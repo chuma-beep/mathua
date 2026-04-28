@@ -1,33 +1,50 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './globals.css'
 
 export default function HomePage() {
-  const [darkMode, setDarkMode] = useState(true)
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const saved = localStorage.getItem('mathua-theme')
-    if (saved) {
-      setDarkMode(saved === 'dark')
+    if (saved === 'light' || saved === 'dark') {
+      setTheme(saved)
     }
   }, [])
 
-  const toggleTheme = () => {
-    const newMode = !darkMode
-    setDarkMode(newMode)
-    localStorage.setItem('mathua-theme', newMode ? 'dark' : 'light')
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const next = prev === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('mathua-theme', next)
+      return next
+    })
+  }, [])
+
+  // Apply theme to document
+  useEffect(() => {
+    if (!mounted) return
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme, mounted])
+
+  if (!mounted) {
+    return <div style={{ background: '#0c0c0d', minHeight: '100vh' }} />
   }
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      {/* Theme Toggle */}
+    <>
       <button 
-        onClick={toggleTheme} 
+        onClick={toggleTheme}
         className="theme-toggle"
         aria-label="Toggle theme"
       >
-        {darkMode ? '☀ light' : '☾ dark'}
+        {theme === 'dark' ? '☀ light' : '☾ dark'}
       </button>
 
       {/* HERO */}
@@ -125,26 +142,11 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
             <tr><th>Domain</th><th style={{textAlign: 'right'}}>Concepts</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Counting</td>
-              <td className="concept-count">7</td>
-            </tr>
-            <tr>
-              <td>Arithmetic</td>
-              <td className="concept-count">39</td>
-            </tr>
-            <tr>
-              <td>Fractions</td>
-              <td className="concept-count">18</td>
-            </tr>
-            <tr>
-              <td>Pre-Algebra</td>
-              <td className="concept-count">17</td>
-            </tr>
-            <tr>
-              <td>Algebra — v1.1 <span className="coming-soon">coming soon</span></td>
-              <td className="concept-count">—</td>
-            </tr>
+            <tr><td>Counting</td><td className="concept-count">7</td></tr>
+            <tr><td>Arithmetic</td><td className="concept-count">39</td></tr>
+            <tr><td>Fractions</td><td className="concept-count">18</td></tr>
+            <tr><td>Pre-Algebra</td><td className="concept-count">17</td></tr>
+            <tr><td>Algebra — v1.1 <span className="coming-soon">coming soon</span></td><td className="concept-count">—</td></tr>
           </tbody>
         </table>
         <p className="table-note">Problems are generated on demand — never stored. There is nothing to memorise.</p>
@@ -232,7 +234,7 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
                    ▼
 ┌──────────────────────────────────────┐
 │   Grading & Problem Generation    │
-└────────────────��─��───────────────────┘
+└──────────────────┬───────────────────┘
                    ▼
 ┌──────────────────────────────────────┐
 │  Data Layer (PostgreSQL / SQLite) │
@@ -286,6 +288,6 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
           Inspired by the mastery-gating philosophy of Math Academy. No content or code from Math Academy is used.
         </div>
       </footer>
-    </div>
+    </>
   )
 }
