@@ -64,8 +64,8 @@ export default function HomePage() {
           <span className="stat-badge">web + desktop</span>
           <span className="stat-badge">open source</span>
         </div>
-        <div className="hero-graph">
-          <div className="max-w-[900px] mx-auto mt-4">
+        <div className="">
+          <div className="max-w-[900px]  mt-0">
             <MathConceptGraph3D theme={theme} />
           </div>
         </div>

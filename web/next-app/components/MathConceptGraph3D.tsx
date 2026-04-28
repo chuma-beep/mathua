@@ -630,11 +630,11 @@ function LegendRow({ theme }: { theme: 'dark' | 'light' }) {
   return (
     <div style={{ 
       display: 'flex', 
-      gap: '24px', 
+      gap: '0px', 
       justifyContent: 'center', 
-      marginTop: '16px',
+      marginTop: '0px',
       flexWrap: 'wrap',
-      padding: '0 16px'
+      padding: '0px'
     }}>
     </div>
   )
@@ -678,9 +678,9 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
   return (
     <section className="w-full">
       <div className="text-center mb-2">
-        <p style={styles.label}>
+        <h3 style={styles.label}>
           live concept graph
-        </p>
+        </h3>
       </div>
       <div style={styles.container}>
         <Canvas
@@ -698,8 +698,8 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
           />
         </Canvas>
       </div>
-      <InfoPanel activeId={activeId} theme={theme} />
-      <LegendRow theme={theme} />
+      <InfoPanel activeId={activeId} theme={theme}/>
+      {/* <LegendRow theme={theme} /> */}
     </section>
   )
 }
