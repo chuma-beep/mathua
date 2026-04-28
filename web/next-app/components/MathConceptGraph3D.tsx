@@ -269,6 +269,14 @@ const NodeMesh = React.memo(function NodeMesh({
   const radius = NODE_RADIUS[node.level]
   const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
   const fieldColor = fieldColors[node.field]
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
   
   useFrame(() => {
     if (meshRef.current) {
@@ -309,19 +317,21 @@ const NodeMesh = React.memo(function NodeMesh({
         />
       </mesh>
       {isHovered && (
-        <Html center distanceFactor={12} style={{ pointerEvents: 'none' }}>
+        <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 1000 }}>
           <div style={{
-            background: theme === 'dark' ? 'rgba(11,15,26,0.95)' : 'rgba(255,255,255,0.95)',
+            background: theme === 'dark' ? 'rgba(11,15,26,0.98)' : 'rgba(255,255,255,0.98)',
             border: `0.5px solid ${theme === 'dark' ? '#2a3f5f' : '#ddd'}`,
-            borderRadius: '6px',
-            padding: '8px 12px',
+            borderRadius: '8px',
+            padding: isMobile ? '10px 14px' : '8px 12px',
             whiteSpace: 'nowrap',
-            minWidth: 'max-content'
+            minWidth: 'max-content',
+            maxWidth: isMobile ? '220px' : '240px',
+            boxShadow: theme === 'dark' ? '0 4px 20px rgba(0,0,0,0.5)' : '0 4px 20px rgba(0,0,0,0.15)'
           }}>
-            <div style={{ color: textColor, fontFamily: 'monospace', fontSize: '12px' }}>{node.name}</div>
-            <div style={{ color: labelColor, fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.field}</div>
-            <div style={{ color: fieldColor, fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.level}</div>
-            <div style={{ color: descColor, fontFamily: 'monospace', fontSize: '11px', maxWidth: '200px', whiteSpace: 'normal', marginTop: '4px', lineHeight: '1.4' }}>{node.description}</div>
+            <div style={{ color: textColor, fontFamily: 'monospace', fontSize: isMobile ? '14px' : '12px', fontWeight: 600 }}>{node.name}</div>
+            <div style={{ color: labelColor, fontFamily: 'monospace', fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '3px' }}>{node.field}</div>
+            <div style={{ color: fieldColor, fontFamily: 'monospace', fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.level}</div>
+            <div style={{ color: descColor, fontFamily: 'monospace', fontSize: isMobile ? '12px' : '11px', maxWidth: isMobile ? '200px' : '200px', whiteSpace: 'normal', marginTop: '6px', lineHeight: '1.4' }}>{node.description}</div>
           </div>
         </Html>
       )}
