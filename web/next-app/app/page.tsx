@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import './globals.css'
 
 export default function HomePage() {
@@ -15,15 +15,6 @@ export default function HomePage() {
     }
   }, [])
 
-  const toggleTheme = useCallback(() => {
-    setTheme(prev => {
-      const next = prev === 'dark' ? 'light' : 'dark'
-      localStorage.setItem('mathua-theme', next)
-      return next
-    })
-  }, [])
-
-  // Apply theme to document
   useEffect(() => {
     if (!mounted) return
     if (theme === 'dark') {
@@ -33,21 +24,22 @@ export default function HomePage() {
     }
   }, [theme, mounted])
 
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    localStorage.setItem('mathua-theme', next)
+  }
+
   if (!mounted) {
     return <div style={{ background: '#0c0c0d', minHeight: '100vh' }} />
   }
 
   return (
-    <>
-      <button 
-        onClick={toggleTheme}
-        className="theme-toggle"
-        aria-label="Toggle theme"
-      >
+    <div className="container">
+      <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
         {theme === 'dark' ? '☀ light' : '☾ dark'}
       </button>
 
-      {/* HERO */}
       <section className="hero">
         <h1>Start from counting.<br />End at algebra.</h1>
         <p className="subtitle">
@@ -77,40 +69,28 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
 
       <hr className="section-divider" />
 
-      {/* HOW IT WORKS */}
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">How it works</span>
-          <h2>A different kind of math system</h2>
-        </div>
+        <span className="section-label">How it works</span>
+        <h2>A different kind of math system</h2>
         <div className="grid-three">
-          <div className="col">
-            <div className="info-card">
-              <h4>Mastery gating</h4>
-              <p>You cannot advance until your streak and response time both meet the threshold. Knowing the answer is not enough — you must know it fast.</p>
-            </div>
+          <div className="info-card">
+            <h4>Mastery gating</h4>
+            <p>You cannot advance until your streak and response time both meet the threshold. Knowing the answer is not enough — you must know it fast.</p>
           </div>
-          <div className="col">
-            <div className="info-card">
-              <h4>Concept graph</h4>
-              <p>Every concept is a node with explicit prerequisites. The scheduler reads the graph and your progress to decide what you see next. Nothing is shown before its foundation is solid.</p>
-            </div>
+          <div className="info-card">
+            <h4>Concept graph</h4>
+            <p>Every concept is a node with explicit prerequisites. The scheduler reads the graph and your progress to decide what you see next. Nothing is shown before its foundation is solid.</p>
           </div>
-          <div className="col">
-            <div className="info-card">
-              <h4>Spaced repetition</h4>
-              <p>Concepts you master resurface automatically before they decay. Reviews are woven into your session — there is no separate review mode.</p>
-            </div>
+          <div className="info-card">
+            <h4>Spaced repetition</h4>
+            <p>Concepts you master resurface automatically before they decay. Reviews are woven into your session — there is no separate review mode.</p>
           </div>
         </div>
       </section>
 
-      {/* MASTERY PIPELINE */}
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">Mastery pipeline</span>
-          <h2>Five states. One direction.</h2>
-        </div>
+        <span className="section-label">Mastery pipeline</span>
+        <h2>Five states. One direction.</h2>
         <div className="pipeline-flow">
           <span className="pipeline-state">UNSEEN</span>
           <span className="pipeline-arrow">→</span>
@@ -131,12 +111,11 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
         </p>
       </section>
 
-      {/* CONTENT DOMAINS */}
+      <hr className="section-divider" />
+
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">Curriculum</span>
-          <h2>What Mathua covers</h2>
-        </div>
+        <span className="section-label">Curriculum</span>
+        <h2>What Mathua covers</h2>
         <table className="domain-table">
           <thead>
             <tr><th>Domain</th><th style={{textAlign: 'right'}}>Concepts</th></tr>
@@ -152,24 +131,23 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
         <p className="table-note">Problems are generated on demand — never stored. There is nothing to memorise.</p>
       </section>
 
-      {/* RANKING */}
+      <hr className="section-divider" />
+
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">Progression</span>
-          <h2>Rank by mastery. Level by depth.</h2>
-        </div>
+        <span className="section-label">Progression</span>
+        <h2>Rank by mastery. Level by depth.</h2>
         <div className="grid-two">
-          <div className="col">
+          <div>
             <p className="body-text">
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three components:
             </p>
-            <pre className="formula-block" style={{marginTop: '16px'}}>
+            <pre className="formula-block">
 {`score = (mastered_count × 100)
       + speed_bonus
       + (current_streak × 10)`}
             </pre>
           </div>
-          <div className="col">
+          <div>
             <ul className="level-list">
               <li className="level-item"><span className="level-num">01</span><span className="level-name">Novice</span><span className="level-range">0–5</span></li>
               <li className="level-item"><span className="level-num">02</span><span className="level-name">Apprentice</span><span className="level-range">6–15</span></li>
@@ -185,38 +163,33 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
         </div>
       </section>
 
-      {/* WEB & DESKTOP */}
+      <hr className="section-divider" />
+
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">Platforms</span>
-          <h2>One engine. Two ways to run it.</h2>
-        </div>
+        <span className="section-label">Platforms</span>
+        <h2>One engine. Two ways to run it.</h2>
         <div className="grid-two">
-          <div className="col">
-            <div className="client-card">
-              <div className="client-type">Web</div>
-              <h3>Browser</h3>
-              <ul>
-                <li>Runs in any modern browser</li>
-                <li>React frontend with KaTeX math rendering</li>
-                <li>Account required — progress syncs across devices</li>
-                <li>Global weekly leaderboard</li>
-                <li>Interactive concept graph view</li>
-              </ul>
-            </div>
+          <div className="client-card">
+            <div className="client-type">Web</div>
+            <h3>Browser</h3>
+            <ul>
+              <li>Runs in any modern browser</li>
+              <li>React frontend with KaTeX math rendering</li>
+              <li>Account required — progress syncs across devices</li>
+              <li>Global weekly leaderboard</li>
+              <li>Interactive concept graph view</li>
+            </ul>
           </div>
-          <div className="col">
-            <div className="client-card">
-              <div className="client-type">Desktop TUI</div>
-              <h3>Terminal</h3>
-              <ul>
-                <li>Single binary download — no runtime dependencies</li>
-                <li>Bubble Tea terminal interface</li>
-                <li>SQLite storage — all data stays on your machine</li>
-                <li>No account needed</li>
-                <li>Fully offline after download</li>
-              </ul>
-            </div>
+          <div className="client-card">
+            <div className="client-type">Desktop TUI</div>
+            <h3>Terminal</h3>
+            <ul>
+              <li>Single binary download — no runtime dependencies</li>
+              <li>Bubble Tea terminal interface</li>
+              <li>SQLite storage — all data stays on your machine</li>
+              <li>No account needed</li>
+              <li>Fully offline after download</li>
+            </ul>
           </div>
         </div>
         <pre className="architecture-block">
@@ -242,12 +215,11 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
         </pre>
       </section>
 
-      {/* OPEN SOURCE */}
+      <hr className="section-divider" />
+
       <section className="card-section">
-        <div className="card-section-header">
-          <span className="section-label">Contributing</span>
-          <h2>Built to be extended.</h2>
-        </div>
+        <span className="section-label">Contributing</span>
+        <h2>Built to be extended.</h2>
         <p className="body-text">
           Every concept is a JSON node. Every problem is a Go generator function. Every contribution goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
@@ -263,10 +235,9 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
   }
 }`}
         </pre>
-        <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" className="btn btn-blue" style={{marginTop: '8px'}}>Read CONTRIBUTING.md →</a>
+        <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" className="btn btn-blue">Read CONTRIBUTING.md →</a>
       </section>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-grid">
           <div>
@@ -288,6 +259,6 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
           Inspired by the mastery-gating philosophy of Math Academy. No content or code from Math Academy is used.
         </div>
       </footer>
-    </>
+    </div>
   )
 }
