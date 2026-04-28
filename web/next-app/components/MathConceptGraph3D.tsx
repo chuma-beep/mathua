@@ -546,7 +546,7 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
     panel: {
       background: theme === 'dark' ? '#111827' : '#fff',
       borderTop: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`,
-      padding: isMobile ? '0.5rem' : '1rem 1.5rem'
+      padding: isMobile ? '0.5rem' : '0.5rem 1rem'
     },
     label: {
       color: theme === 'dark' ? '#5a6577' : '#888',
@@ -600,7 +600,7 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
       </div>
       <div style={styles.desc}>{node.description}</div>
       {connectedIds.length > 0 && (
-        <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+        <div style={{ marginTop: '4px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {connectedIds.map(id => (
             <span key={id} style={styles.pill}>{id}</span>
           ))}
