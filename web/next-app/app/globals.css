@@ -164,6 +164,35 @@ a:hover { color: var(--accent-blue); }
     line-height: 1.8;
 }
 
+.hero-graph {
+    margin-top: 40px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.math-concept-graph {
+    display: flex;
+    flex-direction: column;
+}
+
+.math-concept-graph .text-label {
+    color: var(--text-label);
+}
+
+.math-concept-graph .border-t {
+    border-color: var(--border);
+}
+
+@media (max-width: 768px) {
+    .hero-graph {
+        height: 340px;
+        overflow-y: auto;
+        padding: 16px;
+    }
+}
+
 /* ═══════════════════════════════════════════════════════════════════
    DIVIDER
 ══════════════════════════════════════════════════════════════════════════ */

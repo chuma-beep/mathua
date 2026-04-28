@@ -1,7 +1,15 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import './globals.css'
+
+const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
+  ssr: false,
+  loading: () => (
+    <div style={{ height: '520px', background: '#0b0f1a', borderRadius: '8px', border: '0.5px solid #1e2d45' }} />
+  ),
+})
 
 export default function HomePage() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
@@ -50,21 +58,18 @@ export default function HomePage() {
          <a href="https://github.com/chuma-beep/mathua" className="btn btn-outline">View on GitHub</a>  
         </div>
         <div className="stat-badges">
-          <span className="stat-badge">81 concepts</span>
-          <span className="stat-badge">5 domains</span>
-          <span className="stat-badge">weekly leaderboard</span>
+          <span className="stat-badge">60 topics</span>
+          <span className="stat-badge">120+ connections</span>
+          <span className="stat-badge">9 fields</span>
           <span className="stat-badge">web + desktop</span>
           <span className="stat-badge">open source</span>
         </div>
-        <pre className="concept-graph">
-{`count.objects ──→ count.cardinality ──→ arith.add.single
-                                       ──→ arith.add.multi
-count.compare  ──→ arith.sub.single ──→ arith.sub.multi
-                                       ──→ arith.mul.single
-                     frac.id ──→ frac.compare ──→ frac.add
-                                                 ──→ prealgebra.expr
-                                                 ──→ prealgebra.eq.solve`}
-        </pre>
+        <div className="hero-graph">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-label opacity-50 mb-3">LIVE CONCEPT GRAPH — 60 TOPICS · 120+ CONNECTIONS</p>
+          <div className="max-w-[900px] mx-auto">
+            <MathConceptGraph3D />
+          </div>
+        </div>
       </section>
 
       <hr className="section-divider" />
