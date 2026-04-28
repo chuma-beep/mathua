@@ -110,7 +110,7 @@ export default function HomePage() {
 {`priority = (0.7 × days_since_last_seen) + (0.3 × (1 − mastery))
          + 5.0 if DECAYING  +  2.0 if newly_unlocked`}
         </pre>
-        <p className="body-text">
+        <p className="body-text" style={{ textAlign: 'center' }}>
           The scheduler enforces three hard rules: prerequisites must be mastered before a concept unlocks, the same concept never appears twice in a row, and roughly 70% of each session is new material.
         </p>
       </section>
@@ -142,7 +142,7 @@ export default function HomePage() {
         <h2>Rank by mastery. Level by depth.</h2>
         <div className="grid-two">
           <div>
-            <p className="body-text">
+            <p className="body-text" style={{ textAlign: 'center' }}>
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three components:
             </p>
             <pre className="formula-block">
@@ -224,7 +224,7 @@ export default function HomePage() {
       <section className="card-section">
         <span className="section-label">Contributing</span>
         <h2>Built to be extended.</h2>
-        <p className="body-text">
+        <p className="body-text" style={{ textAlign: 'center' }}>
           Every concept is a JSON node. Every problem is a Go generator function. Every contribution goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
         <pre className="json-block" style={{ textAlign: 'left' }}>
