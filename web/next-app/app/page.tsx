@@ -7,7 +7,7 @@ import './globals.css'
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
   loading: () => (
-    <div style={{ height: '520px', background: '#f5f5f5', borderRadius: '8px', border: '0.5px solid #ddd' }} />
+    <div style={{ height: '520px', background: '#1a1a1a', borderRadius: '8px', border: '0.5px solid #333' }} />
   ),
 })
 
@@ -36,10 +36,6 @@ export default function HomePage() {
     const next = theme === 'dark' ? 'light' : 'dark'
     setTheme(next)
     localStorage.setItem('mathua-theme', next)
-  }
-
-  if (!mounted) {
-    return <div style={{ background: '#0c0c0d', minHeight: '100vh' }} />
   }
 
   return (
