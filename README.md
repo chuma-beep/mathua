@@ -235,7 +235,7 @@ Content design references: [OpenStax](https://openstax.org) (open textbooks), [M
 
 <div align="center">
 
-MIT License &nbsp;·&nbsp; Built in public by [Wisdom Chukwuemeka](https://portfolio3-seven-indol.vercel.app) &nbsp;·&nbsp; [GitHub](https://github.com/chuma-beep)
+MIT License &nbsp;
 
 *Start from counting. End at algebra. Master everything in between.*
 
