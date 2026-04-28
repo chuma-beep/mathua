@@ -65,8 +65,7 @@ export default function HomePage() {
           <span className="stat-badge">open source</span>
         </div>
         <div className="hero-graph">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-label opacity-50 mb-3">LIVE CONCEPT GRAPH — 60 TOPICS · 120+ CONNECTIONS</p>
-          <div className="max-w-[900px] mx-auto">
+          <div className="max-w-[900px] mx-auto mt-4">
             <MathConceptGraph3D theme={theme} />
           </div>
         </div>

@@ -517,6 +517,15 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
   const node = nodeMap.get(activeId)
   if (!node) return null
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const connectedLinks = LINKS.filter(l => l.source === activeId || l.target === activeId)
   const connectedIds = connectedLinks.map(l => l.source === activeId ? l.target : l.source)
   const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
@@ -527,7 +536,7 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
     panel: {
       background: theme === 'dark' ? '#111827' : '#fff',
       borderTop: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`,
-      padding: '1rem 1.5rem'
+      padding: isMobile ? '0.75rem 1rem' : '1rem 1.5rem'
     },
     label: {
       color: theme === 'dark' ? '#5a6577' : '#888',
@@ -538,14 +547,14 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
     name: {
       color: theme === 'dark' ? '#c8a96e' : '#a0814a', 
       fontFamily: 'serif', 
-      fontSize: '18px', 
+      fontSize: isMobile ? '16px' : '18px', 
       marginTop: '4px'
     },
     badge: {
       background: dimFieldColor, 
       color: fieldColor, 
       fontFamily: 'monospace', 
-      fontSize: '11px',
+      fontSize: isMobile ? '10px' : '11px',
       padding: '2px 8px',
       borderRadius: '4px'
     },
@@ -592,6 +601,17 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
 }
 
 function LegendRow({ theme }: { theme: 'dark' | 'light' }) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  if (isMobile) return null
+
   const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
   const linkColors = theme === 'dark' ? LINK_COLORS : LINK_COLORS_LIGHT
 
@@ -606,55 +626,42 @@ function LegendRow({ theme }: { theme: 'dark' | 'light' }) {
       flexWrap: 'wrap',
       padding: '0 16px'
     }}>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {Object.entries(fieldColors).map(([field, color]) => (
-          <div key={field} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: color }} />
-            <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>{field}</span>
-          </div>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: '16px', borderLeft: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`, paddingLeft: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.prerequisite }} />
-          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>prerequisite</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.related }} />
-          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>related</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.extends }} />
-          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>extends</span>
-        </div>
-      </div>
     </div>
   )
 }
 
 export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3DProps) {
   const [activeId, setActiveId] = useState('counting')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const styles = {
     label: {
       color: theme === 'dark' ? '#5a6577' : '#888',
       fontFamily: 'monospace', 
-      fontSize: '10px', 
+      fontSize: isMobile ? '9px' : '10px', 
       textTransform: 'uppercase', 
       letterSpacing: '0.18em'
     },
     sublabel: {
       color: theme === 'dark' ? '#c8a96e' : '#a0814a',
       fontFamily: 'monospace', 
-      fontSize: '11px', 
+      fontSize: isMobile ? '10px' : '11px', 
       marginTop: '4px'
     },
     container: {
-      height: '520px', 
+      height: isMobile ? '320px' : '520px', 
       width: '100%', 
       borderRadius: '8px', 
-      overflow: 'hidden', 
-      border: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`
+      overflow: 'hidden'
     }
   }
 
@@ -663,9 +670,6 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
       <div className="text-center mb-4">
         <p style={styles.label}>
           live concept graph
-        </p>
-        <p style={styles.sublabel}>
-          60 topics · 120+ connections · click any node to explore
         </p>
       </div>
       <div style={styles.container}>
