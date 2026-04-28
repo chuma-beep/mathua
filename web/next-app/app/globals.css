@@ -98,9 +98,8 @@ a:hover { color: var(--accent-blue); }
     color: var(--accent-blue);
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   HERO
-══════════════════════════════════════════════════════════════════ */
+
+/* hero */
 .hero {
     padding: 80px 0 60px;
     text-align: center;
@@ -571,11 +570,9 @@ a:hover { color: var(--accent-blue); }
     opacity: 0.7;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════════════════════ */
+   /* RESPONSIVE */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 32px; }
+    .hero h1 { font-size: 24px; }
     .hero .subtitle { font-size: 14px; }
     .grid-three, .grid-two { grid-template-columns: 1fr; }
     .grid-two > div:last-child {
