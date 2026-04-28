@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Mathua — Math Understanding Agent',
-  description: 'An open-source adaptive math learning engine. Start from counting. End at algebra.',
+  description: 'An open-source adaptive math learning engine. Master the foundation. Earn the abstraction.',
 }
 
 export default function RootLayout({

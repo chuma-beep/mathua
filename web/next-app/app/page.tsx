@@ -41,7 +41,7 @@ export default function HomePage() {
       </button>
 
       <section className="hero">
-        <h1>Start from counting.<br />End at algebra.</h1>
+        <h1>Master the foundation.<br />Earn the abstraction.</h1>
         <p className="subtitle">
           Mathua is an open-source adaptive math learning engine. It never lets you advance until you have truly mastered the prerequisite — both speed and accuracy must be proven.
         </p>
