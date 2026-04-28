@@ -7,7 +7,17 @@ import './globals.css'
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
   loading: () => (
-    <div style={{ height: '520px', background: '#1a1a1a', borderRadius: '8px', border: '0.5px solid #333' }} />
+    <div style={{ 
+      height: '520px', 
+      background: 'var(--bg-card, #1a1a1a)', 
+      borderRadius: '8px', 
+      border: '0.5px solid var(--border, #333)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: 'var(--text-muted, #888)',
+      fontSize: '14px'
+    }}>Loading graph...</div>
   ),
 })
 
@@ -16,11 +26,10 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     const saved = localStorage.getItem('mathua-theme')
-    if (saved === 'light' || saved === 'dark') {
-      setTheme(saved)
-    }
+    const initialTheme = (saved === 'light' || saved === 'dark') ? saved : 'dark'
+    setTheme(initialTheme)
+    setMounted(true)
   }, [])
 
   useEffect(() => {
@@ -38,10 +47,14 @@ export default function HomePage() {
     localStorage.setItem('mathua-theme', next)
   }
 
+  if (!mounted) {
+    return <div style={{ background: '#0c0c0d', minHeight: '100vh' }} />
+  }
+
   return (
     <div className="container">
       <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-        {theme === 'dark' ? '☀ light' : '☾ dark'}
+        {theme === 'dark' ? '☀' : '☾'}
       </button>
 
       <section className="hero">

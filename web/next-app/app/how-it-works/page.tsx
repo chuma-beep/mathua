@@ -87,7 +87,7 @@ export default function HowItWorksPage() {
   return (
     <div className="how-page">
       <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-        {theme === 'dark' ? '☀ light' : '☾ dark'}
+        {theme === 'dark' ? '☀' : '☾'}
       </button>
 
       <header className="how-header">
