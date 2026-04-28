@@ -690,10 +690,10 @@ a:hover { color: var(--accent-blue); }
 }
 
 .how-intro h1 {
-    font-family: Georgia, serif;
+    font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
     color: var(--accent);
     font-size: 1.6rem;
-    font-weight: normal;
+    font-weight: 600;
     margin-bottom: 16px;
 }
 
@@ -709,10 +709,10 @@ a:hover { color: var(--accent-blue); }
 }
 
 .how-section h2 {
-    font-family: Georgia, serif;
+    font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
     color: var(--accent);
     font-size: 1.6rem;
-    font-weight: normal;
+    font-weight: 500;
     border-bottom: 0.5px solid var(--border);
     padding-bottom: 8px;
     margin-bottom: 24px;
