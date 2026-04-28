@@ -546,7 +546,7 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
     panel: {
       background: theme === 'dark' ? '#111827' : '#fff',
       borderTop: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`,
-      padding: isMobile ? '0.5rem 0.75rem' : '1rem 1.5rem'
+      padding: isMobile ? '0.5rem' : '1rem 1.5rem'
     },
     label: {
       color: theme === 'dark' ? '#5a6577' : '#888',
@@ -599,7 +599,7 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
         <span style={styles.level}>{node.level}</span>
       </div>
       <div style={styles.desc}>{node.description}</div>
-      {connectedIds.length > 0 && !isMobile && (
+      {connectedIds.length > 0 && (
         <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {connectedIds.map(id => (
             <span key={id} style={styles.pill}>{id}</span>
@@ -668,7 +668,7 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
       marginTop: '4px'
     },
     container: {
-      height: isMobile ? '260px' : '520px', 
+      height: isMobile ? '320px' : '520px', 
       width: '100%', 
       borderRadius: '8px', 
       overflow: 'hidden'
