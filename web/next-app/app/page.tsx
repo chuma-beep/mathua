@@ -256,7 +256,7 @@ export default function HomePage() {
             <a href="#">Roadmap</a>
           </div>
           <div className="footer-right">
-            MIT License · Built in public by<br />Wisdom Chukwuemeka
+            MIT License · Built in public by<br />Wisdom
           </div>
         </div>
         <div className="footer-bottom">
