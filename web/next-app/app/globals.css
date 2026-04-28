@@ -318,6 +318,7 @@ a:hover { color: var(--accent-blue); }
     line-height: 1.8;
     display: block;
     text-align: center;
+    align-items: center;
     max-width: fit-content;
 }
 

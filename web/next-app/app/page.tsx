@@ -158,9 +158,9 @@ export default function HomePage() {
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three components:
             </p>
             <pre className="formula-block">
-{`score = (mastered_count × 100)
-      + speed_bonus
-      + (current_streak × 10)`}
+       {`score = (mastered_count × 100)
+          + speed_bonus
+           + (current_streak × 10)`}
             </pre>
           </div>
           <div>
