@@ -480,18 +480,26 @@ a:hover { color: var(--accent-blue); }
 /* ═══════════════════════════════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════════════════════════════ */
-.footer {
-    background: var(--bg-section);
-    padding: 40px 0;
-    margin-top: 40px;
-    border-top: 1px solid var(--border);
-}
-
 .footer-grid {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 24px;
     align-items: center;
+    width: 100%;
+}
+
+.footer {
+    background: var(--bg-section);
+    padding: 40px 24px;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+}
+
+.footer {
+    background: var(--bg-section);
+    padding: 40px 24px;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
 }
 
 .footer-brand {
