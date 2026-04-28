@@ -53,15 +53,15 @@ const FIELD_COLORS_LIGHT: Record<MathField, string> = {
 }
 
 const LINK_COLORS: Record<MathLink["type"], string> = {
-  prerequisite: "#e8d4a8",
-  related:      "#8ed8d0",
-  extends:      "#c8c0ff",
+  prerequisite: "#c8a96e",
+  related:      "#4db8a0",
+  extends:      "#a8a0f0",
 }
 
 const LINK_COLORS_LIGHT: Record<MathLink["type"], string> = {
-  prerequisite: "#6a5020",
-  related:      "#207068",
-  extends:      "#5050a0",
+  prerequisite: "#a0814a",
+  related:      "#3a9a8a",
+  extends:      "#8a80d8",
 }
 
 const NODE_RADIUS: Record<MathNode["level"], number> = {
@@ -394,7 +394,7 @@ function EdgeLines({ links, nodes, activeId, theme }: { links: MathLink[], nodes
 
   return (
     <lineSegments ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.9 : 1.0} linewidth={2} />
+      <lineBasicMaterial vertexColors transparent opacity={0.8} linewidth={2} />
     </lineSegments>
   )
 }
@@ -436,7 +436,7 @@ function AllEdges({ links, theme }: { links: MathLink[], theme: 'dark' | 'light'
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.25} />
+      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.12} />
     </lineSegments>
   )
 }
@@ -538,44 +538,52 @@ function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'lig
 
   const connectedLinks = LINKS.filter(l => l.source === activeId || l.target === activeId)
   const connectedIds = connectedLinks.map(l => l.source === activeId ? l.target : l.source)
+  const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
+  const fieldColor = fieldColors[node.field]
+  const dimFieldColor = fieldColor + '30'
 
   const styles = {
     panel: {
-      background: 'var(--bg-card)',
-      borderTop: '1px solid var(--border)',
+      background: theme === 'dark' ? '#111827' : '#fff',
+      borderTop: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`,
       padding: isMobile ? '0.5rem' : '0.5rem 1rem'
     },
     label: {
-      color: 'var(--text-muted)', 
+      color: theme === 'dark' ? '#5a6577' : '#888',
+      fontFamily: 'monospace', 
       fontSize: '10px', 
       textTransform: 'uppercase'
     },
     name: {
-      color: 'var(--text-primary)', 
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a', 
+      fontFamily: 'serif', 
       fontSize: isMobile ? '16px' : '18px', 
       marginTop: '4px'
     },
     badge: {
-      background: 'var(--meta-bg)', 
-      color: 'var(--text-secondary)', 
+      background: dimFieldColor, 
+      color: fieldColor, 
+      fontFamily: 'monospace', 
       fontSize: isMobile ? '10px' : '11px',
       padding: '2px 8px',
       borderRadius: '4px'
     },
     level: {
-      color: 'var(--text-muted)', 
+      color: theme === 'dark' ? '#9fa8b4' : '#666', 
+      fontFamily: 'monospace', 
       fontSize: '11px', 
       textTransform: 'uppercase'
     },
     desc: {
-      color: 'var(--text-secondary)', 
-      fontSize: '13px', 
+      color: theme === 'dark' ? '#e8e2d5' : '#333', 
+      fontSize: '12px', 
       lineHeight: '1.5', 
       marginTop: '8px'
     },
     pill: {
-      background: 'var(--meta-bg)', 
-      color: 'var(--text-secondary)', 
+      background: theme === 'dark' ? '#c8a96e20' : '#a0814a20', 
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a', 
+      fontFamily: 'monospace', 
       fontSize: '10px',
       padding: '2px 8px',
       borderRadius: '12px'
@@ -646,21 +654,33 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
   }, [])
 
   const styles = {
+    label: {
+      color: theme === 'dark' ? '#5a6577' : '#888',
+      fontFamily: 'monospace', 
+      fontSize: isMobile ? '9px' : '10px', 
+      textTransform: 'uppercase', 
+      letterSpacing: '0.18em'
+    },
+    sublabel: {
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a',
+      fontFamily: 'monospace', 
+      fontSize: isMobile ? '10px' : '11px', 
+      marginTop: '4px'
+    },
     container: {
       height: isMobile ? '320px' : '520px', 
       width: '100%', 
-      borderRadius: 'var(--radius-sm)', 
-      overflow: 'hidden',
-      border: '1px solid var(--border)'
+      borderRadius: '2px', 
+      overflow: 'hidden'
     }
   }
 
   return (
-    <section className="w-full" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: isMobile ? '12px' : '16px' }}>
-      <div className="text-center mb-2">
-        <span style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
+    <section className="w-full">
+      <div className="text-center mb-4">
+        <h3 style={styles.label}>
           live concept graph
-        </span>
+        </h3>
       </div>
       <div style={styles.container}>
         <Canvas
@@ -679,7 +699,6 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
         </Canvas>
       </div>
       <InfoPanel activeId={activeId} theme={theme}/>
-      {/* <LegendRow theme={theme} /> */}
     </section>
   )
 }
