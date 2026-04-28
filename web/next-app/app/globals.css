@@ -133,6 +133,7 @@ a:hover { color: var(--accent-blue); }
     display: flex;
     gap: 12px;
     justify-content: center;
+    align-items: center;
     margin-bottom: 32px;
 }
 
