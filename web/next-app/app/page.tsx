@@ -255,9 +255,6 @@ export default function HomePage() {
             <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md">Contributing</a>
             <a href="#">Roadmap</a>
           </div>
-          <div className="footer-right">
-            MIT License · Built in public by<br />Wisdom
-          </div>
         </div>
         <div className="footer-bottom">
           Inspired by the mastery-gating philosophy of Math Academy. No content or code from Math Academy is used.
