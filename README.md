@@ -237,6 +237,4 @@ Content design references: [OpenStax](https://openstax.org) (open textbooks), [M
 
 MIT License &nbsp;
 
-*Start from counting. End at algebra. Master everything in between.*
-
 </div>
