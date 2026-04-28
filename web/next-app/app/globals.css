@@ -260,7 +260,7 @@ a:hover { color: var(--accent-blue); }
 
 /* ═══════════════════════════════════════════════════════════════════
    PIPELINE
-══════════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════════════════ */
 .pipeline-flow {
     display: flex;
     align-items: center;
@@ -275,16 +275,16 @@ a:hover { color: var(--accent-blue); }
     font-size: 11px;
     padding: 10px 18px;
     border-radius: 4px;
-    background: var(--meta-bg);
+    background: var(--bg-card);
     color: var(--text-secondary);
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border);
     letter-spacing: 0.05em;
 }
 
 .pipeline-state.mastered {
-    background: var(--accent-blue);
-    color: #fff;
-    border-color: var(--accent-blue);
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
 }
 
 .pipeline-arrow {
@@ -592,8 +592,9 @@ a:hover { color: var(--accent-blue); }
     .info-card { width: 100%; }
     .card-section { padding: 32px 0; }
     .card-section h2 { font-size: 20px; margin-bottom: 20px; }
-    .pipeline-flow { flex-direction: column; gap: 8px; }
+    .pipeline-flow { flex-wrap: wrap; justify-content: center; }
     .pipeline-arrow { transform: rotate(90deg); }
+    .formula-block, .architecture-block, .json-block { text-align: center; }
     .domain-table { display: block; overflow-x: auto; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 20px; }
     .footer-right { text-align: center; }

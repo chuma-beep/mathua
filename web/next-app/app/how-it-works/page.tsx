@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import './globals.css'
+import '../globals.css'
 
 const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
