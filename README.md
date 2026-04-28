@@ -1,13 +1,13 @@
 <div align="center">
 
-```
+<pre style="font-family: monospace; font-size: 11px; line-height: 1.2;">
 ███╗   ███╗ █████╗ ████████╗██╗  ██╗██╗   ██╗ █████╗
 ████╗ ████║██╔══██╗╚══██╔══╝██║  ██║██║   ██║██╔══██╗
 ██╔████╔██║███████║   ██║   ███████║██║   ██║███████║
 ██║╚██╔╝██║██╔══██║   ██║   ██╔══██║██║   ██║██╔══██║
 ██║ ╚═╝ ██║██║  ██║   ██║   ██║  ██║╚██████╔╝██║  ██║
 ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
-```
+</pre>
 
 **Math Understanding Agent**
 
@@ -17,7 +17,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![License](https://img.shields.io/badge/license-MIT-c8a96e?style=flat-square)](LICENSE)
 [![Build](https://img.shields.io/badge/build-passing-4db8a0?style=flat-square)](.github/workflows/ci.yml)
-[![Concepts](https://img.shields.io/badge/concepts-5-5-a8a0f0?style=flat-square)](#content)
+[![Concepts](https://img.shields.io/badge/concepts-81-a8a0f0?style=flat-square)](#content)
 
 </div>
 
@@ -70,7 +70,7 @@ All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic
 count.objects → count.cardinality → count.number_line → count.compare → count.skip_2
 ```
 
-The graph currently contains **5 concepts** in the counting domain. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
+The graph currently contains **81 concepts** across five domains. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -101,22 +101,21 @@ When a concept reaches MASTERED, Mathua schedules its next review using a simpli
 
 ---
 
-## Content — v0.1 (Counting Domain)
+## Content — v1.0
 
 | Domain | Sub-domains | Concepts |
 |---|---|---|
-| Counting | Objects, cardinality, number line, comparison, skip counting | 5 |
-| **Total** | | **5** |
+| Counting | Objects, cardinality, number line, comparison, skip counting | 7 |
+| Arithmetic | Addition, subtraction, multiplication, division, factors, exponents, negatives, order of operations, place value, decimals intro | 39 |
+| Fractions | Concept, equivalence, addition, subtraction, multiplication, division, mixed numbers | 18 |
+| Pre-Algebra | Decimals, percentages, ratios, negatives, exponents, variables, equations | 17 |
+| **Total** | | **81** |
 
-### Roadmap
+### Roadmap — v1.1
 
 | Version | Domain | Concepts |
 |---|---|---|
-| v0.2 | Arithmetic: addition, subtraction | ~15 |
-| v0.3 | Arithmetic: multiplication, division | ~15 |
-| v0.4 | Fractions | ~18 |
-| v0.5 | Pre-Algebra | ~17 |
-| v1.0 | Algebra (with SymPy) | ~60 |
+| v1.1 | Algebra (with SymPy) | ~60 |
 
 ---
 
