@@ -53,15 +53,15 @@ const FIELD_COLORS_LIGHT: Record<MathField, string> = {
 }
 
 const LINK_COLORS: Record<MathLink["type"], string> = {
-  prerequisite: "#c8a96e",
-  related:      "#4db8a0",
-  extends:      "#a8a0f0",
+  prerequisite: "#e8d4a8",
+  related:      "#8ed8d0",
+  extends:      "#c8c0ff",
 }
 
 const LINK_COLORS_LIGHT: Record<MathLink["type"], string> = {
-  prerequisite: "#a0814a",
-  related:      "#3a9a8a",
-  extends:      "#8a80d8",
+  prerequisite: "#6a5020",
+  related:      "#207068",
+  extends:      "#5050a0",
 }
 
 const NODE_RADIUS: Record<MathNode["level"], number> = {
@@ -394,7 +394,7 @@ function EdgeLines({ links, nodes, activeId, theme }: { links: MathLink[], nodes
 
   return (
     <lineSegments ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={0.8} linewidth={2} />
+      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.9 : 1.0} linewidth={2} />
     </lineSegments>
   )
 }
@@ -436,7 +436,7 @@ function AllEdges({ links, theme }: { links: MathLink[], theme: 'dark' | 'light'
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.12} />
+      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.25} />
     </lineSegments>
   )
 }
