@@ -46,8 +46,8 @@ export default function HomePage() {
           Mathua is an open-source adaptive math learning engine. It never lets you advance until you have truly mastered the prerequisite — both speed and accuracy must be proven.
         </p>
         <div className="hero-cta">
-          <a href="#" className="btn btn-blue">Open the web app</a>
-          <a href="https://github.com/chuma-beep/mathua" className="btn btn-outline">View on GitHub</a>
+         <a href="#" className="btn btn-blue">Open the web app</a>
+         <a href="https://github.com/chuma-beep/mathua" className="btn btn-outline">View on GitHub</a>  
         </div>
         <div className="stat-badges">
           <span className="stat-badge">81 concepts</span>
