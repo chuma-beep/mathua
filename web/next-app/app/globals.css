@@ -545,7 +545,7 @@ a:hover { color: var(--accent-blue); }
 .footer-brand {
     font-size: 20px;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-blue);
 }
 
 .footer-tagline {
@@ -627,7 +627,7 @@ a:hover { color: var(--accent-blue); }
 .how-logo {
     font-size: 18px;
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-blue);
 }
 
 .how-nav {
@@ -674,8 +674,8 @@ a:hover { color: var(--accent-blue); }
 }
 
 .nav-link.active {
-    color: var(--accent);
-    border-left-color: var(--accent);
+    color: var(--accent-blue);
+    border-left-color: var(--accent-blue);
 }
 
 .how-content {
@@ -691,7 +691,7 @@ a:hover { color: var(--accent-blue); }
 
 .how-intro h1 {
     font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
-    color: var(--accent);
+    color: var(--accent-blue);
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 16px;
@@ -710,7 +710,7 @@ a:hover { color: var(--accent-blue); }
 
 .how-section h2 {
     font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
-    color: var(--accent);
+    color: var(--accent-blue);
     font-size: 1.6rem;
     font-weight: 500;
     border-bottom: 0.5px solid var(--border);
@@ -736,7 +736,7 @@ a:hover { color: var(--accent-blue); }
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.9em;
-    color: var(--accent);
+    color: var(--accent-blue);
 }
 
 .code-block {
@@ -753,7 +753,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .formula-block {
-    border-left: 2px solid var(--accent);
+    border-left: 2px solid var(--accent-blue);
     padding-left: 20px;
     background: var(--bg-card);
     border-radius: 0 6px 6px 0;
@@ -786,7 +786,7 @@ a:hover { color: var(--accent-blue); }
 .concept-pill {
     background: var(--bg-card);
     border: 0.5px solid var(--border);
-    color: var(--accent);
+    color: var(--accent-blue);
     font-family: var(--font-mono);
     font-size: 12px;
     padding: 4px 12px;
@@ -816,8 +816,8 @@ a:hover { color: var(--accent-blue); }
 }
 
 .state-pill.mastered {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
 }
 
 .state-pill.decaying {
@@ -845,7 +845,7 @@ a:hover { color: var(--accent-blue); }
 
 .threshold-table th {
     background: var(--bg-section);
-    color: var(--accent);
+    color: var(--accent-blue);
     font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
@@ -884,7 +884,7 @@ a:hover { color: var(--accent-blue); }
     content: counter(step-counter) ".";
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--accent-blue);
     font-family: var(--font-mono);
     font-size: 13px;
 }
@@ -940,7 +940,7 @@ a:hover { color: var(--accent-blue); }
         white-space: nowrap;
     }
     .nav-link.active {
-        border-bottom-color: var(--accent);
+        border-bottom-color: var(--accent-blue);
     }
     .how-content {
         margin-top: 80px;

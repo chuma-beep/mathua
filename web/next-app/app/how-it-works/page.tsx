@@ -33,12 +33,35 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
 
 export default function HowItWorksPage() {
   const [activeSection, setActiveSection] = useState('concept-graph')
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [mounted, setMounted] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
 
   useEffect(() => {
-    document.documentElement.classList.add('dark')
-    
+    setMounted(true)
+    const saved = localStorage.getItem('mathua-theme')
+    if (saved === 'light' || saved === 'dark') {
+      setTheme(saved)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme, mounted])
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    localStorage.setItem('mathua-theme', next)
+  }
+
+  useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -63,6 +86,10 @@ export default function HowItWorksPage() {
 
   return (
     <div className="how-page">
+      <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+        {theme === 'dark' ? '☀ light' : '☾ dark'}
+      </button>
+
       <header className="how-header">
         <Link href="/" className="how-logo">Mathua</Link>
         <nav className="how-nav">
