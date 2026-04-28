@@ -654,12 +654,7 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
   }
 
   return (
-    <section className="w-full" style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', padding: isMobile ? '12px' : '16px' }}>
-      <div className="text-center mb-2">
-        <span style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em' }}>
-          live concept graph
-        </span>
-      </div>
+    <div>
       <div style={styles.container}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
@@ -677,6 +672,6 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
         </Canvas>
       </div>
       <InfoPanel activeId={activeId} theme={theme}/>
-    </section>
+    </div>
   )
 }
