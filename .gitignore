@@ -1,0 +1,55 @@
+# Build outputs
+bin/
+dist/
+*.exe
+/mathua
+/mathua.exe
+
+# Go
+*.test
+coverage.txt
+*.out
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node
+node_modules/
+web/next-app/.next/
+web/desktop-embed/dist/
+web/next-app/node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+*.egg-info/
+dist/
+build/
+
+# Test outputs
+testlog.txt
+*_test_dump/
+
+# Misc
+*.log
+tmp/
+temp/

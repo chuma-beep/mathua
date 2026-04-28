@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mathua:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgres://mathua:mathua@postgres:5432/mathua?sslmode=disable
+      - JWT_SECRET=${JWT_SECRET}
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=mathua
+      - POSTGRES_PASSWORD=mathua
+      - POSTGRES_DB=mathua
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

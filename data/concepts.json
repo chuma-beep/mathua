@@ -1,0 +1,47 @@
+[
+  {
+    "id": "count.objects",
+    "label": "Count objects 1-10",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": [],
+    "mastery_threshold": { "streak": 5, "avg_time_seconds": 10.0 }
+  },
+  {
+    "id": "count.cardinality",
+    "label": "Last number equals total count",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": ["count.objects"],
+    "mastery_threshold": { "streak": 5, "avg_time_seconds": 10.0 }
+  },
+  {
+    "id": "count.number_line",
+    "label": "Position on number line 0-20",
+    "domain": "counting",
+    "subdomain": "counting.number_line",
+    "grading_type": "numeric",
+    "prerequisites": ["count.cardinality"],
+    "mastery_threshold": { "streak": 5, "avg_time_seconds": 8.0 }
+  },
+  {
+    "id": "count.compare",
+    "label": "Greater than and less than",
+    "domain": "counting",
+    "subdomain": "counting.comparison",
+    "grading_type": "numeric",
+    "prerequisites": ["count.number_line"],
+    "mastery_threshold": { "streak": 5, "avg_time_seconds": 8.0 }
+  },
+  {
+    "id": "count.skip_2",
+    "label": "Skip count by 2s",
+    "domain": "counting",
+    "subdomain": "counting.skip",
+    "grading_type": "numeric",
+    "prerequisites": ["count.compare"],
+    "mastery_threshold": { "streak": 5, "avg_time_seconds": 8.0 }
+  }
+]
