@@ -670,14 +670,14 @@ export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3
     container: {
       height: isMobile ? '320px' : '520px', 
       width: '100%', 
-      borderRadius: '8px', 
+      borderRadius: '2px', 
       overflow: 'hidden'
     }
   }
 
   return (
     <section className="w-full">
-      <div className="text-center mb-2">
+      <div className="text-center mb-4">
         <h3 style={styles.label}>
           live concept graph
         </h3>
