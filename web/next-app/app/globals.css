@@ -294,11 +294,11 @@ a:hover { color: var(--accent-blue); }
 
 /* ═══════════════════════════════════════════════════════════════════
    FORMULA & CODE BLOCKS
-══════════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════════ */
 .formula-block,
 .architecture-block,
 .json-block {
-    background: var(--code-bg);
+    background: var(--bg-section);
     border: 1px solid var(--border);
     border-radius: 6px;
     padding: 20px;
@@ -579,16 +579,24 @@ a:hover { color: var(--accent-blue); }
    /* RESPONSIVE */
 @media (max-width: 768px) {
     .container { padding: 0 16px; }
-    .hero h1 { font-size: 24px; }
+    .hero { padding: 40px 0 32px; }
+    .hero h1 { font-size: 28px; }
     .hero .subtitle { font-size: 14px; }
+    .hero-cta { flex-direction: column; gap: 12px; }
+    .hero-cta .btn { width: 100%; max-width: 280px; }
+    .stat-badges { gap: 6px; }
+    .stat-badge { font-size: 10px; padding: 4px 8px; }
     .grid-two { flex-direction: column; gap: 24px; }
     .grid-two > div { min-width: 100%; }
     .grid-three { flex-direction: column; }
     .info-card { width: 100%; }
+    .card-section { padding: 32px 0; }
+    .card-section h2 { font-size: 20px; margin-bottom: 20px; }
+    .pipeline-flow { flex-direction: column; gap: 8px; }
+    .pipeline-arrow { transform: rotate(90deg); }
+    .domain-table { display: block; overflow-x: auto; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 20px; }
     .footer-right { text-align: center; }
-    .pipeline-flow { flex-direction: column; }
-    .pipeline-arrow { transform: rotate(90deg); }
 }
 
 /* How It Works Page */
