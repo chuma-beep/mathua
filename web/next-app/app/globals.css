@@ -106,6 +106,12 @@ a:hover { color: var(--accent-blue); }
     background: var(--bg);
 }
 
+.hero-nav {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
 .hero h1 {
     font-size: 48px;
     font-weight: 600;

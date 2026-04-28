@@ -49,6 +49,9 @@ export default function HomePage() {
       </button>
 
       <section className="hero">
+        <div className="hero-nav">
+          <a href="/how-it-works" className="btn btn-outline">How it works</a>
+        </div>
         <h1>Master the foundation.<br />Earn the abstraction.</h1>
         <p className="subtitle">
           Mathua is an open-source adaptive math learning engine. It never lets you advance until you have truly mastered the prerequisite — both speed and accuracy must be proven.
