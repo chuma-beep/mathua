@@ -662,7 +662,7 @@ a:hover { color: var(--accent-blue); }
 
 .nav-link {
     display: block;
-    color: #5a6577;
+    color: var(--text-muted);
     font-size: 13px;
     padding: 8px 12px;
     border-left: 2px solid transparent;
@@ -670,7 +670,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .nav-link:hover {
-    color: #9fa8b4;
+    color: var(--text-secondary);
 }
 
 .nav-link.active {
@@ -686,7 +686,7 @@ a:hover { color: var(--accent-blue); }
 .how-intro {
     margin-bottom: 48px;
     padding-bottom: 32px;
-    border-bottom: 1px solid #1e2d45;
+    border-bottom: 1px solid var(--border);
 }
 
 .how-intro h1 {
@@ -698,7 +698,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .how-subtitle {
-    color: #9fa8b4;
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.7;
 }
@@ -713,40 +713,40 @@ a:hover { color: var(--accent-blue); }
     color: var(--accent);
     font-size: 1.6rem;
     font-weight: normal;
-    border-bottom: 0.5px solid #1e2d45;
+    border-bottom: 0.5px solid var(--border);
     padding-bottom: 8px;
     margin-bottom: 24px;
 }
 
 .how-section p {
-    color: #9fa8b4;
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.85;
     margin-bottom: 16px;
 }
 
 .how-section strong {
-    color: #e8e2d5;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
 .how-section code {
-    background: #111827;
+    background: var(--bg-card);
     padding: 2px 6px;
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 0.9em;
-    color: #c8a96e;
+    color: var(--accent);
 }
 
 .code-block {
-    background: #0d1117;
-    border: 0.5px solid #1e2d45;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     border-radius: 6px;
     padding: 16px 20px;
     font-family: var(--font-mono);
     font-size: 13px;
-    color: #c9d1d9;
+    color: var(--text-primary);
     overflow-x: auto;
     white-space: pre;
     margin: 16px 0;
@@ -755,11 +755,11 @@ a:hover { color: var(--accent-blue); }
 .formula-block {
     border-left: 2px solid var(--accent);
     padding-left: 20px;
-    background: #111827;
+    background: var(--bg-card);
     border-radius: 0 6px 6px 0;
     font-family: var(--font-mono);
     font-size: 13px;
-    color: #9fa8b4;
+    color: var(--text-secondary);
     line-height: 1.8;
     padding: 16px 20px;
     margin: 16px 0;
@@ -770,7 +770,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .formula-label {
-    color: #5a6577;
+    color: var(--text-muted);
     font-size: 12px;
     margin-top: 4px;
 }
@@ -784,8 +784,8 @@ a:hover { color: var(--accent-blue); }
 }
 
 .concept-pill {
-    background: #111827;
-    border: 0.5px solid #2a3f5f;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     color: var(--accent);
     font-family: var(--font-mono);
     font-size: 12px;
@@ -794,7 +794,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .concept-chain .arrow {
-    color: #2a3f5f;
+    color: var(--border);
 }
 
 .state-flow {
@@ -806,13 +806,13 @@ a:hover { color: var(--accent-blue); }
 }
 
 .state-pill {
-    background: #111827;
-    border: 0.5px solid #2a3f5f;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     padding: 4px 10px;
     border-radius: 4px;
     font-family: var(--font-mono);
     font-size: 10px;
-    color: #5a6577;
+    color: var(--text-muted);
 }
 
 .state-pill.mastered {
@@ -821,12 +821,12 @@ a:hover { color: var(--accent-blue); }
 }
 
 .state-pill.decaying {
-    border-color: #4db8a0;
-    color: #4db8a0;
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
 }
 
 .state-arrow {
-    color: #5a6577;
+    color: var(--text-muted);
     font-size: 12px;
 }
 
@@ -836,32 +836,32 @@ a:hover { color: var(--accent-blue); }
 }
 
 .threshold-table {
-    background: #111827;
-    border: 0.5px solid #1e2d45;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     border-collapse: collapse;
     width: 100%;
     font-size: 13px;
 }
 
 .threshold-table th {
-    background: #0d1117;
+    background: var(--bg-section);
     color: var(--accent);
     font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;
     padding: 10px 14px;
     text-align: left;
-    border-bottom: 0.5px solid #1e2d45;
+    border-bottom: 0.5px solid var(--border);
 }
 
 .threshold-table td {
-    color: #9fa8b4;
+    color: var(--text-secondary);
     padding: 10px 14px;
-    border-bottom: 0.5px solid #1e2d45;
+    border-bottom: 0.5px solid var(--border);
 }
 
 .threshold-table tr:nth-child(even) td {
-    background: #0d1117;
+    background: var(--bg-section);
 }
 
 .step-list {
@@ -872,7 +872,7 @@ a:hover { color: var(--accent-blue); }
 
 .step-list li {
     counter-increment: step-counter;
-    color: #9fa8b4;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 12px;
@@ -890,11 +890,11 @@ a:hover { color: var(--accent-blue); }
 }
 
 .rule-block {
-    border-left: 2px solid #2a3f5f;
+    border-left: 2px solid var(--border-strong);
     padding-left: 16px;
     margin: 8px 0;
     font-size: 0.95rem;
-    color: #9fa8b4;
+    color: var(--text-secondary);
 }
 
 .flow-diagram {
@@ -907,11 +907,11 @@ a:hover { color: var(--accent-blue); }
 }
 
 .flow-diagram span {
-    color: #9fa8b4;
+    color: var(--text-secondary);
 }
 
 .flow-arrow {
-    color: #5a6577;
+    color: var(--text-muted);
 }
 
 @media (max-width: 768px) {

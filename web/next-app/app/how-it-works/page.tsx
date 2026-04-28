@@ -37,6 +37,8 @@ export default function HowItWorksPage() {
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
 
   useEffect(() => {
+    document.documentElement.classList.add('dark')
+    
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
