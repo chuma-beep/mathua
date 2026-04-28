@@ -24,6 +24,10 @@ export interface MathLink {
   type: "prerequisite" | "related" | "extends"
 }
 
+interface MathConceptGraph3DProps {
+  theme?: 'dark' | 'light'
+}
+
 const FIELD_COLORS: Record<MathField, string> = {
   "Number Theory":    "#c8a96e",
   "Algebra":          "#4db8a0",
@@ -36,10 +40,28 @@ const FIELD_COLORS: Record<MathField, string> = {
   "Abstract Algebra": "#e879f9",
 }
 
+const FIELD_COLORS_LIGHT: Record<MathField, string> = {
+  "Number Theory":    "#a0814a",
+  "Algebra":          "#3a9a8a",
+  "Geometry":         "#8a80d8",
+  "Linear Algebra":   "#5ab8dc",
+  "Discrete Math":    "#68c88c",
+  "Calculus":         "#e88a99",
+  "Analysis":         "#c88ae8",
+  "Topology":         "#e87830",
+  "Abstract Algebra": "#c868e8",
+}
+
 const LINK_COLORS: Record<MathLink["type"], string> = {
   prerequisite: "#c8a96e",
   related:      "#4db8a0",
   extends:      "#a8a0f0",
+}
+
+const LINK_COLORS_LIGHT: Record<MathLink["type"], string> = {
+  prerequisite: "#a0814a",
+  related:      "#3a9a8a",
+  extends:      "#8a80d8",
 }
 
 const NODE_RADIUS: Record<MathNode["level"], number> = {
@@ -224,6 +246,7 @@ interface GraphSceneProps {
   links: MathLink[]
   activeId: string
   onSelect: (id: string) => void
+  theme: 'dark' | 'light'
 }
 
 const NodeMesh = React.memo(function NodeMesh({ 
@@ -231,18 +254,21 @@ const NodeMesh = React.memo(function NodeMesh({
   isActive, 
   isHovered, 
   onHover,
-  onSelect 
+  onSelect,
+  theme 
 }: { 
   node: MathNode
   isActive: boolean
   isHovered: boolean
   onHover: (id: string | null) => void
   onSelect: () => void
+  theme: 'dark' | 'light'
 }) {
   const meshRef = useRef<THREE.Mesh>(null)
   const glowRef = useRef<THREE.Mesh>(null)
   const radius = NODE_RADIUS[node.level]
-  const fieldColor = FIELD_COLORS[node.field]
+  const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
+  const fieldColor = fieldColors[node.field]
   
   useFrame(() => {
     if (meshRef.current) {
@@ -256,6 +282,10 @@ const NodeMesh = React.memo(function NodeMesh({
       mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.1)
     }
   })
+
+  const textColor = theme === 'dark' ? '#c8a96e' : '#a0814a'
+  const labelColor = theme === 'dark' ? '#5a6577' : '#888'
+  const descColor = theme === 'dark' ? '#9fa8b4' : '#666'
 
   return (
     <group position={node.position as [number, number, number]}>
@@ -281,17 +311,17 @@ const NodeMesh = React.memo(function NodeMesh({
       {isHovered && (
         <Html center distanceFactor={12} style={{ pointerEvents: 'none' }}>
           <div style={{
-            background: 'rgba(11,15,26,0.95)',
-            border: '0.5px solid #2a3f5f',
+            background: theme === 'dark' ? 'rgba(11,15,26,0.95)' : 'rgba(255,255,255,0.95)',
+            border: `0.5px solid ${theme === 'dark' ? '#2a3f5f' : '#ddd'}`,
             borderRadius: '6px',
             padding: '8px 12px',
             whiteSpace: 'nowrap',
             minWidth: 'max-content'
           }}>
-            <div style={{ color: '#c8a96e', fontFamily: 'monospace', fontSize: '12px' }}>{node.name}</div>
-            <div style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.field}</div>
+            <div style={{ color: textColor, fontFamily: 'monospace', fontSize: '12px' }}>{node.name}</div>
+            <div style={{ color: labelColor, fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.field}</div>
             <div style={{ color: fieldColor, fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', marginTop: '2px' }}>{node.level}</div>
-            <div style={{ color: '#9fa8b4', fontFamily: 'monospace', fontSize: '11px', maxWidth: '200px', whiteSpace: 'normal', marginTop: '4px', lineHeight: '1.4' }}>{node.description}</div>
+            <div style={{ color: descColor, fontFamily: 'monospace', fontSize: '11px', maxWidth: '200px', whiteSpace: 'normal', marginTop: '4px', lineHeight: '1.4' }}>{node.description}</div>
           </div>
         </Html>
       )}
@@ -299,7 +329,9 @@ const NodeMesh = React.memo(function NodeMesh({
   )
 })
 
-function EdgeLines({ links, nodes, activeId }: { links: MathLink[], nodes: MathNode[], activeId: string }) {
+function EdgeLines({ links, nodes, activeId, theme }: { links: MathLink[], nodes: MathNode[], activeId: string, theme: 'dark' | 'light' }) {
+  const linkColors = theme === 'dark' ? LINK_COLORS : LINK_COLORS_LIGHT
+
   const activeLinks = useMemo(() => {
     return links.filter(l => l.source === activeId || l.target === activeId)
   }, [links, activeId])
@@ -321,7 +353,7 @@ function EdgeLines({ links, nodes, activeId }: { links: MathLink[], nodes: MathN
       positions[idx+4] = targetNode.position[1]
       positions[idx+5] = targetNode.position[2]
       
-      const color = new THREE.Color(LINK_COLORS[link.type])
+      const color = new THREE.Color(linkColors[link.type])
       colors[idx] = color.r
       colors[idx+1] = color.g
       colors[idx+2] = color.b
@@ -334,7 +366,7 @@ function EdgeLines({ links, nodes, activeId }: { links: MathLink[], nodes: MathN
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [activeLinks])
+  }, [activeLinks, linkColors])
 
   const lineRef = useRef<THREE.LineSegments>(null)
   const clockRef = useRef(0)
@@ -357,7 +389,9 @@ function EdgeLines({ links, nodes, activeId }: { links: MathLink[], nodes: MathN
   )
 }
 
-function AllEdges({ links }: { links: MathLink[] }) {
+function AllEdges({ links, theme }: { links: MathLink[], theme: 'dark' | 'light' }) {
+  const linkColors = theme === 'dark' ? LINK_COLORS : LINK_COLORS_LIGHT
+
   const geometry = useMemo(() => {
     const positions = new Float32Array(links.length * 6)
     const colors = new Float32Array(links.length * 6)
@@ -375,7 +409,7 @@ function AllEdges({ links }: { links: MathLink[] }) {
       positions[idx+4] = targetNode.position[1]
       positions[idx+5] = targetNode.position[2]
       
-      const color = new THREE.Color(LINK_COLORS[link.type])
+      const color = new THREE.Color(linkColors[link.type])
       colors[idx] = color.r
       colors[idx+1] = color.g
       colors[idx+2] = color.b
@@ -388,16 +422,16 @@ function AllEdges({ links }: { links: MathLink[] }) {
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [links])
+  }, [links, linkColors])
 
   return (
     <lineSegments geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={0.15} />
+      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.12} />
     </lineSegments>
   )
 }
 
-function Particles() {
+function Particles({ theme }: { theme: 'dark' | 'light' }) {
   const positions = useMemo(() => {
     const pos = new Float32Array(800 * 3)
     for (let i = 0; i < 800; i++) {
@@ -411,6 +445,8 @@ function Particles() {
     return pos
   }, [])
 
+  const color = theme === 'dark' ? '#1e2d45' : '#aaa'
+
   return (
     <points>
       <bufferGeometry>
@@ -421,12 +457,12 @@ function Particles() {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.06} color="#1e2d45" transparent opacity={0.8} sizeAttenuation />
+      <pointsMaterial size={0.06} color={color} transparent opacity={0.8} sizeAttenuation />
     </points>
   )
 }
 
-function GraphScene({ nodes, links, activeId, onSelect }: GraphSceneProps) {
+function GraphScene({ nodes, links, activeId, onSelect, theme }: GraphSceneProps) {
   const [hovered, setHovered] = useState<string | null>(null)
   const controlsRef = useRef<any>(null)
   const isAnyHovered = hovered !== null
@@ -437,14 +473,16 @@ function GraphScene({ nodes, links, activeId, onSelect }: GraphSceneProps) {
     }
   }, [isAnyHovered])
 
+  const bgColor = theme === 'dark' ? '#0b0f1a' : '#f5f5f5'
+
   return (
     <>
       <ambientLight intensity={0.4} />
       <pointLight position={[10, 10, 10]} intensity={0.8} />
-      <pointLight position={[-10, -10, -10]} intensity={0.4} color="#c8a96e" />
+      <pointLight position={[-10, -10, -10]} intensity={0.4} color={theme === 'dark' ? '#c8a96e' : '#a0814a'} />
       
-      <AllEdges links={links} />
-      <EdgeLines links={links} nodes={nodes} activeId={activeId} />
+      <AllEdges links={links} theme={theme} />
+      <EdgeLines links={links} nodes={nodes} activeId={activeId} theme={theme} />
       
       {nodes.map(node => (
         <NodeMesh
@@ -454,10 +492,11 @@ function GraphScene({ nodes, links, activeId, onSelect }: GraphSceneProps) {
           isHovered={node.id === hovered}
           onHover={setHovered}
           onSelect={() => onSelect(node.id)}
+          theme={theme}
         />
       ))}
       
-      <Particles />
+      <Particles theme={theme} />
       
       <OrbitControls
         ref={controlsRef}
@@ -474,46 +513,77 @@ function GraphScene({ nodes, links, activeId, onSelect }: GraphSceneProps) {
   )
 }
 
-function InfoPanel({ activeId }: { activeId: string }) {
+function InfoPanel({ activeId, theme }: { activeId: string, theme: 'dark' | 'light' }) {
   const node = nodeMap.get(activeId)
   if (!node) return null
 
   const connectedLinks = LINKS.filter(l => l.source === activeId || l.target === activeId)
   const connectedIds = connectedLinks.map(l => l.source === activeId ? l.target : l.source)
-  const fieldColor = FIELD_COLORS[node.field]
+  const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
+  const fieldColor = fieldColors[node.field]
   const dimFieldColor = fieldColor + '30'
 
-  return (
-    <div style={{
-      background: '#111827',
-      borderTop: '0.5px solid #1e2d45',
+  const styles = {
+    panel: {
+      background: theme === 'dark' ? '#111827' : '#fff',
+      borderTop: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`,
       padding: '1rem 1.5rem'
-    }}>
-      <div style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase' }}>selected concept</div>
-      <div style={{ color: '#c8a96e', fontFamily: 'serif', fontSize: '18px', marginTop: '4px' }}>{node.name}</div>
+    },
+    label: {
+      color: theme === 'dark' ? '#5a6577' : '#888',
+      fontFamily: 'monospace', 
+      fontSize: '10px', 
+      textTransform: 'uppercase'
+    },
+    name: {
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a', 
+      fontFamily: 'serif', 
+      fontSize: '18px', 
+      marginTop: '4px'
+    },
+    badge: {
+      background: dimFieldColor, 
+      color: fieldColor, 
+      fontFamily: 'monospace', 
+      fontSize: '11px',
+      padding: '2px 8px',
+      borderRadius: '4px'
+    },
+    level: {
+      color: theme === 'dark' ? '#9fa8b4' : '#666', 
+      fontFamily: 'monospace', 
+      fontSize: '11px', 
+      textTransform: 'uppercase'
+    },
+    desc: {
+      color: theme === 'dark' ? '#e8e2d5' : '#333', 
+      fontSize: '13px', 
+      lineHeight: '1.7', 
+      marginTop: '12px'
+    },
+    pill: {
+      background: theme === 'dark' ? '#c8a96e20' : '#a0814a20', 
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a', 
+      fontFamily: 'monospace', 
+      fontSize: '10px',
+      padding: '2px 8px',
+      borderRadius: '12px'
+    }
+  }
+
+  return (
+    <div style={styles.panel}>
+      <div style={styles.label}>selected concept</div>
+      <div style={styles.name}>{node.name}</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' }}>
-        <span style={{ 
-          background: dimFieldColor, 
-          color: fieldColor, 
-          fontFamily: 'monospace', 
-          fontSize: '11px',
-          padding: '2px 8px',
-          borderRadius: '4px'
-        }}>{node.field}</span>
-        <span style={{ color: '#9fa8b4', fontFamily: 'monospace', fontSize: '11px', textTransform: 'uppercase' }}>{node.level}</span>
+        <span style={styles.badge}>{node.field}</span>
+        <span style={styles.level}>{node.level}</span>
       </div>
-      <div style={{ color: '#e8e2d5', fontSize: '13px', lineHeight: '1.7', marginTop: '12px' }}>{node.description}</div>
+      <div style={styles.desc}>{node.description}</div>
       {connectedIds.length > 0 && (
         <div style={{ marginTop: '12px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {connectedIds.map(id => (
-            <span key={id} style={{ 
-              background: '#c8a96e20', 
-              color: '#c8a96e', 
-              fontFamily: 'monospace', 
-              fontSize: '10px',
-              padding: '2px 8px',
-              borderRadius: '12px'
-            }}>{id}</span>
+            <span key={id} style={styles.pill}>{id}</span>
           ))}
         </div>
       )}
@@ -521,7 +591,12 @@ function InfoPanel({ activeId }: { activeId: string }) {
   )
 }
 
-function LegendRow() {
+function LegendRow({ theme }: { theme: 'dark' | 'light' }) {
+  const fieldColors = theme === 'dark' ? FIELD_COLORS : FIELD_COLORS_LIGHT
+  const linkColors = theme === 'dark' ? LINK_COLORS : LINK_COLORS_LIGHT
+
+  const labelColor = theme === 'dark' ? '#5a6577' : '#888'
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -532,61 +607,85 @@ function LegendRow() {
       padding: '0 16px'
     }}>
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {Object.entries(FIELD_COLORS).map(([field, color]) => (
+        {Object.entries(fieldColors).map(([field, color]) => (
           <div key={field} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{ width: 8, height: 8, borderRadius: '50%', background: color }} />
-            <span style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '9px' }}>{field}</span>
+            <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>{field}</span>
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', gap: '16px', borderLeft: '0.5px solid #1e2d45', paddingLeft: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', borderLeft: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`, paddingLeft: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#c8a96e' }} />
-          <span style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '9px' }}>prerequisite</span>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.prerequisite }} />
+          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>prerequisite</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#4db8a0' }} />
-          <span style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '9px' }}>related</span>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.related }} />
+          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>related</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#a8a0f0' }} />
-          <span style={{ color: '#5a6577', fontFamily: 'monospace', fontSize: '9px' }}>extends</span>
+          <div style={{ width: 8, height: 8, borderRadius: '50%', background: linkColors.extends }} />
+          <span style={{ color: labelColor, fontFamily: 'monospace', fontSize: '9px' }}>extends</span>
         </div>
       </div>
     </div>
   )
 }
 
-export default function MathConceptGraph3D() {
+export default function MathConceptGraph3D({ theme = 'dark' }: MathConceptGraph3DProps) {
   const [activeId, setActiveId] = useState('counting')
+
+  const styles = {
+    label: {
+      color: theme === 'dark' ? '#5a6577' : '#888',
+      fontFamily: 'monospace', 
+      fontSize: '10px', 
+      textTransform: 'uppercase', 
+      letterSpacing: '0.18em'
+    },
+    sublabel: {
+      color: theme === 'dark' ? '#c8a96e' : '#a0814a',
+      fontFamily: 'monospace', 
+      fontSize: '11px', 
+      marginTop: '4px'
+    },
+    container: {
+      height: '520px', 
+      width: '100%', 
+      borderRadius: '8px', 
+      overflow: 'hidden', 
+      border: `0.5px solid ${theme === 'dark' ? '#1e2d45' : '#ddd'}`
+    }
+  }
 
   return (
     <section className="w-full">
       <div className="text-center mb-4">
-        <p style={{ fontFamily: 'monospace', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#5a6577' }}>
+        <p style={styles.label}>
           live concept graph
         </p>
-        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: '#c8a96e', marginTop: '4px' }}>
+        <p style={styles.sublabel}>
           60 topics · 120+ connections · click any node to explore
         </p>
       </div>
-      <div style={{ height: '520px', width: '100%', borderRadius: '8px', overflow: 'hidden', border: '0.5px solid #1e2d45' }}>
+      <div style={styles.container}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
           style={{ background: 'transparent' }}
           dpr={[1, 2]}
         >
-          <color attach="background" args={['#0b0f1a']} />
+          <color attach="background" args={[theme === 'dark' ? '#0b0f1a' : '#f5f5f5']} />
           <GraphScene
             nodes={NODES}
             links={LINKS}
             activeId={activeId}
             onSelect={setActiveId}
+            theme={theme}
           />
         </Canvas>
       </div>
-      <InfoPanel activeId={activeId} />
-      <LegendRow />
+      <InfoPanel activeId={activeId} theme={theme} />
+      <LegendRow theme={theme} />
     </section>
   )
 }

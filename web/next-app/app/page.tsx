@@ -7,7 +7,7 @@ import './globals.css'
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
   loading: () => (
-    <div style={{ height: '520px', background: '#0b0f1a', borderRadius: '8px', border: '0.5px solid #1e2d45' }} />
+    <div style={{ height: '520px', background: '#f5f5f5', borderRadius: '8px', border: '0.5px solid #ddd' }} />
   ),
 })
 
@@ -67,7 +67,7 @@ export default function HomePage() {
         <div className="hero-graph">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-label opacity-50 mb-3">LIVE CONCEPT GRAPH — 60 TOPICS · 120+ CONNECTIONS</p>
           <div className="max-w-[900px] mx-auto">
-            <MathConceptGraph3D />
+            <MathConceptGraph3D theme={theme} />
           </div>
         </div>
       </section>
