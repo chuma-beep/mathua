@@ -277,8 +277,11 @@ a:hover { color: var(--accent-blue); }
     color: var(--accent-blue);
     white-space: pre;
     overflow-x: auto;
-    margin: 16px 0;
+    margin: 16px auto;
     line-height: 1.8;
+    display: block;
+    text-align: center;
+    max-width: fit-content;
 }
 
 /* ═══════════════════════════════════════════════════════════════════

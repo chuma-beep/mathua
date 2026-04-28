@@ -223,7 +223,7 @@ count.compare  ──→ arith.sub.single ──→ arith.sub.multi
         <p className="body-text">
           Every concept is a JSON node. Every problem is a Go generator function. Every contribution goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
-        <pre className="json-block">
+        <pre className="json-block" style={{ textAlign: 'left' }}>
 {`{
   "id":                "arith.add.multi",
   "label":             "Multi-digit addition",
