@@ -156,7 +156,7 @@ export default function HomePage() {
         <h2>Rank by mastery. Level by depth.</h2>
         <div className="grid-two">
           <div>
-            <p className="" style={{ textAlign: 'center' }}>
+            <p className="body-text" style={{ textAlign: 'center' }}>
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three components:
             </p>
              <div className="formula-container">
@@ -214,6 +214,7 @@ export default function HomePage() {
             </ul>
           </div>
         </div>
+     <div className="formula-container">
         <pre className="architecture-block">
 {`┌──────────────────┐    ┌──────────────────┐
 │  Web (React)    │    │  TUI (Bubble Tea)│
@@ -235,7 +236,9 @@ export default function HomePage() {
 │  Data Layer (PostgreSQL / SQLite) │
 └──────────────────────────────────────┘`}
         </pre>
-      </section>
+       
+     </div>
+        </section>
 
       <hr className="section-divider" />
 
@@ -245,6 +248,7 @@ export default function HomePage() {
         <p className="body-text" style={{ textAlign: 'center' }}>
           Every concept is a JSON node. Every problem is a Go generator function. Every contribution goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
+          <div className="formula-container">
         <pre className="json-block" style={{ textAlign: 'left' }}>
 {`{
   "id":                "arith.add.multi",
@@ -257,8 +261,11 @@ export default function HomePage() {
   }
 }`}
         </pre>
-        <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" className="btn btn-blue">Read CONTRIBUTING.md →</a>
-      </section>
+        </div>
+    <div className="flex align-center">
+        <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" className="btn btn-blue ">Read CONTRIBUTING.md →</a>         
+         </div>
+        </section>
 
       <footer className="footer">
         <div className="footer-grid">
