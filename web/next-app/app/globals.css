@@ -342,7 +342,7 @@ a:hover { color: var(--accent-blue); }
     color: var(--text-secondary);
     font-size: 14px;
     line-height: 1.6;
-    max-width: 500px;
+    /* max-width: 500px; */
 }
 
 /* ═══════════════════════════════════════════════════════════════════
