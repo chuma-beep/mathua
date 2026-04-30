@@ -156,14 +156,18 @@ export default function HomePage() {
         <h2>Rank by mastery. Level by depth.</h2>
         <div className="grid-two">
           <div>
-            <p className="body-text" style={{ textAlign: 'center' }}>
+            <p className="" style={{ textAlign: 'center' }}>
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three components:
             </p>
+             <div className="formula-container">
             <pre className="formula-block">
        {`score = (mastered_count × 100)
           + speed_bonus
            + (current_streak × 10)`}
             </pre>
+
+             </div> 
+
           </div>
           <div>
             <ul className="level-list">
@@ -221,7 +225,7 @@ export default function HomePage() {
                    ▼
 ┌──────────────────────────────────────┐
 │        Scheduling Engine           │
-└──────────────────┬───────────────���─���─┘
+└──────────────────┬────────────────┘
                    ▼
 ┌──────────────────────────────────────┐
 │   Grading & Problem Generation    │
