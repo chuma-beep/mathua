@@ -262,7 +262,7 @@ export default function HomePage() {
 }`}
         </pre>
         </div>
-    <div className="flex align-center">
+    <div className="contrib-button">
         <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" className="btn btn-blue ">Read CONTRIBUTING.md →</a>         
          </div>
         </section>

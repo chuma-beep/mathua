@@ -533,6 +533,12 @@ a:hover { color: var(--accent-blue); }
     color: var(--accent-blue);
 }
 
+.contrib-button{
+    display: flex;
+    justify-content: center;
+}
+
+
 /* ═══════════════════════════════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════════════════════════════ */
