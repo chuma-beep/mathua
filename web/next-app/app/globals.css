@@ -624,8 +624,13 @@ a:hover { color: var(--accent-blue); }
     .pipeline-arrow { transform: rotate(90deg); }
     .formula-block, .architecture-block, .json-block { text-align: center; }
     .domain-table { display: block; overflow-x: auto; }
-    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 20px; }
-    .footer-right { text-align: center; }
+    .footer { padding: 32px 16px; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 24px; }
+    .footer-brand { font-size: 18px; }
+    .footer-tagline { font-size: 9px; }
+    .footer-links { flex-direction: column; gap: 12px; align-items: center; font-size: 14px; }
+    .footer-right { text-align: center; font-size: 11px; }
+    .footer-bottom { font-size: 10px; padding-top: 16px; }
 }
 
 /* How It Works Page */
