@@ -231,6 +231,11 @@ a:hover { color: var(--accent-blue); }
     font-weight: 500;
     color: var(--text-primary);
     margin-bottom: 28px;
+    text-align: center;
+}
+
+.card-section span{
+    text-align: center;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -257,12 +262,14 @@ a:hover { color: var(--accent-blue); }
     font-weight: 600;
     color: var(--accent-blue);
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .info-card p {
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.6;
+    text-align: center;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -302,6 +309,11 @@ a:hover { color: var(--accent-blue); }
 /* ═══════════════════════════════════════════════════════════════════
    FORMULA & CODE BLOCKS
    ══════════════════════════════════════════════════════════════════════════ */
+.formula-container{
+    display: flex;
+    justify-content: center ; 
+}
+
 .formula-block,
 .architecture-block,
 .json-block {
@@ -314,12 +326,13 @@ a:hover { color: var(--accent-blue); }
     color: var(--accent-blue);
     white-space: pre;
     overflow-x: auto;
-    margin: 16px auto;
+    margin: 16px 16px;
     line-height: 1.8;
-    display: block;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    align-items: center;
     max-width: fit-content;
+    align-items: center;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -346,6 +359,7 @@ a:hover { color: var(--accent-blue); }
 }
 
 .domain-table th {
+    width: 100%;
     font-family: var(--font-mono);
     font-size: 11px;
     text-transform: uppercase;

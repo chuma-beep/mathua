@@ -87,7 +87,7 @@ export default function HomePage() {
 
       <section className="card-section">
         <span className="section-label">How it works</span>
-        <h2>A different kind of math system</h2>
+        <h2 className="text-center">A different kind of math system</h2>
         <div className="grid-three">
           <div className="info-card">
             <h4>Mastery gating</h4>
@@ -118,11 +118,13 @@ export default function HomePage() {
           <span className="pipeline-arrow">→</span>
           <span className="pipeline-state">DECAYING</span>
         </div>
+       <div className="formula-container">
         <pre className="formula-block">
 {`priority = (0.7 × days_since_last_seen) + (0.3 × (1 − mastery))
          + 5.0 if DECAYING  +  2.0 if newly_unlocked`}
         </pre>
-        <p className="body-text" style={{ textAlign: 'center' }}>
+      </div> 
+    <p className="" style={{ textAlign: 'center' }}>
           The scheduler enforces three hard rules: prerequisites must be mastered before a concept unlocks, the same concept never appears twice in a row, and roughly 70% of each session is new material.
         </p>
       </section>
