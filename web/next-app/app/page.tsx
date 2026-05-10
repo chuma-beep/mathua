@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
 import './globals.css'
+import conceptsData from '../data/concepts.json'
 
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
@@ -70,15 +71,23 @@ export default function HomePage() {
          <a href="https://github.com/chuma-beep/mathua" className="btn btn-outline">View on GitHub</a>  
         </div>
         <div className="stat-badges">
-          <span className="stat-badge">60 topics</span>
-          <span className="stat-badge">120+ connections</span>
-          <span className="stat-badge">9 fields</span>
+          <span className="stat-badge">80 topics</span>
+          <span className="stat-badge">79 connections</span>
+          <span className="stat-badge">4 domains</span>
           <span className="stat-badge">web + desktop</span>
           <span className="stat-badge">open source</span>
         </div>
         <div className="">
           <div className="max-w-[900px]  mt-0">
-            <MathConceptGraph3D theme={theme} />
+            <MathConceptGraph3D 
+              theme={theme} 
+              concepts={conceptsData.map((c: any) => ({
+                id: c.id,
+                label: c.label,
+                domain: c.domain,
+                prerequisites: c.prerequisites,
+              }))}
+            />
           </div>
         </div>
       </section>
