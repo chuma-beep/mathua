@@ -1,1 +1,4092 @@
-../../../data/concepts.json
+[
+  {
+    "id": "count.objects",
+    "label": "Count objects 1-10",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": [],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "count.cardinality",
+    "label": "Last number equals total count",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.objects"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "count.number_line",
+    "label": "Position on number line 0-20",
+    "domain": "counting",
+    "subdomain": "counting.number_line",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.cardinality"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "count.compare",
+    "label": "Greater than and less than",
+    "domain": "counting",
+    "subdomain": "counting.comparison",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "count.skip_2",
+    "label": "Skip count by 2s",
+    "domain": "counting",
+    "subdomain": "counting.skip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "count.skip_5",
+    "label": "Skip count by 5s",
+    "domain": "counting",
+    "subdomain": "counting.skip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.skip_2"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "count.skip_10",
+    "label": "Skip count by 10s",
+    "domain": "counting",
+    "subdomain": "counting.skip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.skip_5"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 6.0
+    }
+  },
+  {
+    "id": "count.objects_20",
+    "label": "Count objects 11-20",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.objects"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "count.ordinal",
+    "label": "Ordinal numbers: first, second, third",
+    "domain": "counting",
+    "subdomain": "counting.objects",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.cardinality"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "count.backwards",
+    "label": "Count backwards from 20",
+    "domain": "counting",
+    "subdomain": "counting.number_line",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.add.single",
+    "label": "Single-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.cardinality"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.add.double",
+    "label": "Two-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.add.carry",
+    "label": "Addition with carrying",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.add.triple",
+    "label": "Three-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.carry"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 14.0
+    }
+  },
+  {
+    "id": "arith.add.word",
+    "label": "Addition word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.sub.single",
+    "label": "Single-digit subtraction",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.sub.double",
+    "label": "Two-digit subtraction",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.single",
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sub.borrow",
+    "label": "Subtraction with borrowing",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.sub.word",
+    "label": "Subtraction word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.place.tens",
+    "label": "Tens and units place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.place.hundreds",
+    "label": "Hundreds place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.place.thousands",
+    "label": "Thousands place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.tens",
+    "label": "Round to nearest 10",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.hundreds",
+    "label": "Round to nearest 100",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.thousands",
+    "label": "Round to nearest 1000",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.thousands",
+      "arith.round.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.mult.concept",
+    "label": "Multiplication as repeated addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.mult.2_5_10",
+    "label": "Times tables 2, 5 and 10",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.mult.tables",
+    "label": "Times tables 1 to 12",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.2_5_10"
+    ],
+    "mastery_threshold": {
+      "streak": 7,
+      "avg_time_seconds": 6.0
+    }
+  },
+  {
+    "id": "arith.mult.double",
+    "label": "Multiply two-digit numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.mult.triple",
+    "label": "Multiply three-digit by one-digit",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.mult.word",
+    "label": "Multiplication word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "arith.div.concept",
+    "label": "Division as equal sharing",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.div.basic",
+    "label": "Basic division without remainder",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.concept",
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.div.remainder",
+    "label": "Division with remainders",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.div.long",
+    "label": "Long division",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.remainder",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.div.word",
+    "label": "Division word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.remainder"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "arith.factor.find",
+    "label": "Find factors of a number",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.factor.prime",
+    "label": "Identify prime numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.find"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.factor.prime_fact",
+    "label": "Prime factorization",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.gcf",
+    "label": "Greatest common factor",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.lcm",
+    "label": "Least common multiple",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.gcf"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.composite",
+    "label": "Identify composite numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.exp.concept",
+    "label": "Exponents: base and power",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.exp.evaluate",
+    "label": "Evaluate simple exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.product_rule",
+    "label": "Exponent product rule: x^a times x^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.quotient_rule",
+    "label": "Exponent quotient rule: x^a divided by x^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.power_rule",
+    "label": "Power of a power rule: (x^a)^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sqrt.perfect",
+    "label": "Square roots of perfect squares",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sqrt.simplify",
+    "label": "Simplify square roots",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sqrt.perfect",
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.neg.number_line",
+    "label": "Negative numbers on number line",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.neg.add_sub",
+    "label": "Add and subtract negative numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line",
+      "arith.sub.borrow"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.neg.mult_div",
+    "label": "Multiply and divide with negatives",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.add_sub",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.order_ops.basic",
+    "label": "Order of operations without exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.order_ops.full",
+    "label": "BODMAS with exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.order_ops.basic",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.order_ops.nested",
+    "label": "Nested parentheses in order of operations",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.order_ops.full"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.dec.intro",
+    "label": "Read and write decimals to hundredths",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.decimals_intro",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "frac.concept",
+    "label": "What is a fraction",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "frac.parts",
+    "label": "Numerator and denominator",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "frac.on_number_line",
+    "label": "Fractions on the number line",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "frac.equivalent",
+    "label": "Find equivalent fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "frac.simplify",
+    "label": "Reduce fraction to lowest terms",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.equivalent",
+      "arith.factor.gcf"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "frac.compare",
+    "label": "Compare fractions: which is larger",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.equivalent"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "frac.benchmark",
+    "label": "Benchmark fractions: closer to 0, 1/2, or 1",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "frac.to_decimal",
+    "label": "Convert fraction to decimal",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "frac.add.same",
+    "label": "Add fractions with same denominator",
+    "domain": "fractions",
+    "subdomain": "fractions.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "frac.add.diff",
+    "label": "Add fractions with different denominators",
+    "domain": "fractions",
+    "subdomain": "fractions.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.same",
+      "arith.factor.lcm"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "frac.add.word",
+    "label": "Fraction addition word problems",
+    "domain": "fractions",
+    "subdomain": "fractions.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.diff"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "frac.sub.same",
+    "label": "Subtract fractions with same denominator",
+    "domain": "fractions",
+    "subdomain": "fractions.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.same"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "frac.sub.diff",
+    "label": "Subtract fractions with different denominators",
+    "domain": "fractions",
+    "subdomain": "fractions.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.sub.same",
+      "arith.factor.lcm"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "frac.mult",
+    "label": "Multiply fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "frac.mult.whole",
+    "label": "Multiply fraction by a whole number",
+    "domain": "fractions",
+    "subdomain": "fractions.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "frac.div",
+    "label": "Divide fractions by multiplying by reciprocal",
+    "domain": "fractions",
+    "subdomain": "fractions.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "frac.div.whole",
+    "label": "Divide a whole number by a fraction",
+    "domain": "fractions",
+    "subdomain": "fractions.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.div"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "frac.mixed.convert",
+    "label": "Convert mixed number to improper fraction",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "arith.div.remainder"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "frac.mixed.add",
+    "label": "Add mixed numbers",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mixed.convert",
+      "frac.add.diff"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "frac.mixed.sub",
+    "label": "Subtract mixed numbers",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mixed.add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "frac.mixed.mult",
+    "label": "Multiply mixed numbers",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mixed.convert",
+      "frac.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "dec.compare",
+    "label": "Compare decimal values",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.dec.intro"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "dec.add",
+    "label": "Add decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.dec.intro",
+      "arith.add.carry"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "dec.sub",
+    "label": "Subtract decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "dec.mult",
+    "label": "Multiply decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.add",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "dec.div",
+    "label": "Divide decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.mult",
+      "arith.div.long"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "dec.from_frac",
+    "label": "Convert fraction to decimal by division",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.parts",
+      "arith.div.long"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "dec.to_frac",
+    "label": "Convert terminating decimal to fraction",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.from_frac",
+      "frac.simplify"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "dec.round",
+    "label": "Round decimals to given place",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "pct.concept",
+    "label": "Percentage as parts per hundred",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.dec.intro"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "pct.to_dec",
+    "label": "Convert percentage to decimal",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "pct.from_dec",
+    "label": "Convert decimal to percentage",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.to_dec"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "pct.of_number",
+    "label": "Find X percent of a number",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.to_dec",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "pct.find_rate",
+    "label": "What percentage is A of B",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.of_number",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "pct.increase",
+    "label": "Percentage increase and decrease",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.of_number"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "pct.discount",
+    "label": "Calculate discounts and sale prices",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.increase"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "pct.tax_tip",
+    "label": "Tax and tip calculations",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.discount"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.abs_value",
+    "label": "Absolute value",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 6.0
+    }
+  },
+  {
+    "id": "arith.neg.order_ops",
+    "label": "Order of operations with negatives",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.order_ops.full",
+      "arith.neg.mult_div"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "ratio.concept",
+    "label": "What is a ratio",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "ratio.simplify",
+    "label": "Simplify a ratio",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.concept",
+      "arith.factor.gcf"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "ratio.proportion",
+    "label": "Solve a proportion",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.simplify",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "ratio.rate",
+    "label": "Unit rates",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.proportion"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "ratio.scale",
+    "label": "Scale drawings and maps",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.rate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.exp.neg",
+    "label": "Negative exponents",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate",
+      "frac.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.exp.zero",
+    "label": "Zero exponent rule",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 6.0
+    }
+  },
+  {
+    "id": "arith.sci_notation",
+    "label": "Scientific notation",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate",
+      "dec.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.sci_notation.ops",
+    "label": "Operations with scientific notation",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sci_notation"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "prealg.var.concept",
+    "label": "What is a variable",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.proportion"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "prealg.expr.evaluate",
+    "label": "Evaluate expression at given value of x",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.var.concept",
+      "arith.order_ops.full"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.expr.like_terms",
+    "label": "Identify and collect like terms",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.expr.distribute",
+    "label": "Distributive property",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.eq.one_step_add",
+    "label": "Solve x + b = c",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.eq.one_step_mult",
+    "label": "Solve ax = c",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.one_step_add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.eq.two_step",
+    "label": "Solve ax + b = c",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.one_step_mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.eq.word",
+    "label": "Write and solve equations from word problems",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.two_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "prealg.ineq.one_step",
+    "label": "Solve one-step inequalities",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.one_step_mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.ineq.two_step",
+    "label": "Solve two-step inequalities",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.ineq.one_step",
+      "prealg.eq.two_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.basic.points_lines",
+    "label": "Points, lines, and planes",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.basic.angles",
+    "label": "Types of angles: acute, right, obtuse",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.basic.angle_measure",
+    "label": "Measuring angles in degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.basic.complementary",
+    "label": "Complementary and supplementary angles",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.basic.vertical",
+    "label": "Vertical angles and parallel lines",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.complementary"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.types",
+    "label": "Types of triangles",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.triangle.angles",
+    "label": "Triangle angle sum is 180 degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.triangle.area",
+    "label": "Area of a triangle",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.pythagorean",
+    "label": "Pythagorean theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.area",
+      "arith.sqrt.perfect",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.quad.types",
+    "label": "Types of quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.quad.area",
+    "label": "Area of rectangles and parallelograms",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.quad.perimeter",
+    "label": "Perimeter of polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.circle.parts",
+    "label": "Parts of a circle: radius, diameter, chord",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.circle.circumference",
+    "label": "Circumference of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.parts",
+      "dec.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.circle.area",
+    "label": "Area of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.circumference",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.coord.plot",
+    "label": "Plot points on the coordinate plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.coord.distance",
+    "label": "Distance between two points",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.coord.midpoint",
+    "label": "Midpoint of a line segment",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "dec.add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.volume_rect",
+    "label": "Volume of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area",
+      "arith.mult.triple"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.surface_area",
+    "label": "Surface area of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.linear.slope",
+    "label": "Slope of a line from two points",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "prealg.eq.two_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.linear.slope_intercept",
+    "label": "Slope-intercept form y = mx + b",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.linear.graph",
+    "label": "Graph a linear equation",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.linear.standard_form",
+    "label": "Standard form of a linear equation Ax + By = C",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.linear.parallel_perp",
+    "label": "Parallel and perpendicular lines",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.eq.multi_step",
+    "label": "Solve multi-step equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "prealg.expr.distribute"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.eq.vars_both_sides",
+    "label": "Variables on both sides of an equation",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.eq.literal",
+    "label": "Literal equations: solve for a variable",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.ineq.multi_step",
+    "label": "Solve multi-step inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.ineq.two_step",
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.ineq.compound",
+    "label": "Compound inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.systems.substitution",
+    "label": "Systems of equations: substitution method",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "alg.systems.elimination",
+    "label": "Systems of equations: elimination method",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.systems.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "alg.systems.word",
+    "label": "Systems of equations word problems",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.systems.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "alg.poly.concept",
+    "label": "What is a polynomial: terms and degree",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "alg.poly.add_sub",
+    "label": "Add and subtract polynomials",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "alg.poly.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.poly.mult_mono",
+    "label": "Multiply monomial by polynomial",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "alg.poly.add_sub",
+      "prealg.expr.distribute"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.poly.foil",
+    "label": "Multiply two binomials using FOIL",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "alg.poly.mult_mono"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.poly.special",
+    "label": "Special products: difference of squares and perfect squares",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.factor.gcf",
+    "label": "Factor out the greatest common factor",
+    "domain": "algebra",
+    "subdomain": "algebra.factoring",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.poly.mult_mono",
+      "arith.factor.gcf"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.factor.trinomial",
+    "label": "Factor trinomials of the form x² + bx + c",
+    "domain": "algebra",
+    "subdomain": "algebra.factoring",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.factor.gcf",
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.factor.diff_squares",
+    "label": "Factor difference of two squares",
+    "domain": "algebra",
+    "subdomain": "algebra.factoring",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.factor.trinomial",
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.factor.ac_method",
+    "label": "Factor trinomials ax² + bx + c using AC method",
+    "domain": "algebra",
+    "subdomain": "algebra.factoring",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "alg.quad.solve_factor",
+    "label": "Solve quadratics by factoring",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "alg.quad.complete_square",
+    "label": "Completing the square",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.quad.solve_factor",
+      "arith.sqrt.perfect"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "alg.quad.formula",
+    "label": "Quadratic formula",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.quad.complete_square",
+      "arith.sqrt.simplify"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "alg.quad.discriminant",
+    "label": "Discriminant: number of real solutions",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.func.concept",
+    "label": "What is a function: domain and range",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "alg.func.notation",
+    "label": "Function notation f(x)",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "alg.func.evaluate",
+    "label": "Evaluate a function at a given value",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "alg.func.linear",
+    "label": "Linear functions and their graphs",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.evaluate",
+      "alg.linear.graph"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.func.quad",
+    "label": "Quadratic functions and parabolas",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.linear",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.exp.concept",
+    "label": "Exponential functions: growth and decay",
+    "domain": "algebra",
+    "subdomain": "algebra.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.evaluate",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.exp.evaluate",
+    "label": "Evaluate exponential expressions",
+    "domain": "algebra",
+    "subdomain": "algebra.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "alg.log.concept",
+    "label": "What is a logarithm",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.log.evaluate",
+    "label": "Evaluate logarithms",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.log.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.log.properties",
+    "label": "Properties of logarithms",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.log.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.arithmetic",
+    "label": "Arithmetic sequences",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.seq.geometric",
+    "label": "Geometric sequences",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "alg.seq.sum_arith",
+    "label": "Sum of arithmetic series",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.arithmetic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.sum_geo",
+    "label": "Sum of geometric series",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.data.mean",
+    "label": "Calculate the mean",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.median",
+    "label": "Find the median",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.mode",
+    "label": "Find the mode",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "stat.data.range",
+    "label": "Find the range of a data set",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "stat.prob.basic",
+    "label": "Basic probability: P(event) = favourable / total",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.concept",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "stat.prob.complement",
+    "label": "Complement of an event",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.prob.compound",
+    "label": "Compound events: and / or",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.prob.counting",
+    "label": "Fundamental counting principle",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.radians",
+    "label": "Radians and degrees conversion",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angle_measure",
+      "frac.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "trig.unit_circle",
+    "label": "Unit circle: sine and cosine of standard angles",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.radians",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.sin_cos_def",
+    "label": "Sine and cosine definitions in right triangles",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean",
+      "frac.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.tan_def",
+    "label": "Tangent definition and ratio identity",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "trig.reciprocal",
+    "label": "Reciprocal trig functions: csc, sec, cot",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.tan_def"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "trig.pythagorean_id",
+    "label": "Pythagorean identity sin²θ + cos²θ = 1",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "expression",
+    "prerequisites": [
+      "trig.sin_cos_def",
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.special_angles",
+    "label": "Exact values for 30°, 45°, 60°",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.unit_circle"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.reference_angle",
+    "label": "Reference angles and quadrants",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.special_angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.graph_sin",
+    "label": "Graph of sine function",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.reference_angle",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.graph_cos",
+    "label": "Graph of cosine function",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph_sin"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "trig.period",
+    "label": "Amplitude, period, and phase shift",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph_cos"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "trig.inverse",
+    "label": "Inverse trig functions",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph_sin",
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.law_sines",
+    "label": "Law of sines",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.sin_cos_def",
+      "geo.triangle.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "trig.law_cosines",
+    "label": "Law of cosines",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.law_sines",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.limit.concept",
+    "label": "Concept of a limit",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.limit.numeric",
+    "label": "Estimate limits numerically",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.limit.properties",
+    "label": "Limit laws and properties",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.numeric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.limit.infinity",
+    "label": "Limits at infinity",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.properties",
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.limit.continuity",
+    "label": "Continuity and types of discontinuity",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.concept",
+    "label": "Derivative as slope of tangent line",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity",
+      "alg.linear.slope"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.power_rule",
+    "label": "Power rule for differentiation",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.deriv.sum_rule",
+    "label": "Sum and difference rules",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "calc.deriv.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "calc.deriv.product_rule",
+    "label": "Product rule",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.sum_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.quotient_rule",
+    "label": "Quotient rule",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.deriv.chain_rule",
+    "label": "Chain rule",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.trig",
+    "label": "Derivatives of sine and cosine",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "trig.graph_sin"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.exp_log",
+    "label": "Derivatives of e^x and ln(x)",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "alg.log.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.applications",
+    "label": "Applications: velocity and acceleration",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.power_rule",
+      "prealg.eq.word"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization",
+    "label": "Optimization problems",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.applications",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.indefinite",
+    "label": "Indefinite integrals and antiderivatives",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.integral.power_rule",
+    "label": "Power rule for integration",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.integral.substitution",
+    "label": "U-substitution",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.power_rule",
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.definite",
+    "label": "Definite integrals and area",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.ftc",
+    "label": "Fundamental Theorem of Calculus",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.area_between",
+    "label": "Area between two curves",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "alg.ineq.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.volume",
+    "label": "Volume of solids of revolution",
+    "domain": "calculus",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.area_between",
+      "geo.circle.area"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.deriv.implicit",
+    "label": "Implicit differentiation",
+    "domain": "calculus",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates",
+    "label": "Related rates",
+    "domain": "calculus",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.implicit",
+      "prealg.eq.word"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.parts",
+    "label": "Integration by parts",
+    "domain": "calculus",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.substitution",
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "calc.integral.partial_fractions",
+    "label": "Integration by partial fractions",
+    "domain": "calculus",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.parts",
+      "alg.factor.trinomial"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.vector.concept",
+    "label": "Vectors: magnitude and direction",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "linalg.vector.add",
+    "label": "Vector addition and scalar multiplication",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vector.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "linalg.vector.dot",
+    "label": "Dot product of two vectors",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vector.add",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "linalg.matrix.concept",
+    "label": "Matrices: rows, columns, and entries",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vector.add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "linalg.matrix.add",
+    "label": "Matrix addition and scalar multiplication",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "linalg.matrix.mult",
+    "label": "Matrix multiplication",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.add",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.matrix.identity",
+    "label": "Identity matrix and matrix inverses",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "linalg.det.2x2",
+    "label": "Determinant of a 2x2 matrix",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.determinants",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "linalg.det.3x3",
+    "label": "Determinant of a 3x3 matrix",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.determinants",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.2x2"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "linalg.systems.matrix",
+    "label": "Solving systems with matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.identity",
+      "alg.systems.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.cramer",
+    "label": "Cramer's rule",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.2x2",
+      "alg.systems.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.eigen.concept",
+    "label": "Eigenvalues and eigenvectors concept",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.2x2",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.eigen.compute",
+    "label": "Compute eigenvalues of a 2x2 matrix",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.transformations",
+    "label": "Linear transformations",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.transformations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.span",
+    "label": "Span and linear independence",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vector.add",
+      "linalg.det.2x2"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.basis",
+    "label": "Basis and dimension",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.span"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "discrete.logic.propositions",
+    "label": "Propositional logic: statements and truth values",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.var.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "discrete.logic.connectives",
+    "label": "Logical connectives: AND, OR, NOT, IMPLIES",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.propositions"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.logic.truth_tables",
+    "label": "Truth tables",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.connectives"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.logic.quantifiers",
+    "label": "Quantifiers: universal and existential",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.truth_tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.sets.operations",
+    "label": "Set operations: union, intersection, complement",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.propositions"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.sets.venn",
+    "label": "Venn diagrams",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.permutations",
+    "label": "Permutations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.counting",
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.combinations",
+    "label": "Combinations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.permutations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.pascal",
+    "label": "Pascal's triangle and binomial theorem",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.combinations",
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.graphs.basics",
+    "label": "Graphs: vertices, edges, and degrees",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "discrete.graphs.paths",
+    "label": "Paths, cycles, and connectivity",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.basics"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.graphs.trees",
+    "label": "Trees and spanning trees",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.paths"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.recurrence",
+    "label": "Recurrence relations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.recurrence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "discrete.induction",
+    "label": "Mathematical induction",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.proof",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.recurrence",
+      "discrete.logic.quantifiers"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "complex.concept",
+    "label": "Imaginary unit i and complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sqrt.perfect",
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "complex.add_sub",
+    "label": "Add and subtract complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "complex.mult",
+    "label": "Multiply complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.add_sub",
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "complex.conjugate",
+    "label": "Complex conjugate",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "complex.divide",
+    "label": "Divide complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.conjugate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "complex.polar",
+    "label": "Polar form of complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.divide",
+      "trig.unit_circle"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "complex.de_moivre",
+    "label": "De Moivre's theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.polar"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "complex.roots",
+    "label": "Roots of complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.de_moivre"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "nt.divisibility",
+    "label": "Divisibility rules",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.find"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "nt.gcd_euclidean",
+    "label": "Euclidean algorithm for GCD",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.gcf",
+      "arith.div.remainder"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "nt.modular",
+    "label": "Modular arithmetic",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.divisibility",
+      "arith.neg.mult_div"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "nt.congruence",
+    "label": "Congruence relations",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "nt.fermat_little",
+    "label": "Fermat's little theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.congruence",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "nt.euler_phi",
+    "label": "Euler's totient function",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.fermat_little",
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "nt.diophantine",
+    "label": "Linear Diophantine equations",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.gcd_euclidean",
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.crypto",
+    "label": "Introduction to RSA cryptography",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.euler_phi"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "ode.concept",
+    "label": "What is a differential equation",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "ode.separable",
+    "label": "Separable differential equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.concept",
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "ode.linear_first",
+    "label": "First-order linear ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.separable",
+      "calc.deriv.exp_log"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.exact",
+    "label": "Exact equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.linear_first",
+      "calc.deriv.implicit"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.homogeneous",
+    "label": "Homogeneous second-order ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.linear_first",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.nonhomogeneous",
+    "label": "Non-homogeneous second-order ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.homogeneous",
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "ode.laplace",
+    "label": "Laplace transforms",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.nonhomogeneous",
+      "calc.integral.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "ode.systems",
+    "label": "Systems of differential equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.systems",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.homogeneous",
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "abstract.group.def",
+    "label": "Definition of a group",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.quantifiers",
+      "nt.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "abstract.group.examples",
+    "label": "Examples of groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.def"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "abstract.subgroup",
+    "label": "Subgroups and cosets",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.examples"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.ring",
+    "label": "Rings and fields",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.subgroup",
+      "alg.factor.diff_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.homomorphism",
+    "label": "Group homomorphisms",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.subgroup",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "topo.metric",
+    "label": "Metric spaces",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "topo.open_closed",
+    "label": "Open and closed sets",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.metric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "topo.continuous",
+    "label": "Continuity in topological spaces",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.open_closed",
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  }
+]
