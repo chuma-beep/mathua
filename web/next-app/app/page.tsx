@@ -33,6 +33,30 @@ export default function HomePage() {
     setMounted(true)
   }, [])
 
+  const conceptCount = conceptsData.length
+  const connectionCount = conceptsData.reduce((sum: number, c: any) => sum + ((c.prerequisites as any[])?.length || 0), 0)
+  const domainCount = new Set(conceptsData.map((c: any) => c.domain)).size
+
+  const domainOrder = [
+    'counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra',
+    'geometry', 'trigonometry', 'calculus', 'statistics',
+    'linear_algebra', 'discrete_math', 'complex_numbers',
+    'number_theory', 'differential_equations', 'abstract_algebra', 'topology',
+  ]
+  const domainLabels: Record<string, string> = {
+    counting: 'Counting', arithmetic: 'Arithmetic', fractions: 'Fractions',
+    prealgebra: 'Pre-Algebra', algebra: 'Algebra', geometry: 'Geometry',
+    trigonometry: 'Trigonometry', calculus: 'Calculus', statistics: 'Statistics',
+    linear_algebra: 'Linear Algebra', discrete_math: 'Discrete Math',
+    complex_numbers: 'Complex Numbers', number_theory: 'Number Theory',
+    differential_equations: 'Differential Equations', abstract_algebra: 'Abstract Algebra',
+    topology: 'Topology',
+  }
+  const domainCounts = conceptsData.reduce((acc: Record<string, number>, c: any) => {
+    acc[c.domain] = (acc[c.domain] || 0) + 1
+    return acc
+  }, {} as Record<string, number>)
+
   useEffect(() => {
     if (!mounted) return
     if (theme === 'dark') {
@@ -71,9 +95,9 @@ export default function HomePage() {
          <a href="https://github.com/chuma-beep/mathua" className="btn btn-outline">View on GitHub</a>  
         </div>
         <div className="stat-badges">
-          <span className="stat-badge">80 topics</span>
-          <span className="stat-badge">79 connections</span>
-          <span className="stat-badge">4 domains</span>
+          <span className="stat-badge">{conceptCount} topics</span>
+          <span className="stat-badge">{connectionCount} connections</span>
+          <span className="stat-badge">{domainCount} domains</span>
           <span className="stat-badge">web + desktop</span>
           <span className="stat-badge">open source</span>
         </div>
@@ -148,11 +172,9 @@ export default function HomePage() {
             <tr><th>Domain</th><th style={{textAlign: 'right'}}>Concepts</th></tr>
           </thead>
           <tbody>
-            <tr><td>Counting</td><td className="concept-count">7</td></tr>
-            <tr><td>Arithmetic</td><td className="concept-count">39</td></tr>
-            <tr><td>Fractions</td><td className="concept-count">18</td></tr>
-            <tr><td>Pre-Algebra</td><td className="concept-count">17</td></tr>
-            <tr><td>Algebra — v1.1 <span className="coming-soon">coming soon</span></td><td className="concept-count">—</td></tr>
+            {domainOrder.map(d => (
+              <tr key={d}><td>{domainLabels[d]}</td><td className="concept-count">{domainCounts[d]}</td></tr>
+            ))}
           </tbody>
         </table>
         <p className="table-note">Problems are generated on demand — never stored. There is nothing to memorise.</p>
@@ -180,15 +202,15 @@ export default function HomePage() {
           </div>
           <div>
             <ul className="level-list">
-              <li className="level-item"><span className="level-num">01</span><span className="level-name">Novice</span><span className="level-range">0–5</span></li>
-              <li className="level-item"><span className="level-num">02</span><span className="level-name">Apprentice</span><span className="level-range">6–15</span></li>
-              <li className="level-item"><span className="level-num">03</span><span className="level-name">Student</span><span className="level-range">16–25</span></li>
-              <li className="level-item"><span className="level-num">04</span><span className="level-name">Scholar</span><span className="level-range">26–35</span></li>
-              <li className="level-item"><span className="level-num">05</span><span className="level-name">Adept</span><span className="level-range">36–45</span></li>
-              <li className="level-item"><span className="level-num">06</span><span className="level-name">Expert</span><span className="level-range">46–55</span></li>
-              <li className="level-item"><span className="level-num">07</span><span className="level-name">Master</span><span className="level-range">56–65</span></li>
-              <li className="level-item"><span className="level-num">08</span><span className="level-name">Grandmaster</span><span className="level-range">66–75</span></li>
-              <li className="level-item elite"><span className="level-num">09</span><span className="level-name">Math Architect</span><span className="level-range">76–81</span></li>
+              <li className="level-item"><span className="level-num">01</span><span className="level-name">Novice</span><span className="level-range">0–31</span></li>
+              <li className="level-item"><span className="level-num">02</span><span className="level-name">Apprentice</span><span className="level-range">32–63</span></li>
+              <li className="level-item"><span className="level-num">03</span><span className="level-name">Student</span><span className="level-range">64–95</span></li>
+              <li className="level-item"><span className="level-num">04</span><span className="level-name">Scholar</span><span className="level-range">96–127</span></li>
+              <li className="level-item"><span className="level-num">05</span><span className="level-name">Adept</span><span className="level-range">128–159</span></li>
+              <li className="level-item"><span className="level-num">06</span><span className="level-name">Expert</span><span className="level-range">160–191</span></li>
+              <li className="level-item"><span className="level-num">07</span><span className="level-name">Master</span><span className="level-range">192–223</span></li>
+              <li className="level-item"><span className="level-num">08</span><span className="level-name">Grandmaster</span><span className="level-range">224–255</span></li>
+              <li className="level-item elite"><span className="level-num">09</span><span className="level-name">Math Architect</span><span className="level-range">256–284</span></li>
             </ul>
           </div>
         </div>
@@ -265,8 +287,8 @@ export default function HomePage() {
   "domain":            "arithmetic",
   "prerequisites":     ["arith.add.single", "arith.add.carry"],
   "mastery_threshold": {
-    "streak":       5,
-    "max_seconds":  8
+    "streak":          5,
+    "avg_time_seconds": 8
   }
 }`}
         </pre>

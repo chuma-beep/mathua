@@ -115,7 +115,7 @@ export default function HowItWorksPage() {
               Mathua represents all mathematical knowledge as a directed acyclic graph — a DAG. Each node in the graph is an atomic concept: the smallest unit of mathematical knowledge that can be practiced and mastered independently. Each directed edge is a prerequisite relationship. If concept B has an edge from concept A, then A must be mastered before B is ever shown to the student.
             </p>
             <p>
-              The graph currently contains 81 concepts spanning five domains: Counting, Arithmetic, Fractions, Pre-Algebra, and Algebra (v1.1). Every concept has a unique identifier in dot-notation that encodes its domain and sub-domain.
+              The graph currently contains 284 concepts spanning 16 domains — from early Counting through Calculus, Linear Algebra, and Topology. Every concept has a unique identifier in dot-notation that encodes its domain and sub-domain.
             </p>
             <pre className="code-block">{`{
   "id": "frac.add.diff",
@@ -256,7 +256,7 @@ export default function HowItWorksPage() {
               <li>The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered correctly under time count as PRACTICING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.</li>
             </ol>
             <p>
-              The diagnostic takes between 15 and 25 questions for most students. Without this algorithm, a naive assessment of 81 concepts would require up to 81 questions. The CAT approach reduces this by roughly 70%.
+              The diagnostic takes between 15 and 25 questions for most students. Without this algorithm, a naive assessment of 284 concepts would require up to 284 questions. The CAT approach reduces this by roughly 70%.
             </p>
             <p>
               Explain that the diagnostic can be retaken at any time from the settings menu. Retaking does not delete progress — it creates a new knowledge estimate that is merged with existing progress data, always preferring the more optimistic estimate so that students are never penalised for retaking.
