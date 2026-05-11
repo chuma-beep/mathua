@@ -18,7 +18,7 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
   loading: () => (
     <div
       style={{
-        height: '520px',
+        height: 'clamp(320px, 50vh, 520px)',
         background: 'transparent',
         borderRadius: 0,
         border: '0.5px solid var(--border)',
@@ -207,21 +207,26 @@ export default function HomePage() {
             letterSpacing: '0.06em',
             color: 'var(--text-muted)',
             marginBottom: '2.5rem',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '2px 8px',
           }}
         >
-          {conceptCount} topics{'  '}
-          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
-          {connectionCount} connections{'  '}
-          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
-          {domainCount} domains{'  '}
-          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
-          web + desktop{'  '}
-          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
-          open source
+          <span>{conceptCount} topics</span>
+          <span style={{ color: 'var(--border-strong)' }}>·</span>
+          <span>{connectionCount} connections</span>
+          <span style={{ color: 'var(--border-strong)' }}>·</span>
+          <span>{domainCount} domains</span>
+          <span style={{ color: 'var(--border-strong)' }}>·</span>
+          <span>web + desktop</span>
+          <span style={{ color: 'var(--border-strong)' }}>·</span>
+          <span>open source</span>
         </div>
 
         {/* 3D Concept Graph */}
-        <div
+          <div
+          className="max-sm:p-4"
           style={{
             border: '0.5px solid var(--border)',
             borderRadius: 0,
@@ -253,7 +258,7 @@ export default function HomePage() {
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>I.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Mastery gating</span>
             </div>
-            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
               You cannot advance until your streak and response time both meet the threshold. Knowing
               the answer is not enough — you must know it fast.
             </p>
@@ -264,7 +269,7 @@ export default function HomePage() {
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>II.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Concept graph</span>
             </div>
-            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
               Every concept is a node with explicit prerequisites. The scheduler reads the graph and
               your progress to decide what you see next.
             </p>
@@ -275,7 +280,7 @@ export default function HomePage() {
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>III.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Spaced repetition</span>
             </div>
-            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
               Concepts you master resurface automatically before they decay. Reviews are woven into
               your session — there is no separate review mode.
             </p>
@@ -339,8 +344,8 @@ export default function HomePage() {
       {/* ── Progression ── */}
       <section className="py-20 max-sm:py-12">
         <SectionHeader title="Rank by mastery. Level by depth." />
-        <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col">
-          <div className="flex-1 min-w-[280px]">
+        <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col max-sm:gap-4">
+          <div className="flex-1 min-w-[280px] max-sm:min-w-0">
             <p
               style={{
                 fontFamily: bodyFont,
@@ -361,7 +366,7 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <div className="flex-1 min-w-[280px]">
+          <div className="flex-1 min-w-[280px] max-sm:min-w-0">
             <ProgressionLevels levels={levels} />
           </div>
         </div>
@@ -447,9 +452,9 @@ export default function HomePage() {
               border: 'none',
               borderLeft: '2px solid var(--accent-gold)',
               borderRadius: 0,
-              padding: '0.5rem 0 0.5rem 1.5rem',
+              padding: '0.5rem 0 0.5rem 1rem',
               fontFamily: monoFont,
-              fontSize: '13px',
+              fontSize: 'clamp(11px, 2.5vw, 13px)',
               color: 'var(--text-secondary)',
               whiteSpace: 'pre',
               overflowX: 'auto',
