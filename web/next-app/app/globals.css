@@ -60,7 +60,7 @@
   body {
     background: var(--bg);
     color: var(--text-secondary);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Lora', serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.75;

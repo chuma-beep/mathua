@@ -31,7 +31,7 @@ module.exports = {
       },
       fontFamily: {
         serif: ['Lora', 'serif'],
-        sans: ['Inter', '-apple-system', 'sans-serif'],
+        sans: ['Lora', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       maxWidth: {
