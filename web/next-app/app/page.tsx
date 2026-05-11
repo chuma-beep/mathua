@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
+import { useTheme } from '../hooks/useTheme'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
 import Pipeline from '../components/Pipeline'
@@ -42,15 +42,7 @@ const PIPELINE_STATES = [
 ]
 
 export default function HomePage() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const saved = localStorage.getItem('mathua-theme')
-    const initialTheme = saved === 'light' || saved === 'dark' ? saved : 'dark'
-    setTheme(initialTheme)
-    setMounted(true)
-  }, [])
+  const { theme, mounted, toggleTheme } = useTheme()
 
   const conceptCount = conceptsData.length
   const connectionCount = conceptsData.reduce(
@@ -114,21 +106,6 @@ export default function HomePage() {
     { num: '08', name: 'Grandmaster', range: '224–255' },
     { num: '09', name: 'Math Architect', range: '256–284', elite: true },
   ]
-
-  useEffect(() => {
-    if (!mounted) return
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    localStorage.setItem('mathua-theme', next)
-  }
 
   if (!mounted) {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />

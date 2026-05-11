@@ -1,5 +1,6 @@
 'use client'
 
+import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect } from 'react'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -32,20 +33,8 @@ const MOCK_LEADERBOARD = [
 ]
 
 export default function LeaderboardPage() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [mounted, setMounted] = useState(false)
+  const { theme, mounted, toggleTheme } = useTheme()
   const [countdown, setCountdown] = useState('')
-
-  useEffect(() => {
-    const saved = localStorage.getItem('mathua-theme')
-    setTheme(saved === 'light' || saved === 'dark' ? saved : 'dark')
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-  }, [theme, mounted])
 
   useEffect(() => {
     const update = () => {
@@ -63,12 +52,6 @@ export default function LeaderboardPage() {
     const interval = setInterval(update, 60000)
     return () => clearInterval(interval)
   }, [])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    localStorage.setItem('mathua-theme', next)
-  }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
