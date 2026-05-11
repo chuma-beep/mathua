@@ -38,9 +38,12 @@ export default function DocsIndexPage() {
             gap: '1rem',
             padding: '0.75rem 0',
             borderBottom: '0.5px solid var(--border)',
-            textDecoration: 'none',
             color: 'inherit',
+            textDecoration: 'none',
+            transition: 'border-color 0.2s ease',
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
         >
           <span style={{
             fontFamily: monoFont,
@@ -74,9 +77,12 @@ export default function DocsIndexPage() {
             gap: '1rem',
             padding: '0.75rem 0',
             borderBottom: '0.5px solid var(--border)',
-            textDecoration: 'none',
             color: 'inherit',
+            textDecoration: 'none',
+            transition: 'border-color 0.2s ease',
           }}
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
         >
           <span style={{
             fontFamily: monoFont,
