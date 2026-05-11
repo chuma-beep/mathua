@@ -3,23 +3,47 @@
 import { useEffect, useRef, useId } from 'react'
 import mermaid from 'mermaid'
 
-let mermaidInitialized = false
-
-function initMermaid() {
-  if (mermaidInitialized) return
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: 'base',
-    securityLevel: 'sandbox',
-    fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-  })
-  mermaidInitialized = true
-}
-
 interface MermaidDiagramProps {
   chart: string
   theme?: 'dark' | 'light'
   className?: string
+}
+
+const CSS_FALLBACKS: Record<string, string> = {
+  '--bg': '#0b0f1a',
+  '--surface': '#0f172a',
+  '--surface-elevated': '#1e293b',
+  '--surface-highlight': '#334155',
+  '--text-primary': '#e8e2d5',
+  '--text-secondary': '#9fa8b4',
+  '--accent-gold': '#c8a96e',
+  '--border': '#1e2d45',
+  '--border-strong': '#2a3f5f',
+}
+
+function resolveVar(name: string): string {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+  if (raw) return raw
+  return CSS_FALLBACKS[name] || '#333'
+}
+
+function buildThemeVars(isDark: boolean): Record<string, string> {
+  return {
+    primaryColor: resolveVar('--surface-elevated'),
+    primaryTextColor: resolveVar('--text-primary'),
+    primaryBorderColor: resolveVar('--accent-gold'),
+    lineColor: resolveVar('--accent-gold'),
+    secondaryColor: resolveVar('--surface'),
+    tertiaryColor: resolveVar('--surface-highlight'),
+    textColor: resolveVar('--text-secondary'),
+    edgeLabelBackground: resolveVar('--bg'),
+    nodeBorder: resolveVar('--border-strong'),
+    clusterBkg: resolveVar('--bg'),
+    clusterBorder: resolveVar('--border'),
+    titleColor: resolveVar('--text-primary'),
+    fontSize: '13px',
+    mainBkg: resolveVar('--bg'),
+  }
 }
 
 export default function MermaidDiagram({ chart, theme = 'dark', className = '' }: MermaidDiagramProps) {
@@ -30,39 +54,7 @@ export default function MermaidDiagram({ chart, theme = 'dark', className = '' }
   const isDark = theme === 'dark'
 
   useEffect(() => {
-    initMermaid()
-
-    const themeVariables: Record<string, string> = isDark
-      ? {
-          primaryColor: 'var(--surface-elevated, #1e293b)',
-          primaryTextColor: 'var(--text-primary, #e8e2d5)',
-          primaryBorderColor: 'var(--accent-gold, #c8a96e)',
-          lineColor: 'var(--accent-gold, #c8a96e)',
-          secondaryColor: 'var(--surface, #0f172a)',
-          tertiaryColor: 'var(--surface-highlight, #334155)',
-          textColor: 'var(--text-secondary, #9fa8b4)',
-          edgeLabelBackground: 'var(--bg, #0b0f1a)',
-          nodeBorder: 'var(--border-strong, #2a3f5f)',
-          clusterBkg: 'var(--bg, #0b0f1a)',
-          clusterBorder: 'var(--border, #1e2d45)',
-          titleColor: 'var(--text-primary, #e8e2d5)',
-          fontSize: '13px',
-        }
-      : {
-          primaryColor: 'var(--surface-elevated, #f5f1e6)',
-          primaryTextColor: 'var(--text-primary, #1e293b)',
-          primaryBorderColor: 'var(--accent-gold, #b8933e)',
-          lineColor: 'var(--accent-gold, #b8933e)',
-          secondaryColor: 'var(--surface, #faf8f0)',
-          tertiaryColor: 'var(--surface-highlight, #e8e4d6)',
-          textColor: 'var(--text-secondary, #475569)',
-          edgeLabelBackground: 'var(--bg, #fefcf4)',
-          nodeBorder: 'var(--border-strong, #b8b5a8)',
-          clusterBkg: 'var(--bg, #fefcf4)',
-          clusterBorder: 'var(--border, #d6d3c8)',
-          titleColor: 'var(--text-primary, #1e293b)',
-          fontSize: '13px',
-        }
+    const themeVariables = buildThemeVars(isDark)
 
     mermaid.initialize({
       startOnLoad: false,
@@ -81,7 +73,7 @@ export default function MermaidDiagram({ chart, theme = 'dark', className = '' }
         containerRef.current.innerHTML = svg
         previousTheme.current = theme
       } catch (err) {
-        containerRef.current.innerHTML = `<pre style="color:var(--accent-red);font-family:var(--mono);font-size:12px;padding:1rem;white-space:pre-wrap">Mermaid parse error:\n${err}</pre>`
+        containerRef.current.innerHTML = `<pre style="color:var(--accent-red);font-family:JetBrains Mono,Fira Code,monospace;font-size:12px;padding:1rem;white-space:pre-wrap">Mermaid parse error:\n${err}</pre>`
       }
     }
 
