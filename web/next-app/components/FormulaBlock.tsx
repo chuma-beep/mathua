@@ -21,7 +21,8 @@ export default function FormulaBlock({ code, label, className = '' }: FormulaBlo
           overflowX: 'auto',
           lineHeight: 1.6,
           textAlign: 'left',
-          display: 'inline-block',
+          display: 'block',
+          maxWidth: '100%',
         }}
       >
         {code}
