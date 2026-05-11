@@ -480,15 +480,13 @@ export default function HomePage() {
         <div className="flex justify-center mt-6">
           <a
             href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md"
+            className="link-underline"
             style={{
               fontFamily: headingFont,
               fontStyle: 'italic',
               fontSize: '1rem',
               color: 'var(--accent-gold)',
-              textDecoration: 'none',
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline' }}
-            onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none' }}
           >
             Read CONTRIBUTING.md →
           </a>

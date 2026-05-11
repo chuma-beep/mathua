@@ -69,13 +69,13 @@ export default function Header({ links }: HeaderProps) {
         flex: 1,
         marginRight: isMobile ? '0.5rem' : '0',
       }}>
-        <Link href="/" style={{
+        <Link href="/" className="link-underline" style={{
           ...brandStyle,
           marginRight: isMobile ? '0.5rem' : '1.5rem',
           whiteSpace: 'nowrap',
         }}>Mathua</Link>
         {links?.map((link) => (
-          <Link key={link.href} href={link.href} style={{ ...linkStyle, whiteSpace: 'nowrap' }}>
+          <Link key={link.href} href={link.href} className="link-underline" style={{ ...linkStyle, whiteSpace: 'nowrap' }}>
             {link.label}
           </Link>
         ))}

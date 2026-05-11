@@ -34,11 +34,11 @@ export default function Footer({ className = '' }: FooterProps) {
           gap: '4px 12px',
         }}
       >
-        <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Web App</a>
-        <a href="https://github.com/chuma-beep/mathua" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
-        <a href="/docs" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
-        <a href="/docs/contributing" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
-        <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</a>
+        <a href="#" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Web App</a>
+        <a href="https://github.com/chuma-beep/mathua" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
+        <a href="/docs" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
+        <a href="/docs/contributing" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
+        <a href="#" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</a>
       </div>
 
       <div
