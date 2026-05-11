@@ -60,7 +60,7 @@
   body {
     background: var(--bg);
     color: var(--text-secondary);
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: 'Inter', -apple-system, sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.75;
@@ -76,7 +76,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'Lora', serif;
     font-weight: 400;
     color: var(--text-primary);
     letter-spacing: -0.01em;
