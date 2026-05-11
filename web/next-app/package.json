@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "diagrams": "d2 -t 0 diagrams/architecture.d2 diagrams/generated/architecture-light.svg && d2 -t 200 diagrams/architecture.d2 diagrams/generated/architecture-dark.svg && d2 -t 0 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-light.svg && d2 -t 200 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-dark.svg && d2 -t 0 diagrams/contributing.d2 diagrams/generated/contributing-light.svg && d2 -t 200 diagrams/contributing.d2 diagrams/generated/contributing-dark.svg && d2 -t 0 diagrams/student-model.d2 diagrams/generated/student-model-light.svg && d2 -t 200 diagrams/student-model.d2 diagrams/generated/student-model-dark.svg && cp diagrams/generated/*.svg public/diagrams/"
   },
   "dependencies": {
     "@react-three/drei": "^9.99.0",
@@ -16,7 +17,6 @@
     "cytoscape": "^3.28.0",
     "cytoscape-dagre": "^2.5.0",
     "katex": "^0.16.9",
-    "mermaid": "^11.15.0",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

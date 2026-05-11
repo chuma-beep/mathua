@@ -1,0 +1,42 @@
+Fork: Fork the repo
+Fork -> Concept
+
+Concept: Add concept to\nconcepts.json
+Concept -> Generator
+
+Generator: Write Go\ngenerator
+Generator -> Fuzz
+
+Fuzz: Write fuzz test\n(1000 samples)
+Fuzz -> Validate
+
+Validate: Run graph\nvalidator
+Validate -> PR
+
+PR: Open pull request
+PR -> CI
+
+CI: CI passes? {
+  shape: diamond
+}
+
+CI -> Review: Yes
+
+Review: Maintainer review
+Review -> Merge
+
+Merge: Merged!
+
+CI -> Fix: No {
+  style.stroke: "#B53333"
+}
+
+Fix: Fix issues
+Fix -> PR
+
+*.style: {
+  fill: "transparent"
+  font-color: "#141413"
+  border-radius: 6
+  stroke: "#6b6a64"
+}

@@ -2,6 +2,7 @@
 
 import { useTheme } from '../../hooks/useTheme'
 import SectionHeader from '../../components/SectionHeader'
+import D2Diagram from '../../components/D2Diagram'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 
@@ -44,20 +45,7 @@ export default function DiagnosePage() {
         <SectionHeader label="Method" title="How the diagnostic works" />
 
         <div className="flex justify-center mt-8">
-          <pre className="bg-mathua-code border border-mathua-border rounded-md p-6 font-mono text-xs text-mathua-blue whitespace-pre overflow-x-auto leading-relaxed inline-block">
-            {`┌──────────────────────────────────────────────┐
-│          TOPOLOGICALLY SORTED GRAPH           │
-│   Node 0 ──→ Node 1 ──→ ... ──→ Node N     │
-│   ^                         ^                 │
-│   │      Binary search       │                │
-│   │       finds frontier      │                │
-│   └───────────────────────────┘               │
-│                                                │
-│   CORRECT under time  →  move forward          │
-│   INCORRECT / slow    →  move backward         │
-│   3 consecutive hits   →  FRONTIER LOCKED      │
-└──────────────────────────────────────────────┘`}
-          </pre>
+          <D2Diagram name="cat-diagnostic" theme={theme} />
         </div>
 
         <ul className="max-w-[600px] mx-auto mt-8 space-y-3 list-none">

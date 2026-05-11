@@ -8,6 +8,7 @@ import Pipeline from '../components/Pipeline'
 import FormulaBlock from '../components/FormulaBlock'
 import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
+import D2Diagram from '../components/D2Diagram'
 import Footer from '../components/Footer'
 import conceptsData from '../data/concepts.json'
 
@@ -466,40 +467,7 @@ export default function HomePage() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <pre
-            style={{
-              background: 'transparent',
-              border: 'none',
-              padding: '1rem 0',
-              fontFamily: monoFont,
-              fontSize: '12px',
-              color: 'var(--text-secondary)',
-              whiteSpace: 'pre',
-              overflowX: 'auto',
-              textAlign: 'center',
-              lineHeight: 1.6,
-            }}
-          >
-{`┌──────────────────┐    ┌──────────────────┐
-│  Web (React)    │    │  TUI (Bubble Tea)│
-└────────┬─────────┘    └────────┬─────────┘
-         ▼                       ▼
-┌──────────────────────────────────────┐
-│            API Layer               │
-└──────────────────┬───────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│        Scheduling Engine           │
-└──────────────────┬────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│   Grading & Problem Generation    │
-└──────────────────┬───────────────────┘
-                   ▼
-┌──────────────────────────────────────┐
-│  Data Layer (PostgreSQL / SQLite) │
-└──────────────────────────────────────┘`}
-          </pre>
+          <D2Diagram name="architecture" theme={theme} />
         </div>
       </section>
 
