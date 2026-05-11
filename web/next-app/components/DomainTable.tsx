@@ -24,7 +24,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
           <tr>
             <th
               style={{
-                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontFamily: "'Playfair Display', serif",
                 fontWeight: 400,
                 fontSize: '0.9rem',
                 textTransform: 'uppercase',
@@ -40,7 +40,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
             </th>
             <th
               style={{
-                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontFamily: "'Playfair Display', serif",
                 fontWeight: 400,
                 fontSize: '0.9rem',
                 textTransform: 'uppercase',
@@ -61,7 +61,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
             <tr key={row.domain} style={{ borderBottom: '0.5px solid var(--border)', background: 'transparent' }}>
               <td
                 style={{
-                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  fontFamily: "'Inter', -apple-system, sans-serif",
                   fontSize: '1rem',
                   color: 'var(--text-secondary)',
                   padding: '14px 20px 14px 0',
@@ -72,7 +72,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
                 {row.comingSoon && (
                   <span
                     style={{
-                      fontFamily: "'Source Serif 4', Georgia, serif",
+                      fontFamily: "'Inter', -apple-system, sans-serif",
                       fontStyle: 'italic',
                       fontSize: '0.9rem',
                       color: 'var(--text-muted)',

@@ -15,7 +15,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
     <div className={className}>
       <h3
         style={{
-          fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+          fontFamily: "'Playfair Display', serif",
           fontWeight: 400,
           fontSize: '1.1rem',
           color: 'var(--text-primary)',
@@ -50,7 +50,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
               </td>
               <td
                 style={{
-                  fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                  fontFamily: "'Playfair Display', serif",
                   fontSize: '1rem',
                   color: 'var(--text-primary)',
                   padding: '8px 0',

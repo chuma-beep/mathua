@@ -33,7 +33,7 @@ export default function DocsIndexPage() {
           />
           <p
             style={{
-              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontFamily: "'Inter', -apple-system, sans-serif",
               fontSize: '1rem',
               color: 'var(--text-secondary)',
               maxWidth: '600px',
@@ -71,7 +71,7 @@ export default function DocsIndexPage() {
               }}
             >
               <div style={{
-                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontFamily: "'Playfair Display', serif",
                 fontSize: '2rem',
                 fontWeight: 400,
                 color: 'var(--accent-gold)',
@@ -116,7 +116,7 @@ export default function DocsIndexPage() {
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
             >
               <h2 style={{
-                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontFamily: "'Playfair Display', serif",
                 fontWeight: 400,
                 fontSize: '1.25rem',
                 color: 'var(--text-primary)',
@@ -127,7 +127,7 @@ export default function DocsIndexPage() {
                 {doc.title}
               </h2>
               <p style={{
-                fontFamily: "'Source Serif 4', Georgia, serif",
+                fontFamily: "'Inter', -apple-system, sans-serif",
                 fontSize: '0.95rem',
                 lineHeight: 1.7,
                 color: 'var(--text-secondary)',
@@ -187,7 +187,7 @@ go build ./cmd/mathua
 DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
         </pre>
         <p style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Inter', -apple-system, sans-serif",
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',
