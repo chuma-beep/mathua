@@ -13,7 +13,7 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       <div
         style={{
-          fontFamily: "'Lora', serif",
+          fontFamily: "'IBM Plex Serif', serif",
           fontSize: '1rem',
           color: 'var(--text-secondary)',
           marginBottom: '0.75rem',
@@ -24,7 +24,7 @@ export default function Footer({ className = '' }: FooterProps) {
 
       <div
         style={{
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: "'IBM Plex Mono', monospace",
           fontSize: '11px',
           color: 'var(--text-muted)',
           marginBottom: '1rem',
@@ -43,7 +43,7 @@ export default function Footer({ className = '' }: FooterProps) {
 
       <div
         style={{
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: "'IBM Plex Mono', monospace",
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',

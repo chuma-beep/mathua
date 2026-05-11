@@ -14,7 +14,7 @@ export default function FormulaBlock({ code, label, className = '' }: FormulaBlo
           borderLeft: '2px solid var(--accent-gold)',
           borderRadius: 0,
           padding: '0.5rem 0 0.5rem 1.5rem',
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: "'IBM Plex Mono', monospace",
           fontSize: '13px',
           color: 'var(--text-secondary)',
           whiteSpace: 'pre',
@@ -27,7 +27,7 @@ export default function FormulaBlock({ code, label, className = '' }: FormulaBlo
         {code}
       </pre>
       {label && (
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+        <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
           {label}
         </span>
       )}

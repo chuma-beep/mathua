@@ -30,9 +30,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Lora', 'serif'],
-        sans: ['Lora', 'serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        serif: ['IBM Plex Serif', 'serif'],
+        sans: ['IBM Plex Serif', 'serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       maxWidth: {
         container: '1100px',

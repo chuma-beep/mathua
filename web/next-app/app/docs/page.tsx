@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
-const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
-const bodyFont = "'Lora', serif"
+const monoFont = "'IBM Plex Mono', monospace"
+const bodyFont = "'IBM Plex Serif', serif"
 
 export default function DocsIndexPage() {
   const textStyle: React.CSSProperties = {
@@ -14,7 +14,7 @@ export default function DocsIndexPage() {
   return (
     <div className="max-w-[720px] mx-auto px-6 max-sm:px-4 py-20 max-sm:py-12">
       <h1 style={{
-        fontFamily: "'Lora', serif",
+        fontFamily: "'IBM Plex Serif', serif",
         fontWeight: 400,
         fontSize: '1.9rem',
         color: 'var(--text-primary)',
@@ -53,7 +53,7 @@ export default function DocsIndexPage() {
           </span>
           <div>
             <div style={{
-              fontFamily: "'Lora', serif",
+              fontFamily: "'IBM Plex Serif', serif",
               fontWeight: 400,
               fontSize: '1.1rem',
               color: 'var(--text-primary)',
@@ -89,7 +89,7 @@ export default function DocsIndexPage() {
           </span>
           <div>
             <div style={{
-              fontFamily: "'Lora', serif",
+              fontFamily: "'IBM Plex Serif', serif",
               fontWeight: 400,
               fontSize: '1.1rem',
               color: 'var(--text-primary)',
@@ -109,7 +109,7 @@ export default function DocsIndexPage() {
         paddingTop: '3rem',
       }}>
         <h2 style={{
-          fontFamily: "'Lora', serif",
+          fontFamily: "'IBM Plex Serif', serif",
           fontWeight: 400,
           fontSize: '1.3rem',
           color: 'var(--text-primary)',

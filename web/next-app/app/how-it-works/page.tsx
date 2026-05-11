@@ -27,7 +27,7 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
           href={`#${section.id}`}
           className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap"
           style={{
-            fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+            fontFamily: "'IBM Plex Mono', monospace",
             color: activeSection === section.id ? 'var(--accent-gold)' : 'var(--text-muted)',
             borderLeft: activeSection === section.id ? '2px solid var(--accent-gold)' : '2px solid transparent',
             textDecoration: 'none',
@@ -42,9 +42,9 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
   )
 }
 
-const headingFont = "'Lora', serif"
-const bodyFont = "'Lora', serif"
-const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+const headingFont = "'IBM Plex Serif', serif"
+const bodyFont = "'IBM Plex Serif', serif"
+const monoFont = "'IBM Plex Mono', monospace"
 
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,

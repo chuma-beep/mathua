@@ -25,7 +25,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Link
             href="/docs"
             style={{
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '13px',
               color: 'var(--accent-gold)',
               textDecoration: 'none',
@@ -37,7 +37,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Link
             href="/docs/architecture"
             style={{
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '12px',
               color: 'var(--text-muted)',
               textDecoration: 'none',
@@ -48,7 +48,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Link
             href="/docs/contributing"
             style={{
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '12px',
               color: 'var(--text-muted)',
               textDecoration: 'none',
@@ -61,7 +61,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Link
             href="/"
             style={{
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '12px',
               color: 'var(--text-muted)',
               textDecoration: 'none',
@@ -78,7 +78,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                 color: 'var(--text-muted)',
                 padding: '4px 10px',
                 cursor: 'pointer',
-                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                fontFamily: "'IBM Plex Mono', monospace",
                 fontSize: '12px',
                 background: 'var(--bg)',
                 borderRadius: 0,
@@ -98,7 +98,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         borderTop: '0.5px solid var(--border)',
         padding: '32px 24px',
         textAlign: 'center',
-        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+        fontFamily: "'IBM Plex Mono', monospace",
         fontSize: '11px',
         color: 'var(--text-muted)',
         lineHeight: 1.6,
