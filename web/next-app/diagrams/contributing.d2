@@ -1,5 +1,7 @@
-Fork: Fork the repo
-Fork -> Concept
+# Contributing — Pull request workflow
+
+Fork: Fork
+Fork -> Concept: clone repo
 
 Concept: Add concept to\nconcepts.json
 Concept -> Generator
@@ -7,36 +9,51 @@ Concept -> Generator
 Generator: Write Go\ngenerator
 Generator -> Fuzz
 
-Fuzz: Write fuzz test\n(1000 samples)
+Fuzz: Write fuzz test\n(1 000 samples)
 Fuzz -> Validate
 
-Validate: Run graph\nvalidator
+Validate: Run validator\nvalidate_graph.go
 Validate -> PR
 
-PR: Open pull request
+PR: Open\npull request
 PR -> CI
 
 CI: CI passes? {
   shape: diamond
 }
 
-CI -> Review: Yes
+CI -> Review: "Yes"
+CI -> Fix: "No" {
+  style.stroke: "#B53333"
+  style.font-color: "#B53333"
+}
 
-Review: Maintainer review
+Review: Maintainer\nreview
 Review -> Merge
 
-Merge: Merged!
-
-CI -> Fix: No {
-  style.stroke: "#B53333"
+Merge: Merged! {
+  style: {
+    fill: "#EEF2F7"
+    stroke: "#1B365D"
+  }
 }
 
 Fix: Fix issues
 Fix -> PR
 
-*.style: {
-  fill: "transparent"
-  font-color: "#141413"
-  border-radius: 6
-  stroke: "#6b6a64"
+nodes: {
+  style: {
+    font-size: 12
+    font-color: "#141413"
+    border-radius: 4
+    stroke: "#6b6a64"
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#504e49"
+    font-size: 10
+    font-color: "#504e49"
+  }
 }

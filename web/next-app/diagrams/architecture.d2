@@ -1,29 +1,119 @@
-Web (React): Web Browser\nReact + Next.js
-TUI (Bubble Tea): Desktop TUI\nBubble Tea
+# Mathua Architecture — 5 layers with internal modules
 
-Web (React) -> API Layer
-TUI (Bubble Tea) -> API Layer
-
-API Layer: REST API\nSession · Graph · Leaderboard · Diagnostic
-
-API Layer -> Core Engine
-
-Core Engine: Core Engine\nDAG Loader · Scheduler · Generators · Graders · Scoring
-
-Core Engine -> Grading
-
-Grading: Grading\nNumeric (Go) · Polynomial (future)
-
-Grading -> PostgreSQL / SQLite
-
-PostgreSQL / SQLite: {
-  shape: cylinder
-  label: PostgreSQL (web)\nSQLite (desktop)
+UI: UI Layer {
+  style.fill: "#EEF2F7"
+  
+  Web: Web Browser\nReact + KaTeX
+  TUI: Desktop\nBubble Tea
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#E8E6DC"
+    font-color: "#141413"
+  }
 }
 
-*.style: {
-  fill: "transparent"
-  font-color: "#141413"
-  border-radius: 6
-  stroke: "#6b6a64"
+API: API Layer {
+  style.fill: "#EEF2F7"
+  
+  Session: Session\nService
+  Graph: Graph\nService
+  Leaderboard: Leaderboard\nService
+  Diagnostic: Diagnostic\nService
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#E8E6DC"
+    font-color: "#141413"
+  }
+}
+
+Engine: Core Engine {
+  style.fill: "#EEF2F7"
+  
+  Dag: DAG\nLoader
+  Sched: Scheduler\nSM-2
+  Gen: Generators
+  Grade: Graders
+  Score: Scoring
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#E8E6DC"
+    font-color: "#141413"
+  }
+}
+
+Grading: Grading Layer {
+  style.fill: "#EEF2F7"
+  
+  Numeric: Numeric\n(Go)
+  Poly: Polynomial\n(future)
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#E8E6DC"
+    font-color: "#141413"
+  }
+}
+
+Storage: Storage {
+  style.fill: "#EEF2F7"
+  
+  SQLite: SQLite\ndesktop
+  PG: PostgreSQL\nweb
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#E8E6DC"
+    font-color: "#141413"
+  }
+}
+
+# Connections
+# Web → API services
+Web -> Session
+Web -> Graph
+Web -> Leaderboard
+Web -> Diagnostic
+
+# TUI → engine modules (direct calls, bypass API)
+TUI -> Dag
+TUI -> Sched
+TUI -> Gen
+
+# API services → engine
+Session -> Dag
+Session -> Sched
+Graph -> Dag
+Diagnostic -> Sched
+
+# Engine internal flow
+Dag -> Sched
+Sched -> Gen
+Gen -> Grade -> Score
+
+# Engine → Grading
+Gen -> Numeric
+Gen -> Poly
+
+# Grading → Storage
+Score -> SQLite
+Score -> PG
+
+# Styling
+nodes: {
+  style: {
+    font-size: 12
+    font-color: "#141413"
+    border-radius: 4
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#6b6a64"
+    font-size: 10
+    font-color: "#504e49"
+  }
 }

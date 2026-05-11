@@ -1,40 +1,76 @@
+# CAT Diagnostic — Binary search frontier detection
+
 Start: {
   shape: circle
-  width: 24
-  height: 24
-  style.fill: "#1B365D"
+  label: Start
+  style: {
+    fill: "#1B365D"
+    font-color: "#ffffff"
+    stroke: "#1B365D"
+  }
 }
 
-Start -> Midpoint
+Start -> Midpoint: Sorted graph
 
 Midpoint: Test midpoint\nconcept {
   shape: diamond
+  style: {
+    font-color: "#141413"
+  }
 }
 
-Midpoint -> Forward: Correct + Fast
-Midpoint -> Backward: Incorrect / Slow
+Midpoint -> Forward: "Correct\n+ Fast"
 
-Forward: Move forward\n(harder concepts)
-Backward: Move backward\n(foundational)
+Forward: Move forward\nharder concepts {
+  style: {
+    font-color: "#141413"
+  }
+}
+
+Midpoint -> Backward: "Incorrect\n/ Slow" {
+  style.stroke: "#B53333"
+}
+
+Backward: Move backward\nfoundational {
+  style: {
+    font-color: "#141413"
+  }
+}
+
 Forward -> Check
 Backward -> Check
 
 Check: 3 consecutive\ncorrect? {
   shape: diamond
+  style: {
+    font-color: "#141413"
+  }
 }
 
-Check -> Locked: Yes
+Check -> Locked: "Yes"
 
 Locked: FRONTIER LOCKED\nRecord mastery estimates {
   shape: oval
-  style.fill: "#EEF2F7"
+  style: {
+    fill: "#EEF2F7"
+    font-color: "#141413"
+    stroke: "#1B365D"
+  }
 }
 
-Check -> Midpoint: No
+Check -> Midpoint: "No"
 
-*.style: {
-  fill: "transparent"
-  font-color: "#141413"
-  border-radius: 6
-  stroke: "#6b6a64"
+nodes: {
+  style: {
+    font-size: 12
+    border-radius: 6
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#504e49"
+    font-size: 11
+    font-color: "#504e49"
+  }
 }

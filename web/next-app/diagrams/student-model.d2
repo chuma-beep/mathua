@@ -1,23 +1,52 @@
+# Student Model — Concept state pipeline
+
 UNSEEN -> LEARNING
 LEARNING -> PRACTICING
 PRACTICING -> MASTERED
 MASTERED -> DECAYING
 
 UNSEEN: {
-  style.fill: "#EEF2F7"
+  style: {
+    fill: "#EEF2F7"
+    font-color: "#141413"
+    stroke: "#D0DCE9"
+  }
 }
 
+LEARNING -> PRACTICING: first\ncorrect
+PRACTICING -> MASTERED: streak\nreached
+MASTERED -> DECAYING: interval\nelapsed
+
 MASTERED: {
-  style.font-size: 15
+  style: {
+    fill: "#D0DCE9"
+    font-color: "#141413"
+    stroke: "#1B365D"
+    font-size: 13
+  }
 }
 
 DECAYING: {
-  style.fill: "#E8E6DC"
+  style: {
+    fill: "#E8E6DC"
+    font-color: "#B53333"
+    font-size: 11
+  }
 }
 
-*.style: {
-  fill: "transparent"
-  font-color: "#141413"
-  border-radius: 4
-  stroke: "#6b6a64"
+nodes: {
+  style: {
+    font-size: 13
+    font-color: "#141413"
+    border-radius: 4
+    stroke: "#6b6a64"
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#504e49"
+    font-size: 10
+    font-color: "#504e49"
+  }
 }
