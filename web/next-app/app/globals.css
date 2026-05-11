@@ -76,8 +76,8 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-weight: 500;
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
     color: var(--text-primary);
     letter-spacing: -0.01em;
   }

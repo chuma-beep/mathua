@@ -5,7 +5,7 @@ import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
 import MermaidDiagram from '../../../components/MermaidDiagram'
 
-const headingFont = "'JetBrains Mono', 'Fira Code', monospace"
+const headingFont = "'DM Serif Display', serif"
 const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
