@@ -42,8 +42,8 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
   )
 }
 
-const headingFont = "'Cormorant Garamond', serif"
-const bodyFont = "'Inter', -apple-system, sans-serif"
+const headingFont = "'JetBrains Mono', 'Fira Code', monospace"
+const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
 const h2Style: React.CSSProperties = {

@@ -111,8 +111,8 @@ export default function HomePage() {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
   }
 
-  const headingFont = "'Cormorant Garamond', serif"
-  const bodyFont = "'Inter', -apple-system, sans-serif"
+  const headingFont = "'JetBrains Mono', 'Fira Code', monospace"
+  const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
   const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
   return (

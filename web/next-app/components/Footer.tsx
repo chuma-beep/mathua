@@ -13,7 +13,7 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       <div
         style={{
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
           fontSize: '1rem',
           color: 'var(--text-secondary)',
           marginBottom: '0.75rem',
@@ -43,7 +43,7 @@ export default function Footer({ className = '' }: FooterProps) {
 
       <div
         style={{
-          fontFamily: "'Inter', -apple-system, sans-serif",
+          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',

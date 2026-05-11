@@ -30,8 +30,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Cormorant Garamond', 'serif'],
-        sans: ['Inter', '-apple-system', 'sans-serif'],
+        serif: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: ['JetBrains Mono', 'Fira Code', 'monospace'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       maxWidth: {
