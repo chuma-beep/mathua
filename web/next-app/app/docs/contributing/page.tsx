@@ -3,7 +3,7 @@
 import { useTheme } from '../../../hooks/useTheme'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
-import MermaidDiagram from '../../../components/MermaidDiagram'
+import D2Diagram from '../../../components/D2Diagram'
 
 const headingFont = "'DM Serif Display', serif"
 const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
@@ -86,31 +86,7 @@ export default function ContributingPage() {
       </section>
 
       {/* Contributor flow diagram */}
-      <MermaidDiagram
-        theme={theme}
-        chart={`flowchart TD
-    Fork["Fork the repo"]
-    Concept["Add concept to\\nconcepts.json"]
-    Gen["Write generator\\nGo function"]
-    Fuzz["Write fuzz test\\n1000 samples"]
-    Valid["Run validator\\nvalidate_graph.go"]
-    PR["Open pull request"]
-    CI{"CI passes?"}
-    Review["Maintainer review"]
-    Merge["Merged!"]
-    Fix["Fix issues"]
-
-    Fork --> Concept
-    Concept --> Gen
-    Gen --> Fuzz
-    Fuzz --> Valid
-    Valid --> PR
-    PR --> CI
-    CI -->|"Yes"| Review
-    CI -->|"No"| Fix
-    Fix --> PR
-    Review --> Merge`}
-      />
+      <D2Diagram name="contributing" theme={theme} />
 
       {/* Metric cards */}
       <div style={{

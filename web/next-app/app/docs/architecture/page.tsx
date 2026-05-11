@@ -4,7 +4,7 @@ import { useTheme } from '../../../hooks/useTheme'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
 import FormulaBlock from '../../../components/FormulaBlock'
-import MermaidDiagram from '../../../components/MermaidDiagram'
+import D2Diagram from '../../../components/D2Diagram'
 
 const headingFont = "'DM Serif Display', serif"
 const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
@@ -64,48 +64,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* High-level diagram */}
-      <MermaidDiagram
-        theme={theme}
-        chart={`flowchart TB
-    subgraph UI["UI Layer"]
-        Web["Web Browser\\nReact + Next.js"]
-        TUI["Desktop TUI\\nBubble Tea"]
-    end
-    subgraph API["API Layer"]
-        Session["Session Service"]
-        Graph["Graph Service"]
-        Leader["Leaderboard Service"]
-        Diag["Diagnostic Service"]
-    end
-    subgraph Engine["Core Engine"]
-        Dag["DAG Loader"]
-        Sched["Scheduler SM-2"]
-        Gen["Generators"]
-        Grade["Graders"]
-        Score["Scoring"]
-    end
-    subgraph Storage["Storage"]
-        SQLite[("SQLite\\nDesktop")]
-        PG[("PostgreSQL\\nWeb")]
-    end
-    Web --> Session
-    Web --> Graph
-    Web --> Leader
-    Web --> Diag
-    TUI --> Dag
-    TUI --> Sched
-    TUI --> Gen
-    Session --> Dag
-    Session --> Sched
-    Graph --> Dag
-    Diag --> Sched
-    Dag --> Sched
-    Sched --> Gen
-    Gen --> Grade
-    Grade --> Score
-    Score --> SQLite
-    Score --> PG`}
-      />
+      <D2Diagram name="architecture" theme={theme} />
 
       {/* Metric cards */}
       <div style={{
@@ -555,17 +514,7 @@ weekly_score = (mastered_this_week × 100)
           (one per concept) to approximately 20–35.
         </p>
 
-        <MermaidDiagram
-          theme={theme}
-          chart={`flowchart LR
-    Start(["Start: Topologically Sorted Graph"]) --> Midpoint{"Test midpoint concept"}
-    Midpoint -->|"Correct + Fast"| Forward["Move forward\\nharder concepts"]
-    Midpoint -->|"Incorrect / Slow"| Backward["Move backward\\nfoundational concepts"]
-    Forward --> Check{"3 consecutive\\ncorrect?"}
-    Backward --> Check
-    Check -->|"Yes"| Locked(["FRONTIER LOCKED\\nRecord mastery estimates"])
-    Check -->|"No"| Midpoint`}
-        />
+        <D2Diagram name="cat-diagnostic" theme={theme} />
 
         <div style={{ marginTop: '2rem' }}>
           {[

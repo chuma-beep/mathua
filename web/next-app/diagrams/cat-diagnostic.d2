@@ -1,0 +1,40 @@
+Start: {
+  shape: circle
+  width: 24
+  height: 24
+  style.fill: "#1B365D"
+}
+
+Start -> Midpoint
+
+Midpoint: Test midpoint\nconcept {
+  shape: diamond
+}
+
+Midpoint -> Forward: Correct + Fast
+Midpoint -> Backward: Incorrect / Slow
+
+Forward: Move forward\n(harder concepts)
+Backward: Move backward\n(foundational)
+Forward -> Check
+Backward -> Check
+
+Check: 3 consecutive\ncorrect? {
+  shape: diamond
+}
+
+Check -> Locked: Yes
+
+Locked: FRONTIER LOCKED\nRecord mastery estimates {
+  shape: oval
+  style.fill: "#EEF2F7"
+}
+
+Check -> Midpoint: No
+
+*.style: {
+  fill: "transparent"
+  font-color: "#141413"
+  border-radius: 6
+  stroke: "#6b6a64"
+}
