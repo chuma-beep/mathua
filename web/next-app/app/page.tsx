@@ -294,8 +294,10 @@ export default function HomePage() {
         <Pipeline states={PIPELINE_STATES} className="my-7" />
         <div className="flex justify-center">
           <FormulaBlock
-            code={`priority = (0.7 × days_since_last_seen) + (0.3 × (1 − mastery))
-        + 5.0 if DECAYING  +  2.0 if newly_unlocked`}
+            code={`priority = (0.7 × days_since_last_seen)
+         + (0.3 × (1 − mastery))
+         + 5.0  if DECAYING
+         + 2.0  if newly_unlocked`}
           />
         </div>
         <p
