@@ -107,8 +107,8 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
 }
 
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
-const serifFont = "'Cormorant Garamond', serif"
-const bodyFont = "'Inter', -apple-system, sans-serif"
+const serifFont = "'JetBrains Mono', 'Fira Code', monospace"
+const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
 
 const NodeMesh = React.memo(function NodeMesh({
   node,
