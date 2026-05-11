@@ -61,6 +61,19 @@ export default function ArchitecturePage() {
           Mathua is a single Go binary with two delivery modes. The engine core is identical —
           only the presentation layer differs.
         </p>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <a
+            href="https://github.com/chuma-beep/mathua/blob/main/docs/architecture.md"
+            className="link-underline"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              color: 'var(--text-muted)',
+            }}
+          >
+            View source on GitHub
+          </a>
+        </div>
       </section>
 
       {/* High-level diagram */}
