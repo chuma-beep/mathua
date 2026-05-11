@@ -58,4 +58,4 @@ Locates a student's knowledge frontier using binary search on the topologically 
 
 ## Full documentation
 
-For interactive D2 diagrams, internal module detail, and formatted code blocks, see the **[Architecture docs](/docs/architecture)** in the web app.
+For interactive D2 diagrams, internal module detail, and formatted code blocks, see the **[Architecture docs](https://mathua.vercel.app/docs/architecture)** in the web app.
