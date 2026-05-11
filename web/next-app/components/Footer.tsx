@@ -47,23 +47,9 @@ export default function Footer({ className = '' }: FooterProps) {
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',
-          marginBottom: '0.5rem',
         }}
       >
-        MIT License · Built in public by Wisdom Chukwuemeka
-      </div>
-
-      <div
-        style={{
-          fontFamily: "'Inter', -apple-system, sans-serif",
-          fontStyle: 'italic',
-          fontSize: '0.9rem',
-          color: 'var(--text-muted)',
-        }}
-      >
-        Inspired by the mastery-gating philosophy of Math Academy.
-        <br />
-        No content or code from Math Academy is used.
+        MIT License
       </div>
     </footer>
   )
