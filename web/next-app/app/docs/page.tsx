@@ -35,6 +35,7 @@ export default function DocsIndexPage() {
       <div style={{ marginBottom: '3rem' }}>
         <Link
           href="/docs/architecture"
+          className="link-underline"
           style={{
             display: 'flex',
             gap: '1rem',
@@ -42,10 +43,7 @@ export default function DocsIndexPage() {
             borderBottom: '0.5px solid var(--border)',
             color: 'inherit',
             textDecoration: 'none',
-            transition: 'border-color 0.2s ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
         >
           <span style={{
             fontFamily: monoFont,
@@ -74,6 +72,7 @@ export default function DocsIndexPage() {
 
         <Link
           href="/docs/contributing"
+          className="link-underline"
           style={{
             display: 'flex',
             gap: '1rem',
@@ -81,10 +80,7 @@ export default function DocsIndexPage() {
             borderBottom: '0.5px solid var(--border)',
             color: 'inherit',
             textDecoration: 'none',
-            transition: 'border-color 0.2s ease',
           }}
-          onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
-          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
         >
           <span style={{
             fontFamily: monoFont,
