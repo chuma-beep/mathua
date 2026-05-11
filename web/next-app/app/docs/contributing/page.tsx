@@ -1,9 +1,7 @@
 'use client'
 
-import { useTheme } from '../../../hooks/useTheme'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
-import D2Diagram from '../../../components/D2Diagram'
 
 const headingFont = "'DM Serif Display', serif"
 const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
@@ -72,8 +70,6 @@ const tableCellStyle: React.CSSProperties = {
 }
 
 export default function ContributingPage() {
-  const { theme } = useTheme()
-
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
@@ -84,41 +80,6 @@ export default function ContributingPage() {
           generator function, and a fuzz test.
         </p>
       </section>
-
-      {/* Contributor flow diagram */}
-      <D2Diagram name="contributing" theme={theme} />
-
-      {/* Metric cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: '16px',
-        marginBottom: '48px',
-        marginTop: '24px',
-      }}>
-        {[
-          { num: '3', label: 'Steps' },
-          { num: '1000', label: 'Fuzz Samples' },
-          { num: '0', label: 'Cycles Tolerated' },
-        ].map(({ num, label }) => (
-          <div
-            key={label}
-            style={{
-              background: 'var(--surface)',
-              border: '0.5px solid var(--border)',
-              padding: '20px',
-              textAlign: 'center',
-            }}
-          >
-            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
-              {num}
-            </div>
-            <div style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>
-              {label}
-            </div>
-          </div>
-        ))}
-      </div>
 
       <AsciiDivider pattern="wave" />
 
