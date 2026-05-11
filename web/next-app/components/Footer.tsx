@@ -13,7 +13,7 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       <div
         style={{
-          fontFamily: "'DM Serif Display', serif",
+          fontFamily: "'Lora', serif",
           fontSize: '1rem',
           color: 'var(--text-secondary)',
           marginBottom: '0.75rem',
