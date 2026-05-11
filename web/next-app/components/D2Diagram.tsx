@@ -13,9 +13,9 @@ const diagramMap: Record<string, { light: string; dark: string }> = {
     light: '/diagrams/contributing-light.svg',
     dark: '/diagrams/contributing-dark.svg',
   },
-  'student-model': {
-    light: '/diagrams/student-model-light.svg',
-    dark: '/diagrams/student-model-dark.svg',
+  platforms: {
+    light: '/diagrams/platforms-light.svg',
+    dark: '/diagrams/platforms-dark.svg',
   },
 }
 

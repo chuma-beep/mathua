@@ -467,7 +467,7 @@ export default function HomePage() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <D2Diagram name="architecture" theme={theme} />
+          <D2Diagram name="platforms" theme={theme} />
         </div>
       </section>
 
