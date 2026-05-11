@@ -12,29 +12,87 @@ interface DomainTableProps {
 export default function DomainTable({ rows, className = '' }: DomainTableProps) {
   return (
     <div className={className}>
-      <table className="w-full border-collapse bg-mathua-surface rounded-lg overflow-hidden border border-mathua-border">
+      <table
+        style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          border: 'none',
+          background: 'transparent',
+        }}
+      >
         <thead>
           <tr>
-            <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-left p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">
+            <th
+              style={{
+                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontWeight: 400,
+                fontSize: '0.9rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                color: 'var(--accent-gold)',
+                textAlign: 'left',
+                padding: '10px 20px 10px 0',
+                borderBottom: '1px solid var(--accent-gold)',
+                background: 'transparent',
+              }}
+            >
               Domain
             </th>
-            <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">
+            <th
+              style={{
+                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontWeight: 400,
+                fontSize: '0.9rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                color: 'var(--accent-gold)',
+                textAlign: 'right',
+                padding: '10px 0 10px 20px',
+                borderBottom: '1px solid var(--accent-gold)',
+                background: 'transparent',
+              }}
+            >
               Concepts
             </th>
           </tr>
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.domain} className="border-b border-mathua-border last:border-b-0">
-              <td className="p-[14px_20px] text-mathua-primary text-sm">
+            <tr key={row.domain} style={{ borderBottom: '0.5px solid var(--border)', background: 'transparent' }}>
+              <td
+                style={{
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  fontSize: '1rem',
+                  color: 'var(--text-secondary)',
+                  padding: '14px 20px 14px 0',
+                  background: 'transparent',
+                }}
+              >
                 {row.domain}
                 {row.comingSoon && (
-                  <span className="text-[10px] text-mathua-blue bg-mathua-blue/10 px-2 py-0.5 rounded ml-2">
-                    Coming soon
+                  <span
+                    style={{
+                      fontFamily: "'Source Serif 4', Georgia, serif",
+                      fontStyle: 'italic',
+                      fontSize: '0.9rem',
+                      color: 'var(--text-muted)',
+                      marginLeft: '0.5rem',
+                    }}
+                  >
+                    — coming in v1.1
                   </span>
                 )}
               </td>
-              <td className="p-[14px_20px] font-mono text-mathua-muted text-right">
+              <td
+                style={{
+                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontSize: '0.9rem',
+                  color: 'var(--accent-gold)',
+                  textAlign: 'right',
+                  padding: '14px 0 14px 20px',
+                  background: 'transparent',
+                }}
+              >
                 {row.count}
               </td>
             </tr>

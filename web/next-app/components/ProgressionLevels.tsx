@@ -12,31 +12,70 @@ interface ProgressionLevelsProps {
 
 export default function ProgressionLevels({ levels, className = '' }: ProgressionLevelsProps) {
   return (
-    <ul className={`list-none ${className}`}>
-      {levels.map((level) => (
-        <li
-          key={level.num}
-          className={`flex items-center gap-4 py-2.5 border-b border-mathua-border text-sm text-mathua-primary ${
-            level.elite
-              ? 'bg-mathua-blue/10 rounded-md px-3 -mx-1'
-              : ''
-          }`}
-        >
-          <span className="font-mono text-[11px] text-mathua-muted min-w-[24px]">
-            {level.num}
-          </span>
-          <span
-            className={`flex-1 font-medium ${
-              level.elite ? 'text-mathua-blue' : ''
-            }`}
-          >
-            {level.name}
-          </span>
-          <span className="font-mono text-[11px] text-mathua-muted text-right">
-            {level.range}
-          </span>
-        </li>
-      ))}
-    </ul>
+    <div className={className}>
+      <h3
+        style={{
+          fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+          fontWeight: 400,
+          fontSize: '1.1rem',
+          color: 'var(--text-primary)',
+          marginBottom: '0.75rem',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        Levels of mastery
+      </h3>
+      <table style={{ width: '100%', borderCollapse: 'collapse', border: 'none', background: 'transparent' }}>
+        <tbody>
+          {levels.map((level) => (
+            <tr
+              key={level.num}
+              style={{
+                borderBottom: '0.5px solid var(--border)',
+                background: 'transparent',
+                ...(level.elite ? { borderTop: '1px solid var(--accent-gold)' } : {}),
+              }}
+            >
+              <td
+                style={{
+                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontSize: '13px',
+                  color: 'var(--accent-gold)',
+                  padding: '8px 12px 8px 0',
+                  whiteSpace: 'nowrap',
+                  verticalAlign: 'baseline',
+                }}
+              >
+                {parseInt(level.num)}.
+              </td>
+              <td
+                style={{
+                  fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                  fontSize: '1rem',
+                  color: 'var(--text-primary)',
+                  padding: '8px 0',
+                  verticalAlign: 'baseline',
+                }}
+              >
+                {level.name}
+              </td>
+              <td
+                style={{
+                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontSize: '12px',
+                  color: 'var(--text-muted)',
+                  textAlign: 'right',
+                  padding: '8px 0 8px 12px',
+                  whiteSpace: 'nowrap',
+                  verticalAlign: 'baseline',
+                }}
+              >
+                {level.range} concepts
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

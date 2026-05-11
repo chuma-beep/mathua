@@ -7,11 +7,29 @@ interface FormulaBlockProps {
 export default function FormulaBlock({ code, label, className = '' }: FormulaBlockProps) {
   return (
     <div className={`flex flex-col items-center ${className}`}>
-      <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-xs text-mathua-blue whitespace-pre overflow-x-auto leading-relaxed text-center inline-block">
+      <pre
+        style={{
+          background: 'transparent',
+          border: 'none',
+          borderLeft: '2px solid var(--accent-gold)',
+          borderRadius: 0,
+          padding: '0.5rem 0 0.5rem 1.5rem',
+          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontSize: '13px',
+          color: 'var(--text-secondary)',
+          whiteSpace: 'pre',
+          overflowX: 'auto',
+          lineHeight: 1.6,
+          textAlign: 'left',
+          display: 'inline-block',
+        }}
+      >
         {code}
       </pre>
       {label && (
-        <span className="font-mono text-[11px] text-mathua-muted mt-1">{label}</span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
+          {label}
+        </span>
       )}
     </div>
   )

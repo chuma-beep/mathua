@@ -8,20 +8,29 @@ interface PipelineProps {
   className?: string
 }
 
+const statusStyle: Record<string, React.CSSProperties> = {
+  mastered: { color: 'var(--accent-gold)' },
+  decaying: { color: 'var(--accent-teal)' },
+}
+
 export default function Pipeline({ states, className = '' }: PipelineProps) {
   return (
-    <div className={`flex items-center justify-center gap-2 flex-wrap ${className}`}>
+    <div className={`flex items-center justify-center gap-1 flex-wrap ${className}`}>
       {states.map((state, i) => (
-        <span key={i}>
-          {i > 0 && <span className="pipeline-arrow mx-1">→</span>}
+        <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+          {i > 0 && (
+            <span style={{ color: 'var(--border-strong)', fontFamily: "'JetBrains Mono', monospace", fontSize: '13px' }}>
+              {' → '}
+            </span>
+          )}
           <span
-            className={`pipeline-state ${
-              state.status === 'mastered'
-                ? 'mastered'
-                : state.status === 'decaying'
-                ? 'decaying'
-                : ''
-            }`}
+            style={{
+              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+              fontSize: '13px',
+              letterSpacing: '0.08em',
+              color: 'var(--text-secondary)',
+              ...statusStyle[state.status],
+            }}
           >
             {state.label}
           </span>

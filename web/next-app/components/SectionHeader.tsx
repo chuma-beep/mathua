@@ -1,15 +1,29 @@
 interface SectionHeaderProps {
-  label: string
+  label?: string
   title: string
   center?: boolean
   className?: string
 }
 
-export default function SectionHeader({ label, title, center = true, className = '' }: SectionHeaderProps) {
+export default function SectionHeader({ label, title, center = false, className = '' }: SectionHeaderProps) {
   return (
     <div className={`${center ? 'text-center' : ''} ${className}`}>
-      <span className="section-label">{label}</span>
-      <h2 className="font-serif font-medium text-[28px] leading-tight text-mathua-primary">
+      {label && (
+        <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-mathua-muted block mb-2">
+          {label}
+        </span>
+      )}
+      <h2
+        className="font-serif font-normal text-[1.9rem] max-sm:text-[1.5rem] leading-tight text-mathua-primary"
+        style={{
+          fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+          fontWeight: 400,
+          color: 'var(--text-primary)',
+          borderLeft: '2px solid var(--accent-gold)',
+          paddingLeft: '1rem',
+          marginBottom: '1.5rem',
+        }}
+      >
         {title}
       </h2>
     </div>
