@@ -80,6 +80,19 @@ export default function ContributingPage() {
           The most useful thing you can contribute is a new concept — and it takes exactly
           three pieces: a JSON entry, a Go generator, and a fuzz test.
         </p>
+        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <a
+            href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md"
+            className="link-underline"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              color: 'var(--text-muted)',
+            }}
+          >
+            View source on GitHub
+          </a>
+        </div>
       </section>
 
       <AsciiDivider pattern="wave" />
