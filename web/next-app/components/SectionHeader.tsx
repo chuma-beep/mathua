@@ -16,7 +16,7 @@ export default function SectionHeader({ label, title, center = false, className 
       <h2
         className="font-serif font-normal text-[1.9rem] max-sm:text-[1.5rem] leading-tight text-mathua-primary"
         style={{
-          fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+          fontFamily: "'Playfair Display', serif",
           fontWeight: 400,
           color: 'var(--text-primary)',
           borderLeft: '2px solid var(--accent-gold)',

@@ -25,7 +25,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
           <Link
             href="/docs"
             style={{
-              fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+              fontFamily: "'Playfair Display', serif",
               fontSize: '1.1rem',
               color: 'var(--accent-gold)',
               textDecoration: 'none',

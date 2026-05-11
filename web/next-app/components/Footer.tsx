@@ -13,7 +13,7 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       <div
         style={{
-          fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+          fontFamily: "'Playfair Display', serif",
           fontSize: '1rem',
           color: 'var(--text-secondary)',
           marginBottom: '0.75rem',
@@ -43,7 +43,7 @@ export default function Footer({ className = '' }: FooterProps) {
 
       <div
         style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Inter', -apple-system, sans-serif",
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',
@@ -55,7 +55,7 @@ export default function Footer({ className = '' }: FooterProps) {
 
       <div
         style={{
-          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontFamily: "'Inter', -apple-system, sans-serif",
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',

@@ -30,8 +30,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['EB Garamond', 'Garamond', 'Georgia', 'serif'],
-        sans: ['Source Serif 4', 'Georgia', 'serif'],
+        serif: ['Playfair Display', 'serif'],
+        sans: ['Inter', '-apple-system', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       maxWidth: {
