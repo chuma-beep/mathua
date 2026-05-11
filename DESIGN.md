@@ -62,13 +62,15 @@ A mathematics learning platform design system bridging scholarly typographic tra
 
 | Role | Font Family | Weight | Size / Line |
 |---|---|---|---|
-| Hero Title | `'Playfair Display', serif` | 600 | 56px / 1.1 |
-| Page Title | `'Playfair Display', serif` | 500 | 36px / 1.2 |
-| Section Heading | `'Playfair Display', serif` | 500 | 28px / 1.3 |
-| Card Heading | `'Playfair Display', serif` | 400 | 20px / 1.4 |
+| Hero Title | `'Cormorant Garamond', serif` | 600 | 56px / 1.1 |
+| Page Title | `'Cormorant Garamond', serif` | 500 | 36px / 1.2 |
+| Section Heading | `'Cormorant Garamond', serif` | 500 | 28px / 1.3 |
+| Card Heading | `'Cormorant Garamond', serif` | 400 | 20px / 1.4 |
 | Body | `'Inter', -apple-system, sans-serif` | 400 | 16px / 1.7 |
 | Body Small | `'Inter', -apple-system, sans-serif` | 400 | 14px / 1.6 |
 | Strong | `'Inter', -apple-system, sans-serif` | 600 | — |
+| Table Headers | `'JetBrains Mono', monospace` | 400 | 11px / 1.5 |
+| Metric Numbers | `'JetBrains Mono', monospace` | 500 | 32px / 1 |
 | Mono Labels | `'JetBrains Mono', monospace` | 400 | 11px / 1.5 |
 | Mono Code | `'JetBrains Mono', monospace` | 400 | 13px / 1.8 |
 | Stat Badges | `'JetBrains Mono', monospace` | 500 | 11px / 1.5 |

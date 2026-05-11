@@ -71,9 +71,9 @@ export default function DocsIndexPage() {
               }}
             >
               <div style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                 fontSize: '2rem',
-                fontWeight: 400,
+                fontWeight: 500,
                 color: 'var(--accent-gold)',
                 lineHeight: 1,
                 fontVariantNumeric: 'tabular-nums',
@@ -116,7 +116,7 @@ export default function DocsIndexPage() {
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
             >
               <h2 style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'Cormorant Garamond', serif",
                 fontWeight: 400,
                 fontSize: '1.25rem',
                 color: 'var(--text-primary)',

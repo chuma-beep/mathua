@@ -42,7 +42,7 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
   )
 }
 
-const headingFont = "'Playfair Display', serif"
+const headingFont = "'Cormorant Garamond', serif"
 const bodyFont = "'Inter', -apple-system, sans-serif"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
