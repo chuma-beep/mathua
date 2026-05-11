@@ -2,7 +2,7 @@
 
 import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
+import Header from '../../components/Header'
 import AsciiDivider from '../../components/AsciiDivider'
 
 const sections = [
@@ -130,68 +130,9 @@ export default function HowItWorksPage() {
   }, [])
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
-      <button
-        onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
-        style={{ borderRadius: 0, background: 'var(--bg)' }}
-        aria-label="Toggle theme"
-      >
-        {theme === 'dark' ? '\u2600' : '\u263E'}
-      </button>
-
-      <header
-        className="flex justify-between items-center p-[16px_24px] sticky top-0 z-[100]"
-        style={{
-          borderBottom: '0.5px solid var(--border)',
-          background: theme === 'dark' ? 'rgba(11, 15, 26, 0.95)' : 'rgba(254, 252, 244, 0.95)',
-          backdropFilter: 'blur(8px)',
-        }}
-      >
-        <Link
-          href="/"
-          className="text-lg font-semibold"
-          style={{
-            fontFamily: headingFont,
-            fontWeight: 400,
-            fontSize: '1.2rem',
-            color: 'var(--accent-gold)',
-            textDecoration: 'none',
-          }}
-        >
-          Mathua
-        </Link>
-        <nav className="flex gap-4 items-center">
-          <Link
-            href="/"
-            style={{
-              fontFamily: monoFont,
-              fontSize: '12px',
-              letterSpacing: '0.04em',
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-            }}
-          >
-            Home
-          </Link>
-          <a
-            href="/"
-            style={{
-              fontFamily: monoFont,
-              fontSize: '12px',
-              letterSpacing: '0.04em',
-              background: 'var(--accent-gold)',
-              color: 'var(--bg)',
-              padding: '6px 16px',
-              borderRadius: '2px',
-              textDecoration: 'none',
-            }}
-          >
-            Web App
-          </a>
-        </nav>
-      </header>
-
+    <>
+      <Header links={[{ label: 'Docs', href: '/docs' }]} />
+      <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       <div className="flex max-w-[960px] mx-auto p-[32px_24px] gap-10 max-md:flex-col max-md:p-4">
         <NavSidebar activeSection={activeSection} />
 
@@ -564,6 +505,7 @@ func (g *PolyGrader) Grade(input, expected string) (bool, error) {
         </main>
       </div>
     </div>
+    </>
   )
 }
 
