@@ -6,7 +6,7 @@ import AsciiDivider from '../../../components/AsciiDivider'
 import FormulaBlock from '../../../components/FormulaBlock'
 import MermaidDiagram from '../../../components/MermaidDiagram'
 
-const headingFont = "'Playfair Display', serif"
+const headingFont = "'Cormorant Garamond', serif"
 const bodyFont = "'Inter', -apple-system, sans-serif"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
@@ -130,7 +130,7 @@ export default function ArchitecturePage() {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontFamily: headingFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
+            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
               {num}
             </div>
             <div style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>
@@ -161,7 +161,7 @@ export default function ArchitecturePage() {
             <thead>
               <tr style={{ background: 'transparent' }}>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -174,7 +174,7 @@ export default function ArchitecturePage() {
                   Property
                 </th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -187,7 +187,7 @@ export default function ArchitecturePage() {
                   Desktop TUI
                 </th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -256,19 +256,19 @@ export default function ArchitecturePage() {
         </p>
         <div style={{ ...bodyStyle, marginBottom: '0.3rem' }}>
           <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
-          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: headingFont }}>Session Service</strong> — Starts and manages practice sessions. Returns the next problem based on scheduler output.
+          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: monoFont }}>Session Service</strong> — Starts and manages practice sessions. Returns the next problem based on scheduler output.
         </div>
         <div style={{ ...bodyStyle, marginBottom: '0.3rem' }}>
           <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
-          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: headingFont }}>Graph Service</strong> — Exposes the concept DAG for visualization. Returns node metadata and prerequisite edges.
+          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: monoFont }}>Graph Service</strong> — Exposes the concept DAG for visualization. Returns node metadata and prerequisite edges.
         </div>
         <div style={{ ...bodyStyle, marginBottom: '0.3rem' }}>
           <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
-          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: headingFont }}>Leaderboard Service</strong> — Computes and returns the weekly leaderboard. Scores reset every Monday at 00:00 UTC.
+          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: monoFont }}>Leaderboard Service</strong> — Computes and returns the weekly leaderboard. Scores reset every Monday at 00:00 UTC.
         </div>
         <div style={{ ...bodyStyle }}>
           <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
-          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: headingFont }}>Diagnostic Service</strong> — Runs the Computerised Adaptive Testing engine to locate a student's knowledge frontier.
+          <strong style={{ color: 'var(--text-primary)', fontWeight: 400, fontFamily: monoFont }}>Diagnostic Service</strong> — Runs the Computerised Adaptive Testing engine to locate a student's knowledge frontier.
         </div>
         <div style={{
           borderLeft: '2px solid var(--accent-gold)',
@@ -385,7 +385,7 @@ weekly_score = (mastered_this_week × 100)
             <thead>
               <tr style={{ background: 'transparent' }}>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -396,7 +396,7 @@ weekly_score = (mastered_this_week × 100)
                   textAlign: 'left',
                 }}>Grader</th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -407,7 +407,7 @@ weekly_score = (mastered_this_week × 100)
                   textAlign: 'left',
                 }}>Used for</th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -474,7 +474,7 @@ weekly_score = (mastered_this_week × 100)
             <thead>
               <tr style={{ background: 'transparent' }}>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -485,7 +485,7 @@ weekly_score = (mastered_this_week × 100)
                   textAlign: 'left',
                 }}>Entity</th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',
@@ -496,7 +496,7 @@ weekly_score = (mastered_this_week × 100)
                   textAlign: 'left',
                 }}>Stored in</th>
                 <th style={{
-                  fontFamily: headingFont,
+                  fontFamily: monoFont,
                   fontWeight: 400,
                   fontSize: '0.85rem',
                   textTransform: 'uppercase',

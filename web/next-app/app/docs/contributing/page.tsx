@@ -5,7 +5,7 @@ import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
 import MermaidDiagram from '../../../components/MermaidDiagram'
 
-const headingFont = "'Playfair Display', serif"
+const headingFont = "'Cormorant Garamond', serif"
 const bodyFont = "'Inter', -apple-system, sans-serif"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
@@ -50,7 +50,7 @@ const codeBlockStyle: React.CSSProperties = {
 }
 
 const tableHeaderStyle: React.CSSProperties = {
-  fontFamily: headingFont,
+  fontFamily: monoFont,
   fontWeight: 400,
   fontSize: '0.85rem',
   textTransform: 'uppercase',
@@ -134,7 +134,7 @@ export default function ContributingPage() {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontFamily: headingFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
+            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
               {num}
             </div>
             <div style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>

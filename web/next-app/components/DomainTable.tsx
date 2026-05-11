@@ -24,9 +24,9 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
           <tr>
             <th
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                 fontWeight: 400,
-                fontSize: '0.9rem',
+                fontSize: '0.8rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 color: 'var(--accent-gold)',
@@ -40,9 +40,9 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
             </th>
             <th
               style={{
-                fontFamily: "'Playfair Display', serif",
+                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                 fontWeight: 400,
-                fontSize: '0.9rem',
+                fontSize: '0.8rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 color: 'var(--accent-gold)',
