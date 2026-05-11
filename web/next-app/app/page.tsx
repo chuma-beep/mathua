@@ -25,7 +25,7 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
         alignItems: 'center',
         justifyContent: 'center',
         color: 'var(--text-muted)',
-        fontFamily: "'JetBrains Mono', monospace",
+        fontFamily: "'IBM Plex Mono', monospace",
         fontSize: '13px',
       }}
     >
@@ -112,9 +112,9 @@ export default function HomePage() {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
   }
 
-  const headingFont = "'Lora', serif"
-  const bodyFont = "'Lora', serif"
-  const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+  const headingFont = "'IBM Plex Serif', serif"
+  const bodyFont = "'IBM Plex Serif', serif"
+  const monoFont = "'IBM Plex Mono', monospace"
 
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">

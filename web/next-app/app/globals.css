@@ -60,7 +60,7 @@
   body {
     background: var(--bg);
     color: var(--text-secondary);
-    font-family: 'Lora', serif;
+    font-family: 'IBM Plex Serif', serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.75;
@@ -76,7 +76,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Lora', serif;
+    font-family: 'IBM Plex Serif', serif;
     font-weight: 400;
     color: var(--text-primary);
     letter-spacing: -0.01em;
@@ -93,7 +93,7 @@
 
 @layer components {
   .ascii-text {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     color: var(--accent-gold);
     white-space: pre;
     overflow-x: auto;
@@ -102,7 +102,7 @@
   }
 
   .ascii-divider {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     color: var(--text-muted);
     text-align: center;

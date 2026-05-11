@@ -27,7 +27,7 @@ interface D2DiagramProps {
 
 export default function D2Diagram({ name, theme = 'dark', className = '' }: D2DiagramProps) {
   const pair = diagramMap[name]
-  if (!pair) return <div style={{ color: 'var(--accent-red)', fontFamily: 'JetBrains Mono, Fira Code, monospace', fontSize: '12px', padding: '1rem' }}>Diagram "{name}" not found</div>
+  if (!pair) return <div style={{ color: 'var(--accent-red)', fontFamily: 'IBM Plex Mono, Fira Code, monospace', fontSize: '12px', padding: '1rem' }}>Diagram "{name}" not found</div>
 
   return (
     <div className={`flex justify-center py-4 ${className}`}>

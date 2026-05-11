@@ -6,9 +6,9 @@ import AsciiDivider from '../../../components/AsciiDivider'
 import FormulaBlock from '../../../components/FormulaBlock'
 import D2Diagram from '../../../components/D2Diagram'
 
-const headingFont = "'Lora', serif"
-const bodyFont = "'Lora', serif"
-const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+const headingFont = "'IBM Plex Serif', serif"
+const bodyFont = "'IBM Plex Serif', serif"
+const monoFont = "'IBM Plex Mono', monospace"
 
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
