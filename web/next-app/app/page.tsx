@@ -113,7 +113,7 @@ export default function HomePage() {
   }
 
   const headingFont = "'Lora', serif"
-  const bodyFont = "'Inter', -apple-system, sans-serif"
+  const bodyFont = "'Lora', serif"
   const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
   return (

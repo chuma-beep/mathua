@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
-const bodyFont = "'Inter', -apple-system, sans-serif"
+const bodyFont = "'Lora', serif"
 
 export default function DocsIndexPage() {
   const textStyle: React.CSSProperties = {
