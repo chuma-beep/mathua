@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import '../globals.css'
+import AsciiDivider from '../../components/AsciiDivider'
 
 const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
@@ -12,17 +12,21 @@ const sections = [
   { id: 'scheduler', label: 'Scheduler' },
   { id: 'scoring', label: 'Scoring' },
   { id: 'generators', label: 'Generators' },
-  { id: 'symbolic-grading', label: 'Symbolic grading' },
+  { id: 'symbolic-grading', label: 'Polynomial grading' },
 ]
 
 function NavSidebar({ activeSection }: { activeSection: string }) {
   return (
-    <nav className="nav-sidebar">
-      {sections.map(section => (
+    <nav className="w-[220px] flex-shrink-0 sticky top-[100px] h-fit max-md:fixed max-md:top-[57px] max-md:left-0 max-md:right-0 max-md:w-full max-md:bg-[var(--bg)] max-md:border-b max-md:border-mathua-border max-md:flex max-md:overflow-x-auto max-md:p-[8px_16px] max-md:gap-2 max-md:z-[99]">
+      {sections.map((section) => (
         <a
           key={section.id}
           href={`#${section.id}`}
-          className={`nav-link ${activeSection === section.id ? 'active' : ''}`}
+          className={`block text-[13px] py-2 px-3 border-l-2 mb-1 transition-colors max-md:border-l-0 max-md:border-b-2 max-md:mb-0 max-md:whitespace-nowrap ${
+            activeSection === section.id
+              ? 'text-mathua-blue border-l-mathua-blue max-md:border-b-mathua-blue'
+              : 'text-mathua-muted border-l-transparent max-md:border-b-transparent hover:text-mathua-secondary'
+          }`}
         >
           {section.label}
         </a>
@@ -36,7 +40,6 @@ export default function HowItWorksPage() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const [mounted, setMounted] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
-  const sectionRefs = useRef<Map<string, HTMLElement>>(new Map())
 
   useEffect(() => {
     setMounted(true)
@@ -76,7 +79,6 @@ export default function HowItWorksPage() {
     sections.forEach(({ id }) => {
       const el = document.getElementById(id)
       if (el) {
-        sectionRefs.current.set(id, el)
         observerRef.current?.observe(el)
       }
     })
@@ -85,271 +87,290 @@ export default function HowItWorksPage() {
   }, [])
 
   return (
-    <div className="how-page">
-      <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
-        {theme === 'dark' ? '☀' : '☾'}
+    <div className="min-h-screen bg-mathua-bg">
+      <button
+        onClick={toggleTheme}
+        className="fixed top-[50px] right-5 z-[1000] bg-mathua-surface border border-mathua-border-strong text-mathua-primary px-3.5 py-2 rounded-md font-mono text-xs cursor-pointer transition-all duration-200 hover:border-mathua-blue hover:text-mathua-blue"
+        aria-label="Toggle theme"
+      >
+        {theme === 'dark' ? '\u2600' : '\u263E'}
       </button>
 
-      <header className="how-header">
-        <Link href="/" className="how-logo">Mathua</Link>
-        <nav className="how-nav">
-          <Link href="/" className="how-nav-link">Home</Link>
-          <Link href="/" className="how-nav-link">Web App</Link>
+      <header className="flex justify-between items-center p-[16px_24px] border-b border-mathua-border sticky top-0 bg-mathua-bg z-[100]">
+        <Link href="/" className="text-lg font-semibold text-mathua-blue">
+          Mathua
+        </Link>
+        <nav className="flex gap-4">
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+            Home
+          </Link>
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+            Web App
+          </Link>
         </nav>
       </header>
 
-      <div className="how-layout">
+      <div className="flex max-w-[960px] mx-auto p-[32px_24px] gap-10 max-md:flex-col max-md:p-4">
         <NavSidebar activeSection={activeSection} />
-        
-        <main className="how-content">
-          <section id="intro" className="how-intro">
-            <h1>How Mathua Works</h1>
-            <p className="how-subtitle">
-              The engine behind the learning — a technical explanation of the concept graph, student model, diagnostic algorithm, task selection, and scoring system.
+
+        <main className="max-w-[720px] flex-1 max-md:mt-20">
+          <section id="intro" className="mb-12 pb-8 border-b border-mathua-border">
+            <h1 className="font-serif text-[1.6rem] font-semibold text-mathua-blue mb-4">
+              How Mathua Works
+            </h1>
+            <p className="text-mathua-secondary text-base leading-relaxed">
+              The engine behind the learning — a technical explanation of the concept graph, student
+              model, diagnostic algorithm, task selection, and scoring system.
             </p>
           </section>
 
-          <section id="concept-graph" className="how-section">
-            <h2>The Concept Graph</h2>
-            <p>
-              Mathua represents all mathematical knowledge as a directed acyclic graph — a DAG. Each node in the graph is an atomic concept: the smallest unit of mathematical knowledge that can be practiced and mastered independently. Each directed edge is a prerequisite relationship. If concept B has an edge from concept A, then A must be mastered before B is ever shown to the student.
+          {/* Concept Graph */}
+          <section id="concept-graph" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              The Concept Graph
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              Mathua represents all mathematical knowledge as a directed acyclic graph — a DAG. Each
+              node in the graph is an atomic concept: the smallest unit of mathematical knowledge
+              that can be practiced and mastered independently. Each directed edge is a prerequisite
+              relationship. If concept B has an edge from concept A, then A must be mastered before
+              B is ever shown to the student.
             </p>
-            <p>
-              The graph currently contains 284 concepts spanning 16 domains — from early Counting through Calculus, Linear Algebra, and Topology. Every concept has a unique identifier in dot-notation that encodes its domain and sub-domain.
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The graph currently contains 284 concepts spanning 16 domains — from early Counting
+              through Calculus, Linear Algebra, and Topology.
             </p>
-            <pre className="code-block">{`{
+            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+{`{
   "id": "frac.add.diff",
   "label": "Add fractions with different denominators",
   "domain": "fractions",
   "subdomain": "fractions.addition",
   "prerequisites": ["frac.add.same", "arith.factor.lcm"],
   "mastery_threshold": { "streak": 5, "avg_time_seconds": 18.0 }
-}`}</pre>
-            <p>
-              The graph is stored as a flat JSON file — <code>data/concepts.json</code> — and is community-editable. A graph validator runs on every pull request and rejects the change if it introduces a cycle (a loop in the prerequisite chain), an orphaned concept (a node with no path to any root concept), or a dangling reference (a prerequisite ID that does not exist in the graph). This keeps the graph structurally sound regardless of how many contributors add to it.
+}`}
+            </pre>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The graph is stored as a flat JSON file — <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">data/concepts.json</code> — and
+              is community-editable. A graph validator runs on every pull request and rejects the
+              change if it introduces a cycle.
             </p>
-            <p>
-              The graph is loaded at startup using Kahn's algorithm — a topological sort that processes concepts in dependency order. The sorted order is used by the scheduler to determine which concepts are currently available to a given student.
-            </p>
-            <div className="concept-chain">
-              <span className="concept-pill">arith.factor.gcf</span>
-              <span className="arrow">→</span>
-              <span className="concept-pill">arith.factor.lcm</span>
-              <span className="arrow">→</span>
-              <span className="concept-pill">frac.add.diff</span>
-              <span className="arrow">→</span>
-              <span className="concept-pill">frac.mixed.add</span>
+            <div className="flex items-center gap-3 flex-wrap my-6">
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">arith.factor.gcf</span>
+              <span className="text-mathua-border-strong">→</span>
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">arith.factor.lcm</span>
+              <span className="text-mathua-border-strong">→</span>
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">frac.add.diff</span>
+              <span className="text-mathua-border-strong">→</span>
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">frac.mixed.add</span>
             </div>
           </section>
 
-          <section id="student-model" className="how-section">
-            <h2>The Student Model</h2>
-            <p>
-              Every concept in the graph has a state for each student. A concept can be in one of five states:
+          <AsciiDivider pattern="dash" />
+
+          {/* Student Model */}
+          <section id="student-model" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              The Student Model
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              Every concept in the graph has a state for each student:
             </p>
-            <div className="state-flow">
-              <span className="state-pill unseen">UNSEEN</span>
-              <span className="state-arrow">→</span>
-              <span className="state-pill learning">LEARNING</span>
-              <span className="state-arrow">→</span>
-              <span className="state-pill practicing">PRACTICING</span>
-              <span className="state-arrow">→</span>
-              <span className="state-pill mastered">MASTERED</span>
-              <span className="state-arrow">→</span>
-              <span className="state-pill decaying">DECAYING</span>
+            <div className="flex items-center gap-2 flex-wrap my-4">
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">UNSEEN</span>
+              <span className="text-mathua-muted text-xs">→</span>
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">LEARNING</span>
+              <span className="text-mathua-muted text-xs">→</span>
+              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">PRACTICING</span>
+              <span className="text-mathua-muted text-xs">→</span>
+              <span className="bg-mathua-green text-white border border-mathua-green font-mono text-[10px] px-2.5 py-1 rounded">MASTERED</span>
+              <span className="text-mathua-muted text-xs">→</span>
+              <span className="bg-mathua-gold text-[var(--bg)] border border-mathua-gold font-mono text-[10px] px-2.5 py-1 rounded">DECAYING</span>
             </div>
-            <p>
-              <strong>UNSEEN</strong> means the concept's prerequisites have not all been mastered yet. The concept is locked and will not appear in any session.
-            </p>
-            <p>
-              <strong>LEARNING</strong> means the concept is unlocked — all prerequisites are mastered — and the student has begun attempting it but has not yet built a streak.
-            </p>
-            <p>
-              <strong>PRACTICING</strong> means the student has answered correctly at least twice in a row and is building toward the mastery threshold.
-            </p>
-            <p>
-              <strong>MASTERED</strong> means the student has met both the streak threshold and the time threshold simultaneously. The concept is considered known.
-            </p>
-            <p>
-              <strong>DECAYING</strong> means the concept was mastered but has not been seen in more than 14 days. The spaced repetition algorithm has flagged it for review. Decaying concepts are treated as high priority by the scheduler.
-            </p>
-            <div className="threshold-table-wrap">
-              <table className="threshold-table">
+            <div className="overflow-x-auto my-4">
+              <table className="bg-mathua-surface border border-mathua-border border-collapse w-full text-[13px]">
                 <thead>
                   <tr>
-                    <th>Concept</th>
-                    <th>Streak required</th>
-                    <th>Time limit</th>
+                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
+                      Concept
+                    </th>
+                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
+                      Streak required
+                    </th>
+                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
+                      Time limit
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>arith.add.single</td>
-                    <td>5</td>
-                    <td>8s</td>
-                  </tr>
-                  <tr>
-                    <td>arith.mult.tables</td>
-                    <td>7</td>
-                    <td>6s</td>
-                  </tr>
-                  <tr>
-                    <td>frac.add.diff</td>
-                    <td>5</td>
-                    <td>18s</td>
-                  </tr>
-                  <tr>
-                    <td>prealg.eq.one_step_add</td>
-                    <td>5</td>
-                    <td>12s</td>
-                  </tr>
-                  <tr>
-                    <td>arith.div.long</td>
-                    <td>5</td>
-                    <td>20s</td>
-                  </tr>
+                  {[
+                    ['arith.add.single', '5', '8s'],
+                    ['arith.mult.tables', '7', '6s'],
+                    ['frac.add.diff', '5', '18s'],
+                    ['prealg.eq.one_step_add', '5', '12s'],
+                    ['arith.div.long', '5', '20s'],
+                  ].map(([concept, streak, time], i) => (
+                    <tr key={i} className={i % 2 === 0 ? 'bg-mathua-surface-elevated' : ''}>
+                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
+                        {concept}
+                      </td>
+                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
+                        {streak}
+                      </td>
+                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
+                        {time}
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <p>
-              Both thresholds must be met simultaneously. A student who consistently gets correct answers but takes twice the expected time has not truly mastered the concept — they are still computing, not yet fluent.
+          </section>
+
+          <AsciiDivider pattern="dash" />
+
+          {/* Spaced Repetition */}
+          <section id="spaced-repetition" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              Spaced Repetition
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              When a concept reaches MASTERED, Mathua immediately schedules its next review using a
+              simplified SM-2 algorithm.
+            </p>
+            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+{`first review:   1 day
+second review:  3 days
+third review:  interval × ease_factor
+ease_factor: starts at 2.5
+decreases by 0.2 on each failed review
+minimum value: 1.3`}
+            </pre>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              Reviews are never presented as a separate "review mode." They are woven into every
+              session by the scheduler, which manages the 70/30 balance between new material and
+              review automatically.
             </p>
           </section>
 
-          <section id="spaced-repetition" className="how-section">
-            <h2>Spaced Repetition</h2>
-            <p>
-              When a concept reaches MASTERED, Mathua immediately schedules its next review using a simplified SM-2 algorithm. The review interval grows with each successful review:
-            </p>
-            <div className="formula-block">
-              <span>first review:   1 day</span>
-              <span>second review:  3 days</span>
-              <span>third review:  interval × ease_factor</span>
-              <span className="formula-label">ease_factor: starts at 2.5</span>
-              <span className="formula-label">decreases by 0.2 on each failed review</span>
-              <span className="formula-label">minimum value: 1.3</span>
-            </div>
-            <p>
-              The ease factor is personal to each student on each concept. A concept that a student consistently answers quickly and correctly will have a high ease factor — reviews become infrequent because the knowledge is consolidating. A concept the student struggles with will have a lower ease factor — reviews remain frequent until the knowledge is solid.
-            </p>
-            <p>
-              When a concept's next review date passes without the student seeing it, it transitions from MASTERED to DECAYING. The scheduler treats DECAYING concepts with a priority bonus of +5.0 in the priority formula — higher than any new concept — because allowing decay to proceed too long forces the student backward through the mastery process.
-            </p>
-            <p>
-              Reviews are never presented as a separate "review mode." They are woven into every session by the scheduler, which manages the 70/30 balance between new material and review automatically.
-            </p>
-          </section>
+          <AsciiDivider pattern="dash" />
 
-          <section id="diagnostic" className="how-section">
-            <h2>The Diagnostic Algorithm</h2>
-            <p>
-              When a student first opens Mathua, or chooses to retake the diagnostic at any time, they enter a Computerised Adaptive Testing (CAT) session. The goal of the diagnostic is to locate the student's knowledge frontier — the boundary between concepts they have mastered and concepts they are not yet ready for — using as few questions as possible.
+          {/* Diagnostic */}
+          <section id="diagnostic" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              The Diagnostic Algorithm
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              When a student first opens Mathua, they enter a Computerised Adaptive Testing (CAT)
+              session. The goal is to locate the student's knowledge frontier using as few questions
+              as possible.
             </p>
-            <p>
-              The algorithm works as follows:
-            </p>
-            <ol className="step-list">
-              <li>The concept graph is sorted topologically. The diagnostic starts at the concept at the midpoint of the sorted order.</li>
-              <li>If the student answers correctly within the time limit, the algorithm moves forward — it next tests a concept further along the prerequisite chain.</li>
-              <li>If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward — it tests a concept earlier in the chain.</li>
-              <li>This binary search continues until three consecutive correct answers are recorded in a region, or three consecutive failures. At that point the frontier is considered located.</li>
-              <li>The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered correctly under time count as PRACTICING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.</li>
+            <ol className="list-none my-4">
+              {[
+                'The concept graph is sorted topologically. The diagnostic starts at the concept at the midpoint of the sorted order.',
+                'If the student answers correctly within the time limit, the algorithm moves forward — it next tests a concept further along the prerequisite chain.',
+                'If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward — it tests a concept earlier in the chain.',
+                'This binary search continues until three consecutive correct answers are recorded in a region, or three consecutive failures.',
+                'The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.',
+              ].map((step, i) => (
+                <li
+                  key={i}
+                  className="text-mathua-secondary text-[0.95rem] leading-[1.7] mb-3 pl-9 relative before:content-[counter(step)] before:absolute before:left-0 before:text-mathua-blue before:font-mono before:text-[13px]"
+                  style={{ counterIncrement: 'step-counter 1' }}
+                >
+                  {step}
+                </li>
+              ))}
             </ol>
-            <p>
-              The diagnostic takes between 15 and 25 questions for most students. Without this algorithm, a naive assessment of 284 concepts would require up to 284 questions. The CAT approach reduces this by roughly 70%.
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The diagnostic takes 20–35 questions for most students. Without this algorithm, a
+              naive assessment of 284 concepts would require up to 284 questions. The CAT approach,
+              combining binary search with the topological ordering, reduces this by roughly 90%.
             </p>
-            <p>
-              Explain that the diagnostic can be retaken at any time from the settings menu. Retaking does not delete progress — it creates a new knowledge estimate that is merged with existing progress data, always preferring the more optimistic estimate so that students are never penalised for retaking.
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The diagnostic can be retaken at any time from the settings menu. Retaking does not
+              delete progress — it creates a new knowledge estimate that is merged with existing
+              data, always preferring the more optimistic estimate so students are never penalised
+              for reassessing.
             </p>
+            <style>{`ol { counter-reset: step-counter; }`}</style>
           </section>
 
-          <section id="scheduler" className="how-section">
-            <h2>The Task Selection Algorithm</h2>
-            <p>
-              The scheduler runs after every question is submitted. It selects the next concept to present by computing a priority score for every concept that is currently in LEARNING, PRACTICING, or DECAYING state, plus any newly unlocked concepts in UNSEEN state whose prerequisites just reached MASTERED.
+          <AsciiDivider pattern="dash" />
+
+          {/* Scheduler */}
+          <section id="scheduler" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              The Task Selection Algorithm
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The scheduler runs after every question is submitted. It selects the next concept by
+              computing a priority score for every eligible concept.
             </p>
-            <div className="formula-block">
-              <span>priority = (0.7 × days_since_last_seen)</span>
-              <span>+ (0.3 × (1.0 − mastery_score))</span>
-              <span>+ 5.0   if status == DECAYING</span>
-              <span>+ 2.0   if newly unlocked this session</span>
-            </div>
-            <p>
-              <strong>Days since last seen</strong> weighted at 0.7 is the dominant term. Concepts the student has not seen recently float to the top. This implements the spacing effect automatically — the longer since a concept was practiced, the more urgent it becomes.
-            </p>
-            <p>
-              <strong>Weakness score</strong> weighted at 0.3 adjusts for accuracy. A concept with a mastery score of 0.4 gets a weakness contribution of 0.18, while a mastered concept at 1.0 contributes 0. This means weak concepts are gently prioritised over strong ones when recency is equal.
-            </p>
-            <p>
-              <strong>The DECAYING bonus</strong> of 5.0 is large enough to override everything else. A concept that is overdue for review will always be shown before new material. This prevents silent forgetting.
-            </p>
-            <p>
-              <strong>The unlock bonus</strong> of 2.0 gives newly unlocked concepts a small head-start so they appear promptly after their prerequisite is mastered, rather than waiting for natural decay to elevate them.
-            </p>
-            <p>
+            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+{`priority = (0.7 × days_since_last_seen)
++ (0.3 × (1.0 − mastery_score))
++ 5.0   if status == DECAYING
++ 2.0   if newly unlocked this session`}
+            </pre>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
               Three hard rules the scheduler enforces regardless of priority scores:
             </p>
-            <div className="rule-block">
-              A concept whose prerequisites are not all MASTERED is never surfaced, even if it somehow receives a high priority score. The prerequisite graph is the final authority.
-            </div>
-            <div className="rule-block">
-              The same concept is never shown twice in a row. After any concept is presented, its priority score is set to zero for the next selection cycle.
-            </div>
-            <div className="rule-block">
-              The scheduler targets a session composition of 70% new and practicing material, 30% review. If the review queue is empty, 100% new material is shown. If the student has many overdue reviews, the ratio can temporarily invert, but the scheduler always returns toward 70/30 as reviews are cleared.
-            </div>
+            {[
+              'A concept whose prerequisites are not all MASTERED is never surfaced.',
+              'The same concept is never shown twice in a row.',
+              'The scheduler targets a session composition of 70% new and practicing material, 30% review.',
+            ].map((rule, i) => (
+              <div
+                key={i}
+                className="border-l-2 border-mathua-border-strong pl-4 my-2 text-[0.95rem] text-mathua-secondary"
+              >
+                {rule}
+              </div>
+            ))}
           </section>
 
-          <section id="scoring" className="how-section">
-            <h2>Scoring and Ranking</h2>
-            <p>
-              Mathua tracks two separate scoring systems that serve different purposes.
+          <AsciiDivider pattern="dash" />
+
+          {/* Scoring */}
+          <section id="scoring" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              Scoring and Ranking
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              Mathua tracks two separate scoring systems:
             </p>
-            <p>
-              <strong>Topic scores</strong> are personal and never reset. They reflect the depth and quality of a student's mastery within each domain and sub-domain. Topic scores are computed as:
-            </p>
-            <div className="formula-block">
-              <span>topic_score = (mastered_concepts × 100)</span>
-              <span>+ Σ speed_bonus per mastered concept</span>
-              <span>+ domain_completion_bonus (200 pts if all concepts mastered)</span>
-              <span className="formula-label">speed_bonus per concept = max(0, (time_limit − avg_time) / time_limit × 50)</span>
-            </div>
-            <p>
-              A student who masters a concept in exactly the time limit earns zero speed bonus. A student who masters it in half the time earns 25 bonus points. Speed bonuses are capped at 50 points per concept and can never produce a negative score — a student who is slow but correct still earns their base 100 points.
-            </p>
-            <p>
-              <strong>Weekly rank scores</strong> reset every Monday at 00:00 UTC. They reflect a student's activity and performance in the current week only. The formula:
-            </p>
-            <div className="formula-block">
-              <span>weekly_score = (concepts_mastered_this_week × 100)</span>
-              <span>+ speed_bonus_this_week</span>
-              <span>+ (current_day_streak × 10)</span>
-            </div>
-            <p>
-              The leaderboard shows global rank and level-tier rank simultaneously. Level is permanent and based on all-time mastered concept count. The nine levels from Newcomer to Math Architect reflect depth of knowledge and never decrease regardless of weekly performance.
-            </p>
-            <p>
-              The purpose of separating these two systems is intentional: weekly scores create short-term motivation and competition without threatening the permanent record of what a student has learned. A bad week does not undo months of work.
-            </p>
+            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+{`topic_score = (mastered_concepts × 100)
++ Σ speed_bonus per mastered concept
++ domain_completion_bonus (200 pts if all concepts mastered)
+speed_bonus = max(0, (time_limit − avg_time) / time_limit × 50)`}
+            </pre>
+            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+{`weekly_score = (concepts_mastered_this_week × 100)
++ speed_bonus_this_week
++ (current_day_streak × 10)`}
+            </pre>
           </section>
 
-          <section id="generators" className="how-section">
-            <h2>Generator-Based Problems</h2>
-            <p>
-              Every problem in Mathua is generated on demand by a parameterised Go function — a generator. There is no static question bank. This has two consequences:
+          <AsciiDivider pattern="dash" />
+
+          {/* Generators */}
+          <section id="generators" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              Generator-Based Problems
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              Every problem in Mathua is generated on demand by a parameterised Go function — a
+              generator. There is no static question bank.
             </p>
-            <p>
-              The student cannot memorise answers. Each session produces different numbers, different coefficients, different framing. The only way to score well is to understand the underlying concept.
-            </p>
-            <p>
-              The system is infinitely scalable. Adding a new concept requires writing one generator function and one fuzz test — not authoring hundreds of individual questions.
-            </p>
-            <pre className="code-block">{`// internal/generator/arithmetic/add.go
+            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+{`// internal/generator/arithmetic/add.go
 type AddSingleGen struct{}
 
 func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
     max := int(5 + difficulty*4)
-    a   := rand.Intn(max) + 2   // never 0 or 1
+    a   := rand.Intn(max) + 2
     b   := rand.Intn(max) + 2
     ans := a + b
     return generator.Problem{
@@ -357,50 +378,76 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         Answer:      strconv.Itoa(ans),
         Explanation: fmt.Sprintf("%d + %d = %d", a, b, ans),
     }
-}`}</pre>
-            <p>
-              The <code>difficulty</code> parameter: it scales operand size from 0.0 (smallest valid inputs) to 1.0 (largest inputs the concept supports). The scheduler passes a difficulty value based on the student's current mastery score — students who are solidly practicing receive harder variations, newly unlocked concepts start at low difficulty.
-            </p>
-            <p>
-              Every generator has a fuzz test that runs 10,000 samples and asserts: no panics, no empty question strings, no unparseable answer strings, no trivially obvious problems (such as <code>0 + n</code> or <code>1 × n</code>), and that the difficulty parameter visibly changes the output distribution. A generator that fails this test cannot be merged.
+}`}
+            </pre>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">difficulty</code> parameter scales operand size from 0.0 to 1.0.
+              The scheduler passes a difficulty value based on the student's current mastery score.
             </p>
           </section>
 
-          <section id="symbolic-grading" className="how-section">
-            <h2>Symbolic Grading — v1.1</h2>
-            <p>
-              Arithmetic concepts use numeric grading — the student's input is parsed as a float64 and compared to the expected answer within a tolerance of 1×10⁻⁶. This is fast, dependency-free, and covers all concepts through pre-algebra.
+          <AsciiDivider pattern="dash" />
+
+          {/* Polynomial & Expression Grading */}
+          <section id="symbolic-grading" className="mt-12 pt-6">
+            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
+              Polynomial &amp; Expression Grading
+            </h2>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              From algebra onward, answers are expressions —{' '}
+              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">x = 4</code>,{' '}
+              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">(x+2)(x+3)</code>,{' '}
+              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">2x&#178; + 3x - 5</code>{' '}
+              — and numeric comparison is no longer sufficient. Mathua uses a pure-Go polynomial
+              grader with no external dependencies: no Python, no SymPy, no subprocess.
             </p>
-            <p>
-              From algebra onward, answers are expressions — <code>x = 4</code>, <code>2x + 1</code>, <code>(x+2)(x+3)</code> — and numeric comparison is no longer sufficient. Two expressions that look different can be algebraically identical. Mathua v1.1 introduces symbolic grading via a Python subprocess running SymPy.
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The grading router selects the grader by concept type. Arithmetic concepts go to the
+              numeric grader. Algebra concepts go to the polynomial grader, which parses the
+              student's input into a coefficient representation, normalises it, and compares against
+              the expected answer.
             </p>
-            <div className="flow-diagram">
-              <span>Go grader</span>
-              <span className="flow-arrow">→</span>
-              <span>JSON line over stdin</span>
-              <span className="flow-arrow">→</span>
-              <span>sympy_service.py</span>
-              <span className="flow-arrow">→</span>
-              <span>JSON response over stdout</span>
-              <span className="flow-arrow">→</span>
-              <span>Go grader</span>
+            <div className="flex items-center gap-2 flex-wrap my-4 text-xs">
+              <span className="text-mathua-secondary">Input</span>
+              <span className="text-mathua-muted">→</span>
+              <span className="text-mathua-secondary">Tokenizer</span>
+              <span className="text-mathua-muted">→</span>
+              <span className="text-mathua-secondary">Parser (AST)</span>
+              <span className="text-mathua-muted">→</span>
+              <span className="text-mathua-secondary">Expander / Normaliser</span>
+              <span className="text-mathua-muted">→</span>
+              <span className="bg-mathua-green text-white px-2 py-0.5 rounded font-mono text-[10px]">Match</span>
             </div>
-            <p>
-              The SymPy service is launched once at startup as a long-running subprocess. For each symbolic grading request, the Go grader writes a single JSON line to the subprocess's stdin and reads the response from stdout. The service uses <code>sympy.simplify(user - expected) == 0</code> to test algebraic equivalence.
+            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+{`// internal/grader/polynomial.go
+type PolyGrader struct{}
+
+func (g *PolyGrader) Grade(input, expected string) (bool, error) {
+    userPoly   := parsePolynomial(input)    // e.g. (x+2)(x+3) → coeffs
+    expectPoly := parsePolynomial(expected) // e.g. x^2+5x+6 → coeffs
+
+    expand(&userPoly)   // multiply out factored form
+    normalise(&userPoly)
+    normalise(&expectPoly)
+
+    return userPoly.Equals(expectPoly), nil
+}`}
+            </pre>
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              The polynomial grader handles factoring (parse and expand), simplification
+              (normalise), and equation-solving (isolate variable, compare). The same pure-Go
+              pipeline runs identically in the web server and the desktop TUI — no Python,
+              no environment dependencies, no disabled features.
             </p>
-            <pre className="code-block">{`# grading/sympy_service.py
-for line in sys.stdin:
-    req = json.loads(line)
-    try:
-        user = sympify(req['user_answer'])
-        exp  = sympify(req['expected'])
-        ok   = simplify(user - exp) == 0
-        print(json.dumps({'correct': bool(ok)}))
-    except Exception as e:
-        print(json.dumps({'correct': False, 'error': str(e)}))
-    sys.stdout.flush()`}</pre>
-            <p>
-              Symbolic grading requires Python 3.10+ and SymPy (<code>pip install sympy</code>). The desktop TUI detects the absence of Python at startup and gracefully disables symbolic concepts, showing a one-line install prompt. All arithmetic and pre-algebra concepts remain available without Python.
+            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+              For display, the TUI renders exponents using <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">^</code> notation
+              (<code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">x^2 + 5x + 6</code>)
+              while the web frontend uses KaTeX with{' '}
+              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">{'{'}^{'}'}{'{'}^{'}'}</code>{' '}
+              for proper superscripts. Every generator receives a render mode flag
+              (<code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">RenderTUI</code> or{' '}
+              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">RenderWeb</code>) so
+              output is always correct for the target display.
             </p>
           </section>
         </main>
