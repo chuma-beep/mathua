@@ -1,180 +1,131 @@
-'use client'
-
 import Link from 'next/link'
-import { useTheme } from '../../hooks/useTheme'
-import SectionHeader from '../../components/SectionHeader'
-import AsciiDivider from '../../components/AsciiDivider'
 
-const docPages = [
-  {
-    href: '/docs/architecture',
-    title: 'Architecture',
-    description: 'From counting to calculus — how the engine, scheduler, generators, graders, and storage layers compose into a single Go binary.',
-    tags: ['Engine', 'Design', 'System'],
-  },
-  {
-    href: '/docs/contributing',
-    title: 'Contributing',
-    description: 'Add a concept, write a generator, pass the validator. Everything you need to contribute to the concept graph.',
-    tags: ['Community', 'Guide', 'Concepts'],
-  },
-]
+const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+const bodyFont = "'Inter', -apple-system, sans-serif"
 
 export default function DocsIndexPage() {
-  const { theme } = useTheme()
+  const textStyle: React.CSSProperties = {
+    fontFamily: bodyFont,
+    fontSize: '0.95rem',
+    color: 'var(--text-secondary)',
+    lineHeight: 1.7,
+  }
 
   return (
-    <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="py-20 max-sm:py-12">
-        <div className="text-center">
-          <SectionHeader
-            label="Documentation"
-            title="How Mathua is built"
-          />
-          <p
-            style={{
-              fontFamily: "'Inter', -apple-system, sans-serif",
-              fontSize: '1rem',
-              color: 'var(--text-secondary)',
-              maxWidth: '600px',
-              margin: '0 auto 2rem',
-              lineHeight: 1.85,
-            }}
-          >
-            Technical documentation for the adaptive math learning engine — architecture,
-            contributing guide, and design decisions. Docs inherit the same warm palette
-            and typography as the app.
-          </p>
-        </div>
+    <div className="max-w-[720px] mx-auto px-6 max-sm:px-4 py-20 max-sm:py-12">
+      <h1 style={{
+        fontFamily: "'Cormorant Garamond', serif",
+        fontWeight: 400,
+        fontSize: '1.9rem',
+        color: 'var(--text-primary)',
+        marginBottom: '0.5rem',
+        borderBottom: '0.5px solid var(--border)',
+        paddingBottom: '0.5rem',
+      }}>
+        Documentation
+      </h1>
 
-        {/* Metric Row */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: '16px',
-          marginBottom: '80px',
-          marginTop: '24px',
-        }}>
-          {[
-            { num: '284', label: 'Concepts' },
-            { num: '16', label: 'Domains' },
-            { num: '2', label: 'Doc Pages' },
-            { num: '1', label: 'Engine' },
-          ].map(({ num, label }) => (
-            <div
-              key={label}
-              style={{
-                background: 'var(--surface)',
-                border: '0.5px solid var(--border)',
-                padding: '24px',
-                textAlign: 'center',
-              }}
-            >
-              <div style={{
-                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-                fontSize: '2rem',
-                fontWeight: 500,
-                color: 'var(--accent-gold)',
-                lineHeight: 1,
-                fontVariantNumeric: 'tabular-nums',
-              }}>
-                {num}
-              </div>
-              <div style={{
-                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-                fontSize: '11px',
-                color: 'var(--text-muted)',
-                textTransform: 'uppercase' as const,
-                letterSpacing: '0.05em',
-                marginTop: '4px',
-              }}>
-                {label}
-              </div>
+      <p style={{ ...textStyle, marginBottom: '2.5rem' }}>
+        Architecture and contributing guide for Mathua.
+      </p>
+
+      {/* Doc list */}
+      <div style={{ marginBottom: '3rem' }}>
+        <Link
+          href="/docs/architecture"
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            padding: '0.75rem 0',
+            borderBottom: '0.5px solid var(--border)',
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+        >
+          <span style={{
+            fontFamily: monoFont,
+            fontSize: '13px',
+            color: 'var(--accent-gold)',
+            minWidth: '1.5rem',
+            paddingTop: '1px',
+          }}>
+            1.
+          </span>
+          <div>
+            <div style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 400,
+              fontSize: '1.1rem',
+              color: 'var(--text-primary)',
+              marginBottom: '2px',
+            }}>
+              Architecture
             </div>
-          ))}
-        </div>
+            <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+              How the engine, scheduler, generators, graders, and storage layers compose into a single Go binary.
+            </p>
+          </div>
+        </Link>
 
-        {/* Doc cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '24px',
+        <Link
+          href="/docs/contributing"
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            padding: '0.75rem 0',
+            borderBottom: '0.5px solid var(--border)',
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+        >
+          <span style={{
+            fontFamily: monoFont,
+            fontSize: '13px',
+            color: 'var(--accent-gold)',
+            minWidth: '1.5rem',
+            paddingTop: '1px',
+          }}>
+            2.
+          </span>
+          <div>
+            <div style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 400,
+              fontSize: '1.1rem',
+              color: 'var(--text-primary)',
+              marginBottom: '2px',
+            }}>
+              Contributing
+            </div>
+            <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+              Add a concept, write a generator, pass the validator.
+            </p>
+          </div>
+        </Link>
+      </div>
+
+      <div style={{
+        borderTop: '0.5px solid var(--border)',
+        paddingTop: '3rem',
+      }}>
+        <h2 style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontWeight: 400,
+          fontSize: '1.3rem',
+          color: 'var(--text-primary)',
+          marginBottom: '1rem',
         }}>
-          {docPages.map((doc) => (
-            <Link
-              key={doc.href}
-              href={doc.href}
-              style={{
-                textDecoration: 'none',
-                background: 'var(--surface)',
-                border: '0.5px solid var(--border)',
-                padding: '32px',
-                display: 'block',
-                transition: 'border-color 0.2s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
-            >
-              <h2 style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontWeight: 400,
-                fontSize: '1.25rem',
-                color: 'var(--text-primary)',
-                margin: 0,
-                marginBottom: '8px',
-                lineHeight: 1.3,
-              }}>
-                {doc.title}
-              </h2>
-              <p style={{
-                fontFamily: "'Inter', -apple-system, sans-serif",
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                color: 'var(--text-secondary)',
-                marginBottom: '16px',
-              }}>
-                {doc.description}
-              </p>
-              <div style={{ display: 'flex', gap: '6px' }}>
-                {doc.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-                      fontSize: '10px',
-                      color: 'var(--text-muted)',
-                      border: '0.5px solid var(--border)',
-                      padding: '2px 8px',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+          Quickstart
+        </h2>
 
-      <AsciiDivider pattern="dash" />
-
-      <section className="py-20 max-sm:py-12">
-        <SectionHeader
-          label="Quickstart"
-          title="Build from source"
-        />
         <pre style={{
-          background: 'var(--surface)',
-          border: '0.5px solid var(--border)',
-          padding: '24px',
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: monoFont,
           fontSize: '13px',
           color: 'var(--text-secondary)',
           whiteSpace: 'pre',
           overflowX: 'auto',
           lineHeight: 1.6,
-          maxWidth: '600px',
-          margin: '0 auto',
+          margin: 0,
         }}>
 {`git clone https://github.com/chuma-beep/mathua.git
 cd mathua
@@ -186,19 +137,18 @@ go build ./cmd/mathua
 # Run the web server (requires Postgres)
 DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
         </pre>
+
         <p style={{
-          fontFamily: "'Inter', -apple-system, sans-serif",
+          fontFamily: bodyFont,
           fontStyle: 'italic',
           fontSize: '0.9rem',
           color: 'var(--text-muted)',
-          textAlign: 'center',
-          marginTop: '16px',
+          marginTop: '1rem',
           lineHeight: 1.7,
         }}>
-          Requirements: Go 1.21+. For symbolic math grading (algebra concepts in future):
-          Python 3.10+ with SymPy.
+          Requirements: Go 1.21+
         </p>
-      </section>
+      </div>
     </div>
   )
 }
