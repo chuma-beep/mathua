@@ -42,7 +42,7 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
   )
 }
 
-const headingFont = "'JetBrains Mono', 'Fira Code', monospace"
+const headingFont = "'DM Serif Display', serif"
 const bodyFont = "'JetBrains Mono', 'Fira Code', monospace"
 const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 

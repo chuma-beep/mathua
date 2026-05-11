@@ -13,7 +13,7 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       <div
         style={{
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: "'DM Serif Display', serif",
           fontSize: '1rem',
           color: 'var(--text-secondary)',
           marginBottom: '0.75rem',

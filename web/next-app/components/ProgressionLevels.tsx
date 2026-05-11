@@ -15,7 +15,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
     <div className={className}>
       <h3
         style={{
-          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontFamily: "'DM Serif Display', serif",
           fontWeight: 400,
           fontSize: '1.1rem',
           color: 'var(--text-primary)',
@@ -38,7 +38,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
             >
               <td
                 style={{
-                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontFamily: "'DM Serif Display', serif",
                   fontSize: '13px',
                   color: 'var(--accent-gold)',
                   padding: '8px 12px 8px 0',
@@ -50,7 +50,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
               </td>
               <td
                 style={{
-                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontFamily: "'DM Serif Display', serif",
                   fontSize: '1rem',
                   color: 'var(--text-primary)',
                   padding: '8px 0',
@@ -61,7 +61,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
               </td>
               <td
                 style={{
-                  fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                  fontFamily: "'DM Serif Display', serif",
                   fontSize: '12px',
                   color: 'var(--text-muted)',
                   textAlign: 'right',

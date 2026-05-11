@@ -30,7 +30,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        serif: ['DM Serif Display', 'serif'],
         sans: ['JetBrains Mono', 'Fira Code', 'monospace'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
