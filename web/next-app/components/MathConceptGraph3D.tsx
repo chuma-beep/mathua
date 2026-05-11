@@ -106,6 +106,10 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
   return domainColor(node.domain, theme)
 }
 
+const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+const serifFont = "'EB Garamond', Garamond, Georgia, serif"
+const bodyFont = "'Source Serif 4', Georgia, serif"
+
 const NodeMesh = React.memo(function NodeMesh({
   node,
   isActive,
@@ -171,19 +175,19 @@ const NodeMesh = React.memo(function NodeMesh({
       {isHovered && (
         <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 1000 }}>
           <div style={{
-            background: 'var(--bg-card)',
-            border: '1px solid var(--border)',
-            borderRadius: '8px',
+            background: 'var(--bg)',
+            border: '0.5px solid var(--border)',
+            borderRadius: 0,
             padding: isMobile ? '10px 14px' : '8px 12px',
             whiteSpace: 'nowrap',
             minWidth: 'max-content',
             maxWidth: isMobile ? '220px' : '240px',
             boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
           }}>
-            <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontWeight: 600 }}>{node.name}</div>
-            <div style={{ color, fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '3px' }}>{statusLabel}</div>
+            <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
+            <div style={{ color, fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
             {node.status && (
-              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '10px' : '9px', marginTop: '2px', textTransform: 'uppercase' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '10px' : '9px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
                 {node.status} {node.onPath ? '· on path' : ''}
               </div>
             )}
@@ -380,36 +384,35 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
 
   return (
     <div style={{
-      background: 'var(--bg-card)',
-      borderTop: '1px solid var(--border)',
-      padding: isMobile ? '0.5rem' : '0.5rem 1rem',
+      background: 'transparent',
+      borderTop: '0.5px solid var(--border)',
+      padding: isMobile ? '0.5rem' : '0.75rem 1rem',
+      borderRadius: 0,
     }}>
-      <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase' as const }}>selected concept</div>
-      <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '18px', marginTop: '4px' }}>{concept.label}</div>
+      <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', fontFamily: monoFont }}>selected concept</div>
+      <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '18px', marginTop: '4px', fontFamily: serifFont, fontWeight: 400 }}>{concept.label}</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' as const }}>
-        <span style={{ background: 'var(--meta-bg)', color, fontSize: isMobile ? '10px' : '11px', padding: '2px 8px', borderRadius: '4px' }}>{concept.domain}</span>
+        <span style={{ color, fontSize: isMobile ? '10px' : '11px', fontFamily: monoFont }}>● {concept.domain}</span>
         {status && (
           <span style={{
-            background: 'var(--meta-bg)',
-            color: status === 'mastered' ? '#4db8a0' : status === 'learning' ? '#e8a849' : 'var(--text-muted)',
+            color: status === 'mastered' ? 'var(--accent-teal)' : status === 'learning' ? '#e8a849' : 'var(--text-muted)',
             fontSize: isMobile ? '10px' : '11px',
-            padding: '2px 8px',
-            borderRadius: '4px',
-            textTransform: 'uppercase' as const,
+            textTransform: 'uppercase',
+            fontFamily: monoFont,
           }}>
             {status}
           </span>
         )}
         {onPath && (
-          <span style={{ background: 'var(--meta-bg)', color: '#c8a96e', fontSize: isMobile ? '10px' : '11px', padding: '2px 8px', borderRadius: '4px' }}>on path</span>
+          <span style={{ color: 'var(--accent-gold)', fontSize: isMobile ? '10px' : '11px', fontFamily: monoFont }}>on path</span>
         )}
       </div>
       {prereqConcepts.length > 0 && (
         <div style={{ marginTop: '8px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase' as const, marginBottom: '4px' }}>prerequisites</div>
+          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>prerequisites</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
             {prereqConcepts.map(p => (
-              <span key={p.id} style={{ background: 'var(--meta-bg)', color: 'var(--text-secondary)', fontSize: '10px', padding: '2px 8px', borderRadius: '12px' }}>
+              <span key={p.id} style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: monoFont }}>
                 {p.label}
               </span>
             ))}
@@ -418,10 +421,10 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
       )}
       {unlockedBy.length > 0 && (
         <div style={{ marginTop: '6px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase' as const, marginBottom: '4px' }}>unlocks</div>
+          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>unlocks</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
             {unlockedBy.map(u => (
-              <span key={u.id} style={{ background: 'var(--meta-bg)', color: 'var(--text-secondary)', fontSize: '10px', padding: '2px 8px', borderRadius: '12px' }}>
+              <span key={u.id} style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: monoFont }}>
                 {u.label}
               </span>
             ))}
@@ -478,6 +481,8 @@ export default function MathConceptGraph3D({
 
   const [activeId, setActiveId] = useState(() => nodes[0]?.id ?? '')
 
+  const bgColor = theme === 'dark' ? '#0b0f1a' : '#fefcf4'
+
   useEffect(() => {
     if (nodes.length > 0 && !nodes.find(n => n.id === activeId)) {
       setActiveId(nodes[0].id)
@@ -489,16 +494,16 @@ export default function MathConceptGraph3D({
       <div style={{
         height: isMobile ? '320px' : '520px',
         width: '100%',
-        borderRadius: 'var(--radius-sm)',
+        borderRadius: 0,
         overflow: 'hidden',
-        border: '1px solid var(--border)',
+        border: '0.5px solid var(--border)',
       }}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
           style={{ background: 'transparent' }}
           dpr={[1, 2]}
         >
-          <color attach="background" args={[theme === 'dark' ? '#0b0f1a' : '#f5f5f5']} />
+          <color attach="background" args={[bgColor]} />
           <GraphScene
             nodes={nodes}
             links={links}

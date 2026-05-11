@@ -17,22 +17,88 @@ const sections = [
 
 function NavSidebar({ activeSection }: { activeSection: string }) {
   return (
-    <nav className="w-[220px] flex-shrink-0 sticky top-[100px] h-fit max-md:fixed max-md:top-[57px] max-md:left-0 max-md:right-0 max-md:w-full max-md:bg-[var(--bg)] max-md:border-b max-md:border-mathua-border max-md:flex max-md:overflow-x-auto max-md:p-[8px_16px] max-md:gap-2 max-md:z-[99]">
+    <nav className="w-[220px] flex-shrink-0 sticky top-[100px] h-fit max-md:fixed max-md:top-[57px] max-md:left-0 max-md:right-0 max-md:w-full max-md:z-[99] max-md:flex max-md:overflow-x-auto max-md:p-[8px_16px] max-md:gap-2"
+      style={{ background: 'var(--bg)' }}
+    >
       {sections.map((section) => (
         <a
           key={section.id}
           href={`#${section.id}`}
-          className={`block text-[13px] py-2 px-3 border-l-2 mb-1 transition-colors max-md:border-l-0 max-md:border-b-2 max-md:mb-0 max-md:whitespace-nowrap ${
-            activeSection === section.id
-              ? 'text-mathua-blue border-l-mathua-blue max-md:border-b-mathua-blue'
-              : 'text-mathua-muted border-l-transparent max-md:border-b-transparent hover:text-mathua-secondary'
-          }`}
+          className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap"
+          style={{
+            fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+            color: activeSection === section.id ? 'var(--accent-gold)' : 'var(--text-muted)',
+            borderLeft: activeSection === section.id ? '2px solid var(--accent-gold)' : '2px solid transparent',
+            textDecoration: 'none',
+            borderRadius: 0,
+            background: 'transparent',
+          }}
         >
           {section.label}
         </a>
       ))}
     </nav>
   )
+}
+
+const headingFont = "'EB Garamond', Garamond, Georgia, serif"
+const bodyFont = "'Source Serif 4', Georgia, serif"
+const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
+
+const h2Style: React.CSSProperties = {
+  fontFamily: headingFont,
+  fontWeight: 400,
+  fontSize: '1.7rem',
+  color: 'var(--text-primary)',
+  borderBottom: '0.5px solid var(--border)',
+  paddingBottom: '0.5rem',
+  marginBottom: '1.5rem',
+  letterSpacing: '-0.01em',
+}
+
+const bodyStyle: React.CSSProperties = {
+  fontFamily: bodyFont,
+  fontSize: '1rem',
+  color: 'var(--text-secondary)',
+  lineHeight: 1.85,
+  marginBottom: '1rem',
+}
+
+const codeBlockStyle: React.CSSProperties = {
+  background: 'transparent',
+  border: 'none',
+  borderLeft: '2px solid var(--accent-gold)',
+  borderRadius: 0,
+  padding: '0.5rem 0 0.5rem 1.5rem',
+  fontFamily: monoFont,
+  fontSize: '13px',
+  color: 'var(--text-secondary)',
+  whiteSpace: 'pre',
+  overflowX: 'auto',
+  lineHeight: 1.6,
+  margin: '1rem 0',
+}
+
+const tableHeaderStyle: React.CSSProperties = {
+  fontFamily: headingFont,
+  fontWeight: 400,
+  fontSize: '0.9rem',
+  textTransform: 'uppercase' as const,
+  letterSpacing: '0.1em',
+  color: 'var(--accent-gold)',
+  padding: '10px 14px 10px 0',
+  borderBottom: '1px solid var(--accent-gold)',
+  textAlign: 'left' as const,
+  background: 'transparent',
+}
+
+const tableCellStyle: React.CSSProperties = {
+  fontFamily: bodyFont,
+  fontSize: '1rem',
+  color: 'var(--text-secondary)',
+  padding: '10px 14px 10px 0',
+  borderBottom: '0.5px solid var(--border)',
+  background: 'transparent',
 }
 
 export default function HowItWorksPage() {
@@ -87,26 +153,65 @@ export default function HowItWorksPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-mathua-bg">
+    <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
       <button
         onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] bg-mathua-surface border border-mathua-border-strong text-mathua-primary px-3.5 py-2 rounded-md font-mono text-xs cursor-pointer transition-all duration-200 hover:border-mathua-blue hover:text-mathua-blue"
+        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
+        style={{ borderRadius: 0, background: 'var(--bg)' }}
         aria-label="Toggle theme"
       >
         {theme === 'dark' ? '\u2600' : '\u263E'}
       </button>
 
-      <header className="flex justify-between items-center p-[16px_24px] border-b border-mathua-border sticky top-0 bg-mathua-bg z-[100]">
-        <Link href="/" className="text-lg font-semibold text-mathua-blue">
+      <header
+        className="flex justify-between items-center p-[16px_24px] sticky top-0 z-[100]"
+        style={{
+          borderBottom: '0.5px solid var(--border)',
+          background: 'rgba(11, 15, 26, 0.95)',
+          backdropFilter: 'blur(8px)',
+        }}
+      >
+        <Link
+          href="/"
+          className="text-lg font-semibold"
+          style={{
+            fontFamily: headingFont,
+            fontWeight: 400,
+            fontSize: '1.2rem',
+            color: 'var(--accent-gold)',
+            textDecoration: 'none',
+          }}
+        >
           Mathua
         </Link>
-        <nav className="flex gap-4">
-          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+        <nav className="flex gap-4 items-center">
+          <Link
+            href="/"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              letterSpacing: '0.04em',
+              color: 'var(--text-muted)',
+              textDecoration: 'none',
+            }}
+          >
             Home
           </Link>
-          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <a
+            href="/"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              letterSpacing: '0.04em',
+              background: 'var(--accent-gold)',
+              color: 'var(--bg)',
+              padding: '6px 16px',
+              borderRadius: '2px',
+              textDecoration: 'none',
+            }}
+          >
             Web App
-          </Link>
+          </a>
         </nav>
       </header>
 
@@ -114,11 +219,22 @@ export default function HowItWorksPage() {
         <NavSidebar activeSection={activeSection} />
 
         <main className="max-w-[720px] flex-1 max-md:mt-20">
-          <section id="intro" className="mb-12 pb-8 border-b border-mathua-border">
-            <h1 className="font-serif text-[1.6rem] font-semibold text-mathua-blue mb-4">
+          <section id="intro" className="mb-12 pb-8" style={{ borderBottom: '0.5px solid var(--border)' }}>
+            <h1
+              style={{
+                fontFamily: headingFont,
+                fontWeight: 400,
+                fontSize: '1.9rem',
+                color: 'var(--text-primary)',
+                marginBottom: '1rem',
+                letterSpacing: '-0.01em',
+                borderBottom: '0.5px solid var(--border)',
+                paddingBottom: '0.5rem',
+              }}
+            >
               How Mathua Works
             </h1>
-            <p className="text-mathua-secondary text-base leading-relaxed">
+            <p style={bodyStyle}>
               The engine behind the learning — a technical explanation of the concept graph, student
               model, diagnostic algorithm, task selection, and scoring system.
             </p>
@@ -126,21 +242,19 @@ export default function HowItWorksPage() {
 
           {/* Concept Graph */}
           <section id="concept-graph" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              The Concept Graph
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>The Concept Graph</h2>
+            <p style={bodyStyle}>
               Mathua represents all mathematical knowledge as a directed acyclic graph — a DAG. Each
               node in the graph is an atomic concept: the smallest unit of mathematical knowledge
               that can be practiced and mastered independently. Each directed edge is a prerequisite
               relationship. If concept B has an edge from concept A, then A must be mastered before
               B is ever shown to the student.
             </p>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               The graph currently contains 284 concepts spanning 16 domains — from early Counting
               through Calculus, Linear Algebra, and Topology.
             </p>
-            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+            <pre style={codeBlockStyle}>
 {`{
   "id": "frac.add.diff",
   "label": "Add fractions with different denominators",
@@ -150,19 +264,20 @@ export default function HowItWorksPage() {
   "mastery_threshold": { "streak": 5, "avg_time_seconds": 18.0 }
 }`}
             </pre>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
-              The graph is stored as a flat JSON file — <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">data/concepts.json</code> — and
+            <p style={bodyStyle}>
+              The graph is stored as a flat JSON file —{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code> — and{' '}
               is community-editable. A graph validator runs on every pull request and rejects the
               change if it introduces a cycle.
             </p>
-            <div className="flex items-center gap-3 flex-wrap my-6">
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">arith.factor.gcf</span>
-              <span className="text-mathua-border-strong">→</span>
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">arith.factor.lcm</span>
-              <span className="text-mathua-border-strong">→</span>
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">frac.add.diff</span>
-              <span className="text-mathua-border-strong">→</span>
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-blue font-mono text-xs px-3 py-1 rounded-full">frac.mixed.add</span>
+            <div className="flex items-center gap-2 flex-wrap my-6">
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>arith.factor.gcf</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>arith.factor.lcm</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>frac.add.diff</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>frac.mixed.add</span>
             </div>
           </section>
 
@@ -170,36 +285,35 @@ export default function HowItWorksPage() {
 
           {/* Student Model */}
           <section id="student-model" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              The Student Model
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>The Student Model</h2>
+            <p style={bodyStyle}>
               Every concept in the graph has a state for each student:
             </p>
-            <div className="flex items-center gap-2 flex-wrap my-4">
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">UNSEEN</span>
-              <span className="text-mathua-muted text-xs">→</span>
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">LEARNING</span>
-              <span className="text-mathua-muted text-xs">→</span>
-              <span className="bg-mathua-surface border border-mathua-border text-mathua-muted font-mono text-[10px] px-2.5 py-1 rounded">PRACTICING</span>
-              <span className="text-mathua-muted text-xs">→</span>
-              <span className="bg-mathua-green text-white border border-mathua-green font-mono text-[10px] px-2.5 py-1 rounded">MASTERED</span>
-              <span className="text-mathua-muted text-xs">→</span>
-              <span className="bg-mathua-gold text-[var(--bg)] border border-mathua-gold font-mono text-[10px] px-2.5 py-1 rounded">DECAYING</span>
+            <div className="flex items-center gap-1.5 flex-wrap my-4">
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>UNSEEN</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>LEARNING</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>PRACTICING</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>MASTERED</span>
+              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--accent-teal)' }}>DECAYING</span>
             </div>
             <div className="overflow-x-auto my-4">
-              <table className="bg-mathua-surface border border-mathua-border border-collapse w-full text-[13px]">
+              <table
+                style={{
+                  width: '100%',
+                  borderCollapse: 'collapse',
+                  border: 'none',
+                  background: 'transparent',
+                }}
+              >
                 <thead>
-                  <tr>
-                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
-                      Concept
-                    </th>
-                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
-                      Streak required
-                    </th>
-                    <th className="bg-mathua-surface-elevated text-mathua-blue font-mono text-[11px] uppercase p-[10px_14px] text-left border-b border-mathua-border">
-                      Time limit
-                    </th>
+                  <tr style={{ background: 'transparent' }}>
+                    <th style={tableHeaderStyle}>Concept</th>
+                    <th style={tableHeaderStyle}>Streak required</th>
+                    <th style={tableHeaderStyle}>Time limit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -210,16 +324,10 @@ export default function HowItWorksPage() {
                     ['prealg.eq.one_step_add', '5', '12s'],
                     ['arith.div.long', '5', '20s'],
                   ].map(([concept, streak, time], i) => (
-                    <tr key={i} className={i % 2 === 0 ? 'bg-mathua-surface-elevated' : ''}>
-                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
-                        {concept}
-                      </td>
-                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
-                        {streak}
-                      </td>
-                      <td className="text-mathua-secondary p-[10px_14px] border-b border-mathua-border">
-                        {time}
-                      </td>
+                    <tr key={i} style={{ background: 'transparent' }}>
+                      <td style={tableCellStyle}>{concept}</td>
+                      <td style={tableCellStyle}>{streak}</td>
+                      <td style={tableCellStyle}>{time}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -231,14 +339,12 @@ export default function HowItWorksPage() {
 
           {/* Spaced Repetition */}
           <section id="spaced-repetition" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              Spaced Repetition
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>Spaced Repetition</h2>
+            <p style={bodyStyle}>
               When a concept reaches MASTERED, Mathua immediately schedules its next review using a
               simplified SM-2 algorithm.
             </p>
-            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+            <pre style={codeBlockStyle}>
 {`first review:   1 day
 second review:  3 days
 third review:  interval × ease_factor
@@ -246,7 +352,7 @@ ease_factor: starts at 2.5
 decreases by 0.2 on each failed review
 minimum value: 1.3`}
             </pre>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               Reviews are never presented as a separate "review mode." They are woven into every
               session by the scheduler, which manages the 70/30 balance between new material and
               review automatically.
@@ -257,10 +363,8 @@ minimum value: 1.3`}
 
           {/* Diagnostic */}
           <section id="diagnostic" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              The Diagnostic Algorithm
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>The Diagnostic Algorithm</h2>
+            <p style={bodyStyle}>
               When a student first opens Mathua, they enter a Computerised Adaptive Testing (CAT)
               session. The goal is to locate the student's knowledge frontier using as few questions
               as possible.
@@ -275,19 +379,38 @@ minimum value: 1.3`}
               ].map((step, i) => (
                 <li
                   key={i}
-                  className="text-mathua-secondary text-[0.95rem] leading-[1.7] mb-3 pl-9 relative before:content-[counter(step)] before:absolute before:left-0 before:text-mathua-blue before:font-mono before:text-[13px]"
-                  style={{ counterIncrement: 'step-counter 1' }}
+                  style={{
+                    fontFamily: bodyFont,
+                    fontSize: '0.95rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.7,
+                    marginBottom: '0.75rem',
+                    paddingLeft: '2.25rem',
+                    position: 'relative',
+                    counterIncrement: 'step-counter 1',
+                  }}
                 >
+                  <span
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      fontFamily: monoFont,
+                      fontSize: '13px',
+                      color: 'var(--accent-gold)',
+                    }}
+                  >
+                    {roman(i + 1)}.
+                  </span>
                   {step}
                 </li>
               ))}
             </ol>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               The diagnostic takes 20–35 questions for most students. Without this algorithm, a
               naive assessment of 284 concepts would require up to 284 questions. The CAT approach,
               combining binary search with the topological ordering, reduces this by roughly 90%.
             </p>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               The diagnostic can be retaken at any time from the settings menu. Retaking does not
               delete progress — it creates a new knowledge estimate that is merged with existing
               data, always preferring the more optimistic estimate so students are never penalised
@@ -300,20 +423,18 @@ minimum value: 1.3`}
 
           {/* Scheduler */}
           <section id="scheduler" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              The Task Selection Algorithm
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>The Task Selection Algorithm</h2>
+            <p style={bodyStyle}>
               The scheduler runs after every question is submitted. It selects the next concept by
               computing a priority score for every eligible concept.
             </p>
-            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+            <pre style={codeBlockStyle}>
 {`priority = (0.7 × days_since_last_seen)
 + (0.3 × (1.0 − mastery_score))
 + 5.0   if status == DECAYING
 + 2.0   if newly unlocked this session`}
             </pre>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               Three hard rules the scheduler enforces regardless of priority scores:
             </p>
             {[
@@ -323,7 +444,15 @@ minimum value: 1.3`}
             ].map((rule, i) => (
               <div
                 key={i}
-                className="border-l-2 border-mathua-border-strong pl-4 my-2 text-[0.95rem] text-mathua-secondary"
+                style={{
+                  fontFamily: bodyFont,
+                  fontSize: '0.95rem',
+                  color: 'var(--text-secondary)',
+                  lineHeight: 1.7,
+                  borderLeft: '2px solid var(--accent-gold)',
+                  paddingLeft: '1rem',
+                  margin: '0.5rem 0',
+                }}
               >
                 {rule}
               </div>
@@ -334,19 +463,17 @@ minimum value: 1.3`}
 
           {/* Scoring */}
           <section id="scoring" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              Scoring and Ranking
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>Scoring and Ranking</h2>
+            <p style={bodyStyle}>
               Mathua tracks two separate scoring systems:
             </p>
-            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+            <pre style={codeBlockStyle}>
 {`topic_score = (mastered_concepts × 100)
 + Σ speed_bonus per mastered concept
 + domain_completion_bonus (200 pts if all concepts mastered)
 speed_bonus = max(0, (time_limit − avg_time) / time_limit × 50)`}
             </pre>
-            <pre className="bg-mathua-code border border-mathua-border border-l-[2px] border-l-mathua-blue rounded-r-md p-5 font-mono text-[13px] text-mathua-secondary whitespace-pre leading-relaxed my-4">
+            <pre style={codeBlockStyle}>
 {`weekly_score = (concepts_mastered_this_week × 100)
 + speed_bonus_this_week
 + (current_day_streak × 10)`}
@@ -357,14 +484,16 @@ speed_bonus = max(0, (time_limit − avg_time) / time_limit × 50)`}
 
           {/* Generators */}
           <section id="generators" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              Generator-Based Problems
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>Generator-Based Problems</h2>
+            <p style={bodyStyle}>
               Every problem in Mathua is generated on demand by a parameterised Go function — a
               generator. There is no static question bank.
             </p>
-            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+            <pre style={{
+              ...codeBlockStyle,
+              whiteSpace: 'pre',
+              overflowX: 'auto',
+            }}>
 {`// internal/generator/arithmetic/add.go
 type AddSingleGen struct{}
 
@@ -380,8 +509,8 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
     }
 }`}
             </pre>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
-              The <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">difficulty</code> parameter scales operand size from 0.0 to 1.0.
+            <p style={bodyStyle}>
+              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
               The scheduler passes a difficulty value based on the student's current mastery score.
             </p>
           </section>
@@ -390,35 +519,39 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 
           {/* Polynomial & Expression Grading */}
           <section id="symbolic-grading" className="mt-12 pt-6">
-            <h2 className="font-serif text-[1.6rem] font-medium text-mathua-blue border-b border-mathua-border pb-2 mb-6">
-              Polynomial &amp; Expression Grading
-            </h2>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <h2 style={h2Style}>Polynomial &amp; Expression Grading</h2>
+            <p style={bodyStyle}>
               From algebra onward, answers are expressions —{' '}
-              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">x = 4</code>,{' '}
-              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">(x+2)(x+3)</code>,{' '}
-              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">2x&#178; + 3x - 5</code>{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x = 4</code>,{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>(x+2)(x+3)</code>,{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>2x&#178; + 3x - 5</code>{' '}
               — and numeric comparison is no longer sufficient. Mathua uses a pure-Go polynomial
               grader with no external dependencies: no Python, no SymPy, no subprocess.
             </p>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               The grading router selects the grader by concept type. Arithmetic concepts go to the
               numeric grader. Algebra concepts go to the polynomial grader, which parses the
               student's input into a coefficient representation, normalises it, and compares against
               the expected answer.
             </p>
-            <div className="flex items-center gap-2 flex-wrap my-4 text-xs">
-              <span className="text-mathua-secondary">Input</span>
-              <span className="text-mathua-muted">→</span>
-              <span className="text-mathua-secondary">Tokenizer</span>
-              <span className="text-mathua-muted">→</span>
-              <span className="text-mathua-secondary">Parser (AST)</span>
-              <span className="text-mathua-muted">→</span>
-              <span className="text-mathua-secondary">Expander / Normaliser</span>
-              <span className="text-mathua-muted">→</span>
-              <span className="bg-mathua-green text-white px-2 py-0.5 rounded font-mono text-[10px]">Match</span>
+            <div className="flex items-center gap-2 flex-wrap my-4">
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Input</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Tokenizer</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Parser (AST)</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Expander / Normaliser</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
+              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--accent-teal)' }}>
+                Match
+              </span>
             </div>
-            <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-[13px] text-mathua-primary whitespace-pre overflow-x-auto my-4">
+            <pre style={{
+              ...codeBlockStyle,
+              whiteSpace: 'pre',
+              overflowX: 'auto',
+            }}>
 {`// internal/grader/polynomial.go
 type PolyGrader struct{}
 
@@ -433,20 +566,21 @@ func (g *PolyGrader) Grade(input, expected string) (bool, error) {
     return userPoly.Equals(expectPoly), nil
 }`}
             </pre>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
+            <p style={bodyStyle}>
               The polynomial grader handles factoring (parse and expand), simplification
               (normalise), and equation-solving (isolate variable, compare). The same pure-Go
               pipeline runs identically in the web server and the desktop TUI — no Python,
               no environment dependencies, no disabled features.
             </p>
-            <p className="text-mathua-secondary text-base leading-[1.85] mb-4">
-              For display, the TUI renders exponents using <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">^</code> notation
-              (<code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">x^2 + 5x + 6</code>)
+            <p style={bodyStyle}>
+              For display, the TUI renders exponents using{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>^</code> notation{' '}
+              (<code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x^2 + 5x + 6</code>)
               while the web frontend uses KaTeX with{' '}
-              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">{'{'}^{'}'}{'{'}^{'}'}</code>{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>{'{'}^{'}'}{'{'}^{'}'}</code>{' '}
               for proper superscripts. Every generator receives a render mode flag
-              (<code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">RenderTUI</code> or{' '}
-              <code className="bg-mathua-surface-elevated px-1.5 py-0.5 rounded font-mono text-[0.9em] text-mathua-blue">RenderWeb</code>) so
+              (<code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>RenderTUI</code> or{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>RenderWeb</code>) so
               output is always correct for the target display.
             </p>
           </section>
@@ -454,4 +588,9 @@ func (g *PolyGrader) Grade(input, expected string) (bool, error) {
       </div>
     </div>
   )
+}
+
+function roman(n: number): string {
+  const r = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+  return r[n - 1] ?? String(n)
 }

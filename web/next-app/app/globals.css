@@ -2,27 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
 @layer base {
   .dark {
-    --bg: #0a0f1a;
+    --bg: #0b0f1a;
     --surface: #0f172a;
     --surface-elevated: #1e293b;
     --surface-highlight: #334155;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-primary: #e8e2d5;
+    --text-secondary: #9fa8b4;
+    --text-muted: #5a6577;
     --accent-gold: #c8a96e;
     --accent-gold-hover: #d4b87a;
+    --accent-teal: #4db8a0;
     --accent-blue: #3b82f6;
     --accent-blue-hover: #60a5fa;
     --accent-green: #10b981;
     --accent-red: #ef4444;
-    --border: #334155;
-    --border-strong: #475569;
+    --border: #1e2d45;
+    --border-strong: #2a3f5f;
     --code-bg: #1e293b;
-    --division: #1e293b;
+    --division: #1e2d45;
   }
 
   :root {
@@ -35,6 +34,7 @@
     --text-muted: #94a3b8;
     --accent-gold: #b8933e;
     --accent-gold-hover: #a07a2e;
+    --accent-teal: #3a9a8a;
     --accent-blue: #2563eb;
     --accent-blue-hover: #1d4ed8;
     --accent-green: #059669;
@@ -57,12 +57,27 @@
 
   body {
     background: var(--bg);
-    color: var(--text-primary);
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
+    color: var(--text-secondary);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.85;
+    letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
     transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'EB Garamond', 'Garamond', Georgia, serif;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
   }
 
   a {
@@ -70,14 +85,14 @@
     text-decoration: none;
   }
   a:hover {
-    color: var(--accent-blue);
+    color: var(--accent-gold);
   }
 }
 
 @layer components {
   .ascii-text {
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--accent-blue);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    color: var(--accent-gold);
     white-space: pre;
     overflow-x: auto;
     line-height: 1.6;
@@ -85,33 +100,10 @@
   }
 
   .ascii-divider {
-    @apply font-mono text-mathua-muted text-xs text-center select-none;
-  }
-
-  .section-label {
-    @apply font-mono text-[11px] uppercase tracking-[0.15em] text-mathua-muted block mb-2;
-  }
-
-  .pipeline-state {
-    @apply font-mono text-[11px] px-4 py-2.5 rounded border tracking-[0.05em];
-    background: var(--surface);
-    color: var(--text-secondary);
-    border-color: var(--border);
-  }
-
-  .pipeline-state.mastered {
-    background: var(--accent-green);
-    color: #fff;
-    border-color: var(--accent-green);
-  }
-
-  .pipeline-state.decaying {
-    background: var(--accent-gold);
-    color: var(--bg);
-    border-color: var(--accent-gold);
-  }
-
-  .pipeline-arrow {
-    @apply text-mathua-muted text-sm;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    user-select: none;
   }
 }

@@ -2,15 +2,12 @@
 
 import dynamic from 'next/dynamic'
 import { useState, useEffect } from 'react'
-import AsciiBanner from '../components/AsciiBanner'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
-import InfoCard from '../components/InfoCard'
 import Pipeline from '../components/Pipeline'
 import FormulaBlock from '../components/FormulaBlock'
 import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
-import Button from '../components/Button'
 import Footer from '../components/Footer'
 import conceptsData from '../data/concepts.json'
 
@@ -20,34 +17,21 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
     <div
       style={{
         height: '520px',
-        background: 'var(--surface)',
-        borderRadius: '8px',
+        background: 'transparent',
+        borderRadius: 0,
         border: '0.5px solid var(--border)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         color: 'var(--text-muted)',
-        fontSize: '14px',
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: '13px',
       }}
     >
       Loading graph...
     </div>
   ),
 })
-
-const ASCII_HERO = `      ┌─────────────────────────────────────────┐
-      │     ╱╲  ╱╲  ╱╲    ╱╲  ╱╲  ╱╲          │
-      │    ╱  ╲╱  ╲╱  ╲  ╱  ╲╱  ╲╱  ╲         │
-      │   ╱           ╲╱             ╲        │
-      │  ╱    ∂/∂x     ░░░░    ∫ f(x)  ╲       │
-      │ ╱    lim Σ      ░░░░     ∇·F     ╲      │
-      │╲    n→∞         ░░░░              ╱     │
-      │ ╲               ░░░░             ╱      │
-      │  ╲    e^{iπ}+1  ░░░░  det(A)   ╱       │
-      │   ╲             ░░░░           ╱        │
-      │    ╲           ░░░░           ╱         │
-      │     ╲   MATHEMATICAL MASTERY  ╱          │
-      │      └─────────────────────────┘         │`
 
 const PIPELINE_STATES = [
   { label: 'UNSEEN', status: 'unseen' as const },
@@ -147,76 +131,156 @@ export default function HomePage() {
   }
 
   if (!mounted) {
-    return <div style={{ background: '#0a0f1a', minHeight: '100vh' }} />
+    return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
   }
+
+  const headingFont = "'EB Garamond', Garamond, Georgia, serif"
+  const bodyFont = "'Source Serif 4', Georgia, serif"
+  const monoFont = "'JetBrains Mono', 'Fira Code', monospace"
 
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       {/* Theme Toggle */}
       <button
         onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] bg-mathua-surface border border-mathua-border-strong text-mathua-primary px-3.5 py-2 rounded-md font-mono text-xs cursor-pointer transition-all duration-200 hover:border-mathua-blue hover:text-mathua-blue"
+        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
+        style={{ borderRadius: 0, background: 'var(--bg)' }}
         aria-label="Toggle theme"
       >
         {theme === 'dark' ? '\u2600' : '\u263E'}
       </button>
 
       {/* ── Hero ── */}
-      <section className="py-20 max-sm:py-12 text-center bg-mathua-bg">
+      <section
+        className="py-20 max-sm:py-12 text-center"
+        style={{ background: 'var(--bg)' }}
+      >
         <div className="flex justify-end mb-6">
-          <a href="/how-it-works" className="border border-mathua-border-strong text-mathua-primary rounded-md h-10 px-6 inline-flex items-center text-[13px] font-medium transition-all duration-200 hover:border-mathua-blue hover:text-mathua-blue">
+          <a
+            href="/how-it-works"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              color: 'var(--text-muted)',
+              textDecoration: 'none',
+              padding: '6px 16px',
+              border: '0.5px solid var(--border-strong)',
+              borderRadius: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              height: '36px',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-gold)'; e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
+          >
             How it works
           </a>
         </div>
 
-        <h1 className="font-serif font-semibold text-[56px] max-sm:text-[32px] leading-tight tracking-[-0.03em] text-mathua-primary mb-4">
+        <h1
+          style={{
+            fontFamily: headingFont,
+            fontWeight: 400,
+            fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+            lineHeight: 1.2,
+            color: 'var(--text-primary)',
+            marginBottom: '1rem',
+            letterSpacing: '-0.01em',
+          }}
+        >
           Master the foundation.
           <br />
           Earn the abstraction.
         </h1>
-        <p className="text-mathua-secondary text-base max-w-[600px] mx-auto mb-8 leading-relaxed">
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontSize: '1.1rem',
+            color: 'var(--text-secondary)',
+            maxWidth: '600px',
+            margin: '0 auto 2rem',
+            lineHeight: 1.85,
+          }}
+        >
           Mathua is an open-source adaptive math learning engine. It never lets you advance until
           you have truly mastered the prerequisite — both speed and accuracy must be proven.
         </p>
 
-        <div className="flex gap-3 justify-center items-center mb-8 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
+        <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
           <a
             href="#"
-            className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-10 px-6 inline-flex items-center justify-center text-[13px] font-medium transition-all duration-200"
+            style={{
+              background: 'var(--accent-gold)',
+              color: 'var(--bg)',
+              fontFamily: monoFont,
+              fontSize: '13px',
+              padding: '10px 22px',
+              border: 'none',
+              borderRadius: '2px',
+              letterSpacing: '0.04em',
+              textTransform: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              transition: 'background 0.2s',
+            }}
           >
             Open the web app
           </a>
           <a
             href="https://github.com/chuma-beep/mathua"
-            className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-md h-10 px-6 inline-flex items-center justify-center text-[13px] font-medium transition-all duration-200"
+            style={{
+              background: 'transparent',
+              color: 'var(--text-secondary)',
+              fontFamily: monoFont,
+              fontSize: '13px',
+              padding: '10px 22px',
+              border: '0.5px solid var(--border-strong)',
+              borderRadius: '2px',
+              letterSpacing: '0.04em',
+              textTransform: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textDecoration: 'none',
+              transition: 'all 0.2s',
+            }}
           >
             View on GitHub
           </a>
         </div>
 
-        <div className="flex gap-2 justify-center flex-wrap mb-10">
-          <span className="font-mono text-[11px] font-medium px-3 py-1.5 rounded bg-mathua-surface-elevated text-mathua-secondary border border-mathua-border">
-            {conceptCount} topics
-          </span>
-          <span className="font-mono text-[11px] font-medium px-3 py-1.5 rounded bg-mathua-surface-elevated text-mathua-secondary border border-mathua-border">
-            {connectionCount} connections
-          </span>
-          <span className="font-mono text-[11px] font-medium px-3 py-1.5 rounded bg-mathua-surface-elevated text-mathua-secondary border border-mathua-border">
-            {domainCount} domains
-          </span>
-          <span className="font-mono text-[11px] font-medium px-3 py-1.5 rounded bg-mathua-surface-elevated text-mathua-secondary border border-mathua-border">
-            web + desktop
-          </span>
-          <span className="font-mono text-[11px] font-medium px-3 py-1.5 rounded bg-mathua-surface-elevated text-mathua-secondary border border-mathua-border">
-            open source
-          </span>
+        <div
+          style={{
+            fontFamily: monoFont,
+            fontSize: '11px',
+            letterSpacing: '0.06em',
+            color: 'var(--text-muted)',
+            marginBottom: '2.5rem',
+          }}
+        >
+          {conceptCount} topics{'  '}
+          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
+          {connectionCount} connections{'  '}
+          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
+          {domainCount} domains{'  '}
+          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
+          web + desktop{'  '}
+          <span style={{ color: 'var(--border-strong)' }}>·</span>{'  '}
+          open source
         </div>
 
-        {/* ASCII Art Banner */}
-        <AsciiBanner text={ASCII_HERO} className="mb-10 text-mathua-gold text-center" />
-
         {/* 3D Concept Graph */}
-        <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6">
+        <div
+          style={{
+            border: '0.5px solid var(--border)',
+            borderRadius: 0,
+            padding: '1.5rem',
+            background: 'transparent',
+          }}
+        >
           <MathConceptGraph3D
             theme={theme}
             concepts={conceptsData.map((c: any) => ({
@@ -233,26 +297,47 @@ export default function HomePage() {
 
       {/* ── How It Works ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="How it works" title="A different kind of math system" />
-        <div className="flex flex-wrap gap-6 mt-7 max-sm:flex-col">
-          <InfoCard title="Mastery gating">
-            You cannot advance until your streak and response time both meet the threshold. Knowing
-            the answer is not enough — you must know it fast.
-          </InfoCard>
-          <InfoCard title="Concept graph">
-            Every concept is a node with explicit prerequisites. The scheduler reads the graph and
-            your progress to decide what you see next.
-          </InfoCard>
-          <InfoCard title="Spaced repetition">
-            Concepts you master resurface automatically before they decay. Reviews are woven into
-            your session — there is no separate review mode.
-          </InfoCard>
+        <SectionHeader title="A different kind of math system" />
+
+        <div style={{ marginTop: '2rem' }}>
+          <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>I.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Mastery gating</span>
+            </div>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+              You cannot advance until your streak and response time both meet the threshold. Knowing
+              the answer is not enough — you must know it fast.
+            </p>
+          </div>
+
+          <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>II.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Concept graph</span>
+            </div>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+              Every concept is a node with explicit prerequisites. The scheduler reads the graph and
+              your progress to decide what you see next.
+            </p>
+          </div>
+
+          <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>III.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Spaced repetition</span>
+            </div>
+            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: '1.5rem' }}>
+              Concepts you master resurface automatically before they decay. Reviews are woven into
+              your session — there is no separate review mode.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* ── Mastery Pipeline ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Mastery pipeline" title="Five states. One direction." />
+        <SectionHeader title="Five states. One direction." />
         <Pipeline states={PIPELINE_STATES} className="my-7" />
         <div className="flex justify-center">
           <FormulaBlock
@@ -260,7 +345,16 @@ export default function HomePage() {
         + 5.0 if DECAYING  +  2.0 if newly_unlocked`}
           />
         </div>
-        <p className="text-center text-mathua-secondary text-sm mt-5">
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontSize: '0.95rem',
+            color: 'var(--text-secondary)',
+            textAlign: 'center',
+            marginTop: '1.25rem',
+            lineHeight: 1.85,
+          }}
+        >
           The scheduler enforces three hard rules: prerequisites must be mastered before a concept
           unlocks, the same concept never appears twice in a row, and roughly 70% of each session is
           new material.
@@ -271,7 +365,7 @@ export default function HomePage() {
 
       {/* ── Curriculum ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Curriculum" title="What Mathua covers" />
+        <SectionHeader title="What Mathua covers" />
         <DomainTable
           className="mt-5"
           rows={domainOrder.map((d) => ({
@@ -279,7 +373,15 @@ export default function HomePage() {
             count: domainCounts[d],
           }))}
         />
-        <p className="text-mathua-muted text-[13px] italic mt-3">
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontStyle: 'italic',
+            fontSize: '13px',
+            color: 'var(--text-muted)',
+            marginTop: '0.75rem',
+          }}
+        >
           Problems are generated on demand — never stored. There is nothing to memorise.
         </p>
       </section>
@@ -288,10 +390,18 @@ export default function HomePage() {
 
       {/* ── Progression ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Progression" title="Rank by mastery. Level by depth." />
+        <SectionHeader title="Rank by mastery. Level by depth." />
         <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col">
           <div className="flex-1 min-w-[280px]">
-            <p className="text-mathua-secondary text-sm leading-relaxed text-center">
+            <p
+              style={{
+                fontFamily: bodyFont,
+                fontSize: '0.95rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.85,
+                textAlign: 'center',
+              }}
+            >
               The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three
               components:
             </p>
@@ -313,62 +423,67 @@ export default function HomePage() {
 
       {/* ── Platforms ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Platforms" title="One engine. Two ways to run it." />
-        <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col">
-          <div className="flex-1 min-w-[280px] bg-mathua-surface border border-mathua-border rounded-lg p-6">
-            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted mb-2">
-              Web
-            </div>
-            <h3 className="font-sans text-base font-semibold text-mathua-primary mb-3.5">
-              Browser
+        <SectionHeader title="One engine. Two ways to run it." />
+
+        <div className="flex flex-wrap gap-0 items-start mt-7 max-sm:flex-col" style={{ fontFamily: bodyFont }}>
+          {/* Web column */}
+          <div className="flex-1 min-w-[280px]" style={{ paddingRight: '2rem' }}>
+            <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+              Web (browser)
             </h3>
-            <ul className="list-none text-[13px] text-mathua-secondary leading-relaxed">
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Runs in any modern browser
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                React frontend with KaTeX math rendering
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Account required — progress syncs across devices
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Global weekly leaderboard
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Interactive concept graph view
-              </li>
-            </ul>
+            <div style={{ borderBottom: '0.5px solid var(--border)', width: '100%', marginBottom: '0.75rem' }} />
+            {[
+              'React + KaTeX',
+              'Account required',
+              'Global leaderboard',
+              'Graph view',
+            ].map((feature, i) => (
+              <div key={i} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
+                {feature}
+              </div>
+            ))}
           </div>
-          <div className="flex-1 min-w-[280px] bg-mathua-surface border border-mathua-border rounded-lg p-6">
-            <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-mathua-muted mb-2">
-              Desktop TUI
-            </div>
-            <h3 className="font-sans text-base font-semibold text-mathua-primary mb-3.5">
-              Terminal
+
+          {/* Divider */}
+          <div style={{ borderLeft: '0.5px solid var(--border)', alignSelf: 'stretch', minHeight: '160px' }} />
+
+          {/* Desktop column */}
+          <div className="flex-1 min-w-[280px]" style={{ paddingLeft: '2rem' }}>
+            <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
+              Desktop (terminal)
             </h3>
-            <ul className="list-none text-[13px] text-mathua-secondary leading-relaxed">
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Single binary download — no runtime dependencies
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Bubble Tea terminal interface
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                SQLite storage — all data stays on your machine
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                No account needed
-              </li>
-              <li className="before:content-['—'] before:text-mathua-muted before:mr-1">
-                Fully offline after download
-              </li>
-            </ul>
+            <div style={{ borderBottom: '0.5px solid var(--border)', width: '100%', marginBottom: '0.75rem' }} />
+            {[
+              'Bubble Tea TUI',
+              'No account needed',
+              'Fully offline',
+              'SQLite storage',
+            ].map((feature, i) => (
+              <div key={i} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
+                {feature}
+              </div>
+            ))}
           </div>
         </div>
+
         <div className="flex justify-center mt-8">
-          <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-xs text-mathua-blue whitespace-pre overflow-x-auto text-center leading-relaxed">
-            {`┌──────────────────┐    ┌──────────────────┐
+          <pre
+            style={{
+              background: 'transparent',
+              border: 'none',
+              padding: '1rem 0',
+              fontFamily: monoFont,
+              fontSize: '12px',
+              color: 'var(--text-secondary)',
+              whiteSpace: 'pre',
+              overflowX: 'auto',
+              textAlign: 'center',
+              lineHeight: 1.6,
+            }}
+          >
+{`┌──────────────────┐    ┌──────────────────┐
 │  Web (React)    │    │  TUI (Bubble Tea)│
 └────────┬─────────┘    └────────┬─────────┘
          ▼                       ▼
@@ -395,29 +510,63 @@ export default function HomePage() {
 
       {/* ── Contributing ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Contributing" title="Built to be extended." />
-        <p className="text-mathua-secondary text-sm leading-relaxed text-center max-w-[600px] mx-auto">
+        <SectionHeader title="Built to be extended." />
+        <p
+          style={{
+            fontFamily: bodyFont,
+            fontSize: '0.95rem',
+            color: 'var(--text-secondary)',
+            lineHeight: 1.85,
+            textAlign: 'center',
+            maxWidth: '600px',
+            margin: '0 auto',
+          }}
+        >
           Every concept is a JSON node. Every problem is a Go generator function. Every contribution
           goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
         <div className="flex justify-center mt-4">
-          <pre className="bg-mathua-code border border-mathua-border rounded-md p-5 font-mono text-xs text-mathua-blue whitespace-pre overflow-x-auto text-left leading-relaxed">
-            {`{
-  "id":                "arith.add.multi",
-  "label":             "Multi-digit addition",
-  "domain":            "arithmetic",
-  "prerequisites":     ["arith.add.single", "arith.add.carry"],
-  "mastery_threshold": {
-    "streak":          5,
-    "avg_time_seconds": 8
-  }
-}`}
+          <pre
+            style={{
+              background: 'transparent',
+              border: 'none',
+              borderLeft: '2px solid var(--accent-gold)',
+              borderRadius: 0,
+              padding: '0.5rem 0 0.5rem 1.5rem',
+              fontFamily: monoFont,
+              fontSize: '13px',
+              color: 'var(--text-secondary)',
+              whiteSpace: 'pre',
+              overflowX: 'auto',
+              textAlign: 'left',
+              lineHeight: 1.6,
+              display: 'inline-block',
+            }}
+          >
+{`{
+   "id":                "arith.add.multi",
+   "label":             "Multi-digit addition",
+   "domain":            "arithmetic",
+   "prerequisites":     ["arith.add.single", "arith.add.carry"],
+   "mastery_threshold": {
+     "streak":          5,
+     "avg_time_seconds": 8
+   }
+ }`}
           </pre>
         </div>
         <div className="flex justify-center mt-6">
           <a
             href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md"
-            className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-10 px-6 inline-flex items-center justify-center text-[13px] font-medium transition-all duration-200"
+            style={{
+              fontFamily: headingFont,
+              fontStyle: 'italic',
+              fontSize: '1rem',
+              color: 'var(--accent-gold)',
+              textDecoration: 'none',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.textDecoration = 'underline' }}
+            onMouseLeave={(e) => { e.currentTarget.style.textDecoration = 'none' }}
           >
             Read CONTRIBUTING.md →
           </a>

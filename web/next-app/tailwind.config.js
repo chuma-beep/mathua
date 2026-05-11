@@ -20,6 +20,7 @@ module.exports = {
           'gold-hover': 'var(--accent-gold-hover)',
           blue: 'var(--accent-blue)',
           'blue-hover': 'var(--accent-blue-hover)',
+          teal: 'var(--accent-teal)',
           green: 'var(--accent-green)',
           red: 'var(--accent-red)',
           border: 'var(--border)',
@@ -29,16 +30,16 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['Inter', '-apple-system', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        serif: ['EB Garamond', 'Garamond', 'Georgia', 'serif'],
+        sans: ['Source Serif 4', 'Georgia', 'serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       maxWidth: {
         container: '1100px',
       },
       borderRadius: {
-        card: '8px',
-        pill: '9999px',
+        card: '2px',
+        pill: '3px',
       },
       keyframes: {
         'ascii-reveal': {
