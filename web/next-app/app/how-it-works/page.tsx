@@ -167,7 +167,7 @@ export default function HowItWorksPage() {
         className="flex justify-between items-center p-[16px_24px] sticky top-0 z-[100]"
         style={{
           borderBottom: '0.5px solid var(--border)',
-          background: 'rgba(11, 15, 26, 0.95)',
+          background: theme === 'dark' ? 'rgba(11, 15, 26, 0.95)' : 'rgba(254, 252, 244, 0.95)',
           backdropFilter: 'blur(8px)',
         }}
       >
