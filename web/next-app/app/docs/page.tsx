@@ -1,4 +1,9 @@
+'use client'
+
 import Link from 'next/link'
+import { useTheme } from '../../hooks/useTheme'
+import SectionHeader from '../../components/SectionHeader'
+import AsciiDivider from '../../components/AsciiDivider'
 
 const docPages = [
   {
@@ -16,110 +21,134 @@ const docPages = [
 ]
 
 export default function DocsIndexPage() {
+  const { theme } = useTheme()
+
   return (
-    <div className="kami-container">
-      <section style={{ paddingBottom: 'var(--kami-space-3xl)' }}>
-        <span className="kami-overline">Documentation</span>
-        <h1 style={{
-          fontFamily: 'var(--kami-serif)',
-          fontWeight: 500,
-          fontSize: 'var(--kami-display-size)',
-          lineHeight: 'var(--kami-lh-display)',
-          color: 'var(--kami-text)',
-          marginBottom: 'var(--kami-space-md)',
-        }}>
-          Good content deserves
-          <br />
-          good paper.
-        </h1>
-        <p style={{
-          fontFamily: 'var(--kami-serif)',
-          fontSize: 'var(--kami-h3-size)',
-          lineHeight: 'var(--kami-lh-h3)',
-          color: 'var(--kami-text-secondary)',
-          maxWidth: '36rem',
-          marginBottom: 'var(--kami-space-lg)',
-        }}>
-          Technical documentation for Mathua — the adaptive math learning engine.
-          Every page follows the Kami design system: warm parchment, ink blue accent,
-          serif-led hierarchy.
-        </p>
-      </section>
+    <div className="max-w-container mx-auto px-6 max-sm:px-4">
+      <section className="py-20 max-sm:py-12">
+        <div className="text-center">
+          <SectionHeader
+            label="Documentation"
+            title="How Mathua is built"
+          />
+          <p
+            style={{
+              fontFamily: "'Source Serif 4', Georgia, serif",
+              fontSize: '1rem',
+              color: 'var(--text-secondary)',
+              maxWidth: '600px',
+              margin: '0 auto 2rem',
+              lineHeight: 1.85,
+            }}
+          >
+            Technical documentation for the adaptive math learning engine — architecture,
+            contributing guide, and design decisions. Docs inherit the same warm palette
+            and typography as the app.
+          </p>
+        </div>
 
-      {/* Metric Row */}
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: 'var(--kami-space-lg)',
-        marginBottom: 'var(--kami-space-3xl)',
-      }}>
-        <div className="kami-card">
-          <div className="kami-metric">
-            <div className="kami-metric-number">284</div>
-            <div className="kami-metric-label">Concepts</div>
-          </div>
+        {/* Metric Row */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: '16px',
+          marginBottom: '80px',
+          marginTop: '24px',
+        }}>
+          {[
+            { num: '284', label: 'Concepts' },
+            { num: '16', label: 'Domains' },
+            { num: '2', label: 'Doc Pages' },
+            { num: '1', label: 'Engine' },
+          ].map(({ num, label }) => (
+            <div
+              key={label}
+              style={{
+                background: 'var(--surface)',
+                border: '0.5px solid var(--border)',
+                padding: '24px',
+                textAlign: 'center',
+              }}
+            >
+              <div style={{
+                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontSize: '2rem',
+                fontWeight: 400,
+                color: 'var(--accent-gold)',
+                lineHeight: 1,
+                fontVariantNumeric: 'tabular-nums',
+              }}>
+                {num}
+              </div>
+              <div style={{
+                fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                fontSize: '11px',
+                color: 'var(--text-muted)',
+                textTransform: 'uppercase' as const,
+                letterSpacing: '0.05em',
+                marginTop: '4px',
+              }}>
+                {label}
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="kami-card">
-          <div className="kami-metric">
-            <div className="kami-metric-number">16</div>
-            <div className="kami-metric-label">Domains</div>
-          </div>
-        </div>
-        <div className="kami-card">
-          <div className="kami-metric">
-            <div className="kami-metric-number">2</div>
-            <div className="kami-metric-label">Doc Pages</div>
-          </div>
-        </div>
-        <div className="kami-card">
-          <div className="kami-metric">
-            <div className="kami-metric-number">1</div>
-            <div className="kami-metric-label">Engine</div>
-          </div>
-        </div>
-      </section>
 
-      {/* Doc cards */}
-      <section>
-        <span className="kami-overline">Explore</span>
+        {/* Doc cards */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: 'var(--kami-space-lg)',
-          marginTop: 'var(--kami-space-lg)',
+          gap: '24px',
         }}>
           {docPages.map((doc) => (
             <Link
               key={doc.href}
               href={doc.href}
-              className="kami-feature"
-              style={{ textDecoration: 'none', display: 'block', transition: 'box-shadow 0.2s' }}
+              style={{
+                textDecoration: 'none',
+                background: 'var(--surface)',
+                border: '0.5px solid var(--border)',
+                padding: '32px',
+                display: 'block',
+                transition: 'border-color 0.2s',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)' }}
             >
               <h2 style={{
-                fontFamily: 'var(--kami-serif)',
-                fontWeight: 500,
-                fontSize: 'var(--kami-h2-size)',
-                lineHeight: 'var(--kami-lh-h2)',
-                color: 'var(--kami-text)',
+                fontFamily: "'EB Garamond', Garamond, Georgia, serif",
+                fontWeight: 400,
+                fontSize: '1.25rem',
+                color: 'var(--text-primary)',
                 margin: 0,
-                marginBottom: 'var(--kami-space-sm)',
-                borderBottom: 'none',
-                paddingBottom: 0,
+                marginBottom: '8px',
+                lineHeight: 1.3,
               }}>
                 {doc.title}
               </h2>
               <p style={{
-                fontFamily: 'var(--kami-serif)',
-                fontSize: 'var(--kami-caption-size)',
-                lineHeight: 'var(--kami-lh-caption)',
-                color: 'var(--kami-text-secondary)',
-                marginBottom: 'var(--kami-space-md)',
+                fontFamily: "'Source Serif 4', Georgia, serif",
+                fontSize: '0.95rem',
+                lineHeight: 1.7,
+                color: 'var(--text-secondary)',
+                marginBottom: '16px',
               }}>
                 {doc.description}
               </p>
-              <div style={{ display: 'flex', gap: 'var(--kami-space-xs)' }}>
+              <div style={{ display: 'flex', gap: '6px' }}>
                 {doc.tags.map((tag) => (
-                  <span key={tag} className="kami-tag kami-tag--weak">{tag}</span>
+                  <span
+                    key={tag}
+                    style={{
+                      fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                      fontSize: '10px',
+                      color: 'var(--text-muted)',
+                      border: '0.5px solid var(--border)',
+                      padding: '2px 8px',
+                    }}
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </Link>
@@ -127,13 +156,27 @@ export default function DocsIndexPage() {
         </div>
       </section>
 
-      <hr />
+      <AsciiDivider pattern="dash" />
 
-      {/* Quickstart */}
-      <section>
-        <span className="kami-overline">Quickstart</span>
-        <h2>Build from source</h2>
-        <pre>{`git clone https://github.com/chuma-beep/mathua.git
+      <section className="py-20 max-sm:py-12">
+        <SectionHeader
+          label="Quickstart"
+          title="Build from source"
+        />
+        <pre style={{
+          background: 'var(--surface)',
+          border: '0.5px solid var(--border)',
+          padding: '24px',
+          fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+          fontSize: '13px',
+          color: 'var(--text-secondary)',
+          whiteSpace: 'pre',
+          overflowX: 'auto',
+          lineHeight: 1.6,
+          maxWidth: '600px',
+          margin: '0 auto',
+        }}>
+{`git clone https://github.com/chuma-beep/mathua.git
 cd mathua
 go build ./cmd/mathua
 
@@ -141,10 +184,20 @@ go build ./cmd/mathua
 ./mathua
 
 # Run the web server (requires Postgres)
-DATABASE_URL=postgres://... ./mathua --serve --port 8080`}</pre>
-        <blockquote>
-          Requirements: Go 1.21+. For symbolic math grading (algebra concepts): Python 3.10+ with SymPy.
-        </blockquote>
+DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
+        </pre>
+        <p style={{
+          fontFamily: "'Source Serif 4', Georgia, serif",
+          fontStyle: 'italic',
+          fontSize: '0.9rem',
+          color: 'var(--text-muted)',
+          textAlign: 'center',
+          marginTop: '16px',
+          lineHeight: 1.7,
+        }}>
+          Requirements: Go 1.21+. For symbolic math grading (algebra concepts in future):
+          Python 3.10+ with SymPy.
+        </p>
       </section>
     </div>
   )
