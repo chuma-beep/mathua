@@ -1,27 +1,21 @@
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
+import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import Pipeline from '../../components/Pipeline'
 
 export default function SessionPage() {
-  const { theme, mounted, toggleTheme } = useTheme()
+  const { mounted } = useTheme()
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
   return (
-    <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <button
-        onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
-        style={{ borderRadius: 0, background: 'var(--bg)' }}
-        aria-label="Toggle theme"
-      >
-        {theme === 'dark' ? '\u2600' : '\u263E'}
-      </button>
-
+    <>
+      <Header />
+      <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
         <span className="flex justify-between items-center mb-4">
           <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
@@ -126,5 +120,6 @@ export default function SessionPage() {
 
       <Footer />
     </div>
+    </>
   )
 }

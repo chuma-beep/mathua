@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useTheme } from '../hooks/useTheme'
+import Header from '../components/Header'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
 import Pipeline from '../components/Pipeline'
@@ -43,7 +44,7 @@ const PIPELINE_STATES = [
 ]
 
 export default function HomePage() {
-  const { theme, mounted, toggleTheme } = useTheme()
+  const { theme, mounted } = useTheme()
 
   const conceptCount = conceptsData.length
   const connectionCount = conceptsData.reduce(
@@ -117,65 +118,14 @@ export default function HomePage() {
   const monoFont = "'IBM Plex Mono', monospace"
 
   return (
-    <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      {/* Theme Toggle */}
-      <button
-        onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
-        style={{ borderRadius: 0, background: 'var(--bg)' }}
-        aria-label="Toggle theme"
-      >
-        {theme === 'dark' ? '\u2600' : '\u263E'}
-      </button>
-
+    <>
+      <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }]} />
+      <div className="max-w-container mx-auto px-6 max-sm:px-4">
       {/* ── Hero ── */}
       <section
         className="py-20 max-sm:py-12 text-center"
         style={{ background: 'var(--bg)' }}
       >
-        <div className="flex justify-end gap-4 mb-6">
-          <a
-            href="/how-it-works"
-            style={{
-              fontFamily: monoFont,
-              fontSize: '12px',
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              padding: '6px 16px',
-              border: '0.5px solid var(--border-strong)',
-              borderRadius: 0,
-              display: 'inline-flex',
-              alignItems: 'center',
-              height: '36px',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-gold)'; e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
-          >
-            How it works
-          </a>
-          <a
-            href="/docs"
-            style={{
-              fontFamily: monoFont,
-              fontSize: '12px',
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              padding: '6px 16px',
-              border: '0.5px solid var(--border-strong)',
-              borderRadius: 0,
-              display: 'inline-flex',
-              alignItems: 'center',
-              height: '36px',
-              transition: 'all 0.2s',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-gold)'; e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
-          >
-            Docs
-          </a>
-        </div>
-
         <h1
           style={{
             fontFamily: headingFont,
@@ -540,5 +490,6 @@ export default function HomePage() {
 
       <Footer />
     </div>
+    </>
   )
 }
