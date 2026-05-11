@@ -75,22 +75,56 @@ export default function ContributingPage() {
       <section className="pt-8">
         <SectionHeader label="Community" title="Contributing to Mathua" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
-          The most impactful contributions are new concepts and improved generators. Adding
-          a concept requires exactly three things: a JSON entry in the concept graph, a Go
-          generator function, and a fuzz test.
+          Mathua is community-built. Every concept, every generator, every line of the
+          concept graph was added by someone who wanted to help others learn math better.
+          The most useful thing you can contribute is a new concept — and it takes exactly
+          three pieces: a JSON entry, a Go generator, and a fuzz test.
         </p>
       </section>
 
       <AsciiDivider pattern="wave" />
 
+      {/* Getting started */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>Getting started</h2>
+        <p style={bodyStyle}>
+          You'll need Go 1.21+. Clone the repo and make sure the TUI runs:
+        </p>
+        <pre style={codeBlockStyle}>
+{`git clone https://github.com/chuma-beep/mathua.git
+cd mathua
+go build ./cmd/mathua
+./mathua`}
+        </pre>
+        <p style={bodyStyle}>
+          The concept graph lives in{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>.
+          Generators live in{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/</code>.
+          Here are the kinds of contributions that move the needle:
+        </p>
+        {[
+          'New concepts — the single most impactful thing you can add.',
+          'New generators — make existing or new concepts produce better problems.',
+          'Bug fixes in the scheduling engine or graders.',
+          'Documentation and diagram improvements.',
+        ].map((item, i) => (
+          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+            <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
+            {item}
+          </div>
+        ))}
+      </section>
+
+      <AsciiDivider pattern="dash" />
+
       {/* Step 1 */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>I. Add a node to the concept graph</h2>
+        <h2 style={h2Style}>Step 1: Define a new concept</h2>
         <p style={bodyStyle}>
-          Every concept in Mathua lives in{' '}
+          Every concept lives in{' '}
           <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>.
-          Adding a concept means adding a JSON object with an ID, label, domain, prerequisite
-          list, and mastery thresholds.
+          Add a JSON object with an ID, label, domain, prerequisite list, and mastery thresholds.
         </p>
         <pre style={codeBlockStyle}>
 {`{
@@ -129,8 +163,8 @@ export default function ContributingPage() {
                 ['domain', 'string', 'Yes', 'One of the 16 domain categories'],
                 ['subdomain', 'string', 'Optional', 'Nested grouping within a domain'],
                 ['grading_type', 'enum', 'Yes', 'numeric for arithmetic, polynomial for algebra'],
-                ['prerequisites', 'string[]', 'Yes', 'List of concept IDs that must be mastered first'],
-                ['streak', 'number', 'Yes', 'Consecutive correct answers required'],
+                ['prerequisites', 'string[]', 'Yes', 'Concept IDs that must be mastered first'],
+                ['streak', 'number', 'Yes', 'Consecutive correct answers required for mastery'],
                 ['avg_time_seconds', 'number', 'Yes', 'Maximum acceptable average response time'],
               ].map(([field, type, req, desc], i) => (
                 <tr key={i} style={{ background: 'transparent' }}>
@@ -165,9 +199,9 @@ export default function ContributingPage() {
           lineHeight: 1.7,
           marginTop: '1rem',
         }}>
-          The prerequisite list is the most important field. Think carefully — what must a student
-          absolutely know before attempting this concept? If in doubt, add the prerequisite.
-          The graph validator will catch cycles.
+          The prerequisites list is the most important field. What must a student absolutely
+          know before attempting this? If in doubt, add the prerequisite — the graph validator
+          will catch cycles.
         </div>
       </section>
 
@@ -175,10 +209,10 @@ export default function ContributingPage() {
 
       {/* Step 2 */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>II. Write the generator function</h2>
+        <h2 style={h2Style}>Step 2: Teach Mathua to ask questions</h2>
         <p style={bodyStyle}>
-          Each concept needs a generator — a Go function that produces a unique problem every
-          time it is called. Generators live in{' '}
+          A generator is a Go function that produces a unique problem every time it's called.
+          There is no static question bank — every problem is built on demand. Generators live in{' '}
           <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/[domain]/</code> and
           implement the Generator interface.
         </p>
@@ -201,12 +235,12 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
     }
 }`}
         </pre>
-        <h3 style={h3Style}>Guidelines for good generators</h3>
+        <h3 style={h3Style}>A few guidelines</h3>
         {[
-          'Use the difficulty parameter to scale operand sizes. At 0.0 the problem should be trivial; at 1.0 it should be challenging for a student at that level.',
-          'Always provide an Explanation field. It is shown when a student asks to see the solution.',
-          'Use crypto/rand or math/rand with a seeded source. Do not hardcode problems — the generator must produce unique output each call.',
-          'Keep the generator deterministic with respect to difficulty. A student should not get a meaningfully harder problem at the same difficulty.',
+          'Use the difficulty parameter to scale operand sizes. At 0.0, trivial. At 1.0, challenging for someone at that level.',
+          'Always return an Explanation — it is shown when a student asks to see the solution.',
+          'Use crypto/rand or math/rand with a seeded source. No hardcoded problems.',
+          'Stay deterministic with respect to difficulty. A student should not get a meaningfully harder problem at the same difficulty.',
         ].map((rule, i) => (
           <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -219,11 +253,11 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 
       {/* Step 3 */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>III. Write a fuzz test</h2>
+        <h2 style={h2Style}>Step 3: Prove it works</h2>
         <p style={bodyStyle}>
-          Every generator must have a fuzz test that asserts 1000 valid samples. This catches
+          Every generator needs a fuzz test that asserts 1 000 valid samples. This catches
           edge cases — division by zero, negative operand ranges, malformed output — before
-          they reach a student.
+          a student ever sees them.
         </p>
         <pre style={codeBlockStyle}>
 {`func TestAddSingleGen(t *testing.T) {
@@ -237,32 +271,26 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
     }
 }`}
         </pre>
-        <div style={{
-          borderLeft: '2px solid var(--accent-gold)',
-          paddingLeft: '1.5rem',
-          fontFamily: bodyFont,
-          fontStyle: 'italic',
-          fontSize: '0.9rem',
-          color: 'var(--text-muted)',
-          lineHeight: 1.7,
-        }}>
-          Run generator fuzz tests with{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>go test ./internal/generator/... -run TestFuzz -count 1000</code>.
-          All tests must pass before the PR is merged.
-        </div>
+        <p style={bodyStyle}>
+          Run your tests before opening a PR:
+        </p>
+        <pre style={codeBlockStyle}>
+          go test ./internal/generator/... -count 1000
+        </pre>
       </section>
 
       <AsciiDivider pattern="dash" />
 
       {/* Validator */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>Graph validator — automatic on every PR</h2>
+        <h2 style={h2Style}>The graph validator</h2>
         <p style={bodyStyle}>
-          A graph validator runs on every pull request. It checks two invariants:
+          A validator runs on every pull request. It checks two invariants before any
+          merge can happen:
         </p>
         {[
-          'No cycles. The DAG must remain acyclic. A cycle means concept A requires B, which requires A — creating an impossible prerequisite chain.',
-          'No orphans. Every prerequisite referenced must exist in the graph. A reference to a non-existent concept ID is rejected.',
+          'No cycles — concept A cannot require B while B requires A.',
+          'No orphans — every prerequisite must exist in the graph.',
         ].map((rule, i) => (
           <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
@@ -278,16 +306,19 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 
       <AsciiDivider pattern="wave" />
 
-      {/* PR Checklist */}
+      {/* Submitting a PR */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>Pull request checklist</h2>
+        <h2 style={h2Style}>Submitting a pull request</h2>
+        <p style={bodyStyle}>
+          Once everything passes locally, here's the full checklist:
+        </p>
         {[
-          'Add the concept to data/concepts.json with correct prerequisites.',
+          'Add the concept to concepts.json with correct prerequisites.',
           'Write the generator in the appropriate domain subdirectory.',
-          'Write the fuzz test with 1000 samples.',
+          'Write the fuzz test with 1 000 samples.',
           'Run go test ./... and go run scripts/validate_graph.go locally.',
-          'Open a PR. The CI pipeline runs the validator and all tests.',
-          'A maintainer reviews the concept ordering, threshold values, and generator quality.',
+          'Open a PR. The CI pipeline runs the validator and all tests automatically.',
+          'A maintainer reviews the concept ordering, thresholds, and generator quality.',
         ].map((step, i) => (
           <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
@@ -296,6 +327,10 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             {step}
           </div>
         ))}
+        <p style={{ ...bodyStyle, marginTop: '1rem' }}>
+          Reviews usually happen within a few days. If a week passes with no response, feel
+          free to ping the thread. We read every PR.
+        </p>
       </section>
 
       <AsciiDivider pattern="dash" />
@@ -304,10 +339,10 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Design conventions</h2>
         {[
-          'Concept IDs follow the pattern domain.subdomain.descriptor. Use snake_case, no spaces.',
-          'Mastery thresholds are pragmatic. A single-digit addition should require faster response (6–8 seconds) than multi-digit multiplication (15–20 seconds).',
-          'Subdomains group related concepts. If a domain grows beyond 15 concepts, consider introducing subdomains.',
-          'Difficulty scaling should be linear where possible. The difference between difficulty 0.0 and 1.0 should feel meaningful but not extreme.',
+          'Concept IDs follow domain.subdomain.descriptor — lower case, no spaces.',
+          'Mastery thresholds are pragmatic. Single-digit addition should require faster response (6–8 s) than multi-digit multiplication (15–20 s).',
+          'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
+          'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
         ].map((rule, i) => (
           <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -328,7 +363,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           <a href="https://github.com/chuma-beep/mathua/blob/main/DESIGN.md" style={{ color: 'var(--accent-gold)', textDecoration: 'underline' }}>
             DESIGN.md
           </a>{' '}
-          for color palette, typography, spacing, and component patterns used across the project.
+          for color palette, typography, spacing, and component patterns.
         </div>
       </section>
     </div>
