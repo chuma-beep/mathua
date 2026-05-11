@@ -40,7 +40,7 @@ const bodyStyle: React.CSSProperties = {
 const codeBlockStyle: React.CSSProperties = {
   background: 'var(--surface)',
   border: 'none',
-  padding: '20px 24px',
+  padding: '16px 20px',
   fontFamily: monoFont,
   fontSize: '13px',
   color: 'var(--text-secondary)',

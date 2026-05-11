@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 
 interface HeaderLink {
@@ -43,18 +44,38 @@ const brandStyle: React.CSSProperties = {
 
 export default function Header({ links }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   return (
     <header
+      className="max-sm:px-4"
       style={{
         ...barStyle,
         background: theme === 'dark' ? 'rgba(11, 15, 26, 0.95)' : 'rgba(254, 252, 244, 0.95)',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <Link href="/" style={brandStyle}>Mathua</Link>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: isMobile ? '0.5rem' : '1rem',
+        overflowX: isMobile ? 'auto' : 'visible',
+        flex: 1,
+        marginRight: isMobile ? '0.5rem' : '0',
+      }}>
+        <Link href="/" style={{
+          ...brandStyle,
+          marginRight: isMobile ? '0.5rem' : '1.5rem',
+          whiteSpace: 'nowrap',
+        }}>Mathua</Link>
         {links?.map((link) => (
-          <Link key={link.href} href={link.href} style={linkStyle}>
+          <Link key={link.href} href={link.href} style={{ ...linkStyle, whiteSpace: 'nowrap' }}>
             {link.label}
           </Link>
         ))}

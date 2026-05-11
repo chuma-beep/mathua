@@ -5,7 +5,7 @@ interface FooterProps {
 export default function Footer({ className = '' }: FooterProps) {
   return (
     <footer
-      className={`text-center pt-8 pb-10 px-6 mt-10 ${className}`}
+      className={`text-center pt-8 pb-8 max-sm:pb-6 px-6 mt-10 ${className}`}
       style={{
         borderTop: '0.5px solid var(--border)',
         background: 'transparent',
@@ -28,16 +28,16 @@ export default function Footer({ className = '' }: FooterProps) {
           fontSize: '11px',
           color: 'var(--text-muted)',
           marginBottom: '1rem',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '4px 12px',
         }}
       >
         <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Web App</a>
-        {'  ·  '}
         <a href="https://github.com/chuma-beep/mathua" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
-        {'  ·  '}
         <a href="/docs" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
-        {'  ·  '}
         <a href="/docs/contributing" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
-        {'  ·  '}
         <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</a>
       </div>
 

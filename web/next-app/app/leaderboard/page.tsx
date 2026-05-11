@@ -97,19 +97,19 @@ export default function LeaderboardPage() {
         <table className="w-full border-collapse bg-mathua-surface rounded-lg overflow-hidden border border-mathua-border">
           <thead>
             <tr>
-              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-left p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border w-12">
+              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-left p-[14px_20px] max-sm:p-[10px_12px] bg-mathua-surface-elevated border-b border-mathua-border w-12">
                 #
               </th>
-              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-left p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">
+              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-left p-[14px_20px] max-sm:p-[10px_12px] bg-mathua-surface-elevated border-b border-mathua-border">
                 Name
               </th>
-              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">
+              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] max-sm:p-[10px_12px] bg-mathua-surface-elevated border-b border-mathua-border">
                 Mastered
               </th>
-              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border">
+              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] max-sm:p-[10px_12px] bg-mathua-surface-elevated border-b border-mathua-border">
                 Streak
               </th>
-              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] bg-mathua-surface-elevated border-b border-mathua-border hidden md:table-cell">
+              <th className="font-mono text-[11px] uppercase tracking-[0.1em] text-mathua-muted text-right p-[14px_20px] max-sm:p-[10px_12px] bg-mathua-surface-elevated border-b border-mathua-border hidden md:table-cell">
                 Level
               </th>
             </tr>
@@ -122,7 +122,7 @@ export default function LeaderboardPage() {
                   i < 3 ? 'bg-mathua-gold/5' : ''
                 }`}
               >
-                <td className="p-[14px_20px] font-mono text-sm text-mathua-muted">
+                <td className="p-[14px_20px] max-sm:p-[10px_12px] font-mono text-sm text-mathua-muted">
                   {row.rank <= 3 ? (
                     <span className="text-mathua-gold">
                       {['\u2460', '\u2461', '\u2462'][row.rank - 1]}
@@ -131,16 +131,16 @@ export default function LeaderboardPage() {
                     row.rank
                   )}
                 </td>
-                <td className="p-[14px_20px] text-mathua-primary text-sm font-medium">
+                <td className="p-[14px_20px] max-sm:p-[10px_12px] text-mathua-primary text-sm font-medium">
                   {row.name}
                 </td>
-                <td className="p-[14px_20px] font-mono text-sm text-mathua-muted text-right">
+                <td className="p-[14px_20px] max-sm:p-[10px_12px] font-mono text-sm text-mathua-muted text-right">
                   {row.mastered}
                 </td>
-                <td className="p-[14px_20px] font-mono text-sm text-mathua-green text-right">
+                <td className="p-[14px_20px] max-sm:p-[10px_12px] font-mono text-sm text-mathua-green text-right">
                   {row.streak}
                 </td>
-                <td className="p-[14px_20px] text-mathua-secondary text-sm text-right hidden md:table-cell">
+                <td className="p-[14px_20px] max-sm:p-[10px_12px] text-mathua-secondary text-sm text-right hidden md:table-cell">
                   {row.level}
                 </td>
               </tr>
