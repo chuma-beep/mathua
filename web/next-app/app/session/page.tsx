@@ -27,13 +27,14 @@ export default function SessionPage() {
     localStorage.setItem('mathua-theme', next)
   }
 
-  if (!mounted) return <div style={{ background: '#0a0f1a', minHeight: '100vh' }} />
+  if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <button
         onClick={toggleTheme}
-        className="fixed top-[50px] right-5 z-[1000] bg-mathua-surface border border-mathua-border-strong text-mathua-primary px-3.5 py-2 rounded-md font-mono text-xs cursor-pointer transition-all duration-200 hover:border-mathua-blue hover:text-mathua-blue"
+        className="fixed top-[50px] right-5 z-[1000] border border-[var(--border-strong)] text-[var(--text-muted)] px-3 py-1.5 font-mono text-xs cursor-pointer transition-all duration-200 hover:text-[var(--accent-gold)] hover:border-[var(--accent-gold)]"
+        style={{ borderRadius: 0, background: 'var(--bg)' }}
         aria-label="Toggle theme"
       >
         {theme === 'dark' ? '\u2600' : '\u263E'}
