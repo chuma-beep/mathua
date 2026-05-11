@@ -1,5 +1,6 @@
 'use client'
 
+import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -102,33 +103,9 @@ const tableCellStyle: React.CSSProperties = {
 }
 
 export default function HowItWorksPage() {
+  const { theme, mounted, toggleTheme } = useTheme()
   const [activeSection, setActiveSection] = useState('concept-graph')
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [mounted, setMounted] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
-
-  useEffect(() => {
-    setMounted(true)
-    const saved = localStorage.getItem('mathua-theme')
-    if (saved === 'light' || saved === 'dark') {
-      setTheme(saved)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    localStorage.setItem('mathua-theme', next)
-  }
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(

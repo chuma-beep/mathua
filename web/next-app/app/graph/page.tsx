@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useTheme } from '../../hooks/useTheme'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -38,30 +38,7 @@ const concepts = conceptsData.map((c: any) => ({
 }))
 
 export default function GraphPage() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const saved = localStorage.getItem('mathua-theme')
-    const initialTheme = saved === 'light' || saved === 'dark' ? saved : 'dark'
-    setTheme(initialTheme)
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    localStorage.setItem('mathua-theme', next)
-  }
+  const { theme, mounted, toggleTheme } = useTheme()
 
   if (!mounted) {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />

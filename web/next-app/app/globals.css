@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color-scheme: light dark;
     --bg: #fefcf4;
     --surface: #faf8f0;
     --surface-elevated: #f5f1e6;
@@ -25,6 +26,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --bg: #0b0f1a;
     --surface: #0f172a;
     --surface-elevated: #1e293b;

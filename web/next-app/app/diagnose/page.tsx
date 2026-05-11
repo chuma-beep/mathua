@@ -1,30 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useTheme } from '../../hooks/useTheme'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 
 export default function DiagnosePage() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const saved = localStorage.getItem('mathua-theme')
-    setTheme(saved === 'light' || saved === 'dark' ? saved : 'dark')
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-  }, [theme, mounted])
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    setTheme(next)
-    localStorage.setItem('mathua-theme', next)
-  }
+  const { theme, mounted, toggleTheme } = useTheme()
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
