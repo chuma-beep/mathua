@@ -17,7 +17,7 @@ export default function FormulaBlock({ code, label, className = '' }: FormulaBlo
           fontFamily: "'IBM Plex Mono', monospace",
           fontSize: '13px',
           color: 'var(--text-secondary)',
-          whiteSpace: 'pre',
+          whiteSpace: 'pre-wrap',
           overflowX: 'auto',
           lineHeight: 1.6,
           textAlign: 'left',
