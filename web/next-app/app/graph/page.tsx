@@ -14,7 +14,7 @@ const MathConceptGraph3D = dynamic(
     loading: () => (
       <div
         style={{
-          height: '520px',
+          height: 'clamp(320px, 50vh, 520px)',
           background: 'var(--surface)',
           borderRadius: '8px',
           border: '0.5px solid var(--border)',

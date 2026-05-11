@@ -49,7 +49,7 @@ const monoFont = "'IBM Plex Mono', monospace"
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
-  fontSize: '1.7rem',
+  fontSize: 'clamp(1.4rem, 4vw, 1.7rem)',
   color: 'var(--text-primary)',
   borderBottom: '0.5px solid var(--border)',
   paddingBottom: '0.5rem',

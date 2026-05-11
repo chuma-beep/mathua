@@ -144,7 +144,7 @@ export default function HomePage() {
         <p
           style={{
             fontFamily: bodyFont,
-            fontSize: '1.1rem',
+            fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
             color: 'var(--text-secondary)',
             maxWidth: '600px',
             margin: '0 auto 2rem',
@@ -203,7 +203,7 @@ export default function HomePage() {
         <div
           style={{
             fontFamily: monoFont,
-            fontSize: '11px',
+            fontSize: 'clamp(11px, 3vw, 12px)',
             letterSpacing: '0.06em',
             color: 'var(--text-muted)',
             marginBottom: '2.5rem',
@@ -375,7 +375,7 @@ export default function HomePage() {
 
         <div className="flex flex-wrap gap-0 items-start mt-7 max-sm:flex-col" style={{ fontFamily: bodyFont }}>
           {/* Web column */}
-          <div className="flex-1 min-w-[280px]" style={{ paddingRight: '2rem' }}>
+          <div className="flex-1 min-w-[280px] max-sm:pr-0" style={{ paddingRight: '2rem' }}>
             <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
               Web (browser)
             </h3>
@@ -394,10 +394,10 @@ export default function HomePage() {
           </div>
 
           {/* Divider */}
-          <div style={{ borderLeft: '0.5px solid var(--border)', alignSelf: 'stretch', minHeight: '160px' }} />
+          <div className="max-sm:hidden" style={{ borderLeft: '0.5px solid var(--border)', alignSelf: 'stretch', minHeight: '160px' }} />
 
           {/* Desktop column */}
-          <div className="flex-1 min-w-[280px]" style={{ paddingLeft: '2rem' }}>
+          <div className="flex-1 min-w-[280px] max-sm:pl-0" style={{ paddingLeft: '2rem' }}>
             <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
               Desktop (terminal)
             </h3>
