@@ -34,9 +34,9 @@ export default function Footer({ className = '' }: FooterProps) {
         {'  ·  '}
         <a href="https://github.com/chuma-beep/mathua" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
         {'  ·  '}
-        <a href="https://github.com/chuma-beep/mathua/blob/main/docs/architecture.md" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
+        <a href="/docs" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
         {'  ·  '}
-        <a href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
+        <a href="/docs/contributing" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
         {'  ·  '}
         <a href="#" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</a>
       </div>

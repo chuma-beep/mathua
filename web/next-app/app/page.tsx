@@ -132,7 +132,7 @@ export default function HomePage() {
         className="py-20 max-sm:py-12 text-center"
         style={{ background: 'var(--bg)' }}
       >
-        <div className="flex justify-end mb-6">
+        <div className="flex justify-end gap-4 mb-6">
           <a
             href="/how-it-works"
             style={{
@@ -152,6 +152,26 @@ export default function HomePage() {
             onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
           >
             How it works
+          </a>
+          <a
+            href="/docs"
+            style={{
+              fontFamily: monoFont,
+              fontSize: '12px',
+              color: 'var(--text-muted)',
+              textDecoration: 'none',
+              padding: '6px 16px',
+              border: '0.5px solid var(--border-strong)',
+              borderRadius: 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              height: '36px',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent-gold)'; e.currentTarget.style.borderColor = 'var(--accent-gold)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
+          >
+            Docs
           </a>
         </div>
 
