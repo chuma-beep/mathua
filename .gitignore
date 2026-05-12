@@ -54,3 +54,4 @@ testlog.txt
 *.log
 tmp/
 temp/mathua.db*
+mathua.db*
