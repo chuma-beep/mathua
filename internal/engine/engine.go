@@ -14,6 +14,8 @@ import (
 	"github.com/chuma-beep/mathua/internal/scheduler"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
+
+	"github.com/chuma-beep/mathua/internal/lessons"
 )
 
 type activeSession struct {
@@ -30,10 +32,11 @@ type activeSession struct {
 }
 
 type Question struct {
-	ConceptID   string `json:"concept_id"`
-	ConceptName string `json:"concept_name"`
-	Question    string `json:"question"`
-	IsReview    bool   `json:"is_review"`
+	ConceptID   string          `json:"concept_id"`
+	ConceptName string          `json:"concept_name"`
+	Question    string          `json:"question"`
+	IsReview    bool            `json:"is_review"`
+	Lesson      *lessons.Lesson `json:"lesson,omitempty"`
 }
 
 type AnswerResult struct {
@@ -55,12 +58,13 @@ type Engine struct {
 	scorer   *scoring.Updater
 	lboard   *leaderboard.Computer
 	diag     *diagnostic.Engine
+	ll       *lessons.Loader
 
 	mu       sync.Mutex
 	sessions map[string]*activeSession
 }
 
-func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry) *Engine {
+func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader) *Engine {
 	return &Engine{
 		dag:      dag,
 		repo:     repo,
@@ -71,6 +75,7 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry) *E
 		scorer:   scoring.NewUpdater(dag, repo),
 		lboard:   leaderboard.NewComputer(repo),
 		diag:     diagnostic.NewEngine(dag, reg),
+		ll:       ll,
 		sessions: make(map[string]*activeSession),
 	}
 }
@@ -141,11 +146,17 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.isReview = next.IsReview
 	e.sessions[sessionID] = as
 
+	var lesson *lessons.Lesson
+	if e.ll != nil {
+		lesson = e.ll.Lesson(next.Concept.ID)
+	}
+
 	return &Question{
 		ConceptID:   next.Concept.ID,
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
 		IsReview:    next.IsReview,
+		Lesson:      lesson,
 	}, nil
 }
 
