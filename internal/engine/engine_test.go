@@ -198,3 +198,89 @@ func TestEngine_GetDAG(t *testing.T) {
 		t.Errorf("expected 2 concepts, got %d", dag.Count())
 	}
 }
+
+func TestEngine_FullMasteryCycle(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("mastery_tester")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	// Master concept "a" (requiredStreak=3 per level, 9 total correct answers).
+	// Then verify concept "b" becomes available (prerequisite "a" now mastered).
+	for i := 0; i < 9; i++ {
+		e.mu.Lock()
+		e.sessions[sess.ID] = &activeSession{}
+		e.mu.Unlock()
+		q, err := e.NextQuestion(sess.ID, st.ID)
+		if err != nil {
+			t.Fatalf("next question %d: %v", i+1, err)
+		}
+		if q == nil {
+			t.Fatal("expected question")
+		}
+		if q.ConceptID != "a" {
+			t.Fatalf("expected concept a on attempt %d, got %s", i+1, q.ConceptID)
+		}
+		res, err := e.SubmitAnswer(sess.ID, st.ID, "42", 1.0)
+		if err != nil {
+			t.Fatalf("submit answer %d: %v", i+1, err)
+		}
+		if !res.Correct {
+			t.Fatalf("expected correct on attempt %d, got %s", i+1, res.Feedback)
+		}
+	}
+	progress, _ := e.GetProgress(st.ID)
+	if p := progress["a"]; p == nil || p.Status != "MASTERED" {
+		t.Fatalf("expected MASTERED after 9 correct, got %+v", progress["a"])
+	}
+
+	// Now concept "b" should be available (prereq "a" is mastered).
+	e.mu.Lock()
+	e.sessions[sess.ID] = &activeSession{}
+	e.mu.Unlock()
+	q, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question after mastery: %v", err)
+	}
+	if q == nil {
+		t.Fatal("expected concept b to become available")
+	}
+	if q.ConceptID != "b" {
+		t.Errorf("expected concept b after mastering a, got %s", q.ConceptID)
+	}
+
+	// Answer "a" correctly 9 more times... no wait, now concept "b" is selected.
+	// Answer "b" correctly (it expects "99").
+	res, err := e.SubmitAnswer(sess.ID, st.ID, "99", 1.0)
+	if err != nil {
+		t.Fatalf("submit answer for b: %v", err)
+	}
+	if !res.Correct {
+		t.Fatalf("expected correct on b, got %s", res.Feedback)
+	}
+	scores, _ := e.GetScores(st.ID)
+	if scores.ConceptsMastered != 1 {
+		t.Errorf("expected 1 mastered, got %d", scores.ConceptsMastered)
+	}
+	t.Logf("Mastery complete! A: %s, Level: %s", progress["a"].Status, scores.Level)
+}
+
+func TestEngine_LessonAttachedToQuestion(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("lesson_tester")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	q, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question: %v", err)
+	}
+	if q == nil {
+		t.Fatal("expected question")
+	}
+	if q.ConceptID != "a" {
+		t.Fatalf("expected concept a, got %s", q.ConceptID)
+	}
+	// No lessons loaded, so Lesson should be nil
+	if q.Lesson != nil {
+		t.Error("expected nil lesson (no loader configured)")
+	}
+}
