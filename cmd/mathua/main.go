@@ -19,6 +19,8 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/geometry"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
 	"github.com/chuma-beep/mathua/internal/lessons"
+	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/storage"
 	"github.com/chuma-beep/mathua/ui/tui"
@@ -76,7 +78,179 @@ func main() {
 		srv.Register(mux)
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
 	} else {
-		m := tui.New(eng, repo)
+		m := tui.New()
+		var studentID, sessionID string
+
+		m.OnNext = func() tui.SessionMsg {
+			if sessionID == "" {
+				return tui.SessionMsg{}
+			}
+			q, err := eng.NextQuestion(sessionID, studentID)
+			if err != nil || q == nil {
+				return tui.SessionMsg{}
+			}
+			c := dag.Concept(q.ConceptID)
+			domain, subdomain := "", ""
+			if c != nil {
+				domain = c.Domain
+				subdomain = c.Subdomain
+			}
+			prog, _ := eng.GetProgress(studentID)
+			masteryPct := 0.0
+			streak := 0
+			streakNeeded := 5
+			status := "UNSEEN"
+			if p, ok := prog[q.ConceptID]; ok {
+				streak = p.Streak
+				status = p.Status
+				if c != nil && c.MasteryThreshold.Streak > 0 {
+					masteryPct = float64(streak) / float64(c.MasteryThreshold.Streak)
+					streakNeeded = c.MasteryThreshold.Streak
+				}
+				if masteryPct > 1 {
+					masteryPct = 1
+				}
+			}
+			timeLimit := 60.0
+			if c != nil {
+				timeLimit = c.MasteryThreshold.AvgTimeSeconds
+			}
+			lessonTitle := ""
+			if q.Lesson != nil {
+				lessonTitle = q.Lesson.Title
+			}
+			return tui.SessionMsg{
+				ConceptID:    q.ConceptID,
+				Domain:       domain,
+				Subdomain:    subdomain,
+				Label:        q.ConceptName,
+				Question:     q.Question,
+				Difficulty:   0.5,
+				TimeLimit:    timeLimit,
+				MasteryPct:   masteryPct,
+				Streak:       streak,
+				StreakNeeded: streakNeeded,
+				Status:       status,
+				LessonTitle:  lessonTitle,
+			}
+		}
+
+		m.OnSubmit = func(conceptID, answer string, elapsed float64) tui.SubmitResultMsg {
+			result, err := eng.SubmitAnswer(sessionID, studentID, answer, elapsed)
+			if err != nil {
+				return tui.SubmitResultMsg{Correct: false, Explanation: err.Error()}
+			}
+			masteryAchieved := result.NewStatus == mastery.StatusMastered
+			c := dag.Concept(conceptID)
+			streakNeeded := 5
+			if c != nil {
+				streakNeeded = c.MasteryThreshold.Streak
+			}
+			newMastery := 0.0
+			if streakNeeded > 0 {
+				newMastery = float64(result.Streak) / float64(streakNeeded)
+				if newMastery > 1 {
+					newMastery = 1
+				}
+			}
+			var unlocked []string
+			if masteryAchieved {
+				for _, dep := range dag.DependentsOf(conceptID) {
+					unlocked = append(unlocked, dep.ID)
+				}
+			}
+			return tui.SubmitResultMsg{
+				Correct:          result.Correct,
+				UserAnswer:       answer,
+				CorrectAnswer:    answer,
+				Explanation:      result.Explanation,
+				ElapsedSecs:      elapsed,
+				NewMastery:       newMastery,
+				NewStreak:        result.Streak,
+				NewStatus:        string(result.NewStatus),
+				MasteryAchieved:  masteryAchieved,
+				UnlockedConcepts: unlocked,
+			}
+		}
+
+		m.OnProgress = func() tui.ProgressMsg {
+			prog, _ := eng.GetProgress(studentID)
+			domains := make(map[string]*tui.DomainProgress)
+			subdomains := make(map[string]map[string]*tui.SubdomainProgress)
+
+			for _, c := range dag.Order() {
+				d, ok := domains[c.Domain]
+				if !ok {
+					d = &tui.DomainProgress{Domain: c.Domain}
+					domains[c.Domain] = d
+					subdomains[c.Domain] = make(map[string]*tui.SubdomainProgress)
+				}
+				d.Total++
+				if p, ok := prog[c.ID]; ok && p.Status == "MASTERED" {
+					d.Mastered++
+				}
+				sd, ok := subdomains[c.Domain][c.Subdomain]
+				if !ok {
+					sd = &tui.SubdomainProgress{Name: c.Subdomain}
+					subdomains[c.Domain][c.Subdomain] = sd
+				}
+				sd.Total++
+				if p, ok := prog[c.ID]; ok && p.Status == "MASTERED" {
+					sd.Mastered++
+				}
+			}
+
+			var dl []tui.DomainProgress
+			for _, d := range domains {
+				for _, sd := range subdomains[d.Domain] {
+					d.Subdomains = append(d.Subdomains, *sd)
+				}
+				dl = append(dl, *d)
+			}
+			return tui.ProgressMsg{Domains: dl}
+		}
+
+		m.OnWelcome = func() tui.WelcomeStatsMsg {
+			if studentID == "" {
+				st, err := eng.CreateStudent("")
+				if err != nil {
+					return tui.WelcomeStatsMsg{TotalConcepts: dag.Count()}
+				}
+				studentID = st.ID
+				sess, _ := repo.CreateSession(studentID)
+				sessionID = sess.ID
+			}
+			scores, _ := scoring.NewUpdater(dag, repo).Compute(studentID)
+			prog, _ := eng.GetProgress(studentID)
+
+			domains := make(map[string]*tui.DomainProgress)
+			for _, c := range dag.Order() {
+				d, ok := domains[c.Domain]
+				if !ok {
+					d = &tui.DomainProgress{Domain: c.Domain}
+					domains[c.Domain] = d
+				}
+				d.Total++
+				if p, ok := prog[c.ID]; ok && p.Status == "MASTERED" {
+					d.Mastered++
+				}
+			}
+			var dl []tui.DomainProgress
+			for _, d := range domains {
+				dl = append(dl, *d)
+			}
+
+			return tui.WelcomeStatsMsg{
+				TotalMastered:  scores.ConceptsMastered,
+				TotalConcepts:  dag.Count(),
+				DayStreak:      scores.CurrentStreak,
+				Level:          scores.Level,
+				LevelName:      scores.Level,
+				WeeklyScore:    scores.WeeklyScore,
+				DomainProgress: dl,
+			}
+		}
+
 		if _, err := tea.NewProgram(m, tea.WithAltScreen()).Run(); err != nil {
 			log.Fatalf("tui: %v", err)
 		}
