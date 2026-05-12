@@ -9,6 +9,8 @@ import (
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
+	"github.com/chuma-beep/mathua/internal/generator/counting"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -39,10 +41,8 @@ func main() {
 	defer repo.Close()
 
 	reg := generator.NewRegistry()
-	// Domain generators are registered via sub-package Register() calls.
-	// arithmetic.Register(reg)
-	// counting.Register(reg)
-	// ...
+	counting.Register(reg)
+	arithmetic.Register(reg)
 
 	eng := engine.New(repo, dag, reg)
 	fmt.Printf("engine ready — %d generators registered\n", reg.Count())
