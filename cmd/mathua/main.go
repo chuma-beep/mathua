@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -18,6 +19,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/geometry"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
 	"github.com/chuma-beep/mathua/internal/lessons"
+	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -67,7 +69,10 @@ func main() {
 
 	if *serve {
 		fmt.Printf("starting web server on :%d\n", *port)
-		_ = eng
+		srv := server.New(eng, repo)
+		mux := http.NewServeMux()
+		srv.Register(mux)
+		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
 	} else {
 		runCLI(eng, repo)
 	}
