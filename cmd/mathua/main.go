@@ -9,6 +9,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -73,7 +74,8 @@ func main() {
 
 	if *serve {
 		fmt.Printf("starting web server on :%d\n", *port)
-		srv := server.New(eng, repo)
+		authSvc := auth.New(repo)
+		srv := server.New(eng, repo, authSvc)
 		mux := http.NewServeMux()
 		srv.Register(mux)
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))

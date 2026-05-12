@@ -16,6 +16,14 @@ func (s *PostgresStore) GetStudent(id string) (*Student, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) FindByUsername(username string) (*Student, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Student, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) GetProgress(studentID, conceptID string) (*ConceptProgress, error) {
 	return nil, fmt.Errorf("not implemented")
 }
@@ -29,6 +37,10 @@ func (s *PostgresStore) UpsertProgress(p *ConceptProgress) error {
 }
 
 func (s *PostgresStore) CreateSession(studentID string) (*Session, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetSession(id string) (*Session, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 

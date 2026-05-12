@@ -29,7 +29,7 @@ func testServer(t *testing.T) *Server {
 	t.Cleanup(func() { store.Close() })
 	reg := generator.NewRegistry()
 	reg.Register("a", &testGen{})
-	return New(engine.New(store, d, reg, nil), store)
+	return New(engine.New(store, d, reg, nil), store, nil)
 }
 
 func TestHealth(t *testing.T) {
@@ -78,7 +78,6 @@ func TestAnswer(t *testing.T) {
 
 	ansBody, _ := json.Marshal(answerReq{
 		SessionID: startRes.SessionID,
-		StudentID: startRes.StudentID,
 		Answer:    "4",
 		Elapsed:   2.0,
 	})

@@ -1,5 +1,7 @@
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
 
+import { getAuthHeaders } from './auth'
+
 export interface StartSessionRes {
   student_id: string
   session_id: string
@@ -71,11 +73,14 @@ export interface ConceptProgress {
   attempts: number
 }
 
-export async function startSession(name: string): Promise<StartSessionRes> {
+export async function startSession(): Promise<StartSessionRes> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...getAuthHeaders(),
+  }
   const res = await fetch(`${API_BASE}/api/session`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name }),
+    headers,
   })
   if (!res.ok) throw new Error(`Session start failed: ${res.status}`)
   return res.json()
@@ -83,19 +88,17 @@ export async function startSession(name: string): Promise<StartSessionRes> {
 
 export async function submitAnswer(
   sessionID: string,
-  studentID: string,
   answer: string,
   elapsed: number,
 ): Promise<AnswerRes> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...getAuthHeaders(),
+  }
   const res = await fetch(`${API_BASE}/api/answer`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      session_id: sessionID,
-      student_id: studentID,
-      answer,
-      elapsed,
-    }),
+    headers,
+    body: JSON.stringify({ session_id: sessionID, answer, elapsed }),
   })
   if (!res.ok) throw new Error(`Answer submit failed: ${res.status}`)
   return res.json()
@@ -132,4 +135,24 @@ export async function healthCheck(): Promise<boolean> {
   } catch {
     return false
   }
+}
+
+export async function signup(name: string, username: string, password: string): Promise<{ token: string; student_id: string; name: string }> {
+  const res = await fetch(`${API_BASE}/api/auth/signup`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, username, password }),
+  })
+  if (!res.ok) throw new Error('Signup failed')
+  return res.json()
+}
+
+export async function login(username: string, password: string): Promise<{ token: string; student_id: string; name: string }> {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  })
+  if (!res.ok) throw new Error('Invalid credentials')
+  return res.json()
 }
