@@ -70,7 +70,7 @@ func main() {
 }
 
 func runCLI(eng *engine.Engine, repo storage.Repository) {
-	fmt.Println("\n=== Mathua — Math Understanding Agent ===\n")
+	fmt.Println("\n=== Mathua — Math Understanding Agent ===")
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Print("Your name [learner]: ")

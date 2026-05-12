@@ -100,6 +100,9 @@ func TestLoad_NotFound(t *testing.T) {
 }
 
 func TestLoad_RealData(t *testing.T) {
+	if _, err := os.Stat("../../data/lessons/advanced/trigonometry/sine-and-cosine.md"); err != nil {
+		t.Skip("Algebrica submodule not checked out: run git submodule update --init")
+	}
 	loader, err := Load("../../data/lessons")
 	if err != nil {
 		t.Fatalf("load real data: %v", err)
