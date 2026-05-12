@@ -53,4 +53,4 @@ testlog.txt
 # Misc
 *.log
 tmp/
-temp/
+temp/mathua.db*
