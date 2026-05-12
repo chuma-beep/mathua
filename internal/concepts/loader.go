@@ -7,9 +7,8 @@ import (
 	"sort"
 )
 
-// Load reads concept definitions from a JSON file, validates the graph
-// (no cycles, no orphan prerequisites), topologically sorts, and
-// returns the populated DAG.
+// Load reads concept definitions from a JSON file, validates the graph,
+// topologically sorts, and returns the populated DAG.
 func Load(path string) (*DAG, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -19,8 +18,14 @@ func Load(path string) (*DAG, error) {
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return nil, fmt.Errorf("parse concepts: %w", err)
 	}
+	return Build(raw)
+}
+
+// Build validates a slice of concepts (no cycles, no orphan prerequisites,
+// no empty or duplicate IDs), topologically sorts, and returns a DAG.
+func Build(raw []Concept) (*DAG, error) {
 	if len(raw) == 0 {
-		return nil, fmt.Errorf("concepts file is empty")
+		return nil, fmt.Errorf("concepts slice is empty")
 	}
 	if err := validate(raw); err != nil {
 		return nil, err
