@@ -16,9 +16,7 @@ func newTestStore(t *testing.T) *SQLiteStore {
 	return store
 }
 
-// ---------------------------------------------------------------------------
 // Students
-// ---------------------------------------------------------------------------
 
 func TestCreateStudent(t *testing.T) {
 	store := newTestStore(t)
@@ -63,9 +61,7 @@ func TestGetStudent_NotFound(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Progress
-// ---------------------------------------------------------------------------
 
 func TestGetProgress_NotFound(t *testing.T) {
 	store := newTestStore(t)
@@ -174,9 +170,7 @@ func TestGetAllProgress(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Sessions
-// ---------------------------------------------------------------------------
 
 func TestCreateSession(t *testing.T) {
 	store := newTestStore(t)
@@ -196,9 +190,7 @@ func TestCreateSession(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Attempts
-// ---------------------------------------------------------------------------
 
 func TestRecordAndGetAttempts(t *testing.T) {
 	store := newTestStore(t)
@@ -249,9 +241,7 @@ func TestGetSessionAttempts_Empty(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Leaderboard
-// ---------------------------------------------------------------------------
 
 func TestGetWeeklyLeaderboard(t *testing.T) {
 	store := newTestStore(t)
@@ -292,9 +282,7 @@ func TestGetWeeklyLeaderboard(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Migrate (idempotent)
-// ---------------------------------------------------------------------------
 
 func TestMigrate_Idempotent(t *testing.T) {
 	store := newTestStore(t)
@@ -303,9 +291,7 @@ func TestMigrate_Idempotent(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // SQLite pragma errors (invalid path)
-// ---------------------------------------------------------------------------
 
 func TestNewSQLiteStore_InvalidPath(t *testing.T) {
 	_, err := NewSQLiteStore("/nonexistent/dir/db.sqlite")
@@ -317,8 +303,6 @@ func TestNewSQLiteStore_InvalidPath(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // helpers
-// ---------------------------------------------------------------------------
 
 func ptrTime(t time.Time) *time.Time { return &t }
