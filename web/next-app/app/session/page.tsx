@@ -2,6 +2,7 @@
 
 import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -15,14 +16,16 @@ import {
   type AnswerResult,
   type Scores,
 } from '../../lib/api'
+import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
 
-type Screen = 'name' | 'practice' | 'feedback'
+type Screen = 'practice' | 'feedback'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
+  const router = useRouter()
 
-  const [screen, setScreen] = useState<Screen>('name')
-  const [name, setName] = useState('')
+  const [screen, setScreen] = useState<Screen>('practice')
+  const [user, setUser] = useState<UserInfo | null>(null)
   const [studentID, setStudentID] = useState('')
   const [sessionID, setSessionID] = useState('')
   const [question, setQuestion] = useState<Question | null>(null)
@@ -33,10 +36,20 @@ export default function SessionPage() {
     concepts_mastered: 0, current_streak: 0, level: 'Novice',
   })
   const [error, setError] = useState('')
-  const [connected, setConnected] = useState<boolean | null>(null)
   const [elapsed, setElapsed] = useState(0)
+  const [loading, setLoading] = useState(true)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      router.push('/login')
+      return
+    }
+    const u = getUserInfo()
+    setUser(u)
+    beginSession()
+  }, [])
 
   useEffect(() => {
     if (screen === 'practice') {
@@ -49,13 +62,10 @@ export default function SessionPage() {
   }, [screen, question])
 
   const beginSession = useCallback(async () => {
-    if (!name.trim()) {
-      setError('Enter your name')
-      return
-    }
     setError('')
+    setLoading(true)
     try {
-      const res = await startSession(name.trim())
+      const res = await startSession()
       setStudentID(res.student_id)
       setSessionID(res.session_id)
       setQuestion(res.question)
@@ -64,14 +74,16 @@ export default function SessionPage() {
       if (s) setScores(s)
     } catch {
       setError('Could not connect to server. Is the backend running?')
+    } finally {
+      setLoading(false)
     }
-  }, [name])
+  }, [])
 
   const handleSubmit = useCallback(async () => {
     if (!answer.trim() || !question) return
     const e = (Date.now() - startRef.current) / 1000
     try {
-      const res = await submitAnswer(sessionID, studentID, answer.trim(), e)
+      const res = await submitAnswer(sessionID, answer.trim(), e)
       setLastResult(res.result)
       setAnswer('')
       if (timerRef.current) clearInterval(timerRef.current)
@@ -105,32 +117,22 @@ export default function SessionPage() {
           <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
           </a>
-          <span className="font-mono text-[11px] text-mathua-muted">
-            {screen === 'name' ? 'New session' : `Session`}
+          <span className="flex gap-3 items-center">
+            {user && <span className="font-mono text-[11px] text-mathua-muted">{user.name}</span>}
+            <button onClick={() => { clearToken(); router.push('/login') }} className="text-mathua-secondary text-xs hover:text-mathua-red">
+              Logout
+            </button>
           </span>
         </span>
 
-        {screen === 'name' && (
-          <div className="max-w-md mx-auto mt-20">
-            <SectionHeader label="Practice session" title="What's your name?" />
-            <div className="flex gap-3 mt-6">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && beginSession()}
-                placeholder="Your name"
-                autoFocus
-                className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
-              />
-              <button
-                onClick={beginSession}
-                className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm"
-              >
-                Start
-              </button>
-            </div>
-            {error && <p className="text-mathua-red text-sm mt-2">{error}</p>}
+        {loading && (
+          <div className="max-w-md mx-auto mt-20 text-center">
+            <p className="text-mathua-muted text-sm">Loading...</p>
+          </div>
+        )}
+        {error && (
+          <div className="max-w-md mx-auto mt-20 text-center">
+            <p className="text-mathua-red text-sm">{error}</p>
           </div>
         )}
 

@@ -9,9 +9,11 @@ import (
 // Data types
 
 type Student struct {
-	ID        string
-	Name      string
-	CreatedAt time.Time
+	ID           string
+	Name         string
+	Username     string
+	PasswordHash string
+	CreatedAt    time.Time
 }
 
 type ConceptProgress struct {
@@ -60,12 +62,15 @@ type LeaderboardRow struct {
 type Repository interface {
 	CreateStudent(name string) (*Student, error)
 	GetStudent(id string) (*Student, error)
+	FindByUsername(username string) (*Student, error)
+	CreateUser(name, username, passwordHash string) (*Student, error)
 
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)
 	GetAllProgress(studentID string) (map[string]*ConceptProgress, error)
 	UpsertProgress(p *ConceptProgress) error
 
 	CreateSession(studentID string) (*Session, error)
+	GetSession(id string) (*Session, error)
 	RecordAttempt(entry AttemptEntry) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 

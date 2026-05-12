@@ -2,9 +2,11 @@ package storage
 
 const schema = `
 CREATE TABLE IF NOT EXISTS students (
-    id         TEXT PRIMARY KEY,
-    name       TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    id            TEXT PRIMARY KEY,
+    name          TEXT NOT NULL,
+    username      TEXT,
+    password_hash TEXT,
+    created_at    TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (

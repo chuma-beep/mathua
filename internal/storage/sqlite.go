@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+	"strings"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -35,8 +36,31 @@ func NewSQLiteStore(path string) (*SQLiteStore, error) {
 }
 
 func (s *SQLiteStore) Migrate() error {
-	_, err := s.db.Exec(schema)
-	return err
+	if _, err := s.db.Exec(schema); err != nil {
+		return err
+	}
+	return authMigrate(s.db)
+}
+
+func authMigrate(db *sql.DB) error {
+	migrations := []string{
+		`ALTER TABLE students ADD COLUMN username TEXT`,
+		`ALTER TABLE students ADD COLUMN password_hash TEXT`,
+		`CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)`,
+	}
+	for _, m := range migrations {
+		// Ignore "duplicate column" errors for existing DBs.
+		if _, err := db.Exec(m); err != nil {
+			if !isDuplicateColumn(err) {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+func isDuplicateColumn(err error) bool {
+	return strings.Contains(err.Error(), "duplicate column name")
 }
 
 func (s *SQLiteStore) Close() error {
@@ -58,16 +82,49 @@ func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	return &Student{ID: id, Name: name, CreatedAt: now}, nil
 }
 
+func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student, error) {
+	id := newUUID()
+	now := time.Now().UTC()
+	_, err := s.db.Exec(
+		"INSERT INTO students (id, name, username, password_hash, created_at) VALUES (?, ?, ?, ?, ?)",
+		id, name, username, passwordHash, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("create user: %w", err)
+	}
+	return &Student{ID: id, Name: name, Username: username, PasswordHash: passwordHash, CreatedAt: now}, nil
+}
+
 func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, created_at FROM students WHERE id = ?", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, created_at FROM students WHERE id = ?", id)
 	var st Student
+	var username, passwordHash sql.NullString
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &createdAt); err != nil {
+	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &createdAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
 		return nil, fmt.Errorf("get student: %w", err)
 	}
+	st.Username = username.String
+	st.PasswordHash = passwordHash.String
+	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
+	return &st, nil
+}
+
+func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, created_at FROM students WHERE username = ?", username)
+	var st Student
+	var un, ph sql.NullString
+	var createdAt string
+	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &createdAt); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("find by username: %w", err)
+	}
+	st.Username = un.String
+	st.PasswordHash = ph.String
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
 }
@@ -163,6 +220,20 @@ func (s *SQLiteStore) CreateSession(studentID string) (*Session, error) {
 		return nil, fmt.Errorf("create session: %w", err)
 	}
 	return &Session{ID: id, StudentID: studentID, StartedAt: now}, nil
+}
+
+func (s *SQLiteStore) GetSession(id string) (*Session, error) {
+	row := s.db.QueryRow("SELECT id, student_id, started_at FROM sessions WHERE id = ?", id)
+	var ses Session
+	var startedAt string
+	if err := row.Scan(&ses.ID, &ses.StudentID, &startedAt); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("get session: %w", err)
+	}
+	ses.StartedAt, _ = time.Parse(time.RFC3339, startedAt)
+	return &ses, nil
 }
 
 // Attempts
