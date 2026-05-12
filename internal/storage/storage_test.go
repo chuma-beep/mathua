@@ -1,0 +1,324 @@
+package storage
+
+import (
+	"strings"
+	"testing"
+	"time"
+)
+
+func newTestStore(t *testing.T) *SQLiteStore {
+	t.Helper()
+	store, err := NewSQLiteStore(":memory:")
+	if err != nil {
+		t.Fatalf("create store: %v", err)
+	}
+	t.Cleanup(func() { store.Close() })
+	return store
+}
+
+// ---------------------------------------------------------------------------
+// Students
+// ---------------------------------------------------------------------------
+
+func TestCreateStudent(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.CreateStudent("alice")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	if st.ID == "" {
+		t.Error("expected non-empty ID")
+	}
+	if st.Name != "alice" {
+		t.Errorf("expected name alice, got %q", st.Name)
+	}
+	if st.CreatedAt.IsZero() {
+		t.Error("expected non-zero created_at")
+	}
+}
+
+func TestGetStudent_Found(t *testing.T) {
+	store := newTestStore(t)
+	created, _ := store.CreateStudent("bob")
+	st, err := store.GetStudent(created.ID)
+	if err != nil {
+		t.Fatalf("get student: %v", err)
+	}
+	if st == nil {
+		t.Fatal("expected student, got nil")
+	}
+	if st.Name != "bob" {
+		t.Errorf("expected bob, got %q", st.Name)
+	}
+}
+
+func TestGetStudent_NotFound(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.GetStudent("nonexistent")
+	if err != nil {
+		t.Fatalf("get student: %v", err)
+	}
+	if st != nil {
+		t.Error("expected nil for nonexistent student")
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Progress
+// ---------------------------------------------------------------------------
+
+func TestGetProgress_NotFound(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("carol")
+	p, err := store.GetProgress(st.ID, "some.concept")
+	if err != nil {
+		t.Fatalf("get progress: %v", err)
+	}
+	if p != nil {
+		t.Error("expected nil for absent progress")
+	}
+}
+
+func TestUpsertAndGetProgress(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("dave")
+	now := time.Now().UTC().Truncate(time.Second)
+
+	p := &ConceptProgress{
+		StudentID:       st.ID,
+		ConceptID:       "arith.add.single",
+		Status:          "LEARNING",
+		Streak:          3,
+		BestStreak:      5,
+		AvgResponseTime: 4.2,
+		Attempts:        7,
+		LastAttempted:   &now,
+		LastReviewed:    &now,
+		NextReviewDue:   &now,
+		SM2Repetitions:  2,
+		SM2Interval:     3,
+		SM2EFactor:      2.5,
+		MasteredAt:      nil,
+	}
+	if err := store.UpsertProgress(p); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+
+	got, err := store.GetProgress(st.ID, "arith.add.single")
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got == nil {
+		t.Fatal("expected progress, got nil")
+	}
+	if got.Streak != 3 {
+		t.Errorf("expected streak 3, got %d", got.Streak)
+	}
+	if got.BestStreak != 5 {
+		t.Errorf("expected best_streak 5, got %d", got.BestStreak)
+	}
+	if got.AvgResponseTime != 4.2 {
+		t.Errorf("expected avg_response_time 4.2, got %f", got.AvgResponseTime)
+	}
+	if got.Status != "LEARNING" {
+		t.Errorf("expected LEARNING, got %q", got.Status)
+	}
+}
+
+func TestUpsertProgress_Update(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("eve")
+
+	p1 := &ConceptProgress{
+		StudentID: st.ID, ConceptID: "c", Status: "LEARNING", Streak: 1,
+	}
+	_ = store.UpsertProgress(p1)
+
+	p2 := &ConceptProgress{
+		StudentID: st.ID, ConceptID: "c", Status: "PRACTICING", Streak: 5,
+	}
+	_ = store.UpsertProgress(p2)
+
+	got, _ := store.GetProgress(st.ID, "c")
+	if got.Status != "PRACTICING" || got.Streak != 5 {
+		t.Errorf("expected updated values, got status=%q streak=%d", got.Status, got.Streak)
+	}
+}
+
+func TestGetAllProgress(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("frank")
+
+	// No progress yet
+	all, err := store.GetAllProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get all: %v", err)
+	}
+	if len(all) != 0 {
+		t.Errorf("expected empty, got %d entries", len(all))
+	}
+
+	// Add two concepts
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: st.ID, ConceptID: "a", Status: "LEARNING"})
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: st.ID, ConceptID: "b", Status: "MASTERED"})
+
+	all, err = store.GetAllProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get all: %v", err)
+	}
+	if len(all) != 2 {
+		t.Errorf("expected 2 entries, got %d", len(all))
+	}
+	if all["a"] == nil || all["b"] == nil {
+		t.Error("expected both concepts present")
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Sessions
+// ---------------------------------------------------------------------------
+
+func TestCreateSession(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("grace")
+	sess, err := store.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	if sess.ID == "" {
+		t.Error("expected non-empty session ID")
+	}
+	if sess.StudentID != st.ID {
+		t.Errorf("expected student %s, got %s", st.ID, sess.StudentID)
+	}
+	if sess.StartedAt.IsZero() {
+		t.Error("expected non-zero started_at")
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Attempts
+// ---------------------------------------------------------------------------
+
+func TestRecordAndGetAttempts(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("heidi")
+	sess, _ := store.CreateSession(st.ID)
+
+	entry := AttemptEntry{
+		SessionID:      sess.ID,
+		StudentID:      st.ID,
+		ConceptID:      "arith.add.single",
+		Answer:         "12",
+		Expected:       "12",
+		Correct:        true,
+		ElapsedSeconds: 3.5,
+		Timestamp:      time.Now().UTC(),
+	}
+	if err := store.RecordAttempt(entry); err != nil {
+		t.Fatalf("record attempt: %v", err)
+	}
+
+	attempts, err := store.GetSessionAttempts(st.ID, sess.ID)
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(attempts) != 1 {
+		t.Fatalf("expected 1 attempt, got %d", len(attempts))
+	}
+	if attempts[0].Answer != "12" {
+		t.Errorf("expected answer 12, got %q", attempts[0].Answer)
+	}
+	if !attempts[0].Correct {
+		t.Error("expected correct=true")
+	}
+	if attempts[0].ElapsedSeconds != 3.5 {
+		t.Errorf("expected 3.5s, got %f", attempts[0].ElapsedSeconds)
+	}
+}
+
+func TestGetSessionAttempts_Empty(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("ivan")
+	attempts, err := store.GetSessionAttempts(st.ID, "nonexistent")
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(attempts) != 0 {
+		t.Errorf("expected empty, got %d", len(attempts))
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Leaderboard
+// ---------------------------------------------------------------------------
+
+func TestGetWeeklyLeaderboard(t *testing.T) {
+	store := newTestStore(t)
+	alice, _ := store.CreateStudent("alice")
+	bob, _ := store.CreateStudent("bob")
+
+	// Alice: 3 mastered (2 this week)
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: alice.ID, ConceptID: "a", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC())})
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: alice.ID, ConceptID: "b", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC())})
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: alice.ID, ConceptID: "c", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC().AddDate(0, 0, -10))})
+
+	// Bob: 2 mastered (2 this week)
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: bob.ID, ConceptID: "a", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC())})
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: bob.ID, ConceptID: "b", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC())})
+
+	rows, err := store.GetWeeklyLeaderboard()
+	if err != nil {
+		t.Fatalf("get weekly leaderboard: %v", err)
+	}
+	if len(rows) != 2 {
+		t.Fatalf("expected 2 rows, got %d", len(rows))
+	}
+	// Alice first (weekly=2 + total=3 tiebreaker over Bob's 2)
+	if rows[0].Name != "alice" {
+		t.Errorf("expected alice first, got %s", rows[0].Name)
+	}
+	if rows[0].WeeklyMastered != 2 {
+		t.Errorf("expected alice weekly=2, got %d", rows[0].WeeklyMastered)
+	}
+	if rows[0].TotalMastered != 3 {
+		t.Errorf("expected alice total=3, got %d", rows[0].TotalMastered)
+	}
+	if rows[1].Name != "bob" {
+		t.Errorf("expected bob second, got %s", rows[1].Name)
+	}
+	if rows[1].WeeklyMastered != 2 {
+		t.Errorf("expected bob weekly=2, got %d", rows[1].WeeklyMastered)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Migrate (idempotent)
+// ---------------------------------------------------------------------------
+
+func TestMigrate_Idempotent(t *testing.T) {
+	store := newTestStore(t)
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("second migrate should be idempotent: %v", err)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// SQLite pragma errors (invalid path)
+// ---------------------------------------------------------------------------
+
+func TestNewSQLiteStore_InvalidPath(t *testing.T) {
+	_, err := NewSQLiteStore("/nonexistent/dir/db.sqlite")
+	if err == nil {
+		t.Fatal("expected error for invalid path")
+	}
+	if !strings.Contains(err.Error(), "open") && !strings.Contains(err.Error(), "unable") {
+		t.Logf("got error: %v", err)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// helpers
+// ---------------------------------------------------------------------------
+
+func ptrTime(t time.Time) *time.Time { return &t }

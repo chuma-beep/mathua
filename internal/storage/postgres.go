@@ -1,3 +1,53 @@
-// TODO: PostgreSQL implementation
-
 package storage
+
+import "fmt"
+
+type PostgresStore struct{}
+
+func NewPostgresStore(dsn string) (*PostgresStore, error) {
+	return nil, fmt.Errorf("PostgreSQL backend not yet implemented")
+}
+
+func (s *PostgresStore) CreateStudent(name string) (*Student, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetStudent(id string) (*Student, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetProgress(studentID, conceptID string) (*ConceptProgress, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetAllProgress(studentID string) (map[string]*ConceptProgress, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) UpsertProgress(p *ConceptProgress) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) CreateSession(studentID string) (*Session, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) RecordAttempt(entry AttemptEntry) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) Migrate() error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) Close() error {
+	return fmt.Errorf("not implemented")
+}
