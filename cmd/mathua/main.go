@@ -1,14 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"strings"
-	"time"
+
+	tea "github.com/charmbracelet/bubbletea"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
@@ -22,6 +21,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/storage"
+	"github.com/chuma-beep/mathua/ui/tui"
 )
 
 func main() {
@@ -76,115 +76,9 @@ func main() {
 		srv.Register(mux)
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
 	} else {
-		runCLI(eng, repo)
-	}
-}
-
-func runCLI(eng *engine.Engine, repo storage.Repository) {
-	fmt.Println("\n=== Mathua — Math Understanding Agent ===")
-	scanner := bufio.NewScanner(os.Stdin)
-
-	fmt.Print("Your name [learner]: ")
-	scanner.Scan()
-	name := strings.TrimSpace(scanner.Text())
-	if name == "" {
-		name = "learner"
-	}
-
-	st, err := eng.CreateStudent(name)
-	if err != nil {
-		log.Fatalf("create student: %v", err)
-	}
-
-	sess, err := repo.CreateSession(st.ID)
-	if err != nil {
-		log.Fatalf("create session: %v", err)
-	}
-	fmt.Printf("Welcome, %s!  Type 'quit', 'stats', or 'skip'.\n\n", name)
-
-	for {
-		q, err := eng.NextQuestion(sess.ID, st.ID)
-		if err != nil {
-			fmt.Printf("error: %v\n", err)
-			break
-		}
-		if q == nil {
-			fmt.Println("All available concepts mastered! Nothing left to practice.")
-			fmt.Println("Come back tomorrow for reviews or add more generators.")
-			printStats(eng, st.ID)
-			break
-		}
-
-		if q.Lesson != nil {
-			fmt.Printf("[Lesson: %s]\n", q.Lesson.Title)
-		}
-		status := engCurrentStatus(eng, st.ID, q.ConceptID)
-		fmt.Printf("[%s] %s: %s\n", status, q.ConceptName, q.Question)
-		fmt.Print("> ")
-
-		t0 := time.Now()
-		if !scanner.Scan() {
-			break
-		}
-		elapsed := time.Since(t0).Seconds()
-
-		input := strings.TrimSpace(scanner.Text())
-		switch strings.ToLower(input) {
-		case "quit", "q":
-			printStats(eng, st.ID)
-			return
-		case "stats", "s":
-			printStats(eng, st.ID)
-			continue
-		case "skip":
-			_ = repo.RecordAttempt(storage.AttemptEntry{
-				SessionID: sess.ID, StudentID: st.ID,
-				ConceptID: q.ConceptID, Answer: "(skipped)",
-				Expected: "(skipped)", Correct: false,
-				ElapsedSeconds: elapsed, Timestamp: time.Now().UTC(),
-			})
-			continue
-		case "":
-			continue
-		}
-
-		result, err := eng.SubmitAnswer(sess.ID, st.ID, input, elapsed)
-		if err != nil {
-			fmt.Printf("error: %v\n", err)
-			break
-		}
-		if result.Correct {
-			fmt.Printf("Correct! (%.1fs, streak %d/%d → %s)\n",
-				elapsed, result.Streak, result.RequiredStreak, result.NewStatus)
-		} else {
-			fmt.Printf("Wrong — %s\n  %s\n", result.Feedback, result.Explanation)
+		m := tui.New(eng, repo)
+		if _, err := tea.NewProgram(m, tea.WithAltScreen()).Run(); err != nil {
+			log.Fatalf("tui: %v", err)
 		}
 	}
-}
-
-func engCurrentStatus(eng *engine.Engine, studentID, conceptID string) string {
-	prog, _ := eng.GetProgress(studentID)
-	if p, ok := prog[conceptID]; ok {
-		return p.Status
-	}
-	return "UNSEEN"
-}
-
-func printStats(eng *engine.Engine, studentID string) {
-	scores, err := eng.GetScores(studentID)
-	if err != nil {
-		fmt.Printf("stats error: %v\n", err)
-		return
-	}
-	fmt.Printf("\n--- %s ---\n", scores.Level)
-	fmt.Printf("Mastered: %d  Streak: %dd  Score: %d\n",
-		scores.ConceptsMastered, scores.CurrentStreak, scores.WeeklyScore)
-	prog, _ := eng.GetProgress(studentID)
-	inProgress := 0
-	for _, p := range prog {
-		if p.Status != "MASTERED" && p.Status != "UNSEEN" {
-			inProgress++
-		}
-	}
-	fmt.Printf("In progress: %d  Unseen: %d\n", inProgress, 284-scores.ConceptsMastered-inProgress)
 }
