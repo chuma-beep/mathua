@@ -45,7 +45,7 @@ func testEngine(t *testing.T) *Engine {
 	reg := generator.NewRegistry()
 	reg.Register("a", &testGen{answer: "42"})
 	reg.Register("b", &testGen{answer: "99"})
-	return New(store, d, reg)
+	return New(store, d, reg, nil)
 }
 
 func TestEngine_CreateStudent(t *testing.T) {
