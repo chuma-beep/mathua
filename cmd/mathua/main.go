@@ -14,6 +14,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
 	"github.com/chuma-beep/mathua/internal/generator/counting"
+	"github.com/chuma-beep/mathua/internal/generator/fractions"
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
@@ -47,6 +48,7 @@ func main() {
 	reg := generator.NewRegistry()
 	counting.Register(reg)
 	arithmetic.Register(reg)
+	fractions.Register(reg)
 
 	ll, err := lessons.Load("data/lessons")
 	if err != nil {
