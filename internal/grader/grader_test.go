@@ -4,9 +4,7 @@ import (
 	"testing"
 )
 
-// ---------------------------------------------------------------------------
 // Numeric grader
-// ---------------------------------------------------------------------------
 
 func TestNumeric_Grade_IntegerMatch(t *testing.T) {
 	r := NewRouter()
@@ -154,9 +152,7 @@ func TestNumeric_Grade_MinusZeroVsZero(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Multiple choice grader
-// ---------------------------------------------------------------------------
 
 func TestChoice_Grade_ExactMatch(t *testing.T) {
 	r := NewRouter()
@@ -210,9 +206,7 @@ func TestChoice_Grade_Empty(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Comparison grader
-// ---------------------------------------------------------------------------
 
 func TestComparison_Grade_Correct(t *testing.T) {
 	r := NewRouter()
@@ -256,9 +250,7 @@ func TestComparison_Grade_InvalidOperator(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Ordering grader
-// ---------------------------------------------------------------------------
 
 func TestOrdering_Grade_Correct(t *testing.T) {
 	r := NewRouter()
@@ -299,9 +291,7 @@ func TestOrdering_Grade_Empty(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Symbolic grader
-// ---------------------------------------------------------------------------
 
 func TestSymbolic_Grade_ExactMatch(t *testing.T) {
 	r := NewRouter()
@@ -335,9 +325,7 @@ func TestSymbolic_Grade_Empty(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Router dispatch
-// ---------------------------------------------------------------------------
 
 func TestRouter_UnknownType(t *testing.T) {
 	r := NewRouter()

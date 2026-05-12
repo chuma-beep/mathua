@@ -2,9 +2,7 @@ package mastery
 
 import "testing"
 
-// ---------------------------------------------------------------------------
 // Next() transitions
-// ---------------------------------------------------------------------------
 
 func TestNext_UnseenToLearning(t *testing.T) {
 	m := &Machine{}
@@ -176,9 +174,7 @@ func TestNext_ExactBoundary(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // EffectiveStatus
-// ---------------------------------------------------------------------------
 
 func TestEffectiveStatus_Decaying(t *testing.T) {
 	if got := EffectiveStatus(StatusMastered, 15, 14); got != "DECAYING" {
@@ -206,9 +202,7 @@ func TestEffectiveStatus_NonMasteredUnaffected(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // SM2Quality
-// ---------------------------------------------------------------------------
 
 func TestSM2Quality_Perfect(t *testing.T) {
 	if q := SM2Quality(true, 0.3); q != 5 {
@@ -246,9 +240,7 @@ func TestSM2Quality_ExactOne(t *testing.T) {
 	}
 }
 
-// ---------------------------------------------------------------------------
 // Status constants
-// ---------------------------------------------------------------------------
 
 func TestStatusConstants(t *testing.T) {
 	if StatusUnseen != "UNSEEN" || StatusLearning != "LEARNING" || StatusPracticing != "PRACTICING" || StatusMastered != "MASTERED" {

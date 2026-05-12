@@ -43,9 +43,7 @@ func (s *SQLiteStore) Close() error {
 	return s.db.Close()
 }
 
-// ---------------------------------------------------------------------------
 // Students
-// ---------------------------------------------------------------------------
 
 func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	id := newUUID()
@@ -74,9 +72,7 @@ func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
 	return &st, nil
 }
 
-// ---------------------------------------------------------------------------
 // Progress
-// ---------------------------------------------------------------------------
 
 func (s *SQLiteStore) GetProgress(studentID, conceptID string) (*ConceptProgress, error) {
 	row := s.db.QueryRow(`
@@ -154,9 +150,7 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 	return nil
 }
 
-// ---------------------------------------------------------------------------
 // Sessions
-// ---------------------------------------------------------------------------
 
 func (s *SQLiteStore) CreateSession(studentID string) (*Session, error) {
 	id := newUUID()
@@ -171,9 +165,7 @@ func (s *SQLiteStore) CreateSession(studentID string) (*Session, error) {
 	return &Session{ID: id, StudentID: studentID, StartedAt: now}, nil
 }
 
-// ---------------------------------------------------------------------------
 // Attempts
-// ---------------------------------------------------------------------------
 
 func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 	_, err := s.db.Exec(`
@@ -224,9 +216,7 @@ func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]Attempt
 	return out, rows.Err()
 }
 
-// ---------------------------------------------------------------------------
 // Leaderboard
-// ---------------------------------------------------------------------------
 
 func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	monday := weekStart(time.Now().UTC())
@@ -256,9 +246,7 @@ func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	return out, rows.Err()
 }
 
-// ---------------------------------------------------------------------------
 // Helpers
-// ---------------------------------------------------------------------------
 
 func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProgress, error) {
 	p := &ConceptProgress{}
