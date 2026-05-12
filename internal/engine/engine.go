@@ -209,7 +209,13 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		ResponseThreshold: as.timeThreshold,
 	}
 	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
+	oldStatus := progress.Status
 	progress.Status = string(newStatus)
+
+	// Reset streak when advancing to a new mastery level.
+	if newStatus != mastery.Status(oldStatus) && gr.Correct {
+		progress.Streak = 1
+	}
 
 	// SM-2 update
 	quality := mastery.SM2Quality(

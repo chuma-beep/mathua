@@ -191,3 +191,37 @@ func TestNext_FallthroughWhenBlocked(t *testing.T) {
 		t.Errorf("expected fallthrough to a, got %s", next.Concept.ID)
 	}
 }
+
+func TestNext_FiltersMasteredConcepts(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	now := time.Now().UTC()
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+		"b": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+		"c": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+		"d": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+	}
+	next := s.Next(snap, "", 0, 0)
+	if next != nil {
+		t.Errorf("expected nil (all mastered), got concept %s", next.Concept.ID)
+	}
+}
+
+func TestNext_AllowsDecayingConcept(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	old := time.Now().UTC().AddDate(0, 0, -20)
+	now := time.Now().UTC()
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusMastered, LastReviewed: old, RequiredStreak: 3},
+		"b": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+	}
+	next := s.Next(snap, "", 0, 0)
+	if next == nil {
+		t.Fatal("expected decaying concept to be selected")
+	}
+	if !next.IsReview {
+		t.Error("decaying should be review")
+	}
+}
