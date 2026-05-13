@@ -481,8 +481,6 @@ export default function MathConceptGraph3D({
 
   const [activeId, setActiveId] = useState(() => nodes[0]?.id ?? '')
 
-  const bgColor = theme === 'dark' ? '#0b0f1a' : '#fefcf4'
-
   useEffect(() => {
     if (nodes.length > 0 && !nodes.find(n => n.id === activeId)) {
       setActiveId(nodes[0].id)
@@ -500,10 +498,9 @@ export default function MathConceptGraph3D({
       }}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
-          style={{ background: 'transparent' }}
+          style={{ background: 'var(--bg)' }}
           dpr={[1, 2]}
         >
-          <color attach="background" args={[bgColor]} />
           <GraphScene
             nodes={nodes}
             links={links}
