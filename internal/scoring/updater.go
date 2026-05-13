@@ -4,23 +4,10 @@ import (
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/levels"
+	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
-
-var levels = []struct {
-	Min   int
-	Title string
-}{
-	{0, "Novice"},
-	{32, "Apprentice"},
-	{64, "Student"},
-	{96, "Scholar"},
-	{128, "Adept"},
-	{160, "Expert"},
-	{192, "Master"},
-	{224, "Grandmaster"},
-	{256, "Math Architect"},
-}
 
 type Scores struct {
 	LifetimePoints   int     `json:"lifetime_points"`
@@ -54,7 +41,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 	speedBonus := 0.0
 
 	for _, p := range progress {
-		if p.Status == "MASTERED" {
+		if p.Status == string(mastery.StatusMastered) {
 			mastered++
 			if p.MasteredAt != nil && !p.MasteredAt.Before(monday) {
 				weeklyCount++
@@ -65,7 +52,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 
 	weeklyScore := weeklyCount*100 + int(speedBonus)
 	lifetimePoints := mastered * 100
-	level := computeLevel(mastered)
+	level := levels.Compute(mastered)
 	streak := computeCurrentStreak(progress)
 	xpTotal, xpToday, _ := u.repo.GetXP(studentID)
 
@@ -119,16 +106,6 @@ func computeCurrentStreak(progress map[string]*storage.ConceptProgress) int {
 		}
 	}
 	return streak
-}
-
-func computeLevel(mastered int) string {
-	title := levels[0].Title
-	for _, l := range levels {
-		if mastered >= l.Min {
-			title = l.Title
-		}
-	}
-	return title
 }
 
 func weekStart(t time.Time) time.Time {

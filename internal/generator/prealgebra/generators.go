@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
 func Register(reg *generator.Registry) {
@@ -52,13 +53,6 @@ func Register(reg *generator.Registry) {
 	reg.Register("prealg.eq.word", &eqWordGen{})
 	reg.Register("prealg.ineq.one_step", &ineqOneStepGen{})
 	reg.Register("prealg.ineq.two_step", &ineqTwoStepGen{})
-}
-
-func gcd(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return a
 }
 
 // Decimals
@@ -142,7 +136,7 @@ func (g *decToFracGen) Generate(difficulty float64) generator.Problem {
 	d := decimals[rand.Intn(len(decimals))]
 	den := 1000
 	num := int(d * float64(den))
-	gcd := gcd(num, den)
+	gcd := mathutil.GCD(num, den)
 	num /= gcd
 	den /= gcd
 	return generator.Problem{
@@ -275,15 +269,9 @@ func (g *absValueGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(30) - 15
 	return generator.Problem{
 		Question:    fmt.Sprintf("|%d| = ?", n),
-		Answer:      fmt.Sprintf("%d", abs(n)),
-		Explanation: fmt.Sprintf("The absolute value of %d is %d.", n, abs(n)),
+		Answer:      fmt.Sprintf("%d", mathutil.Abs(n)),
+		Explanation: fmt.Sprintf("The absolute value of %d is %d.", n, mathutil.Abs(n)),
 	}
-}
-func abs(n int) int {
-	if n < 0 {
-		return -n
-	}
-	return n
 }
 
 type negOrderOpsGen struct{}
@@ -329,7 +317,7 @@ func (g *ratioSimplifyGen) Generate(difficulty float64) generator.Problem {
 	for a == b {
 		b += f
 	}
-	d := gcd(a, b)
+	d := mathutil.GCD(a, b)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify the ratio %d:%d", a, b),
 		Answer:      fmt.Sprintf("%d:%d", a/d, b/d),
@@ -388,16 +376,9 @@ func (g *expNegGen) Generate(difficulty float64) generator.Problem {
 	exp := rand.Intn(3) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: %d^-%d", base, exp),
-		Answer:      fmt.Sprintf("1/%d", intPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^-%d = 1/%d^%d = 1/%d", base, exp, base, exp, intPow(base, exp)),
+		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("%d^-%d = 1/%d^%d = 1/%d", base, exp, base, exp, mathutil.IntPow(base, exp)),
 	}
-}
-func intPow(a, b int) int {
-	r := 1
-	for i := 0; i < b; i++ {
-		r *= a
-	}
-	return r
 }
 
 type expZeroGen struct{}
@@ -418,8 +399,8 @@ func (g *sciNotationGen) Generate(difficulty float64) generator.Problem {
 	exp := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write %g x 10^%d as a standard number.", coeff, exp),
-		Answer:      fmt.Sprintf("%g", coeff*float64(intPow(10, exp))),
-		Explanation: fmt.Sprintf("%g x 10^%d = %g", coeff, exp, coeff*float64(intPow(10, exp))),
+		Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
+		Explanation: fmt.Sprintf("%g x 10^%d = %g", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
 	}
 }
 

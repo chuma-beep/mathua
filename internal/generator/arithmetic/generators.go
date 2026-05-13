@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
 func Register(reg *generator.Registry) {
@@ -428,7 +429,7 @@ type gcfGen struct{}
 func (g *gcfGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(50) + 10
 	b := rand.Intn(50) + 10
-	result := gcd(a, b)
+	result := mathutil.GCD(a, b)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the GCF of %d and %d.", a, b),
 		Answer:      fmt.Sprintf("%d", result),
@@ -436,19 +437,12 @@ func (g *gcfGen) Generate(difficulty float64) generator.Problem {
 	}
 }
 
-func gcd(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return a
-}
-
 type lcmGen struct{}
 
 func (g *lcmGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(20) + 2
 	b := rand.Intn(20) + 2
-	l := a * b / gcd(a, b)
+	l := a * b / mathutil.GCD(a, b)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the LCM of %d and %d.", a, b),
 		Answer:      fmt.Sprintf("%d", l),
@@ -487,17 +481,9 @@ func (g *expConceptGen) Generate(difficulty float64) generator.Problem {
 	exp := rand.Intn(3) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("What does %d^%d mean?", base, exp),
-		Answer:      fmt.Sprintf("%d", intPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^%d = %s = %d", base, exp, strings.Repeat(fmt.Sprintf("%dx", base), exp-1)+fmt.Sprintf("%d", base), intPow(base, exp)),
+		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("%d^%d = %s = %d", base, exp, strings.Repeat(fmt.Sprintf("%dx", base), exp-1)+fmt.Sprintf("%d", base), mathutil.IntPow(base, exp)),
 	}
-}
-
-func intPow(a, b int) int {
-	r := 1
-	for i := 0; i < b; i++ {
-		r *= a
-	}
-	return r
 }
 
 type expEvalGen struct{}
@@ -510,8 +496,8 @@ func (g *expEvalGen) Generate(difficulty float64) generator.Problem {
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d^%d = ?", base, exp),
-		Answer:      fmt.Sprintf("%d", intPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^%d = %d", base, exp, intPow(base, exp)),
+		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("%d^%d = %d", base, exp, mathutil.IntPow(base, exp)),
 	}
 }
 
@@ -645,7 +631,7 @@ func (g *orderOpsGen) Generate(difficulty float64) generator.Problem {
 	} else {
 		e := rand.Intn(3) + 2
 		q = fmt.Sprintf("%d + (%d)^%d x %d", a, b, e, c)
-		result = a + intPow(b, e)*c
+		result = a + mathutil.IntPow(b, e)*c
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: %s", q),

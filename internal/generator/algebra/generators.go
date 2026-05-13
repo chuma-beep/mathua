@@ -6,6 +6,7 @@ import (
 	"math/rand"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
 func Register(reg *generator.Registry) {
@@ -553,8 +554,8 @@ func (g *algExpConceptGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(4) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("If f(x) = %d^x, find f(%d).", a, x),
-		Answer:      fmt.Sprintf("%d", pow(a, x)),
-		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, pow(a, x)),
+		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
+		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, mathutil.IntPow(a, x)),
 	}
 }
 
@@ -565,8 +566,8 @@ func (g *algExpEvaluateGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(4) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: %d^%d", a, x),
-		Answer:      fmt.Sprintf("%d", pow(a, x)),
-		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, pow(a, x)),
+		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
+		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, mathutil.IntPow(a, x)),
 	}
 }
 
@@ -575,7 +576,7 @@ type logConceptGen struct{}
 func (g *logConceptGen) Generate(difficulty float64) generator.Problem {
 	base := rand.Intn(3) + 2
 	exp := rand.Intn(4) + 1
-	val := pow(base, exp)
+	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write as a logarithm: %d^%d = %d", base, exp, val),
 		Answer:      fmt.Sprintf("log_%d(%d) = %d", base, val, exp),
@@ -588,7 +589,7 @@ type logEvaluateGen struct{}
 func (g *logEvaluateGen) Generate(difficulty float64) generator.Problem {
 	base := rand.Intn(3) + 2
 	exp := rand.Intn(4) + 1
-	val := pow(base, exp)
+	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: log_%d(%d)", base, val),
 		Answer:      fmt.Sprintf("%d", exp),
@@ -600,8 +601,8 @@ type logPropertiesGen struct{}
 
 func (g *logPropertiesGen) Generate(difficulty float64) generator.Problem {
 	base := rand.Intn(3) + 2
-	a := pow(base, rand.Intn(3)+1)
-	b := pow(base, rand.Intn(3)+2)
+	a := mathutil.IntPow(base, rand.Intn(3)+1)
+	b := mathutil.IntPow(base, rand.Intn(3)+2)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: log_%d(%d x %d)", base, a, b),
 		Answer:      fmt.Sprintf("log_%d(%d) + log_%d(%d)", base, a, base, b),
@@ -633,7 +634,7 @@ func (g *seqGeomGen) Generate(difficulty float64) generator.Problem {
 	a1 := rand.Intn(5) + 2
 	r := rand.Intn(3) + 2
 	n := rand.Intn(4) + 2
-	an := a1 * pow(r, n-1)
+	an := a1 * mathutil.IntPow(r, n-1)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Geometric sequence: %d, %d, %d, ... Find term %d.", a1, a1*r, a1*r*r, n),
 		Answer:      fmt.Sprintf("%d", an),
@@ -664,7 +665,7 @@ func (g *seqSumGeoGen) Generate(difficulty float64) generator.Problem {
 	// Sum of first n terms: a1(1-r^n)/(1-r)
 	// Keep values small
 	n := rand.Intn(4) + 2
-	rn := pow(r, n)
+	rn := mathutil.IntPow(r, n)
 	sum := a1 * (1 - rn) / (1 - r)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find sum of geometric series: %d + %d + %d + ... (first %d terms, r=%d).", a1, a1*r, a1*r*r, n, r),
@@ -683,7 +684,7 @@ func reduce(num, den int) frac {
 	if num == 0 {
 		return frac{0, 1}
 	}
-	g := gcd(abs(num), den)
+	g := mathutil.GCD(mathutil.Abs(num), den)
 	n := num / g
 	d := den / g
 	if d < 0 {
@@ -708,26 +709,4 @@ func formatLinear(m, b int) string {
 		return fmt.Sprintf("y = %dx - %d", m, -b)
 	}
 	return fmt.Sprintf("y = %dx + %d", m, b)
-}
-
-func gcd(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return a
-}
-
-func abs(n int) int {
-	if n < 0 {
-		return -n
-	}
-	return n
-}
-
-func pow(a, b int) int {
-	r := 1
-	for i := 0; i < b; i++ {
-		r *= a
-	}
-	return r
 }

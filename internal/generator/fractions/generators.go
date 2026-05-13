@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
 func Register(reg *generator.Registry) {
@@ -41,17 +42,10 @@ func mixStr(whole, num, den int) string {
 	return fmt.Sprintf("%d %d/%d", whole, num, den)
 }
 
-func gcd(a, b int) int {
-	for b != 0 {
-		a, b = b, a%b
-	}
-	return a
-}
-
-func lcm(a, b int) int { return a * b / gcd(a, b) }
+func lcm(a, b int) int { return a * b / mathutil.GCD(a, b) }
 
 func reduce(num, den int) (int, int) {
-	g := gcd(num, den)
+	g := mathutil.GCD(num, den)
 	return num / g, den / g
 }
 
@@ -60,10 +54,6 @@ func toMixed(num, den int) (int, int, int) {
 	rem := num % den
 	return whole, rem, den
 }
-
-// ---------------------------------------------------------------------------
-// Generators
-// ---------------------------------------------------------------------------
 
 type fracConceptGen struct{}
 
@@ -148,7 +138,7 @@ func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: %d/%d", num, den),
 		Answer:      fracStr(n, d),
-		Explanation: fmt.Sprintf("Divide numerator and denominator by %d: %d/%d = %d/%d", gcd(num, den), num, den, n, d),
+		Explanation: fmt.Sprintf("Divide numerator and denominator by %d: %d/%d = %d/%d", mathutil.GCD(num, den), num, den, n, d),
 	}
 }
 
