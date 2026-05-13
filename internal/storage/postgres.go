@@ -60,6 +60,14 @@ func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) AddXP(studentID string, amount int) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetXP(studentID string) (int, int, error) {
+	return 0, 0, fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) Migrate() error {
 	return fmt.Errorf("not implemented")
 }
