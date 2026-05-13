@@ -212,11 +212,10 @@ func (g *pctFindRateGen) Generate(difficulty float64) generator.Problem {
 	p := rand.Intn(40) + 20
 	total := (rand.Intn(40) + 10) * 10
 	part := p * total / 100
-	result := float64(part) / float64(total) * 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d is what percent of %d?", part, total),
-		Answer:      fmt.Sprintf("%d", int(result)),
-		Explanation: fmt.Sprintf("%d/%d = %g = %d%%", part, total, result/100, int(result)),
+		Answer:      fmt.Sprintf("%d", p),
+		Explanation: fmt.Sprintf("%d/%d = %d/%d = %d%%", part, total, p, 100, p),
 	}
 }
 
@@ -545,10 +544,11 @@ type ineqOneStepGen struct{}
 func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(9) + 2
 	b := rand.Intn(15) - 7
+	c := x + b - 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x + %d > %d. What integer does x exceed?", b, x+b-1),
-		Answer:      fmt.Sprintf("%d", x-1),
-		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d. x exceeds %d.", b, x+b-1, b, x-1, x-1),
+		Question:    fmt.Sprintf("Solve: x + %d > %d", b, c),
+		Answer:      fmt.Sprintf("%d", x),
+		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d. Smallest integer: %d.", b, c, b, c-b, x),
 	}
 }
 
@@ -558,11 +558,11 @@ func (g *ineqTwoStepGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(5) + 2
 	b := rand.Intn(8) - 3
-	rhs := a*x + b
+	c := a*x + b - 1
 	return generator.Problem{
-		Question: fmt.Sprintf("Solve: %dx + %d < %d. What number is x less than?", a, b, rhs+1),
-		Answer:   fmt.Sprintf("%d", x+1),
-		Explanation: fmt.Sprintf("%dx + %d < %d, subtract %d: %dx < %d, divide: x < %.1f, so x < %d.",
-			a, b, rhs+1, b, a, rhs+1-b, float64(rhs+1-b)/float64(a), x+1),
+		Question: fmt.Sprintf("Solve: %dx + %d < %d", a, b, c),
+		Answer:   fmt.Sprintf("%d", x),
+		Explanation: fmt.Sprintf("%dx + %d < %d, subtract %d: %dx < %d, divide: x < %.1f. Largest integer: %d.",
+			a, b, c, b, a, c-b, float64(c-b)/float64(a), x),
 	}
 }
