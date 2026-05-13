@@ -38,6 +38,7 @@ type Question struct {
 	Question    string          `json:"question"`
 	IsReview    bool            `json:"is_review"`
 	Lesson      *lessons.Lesson `json:"lesson,omitempty"`
+	Diagram     string          `json:"diagram,omitempty"`
 }
 
 type AnswerResult struct {
@@ -203,13 +204,39 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 		lesson = e.ll.Lesson(next.Concept.ID)
 	}
 
+	diagram := diagramForConcept(next.Concept.ID)
+
 	return &Question{
 		ConceptID:   next.Concept.ID,
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
 		IsReview:    next.IsReview,
 		Lesson:      lesson,
+		Diagram:     diagram,
 	}, nil
+}
+
+var conceptDiagrams = map[string]string{
+	// Integrals
+	"calc.integral.definite":          "/diagrams/algebrica/definite-integrals-1.svg",
+	"calc.integral.ftc":               "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
+	"calc.integral.area_between":      "/diagrams/algebrica/finding-areas-by-integration-1.svg",
+	"calc.integral.volume":            "/diagrams/algebrica/finding-areas-by-integration-2.svg",
+	"calc.integral.substitution":      "/diagrams/algebrica/integration-by-substitution.svg",
+	"calc.integral.partial_fractions": "/diagrams/algebrica/integral-of-rational-functions.svg",
+	// Equations
+	"alg.quad.solve_factor": "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.formula":      "/diagrams/algebrica/quadratic-equations.svg",
+	// Calculus limits
+	"calc.limit.continuity":  "/diagrams/algebrica/riemann-integrability-criteria-1.svg",
+	"calc.integral.improper": "/diagrams/algebrica/improper-integrals-1.svg",
+}
+
+func diagramForConcept(id string) string {
+	if d, ok := conceptDiagrams[id]; ok {
+		return d
+	}
+	return ""
 }
 
 func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapsedSeconds float64) (*AnswerResult, error) {
