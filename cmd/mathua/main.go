@@ -20,10 +20,16 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/generator/algebra"
 	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
+	"github.com/chuma-beep/mathua/internal/generator/complex"
 	"github.com/chuma-beep/mathua/internal/generator/counting"
+	"github.com/chuma-beep/mathua/internal/generator/discrete"
 	"github.com/chuma-beep/mathua/internal/generator/fractions"
 	"github.com/chuma-beep/mathua/internal/generator/geometry"
+	"github.com/chuma-beep/mathua/internal/generator/linalg"
+	"github.com/chuma-beep/mathua/internal/generator/numtheory"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
+	"github.com/chuma-beep/mathua/internal/generator/statistics"
+	"github.com/chuma-beep/mathua/internal/generator/trigonometry"
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/planning"
@@ -71,6 +77,12 @@ func main() {
 	geometry.Register(reg)
 	prealgebra.Register(reg)
 	algebra.Register(reg)
+	trigonometry.Register(reg)
+	statistics.Register(reg)
+	numtheory.Register(reg)
+	complex.Register(reg)
+	linalg.Register(reg)
+	discrete.Register(reg)
 
 	ll, err := lessons.Load("data/lessons")
 	if err != nil {
