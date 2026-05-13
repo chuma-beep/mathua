@@ -32,6 +32,7 @@ type ConceptProgress struct {
 	SM2Interval     int
 	SM2EFactor      float64
 	MasteredAt      *time.Time
+	WeaknessScore   float64
 }
 
 type Session struct {

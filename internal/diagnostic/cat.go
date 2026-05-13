@@ -23,6 +23,7 @@ type Session struct {
 	ConsecutiveOK int
 	State         State
 	Attempts      []Attempt
+	order         []*concepts.Concept
 }
 
 type Attempt struct {
@@ -43,26 +44,33 @@ func NewEngine(dag *concepts.DAG, reg *generator.Registry) *Engine {
 }
 
 func (e *Engine) Start() *Session {
-	mid := len(e.dag.Order()) / 2
+	order := e.dag.Order()
+	return e.StartWithPath(order)
+}
+
+func (e *Engine) StartWithPath(path []*concepts.Concept) *Session {
+	if len(path) == 0 {
+		return &Session{State: StateDone, order: path}
+	}
+	mid := len(path) / 2
 	return &Session{
 		Position: mid,
 		Low:      0,
-		High:     len(e.dag.Order()) - 1,
+		High:     len(path) - 1,
 		State:    StateProbing,
+		order:    path,
 	}
 }
 
 func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
-	if s.State == StateDone {
+	if s.State == StateDone || s.Position < 0 || s.Position >= len(s.order) {
 		return nil, "", nil
 	}
-	concept := e.dag.Order()[s.Position]
-	threshold := concept.MasteryThreshold.AvgTimeSeconds
+	concept := s.order[s.Position]
 	p, err := e.registry.Generate(concept.ID, 0.5)
 	if err != nil {
 		return nil, "", err
 	}
-	_ = threshold
 	return &p, concept.ID, nil
 }
 

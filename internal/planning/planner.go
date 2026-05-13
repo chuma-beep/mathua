@@ -53,17 +53,15 @@ func (p *Planner) Course(id string) *Course {
 	return p.byID[id]
 }
 
-func (p *Planner) PrerequisiteChain(targets []string) (*Path, error) {
+func (p *Planner) collectChain(targets []string) (map[string]bool, error) {
 	inChain := make(map[string]bool)
 	var queue []string
-
 	for _, t := range targets {
 		if p.dag.Concept(t) == nil {
 			return nil, fmt.Errorf("target concept %q not found in DAG", t)
 		}
 		queue = append(queue, t)
 	}
-	// BFS backward through prerequisites
 	for len(queue) > 0 {
 		cid := queue[0]
 		queue = queue[1:]
@@ -77,7 +75,14 @@ func (p *Planner) PrerequisiteChain(targets []string) (*Path, error) {
 			}
 		}
 	}
-	// Collect and topo-sort (respecting existing DAG order)
+	return inChain, nil
+}
+
+func (p *Planner) PrerequisitesOf(conceptIDs []string) (*Path, error) {
+	inChain, err := p.collectChain(conceptIDs)
+	if err != nil {
+		return nil, err
+	}
 	var chain []*concepts.Concept
 	for _, c := range p.dag.Order() {
 		if inChain[c.ID] {
@@ -85,9 +90,26 @@ func (p *Planner) PrerequisiteChain(targets []string) (*Path, error) {
 		}
 	}
 	return &Path{
-		Course:   &Course{Targets: targets},
+		Course:   &Course{Targets: conceptIDs},
 		Concepts: chain,
 	}, nil
+}
+
+func (p *Planner) PrerequisiteChain(targets []string) (*Path, error) {
+	return p.PrerequisitesOf(targets)
+}
+
+func (p *Planner) PathForCourse(courseID string) (*Path, error) {
+	c := p.byID[courseID]
+	if c == nil {
+		return nil, fmt.Errorf("course %q not found", courseID)
+	}
+	path, err := p.PrerequisitesOf(c.Targets)
+	if err != nil {
+		return nil, err
+	}
+	path.Course = c
+	return path, nil
 }
 
 func (p *Planner) Unmastered(path *Path, progress map[string]*storage.ConceptProgress) []*concepts.Concept {
@@ -100,17 +122,21 @@ func (p *Planner) Unmastered(path *Path, progress map[string]*storage.ConceptPro
 	return out
 }
 
-func (p *Planner) PathForCourse(courseID string) (*Path, error) {
-	c := p.byID[courseID]
-	if c == nil {
-		return nil, fmt.Errorf("course %q not found", courseID)
+func (p *Planner) WeakAreas(path *Path, progress map[string]*storage.ConceptProgress) []*concepts.Concept {
+	return p.Unmastered(path, progress)
+}
+
+func (p *Planner) Readiness(path *Path, progress map[string]*storage.ConceptProgress) float64 {
+	if len(path.Concepts) == 0 {
+		return 1.0
 	}
-	path, err := p.PrerequisiteChain(c.Targets)
-	if err != nil {
-		return nil, err
+	mastered := 0
+	for _, c := range path.Concepts {
+		if prog, ok := progress[c.ID]; ok && prog.Status == "MASTERED" {
+			mastered++
+		}
 	}
-	path.Course = c
-	return path, nil
+	return float64(mastered) / float64(len(path.Concepts))
 }
 
 func (p *Planner) SortCourses(courses []*Course) {

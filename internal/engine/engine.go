@@ -151,6 +151,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 			NextReviewDue:  p.NextReviewDue,
 			RequiredStreak: reqStreak,
 			TimeThreshold:  timeThresh,
+			WeaknessScore:  p.WeaknessScore,
 		}
 	}
 	for _, c := range e.dag.Order() {
@@ -251,6 +252,23 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		progress.Streak = 0
 	}
 
+	// Weakness score update
+	conceptThreshold := as.timeThreshold
+	if conceptThreshold == 0 {
+		conceptThreshold = 10.0
+	}
+	if gr.Correct {
+		progress.WeaknessScore *= 0.5
+		if elapsedSeconds <= conceptThreshold {
+			progress.WeaknessScore *= 0.3
+		}
+	} else {
+		progress.WeaknessScore += 0.2
+		if progress.WeaknessScore > 1.0 {
+			progress.WeaknessScore = 1.0
+		}
+	}
+
 	// Mastery transition
 	ctx := mastery.TransitionCtx{
 		Streak:            progress.Streak,
@@ -286,6 +304,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		now := nowUTC()
 		progress.MasteredAt = &now
 	}
+	if newStatus == mastery.StatusMastered {
+		progress.WeaknessScore = 0.0
+	}
 	if progress.Streak >= as.requiredStreak && progress.AvgResponseTime <= as.timeThreshold {
 		now := nowUTC()
 		progress.LastReviewed = &now
@@ -296,6 +317,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	if err := e.repo.UpsertProgress(progress); err != nil {
 		return nil, fmt.Errorf("save progress: %w", err)
 	}
+
+	e.PropagateWeakness(studentID)
 
 	// Record attempt
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
@@ -370,6 +393,142 @@ func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 
 func (e *Engine) DiagnosticFrontier(s *diagnostic.Session) int {
 	return e.diag.FrontierEstimate(s)
+}
+
+func (e *Engine) StartGoalDiagnostic(studentID string, conceptIDs []string) (*diagnostic.Session, *Question, error) {
+	if e.planner == nil {
+		return nil, nil, fmt.Errorf("no planner configured")
+	}
+	path, err := e.planner.PrerequisitesOf(conceptIDs)
+	if err != nil {
+		return nil, nil, fmt.Errorf("goal path: %w", err)
+	}
+	session := e.diag.StartWithPath(path.Concepts)
+	if session.State == diagnostic.StateDone || len(path.Concepts) == 0 {
+		return session, nil, nil
+	}
+	prob, cid, err := e.diag.NextQuestion(session)
+	if err != nil {
+		return nil, nil, err
+	}
+	c := e.dag.Concept(cid)
+	label := cid
+	if c != nil {
+		label = c.Label
+	}
+	return session, &Question{
+		ConceptID:   cid,
+		ConceptName: label,
+		Question:    prob.Question,
+	}, nil
+}
+
+func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session) error {
+	for _, att := range session.Attempts {
+		status := string(mastery.StatusUnseen)
+		weakness := 1.0
+		if att.Correct && att.Fast {
+			status = string(mastery.StatusPracticing)
+			weakness = 0.1
+		} else if att.Correct {
+			status = string(mastery.StatusLearning)
+			weakness = 0.3
+		} else {
+			weakness = 0.8
+		}
+		prog := &storage.ConceptProgress{
+			StudentID:     studentID,
+			ConceptID:     att.ConceptID,
+			Status:        status,
+			WeaknessScore: weakness,
+		}
+		if err := e.repo.UpsertProgress(prog); err != nil {
+			return fmt.Errorf("save diagnostic progress: %w", err)
+		}
+	}
+	// Set active path to the diagnostic's concept set for focused practice
+	if len(session.Attempts) > 0 {
+		e.mu.Lock()
+		pathSet := make(map[string]bool)
+		for _, att := range session.Attempts {
+			pathSet[att.ConceptID] = true
+		}
+		e.activePath[studentID] = pathSet
+		e.mu.Unlock()
+	}
+	return nil
+}
+
+func (e *Engine) WeaknessMap(studentID string) map[string]float64 {
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return nil
+	}
+	result := make(map[string]float64)
+	for _, c := range e.dag.Order() {
+		p, ok := progress[c.ID]
+		if !ok {
+			result[c.ID] = 0.5
+			continue
+		}
+		if p.Status == "MASTERED" {
+			result[c.ID] = 0.0
+			continue
+		}
+		result[c.ID] = p.WeaknessScore
+	}
+	return result
+}
+
+func (e *Engine) PropagateWeakness(studentID string) {
+	weakness := e.WeaknessMap(studentID)
+	type update struct {
+		cid string
+		w   float64
+	}
+	var updates []update
+	for cid, w := range weakness {
+		if w > 0.3 {
+			for _, dep := range e.dag.DependentsOf(cid) {
+				if weakness[dep.ID] < w*0.3 {
+					updates = append(updates, update{dep.ID, w * 0.3})
+				}
+			}
+		}
+	}
+	for _, u := range updates {
+		prog, err := e.repo.GetProgress(studentID, u.cid)
+		if err != nil || prog == nil {
+			prog = &storage.ConceptProgress{
+				StudentID: studentID,
+				ConceptID: u.cid,
+				Status:    string(mastery.StatusUnseen),
+			}
+		}
+		prog.WeaknessScore = u.w
+		_ = e.repo.UpsertProgress(prog)
+	}
+}
+
+func (e *Engine) AdjustPlan(studentID string) {
+	e.mu.Lock()
+	path := e.activePath[studentID]
+	e.mu.Unlock()
+	if len(path) == 0 {
+		return
+	}
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return
+	}
+	e.mu.Lock()
+	for cid := range path {
+		if p, ok := progress[cid]; ok && p.Status == "MASTERED" && p.WeaknessScore < 0.2 {
+			delete(path, cid)
+		}
+	}
+	e.activePath[studentID] = path
+	e.mu.Unlock()
 }
 
 func timeOrZero(t *time.Time) time.Time {
