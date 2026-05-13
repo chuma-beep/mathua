@@ -1,4 +1,4 @@
-FROM golang:1.21 AS builder
+FROM golang:1.25 AS builder
 
 WORKDIR /app
 
@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
 
 WORKDIR /app
 COPY --from=builder /app/mathua .
+COPY --from=builder /app/web/next-app/out ./web/next-app/out
+COPY --from=builder /app/data ./data
 
 EXPOSE 8080
 
