@@ -2,7 +2,6 @@ package algebra
 
 import (
 	"fmt"
-	"math"
 	"math/rand"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -125,10 +124,17 @@ func (g *stdFormGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(5) + 1
 	y := rand.Intn(5) + 1
 	c := a*x + b*y
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Is (%d,%d) a solution to %dx + %dy = %d?", x, y, a, b, c),
+			Answer:      "yes",
+			Explanation: fmt.Sprintf("%d(%d) + %d(%d) = %d + %d = %d. Yes!", a, x, b, y, a*x, b*y, c),
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is (%d,%d) a solution to %dx + %dy = %d?", x, y, a, b, c),
-		Answer:      "yes",
-		Explanation: fmt.Sprintf("%d(%d) + %d(%d) = %d + %d = %d. Yes!", a, x, b, y, a*x, b*y, c),
+		Question:    fmt.Sprintf("Is (%d,%d) a solution to %dx + %dy = %d?", x+1, y, a, b, c),
+		Answer:      "no",
+		Explanation: fmt.Sprintf("%d(%d) + %d(%d) = %d + %d = %d, not %d. No!", a, x+1, b, y, a*(x+1), b*y, a*(x+1)+b*y, c),
 	}
 }
 
@@ -178,18 +184,16 @@ type varsBothSidesGen struct{}
 func (g *varsBothSidesGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(5) + 2
-	b := rand.Intn(10) + 1
 	c := rand.Intn(5) + 1
 	for a == c {
 		c++
 	}
-	right := c*x + b
-	leftCoef := a + c
-	leftConst := a * x
+	b := rand.Intn(10) + 1
+	d := (a-c)*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d = %dx + %d", leftCoef, 0, c, right),
+		Question:    fmt.Sprintf("Solve: %dx + %d = %dx + %d", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%dx = %dx + %d -> %dx = %d -> x = %d.", leftCoef, c, right, a, right-leftConst, x),
+		Explanation: fmt.Sprintf("%dx + %d = %dx + %d -> %dx = %d -> x = %d.", a, b, c, d, a-c, d-b, x),
 	}
 }
 
@@ -211,11 +215,11 @@ func (g *multiStepIneqGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(6) + 2
 	b := rand.Intn(10) + 1
-	rhs := a*x + b
+	c := a*(x-1) + b + rand.Intn(a)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d > %d", a, b, rhs-1),
-		Answer:      fmt.Sprintf("%d", x-1),
-		Explanation: fmt.Sprintf("%dx + %d > %d -> %dx > %d -> x > %d.", a, b, rhs-1, a, rhs-1-b, x-1),
+		Question:    fmt.Sprintf("Solve: %dx + %d > %d", a, b, c),
+		Answer:      fmt.Sprintf("%d", x),
+		Explanation: fmt.Sprintf("%dx + %d > %d -> %dx > %d -> x > %d, so x >= %d.", a, b, c, a, c-b, c-b, x),
 	}
 }
 
@@ -439,12 +443,10 @@ func (g *quadCompleteSquareGen) Generate(difficulty float64) generator.Problem {
 type quadFormulaGen struct{}
 
 func (g *quadFormulaGen) Generate(difficulty float64) generator.Problem {
-	r := rand.Intn(8) + 1
-	b := -2 * r
-	c := r*r - rand.Intn(10)
-	disc := b*b - 4*c
-	r1 := (-b + int(math.Sqrt(float64(disc)))) / 2
-	r2 := (-b - int(math.Sqrt(float64(disc)))) / 2
+	r1 := rand.Intn(8) + 1
+	r2 := rand.Intn(8) + 1
+	b := -(r1 + r2)
+	c := r1 * r2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve using quadratic formula: x^2 + %dx + %d = 0", b, c),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
@@ -519,15 +521,23 @@ func (g *funcEvaluateGen) Generate(difficulty float64) generator.Problem {
 type funcLinearGen struct{}
 
 func (g *funcLinearGen) Generate(difficulty float64) generator.Problem {
-	m := rand.Intn(6) - 3
-	if m == 0 {
-		m = 1
+	if rand.Intn(2) == 0 {
+		m := rand.Intn(6) - 3
+		if m == 0 {
+			m = 1
+		}
+		b := rand.Intn(10) - 5
+		return generator.Problem{
+			Question:    fmt.Sprintf("Is y = %s a function? (yes/no)", formatLinear(m, b)),
+			Answer:      "yes",
+			Explanation: fmt.Sprintf("Linear equations always define functions (passes vertical line test)."),
+		}
 	}
-	b := rand.Intn(10) - 5
+	c := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is y = %s a function? (yes/no)", formatLinear(m, b)),
-		Answer:      "yes",
-		Explanation: fmt.Sprintf("Linear equations always define functions (passes vertical line test)."),
+		Question:    fmt.Sprintf("Is x = %d a function? (yes/no)", c),
+		Answer:      "no",
+		Explanation: fmt.Sprintf("x = %d is a vertical line — it fails the vertical line test.", c),
 	}
 }
 
