@@ -57,6 +57,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.seq.geometric", &seqGeomGen{})
 	reg.Register("alg.seq.sum_arith", &seqSumArithGen{})
 	reg.Register("alg.seq.sum_geo", &seqSumGeoGen{})
+
+	reg.Register("alg.ineq.two_var", &ineqTwoVarGen{})
+	reg.Register("alg.conic.circle", &conicCircleGen{})
+	reg.Register("alg.conic.ellipse", &conicEllipseGen{})
 }
 
 // ---------------------------------------------------------------------------
@@ -719,4 +723,71 @@ func formatLinear(m, b int) string {
 		return fmt.Sprintf("y = %dx - %d", m, -b)
 	}
 	return fmt.Sprintf("y = %dx + %d", m, b)
+}
+
+type ineqTwoVarGen struct{}
+
+func (g *ineqTwoVarGen) Generate(difficulty float64) generator.Problem {
+	m := rand.Intn(4) + 1
+	b := rand.Intn(6) - 3
+	op := ">"
+	if rand.Intn(2) == 0 {
+		op = "<"
+	}
+	testX := rand.Intn(5) + 1
+	testY := m*testX + b + rand.Intn(4) - 2
+	expected := m*testX + b
+	satisfies := testY > expected
+	if op == "<" {
+		satisfies = testY < expected
+	}
+	ans := "no"
+	if satisfies {
+		ans = "yes"
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is (%d,%d) a solution to y %s %dx + %d?", testX, testY, op, m, b),
+		Answer:      ans,
+		Explanation: fmt.Sprintf("At x=%d: y should be %s %d. y=%d %s %d = %t.", testX, op, expected, testY, op, expected, satisfies),
+	}
+}
+
+type conicCircleGen struct{}
+
+func (g *conicCircleGen) Generate(difficulty float64) generator.Problem {
+	h := rand.Intn(5) - 2
+	k := rand.Intn(5) - 2
+	r := rand.Intn(4) + 2
+	r2 := r * r
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the radius of (x%+d)² + (y%+d)² = %d?", -h, -k, r2),
+		Answer:      fmt.Sprintf("%d", r),
+		Explanation: fmt.Sprintf("The radius is √%d = %d.", r2, r),
+	}
+}
+
+type conicEllipseGen struct{}
+
+func (g *conicEllipseGen) Generate(difficulty float64) generator.Problem {
+	h := rand.Intn(5) - 2
+	k := rand.Intn(5) - 2
+	a := rand.Intn(3) + 2
+	b := rand.Intn(2) + 1
+	for a <= b {
+		b = rand.Intn(2) + 1
+	}
+	a2 := a * a
+	b2 := b * b
+	askMajor := rand.Intn(2) == 0
+	label := "semi-minor"
+	val := b
+	if askMajor {
+		label = "semi-major"
+		val = a
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the %s axis length of (x%+d)²/%d + (y%+d)²/%d = 1?", label, -h, a2, -k, b2),
+		Answer:      fmt.Sprintf("%d", val),
+		Explanation: fmt.Sprintf("The %s axis length is %d because %s² = %d.", label, val, label[:6], val*val),
+	}
 }

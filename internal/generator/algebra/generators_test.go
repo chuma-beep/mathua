@@ -91,3 +91,7 @@ func TestSeqArith(t *testing.T)    { fuzzGen(t, &seqArithGen{}, grader.GradingNu
 func TestSeqGeom(t *testing.T)     { fuzzGen(t, &seqGeomGen{}, grader.GradingNumeric) }
 func TestSeqSumArith(t *testing.T) { fuzzGen(t, &seqSumArithGen{}, grader.GradingNumeric) }
 func TestSeqSumGeo(t *testing.T)   { fuzzGen(t, &seqSumGeoGen{}, grader.GradingNumeric) }
+
+func TestIneqTwoVar(t *testing.T)   { fuzzNoSelf(t, &ineqTwoVarGen{}) }
+func TestConicCircle(t *testing.T)  { fuzzGen(t, &conicCircleGen{}, grader.GradingNumeric) }
+func TestConicEllipse(t *testing.T) { fuzzGen(t, &conicEllipseGen{}, grader.GradingNumeric) }
