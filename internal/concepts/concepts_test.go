@@ -8,7 +8,7 @@ import (
 )
 
 func TestLoad_Valid(t *testing.T) {
-	d, err := Load("../../data/concepts.json")
+	d, err := LoadDir("../../data/concepts")
 	if err != nil {
 		t.Fatalf("unexpected load error: %v", err)
 	}

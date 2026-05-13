@@ -1,0 +1,656 @@
+[
+  {
+    "id": "arith.add.single",
+    "label": "Single-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.cardinality"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.add.double",
+    "label": "Two-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.add.carry",
+    "label": "Addition with carrying",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.add.triple",
+    "label": "Three-digit addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.carry"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 14.0
+    }
+  },
+  {
+    "id": "arith.add.word",
+    "label": "Addition word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.sub.single",
+    "label": "Single-digit subtraction",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.sub.double",
+    "label": "Two-digit subtraction",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.single",
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sub.borrow",
+    "label": "Subtraction with borrowing",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.sub.word",
+    "label": "Subtraction word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.place.tens",
+    "label": "Tens and units place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.place.hundreds",
+    "label": "Hundreds place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.place.thousands",
+    "label": "Thousands place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.tens",
+    "label": "Round to nearest 10",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.hundreds",
+    "label": "Round to nearest 100",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.round.thousands",
+    "label": "Round to nearest 1000",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.thousands",
+      "arith.round.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.mult.concept",
+    "label": "Multiplication as repeated addition",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.mult.2_5_10",
+    "label": "Times tables 2, 5 and 10",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.mult.tables",
+    "label": "Times tables 1 to 12",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.2_5_10"
+    ],
+    "mastery_threshold": {
+      "streak": 7,
+      "avg_time_seconds": 6.0
+    }
+  },
+  {
+    "id": "arith.mult.double",
+    "label": "Multiply two-digit numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.mult.triple",
+    "label": "Multiply three-digit by one-digit",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.mult.word",
+    "label": "Multiplication word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "arith.div.concept",
+    "label": "Division as equal sharing",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.div.basic",
+    "label": "Basic division without remainder",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.concept",
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.div.remainder",
+    "label": "Division with remainders",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.div.long",
+    "label": "Long division",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.remainder",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.div.word",
+    "label": "Division word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.remainder"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "arith.factor.find",
+    "label": "Find factors of a number",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.factor.prime",
+    "label": "Identify prime numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.find"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.factor.prime_fact",
+    "label": "Prime factorization",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.gcf",
+    "label": "Greatest common factor",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.lcm",
+    "label": "Least common multiple",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.gcf"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.factor.composite",
+    "label": "Identify composite numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.prime"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.exp.concept",
+    "label": "Exponents: base and power",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.exp.evaluate",
+    "label": "Evaluate simple exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.product_rule",
+    "label": "Exponent product rule: x^a times x^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.quotient_rule",
+    "label": "Exponent quotient rule: x^a divided by x^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.exp.power_rule",
+    "label": "Power of a power rule: (x^a)^b",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sqrt.perfect",
+    "label": "Square roots of perfect squares",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "arith.sqrt.simplify",
+    "label": "Simplify square roots",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sqrt.perfect",
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.neg.number_line",
+    "label": "Negative numbers on number line",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "arith.neg.add_sub",
+    "label": "Add and subtract negative numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line",
+      "arith.sub.borrow"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.neg.mult_div",
+    "label": "Multiply and divide with negatives",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.add_sub",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "arith.order_ops.basic",
+    "label": "Order of operations without exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.order_ops.full",
+    "label": "BODMAS with exponents",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.order_ops.basic",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "arith.order_ops.nested",
+    "label": "Nested parentheses in order of operations",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.order_of_operations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.order_ops.full"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.dec.intro",
+    "label": "Read and write decimals to hundredths",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.decimals_intro",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.hundreds",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  }
+]

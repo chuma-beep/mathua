@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sort"
+	"strings"
 )
 
 // Load reads concept definitions from a JSON file, validates the graph,
@@ -17,6 +19,31 @@ func Load(path string) (*DAG, error) {
 	var raw []Concept
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return nil, fmt.Errorf("parse concepts: %w", err)
+	}
+	return Build(raw)
+}
+
+// LoadDir reads all .json files from a directory, merges them, validates,
+// topologically sorts, and returns the populated DAG.
+func LoadDir(dir string) (*DAG, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, fmt.Errorf("read concepts dir: %w", err)
+	}
+	var raw []Concept
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".json") {
+			continue
+		}
+		data, err := os.ReadFile(filepath.Join(dir, e.Name()))
+		if err != nil {
+			return nil, fmt.Errorf("read %s: %w", e.Name(), err)
+		}
+		var batch []Concept
+		if err := json.Unmarshal(data, &batch); err != nil {
+			return nil, fmt.Errorf("parse %s: %w", e.Name(), err)
+		}
+		raw = append(raw, batch...)
 	}
 	return Build(raw)
 }

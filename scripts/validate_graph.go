@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	dag, err := concepts.Load("data/concepts.json")
+	dag, err := concepts.LoadDir("data/concepts")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "FAIL: %v\n", err)
 		os.Exit(1)

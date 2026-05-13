@@ -1,0 +1,293 @@
+[
+  {
+    "id": "geo.basic.points_lines",
+    "label": "Points, lines, and planes",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.basic.angles",
+    "label": "Types of angles: acute, right, obtuse",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.basic.angle_measure",
+    "label": "Measuring angles in degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.basic.complementary",
+    "label": "Complementary and supplementary angles",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.basic.vertical",
+    "label": "Vertical angles and parallel lines",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.complementary"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.types",
+    "label": "Types of triangles",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.triangle.angles",
+    "label": "Triangle angle sum is 180 degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.triangle.area",
+    "label": "Area of a triangle",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.pythagorean",
+    "label": "Pythagorean theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.area",
+      "arith.sqrt.perfect",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.quad.types",
+    "label": "Types of quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.quad.area",
+    "label": "Area of rectangles and parallelograms",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.quad.perimeter",
+    "label": "Perimeter of polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.circle.parts",
+    "label": "Parts of a circle: radius, diameter, chord",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.circle.circumference",
+    "label": "Circumference of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.parts",
+      "dec.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.circle.area",
+    "label": "Area of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.circumference",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.coord.plot",
+    "label": "Plot points on the coordinate plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.coord.distance",
+    "label": "Distance between two points",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.coord.midpoint",
+    "label": "Midpoint of a line segment",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "dec.add"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.volume_rect",
+    "label": "Volume of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area",
+      "arith.mult.triple"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.surface_area",
+    "label": "Surface area of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  }
+]

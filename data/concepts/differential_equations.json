@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ode.concept",
+    "label": "What is a differential equation",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "ode.separable",
+    "label": "Separable differential equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.concept",
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "ode.linear_first",
+    "label": "First-order linear ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.separable",
+      "calc.deriv.exp_log"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.exact",
+    "label": "Exact equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.linear_first",
+      "calc.deriv.implicit"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.homogeneous",
+    "label": "Homogeneous second-order ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.linear_first",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.nonhomogeneous",
+    "label": "Non-homogeneous second-order ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.homogeneous",
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "ode.laplace",
+    "label": "Laplace transforms",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.nonhomogeneous",
+      "calc.integral.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  },
+  {
+    "id": "ode.systems",
+    "label": "Systems of differential equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.systems",
+    "grading_type": "expression",
+    "prerequisites": [
+      "ode.homogeneous",
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 35.0
+    }
+  }
+]

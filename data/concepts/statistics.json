@@ -1,0 +1,174 @@
+[
+  {
+    "id": "stat.data.read_table",
+    "label": "Read data from tables and charts",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "count.compare",
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "stat.data.bar_graph",
+    "label": "Read and create bar graphs",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.line_plot",
+    "label": "Read and create line plots",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.bar_graph"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.mean",
+    "label": "Calculate the mean",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.median",
+    "label": "Find the median",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.mode",
+    "label": "Find the mode",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "stat.data.range",
+    "label": "Find the range of a data set",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "stat.prob.sample_space",
+    "label": "Sample space: list all possible outcomes",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.range",
+      "count.cardinality"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.prob.basic",
+    "label": "Basic probability: P(event) = favourable / total",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.concept",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "stat.prob.complement",
+    "label": "Complement of an event",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.prob.compound",
+    "label": "Compound events: and / or",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.prob.counting",
+    "label": "Fundamental counting principle",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  }
+]

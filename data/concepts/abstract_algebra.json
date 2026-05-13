@@ -1,0 +1,75 @@
+[
+  {
+    "id": "abstract.group.def",
+    "label": "Definition of a group",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.quantifiers",
+      "nt.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "abstract.group.examples",
+    "label": "Examples of groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.def"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "abstract.subgroup",
+    "label": "Subgroups and cosets",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.examples"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.ring",
+    "label": "Rings and fields",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.subgroup",
+      "alg.factor.diff_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.homomorphism",
+    "label": "Group homomorphisms",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.subgroup",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 28.0
+    }
+  }
+]

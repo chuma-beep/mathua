@@ -1,0 +1,46 @@
+[
+  {
+    "id": "topo.metric",
+    "label": "Metric spaces",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "topo.open_closed",
+    "label": "Open and closed sets",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.metric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "topo.continuous",
+    "label": "Continuity in topological spaces",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.open_closed",
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  }
+]
