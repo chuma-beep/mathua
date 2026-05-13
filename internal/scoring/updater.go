@@ -18,6 +18,7 @@ type Scores struct {
 	Level            string  `json:"level"`
 	XPTotal          int     `json:"xp_total"`
 	XPToday          int     `json:"xp_today"`
+	DailyXPGoal      int     `json:"daily_xp_goal"`
 }
 
 type Updater struct {
@@ -55,6 +56,10 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 	level := levels.Compute(mastered)
 	streak := computeCurrentStreak(progress)
 	xpTotal, xpToday, _ := u.repo.GetXP(studentID)
+	dailyGoal := 150
+	if st, err := u.repo.GetStudent(studentID); err == nil && st != nil {
+		dailyGoal = st.DailyXPGoal
+	}
 
 	return &Scores{
 		LifetimePoints:   lifetimePoints,
@@ -65,6 +70,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		Level:            level,
 		XPTotal:          xpTotal,
 		XPToday:          xpToday,
+		DailyXPGoal:      dailyGoal,
 	}, nil
 }
 

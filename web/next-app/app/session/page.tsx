@@ -15,6 +15,7 @@ import {
   getScores,
   startGoalDiagnosticName,
   getGoalPlan,
+  setDailyXPGoal,
   type Question,
   type AnswerResult,
   type Scores,
@@ -40,7 +41,7 @@ export default function SessionPage() {
   const [scores, setScores] = useState<Scores>({
     lifetime_points: 0, weekly_score: 0, speed_bonus: 0,
     concepts_mastered: 0, current_streak: 0, level: 'Novice',
-    xp_total: 0, xp_today: 0,
+    xp_total: 0, xp_today: 0, daily_xp_goal: 150,
   })
   const [error, setError] = useState('')
   const [elapsed, setElapsed] = useState(0)
@@ -430,19 +431,35 @@ export default function SessionPage() {
                     <div className="font-mono text-2xl text-mathua-gold mt-1">{scores.concepts_mastered}</div>
                   </div>
                   <div>
-                    <span className="font-mono text-[10px] uppercase text-mathua-muted">XP</span>
+                    <span className="font-mono text-[10px] uppercase text-mathua-muted">Daily XP</span>
                     <div className="flex items-baseline gap-2 mt-1">
-                      <span className="font-mono text-2xl text-mathua-blue">{scores.xp_total ?? 0}</span>
-                      <span className="font-mono text-[10px] text-mathua-muted">/ {Math.ceil(((scores.xp_total ?? 0) + 1) / 150) * 150}</span>
+                      <span className="font-mono text-2xl text-mathua-blue">{scores.xp_today ?? 0}</span>
+                      <span className="font-mono text-[10px] text-mathua-muted">/ {scores.daily_xp_goal ?? 150}</span>
+                      <button
+                        onClick={() => {
+                          const g = prompt('Set daily XP goal:', String(scores.daily_xp_goal || 150))
+                          if (g) {
+                            const n = parseInt(g, 10)
+                            if (n > 0 && n <= 10000) {
+                              setDailyXPGoal(n).then(() => {
+                                setScores(prev => ({ ...prev, daily_xp_goal: n }))
+                              }).catch(() => {})
+                            }
+                          }
+                        }}
+                        className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover ml-1"
+                      >
+                        edit
+                      </button>
                     </div>
                     <div className="mt-2 h-1.5 bg-mathua-code rounded-full overflow-hidden">
                       <div
                         className="h-full bg-mathua-blue rounded-full transition-all duration-500"
-                        style={{ width: `${(((scores.xp_total ?? 0) % 150) / 150) * 100}%` }}
+                        style={{ width: `${Math.min(((scores.xp_today ?? 0) / (scores.daily_xp_goal || 150)) * 100, 100)}%` }}
                       />
                     </div>
-                    {(scores.xp_total ?? 0) > 0 && (scores.xp_total ?? 0) % 150 === 0 && (
-                      <div className="mt-1 font-mono text-[10px] text-mathua-gold uppercase">Quiz ready!</div>
+                    {(scores.xp_today ?? 0) >= (scores.daily_xp_goal || 150) && (
+                      <div className="mt-1 font-mono text-[10px] text-mathua-gold uppercase">Goal reached! ★</div>
                     )}
                   </div>
                 </div>

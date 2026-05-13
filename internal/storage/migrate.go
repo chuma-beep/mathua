@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS students (
     xp_total             INTEGER NOT NULL DEFAULT 0,
     xp_today             INTEGER NOT NULL DEFAULT 0,
     xp_date              TEXT,
-    diagnostic_completed INTEGER NOT NULL DEFAULT 0
+    diagnostic_completed INTEGER NOT NULL DEFAULT 0,
+    daily_xp_goal        INTEGER NOT NULL DEFAULT 150
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
