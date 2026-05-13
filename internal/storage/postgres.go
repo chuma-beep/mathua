@@ -72,6 +72,10 @@ func (s *PostgresStore) SetDiagnosticCompleted(studentID string) error {
 	return fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) SetDailyXPGoal(studentID string, goal int) error {
+	return fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) Migrate() error {
 	return fmt.Errorf("not implemented")
 }

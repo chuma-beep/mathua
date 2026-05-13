@@ -65,6 +65,7 @@ export interface Scores {
   level: string
   xp_total: number
   xp_today: number
+  daily_xp_goal: number
 }
 
 export interface ConceptProgress {
@@ -265,6 +266,15 @@ export async function getGoalPlan(sessionId: string): Promise<GoalPlanRes> {
 	})
 	if (!res.ok) throw new Error(`Goal plan failed: ${res.status}`)
 	return res.json()
+}
+
+export async function setDailyXPGoal(goal: number): Promise<void> {
+	const res = await fetch(`${API_BASE}/api/goals/xp`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ goal }),
+	})
+	if (!res.ok) throw new Error(`Set goal failed: ${res.status}`)
 }
 
 export async function getWeaknesses(): Promise<WeaknessRes> {

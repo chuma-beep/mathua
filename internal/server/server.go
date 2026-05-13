@@ -66,6 +66,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.authMiddleware(s.handleGoalDiagnosticAnswer))))
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.authMiddleware(s.handleGoalPlan))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
+	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 }
 
@@ -650,6 +651,31 @@ func (s *Server) handleWeaknesses(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, map[string]interface{}{"by_domain": byDomain})
+}
+
+// POST /api/goals/xp  Body: { "goal": 200 }
+func (s *Server) handleSetDailyXPGoal(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	var req struct {
+		Goal int `json:"goal"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.Goal < 1 || req.Goal > 10000 {
+		writeError(w, "goal must be between 1 and 10000", 400)
+		return
+	}
+	if err := s.repo.SetDailyXPGoal(studentID, req.Goal); err != nil {
+		writeError(w, err.Error(), 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"goal": req.Goal})
 }
 
 // GET /api/courses
