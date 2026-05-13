@@ -6,6 +6,7 @@ import (
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
+	"github.com/chuma-beep/mathua/internal/verify"
 )
 
 func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
@@ -19,6 +20,11 @@ func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
 		res := gr.Grade(gtype, p.Answer, p.Answer)
 		if !res.Correct {
 			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
+		}
+		if expr, ok := verify.ExtractExpr(p.Question); ok {
+			if err := verify.CheckExpr(expr, p.Answer); err != nil {
+				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
+			}
 		}
 	}
 }

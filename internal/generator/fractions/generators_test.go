@@ -6,6 +6,7 @@ import (
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
+	"github.com/chuma-beep/mathua/internal/verify"
 )
 
 func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
@@ -20,26 +21,31 @@ func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
 		if !res.Correct {
 			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
 		}
+		if expr, ok := verify.ExtractExpr(p.Question); ok {
+			if err := verify.CheckExpr(expr, p.Answer); err != nil {
+				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
+			}
+		}
 	}
 }
 
-func TestFracConcept(t *testing.T)      { fuzzGen(t, &fracConceptGen{}, grader.GradingNumeric) }
-func TestFracParts(t *testing.T)        { fuzzGen(t, &fracPartsGen{}, grader.GradingNumeric) }
-func TestFracNumberLine(t *testing.T)   { fuzzGen(t, &fracNumberLineGen{}, grader.GradingNumeric) }
-func TestFracEquivalent(t *testing.T)   { fuzzGen(t, &fracEquivalentGen{}, grader.GradingNumeric) }
-func TestFracSimplify(t *testing.T)     { fuzzGen(t, &fracSimplifyGen{}, grader.GradingNumeric) }
-func TestFracCompare(t *testing.T)      { fuzzGen(t, &fracCompareGen{}, grader.GradingComparison) }
-func TestFracBenchmark(t *testing.T)    { fuzzGen(t, &fracBenchmarkGen{}, grader.GradingMultipleChoice) }
-func TestFracToDecimal(t *testing.T)    { fuzzGen(t, &fracToDecimalGen{}, grader.GradingNumeric) }
-func TestFracAddSame(t *testing.T)      { fuzzGen(t, &fracOpSameDenGen{op: "+"}, grader.GradingNumeric) }
-func TestFracSubSame(t *testing.T)      { fuzzGen(t, &fracOpSameDenGen{op: "-"}, grader.GradingNumeric) }
-func TestFracAddDiff(t *testing.T)      { fuzzGen(t, &fracOpDiffDenGen{op: "+"}, grader.GradingNumeric) }
-func TestFracSubDiff(t *testing.T)      { fuzzGen(t, &fracOpDiffDenGen{op: "-"}, grader.GradingNumeric) }
-func TestFracAddWord(t *testing.T)      { fuzzGen(t, &fracWordGen{op: "+"}, grader.GradingNumeric) }
-func TestFracMult(t *testing.T)         { fuzzGen(t, &fracMultGen{wholeMul: false}, grader.GradingNumeric) }
-func TestFracMultWhole(t *testing.T)    { fuzzGen(t, &fracMultGen{wholeMul: true}, grader.GradingNumeric) }
-func TestFracDiv(t *testing.T)          { fuzzGen(t, &fracDivGen{wholeDiv: false}, grader.GradingNumeric) }
-func TestFracDivWhole(t *testing.T)     { fuzzGen(t, &fracDivGen{wholeDiv: true}, grader.GradingNumeric) }
+func TestFracConcept(t *testing.T)    { fuzzGen(t, &fracConceptGen{}, grader.GradingNumeric) }
+func TestFracParts(t *testing.T)      { fuzzGen(t, &fracPartsGen{}, grader.GradingNumeric) }
+func TestFracNumberLine(t *testing.T) { fuzzGen(t, &fracNumberLineGen{}, grader.GradingNumeric) }
+func TestFracEquivalent(t *testing.T) { fuzzGen(t, &fracEquivalentGen{}, grader.GradingNumeric) }
+func TestFracSimplify(t *testing.T)   { fuzzGen(t, &fracSimplifyGen{}, grader.GradingNumeric) }
+func TestFracCompare(t *testing.T)    { fuzzGen(t, &fracCompareGen{}, grader.GradingComparison) }
+func TestFracBenchmark(t *testing.T)  { fuzzGen(t, &fracBenchmarkGen{}, grader.GradingMultipleChoice) }
+func TestFracToDecimal(t *testing.T)  { fuzzGen(t, &fracToDecimalGen{}, grader.GradingNumeric) }
+func TestFracAddSame(t *testing.T)    { fuzzGen(t, &fracOpSameDenGen{op: "+"}, grader.GradingNumeric) }
+func TestFracSubSame(t *testing.T)    { fuzzGen(t, &fracOpSameDenGen{op: "-"}, grader.GradingNumeric) }
+func TestFracAddDiff(t *testing.T)    { fuzzGen(t, &fracOpDiffDenGen{op: "+"}, grader.GradingNumeric) }
+func TestFracSubDiff(t *testing.T)    { fuzzGen(t, &fracOpDiffDenGen{op: "-"}, grader.GradingNumeric) }
+func TestFracAddWord(t *testing.T)    { fuzzGen(t, &fracWordGen{op: "+"}, grader.GradingNumeric) }
+func TestFracMult(t *testing.T)       { fuzzGen(t, &fracMultGen{wholeMul: false}, grader.GradingNumeric) }
+func TestFracMultWhole(t *testing.T)  { fuzzGen(t, &fracMultGen{wholeMul: true}, grader.GradingNumeric) }
+func TestFracDiv(t *testing.T)        { fuzzGen(t, &fracDivGen{wholeDiv: false}, grader.GradingNumeric) }
+func TestFracDivWhole(t *testing.T)   { fuzzGen(t, &fracDivGen{wholeDiv: true}, grader.GradingNumeric) }
 func TestFracMixedConvert(t *testing.T) {
 	gen := &fracMixedConvertGen{}
 	for i := 0; i < 100; i++ {
@@ -49,6 +55,6 @@ func TestFracMixedConvert(t *testing.T) {
 		}
 	}
 }
-func TestFracMixedAdd(t *testing.T)     { fuzzGen(t, &fracMixedOpGen{op: "+"}, grader.GradingNumeric) }
-func TestFracMixedSub(t *testing.T)     { fuzzGen(t, &fracMixedOpGen{op: "-"}, grader.GradingNumeric) }
-func TestFracMixedMult(t *testing.T)    { fuzzGen(t, &fracMixedMultGen{}, grader.GradingNumeric) }
+func TestFracMixedAdd(t *testing.T)  { fuzzGen(t, &fracMixedOpGen{op: "+"}, grader.GradingNumeric) }
+func TestFracMixedSub(t *testing.T)  { fuzzGen(t, &fracMixedOpGen{op: "-"}, grader.GradingNumeric) }
+func TestFracMixedMult(t *testing.T) { fuzzGen(t, &fracMixedMultGen{}, grader.GradingNumeric) }
