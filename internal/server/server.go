@@ -409,6 +409,10 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
 	var req signupReq
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -436,6 +440,10 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
 	var req loginReq
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -452,6 +460,10 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
 		return
 	}
 	token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")

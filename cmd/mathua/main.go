@@ -31,6 +31,7 @@ import (
 func main() {
 	serve := flag.Bool("serve", false, "run web server")
 	port := flag.Int("port", 8080, "web server port")
+	noAuth := flag.Bool("no-auth", false, "disable authentication (dev mode)")
 	flag.Parse()
 
 	dag, err := concepts.Load("data/concepts.json")
@@ -75,8 +76,15 @@ func main() {
 	fmt.Printf("engine ready — %d generators registered\n", reg.Count())
 
 	if *serve {
-		fmt.Printf("starting web server on :%d\n", *port)
-		authSvc := auth.New(repo)
+		fmt.Printf("starting web server on :%d", *port)
+		var authSvc *auth.AuthService
+		if !*noAuth {
+			authSvc = auth.New(repo)
+			fmt.Print(" (auth enabled)")
+		} else {
+			fmt.Print(" (no auth)")
+		}
+		fmt.Println()
 		srv := server.New(eng, repo, authSvc)
 		mux := http.NewServeMux()
 		srv.Register(mux)

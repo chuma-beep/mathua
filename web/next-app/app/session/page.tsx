@@ -10,6 +10,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 import Pipeline from '../../components/Pipeline'
 import {
   startSession,
+  startSessionName,
   submitAnswer,
   getScores,
   type Question,
@@ -18,13 +19,14 @@ import {
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
 
-type Screen = 'practice' | 'feedback'
+type Screen = 'name' | 'practice' | 'feedback'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
   const router = useRouter()
 
   const [screen, setScreen] = useState<Screen>('practice')
+  const [name, setName] = useState('')
   const [user, setUser] = useState<UserInfo | null>(null)
   const [studentID, setStudentID] = useState('')
   const [sessionID, setSessionID] = useState('')
@@ -42,13 +44,15 @@ export default function SessionPage() {
   const timerRef = useRef<ReturnType<typeof setInterval>>()
 
   useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push('/login')
-      return
-    }
     const u = getUserInfo()
-    setUser(u)
-    beginSession()
+    if (u) {
+      setUser(u)
+      setScreen('practice')
+      beginSessionAuth()
+    } else {
+      setScreen('name')
+      setLoading(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -61,7 +65,7 @@ export default function SessionPage() {
     return () => { if (timerRef.current) clearInterval(timerRef.current) }
   }, [screen, question])
 
-  const beginSession = useCallback(async () => {
+  const beginSessionAuth = useCallback(async () => {
     setError('')
     setLoading(true)
     try {
@@ -78,6 +82,22 @@ export default function SessionPage() {
       setLoading(false)
     }
   }, [])
+
+  const beginSessionName = useCallback(async () => {
+    if (!name.trim()) { setError('Enter your name'); return }
+    setError(''); setLoading(true)
+    try {
+      const res = await startSessionName(name.trim())
+      setStudentID(res.student_id)
+      setSessionID(res.session_id)
+      setQuestion(res.question)
+      setScreen('practice')
+      const s = await getScores(res.student_id).catch(() => null)
+      if (s) setScores(s)
+    } catch {
+      setError('Could not connect to server. Is the backend running?')
+    } finally { setLoading(false) }
+  }, [name])
 
   const handleSubmit = useCallback(async () => {
     if (!answer.trim() || !question) return
@@ -124,6 +144,37 @@ export default function SessionPage() {
             </button>
           </span>
         </span>
+
+        {screen === 'name' && (
+          <div className="max-w-md mx-auto mt-20">
+            <SectionHeader label="Practice session" title="What's your name?" />
+            <p className="text-mathua-secondary text-sm text-center mt-2 mb-4">
+              Sign up or login to save your progress permanently.
+            </p>
+            <div className="flex gap-3 mt-6">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && beginSessionName()}
+                placeholder="Your name"
+                autoFocus
+                className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+              />
+              <button
+                onClick={beginSessionName}
+                className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm"
+              >
+                Start
+              </button>
+            </div>
+            <div className="mt-4 text-center">
+              <a href="/login" className="text-mathua-secondary text-sm hover:text-mathua-blue">
+                Have an account? Sign in
+              </a>
+            </div>
+          </div>
+        )}
 
         {loading && (
           <div className="max-w-md mx-auto mt-20 text-center">
