@@ -29,7 +29,7 @@ func testServer(t *testing.T) *Server {
 	t.Cleanup(func() { store.Close() })
 	reg := generator.NewRegistry()
 	reg.Register("a", &testGen{})
-	return New(engine.New(store, d, reg, nil), store, nil)
+	return New(engine.New(store, d, reg, nil, nil), store, nil)
 }
 
 func TestHealth(t *testing.T) {

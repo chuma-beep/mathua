@@ -1,0 +1,72 @@
+[
+  {
+    "id": "4",
+    "name": "4th Grade Math",
+    "grade": "4th",
+    "description": "Multi-digit arithmetic, negative numbers, fractions, decimals, lines and angles in geometry.",
+    "targets": ["arith.div.basic", "arith.dec.intro", "frac.parts", "geo.basic.angle_measure"]
+  },
+  {
+    "id": "5",
+    "name": "5th Grade Math",
+    "grade": "5th",
+    "description": "Arithmetic with fractions and decimals. Solve real-world problems involving measurement, data, and geometry.",
+    "targets": ["arith.neg.mult_div", "dec.div", "frac.mult", "geo.quad.area"]
+  },
+  {
+    "id": "6",
+    "name": "6th Grade Math",
+    "grade": "6th",
+    "description": "Ratios, percentages, fraction division, expressions, equations, geometry, and statistics.",
+    "targets": ["pct.of_number", "frac.div", "ratio.proportion", "prealg.expr.evaluate"]
+  },
+  {
+    "id": "7",
+    "name": "7th Grade Math",
+    "grade": "7th",
+    "description": "Proportional relationships, multi-step equations, geometry, statistics, and probability.",
+    "targets": ["pct.discount", "prealg.eq.one_step_mult", "geo.triangle.pythagorean", "ratio.rate"]
+  },
+  {
+    "id": "8",
+    "name": "8th Grade Math",
+    "grade": "8th",
+    "description": "Exponents, scientific notation, equations, graphs, functions, geometry, and transformations.",
+    "targets": ["arith.sci_notation", "prealg.eq.two_step", "geo.coord.distance", "arith.exp.evaluate"]
+  },
+  {
+    "id": "pa",
+    "name": "Prealgebra",
+    "grade": "8th-9th",
+    "description": "Variables, linear equations and inequalities, systems of equations, expressions, ratios, and the distributive property.",
+    "targets": ["prealg.ineq.two_step", "alg.systems.substitution", "prealg.expr.distribute", "alg.linear.slope_intercept"]
+  },
+  {
+    "id": "a1",
+    "name": "Algebra I",
+    "grade": "9th",
+    "description": "Functions, graphing, linear and quadratic equations, factoring, exponents, and systems.",
+    "targets": ["alg.quad.formula", "alg.factor.trinomial", "alg.func.linear", "alg.linear.parallel_perp"]
+  },
+  {
+    "id": "geo",
+    "name": "Geometry",
+    "grade": "10th",
+    "description": "Length, area, and volume. Relationships between angles and side lengths in right triangles. Coordinate geometry.",
+    "targets": ["geo.circle.area", "geo.solid.surface_area", "geo.triangle.pythagorean", "geo.coord.distance"]
+  },
+  {
+    "id": "a2",
+    "name": "Algebra II",
+    "grade": "10th-11th",
+    "description": "Advanced functions: quadratics, logarithms, trigonometry, and polynomials. Complex numbers and sequences.",
+    "targets": ["alg.log.properties", "trig.sin_cos_def", "alg.poly.special", "alg.seq.geometric"]
+  },
+  {
+    "id": "pc",
+    "name": "Precalculus",
+    "grade": "11th-12th",
+    "description": "Advanced trigonometry, complex numbers, vectors, matrices, limits, and sequences.",
+    "targets": ["trig.law_cosines", "complex.polar", "linalg.vector.concept", "calc.limit.concept"]
+  }
+]

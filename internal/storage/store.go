@@ -13,6 +13,7 @@ type Student struct {
 	Name         string
 	Username     string
 	PasswordHash string
+	CourseID     string
 	CreatedAt    time.Time
 }
 
@@ -64,6 +65,7 @@ type Repository interface {
 	GetStudent(id string) (*Student, error)
 	FindByUsername(username string) (*Student, error)
 	CreateUser(name, username, passwordHash string) (*Student, error)
+	SetCourseID(studentID, courseID string) error
 
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)
 	GetAllProgress(studentID string) (map[string]*ConceptProgress, error)

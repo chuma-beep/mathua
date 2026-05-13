@@ -16,6 +16,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 
 	"github.com/chuma-beep/mathua/internal/lessons"
+	"github.com/chuma-beep/mathua/internal/planning"
 )
 
 type activeSession struct {
@@ -59,24 +60,28 @@ type Engine struct {
 	lboard   *leaderboard.Computer
 	diag     *diagnostic.Engine
 	ll       *lessons.Loader
+	planner  *planning.Planner
 
-	mu       sync.Mutex
-	sessions map[string]*activeSession
+	mu         sync.Mutex
+	sessions   map[string]*activeSession
+	activePath map[string]map[string]bool
 }
 
-func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader) *Engine {
+func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner) *Engine {
 	return &Engine{
-		dag:      dag,
-		repo:     repo,
-		sched:    scheduler.New(dag),
-		registry: reg,
-		gr:       grader.NewRouter(),
-		machine:  &mastery.Machine{},
-		scorer:   scoring.NewUpdater(dag, repo),
-		lboard:   leaderboard.NewComputer(repo),
-		diag:     diagnostic.NewEngine(dag, reg),
-		ll:       ll,
-		sessions: make(map[string]*activeSession),
+		dag:        dag,
+		repo:       repo,
+		sched:      scheduler.New(dag),
+		registry:   reg,
+		gr:         grader.NewRouter(),
+		machine:    &mastery.Machine{},
+		scorer:     scoring.NewUpdater(dag, repo),
+		lboard:     leaderboard.NewComputer(repo),
+		diag:       diagnostic.NewEngine(dag, reg),
+		ll:         ll,
+		planner:    planner,
+		sessions:   make(map[string]*activeSession),
+		activePath: make(map[string]map[string]bool),
 	}
 }
 
@@ -86,6 +91,41 @@ func (e *Engine) CreateStudent(name string) (*storage.Student, error) {
 
 func (e *Engine) GetStudent(id string) (*storage.Student, error) {
 	return e.repo.GetStudent(id)
+}
+
+func (e *Engine) SetActiveCourse(studentID, courseID string) (*planning.Path, error) {
+	if e.planner == nil {
+		return nil, fmt.Errorf("no planner configured")
+	}
+	path, err := e.planner.PathForCourse(courseID)
+	if err != nil {
+		return nil, err
+	}
+	if err := e.repo.SetCourseID(studentID, courseID); err != nil {
+		return nil, fmt.Errorf("save course: %w", err)
+	}
+	set := make(map[string]bool, len(path.Concepts))
+	for _, c := range path.Concepts {
+		set[c.ID] = true
+	}
+	e.mu.Lock()
+	e.activePath[studentID] = set
+	e.mu.Unlock()
+	return path, nil
+}
+
+func (e *Engine) GetPlanner() *planning.Planner { return e.planner }
+func (e *Engine) PlannerCourses() []*planning.Course {
+	if e.planner == nil {
+		return nil
+	}
+	return e.planner.Courses()
+}
+
+func (e *Engine) ActivePath(studentID string) map[string]bool {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	return e.activePath[studentID]
 }
 
 func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
@@ -125,6 +165,16 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 
 	e.mu.Lock()
 	defer e.mu.Unlock()
+
+	// Filter to active course path if set
+	if path := e.activePath[studentID]; len(path) > 0 {
+		for cid := range snapshots {
+			if !path[cid] {
+				delete(snapshots, cid)
+			}
+		}
+	}
+
 	as := e.sessions[sessionID]
 	if as == nil {
 		as = &activeSession{}
