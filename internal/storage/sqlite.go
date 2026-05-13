@@ -44,12 +44,12 @@ func (s *SQLiteStore) Migrate() error {
 
 func authMigrate(db *sql.DB) error {
 	migrations := []string{
-		`ALTER TABLE students ADD COLUMN username TEXT`,
-		`ALTER TABLE students ADD COLUMN password_hash TEXT`,
-		`CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)`,
+		"ALTER TABLE students ADD COLUMN username TEXT",
+		"ALTER TABLE students ADD COLUMN password_hash TEXT",
+		"ALTER TABLE students ADD COLUMN course_id TEXT",
+		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 	}
 	for _, m := range migrations {
-		// Ignore "duplicate column" errors for existing DBs.
 		if _, err := db.Exec(m); err != nil {
 			if !isDuplicateColumn(err) {
 				return err
@@ -96,11 +96,11 @@ func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student,
 }
 
 func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, created_at FROM students WHERE id = ?", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, created_at FROM students WHERE id = ?", id)
 	var st Student
-	var username, passwordHash sql.NullString
+	var username, passwordHash, courseID sql.NullString
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &createdAt); err != nil {
+	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &createdAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -108,16 +108,17 @@ func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
 	}
 	st.Username = username.String
 	st.PasswordHash = passwordHash.String
+	st.CourseID = courseID.String
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
 }
 
 func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, created_at FROM students WHERE username = ?", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, created_at FROM students WHERE username = ?", username)
 	var st Student
-	var un, ph sql.NullString
+	var un, ph, cid sql.NullString
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &createdAt); err != nil {
+	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &cid, &createdAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -125,8 +126,17 @@ func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
 	}
 	st.Username = un.String
 	st.PasswordHash = ph.String
+	st.CourseID = cid.String
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
+}
+
+func (s *SQLiteStore) SetCourseID(studentID, courseID string) error {
+	_, err := s.db.Exec("UPDATE students SET course_id = ? WHERE id = ?", courseID, studentID)
+	if err != nil {
+		return fmt.Errorf("set course_id: %w", err)
+	}
+	return nil
 }
 
 // Progress

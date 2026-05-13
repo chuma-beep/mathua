@@ -21,6 +21,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/storage"
@@ -66,7 +67,8 @@ func main() {
 		fmt.Printf("lessons not loaded: %v (continuing without lessons)\n", err)
 	}
 
-	eng := engine.New(repo, dag, reg, ll)
+	planner, _ := planning.Load("data/courses.json", dag)
+	eng := engine.New(repo, dag, reg, ll, planner)
 	if ll != nil {
 		fmt.Printf("%d lessons loaded\n", ll.Count())
 	}

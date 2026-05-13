@@ -20,6 +20,10 @@ func (s *PostgresStore) FindByUsername(username string) (*Student, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) SetCourseID(studentID, courseID string) error {
+	return fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	return nil, fmt.Errorf("not implemented")
 }

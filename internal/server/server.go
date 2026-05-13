@@ -57,6 +57,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.authMiddleware(s.handleScores))))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
+	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
+	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseDiagnostic))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
 	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.handleDiagnosticAnswer)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
@@ -340,6 +342,36 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 // GET /api/health
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]string{"status": "ok"})
+}
+
+// GET /api/courses
+func (s *Server) handleCourses(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	courses := s.eng.PlannerCourses()
+	writeJSON(w, map[string]interface{}{"courses": courses})
+}
+
+// POST /api/courses/{id}/diagnostic
+func (s *Server) handleCourseDiagnostic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	courseID := strings.TrimPrefix(r.URL.Path, "/api/courses/")
+	courseID = strings.TrimSuffix(courseID, "/diagnostic")
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	path, err := s.eng.SetActiveCourse(studentID, courseID)
+	if err != nil {
+		writeError(w, "failed to set course: "+err.Error(), 400)
+		return
+	}
+	writeJSON(w, map[string]interface{}{
+		"course_id":   courseID,
+		"path_length": len(path.Concepts),
+	})
 }
 
 func writeJSON(w http.ResponseWriter, v interface{}) {
