@@ -124,7 +124,7 @@ export default function HomePage() {
       {/* ── Hero ── */}
       <section
         className="py-20 max-sm:py-12 text-center"
-        style={{ background: 'var(--bg)' }}
+        style={{ background: 'transparent' }}
       >
         <h1
           style={{

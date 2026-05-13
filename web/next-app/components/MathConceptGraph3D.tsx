@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
@@ -498,7 +498,7 @@ export default function MathConceptGraph3D({
       }}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
-          style={{ background: 'var(--bg)' }}
+          gl={{ alpha: true, premultipliedAlpha: true }}
           dpr={[1, 2]}
         >
           <GraphScene
