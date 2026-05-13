@@ -80,6 +80,10 @@ func main() {
 		srv := server.New(eng, repo, authSvc)
 		mux := http.NewServeMux()
 		srv.Register(mux)
+		if info, err := os.Stat("web/next-app/out"); err == nil && info.IsDir() {
+			mux.Handle("/", http.FileServer(http.Dir("web/next-app/out")))
+			fmt.Println("serving static frontend from web/next-app/out")
+		}
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
 	} else {
 		m := tui.New()

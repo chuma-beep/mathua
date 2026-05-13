@@ -8,7 +8,7 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import { isLoggedIn } from '../../lib/auth'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 
 interface Course {
   id: string; name: string; grade: string; description: string; targets: string[]
