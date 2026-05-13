@@ -13,13 +13,17 @@ import {
   startSessionName,
   submitAnswer,
   getScores,
+  startGoalDiagnosticName,
+  getGoalPlan,
   type Question,
   type AnswerResult,
   type Scores,
+  type GoalPlanRes,
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
+import conceptsData from '../../data/concepts.json'
 
-type Screen = 'name' | 'practice' | 'feedback'
+type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'feedback'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
@@ -43,6 +47,18 @@ export default function SessionPage() {
   const [loading, setLoading] = useState(true)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
+
+  // Diagnostic state (guest mode)
+  const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
+  const [diagSessionId, setDiagSessionId] = useState('')
+  const [diagQuestion, setDiagQuestion] = useState('')
+  const [diagConceptId, setDiagConceptId] = useState('')
+  const [diagConceptName, setDiagConceptName] = useState('')
+  const [diagCount, setDiagCount] = useState(0)
+  const [diagAnswer, setDiagAnswer] = useState('')
+  const [diagLastResult, setDiagLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
+  const [diagAccuracy, setDiagAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
+  const [diagPlan, setDiagPlan] = useState<GoalPlanRes | null>(null)
 
   useEffect(() => {
     const u = getUserInfo()
@@ -127,6 +143,127 @@ export default function SessionPage() {
     setScreen('practice')
   }, [])
 
+  // Guest diagnostic logic
+  const domainOrder = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+  const domainLabels: Record<string, string> = {
+    counting: 'Counting', arithmetic: 'Arithmetic', fractions: 'Fractions', prealgebra: 'Pre-Algebra',
+    algebra: 'Algebra', geometry: 'Geometry', trigonometry: 'Trigonometry',
+    complex_numbers: 'Complex Numbers', precalculus: 'Precalculus', calculus: 'Calculus',
+    linear_algebra: 'Linear Algebra', statistics: 'Statistics', discrete_math: 'Discrete Math',
+    number_theory: 'Number Theory', differential_equations: 'Differential Equations',
+    abstract_algebra: 'Abstract Algebra', topology: 'Topology',
+  }
+
+  useEffect(() => {
+    if (screen !== 'diag_select') return
+    const raw = conceptsData as any[]
+    const map = new Map<string, string[]>()
+    for (const c of raw) {
+      const list = map.get(c.domain) || []
+      list.push(c.id)
+      map.set(c.domain, list)
+    }
+    const result: { name: string; concepts: string[]; selected: boolean }[] = []
+    map.forEach((concepts, name) => result.push({ name, concepts, selected: false }))
+    result.sort((a, b) => domainOrder.indexOf(a.name) - domainOrder.indexOf(b.name))
+    setDomains(result)
+  }, [screen])
+
+  function toggleDomain(name: string) {
+    setDomains(prev => prev.map(d => d.name === name ? { ...d, selected: !d.selected } : d))
+  }
+
+  async function beginGuestDiagnostic() {
+    const ids: string[] = []
+    for (const d of domains) {
+      if (d.selected) ids.push(...d.concepts)
+    }
+    if (ids.length === 0) return
+    setLoading(true)
+    try {
+      const res = await startGoalDiagnosticName(name.trim(), ids)
+      if (res.done) {
+        setDiagPlan({ readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} })
+        setScreen('practice')
+        return
+      }
+      setDiagSessionId(res.session_id)
+      setDiagQuestion(res.question || '')
+      setDiagConceptId(res.concept_id || '')
+      setDiagConceptName(res.concept_name || '')
+      setDiagCount(1)
+      setDiagAccuracy({ correct: 0, total: 0 })
+      setDiagLastResult(null)
+      setDiagAnswer('')
+      setScreen('diagnostic')
+    } catch {
+      setError('Could not start diagnostic.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function submitGuestDiagnostic() {
+    if (!diagAnswer.trim()) return
+    setLoading(true)
+    try {
+      const elapsed = 5.0
+      const res = await fetch(`/api/goal/diagnostic/answer`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: diagSessionId, concept_id: diagConceptId, answer: diagAnswer.trim(), elapsed }),
+      })
+      const data = await res.json()
+      const correct = data.correct || false
+      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
+      setDiagAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
+      setDiagLastResult({ correct, feedback })
+
+      if (data.done) {
+        setTimeout(async () => {
+          try {
+            const planRes = await getGoalPlan(diagSessionId)
+            setDiagPlan(planRes)
+            beginSessionName()
+          } catch {
+            setError('Could not generate plan.')
+          }
+          setLoading(false)
+        }, 800)
+        return
+      }
+
+      setTimeout(() => {
+        setDiagQuestion(data.question || '')
+        setDiagConceptId(data.concept_id || '')
+        setDiagConceptName(data.concept_name || '')
+        setDiagCount(prev => prev + 1)
+        setDiagLastResult(null)
+        setDiagAnswer('')
+        setLoading(false)
+      }, 1200)
+    } catch {
+      setError('Failed to submit.')
+      setLoading(false)
+    }
+  }
+
+  function startGuestDiagnostic() {
+    setError('')
+    const raw = conceptsData as any[]
+    const map = new Map<string, string[]>()
+    for (const c of raw) {
+      const list = map.get(c.domain) || []
+      list.push(c.id)
+      map.set(c.domain, list)
+    }
+    const result: { name: string; concepts: string[]; selected: boolean }[] = []
+    map.forEach((concepts, name) => result.push({ name, concepts, selected: true }))
+    result.sort((a, b) => domainOrder.indexOf(a.name) - domainOrder.indexOf(b.name))
+    setDomains(result)
+    setScreen('diag_select')
+  }
+
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
   return (
@@ -169,10 +306,89 @@ export default function SessionPage() {
                 Start
               </button>
             </div>
+            <div className="mt-3 flex justify-center">
+              <button
+                onClick={startGuestDiagnostic}
+                className="text-mathua-blue text-sm hover:text-mathua-blue-hover underline underline-offset-2"
+              >
+                Take diagnostic test first
+              </button>
+            </div>
             <div className="mt-4 text-center">
               <a href="/login" className="text-mathua-secondary text-sm hover:text-mathua-blue">
                 Have an account? Sign in
               </a>
+            </div>
+          </div>
+        )}
+
+        {screen === 'diag_select' && (
+          <div className="max-w-4xl mx-auto mt-8">
+            <SectionHeader label="Diagnostic" title="What do you want to learn?" />
+            <p className="text-mathua-secondary text-sm text-center max-w-[500px] mx-auto mt-2 mb-6">
+              We'll test your current knowledge and find the right starting point.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
+              {domains.map(d => {
+                const label = domainLabels[d.name] || d.name
+                return (
+                  <button
+                    key={d.name}
+                    onClick={() => toggleDomain(d.name)}
+                    className={`rounded-lg p-4 text-left transition-all text-sm ${
+                      d.selected
+                        ? 'bg-mathua-blue text-white ring-2 ring-mathua-blue'
+                        : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                    }`}
+                  >
+                    <div className="font-medium">{label}</div>
+                    <div className={`font-mono text-[10px] mt-1 ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
+                      {d.concepts.length} concepts
+                    </div>
+                  </button>
+                )
+              })}
+            </div>
+            <div className="flex gap-3 justify-center">
+              <button onClick={() => setScreen('name')} className="bg-mathua-surface border border-mathua-border rounded-md h-12 px-8 text-sm text-mathua-secondary hover:text-mathua-blue">
+                Back
+              </button>
+              <button onClick={beginGuestDiagnostic} disabled={loading} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50">
+                {loading ? 'Loading...' : 'Start diagnostic'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {screen === 'diagnostic' && (
+          <div className="max-w-2xl mx-auto mt-8">
+            <SectionHeader label={`Question ${diagCount}`} title={diagConceptName} />
+            <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
+              <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
+                <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</p>
+              </div>
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={diagAnswer}
+                  onChange={(e) => setDiagAnswer(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
+                  placeholder="Your answer..."
+                  disabled={loading || diagLastResult !== null}
+                  className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                />
+                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50">
+                  Submit
+                </button>
+              </div>
+            </div>
+            {diagLastResult && (
+              <div className={`bg-mathua-surface border rounded-lg p-4 mb-4 text-center ${diagLastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
+                <p className={diagLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{diagLastResult.feedback}</p>
+              </div>
+            )}
+            <div className="text-center text-mathua-muted text-xs font-mono">
+              {diagAccuracy.total > 0 && `${diagAccuracy.correct}/${diagAccuracy.total} correct`}
             </div>
           </div>
         )}

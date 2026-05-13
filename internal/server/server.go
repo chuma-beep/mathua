@@ -403,7 +403,8 @@ func (s *Server) handleGoal(w http.ResponseWriter, r *http.Request) {
 }
 
 // POST /api/goal/diagnostic
-// Body: { "concept_ids": [...] }
+// Body (auth): { "concept_ids": [...] }
+// Body (no-auth): { "name": "...", "concept_ids": [...] }
 func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -412,6 +413,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
 	var req struct {
 		ConceptIDs []string `json:"concept_ids"`
+		Name       string   `json:"name"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -420,6 +422,14 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	if len(req.ConceptIDs) == 0 {
 		writeError(w, "concept_ids required", 400)
 		return
+	}
+	if studentID == "" && req.Name != "" && s.auth == nil {
+		st, err := s.eng.CreateStudent(req.Name)
+		if err != nil {
+			writeError(w, "failed to create student", 500)
+			return
+		}
+		studentID = st.ID
 	}
 	session, question, err := s.eng.StartGoalDiagnostic(studentID, req.ConceptIDs)
 	if err != nil {
