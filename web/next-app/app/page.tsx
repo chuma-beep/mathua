@@ -119,7 +119,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }]} />
+      <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
       {/* ── Hero ── */}
       <section
@@ -157,7 +157,7 @@ export default function HomePage() {
 
         <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
           <a
-            href="#"
+            href="/login"
             style={{
               background: 'var(--accent-gold)',
               color: 'var(--bg)',

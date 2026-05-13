@@ -45,6 +45,7 @@ const brandStyle: React.CSSProperties = {
 export default function Header({ links }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
   const [isMobile, setIsMobile] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640)
@@ -52,6 +53,21 @@ export default function Header({ links }: HeaderProps) {
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLoggedIn(!!localStorage.getItem('mathua_token'))
+    }
+  }, [mounted])
+
+  const displayLinks = links || [
+    { label: 'Leaderboard', href: '/leaderboard' },
+    { label: 'Graph', href: '/graph' },
+    ...(loggedIn
+      ? [{ label: 'Practice', href: '/session' }]
+      : [{ label: 'Login', href: '/login' }]
+    ),
+  ]
 
   return (
     <header
@@ -74,7 +90,7 @@ export default function Header({ links }: HeaderProps) {
           marginRight: isMobile ? '0.5rem' : '1.5rem',
           whiteSpace: 'nowrap',
         }}>Mathua</Link>
-        {links?.map((link) => (
+        {displayLinks.map((link) => (
           <Link key={link.href} href={link.href} className="link-underline" style={{ ...linkStyle, whiteSpace: 'nowrap' }}>
             {link.label}
           </Link>
