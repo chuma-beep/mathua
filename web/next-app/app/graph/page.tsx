@@ -5,8 +5,10 @@ import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
+import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
-import { getGraph, healthCheck, type GraphRes } from '../../lib/api'
+import { getGraph, healthCheck, getScores, type GraphRes, type Scores } from '../../lib/api'
+import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import type { MasteryStatus } from '../../components/MathConceptGraph3D'
 import conceptsData from '../../data/concepts.json'
 
@@ -41,8 +43,11 @@ export default function GraphPage() {
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
   const [conceptStatuses, setConceptStatuses] = useState<Record<string, MasteryStatus>>({})
   const [connected, setConnected] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [scores, setScores] = useState<Scores | null>(null)
 
   useEffect(() => {
+    setLoggedIn(isLoggedIn())
     healthCheck().then((ok) => {
       setConnected(ok)
       if (ok) {
@@ -50,6 +55,15 @@ export default function GraphPage() {
       }
     })
   }, [])
+
+  useEffect(() => {
+    if (connected && loggedIn) {
+      const user = getUserInfo()
+      if (user) {
+        getScores(user.student_id).then(setScores).catch(() => {})
+      }
+    }
+  }, [connected, loggedIn])
 
   const concepts = graphData
     ? graphData.nodes.map((n) => ({
@@ -71,16 +85,22 @@ export default function GraphPage() {
           <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
           </a>
-          {connected && (
-            <span className="font-mono text-[11px] text-mathua-green">● Connected</span>
-          )}
         </span>
         <SectionHeader label="Your knowledge graph" title="Explore the concept map" />
-        <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4">
-          {connected
-            ? 'Each node is a math concept. Hover to see details. Mastered concepts glow green, and your learning path is highlighted in gold.'
-            : 'Start the server (./mathua --serve) and run a diagnostic to overlay your personal progress on this graph.'}
-        </p>
+        {connected && loggedIn && scores ? (
+          <ProgressSummary scores={scores} />
+        ) : connected && !loggedIn ? (
+          <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
+            Sign in or{' '}
+            <a href="/session" className="text-mathua-gold hover:underline">start a practice session</a>
+            {' '}to track your progress across the concept map.
+          </p>
+        ) : (
+          <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
+            <a href="/session" className="text-mathua-gold hover:underline">Start practicing</a>
+            {' '}to track your progress across the concept map.
+          </p>
+        )}
       </section>
 
       <div className="my-8">

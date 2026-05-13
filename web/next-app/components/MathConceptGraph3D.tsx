@@ -142,12 +142,12 @@ const NodeMesh = React.memo(function NodeMesh({
     if (meshRef.current) {
       const mat = meshRef.current.material as THREE.MeshStandardMaterial
       const targetIntensity = isActive ? 2.0 : isHovered ? 1.2 : node.onPath ? 0.8 : node.status === 'locked' ? 0.1 : 0.3
-      mat.emissiveIntensity = THREE.MathUtils.lerp(mat.emissiveIntensity, targetIntensity, 0.12)
+      mat.emissiveIntensity = THREE.MathUtils.lerp(mat.emissiveIntensity, targetIntensity, 0.25)
     }
     if (ringRef.current) {
       const mat = ringRef.current.material as THREE.MeshBasicMaterial
       const targetOpacity = node.onPath ? 0.18 : 0.04
-      mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.1)
+      mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.2)
     }
   })
 
@@ -233,7 +233,7 @@ function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], pos
     clockRef.current += delta
     if (lineRef.current) {
       const mat = lineRef.current.material as THREE.LineBasicMaterial
-      mat.opacity = 0.6 + 0.4 * Math.sin(clockRef.current * 2)
+      mat.opacity = 0.6 + 0.4 * Math.sin(clockRef.current * 4)
     }
   })
 
@@ -346,8 +346,8 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme }: Gr
         minDistance={12}
         maxDistance={45}
         autoRotate={true}
-        autoRotateSpeed={0.4}
-        dampingFactor={0.08}
+        autoRotateSpeed={1.2}
+        dampingFactor={0.05}
         enableDamping={true}
       />
     </>
