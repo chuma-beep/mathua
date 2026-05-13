@@ -186,6 +186,7 @@ export interface GoalPathRes {
 
 export interface GoalDiagStartRes {
 	session_id: string
+	student_id?: string
 	concept_id?: string
 	concept_name?: string
 	question?: string
