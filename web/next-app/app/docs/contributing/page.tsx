@@ -110,8 +110,8 @@ go build ./cmd/mathua
 ./mathua`}
         </pre>
         <p style={bodyStyle}>
-          The concept graph lives in{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>.
+          The concept graph lives in per-domain files under{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts/</code>.
           Generators live in{' '}
           <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/</code>.
           Here are the kinds of contributions that move the needle:
@@ -135,8 +135,8 @@ go build ./cmd/mathua
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Step 1: Define a new concept</h2>
         <p style={bodyStyle}>
-          Every concept lives in{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>.
+          Every concept lives in a per-domain file under{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts/</code>.
           Add a JSON object with an ID, label, domain, prerequisite list, and mastery thresholds.
         </p>
         <pre style={codeBlockStyle}>
@@ -326,7 +326,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           Once everything passes locally, here's the full checklist:
         </p>
         {[
-          'Add the concept to concepts.json with correct prerequisites.',
+          'Add the concept to the appropriate domain file in data/concepts/ with correct prerequisites.',
           'Write the generator in the appropriate domain subdirectory.',
           'Write the fuzz test with 1 000 samples.',
           'Run go test ./... and go run scripts/validate_graph.go locally.',
