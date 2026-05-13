@@ -13,7 +13,7 @@ go build ./cmd/mathua
 ./mathua
 ```
 
-The concept graph lives in `data/concepts.json`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
+The concept graph lives in per-domain files under `data/concepts/`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
 
 - New concepts — the single most impactful thing you can add.
 - New generators — make existing or new concepts produce better problems.
@@ -24,7 +24,7 @@ The concept graph lives in `data/concepts.json`. Generators live in `internal/ge
 
 ### 1. Define a new concept
 
-Add a JSON entry to `data/concepts.json`:
+Add a JSON entry to the appropriate domain file in `data/concepts/` (e.g. `data/concepts/arithmetic.json`):
 
 ```json
 {
@@ -103,7 +103,7 @@ A validator runs on every pull request. It checks two invariants before any merg
 
 ## Submitting a pull request
 
-1. Add the concept to `concepts.json` with correct prerequisites.
+1. Add the concept to the appropriate domain file in `data/concepts/` with correct prerequisites.
 2. Write the generator in the appropriate domain subdirectory.
 3. Write the fuzz test with 1 000 samples.
 4. Run `go test ./...` and `go run scripts/validate_graph.go` locally.

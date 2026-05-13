@@ -24,7 +24,7 @@ Mathua is a single Go binary with two delivery modes. The engine core is identic
 ├──────────────────────────────────────────────┤
 │  Storage                                       │
 │  SQLite (desktop) · PostgreSQL (web)           │
-│  concepts.json — community-editable DAG        │
+│  data/concepts/ — per-domain DAG files          │
 └──────────────────────────────────────────────┘
 ```
 
@@ -54,7 +54,7 @@ SQLite for fully offline desktop operation. PostgreSQL for concurrent web access
 
 ## Diagnostic — Computerised Adaptive Testing
 
-Locates a student's knowledge frontier using binary search on the topologically sorted concept graph. Reduces the assessment from 284 questions to approximately 20–35.
+Locates a student's knowledge frontier using binary search on the topologically sorted concept graph. Reduces the assessment from 291 questions to approximately 20–35.
 
 ## Full documentation
 
