@@ -68,5 +68,52 @@
   {"concept_id": "alg.systems.elimination",  "source": "advanced/linear-systems/rouche-capelli-theorem.md"},
   {"concept_id": "alg.systems.substitution", "source": "advanced/linear-systems/rouche-capelli-theorem.md"},
 
-  {"concept_id": "nt.euler_phi", "source": "advanced/sets-and-numbers/natural-numbers.md"}
+  {"concept_id": "nt.euler_phi", "source": "advanced/sets-and-numbers/natural-numbers.md"},
+
+  {"concept_id": "complex.concept",     "source": "algebrica/complex-numbers/complex-numbers.md"},
+  {"concept_id": "complex.add_sub",     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"},
+  {"concept_id": "complex.mult",        "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"},
+  {"concept_id": "complex.divide",      "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"},
+  {"concept_id": "complex.conjugate",   "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"},
+  {"concept_id": "complex.polar",       "source": "algebrica/complex-numbers/complex-numbers-in-trigonometric-form.md"},
+  {"concept_id": "complex.de_moivre",   "source": "algebrica/complex-numbers/de-moivre-theorem.md"},
+  {"concept_id": "complex.roots",       "source": "algebrica/complex-numbers/roots-of-unity.md"},
+
+  {"concept_id": "nt.divisibility",     "source": "algebrica/sets-and-numbers/integers.md"},
+  {"concept_id": "nt.modular",          "source": "algebrica/sets-and-numbers/modulo-operator.md"},
+  {"concept_id": "nt.congruence",       "source": "algebrica/sets-and-numbers/modulo-operator.md"},
+
+  {"concept_id": "linalg.vector.concept",  "source": "algebrica/vectors-and-matrices/vectors.md"},
+  {"concept_id": "linalg.vector.add",      "source": "algebrica/vectors-and-matrices/vectors.md"},
+  {"concept_id": "linalg.vector.dot",      "source": "algebrica/vectors-and-matrices/vectors.md"},
+  {"concept_id": "linalg.matrix.concept",  "source": "algebrica/vectors-and-matrices/matrices.md"},
+  {"concept_id": "linalg.matrix.add",      "source": "algebrica/vectors-and-matrices/matrices.md"},
+  {"concept_id": "linalg.matrix.mult",     "source": "algebrica/vectors-and-matrices/matrices.md"},
+  {"concept_id": "linalg.det.2x2",         "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"},
+  {"concept_id": "linalg.det.3x3",         "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"},
+  {"concept_id": "linalg.matrix.identity", "source": "algebrica/vectors-and-matrices/inverse-matrix.md"},
+  {"concept_id": "linalg.eigen.concept",   "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"},
+  {"concept_id": "linalg.eigen.compute",   "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"},
+  {"concept_id": "linalg.span",            "source": "algebrica/vectors-and-matrices/linear-combinations.md"},
+  {"concept_id": "linalg.basis",           "source": "algebrica/vectors-and-matrices/linear-combinations.md"},
+
+  {"concept_id": "calc.limit.concept",      "source": "algebrica/limits/remarkable-limits.md"},
+  {"concept_id": "calc.deriv.power_rule",   "source": "algebrica/polynomials/polynomials.md"},
+  {"concept_id": "calc.integral.indefinite",   "source": "algebrica/integrals/indefinite-integrals.md"},
+  {"concept_id": "calc.integral.definite",     "source": "algebrica/integrals/definite-integrals.md"},
+  {"concept_id": "calc.integral.ftc",          "source": "algebrica/integrals/fundamental-theorem-of-calculus.md"},
+  {"concept_id": "calc.integral.substitution", "source": "algebrica/integrals/integration-by-substitution.md"},
+  {"concept_id": "calc.integral.parts",        "source": "algebrica/integrals/integration-by-parts.md"},
+  {"concept_id": "calc.integral.area_between", "source": "algebrica/integrals/finding-areas-by-integration.md"},
+
+  {"concept_id": "discrete.sets.operations",        "source": "algebrica/sets-and-numbers/sets.md"},
+  {"concept_id": "discrete.combinatorics.permutations", "source": "algebrica/sets-and-numbers/factorial.md"},
+  {"concept_id": "discrete.combinatorics.combinations", "source": "algebrica/sets-and-numbers/binomial-coefficient.md"},
+  {"concept_id": "discrete.combinatorics.pascal",       "source": "algebrica/sets-and-numbers/binomial-coefficient.md"},
+
+  {"concept_id": "abstract.group.def",       "source": "algebrica/algebraic-structures/groups.md"},
+  {"concept_id": "abstract.group.examples",  "source": "algebrica/algebraic-structures/groups.md"},
+  {"concept_id": "abstract.subgroup",        "source": "algebrica/algebraic-structures/groups.md"},
+  {"concept_id": "abstract.ring",            "source": "algebrica/algebraic-structures/rings.md"},
+  {"concept_id": "abstract.homomorphism",    "source": "algebrica/algebraic-structures/groups.md"}
 ]

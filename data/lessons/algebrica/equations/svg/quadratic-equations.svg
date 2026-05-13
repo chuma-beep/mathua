@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="319px" height="251px" viewBox="0 0 319 251" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(1.000000, 0.000000)">
+            <path d="M71.882134,2.67699263 L71.9357878,2.75486938 L76.4357878,10.7548694 C76.5711697,10.9955483 76.4858096,11.3004059 76.2451306,11.4357878 C76.0311938,11.5561272 75.7665479,11.5020533 75.6152959,11.3195146 L75.5642122,11.2451306 L72,4.908 L72,250.5 C72,250.776142 71.7761424,251 71.5,251 C71.2545401,251 71.0503916,250.823125 71.0080557,250.589876 L71,250.5 L71,4.908 L67.4357878,11.2451306 C67.3154483,11.4590675 67.0612021,11.5502832 66.8371522,11.4728292 L66.7548694,11.4357878 C66.5409325,11.3154483 66.4497168,11.0612021 66.5271708,10.8371522 L66.5642122,10.7548694 L71.0642122,2.75486938 C71.2394349,2.44336236 71.6651608,2.41740344 71.882134,2.67699263 Z" fill="#BABABA" fill-rule="nonzero"></path>
+            <path d="M295.162848,212.527171 L295.245131,212.564212 L303.245131,217.064212 C303.556638,217.239435 303.582597,217.665161 303.323007,217.882134 L303.245131,217.935788 L295.245131,222.435788 C295.004452,222.57117 294.699594,222.48581 294.564212,222.245131 C294.443873,222.031194 294.497947,221.766548 294.680485,221.615296 L294.754869,221.564212 L301.091,218 L3.85379111e-16,218 C-0.276142375,218 -0.5,217.776142 -0.5,217.5 C-0.5,217.25454 -0.323124839,217.050392 -0.0898756324,217.008056 L-3.85379111e-16,217 L301.091,217 L294.754869,213.435788 C294.540933,213.315448 294.449717,213.061202 294.527171,212.837152 L294.564212,212.754869 C294.684552,212.540933 294.938798,212.449717 295.162848,212.527171 Z" fill="#BABABA" fill-rule="nonzero"></path>
+            <line x1="2.29679453e-15" y1="189.5" x2="302.5" y2="189.5" stroke="#BABABA" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4"></line>
+            <line x1="144.5" y1="250.5" x2="144.5" y2="14.5" stroke="#BABABA" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4"></line>
+            <line x1="71.5" y1="112.5" x2="144.5" y2="112.5" stroke="#BABABA" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4"></line>
+            <line x1="71.5" y1="150.5" x2="144.5" y2="150.5" stroke="#BABABA" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4"></line>
+            <path d="M28,10 C64.6000331,104 102.600033,151 142,151 C172.669792,151 203.905149,122.520798 235.706071,65.5623933" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M245.875289,45.959464 C249.076673,39.4893797 254.78491,27.5028917 263,10" stroke="#333333" stroke-width="2" stroke-linecap="round"></path>
+            <text font-size="13" font-weight="normal" line-spacing="13" fill="#333333">
+                <tspan x="225.5" y="59">y = ax² + bx + c</tspan>
+            </text>
+            <text font-size="14" font-weight="normal" line-spacing="13" fill="#BABABA">
+                <tspan x="50" y="14">y</tspan>
+            </text>
+            <text font-size="14" font-weight="normal" line-spacing="13" fill="#BABABA">
+                <tspan x="296" y="238">x</tspan>
+            </text>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#333333">
+                <tspan x="153" y="110">F</tspan>
+            </text>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#333333">
+                <tspan x="152" y="168">V</tspan>
+            </text>
+            <circle fill="#333333" cx="144.5" cy="112.5" r="2.5"></circle>
+            <ellipse fill="#333333" cx="144.495446" cy="150.5" rx="2.49544627" ry="2.5"></ellipse>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#636363">
+                <tspan x="176.601695" y="22">Axis of the </tspan>
+                <tspan x="176.601695" y="35">parabola</tspan>
+            </text>
+            <line x1="170.5" y1="17.5" x2="154.5" y2="17.5" stroke="#BABABA" stroke-linecap="round"></line>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#333333">
+                <tspan x="293" y="180">d</tspan>
+            </text>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#636363">
+                <tspan x="230" y="138">Directrix</tspan>
+            </text>
+            <line x1="243.5" y1="145.5" x2="243.5" y2="180.5" stroke="#BABABA" stroke-linecap="round"></line>
+        </g>
+    </g>
+</svg>
