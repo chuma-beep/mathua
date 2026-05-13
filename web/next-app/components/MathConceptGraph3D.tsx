@@ -56,6 +56,9 @@ function domainColor(domain: string, theme: 'dark' | 'light'): string {
 const LINK_COLOR = '#8ed8d0'
 const LINK_COLOR_LIGHT = '#207068'
 
+const ACTIVE_LINK_COLOR = '#60a5fa'
+const ACTIVE_LINK_COLOR_LIGHT = '#2563eb'
+
 const NODE_RADIUS = 0.20
 
 interface RenderNode {
@@ -200,7 +203,7 @@ const NodeMesh = React.memo(function NodeMesh({
 
 function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], positionMap: Map<string, [number, number, number]>, activeId: string, theme: 'dark' | 'light' }) {
   const activeLinks = useMemo(() => links.filter(l => l.source === activeId || l.target === activeId), [links, activeId])
-  const edgeColor = theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT
+  const edgeColor = theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT
 
   const geometry = useMemo(() => {
     const positions = new Float32Array(activeLinks.length * 6)
@@ -294,7 +297,7 @@ function Particles({ theme }: { theme: 'dark' | 'light' }) {
     return pos
   }, [])
 
-  const color = theme === 'dark' ? '#1e2d45' : '#aaa'
+  const color = theme === 'dark' ? '#4a5568' : '#aaa'
 
   return (
     <points>
