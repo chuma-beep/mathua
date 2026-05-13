@@ -472,15 +472,23 @@ export default function SessionPage() {
                       {question.concept_name}
                     </h3>
                   </div>
-                  <div className="bg-mathua-code border border-mathua-border rounded-none p-8 text-center mb-6">
-                    {question.diagram && (
-                      <div className="mb-4 flex justify-center">
-                        <img src={question.diagram} alt="Diagram" className="max-w-full h-auto" style={{ maxHeight: '200px' }} />
+                  <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
+                    {question.diagram ? (
+                      <div className="flex flex-col md:flex-row">
+                        <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
+                          <img src={question.diagram} alt="Diagram" className="max-w-full h-auto" style={{ maxHeight: '180px' }} />
+                        </div>
+                        <div className="md:w-2/3 p-8 flex items-center justify-center">
+                          <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                            {question.question}
+                          </p>
+                        </div>
                       </div>
+                    ) : (
+                      <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                        {question.question}
+                      </p>
                     )}
-                    <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap">
-                      {question.question}
-                    </p>
                   </div>
                   <div className="flex gap-3 mb-4">
                     <input
