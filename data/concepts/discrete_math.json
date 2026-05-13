@@ -1,0 +1,202 @@
+[
+  {
+    "id": "discrete.logic.propositions",
+    "label": "Propositional logic: statements and truth values",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.var.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "discrete.logic.connectives",
+    "label": "Logical connectives: AND, OR, NOT, IMPLIES",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.propositions"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.logic.truth_tables",
+    "label": "Truth tables",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.connectives"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.logic.quantifiers",
+    "label": "Quantifiers: universal and existential",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.truth_tables"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.sets.operations",
+    "label": "Set operations: union, intersection, complement",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.propositions"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.sets.venn",
+    "label": "Venn diagrams",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.permutations",
+    "label": "Permutations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.counting",
+      "arith.factor.prime_fact"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.combinations",
+    "label": "Combinations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.permutations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.pascal",
+    "label": "Pascal's triangle and binomial theorem",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.combinations",
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.graphs.basics",
+    "label": "Graphs: vertices, edges, and degrees",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "discrete.graphs.paths",
+    "label": "Paths, cycles, and connectivity",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.basics"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "discrete.graphs.trees",
+    "label": "Trees and spanning trees",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.paths"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.recurrence",
+    "label": "Recurrence relations",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.recurrence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "discrete.induction",
+    "label": "Mathematical induction",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.proof",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.recurrence",
+      "discrete.logic.quantifiers"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 30.0
+    }
+  }
+]

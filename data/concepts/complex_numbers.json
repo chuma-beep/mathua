@@ -1,0 +1,117 @@
+[
+  {
+    "id": "complex.concept",
+    "label": "Imaginary unit i and complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sqrt.perfect",
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "complex.add_sub",
+    "label": "Add and subtract complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "complex.mult",
+    "label": "Multiply complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.add_sub",
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "complex.conjugate",
+    "label": "Complex conjugate",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "complex.divide",
+    "label": "Divide complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.conjugate"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "complex.polar",
+    "label": "Polar form of complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.divide",
+      "trig.unit_circle"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "complex.de_moivre",
+    "label": "De Moivre's theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.polar"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "complex.roots",
+    "label": "Roots of complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.de_moivre"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 25.0
+    }
+  }
+]

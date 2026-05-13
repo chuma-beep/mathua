@@ -39,7 +39,7 @@ func main() {
 	noAuth := flag.Bool("no-auth", false, "disable authentication (dev mode)")
 	flag.Parse()
 
-	dag, err := concepts.Load("data/concepts.json")
+	dag, err := concepts.LoadDir("data/concepts")
 	if err != nil {
 		log.Fatalf("load concepts: %v", err)
 	}
