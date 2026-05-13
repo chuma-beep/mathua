@@ -311,11 +311,11 @@ export default function SessionPage() {
                 onKeyDown={(e) => e.key === 'Enter' && beginSessionName()}
                 placeholder="Your name"
                 autoFocus
-                className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
               />
               <button
                 onClick={startGuestDiagnostic}
-                className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm"
+                className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm"
               >
                 Start
               </button>
@@ -341,7 +341,7 @@ export default function SessionPage() {
                   <button
                     key={d.name}
                     onClick={() => toggleDomain(d.name)}
-                    className={`rounded-lg p-4 text-left transition-all text-sm ${
+                    className={`rounded-none p-4 text-left transition-all text-sm ${
                       d.selected
                         ? 'bg-mathua-blue text-white ring-2 ring-mathua-blue'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
@@ -356,10 +356,10 @@ export default function SessionPage() {
               })}
             </div>
             <div className="flex gap-3 justify-center">
-              <button onClick={() => setScreen('name')} className="bg-mathua-surface border border-mathua-border rounded-md h-12 px-8 text-sm text-mathua-secondary hover:text-mathua-blue">
+              <button onClick={() => setScreen('name')} className="bg-mathua-surface border border-mathua-border rounded-none h-12 px-8 text-sm text-mathua-secondary hover:text-mathua-blue">
                 Back
               </button>
-              <button onClick={beginGuestDiagnostic} disabled={loading} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50">
+              <button onClick={beginGuestDiagnostic} disabled={loading} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50">
                 {loading ? 'Loading...' : 'Start diagnostic'}
               </button>
             </div>
@@ -369,8 +369,8 @@ export default function SessionPage() {
         {screen === 'diagnostic' && (
           <div className="max-w-2xl mx-auto mt-8">
             <SectionHeader label={`Question ${diagCount}`} title={diagConceptName} />
-            <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
-              <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
+            <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-6">
+              <div className="bg-mathua-code border border-mathua-border rounded-none p-6 text-center mb-4">
                 <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</p>
               </div>
               <div className="flex gap-3">
@@ -381,15 +381,15 @@ export default function SessionPage() {
                   onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
                   placeholder="Your answer..."
                   disabled={loading || diagLastResult !== null}
-                  className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
-                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50">
+                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
                   Submit
                 </button>
               </div>
             </div>
             {diagLastResult && (
-              <div className={`bg-mathua-surface border rounded-lg p-4 mb-4 text-center ${diagLastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
+              <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${diagLastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
                 <p className={diagLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{diagLastResult.feedback}</p>
               </div>
             )}
@@ -414,7 +414,7 @@ export default function SessionPage() {
           <>
             <div className="flex gap-8 items-start mt-4 max-md:flex-col">
               <div className="w-[200px] flex-shrink-0 max-md:w-full">
-                <div className="bg-mathua-surface border border-mathua-border rounded-lg p-5 space-y-4">
+                <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4">
                   <div>
                     <span className="font-mono text-[10px] uppercase text-mathua-muted">Streak</span>
                     <div className="font-mono text-2xl text-mathua-green mt-1">
@@ -448,14 +448,14 @@ export default function SessionPage() {
                 </div>
               </div>
               <div className="flex-1">
-                <div className="bg-mathua-surface border border-mathua-border rounded-lg p-8 max-md:p-5">
+                <div className="bg-mathua-surface border border-mathua-border rounded-none p-8 max-md:p-5">
                   <div className="mb-6">
                     <span className="section-label">{question.concept_id}</span>
                     <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1">
                       {question.concept_name}
                     </h3>
                   </div>
-                  <div className="bg-mathua-code border border-mathua-border rounded-md p-8 text-center mb-6">
+                  <div className="bg-mathua-code border border-mathua-border rounded-none p-8 text-center mb-6">
                     <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap">
                       {question.question}
                     </p>
@@ -468,11 +468,11 @@ export default function SessionPage() {
                       onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                       placeholder="Your answer"
                       autoFocus
-                      className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                      className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
                     <button
                       onClick={handleSubmit}
-                      className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm"
+                      className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm"
                     >
                       Submit
                     </button>
@@ -495,7 +495,7 @@ export default function SessionPage() {
 
         {screen === 'feedback' && lastResult && (
           <div className="max-w-xl mx-auto mt-8">
-            <div className={`bg-mathua-surface border rounded-lg p-8 max-md:p-5 ${
+            <div className={`bg-mathua-surface border rounded-none p-8 max-md:p-5 ${
               lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'
             }`}>
               <h3 className={`font-serif text-2xl font-medium mb-2 ${
@@ -517,7 +517,7 @@ export default function SessionPage() {
               {question ? (
                 <button
                   onClick={nextQuestion}
-                  className="w-full bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 font-medium text-sm"
+                  className="w-full bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 font-medium text-sm"
                 >
                   Next Question
                 </button>
