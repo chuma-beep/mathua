@@ -68,6 +68,10 @@ func (s *PostgresStore) GetXP(studentID string) (int, int, error) {
 	return 0, 0, fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) SetDiagnosticCompleted(studentID string) error {
+	return fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) Migrate() error {
 	return fmt.Errorf("not implemented")
 }

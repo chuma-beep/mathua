@@ -2,14 +2,15 @@ package storage
 
 const schema = `
 CREATE TABLE IF NOT EXISTS students (
-    id            TEXT PRIMARY KEY,
-    name          TEXT NOT NULL,
-    username      TEXT,
-    password_hash TEXT,
-    created_at    TEXT NOT NULL DEFAULT (datetime('now')),
-    xp_total      INTEGER NOT NULL DEFAULT 0,
-    xp_today      INTEGER NOT NULL DEFAULT 0,
-    xp_date       TEXT
+    id                   TEXT PRIMARY KEY,
+    name                 TEXT NOT NULL,
+    username             TEXT,
+    password_hash        TEXT,
+    created_at           TEXT NOT NULL DEFAULT (datetime('now')),
+    xp_total             INTEGER NOT NULL DEFAULT 0,
+    xp_today             INTEGER NOT NULL DEFAULT 0,
+    xp_date              TEXT,
+    diagnostic_completed INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (

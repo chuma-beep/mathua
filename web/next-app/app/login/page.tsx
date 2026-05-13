@@ -30,8 +30,8 @@ export default function LoginPage() {
         ? await signup(name.trim(), username.trim(), password)
         : await login(username.trim(), password)
       setToken(res.token)
-      setUserInfo({ student_id: res.student_id, name: res.name, username: username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice' })
-      router.push('/goals')
+      setUserInfo({ student_id: res.student_id, name: res.name, username: username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
+      router.push(res.diagnostic_completed ? '/session' : '/onboard')
     } catch (e: any) {
       setError(e.message || 'Authentication failed')
     } finally { setLoading(false) }
