@@ -501,7 +501,7 @@ func (e *Engine) WeaknessMap(studentID string) map[string]float64 {
 			result[c.ID] = 0.5
 			continue
 		}
-		if p.Status == "MASTERED" {
+		if p.Status == string(mastery.StatusMastered) {
 			result[c.ID] = 0.0
 			continue
 		}
@@ -553,7 +553,7 @@ func (e *Engine) AdjustPlan(studentID string) {
 	}
 	e.mu.Lock()
 	for cid := range path {
-		if p, ok := progress[cid]; ok && p.Status == "MASTERED" && p.WeaknessScore < 0.2 {
+		if p, ok := progress[cid]; ok && p.Status == string(mastery.StatusMastered) && p.WeaknessScore < 0.2 {
 			delete(path, cid)
 		}
 	}

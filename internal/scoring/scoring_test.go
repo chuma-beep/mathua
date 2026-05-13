@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/levels"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -26,7 +27,7 @@ func TestComputeLevel(t *testing.T) {
 		{284, "Math Architect"},
 	}
 	for _, tc := range cases {
-		got := computeLevel(tc.mastered)
+		got := levels.Compute(tc.mastered)
 		if got != tc.expected {
 			t.Errorf("mastered=%d: expected %q, got %q", tc.mastered, tc.expected, got)
 		}

@@ -24,7 +24,7 @@ func (g *numericGrader) grade(expected, answer string) Result {
 	e := normalise(expected)
 	a := normalise(answer)
 	if e == "" || a == "" {
-		return Result{Correct: false, Score: 0, Feedback: "Answer must not be empty"}
+		return emptyResult()
 	}
 	eVal, eIsFloat, eOK := parseNumeric(e)
 	aVal, aIsFloat, aOK := parseNumeric(a)

@@ -13,7 +13,7 @@ func (g *choiceGrader) grade(expected, answer string) Result {
 	e := strings.TrimSpace(expected)
 	a := strings.TrimSpace(answer)
 	if e == "" || a == "" {
-		return Result{Correct: false, Score: 0, Feedback: "Answer must not be empty"}
+		return emptyResult()
 	}
 	if strings.EqualFold(e, a) {
 		return Result{Correct: true, Score: 1}

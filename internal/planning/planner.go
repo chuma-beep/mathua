@@ -7,6 +7,7 @@ import (
 	"sort"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -115,7 +116,7 @@ func (p *Planner) PathForCourse(courseID string) (*Path, error) {
 func (p *Planner) Unmastered(path *Path, progress map[string]*storage.ConceptProgress) []*concepts.Concept {
 	var out []*concepts.Concept
 	for _, c := range path.Concepts {
-		if prog, ok := progress[c.ID]; !ok || prog.Status != "MASTERED" {
+		if prog, ok := progress[c.ID]; !ok || prog.Status != string(mastery.StatusMastered) {
 			out = append(out, c)
 		}
 	}
@@ -132,7 +133,7 @@ func (p *Planner) Readiness(path *Path, progress map[string]*storage.ConceptProg
 	}
 	mastered := 0
 	for _, c := range path.Concepts {
-		if prog, ok := progress[c.ID]; ok && prog.Status == "MASTERED" {
+		if prog, ok := progress[c.ID]; ok && prog.Status == string(mastery.StatusMastered) {
 			mastered++
 		}
 	}

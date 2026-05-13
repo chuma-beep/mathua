@@ -2,6 +2,8 @@ package leaderboard
 
 import (
 	"testing"
+
+	"github.com/chuma-beep/mathua/internal/levels"
 )
 
 func TestComputeLevel(t *testing.T) {
@@ -22,7 +24,7 @@ func TestComputeLevel(t *testing.T) {
 		{284, "Math Architect"},
 	}
 	for _, tc := range cases {
-		got := computeLevel(tc.mastered)
+		got := levels.Compute(tc.mastered)
 		if got != tc.expected {
 			t.Errorf("mastered=%d: expected %q, got %q", tc.mastered, tc.expected, got)
 		}

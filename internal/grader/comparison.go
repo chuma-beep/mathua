@@ -8,7 +8,7 @@ func (g *comparisonGrader) grade(expected, answer string) Result {
 	e := strings.TrimSpace(expected)
 	a := strings.TrimSpace(answer)
 	if e == "" || a == "" {
-		return Result{Correct: false, Score: 0, Feedback: "Answer must not be empty"}
+		return emptyResult()
 	}
 	eVal, err := parseComparison(e)
 	if err != "" {

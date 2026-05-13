@@ -13,7 +13,7 @@ func (g *orderingGrader) grade(expected, answer string) Result {
 	eParts := splitOrdering(expected)
 	aParts := splitOrdering(answer)
 	if len(eParts) == 0 || len(aParts) == 0 {
-		return Result{Correct: false, Score: 0, Feedback: "Answer must not be empty"}
+		return emptyResult()
 	}
 	if len(eParts) != len(aParts) {
 		return Result{Correct: false, Score: 0, Feedback: "Incorrect number of elements"}

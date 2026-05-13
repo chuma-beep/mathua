@@ -8,7 +8,7 @@ func (g *symbolicGrader) grade(expected, answer string) Result {
 	e := normaliseSymbolic(expected)
 	a := normaliseSymbolic(answer)
 	if e == "" || a == "" {
-		return Result{Correct: false, Score: 0, Feedback: "Answer must not be empty"}
+		return emptyResult()
 	}
 	if e == a {
 		return Result{Correct: true, Score: 1}
