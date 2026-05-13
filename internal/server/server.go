@@ -61,6 +61,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseDiagnostic))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
 	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.handleDiagnosticAnswer)))
+	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
+	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.authMiddleware(s.handleGoalDiagnosticStart))))
+	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.authMiddleware(s.handleGoalDiagnosticAnswer))))
+	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.authMiddleware(s.handleGoalPlan))))
+	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 }
 
@@ -342,6 +347,288 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 // GET /api/health
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]string{"status": "ok"})
+}
+
+// POST /api/goal
+// Body: { "concept_ids": [...], "domain": "..." }
+func (s *Server) handleGoal(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		ConceptIDs []string `json:"concept_ids"`
+		Domain     string   `json:"domain"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	ids := req.ConceptIDs
+	if req.Domain != "" && len(ids) == 0 {
+		for _, c := range s.eng.GetDAG().Order() {
+			if c.Domain == req.Domain {
+				ids = append(ids, c.ID)
+			}
+		}
+	}
+	if len(ids) == 0 {
+		writeError(w, "no concepts specified", 400)
+		return
+	}
+	path, err := s.eng.GetPlanner().PrerequisitesOf(ids)
+	if err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
+	type conceptInfo struct {
+		ID      string   `json:"id"`
+		Label   string   `json:"label"`
+		Domain  string   `json:"domain"`
+		Prereqs []string `json:"prerequisites"`
+	}
+	chain := make([]conceptInfo, 0, len(path.Concepts))
+	for _, c := range path.Concepts {
+		chain = append(chain, conceptInfo{
+			ID:      c.ID,
+			Label:   c.Label,
+			Domain:  c.Domain,
+			Prereqs: c.Prerequisites,
+		})
+	}
+	writeJSON(w, map[string]interface{}{
+		"concepts": chain,
+		"count":    len(chain),
+	})
+}
+
+// POST /api/goal/diagnostic
+// Body: { "concept_ids": [...] }
+func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	var req struct {
+		ConceptIDs []string `json:"concept_ids"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if len(req.ConceptIDs) == 0 {
+		writeError(w, "concept_ids required", 400)
+		return
+	}
+	session, question, err := s.eng.StartGoalDiagnostic(studentID, req.ConceptIDs)
+	if err != nil {
+		writeError(w, err.Error(), 500)
+		return
+	}
+	session.ID = newUUID()
+	session.StudentID = studentID
+	s.mu.Lock()
+	s.diagSessions[session.ID] = session
+	s.mu.Unlock()
+	if question == nil {
+		writeJSON(w, map[string]interface{}{"session_id": session.ID, "done": true})
+		return
+	}
+	writeJSON(w, map[string]interface{}{
+		"session_id":   session.ID,
+		"concept_id":   question.ConceptID,
+		"concept_name": question.ConceptName,
+		"question":     question.Question,
+	})
+}
+
+// POST /api/goal/diagnostic/answer
+// Body: { "session_id": "...", "concept_id": "...", "answer": "...", "elapsed": 0.0 }
+func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string  `json:"session_id"`
+		ConceptID string  `json:"concept_id"`
+		Answer    string  `json:"answer"`
+		Elapsed   float64 `json:"elapsed"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	s.mu.Lock()
+	session := s.diagSessions[req.SessionID]
+	s.mu.Unlock()
+	if session == nil {
+		writeError(w, "diagnostic session not found", 404)
+		return
+	}
+
+	// Generate the expected answer and grade it server-side
+	concept := s.eng.GetDAG().Concept(req.ConceptID)
+	timeThresh := 10.0
+	if concept != nil {
+		timeThresh = concept.MasteryThreshold.AvgTimeSeconds
+	}
+	prob, _, err := s.eng.NextDiagnosticQuestion(session)
+	correct := false
+	explanation := ""
+	if err == nil && prob != nil {
+		gr := s.eng.GetDAG().Concept(req.ConceptID)
+		gradingType := "numeric"
+		if gr != nil {
+			gradingType = gr.GradingType
+		}
+		if gradingType == "numeric" {
+			correct = prob.Answer == req.Answer
+		} else {
+			correct = prob.Answer == req.Answer
+		}
+		explanation = prob.Explanation
+	}
+	fast := req.Elapsed < timeThresh
+
+	s.eng.SubmitDiagnosticAnswer(session, req.ConceptID, correct, fast)
+	if s.eng.IsDiagnosticComplete(session) {
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  correct,
+			"feedback": explanation,
+		})
+		return
+	}
+	nextProb, cid, err := s.eng.NextDiagnosticQuestion(session)
+	if err != nil {
+		writeError(w, "failed to get next question", 500)
+		return
+	}
+	c := s.eng.GetDAG().Concept(cid)
+	name := cid
+	if c != nil {
+		name = c.Label
+	}
+	writeJSON(w, map[string]interface{}{
+		"done":         false,
+		"correct":      correct,
+		"feedback":     explanation,
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     nextProb.Question,
+	})
+}
+
+// POST /api/goal/plan
+// Body: { "session_id": "..." }
+// Returns readiness, weak areas by domain, strong areas
+func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string `json:"session_id"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	s.mu.Lock()
+	session := s.diagSessions[req.SessionID]
+	s.mu.Unlock()
+	if session == nil {
+		writeError(w, "diagnostic session not found", 404)
+		return
+	}
+	studentID := session.StudentID
+
+	// Persist diagnostic results
+	if err := s.eng.ApplyGoalResults(studentID, session); err != nil {
+		writeError(w, err.Error(), 500)
+		return
+	}
+
+	// Clean up session
+	s.mu.Lock()
+	delete(s.diagSessions, req.SessionID)
+	s.mu.Unlock()
+
+	// Compute readiness and weak areas
+	weakByDomain := make(map[string][]map[string]interface{})
+	strongByDomain := make(map[string][]string)
+
+	for _, att := range session.Attempts {
+		c := s.eng.GetDAG().Concept(att.ConceptID)
+		domain := "unknown"
+		label := att.ConceptID
+		if c != nil {
+			domain = c.Domain
+			label = c.Label
+		}
+		isWeak := (!att.Correct || !att.Fast)
+		if isWeak {
+			weakByDomain[domain] = append(weakByDomain[domain], map[string]interface{}{
+				"id":    att.ConceptID,
+				"label": label,
+			})
+		} else {
+			strongByDomain[domain] = append(strongByDomain[domain], label)
+		}
+	}
+
+	total := len(session.Attempts)
+	correct := 0
+	for _, att := range session.Attempts {
+		if att.Correct {
+			correct++
+		}
+	}
+	readiness := 0.0
+	if total > 0 {
+		readiness = float64(correct) / float64(total)
+	}
+
+	writeJSON(w, map[string]interface{}{
+		"readiness":     readiness,
+		"total_tested":  total,
+		"correct_count": correct,
+		"weak_areas":    weakByDomain,
+		"strong_areas":  strongByDomain,
+	})
+}
+
+// GET /api/weaknesses
+// Returns weakness scores grouped by domain for the authenticated student
+func (s *Server) handleWeaknesses(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	weakMap := s.eng.WeaknessMap(studentID)
+	if weakMap == nil {
+		writeJSON(w, map[string]interface{}{"by_domain": map[string]interface{}{}})
+		return
+	}
+	byDomain := make(map[string][]map[string]interface{})
+	for _, c := range s.eng.GetDAG().Order() {
+		w := weakMap[c.ID]
+		if w > 0.2 {
+			byDomain[c.Domain] = append(byDomain[c.Domain], map[string]interface{}{
+				"id":       c.ID,
+				"label":    c.Label,
+				"weakness": w,
+			})
+		}
+	}
+	writeJSON(w, map[string]interface{}{"by_domain": byDomain})
 }
 
 // GET /api/courses

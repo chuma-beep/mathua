@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS concept_progress (
     sm2_interval     INTEGER NOT NULL DEFAULT 0,
     sm2_efactor      REAL    NOT NULL DEFAULT 2.5,
     mastered_at      TEXT,
+    weakness_score   REAL    NOT NULL DEFAULT 0,
     PRIMARY KEY (student_id, concept_id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 );

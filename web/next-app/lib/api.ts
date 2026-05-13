@@ -158,11 +158,98 @@ export async function signup(name: string, username: string, password: string): 
 }
 
 export async function login(username: string, password: string): Promise<{ token: string; student_id: string; name: string }> {
-  const res = await fetch(`${API_BASE}/api/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  })
-  if (!res.ok) throw new Error('Invalid credentials')
-  return res.json()
+	const res = await fetch(`${API_BASE}/api/auth/login`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ username, password }),
+	})
+	if (!res.ok) throw new Error('Invalid credentials')
+	return res.json()
+}
+
+// Goal-based diagnostic API
+
+export interface GoalPathRes {
+	concepts: { id: string; label: string; domain: string; prerequisites: string[] }[]
+	count: number
+}
+
+export interface GoalDiagStartRes {
+	session_id: string
+	concept_id?: string
+	concept_name?: string
+	question?: string
+	done?: boolean
+}
+
+export interface GoalDiagAnswerRes {
+	done: boolean
+	concept_id?: string
+	concept_name?: string
+	question?: string
+}
+
+export interface GoalPlanRes {
+	readiness: number
+	total_tested: number
+	correct_count: number
+	weak_areas: Record<string, { id: string; label: string }[]>
+	strong_areas: Record<string, string[]>
+}
+
+export interface WeaknessRes {
+	by_domain: Record<string, { id: string; label: string; weakness: number }[]>
+}
+
+export async function getGoalPath(conceptIds: string[]): Promise<GoalPathRes> {
+	const res = await fetch(`${API_BASE}/api/goal`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ concept_ids: conceptIds }),
+	})
+	if (!res.ok) throw new Error(`Goal path fetch failed: ${res.status}`)
+	return res.json()
+}
+
+export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDiagStartRes> {
+	const res = await fetch(`${API_BASE}/api/goal/diagnostic`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ concept_ids: conceptIds }),
+	})
+	if (!res.ok) throw new Error(`Goal diagnostic start failed: ${res.status}`)
+	return res.json()
+}
+
+export async function submitGoalAnswer(
+	sessionId: string,
+	conceptId: string,
+	correct: boolean,
+	fast: boolean,
+): Promise<GoalDiagAnswerRes> {
+	const res = await fetch(`${API_BASE}/api/goal/diagnostic/answer`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, correct, fast }),
+	})
+	if (!res.ok) throw new Error(`Goal answer failed: ${res.status}`)
+	return res.json()
+}
+
+export async function getGoalPlan(sessionId: string): Promise<GoalPlanRes> {
+	const res = await fetch(`${API_BASE}/api/goal/plan`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ session_id: sessionId }),
+	})
+	if (!res.ok) throw new Error(`Goal plan failed: ${res.status}`)
+	return res.json()
+}
+
+export async function getWeaknesses(): Promise<WeaknessRes> {
+	const res = await fetch(`${API_BASE}/api/weaknesses`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) return { by_domain: {} }
+	return res.json()
 }

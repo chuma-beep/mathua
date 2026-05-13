@@ -48,6 +48,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN password_hash TEXT",
 		"ALTER TABLE students ADD COLUMN course_id TEXT",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
+		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -146,7 +147,7 @@ func (s *SQLiteStore) GetProgress(studentID, conceptID string) (*ConceptProgress
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at
+		       mastered_at, weakness_score
 		FROM concept_progress
 		WHERE student_id = ? AND concept_id = ?
 	`, studentID, conceptID)
@@ -163,7 +164,7 @@ func (s *SQLiteStore) GetAllProgress(studentID string) (map[string]*ConceptProgr
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at
+		       mastered_at, weakness_score
 		FROM concept_progress
 		WHERE student_id = ?
 	`, studentID)
@@ -189,8 +190,8 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 			(student_id, concept_id, status, streak, best_streak,
 			 avg_response_time, attempts, last_attempted, last_reviewed,
 			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-			 mastered_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 mastered_at, weakness_score)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(student_id, concept_id) DO UPDATE SET
 			status            = excluded.status,
 			streak            = excluded.streak,
@@ -203,13 +204,14 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 			sm2_repetitions   = excluded.sm2_repetitions,
 			sm2_interval      = excluded.sm2_interval,
 			sm2_efactor       = excluded.sm2_efactor,
-			mastered_at       = excluded.mastered_at
+			mastered_at       = excluded.mastered_at,
+			weakness_score    = excluded.weakness_score
 	`,
 		p.StudentID, p.ConceptID, p.Status, p.Streak, p.BestStreak,
 		p.AvgResponseTime, p.Attempts,
 		nullTime(p.LastAttempted), nullTime(p.LastReviewed),
 		nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
-		p.SM2EFactor, nullTime(p.MasteredAt),
+		p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
 	)
 	if err != nil {
 		return fmt.Errorf("upsert progress: %w", err)
@@ -336,7 +338,7 @@ func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProg
 		&p.StudentID, &p.ConceptID, &p.Status, &p.Streak, &p.BestStreak,
 		&p.AvgResponseTime, &p.Attempts, &lastAtt, &lastRev,
 		&nextRev, &p.SM2Repetitions, &p.SM2Interval, &p.SM2EFactor,
-		&masterAt,
+		&masterAt, &p.WeaknessScore,
 	)
 	if err != nil {
 		return nil, err

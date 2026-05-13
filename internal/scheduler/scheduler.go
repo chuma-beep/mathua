@@ -39,6 +39,7 @@ type ConceptSnapshot struct {
 	NextReviewDue  *time.Time
 	RequiredStreak int
 	TimeThreshold  float64
+	WeaknessScore  float64
 }
 
 // Next selects the next concept for a student to practice.
@@ -121,6 +122,7 @@ func prereqsMet(dag *concepts.DAG, c *concepts.Concept, snapshots map[string]*Co
 func computePriority(snap *ConceptSnapshot, now time.Time, isDecaying bool) float64 {
 	daysSinceLastSeen := 0.0
 	masteryScore := 0.0
+	weakness := 0.0
 	if snap != nil {
 		if !snap.LastAttempted.IsZero() {
 			daysSinceLastSeen = now.Sub(snap.LastAttempted).Hours() / 24
@@ -128,8 +130,9 @@ func computePriority(snap *ConceptSnapshot, now time.Time, isDecaying bool) floa
 		if snap.RequiredStreak > 0 {
 			masteryScore = math.Min(1.0, float64(snap.Streak)/float64(snap.RequiredStreak))
 		}
+		weakness = snap.WeaknessScore
 	}
-	priority := 0.7*daysSinceLastSeen + 0.3*(1.0-masteryScore)
+	priority := 0.5*daysSinceLastSeen + 0.2*(1.0-masteryScore) + 0.3*weakness
 	if isDecaying {
 		priority += 5.0
 	}
