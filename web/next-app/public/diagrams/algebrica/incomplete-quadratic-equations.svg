@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="336px" height="278px" viewBox="0 0 336 278" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="incomplete-quadratic-equations" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(0.500000, 0.000000)">
+            <path id="Line" d="M147,51.9801356 L147.435788,52.7548694 L151.935788,60.7548694 L152.180918,61.1906571 L151.309343,61.6809184 L151.064212,61.2451306 L147.5,54.908 L147.5,278 L146.5,278 L146.5,54.908 L142.935788,61.2451306 L142.690657,61.6809184 L141.819082,61.1906571 L142.064212,60.7548694 L146.564212,52.7548694 L147,51.9801356 Z" fill="#BABABA" fill-rule="nonzero"></path>
+            <path id="Line-2" d="M294.309343,238.319082 L294.745131,238.564212 L302.745131,243.064212 L303.519864,243.5 L302.745131,243.935788 L294.745131,248.435788 L294.309343,248.680918 L293.819082,247.809343 L294.254869,247.564212 L300.591,244 L-0.5,244 L-0.5,243 L300.591,243 L294.254869,239.435788 L293.819082,239.190657 L294.309343,238.319082 Z" fill="#BABABA" fill-rule="nonzero"></path>
+            <text font-size="11" font-weight="normal" line-spacing="13" fill="#666666">
+                <tspan x="194.5" y="11">Since the equation is of the </tspan>
+                <tspan x="194.5" y="24">form ax² , the graph always </tspan>
+                <tspan x="194.5" y="37">touches the x-axis at x = 0, </tspan>
+                <tspan x="194.5" y="50">but does not cross it.</tspan>
+            </text>
+            <line x1="218" y1="57.5" x2="218" y2="91.5" stroke="#BABABA" stroke-linecap="round"></line>
+            <path d="M77,101.5 C98.9600199,195.5 121.76002,242.5 145.4,242.5 C164.751198,242.5 184.477649,211.006614 204.579355,148.019843 M210.826657,127.47218 C212.417236,121.994085 214.80835,113.336692 218,101.5" id="Shape" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <text font-size="13" font-weight="normal" fill="#333333">
+                <tspan x="194" y="141">y=ax²</tspan>
+            </text>
+            <text font-size="14" font-weight="normal" fill="#BABABA">
+                <tspan x="126.5" y="61">y</tspan>
+            </text>
+            <text font-size="14" font-weight="normal" fill="#BABABA">
+                <tspan x="295.5" y="261">x</tspan>
+            </text>
+            <text font-size="14" font-style="italic" font-weight="normal" fill="#BABABA">
+                <tspan x="130.5" y="263">O</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
