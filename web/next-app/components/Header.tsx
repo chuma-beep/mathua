@@ -74,7 +74,7 @@ export default function Header({ links }: HeaderProps) {
       className="max-sm:px-4"
       style={{
         ...barStyle,
-        background: theme === 'dark' ? 'rgba(11, 15, 26, 0.95)' : 'rgba(254, 252, 244, 0.95)',
+        background: 'var(--bg)',
       }}
     >
       <div style={{
