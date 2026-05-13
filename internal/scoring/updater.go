@@ -29,6 +29,8 @@ type Scores struct {
 	ConceptsMastered int     `json:"concepts_mastered"`
 	CurrentStreak    int     `json:"current_streak"`
 	Level            string  `json:"level"`
+	XPTotal          int     `json:"xp_total"`
+	XPToday          int     `json:"xp_today"`
 }
 
 type Updater struct {
@@ -65,6 +67,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 	lifetimePoints := mastered * 100
 	level := computeLevel(mastered)
 	streak := computeCurrentStreak(progress)
+	xpTotal, xpToday, _ := u.repo.GetXP(studentID)
 
 	return &Scores{
 		LifetimePoints:   lifetimePoints,
@@ -73,6 +76,8 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		ConceptsMastered: mastered,
 		CurrentStreak:    streak,
 		Level:            level,
+		XPTotal:          xpTotal,
+		XPToday:          xpToday,
 	}, nil
 }
 

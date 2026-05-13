@@ -47,6 +47,9 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN username TEXT",
 		"ALTER TABLE students ADD COLUMN password_hash TEXT",
 		"ALTER TABLE students ADD COLUMN course_id TEXT",
+		"ALTER TABLE students ADD COLUMN xp_total INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE students ADD COLUMN xp_today INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE students ADD COLUMN xp_date TEXT",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 	}
@@ -97,11 +100,12 @@ func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student,
 }
 
 func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, created_at FROM students WHERE id = ?", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, created_at FROM students WHERE id = ?", id)
 	var st Student
-	var username, passwordHash, courseID sql.NullString
+	var username, passwordHash, courseID, xpDate sql.NullString
+	var xpTotal, xpToday sql.NullInt64
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &createdAt); err != nil {
+	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &createdAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -110,16 +114,24 @@ func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
 	st.Username = username.String
 	st.PasswordHash = passwordHash.String
 	st.CourseID = courseID.String
+	if xpTotal.Valid {
+		st.XPTotal = int(xpTotal.Int64)
+	}
+	if xpToday.Valid {
+		st.XPToday = int(xpToday.Int64)
+	}
+	st.XPTodayDate = xpDate.String
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
 }
 
 func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, created_at FROM students WHERE username = ?", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, created_at FROM students WHERE username = ?", username)
 	var st Student
-	var un, ph, cid sql.NullString
+	var un, ph, cid, xpDate sql.NullString
+	var xpTotal, xpToday sql.NullInt64
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &cid, &createdAt); err != nil {
+	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &cid, &xpTotal, &xpToday, &xpDate, &createdAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -128,6 +140,13 @@ func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
 	st.Username = un.String
 	st.PasswordHash = ph.String
 	st.CourseID = cid.String
+	if xpTotal.Valid {
+		st.XPTotal = int(xpTotal.Int64)
+	}
+	if xpToday.Valid {
+		st.XPToday = int(xpToday.Int64)
+	}
+	st.XPTodayDate = xpDate.String
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
 }
@@ -138,6 +157,37 @@ func (s *SQLiteStore) SetCourseID(studentID, courseID string) error {
 		return fmt.Errorf("set course_id: %w", err)
 	}
 	return nil
+}
+
+func (s *SQLiteStore) AddXP(studentID string, amount int) error {
+	today := time.Now().UTC().Format("2006-01-02")
+	_, err := s.db.Exec(`
+		UPDATE students
+		SET xp_total = xp_total + ?,
+		    xp_today = CASE WHEN xp_date = ? THEN xp_today + ? ELSE ? END,
+		    xp_date  = ?
+		WHERE id = ?
+	`, amount, today, amount, amount, today, studentID)
+	if err != nil {
+		return fmt.Errorf("add xp: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) GetXP(studentID string) (int, int, error) {
+	row := s.db.QueryRow("SELECT xp_total, xp_today, xp_date FROM students WHERE id = ?", studentID)
+	var total, today sql.NullInt64
+	var xpDate sql.NullString
+	if err := row.Scan(&total, &today, &xpDate); err != nil {
+		if err == sql.ErrNoRows {
+			return 0, 0, nil
+		}
+		return 0, 0, fmt.Errorf("get xp: %w", err)
+	}
+	if xpDate.String != time.Now().UTC().Format("2006-01-02") {
+		today.Int64 = 0
+	}
+	return int(total.Int64), int(today.Int64), nil
 }
 
 // Progress

@@ -14,6 +14,9 @@ type Student struct {
 	Username     string
 	PasswordHash string
 	CourseID     string
+	XPTotal      int
+	XPToday      int
+	XPTodayDate  string
 	CreatedAt    time.Time
 }
 
@@ -78,6 +81,9 @@ type Repository interface {
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
+
+	AddXP(studentID string, amount int) error
+	GetXP(studentID string) (total int, today int, err error)
 
 	Migrate() error
 	Close() error

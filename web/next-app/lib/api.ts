@@ -33,6 +33,7 @@ export interface AnswerResult {
   explanation: string
   streak: number
   required_streak: number
+  xp: number
 }
 
 export interface GraphRes {
@@ -62,6 +63,8 @@ export interface Scores {
   concepts_mastered: number
   current_streak: number
   level: string
+  xp_total: number
+  xp_today: number
 }
 
 export interface ConceptProgress {

@@ -47,6 +47,7 @@ type AnswerResult struct {
 	Explanation    string         `json:"explanation,omitempty"`
 	Streak         int            `json:"streak"`
 	RequiredStreak int            `json:"required_streak"`
+	XP             int            `json:"xp"`
 }
 
 type Engine struct {
@@ -339,6 +340,11 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		explanation = as.explanation
 	}
 
+	xp := computeXP(gr.Correct, elapsedSeconds, as.timeThreshold, progress.Streak, as.isReview)
+	if xp > 0 {
+		_ = e.repo.AddXP(studentID, xp)
+	}
+
 	e.mu.Lock()
 	as.lastConceptID = as.conceptID
 	if as.isReview {
@@ -356,7 +362,31 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		Explanation:    explanation,
 		Streak:         progress.Streak,
 		RequiredStreak: as.requiredStreak,
+		XP:             xp,
 	}, nil
+}
+
+func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isReview bool) int {
+	if !correct {
+		return 0
+	}
+	base := 10
+	if isReview {
+		base = 5
+	}
+	ratio := elapsed / timeThreshold
+	if ratio <= 0 {
+		ratio = 0.01
+	}
+	timeMultiplier := 2.0 - ratio
+	if timeMultiplier < 0.5 {
+		timeMultiplier = 0.5
+	}
+	if timeMultiplier > 1.5 {
+		timeMultiplier = 1.5
+	}
+	streakMultiplier := 1.0 + float64(min(streak, 10))*0.1
+	return int(float64(base) * timeMultiplier * streakMultiplier)
 }
 
 func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgress, error) {
