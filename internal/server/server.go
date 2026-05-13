@@ -111,28 +111,37 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 	// If no auth, accept name from body (testing / legacy)
 	if s.auth == nil {
 		var req struct {
-			Name string `json:"name"`
+			Name      string `json:"name"`
+			StudentID string `json:"student_id"`
 		}
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Name == "" {
-			http.Error(w, `{"error":"name is required"}`, 400)
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			http.Error(w, `{"error":"invalid request"}`, 400)
 			return
 		}
-		st, err := s.eng.CreateStudent(req.Name)
-		if err != nil {
-			writeError(w, "failed to create student", 500)
-			return
+		studentID := req.StudentID
+		if studentID == "" {
+			if req.Name == "" {
+				http.Error(w, `{"error":"name or student_id is required"}`, 400)
+				return
+			}
+			st, err := s.eng.CreateStudent(req.Name)
+			if err != nil {
+				writeError(w, "failed to create student", 500)
+				return
+			}
+			studentID = st.ID
 		}
-		sess, err := s.repo.CreateSession(st.ID)
+		sess, err := s.repo.CreateSession(studentID)
 		if err != nil {
 			writeError(w, "failed to create session", 500)
 			return
 		}
-		q, err := s.eng.NextQuestion(sess.ID, st.ID)
+		q, err := s.eng.NextQuestion(sess.ID, studentID)
 		if err != nil {
 			writeError(w, "failed to get question", 500)
 			return
 		}
-		writeJSON(w, startSessionRes{StudentID: st.ID, SessionID: sess.ID, Question: q})
+		writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
 		return
 	}
 	studentID := r.Context().Value(authStudentKey{}).(string)
@@ -447,6 +456,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	}
 	writeJSON(w, map[string]interface{}{
 		"session_id":   session.ID,
+		"student_id":   studentID,
 		"concept_id":   question.ConceptID,
 		"concept_name": question.ConceptName,
 		"question":     question.Question,

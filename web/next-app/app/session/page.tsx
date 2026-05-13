@@ -59,6 +59,7 @@ export default function SessionPage() {
   const [diagLastResult, setDiagLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [diagAccuracy, setDiagAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
   const [diagPlan, setDiagPlan] = useState<GoalPlanRes | null>(null)
+  const [guestStudentID, setGuestStudentID] = useState('')
 
   useEffect(() => {
     const u = getUserInfo()
@@ -182,6 +183,7 @@ export default function SessionPage() {
     setLoading(true)
     try {
       const res = await startGoalDiagnosticName(name.trim(), ids)
+      if (res.student_id) setGuestStudentID(res.student_id)
       if (res.done) {
         setDiagPlan({ readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} })
         setScreen('practice')
@@ -224,7 +226,19 @@ export default function SessionPage() {
           try {
             const planRes = await getGoalPlan(diagSessionId)
             setDiagPlan(planRes)
-            beginSessionName()
+            if (guestStudentID) {
+              const sessRes = await fetch('/api/session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ student_id: guestStudentID }),
+              })
+              const sessData = await sessRes.json()
+              setStudentID(sessData.student_id)
+              setSessionID(sessData.session_id)
+              setQuestion(sessData.question)
+              setScreen('practice')
+              getScores(guestStudentID).then(setScores).catch(() => {})
+            }
           } catch {
             setError('Could not generate plan.')
           }
@@ -300,18 +314,10 @@ export default function SessionPage() {
                 className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
               />
               <button
-                onClick={beginSessionName}
+                onClick={startGuestDiagnostic}
                 className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm"
               >
                 Start
-              </button>
-            </div>
-            <div className="mt-3 flex justify-center">
-              <button
-                onClick={startGuestDiagnostic}
-                className="text-mathua-blue text-sm hover:text-mathua-blue-hover underline underline-offset-2"
-              >
-                Take diagnostic test first
               </button>
             </div>
             <div className="mt-4 text-center">
