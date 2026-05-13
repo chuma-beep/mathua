@@ -3,6 +3,7 @@ package auth
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -11,7 +12,17 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
-var jwtSecret = generateSecret()
+var jwtSecret = loadSecret()
+
+func loadSecret() []byte {
+	if s := os.Getenv("JWT_SECRET"); s != "" {
+		if b, err := hex.DecodeString(s); err == nil && len(b) == 32 {
+			return b
+		}
+		return []byte(s)
+	}
+	return generateSecret()
+}
 
 type Claims struct {
 	StudentID string `json:"sub"`

@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"strings"
+	"syscall"
+	"time"
 
 	tea "github.com/charmbracelet/bubbletea"
 
@@ -41,6 +46,10 @@ func main() {
 	fmt.Printf("loaded %d concepts across %d domains\n", dag.Count(), len(dag.Domains()))
 
 	dsn := os.Getenv("DATABASE_URL")
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		fmt.Println("warning: PostgreSQL backend not yet implemented, falling back to SQLite")
+		dsn = "mathua.db"
+	}
 	var repo storage.Repository
 	if dsn != "" || *serve {
 		if dsn == "" {
@@ -92,7 +101,28 @@ func main() {
 			mux.Handle("/", http.FileServer(http.Dir("web/next-app/out")))
 			fmt.Println("serving static frontend from web/next-app/out")
 		}
-		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), mux))
+		httpSrv := &http.Server{
+			Addr:         fmt.Sprintf(":%d", *port),
+			Handler:      mux,
+			ReadTimeout:  15 * time.Second,
+			WriteTimeout: 30 * time.Second,
+			IdleTimeout:  60 * time.Second,
+		}
+		go func() {
+			if err := httpSrv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+				log.Fatalf("server: %v", err)
+			}
+		}()
+		quit := make(chan os.Signal, 1)
+		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+		<-quit
+		fmt.Println("\nshutting down gracefully...")
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+		if err := httpSrv.Shutdown(ctx); err != nil {
+			log.Fatalf("forced shutdown: %v", err)
+		}
+		fmt.Println("server stopped")
 	} else {
 		m := tui.New()
 		var studentID, sessionID string

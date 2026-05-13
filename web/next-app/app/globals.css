@@ -5,46 +5,46 @@
 @layer base {
   :root {
     color-scheme: light dark;
-    --bg: #fefcf4;
-    --surface: #faf8f0;
-    --surface-elevated: #f5f1e6;
-    --surface-highlight: #e8e4d6;
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --accent-gold: #b8933e;
-    --accent-gold-hover: #a07a2e;
-    --accent-teal: #3a9a8a;
-    --accent-blue: #2563eb;
-    --accent-blue-hover: #1d4ed8;
+    --bg: oklch(1 0 0);
+    --surface: oklch(0.95 0 0);
+    --surface-elevated: oklch(0.95 0 0);
+    --surface-highlight: oklch(0.95 0 0);
+    --text-primary: oklch(0.16 0.004 264);
+    --text-secondary: oklch(0.54 0 0);
+    --text-muted: oklch(0.54 0 0);
+    --accent-gold: oklch(0.6 0.16 255);
+    --accent-gold-hover: oklch(0.6 0.16 255);
+    --accent-teal: oklch(0.68 0.15 250);
+    --accent-blue: oklch(0.6 0.16 255);
+    --accent-blue-hover: oklch(0.6 0.16 255);
     --accent-green: #059669;
     --accent-red: #dc2626;
-    --border: #d6d3c8;
-    --border-strong: #b8b5a8;
-    --code-bg: #f0ede0;
-    --division: #d6d3c8;
+    --border: oklch(0.85 0.02 264);
+    --border-strong: oklch(0.75 0.03 264);
+    --code-bg: oklch(0.95 0 0);
+    --division: oklch(0.85 0.02 264 / 0.45);
   }
 
   .dark {
     color-scheme: dark;
-    --bg: #0b0f1a;
-    --surface: #0f172a;
-    --surface-elevated: #1e293b;
-    --surface-highlight: #334155;
-    --text-primary: #e8e2d5;
-    --text-secondary: #9fa8b4;
-    --text-muted: #5a6577;
-    --accent-gold: #c8a96e;
-    --accent-gold-hover: #d4b87a;
-    --accent-teal: #4db8a0;
-    --accent-blue: #3b82f6;
-    --accent-blue-hover: #60a5fa;
+    --bg: oklch(0.16 0.004 264);
+    --surface: oklch(0.21 0 0 / 0.8);
+    --surface-elevated: oklch(0.21 0 0);
+    --surface-highlight: oklch(0.21 0 0);
+    --text-primary: oklch(1 0 0);
+    --text-secondary: oklch(0.66 0 0);
+    --text-muted: oklch(0.66 0 0);
+    --accent-gold: oklch(0.72 0.145 230);
+    --accent-gold-hover: oklch(0.72 0.145 230);
+    --accent-teal: oklch(0.68 0.15 250);
+    --accent-blue: oklch(0.72 0.145 230);
+    --accent-blue-hover: oklch(0.72 0.145 230);
     --accent-green: #10b981;
     --accent-red: #ef4444;
-    --border: #1e2d45;
-    --border-strong: #2a3f5f;
-    --code-bg: #1e293b;
-    --division: #1e2d45;
+    --border: oklch(0.35 0.02 264);
+    --border-strong: oklch(0.45 0.03 264);
+    --code-bg: oklch(0.21 0 0 / 0.8);
+    --division: oklch(0.35 0.02 264 / 0.45);
   }
 
   * {
