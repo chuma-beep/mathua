@@ -9,15 +9,16 @@ import (
 // Data types
 
 type Student struct {
-	ID           string
-	Name         string
-	Username     string
-	PasswordHash string
-	CourseID     string
-	XPTotal      int
-	XPToday      int
-	XPTodayDate  string
-	CreatedAt    time.Time
+	ID                  string
+	Name                string
+	Username            string
+	PasswordHash        string
+	CourseID            string
+	XPTotal             int
+	XPToday             int
+	XPTodayDate         string
+	DiagnosticCompleted bool
+	CreatedAt           time.Time
 }
 
 type ConceptProgress struct {
@@ -84,6 +85,7 @@ type Repository interface {
 
 	AddXP(studentID string, amount int) error
 	GetXP(studentID string) (total int, today int, err error)
+	SetDiagnosticCompleted(studentID string) error
 
 	Migrate() error
 	Close() error

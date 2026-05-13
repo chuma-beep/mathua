@@ -150,7 +150,14 @@ export async function healthCheck(): Promise<boolean> {
   }
 }
 
-export async function signup(name: string, username: string, password: string): Promise<{ token: string; student_id: string; name: string }> {
+export interface AuthRes {
+  token: string
+  student_id: string
+  name: string
+  diagnostic_completed: boolean
+}
+
+export async function signup(name: string, username: string, password: string): Promise<AuthRes> {
   const res = await fetch(`${API_BASE}/api/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -160,7 +167,7 @@ export async function signup(name: string, username: string, password: string): 
   return res.json()
 }
 
-export async function login(username: string, password: string): Promise<{ token: string; student_id: string; name: string }> {
+export async function login(username: string, password: string): Promise<AuthRes> {
 	const res = await fetch(`${API_BASE}/api/auth/login`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -227,13 +234,13 @@ export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDia
 export async function submitGoalAnswer(
 	sessionId: string,
 	conceptId: string,
-	correct: boolean,
-	fast: boolean,
+	answer: string,
+	elapsed: number,
 ): Promise<GoalDiagAnswerRes> {
 	const res = await fetch(`${API_BASE}/api/goal/diagnostic/answer`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, correct, fast }),
+		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
 	})
 	if (!res.ok) throw new Error(`Goal answer failed: ${res.status}`)
 	return res.json()

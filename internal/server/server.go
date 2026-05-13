@@ -550,6 +550,7 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), 500)
 		return
 	}
+	_ = s.repo.SetDiagnosticCompleted(studentID)
 
 	// Clean up session
 	s.mu.Lock()
@@ -686,9 +687,10 @@ type signupReq struct {
 }
 
 type authRes struct {
-	Token     string `json:"token"`
-	StudentID string `json:"student_id"`
-	Name      string `json:"name"`
+	Token               string `json:"token"`
+	StudentID           string `json:"student_id"`
+	Name                string `json:"name"`
+	DiagnosticCompleted bool   `json:"diagnostic_completed"`
 }
 
 func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
@@ -714,7 +716,7 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "signup failed: "+err.Error(), 400)
 		return
 	}
-	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name})
+	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
 
 type loginReq struct {
@@ -741,7 +743,7 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "invalid username or password", 401)
 		return
 	}
-	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name})
+	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
 
 func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
@@ -770,12 +772,13 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 	}
 	scores, _ := s.eng.GetScores(studentID)
 	writeJSON(w, map[string]interface{}{
-		"student_id":        st.ID,
-		"name":              st.Name,
-		"username":          st.Username,
-		"concepts_mastered": scores.ConceptsMastered,
-		"current_streak":    scores.CurrentStreak,
-		"level":             scores.Level,
+		"student_id":           st.ID,
+		"name":                 st.Name,
+		"username":             st.Username,
+		"concepts_mastered":    scores.ConceptsMastered,
+		"current_streak":       scores.CurrentStreak,
+		"level":                scores.Level,
+		"diagnostic_completed": st.DiagnosticCompleted,
 	})
 }
 

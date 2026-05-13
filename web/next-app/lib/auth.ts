@@ -39,6 +39,7 @@ export interface UserInfo {
   concepts_mastered: number
   current_streak: number
   level: string
+  diagnostic_completed: boolean
 }
 
 export function setUserInfo(info: UserInfo) {
