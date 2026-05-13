@@ -473,6 +473,11 @@ export default function SessionPage() {
                     </h3>
                   </div>
                   <div className="bg-mathua-code border border-mathua-border rounded-none p-8 text-center mb-6">
+                    {question.diagram && (
+                      <div className="mb-4 flex justify-center">
+                        <img src={question.diagram} alt="Diagram" className="max-w-full h-auto" style={{ maxHeight: '200px' }} />
+                      </div>
+                    )}
                     <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap">
                       {question.question}
                     </p>
@@ -499,9 +504,9 @@ export default function SessionPage() {
                       <summary className="text-mathua-secondary text-sm cursor-pointer hover:text-mathua-blue">
                         Show lesson: {question.lesson.Title}
                       </summary>
-                      <pre className="mt-2 bg-mathua-code p-4 rounded text-xs text-mathua-muted whitespace-pre-wrap max-h-60 overflow-auto">
-                        {question.lesson.Body.slice(0, 2000)}
-                      </pre>
+                      <div className="mt-2 bg-mathua-code border border-mathua-border rounded-none p-4 text-xs text-mathua-muted whitespace-pre-wrap max-h-80 overflow-auto leading-relaxed">
+                        {question.lesson.Body.slice(0, 3000)}
+                      </div>
                     </details>
                   )}
                 </div>

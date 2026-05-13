@@ -18,6 +18,7 @@ export interface Question {
     Body: string
     Concepts: string[]
   }
+  diagram?: string
 }
 
 export interface AnswerRes {
