@@ -69,6 +69,11 @@ export default function LoginPage() {
             <button onClick={handleSubmit} disabled={loading} className="w-full bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 font-medium text-sm disabled:opacity-50">
               {loading ? 'Loading...' : tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
+            <div className="mt-3 text-center">
+              <a href="/session" className="text-mathua-muted text-xs hover:text-mathua-secondary">
+                Skip for now — try without account
+              </a>
+            </div>
           </div>
         </section>
       </div>

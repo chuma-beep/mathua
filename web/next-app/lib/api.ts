@@ -86,6 +86,16 @@ export async function startSession(): Promise<StartSessionRes> {
   return res.json()
 }
 
+export async function startSessionName(name: string): Promise<StartSessionRes> {
+  const res = await fetch(`${API_BASE}/api/session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name }),
+  })
+  if (!res.ok) throw new Error(`Session start failed: ${res.status}`)
+  return res.json()
+}
+
 export async function submitAnswer(
   sessionID: string,
   answer: string,

@@ -23,9 +23,8 @@ export default function GoalsPage() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    if (!isLoggedIn()) { router.push('/login'); return }
     fetch(`${API_BASE}/api/courses`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('mathua_token')}` }
+      headers: { Authorization: `Bearer ${localStorage.getItem('mathua_token') || ''}` }
     })
       .then(r => r.json())
       .then(d => { setCourses(d.courses || []); setLoading(false) })
