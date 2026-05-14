@@ -1,6 +1,5 @@
 'use client'
 
-import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect, useRef } from 'react'
 import Header from '../../components/Header'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -103,7 +102,6 @@ const tableCellStyle: React.CSSProperties = {
 }
 
 export default function HowItWorksPage() {
-  const { theme, mounted, toggleTheme } = useTheme()
   const [activeSection, setActiveSection] = useState('concept-graph')
   const observerRef = useRef<IntersectionObserver | null>(null)
 
@@ -153,7 +151,7 @@ export default function HowItWorksPage() {
               How Mathua Works
             </h1>
             <p style={bodyStyle}>
-              The engine behind the learning — a technical explanation of the concept graph, student
+              The engine behind the learning: a technical explanation of the concept graph, student
               model, diagnostic algorithm, task selection, and scoring system.
             </p>
           </section>
@@ -162,14 +160,14 @@ export default function HowItWorksPage() {
           <section id="concept-graph" className="mt-12 pt-6">
             <h2 style={h2Style}>The Concept Graph</h2>
             <p style={bodyStyle}>
-              Mathua represents all mathematical knowledge as a directed acyclic graph — a DAG. Each
+              Mathua represents all mathematical knowledge as a directed acyclic graph (a DAG). Each
               node in the graph is an atomic concept: the smallest unit of mathematical knowledge
               that can be practiced and mastered independently. Each directed edge is a prerequisite
               relationship. If concept B has an edge from concept A, then A must be mastered before
               B is ever shown to the student.
             </p>
             <p style={bodyStyle}>
-              The graph currently contains 284 concepts spanning 16 domains — from early Counting
+              The graph currently contains 284 concepts spanning 16 domains: from early Counting
               through Calculus, Linear Algebra, and Topology.
             </p>
             <pre style={codeBlockStyle}>
@@ -183,8 +181,8 @@ export default function HowItWorksPage() {
 }`}
             </pre>
             <p style={bodyStyle}>
-              The graph is stored as a flat JSON file —{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code> — and{' '}
+              The graph is stored as a flat JSON file:{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>, and{' '}
               is community-editable. A graph validator runs on every pull request and rejects the
               change if it introduces a cycle.
             </p>
@@ -208,15 +206,15 @@ export default function HowItWorksPage() {
               Every concept in the graph has a state for each student:
             </p>
             <div className="flex items-center gap-1.5 flex-wrap my-4">
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>UNSEEN</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>UNSEEN</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>LEARNING</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>LEARNING</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>PRACTICING</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>PRACTICING</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--accent-gold)' }}>MASTERED</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-gold)' }}>MASTERED</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.08em', color: 'var(--accent-teal)' }}>DECAYING</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-teal)' }}>DECAYING</span>
             </div>
             <div className="overflow-x-auto my-4">
               <table
@@ -241,8 +239,8 @@ export default function HowItWorksPage() {
                     ['frac.add.diff', '5', '18s'],
                     ['prealg.eq.one_step_add', '5', '12s'],
                     ['arith.div.long', '5', '20s'],
-                  ].map(([concept, streak, time], i) => (
-                    <tr key={i} style={{ background: 'transparent' }}>
+                  ].map(([concept, streak, time]) => (
+                    <tr key={`concept-${concept}`} style={{ background: 'transparent' }}>
                       <td style={tableCellStyle}>{concept}</td>
                       <td style={tableCellStyle}>{streak}</td>
                       <td style={tableCellStyle}>{time}</td>
@@ -290,13 +288,13 @@ minimum value: 1.3`}
             <ol className="list-none my-4">
               {[
                 'The concept graph is sorted topologically. The diagnostic starts at the concept at the midpoint of the sorted order.',
-                'If the student answers correctly within the time limit, the algorithm moves forward — it next tests a concept further along the prerequisite chain.',
-                'If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward — it tests a concept earlier in the chain.',
+                'If the student answers correctly within the time limit, the algorithm moves forward: it next tests a concept further along the prerequisite chain.',
+                'If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward: it tests a concept earlier in the chain.',
                 'This binary search continues until three consecutive correct answers are recorded in a region, or three consecutive failures.',
                 'The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.',
               ].map((step, i) => (
                 <li
-                  key={i}
+                  key={`diag-step-${i}`}
                   style={{
                     fontFamily: bodyFont,
                     fontSize: '0.95rem',
@@ -330,7 +328,7 @@ minimum value: 1.3`}
             </p>
             <p style={bodyStyle}>
               The diagnostic can be retaken at any time from the settings menu. Retaking does not
-              delete progress — it creates a new knowledge estimate that is merged with existing
+              delete progress: it creates a new knowledge estimate that is merged with existing
               data, always preferring the more optimistic estimate so students are never penalised
               for reassessing.
             </p>
@@ -361,7 +359,7 @@ minimum value: 1.3`}
               'The scheduler targets a session composition of 70% new and practicing material, 30% review.',
             ].map((rule, i) => (
               <div
-                key={i}
+                key={`sched-rule-${i}`}
                 style={{
                   fontFamily: bodyFont,
                   fontSize: '0.95rem',
@@ -404,7 +402,7 @@ speed_bonus = max(0, (time_limit − avg_time) / time_limit × 50)`}
           <section id="generators" className="mt-12 pt-6">
             <h2 style={h2Style}>Generator-Based Problems</h2>
             <p style={bodyStyle}>
-              Every problem in Mathua is generated on demand by a parameterised Go function — a
+              Every problem in Mathua is generated on demand by a parameterised Go function: a
               generator. There is no static question bank.
             </p>
             <pre style={{
@@ -439,11 +437,11 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           <section id="symbolic-grading" className="mt-12 pt-6">
             <h2 style={h2Style}>Polynomial &amp; Expression Grading</h2>
             <p style={bodyStyle}>
-              From algebra onward, answers are expressions —{' '}
+              From algebra onward, answers are expressions:{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x = 4</code>,{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>(x+2)(x+3)</code>,{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>2x&#178; + 3x - 5</code>{' '}
-              — and numeric comparison is no longer sufficient. Mathua uses a pure-Go polynomial
+              but numeric comparison is no longer sufficient. Mathua uses a pure-Go polynomial
               grader with no external dependencies: no Python, no SymPy, no subprocess.
             </p>
             <p style={bodyStyle}>
@@ -487,7 +485,7 @@ func (g *PolyGrader) Grade(input, expected string) (bool, error) {
             <p style={bodyStyle}>
               The polynomial grader handles factoring (parse and expand), simplification
               (normalise), and equation-solving (isolate variable, compare). The same pure-Go
-              pipeline runs identically in the web server and the desktop TUI — no Python,
+              pipeline runs identically in the web server and the desktop TUI: no Python,
               no environment dependencies, no disabled features.
             </p>
             <p style={bodyStyle}>

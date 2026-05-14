@@ -2,6 +2,7 @@
 
 import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Header from '../../components/Header'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
@@ -28,7 +29,7 @@ const MathConceptGraph3D = dynamic(
         color: 'var(--text-muted)',
         fontSize: '14px',
       }}>
-        Loading graph...
+        Loading graph&hellip;
       </div>
     ),
   }
@@ -41,29 +42,27 @@ const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
 export default function GraphPage() {
   const { theme, mounted } = useTheme()
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [conceptStatuses, setConceptStatuses] = useState<Record<string, MasteryStatus>>({})
+  const [conceptStatuses] = useState<Record<string, MasteryStatus>>({})
   const [connected, setConnected] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
 
   useEffect(() => {
-    setLoggedIn(isLoggedIn())
+    const loggedInVal = isLoggedIn()
+    setLoggedIn(loggedInVal)
     healthCheck().then((ok) => {
       setConnected(ok)
       if (ok) {
         getGraph().then(setGraphData)
       }
+      if (ok && loggedInVal) {
+        const user = getUserInfo()
+        if (user) {
+          getScores(user.student_id).then(setScores).catch(() => {})
+        }
+      }
     })
   }, [])
-
-  useEffect(() => {
-    if (connected && loggedIn) {
-      const user = getUserInfo()
-      if (user) {
-        getScores(user.student_id).then(setScores).catch(() => {})
-      }
-    }
-  }, [connected, loggedIn])
 
   const concepts = graphData
     ? graphData.nodes.map((n) => ({
@@ -82,9 +81,9 @@ export default function GraphPage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
         <span className="flex justify-between mb-4">
-          <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
-          </a>
+          </Link>
         </span>
         <SectionHeader label="Your knowledge graph" title="Explore the concept map" />
         {connected && loggedIn && scores ? (
@@ -92,12 +91,12 @@ export default function GraphPage() {
         ) : connected && !loggedIn ? (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
             Sign in or{' '}
-            <a href="/session" className="text-mathua-gold hover:underline">start a practice session</a>
+            <Link href="/session" className="text-mathua-gold hover:underline">start a practice session</Link>
             {' '}to track your progress across the concept map.
           </p>
         ) : (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
-            <a href="/session" className="text-mathua-gold hover:underline">Start practicing</a>
+            <Link href="/session" className="text-mathua-gold hover:underline">Start practicing</Link>
             {' '}to track your progress across the concept map.
           </p>
         )}

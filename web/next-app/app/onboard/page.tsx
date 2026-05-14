@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
@@ -47,16 +48,16 @@ const domainOrder = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algeb
 
 export default function OnboardPage() {
   const { mounted } = useTheme()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const [step, setStep] = useState<Step>('welcome')
   const [loading, setLoading] = useState(false)
 
   const [domains, setDomains] = useState<DomainInfo[]>([])
 
-  const [sessionId, setSessionId] = useState('')
+  const sessionId = useRef('')
   const [question, setQuestion] = useState('')
-  const [conceptId, setConceptId] = useState('')
+  const conceptId = useRef('')
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
   const [answerInput, setAnswerInput] = useState('')
@@ -109,9 +110,9 @@ export default function OnboardPage() {
         setStep('results')
         return
       }
-      setSessionId(res.session_id)
+      sessionId.current = res.session_id
       setQuestion(res.question || '')
-      setConceptId(res.concept_id || '')
+      conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
       setAccuracy({ correct: 0, total: 0 })
@@ -135,7 +136,7 @@ export default function OnboardPage() {
       const res = await fetch(`/api/goal/diagnostic/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
-        body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
+        body: JSON.stringify({ session_id: sessionId.current, concept_id: conceptId.current, answer, elapsed }),
       })
       const data = await res.json()
       const correct = data.correct || false
@@ -146,7 +147,7 @@ export default function OnboardPage() {
       if (data.done) {
         setTimeout(async () => {
           try {
-            const planRes = await getGoalPlan(sessionId)
+            const planRes = await getGoalPlan(sessionId.current)
             setPlan(planRes)
             setStep('results')
           } catch {
@@ -177,7 +178,7 @@ export default function OnboardPage() {
     if (user) {
       setUserInfo({ ...user, diagnostic_completed: true })
     }
-    router.push('/session')
+    push('/session')
   }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -189,7 +190,7 @@ export default function OnboardPage() {
         <section className="pt-8">
           {step !== 'welcome' && (
             <span className="flex mb-4">
-              <a href="/onboard" className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</a>
+              <Link href="/onboard" className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</Link>
             </span>
           )}
 

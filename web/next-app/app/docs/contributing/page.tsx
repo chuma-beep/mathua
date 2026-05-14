@@ -1,6 +1,10 @@
-'use client'
-
+import type { Metadata } from 'next'
 import SectionHeader from '../../../components/SectionHeader'
+
+export const metadata: Metadata = {
+  title: 'Contributing \u2014 Mathua',
+  description: 'How to contribute to Mathua — add concepts, write generators, and pass the validator.',
+}
 import AsciiDivider from '../../../components/AsciiDivider'
 
 const headingFont = "'IBM Plex Serif', serif"
@@ -77,7 +81,7 @@ export default function ContributingPage() {
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
           Mathua is community-built. Every concept, every generator, every line of the
           concept graph was added by someone who wanted to help others learn math better.
-          The most useful thing you can contribute is a new concept — and it takes exactly
+          The most useful thing you can contribute is a new concept: and it takes exactly
           three pieces: a JSON entry, a Go generator, and a fuzz test.
         </p>
         <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
@@ -117,12 +121,12 @@ go build ./cmd/mathua
           Here are the kinds of contributions that move the needle:
         </p>
         {[
-          'New concepts — the single most impactful thing you can add.',
-          'New generators — make existing or new concepts produce better problems.',
+          'New concepts: the single most impactful thing you can add.',
+          'New generators: make existing or new concepts produce better problems.',
           'Bug fixes in the scheduling engine or graders.',
           'Documentation and diagram improvements.',
         ].map((item, i) => (
-          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+          <div key={`contrib-types-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {item}
           </div>
@@ -179,14 +183,14 @@ go build ./cmd/mathua
                 ['prerequisites', 'string[]', 'Yes', 'Concept IDs that must be mastered first'],
                 ['streak', 'number', 'Yes', 'Consecutive correct answers required for mastery'],
                 ['avg_time_seconds', 'number', 'Yes', 'Maximum acceptable average response time'],
-              ].map(([field, type, req, desc], i) => (
-                <tr key={i} style={{ background: 'transparent' }}>
+              ].map(([field, type, req, desc]) => (
+                <tr key={field} style={{ background: 'transparent' }}>
                   <td style={{ ...tableCellStyle, fontFamily: monoFont, fontSize: '0.8rem' }}>{field}</td>
                   <td style={tableCellStyle}>{type}</td>
                   <td style={tableCellStyle}>
                     <span style={{
                       fontFamily: monoFont,
-                      fontSize: '10px',
+                      fontSize: '12px',
                       color: req === 'Yes' ? 'var(--accent-green)' : 'var(--text-muted)',
                       border: '0.5px solid',
                       borderColor: req === 'Yes' ? 'var(--accent-green)' : 'var(--border)',
@@ -213,7 +217,7 @@ go build ./cmd/mathua
           marginTop: '1rem',
         }}>
           The prerequisites list is the most important field. What must a student absolutely
-          know before attempting this? If in doubt, add the prerequisite — the graph validator
+           know before attempting this? If in doubt, add the prerequisite: the graph validator
           will catch cycles.
         </div>
       </section>
@@ -225,7 +229,7 @@ go build ./cmd/mathua
         <h2 style={h2Style}>Step 2: Teach Mathua to ask questions</h2>
         <p style={bodyStyle}>
           A generator is a Go function that produces a unique problem every time it's called.
-          There is no static question bank — every problem is built on demand. Generators live in{' '}
+          There is no static question bank: every problem is built on demand. Generators live in{' '}
           <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/[domain]/</code> and
           implement the Generator interface.
         </p>
@@ -251,11 +255,11 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         <h3 style={h3Style}>A few guidelines</h3>
         {[
           'Use the difficulty parameter to scale operand sizes. At 0.0, trivial. At 1.0, challenging for someone at that level.',
-          'Always return an Explanation — it is shown when a student asks to see the solution.',
+          'Always return an Explanation: it is shown when a student asks to see the solution.',
           'Use crypto/rand or math/rand with a seeded source. No hardcoded problems.',
           'Stay deterministic with respect to difficulty. A student should not get a meaningfully harder problem at the same difficulty.',
         ].map((rule, i) => (
-          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+          <div key={`guideline-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {rule}
           </div>
@@ -269,7 +273,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         <h2 style={h2Style}>Step 3: Prove it works</h2>
         <p style={bodyStyle}>
           Every generator needs a fuzz test that asserts 1 000 valid samples. This catches
-          edge cases — division by zero, negative operand ranges, malformed output — before
+           edge cases: division by zero, negative operand ranges, malformed output: before
           a student ever sees them.
         </p>
         <pre style={codeBlockStyle}>
@@ -302,10 +306,10 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           merge can happen:
         </p>
         {[
-          'No cycles — concept A cannot require B while B requires A.',
-          'No orphans — every prerequisite must exist in the graph.',
+          'No cycles: concept A cannot require B while B requires A.',
+          'No orphans: every prerequisite must exist in the graph.',
         ].map((rule, i) => (
-          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+          <div key={`invariant-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
@@ -333,7 +337,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Open a PR. The CI pipeline runs the validator and all tests automatically.',
           'A maintainer reviews the concept ordering, thresholds, and generator quality.',
         ].map((step, i) => (
-          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+          <div key={`pr-step-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
@@ -352,12 +356,12 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Design conventions</h2>
         {[
-          'Concept IDs follow domain.subdomain.descriptor — lower case, no spaces.',
+          'Concept IDs follow domain.subdomain.descriptor: lower case, no spaces.',
           'Mastery thresholds are pragmatic. Single-digit addition should require faster response (6–8 s) than multi-digit multiplication (15–20 s).',
           'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
           'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
         ].map((rule, i) => (
-          <div key={i} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+          <div key={`design-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {rule}
           </div>

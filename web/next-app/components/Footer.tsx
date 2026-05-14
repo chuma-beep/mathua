@@ -1,5 +1,19 @@
+import Link from 'next/link'
+
 interface FooterProps {
   className?: string
+}
+
+const linkStyle: React.CSSProperties = {
+  color: 'inherit',
+  textDecoration: 'none',
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontSize: '12px',
+}
+
+const linkItemStyle: React.CSSProperties = {
+  ...linkStyle,
+  color: 'var(--text-muted)',
 }
 
 export default function Footer({ className = '' }: FooterProps) {
@@ -19,13 +33,13 @@ export default function Footer({ className = '' }: FooterProps) {
           marginBottom: '0.75rem',
         }}
       >
-        Mathua — Math Understanding Agent
+        Mathua: Math Understanding Agent
       </div>
 
       <div
         style={{
           fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: '11px',
+          fontSize: '12px',
           color: 'var(--text-muted)',
           marginBottom: '1rem',
           display: 'flex',
@@ -34,11 +48,11 @@ export default function Footer({ className = '' }: FooterProps) {
           gap: '4px 12px',
         }}
       >
-        <a href="#" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Web App</a>
-        <a href="https://github.com/chuma-beep/mathua" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>GitHub</a>
-        <a href="/docs" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Docs</a>
-        <a href="/docs/contributing" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Contributing</a>
-        <a href="#" className="link-underline" style={{ color: 'inherit', textDecoration: 'none' }}>Roadmap</a>
+        <span className="link-underline" style={linkItemStyle}>Web App</span>
+        <a href="https://github.com/chuma-beep/mathua" className="link-underline" style={linkStyle}>GitHub</a>
+        <Link href="/docs" className="link-underline" style={linkStyle}>Docs</Link>
+        <Link href="/docs/contributing" className="link-underline" style={linkStyle}>Contributing</Link>
+        <span className="link-underline" style={linkItemStyle}>Roadmap</span>
       </div>
 
       <div

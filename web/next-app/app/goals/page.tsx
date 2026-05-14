@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
@@ -9,10 +10,8 @@ import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import {
   startGoalDiagnostic,
-  submitGoalAnswer,
   getGoalPlan,
   getScores,
-  type GoalDiagAnswerRes,
   type GoalPlanRes,
   type Scores,
 } from '../../lib/api'
@@ -49,8 +48,8 @@ const domainLabels: Record<string, string> = {
 }
 
 export default function GoalsPage() {
-  const { theme, mounted } = useTheme()
-  const router = useRouter()
+  const { mounted } = useTheme()
+  const { push } = useRouter()
 
   const [step, setStep] = useState<Step>('select')
   const [scores, setScores] = useState<Scores | null>(null)
@@ -58,15 +57,14 @@ export default function GoalsPage() {
 
   // Step 1: goal selection
   const [domains, setDomains] = useState<DomainInfo[]>([])
-  const [customConcepts, setCustomConcepts] = useState<string[]>([])
+  const [customConcepts] = useState<string[]>([])
 
   // Step 2: diagnostic
-  const [sessionId, setSessionId] = useState('')
+  const sessionId = useRef('')
   const [question, setQuestion] = useState('')
-  const [conceptId, setConceptId] = useState('')
+  const conceptId = useRef('')
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
-  const [totalQuestions, setTotalQuestions] = useState(20)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
@@ -79,13 +77,14 @@ export default function GoalsPage() {
   useEffect(() => {
     if (!mounted) return
     const loggedIn = isLoggedIn()
+    const token = localStorage.getItem('mathua_token')
     if (loggedIn) {
       const user = getUserInfo()
       if (user) {
         getScores(user.student_id).then(setScores).catch(() => {})
       }
       fetch('/api/weaknesses', {
-        headers: { Authorization: `Bearer ${localStorage.getItem('mathua_token') || ''}` },
+        headers: { Authorization: `Bearer ${token || ''}` },
       }).then(r => r.json()).then(d => {
         if (d.by_domain) setWeakByDomain(d.by_domain)
       }).catch(() => {})
@@ -149,9 +148,9 @@ export default function GoalsPage() {
         setStep('results')
         return
       }
-      setSessionId(res.session_id)
+      sessionId.current = res.session_id
       setQuestion(res.question || '')
-      setConceptId(res.concept_id || '')
+      conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
       setAccuracy({ correct: 0, total: 0 })
@@ -171,10 +170,11 @@ export default function GoalsPage() {
     try {
       const answer = answerInput.trim()
       const elapsed = 5.0
+      const token = localStorage.getItem('mathua_token')
       const res = await fetch(`/api/goal/diagnostic/answer`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localStorage.getItem('mathua_token') || ''}` },
-        body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token || ''}` },
+        body: JSON.stringify({ session_id: sessionId.current, concept_id: conceptId.current, answer, elapsed }),
       })
       const data = await res.json()
       const correct = data.correct || false
@@ -188,7 +188,7 @@ export default function GoalsPage() {
       if (data.done) {
         setTimeout(async () => {
           try {
-            const planRes = await getGoalPlan(sessionId)
+            const planRes = await getGoalPlan(sessionId.current)
             setPlan(planRes)
             setStep('results')
           } catch {
@@ -215,7 +215,7 @@ export default function GoalsPage() {
   }
 
   function startPractice() {
-    router.push('/session')
+    push('/session')
   }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -226,7 +226,7 @@ export default function GoalsPage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
         <section className="pt-8">
           <span className="flex mb-4">
-            <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</a>
+            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
           </span>
 
           {/* === STEP 1: Goal Selection === */}

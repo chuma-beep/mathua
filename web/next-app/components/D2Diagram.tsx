@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 const diagramMap: Record<string, { light: string; dark: string }> = {
   architecture: {
     light: '/diagrams/architecture-light.svg',
@@ -31,9 +33,11 @@ export default function D2Diagram({ name, theme = 'dark', className = '' }: D2Di
 
   return (
     <div className={`flex justify-center py-4 ${className}`}>
-      <img
+      <Image
         src={theme === 'dark' ? pair.dark : pair.light}
         alt={`${name} diagram`}
+        width={800}
+        height={400}
         style={{ maxWidth: '100%', height: 'auto' }}
       />
     </div>

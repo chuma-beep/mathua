@@ -1,6 +1,10 @@
-'use client'
-
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: 'Documentation \u2014 Mathua',
+  description: 'Architecture and contributing guide for Mathua, the open-source adaptive math learning engine.',
+}
 
 const monoFont = "'IBM Plex Mono', monospace"
 const bodyFont = "'IBM Plex Serif', serif"

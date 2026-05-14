@@ -23,7 +23,7 @@ export default function NotFound() {
         </div>
 
         <div className="mt-10 flex items-baseline gap-6">
-          <h1 className="font-serif text-[7.5rem] leading-none font-bold text-mathua-blue tabular-nums">
+          <h1 className="font-serif text-[7.5rem] leading-none font-semibold text-mathua-blue tabular-nums">
             404
           </h1>
           <div className="hidden h-24 w-px bg-mathua-border sm:block" aria-hidden="true" />
@@ -37,7 +37,7 @@ export default function NotFound() {
           This route is undefined.
         </h2>
         <p className="mt-3 max-w-md font-mono text-sm leading-relaxed text-mathua-muted">
-          The concept you requested isn&apos;t in the graph — it may have been moved,
+          The concept you requested isn&apos;t in the graph: it may have been moved,
           renamed, or never existed in this domain.
         </p>
 
