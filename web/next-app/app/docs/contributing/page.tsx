@@ -135,8 +135,8 @@ go build ./cmd/mathua
           'New generators: make existing or new concepts produce better problems.',
           'Bug fixes in the scheduling engine or graders.',
           'Documentation and diagram improvements.',
-        ].map((item, i) => (
-          <div key={`contrib-types-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+        ].map((item) => (
+          <div key={item} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {item}
           </div>
@@ -259,8 +259,8 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Always return an Explanation: it is shown when a student asks to see the solution.',
           'Use crypto/rand or math/rand with a seeded source. No hardcoded problems.',
           'Stay deterministic with respect to difficulty. A student should not get a meaningfully harder problem at the same difficulty.',
-        ].map((rule, i) => (
-          <div key={`guideline-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+        ].map((rule) => (
+          <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {rule}
           </div>
@@ -309,8 +309,8 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         {[
           'No cycles: concept A cannot require B while B requires A.',
           'No orphans: every prerequisite must exist in the graph.',
-        ].map((rule, i) => (
-          <div key={`invariant-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+        ].map((rule) => (
+          <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
@@ -337,8 +337,8 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Run go test ./... and go run scripts/validate_graph.go locally.',
           'Open a PR. The CI pipeline runs the validator and all tests automatically.',
           'A maintainer reviews the concept ordering, thresholds, and generator quality.',
-        ].map((step, i) => (
-          <div key={`pr-step-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+        ].map((step) => (
+          <div key={step} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
@@ -361,8 +361,8 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Mastery thresholds are pragmatic. Single-digit addition should require faster response (6–8 s) than multi-digit multiplication (15–20 s).',
           'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
           'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
-        ].map((rule, i) => (
-          <div key={`design-${i}`} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
+        ].map((rule) => (
+          <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
             {rule}
           </div>

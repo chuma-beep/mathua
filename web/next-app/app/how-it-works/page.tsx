@@ -311,7 +311,7 @@ minimum value: 1.3`}
                 'The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.',
               ].map((step, i) => (
                 <li
-                  key={`diag-step-${i}`}
+                  key={step}
                   style={stepLiStyle}
                 >
                   <span
@@ -365,9 +365,9 @@ minimum value: 1.3`}
               'A concept whose prerequisites are not all MASTERED is never surfaced.',
               'The same concept is never shown twice in a row.',
               'The scheduler targets a session composition of 70% new and practicing material, 30% review.',
-            ].map((rule, i) => (
+            ].map((rule) => (
               <div
-                key={`sched-rule-${i}`}
+                key={rule}
                 style={{
                   fontFamily: bodyFont,
                   fontSize: '0.95rem',

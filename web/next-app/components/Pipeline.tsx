@@ -17,7 +17,7 @@ export default function Pipeline({ states, className = '' }: PipelineProps) {
   return (
     <div className={`flex items-center justify-center gap-1 flex-wrap ${className}`}>
       {states.map((state, i) => (
-        <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+        <span key={state.status} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
           {i > 0 && (
             <span style={{ color: 'var(--border-strong)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>
               {' → '}

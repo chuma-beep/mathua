@@ -132,8 +132,8 @@ export default function ArchitecturePage() {
             'Incorrect or slow answers move backward toward foundational material.',
             'After 3 consecutive correct answers in a region, the frontier is considered located.',
             'The diagnostic records a mastery estimate for every concept passed through.',
-          ].map((step, i) => (
-            <div key={`cat-step-${i}`} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
+          ].map((step) => (
+            <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
               <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px', fontWeight: 500 }}>
                 {i + 1}.
               </span>
