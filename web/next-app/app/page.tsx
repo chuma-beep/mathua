@@ -1,10 +1,3 @@
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Mathua — Master the Foundation',
-  description: 'An open-source adaptive math learning engine. Master every prerequisite before advancing — speed and accuracy both count.',
-}
-
 'use client'
 
 import dynamic from 'next/dynamic'

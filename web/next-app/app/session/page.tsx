@@ -1,10 +1,3 @@
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Practice — Mathua',
-  description: 'Start a practice session — answer math questions and build mastery through adaptive learning.',
-}
-
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
