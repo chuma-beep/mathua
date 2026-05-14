@@ -16,7 +16,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         padding: '32px 24px',
         textAlign: 'center',
         fontFamily: "'IBM Plex Mono', monospace",
-        fontSize: '11px',
+        fontSize: '12px',
         color: 'var(--text-muted)',
         lineHeight: 1.6,
       }}>

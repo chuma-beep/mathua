@@ -1,7 +1,8 @@
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -27,6 +28,11 @@ export default function LeaderboardPage() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([])
   const [loading, setLoading] = useState(true)
 
+  const finishLoading = useCallback((data: LeaderboardEntry[]) => {
+    setEntries(data)
+    setLoading(false)
+  }, [])
+
   useEffect(() => {
     const update = () => {
       const now = new Date()
@@ -46,9 +52,9 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     getLeaderboard()
-      .then((data) => { setEntries(data); setLoading(false) })
+      .then((data) => finishLoading(data))
       .catch(() => setLoading(false))
-  }, [])
+  }, [finishLoading])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
@@ -58,9 +64,9 @@ export default function LeaderboardPage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
         <span className="flex mb-4">
-          <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
-          </a>
+          </Link>
         </span>
 
         <SectionHeader label="Weekly Leaderboard" title="Compete. Improve. Rise." />
@@ -100,7 +106,7 @@ export default function LeaderboardPage() {
             {loading && (
               <tr>
                 <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                  Loading leaderboard...
+                  Loading leaderboard&hellip;
                 </td>
               </tr>
             )}
@@ -113,7 +119,7 @@ export default function LeaderboardPage() {
             )}
             {entries.map((row, i) => (
               <tr
-                key={i}
+                key={`entry-${row.rank}`}
                 className={`border-b border-mathua-border last:border-b-0 ${
                   i < 3 ? 'bg-mathua-gold/5' : ''
                 }`}

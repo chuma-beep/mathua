@@ -9,6 +9,18 @@ interface DomainTableProps {
   className?: string
 }
 
+const thStyle: React.CSSProperties = {
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontWeight: 400,
+  fontSize: '0.8rem',
+  textTransform: 'uppercase',
+  letterSpacing: '0.1em',
+  color: 'var(--accent-gold)',
+  padding: '10px 20px 10px 0',
+  borderBottom: '1px solid var(--accent-gold)',
+  background: 'transparent',
+}
+
 export default function DomainTable({ rows, className = '' }: DomainTableProps) {
   return (
     <div className={className}>
@@ -24,32 +36,17 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
           <tr>
             <th
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontWeight: 400,
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                color: 'var(--accent-gold)',
+                ...thStyle,
                 textAlign: 'left',
-                padding: '10px 20px 10px 0',
-                borderBottom: '1px solid var(--accent-gold)',
-                background: 'transparent',
               }}
             >
               Domain
             </th>
             <th
               style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontWeight: 400,
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                color: 'var(--accent-gold)',
+                ...thStyle,
                 textAlign: 'right',
                 padding: '10px 0 10px 20px',
-                borderBottom: '1px solid var(--accent-gold)',
-                background: 'transparent',
               }}
             >
               Concepts
@@ -79,7 +76,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
                       marginLeft: '0.5rem',
                     }}
                   >
-                    — coming in v1.1
+                    : coming in v1.1
                   </span>
                 )}
               </td>

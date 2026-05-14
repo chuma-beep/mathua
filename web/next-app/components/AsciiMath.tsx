@@ -14,15 +14,19 @@ export default function AsciiMath({ lines, className = '' }: AsciiMathProps) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    let intervalId: ReturnType<typeof setInterval> | null = null
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           let i = 0
-          const interval = setInterval(() => {
+          intervalId = setInterval(() => {
             i++
             setVisibleLines(i)
-            if (i >= lines.length) clearInterval(interval)
+            if (i >= lines.length && intervalId) {
+              clearInterval(intervalId)
+              intervalId = null
+            }
           }, 120)
           observer.unobserve(el)
         }
@@ -30,7 +34,10 @@ export default function AsciiMath({ lines, className = '' }: AsciiMathProps) {
       { threshold: 0.3 }
     )
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (intervalId) clearInterval(intervalId)
+    }
   }, [lines.length])
 
   return (
