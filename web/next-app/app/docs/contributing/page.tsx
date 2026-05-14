@@ -309,7 +309,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         {[
           'No cycles: concept A cannot require B while B requires A.',
           'No orphans: every prerequisite must exist in the graph.',
-        ].map((rule) => (
+        ].map((rule, i) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
@@ -337,7 +337,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Run go test ./... and go run scripts/validate_graph.go locally.',
           'Open a PR. The CI pipeline runs the validator and all tests automatically.',
           'A maintainer reviews the concept ordering, thresholds, and generator quality.',
-        ].map((step) => (
+        ].map((step, i) => (
           <div key={step} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
