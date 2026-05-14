@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable react/no-unknown-property -- R3F/Drei JSX elements use non-HTML attributes */
+
 import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html } from '@react-three/drei'

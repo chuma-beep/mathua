@@ -423,8 +423,8 @@ export default function HomePage() {
               'Account required',
               'Global leaderboard',
               'Graph view',
-            ].map((feature, i) => (
-              <div key={i} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+            ].map((feature) => (
+              <div key={feature} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
                 <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
                 {feature}
               </div>
@@ -445,8 +445,8 @@ export default function HomePage() {
               'No account needed',
               'Fully offline',
               'SQLite storage',
-            ].map((feature, i) => (
-              <div key={i} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+            ].map((feature) => (
+              <div key={feature} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
                 <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
                 {feature}
               </div>

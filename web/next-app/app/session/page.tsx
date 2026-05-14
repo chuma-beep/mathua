@@ -165,21 +165,6 @@ export default function SessionPage() {
     abstract_algebra: 'Abstract Algebra', topology: 'Topology',
   }
 
-  useEffect(() => {
-    if (screen !== 'diag_select') return
-    const raw = conceptsData as any[]
-    const map = new Map<string, string[]>()
-    for (const c of raw) {
-      const list = map.get(c.domain) || []
-      list.push(c.id)
-      map.set(c.domain, list)
-    }
-    const result: { name: string; concepts: string[]; selected: boolean }[] = []
-    map.forEach((concepts, name) => result.push({ name, concepts, selected: false }))
-    result.sort((a, b) => domainOrder.indexOf(a.name) - domainOrder.indexOf(b.name))
-    setDomains(result)
-  }, [screen])
-
   function toggleDomain(name: string) {
     setDomains(prev => prev.map(d => d.name === name ? { ...d, selected: !d.selected } : d))
   }

@@ -57,9 +57,9 @@ export default function DiagnosePage() {
             'Incorrect or slow answers move backward toward foundational material.',
             'After 3 consecutive correct answers in a region, the frontier is considered located.',
             'The diagnostic records a mastery estimate for every concept passed through.',
-          ].map((step, i) => (
+          ].map((step) => (
             <li
-              key={`step-${i}`}
+              key={step}
               className="text-mathua-secondary text-[0.95rem] leading-[1.7] pl-9 relative before:content-[counter(step)] before:absolute before:left-0 before:text-mathua-blue before:font-mono before:text-[13px]"
               style={{ counterIncrement: 'step-counter 1' }}
             >
