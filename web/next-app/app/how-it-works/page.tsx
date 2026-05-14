@@ -101,6 +101,27 @@ const tableCellStyle: React.CSSProperties = {
   background: 'transparent',
 }
 
+const h1Style: React.CSSProperties = {
+  fontFamily: headingFont,
+  fontWeight: 400,
+  fontSize: '1.9rem',
+  color: 'var(--text-primary)',
+  marginBottom: '1rem',
+  letterSpacing: '-0.01em',
+  borderBottom: '0.5px solid var(--border)',
+  paddingBottom: '0.5rem',
+}
+
+const stepLiStyle: React.CSSProperties = {
+  fontFamily: bodyFont,
+  fontSize: '0.95rem',
+  color: 'var(--text-secondary)',
+  lineHeight: 1.7,
+  marginBottom: '0.75rem',
+  paddingLeft: '2.25rem',
+  position: 'relative',
+}
+
 export default function HowItWorksPage() {
   const [activeSection, setActiveSection] = useState('concept-graph')
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -136,18 +157,7 @@ export default function HowItWorksPage() {
 
         <main className="max-w-[720px] flex-1 max-md:mt-20">
           <section id="intro" className="mb-12 pb-8" style={{ borderBottom: '0.5px solid var(--border)' }}>
-            <h1
-              style={{
-                fontFamily: headingFont,
-                fontWeight: 400,
-                fontSize: '1.9rem',
-                color: 'var(--text-primary)',
-                marginBottom: '1rem',
-                letterSpacing: '-0.01em',
-                borderBottom: '0.5px solid var(--border)',
-                paddingBottom: '0.5rem',
-              }}
-            >
+            <h1 style={h1Style}>
               How Mathua Works
             </h1>
             <p style={bodyStyle}>
@@ -295,16 +305,7 @@ minimum value: 1.3`}
               ].map((step, i) => (
                 <li
                   key={`diag-step-${i}`}
-                  style={{
-                    fontFamily: bodyFont,
-                    fontSize: '0.95rem',
-                    color: 'var(--text-secondary)',
-                    lineHeight: 1.7,
-                    marginBottom: '0.75rem',
-                    paddingLeft: '2.25rem',
-                    position: 'relative',
-                    counterIncrement: 'step-counter 1',
-                  }}
+                  style={stepLiStyle}
                 >
                   <span
                     style={{

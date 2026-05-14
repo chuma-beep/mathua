@@ -113,6 +113,15 @@ const monoFont = "'IBM Plex Mono', monospace"
 const serifFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
 
+const tooltipStyle: React.CSSProperties = {
+  background: 'var(--bg)',
+  border: '0.5px solid var(--border)',
+  borderRadius: 0,
+  whiteSpace: 'nowrap',
+  minWidth: 'max-content',
+  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+}
+
 const NodeMesh = React.memo(function NodeMesh({
   node,
   isActive,
@@ -177,16 +186,7 @@ const NodeMesh = React.memo(function NodeMesh({
       </mesh>
       {isHovered && (
         <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 1000 }}>
-          <div style={{
-            background: 'var(--bg)',
-            border: '0.5px solid var(--border)',
-            borderRadius: 0,
-            padding: isMobile ? '10px 14px' : '8px 12px',
-            whiteSpace: 'nowrap',
-            minWidth: 'max-content',
-            maxWidth: isMobile ? '220px' : '240px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-          }}>
+          <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
             <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
             <div style={{ color, fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
             {node.status && (

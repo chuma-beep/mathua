@@ -13,23 +13,32 @@ import D2Diagram from '../components/D2Diagram'
 import Footer from '../components/Footer'
 import conceptsData from '../data/concepts.json'
 
+const loadingGraphStyle: React.CSSProperties = {
+  height: 'clamp(320px, 50vh, 520px)',
+  background: 'transparent',
+  borderRadius: 0,
+  border: '0.5px solid var(--border)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'var(--text-muted)',
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontSize: '13px',
+}
+
+const statCountStyle: React.CSSProperties = {
+  color: 'var(--bg)',
+  fontFamily: "'IBM Plex Mono', monospace",
+  fontSize: '30px',
+  fontWeight: 400,
+  lineHeight: 1,
+  marginBottom: '4px',
+}
+
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
   loading: () => (
-    <div
-      style={{
-        height: 'clamp(320px, 50vh, 520px)',
-        background: 'transparent',
-        borderRadius: 0,
-        border: '0.5px solid var(--border)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--text-muted)',
-        fontFamily: "'IBM Plex Mono', monospace",
-        fontSize: '13px',
-      }}
-    >
+    <div style={loadingGraphStyle}>
       Loading graph...
     </div>
   ),
@@ -117,6 +126,68 @@ export default function HomePage() {
   const bodyFont = "'IBM Plex Serif', serif"
   const monoFont = "'IBM Plex Mono', monospace"
 
+  const ctaPrimaryStyle: React.CSSProperties = {
+    background: 'var(--accent-gold)',
+    color: 'var(--bg)',
+    fontFamily: monoFont,
+    fontSize: '13px',
+    padding: '10px 22px',
+    border: 'none',
+    borderRadius: '2px',
+    letterSpacing: '0.04em',
+    textTransform: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textDecoration: 'none',
+    transition: 'background 0.2s',
+  }
+
+  const ctaSecondaryStyle: React.CSSProperties = {
+    background: 'transparent',
+    color: 'var(--text-secondary)',
+    fontFamily: monoFont,
+    fontSize: '13px',
+    padding: '10px 22px',
+    border: '0.5px solid var(--border-strong)',
+    borderRadius: '2px',
+    letterSpacing: '0.04em',
+    textTransform: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textDecoration: 'none',
+    transition: 'all 0.2s',
+  }
+
+  const statsRowStyle: React.CSSProperties = {
+    fontFamily: monoFont,
+    fontSize: 'clamp(11px, 3vw, 12px)',
+    letterSpacing: '0.06em',
+    color: 'var(--text-muted)',
+    marginBottom: '2.5rem',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '2px 8px',
+  }
+
+  const codeQuoteStyle: React.CSSProperties = {
+    background: 'transparent',
+    border: 'none',
+    borderLeft: '2px solid var(--accent-gold)',
+    borderRadius: 0,
+    padding: '0.5rem 0 0.5rem 1rem',
+    fontFamily: monoFont,
+    fontSize: 'clamp(11px, 2.5vw, 13px)',
+    color: 'var(--text-secondary)',
+    whiteSpace: 'pre',
+    overflowX: 'auto',
+    textAlign: 'left',
+    lineHeight: 1.6,
+    display: 'inline-block',
+  }
+
   return (
     <>
       <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
@@ -156,63 +227,15 @@ export default function HomePage() {
         </p>
 
         <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
-          <a
-            href="/login"
-            style={{
-              background: 'var(--accent-gold)',
-              color: 'var(--bg)',
-              fontFamily: monoFont,
-              fontSize: '13px',
-              padding: '10px 22px',
-              border: 'none',
-              borderRadius: '2px',
-              letterSpacing: '0.04em',
-              textTransform: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              transition: 'background 0.2s',
-            }}
-          >
+          <a href="/login" style={ctaPrimaryStyle}>
             Open the web app
           </a>
-          <a
-            href="https://github.com/chuma-beep/mathua"
-            style={{
-              background: 'transparent',
-              color: 'var(--text-secondary)',
-              fontFamily: monoFont,
-              fontSize: '13px',
-              padding: '10px 22px',
-              border: '0.5px solid var(--border-strong)',
-              borderRadius: '2px',
-              letterSpacing: '0.04em',
-              textTransform: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-            }}
-          >
+          <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle}>
             View on GitHub
           </a>
         </div>
 
-        <div
-          style={{
-            fontFamily: monoFont,
-            fontSize: 'clamp(11px, 3vw, 12px)',
-            letterSpacing: '0.06em',
-            color: 'var(--text-muted)',
-            marginBottom: '2.5rem',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '2px 8px',
-          }}
-        >
+        <div style={statsRowStyle}>
           <span>{conceptCount} topics</span>
           <span style={{ color: 'var(--border-strong)' }}>·</span>
           <span>{connectionCount} connections</span>
@@ -448,23 +471,7 @@ export default function HomePage() {
           goes through a graph validator that rejects cycles and orphaned nodes automatically.
         </p>
         <div className="flex justify-center mt-4">
-          <pre
-            style={{
-              background: 'transparent',
-              border: 'none',
-              borderLeft: '2px solid var(--accent-gold)',
-              borderRadius: 0,
-              padding: '0.5rem 0 0.5rem 1rem',
-              fontFamily: monoFont,
-              fontSize: 'clamp(11px, 2.5vw, 13px)',
-              color: 'var(--text-secondary)',
-              whiteSpace: 'pre',
-              overflowX: 'auto',
-              textAlign: 'left',
-              lineHeight: 1.6,
-              display: 'inline-block',
-            }}
-          >
+          <pre style={codeQuoteStyle}>
 {`{
    "id":                "arith.add.multi",
    "label":             "Multi-digit addition",
