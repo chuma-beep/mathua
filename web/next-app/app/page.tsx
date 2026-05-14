@@ -1,6 +1,14 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Mathua — Master the Foundation',
+  description: 'An open-source adaptive math learning engine. Master every prerequisite before advancing — speed and accuracy both count.',
+}
+
 'use client'
 
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useTheme } from '../hooks/useTheme'
 import Header from '../components/Header'
 import AsciiDivider from '../components/AsciiDivider'
@@ -39,7 +47,7 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
   ssr: false,
   loading: () => (
     <div style={loadingGraphStyle}>
-      Loading graph...
+      Loading graph…
     </div>
   ),
 })
@@ -157,13 +165,13 @@ export default function HomePage() {
     alignItems: 'center',
     justifyContent: 'center',
     textDecoration: 'none',
-    transition: 'all 0.2s',
+    transition: 'background 0.2s, color 0.2s',
   }
 
   const statsRowStyle: React.CSSProperties = {
     fontFamily: monoFont,
     fontSize: 'clamp(11px, 3vw, 12px)',
-    letterSpacing: '0.06em',
+    letterSpacing: '0.04em',
     color: 'var(--text-muted)',
     marginBottom: '2.5rem',
     display: 'flex',
@@ -223,13 +231,13 @@ export default function HomePage() {
           }}
         >
           Mathua is an open-source adaptive math learning engine. It never lets you advance until
-          you have truly mastered the prerequisite — both speed and accuracy must be proven.
+          you have truly mastered the prerequisite, both speed and accuracy must be proven.
         </p>
 
         <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
-          <a href="/login" style={ctaPrimaryStyle}>
+          <Link href="/login" style={ctaPrimaryStyle}>
             Open the web app
-          </a>
+          </Link>
           <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle}>
             View on GitHub
           </a>
@@ -283,7 +291,7 @@ export default function HomePage() {
             </div>
             <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
               You cannot advance until your streak and response time both meet the threshold. Knowing
-              the answer is not enough — you must know it fast.
+              the answer is not enough; you must know it fast.
             </p>
           </div>
 
@@ -305,7 +313,7 @@ export default function HomePage() {
             </div>
             <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
               Concepts you master resurface automatically before they decay. Reviews are woven into
-              your session — there is no separate review mode.
+              your session; there is no separate review mode.
             </p>
           </div>
         </div>
@@ -360,7 +368,7 @@ export default function HomePage() {
             marginTop: '0.75rem',
           }}
         >
-          Problems are generated on demand — never stored. There is nothing to memorise.
+          Problems are generated on demand, never stored. There is nothing to memorise.
         </p>
       </section>
 

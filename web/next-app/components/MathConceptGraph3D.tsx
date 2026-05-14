@@ -185,12 +185,12 @@ const NodeMesh = React.memo(function NodeMesh({
         />
       </mesh>
       {isHovered && (
-        <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 1000 }}>
+          <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 20 }}>
           <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
             <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
-            <div style={{ color, fontSize: isMobile ? '11px' : '10px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
+            <div style={{ color, fontSize: isMobile ? '13px' : '12px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
             {node.status && (
-              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '10px' : '9px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
                 {node.status} {node.onPath ? '· on path' : ''}
               </div>
             )}
@@ -364,9 +364,6 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
   onPathNodes?: string[]
   theme: 'dark' | 'light'
 }) {
-  const concept = useMemo(() => concepts.find(c => c.id === activeId), [concepts, activeId])
-  if (!concept) return null
-
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
@@ -375,13 +372,18 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
+  const concept = useMemo(() => concepts.find(c => c.id === activeId), [concepts, activeId])
+  if (!concept) return null
+
   const status = conceptStatuses?.[concept.id] ?? null
   const onPath = onPathNodes?.includes(concept.id) ?? false
   const color = domainColor(concept.domain, theme)
 
   const prereqConcepts = concept.prerequisites
-    .map(id => concepts.find(c => c.id === id))
-    .filter(Boolean) as ConceptDef[]
+    .flatMap(id => {
+      const c = concepts.find(c => c.id === id)
+      return c ? [c] : []
+    }) as ConceptDef[]
 
   const unlockedBy = concepts.filter(c => c.prerequisites.includes(concept.id))
 
@@ -392,14 +394,14 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
       padding: isMobile ? '0.5rem' : '0.75rem 1rem',
       borderRadius: 0,
     }}>
-      <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', fontFamily: monoFont }}>selected concept</div>
+      <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', fontFamily: monoFont }}>selected concept</div>
       <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '18px', marginTop: '4px', fontFamily: serifFont, fontWeight: 400 }}>{concept.label}</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' as const }}>
-        <span style={{ color, fontSize: isMobile ? '10px' : '11px', fontFamily: monoFont }}>● {concept.domain}</span>
+        <span style={{ color, fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>● {concept.domain}</span>
         {status && (
           <span style={{
             color: status === 'mastered' ? 'var(--accent-teal)' : status === 'learning' ? '#e8a849' : 'var(--text-muted)',
-            fontSize: isMobile ? '10px' : '11px',
+            fontSize: isMobile ? '12px' : '12px',
             textTransform: 'uppercase',
             fontFamily: monoFont,
           }}>
@@ -407,15 +409,15 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
           </span>
         )}
         {onPath && (
-          <span style={{ color: 'var(--accent-gold)', fontSize: isMobile ? '10px' : '11px', fontFamily: monoFont }}>on path</span>
+          <span style={{ color: 'var(--accent-gold)', fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>on path</span>
         )}
       </div>
       {prereqConcepts.length > 0 && (
         <div style={{ marginTop: '8px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>prerequisites</div>
+          <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>prerequisites</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
             {prereqConcepts.map(p => (
-              <span key={p.id} style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: monoFont }}>
+              <span key={p.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
                 {p.label}
               </span>
             ))}
@@ -424,10 +426,10 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
       )}
       {unlockedBy.length > 0 && (
         <div style={{ marginTop: '6px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '10px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>unlocks</div>
+          <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>unlocks</div>
           <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
             {unlockedBy.map(u => (
-              <span key={u.id} style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: monoFont }}>
+              <span key={u.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
                 {u.label}
               </span>
             ))}

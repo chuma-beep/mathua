@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Architecture — Mathua Docs',
+  description: 'Mathua is a single Go binary with two delivery modes — the engine core is identical, only the presentation differs.',
+}
+
 'use client'
 
 import { useTheme } from '../../../hooks/useTheme'

@@ -85,7 +85,7 @@ export default function Header({ links }: HeaderProps) {
 
           <button
             onClick={() => setMenuOpen((p) => !p)}
-            className="md:hidden flex items-center justify-center w-6 h-6 text-mathua-muted hover:text-mathua-gold transition-colors"
+            className="md:hidden flex items-center justify-center size-6 text-mathua-muted hover:text-mathua-gold transition-colors"
             aria-label="Toggle navigation menu"
           >
             <span

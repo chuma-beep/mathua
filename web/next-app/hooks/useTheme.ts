@@ -13,17 +13,18 @@ function getSystemTheme(): Theme {
   return 'dark'
 }
 
+function getInitialTheme(): Theme {
+  if (typeof window === 'undefined') return 'dark'
+  const saved = localStorage.getItem(STORAGE_KEY)
+  if (saved === 'dark' || saved === 'light') return saved
+  return getSystemTheme()
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme>(getInitialTheme)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved === 'dark' || saved === 'light') {
-      setTheme(saved)
-    } else {
-      setTheme(getSystemTheme())
-    }
     setMounted(true)
   }, [])
 
