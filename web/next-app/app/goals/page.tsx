@@ -201,7 +201,7 @@ export default function GoalsPage() {
 
       setTimeout(() => {
         setQuestion(data.question || '')
-        setConceptId(data.concept_id || '')
+        conceptId.current = data.concept_id || ''
         setConceptName(data.concept_name || '')
         setQuestionCount(prev => prev + 1)
         setLastResult(null)
