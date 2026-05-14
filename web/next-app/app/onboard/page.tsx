@@ -1,10 +1,3 @@
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Onboarding — Mathua',
-  description: 'Tell us what you want to learn — we\'ll diagnose your starting point and build a personalized study plan.',
-}
-
 'use client'
 
 import { useState, useEffect, useRef } from 'react'

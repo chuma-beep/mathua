@@ -1,10 +1,3 @@
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Login — Mathua',
-  description: 'Sign in or create an account on Mathua, the open-source adaptive math learning engine.',
-}
-
 'use client'
 
 import { useReducer } from 'react'

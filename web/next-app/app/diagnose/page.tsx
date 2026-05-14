@@ -1,10 +1,3 @@
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Diagnostic Test — Mathua',
-  description: 'A computerized adaptive test that locates your position on the concept graph using as few questions as possible.',
-}
-
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
