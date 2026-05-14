@@ -136,7 +136,7 @@ const NodeMesh = React.memo(function NodeMesh({
   isActive: boolean
   isHovered: boolean
   onHover: (id: string | null) => void
-  onSelect: () => void
+  onSelect: (id: string) => void
   theme: 'dark' | 'light'
 }) {
   const meshRef = useRef<THREE.Mesh>(null)
@@ -171,7 +171,7 @@ const NodeMesh = React.memo(function NodeMesh({
         ref={ringRef}
         onPointerOver={() => onHover(node.id)}
         onPointerOut={() => onHover(null)}
-        onClick={onSelect}
+        onClick={() => onSelect(node.id)}
       >
         <sphereGeometry args={[NODE_RADIUS * 2.2, 12, 12]} />
         <meshBasicMaterial color={node.onPath ? '#c8a96e' : color} transparent opacity={0.04} depthWrite={false} />
@@ -337,7 +337,7 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme }: Gr
           isActive={node.id === activeId}
           isHovered={node.id === hovered}
           onHover={setHovered}
-          onSelect={() => onSelect(node.id)}
+          onSelect={onSelect}
           theme={theme}
         />
       ))}
