@@ -8,27 +8,29 @@ import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
-import { getGraph, healthCheck, getScores, type GraphRes, type Scores } from '../../lib/api'
+import conceptsData from '../../data/concepts.json'
+import { getScores, getGraph, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import type { MasteryStatus } from '../../components/MathConceptGraph3D'
-import conceptsData from '../../data/concepts.json'
+
+const graphLoadingStyle: React.CSSProperties = {
+  height: 'clamp(320px, 50vh, 520px)',
+  background: 'var(--surface)',
+  borderRadius: '8px',
+  border: '0.5px solid var(--border)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'var(--text-muted)',
+  fontSize: '14px',
+}
 
 const MathConceptGraph3D = dynamic(
   () => import('../../components/MathConceptGraph3D'),
   {
     ssr: false,
     loading: () => (
-      <div style={{
-        height: 'clamp(320px, 50vh, 520px)',
-        background: 'var(--surface)',
-        borderRadius: '8px',
-        border: '0.5px solid var(--border)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'var(--text-muted)',
-        fontSize: '14px',
-      }}>
+      <div style={graphLoadingStyle}>
         Loading graph&hellip;
       </div>
     ),

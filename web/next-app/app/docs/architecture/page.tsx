@@ -27,6 +27,17 @@ const bodyStyle: React.CSSProperties = {
   marginBottom: '1rem',
 }
 
+const calloutStyle: React.CSSProperties = {
+  borderLeft: '2px solid var(--accent-gold)',
+  paddingLeft: '1.5rem',
+  fontFamily: bodyFont,
+  fontStyle: 'italic',
+  fontSize: '0.9rem',
+  color: 'var(--text-muted)',
+  lineHeight: 1.7,
+  marginTop: '1.5rem',
+}
+
 export default function ArchitecturePage() {
   const { theme } = useTheme()
 
@@ -123,16 +134,7 @@ export default function ArchitecturePage() {
             </div>
           ))}
         </div>
-        <div style={{
-          borderLeft: '2px solid var(--accent-gold)',
-          paddingLeft: '1.5rem',
-          fontFamily: bodyFont,
-          fontStyle: 'italic',
-          fontSize: '0.9rem',
-          color: 'var(--text-muted)',
-          lineHeight: 1.7,
-          marginTop: '1.5rem',
-        }}>
+        <div style={calloutStyle}>
           The diagnostic can be retaken at any time. Retaking does not delete progress: it creates
           a new estimate that is merged with existing data, always preferring the more optimistic
           estimate.

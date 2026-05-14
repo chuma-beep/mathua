@@ -73,6 +73,16 @@ const tableCellStyle: React.CSSProperties = {
   background: 'transparent',
 }
 
+const calloutStyle: React.CSSProperties = {
+  borderLeft: '2px solid var(--accent-gold)',
+  paddingLeft: '1.5rem',
+  fontFamily: bodyFont,
+  fontStyle: 'italic',
+  fontSize: '0.9rem',
+  color: 'var(--text-muted)',
+  lineHeight: 1.7,
+}
+
 export default function ContributingPage() {
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
@@ -206,16 +216,7 @@ go build ./cmd/mathua
           </table>
         </div>
 
-        <div style={{
-          borderLeft: '2px solid var(--accent-gold)',
-          paddingLeft: '1.5rem',
-          fontFamily: bodyFont,
-          fontStyle: 'italic',
-          fontSize: '0.9rem',
-          color: 'var(--text-muted)',
-          lineHeight: 1.7,
-          marginTop: '1rem',
-        }}>
+        <div style={{ ...calloutStyle, marginTop: '1rem' }}>
           The prerequisites list is the most important field. What must a student absolutely
            know before attempting this? If in doubt, add the prerequisite: the graph validator
           will catch cycles.
@@ -366,16 +367,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             {rule}
           </div>
         ))}
-        <div style={{
-          borderLeft: '2px solid var(--accent-gold)',
-          paddingLeft: '1.5rem',
-          fontFamily: bodyFont,
-          fontStyle: 'italic',
-          fontSize: '0.9rem',
-          color: 'var(--text-muted)',
-          lineHeight: 1.7,
-          marginTop: '1.5rem',
-        }}>
+        <div style={{ ...calloutStyle, marginTop: '1.5rem' }}>
           Read the full design system in{' '}
           <a href="https://github.com/chuma-beep/mathua/blob/main/DESIGN.md" style={{ color: 'var(--accent-gold)', textDecoration: 'underline' }}>
             DESIGN.md
