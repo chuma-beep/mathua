@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Leaderboard — Mathua',
+  description: 'Weekly leaderboard ranking by mastery points — see how your math skills compare.',
+}
+
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'

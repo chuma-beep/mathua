@@ -1,8 +1,17 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Practice — Mathua',
+  description: 'Start a practice session — answer math questions and build mastery through adaptive learning.',
+}
+
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -28,7 +37,7 @@ type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'feedback'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
-  const router = useRouter()
+  const { push } = useRouter()
 
   const [screen, setScreen] = useState<Screen>('practice')
   const [name, setName] = useState('')
@@ -51,16 +60,16 @@ export default function SessionPage() {
 
   // Diagnostic state (guest mode)
   const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
-  const [diagSessionId, setDiagSessionId] = useState('')
+  const diagSessionId = useRef('')
   const [diagQuestion, setDiagQuestion] = useState('')
-  const [diagConceptId, setDiagConceptId] = useState('')
+  const diagConceptId = useRef('')
   const [diagConceptName, setDiagConceptName] = useState('')
   const [diagCount, setDiagCount] = useState(0)
   const [diagAnswer, setDiagAnswer] = useState('')
   const [diagLastResult, setDiagLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [diagAccuracy, setDiagAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
-  const [diagPlan, setDiagPlan] = useState<GoalPlanRes | null>(null)
-  const [guestStudentID, setGuestStudentID] = useState('')
+  const diagPlan = useRef<GoalPlanRes | null>(null)
+  const guestStudentID = useRef('')
 
   useEffect(() => {
     const u = getUserInfo()
@@ -184,15 +193,15 @@ export default function SessionPage() {
     setLoading(true)
     try {
       const res = await startGoalDiagnosticName(name.trim(), ids)
-      if (res.student_id) setGuestStudentID(res.student_id)
+      if (res.student_id) guestStudentID.current = res.student_id
       if (res.done) {
-        setDiagPlan({ readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} })
+        diagPlan.current = { readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} }
         setScreen('practice')
         return
       }
-      setDiagSessionId(res.session_id)
+      diagSessionId.current = res.session_id
       setDiagQuestion(res.question || '')
-      setDiagConceptId(res.concept_id || '')
+      diagConceptId.current = res.concept_id || ''
       setDiagConceptName(res.concept_name || '')
       setDiagCount(1)
       setDiagAccuracy({ correct: 0, total: 0 })
@@ -214,7 +223,7 @@ export default function SessionPage() {
       const res = await fetch(`/api/goal/diagnostic/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ session_id: diagSessionId, concept_id: diagConceptId, answer: diagAnswer.trim(), elapsed }),
+        body: JSON.stringify({ session_id: diagSessionId.current, concept_id: diagConceptId.current, answer: diagAnswer.trim(), elapsed }),
       })
       const data = await res.json()
       const correct = data.correct || false
@@ -225,20 +234,20 @@ export default function SessionPage() {
       if (data.done) {
         setTimeout(async () => {
           try {
-            const planRes = await getGoalPlan(diagSessionId)
-            setDiagPlan(planRes)
-            if (guestStudentID) {
+            const planRes = await getGoalPlan(diagSessionId.current)
+            diagPlan.current = planRes
+            if (guestStudentID.current) {
               const sessRes = await fetch('/api/session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ student_id: guestStudentID }),
+                body: JSON.stringify({ student_id: guestStudentID.current }),
               })
               const sessData = await sessRes.json()
               setStudentID(sessData.student_id)
               setSessionID(sessData.session_id)
               setQuestion(sessData.question)
               setScreen('practice')
-              getScores(guestStudentID).then(setScores).catch(() => {})
+              getScores(guestStudentID.current).then(setScores).catch(() => {})
             }
           } catch {
             setError('Could not generate plan.')
@@ -250,7 +259,7 @@ export default function SessionPage() {
 
       setTimeout(() => {
         setDiagQuestion(data.question || '')
-        setDiagConceptId(data.concept_id || '')
+        diagConceptId.current = data.concept_id || ''
         setDiagConceptName(data.concept_name || '')
         setDiagCount(prev => prev + 1)
         setDiagLastResult(null)
@@ -287,12 +296,12 @@ export default function SessionPage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
         <span className="flex justify-between items-center mb-4">
-          <a href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
-          </a>
+          </Link>
           <span className="flex gap-3 items-center">
             {user && <span className="font-mono text-[11px] text-mathua-muted">{user.name}</span>}
-            <button onClick={() => { clearToken(); router.push('/login') }} className="text-mathua-secondary text-xs hover:text-mathua-red">
+            <button onClick={() => { clearToken(); push('/login') }} className="text-mathua-secondary text-xs hover:text-mathua-red">
               Logout
             </button>
           </span>
@@ -311,7 +320,6 @@ export default function SessionPage() {
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && beginSessionName()}
                 placeholder="Your name"
-                autoFocus
                 className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
               />
               <button
@@ -322,9 +330,9 @@ export default function SessionPage() {
               </button>
             </div>
             <div className="mt-4 text-center">
-              <a href="/login" className="text-mathua-secondary text-sm hover:text-mathua-blue">
+              <Link href="/login" className="text-mathua-secondary text-sm hover:text-mathua-blue">
                 Have an account? Sign in
-              </a>
+              </Link>
             </div>
           </div>
         )}
@@ -361,7 +369,7 @@ export default function SessionPage() {
                 Back
               </button>
               <button onClick={beginGuestDiagnostic} disabled={loading} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50">
-                {loading ? 'Loading...' : 'Start diagnostic'}
+                {loading ? 'Loading…' : 'Start diagnostic'}
               </button>
             </div>
           </div>
@@ -385,7 +393,7 @@ export default function SessionPage() {
                   className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
                 <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
-                  Submit
+                  Check Answer
                 </button>
               </div>
             </div>
@@ -402,7 +410,7 @@ export default function SessionPage() {
 
         {loading && (
           <div className="max-w-md mx-auto mt-20 text-center">
-            <p className="text-mathua-muted text-sm">Loading...</p>
+            <p className="text-mathua-muted text-sm">Loading…</p>
           </div>
         )}
         {error && (
@@ -476,7 +484,7 @@ export default function SessionPage() {
                     {question.diagram ? (
                       <div className="flex flex-col md:flex-row">
                         <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
-                          <img src={question.diagram} alt="Diagram" className="max-w-full h-auto" style={{ maxHeight: '180px' }} />
+                          <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                         </div>
                         <div className="md:w-2/3 p-8 flex items-center justify-center">
                           <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
@@ -497,14 +505,13 @@ export default function SessionPage() {
                       onChange={(e) => setAnswer(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                       placeholder="Your answer"
-                      autoFocus
                       className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
                     <button
                       onClick={handleSubmit}
                       className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm"
                     >
-                      Submit
+                      Check Answer
                     </button>
                   </div>
                   {question.lesson && (

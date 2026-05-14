@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Learning Goals — Mathua',
+  description: 'Set your learning goals, run a diagnostic, and get a personalized study plan based on your current knowledge.',
+}
+
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -61,6 +68,7 @@ export default function GoalsPage() {
 
   // Step 2: diagnostic
   const sessionId = useRef('')
+  const tokenRef = useRef('')
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
   const [conceptName, setConceptName] = useState('')
@@ -76,8 +84,9 @@ export default function GoalsPage() {
   // Load scores and domains on mount
   useEffect(() => {
     if (!mounted) return
-    const loggedIn = isLoggedIn()
     const token = localStorage.getItem('mathua_token')
+    tokenRef.current = token
+    const loggedIn = isLoggedIn()
     if (loggedIn) {
       const user = getUserInfo()
       if (user) {
@@ -170,7 +179,7 @@ export default function GoalsPage() {
     try {
       const answer = answerInput.trim()
       const elapsed = 5.0
-      const token = localStorage.getItem('mathua_token')
+      const token = tokenRef.current
       const res = await fetch(`/api/goal/diagnostic/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token || ''}` },
@@ -266,7 +275,7 @@ export default function GoalsPage() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
-                  {loading ? 'Loading...' : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
+                  {loading ? 'Loading…' : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
                 </button>
               </div>
             </>
@@ -298,7 +307,7 @@ export default function GoalsPage() {
                       disabled={!answerInput.trim() || loading || lastResult !== null}
                       className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
                     >
-                      Submit
+                      Check Answer
                     </button>
                   </div>
                 </div>

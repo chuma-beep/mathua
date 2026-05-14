@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Onboarding — Mathua',
+  description: 'Tell us what you want to learn — we\'ll diagnose your starting point and build a personalized study plan.',
+}
+
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
@@ -244,7 +251,7 @@ export default function OnboardPage() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
-                  {loading ? 'Loading...' : `Start diagnostic (${selectedConceptIds().length} concepts)`}
+                  {loading ? 'Loading…' : `Start diagnostic (${selectedConceptIds().length} concepts)`}
                 </button>
               </div>
             </div>
@@ -274,7 +281,7 @@ export default function OnboardPage() {
                       disabled={!answerInput.trim() || loading || lastResult !== null}
                       className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
                     >
-                      Submit
+                      Check Answer
                     </button>
                   </div>
                 </div>

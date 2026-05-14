@@ -23,7 +23,7 @@ const formulaPreStyle: React.CSSProperties = {
 
 const formulaLabelStyle: React.CSSProperties = {
   fontFamily: "'IBM Plex Mono', monospace",
-  fontSize: '11px',
+  fontSize: '12px',
   color: 'var(--text-muted)',
   marginTop: '0.25rem',
 }

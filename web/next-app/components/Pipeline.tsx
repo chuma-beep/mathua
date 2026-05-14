@@ -27,7 +27,7 @@ export default function Pipeline({ states, className = '' }: PipelineProps) {
             style={{
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '13px',
-              letterSpacing: '0.08em',
+              letterSpacing: '0.05em',
               color: 'var(--text-secondary)',
               ...statusStyle[state.status],
             }}

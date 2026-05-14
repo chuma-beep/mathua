@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Concept Graph — Mathua',
+  description: 'Explore the 3D interactive concept map — see how math topics connect and track your mastery.',
+}
+
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
