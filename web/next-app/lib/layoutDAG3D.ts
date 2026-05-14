@@ -90,13 +90,22 @@ export function layoutDAG3D(
 
   const positions: Record<string, [number, number, number]> = {}
 
+  const layerNodeIndices: Record<number, Map<string, number>> = {}
+  for (const id of nodeIds) {
+    const layer = layers[id]
+    if (!layerNodeIndices[layer]) layerNodeIndices[layer] = new Map()
+  }
+  for (const [layer, ids] of Object.entries(layerGroups)) {
+    const map = layerNodeIndices[Number(layer)]
+    ids.forEach((id, idx) => map.set(id, idx))
+  }
+
   for (const id of nodeIds) {
     const layer = layers[id]
     const y = layer * ySpacing - centerY
 
-    const sameLayerNodes = layerGroups[layer]
-    const indexInLayer = sameLayerNodes.indexOf(id)
-    const totalInLayer = sameLayerNodes.length
+    const indexInLayer = layerNodeIndices[layer].get(id)!
+    const totalInLayer = layerGroups[layer].length
 
     const angle = (Math.PI * 2 * indexInLayer) / totalInLayer + Math.random() * 0.2
     const r = (0.4 + Math.random() * 0.6) * layerRadius
