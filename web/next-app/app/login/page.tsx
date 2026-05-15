@@ -87,8 +87,8 @@ export default function LoginPage() {
           </span>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
           <div className="flex gap-2 mt-6 mb-4">
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'login' ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'signup' ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
           </div>
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 space-y-4">
             {state.tab === 'signup' && (

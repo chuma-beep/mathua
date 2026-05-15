@@ -330,7 +330,7 @@ export default function SessionPage() {
                     onClick={() => toggleDomain(d.name)}
                     className={`rounded-none p-4 text-left transition-all text-sm ${
                       d.selected
-                        ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white'
+                        ? 'bg-mathua-blue text-white'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
                     }`}
                   >
