@@ -16,8 +16,7 @@ module.exports = {
           primary: 'var(--text-primary)',
           secondary: 'var(--text-secondary)',
           muted: 'var(--text-muted)',
-          gold: 'var(--accent-gold)',
-          'gold-hover': 'var(--accent-gold-hover)',
+
           blue: 'var(--accent-blue)',
           'blue-hover': 'var(--accent-blue-hover)',
           teal: 'var(--accent-teal)',

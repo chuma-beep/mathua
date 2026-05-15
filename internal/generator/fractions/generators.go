@@ -253,7 +253,7 @@ func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d/%d %s %d/%d = ?", aNum, aDen, g.op, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
-		Explanation: fmt.Sprintf("LCM(%d,%d)=%d: %d/%d + %d/%d = %d/%d", aDen, bDen, cm, aScaled, cm, bScaled, cm, rn, rd),
+		Explanation: fmt.Sprintf("LCM(%d,%d)=%d: %d/%d %s %d/%d = %d/%d", aDen, bDen, cm, aScaled, cm, g.op, bScaled, cm, rn, rd),
 	}
 }
 

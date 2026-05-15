@@ -121,12 +121,12 @@ export default function LeaderboardPage() {
               <tr
                 key={`entry-${row.rank}`}
                 className={`border-b border-mathua-border last:border-b-0 ${
-                  i < 3 ? 'bg-mathua-gold/5' : ''
+                  i < 3 ? 'bg-mathua-blue/5' : ''
                 }`}
               >
                 <td className="p-[14px_20px] max-sm:p-[10px_12px] font-mono text-sm text-mathua-muted">
                   {row.rank <= 3 ? (
-                    <span className="text-mathua-gold">
+                    <span className="text-mathua-blue">
                       {['\u2460', '\u2461', '\u2462'][row.rank - 1]}
                     </span>
                   ) : row.rank}

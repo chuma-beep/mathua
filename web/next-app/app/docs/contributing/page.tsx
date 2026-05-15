@@ -57,9 +57,9 @@ const tableHeaderStyle: React.CSSProperties = {
   fontSize: '0.85rem',
   textTransform: 'uppercase',
   letterSpacing: '0.08em',
-  color: 'var(--accent-gold)',
+  color: 'var(--accent-blue)',
   padding: '10px 14px 10px 0',
-  borderBottom: '1px solid var(--accent-gold)',
+  borderBottom: '1px solid var(--accent-blue)',
   textAlign: 'left',
   background: 'transparent',
 }
@@ -74,7 +74,7 @@ const tableCellStyle: React.CSSProperties = {
 }
 
 const calloutStyle: React.CSSProperties = {
-  borderLeft: '2px solid var(--accent-gold)',
+  borderLeft: '2px solid var(--accent-blue)',
   paddingLeft: '1.5rem',
   fontFamily: bodyFont,
   fontStyle: 'italic',
@@ -125,9 +125,9 @@ go build ./cmd/mathua
         </pre>
         <p style={bodyStyle}>
           The concept graph lives in per-domain files under{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts/</code>.
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/concepts/</code>.
           Generators live in{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/</code>.
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>internal/generator/</code>.
           Here are the kinds of contributions that move the needle:
         </p>
         {[
@@ -150,7 +150,7 @@ go build ./cmd/mathua
         <h2 style={h2Style}>Step 1: Define a new concept</h2>
         <p style={bodyStyle}>
           Every concept lives in a per-domain file under{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts/</code>.
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/concepts/</code>.
           Add a JSON object with an ID, label, domain, prerequisite list, and mastery thresholds.
         </p>
         <pre style={codeBlockStyle}>
@@ -231,7 +231,7 @@ go build ./cmd/mathua
         <p style={bodyStyle}>
           A generator is a Go function that produces a unique problem every time it's called.
           There is no static question bank: every problem is built on demand. Generators live in{' '}
-          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>internal/generator/[domain]/</code> and
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>internal/generator/[domain]/</code> and
           implement the Generator interface.
         </p>
         <pre style={codeBlockStyle}>
@@ -311,7 +311,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'No orphans: every prerequisite must exist in the graph.',
         ].map((rule, i) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
-            <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
+            <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
             {rule}
@@ -339,7 +339,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'A maintainer reviews the concept ordering, thresholds, and generator quality.',
         ].map((step, i) => (
           <div key={step} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
-            <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px' }}>
+            <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px' }}>
               {i + 1}.
             </span>{' '}
             {step}
@@ -369,7 +369,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         ))}
         <div style={{ ...calloutStyle, marginTop: '1.5rem' }}>
           Read the full design system in{' '}
-          <a href="https://github.com/chuma-beep/mathua/blob/main/DESIGN.md" style={{ color: 'var(--accent-gold)', textDecoration: 'underline' }}>
+          <a href="https://github.com/chuma-beep/mathua/blob/main/DESIGN.md" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>
             DESIGN.md
           </a>{' '}
           for color palette, typography, spacing, and component patterns.

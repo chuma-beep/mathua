@@ -302,7 +302,7 @@ export default function SessionPage() {
               />
               <button
                 onClick={startGuestDiagnostic}
-                className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm"
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
               >
                 Start
               </button>
@@ -330,7 +330,7 @@ export default function SessionPage() {
                     onClick={() => toggleDomain(d.name)}
                     className={`rounded-none p-4 text-left transition-all text-sm ${
                       d.selected
-                        ? 'bg-mathua-blue text-white ring-2 ring-mathua-blue'
+                        ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
                     }`}
                   >
@@ -346,7 +346,7 @@ export default function SessionPage() {
               <button onClick={() => setScreen('name')} className="bg-mathua-surface border border-mathua-border rounded-none h-12 px-8 text-sm text-mathua-secondary hover:text-mathua-blue">
                 Back
               </button>
-              <button onClick={beginGuestDiagnostic} disabled={loading} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50">
+              <button onClick={beginGuestDiagnostic} disabled={loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50">
                 {loading ? 'Loading…' : 'Start diagnostic'}
               </button>
             </div>
@@ -370,7 +370,7 @@ export default function SessionPage() {
                   disabled={loading || diagLastResult !== null}
                   className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
-                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
+                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
                   Check Answer
                 </button>
               </div>
@@ -414,7 +414,7 @@ export default function SessionPage() {
                   </div>
                   <div>
                     <span className="font-mono text-[10px] uppercase text-mathua-muted">Mastered total</span>
-                    <div className="font-mono text-2xl text-mathua-gold mt-1">{scores.concepts_mastered}</div>
+                    <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.concepts_mastered}</div>
                   </div>
                   <div>
                     <span className="font-mono text-[10px] uppercase text-mathua-muted">Daily XP</span>
@@ -445,7 +445,7 @@ export default function SessionPage() {
                       />
                     </div>
                     {(scores.xp_today ?? 0) >= (scores.daily_xp_goal || 150) && (
-                      <div className="mt-1 font-mono text-[10px] text-mathua-gold uppercase">Goal reached! ★</div>
+                      <div className="mt-1 font-mono text-[10px] text-mathua-blue uppercase">Goal reached! ★</div>
                     )}
                   </div>
                 </div>
@@ -487,7 +487,7 @@ export default function SessionPage() {
                     />
                     <button
                       onClick={handleSubmit}
-                      className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 px-8 font-medium text-sm"
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
                     >
                       Check Answer
                     </button>
@@ -532,12 +532,12 @@ export default function SessionPage() {
               {question ? (
                 <button
                   onClick={nextQuestion}
-                  className="w-full bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 font-medium text-sm"
+                  className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm"
                 >
                   Next Question
                 </button>
               ) : (
-                <p className="text-mathua-gold text-center">
+                <p className="text-mathua-blue text-center">
                   All available concepts mastered! Come back tomorrow for reviews.
                 </p>
               )}

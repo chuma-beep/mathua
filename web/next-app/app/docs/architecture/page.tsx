@@ -28,7 +28,7 @@ const bodyStyle: React.CSSProperties = {
 }
 
 const calloutStyle: React.CSSProperties = {
-  borderLeft: '2px solid var(--accent-gold)',
+  borderLeft: '2px solid var(--accent-blue)',
   paddingLeft: '1.5rem',
   fontFamily: bodyFont,
   fontStyle: 'italic',
@@ -90,7 +90,7 @@ export default function ArchitecturePage() {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-gold)', lineHeight: 1 }}>
+            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-blue)', lineHeight: 1 }}>
               {num}
             </div>
             <div style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>
@@ -127,7 +127,7 @@ export default function ArchitecturePage() {
             'The diagnostic records a mastery estimate for every concept passed through.',
           ].map((step, i) => (
             <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
-              <span style={{ color: 'var(--accent-gold)', fontFamily: monoFont, fontSize: '13px', fontWeight: 500 }}>
+              <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px', fontWeight: 500 }}>
                 {i + 1}.
               </span>
               {' '}{step}

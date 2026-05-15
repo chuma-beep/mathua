@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"regexp"
 	"strconv"
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
@@ -311,6 +313,8 @@ func (g *divBasicGen) Generate(difficulty float64) generator.Problem {
 
 type divRemainderGen struct{}
 
+var remainderRe = regexp.MustCompile(`^(-?\d+)\s*R\s*(\d+)$`)
+
 func (g *divRemainderGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(10) + 2
 	r := rand.Intn(b-1) + 1
@@ -320,6 +324,18 @@ func (g *divRemainderGen) Generate(difficulty float64) generator.Problem {
 		Answer:      fmt.Sprintf("%d R %d", a/b, r),
 		Explanation: fmt.Sprintf("%d / %d = %d remainder %d", a, b, a/b, r),
 	}
+}
+
+func (g *divRemainderGen) Grade(expected, answer string) grader.Result {
+	e := remainderRe.FindStringSubmatch(expected)
+	a := remainderRe.FindStringSubmatch(answer)
+	if e == nil || a == nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Expected format: Q R (e.g. 5 R 3)"}
+	}
+	if e[1] == a[1] && e[2] == a[2] {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect"}
 }
 
 type divLongGen struct{}
@@ -354,6 +370,23 @@ func (g *divWordGen) Generate(difficulty float64) generator.Problem {
 
 type factorFindGen struct{}
 
+func parseFactorSet(s string) map[int]bool {
+	out := make(map[int]bool)
+	parts := strings.Split(s, ",")
+	for _, p := range parts {
+		p = strings.TrimSpace(p)
+		if p == "" {
+			continue
+		}
+		n, err := strconv.Atoi(p)
+		if err != nil {
+			return nil
+		}
+		out[n] = true
+	}
+	return out
+}
+
 func (g *factorFindGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(50) + 10
 	var factors []int
@@ -371,6 +404,23 @@ func (g *factorFindGen) Generate(difficulty float64) generator.Problem {
 		Answer:      strings.Join(fStr, ","),
 		Explanation: fmt.Sprintf("Factors of %d: %v", n, factors),
 	}
+}
+
+func (g *factorFindGen) Grade(expected, answer string) grader.Result {
+	eSet := parseFactorSet(expected)
+	aSet := parseFactorSet(answer)
+	if eSet == nil || aSet == nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Enter factors separated by commas, e.g. 1,2,3,6"}
+	}
+	if len(eSet) != len(aSet) {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect number of factors"}
+	}
+	for k := range eSet {
+		if !aSet[k] {
+			return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect"}
+		}
+	}
+	return grader.Result{Correct: true, Score: 1}
 }
 
 type primeGen struct{}
@@ -556,8 +606,9 @@ func (g *sqrtPerfectGen) Generate(difficulty float64) generator.Problem {
 
 type sqrtSimplifyGen struct{}
 
+var sqrtRe = regexp.MustCompile(`^(-?\d+)\s*sqrt\(\s*(\d+)\s*\)$`)
+
 func (g *sqrtSimplifyGen) Generate(difficulty float64) generator.Problem {
-	// sqrt(n) = a*sqrt(b) where n = a^2 * b
 	perfects := []int{2, 3, 4, 5, 6}
 	square := perfects[rand.Intn(len(perfects))]
 	b := rand.Intn(7) + 2
@@ -567,6 +618,18 @@ func (g *sqrtSimplifyGen) Generate(difficulty float64) generator.Problem {
 		Answer:      fmt.Sprintf("%d sqrt(%d)", square, b),
 		Explanation: fmt.Sprintf("sqrt(%d) = sqrt(%dx%d) = sqrt(%d) x sqrt(%d) = %d sqrt(%d)", n, square*square, b, square*square, b, square, b),
 	}
+}
+
+func (g *sqrtSimplifyGen) Grade(expected, answer string) grader.Result {
+	e := sqrtRe.FindStringSubmatch(expected)
+	a := sqrtRe.FindStringSubmatch(answer)
+	if e == nil || a == nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Expected format: a sqrt(b) (e.g. 3 sqrt(2))"}
+	}
+	if e[1] == a[1] && e[2] == a[2] {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect"}
 }
 
 type negNumberLineGen struct{}

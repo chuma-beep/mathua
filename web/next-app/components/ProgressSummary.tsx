@@ -27,10 +27,10 @@ const domainLabels: Record<string, string> = {
 
 export default function ProgressSummary({ scores, weakByDomain }: ProgressSummaryProps) {
   const stats = [
-    { label: 'Concepts mastered', value: scores.concepts_mastered, color: 'var(--accent-gold)' },
+    { label: 'Concepts mastered', value: scores.concepts_mastered, color: 'var(--accent-blue)' },
     { label: 'Day streak', value: scores.current_streak, color: 'var(--accent-teal)' },
     { label: 'Level', value: scores.level, color: 'var(--accent-blue)' },
-    { label: 'Weekly score', value: scores.weekly_score, color: 'var(--accent-gold)' },
+    { label: 'Weekly score', value: scores.weekly_score, color: 'var(--accent-blue)' },
   ]
 
   const weakDomains = weakByDomain

@@ -49,6 +49,7 @@ type AnswerResult struct {
 	Streak         int            `json:"streak"`
 	RequiredStreak int            `json:"required_streak"`
 	XP             int            `json:"xp"`
+	ExpectedAnswer string         `json:"expected_answer,omitempty"`
 }
 
 type Engine struct {
@@ -239,6 +240,22 @@ func diagramForConcept(id string) string {
 	return ""
 }
 
+// gradeAnswer delegates to the generator's own grader if it implements
+// GradedGenerator, otherwise falls back to the type-based router.
+func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string) grader.Result {
+	if gen, err := e.registry.Get(conceptID); err == nil {
+		if gg, ok := gen.(generator.GradedGenerator); ok {
+			return gg.Grade(expectedAnswer, userAnswer)
+		}
+	}
+	c := e.dag.Concept(conceptID)
+	gradingType := grader.GradingNumeric
+	if c != nil {
+		gradingType = grader.GradingType(c.GradingType)
+	}
+	return e.gr.Grade(gradingType, expectedAnswer, userAnswer)
+}
+
 func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapsedSeconds float64) (*AnswerResult, error) {
 	e.mu.Lock()
 	as := e.sessions[sessionID]
@@ -247,12 +264,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		return nil, fmt.Errorf("no active question for session %q", sessionID)
 	}
 
-	concept := e.dag.Concept(as.conceptID)
-	gradingType := grader.GradingNumeric
-	if concept != nil {
-		gradingType = grader.GradingType(concept.GradingType)
-	}
-	gr := e.gr.Grade(gradingType, as.expectedAnswer, answer)
+	gr := e.gradeAnswer(as.conceptID, as.expectedAnswer, answer)
 
 	progress, err := e.repo.GetProgress(studentID, as.conceptID)
 	if err != nil {
@@ -390,6 +402,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		Streak:         progress.Streak,
 		RequiredStreak: as.requiredStreak,
 		XP:             xp,
+		ExpectedAnswer: as.expectedAnswer,
 	}, nil
 }
 

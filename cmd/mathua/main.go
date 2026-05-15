@@ -228,7 +228,7 @@ func main() {
 			return tui.SubmitResultMsg{
 				Correct:          result.Correct,
 				UserAnswer:       answer,
-				CorrectAnswer:    answer,
+				CorrectAnswer:    result.ExpectedAnswer,
 				Explanation:      result.Explanation,
 				ElapsedSecs:      elapsed,
 				NewMastery:       newMastery,

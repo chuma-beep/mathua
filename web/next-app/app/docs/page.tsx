@@ -52,7 +52,7 @@ export default function DocsIndexPage() {
           <span style={{
             fontFamily: monoFont,
             fontSize: '13px',
-            color: 'var(--accent-gold)',
+            color: 'var(--accent-blue)',
             minWidth: '1.5rem',
             paddingTop: '1px',
           }}>
@@ -89,7 +89,7 @@ export default function DocsIndexPage() {
           <span style={{
             fontFamily: monoFont,
             fontSize: '13px',
-            color: 'var(--accent-gold)',
+            color: 'var(--accent-blue)',
             minWidth: '1.5rem',
             paddingTop: '1px',
           }}>

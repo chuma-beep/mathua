@@ -9,7 +9,7 @@ interface PipelineProps {
 }
 
 const statusStyle: Record<string, React.CSSProperties> = {
-  mastered: { color: 'var(--accent-gold)' },
+  mastered: { color: 'var(--accent-blue)' },
   decaying: { color: 'var(--accent-teal)' },
 }
 

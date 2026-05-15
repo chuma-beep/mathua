@@ -75,7 +75,7 @@ export default function DiagnosePage() {
         </p>
 
         <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center">
-          <button className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-10 px-6 text-[13px] font-medium transition-colors">
+          <button className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-10 px-6 text-[13px] font-medium transition-colors">
             Start Diagnostic
           </button>
           <button className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-md h-10 px-6 text-[13px] font-medium transition-colors">

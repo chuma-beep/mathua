@@ -7,7 +7,7 @@ interface FormulaBlockProps {
 const formulaPreStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
-  borderLeft: '2px solid var(--accent-gold)',
+  borderLeft: '2px solid var(--accent-blue)',
   borderRadius: 0,
   padding: '0.5rem 0 0.5rem 1.5rem',
   fontFamily: "'IBM Plex Mono', monospace",
