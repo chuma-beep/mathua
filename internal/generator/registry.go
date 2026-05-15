@@ -28,8 +28,34 @@ func (r *Registry) Register(conceptID string, gen Generator) error {
 	if _, exists := r.gens[conceptID]; exists {
 		return fmt.Errorf("generator already registered for concept %q", conceptID)
 	}
+	// Self-validation: if the generator implements GradedGenerator, verify
+	// it can correctly grade its own answer.
+	if gg, ok := gen.(GradedGenerator); ok {
+		p := gg.Generate(0.5)
+		result := gg.Grade(p.Answer, p.Answer)
+		if !result.Correct {
+			return fmt.Errorf("generator for %q cannot grade its own answer (expected=%q): %s",
+				conceptID, p.Answer, result.Feedback)
+		}
+		// Also verify it rejects a clearly wrong answer
+		wrongResult := gg.Grade(p.Answer, "")
+		if wrongResult.Correct {
+			return fmt.Errorf("generator for %q accepted empty answer as correct", conceptID)
+		}
+	}
 	r.gens[conceptID] = gen
 	return nil
+}
+
+// Get returns the generator for a concept ID.
+func (r *Registry) Get(conceptID string) (Generator, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	gen, exists := r.gens[conceptID]
+	if !exists {
+		return nil, fmt.Errorf("no generator registered for concept %q", conceptID)
+	}
+	return gen, nil
 }
 
 func (r *Registry) Generate(conceptID string, difficulty float64) (Problem, error) {

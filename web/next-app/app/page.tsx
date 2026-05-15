@@ -128,7 +128,7 @@ export default function HomePage() {
   const monoFont = "'IBM Plex Mono', monospace"
 
   const ctaPrimaryStyle: React.CSSProperties = {
-    background: 'var(--accent-gold)',
+    background: 'var(--accent-blue)',
     color: 'var(--bg)',
     fontFamily: monoFont,
     fontSize: '13px',
@@ -176,7 +176,7 @@ export default function HomePage() {
   const codeQuoteStyle: React.CSSProperties = {
     background: 'transparent',
     border: 'none',
-    borderLeft: '2px solid var(--accent-gold)',
+    borderLeft: '2px solid var(--accent-blue)',
     borderRadius: 0,
     padding: '0.5rem 0 0.5rem 1rem',
     fontFamily: monoFont,
@@ -279,7 +279,7 @@ export default function HomePage() {
         <div style={{ marginTop: '2rem' }}>
           <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
-              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>I.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-blue)' }}>I.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Mastery gating</span>
             </div>
             <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
@@ -290,7 +290,7 @@ export default function HomePage() {
 
           <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
-              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>II.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-blue)' }}>II.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Concept graph</span>
             </div>
             <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
@@ -301,7 +301,7 @@ export default function HomePage() {
 
           <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
             <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
-              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-gold)' }}>III.</span>
+              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-blue)' }}>III.</span>
               <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>Spaced repetition</span>
             </div>
             <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
@@ -493,7 +493,7 @@ export default function HomePage() {
               fontFamily: headingFont,
               fontStyle: 'italic',
               fontSize: '1rem',
-              color: 'var(--accent-gold)',
+              color: 'var(--accent-blue)',
             }}
           >
             Read CONTRIBUTING.md →

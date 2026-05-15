@@ -19,7 +19,7 @@ export default function SectionHeader({ label, title, center = false, className 
           fontFamily: "'IBM Plex Serif', serif",
           fontWeight: 400,
           color: 'var(--text-primary)',
-          borderLeft: '2px solid var(--accent-gold)',
+          borderLeft: '2px solid var(--accent-blue)',
           paddingLeft: '1rem',
           marginBottom: '1.5rem',
         }}

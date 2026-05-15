@@ -411,7 +411,7 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
           </span>
         )}
         {onPath && (
-          <span style={{ color: 'var(--accent-gold)', fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>on path</span>
+          <span style={{ color: 'var(--accent-blue)', fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>on path</span>
         )}
       </div>
       {prereqConcepts.length > 0 && (

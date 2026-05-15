@@ -27,8 +27,8 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
           className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap"
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
-            color: activeSection === section.id ? 'var(--accent-gold)' : 'var(--text-muted)',
-            borderLeft: activeSection === section.id ? '2px solid var(--accent-gold)' : '2px solid transparent',
+            color: activeSection === section.id ? 'var(--accent-blue)' : 'var(--text-muted)',
+            borderLeft: activeSection === section.id ? '2px solid var(--accent-blue)' : '2px solid transparent',
             textDecoration: 'none',
             borderRadius: 0,
             background: 'transparent',
@@ -67,7 +67,7 @@ const bodyStyle: React.CSSProperties = {
 const codeBlockStyle: React.CSSProperties = {
   background: 'transparent',
   border: 'none',
-  borderLeft: '2px solid var(--accent-gold)',
+  borderLeft: '2px solid var(--accent-blue)',
   borderRadius: 0,
   padding: '0.5rem 0 0.5rem 1.5rem',
   fontFamily: monoFont,
@@ -85,9 +85,9 @@ const tableHeaderStyle: React.CSSProperties = {
   fontSize: '0.9rem',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.1em',
-  color: 'var(--accent-gold)',
+  color: 'var(--accent-blue)',
   padding: '10px 14px 10px 0',
-  borderBottom: '1px solid var(--accent-gold)',
+  borderBottom: '1px solid var(--accent-blue)',
   textAlign: 'left' as const,
   background: 'transparent',
 }
@@ -192,18 +192,18 @@ export default function HowItWorksPage() {
             </pre>
             <p style={bodyStyle}>
               The graph is stored as a flat JSON file:{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>data/concepts.json</code>, and{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/concepts.json</code>, and{' '}
               is community-editable. A graph validator runs on every pull request and rejects the
               change if it introduces a cycle.
             </p>
             <div className="flex items-center gap-2 flex-wrap my-6">
-              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>arith.factor.gcf</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-blue)' }}>arith.factor.gcf</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>arith.factor.lcm</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-blue)' }}>arith.factor.lcm</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>frac.add.diff</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-blue)' }}>frac.add.diff</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-gold)' }}>frac.mixed.add</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--accent-blue)' }}>frac.mixed.add</span>
             </div>
           </section>
 
@@ -222,7 +222,7 @@ export default function HowItWorksPage() {
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
               <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>PRACTICING</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-gold)' }}>MASTERED</span>
+              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-blue)' }}>MASTERED</span>
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
               <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-teal)' }}>DECAYING</span>
             </div>
@@ -313,7 +313,7 @@ minimum value: 1.3`}
                       left: 0,
                       fontFamily: monoFont,
                       fontSize: '13px',
-                      color: 'var(--accent-gold)',
+                      color: 'var(--accent-blue)',
                     }}
                   >
                     {roman(i + 1)}.
@@ -366,7 +366,7 @@ minimum value: 1.3`}
                   fontSize: '0.95rem',
                   color: 'var(--text-secondary)',
                   lineHeight: 1.7,
-                  borderLeft: '2px solid var(--accent-gold)',
+                  borderLeft: '2px solid var(--accent-blue)',
                   paddingLeft: '1rem',
                   margin: '0.5rem 0',
                 }}
@@ -427,7 +427,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 }`}
             </pre>
             <p style={bodyStyle}>
-              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-gold)' }}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
+              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
               The scheduler passes a difficulty value based on the student's current mastery score.
             </p>
           </section>

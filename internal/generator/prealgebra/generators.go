@@ -515,10 +515,11 @@ func (g *eqTwoStepGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(9) + 2
 	b := rand.Intn(15) - 7
 	rhs := a*x + b
+	lhs := formatExpr(a, b)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d = %d", a, b, rhs),
+		Question:    fmt.Sprintf("Solve: %s = %d", lhs, rhs),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%dx + %d = %d, subtract %d: %dx = %d, divide by %d: x = %d", a, b, rhs, b, a, rhs-b, a, x),
+		Explanation: fmt.Sprintf("%s = %d -> %dx = %d -> x = %d.", lhs, rhs, a, rhs-b, x),
 	}
 }
 
@@ -548,7 +549,7 @@ func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: x + %d > %d", b, c),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d. Smallest integer: %d.", b, c, b, c-b, x),
+		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d.", b, c, b, c-b),
 	}
 }
 
@@ -558,11 +559,30 @@ func (g *ineqTwoStepGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(5) + 2
 	b := rand.Intn(8) - 3
-	c := a*x + b - 1
+	// We want ax + b < c where x is the largest integer solution.
+	// x must satisfy: ax + b < c
+	// x+1 must NOT satisfy: a(x+1) + b >= c
+	// So c in (ax + b, a(x+1) + b]
+	c := a*x + b + rand.Intn(a) + 1
+	q := formatIneq(a, b, c)
 	return generator.Problem{
-		Question: fmt.Sprintf("Solve: %dx + %d < %d", a, b, c),
-		Answer:   fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%dx + %d < %d, subtract %d: %dx < %d, divide: x < %.1f. Largest integer: %d.",
-			a, b, c, b, a, c-b, float64(c-b)/float64(a), x),
+		Question:    q,
+		Answer:      fmt.Sprintf("%d", x),
+		Explanation: fmt.Sprintf("Solve %s -> %dx < %d -> x < %.1f -> x = %d.", q, a, c-b, float64(c-b)/float64(a), x),
 	}
+}
+
+func formatIneq(a, b, c int) string {
+	lhs := formatExpr(a, b)
+	return fmt.Sprintf("%s < %d", lhs, c)
+}
+
+func formatExpr(a, b int) string {
+	if b == 0 {
+		return fmt.Sprintf("%dx", a)
+	}
+	if b < 0 {
+		return fmt.Sprintf("%dx - %d", a, -b)
+	}
+	return fmt.Sprintf("%dx + %d", a, b)
 }

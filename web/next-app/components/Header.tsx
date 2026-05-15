@@ -50,7 +50,7 @@ export default function Header({ links }: HeaderProps) {
         <div className="flex items-center gap-4 md:gap-6 min-w-0">
           <Link
             href="/"
-            className="link-underline font-mono text-sm text-mathua-gold whitespace-nowrap shrink-0"
+            className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
           >
             λ Mathua
           </Link>
@@ -63,7 +63,7 @@ export default function Header({ links }: HeaderProps) {
                 )}
                 <Link
                   href={link.href}
-                  className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-gold whitespace-nowrap transition-colors"
+                  className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-blue whitespace-nowrap transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -77,7 +77,7 @@ export default function Header({ links }: HeaderProps) {
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="font-mono text-xs text-mathua-muted bg-transparent border border-mathua-border-strong px-2.5 py-1 cursor-pointer rounded-none hover:text-mathua-gold hover:border-mathua-gold transition-colors"
+              className="font-mono text-xs text-mathua-muted bg-transparent border border-mathua-border-strong px-2.5 py-1 cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
             >
               {theme === 'dark' ? '\u2600' : '\u263E'}
             </button>
@@ -85,7 +85,7 @@ export default function Header({ links }: HeaderProps) {
 
           <button
             onClick={() => setMenuOpen((p) => !p)}
-            className="md:hidden flex items-center justify-center size-6 text-mathua-muted hover:text-mathua-gold transition-colors"
+            className="md:hidden flex items-center justify-center size-6 text-mathua-muted hover:text-mathua-blue transition-colors"
             aria-label="Toggle navigation menu"
           >
             <span
@@ -110,7 +110,7 @@ export default function Header({ links }: HeaderProps) {
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="font-mono text-xs text-mathua-muted hover:text-mathua-gold transition-colors"
+              className="font-mono text-xs text-mathua-muted hover:text-mathua-blue transition-colors"
             >
               {link.label}
             </Link>

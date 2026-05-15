@@ -33,14 +33,14 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
               style={{
                 borderBottom: '0.5px solid var(--border)',
                 background: 'transparent',
-                ...(level.elite ? { borderTop: '1px solid var(--accent-gold)' } : {}),
+                ...(level.elite ? { borderTop: '1px solid var(--accent-blue)' } : {}),
               }}
             >
               <td
                 style={{
                   fontFamily: "'IBM Plex Serif', serif",
                   fontSize: '13px',
-                  color: 'var(--accent-gold)',
+                  color: 'var(--accent-blue)',
                   padding: '8px 12px 8px 0',
                   whiteSpace: 'nowrap',
                   verticalAlign: 'baseline',

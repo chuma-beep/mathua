@@ -3,6 +3,7 @@ package algebra
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -231,12 +232,19 @@ type compoundIneqGen struct{}
 
 func (g *compoundIneqGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
-	a := x - 1
-	b := x + 2
+	b := rand.Intn(3) + 2
+	c := rand.Intn(5) - 2
+	// We want a < bx + c < d with exactly one integer solution x.
+	// x satisfies: a < bx + c < d
+	// x-1 fails: a >= b(x-1) + c
+	// x+1 fails: b(x+1) + c >= d
+	// So: a = b(x-1) + c + 1, d = bx + c + 1
+	a := b*(x-1) + c + 1
+	d := b*x + c + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %d < x + 1 < %d", a, b),
+		Question:    fmt.Sprintf("Solve: %d < %dx + %d < %d", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%d < x + 1 < %d -> %d < x < %d, so x = %d.", a, b, a-1, b-1, x),
+		Explanation: fmt.Sprintf("%d < %dx + %d < %d -> %.1f < x < %.1f -> x = %d.", a, b, c, d, float64(a-c)/float64(b), float64(d-c)/float64(b), x),
 	}
 }
 
@@ -425,8 +433,9 @@ func (g *quadSolveFactorGen) Generate(difficulty float64) generator.Problem {
 	r2 := rand.Intn(8) - 4
 	b := -(r1 + r2)
 	c := r1 * r2
+	q := formatQuadratic(b, c)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x^2 + %dx + %d = 0", b, c),
+		Question:    fmt.Sprintf("Solve: %s = 0", q),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("Factors: (x %+d)(x %+d) = 0, so x = %d or x = %d.", -r1, -r2, r1, r2),
 	}
@@ -451,8 +460,9 @@ func (g *quadFormulaGen) Generate(difficulty float64) generator.Problem {
 	r2 := rand.Intn(8) + 1
 	b := -(r1 + r2)
 	c := r1 * r2
+	q := formatQuadratic(b, c)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve using quadratic formula: x^2 + %dx + %d = 0", b, c),
+		Question:    fmt.Sprintf("Solve using quadratic formula: %s = 0", q),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("x = [-%d +/- sqrt(%d - 4(%d))]/2 = %d or %d.", b, b*b, c, r1, r2),
 	}
@@ -723,6 +733,41 @@ func formatLinear(m, b int) string {
 		return fmt.Sprintf("y = %dx - %d", m, -b)
 	}
 	return fmt.Sprintf("y = %dx + %d", m, b)
+}
+
+// formatLinearExpr formats "ax + b" with proper signs, e.g. "3x - 5"
+func formatLinearExpr(a, b int) string {
+	if b == 0 {
+		return fmt.Sprintf("%dx", a)
+	}
+	if b < 0 {
+		return fmt.Sprintf("%dx - %d", a, -b)
+	}
+	return fmt.Sprintf("%dx + %d", a, b)
+}
+
+func formatQuadratic(b, c int) string {
+	var parts []string
+	parts = append(parts, "x^2")
+	if b != 0 {
+		if b == 1 {
+			parts = append(parts, "+ x")
+		} else if b == -1 {
+			parts = append(parts, "- x")
+		} else if b > 0 {
+			parts = append(parts, fmt.Sprintf("+ %dx", b))
+		} else {
+			parts = append(parts, fmt.Sprintf("- %dx", -b))
+		}
+	}
+	if c != 0 {
+		if c > 0 {
+			parts = append(parts, fmt.Sprintf("+ %d", c))
+		} else {
+			parts = append(parts, fmt.Sprintf("- %d", -c))
+		}
+	}
+	return strings.Join(parts, " ")
 }
 
 type ineqTwoVarGen struct{}

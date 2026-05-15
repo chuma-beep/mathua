@@ -15,9 +15,9 @@ const thStyle: React.CSSProperties = {
   fontSize: '0.8rem',
   textTransform: 'uppercase',
   letterSpacing: '0.1em',
-  color: 'var(--accent-gold)',
+  color: 'var(--accent-blue)',
   padding: '10px 20px 10px 0',
-  borderBottom: '1px solid var(--accent-gold)',
+  borderBottom: '1px solid var(--accent-blue)',
   background: 'transparent',
 }
 
@@ -84,7 +84,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
                 style={{
                   fontFamily: "'IBM Plex Mono', monospace",
                   fontSize: '0.9rem',
-                  color: 'var(--accent-gold)',
+                  color: 'var(--accent-blue)',
                   textAlign: 'right',
                   padding: '14px 0 14px 20px',
                   background: 'transparent',

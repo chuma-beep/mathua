@@ -87,8 +87,8 @@ export default function LoginPage() {
           </span>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
           <div className="flex gap-2 mt-6 mb-4">
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'login' ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'signup' ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
           </div>
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 space-y-4">
             {state.tab === 'signup' && (
@@ -106,7 +106,7 @@ export default function LoginPage() {
               <input id="password" type="password" value={state.password} onChange={(e) => dispatch({ type: 'SET_PASSWORD', password: e.target.value })} onKeyDown={(e) => e.key === 'Enter' && handleSubmit()} placeholder="password" className="w-full mt-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
-            <button onClick={handleSubmit} disabled={state.loading} className="w-full bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-none h-12 font-medium text-sm disabled:opacity-50">
+            <button onClick={handleSubmit} disabled={state.loading} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? 'Loading\u2026' : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="mt-3 text-center">

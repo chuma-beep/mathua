@@ -93,12 +93,12 @@ export default function GraphPage() {
         ) : connected && !loggedIn ? (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
             Sign in or{' '}
-            <Link href="/session" className="text-mathua-gold hover:underline">start a practice session</Link>
+            <Link href="/session" className="text-mathua-blue hover:underline">start a practice session</Link>
             {' '}to track your progress across the concept map.
           </p>
         ) : (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
-            <Link href="/session" className="text-mathua-gold hover:underline">Start practicing</Link>
+            <Link href="/session" className="text-mathua-blue hover:underline">Start practicing</Link>
             {' '}to track your progress across the concept map.
           </p>
         )}

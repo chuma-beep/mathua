@@ -44,7 +44,7 @@ export default function NotFound() {
         <div className="mt-10 flex flex-wrap items-center gap-3">
           <Link
             href="/"
-            className="inline-flex items-center justify-center border border-mathua-blue bg-mathua-blue px-5 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-mathua-bg transition-colors hover:bg-mathua-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mathua-primary"
+            className="inline-flex items-center justify-center border border-mathua-blue px-5 py-2.5 font-mono text-xs uppercase tracking-[0.18em] text-mathua-blue transition-colors hover:bg-mathua-blue hover:text-mathua-bg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mathua-primary"
           >
             ← Return home
           </Link>

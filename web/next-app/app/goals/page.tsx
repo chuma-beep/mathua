@@ -247,11 +247,11 @@ export default function GoalsPage() {
                     <button
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
-                      className={`rounded-lg p-4 text-left transition-all text-sm ${
-                        d.selected
-                          ? 'bg-mathua-blue text-white ring-2 ring-mathua-blue'
-                          : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
-                      }`}
+                    className={`rounded-lg p-4 text-left transition-all text-sm ${
+                      d.selected
+                        ? 'border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white'
+                        : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                    }`}
                     >
                       <div className="font-medium">{label}</div>
                       <div className={`font-mono text-[10px] mt-1 ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
@@ -266,7 +266,7 @@ export default function GoalsPage() {
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
-                  className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
                   {loading ? 'Loading…' : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
                 </button>
@@ -298,7 +298,7 @@ export default function GoalsPage() {
                     <button
                       onClick={submitAnswer}
                       disabled={!answerInput.trim() || loading || lastResult !== null}
-                      className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
                     >
                       Check Answer
                     </button>
@@ -368,7 +368,7 @@ export default function GoalsPage() {
 
                 <button
                   onClick={startPractice}
-                  className="bg-mathua-blue text-white hover:bg-mathua-blue-hover rounded-md h-12 px-10 font-medium text-sm"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm"
                 >
                   Start practicing
                 </button>
