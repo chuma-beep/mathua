@@ -159,7 +159,7 @@ export default function SessionPage() {
   }
 
   function toggleDomain(name: string) {
-    setDomains(prev => prev.map(d => d.name === name ? { ...d, selected: !d.selected } : d))
+    setDomains(prev => prev.map(d => ({ ...d, selected: d.name === name ? !d.selected : false })))
   }
 
   async function beginGuestDiagnostic() {
@@ -331,7 +331,7 @@ export default function SessionPage() {
                     className={`rounded-none p-4 text-left transition-all text-sm ${
                       d.selected
                         ? 'bg-mathua-blue text-white'
-                        : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                        : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:bg-mathua-blue hover:text-white'
                     }`}
                   >
                     <div className="font-medium">{label}</div>
