@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import Header from '../../components/Header'
 import AsciiDivider from '../../components/AsciiDivider'
+import MermaidDiagram from '../../components/MermaidDiagram'
+import MermaidAscii from '../../components/MermaidAscii'
 
 const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
@@ -226,6 +228,13 @@ export default function HowItWorksPage() {
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
               <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-teal)' }}>DECAYING</span>
             </div>
+            <MermaidDiagram code={`stateDiagram-v2
+    [*] --> UNSEEN
+    UNSEEN --> LEARNING: first correct
+    LEARNING --> PRACTICING: streak reached
+    PRACTICING --> MASTERED: threshold met
+    MASTERED --> DECAYING: interval elapsed
+    DECAYING --> PRACTICING: review correct`} />
             <div className="overflow-x-auto my-4">
               <table
                 style={{
@@ -322,6 +331,15 @@ minimum value: 1.3`}
                 </li>
               ))}
             </ol>
+            <MermaidDiagram code={`graph TD
+    Start((Start)) --> Mid[Test midpoint concept]
+    Mid --> Correct{Correct within time limit?}
+    Correct -->|Yes| Forward[Move forward: harder concepts]
+    Correct -->|No| Backward[Move backward: foundational concepts]
+    Forward --> Check{3 correct in a row?}
+    Backward --> Check
+    Check -->|Yes| Lock([Frontier locked])
+    Check -->|No| Mid`} />
             <p style={bodyStyle}>
               The diagnostic takes 20–35 questions for most students. Without this algorithm, a
               naive assessment of 284 concepts would require up to 284 questions. The CAT approach,
@@ -371,9 +389,18 @@ minimum value: 1.3`}
                   margin: '0.5rem 0',
                 }}
               >
-                {rule}
-              </div>
+              {rule}
+            </div>
             ))}
+            <MermaidDiagram code={`graph TD
+    Submit[Question submitted] --> Score[Compute priority\nfor each concept]
+    Score --> Enforce[Enforce hard rules]
+    Enforce --> R1[Prerequisites\nmust be MASTERED]
+    Enforce --> R2[No same concept\ntwice in a row]
+    Enforce --> R3[70% practice\n30% review]
+    R1 --> Select[Select highest\npriority concept]
+    R2 --> Select
+    R3 --> Select`} />
           </section>
 
           <AsciiDivider pattern="dash" />
@@ -451,19 +478,20 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
               student's input into a coefficient representation, normalises it, and compares against
               the expected answer.
             </p>
-            <div className="flex items-center gap-2 flex-wrap my-4">
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Input</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Tokenizer</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Parser (AST)</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-secondary)' }}>Expander / Normaliser</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--border-strong)' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--accent-teal)' }}>
-                Match
-              </span>
-            </div>
+            <MermaidDiagram code={`graph LR
+    Input[Student Input] --> Tokenizer[Tokenizer]
+    Tokenizer --> Parser[Parser / AST]
+    Parser --> Expander[Expander / Normaliser]
+    Expander --> Match{Match expected?}
+    Match -->|Yes| Correct[✓ Correct]
+    Match -->|No| Wrong[✗ Incorrect]`} />
+            <MermaidAscii code={`graph LR
+    Input[Input] --> Tokenizer[Tokenizer]
+    Tokenizer --> Parser[AST]
+    Parser --> Expander[Expand/Normalise]
+    Expander --> Match{Match?}
+    Match -->|Yes| Correct[OK]
+    Match -->|No| Wrong[FAIL]`} />
             <pre style={{
               ...codeBlockStyle,
               whiteSpace: 'pre',
