@@ -392,12 +392,12 @@ minimum value: 1.3`}
             </div>
             ))}
             <MermaidDiagram code={`graph TD
-    Submit[Question submitted] --> Score[Compute priority\nfor each concept]
+    Submit[Question submitted] --> Score[Compute priority\\nfor each concept]
     Score --> Enforce[Enforce hard rules]
-    Enforce --> R1[Prerequisites\nmust be MASTERED]
-    Enforce --> R2[No same concept\ntwice in a row]
-    Enforce --> R3[70% practice\n30% review]
-    R1 --> Select[Select highest\npriority concept]
+    Enforce --> R1[Prerequisites\\nmust be MASTERED]
+    Enforce --> R2[No same concept\\ntwice in a row]
+    Enforce --> R3[70% practice\\n30% review]
+    R1 --> Select[Select highest\\npriority concept]
     R2 --> Select
     R3 --> Select`} />
           </section>
