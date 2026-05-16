@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"strings"
 	"syscall"
 	"time"
@@ -118,7 +119,7 @@ func main() {
 		mux := http.NewServeMux()
 		srv.Register(mux)
 		if info, err := os.Stat("web/next-app/out"); err == nil && info.IsDir() {
-			mux.Handle("/", http.FileServer(http.Dir("web/next-app/out")))
+			mux.Handle("/", nextStaticFS("web/next-app/out"))
 			fmt.Println("serving static frontend from web/next-app/out")
 		}
 		httpSrv := &http.Server{
@@ -321,4 +322,30 @@ func main() {
 			log.Fatalf("tui: %v", err)
 		}
 	}
+}
+
+// nextStaticFS wraps http.FileServer to support Next.js static exports
+// where routes like /session map to session.html files.
+func nextStaticFS(root string) http.Handler {
+	fs := http.FileServer(http.Dir(root))
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path == "/" {
+			fs.ServeHTTP(w, r)
+			return
+		}
+		localPath := filepath.Join(root, r.URL.Path)
+		if _, err := os.Stat(localPath); err == nil {
+			fs.ServeHTTP(w, r)
+			return
+		}
+		if filepath.Ext(r.URL.Path) == "" {
+			htmlPath := r.URL.Path + ".html"
+			if _, err := os.Stat(filepath.Join(root, htmlPath)); err == nil {
+				r.URL.Path = htmlPath
+				fs.ServeHTTP(w, r)
+				return
+			}
+		}
+		fs.ServeHTTP(w, r)
+	})
 }

@@ -15,7 +15,7 @@ go build ./cmd/mathua
 
 The concept graph lives in per-domain files under `data/concepts/`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
 
-- New concepts — the single most impactful thing you can add.
+- New concepts — the single most impactful thing you can add. Concepts using `polynomial` or `expression` grading require Python 3.8+ and `sympy` for full equivalence checking (falls back to string comparison if unavailable).
 - New generators — make existing or new concepts produce better problems.
 - Bug fixes in the scheduling engine or graders.
 - Documentation and diagram improvements.
@@ -24,22 +24,28 @@ The concept graph lives in per-domain files under `data/concepts/`. Generators l
 
 ### 1. Define a new concept
 
-Add a JSON entry to the appropriate domain file in `data/concepts/` (e.g. `data/concepts/arithmetic.json`):
+Concepts live in per-domain files under `data/concepts/`. Each file is a JSON array — add your new concept as a new entry in the array for the matching domain:
 
 ```json
-{
-  "id":                "arith.mult.tables",
-  "label":             "Multiplication tables 1-12",
-  "domain":            "arithmetic",
-  "subdomain":         "arithmetic.multiplication",
-  "grading_type":      "numeric",
-  "prerequisites":     ["arith.add.multi"],
-  "mastery_threshold": {
-    "streak":           7,
-    "avg_time_seconds": 6.0
+[
+  { "id": "arith.add.single", "label": "Single-digit addition", ... },
+  { "id": "arith.add.multi",  "label": "Multi-digit addition",  ... },
+  {
+    "id":                "arith.mult.tables",
+    "label":             "Multiplication tables 1-12",
+    "domain":            "arithmetic",
+    "subdomain":         "arithmetic.multiplication",
+    "grading_type":      "numeric",
+    "prerequisites":     ["arith.add.multi"],
+    "mastery_threshold": {
+      "streak":           7,
+      "avg_time_seconds": 6.0
+    }
   }
-}
+]
 ```
+
+Valid `grading_type` values: `numeric`, `polynomial`, `expression`, `multiple_choice`, `comparison`, `ordering`.
 
 > The prerequisites list is the most important field. What must a student absolutely know before attempting this? If in doubt, add the prerequisite — the graph validator will catch cycles.
 
@@ -94,6 +100,16 @@ go test ./... -count 1000
 go run scripts/validate_graph.go
 ```
 
+### 4. (Optional) Write a lesson
+
+Mathua includes a built-in lesson system. Each concept can have an associated lesson — a markdown file that teaches the material. Lessons live under `data/lessons/` and are registered in `data/lessons/lessons.json`, which maps concept IDs to file paths:
+
+```json
+  { "concept_id": "calc.deriv.power_rule", "source": "advanced/polynomials/polynomials.md" }
+```
+
+Multiple concepts can share a single lesson file. Lesson content is written in Markdown with LaTeX via `\( ... \)` or `\[ ... \]` delimiters and rendered inside the app as a sidebar panel alongside practice problems.
+
 ## The graph validator
 
 A validator runs on every pull request. It checks two invariants before any merge can happen:
@@ -106,7 +122,8 @@ A validator runs on every pull request. It checks two invariants before any merg
 1. Add the concept to the appropriate domain file in `data/concepts/` with correct prerequisites.
 2. Write the generator in the appropriate domain subdirectory.
 3. Write the fuzz test with 1 000 samples.
-4. Run `go test ./...` and `go run scripts/validate_graph.go` locally.
+4. (Optional) Write a lesson and register it in `data/lessons/lessons.json`.
+5. Run `go test ./...` and `go run scripts/validate_graph.go` locally.
 5. Open a PR. The CI pipeline runs the validator and all tests automatically.
 6. A maintainer reviews the concept ordering, thresholds, and generator quality.
 

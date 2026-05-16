@@ -19,8 +19,9 @@ Mathua is a single Go binary with two delivery modes. The engine core is identic
 │  Mastery Tracking · Scoring                   │
 ├──────────────────────────────────────────────┤
 │  Grading                                       │
-│  Numeric grader (Go)                           │
-│  Polynomial grader (future)                    │
+│  Numeric · Choice · Comparison · Ordering (Go)  │
+│  Symbolic (Go) — fallback                       │
+│  Polynomial & Expression → SymPy (Python)       │
 ├──────────────────────────────────────────────┤
 │  Storage                                       │
 │  SQLite (desktop) · PostgreSQL (web)           │
@@ -44,9 +45,17 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 - **Mastery & Spaced Repetition** — Tracks mastery via streak and response time. Simplified SM-2 algorithm schedules reviews.
 - **Scoring** — Two scores: lifetime topic score (permanent) and weekly score (resets every Monday).
 
-### Grading — Numeric and symbolic
+### Grading — Six strategies
 
-Two grading strategies: numeric (string/integer comparison for arithmetic) and polynomial (pure-Go expansion and coefficient comparison for algebra). No Python, no SymPy, no subprocess dependencies.
+Six grader types handled by a single `Router`:
+
+- **Numeric** — integer, float, fraction, mixed number, scientific notation (pure Go).
+- **Choice** — case-insensitive multiple-choice matching.
+- **Comparison** — comparison operators (`>`, `<`, `=`, `>=`, `<=`).
+- **Ordering** — ordered sequences separated by delimiters.
+- **Symbolic** — string normalisation fallback for when SymPy is unavailable.
+
+**Polynomial and Expression** — `polynomial` and `expression` grading types route through a long-lived Python subprocess running `grading/sympy_service.py`. The Go client sends a JSON expression pair over stdin; SymPy parses both into expression trees and tests equivalence via `simplify(expected - answer) == 0`. If Python/SymPy are not installed, grading falls back gracefully to the pure-Go `symbolic` string normaliser.
 
 ### Storage — SQLite and Postgres
 
