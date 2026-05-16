@@ -2,24 +2,43 @@
 
 import { useMemo } from 'react'
 import { renderMermaidSVG } from 'beautiful-mermaid'
+import { useTheme } from '../hooks/useTheme'
 
 interface MermaidDiagramProps {
   code: string
   className?: string
 }
 
+const LIGHT_COLORS = {
+  bg: '#ffffff',
+  fg: '#18181b',
+  accent: '#2563eb',
+  muted: '#71717a',
+  surface: '#f4f4f5',
+  border: '#a1a1aa',
+  line: '#a1a1aa',
+}
+
+const DARK_COLORS = {
+  bg: '#18181b',
+  fg: '#fafafa',
+  accent: '#60a5fa',
+  muted: '#a1a1aa',
+  surface: '#27272a',
+  border: '#52525b',
+  line: '#52525b',
+}
+
 export default function MermaidDiagram({ code, className = '' }: MermaidDiagramProps) {
+  const { theme, mounted } = useTheme()
+
   const { svg, error } = useMemo(() => {
+    if (!mounted) return { svg: null, error: null }
     try {
+      const colors = theme === 'light' ? LIGHT_COLORS : DARK_COLORS
       return {
         svg: renderMermaidSVG(code, {
-          bg: 'var(--bg)',
-          fg: 'var(--text-primary)',
-          accent: 'var(--accent-blue)',
-          muted: 'var(--text-muted)',
-          surface: 'var(--surface)',
-          border: 'var(--border-strong)',
-          line: 'var(--border-strong)',
+          ...colors,
           font: "'IBM Plex Mono', 'IBM Plex Serif', monospace",
           transparent: true,
         }),
@@ -28,7 +47,7 @@ export default function MermaidDiagram({ code, className = '' }: MermaidDiagramP
     } catch (err) {
       return { svg: null, error: err instanceof Error ? err.message : String(err) }
     }
-  }, [code])
+  }, [code, theme, mounted])
 
   if (error) {
     return (
@@ -46,6 +65,20 @@ export default function MermaidDiagram({ code, className = '' }: MermaidDiagramP
     )
   }
 
+  if (!mounted || !svg) {
+    return (
+      <div
+        className={className}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '24px 0',
+          minHeight: '120px',
+        }}
+      />
+    )
+  }
+
   return (
     <div
       className={className}
@@ -54,7 +87,7 @@ export default function MermaidDiagram({ code, className = '' }: MermaidDiagramP
         justifyContent: 'center',
         margin: '24px 0',
       }}
-      dangerouslySetInnerHTML={{ __html: svg! }}
+      dangerouslySetInnerHTML={{ __html: svg }}
     />
   )
 }
