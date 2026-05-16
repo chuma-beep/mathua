@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import Header from '../../components/Header'
 import AsciiDivider from '../../components/AsciiDivider'
 import MermaidDiagram from '../../components/MermaidDiagram'
-import MermaidAscii from '../../components/MermaidAscii'
 
 const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
@@ -482,16 +481,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
     Input[Student Input] --> Tokenizer[Tokenizer]
     Tokenizer --> Parser[Parser / AST]
     Parser --> Expander[Expander / Normaliser]
-    Expander --> Match{Match expected?}
-    Match -->|Yes| Correct[✓ Correct]
-    Match -->|No| Wrong[✗ Incorrect]`} />
-            <MermaidAscii code={`graph LR
-    Input[Input] --> Tokenizer[Tokenizer]
-    Tokenizer --> Parser[AST]
-    Parser --> Expander[Expand/Normalise]
-    Expander --> Match{Match?}
-    Match -->|Yes| Correct[OK]
-    Match -->|No| Wrong[FAIL]`} />
+    Expander --> Output(Match or No Match)`} />
             <pre style={{
               ...codeBlockStyle,
               whiteSpace: 'pre',
