@@ -107,16 +107,7 @@ export default function ArchitecturePage() {
     Gen --> Poly
     Score --> SQLite
     Score --> PG`} />
-      <style>{`
-        :root { --subgraph-bg: #f4f6f8; }
-        .dark { --subgraph-bg: #1a1b2e; }
-        .subgraph { --_group-fill: var(--subgraph-bg); }
-        .subgraph[data-id="UI"] { --_group-hdr: color-mix(in srgb, var(--accent-blue) 10%, var(--subgraph-bg)); }
-        .subgraph[data-id="API"] { --_group-hdr: color-mix(in srgb, var(--accent-teal) 10%, var(--subgraph-bg)); }
-        .subgraph[data-id="Engine"] { --_group-hdr: color-mix(in srgb, var(--accent-green) 10%, var(--subgraph-bg)); }
-        .subgraph[data-id="Grading"] { --_group-hdr: color-mix(in srgb, var(--accent-blue) 10%, var(--subgraph-bg)); }
-        .subgraph[data-id="Storage"] { --_group-hdr: color-mix(in srgb, var(--accent-teal) 10%, var(--subgraph-bg)); }
-      `}</style>
+
 
       {/* Metric cards */}
       <div style={{
