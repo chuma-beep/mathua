@@ -1,9 +1,7 @@
 'use client'
 
-import { useTheme } from '../../../hooks/useTheme'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
-import D2Diagram from '../../../components/D2Diagram'
 import MermaidDiagram from '../../../components/MermaidDiagram'
 
 const headingFont = "'IBM Plex Serif', serif"
@@ -40,8 +38,6 @@ const calloutStyle: React.CSSProperties = {
 }
 
 export default function ArchitecturePage() {
-  const { theme } = useTheme()
-
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
@@ -66,7 +62,61 @@ export default function ArchitecturePage() {
       </section>
 
       {/* High-level diagram */}
-      <D2Diagram name="architecture" theme={theme} />
+      <MermaidDiagram code={`graph TD
+    subgraph UI[UI Layer]
+        Web[Web Browser\\nReact + KaTeX]
+        TUI[Desktop\\nBubble Tea]
+    end
+    subgraph API[API Layer]
+        Session[Session Service]
+        Graph[Graph Service]
+        Leaderboard[Leaderboard Service]
+        Diag[Diagnostic Service]
+    end
+    subgraph Engine[Core Engine]
+        Dag[DAG Loader]
+        Sched[Scheduler SM-2]
+        Gen[Generators]
+        Grade[Graders]
+        Score[Scoring]
+    end
+    subgraph Grading[Grading Layer]
+        Numeric[Numeric Go]
+        Poly[Polynomial]
+    end
+    subgraph Storage[Storage]
+        SQLite[SQLite desktop]
+        PG[PostgreSQL web]
+    end
+    Web --> Session
+    Web --> Graph
+    Web --> Leaderboard
+    Web --> Diag
+    TUI --> Dag
+    TUI --> Sched
+    TUI --> Gen
+    Session --> Dag
+    Session --> Sched
+    Graph --> Dag
+    Diag --> Sched
+    Dag --> Sched
+    Sched --> Gen
+    Gen --> Grade
+    Grade --> Score
+    Gen --> Numeric
+    Gen --> Poly
+    Score --> SQLite
+    Score --> PG`} />
+      <style>{`
+        :root { --subgraph-bg: #f4f6f8; }
+        .dark { --subgraph-bg: #1a1b2e; }
+        .subgraph { --_group-fill: var(--subgraph-bg); }
+        .subgraph[data-id="UI"] { --_group-hdr: color-mix(in srgb, var(--accent-blue) 10%, var(--subgraph-bg)); }
+        .subgraph[data-id="API"] { --_group-hdr: color-mix(in srgb, var(--accent-teal) 10%, var(--subgraph-bg)); }
+        .subgraph[data-id="Engine"] { --_group-hdr: color-mix(in srgb, var(--accent-green) 10%, var(--subgraph-bg)); }
+        .subgraph[data-id="Grading"] { --_group-hdr: color-mix(in srgb, var(--accent-blue) 10%, var(--subgraph-bg)); }
+        .subgraph[data-id="Storage"] { --_group-hdr: color-mix(in srgb, var(--accent-teal) 10%, var(--subgraph-bg)); }
+      `}</style>
 
       {/* Metric cards */}
       <div style={{
