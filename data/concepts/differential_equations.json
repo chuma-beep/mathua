@@ -49,7 +49,7 @@
     "label": "Exact equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.linear_first",
       "calc.deriv.implicit"
@@ -109,7 +109,7 @@
     "label": "Systems of differential equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.systems",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.homogeneous",
       "linalg.eigen.compute"

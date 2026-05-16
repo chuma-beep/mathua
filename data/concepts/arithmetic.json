@@ -386,7 +386,7 @@
     "label": "Identify prime numbers",
     "domain": "arithmetic",
     "subdomain": "arithmetic.factors",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "arith.factor.find"
     ],
@@ -442,7 +442,7 @@
     "label": "Identify composite numbers",
     "domain": "arithmetic",
     "subdomain": "arithmetic.factors",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "arith.factor.prime"
     ],
@@ -484,7 +484,7 @@
     "label": "Exponent product rule: x^a times x^b",
     "domain": "arithmetic",
     "subdomain": "arithmetic.exponents",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "arith.exp.evaluate"
     ],
@@ -498,7 +498,7 @@
     "label": "Exponent quotient rule: x^a divided by x^b",
     "domain": "arithmetic",
     "subdomain": "arithmetic.exponents",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "arith.exp.product_rule"
     ],
@@ -512,7 +512,7 @@
     "label": "Power of a power rule: (x^a)^b",
     "domain": "arithmetic",
     "subdomain": "arithmetic.exponents",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "arith.exp.product_rule"
     ],

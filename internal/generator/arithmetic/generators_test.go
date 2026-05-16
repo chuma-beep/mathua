@@ -100,9 +100,9 @@ func TestComposite(t *testing.T)  { fuzzGen(t, &compositeGen{}, grader.GradingMu
 
 func TestExpConcept(t *testing.T)      { fuzzGen(t, &expConceptGen{}, grader.GradingNumeric) }
 func TestExpEval(t *testing.T)         { fuzzGen(t, &expEvalGen{}, grader.GradingNumeric) }
-func TestExpProductRule(t *testing.T)  { fuzzGen(t, &expProductRuleGen{}, grader.GradingPolynomial) }
-func TestExpQuotientRule(t *testing.T) { fuzzGen(t, &expQuotientRuleGen{}, grader.GradingPolynomial) }
-func TestExpPowerRule(t *testing.T)    { fuzzGen(t, &expPowerRuleGen{}, grader.GradingPolynomial) }
+func TestExpProductRule(t *testing.T)  { fuzzGen(t, &expProductRuleGen{}, grader.GradingExpression) }
+func TestExpQuotientRule(t *testing.T) { fuzzGen(t, &expQuotientRuleGen{}, grader.GradingExpression) }
+func TestExpPowerRule(t *testing.T)    { fuzzGen(t, &expPowerRuleGen{}, grader.GradingExpression) }
 
 func TestSqrtPerfect(t *testing.T)  { fuzzGen(t, &sqrtPerfectGen{}, grader.GradingNumeric) }
 func TestSqrtSimplify(t *testing.T) { fuzzGen(t, &sqrtSimplifyGen{}, grader.GradingPolynomial) }

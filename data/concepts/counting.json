@@ -44,7 +44,7 @@
     "label": "Greater than and less than",
     "domain": "counting",
     "subdomain": "counting.comparison",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "prerequisites": [
       "count.number_line"
     ],
@@ -114,7 +114,7 @@
     "label": "Ordinal numbers: first, second, third",
     "domain": "counting",
     "subdomain": "counting.objects",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "count.cardinality"
     ],
