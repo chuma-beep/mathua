@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description: 'How to contribute to Mathua — add concepts, write generators, and pass the validator.',
 }
 import AsciiDivider from '../../../components/AsciiDivider'
+import MermaidDiagram from '../../../components/MermaidDiagram'
 
 const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
@@ -345,10 +346,20 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             {step}
           </div>
         ))}
-        <p style={{ ...bodyStyle, marginTop: '1rem' }}>
-          Reviews usually happen within a few days. If a week passes with no response, feel
-          free to ping the thread. We read every PR.
-        </p>
+          <MermaidDiagram code={`graph LR
+    Concept[Add concept JSON] --> Gen[Write Go generator]
+    Gen --> Test[Write fuzz test 1k samples]
+    Test --> Run[Run go test + validate]
+    Run --> PR[Open PR]
+    PR --> CI{CI passes?}
+    CI -->|Yes| Review[Maintainer review]
+    CI -->|No| Fix[Fix issues]
+    Fix --> PR
+    Review --> Merge([Merged!])`} />
+          <p style={{ ...bodyStyle, marginTop: '1rem' }}>
+            Reviews usually happen within a few days. If a week passes with no response, feel
+            free to ping the thread. We read every PR.
+          </p>
       </section>
 
       <AsciiDivider pattern="dash" />

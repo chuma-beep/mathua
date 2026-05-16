@@ -4,6 +4,7 @@ import { useTheme } from '../../../hooks/useTheme'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
 import D2Diagram from '../../../components/D2Diagram'
+import MermaidDiagram from '../../../components/MermaidDiagram'
 
 const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
@@ -116,7 +117,15 @@ export default function ArchitecturePage() {
           (one per concept) to approximately 20–35.
         </p>
 
-        <D2Diagram name="cat-diagnostic" theme={theme} />
+        <MermaidDiagram code={`graph TD
+    Start((Start)) --> Mid[Test midpoint concept]
+    Mid --> Correct{Correct within time limit?}
+    Correct -->|Yes| Forward[Move forward: harder concepts]
+    Correct -->|No| Backward[Move backward: foundational concepts]
+    Forward --> Check{3 correct in a row?}
+    Backward --> Check
+    Check -->|Yes| Lock([Frontier locked])
+    Check -->|No| Mid`} />
 
         <div style={{ marginTop: '2rem' }}>
           {[
