@@ -1073,7 +1073,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "arith.factor.prime",
     "label": "Identify prime numbers",
     "mastery_threshold": {
@@ -1129,7 +1129,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "arith.factor.composite",
     "label": "Identify composite numbers",
     "mastery_threshold": {
@@ -1171,7 +1171,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "arith.exp.product_rule",
     "label": "Exponent product rule: x^a times x^b",
     "mastery_threshold": {
@@ -1185,7 +1185,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "arith.exp.quotient_rule",
     "label": "Exponent quotient rule: x^a divided by x^b",
     "mastery_threshold": {
@@ -1199,7 +1199,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "arith.exp.power_rule",
     "label": "Power of a power rule: (x^a)^b",
     "mastery_threshold": {
@@ -1879,7 +1879,7 @@
   },
   {
     "domain": "counting",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "id": "count.compare",
     "label": "Greater than and less than",
     "mastery_threshold": {
@@ -1949,7 +1949,7 @@
   },
   {
     "domain": "counting",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "count.ordinal",
     "label": "Ordinal numbers: first, second, third",
     "mastery_threshold": {
@@ -2022,7 +2022,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.exact",
     "label": "Exact equations",
     "mastery_threshold": {
@@ -2082,7 +2082,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.systems",
     "label": "Systems of differential equations",
     "mastery_threshold": {
