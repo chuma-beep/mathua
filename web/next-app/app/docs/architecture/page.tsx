@@ -82,7 +82,11 @@ export default function ArchitecturePage() {
     end
     subgraph Grading[Grading Layer]
         Numeric[Numeric Go]
-        Poly[Polynomial]
+        SymPy[SymPy Python]
+        Symbolic[Symbolic Go]
+        Choice[Choice Go]
+        Comp[Comparison Go]
+        Order[Ordering Go]
     end
     subgraph Storage[Storage]
         SQLite[SQLite desktop]
@@ -104,7 +108,11 @@ export default function ArchitecturePage() {
     Gen --> Grade
     Grade --> Score
     Gen --> Numeric
-    Gen --> Poly
+    Gen --> SymPy
+    Gen --> Symbolic
+    Gen --> Choice
+    Gen --> Comp
+    Gen --> Order
     Score --> SQLite
     Score --> PG`} />
 
@@ -121,7 +129,7 @@ export default function ArchitecturePage() {
           { num: '1', label: 'Binary' },
           { num: '2', label: 'UI Modes' },
           { num: '5', label: 'Engine Modules' },
-          { num: '2', label: 'Graders' },
+          { num: '6', label: 'Graders' },
         ].map(({ num, label }) => (
           <div
             key={label}
