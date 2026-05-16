@@ -134,6 +134,7 @@ go build ./cmd/mathua
         {[
           'New concepts: the single most impactful thing you can add.',
           'New generators: make existing or new concepts produce better problems.',
+          'New lessons: write markdown + LaTeX lesson content and register it in data/lessons/lessons.json.',
           'Bug fixes in the scheduling engine or graders.',
           'Documentation and diagram improvements.',
         ].map((item) => (
@@ -150,23 +151,27 @@ go build ./cmd/mathua
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Step 1: Define a new concept</h2>
         <p style={bodyStyle}>
-          Every concept lives in a per-domain file under{' '}
+          Concepts live in per-domain files under{' '}
           <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/concepts/</code>.
-          Add a JSON object with an ID, label, domain, prerequisite list, and mastery thresholds.
+          Each file is a JSON array — add your new concept as a new entry in the array for the matching domain:
         </p>
         <pre style={codeBlockStyle}>
-{`{
-  "id":                "arith.mult.tables",
-  "label":             "Multiplication tables 1-12",
-  "domain":            "arithmetic",
-  "subdomain":         "arithmetic.multiplication",
-  "grading_type":      "numeric",
-  "prerequisites":     ["arith.add.multi"],
-  "mastery_threshold": {
-    "streak":           7,
-    "avg_time_seconds": 6.0
+{`[
+  { "id": "arith.add.single", "label": "Single-digit addition", ... },
+  { "id": "arith.add.multi",  "label": "Multi-digit addition",  ... },
+  {
+    "id":                "arith.mult.tables",
+    "label":             "Multiplication tables 1-12",
+    "domain":            "arithmetic",
+    "subdomain":         "arithmetic.multiplication",
+    "grading_type":      "numeric",
+    "prerequisites":     ["arith.add.multi"],
+    "mastery_threshold": {
+      "streak":           7,
+      "avg_time_seconds": 6.0
+    }
   }
-}`}
+]`}
         </pre>
 
         <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
@@ -298,6 +303,36 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         </pre>
       </section>
 
+      <AsciiDivider pattern="wave" />
+
+      {/* Step 4: Lessons */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>Step 4: Write a lesson (optional)</h2>
+        <p style={bodyStyle}>
+          Mathua includes a built-in lesson system. Each concept can have an associated lesson — a
+          markdown file that teaches the material, rendered inside the app as a sidebar panel
+          alongside practice problems.
+        </p>
+        <p style={bodyStyle}>
+          Lessons live under{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/lessons/</code>{' '}
+          and are registered in{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/lessons/lessons.json</code>,
+          which maps concept IDs to file paths:
+        </p>
+        <pre style={codeBlockStyle}>
+{`{ "concept_id": "calc.deriv.power_rule", "source": "advanced/polynomials/polynomials.md" }`}
+        </pre>
+        <p style={bodyStyle}>
+          Multiple concepts can share a single lesson file. Content is written in Markdown with
+          LaTeX via{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>{'\\\\( ... \\\\)'}</code>{' '}
+          or{' '}
+          <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>{'\\\\[ ... \\\\]'}</code>{' '}
+          delimiters.
+        </p>
+      </section>
+
       <AsciiDivider pattern="dash" />
 
       {/* Validator */}
@@ -335,6 +370,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Add the concept to the appropriate domain file in data/concepts/ with correct prerequisites.',
           'Write the generator in the appropriate domain subdirectory.',
           'Write the fuzz test with 1 000 samples.',
+          '(Optional) Write a lesson and register it in data/lessons/lessons.json.',
           'Run go test ./... and go run scripts/validate_graph.go locally.',
           'Open a PR. The CI pipeline runs the validator and all tests automatically.',
           'A maintainer reviews the concept ordering, thresholds, and generator quality.',
@@ -348,7 +384,9 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
         ))}
           <MermaidDiagram code={`graph LR
     Concept[Add concept JSON] --> Gen[Write Go generator]
+    Concept -.->|optional| Lesson[Write lesson markdown]
     Gen --> Test[Write fuzz test 1k samples]
+    Lesson -.-> Test
     Test --> Run[Run go test + validate]
     Run --> PR[Open PR]
     PR --> CI{CI passes?}

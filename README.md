@@ -52,7 +52,7 @@ go build ./cmd/mathua
 DATABASE_URL=postgres://... ./mathua --serve --port 8080
 ```
 
-> **Requirements:** Go 1.21+.
+> **Requirements:** Go 1.21+. Python 3.8+ with `sympy` (optional — enables mathematical expression equivalence grading for algebra and beyond).
 
 ---
 
@@ -125,10 +125,10 @@ Mathua is a single Go binary with two modes. The engine core is identical — on
 ```
 Web (React + Next.js) ═══ REST API ═══┐
                                        ├── Core Engine ── Grading ── Storage
-Desktop TUI (Bubble Tea) ═══ direct ───┘    (Scheduler · Generators · SM-2   Numeric · Polynomial   SQLite · Postgres)
+Desktop TUI (Bubble Tea) ═══ direct ───┘    (Scheduler · Generators · SM-2   Numeric · Choice · Comparison · Ordering · Symbolic · SymPy   SQLite · Postgres)
 ```
 
-The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fully documented at **[`docs/architecture.md`](docs/architecture.md)** and in the interactive **[web docs](/docs/architecture)** with D2 diagrams.
+The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fully documented at **[`docs/architecture.md`](docs/architecture.md)** and in the interactive **[web docs](/docs/architecture)** with Mermaid diagrams.
 
 ---
 
