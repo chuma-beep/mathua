@@ -13,7 +13,7 @@ const sections = [
   { id: 'scheduler', label: 'Scheduler' },
   { id: 'scoring', label: 'Scoring' },
   { id: 'generators', label: 'Generators' },
-  { id: 'symbolic-grading', label: 'Polynomial grading' },
+  { id: 'symbolic-grading', label: 'Expression grading' },
 ]
 
 function NavSidebar({ activeSection }: { activeSection: string }) {
@@ -462,50 +462,93 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 
           {/* Polynomial & Expression Grading */}
           <section id="symbolic-grading" className="mt-12 pt-6">
-            <h2 style={h2Style}>Polynomial &amp; Expression Grading</h2>
+            <h2 style={h2Style}>Expression Grading with SymPy</h2>
             <p style={bodyStyle}>
               From algebra onward, answers are expressions:{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x = 4</code>,{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>(x+2)(x+3)</code>,{' '}
               <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>2x&#178; + 3x - 5</code>{' '}
-              but numeric comparison is no longer sufficient. Mathua uses a pure-Go polynomial
-              grader with no external dependencies: no Python, no SymPy, no subprocess.
+              where numeric comparison is no longer sufficient. Mathua uses a mixed Go/Python
+              grading system: a Go router dispatches to six grader types, and mathematical
+              equivalence for algebra, calculus, differential equations, and trigonometry is
+              handled by a Python subprocess running{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>sympy</code>.
             </p>
             <p style={bodyStyle}>
-              The grading router selects the grader by concept type. Arithmetic concepts go to the
-              numeric grader. Algebra concepts go to the polynomial grader, which parses the
-              student's input into a coefficient representation, normalises it, and compares against
-              the expected answer.
+              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>Router</code> selects the
+              grader by <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>grading_type</code>.
+              Concepts with type <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>polynomial</code> or{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>expression</code> route to{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>sympyGrade()</code>, which
+              spawns a long-lived Python 3 subprocess. If Python or SymPy are not installed, it
+              falls back to a pure-Go string normaliser (symbolic grader).
             </p>
             <MermaidDiagram code={`graph LR
-    Input[Student Input] --> Tokenizer[Tokenizer]
-    Tokenizer --> Parser[Parser / AST]
-    Parser --> Expander[Expander / Normaliser]
-    Expander --> Output(Match or No Match)`} />
+    Input[Student Answer] --> Router{Router}
+    Router -->|numeric| Numeric[Numeric Go]
+    Router -->|polynomial / expression| SymPy[SymPy Python]
+    Router -->|multiple_choice| Choice[Choice Go]
+    Router -->|comparison| Comp[Comparison Go]
+    Router -->|ordering| Order[Ordering Go]
+    SymPy -->|no Python| Fallback[Symbolic Go fallback]`} />
             <pre style={{
               ...codeBlockStyle,
               whiteSpace: 'pre',
               overflowX: 'auto',
             }}>
-{`// internal/grader/polynomial.go
-type PolyGrader struct{}
+{`// internal/grader/router.go
+func (r *Router) Grade(t GradingType, expected, answer string) Result {
+    switch t {
+    case GradingNumeric:
+        return r.numeric.grade(expected, answer)
+    case GradingPolynomial, GradingExpression:
+        return r.sympyGrade(expected, answer)
+    case GradingMultipleChoice:
+        return r.choice.grade(expected, answer)
+    case GradingComparison:
+        return r.comparison.grade(expected, answer)
+    case GradingOrdering:
+        return r.ordering.grade(expected, answer)
+    }
+}
 
-func (g *PolyGrader) Grade(input, expected string) (bool, error) {
-    userPoly   := parsePolynomial(input)    // e.g. (x+2)(x+3) → coeffs
-    expectPoly := parsePolynomial(expected) // e.g. x^2+5x+6 → coeffs
-
-    expand(&userPoly)   // multiply out factored form
-    normalise(&userPoly)
-    normalise(&expectPoly)
-
-    return userPoly.Equals(expectPoly), nil
+func (r *Router) sympyGrade(expected, answer string) Result {
+    if r.sympy == nil {
+        var err error
+        r.sympy, err = newSympyGrader()
+        if err != nil {
+            return r.symbolic.grade(expected, answer) // fallback
+        }
+    }
+    return r.sympy.grade(expected, answer)
 }`}
             </pre>
             <p style={bodyStyle}>
-              The polynomial grader handles factoring (parse and expand), simplification
-              (normalise), and equation-solving (isolate variable, compare). The same pure-Go
-              pipeline runs identically in the web server and the desktop TUI: no Python,
-              no environment dependencies, no disabled features.
+              The Go client sends JSON requests to the Python subprocess via stdin. SymPy parses
+              both expressions into trees and checks equivalence with{' '}
+              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>simplify(expected - answer) == 0</code>.
+              This catches identities that string or coefficient comparison never could:
+            </p>
+            <pre style={codeBlockStyle}>
+{`# grading/sympy_service.py
+import sys, json
+from sympy import simplify, parse_expr, Symbol
+
+for line in sys.stdin:
+    req = json.loads(line)
+    expected = parse_expr(req["expected"])
+    answer   = parse_expr(req["answer"])
+    correct  = simplify(expected - answer) == 0
+    print(json.dumps({"id": req["id"], "correct": correct}))`}
+            </pre>
+            <p style={bodyStyle}>
+              Examples of equivalences SymPy can detect:
+              <span style={{ display: 'block', fontFamily: monoFont, fontSize: '13px', marginTop: '0.5rem', color: 'var(--text-muted)' }}>
+                x² + 2x + 1 == (x+1)²{' · '}
+                sin²(x) + cos²(x) == 1{' · '}
+                xe^x − e^x + C == e^x(x−1) + C{' · '}
+                2e^(2x) == 2exp(2x)
+              </span>
             </p>
             <p style={bodyStyle}>
               For display, the TUI renders exponents using{' '}

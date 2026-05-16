@@ -190,7 +190,7 @@ go build ./cmd/mathua
                 ['label', 'string', 'Yes', 'Human-readable name displayed in the UI'],
                 ['domain', 'string', 'Yes', 'One of the 16 domain categories'],
                 ['subdomain', 'string', 'Optional', 'Nested grouping within a domain'],
-                ['grading_type', 'enum', 'Yes', 'numeric for arithmetic, polynomial for algebra'],
+                ['grading_type', 'enum', 'Yes', 'numeric for arithmetic, polynomial/expression for algebra (uses SymPy), multiple_choice, comparison, ordering'],
                 ['prerequisites', 'string[]', 'Yes', 'Concept IDs that must be mastered first'],
                 ['streak', 'number', 'Yes', 'Consecutive correct answers required for mastery'],
                 ['avg_time_seconds', 'number', 'Yes', 'Maximum acceptable average response time'],
