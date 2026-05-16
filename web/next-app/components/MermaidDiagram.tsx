@@ -13,20 +13,20 @@ const LIGHT_COLORS = {
   bg: '#ffffff',
   fg: '#18181b',
   accent: '#2563eb',
+  line: '#2563eb',
   muted: '#71717a',
-  surface: '#f4f4f5',
+  surface: '#e4e4e7',
   border: '#a1a1aa',
-  line: '#a1a1aa',
 }
 
 const DARK_COLORS = {
   bg: '#18181b',
   fg: '#fafafa',
   accent: '#60a5fa',
+  line: '#60a5fa',
   muted: '#a1a1aa',
   surface: '#27272a',
   border: '#52525b',
-  line: '#52525b',
 }
 
 export default function MermaidDiagram({ code, className = '' }: MermaidDiagramProps) {
