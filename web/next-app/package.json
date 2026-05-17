@@ -24,6 +24,9 @@
     "react-katex": "^3.0.1",
     "three": "^0.160.0"
   },
+  "engines": {
+    "node": ">=18.17.0"
+  },
   "devDependencies": {
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.0",
