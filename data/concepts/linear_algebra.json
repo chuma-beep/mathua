@@ -19,7 +19,7 @@
     "label": "Vector addition and scalar multiplication",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "linalg.vector.concept"
     ],
@@ -133,7 +133,7 @@
     "label": "Solving systems with matrices",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.systems",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "linalg.matrix.identity",
       "alg.systems.elimination"
@@ -163,7 +163,7 @@
     "label": "Eigenvalues and eigenvectors concept",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.eigenvalues",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "linalg.det.2x2",
       "alg.quad.formula"
@@ -178,7 +178,7 @@
     "label": "Compute eigenvalues of a 2x2 matrix",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.eigenvalues",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "linalg.eigen.concept"
     ],
@@ -192,7 +192,7 @@
     "label": "Linear transformations",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.transformations",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "linalg.matrix.mult",
       "alg.func.concept"
@@ -207,7 +207,7 @@
     "label": "Span and linear independence",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "linalg.vector.add",
       "linalg.det.2x2"
@@ -222,7 +222,7 @@
     "label": "Basis and dimension",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "linalg.span"
     ],

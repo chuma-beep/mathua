@@ -4,7 +4,7 @@
     "label": "Points, lines, and planes",
     "domain": "geometry",
     "subdomain": "geometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "count.number_line"
     ],
@@ -18,7 +18,7 @@
     "label": "Types of angles: acute, right, obtuse",
     "domain": "geometry",
     "subdomain": "geometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.points_lines"
     ],
@@ -32,7 +32,7 @@
     "label": "Measuring angles in degrees",
     "domain": "geometry",
     "subdomain": "geometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.angles"
     ],
@@ -74,7 +74,7 @@
     "label": "Types of triangles",
     "domain": "geometry",
     "subdomain": "geometry.triangles",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.angles"
     ],
@@ -134,7 +134,7 @@
     "label": "Types of quadrilaterals",
     "domain": "geometry",
     "subdomain": "geometry.shapes",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.angles"
     ],
@@ -178,7 +178,7 @@
     "label": "Parts of a circle: radius, diameter, chord",
     "domain": "geometry",
     "subdomain": "geometry.circles",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.points_lines"
     ],
@@ -222,7 +222,7 @@
     "label": "Plot points on the coordinate plane",
     "domain": "geometry",
     "subdomain": "geometry.coordinate",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "arith.neg.number_line"
     ],
@@ -251,7 +251,7 @@
     "label": "Midpoint of a line segment",
     "domain": "geometry",
     "subdomain": "geometry.coordinate",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "geo.coord.plot",
       "dec.add"

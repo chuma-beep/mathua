@@ -1,7 +1,7 @@
 [
   {
     "domain": "abstract_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "abstract.group.def",
     "label": "Definition of a group",
     "mastery_threshold": {
@@ -16,7 +16,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "abstract.group.examples",
     "label": "Examples of groups",
     "mastery_threshold": {
@@ -30,7 +30,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "abstract.subgroup",
     "label": "Subgroups and cosets",
     "mastery_threshold": {
@@ -44,7 +44,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "abstract.ring",
     "label": "Rings and fields",
     "mastery_threshold": {
@@ -59,7 +59,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "abstract.homomorphism",
     "label": "Group homomorphisms",
     "mastery_threshold": {
@@ -89,7 +89,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "alg.linear.slope_intercept",
     "label": "Slope-intercept form y = mx + b",
     "mastery_threshold": {
@@ -117,7 +117,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "alg.linear.standard_form",
     "label": "Standard form of a linear equation Ax + By = C",
     "mastery_threshold": {
@@ -174,7 +174,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "alg.eq.literal",
     "label": "Literal equations: solve for a variable",
     "mastery_threshold": {
@@ -217,7 +217,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "alg.ineq.two_var",
     "label": "Graph linear inequalities in two variables",
     "mastery_threshold": {
@@ -232,7 +232,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "alg.systems.substitution",
     "label": "Systems of equations: substitution method",
     "mastery_threshold": {
@@ -246,7 +246,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "alg.systems.elimination",
     "label": "Systems of equations: elimination method",
     "mastery_threshold": {
@@ -260,7 +260,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "alg.systems.word",
     "label": "Systems of equations word problems",
     "mastery_threshold": {
@@ -404,7 +404,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "alg.quad.solve_factor",
     "label": "Solve quadratics by factoring",
     "mastery_threshold": {
@@ -433,7 +433,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "alg.quad.formula",
     "label": "Quadratic formula",
     "mastery_threshold": {
@@ -448,7 +448,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "alg.quad.discriminant",
     "label": "Discriminant: number of real solutions",
     "mastery_threshold": {
@@ -533,7 +533,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "alg.func.linear",
     "label": "Linear functions and their graphs",
     "mastery_threshold": {
@@ -592,7 +592,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "alg.log.concept",
     "label": "What is a logarithm",
     "mastery_threshold": {
@@ -620,7 +620,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "alg.log.properties",
     "label": "Properties of logarithms",
     "mastery_threshold": {
@@ -1087,7 +1087,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "numeric",
+    "grading_type": "ordering",
     "id": "arith.factor.prime_fact",
     "label": "Prime factorization",
     "mastery_threshold": {
@@ -1403,7 +1403,7 @@
   },
   {
     "domain": "calculus",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "calc.limit.continuity",
     "label": "Continuity and types of discontinuity",
     "mastery_threshold": {
@@ -1619,7 +1619,7 @@
   },
   {
     "domain": "calculus",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "calc.integral.ftc",
     "label": "Fundamental Theorem of Calculus",
     "mastery_threshold": {
@@ -1649,7 +1649,7 @@
   },
   {
     "domain": "calculus",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "calc.integral.volume",
     "label": "Volume of solids of revolution",
     "mastery_threshold": {
@@ -1679,7 +1679,7 @@
   },
   {
     "domain": "calculus",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "id": "calc.deriv.related_rates",
     "label": "Related rates",
     "mastery_threshold": {
@@ -1724,7 +1724,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.concept",
     "label": "Imaginary unit i and complex numbers",
     "mastery_threshold": {
@@ -1739,7 +1739,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.add_sub",
     "label": "Add and subtract complex numbers",
     "mastery_threshold": {
@@ -1753,7 +1753,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.mult",
     "label": "Multiply complex numbers",
     "mastery_threshold": {
@@ -1768,7 +1768,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.conjugate",
     "label": "Complex conjugate",
     "mastery_threshold": {
@@ -1782,7 +1782,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.divide",
     "label": "Divide complex numbers",
     "mastery_threshold": {
@@ -1796,7 +1796,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.polar",
     "label": "Polar form of complex numbers",
     "mastery_threshold": {
@@ -1811,7 +1811,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.de_moivre",
     "label": "De Moivre's theorem",
     "mastery_threshold": {
@@ -1825,7 +1825,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "id": "complex.roots",
     "label": "Roots of complex numbers",
     "mastery_threshold": {
@@ -1977,7 +1977,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "ode.concept",
     "label": "What is a differential equation",
     "mastery_threshold": {
@@ -1992,7 +1992,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.separable",
     "label": "Separable differential equations",
     "mastery_threshold": {
@@ -2007,7 +2007,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.linear_first",
     "label": "First-order linear ODEs",
     "mastery_threshold": {
@@ -2037,7 +2037,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.homogeneous",
     "label": "Homogeneous second-order ODEs",
     "mastery_threshold": {
@@ -2052,7 +2052,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.nonhomogeneous",
     "label": "Non-homogeneous second-order ODEs",
     "mastery_threshold": {
@@ -2067,7 +2067,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "id": "ode.laplace",
     "label": "Laplace transforms",
     "mastery_threshold": {
@@ -2097,7 +2097,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.logic.propositions",
     "label": "Propositional logic: statements and truth values",
     "mastery_threshold": {
@@ -2111,7 +2111,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.logic.connectives",
     "label": "Logical connectives: AND, OR, NOT, IMPLIES",
     "mastery_threshold": {
@@ -2125,7 +2125,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.logic.truth_tables",
     "label": "Truth tables",
     "mastery_threshold": {
@@ -2139,7 +2139,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.logic.quantifiers",
     "label": "Quantifiers: universal and existential",
     "mastery_threshold": {
@@ -2153,7 +2153,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.sets.operations",
     "label": "Set operations: union, intersection, complement",
     "mastery_threshold": {
@@ -2167,7 +2167,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.sets.venn",
     "label": "Venn diagrams",
     "mastery_threshold": {
@@ -2210,7 +2210,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.combinatorics.pascal",
     "label": "Pascal's triangle and binomial theorem",
     "mastery_threshold": {
@@ -2239,7 +2239,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.graphs.paths",
     "label": "Paths, cycles, and connectivity",
     "mastery_threshold": {
@@ -2282,7 +2282,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "discrete.induction",
     "label": "Mathematical induction",
     "mastery_threshold": {
@@ -2370,7 +2370,7 @@
   },
   {
     "domain": "fractions",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "id": "frac.compare",
     "label": "Compare fractions: which is larger",
     "mastery_threshold": {
@@ -2384,7 +2384,7 @@
   },
   {
     "domain": "fractions",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "frac.benchmark",
     "label": "Benchmark fractions: closer to 0, 1/2, or 1",
     "mastery_threshold": {
@@ -2601,7 +2601,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.basic.points_lines",
     "label": "Points, lines, and planes",
     "mastery_threshold": {
@@ -2615,7 +2615,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.basic.angles",
     "label": "Types of angles: acute, right, obtuse",
     "mastery_threshold": {
@@ -2629,7 +2629,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.basic.angle_measure",
     "label": "Measuring angles in degrees",
     "mastery_threshold": {
@@ -2671,7 +2671,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.triangle.types",
     "label": "Types of triangles",
     "mastery_threshold": {
@@ -2731,7 +2731,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.quad.types",
     "label": "Types of quadrilaterals",
     "mastery_threshold": {
@@ -2775,7 +2775,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.circle.parts",
     "label": "Parts of a circle: radius, diameter, chord",
     "mastery_threshold": {
@@ -2819,7 +2819,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "geo.coord.plot",
     "label": "Plot points on the coordinate plane",
     "mastery_threshold": {
@@ -2848,7 +2848,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "geo.coord.midpoint",
     "label": "Midpoint of a line segment",
     "mastery_threshold": {
@@ -2907,7 +2907,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "linalg.vector.add",
     "label": "Vector addition and scalar multiplication",
     "mastery_threshold": {
@@ -3021,7 +3021,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "linalg.systems.matrix",
     "label": "Solving systems with matrices",
     "mastery_threshold": {
@@ -3051,7 +3051,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "linalg.eigen.concept",
     "label": "Eigenvalues and eigenvectors concept",
     "mastery_threshold": {
@@ -3066,7 +3066,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "linalg.eigen.compute",
     "label": "Compute eigenvalues of a 2x2 matrix",
     "mastery_threshold": {
@@ -3080,7 +3080,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "id": "linalg.transformations",
     "label": "Linear transformations",
     "mastery_threshold": {
@@ -3095,7 +3095,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "linalg.span",
     "label": "Span and linear independence",
     "mastery_threshold": {
@@ -3110,7 +3110,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "linalg.basis",
     "label": "Basis and dimension",
     "mastery_threshold": {
@@ -3124,7 +3124,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "nt.divisibility",
     "label": "Divisibility rules",
     "mastery_threshold": {
@@ -3168,7 +3168,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "nt.congruence",
     "label": "Congruence relations",
     "mastery_threshold": {
@@ -3212,7 +3212,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "nt.diophantine",
     "label": "Linear Diophantine equations",
     "mastery_threshold": {
@@ -3241,7 +3241,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "id": "dec.compare",
     "label": "Compare decimal values",
     "mastery_threshold": {
@@ -3660,7 +3660,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "numeric",
+    "grading_type": "polynomial",
     "id": "prealg.expr.like_terms",
     "label": "Identify and collect like terms",
     "mastery_threshold": {
@@ -3674,7 +3674,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "numeric",
+    "grading_type": "polynomial",
     "id": "prealg.expr.distribute",
     "label": "Distributive property",
     "mastery_threshold": {
@@ -3788,7 +3788,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "stat.data.bar_graph",
     "label": "Read and create bar graphs",
     "mastery_threshold": {
@@ -3945,7 +3945,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "topo.metric",
     "label": "Metric spaces",
     "mastery_threshold": {
@@ -3960,7 +3960,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "topo.open_closed",
     "label": "Open and closed sets",
     "mastery_threshold": {
@@ -3974,7 +3974,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "topo.continuous",
     "label": "Continuity in topological spaces",
     "mastery_threshold": {
@@ -3989,7 +3989,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.radians",
     "label": "Radians and degrees conversion",
     "mastery_threshold": {
@@ -4004,7 +4004,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.unit_circle",
     "label": "Unit circle: sine and cosine of standard angles",
     "mastery_threshold": {
@@ -4062,7 +4062,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "expression",
+    "grading_type": "numeric",
     "id": "trig.pythagorean_id",
     "label": "Pythagorean identity sin²θ + cos²θ = 1",
     "mastery_threshold": {
@@ -4077,7 +4077,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.special_angles",
     "label": "Exact values for 30°, 45°, 60°",
     "mastery_threshold": {
@@ -4091,7 +4091,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.reference_angle",
     "label": "Reference angles and quadrants",
     "mastery_threshold": {
@@ -4105,7 +4105,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.graph_sin",
     "label": "Graph of sine function",
     "mastery_threshold": {
@@ -4120,7 +4120,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.graph_cos",
     "label": "Graph of cosine function",
     "mastery_threshold": {
@@ -4134,7 +4134,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.period",
     "label": "Amplitude, period, and phase shift",
     "mastery_threshold": {
@@ -4148,7 +4148,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "id": "trig.inverse",
     "label": "Inverse trig functions",
     "mastery_threshold": {

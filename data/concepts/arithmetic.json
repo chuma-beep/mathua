@@ -400,7 +400,7 @@
     "label": "Prime factorization",
     "domain": "arithmetic",
     "subdomain": "arithmetic.factors",
-    "grading_type": "numeric",
+    "grading_type": "ordering",
     "prerequisites": [
       "arith.factor.prime"
     ],

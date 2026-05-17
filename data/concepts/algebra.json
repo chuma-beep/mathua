@@ -19,7 +19,7 @@
     "label": "Slope-intercept form y = mx + b",
     "domain": "algebra",
     "subdomain": "algebra.linear",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "alg.linear.slope"
     ],
@@ -47,7 +47,7 @@
     "label": "Standard form of a linear equation Ax + By = C",
     "domain": "algebra",
     "subdomain": "algebra.linear",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "alg.linear.slope_intercept"
     ],
@@ -104,7 +104,7 @@
     "label": "Literal equations: solve for a variable",
     "domain": "algebra",
     "subdomain": "algebra.equations",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "alg.eq.vars_both_sides"
     ],
@@ -147,7 +147,7 @@
     "label": "Graph linear inequalities in two variables",
     "domain": "algebra",
     "subdomain": "algebra.inequalities",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "alg.ineq.compound",
       "alg.linear.graph"
@@ -162,7 +162,7 @@
     "label": "Systems of equations: substitution method",
     "domain": "algebra",
     "subdomain": "algebra.systems",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.linear.slope_intercept"
     ],
@@ -176,7 +176,7 @@
     "label": "Systems of equations: elimination method",
     "domain": "algebra",
     "subdomain": "algebra.systems",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.systems.substitution"
     ],
@@ -190,7 +190,7 @@
     "label": "Systems of equations word problems",
     "domain": "algebra",
     "subdomain": "algebra.systems",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.systems.elimination"
     ],
@@ -334,7 +334,7 @@
     "label": "Solve quadratics by factoring",
     "domain": "algebra",
     "subdomain": "algebra.quadratics",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.factor.trinomial"
     ],
@@ -363,7 +363,7 @@
     "label": "Quadratic formula",
     "domain": "algebra",
     "subdomain": "algebra.quadratics",
-    "grading_type": "numeric",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.quad.complete_square",
       "arith.sqrt.simplify"
@@ -378,7 +378,7 @@
     "label": "Discriminant: number of real solutions",
     "domain": "algebra",
     "subdomain": "algebra.quadratics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "alg.quad.formula"
     ],
@@ -463,7 +463,7 @@
     "label": "Linear functions and their graphs",
     "domain": "algebra",
     "subdomain": "algebra.functions",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "alg.func.evaluate",
       "alg.linear.graph"
@@ -522,7 +522,7 @@
     "label": "What is a logarithm",
     "domain": "algebra",
     "subdomain": "algebra.logarithms",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "alg.exp.evaluate"
     ],
@@ -550,7 +550,7 @@
     "label": "Properties of logarithms",
     "domain": "algebra",
     "subdomain": "algebra.logarithms",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "alg.log.evaluate"
     ],

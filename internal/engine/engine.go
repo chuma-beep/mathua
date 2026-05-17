@@ -117,6 +117,7 @@ func (e *Engine) SetActiveCourse(studentID, courseID string) (*planning.Path, er
 }
 
 func (e *Engine) GetPlanner() *planning.Planner { return e.planner }
+func (e *Engine) GetGrader() *grader.Router     { return e.gr }
 func (e *Engine) PlannerCourses() []*planning.Course {
 	if e.planner == nil {
 		return nil
@@ -222,8 +223,7 @@ var conceptDiagrams = map[string]string{
 	"calc.integral.ftc":               "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
 	"calc.integral.area_between":      "/diagrams/algebrica/finding-areas-by-integration-1.svg",
 	"calc.integral.volume":            "/diagrams/algebrica/finding-areas-by-integration-2.svg",
-	"calc.integral.substitution":      "/diagrams/algebrica/integration-by-substitution.svg",
-	"calc.integral.partial_fractions": "/diagrams/algebrica/integral-of-rational-functions.svg",
+
 	// Equations
 	"alg.quad.solve_factor": "/diagrams/algebrica/quadratic-equations.svg",
 	"alg.quad.formula":      "/diagrams/algebrica/quadratic-equations.svg",

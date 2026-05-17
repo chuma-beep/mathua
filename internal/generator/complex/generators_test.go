@@ -29,11 +29,11 @@ func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
 	}
 }
 
-func TestConcept(t *testing.T)   { fuzzGen(t, &conceptGen{}, grader.GradingMultipleChoice) }
-func TestAddSub(t *testing.T)    { fuzzGen(t, &addSubGen{}, grader.GradingMultipleChoice) }
-func TestMult(t *testing.T)      { fuzzGen(t, &multGen{}, grader.GradingMultipleChoice) }
-func TestConjugate(t *testing.T) { fuzzGen(t, &conjugateGen{}, grader.GradingMultipleChoice) }
-func TestDivide(t *testing.T)    { fuzzGen(t, &divideGen{}, grader.GradingMultipleChoice) }
-func TestPolar(t *testing.T)     { fuzzGen(t, &polarGen{}, grader.GradingMultipleChoice) }
-func TestDeMoivre(t *testing.T)  { fuzzGen(t, &deMoivreGen{}, grader.GradingMultipleChoice) }
-func TestRoots(t *testing.T)     { fuzzGen(t, &rootsGen{}, grader.GradingMultipleChoice) }
+func TestConcept(t *testing.T)   { fuzzGen(t, &conceptGen{}, grader.GradingComplex) }
+func TestAddSub(t *testing.T)    { fuzzGen(t, &addSubGen{}, grader.GradingComplex) }
+func TestMult(t *testing.T)      { fuzzGen(t, &multGen{}, grader.GradingComplex) }
+func TestConjugate(t *testing.T) { fuzzGen(t, &conjugateGen{}, grader.GradingComplex) }
+func TestDivide(t *testing.T)    { fuzzGen(t, &divideGen{}, grader.GradingComplex) }
+func TestPolar(t *testing.T)     { fuzzGen(t, &polarGen{}, grader.GradingComplex) }
+func TestDeMoivre(t *testing.T)  { fuzzGen(t, &deMoivreGen{}, grader.GradingComplex) }
+func TestRoots(t *testing.T)     { fuzzGen(t, &rootsGen{}, grader.GradingComplex) }

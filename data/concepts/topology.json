@@ -4,7 +4,7 @@
     "label": "Metric spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "calc.limit.continuity",
       "linalg.vector.dot"
@@ -19,7 +19,7 @@
     "label": "Open and closed sets",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "topo.metric"
     ],
@@ -33,7 +33,7 @@
     "label": "Continuity in topological spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "topo.open_closed",
       "calc.limit.continuity"

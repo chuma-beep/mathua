@@ -56,6 +56,6 @@ func TestCircumference(t *testing.T)  { fuzzGen(t, &circumferenceGen{}, grader.G
 func TestCircleArea(t *testing.T)     { fuzzGen(t, &circleAreaGen{}, grader.GradingNumeric) }
 func TestCoordPlot(t *testing.T)      { fuzzGen(t, &coordPlotGen{}, grader.GradingMultipleChoice) }
 func TestCoordDistance(t *testing.T)  { fuzzGen(t, &coordDistanceGen{}, grader.GradingNumeric) }
-func TestCoordMidpoint(t *testing.T)  { fuzzGenNoSelfGrade(t, &coordMidpointGen{}) }
+func TestCoordMidpoint(t *testing.T)  { fuzzGen(t, &coordMidpointGen{}, grader.GradingTuple) }
 func TestVolume(t *testing.T)         { fuzzGen(t, &volumeGen{}, grader.GradingNumeric) }
 func TestSurfaceArea(t *testing.T)    { fuzzGen(t, &surfaceAreaGen{}, grader.GradingNumeric) }

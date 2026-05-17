@@ -19,6 +19,7 @@ func init() {
 		"grading/sympy_service.py",                  // cwd = project root
 		"../../grading/sympy_service.py",             // cwd = internal/grader/
 		"../grading/sympy_service.py",                // cwd = internal/
+		"../../../grading/sympy_service.py",           // cwd = internal/generator/complex/
 	}
 	if exe, err := os.Executable(); err == nil {
 		d := filepath.Dir(exe)
@@ -28,7 +29,7 @@ func init() {
 		)
 	}
 	if wd, err := os.Getwd(); err == nil {
-		for _, rel := range []string{"grading/sympy_service.py", "../../grading/sympy_service.py"} {
+		for _, rel := range []string{"grading/sympy_service.py", "../../grading/sympy_service.py", "../../../grading/sympy_service.py"} {
 			paths = append(paths, filepath.Join(wd, rel))
 		}
 	}

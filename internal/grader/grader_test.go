@@ -329,12 +329,60 @@ func TestSymbolic_Grade_Empty(t *testing.T) {
 
 func TestRouter_UnknownType(t *testing.T) {
 	r := NewRouter()
-	res := r.Grade(GradingType("bogus"), "1", "1")
+	res := r.Grade(GradingType("bogus"), "1", "2")
 	if res.Correct {
-		t.Error("expected unknown grading type to be incorrect")
+		t.Error("expected unknown grading type to fall back to tuple grader and be incorrect for mismatched values")
 	}
-	if res.Feedback != "Unknown grading type" {
-		t.Errorf("expected 'Unknown grading type' feedback, got %q", res.Feedback)
+}
+
+func TestRouter_UnknownType_Fallback(t *testing.T) {
+	r := NewRouter()
+	res := r.Grade(GradingType("bogus"), "1", "1")
+	if !res.Correct {
+		t.Error("expected unknown grading type to fall back to tuple grader and match")
+	}
+}
+
+// Tuple grader
+
+func TestTuple_Grade_ExactMatch(t *testing.T) {
+	r := NewRouter()
+	for _, tc := range []struct{ expected, answer string }{
+		{"(3,4)", "(3,4)"},
+		{"(3,4)", "3,4"},
+		{"2,-3", "2,-3"},
+		{"2,-3", "(2,-3)"},
+		{"(1,2,3)", "1,2,3"},
+		{"1;2;3", "1,2,3"},
+	} {
+		res := r.Grade(GradingTuple, tc.expected, tc.answer)
+		if !res.Correct {
+			t.Errorf("expected %q == %q to be correct", tc.expected, tc.answer)
+		}
+	}
+}
+
+func TestTuple_Grade_Wrong(t *testing.T) {
+	r := NewRouter()
+	res := r.Grade(GradingTuple, "(3,4)", "(4,3)")
+	if res.Correct {
+		t.Error("expected wrong tuple to be incorrect")
+	}
+}
+
+func TestTuple_Grade_WrongCount(t *testing.T) {
+	r := NewRouter()
+	res := r.Grade(GradingTuple, "(1,2,3)", "(1,2)")
+	if res.Correct {
+		t.Error("expected wrong element count to be incorrect")
+	}
+}
+
+func TestTuple_Grade_Empty(t *testing.T) {
+	r := NewRouter()
+	res := r.Grade(GradingTuple, "(1,2)", "")
+	if res.Correct {
+		t.Error("expected empty answer to be incorrect")
 	}
 }
 

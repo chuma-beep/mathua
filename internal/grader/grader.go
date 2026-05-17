@@ -9,6 +9,8 @@ const (
 	GradingMultipleChoice GradingType = "multiple_choice"
 	GradingComparison     GradingType = "comparison"
 	GradingOrdering       GradingType = "ordering"
+	GradingTuple          GradingType = "tuple"
+	GradingComplex        GradingType = "complex"
 )
 
 type Result struct {

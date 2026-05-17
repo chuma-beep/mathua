@@ -4,7 +4,7 @@
     "label": "Radians and degrees conversion",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.angle_measure",
       "frac.concept"
@@ -19,7 +19,7 @@
     "label": "Unit circle: sine and cosine of standard angles",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.radians",
       "geo.coord.plot"
@@ -74,10 +74,10 @@
   },
   {
     "id": "trig.pythagorean_id",
-    "label": "Pythagorean identity sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1",
+    "label": "Pythagorean identity sin²θ + cos²θ = 1",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "expression",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.sin_cos_def",
       "alg.poly.special"
@@ -89,10 +89,10 @@
   },
   {
     "id": "trig.special_angles",
-    "label": "Exact values for 30\u00b0, 45\u00b0, 60\u00b0",
+    "label": "Exact values for 30°, 45°, 60°",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.unit_circle"
     ],
@@ -106,7 +106,7 @@
     "label": "Reference angles and quadrants",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.special_angles"
     ],
@@ -120,7 +120,7 @@
     "label": "Graph of sine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.reference_angle",
       "alg.func.concept"
@@ -135,7 +135,7 @@
     "label": "Graph of cosine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.graph_sin"
     ],
@@ -149,7 +149,7 @@
     "label": "Amplitude, period, and phase shift",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.graph_cos"
     ],
@@ -163,7 +163,7 @@
     "label": "Inverse trig functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.advanced",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "trig.graph_sin",
       "alg.func.notation"

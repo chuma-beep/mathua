@@ -4,7 +4,7 @@
     "label": "What is a differential equation",
     "domain": "differential_equations",
     "subdomain": "differential_equations.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "calc.deriv.concept",
       "calc.integral.indefinite"
@@ -19,7 +19,7 @@
     "label": "Separable differential equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.concept",
       "calc.integral.substitution"
@@ -34,7 +34,7 @@
     "label": "First-order linear ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.separable",
       "calc.deriv.exp_log"
@@ -64,7 +64,7 @@
     "label": "Homogeneous second-order ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.second_order",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.linear_first",
       "alg.quad.formula"
@@ -79,7 +79,7 @@
     "label": "Non-homogeneous second-order ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.second_order",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.homogeneous",
       "alg.eq.vars_both_sides"
@@ -94,7 +94,7 @@
     "label": "Laplace transforms",
     "domain": "differential_equations",
     "subdomain": "differential_equations.transforms",
-    "grading_type": "expression",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "ode.nonhomogeneous",
       "calc.integral.parts"

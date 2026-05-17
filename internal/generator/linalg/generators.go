@@ -3,9 +3,15 @@ package linalg
 import (
 	"fmt"
 	"math/rand"
+	"regexp"
+	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 )
+
+var matrixRe = regexp.MustCompile(`\[\[([^\]]+)\],\[([^\]]+)\]\]`)
 
 func Register(reg *generator.Registry) {
 	reg.Register("linalg.vector.concept", &vectorConceptGen{})
@@ -117,6 +123,10 @@ func (g *matrixConceptGen) Generate(difficulty float64) generator.Problem {
 
 type matrixAddGen struct{}
 
+func (g *matrixAddGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeMatrix(expected, userAnswer)
+}
+
 func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
 	a := make([][]int, 2)
 	b := make([][]int, 2)
@@ -162,6 +172,10 @@ func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
 
 type matrixMultGen struct{}
 
+func (g *matrixMultGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeMatrix(expected, userAnswer)
+}
+
 func (g *matrixMultGen) Generate(difficulty float64) generator.Problem {
 	a := make([][]int, 2)
 	b := make([][]int, 2)
@@ -189,6 +203,10 @@ func (g *matrixMultGen) Generate(difficulty float64) generator.Problem {
 }
 
 type matrixIdentityGen struct{}
+
+func (g *matrixIdentityGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeMatrix(expected, userAnswer)
+}
 
 func (g *matrixIdentityGen) Generate(difficulty float64) generator.Problem {
 	candidates := [][4]int{
@@ -486,4 +504,50 @@ func formatMatrix3(m [][]int) string {
 		m[0][0], m[0][1], m[0][2],
 		m[1][0], m[1][1], m[1][2],
 		m[2][0], m[2][1], m[2][2])
+}
+
+func parseMatrix(s string) ([][]int, bool) {
+	matches := matrixRe.FindStringSubmatch(s)
+	if len(matches) != 3 {
+		return nil, false
+	}
+	rows := make([][]int, 2)
+	for i, part := range matches[1:] {
+		parts := strings.Split(part, ",")
+		if len(parts) != 2 {
+			return nil, false
+		}
+		row := make([]int, 2)
+		for j, p := range parts {
+			val, err := strconv.Atoi(strings.TrimSpace(p))
+			if err != nil {
+				return nil, false
+			}
+			row[j] = val
+		}
+		rows[i] = row
+	}
+	return rows, true
+}
+
+func gradeMatrix(expected, userAnswer string) grader.Result {
+	eMat, ok := parseMatrix(expected)
+	if !ok {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid matrix format"}
+	}
+	aMat, ok := parseMatrix(userAnswer)
+	if !ok {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid matrix format"}
+	}
+	if len(eMat) != len(aMat) || len(eMat[0]) != len(aMat[0]) {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Matrix dimension mismatch"}
+	}
+	for i := range eMat {
+		for j := range eMat[i] {
+			if eMat[i][j] != aMat[i][j] {
+				return grader.Result{Correct: false, Score: 0, Feedback: fmt.Sprintf("Mismatch at (%d,%d)", i+1, j+1)}
+			}
+		}
+	}
+	return grader.Result{Correct: true, Score: 1}
 }

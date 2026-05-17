@@ -4,7 +4,7 @@
     "label": "Divisibility rules",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "arith.factor.find"
     ],
@@ -48,7 +48,7 @@
     "label": "Congruence relations",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "nt.modular"
     ],
@@ -92,7 +92,7 @@
     "label": "Linear Diophantine equations",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "nt.gcd_euclidean",
       "alg.eq.vars_both_sides"

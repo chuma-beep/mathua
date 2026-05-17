@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"strconv"
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
@@ -294,6 +296,25 @@ func (g *negOrderOpsGen) Generate(difficulty float64) generator.Problem {
 
 type ratioConceptGen struct{}
 
+func (g *ratioConceptGen) Grade(expected, userAnswer string) grader.Result {
+	eParts := strings.SplitN(expected, ":", 2)
+	aParts := strings.SplitN(userAnswer, ":", 2)
+	if len(eParts) != 2 || len(aParts) != 2 {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format (use a:b)"}
+	}
+	e1, err1 := strconv.Atoi(strings.TrimSpace(eParts[0]))
+	e2, err2 := strconv.Atoi(strings.TrimSpace(eParts[1]))
+	a1, err3 := strconv.Atoi(strings.TrimSpace(aParts[0]))
+	a2, err4 := strconv.Atoi(strings.TrimSpace(aParts[1]))
+	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format"}
+	}
+	if e1 == a1 && e2 == a2 {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect ratio"}
+}
+
 func (g *ratioConceptGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(9) + 1
 	b := rand.Intn(9) + 1
@@ -308,6 +329,25 @@ func (g *ratioConceptGen) Generate(difficulty float64) generator.Problem {
 }
 
 type ratioSimplifyGen struct{}
+
+func (g *ratioSimplifyGen) Grade(expected, userAnswer string) grader.Result {
+	eParts := strings.SplitN(expected, ":", 2)
+	aParts := strings.SplitN(userAnswer, ":", 2)
+	if len(eParts) != 2 || len(aParts) != 2 {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format (use a:b)"}
+	}
+	e1, err1 := strconv.Atoi(strings.TrimSpace(eParts[0]))
+	e2, err2 := strconv.Atoi(strings.TrimSpace(eParts[1]))
+	a1, err3 := strconv.Atoi(strings.TrimSpace(aParts[0]))
+	a2, err4 := strconv.Atoi(strings.TrimSpace(aParts[1]))
+	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format"}
+	}
+	if e1 == a1 && e2 == a2 {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect ratio"}
+}
 
 func (g *ratioSimplifyGen) Generate(difficulty float64) generator.Problem {
 	f := rand.Intn(5) + 2
@@ -404,6 +444,53 @@ func (g *sciNotationGen) Generate(difficulty float64) generator.Problem {
 }
 
 type sciNotationOpsGen struct{}
+
+func (g *sciNotationOpsGen) Grade(expected, userAnswer string) grader.Result {
+	normE := normalizeSciNotation(expected)
+	normA := normalizeSciNotation(userAnswer)
+	if normE == "" || normA == "" {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid scientific notation format"}
+	}
+	eCoeff, eExp := parseSciNotationValue(normE)
+	aCoeff, aExp := parseSciNotationValue(normA)
+	if eCoeff == nil || aCoeff == nil {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid scientific notation format"}
+	}
+	if *eExp != *aExp {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect exponent"}
+	}
+	diff := math.Abs(*eCoeff - *aCoeff)
+	if diff < 1e-4 {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect coefficient"}
+}
+
+func normalizeSciNotation(s string) string {
+	s = strings.TrimSpace(s)
+	s = strings.ReplaceAll(s, " ", "")
+	parts := strings.Split(s, "x10^")
+	if len(parts) != 2 {
+		return ""
+	}
+	return strings.TrimSpace(parts[0]) + "x10^" + strings.TrimSpace(parts[1])
+}
+
+func parseSciNotationValue(s string) (*float64, *int) {
+	parts := strings.Split(s, "x10^")
+	if len(parts) != 2 {
+		return nil, nil
+	}
+	coeff, err := strconv.ParseFloat(parts[0], 64)
+	if err != nil {
+		return nil, nil
+	}
+	exp, err := strconv.Atoi(parts[1])
+	if err != nil {
+		return nil, nil
+	}
+	return &coeff, &exp
+}
 
 func (g *sciNotationOpsGen) Generate(difficulty float64) generator.Problem {
 	a := float64(rand.Intn(90)+10) / 10

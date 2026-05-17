@@ -51,14 +51,14 @@ func TestDerivConcept(t *testing.T)   { fuzzGen(t, &derivConceptGen{}, grader.Gr
 func TestDerivPowerRule(t *testing.T) { fuzzGen(t, &derivPowerRuleGen{}, grader.GradingPolynomial) }
 func TestDerivSumRule(t *testing.T)   { fuzzGen(t, &derivSumRuleGen{}, grader.GradingPolynomial) }
 func TestDerivProductRule(t *testing.T) {
-	fuzzGen(t, &derivProductRuleGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &derivProductRuleGen{}, grader.GradingExpression)
 }
 func TestDerivQuotientRule(t *testing.T) {
-	fuzzGen(t, &derivQuotientRuleGen{}, grader.GradingNumeric)
+	fuzzGen(t, &derivQuotientRuleGen{}, grader.GradingExpression)
 }
-func TestDerivChainRule(t *testing.T) { fuzzGen(t, &derivChainRuleGen{}, grader.GradingMultipleChoice) }
-func TestDerivTrig(t *testing.T)      { fuzzGen(t, &derivTrigGen{}, grader.GradingMultipleChoice) }
-func TestDerivExpLog(t *testing.T)    { fuzzGen(t, &derivExpLogGen{}, grader.GradingMultipleChoice) }
+func TestDerivChainRule(t *testing.T) { fuzzGen(t, &derivChainRuleGen{}, grader.GradingExpression) }
+func TestDerivTrig(t *testing.T)      { fuzzGen(t, &derivTrigGen{}, grader.GradingExpression) }
+func TestDerivExpLog(t *testing.T)    { fuzzGen(t, &derivExpLogGen{}, grader.GradingExpression) }
 func TestDerivApplications(t *testing.T) {
 	fuzzGen(t, &derivApplicationsGen{}, grader.GradingNumeric)
 }
@@ -67,32 +67,32 @@ func TestDerivOptimization(t *testing.T) {
 }
 
 func TestIntegralIndefinite(t *testing.T) {
-	fuzzGen(t, &integralIndefiniteGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &integralIndefiniteGen{}, grader.GradingExpression)
 }
 func TestIntegralPowerRule(t *testing.T) {
-	fuzzGen(t, &integralPowerRuleGen{}, grader.GradingPolynomial)
+	fuzzGen(t, &integralPowerRuleGen{}, grader.GradingExpression)
 }
 func TestIntegralSubstitution(t *testing.T) {
-	fuzzGen(t, &integralSubstitutionGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &integralSubstitutionGen{}, grader.GradingExpression)
 }
 func TestIntegralDefinite(t *testing.T) {
 	fuzzGen(t, &integralDefiniteGen{}, grader.GradingNumeric)
 }
-func TestIntegralFTC(t *testing.T) { fuzzGen(t, &integralFTCGen{}, grader.GradingMultipleChoice) }
+func TestIntegralFTC(t *testing.T) { fuzzGen(t, &integralFTCGen{}, grader.GradingExpression) }
 func TestIntegralAreaBetween(t *testing.T) {
 	fuzzGen(t, &integralAreaBetweenGen{}, grader.GradingNumeric)
 }
 func TestIntegralVolume(t *testing.T) {
-	fuzzGen(t, &integralVolumeGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &integralVolumeGen{}, grader.GradingExpression)
 }
 
-func TestDerivImplicit(t *testing.T) { fuzzGen(t, &derivImplicitGen{}, grader.GradingNumeric) }
+func TestDerivImplicit(t *testing.T) { fuzzGen(t, &derivImplicitGen{}, grader.GradingExpression) }
 func TestDerivRelatedRates(t *testing.T) {
-	fuzzGen(t, &derivRelatedRatesGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &derivRelatedRatesGen{}, grader.GradingExpression)
 }
 func TestIntegralParts(t *testing.T) {
-	fuzzGen(t, &integralPartsGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &integralPartsGen{}, grader.GradingExpression)
 }
 func TestIntegralPartialFractions(t *testing.T) {
-	fuzzGen(t, &integralPartialFractionsGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &integralPartialFractionsGen{}, grader.GradingExpression)
 }

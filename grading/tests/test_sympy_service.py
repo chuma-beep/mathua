@@ -112,3 +112,68 @@ def test_multiple_requests():
     assert results[0]["correct"] is True
     assert results[1]["correct"] is False
     assert results[2]["correct"] is True
+
+
+def test_equivalent_different_forms():
+    r = grade_via_service("x(x+1)", "x^2+x")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_trig_double_angle():
+    r = grade_via_service("sin(2x)", "2sin(x)cos(x)")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_trig_pythagorean_variant():
+    r = grade_via_service("1-cos(x)^2", "sin(x)^2")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_constant_integration_c1():
+    r = grade_via_service("xe^x-e^x+C_1", "e^x*(x-1)+C_2")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_constant_integration_minus_c():
+    r = grade_via_service("x^2/2-C", "x^2/2+C")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_log_absolute_equivalence():
+    r = grade_via_service("ln|x|", "log(Abs(x))")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_pi_symbol():
+    r = grade_via_service("2pi", "2*pi")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_arcsin_variants():
+    r = grade_via_service("arcsin(x)", "asin(x)")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_rational_expression_simplification():
+    r = grade_via_service("(x^2-1)/(x-1)", "x+1")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_power_simplification():
+    r = grade_via_service("x^(1/2)", "sqrt(x)")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_factored_vs_expanded():
+    r = grade_via_service("x^2-4", "(x+2)(x-2)")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_exp_equivalence():
+    r = grade_via_service("exp(2x)", "e^(2x)")
+    assert r["correct"] is True, f"Expected True, got {r}"
+
+
+def test_negative_constant_integration():
+    r = grade_via_service("sin(x)+C", "sin(x)-C")
+    assert r["correct"] is True, f"Expected True, got {r}"

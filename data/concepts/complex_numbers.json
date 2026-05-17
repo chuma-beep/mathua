@@ -4,7 +4,7 @@
     "label": "Imaginary unit i and complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "arith.sqrt.perfect",
       "arith.neg.number_line"
@@ -19,7 +19,7 @@
     "label": "Add and subtract complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.concept"
     ],
@@ -33,7 +33,7 @@
     "label": "Multiply complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.add_sub",
       "alg.poly.foil"
@@ -48,7 +48,7 @@
     "label": "Complex conjugate",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.mult"
     ],
@@ -62,7 +62,7 @@
     "label": "Divide complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.conjugate"
     ],
@@ -76,7 +76,7 @@
     "label": "Polar form of complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.divide",
       "trig.unit_circle"
@@ -91,7 +91,7 @@
     "label": "De Moivre's theorem",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.polar"
     ],
@@ -105,7 +105,7 @@
     "label": "Roots of complex numbers",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "numeric",
+    "grading_type": "complex",
     "prerequisites": [
       "complex.de_moivre"
     ],

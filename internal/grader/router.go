@@ -7,6 +7,8 @@ type Router struct {
 	choice     *choiceGrader
 	comparison *comparisonGrader
 	ordering   *orderingGrader
+	tuple      *tupleGrader
+	complex    *complexGrader
 }
 
 func NewRouter() *Router {
@@ -16,6 +18,8 @@ func NewRouter() *Router {
 		choice:     &choiceGrader{},
 		comparison: &comparisonGrader{},
 		ordering:   &orderingGrader{},
+		tuple:      &tupleGrader{},
+		complex:    &complexGrader{},
 	}
 }
 
@@ -31,8 +35,12 @@ func (r *Router) Grade(gradingType GradingType, expected, answer string) Result 
 		return r.comparison.grade(expected, answer)
 	case GradingOrdering:
 		return r.ordering.grade(expected, answer)
+	case GradingTuple:
+		return r.tuple.grade(expected, answer)
+	case GradingComplex:
+		return r.complex.grade(expected, answer)
 	default:
-		return Result{Correct: false, Score: 0, Feedback: "Unknown grading type"}
+		return r.tuple.grade(expected, answer)
 	}
 }
 
