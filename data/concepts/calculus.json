@@ -62,7 +62,7 @@
     "label": "Continuity and types of discontinuity",
     "domain": "calculus",
     "subdomain": "calculus.limits",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "calc.limit.properties"
     ],
@@ -278,7 +278,7 @@
     "label": "Fundamental Theorem of Calculus",
     "domain": "calculus",
     "subdomain": "calculus.integrals",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "calc.integral.definite",
       "calc.deriv.concept"
@@ -308,7 +308,7 @@
     "label": "Volume of solids of revolution",
     "domain": "calculus",
     "subdomain": "calculus.integrals",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "calc.integral.area_between",
       "geo.circle.area"
@@ -338,7 +338,7 @@
     "label": "Related rates",
     "domain": "calculus",
     "subdomain": "calculus.advanced",
-    "grading_type": "numeric",
+    "grading_type": "expression",
     "prerequisites": [
       "calc.deriv.implicit",
       "prealg.eq.word"

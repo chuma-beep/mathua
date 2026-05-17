@@ -39,6 +39,24 @@ func fuzzNoSelf(t *testing.T, gen generator.Generator) {
 	}
 }
 
+func fuzzGrade(t *testing.T, gen generator.Generator) {
+	t.Helper()
+	gg, ok := gen.(generator.GradedGenerator)
+	if !ok {
+		t.Fatal("not a GradedGenerator")
+	}
+	for i := 0; i < 100; i++ {
+		p := gen.Generate(rand.Float64())
+		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
+			t.Errorf("empty field")
+		}
+		res := gg.Grade(p.Answer, p.Answer)
+		if !res.Correct {
+			t.Errorf("self-grade via Grade() failed: a=%q", p.Answer)
+		}
+	}
+}
+
 func TestDecCompare(t *testing.T)  { fuzzGen(t, &decCompareGen{}, grader.GradingComparison) }
 func TestDecAdd(t *testing.T)      { fuzzGen(t, &decAddSubGen{op: "+"}, grader.GradingNumeric) }
 func TestDecSub(t *testing.T)      { fuzzGen(t, &decAddSubGen{op: "-"}, grader.GradingNumeric) }
@@ -60,8 +78,8 @@ func TestPctTaxTip(t *testing.T)   { fuzzGen(t, &pctTaxTipGen{}, grader.GradingN
 func TestAbsValue(t *testing.T)    { fuzzGen(t, &absValueGen{}, grader.GradingNumeric) }
 func TestNegOrderOps(t *testing.T) { fuzzGen(t, &negOrderOpsGen{}, grader.GradingNumeric) }
 
-func TestRatioConcept(t *testing.T)    { fuzzNoSelf(t, &ratioConceptGen{}) }
-func TestRatioSimplify(t *testing.T)   { fuzzNoSelf(t, &ratioSimplifyGen{}) }
+func TestRatioConcept(t *testing.T)    { fuzzGrade(t, &ratioConceptGen{}) }
+func TestRatioSimplify(t *testing.T)   { fuzzGrade(t, &ratioSimplifyGen{}) }
 func TestRatioProportion(t *testing.T) { fuzzGen(t, &ratioProportionGen{}, grader.GradingNumeric) }
 func TestRatioRate(t *testing.T)       { fuzzGen(t, &ratioRateGen{}, grader.GradingNumeric) }
 func TestRatioScale(t *testing.T)      { fuzzGen(t, &ratioScaleGen{}, grader.GradingNumeric) }
@@ -69,7 +87,7 @@ func TestRatioScale(t *testing.T)      { fuzzGen(t, &ratioScaleGen{}, grader.Gra
 func TestExpNeg(t *testing.T)         { fuzzGen(t, &expNegGen{}, grader.GradingNumeric) }
 func TestExpZero(t *testing.T)        { fuzzGen(t, &expZeroGen{}, grader.GradingNumeric) }
 func TestSciNotation(t *testing.T)    { fuzzGen(t, &sciNotationGen{}, grader.GradingNumeric) }
-func TestSciNotationOps(t *testing.T) { fuzzNoSelf(t, &sciNotationOpsGen{}) }
+func TestSciNotationOps(t *testing.T) { fuzzGrade(t, &sciNotationOpsGen{}) }
 
 func TestVarConcept(t *testing.T)    { fuzzGen(t, &varConceptGen{}, grader.GradingNumeric) }
 func TestExprEval(t *testing.T)      { fuzzGen(t, &exprEvalGen{}, grader.GradingNumeric) }

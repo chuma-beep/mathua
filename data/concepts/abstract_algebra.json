@@ -4,7 +4,7 @@
     "label": "Definition of a group",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "discrete.logic.quantifiers",
       "nt.modular"
@@ -19,7 +19,7 @@
     "label": "Examples of groups",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "abstract.group.def"
     ],
@@ -33,7 +33,7 @@
     "label": "Subgroups and cosets",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "abstract.group.examples"
     ],
@@ -47,7 +47,7 @@
     "label": "Rings and fields",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "abstract.subgroup",
       "alg.factor.diff_squares"
@@ -62,7 +62,7 @@
     "label": "Group homomorphisms",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "abstract.subgroup",
       "alg.func.concept"

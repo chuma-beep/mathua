@@ -13,6 +13,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
+	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -489,27 +490,27 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	// Generate the expected answer and grade it server-side
+	// Grade against the stored problem (the one the user actually saw)
 	concept := s.eng.GetDAG().Concept(req.ConceptID)
 	timeThresh := 10.0
 	if concept != nil {
 		timeThresh = concept.MasteryThreshold.AvgTimeSeconds
 	}
-	prob, _, err := s.eng.NextDiagnosticQuestion(session)
 	correct := false
 	explanation := ""
-	if err == nil && prob != nil {
-		gr := s.eng.GetDAG().Concept(req.ConceptID)
-		gradingType := "numeric"
-		if gr != nil {
-			gradingType = gr.GradingType
+	if session.LastProblem != nil {
+		gt := "numeric"
+		if concept != nil {
+			gt = concept.GradingType
 		}
-		if gradingType == "numeric" {
-			correct = prob.Answer == req.Answer
+		graderRouter := s.eng.GetGrader()
+		if graderRouter != nil {
+			grResult := graderRouter.Grade(grader.GradingType(gt), session.LastProblem.Answer, req.Answer)
+			correct = grResult.Correct
 		} else {
-			correct = prob.Answer == req.Answer
+			correct = session.LastProblem.Answer == req.Answer
 		}
-		explanation = prob.Explanation
+		explanation = session.LastProblem.Explanation
 	}
 	fast := req.Elapsed < timeThresh
 

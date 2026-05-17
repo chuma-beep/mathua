@@ -77,7 +77,7 @@
     "label": "Compare fractions: which is larger",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "prerequisites": [
       "frac.equivalent"
     ],
@@ -91,7 +91,7 @@
     "label": "Benchmark fractions: closer to 0, 1/2, or 1",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "frac.compare"
     ],

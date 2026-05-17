@@ -19,7 +19,7 @@
     "label": "Read and create bar graphs",
     "domain": "statistics",
     "subdomain": "statistics.data_representation",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "stat.data.read_table"
     ],

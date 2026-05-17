@@ -365,9 +365,12 @@ func (g *integralPowerRuleGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(4) + 1
 	a := n + 1
 	exp := n + 1
-	answer := fmt.Sprintf("%dx^%d", 1, exp)
-	if a != 1 {
-		answer = fmt.Sprintf("%dx^%d", a/(n+1), exp)
+	coef := a / (n + 1)
+	var answer string
+	if coef == 1 {
+		answer = fmt.Sprintf("x^%d", exp)
+	} else {
+		answer = fmt.Sprintf("%dx^%d", coef, exp)
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find ∫%dx^%d dx (use power rule for integration, omit +C).", a, n),

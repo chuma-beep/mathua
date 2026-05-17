@@ -4,7 +4,7 @@
     "label": "Compare decimal values",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
-    "grading_type": "numeric",
+    "grading_type": "comparison",
     "prerequisites": [
       "arith.dec.intro"
     ],
@@ -423,7 +423,7 @@
     "label": "Identify and collect like terms",
     "domain": "prealgebra",
     "subdomain": "prealgebra.variables",
-    "grading_type": "numeric",
+    "grading_type": "polynomial",
     "prerequisites": [
       "prealg.expr.evaluate"
     ],
@@ -437,7 +437,7 @@
     "label": "Distributive property",
     "domain": "prealgebra",
     "subdomain": "prealgebra.variables",
-    "grading_type": "numeric",
+    "grading_type": "polynomial",
     "prerequisites": [
       "prealg.expr.like_terms"
     ],

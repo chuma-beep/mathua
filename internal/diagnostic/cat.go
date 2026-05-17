@@ -24,6 +24,7 @@ type Session struct {
 	State         State
 	Attempts      []Attempt
 	order         []*concepts.Concept
+	LastProblem   *generator.Problem
 }
 
 type Attempt struct {
@@ -64,6 +65,7 @@ func (e *Engine) StartWithPath(path []*concepts.Concept) *Session {
 
 func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	if s.State == StateDone || s.Position < 0 || s.Position >= len(s.order) {
+		s.LastProblem = nil
 		return nil, "", nil
 	}
 	concept := s.order[s.Position]
@@ -71,7 +73,8 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	if err != nil {
 		return nil, "", err
 	}
-	return &p, concept.ID, nil
+	s.LastProblem = &p
+	return s.LastProblem, concept.ID, nil
 }
 
 // RecordAnswer processes a diagnostic answer and updates the session state.

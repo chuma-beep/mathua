@@ -30,7 +30,7 @@ func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
 }
 
 func TestVectorConcept(t *testing.T)  { fuzzGen(t, &vectorConceptGen{}, grader.GradingMultipleChoice) }
-func TestVectorAdd(t *testing.T)      { fuzzGen(t, &vectorAddGen{}, grader.GradingMultipleChoice) }
+func TestVectorAdd(t *testing.T)      { fuzzGen(t, &vectorAddGen{}, grader.GradingTuple) }
 func TestVectorDot(t *testing.T)      { fuzzGen(t, &vectorDotGen{}, grader.GradingNumeric) }
 func TestMatrixConcept(t *testing.T)  { fuzzGen(t, &matrixConceptGen{}, grader.GradingMultipleChoice) }
 func TestMatrixAdd(t *testing.T)      { fuzzGen(t, &matrixAddGen{}, grader.GradingMultipleChoice) }
@@ -38,12 +38,12 @@ func TestMatrixMult(t *testing.T)     { fuzzGen(t, &matrixMultGen{}, grader.Grad
 func TestMatrixIdentity(t *testing.T) { fuzzGen(t, &matrixIdentityGen{}, grader.GradingMultipleChoice) }
 func TestDet2x2(t *testing.T)         { fuzzGen(t, &det2x2Gen{}, grader.GradingNumeric) }
 func TestDet3x3(t *testing.T)         { fuzzGen(t, &det3x3Gen{}, grader.GradingNumeric) }
-func TestSystemsMatrix(t *testing.T)  { fuzzGen(t, &systemsMatrixGen{}, grader.GradingMultipleChoice) }
+func TestSystemsMatrix(t *testing.T)  { fuzzGen(t, &systemsMatrixGen{}, grader.GradingTuple) }
 func TestCramer(t *testing.T)         { fuzzGen(t, &cramerGen{}, grader.GradingNumeric) }
 func TestEigenConcept(t *testing.T)   { fuzzGen(t, &eigenConceptGen{}, grader.GradingMultipleChoice) }
-func TestEigenCompute(t *testing.T)   { fuzzGen(t, &eigenComputeGen{}, grader.GradingMultipleChoice) }
+func TestEigenCompute(t *testing.T)   { fuzzGen(t, &eigenComputeGen{}, grader.GradingTuple) }
 func TestTransformations(t *testing.T) {
-	fuzzGen(t, &transformationsGen{}, grader.GradingMultipleChoice)
+	fuzzGen(t, &transformationsGen{}, grader.GradingTuple)
 }
 func TestSpan(t *testing.T)  { fuzzGen(t, &spanGen{}, grader.GradingMultipleChoice) }
 func TestBasis(t *testing.T) { fuzzGen(t, &basisGen{}, grader.GradingMultipleChoice) }
