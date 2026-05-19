@@ -113,5 +113,33 @@
       "streak": 10,
       "avg_time_seconds": 25.0
     }
+  },
+  {
+    "id": "complex.adv.exponential",
+    "label": "Exponential form of complex numbers (Euler's formula)",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "complex.adv.polar"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "complex.adv.inequalities",
+    "label": "Fundamental inequalities for complex numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "complex.basics.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]

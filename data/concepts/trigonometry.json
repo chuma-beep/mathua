@@ -74,7 +74,7 @@
   },
   {
     "id": "trig.ident.pythagorean",
-    "label": "Pythagorean identity sin²θ + cos²θ = 1",
+    "label": "Pythagorean identity sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
     "grading_type": "numeric",
@@ -89,7 +89,7 @@
   },
   {
     "id": "trig.basics.special_angles",
-    "label": "Exact values for 30°, 45°, 60°",
+    "label": "Exact values for 30\u00b0, 45\u00b0, 60\u00b0",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "multiple_choice",
@@ -201,6 +201,118 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "trig.adv.arctan",
+    "label": "Arctangent and arccotangent functions",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.adv.inverse"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.hyperbolic.sinh_cosh",
+    "label": "Hyperbolic sine and cosine functions",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.hyperbolic",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.hyperbolic.tanh_coth",
+    "label": "Hyperbolic tangent and cotangent functions",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.hyperbolic",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.hyperbolic.sinh_cosh"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.basics.right_triangle",
+    "label": "Right triangle trigonometry",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.ident.identities",
+    "label": "Trigonometric identities",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.ident.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.eq.basic",
+    "label": "Basic trigonometric equations",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.eq.homogeneous",
+    "label": "Homogeneous trigonometric equations",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.eq.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "trig.ineq.basic",
+    "label": "Trigonometric inequalities",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "trig.eq.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
     }
   }
 ]

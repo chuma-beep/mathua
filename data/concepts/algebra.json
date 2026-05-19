@@ -287,7 +287,7 @@
   },
   {
     "id": "alg.factor.trinomial",
-    "label": "Factor trinomials of the form x² + bx + c",
+    "label": "Factor trinomials of the form x\u00b2 + bx + c",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -317,7 +317,7 @@
   },
   {
     "id": "alg.factor.ac_method",
-    "label": "Factor trinomials ax² + bx + c using AC method",
+    "label": "Factor trinomials ax\u00b2 + bx + c using AC method",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -642,6 +642,560 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "alg.eq.absolute_value",
+    "label": "Equations involving absolute value",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.rational",
+    "label": "Rational equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.irrational",
+    "label": "Irrational equations (equations with radicals)",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.exponential",
+    "label": "Exponential equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.logarithmic",
+    "label": "Logarithmic equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.log.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.polynomial",
+    "label": "Polynomial equations (higher degree)",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.binomial",
+    "label": "Binomial equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.trinomial",
+    "label": "Trinomial equations",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.eq.extraneous_roots",
+    "label": "Extraneous solutions and loss of roots",
+    "domain": "algebra",
+    "subdomain": "algebra.equations",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.rational",
+      "alg.eq.irrational"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.quad.quadratic",
+    "label": "Quadratic equations: overview and solving methods",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.solve_factor",
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.quad.incomplete",
+    "label": "Incomplete quadratic equations",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.solve_factor"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.quad.complex",
+    "label": "Quadratic equations with complex solutions",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.formula",
+      "complex.basics.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.quad.parametric",
+    "label": "Quadratic equations with parameters",
+    "domain": "algebra",
+    "subdomain": "algebra.quadratics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.quadratic",
+    "label": "Quadratic inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.rational",
+    "label": "Rational inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.irrational",
+    "label": "Irrational inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.logarithmic",
+    "label": "Logarithmic inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.log.properties",
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.absolute_value",
+    "label": "Inequalities with absolute value",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.sign_analysis",
+    "label": "Sign analysis method for inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.ineq.systems",
+    "label": "Systems of inequalities",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.domain",
+    "label": "Determining the domain of a function",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.even_odd",
+    "label": "Even and odd functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.monotonicity",
+    "label": "Increasing and decreasing functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.composite",
+    "label": "Composite functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.inverse",
+    "label": "Inverse functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.composite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.absolute_value",
+    "label": "Absolute value function",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.rational",
+    "label": "Rational functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.graph_analysis",
+    "label": "Analyzing graphs of functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.monotonicity"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.sign",
+    "label": "Sign function",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.sigmoid",
+    "label": "Sigmoid function (logistic function)",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.dirichlet",
+    "label": "Dirichlet function and pathological functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.poly.division",
+    "label": "Polynomial division",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.poly.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.poly.roots",
+    "label": "Roots of a polynomial",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.poly.concept",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.poly.synthetic_division",
+    "label": "Synthetic division method",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.poly.division"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.poly.vieta",
+    "label": "Vieta's formulas",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.poly.roots"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.conic.parabola",
+    "label": "Parabola: equation and graph",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.quad"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.conic.hyperbola",
+    "label": "Hyperbola: equation and graph",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.conic.circle"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.systems.concept",
+    "label": "Systems of linear equations: introduction",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.systems.gaussian",
+    "label": "Gaussian elimination for solving linear systems",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.systems.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
     }
   }
 ]

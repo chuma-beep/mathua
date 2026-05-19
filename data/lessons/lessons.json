@@ -1,119 +1,43 @@
 [
   {
-    "concept_id": "trig.basics.sin_cos_def",
-    "source": "algebrica/trigonometry/sine-and-cosine.md"
+    "concept_id": "abstract.group.def",
+    "source": "algebrica/algebraic-structures/groups.md"
   },
   {
-    "concept_id": "trig.basics.tan_def",
-    "source": "algebrica/trigonometry/tangent-and-cotangent.md"
+    "concept_id": "abstract.group.subgroup",
+    "source": "algebrica/algebraic-structures/groups.md"
   },
   {
-    "concept_id": "trig.basics.unit_circle",
-    "source": "algebrica/trigonometry/unit-circle.md"
+    "concept_id": "abstract.group.examples",
+    "source": "algebrica/algebraic-structures/groups.md"
   },
   {
-    "concept_id": "trig.ident.pythagorean",
-    "source": "algebrica/trigonometry/pythagorean-identity.md"
+    "concept_id": "abstract.rings.def",
+    "source": "algebrica/algebraic-structures/rings.md"
   },
   {
-    "concept_id": "trig.basics.reciprocal",
-    "source": "algebrica/trigonometry/secant-and-cosecant.md"
+    "concept_id": "abstract.group.homomorphism",
+    "source": "algebrica/algebraic-structures/vector-spaces.md"
   },
   {
-    "concept_id": "trig.basics.special_angles",
-    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
+    "concept_id": "complex.adv.exponential",
+    "source": "algebrica/complex-numbers/complex-numbers-in-exponential-form.md"
   },
   {
-    "concept_id": "trig.basics.reference_angle",
-    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
-  },
-  {
-    "concept_id": "trig.graph.sin",
-    "source": "algebrica/trigonometry/sine-and-cosine.md"
-  },
-  {
-    "concept_id": "trig.graph.cos",
-    "source": "algebrica/trigonometry/sine-and-cosine.md"
-  },
-  {
-    "concept_id": "trig.adv.inverse",
-    "source": "algebrica/trigonometry/arcsine-and-arccosine.md"
-  },
-  {
-    "concept_id": "trig.adv.law_sines",
-    "source": "algebrica/trigonometry/the-law-of-sines.md"
-  },
-  {
-    "concept_id": "trig.adv.law_cosines",
-    "source": "algebrica/trigonometry/the-law-of-cosines.md"
-  },
-  {
-    "concept_id": "calc.integral.indefinite",
-    "source": "algebrica/integrals/indefinite-integrals.md"
-  },
-  {
-    "concept_id": "calc.integral.substitution",
-    "source": "algebrica/integrals/integration-by-substitution.md"
-  },
-  {
-    "concept_id": "calc.integral.definite",
-    "source": "algebrica/integrals/definite-integrals.md"
-  },
-  {
-    "concept_id": "calc.integral.parts",
-    "source": "algebrica/integrals/integration-by-parts.md"
-  },
-  {
-    "concept_id": "calc.integral.area_between",
-    "source": "algebrica/integrals/finding-areas-by-integration.md"
-  },
-  {
-    "concept_id": "calc.limit.concept",
-    "source": "algebrica/limits/remarkable-limits.md"
-  },
-  {
-    "concept_id": "linalg.vector.concept",
-    "source": "algebrica/vectors-and-matrices/vectors.md"
-  },
-  {
-    "concept_id": "linalg.matrix.concept",
-    "source": "algebrica/vectors-and-matrices/matrices.md"
-  },
-  {
-    "concept_id": "linalg.eigen.concept",
-    "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"
-  },
-  {
-    "concept_id": "linalg.eigen.compute",
-    "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"
-  },
-  {
-    "concept_id": "linalg.det.2x2",
-    "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"
-  },
-  {
-    "concept_id": "linalg.det.3x3",
-    "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"
-  },
-  {
-    "concept_id": "linalg.lintrans.concept",
-    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
-  },
-  {
-    "concept_id": "linalg.vec.span",
-    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
-  },
-  {
-    "concept_id": "linalg.matrix.add",
-    "source": "algebrica/vectors-and-matrices/matrices.md"
-  },
-  {
-    "concept_id": "linalg.matrix.mult",
-    "source": "algebrica/vectors-and-matrices/matrices.md"
+    "concept_id": "complex.adv.polar",
+    "source": "algebrica/complex-numbers/complex-numbers-in-trigonometric-form.md"
   },
   {
     "concept_id": "complex.basics.concept",
     "source": "algebrica/complex-numbers/complex-numbers.md"
+  },
+  {
+    "concept_id": "complex.adv.de_moivre",
+    "source": "algebrica/complex-numbers/de-moivre-theorem.md"
+  },
+  {
+    "concept_id": "complex.adv.inequalities",
+    "source": "algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md"
   },
   {
     "concept_id": "complex.ops.add_sub",
@@ -128,108 +52,380 @@
     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
-    "concept_id": "complex.adv.polar",
-    "source": "algebrica/complex-numbers/complex-numbers-in-trigonometric-form.md"
-  },
-  {
-    "concept_id": "complex.adv.de_moivre",
-    "source": "algebrica/complex-numbers/de-moivre-theorem.md"
+    "concept_id": "complex.ops.conjugate",
+    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
     "concept_id": "complex.adv.roots",
     "source": "algebrica/complex-numbers/roots-of-unity.md"
   },
   {
-    "concept_id": "alg.poly.concept",
-    "source": "algebrica/polynomials/polynomials.md"
+    "concept_id": "calc.deriv.chain_rule",
+    "source": "algebrica/derivatives/derivative-of-composite-power-functions.md"
   },
   {
-    "concept_id": "alg.poly.add_sub",
-    "source": "algebrica/polynomials/adding-and-subtracting-polynomials.md"
+    "concept_id": "calc.deriv.concept",
+    "source": "algebrica/derivatives/derivatives.md"
   },
   {
-    "concept_id": "alg.poly.foil",
-    "source": "algebrica/polynomials/binomials.md"
+    "concept_id": "calc.deriv.difference_quotient",
+    "source": "algebrica/derivatives/difference-quotient.md"
   },
   {
-    "concept_id": "alg.factor.trinomial",
-    "source": "algebrica/polynomials/trinomials.md"
+    "concept_id": "calc.deriv.differential",
+    "source": "algebrica/derivatives/differential-of-a-function.md"
+  },
+  {
+    "concept_id": "calc.deriv.optimization",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.partial",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.non_differentiability",
+    "source": "algebrica/derivatives/points-of-non-differentiability.md"
+  },
+  {
+    "concept_id": "calc.deriv.chain_rule",
+    "source": "algebrica/derivatives/the-derivative-of-a-composite-function.md"
+  },
+  {
+    "concept_id": "calc.deriv.cauchy_mvt",
+    "source": "algebrica/differential-calculus-theorems/cauchy-theorem.md"
+  },
+  {
+    "concept_id": "calc.deriv.fermat",
+    "source": "algebrica/differential-calculus-theorems/fermat-theorem.md"
+  },
+  {
+    "concept_id": "calc.limit.lhopital",
+    "source": "algebrica/differential-calculus-theorems/hopital-rule.md"
+  },
+  {
+    "concept_id": "calc.deriv.mvt",
+    "source": "algebrica/differential-calculus-theorems/lagrange-theorem.md"
+  },
+  {
+    "concept_id": "calc.deriv.rolle",
+    "source": "algebrica/differential-calculus-theorems/rolles-theorem.md"
+  },
+  {
+    "concept_id": "calc.limit.weierstrass",
+    "source": "algebrica/differential-calculus-theorems/weierstrass-theorem.md"
+  },
+  {
+    "concept_id": "ode.basics.concept",
+    "source": "algebrica/differential-equations/differential-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.absolute_value",
+    "source": "algebrica/equations/absolute-value-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.binomial",
+    "source": "algebrica/equations/binomial-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.literal",
+    "source": "algebrica/equations/equations-with-parameters.md"
+  },
+  {
+    "concept_id": "alg.eq.multi_step",
+    "source": "algebrica/equations/equations.md"
+  },
+  {
+    "concept_id": "alg.eq.exponential",
+    "source": "algebrica/equations/exponential-equations.md"
   },
   {
     "concept_id": "alg.quad.solve_factor",
     "source": "algebrica/equations/factoring-quadratic-equations.md"
   },
   {
+    "concept_id": "alg.func.quad",
+    "source": "algebrica/equations/geometrical-meaning-quadratic-equations.md"
+  },
+  {
+    "concept_id": "trig.eq.homogeneous",
+    "source": "algebrica/equations/homogeneous-trigonometric-equations.md"
+  },
+  {
+    "concept_id": "alg.quad.incomplete",
+    "source": "algebrica/equations/incomplete-quadratic-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.irrational",
+    "source": "algebrica/equations/irrational-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.literal",
+    "source": "algebrica/equations/linear-equations-with-parameters.md"
+  },
+  {
+    "concept_id": "alg.linear.slope_intercept",
+    "source": "algebrica/equations/linear-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.logarithmic",
+    "source": "algebrica/equations/logarithmic-equations.md"
+  },
+  {
+    "concept_id": "alg.eq.extraneous_roots",
+    "source": "algebrica/equations/loss-of-roots.md"
+  },
+  {
+    "concept_id": "alg.eq.polynomial",
+    "source": "algebrica/equations/polynomial-equations.md"
+  },
+  {
+    "concept_id": "alg.quad.complex",
+    "source": "algebrica/equations/quadratic-equations-with-complex-solutions.md"
+  },
+  {
+    "concept_id": "alg.quad.parametric",
+    "source": "algebrica/equations/quadratic-equations-with-parameters.md"
+  },
+  {
+    "concept_id": "alg.quad.quadratic",
+    "source": "algebrica/equations/quadratic-equations.md"
+  },
+  {
     "concept_id": "alg.quad.formula",
     "source": "algebrica/equations/quadratic-formula.md"
   },
   {
-    "concept_id": "arith.exp.concept",
-    "source": "algebrica/powers-radicals-logarithms/powers.md"
+    "concept_id": "alg.eq.rational",
+    "source": "algebrica/equations/rational-equations.md"
   },
   {
-    "concept_id": "arith.exp.product_rule",
-    "source": "algebrica/powers-radicals-logarithms/powers.md"
+    "concept_id": "trig.eq.basic",
+    "source": "algebrica/equations/trigonometric-equations.md"
   },
   {
-    "concept_id": "arith.exp.quotient_rule",
-    "source": "algebrica/powers-radicals-logarithms/powers.md"
+    "concept_id": "alg.eq.trinomial",
+    "source": "algebrica/equations/trinomial-equations.md"
   },
   {
-    "concept_id": "arith.exp.power_rule",
-    "source": "algebrica/powers-radicals-logarithms/powers.md"
+    "concept_id": "alg.func.absolute_value",
+    "source": "algebrica/functions/absolute-value-function.md"
   },
   {
-    "concept_id": "arith.sqrt.simplify",
-    "source": "algebrica/powers-radicals-logarithms/radicals.md"
+    "concept_id": "alg.func.graph_analysis",
+    "source": "algebrica/functions/analyzing-the-graphs-of-functions.md"
   },
   {
-    "concept_id": "arith.exp.evaluate",
-    "source": "algebrica/powers-radicals-logarithms/powers.md"
+    "concept_id": "alg.func.composite",
+    "source": "algebrica/functions/composite-functions.md"
+  },
+  {
+    "concept_id": "calc.limit.continuity",
+    "source": "algebrica/functions/continuous-functions.md"
+  },
+  {
+    "concept_id": "calc.deriv.convexity",
+    "source": "algebrica/functions/convexity-and-concavity-of-functions.md"
+  },
+  {
+    "concept_id": "alg.func.domain",
+    "source": "algebrica/functions/determining-the-domain-of-a-function.md"
+  },
+  {
+    "concept_id": "alg.func.dirichlet",
+    "source": "algebrica/functions/dirichlet-function.md"
+  },
+  {
+    "concept_id": "calc.limit.discontinuity",
+    "source": "algebrica/functions/discontinuities-of-real-functions.md"
+  },
+  {
+    "concept_id": "alg.func.even_odd",
+    "source": "algebrica/functions/even-and-odd-functions.md"
+  },
+  {
+    "concept_id": "alg.exp.concept",
+    "source": "algebrica/functions/exponential-function.md"
+  },
+  {
+    "concept_id": "alg.func.concept",
+    "source": "algebrica/functions/functions.md"
+  },
+  {
+    "concept_id": "alg.func.monotonicity",
+    "source": "algebrica/functions/increasing-and-decreasing-functions.md"
+  },
+  {
+    "concept_id": "alg.func.inverse",
+    "source": "algebrica/functions/inverse-function.md"
   },
   {
     "concept_id": "alg.log.concept",
-    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+    "source": "algebrica/functions/logarithmic-function.md"
   },
   {
-    "concept_id": "alg.log.evaluate",
-    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+    "concept_id": "alg.poly.concept",
+    "source": "algebrica/functions/polynomial-function.md"
   },
   {
-    "concept_id": "alg.log.properties",
-    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+    "concept_id": "alg.func.rational",
+    "source": "algebrica/functions/rational-functions.md"
   },
   {
-    "concept_id": "abstract.group.def",
-    "source": "algebrica/algebraic-structures/groups.md"
+    "concept_id": "alg.func.sigmoid",
+    "source": "algebrica/functions/sigmoid-function.md"
   },
   {
-    "concept_id": "abstract.rings.def",
-    "source": "algebrica/algebraic-structures/rings.md"
+    "concept_id": "alg.func.sign",
+    "source": "algebrica/functions/sign-function.md"
   },
   {
-    "concept_id": "abstract.group.subgroup",
-    "source": "algebrica/algebraic-structures/groups.md"
+    "concept_id": "calc.limit.uniform_continuity",
+    "source": "algebrica/functions/uniform-continuity.md"
   },
   {
-    "concept_id": "abstract.group.homomorphism",
-    "source": "algebrica/algebraic-structures/vector-spaces.md"
+    "concept_id": "alg.ineq.absolute_value",
+    "source": "algebrica/inequalities/inequalities-with-absolute-value.md"
   },
   {
-    "concept_id": "abstract.group.examples",
-    "source": "algebrica/algebraic-structures/groups.md"
+    "concept_id": "alg.ineq.irrational",
+    "source": "algebrica/inequalities/irrational-inequalities.md"
   },
   {
-    "concept_id": "discrete.sets.operations",
-    "source": "algebrica/sets-and-numbers/sets.md"
+    "concept_id": "alg.ineq.multi_step",
+    "source": "algebrica/inequalities/linear-inequalities.md"
   },
   {
-    "concept_id": "discrete.combinatorics.permutations",
-    "source": "algebrica/sets-and-numbers/factorial.md"
+    "concept_id": "alg.ineq.logarithmic",
+    "source": "algebrica/inequalities/logarithmic-inequalities.md"
   },
   {
-    "concept_id": "discrete.combinatorics.pascal",
-    "source": "algebrica/sets-and-numbers/binomial-coefficient.md"
+    "concept_id": "alg.ineq.quadratic",
+    "source": "algebrica/inequalities/quadratic-inequalities.md"
+  },
+  {
+    "concept_id": "alg.ineq.rational",
+    "source": "algebrica/inequalities/rational-inequalities.md"
+  },
+  {
+    "concept_id": "alg.ineq.sign_analysis",
+    "source": "algebrica/inequalities/sign-analysis-in-inequalities.md"
+  },
+  {
+    "concept_id": "alg.ineq.systems",
+    "source": "algebrica/inequalities/systems-of-inequalities.md"
+  },
+  {
+    "concept_id": "trig.ineq.basic",
+    "source": "algebrica/inequalities/trigonometric-inequalities.md"
+  },
+  {
+    "concept_id": "calc.integral.arc_length",
+    "source": "algebrica/integrals/arc-length-of-a-curve.md"
+  },
+  {
+    "concept_id": "calc.integral.definite",
+    "source": "algebrica/integrals/definite-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.area_between",
+    "source": "algebrica/integrals/finding-areas-by-integration.md"
+  },
+  {
+    "concept_id": "calc.integral.ftc",
+    "source": "algebrica/integrals/fundamental-theorem-of-calculus.md"
+  },
+  {
+    "concept_id": "calc.integral.improper",
+    "source": "algebrica/integrals/improper-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.indefinite",
+    "source": "algebrica/integrals/indefinite-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.partial_fractions",
+    "source": "algebrica/integrals/integral-of-rational-functions.md"
+  },
+  {
+    "concept_id": "calc.integral.exp_integral",
+    "source": "algebrica/integrals/integral-of-the-exponential-function.md"
+  },
+  {
+    "concept_id": "calc.integral.trig_integrals",
+    "source": "algebrica/integrals/integral-of-trigonometric-functions.md"
+  },
+  {
+    "concept_id": "calc.integral.parts",
+    "source": "algebrica/integrals/integration-by-parts.md"
+  },
+  {
+    "concept_id": "calc.integral.substitution",
+    "source": "algebrica/integrals/integration-by-substitution.md"
+  },
+  {
+    "concept_id": "calc.integral.numerical",
+    "source": "algebrica/integrals/numerical-integration.md"
+  },
+  {
+    "concept_id": "calc.integral.riemann_criteria",
+    "source": "algebrica/integrals/riemann-integrability-criteria.md"
+  },
+  {
+    "concept_id": "calc.integral.weierstrass_sub",
+    "source": "algebrica/integrals/the-weierstrass-substitution.md"
+  },
+  {
+    "concept_id": "calc.integral.trig_substitution",
+    "source": "algebrica/integrals/trigonometric-substitution-for-integrals.md"
+  },
+  {
+    "concept_id": "calc.deriv.applications",
+    "source": "algebrica/kinematics/acceleration.md"
+  },
+  {
+    "concept_id": "calc.deriv.applications",
+    "source": "algebrica/kinematics/simple-harmonic-motion.md"
+  },
+  {
+    "concept_id": "calc.deriv.applications",
+    "source": "algebrica/kinematics/velocity.md"
+  },
+  {
+    "concept_id": "calc.limit.algebra",
+    "source": "algebrica/limits/algebra-of-limits.md"
+  },
+  {
+    "concept_id": "calc.limit.asymptotes",
+    "source": "algebrica/limits/asymptotes.md"
+  },
+  {
+    "concept_id": "calc.limit.big_o",
+    "source": "algebrica/limits/big-o-notation.md"
+  },
+  {
+    "concept_id": "calc.limit.indeterminate",
+    "source": "algebrica/limits/indeterminate-forms.md"
+  },
+  {
+    "concept_id": "calc.limit.properties",
+    "source": "algebrica/limits/limits.md"
+  },
+  {
+    "concept_id": "calc.limit.little_o",
+    "source": "algebrica/limits/little-o-notation.md"
+  },
+  {
+    "concept_id": "calc.limit.concept",
+    "source": "algebrica/limits/remarkable-limits.md"
+  },
+  {
+    "concept_id": "calc.limit.squeeze",
+    "source": "algebrica/limits/squeeze-theorem.md"
+  },
+  {
+    "concept_id": "linalg.sys.cramer",
+    "source": "algebrica/linear-systems/cramers-rule.md"
   },
   {
     "concept_id": "alg.systems.elimination",
@@ -240,68 +436,52 @@
     "source": "algebrica/linear-systems/rouche-capelli-theorem.md"
   },
   {
-    "concept_id": "nt.adv.euler_phi",
-    "source": "algebrica/sets-and-numbers/natural-numbers.md"
+    "concept_id": "alg.systems.gaussian",
+    "source": "algebrica/linear-systems/solving-linear-systems-using-gaussian-elimination.md"
   },
   {
-    "concept_id": "complex.ops.conjugate",
-    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
+    "concept_id": "alg.systems.concept",
+    "source": "algebrica/linear-systems/systems-of-linear-equations.md"
   },
   {
-    "concept_id": "nt.basics.divisibility",
-    "source": "algebrica/sets-and-numbers/integers.md"
+    "concept_id": "alg.conic.circle",
+    "source": "algebrica/lines-planes-conic-sections/circumference.md"
   },
   {
-    "concept_id": "nt.basics.modular",
-    "source": "algebrica/sets-and-numbers/modulo-operator.md"
+    "concept_id": "alg.conic.ellipse",
+    "source": "algebrica/lines-planes-conic-sections/ellipse.md"
   },
   {
-    "concept_id": "nt.basics.congruence",
-    "source": "algebrica/sets-and-numbers/modulo-operator.md"
+    "concept_id": "alg.conic.hyperbola",
+    "source": "algebrica/lines-planes-conic-sections/hyperbola.md"
   },
   {
-    "concept_id": "linalg.vector.add",
-    "source": "algebrica/vectors-and-matrices/vectors.md"
+    "concept_id": "geo.coord.lines",
+    "source": "algebrica/lines-planes-conic-sections/lines.md"
   },
   {
-    "concept_id": "linalg.vector.dot",
-    "source": "algebrica/vectors-and-matrices/vectors.md"
+    "concept_id": "alg.conic.parabola",
+    "source": "algebrica/lines-planes-conic-sections/parabola.md"
   },
   {
-    "concept_id": "linalg.matrix.identity",
-    "source": "algebrica/vectors-and-matrices/inverse-matrix.md"
+    "concept_id": "geo.coord.polar",
+    "source": "algebrica/lines-planes-conic-sections/polar-coordinates.md"
   },
   {
-    "concept_id": "linalg.vec.basis",
-    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
+    "concept_id": "linalg.vector.parametric",
+    "source": "algebrica/lines-planes-conic-sections/vector-and-parametric-equations-of-a-line.md"
   },
   {
-    "concept_id": "calc.deriv.power_rule",
-    "source": "algebrica/polynomials/polynomials.md"
+    "concept_id": "alg.poly.add_sub",
+    "source": "algebrica/polynomials/adding-and-subtracting-polynomials.md"
   },
   {
-    "concept_id": "calc.integral.ftc",
-    "source": "algebrica/integrals/fundamental-theorem-of-calculus.md"
+    "concept_id": "discrete.combinatorics.binomial_theorem",
+    "source": "algebrica/polynomials/binomial-theorem.md"
   },
   {
-    "concept_id": "discrete.combinatorics.combinations",
-    "source": "algebrica/sets-and-numbers/binomial-coefficient.md"
-  },
-  {
-    "concept_id": "alg.eq.multi_step",
-    "source": "algebrica/equations/equations.md"
-  },
-  {
-    "concept_id": "alg.linear.slope_intercept",
-    "source": "algebrica/equations/linear-equations.md"
-  },
-  {
-    "concept_id": "alg.eq.literal",
-    "source": "algebrica/equations/linear-equations-with-parameters.md"
-  },
-  {
-    "concept_id": "calc.integral.partial_fractions",
-    "source": "algebrica/integrals/integral-of-rational-functions.md"
+    "concept_id": "alg.poly.foil",
+    "source": "algebrica/polynomials/binomials.md"
   },
   {
     "concept_id": "alg.quad.complete_square",
@@ -320,12 +500,296 @@
     "source": "algebrica/polynomials/notable-products.md"
   },
   {
+    "concept_id": "alg.poly.division",
+    "source": "algebrica/polynomials/polynomial-division.md"
+  },
+  {
+    "concept_id": "alg.poly.concept",
+    "source": "algebrica/polynomials/polynomials.md"
+  },
+  {
+    "concept_id": "calc.deriv.power_rule",
+    "source": "algebrica/polynomials/polynomials.md"
+  },
+  {
+    "concept_id": "alg.poly.roots",
+    "source": "algebrica/polynomials/roots-of-a-polynomial.md"
+  },
+  {
+    "concept_id": "alg.poly.synthetic_division",
+    "source": "algebrica/polynomials/synthetic-division-method.md"
+  },
+  {
+    "concept_id": "alg.factor.trinomial",
+    "source": "algebrica/polynomials/trinomials.md"
+  },
+  {
+    "concept_id": "alg.poly.vieta",
+    "source": "algebrica/polynomials/vieta-formulas.md"
+  },
+  {
+    "concept_id": "alg.log.concept",
+    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+  },
+  {
+    "concept_id": "alg.log.evaluate",
+    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+  },
+  {
+    "concept_id": "alg.log.properties",
+    "source": "algebrica/powers-radicals-logarithms/logarithms.md"
+  },
+  {
+    "concept_id": "arith.exp.concept",
+    "source": "algebrica/powers-radicals-logarithms/powers.md"
+  },
+  {
+    "concept_id": "arith.exp.product_rule",
+    "source": "algebrica/powers-radicals-logarithms/powers.md"
+  },
+  {
+    "concept_id": "arith.exp.quotient_rule",
+    "source": "algebrica/powers-radicals-logarithms/powers.md"
+  },
+  {
+    "concept_id": "arith.exp.power_rule",
+    "source": "algebrica/powers-radicals-logarithms/powers.md"
+  },
+  {
+    "concept_id": "arith.exp.evaluate",
+    "source": "algebrica/powers-radicals-logarithms/powers.md"
+  },
+  {
+    "concept_id": "arith.sqrt.simplify",
+    "source": "algebrica/powers-radicals-logarithms/radicals.md"
+  },
+  {
+    "concept_id": "stat.data.mean",
+    "source": "algebrica/probability-and-statistics/arithmetic-mean.md"
+  },
+  {
+    "concept_id": "stat.prob.bayes",
+    "source": "algebrica/probability-and-statistics/bayes-theorem.md"
+  },
+  {
+    "concept_id": "stat.dist.bernoulli",
+    "source": "algebrica/probability-and-statistics/bernoulli-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.beta",
+    "source": "algebrica/probability-and-statistics/beta-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.binomial",
+    "source": "algebrica/probability-and-statistics/binomial-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.chi_square",
+    "source": "algebrica/probability-and-statistics/chi-square-distribution.md"
+  },
+  {
+    "concept_id": "stat.infer.confidence",
+    "source": "algebrica/probability-and-statistics/confidence-intervals.md"
+  },
+  {
+    "concept_id": "stat.prob.continuous_rv",
+    "source": "algebrica/probability-and-statistics/continuous-random-variables.md"
+  },
+  {
+    "concept_id": "stat.prob.discrete_rv",
+    "source": "algebrica/probability-and-statistics/discrete-random-variables.md"
+  },
+  {
+    "concept_id": "stat.dist.exponential",
+    "source": "algebrica/probability-and-statistics/exponential-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.gamma",
+    "source": "algebrica/probability-and-statistics/gamma-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.geometric",
+    "source": "algebrica/probability-and-statistics/geometric-distribution.md"
+  },
+  {
+    "concept_id": "stat.adv.geometric_mean",
+    "source": "algebrica/probability-and-statistics/geometric-mean.md"
+  },
+  {
+    "concept_id": "stat.adv.harmonic_mean",
+    "source": "algebrica/probability-and-statistics/harmonic-mean.md"
+  },
+  {
+    "concept_id": "stat.dist.hypergeometric",
+    "source": "algebrica/probability-and-statistics/hypergeometric-distribution.md"
+  },
+  {
+    "concept_id": "stat.data.mean",
+    "source": "algebrica/probability-and-statistics/introduction-to-the-mean.md"
+  },
+  {
+    "concept_id": "stat.prob.expected_value",
+    "source": "algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md"
+  },
+  {
+    "concept_id": "stat.data.median",
+    "source": "algebrica/probability-and-statistics/median.md"
+  },
+  {
+    "concept_id": "stat.dist.normal",
+    "source": "algebrica/probability-and-statistics/normal-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.poisson",
+    "source": "algebrica/probability-and-statistics/poisson-distribution.md"
+  },
+  {
+    "concept_id": "stat.adv.rms",
+    "source": "algebrica/probability-and-statistics/root-mean-square.md"
+  },
+  {
+    "concept_id": "stat.infer.sampling",
+    "source": "algebrica/probability-and-statistics/sampling-distributions.md"
+  },
+  {
+    "concept_id": "stat.dist.z_table",
+    "source": "algebrica/probability-and-statistics/standard-normal-z-table.md"
+  },
+  {
+    "concept_id": "stat.dist.student_t",
+    "source": "algebrica/probability-and-statistics/student-t-distribution.md"
+  },
+  {
+    "concept_id": "stat.dist.uniform",
+    "source": "algebrica/probability-and-statistics/uniform-distribution.md"
+  },
+  {
+    "concept_id": "stat.adv.covariance",
+    "source": "algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md"
+  },
+  {
+    "concept_id": "stat.adv.variance",
+    "source": "algebrica/probability-and-statistics/variance.md"
+  },
+  {
+    "concept_id": "alg.seq.arithmetic",
+    "source": "algebrica/sequences/arithmetic-sequence.md"
+  },
+  {
+    "concept_id": "calc.seq.cauchy",
+    "source": "algebrica/sequences/cauchy-sequence.md"
+  },
+  {
+    "concept_id": "calc.seq.convergence",
+    "source": "algebrica/sequences/convergent-and-divergent-sequences.md"
+  },
+  {
+    "concept_id": "calc.seq.euler",
+    "source": "algebrica/sequences/euler-number-limit-sequence.md"
+  },
+  {
+    "concept_id": "alg.seq.geometric",
+    "source": "algebrica/sequences/geometric-sequence.md"
+  },
+  {
+    "concept_id": "calc.seq.monotone",
+    "source": "algebrica/sequences/monotone-sequences.md"
+  },
+  {
+    "concept_id": "discrete.proof.induction",
+    "source": "algebrica/sequences/principle-of-mathematical-induction.md"
+  },
+  {
+    "concept_id": "calc.seq.function_sequences",
+    "source": "algebrica/sequences/sequences-of-functions.md"
+  },
+  {
+    "concept_id": "calc.seq.concept",
+    "source": "algebrica/sequences/sequences.md"
+  },
+  {
+    "concept_id": "calc.series.cauchy_criterion",
+    "source": "algebrica/series/cauchy-convergence-criterion-series.md"
+  },
+  {
+    "concept_id": "calc.series.fourier",
+    "source": "algebrica/series/fourier-series.md"
+  },
+  {
+    "concept_id": "calc.series.function_series",
+    "source": "algebrica/series/function-series.md"
+  },
+  {
+    "concept_id": "alg.seq.sum_geo",
+    "source": "algebrica/series/geometric-series.md"
+  },
+  {
+    "concept_id": "calc.series.harmonic",
+    "source": "algebrica/series/harmonic-series.md"
+  },
+  {
+    "concept_id": "calc.series.integral_test",
+    "source": "algebrica/series/integral-test-for-series-convergence.md"
+  },
+  {
+    "concept_id": "calc.series.alternating",
+    "source": "algebrica/series/leibniz-criterion.md"
+  },
+  {
+    "concept_id": "calc.series.power",
+    "source": "algebrica/series/power-series.md"
+  },
+  {
+    "concept_id": "calc.series.root_test",
+    "source": "algebrica/series/root-test-for-series-convergence.md"
+  },
+  {
+    "concept_id": "calc.series.positive_terms",
+    "source": "algebrica/series/series-with-positive-terms.md"
+  },
+  {
+    "concept_id": "calc.series.concept",
+    "source": "algebrica/series/series.md"
+  },
+  {
+    "concept_id": "calc.series.taylor",
+    "source": "algebrica/series/taylor-series.md"
+  },
+  {
     "concept_id": "arith.neg.abs_value",
     "source": "algebrica/sets-and-numbers/absolute-value.md"
   },
   {
+    "concept_id": "discrete.combinatorics.pascal",
+    "source": "algebrica/sets-and-numbers/binomial-coefficient.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.combinations",
+    "source": "algebrica/sets-and-numbers/binomial-coefficient.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.permutations",
+    "source": "algebrica/sets-and-numbers/factorial.md"
+  },
+  {
+    "concept_id": "nt.basics.divisibility",
+    "source": "algebrica/sets-and-numbers/integers.md"
+  },
+  {
     "concept_id": "alg.ineq.interval",
     "source": "algebrica/sets-and-numbers/intervals.md"
+  },
+  {
+    "concept_id": "nt.basics.modular",
+    "source": "algebrica/sets-and-numbers/modulo-operator.md"
+  },
+  {
+    "concept_id": "nt.basics.congruence",
+    "source": "algebrica/sets-and-numbers/modulo-operator.md"
+  },
+  {
+    "concept_id": "nt.adv.euler_phi",
+    "source": "algebrica/sets-and-numbers/natural-numbers.md"
   },
   {
     "concept_id": "prealg.real.properties",
@@ -336,7 +800,163 @@
     "source": "algebrica/sets-and-numbers/real-numbers.md"
   },
   {
+    "concept_id": "discrete.sets.operations",
+    "source": "algebrica/sets-and-numbers/sets.md"
+  },
+  {
+    "concept_id": "calc.limit.supremum",
+    "source": "algebrica/sets-and-numbers/supremum-and-infimum.md"
+  },
+  {
+    "concept_id": "prealg.types",
+    "source": "algebrica/sets-and-numbers/types-of-numbers.md"
+  },
+  {
+    "concept_id": "trig.adv.inverse",
+    "source": "algebrica/trigonometry/arcsine-and-arccosine.md"
+  },
+  {
+    "concept_id": "trig.adv.arctan",
+    "source": "algebrica/trigonometry/arctangent-and-arccotangent.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.sinh_cosh",
+    "source": "algebrica/trigonometry/hyperbolic-sine-and-cosine.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.tanh_coth",
+    "source": "algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md"
+  },
+  {
+    "concept_id": "trig.ident.pythagorean",
+    "source": "algebrica/trigonometry/pythagorean-identity.md"
+  },
+  {
     "concept_id": "geo.triangle.pythagorean",
     "source": "algebrica/trigonometry/pythagorean-theorem.md"
+  },
+  {
+    "concept_id": "trig.basics.special_angles",
+    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
+  },
+  {
+    "concept_id": "trig.basics.reference_angle",
+    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
+  },
+  {
+    "concept_id": "trig.basics.right_triangle",
+    "source": "algebrica/trigonometry/right-triangle-trigonometry.md"
+  },
+  {
+    "concept_id": "trig.basics.reciprocal",
+    "source": "algebrica/trigonometry/secant-and-cosecant.md"
+  },
+  {
+    "concept_id": "trig.basics.sin_cos_def",
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
+  },
+  {
+    "concept_id": "trig.graph.sin",
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
+  },
+  {
+    "concept_id": "trig.graph.cos",
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
+  },
+  {
+    "concept_id": "trig.basics.tan_def",
+    "source": "algebrica/trigonometry/tangent-and-cotangent.md"
+  },
+  {
+    "concept_id": "trig.adv.law_cosines",
+    "source": "algebrica/trigonometry/the-law-of-cosines.md"
+  },
+  {
+    "concept_id": "trig.adv.law_sines",
+    "source": "algebrica/trigonometry/the-law-of-sines.md"
+  },
+  {
+    "concept_id": "trig.ident.identities",
+    "source": "algebrica/trigonometry/trigonometric-identities.md"
+  },
+  {
+    "concept_id": "trig.basics.unit_circle",
+    "source": "algebrica/trigonometry/unit-circle.md"
+  },
+  {
+    "concept_id": "ml.backpropagation",
+    "source": "algebrica/various/backpropagation.md"
+  },
+  {
+    "concept_id": "linalg.vector.cosine_similarity",
+    "source": "algebrica/various/cosine-similarity.md"
+  },
+  {
+    "concept_id": "discrete.logic.propositions",
+    "source": "algebrica/various/propositional-logic.md"
+  },
+  {
+    "concept_id": "linalg.det.2x2",
+    "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"
+  },
+  {
+    "concept_id": "linalg.det.3x3",
+    "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"
+  },
+  {
+    "concept_id": "linalg.eigen.concept",
+    "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"
+  },
+  {
+    "concept_id": "linalg.eigen.compute",
+    "source": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md"
+  },
+  {
+    "concept_id": "linalg.matrix.identity",
+    "source": "algebrica/vectors-and-matrices/inverse-matrix.md"
+  },
+  {
+    "concept_id": "linalg.lintrans.concept",
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
+  },
+  {
+    "concept_id": "linalg.vec.span",
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
+  },
+  {
+    "concept_id": "linalg.vec.basis",
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
+  },
+  {
+    "concept_id": "linalg.matrix.concept",
+    "source": "algebrica/vectors-and-matrices/matrices.md"
+  },
+  {
+    "concept_id": "linalg.matrix.add",
+    "source": "algebrica/vectors-and-matrices/matrices.md"
+  },
+  {
+    "concept_id": "linalg.matrix.mult",
+    "source": "algebrica/vectors-and-matrices/matrices.md"
+  },
+  {
+    "concept_id": "linalg.eigen.diagonalization",
+    "source": "algebrica/vectors-and-matrices/matrix-diagonalization.md"
+  },
+  {
+    "concept_id": "linalg.matrix.rank",
+    "source": "algebrica/vectors-and-matrices/rank-of-a-matrix.md"
+  },
+  {
+    "concept_id": "linalg.vector.concept",
+    "source": "algebrica/vectors-and-matrices/vectors.md"
+  },
+  {
+    "concept_id": "linalg.vector.add",
+    "source": "algebrica/vectors-and-matrices/vectors.md"
+  },
+  {
+    "concept_id": "linalg.vector.dot",
+    "source": "algebrica/vectors-and-matrices/vectors.md"
   }
 ]

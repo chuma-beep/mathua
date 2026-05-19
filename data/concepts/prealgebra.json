@@ -558,5 +558,19 @@
       "streak": 10,
       "avg_time_seconds": 8.0
     }
+  },
+  {
+    "id": "prealg.types",
+    "label": "Types of numbers",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "prealg.real.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]
