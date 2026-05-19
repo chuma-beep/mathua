@@ -28,7 +28,6 @@ A \\text{ is invertible} \\iff \\det(A) \\neq 0
 
 > The condition \\( \\det(A) \\neq 0 \\) is both necessary and sufficient for invertibility. It is equivalent to requiring that the rows (or columns) of \\( A \\) are linearly independent, and that the rank of \\( A \\) equals \\( n \\). The set of all invertible matrices of order \\( n \\) forms a group under matrix multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\), discussed in the entry on groups.
 
-- - -
 ## Properties of the inverse
 
 The inverse matrix satisfies the following properties, for square matrices \\( A \\) and \\( B \\) of order \\( n \\):
@@ -40,7 +39,6 @@ The inverse matrix satisfies the following properties, for square matrices \\( A
 
 > The reversal of order in \\( (AB)^{-1} = B^{-1}A^{-1} \\) is necessary for the same reason as in the transpose: matrix multiplication is not commutative, so inverting a product requires inverting each factor and reversing their order.
 
-- - -
 ## Computing the inverse: the cofactor method
 
 The inverse of a square matrix \\( A \\) of order \\( n \\), when it exists, can be computed using the cofactor method. Given a square matrix \\( A = (a_{ij}) \\), the minor \\( M_{ij} \\) is the determinant of the \\( (n-1) \\times (n-1) \\) submatrix obtained by deleting the \\( i \\)-th row and \\( j \\)-th column of \\( A \\). The cofactor \\( C_{ij} \\) is defined as:
@@ -57,7 +55,6 @@ A^{-1} = \\frac{1}{\\det(A)}\\, C^{\\mathrm{T}} = \\frac{1}{\\det(A)}\\, \\mathr
 
 The computation proceeds as follows: calculate the cofactor \\( C_{ij} \\) for every entry of \\( A \\), assemble the cofactor matrix \\( C \\), take its transpose to obtain \\( \\mathrm{adj}(A) \\), and divide every entry by \\( \\det(A) \\).
 
-- - -
 
 ## Example
 
@@ -126,7 +123,6 @@ A^{-1} = \\frac{1}{6}
 
 > The cofactor method is exact but computationally expensive for large matrices, with complexity \\( O(n!) \\) due to the determinant evaluations involved. In numerical practice, the inverse is typically computed via Gaussian elimination or LU decomposition, which achieve \\( O(n^3) \\) complexity.
 
-- - -
 ## Inversion by Gauss-Jordan elimination
 
 The cofactor method is conceptually transparent, but its computational cost becomes prohibitive as the order of the matrix grows, since it inherits the factorial cost of evaluating determinants by Laplace expansion. In practice, the inverse of a matrix is more efficiently computed using Gauss-Jordan elimination, which reduces the cost to \\( O(n^3) \\).
@@ -149,7 +145,6 @@ The same procedure provides an immediate test for invertibility. If during the r
 
 > The Gauss-Jordan method is the method of choice whenever the order of the matrix exceeds three. The cofactor method retains its value as a definition and as a tool for theoretical reasoning, but for explicit computation Gauss-Jordan is consistently preferable.
 
-- - -
 
 ### Example
 

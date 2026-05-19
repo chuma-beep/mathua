@@ -33,7 +33,6 @@ A = \\begin{pmatrix} 3 & 2 \\\\[6pt] 1 & 4 \\end{pmatrix}
 \\det(A) = 3 \\cdot 4-1 \\cdot 2 = 10
 \\]
 
-- - -
 ## Diagonal and triangular matrices
 
 For a diagonal matrix, that is a square matrix in which all off-diagonal elements are zero, the determinant equals the product of the elements on the main diagonal:
@@ -51,7 +50,6 @@ a_{11} & 0 & \\cdots & 0 \\\\[6pt]
 
 The same result holds for upper and lower triangular matrices. In both cases, the determinant is the product of the diagonal entries, since all the additional terms in the expansion vanish.
 
-- - -
 ## Laplace expansion
 
 The determinant of a square matrix of order \\( n \\geq 3 \\) can be computed recursively using the cofactor expansion, also known as Laplace expansion. Given a square matrix \\( A = (a_{ij}) \\) of order \\( n \\), the minor \\( M_{ij} \\) is the determinant of the \\( (n-1) \\times (n-1) \\) submatrix obtained by deleting the \\( i \\)-th row and \\( j \\)-th column of \\( A \\). The cofactor \\( C_{ij} \\) is defined as:
@@ -84,7 +82,6 @@ A = \\begin{pmatrix}
 
 Expanding along the first row, we compute the cofactor contribution of each element.
 
-- - -
 
 For \\( a_{11} = 2 \\), the minor is the determinant of the submatrix obtained by deleting row 1 and column 1:
 
@@ -94,7 +91,6 @@ C_{11} = (-1)^{1+1} \\cdot \\det\\begin{pmatrix} -2 & 0 \\\\[6pt] 4 & 1 \\end{pm
 
 The contribution is \\( a_{11} \\cdot C_{11} = 2 \\cdot (-2) = -4 \\).
 
-- - -
 
 For \\( a_{12} = 0 \\), the minor is:
 
@@ -104,7 +100,6 @@ C_{12} = (-1)^{1+2} \\cdot \\det\\begin{pmatrix} 3 & 0 \\\\[6pt] 1 & 1 \\end{pma
 
 The contribution is \\( a_{12} \\cdot C_{12} = 0 \\cdot (-3) = 0 \\).
 
-- - -
 
 For \\( a_{13} = -1 \\), the minor is:
 
@@ -114,7 +109,6 @@ C_{13} = (-1)^{1+3} \\cdot \\det\\begin{pmatrix} 3 & -2 \\\\[6pt] 1 & 4 \\end{pm
 
 The contribution is \\( a_{13} \\cdot C_{13} = (-1) \\cdot 14 = -14 \\).
 
-- - -
 
 Summing the three contributions we obtain:
 
@@ -124,7 +118,6 @@ Summing the three contributions we obtain:
 
 > The computational cost of Laplace expansion grows factorially with the order of the matrix, resulting in a time complexity of \\( O(n!) \\). For this reason, the method is impractical for large matrices in numerical applications, where more efficient algorithms such as LU decomposition are preferred.
 
-- - -
 ## Sarrus' rule
 
 For matrices of order 3, the determinant can be computed using Sarrus' rule, a direct mnemonic method equivalent to the Laplace expansion. Given the matrix:
@@ -179,7 +172,6 @@ We obtain:
 
 > Sarrus' rule applies exclusively to matrices of order 3. It does not generalize to higher orders.
 
-- - -
 ## Properties of the determinant
 
 The following are the fundamental properties of the determinant.

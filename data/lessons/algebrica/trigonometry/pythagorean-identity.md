@@ -28,7 +28,6 @@ radius of the circle, which by definition equals one. Substituting \\(c = 1\\), 
 \sin\theta\\), and \\(b = \cos\theta\\) into the equation above yields the Pythagorean
 identity directly.
 
----
 
 The Pythagorean identity makes it possible to express each of the two functions in terms of
 the other. Solving for sine gives
@@ -45,7 +44,6 @@ and solving for cosine gives:
 
 In each case, the sign depends on the quadrant in which \\(\theta\\) lies. In the first quadrant both functions are positive, so the positive square root applies; in the remaining quadrants the sign must be chosen in accordance with the known sign of the relevant function in that region.
 
----
 
 The same identity also gives rise to two further relationships, one involving tangent and secant, the other involving cotangent and
 cosecant.
@@ -76,7 +74,6 @@ Since \\(\cos\theta / \sin\theta = \cot\theta\\) and \\(1/\sin\theta = \csc\thet
 
 The three identities obtained, together with the original Pythagorean identity, form the backbone of most algebraic manipulations encountered in trigonometry.
 
-- - -
 ## Domain restrictions
 
 The identities:
@@ -90,7 +87,6 @@ Similarly, dividing by \\(\sin^2\theta\\) requires \\(\sin\theta \neq 0\\), whic
 
 This coincidence between the domain restrictions and the natural domains of \\(\tan\\), \\(\sec\\), \\(\cot\\), and \\(\csc\\) is not accidental. These four functions are defined precisely as ratios involving sine and cosine, so the values excluded from their domains are exactly those at which the relevant denominator vanishes. The restrictions that appear when deriving the identities by division are therefore the same restrictions that define the functions themselves, and could not be otherwise.
 
-- - -
 ## Validity for arbitrary angles
 
 The geometric argument given above establishes the identity for acute angles, since it relies on interpreting sine and cosine as the lengths of the legs of a right triangle. This interpretation ceases to be meaningful when \\(\theta\\) is obtuse, negative, or greater than \\(2\pi\\), and a more general foundation is therefore needed.
@@ -105,7 +101,6 @@ Under this definition, the point \\((\cos\theta, \sin\theta)\\) lies on the unit
 
 for every real value of \\(\theta\\), without any restriction on the quadrant or the magnitude of the angle. The identity is therefore not a consequence of triangle geometry, but a direct expression of the definition of the trigonometric functions on the real line.
 
-- - -
 ## Example 1
 
 The Pythagorean identity is often useful in simplifying expressions that do not appear, at first glance, to involve it. The following expression illustrates how recognising an algebraic structure in the numerator can reduce an apparently non-trivial fraction to a constant. Consider the expression:
@@ -128,7 +123,6 @@ Since \\(\sin^2\theta + \cos^2\theta = 1\\) by the Pythagorean identity, the num
 
 provided that \\(\sin^2\theta \neq \cos^2\theta\\), that is, for all \\(\theta\\) that are not odd multiples of \\(\dfrac{\pi}{4}\\).
 
-- - -
 ## Rewriting expressions in a single function
 
 A common requirement in calculus and mathematical analysis is to rewrite a trigonometric expression so that it involves only one function. The three Pythagorean identities provide a systematic way to do this, and the technique appears repeatedly across a wide range of problems, from the simplification of trigonometric expressions to the computation of integrals and the solution of differential equations.
@@ -170,7 +164,6 @@ The same principle underlies trigonometric substitution, where expressions invol
 
 which reduces to \\(\cos\theta\\) whenever \\(\theta \in \left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\\), the standard range chosen for this substitution. The radical has been eliminated entirely, and the resulting integral involves only trigonometric functions, to which standard techniques apply directly.
 
-- - -
 ## Example 2
 
 The substitution \\(x = \sin\theta\\) is a standard technique for integrals containing the radical \\(\sqrt{1 - x^2}\\). The Pythagorean identity is what makes the substitution effective: it guarantees that the radical collapses to a single trigonometric function, eliminating the square root entirely. Consider the following integral:
@@ -210,7 +203,6 @@ The solution is therefore:
 
 > This is the area formula for a semicircle of unit radius, as expected from the geometric interpretation of the integrand.
 
-- - -
 ## Connection with Euler's formula
 
 The Pythagorean identity admits an especially transparent proof once the trigonometric functions are extended to the complex plane. Euler's formula states that for any real \\(\theta\\), the complex exponential satisfies:

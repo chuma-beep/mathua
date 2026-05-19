@@ -15,7 +15,6 @@ The quantity \(2r\) is the diameter of the circumcircle, that is, the unique cir
 
 The law of sines is particularly useful when some sides or angles of a triangle are known and the remaining ones must be determined, since each unknown can be recovered through a simple proportion.
 
-- - -
 
 To establish the equality of the three ratios, consider the altitude \\(h\\) drawn from the vertex opposite to side \\(c\\) to the side \\(c\\) itself. By the definition of the sine function applied to angles \\(\alpha\\) and \\(\beta\\), one has \\(\sin(\alpha) = h/b\\) and \\(\sin(\beta) = h/a\\), from which \\(b\sin(\alpha) = h = a\sin(\beta)\\). Dividing both sides by \\(\sin(\alpha)\sin(\beta)\\) yields:
 
@@ -35,7 +34,6 @@ To see why the common value is \\(2r\\), note that when the triangle is inscribe
 
 > The law of sines is often used in conjunction with the law of cosines, which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
 
-- - -
 
 ## Example 1
 
@@ -53,7 +51,6 @@ b = \frac{10 \cdot \sin 65^\circ}{\sin 40^\circ} = \frac{10 \cdot 0.9063}{0.6428
 
 The length of side \\(b\\) is approximately \\(14.1\\) units.
 
-- - -
 ## The ambiguous case
 
 In the Side-Side-Angle (SSA) configuration, where two sides \\(a\\) and \\(b\\) and an angle \\(\alpha\\) opposite to one of them are given, the law of sines does not necessarily determine a unique triangle. Isolating \\(\sin(\beta)\\) from the proportion yields:
@@ -64,7 +61,6 @@ In the Side-Side-Angle (SSA) configuration, where two sides \\(a\\) and \\(b\\) 
 
 Since the sine function satisfies \\(\sin(\theta) = \sin(180^\circ - \theta)\\) for every \\(\theta \in (0^\circ, 180^\circ)\\), this value may correspond to two distinct angles, \\(\beta\\) and \\(180^\circ - \beta\\). Whether neither, one, or both of these yield a valid triangle depends on the relative magnitudes of \\(a\\), \\(b\\), and the altitude from the vertex opposite to \\(c\\). Each candidate value of \\(\beta\\) must therefore be examined individually to verify that the resulting angles sum to less than \\(180^\circ\\) and that all sides are positive.
 
-- - -
 ## Example 2
 
 Consider a triangle in which \\(\alpha = 35^\circ\\), \\(a = 7\\) and \\(b = 10\\). The goal is to determine all possible values of angle \\(\beta\\) and, for each, the corresponding triangle. Applying the law of sines to isolate \\(\sin(\beta)\\) gives:
@@ -97,7 +93,6 @@ This case is also positive, so the second triangle is valid as well. The two tri
 
 Both are consistent with the given data \\(\alpha = 35^\circ\\), \\(a = 7\\), \\(b = 10\\), confirming that two distinct triangles can satisfy the same initial conditions.
 
-- - -
 ## A geometric criterion for the ambiguous case
 
 The algebraic analysis of the ambiguous case can be complemented by a geometric criterion that allows the number of valid triangles to be determined before performing any computation. Given the angle \\(\alpha\\) and the two sides \\(a\\) and \\(b\\), the quantity \\(b \sin(\alpha)\\) coincides with the altitude of the triangle measured from the vertex opposite to side \\(c\\). Comparing this altitude with the length of \\(a\\) is sufficient to predict how many triangles are compatible with the given data.
@@ -111,7 +106,6 @@ Four situations arise depending on the relative size of \\(a\\) with respect to 
 
 > The expression \\(b \sin(\alpha)\\) should be read as the altitude from the vertex of angle \\(\alpha\\) to the line containing side \\(c\\). This interpretation makes the criterion easy to recall, since the question reduces to whether \\(a\\) falls short of this altitude, equals it, lies between it and \\(b\\), or exceeds \\(b\\).
 
-- - -
 
 The criterion is consistent with the second example discussed above. With \\(\alpha = 35^\circ\\) and \\(b = 10\\), the altitude is:
 

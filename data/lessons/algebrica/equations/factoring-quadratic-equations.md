@@ -17,7 +17,6 @@ ax^{2}+bx+c = a(x-x_1)(x-x_2) \tag{1}
 
 The roots may coincide when \\(\Delta = 0\\), in which case the factorization reduces to \\(a(x-x_0)^2\\). When \\(\Delta < 0\\) the polynomial is irreducible over \\(\mathbb{R}\\) and admits a factorization only over \\(\mathbb{C}\\), where the two roots are complex conjugates.
 
-- - -
 ## Derivation
 
 Consider the quadratic polynomial associated with the equation:
@@ -54,7 +53,6 @@ This establishes identity \\((1)\\). The roots of the equation are recovered by 
 
 > The factorization above is exact and follows directly from the values of the roots. When the roots are not known in advance, they are obtained from the quadratic formula and substituted into \\((1)\\). An alternative approach, useful when the coefficients are integers and the roots are rational, is the AC method, which factors the polynomial without computing the discriminant explicitly.
 
-- - -
 ## Example 1
 
 Consider a polynomial with integer roots:
@@ -71,7 +69,6 @@ x^{2} - 4x + 3 = (x-1)(x-3)
 
 The associated equation has solutions \\(x_1 = 1\\) and \\(x_2 = 3\\).
 
-- - -
 ## Example 2
 
 Consider a polynomial whose leading coefficient is different from one:
@@ -96,7 +93,6 @@ Substituting these values into \\((1)\\) with \\(a = 2\\):
 
 > The factor \\(2\\) has been absorbed into the second linear term to produce a factorization with integer coefficients.
 
-- - -
 ## Example 3
 
 Consider a polynomial whose discriminant vanishes, so that the two roots coincide:
@@ -113,7 +109,6 @@ x^{2} - 6x + 9 = (x-3)^{2}
 
 This is consistent with identity \\((1)\\), where \\(x_1 = x_2 = x_0\\).
 
-- - -
 ## Example 4
 
 Consider a polynomial whose discriminant is negative, so that the polynomial is irreducible over \\(\mathbb{R}\\):

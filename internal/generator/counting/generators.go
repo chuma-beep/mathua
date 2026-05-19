@@ -9,16 +9,16 @@ import (
 )
 
 func Register(reg *generator.Registry) {
-	reg.Register("count.objects", &countObjectsGen{})
-	reg.Register("count.cardinality", &countCardinalityGen{})
-	reg.Register("count.number_line", &countNumberLineGen{})
-	reg.Register("count.compare", &countCompareGen{})
-	reg.Register("count.skip_2", &skipCountGen{step: 2, max: 20})
-	reg.Register("count.skip_5", &skipCountGen{step: 5, max: 50})
-	reg.Register("count.skip_10", &skipCountGen{step: 10, max: 100})
-	reg.Register("count.objects_20", &countObjects20Gen{})
-	reg.Register("count.ordinal", &countOrdinalGen{})
-	reg.Register("count.backwards", &countBackwardsGen{})
+	reg.Register("count.basics.objects", &countObjectsGen{})
+	reg.Register("count.basics.cardinality", &countCardinalityGen{})
+	reg.Register("count.basics.number_line", &countNumberLineGen{})
+	reg.Register("count.basics.compare", &countCompareGen{})
+	reg.Register("count.skip.by_2", &skipCountGen{step: 2, max: 20})
+	reg.Register("count.skip.by_5", &skipCountGen{step: 5, max: 50})
+	reg.Register("count.skip.by_10", &skipCountGen{step: 10, max: 100})
+	reg.Register("count.basics.objects_20", &countObjects20Gen{})
+	reg.Register("count.basics.ordinal", &countOrdinalGen{})
+	reg.Register("count.basics.backwards", &countBackwardsGen{})
 }
 
 var ordinals = []string{

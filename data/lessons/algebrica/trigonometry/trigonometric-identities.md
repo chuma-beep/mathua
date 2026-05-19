@@ -8,7 +8,6 @@ A trigonometric identity is an equation involving trigonometric functions that h
 
 The identities presented below are grouped into families according to the type of transformation they perform. Some express a function of a modified angle in terms of the original angle, others convert products into sums or sums into products, and others still reduce a general angle to a parametric variable. Each group plays a distinct role in the resolution of trigonometric equations, in the simplification of expressions, and in the broader apparatus of calculus.
 
-- - -
 ## Fundamental identities
 
 Before examining the transformations that relate trigonometric functions of different angles, it is useful to recall the elementary identities that connect the six trigonometric functions at a single angle. These identities descend directly from the definitions on the unit circle and from the Pythagorean theorem, and they form the algebraic foundation on which every subsequent identity is built. The Pythagorean identity expresses the constraint that the coordinates of any point on the unit circle satisfy the equation of the circle itself:
@@ -40,7 +39,6 @@ The quotient identities relate tangent and cotangent to the ratio of sine and co
 
 > The first identity is valid for \\(\cos(\theta) \neq 0\\), the second for \\(\sin(\theta) \neq 0\\). Together, the Pythagorean and quotient identities are sufficient to re-express any trigonometric expression in terms of sine and cosine alone, a reduction that is often the first step in the simplification of more elaborate formulas.
 
-- - -
 ## Reference angles and reflections
 
 The method of reference angles, sometimes called the method of reflections, is a family of identities that allow one to express a trigonometric function of a non-acute angle in terms of the corresponding acute angle in the first quadrant of the Cartesian plane. Any trigonometric function, whether sine, cosine, tangent, or cotangent, with an argument of the form:
@@ -66,7 +64,6 @@ In Cartesian coordinates, this angle lies in the second quadrant. A direct geome
 
 The vertical segment associated with the sine of \\(\alpha\\) in the first quadrant has the same length as the horizontal segment associated with the cosine of \\(\frac{\pi}{2} + \alpha\\) in the second quadrant, while the sign of the cosine becomes negative because the second quadrant lies to the left of the vertical axis. The same procedure applied to every angle of the form listed above produces a full catalogue of reduction formulas, discussed in detail in the page on reduction formulas and reference angles.
 
-- - -
 
 ## Sum and difference
 
@@ -94,7 +91,6 @@ The analogous identities for tangent and cotangent follow by taking the ratio of
 
 > These identities form the backbone of the entire body of trigonometric identities. The double-angle, half-angle, and prosthaphaeresis formulas are all derived from them through appropriate substitutions or algebraic manipulations.
 
-- - -
 ## Double-angle
 
 The double-angle formulas express the trigonometric functions of an angle \\(2\theta\\) in terms of the trigonometric functions of \\(\theta\\). For sine and cosine the following identities hold:
@@ -124,7 +120,6 @@ The corresponding identities for tangent and cotangent are:
 \end{align}
 \\]
 
-- - -
 
 The derivation of the sine double-angle formula proceeds from the sum identity for the sine:
 
@@ -146,7 +141,6 @@ Combining the two identical terms on the right gives the final result:
 
 The same reasoning applied to the sum identity for the cosine, with \\(a = b = \theta\\), yields the double-angle formula for the cosine.
 
-- - -
 ## Example
 
 Consider the integral:
@@ -177,7 +171,6 @@ The integral becomes elementary:
 
 > The integral, which at first sight required a non-trivial technique, has been reduced to a sum of elementary antiderivatives through a single trigonometric identity.
 
-- - -
 ## Half-angle formulas
 
 The half-angle formulas express the trigonometric functions of \\(\frac{\theta}{2}\\) in terms of the trigonometric functions of \\(\theta\\). For sine and cosine the following identities hold:
@@ -202,7 +195,6 @@ The half-angle formulas for tangent and cotangent can be written either in radic
 
 > The derivation of the half-angle formulas follows from the two alternative forms of the cosine double-angle identity. Writing \\(\cos(\theta) = 1 - 2\sin^2(\theta/2)\\) and solving for \\(\sin(\theta/2)\\) yields the half-angle formula for the sine; the analogous manipulation on \\(\cos(\theta) = 2\cos^2(\theta/2) - 1\\) produces the half-angle formula for the cosine.
 
-- - -
 ## Parametric formulas
 
 The parametric formulas express the trigonometric functions of an angle \\(\theta\\) in terms of the single auxiliary variable:
@@ -231,7 +223,6 @@ The corresponding expressions for tangent and cotangent are:
 
 The substitution is valid whenever \\(\theta \neq \pi + 2k\pi\\) with \\(k \in \mathbb{Z}\\), since at those values the tangent of the half-angle is undefined. The practical importance of the parametric formulas lies in their ability to reduce a trigonometric expression to a rational function of a single algebraic variable, a property widely exploited in the integration of rational functions of sine and cosine through the Weierstrass substitution.
 
-- - -
 ## Werner's formulas
 
 Werner's formulas transform the product of two trigonometric functions into a sum or difference of trigonometric functions. The three identities are:
@@ -246,7 +237,6 @@ Werner's formulas transform the product of two trigonometric functions into a su
 
 Each identity follows by adding or subtracting the appropriate pair of sum and difference formulas. For example, adding the expansions of \\(\cos(\alpha - \beta)\\) and \\(\cos(\alpha + \beta)\\) cancels the sine terms and leaves twice the product \\(\cos(\alpha)\cos(\beta)\\), from which the second identity is immediate. These formulas are particularly useful in the integration of products of trigonometric functions and in the analysis of the interference of waves in physics, where the product of two sinusoidal signals is naturally decomposed into components at the sum and difference frequencies.
 
-- - -
 ## Prosthaphaeresis formulas
 
 The prosthaphaeresis formulas perform the transformation opposite to Werner's: they rewrite a sum or difference of sines or cosines as a product of trigonometric functions. The four identities are:

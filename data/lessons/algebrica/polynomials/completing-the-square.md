@@ -18,7 +18,6 @@ p(x) = a(x + h)^2 + k
 
 The pair \\( (-h,\\, k) \\) specifies the vertex of the corresponding parabola. The value \\( k \\) represents the minimum of \\( p \\) when \\( a > 0 \\) and the maximum when \\( a < 0 \\). Setting \\( p(x) \\) equal to zero yields the equation \\( a(x+h)^2 = -k \\), from which the roots can be obtained by taking square roots of both sides.
 
-- - -
 
 To derive explicit expressions for \\( h \\) and \\( k \\), the process begins by factoring \\( a \\) from the quadratic and linear terms:
 
@@ -50,7 +49,6 @@ which is the vertex form with:
 h = \\frac{b}{2a} \qquad k = c - \\frac{b^2}{4a}
 \\]
 
-- - -
 ## Geometric interpretation
 
 The algebraic identity underlying the method of completing the square allows for a direct geometric interpretation. Consider the following expression:
@@ -69,7 +67,6 @@ This geometric reasoning applies precisely when the constant term equals the squ
 
 > When the coefficients are small integers and the polynomial factors readily, this geometric approach is often more straightforward than using the quadratic formula. Its effectiveness decreases when the leading coefficient or the linear term contains fractions or irrational numbers, as the arithmetic becomes more complex and the quadratic formula is generally preferable.
 
-- - -
 ## Example 1
 
 An application of the method can be demonstrated using the following quadratic equation:
@@ -114,7 +111,6 @@ x = \\frac{2 \\pm \\sqrt{7}}{3}
 
 > When the coefficients are not small integers, completing the square is typically more laborious than directly applying the quadratic formula. The latter method is generally preferable in such cases.
 
-- - -
 
 ## Derivation of the quadratic formula
 
@@ -150,7 +146,6 @@ x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}
 
 > This derivation shows that the quadratic formula is a direct consequence of completing the square applied to the general quadratic equation.
 
-- - -
 
 The expression \\( b^2 - 4ac \\), which appears under the square root in the quadratic formula, is called the discriminant of the equation. Its sign determines the nature of the roots:
 

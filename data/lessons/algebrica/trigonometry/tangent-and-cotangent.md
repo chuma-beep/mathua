@@ -13,7 +13,6 @@ Both admit a precise geometric interpretation on the unit circle, where they app
 
 ![Tangent on the unit circle](svg/unit-circle-tangent.svg)
 
-- - -
 ## Tangent
 
 Consider the unit circle centered at the origin \\(\text{O} = (0,0)\\) with radius 1. Let \\(\theta\\) be an angle in standard position, and denote by \\(\text{P}\\) the point on the circle where the terminal side of \\(\theta\\) intersects it.
@@ -46,7 +45,6 @@ Since the cosine vanishes at \\(\theta = \dfrac{\pi}{2} + k\pi\\) for every \\(k
 \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} \qquad \theta \neq \frac{\pi}{2} + k\pi \quad k \in \mathbb{Z}
 \\]
 
-- - -
 ## Common values of the tangent
 
 The following table collects the values of \\( \tan(x) \\) at the most frequently encountered angles, expressed in radians.
@@ -63,7 +61,6 @@ x &= \pi/3   &\quad& \tan(\pi/3) = \sqrt{3}
 \end{align}
 \\]
 
-- - -
 ## Trigonometric identities for the tangent
 
 + \\[  \text{1.} \quad \tan(x+y) = \frac{\tan(x) + \tan(y)}{1 - \tan(x)\tan(y)} \\]
@@ -79,7 +76,6 @@ x &= \pi/3   &\quad& \tan(\pi/3) = \sqrt{3}
 
 > These identities describe how tangent behaves under angle addition, subtraction, doubling, halving, and reciprocal relationships. They complement the identities for sine and cosine and are especially useful when simplifying expressions or transforming trigonometric equations. For a broader overview, refer to the full collection of trigonometric identities.
 
-- - -
 ## Cotangent
 
 The reciprocal of the tangent is called the cotangent and is denoted by \\(\cot(\theta).\\) Geometrically, it corresponds to the signed length of a segment \\(\overline{ZV}\\) constructed on the horizontal tangent line at the top of the unit circle, in a manner analogous to the construction for the tangent. It can be expressed as:
@@ -94,7 +90,6 @@ Since the sine vanishes at \\(\theta = k\pi\\) for every \\(k \in \mathbb{Z}\\),
 \cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)} \qquad \theta \neq k\pi \quad k \in \mathbb{Z}
 \\]
 
-- - -
 ## Trigonometric identities for the cotangent
 
 + \\[\text{1.} \quad  \cot(x+y) = \frac{\cot(x)\cot(y) - 1}{\cot(x) + \cot(y)}\\]
@@ -108,7 +103,6 @@ Since the sine vanishes at \\(\theta = k\pi\\) for every \\(k \in \mathbb{Z}\\),
 
 > These identities describe how cotangent behaves under angle addition, subtraction, doubling, halving, and reciprocal relationships.
 
-- - -
 ## Tangent and cotangent functions
 
 The tangent function \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), expressed in radians, its corresponding tangent value. Its graph is a periodic curve with period \\(\pi\\), crossing the horizontal axis at every integer multiple of \\(\pi\\) and displaying vertical asymptotes at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\), where the cosine vanishes. The domain of \\(\tan(x)\\) consists of all real numbers except these values, and its range is the entire real line.
@@ -118,7 +112,6 @@ The tangent function \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), express
 * Periodicity: periodic in \\( x \\) with period \\( \pi \\)
 * Parity: odd, \\( \tan(-x) = -\tan(x) \\)
 
----
 
 The cotangent function \\( f(x) = \cot(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding cotangent value. Its graph is a periodic curve with period \\( \pi \\), featuring vertical asymptotes at \\( x = k\pi \\) for \\( k \in \mathbb{Z} \\), where the sine vanishes. The domain excludes these points, and the range is the entire real line.
 
@@ -162,7 +155,6 @@ This expression mirrors the structure of the hyperbolic tangent, which is define
 
 This identity reflects the deeper unity between circular and hyperbolic trigonometry, both of which emerge from the same exponential framework over the complex numbers.
 
-- - -
 ## The Weierstrass substitution
 
 The half-angle formula for the tangent is the starting point of one of the most useful techniques in integral calculus, the Weierstrass substitution. The substitution is defined by:

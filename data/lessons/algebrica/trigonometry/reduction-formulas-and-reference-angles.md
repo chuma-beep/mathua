@@ -15,7 +15,6 @@ The identities that realize this link are known as reduction formulas. Each of t
 
 Every other case reduces to one of these by adding or subtracting an integer multiple of \\( 2\pi \\).
 
-- - -
 
 For each of these forms, two pieces of information completely determine the corresponding reduction formula: the quadrant of the angle, which fixes the signs of the four trigonometric functions, and the axis used as reference, which determines whether the reduction preserves each function or swaps it with its cofunction.
 
@@ -34,7 +33,6 @@ Angles written as deviations from \\( \pi/2\\) or \\(3\pi/2\\) are measured from
 
 > The sections that follow derive each identity geometrically, starting from the position of the terminal side on the unit circle and reading the sign of the coordinates directly from the figure.
 
-- - -
 ## Reduction formulas for \\( \pi/2 + \alpha \\)
 
 Consider an angle of the form \\(\pi/2+\alpha\\) where \\( \alpha \\) denotes an acute angle measured from the positive \\( x \\)-axis. Starting from \\( \frac{\pi}{2} \\), which corresponds to the vertical direction, the addition of \\( \alpha \\) rotates the terminal side slightly to the left of the vertical axis, as shown in the figure below. The resulting angle lies strictly between \\( \frac{\pi}{2} \\) and \\( \pi \\), and therefore its terminal side falls in the second quadrant of the Cartesian plane.
@@ -66,7 +64,6 @@ Substituting the expressions obtained above into these definitions gives:
 
 The tangent and cotangent of \\( \pi/2+\alpha \\) therefore differ from the cotangent and tangent of \\( \alpha \\) only by a change of sign, consistently with the fact that both functions are negative in the second quadrant.
 
-- - -
 ## Reduction formulas for \\( \pi/2 - \alpha \\)
 
 Consider now an angle of the form \\(\frac{\pi}{2}-\alpha\\) where \\( \alpha \\) denotes an acute angle in the first quadrant. This angle is obtained by rotating counterclockwise from the positive \\( x \\)-axis up to \\( \frac{\pi}{2} \\), and then turning back by \\( \alpha \\). The backward rotation brings the terminal side to the right of the vertical axis, keeping it between \\( 0 \\) and \\( \frac{\pi}{2} \\). The resulting angle therefore lies in the first quadrant of the Cartesian plane.
@@ -87,7 +84,6 @@ In this case both functions retain a positive sign, consistently with the fact t
 \\]
 The tangent of \\( \pi/2-\alpha \\) therefore coincides with the cotangent of \\( \alpha \\), and viceversa, in agreement with the general rule that angles measured from a vertical axis produce a cofunction swap.
 
-- - -
 ## Reduction formulas for \\( \pi + \alpha \\)
 
 Consider now an angle of the form \\(\pi+\alpha)\\), where \\( \alpha \\) denotes an acute angle. Starting from \\( \pi \\), which corresponds to the negative direction of the \\( x \\)-axis, the addition of \\( \alpha \\) rotates the terminal side slightly downward, bringing it into the lower-left region of the Cartesian plane. The resulting angle lies strictly between \\( \pi \\) and \\( 3\pi/2 \\), and therefore its terminal side falls in the third quadrant.
@@ -108,7 +104,6 @@ Both values carry a negative sign, as expected in the third quadrant, where the 
 \\]
 The two negative signs cancel in each quotient, and the tangent and cotangent of \\( \pi+\alpha \\) therefore coincide with those of \\( \alpha \\). This is the analytic counterpart of the fact that tangent and cotangent have period \\( \pi \\), whereas sine and cosine have period \\( 2\pi.\\)
 
-- - -
 ## Reduction formulas for \\( \pi - \alpha \\)
 
 Consider now an angle of the form \\(\pi-\alpha\\) where \\( \alpha \\) denotes an acute angle. Since \\( \pi \\) corresponds to the negative direction of the \\( x \\)-axis, the subtraction of \\( \alpha \\) rotates the terminal side slightly upward, bringing it into the upper-left region of the Cartesian plane. The resulting angle lies strictly between \\( \pi/2 \\) and \\( \pi \\), and therefore its terminal side falls in the second quadrant.
@@ -129,7 +124,6 @@ The sine retains a positive value, consistently with the fact that the terminal 
 \\]
 Both quotients carry a single minus sign, and the tangent and cotangent of \\( \pi-\alpha \\) therefore differ from those of \\( \alpha \\) only by a change of sign. This is consistent with the fact that in the second quadrant both functions take negative values.
 
-- - -
 ## Reduction formulas for \\( 3\pi/2 + \alpha \\)
 
 Consider now an angle of the form \\(\frac{3\pi}{2}+\alpha\\) where \\( \alpha \\) denotes an acute angle. Starting from \\( 3\pi/2 \\), which corresponds to the negative direction of the \\( y \\)-axis, the addition of \\( \alpha \\) rotates the terminal side slightly to the right of the vertical axis. The resulting angle lies strictly between \\( 3\pi/2 \\) and \\( 2\pi \\), and therefore its terminal side falls in the fourth quadrant of the Cartesian plane.
@@ -150,7 +144,6 @@ The sine takes a negative value because the terminal side lies below the horizon
 \\]
 Both quotients carry a single minus sign, and the tangent and cotangent of \\( 3\pi/2+\alpha \\) therefore differ from the cotangent and tangent of \\( \alpha \\) only by a change of sign. This is consistent with the fact that in the fourth quadrant both functions take negative values.
 
-- - -
 ## Reduction formulas for \\( 3\pi/2 - \alpha \\)
 
 Consider now an angle of the form \\(\frac{3\pi}{2}-\alpha\\) where \\( \alpha \\) denotes an acute angle. Since \\( 3\pi/2 \\) corresponds to the negative direction of the \\( y \\)-axis, the subtraction of \\( \alpha \\) rotates the terminal side backward toward \\( \pi \\), bringing it into the lower-left region of the Cartesian plane. The resulting angle lies strictly between \\( \pi \\) and \\( 3\pi/2 \\), and therefore its terminal side falls in the third quadrant.
@@ -171,7 +164,6 @@ Both values carry a negative sign, consistently with the fact that in the third 
 \\]
 The two negative signs cancel in each quotient, and the tangent of \\( 3\pi/2-\alpha \\) therefore coincides with the cotangent of \\( \alpha \\), while the cotangent of \\( 3\pi/2-\alpha \\) coincides with the tangent of \\( \alpha \\). This is in agreement with the fact that both functions take positive values in the third quadrant.
 
-- - -
 ## Reduction formulas for \\( 2\pi - \alpha = -\alpha \\)
 
 Consider finally an angle of the form \\(2\pi-\alpha\\) where \\( \alpha \\) denotes an acute angle. Since \\( 2\pi \\) corresponds to a full revolution and therefore identifies the same terminal side as \\( 0 \\), the subtraction of \\( \alpha \\) rotates the terminal side slightly below the positive \\( x \\)-axis. The resulting angle lies strictly between \\( 3\pi/2 \\) and \\( 2\pi \\), and therefore its terminal side falls in the fourth quadrant.
@@ -194,7 +186,6 @@ The sine takes a negative value because the terminal side lies below the horizon
 \\]
 Both quotients carry a single minus sign, and the tangent and cotangent of \\( 2\pi-\alpha \\) therefore differ from those of \\( \alpha \\) only by a change of sign. This is consistent with the fact that in the fourth quadrant both functions take negative values, and with the odd symmetry of tangent and cotangent with respect to the origin.
 
-- - -
 ## Structural remarks
 
 Beyond their immediate computational use, the reduction formulas reveal a structural feature of the trigonometric functions that is worth stating explicitly. Every identity derived on this page is a consequence of two elementary symmetries of the unit circle: the invariance of the coordinates under a rotation by \\( 2\pi \\), which encodes the periodicity of sine and cosine, and their behaviour under reflections with respect to the coordinate axes, which produces the sign changes and the cofunction swaps. In this sense, reduction formulas are the algebraic translation of how a point moves on the unit circle under a finite group of rigid transformations.

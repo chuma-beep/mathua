@@ -18,12 +18,10 @@ The order is compatible with the field operations.
 
 A field equipped with a total order satisfying these compatibility conditions is an ordered field. Both \\(\mathbb{Q}\\) and \\(\mathbb{R}\\) are ordered fields (what separates the two is the completeness property introduced below).
 
-- - -
 ## The real line
 
 The real numbers admit a geometric interpretation that makes their order and completeness clear. Fix an arbitrary point on a straight line and label it \\(0\\). Fix a second point to its right and label it \\(1\\). Every real number \\(x\\) then corresponds to a unique point on the line: positive numbers lie to the right of \\(0\\), negative numbers to the left, at a distance from the origin equal to the absolute value \\(|x|\\). This correspondence is a bijection between \\(\mathbb{R}\\) and the points of the line and it preserves the order. \\(x < y\\) holds if and only if the point corresponding to \\(x\\) lies to the left of the point corresponding to \\(y\\).
 
-- - -
 ## The completeness axiom
 
 The property that distinguishes \\(\mathbb{R}\\) from \\(\mathbb{Q}\\) is completeness. It expresses the absence of gaps. Every position on the number line that could be approached by a sequence of rational numbers is actually occupied by a real number. The rational numbers, by contrast, leave the line with infinitely many holes, one for each irrational value.
@@ -40,7 +38,6 @@ This set is non-empty and bounded above within \\(\mathbb{Q}\\), yet it has no l
 
 A symmetric notion applies to sets bounded below. A subset \\(S \subseteq \mathbb{R}\\) is bounded below if there exists \\(m \in \mathbb{R}\\) such that \\(x \geq m\\) for all \\(x \in S\\). The greatest lower bound, or infimum, is denoted \\(\inf S\\). The completeness axiom implies that every non-empty subset of \\(\mathbb{R}\\) bounded below has an infimum in \\(\mathbb{R}\\).
 
-- - -
 ## The Archimedean property
 
 A consequence of completeness is the Archimedean property of \\(\mathbb{R}\\). It states that for every real number \\(x\\), there exists a natural number \\(n\\) such that \\(n > x\\). Equivalently, the set of natural numbers \\(\mathbb{N}\\) is not bounded above in \\(\mathbb{R}\\). The argument runs as follows.
@@ -52,7 +49,6 @@ A consequence of completeness is the Archimedean property of \\(\mathbb{R}\\). I
 
 To illustrate the property concretely, consider the real number \\(x = 7.4\\). The Archimedean property guarantees the existence of a natural number greater than \\(x\\): since \\(8 > 7.4\\), the smallest such natural number is \\(n = 8\\). The result, elementary as it appears, depends on the completeness of \\(\mathbb{R}\\) and fails in ordered fields that do not satisfy it.
 
-- - -
 ## Dedekind cuts
 
 A Dedekind cut is a subset \\(A \subseteq \mathbb{Q}\\) satisfying three conditions: \\(A\\) is non-empty and \\(A \neq \mathbb{Q}\\). If \\(q \in A\\) and \\(p < q\\) then \\(p \in A\\), and \\(A\\) has no greatest element. The set \\(\mathbb{R}\\) is then defined as the collection of all Dedekind cuts of \\(\mathbb{Q}\\).
@@ -65,7 +61,6 @@ A = \\{ q \in \mathbb{Q} : q < 0 \\} \cup \\{ q \in \mathbb{Q} : q > 0 \text{ an
 
 This set satisfies all three conditions, yet has no rational supremum in \\(\mathbb{Q}\\): the cut carves out a position on the rational line where no rational number sits, and it is precisely this gap that the construction fills by declaring \\(A\\) itself to be a real number.
 
-- - -
 
 The algebraic structure of \\(\mathbb{R}\\) is then built directly from set-theoretic operations on cuts. Addition is defined by setting:
 
@@ -77,7 +72,6 @@ The order is given by inclusion: \\(A \leq B\\) if and only if \\(A \subseteq B\
 
 > The Dedekind construction builds the real numbers from the order structure of \\(\mathbb{Q}\\) alone. Its main contribution is to show that the completeness of \\(\mathbb{R}\\) is a consequence of filling in all the gaps that the rational order leaves open.
 
-- - -
 ## Cauchy sequence construction
 
 A second construction of \\(\mathbb{R}\\) starts from a limitation of \\(\mathbb{Q}\\). Not every Cauchy sequence of rational numbers converges to a rational number. A sequence \\((x_n)_{n \in \mathbb{N}}\\) in \\(\mathbb{Q}\\) is a Cauchy sequence if for every \\(\varepsilon \in \mathbb{Q}^+\\) there exists \\(N \in \mathbb{N}\\) such that:
@@ -113,7 +107,6 @@ These operations are well-defined, meaning independent of the choice of represen
 
 The real number \\(\sqrt{2}\\), for instance, is the equivalence class of any Cauchy sequence of rationals converging to it, such as \\((1, 1.4, 1.41, 1.414, \ldots)\\). Two such sequences satisfy \\((x_n) \sim (y_n)\\) and therefore define the same real number. Completeness in this construction means that every Cauchy sequence of real numbers converges to a real number. The Dedekind and Cauchy constructions are isomorphic as complete ordered fields (they describe exactly the same mathematical object).
 
-- - -
 ## Consequences of completeness
 
 The rational numbers are dense in \\(\mathbb{R}\\): between any two distinct real numbers there exists a rational number. In more formal terms for every \\(x, y \in \mathbb{R}\\) with \\(x < y\\), there exists \\(q \in \mathbb{Q}\\) such that \\(x < q < y\\). This follows from the Archimedean property. Given \\(x < y\\), one finds a natural number \\(n\\) satisfying \\(n(y - x) > 1\\) and among the integers \\(m\\) with \\(m > nx\\) one can identify one for which \\(x < m/n < y\\) holds.
@@ -122,12 +115,10 @@ Despite the density of \\(\mathbb{Q}\\) in \\(\mathbb{R}\\), the two sets differ
 
 The Bolzano-Weierstrass theorem is a further consequence of completeness. It states that every bounded sequence of real numbers has a convergent subsequence. This result guarantees that bounded infinite sets cannot spread indefinitely without accumulating somewhere, and it underpins the theory of limits, continuous functions, and compactness in \\(\mathbb{R}\\).
 
-- - -
 ## Uniqueness of \\(\mathbb{R}\\)
 
 The real number system is the unique complete ordered field. Any two complete ordered fields are isomorphic as ordered fields, and the isomorphism between them is unique. This means that \\(\mathbb{R}\\) is not merely one among many possible completions of \\(\mathbb{Q}\\) but the only one up to a structure-preserving bijection.
 
-- - -
 ## Intervals
 
 Among the subsets of \\(\mathbb{R}\\), intervals occupy a central role. An interval is a subset \\(I \subseteq \mathbb{R}\\) with the property that, whenever two points belong to it, every point lying between them also belongs to it. Intervals may be bounded, such as the open interval \\((a, b)\\) or the closed interval \\([a, b]\\), or unbounded, such as \\([a, +\infty)\\) or \\((-\infty, b)\\). The entire real line is itself an interval, denoted \\((-\infty, +\infty)\\).

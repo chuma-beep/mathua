@@ -28,8 +28,7 @@ func (r *Registry) Register(conceptID string, gen Generator) error {
 	if _, exists := r.gens[conceptID]; exists {
 		return fmt.Errorf("generator already registered for concept %q", conceptID)
 	}
-	// Self-validation: if the generator implements GradedGenerator, verify
-	// it can correctly grade its own answer.
+	// Self-check: if this is a GradedGenerator, make sure it can grade its own output.
 	if gg, ok := gen.(GradedGenerator); ok {
 		p := gg.Generate(0.5)
 		result := gg.Grade(p.Answer, p.Answer)
@@ -47,7 +46,7 @@ func (r *Registry) Register(conceptID string, gen Generator) error {
 	return nil
 }
 
-// Get returns the generator for a concept ID.
+
 func (r *Registry) Get(conceptID string) (Generator, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()

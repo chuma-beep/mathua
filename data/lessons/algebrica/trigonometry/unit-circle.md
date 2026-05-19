@@ -15,7 +15,6 @@ Let \\( S \\) be the point \\( (1, 0) \\) where the unit circle meets the positi
 - The length of the horizontal segment \\( \overline{OR} \\) equals the cosine of the angle \\( \theta \\).
 - The length of the vertical segment \\( \overline{ST} \\) equals the tangent of the angle \\( \theta \\).
 
-- - -
 ## Fundamental trigonometric identity
 
 Once the notions of sine and cosine are introduced through the geometry of the unit circle, their relationship becomes obvious. If a point \\( P \\) lies on the unit circle and the segment \\( \overline{OP} \\) forms an angle \\( \theta \\) with the positive \\( x \\)-axis, the right triangle with vertices at \\( O \\), \\( R \\), and \\( P \\) has hypotenuse of length \\( 1 \\), horizontal leg of length \\( \cos\theta \\), and vertical leg of length \\( \sin\theta \\). Applying the Pythagorean theorem to this triangle gives the following identity:
@@ -42,7 +41,6 @@ Angles are typically expressed in degrees according to the sexagesimal system, i
 - \\( 450^\circ \\) represents one full turn (\\( 360^\circ \\)) plus an additional \\( 90^\circ \\).
 - \\( -90^\circ \\) corresponds to a quarter-turn in the clockwise direction.
 
-- - -
 ## Arc length and radians
 
 Let \\( A \\) be the point where the positive \\( x \\)-axis intersects the unit circle, and let \\( P \\) be any point on the unit circle. The point \\( P \\) can be uniquely identified by the length of the arc from \\( A \\) to \\( P \\), measured counterclockwise along the unit circle.
@@ -54,7 +52,6 @@ This arc length is called the radian measure of the angle \\( \angle AOP \\), an
 \theta = 30 \times \frac{\pi}{180} = \frac{\pi}{6}
 \\]
 
-- - -
 ## Cartesian coordinates and parametric representation
 
 The unit circle admits a natural parametric representation in the Cartesian coordinate system. Any point \\( P \\) on the circle is uniquely determined by the angle \\( \theta \\) formed between the positive \\( x \\)-axis and the segment \\( \overline{OP} \\). As \\( \theta \\) ranges over \\( [0, 2\pi) \\), the point \\( P \\) traces the circle exactly once, and the correspondence is expressed by the following parametric equations.
@@ -78,7 +75,6 @@ One may verify directly that:
 
 \\[ \left(\frac{1}{2}\right)^2 + \left(\frac{\sqrt{3}}{2}\right)^2 = \frac{1}{4} + \frac{3}{4} = 1 \\]
 
-- - -
 ## Periodic nature of the parametrization
 
 The parametric representation of the unit circle reflects a fundamental property of the
@@ -95,7 +91,6 @@ for every integer \\( k \in \mathbb{Z} \\). In particular, this means that the p
 
 This periodic behaviour is a defining property of the sine and cosine, which inherit it directly from the geometry of the unit circle.
 
-- - -
 ## Notable angles and their coordinates
 
 Some angles appear frequently in trigonometry. At these values of \\(\theta\\), sine and cosine can be calculated through elementary geometric arguments, with no need for numerical approximation. The table below lists the corresponding coordinates \\((\cos\theta, \sin\theta)\\) for the most common angles.
@@ -114,7 +109,6 @@ Some angles appear frequently in trigonometry. At these values of \\(\theta\\), 
 
 The values at \\(\theta = \pi/4\\) follow from a single observation: an isosceles right triangle inscribed in the unit circle has equal legs, so that \\( \cos(\pi/4) = \sin(\pi/4) = \sqrt{2}/2 .\\] The values at \\(\theta = \pi/6\\) and \\(\theta = \pi/3\\) come instead from the geometry of the equilateral triangle, whose interior angles all equal \\(\pi/3\\).
 
-- - -
 ## The unit circle and complex numbers
 
 The unit circle admits a natural interpretation in the context of complex numbers. Recall that a complex number \\( z = x + iy \\) can be represented as a point \\( (x, y) \\) in the Cartesian plane. The modulus of \\( z \\) is defined as \\( |z| = \sqrt{x^2 + y^2} \\), so the condition \\( |z| = 1 \\) describes precisely the set of complex numbers lying on the unit circle. By the parametric representation established above, every such number can be written in the form:

@@ -30,7 +30,6 @@ A linear equation may involve any finite number of unknowns. The expression \\(a
 
 > Linear equations are the foundation on which systems of linear equations and matrix calculus are built, and they provide the language in which problems involving several unknowns can be formulated and solved simultaneously.
 
-- - -
 ## Type of solution
 
 The geometric nature of the solution set of a linear equation depends on the number of unknowns and on whether the equation is homogeneous. In every case the solution set is an affine subspace of \\(\mathbb{R}^n\\), that is, a translate of a linear subspace, and its dimension equals \\(n - 1\\) when the equation is non-degenerate.
@@ -42,7 +41,6 @@ The geometric nature of the solution set of a linear equation depends on the num
 
 > The drop in dimension by exactly one reflects the fact that a single linear equation imposes one scalar constraint on the \\(n\\) unknowns. Imposing further independent linear conditions corresponds to intersecting hyperplanes, and leads naturally to the theory of systems of linear equations.
 
-- - -
 ## Linear equations in one variable
 
 A linear equation in one unknown can always be reduced, through elementary algebraic manipulations, to the standard form:
@@ -67,7 +65,6 @@ When \\(a = 0\\) and \\(b \neq 0\\), the equation reduces to \\(0 = b\\), a cont
 
 The three cases above are not abstract curiosities. They appear systematically when the coefficients depend on one or more real parameters, giving rise to linear equations with parameters of the form \\(a(k)\, x = b(k)\\). The values of \\(k\\) for which \\(a(k) = 0\\) are precisely those that switch the equation between the determinate, indeterminate, and impossible regimes, and identifying them is the central problem in the parametric setting.
 
-- - -
 ## Example 1
 
 Consider the equation:
@@ -141,7 +138,6 @@ x = \lambda b, \qquad y = -\lambda a, \qquad \lambda \in \mathbb{R}
 
 The pair \\((b, -a)\\) is indeed a solution of the equation, since \\(a b + b(-a) = 0\\), and every other solution is a scalar multiple of it. This is a first concrete instance of a phenomenon that runs through the whole theory: the solutions of a homogeneous linear equation form a vector subspace, while those of the corresponding non-homogeneous equation form an affine subspace obtained by translation.
 
-- - -
 ## Example 2
 
 Consider the homogeneous linear equation:
@@ -177,7 +173,6 @@ The solution set of the equation \\(2x - 3y = 0\\) is the line through the origi
 
 \\[y = \tfrac{2}{3} x\\]
 
-- - -
 ## Linear equations in three variables
 
 A linear equation in three unknowns has the standard form:
@@ -210,7 +205,6 @@ x = \lambda, \qquad y = \mu, \qquad z = -\frac{a \lambda + b \mu}{c}, \qquad \la
 
 > The role of the unknown chosen as dependent is conventional. If \\(c = 0\\) but \\(a \neq 0\\) or \\(b \neq 0\\), the same construction can be carried out by isolating \\(x\\) or \\(y\\) instead. What does not depend on the choice is the geometric object obtained: the plane itself, with its orientation fixed by the normal vector \\((a, b, c)\\).
 
-- - -
 ## Example 3
 
 Consider the homogeneous linear equation:
@@ -253,7 +247,6 @@ The solution set of the equation \\(x + 2y - z = 0\\) is the plane through the o
 (x, y, z) = (\lambda, \\, \mu, \\, \lambda + 2\mu), \qquad \lambda, \mu \in \mathbb{R}
 \\]
 
-- - -
 ## Linear equations with a parameter
 
 A natural extension of the theory developed so far consists in allowing the coefficients to depend on one or more real parameters, rather than being fixed numbers. This gives rise to linear equations with a parameter, a family of relations of the form:

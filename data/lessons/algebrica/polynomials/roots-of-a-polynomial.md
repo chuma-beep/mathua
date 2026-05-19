@@ -24,7 +24,6 @@ For a root of even multiplicity, the graph touches the \\(x\\)-axis but does not
 
 For roots of odd multiplicity greater than one, that is \\(m \geq 3\\), the graph crosses the axis but appears flatter at the intercept. The flattening becomes more pronounced as the multiplicity increases, giving the curve an inflexion-like appearance.
 
-- - -
 
 These properties follow from the local factorization:
 
@@ -41,7 +40,6 @@ A nonzero polynomial of degree \\(n\\) over any field has at most \\(n\\) roots,
 
 > Two distinct polynomials of degree at most \\(n\\) cannot agree at more than \\(n\\) points. If \\(p(x) - q(x)\\) has degree at most \\(n\\) and vanishes at \\(n + 1\\) points, then \\(p \equiv q\\).
 
-- - -
 ## Multiplicity of a root
 
 The notion of multiplicity refines the definition of a root by quantifying how many times a given value is a root. Let \\(p(x)\\) be a polynomial with coefficients in a field \\(\mathbb{F}\\), and let \\(r \in \mathbb{F}\\) be a root of \\(p(x)\\). The multiplicity of \\(r\\) is the largest positive integer \\(m\\) such that \\((x - r)^m\\) divides \\(p(x)\\) in \\(\mathbb{F}[x]\\), while \\((x - r)^{m+1}\\) does not. Equivalently, \\(p(x)\\) admits the factorization:
@@ -76,7 +74,6 @@ This criterion provides a constructive method for determining the multiplicity o
 
 > The differential characterization explains the graphical behaviour described above. At a simple root, the polynomial vanishes but its derivative does not, so the graph crosses the \\(x\\)-axis with nonzero slope. At a root of multiplicity \\(m \geq 2\\), the first \\(m-1\\) derivatives also vanish at \\(r\\), and the graph becomes increasingly flat at the intercept as \\(m\\) grows.
 
-- - -
 ## Rational root theorem
 
 Given a polynomial with integer coefficients:
@@ -89,7 +86,6 @@ the rational root theorem identifies a finite set of candidates for rational roo
 
 The theorem reduces the search for rational roots to a finite collection of fractions, each of which can be verified by direct substitution or synthetic division.
 
-- - -
 ## The fundamental theorem of algebra
 
 In the field of complex numbers \\(\mathbb{C}\\), every non-constant polynomial has at least one root. Applying the factor theorem repeatedly, any polynomial of degree \\(n \geq 1\\) decomposes completely into linear factors over \\(\mathbb{C}\\):
@@ -128,7 +124,6 @@ r_1 r_2 \cdots r_n = \frac{(-1)^n a_0}{a_n}
 
 The quadratic case is treated in detail in the page on trinomials.
 
-- - -
 ## Finding roots: an overview of methods
 
 For polynomials of degree 1 and 2, exact formulas are elementary. A linear polynomial \\(ax + b\\) has the unique root \\(x = -b/a\\). For a quadratic \\(ax^2 + bx + c\\), the roots are given by the quadratic formula:
@@ -145,7 +140,6 @@ The quantity \\(\Delta = b^2 - 4ac\\) is the discriminant.
 
 > Closed-form solutions also exist for degree 3 (Cardano's formula) and degree 4 (Ferrari's method), though they are considerably more involved. For higher degrees, the problem requires more advanced techniques.
 
-- - -
 
 The roots of a polynomial are precisely the solutions to the corresponding polynomial equation \\(p(x) = 0\\), and the methods outlined above apply directly to both settings.
 

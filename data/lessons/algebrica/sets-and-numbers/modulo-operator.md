@@ -14,14 +14,12 @@ a \bmod n = r
 
 > The modulo operator is sometimes written as \\(a \\, \mathrm{mod} \\, n\\) in textbooks and as "a % n" in many programming languages, although the behaviour for negative operands may differ between the mathematical definition and specific programming implementations.
 
-- - -
 ## Modulo of a negative integer
 
 A subtle point arises when \\(a\\) is negative. The mathematical definition requires the remainder to satisfy \\(0 \le r < n\\), so the result is always a non-negative integer strictly smaller than the modulus. Consider \\(-7 \bmod 5\\). Writing \\(-7 = q \cdot 5 + r\\) with \\(0 \le r < 5\\), one finds \\(q = -2\\) and \\(r = 3\\), since \\(-7 = (-2) \cdot 5 + 3\\). Therefore \\(-7 \bmod 5 = 3\\), not \\(-2\\) as one might naively expect.
 
 This convention is not universal. In several programming languages the `%` operator follows the sign of the dividend, so that `-7 % 5` returns \\(-2\\) rather than \\(3\\). In a purely mathematical context, however, the remainder is always taken to be non-negative.
 
-- - -
 ## Congruence modulo n
 
 Closely related to the modulo operator is the notion of congruence. Two integers \\(a\\) and \\(b\\) are said to be congruent modulo \\(n\\) if they leave the same remainder when divided by \\(n\\), or equivalently if their difference is a multiple of \\(n\\). This relation is written as follows:
@@ -37,7 +35,6 @@ It is important to distinguish the operator \\(a \bmod n\\), which produces a sp
 + It is reflexive, since \\(a \equiv a \pmod n\\) for every integer \\(a\\).
 + It is symmetric, since \\(a \equiv b \pmod n\\) implies \\(b \equiv a \pmod n\\).
 + It is transitive, since \\(a \equiv b \pmod n\\) and \\(b \equiv c \pmod n\\) together imply \\(a \equiv c \pmod n\\).
-- - -
 ## Arithmetic properties
 
 Congruence modulo \\(n\\) behaves well under the standard arithmetic operations, which is precisely what makes modular arithmetic a powerful tool. If \\(a \equiv b \pmod n\\) and \\(c \equiv d \pmod n\\), then the following identities hold:
@@ -56,7 +53,6 @@ Raising to an integer power is compatible with congruence as well. If \\(a \equi
 
 > A nonzero element \\(a\\) has a multiplicative inverse modulo \\(n\\) if and only if \\(\gcd(a, n) = 1\\), that is, if \\(a\\) and \\(n\\) are coprime. When such an inverse exists, it is unique modulo \\(n\\).
 
-- - -
 ## Addition and multiplication tables
 
 A useful way to visualise the arithmetic of residues modulo \\(n\\) is to arrange all possible sums or products in a square table. Each row and each column is labelled by a residue, and the entry at their intersection is the result of the operation reduced modulo \\(n\\). For \\(n = 4\\), the addition table is the following:
@@ -83,7 +79,6 @@ The behaviour of multiplication is noticeably less regular than that of addition
 
 > In group theory, a table of this form is called a Cayley table. It describes a finite group by listing the result of its operation for every ordered pair of elements. The addition table modulo \\(n\\) is precisely the Cayley table of the group \\((\mathbb{Z}/n\mathbb{Z}, +)\\).
 
-- - -
 ## Residue classes
 
 For a fixed modulus \\(n\\), the equivalence relation of congruence partitions the set of integers into \\(n\\) disjoint subsets, called residue classes or equivalence classes modulo \\(n\\). The residue class of an integer \\(a\\) is the set of all integers congruent to \\(a\\) modulo \\(n\\):
@@ -107,7 +102,6 @@ As a concrete case, take \\(n = 4\\). The integers split into four residue class
 
 Every integer belongs to exactly one of these four classes, and the union of the four classes is all of \\(\mathbb{Z}\\).
 
-- - -
 ## Examples
 
 Consider the problem of determining the day of the week a given number of days from today. If today is Wednesday and one wants to know what day it will be in \\(100\\) days, it is enough to compute \\(100 \bmod 7\\). Since \\(100 = 14 \cdot 7 + 2\\), the remainder is \\(2\\), so the answer is two days after Wednesday, that is, Friday. The modulo operator captures precisely the cyclical structure of the week.
@@ -116,7 +110,6 @@ A second classical example is the parity of an integer. An integer \\(a\\) is ev
 
 As a slightly less trivial example, one can use modular arithmetic to compute the last digit of a large power. The last digit of \\(7^{100}\\) in base \\(10\\) is simply \\(7^{100} \bmod 10\\). Computing successive powers of \\(7\\) modulo \\(10\\) yields \\(7, 9, 3, 1, 7, 9, 3, 1, \ldots\\), a cycle of length \\(4\\). Since \\(100 \bmod 4 = 0\\), the exponent falls at the end of a full cycle, so \\(7^{100} \equiv 1 \pmod{10}\\). The last digit of \\(7^{100}\\) is therefore \\(1\\).
 
-- - -
 ## Relation with algebraic structures
 
 The residue classes modulo \\(n\\) can be added and multiplied in a way that is compatible with the arithmetic of the integers. Defining:

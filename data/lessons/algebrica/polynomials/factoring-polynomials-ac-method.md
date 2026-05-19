@@ -28,7 +28,6 @@ m + n &= b
 
 The existence of such a pair \\( (m, n) \\) is both necessary and sufficient for the trinomial to be factorable over \\( \mathbb{Z} \\). If no such integer pair exists, the trinomial is irreducible over \\( \mathbb{Z} \\), though it may still admit a factorization over \\( \mathbb{Q} \\) or \\( \mathbb{R} \\), depending on the sign of the discriminant \\( b^2 - 4ac \\).
 
-- - -
 ## The method
 
 Consider a trinomial with integer coefficients in the standard form:
@@ -46,7 +45,6 @@ Each group yields a monomial factor, and the two resulting expressions share a c
 
 The two possible orderings of the pair, \\( (m, n) \\) and \\( (n, m) \\), result in different intermediate groupings but necessarily produce the same factorisation, since the product \\( (px + q)(rx + s) \\) is invariant under exchange of its factors.
 
-- - -
 
 In summary, the procedure reduces to the following steps:
 
@@ -55,7 +53,6 @@ In summary, the procedure reduces to the following steps:
 - Identify the pair \\( (m, n) \\) whose sum equals \\( b \\).
 - Rewrite the middle term as \\( mx + nx \\).
 - Factor by grouping to extract the common linear binomial.
-- - -
 ## Example 1
 
 Consider the trinomial \\( 2x^2 + 7x + 3 \\). In this case, \\( a = 2 \\), \\( b = 7 \\), and \\( c = 3 \\), so \\( ac = 6 \\). The task is to find integers \\( m \\) and \\( n \\) such that \\( mn = 6 \\) and \\( m + n = 7 \\). The integer pairs \\( (m, n) \\) with \\( mn = 6 \\), listed by absolute value, are:
@@ -86,7 +83,6 @@ This yields:
 
 > These results can be verified using the quadratic formula which returns the same values, confirming that the factorisation \\( (x + 3)(2x + 1) \\) is correct.
 
-- - -
 ## Relation to Vieta's formulas
 
 The conditions \\( mn = ac \\) and \\( m + n = b \\), which are central to the AC method, are closely related to a classical result in polynomial theory. Vieta's formulas state that, for a monic quadratic \\( x^2 + px + q \\) with roots \\( x_1 \\) and \\( x_2 \\), the following relationships hold:
@@ -98,7 +94,6 @@ x_1 \cdot x_2 &= q
 
 In the special case where \\( a = 1 \\), the trinomial simplifies to \\( x^2 + bx + c \\), and the AC conditions become \\( mn = c \\) and \\( m + n = b \\). Vieta's formulas for this polynomial give \\( x_1 + x_2 = -b \\) and \\( x_1 x_2 = c \\), so one has \\( m = -x_1 \\) and \\( n = -x_2 \\): the integers sought by the AC method are the negatives of the roots, and the search for the pair is equivalent to a direct application of Vieta's formulas.
 
-- - -
 
 When \\( a \neq 1 \\), the correspondence is less direct but remains present. Multiplying the trinomial by \\( a \\) yields
 
@@ -108,7 +103,6 @@ which is a monic quadratic in the auxiliary variable \\( u = ax \\). Applying Vi
 
 > The AC method can therefore be interpreted as an application of Vieta's formulas to a rescaled polynomial, with the splitting of the middle term serving as the mechanism that transfers the factorisation of the auxiliary polynomial back to the original trinomial.
 
-- - -
 ## On the irreducibility of quadratic trinomials
 
 When no integer pair \\( (m, n) \\) satisfies \\( mn = ac \\) and \\( m + n = b \\), the trinomial is irreducible over \\( \mathbb{Z} \\). This occurs precisely when the discriminant \\( \Delta = b^2 - 4ac \\) is not a perfect square integer.
@@ -117,7 +111,6 @@ When \\( \Delta > 0 \\) but not a perfect square integer, the trinomial has two 
 
 When \\( \Delta = 0 \\), the trinomial has a repeated root \\( x = -b/(2a) \\), which is rational but not necessarily an integer, so irreducibility over \\( \mathbb{Z} \\) depends on whether \\( 2a \mid b \\). The AC method, being combinatorial in nature, terminates without output once all integer divisor pairs of \\( ac \\) have been checked without success, and this exhaustion of cases constitutes a constructive proof of irreducibility over \\( \mathbb{Z} \\).
 
-- - -
 
 For illustration, consider the trinomial \\( 3x^2 + 5x + 4 \\). In this case, \\( a = 3 \\), \\( b = 5 \\), and \\( c = 4 \\), yielding \\( ac = 12 \\). The integer divisor pairs of \\( 12 \\) are as follows:
 
@@ -131,7 +124,6 @@ x_{1,2} &= \frac{-5 \pm i\sqrt{23}}{6}
 
 So, the trinomial admits no factorisation over \\( \mathbb{R} \\), nor over \\( \mathbb{Z} \\).
 
-- - -
 ## Limitations of the AC method
 
 The AC method is effective when the coefficients are small integers and the divisor search concludes rapidly. Its computational cost grows with the number of integer divisor pairs of \\( ac \\).
@@ -140,7 +132,6 @@ When \\( |ac| \\) is large, the enumeration becomes laborious and the method los
 
 When the trinomial is irreducible over \\( \mathbb{Z} \\) but possesses real roots, one must resort to the quadratic formula, which returns the exact roots regardless of whether the discriminant is a perfect square.
 
-- - -
 ## An additional connection
 
 Multiplying the trinomial \\( ax^2 + bx + c \\) by \\( a \\) produces a monic quadratic in the auxiliary variable \\( u = ax \\):

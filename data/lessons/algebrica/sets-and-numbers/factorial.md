@@ -41,7 +41,6 @@ n! =
 
 The factorial is used to compute the binomial coefficient, which represents the number of ways to select a given number of elements from a larger set.
 
-- - -
 -
 ## Simplifying factorial ratios
 
@@ -63,7 +62,6 @@ Consider the ratio between \\(7!\\) and \\(4!\\). The factors from \\(4\\) down 
 \frac{7!}{4!} = \frac{7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{4 \cdot 3 \cdot 2 \cdot 1} = 7 \cdot 6 \cdot 5 = 210
 \\]
 
-- - -
 
 ## Factorial in combinatorics
 
@@ -88,7 +86,6 @@ If the order of selection does not matter, many of these orderings become equiva
 \binom{n}{k} = \frac{n!}{k! \\, (n-k)!}
 \\]
 
-- - -
 
 ## A useful identity involving factorial
 
@@ -100,7 +97,6 @@ Starting from the recursive definition \\(n! = n \cdot (n-1)!\\) and substitutin
 
 A typical application is the derivation of the mean of the Poisson distribution or the rewriting of binomial coefficients in a simpler form.
 
-- - -
 
 ## Relationship between the factorial and the gamma function
 
@@ -120,7 +116,6 @@ So the factorial can be seen as the discrete restriction of the gamma function t
 
 > The gamma function also appears in the Beta distribution, where it provides the normalizing constant that makes the total probability integrate to one.
 
-- - -
 
 ## Stirling's approximation
 

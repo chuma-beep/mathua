@@ -21,7 +21,6 @@ This formulation makes clear that \\(P\\) is a change-of-basis matrix: it transf
 
 > The matrix \\(D\\) is unique up to the ordering of the eigenvalues along the diagonal, while \\(P\\) is not unique, since each eigenvector may be replaced by any nonzero scalar multiple.
 
-- - -
 ## Eigenvalues and eigenvectors
 
 The construction of the diagonalization relies entirely on the eigenstructure of \\(A\\). Recall that a scalar \\(\lambda\\) is an eigenvalue of \\(A\\) if there exists a nonzero vector \\(\mathbf{v}\\) satisfying the following equation:
@@ -44,7 +43,6 @@ The left-hand side of this equation is a polynomial of degree \\(n\\) in \\(\lam
 
 The set of all solutions, including the zero vector, constitutes a subspace of \\(\mathbb{R}^n\\) (or \\(\mathbb{C}^n\\)), called the eigenspace associated with \\(\lambda_k\\).
 
-- - -
 ## Algebraic and geometric multiplicity
 
 Each eigenvalue \\(\lambda_k\\) carries two distinct notions of multiplicity that play a central role in determining whether \\(A\\) is diagonalizable. The algebraic multiplicity of \\(\lambda_k\\), denoted \\(m_a(\lambda_k)\\), is the multiplicity of \\(\lambda_k\\) as a root of the characteristic polynomial. The geometric multiplicity of \\(\lambda_k\\), denoted \\(m_g(\lambda_k)\\), is the dimension of the corresponding eigenspace, that is:
@@ -61,7 +59,6 @@ It can be shown that for every eigenvalue the geometric multiplicity does not ex
 
 The matrix \\(A\\) is diagonalizable if and only if, for every eigenvalue \\(\lambda_k\\), the geometric multiplicity equals the algebraic multiplicity. In particular, a matrix with \\(n\\) distinct eigenvalues is always diagonalizable, since in that case both multiplicities are equal to one for every eigenvalue.
 
-- - -
 ## The diagonalization procedure
 
 The practical construction of the matrices \\(P\\) and \\(D\\) follows a well-defined sequence of steps.
@@ -74,7 +71,6 @@ The practical construction of the matrices \\(P\\) and \\(D\\) follows a well-de
 
 Once \\(P\\) has been assembled, one verifies that it is invertible and computes \\(P^{-1}\\), thereby completing the factorization \\(A = P D P^{-1}\\).
 
-- - -
 ## Example 1
 
 Consider the following matrix:
@@ -127,7 +123,6 @@ D = \begin{pmatrix} 2 & 0 \\\\ 0 & 3 \end{pmatrix}
 
 One may verify that \\(A = P D P^{-1}\\) holds by direct multiplication. The matrix \\(A\\) is therefore diagonalizable, and its diagonalization is given by the factorization above, with \\(P\\) and \\(D\\) as constructed.
 
-- - -
 
 ## Example 2
 
@@ -159,7 +154,6 @@ The first row gives \\(v_2 = 0\\), and the third row gives \\(v_3 = 0\\), while 
 
 > This example illustrates that the presence of a repeated eigenvalue does not by itself prevent diagonalization: what matters is whether the corresponding eigenspace has dimension equal to the algebraic multiplicity. A matrix with a repeated eigenvalue may or may not be diagonalizable depending on the rank of \\(A - \lambda I\\).
 
-- - -
 ## When diagonalization fails
 
 Not every square matrix is diagonalizable. A matrix fails to be diagonalizable precisely when, for at least one eigenvalue, the geometric multiplicity is strictly less than the algebraic multiplicity. In such cases, the eigenspace associated with that eigenvalue is too small to provide a sufficient number of linearly independent eigenvectors. A standard example is the matrix:
@@ -178,7 +172,6 @@ The only condition is \\(v_2 = 0\\), so the eigenspace is one-dimensional, spann
 
 > Matrices of this type are studied within the framework of Jordan normal form, which provides the canonical representation for non-diagonalizable matrices through the introduction of Jordan blocks.
 
-- - -
 ## Powers of a diagonalizable matrix
 
 One of the most immediate applications of diagonalization concerns the computation of integer powers of a matrix. For a diagonalizable matrix \\(A = P D P^{-1}\\), the \\(k\\)-th power admits the following compact expression:

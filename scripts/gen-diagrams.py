@@ -83,7 +83,7 @@ def arc(cx, cy, r, a1, a2, color=C_AXIS, width=1):
 # ─── Diagram generators ─────────────────────────────────────────────────────
 
 def unit_circle_labeled():
-    """Labeled unit circle with quadrant angles and (cos, sin) coordinates."""
+    """Unit circle with notable angles and their (cos, sin) values."""
     cx, cy, r = 250, 250, 160
     lines = [head(500, 500), bg(500, 500)]
     lines.append(h_arrow(40, 460, cy, C_AXIS, 1.5))
@@ -127,7 +127,7 @@ def unit_circle_labeled():
 
 
 def unit_circle_sincos():
-    """Unit circle with sine/cosine projections at angle θ (existing)."""
+    """Unit circle with sin/cos projections at angle θ."""
     cx, cy, r = 200, 200, 140
     theta = math.radians(50)
     px = cx + r * math.cos(theta)
@@ -154,7 +154,7 @@ def unit_circle_sincos():
 
 
 def unit_circle_tangent():
-    """Unit circle showing tangent as length ST on tangent line x=1."""
+    """Unit circle with tangent as length ST on the line x=1."""
     cx, cy, r = 200, 200, 140
     theta = math.radians(40)
     px = cx + r * math.cos(theta)
@@ -199,7 +199,7 @@ def unit_circle_tangent():
 
 
 def right_triangle_unit_circle():
-    """Right triangle inscribed in unit circle for Pythagorean identity."""
+    """Right triangle inside the unit circle illustrating sin²+cos²=1."""
     cx, cy, r = 220, 220, 150
     theta = math.radians(35)
     px = cx + r * math.cos(theta)
@@ -240,7 +240,7 @@ def right_triangle_unit_circle():
 
 
 def reference_angles():
-    """Reference angles shown on unit circle in four quadrants."""
+    """Reference angles on the unit circle across all four quadrants."""
     cx, cy, r = 250, 250, 170
     lines = [head(500, 500), bg(500, 500)]
     lines.append(h_arrow(30, 470, cy, C_AXIS, 1.5))
@@ -297,7 +297,7 @@ def reference_angles():
 
 
 def right_triangle_trig():
-    """Labeled right triangle with sides opposite/adjacent/hypotenuse."""
+    """Right triangle with opposite, adjacent, and hypotenuse labeled."""
     w, h = 350, 300
     # Triangle points: right angle at bottom-left
     ax, ay = 50, 250  # right angle vertex
@@ -333,7 +333,7 @@ def right_triangle_trig():
 
 
 def pythagorean_theorem():
-    """Right triangle with squares on each side."""
+    """Right triangle with a square built on each side for a²+b²=c²."""
     w, h = 400, 400
     # Triangle: right angle at bottom-left
     ax, ay = 40, 280  # right angle
@@ -373,7 +373,7 @@ def pythagorean_theorem():
 
 
 def law_of_sines():
-    """Triangle with circumcircle for Law of Sines."""
+    """Triangle inscribed in a circumcircle for the Law of Sines."""
     w, h = 400, 350
     cx, cy = 200, 180
     r = 140
@@ -406,7 +406,7 @@ def law_of_sines():
 
 
 def law_of_cosines():
-    """Triangle with labeled sides for Law of Cosines."""
+    """Triangle with labeled sides for the Law of Cosines."""
     w, h = 380, 300
     # Triangle
     ax, ay = 50, 240
@@ -437,7 +437,7 @@ def law_of_cosines():
 
 
 def hyperbolic_functions():
-    """Hyperbola x²-y²=1 with cosh/sinh point."""
+    """Hyperbola x²−y²=1 with a point traced by cosh/sinh."""
     w, h = 450, 350
     cx, cy = 225, 175
     scale = 120
@@ -495,7 +495,7 @@ def hyperbolic_functions():
 
 
 def inverse_trig_graphs():
-    """Arcsin and Arccos function graphs."""
+    """Graphs of arcsin(x) and arccos(x)."""
     w, h = 500, 240
     margin = 45
     gx, gy = margin, h//2
@@ -558,7 +558,7 @@ def inverse_trig_graphs():
 
 
 def sec_csc_cot_graphs():
-    """Secant, Cosecant, Cotangent function graphs."""
+    """Graphs of sec(x) and csc(x) showing asymptotes."""
     # Simple: plot sec(x) and csc(x) over [0, 2π]
     w, h = 500, 220
     margin = 40
@@ -618,7 +618,7 @@ def sec_csc_cot_graphs():
 
 
 def sine_cosine_graph_svg():
-    """Sine and cosine function graphs."""
+    """Graphs of sin(x) and cos(x) over one period."""
     w, h = 500, 220
     margin = 40
     gx, gy = margin, h // 2
@@ -658,7 +658,7 @@ def sine_cosine_graph_svg():
 
 
 def complex_plane():
-    """Complex plane with point a+bi."""
+    """Complex plane with a point z = a + bi."""
     w, h = 400, 400
     cx, cy = 200, 200
     scale = 120
@@ -697,7 +697,7 @@ def complex_plane():
 
 
 def vector_arrow():
-    """Vector arrow in plane with components."""
+    """Vector in the plane with its x/y components."""
     w, h = 400, 350
     cx, cy = 80, 280
     vx, vy = 220, -150
@@ -729,7 +729,7 @@ def vector_arrow():
 
 
 def vector_addition():
-    """Parallelogram law of vector addition."""
+    """Vector addition using the parallelogram law."""
     w, h = 400, 350
     ox, oy = 80, 260
     ux, uy = 140, -180
@@ -771,7 +771,7 @@ def vector_addition():
 
 
 def pascals_triangle():
-    """Pascal's triangle diagram."""
+    """Pascal's triangle (6 rows)."""
     rows = 6
     cell_w = 50
     cell_h = 35
@@ -796,7 +796,7 @@ def pascals_triangle():
 
 
 def completing_square():
-    """Visual representation of completing the square."""
+    """Completing the square shown as areas."""
     w, h = 350, 300
     s = 80  # Side of the x² square
     bx = 20  # Coefficient for x term (rectangle width)
@@ -835,7 +835,7 @@ def completing_square():
 
 
 def number_line_absolute_value():
-    """Number line showing absolute value as distance from zero."""
+    """Number line showing |x| as distance from zero."""
     w, h = 450, 120
     cx, cy = 225, 65
     extent = 180
@@ -866,7 +866,7 @@ def number_line_absolute_value():
 
 
 def number_line_intervals():
-    """Number line showing different interval types."""
+    """Number line with open and closed intervals."""
     w, h = 500, 160
     cx, cy = 250, 55
     extent = 220
@@ -901,7 +901,7 @@ def number_line_intervals():
 
 
 def number_line_real():
-    """Number line showing real numbers."""
+    """Number line labeled with real number positions."""
     w, h = 450, 100
     cx, cy = 225, 45
     extent = 200
@@ -921,7 +921,7 @@ def number_line_real():
 
 
 def number_types_venn():
-    """Venn diagram of number systems: N ⊂ Z ⊂ Q ⊂ R ⊂ C."""
+    """Venn diagram nesting N ⊂ Z ⊂ Q ⊂ R ⊂ C."""
     w, h = 420, 310
     cx, cy = 210, 155
 
@@ -957,7 +957,7 @@ def number_types_venn():
 
 
 def polynomial_roots_graph():
-    """Graph of polynomial showing roots on x-axis."""
+    """Polynomial graph with roots highlighted on the x-axis."""
     w, h = 450, 300
     cx, cy = 225, 160
     scale_x = 60
@@ -1004,7 +1004,7 @@ def polynomial_roots_graph():
 
 
 def linear_equation_graph():
-    """Graph of a linear equation y = mx + b."""
+    """Line graph showing y = mx + b with slope triangle."""
     w, h = 400, 300
     cx, cy = 200, 160
     scale = 40
@@ -1059,7 +1059,7 @@ def linear_equation_graph():
 # ─── Main ───────────────────────────────────────────────────────────────────
 
 def copy_to_data_svgs(name, domain):
-    """Copy SVG from public dir to data/lessons svg dir."""
+    """Copy an SVG from the output dir into the lesson's svg folder."""
     src = os.path.join(OUT, name)
     dst_dir = os.path.join(DATA, domain, 'svg')
     os.makedirs(dst_dir, exist_ok=True)

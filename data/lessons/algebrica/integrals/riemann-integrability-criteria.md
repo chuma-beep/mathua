@@ -7,7 +7,6 @@ The Riemann integral is built to measure the net area under a bounded function o
 
 > If you want the definition and basic properties of the definite integral first, see: Definite Integrals.
 
-- - -
 ## Partitions, upper sums, lower sums
 
 Let \\( f:[a,b]\to\mathbb{R} \\) be bounded. A partition \\( P \\) of \\( [a,b] \\) is a finite collection of points
@@ -31,7 +30,6 @@ The diagram above shows the lower sum: each rectangle is built using the infimum
 
 As the partition gets finer and the subintervals shrink, the rectangles in both sums become thinner and more numerous, and the two approximations are forced closer and closer together.
 
-- - -
 
 When \\( f \\) is continuous, these coincide with the actual maximum and minimum on the subinterval. For a general bounded function, sup and inf are used because a maximum or minimum may not be attained. Using \\( M_i \\) and \\( m_i \\), we define the Darboux upper and lower sums:
 
@@ -46,7 +44,6 @@ L(f,P) \leq U(f,P)
 
 Together, these mean that as partitions get finer, the upper and lower sums are squeezed toward each other. When they meet at a common limit, the function is integrable and that limit is the integral.
 
-- - -
 ## The Darboux criterion
 
 Before stating the criterion, it helps to fix two numbers that summarize all possible upper and lower sums at once. Define the upper and lower integrals as:
@@ -61,7 +58,6 @@ where the infimum and supremum range over all partitions \\( P \\) of \\( [a,b] 
 
 One can show that \\( L(f) \leq U(f) \\) always holds, regardless of the function.
 
-- - -
 
 A bounded function \\( f \\) is Riemann integrable on \\( [a,b] \\) if and only if these two numbers coincide:
 
@@ -89,7 +85,6 @@ The difference becomes clear looking at the two diagrams. With a coarse partitio
 
 In other words, you can always find a partition that forces the upper and lower sums as close together as you like. This is the criterion to reach for when you want to prove integrability by squeezing the two sums toward each other.
 
-- - -
 
 On each subinterval \\( [x_{i-1},x_i] \\), the difference \\( M_i - m_i \\) represents the range of values taken by \\( f \\) on that portion of the interval, that is, its oscillation over that segment. A straightforward computation then shows that:
 
@@ -101,7 +96,6 @@ This is the central idea. A function is integrable if we can divide the interval
 
 > Once a function is known to be Riemann integrable, the Fundamental Theorem of Calculus provides the main tool for evaluating it.
 
-- - -
 ## Common sufficient conditions
 
 The Darboux criterion is the foundation, but in practice most functions you encounter fall into one of three categories that guarantee integrability without any direct computation of sums. A function \\( f \\) on \\( [a,b] \\) is Riemann integrable if it satisfies any one of the following conditions.
@@ -114,7 +108,6 @@ The Darboux criterion is the foundation, but in practice most functions you enco
 
 > These three conditions are independent: a function can be monotone without being continuous, and can have finitely many discontinuities without being monotone. What they share is that none of them allows discontinuities to accumulate densely, and that is the key.
 
-- - -
 
 ## The discontinuity-set criterion
 
@@ -122,7 +115,6 @@ A bounded function \\( f:[a,b]\to\mathbb{R} \\) is Riemann integrable if and onl
 
 > Lebesgue measure is the standard way of assigning length to subsets of the real line. For an interval \\( [c,d] \\) it equals \\( d - c \\). A set has measure zero if it can be covered by intervals of arbitrarily small total length — it occupies no space on the line in any meaningful sense. Finite and countable sets, such as the rationals, all have measure zero.
 
-- - -
 
 Dirichlet's function is defined as:
 
@@ -136,7 +128,6 @@ f(x) =
 
 It is discontinuous at every point of \\( [a,b] \\), so its discontinuity set is the entire interval, which does not have measure zero. It is not Riemann integrable. Every subinterval contains both rationals and irrationals, so every \\( M_i = 1 \\) and every \\( m_i = 0 \\), which gives \\( U(f,P) - L(f,P) = b - a \\) for every partition \\( P \\), regardless of how fine it is.
 
-- - -
 
 Thomae's function is defined as
 
@@ -150,7 +141,6 @@ t(x) =
 
 It is discontinuous exactly at the rationals and continuous at every irrational. The rationals in \\( [a,b] \\) form a countable set, and every countable set has measure zero. So Thomae's function is Riemann integrable and its integral over any interval is zero, despite being discontinuous at infinitely many points.
 
-- - -
 ## Recognising Riemann integrability
 
 When you encounter a bounded function \\( f \\) on \\( [a,b] \\) and need to decide whether it is Riemann integrable, the following sequence of checks usually settles the question quickly.

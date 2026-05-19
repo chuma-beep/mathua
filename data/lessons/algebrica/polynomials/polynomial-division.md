@@ -31,7 +31,6 @@ Subtracting yields \\((Q_1(x) - Q_2(x)) \cdot D(x) = R_2(x) - R_1(x)\\). If \\(Q
 
 > A ring is an algebraic structure with two operations, addition and multiplication, that satisfy associativity, distributivity, and the existence of additive inverses. A field is a ring in which every nonzero element possesses a multiplicative inverse. Common examples of fields are \\(\mathbb{Q}\\), \\(\mathbb{R}\\), and \\(\mathbb{C}.\\)
 
-- - -
 
 Let \\(P(x)\\) and \\(D(x)\\) be nonzero polynomials such that \\(\deg P \geq \deg D\\). The degrees of the quotient and remainder are as follows:
 
@@ -45,7 +44,6 @@ Let \\(P(x)\\) and \\(D(x)\\) be nonzero polynomials such that \\(\deg P \geq \d
 
 If \\(\deg P < \deg D\\), then the quotient is the zero polynomial and the remainder is \\(P(x)\\).
 
-- - -
 ## Properties of polynomial division
 
 The division algorithm gives rise to several properties that follow directly from the uniqueness of the quotient and the remainder, or from the behaviour of the degree under polynomial operations.
@@ -69,7 +67,6 @@ The division is invariant under multiplication of the divisor by a nonzero const
 
 > The polynomial ring \\(\mathbb{R}[x]\\), equipped with the division algorithm, is an example of a Euclidean ring. The degree function plays the role of the Euclidean valuation, and the existence of a division with remainder satisfying \\(\deg R < \deg D\\) is precisely what characterises Euclidean structure in the polynomial setting.
 
-- - -
 ## Polynomial long division
 
 The long division algorithm involves repeatedly dividing the leading term of the current remainder by the leading term of \\(D(x)\\), subtracting the resulting product, and continuing this process until the degree of the remainder is less than that of \\(D(x)\\). The procedure can be summarized in the following steps:
@@ -80,7 +77,6 @@ The long division algorithm involves repeatedly dividing the leading term of the
 
 > When the divisor is a linear polynomial of the form \\(x - c\\), the procedure can be carried out more efficiently using the synthetic division method, which reduces the computation to operations on coefficients alone.
 
-- - -
 ## Example 1
 
 Consider the polynomials \\(P(x) = x^3 + 2x^2 - x - 2\\) and \\(D(x) = x - 1\\). The method outlined above is applied to compute the quotient and the remainder of \\(P(x)\\) divided by \\(D(x)\\):
@@ -150,7 +146,6 @@ The factorization of \\(P(x)\\) is therefore:
 x^3 + 2x^2 - x - 2 = (x^2 + 3x + 2)(x - 1)
 \\]
 
-- - -
 
 ## Example 2
 
@@ -207,7 +202,6 @@ The division can therefore be written as:
 x^3 + x^2 + x + 2 = (x + 1)(x^2 + 1) + 1
 \\]
 
-- - -
 
 ## The remainder theorem and the factor theorem
 
@@ -229,7 +223,6 @@ The identity \\(r = P\(c\)\\) establishes the result.
 
 > The remainder theorem offers a direct method for evaluating a polynomial at a specific point without performing the complete division. The value \\(P\(c\)\\) is given by the remainder when dividing by \\(x - c\\).
 
-- - -
 
 The factor theorem is a direct consequence of the remainder theorem. Let \\(P(x) \in \mathbb{R}[x]\\) and \\(c \in \mathbb{R}\\). The polynomial \\(x - c\\) divides \\(P(x)\\) in \\(\mathbb{R}[x]\\) if and only if \\(P\(c\) = 0\\).
 
@@ -239,7 +232,6 @@ The factor theorem establishes a correspondence between the roots of a polynomia
 
 > This principle underlies the factorization of polynomials over a field and will be explored further in the section on polynomial factorization.
 
-- - -
 
 ## Example 3
 
@@ -312,7 +304,6 @@ The division can therefore be written as:
 2x^3 - 3x^2 + x - 5 = (2x^2 + x + 3)(x - 2) + 1
 \\]
 
-- - -
 
 ## Rational functions and polynomial division
 
@@ -332,7 +323,6 @@ The decomposition is unique: the polynomial part \\(Q(x)\\) and the proper ratio
 
 The decomposition serves as the foundation for partial fraction decomposition, a technique that expresses the proper rational component as a sum of simpler fractions. The method is widely used in integration.
 
-- - -
 ## Polynomial division and the GCD
 
 Polynomial division is the basic operation underlying the computation of the greatest common divisor of two polynomials. Given \\(P(x)\\) and \\(D(x)\\) in \\(\mathbb{R}[x]\\) with \\(D(x) \neq 0\\), the greatest common divisor \\(\gcd(P, D)\\) is defined as the polynomial of highest degree that divides both \\(P(x)\\) and \\(D(x)\\). The Euclidean algorithm for polynomials computes \\(\gcd(P, D)\\) through successive divisions, in direct analogy with the Euclidean algorithm for integers. The procedure rests on the following observation. Dividing \\(P(x)\\) by \\(D(x)\\) gives:

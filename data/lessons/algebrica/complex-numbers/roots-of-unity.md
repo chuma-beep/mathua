@@ -24,7 +24,6 @@ z_k = \cos\\!\left(\frac{2\pi k}{n}\right) + i\\,\sin\\!\left(\frac{2\pi k}{n}\r
 
 For \\(k = 0\\) one recovers \\(z_0 = 1\\), which is always a root regardless of \\(n\\). When \\(n = 2\\) the two roots are \\(1\\) and \\(-1\\). When \\(n = 4\\) the four roots are \\(1, i, -1, -i\\), which are familiar from the arithmetic of the Gaussian integers. For general \\(n\\), the roots come in conjugate pairs: since the arguments \\(2\pi k/n\\) and \\(2\pi(n-k)/n\\) sum to \\(2\pi\\), one has \\(z_{n-k} = \overline{z_k}\\).
 
-- - -
 ## Group structure
 
 The set \\(\mu_n\\) of all \\(n\\)-th roots of unity, equipped with the operation of complex multiplication, forms a group. Closure holds because \\(z_j \cdot z_k = e^{2\pi i(j+k)/n}\\), which is again an \\(n\\)-th root of unity since:
@@ -43,7 +42,6 @@ In particular, \\(\mu_n\\) is abelian, and its subgroup structure mirrors that o
 
 > The isomorphism with \\(\mathbb{Z}/n\mathbb{Z}\\) is given explicitly by \\(z_k \mapsto k\\), and it preserves the group operation in the sense that multiplication of roots corresponds to addition of indices modulo \\(n\\). Since \\(\mathbb{Z}/n\mathbb{Z}\\) is abelian, so is \\(\mu_n\\): the order in which two roots are multiplied is irrelevant, as \\(z_j z_k = z_k z_j\\) follows immediately from  the commutativity of addition among the exponents.
 
-- - -
 ## Geometric interpretation
 
 In the complex plane, the \\(n\\)-th roots of unity are located at the vertices of a regular \\(n\\)-gon inscribed in the unit circle, with one vertex fixed at the point \\(1\\) on the real axis. The vertices are equally spaced, with an angular separation of \\(2\pi/n\\) radians between any two consecutive roots.
@@ -58,7 +56,6 @@ z_2 &= e^{4\pi i/3} = -\frac{1}{2} - \frac{\sqrt{3}}{2}\\,i
 
 > For \\(n = 6\\) the six roots are the vertices of a regular hexagon, and they include as a subset the roots for \\(n = 2\\) and \\(n = 3\\), which reflects the divisibility \\(2 \mid 6\\) and \\(3 \mid 6\\) and the corresponding subgroup inclusions \\(\mu_2, \mu_3 \subset \mu_6\\).
 
-- - -
 ## Primitive roots
 
 A root of unity \\(z_k \in \mu_n\\) is called primitive if its order in the group is exactly \\(n\\), meaning that \\(z_k^m \neq 1\\) for every positive integer \\(m < n\\). Equivalently, \\(z_k\\) is a generator of \\(\mu_n\\): every element of the group can be expressed as a power of \\(z_k\\). Since \\(z_k = z_1^k\\), the order of \\(z_k\\) in the cyclic group \\(\mu_n\\) is \\(n / \gcd(k, n)\\). Therefore \\(z_k\\) is primitive if and only if \\(\gcd(k, n) = 1\\).
@@ -71,7 +68,6 @@ For instance, when \\(n = 6\\) one has \\(\varphi(6) = 2\\), and the primitive r
 
 This makes the choice of primitive root a matter of convention rather than mathematical substance, since all primitive roots generate the same group.
 
-- - -
 ## Sum of the roots
 
 The sum of all \\(n\\)-th roots of unity vanishes for every \\(n \geq 2\\). To see this, observe that the polynomial \\(z^n - 1\\) factors completely over \\(\mathbb{C}\\) as:
@@ -94,7 +90,6 @@ An alternative verification uses the formula for a geometric series: since \\(z_
 
 Geometrically, this result states that the centroid of the vertices of a regular \\(n\\)-gon inscribed in the unit circle coincides with the origin, which is geometrically evident by symmetry.
 
-- - -
 ## Product of the Roots
 
 The product of all \\(n\\)-th roots of unity is given by the following identity. Since the
@@ -113,7 +108,6 @@ yields:
 
 This result is a direct consequence of Vieta's formulas, which relate the coefficients of a polynomial to the elementary symmetric polynomials of its roots. For instance, when \\(n = 2\\) the roots are \\(1\\) and \\(-1\\), whose product is \\(-1 = (-1)^3\\), and when \\(n = 3\\) the roots are the three cube roots of unity, whose product is \\(1 = (-1)^4\\).
 
-- - -
 ## Cyclotomic polynomials
 
 The primitive \\(n\\)-th roots of unity are precisely the roots of the \\(n\\)-th cyclotomic polynomial \\(\Phi_n(x)\\), defined as the monic polynomial whose roots are exactly the primitive \\(n\\)-th roots of unity. We have:

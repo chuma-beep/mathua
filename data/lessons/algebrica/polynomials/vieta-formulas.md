@@ -10,7 +10,6 @@ The formulas can be stated in two equivalent ways.
 + From the perspective of solving an equation, they give the sum, the product, and a hierarchy of intermediate symmetric expressions of the roots, all in terms of the coefficients. 
 + From the perspective of constructing a polynomial, they describe how to assemble the coefficients once the roots are fixed.
 
-- - -
 ## Quadratic case
 
 Consider the quadratic equation in standard form:
@@ -35,7 +34,6 @@ These two identities encode all the information about the roots that can be read
 
 > The same identities can be derived from the quadratic formula by computing the sum and the product of the two expressions \\(\frac{-b + \sqrt{\Delta}}{2a}\\) and \\(\frac{-b - \sqrt{\Delta}}{2a}\\). The argument by factorisation is shorter and generalises to higher degrees with no modification.
 
-- - -
 ## General form
 
 The same reasoning applies, with no essential change, to a polynomial of arbitrary degree. Let \\(p(x)\\) be a polynomial of degree \\(n\\) with leading coefficient \\(a_n \neq 0\\):
@@ -84,7 +82,6 @@ The constant term encodes the product of the roots, with a sign that depends on 
 
 > When the polynomial is monic, that is, when \\(a_n = 1\\), the formulas simplify accordingly. The factor at the denominator disappears, and each coefficient \\(a_{n-k}\\) coincides, up to the sign \\((-1)^k\\), with the corresponding elementary symmetric polynomial in the roots.
 
-- - -
 ## The cubic case
 
 Specialising the general statement to degree three produces a useful intermediate case between the quadratic identities and the formal expression in arbitrary degree. Consider the cubic equation in standard form:
@@ -105,7 +102,6 @@ x_1 x_2 x_3 &= -\frac{d}{a}
 
 The three identities correspond to the elementary symmetric polynomials \\(e_1\\), \\(e_2\\), and \\(e_3\\). The middle one, often the least familiar, is the sum of all distinct pairwise products of the roots. The pattern of alternating signs, already visible in the quadratic case, is dictated by the formula \\((-1)^k e_k = a_{n-k}/a_n\\).
 
-- - -
 ## Example 1
 
 Consider the quadratic equation:
@@ -122,7 +118,6 @@ x^2 - 5x + 6 = (x - 2)(x - 3)
 
 The roots are \\(x_1 = 2\\) and \\(x_2 = 3\\). The procedure works whenever the roots are rational and small enough to be located by inspection. When this fails, the quadratic formula remains the general-purpose method.
 
-- - -
 ## Example 2
 
 Consider the cubic equation:
@@ -147,7 +142,6 @@ The leading coefficient is \\(a = 1\\), so Vieta's formulas read \\(-b = e_1\\),
 x^3 - 6x^2 + 11x - 6 = (x - 1)(x - 2)(x - 3)
 \\]
 
-- - -
 ## Constructing a polynomial from its roots
 
 Vieta's formulas can be read in the opposite direction: given a list of numbers, the monic polynomial having precisely those numbers as roots is determined by their elementary symmetric polynomials. If \\(\alpha_1, \alpha_2, \ldots, \alpha_n\\) are the assigned roots, the polynomial is:
@@ -174,7 +168,6 @@ p(x) = x^3 - 4x^2 + x + 6
 
 The polynomial has the prescribed roots, as can be verified by direct substitution of \\(x = 2\\), \\(x = -1\\), and \\(x = 3\\), each of which makes \\(p(x)\\) vanish.
 
-- - -
 ## Applications
 
 Vieta's formulas underpin a number of techniques that recur throughout elementary algebra and beyond. Three uses are worth recording.
@@ -185,7 +178,6 @@ The second is the AC method for factoring quadratic trinomials. The conditions \
 
 The third arises in the study of the roots of unity, where the polynomial \\(z^n - 1\\) has all its non-leading coefficients equal to zero except for the constant term. Vieta's formulas then state that the sum of the \\(n\\)-th roots of unity vanishes whenever \\(n \geq 2\\), and that their product equals \\((-1)^{n+1}\\). Both results follow by inspection of the coefficients of \\(z^n - 1\\).
 
-- - -
 ## Structural interpretation
 
 Behind Vieta's formulas lies a more general phenomenon. The elementary symmetric polynomials \\(e_1, e_2, \ldots, e_n\\) form a system of generators for the ring of symmetric polynomials in the variables \\(x_1, \ldots, x_n\\): every polynomial expression in the roots that is invariant under permutation can be written, in a unique way, as a polynomial in the \\(e_k\\). This statement is the fundamental theorem of symmetric polynomials.

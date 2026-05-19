@@ -12,7 +12,6 @@ Starting from this very equation, we introduce the symbol \\( i \\), known as th
 
 In this way, the equation \\( x^2 + 1 = 0 \\) has two distinct complex roots, given by \\( \pm i \\).
 
-- - -
 ## Construction of the complex numbers
 
 The introduction of complex numbers is sometimes treated as a matter of convenient notation, as though the symbol \\( i \\) were simply declared to satisfy \\( i^2 = -1 \\) and the matter were settled.This approach leaves an important question unanswered: does such an object actually exist, and if so, in what mathematical sense? The answer requires a short excursion into the construction of \\( \mathbb{C} \\) from the real numbers.
@@ -25,7 +24,6 @@ Addition is defined componentwise. Given two pairs \\( (a, b) \\) and \\( (c, d)
 \\]
 This is the natural extension of vector addition in the plane and presents no difficulty.
 
-- - -
 
 Multiplication is more subtle, and it is precisely here that the algebraic structure of the complex numbers diverges from that of \\( \mathbb{R}^2 \\) viewed merely as a vector space. The product of two pairs is defined as follows.
 \\[
@@ -49,7 +47,6 @@ With this notation established, every complex number \\( (a, b) \\) can be decom
 \\]
 The notation \\( z = a + bi \\) is thus a compact encoding of the ordered pair \\( (a, b) \\), with \\( a \\) called the real part and \\( b \\) the imaginary part of \\( z \\). These are written as \\( \mathrm{Re}(z) = a \\) and \\( \mathrm{Im}(z) = b \\). Note that the imaginary part is the real number \\( b \\), not the quantity \\( bi \\).
 
-- - -
 
 It remains to verify that the algebraic properties expected of a field actually hold. The verification is mechanical but worth summarising. Under addition, \\( \mathbb{C} \\) forms an abelian group: commutativity and associativity are inherited directly from \\( \mathbb{R} \\), the additive identity is \\( (0, 0) \\), and the additive inverse of \\( (a, b) \\) is \\( (-a, -b) \\).
 
@@ -63,7 +60,6 @@ One may also observe that, as a vector space over \\( \mathbb{R} \\), the field 
 
 The construction just described also generalises: replacing \\( \mathbb{R} \\) with an arbitrary field \\( F \\) and seeking an extension in which a chosen irreducible polynomial has a root leads to the broader theory of field extensions, of which \\( \mathbb{C} \cong \mathbb{R}[x]/(x^2 + 1) \\) is the simplest and most important example.
 
-- - -
 ## Definition
 
 A complex number \\( z \\) is a number of the form \\( z = a + bi \\), where \\( a \\) and \\( b \\) are real numbers. The set of complex numbers is denoted by \\( \mathbb{C} \\) and is formally defined as follows.
@@ -82,14 +78,12 @@ z = a + ib \quad \rightarrow \quad
 + The complex number \\( z = 2 + 3i \\) has a real part of \\( 2 \\) and an imaginary part of \\( 3 \\).
 + Numbers of the form \\( z = ib \\) are called purely imaginary numbers.
 
-- - -
 
 While the algebraic form is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their polar trigonometric form:
 \\[z = r (\cos\theta + i\sin\theta) \\]
 Another representation is the exponential form:
 \\[z = r e^{i\theta} \\]
 
-- - -
 ## Complex plane
 
 Due to the structure of the set \\( \mathbb{C} \\) as a Cartesian product, complex numbers can be represented geometrically in the complex plane (also known as the Gaussian or Argand plane), where the real part corresponds to the \\( x \\)-coordinate and the imaginary part corresponds to the \\( y \\)-coordinate. Thus, the complex number:
@@ -102,7 +96,6 @@ can be represented as the point \( (x, y) \) in the plane, which is known as the
 
 A purely imaginary number is represented by the ordered pair \( i = (0,1) \).
 
-- - -
 ## Conjugate and modulus
 
 Given the complex number \\( z = a + bi \\), the conjugate of \\( z \\) is defined as the complex number:
@@ -123,7 +116,6 @@ It represents the distance from the origin to the point \\( (a, b) \\) in the co
 |z|^2 = a^2 + b^2
 \\]
 
-- - -
 ## Example
 
 Let’s consider the complex number \\(z = 3 + 2i\\). Using the modulus formula, we substitute \\( a = 3 \\) and \\( b = 2 \\):
@@ -136,7 +128,6 @@ Thus, the modulus of \\( z = 3 + 2i \\) is:
 
 > This value represents the distance of \\( z \\) from the origin in the complex plane for the complex number \\(3 + 2i\\).
 
-- - -
 ## Argument
 
 The argument of a complex number \\( z = a + bi \\) is the angle \\( \theta \\) formed between the positive real axis and the segment connecting the origin to the point \\( (a, b) \\) in the complex plane. It is measured in radians, counterclockwise from the positive real axis, and is denoted by \\( \arg(z) \\).
@@ -162,7 +153,6 @@ When \\( a < 0 \\) and \\( b < 0 \\), the point lies in the third quadrant, and 
 \\]
 When \\( a = 0 \\), the point lies on the imaginary axis and the arctangent is undefined. In this case the argument is determined directly from the sign of \\( b \\): if \\( b > 0 \\) then \\( \mathrm{Arg}(z) = \pi/2 \\), and if \\( b < 0 \\) then \\( \mathrm{Arg}(z) = -\pi/2 \\). The case \\( z = 0 \\) is excluded, since the argument of the origin is undefined.
 
-- - -
 
 As an illustration, consider the complex number \\( z = -1 + i \\). Its real part is negative and its imaginary part is positive, so the point lies in the second quadrant. Applying the arctangent to the ratio \\( b/a = 1/(-1) = -1 \\) gives \\( \arctan(-1) = -\pi/4 \\), which falls in the fourth quadrant and is therefore incorrect. Since \\( a < 0 \\) and \\( b \geq 0 \\), the correction of \\( +\pi \\) must be applied, yielding the following.
 \\[
@@ -170,7 +160,6 @@ As an illustration, consider the complex number \\( z = -1 + i \\). Its real par
 \\]
 This value is consistent with the geometric position of \\( z = -1 + i \\): the point lies at equal distances from both axes in the second quadrant, forming an angle of \\( 135° \\) with the positive real axis.
 
-- - -
 ## Properties of \\(\mathbb{C}\\)
 
 The sum and product of complex numbers satisfy the associative, commutative, and distributive properties, just like the set of real numbers.
@@ -182,7 +171,6 @@ Commutative property. The order in which two complex numbers are added or multip
 \\[z_1 \cdot z_2 = z_2 \cdot z_1 \\]
 Distributive property. Multiplying a number by a sum gives the same result as multiplying each addend individually and then adding the products.
 \\[z_1 \cdot (z_2 + z_3) = z_1 \cdot z_2 + z_1 \cdot z_3 \\]
-- - -
 The complex number \\( 0 + 0i \\) is the additive identity in \\( \mathbb{C} \\), since for every complex number \\( z = a + bi \\), we have:
 \\[
 \begin{align}
@@ -201,13 +189,11 @@ z \cdot (1 + 0i) &= (a + bi) \cdot (1 + 0i) \\\\[6pt]
 &= z
 \end{align}
 \\]
-- - -
 The opposite of \\( a + bi \\) is the complex number:
 \\[-(a + bi) = -a - bi \\]
 The reciprocal of a nonzero complex number \\( z = a + bi \\) is the complex number:
 \\[\frac{1}{z} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2} i \\]
 Complex numbers of the form \\( z = a + 0i \\), where the imaginary part is zero, are precisely the real numbers.
-- - -
 The set of complex numbers \\( \mathbb{C} \\) cannot be ordered in a way that is compatible with addition and multiplication. If there existed a total order \\( \leq \\) on \\( \mathbb{C} \\), we should be able to compare \\( i \\) with \\( 0 \\). There are two possible cases:  
 + If \\( i > 0 \\), then multiplying both sides by \\( i \\) gives \\( i^2 = -1 > 0 \\), which is a contradiction.  
 + If \\( i < 0 \\), multiplying both sides by \\( i \\) again leads to the same contradiction: \\( -1 > 0 \\).  

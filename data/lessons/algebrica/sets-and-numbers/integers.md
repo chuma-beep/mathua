@@ -36,7 +36,6 @@ For instance, the pair \\((4,7)\\) lies in the same class as \\((2,5)\\), becaus
 
 Although the components differ, both pairs encode the same overall difference, the integer \\(-3.\\)
 
-- - -
 ## The Integers as an algebraic ring
 
 When we say that the integers form a ring, we mean that the set \\(\mathbb{Z}\\) comes equipped with two operations, addition and multiplication, that interact in a structured and predictable way. This structure ensures that arithmetic with integers behaves consistently, no matter how large or small the numbers involved may be.
@@ -54,40 +53,34 @@ Multiplication in \\(\mathbb{Z}\\) is also commutative, that is, \\(ab = ba\\) f
 
 > A field extends the ring structure by requiring that every non-zero element also has a multiplicative inverse. The rational numbers \\(\mathbb{Q}\\) and the real numbers \\(\mathbb{R}\\) are standard examples; the integers are not, since \\(2^{-1} \notin \mathbb{Z}\\).
 
-- - -
 ## Fundamental properties of the integers
 
 Compatibility with equality: whenever two integers satisfy \\(a = b\\), any operation applied to both sides preserves that equality. In particular:
 \\[a + c = b + c \\]
 \\[ac = bc\\]
 
-- - -
 
 Commutative laws: the order of the operands does not affect the result:
 \\[a\ + b = b + a \\]
 \\[ab = ba\\]
 
-- - -
 
 Associative laws: grouping the terms does not change the outcome:
 \\[a + (b + c) = (a + b) + c \\]
 \\[a(bc) = (ab)c \\]
 
-- - -
 
 Distributive law: multiplication distributes over addition:
    \\[
    a(b + c) = ab + ac
    \\]
 
-- - -
 
 The integers also include neutral elements for the two operations: adding zero leaves any integer unchanged, and multiplying by one preserves its value:
 \\[
 a + 0 = a \qquad a \cdot 1 = a
 \\]
 
-- - -
 ## Integers in base 10
 
 Integers are typically written using the decimal system, that is, base 10. Each digit in a number carries a positional weight determined by a corresponding power of ten. By combining these weighted digits, we can reconstruct the entire value of the integer. Consider for example the number \\(235.\\) Using the positional principle, we can express the number as a sum of powers of ten:
@@ -110,7 +103,6 @@ Adding these contributions together recovers the integer:
 
 > The same mechanism applies to any integer written in decimal notation. Each digit acts as a coefficient multiplying a specific power of ten, and the integer itself is obtained by summing all these positional contributions.
 
-- - -
 ## The binary system
 
 Although integers are commonly written in base 10, other numeral systems are equally valid and sometimes more convenient. An especially important alternative is base 2, or the binary system, which uses only the digits \\(0\\) and \\(1\\). This representation is fundamental in computer science and digital electronics, where information is stored and processed using two-state devices. In base 2, each position corresponds to a power of two rather than a power of ten. Any integer can be rewritten in binary by expanding it as a sum of weighted powers of two. For example, consider the integer:
@@ -145,7 +137,6 @@ The sum of the contributions confirms the conversion:
 32 + 16 + 0 + 4 + 0 + 1 = 53
 \\]
 
-- - -
 ## The modulo operator
 
 Modular arithmetic describes how integers behave when we are interested only in their remainders after division by a fixed integer \\(n\\). Within \\(\mathbb{Z}\\), two integers are said to be equivalent modulo \\(n\\) when they differ by a multiple of \\(n\\). For example, in arithmetic modulo \\(12\\), the integers \\(14\\) and \\(2\\) represent the same residue class because \\(14 - 2 = 12\\). Addition and multiplication are carried out as usual, but the final result is replaced by its remainder upon division by \\(n\\). For example:
@@ -155,7 +146,6 @@ Modular arithmetic describes how integers behave when we are interested only in 
 
 > In the case of \\(5 \times 7\\), the product is \\(35 = 24 + 11\\); since \\(24\\) is a multiple of \\(12\\), the value of the product modulo \\(12\\) is the remainder \\(11\\).
 
-- - -
 
 This kind of arithmetic is widely used beyond pure mathematics. In computer science, the modulo operator is essential for extracting remainders, generating cyclic patterns, and keeping values within a bounded range. A familiar example involves the months of the year: adding \\(n\\) months is naturally handled modulo \\(12\\), since month counts wrap around after December.
 
@@ -169,7 +159,6 @@ System.out.println(result);  // Output: 1  (January)
 // Instead, 13 is reduced to its remainder when divided by 12, which is 1.
 ````
 
-- - -
 ## Integers and the role of induction
 
 In mathematics, several structural properties of the integers depend on the recursive nature of the natural numbers. The naturals form the foundation from which the integers are constructed, and many statements about \\( \mathbb{Z} \\) can be traced back to properties first established on \\( \mathbb{N} \\). The mechanism that allows these stepwise constructions and proofs is the Principle of Mathematical Induction.

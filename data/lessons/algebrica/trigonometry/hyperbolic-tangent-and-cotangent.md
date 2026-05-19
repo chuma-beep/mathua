@@ -20,7 +20,6 @@ Once the point \\(P(\cosh(x), \sinh(x))\\) on the hyperbola has been identified 
 
 > To make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\cosh x, \sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the line passing through the origin \\( O \\) and \\( P \\), and consider the vertical line \\( x = 1 \\). Their intersection defines the point \\( T \\), which has coordinates \\( T = (1, \tanh x) \\), since the slope of the line \\( OP \\) is \\( \sinh x/ \cosh x = \tanh x \\). The vertical segment joining \\( (1,0) \\) to \\( T \\) therefore represents geometrically the length of the hyperbolic tangent.
 
-- - -
 
 The hyperbolic cotangent is the reciprocal ratio, that is, the horizontal coordinate divided by the vertical one:
 
@@ -30,11 +29,9 @@ The hyperbolic cotangent is the reciprocal ratio, that is, the horizontal coordi
 
 > As in the case illustrated above for the hyperbolic tangent, to make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\\cosh x, \\sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the line passing through the origin \\( O \\) and \\( P \\), and consider the horizontal line \\( y = 1 \\). Their intersection defines the point \\( S \\), which has coordinates \\( S = (\\coth x, 1) \\), since the slope of the line \\( OP \\) is \\( \\sinh x / \\cosh x = \\tanh x \\), and thus its reciprocal gives \\( \\coth x = \\cosh x / \\sinh x \\). The horizontal segment joining \\( (0,1) \\) to \\( S \\) therefore represents geometrically the length of the hyperbolic cotangent.
 
-- - -
 
 In this geometric picture, the hyperbolic tangent and cotangent measure a kind of slope of the point on the hyperbola relative to its two coordinates, in analogy with the way the circular tangent expresses the slope of the point on the unit circle.
 
-- - -
 ## Fundamental hyperbolic identity for tangent and cotangent
 
 The hyperbolic tangent and cotangent satisfy an identity that follows directly from the fundamental hyperbolic identity. Starting from:
@@ -57,7 +54,6 @@ Analogously, dividing the fundamental identity by \\(\sinh^{2}(x)\\) for \\(x \n
 
 Both identities record a direct consequence of the hyperbola equation: the coordinates of the point \\(P\\) are constrained to satisfy \\(X^{2} – Y^{2} = 1\\), and dividing by either coordinate squared translates this constraint into a relation involving the ratio functions.
 
-- - -
 ## Hyperbolic identities
 
 - \\[\text{1. } \quad \tanh(x+y) = \frac{\tanh(x) + \tanh(y)}{1 + \tanh(x)\\,\tanh(y)}\\]
@@ -74,7 +70,6 @@ Both identities record a direct consequence of the hyperbola equation: the coord
 
 > The addition and subtraction formulas for the hyperbolic tangent and cotangent closely mirror their circular counterparts, but are governed by the algebra of the equilateral hyperbola. The last identity simply states that \\(\tanh\\) and \\(\coth\\) are reciprocal functions wherever both are defined.
 
-- - -
 ## Analytical expression of the hyperbolic tangent
 
 Using the analytical expressions of the hyperbolic sine and cosine in terms of the exponential function, we can write the hyperbolic tangent directly. Substituting:
@@ -102,7 +97,6 @@ or, equivalently, by multiplying by \\(e^{x}\\):
 
 All three expressions are equivalent and each makes apparent a different aspect of the function: in the first form, the numerator and denominator are the analytically defined hyperbolic sine and cosine themselves. In the latter two, the exponential growth as \\(x \to +\infty\\) or \\(x \to -\infty\\) becomes immediately visible, and from them one can read off at once that the function tends to \\(1\\) and \\(-1\\) respectively.
 
-- - -
 ## Analytical expression of the hyperbolic cotangent
 
 The derivation of the analytical expression for the hyperbolic cotangent follows the same pattern. Substituting the expressions of \\(\sinh(x)\\) and \\(\cosh(x)\\) into the definition \\(\coth(x) = \cosh(x)/\sinh(x)\\), and again cancelling the common factor \\(1/2\\), we get:
@@ -119,7 +113,6 @@ As before, multiplying numerator and denominator by \\(e^{-x}\\) or by \\(e^{x}\
 
 The latter expressions show that for large positive \\(x\\) the function approaches \\(1\\) from above, while for large negative \\(x\\) it approaches \\(-1\\) from below, with a vertical asymptote at \\(x = 0\\) in both cases.
 
-- - -
 ## Hyperbolic tangent and cotangent functions
 
 The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real numbers. Unlike the circular tangent, it does not have vertical asymptotes: its graph is a smooth, monotonically increasing curve that passes through the origin with slope \\(1\\) and remains bounded for all \\(x\\). As \\(x \to +\infty\\) the function approaches \\(1\\) asymptotically, while as \\(x \to -\infty\\) it approaches \\(-1\\), so the range is the open interval \\((-1, 1)\\).
@@ -130,7 +123,6 @@ The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real nu
 - Parity: odd, \\(\tanh(-x) = -\tanh(x)\\)
 - Horizontal asymptotes: \\(y = 1\\) as \\(x \to +\infty\\); \\(y = -1\\) as \\(x \to -\infty\\)
 
----
 
 The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real \\(x \neq 0\\). Its graph consists of two branches: one for \\(x > 0\\), where the function decreases from \\(+\infty\\) toward \\(1\\), and one for \\(x < 0\\), where it increases from \\(-\infty\\) toward \\(-1\\). The origin is a vertical asymptote, and the lines \\(y = 1\\) and \\(y = -1\\) are horizontal asymptotes.
 
@@ -140,7 +132,6 @@ The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real 
 - Parity: odd, \\(\coth(-x) = -\coth(x)\\)
 - Vertical asymptote: \\(x = 0\\)
 - Horizontal asymptotes: \\(y = 1\\) as \\(x \to +\infty\\); \\(y = -1\\) as \\(x \to -\infty\\)
-- - -
 ## Relation to the circular tangent and cotangent
 
 The circular tangent and cotangent are defined as ratios of the circular sine and cosine, which in turn arise from the geometry of the unit circle. By exact analogy, the hyperbolic tangent and cotangent are ratios of the hyperbolic sine and cosine, which arise from the geometry of the equilateral hyperbola. In both settings, the underlying identity constraining the coordinates of a point on the curve propagates to a corresponding identity for the ratio functions.

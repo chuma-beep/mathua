@@ -12,7 +12,6 @@ The coefficients \\(a_n, a_m, a_k\\) are non-zero elements of the ring. When the
 
 > A ring is a set equipped with addition and multiplication satisfying the standard algebraic axioms: associativity, distributivity, and the existence of an additive identity and inverses. A commutative ring with unity additionally requires commutativity of multiplication and a multiplicative identity. Typical examples are \\(\mathbb{Z}\\), \\(\mathbb{R}\\), and \\(\mathbb{C}.\\)
 
-- - -
 
 The quadratic trinomial in one variable, which has degree two, is the most frequently studied case and takes the following canonical form where \\(a, b, c \in \mathbb{R}\\) and \\(a \neq 0\\):
 
@@ -22,7 +21,6 @@ The requirement \\(a \neq 0\\) is essential because, if omitted, the leading ter
 
 Not every polynomial with three terms is of the form (1). For example, expressions such as \\(x^3 + 2x + 1\\), \\(x^4 - x^2 + 3\\), and \\(x^2 y + xy^2 - 1\\) are all trinomials, each representing a distinct class. The subsequent discussion primarily addresses the quadratic case, with a dedicated section for higher-degree trinomials that can be reduced to this form through substitution.
 
-- - -
 
 The quadratic trinomial (1) defines the quadratic function \\(f(x) = ax^2 + bx + c\\), whose graph is a parabola. The vertex form indicates that the vertex of the parabola is located at
 
@@ -32,7 +30,6 @@ The parabola opens upward if \\(a > 0\\) and downward if \\(a < 0\\).
 
 The number of intersections with the \\(x\\)-axis corresponds to the number of distinct real roots. The sign of \\(\Delta\\) provides a geometric interpretation: \\(\Delta > 0\\) indicates two \\(x\\)-intercepts, \\(\Delta = 0\\) indicates tangency to the \\(x\\)-axis, and \\(\Delta < 0\\) indicates no real intersection.
 
-- - -
 
 ## Classification of trinomials
 
@@ -40,7 +37,6 @@ Trinomials are classified according to two primary criteria: degree and number o
 
 In the case of two variables, trinomials of the form \\(ax^2 + bxy + cy^2\\) represent homogeneous quadratic forms. Homogeneous trinomials deserve a brief mention: a trinomial \\(ax^n + bx^{n-1}y + cy^{n-2}\\) is not homogeneous unless all three terms share the same total degree. The trinomial \\(x^2 + xy + y^2\\), for instance, is homogeneous of degree 2, while \\(x^2 + xy + y\\) is not.
 
-- - -
 ## The discriminant
 
 The algebraic properties of the quadratic trinomial \\(ax^2 + bx + c\\) are determined by a single quantity known as the discriminant, defined as follows:
@@ -57,7 +53,6 @@ If \\(\Delta = 0\\), the two roots coincide, resulting in a single value \\(x_0 
 
 If \\(\Delta < 0\\), the trinomial has no real roots and is irreducible over \\(\mathbb{R}\\), as it cannot be expressed as a product of two linear factors with real coefficients. However, over the complex numbers \\(\mathbb{C}\\), formula (3) remains valid, with \\(\sqrt{\Delta}\\) interpreted as \\(i\sqrt{|\Delta|}\\), resulting in a conjugate pair of complex roots.
 
-- - -
 
 If \\(\Delta \geq 0\\), the trinomial in equation (1) can be completely factorised over the real numbers:
 
@@ -69,7 +64,6 @@ If \\(\Delta \geq 0\\), the trinomial in equation (1) can be completely factoris
 
 The factorisation in equation (4) represents the product form of the trinomial. This form is fundamental for simplifying rational expressions, solving inequalities, and evaluating limits and integrals that involve quadratic denominators.
 
-- - -
 ## Vieta's formulas
 
 An immediate consequence of equation (4) is that the roots satisfy the following relations, known as Vieta's formulas:
@@ -100,7 +94,6 @@ The pair \\((2, 3)\\) in row 3 satisfies both conditions, thus:
 
 > This mental arithmetic approach is effective whenever the roots are rational.
 
-- - -
 ## Example 1
 
 Factor the trinomial \\(3x^2 - 7x + 2\\). The first step is to compute the discriminant: \\(\Delta = (-7)^2 - 4 \cdot 3 \cdot 2 = 49 - 24 = 25 > 0\\). Since \\(\Delta > 0\\), the trinomial has two distinct real roots, which can be determined using the quadratic formula:
@@ -121,7 +114,6 @@ As a consistency check, Vieta's formulas (5) require that \\(x_1 + x_2 = -b/a\\)
 The factorisation therefore yields:
 \\[(x-2)(3x-1)\\]
 
-- - -
 ## Perfect square trinomials
 
 A trinomial is defined as a perfect square if it can be expressed as the square of a binomial. The two fundamental identities are as follows:
@@ -139,7 +131,6 @@ A frequent mistake is to assume that \\(x^2 + 4x + 8\\) is a perfect square sole
 
 A perfect square trinomial always has a discriminant \\(\Delta = 0\\), as its two roots are identical. Conversely, any quadratic trinomial with \\(\Delta = 0\\) is a perfect square.
 
-- - -
 
 For example, determine whether \\(4x^2 - 12x + 9\\) is a perfect square and factor it. To verify, note that \\(4x^2 = (2x)^2\\), \\(9 = 3^2\\), and \\(12x = 2 \cdot 2x \cdot 3\\). Since all three conditions are satisfied we have:
 
@@ -147,7 +138,6 @@ For example, determine whether \\(4x^2 - 12x + 9\\) is a perfect square and fact
 
 The discriminant \\(\Delta = 144 - 144 = 0\\) confirms the presence of a repeated root at \\(x_0 = 3/2\\).
 
-- - -
 ## Example 2
 
 Determine whether the polynomial \\(x^2 + x + 1\\) is reducible over \\(\mathbb{R}\\), and identify its complex roots. The discriminant is \\(\Delta = 1 - 4 = -3 < 0\\). Because \\(\Delta < 0\\), the polynomial has no real roots and is irreducible over \\(\mathbb{R}\\). It cannot be expressed as a product of two linear factors with real coefficients.
@@ -163,7 +153,6 @@ These roots are primitive sixth roots of unity, as they satisfy \\(x^6 = 1\\) bu
 Thus, the trinomial is irreducible over \\(\mathbb{R}\\), and its two complex roots are:
 \\[x_1 = \dfrac{-1 + i\sqrt{3}}{2} \quad x_2 = \dfrac{-1 - i\sqrt{3}}{2}\\]
 
-- - -
 ## The method of completing the square
 
 Completing the square is a technique used to rewrite any quadratic trinomial of the form \\(ax^2 + bx + c\\) as an equivalent expression:
@@ -172,7 +161,6 @@ Completing the square is a technique used to rewrite any quadratic trinomial of 
 
 \\(h\\) and \\(k\\) are constants determined by the original coefficients. This form allows for direct identification of the vertex of the corresponding parabola and serves as a fundamental step in deriving the quadratic formula. For a comprehensive discussion, refer to the dedicated page on completing the square.
 
-- - -
 ## Trinomials reducible to quadratic form
 
 Certain higher-degree trinomials may be reduced to quadratic form through an appropriate change of variable. Specifically, a trinomial of the form:
@@ -211,7 +199,6 @@ x^4 + x^2 + 1 &= (x^4 + 2x^2 + 1) - x^2 \\\\[6pt]
 
 Each factor is a quadratic trinomial with a negative discriminant, so the factorisation cannot be further refined over \\(\mathbb{R}\\).
 
-- - -
 ## Irreducibility and complex roots
 
 A quadratic trinomial \\(ax^2 + bx + c\\) with \\(\Delta < 0\\) cannot be decomposed into linear factors over \\(\mathbb{R}\\). Over \\(\mathbb{C}\\), every quadratic polynomial can be factored completely. The roots form a conjugate pair:

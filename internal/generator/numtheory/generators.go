@@ -9,14 +9,14 @@ import (
 )
 
 func Register(reg *generator.Registry) {
-	reg.Register("nt.divisibility", &divisibilityGen{})
-	reg.Register("nt.gcd_euclidean", &gcdEuclideanGen{})
-	reg.Register("nt.modular", &modularGen{})
-	reg.Register("nt.congruence", &congruenceGen{})
-	reg.Register("nt.fermat_little", &fermatLittleGen{})
-	reg.Register("nt.euler_phi", &eulerPhiGen{})
-	reg.Register("nt.diophantine", &diophantineGen{})
-	reg.Register("nt.crypto", &cryptoGen{})
+	reg.Register("nt.basics.divisibility", &divisibilityGen{})
+	reg.Register("nt.basics.gcd_euclidean", &gcdEuclideanGen{})
+	reg.Register("nt.basics.modular", &modularGen{})
+	reg.Register("nt.basics.congruence", &congruenceGen{})
+	reg.Register("nt.adv.fermat_little", &fermatLittleGen{})
+	reg.Register("nt.adv.euler_phi", &eulerPhiGen{})
+	reg.Register("nt.adv.diophantine", &diophantineGen{})
+	reg.Register("nt.app.crypto", &cryptoGen{})
 }
 
 type divisibilityGen struct{}

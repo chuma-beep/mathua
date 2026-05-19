@@ -1,6 +1,6 @@
 [
   {
-    "id": "dec.compare",
+    "id": "dec.basics.compare",
     "label": "Compare decimal values",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
@@ -14,7 +14,7 @@
     }
   },
   {
-    "id": "dec.add",
+    "id": "dec.ops.add",
     "label": "Add decimals",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
@@ -29,13 +29,13 @@
     }
   },
   {
-    "id": "dec.sub",
+    "id": "dec.ops.sub",
     "label": "Subtract decimals",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "dec.add"
+      "dec.ops.add"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -43,13 +43,13 @@
     }
   },
   {
-    "id": "dec.mult",
+    "id": "dec.ops.mult",
     "label": "Multiply decimals",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "dec.add",
+      "dec.ops.add",
       "arith.mult.double"
     ],
     "mastery_threshold": {
@@ -58,13 +58,13 @@
     }
   },
   {
-    "id": "dec.div",
+    "id": "dec.ops.div",
     "label": "Divide decimals",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "dec.mult",
+      "dec.ops.mult",
       "arith.div.long"
     ],
     "mastery_threshold": {
@@ -73,13 +73,13 @@
     }
   },
   {
-    "id": "dec.from_frac",
+    "id": "dec.convert.from_frac",
     "label": "Convert fraction to decimal by division",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
+      "frac.basics.parts",
       "arith.div.long"
     ],
     "mastery_threshold": {
@@ -88,14 +88,14 @@
     }
   },
   {
-    "id": "dec.to_frac",
+    "id": "dec.convert.to_frac",
     "label": "Convert terminating decimal to fraction",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "dec.from_frac",
-      "frac.simplify"
+      "dec.convert.from_frac",
+      "frac.ops.simplify"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -103,13 +103,13 @@
     }
   },
   {
-    "id": "dec.round",
+    "id": "dec.ops.round",
     "label": "Round decimals to given place",
     "domain": "prealgebra",
     "subdomain": "prealgebra.decimals",
     "grading_type": "numeric",
     "prerequisites": [
-      "dec.compare"
+      "dec.basics.compare"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -117,7 +117,7 @@
     }
   },
   {
-    "id": "pct.concept",
+    "id": "pct.basics.concept",
     "label": "Percentage as parts per hundred",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
@@ -131,13 +131,13 @@
     }
   },
   {
-    "id": "pct.to_dec",
+    "id": "pct.convert.to_dec",
     "label": "Convert percentage to decimal",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.concept"
+      "pct.basics.concept"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -145,13 +145,13 @@
     }
   },
   {
-    "id": "pct.from_dec",
+    "id": "pct.convert.from_dec",
     "label": "Convert decimal to percentage",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.to_dec"
+      "pct.convert.to_dec"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -159,13 +159,13 @@
     }
   },
   {
-    "id": "pct.of_number",
+    "id": "pct.ops.of_number",
     "label": "Find X percent of a number",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.to_dec",
+      "pct.convert.to_dec",
       "arith.mult.double"
     ],
     "mastery_threshold": {
@@ -174,13 +174,13 @@
     }
   },
   {
-    "id": "pct.find_rate",
+    "id": "pct.ops.find_rate",
     "label": "What percentage is A of B",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.of_number",
+      "pct.ops.of_number",
       "arith.div.basic"
     ],
     "mastery_threshold": {
@@ -189,13 +189,13 @@
     }
   },
   {
-    "id": "pct.increase",
+    "id": "pct.ops.increase",
     "label": "Percentage increase and decrease",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.of_number"
+      "pct.ops.of_number"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -203,13 +203,13 @@
     }
   },
   {
-    "id": "pct.discount",
+    "id": "pct.ops.discount",
     "label": "Calculate discounts and sale prices",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.increase"
+      "pct.ops.increase"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -217,13 +217,13 @@
     }
   },
   {
-    "id": "pct.tax_tip",
+    "id": "pct.ops.tax_tip",
     "label": "Tax and tip calculations",
     "domain": "prealgebra",
     "subdomain": "prealgebra.percentages",
     "grading_type": "numeric",
     "prerequisites": [
-      "pct.discount"
+      "pct.ops.discount"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -231,7 +231,7 @@
     }
   },
   {
-    "id": "arith.abs_value",
+    "id": "arith.neg.abs_value",
     "label": "Absolute value",
     "domain": "prealgebra",
     "subdomain": "prealgebra.negatives",
@@ -260,7 +260,7 @@
     }
   },
   {
-    "id": "ratio.concept",
+    "id": "ratio.basics.concept",
     "label": "What is a ratio",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
@@ -274,13 +274,13 @@
     }
   },
   {
-    "id": "ratio.simplify",
+    "id": "ratio.ops.simplify",
     "label": "Simplify a ratio",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
     "grading_type": "numeric",
     "prerequisites": [
-      "ratio.concept",
+      "ratio.basics.concept",
       "arith.factor.gcf"
     ],
     "mastery_threshold": {
@@ -289,13 +289,13 @@
     }
   },
   {
-    "id": "ratio.proportion",
+    "id": "ratio.ops.proportion",
     "label": "Solve a proportion",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
     "grading_type": "numeric",
     "prerequisites": [
-      "ratio.simplify",
+      "ratio.ops.simplify",
       "arith.mult.double"
     ],
     "mastery_threshold": {
@@ -304,13 +304,13 @@
     }
   },
   {
-    "id": "ratio.rate",
+    "id": "ratio.ops.rate",
     "label": "Unit rates",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
     "grading_type": "numeric",
     "prerequisites": [
-      "ratio.proportion"
+      "ratio.ops.proportion"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -318,13 +318,13 @@
     }
   },
   {
-    "id": "ratio.scale",
+    "id": "ratio.ops.scale",
     "label": "Scale drawings and maps",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
     "grading_type": "numeric",
     "prerequisites": [
-      "ratio.rate"
+      "ratio.ops.rate"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -339,7 +339,7 @@
     "grading_type": "numeric",
     "prerequisites": [
       "arith.exp.evaluate",
-      "frac.concept"
+      "frac.basics.concept"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -361,14 +361,14 @@
     }
   },
   {
-    "id": "arith.sci_notation",
+    "id": "arith.exp.sci_notation",
     "label": "Scientific notation",
     "domain": "prealgebra",
     "subdomain": "prealgebra.exponents",
     "grading_type": "numeric",
     "prerequisites": [
       "arith.exp.evaluate",
-      "dec.mult"
+      "dec.ops.mult"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -382,7 +382,7 @@
     "subdomain": "prealgebra.exponents",
     "grading_type": "numeric",
     "prerequisites": [
-      "arith.sci_notation"
+      "arith.exp.sci_notation"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -396,7 +396,7 @@
     "subdomain": "prealgebra.variables",
     "grading_type": "numeric",
     "prerequisites": [
-      "ratio.proportion"
+      "ratio.ops.proportion"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -552,7 +552,7 @@
     "subdomain": "prealgebra.variables",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "dec.compare"
+      "dec.basics.compare"
     ],
     "mastery_threshold": {
       "streak": 10,

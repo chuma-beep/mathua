@@ -15,7 +15,6 @@ Formally, a field is a set \\(F\\) together with two binary operations \\(+\\) a
 
 > The requirement that \\(0 \\neq 1\\) is included implicitly by excluding \\(0\\) from the multiplicative group, and it ensures that the trivial set \\(\\{0\\}\\) does not qualify as a field. A field is therefore a commutative ring with unity in which every nonzero element is invertible. Every field is a ring, but a ring is generally not a field.
 
-- - -
 ## Properties
 
 Several properties follow directly from the previous axioms. For any \\(a \\in F\\), multiplication by zero satisfies \\(a \\cdot 0 = 0\\). This is not assumed but derived: one writes \\(a \\cdot 0 = a \\cdot (0 + 0) = a \\cdot 0 + a \\cdot 0\\) and then cancels \\(a \\cdot 0\\) from both sides using the additive group structure.
@@ -32,7 +31,6 @@ The expression holds or all \\(a, b \\in F\\). In particular, the product of two
 
 a consequence of the axioms rather than a convention.
 
-- - -
 ## Algebraic hierarchy
 
 A group is the most elementary of algebraic structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
@@ -47,7 +45,6 @@ A field is obtained by imposing one further requirement on a commutative ring wi
 
 > The rational numbers \\(\\mathbb{Q}\\), the real numbers \\(\\mathbb{R}\\), and the complex numbers \\(\\mathbb{C}\\) are all fields. The integers \\(\\mathbb{Z}\\), by contrast, form a ring but not a field, since division does not close within them.
 
-- - -
 ## Examples
 
 The set \\(\\mathbb{Q}\\) of rational numbers, equipped with ordinary addition and multiplication, is the smallest field containing the integers. Every nonzero rational number \\(p/q\\) has a multiplicative inverse \\(q/p\\), and all field axioms are satisfied.
@@ -56,13 +53,11 @@ The set \\(\\mathbb{R}\\) of real numbers is a field extending \\(\\mathbb{Q}\\)
 
 The set \\(\\mathbb{C}\\) of complex numbers is a field extending \\(\\mathbb{R}\\). Unlike \\(\\mathbb{R}\\), it is algebraically closed: every nonconstant polynomial with coefficients in \\(\\mathbb{C}\\) has at least one root in \\(\\mathbb{C}\\), a result known as the fundamental theorem of algebra.
 
-- - -
 
 For any prime \\(p\\), the set \\(\\mathbb{Z}/p\\mathbb{Z} = \\{0, 1, \\ldots, p-1\\}\\) equipped with addition and multiplication modulo \\(p\\) is a field, commonly denoted \\(\\mathbb{F}\_p\\). This is a finite field: it contains exactly \\(p\\) elements. The primality of \\(p\\) is essential. In \\(\\mathbb{Z}/6\\mathbb{Z}\\), for instance, the elements \\(2\\) and \\(3\\) satisfy \\(2 \\cdot 3 = 0\\), so neither is invertible, and the structure fails to be a field.
 
 > Finite fields exist only when the number of elements is a prime power \\(p^n\\), for some prime \\(p\\) and positive integer \\(n\\). For every such prime power there exists, up to isomorphism, exactly one finite field, denoted \\(\\mathbb{F}_{p^n}\\) or \\(\\text{GF}(p^n)\\).
 
-- - -
 ## Subfields and field extensions
 
 A subset \\(K \\subseteq F\\) is called a subfield of \\(F\\) if \\(K\\) is itself a field under the operations inherited from \\(F\\). Equivalently, \\(K\\) is a subfield of \\(F\\) if it contains \\(0\\) and \\(1\\), and is closed under addition, negation, multiplication, and taking multiplicative inverses of nonzero elements. The rational numbers \\(\\mathbb{Q}\\) form a subfield of \\(\\mathbb{R}\\), which is itself a subfield of \\(\\mathbb{C}\\). These inclusions define a chain of fields:
@@ -73,7 +68,6 @@ A subset \\(K \\subseteq F\\) is called a subfield of \\(F\\) if \\(K\\) is itse
 
 When \\(K\\) is a subfield of \\(F\\), one says that \\(F\\) is a field extension of \\(K\\), written \\(F/K\\). From this perspective, \\(\\mathbb{C}/\\mathbb{R}\\) is a field extension, and \\(\\mathbb{C}\\) can be studied as a two-dimensional vector space over \\(\\mathbb{R}\\) with basis \\(\\{1, i\\}\\). The dimension of \\(F\\) regarded as a vector space over \\(K\\) is called the degree of the extension and is denoted \\([F : K]\\). In this example, \\([\\mathbb{C} : \\mathbb{R}] = 2\\).
 
-- - -
 ## Characteristic of a field
 
 Every field \\(F\\) has an associated non-negative integer called its characteristic, which measures how many times the multiplicative identity must be added to itself before reaching zero. Formally, the characteristic of \\(F\\) is the smallest positive integer \\(n\\) such that:
@@ -90,7 +84,6 @@ If no such \\(n\\) exists, the characteristic is defined to be \\(0\\). The char
 
 Since a field has no zero divisors, one of the two factors would have to be zero, contradicting the minimality of \\(n\\). The fields \\(\\mathbb{Q}\\), \\(\\mathbb{R}\\), and \\(\\mathbb{C}\\) all have characteristic zero. The finite field \\(\\mathbb{F}_p\\) has characteristic \\(p\\).
 
-- - -
 ## Field homomorphisms
 
 A field homomorphism is a function \\(\\varphi : F \\to K\\) between two fields that preserves both operations: for all \\(a, b \\in F\\) holds:

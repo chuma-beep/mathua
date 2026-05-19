@@ -24,7 +24,6 @@ Coefficients with indices exceeding the degree of the respective polynomial are 
 
 > The set \\(\mathbb{R}[x]\\) constitutes a ring under the standard operations of addition and multiplication, as the sum, difference, or product of any two polynomials in \\(\mathbb{R}[x]\\) yields another polynomial within the same set.
 
-- - -
 ## Degree of a polynomial
 
 The degree of a polynomial \\(P(x)\\) is defined as the largest integer \\(k\\) such that the coefficient \\(a_k\\) is nonzero. This degree is denoted as \\(\deg P\\) or \\(\deg P(x)\\). For example, consider the polynomial:
@@ -39,7 +38,6 @@ The zero polynomial, where all coefficients are zero, is the only polynomial tha
 
 \\[\deg(P \cdot Q) = \deg P + \deg Q\\]
 
-- - -
 ## Interpolation and degree of a polynomial
 
 An important implication of the concept of polynomial degree is its role in interpolation. Given \\(n+1\\) distinct points \\(\alpha_0, \alpha_1, \dots, \alpha_n \in \mathbb{R}\\) and corresponding values \\(\beta_0, \beta_1, \dots, \beta_n \in \mathbb{R}\\), there exists a unique polynomial \\(p(x) \in \mathbb{R}[x]\\) of degree at most \\(n\\) that satisfies the following conditions:
@@ -48,7 +46,6 @@ An important implication of the concept of polynomial degree is its role in inte
 
 This result demonstrates a direct relationship between the degree of a polynomial and the number of data points necessary for its unique determination. Specifically, a polynomial of degree at most \\(n\\) is uniquely specified by \\(n+1\\) distinct interpolation nodes. The process of constructing such a polynomial is known as polynomial interpolation. Several explicit methods are available for this purpose, with the Lagrange interpolation formula being the most classical approach.
 
-- - -
 ## Degree of a polynomial and its geometric interpretation
 
 The degree of a polynomial directly influences the shape of its graph in the Cartesian plane, determining the overall behaviour and geometry of the curve. A first-degree polynomial, also referred to as a linear polynomial, produces a graph that is a straight line of the form:
@@ -59,7 +56,6 @@ In this equation, \\(m\\) represents the slope (also known as the angular coeffi
 
 > In the equation of a straight line, the slope \\( m \\) corresponds to the derivative when the line is tangent to the graph of a function at a given point. In general, the derivative of a function at a point gives the slope of the tangent line at that point.
 
-- - -
 
 Second-degree polynomials, also known as quadratic polynomials, have a graph that corresponds to a parabola of the form:
 
@@ -68,13 +64,11 @@ Second-degree polynomials, also known as quadratic polynomials, have a graph tha
 \\(a\\) determines the concavity of the parabola, \\(b\\) and \\(c\\) jointly determine
 the position of the vertex, and \\(c\\) represents the y-intercept. The graph shows the equation of the parabola \\( y = x^2 + 4x - 4.\\) In this case, the parabola opens upward since the coefficient of \\( x^2 \\) is positive.
 
-- - -
 
 Third-degree polynomials, also known as cubic polynomials, have a graph that corresponds to a cubic curve of the form:  
 \\[y = ax^3 + bx^2 + cx + d \\]
 where \\( a \\) determines the overall shape and orientation of the curve, \\( b \\) and \\( c \\) influence the curvature and inflection points, and \\( d \\) represents the y-intercept.
 
-- - -
 
 ## End behavior of polynomial
 
@@ -95,7 +89,6 @@ Consequently, the description of the polynomial’s behavior for \\(x \to -\inft
 
 > In all cases, the leading term fully determines the polynomial’s asymptotic behavior, while the contribution of the remaining terms diminishes progressively as \\(|x|\\) increases.
 
-- - -
 
 To clarify the concept further, let us consider the case in the third row with the following polynomial:
 \\[ x^3 + 5x^2 + 5x + 1 \\]
@@ -109,7 +102,6 @@ In this case the polynomial exhibits the characteristic end behavior of a cubic 
 
 This behavior produces the familiar down–to–up orientation characteristic of all odd-degree polynomials with a positive leading coefficient. Understanding a polynomial’s end behavior directly from its algebraic structure is especially valuable when studying the overall behavior of functions. By focusing on the leading term \\(a_n x^n\\), one can predict how the graph evolves as \\(x \to +\infty\\) or \\(x \to -\infty\\), since the rapid growth of \\(x^n\\) dominates and makes all lower-degree contributions negligible. In many cases, identifying the degree of the polynomial and the sign of its leading coefficient already provides a clear, immediate indication of the global shape of the function.
 
-- - -
 ## Monomials, binomials, trinomials
 
 A monomial is a polynomial expression comprising only one term, a constant, a single variable, or a combination of constants and variables raised to non-negative integer powers. For instance, \\(3x^2\\) and \\(-5y\\) are both monomials.
@@ -118,7 +110,6 @@ A binomial is a polynomial expression consisting of two terms: constants, variab
 
 A trinomial is a polynomial expression consisting of three terms, which can also be constants, variables, or the product of constants and variables raised to non-negative integer powers. For instance, \\(x^2-2x + 4\\) and \\(3y^3 + 2y^2- y\\) are both trinomials.
 
-- - -
 ## Sum or difference of two polynomials
 
 The sum or difference of two polynomials of the same degree results in a polynomial of the same degree, or of lower degree if the terms of highest degree cancel out. For example, if we have two polynomials of degree \\(n\\), say \\(P(x)\\) and \\(Q(x)\\), then their sum or difference, denoted by \\(P(x) ± Q(x)\\), is also a polynomial of degree \\(\leq n\\).
@@ -134,7 +125,6 @@ P(x)-Q(x) &= (ax^n + bx^{n-1} + \ldots + z) - (px^n + qx^{n-1} + \ldots + w) \\\
 \end{align*}
 \\]
 
-- - -
 ## Example 1
 
 Given two polynomial \\(P(x)\\) and \\(Q(x)\\), calculate the sum \\(P(x)\\) + \\(Q(x)\\):
@@ -146,7 +136,6 @@ Their sum is given by:
 
 \\\[ P(x) + Q(x) = \left( x^2 + 3x-1 \right) + (2x^2-x + 5) \\]
 
-- - -
 
 Removing the parentheses and collecting terms of equal degree we obtain:
 
@@ -162,7 +151,6 @@ The result of the two polynomials \\(P(x) + Q(x)\\) is expressed as:
 
 \\[3x^2 + 2x + 4 \\]
 
-- - -
 ## Example 2
 
 Consider two polynomials \\(P(x)\\) and \\(Q(x)\\) of degree \\(n\\). As established above, their sum or difference is a polynomial of degree at most \\(n\\). The following example illustrates the case in which the degree strictly decreases.
@@ -186,7 +174,6 @@ P(x)-Q(x) &= 2x^2+3x-1-2x^2+x-5 \\\\[0.5em]
 
 > The leading terms of degree \\(n=2\\) cancel exactly, reducing the result to a polynomial of degree \\(n-1=1\\). This confirms that the degree of a sum or difference can be strictly less than the degree of the summands.
 
-- - -
 ## How to divide two polynomials
 
 Dividing two polynomials is a more complex process compared to their addition or subtraction. Given two polynomials \\( P(x) \\) and \\( D(x) \\), it is always possible to determine two polynomials \\( Q(x) \\) and \\( R(x) \\) such that:
@@ -199,7 +186,6 @@ Dividing two polynomials is a more complex process compared to their addition or
 
 > This result is known as the polynomial division algorithm, or polynomial long division. It provides a systematic procedure for dividing any polynomial by a nonzero polynomial of lower or equal degree, guaranteeing that the remainder is either zero or of strictly lower degree than the divisor.
 
-- - -
 
 When the division between two polynomials is expressed as a reduced quotient (without explicitly showing the remainder), we obtain a rational function defined as:
 
@@ -211,12 +197,10 @@ where \\( P(x) \\) and \\( Q(x) \\) are polynomials and \\( Q(x) \ne 0 \\).
 
 > In this context, it is worth exploring rational equations and rational inequalities, which involve expressions where both the numerator and the denominator are polynomials.
 
-- - -
 ## Factoring polynomials
 
 A number \\( \alpha \\) is said to be a root of the polynomial \\( P(x) \\) if \\( P(\alpha) = 0 \\). The root \\( \alpha \\) is called integer, rational, real, or complex depending on whether \\( \alpha \\) is an integer, a rational number, a real number, or a complex number.
 
----
 
 The existence of roots over \\( \mathbb{C} \\) is guaranteed by the Fundamental Theorem of Algebra, which states that every non-constant polynomial with complex coefficients has at least one complex root. As a consequence, any polynomial of degree \\( n \\) over \\( \mathbb{C} \\) factors into exactly \\( n \\) linear factors, counted with multiplicity. Over \\( \mathbb{R} \\), the situation is more nuanced: real roots may not always exist, and irreducible quadratic factors with no real roots may appear in the factorization.
 
@@ -228,7 +212,6 @@ P(x) = P(0) \prod_{\rho} \left(1 - \frac{x}{\rho} \right)
 
 where the product runs over all roots \\( \rho \\) of the polynomial, real or complex, counted with multiplicity. This representation expresses the polynomial entirely in terms of the values at which it vanishes, and makes the role of each root explicit in the structure of the expression.
 
----
 
 The manipulation of polynomials, together with a thorough understanding of their structural properties, underlies a wide range of techniques in algebra and analysis. The following topics extend the material covered in this page and are recommended as natural continuations.
 
@@ -237,7 +220,6 @@ The manipulation of polynomials, together with a thorough understanding of their
 + Completing the square
 + The Synthetic Division Method
 
-- - -
 ## Polynomial Equations
 
 A polynomial equation is an equation of the form:
@@ -246,7 +228,6 @@ A polynomial equation is an equation of the form:
 
 Polynomial equations are classified according to the degree of the leading term. Depending on their degree, they are referred to as linear (degree 1), quadratic (degree 2), cubic (degree 3), or of higher degree when \\(n > 3\\).
 
-- - -
 ## Polynomial functions
 
 A polynomial function is a function of the form:
@@ -260,7 +241,6 @@ Let \\( p(x) \\) and \\( q(x) \\) be two polynomials. If the two polynomial func
 
 then the two polynomials are exactly the same, meaning they have the same coefficients. This is known as the identity principle of polynomials.
 
-- - -
 
 Polynomial functions possess several notable analytical properties.
 

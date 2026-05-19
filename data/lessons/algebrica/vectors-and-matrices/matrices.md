@@ -18,7 +18,6 @@ This is also written in compact form as \\( A = (a_{ij}) \\), where \\( a_{ij} \
 
 > The set of all \\( m \\times n \\) matrices with real entries forms an abelian group under addition. When restricted to square matrices of order \\( n \\), the additional structure of matrix multiplication makes \\( M_{n\\times n}(\\mathbb{R}) \\) a ring. The subset of invertible matrices of order \\( n \\) forms a group under multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\).
 
-- - -
 ## Vectors and the zero matrix
 
 A matrix consisting of a single row is called a row vector, and a matrix consisting of a single column is called a column vector. The following are a row vector \\( A \\) with 3 columns and a column vector \\( B \\) with 3 rows:
@@ -33,7 +32,6 @@ A matrix in which every element is equal to zero is called the zero matrix, deno
 
 > Row and column vectors are matrices in the usual sense and obey all the same algebraic rules. They are treated as special cases here for clarity, but are studied more extensively in the context of linear combinations and vector spaces.
 
-- - -
 ## Square matrices and special types
 
 A matrix is called square when its number of rows equals its number of columns, that is, when it has dimensions \\( n \\times n \\). The integer \\( n \\) is called the order of the matrix. In a square matrix, the elements \\( a_{ij} \\) for which \\( i = j \\) form the main diagonal. The elements for which \\( i + j = n+1 \\) form the secondary diagonal:
@@ -84,7 +82,6 @@ S = \\begin{pmatrix}
 
 > Symmetric matrices arise naturally in many areas of mathematics, including quadratic forms, inner product spaces, and spectral theory. Every real symmetric matrix has real eigenvalues and an orthogonal basis of eigenvectors, a result known as the spectral theorem.
 
-- - -
 ## Transpose
 
 The transpose of a matrix \\( A \\) of dimensions \\( m \\times n \\), denoted \\( A^{\\mathrm{T}} \\), is the matrix of dimensions \\( n \\times m \\) obtained by interchanging the rows and columns of \\( A \\). Formally, the element in position \\( (i,j) \\) of \\( A^{\\mathrm{T}} \\) is the element in position \\( (j,i) \\) of \\( A \\). For example:
@@ -112,7 +109,6 @@ The transpose satisfies the following properties, for matrices \\( A \\) and \\(
 
 > The identity \\( (AB)^{\\mathrm{T}} = B^{\\mathrm{T}} A^{\\mathrm{T}} \\) reverses the order of the factors. This reversal is necessary because matrix multiplication is not commutative, and it recurs in several other contexts, including the inverse of a product.
 
-- - -
 ## Additive inverse matrix
 
 The additive inverse of a matrix \\( A \\), denoted \\( -A \\), is the matrix obtained by negating every element of \\( A \\): each entry \\( a_{ij} \\) becomes \\( -a_{ij} \\). The matrices \\( A \\) and \\( -A \\) have the same dimensions, and their sum is the zero matrix:
@@ -137,7 +133,6 @@ A = \\begin{pmatrix}
 \\end{pmatrix}
 \\]
 
-- - -
 ## Matrix addition and subtraction
 
 Two matrices can be added or subtracted only if they have the same dimensions. Given two \\( m \\times n \\) matrices \\( A = (a_{ij}) \\) and \\( B = (b_{ij}) \\), their sum \\( C = A + B \\) is the \\( m \\times n \\) matrix defined by:
@@ -181,7 +176,6 @@ The difference \\( A-B \\) is defined as \\( A+(-B) \\), that is, the sum of \\(
 - Associativity: \\( (A+B)+C = A+(B+C) \\). Sums of three or more matrices can be computed in any grouping.
 - Additive identity: \\( A+O = A \\), where \\( O \\) is the zero matrix of the same dimensions. Adding the zero matrix leaves \\( A \\) unchanged.
 - Additive inverse: \\( A+(-A) = O \\). Every matrix has a unique additive inverse.
-- - -
 ## Scalar multiplication
 
 Given a matrix \\( A = (a_{ij}) \\) of dimensions \\( m \\times n \\) and a real number \\( k \\), the scalar multiple \\( kA \\) is the \\( m \\times n \\) matrix whose element in position \\( (i,j) \\) is \\( k \\cdot a_{ij} \\). Every entry of the matrix is multiplied by \\( k \\). For example, with \\( k = 2 \\):
@@ -204,7 +198,6 @@ Scalar multiplication satisfies the following properties, for matrices \\( A \\)
 - Distributivity over matrix addition: \\( k(A+B) = kA+kB \\). A scalar distributes over a sum of matrices.
 - Distributivity over scalar addition: \\( (k+h)A = kA+hA \\). A sum of scalars distributes over a single matrix.
 
-- - -
 ## Matrix multiplication
 
 Matrix multiplication is defined under a compatibility condition: the product \\( AB \\) is defined only when the number of columns of \\( A \\) equals the number of rows of \\( B \\). If \\( A \\) has dimensions \\( m \\times n \\) and \\( B \\) has dimensions \\( n \\times p \\), the product \\( C = AB \\) is a matrix of dimensions \\( m \\times p \\), whose element in position \\( (i,j) \\) is defined by:
@@ -250,7 +243,6 @@ C = AB = \\begin{pmatrix}
 
 > Matrix multiplication is not commutative in general: even when both \\( AB \\) and \\( BA \\) are defined, it is typically the case that \\( AB \\neq BA \\). This distinguishes matrix multiplication from multiplication of real numbers and is one of its most consequential properties.
 
-- - -
 
 The identity matrix of order \\( n \\), denoted \\( I_n \\), is the \\( n \\times n \\) square matrix with ones on the main diagonal and zeros elsewhere. It acts as the multiplicative identity: for any matrix \\( A \\) of compatible dimensions,
 
@@ -284,6 +276,5 @@ Matrix multiplication satisfies the following properties, for matrices of compat
 - Right distributivity: \\( (B+C)A = BA+CA \\). Multiplication distributes over addition from the right.
 - Non-commutativity: in general, \\( AB \\neq BA \\), even when both products are defined.
 
-- - -
 
 To every square matrix of order \\( n \\) one associates a real number called the determinant of the matrix, denoted \\( \\det(A) \\). The determinant encodes fundamental information about the matrix, including whether it is invertible, as discussed in the entry on the inverse matrix.

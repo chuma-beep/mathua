@@ -170,7 +170,7 @@
     }
   },
   {
-    "id": "discrete.recurrence",
+    "id": "discrete.sequences.recurrence",
     "label": "Recurrence relations",
     "domain": "discrete_math",
     "subdomain": "discrete_math.recurrence",
@@ -185,13 +185,13 @@
     }
   },
   {
-    "id": "discrete.induction",
+    "id": "discrete.proof.induction",
     "label": "Mathematical induction",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "discrete.recurrence",
+      "discrete.sequences.recurrence",
       "discrete.logic.quantifiers"
     ],
     "mastery_threshold": {

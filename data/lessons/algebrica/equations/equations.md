@@ -11,7 +11,6 @@ F(x) = 0
 
 a representation that simplifies their study, highlights their structure, and provides a unified framework for approaching different methods of solution.
 
-- - -
 ## The solution to an equation
 
 The solution to an equation is any value of the variables that makes the equality true. Depending on the equation and its structure, the solution set may contain:
@@ -27,7 +26,6 @@ In other contexts, especially in polynomial, exponential, or transcendental equa
 
 A representative instance is the quadratic equation with negative discriminant, which admits no real roots but always has two complex conjugate solutions, as discussed in detail in the page on quadratic equations with complex solutions.
 
-- - -
 ## Equivalent equations and admissible operations
 
 Two equations are considered equivalent if they possess identical solution sets. The objective in solving an equation is to apply a sequence of transformations that maintain this equivalence, thereby reducing the equation to a simpler form in which the solutions are readily apparent.
@@ -36,7 +34,6 @@ Certain operations are guaranteed to yield an equivalent equation. Adding or sub
 
 Other operations can disrupt equivalence in less obvious ways. Multiplying both sides by an expression involving the variable may introduce extraneous solutions if the expression equals zero for some value of \\( x \\). Similarly, squaring both sides, a common technique for irrational equations, can produce solutions that satisfy the transformed equation but not the original. Conversely, dividing both sides by a variable expression may eliminate solutions at points where the expression is zero, a phenomenon addressed in detail in the discussion on loss of roots.
 
-- - -
 ## Algebraic equations
 
 Algebraic equations are equations in which both sides consist entirely of polynomials. A polynomial in one variable is a formal expression of the form
@@ -61,7 +58,6 @@ Equations of degree higher than three follow the same principle: a polynomial eq
 
 Among higher-degree equations, binomial and trinomial equations deserve particular attention. These are equations of degree greater than two that contain only two or three distinct terms, respectively, and can often be solved by substitution or by factoring into lower-degree polynomials.
 
-- - -
 ## Rational equations
 
 Rational equations are equations that contain at least one fractional expression whose numerator and denominator are polynomials. In their most general form, they involve a ratio of polynomials on both sides, and can always be reduced to the form
@@ -74,7 +70,6 @@ by transferring all terms to one side and combining them over a common denominat
 
 > This step, however, requires careful attention: any value that makes a denominator vanish must be excluded from the solution set from the outset, and candidate solutions obtained after clearing must be checked against these excluded values.
 
-- - -
 ## Irrational equations
 
 Irrational equations have variables inside a radical. Typically, such equations have one radical, for example:
@@ -87,7 +82,6 @@ where \\( f(x) \\) and \\( g(x) \\) are polynomials with real coefficients, and 
 
 It is therefore necessary to verify every candidate solution in the original equation, and this requirement becomes increasingly important as the number of radicals grows.
 
-- - -
 ## Absolute value equations
 
 Absolute value equations are equations in which the unknown appears inside an absolute value expression. The simplest case takes the form \\( |x| = a \\), where \\( a \\) is a real constant, and its solution set depends entirely on the sign of \\( a \\).
@@ -98,7 +92,6 @@ Absolute value equations are equations in which the unknown appears inside an ab
 
 > Absolute value equations that contain polynomial or rational expressions often require case analysis based on the sign of the inner expression. It is essential to verify that each candidate solution satisfies the original equation, since the case-splitting procedure may introduce extraneous solutions.
 
-- - -
 ## Transcendental equations
 
 Transcendental equations are equations in which one or more variables appear within transcendental functions, such as exponential, logarithmic, or trigonometric functions, that cannot be expressed as finite combinations of algebraic operations. These equations go beyond polynomial or rational forms and frequently resist closed-form solution: in many cases no explicit formula for the roots exists, and one must resort to numerical methods to approximate them.
@@ -109,7 +102,6 @@ Exponential equations are equations in which the variable appears in the exponen
 
 Trigonometric equations are equations that involve periodic trigonometric functions such as \\( \sin(x) \\), \\( \cos(x) \\), or \\( \tan(x) \\) containing a variable. Due to the periodic nature of these functions, trigonometric equations often have infinitely many solutions.
 
-- - -
 ## Systems of equations
 
 A system of equations arises when multiple equations must be satisfied simultaneously by the same set of unknowns. Such a system consists of two or more equations involving the same variables, and a solution is any assignment of values to those variables that satisfies all equations concurrently. Systems may be classified as linear or nonlinear based on the form of their equations. Analysing these systems often requires advanced techniques beyond those used for single equations, including substitution, elimination, or matrix methods for linear systems.

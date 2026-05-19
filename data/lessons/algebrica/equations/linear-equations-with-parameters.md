@@ -18,7 +18,6 @@ This parametric perspective makes it possible to study not just a single equatio
 
 > This page focuses on the linear case. For a broader discussion of parametric equations across different degrees, see equations with parameters.
 
-- - -
 ## Classification of cases
 
 For the parametric linear equation \\(a x + b = c\\) all possible behaviours can be reduced to three fundamental situations:
@@ -29,7 +28,6 @@ For the parametric linear equation \\(a x + b = c\\) all possible behaviours can
 
 > These three cases cover the entire family of first-degree equations with parameters and allow the structure of the equation to be analysed systematically.
 
-- - -
 
 When the leading coefficient satisfies \\(a \neq 0\\), the equation behaves as a standard linear relation. In this case the variable \\(x\\) can be isolated directly, giving:
 
@@ -39,7 +37,6 @@ x = \frac{c - b}{a}
 
 This expression provides a single real solution for every choice of parameters with \\(a \neq 0\\).
 
-- - -
 
 When \\(a = 0\\), the term containing \\(x\\) disappears and the equation becomes the constant statement:
 
@@ -49,7 +46,6 @@ b = c
 
 At this point the presence or absence of solutions depends entirely on the relationship between \\(b\\) and \\(c\\). When \\(b = c\\), the statement holds for every real \\(x\\), and the equation is an identity. When \\(b \neq c\\), the statement is false and no solution exists.
 
-- - -
 
 A compact summary of the three fundamental situations can be written as follows. Each condition on the parameters determines a different algebraic behaviour, ranging from a fully determined equation to an identity or a contradiction:
 
@@ -68,7 +64,6 @@ a \neq 0, \\; \forall \\; b, c
 
 This classification captures all possible outcomes for a linear equation with parameters and shows how different choices of \\(a\\), \\(b\\), and \\(c\\) affect the existence and uniqueness of the solution.
 
-- - -
 ## Example 1
 
 In practice, the parameters need not be independent: a single real quantity, commonly denoted \(k\), may appear simultaneously in several coefficients, and the classification above applies by treating that quantity as the free parameter. As a concrete illustration of the general classification, consider the parametric equation
@@ -100,7 +95,6 @@ From the analysis of the possible cases, we obtain:
 
 This example highlights how changing the parameters can alter the nature of the equation itself, showing how a linear relation may shift from being undefined to impossible or uniquely solvable depending on their values.
 
-- - -
 ## Example 2
 
 Let us now examine a simple linear equation that depends on a real parameter. Consider the problem of solving:
@@ -117,7 +111,6 @@ where \\(k \in \mathbb{R}\\). The equation behaves as an ordinary linear equatio
 k \neq \frac{3}{2}
 \\]
 
-- - -
 
 Under this condition, isolating the variable gives:
 
@@ -145,7 +138,6 @@ k \neq \tfrac{3}{2}
 \end{cases}
 \\]
 
-- - -
 ## Example 3
 
 Consider the linear equation:

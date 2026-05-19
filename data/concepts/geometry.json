@@ -6,7 +6,7 @@
     "subdomain": "geometry.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "count.number_line"
+      "count.basics.number_line"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -195,7 +195,7 @@
     "grading_type": "numeric",
     "prerequisites": [
       "geo.circle.parts",
-      "dec.mult"
+      "dec.ops.mult"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -254,7 +254,7 @@
     "grading_type": "tuple",
     "prerequisites": [
       "geo.coord.plot",
-      "dec.add"
+      "dec.ops.add"
     ],
     "mastery_threshold": {
       "streak": 10,

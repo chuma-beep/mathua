@@ -15,14 +15,12 @@ Unlike a group or a ring, which are defined on a single set, a vector space invo
 
 > The field \\(F\\) over which \\(V\\) is defined is called the scalar field of \\(V\\). In most applications encountered at the undergraduate level, \\(F\\) is either \\(\mathbb{R}\\) or \\(\mathbb{C}\\), and one speaks of a real vector space or a complex vector space accordingly.
 
-- - -
 ## Properties
 
 Several elementary consequences follow directly from the axioms. For any scalar \\(\alpha \in F\\) and any vector \\(\mathbf{v} \in V\\), multiplication by zero satisfies \\(0 \cdot \mathbf{v} = \mathbf{0}\\). To see this, one writes \\(0 \cdot \mathbf{v} = (0 + 0) \cdot \mathbf{v} = 0 \cdot \mathbf{v} + 0 \cdot \mathbf{v}\\) and cancels \\(0 \cdot \mathbf{v}\\) from both sides using the group structure of \\((V, +)\\). Similarly, for any \\(\mathbf{v} \in V\\) one has \\(\alpha \cdot \mathbf{0} = \mathbf{0}\\) and \\((-1) \cdot \mathbf{v} = -\mathbf{v}\\).
 
 If \\(\alpha \cdot \mathbf{v} = \mathbf{0}\\), then either \\(\alpha = 0\\) or \\(\mathbf{v} = \mathbf{0}\\). This is a direct consequence of the invertibility of nonzero scalars: if \\(\alpha \neq 0\\), then \\(\mathbf{v} = 1 \cdot \mathbf{v} = (\alpha^{-1}\alpha) \cdot \mathbf{v} = \alpha^{-1} \cdot (\alpha \cdot \mathbf{v}) = \alpha^{-1} \cdot \mathbf{0} = \mathbf{0}\\). This property is the vector space analogue of the absence of zero divisors in a field, and it plays a central role in the theory of linear independence.
 
-- - -
 ## Algebraic hierarchy
 
 Vector spaces occupy a position at the top of the standard hierarchy of algebraic structures, depending essentially on the presence of a field of scalars.
@@ -35,20 +33,17 @@ A group consists of a set with a single operation admitting inverses. A ring int
 
 > A vector space is not itself a further step in this chain but rather a structure that presupposes a field. Every vector space over \\(\mathbb{R}\\) or \\(\mathbb{C}\\) depends on the field axioms being in force for its scalar multiplication to be well-defined.
 
-- - -
 ## Examples
 
 The set \\(\mathbb{R}^n\\) of all ordered \\(n\\)-tuples of real numbers is a vector space over \\(\mathbb{R}\\) under componentwise addition and scalar multiplication. For \\(n = 2\\), addition is defined by \\((a_1, a_2) + (b_1, b_2) = (a_1 + b_1,\\, a_2 + b_2)\\) and scalar multiplication by \\(\alpha \cdot (a_1, a_2) = (\alpha a_1,\\, \alpha a_2)\\). The zero vector is \\((0, 0)\\). This is the prototype of a finite-dimensional real vector space, and it provides the geometric intuition underlying the general theory.
 
 The set \\(\mathbb{C}^n\\) of all ordered \\(n\\)-tuples of complex numbers is a vector space over \\(\mathbb{C}\\) under the analogous operations. It can also be regarded as a vector space over \\(\mathbb{R}\\), though in that case its dimension doubles: \\(\mathbb{C}^n\\) as a real vector space has dimension \\(2n\\).
 
----
 
 The set \\(\mathbb{R}[x]_{\leq n}\\) of all polynomials with real coefficients of degree at most \\(n\\) is a vector space over \\(\mathbb{R}\\) under the usual addition of polynomials and multiplication of a polynomial by a real constant. The zero vector is the zero polynomial. A natural basis for this space is \\(\{1, x, x^2, \ldots, x^n\}\\), which contains \\(n+1\\) elements, so the dimension of this space is \\(n+1\\).
 
 The set \\(\mathcal{C}([a,b])\\) of all continuous real-valued functions on a closed interval \\([a,b]\\) is a vector space over \\(\mathbb{R}\\) under pointwise addition and scalar multiplication: \\((f + g)(x) = f(x) + g(x)\\) and \\((\alpha f)(x) = \alpha f(x)\\). This space is infinite-dimensional, since the polynomials of all degrees form a linearly independent subset with no finite spanning set.
 
-- - -
 ## Subspaces
 
 A nonempty subset \\(W \subseteq V\\) is called a subspace of \\(V\\) if \\(W\\) is itself a vector space over \\(F\\) under the operations inherited from \\(V\\). Rather than verifying all axioms separately, it suffices to check two conditions: for all \\(\mathbf{u}, \mathbf{v} \in W\\) and all \\(\alpha \in F\\), one requires \\(\mathbf{u} + \mathbf{v} \in W\\) and \\(\alpha \cdot \mathbf{v} \in W\\). These two conditions together are called closure under linear combinations. The zero vector \\(\mathbf{0}\\) must belong to every subspace, since setting \\(\alpha = 0\\) gives \\(0 \cdot \mathbf{v} = \mathbf{0} \in W\\).
@@ -57,7 +52,6 @@ As an example, the set \\(W = \{(x, y) \in \mathbb{R}^2 : y = 2x\}\\) is a subsp
 
 > The diagram illustrates the two closure conditions on the subspace \\(W = \\{(x, y) \\in \\mathbb{R}^2 : y = 2x\\}\\). Any vector in \\(W\\) lies on the line through the origin with slope \\(2\\). Adding two such vectors or multiplying one by a scalar always produces a vector that remains on the same line, confirming that \\(W\\) is closed under both operations.
 
-- - -
 ## Basis and dimension
 
 A set of vectors \\(\\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\\}\\) in \\(V\\) is called linearly independent if the only solution to the equation
@@ -74,7 +68,6 @@ then subtracting yields:
 
 and linear independence forces \\(\alpha_k = \beta_k\\) for all \\(k\\).
 
-- - -
 
 One of the fundamental theorems of linear algebra states that any two bases of the same vector space contain the same number of elements. The argument rests on the observation that if a set of \\(m\\) vectors spans \\(V\\) and a set of \\(n\\) vectors is linearly independent in \\(V\\), then necessarily \\(n \leq m\\). Applying this inequality twice, once in each direction, to any two bases forces their cardinalities to be equal. This common cardinality is called the dimension of \\(V\\) and is denoted \\(\dim V\\).
 
@@ -86,7 +79,6 @@ The standard basis of \\(\mathbb{R}^n\\) consists of the \\(n\\) vectors \\(\mat
 
 Every vector \\((a, b, c) \in \mathbb{R}^3\\) can be written uniquely as \\(a\\,\mathbf{e}_1 + b\\,\mathbf{e}_2 + c\\,\mathbf{e}_3\\), confirming that these three vectors form a basis and that \\(\dim \mathbb{R}^3 = 3\\).
 
-- - -
 ## Linear maps
 
 A linear map, or linear transformation, is a function \\(\varphi : V \to W\\) between two vector spaces over the same field \\(F\\) that preserves the vector space structure. Explicitly, \\(\varphi\\) is linear if for all \\(\mathbf{u}, \mathbf{v} \in V\\) and all \\(\alpha \in F\\) the following two conditions hold:
@@ -109,7 +101,6 @@ Both \\(\ker(\varphi)\\) and \\(\mathrm{im}(\varphi)\\) are subspaces of \\(V\\)
 
 The dimension of \\(\mathrm{im}(\varphi)\\) is called the rank of \\(\varphi\\) and the dimension of \\(\ker(\varphi)\\) is called its nullity. The rank-nullity theorem is one of the central results of linear algebra and underlies the theory of systems of linear equations, the analysis of matrices, and the classification of linear maps between finite-dimensional spaces.
 
-- - -
 ## Example
 
 Consider the linear map \\(\varphi : \mathbb{R}^3 \to \mathbb{R}^2\\) defined by the following assignment:

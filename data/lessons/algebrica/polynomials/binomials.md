@@ -9,7 +9,6 @@ In this context, \\(a\\) and \\(b\\) represent non-zero, unlike terms, meaning t
 
 Binomials exhibit properties that facilitate algebraic manipulation. Among these properties are notable products, which are specific products involving powers, binomials, and trinomials. These products are fundamental for solving equations and for identifying common mathematical patterns.
 
-- - -
 ## Multiplying two binomials: The FOIL Method
 
 When multiplying two binomials, such as \\((a + b)(c + d)\\) we use the FOIL method to expand the expression. FOIL is an acronym that helps remember the four steps:
@@ -29,7 +28,6 @@ The FOIL method applies exclusively to the multiplication of two binomials. For 
 
 > This method provides an efficient and systematic approach to expanding binomials, particularly when each binomial contains two terms. It ensures comprehensive multiplication and maintains organisational clarity throughout the process.
 
-- - -
 ## Example 1
 
 To see a practical example of multiplying two binomials, let’s consider the expression:
@@ -52,7 +50,6 @@ The final result shows that:
 (x + 3)(x + 5) = x^2 + 8x + 15
 \\]
 
-- - -
 ## Example 2
 
 Let’s now look at another example that involves the product of two binomials containing complex numbers. Consider the following expression:  
@@ -84,7 +81,6 @@ The final result shows that:
 \\]
 
 
-- - -
 ## Associative, distributive and commutative properties
 
 The associative property states that when adding or multiplying three or more binomials, the grouping does not affect the final result. For addition, given three binomials \\((a + b)\\), \\((c + d)\\), and \\((e + f)\\), the following holds:
@@ -98,7 +94,6 @@ For multiplication:
 In both cases, the grouping of the binomials can be changed freely without
 altering the overall result.
 
-- - -
 
 The distributive property is a principle that establishes the connection between multiplication and addition or subtraction. Specifically, it states that multiplying a term by the sum or difference of two other terms is equivalent to distributing the multiplication over each term. Formally:
 
@@ -129,7 +124,6 @@ In both operations, interchanging the order of the two binomials does not alter 
 
 > These structural principles extend beyond binomials and originate from the foundational algebraic structure of the real number system. A detailed formal development is available in the section on properties of real numbers.
 
-- - -
 ## Special cases: notable products
 
 Two fundamental examples of notable products resulting from binomial multiplication include the following:
@@ -139,7 +133,6 @@ Two fundamental examples of notable products resulting from binomial multiplicat
 
 These identities result from repeated application of the distributive property and illustrate recurring algebraic patterns. They are essential for algebraic expansion, simplification, and factorisation. A comprehensive and systematic discussion is provided on the related page.
 
-- - -
 ## Expansion of a binomial expression
 
 For any natural number \\( n \\), the expansion of a binomial \\( (a + b)^n \\) is given by the binomial theorem:
@@ -157,7 +150,6 @@ Where \\( \dbinom{n}{k} \\) represents the binomial coefficient calculated as:
 
 The sum indicates that all terms are summed for \\( k \\) ranging from \\( 0 \\) to \\( n \\) and \\( a^{n - k}b^k \\) represents the partial terms of the expansion.
 
-- - -
 
 To better understand how the expansion of a binomial works through the binomial theorem, let’s expand the following expression using the formula:  
 

@@ -1,50 +1,50 @@
 [
   {
-    "concept_id": "trig.sin_cos_def",
+    "concept_id": "trig.basics.sin_cos_def",
     "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
-    "concept_id": "trig.tan_def",
+    "concept_id": "trig.basics.tan_def",
     "source": "algebrica/trigonometry/tangent-and-cotangent.md"
   },
   {
-    "concept_id": "trig.unit_circle",
+    "concept_id": "trig.basics.unit_circle",
     "source": "algebrica/trigonometry/unit-circle.md"
   },
   {
-    "concept_id": "trig.pythagorean_id",
+    "concept_id": "trig.ident.pythagorean",
     "source": "algebrica/trigonometry/pythagorean-identity.md"
   },
   {
-    "concept_id": "trig.reciprocal",
+    "concept_id": "trig.basics.reciprocal",
     "source": "algebrica/trigonometry/secant-and-cosecant.md"
   },
   {
-    "concept_id": "trig.special_angles",
+    "concept_id": "trig.basics.special_angles",
     "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
   },
   {
-    "concept_id": "trig.reference_angle",
+    "concept_id": "trig.basics.reference_angle",
     "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
   },
   {
-    "concept_id": "trig.graph_sin",
+    "concept_id": "trig.graph.sin",
     "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
-    "concept_id": "trig.graph_cos",
+    "concept_id": "trig.graph.cos",
     "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
-    "concept_id": "trig.inverse",
+    "concept_id": "trig.adv.inverse",
     "source": "algebrica/trigonometry/arcsine-and-arccosine.md"
   },
   {
-    "concept_id": "trig.law_sines",
+    "concept_id": "trig.adv.law_sines",
     "source": "algebrica/trigonometry/the-law-of-sines.md"
   },
   {
-    "concept_id": "trig.law_cosines",
+    "concept_id": "trig.adv.law_cosines",
     "source": "algebrica/trigonometry/the-law-of-cosines.md"
   },
   {
@@ -96,11 +96,11 @@
     "source": "algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md"
   },
   {
-    "concept_id": "linalg.transformations",
+    "concept_id": "linalg.lintrans.concept",
     "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
-    "concept_id": "linalg.span",
+    "concept_id": "linalg.vec.span",
     "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
@@ -112,31 +112,31 @@
     "source": "algebrica/vectors-and-matrices/matrices.md"
   },
   {
-    "concept_id": "complex.concept",
+    "concept_id": "complex.basics.concept",
     "source": "algebrica/complex-numbers/complex-numbers.md"
   },
   {
-    "concept_id": "complex.add_sub",
+    "concept_id": "complex.ops.add_sub",
     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
-    "concept_id": "complex.mult",
+    "concept_id": "complex.ops.mult",
     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
-    "concept_id": "complex.divide",
+    "concept_id": "complex.ops.divide",
     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
-    "concept_id": "complex.polar",
+    "concept_id": "complex.adv.polar",
     "source": "algebrica/complex-numbers/complex-numbers-in-trigonometric-form.md"
   },
   {
-    "concept_id": "complex.de_moivre",
+    "concept_id": "complex.adv.de_moivre",
     "source": "algebrica/complex-numbers/de-moivre-theorem.md"
   },
   {
-    "concept_id": "complex.roots",
+    "concept_id": "complex.adv.roots",
     "source": "algebrica/complex-numbers/roots-of-unity.md"
   },
   {
@@ -204,15 +204,15 @@
     "source": "algebrica/algebraic-structures/groups.md"
   },
   {
-    "concept_id": "abstract.ring",
+    "concept_id": "abstract.rings.def",
     "source": "algebrica/algebraic-structures/rings.md"
   },
   {
-    "concept_id": "abstract.subgroup",
+    "concept_id": "abstract.group.subgroup",
     "source": "algebrica/algebraic-structures/groups.md"
   },
   {
-    "concept_id": "abstract.homomorphism",
+    "concept_id": "abstract.group.homomorphism",
     "source": "algebrica/algebraic-structures/vector-spaces.md"
   },
   {
@@ -240,23 +240,23 @@
     "source": "algebrica/linear-systems/rouche-capelli-theorem.md"
   },
   {
-    "concept_id": "nt.euler_phi",
+    "concept_id": "nt.adv.euler_phi",
     "source": "algebrica/sets-and-numbers/natural-numbers.md"
   },
   {
-    "concept_id": "complex.conjugate",
+    "concept_id": "complex.ops.conjugate",
     "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
-    "concept_id": "nt.divisibility",
+    "concept_id": "nt.basics.divisibility",
     "source": "algebrica/sets-and-numbers/integers.md"
   },
   {
-    "concept_id": "nt.modular",
+    "concept_id": "nt.basics.modular",
     "source": "algebrica/sets-and-numbers/modulo-operator.md"
   },
   {
-    "concept_id": "nt.congruence",
+    "concept_id": "nt.basics.congruence",
     "source": "algebrica/sets-and-numbers/modulo-operator.md"
   },
   {
@@ -272,7 +272,7 @@
     "source": "algebrica/vectors-and-matrices/inverse-matrix.md"
   },
   {
-    "concept_id": "linalg.basis",
+    "concept_id": "linalg.vec.basis",
     "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
@@ -320,7 +320,7 @@
     "source": "algebrica/polynomials/notable-products.md"
   },
   {
-    "concept_id": "arith.abs_value",
+    "concept_id": "arith.neg.abs_value",
     "source": "algebrica/sets-and-numbers/absolute-value.md"
   },
   {

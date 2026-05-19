@@ -11,7 +11,6 @@ A rational function is the quotient of two polynomials, and the corresponding in
 
 where \\(N(x)\\) and \\(D(x)\\) are polynomials with real coefficients, and \\(D(x)\\) is not identically zero. The strategy for computing an integral of this kind depends on the relation between the degrees of the numerator and the denominator. We begin by examining the case in which the degree of \\(N(x)\\) is greater than or equal to the degree of \\(D(x)\\).
 
----
 
 From the general properties of polynomials, we know that it is always possible to perform the division of a polynomial \\(N(x)\\) by a non-zero polynomial \\(D(x)\\). The result of this operation consists of two polynomials:
 
@@ -27,7 +26,6 @@ Dividing both sides by \\(D(x)\\), we obtain:
 If we compute the integral, we obtain:
 \\[\int\frac{N(x)}{D(x)}\\,dx = \int Q(x)\\,dx + \int \frac{R(x)}{D(x)}\\,dx \\]
 
-- - -
 
 What guides the choice of method is the comparison between the degrees of the numerator and 
 the denominator. If \\(\deg N(x) \geq \deg D(x)\\), the rational function is improper and 
@@ -45,7 +43,6 @@ the technique:
 
 > Once the rational function has been reduced to the proper case, the denominator governs the entire strategy. Its factorization over the real numbers determines the structure of the partial fraction decomposition. Integration then becomes a systematic reduction to logarithmic and inverse trigonometric primitives.
 
-- - -
 ## Example 1
 
 Let's compute the integral of the rational function:
@@ -73,7 +70,6 @@ Q(x) = x \qquad R(x) = 1
 
 > To learn more about the method of dividing two polynomials, refer to the relevant section on polynomials.
 
----
 
 We can rewrite our integral as:
 
@@ -85,7 +81,6 @@ Solving the integral, we obtain:
 
 \\[\frac{x^2}{2} + \arctan(x) + c\\]
 
-- - -
 ## Integrals with linear denominators
 
 The simplest case of a proper rational function occurs when the denominator is a polynomial of degree one. The integral then takes the form:
@@ -110,7 +105,6 @@ Returning to the original variable, we obtain the general formula:
 
 The absolute value is essential, since the linear expression \\(ax + b\\) changes sign at \\(x = -b/a\\) and the natural logarithm is defined only for positive arguments. The formula holds on any interval that does not contain this point, where the integrand is otherwise continuous. This case also serves as a building block for the more general situation. Once a proper rational function has been decomposed into partial fractions, every term whose denominator is a simple linear factor reduces to an integral of the form considered here. The logarithmic primitive obtained above therefore appears repeatedly in the rest of the discussion.
 
-- - -
 ## Example 2
 
 Let's compute the integral of the rational function:
@@ -119,7 +113,6 @@ Let's compute the integral of the rational function:
 \int \frac{2}{6x + 1} \\, dx
 \\]
 
----
 
 We apply the substitution \\(t = 6x + 1\\). Differentiating both sides with respect to \\(x\\), we have:
 
@@ -146,7 +139,6 @@ Returning to the original variable by substituting \\(t = 6x + 1\\), we obtain t
 \frac{1}{3} \ln|6x + 1| + c
 \\]
 
-- - -
 ## Partial fraction decomposition 
 
 In many situations, the integral of a rational function cannot be computed directly by inspection. Even when the expression appears relatively simple, algebraic manipulations may not reveal an immediate antiderivative. In such cases, the method of partial fraction decomposition provides a systematic way to rewrite the function as a sum of elementary terms whose integrals are well known. By decomposing the rational function into simpler components, we obtain a representation that is far more suitable for integration. To illustrate the idea in a setting different from the earlier examples, consider the integral:
@@ -216,7 +208,6 @@ Combining the constants and simplifying, we obtain the antiderivative:
 
 > This example shows how a rational function that initially presents no clear path to integration becomes entirely tractable once rewritten in partial fractions. The method transforms the integral into a collection of standard forms, making the computation both systematic and transparent.
 
-- - -
 ## Repeated linear factors
 
 When the denominator of a rational function contains a linear factor raised to a power greater than one, the decomposition into partial fractions requires a structural adjustment. A single term of the form \\(\frac{A}{x - r}\\) is no longer sufficient to capture the behaviour of the function near the repeated root. Each power of the factor must contribute its own term to the decomposition.
@@ -237,7 +228,6 @@ Once the decomposition has been written, the integration proceeds term by term. 
 
 The logarithmic term therefore appears only once, associated with the simple power, whereas the higher powers contribute rational expressions without logarithms.
 
-- - -
 ## Example 3
 
 Consider the integral:
@@ -300,7 +290,6 @@ The final expression shows how the two distinct powers of the factor \\(x - 1\\)
 
 > The repeated factor \\((x - 1)^2\\) contributes two distinct terms to the antiderivative. Only the simple power produces a logarithm, whereas the higher power yields a rational expression with negative exponent. The same pattern applies to every linear factor of multiplicity greater than one.
 
-- - -
 ## Irreducible quadratic factors in the denominator
 
 Not every polynomial splits into linear factors over the real numbers. A quadratic expression \\(ax^2 + bx + c\\) whose discriminant satisfies \\(b^2 - 4ac < 0\\) has no real roots. In concrete terms, this means it cannot be written as \\((x - r_1)(x - r_2)\\) with \\(r_1, r_2 \in \mathbb{R}\\). 
@@ -323,7 +312,6 @@ whose antiderivative is
 
 The appearance of the arctangent reflects the geometric structure encoded in the expression \\(u^2 + a^2\\), which cannot vanish over the real numbers and corresponds, analytically, to the derivative of the inverse tangent function.
 
-- - -
 ## Example 4
 
 Consider the following integral:
@@ -382,7 +370,6 @@ The integral splits accordingly:
 
 \\[\frac{5}{2} \int \frac{2x + 2}{x^2 + 2x + 3} \\, dx - 7 \int \frac{1}{x^2 + 2x + 3} \\, dx\\]
 
-- - -
 
 First part: here the numerator is exactly the derivative of the denominator. This produces a logarithm:
 
@@ -390,7 +377,6 @@ First part: here the numerator is exactly the derivative of the denominator. Thi
 
 Because the quadratic has negative discriminant, it is always positive, so the absolute value is not strictly necessary, though keeping it causes no harm.
 
-- - -
 
 Second part: we complete the square \\(x^2 + 2x + 3 = (x + 1)^2 + 2\\) thus:
 
@@ -406,7 +392,6 @@ Putting everything together, an antiderivative is:
 
 > The factor \\( x + 1 \\) initially appears to require its own term in the decomposition. Yet, once the coefficients are computed, that contribution disappears entirely. For this reason, the full decomposition must always be written down: what seems essential at first may ultimately cancel.
 
-- - -
 ## Flowchart
 
 - `Integral to solve`

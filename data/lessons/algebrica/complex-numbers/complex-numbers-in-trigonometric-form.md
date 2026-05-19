@@ -27,7 +27,6 @@ z = (a, b) &= a + ib \\\\[6pt]
 \end{align}
 \\]
 
----
 
 The complex conjugate \\( \bar{z} \\) of a complex number \\( z \\) in trigonometric form is obtained by replacing \\( \theta \\) with \\( -\theta \\), which corresponds geometrically to reflecting \\( z \\) across the real axis. Since cosine is an even function and sine is odd, the result takes the following form.
 
@@ -35,7 +34,6 @@ The complex conjugate \\( \bar{z} \\) of a complex number \\( z \\) in trigonome
 
 > See also how to express a complex number in its exponential form.
 
-- - -
 ## Operations
 
 Given two complex numbers in trigonometric form:
@@ -51,13 +49,11 @@ Geometrically, multiplying two complex numbers corresponds to scaling their dist
 
 > This interpretation extends naturally to integer powers through De Moivre's theorem.
 
----
 
 The quotient of two complex numbers in trigonometric form, defined for \\( z_2 \neq 0 \\), follows a symmetric rule: the modulus of the result is the ratio of the moduli, and the argument is the difference of the arguments.
 
 \\[\frac{z_1}{z_2} = \frac{r_1}{r_2} \left[ \cos(\theta_1 - \theta_2) + i\sin(\theta_1 - \theta_2) \right]\\]
 
----
 
 Addition does not admit a comparably compact formula. The most direct approach is to convert both numbers to algebraic form, add their real and imaginary parts separately, and then convert the result back to trigonometric form if needed. The real and imaginary parts of the sum are the following.
 
@@ -74,7 +70,6 @@ The argument requires attention to the quadrant of the point \\( (x, y) \\) in t
 
 When \\( x < 0 \\), a correction of \\( \pm\pi \\) must be applied depending on the sign of \\( y \\), and when \\( x = 0 \\) the argument is \\( \pm\pi/2 \\) according to the sign of \\( y \\).
 
-- - -
 ## Modulus and argument
 
 The modulus \\( r \\) of a complex number represents its distance from the origin in the complex plane. It is computed via the Pythagorean theorem applied to the real and imaginary components, and its value is always non-negative.
@@ -83,7 +78,6 @@ The modulus \\( r \\) of a complex number represents its distance from the origi
 
 Since the modulus measures a geometric length, it cannot be negative. When \\( r = 0 \\), the only complex number satisfying this condition is \\( z = 0 \\), which corresponds to the origin of the complex plane. In that case, there is no directional component and the argument \\( \theta \\) is undefined. For every nonzero complex number, the modulus is strictly positive, that is, \\( r > 0 \\).
 
----
 
 The argument \\( \theta \\) of a complex number describes its angular position in the complex plane, measured in radians from the positive real axis. Unlike the modulus, which is uniquely determined, the argument is not unique: two angles that differ by an integer multiple of \\( 2\pi \\) describe the same direction, and therefore the same complex number. More precisely, for any \\( k \in \mathbb{Z} \\), the angles \\( \theta \\) and \\( \theta + 2k\pi \\) correspond to the same point in the complex plane. This is often written in the following compact form:
 
@@ -99,7 +93,6 @@ In this convention, angles are measured counterclockwise from the positive real 
 
 In this case all arguments are taken as non-negative. Both conventions are equally valid; the choice depends on the context. Regardless of the convention adopted, the argument of \\( z = 0 \\) remains undefined, since the origin carries no directional information.
 
-- - -
 ## How to express a complex number in trigonometric form
 
 - Given a complex number \\( z = a + bi \\), compute its modulus using the following formula.
@@ -110,7 +103,6 @@ In this case all arguments are taken as non-negative. Both conventions are equal
 - Substitute \\( r \\) and \\( \theta \\) into the trigonometric form.
   \\[z = r (\cos \theta + i \sin \theta)\\]
 
-- - -
 ## Example
 
 Consider the complex number \\( z = 1 + i \\) and its conversion to trigonometric form. The modulus is computed by applying the definition directly. Since \\( a = 1 \\) and \\( b = 1 \\), one obtains the following:

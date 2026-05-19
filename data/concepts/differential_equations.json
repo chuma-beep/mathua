@@ -1,6 +1,6 @@
 [
   {
-    "id": "ode.concept",
+    "id": "ode.basics.concept",
     "label": "What is a differential equation",
     "domain": "differential_equations",
     "subdomain": "differential_equations.basics",
@@ -15,13 +15,13 @@
     }
   },
   {
-    "id": "ode.separable",
+    "id": "ode.first_order.separable",
     "label": "Separable differential equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.concept",
+      "ode.basics.concept",
       "calc.integral.substitution"
     ],
     "mastery_threshold": {
@@ -30,13 +30,13 @@
     }
   },
   {
-    "id": "ode.linear_first",
+    "id": "ode.first_order.linear",
     "label": "First-order linear ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.separable",
+      "ode.first_order.separable",
       "calc.deriv.exp_log"
     ],
     "mastery_threshold": {
@@ -45,13 +45,13 @@
     }
   },
   {
-    "id": "ode.exact",
+    "id": "ode.first_order.exact",
     "label": "Exact equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.linear_first",
+      "ode.first_order.linear",
       "calc.deriv.implicit"
     ],
     "mastery_threshold": {
@@ -60,13 +60,13 @@
     }
   },
   {
-    "id": "ode.homogeneous",
+    "id": "ode.second_order.homogeneous",
     "label": "Homogeneous second-order ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.second_order",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.linear_first",
+      "ode.first_order.linear",
       "alg.quad.formula"
     ],
     "mastery_threshold": {
@@ -75,13 +75,13 @@
     }
   },
   {
-    "id": "ode.nonhomogeneous",
+    "id": "ode.second_order.nonhomogeneous",
     "label": "Non-homogeneous second-order ODEs",
     "domain": "differential_equations",
     "subdomain": "differential_equations.second_order",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.homogeneous",
+      "ode.second_order.homogeneous",
       "alg.eq.vars_both_sides"
     ],
     "mastery_threshold": {
@@ -90,13 +90,13 @@
     }
   },
   {
-    "id": "ode.laplace",
+    "id": "ode.transforms.laplace",
     "label": "Laplace transforms",
     "domain": "differential_equations",
     "subdomain": "differential_equations.transforms",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.nonhomogeneous",
+      "ode.second_order.nonhomogeneous",
       "calc.integral.parts"
     ],
     "mastery_threshold": {
@@ -105,13 +105,13 @@
     }
   },
   {
-    "id": "ode.systems",
+    "id": "ode.adv.systems",
     "label": "Systems of differential equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.systems",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "ode.homogeneous",
+      "ode.second_order.homogeneous",
       "linalg.eigen.compute"
     ],
     "mastery_threshold": {

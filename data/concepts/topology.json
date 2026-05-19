@@ -1,6 +1,6 @@
 [
   {
-    "id": "topo.metric",
+    "id": "topo.basics.metric",
     "label": "Metric spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
@@ -15,13 +15,13 @@
     }
   },
   {
-    "id": "topo.open_closed",
+    "id": "topo.basics.open_closed",
     "label": "Open and closed sets",
     "domain": "topology",
     "subdomain": "topology.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "topo.metric"
+      "topo.basics.metric"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -29,13 +29,13 @@
     }
   },
   {
-    "id": "topo.continuous",
+    "id": "topo.basics.continuous",
     "label": "Continuity in topological spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "topo.open_closed",
+      "topo.basics.open_closed",
       "calc.limit.continuity"
     ],
     "mastery_threshold": {

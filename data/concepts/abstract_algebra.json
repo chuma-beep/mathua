@@ -7,7 +7,7 @@
     "grading_type": "multiple_choice",
     "prerequisites": [
       "discrete.logic.quantifiers",
-      "nt.modular"
+      "nt.basics.modular"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -29,7 +29,7 @@
     }
   },
   {
-    "id": "abstract.subgroup",
+    "id": "abstract.group.subgroup",
     "label": "Subgroups and cosets",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
@@ -43,13 +43,13 @@
     }
   },
   {
-    "id": "abstract.ring",
+    "id": "abstract.rings.def",
     "label": "Rings and fields",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "abstract.subgroup",
+      "abstract.group.subgroup",
       "alg.factor.diff_squares"
     ],
     "mastery_threshold": {
@@ -58,13 +58,13 @@
     }
   },
   {
-    "id": "abstract.homomorphism",
+    "id": "abstract.group.homomorphism",
     "label": "Group homomorphisms",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "abstract.subgroup",
+      "abstract.group.subgroup",
       "alg.func.concept"
     ],
     "mastery_threshold": {

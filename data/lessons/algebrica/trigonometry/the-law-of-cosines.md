@@ -32,7 +32,6 @@ c^2 = a^2 + b^2 - 2ab\cos(\theta)
 
 > The law of cosines is often used in conjunction with the law of sines, which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
 
-- - -
 ## Example 1
 
 Consider a triangle with sides \\(a = 8\\), \\(b = 6\\) and included angle \\(\theta = 60^\circ\\). The goal is to determine the length of the third side \\(c\\). Substituting the known values into the law of cosines gives:
@@ -51,7 +50,6 @@ Taking the positive square root, one obtains \\(c = \sqrt{52} = 2\sqrt{13} \appr
 
 The length of the third side is approximately \\(7.21\\) units.
 
-- - -
 ## Example 2
 
 Consider a triangle with sides \\(a = 5\\), \\(b = 7\\) and \\(c = 9\\). The goal is to determine the angle \\(\theta\\) opposite to side \\(c\\). Solving the law of cosines for \\(\cos(\theta)\\) gives:
@@ -78,7 +76,6 @@ Since \\(\cos(\theta) < 0\\), the angle \\(\theta\\) is obtuse. Taking the inver
 
 The angle opposite to the longest side is approximately \\(95.7^\circ\\).
 
-- - -
 
 ## Vector interpretation
 

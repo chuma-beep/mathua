@@ -15,7 +15,6 @@ z^2 &= (a + ib)^2 \\\\[0.5em]
 
 While this method is valid, as the exponent increases beyond three, the calculations become increasingly tedious and impractical. Expanding higher powers algebraically yields lengthy expressions and more terms, reducing the practicality of this approach. In these situations, De Moivre's Theorem provides a more efficient and elegant solution.
 
-- - -
 ## De Moivre's theorem and exponential notation for complex numbers
 
 De Moivre's theorem provides a method for computing powers and roots of complex numbers, whether written in trigonometric or exponential form. Consider a complex number \\( z \\) raised to an integer power \\( n \in \mathbb{Z} \\). That is,
@@ -38,7 +37,6 @@ z^n = r^n \left(\cos(n\theta) + i\sin(n\theta)\right)
 
 This identity holds for all integers \\( n \\), including negative ones. When \\( n \\) is a rational number \\( n = p/q \\), the formula still applies but yields one of the \\( q \\) distinct roots; the full set of roots requires considering all values of the argument of the form \\( \theta + 2k\pi \\) for \\( k = 0, 1, \dots, q-1 \\).
 
----
 
 Now rewrite the complex number \\( z \\) using Euler's identity, in exponential form:
 
@@ -60,7 +58,6 @@ z^n = (re^{i\theta})^n = r^n e^{in\theta}
 
 There's no algebra to expand, no trigonometric identities to manipulate. The modulus is raised to the power \\( n \\), and the argument is multiplied by \\( n \\).
 
-- - -
 ## A proof by induction
 
 De Moivre's Theorem states that for any integer \\( n \\) and any complex number \\( z = r(\cos\theta + i\sin\theta) \\):
@@ -74,7 +71,6 @@ The formula can be established by induction on \\( n \\). The argument has two p
 + Verifying the base case.
 + Showing that validity at step \\( n \\) forces validity at step \\( n + 1 \\).
 
-- - -
 
 For the base case, setting \\( n = 1 \\) reduces the formula to \\( z = r(\cos\theta + i\sin\theta) \\), which is the trigonometric form of \\( z \\) by definition. For the inductive step, suppose the formula holds for some integer \\( n \geq 1 \\):
 
@@ -96,7 +92,6 @@ z^{n+1} = r^{n+1}\bigl(\cos\bigl((n+1)\theta\bigr) + i\sin\bigl((n+1)\theta\bigr
 
 The identity holds at step \\( n + 1 \\), which completes the induction.
 
-- - -
 ## Example 1
 
 For example, squaring the complex number \\( z = re^{i\theta} \\) gives:
@@ -107,7 +102,6 @@ z^2 = (re^{i\theta})^2 = r^2 e^{i2\theta}
 
 The result is a new complex number whose modulus is \\( r^2 \\) and whose argument is \\( 2\theta. \\) In geometric terms, this means the vector is stretched by a factor of \\( r^2 \\) and rotated to double its original angle.
 
-- - -
 
 ## Example 2
 
@@ -120,7 +114,6 @@ First, we determine the modulus of \\( z \\):
 
 > The modulus of a complex number represents its distance from the origin in the complex plane. It is calculated using the Pythagorean theorem.
 
-- - -
 
 Next, we determine the argument of \\( z \\):
 
@@ -130,7 +123,6 @@ Next, we determine the argument of \\( z \\):
 
 > The argument of a complex number is the angle it makes with the positive real axis, measured counterclockwise. In this case, since both the real and imaginary parts are equal, the angle is exactly \\( 45^\circ \\), or \\( \frac{\pi}{4} \\) radians.
 
-- - -
 
 We can now express \\( z \\) in exponential form:
 
@@ -150,7 +142,6 @@ Let’s simplify:
 (2\sqrt{2})^4 = (2^1 \cdot 2^{1/2})^4 = 2^6 = 64
 \\]
 
-- - -
 
 Since \\(e^{i\pi} = -1\\) we find:
 
@@ -162,7 +153,6 @@ z^4 = 64 \cdot (-1) = -64
 
 So the fourth power of \\( z = 2 + 2i \\) is the real number \\( -64 \\).
 
-- - -
 ## Deriving trigonometric identities
 
 One of the most practical applications of De Moivre's Theorem is the derivation of explicit formulas for sine and cosine, in particular for \\( \cos(n\theta) \\) and \\( \sin(n\theta) \\) in terms of powers of \\( \cos\theta \\) and \\( \sin\theta \\). The idea is straightforward: expand the left-hand side of the theorem using the binomial formula, then separate real and imaginary parts.
@@ -197,7 +187,6 @@ Equating real and imaginary parts with the right-hand side:
 
 These are the triple angle formulas for cosine and sine. Both follow directly from a single application of the binomial expansion, with no need for repeated use of addition formulas or any other intermediate result. The same procedure extends to any integer \\( n \\): the binomial expansion of \\( (\cos\theta + i\sin\theta)^n \\) always yields \\( \cos(n\theta) \\) as its real part and \\( \sin(n\theta) \\) as its imaginary part.
 
-- - -
 ## Finding complex roots with De Moivre's theorem
 
 De Moivre's Theorem isn't just useful for powers. It also gives us a clean and elegant way to find the roots of a complex number. Suppose we want to solve:
@@ -220,7 +209,6 @@ z_k = \sqrt[n]{r} \cdot e^{i\left(\frac{\theta + 2k\pi}{n}\right)}, \quad \text{
 
 This gives all the \\( n \\) distinct complex roots. They lie on a circle of radius \\( \sqrt[n]{r} \\), equally spaced by an angle of \\( \dfrac{2\pi}{n} \\). This means the roots are arranged like the vertices of a regular polygon with \\( n \\) sides inscribed in a circle of radius \\( \sqrt[n]{r} \\). In the case of cube roots, we get three points on a circle, each separated by an angle of \\( \dfrac{2\pi}{3} \\), forming an equilateral triangle in the complex plane.
 
-- - -
 ## Example 3
 
 Let's find all the complex solutions to the equation:

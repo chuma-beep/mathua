@@ -144,7 +144,7 @@
     }
   },
   {
-    "id": "linalg.cramer",
+    "id": "linalg.sys.cramer",
     "label": "Cramer's rule",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.systems",
@@ -188,7 +188,7 @@
     }
   },
   {
-    "id": "linalg.transformations",
+    "id": "linalg.lintrans.concept",
     "label": "Linear transformations",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.transformations",
@@ -203,7 +203,7 @@
     }
   },
   {
-    "id": "linalg.span",
+    "id": "linalg.vec.span",
     "label": "Span and linear independence",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
@@ -218,13 +218,13 @@
     }
   },
   {
-    "id": "linalg.basis",
+    "id": "linalg.vec.basis",
     "label": "Basis and dimension",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "linalg.span"
+      "linalg.vec.span"
     ],
     "mastery_threshold": {
       "streak": 10,

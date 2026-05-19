@@ -9,9 +9,9 @@ const (
 	StatusMastered   Status = "MASTERED"
 )
 
-// EffectiveStatus returns DECAYING when a MASTERED concept has not been
-// reviewed for longer than the decay threshold (in days). Decay is a
-// read-time signal — the database always stores MASTERED.
+// EffectiveStatus returns DECAYING if a MASTERED concept hasn't been reviewed
+// beyond the decay threshold (in days). Decay is computed at read time —
+// the database never stores it.
 func EffectiveStatus(current Status, daysSinceLastReview float64, decayThresholdDays float64) Status {
 	if current == StatusMastered && daysSinceLastReview >= decayThresholdDays {
 		return "DECAYING"

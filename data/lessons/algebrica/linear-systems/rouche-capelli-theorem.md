@@ -18,7 +18,6 @@ The theorem can be stated as follows. Let \\(S\\) be a linear system of \\(m\\) 
 
 The first part of the theorem is a criterion for consistency, formulated entirely in terms of the rank. The second part, which presupposes consistency, quantifies the dimension of the solution set as the difference \\(n - r\\) between the number of unknowns and the common value of the two ranks.
 
-- - -
 ## Geometric interpretation
 
 The condition \\(r(A) = r(A \mid \mathbf{b})\\) admits a transparent geometric reading in terms of linear combinations of the columns of \\(A\\). Denote by \\(C_1, C_2, \ldots, C_n \in \mathbb{R}^m\\) the columns of \\(A\\). The matrix-vector product can be written as:
@@ -31,7 +30,6 @@ Solving the system therefore amounts to expressing \\(\mathbf{b}\\) as a linear 
 
 > The rank equality is therefore a way of testing whether \\(\mathbf{b}\\) lies in the subspace spanned by the columns of \\(A\\). When the equality fails, \\(\mathbf{b}\\) is independent of those columns and no linear combination can reproduce it, so the system has no solution.
 
-- - -
 ## Proof of the consistency criterion
 
 The consistency part of the theorem can be proved by reducing the system to row echelon form via Gaussian elimination and analyzing the position of the pivots in the reduced matrix.
@@ -60,7 +58,6 @@ Combining this with the rank equalities above, the original system \\(S\\) is co
 
 The second part of the theorem follows from the same row echelon analysis. When the reduced system is consistent and has \\(r\\) pivots, the variables associated with the pivot columns can be expressed in terms of the remaining \\(n - r\\) variables, which act as free parameters. This produces a unique solution exactly when \\(n - r = 0\\), and an \\((n-r)\\)-parameter family of solutions otherwise.
 
-- - -
 ## Example 1
 
 The following system illustrates the case of a unique solution:
@@ -80,7 +77,6 @@ A \mid \mathbf{b} = \begin{pmatrix} 3 & -1 & 7 \\[6pt] 1 & \phantom{-}2 & 0 \end
 
 Since \\(\det(A) = 3 \cdot 2 - (-1) \cdot 1 = 7 \neq 0\\), the rank of \\(A\\) is \\(2\\), the maximum possible. The augmented matrix has at most rank \\(2\\) and contains \\(A\\) as a submatrix of rank \\(2\\), so its rank is also \\(2\\). The Rouché-Capelli theorem then guarantees consistency, and because \\(r = n = 2\\) the solution is unique. To find it, we use the second equation to write \\(x = -2y\\), and substitute into the first equation to obtain \\(3(-2y) - y = 7\\), which gives \\(y = -1\\). Substituting back yields \\(x = 2\\). The system therefore admits the unique solution \\((x, y) = (2, -1)\\).
 
-- - -
 
 ## Example 2
 
@@ -135,7 +131,6 @@ x_3 = 1 + x_4
 
 with \\(x_2, x_4 \in \mathbb{R}\\) arbitrary. The solution set is a two-dimensional affine subspace of \\(\mathbb{R}^4\\), in agreement with the value \\(n - r = 2\\) predicted by the theorem.
 
-- - -
 ## Example 3
 
 The following system illustrates the case of an inconsistent system:
@@ -180,7 +175,6 @@ The third row of \\(A \mid \mathbf{b}\\) is no longer the sum of the first two, 
 
 The minor is nonzero, so \\(r(A \mid \mathbf{b}) = 3\\). Since \\(r(A) = 2 \neq 3 = r(A \mid \mathbf{b})\\), the Rouché-Capelli theorem certifies that the system is inconsistent.
 
-- - -
 
 ## Discussion of a parametric system
 
@@ -229,7 +223,6 @@ The second row of \\(A\\) is the opposite of the first, so \\(r(A) = 1\\). For t
 
 which is nonzero, so \\(r(A \mid \mathbf{b}) = 2\\). The two ranks differ, and the Rouché-Capelli theorem certifies that the system is inconsistent. The classification of solutions according to the value of \\(k\\) can therefore be summarized as follows. The system admits a unique solution when \\(k \neq 2\\) and \\(k \neq -3\\), infinitely many solutions when \\(k = 2\\), and no solution when \\(k = -3\\).
 
-- - -
 ## Homogeneous systems
 
 A homogeneous linear system has the form:
