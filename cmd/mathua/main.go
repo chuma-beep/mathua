@@ -31,6 +31,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/fractions"
 	"github.com/chuma-beep/mathua/internal/generator/geometry"
 	"github.com/chuma-beep/mathua/internal/generator/linalg"
+	"github.com/chuma-beep/mathua/internal/generator/machinelearning"
 	"github.com/chuma-beep/mathua/internal/generator/numtheory"
 	"github.com/chuma-beep/mathua/internal/generator/odes"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
@@ -89,6 +90,7 @@ func main() {
 	numtheory.Register(reg)
 	complex.Register(reg)
 	linalg.Register(reg)
+	machinelearning.Register(reg)
 	discrete.Register(reg)
 	calculus.Register(reg)
 	odes.Register(reg)

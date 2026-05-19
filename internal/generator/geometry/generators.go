@@ -29,6 +29,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("geo.coord.midpoint", &coordMidpointGen{})
 	reg.Register("geo.solid.volume_rect", &volumeGen{})
 	reg.Register("geo.solid.surface_area", &surfaceAreaGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("geo.coord.lines", &generator.Stub{ConceptID: "geo.coord.lines"})
+	reg.Register("geo.coord.polar", &generator.Stub{ConceptID: "geo.coord.polar"})
 }
 
 type pointsLinesGen struct{}

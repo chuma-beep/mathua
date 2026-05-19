@@ -24,6 +24,16 @@ func Register(reg *generator.Registry) {
 	reg.Register("trig.adv.inverse", &inverseGen{})
 	reg.Register("trig.adv.law_sines", &lawSinesGen{})
 	reg.Register("trig.adv.law_cosines", &lawCosinesGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("trig.adv.arctan", &generator.Stub{ConceptID: "trig.adv.arctan"})
+	reg.Register("trig.basics.right_triangle", &generator.Stub{ConceptID: "trig.basics.right_triangle"})
+	reg.Register("trig.eq.basic", &generator.Stub{ConceptID: "trig.eq.basic"})
+	reg.Register("trig.eq.homogeneous", &generator.Stub{ConceptID: "trig.eq.homogeneous"})
+	reg.Register("trig.hyperbolic.sinh_cosh", &generator.Stub{ConceptID: "trig.hyperbolic.sinh_cosh"})
+	reg.Register("trig.hyperbolic.tanh_coth", &generator.Stub{ConceptID: "trig.hyperbolic.tanh_coth"})
+	reg.Register("trig.ident.identities", &generator.Stub{ConceptID: "trig.ident.identities"})
+	reg.Register("trig.ineq.basic", &generator.Stub{ConceptID: "trig.ineq.basic"})
 }
 
 type radiansGen struct{}

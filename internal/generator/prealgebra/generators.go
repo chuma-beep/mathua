@@ -55,6 +55,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("prealg.eq.word", &eqWordGen{})
 	reg.Register("prealg.ineq.one_step", &ineqOneStepGen{})
 	reg.Register("prealg.ineq.two_step", &ineqTwoStepGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("prealg.real.concept", &generator.Stub{ConceptID: "prealg.real.concept"})
+	reg.Register("prealg.real.properties", &generator.Stub{ConceptID: "prealg.real.properties"})
+	reg.Register("prealg.types", &generator.Stub{ConceptID: "prealg.types"})
 }
 
 // Decimals

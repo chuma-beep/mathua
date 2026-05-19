@@ -19,6 +19,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("complex.adv.polar", &polarGen{})
 	reg.Register("complex.adv.de_moivre", &deMoivreGen{})
 	reg.Register("complex.adv.roots", &rootsGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("complex.adv.exponential", &generator.Stub{ConceptID: "complex.adv.exponential"})
+	reg.Register("complex.adv.inequalities", &generator.Stub{ConceptID: "complex.adv.inequalities"})
 }
 
 func fmtComplex(r, i int) string {

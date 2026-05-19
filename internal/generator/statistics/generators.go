@@ -24,6 +24,32 @@ func Register(reg *generator.Registry) {
 	reg.Register("stat.prob.complement", &complementProbGen{})
 	reg.Register("stat.prob.compound", &compoundProbGen{})
 	reg.Register("stat.prob.counting", &countingGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("stat.adv.covariance", &generator.Stub{ConceptID: "stat.adv.covariance"})
+	reg.Register("stat.adv.geometric_mean", &generator.Stub{ConceptID: "stat.adv.geometric_mean"})
+	reg.Register("stat.adv.harmonic_mean", &generator.Stub{ConceptID: "stat.adv.harmonic_mean"})
+	reg.Register("stat.adv.rms", &generator.Stub{ConceptID: "stat.adv.rms"})
+	reg.Register("stat.adv.variance", &generator.Stub{ConceptID: "stat.adv.variance"})
+	reg.Register("stat.dist.bernoulli", &generator.Stub{ConceptID: "stat.dist.bernoulli"})
+	reg.Register("stat.dist.beta", &generator.Stub{ConceptID: "stat.dist.beta"})
+	reg.Register("stat.dist.binomial", &generator.Stub{ConceptID: "stat.dist.binomial"})
+	reg.Register("stat.dist.chi_square", &generator.Stub{ConceptID: "stat.dist.chi_square"})
+	reg.Register("stat.dist.exponential", &generator.Stub{ConceptID: "stat.dist.exponential"})
+	reg.Register("stat.dist.gamma", &generator.Stub{ConceptID: "stat.dist.gamma"})
+	reg.Register("stat.dist.geometric", &generator.Stub{ConceptID: "stat.dist.geometric"})
+	reg.Register("stat.dist.hypergeometric", &generator.Stub{ConceptID: "stat.dist.hypergeometric"})
+	reg.Register("stat.dist.normal", &generator.Stub{ConceptID: "stat.dist.normal"})
+	reg.Register("stat.dist.poisson", &generator.Stub{ConceptID: "stat.dist.poisson"})
+	reg.Register("stat.dist.student_t", &generator.Stub{ConceptID: "stat.dist.student_t"})
+	reg.Register("stat.dist.uniform", &generator.Stub{ConceptID: "stat.dist.uniform"})
+	reg.Register("stat.dist.z_table", &generator.Stub{ConceptID: "stat.dist.z_table"})
+	reg.Register("stat.infer.confidence", &generator.Stub{ConceptID: "stat.infer.confidence"})
+	reg.Register("stat.infer.sampling", &generator.Stub{ConceptID: "stat.infer.sampling"})
+	reg.Register("stat.prob.bayes", &generator.Stub{ConceptID: "stat.prob.bayes"})
+	reg.Register("stat.prob.continuous_rv", &generator.Stub{ConceptID: "stat.prob.continuous_rv"})
+	reg.Register("stat.prob.discrete_rv", &generator.Stub{ConceptID: "stat.prob.discrete_rv"})
+	reg.Register("stat.prob.expected_value", &generator.Stub{ConceptID: "stat.prob.expected_value"})
 }
 
 type readTableGen struct{}
