@@ -49,9 +49,12 @@ func TestLoad_MissingLessonFile(t *testing.T) {
 	writeFile(t, filepath.Join(dir, "lessons.json"), `[
 		{"concept_id": "c", "source": "nonexistent.md"}
 	]`)
-	_, err := Load(dir)
-	if err == nil {
-		t.Fatal("expected error for missing lesson file")
+	loader, err := Load(dir)
+	if err != nil {
+		t.Fatal("expected no error, missing files are skipped")
+	}
+	if loader.Lesson("c") != nil {
+		t.Error("expected nil lesson for missing file")
 	}
 }
 
@@ -100,7 +103,7 @@ func TestLoad_NotFound(t *testing.T) {
 }
 
 func TestLoad_RealData(t *testing.T) {
-	if _, err := os.Stat("../../data/lessons/advanced/trigonometry/sine-and-cosine.md"); err != nil {
+	if _, err := os.Stat("../../data/lessons/algebrica/trigonometry/sine-and-cosine.md"); err != nil {
 		t.Skip("Algebrica submodule not checked out: run git submodule update --init")
 	}
 	loader, err := Load("../../data/lessons")

@@ -23,6 +23,14 @@ func (m Model) View() string {
 		body = m.viewFeedback()
 	case ScreenProgress:
 		body = m.viewProgress()
+	case ScreenStudy:
+		body = m.viewStudy()
+	case ScreenBrowse:
+		body = m.viewBrowse()
+	case ScreenDiagnostic:
+		body = m.viewDiagnostic()
+	case ScreenDiagFeedback:
+		body = m.viewDiagFeedback()
 	}
 
 	header := m.viewHeader()
@@ -55,11 +63,17 @@ func (m Model) viewFooter() string {
 	var items [][2]string
 	switch m.screen {
 	case ScreenWelcome:
-		items = [][2]string{{"enter", "start"}, {"p", "progress"}, {"q", "quit"}}
+		items = [][2]string{{"enter", "learning"}, {"b", "browse"}, {"d", "diagnostic"}, {"s", "study"}, {"p", "progress"}, {"q", "quit"}}
 	case ScreenProblem:
 		items = [][2]string{{"enter", "submit"}, {"ctrl+p", "progress"}, {"ctrl+c", "quit"}}
 	case ScreenFeedback:
 		items = [][2]string{{"enter", "next"}, {"p", "progress"}, {"q", "quit"}}
+	case ScreenDiagnostic:
+		items = [][2]string{{"enter", "submit"}, {"q", "quit"}}
+	case ScreenDiagFeedback:
+		items = [][2]string{{"enter", "next"}, {"q", "quit"}}
+	case ScreenStudy:
+		items = [][2]string{{"1-9", "select"}, {"w", "welcome"}, {"q", "quit"}}
 	case ScreenProgress:
 		items = [][2]string{{"enter", "continue"}, {"w", "welcome"}, {"q", "quit"}}
 	}
@@ -72,6 +86,89 @@ func (m Model) viewFooter() string {
 		parts = append(parts, p)
 	}
 	return FooterStyle.Width(m.width).Render(strings.Join(parts, ""))
+}
+
+// Browse screen
+
+func (m Model) viewBrowse() string {
+	w := m.width - 10
+	data := m.browseData
+	var b strings.Builder
+
+	switch m.browseLevel {
+	case 0:
+		b.WriteString(WelcomeTitleStyle.Render("Concept Browser"))
+		b.WriteString("\n")
+		b.WriteString(WelcomeSubtitleStyle.Render("Choose a domain to explore."))
+		b.WriteString("\n\n")
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n\n")
+		for i, d := range data.Domains {
+			num := fmt.Sprintf("%d.", i+1)
+			b.WriteString(DomainNameStyle.Render(num))
+			b.WriteString(ConceptIDStyle.Render(d.Name))
+			b.WriteString(DomainStyle.Render(fmt.Sprintf("  [%d subdomains]", len(d.Subdomains))))
+			b.WriteString("\n")
+		}
+
+	case 1:
+		domain := data.Domains[m.browseDomain]
+		b.WriteString(WelcomeTitleStyle.Render(domain.Name))
+		b.WriteString("\n")
+		b.WriteString(WelcomeSubtitleStyle.Render("Choose a subdomain."))
+		b.WriteString("\n\n")
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n\n")
+		for i, sd := range domain.Subdomains {
+			num := fmt.Sprintf("%d.", i+1)
+			b.WriteString(DomainNameStyle.Render(num))
+			b.WriteString(ConceptIDStyle.Render(sd.Name))
+			b.WriteString(DomainStyle.Render(fmt.Sprintf("  [%d concepts]", len(sd.Concepts))))
+			b.WriteString("\n")
+		}
+
+	case 2:
+		domain := data.Domains[m.browseDomain]
+		sub := domain.Subdomains[m.browseSub]
+		b.WriteString(WelcomeTitleStyle.Render(sub.Name))
+		b.WriteString("\n")
+		b.WriteString(WelcomeSubtitleStyle.Render("Choose a concept to practice."))
+		b.WriteString("\n\n")
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n\n")
+		for i, c := range sub.Concepts {
+			num := fmt.Sprintf("%d.", i+1)
+			b.WriteString(DomainNameStyle.Render(num))
+			if c.Unlocked {
+				b.WriteString(StatLabelStyle.Render(c.Label))
+			} else {
+				b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(colDim)).Render(c.Label + "  [locked]"))
+			}
+			bar := masteryBar(c.MasteryPct, 12)
+			status := ""
+			switch c.Status {
+			case "MASTERED":
+				status = MasteryAchievedStyle.Render("  mastered")
+			case "PRACTICING":
+				status = DomainCountStyle.Render(fmt.Sprintf("  %.0f%%", c.MasteryPct*100))
+			case "LEARNING":
+				status = DomainCountStyle.Render(fmt.Sprintf("  %.0f%%", c.MasteryPct*100))
+			default:
+				if c.Unlocked {
+					status = DomainStyle.Render("  new")
+				}
+			}
+			b.WriteString(bar + status)
+			b.WriteString("\n")
+		}
+	}
+
+	b.WriteString("\n")
+	b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+	b.WriteString("\n\n")
+	b.WriteString(ContinueStyle.Render("press number to select  |  w for back  |  q to quit"))
+
+	return ContentStyle.Render(b.String())
 }
 
 // Welcome screen
@@ -177,9 +274,82 @@ func (m Model) viewProblem() string {
 	b.WriteString(box)
 	b.WriteString("\n")
 
-	timerStr := m.viewTimer(s.TimeLimit)
-	b.WriteString(timerStr)
+	b.WriteString(InputLabelStyle.Render("answer"))
+	b.WriteString("\n")
+	b.WriteString(m.input.View())
+
+	return ContentStyle.Render(b.String())
+}
+
+// Study screen
+
+func (m Model) viewStudy() string {
+	w := m.width - 10
+	if m.studyContent != nil {
+		var b strings.Builder
+		b.WriteString(ProgressTitleStyle.Render(m.studyContent.Title))
+		b.WriteString("\n\n")
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n\n")
+		body := m.studyContent.Body
+		if len(body) > 3000 {
+			body = body[:3000] + "\n\n[... truncated ...]"
+		}
+		b.WriteString(QuestionTextStyle.Render(body))
+		return ContentStyle.Render(b.String())
+	}
+
+	var b strings.Builder
+	b.WriteString(WelcomeTitleStyle.Render("Study Lessons"))
+	b.WriteString("\n")
+	b.WriteString(WelcomeSubtitleStyle.Render("Browse lesson content at your own pace."))
 	b.WriteString("\n\n")
+	b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+	b.WriteString("\n\n")
+
+	for i, l := range m.studyLessons {
+		num := fmt.Sprintf("%d.", i+1)
+		b.WriteString(DomainNameStyle.Render(num))
+		b.WriteString(ConceptIDStyle.Render(l.Title))
+		b.WriteString("  ")
+		b.WriteString(DomainStyle.Render("[" + l.Domain + "]"))
+		b.WriteString("\n")
+	}
+
+	if len(m.studyLessons) == 0 {
+		b.WriteString(StatLabelStyle.Render("No lessons available."))
+		b.WriteString("\n")
+	}
+
+	b.WriteString("\n")
+	b.WriteString(ContinueStyle.Render("press number to read  |  w for welcome  |  q to quit"))
+
+	return ContentStyle.Render(b.String())
+}
+
+// Diagnostic screen
+
+func (m Model) viewDiagnostic() string {
+	d := m.diagQuestion
+	w := m.width - 10
+
+	var b strings.Builder
+
+	b.WriteString(
+		DomainStyle.Render("diagnostic") +
+			DomainStyle.Render("  |  ") +
+			ConceptIDStyle.Render(d.ConceptID),
+	)
+	b.WriteString("\n\n")
+
+	questionContent := QuestionLabelStyle.Render(
+		fmt.Sprintf("question %d", d.Count),
+	) + "\n\n" +
+		QuestionTextStyle.Render(d.Question)
+
+	box := QuestionBoxStyle.Width(w).Render(questionContent)
+	b.WriteString(box)
+	b.WriteString("\n")
 
 	b.WriteString(InputLabelStyle.Render("answer"))
 	b.WriteString("\n")
@@ -188,25 +358,47 @@ func (m Model) viewProblem() string {
 	return ContentStyle.Render(b.String())
 }
 
-func (m Model) viewTimer(timeLimit float64) string {
-	elapsed := m.elapsed
-	remaining := timeLimit - elapsed
-	if remaining < 0 {
-		remaining = 0
+func (m Model) viewDiagFeedback() string {
+	r := m.diagFeedback
+	w := m.width - 10
+
+	var b strings.Builder
+
+	b.WriteString(
+		ConceptIDStyle.Render("diagnostic"),
+	)
+	b.WriteString("\n\n")
+
+	var box string
+	if r.Correct {
+		content := FeedbackCorrectTitle.Render("correct") + "\n\n" +
+			FeedbackYourAnswerStyle.Render("your answer  ") +
+			FeedbackCorrectAnswerStyle.Render(r.CorrectAnswer)
+		box = FeedbackCorrectBox.Width(w).Render(content)
+	} else {
+		content := FeedbackWrongTitle.Render("incorrect") + "\n\n" +
+			FeedbackYourAnswerStyle.Render("your answer  ") +
+			lipgloss.NewStyle().Foreground(lipgloss.Color(colRed)).Render(r.UserAnswer) + "\n" +
+			FeedbackYourAnswerStyle.Render("correct      ") +
+			FeedbackCorrectAnswerStyle.Render(r.CorrectAnswer)
+		box = FeedbackWrongBox.Width(w).Render(content)
+	}
+	b.WriteString(box)
+	b.WriteString("\n")
+
+	if r.Explanation != "" {
+		b.WriteString(ExplanationStyle.Render(r.Explanation))
+		b.WriteString("\n\n")
 	}
 
-	ratio := elapsed / timeLimit
-	var style lipgloss.Style
-	switch {
-	case ratio > 0.9:
-		style = TimerCriticalStyle
-	case ratio > 0.7:
-		style = TimerWarningStyle
-	default:
-		style = TimerStyle
+	if r.Done {
+		b.WriteString(MasteryAchievedStyle.Render("diagnostic complete — starting practice"))
+		b.WriteString("\n\n")
 	}
 
-	return style.Render(fmt.Sprintf("%.1fs / %.0fs", elapsed, timeLimit))
+	b.WriteString(ContinueStyle.Render("press enter to continue"))
+
+	return ContentStyle.Render(b.String())
 }
 
 // Feedback screen
@@ -242,9 +434,7 @@ func (m Model) viewFeedback() string {
 	b.WriteString("\n")
 
 	b.WriteString(
-		TimingStyle.Render("time  ") +
-			TimingValueStyle.Render(fmt.Sprintf("%.1fs", r.ElapsedSecs)) +
-			TimingStyle.Render("  |  new mastery  ") +
+		TimingStyle.Render("new mastery  ") +
 			MasteryValueStyle.Render(fmt.Sprintf("%.0f%%", r.NewMastery*100)),
 	)
 	b.WriteString("\n")

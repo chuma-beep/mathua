@@ -9,7 +9,7 @@
       "prealg.var.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -23,7 +23,7 @@
       "discrete.logic.propositions"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -37,7 +37,7 @@
       "discrete.logic.connectives"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -51,7 +51,7 @@
       "discrete.logic.truth_tables"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -65,7 +65,7 @@
       "discrete.logic.propositions"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -79,7 +79,7 @@
       "discrete.sets.operations"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -94,7 +94,7 @@
       "arith.factor.prime_fact"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -108,7 +108,7 @@
       "discrete.combinatorics.permutations"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -123,7 +123,7 @@
       "alg.poly.special"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -137,7 +137,7 @@
       "discrete.sets.operations"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -151,7 +151,7 @@
       "discrete.graphs.basics"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -165,7 +165,7 @@
       "discrete.graphs.paths"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -180,7 +180,7 @@
       "alg.seq.geometric"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -195,7 +195,7 @@
       "discrete.logic.quantifiers"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 30.0
     }
   }

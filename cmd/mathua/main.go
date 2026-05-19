@@ -17,9 +17,11 @@ import (
 
 	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/generator/abstract"
+	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/generator/algebra"
 	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
 	"github.com/chuma-beep/mathua/internal/generator/calculus"
@@ -147,6 +149,8 @@ func main() {
 	} else {
 		m := tui.New()
 		var studentID, sessionID string
+		var diagSession *diagnostic.Session
+		var diagCount int
 
 		m.OnNext = func() tui.SessionMsg {
 			if sessionID == "" {
@@ -165,8 +169,8 @@ func main() {
 			prog, _ := eng.GetProgress(studentID)
 			masteryPct := 0.0
 			streak := 0
-			streakNeeded := 5
-			status := "UNSEEN"
+		streakNeeded := 10
+		status := "UNSEEN"
 			if p, ok := prog[q.ConceptID]; ok {
 				streak = p.Streak
 				status = p.Status
@@ -209,7 +213,7 @@ func main() {
 			}
 			masteryAchieved := result.NewStatus == mastery.StatusMastered
 			c := dag.Concept(conceptID)
-			streakNeeded := 5
+			streakNeeded := 10
 			if c != nil {
 				streakNeeded = c.MasteryThreshold.Streak
 			}
@@ -277,7 +281,156 @@ func main() {
 			return tui.ProgressMsg{Domains: dl}
 		}
 
-		m.OnWelcome = func() tui.WelcomeStatsMsg {
+		m.OnStudy = func() []tui.StudyLesson {
+		ll := eng.GetLessonLoader()
+		if ll == nil {
+			return nil
+		}
+		byDomain := ll.LessonsByDomain()
+		var out []tui.StudyLesson
+		for domain, lessons := range byDomain {
+			for _, l := range lessons {
+				for _, cid := range l.Concepts {
+					out = append(out, tui.StudyLesson{
+						Title:     l.Title,
+						Body:      l.Body,
+						ConceptID: cid,
+						Domain:    domain,
+					})
+				}
+			}
+		}
+		return out
+	}
+
+	m.OnBrowse = func() tui.ConceptTreeMsg {
+		nodes := eng.ConceptTree(studentID)
+		var domains []tui.DomainNode
+		for _, d := range nodes {
+			var subs []tui.SubdomainNode
+			for _, sd := range d.Subdomains {
+				var concepts []tui.ConceptNode
+				for _, c := range sd.Concepts {
+					concepts = append(concepts, tui.ConceptNode{
+						ID:         c.ID,
+						Label:      c.Label,
+						Unlocked:   c.Unlocked,
+						MasteryPct: c.MasteryPct,
+						Streak:     c.Streak,
+						Status:     c.Status,
+					})
+				}
+				subs = append(subs, tui.SubdomainNode{Name: sd.Name, Concepts: concepts})
+			}
+			domains = append(domains, tui.DomainNode{Name: d.Name, Subdomains: subs})
+		}
+		return tui.ConceptTreeMsg{Domains: domains}
+	}
+
+	m.OnSelectConcept = func(conceptID string) tui.SessionMsg {
+		if sessionID == "" {
+			return tui.SessionMsg{}
+		}
+		q, err := eng.PracticeConcept(sessionID, studentID, conceptID)
+		if err != nil || q == nil {
+			return tui.SessionMsg{}
+		}
+		c := dag.Concept(conceptID)
+		domain, subdomain := "", ""
+		if c != nil {
+			domain = c.Domain
+			subdomain = c.Subdomain
+		}
+		prog, _ := eng.GetProgress(studentID)
+		masteryPct := 0.0
+		streak := 0
+		streakNeeded := 10
+		status := "UNSEEN"
+		if p, ok := prog[conceptID]; ok {
+			streak = p.Streak
+			status = p.Status
+			if c != nil && c.MasteryThreshold.Streak > 0 {
+				masteryPct = float64(streak) / float64(c.MasteryThreshold.Streak)
+				streakNeeded = c.MasteryThreshold.Streak
+			}
+			if masteryPct > 1 {
+				masteryPct = 1
+			}
+		}
+		timeLimit := 60.0
+		if c != nil {
+			timeLimit = c.MasteryThreshold.AvgTimeSeconds
+		}
+		lessonTitle := ""
+		if q.Lesson != nil {
+			lessonTitle = q.Lesson.Title
+		}
+		return tui.SessionMsg{
+			ConceptID:    conceptID,
+			Domain:       domain,
+			Subdomain:    subdomain,
+			Label:        q.ConceptName,
+			Question:     q.Question,
+			TimeLimit:    timeLimit,
+			MasteryPct:   masteryPct,
+			Streak:       streak,
+			StreakNeeded: streakNeeded,
+			Status:       status,
+			LessonTitle:  lessonTitle,
+		}
+	}
+
+	m.OnDiagStart = func() tui.DiagQuestionMsg {
+		if diagSession == nil || eng.IsDiagnosticComplete(diagSession) {
+			diagSession = eng.StartDiagnostic()
+			diagCount = 0
+		}
+		prob, cid, err := eng.NextDiagnosticQuestion(diagSession)
+		if err != nil || prob == nil {
+			return tui.DiagQuestionMsg{}
+		}
+		diagCount++
+		c := dag.Concept(cid)
+		label := cid
+		if c != nil {
+			label = c.Label
+		}
+		return tui.DiagQuestionMsg{
+			ConceptID:   cid,
+			ConceptName: label,
+			Question:    prob.Question,
+			Count:       diagCount,
+		}
+	}
+
+	m.OnDiagSubmit = func(conceptID, answer string, elapsed float64) tui.DiagFeedbackMsg {
+		prob := diagSession.LastProblem
+		correct := false
+		correctAnswer := ""
+		explanation := ""
+		if prob != nil {
+			c := dag.Concept(conceptID)
+			gt := grader.GradingNumeric
+			if c != nil {
+				gt = grader.GradingType(c.GradingType)
+			}
+			grResult := eng.GetGrader().Grade(gt, prob.Answer, answer)
+			correct = grResult.Correct
+			correctAnswer = prob.Answer
+			explanation = prob.Explanation
+		}
+		eng.SubmitDiagnosticAnswer(diagSession, conceptID, correct, elapsed < 10.0)
+		done := eng.IsDiagnosticComplete(diagSession)
+		return tui.DiagFeedbackMsg{
+			Correct:       correct,
+			UserAnswer:    answer,
+			CorrectAnswer: correctAnswer,
+			Explanation:   explanation,
+			Done:          done,
+		}
+	}
+
+	m.OnWelcome = func() tui.WelcomeStatsMsg {
 			if studentID == "" {
 				st, err := eng.CreateStudent("")
 				if err != nil {

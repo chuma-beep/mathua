@@ -10,7 +10,7 @@
       "linalg.vector.dot"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -24,7 +24,7 @@
       "topo.metric"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -39,7 +39,7 @@
       "calc.limit.continuity"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   }

@@ -10,7 +10,7 @@
       "prealg.eq.two_step"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -24,7 +24,7 @@
       "alg.linear.slope"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -38,7 +38,7 @@
       "alg.linear.slope_intercept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -52,7 +52,7 @@
       "alg.linear.slope_intercept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -66,7 +66,7 @@
       "alg.linear.slope_intercept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -81,7 +81,7 @@
       "prealg.expr.distribute"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -95,7 +95,7 @@
       "alg.eq.multi_step"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -109,7 +109,7 @@
       "alg.eq.vars_both_sides"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -124,7 +124,7 @@
       "alg.eq.multi_step"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -138,7 +138,7 @@
       "alg.ineq.multi_step"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -153,7 +153,7 @@
       "alg.linear.graph"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -167,7 +167,7 @@
       "alg.linear.slope_intercept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -181,7 +181,7 @@
       "alg.systems.substitution"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -195,7 +195,7 @@
       "alg.systems.elimination"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 30.0
     }
   },
@@ -209,7 +209,7 @@
       "prealg.expr.like_terms"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -223,7 +223,7 @@
       "alg.poly.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -238,7 +238,7 @@
       "prealg.expr.distribute"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -252,7 +252,7 @@
       "alg.poly.mult_mono"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -266,7 +266,7 @@
       "alg.poly.foil"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -281,7 +281,7 @@
       "arith.factor.gcf"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -296,7 +296,7 @@
       "alg.poly.foil"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -311,7 +311,7 @@
       "alg.poly.special"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -325,7 +325,7 @@
       "alg.factor.trinomial"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -339,7 +339,7 @@
       "alg.factor.trinomial"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -354,7 +354,7 @@
       "arith.sqrt.perfect"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -369,7 +369,7 @@
       "arith.sqrt.simplify"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -383,7 +383,7 @@
       "alg.quad.formula"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -398,7 +398,7 @@
       "geo.circle.parts"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -412,7 +412,7 @@
       "alg.conic.circle"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -426,7 +426,7 @@
       "alg.linear.slope_intercept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -440,7 +440,7 @@
       "alg.func.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -454,7 +454,7 @@
       "alg.func.notation"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -469,7 +469,7 @@
       "alg.linear.graph"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -484,7 +484,7 @@
       "alg.quad.formula"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -499,7 +499,7 @@
       "arith.exp.evaluate"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -513,7 +513,7 @@
       "alg.exp.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -527,7 +527,7 @@
       "alg.exp.evaluate"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -541,7 +541,7 @@
       "alg.log.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -555,7 +555,7 @@
       "alg.log.evaluate"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -569,7 +569,7 @@
       "alg.func.linear"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -584,7 +584,7 @@
       "alg.exp.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -598,7 +598,7 @@
       "alg.seq.arithmetic"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -612,7 +612,7 @@
       "alg.seq.geometric"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   }

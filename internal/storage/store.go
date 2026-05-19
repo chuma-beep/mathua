@@ -19,6 +19,7 @@ type Student struct {
 	XPTodayDate         string
 	DiagnosticCompleted bool
 	DailyXPGoal         int
+	Settings            string
 	CreatedAt           time.Time
 }
 
@@ -88,6 +89,8 @@ type Repository interface {
 	GetXP(studentID string) (total int, today int, err error)
 	SetDiagnosticCompleted(studentID string) error
 	SetDailyXPGoal(studentID string, goal int) error
+	GetSettings(studentID string) (string, error)
+	UpdateSettings(studentID string, settings string) error
 
 	Migrate() error
 	Close() error

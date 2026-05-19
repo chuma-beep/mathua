@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"sort"
 	"sync"
 	"time"
 
@@ -440,6 +441,10 @@ func (e *Engine) GetDAG() *concepts.DAG {
 	return e.dag
 }
 
+func (e *Engine) GetLessonLoader() *lessons.Loader {
+	return e.ll
+}
+
 func (e *Engine) GetLeaderboard() ([]leaderboard.Entry, error) {
 	return e.lboard.Weekly()
 }
@@ -545,6 +550,142 @@ func (e *Engine) WeaknessMap(studentID string) map[string]float64 {
 			continue
 		}
 		result[c.ID] = p.WeaknessScore
+	}
+	return result
+}
+
+func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Question, error) {
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return nil, fmt.Errorf("load progress: %w", err)
+	}
+
+	c := e.dag.Concept(conceptID)
+	if c == nil {
+		return nil, fmt.Errorf("concept %q not found", conceptID)
+	}
+
+	// Check prerequisites are met
+	for _, pid := range c.Prerequisites {
+		p, ok := progress[pid]
+		if !ok || p.Status != string(mastery.StatusMastered) {
+			return nil, fmt.Errorf("prerequisite %q not mastered", pid)
+		}
+	}
+
+	prob, err := e.registry.Generate(conceptID, 0.5)
+	if err != nil {
+		return nil, fmt.Errorf("generate problem: %w", err)
+	}
+
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
+	as := e.sessions[sessionID]
+	if as == nil {
+		as = &activeSession{}
+	}
+	as.conceptID = conceptID
+	as.conceptName = c.Label
+	as.expectedAnswer = prob.Answer
+	as.explanation = prob.Explanation
+	as.requiredStreak = c.MasteryThreshold.Streak
+	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
+	e.sessions[sessionID] = as
+
+	var lesson *lessons.Lesson
+	if e.ll != nil {
+		lesson = e.ll.Lesson(conceptID)
+	}
+
+	return &Question{
+		ConceptID:   conceptID,
+		ConceptName: c.Label,
+		Question:    prob.Question,
+		Lesson:      lesson,
+	}, nil
+}
+
+type ConceptTreeNode struct {
+	ID           string  `json:"id"`
+	Label        string  `json:"label"`
+	Unlocked     bool    `json:"unlocked"`
+	MasteryPct   float64 `json:"mastery_pct"`
+	Streak       int     `json:"streak"`
+	Status       string  `json:"status"`
+}
+
+type SubdomainNode struct {
+	Name     string            `json:"name"`
+	Concepts []ConceptTreeNode `json:"concepts"`
+}
+
+type DomainNode struct {
+	Name       string          `json:"name"`
+	Subdomains []SubdomainNode `json:"subdomains"`
+}
+
+func (e *Engine) ConceptTree(studentID string) []DomainNode {
+	progress, _ := e.repo.GetAllProgress(studentID)
+	domains := make(map[string]map[string][]ConceptTreeNode)
+	domainOrder := make([]string, 0)
+	domainSeen := make(map[string]bool)
+
+	for _, c := range e.dag.Order() {
+		if !domainSeen[c.Domain] {
+			domainSeen[c.Domain] = true
+			domainOrder = append(domainOrder, c.Domain)
+		}
+		if domains[c.Domain] == nil {
+			domains[c.Domain] = make(map[string][]ConceptTreeNode)
+		}
+
+		unlocked := true
+		for _, pid := range c.Prerequisites {
+			p, ok := progress[pid]
+			if !ok || p.Status != string(mastery.StatusMastered) {
+				unlocked = false
+				break
+			}
+		}
+
+		masteryPct := 0.0
+		streak := 0
+		status := "UNSEEN"
+		if p, ok := progress[c.ID]; ok {
+			streak = p.Streak
+			status = p.Status
+			if c.MasteryThreshold.Streak > 0 {
+				masteryPct = float64(streak) / float64(c.MasteryThreshold.Streak)
+				if masteryPct > 1 {
+					masteryPct = 1
+				}
+			}
+		}
+
+		domains[c.Domain][c.Subdomain] = append(domains[c.Domain][c.Subdomain], ConceptTreeNode{
+			ID:         c.ID,
+			Label:      c.Label,
+			Unlocked:   unlocked,
+			MasteryPct: masteryPct,
+			Streak:     streak,
+			Status:     status,
+		})
+	}
+
+	var result []DomainNode
+	for _, name := range domainOrder {
+		d := domains[name]
+		var subs []SubdomainNode
+		subKeys := make([]string, 0, len(d))
+		for k := range d {
+			subKeys = append(subKeys, k)
+		}
+		sort.Strings(subKeys)
+		for _, sk := range subKeys {
+			subs = append(subs, SubdomainNode{Name: sk, Concepts: d[sk]})
+		}
+		result = append(result, DomainNode{Name: name, Subdomains: subs})
 	}
 	return result
 }

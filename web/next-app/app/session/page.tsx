@@ -11,10 +11,13 @@ import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import Pipeline from '../../components/Pipeline'
 import {
+  getConfig,
   startSession,
   startSessionName,
   submitAnswer,
   getScores,
+  getSettings,
+  updateSettings,
   startGoalDiagnosticName,
   getGoalPlan,
   setDailyXPGoal,
@@ -46,8 +49,9 @@ export default function SessionPage() {
     xp_total: 0, xp_today: 0, daily_xp_goal: 150,
   })
   const [error, setError] = useState('')
-  const [elapsed, setElapsed] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [showTimer, setShowTimer] = useState(false)
+  const [elapsed, setElapsed] = useState(0)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
 
@@ -65,26 +69,44 @@ export default function SessionPage() {
   const guestStudentID = useRef('')
 
   useEffect(() => {
-    const u = getUserInfo()
-    if (u) {
-      setUser(u)
-      setScreen('practice')
-      beginSessionAuth()
-    } else {
-      setScreen('name')
-      setLoading(false)
-    }
+    getConfig()
+      .then(config => {
+        if (!config.auth_enabled) {
+          setScreen('name')
+          setLoading(false)
+          return
+        }
+        const u = getUserInfo()
+        if (u) {
+          setUser(u)
+          setScreen('practice')
+          getSettings().then(s => setShowTimer(s.show_timer ?? false)).catch(() => {})
+          beginSessionAuth()
+        } else {
+          setScreen('name')
+          setLoading(false)
+        }
+      })
+      .catch(() => {
+        setScreen('name')
+        setLoading(false)
+      })
   }, [])
 
   useEffect(() => {
     if (screen === 'practice') {
       startRef.current = Date.now()
+    }
+  }, [screen, question])
+
+  useEffect(() => {
+    if (screen === 'practice' && showTimer) {
       timerRef.current = setInterval(() => {
         setElapsed((Date.now() - startRef.current) / 1000)
       }, 100)
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [screen, question])
+  }, [screen, showTimer])
 
   const beginSessionAuth = useCallback(async () => {
     setError('')
@@ -98,7 +120,9 @@ export default function SessionPage() {
       const s = await getScores(res.student_id).catch(() => null)
       if (s) setScores(s)
     } catch {
-      setError('Could not connect to server. Is the backend running?')
+      clearToken()
+      setScreen('name')
+      setError('Session expired. Please log in again.')
     } finally {
       setLoading(false)
     }
@@ -127,7 +151,6 @@ export default function SessionPage() {
       const res = await submitAnswer(sessionID, answer.trim(), e)
       setLastResult(res.result)
       setAnswer('')
-      if (timerRef.current) clearInterval(timerRef.current)
       setScreen('feedback')
       // Pre-load next question
       if (res.next_question) {
@@ -291,24 +314,35 @@ export default function SessionPage() {
             <p className="text-mathua-secondary text-sm text-center mt-2 mb-4">
               Sign up or login to save your progress permanently.
             </p>
-            <div className="flex gap-3 mt-6">
+            <div className="mt-6">
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && beginSessionName()}
                 placeholder="Your name"
-                className="flex-1  border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                className="w-full border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
               />
-              <button
-                onClick={startGuestDiagnostic}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
-              >
-                Start
-              </button>
+              <div className="flex flex-col gap-3 mt-4">
+                <button
+                  onClick={beginSessionName}
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-4 font-medium text-sm"
+                >
+                  Learning Mode →
+                </button>
+                <button
+                  onClick={startGuestDiagnostic}
+                  className="border border-mathua-secondary text-mathua-secondary hover:bg-mathua-secondary hover:text-white rounded-none h-12 px-4 font-medium text-sm"
+                >
+                  Take a Diagnostic →
+                </button>
+              </div>
             </div>
-            <div className="mt-4 text-center">
-              <Link href="/login" className="text-mathua-secondary text-sm hover:text-mathua-blue">
+            <div className="mt-6 text-center">
+              <Link href="/study" className="block text-mathua-blue text-sm hover:text-mathua-blue-hover">
+                Browse study lessons →
+              </Link>
+              <Link href="/login" className="block text-mathua-secondary text-sm hover:text-mathua-blue">
                 Have an account? Sign in
               </Link>
             </div>
@@ -409,8 +443,26 @@ export default function SessionPage() {
                     </div>
                   </div>
                   <div>
-                    <span className="font-mono text-[10px] uppercase text-mathua-muted">Time</span>
-                    <div className="font-mono text-2xl text-mathua-primary mt-1">{elapsed.toFixed(1)}s</div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Timer</span>
+                      <button
+                        onClick={() => {
+                          const next = !showTimer
+                          setShowTimer(next)
+                          updateSettings({ show_timer: next }).catch(() => {})
+                        }}
+                        className={`font-mono text-[10px] px-2 py-0.5 border transition-colors ${
+                          showTimer
+                            ? 'bg-mathua-blue text-white border-mathua-blue'
+                            : 'text-mathua-muted border-mathua-border hover:text-mathua-primary'
+                        }`}
+                      >
+                        {showTimer ? 'ON' : 'OFF'}
+                      </button>
+                    </div>
+                    {showTimer && (
+                      <div className="font-mono text-2xl text-mathua-primary mt-2">{elapsed.toFixed(1)}s</div>
+                    )}
                   </div>
                   <div>
                     <span className="font-mono text-[10px] uppercase text-mathua-muted">Mastered total</span>

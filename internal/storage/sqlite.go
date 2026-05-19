@@ -52,6 +52,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN diagnostic_completed INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 150",
+		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 	}
@@ -79,39 +80,39 @@ func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
 	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, created_at) VALUES (?, ?, ?)",
+		"INSERT INTO students (id, name, settings, created_at) VALUES (?, ?, '{}', ?)",
 		id, name, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create student: %w", err)
 	}
-	return &Student{ID: id, Name: name, CreatedAt: now}, nil
+	return &Student{ID: id, Name: name, Settings: "{}", CreatedAt: now}, nil
 }
 
 func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
 	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, username, password_hash, created_at) VALUES (?, ?, ?, ?, ?)",
+		"INSERT INTO students (id, name, username, password_hash, settings, created_at) VALUES (?, ?, ?, ?, '{}', ?)",
 		id, name, username, passwordHash, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create user: %w", err)
 	}
-	return &Student{ID: id, Name: name, Username: username, PasswordHash: passwordHash, CreatedAt: now}, nil
+	return &Student{ID: id, Name: name, Username: username, PasswordHash: passwordHash, Settings: "{}", CreatedAt: now}, nil
 }
 
-func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, created_at FROM students WHERE id = ?", id)
+func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) {
 	var st Student
-	var username, passwordHash, courseID, xpDate sql.NullString
+	var username, passwordHash, courseID, xpDate, settings sql.NullString
 	var xpTotal, xpToday, diagCompleted, dailyGoal sql.NullInt64
 	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &createdAt); err != nil {
+	err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &settings, &createdAt)
+	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
-		return nil, fmt.Errorf("get student: %w", err)
+		return nil, err
 	}
 	st.Username = username.String
 	st.PasswordHash = passwordHash.String
@@ -127,40 +128,22 @@ func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
 	if dailyGoal.Valid {
 		st.DailyXPGoal = int(dailyGoal.Int64)
 	}
+	st.Settings = settings.String
+	if st.Settings == "" {
+		st.Settings = "{}"
+	}
 	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
 	return &st, nil
 }
 
+func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at FROM students WHERE id = ?", id)
+	return scanStudent(row)
+}
+
 func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, created_at FROM students WHERE username = ?", username)
-	var st Student
-	var un, ph, cid, xpDate sql.NullString
-	var xpTotal, xpToday, diagCompleted, dailyGoal sql.NullInt64
-	var createdAt string
-	if err := row.Scan(&st.ID, &st.Name, &un, &ph, &cid, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &createdAt); err != nil {
-		if err == sql.ErrNoRows {
-			return nil, nil
-		}
-		return nil, fmt.Errorf("find by username: %w", err)
-	}
-	st.Username = un.String
-	st.PasswordHash = ph.String
-	st.CourseID = cid.String
-	if xpTotal.Valid {
-		st.XPTotal = int(xpTotal.Int64)
-	}
-	if xpToday.Valid {
-		st.XPToday = int(xpToday.Int64)
-	}
-	st.XPTodayDate = xpDate.String
-	if diagCompleted.Valid {
-		st.DiagnosticCompleted = diagCompleted.Int64 == 1
-	}
-	if dailyGoal.Valid {
-		st.DailyXPGoal = int(dailyGoal.Int64)
-	}
-	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
-	return &st, nil
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at FROM students WHERE username = ?", username)
+	return scanStudent(row)
 }
 
 func (s *SQLiteStore) SetCourseID(studentID, courseID string) error {
@@ -214,6 +197,29 @@ func (s *SQLiteStore) SetDailyXPGoal(studentID string, goal int) error {
 	_, err := s.db.Exec("UPDATE students SET daily_xp_goal = ? WHERE id = ?", goal, studentID)
 	if err != nil {
 		return fmt.Errorf("set daily xp goal: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) GetSettings(studentID string) (string, error) {
+	row := s.db.QueryRow("SELECT settings FROM students WHERE id = ?", studentID)
+	var settings string
+	if err := row.Scan(&settings); err != nil {
+		if err == sql.ErrNoRows {
+			return "{}", nil
+		}
+		return "", fmt.Errorf("get settings: %w", err)
+	}
+	if settings == "" {
+		return "{}", nil
+	}
+	return settings, nil
+}
+
+func (s *SQLiteStore) UpdateSettings(studentID string, settings string) error {
+	_, err := s.db.Exec("UPDATE students SET settings = ? WHERE id = ?", settings, studentID)
+	if err != nil {
+		return fmt.Errorf("update settings: %w", err)
 	}
 	return nil
 }

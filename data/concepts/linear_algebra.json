@@ -10,7 +10,7 @@
       "arith.neg.number_line"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -24,7 +24,7 @@
       "linalg.vector.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -39,7 +39,7 @@
       "arith.mult.double"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -53,7 +53,7 @@
       "linalg.vector.add"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -67,7 +67,7 @@
       "linalg.matrix.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -82,7 +82,7 @@
       "linalg.vector.dot"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -96,7 +96,7 @@
       "linalg.matrix.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -110,7 +110,7 @@
       "linalg.matrix.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -124,7 +124,7 @@
       "linalg.det.2x2"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -139,7 +139,7 @@
       "alg.systems.elimination"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -154,7 +154,7 @@
       "alg.systems.substitution"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 22.0
     }
   },
@@ -169,7 +169,7 @@
       "alg.quad.formula"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -183,7 +183,7 @@
       "linalg.eigen.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -198,7 +198,7 @@
       "alg.func.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 22.0
     }
   },
@@ -213,7 +213,7 @@
       "linalg.det.2x2"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -227,7 +227,7 @@
       "linalg.span"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   }

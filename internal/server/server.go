@@ -56,6 +56,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/answer", logRequest(cors(s.authMiddleware(s.handleAnswer))))
 	mux.HandleFunc("/api/progress/", logRequest(cors(s.authMiddleware(s.handleProgress))))
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.authMiddleware(s.handleScores))))
+	mux.HandleFunc("/api/config", logRequest(cors(s.handleConfig)))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
@@ -68,6 +69,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.authMiddleware(s.handleGoalPlan))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
+	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
+	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 }
 
@@ -248,6 +251,13 @@ func (s *Server) handleScores(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, scores)
+}
+
+// GET /api/config
+func (s *Server) handleConfig(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, map[string]interface{}{
+		"auth_enabled": s.auth != nil,
+	})
 }
 
 // GET /api/graph
@@ -654,6 +664,36 @@ func (s *Server) handleWeaknesses(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]interface{}{"by_domain": byDomain})
 }
 
+// GET /api/lessons
+func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	ll := s.eng.GetLessonLoader()
+	if ll == nil {
+		writeJSON(w, map[string]interface{}{"lessons": []interface{}{}})
+		return
+	}
+	byDomain := ll.LessonsByDomain()
+	type lessonInfo struct {
+		Title    string   `json:"title"`
+		Body     string   `json:"body"`
+		Concepts []string `json:"concepts"`
+	}
+	result := make(map[string][]lessonInfo)
+	for domain, lessons := range byDomain {
+		for _, l := range lessons {
+			result[domain] = append(result[domain], lessonInfo{
+				Title:    l.Title,
+				Body:     l.Body,
+				Concepts: l.Concepts,
+			})
+		}
+	}
+	writeJSON(w, map[string]interface{}{"lessons": result})
+}
+
 // POST /api/goals/xp  Body: { "goal": 200 }
 func (s *Server) handleSetDailyXPGoal(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -677,6 +717,44 @@ func (s *Server) handleSetDailyXPGoal(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, map[string]interface{}{"goal": req.Goal})
+}
+
+// GET|PUT /api/settings
+func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	switch r.Method {
+	case http.MethodGet:
+		settings, err := s.repo.GetSettings(studentID)
+		if err != nil {
+			writeError(w, "failed to get settings", 500)
+			return
+		}
+		var parsed interface{}
+		json.Unmarshal([]byte(settings), &parsed)
+		writeJSON(w, parsed)
+	case http.MethodPut:
+		var req map[string]interface{}
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			writeError(w, "invalid request", 400)
+			return
+		}
+		bytes, err := json.Marshal(req)
+		if err != nil {
+			writeError(w, "failed to encode settings", 500)
+			return
+		}
+		if err := s.repo.UpdateSettings(studentID, string(bytes)); err != nil {
+			writeError(w, "failed to update settings", 500)
+			return
+		}
+		writeJSON(w, req)
+	default:
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+	}
 }
 
 // GET /api/courses
