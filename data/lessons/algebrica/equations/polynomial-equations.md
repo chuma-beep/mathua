@@ -3,7 +3,7 @@
 
 ## Definition
 
-A polynomial equation is an equation in which one side consists of a [polynomial](../polynomials) expression and the other is zero. The general form of such an equation is the following:
+A polynomial equation is an equation in which one side consists of a polynomial expression and the other is zero. The general form of such an equation is the following:
 
 \\[
 a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = 0
@@ -12,16 +12,16 @@ a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = 0
 In this expression:
 
 + \\(n\\) is a non-negative integer called the degree of the equation.
-+ The coefficients \\(a_0, a_1, \ldots, a_n\\) are real or [complex numbers](../complex-numbers-introduction/).
++ The coefficients \\(a_0, a_1, \ldots, a_n\\) are real or complex numbers.
 + The leading coefficient \\(a_n\\) is assumed to be non-zero.
 + The unknown \\(x\\) is the variable for which a solution is sought.
 
-A value \\(x_0\\) that satisfies the equation is called a [root](../roots-of-a-polynomial/), or a solution, of the polynomial equation.
+A value \\(x_0\\) that satisfies the equation is called a root, or a solution, of the polynomial equation.
 
 - - -
 ## Degree and classification
 
-The degree of a polynomial equation determines much of its behaviour and governs how many solutions one may expect to find. A polynomial equation of degree one is called a [linear equation](../linear-equations/). Its general form is the following:
+The degree of a polynomial equation determines much of its behaviour and governs how many solutions one may expect to find. A polynomial equation of degree one is called a linear equation. Its general form is the following:
 
 \\[
 a_1 x + a_0 = 0
@@ -33,13 +33,13 @@ Since \\(a_1 \neq 0\\), this equation has exactly one real solution, which is ob
 x = -\frac{a_0}{a_1}
 \\]
 
-A polynomial equation of degree two is called a [quadratic equation](../quadratic-equations/). Its general form is the following:
+A polynomial equation of degree two is called a quadratic equation. Its general form is the following:
 
 \\[
 a_2 x^2 + a_1 x + a_0 = 0
 \\]
 
-The solutions of a quadratic equation are described by the [quadratic formula](../quadratic-formula/), which expresses them in terms of the discriminant \\(\Delta = a_1^2 - 4 a_2 a_0\\). A polynomial equation of degree three is called a cubic equation, and one of degree four is called a quartic equation.
+The solutions of a quadratic equation are described by the quadratic formula, which expresses them in terms of the discriminant \\(\Delta = a_1^2 - 4 a_2 a_0\\). A polynomial equation of degree three is called a cubic equation, and one of degree four is called a quartic equation.
 
 > Beyond degree four, equations are generally referred to by their numerical degree: degree-five equations, degree-six equations, and so forth.
 
@@ -48,7 +48,7 @@ The solutions of a quadratic equation are described by the [quadratic formula](.
 
 The existence and count of roots of a polynomial equation are governed by the Fundamental Theorem of Algebra, which guarantees that every polynomial equation of degree \\(n \geq 1\\) with complex coefficients has exactly \\(n\\) roots in \\(\mathbb{C}\\), counted with multiplicity.
 
-The implications of this theorem, including the factorisation into linear factors over \\(\mathbb{C}\\) and the conjugate-pair structure of [complex roots](../quadratic-equations-with-complex-solutions/) of real polynomials, are discussed in the entry on [roots of a polynomial](../roots-of-a-polynomial/).
+The implications of this theorem, including the factorisation into linear factors over \\(\mathbb{C}\\) and the conjugate-pair structure of complex roots of real polynomials, are discussed in the entry on roots of a polynomial.
 
 - - -
 ## Multiplicity of roots
@@ -58,12 +58,12 @@ A root \\(x_0\\) is said to have multiplicity \\(m\\) if the factor \\((x - x_0)
 + A root of multiplicity one is called a simple root.
 + A root of multiplicity two is called a double root, and so on.
 
-The multiplicity of a root has a [geometric interpretation](../roots-of-a-polynomial/): a simple root corresponds to a transversal crossing of the graph of the polynomial with the horizontal axis, while a root of even multiplicity corresponds to a tangency point where the graph touches but does not cross the axis.
+The multiplicity of a root has a geometric interpretation: a simple root corresponds to a transversal crossing of the graph of the polynomial with the horizontal axis, while a root of even multiplicity corresponds to a tangency point where the graph touches but does not cross the axis.
 
 - - -
 ## Rational root theorem
 
-When the coefficients of a polynomial equation are [integers](../integers/), it is possible to identify all candidates for rational roots without solving the equation directly. Suppose the equation is the following.
+When the coefficients of a polynomial equation are integers, it is possible to identify all candidates for rational roots without solving the equation directly. Suppose the equation is the following.
 
 \\[
 a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 = 0
@@ -110,7 +110,7 @@ x_1 x_2 \cdots x_n &= (-1)^n c_0
 \end{align}
 \\]
 
-In other words, each coefficient is an elementary symmetric polynomial in the roots. The derivation and a detailed discussion of the quadratic case are given in the entry on [trinomials](../trinomials/).
+In other words, each coefficient is an elementary symmetric polynomial in the roots. The derivation and a detailed discussion of the quadratic case are given in the entry on trinomials.
 
 - - -
 ## Reduction to a polynomial equation
@@ -121,7 +121,7 @@ Many equations that do not appear polynomial at first sight can be reduced to po
 x + \frac{1}{x} = 3
 \\]
 
-becomes polynomial upon multiplying both sides by \\(x\\), yielding \\(x^2 - 3x + 1 = 0\\). An [irrational equation](../irrational-equations/) such as:
+becomes polynomial upon multiplying both sides by \\(x\\), yielding \\(x^2 - 3x + 1 = 0\\). An irrational equation such as:
 
 \\[
 \sqrt{x + 1} + x = 5
@@ -153,14 +153,14 @@ The value \\(x = 8\\) is an extraneous solution introduced by the squaring step.
 
 In both cases the reduction introduces constraints that must be checked: multiplying by \\(x\\) requires \\(x \neq 0\\), and squaring may introduce extraneous solutions that do not satisfy the original equation.
 
-The reduction technique and the verification of solutions are treated in detail in the entries on [rational equations](../rational-equations/) and [irrational equations](../irrational-equations/).
+The reduction technique and the verification of solutions are treated in detail in the entries on rational equations and irrational equations.
 
 - - -
 ## Solvability by radicals
 
 For polynomial equations of degree up to four, explicit formulas expressing the roots in terms of the coefficients by means of arithmetic operations and radicals are known. The quadratic formula handles degree two. Analogous but considerably more involved formulas, due to Cardano and Ferrari, handle degrees three and four respectively.
 
-For degree five and beyond, no such general formula exists. This result, established rigorously by Abel and [Ruffini](../syntetic-division/) and placed within a definitive theoretical framework by Galois, is one of the landmark theorems of modern algebra.
+For degree five and beyond, no such general formula exists. This result, established rigorously by Abel and Ruffini and placed within a definitive theoretical framework by Galois, is one of the landmark theorems of modern algebra.
 
 The Galois group of a general polynomial of degree five or higher is not solvable, which rules out any solution expressible solely by radicals. Particular equations of high degree may still be solvable by radicals if their Galois group happens to be solvable, but no universal formula of that type can exist.
 
@@ -195,4 +195,4 @@ When an analytic solution is unavailable or impractical, polynomial equations ar
 x_{k+1} = x_k - \frac{p(x_k)}{p'(x_k)}
 \\]
 
-Starting from an initial estimate \\(x_0\\) sufficiently close to a simple root, the [sequence](../sequences/) \\((x_k)\\) converges quadratically to that root, meaning that the number of correct decimal digits roughly doubles with each iteration. Other methods, such as the bisection method and Brent's method, sacrifice speed for guaranteed convergence and are preferred when robustness is a priority.
+Starting from an initial estimate \\(x_0\\) sufficiently close to a simple root, the sequence \\((x_k)\\) converges quadratically to that root, meaning that the number of correct decimal digits roughly doubles with each iteration. Other methods, such as the bisection method and Brent's method, sacrifice speed for guaranteed convergence and are preferred when robustness is a priority.

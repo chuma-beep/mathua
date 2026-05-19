@@ -3,7 +3,7 @@
 
 ## Definition
 
-Let \\(p(x)\\) be a [polynomial](../polynomials/) with coefficients in a field \\(\mathbb{F}\\), typically \\(\mathbb{R}\\) or \\(\mathbb{C}\\). A root, or zero, of \\(p\\) is any element \\(r \in \mathbb{F}\\) such that:
+Let \\(p(x)\\) be a polynomial with coefficients in a field \\(\mathbb{F}\\), typically \\(\mathbb{R}\\) or \\(\mathbb{C}\\). A root, or zero, of \\(p\\) is any element \\(r \in \mathbb{F}\\) such that:
 
 \\[
 p\(r\) = 0
@@ -19,9 +19,9 @@ with \\(a_n \neq 0\\), the element \\(r\\) is a root precisely when the substitu
 
 For a polynomial \\(p : \mathbb{R} \to \mathbb{R}\\), the real roots are the \\(x\\)-intercepts of its graph. The multiplicity of a root affects the graph locally. At a simple root, of multiplicity one, the graph crosses the \\(x\\)-axis cleanly and is not tangent to it.
 
-For a root of even multiplicity, the graph touches the \\(x\\)-axis but does not cross it. Since \\((x - r)^m \geq 0\\) for even \\(m\\), the polynomial does not [change sign](../sign-analysis-in-inequalities/) at \\(r\\), and the graph bounces back to the same side of the axis.
+For a root of even multiplicity, the graph touches the \\(x\\)-axis but does not cross it. Since \\((x - r)^m \geq 0\\) for even \\(m\\), the polynomial does not change sign at \\(r\\), and the graph bounces back to the same side of the axis.
 
-For roots of odd multiplicity greater than one, that is \\(m \geq 3\\), the graph crosses the axis but appears flatter at the intercept. The flattening becomes more pronounced as the multiplicity increases, giving the curve an [inflexion-like](../maximum-minimum-and-inflection-points/) appearance.
+For roots of odd multiplicity greater than one, that is \\(m \geq 3\\), the graph crosses the axis but appears flatter at the intercept. The flattening becomes more pronounced as the multiplicity increases, giving the curve an inflexion-like appearance.
 
 - - -
 
@@ -31,7 +31,7 @@ These properties follow from the local factorization:
 p(x) = (x - r)^m q(x)
 \\]
 
-with \\(q\(r\) \neq 0\\). Since \\(q\\) is [continuous](../continuous-functions/) and nonzero at \\(r\\), it maintains a constant sign in some neighborhood of \\(r\\), so the sign of \\(p(x)\\) near \\(r\\) is determined entirely by the factor \\((x - r)^m\\).
+with \\(q\(r\) \neq 0\\). Since \\(q\\) is continuous and nonzero at \\(r\\), it maintains a constant sign in some neighborhood of \\(r\\), so the sign of \\(p(x)\\) near \\(r\\) is determined entirely by the factor \\((x - r)^m\\).
 
 - When \\(m\\) is odd, \\((x - r)^m\\) changes sign as \\(x\\) passes through \\(r\\), so \\(p\\) crosses the axis.
 - When \\(m\\) is even, \\((x - r)^m \geq 0\\) on both sides of \\(r\\), so \\(p\\) does not change sign and the graph returns to the same side of the axis.
@@ -59,7 +59,7 @@ p(x) = a_n (x - r_1)^{m_1} (x - r_2)^{m_2} \cdots (x - r_k)^{m_k}
 
 with \\(m_1 + m_2 + \cdots + m_k = n\\). Over the field of complex numbers, the fundamental theorem of algebra ensures that this complete decomposition always exists.
 
-The multiplicity admits a differential characterization in terms of the [derivatives](../derivatives/) of \\(p(x)\\). The element \\(r\\) is a root of multiplicity \\(m\\) of \\(p(x)\\) if and only if:
+The multiplicity admits a differential characterization in terms of the derivatives of \\(p(x)\\). The element \\(r\\) is a root of multiplicity \\(m\\) of \\(p(x)\\) if and only if:
 
 \\[
 p\(r\) = p'\(r\) = p''\(r\) = \cdots = p^{(m-1)}\(r\) = 0
@@ -84,20 +84,20 @@ Given a polynomial with integer coefficients:
 p(x) = a_n x^n + \cdots + a_0 \in \mathbb{Z}[x]
 \\]
 
-the [rational root theorem](../polynomial-equations/) identifies a finite set of candidates for rational roots. If \\(r = s/q\\) in lowest terms, with \\(s, q \in \mathbb{Z}\\) and \\(q > 0\\), is a root of \\(p(x)\\), then necessarily \\(s \mid a_0\\) and \\(q \mid a_n\\).
+the rational root theorem identifies a finite set of candidates for rational roots. If \\(r = s/q\\) in lowest terms, with \\(s, q \in \mathbb{Z}\\) and \\(q > 0\\), is a root of \\(p(x)\\), then necessarily \\(s \mid a_0\\) and \\(q \mid a_n\\).
 
-The theorem reduces the search for rational roots to a finite collection of fractions, each of which can be verified by direct substitution or [synthetic division](../synthetic-division/).
+The theorem reduces the search for rational roots to a finite collection of fractions, each of which can be verified by direct substitution or synthetic division.
 
 - - -
 ## The fundamental theorem of algebra
 
-In the field of [complex numbers](../complex-numbers-introduction/) \\(\mathbb{C}\\), every non-constant polynomial has at least one root. Applying the factor theorem repeatedly, any polynomial of degree \\(n \geq 1\\) decomposes completely into linear factors over \\(\mathbb{C}\\):
+In the field of complex numbers \\(\mathbb{C}\\), every non-constant polynomial has at least one root. Applying the factor theorem repeatedly, any polynomial of degree \\(n \geq 1\\) decomposes completely into linear factors over \\(\mathbb{C}\\):
 
 \\[
 p(x) = a_n (x - r_1)^{m_1}(x - r_2)^{m_2} \cdots (x - r_k)^{m_k}
 \\]
 
-where \\(m_1 + m_2 + \cdots + m_k = n\\). Counting roots with their multiplicities, a degree-\\(n\\) polynomial has exactly \\(n\\) roots in \\(\mathbb{C}\\). This property characterizes \\(\mathbb{C}\\) as an algebraically closed [field](../fields/). Over \\(\mathbb{R}\\), the complex roots of a real polynomial occur in conjugate pairs. If \\(r = \alpha + \beta i\\) with \\(\beta \neq 0\\) is a root of \\(p \in \mathbb{R}[x]\\), then \\(\bar{r} = \alpha - \beta i\\) is also a root, and the two factors combine into an irreducible quadratic over \\(\mathbb{R}\\):
+where \\(m_1 + m_2 + \cdots + m_k = n\\). Counting roots with their multiplicities, a degree-\\(n\\) polynomial has exactly \\(n\\) roots in \\(\mathbb{C}\\). This property characterizes \\(\mathbb{C}\\) as an algebraically closed field. Over \\(\mathbb{R}\\), the complex roots of a real polynomial occur in conjugate pairs. If \\(r = \alpha + \beta i\\) with \\(\beta \neq 0\\) is a root of \\(p \in \mathbb{R}[x]\\), then \\(\bar{r} = \alpha - \beta i\\) is also a root, and the two factors combine into an irreducible quadratic over \\(\mathbb{R}\\):
 
 \\[
 (x - r)(x - \bar{r}) = x^2 - 2\alpha x + (\alpha^2 + \beta^2)
@@ -125,7 +125,7 @@ r_1 + r_2 + \cdots + r_n = \frac{-a_{n-1}}{a_n}
 r_1 r_2 \cdots r_n = \frac{(-1)^n a_0}{a_n}
 \\]
 
-The quadratic case is treated in detail in the page on [trinomials](../trinomials/).
+The quadratic case is treated in detail in the page on trinomials.
 
 - - -
 ## Finding roots: an overview of methods
@@ -146,6 +146,6 @@ The quantity \\(\Delta = b^2 - 4ac\\) is the discriminant.
 
 - - -
 
-The roots of a polynomial are precisely the solutions to the corresponding [polynomial equation](../polynomial-equations/) \\(p(x) = 0\\), and the methods outlined above apply directly to both settings.
+The roots of a polynomial are precisely the solutions to the corresponding polynomial equation \\(p(x) = 0\\), and the methods outlined above apply directly to both settings.
 
-An important application of polynomial roots occurs in [partial fraction decomposition](../partial-fraction-decomposition/), where a rational function \\(P(x)/Q(x)\\) is expressed as a sum of simpler terms. The structure of these terms is determined by the roots and multiplicities of the denominator \\(Q(x)\\). Simple roots of \\(Q(x)\\) correspond to distinct linear factors, whereas repeated roots result in sequences of terms with increasing order.
+An important application of polynomial roots occurs in partial fraction decomposition, where a rational function \\(P(x)/Q(x)\\) is expressed as a sum of simpler terms. The structure of these terms is determined by the roots and multiplicities of the denominator \\(Q(x)\\). Simple roots of \\(Q(x)\\) correspond to distinct linear factors, whereas repeated roots result in sequences of terms with increasing order.

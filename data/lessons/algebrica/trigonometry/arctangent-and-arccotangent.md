@@ -3,14 +3,14 @@
 
 ## Arctangent definition
 
-In the [unit circle](../unit-circle/), the [tangent](../tangent-and-cotangent) of an angle \\( \theta \\) can be visualized as the length of the segment tangent to the circle at the point where the terminal side meets it, measured along the vertical tangent line at \\( (1, 0) \\). The arctangent performs the reverse process: given a [real number](../properties-of-real-numbers/) \\( x \\), it returns the unique angle \\( \theta \\) in the interval \\( \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). This geometric relationship illustrates how the tangent and arctangent are interconnected as a function and its inverse, each reversing the role of angle and ratio.
+In the unit circle, the tangent of an angle \\( \theta \\) can be visualized as the length of the segment tangent to the circle at the point where the terminal side meets it, measured along the vertical tangent line at \\( (1, 0) \\). The arctangent performs the reverse process: given a real number \\( x \\), it returns the unique angle \\( \theta \\) in the interval \\( \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). This geometric relationship illustrates how the tangent and arctangent are interconnected as a function and its inverse, each reversing the role of angle and ratio.
 
-By relating the arctangent to the concept of a [function](../functions), we can formally express the relationship between tangent and arctangent as follows:
+By relating the arctangent to the concept of a function, we can formally express the relationship between tangent and arctangent as follows:
 
 \\[\arctan(x) = \theta \quad \iff \quad \tan(\theta) = x\\]
 \\[ \theta \in \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)\\]
 
-The arctangent establishes a correspondence between a real number \\( x \\) and the unique angle \\( \theta \\) in the interval \\( \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). The restriction to this interval is necessary because the tangent function is periodic and therefore not injective over its full domain. By confining it to \\( \left(-\pi/2, \pi/2\right) \\), one obtains a strictly increasing bijection, which admits a well-defined [inverse](../inverse-function/). This reciprocal relationship is summarized by the identity:
+The arctangent establishes a correspondence between a real number \\( x \\) and the unique angle \\( \theta \\) in the interval \\( \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). The restriction to this interval is necessary because the tangent function is periodic and therefore not injective over its full domain. By confining it to \\( \left(-\pi/2, \pi/2\right) \\), one obtains a strictly increasing bijection, which admits a well-defined inverse. This reciprocal relationship is summarized by the identity:
 
 \\[
 \tan(\arctan(x)) = x \quad \forall \\, x \in \mathbb{R}
@@ -20,7 +20,7 @@ The arctangent establishes a correspondence between a real number \\( x \\) and 
 
 + When \\( x \\) is negative, the angle lies in the fourth quadrant; and when \\( x = 0 \\), the angle is zero.
 
-As \\( x \\) grows without bound, the corresponding angle \\( \theta \\) approaches the [asymptotic](../asymptotes/) values:
+As \\( x \\) grows without bound, the corresponding angle \\( \theta \\) approaches the asymptotic values:
 
 \\[\lim_{x \to +\infty} \arctan(x) = \frac{\pi}{2}\\]
 \\[ \lim_{x \to -\infty} \arctan(x) = -\frac{\pi}{2}\\]
@@ -49,25 +49,25 @@ x &\to +\infty &\quad& \arctan(x) \to \pi/2
 - - -
 ## Arctangent function
 
-The arctangent function \\( f(x) = \arctan(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). Its graph is a continuous, strictly increasing curve that admits two horizontal asymptotes, namely \\( y = -\pi/2 \\) and \\( y = \pi/2 \\). The function is the [inverse](../inverse-function/) of the tangent restricted to its principal domain \\( \left(-\pi/2, \pi/2\right) \\), over which the tangent is strictly increasing and bijective.
+The arctangent function \\( f(x) = \arctan(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). Its graph is a continuous, strictly increasing curve that admits two horizontal asymptotes, namely \\( y = -\pi/2 \\) and \\( y = \pi/2 \\). The function is the inverse of the tangent restricted to its principal domain \\( \left(-\pi/2, \pi/2\right) \\), over which the tangent is strictly increasing and bijective.
 
 + Domain: \\( x \in \mathbb{R} \\)
 + Range: \\( y \in \left(-\frac{\pi}{2},\\, \frac{\pi}{2}\right) \\)
-+ The arctangent is an [odd function](../even-and-odd-functions/), meaning that:
++ The arctangent is an odd function, meaning that:
   \\[
   \arctan(-x) = -\arctan(x) \quad \forall \\, x \in \mathbb{R}
   \\] This follows directly from the fact that the tangent is itself an odd function, and reflects the symmetry of the graph of \\( \arctan \\) with respect to the origin.
 
-> A [bijective function](../functions/) is both injective and surjective, that is, if for every \\( y \in B \\) there exists a unique \\( x \in A \\) such that \\( f(x) = y \\).
+> A bijective function is both injective and surjective, that is, if for every \\( y \in B \\) there exists a unique \\( x \in A \\) such that \\( f(x) = y \\).
 
 - - -
 ## Analytical expression of the arctangent
 
-The arctangent can also be written using the [sine and cosine](../sine-and-cosine) functions, which highlights its geometric foundation within the unit circle and its connection with the other inverse trigonometric functions. Starting from the identity:
+The arctangent can also be written using the sine and cosine functions, which highlights its geometric foundation within the unit circle and its connection with the other inverse trigonometric functions. Starting from the identity:
 \\[
 \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)}
 \\]
-one can consider a [right triangle](../right-triangle-trigonometry/) in which the angle \\( \theta \\) satisfies \\( \tan(\theta) = x \\), that is, the ratio of the opposite side to the adjacent side equals \\( x \\). Taking the adjacent side equal to \\( 1 \\) and the opposite side equal to \\( x \\), the hypotenuse is \\( \sqrt{1 + x^2} \\) by the [Pythagorean theorem](../pythagorean-theorem/), so that:
+one can consider a right triangle in which the angle \\( \theta \\) satisfies \\( \tan(\theta) = x \\), that is, the ratio of the opposite side to the adjacent side equals \\( x \\). Taking the adjacent side equal to \\( 1 \\) and the opposite side equal to \\( x \\), the hypotenuse is \\( \sqrt{1 + x^2} \\) by the Pythagorean theorem, so that:
 
 \\[\sin(\theta) = \frac{x}{\sqrt{1 + x^2}}\\]
 \\[ \cos(\theta) = \frac{1}{\sqrt{1 + x^2}}\\]
@@ -80,7 +80,7 @@ Reversing these relationships yields two equivalent expressions for the arctange
 \arctan(x) = \arccos\\!\left(\frac{1}{\sqrt{1 + x^2}}\right)
 \\]
 
-> This equivalence is often useful in calculus and in analytical derivations, because it allows expressions involving the arctangent to be rewritten in terms of the [arcsine or arccosine](../arcsine-and-arccosine/), depending on which form simplifies the computation.
+> This equivalence is often useful in calculus and in analytical derivations, because it allows expressions involving the arctangent to be rewritten in terms of the arcsine or arccosine, depending on which form simplifies the computation.
 
 - - -
 ## Addition formula for the arctangent
@@ -112,14 +112,14 @@ This follows from the fact that for \\( x > 0 \\) one has \\( \operatorname{arcc
 - - -
 ## Arccotangent definition
 
-In the [unit circle](../unit-circle), the [cotangent](../tangent-and-cotangent) of an angle \\( \theta \\) can be visualized as the length of the segment tangent to the circle at the point where the terminal side meets it, measured along the horizontal tangent line at \\( (0, 1) \\). The arccotangent performs the reverse process: given a real number \\( x \\), it returns the unique angle \\( \theta \\) in the interval \\( (0, \pi) \\) whose cotangent equals \\( x \\). This geometric relationship illustrates how the cotangent and arccotangent are interconnected as a function and its inverse, each reversing the role of angle and ratio.
+In the unit circle, the cotangent of an angle \\( \theta \\) can be visualized as the length of the segment tangent to the circle at the point where the terminal side meets it, measured along the horizontal tangent line at \\( (0, 1) \\). The arccotangent performs the reverse process: given a real number \\( x \\), it returns the unique angle \\( \theta \\) in the interval \\( (0, \pi) \\) whose cotangent equals \\( x \\). This geometric relationship illustrates how the cotangent and arccotangent are interconnected as a function and its inverse, each reversing the role of angle and ratio.
 
-By relating the arccotangent to the concept of a [function](../functions), we can formally express the relationship between cotangent and arccotangent as follows:
+By relating the arccotangent to the concept of a function, we can formally express the relationship between cotangent and arccotangent as follows:
 
 \\[\operatorname{arccot}(x) = \theta \quad \iff \quad \cot(\theta) = x\\]
 \\[ \quad \theta \in (0, \pi)\\]
 
-The arccotangent establishes a correspondence between a real number \\( x \\) and the unique angle \\( \theta \\) in the interval \\( (0, \pi) \\) whose cotangent equals \\( x \\). The restriction to this interval is necessary because the cotangent function is periodic and therefore not injective over its full domain; by confining it to \\( (0, \pi) \\), one obtains a strictly decreasing bijection, which admits a well-defined [inverse](../inverse-function/). This reciprocal relationship is summarized by the identity:
+The arccotangent establishes a correspondence between a real number \\( x \\) and the unique angle \\( \theta \\) in the interval \\( (0, \pi) \\) whose cotangent equals \\( x \\). The restriction to this interval is necessary because the cotangent function is periodic and therefore not injective over its full domain; by confining it to \\( (0, \pi) \\), one obtains a strictly decreasing bijection, which admits a well-defined inverse. This reciprocal relationship is summarized by the identity:
 \\[
 \cot(\operatorname{arccot}(x)) = x \quad \text{for all } x \in \mathbb{R}
 \\]
@@ -155,7 +155,7 @@ x &\to +\infty &\quad& \operatorname{arccot}(x) \to 0
 - - -
 ## Arccotangent function
 
-The arccotangent function \\( f(x) = \operatorname{arccot}(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in (0, \pi) \\) whose cotangent equals \\( x \\). Its graph is a continuous, strictly decreasing curve that admits two horizontal asymptotes, namely \\( y = 0 \\) and \\( y = \pi \\). The function is the [inverse](../inverse-function/) of the cotangent restricted to its principal domain \\( (0, \pi) \\), over which the cotangent is strictly decreasing and bijective.
+The arccotangent function \\( f(x) = \operatorname{arccot}(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in (0, \pi) \\) whose cotangent equals \\( x \\). Its graph is a continuous, strictly decreasing curve that admits two horizontal asymptotes, namely \\( y = 0 \\) and \\( y = \pi \\). The function is the inverse of the cotangent restricted to its principal domain \\( (0, \pi) \\), over which the cotangent is strictly decreasing and bijective.
 
 + Domain: \\( x \in \mathbb{R} \\)
 + Range: \\( y \in (0, \pi) \\)

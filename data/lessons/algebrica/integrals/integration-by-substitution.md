@@ -3,7 +3,7 @@
 
 ## How substitution simplifies integration
 
-Integration by substitution is a technique used to simplify an integral by introducing a suitable substitution. When the [integral](../indefinite-integrals/) is not straightforward to compute, this method proves highly useful as it allows rewriting the integral of a function \\(f(x)\\) in terms of a new variable \\(u\\), simplifying the computation:
+Integration by substitution is a technique used to simplify an integral by introducing a suitable substitution. When the integral is not straightforward to compute, this method proves highly useful as it allows rewriting the integral of a function \\(f(x)\\) in terms of a new variable \\(u\\), simplifying the computation:
 
 \\[\int f(g(x))\\,g'(x)\\,dx = \int f(u)\\,du\\]
 
@@ -18,7 +18,7 @@ The process involves the following steps:
 
 - - -
 
-The method of substitution is a direct consequence of the [chain rule](../the-derivative-of-a-composite-function/) for derivatives. If \\( F(x) = H(g(x)) \\), then by the chain rule:
+The method of substitution is a direct consequence of the chain rule for derivatives. If \\( F(x) = H(g(x)) \\), then by the chain rule:
 
 \\[
 F'(x) = H'(g(x))\\, g'(x)
@@ -33,7 +33,7 @@ Therefore, whenever an integrand has the form \\(H'(g(x))\\, g'(x)\\) it is the 
 - - -
 ## Recognizing when to use substitution
 
-Before proceeding to concrete examples, it is useful to understand when a substitution is likely to be effective. The technique is most natural when the integrand contains a [composite function](../composite-functions/). In many cases, the integral has the general form:
+Before proceeding to concrete examples, it is useful to understand when a substitution is likely to be effective. The technique is most natural when the integrand contains a composite function. In many cases, the integral has the general form:
 
 \\[
 f(g(x))\\,g'(x)
@@ -45,7 +45,7 @@ or differs from it only by a constant factor. When this pattern appears, choosin
 \frac{g'(x)}{g(x)}
 \\]
 
-the [derivative](../derivatives) of the denominator suggests the substitution \\( u = g(x) \\).
+the derivative of the denominator suggests the substitution \\( u = g(x) \\).
 
 > In practice, the key idea is to look for an inner expression whose derivative also appears, exactly or up to a multiplicative constant, elsewhere in the integrand. When such a relationship is present, substitution typically transforms the integral into a simpler form.
 
@@ -194,7 +194,7 @@ Substituting back \\( u = \sin x \\), we obtain:
 - - -
 ## Trigonometric substitutions
 
-Trigonometric substitution applies when an integral involves [polynomial](../polynomials), [rational](../rational-functions/), or algebraic expressions that can be simplified using the [fundamental trigonometric identity](../pythagorean-identity/):
+Trigonometric substitution applies when an integral involves polynomial, rational, or algebraic expressions that can be simplified using the fundamental trigonometric identity:
 
 \\[\sin^2 x + \cos^2 x = 1\\]
 
@@ -214,7 +214,7 @@ To simplify an integral, choose an appropriate substitution based on the express
 - If the integrand contains \\( 1 + x^2 \\), use \\( x = \tan u \\).
 - If the integrand contains \\( x^2 - 1 \\), use \\( x = \sec u \\).
 
-> A complete discussion of trigonometric substitution, including the geometric rationale and fully worked examples, is presented in the dedicated section [Trigonometric Substitution for Integrals](../trigonometric-substitution-for-integrals/).
+> A complete discussion of trigonometric substitution, including the geometric rationale and fully worked examples, is presented in the dedicated section Trigonometric Substitution for Integrals.
 
 - - -
 ## Example 5
@@ -251,7 +251,7 @@ Thus, the integral transforms into:
 
 ---
 
-From the substitution \\( x = 3\sin u \\), solving for \\( u \\) via the [arcsine](../arcsine-and-arccosine/) function gives:
+From the substitution \\( x = 3\sin u \\), solving for \\( u \\) via the arcsine function gives:
 
 \\[u = \arcsin\left(\frac{x}{3}\right)\\]
 
@@ -262,7 +262,7 @@ Thus:
 - - -
 ## Substitution rule for definite integrals
 
-When applying substitution to evaluate [definite integrals](../definite-integrals), the limits of integration must be adjusted to reflect the new variable. If the limits are not changed, the result will be incorrect. Given the substitution \\( u = g(x) \\), we have:
+When applying substitution to evaluate definite integrals, the limits of integration must be adjusted to reflect the new variable. If the limits are not changed, the result will be incorrect. Given the substitution \\( u = g(x) \\), we have:
 
 \\[\int_{a}^{b} f(g(x))\\,g'(x)\\,dx = \int_{g(a)}^{g(b)} f(u)\\,du\\]
 

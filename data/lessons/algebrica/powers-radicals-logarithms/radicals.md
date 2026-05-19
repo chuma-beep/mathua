@@ -3,11 +3,11 @@
 
 ## Definition of radicals
 
-Radicals emerge from the problem of solving [equations](../equations/) of the form \\( x^n = a \\), where \\( n \in \mathbb{N} \\), \\( n \ge 2 \\), and \\( a \in \mathbb{R} \\). In this context, the \\( n \\)-th root of a number is defined as a value whose \\( n \\)-th [power](../powers/) yields the original number.
+Radicals emerge from the problem of solving equations of the form \\( x^n = a \\), where \\( n \in \mathbb{N} \\), \\( n \ge 2 \\), and \\( a \in \mathbb{R} \\). In this context, the \\( n \\)-th root of a number is defined as a value whose \\( n \\)-th power yields the original number.
 
 When \\( a \ge 0 \\), the principal real \\( n \\)-th root of \\( a \\) is the unique non-negative real number \\( b \\) satisfying \\( b^n = a \\). This value is denoted by \\( \sqrt[n]{a} \\). The defining property is that \\( \sqrt[n]{a} = b \\) if and only if \\( b^n = a \\) and \\( b \ge 0 \\). The condition \\( b \ge 0 \\) guarantees uniqueness in the real case when \\( n \\) is even.
 
-The value \\( a \\) is referred to as the radicand, and the [integer](../integers/) \\( n \\) is known as the index of the root. This notation specifies both the root extraction operation and its degree.
+The value \\( a \\) is referred to as the radicand, and the integer \\( n \\) is known as the index of the root. This notation specifies both the root extraction operation and its degree.
 
 - - -
 
@@ -18,7 +18,7 @@ The properties of the roots depend on whether the index is even or odd.
 
 > For example, since \\( 2^3 = 8 \\), it follows that \\( \sqrt[3]{8} = 2 \\), as 2 is the unique real number whose cube equals 8. More generally, extracting an \\( n \\)-th root is the inverse operation of raising a number to the \\( n \\)-th power. Solving the equation \\( x^n = a \\) is therefore equivalent to applying the \\( n \\)-th root to \\( a \\).
 
-Radicals such as \\( \sqrt{2} \\), \\( \sqrt{3} \\), and \\( \sqrt{5} \\) are classified as [irrational numbers](../types-of-numbers/) because they cannot be expressed as exact fractions of two integers.
+Radicals such as \\( \sqrt{2} \\), \\( \sqrt{3} \\), and \\( \sqrt{5} \\) are classified as irrational numbers because they cannot be expressed as exact fractions of two integers.
 
 Their decimal expansions are infinite and non-repeating, lacking any predictable pattern. No rational number squared yields 2, 3, or 5. These values nonetheless occupy precise positions on the real number line, interspersed among the rational numbers, with no gaps.
 
@@ -56,7 +56,7 @@ This means \\( b^2 \\) is also even, so \\( b \\) must be even too. But if both 
 - - -
 ## Powers with rational exponents
 
-The connection between radicals and [powers](../powers/) becomes explicit when the exponent is a rational number. For \\( a \in \mathbb{R}^+ \\) and \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), the \\( n \\)-th root of \\( a \\) is equivalently written as:
+The connection between radicals and powers becomes explicit when the exponent is a rational number. For \\( a \in \mathbb{R}^+ \\) and \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), the \\( n \\)-th root of \\( a \\) is equivalently written as:
 
 \\[
 \sqrt[n]{a} = a^{\frac{1}{n}}
@@ -183,7 +183,7 @@ By converting each radical to a power with rational exponent:
 \sqrt{a} = a^{\frac{1}{2}} \qquad \sqrt[3]{a} = a^{\frac{1}{3}}
 \\]
 
-Applying the quotient rule for [powers](../powers/):
+Applying the quotient rule for powers:
 
 \\[
 \frac{a^{\frac{1}{2}}}{a^{\frac{1}{3}}} = a^{\frac{1}{2}-\frac{1}{3}} = a^{\frac{1}{6}}
@@ -230,7 +230,7 @@ For example:
 - - -
 ## Example 2
 
-Rationalization can also be applied to the numerator when this simplifies an expression. Consider the following limit, which arises naturally in the definition of the [derivative](../derivatives/):
+Rationalization can also be applied to the numerator when this simplifies an expression. Consider the following limit, which arises naturally in the definition of the derivative:
 
 \\[
 \lim_{h \to 0} \frac{\sqrt{x+h}-\sqrt{x}}{h}

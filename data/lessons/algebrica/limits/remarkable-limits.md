@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Notable [limits](../limits/) play a central role in mathematical analysis. They are used in calculations and help describe both the local behaviour of [functions](../functions) and their behaviour at infinity. The most important cases are collected below. They include trigonometric, exponential, and logarithmic expressions, as well as standard comparisons between quantities that grow without bound and those that tend to zero.
+Notable limits play a central role in mathematical analysis. They are used in calculations and help describe both the local behaviour of functions and their behaviour at infinity. The most important cases are collected below. They include trigonometric, exponential, and logarithmic expressions, as well as standard comparisons between quantities that grow without bound and those that tend to zero.
 
 - - -
 ## The trigonometric fundamental limit
@@ -14,7 +14,7 @@ The most fundamental and structurally significant trigonometric limit is given b
 \lim_{x \to 0} \frac{\sin x}{x} = 1
 \\]
 
-This result characterizes the local linearity of the [sine function](../sine-function/) at the origin and is equivalent to the following statement:
+This result characterizes the local linearity of the sine function at the origin and is equivalent to the following statement:
 
 \\[
 \left.\frac{d}{dx}\sin x\right|_{x=0} = 1
@@ -28,7 +28,7 @@ From this limit, it follows directly that for any real constant a we have:
 - - -
 ## The tangent limit
 
-To evaluate the [tangent](../tangent-function/) limit, consider the following identity:
+To evaluate the tangent limit, consider the following identity:
 
 \\[
 \frac{\tan x}{x} = \frac{\sin x}{x} \cdot \frac{1}{\cos x}
@@ -55,12 +55,12 @@ Quadratic, or second-order, behaviour emerges in the evaluation of this limit:
 \lim_{x \to 0} \frac{1 - \cos x}{x^2} = \frac{1}{2}
 \\]
 
-In this case, the numerator vanishes quadratically with respect to \\(x\\), rather than linearly. The [cosine function](../cosine-function/) is tangent to the horizontal line \\(y = 1\\) at the origin: its first derivative at \\(x = 0\\) is zero, and the first non-vanishing term in its Taylor expansion is of order \\(x^2\\). Indeed:
+In this case, the numerator vanishes quadratically with respect to \\(x\\), rather than linearly. The cosine function is tangent to the horizontal line \\(y = 1\\) at the origin: its first derivative at \\(x = 0\\) is zero, and the first non-vanishing term in its Taylor expansion is of order \\(x^2\\). Indeed:
 \\[
 \cos x = 1 - \frac{x^2}{2} + o(x^2)
 \\]
 
-> Here \\( o(x^2) \\) denotes the [little-o notation](../little-o-notation/), meaning a term that becomes negligible compared to \\( x^2 \\) as \\( x \to 0 \\).
+> Here \\( o(x^2) \\) denotes the little-o notation, meaning a term that becomes negligible compared to \\( x^2 \\) as \\( x \to 0 \\).
 
 Dividing by \\(x^2\\) isolates the leading quadratic term and yields the limit. More generally we have:
 
@@ -71,7 +71,7 @@ Dividing by \\(x^2\\) isolates the leading quadratic term and yields the limit. 
 - - -
 ## The exponential fundamental limit
 
-The [exponential function](../exponential-function/) exhibits first-order behaviour near the origin: the deviation from the constant 1 is linear in \\(x\\):
+The exponential function exhibits first-order behaviour near the origin: the deviation from the constant 1 is linear in \\(x\\):
 \\[
 \lim_{x \to 0} \frac{e^x - 1}{x} = 1
 \\]
@@ -89,12 +89,12 @@ from which dividing by \\(x\\) and taking the limit immediately yields 1, as all
 \\]
 which follows by substituting \\(u = ax\\) and reducing to the standard form.
 
-> Here \\(n!\\) denotes the [factorial](../factorial/) of \\(n\\), defined as the product of all positive integers up to \\(n\\); in particular, \\(2! = 2\\).
+> Here \\(n!\\) denotes the factorial of \\(n\\), defined as the product of all positive integers up to \\(n\\); in particular, \\(2! = 2\\).
 
 - - -
 ## The logarithmic fundamental limit
 
-For the natural [logarithm](../logarithmic-function/), the following limit holds:
+For the natural logarithm, the following limit holds:
 \\[
 \lim_{x \to 0} \frac{\ln(1+x)}{x} = 1
 \\]
@@ -139,7 +139,7 @@ This result may be derived using the binomial expansion when \\(\alpha\\) is rat
 - - -
 ## Asymptotic equivalence
 
-The following notable limits illustrate local [asymptotic](../asymptotes/) relationships:
+The following notable limits illustrate local asymptotic relationships:
 \\[
 \sin x \sim x \qquad \tan x \sim x \qquad 1 - \cos x \sim \frac{x^2}{2}
 \\]
@@ -159,7 +159,7 @@ From an advanced perspective, remarkable limits serve as expressions of differen
 
 \\[ \lim_{x \to 0} \frac{f(x) - f(0)}{x} \\]
 
-corresponds to the definition of the [derivative](../derivatives/) of \\(f\\) at the origin. Classical remarkable limits represent particular cases where this derivative can be calculated explicitly and then utilised as a foundational method for addressing more complex [indeterminate forms](../indeterminate-forms/).
+corresponds to the definition of the derivative of \\(f\\) at the origin. Classical remarkable limits represent particular cases where this derivative can be calculated explicitly and then utilised as a foundational method for addressing more complex indeterminate forms.
 
 - - -
 ## Summary of the main remarkable limits

@@ -3,11 +3,11 @@
 
 ## Introduction
 
-Notable products are identities describing the expansion or [factorisation](../factoring-ac-method/) of [polynomials](../polynomials) such as [binomials](../binomials) or [trinomials](../trinomials). They allow rewriting such expressions in a simpler form, and this is often what makes polynomial factorisation tractable in practice or what allows us to actually solve an [equation](../equations/).
+Notable products are identities describing the expansion or factorisation of polynomials such as binomials or trinomials. They allow rewriting such expressions in a simpler form, and this is often what makes polynomial factorisation tractable in practice or what allows us to actually solve an equation.
 
 Consider for example the identity \\((a+b)^2 = a^2 + 2ab + b^2\\). A useful property is that, read from left to right, it gives us the expansion of the square, while read from right to left it gives us its factorisation.
 
-Most of the identities collected here are special cases of the [binomial theorem](../binomial-theorem/), which gives the expansion of \\((a+b)^n\\) for arbitrary non-negative integer \\(n\\). The square and the cube of a binomial are just the cases \\(n=2\\) and \\(n=3\\) of this general expansion. Other identities on this page, like the difference of two squares or the factorisation of \\(a^3 \pm b^3\\), cannot be obtained from the binomial theorem, although the underlying mechanism is essentially the same.
+Most of the identities collected here are special cases of the binomial theorem, which gives the expansion of \\((a+b)^n\\) for arbitrary non-negative integer \\(n\\). The square and the cube of a binomial are just the cases \\(n=2\\) and \\(n=3\\) of this general expansion. Other identities on this page, like the difference of two squares or the factorisation of \\(a^3 \pm b^3\\), cannot be obtained from the binomial theorem, although the underlying mechanism is essentially the same.
 
 - - -
 
@@ -69,7 +69,7 @@ When we multiply a binomial by itself three times, the result is one of the foll
 \end{align}
 \\]
 
-Both are special cases of the [binomial theorem](../binomial-theorem/) with \\(n=3\\).
+Both are special cases of the binomial theorem with \\(n=3\\).
 
 ---
 
@@ -102,19 +102,19 @@ The same procedure works for \\(a^3 - b^3\\):
 
 In both cases the mixed terms cancel in pairs, and only the cubes \\(a^3\\) and \\(\pm b^3\\) survive.
 
-> In the expansion of \\((a+b+c)^3\\), the coefficient \\(6\\) in the term \\(6abc\\) arises from the number of permutations of the three distinct factors \\(a\\), \\(b\\), \\(c\\), that is \\(3!=6\\). This is an instance of the multinomial theorem, which generalises the [binomial theorem](../binomial-theorem/) to sums of more than two terms.
+> In the expansion of \\((a+b+c)^3\\), the coefficient \\(6\\) in the term \\(6abc\\) arises from the number of permutations of the three distinct factors \\(a\\), \\(b\\), \\(c\\), that is \\(3!=6\\). This is an instance of the multinomial theorem, which generalises the binomial theorem to sums of more than two terms.
 
 - - -
 
 ## Notable products and the binomial theorem
 
-The square and the cube of a binomial both come from a more general formula, the [binomial theorem](../binomial-theorem/), which expands \\((a+b)^n\\) for any non-negative integer \\(n\\):
+The square and the cube of a binomial both come from a more general formula, the binomial theorem, which expands \\((a+b)^n\\) for any non-negative integer \\(n\\):
 
 \\[
 (a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^{k}
 \\]
 
-The coefficients \\(\binom{n}{k}\\) are the [binomial coefficients](../binomial-coefficient/):
+The coefficients \\(\binom{n}{k}\\) are the binomial coefficients:
 
 \\[
 \binom{n}{k} = \frac{n!}{k!(n-k)!}
@@ -147,7 +147,7 @@ x^2 + 3x + 9 = 0
 \end{cases}
 \\]
 
-The first case yields \\(x = 3\\) directly. For the second case, the [quadratic formula](../quadratic-formula/) is applied:
+The first case yields \\(x = 3\\) directly. For the second case, the quadratic formula is applied:
 
 \\[
 \begin{align}
@@ -157,7 +157,7 @@ x &= \frac{-3 \pm \sqrt{3^2 - 4(1)(9)}}{2(1)} \\\\
 \end{align}
 \\]
 
-Because the discriminant \\(\Delta = -27 < 0\\), the two remaining solutions are [complex](../quadratic-equations-with-complex-solutions/). Substituting \\(\sqrt{-27} = 3i\sqrt{3}\\) gives:
+Because the discriminant \\(\Delta = -27 < 0\\), the two remaining solutions are complex. Substituting \\(\sqrt{-27} = 3i\sqrt{3}\\) gives:
 
 \\[x = \frac{-3 + 3i\sqrt{3}}{2} \qquad x = \frac{-3 - 3i\sqrt{3}}{2}\\]
 
@@ -187,7 +187,7 @@ a^n+b^n = (a+b)(a^{n-1}-a^{n-2}b+a^{n-3}b^2-\cdots-ab^{n-2}+b^{n-1})
 
 When \\(n\\) is even, on the other hand, no such factorisation is available over \\(\mathbb{R}\\) in general. The expressions \\(a^2+b^2\\) and \\(a^4+b^4\\), for instance, are irreducible over the reals unless further structure is brought in.
 
-> The factorisation of \\(a^n-b^n\\) is closely related to the structure of the \\(n\\)-th roots of unity in the [complex plane](../complex-numbers-introduction/). The [roots](../roots-of-a-polynomial/) of \\(a^n-b^n=0\\) are precisely \\(a/b=e^{2\pi i k/n}\\) for \\(k=0,1,\dots,n-1\\).
+> The factorisation of \\(a^n-b^n\\) is closely related to the structure of the \\(n\\)-th roots of unity in the complex plane. The roots of \\(a^n-b^n=0\\) are precisely \\(a/b=e^{2\pi i k/n}\\) for \\(k=0,1,\dots,n-1\\).
 
 ---
 

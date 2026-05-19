@@ -3,13 +3,13 @@
 
 ## The method of integration by parts
 
-The method of integration by parts allows us to rewrite the integral of the product of two [functions](../functions/) in a more convenient form. For [indefinite integrals](../indefinite-integrals), the formula is:
+The method of integration by parts allows us to rewrite the integral of the product of two functions in a more convenient form. For indefinite integrals, the formula is:
 
 \\[
 \int f(x)g'(x)\\, dx = f(x)g(x) - \int f'(x)g(x)\\, dx + c
 \\]
 
-For [definite integrals](../definite-integrals), the formula extends as:
+For definite integrals, the formula extends as:
 
 \\[
 \int_a^b f(x)g'(x)\\, dx = \Big[f(x)g(x)\Big]_a^b - \int_a^b f'(x)g(x)\\, dx
@@ -17,14 +17,14 @@ For [definite integrals](../definite-integrals), the formula extends as:
 
 where \\( \Big[f(x)g(x)\Big]_a^b = f(b)g(b) - f(a)g(a) \\) is the boundary term, which must be evaluated. 
 
-In both cases, \\( f \\) and \\( g \\) are assumed to be differentiable on the [interval](../intervals/) of integration. The method is conceptually simple, but it requires practice to identify which function should be differentiated and which should be integrated in order to simplify the expression.
+In both cases, \\( f \\) and \\( g \\) are assumed to be differentiable on the interval of integration. The method is conceptually simple, but it requires practice to identify which function should be differentiated and which should be integrated in order to simplify the expression.
 
 > In some cases, integration by parts must be applied more than once to completely evaluate the integral. One should proceed carefully, since repeated applications may increase the length of the computation and make sign errors more likely.
 
 - - -
 ## Derivation of the formula
 
-The integration by parts formula follows directly from the product rule for [derivatives](../derivatives). Start from:
+The integration by parts formula follows directly from the product rule for derivatives. Start from:
 
 \\[
 \frac{d}{dx}\big(f(x)g(x)\big) = f'(x)g(x) + f(x)g'(x)
@@ -77,7 +77,7 @@ A useful order for selecting \\( u \\) is the hierarchy known by the acronym LIA
 + Trigonometric functions
 + Exponential functions
 
-The ordering reflects how these functions behave under differentiation. [Logarithmic](../logarithmic-function/) and inverse trigonometric functions simplify considerably when differentiated, making them natural candidates for \\( u \\). [Exponential functions](../exponential-function/), by contrast, remain essentially unchanged after differentiation and are generally better assigned to \\( dv \\).
+The ordering reflects how these functions behave under differentiation. Logarithmic and inverse trigonometric functions simplify considerably when differentiated, making them natural candidates for \\( u \\). Exponential functions, by contrast, remain essentially unchanged after differentiation and are generally better assigned to \\( dv \\).
 
 > Choosing \\( u \\) according to this hierarchy often reduces the complexity of the remaining integral after a single application of the formula
 
@@ -88,7 +88,7 @@ A few recurring mistakes are worth keeping in mind when applying integration by 
 
 Choosing \\( dv \\) carelessly, in particular assigning to \\( dv \\) a factor whose integral \\( v \\) is harder to compute than the original integral, often makes the problem worse rather than better. If the resulting \\( \int v\,du \\) is more complex than what you started with, it is worth reconsidering the assignment before proceeding.
 
-In the [definite integral](../definite-integrals/) version of the formula, the boundary term \\( uv \big|\_a^b \\) must be evaluated explicitly. Omitting it is one of the most common sources of incorrect results, particularly when the computation spans several lines and attention drifts toward the integral that follows.
+In the definite integral version of the formula, the boundary term \\( uv \big|\_a^b \\) must be evaluated explicitly. Omitting it is one of the most common sources of incorrect results, particularly when the computation spans several lines and attention drifts toward the integral that follows.
 
 Sign errors during differentiation are especially insidious in cyclic cases, where \\( \sin(x) \\) and \\( \cos(x) \\) alternate and a misplaced minus sign propagates through the entire calculation. Keeping track of signs at each step, rather than reconstructing them at the end, saves considerable time.
 
@@ -103,7 +103,7 @@ Let's consider an example by solving the following integral:
 \int x^2 \ln(x) \\, dx
 \\]
 
-The integrand is a product of a logarithmic function and a [power](../powers) of \\( x \\). Following the LIATE hierarchy, \\( \ln(x) \\) takes priority and is assigned to \\( f \\), while \\( x^2 \\) is assigned to \\( g' \\):
+The integrand is a product of a logarithmic function and a power of \\( x \\). Following the LIATE hierarchy, \\( \ln(x) \\) takes priority and is assigned to \\( f \\), while \\( x^2 \\) is assigned to \\( g' \\):
 
 \\[
 f(x) = \ln(x) \quad \rightarrow \quad f'(x) = \frac{1}{x}
@@ -198,7 +198,7 @@ Dividing through by \\(2\\) and adding the constant of integration:
 I = \frac{e^x}{2}\bigl(\sin(x) - \cos(x)\bigr) + c
 \\]
 
-> The key observation is that the cyclic structure transforms an apparently endless recursion into a [linear equation](../linear-equations/) in \\( I \\), which can be solved directly. This technique applies whenever repeated integration by parts returns the original integral with a nonzero coefficient.
+> The key observation is that the cyclic structure transforms an apparently endless recursion into a linear equation in \\( I \\), which can be solved directly. This technique applies whenever repeated integration by parts returns the original integral with a nonzero coefficient.
 
 - - -
 
@@ -248,7 +248,7 @@ Therefore:
 \int_0^1 x\ln(x)\\, dx = -\frac{1}{4}
 \\]
 
-> The [limit](../limits) \\( \lim_{x \to 0^+} x^2 \ln(x) = 0 \\) follows from the fact that [polynomial](../polynomials/) growth dominates [logarithmic](../logarithms/) decay near zero. This kind of boundary analysis is essential whenever the integrand is not defined at one of the endpoints.
+> The limit \\( \lim_{x \to 0^+} x^2 \ln(x) = 0 \\) follows from the fact that polynomial growth dominates logarithmic decay near zero. This kind of boundary analysis is essential whenever the integrand is not defined at one of the endpoints.
 
 - - -
 ## Flowchart

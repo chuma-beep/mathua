@@ -3,7 +3,7 @@
 
 ## The division algorithm
 
-Let \\(P(x)\\) and \\(D(x)\\) be [polynomials](../polynomials/) in \\(\mathbb{R}[x]\\) with \\(D(x) \neq 0\\). The division algorithm asserts the existence of unique polynomials \\(Q(x)\\) and \\(R(x)\\) in \\(\mathbb{R}[x]\\) such that:
+Let \\(P(x)\\) and \\(D(x)\\) be polynomials in \\(\mathbb{R}[x]\\) with \\(D(x) \neq 0\\). The division algorithm asserts the existence of unique polynomials \\(Q(x)\\) and \\(R(x)\\) in \\(\mathbb{R}[x]\\) such that:
 
 \\[
 P(x) = Q(x) \cdot D(x) + R(x)
@@ -18,7 +18,7 @@ P(x) = Q(x) \cdot D(x) + R(x)
 - \\(Q(x)\\) as the quotient.
 - \\(R(x)\\) as the remainder.
 
-If \\(R(x) = 0\\), the division is exact and \\(D(x)\\) divides \\(P(x)\\) in \\(\mathbb{R}[x]\\). This result is directly analogous to the Euclidean division of [integers](../integers/) and holds in any polynomial [ring](../rings/) \\(F[x]\\), where \\(F\\) is a [field](../fields/). The existence of such a representation can be established by induction on \\(\deg P\\), while uniqueness follows from a degree argument. Suppose that two representations exist:
+If \\(R(x) = 0\\), the division is exact and \\(D(x)\\) divides \\(P(x)\\) in \\(\mathbb{R}[x]\\). This result is directly analogous to the Euclidean division of integers and holds in any polynomial ring \\(F[x]\\), where \\(F\\) is a field. The existence of such a representation can be established by induction on \\(\deg P\\), while uniqueness follows from a degree argument. Suppose that two representations exist:
 
 \\[
 \begin{align}
@@ -67,7 +67,7 @@ where \\(Q_i\\) and \\(R_i\\) are the quotient and the remainder of dividing \\(
 
 The division is invariant under multiplication of the divisor by a nonzero constant. Given \\(\lambda \in \mathbb{R}\\) with \\(\lambda \neq 0\\), dividing \\(P(x)\\) by \\(\lambda D(x)\\) produces the quotient \\(Q(x)/\lambda\\) and the same remainder \\(R(x)\\). The relation \\(P(x) = Q(x) D(x) + R(x)\\) is therefore unaffected by rescaling the divisor, up to a corresponding rescaling of the quotient.
 
-> The polynomial [ring](../rings/) \\(\mathbb{R}[x]\\), equipped with the division algorithm, is an example of a Euclidean ring. The degree function plays the role of the Euclidean valuation, and the existence of a division with remainder satisfying \\(\deg R < \deg D\\) is precisely what characterises Euclidean structure in the polynomial setting.
+> The polynomial ring \\(\mathbb{R}[x]\\), equipped with the division algorithm, is an example of a Euclidean ring. The degree function plays the role of the Euclidean valuation, and the existence of a division with remainder satisfying \\(\deg R < \deg D\\) is precisely what characterises Euclidean structure in the polynomial setting.
 
 - - -
 ## Polynomial long division
@@ -78,7 +78,7 @@ The long division algorithm involves repeatedly dividing the leading term of the
 - Multiply this term by \\(D(x)\\) and subtract the result from the current dividend.
 - Repeat these steps until the degree of the remaining expression is strictly less than \\(\deg D(x)\\).
 
-> When the divisor is a linear polynomial of the form \\(x - c\\), the procedure can be carried out more efficiently using the [synthetic division method](../synthetic-division/), which reduces the computation to operations on coefficients alone.
+> When the divisor is a linear polynomial of the form \\(x - c\\), the procedure can be carried out more efficiently using the synthetic division method, which reduces the computation to operations on coefficients alone.
 
 - - -
 ## Example 1
@@ -235,9 +235,9 @@ The factor theorem is a direct consequence of the remainder theorem. Let \\(P(x)
 
 The proof follows directly from the remainder theorem. Dividing \\(P(x)\\) by \\(x - c\\) gives \\(P(x) = Q(x)(x - c) + r\\), where \\(r = P\(c\)\\). The polynomial \\(x - c\\) divides \\(P(x)\\) if and only if \\(r = 0\\), which is equivalent to \\(P\(c\) = 0.\\)
 
-The factor theorem establishes a correspondence between the [roots](../roots-of-a-polynomial/) of a polynomial and its linear factors: \\(c\\) is a root of \\(P(x)\\) if and only if \\(x - c\\) is a factor of \\(P(x)\\) in \\(\mathbb{R}[x]\\).
+The factor theorem establishes a correspondence between the roots of a polynomial and its linear factors: \\(c\\) is a root of \\(P(x)\\) if and only if \\(x - c\\) is a factor of \\(P(x)\\) in \\(\mathbb{R}[x]\\).
 
-> This principle underlies the factorization of polynomials over a field and will be explored further in the section on [polynomial factorization](../polynomials/).
+> This principle underlies the factorization of polynomials over a field and will be explored further in the section on polynomial factorization.
 
 - - -
 
@@ -316,7 +316,7 @@ The division can therefore be written as:
 
 ## Rational functions and polynomial division
 
-When the division of two polynomials is performed without separating the remainder, the result is represented as a [rational function](../rational-functions/) where \\(D(x) \neq 0\\):
+When the division of two polynomials is performed without separating the remainder, the result is represented as a rational function where \\(D(x) \neq 0\\):
 
 \\[
 F(x) = \frac{P(x)}{D(x)}
@@ -330,7 +330,7 @@ In this context, polynomial division provides a systematic method to decompose \
 
 The decomposition is unique: the polynomial part \\(Q(x)\\) and the proper rational part \\(R(x)/D(x)\\) are uniquely determined by \\(P(x)\\) and \\(D(x)\\), as a direct consequence of the uniqueness of the division algorithm.
 
-The decomposition serves as the foundation for [partial fraction decomposition](../partial-fraction-decomposition/), a technique that expresses the proper rational component as a sum of simpler fractions. The method is widely used in integration.
+The decomposition serves as the foundation for partial fraction decomposition, a technique that expresses the proper rational component as a sum of simpler fractions. The method is widely used in integration.
 
 - - -
 ## Polynomial division and the GCD

@@ -3,19 +3,19 @@
 
 ## Introduction
 
-A [quadratic equation](../quadratic-equations/) in standard form is written as:
+A quadratic equation in standard form is written as:
 
 \\[
 ax^{2}+bx+c = 0, \qquad a \neq 0
 \\]
 
-Factoring the equation means rewriting the left-hand side as a product of linear factors with the same roots. When the [discriminant](../quadratic-formula/) \\(\Delta = b^2 - 4ac\\) is non-negative, the equation admits two [real roots](../roots-of-a-polynomial/) \\(x_1\\) and \\(x_2\\), and the following identity holds:
+Factoring the equation means rewriting the left-hand side as a product of linear factors with the same roots. When the discriminant \\(\Delta = b^2 - 4ac\\) is non-negative, the equation admits two real roots \\(x_1\\) and \\(x_2\\), and the following identity holds:
 
 \\[
 ax^{2}+bx+c = a(x-x_1)(x-x_2) \tag{1}
 \\]
 
-The roots may coincide when \\(\Delta = 0\\), in which case the factorization reduces to \\(a(x-x_0)^2\\). When \\(\Delta < 0\\) the polynomial is irreducible over \\(\mathbb{R}\\) and admits a factorization only over \\(\mathbb{C}\\), where the two roots are [complex conjugates](../complex-numbers-introduction/).
+The roots may coincide when \\(\Delta = 0\\), in which case the factorization reduces to \\(a(x-x_0)^2\\). When \\(\Delta < 0\\) the polynomial is irreducible over \\(\mathbb{R}\\) and admits a factorization only over \\(\mathbb{C}\\), where the two roots are complex conjugates.
 
 - - -
 ## Derivation
@@ -32,7 +32,7 @@ Since \\(a \neq 0\\), the leading coefficient can be factored out:
 P(x) = a\left(x^2 + \frac{b}{a}x + \frac{c}{a}\right)
 \\]
 
-The coefficients of the monic polynomial inside the parentheses are linked to the roots through [Viète's relations](../quadratic-formula/):
+The coefficients of the monic polynomial inside the parentheses are linked to the roots through Viète's relations:
 
 \\[
 x_1 + x_2 = -\frac{b}{a}, \qquad x_1 \cdot x_2 = \frac{c}{a}
@@ -52,7 +52,7 @@ This establishes identity \\((1)\\). The roots of the equation are recovered by 
 \\[x - x_1 = 0 \\;\Rightarrow\\; x = x_1\\]
 \\[x - x_2 = 0 \\;\Rightarrow\\; x = x_2\\]
 
-> The factorization above is exact and follows directly from the values of the roots. When the roots are not known in advance, they are obtained from the quadratic formula and substituted into \\((1)\\). An alternative approach, useful when the coefficients are integers and the roots are rational, is the [AC method](../factoring-ac-method/), which factors the polynomial without computing the discriminant explicitly.
+> The factorization above is exact and follows directly from the values of the roots. When the roots are not known in advance, they are obtained from the quadratic formula and substituted into \\((1)\\). An alternative approach, useful when the coefficients are integers and the roots are rational, is the AC method, which factors the polynomial without computing the discriminant explicitly.
 
 - - -
 ## Example 1
@@ -105,7 +105,7 @@ Consider a polynomial whose discriminant vanishes, so that the two roots coincid
 x^{2} - 6x + 9
 \\]
 
-The [discriminant](../quadratic-formula/) is \\(\Delta = 36 - 36 = 0\\), and the unique root is \\(x_0 = 3\\). The factorization is:
+The discriminant is \\(\Delta = 36 - 36 = 0\\), and the unique root is \\(x_0 = 3\\). The factorization is:
 
 \\[
 x^{2} - 6x + 9 = (x-3)^{2}

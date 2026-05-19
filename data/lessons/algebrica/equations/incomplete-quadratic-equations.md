@@ -3,7 +3,7 @@
 
 ## Definition
 
-A [quadratic equation](../quadratic-equations/) is considered incomplete when one or both of the terms \\(bx\\) and \\(c\\) are absent from the standard form \\(ax^2 + bx + c = 0\\), provided the term \\(ax^2\\) is present. These equations admit direct solution methods that do not require the [quadratic formula](../quadratic-formula/) or [factorization](../factoring-quadratic-equations/). 
+A quadratic equation is considered incomplete when one or both of the terms \\(bx\\) and \\(c\\) are absent from the standard form \\(ax^2 + bx + c = 0\\), provided the term \\(ax^2\\) is present. These equations admit direct solution methods that do not require the quadratic formula or factorization. 
 
 - - -
 
@@ -16,7 +16,7 @@ Dividing both sides by \\(a\\), which is nonzero by assumption, gives \\(x^2 = 0
 ![Img. 1](svg/incomplete-quadratic-equations.svg)
 
 
-> Graphically, the equation represents a [parabola](../parabola) with its vertex at the origin \\((0, 0)\\), symmetric about the y-axis. The graph opens upward if \\(a > 0\\) and downward if \\(a < 0\\); the magnitude of \\(a\\) determines the width of the parabola. Although the equation has a single solution, the function has a double root at \\(x = 0\\): the x-axis is tangent to the parabola at the origin.
+> Graphically, the equation represents a parabola with its vertex at the origin \\((0, 0)\\), symmetric about the y-axis. The graph opens upward if \\(a > 0\\) and downward if \\(a < 0\\); the magnitude of \\(a\\) determines the width of the parabola. Although the equation has a single solution, the function has a double root at \\(x = 0\\): the x-axis is tangent to the parabola at the origin.
 
 - - -
 ## The case b = 0
@@ -67,7 +67,7 @@ Taking the square root of both sides yields the two solutions:
 
 - - -
 
-Consider the equation \\(x^2 + 5 = 0\\). Here \\(a = 1\\) and \\(c = 5\\) have the same sign, so \\(-c/a = -5 < 0\\). The equation has [no real solutions](../quadratic-equations-with-complex-solutions/).
+Consider the equation \\(x^2 + 5 = 0\\). Here \\(a = 1\\) and \\(c = 5\\) have the same sign, so \\(-c/a = -5 < 0\\). The equation has no real solutions.
 
 - - -
 
@@ -82,4 +82,4 @@ For equations of the form \\(ax^2 + bx = 0\\), a frequent error consists in divi
 
 \\[ax^2 = bx\\]
 
-Dividing by \\(x\\) is not a valid operation here, since \\(x = 0\\) is itself a solution and division by zero is undefined. This manipulation [eliminates the root \\(x = 0\\)](../loss-of-roots/) and reduces the equation to a linear one, producing only the solution \\(x = -b/a\\). The correct approach is to collect \\(x\\) as a common factor, as shown above.
+Dividing by \\(x\\) is not a valid operation here, since \\(x = 0\\) is itself a solution and division by zero is undefined. This manipulation eliminates the root \\(x = 0\\) and reduces the equation to a linear one, producing only the solution \\(x = -b/a\\). The correct approach is to collect \\(x\\) as a common factor, as shown above.

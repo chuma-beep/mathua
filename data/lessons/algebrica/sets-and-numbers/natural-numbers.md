@@ -5,11 +5,11 @@
 
 The natural numbers arise from the act of counting, but a modern treatment demands an axiomatic foundation that makes their properties explicit and independent from any informal notion. This page develops the natural numbers from two complementary perspectives: an axiomatic one, based on the Peano axioms, and an algebraic one, focused on the operations defined on them and on the structure they give rise to.
 
-We denote the set of natural numbers by \\(\\mathbb{N}\\), and throughout this page we adopt the convention that \\(0 \\in \\mathbb{N}\\), consistent with the modern formulation of the Peano axioms and with the treatment of the [principle of mathematical induction](../principle-of-mathematical-induction/) already developed on this site.
+We denote the set of natural numbers by \\(\\mathbb{N}\\), and throughout this page we adopt the convention that \\(0 \\in \\mathbb{N}\\), consistent with the modern formulation of the Peano axioms and with the treatment of the principle of mathematical induction already developed on this site.
 
 - - -
 
-A useful way to visualise the natural numbers is to place them on the real line, alongside the other [numerical systems](../types-of-numbers/) that extend them. The real [line](../lines/) provides a geometric representation of every number, and the natural numbers appear within it as a distinguished discrete subset.
+A useful way to visualise the natural numbers is to place them on the real line, alongside the other numerical systems that extend them. The real line provides a geometric representation of every number, and the natural numbers appear within it as a distinguished discrete subset.
 
 Starting from \\(0\\), the natural numbers occupy equally spaced positions to the right, corresponding to \\(0, 1, 2, 3, \\dots\\), and extending indefinitely in that direction. They form an unbounded, discrete sequence of points, with no natural number lying strictly between two consecutive ones. This discreteness sets them apart from the rational and irrational numbers, which are densely distributed along the line and fill the gaps between the integer positions.
 
@@ -18,7 +18,7 @@ To the left of \\(0\\), the line continues with the negative integers \\(-1, -2,
 - - -
 ## The Peano axioms
 
-The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a minimal list of properties, from which every other fact about natural numbers can be derived. The Peano axioms describe a set \\(\\mathbb{N}\\) together with a distinguished element \\(0\\) and a function \\(S : \\mathbb{N} \\to \\mathbb{N}\\), called the successor [function](../functions/), subject to the following conditions:
+The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a minimal list of properties, from which every other fact about natural numbers can be derived. The Peano axioms describe a set \\(\\mathbb{N}\\) together with a distinguished element \\(0\\) and a function \\(S : \\mathbb{N} \\to \\mathbb{N}\\), called the successor function, subject to the following conditions:
 
 \\[
 \\begin{align}
@@ -35,7 +35,7 @@ The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a 
 + The third excludes the possibility that \\(0\\) is itself the successor of some element, which guarantees that the sequence does not close into a cycle.
 + The fourth axiom, often called the injectivity of the successor, ensures that distinct natural numbers have distinct successors, so that applying \\(S\\) repeatedly generates genuinely new elements at each step.
 
-The fifth axiom, the [principle of induction](../principle-of-mathematical-induction/), asserts that any subset of \\(\\mathbb{N}\\) containing \\(0\\) and closed under the successor function must coincide with \\(\\mathbb{N}\\) itself. This is the axiom that fixes \\(\\mathbb{N}\\) as the smallest structure satisfying the previous four, and it is the conceptual engine behind every proof by induction. A detailed treatment is given in the page on the [principle of mathematical induction](../principle-of-mathematical-induction/).
+The fifth axiom, the principle of induction, asserts that any subset of \\(\\mathbb{N}\\) containing \\(0\\) and closed under the successor function must coincide with \\(\\mathbb{N}\\) itself. This is the axiom that fixes \\(\\mathbb{N}\\) as the smallest structure satisfying the previous four, and it is the conceptual engine behind every proof by induction. A detailed treatment is given in the page on the principle of mathematical induction.
 
 - - -
 ## Set-theoretic construction

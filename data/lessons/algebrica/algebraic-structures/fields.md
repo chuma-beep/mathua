@@ -3,7 +3,7 @@
 
 ## Definition
 
-A field is an algebraic structure in which the operations of addition and multiplication are both fully invertible, subject to the sole exception that division by zero is excluded. The concept arises when one observes that certain number systems, such as the rational numbers, the [real numbers](../properties-of-real-numbers/), and the [complex numbers](../complex-numbers-introduction/), allow not only addition and subtraction but also multiplication and division by any nonzero element, with all the expected algebraic rules in force.
+A field is an algebraic structure in which the operations of addition and multiplication are both fully invertible, subject to the sole exception that division by zero is excluded. The concept arises when one observes that certain number systems, such as the rational numbers, the real numbers, and the complex numbers, allow not only addition and subtraction but also multiplication and division by any nonzero element, with all the expected algebraic rules in force.
 
 Formally, a field is a set \\(F\\) together with two binary operations \\(+\\) and \\(\\cdot\\) satisfying the following axioms:
 
@@ -13,7 +13,7 @@ Formally, a field is a set \\(F\\) together with two binary operations \\(+\\) a
 
 - Multiplication distributes over addition: for all \\(a, b, c \\in F\\), one has \\(a \\cdot (b + c) = a \\cdot b + a \\cdot c\\).
 
-> The requirement that \\(0 \\neq 1\\) is included implicitly by excluding \\(0\\) from the multiplicative group, and it ensures that the trivial set \\(\\{0\\}\\) does not qualify as a field. A field is therefore a commutative [ring](../rings) with unity in which every nonzero element is invertible. Every field is a ring, but a ring is generally not a field.
+> The requirement that \\(0 \\neq 1\\) is included implicitly by excluding \\(0\\) from the multiplicative group, and it ensures that the trivial set \\(\\{0\\}\\) does not qualify as a field. A field is therefore a commutative ring with unity in which every nonzero element is invertible. Every field is a ring, but a ring is generally not a field.
 
 - - -
 ## Properties
@@ -35,9 +35,9 @@ a consequence of the axioms rather than a convention.
 - - -
 ## Algebraic hierarchy
 
-A [group](../groups/) is the most elementary of algebraic structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
+A group is the most elementary of algebraic structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
 
-When a second operation is introduced and required to distribute over the first, but without demanding that this second operation admit inverses, the result is a [ring](../rings/). The integers \\(\\mathbb{Z}\\) are the canonical example. Every [integer](../integers/) has an additive inverse, yet most integers lack a multiplicative inverse within \\(\\mathbb{Z}\\) itself, since \\(2^{-1}\\) does not belong to \\(\\mathbb{Z}\\).
+When a second operation is introduced and required to distribute over the first, but without demanding that this second operation admit inverses, the result is a ring. The integers \\(\\mathbb{Z}\\) are the canonical example. Every integer has an additive inverse, yet most integers lack a multiplicative inverse within \\(\\mathbb{Z}\\) itself, since \\(2^{-1}\\) does not belong to \\(\\mathbb{Z}\\).
 
 A field is obtained by imposing one further requirement on a commutative ring with unity, namely that every nonzero element be invertible with respect to multiplication. The three structures thus form a chain of increasing rigidity:
 
@@ -58,7 +58,7 @@ The set \\(\\mathbb{C}\\) of complex numbers is a field extending \\(\\mathbb{R}
 
 - - -
 
-For any prime \\(p\\), the set \\(\\mathbb{Z}/p\\mathbb{Z} = \\{0, 1, \\ldots, p-1\\}\\) equipped with addition and multiplication [modulo](../modulo-operator/) \\(p\\) is a field, commonly denoted \\(\\mathbb{F}\_p\\). This is a finite field: it contains exactly \\(p\\) elements. The primality of \\(p\\) is essential. In \\(\\mathbb{Z}/6\\mathbb{Z}\\), for instance, the elements \\(2\\) and \\(3\\) satisfy \\(2 \\cdot 3 = 0\\), so neither is invertible, and the structure fails to be a field.
+For any prime \\(p\\), the set \\(\\mathbb{Z}/p\\mathbb{Z} = \\{0, 1, \\ldots, p-1\\}\\) equipped with addition and multiplication modulo \\(p\\) is a field, commonly denoted \\(\\mathbb{F}\_p\\). This is a finite field: it contains exactly \\(p\\) elements. The primality of \\(p\\) is essential. In \\(\\mathbb{Z}/6\\mathbb{Z}\\), for instance, the elements \\(2\\) and \\(3\\) satisfy \\(2 \\cdot 3 = 0\\), so neither is invertible, and the structure fails to be a field.
 
 > Finite fields exist only when the number of elements is a prime power \\(p^n\\), for some prime \\(p\\) and positive integer \\(n\\). For every such prime power there exists, up to isomorphism, exactly one finite field, denoted \\(\\mathbb{F}_{p^n}\\) or \\(\\text{GF}(p^n)\\).
 
@@ -98,7 +98,7 @@ A field homomorphism is a function \\(\\varphi : F \\to K\\) between two fields 
 \\[\\varphi(a + b) = \\varphi(a) + \\varphi(b)\\]
 \\[\\varphi(a \\cdot b) = \\varphi(a) \\cdot \\varphi(b)\\]
 
-We have that \\(\\varphi(1_F) = 1_K\\). Every field homomorphism is necessarily injective. To see this, note that its kernel is an [ideal](.../rings/) of \\(F\\):
+We have that \\(\\varphi(1_F) = 1_K\\). Every field homomorphism is necessarily injective. To see this, note that its kernel is an ideal of \\(F\\):
 
 \\[\\ker(\\varphi) = \\{a \\in F : \\varphi(a) = 0\\}\\]
 

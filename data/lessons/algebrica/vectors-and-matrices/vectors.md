@@ -3,7 +3,7 @@
 
 ## Geometric representation
 
-A vector is a quantity characterised by both a magnitude and a direction, in contrast to a scalar, which is described by magnitude alone. This distinction arises naturally in geometry and physics, where quantities such as displacement, [velocity](../velocity), and force require directional information that a single real number cannot encode.
+A vector is a quantity characterised by both a magnitude and a direction, in contrast to a scalar, which is described by magnitude alone. This distinction arises naturally in geometry and physics, where quantities such as displacement, velocity, and force require directional information that a single real number cannot encode.
 
 The formal treatment developed here is algebraic and applies to vectors in the Euclidean spaces \\(\mathbb{R}^2\\) and \\(\mathbb{R}^3\\), which are sufficient for most basic applications in calculus, geometry, and mechanics. A vector in the plane or in three-dimensional space is represented as a directed line segment, that is, a segment with a specified initial point and a terminal point. The direction of the segment indicates the orientation of the vector, and its length represents the magnitude.
 
@@ -22,13 +22,13 @@ A vector in \\(\mathbb{R}^3\\) is written as an ordered triple.
 
 \\[ \mathbf{v} = (v_1,\\, v_2,\\, v_3) \in \mathbb{R}^3\\]
 
-The [real numbers](../properties-of-real-numbers/) \\(v_1, v_2, v_3\\) are called the components of \\(\mathbf{v}\\) with respect to the chosen coordinate system. The standard basis vectors in \\(\mathbb{R}^3\\) are defined as follows.
+The real numbers \\(v_1, v_2, v_3\\) are called the components of \\(\mathbf{v}\\) with respect to the chosen coordinate system. The standard basis vectors in \\(\mathbb{R}^3\\) are defined as follows.
 
 \\[
 \mathbf{i} = (1,\\,0,\\,0) \qquad \mathbf{j} = (0,\\,1,\\,0) \qquad \mathbf{k} = (0,\\,0,\\,1)
 \\]
 
-Every vector in \\(\mathbb{R}^3\\) can be expressed as a [linear combination](../linear-combinations/) of these basis vectors.
+Every vector in \\(\mathbb{R}^3\\) can be expressed as a linear combination of these basis vectors.
 
 \\[
 \mathbf{v} = v_1\\,\mathbf{i} + v_2\\,\mathbf{j} + v_3\\,\mathbf{k}
@@ -78,7 +78,7 @@ The norm, or magnitude, of a vector \\(\mathbf{v} = (v_1, v_2, v_3)\\) is a non-
 \\|\mathbf{v}\\| = \sqrt{v_1^2 + v_2^2 + v_3^2}
 \\]
 
-This formula is a direct consequence of the [Pythagorean theorem](../pythagorean-theorem/) applied iteratively along the coordinate axes. In \\(\mathbb{R}^2\\), the analogous formula is:
+This formula is a direct consequence of the Pythagorean theorem applied iteratively along the coordinate axes. In \\(\mathbb{R}^2\\), the analogous formula is:
 
 \\[\\|\mathbf{v}\\| = \sqrt{v_1^2 + v_2^2}\\]
 
@@ -116,7 +116,7 @@ The dot product admits an equivalent geometric formulation in terms of the angle
 \mathbf{u} \cdot \mathbf{v} = \\|\mathbf{u}\\| \\,\\|\mathbf{v}\\|\cos\theta
 \\]
 
-The factor \\(\cos\theta\\) connects the dot product to the [cosine](../sine-and-cosine/) of the angle between the two vectors, and it is precisely this relationship that makes the dot product a powerful tool for measuring alignment and orthogonality. When \\(\mathbf{u} \cdot \mathbf{v} = 0\\) and neither vector is zero, it follows that \\(\cos\theta = 0\\), hence \\(\theta = \pi/2\\). Two vectors satisfying this condition are said to be orthogonal. Conversely, when the vectors are parallel, \\(\theta = 0\\) or \\(\theta = \pi\\), and the dot product equals \\(\pm\\|\mathbf{u}\\|\,\\|\mathbf{v}\\|\\). The dot product also provides a direct expression for the norm: \\(\|\mathbf{v}\|^2 = \mathbf{v} \cdot \mathbf{v}\\). As an application, consider \\(\mathbf{u} = (1, 2, -1)\\) and \\(\mathbf{v} = (3, 0, 3)\\). The dot product is computed as follows.
+The factor \\(\cos\theta\\) connects the dot product to the cosine of the angle between the two vectors, and it is precisely this relationship that makes the dot product a powerful tool for measuring alignment and orthogonality. When \\(\mathbf{u} \cdot \mathbf{v} = 0\\) and neither vector is zero, it follows that \\(\cos\theta = 0\\), hence \\(\theta = \pi/2\\). Two vectors satisfying this condition are said to be orthogonal. Conversely, when the vectors are parallel, \\(\theta = 0\\) or \\(\theta = \pi\\), and the dot product equals \\(\pm\\|\mathbf{u}\\|\,\\|\mathbf{v}\\|\\). The dot product also provides a direct expression for the norm: \\(\|\mathbf{v}\|^2 = \mathbf{v} \cdot \mathbf{v}\\). As an application, consider \\(\mathbf{u} = (1, 2, -1)\\) and \\(\mathbf{v} = (3, 0, 3)\\). The dot product is computed as follows.
 
 \\[
 \begin{align}
@@ -131,7 +131,7 @@ Since the result is zero, the two vectors are orthogonal. This conclusion can be
 - - -
 ## Cross product
 
-The cross product is an operation defined for vectors in \\(\mathbb{R}^3\\) that takes two vectors and returns a third vector. Unlike the dot product, the result is not a scalar but a vector, and for this reason the operation is also called the vector product. Given \\(\mathbf{u} = (u_1, u_2, u_3)\\) and \\(\mathbf{v} = (v_1, v_2, v_3)\\), their cross product is defined by the following formula, expressed as the determinant of a [matrix](../matrices/).
+The cross product is an operation defined for vectors in \\(\mathbb{R}^3\\) that takes two vectors and returns a third vector. Unlike the dot product, the result is not a scalar but a vector, and for this reason the operation is also called the vector product. Given \\(\mathbf{u} = (u_1, u_2, u_3)\\) and \\(\mathbf{v} = (v_1, v_2, v_3)\\), their cross product is defined by the following formula, expressed as the determinant of a matrix.
 
 \\[
 \mathbf{u} \times \mathbf{v} =

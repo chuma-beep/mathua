@@ -3,7 +3,7 @@
 
 ## The diagonalization condition
 
-A square [matrix](../matrices/) is said to be diagonalizable when it is possible to find a basis of the underlying [vector space](../vector-spaces/) consisting entirely of [eigenvectors](../eigenvalues-and-eigenvectors/) of that matrix. When such a basis exists, the matrix can be expressed in a particularly simple form: a diagonal matrix whose entries are precisely the eigenvalues. This representation is not merely a notational convenience; it reveals the intrinsic geometric structure of the linear transformation associated with the matrix and simplifies substantially the computation of powers, exponentials, and solutions to linear differential equations.
+A square matrix is said to be diagonalizable when it is possible to find a basis of the underlying vector space consisting entirely of eigenvectors of that matrix. When such a basis exists, the matrix can be expressed in a particularly simple form: a diagonal matrix whose entries are precisely the eigenvalues. This representation is not merely a notational convenience; it reveals the intrinsic geometric structure of the linear transformation associated with the matrix and simplifies substantially the computation of powers, exponentials, and solutions to linear differential equations.
 
 Let \\(A\\) be a square matrix of order \\(n\\) with entries in \\(\mathbb{R}\\) or \\(\mathbb{C}\\). The matrix \\(A\\) is diagonalizable if and only if there exists an invertible matrix \\(P\\) and a diagonal matrix \\(D\\) such that the following relation holds:
 
@@ -24,7 +24,7 @@ This formulation makes clear that \\(P\\) is a change-of-basis matrix: it transf
 - - -
 ## Eigenvalues and eigenvectors
 
-The construction of the diagonalization relies entirely on the [eigenstructure](../eigenvalues-and-eigenvectors/) of \\(A\\). Recall that a scalar \\(\lambda\\) is an eigenvalue of \\(A\\) if there exists a nonzero vector \\(\mathbf{v}\\) satisfying the following equation:
+The construction of the diagonalization relies entirely on the eigenstructure of \\(A\\). Recall that a scalar \\(\lambda\\) is an eigenvalue of \\(A\\) if there exists a nonzero vector \\(\mathbf{v}\\) satisfying the following equation:
 
 \\[
 A \mathbf{v} = \lambda \mathbf{v}
@@ -36,13 +36,13 @@ Such a vector \\(\mathbf{v}\\) is called an eigenvector of \\(A\\) associated wi
 \det(A - \lambda I) = 0
 \\]
 
-The left-hand side of this equation is a [polynomial](../polynomials/) of degree \\(n\\) in \\(\lambda\\), called the characteristic polynomial of \\(A\\). Its roots, counted with multiplicity, are the eigenvalues of \\(A\\). Once an eigenvalue \\(\lambda_k\\) has been determined, the associated eigenvectors are the nonzero solutions of the homogeneous [linear system](../systems-of-linear-equations/):
+The left-hand side of this equation is a polynomial of degree \\(n\\) in \\(\lambda\\), called the characteristic polynomial of \\(A\\). Its roots, counted with multiplicity, are the eigenvalues of \\(A\\). Once an eigenvalue \\(\lambda_k\\) has been determined, the associated eigenvectors are the nonzero solutions of the homogeneous linear system:
 
 \\[
 (A - \lambda_k I)\\,\mathbf{v} = \mathbf{0}
 \\]
 
-The set of all solutions, including the zero vector, constitutes a [subspace](../spaces/) of \\(\mathbb{R}^n\\) (or \\(\mathbb{C}^n\\)), called the eigenspace associated with \\(\lambda_k\\).
+The set of all solutions, including the zero vector, constitutes a subspace of \\(\mathbb{R}^n\\) (or \\(\mathbb{C}^n\\)), called the eigenspace associated with \\(\lambda_k\\).
 
 - - -
 ## Algebraic and geometric multiplicity
@@ -66,7 +66,7 @@ The matrix \\(A\\) is diagonalizable if and only if, for every eigenvalue \\(\la
 
 The practical construction of the matrices \\(P\\) and \\(D\\) follows a well-defined sequence of steps.
 
-+ The first step consists of computing the characteristic polynomial \\(\det(A - \lambda I)\\) and finding all its [roots](../roots-of-a-polynomial/). These roots are the eigenvalues \\(\lambda_1, \lambda_2, \ldots, \lambda_k\\) of \\(A\\).
++ The first step consists of computing the characteristic polynomial \\(\det(A - \lambda I)\\) and finding all its roots. These roots are the eigenvalues \\(\lambda_1, \lambda_2, \ldots, \lambda_k\\) of \\(A\\).
 
 + The second step consists of determining, for each eigenvalue, a basis of the corresponding eigenspace by solving the homogeneous system \\((A - \lambda_j I)\\,\mathbf{v} = \mathbf{0}\\). The union of all these bases must contain exactly \\(n\\) linearly independent vectors for the matrix to be diagonalizable.
 
@@ -83,7 +83,7 @@ Consider the following matrix:
 A = \begin{pmatrix} 3 & 1 \\\\ 0 & 2 \end{pmatrix}
 \\]
 
-To find the eigenvalues, one computes the [determinant](../determinant/) of \\(A - \lambda I\\):
+To find the eigenvalues, one computes the determinant of \\(A - \lambda I\\):
 
 \\[
 \det(A - \lambda I) = \det \begin{pmatrix} 3 - \lambda & 1 \\\\ 0 & 2 - \lambda \end{pmatrix} = (3 - \lambda)(2 - \lambda)
@@ -113,7 +113,7 @@ Both rows give \\(v_2 = 0\\), leaving \\(v_1\\) free. Choosing \\(v_1 = 1\\), on
 P = \begin{pmatrix} -1 & 1 \\\\ 1 & 0 \end{pmatrix}
 \\]
 
-Its [inverse](../inverse-matrix/) is computed directly:
+Its inverse is computed directly:
 
 \\[
 P^{-1} = \begin{pmatrix} 0 & 1 \\\\ 1 & 1 \end{pmatrix}

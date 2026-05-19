@@ -59,7 +59,7 @@ Denoting by \\(H\\) the foot of the height drawn from \\(C\\) to the base \\(AB\
 - - -
 ## Pythagorean triples
 
-A Pythagorean triple is a set of three positive [integers](../integers/) \\((a, b, c)\\) satisfying the relation:
+A Pythagorean triple is a set of three positive integers \\((a, b, c)\\) satisfying the relation:
 
 \\[
 a^2 + b^2 = c^2
@@ -81,20 +81,20 @@ A Pythagorean triple whose three entries are pairwise coprime is called a primit
 - - -
 ## Pythagorean identity on the unit circle
 
-On the [unit circle](../unit-circle/), the [sine and cosine](../sine-and-cosine/) of an angle \\(\theta\\) admit a direct geometric interpretation. Dropping a perpendicular from the point on the circle identified by \\(\theta\\) to the horizontal axis produces a right triangle whose hypotenuse is the radius, whose horizontal leg has length \\(\cos\theta\\) and whose vertical leg has length \\(\sin\theta\\).
+On the unit circle, the sine and cosine of an angle \\(\theta\\) admit a direct geometric interpretation. Dropping a perpendicular from the point on the circle identified by \\(\theta\\) to the horizontal axis produces a right triangle whose hypotenuse is the radius, whose horizontal leg has length \\(\cos\theta\\) and whose vertical leg has length \\(\sin\theta\\).
 
-Applying the Pythagorean theorem to this triangle, with legs of length \\(\sin\theta\\) and \\(\cos\theta\\) and hypotenuse of length \\(1\\), yields the [fundamental trigonometric identity](../pythagorean-identity/):
+Applying the Pythagorean theorem to this triangle, with legs of length \\(\sin\theta\\) and \\(\cos\theta\\) and hypotenuse of length \\(1\\), yields the fundamental trigonometric identity:
 
 \\[
 \sin^2\theta + \cos^2\theta = 1
 \\]
 
-The identity therefore holds for every real \\(\theta\\) and is simply the Pythagorean theorem expressed in trigonometric form. The [law of cosines](../law-of-cosines/) generalises this relation to arbitrary triangles, reducing to the Pythagorean theorem when the angle between the two known sides is right, while the [law of sines](../law-of-sines/) expresses a different link between sides and opposite angles and is used to solve triangles in which a side-angle pair is known.
+The identity therefore holds for every real \\(\theta\\) and is simply the Pythagorean theorem expressed in trigonometric form. The law of cosines generalises this relation to arbitrary triangles, reducing to the Pythagorean theorem when the angle between the two known sides is right, while the law of sines expresses a different link between sides and opposite angles and is used to solve triangles in which a side-angle pair is known.
 
 - - -
 ## Modulus of a complex number
 
-A [complex number](../complex-numbers-introduction/) can be written in the algebraic form:
+A complex number can be written in the algebraic form:
 
 \\[
 z = a + bi

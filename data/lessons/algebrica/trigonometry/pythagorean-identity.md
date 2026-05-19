@@ -3,7 +3,7 @@
 
 ## Definition
 
-The Pythagorean identity is an equation that connects trigonometry and geometry, and it derives directly from the [Pythagorean theorem](../pythagorean-theorem), which relates the sides of a right triangle. Consider a right triangle whose hypotenuse has length \\(1\\). Placing the triangle on the [unit circle](../unit-circle) and letting \\(\theta\\) denote an angle at the origin, the two legs have lengths equal to \\(\sin(\theta)\\) and \\(\cos(\theta)\\), respectively.
+The Pythagorean identity is an equation that connects trigonometry and geometry, and it derives directly from the Pythagorean theorem, which relates the sides of a right triangle. Consider a right triangle whose hypotenuse has length \\(1\\). Placing the triangle on the unit circle and letting \\(\theta\\) denote an angle at the origin, the two legs have lengths equal to \\(\sin(\theta)\\) and \\(\cos(\theta)\\), respectively.
 
 The identity takes the form
 
@@ -84,7 +84,7 @@ hold only where the respective divisions are defined. Dividing by \\(\cos^2\thet
 
 Similarly, dividing by \\(\sin^2\theta\\) requires \\(\sin\theta \neq 0\\), which excludes all integer multiples of \\(\pi\\), where \\(\cot\theta\\) and \\(\csc\theta\\) are undefined. The original identity \\(\sin^2\theta + \cos^2\theta = 1\\), by contrast, holds for every real value of \\(\theta\\) without exception.
 
-This coincidence between the [domain](../determining-the-domain-of-a-function/) restrictions and the natural domains of \\(\tan\\), \\(\sec\\), \\(\cot\\), and \\(\csc\\) is not accidental. These four functions are defined precisely as ratios involving sine and cosine, so the values excluded from their domains are exactly those at which the relevant denominator vanishes. The restrictions that appear when deriving the identities by division are therefore the same restrictions that define the functions themselves, and could not be otherwise.
+This coincidence between the domain restrictions and the natural domains of \\(\tan\\), \\(\sec\\), \\(\cot\\), and \\(\csc\\) is not accidental. These four functions are defined precisely as ratios involving sine and cosine, so the values excluded from their domains are exactly those at which the relevant denominator vanishes. The restrictions that appear when deriving the identities by division are therefore the same restrictions that define the functions themselves, and could not be otherwise.
 
 - - -
 ## Validity for arbitrary angles
@@ -138,7 +138,7 @@ we obtain the two substitution rules:
 \\[\sin^2\theta = 1 - \cos^2\theta\\]
 \\[\cos^2\theta = 1 - \sin^2\theta\\]
 
-These allow any [polynomial](../polynomials/) expression in both sine and cosine to be reduced to a polynomial in one of them alone. For example, an expression of the form:
+These allow any polynomial expression in both sine and cosine to be reduced to a polynomial in one of them alone. For example, an expression of the form:
 
 \\[\sin^2\theta + 2\sin\theta\cos\theta + \cos^2\theta\\]
 
@@ -148,7 +148,7 @@ The derived identities serve the same purpose for expressions involving the reci
 
 Similarly, from \\(1 + \cot^2\theta = \csc^2\theta\\) one obtains \\(\cot^2\theta = \csc^2\theta - 1\\), allowing expressions in \\(\cot\theta\\) and \\(\csc\theta\\) to be written in terms of \\(\csc\theta\\) alone.
 
-Many standard [integrals](../definite-integrals/) require the integrand to be expressed in a form that matches a known pattern before a substitution can be applied. The integral of \\(\tan^2\theta\\), for instance, is not immediately reducible by elementary rules. Substituting \\(\tan^2\theta = \sec^2\theta - 1\\) rewrites the integrand as a difference of two terms, each of which is straightforward to integrate:
+Many standard integrals require the integrand to be expressed in a form that matches a known pattern before a substitution can be applied. The integral of \\(\tan^2\theta\\), for instance, is not immediately reducible by elementary rules. Substituting \\(\tan^2\theta = \sec^2\theta - 1\\) rewrites the integrand as a difference of two terms, each of which is straightforward to integrate:
 
 \\[
 \begin{align}
@@ -175,7 +175,7 @@ The substitution \\(x = \sin\theta\\) is a standard technique for integrals cont
 \int \sqrt{1 - x^2} \\, dx
 \\]
 
-Setting \\(x = \sin\theta\\), with \\(\theta \in \left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\\), gives \\(dx = \cos\theta \\, d\theta\\). The [radical](../radicals/) transforms as follows:
+Setting \\(x = \sin\theta\\), with \\(\theta \in \left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]\\), gives \\(dx = \cos\theta \\, d\theta\\). The radical transforms as follows:
 
 \\[
 \sqrt{1 - x^2} = \sqrt{1 - \sin^2\theta} = \sqrt{\cos^2\theta} = \cos\theta
@@ -209,11 +209,11 @@ The solution is therefore:
 - - -
 ## Connection with Euler's formula
 
-The Pythagorean identity admits an especially transparent proof once the trigonometric functions are extended to the complex plane. Euler's formula states that for any real \\(\theta\\), the [complex exponential](../complex-numbers-exponential-form/) satisfies:
+The Pythagorean identity admits an especially transparent proof once the trigonometric functions are extended to the complex plane. Euler's formula states that for any real \\(\theta\\), the complex exponential satisfies:
 
 \\[e^{i\theta} = \cos\theta + i\sin\theta\\]
 
-Since \\(e^{i\theta}\\) lies on the unit circle in the complex plane, its [modulus](../complex-numbers-introduction/) is equal to one. Computing the squared modulus directly gives:
+Since \\(e^{i\theta}\\) lies on the unit circle in the complex plane, its modulus is equal to one. Computing the squared modulus directly gives:
 
 \\[
 |e^{i\theta}|^2 = \cos^2\theta + \sin^2\theta = 1

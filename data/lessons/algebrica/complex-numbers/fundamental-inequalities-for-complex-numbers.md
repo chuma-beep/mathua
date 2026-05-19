@@ -3,16 +3,16 @@
 
 ## Introduction
 
-A defining feature of the [field](../fields/) \\( \mathbb{C} \\) is the absence of a total order compatible with its arithmetic operations. As established in the discussion of [complex numbers](../complex-numbers-introduction/), no relation \\( \leq \\) can be defined on \\( \mathbb{C} \\) so that it behaves consistently with addition and multiplication. Statements such as \\( z_1 < z_2 \\) are therefore meaningless for arbitrary complex numbers, and the comparison techniques available in \\( \mathbb{R} \\) do not transfer to the complex setting.
+A defining feature of the field \\( \mathbb{C} \\) is the absence of a total order compatible with its arithmetic operations. As established in the discussion of complex numbers, no relation \\( \leq \\) can be defined on \\( \mathbb{C} \\) so that it behaves consistently with addition and multiplication. Statements such as \\( z_1 < z_2 \\) are therefore meaningless for arbitrary complex numbers, and the comparison techniques available in \\( \mathbb{R} \\) do not transfer to the complex setting.
 
-What survives, and what makes a quantitative theory possible, is the [modulus](../complex-numbers-introduction/) \\( |z| \\). It assigns to every complex number a non-negative real value, and through it one can compare sizes, estimate distances, and bound sums and products. The inequalities collected here form the basic toolkit for these comparisons. They appear repeatedly in the analysis of complex sequences, in the convergence of series of complex terms, and in the geometric description of regions of the plane defined by analytic conditions.
+What survives, and what makes a quantitative theory possible, is the modulus \\( |z| \\). It assigns to every complex number a non-negative real value, and through it one can compare sizes, estimate distances, and bound sums and products. The inequalities collected here form the basic toolkit for these comparisons. They appear repeatedly in the analysis of complex sequences, in the convergence of series of complex terms, and in the geometric description of regions of the plane defined by analytic conditions.
 
 > The presentation that follows proceeds from the simplest estimates, those concerning the real and imaginary components, towards the triangle inequality and its consequences, and concludes with the Cauchy-Schwarz inequality, which provides a unifying perspective on the others.
 
 - - -
 ## Inequalities involving real and imaginary parts
 
-Let \\( z = a + bi \\) be a complex number, with \\( a = \mathrm{Re}(z) \\) and \\( b = \mathrm{Im}(z) \\). The modulus is defined by \\( |z| = \sqrt{a^2 + b^2} \\), and from this definition follow three elementary inequalities that compare the modulus with the [absolute values](../absolute-value/) of the components.
+Let \\( z = a + bi \\) be a complex number, with \\( a = \mathrm{Re}(z) \\) and \\( b = \mathrm{Im}(z) \\). The modulus is defined by \\( |z| = \sqrt{a^2 + b^2} \\), and from this definition follow three elementary inequalities that compare the modulus with the absolute values of the components.
 
 The first asserts that the absolute value of either part cannot exceed the modulus:
 
@@ -73,7 +73,7 @@ Taking square roots, both sides being non-negative, completes the argument.
 
 Equality in the triangle inequality holds precisely when \\( \mathrm{Re}(z_1 \overline{z_2}) = |z_1 \overline{z_2}| \\), which occurs if and only if \\( z_1 \overline{z_2} \\) is a non-negative real number. Geometrically, this condition means that \\( z_1 \\) and \\( z_2 \\) lie on the same ray from the origin, or that one of the two vanishes. In all other configurations the inequality is strict.
 
-The geometric content is transparent. Interpreting \\( z_1 \\) and \\( z_2 \\) as [vectors](../vectors/) in the plane, the sum \\( z_1 + z_2 \\) is the diagonal of the parallelogram whose sides are the two vectors. The diagonal cannot exceed the sum of the lengths of the sides, and the two coincide only when the parallelogram degenerates into a segment, that is, when the vectors are parallel and point in the same direction.
+The geometric content is transparent. Interpreting \\( z_1 \\) and \\( z_2 \\) as vectors in the plane, the sum \\( z_1 + z_2 \\) is the diagonal of the parallelogram whose sides are the two vectors. The diagonal cannot exceed the sum of the lengths of the sides, and the two coincide only when the parallelogram degenerates into a segment, that is, when the vectors are parallel and point in the same direction.
 
 - - -
 
@@ -119,7 +119,7 @@ The triangle inequality extends to finite sums of arbitrary length. For any \\( 
 \left|\\, \sum_{k=1}^{n} z_k \\,\right| \leq \sum_{k=1}^{n} |z_k|
 \\]
 
-The proof proceeds by [induction](../principle-of-mathematical-induction/) on \\( n \\). The case \\( n = 1 \\) is trivial, since both sides reduce to \\( |z_1| \\), and the case \\( n = 2 \\) is precisely the original triangle inequality. Suppose the bound holds for some \\( n \geq 2 \\). Writing the sum of \\( n + 1 \\) terms as the sum of two complex numbers, one consisting of the first \\( n \\) summands and one consisting of the last, the triangle inequality gives:
+The proof proceeds by induction on \\( n \\). The case \\( n = 1 \\) is trivial, since both sides reduce to \\( |z_1| \\), and the case \\( n = 2 \\) is precisely the original triangle inequality. Suppose the bound holds for some \\( n \geq 2 \\). Writing the sum of \\( n + 1 \\) terms as the sum of two complex numbers, one consisting of the first \\( n \\) summands and one consisting of the last, the triangle inequality gives:
 
 \\[
 \left|\\, \sum_{k=1}^{n+1} z_k \\,\right| = \left|\\, \sum_{k=1}^{n} z_k + z_{n+1} \\,\right| \leq \left|\\, \sum_{k=1}^{n} z_k \\,\right| + |z_{n+1}|
@@ -137,7 +137,7 @@ The estimate therefore holds at step \\( n + 1 \\), which completes the inductio
 
 Equality requires more attention than in the two-term case. It holds if and only if all the non-zero summands lie on a single ray from the origin, that is, there exists a fixed unit vector \\( e^{i\alpha} \\) and non-negative real numbers \\( r_1, r_2, \ldots, r_n \\) such that \\( z_k = r_k e^{i\alpha} \\) for every \\( k \\). Under this condition the sum is itself a non-negative multiple of \\( e^{i\alpha} \\), and its modulus equals the sum of the individual moduli.
 
-The generalized triangle inequality is the foundation on which the theory of [series](../geometric-series/) of complex terms is built. The notion of absolute convergence, in particular, depends on this estimate, since it allows one to control the modulus of partial sums by partial sums of moduli, which are real and non-negative.
+The generalized triangle inequality is the foundation on which the theory of series of complex terms is built. The notion of absolute convergence, in particular, depends on this estimate, since it allows one to control the modulus of partial sums by partial sums of moduli, which are real and non-negative.
 
 - - -
 ## Cauchy-Schwarz inequality
@@ -192,7 +192,7 @@ A first illustration concerns the use of the elementary component inequalities. 
 
 - - -
 
-A second application concerns the localisation of roots of [polynomials](../polynomials/). Consider a monic polynomial of degree \\( n \\):
+A second application concerns the localisation of roots of polynomials. Consider a monic polynomial of degree \\( n \\):
 
 \\[
 p(z) = z^n + a_{n-1} z^{n-1} + \cdots + a_1 z + a_0
@@ -210,7 +210,7 @@ Setting \\( M = \max_{0 \leq k \leq n-1} |a_k| \\) and assuming \\( |z_0| > 1 \\
 |z_0| \leq 1 + M
 \\]
 
-This is a classical bound, due to Cauchy, asserting that all the complex roots of a monic polynomial lie in a closed disc whose radius is determined by the largest coefficient. The argument is short, but it combines the triangle inequality with the [geometric series](../geometric-series/) and illustrates how the basic estimates yield substantive structural information about polynomial equations.
+This is a classical bound, due to Cauchy, asserting that all the complex roots of a monic polynomial lie in a closed disc whose radius is determined by the largest coefficient. The argument is short, but it combines the triangle inequality with the geometric series and illustrates how the basic estimates yield substantive structural information about polynomial equations.
 
 - - -
 

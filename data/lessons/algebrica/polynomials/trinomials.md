@@ -3,18 +3,18 @@
 
 ## Definition
 
-A trinomial is defined as a [polynomial](../polynomials/) consisting of exactly three non-zero, pairwise distinct terms. More generally, within a commutative ring with unity, a trinomial in the indeterminate \\(x\\) is any expression of the form:
+A trinomial is defined as a polynomial consisting of exactly three non-zero, pairwise distinct terms. More generally, within a commutative ring with unity, a trinomial in the indeterminate \\(x\\) is any expression of the form:
 
 \\[ a_n x^n + a_m x^m + a_k x^k\\]
 \\[n > m > k \geq 0\\]
 
 The coefficients \\(a_n, a_m, a_k\\) are non-zero elements of the ring. When the underlying ring is \\(\mathbb{R}\\), the coefficients are real numbers and the degree of the trinomial is \\(n\\).
 
-> A [ring](../rings/) is a set equipped with addition and multiplication satisfying the standard algebraic axioms: associativity, distributivity, and the existence of an additive identity and inverses. A commutative ring with unity additionally requires commutativity of multiplication and a multiplicative identity. Typical examples are \\(\mathbb{Z}\\), \\(\mathbb{R}\\), and \\(\mathbb{C}.\\)
+> A ring is a set equipped with addition and multiplication satisfying the standard algebraic axioms: associativity, distributivity, and the existence of an additive identity and inverses. A commutative ring with unity additionally requires commutativity of multiplication and a multiplicative identity. Typical examples are \\(\mathbb{Z}\\), \\(\mathbb{R}\\), and \\(\mathbb{C}.\\)
 
 - - -
 
-The [quadratic trinomial](../quadratic-equations/) in one variable, which has degree two, is the most frequently studied case and takes the following canonical form where \\(a, b, c \in \mathbb{R}\\) and \\(a \neq 0\\):
+The quadratic trinomial in one variable, which has degree two, is the most frequently studied case and takes the following canonical form where \\(a, b, c \in \mathbb{R}\\) and \\(a \neq 0\\):
 
 \\[ ax^2 + bx + c \tag{1}\\]
 
@@ -24,7 +24,7 @@ Not every polynomial with three terms is of the form (1). For example, expressio
 
 - - -
 
-The quadratic trinomial (1) defines the quadratic function \\(f(x) = ax^2 + bx + c\\), whose graph is a [parabola](../parabola/). The vertex form indicates that the vertex of the parabola is located at
+The quadratic trinomial (1) defines the quadratic function \\(f(x) = ax^2 + bx + c\\), whose graph is a parabola. The vertex form indicates that the vertex of the parabola is located at
 
 \\[ \left( -\frac{b}{2a}, \\, -\frac{\Delta}{4a} \right) \\]
 
@@ -47,15 +47,15 @@ The algebraic properties of the quadratic trinomial \\(ax^2 + bx + c\\) are dete
 
 \\[ \Delta = b^2 - 4ac \tag{2} \\]
 
-The discriminant determines the nature of the [roots](../roots-of-a-polynomial/) of the quadratic equation \\(ax^2 + bx + c = 0\\) and, consequently, the factorisation structure of the trinomial over the real numbers \\(\mathbb{R}\\) and the complex numbers \\(\mathbb{C}\\). Three distinct cases arise based on the value of the discriminant.
+The discriminant determines the nature of the roots of the quadratic equation \\(ax^2 + bx + c = 0\\) and, consequently, the factorisation structure of the trinomial over the real numbers \\(\mathbb{R}\\) and the complex numbers \\(\mathbb{C}\\). Three distinct cases arise based on the value of the discriminant.
 
-If \\(\Delta > 0\\), the trinomial possesses two distinct real roots, \\(x_1\\) and \\(x_2\\), which are given by the [quadratic formula](../quadratic-formula/):
+If \\(\Delta > 0\\), the trinomial possesses two distinct real roots, \\(x_1\\) and \\(x_2\\), which are given by the quadratic formula:
 
 \\[ x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a} \tag{3} \\]
 
 If \\(\Delta = 0\\), the two roots coincide, resulting in a single value \\(x_0 = -b/(2a)\\), referred to as a repeated root or a root of multiplicity two.
 
-If \\(\Delta < 0\\), the trinomial has no real roots and is irreducible over \\(\mathbb{R}\\), as it cannot be expressed as a product of two linear factors with real coefficients. However, over the [complex numbers](../complex-numbers-introduction/) \\(\mathbb{C}\\), formula (3) remains valid, with \\(\sqrt{\Delta}\\) interpreted as \\(i\sqrt{|\Delta|}\\), resulting in a conjugate pair of [complex roots](../quadratic-equations-with-complex-solutions/).
+If \\(\Delta < 0\\), the trinomial has no real roots and is irreducible over \\(\mathbb{R}\\), as it cannot be expressed as a product of two linear factors with real coefficients. However, over the complex numbers \\(\mathbb{C}\\), formula (3) remains valid, with \\(\sqrt{\Delta}\\) interpreted as \\(i\sqrt{|\Delta|}\\), resulting in a conjugate pair of complex roots.
 
 - - -
 
@@ -67,7 +67,7 @@ If \\(\Delta \geq 0\\), the trinomial in equation (1) can be completely factoris
 
 \\[ ax^2 + bx + c = a(x - x_0)^2 \\]
 
-The factorisation in equation (4) represents the product form of the trinomial. This form is fundamental for simplifying rational expressions, solving inequalities, and evaluating [limits](../limits/) and [integrals](../definite-integrals/) that involve quadratic denominators.
+The factorisation in equation (4) represents the product form of the trinomial. This form is fundamental for simplifying rational expressions, solving inequalities, and evaluating limits and integrals that involve quadratic denominators.
 
 - - -
 ## Vieta's formulas
@@ -170,7 +170,7 @@ Completing the square is a technique used to rewrite any quadratic trinomial of 
 
  \\[a(x - h)^2 + k\\]
 
-\\(h\\) and \\(k\\) are constants determined by the original coefficients. This form allows for direct identification of the vertex of the corresponding [parabola](../parabola/) and serves as a fundamental step in deriving the quadratic formula. For a comprehensive discussion, refer to the dedicated page on completing the square.
+\\(h\\) and \\(k\\) are constants determined by the original coefficients. This form allows for direct identification of the vertex of the corresponding parabola and serves as a fundamental step in deriving the quadratic formula. For a comprehensive discussion, refer to the dedicated page on completing the square.
 
 - - -
 ## Trinomials reducible to quadratic form
@@ -179,7 +179,7 @@ Certain higher-degree trinomials may be reduced to quadratic form through an app
 
 \\[ ax^{2n} + bx^n + c \\]
 
-\\(n \geq 2\\) is a positive [integer](../integers/), becomes quadratic when the substitution \\(t = x^n\\) is applied:
+\\(n \geq 2\\) is a positive integer, becomes quadratic when the substitution \\(t = x^n\\) is applied:
 
 \\[ at^2 + bt + c \\]
 
@@ -218,6 +218,6 @@ A quadratic trinomial \\(ax^2 + bx + c\\) with \\(\Delta < 0\\) cannot be decomp
 
 \\[ x_{1,2} = \frac{-b \pm i\sqrt{|\Delta|}}{2a} \\]
 
-The corresponding factorisation is \\(a(x - x_1)(x - x_2)\\), which holds in \\(\mathbb{C}[x]\\). This result follows from the [Fundamental Theorem of Algebra](../roots-of-a-polynomial/), which states that every non-constant polynomial over \\(\mathbb{C}\\) can be factored completely into linear factors.
+The corresponding factorisation is \\(a(x - x_1)(x - x_2)\\), which holds in \\(\mathbb{C}[x]\\). This result follows from the Fundamental Theorem of Algebra, which states that every non-constant polynomial over \\(\mathbb{C}\\) can be factored completely into linear factors.
 
 > This irreducibility constitutes a property with significant implications in real analysis and integration theory. Specifically, integrals involving an irreducible quadratic in the denominator necessitate completing the square and substitution, rather than employing partial fractions with real linear factors.

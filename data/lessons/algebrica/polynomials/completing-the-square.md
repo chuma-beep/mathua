@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Completing the square is a technique used to rewrite a quadratic [polynomial](../polynomials/) in a form that reveals its structural properties. Consider a polynomial of the form:
+Completing the square is a technique used to rewrite a quadratic polynomial in a form that reveals its structural properties. Consider a polynomial of the form:
 
 \\[
 p(x) = ax^2 + bx + c, \quad a \neq 0
@@ -15,7 +15,7 @@ The objective is to determine real constants \\( h \\) and \\( k \\), which depe
 p(x) = a(x + h)^2 + k
 \\]
 
-The pair \\( (-h,\\, k) \\) specifies the vertex of the corresponding [parabola](../parabola/). The value \\( k \\) represents the minimum of \\( p \\) when \\( a > 0 \\) and the maximum when \\( a < 0 \\). Setting \\( p(x) \\) equal to zero yields the equation \\( a(x+h)^2 = -k \\), from which the [roots](../roots-of-a-polynomial/) can be obtained by taking square roots of both sides.
+The pair \\( (-h,\\, k) \\) specifies the vertex of the corresponding parabola. The value \\( k \\) represents the minimum of \\( p \\) when \\( a > 0 \\) and the maximum when \\( a < 0 \\). Setting \\( p(x) \\) equal to zero yields the equation \\( a(x+h)^2 = -k \\), from which the roots can be obtained by taking square roots of both sides.
 
 - - -
 
@@ -25,7 +25,7 @@ To derive explicit expressions for \\( h \\) and \\( k \\), the process begins b
 p(x) = a\\left(x^2 + \\frac{b}{a}x\\right) + c
 \\]
 
-The crucial step is to add and subtract \\( \\left(\\dfrac{b}{2a}\\right)^{\\!2} \\) inside the parentheses, a quantity chosen so that the three terms involving \\( x \\) form a perfect square [trinomial](../trinomials/):
+The crucial step is to add and subtract \\( \\left(\\dfrac{b}{2a}\\right)^{\\!2} \\) inside the parentheses, a quantity chosen so that the three terms involving \\( x \\) form a perfect square trinomial:
 
 \\[
 p(x) = a\\left(x^2 + \\frac{b}{a}x + \\left(\\frac{b}{2a}\\right)^{\\!2} - \\left(\\frac{b}{2a}\\right)^{\\!2}\\right) + c
@@ -66,7 +66,7 @@ x^2 + 6x + 9 = (x + 3)^2
 
 This geometric reasoning applies precisely when the constant term equals the square of half the linear coefficient, as in a polynomial with a repeated root. Setting the expression equal to zero yields the equation \\( (x+3)^2 = 0 \\), whose unique solution is \\( x = -3 \\). In the general case, completing the square provides the necessary correction algebraically, even when the resulting configuration does not correspond to a concrete geometric realisation over the positive real numbers.
 
-> When the coefficients are small integers and the polynomial factors readily, this geometric approach is often more straightforward than using the [quadratic formula](../quadratic-formula). Its effectiveness decreases when the leading coefficient or the linear term contains fractions or irrational numbers, as the arithmetic becomes more complex and the quadratic formula is generally preferable.
+> When the coefficients are small integers and the polynomial factors readily, this geometric approach is often more straightforward than using the quadratic formula. Its effectiveness decreases when the leading coefficient or the linear term contains fractions or irrational numbers, as the arithmetic becomes more complex and the quadratic formula is generally preferable.
 
 - - -
 ## Example 1
@@ -111,13 +111,13 @@ The equation has two real roots:
 x = \\frac{2 \\pm \\sqrt{7}}{3}
 \\]
 
-> When the coefficients are not small integers, completing the square is typically more laborious than directly applying the [quadratic formula](../quadratic-formula). The latter method is generally preferable in such cases.
+> When the coefficients are not small integers, completing the square is typically more laborious than directly applying the quadratic formula. The latter method is generally preferable in such cases.
 
 - - -
 
 ## Derivation of the quadratic formula
 
-A principal application of completing the square is that it produces the [quadratic formula](../quadratic-formula/) as a direct consequence, rather than as an independent result. The derivation begins with the general quadratic equation:
+A principal application of completing the square is that it produces the quadratic formula as a direct consequence, rather than as an independent result. The derivation begins with the general quadratic equation:
 
 \\[
 ax^2 + bx + c = 0 \quad a \neq 0.
@@ -147,7 +147,7 @@ Taking the square root of both sides and solving for \\( x \\) we obtain:
 x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}
 \\]
 
-> This derivation shows that the quadratic formula is a direct consequence of completing the square applied to the general [quadratic equation](../quadratic-equations/).
+> This derivation shows that the quadratic formula is a direct consequence of completing the square applied to the general quadratic equation.
 
 - - -
 

@@ -3,14 +3,14 @@
 
 ## Definition
 
-The [algebraic form](../complex-numbers-introduction) \\( z = a + bi \\) represents a complex number through its real and imaginary components directly. Every nonzero complex number can also be described by two geometric quantities, its distance from the origin and its angular position in the complex plane. This leads to the trigonometric form of a complex number:
+The algebraic form \\( z = a + bi \\) represents a complex number through its real and imaginary components directly. Every nonzero complex number can also be described by two geometric quantities, its distance from the origin and its angular position in the complex plane. This leads to the trigonometric form of a complex number:
 
 \\[z = r (\cos\theta + i\sin\theta)\\]
 
 - \\( r = |z| = \sqrt{a^2 + b^2} \\) is the modulus, representing the distance of \\( z \\) from the origin in the complex plane.
-- \\( \theta = \arg(z) \\) is the argument, the angle in radians between the positive real axis and the [vector](../vectors/) representing \\( z \\).
+- \\( \theta = \arg(z) \\) is the argument, the angle in radians between the positive real axis and the vector representing \\( z \\).
 
-Since the point \\( z = (a, b) \\) lies in the complex plane at distance \\( r \\) from the origin, and \\( \theta \\) is the angle it forms with the positive real axis, the real and imaginary components can be expressed through the definitions of [sine](../sine-and-cosine) and [cosine](../sine-and-cosine) in a right triangle. The projections onto the two axes are the following.
+Since the point \\( z = (a, b) \\) lies in the complex plane at distance \\( r \\) from the origin, and \\( \theta \\) is the angle it forms with the positive real axis, the real and imaginary components can be expressed through the definitions of sine and cosine in a right triangle. The projections onto the two axes are the following.
 
 \\[\overline{OA} = \overline{OP} \cdot \cos(\theta) = r \cos(\theta)\\]
 \\[\overline{OB} = \overline{OP} \cdot \sin(\theta) = r \sin(\theta)\\]
@@ -31,7 +31,7 @@ The complex conjugate \\( \bar{z} \\) of a complex number \\( z \\) in trigonome
 
 \\[\bar{z} = r (\cos\theta - i\sin\theta)\\]
 
-> See also how to express a complex number in its [exponential form](../complex-numbers-exponential-form).
+> See also how to express a complex number in its exponential form.
 
 - - -
 ## Operations
@@ -45,9 +45,9 @@ their product is another complex number whose modulus is the product of the modu
 
 \\[z_1 z_2 = r_1 r_2 [\cos(\theta_1 + \theta_2) + i \sin(\theta_1 + \theta_2)]\\]
 
-Geometrically, [multiplying two complex numbers](../complex-number-operations/) corresponds to scaling their distances from the origin by the product of their moduli and rotating the result by the sum of their arguments, combining a dilation and a rotation in a single operation.
+Geometrically, multiplying two complex numbers corresponds to scaling their distances from the origin by the product of their moduli and rotating the result by the sum of their arguments, combining a dilation and a rotation in a single operation.
 
-> This interpretation extends naturally to integer powers through [De Moivre's theorem](../de-moivre-theorem/).
+> This interpretation extends naturally to integer powers through De Moivre's theorem.
 
 ---
 
@@ -75,7 +75,7 @@ When \\( x < 0 \\), a correction of \\( \pm\pi \\) must be applied depending on 
 - - -
 ## Modulus and argument
 
-The modulus \\( r \\) of a complex number represents its distance from the origin in the complex plane. It is computed via the [Pythagorean theorem](../pythagorean-theorem/) applied to the real and imaginary components, and its value is always non-negative.
+The modulus \\( r \\) of a complex number represents its distance from the origin in the complex plane. It is computed via the Pythagorean theorem applied to the real and imaginary components, and its value is always non-negative.
 
 \\[r = |z| = \sqrt{a^2 + b^2} \geq 0\\]
 
@@ -83,7 +83,7 @@ Since the modulus measures a geometric length, it cannot be negative. When \\( r
 
 ---
 
-The argument \\( \theta \\) of a complex number describes its angular position in the complex plane, measured in radians from the positive real axis. Unlike the modulus, which is uniquely determined, the argument is not unique: two angles that differ by an [integer](../integers/) multiple of \\( 2\pi \\) describe the same direction, and therefore the same complex number. More precisely, for any \\( k \in \mathbb{Z} \\), the angles \\( \theta \\) and \\( \theta + 2k\pi \\) correspond to the same point in the complex plane. This is often written in the following compact form:
+The argument \\( \theta \\) of a complex number describes its angular position in the complex plane, measured in radians from the positive real axis. Unlike the modulus, which is uniquely determined, the argument is not unique: two angles that differ by an integer multiple of \\( 2\pi \\) describe the same direction, and therefore the same complex number. More precisely, for any \\( k \in \mathbb{Z} \\), the angles \\( \theta \\) and \\( \theta + 2k\pi \\) correspond to the same point in the complex plane. This is often written in the following compact form:
 
 \\[\arg(z) = \theta + 2k\pi, \quad k \in \mathbb{Z}\\]
 

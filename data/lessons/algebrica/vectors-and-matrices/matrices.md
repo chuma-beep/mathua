@@ -3,7 +3,7 @@
 
 ## Introduction
 
-A matrix is a rectangular array of [real numbers](../types-of-numbers) arranged in rows and columns. A matrix with \\( m \\) rows and \\( n \\) columns is said to have dimensions \\( m \\times n \\), and is called an \\( m \\times n \\) matrix. For example, a \\( 3 \\times 2 \\) matrix has 3 rows and 2 columns. Each number appearing in a matrix is called an element. Elements are identified by two subscript indices: the first indicates the row and the second the column. Thus \\( a_{2,3} \\) denotes the element in the second row and third column. A matrix \\( A \\) of dimensions \\( m \\times n \\) is written as follows:
+A matrix is a rectangular array of real numbers arranged in rows and columns. A matrix with \\( m \\) rows and \\( n \\) columns is said to have dimensions \\( m \\times n \\), and is called an \\( m \\times n \\) matrix. For example, a \\( 3 \\times 2 \\) matrix has 3 rows and 2 columns. Each number appearing in a matrix is called an element. Elements are identified by two subscript indices: the first indicates the row and the second the column. Thus \\( a_{2,3} \\) denotes the element in the second row and third column. A matrix \\( A \\) of dimensions \\( m \\times n \\) is written as follows:
 
 \\[
 A = \\begin{pmatrix}
@@ -16,12 +16,12 @@ a_{m1} & a_{m2} & \\cdots & a_{mn}
 
 This is also written in compact form as \\( A = (a_{ij}) \\), where \\( a_{ij} \\) denotes the element in the \\( i \\)-th row and \\( j \\)-th column, with \\( 1 \\leq i \\leq m \\) and \\( 1 \\leq j \\leq n \\).
 
-> The set of all \\( m \\times n \\) matrices with real entries forms an abelian group under addition. When restricted to square matrices of order \\( n \\), the additional structure of matrix multiplication makes \\( M_{n\\times n}(\\mathbb{R}) \\) a ring. The subset of invertible matrices of order \\( n \\) forms a [group](../groups/) under multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\).
+> The set of all \\( m \\times n \\) matrices with real entries forms an abelian group under addition. When restricted to square matrices of order \\( n \\), the additional structure of matrix multiplication makes \\( M_{n\\times n}(\\mathbb{R}) \\) a ring. The subset of invertible matrices of order \\( n \\) forms a group under multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\).
 
 - - -
 ## Vectors and the zero matrix
 
-A matrix consisting of a single row is called a row [vector](../vectors/), and a matrix consisting of a single column is called a column vector. The following are a row vector \\( A \\) with 3 columns and a column vector \\( B \\) with 3 rows:
+A matrix consisting of a single row is called a row vector, and a matrix consisting of a single column is called a column vector. The following are a row vector \\( A \\) with 3 columns and a column vector \\( B \\) with 3 rows:
 
 \\[
 A = \\begin{pmatrix} a\_1 & a\_2 & a_3 \\end{pmatrix}
@@ -31,7 +31,7 @@ B = \\begin{pmatrix} b\_1 \\\\[6pt] b\_2 \\\\[6pt] b\_3 \\end{pmatrix}
 
 A matrix in which every element is equal to zero is called the zero matrix, denoted \\( O \\). The zero matrix plays the role of the additive identity in matrix addition, as discussed below.
 
-> Row and column vectors are matrices in the usual sense and obey all the same algebraic rules. They are treated as special cases here for clarity, but are studied more extensively in the context of [linear combinations](../linear-combinations/) and vector spaces.
+> Row and column vectors are matrices in the usual sense and obey all the same algebraic rules. They are treated as special cases here for clarity, but are studied more extensively in the context of linear combinations and vector spaces.
 
 - - -
 ## Square matrices and special types
@@ -82,7 +82,7 @@ S = \\begin{pmatrix}
 \\end{pmatrix}
 \\]
 
-> Symmetric matrices arise naturally in many areas of mathematics, including quadratic forms, inner product spaces, and spectral theory. Every real symmetric matrix has real [eigenvalues](../eigenvalues-and-eigenvectors/) and an orthogonal basis of eigenvectors, a result known as the spectral theorem.
+> Symmetric matrices arise naturally in many areas of mathematics, including quadratic forms, inner product spaces, and spectral theory. Every real symmetric matrix has real eigenvalues and an orthogonal basis of eigenvectors, a result known as the spectral theorem.
 
 - - -
 ## Transpose
@@ -286,4 +286,4 @@ Matrix multiplication satisfies the following properties, for matrices of compat
 
 - - -
 
-To every square matrix of order \\( n \\) one associates a real number called the [determinant](../determinant/) of the matrix, denoted \\( \\det(A) \\). The determinant encodes fundamental information about the matrix, including whether it is invertible, as discussed in the entry on the [inverse matrix](../inverse-matrix/).
+To every square matrix of order \\( n \\) one associates a real number called the determinant of the matrix, denoted \\( \\det(A) \\). The determinant encodes fundamental information about the matrix, including whether it is invertible, as discussed in the entry on the inverse matrix.

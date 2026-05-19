@@ -3,9 +3,9 @@
 
 ## Introduction
 
-The Riemann integral is built to measure the net area under a bounded [function](../functions/) on a [closed interval](../intervals/) by approximating it with rectangles. The subtle point is not computing the integral once it exists, but deciding when the [limiting](../limits) process is well-defined. This page collects the most useful criteria for Riemann integrability, in a form that is easy to apply when you meet a function that is not obviously [continuous](../continuous-functions/). 
+The Riemann integral is built to measure the net area under a bounded function on a closed interval by approximating it with rectangles. The subtle point is not computing the integral once it exists, but deciding when the limiting process is well-defined. This page collects the most useful criteria for Riemann integrability, in a form that is easy to apply when you meet a function that is not obviously continuous. 
 
-> If you want the definition and basic properties of the definite integral first, see: [Definite Integrals](../definite-integrals/).
+> If you want the definition and basic properties of the definite integral first, see: Definite Integrals.
 
 - - -
 ## Partitions, upper sums, lower sums
@@ -99,14 +99,14 @@ U(f,P) - L(f,P) = \sum_{i=1}^n (M_i - m_i)(x_i - x_{i-1})
 
 This is the central idea. A function is integrable if we can divide the interval into sufficiently small pieces so that the variation of the function on each piece contributes only a negligible error to the total sum. If, on the contrary, the function keeps oscillating in an uncontrollable way on every subinterval, no matter how fine the partition, then this condition cannot be met, and the function fails to be integrable in the Riemann sense.
 
-> Once a function is known to be Riemann integrable, the [Fundamental Theorem of Calculus](../fundamental-theorem-of-calculus/) provides the main tool for evaluating it.
+> Once a function is known to be Riemann integrable, the Fundamental Theorem of Calculus provides the main tool for evaluating it.
 
 - - -
 ## Common sufficient conditions
 
 The Darboux criterion is the foundation, but in practice most functions you encounter fall into one of three categories that guarantee integrability without any direct computation of sums. A function \\( f \\) on \\( [a,b] \\) is Riemann integrable if it satisfies any one of the following conditions.
 
-+ If \\( f \\) is [continuous](../continuous-functions/) on \\( [a,b] \\), integrability follows from uniform continuity: on a closed bounded interval, continuity forces the oscillation \\( M_i - m_i \\) to be uniformly small on every sufficiently short subinterval, which is exactly what the Darboux criterion requires.
++ If \\( f \\) is continuous on \\( [a,b] \\), integrability follows from uniform continuity: on a closed bounded interval, continuity forces the oscillation \\( M_i - m_i \\) to be uniformly small on every sufficiently short subinterval, which is exactly what the Darboux criterion requires.
 
 + If \\( f \\) is monotone on \\( [a,b] \\), the oscillation on each subinterval reduces to a difference of endpoint values. These differences telescope when summed across the partition, and the total \\( U(f,P) - L(f,P) \\) can be made small simply by taking the mesh fine enough.
 
@@ -124,7 +124,7 @@ A bounded function \\( f:[a,b]\to\mathbb{R} \\) is Riemann integrable if and onl
 
 - - -
 
-[Dirichlet's function](../dirichlet-function/) is defined as:
+Dirichlet's function is defined as:
 
 \\[
 f(x) =
@@ -134,7 +134,7 @@ f(x) =
 \end{cases}
 \\]
 
-It is [discontinuous](../discontinuities-of-real-functions/) at every point of \\( [a,b] \\), so its discontinuity set is the entire interval, which does not have measure zero. It is not Riemann integrable. Every subinterval contains both rationals and irrationals, so every \\( M_i = 1 \\) and every \\( m_i = 0 \\), which gives \\( U(f,P) - L(f,P) = b - a \\) for every partition \\( P \\), regardless of how fine it is.
+It is discontinuous at every point of \\( [a,b] \\), so its discontinuity set is the entire interval, which does not have measure zero. It is not Riemann integrable. Every subinterval contains both rationals and irrationals, so every \\( M_i = 1 \\) and every \\( m_i = 0 \\), which gives \\( U(f,P) - L(f,P) = b - a \\) for every partition \\( P \\), regardless of how fine it is.
 
 - - -
 

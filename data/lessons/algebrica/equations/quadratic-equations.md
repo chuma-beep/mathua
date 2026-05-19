@@ -3,7 +3,7 @@
 
 ## Introduction
 
-A quadratic equation is a second-degree [polynomial equation](../polynomial-equations/)
+A quadratic equation is a second-degree polynomial equation
 in one variable. Its standard form is the following:
 
 \\[ ax^2 + bx + c = 0 \\]
@@ -15,7 +15,7 @@ where \\(a\\), \\(b\\), and \\(c\\) are real coefficients, \\(x\\) is the unknow
 - \\(a\\) is the coefficient of the quadratic term \\(x^2\\), \\(b\\) the coefficient of the linear term \\(x\\) and \\(c\\) the constant term.
 - When \\(a = 0\\), the equation reduces to the linear equation \\(bx + c = 0\\). If \\(b = 0\\) as well, the equation becomes constant and may have no solution or infinitely many solutions, depending on whether \\(c \neq 0\\) or \\(c = 0\\).
 
-Quadratic equations are the simplest case of [trinomial equation](../trinomial-equations/), which has the general form:
+Quadratic equations are the simplest case of trinomial equation, which has the general form:
 
 \\[ ax^{2n} + bx^{n} + c = 0 \\]
 
@@ -24,43 +24,43 @@ Setting \\(n = 1\\) recovers the standard quadratic form \\(ax^2 + bx + c = 0.\\
 - - -
 ## Geometrical interpretation
 
-The equation \\(y = ax^2 + bx + c\\), with \\(a \neq 0\\), represents a [parabola](../parabola/) in the plane defined by the variables \\(x\\) and \\(y\\).
+The equation \\(y = ax^2 + bx + c\\), with \\(a \neq 0\\), represents a parabola in the plane defined by the variables \\(x\\) and \\(y\\).
 
 ![Img. 1](quadratic-equations.svg)
 
 When the coefficient \\(a > 0\\) the parabola opens upward and the vertex is a minimum of the function. When \\(a < 0\\) it opens downward and the vertex is a maximum.
 
-The real solutions of the equation \\(ax^2 + bx + c = 0\\) correspond to the points at which the parabola intersects the \\(x\\)-axis. The sign of the [discriminant](../quadratic-formula/) \\(\Delta = b^2 - 4ac\\) controls this configuration:
+The real solutions of the equation \\(ax^2 + bx + c = 0\\) correspond to the points at which the parabola intersects the \\(x\\)-axis. The sign of the discriminant \\(\Delta = b^2 - 4ac\\) controls this configuration:
 
 + For \\(\Delta > 0\\) the parabola crosses the axis at two distinct points.
 + For \\(\Delta = 0\\) it is tangent to the axis.
 + For \\(\Delta < 0\\) it does not intersect the axis and the equation has no real solutions.
 
-> The condition \\(a \neq 0\\) ensures that the equation describes a parabolic curve rather than a [linear equation](../linear-equation/).
+> The condition \\(a \neq 0\\) ensures that the equation describes a parabolic curve rather than a linear equation.
 
 - - -
 ## Resolution methods
 
-A quadratic equation is [incomplete](../incomplete-quadratic-equations/) when either the
+A quadratic equation is incomplete when either the
 coefficient \\(b\\) or \\(c\\) is equal to zero. In this case the equation takes a simpler form and can be solved directly, without applying the general formula. The first step in solving a quadratic equation is to rewrite it in standard form:
 
 \\[ax^2 + bx + c = 0\\]
 
-This form allows the coefficients to be identified and the [discriminant](../quadratic-formula/) \\(\Delta = b^2 - 4ac\\) to be computed. The discriminant determines the nature of the solutions:
+This form allows the coefficients to be identified and the discriminant \\(\Delta = b^2 - 4ac\\) to be computed. The discriminant determines the nature of the solutions:
 
 + Two distinct real roots when \\(\Delta > 0\\).
 + One real root of multiplicity two when \\(\Delta = 0\\).
 + A pair of complex conjugate roots when \\(\Delta < 0\\).
 
-The most general method of resolution is the [quadratic formula](../quadratic-formula/).
-In some cases, however, [factoring](../factoring-quadratic-equations/) or [completing the square](../completing-the-square) can offer a more direct route to the solution.
+The most general method of resolution is the quadratic formula.
+In some cases, however, factoring or completing the square can offer a more direct route to the solution.
 
-The [fundamental theorem of algebra](../roots-of-a-polynomial/) guarantees that a quadratic equation has exactly two roots in \\(\mathbb{C}\\), counted with multiplicity. The roots are both real when \\(\Delta \geq 0\\), and form a pair of [complex conjugates](../quadratic-equations-with-complex-solutions/)when \\(\Delta < 0\\).
+The fundamental theorem of algebra guarantees that a quadratic equation has exactly two roots in \\(\mathbb{C}\\), counted with multiplicity. The roots are both real when \\(\Delta \geq 0\\), and form a pair of complex conjugateswhen \\(\Delta < 0\\).
 
 - - -
 ## Quadratic formula
 
- Given a quadratic equation in the standard form \\(ax^2+bx+c = 0\\), the [quadratic formula](../quadratic-equations/quadratic-formula/) is:
+ Given a quadratic equation in the standard form \\(ax^2+bx+c = 0\\), the quadratic formula is:
 
 \\[ x_{1,2} = \frac{{-b \pm \sqrt{{b^2 - 4ac}}}}{{2a}} \\]
 
@@ -76,23 +76,23 @@ A further property of the discriminant is the following:
 This identity shows directly that \\(\Delta \geq 0\\) when the roots are real, and that
 \\(\Delta = 0\\) if and only if the two roots coincide.
 
->When the discriminant is negative, the solutions are complex. The dedicated entry on [quadratic equations with complex solutions](../quadratic-equations-with-complex-solutions/) covers this case in full.
+>When the discriminant is negative, the solutions are complex. The dedicated entry on quadratic equations with complex solutions covers this case in full.
 
 - - -
 ## Factoring
 
-A quadratic equation can be [factored](../factoring-quadratic-equations/) into the following form:
+A quadratic equation can be factored into the following form:
 
 \\[ ax^2 + bx + c = 0 \quad \Longleftrightarrow \quad a(x - x_1)(x - x_2) = 0 \\]
 
-where \\(x_1\\) and \\(x_2\\) are the roots of the equation. By [Vieta's formulas](../trinomials/), the roots satisfy the following relations:
+where \\(x_1\\) and \\(x_2\\) are the roots of the equation. By Vieta's formulas, the roots satisfy the following relations:
 
 \\[ x_1 + x_2 = -\frac{b}{a}\\]
 \\[ x_1 \cdot x_2 = \frac{c}{a} \\]
 
 This method is effective when the roots can be identified by inspection or by simple
 trial, but becomes impractical for equations with irrational or complex roots, where the
-[quadratic formula](../quadratic-formula/) is preferable.
+quadratic formula is preferable.
 
 - - -
 ## How to solve a quadratic equation
@@ -111,7 +111,7 @@ trial, but becomes impractical for equations with irrational or complex roots, w
 - - -
 ## Quadratic equations with parameters
 
-A natural extension of the study of quadratic equations is to consider the case in which the coefficients are not fixed numbers but depend on an external parameter. In this setting we speak of [quadratic equations with a parameter](../quadratic-equations-with-parameters/),
+A natural extension of the study of quadratic equations is to consider the case in which the coefficients are not fixed numbers but depend on an external parameter. In this setting we speak of quadratic equations with a parameter,
 also called literal quadratic equations, which take the form:
 
 \\[ a(k)\\,x^2 + b(k)\\,x + c(k) = 0, \quad a(k) \neq 0 \\]

@@ -3,13 +3,13 @@
 
 ## Definition
 
-To every square [matrix](../matrices/) of order \\( n \\) one can associate a [real number](../types-of-numbers/) called the determinant of the matrix, denoted \\( \\det(A) \\) or \\( |A| \\). The determinant is a scalar-valued function that encodes both algebraic and geometric properties of the associated linear transformation:
+To every square matrix of order \\( n \\) one can associate a real number called the determinant of the matrix, denoted \\( \\det(A) \\) or \\( |A| \\). The determinant is a scalar-valued function that encodes both algebraic and geometric properties of the associated linear transformation:
 
 \\[
 \\det : M_n(\\mathbb{R}) \\to \\mathbb{R}
 \\]
 
-It determines whether the matrix is invertible and measures the factor by which the transformation scales volumes. It appears in the explicit solution of [systems of linear equations](../systems-of-linear-equations/) via [Cramer's rule](../cramers-rule/), and plays a central role in the study of [eigenvalues](../eigenvalues-and-eigenvectors/) and linear transformations.
+It determines whether the matrix is invertible and measures the factor by which the transformation scales volumes. It appears in the explicit solution of systems of linear equations via Cramer's rule, and plays a central role in the study of eigenvalues and linear transformations.
 
 The determinant of a matrix of order 1 is the element itself:
 
@@ -185,9 +185,9 @@ We obtain:
 The following are the fundamental properties of the determinant.
 
 - If \\( A \\) has an entire row or column of zeros, then \\( \\det(A) = 0 \\).
-- If two rows or two columns of \\( A \\) are proportional, then \\( \\det(A) = 0 \\). More generally, if one row or column is a [linear combination](../linear-combinations/) of others, then \\( \\det(A) = 0 \\).
+- If two rows or two columns of \\( A \\) are proportional, then \\( \\det(A) = 0 \\). More generally, if one row or column is a linear combination of others, then \\( \\det(A) = 0 \\).
 - If all elements of a row or column are multiplied by a scalar \\( k \\), the determinant is multiplied by \\( k \\). Equivalently, a scalar factor can be extracted from any row or column: \\( \\det(kA) = k^n \\det(A) \\) for a matrix of order \\( n \\).
 - The determinant of a product equals the product of the determinants: \\( \\det(AB) = \\det(A) \\cdot \\det(B) \\).
 - The determinant of the transpose equals the determinant of the original matrix: \\( \\det(A^{\\mathrm{T}}) = \\det(A) \\).
-- A square matrix \\( A \\) is invertible if and only if \\( \\det(A) \\neq 0 \\). When \\( \\det(A) = 0 \\), the matrix is called singular, as discussed in the entry on the [inverse matrix](../inverse-matrix/).
+- A square matrix \\( A \\) is invertible if and only if \\( \\det(A) \\neq 0 \\). When \\( \\det(A) = 0 \\), the matrix is called singular, as discussed in the entry on the inverse matrix.
 

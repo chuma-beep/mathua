@@ -108,7 +108,7 @@ A partition of a set \\(A\\) is a family of non-empty subsets \\(\\{A_i\\}_{i \i
 \end{align}
 \\]
 
-The subsets \\(A_i\\) are called the blocks of the partition and each element of \\(A\\) belongs to exactly one of them. A simple example is the set of [integers](../integers/) \\(\mathbb{Z}\\), which can be partitioned into the set of even integers and the set of odd integers, since these two blocks are non-empty, disjoint, and together cover the whole of \\(\mathbb{Z}\\).
+The subsets \\(A_i\\) are called the blocks of the partition and each element of \\(A\\) belongs to exactly one of them. A simple example is the set of integers \\(\mathbb{Z}\\), which can be partitioned into the set of even integers and the set of odd integers, since these two blocks are non-empty, disjoint, and together cover the whole of \\(\mathbb{Z}\\).
 
 Partitions are related to equivalence relations. Given an equivalence relation on \\(A\\) we have:
 
@@ -163,7 +163,7 @@ An equivalent representation is given by the following expression:
 A \triangle B = (A \cup B) \setminus (A \cap B)
 \\]
 
-The symmetric difference is commutative and associative, and satisfies \\(A \triangle A = \emptyset\\) and \\(A \triangle \emptyset = A\\). Together with intersection, it gives the collection of all subsets of a given set the structure of a boolean [ring](../rings/).
+The symmetric difference is commutative and associative, and satisfies \\(A \triangle A = \emptyset\\) and \\(A \triangle \emptyset = A\\). Together with intersection, it gives the collection of all subsets of a given set the structure of a boolean ring.
 
 - - -
 
@@ -248,7 +248,7 @@ These laws generalise to arbitrary finite collections of sets. For example, for 
 \end{align}
 \\]
 
-There exists a relation between the algebraic structure of sets and that of the logical connectives of [propositional logic](../propositional-logic/). De Morgan's laws correspond, in fact, to the following equivalences in propositional logic:
+There exists a relation between the algebraic structure of sets and that of the logical connectives of propositional logic. De Morgan's laws correspond, in fact, to the following equivalences in propositional logic:
 
 \\[
 \neg(P \lor Q) \equiv \neg P \land \neg Q
@@ -353,7 +353,7 @@ An ordered pair is asymmetric: \\((a, b)\\) differs from \\((b, a)\\) if \\(a\\)
 (a, b) = (a', b') \iff a = a' \text{ and } b = b'
 \\]
 
-In general \\(A \times B\\) and \\(B \times A\\) are not the same. If set \\(A\\) contains \\(m\\) elements and set \\(B\\) contains \\(n\\) elements, then \\(A \times B\\) contains \\(mn\\) elements. For example \\(\mathbb{R} \times \mathbb{R}\\), which represents the set of all pairs of [real numbers](../real-numbers/) corresponding to the Cartesian plane, contains \\(\mathbb{R}^2\\) elements.
+In general \\(A \times B\\) and \\(B \times A\\) are not the same. If set \\(A\\) contains \\(m\\) elements and set \\(B\\) contains \\(n\\) elements, then \\(A \times B\\) contains \\(mn\\) elements. For example \\(\mathbb{R} \times \mathbb{R}\\), which represents the set of all pairs of real numbers corresponding to the Cartesian plane, contains \\(\mathbb{R}^2\\) elements.
 
 Given the sets \\(A_1, A_2, \ldots, A_n\\), their Cartesian product is the set of all ordered \\(n\\)-tuples:
 

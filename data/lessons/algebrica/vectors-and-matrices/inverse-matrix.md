@@ -4,7 +4,7 @@
 
 ## Definition
 
-Given a square [matrix](../matrices/) of order \\( n \\), the inverse of \\( A \\), denoted \\( A^{-1} \\), is the matrix such that:
+Given a square matrix of order \\( n \\), the inverse of \\( A \\), denoted \\( A^{-1} \\), is the matrix such that:
 
 \\[
 A \\cdot A^{-1} = A^{-1} \\cdot A = I
@@ -18,15 +18,15 @@ The inverse matrix represents the linear transformation that reverses the effect
 A\\mathbf{x} = \\mathbf{b} \\implies \\mathbf{x} = A^{-1}\\mathbf{b}
 \\]
 
-This is precisely the principle underlying the solution of [systems of linear equations](../systems-of-linear-equations/) via the inverse matrix.
+This is precisely the principle underlying the solution of systems of linear equations via the inverse matrix.
 
-A square matrix \\( A \\) is invertible if and only if its [determinant](../determinant/) is nonzero:
+A square matrix \\( A \\) is invertible if and only if its determinant is nonzero:
 
 \\[
 A \\text{ is invertible} \\iff \\det(A) \\neq 0
 \\]
 
-> The condition \\( \\det(A) \\neq 0 \\) is both necessary and sufficient for invertibility. It is equivalent to requiring that the rows (or columns) of \\( A \\) are linearly independent, and that the [rank](../rank-of-a-matrix/) of \\( A \\) equals \\( n \\). The set of all invertible matrices of order \\( n \\) forms a group under matrix multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\), discussed in the entry on [groups](../groups/).
+> The condition \\( \\det(A) \\neq 0 \\) is both necessary and sufficient for invertibility. It is equivalent to requiring that the rows (or columns) of \\( A \\) are linearly independent, and that the rank of \\( A \\) equals \\( n \\). The set of all invertible matrices of order \\( n \\) forms a group under matrix multiplication, known as the general linear group \\( GL(n, \\mathbb{R}) \\), discussed in the entry on groups.
 
 - - -
 ## Properties of the inverse
@@ -124,7 +124,7 @@ A^{-1} = \\frac{1}{6}
 \\end{pmatrix}
 \\]
 
-> The cofactor method is exact but computationally expensive for large matrices, with complexity \\( O(n!) \\) due to the determinant evaluations involved. In numerical practice, the inverse is typically computed via [Gaussian elimination](../solving-linear-systems-using-gaussian-elimination/) or LU decomposition, which achieve \\( O(n^3) \\) complexity.
+> The cofactor method is exact but computationally expensive for large matrices, with complexity \\( O(n!) \\) due to the determinant evaluations involved. In numerical practice, the inverse is typically computed via Gaussian elimination or LU decomposition, which achieve \\( O(n^3) \\) complexity.
 
 - - -
 ## Inversion by Gauss-Jordan elimination

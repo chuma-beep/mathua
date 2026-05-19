@@ -10,7 +10,7 @@ Given two non-negative natural numbers \\(k\\) and \\(n\\), the binomial coeffic
 
 * \\(n\\) represents the number of elements in the set.
 * \\(k\\) indicates the number of elements to be selected.
-* \\(n!\\) and \\((n-k)!\\) are two [factorials](../factorial/).
+* \\(n!\\) and \\((n-k)!\\) are two factorials.
 
 For example, to determine the value of the binomial coefficient \\( \large{4 \choose 2} \\), we count the number of pairs that can be formed from a set of four elements. Starting from a generic set \\(P=(p,q,r,s)\\), the number of subsets formed by two elements is six, and they are:
 
@@ -20,12 +20,12 @@ Unlike permutations, where order matters, the pairs \\((p,q)\\) and \\((q,p)\\) 
 
 \\[ \binom{n}{k} = \frac{n!}{(n-k)!} \cdot \frac{1}{k!} = \frac{n!}{k!\\,(n-k)!} \\]
 
-> The binomial coefficient appears in the [binomial theorem](../binomial-theorem/), where it gives the coefficients of each term in the expansion of \\((a+b)^n\\).
+> The binomial coefficient appears in the binomial theorem, where it gives the coefficients of each term in the expansion of \\((a+b)^n\\).
 
 - - -
 ## Pascal's triangle
 
-Pascal's triangle is a triangular arrangement of binomial coefficients, the coefficients that appear in the expansion of the [binomial](../binomial/) \\((a+b)\\) raised to a non-negative integer power \\(n\\). The first row contains only \\(1\\), and each number in the subsequent rows is the sum of the two numbers directly above it. The outermost elements of every row are always 1. Here are the first six rows:
+Pascal's triangle is a triangular arrangement of binomial coefficients, the coefficients that appear in the expansion of the binomial \\((a+b)\\) raised to a non-negative integer power \\(n\\). The first row contains only \\(1\\), and each number in the subsequent rows is the sum of the two numbers directly above it. The outermost elements of every row are always 1. Here are the first six rows:
 
 \\[
 \begin{array}{c}
@@ -152,14 +152,14 @@ The definition introduced at the start of this page requires \\( n \\) and \\( k
 \binom{\alpha}{k} = \frac{\alpha(\alpha - 1)(\alpha - 2) \cdots (\alpha - k + 1)}{k!}
 \\]
 
-where \\( \alpha \in \mathbb{R} \\) and \\( k \\) remains a non-negative integer. When \\( \alpha \\) is a natural number and \\( k \leq \alpha \\), this expression reduces to the standard binomial coefficient. When \\( \alpha \\) is not a natural number or when \\( k > \alpha \\) it produces values that are no longer integers, but remain well-defined. This generalization is what allows the [binomial theorem](../binomial-theorem/)
+where \\( \alpha \in \mathbb{R} \\) and \\( k \\) remains a non-negative integer. When \\( \alpha \\) is a natural number and \\( k \leq \alpha \\), this expression reduces to the standard binomial coefficient. When \\( \alpha \\) is not a natural number or when \\( k > \alpha \\) it produces values that are no longer integers, but remain well-defined. This generalization is what allows the binomial theorem
 to extend beyond integer exponents. For \\( |x| < 1 \\), Newton showed that:
 
 \\[
 (1 + x)^{\alpha} = \sum_{k=0}^{\infty} \binom{\alpha}{k} x^k
 \\]
 
-Unlike the standard binomial theorem, this sum does not terminate and it is an infinite series. Two cases are worth noting. Taking \\( \alpha = -1 \\) recovers the [geometric series](../geometric-series/):
+Unlike the standard binomial theorem, this sum does not terminate and it is an infinite series. Two cases are worth noting. Taking \\( \alpha = -1 \\) recovers the geometric series:
 
 \\[
 \frac{1}{1+x} = \sum_{k=0}^{\infty} (-1)^k x^k
@@ -259,12 +259,12 @@ What makes this identity particularly useful in computing is that the recursion 
 \binom{n}{0} = \binom{n}{n} = 1
 \\]
 
-> Note that recursion recalculates the same values multiple times. The computational cost grows quickly with \\( n, \\) a problem that memoization solves by storing intermediate results as they are computed. This trade-off between simplicity and efficiency is explored in depth in the analysis of [Big O notation](../big-o-notation/).
+> Note that recursion recalculates the same values multiple times. The computational cost grows quickly with \\( n, \\) a problem that memoization solves by storing intermediate results as they are computed. This trade-off between simplicity and efficiency is explored in depth in the analysis of Big O notation.
 
 - - -
 ## Foundation of the binomial distribution
 
-The binomial coefficient provides the foundation for the [binomial distribution](../binomial-distribution/), which describes the probability of obtaining a specific number of successes in a fixed number of independent trials. If each trial has only two possible outcomes, success with probability \\( p \\) and failure with probability \\( q = 1 - p \\), the probability of observing exactly \\( x \\) successes in \\( n \\) trials is given by:
+The binomial coefficient provides the foundation for the binomial distribution, which describes the probability of obtaining a specific number of successes in a fixed number of independent trials. If each trial has only two possible outcomes, success with probability \\( p \\) and failure with probability \\( q = 1 - p \\), the probability of observing exactly \\( x \\) successes in \\( n \\) trials is given by:
 
 \\[
 b(x; n, p) = \binom{n}{x} p^{x} q^{n - x}

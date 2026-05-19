@@ -3,7 +3,7 @@
 
 ## Introduction
 
-The Fundamental Theorem of Calculus establishes the exact relationship between [differentiation](../derivatives/) and [integration](../indefinite-integrals/). These two operations arise from different initial motivations. Differentiation describes instantaneous variation, while integration measures accumulated quantity. The theorem proves that, under suitable regularity assumptions, they are inverse processes. The result is traditionally divided into two complementary statements:
+The Fundamental Theorem of Calculus establishes the exact relationship between differentiation and integration. These two operations arise from different initial motivations. Differentiation describes instantaneous variation, while integration measures accumulated quantity. The theorem proves that, under suitable regularity assumptions, they are inverse processes. The result is traditionally divided into two complementary statements:
 
 + The First Fundamental Theorem of Calculus
 + The Second Fundamental Theorem of Calculus
@@ -13,7 +13,7 @@ The Fundamental Theorem of Calculus establishes the exact relationship between [
 - - -
 ## The First Fundamental Theorem of Calculus
 
-Let \\( f \\) be [continuous](../continuous-functions/) on a [closed interval](../intervals/) \\( [a,b] \\). Define the function:
+Let \\( f \\) be continuous on a closed interval \\( [a,b] \\). Define the function:
 
 \\[
 F(x) = \int_a^x f(t)\\,dt
@@ -25,14 +25,14 @@ for \\( x \in [a,b] \\). Then \\( F \\) is continuous on \\( [a,b] \\), differen
 F'(x) = f(x)
 \\]
 
-This statement asserts that the function defined by accumulation of area from a fixed lower bound up to a variable upper limit is differentiable, and its derivative coincides with the original integrand. To justify this result, consider the [difference quotient](../difference-quotient/):
+This statement asserts that the function defined by accumulation of area from a fixed lower bound up to a variable upper limit is differentiable, and its derivative coincides with the original integrand. To justify this result, consider the difference quotient:
 
 \\[
 \frac{F(x+h) - F(x)}{h}
 = \frac{1}{h} \left( \int_a^{x+h} f(t)\\,dt - \int_a^x f(t)\\,dt \right)
 \\]
 
-[Definite integrals](../definite-integrals/) satisfy the additivity property over adjacent intervals:
+Definite integrals satisfy the additivity property over adjacent intervals:
 
 \\[
 \int_a^b f(t)\\,dt + \int_b^c f(t)\\,dt = \int_a^c f(t)\\,dt
@@ -44,7 +44,7 @@ Applying this to our case, we obtain:
 \frac{1}{h} \int_x^{x+h} f(t)\\,dt
 \\]
 
-Since \\( f \\) is continuous on \\( [x, x+h] \\), the [mean value theorem for integrals](../mean-value-theorem-for-integrals/) guarantees the existence of a point \\( c \\) between \\( x \\) and \\( x+h \\) such that:
+Since \\( f \\) is continuous on \\( [x, x+h] \\), the mean value theorem for integrals guarantees the existence of a point \\( c \\) between \\( x \\) and \\( x+h \\) such that:
 
 \\[
 \int_x^{x+h} f(t)\\,dt = f\(c\)\\,h
@@ -82,7 +82,7 @@ The First Fundamental Theorem covers the case in which the upper limit of integr
 \Phi(x) = \int_{a(x)}^{b(x)} f(t)\\,dt
 \\]
 
-where \\( f \\) is [continuous](../continuous-functions/) on an [interval]../intervals/) containing the range of \\( a(x) \\) and \\( b(x) \\), and both \\( a(x) \\) and \\( b(x) \\) are differentiable. The derivative of \\( \Phi \\) is given by:
+where \\( f \\) is continuous on an interval containing the range of \\( a(x) \\) and \\( b(x) \\), and both \\( a(x) \\) and \\( b(x) \\) are differentiable. The derivative of \\( \Phi \\) is given by:
 
 \\[
 \Phi'(x) = f(b(x))\\,b'(x) - f(a(x))\\,a'(x)
@@ -106,7 +106,7 @@ By the First Fundamental Theorem, \\( F'(u) = f(u) \\). The original function ca
 \Phi(x) = F(b(x)) - F(a(x))
 \\]
 
-Applying the [chain rule](../the-derivative-of-a-composite-function/) to each term yields:
+Applying the chain rule to each term yields:
 
 \\[
 \Phi'(x) = F'(b(x))\\,b'(x) - F'(a(x))\\,a'(x) = f(b(x))\\,b'(x) - f(a(x))\\,a'(x)
@@ -179,7 +179,7 @@ The construction does not require reconstructing the area piece by piece. The an
 
 The two versions of the Fundamental Theorem stated in the previous sections rely on the assumption that the integrand \\( f \\) is continuous on the closed interval \\( [a, b] \\). This hypothesis is sufficient, but a weaker condition suffices for several of the conclusions. We now examine which properties of the accumulation function survive when continuity is relaxed to mere Riemann integrability.
 
-Let \\( f \\) be [Riemann-integrable](../riemann-integrability-criteria/) on \\( [a, b] \\), and define the accumulation function:
+Let \\( f \\) be Riemann-integrable on \\( [a, b] \\), and define the accumulation function:
 
 \\[
 F(x) = \int_a^x f(t)\\,dt

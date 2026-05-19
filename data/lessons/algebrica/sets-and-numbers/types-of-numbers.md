@@ -3,18 +3,18 @@
 
 ## Introduction
 
-Numbers organized into nested families, each extending the previous one to accommodate quantities that the smaller family cannot represent. The main numerical sets, listed in order of inclusion, are the natural numbers \\(\mathbb{N},\\) the [integers](../integers/) \\(\mathbb{Z},\\) the rational numbers \\(\mathbb{Q},\\) the real numbers \\(\mathbb{R},\\) and the [complex numbers](../complex-numbers-introduction/) \\(\mathbb{C}\\). The irrational numbers \\(\mathbb{I}\\) occupy a complementary position within \\(\mathbb{R}\\) rather than forming a separate step in the hierarchy. The inclusion relationships among these [sets](../sets/) are the following.
+Numbers organized into nested families, each extending the previous one to accommodate quantities that the smaller family cannot represent. The main numerical sets, listed in order of inclusion, are the natural numbers \\(\mathbb{N},\\) the integers \\(\mathbb{Z},\\) the rational numbers \\(\mathbb{Q},\\) the real numbers \\(\mathbb{R},\\) and the complex numbers \\(\mathbb{C}\\). The irrational numbers \\(\mathbb{I}\\) occupy a complementary position within \\(\mathbb{R}\\) rather than forming a separate step in the hierarchy. The inclusion relationships among these sets are the following.
 
 \\[
 \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}, \qquad \mathbb{I} \subset \mathbb{R}
 \\]
 
-The structure of these sets reflects how each extension resolves a limitation of the previous one, until \\(\mathbb{C}\\) is reached, within which every [polynomial equation](../polynomial-equations/) has a solution.
+The structure of these sets reflects how each extension resolves a limitation of the previous one, until \\(\mathbb{C}\\) is reached, within which every polynomial equation has a solution.
 
 - - -
 ## Natural numbers
 
-The set of [natural numbers](../natural-numbers), denoted by \\(\mathbb{N}\\), is the collection of non-negative integers used to count discrete quantities.
+The set of natural numbers, denoted by \\(\mathbb{N}\\), is the collection of non-negative integers used to count discrete quantities.
 
 \\[
 \mathbb{N} = \\{0, 1, 2, 3, 4, \ldots\\}
@@ -25,7 +25,7 @@ Each element is obtained by adding one to the previous, starting from \\(0\\). B
 \\[\mathbb{N}_0 = \\{0, 1, 2, 3, \ldots\\}\\]
 \\[ \mathbb{N}^+ = \\{1, 2, 3, \ldots\\}\\]
 
-From a foundational point of view, \\(\mathbb{N}\\) is the smallest inductive set contained in \\(\mathbb{R}\\): it contains \\(0\\) and, whenever it contains an element \\(n\\), it also contains \\(n+1\\). This property is the basis of the [principle of mathematical induction](../principle-of-mathematical-induction/).
+From a foundational point of view, \\(\mathbb{N}\\) is the smallest inductive set contained in \\(\mathbb{R}\\): it contains \\(0\\) and, whenever it contains an element \\(n\\), it also contains \\(n+1\\). This property is the basis of the principle of mathematical induction.
 
 - - -
 ## Integer numbers
@@ -42,7 +42,7 @@ Every integer is either positive, negative, or zero. The set \\(\mathbb{Z}\\) ca
 \mathbb{Z} = \mathbb{N} \cup \\{-n : n \in \mathbb{N}^+\\}
 \\]
 
-The passage from \\(\mathbb{N}\\) to \\(\mathbb{Z}\\) makes subtraction always well-defined: for any \\(a, b \in \mathbb{Z}\\) the difference \\(a - b\\) is again an integer. A dedicated entry covers the properties of [integers](../integers/) in detail.
+The passage from \\(\mathbb{N}\\) to \\(\mathbb{Z}\\) makes subtraction always well-defined: for any \\(a, b \in \mathbb{Z}\\) the difference \\(a - b\\) is again an integer. A dedicated entry covers the properties of integers in detail.
 
 - - -
 ## Rational numbers
@@ -75,14 +75,14 @@ The irrationality of \\(\sqrt{2}\\) is one of the oldest results in mathematics 
 - - -
 ## Real numbers
 
-The set of [real numbers](../real-numbers/), denoted by \\(\mathbb{R}\\), is the union of the rational and irrational numbers.
+The set of real numbers, denoted by \\(\mathbb{R}\\), is the union of the rational and irrational numbers.
 
 \\[
 \mathbb{R} = \mathbb{Q} \cup \mathbb{I}
 \\]
 
 The passage from \\(\mathbb{Q}\\) to \\(\mathbb{R}\\) fills the gaps left by the rationals,
-ensuring that every convergent [sequence](../sequences/) has a [limit](../limits/) within the set. Every real number admits a decimal representation of the following form.
+ensuring that every convergent sequence has a limit within the set. Every real number admits a decimal representation of the following form.
 
 \\[
 \left\\{ p,\alpha\_0\alpha_1\alpha\_2\alpha\_3\ldots : p \in \mathbb{Z},\\; \alpha\_k \in \\{0,1,2,\ldots,9\\},\\; \forall\\,k \in \mathbb{N} \right\\}

@@ -3,7 +3,7 @@
 
 ## Understanding the sides of a right triangle
 
-Trigonometry studies the relationships between angles and sides of triangles, and the right triangle is where the basic trigonometric functions are usually introduced: [sine](../sine-and-cosine/), [cosine](../sine-and-cosine/), and [tangent](../tangent-and-cotangent/). A right triangle has one interior angle of exactly \\(90^\circ.\\) The two sides meeting at the right angle are the legs, and the third side, opposite the right angle, is the hypotenuse, which is always the longest of the three. Fix an acute angle \\(\theta\\) inside the triangle. The hypotenuse does not depend on the choice of \\(\theta\\), but the two legs do: one lies opposite to \\(\theta\\), the other borders it. The trigonometric functions arise precisely from this asymmetry, as ratios between pairs of sides.
+Trigonometry studies the relationships between angles and sides of triangles, and the right triangle is where the basic trigonometric functions are usually introduced: sine, cosine, and tangent. A right triangle has one interior angle of exactly \\(90^\circ.\\) The two sides meeting at the right angle are the legs, and the third side, opposite the right angle, is the hypotenuse, which is always the longest of the three. Fix an acute angle \\(\theta\\) inside the triangle. The hypotenuse does not depend on the choice of \\(\theta\\), but the two legs do: one lies opposite to \\(\theta\\), the other borders it. The trigonometric functions arise precisely from this asymmetry, as ratios between pairs of sides.
 
 - Hypotenuse \\(h\\): the longest side, opposite the right angle.
 - Opposite leg \\(y\\): the leg opposite to \\(\theta\\).
@@ -14,9 +14,9 @@ A key observation is that these ratios depend only on \\(\theta\\), not on the s
 - - -
 ## SOH-CAH-TOA method
 
-Place a right triangle inside a [unit circle](../unit-circle/), with the acute angle \\(\theta\\) at the origin of the Cartesian coordinate system and the hypotenuse running from the origin to a point on the circle. In this configuration the hypotenuse has length \\(h = 1\\), and the two legs coincide with the horizontal and vertical coordinates of that point. The ratios that define the trigonometric functions take an especially transparen form here, because dividing by \\(h = 1\\) leaves the coordinates themselves as the values of sine and cosine.
+Place a right triangle inside a unit circle, with the acute angle \\(\theta\\) at the origin of the Cartesian coordinate system and the hypotenuse running from the origin to a point on the circle. In this configuration the hypotenuse has length \\(h = 1\\), and the two legs coincide with the horizontal and vertical coordinates of that point. The ratios that define the trigonometric functions take an especially transparen form here, because dividing by \\(h = 1\\) leaves the coordinates themselves as the values of sine and cosine.
 
-The name SOH-CAH-TOA is a mnemonic that encodes the three primary trigonometric functions as ratios of sides: [sine](../sine-and-cosine/) is Opposite over Hypotenuse, [cosine](../sine-and-cosine/) is Adjacent over Hypotenuse, and [tangent](../tangent-and-cotangent/) is Opposite over Adjacent. Reading each triple from left to right gives the function on the left and the two sides forming the ratio on the right. The three reciprocal functions, [cosecant](../secant-and-cosecant/), [secant](../secant-and-cosecant/), and [cotangent](../tangent-and-cotangent/), follow by inverting each ratio.
+The name SOH-CAH-TOA is a mnemonic that encodes the three primary trigonometric functions as ratios of sides: sine is Opposite over Hypotenuse, cosine is Adjacent over Hypotenuse, and tangent is Opposite over Adjacent. Reading each triple from left to right gives the function on the left and the two sides forming the ratio on the right. The three reciprocal functions, cosecant, secant, and cotangent, follow by inverting each ratio.
 
 The SOH group gives the sine of the angle and its reciprocal, the cosecant:
 
@@ -54,19 +54,19 @@ The tangent can also be written directly in terms of sine and cosine, since \\(y
 - - -
 ## The Pythagorean identity
 
-The sine and cosine of the same angle are not independent quantities: they satisfy the [Pythagorean identity](../pythagorean-identity/), which in any right triangle with acute angle \\(\theta\\) takes the form:
+The sine and cosine of the same angle are not independent quantities: they satisfy the Pythagorean identity, which in any right triangle with acute angle \\(\theta\\) takes the form:
 
 \\[
 \sin^2(\theta) + \cos^2(\theta) = 1
 \\]
 
-The identity is a direct consequence of the [Pythagorean theorem](../pythagorean-theorem/). Starting from \\(x^2 + y^2 = h^2\\) and dividing both sides by \\(h^2\\), the equation becomes:
+The identity is a direct consequence of the Pythagorean theorem. Starting from \\(x^2 + y^2 = h^2\\) and dividing both sides by \\(h^2\\), the equation becomes:
 
 \\[
 \left(\frac{y}{h}\right)^2 + \left(\frac{x}{h}\right)^2 = 1
 \\]
 
-The two ratios on the left coincide with \\(\sin(\theta)\\) and \\(\cos(\theta)\\) by the SOH and CAH relations, which gives the identity in its standard form. The same conclusion follows geometrically from the [unit circle](../unit-circle/). A point on the circle has coordinates \\((\cos(\theta), \sin(\theta))\\), and the equation of the circle, \\(x^2 + y^2 =1\\), is exactly the [Pythagorean identity](../pythagorean-identity/) rewritten in those coordinates.
+The two ratios on the left coincide with \\(\sin(\theta)\\) and \\(\cos(\theta)\\) by the SOH and CAH relations, which gives the identity in its standard form. The same conclusion follows geometrically from the unit circle. A point on the circle has coordinates \\((\cos(\theta), \sin(\theta))\\), and the equation of the circle, \\(x^2 + y^2 =1\\), is exactly the Pythagorean identity rewritten in those coordinates.
 
 - - -
 ## Solving a right triangle

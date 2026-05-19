@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Given a [polynomial equation](../polynomial-equations/) with assigned roots, the coefficients are not free parameters and are determined, up to a multiplicative constant, by the roots themselves. The identities that explicitly relate the roots to the coefficients are known as Vieta’s formulas. They provide one of the simplest examples of how symmetric relationships between the roots are reflected in the coefficients of a [polynomial](../polynomials/).
+Given a polynomial equation with assigned roots, the coefficients are not free parameters and are determined, up to a multiplicative constant, by the roots themselves. The identities that explicitly relate the roots to the coefficients are known as Vieta’s formulas. They provide one of the simplest examples of how symmetric relationships between the roots are reflected in the coefficients of a polynomial.
 
 The formulas can be stated in two equivalent ways. 
 
@@ -13,7 +13,7 @@ The formulas can be stated in two equivalent ways.
 - - -
 ## Quadratic case
 
-Consider the [quadratic equation](../quadratic-equations/) in standard form:
+Consider the quadratic equation in standard form:
 
 \\[
 ax^2 + bx + c = 0, \qquad a \neq 0
@@ -31,9 +31,9 @@ Equating the coefficients of \\(x^2\\), \\(x\\), and the constant term with thos
 x_1 + x_2 = -\frac{b}{a}, \qquad x_1 x_2 = \frac{c}{a}
 \\]
 
-These two identities encode all the information about the roots that can be read directly from the coefficients without solving the equation. They hold for every value of the [discriminant](../quadratic-formula/), including the case in which the roots form a pair of complex conjugates.
+These two identities encode all the information about the roots that can be read directly from the coefficients without solving the equation. They hold for every value of the discriminant, including the case in which the roots form a pair of complex conjugates.
 
-> The same identities can be derived from the [quadratic formula](../quadratic-formula/) by computing the sum and the product of the two expressions \\(\frac{-b + \sqrt{\Delta}}{2a}\\) and \\(\frac{-b - \sqrt{\Delta}}{2a}\\). The argument by factorisation is shorter and generalises to higher degrees with no modification.
+> The same identities can be derived from the quadratic formula by computing the sum and the product of the two expressions \\(\frac{-b + \sqrt{\Delta}}{2a}\\) and \\(\frac{-b - \sqrt{\Delta}}{2a}\\). The argument by factorisation is shorter and generalises to higher degrees with no modification.
 
 - - -
 ## General form
@@ -44,7 +44,7 @@ The same reasoning applies, with no essential change, to a polynomial of arbitra
 p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0
 \\]
 
-By the [fundamental theorem of algebra](../roots-of-a-polynomial/), \\(p(x)\\) admits exactly \\(n\\) roots in \\(\mathbb{C}\\), counted with multiplicity. Denoting them \\(x_1, x_2, \ldots, x_n\\), the polynomial factors as:
+By the fundamental theorem of algebra, \\(p(x)\\) admits exactly \\(n\\) roots in \\(\mathbb{C}\\), counted with multiplicity. Denoting them \\(x_1, x_2, \ldots, x_n\\), the polynomial factors as:
 
 \\[
 p(x) = a_n (x - x_1)(x - x_2) \cdots (x - x_n)
@@ -120,7 +120,7 @@ Vieta's formulas demand that the two roots have sum equal to \\(5\\) and product
 x^2 - 5x + 6 = (x - 2)(x - 3)
 \\]
 
-The roots are \\(x_1 = 2\\) and \\(x_2 = 3\\). The procedure works whenever the roots are rational and small enough to be located by inspection. When this fails, the [quadratic formula](../quadratic-formula/) remains the general-purpose method.
+The roots are \\(x_1 = 2\\) and \\(x_2 = 3\\). The procedure works whenever the roots are rational and small enough to be located by inspection. When this fails, the quadratic formula remains the general-purpose method.
 
 - - -
 ## Example 2
@@ -181,9 +181,9 @@ Vieta's formulas underpin a number of techniques that recur throughout elementar
 
 The first is the verification of a candidate factorisation. Given a proposed pair of roots \\(x_1\\) and \\(x_2\\) for a quadratic with coefficients \\(a\\), \\(b\\), \\(c\\), the conditions \\(x_1 + x_2 = -b/a\\) and \\(x_1 x_2 = c/a\\) provide a fast consistency check that requires no recomputation of the discriminant.
 
-The second is the [AC method](../factoring-polynomials-ac-method/) for factoring quadratic trinomials. The conditions \\(mn = ac\\) and \\(m + n = b\\) imposed by that procedure are precisely Vieta's formulas applied to the rescaled polynomial \\(u^2 + bu + ac\\), with \\(u = ax\\). The dedicated entry develops the correspondence in detail.
+The second is the AC method for factoring quadratic trinomials. The conditions \\(mn = ac\\) and \\(m + n = b\\) imposed by that procedure are precisely Vieta's formulas applied to the rescaled polynomial \\(u^2 + bu + ac\\), with \\(u = ax\\). The dedicated entry develops the correspondence in detail.
 
-The third arises in the study of the [roots of unity](../roots-of-unity/), where the polynomial \\(z^n - 1\\) has all its non-leading coefficients equal to zero except for the constant term. Vieta's formulas then state that the sum of the \\(n\\)-th roots of unity vanishes whenever \\(n \geq 2\\), and that their product equals \\((-1)^{n+1}\\). Both results follow by inspection of the coefficients of \\(z^n - 1\\).
+The third arises in the study of the roots of unity, where the polynomial \\(z^n - 1\\) has all its non-leading coefficients equal to zero except for the constant term. Vieta's formulas then state that the sum of the \\(n\\)-th roots of unity vanishes whenever \\(n \geq 2\\), and that their product equals \\((-1)^{n+1}\\). Both results follow by inspection of the coefficients of \\(z^n - 1\\).
 
 - - -
 ## Structural interpretation

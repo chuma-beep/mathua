@@ -4,11 +4,11 @@
 
 ## Primitives
 
-Differentiation assigns to each function a unique [derivative](../derivatives/) by definition. The inverse process asks whether, for a given function \\(f(x)\\), there exists a function \\(F(x)\\) whose derivative is exactly \\(f(x)\\). Such a function is called a primitive of \\(f\\). Formally, \\(F(x)\\) is a primitive of \\(f(x)\\) on the [interval](../intervals/) \\([a, b]\\) if \\(F\\) is differentiable throughout \\([a, b]\\) and:
+Differentiation assigns to each function a unique derivative by definition. The inverse process asks whether, for a given function \\(f(x)\\), there exists a function \\(F(x)\\) whose derivative is exactly \\(f(x)\\). Such a function is called a primitive of \\(f\\). Formally, \\(F(x)\\) is a primitive of \\(f(x)\\) on the interval \\([a, b]\\) if \\(F\\) is differentiable throughout \\([a, b]\\) and:
 
 \\[F'(x) = f(x), \quad \forall x \in [a, b]\\]
 
-Not every function admits a primitive on a given interval. A sufficient condition is [continuity](../continuous-functions/): every continuous function on a closed interval \\([a, b]\\) admits a primitive there. The converse does not hold in general. As an example, if \\(f(x) = 3x^2\\), a primitive is \\(F(x) = x^3\\), since:
+Not every function admits a primitive on a given interval. A sufficient condition is continuity: every continuous function on a closed interval \\([a, b]\\) admits a primitive there. The converse does not hold in general. As an example, if \\(f(x) = 3x^2\\), a primitive is \\(F(x) = x^3\\), since:
 
 \\[\frac{d}{dx} x^3 = 3x^2\\]
 
@@ -33,7 +33,7 @@ From this definition it follows directly that:
 
 \\[\frac{d}{dx}\left[ \int f(x) \\, dx \right] = f(x)\\]
 
-Differentiating an indefinite integral returns the original function. This relationship is made precise by the [Fundamental Theorem of Calculus](../fundamental-theorem-of-calculus/), which establishes the formal connection between differentiation and integration.
+Differentiating an indefinite integral returns the original function. This relationship is made precise by the Fundamental Theorem of Calculus, which establishes the formal connection between differentiation and integration.
 
 - - -
 ## Example 1
@@ -147,18 +147,18 @@ This follows from the fact that \\(\frac{d}{dx} \ln |x| = \frac{1}{x}\\), which 
 
 Below is a summary of the most common basic integrals, useful in calculus and for transforming complex expressions into simpler, well-known forms.
 
-+ \\[\int \frac{1}{x} \\, dx = \ln |x| + c\\] [Further reading](../integral-of-rational-functions/)
++ \\[\int \frac{1}{x} \\, dx = \ln |x| + c\\] Further reading
 
-+ \\[\int a^x \\, dx = \frac{1}{\ln a} \cdot a^x + c\\] [Further reading](../integral-of-the-exponential-function)
++ \\[\int a^x \\, dx = \frac{1}{\ln a} \cdot a^x + c\\] Further reading
 
-+ \\[\int \sin x \\, dx = -\cos x + c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \cos x \\, dx = \sin x + c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \frac{1}{\sin^2x}\\, dx  = \cot x +c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \frac{1}{\cos^2x}\\, dx  = \tan x +c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \sec^2 x \\, dx = \tan x + c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \sec x \tan x \\, dx = \sec x + c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \csc^2 x \\, dx = -\cot x + c\\] [Further reading](../integral-of-trigonometric-functions/)
-+ \\[\int \csc x \cot x \\, dx = -\csc x + c\\] [Further reading](../integral-of-trigonometric-functions/)
++ \\[\int \sin x \\, dx = -\cos x + c\\] Further reading
++ \\[\int \cos x \\, dx = \sin x + c\\] Further reading
++ \\[\int \frac{1}{\sin^2x}\\, dx  = \cot x +c\\] Further reading
++ \\[\int \frac{1}{\cos^2x}\\, dx  = \tan x +c\\] Further reading
++ \\[\int \sec^2 x \\, dx = \tan x + c\\] Further reading
++ \\[\int \sec x \tan x \\, dx = \sec x + c\\] Further reading
++ \\[\int \csc^2 x \\, dx = -\cot x + c\\] Further reading
++ \\[\int \csc x \cot x \\, dx = -\csc x + c\\] Further reading
 + \\[\int \frac{dx}{1 + x^2} = \arctan x + c\\]
 + \\[\int \frac{dx}{\sqrt{1 - x^2}} = \arcsin x + c\\]
 

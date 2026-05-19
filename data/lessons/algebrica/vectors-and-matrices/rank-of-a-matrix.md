@@ -9,13 +9,13 @@ The rank of a matrix \\( A \\), denoted \\( r(A) \\) or \\( \\mathrm{rank}(A) \\
 0 \\leq r(A) \\leq \\min(m,n)
 \\]
 
-The rank of a matrix \\( A \\) equals the dimension of the image of the associated linear transformation \\( T_A : \\mathbb{R}^n \\to \\mathbb{R}^m \\), defined by \\( T_A(\\mathbf{x}) = A\\mathbf{x} \\). The complementary quantity \\( n - r(A) \\) is the dimension of the kernel of \\( T_A \\), the subspace of [vectors](../vectors/) mapped to zero. These two quantities are related by the rank-nullity theorem: for any \\( A \\in M_{m,n}(\\mathbb{R}) \\) we have:
+The rank of a matrix \\( A \\) equals the dimension of the image of the associated linear transformation \\( T_A : \\mathbb{R}^n \\to \\mathbb{R}^m \\), defined by \\( T_A(\\mathbf{x}) = A\\mathbf{x} \\). The complementary quantity \\( n - r(A) \\) is the dimension of the kernel of \\( T_A \\), the subspace of vectors mapped to zero. These two quantities are related by the rank-nullity theorem: for any \\( A \\in M_{m,n}(\\mathbb{R}) \\) we have:
 
 \\[
 \\mathrm{rank}(A) + \\mathrm{nullity}(A) = n
 \\]
 
-> The rank is one of the most fundamental invariants of a matrix. It determines the solvability of [systems of linear equations](../systems-of-linear-equations/) via the [Rouché-Capelli theorem](../rouche-capelli-theorem/), and it coincides with the condition \\( r(A) = n \\) for a square matrix to be [invertible](../inverse-matrix/)
+> The rank is one of the most fundamental invariants of a matrix. It determines the solvability of systems of linear equations via the Rouché-Capelli theorem, and it coincides with the condition \\( r(A) = n \\) for a square matrix to be invertible
 
 - - -
 ## Submatrices and minors
@@ -29,7 +29,7 @@ a_{31} & a_{32} & a_{34}
 \\end{pmatrix}
 \\]
 
-A minor of order \\( p \\) of a matrix \\( A \\) is the [determinant](../determinant/) of a square submatrix of size \\( p \\times p \\) extracted from \\( A \\). Since the determinant is defined only for square matrices, only square submatrices give rise to minors.
+A minor of order \\( p \\) of a matrix \\( A \\) is the determinant of a square submatrix of size \\( p \\times p \\) extracted from \\( A \\). Since the determinant is defined only for square matrices, only square submatrices give rise to minors.
 
 - - -
 ## Definition via minors
@@ -61,7 +61,7 @@ r(A) = 2
 - - -
 ## Computing the rank via Gaussian elimination
 
-For matrices of large order, computing all minors is impractical. The standard computational method is [Gaussian elimination](../solving-linear-systems-using-gaussian-elimination/): reduce \\( A \\) to row echelon form by applying elementary row operations, which do not change the rank. The rank equals the number of nonzero rows in the reduced matrix. Consider the matrix from the previous example:
+For matrices of large order, computing all minors is impractical. The standard computational method is Gaussian elimination: reduce \\( A \\) to row echelon form by applying elementary row operations, which do not change the rank. The rank equals the number of nonzero rows in the reduced matrix. Consider the matrix from the previous example:
 
 \\[
 A = \\begin{pmatrix}
@@ -102,4 +102,4 @@ The row echelon form has 2 nonzero rows, confirming \\( r(A) = 2 \\).
 - \\( r(A+B) \\leq r(A) + r(B) \\).
 - \\( r(AB) \\leq \\min(r(A),\\, r(B)) \\).
 
-> The rank appears in the [Rouché-Capelli theorem](../rouche-capelli-theorem/), which characterizes the compatibility of a system of linear equations \\( A\\mathbf{x} = \\mathbf{b} \\): the system is consistent if and only if \\( r(A) = r(A|\\mathbf{b}) \\), where \\( A|\\mathbf{b} \\) denotes the augmented matrix. When consistent, the solution space has dimension \\( n - r(A) \\).
+> The rank appears in the Rouché-Capelli theorem, which characterizes the compatibility of a system of linear equations \\( A\\mathbf{x} = \\mathbf{b} \\): the system is consistent if and only if \\( r(A) = r(A|\\mathbf{b}) \\), where \\( A|\\mathbf{b} \\) denotes the augmented matrix. When consistent, the solution space has dimension \\( n - r(A) \\).

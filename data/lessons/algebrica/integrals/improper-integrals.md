@@ -3,7 +3,7 @@
 
 ## Definition
 
-Improper integrals are [integrals](../indefinite-integrals/) in which either the interval of integration is unbounded, or the integrand becomes unbounded at one or more points, or both. In elementary calculus, the [definite integral](../definite-integrals/):
+Improper integrals are integrals in which either the interval of integration is unbounded, or the integrand becomes unbounded at one or more points, or both. In elementary calculus, the definite integral:
 
 \\[
 \int_a^b f(x)\\,dx
@@ -12,15 +12,15 @@ Improper integrals are [integrals](../indefinite-integrals/) in which either the
 is defined under the assumption that:
 
 + The interval \\([a,b]\\) is bounded.
-+ The function \\(f\\) is [continuous](../continuous-functions/) or at least integrable on that interval.
++ The function \\(f\\) is continuous or at least integrable on that interval.
 
-However, many problems lead beyond these restrictions. We may encounter an [unbounded interval](../intervals/), such as \\((a,+\infty)\\), or a function that becomes unbounded at one or more points of the interval. In such cases, the integral is called an improper integral. Its meaning is not immediate and it must be defined through a limiting process.
+However, many problems lead beyond these restrictions. We may encounter an unbounded interval, such as \\((a,+\infty)\\), or a function that becomes unbounded at one or more points of the interval. In such cases, the integral is called an improper integral. Its meaning is not immediate and it must be defined through a limiting process.
 
-> Improper integrals do not enlarge the class of [Riemann integrable](../riemann-integrability-criteria/) functions. They reinterpret problematic situations through limits of ordinary integrals. Convergence is a global property: it depends on how the function behaves near infinity or near a singularity, not just locally.
+> Improper integrals do not enlarge the class of Riemann integrable functions. They reinterpret problematic situations through limits of ordinary integrals. Convergence is a global property: it depends on how the function behaves near infinity or near a singularity, not just locally.
 
 - - -
 
-The need for a limiting process becomes clear when one attempts to apply the [Fundamental Theorem of Calculus](../fundamental-theorem-of-calculus/) directly to the following integral:
+The need for a limiting process becomes clear when one attempts to apply the Fundamental Theorem of Calculus directly to the following integral:
 
 \\[
 \int_{-1}^{1} \frac{1}{x^2}\\,dx
@@ -33,13 +33,13 @@ A direct calculation gives \\(\left[-x^{-1}\right]\_{-1}^{1} = -2\\), which is c
 - - -
 ## Improper integrals over unbounded intervals
 
-Suppose \\(f\\) is [continuous](../continuous-functions/) on \\([a,+\infty)\\). The integral:
+Suppose \\(f\\) is continuous on \\([a,+\infty)\\). The integral:
 
 \\[
 \int_a^{+\infty} f(x)\\,dx
 \\]
 
-is defined as the [limit](../limits):
+is defined as the limit:
 
 \\[
 \int_a^{+\infty} f(x)\\,dx
@@ -218,7 +218,7 @@ A fundamental reference example is the family of integrals:
 \int_1^{+\infty} \frac{1}{x^p}\\,dx \tag{1}
 \\]
 
-where \\(p\\) is a [real](../properties-of-real-numbers/) parameter. The behavior of this integral depends entirely on \\(p\\), and the result serves as a benchmark for comparing more complex integrands. For \\(p \neq 1\\), we compute:
+where \\(p\\) is a real parameter. The behavior of this integral depends entirely on \\(p\\), and the result serves as a benchmark for comparing more complex integrands. For \\(p \neq 1\\), we compute:
 
 \\[
 \int_1^b x^{-p}\\,dx
@@ -265,7 +265,7 @@ A pointwise bound is not always easy to establish, and this is where the limit c
 \lim_{x \to +\infty} \frac{f(x)}{g(x)} = L \quad \quad 0 < L < +\infty
 \\]
 
-then \\(\int_a^{+\infty} f(x)\\,dx\\) and \\(\int_a^{+\infty} g(x)\\,dx\\) either both converge or both diverge. When two functions are asymptotically equivalent, convergence of one implies convergence of the other, and the same holds for divergence. The reference of choice is almost always a [power](../powers/) \\(1/x^p\\), whose behavior is fully characterized by the \\(p\\)-integral test.
+then \\(\int_a^{+\infty} f(x)\\,dx\\) and \\(\int_a^{+\infty} g(x)\\,dx\\) either both converge or both diverge. When two functions are asymptotically equivalent, convergence of one implies convergence of the other, and the same holds for divergence. The reference of choice is almost always a power \\(1/x^p\\), whose behavior is fully characterized by the \\(p\\)-integral test.
 
 - - -
 ## Flowchart

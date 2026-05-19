@@ -3,7 +3,7 @@
 
 ## Definition
 
-In linear algebra, a linear combination is the fundamental operation that relates [vectors](../vectors/) to one another within a given collection. Each vector is scaled by a real coefficient, and the scaled vectors are then summed to produce a new vector. Simple as this construction is, it generates the core concepts of the subject: span, linear independence, [rank](../rank-of-a-matrix/), and dimension. It also gives rise to the geometric objects that structure \\( \mathbb{R}^n \\), including [lines](../lines/), planes, and higher-dimensional subspaces. Let \\( V = \mathbb{R}^n \\) and consider a finite collection of vectors:
+In linear algebra, a linear combination is the fundamental operation that relates vectors to one another within a given collection. Each vector is scaled by a real coefficient, and the scaled vectors are then summed to produce a new vector. Simple as this construction is, it generates the core concepts of the subject: span, linear independence, rank, and dimension. It also gives rise to the geometric objects that structure \\( \mathbb{R}^n \\), including lines, planes, and higher-dimensional subspaces. Let \\( V = \mathbb{R}^n \\) and consider a finite collection of vectors:
 
 \\[
 v_1, v_2, \dots, v_k \in \mathbb{R}^n
@@ -60,12 +60,12 @@ c_1 v_{1n} + \dots + c_k v_{kn}
 \end{pmatrix}
 \\]
 
-Each entry of the resulting vector is therefore a linear combination of [real numbers](../types-of-numbers/) drawn from the corresponding entries of the original vectors. In other words, scalar multiplication and vector addition are performed independently in each coordinate. This explicit description confirms that the concept of linear combination is fully compatible with the coordinate structure of \\( \mathbb{R}^n \\). The global operation of combining vectors reduces to familiar arithmetic carried out entry by entry.
+Each entry of the resulting vector is therefore a linear combination of real numbers drawn from the corresponding entries of the original vectors. In other words, scalar multiplication and vector addition are performed independently in each coordinate. This explicit description confirms that the concept of linear combination is fully compatible with the coordinate structure of \\( \mathbb{R}^n \\). The global operation of combining vectors reduces to familiar arithmetic carried out entry by entry.
 
 - - -
 ## Matrix–Vector interpretation
 
-The relationship between linear combinations and [matrices](../matrices/) becomes especially clear when we look at matrix–vector multiplication more closely. Consider a matrix whose columns are the vectors \\( v_1, \dots, v_k \\):
+The relationship between linear combinations and matrices becomes especially clear when we look at matrix–vector multiplication more closely. Consider a matrix whose columns are the vectors \\( v_1, \dots, v_k \\):
 
 \\[
 A =
@@ -101,13 +101,13 @@ In other words, multiplying a matrix by a vector is nothing more than forming a 
 - - -
 ## Linear systems and solvability
 
-Let us now return to one of the central objects of linear algebra: a [linear system](../systems-of-linear-equations/) written in matrix form:
+Let us now return to one of the central objects of linear algebra: a linear system written in matrix form:
 
 \\[
 A x = b
 \\]
 
-This equation represents a compact way of writing several linear [equations](../equations/) at once. However, once we interpret matrix–vector multiplication as a linear combination of columns, the meaning of the system becomes much clearer. Suppose the columns of \\( A \\) are the vectors \\( v_1, \dots, v_k \\). Expanding the product \\( A x \\) according to the definition of matrix multiplication, we obtain:
+This equation represents a compact way of writing several linear equations at once. However, once we interpret matrix–vector multiplication as a linear combination of columns, the meaning of the system becomes much clearer. Suppose the columns of \\( A \\) are the vectors \\( v_1, \dots, v_k \\). Expanding the product \\( A x \\) according to the definition of matrix multiplication, we obtain:
 
 \\[
 x_1 v_1 + x_2 v_2 + \dots + x_k v_k = b
@@ -183,7 +183,7 @@ These properties show that the span is not merely a subset of \\( \mathbb{R}^n \
 - - -
 ## Example
 
-Let us now see how the concept of span works in practice. When we say that a vector belongs to the span of other vectors, we are claiming that it can be constructed as a linear combination of them. In concrete terms, this means that there must exist suitable scalar coefficients that, when applied to the given vectors and added together, reproduce the target vector. Testing whether a vector lies in a span therefore amounts to solving a [linear system](../systems-of-linear-equations/). We will make this idea explicit through a direct computation.
+Let us now see how the concept of span works in practice. When we say that a vector belongs to the span of other vectors, we are claiming that it can be constructed as a linear combination of them. In concrete terms, this means that there must exist suitable scalar coefficients that, when applied to the given vectors and added together, reproduce the target vector. Testing whether a vector lies in a span therefore amounts to solving a linear system. We will make this idea explicit through a direct computation.
 
 Consider the vectors in \\( \mathbb{R}^3 \\):
 
@@ -330,13 +330,13 @@ where not all the coefficients are zero. The existence of such a relation means 
 - - -
 ## General vector spaces
 
-The definition of linear combination given above is stated for [vectors](../vectors/) in \\( \mathbb{R}^n \\), but the concept extends without modification to any vector space over a field. Let \\( V \\) be a vector space over a [field](../fields/) \\( \mathbb{F} \\), and let \\( v_1, v_2, \dots, v_k \in V \\). A linear combination of these vectors is any element of \\( V \\) of the form:
+The definition of linear combination given above is stated for vectors in \\( \mathbb{R}^n \\), but the concept extends without modification to any vector space over a field. Let \\( V \\) be a vector space over a field \\( \mathbb{F} \\), and let \\( v_1, v_2, \dots, v_k \in V \\). A linear combination of these vectors is any element of \\( V \\) of the form:
 
 \\[
 c_1 v_1 + c_2 v_2 + \dots + c_k v_k
 \\]
 
-where \\( c_1, c_2, \dots, c_k \in \mathbb{F} \\). The field \\( \mathbb{F} \\) may be taken to be \\( \mathbb{R} \\) or \\( \mathbb{C} \\), and the vector space \\( V \\) may be a space of [polynomials](../polynomials/), of [matrices](../matrices/), or of [continuous functions](../continuous-functions/), among many others. In each of these settings, the notions of span and linear independence carry over directly, and the structural results of linear algebra remain valid in full generality.
+where \\( c_1, c_2, \dots, c_k \in \mathbb{F} \\). The field \\( \mathbb{F} \\) may be taken to be \\( \mathbb{R} \\) or \\( \mathbb{C} \\), and the vector space \\( V \\) may be a space of polynomials, of matrices, or of continuous functions, among many others. In each of these settings, the notions of span and linear independence carry over directly, and the structural results of linear algebra remain valid in full generality.
 
 - - -
 ## Affine, conical, and convex combinations

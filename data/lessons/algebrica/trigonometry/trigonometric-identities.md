@@ -3,20 +3,20 @@
 
 ## Introduction
 
-A trigonometric identity is an equation involving trigonometric functions that holds for every admissible value of the variables. Unlike a trigonometric equation, which is solved for a specific set of angles, an identity is an equality valid throughout the common domain of the functions it relates. The study of these identities organises the algebraic relationships that tie [sine and cosine](../sine-and-cosine/), [tangent and cotangent](../tangent-and-cotangent/) together, and provides the tools needed to manipulate trigonometric expressions into equivalent forms that are easier to evaluate, [differentiate](../derivatives/), [integrate](../indefinite-integrals/), or interpret geometrically.
+A trigonometric identity is an equation involving trigonometric functions that holds for every admissible value of the variables. Unlike a trigonometric equation, which is solved for a specific set of angles, an identity is an equality valid throughout the common domain of the functions it relates. The study of these identities organises the algebraic relationships that tie sine and cosine, tangent and cotangent together, and provides the tools needed to manipulate trigonometric expressions into equivalent forms that are easier to evaluate, differentiate, integrate, or interpret geometrically.
 
-The identities presented below are grouped into families according to the type of transformation they perform. Some express a [function](../functions/) of a modified angle in terms of the original angle, others convert products into sums or sums into products, and others still reduce a general angle to a parametric variable. Each group plays a distinct role in the resolution of [trigonometric equations](../trigonometric-equations/), in the simplification of expressions, and in the broader apparatus of calculus.
+The identities presented below are grouped into families according to the type of transformation they perform. Some express a function of a modified angle in terms of the original angle, others convert products into sums or sums into products, and others still reduce a general angle to a parametric variable. Each group plays a distinct role in the resolution of trigonometric equations, in the simplification of expressions, and in the broader apparatus of calculus.
 
 - - -
 ## Fundamental identities
 
-Before examining the transformations that relate trigonometric functions of different angles, it is useful to recall the elementary identities that connect the six trigonometric functions at a single angle. These identities descend directly from the definitions on the [unit circle](../unit-circle/) and from the [Pythagorean theorem](../pythagorean-theorem/), and they form the algebraic foundation on which every subsequent identity is built. The [Pythagorean identity](../pythagorean-identity/) expresses the constraint that the coordinates of any point on the unit circle satisfy the equation of the circle itself:
+Before examining the transformations that relate trigonometric functions of different angles, it is useful to recall the elementary identities that connect the six trigonometric functions at a single angle. These identities descend directly from the definitions on the unit circle and from the Pythagorean theorem, and they form the algebraic foundation on which every subsequent identity is built. The Pythagorean identity expresses the constraint that the coordinates of any point on the unit circle satisfy the equation of the circle itself:
 
 \\[
 \sin^2(\theta) + \cos^2(\theta) = 1
 \\]
 
-Dividing both sides of this identity by \\(\cos^2(\theta)\\), provided \\(\cos(\theta) \neq 0\\), yields the corresponding identity involving the tangent and the [secant](../secant-and-cosecant/):
+Dividing both sides of this identity by \\(\cos^2(\theta)\\), provided \\(\cos(\theta) \neq 0\\), yields the corresponding identity involving the tangent and the secant:
 
 \\[
 1 + \tan^2(\theta) = \sec^2(\theta)
@@ -42,7 +42,7 @@ The quotient identities relate tangent and cotangent to the ratio of sine and co
 - - -
 ## Reference angles and reflections
 
-The method of [reference angles](../identities-using-reference-angles/), sometimes called the method of reflections, is a family of identities that allow one to express a trigonometric function of a non-acute angle in terms of the corresponding acute angle in the first quadrant of the Cartesian plane. Any trigonometric function, whether [sine](../sine-and-cosine/), [cosine](../sine-and-cosine/), [tangent](../tangent-and-cotangent/), or [cotangent](../tangent-and-cotangent/), with an argument of the form:
+The method of reference angles, sometimes called the method of reflections, is a family of identities that allow one to express a trigonometric function of a non-acute angle in terms of the corresponding acute angle in the first quadrant of the Cartesian plane. Any trigonometric function, whether sine, cosine, tangent, or cotangent, with an argument of the form:
 
 \\[
 \frac{\pi}{2} \pm \alpha,\\, \quad \pi \pm \alpha,\\, \quad \frac{3\pi}{2} \pm \alpha,\\, \quad 2\pi - \alpha
@@ -54,7 +54,7 @@ can be rewritten as a function of the acute angle \\(\alpha\\), with an appropri
 \frac{\pi}{2} + \alpha
 \\]
 
-In Cartesian coordinates, this angle lies in the second quadrant. A direct geometric analysis of the corresponding point on the [unit circle](../unit-circle/) yields the following two identities:
+In Cartesian coordinates, this angle lies in the second quadrant. A direct geometric analysis of the corresponding point on the unit circle yields the following two identities:
 
 \\[
 \begin{align}
@@ -63,7 +63,7 @@ In Cartesian coordinates, this angle lies in the second quadrant. A direct geome
 \end{align}
 \\]
 
-The vertical segment associated with the sine of \\(\alpha\\) in the first quadrant has the same length as the horizontal segment associated with the cosine of \\(\frac{\pi}{2} + \alpha\\) in the second quadrant, while the sign of the cosine becomes negative because the second quadrant lies to the left of the vertical axis. The same procedure applied to every angle of the form listed above produces a full catalogue of reduction formulas, discussed in detail in the page on [reduction formulas and reference angles](../reduction-formulas-and-reference-angles/).
+The vertical segment associated with the sine of \\(\alpha\\) in the first quadrant has the same length as the horizontal segment associated with the cosine of \\(\frac{\pi}{2} + \alpha\\) in the second quadrant, while the sign of the cosine becomes negative because the second quadrant lies to the left of the vertical axis. The same procedure applied to every angle of the form listed above produces a full catalogue of reduction formulas, discussed in detail in the page on reduction formulas and reference angles.
 
 - - -
 
@@ -105,7 +105,7 @@ The double-angle formulas express the trigonometric functions of an angle \\(2\t
 \end{align}
 \\]
 
-The cosine double-angle formula admits two equivalent forms obtained by applying the [Pythagorean identity](../pythagorean-identity/) \\(\sin^2\theta + \cos^2\theta = 1\\):
+The cosine double-angle formula admits two equivalent forms obtained by applying the Pythagorean identity \\(\sin^2\theta + \cos^2\theta = 1\\):
 
 \\[
 \begin{align}
@@ -148,7 +148,7 @@ The same reasoning applied to the sum identity for the cosine, with \\(a = b = \
 - - -
 ## Example
 
-Consider the [integral](../indefinite-integrals/):
+Consider the integral:
 
 \\[
 \int \frac{1 - \cos(2\theta)}{2}\\,d\theta
@@ -160,7 +160,7 @@ The integrand contains a cosine of a doubled angle, which makes a direct computa
 1 - \cos(2\theta) = 1 - \left(1 - 2\sin^2(\theta)\right) = 2\sin^2(\theta)
 \\]
 
-Substituting this result in the original expression transforms the integrand into a single [power](../powers) of the sine:
+Substituting this result in the original expression transforms the integrand into a single power of the sine:
 
 \\[
 \int \frac{2\sin^2(\theta)}{2}\\,d\theta = \int \sin^2(\theta)\\,d\theta
@@ -188,7 +188,7 @@ The half-angle formulas express the trigonometric functions of \\(\frac{\theta}{
 \end{align}
 \\]
 
-The sign on the right-hand side is determined by the quadrant in which the half-angle \\(\frac{\theta}{2}\\) lies, and must be selected according to the geometric position of the angle on the [unit circle](../unit-circle/).
+The sign on the right-hand side is determined by the quadrant in which the half-angle \\(\frac{\theta}{2}\\) lies, and must be selected according to the geometric position of the angle on the unit circle.
 
 The half-angle formulas for tangent and cotangent can be written either in radical form or in rational form. The rational form is generally preferred because it avoids the ambiguity of the sign:
 

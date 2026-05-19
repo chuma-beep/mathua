@@ -3,9 +3,9 @@
 
 ## Definition
 
-A module is the algebraic structure obtained by replacing the field of scalars in the definition of a [vector space](../vector-spaces/) with a [ring](../rings/). The motivation is that several familiar constructions, such as ideals inside a ring, [abelian groups](../groups/) regarded with their canonical \\(\mathbb{Z}\\)-action, and rings of polynomials viewed over their coefficient ring, all fit a single pattern in which the scalars need not be invertible. The resulting theory is broader than that of vector spaces and provides the common language used throughout commutative algebra and homological algebra.
+A module is the algebraic structure obtained by replacing the field of scalars in the definition of a vector space with a ring. The motivation is that several familiar constructions, such as ideals inside a ring, abelian groups regarded with their canonical \\(\mathbb{Z}\\)-action, and rings of polynomials viewed over their coefficient ring, all fit a single pattern in which the scalars need not be invertible. The resulting theory is broader than that of vector spaces and provides the common language used throughout commutative algebra and homological algebra.
 
-Let \\(R\\) be a ring with unity. A left module over \\(R\\), or simply a left \\(R\\)-module, is an [abelian group](../groups/) \\((M, +)\\) equipped with a scalar multiplication \\(\cdot : R \times M \to M\\) satisfying the following axioms:
+Let \\(R\\) be a ring with unity. A left module over \\(R\\), or simply a left \\(R\\)-module, is an abelian group \\((M, +)\\) equipped with a scalar multiplication \\(\cdot : R \times M \to M\\) satisfying the following axioms:
 
 - Distributivity over module addition: for all \\(r \in R\\) and \\(\mathbf{u}, \mathbf{v} \in M\\), one has \\(r \cdot (\mathbf{u} + \mathbf{v}) = r \cdot \mathbf{u} + r \cdot \mathbf{v}\\). 
 - Distributivity over ring addition: for all \\(r, s \in R\\) and \\(\mathbf{v} \in M\\), one has \\((r + s) \cdot \mathbf{v} = r \cdot \mathbf{v} + s \cdot \mathbf{v}\\).
@@ -14,7 +14,7 @@ Let \\(R\\) be a ring with unity. A left module over \\(R\\), or simply a left \
 
 A right module over \\(R\\) is defined analogously by placing the scalar on the right of the vector and reversing the compatibility condition to \\(\mathbf{v} \cdot (rs) = (\mathbf{v} \cdot r) \cdot s\\). When \\(R\\) is commutative the two notions coincide, and one speaks simply of an \\(R\\)-module.
 
-> The ring \\(R\\) over which \\(M\\) is defined is called the ring of scalars of \\(M\\). When \\(R\\) is a [field](../fields/), the axioms reduce exactly to those of a vector space, so every vector space is a module and the theory of modules contains the theory of vector spaces as a special case.
+> The ring \\(R\\) over which \\(M\\) is defined is called the ring of scalars of \\(M\\). When \\(R\\) is a field, the axioms reduce exactly to those of a vector space, so every vector space is a module and the theory of modules contains the theory of vector spaces as a special case.
 
 ---
 
@@ -34,7 +34,7 @@ A difference with respect to vector spaces concerns the possible presence of non
 
 ## Algebraic hierarchy
 
-The structures introduced so far form a chain of increasing rigidity. A [group](../groups/) carries one operation with inverses. A [ring](../rings/)carries two operations, with inverses guaranteed only for addition. A [field](../fields/) carries two operations, with inverses guaranteed for both addition and all nonzero elements under multiplication. A [vector space](../vector-spaces/) is then built on top of a field, with the field acting on a separate set of vectors by scaling.
+The structures introduced so far form a chain of increasing rigidity. A group carries one operation with inverses. A ringcarries two operations, with inverses guaranteed only for addition. A field carries two operations, with inverses guaranteed for both addition and all nonzero elements under multiplication. A vector space is then built on top of a field, with the field acting on a separate set of vectors by scaling.
 
 A module sits between rings and vector spaces in this picture. It is constructed in the same way as a vector space, but the field of scalars is replaced by a ring. The loss of multiplicative inverses for general scalars produces a theory that is significantly richer in pathologies:
 
@@ -60,7 +60,7 @@ Let \\(R\\) be a ring and let \\(n\\) be a positive integer. The set \\(R^n\\) o
 
 ---
 
-Every ring \\(R\\) is a module over itself, with scalar multiplication given by the ring multiplication. The submodules of \\(R\\) regarded as a left \\(R\\)-module are precisely the [left ideals](../rings/) of \\(R\\). This perspective unifies the language of ideals and modules and provides one of the chief motivations for studying modules in commutative algebra.
+Every ring \\(R\\) is a module over itself, with scalar multiplication given by the ring multiplication. The submodules of \\(R\\) regarded as a left \\(R\\)-module are precisely the left ideals of \\(R\\). This perspective unifies the language of ideals and modules and provides one of the chief motivations for studying modules in commutative algebra.
 
 The set \\(\mathbb{Z}/n\mathbb{Z}\\) is an abelian group of order \\(n\\), so by the construction above it is a \\(\mathbb{Z}\\)-module. Every element \\(\bar{a} \in \mathbb{Z}/n\mathbb{Z}\\) satisfies \\(n \cdot \bar{a} = 0\\), so the entire module is torsion. This shows that even a finitely generated \\(\mathbb{Z}\\)-module need not admit a basis, since the existence of a torsion element prevents any subset containing it from being linearly independent.
 
@@ -96,7 +96,7 @@ Not every module is free. The \\(\mathbb{Z}\\)-module \\(\mathbb{Z}/n\mathbb{Z}\
 
 ## Module homomorphisms and isomorphisms
 
-A module homomorphism, also called an \\(R\\)-linear map, is a [function](../functions/) \\(\varphi : M \to N\\) between two left \\(R\\)-modules that preserves both the additive structure and the action of the ring. Explicitly, \\(\varphi\\) is a homomorphism if for all \\(\mathbf{u}, \mathbf{v} \in M\\) and all \\(r \in R\\) the following two identities hold:
+A module homomorphism, also called an \\(R\\)-linear map, is a function \\(\varphi : M \to N\\) between two left \\(R\\)-modules that preserves both the additive structure and the action of the ring. Explicitly, \\(\varphi\\) is a homomorphism if for all \\(\mathbf{u}, \mathbf{v} \in M\\) and all \\(r \in R\\) the following two identities hold:
 
 \\[\varphi(\mathbf{u} + \mathbf{v}) = \varphi(\mathbf{u}) + \varphi(\mathbf{v})\\]  
 \\[\varphi(r \cdot \mathbf{v}) = r \cdot \varphi(\mathbf{v})\\]

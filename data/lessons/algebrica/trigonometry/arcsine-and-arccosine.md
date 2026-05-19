@@ -3,7 +3,7 @@
 
 ## Arcsine
 
-The arcsine is the inverse of the [sine](../sine-and-cosine) function. Given a number \\(x \in [-1, 1]\\) (i.e., the range of values the sine function can attain), \\(\arcsin(x)\\) is defined as the angle \\(\theta\\) in the interval \\([-\pi/2, \pi/2]\\) whose sine is equal to \\(x\\). In general, an [inverse function](../inverse-function/) reverses the operation of the original: if a function \\(f\\) maps a value \\(x\\) to a value \\(y\\), then its inverse \\(f^{-1}\\) maps \\(y\\) back to \\(x\\). The sine function takes an angle and returns a real number in \\([-1, 1]\\) and the arcsine does the opposite, returning the angle whose sine equals the given value. This inverse relationship is expressed by the identity:
+The arcsine is the inverse of the sine function. Given a number \\(x \in [-1, 1]\\) (i.e., the range of values the sine function can attain), \\(\arcsin(x)\\) is defined as the angle \\(\theta\\) in the interval \\([-\pi/2, \pi/2]\\) whose sine is equal to \\(x\\). In general, an inverse function reverses the operation of the original: if a function \\(f\\) maps a value \\(x\\) to a value \\(y\\), then its inverse \\(f^{-1}\\) maps \\(y\\) back to \\(x\\). The sine function takes an angle and returns a real number in \\([-1, 1]\\) and the arcsine does the opposite, returning the angle whose sine equals the given value. This inverse relationship is expressed by the identity:
 
 \\[
 \sin(\arcsin(x)) = x \quad \forall \\, x \in [-1, 1]
@@ -15,7 +15,7 @@ In formal terms, the definition of the arcsine is the following:
 \arcsin(x) = \theta \quad \iff \quad \sin(\theta) = x \quad \text{and} \quad \theta \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]
 \\]
 
-The restriction of \\(\theta\\) to the interval \\(\left[-\pi/2, \pi/2 \right]\\) is necessary because the sine function is not injective on its full [domain](../determining-the-domain-of-a-function/). Without this restriction, the inverse would not be well-defined.
+The restriction of \\(\theta\\) to the interval \\(\left[-\pi/2, \pi/2 \right]\\) is necessary because the sine function is not injective on its full domain. Without this restriction, the inverse would not be well-defined.
 
 - - -
 ## Example
@@ -49,7 +49,7 @@ x &= 1           &\quad& \arcsin(1) = \pi/2
 - - -
 ## Arccosine
 
-The arccosine is the inverse of the [cosine](../sine-and-cosine) function. Given a number \\(x \in [-1, 1]\\) (i.e., the range of values the cosine function can attain), \\(\arccos(x)\\) is defined as the angle \\(\theta\\) in the interval \\([0, \pi]\\) whose cosine is equal to \\(x\\). As with the arcsine, the restriction of the codomain to \\([0, \pi]\\) is necessary to ensure that the inverse is well-defined, since the cosine function is not injective on its full domain. The corresponding identity is:
+The arccosine is the inverse of the cosine function. Given a number \\(x \in [-1, 1]\\) (i.e., the range of values the cosine function can attain), \\(\arccos(x)\\) is defined as the angle \\(\theta\\) in the interval \\([0, \pi]\\) whose cosine is equal to \\(x\\). As with the arcsine, the restriction of the codomain to \\([0, \pi]\\) is necessary to ensure that the inverse is well-defined, since the cosine function is not injective on its full domain. The corresponding identity is:
 
 \\[
 \cos(\arccos(x)) = x \quad \text{for all } x \in [-1, 1]
@@ -118,7 +118,7 @@ The opposite composition, however, does not hold in general. For an arbitrary an
 
 The arcsine function \\(f(x) = \arcsin(x)\\) assigns to each value \\(x \in [-1, 1]\\) the angle \\(\theta \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]\\) whose sine equals \\(x\\). Its graph is a continuous, strictly increasing curve.
 
-* [Domain](../determining-the-domain-of-a-function/): \\(x \in [-1, 1]\\)
+* Domain: \\(x \in [-1, 1]\\)
 * Range: \\(y \in [-\pi/2, \pi/2]\\)
 * Periodicity: the arcsine function is not periodic.
 * Parity: the function is odd, satisfying \\(\arcsin(-x) = -\arcsin(x)\\).

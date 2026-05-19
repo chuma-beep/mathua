@@ -3,7 +3,7 @@
 
 ## Definition and basic properties
 
-Let \\( R \\) be a commutative [ring](../rings) and \\( R[x] \\) the ring of polynomials in one indeterminate over \\( R \\). Consider two [polynomials](../polynomials/) \\( P(x) \\) and \\( Q(x) \\), where any missing coefficients are understood to be zero:
+Let \\( R \\) be a commutative ring and \\( R[x] \\) the ring of polynomials in one indeterminate over \\( R \\). Consider two polynomials \\( P(x) \\) and \\( Q(x) \\), where any missing coefficients are understood to be zero:
 
 \\[
 P(x) = \sum_{k=0}^{n} a_k x^k
@@ -84,7 +84,7 @@ P(x) - Q(x)
 
 ## Properties of polynomial addition and subtraction
 
-Polynomial addition inherits its structural properties directly from the addition of the underlying ring \\( R \\). Since the sum is defined coefficient by coefficient, every property that holds for \\( + \\) in \\( R \\) transfers to \\( + \\) in \\( R[x] \\). The four properties below characterize \\( (R[x], +) \\) as an abelian [group](../groups/). The first property is commutativity. For every pair of polynomials \\( P(x) \\) and \\( Q(x):\\)
+Polynomial addition inherits its structural properties directly from the addition of the underlying ring \\( R \\). Since the sum is defined coefficient by coefficient, every property that holds for \\( + \\) in \\( R \\) transfers to \\( + \\) in \\( R[x] \\). The four properties below characterize \\( (R[x], +) \\) as an abelian group. The first property is commutativity. For every pair of polynomials \\( P(x) \\) and \\( Q(x):\\)
 
 \\[
 P(x) + Q(x) = Q(x) + P(x)

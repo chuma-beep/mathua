@@ -3,9 +3,9 @@
 
 ## Definition
 
-A vector space is an algebraic structure that formalises the idea of quantities that can be scaled and [combined linearly](../linear-combinations/). The concept arises wherever one encounters objects that can be added together and multiplied by numbers in a coherent way: geometric arrows in the plane, [polynomials](../polynomials/) with real coefficients, sequences of [real numbers](../properties-of-real-numbers/), and [continuous functions](../continuous-functions/) on an interval all share this common pattern.
+A vector space is an algebraic structure that formalises the idea of quantities that can be scaled and combined linearly. The concept arises wherever one encounters objects that can be added together and multiplied by numbers in a coherent way: geometric arrows in the plane, polynomials with real coefficients, sequences of real numbers, and continuous functions on an interval all share this common pattern.
 
-Unlike a [group](../groups/) or a [ring](../rings/), which are defined on a single set, a vector space involves two distinct sets: a [field](../fields/) \\(F\\), whose elements are called scalars, and a set \\(V\\), whose elements are called [vectors](../vectors/). A vector space over \\(F\\) is a set \\(V\\) together with two operations, vector addition \\(+ : V \times V \to V\\) and scalar multiplication \\(\cdot : F \times V \to V\\), satisfying the following axioms:
+Unlike a group or a ring, which are defined on a single set, a vector space involves two distinct sets: a field \\(F\\), whose elements are called scalars, and a set \\(V\\), whose elements are called vectors. A vector space over \\(F\\) is a set \\(V\\) together with two operations, vector addition \\(+ : V \times V \to V\\) and scalar multiplication \\(\cdot : F \times V \to V\\), satisfying the following axioms:
 
 - \\((V, +)\\) is an abelian group. In particular, there exists a zero vector \\(\mathbf{0} \in V\\) such that \\(\mathbf{v} + \mathbf{0} = \mathbf{v}\\) for all \\(\mathbf{v} \in V\\), and every vector \\(\mathbf{v}\\) has an additive inverse \\(-\mathbf{v}\\).
 - Compatibility with field multiplication: for all \\(\alpha, \beta \in F\\) and \\(\mathbf{v} \in V\\), one has \\(\alpha \cdot (\beta \cdot \mathbf{v}) = (\alpha\beta) \cdot \mathbf{v}\\).
@@ -27,7 +27,7 @@ If \\(\alpha \cdot \mathbf{v} = \mathbf{0}\\), then either \\(\alpha = 0\\) or \
 
 Vector spaces occupy a position at the top of the standard hierarchy of algebraic structures, depending essentially on the presence of a field of scalars.
 
-A [group](../groups/) consists of a set with a single operation admitting inverses. A [ring](../rings/) introduces a second operation that need not be invertible. A [field](../fields/) requires both operations to be fully invertible on nonzero elements. A vector space then takes a field as a given and builds a new structure on top of it, one in which the field acts on a separate set of vectors by scaling. The three structures form a chain of increasing rigidity:
+A group consists of a set with a single operation admitting inverses. A ring introduces a second operation that need not be invertible. A field requires both operations to be fully invertible on nonzero elements. A vector space then takes a field as a given and builds a new structure on top of it, one in which the field acts on a separate set of vectors by scaling. The three structures form a chain of increasing rigidity:
 
 - A group carries one operation with inverses.
 - A ring carries two operations, with inverses guaranteed only for addition.
@@ -44,7 +44,7 @@ The set \\(\mathbb{C}^n\\) of all ordered \\(n\\)-tuples of complex numbers is a
 
 ---
 
-The set \\(\mathbb{R}[x]_{\leq n}\\) of all [polynomials](../polynomials/) with real coefficients of degree at most \\(n\\) is a vector space over \\(\mathbb{R}\\) under the usual addition of polynomials and multiplication of a polynomial by a real constant. The zero vector is the zero polynomial. A natural basis for this space is \\(\{1, x, x^2, \ldots, x^n\}\\), which contains \\(n+1\\) elements, so the dimension of this space is \\(n+1\\).
+The set \\(\mathbb{R}[x]_{\leq n}\\) of all polynomials with real coefficients of degree at most \\(n\\) is a vector space over \\(\mathbb{R}\\) under the usual addition of polynomials and multiplication of a polynomial by a real constant. The zero vector is the zero polynomial. A natural basis for this space is \\(\{1, x, x^2, \ldots, x^n\}\\), which contains \\(n+1\\) elements, so the dimension of this space is \\(n+1\\).
 
 The set \\(\mathcal{C}([a,b])\\) of all continuous real-valued functions on a closed interval \\([a,b]\\) is a vector space over \\(\mathbb{R}\\) under pointwise addition and scalar multiplication: \\((f + g)(x) = f(x) + g(x)\\) and \\((\alpha f)(x) = \alpha f(x)\\). This space is infinite-dimensional, since the polynomials of all degrees form a linearly independent subset with no finite spanning set.
 
@@ -66,7 +66,7 @@ A set of vectors \\(\\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\\}\\) in
 \alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 + \cdots + \alpha_n \mathbf{v}_n = \mathbf{0}
 \\]
 
-is \\(\alpha_1 = \alpha_2 = \cdots = \alpha_n = 0\\). A set of vectors that is not linearly independent is called linearly dependent, meaning that at least one vector in the set can be expressed as a [linear combination](../linear-combinations/) of the others. A basis of \\(V\\) is a linearly independent set of vectors that spans \\(V\\), meaning every vector in \\(V\\) can be written as a linear combination of the basis vectors. The representation of any vector in terms of a given basis is unique. If
+is \\(\alpha_1 = \alpha_2 = \cdots = \alpha_n = 0\\). A set of vectors that is not linearly independent is called linearly dependent, meaning that at least one vector in the set can be expressed as a linear combination of the others. A basis of \\(V\\) is a linearly independent set of vectors that spans \\(V\\), meaning every vector in \\(V\\) can be written as a linear combination of the basis vectors. The representation of any vector in terms of a given basis is unique. If
 \\[\mathbf{v} = \alpha_1 \mathbf{v}_1 + \cdots + \alpha_n \mathbf{v}_n = \beta_1 \mathbf{v}_1 + \cdots + \beta_n \mathbf{v}_n\\]
 
 then subtracting yields:
@@ -84,7 +84,7 @@ The standard basis of \\(\mathbb{R}^n\\) consists of the \\(n\\) vectors \\(\mat
 \mathbf{e}_1 = (1, 0, 0), \quad \mathbf{e}_2 = (0, 1, 0), \quad \mathbf{e}_3 = (0, 0, 1)
 \\]
 
-Every [vector](../vectors/) \\((a, b, c) \in \mathbb{R}^3\\) can be written uniquely as \\(a\\,\mathbf{e}_1 + b\\,\mathbf{e}_2 + c\\,\mathbf{e}_3\\), confirming that these three vectors form a basis and that \\(\dim \mathbb{R}^3 = 3\\).
+Every vector \\((a, b, c) \in \mathbb{R}^3\\) can be written uniquely as \\(a\\,\mathbf{e}_1 + b\\,\mathbf{e}_2 + c\\,\mathbf{e}_3\\), confirming that these three vectors form a basis and that \\(\dim \mathbb{R}^3 = 3\\).
 
 - - -
 ## Linear maps
@@ -107,7 +107,7 @@ Both \\(\ker(\varphi)\\) and \\(\mathrm{im}(\varphi)\\) are subspaces of \\(V\\)
 \dim V = \dim \ker(\varphi) + \dim \mathrm{im}(\varphi)
 \\]
 
-The dimension of \\(\mathrm{im}(\varphi)\\) is called the rank of \\(\varphi\\) and the dimension of \\(\ker(\varphi)\\) is called its nullity. The rank-nullity theorem is one of the central results of linear algebra and underlies the theory of [systems of linear equations](../systems-of-linear-equations/), the analysis of [matrices](../matrices/), and the classification of linear maps between finite-dimensional spaces.
+The dimension of \\(\mathrm{im}(\varphi)\\) is called the rank of \\(\varphi\\) and the dimension of \\(\ker(\varphi)\\) is called its nullity. The rank-nullity theorem is one of the central results of linear algebra and underlies the theory of systems of linear equations, the analysis of matrices, and the classification of linear maps between finite-dimensional spaces.
 
 - - -
 ## Example

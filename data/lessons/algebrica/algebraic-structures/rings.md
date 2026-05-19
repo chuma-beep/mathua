@@ -3,7 +3,7 @@
 
 ## Definition
 
-A ring is an algebraic structure that extends the notion of a [group](../groups/) by introducing a second binary operation. The concept arises from the observation that several fundamental objects, such as the [integers](../integers/), the [polynomials](../polynomials/) with real coefficients, and the [square matrices](../matrices/) of a given size, share a common pattern. They admit both an addition and a multiplication, the two operations interact in a predictable way, and yet multiplication need not be commutative and need not admit inverses. A ring is a set \\(R\\) together with two binary operations \\(+\\) and \\(\cdot\\) (addition and multiplication), satisfying the following axioms:
+A ring is an algebraic structure that extends the notion of a group by introducing a second binary operation. The concept arises from the observation that several fundamental objects, such as the integers, the polynomials with real coefficients, and the square matrices of a given size, share a common pattern. They admit both an addition and a multiplication, the two operations interact in a predictable way, and yet multiplication need not be commutative and need not admit inverses. A ring is a set \\(R\\) together with two binary operations \\(+\\) and \\(\cdot\\) (addition and multiplication), satisfying the following axioms:
 
 - \\((R, +)\\) is an abelian group. In particular, there exists an element \\(0 \in R\\) such that \\(a + 0 = a\\) for all \\(a \in R\\), and for every \\(a \in R\\) there exists \\(-a \in R\\) with \\(a + (-a) = 0\\).
 - Associativity of multiplication: for all \\(a, b, c \in R\\), one has \\((a \cdot b) \cdot c = a \cdot (b \cdot c)\\).
@@ -35,11 +35,11 @@ In particular, \\((-1) \cdot a = -a\\) whenever \\(R\\) has a unity. These sign 
 - - -
 ## Algebraic hierarchy
 
-A [group](../groups/) is the most elementary of these structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
+A group is the most elementary of these structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
 
 A ring extends this framework by introducing a second operation, multiplication, required to be associative and to distribute over addition, but not necessarily commutative and not required to admit inverses.
 
-When the additional requirement that every nonzero element possess a multiplicative inverse is imposed on a commutative ring with unity, the structure becomes a [field](../fields/). The three structures thus form a chain of increasing rigidity:
+When the additional requirement that every nonzero element possess a multiplicative inverse is imposed on a commutative ring with unity, the structure becomes a field. The three structures thus form a chain of increasing rigidity:
 
 - A group carries one operation with inverses.
 - A ring carries two operations, with inverses guaranteed only for addition.
@@ -56,9 +56,9 @@ The set of polynomials with real coefficients, denoted \\(\mathbb{R}[x]\\), form
 
 ---
 
-Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\), equipped with addition and multiplication [modulo](../modulo-operator/) \\(n\\), forms a commutative ring with unity. For example, in \\(\mathbb{Z}/6\mathbb{Z}\\) one has \\(2 \cdot 3 = 0\\), so \\(2\\) and \\(3\\) are zero divisors and \\(\mathbb{Z}/6\mathbb{Z}\\) is not an integral domain. When \\(n\\) is prime, however, \\(\mathbb{Z}/n\mathbb{Z}\\) contains no zero divisors and is in fact a field.
+Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\), equipped with addition and multiplication modulo \\(n\\), forms a commutative ring with unity. For example, in \\(\mathbb{Z}/6\mathbb{Z}\\) one has \\(2 \cdot 3 = 0\\), so \\(2\\) and \\(3\\) are zero divisors and \\(\mathbb{Z}/6\mathbb{Z}\\) is not an integral domain. When \\(n\\) is prime, however, \\(\mathbb{Z}/n\mathbb{Z}\\) contains no zero divisors and is in fact a field.
 
-Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set \\(\mathrm{M}\_n(F)\\) of all \\(n \times n\\) [matrices](../matrices/) with entries in \\(F\\) forms a ring under matrix addition and multiplication. The additive identity is the zero matrix, and the multiplicative identity is the identity matrix \\(I_n\\). For \\(n \geq 2\\), this ring is not commutative, since matrix multiplication does not commute in general, and it contains zero divisors.
+Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set \\(\mathrm{M}\_n(F)\\) of all \\(n \times n\\) matrices with entries in \\(F\\) forms a ring under matrix addition and multiplication. The additive identity is the zero matrix, and the multiplicative identity is the identity matrix \\(I_n\\). For \\(n \geq 2\\), this ring is not commutative, since matrix multiplication does not commute in general, and it contains zero divisors.
 
 - - -
 ## Subrings
@@ -91,7 +91,7 @@ one has:
 - - -
 ## Ring homomorphisms and isomorphisms
 
-A ring homomorphism is a [function](../functions/) between two rings that preserves both operations. Given two rings \\((R, +, \cdot)\\) and \\((S, \oplus, \odot)\\), a function \\(\varphi : R \to S\\) is a ring homomorphism if for all \\(a, b \in R\\):
+A ring homomorphism is a function between two rings that preserves both operations. Given two rings \\((R, +, \cdot)\\) and \\((S, \oplus, \odot)\\), a function \\(\varphi : R \to S\\) is a ring homomorphism if for all \\(a, b \in R\\):
 
 \\[\varphi(a + b) = \varphi(a) \oplus \varphi(b)\\]
 \\[\varphi(a \cdot b) = \varphi(a) \odot \varphi(b)\\]

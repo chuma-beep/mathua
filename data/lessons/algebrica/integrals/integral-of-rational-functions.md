@@ -3,17 +3,17 @@
 
 ## Integration of rational functions with polynomial division
 
-A [rational function](../rational-functions/) is the quotient of two polynomials, and the corresponding [indefinite integral](../indefinite-integral) takes the general form:
+A rational function is the quotient of two polynomials, and the corresponding indefinite integral takes the general form:
 
 \\[
 \int \frac{N(x)}{D(x)} \\, dx
 \\]
 
-where \\(N(x)\\) and \\(D(x)\\) are [polynomials](../polynomials/) with real coefficients, and \\(D(x)\\) is not identically zero. The strategy for computing an integral of this kind depends on the relation between the degrees of the numerator and the denominator. We begin by examining the case in which the degree of \\(N(x)\\) is greater than or equal to the degree of \\(D(x)\\).
+where \\(N(x)\\) and \\(D(x)\\) are polynomials with real coefficients, and \\(D(x)\\) is not identically zero. The strategy for computing an integral of this kind depends on the relation between the degrees of the numerator and the denominator. We begin by examining the case in which the degree of \\(N(x)\\) is greater than or equal to the degree of \\(D(x)\\).
 
 ---
 
-From the general properties of polynomials, we know that it is always possible to perform the [division](../polynomial-division/) of a polynomial \\(N(x)\\) by a non-zero polynomial \\(D(x)\\). The result of this operation consists of two polynomials:
+From the general properties of polynomials, we know that it is always possible to perform the division of a polynomial \\(N(x)\\) by a non-zero polynomial \\(D(x)\\). The result of this operation consists of two polynomials:
 
 - A quotient polynomial \\( Q(x) \\).  
 - A remainder polynomial \\( R(x) \\), where the degree of \\( R(x) \\) is strictly less than the degree of \\( D(x) \\).
@@ -54,7 +54,7 @@ Let's compute the integral of the rational function:
 \int \frac{x^3 + x + 1}{x^2 + 1} \\, dx
 \\]
 
-First, we proceed with the [division](../polynomial-division/) between the numerator and the denominator, obtaining:
+First, we proceed with the division between the numerator and the denominator, obtaining:
 
 \\[
 \begin{array}{rrrr|ll}
@@ -71,7 +71,7 @@ From the division, we obtain:
 Q(x) = x \qquad R(x) = 1
 \\]
 
-> To learn more about the method of dividing two polynomials, refer to the relevant section on [polynomials](../polynomials).
+> To learn more about the method of dividing two polynomials, refer to the relevant section on polynomials.
 
 ---
 
@@ -96,7 +96,7 @@ The simplest case of a proper rational function occurs when the denominator is a
 
 where \\(a\\), \\(b\\), and \\(c\\) are real constants with \\(a \neq 0\\). The numerator is a constant, and the degree condition \\(\deg N(x) < \deg D(x)\\) is automatically satisfied.
 
-An integral of this type is solved by the [method of substitution](../integration-by-substitution/). Setting \\(t = ax + b\\), we have \\(dt = a \\, dx\\), and the integral becomes:
+An integral of this type is solved by the method of substitution. Setting \\(t = ax + b\\), we have \\(dt = a \\, dx\\), and the integral becomes:
 
 \\[
 \int \frac{c}{ax + b} \\, dx = \frac{c}{a} \int \frac{1}{t} \\, dt = \frac{c}{a} \ln|t| + k
@@ -133,7 +133,7 @@ Replacing these expressions into the integral, we obtain:
 \int \frac{2}{6x + 1} \\, dx = \int \frac{2}{t} \cdot \frac{dt}{6} = \frac{1}{3} \int \frac{1}{t} \\, dt
 \\]
 
-The remaining integral is one of the elementary forms recalled among the [indefinite integrals](../indefinite-integrals/), and its primitive is the natural logarithm of the absolute value of \\(t\\). We therefore have:
+The remaining integral is one of the elementary forms recalled among the indefinite integrals, and its primitive is the natural logarithm of the absolute value of \\(t\\). We therefore have:
 
 \\[
 \frac{1}{3} \int \frac{1}{t} \\, dt = \frac{1}{3} \ln|t| + c
@@ -149,7 +149,7 @@ Returning to the original variable by substituting \\(t = 6x + 1\\), we obtain t
 - - -
 ## Partial fraction decomposition 
 
-In many situations, the integral of a rational function cannot be computed directly by inspection. Even when the expression appears relatively simple, algebraic manipulations may not reveal an immediate antiderivative. In such cases, the method of [partial fraction decomposition](../partial-fraction-decomposition/) provides a systematic way to rewrite the function as a sum of elementary terms whose integrals are well known. By decomposing the rational function into simpler components, we obtain a representation that is far more suitable for integration. To illustrate the idea in a setting different from the earlier examples, consider the integral:
+In many situations, the integral of a rational function cannot be computed directly by inspection. Even when the expression appears relatively simple, algebraic manipulations may not reveal an immediate antiderivative. In such cases, the method of partial fraction decomposition provides a systematic way to rewrite the function as a sum of elementary terms whose integrals are well known. By decomposing the rational function into simpler components, we obtain a representation that is far more suitable for integration. To illustrate the idea in a setting different from the earlier examples, consider the integral:
 
 \\[
 \int \frac{7x + 5}{(x - 1)(3x + 2)} \\, dx
@@ -190,7 +190,7 @@ At this point the integral becomes:
 \int \left( \frac{4}{x - 1} - \frac{5}{3x + 2} \right) dx
 \\]
 
-and by the [linearity of the integral](../indefinite-integrals/) we may treat each term separately:
+and by the linearity of the integral we may treat each term separately:
 
 \\[
 4 \int \frac{1}{x - 1} \\, dx
@@ -199,7 +199,7 @@ and by the [linearity of the integral](../indefinite-integrals/) we may treat ea
 5 \int \frac{1}{3x + 2} \\, dx
 \\]
 
-Both integrals reduce to elementary [logarithmic](../logarithms/) forms:
+Both integrals reduce to elementary logarithmic forms:
 
 \\[
 4 \ln|x - 1| + c_1
@@ -303,9 +303,9 @@ The final expression shows how the two distinct powers of the factor \\(x - 1\\)
 - - -
 ## Irreducible quadratic factors in the denominator
 
-Not every polynomial splits into linear factors over the real numbers. A quadratic expression \\(ax^2 + bx + c\\) whose [discriminant](../quadratic-formula) satisfies \\(b^2 - 4ac < 0\\) has no real roots. In concrete terms, this means it cannot be written as \\((x - r_1)(x - r_2)\\) with \\(r_1, r_2 \in \mathbb{R}\\). 
+Not every polynomial splits into linear factors over the real numbers. A quadratic expression \\(ax^2 + bx + c\\) whose discriminant satisfies \\(b^2 - 4ac < 0\\) has no real roots. In concrete terms, this means it cannot be written as \\((x - r_1)(x - r_2)\\) with \\(r_1, r_2 \in \mathbb{R}\\). 
 
-Over the real field, such a quadratic is said to be irreducible. When a factor of this type appears in the denominator of a [rational function](../rational-functions/), the strategy for partial fraction decomposition changes slightly. In the linear case, each factor \\((x - r)\\) gives rise to a term of the form: 
+Over the real field, such a quadratic is said to be irreducible. When a factor of this type appears in the denominator of a rational function, the strategy for partial fraction decomposition changes slightly. In the linear case, each factor \\((x - r)\\) gives rise to a term of the form: 
 
 \\[\frac{A}{x - r}\\]
 
@@ -313,7 +313,7 @@ Here there are no real roots to attach such terms to. The quadratic must therefo
 
 \\[\frac{Ax + B}{ax^2 + bx + c}\\]
 
-The numerator must have degree strictly smaller than the denominator, and in the quadratic case that means degree one. Using only a constant would not provide enough flexibility to match the original rational function. Once the decomposition is complete, integration typically proceeds by rewriting the quadratic denominator through [completing the square](../completing-the-square/). After an appropriate change of variable, one arrives at an expression of the type:
+The numerator must have degree strictly smaller than the denominator, and in the quadratic case that means degree one. Using only a constant would not provide enough flexibility to match the original rational function. Once the decomposition is complete, integration typically proceeds by rewriting the quadratic denominator through completing the square. After an appropriate change of variable, one arrives at an expression of the type:
 
 \\[\int \frac{1}{u^2 + a^2} \\, du\\]
 
@@ -321,7 +321,7 @@ whose antiderivative is
 
 \\[\frac{1}{a}\arctan\\!\left(\frac{u}{a}\right) + c\\]
 
-The appearance of the [arctangent](../arctangent-and-arccotangent/) reflects the geometric structure encoded in the expression \\(u^2 + a^2\\), which cannot vanish over the real numbers and corresponds, analytically, to the derivative of the inverse [tangent function](../tangent-function/).
+The appearance of the arctangent reflects the geometric structure encoded in the expression \\(u^2 + a^2\\), which cannot vanish over the real numbers and corresponds, analytically, to the derivative of the inverse tangent function.
 
 - - -
 ## Example 4
@@ -384,11 +384,11 @@ The integral splits accordingly:
 
 - - -
 
-First part: here the numerator is exactly the derivative of the denominator. This produces a [logarithm](../logarithms/):
+First part: here the numerator is exactly the derivative of the denominator. This produces a logarithm:
 
 \\[\frac{5}{2} \ln|x^2 + 2x + 3|\\]
 
-Because the quadratic has negative discriminant, it is always positive, so the [absolute value](../absolute-value/) is not strictly necessary, though keeping it causes no harm.
+Because the quadratic has negative discriminant, it is always positive, so the absolute value is not strictly necessary, though keeping it causes no harm.
 
 - - -
 
