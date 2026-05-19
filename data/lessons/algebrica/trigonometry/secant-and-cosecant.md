@@ -22,7 +22,9 @@ Since the secant is the reciprocal of the cosine, it is defined only at angles w
 \qquad \forall\\, \theta \neq \frac{\pi}{2} + k\pi, \quad k \in \mathbb{Z}
 \\]
 
-From the geometric construction, the secant measures the factor by which the unit radius must be extended to reach the point \\(\text{S}\\) where the tangent line at \\(\text{P}\\) meets the \\(x\\)-axis. This interpretation makes it evident why \\(|\sec(\theta)| \geq 1\\) wherever the function is defined: the intersection point \\(\text{S}\\) necessarily lies at a distance from the origin no smaller than the radius of the unit circle itself.
+From the geometric construction, the secant measures the factor by which the unit radius must be extended to reach the point \(\text{S}\) where the tangent line at \(\text{P}\) meets the \(x\)-axis. This interpretation makes it evident why \(|\sec(\theta)| \geq 1\) wherever the function is defined: the intersection point \(\text{S}\) necessarily lies at a distance from the origin no smaller than the radius of the unit circle itself.
+
+![Secant and cosecant graphs](svg/sec-csc-cot-graphs.svg)
 
 > This section examines the secant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the secant function.
 

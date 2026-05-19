@@ -1,5 +1,6 @@
 # Complex Numbers in Exponential Form
 
+![Complex plane representation](svg/complex-plane.svg)
 
 ## Introduction
 

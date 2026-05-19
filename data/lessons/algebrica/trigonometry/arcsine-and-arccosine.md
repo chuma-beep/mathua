@@ -15,7 +15,9 @@ In formal terms, the definition of the arcsine is the following:
 \arcsin(x) = \theta \quad \iff \quad \sin(\theta) = x \quad \text{and} \quad \theta \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]
 \\]
 
-The restriction of \\(\theta\\) to the interval \\(\left[-\pi/2, \pi/2 \right]\\) is necessary because the sine function is not injective on its full domain. Without this restriction, the inverse would not be well-defined.
+The restriction of \(\theta\) to the interval \(\left[-\pi/2, \pi/2 \right]\) is necessary because the sine function is not injective on its full domain. Without this restriction, the inverse would not be well-defined.
+
+![Inverse trigonometric function graphs](svg/inverse-trig-graphs.svg)
 
 - - -
 ## Example

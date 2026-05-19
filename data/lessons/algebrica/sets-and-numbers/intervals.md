@@ -1,6 +1,7 @@
 
 # Intervals
 
+![Number line with interval notation](svg/number-line-intervals.svg)
 
 ## Definition
 

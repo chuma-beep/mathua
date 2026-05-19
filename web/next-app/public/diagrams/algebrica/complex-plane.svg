@@ -1,0 +1,20 @@
+<svg width="400px" height="400px" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="400" fill="white"/>
+<line x1="30" y1="200" x2="380" y2="200" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="380,200 372.6315120479769,203.1153467384692 372.6315120479769,196.8846532615308" fill="#BABABA"/>
+<line x1="200" y1="210" x2="200" y2="30" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="200,30 203.1153467384692,37.36848795202308 196.8846532615308,37.36848795202308" fill="#BABABA"/>
+<text x="378" y="218" font-size="14" font-family="serif" fill="#636363">Re</text>
+<text x="210" y="30" font-size="14" font-family="serif" fill="#636363">Im</text>
+<text x="205" y="195" font-size="14" font-family="serif" fill="#636363">O</text>
+<line x1="200" y1="200" x2="284.0" y2="140.0" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+<circle cx="284.0" cy="140.0" r="5" fill="#333333"/>
+<text x="292.0" y="132.0" font-size="13" font-family="serif" fill="#333333">z = a + bi</text>
+<line x1="284.0" y1="200" x2="284.0" y2="140.0" stroke="#BABABA" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<line x1="200" y1="140.0" x2="284.0" y2="140.0" stroke="#BABABA" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="284.0" y="218" font-size="13" font-family="serif" fill="#e74c3c" text-anchor="middle">a</text>
+<text x="185" y="144.0" font-size="13" font-family="serif" fill="#2980b9" text-anchor="end">b</text>
+<path d="M 230.0 200.0 A 30 30 0 0 1 224.41200413620206 182.5628541884271" fill="none" stroke="#BABABA" stroke-width="1.5"/>
+<text x="240" y="185" font-size="13" font-family="serif" fill="#636363">θ</text>
+<text x="252.0" y="170.0" font-size="12" font-family="serif" fill="#333333">r = |z|</text>
+</svg>

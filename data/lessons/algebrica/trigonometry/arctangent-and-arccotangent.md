@@ -1,5 +1,6 @@
 # Arctangent and Arccotangent
 
+![Inverse trig function graphs](svg/inverse-trig-graphs.svg)
 
 ## Arctangent definition
 

@@ -1,0 +1,22 @@
+<svg width="450px" height="400px" viewBox="0 0 450 400" xmlns="http://www.w3.org/2000/svg">
+<rect width="450" height="400" fill="white"/>
+<line x1="30" y1="200" x2="420" y2="200" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="420,200 412.6315120479769,203.1153467384692 412.6315120479769,196.8846532615308" fill="#BABABA"/>
+<line x1="200" y1="210" x2="200" y2="30" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="200,30 203.1153467384692,37.36848795202308 196.8846532615308,37.36848795202308" fill="#BABABA"/>
+<circle cx="200" cy="200" r="140" fill="none" stroke="#333333" stroke-width="2"/>
+<line x1="340" y1="50" x2="340" y2="350" stroke="#BABABA" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<line x1="200" y1="200" x2="340" y2="82.52605163518083" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="340" y1="200" x2="340" y2="82.52605163518083" stroke="#27ae60" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="307.24622203665695" cy="110.0097346438845" r="4" fill="#333333"/>
+<circle cx="340" cy="200" r="4" fill="#333333"/>
+<circle cx="340" cy="82.52605163518083" r="4" fill="#333333"/>
+<text x="205" y="195" font-size="14" font-family="serif" fill="#636363">O</text>
+<text x="418" y="215" font-size="14" font-family="serif" fill="#636363">x</text>
+<text x="208" y="32" font-size="14" font-family="serif" fill="#636363">y</text>
+<text x="313.24622203665695" y="104.0097346438845" font-size="13" font-family="serif" fill="#333333">P</text>
+<text x="346" y="194" font-size="13" font-family="serif" fill="#333333">S</text>
+<text x="346" y="86.52605163518083" font-size="13" font-family="serif" fill="#333333">T</text>
+<text x="350" y="141.0" font-size="13" font-family="serif" fill="#27ae60">tan(θ)</text>
+<text x="410" y="60" font-size="11" font-family="serif" fill="#636363" text-anchor="end">x = 1</text>
+</svg>

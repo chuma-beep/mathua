@@ -1,5 +1,6 @@
 # Hyperbolic Tangent and Cotangent
 
+![Hyperbolic functions graph](svg/hyperbolic-functions.svg)
 
 ## Introduction
 

@@ -12,6 +12,8 @@ The algebraic form \\( z = a + bi \\) represents a complex number through its re
 
 Since the point \\( z = (a, b) \\) lies in the complex plane at distance \\( r \\) from the origin, and \\( \theta \\) is the angle it forms with the positive real axis, the real and imaginary components can be expressed through the definitions of sine and cosine in a right triangle. The projections onto the two axes are the following.
 
+![Complex plane with trigonometric form](svg/complex-plane.svg)
+
 \\[\overline{OA} = \overline{OP} \cdot \cos(\theta) = r \cos(\theta)\\]
 \\[\overline{OB} = \overline{OP} \cdot \sin(\theta) = r \sin(\theta)\\]
 

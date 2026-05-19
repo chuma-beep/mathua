@@ -7,6 +7,8 @@ The unit circle (or the trigonometric circle) is a circle of radius one centered
 
 By convention, the counterclockwise direction is assigned a positive sign and the clockwise direction a negative sign. The angle \\( \theta \\) is therefore positive when \\( P \\) is reached by moving counterclockwise from the positive \\( x \\)-axis, and negative otherwise.
 
+![Unit circle with notable angles](svg/unit-circle-labeled.svg)
+
 Let \\( S \\) be the point \\( (1, 0) \\) where the unit circle meets the positive \\( x \\)-axis, and let \\( T \\) be the point where the line through \\( O \\) and \\( P \\) intersects the vertical tangent to the circle at \\( S \\).
 
 - The length of the vertical segment \\( \overline{PR} \\) equals the sine of the angle \\( \theta \\).

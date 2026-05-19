@@ -5,6 +5,8 @@
 
 Given an angle \\( \theta \\) in standard position on the unit circle, the acute angle formed between its terminal side and the horizontal axis is called the reference angle of \\( \theta \\), and is usually denoted by \\( \alpha \\). The reference angle provides a direct link between the trigonometric functions of a generic angle and those of an acute angle in the first quadrant, where all values are positive and computable from elementary geometric considerations.
 
+![Reference angles on unit circle](svg/reference-angles.svg)
+
 The identities that realize this link are known as reduction formulas. Each of them expresses a trigonometric function of \\( \theta \\) in terms of the same function, or its cofunction, evaluated at \\( \alpha \\), with a sign fixed by the quadrant in which \\( \theta \\) lies. The angle forms that appear most frequently are the following:
 
 \\[

@@ -5,11 +5,13 @@
 
 The Pythagorean theorem states that in every right triangle, the square of the hypotenuse is equal to the sum of the squares of the two legs:
 
-\\[
+\[
 a^2 + b^2 = c^2
-\\]
+\]
 
-In this relation \\(c\\) denotes the hypotenuse, while \\(a\\) and \\(b\\) denote the two legs. The theorem applies exclusively to right triangles, that is, triangles containing exactly one angle of \\(90^\circ\\).
+In this relation \(c\) denotes the hypotenuse, while \(a\) and \(b\) denote the two legs. The theorem applies exclusively to right triangles, that is, triangles containing exactly one angle of \(90^\circ\).
+
+![Pythagorean theorem diagram](svg/pythagorean-theorem.svg)
 
 From the identity \\(a^2 + b^2 = c^2\\) one can isolate each side in turn, obtaining the hypotenuse as a function of the two legs and each leg as a function of the hypotenuse and the other leg:
 

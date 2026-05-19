@@ -1,0 +1,18 @@
+<svg width="380px" height="300px" viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="380" height="300" fill="white"/>
+<line x1="50" y1="240" x2="330" y2="240" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+<line x1="330" y1="240" x2="130" y2="50" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+<line x1="130" y1="50" x2="50" y2="240" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+<circle cx="50" cy="240" r="4" fill="#333333"/>
+<circle cx="330" cy="240" r="4" fill="#333333"/>
+<circle cx="130" cy="50" r="4" fill="#333333"/>
+<text x="35" y="255" font-size="14" font-family="serif" fill="#333333">A</text>
+<text x="340" y="255" font-size="14" font-family="serif" fill="#333333">B</text>
+<text x="120" y="40" font-size="14" font-family="serif" fill="#333333">C</text>
+<text x="190" y="258" font-size="14" font-family="serif" fill="#333333" text-anchor="middle">c</text>
+<text x="235" y="145" font-size="14" font-family="serif" fill="#e74c3c">a</text>
+<text x="85" y="145" font-size="14" font-family="serif" fill="#2980b9" text-anchor="end">b</text>
+<path d="M 75.0 240.0 A 25 25 0 0 0 59.701425001453316 263.0408843784516" fill="none" stroke="#BABABA" stroke-width="1.5"/>
+<text x="85" y="272.64906125414194" font-size="13" font-family="serif" fill="#636363">γ</text>
+<text x="190" y="285" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">Law of Cosines: c² = a² + b² - 2ab·cos(γ)</text>
+</svg>

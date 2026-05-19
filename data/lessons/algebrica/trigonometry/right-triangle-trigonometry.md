@@ -5,6 +5,8 @@
 
 Trigonometry studies the relationships between angles and sides of triangles, and the right triangle is where the basic trigonometric functions are usually introduced: sine, cosine, and tangent. A right triangle has one interior angle of exactly \\(90^\circ.\\) The two sides meeting at the right angle are the legs, and the third side, opposite the right angle, is the hypotenuse, which is always the longest of the three. Fix an acute angle \\(\theta\\) inside the triangle. The hypotenuse does not depend on the choice of \\(\theta\\), but the two legs do: one lies opposite to \\(\theta\\), the other borders it. The trigonometric functions arise precisely from this asymmetry, as ratios between pairs of sides.
 
+![Right triangle trigonometry](svg/right-triangle-trig.svg)
+
 - Hypotenuse \\(h\\): the longest side, opposite the right angle.
 - Opposite leg \\(y\\): the leg opposite to \\(\theta\\).
 - Adjacent leg \\(x\\): the leg that bounds \\(\theta\\) together with the hypotenuse.

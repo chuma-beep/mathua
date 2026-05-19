@@ -9,7 +9,9 @@ The law of sines states that in any triangle, the ratio between the length of a 
 \frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2r
 \\]
 
-The quantity \\(2r\\) is the diameter of the circumcircle, that is, the unique circle passing through all three vertices of the triangle.
+The quantity \(2r\) is the diameter of the circumcircle, that is, the unique circle passing through all three vertices of the triangle.
+
+![Law of sines with circumcircle](svg/law-of-sines.svg)
 
 The law of sines is particularly useful when some sides or angles of a triangle are known and the remaining ones must be determined, since each unknown can be recovered through a simple proportion.
 

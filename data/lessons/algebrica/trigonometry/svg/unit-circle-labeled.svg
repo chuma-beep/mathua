@@ -1,0 +1,60 @@
+<svg width="500px" height="500px" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="500" fill="white"/>
+<line x1="40" y1="250" x2="460" y2="250" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="460,250 452.6315120479769,253.1153467384692 452.6315120479769,246.8846532615308" fill="#BABABA"/>
+<line x1="250" y1="260" x2="250" y2="40" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="250,40 253.1153467384692,47.36848795202308 246.8846532615308,47.36848795202308" fill="#BABABA"/>
+<circle cx="250" cy="250" r="160" fill="none" stroke="#333333" stroke-width="2"/>
+<text x="250" y="258" font-size="15" font-family="serif" fill="#636363">O</text>
+<text x="458" y="265" font-size="14" font-family="serif" fill="#636363">x</text>
+<text x="260" y="40" font-size="14" font-family="serif" fill="#636363">y</text>
+<line x1="250" y1="250" x2="410.0" y2="250.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="410.0" cy="250.0" r="3" fill="#333333"/>
+<text x="442.0" y="250.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">0</text>
+<line x1="250" y1="250" x2="388.5640646055102" y2="170.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="388.5640646055102" cy="170.0" r="3" fill="#333333"/>
+<text x="417.61662348876786" y="163.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">π/6</text>
+<line x1="250" y1="250" x2="363.1370849898476" y2="136.8629150101524" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="363.1370849898476" cy="136.8629150101524" r="3" fill="#333333"/>
+<text x="388.69343417595167" y="125.30656582404836" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">π/4</text>
+<line x1="250" y1="250" x2="330.0" y2="111.43593539448983" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="330.0" cy="111.43593539448983" r="3" fill="#333333"/>
+<text x="351.0" y="96.38337651123217" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">π/3</text>
+<line x1="250" y1="250" x2="250.0" y2="90.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="250.0" cy="90.0" r="3" fill="#333333"/>
+<text x="250.0" y="72.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">π/2</text>
+<line x1="250" y1="250" x2="170.00000000000003" y2="111.4359353944898" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="170.00000000000003" cy="111.4359353944898" r="3" fill="#333333"/>
+<text x="149.00000000000006" y="96.38337651123214" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">2π/3</text>
+<line x1="250" y1="250" x2="136.8629150101524" y2="136.8629150101524" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="136.8629150101524" cy="136.8629150101524" r="3" fill="#333333"/>
+<text x="111.30656582404836" y="125.30656582404833" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">3π/4</text>
+<line x1="250" y1="250" x2="111.4359353944898" y2="170.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="111.4359353944898" cy="170.0" r="3" fill="#333333"/>
+<text x="82.38337651123214" y="163.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">5π/6</text>
+<line x1="250" y1="250" x2="90.0" y2="249.99999999999997" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="90.0" cy="249.99999999999997" r="3" fill="#333333"/>
+<text x="58.0" y="249.99999999999997" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">π</text>
+<line x1="250" y1="250" x2="111.43593539448983" y2="330.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="111.43593539448983" cy="330.0" r="3" fill="#333333"/>
+<text x="82.38337651123217" y="337.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">7π/6</text>
+<line x1="250" y1="250" x2="136.86291501015236" y2="363.1370849898476" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="136.86291501015236" cy="363.1370849898476" r="3" fill="#333333"/>
+<text x="111.30656582404833" y="374.69343417595167" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">5π/4</text>
+<line x1="250" y1="250" x2="169.99999999999994" y2="388.5640646055101" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="169.99999999999994" cy="388.5640646055101" r="3" fill="#333333"/>
+<text x="148.99999999999991" y="403.6166234887678" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">4π/3</text>
+<line x1="250" y1="250" x2="249.99999999999997" y2="410.0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="249.99999999999997" cy="410.0" r="3" fill="#333333"/>
+<text x="249.99999999999997" y="428.0" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">3π/2</text>
+<line x1="250" y1="250" x2="330.0" y2="388.56406460551017" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="330.0" cy="388.56406460551017" r="3" fill="#333333"/>
+<text x="351.0" y="403.6166234887678" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">5π/3</text>
+<line x1="250" y1="250" x2="363.1370849898476" y2="363.1370849898476" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="363.1370849898476" cy="363.1370849898476" r="3" fill="#333333"/>
+<text x="388.6934341759516" y="374.69343417595167" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">7π/4</text>
+<line x1="250" y1="250" x2="388.5640646055101" y2="330.00000000000006" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<circle cx="388.5640646055101" cy="330.00000000000006" r="3" fill="#333333"/>
+<text x="417.6166234887678" y="337.0000000000001" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">11π/6</text>
+<text x="250" y="60" font-size="14" font-family="serif" fill="#333333" text-anchor="middle">Unit Circle with Notable Angles</text>
+</svg>

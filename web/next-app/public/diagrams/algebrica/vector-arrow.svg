@@ -1,0 +1,18 @@
+<svg width="400px" height="350px" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="350" fill="white"/>
+<line x1="30" y1="280" x2="380" y2="280" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="380,280 372.6315120479769,283.1153467384692 372.6315120479769,276.8846532615308" fill="#BABABA"/>
+<line x1="80" y1="290" x2="80" y2="30" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="80,30 83.1153467384692,37.36848795202308 76.8846532615308,37.36848795202308" fill="#BABABA"/>
+<text x="378" y="295" font-size="13" font-family="serif" fill="#636363">x</text>
+<text x="88" y="30" font-size="13" font-family="serif" fill="#636363">y</text>
+<text x="70" y="285" font-size="13" font-family="serif" fill="#636363">O</text>
+<line x1="80" y1="280" x2="300" y2="130" stroke="#333333" stroke-width="2.5" stroke-linecap="round"/>
+<polygon points="300,130 292.156964239584,128.42304405234768 295.66694331819707,123.27507473704853" fill="#333333"/>
+<circle cx="300" cy="130" r="4" fill="#333333"/>
+<text x="310" y="125" font-size="14" font-family="serif" fill="#333333">v</text>
+<line x1="80" y1="280" x2="300" y2="280" stroke="#e74c3c" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6,4"/>
+<line x1="300" y1="280" x2="300" y2="130" stroke="#2980b9" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6,4"/>
+<text x="190" y="298" font-size="12" font-family="serif" fill="#e74c3c" text-anchor="middle">v_x</text>
+<text x="312" y="205" font-size="12" font-family="serif" fill="#2980b9">v_y</text>
+</svg>

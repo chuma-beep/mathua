@@ -1,5 +1,6 @@
 # Quadratic Equations
 
+![Graph of a quadratic equation](svg/quadratic-equations.svg)
 
 ## Introduction
 

@@ -1,6 +1,7 @@
 
 # Real Numbers
 
+![Number line representation of real numbers](svg/number-line-real.svg)
 
 ## Field and order structure
 

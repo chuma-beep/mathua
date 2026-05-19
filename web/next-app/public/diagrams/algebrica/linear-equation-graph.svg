@@ -1,0 +1,49 @@
+<svg width="400px" height="300px" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="300" fill="white"/>
+<line x1="30" y1="160" x2="380" y2="160" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="380,160 372.6315120479769,163.1153467384692 372.6315120479769,156.8846532615308" fill="#BABABA"/>
+<line x1="200" y1="170" x2="200" y2="20" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="200,20 203.1153467384692,27.36848795202308 196.8846532615308,27.36848795202308" fill="#BABABA"/>
+<text x="378" y="175" font-size="13" font-family="serif" fill="#636363">x</text>
+<text x="208" y="22" font-size="13" font-family="serif" fill="#636363">y</text>
+<text x="190" y="175" font-size="13" font-family="serif" fill="#636363">O</text>
+<line x1="40" y1="157" x2="40" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="40" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">-4</text>
+<line x1="197" y1="320" x2="203" y2="320" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="324" font-size="10" font-family="serif" fill="#636363" text-anchor="end">-4</text>
+<line x1="80" y1="157" x2="80" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="80" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">-3</text>
+<line x1="197" y1="280" x2="203" y2="280" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="284" font-size="10" font-family="serif" fill="#636363" text-anchor="end">-3</text>
+<line x1="120" y1="157" x2="120" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="120" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">-2</text>
+<line x1="197" y1="240" x2="203" y2="240" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="244" font-size="10" font-family="serif" fill="#636363" text-anchor="end">-2</text>
+<line x1="160" y1="157" x2="160" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="160" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">-1</text>
+<line x1="197" y1="200" x2="203" y2="200" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="204" font-size="10" font-family="serif" fill="#636363" text-anchor="end">-1</text>
+<line x1="240" y1="157" x2="240" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="240" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">1</text>
+<line x1="197" y1="120" x2="203" y2="120" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="124" font-size="10" font-family="serif" fill="#636363" text-anchor="end">1</text>
+<line x1="280" y1="157" x2="280" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="280" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">2</text>
+<line x1="197" y1="80" x2="203" y2="80" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="84" font-size="10" font-family="serif" fill="#636363" text-anchor="end">2</text>
+<line x1="320" y1="157" x2="320" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="320" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">3</text>
+<line x1="197" y1="40" x2="203" y2="40" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="44" font-size="10" font-family="serif" fill="#636363" text-anchor="end">3</text>
+<line x1="360" y1="157" x2="360" y2="163" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="360" y="178" font-size="10" font-family="serif" fill="#636363" text-anchor="middle">4</text>
+<line x1="197" y1="0" x2="203" y2="0" stroke="#BABABA" stroke-width="0.5" stroke-linecap="round"/>
+<text x="188" y="4" font-size="10" font-family="serif" fill="#636363" text-anchor="end">4</text>
+<line x1="40" y1="440.0" x2="360" y2="-40.0" stroke="#2980b9" stroke-width="2.5" stroke-linecap="round"/>
+<text x="215.0" y="190.0" font-size="12" font-family="serif" fill="#2980b9">y = 1.5x - 1</text>
+<line x1="280" y1="80.0" x2="320" y2="80.0" stroke="#e74c3c" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<line x1="320" y1="80.0" x2="320" y2="20.0" stroke="#e74c3c" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="300" y="92.0" font-size="9" font-family="serif" fill="#e74c3c" text-anchor="middle">Δx</text>
+<text x="330" y="50.0" font-size="9" font-family="serif" fill="#e74c3c">Δy</text>
+<text x="200" y="285" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">Linear Equation y = mx + b</text>
+</svg>
