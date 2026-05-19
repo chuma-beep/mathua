@@ -80,7 +80,7 @@ export default function StudyPage() {
           </span>
 
           {selectedLesson ? (
-            <div className="max-w-3xl mx-auto mt-8">
+            <div className="max-w-4xl mx-auto mt-8 mb-16">
               <button
                 onClick={() => setSelectedLesson(null)}
                 className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
@@ -92,11 +92,9 @@ export default function StudyPage() {
                 <div className="text-mathua-secondary text-xs font-mono mb-4">
                   Concepts: {selectedLesson.concepts.join(', ')}
                 </div>
-                <div className="text-mathua-primary text-sm leading-relaxed max-h-[60vh] overflow-y-auto">
-                  <KatexContent>{selectedLesson.body}</KatexContent>
-                </div>
+                <KatexContent>{selectedLesson.body}</KatexContent>
               </div>
-              <div className="mt-6 text-center">
+              <div className="mt-8 text-center">
                 <Link
                   href={`/session`}
                   className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px]"

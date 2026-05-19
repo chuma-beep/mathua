@@ -1,66 +1,51 @@
 'use client'
 
-import { InlineMath, BlockMath } from 'react-katex'
+import ReactMarkdown from 'react-markdown'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import remarkGfm from 'remark-gfm'
 import 'katex/dist/katex.min.css'
 
-interface Segment {
-  type: 'text' | 'inline' | 'display'
-  content: string
-}
-
-function parseLaTeX(text: string): Segment[] {
-  const segments: Segment[] = []
-
-  // Pattern matches \\(...\\) for inline math and \\[...\\] for display math.
-  // The lesson files use double-backslash delimiters because they were written
-  // for a Markdown pipeline that strips one level of escaping.
-  const re = /\\\\\(([\s\S]*?)\\\\\)|\\\\\[([\s\S]*?)\\\\\]/g
-
-  let lastIdx = 0
-  let m: RegExpExecArray | null
-
-  while ((m = re.exec(text)) !== null) {
-    if (m.index > lastIdx) {
-      segments.push({ type: 'text', content: text.slice(lastIdx, m.index) })
-    }
-    if (m[1] !== undefined) {
-      segments.push({ type: 'inline', content: m[1] })
-    } else if (m[2] !== undefined) {
-      segments.push({ type: 'display', content: m[2] })
-    }
-    lastIdx = re.lastIndex
-  }
-
-  if (lastIdx < text.length) {
-    segments.push({ type: 'text', content: text.slice(lastIdx) })
-  }
-
-  return segments
-}
-
 export default function KatexContent({ children }: { children: string }) {
-  const segments = parseLaTeX(children)
+  let content = children
+
+  // Convert lesson LaTeX delimiters from Markdown-escaped form to $...$ / $$...$$
+  // The lesson files use \\(...\\) (inline) and \\[...\\] (display),
+  // which remark-math expects as $...$ and $$...$$.
+  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner + '$')
+  content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => '$$' + inner + '$$')
 
   return (
-    <span className="katex-content">
-      {segments.map((seg, i) => {
-        switch (seg.type) {
-          case 'inline':
-            return <InlineMath key={i} math={seg.content} />
-          case 'display':
-            return (
-              <span key={i} className="block my-4 overflow-x-auto">
-                <BlockMath math={seg.content} />
-              </span>
-            )
-          default:
-            return (
-              <span key={i} className="whitespace-pre-wrap">
-                {seg.content}
-              </span>
-            )
-        }
-      })}
-    </span>
+    <div className="katex-content text-sm leading-relaxed">
+      <ReactMarkdown
+        remarkPlugins={[remarkMath, remarkGfm]}
+        rehypePlugins={[rehypeKatex]}
+        components={{
+          a: ({ href, children }) => (
+            <a href={href} target="_blank" rel="noopener noreferrer"
+               className="text-mathua-blue hover:underline">
+              {children}
+            </a>
+          ),
+          code: ({ children }) => (
+            <code className="bg-mathua-code px-1 rounded-none text-mathua-secondary">
+              {children}
+            </code>
+          ),
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+      <style jsx global>{`
+        .katex-content h1 { font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 0.75rem; font-family: var(--font-serif); }
+        .katex-content h2 { font-size: 1.25rem; font-weight: 700; margin: 1.25rem 0 0.5rem; font-family: var(--font-serif); }
+        .katex-content h3 { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+        .katex-content p { margin: 0.75rem 0; }
+        .katex-content ul, .katex-content ol { margin: 0.5rem 0; padding-left: 1.5rem; }
+        .katex-content li { margin: 0.25rem 0; }
+        .katex-content hr { border: 0; border-top: 1px solid; margin: 1.5rem 0; opacity: 0.3; }
+        .katex-content strong { font-weight: 700; }
+      `}</style>
+    </div>
   )
 }
