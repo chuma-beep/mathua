@@ -9,6 +9,7 @@ import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
+import KatexContent from '../../components/KatexContent'
 import Pipeline from '../../components/Pipeline'
 import {
   getConfig,
@@ -549,8 +550,8 @@ export default function SessionPage() {
                       <summary className="text-mathua-secondary text-sm cursor-pointer hover:text-mathua-blue">
                         Show lesson: {question.lesson.Title}
                       </summary>
-                      <div className="mt-2 bg-mathua-code border border-mathua-border rounded-none p-4 text-xs text-mathua-muted whitespace-pre-wrap max-h-80 overflow-auto leading-relaxed">
-                        {question.lesson.Body.slice(0, 3000)}
+                      <div className="mt-2 bg-mathua-code border border-mathua-border rounded-none p-4 text-xs text-mathua-muted max-h-80 overflow-auto leading-relaxed">
+                        <KatexContent>{question.lesson.Body.slice(0, 3000)}</KatexContent>
                       </div>
                     </details>
                   )}
