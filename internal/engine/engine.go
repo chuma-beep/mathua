@@ -240,8 +240,7 @@ func diagramForConcept(id string) string {
 	return ""
 }
 
-// gradeAnswer delegates to the generator's own grader if it implements
-// GradedGenerator, otherwise falls back to the type-based router.
+// gradeAnswer uses the generator's own grader when available, otherwise falls back to the type-based router.
 func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string) grader.Result {
 	if gen, err := e.registry.Get(conceptID); err == nil {
 		if gg, ok := gen.(generator.GradedGenerator); ok {

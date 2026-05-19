@@ -41,7 +41,6 @@ A direct verification confirms the formula:
 
 The factor \\( \dfrac{1}{\ln \alpha} \\) compensates exactly for the logarithmic term produced by differentiation, and the result reduces to the original integrand.
 
-- - -
 ## Canonical forms of exponential integrals
 
 The following table collects the antiderivatives of the standard exponential integrands, with the integrand on the left and the corresponding antiderivative on the right. The constants \\( a \\) and \\( b \\) are real, with \\( a \neq 0 \\), and \\( \alpha > 0 \\) with \\( \alpha \neq 1 \\). In the last row, \\( f(x) \\) is any differentiable function. These forms cover the cases most commonly encountered in integration problems.
@@ -54,7 +53,6 @@ The following table collects the antiderivatives of the standard exponential int
 
 > Each formula shows that integration preserves the exponential structure of the integrand. The antiderivative differs from the original function only by a multiplicative constant that depends on the coefficients appearing in the exponent or on the base of the power.
 
-- - -
 ## Example 1
 
 Consider the following integral:
@@ -95,7 +93,6 @@ Combining the two contributions, the solution is:
 
 > The antiderivative is the sum of two exponential terms, each governed by its own base.
 
-- - -
 ## Exponential with a linear argument
 
 A frequent situation in applications is an exponential whose argument is a linear function \\( ax + b \\), with \\( a \neq 0 \\). The corresponding integration formula is:
@@ -128,7 +125,6 @@ The same reasoning extends to exponential functions with an arbitrary base \\( \
 
 A direct differentiation of the right-hand side confirms the result. Expressions of this type frequently appear in intermediate steps when more complicated integrals are reduced to their elementary components.
 
-- - -
 ## Example 2
 
 Consider the following integral, which involves a product of two exponential terms with different bases:
@@ -169,7 +165,6 @@ The integral of the constant function \\( 1 \\) is \\( x + c \\), so the final r
 
 > The apparent complexity of the original integrand disappears once the two exponential factors are reduced to the same base, and the integral collapses to that of a constant.
 
-- - -
 ## Example 3
 
 Consider the following integral, in which both factors are exponentials with linear arguments and related bases:
@@ -210,7 +205,6 @@ Applying formula \\( (2) \\), the final result is:
 
 > The reduction to a common base is the key step: once both factors are expressed as powers of \\( 3 \\), the integrand becomes a single exponential and the integration is immediate.
 
-- - -
 ## Example 4
 
 Consider the following integral:
@@ -237,7 +231,6 @@ The differentiation recovers the original integrand, so the antiderivative is co
 \int e^{3x - 2} \\, dx = \frac{1}{3} \\, e^{3x - 2} + c
 \\]
 
-- - -
 ## A common oversight
 
 A frequent source of error in the integration of exponential functions arises when the exponent carries a coefficient different from \\( 1 \\). A common incorrect formulation is:
@@ -254,7 +247,6 @@ in which the factor \\( \dfrac{1}{3} \\) has been omitted. The mistake is identi
 
 The result is three times the original integrand, which shows that \\( e^{3x - 2} \\) alone is not an antiderivative of itself. Whenever the exponent has the form \\( ax + b \\) with \\( a \neq 1 \\), the compensating factor \\( \dfrac{1}{a} \\) must appear in the antiderivative, since the chain rule introduces the multiplicative constant \\( a \\) upon differentiation.
 
-- - -
 ## Example 5
 
 Consider the following integral, in which the exponent is no longer a linear function of \\( x \\):
@@ -283,7 +275,6 @@ A direct differentiation of the right-hand side confirms the result:
 
 > The differentiation recovers the original integrand, which validates the antiderivative obtained.
 
-- - -
 ## When the matching factor is missing
 
 The role of the factor \\( x \\) in the previous example becomes evident when it is removed. The integral:
@@ -302,7 +293,6 @@ The function \\( \mathrm{erf}(x) \\) is not elementary, in the sense that it can
 
 The comparison with the previous example clarifies the role of the factor \\( x \\). In \\( \int x \\, e^{x^2} \\, dx \\) the factor \\( x \\) provides, up to the constant \\( \dfrac{1}{2} \\), the derivative of the exponent \\( x^2 \\). The integrand matches the canonical form \\( e^{f(x)} \cdot f'(x) \\), and the antiderivative is elementary. When the factor \\( x \\) is absent, the matching is lost and the integral falls outside the class of integrals solvable through elementary techniques.
 
-- - -
 ## Integration by parts with exponential factors
 
 Several integrals involving the exponential function cannot be reduced to a canonical form through algebraic manipulation alone. When the integrand is the product of an exponential and a polynomial, or of an exponential and another transcendental function, the technique of integration by parts provides a systematic approach. The method is based on the formula:
@@ -313,7 +303,6 @@ Several integrals involving the exponential function cannot be reduced to a cano
 
 The choice of \\( u(x) \\) and \\( v'(x) \\) is the decisive step. When an exponential factor is present, it is generally convenient to take \\( v'(x) = e^{ax + b} \\), since the exponential is invariant under integration up to a multiplicative constant, while the remaining factor is differentiated and progressively simplified.
 
-- - -
 
 The simplest case arises when the integrand is the product of a first-degree polynomial and an exponential. Consider the integral:
 
@@ -339,7 +328,6 @@ A direct differentiation confirms the result which coincides with the original i
 \frac{d}{dx}\left[ (x - 1) \\, e^x + c \right] = e^x + (x - 1) \\, e^x = x \\, e^x
 \\]
 
-- - -
 
 When the polynomial factor has degree greater than \\( 1 \\), a single application of the formula is not sufficient and the procedure must be iterated. Consider the integral:
 
@@ -367,7 +355,6 @@ The same reasoning extends to any polynomial \\( P(x) \\) of degree \\( n \\). A
 
 which expresses the integral of \\( x^n \\, e^x \\) in terms of the integral of \\( x^{n-1} \\, e^x \\), and produces a closed-form antiderivative in a finite number of steps.
 
-- - -
 
 A further variation occurs when the exponent of the exponential is itself a linear function of \\( x \\). The same technique applies, with the only adjustment being the compensating factor \\( \dfrac{1}{a} \\) in the antiderivative of \\( e^{ax + b} \\). Consider for example:
 
@@ -389,7 +376,6 @@ Factoring the common exponential term, the final result is:
 
 The presence of the coefficient \\( a = 2 \\) in the exponent does not change the structure of the procedure: it only introduces the factor \\( \dfrac{1}{2} \\) at each integration step, which propagates into the final expression.
 
-- - -
 ## Flowchart
 
 - `Exponential integral to solve`

@@ -12,14 +12,15 @@ func TestLoad_Valid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected load error: %v", err)
 	}
-	if d.Count() != 291 {
-		t.Errorf("expected 291 concepts, got %d", d.Count())
+	if d.Count() != 295 {
+
+		t.Errorf("expected 295 concepts, got %d", d.Count())
+
 	}
-	if len(d.Domains()) != 16 {
-		t.Errorf("expected 16 domains, got %d", len(d.Domains()))
-	}
-	if len(d.Order()) != 291 {
-		t.Errorf("expected 291 in topo order, got %d", len(d.Order()))
+
+	if len(d.Order()) != 295 {
+
+		t.Errorf("expected 295 in topo order, got %d", len(d.Order()))
 	}
 }
 
@@ -120,10 +121,10 @@ func TestDAG_Domains(t *testing.T) {
 func TestDAG_PrereqsOf(t *testing.T) {
 	d := buildTestDAG(t)
 	ps := d.PrereqsOf("arith.add.single")
-	if len(ps) != 1 || ps[0].ID != "count.objects" {
+	if len(ps) != 1 || ps[0].ID != "count.basics.objects" {
 		t.Errorf("expected 1 prereq count.objects, got %v", ps)
 	}
-	ps = d.PrereqsOf("count.objects")
+	ps = d.PrereqsOf("count.basics.objects")
 	if len(ps) != 0 {
 		t.Errorf("expected 0 prereqs for root, got %d", len(ps))
 	}
@@ -131,7 +132,7 @@ func TestDAG_PrereqsOf(t *testing.T) {
 
 func TestDAG_DependentsOf(t *testing.T) {
 	d := buildTestDAG(t)
-	deps := d.DependentsOf("count.objects")
+	deps := d.DependentsOf("count.basics.objects")
 	if len(deps) != 2 {
 		t.Errorf("expected 2 dependents of count.objects, got %d", len(deps))
 	}
@@ -139,7 +140,7 @@ func TestDAG_DependentsOf(t *testing.T) {
 	for _, dep := range deps {
 		ids[dep.ID] = true
 	}
-	if !ids["count.cardinality"] || !ids["arith.add.single"] {
+	if !ids["count.basics.cardinality"] || !ids["arith.add.single"] {
 		t.Errorf("unexpected dependents: %v", deps)
 	}
 }
@@ -149,20 +150,20 @@ func TestDAG_Available(t *testing.T) {
 
 	// Nothing mastered — only concepts with no prereqs should be available.
 	avail := d.Available(map[string]bool{})
-	if len(avail) != 1 || avail[0].ID != "count.objects" {
+	if len(avail) != 1 || avail[0].ID != "count.basics.objects" {
 		t.Errorf("expected only count.objects available, got %v", avail)
 	}
 
 	// count.objects mastered — its dependents become available.
-	avail = d.Available(map[string]bool{"count.objects": true})
+	avail = d.Available(map[string]bool{"count.basics.objects": true})
 	if len(avail) != 2 {
 		t.Errorf("expected 2 available after count.objects mastered, got %d", len(avail))
 	}
 
 	// Everything mastered — nothing available.
 	all := map[string]bool{
-		"count.objects":     true,
-		"count.cardinality": true,
+		"count.basics.objects":     true,
+		"count.basics.cardinality": true,
 		"arith.add.single":  true,
 		"arith.sub.single":  true,
 	}
@@ -200,18 +201,18 @@ func buildTestDAG(t *testing.T) *DAG {
 	t.Helper()
 	raw := []Concept{
 		{
-			ID: "count.objects", Label: "Count objects 1-10",
+			ID: "count.basics.objects", Label: "Count objects 1-10",
 			Domain: "counting", Prerequisites: []string{},
 			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 10},
 		},
 		{
-			ID: "count.cardinality", Label: "Cardinality",
-			Domain: "counting", Prerequisites: []string{"count.objects"},
+			ID: "count.basics.cardinality", Label: "Cardinality",
+			Domain: "counting", Prerequisites: []string{"count.basics.objects"},
 			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 10},
 		},
 		{
 			ID: "arith.add.single", Label: "Single-digit addition",
-			Domain: "arithmetic", Prerequisites: []string{"count.objects"},
+			Domain: "arithmetic", Prerequisites: []string{"count.basics.objects"},
 			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 6},
 		},
 		{

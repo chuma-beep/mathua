@@ -16,7 +16,6 @@ The procedure consists in factoring \\(Q(x)\\) and rewriting \\(P(x)/Q(x)\\) as 
 
 > The method is useful, for instance, when integrating rational functions: each partial fraction has a standard antiderivative.
 
-- - -
 
 ## Example 1
 
@@ -67,7 +66,6 @@ Substituting the values of \\(A\\) and \\(B\\) into equation \\((1)\\), the orig
 \frac{5x + 4}{(x - 2)(2x + 3)} = \frac{2}{x - 2} + \frac{1}{2x + 3}
 \\]
 
-- - -
 
 ## Application to the computation of integrals
 
@@ -105,7 +103,6 @@ Combining the results yields the antiderivative of the original rational functio
 \int \frac{5x + 4}{(x - 2)(2x + 3)} \\, dx = 2 \ln|x - 2| + \frac{1}{2} \ln|2x + 3| + c
 \\]
 
-- - -
 
 ## General structure of partial fraction decomposition
 
@@ -143,7 +140,6 @@ The numerator is a linear polynomial because the denominator has degree two, and
 
 > Every rational function whose denominator factors over the real numbers admits a unique partial fraction representation, determined up to the values of the coefficients.
 
-- - -
 
 ## Example 2
 
@@ -222,7 +218,6 @@ Substituting the three values into the decomposition, the original rational func
 
 > This expresses the original rational function as a sum of elementary fractions, each associated with one of the linear factors of the denominator, and shows how the partial fraction method extends naturally to denominators of higher degree once they have been properly factorized.
 
-- - -
 
 ## Example 3
 
@@ -288,7 +283,6 @@ Substituting the three constants into the decomposition, the original rational f
 
 > This example shows that, when the denominator contains a repeated linear factor, the cover-up rule still determines the coefficients associated with the highest power of each factor, while the remaining coefficients are recovered by comparing the coefficients of the polynomial identity.
 
-- - -
 
 ## Example 4
 
@@ -353,7 +347,6 @@ Substituting the three constants into the decomposition, the original rational f
 
 > This example shows how the partial fraction method handles an irreducible quadratic factor: the corresponding numerator is taken as a generic polynomial of degree one, and its coefficients are recovered by comparing the
 
-- - -
 
 ## The case of improper rational functions
 

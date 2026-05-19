@@ -164,7 +164,7 @@
     "grading_type": "expression",
     "prerequisites": [
       "calc.deriv.chain_rule",
-      "trig.graph_sin"
+      "trig.graph.sin"
     ],
     "mastery_threshold": {
       "streak": 10,

@@ -28,7 +28,6 @@ As \\( x \\) grows without bound, the corresponding angle \\( \theta \\) approac
 
 These values are never attained, since no finite value of \\( x \\) has tangent equal to \\( \pm \pi/2 \\). They correspond to the directions in which the terminal side of the angle becomes parallel to the y-axis.
 
-- - -
 ## Reference values of arctangent
 
 Below are some commonly known values of \\( \arctan(x) \\) for selected inputs, useful in various applications of trigonometry:
@@ -47,7 +46,6 @@ x &\to +\infty &\quad& \arctan(x) \to \pi/2
 \end{align}
 \\]
 
-- - -
 ## Arctangent function
 
 The arctangent function \\( f(x) = \arctan(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in \left(-\pi/2, \pi/2\right) \\) whose tangent equals \\( x \\). Its graph is a continuous, strictly increasing curve that admits two horizontal asymptotes, namely \\( y = -\pi/2 \\) and \\( y = \pi/2 \\). The function is the inverse of the tangent restricted to its principal domain \\( \left(-\pi/2, \pi/2\right) \\), over which the tangent is strictly increasing and bijective.
@@ -61,7 +59,6 @@ The arctangent function \\( f(x) = \arctan(x) \\) assigns to each real number \\
 
 > A bijective function is both injective and surjective, that is, if for every \\( y \in B \\) there exists a unique \\( x \in A \\) such that \\( f(x) = y \\).
 
-- - -
 ## Analytical expression of the arctangent
 
 The arctangent can also be written using the sine and cosine functions, which highlights its geometric foundation within the unit circle and its connection with the other inverse trigonometric functions. Starting from the identity:
@@ -83,7 +80,6 @@ Reversing these relationships yields two equivalent expressions for the arctange
 
 > This equivalence is often useful in calculus and in analytical derivations, because it allows expressions involving the arctangent to be rewritten in terms of the arcsine or arccosine, depending on which form simplifies the computation.
 
-- - -
 ## Addition formula for the arctangent
 
 The arctangent satisfies a notable identity that expresses the arctangent of a sum in terms of the individual arctangents. For any two real numbers \\( x \\) and \\( y \\) satisfying \\( xy < 1 \\), the following identity holds:
@@ -100,7 +96,6 @@ This formula follows directly from the addition formula for the tangent function
 
 Applying the arctangent to both sides then yields the identity. The condition \\( xy < 1 \\) ensures that \\( \alpha + \beta \in \left(-\pi/2, \pi/2\right) \\), which is the principal interval of the arctangent; when \\( xy > 1 \\), a correction term of \\( \pm\pi \\) must be added depending on the sign of \\( x \\).
 
-- - -
 
 A particularly useful special case arises by setting \\( y = 1/x \\) with \\( x > 0 \\), so that \\( xy = 1 \\). In this situation the general formula does not apply directly, but one can verify the result by observing that \\( \arctan(x) \\) and \\( \arctan\\!\left(1/x\right) \\) are complementary angles. The identity takes the form:
 
@@ -110,7 +105,6 @@ A particularly useful special case arises by setting \\( y = 1/x \\) with \\( x 
 
 This follows from the fact that for \\( x > 0 \\) one has \\( \operatorname{arccot}(x) = \arctan\\!\left(1/x\right) \\), and the complementarity relation \\( \arctan(x) + \operatorname{arccot}(x) = \pi/2 \\) holds for all positive \\( x \\).
 
-- - -
 ## Arccotangent definition
 
 In the unit circle, the cotangent of an angle \\( \theta \\) can be visualized as the length of the segment tangent to the circle at the point where the terminal side meets it, measured along the horizontal tangent line at \\( (0, 1) \\). The arccotangent performs the reverse process: given a real number \\( x \\), it returns the unique angle \\( \theta \\) in the interval \\( (0, \pi) \\) whose cotangent equals \\( x \\). This geometric relationship illustrates how the cotangent and arccotangent are interconnected as a function and its inverse, each reversing the role of angle and ratio.
@@ -135,7 +129,6 @@ As \\( x \\) grows without bound, the corresponding angle \\( \theta \\) approac
 
   These values are never attained, since no finite value of \\( x \\) has cotangent equal to \\( 0 \\) or \\( \pi \\); they correspond to the directions in which the terminal side of the angle becomes parallel to the x-axis.
 
-- - -
 ## Reference values of arccotangent
 
 Below are some commonly known values of \\( \operatorname{arccot}(x) \\) for selected inputs, useful in various applications of trigonometry:
@@ -153,7 +146,6 @@ x &\to +\infty &\quad& \operatorname{arccot}(x) \to 0
 \end{align}
 \\]
 
-- - -
 ## Arccotangent function
 
 The arccotangent function \\( f(x) = \operatorname{arccot}(x) \\) assigns to each real number \\( x \in \mathbb{R} \\) the unique angle \\( \theta \in (0, \pi) \\) whose cotangent equals \\( x \\). Its graph is a continuous, strictly decreasing curve that admits two horizontal asymptotes, namely \\( y = 0 \\) and \\( y = \pi \\). The function is the inverse of the cotangent restricted to its principal domain \\( (0, \pi) \\), over which the cotangent is strictly decreasing and bijective.
@@ -167,7 +159,6 @@ The arccotangent function \\( f(x) = \operatorname{arccot}(x) \\) assigns to eac
  \\]
  This follows from the fact that the cotangent is an odd function, and reflects the symmetry of the graph of \\( \operatorname{arccot} \\) with respect to the point \\( \left(0,\\, \pi/2\right) \\).
 
-- - -
 ## Analytical expression of the arccotangent
 
 The arccotangent can also be expressed in relation to the arctangent, sine, and cosine functions, emphasizing its complementary nature within the family of inverse trigonometric functions. Starting from the identity:

@@ -10,7 +10,6 @@ P(x) = (x - r)\\, Q(x)
 \\]
 where \\(Q(x)\\) is a polynomial of degree \\(n - 1\\).
 
-- - -
 Synthetic division is useful for two reasons:
 
 + The method provides a simple way to divide by \\((x - r)\\), making the factorization of a polynomial almost immediate once a root has been identified.
@@ -19,7 +18,6 @@ Synthetic division is useful for two reasons:
 
 Although this method is often used in conjunction with the rational root theorem, it is not the only available technique. Depending on how the expression is built, other tools, like special products or factoring methods such as the AC method, can sometimes get you to the factorization more easily or directly.
 
-- - -
 
 ## Rational root theorem
 
@@ -39,7 +37,6 @@ where \\(p\\) and \\(q\\) are coprime integers, \\(p\\) is a divisor of the cons
 
 > Two integers are coprime when their greatest common divisor is \\(1\\). It means they share no factor other than \\(1\\).
 
-- - -
 
 ## Statement of the method
 
@@ -70,7 +67,6 @@ After \\(n\\) iterations the procedure stops, and you have both the quotient and
 
 > Synthetic division is equivalent to polynomial long division by \\((x - r)\\) but it works only on the coefficients and skips rewriting the variable at each step. However, the choice of \\(r\\) is not guaranteed to produce a factor: if \\(R \neq 0\\), then \\(r\\) is not a root of \\(P(x)\\), and \\((x - r)\\) is not a factor of the polynomial.
 
-- - -
 
 ## Example
 
@@ -214,7 +210,6 @@ Substituting this factorization into the previous expression, the polynomial \\(
 
 > If the remainder is not zero, the value tested is not a root of the polynomial. In that case, the procedure must be repeated with a different candidate from the list provided by the rational root theorem.
 
-- - -
 
 ## Limitations
 
@@ -228,7 +223,6 @@ Advancing through the iterations requires knowing a valid root, which makes find
 
 > The rational root theorem makes the search easier for polynomials with integer coefficients, because it reduces it to a finite number of candidates. But it does not help when the remaining roots are irrational or complex.
 
-- - -
 ## A practical case where the method cannot be applied
 
 Suppose we want to divide the polynomial \\(P(x)\\) by the binomial \\(D(x)\\):
@@ -256,7 +250,6 @@ The nonzero result demonstrates that \\(1 + i\\) is not a root of \\(P(x)\\). Al
 
 > The roots of \\(P(x) = x^3 - 3x^2 + 4x - 4\\) are the real root \\(x = 2\\) and the complex conjugate pair \\(x = \frac{1 \pm i\sqrt{7}}{2}\\). The real root can be identified by inspection or by applying the rational root theorem. The remaining two roots are obtained from the quadratic factor that results after performing synthetic division with the real root.
 
-- - -
 
 ## Computational insight
 

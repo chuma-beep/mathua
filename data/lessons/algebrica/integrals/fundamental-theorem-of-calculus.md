@@ -10,7 +10,6 @@ The Fundamental Theorem of Calculus establishes the exact relationship between d
 
 > As will be shown in the following sections, the First Fundamental Theorem guarantees that every continuous function on a closed interval admits an antiderivative, constructed explicitly via integration. The Second expresses the practical consequence: the definite integral of a function over an interval can be computed directly from any of its antiderivatives, evaluated at the endpoints.
 
-- - -
 ## The First Fundamental Theorem of Calculus
 
 Let \\( f \\) be continuous on a closed interval \\( [a,b] \\). Define the function:
@@ -128,7 +127,6 @@ The integrand \\( \sin(t^2) \\) admits no elementary antiderivative, yet the der
 
 > The Leibniz rule expresses a principle of conservation: the rate of change of an accumulated quantity equals the rate at which area enters through the moving upper boundary, minus the rate at which area leaves through the moving lower boundary. Each boundary contributes the integrand evaluated at that point, weighted by the speed of the boundary itself.
 
-- - -
 ## The Second Fundamental Theorem of Calculus
 
 Let \\( f \\) be continuous on \\( [a,b] \\), and suppose \\( F \\) is any antiderivative of \\( f \\), meaning:
@@ -174,7 +172,6 @@ Thus the definite integral measures the net change of any primitive over the int
 
 The construction does not require reconstructing the area piece by piece. The antiderivative \\( F \\) already carries that information inside it, accumulated continuously. Evaluating it at the two endpoints and taking the difference is enough. The entire geometry of the curve between \\( a \\) and \\( b \\) collapses into a single arithmetic operation.
 
-- - -
 ## Beyond continuity
 
 The two versions of the Fundamental Theorem stated in the previous sections rely on the assumption that the integrand \\( f \\) is continuous on the closed interval \\( [a, b] \\). This hypothesis is sufficient, but a weaker condition suffices for several of the conclusions. We now examine which properties of the accumulation function survive when continuity is relaxed to mere Riemann integrability.
@@ -225,7 +222,6 @@ remains valid. The hypothesis is satisfied, for instance, by piecewise continuou
 
 > Continuity of the integrand is the simplest sufficient condition for the Fundamental Theorem. The general principle underlying the result can be phrased in terms of regularity: integration raises regularity by one degree. A bounded Riemann-integrable integrand produces a Lipschitz primitive, a continuous integrand produces a differentiable primitive, and an integrand of class \\( C^k \\) produces a primitive of class \\( C^{k+1} \\).
 
-- - -
 ## Example 1
 
 Consider the following integral:
@@ -256,7 +252,6 @@ H'(x) = \ln x
 
 The derivative of the accumulation function recovers the integrand exactly, confirming that integration and differentiation are inverse operations in the precise sense established by the theorem.
 
-- - -
 ## Example 2
 
 Apply the First Fundamental Theorem of Calculus to find the following derivative:

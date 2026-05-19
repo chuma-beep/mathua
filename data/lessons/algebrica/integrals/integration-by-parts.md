@@ -21,7 +21,6 @@ In both cases, \\( f \\) and \\( g \\) are assumed to be differentiable on the i
 
 > In some cases, integration by parts must be applied more than once to completely evaluate the integral. One should proceed carefully, since repeated applications may increase the length of the computation and make sign errors more likely.
 
-- - -
 ## Derivation of the formula
 
 The integration by parts formula follows directly from the product rule for derivatives. Start from:
@@ -57,7 +56,6 @@ This is the integration by parts formula. In the compact notation \\( u = f(x) \
 
 > In practice, integration by parts is useful when differentiating one factor makes it simpler, while the other can still be integrated without difficulty. The method often turns a complicated expression into something more manageable, and in many problems it can be applied repeatedly until the integral is reduced to a standard form.
 
-- - -
 ## How to choose \\(u\\) and \\(dv\\)
 
 The method is effective only if the new integral \\( \int v\\,du \\) is simpler than 
@@ -67,7 +65,6 @@ so the choice is not arbitrary. A practical strategy is:
 - Choose \\( u \\) as the factor that becomes simpler when differentiated.
 - Choose \\( dv \\) as the remaining factor, so that \\( v = \int dv \\) is easy to compute.
 
-- - -
 
 A useful order for selecting \\( u \\) is the hierarchy known by the acronym LIATE:
 
@@ -81,7 +78,6 @@ The ordering reflects how these functions behave under differentiation. Logarith
 
 > Choosing \\( u \\) according to this hierarchy often reduces the complexity of the remaining integral after a single application of the formula
 
-- - -
 ## Most common mistakes
 
 A few recurring mistakes are worth keeping in mind when applying integration by parts.
@@ -94,7 +90,6 @@ Sign errors during differentiation are especially insidious in cyclic cases, whe
 
 Finally, in the indefinite case, the constant of integration \\( C \\) must appear in the final result. After repeated applications of the formula it is easy to lose track of it, particularly when intermediate integrals are written without it. A reliable habit is to carry \\( C \\) explicitly only in the last step and to confirm its presence before writing the answer.
 
-- - -
 ## Example 1
 
 Let's consider an example by solving the following integral:
@@ -135,7 +130,6 @@ Factoring out \\( \frac{x^3}{3} \\) gives the final result in compact form:
 \frac{x^3}{3}\left(\ln(x) - \frac{1}{3}\right) + c
 \\]
 
-- - -
 ## Example 2
 
 Some integrals do not resolve after a single application of integration by parts. Instead, repeated application leads back to the original integral, a situation that, rather than signaling failure, opens the door to an algebraic resolution. The following example illustrates this technique. Solve the following integral:
@@ -200,7 +194,6 @@ I = \frac{e^x}{2}\bigl(\sin(x) - \cos(x)\bigr) + c
 
 > The key observation is that the cyclic structure transforms an apparently endless recursion into a linear equation in \\( I \\), which can be solved directly. This technique applies whenever repeated integration by parts returns the original integral with a nonzero coefficient.
 
-- - -
 
 ## Example 3
 
@@ -250,7 +243,6 @@ Therefore:
 
 > The limit \\( \lim_{x \to 0^+} x^2 \ln(x) = 0 \\) follows from the fact that polynomial growth dominates logarithmic decay near zero. This kind of boundary analysis is essential whenever the integrand is not defined at one of the endpoints.
 
-- - -
 ## Flowchart
 - `Integral to solve`
   - **IF** the integrand is a product of two functions \\( f(x) \cdot g'(x) \\)

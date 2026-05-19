@@ -22,7 +22,6 @@ Quadratic equations are the simplest case of trinomial equation, which has the g
 
 Setting \\(n = 1\\) recovers the standard quadratic form \\(ax^2 + bx + c = 0.\\) For \\(n \geq 2\\) the equation can be reduced to a quadratic in the auxiliary variable \\(y = x^n\\) and solved with the same techniques.
 
-- - -
 ## Geometrical interpretation
 
 The equation \\(y = ax^2 + bx + c\\), with \\(a \neq 0\\), represents a parabola in the plane defined by the variables \\(x\\) and \\(y\\).
@@ -39,7 +38,6 @@ The real solutions of the equation \\(ax^2 + bx + c = 0\\) correspond to the poi
 
 > The condition \\(a \neq 0\\) ensures that the equation describes a parabolic curve rather than a linear equation.
 
-- - -
 ## Resolution methods
 
 A quadratic equation is incomplete when either the
@@ -58,7 +56,6 @@ In some cases, however, factoring or completing the square can offer a more dire
 
 The fundamental theorem of algebra guarantees that a quadratic equation has exactly two roots in \\(\mathbb{C}\\), counted with multiplicity. The roots are both real when \\(\Delta \geq 0\\), and form a pair of complex conjugateswhen \\(\Delta < 0\\).
 
-- - -
 ## Quadratic formula
 
  Given a quadratic equation in the standard form \\(ax^2+bx+c = 0\\), the quadratic formula is:
@@ -79,7 +76,6 @@ This identity shows directly that \\(\Delta \geq 0\\) when the roots are real, a
 
 >When the discriminant is negative, the solutions are complex. The dedicated entry on quadratic equations with complex solutions covers this case in full.
 
-- - -
 ## Factoring
 
 A quadratic equation can be factored into the following form:
@@ -95,7 +91,6 @@ This method is effective when the roots can be identified by inspection or by si
 trial, but becomes impractical for equations with irrational or complex roots, where the
 quadratic formula is preferable.
 
-- - -
 ## How to solve a quadratic equation
 
 + Rewrite the equation in standard form: \\( ax^2 + bx + c = 0 \\).  
@@ -109,7 +104,6 @@ quadratic formula is preferable.
 
 > The quadratic formula is the universal method, but not always the most efficient. When the equation is incomplete or admits an obvious factorization, the roots can often be obtained more quickly by direct inspection.
 
-- - -
 ## Quadratic equations with parameters
 
 A natural extension of the study of quadratic equations is to consider the case in which the coefficients are not fixed numbers but depend on an external parameter. In this setting we speak of quadratic equations with a parameter,
@@ -124,7 +118,6 @@ Varying the parameter \\(k\\) alters the equation and, consequently, the nature 
 which, exactly as in the classical case, determines whether the equation admits two
 distinct real solutions, a repeated solution, or a pair of complex conjugate solutions.
 
-- - -
 ## Flowchart
 
 - `Quadratic equation to solve`

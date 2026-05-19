@@ -9,8 +9,8 @@ import (
 func TestLoad(t *testing.T) {
 	dir := t.TempDir()
 	writeFile(t, filepath.Join(dir, "lessons.json"), `[
-		{"concept_id": "trig.sin_cos_def", "source": "advanced/sine-and-cosine.md"},
-		{"concept_id": "trig.unit_circle", "source": "advanced/unit-circle.md"}
+		{"concept_id": "trig.basics.sin_cos_def", "source": "advanced/sine-and-cosine.md"},
+		{"concept_id": "trig.basics.unit_circle", "source": "advanced/unit-circle.md"}
 	]`)
 	os.MkdirAll(filepath.Join(dir, "advanced"), 0755)
 	writeFile(t, filepath.Join(dir, "advanced/sine-and-cosine.md"), "# Sine and Cosine\n\nSine and cosine are fundamental trigonometric functions.")
@@ -24,7 +24,7 @@ func TestLoad(t *testing.T) {
 		t.Errorf("expected 2 lessons, got %d", loader.Count())
 	}
 
-	l := loader.Lesson("trig.sin_cos_def")
+	l := loader.Lesson("trig.basics.sin_cos_def")
 	if l == nil {
 		t.Fatal("expected lesson for trig.sin_cos_def")
 	}
@@ -114,7 +114,7 @@ func TestLoad_RealData(t *testing.T) {
 		t.Fatal("expected lessons to be loaded")
 	}
 	// Verify a known mapping works.
-	l := loader.Lesson("trig.sin_cos_def")
+	l := loader.Lesson("trig.basics.sin_cos_def")
 	if l == nil {
 		t.Fatal("expected trig.sin_cos_def lesson")
 	}
@@ -125,7 +125,7 @@ func TestLoad_RealData(t *testing.T) {
 		t.Error("expected non-empty body")
 	}
 	// Shared source test: trig.sin_cos_def and trig.graph_sin share sine-and-cosine.md.
-	l2 := loader.Lesson("trig.graph_sin")
+	l2 := loader.Lesson("trig.graph.sin")
 	if l2 != l {
 		t.Error("expected same lesson object for trig.sin_cos_def and trig.graph_sin")
 	}

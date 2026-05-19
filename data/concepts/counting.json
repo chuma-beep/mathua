@@ -1,6 +1,6 @@
 [
   {
-    "id": "count.objects",
+    "id": "count.basics.objects",
     "label": "Count objects 1-10",
     "domain": "counting",
     "subdomain": "counting.objects",
@@ -12,13 +12,13 @@
     }
   },
   {
-    "id": "count.cardinality",
+    "id": "count.basics.cardinality",
     "label": "Last number equals total count",
     "domain": "counting",
     "subdomain": "counting.objects",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.objects"
+      "count.basics.objects"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -26,13 +26,13 @@
     }
   },
   {
-    "id": "count.number_line",
+    "id": "count.basics.number_line",
     "label": "Position on number line 0-20",
     "domain": "counting",
     "subdomain": "counting.number_line",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.cardinality"
+      "count.basics.cardinality"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -40,13 +40,13 @@
     }
   },
   {
-    "id": "count.compare",
+    "id": "count.basics.compare",
     "label": "Greater than and less than",
     "domain": "counting",
     "subdomain": "counting.comparison",
     "grading_type": "comparison",
     "prerequisites": [
-      "count.number_line"
+      "count.basics.number_line"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -54,13 +54,13 @@
     }
   },
   {
-    "id": "count.skip_2",
+    "id": "count.skip.by_2",
     "label": "Skip count by 2s",
     "domain": "counting",
     "subdomain": "counting.skip",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.compare"
+      "count.basics.compare"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -68,13 +68,13 @@
     }
   },
   {
-    "id": "count.skip_5",
+    "id": "count.skip.by_5",
     "label": "Skip count by 5s",
     "domain": "counting",
     "subdomain": "counting.skip",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.skip_2"
+      "count.skip.by_2"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -82,13 +82,13 @@
     }
   },
   {
-    "id": "count.skip_10",
+    "id": "count.skip.by_10",
     "label": "Skip count by 10s",
     "domain": "counting",
     "subdomain": "counting.skip",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.skip_5"
+      "count.skip.by_5"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -96,13 +96,13 @@
     }
   },
   {
-    "id": "count.objects_20",
+    "id": "count.basics.objects_20",
     "label": "Count objects 11-20",
     "domain": "counting",
     "subdomain": "counting.objects",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.objects"
+      "count.basics.objects"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -110,13 +110,13 @@
     }
   },
   {
-    "id": "count.ordinal",
+    "id": "count.basics.ordinal",
     "label": "Ordinal numbers: first, second, third",
     "domain": "counting",
     "subdomain": "counting.objects",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "count.cardinality"
+      "count.basics.cardinality"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -124,13 +124,13 @@
     }
   },
   {
-    "id": "count.backwards",
+    "id": "count.basics.backwards",
     "label": "Count backwards from 20",
     "domain": "counting",
     "subdomain": "counting.number_line",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.number_line"
+      "count.basics.number_line"
     ],
     "mastery_threshold": {
       "streak": 10,

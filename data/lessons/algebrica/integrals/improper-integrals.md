@@ -18,7 +18,6 @@ However, many problems lead beyond these restrictions. We may encounter an unbou
 
 > Improper integrals do not enlarge the class of Riemann integrable functions. They reinterpret problematic situations through limits of ordinary integrals. Convergence is a global property: it depends on how the function behaves near infinity or near a singularity, not just locally.
 
-- - -
 
 The need for a limiting process becomes clear when one attempts to apply the Fundamental Theorem of Calculus directly to the following integral:
 
@@ -30,7 +29,6 @@ A direct calculation gives \\(\left[-x^{-1}\right]\_{-1}^{1} = -2\\), which is c
 
 > Blindly applying the Fundamental Theorem of Calculus to an improper integral can produce results that are mathematically nonsensical, not merely inaccurate.
 
-- - -
 ## Improper integrals over unbounded intervals
 
 Suppose \\(f\\) is continuous on \\([a,+\infty)\\). The integral:
@@ -55,7 +53,6 @@ provided that this limit exists and is finite. In other words, we integrate up t
 + If the limit exists and is finite, the integral is said to converge: the area under the curve accumulates to a well-defined value despite the unbounded domain.
 + If the limit does not exist or is infinite, the integral diverges: no finite value can be assigned to it.
 
----
 
 The same idea applies when the lower limit is \\(-\infty\\). For an integral of the form:
 \\[
@@ -112,7 +109,6 @@ The limit exists and is finite, so we conclude:
 \\]
 and the integral converges to \\(1\\).
 
-- - -
 ## Example 2
 
 We now consider a case where the limit fails to be finite. The integral:
@@ -139,7 +135,6 @@ Taking the limit as \\(b \to +\infty\\):
 
 The limit does not exist as a finite value, and therefore the integral diverges.
 
-- - -
 ## Improper integrals with infinite discontinuities
 
 A second type of improper integral occurs when \\(f\\) is unbounded at some point in the interval. Suppose \\(f\\) is continuous on \\((a,b]\\), but becomes unbounded as \\(x \to a^+\\). Then we define:
@@ -170,7 +165,6 @@ If the singularity occurs at an interior point \\(c \in (a,b)\\), the integral i
 
 provided both integrals converge separately.
 
-- - -
 ## Example 3
 
 To illustrate the case of an infinite discontinuity, we compute an integral whose integrand blows up at one of the endpoints. Consider:
@@ -209,7 +203,6 @@ Taking the limit as \\(t \to 0^+\\):
 \\]
 The limit exists and is finite, so the integral converges and equals \\(2\\).
 
-- - -
 ## The \\(p\\)-Integral Test
 
 A fundamental reference example is the family of integrals:
@@ -245,7 +238,6 @@ the singularity is now at \\(x = 0\\), and the roles are reversed. The integral 
 
 > The \\(p\\)-integral test illustrates a fundamental principle: the convergence of an improper integral is governed by the rate at which the integrand decays or blows up. What ultimately matters is not the exact form of the function, but its asymptotic behavior near infinity or near the singular point. For this reason, powers of \\(x\\) serve as natural comparison models in a wide range of convergence arguments.
 
-- - -
 ## Convergence and comparison
 
 Directly computing an improper integral is not always feasible and often not even necessary. In many situations, what one needs to know is not the exact value of the integral, but simply whether it converges or diverges. Comparison principles make it possible to answer this question by looking at how the integrand behaves, rather than by finding its antiderivative.
@@ -267,7 +259,6 @@ A pointwise bound is not always easy to establish, and this is where the limit c
 
 then \\(\int_a^{+\infty} f(x)\\,dx\\) and \\(\int_a^{+\infty} g(x)\\,dx\\) either both converge or both diverge. When two functions are asymptotically equivalent, convergence of one implies convergence of the other, and the same holds for divergence. The reference of choice is almost always a power \\(1/x^p\\), whose behavior is fully characterized by the \\(p\\)-integral test.
 
-- - -
 ## Flowchart
 
 - `Improper integral to evaluate`
@@ -284,7 +275,6 @@ then \\(\int_a^{+\infty} f(x)\\,dx\\) and \\(\int_a^{+\infty} g(x)\\,dx\\) eithe
     - `ELSE`
       - _choose a reference \\(1/x^p\\) and apply the limit comparison test_
 
-- - -
 ## Example 4
 
 To illustrate the limit comparison test, consider the integral:
@@ -313,7 +303,6 @@ either both converge or both diverge. Since the latter converges by the \\(p\\)-
 \\]
 converges as well.
 
-- - -
 ## Example 5
 
 To illustrate the direct comparison test, consider the integral:
@@ -338,7 +327,6 @@ converges. By the direct comparison test, the integral:
 
 converges as well.
 
-- - -
 ## Absolute convergence
 
 Consider an improper integral of the form:

@@ -86,11 +86,11 @@ func TestCompute(t *testing.T) {
 	st, _ := store.CreateStudent("tester")
 	now := time.Now().UTC()
 	_ = store.UpsertProgress(&storage.ConceptProgress{
-		StudentID: st.ID, ConceptID: "count.objects",
+		StudentID: st.ID, ConceptID: "count.basics.objects",
 		Status: "MASTERED", AvgResponseTime: 5.0, MasteredAt: &now, LastAttempted: &now,
 	})
 	_ = store.UpsertProgress(&storage.ConceptProgress{
-		StudentID: st.ID, ConceptID: "count.cardinality",
+		StudentID: st.ID, ConceptID: "count.basics.cardinality",
 		Status: "LEARNING", AvgResponseTime: 8.0, LastAttempted: &now,
 	})
 

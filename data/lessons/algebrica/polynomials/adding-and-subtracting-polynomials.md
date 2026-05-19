@@ -37,7 +37,6 @@ The degree of the result depends on whether the leading terms cancel. Denoting \
 
 If \\( n \neq m \\), the leading term of the polynomial of higher degree has no counterpart to cancel against, and the degree of the result is exactly \\( \max\\{n,\\, m\\} \\). When \\( n = m \\), the degree may decrease: under addition, the leading term cancels whenever \\( a_n + b_n = 0 \\); under subtraction, whenever \\( a_n = b_n \\). If every term cancels, the result is the zero polynomial, to which the deg
 
-- - -
 
 ## Addition and subtraction term by term
 
@@ -80,7 +79,6 @@ P(x) - Q(x)
 
 > The columnar layout is not a separate definition but a notational convenience. It corresponds exactly to the summation form \\( \sum (a_k \pm b_k)\\, x^k \\), with the convention that any coefficient absent from the standard form of a polynomial is taken to be zero.
 
-- - -
 
 ## Properties of polynomial addition and subtraction
 
@@ -127,7 +125,6 @@ P(x) \cdot \bigl(Q(x) + R(x)\bigr) &= P(x)\,Q(x) + P(x)\,R(x) \\\\[6pt]
 
 Together with the abelian group structure of \\( (R[x], +) \\), distributivity is what makes \\( R[x] \\) a ring. When \\( R \\) is commutative, \\( R[x] \\) is also commutative, and the two distributive laws coincide.
 
-- - -
 
 ## Polynomials in several indeterminates
 
@@ -183,7 +180,6 @@ P(x, y) + Q(x, y)
 
 The structural properties carry over without modification: \\( (R[x_1, \dots, x_n], +) \\) is an abelian group, with the zero polynomial as neutral element and \\( -P \\) as the additive inverse of \\( P \\). The multivariate setting introduces no new algebraic phenomena for addition and subtraction; the only conceptual shift is the indexing of coefficients by multi-indices rather than by a single integer.
 
-- - -
 
 ## Example 1
 
@@ -206,7 +202,6 @@ P(x) + Q(x)
 
 The leading coefficients satisfy \\( 1 + 2 = 3 \neq 0 \\), so the degree-2 term is preserved. The sum is the polynomial \\( 3x^2 + 2x + 4 \\), of degree 2.
 
-- - -
 
 ## Example 2
 
@@ -233,7 +228,6 @@ The two polynomials share the same leading coefficient, so the degree-2 term can
 
 The difference is the polynomial \\( 4x - 6 \\), of degree 1.
 
-- - -
 
 ## Example 3
 
@@ -256,7 +250,6 @@ P(x) + Q(x)
 
 Since the two polynomials have different degrees, the leading term of \\( Q(x) \\) has no counterpart in \\( P(x) \\) and is preserved in the result. The degree of the sum is therefore \\( \max\\{2,\\, 4\\} = 4 \\), and the result is the polynomial \\( 2x^4 + x^2 + 2x + 4 \\).
 
-- - -
 
 ## Example 4
 

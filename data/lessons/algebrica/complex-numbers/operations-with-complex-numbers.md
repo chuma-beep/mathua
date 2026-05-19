@@ -13,7 +13,6 @@ The real number \\( a \\) is called the real part of \\( z \\) and is denoted \\
 
 Every real number \\( a \in \mathbb{R} \\) can be identified with the complex number \\( a + 0i \\), so \\( \mathbb{R} \\) embeds naturally into \\( \mathbb{C} \\) as a subfield.
 
-- - -
 
 The set \\( \mathbb{C} \\), equipped with the addition and multiplication defined in the sections below, forms a field. Before examining each operation individually, it is useful to recall the field axioms that govern the arithmetic of complex numbers.
 
@@ -36,7 +35,6 @@ Two structural properties distinguish \\( \mathbb{C} \\) from \\( \mathbb{R} \\)
 
 More remarkably, \\( \mathbb{C} \\) is algebraically closed. Every nonconstant polynomial with coefficients in \\( \mathbb{C} \\) has at least one root in \\( \mathbb{C} \\). This result, known as the fundamental theorem of algebra, has no analogue in \\( \mathbb{R} \\), where polynomials such as \\( x^2 + 1 \\) admit no real roots.
 
-- - -
 ## Sum and difference of complex numbers
 
 The sum and difference of two complex numbers are defined componentwise, by operating separately on the real and imaginary parts. Given \\( z_1 = a + bi \\) and \\( z_2 = c + di \\), the definitions are the following.
@@ -48,7 +46,6 @@ z_1 + z_2 = (a + c) + (b + d)i
 z_1 - z_2 = (a - c) + (b - d)i
 \\]
 
----
 
 Let \\( z_1 = 2 - 3i \\) and \\( z_2 = 3 + 5i \\). To compute \\( z_1 - z_2 \\), we subtract the real parts and the imaginary parts separately. Subtracting \\( z_2 \\) is equivalent to adding the additive inverse \\( -z_2 = -3 - 5i \\), so the operation reduces to a componentwise subtraction.
 
@@ -84,7 +81,6 @@ The two constructions together provide a complete geometric interpretation of ad
 
 The difference \\( z_1 - z_2 \\) is obtained by adding \\( z_1 \\) to the additive inverse \\( -z_2 \\), whose vector is the reflection of \\( z_2 \\) through the origin. Geometrically, \\( z_1 - z_2 \\) corresponds to the vector from the tip of \\( z_2 \\) to the tip of \\( z_1 \\), when both vectors originate at the origin.
 
-- - -
 ## Product of complex numbers
 
 The product of two complex numbers is defined by applying the distributive property and the fundamental relation \\( i^2 = -1 \\). Given \\( z_1 = a + bi \\) and \\( z_2 = c + di \\), expanding the product yields the following.
@@ -109,7 +105,6 @@ This means that multiplication scales the moduli of the two factors. The same id
 
 The geometric significance of both identities becomes fully transparent in the trigonometric representation, where multiplication adds the arguments and division subtracts them.
 
-- - -
 ## Properties of the complex conjugate
 
 The complex conjugate satisfies several algebraic identities that follow directly from its definition. Let \\( z, z_1, z_2 \in \mathbb{C} \\). The conjugation map is an involution, meaning that applying it twice returns the original number:
@@ -140,7 +135,6 @@ This last identity is the key step in the computation of both the reciprocal and
 
 > field automorphism is a bijective map from a field to itself that preserves addition and multiplication. Conjugation satisfies this condition, and since it fixes every real number, it is an automorphism of \\( \mathbb{C} \\) over \\( \mathbb{R} \\).
 
-- - -
 ## Division of complex numbers
 
 To divide two complex numbers, we multiply both the numerator and the denominator by the complex conjugate of the denominator. This eliminates the imaginary part from the denominator and reduces the quotient to standard form. Given \\( z_1 = a + bi \\) and \\( z_2 = c + di \\) with \\( z_2 \neq 0 \\), the conjugate of the denominator is \\( \overline{z_2} = c - di \\), and the procedure begins as follows.
@@ -169,7 +163,6 @@ Let \\( z_1 = 5 + 3i \\) and \\( z_2 = 2 - i \\). To compute the quotient \\( z_
 \end{align}
 \\]
 
-- - -
 ## Reciprocal of a complex number
 
 The reciprocal of a nonzero complex number \\( z = a + bi \\) is the multiplicative inverse \\( z^{-1} \\), defined by the condition \\( z \cdot z^{-1} = 1 \\). It is a special case of division with numerator equal to \\( 1 \\), and is computed by the same technique: multiplying numerator and denominator by the conjugate \\( \overline{z} = a - bi \\). The general formula is the following.
@@ -189,7 +182,6 @@ Let \\( z = 3 - 2i \\). To compute \\( z^{-1} \\), we multiply numerator and den
 \end{align}
 \\]
 
-- - -
 ## Multiplication and division in trigonometric form
 
 The operations of multiplication and division acquire a particularly transparent geometric interpretation when complex numbers are expressed in trigonometric or exponential form. Consider the following complex numbers:

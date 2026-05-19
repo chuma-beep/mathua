@@ -18,7 +18,6 @@ In this expression:
 
 A value \\(x_0\\) that satisfies the equation is called a root, or a solution, of the polynomial equation.
 
-- - -
 ## Degree and classification
 
 The degree of a polynomial equation determines much of its behaviour and governs how many solutions one may expect to find. A polynomial equation of degree one is called a linear equation. Its general form is the following:
@@ -43,14 +42,12 @@ The solutions of a quadratic equation are described by the quadratic formula, wh
 
 > Beyond degree four, equations are generally referred to by their numerical degree: degree-five equations, degree-six equations, and so forth.
 
-- - -
 ## The fundamental theorem of algebra
 
 The existence and count of roots of a polynomial equation are governed by the Fundamental Theorem of Algebra, which guarantees that every polynomial equation of degree \\(n \geq 1\\) with complex coefficients has exactly \\(n\\) roots in \\(\mathbb{C}\\), counted with multiplicity.
 
 The implications of this theorem, including the factorisation into linear factors over \\(\mathbb{C}\\) and the conjugate-pair structure of complex roots of real polynomials, are discussed in the entry on roots of a polynomial.
 
-- - -
 ## Multiplicity of roots
 
 A root \\(x_0\\) is said to have multiplicity \\(m\\) if the factor \\((x - x_0)^m\\) divides the polynomial but \\((x - x_0)^{m+1}\\) does not.
@@ -60,7 +57,6 @@ A root \\(x_0\\) is said to have multiplicity \\(m\\) if the factor \\((x - x_0)
 
 The multiplicity of a root has a geometric interpretation: a simple root corresponds to a transversal crossing of the graph of the polynomial with the horizontal axis, while a root of even multiplicity corresponds to a tangency point where the graph touches but does not cross the axis.
 
-- - -
 ## Rational root theorem
 
 When the coefficients of a polynomial equation are integers, it is possible to identify all candidates for rational roots without solving the equation directly. Suppose the equation is the following.
@@ -95,7 +91,6 @@ The residual quadratic \\(2x^2 + 3x - 2\\) can be factored as \\((2x - 1)(x + 2)
 
 The three real roots are therefore \\(x = 3\\), \\(x = 1/2\\), and \\(x = -2\\).
 
-- - -
 
 ## Vieta's formulas
 
@@ -112,7 +107,6 @@ x_1 x_2 \cdots x_n &= (-1)^n c_0
 
 In other words, each coefficient is an elementary symmetric polynomial in the roots. The derivation and a detailed discussion of the quadratic case are given in the entry on trinomials.
 
-- - -
 ## Reduction to a polynomial equation
 
 Many equations that do not appear polynomial at first sight can be reduced to polynomial form through algebraic manipulation, after which the methods discussed in this entry apply directly. A rational equation such as the following
@@ -155,7 +149,6 @@ In both cases the reduction introduces constraints that must be checked: multipl
 
 The reduction technique and the verification of solutions are treated in detail in the entries on rational equations and irrational equations.
 
-- - -
 ## Solvability by radicals
 
 For polynomial equations of degree up to four, explicit formulas expressing the roots in terms of the coefficients by means of arithmetic operations and radicals are known. The quadratic formula handles degree two. Analogous but considerably more involved formulas, due to Cardano and Ferrari, handle degrees three and four respectively.
@@ -164,7 +157,6 @@ For degree five and beyond, no such general formula exists. This result, establi
 
 The Galois group of a general polynomial of degree five or higher is not solvable, which rules out any solution expressible solely by radicals. Particular equations of high degree may still be solvable by radicals if their Galois group happens to be solvable, but no universal formula of that type can exist.
 
-- - -
 
 To appreciate what this means concretely, consider this equations:
 
@@ -186,7 +178,6 @@ x^5 - x - 1 = 0
 
 This equation has no such closed form. Its real root cannot be expressed by any finite combination of arithmetic operations and radicals applied to the coefficients. Both equations have degree five, but their algebraic structure differs in a way that determines whether a radical formula is possible.
 
-- - -
 ## Numerical methods
 
 When an analytic solution is unavailable or impractical, polynomial equations are typically solved by numerical methods. The most widely used of these is Newton's method, which generates successive approximations to a root by iterating the following update rule:

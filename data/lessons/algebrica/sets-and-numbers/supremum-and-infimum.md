@@ -6,7 +6,6 @@
 
 Although real numbers are frequently introduced via their algebraic properties, the essential distinction between \\( \mathbb{R} \\) and \\( \mathbb{Q} \\) lies in their order structure, particularly a unique property of that order. Specifically, every non-empty subset of \\( \mathbb{R} \\) that is bounded above possesses a least upper bound that remains within \\( \mathbb{R} \\). This property is known as the completeness axiom and serves as a foundational characteristic of the real line. The notions of supremum and infimum provide practical means to apply this axiom.
 
-- - -
 ## Upper and lower bounds
 
 Consider a non-empty set \\( A \subseteq \mathbb{R} \\). A real number \\( M \\) is defined as an upper bound of \\( A \\) if:
@@ -30,7 +29,6 @@ Upper bounds, when they exist, are generally not unique. For example, if \\( M \
 + If \\( A \\) is not bounded below, the infimum is set as \\( \inf A = -\infty \\).
 
 + For the empty set, the conventions \\( \sup \emptyset = -\infty \\) and \\( \inf \emptyset = +\infty \\) are employed.
-- - -
 ## Supremum
 
 Consider a non-empty subset \\( A \subseteq \mathbb{R} \\) that is bounded above. The supremum of \\( A \\), denoted \\( \sup A \\), is defined as its least upper bound. A real number \\( s \\) is equal to \\( \sup A \\) if and only if both of the following conditions are satisfied. The first condition says that \\( s \\) is an upper bound of \\( A \\):
@@ -47,7 +45,6 @@ An equivalent characterisation states that \\( s = \sup A \\) if and only if \\(
 
 > The completeness axiom ensures that \\( \sup A \\) exists in \\( \mathbb{R} \\) whenever \\( A \\) is non-empty and bounded above. This property does not hold in \\( \mathbb{Q} \\). For example, the set \\( \{q \in \mathbb{Q} : q^2 < 2\} \\) is bounded above in \\( \mathbb{Q} \\), but its least upper bound is \\( \sqrt{2} \\), which is not a rational number. In this case, the supremum exists, but it does not belong to the space. Such a situation cannot occur in \\( \mathbb{R} \\).
 
-- - -
 ## Infimum
 
 Consider a non-empty subset \\( A \subseteq \mathbb{R} \\) that is bounded below. The infimum of \\( A \\), denoted \\( \inf A \\), is defined as its greatest lower bound. A real number \\( i \\) is equal to \\( \inf A \\) if and only if both of the following conditions are satisfied. The first condition says that \\( i \\) is a lower bound of \\( A \\):
@@ -64,7 +61,6 @@ Together, these conditions uniquely determine \\( i \\). There can be only one g
 
 An equivalent characterisation states that \\( i = \inf A \\) if and only if \\( i \\) is a lower bound of \\( A \\) and there exists a sequence \\( (a_n) \subseteq A \\) such that \\( a_n \to i \\).
 
-- - -
 ## Supremum and maximum, infimum and minimum
 
 The relationship between supremum and maximum, as well as between infimum and minimum, is frequently misunderstood. The maximum of a set \\( A \\) is defined as an element of \\( A \\) that is greater than or equal to every other element. When a maximum exists we have:
@@ -79,7 +75,6 @@ since the boundary points are included in the set.
 
 ![Img. 2](svg/supremum-and-infimum-2.svg)
 
-- - -
 
 In general, the following holds:
 
@@ -88,7 +83,6 @@ In general, the following holds:
 
 The converse does not hold in general. Whether a function actually attains its supremum is a non-trivial question. The Weierstrass theorem gives a sufficient condition: if a function is continuous on a closed and bounded interval, then the supremum and infimum are attained, and the maximum and minimum exist. Outside these conditions, the question must be examined case by case.
 
-- - -
 ## Supremum and infimum of functions
 
 The concepts of supremum and infimum extend naturally to functions. For a function \\( f : D \to \mathbb{R} \\), the supremum of \\( f \\) over \\( D \\) is defined as the supremum of its image:
@@ -109,7 +103,6 @@ The supremum and infimum of a function are not necessarily attained. For instanc
 
 > The definitions of supremum and infimum for a function prompt consideration of their distinction from maximum and minimum values. Supremum and infimum represent bounds that the function may approach but does not necessarily attain, whereas maximum and minimum refer to values that the function actually achieves at specific points in \\( D \\).
 
-- - -
 ## The approximation property
 
 The \\( \varepsilon \\)-characterisation of the supremum and infimum is more than a definitional detail; it is the form in which these concepts most frequently appear in proofs. This characterisation is often presented as a standalone property. If \\( s = \sup A \\), then for every \\( \varepsilon > 0 \\) there exists an element \\( a \in A \\) such that

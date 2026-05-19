@@ -10,7 +10,7 @@ import (
 	"github.com/Knetic/govaluate"
 )
 
-// Eval evaluates a mathematical expression and returns the result.
+// Eval evaluates a math expression.
 func Eval(expr string) (float64, error) {
 	e, err := govaluate.NewEvaluableExpression(expr)
 	if err != nil {
@@ -27,7 +27,7 @@ func Eval(expr string) (float64, error) {
 	return v, nil
 }
 
-// CheckExpr evaluates expr and verifies the result matches expected (within 1e-9 tolerance).
+// CheckExpr evaluates expr and confirms it matches expected (within 1e-9).
 func CheckExpr(expr, expected string) error {
 	got, err := Eval(expr)
 	if err != nil {
@@ -43,8 +43,7 @@ func CheckExpr(expr, expected string) error {
 	return nil
 }
 
-// ExtractNumeric attempts to extract a numeric expression from a question string
-// by matching common patterns. Returns the expression and true on success.
+// ExtractNumeric pulls a numeric expression from a question by matching common patterns.
 var patterns = []struct {
 	re   *regexp.Regexp
 	expr func([]string) string
@@ -76,8 +75,7 @@ var patterns = []struct {
 
 var unaryMinusRe = regexp.MustCompile(`([+*/(^-]\s*)-(\d+)`)
 
-// ExtractExpr tries to extract a verifiable expression from a question string.
-// Returns the normalised expression and true on success.
+// ExtractExpr pulls a verifiable expression out of a question string.
 func ExtractExpr(question string) (string, bool) {
 	q := strings.TrimSpace(question)
 	for _, p := range patterns {

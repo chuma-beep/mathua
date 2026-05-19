@@ -13,7 +13,6 @@ It is standard to denote vectors using boldface letters such as \(\mathbf{v}\), 
 
 ![Vector arrow in plane](svg/vector-arrow.svg)
 
-- - -
 ## Components and coordinate representation
 
 In a Cartesian coordinate system, every vector in \\(\mathbb{R}^n\\) can be expressed in terms of its components along the coordinate axes. A vector \\(\mathbf{v}\\) in \\(\mathbb{R}^2\\) is written as an ordered pair:
@@ -37,7 +36,6 @@ Every vector in \\(\mathbb{R}^3\\) can be expressed as a linear combination of t
 \\]
 In this expression, each scalar coefficient selects the contribution of the corresponding basis vector: \\(v_1\\) scales \\(\mathbf{i}\\) along the \\(x\\)-axis, \\(v_2\\) scales \\(\mathbf{j}\\) along the \\(y\\)-axis, and \\(v_3\\) scales \\(\mathbf{k}\\) along the \\(z\\)-axis. The sum of these three scaled basis vectors reconstructs \\(\mathbf{v}\\) exactly. For example, the vector \\((3, -1, 2)\\) is written as \\(3\\,\mathbf{i} - \mathbf{j} + 2\\,\mathbf{k}\\), meaning a displacement of three units in the \\(x\\)-direction, one unit in the negative \\(y\\)-direction, and two units in the \\(z\\)-direction. This representation makes explicit the decomposition of \\(\mathbf{v}\\) into contributions along each coordinate direction.
 
-- - -
 ## Vector operations
 
 The basic algebraic operations on vectors are addition, subtraction, and scalar multiplication. These operations are defined component-wise and admit clear geometric interpretations. Given two vectors \\(\mathbf{u} = (u_1, u_2, u_3)\\) and \\(\mathbf{v} = (v_1, v_2, v_3)\\) in \\(\mathbb{R}^3\\), their sum is defined as follows.
@@ -58,7 +56,6 @@ Scalar multiplication by a real number \\(\lambda \in \mathbb{R}\\) scales each 
 
 When \\(\lambda > 0\\), the resulting vector has the same direction as \\(\mathbf{v}\\) and magnitude scaled by \\(\lambda\\). When \\(\lambda < 0\\), the direction is reversed. When \\(\lambda = 0\\), the result is the zero vector. Subtraction is defined by combining the two preceding operations: \\(\mathbf{u} - \mathbf{v} = \mathbf{u} + (-1)\mathbf{v}\\), which yields \\((u_1-v_1,\\, u_2-v_2,\\, u_3-v_3)\\).
 
-- - -
 ## Algebraic properties
 
 The operations of vector addition and scalar multiplication satisfy a set of fundamental properties that hold for all vectors \\(\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{R}^n\\) and all scalars \\(\lambda, \mu \in \mathbb{R}\\).
@@ -71,7 +68,6 @@ The operations of vector addition and scalar multiplication satisfy a set of fun
 
 > These properties are not incidental: together they constitute the defining axioms of a vector space. The set \\(\mathbb{R}^n\\) equipped with these two operations forms a vector space over the field \\(\mathbb{R}\\), a structure that will be examined in greater generality in the entry on vector spaces.
 
-- - -
 ## Norm of a vector
 
 The norm, or magnitude, of a vector \\(\mathbf{v} = (v_1, v_2, v_3)\\) is a non-negative real number that measures its length. It is defined by the following expression:
@@ -103,7 +99,6 @@ Each term under the radical corresponds to the squared contribution of one coord
 
 The resulting vector \\(\hat{\mathbf{v}}\\) satisfies \\(\\|\hat{\mathbf{v}}\\| = 1\\) by construction.
 
-- - -
 ## Dot product
 
 The dot product, also called the scalar product or inner product, is a binary operation that takes two vectors and returns a real number. For \\(\mathbf{u}, \mathbf{v} \in \mathbb{R}^n\\), it is defined algebraically as the sum of the products of corresponding components.
@@ -130,7 +125,6 @@ The factor \\(\cos\theta\\) connects the dot product to the cosine of the angle 
 
 Since the result is zero, the two vectors are orthogonal. This conclusion can be verified geometrically by observing that neither vector is a scalar multiple of the other and their components satisfy the orthogonality condition exactly.
 
-- - -
 ## Cross product
 
 The cross product is an operation defined for vectors in \\(\mathbb{R}^3\\) that takes two vectors and returns a third vector. Unlike the dot product, the result is not a scalar but a vector, and for this reason the operation is also called the vector product. Given \\(\mathbf{u} = (u_1, u_2, u_3)\\) and \\(\mathbf{v} = (v_1, v_2, v_3)\\), their cross product is defined by the following formula, expressed as the determinant of a matrix.
@@ -157,7 +151,6 @@ The resulting vector is orthogonal to both \\(\mathbf{u}\\) and \\(\mathbf{v}\\)
 
 This quantity equals the area of the parallelogram spanned by \\(\mathbf{u}\\) and \\(\mathbf{v}\\). In particular, \\(\mathbf{u} \times \mathbf{v} = \mathbf{0}\\) if and only if \\(\sin\theta = 0\\), that is, if and only if the vectors are parallel. The cross product is anti-commutative: \\(\mathbf{v} \times \mathbf{u} = -(\mathbf{u} \times \mathbf{v})\\), which reflects the reversal of orientation when the order of the operands is exchanged.
 
-- - -
 
 As a concrete example, consider \\(\mathbf{u} = (1, 2, 3)\\) and \\(\mathbf{v} = (4, 5, 6)\\). Applying the component formula yields the following.
 \\[

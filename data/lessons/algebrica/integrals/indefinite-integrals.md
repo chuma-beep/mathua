@@ -22,7 +22,6 @@ Conversely, any two primitives of the same function differ by a constant. If \\(
 
 which implies \\(F_1(x) - F_2(x) = c\\) for some constant \\(c \in \mathbb{R}\\).
 
-- - -
 ## What is the indefinite integral
 
 The indefinite integral of a function \\(f(x)\\) is the set of all its primitives. Since any two primitives differ by a constant, the entire family is expressed as \\(F(x) + c\\) for \\(c \in \mathbb{R}\\), and is denoted:
@@ -35,7 +34,6 @@ From this definition it follows directly that:
 
 Differentiating an indefinite integral returns the original function. This relationship is made precise by the Fundamental Theorem of Calculus, which establishes the formal connection between differentiation and integration.
 
-- - -
 ## Example 1
 
 Find the primitive of \\(f(x) = 3x\\) that passes through the point \\((2, 1)\\). The general primitive is obtained by integrating:
@@ -52,7 +50,6 @@ c &= -5
 
 The unique primitive satisfying the given a is \\(F(x) = \frac{3}{2}x^2 - 5\\).
 
-- - -
 ## Linearity properties
 
 The indefinite integral is a linear operator. The integral of a sum of integrable functions equals the sum of their integrals:
@@ -63,7 +60,6 @@ A constant factor can be moved outside the integral sign:
 
 \\[\int k f(x) \\, dx = k \int f(x) \\, dx, \quad \forall k \in \mathbb{R} \tag{2}\\]
 
-- - -
 ## Example 2
 
 Compute the integral of \\(f(x) = 3x^2 + 2x\\). Applying property \\(1\\), the integral splits into two terms, each of which falls under the power rule:
@@ -72,7 +68,6 @@ Compute the integral of \\(f(x) = 3x^2 + 2x\\). Applying property \\(1\\), the i
 
 The two integration constants arising from each term combine into a single arbitrary constant, giving \\(x^3 + x^2 + c\\) with \\(c \in \mathbb{R}\\).
 
-- - -
 ## Example 3
 
 Compute the integral of \\(f(x) = 5\sin(x)\\). Applying property \\(2\\), the constant factor is moved outside the integral:
@@ -81,7 +76,6 @@ Compute the integral of \\(f(x) = 5\sin(x)\\). Applying property \\(2\\), the co
 
 Since the integral of \\(\sin(x)\\) is \\(-\cos(x)\\), the result is \\(-5\cos(x) + c\\) with \\(c \in \mathbb{R}\\).
 
-- - -
 ## Integral of a power function
 
 The integral of a power function \\(x^a\\) with \\(a \in \mathbb{R}\\) and \\(a \neq -1\\) is given by:
@@ -90,7 +84,6 @@ The integral of a power function \\(x^a\\) with \\(a \in \mathbb{R}\\) and \\(a 
 
 The case \\(a = -1\\) requires a separate treatment and is discussed in the next section.
 
-- - -
 ## Example 4
 
 Compute the following integral:
@@ -103,7 +96,6 @@ Applying linearity, the constant factors are moved outside and the power rule is
 
 The result is \\(\dfrac{3}{5}x^5 + \dfrac{5}{3}x^3 + c\\) with \\(c \in \mathbb{R}\\).
 
-- - -
 ## Example 5
 
 Compute the following integral:
@@ -122,7 +114,6 @@ Assembling the three contributions:
 
 > The result can be verified by differentiating \\(x^4 - 6\sqrt{x} + 2\sin x + c\\) term by term, which returns the original integrand.
 
-- - -
 ## The logarithmic integral
 
 When \\(a = -1\\), the power rule formula produces a zero denominator and does not apply. The integral in this case is:
@@ -133,7 +124,6 @@ This follows from the fact that \\(\frac{d}{dx} \ln |x| = \frac{1}{x}\\), which 
 
 > The identity \\(\int \frac{1}{x} \\, dx = \ln |x| + c\\) holds separately on \\((-\infty, 0)\\) and on \\((0, +\infty)\\). On each interval the arbitrary constant may take a different value, so the most general antiderivative of \\(\frac{1}{x}\\) on its full domain is not a single expression \\(\ln |x| + c\\) with one constant, but a piecewise family with independent constants on the two components.
 
-- - -
 ## Fundamental integration rules
 
 |                  |                                                                                  |
@@ -142,7 +132,6 @@ This follows from the fact that \\(\frac{d}{dx} \ln |x| = \frac{1}{x}\\), which 
 | Linearity        | \\[ \int k\\, f(x)\\, dx = k \int f(x)\\, dx \\]                                 |
 | Power rule       | \\[ \int x^a\\, dx = \dfrac{x^{a+1}}{a+1} + c \quad a \neq -1 \\]                |
 | Logarithmic case | \\[ \int \dfrac{1}{x} \\,dx = \ln\|x\| + c \\]                                   |
-- - -
 ## Common Integrals
 
 Below is a summary of the most common basic integrals, useful in calculus and for transforming complex expressions into simpler, well-known forms.

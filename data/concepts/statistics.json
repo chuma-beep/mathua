@@ -6,7 +6,7 @@
     "subdomain": "statistics.data_representation",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.compare",
+      "count.basics.compare",
       "arith.add.single"
     ],
     "mastery_threshold": {
@@ -107,7 +107,7 @@
     "grading_type": "numeric",
     "prerequisites": [
       "stat.data.range",
-      "count.cardinality"
+      "count.basics.cardinality"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -121,7 +121,7 @@
     "subdomain": "statistics.probability",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.concept",
+      "frac.basics.concept",
       "stat.data.mean"
     ],
     "mastery_threshold": {

@@ -10,9 +10,9 @@ import (
 func Register(reg *generator.Registry) {
 	reg.Register("abstract.group.def", &groupDefGen{})
 	reg.Register("abstract.group.examples", &groupExamplesGen{})
-	reg.Register("abstract.subgroup", &subgroupGen{})
-	reg.Register("abstract.ring", &ringGen{})
-	reg.Register("abstract.homomorphism", &homomorphismGen{})
+	reg.Register("abstract.group.subgroup", &subgroupGen{})
+	reg.Register("abstract.rings.def", &ringGen{})
+	reg.Register("abstract.group.homomorphism", &homomorphismGen{})
 }
 
 // ----- 1. group.def -----

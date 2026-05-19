@@ -9,7 +9,6 @@ What survives, and what makes a quantitative theory possible, is the modulus \\(
 
 > The presentation that follows proceeds from the simplest estimates, those concerning the real and imaginary components, towards the triangle inequality and its consequences, and concludes with the Cauchy-Schwarz inequality, which provides a unifying perspective on the others.
 
-- - -
 ## Inequalities involving real and imaginary parts
 
 Let \\( z = a + bi \\) be a complex number, with \\( a = \mathrm{Re}(z) \\) and \\( b = \mathrm{Im}(z) \\). The modulus is defined by \\( |z| = \sqrt{a^2 + b^2} \\), and from this definition follow three elementary inequalities that compare the modulus with the absolute values of the components.
@@ -24,7 +23,6 @@ The proof is immediate. Since \\( a^2 \leq a^2 + b^2 \\), taking square roots yi
 
 Geometrically, this is the statement that the projection of a vector onto either coordinate axis cannot be longer than the vector itself. The projections become equal to the original length only in the degenerate case where the vector is already aligned with the axis.
 
-- - -
 
 The second inequality reverses the comparison and provides an upper bound for the modulus in terms of its components:
 
@@ -36,7 +34,6 @@ This bound follows from the algebraic identity \\( (|a| + |b|)^2 = a^2 + 2|a|\\,
 
 These three inequalities allow one to convert bounds on \\( |z| \\) into bounds on the components, and conversely.
 
-- - -
 ## Triangle inequality
 
 The most important inequality in the arithmetic of complex numbers is the triangle inequality, which asserts that the modulus of a sum is bounded by the sum of the moduli. For any \\( z_1, z_2 \in \mathbb{C} \\) the following relation holds.
@@ -69,13 +66,11 @@ By the inequality on real parts established in the previous section, one has \\(
 
 Taking square roots, both sides being non-negative, completes the argument.
 
-- - -
 
 Equality in the triangle inequality holds precisely when \\( \mathrm{Re}(z_1 \overline{z_2}) = |z_1 \overline{z_2}| \\), which occurs if and only if \\( z_1 \overline{z_2} \\) is a non-negative real number. Geometrically, this condition means that \\( z_1 \\) and \\( z_2 \\) lie on the same ray from the origin, or that one of the two vanishes. In all other configurations the inequality is strict.
 
 The geometric content is transparent. Interpreting \\( z_1 \\) and \\( z_2 \\) as vectors in the plane, the sum \\( z_1 + z_2 \\) is the diagonal of the parallelogram whose sides are the two vectors. The diagonal cannot exceed the sum of the lengths of the sides, and the two coincide only when the parallelogram degenerates into a segment, that is, when the vectors are parallel and point in the same direction.
 
-- - -
 
 A useful corollary applies to differences. Replacing \\( z_2 \\) with \\( -z_2 \\), and noting that \\( |-z_2| = |z_2| \\), one obtains the following.
 
@@ -85,7 +80,6 @@ A useful corollary applies to differences. Replacing \\( z_2 \\) with \\( -z_2 \
 
 This estimate has a direct interpretation as a bound on the distance between two points of the complex plane: the distance from \\( z_1 \\) to \\( z_2 \\) cannot exceed the sum of the distances of the two points from the origin.
 
-- - -
 ## Reverse triangle inequality
 
 The triangle inequality has a companion result, often called the reverse triangle inequality, which provides a lower bound for the modulus of a difference. For any \\( z_1, z_2 \in \mathbb{C} \\) one has the following.
@@ -104,13 +98,11 @@ Rearranging gives \\( |z_1| - |z_2| \leq |z_1 - z_2| \\). Exchanging the roles o
 
 Equality holds, as in the direct triangle inequality, when \\( z_1 \\) and \\( z_2 \\) lie on the same ray from the origin.
 
-- - -
 
 The reverse triangle inequality has an important analytic consequence. Viewed as a map \\( |\\,\cdot\\,| : \mathbb{C} \to \mathbb{R} \\), the modulus is a Lipschitz function with constant \\( 1 \\). The inequality says exactly that the change in modulus is no larger than the distance between the two points. As a consequence, the modulus is uniformly continuous on \\( \mathbb{C} \\), a property routinely invoked in the analysis of sequences, series, and limits of complex-valued expressions.
 
 > Lipschitz continuity with constant \\( 1 \\) is a strong form of uniform continuity. It guarantees that arbitrarily small variations of \\( z \\) produce variations of \\( |z| \\) that are no larger in magnitude than the variation of \\( z \\) itself.
 
-- - -
 ## Generalized triangle inequality
 
 The triangle inequality extends to finite sums of arbitrary length. For any \\( n \geq 1 \\) and any complex numbers \\( z_1, z_2, \ldots, z_n \\), one has the following.
@@ -133,13 +125,11 @@ Applying the inductive hypothesis to the first term on the right yields:
 
 The estimate therefore holds at step \\( n + 1 \\), which completes the induction.
 
-- - -
 
 Equality requires more attention than in the two-term case. It holds if and only if all the non-zero summands lie on a single ray from the origin, that is, there exists a fixed unit vector \\( e^{i\alpha} \\) and non-negative real numbers \\( r_1, r_2, \ldots, r_n \\) such that \\( z_k = r_k e^{i\alpha} \\) for every \\( k \\). Under this condition the sum is itself a non-negative multiple of \\( e^{i\alpha} \\), and its modulus equals the sum of the individual moduli.
 
 The generalized triangle inequality is the foundation on which the theory of series of complex terms is built. The notion of absolute convergence, in particular, depends on this estimate, since it allows one to control the modulus of partial sums by partial sums of moduli, which are real and non-negative.
 
-- - -
 ## Cauchy-Schwarz inequality
 
 The Cauchy-Schwarz inequality is a quantitative refinement that relates sums of products of complex numbers to sums of their squared moduli. In its finite form, for any complex numbers \\( a_1, \ldots, a_n \\) and \\( b_1, \ldots, b_n \\) one has the following.
@@ -177,7 +167,6 @@ Rearranging the last inequality produces the bound:
 
 which is exactly the Cauchy-Schwarz inequality.
 
-- - -
 
 Equality holds when \\( P(t) = 0 \\) for some value of \\( t \\), which means that \\( a_k = t b_k \\) for every index \\( k \\). In other words, equality occurs precisely when the tuples \\( (a_1, \ldots, a_n) \\) and \\( (b_1, \ldots, b_n) \\) are proportional in \\( \mathbb{C}^n \\).
 
@@ -185,12 +174,10 @@ Equality holds when \\( P(t) = 0 \\) for some value of \\( t \\), which means th
 
 The role of Cauchy-Schwarz extends well beyond the present setting. In the theory of inner product spaces, of which \\( \mathbb{C}^n \\) is the prototypical finite-dimensional example, the inequality becomes the foundational estimate from which the geometric notion of angle, the parallelogram identity, and the entire structure of orthogonality follow.
 
-- - -
 ## Examples and applications
 
 A first illustration concerns the use of the elementary component inequalities. Suppose \\( z = a + bi \\) satisfies \\( |z| \leq 5 \\). The estimate \\( |a| \leq |z| \\) gives \\( -5 \leq a \leq 5 \\), and the corresponding bound for \\( b \\) shows that the point \\( z \\) is contained in the square of side \\( 10 \\) centred at the origin. Conversely, if \\( |a| \leq 3 \\) and \\( |b| \leq 4 \\), the inequality \\( |z| \leq |a| + |b| \\) gives the loose bound \\( |z| \leq 7 \\). The sharper estimate \\( |z| \leq \sqrt{9 + 16} = 5 \\) requires the full Pythagorean computation but produces a tighter result.
 
-- - -
 
 A second application concerns the localisation of roots of polynomials. Consider a monic polynomial of degree \\( n \\):
 
@@ -212,7 +199,6 @@ Setting \\( M = \max_{0 \leq k \leq n-1} |a_k| \\) and assuming \\( |z_0| > 1 \\
 
 This is a classical bound, due to Cauchy, asserting that all the complex roots of a monic polynomial lie in a closed disc whose radius is determined by the largest coefficient. The argument is short, but it combines the triangle inequality with the geometric series and illustrates how the basic estimates yield substantive structural information about polynomial equations.
 
-- - -
 
 A third application uses the Cauchy-Schwarz inequality directly. Given complex numbers \\( z_1, \ldots, z_n \\), choosing \\( a_k = z_k \\) and \\( b_k = 1 \\) in the inequality gives the following.
 

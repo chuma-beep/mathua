@@ -9,7 +9,6 @@ When \\( a \ge 0 \\), the principal real \\( n \\)-th root of \\( a \\) is the u
 
 The value \\( a \\) is referred to as the radicand, and the integer \\( n \\) is known as the index of the root. This notation specifies both the root extraction operation and its degree.
 
-- - -
 
 The properties of the roots depend on whether the index is even or odd.
 
@@ -22,13 +21,11 @@ Radicals such as \\( \sqrt{2} \\), \\( \sqrt{3} \\), and \\( \sqrt{5} \\) are cl
 
 Their decimal expansions are infinite and non-repeating, lacking any predictable pattern. No rational number squared yields 2, 3, or 5. These values nonetheless occupy precise positions on the real number line, interspersed among the rational numbers, with no gaps.
 
-- - -
 
 Formally, if \\( a \in \mathbb{N} \\) is not a perfect square, then \\( \sqrt{a} \notin \mathbb{Q} \\).
 
 > Square roots are not always irrational. The square root of a perfect square, such as \\(4\\) or \\(9\\), is rational. In contrast, the square root of a non-perfect square, such as \\(2\\) or \\(5\\), is irrational because it cannot be expressed as a fraction.
 
-- - -
 ## Why is \\( \sqrt{2} \\) irrational?
 
 To prove that \\( \sqrt{2} \\) is not a rational number, consider a proof by contradiction. Assume that \\( \sqrt{2} \\) is rational. Then it can be expressed as a fraction of two integers in lowest terms, where \\( a, b \in \mathbb{Z} \\), \\( b \neq 0 \\), and \\( \gcd(a,b) = 1 \\):
@@ -37,7 +34,6 @@ To prove that \\( \sqrt{2} \\) is not a rational number, consider a proof by con
 
 > \\( \gcd(a,b) \\) denotes the greatest common divisor of \\( a \\) and \\( b \\), which is the largest positive integer dividing both numbers. The condition \\( \gcd(a,b) = 1 \\) indicates that \\( a \\) and \\( b \\) are coprime, meaning they share no common divisors other than 1. Thus, the fraction \\( a/b \\) is already in lowest terms.
 
-- - -
 
 Squaring both sides:
 \\[
@@ -49,11 +45,9 @@ This implies that \\( a^2 \\) is even, which means \\( a \\) must also be even. 
 (2k)^2 = 2b^2 \to 4k^2 = 2b^2 \to b^2 = 2k^2
 \\]
 
-- - -
 
 This means \\( b^2 \\) is also even, so \\( b \\) must be even too. But if both \\( a \\) and \\( b \\) are even, they share a common factor which is \\(2\\) which contradicts our initial assumption that \\( \dfrac{a}{b} \\) is in lowest terms. This means \\(\sqrt{2}\\) is irrational.
 
-- - -
 ## Powers with rational exponents
 
 The connection between radicals and powers becomes explicit when the exponent is a rational number. For \\( a \in \mathbb{R}^+ \\) and \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), the \\( n \\)-th root of \\( a \\) is equivalently written as:
@@ -80,7 +74,6 @@ a^{\frac{m}{n}} \cdot a^{\frac{p}{q}} &= a^{\frac{m}{n}+\frac{p}{q}} \\\\[6pt]
 
 For example, \\( \sqrt{a^3} = a^{\frac{3}{2}} \\), \\( \sqrt[3]{a^2} = a^{\frac{2}{3}} \\), and \\( \sqrt[4]{a} = a^{\frac{1}{4}} \\).
 
-- - -
 
 ## Properties
 
@@ -94,7 +87,6 @@ For \\( a \ge 0 \\), \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), and \\( m \i
 
 If \\( n \\) is even, the condition \\( a \ge 0 \\) is necessary to remain in the real numbers.
 
----
 
 For \\( n \in \mathbb{N} \\) with \\( n \ge 2 \\), the \\( n \\)-th root distributes over multiplication and division:
 
@@ -108,7 +100,6 @@ For \\( n \in \mathbb{N} \\) with \\( n \ge 2 \\), the \\( n \\)-th root distrib
 
 If \\( n \\) is even, the product rule requires \\( a \ge 0 \\) and \\( b \ge 0 \\), and the quotient rule requires \\( a \ge 0 \\) and \\( b > 0 \\), in order to remain in the real numbers. If \\( n \\) is odd, both identities hold for all admissible real values: any \\( a,\\, b \in \mathbb{R} \\) for the product, and any \\( a \in \mathbb{R} \\), \\( b \in \mathbb{R} \setminus \{0\} \\) for the quotient.
 
----
 
 For \\( a \ge 0 \\), \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), and \\( m \in \mathbb{Z} \\), raising a radical to an integer power is equivalent to raising the radicand to that power and then extracting the root:
 
@@ -118,7 +109,6 @@ For \\( a \ge 0 \\), \\( n \in \mathbb{N} \\) with \\( n \ge 1 \\), and \\( m \i
 
 If \\( n \\) is even, the condition \\( a \ge 0 \\) is required to remain in the real numbers.
 
----
 
 Let \\( k \in \mathbb{N} \\) with \\( k \ge 1 \\). Multiplying both the index of the root and the exponent of the radicand by the same positive integer \\( k \\) does not alter the value of the radical:
 
@@ -128,7 +118,6 @@ Let \\( k \in \mathbb{N} \\) with \\( k \ge 1 \\). Multiplying both the index of
 
 This identity allows the index of a radical to be reduced to its lowest form. For example, \\( \sqrt[4]{a^2} = \sqrt[2]{a} = \sqrt{a} \\), obtained by dividing both exponents by 2. If \\( n \\) is even, the condition \\( a \ge 0 \\) applies.
 
----
 
 For \\( a \ge 0 \\) and \\( m,\\, n \in \mathbb{N} \\) with \\( m,\\, n \ge 1 \\), a nested radical reduces to a single radical whose index is the product of the two indices:
 
@@ -138,7 +127,6 @@ For \\( a \ge 0 \\) and \\( m,\\, n \in \mathbb{N} \\) with \\( m,\\, n \ge 1 \\
 
 If either \\( m \\) or \\( n \\) is even, the condition \\( a \ge 0 \\) is necessary to remain in the real numbers. If both \\( m \\) and \\( n \\) are odd, the identity holds for all \\( a \in \mathbb{R} \\).
 
----
 
 A radical \\( \sqrt[n]{a^m} \\) can be simplified when \\( m \ge n \\) by decomposing the exponent as \\( m = nq+r \\), where \\( q \\) is the quotient and \\( 0 \le r < n \\) is the remainder of the division of \\( m \\) by \\( n \\). The factor \\( a^q \\) can then be extracted from the radical:
 
@@ -148,7 +136,6 @@ A radical \\( \sqrt[n]{a^m} \\) can be simplified when \\( m \ge n \\) by decomp
 
 For example, \\( \sqrt{a^5} = \sqrt{a^4 \cdot a} = a^2\sqrt{a} \\), since \\( 5 = 2 \cdot 2+1 \\). Similarly, \\( \sqrt[3]{a^7} = a^2\\,\sqrt[3]{a} \\), since \\( 7 = 3 \cdot 2+1 \\). The condition \\( a \ge 0 \\) applies when the index is even.
 
----
 
 Two radicals are said to be like if they share the same index and the same radicand. Like radicals can be added and subtracted by combining their coefficients, in the same way as like terms in a polynomial:
 
@@ -168,7 +155,6 @@ since:
 
 \\[ \sqrt{12} = \sqrt{4 \cdot 3} = 2\sqrt{3} \\]
 
-- - -
 ## Example 1
 
 Simplify the following expression and write the result in radical form:
@@ -195,7 +181,6 @@ Therefore we obtain:
 \frac{\sqrt{a}}{\sqrt[3]{a}} = \sqrt[6]{a}
 \\]
 
-- - -
 
 ## Rationalizing the denominator
 
@@ -227,7 +212,6 @@ For example:
 \end{align}
 \\]
 
-- - -
 ## Example 2
 
 Rationalization can also be applied to the numerator when this simplifies an expression. Consider the following limit, which arises naturally in the definition of the derivative:
@@ -256,7 +240,6 @@ Taking the limit as \\( h \to 0 \\):
 
 > This result is the derivative of \\( \sqrt{x} \\), obtained here without invoking the general power rule.
 
-- - -
 ## Geometric construction of the segment \\(\sqrt{a}\\)
 
 The square root \\(\sqrt{a}\\) is more than a number: it can be constructed as a segment using only a compass and straightedge. This method transforms an algebraic idea into a geometric form, revealing the deep connection between numbers and shapes. Given a segment of length \\(a\\), follow these steps:

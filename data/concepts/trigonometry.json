@@ -1,13 +1,13 @@
 [
   {
-    "id": "trig.radians",
+    "id": "trig.basics.radians",
     "label": "Radians and degrees conversion",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
       "geo.basic.angle_measure",
-      "frac.concept"
+      "frac.basics.concept"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -15,13 +15,13 @@
     }
   },
   {
-    "id": "trig.unit_circle",
+    "id": "trig.basics.unit_circle",
     "label": "Unit circle: sine and cosine of standard angles",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.radians",
+      "trig.basics.radians",
       "geo.coord.plot"
     ],
     "mastery_threshold": {
@@ -30,14 +30,14 @@
     }
   },
   {
-    "id": "trig.sin_cos_def",
+    "id": "trig.basics.sin_cos_def",
     "label": "Sine and cosine definitions in right triangles",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "numeric",
     "prerequisites": [
       "geo.triangle.pythagorean",
-      "frac.concept"
+      "frac.basics.concept"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -45,13 +45,13 @@
     }
   },
   {
-    "id": "trig.tan_def",
+    "id": "trig.basics.tan_def",
     "label": "Tangent definition and ratio identity",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "numeric",
     "prerequisites": [
-      "trig.sin_cos_def"
+      "trig.basics.sin_cos_def"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -59,13 +59,13 @@
     }
   },
   {
-    "id": "trig.reciprocal",
+    "id": "trig.basics.reciprocal",
     "label": "Reciprocal trig functions: csc, sec, cot",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "numeric",
     "prerequisites": [
-      "trig.tan_def"
+      "trig.basics.tan_def"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -73,13 +73,13 @@
     }
   },
   {
-    "id": "trig.pythagorean_id",
+    "id": "trig.ident.pythagorean",
     "label": "Pythagorean identity sin²θ + cos²θ = 1",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
     "grading_type": "numeric",
     "prerequisites": [
-      "trig.sin_cos_def",
+      "trig.basics.sin_cos_def",
       "alg.poly.special"
     ],
     "mastery_threshold": {
@@ -88,13 +88,13 @@
     }
   },
   {
-    "id": "trig.special_angles",
+    "id": "trig.basics.special_angles",
     "label": "Exact values for 30°, 45°, 60°",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.unit_circle"
+      "trig.basics.unit_circle"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -102,13 +102,13 @@
     }
   },
   {
-    "id": "trig.reference_angle",
+    "id": "trig.basics.reference_angle",
     "label": "Reference angles and quadrants",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.special_angles"
+      "trig.basics.special_angles"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -116,13 +116,13 @@
     }
   },
   {
-    "id": "trig.graph_sin",
+    "id": "trig.graph.sin",
     "label": "Graph of sine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.reference_angle",
+      "trig.basics.reference_angle",
       "alg.func.concept"
     ],
     "mastery_threshold": {
@@ -131,13 +131,13 @@
     }
   },
   {
-    "id": "trig.graph_cos",
+    "id": "trig.graph.cos",
     "label": "Graph of cosine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.graph_sin"
+      "trig.graph.sin"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -145,13 +145,13 @@
     }
   },
   {
-    "id": "trig.period",
+    "id": "trig.graph.period",
     "label": "Amplitude, period, and phase shift",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.graph_cos"
+      "trig.graph.cos"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -159,13 +159,13 @@
     }
   },
   {
-    "id": "trig.inverse",
+    "id": "trig.adv.inverse",
     "label": "Inverse trig functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.advanced",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "trig.graph_sin",
+      "trig.graph.sin",
       "alg.func.notation"
     ],
     "mastery_threshold": {
@@ -174,13 +174,13 @@
     }
   },
   {
-    "id": "trig.law_sines",
+    "id": "trig.adv.law_sines",
     "label": "Law of sines",
     "domain": "trigonometry",
     "subdomain": "trigonometry.advanced",
     "grading_type": "numeric",
     "prerequisites": [
-      "trig.sin_cos_def",
+      "trig.basics.sin_cos_def",
       "geo.triangle.angles"
     ],
     "mastery_threshold": {
@@ -189,13 +189,13 @@
     }
   },
   {
-    "id": "trig.law_cosines",
+    "id": "trig.adv.law_cosines",
     "label": "Law of cosines",
     "domain": "trigonometry",
     "subdomain": "trigonometry.advanced",
     "grading_type": "numeric",
     "prerequisites": [
-      "trig.law_sines",
+      "trig.adv.law_sines",
       "alg.quad.formula"
     ],
     "mastery_threshold": {

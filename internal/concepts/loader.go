@@ -9,8 +9,7 @@ import (
 	"strings"
 )
 
-// Load reads concept definitions from a JSON file, validates the graph,
-// topologically sorts, and returns the populated DAG.
+// Load reads a JSON concept file, validates the graph, topo-sorts, and returns a DAG.
 func Load(path string) (*DAG, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -23,8 +22,7 @@ func Load(path string) (*DAG, error) {
 	return Build(raw)
 }
 
-// LoadDir reads all .json files from a directory, merges them, validates,
-// topologically sorts, and returns the populated DAG.
+// LoadDir reads all .json files from a directory, merges, validates, topo-sorts, and returns a DAG.
 func LoadDir(dir string) (*DAG, error) {
 	entries, err := os.ReadDir(dir)
 	if err != nil {
@@ -48,8 +46,7 @@ func LoadDir(dir string) (*DAG, error) {
 	return Build(raw)
 }
 
-// Build validates a slice of concepts (no cycles, no orphan prerequisites,
-// no empty or duplicate IDs), topologically sorts, and returns a DAG.
+// Build validates a concept slice (no cycles, orphan prereqs, empty/duplicate IDs), topo-sorts, and returns a DAG.
 func Build(raw []Concept) (*DAG, error) {
 	if len(raw) == 0 {
 		return nil, fmt.Errorf("concepts slice is empty")

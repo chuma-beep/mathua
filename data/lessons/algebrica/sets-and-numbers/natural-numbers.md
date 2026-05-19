@@ -7,7 +7,6 @@ The natural numbers arise from the act of counting, but a modern treatment deman
 
 We denote the set of natural numbers by \\(\\mathbb{N}\\), and throughout this page we adopt the convention that \\(0 \\in \\mathbb{N}\\), consistent with the modern formulation of the Peano axioms and with the treatment of the principle of mathematical induction already developed on this site.
 
-- - -
 
 A useful way to visualise the natural numbers is to place them on the real line, alongside the other numerical systems that extend them. The real line provides a geometric representation of every number, and the natural numbers appear within it as a distinguished discrete subset.
 
@@ -15,7 +14,6 @@ Starting from \\(0\\), the natural numbers occupy equally spaced positions to th
 
 To the left of \\(0\\), the line continues with the negative integers \\(-1, -2, -3, \\dots\\), which do not belong to \\(\\mathbb{N}\\) and are introduced only when the set is extended to the integers \\(\\mathbb{Z}\\). Between any two consecutive integers one finds infinitely many rational numbers, such as \\(1/3\\), and infinitely many irrational numbers, such as \\(-\\sqrt{3}\\) or \\(\\pi\\), which require the further extensions to \\(\\mathbb{Q}\\) and \\(\\mathbb{R}\\). In this picture the natural numbers are the most elementary layer, from which all the other numerical systems are progressively built.
 
-- - -
 ## The Peano axioms
 
 The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a minimal list of properties, from which every other fact about natural numbers can be derived. The Peano axioms describe a set \\(\\mathbb{N}\\) together with a distinguished element \\(0\\) and a function \\(S : \\mathbb{N} \\to \\mathbb{N}\\), called the successor function, subject to the following conditions:
@@ -37,7 +35,6 @@ The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a 
 
 The fifth axiom, the principle of induction, asserts that any subset of \\(\\mathbb{N}\\) containing \\(0\\) and closed under the successor function must coincide with \\(\\mathbb{N}\\) itself. This is the axiom that fixes \\(\\mathbb{N}\\) as the smallest structure satisfying the previous four, and it is the conceptual engine behind every proof by induction. A detailed treatment is given in the page on the principle of mathematical induction.
 
-- - -
 ## Set-theoretic construction
 
 The Peano axioms characterise \\(\\mathbb{N}\\) up to isomorphism, but they do not exhibit an explicit model. A concrete realisation was proposed by John von Neumann within the framework of set theory, and it is by now the standard reference construction. In this construction the natural number \\(0\\) is identified with the empty set, and the successor of a natural number is defined as the union of that number with the singleton containing it. The definitions are the following:
@@ -61,7 +58,6 @@ Applying the successor function repeatedly produces an explicit sequence of sets
 
 A notable feature of this construction is that each natural number coincides with the set of all its predecessors, so that the number \\(n\\) has exactly \\(n\\) elements. This provides a direct and elegant link between the ordinal and the cardinal aspects of \\(\\mathbb{N}\\).
 
-- - -
 ## Addition and multiplication
 
 Once the successor function is available, the two fundamental arithmetic operations can be introduced by recursion. The idea is to define each operation by specifying its value in a base case and then extending it to all natural numbers by appealing to the successor.
@@ -77,7 +73,6 @@ Addition is defined, for every \\(m \\in \\mathbb{N}\\), by the recursive clause
 
 The first clause specifies that adding zero leaves the number unchanged, while the second reduces the addition of a successor to the successor of an addition, thereby propagating the definition to all natural numbers.
 
-- - -
 
 Multiplication is defined in a similar way, for every \\(m \\in \\mathbb{N}\\), by the clauses:
 
@@ -90,7 +85,6 @@ Multiplication is defined in a similar way, for every \\(m \\in \\mathbb{N}\\), 
 
 Multiplication is therefore constructed on top of addition, according to the idea that multiplying by a successor corresponds to adding one further copy of the multiplicand.
 
-- - -
 ## Properties of the operations
 
 From the recursive definitions, together with the induction axiom, one can prove that addition and multiplication satisfy the expected algebraic properties. The proofs proceed by induction on one of the arguments, and they are a standard exercise in arithmetic.
@@ -114,7 +108,6 @@ These properties are summarised as follows:
 
 A further property, which distinguishes \\(\\mathbb{N}\\) from more general algebraic structures, is the absence of zero divisors. If the product of two natural numbers equals zero, then at least one of the two factors must be zero.
 
-- - -
 ## Order and well-ordering
 
 The set \\(\\mathbb{N}\\) is equipped with a total order, which can be defined directly in terms of addition. Given two natural numbers \\(m\\) and \\(n\\), the relation \\(m \\leq n\\) holds if and only if there exists a natural number \\(k\\) such that the following equality is satisfied:
@@ -127,7 +120,6 @@ In this definition the element \\(k\\) measures the gap between \\(m\\) and \\(n
 
 A distinctive feature of this order is the well-ordering property. Every non-empty subset of \\(\\mathbb{N}\\) admits a least element with respect to \\(\\leq\\). It is logically equivalent to the principle of induction, in the sense that each can be derived from the other within a suitable axiomatic framework, and it provides an alternative foundation for the same body of results.
 
-- - -
 ## Example
 
 As an illustration of how the recursive definitions interact with the algebraic properties, we compute the sum \\(2 + 3\\) directly from the definition of addition. The computation relies exclusively on the recursive clauses and on the fact that \\(3 = S(S(S(0)))\\). We start from the outer successor and apply the recursive clause for addition at each step:

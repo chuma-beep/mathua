@@ -11,7 +11,6 @@ A ring is an algebraic structure that extends the notion of a group by introduci
 
 A ring \\((R, +, \cdot)\\) is called commutative if \\(a \cdot b = b \cdot a\\) for all \\(a, b \in R\\). It is called a ring with unity, or unital ring, if there exists a multiplicative identity element \\(1 \in R\\) such that \\(1 \cdot a = a \cdot 1 = a\\) for all \\(a \in R\\).
 
-- - -
 ## Properties
 
 Several consequences follow directly from the axioms. For any \\(a \in R\\), multiplication by the additive identity satisfies \\(a \cdot 0 = 0 \cdot a = 0\\). This is a consequence of distributivity. One writes:
@@ -32,7 +31,6 @@ In particular, \\((-1) \cdot a = -a\\) whenever \\(R\\) has a unity. These sign 
 
 + A commutative ring with unity that contains no zero divisors is called an integral domain.
 
-- - -
 ## Algebraic hierarchy
 
 A group is the most elementary of these structures. It consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses.
@@ -47,20 +45,17 @@ When the additional requirement that every nonzero element possess a multiplicat
 
 > The integers \\(\\mathbb{Z}\\) are the most natural example of a ring that is not a field: every integer has an additive inverse, yet \\(2^{-1}\\) does not belong to \\(\\mathbb{Z}.\\) The rational numbers \\(\\mathbb{Q}\\), by contrast, form a field.
 
-- - -
 ## Examples
 
 The set \\(\mathbb{Z}\\) of integers, equipped with ordinary addition and multiplication, is the most simple example of a commutative ring with unity. The additive identity is \\(0\\), the multiplicative identity is \\(1\\), and every integer has an additive inverse. The integers form an integral domain, since the product of two nonzero integers is always nonzero.
 
 The set of polynomials with real coefficients, denoted \\(\mathbb{R}[x]\\), forms a commutative ring with unity under the usual addition and multiplication of polynomials. The additive identity is the zero polynomial, and the multiplicative identity is the constant polynomial \\(1\\). This ring is also an integral domain.
 
----
 
 Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\), equipped with addition and multiplication modulo \\(n\\), forms a commutative ring with unity. For example, in \\(\mathbb{Z}/6\mathbb{Z}\\) one has \\(2 \cdot 3 = 0\\), so \\(2\\) and \\(3\\) are zero divisors and \\(\mathbb{Z}/6\mathbb{Z}\\) is not an integral domain. When \\(n\\) is prime, however, \\(\mathbb{Z}/n\mathbb{Z}\\) contains no zero divisors and is in fact a field.
 
 Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set \\(\mathrm{M}\_n(F)\\) of all \\(n \times n\\) matrices with entries in \\(F\\) forms a ring under matrix addition and multiplication. The additive identity is the zero matrix, and the multiplicative identity is the identity matrix \\(I_n\\). For \\(n \geq 2\\), this ring is not commutative, since matrix multiplication does not commute in general, and it contains zero divisors.
 
-- - -
 ## Subrings
 
 A subset \\(S\\) of a ring \\(R\\) is called a subring if \\(S\\) is itself a ring under the operations inherited from \\(R\\). A nonempty subset \\(S \subseteq R\\) is a subring of \\(R\\) if and only if it is closed under subtraction and under multiplication, that is, for all \\(a, b \in S\\) one has \\(a - b \in S\\) and \\(a \cdot b \in S\\). Closure under subtraction is equivalent to requiring that \\(S\\) be a subgroup of \\((R, +)\\), and closure under multiplication then ensures that the second operation is also well-defined on \\(S\\). Every ring \\(R\\) contains at least two subrings:
@@ -72,7 +67,6 @@ Any subring other than \\(R\\) is called a proper subring.
 
 As an example, the set of even integers \\(2\mathbb{Z} = \\{\ldots, -4, -2, 0, 2, 4, \ldots\\}\\) is a subring of \\((\mathbb{Z}, +, \cdot)\\). For any two even integers \\(a = 2m\\) and \\(b = 2k\\), one has \\(a - b = 2(m-k) \in 2\mathbb{Z}\\) and \\(a \cdot b = 4mk \in 2\mathbb{Z}\\), so both conditions are satisfied. Note that \\(2\mathbb{Z}\\) does not contain the multiplicative identity \\(1\\) of \\(\mathbb{Z}\\), which illustrates that a subring of a unital ring need not itself be unital.
 
-- - -
 ## Ideals
 
 Ideals are the subsets that allow the construction of quotient rings, playing a role analogous to normal subgroups in group theory. A nonempty subset \\(I \subseteq R\\)
@@ -88,7 +82,6 @@ one has:
 
 > Ideals are precisely the kernels of  ring homomorphisms, a fact that makes them the natural tool for constructing quotient rings and studying the structure of rings through their homomorphic images.
 
-- - -
 ## Ring homomorphisms and isomorphisms
 
 A ring homomorphism is a function between two rings that preserves both operations. Given two rings \\((R, +, \cdot)\\) and \\((S, \oplus, \odot)\\), a function \\(\varphi : R \to S\\) is a ring homomorphism if for all \\(a, b \in R\\):
@@ -104,7 +97,6 @@ The first condition requires that \\(\varphi\\) be a group homomorphism between 
 
 The kernel is always an ideal of \\(R\\), and the image is always a subring of \\(S\\). A homomorphism is injective if and only if its kernel contains only the additive identity of \\(R.\\)
 
----
 
 A ring homomorphism that is injective and surjective is called a ring isomorphism. Two rings are isomorphic, written \\(R \cong S\\), if an isomorphism between them exists. Isomorphic rings are structurally identical and share all properties that are intrinsic to their ring structure.
 

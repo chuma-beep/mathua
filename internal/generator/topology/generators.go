@@ -8,9 +8,9 @@ import (
 )
 
 func Register(reg *generator.Registry) {
-	reg.Register("topo.metric", &metricGen{})
-	reg.Register("topo.open_closed", &openClosedGen{})
-	reg.Register("topo.continuous", &continuousGen{})
+	reg.Register("topo.basics.metric", &metricGen{})
+	reg.Register("topo.basics.open_closed", &openClosedGen{})
+	reg.Register("topo.basics.continuous", &continuousGen{})
 }
 
 // ----- 1. metric -----

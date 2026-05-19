@@ -1,6 +1,6 @@
 [
   {
-    "id": "frac.concept",
+    "id": "frac.basics.concept",
     "label": "What is a fraction",
     "domain": "fractions",
     "subdomain": "fractions.concept",
@@ -14,13 +14,13 @@
     }
   },
   {
-    "id": "frac.parts",
+    "id": "frac.basics.parts",
     "label": "Numerator and denominator",
     "domain": "fractions",
     "subdomain": "fractions.concept",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.concept"
+      "frac.basics.concept"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -28,14 +28,14 @@
     }
   },
   {
-    "id": "frac.on_number_line",
+    "id": "frac.basics.number_line",
     "label": "Fractions on the number line",
     "domain": "fractions",
     "subdomain": "fractions.concept",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
-      "count.number_line"
+      "frac.basics.parts",
+      "count.basics.number_line"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -43,13 +43,13 @@
     }
   },
   {
-    "id": "frac.equivalent",
+    "id": "frac.basics.equivalent",
     "label": "Find equivalent fractions",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
+      "frac.basics.parts",
       "arith.mult.tables"
     ],
     "mastery_threshold": {
@@ -58,13 +58,13 @@
     }
   },
   {
-    "id": "frac.simplify",
+    "id": "frac.ops.simplify",
     "label": "Reduce fraction to lowest terms",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.equivalent",
+      "frac.basics.equivalent",
       "arith.factor.gcf"
     ],
     "mastery_threshold": {
@@ -73,13 +73,13 @@
     }
   },
   {
-    "id": "frac.compare",
+    "id": "frac.ops.compare",
     "label": "Compare fractions: which is larger",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
     "grading_type": "comparison",
     "prerequisites": [
-      "frac.equivalent"
+      "frac.basics.equivalent"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -87,13 +87,13 @@
     }
   },
   {
-    "id": "frac.benchmark",
+    "id": "frac.ops.benchmark",
     "label": "Benchmark fractions: closer to 0, 1/2, or 1",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "frac.compare"
+      "frac.ops.compare"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -101,13 +101,13 @@
     }
   },
   {
-    "id": "frac.to_decimal",
+    "id": "frac.ops.to_decimal",
     "label": "Convert fraction to decimal",
     "domain": "fractions",
     "subdomain": "fractions.concept",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
+      "frac.basics.parts",
       "arith.div.basic"
     ],
     "mastery_threshold": {
@@ -122,7 +122,7 @@
     "subdomain": "fractions.addition",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts"
+      "frac.basics.parts"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -188,13 +188,13 @@
     }
   },
   {
-    "id": "frac.mult",
+    "id": "frac.ops.mult",
     "label": "Multiply fractions",
     "domain": "fractions",
     "subdomain": "fractions.multiplication",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
+      "frac.basics.parts",
       "arith.mult.tables"
     ],
     "mastery_threshold": {
@@ -209,7 +209,7 @@
     "subdomain": "fractions.multiplication",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.mult"
+      "frac.ops.mult"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -217,13 +217,13 @@
     }
   },
   {
-    "id": "frac.div",
+    "id": "frac.ops.div",
     "label": "Divide fractions by multiplying by reciprocal",
     "domain": "fractions",
     "subdomain": "fractions.division",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.mult"
+      "frac.ops.mult"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -237,7 +237,7 @@
     "subdomain": "fractions.division",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.div"
+      "frac.ops.div"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -251,7 +251,7 @@
     "subdomain": "fractions.mixed",
     "grading_type": "numeric",
     "prerequisites": [
-      "frac.parts",
+      "frac.basics.parts",
       "arith.div.remainder"
     ],
     "mastery_threshold": {
@@ -296,7 +296,7 @@
     "grading_type": "numeric",
     "prerequisites": [
       "frac.mixed.convert",
-      "frac.mult"
+      "frac.ops.mult"
     ],
     "mastery_threshold": {
       "streak": 10,

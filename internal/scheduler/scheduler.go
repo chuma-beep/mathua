@@ -29,8 +29,8 @@ type NextConcept struct {
 	IsReview bool
 }
 
-// ConceptSnapshot is the scheduler's view of a student's progress on one
-// concept. Zero value means the concept has never been attempted.
+// ConceptSnapshot tracks a student's progress on one concept.
+// Zero value means the concept has never been attempted.
 type ConceptSnapshot struct {
 	Status         mastery.Status
 	Streak         int
@@ -42,11 +42,10 @@ type ConceptSnapshot struct {
 	WeaknessScore  float64
 }
 
-// Next selects the next concept for a student to practice.
+// Next picks the next concept for a student to work on.
 //
 // prevConceptID is the last concept practiced ("" if none).
-// sessionReviewCount / sessionNewCount track how many of each type
-// have been shown this session (for 70/30 balance).
+// sessionReviewCount / sessionNewCount are used to maintain the 70/30 balance.
 func (s *Scheduler) Next(
 	snapshots map[string]*ConceptSnapshot,
 	prevConceptID string,

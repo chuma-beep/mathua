@@ -28,7 +28,6 @@ From the geometric construction, the secant measures the factor by which the uni
 
 > This section examines the secant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the secant function.
 
-- - -
 ## Common values of the secant
 
 Below are some commonly known values of \\(\sec(\theta)\\) for selected angles, useful in various applications of trigonometry:
@@ -43,7 +42,6 @@ Below are some commonly known values of \\(\sec(\theta)\\) for selected angles, 
 \end{align}
 \\]
 
-- - -
 ## Trigonometric identities for the secant
 
 + \\[ \text{1. } \quad \sec x = \frac{1}{\cos x} \\]
@@ -58,7 +56,6 @@ Below are some commonly known values of \\(\sec(\theta)\\) for selected angles, 
 
 > These formulas collect the most useful identities involving the secant, including the reciprocal definition, the Pythagorean identity, the symmetry relation, and common algebraic transformations. For a broader overview, refer to the full collection of trigonometric identities.
 
-- - -
 ## Cosecant
 
 Consider again the same construction: the tangent line drawn at \\(\text{P}\\) to the unit circle meets the \\(y\\)-axis at a point \\(\text{Q}\\). The cosecant of the angle \\(\theta\\) is defined as the signed length of the segment \\(\overline{OQ}\\), that is, the ordinate \\(y_Q\\) of the point \\(\text{Q}\\):
@@ -83,14 +80,12 @@ Analogous to the secant, the cosecant measures the factor by which the unit radi
 
 > This section examines the cosecant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the cosecant function.
 
-- - -
 ## Geometric interpretation
 
 Both definitions stem from a single geometric object: the tangent line drawn at \\(\text{P}\\) simultaneously determines the point \\(\text{S}\\) on the \\(x\\)-axis and the point \\(\text{Q}\\) on the \\(y\\)-axis, yielding the secant and the cosecant from one construction.
 
 This also makes transparent the asymmetric behaviour of the two functions. When the terminal side of \\(\theta\\) approaches a horizontal position, the tangent line at \\(\text{P}\\) becomes nearly parallel to the \\(x\\)-axis, driving \\(\text{S}\\) to infinity and making the secant unbounded, while \\(\text{Q}\\) remains well-defined. The situation is reversed when the terminal side approaches a vertical position.
 
-- - -
 ## Common values of the cosecant
 
 Below are some commonly known values of \\(\csc(\theta)\\) for selected angles, useful in various applications of trigonometry:
@@ -105,7 +100,6 @@ Below are some commonly known values of \\(\csc(\theta)\\) for selected angles, 
 \end{align}
 \\]
 
-- - -
 ## Secant and cosecant functions
 
 The secant function \\(f(x) = \sec(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\cos(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical asymptotes at the points where the cosine vanishes, that is, at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\). The domain of \\(\sec(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
@@ -115,7 +109,6 @@ The secant function \\(f(x) = \sec(x)\\) assigns to each angle \\(x\\), measured
 + Periodicity: periodic in \\( x \\) with period \\( 2\pi \\)
 + Parity: even, \\( \sec(-x) = \sec(x) \\)
 
----
 
 The cosecant function \\(f(x) = \csc(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\sin(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical asymptotes at the points where the sine vanishes, that is, at \\(x = k\pi\\) for \\(k \in \mathbb{Z}\\). The domain of \\(\csc(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
 
@@ -124,7 +117,6 @@ The cosecant function \\(f(x) = \csc(x)\\) assigns to each angle \\(x\\), measur
 + Periodicity: periodic in \\( x \\) with period \\( 2\pi \\)
 + Parity: odd, \\( \csc(-x) = -\csc(x) \\)
 
-- - -
 ## Trigonometric identities for the cosecant
 
 + \\[ \text{1. } \quad \csc x = \frac{1}{\sin x} \\]

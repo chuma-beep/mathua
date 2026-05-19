@@ -6,7 +6,7 @@
     "subdomain": "arithmetic.addition",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.cardinality"
+      "count.basics.cardinality"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -557,7 +557,7 @@
     "subdomain": "arithmetic.negatives",
     "grading_type": "numeric",
     "prerequisites": [
-      "count.number_line"
+      "count.basics.number_line"
     ],
     "mastery_threshold": {
       "streak": 10,

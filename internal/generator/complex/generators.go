@@ -11,14 +11,14 @@ import (
 )
 
 func Register(reg *generator.Registry) {
-	reg.Register("complex.concept", &conceptGen{})
-	reg.Register("complex.add_sub", &addSubGen{})
-	reg.Register("complex.mult", &multGen{})
-	reg.Register("complex.conjugate", &conjugateGen{})
-	reg.Register("complex.divide", &divideGen{})
-	reg.Register("complex.polar", &polarGen{})
-	reg.Register("complex.de_moivre", &deMoivreGen{})
-	reg.Register("complex.roots", &rootsGen{})
+	reg.Register("complex.basics.concept", &conceptGen{})
+	reg.Register("complex.ops.add_sub", &addSubGen{})
+	reg.Register("complex.ops.mult", &multGen{})
+	reg.Register("complex.ops.conjugate", &conjugateGen{})
+	reg.Register("complex.ops.divide", &divideGen{})
+	reg.Register("complex.adv.polar", &polarGen{})
+	reg.Register("complex.adv.de_moivre", &deMoivreGen{})
+	reg.Register("complex.adv.roots", &rootsGen{})
 }
 
 func fmtComplex(r, i int) string {

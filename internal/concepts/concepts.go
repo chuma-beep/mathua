@@ -69,8 +69,7 @@ func (d *DAG) DependentsOf(id string) []*Concept {
 	return nil
 }
 
-// Available returns concepts whose prerequisites are all present in the
-// mastered set. Only includes concepts that are NOT themselves in mastered.
+// Available returns concepts whose prereqs are all mastered, excluding concepts already in the mastered set.
 func (d *DAG) Available(mastered map[string]bool) []*Concept {
 	var avail []*Concept
 	for _, c := range d.order {

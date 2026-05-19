@@ -11,14 +11,12 @@ Intervals are among the most fundamental objects in mathematical analysis. They 
 
 Intervals are classified according to whether their endpoints are included or excluded, and  according to whether they are bounded or extend indefinitely in one or both directions.
 
-- - -
 ## Bounded intervals
 
 A bounded interval is one that is contained within a finite portion of the real line, that is, one for which there exist real numbers \\( a \\) and \\( b \\) with \\( a \leq b \\) such that the interval is a subset of \\( [a, b] \\). The open interval with endpoints \\( a \\) and \\( b \\) is the set of all real numbers strictly between \\( a \\) and \\( b \\), excluding both endpoints. It is defined as follows:
 \\[
 (a, b) = \{x \in \mathbb{R} : a < x < b\}
 \\]
-
 
 
 The closed interval with endpoints \\( a \\) and \\( b \\) is the set of all real numbers between \\( a \\) and \\( b \\), including both endpoints. It is defined as follows:
@@ -41,7 +39,6 @@ exclude the other. They are defined as follows:
 
 A degenerate interval is the special case \\( [a, a] = \\{a\\} \\), which contains exactly one point. It satisfies the definition of an interval vacuously, since there are no two distinct points between which additional points could be required.
 
-- - -
 ## Unbounded intervals
 
 An unbounded interval extends indefinitely in at least one direction. Since infinity is not
@@ -71,7 +68,6 @@ the corresponding bracket is always a parenthesis. The four unbounded intervals 
 
 Finally, the entire real line is itself an interval, denoted \\( (-\infty, +\infty) = \mathbb{R} \\), which contains every real number and has no restriction of any kind.
 
-- - -
 ## Operations on intervals
 
 Given two intervals, one may form new sets by combining them through the standard
@@ -81,7 +77,6 @@ set-theoretic operations of intersection and union. The intersection \\( I \cap 
 The third row shows the intersection \\( (3, 5) \\), which is the portion shared by both
 intervals.
 
-- - -
 
 The union \\( I \cup J \\) is the set of all points belonging to at least one of the two
 intervals. Unlike intersection, the union of two intervals is not always an interval: it is
@@ -92,7 +87,6 @@ union is the interval \\( (1, 7) \\).
 
 The third row shows the union \\( (1, 7) \\). By contrast, the union \\( (1, 3) \cup (5, 7) \\)
 is not an interval, because the points between \\( 3 \\) and \\( 5 \\) belong to neither set.
-- - -
 ## Intervals and neighborhoods
 
 A concept closely related to intervals and central to mathematical analysis is that of a
@@ -114,7 +108,6 @@ Neighborhoods provide the language in which the definitions of limit, continuity
 A point \\( x_0 \\) is said to be interior to a set \\( S \subseteq \mathbb{R} \\) if some neighborhood of \\( x_0 \\) is entirely contained in \\( S \\). Every point of an open interval is interior to it, which is one reason open intervals play a privileged role in analysis. By contrast, the endpoints of a closed interval are not interior points: every
 neighborhood of an endpoint contains points outside the interval.
 
-- - -
 ## Length of an interval
 
 The length of a bounded interval with endpoints \\( a \\) and \\( b \\) is defined as \\( b - a \\), regardless of whether the endpoints are included or excluded. That is, the four intervals \\( (a, b) \\), \\( [a, b) \\), \\( (a, b] \\), and \\( [a, b] \\) all have the same length, given by the following expression.
@@ -128,7 +121,6 @@ interval whose distance exceeds \\( M \\), so no finite value can be assigned as
 
 This notion of length is the starting point for the theory of measure on the real line, which assigns a generalized notion of size to arbitrary subsets of \\( \mathbb{R} \\). The measure of an interval \\( [a, b] \\) coincides with its length \\( b - a \\), and the extension of this assignment to more complex sets, through the notion of outer measure and measurability, forms the foundation of the Lebesgue integral.
 
-- - -
 ## Characterization of intervals
 
 A subset of the real line is said to be connected if it cannot be written as the union of

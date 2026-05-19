@@ -9,7 +9,6 @@ Consider for example the identity \\((a+b)^2 = a^2 + 2ab + b^2\\). A useful prop
 
 Most of the identities collected here are special cases of the binomial theorem, which gives the expansion of \\((a+b)^n\\) for arbitrary non-negative integer \\(n\\). The square and the cube of a binomial are just the cases \\(n=2\\) and \\(n=3\\) of this general expansion. Other identities on this page, like the difference of two squares or the factorisation of \\(a^3 \pm b^3\\), cannot be obtained from the binomial theorem, although the underlying mechanism is essentially the same.
 
-- - -
 
 ## Square of a binomial
 
@@ -34,7 +33,6 @@ Working out the expansion of \\((a+b)^2\\), we obtain three terms:
 
 Two of them are the squares of \\(a\\) and \\(b\\), and the third one is twice their product. The case \\((a-b)^2\\) is analogous, with the only difference that the middle term comes out negative, since multiplying \\(a\\) by \\(-b\\) introduces a minus sign.
 
-- - -
 
 ## Difference of two squares
 
@@ -56,7 +54,6 @@ The product on the right-hand side expands as follows:
 
 The terms \\(-ab\\) and \\(+ab\\) cancel out, so what is left is just \\(a^2 - b^2\\).
 
-- - -
 
 ## Cube of a binomial
 
@@ -71,7 +68,6 @@ When we multiply a binomial by itself three times, the result is one of the foll
 
 Both are special cases of the binomial theorem with \\(n=3\\).
 
----
 
 Closely related to the cube of a binomial are the sum and difference of two cubes, which work the other way around: they take an expression of the form \\(a^3 \pm b^3\\) and rewrite it as a product.
 
@@ -104,7 +100,6 @@ In both cases the mixed terms cancel in pairs, and only the cubes \\(a^3\\) and 
 
 > In the expansion of \\((a+b+c)^3\\), the coefficient \\(6\\) in the term \\(6abc\\) arises from the number of permutations of the three distinct factors \\(a\\), \\(b\\), \\(c\\), that is \\(3!=6\\). This is an instance of the multinomial theorem, which generalises the binomial theorem to sums of more than two terms.
 
-- - -
 
 ## Notable products and the binomial theorem
 
@@ -126,7 +121,6 @@ If we now want to use this general formula to recover the cube of a binomial, we
 (a+b)^3 = a^3 + 3a^2b + 3ab^2 + b^3
 \\]
 
-- - -
 
 ## Example 1
 
@@ -167,7 +161,6 @@ Therefore, by applying the expansion of the difference of two cubes, we were abl
 x = 3, \quad x = \frac{-3 + 3i\sqrt{3}}{2}, \quad x = \frac{-3 - 3i\sqrt{3}}{2}
 \\]
 
-- - -
 
 ## Sum and difference of nth powers
 
@@ -189,7 +182,6 @@ When \\(n\\) is even, on the other hand, no such factorisation is available over
 
 > The factorisation of \\(a^n-b^n\\) is closely related to the structure of the \\(n\\)-th roots of unity in the complex plane. The roots of \\(a^n-b^n=0\\) are precisely \\(a/b=e^{2\pi i k/n}\\) for \\(k=0,1,\dots,n-1\\).
 
----
 
 The case of even \\(n\\) admits one exception, known as Sophie Germain's identity, which has some consequences in showing that certain integers of the form \\(n^4+4m^4\\) admit a non-trivial factorisation and are therefore not prime. The identity is:
 
@@ -207,7 +199,6 @@ In this way the expression is a difference of two squares, and the factorisation
 
 > The identities for \\(a^n \pm b^n\\) are related to Newton's identities, which express power sums \\(p_k=a^k+b^k\\) in terms of the elementary symmetric polynomials \\(e_1=a+b\\) and \\(e_2=ab\\).
 
-- - -
 -
 ## Example 2
 
@@ -231,7 +222,6 @@ The factorisation can be verified by expanding the right-hand side:
 \end{align}
 \\]
 
-- - -
 
 ## List of the main notable products
 

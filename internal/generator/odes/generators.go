@@ -8,14 +8,14 @@ import (
 )
 
 func Register(reg *generator.Registry) {
-	reg.Register("ode.concept", &conceptGen{})
-	reg.Register("ode.separable", &separableGen{})
-	reg.Register("ode.linear_first", &linearFirstGen{})
-	reg.Register("ode.exact", &exactGen{})
-	reg.Register("ode.homogeneous", &homogeneousGen{})
-	reg.Register("ode.nonhomogeneous", &nonhomogeneousGen{})
-	reg.Register("ode.laplace", &laplaceGen{})
-	reg.Register("ode.systems", &systemsGen{})
+	reg.Register("ode.basics.concept", &conceptGen{})
+	reg.Register("ode.first_order.separable", &separableGen{})
+	reg.Register("ode.first_order.linear", &linearFirstGen{})
+	reg.Register("ode.first_order.exact", &exactGen{})
+	reg.Register("ode.second_order.homogeneous", &homogeneousGen{})
+	reg.Register("ode.second_order.nonhomogeneous", &nonhomogeneousGen{})
+	reg.Register("ode.transforms.laplace", &laplaceGen{})
+	reg.Register("ode.adv.systems", &systemsGen{})
 }
 
 type conceptGen struct{}

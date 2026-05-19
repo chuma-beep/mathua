@@ -22,7 +22,6 @@ Unlike permutations, where order matters, the pairs \\((p,q)\\) and \\((q,p)\\) 
 
 > The binomial coefficient appears in the binomial theorem, where it gives the coefficients of each term in the expansion of \\((a+b)^n\\).
 
-- - -
 ## Pascal's triangle
 
 Pascal's triangle is a triangular arrangement of binomial coefficients, the coefficients that appear in the expansion of the binomial \\((a+b)\\) raised to a non-negative integer power \\(n\\). The first row contains only \\(1\\), and each number in the subsequent rows is the sum of the two numbers directly above it. The outermost elements of every row are always 1. Here are the first six rows:
@@ -38,7 +37,6 @@ Pascal's triangle is a triangular arrangement of binomial coefficients, the coef
 \end{array}
 \\]
 
-- - -
 
 Each element in row \\( n \\) and column \\( k \\) corresponds to the binomial coefficient. For example, the number at \\( n = 4, k = 2 \\) is:
 
@@ -48,7 +46,6 @@ Each element in row \\( n \\) and column \\( k \\) corresponds to the binomial c
 
 And indeed, in the fourth row, the third number is 6.
 
-- - -
 
 Pascal's Triangle satisfies the recurrence relation which directly follows from the triangle's construction:
 
@@ -56,7 +53,6 @@ Pascal's Triangle satisfies the recurrence relation which directly follows from 
 \binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}
 \\]
 
-- - -
 ## Fundamental properties of the binomial coefficient
 
 The edge property of the binomial coefficient expresses a basic rule that appears along the borders of Pascal’s triangle. It states that the coefficients located at the two ends of each row are always equal to one:
@@ -67,7 +63,6 @@ The edge property of the binomial coefficient expresses a basic rule that appear
 
 For any natural number \\( n \\), there is exactly one possible way to choose none of the available elements, and likewise only one way to choose all of them.
 
-- - -
 
 The symmetry property is observed when selecting a subset of \\(k\\) elements from a set of \\(n\\) elements, with the number of ways to do this always equal to the number of ways to select the remaining \\(n-k\\) elements. This symmetry is reflected in the equivalence:
 
@@ -75,7 +70,6 @@ The symmetry property is observed when selecting a subset of \\(k\\) elements fr
 
 This principle of symmetric selection is not just a theoretical idea, but a practical tool used in various fields. It is particularly useful in probability theory, combinatorics, and statistics, where it helps in calculating probabilities, counting possibilities, and analyzing data.
 
-- - -
 
 The additive property of the binomial coefficient establishes a relationship between consecutive binomial coefficients. If we consider the binomial coefficients \\( \large{n \choose k} \\) and \\( \large{{n \choose k+1}}\\), then:
 
@@ -83,7 +77,6 @@ The additive property of the binomial coefficient establishes a relationship bet
 
 This property is fundamental in practical applications, as it provides a way to quickly compute the value of the next binomial coefficient, knowing the previous ones. It relies on the definition of the binomial coefficient and its recursive relationship, which allows the expression of a binomial coefficient in terms of preceding binomial coefficients.
 
-- - -
 
 The recursive property describes how each binomial coefficient can be derived from those in the previous row of Pascal’s triangle. According to this relationship, every coefficient is obtained as the sum of the two elements positioned directly above it:
 
@@ -93,7 +86,6 @@ The recursive property describes how each binomial coefficient can be derived fr
 
 This rule provides a recursive definition for the binomial coefficient and explains the additive structure underlying Pascal’s triangle.
 
-- - -
 ## Notable identities of the binomial coefficient
 
 Beyond the core properties, the binomial coefficient satisfies a number of deeper identities that appear repeatedly across combinatorics, probability, and analysis. Each of them reflects a structural truth about how counting works.
@@ -107,7 +99,6 @@ row \\( n \\) of Pascal's triangle equals \\( 2^n \\):
 
 One way to see why this is true: consider a set of \\( n \\) elements. Each element can either be included in a subset or not, giving two independent choices per element. The total number of subsets is therefore \\( 2^n \\), and since \\( \binom{n}{k} \\) counts the subsets of exactly \\( k \\) elements, summing over all possible values of \\( k \\) from \\( 0 \\) to \\( n \\) recovers the same count.
 
----
 
 The alternating sum identity is a close relative of the row sum, but with alternating signs:
 
@@ -117,7 +108,6 @@ The alternating sum identity is a close relative of the row sum, but with altern
 
 This follows directly from evaluating the binomial theorem at \\( a = 1 \\) and \\( b = -1 \\). The result reflects a symmetry between subsets of even and odd size: for any \\( n \geq 1 \\), there are exactly as many even-sized subsets of an \\( n \\)-element set as there are odd-sized ones.
 
----
 
 The Vandermonde identity describes what happens when two independent selections are combined into a single one. Given two disjoint groups of \\( m \\) and \\( n \\) elements respectively, the number of ways to choose \\( r \\) elements from the combined group equals:
 
@@ -133,7 +123,6 @@ The reasoning is direct: any selection of \\( r \\) elements from the  combined 
 
 This tells us that the central binomial coefficient — the middle entry of row  \\( 2n \\) in Pascal's triangle — counts the number of ways to select \\( n \\) elements from a group of \\( 2n \\), which can always be decomposed as choosing \\( k \\) from one half and \\( n - k \\) from the other.
 
----
 
 The upper summation identity relates a binomial coefficient to a sum of coefficients from earlier rows:
 
@@ -143,7 +132,6 @@ The upper summation identity relates a binomial coefficient to a sum of coeffici
 
 The name comes from the shape this identity traces in Pascal's triangle:  a diagonal run of entries whose sum equals a single entry one step to the right and one step down — resembling the blade and handle of a hockey stick. This identity is especially useful when computing cumulative counts that build row by row.
 
-- - -
 ## Generalized binomial coefficient
 
 The definition introduced at the start of this page requires \\( n \\) and \\( k \\) to be natural numbers. This constraint, however, is not as rigid as it appears. The factorial in the numerator can be replaced by a product that makes sense for any real number \\( \alpha \\), leading to the generalized binomial coefficient:
@@ -173,7 +161,6 @@ Taking \\( \alpha = \tfrac{1}{2} \\) produces the expansion of \\( \sqrt{1+x} \\
 
 an approximation used routinely in physics and engineering when \\( x \\) is small. In both cases, the coefficients are computed directly from the generalized binomial coefficient (the same formula, with \\( \alpha \\) no longer restricted to a whole number).
 
-- - -
 ## Example 1
 
 A research team is made up of 7 scientists and 8 engineers. In how many ways can we form a working group consisting of 3 scientists and 4 engineers? To form the group, we must independently select 3 scientists from 7 and 4 engineers from 8. Since the two selections are independent, the total number of possible combinations is given by:
@@ -192,7 +179,6 @@ Now, compute each term:
 \binom{8}{4} = \frac{8 \times 7 \times 6 \times 5}{4 \times 3 \times 2 \times 1} = 70
 \\]
 
-- - -
 Therefore, by combining the possible selections of scientists and engineers, we obtain:
 
 \\[
@@ -201,7 +187,6 @@ N = 35 \times 70 = 2450
 
 >This means that, based on our group of scientists and engineers, we can form 2,450 distinct working teams composed of 3 scientists and 4 engineers.
 
-- - -
 ## Example 2
 
 Let’s now consider the same situation described in Example 1, but with an additional condition: if 2 engineers have a disagreement and cannot be assigned to the same group, how many valid combinations can be formed? We already know that the total number of possible groups, without any restriction, is 2450.
@@ -242,7 +227,6 @@ N_{\text{valid}} = N_{\text{total}} - N_{\text{invalid}} = 2450 - 525 = 1925
 
 There are 1,925 valid combinations if the two conflicting engineers cannot be assigned to the same group.
 
-- - -
 ## Recursion
 
 The binomial coefficient has a natural recursive structure: to count the ways to choose \\( k \\) elements from \\( n \\), it is enough to know the answers to two smaller versions of the same problem.
@@ -261,7 +245,6 @@ What makes this identity particularly useful in computing is that the recursion 
 
 > Note that recursion recalculates the same values multiple times. The computational cost grows quickly with \\( n, \\) a problem that memoization solves by storing intermediate results as they are computed. This trade-off between simplicity and efficiency is explored in depth in the analysis of Big O notation.
 
-- - -
 ## Foundation of the binomial distribution
 
 The binomial coefficient provides the foundation for the binomial distribution, which describes the probability of obtaining a specific number of successes in a fixed number of independent trials. If each trial has only two possible outcomes, success with probability \\( p \\) and failure with probability \\( q = 1 - p \\), the probability of observing exactly \\( x \\) successes in \\( n \\) trials is given by:

@@ -5,7 +5,6 @@
 
 Notable limits play a central role in mathematical analysis. They are used in calculations and help describe both the local behaviour of functions and their behaviour at infinity. The most important cases are collected below. They include trigonometric, exponential, and logarithmic expressions, as well as standard comparisons between quantities that grow without bound and those that tend to zero.
 
-- - -
 ## The trigonometric fundamental limit
 
 The most fundamental and structurally significant trigonometric limit is given by:
@@ -25,7 +24,6 @@ From this limit, it follows directly that for any real constant a we have:
 \\[\lim_{x \to 0} \frac{\sin(ax)}{ax} = 1\\]
 \\[\lim_{x \to 0} \frac{\sin(ax)}{x} = a\\]
 
-- - -
 ## The tangent limit
 
 To evaluate the tangent limit, consider the following identity:
@@ -46,7 +44,6 @@ More generally, for any real constant \\(a\\) we have:
 \lim_{x \to 0} \frac{\tan(ax)}{x} = a
 \\]
 
-- - -
 ## The cosine limit
 
 Quadratic, or second-order, behaviour emerges in the evaluation of this limit:
@@ -68,7 +65,6 @@ Dividing by \\(x^2\\) isolates the leading quadratic term and yields the limit. 
 \lim_{x \to 0} \frac{1 - \cos(ax)}{x^2} = \frac{a^2}{2}
 \\]
 
-- - -
 ## The exponential fundamental limit
 
 The exponential function exhibits first-order behaviour near the origin: the deviation from the constant 1 is linear in \\(x\\):
@@ -91,7 +87,6 @@ which follows by substituting \\(u = ax\\) and reducing to the standard form.
 
 > Here \\(n!\\) denotes the factorial of \\(n\\), defined as the product of all positive integers up to \\(n\\); in particular, \\(2! = 2\\).
 
-- - -
 ## The logarithmic fundamental limit
 
 For the natural logarithm, the following limit holds:
@@ -107,7 +102,6 @@ More generally, for any real constant \\(a\\) we have:
 \lim_{x \to 0} \frac{\ln(1+ax)}{x} = a
 \\]
 
-- - -
 ## Limits defining exponential functions
 
 A standard limit that defines Euler's number is given by:
@@ -126,7 +120,6 @@ More generally, for any real constant \\(a\\) we have:
 \lim_{x \to 0} (1 + ax)^{\frac{1}{x}} = e^{a}
 \\]
 
-- - -
 ## Limits involving power functions
 
 For any real exponent \\(\alpha\\) we have:
@@ -136,7 +129,6 @@ For any real exponent \\(\alpha\\) we have:
 
 This result may be derived using the binomial expansion when \\(\alpha\\) is rational, or by applying logarithmic differentiation in the general case.
 
-- - -
 ## Asymptotic equivalence
 
 The following notable limits illustrate local asymptotic relationships:
@@ -152,7 +144,6 @@ More precisely, the notation \\(f(x) \sim g(x)\\) as \\(x \to 0\\) indicates tha
 \\]
 Each of these relationships corresponds to the first nonzero term in the local Taylor expansion of a smooth function near a regular point. Consequently, these equivalences can be used to replace more complex expressions with simpler ones when evaluating limits.
 
-- - -
 ## Structural interpretation
 
 From an advanced perspective, remarkable limits serve as expressions of differentiability and local linearization. Every limit of the form:
@@ -161,7 +152,6 @@ From an advanced perspective, remarkable limits serve as expressions of differen
 
 corresponds to the definition of the derivative of \\(f\\) at the origin. Classical remarkable limits represent particular cases where this derivative can be calculated explicitly and then utilised as a foundational method for addressing more complex indeterminate forms.
 
-- - -
 ## Summary of the main remarkable limits
 
 |  |  |

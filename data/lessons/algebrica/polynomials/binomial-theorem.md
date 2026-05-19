@@ -23,7 +23,6 @@ In its compact form, the binomial theorem can be expressed as a summation of \\(
 (a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k
 \\]
 
-- - -
 ## Binomial coefficient
 
 The binomial coefficient represents the number of ways to choose \\(k\\) items from a set of \\(n\\) elements, without regard to the order of selection. In combinatorics it is commonly read as "n choose k" and is denoted by:
@@ -40,7 +39,6 @@ The binomial coefficient represents the number of ways to choose \\(k\\) items f
 - \\(k\\) is the number of items to be selected.
 - \\(n!\\) and \\((n-k)!\\) are the factorials of the natural numbers \\(n\\) and \\(n-k\\) respectively.
 
-- - -
 ## Proof
 
 There are two standard proofs of the theorem. The first is based on a combinatorial argument. The expansion of \\((a+b)^n\\) can be viewed as the product of \\(n\\) identical factors:
@@ -74,7 +72,6 @@ Applying Pascal's identity \\(\binom{n}{k} + \binom{n}{k-1} = \binom{n+1}{k}\\) 
 
 This is the statement of the binomial theorem for \\(n+1\\), which completes the induction.
 
-- - -
 ## Properties of the binomial expansion
 
 The binomial theorem gives rise to several identities that follow directly from specific choices of \\(a\\) and \\(b\\), or from structural features of the coefficients themselves.
@@ -107,7 +104,6 @@ T_{k+1} = \binom{n}{k} a^{n-k} b^k
 
 The index \\(k+1\\) reflects the position of the term in the expansion, since \\(k\\) ranges from \\(0\\) to \\(n\\) and the first term corresponds to \\(k = 0\\). This formulation is useful when a specific term of the expansion is required without computing the full sum.
 
-- - -
 ## Special cases
 
 Several classical identities arise as particular instances of the binomial theorem and are worth stating explicitly for their frequent use in algebraic manipulation.
@@ -136,7 +132,6 @@ This form is particularly important since it expresses \\((1+x)^n\\) as a polyno
 
 Setting \\(x = 1\\) in the previous identity recovers the sum of binomial coefficients already discussed, while setting \\(x = -1\\) yields the alternating sum. These two evaluations show how the special case \\((1+x)^n\\) encodes, in a single expression, the structural identities satisfied by the binomial coefficients.
 
-- - -
 ## Example 1
 
 Consider the expansion of \\((x + 2)^4\\) using the binomial theorem, with \\(a = x\\), \\(b = 2\\), and \\(n = 4\\). Applying the formula:
@@ -161,7 +156,6 @@ Summing all the terms, the expansion is:
 
 \\[(x+2)^4 = x^4 + 8x^3 + 24x^2 + 32x + 16\\]
 
-- - -
 ## Example 2
 
 For a binomial involving subtraction, the binomial theorem applies with \\(b\\) replaced by a negative value. The signs alternate in the expansion because \\((-1)^k\\) yields a positive value for even \\(k\\) and a negative value for odd \\(k\\). Consider the expansion of \\((x - 1)^5\\), where \\(a = x\\), \\(b = -1\\), and \\(n = 5\\):

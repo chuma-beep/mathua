@@ -31,7 +31,6 @@ a^2 + b^2 = c^2
 
 is satisfied, then the triangle is right-angled, and the right angle is the one opposite the side \\(c\\).
 
-- - -
 ## Applications
 
 The Pythagorean theorem can be applied whenever a figure admits a decomposition that isolates a right triangle. This makes it possible to determine the length of sides, diagonals or other segments belonging to the original figure. A first illustration is provided by the square shown below:
@@ -58,7 +57,6 @@ Denoting by \\(H\\) the foot of the height drawn from \\(C\\) to the base \\(AB\
 
 > The same principle extends to any figure that can be partitioned into right triangles, such as rectangles, rhombi or portions of trapezoids.
 
-- - -
 ## Pythagorean triples
 
 A Pythagorean triple is a set of three positive integers \\((a, b, c)\\) satisfying the relation:
@@ -80,7 +78,6 @@ The smallest examples are the following:
 
 A Pythagorean triple whose three entries are pairwise coprime is called a primitive triple. Every non-primitive triple is obtained by multiplying a primitive one by a positive integer, so that \\((6, 8, 10)\\) and \\((9, 12, 15)\\) are both non-primitive triples derived from \\((3, 4, 5)\\). All primitive triples are therefore Pythagorean, but the converse does not hold.
 
-- - -
 ## Pythagorean identity on the unit circle
 
 On the unit circle, the sine and cosine of an angle \\(\theta\\) admit a direct geometric interpretation. Dropping a perpendicular from the point on the circle identified by \\(\theta\\) to the horizontal axis produces a right triangle whose hypotenuse is the radius, whose horizontal leg has length \\(\cos\theta\\) and whose vertical leg has length \\(\sin\theta\\).
@@ -93,7 +90,6 @@ Applying the Pythagorean theorem to this triangle, with legs of length \\(\sin\t
 
 The identity therefore holds for every real \\(\theta\\) and is simply the Pythagorean theorem expressed in trigonometric form. The law of cosines generalises this relation to arbitrary triangles, reducing to the Pythagorean theorem when the angle between the two known sides is right, while the law of sines expresses a different link between sides and opposite angles and is used to solve triangles in which a side-angle pair is known.
 
-- - -
 ## Modulus of a complex number
 
 A complex number can be written in the algebraic form:

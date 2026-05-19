@@ -18,7 +18,6 @@ The quantities appearing in this expression have the following meaning:
 
 > The point \\( P \\) can be represented either in rectangular coordinates \\( (a, b) \\) or in polar coordinates \\( (r, \theta) \\). This duality highlights the connection between the algebraic and geometric perspectives of complex numbers.
 
----
 
 The equation \\(z = r e^{i\theta}\\) follows directly from Euler's formula:
 
@@ -34,7 +33,6 @@ e^{ix} = \sum_{n=0}^{\infty} \frac{(ix)^n}{n!} = \cos x + i\sin x
 
 > The formula involves Euler's number \\( e \\), a fundamental constant in mathematics. To understand its origin, one may consult the topic Euler's number as the limit of a sequence, where it arises as the limit of a sequence. Geometrically, this corresponds to a reflection of \\( z \\) across the real axis in the complex plane.
 
----
 
 Given the complex number \\( z = a + bi \\), its complex conjugate is defined as:
 
@@ -44,7 +42,6 @@ In exponential form, the conjugate of \\( z = r e^{i\theta} \\) is obtained by n
 
 \\[\overline{z} = r e^{-i\theta}\\]
 
-- - -
 ## How to express a complex number in exponential form
 
 Given a complex number \\( z = a + bi \\), the conversion to exponential form proceeds as follows.
@@ -59,7 +56,6 @@ When \\( a \leq 0 \\), the quadrant of \\( z \\) must be taken into account to s
 + Write \\( z \\) in exponential form by applying Euler's formula:
 \\[z = r e^{i\theta}\\]
 
-- - -
 
 The argument of a complex number is not uniquely determined: if \\( \theta \\) is an argument of \\( z \\), then so is \\( \theta + 2k\pi \\) for any integer \\( k \\). More precisely, one has:
 
@@ -74,7 +70,6 @@ The exponential representation is therefore not unique; it is defined modulo \\(
 
 Unless otherwise stated, the argument is understood to mean the principal argument.
 
-- - -
 ## Example 1
 
 Consider the complex number \\( z = 2 + 3i \\) and its conversion to exponential form. The modulus is computed by applying the definition directly. Since \\( a = 2 \\) and \\( b = 3 \\), one obtains:
@@ -96,7 +91,6 @@ Substituting \\( r = \sqrt{13} \\) and \\( \theta \approx 0.98 \\) into the expo
 z = \sqrt{13}\\, e^{\\,i \cdot 0.98}
 \\]
 
-- - -
 ## Example 2
 
 Consider the complex number \\( z = -1 + i \\) and its conversion to exponential form. The modulus is computed by applying the definition. Since \\( a = -1 \\) and \\( b = 1 \\), one obtains:
@@ -122,7 +116,6 @@ Substituting \\( r = \sqrt{2} \\) and \\( \theta = \dfrac{3\pi}{4} \\) into the 
 z = \sqrt{2}\\, e^{\\,i \frac{3\pi}{4}}
 \\]
 
-- - -
 ## Properties of the exponential form
 
 One of the principal advantages of the exponential form is the simplicity it confers on multiplication, division, and exponentiation of complex numbers. Given two complex numbers \\( z_1 = r_1 e^{i\theta_1} \\) and \\( z_2 = r_2 e^{i\theta_2} \\), their product is obtained by multiplying the moduli and adding the arguments:
@@ -136,7 +129,6 @@ z_1 z_2 = 2 \cdot 3\\, e^{i(\pi/3 + \pi/6)} = 6\\, e^{i\pi/2}
 \\]
 The modulus of the product is \\( 6 \\) and its argument is \\( \pi/2 \\), corresponding to the imaginary unit direction in the complex plane.
 
-- - -
 
 Similarly, provided \\( z_2 \neq 0 \\), the quotient is obtained by dividing the moduli and subtracting the arguments:
 \\[
@@ -157,7 +149,6 @@ z^2 = r^2 e^{i2\theta}
 
 The resulting complex number has modulus \\( r^2 \\) and argument \\( 2\theta \\). Ggeometrically, the vector is stretched by a factor of \\( r^2 \\) and rotated to twice its original angle.
 
-- - -
 ## Roots in exponential form
 
 The exponential form provides a natural framework for computing the \\( n \\)-th roots of a complex number. Given \\( z = re^{i\theta} \\), the solutions of the equation \\(w^n = z\\) are exactly \\( n \\) distinct complex numbers, given by:
@@ -165,7 +156,6 @@ The exponential form provides a natural framework for computing the \\( n \\)-th
 \\[k = 0, 1, \ldots, n-1\\]
 The modulus of each root is \\( \sqrt[n]{r} \\), while the arguments are equally spaced by \\( 2\pi/n \\). Geometrically, the \\( n \\) roots correspond to the vertices of a regular polygon inscribed in a circle of radius \\( \sqrt[n]{r} \\) in the complex plane.
 
-- - -
 
 As an illustration, consider the cube roots of \\( z = 8 \\). Writing \\( z = 8e^{i \cdot 0} \\), one has \\( r = 8 \\) and \\( \theta = 0 \\), so the three roots are:
 

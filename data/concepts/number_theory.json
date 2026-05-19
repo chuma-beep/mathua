@@ -1,6 +1,6 @@
 [
   {
-    "id": "nt.divisibility",
+    "id": "nt.basics.divisibility",
     "label": "Divisibility rules",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
@@ -14,7 +14,7 @@
     }
   },
   {
-    "id": "nt.gcd_euclidean",
+    "id": "nt.basics.gcd_euclidean",
     "label": "Euclidean algorithm for GCD",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
@@ -29,13 +29,13 @@
     }
   },
   {
-    "id": "nt.modular",
+    "id": "nt.basics.modular",
     "label": "Modular arithmetic",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
     "grading_type": "numeric",
     "prerequisites": [
-      "nt.divisibility",
+      "nt.basics.divisibility",
       "arith.neg.mult_div"
     ],
     "mastery_threshold": {
@@ -44,13 +44,13 @@
     }
   },
   {
-    "id": "nt.congruence",
+    "id": "nt.basics.congruence",
     "label": "Congruence relations",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "nt.modular"
+      "nt.basics.modular"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -58,13 +58,13 @@
     }
   },
   {
-    "id": "nt.fermat_little",
+    "id": "nt.adv.fermat_little",
     "label": "Fermat's little theorem",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
     "grading_type": "numeric",
     "prerequisites": [
-      "nt.congruence",
+      "nt.basics.congruence",
       "arith.exp.evaluate"
     ],
     "mastery_threshold": {
@@ -73,13 +73,13 @@
     }
   },
   {
-    "id": "nt.euler_phi",
+    "id": "nt.adv.euler_phi",
     "label": "Euler's totient function",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
     "grading_type": "numeric",
     "prerequisites": [
-      "nt.fermat_little",
+      "nt.adv.fermat_little",
       "arith.factor.prime_fact"
     ],
     "mastery_threshold": {
@@ -88,13 +88,13 @@
     }
   },
   {
-    "id": "nt.diophantine",
+    "id": "nt.adv.diophantine",
     "label": "Linear Diophantine equations",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
     "grading_type": "multiple_choice",
     "prerequisites": [
-      "nt.gcd_euclidean",
+      "nt.basics.gcd_euclidean",
       "alg.eq.vars_both_sides"
     ],
     "mastery_threshold": {
@@ -103,13 +103,13 @@
     }
   },
   {
-    "id": "nt.crypto",
+    "id": "nt.app.crypto",
     "label": "Introduction to RSA cryptography",
     "domain": "number_theory",
     "subdomain": "number_theory.applications",
     "grading_type": "numeric",
     "prerequisites": [
-      "nt.euler_phi"
+      "nt.adv.euler_phi"
     ],
     "mastery_threshold": {
       "streak": 10,

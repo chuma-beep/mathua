@@ -17,7 +17,6 @@ The rank of a matrix \\( A \\) equals the dimension of the image of the associat
 
 > The rank is one of the most fundamental invariants of a matrix. It determines the solvability of systems of linear equations via the Rouché-Capelli theorem, and it coincides with the condition \\( r(A) = n \\) for a square matrix to be invertible
 
-- - -
 ## Submatrices and minors
 
 A submatrix of a matrix \\( A \\in M_{m,n}(\\mathbb{R}) \\) is any matrix obtained by selecting \\( k \\) rows and \\( h \\) columns from \\( A \\), preserving the original order of elements, with \\( k \\leq m \\) and \\( h \\leq n \\). For example, selecting rows 1 and 3 and columns 1, 2, and 4 from a \\( 3 \\times 4 \\) matrix \\( A \\) yields the \\( 2 \\times 3 \\) submatrix:
@@ -31,7 +30,6 @@ a_{31} & a_{32} & a_{34}
 
 A minor of order \\( p \\) of a matrix \\( A \\) is the determinant of a square submatrix of size \\( p \\times p \\) extracted from \\( A \\). Since the determinant is defined only for square matrices, only square submatrices give rise to minors.
 
-- - -
 ## Definition via minors
 
 The rank of a matrix \\( A \\) is the largest integer \\( r \\) such that at least one minor of order \\( r \\) is nonzero. Equivalently, all minors of order \\( r+1 \\) are zero.
@@ -58,7 +56,6 @@ Since there exists a nonzero minor of order 2 and all minors of order 3 are zero
 r(A) = 2
 \\]
 
-- - -
 ## Computing the rank via Gaussian elimination
 
 For matrices of large order, computing all minors is impractical. The standard computational method is Gaussian elimination: reduce \\( A \\) to row echelon form by applying elementary row operations, which do not change the rank. The rank equals the number of nonzero rows in the reduced matrix. Consider the matrix from the previous example:
@@ -93,7 +90,6 @@ Swapping the second and third rows:
 
 The row echelon form has 2 nonzero rows, confirming \\( r(A) = 2 \\).
 
-- - -
 ## Properties of the rank
 
 - \\( r(A) = 0 \\) if and only if \\( A \\) is the zero matrix.

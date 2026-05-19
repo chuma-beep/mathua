@@ -24,12 +24,12 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.det.2x2", &det2x2Gen{})
 	reg.Register("linalg.det.3x3", &det3x3Gen{})
 	reg.Register("linalg.systems.matrix", &systemsMatrixGen{})
-	reg.Register("linalg.cramer", &cramerGen{})
+	reg.Register("linalg.sys.cramer", &cramerGen{})
 	reg.Register("linalg.eigen.concept", &eigenConceptGen{})
 	reg.Register("linalg.eigen.compute", &eigenComputeGen{})
-	reg.Register("linalg.transformations", &transformationsGen{})
-	reg.Register("linalg.span", &spanGen{})
-	reg.Register("linalg.basis", &basisGen{})
+	reg.Register("linalg.lintrans.concept", &transformationsGen{})
+	reg.Register("linalg.vec.span", &spanGen{})
+	reg.Register("linalg.vec.basis", &basisGen{})
 }
 
 type vectorConceptGen struct{}

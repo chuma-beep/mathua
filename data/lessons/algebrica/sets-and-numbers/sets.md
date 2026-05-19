@@ -18,7 +18,6 @@ A = \\{5, 6, 7, 8\\}
 \\]
 The empty set is the set that contain no elements, is denoted by \\(\emptyset\\) or \\(\\{\\}\\) and serves a role in set theory analogous to that of zero in arithmetic.
 
-- - -
 
 ## The universal set
 
@@ -26,7 +25,6 @@ Often, we specify a main collection containing all objects we are considering, c
 
 > The universal set is a way to define the concept of set complement unambiguously as illustrated in the section on set operations.
 
-- - -
 
 ## Cardinality of finite sets
 
@@ -70,7 +68,6 @@ In this case:
 + Elements shared by two sets are added twice and subtracted once, giving a net contribution of one.
 + Elements lying in all three sets are added three times, subtracted three times, and added back once through the triple intersection, again producing a net contribution of one.
 
-- - -
 
 ## Subsets and power sets
 
@@ -94,7 +91,6 @@ The power set of a set \\(A\\) is the set of all subsets of \\(A\\) and is denot
 \mathcal{P}(A) = \\{\emptyset, \\, \\{a\\}, \\, \\{b\\}, \\, \\{c\\}, \\, \\{a,b\\}, \\, \\{a,c\\}, \\, \\{b,c\\}, \\, \\{a,b,c\\}\\}
 \\]
 
-- - -
 
 ## Partitions
 
@@ -115,7 +111,6 @@ Partitions are related to equivalence relations. Given an equivalence relation o
 * The equivalence classes it induces form a partition of \\(A\\).
 * Any partition of \\(A\\) defines an equivalence relation by declaring two elements equivalent whenever they belong to the same block.
 
-- - -
 
 ## Set operations
 
@@ -165,7 +160,6 @@ A \triangle B = (A \cup B) \setminus (A \cap B)
 
 The symmetric difference is commutative and associative, and satisfies \\(A \triangle A = \emptyset\\) and \\(A \triangle \emptyset = A\\). Together with intersection, it gives the collection of all subsets of a given set the structure of a boolean ring.
 
-- - -
 
 ## Properties of set operations
 
@@ -258,7 +252,6 @@ There exists a relation between the algebraic structure of sets and that of the 
 \neg(P \land Q) \equiv \neg P \lor \neg Q
 \\]
 
-- - -
 
 ## Example
 
@@ -337,7 +330,6 @@ The same result can be obtained through the equivalent characterisation that use
 \end{align}
 \\]
 
-- - -
 
 ## Cartesian product
 
@@ -363,7 +355,6 @@ A_1 \times A_2 \times \cdots \times A_n = \\{(a_1, a_2, \ldots, a_n) \mid a_i \i
 
 An \\(n\\)-tuple \\((a_1, \ldots, a_n)\\) is an ordered sequence of \\(n\\) elements, and two \\(n\\)-tuples are equal if and only if all corresponding components are equal. If all sets are identical, that is, \\(A_i = A\\) for every \\(i\\), the product is \\(A^n\\). The space \\(\mathbb{R}^n\\) is the \\(n\\)-fold Cartesian product of \\(\mathbb{R}\\) with itself, and its elements are \\(n\\)-tuples of real numbers.
 
-- - -
 
 ## The ordered pair
 

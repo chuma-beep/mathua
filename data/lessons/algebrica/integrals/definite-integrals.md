@@ -13,7 +13,6 @@ When \\( f(x) \\) is continuous on \\( [a, b] \\), this region is called a curvi
 
 Its area cannot be determined by the standard formulas of elementary geometry, since one of its sides is a curve rather than a straight segment.
 
-- - -
 ## Approximating area with rectangular sums
 
 The area of the curvilinear trapezoid can be approximated by dividing the interval \\( [a, b] \\) into \\( n \\) subintervals of equal width:
@@ -42,7 +41,6 @@ This common limit is the definite integral of \\( f(x) \\) over \\( [a, b] \\):
 
 This approach, based on the convergence of lower and upper sums, is known as the Riemann definition of the integral. The values \\( a \\) and \\( b \\) are called the lower and upper limits of integration, and \\( f(x) \\) is the integrand. Geometrically, \\( f(x) \\) and \\( dx \\) represent the height and the base of the infinitesimal rectangles whose areas are summed in the limit.
 
-- - -
 ## Computing definite integrals
 
 If \\( f(x) \\) is a continuous function on \\( [a, b] \\) and \\( F(x) \\) is any antiderivative of \\( f(x) \\), then:
@@ -58,7 +56,6 @@ This formula is the conclusion of the Second Fundamental Theorem of Calculus. Th
 
 then \\( F'(x) = f(x) \\), making differentiation and integration inverse operations in a precise sense. Both results are covered in the dedicated page on the Fundamental Theorem of Calculus.
 
-- - -
 ## Properties
 
 When the two extremes of integration coincide, the integral is zero:
@@ -79,7 +76,6 @@ If \\( k \\) is a constant, a constant factor can be moved outside the integral:
 
 \\[\int_{a}^{b} k \cdot f(x) \\, dx = k \int_{a}^{b} f(x) \\, dx\\]
 
-- - -
 
 The integral is additive over sums of functions:
 
@@ -95,7 +91,6 @@ If \\( f(x) \leq g(x) \\) for every \\( x \in [a, b] \\), then:
 
 > This is known as the comparison property of integrals. Geometrically, it states that the area under \\( f \\) does not exceed the area under \\( g \\) over the same interval.
 
-- - -
 ## Mean Value Theorem for Integrals
 
 If \\( f(x) \\) is continuous on \\( [a, b] \\), then there exists at least one point \\( c \in (a, b) \\) such that:
@@ -108,7 +103,6 @@ The value \\( f\(c\) \\) is the average value of the function over the interval.
 
 > The Mean Value Theorem for Integrals is the integral counterpart of Lagrange's Mean Value Theorem. While the latter guarantees a point where the instantaneous rate of change equals the average rate of change, this theorem guarantees a point where the function value equals the average value over the interval.
 
-- - -
 ## Example 1
 
 Compute the following definite integral:
@@ -140,7 +134,6 @@ The area of the region bounded by the graph of \\( f(x) = 3x - x^2 \\) and the x
 
 > This is just a simple example that generally shows the procedure for calculating definite integrals. Very often, integrals are not so straightforward to compute, and it is necessary to resort to other solving methods such as substitution and integration by parts.
 
-- - -
 ## Example 2
 
 Compute the following definite integral:
@@ -149,7 +142,6 @@ Compute the following definite integral:
 
 > This example combines a polynomial term with a trigonometric function. For a review of the relevant antiderivatives, see the page on integrals of trigonometric functions.
 
-- - -
 
 Applying linearity:
 
@@ -173,7 +165,6 @@ The area of the region bounded by the graph of \\( f(x) = x + \sin x \\) and the
 \frac{\pi^2}{2} + 2
 \\]
 
-- - -
 ## Handling definite integrals with positive and negative areas
 
 The interpretation of the definite integral as an area holds when \\( f(x) \geq 0 \\) throughout \\( [a, b] \\). When \\( f(x) \\) changes sign within the interval, the integral assigns a negative value to the portions of the region lying below the x-axis, so the result is an oriented area rather than a geometric one.
@@ -204,7 +195,6 @@ For an odd function, where the oriented integral vanishes, the geometric area is
 
 \\[S = 2\int_{0}^{a} |f(x)| \\, dx\\]
 
-- - -
 ## Improper integrals
 
 Everything covered on this page assumes that the interval \\( [a, b] \\) is finite and that \\( f(x) \\) remains bounded throughout. These conditions are not always satisfied: it is common to encounter integrals over unbounded intervals, or functions that diverge at some point in the domain.

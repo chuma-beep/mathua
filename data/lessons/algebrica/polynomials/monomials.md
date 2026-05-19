@@ -15,7 +15,6 @@ a \cdot x_1^{n_1} \cdot x_2^{n_2} \cdot \dots \cdot x_k^{n_k}
 
 The zero monomial is the special case where \\(a = 0\\). It is considered a monomial but its degree is left undefined.
 
-- - -
 
 Examples of monomials include:
 
@@ -28,11 +27,9 @@ A monomial in \\(k\\) variables can be viewed as an element of the polynomial ri
 
 > A ring is an algebraic structure with two operations, addition and multiplication, that satisfy associativity, distributivity, and the existence of an additive identity and additive inverses.
 
-- - -
 
 A polynomial is called homogeneous if all its terms have the same total degree. Since a monomial consists of a single term, every monomial is homogeneous by definition. The monomials of degree \\(d\\) in \\(k\\) variables form a basis for the \\(\mathbb{R}\\) vector space of homogeneous polynomials of degree \\(d\\). For example, \\(x^2, xy, y^2\\) form a basis for the space of homogeneous polynomials of degree \\(2\\) in two variables.
 
-- - -
 ## Why exponents in a monomial must be non-negative integers
 
 The constraint that exponents be non-negative integers follows directly from the definition of a polynomial: each variable must appear with an exponent in \\(\mathbb{N}\_0\\). This ensures that a monomial represents a finite product of variables, with no divisions or radicals involved. The following expressions are not monomials:
@@ -45,7 +42,6 @@ In the first case, \\(x^{-1} = 1/x\\), a negative exponent introduces a division
 In the second, \\(x^{1/2} = \sqrt{x}\\), a fractional exponent introduces a radical.
 The third case, \\(4/x = 4x^{-1}\\), is simply a negative exponent in disguise.
 
-- - -
 ## Degree of a monomial
 
 The degree of a monomial is the sum of the exponents of all its variables. For the monomial \\( ab^2c^3 \\), the exponents are \\(1\\), \\(2\\), and \\(3\\), so its degree is:
@@ -54,13 +50,11 @@ The degree of a monomial is the sum of the exponents of all its variables. For t
 
 The degree of a non-zero constant is \\(0\\), since no variables are present. The zero monomial has no defined degree.
 
----
 
 The partial degree of a monomial with respect to a given variable is the exponent of that variable. For the monomial \\(3x^2y^3\\), the partial degree in \\(x\\) is \\(2\\) and the partial degree in \\(y\\) is \\(3\\). The total degree is the sum of all partial degrees:
 
 \\[2 + 3 = 5\\]
 
-- - -
 
 The total number of monomials of degree \\(d\\) in \\(k\\) variables can be determined using the following binomial coefficient:
 
@@ -68,7 +62,6 @@ The total number of monomials of degree \\(d\\) in \\(k\\) variables can be dete
 
 For instance, the monomials of degree \\(2\\) in \\(2\\) variables are \\(x^2\\), \\(xy\\), and \\(y^2\\). This corresponds to: \\[\binom{2+2-1}{2-1} = \binom{3}{1} = 3\\]
 
-- - -
 ## Similar, opposite and equal monomials
 
 Two monomials are defined as similar if they possess identical variable parts, meaning the same variables raised to the same exponents. For example, \\( 3x^2y \\) and \\( -5x^2y \\) are similar monomials.
@@ -77,7 +70,6 @@ Two monomials are considered opposite if they are similar and their coefficients
 
 Two monomials are defined as equal if they have both the same variable part and the same coefficient. Formally, two monomials are equal if and only if they are similar and their coefficients are equal.
 
-- - -
 ## Addition and subtraction of monomials
 
 In polynomial algebra, the addition or subtraction of monomials is governed by specific rules. Monomials may be combined only if their variables and corresponding exponents are identical. In these cases, the coefficients are added or subtracted, while the variables and exponents remain unchanged. For example:
@@ -86,7 +78,6 @@ In polynomial algebra, the addition or subtraction of monomials is governed by s
 
 For the expression \\(3x^2 + 2x\\), the monomials cannot be combined because they have different variable parts.
 
-- - -
 ## Product of monomials
 
 Monomials can be multiplied by multiplying their coefficients and adding the exponents of the like variables. For instance, the product of \\( (3x^2)(2x^3) \\) can be computed as follows:
@@ -102,17 +93,14 @@ The same rule applies to monomials with multiple variables: multiply the coeffic
 
 \\[(3x^2y)(2xy^3) = 6x^{2+1}y^{1+3} = 6x^3y^4 \\]
 
-- - -
 
 The product of monomials is both commutative and associative, since multiplication in \\(\mathbb{R}[x_1, \dots, x_k]\\) inherits these properties from \\(\mathbb{R}\\). This means the order and grouping of factors does not affect the result:
 
 \\[(3x^2y)(2xy^3) = (2xy^3)(3x^2y) = 6x^3y^4\\]
 
-- - -
 
 The set of all monomials in \\(k\\) variables with coefficients in \\(\mathbb{R}\\) is closed under multiplication, as the product of any two monomials yields another monomial. Consequently, the monomials constitute a multiplicative semigroup within the polynomial ring \\(\mathbb{R}[x\_1, \dots, x\_k].\\)
 
-- - -
 ## Division of monomials
 
 To divide monomials, divide their coefficients and subtract the exponents of like variables. For example:
@@ -129,7 +117,6 @@ If the exponent in the divisor is greater than that in the dividend, the result 
 
 Dividing monomials is straightforward when the bases are the same. In contrast, dividing polynomials is more complex and requires structured methods such as long division or Ruffini's rule.
 
-- - -
 ## Powers
 
 When a monomial is raised to a power, the exponent applies to each factor: the coefficient is raised to that power, and the exponents of the variables are multiplied by it. For a monomial raised to a positive integer power \\(n\\):
@@ -146,7 +133,6 @@ The same rule extends to monomials in multiple variables:
 
 When \\(n = 0\\), any non-zero monomial raised to the zeroth power equals \\(1\\), since \\(a^0 = 1\\) and \\(x_i^{0} = 1\\) for all \\(i\\).
 
-- - -
 ## GCD and LCM of monomials
 
 The greatest common divisor (GCD) of two or more monomials is defined as the monomial with the largest coefficient that divides all given coefficients and the smallest exponent for each variable present in all monomials. In contrast, the least common multiple (LCM) is the monomial with the smallest coefficient divisible by all given coefficients and the largest exponent for each variable present in any of the monomials.

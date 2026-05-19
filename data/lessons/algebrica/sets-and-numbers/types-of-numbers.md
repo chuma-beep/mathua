@@ -12,7 +12,6 @@ Numbers organized into nested families, each extending the previous one to accom
 
 The structure of these sets reflects how each extension resolves a limitation of the previous one, until \\(\mathbb{C}\\) is reached, within which every polynomial equation has a solution.
 
-- - -
 ## Natural numbers
 
 The set of natural numbers, denoted by \\(\mathbb{N}\\), is the collection of non-negative integers used to count discrete quantities.
@@ -28,7 +27,6 @@ Each element is obtained by adding one to the previous, starting from \\(0\\). B
 
 From a foundational point of view, \\(\mathbb{N}\\) is the smallest inductive set contained in \\(\mathbb{R}\\): it contains \\(0\\) and, whenever it contains an element \\(n\\), it also contains \\(n+1\\). This property is the basis of the principle of mathematical induction.
 
-- - -
 ## Integer numbers
 
 The set of integers, denoted by \\(\mathbb{Z}\\), extends \\(\mathbb{N}\\) by adjoining a negative counterpart to every positive natural number:
@@ -45,7 +43,6 @@ Every integer is either positive, negative, or zero. The set \\(\mathbb{Z}\\) ca
 
 The passage from \\(\mathbb{N}\\) to \\(\mathbb{Z}\\) makes subtraction always well-defined: for any \\(a, b \in \mathbb{Z}\\) the difference \\(a - b\\) is again an integer. A dedicated entry covers the properties of integers in detail.
 
-- - -
 ## Rational numbers
 
 The set of rational numbers, denoted by \\(\mathbb{Q}\\), consists of all numbers that can be expressed as a ratio of two integers with a nonzero denominator:
@@ -62,7 +59,6 @@ Every integer is rational, since any \\(n \in \mathbb{Z}\\) can be written as \\
 
 The passage from \\(\mathbb{Z}\\) to \\(\mathbb{Q}\\) makes division by any nonzero integer always well-defined.
 
-- - -
 ## Irrational numbers
 
 A real number is called irrational if it cannot be expressed as a ratio of two integers. The set of irrational numbers is denoted by \\(\mathbb{I}\\), and it satisfies \\(\mathbb{R} = \mathbb{Q} \cup \mathbb{I}\\) with \\(\mathbb{Q} \cap \mathbb{I} = \emptyset\\). The decimal expansion of an irrational number is non-terminating and non-periodic. Familiar examples include the following.
@@ -73,7 +69,6 @@ A real number is called irrational if it cannot be expressed as a ratio of two i
 
 The irrationality of \\(\sqrt{2}\\) is one of the oldest results in mathematics and admits a concise proof by contradiction. Assuming \\(\sqrt{2} = p/q\\) in lowest terms leads to the conclusion that both \\(p\\) and \\(q\\) are even, contradicting the assumption. The numbers \\(\pi\\) and \\(e\\) are irrational but belong to a further distinguished class: they are transcendental, meaning they are not roots of any nonzero polynomial with rational coefficients.
 
-- - -
 ## Real numbers
 
 The set of real numbers, denoted by \\(\mathbb{R}\\), is the union of the rational and irrational numbers.
@@ -97,7 +92,6 @@ In this representation, the components are interpreted as follows:
 
 For rational numbers the decimal expansion is eventually periodic. For irrational numbers it is non-terminating and non-periodic.
 
-- - -
 
 Geometrically, \\(\mathbb{R}\\) corresponds to the points of a continuous straight line, the real number line, with no gaps.
 
@@ -109,7 +103,6 @@ A further structural distinction separates \\(\mathbb{Q}\\) from \\(\mathbb{R}\\
 
 Since zero carries no sign, it does not belong to either the positive or negative reals. For this reason the following terminology is standard: a non-negative real number satisfies \\(x \geq 0\\), while a non-positive real number satisfies \\(x \leq 0\\).
 
-- - -
 ## Algebraic and transcendental numbers
 
 A real number is called algebraic if it is a root of some nonzero polynomial with rational coefficients, and transcendental otherwise. The set of algebraic numbers is denoted by \\(\mathbb{A}\\), and every real number belongs to exactly one of the two classes:
@@ -127,7 +120,6 @@ The transcendental numbers are the real numbers that lie outside \\(\mathbb{A}\\
 
 > The set \\(\mathbb{A}\\) is countable, because the polynomials with rational coefficients form a countable family and each polynomial has finitely many roots. Since \\(\mathbb{R}\\) is uncountable, the transcendental numbers form an uncountable set, and in this sense almost every real number is transcendental, even though explicit examples are comparatively rare.
 
-- - -
 ## Complex numbers
 
 The set of complex numbers, denoted by \\(\mathbb{C}\\), extends \\(\mathbb{R}\\) by introducing an element \\(i\\) satisfying \\(i^2 = -1\\). Every complex number takes the form

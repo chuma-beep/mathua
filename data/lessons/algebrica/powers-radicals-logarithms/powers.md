@@ -8,7 +8,6 @@ Powers are mathematical operations that show how many times a number is to be mu
 
 > From a geometric perspective, when considering a positive number \\( a \\), it can be observed that the expressions \\( a^2 \\) and \\( a^3 \\) respectively denote the area of a square with its side length being \\( a \\) and the volume of a cube with its edge length being \\( a \\).
 
-- - -
 
 The value of the exponent \\( n \\) can be positive, negative, or zero. When the exponent is negative, it indicates a reciprocal relationship between powers, expressed as follows:
 \\[a^{-n} = \frac{1}{a^{n}}\\]
@@ -18,7 +17,6 @@ This expression represents the \\(m\\)-th root of \\( a \\). By combining both c
 \\[a^{-\frac{1}{m}} = \frac{1}{\sqrt[m]{a}}\\]
 This unified notation allows exponents to represent both powers and roots, simplifying many algebraic expressions and making exponent rules consistent across different cases.
 
-- - -
 
 The table below illustrates selected values of \\(a^n\\). Each row corresponds to a fixed base \\(a\\) and each column to a fixed exponent \\(n\\).
 
@@ -35,7 +33,6 @@ The table below illustrates selected values of \\(a^n\\). Each row corresponds t
 
 If the base \\( a \\) is negative, the sign of \\( a^n \\) alternates according to the parity of \\( n \\). For instance, \\( (-1)^n = 1 \\) when \\( n \\) is even, and \\( (-1)^n = -1 \\) when \\( n \\) is odd. This alternating behaviour is particularly significant in the analysis of sequences and limits. Additionally, negative bases with fractional exponents must be treated carefully, since expressions such as \\( (-1)^{1/2} \\) are not defined in \\( \mathbb{R} \\).
 
-- - -
 ## Powers with real exponents
 
 The definition \\( a^n \\) in \\(1\\) is valid only for positive integers \\( n \\), but the idea of repeated multiplication does not work when the exponent is not an integer. Extending this concept to real exponents necessitates a different approach, one based on the exponential function and the natural logarithm. For any positive base \\( a > 0 \\) and real exponent \\( x \in \mathbb{R} \\), the power \\( a^x \\) is defined as follows.
@@ -48,7 +45,6 @@ This confirms that the exponential definition reduces to the usual radical inter
 \\[2^{\sqrt{2}} = e^{\sqrt{2} \ln 2} \approx e^{0.9803} \approx 2.665\\]
 This value is well-defined and can be approximated to any specified degree of precision. This definition also explains why the base must satisfy \\( a > 0 \\). If \\( a \leq 0 \\), the expression \\( \ln a \\) is undefined in \\( \mathbb{R} \\), and the extension fails. This is consistent with the earlier observation that negative bases with fractional exponents do not yield real numbers. As a result, the function \\( f(x) = a^x \\) is continuous and differentiable for all real numbers when \\( a > 0 \\).
 
-- - -
 ## Fundamental rules of powers
 
 The following rules govern the manipulation of expressions involving powers. They hold for real bases and exponents under the conditions specified in each case.
@@ -56,7 +52,6 @@ The following rules govern the manipulation of expressions involving powers. The
 Raising any base not equal to zero to an exponent of zero always results in \\(1\\). The value of \\(a\\) is restricted because the operation \\(0^0\\) is meaningless and considered an indeterminate form.
 \\[a^0 = 1 \quad \text{if} \quad a \neq 0\\]
 
-- - -
 
 Any power of zero always results in zero because it corresponds to the product of \\( n \\) zeros, where \\( n \\) is the exponent:
 \\[0^n = 0 \quad \text{for } n > 0\\]
@@ -67,7 +62,6 @@ The form \\( 0^0 \\) is therefore left undefined in the context of limits. More 
 
 > In combinatorics and algebra, however, it is conventionally assigned the value \\( 1 \\), since it arises naturally in expressions such as the binomial theorem.
 
-- - -
 
 The product of two or more powers with the same base \\(a\\) is a power with the same base and exponent equal to the sum of the exponents:
 \\[a^n \cdot a^m = a^{n+m}\\]
@@ -76,14 +70,12 @@ To see why this holds, observe that \\( a^n \\) represents the product of \\( n 
 This reasoning applies directly to positive integer exponents, as it relies on counting factors. For integer, rational, or real exponents, the same result follows from the definition \\( a^x = e^{x \ln a} \\). Since the exponential function satisfies \\( e^u \cdot e^v = e^{u+v} \\), we have the following:
 \\[a^n \cdot a^m = e^{n \ln a} \cdot e^{m \ln a} = e^{(n+m) \ln a} = a^{n+m}\\]
 
-- - -
 
 The product of powers with different bases \\(a\\) and \\(b\\) but the same exponent \\(n\\) is a power whose base is the product of the original bases.
 \\[a^{n} \cdot b^n = (ab)^n\\]
 
 > Consider the expression \\(2^3 \cdot 5^3\\). Since both factors share the same exponent, they can be combined into a single power of the product of the bases, giving \\(2^3 \cdot 5^3 = (2 \cdot 5)^3 = 10^3\\).
 
-- - -
 
 The quotient of two powers with the same base \\(a\\) is a power with the same base and exponent equal to the difference between the exponents.
 \\[\frac{a^n}{a^m} = a^{n-m}\\]
@@ -91,33 +83,28 @@ This follows directly from the product rule already established. Dividing by \\(
 \\[\frac{a^n}{a^m} = a^n \cdot a^{-m} = a^{n+(-m)} = a^{n-m}\\]
 The condition \\(a \neq 0\\) is required for \\(a^{-m}\\) to be defined.
 
-- - -
 
 The quotient of powers with different bases \\(a\\) and \\(b\\) but the same exponent \\(n\\) is a power whose base is the quotient of the original bases.
 \\[\frac{a^n}{b^n} = \left(\frac{a}{b}\right)^n\\]
 
 > Consider the expression \\(\dfrac{6^3}{2^3}\\). Since both terms share the same exponent, the quotient can be rewritten as a single power of the ratio of the bases, giving \\(\dfrac{6^3}{2^3} = \left(\dfrac{6}{2}\right)^3 = 3^3 = 27\\).
 
-- - -
 
 The power of a power is a power with the same base and exponent equal to the product of the two exponents.
 \\[(a^m)^n = a^{m \cdot n}\\]
 
 > Consider the expression \\((2^3)^4\\). Applying the rule for the power of a power, the two exponents are multiplied, giving \\((2^3)^4 = 2^{3 \cdot 4} = 2^{12}\\).
 
-- - -
 
 When a base \\(a\\) is raised to a negative exponent, the result is the reciprocal of the same base raised to the corresponding positive exponent.
 \\[a^{-n} = \frac{1}{a^n} \quad \text{with} \quad a \neq 0 \quad \text{and} \quad n > 0\\]
 
-- - -
 
 When the exponent is a rational number of the form \\( \frac{m}{n} \\), the power can be expressed as a radical.
 \\[a^{\frac{m}{n}} = \sqrt[n]{a^m} \quad \text{where} \quad m, n \in \mathbb{N} \quad \text{and} \quad n \neq 0\\]
 
 > The properties of powers transform multiplications and divisions of numbers raised to powers into simpler operations, making calculations faster and more manageable, especially in algebraic expressions.
 
-- - -
 ## Summary
 
 |                          |                                                        |                                  |
@@ -132,7 +119,6 @@ When the exponent is a rational number of the form \\( \frac{m}{n} \\), the powe
 | Negative exponent        |            \\[ a^{-n} = \dfrac{1}{a^n} \\]             | \\[ a \neq 0,\ n > 0 \\]         |
 | Rational exponent        |        \\[ a^{\frac{m}{n}} = \sqrt[n]{a^m} \\]         | \\[ a > 0,\ n \neq 0 \\]         |
 | Real exponent            |               \\[ a^x = e^{x \ln a} \\]                | \\[ a > 0,\ x \in \mathbb{R} \\] |
-- - -
 ## Why is \\( a^0 = 1 \\)?
 
 Among the properties of exponents, the result \\(a^0 = 1\\) may initially seem counterintuitive, but this outcome follows directly from the quotient rule, which states that dividing any power by itself yields \\(1\\).
@@ -141,14 +127,12 @@ Applying the quotient rule to the left-hand side gives the following.
 \\[\frac{a^n}{a^n} = a^{n-n} = a^0\\]
 This reasoning establishes that \\( a^0 = 1 \\). The condition \\( a \neq 0 \\) is a direct consequence of the argument, since the expression \\( \frac{a^n}{a^n} \\) is defined only when \\( a \neq 0 \\).
 
-- - -
 ## Power and exponential
 
 Sometimes, people mistakenly mix up the concepts of power and exponential function. A power is an arithmetic operation in which a base \\(a\\) is multiplied by itself \\(n\\) times, with \\(n\\) referred to as the exponent. The exponential function, by contrast, is a function in which the variable appears in the exponent rather than the base, taking the form:
 \\[f(x) = e^x \quad \text{or} \quad f(x) = a^x\\]
 where \\(a > 0\\) and \\(a \neq 1\\).
 
-- - -
 ## Powers with complex exponents
 
 The definition \\( a^x = e^{x \ln a} \\) extends naturally to cases where the exponent is complex. When the exponent is purely imaginary, that is, when \\( x = i\theta \\) with \\( \theta \in \mathbb{R} \\), the expression \\( e^{i\theta} \\) is well-defined provided one interprets the exponential through its Taylor series expansion. Recalling that:

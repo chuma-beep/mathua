@@ -16,7 +16,6 @@ The process involves the following steps:
 
 > The key insight is that substitution reverses the chain rule: recognizing this connection makes it easier to identify when and how to apply the technique.
 
-- - -
 
 The method of substitution is a direct consequence of the chain rule for derivatives. If \\( F(x) = H(g(x)) \\), then by the chain rule:
 
@@ -30,7 +29,6 @@ Therefore, whenever an integrand has the form \\(H'(g(x))\\, g'(x)\\) it is the 
 \int H'(u)\\, du = H(u) + c
 \\]
 
-- - -
 ## Recognizing when to use substitution
 
 Before proceeding to concrete examples, it is useful to understand when a substitution is likely to be effective. The technique is most natural when the integrand contains a composite function. In many cases, the integral has the general form:
@@ -49,7 +47,6 @@ the derivative of the denominator suggests the substitution \\( u = g(x) \\).
 
 > In practice, the key idea is to look for an inner expression whose derivative also appears, exactly or up to a multiplicative constant, elsewhere in the integrand. When such a relationship is present, substitution typically transforms the integral into a simpler form.
 
-- - -
 ## Substitution patterns
 
 |                                        |                  |
@@ -59,14 +56,12 @@ the derivative of the denominator suggests the substitution \\( u = g(x) \\).
 | \\[ \int e^{ax+b}\\]                   | \\[ u = ax+b \\] |
 | \\[\int \ln(ax+b)\\, dx \\]            | \\[ u = ax+b \\] |
 | \\[ \int \dfrac{g'(x)}{g(x)}\\, dx \\] | \\[ u = g(x) \\] |
-- - -
 ## Example 1
 
 Consider the following integral:
 
 \\[\int (2x+1)^3 \\,dx\\]
 
----
 
 Let \\( u = 2x + 1 \\), which simplifies the exponentiation. Differentiating both sides with respect to \\( x \\) we have:
 
@@ -76,7 +71,6 @@ Solving for \\( dx \\) we obtain:
 
 \\[dx = \frac{du}{2}\\]
 
----
 
 Expressing the integral entirely in terms of \\( u \\):
 
@@ -90,14 +84,12 @@ Substituting back \\( u = 2x+1 \\), we get:
 
 \\[\frac{1}{8} (2x+1)^4 + c\\]
 
-- - -
 ## Example 2
 
 Evaluate the following integral:
 
 \\[\int \frac{1}{3x-5} \\,dx\\]
 
----
 
 Let \\( u = 3x - 5 \\), which simplifies the denominator. Differentiating both sides with respect to \\( x \\), we have:
 
@@ -107,7 +99,6 @@ Solving for \\( dx \\), we obtain:
 
 \\[dx = \frac{du}{3}\\]
 
----
 
 Expressing the integral entirely in terms of \\( u \\):
 
@@ -123,14 +114,12 @@ Substituting back \\( u = 3x - 5 \\), we get:
 
 > Integration by substitution is an effective technique, but selecting the right substitution requires practice and the ability to recognize the structure of the integrand.
 
-- - -
 ## Example 3
 
 Evaluate the following integral:
 
 \\[\int x \sin(x^2)\\,dx\\]
 
----
 
 The substitution is less immediate here, since the integrand does not match the standard pattern as directly as in the previous examples. Let \\( u = x^2 \\), which simplifies the argument of the sine function. Differentiating both sides with respect to \\( x \\), we get:
 
@@ -140,13 +129,11 @@ Solving for \\( dx \\) we obtain:
 
 \\[dx = \frac{du}{2x}\\]
 
----
 
 Rewriting everything in terms of \\( u \\), and since \\( du = 2x\\,dx \\), we have:
 
 \\[\int x \sin(u) \cdot \frac{du}{2x} = \frac{1}{2} \int \sin(u)\\,du\\]
 
----
 
 We now proceed to solve the integral in \\( u \\):
 
@@ -160,14 +147,12 @@ Substituting back \\( u = x^2 \\), we obtain:
 
 \\[-\frac{1}{2} \cos(x^2) + c\\]
 
-- - -
 ## Example 4
 
 Evaluate the following integral:
 
 \\[\int \cos x \sqrt{\sin x}\\,dx\\]
 
----
 
 Let \\( u = \sin x \\), which simplifies the square root term. Differentiating both sides with respect to \\( x \\), we get:
 
@@ -175,13 +160,11 @@ Let \\( u = \sin x \\), which simplifies the square root term. Differentiating b
 
 Since \\( du = \cos x\\,dx \\), we can substitute directly into the integral.
 
----
 
 Substituting \\( u = \sin x \\) and \\( du = \cos x\\,dx \\) into the integral, we obtain:
 
 \\[\int \sqrt{u}\\,du = \int u^{1/2}\\,du\\]
 
----
 
 We now compute the integral:
 
@@ -191,7 +174,6 @@ Substituting back \\( u = \sin x \\), we obtain:
 
 \\[\frac{2}{3} (\sin x)^{3/2} + c\\]
 
-- - -
 ## Trigonometric substitutions
 
 Trigonometric substitution applies when an integral involves polynomial, rational, or algebraic expressions that can be simplified using the fundamental trigonometric identity:
@@ -216,14 +198,12 @@ To simplify an integral, choose an appropriate substitution based on the express
 
 > A complete discussion of trigonometric substitution, including the geometric rationale and fully worked examples, is presented in the dedicated section Trigonometric Substitution for Integrals.
 
-- - -
 ## Example 5
 
 Evaluate the following integral:
 
 \\[\int \frac{1}{\sqrt{9-x^2}}\\,dx\\]
 
----
 
 For expressions of the form \\( a^2 - x^2 \\), a natural substitution is:
 
@@ -233,7 +213,6 @@ Differentiating both sides:
 
 \\[dx = 3\cos u\\,du\\]
 
----
 
 Substituting \\( x = 3\sin u \\) in the denominator:
 
@@ -249,7 +228,6 @@ Thus, the integral transforms into:
 
 > This step assumes \\( \cos u \geq 0 \\), which holds since the substitution \\( x = 3\sin u \\) implies \\( u \in [-\pi/2,\\,\pi/2] \\).
 
----
 
 From the substitution \\( x = 3\sin u \\), solving for \\( u \\) via the arcsine function gives:
 
@@ -259,27 +237,23 @@ Thus:
 
 \\[\arcsin\left(\frac{x}{3}\right) + c\\]
 
-- - -
 ## Substitution rule for definite integrals
 
 When applying substitution to evaluate definite integrals, the limits of integration must be adjusted to reflect the new variable. If the limits are not changed, the result will be incorrect. Given the substitution \\( u = g(x) \\), we have:
 
 \\[\int_{a}^{b} f(g(x))\\,g'(x)\\,dx = \int_{g(a)}^{g(b)} f(u)\\,du\\]
 
-- - -
 ## Example 6
 
 Evaluate the following definite integral:
 
 \\[\int_{0}^{1} x\cos(x^2)\\,dx\\]
 
----
 
 Using the substitution \\( u = x^2 \\), we get:
 
 \\[du = 2x\\,dx \qquad dx = \frac{du}{2x}\\]
 
----
 
 The limits of integration must be updated. When \\( x = 0 \\), then \\( u = 0 \\); when \\( x = 1 \\), then \\( u = 1 \\). In this case the transformed limits coincide with the original ones, though this is not generally the case. We obtain:
 
@@ -289,7 +263,6 @@ Evaluating the integral we obtain:
 
 \\[\frac{1}{2}\sin u\Big|_{0}^{1} = \frac{1}{2}(\sin 1 - \sin 0) = \frac{\sin 1}{2}\\]
 
-- - -
 ## Flowchart
 
 - `Integral to solve`
