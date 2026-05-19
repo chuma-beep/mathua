@@ -1,8 +1,6 @@
 package tui
 
 import (
-	"time"
-
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -14,9 +12,60 @@ const (
 	ScreenProblem
 	ScreenFeedback
 	ScreenProgress
+	ScreenStudy
+	ScreenDiagnostic
+	ScreenDiagFeedback
+	ScreenBrowse
 )
 
-type TickMsg time.Time
+type ConceptNode struct {
+	ID         string
+	Label      string
+	Unlocked   bool
+	MasteryPct float64
+	Streak     int
+	Status     string
+}
+
+type SubdomainNode struct {
+	Name     string
+	Concepts []ConceptNode
+}
+
+type DomainNode struct {
+	Name       string
+	Subdomains []SubdomainNode
+}
+
+type ConceptTreeMsg struct {
+	Domains []DomainNode
+}
+
+type StudyLesson struct {
+	Title     string
+	Body      string
+	ConceptID string
+	Domain    string
+}
+
+type DiagQuestionMsg struct {
+	ConceptID   string
+	ConceptName string
+	Question    string
+	Count       int
+}
+
+type DiagFeedbackMsg struct {
+	Correct       bool
+	UserAnswer    string
+	CorrectAnswer string
+	Explanation   string
+	Done          bool
+}
+
+type StudyListMsg struct {
+	Lessons []StudyLesson
+}
 
 type SessionMsg struct {
 	ConceptID    string
@@ -85,17 +134,31 @@ type Model struct {
 
 	session    SessionMsg
 	input      textinput.Model
-	startTime  time.Time
-	elapsed    float64
 	roundCount int
 
 	result   SubmitResultMsg
 	progress ProgressMsg
 
+	studyLessons []StudyLesson
+	studyContent *struct{ Title, Body string }
+
+	diagQuestion DiagQuestionMsg
+	diagFeedback DiagFeedbackMsg
+
+	browseData     ConceptTreeMsg
+	browseDomain   int
+	browseSub      int
+	browseLevel    int // 0=domains, 1=subdomains, 2=concepts
+
 	OnSubmit   func(conceptID, answer string, elapsed float64) SubmitResultMsg
 	OnNext     func() SessionMsg
 	OnProgress func() ProgressMsg
 	OnWelcome  func() WelcomeStatsMsg
+	OnStudy    func() []StudyLesson
+	OnDiagStart  func() DiagQuestionMsg
+	OnDiagSubmit func(conceptID, answer string, elapsed float64) DiagFeedbackMsg
+	OnBrowse   func() ConceptTreeMsg
+	OnSelectConcept func(conceptID string) SessionMsg
 }
 
 func New() Model {
@@ -133,17 +196,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case SessionMsg:
 		m.session = msg
 		m.screen = ScreenProblem
-		m.startTime = time.Now()
-		m.elapsed = 0
 		m.input.Reset()
 		m.input.Focus()
-		return m, tickCmd()
-
-	case TickMsg:
-		if m.screen == ScreenProblem {
-			m.elapsed = time.Since(m.startTime).Seconds()
-			return m, tickCmd()
-		}
 		return m, nil
 
 	case SubmitResultMsg:
@@ -155,6 +209,34 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case ProgressMsg:
 		m.progress = msg
 		m.screen = ScreenProgress
+		return m, nil
+
+	case DiagQuestionMsg:
+		m.diagQuestion = msg
+		m.diagFeedback = DiagFeedbackMsg{}
+		m.input.Reset()
+		m.input.Focus()
+		m.screen = ScreenDiagnostic
+		return m, nil
+
+	case DiagFeedbackMsg:
+		m.diagFeedback = msg
+		m.input.Blur()
+		m.screen = ScreenDiagFeedback
+		return m, nil
+
+	case StudyListMsg:
+		m.studyLessons = msg.Lessons
+		m.studyContent = nil
+		m.screen = ScreenStudy
+		return m, nil
+
+	case ConceptTreeMsg:
+		m.browseData = msg
+		m.browseLevel = 0
+		m.browseDomain = 0
+		m.browseSub = 0
+		m.screen = ScreenBrowse
 		return m, nil
 
 	case tea.KeyMsg:
@@ -182,8 +264,14 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "enter", " ":
 			return m, loadNextProblem(m.OnNext)
+		case "b":
+			return m, loadConceptTree(m.OnBrowse)
+		case "d":
+			return m, startDiagnostic(m.OnDiagStart)
 		case "p":
 			return m, loadProgress(m.OnProgress)
+		case "s":
+			return m, loadStudyLessons(m.OnStudy)
 		case "q":
 			return m, tea.Quit
 		}
@@ -197,8 +285,7 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 			if answer == "" {
 				return m, nil
 			}
-			elapsed := time.Since(m.startTime).Seconds()
-			return m, submitAnswer(m.OnSubmit, m.session.ConceptID, answer, elapsed)
+			return m, submitAnswer(m.OnSubmit, m.session.ConceptID, answer, 0)
 		default:
 			if len(msg.String()) > 3 {
 				return m, nil
@@ -222,6 +309,130 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		}
 
+	case ScreenStudy:
+		switch {
+		case msg.String() == "q":
+			return m, tea.Quit
+		case msg.String() == "esc" || msg.String() == "w":
+			if m.studyContent != nil {
+				m.studyContent = nil
+				return m, nil
+			}
+			m.screen = ScreenWelcome
+			return m, loadWelcomeStats(m.OnWelcome)
+		case msg.String() == "enter" && m.studyContent == nil:
+			return m, nil // No-op, handled by numbered selection
+		default:
+			if m.studyContent == nil {
+				// Number key selects a lesson
+				if len(msg.String()) == 1 && msg.String()[0] >= '1' && msg.String()[0] <= '9' {
+					idx := int(msg.String()[0] - '1')
+					if idx >= 0 && idx < len(m.studyLessons) {
+						l := m.studyLessons[idx]
+						m.studyContent = &struct{ Title, Body string }{l.Title, l.Body}
+						return m, nil
+					}
+				}
+			}
+			return m, nil
+		}
+
+	case ScreenBrowse:
+		switch msg.String() {
+		case "q":
+			return m, tea.Quit
+		case "esc", "w":
+			if m.browseLevel == 0 {
+				m.screen = ScreenWelcome
+				return m, loadWelcomeStats(m.OnWelcome)
+			}
+			m.browseLevel--
+			return m, nil
+		case "enter":
+			if m.browseLevel == 2 {
+				domains := m.browseData.Domains
+				if m.browseDomain < len(domains) {
+					subs := domains[m.browseDomain].Subdomains
+					if m.browseSub < len(subs) {
+						concepts := subs[m.browseSub].Concepts
+						if len(concepts) > 0 {
+							c := concepts[0]
+							if c.Unlocked {
+								return m, loadConceptPractice(m.OnSelectConcept, c.ID)
+							}
+						}
+					}
+				}
+			}
+			return m, nil
+		default:
+			if len(msg.String()) == 1 && msg.String()[0] >= '0' && msg.String()[0] <= '9' {
+				idx := int(msg.String()[0] - '0')
+				switch m.browseLevel {
+				case 0:
+					if idx >= 1 && idx <= len(m.browseData.Domains) {
+						m.browseDomain = idx - 1
+						m.browseSub = 0
+						m.browseLevel = 1
+					}
+				case 1:
+					domains := m.browseData.Domains
+					if m.browseDomain < len(domains) {
+						subs := domains[m.browseDomain].Subdomains
+						if idx >= 1 && idx <= len(subs) {
+							m.browseSub = idx - 1
+							m.browseLevel = 2
+						}
+					}
+				case 2:
+					domains := m.browseData.Domains
+					if m.browseDomain < len(domains) {
+						subs := domains[m.browseDomain].Subdomains
+						if m.browseSub < len(subs) {
+							concepts := subs[m.browseSub].Concepts
+							if idx >= 1 && idx <= len(concepts) {
+								c := concepts[idx-1]
+								if c.Unlocked {
+									return m, loadConceptPractice(m.OnSelectConcept, c.ID)
+								}
+							}
+						}
+					}
+				}
+			}
+			return m, nil
+		}
+
+	case ScreenDiagnostic:
+		switch msg.String() {
+		case "enter":
+			answer := m.input.Value()
+			if answer == "" {
+				return m, nil
+			}
+			return m, submitDiagAnswer(m.OnDiagSubmit, m.diagQuestion.ConceptID, answer, 0)
+		case "q":
+			return m, tea.Quit
+		default:
+			if len(msg.String()) > 3 {
+				return m, nil
+			}
+			var cmd tea.Cmd
+			m.input, cmd = m.input.Update(msg)
+			return m, cmd
+		}
+
+	case ScreenDiagFeedback:
+		switch msg.String() {
+		case "enter", " ", "n":
+			if m.diagFeedback.Done {
+				return m, loadNextProblem(m.OnNext)
+			}
+			return m, startDiagnostic(m.OnDiagStart)
+		case "q":
+			return m, tea.Quit
+		}
+
 	case ScreenProgress:
 		switch msg.String() {
 		case "enter", " ", "n":
@@ -235,12 +446,6 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	}
 
 	return m, nil
-}
-
-func tickCmd() tea.Cmd {
-	return tea.Tick(time.Second/10, func(t time.Time) tea.Msg {
-		return TickMsg(t)
-	})
 }
 
 func loadNextProblem(fn func() SessionMsg) tea.Cmd {
@@ -264,5 +469,35 @@ func loadProgress(fn func() ProgressMsg) tea.Cmd {
 func loadWelcomeStats(fn func() WelcomeStatsMsg) tea.Cmd {
 	return func() tea.Msg {
 		return fn()
+	}
+}
+
+func loadStudyLessons(fn func() []StudyLesson) tea.Cmd {
+	return func() tea.Msg {
+		return StudyListMsg{Lessons: fn()}
+	}
+}
+
+func loadConceptTree(fn func() ConceptTreeMsg) tea.Cmd {
+	return func() tea.Msg {
+		return fn()
+	}
+}
+
+func loadConceptPractice(fn func(conceptID string) SessionMsg, conceptID string) tea.Cmd {
+	return func() tea.Msg {
+		return fn(conceptID)
+	}
+}
+
+func startDiagnostic(fn func() DiagQuestionMsg) tea.Cmd {
+	return func() tea.Msg {
+		return fn()
+	}
+}
+
+func submitDiagAnswer(fn func(conceptID, answer string, elapsed float64) DiagFeedbackMsg, conceptID, answer string, elapsed float64) tea.Cmd {
+	return func() tea.Msg {
+		return fn(conceptID, answer, elapsed)
 	}
 }

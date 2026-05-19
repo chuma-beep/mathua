@@ -143,6 +143,16 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   return res.json()
 }
 
+export interface ConfigRes {
+	auth_enabled: boolean
+}
+
+export async function getConfig(): Promise<ConfigRes> {
+	const res = await fetch(`${API_BASE}/api/config`)
+	if (!res.ok) return { auth_enabled: false }
+	return res.json()
+}
+
 export async function healthCheck(): Promise<boolean> {
   try {
     const res = await fetch(`${API_BASE}/api/health`)
@@ -283,5 +293,41 @@ export async function getWeaknesses(): Promise<WeaknessRes> {
 		headers: { ...getAuthHeaders() },
 	})
 	if (!res.ok) return { by_domain: {} }
+	return res.json()
+}
+
+export interface UserSettings {
+	show_timer?: boolean
+}
+
+export async function getSettings(): Promise<UserSettings> {
+	const res = await fetch(`${API_BASE}/api/settings`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) return {}
+	return res.json()
+}
+
+export async function updateSettings(settings: UserSettings): Promise<void> {
+	await fetch(`${API_BASE}/api/settings`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify(settings),
+	})
+}
+
+export interface LessonInfo {
+	title: string
+	body: string
+	concepts: string[]
+}
+
+export interface LessonsRes {
+	lessons: Record<string, LessonInfo[]>
+}
+
+export async function getLessons(): Promise<LessonsRes> {
+	const res = await fetch(`${API_BASE}/api/lessons`)
+	if (!res.ok) return { lessons: {} }
 	return res.json()
 }

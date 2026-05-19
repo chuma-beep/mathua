@@ -9,7 +9,7 @@
       "count.number_line"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -23,7 +23,7 @@
       "geo.basic.points_lines"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -37,7 +37,7 @@
       "geo.basic.angles"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -51,7 +51,7 @@
       "geo.basic.angle_measure"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -65,7 +65,7 @@
       "geo.basic.complementary"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -79,7 +79,7 @@
       "geo.basic.angles"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -94,7 +94,7 @@
       "geo.basic.angle_measure"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -109,7 +109,7 @@
       "arith.mult.double"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -125,7 +125,7 @@
       "arith.exp.evaluate"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -139,7 +139,7 @@
       "geo.basic.angles"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -154,7 +154,7 @@
       "arith.mult.double"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -169,7 +169,7 @@
       "arith.add.double"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -183,7 +183,7 @@
       "geo.basic.points_lines"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -198,7 +198,7 @@
       "dec.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -213,7 +213,7 @@
       "arith.exp.evaluate"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -227,7 +227,7 @@
       "arith.neg.number_line"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -242,7 +242,7 @@
       "geo.triangle.pythagorean"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -257,7 +257,7 @@
       "dec.add"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -272,7 +272,7 @@
       "arith.mult.triple"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -286,7 +286,7 @@
       "geo.solid.volume_rect"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   }

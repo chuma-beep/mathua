@@ -36,10 +36,11 @@ export default function Header({ links }: HeaderProps) {
   }, [menuOpen, closeMenu])
 
   const displayLinks = links || [
+    { label: 'Study', href: '/study' },
     { label: 'Leaderboard', href: '/leaderboard' },
     { label: 'Graph', href: '/graph' },
     ...(loggedIn
-      ? [{ label: 'Practice', href: '/session' }]
+      ? [{ label: 'Practice', href: '/session' }, { label: 'Settings', href: '/settings' }]
       : [{ label: 'Login', href: '/login' }]
     ),
   ]

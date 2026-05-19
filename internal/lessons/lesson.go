@@ -3,6 +3,7 @@ package lessons
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -34,26 +35,29 @@ func Load(lessonsDir string) (*Loader, error) {
 		return nil, fmt.Errorf("parse lessons.json: %w", err)
 	}
 
+	// Group concept IDs by source file
+	sourceConcepts := make(map[string][]string)
+	for _, m := range mappings {
+		sourceConcepts[m.Source] = append(sourceConcepts[m.Source], m.ConceptID)
+	}
+
 	concepts := make(map[string]*Lesson, len(mappings))
 
-	for _, m := range mappings {
-		mdPath := filepath.Join(lessonsDir, m.Source)
+	for source, ids := range sourceConcepts {
+		mdPath := filepath.Join(lessonsDir, source)
 		body, err := os.ReadFile(mdPath)
 		if err != nil {
-			return nil, fmt.Errorf("read lesson %q: %w", m.Source, err)
+			log.Printf("warning: lesson file not found, skipping %q: %v", source, err)
+			continue
 		}
 		title := extractTitle(string(body))
 		lesson := &Lesson{
 			Title:    title,
 			Body:     string(body),
-			Concepts: append(lessonConcepts(mappings, m.Source, m.ConceptID), m.ConceptID),
+			Concepts: ids,
 		}
-		concepts[m.ConceptID] = lesson
-		// Share the same lesson object for all concepts pointing to same source.
-		for _, m2 := range mappings {
-			if m2.Source == m.Source && m2.ConceptID != m.ConceptID {
-				concepts[m2.ConceptID] = lesson
-			}
+		for _, id := range ids {
+			concepts[id] = lesson
 		}
 	}
 
@@ -62,6 +66,30 @@ func Load(lessonsDir string) (*Loader, error) {
 
 func (l *Loader) Lesson(conceptID string) *Lesson {
 	return l.concepts[conceptID]
+}
+
+func (l *Loader) All() map[string]*Lesson {
+	return l.concepts
+}
+
+func (l *Loader) LessonsByDomain() map[string][]*Lesson {
+	byDomain := make(map[string][]*Lesson)
+	seen := make(map[*Lesson]bool)
+	for _, lesson := range l.concepts {
+		if seen[lesson] {
+			continue
+		}
+		seen[lesson] = true
+		domain := "general"
+		if len(lesson.Concepts) > 0 {
+			parts := strings.SplitN(lesson.Concepts[0], ".", 3)
+			if len(parts) >= 2 {
+				domain = parts[0] + "." + parts[1]
+			}
+		}
+		byDomain[domain] = append(byDomain[domain], lesson)
+	}
+	return byDomain
 }
 
 func (l *Loader) Count() int {
@@ -74,14 +102,4 @@ func extractTitle(md string) string {
 		return strings.TrimPrefix(lines[0], "# ")
 	}
 	return ""
-}
-
-func lessonConcepts(mappings []mapping, source, skip string) []string {
-	var out []string
-	for _, m := range mappings {
-		if m.Source == source && m.ConceptID != skip {
-			out = append(out, m.ConceptID)
-		}
-	}
-	return out
 }

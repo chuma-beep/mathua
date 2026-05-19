@@ -10,7 +10,7 @@
       "calc.integral.indefinite"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -25,7 +25,7 @@
       "calc.integral.substitution"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -40,7 +40,7 @@
       "calc.deriv.exp_log"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 28.0
     }
   },
@@ -55,7 +55,7 @@
       "calc.deriv.implicit"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 30.0
     }
   },
@@ -70,7 +70,7 @@
       "alg.quad.formula"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 30.0
     }
   },
@@ -85,7 +85,7 @@
       "alg.eq.vars_both_sides"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 35.0
     }
   },
@@ -100,7 +100,7 @@
       "calc.integral.parts"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 35.0
     }
   },
@@ -115,7 +115,7 @@
       "linalg.eigen.compute"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 35.0
     }
   }

@@ -9,7 +9,7 @@
       "arith.div.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -23,7 +23,7 @@
       "frac.concept"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 8.0
     }
   },
@@ -38,7 +38,7 @@
       "count.number_line"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -53,7 +53,7 @@
       "arith.mult.tables"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -68,7 +68,7 @@
       "arith.factor.gcf"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -82,7 +82,7 @@
       "frac.equivalent"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -96,7 +96,7 @@
       "frac.compare"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -111,7 +111,7 @@
       "arith.div.basic"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -125,7 +125,7 @@
       "frac.parts"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -140,7 +140,7 @@
       "arith.factor.lcm"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -154,7 +154,7 @@
       "frac.add.diff"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 25.0
     }
   },
@@ -168,7 +168,7 @@
       "frac.add.same"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 10.0
     }
   },
@@ -183,7 +183,7 @@
       "arith.factor.lcm"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 18.0
     }
   },
@@ -198,7 +198,7 @@
       "arith.mult.tables"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -212,7 +212,7 @@
       "frac.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 12.0
     }
   },
@@ -226,7 +226,7 @@
       "frac.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -240,7 +240,7 @@
       "frac.div"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -255,7 +255,7 @@
       "arith.div.remainder"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 15.0
     }
   },
@@ -270,7 +270,7 @@
       "frac.add.diff"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -284,7 +284,7 @@
       "frac.mixed.add"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 20.0
     }
   },
@@ -299,7 +299,7 @@
       "frac.mult"
     ],
     "mastery_threshold": {
-      "streak": 5,
+      "streak": 10,
       "avg_time_seconds": 22.0
     }
   }
