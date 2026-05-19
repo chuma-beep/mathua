@@ -1,7 +1,5 @@
 # Improper Integrals
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/improper-integrals/
 
 ## Definition
 
@@ -361,7 +359,7 @@ Absolute convergence implies convergence. If \\(\int_a^{+\infty} |f(x)|\\,dx\\) 
 \int_1^{+\infty} \frac{\sin x}{x}\\,dx
 \\]
 
-converges by [integration by parts](https://algebrica.org/integration-by-parts/), while: 
+converges by integration by parts, while: 
 
 \\[\int_1^{+\infty} \frac{|\sin x|}{x}\\,dx\\] 
 

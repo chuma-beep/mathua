@@ -1,7 +1,5 @@
 # Linear Combinations
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/linear-combinations/
 
 ## Definition
 

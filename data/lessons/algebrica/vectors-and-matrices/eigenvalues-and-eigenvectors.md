@@ -1,7 +1,5 @@
 # Eigenvalues and Eigenvectors
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/eigenvalues-and-eigenvectors/
 
 ## Definition
 

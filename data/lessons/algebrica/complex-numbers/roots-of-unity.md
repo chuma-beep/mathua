@@ -1,7 +1,5 @@
 # Roots of Unity
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/roots-of-unity/
 
 ## Definition
 

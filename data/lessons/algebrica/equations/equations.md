@@ -1,7 +1,5 @@
 # Equations
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/equations/
 
 ## What are equations
 

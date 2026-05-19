@@ -1,7 +1,5 @@
 # Integration by Substitution
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/integration-by-substitution/
 
 ## How substitution simplifies integration
 

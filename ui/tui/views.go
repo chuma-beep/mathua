@@ -8,6 +8,14 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
+func stripLatexDelimiters(s string) string {
+	s = strings.ReplaceAll(s, `\(`, "")
+	s = strings.ReplaceAll(s, `\)`, "")
+	s = strings.ReplaceAll(s, `\[`, "")
+	s = strings.ReplaceAll(s, `\]`, "")
+	return s
+}
+
 func (m Model) View() string {
 	if m.width == 0 {
 		return ""
@@ -291,7 +299,7 @@ func (m Model) viewStudy() string {
 		b.WriteString("\n\n")
 		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
 		b.WriteString("\n\n")
-		body := m.studyContent.Body
+		body := stripLatexDelimiters(m.studyContent.Body)
 		if len(body) > 3000 {
 			body = body[:3000] + "\n\n[... truncated ...]"
 		}

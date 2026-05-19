@@ -1,7 +1,5 @@
 # Factorial
 
-Source: algebrica.org — CC BY-NC 4.0
-
 ## Definition
 
 The factorial of a non-negative [integer](../types-of-numbers/) \\(n\\), written \\(n!\\), is the product of all positive integers from \\(1\\) to \\(n\\):

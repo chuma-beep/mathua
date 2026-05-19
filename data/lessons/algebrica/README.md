@@ -1,6 +1,6 @@
 # README
 
-[Algebrica](https://algebrica.org) is a free, ad-free, university-level mathematics knowledge base. This repository hosts the source content of the entries published on the site, released progressively in Markdown format and reusable under a non-commercial license.The repository progressively includes:
+Algebrica is a free, ad-free, university-level mathematics knowledge base. This repository hosts the source content of the entries published on the site, released progressively in Markdown format and reusable under a non-commercial license.The repository progressively includes:
 
 - the original source files of the entries written for Algebrica in Markdown and LaTeX format;
 - fully editable SVG illustrations, including both vector structures and text elements, which can be modified directly through the source code;
@@ -43,5 +43,4 @@ Content is released under [Creative Commons Attribution-NonCommercial 4.0 (CC BY
 
 ## Links
 
-- Website: [algebrica.org](https://algebrica.org)
 - X: [@antoniolupetti](https://x.com/antoniolupetti)

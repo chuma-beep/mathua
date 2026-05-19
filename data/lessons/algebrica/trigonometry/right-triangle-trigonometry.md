@@ -1,7 +1,5 @@
 # Right Triangle Trigonometry
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/right-triangle-trigonometry/
 
 ## Understanding the sides of a right triangle
 

@@ -1,7 +1,5 @@
 # Binomial Coefficient
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/binomial-coefficient/
 
 ## Introduction
 

@@ -1,7 +1,5 @@
 # Pythagorean Theorem
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/pythagorean-theorem/
 
 ## Statement
 

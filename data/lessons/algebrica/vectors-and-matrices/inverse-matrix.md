@@ -1,8 +1,6 @@
 
 # Inverse Matrix
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/inverse-matrix/
 
 ## Definition
 

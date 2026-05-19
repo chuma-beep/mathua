@@ -1,7 +1,5 @@
 # Absolute value
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/absolute-value/
 
 ## Definition
 

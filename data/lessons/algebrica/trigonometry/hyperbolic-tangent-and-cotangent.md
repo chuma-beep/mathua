@@ -1,11 +1,9 @@
 # Hyperbolic Tangent and Cotangent
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/hyperbolic-tangent-and-cotangent/
 
 ## Introduction
 
-The hyperbolic tangent and cotangent arise from the hyperbolic sine and cosine in exactly the same way that the circular [tangent and cotangent](../tangent-and-cotangent/) arise from the circular [sine and cosine](../sine-and-cosine/). Given the [hyperbolic sine and cosine](../hyperbolic-sine-and-cosine/), both introduced in relation to the right branch of the equilateral [hyperbola](https://algebrica.org/hyperbola/):
+The hyperbolic tangent and cotangent arise from the hyperbolic sine and cosine in exactly the same way that the circular [tangent and cotangent](../tangent-and-cotangent/) arise from the circular [sine and cosine](../sine-and-cosine/). Given the [hyperbolic sine and cosine](../hyperbolic-sine-and-cosine/), both introduced in relation to the right branch of the equilateral hyperbola:
 
 \\[
 X^{2} – Y^{2} = 1
@@ -38,7 +36,7 @@ In this geometric picture, the hyperbolic tangent and cotangent measure a kind o
 - - -
 ## Fundamental hyperbolic identity for tangent and cotangent
 
-The hyperbolic tangent and cotangent satisfy an identity that follows directly from the [fundamental hyperbolic identity](https://algebrica.org/hyperbolic-sine-and-cosine/). Starting from:
+The hyperbolic tangent and cotangent satisfy an identity that follows directly from the fundamental hyperbolic identity. Starting from:
 
 \\[
 \cosh^{2}(x) – \sinh^{2}(x) = 1
@@ -128,7 +126,7 @@ The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real nu
 - Domain: \\(x \in \mathbb{R}\\)
 - Range: \\(y \in (-1, 1)\\)
 - Periodicity: not periodic
-- Parity: [odd](https://algebrica.org/even-and-odd-functions/), \\(\tanh(-x) = -\tanh(x)\\)
+- Parity: odd, \\(\tanh(-x) = -\tanh(x)\\)
 - Horizontal asymptotes: \\(y = 1\\) as \\(x \to +\infty\\); \\(y = -1\\) as \\(x \to -\infty\\)
 
 ---
@@ -138,13 +136,13 @@ The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real 
 - Domain: \\(x \in \mathbb{R},\; x \neq 0\\)
 - Range: \\(y \in (-\infty, -1) \cup (1, +\infty)\\)
 - Periodicity: not periodic
-- Parity: [odd](https://algebrica.org/even-and-odd-functions/), \\(\coth(-x) = -\coth(x)\\)
+- Parity: odd, \\(\coth(-x) = -\coth(x)\\)
 - Vertical asymptote: \\(x = 0\\)
 - Horizontal asymptotes: \\(y = 1\\) as \\(x \to +\infty\\); \\(y = -1\\) as \\(x \to -\infty\\)
 - - -
 ## Relation to the circular tangent and cotangent
 
-The circular [tangent and cotangent](https://algebrica.org/tangent-and-cotangent/) are defined as ratios of the circular sine and cosine, which in turn arise from the geometry of the unit circle. By exact analogy, the hyperbolic tangent and cotangent are ratios of the hyperbolic sine and cosine, which arise from the geometry of the equilateral hyperbola. In both settings, the underlying identity constraining the coordinates of a point on the curve propagates to a corresponding identity for the ratio functions.
+The circular tangent and cotangent are defined as ratios of the circular sine and cosine, which in turn arise from the geometry of the unit circle. By exact analogy, the hyperbolic tangent and cotangent are ratios of the hyperbolic sine and cosine, which arise from the geometry of the equilateral hyperbola. In both settings, the underlying identity constraining the coordinates of a point on the curve propagates to a corresponding identity for the ratio functions.
 
 There is, however, a fundamental difference between the two cases: while the circular tangent is periodic with period \\(\pi\\) and is unbounded, the hyperbolic tangent is monotone and bounded between \\(-1\\) and \\(1\\). Similarly, the circular cotangent has vertical asymptotes at every integer multiple of \\(\pi\\), whereas the hyperbolic cotangent has only one, at the origin.
 

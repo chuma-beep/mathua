@@ -1,7 +1,5 @@
 # Secant and Cosecant
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/secant-and-cosecant/)
 
 ## Secant
 

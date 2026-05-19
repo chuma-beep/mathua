@@ -1,8 +1,6 @@
 
 # Finding Areas by Integration
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/finding-areas-by-integration/
 
 ## Area between two curves using definite integrals
 

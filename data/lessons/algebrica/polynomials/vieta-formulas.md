@@ -1,7 +1,5 @@
 # Vieta's Formulas
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/vieta-formulas/
 
 ## Introduction
 

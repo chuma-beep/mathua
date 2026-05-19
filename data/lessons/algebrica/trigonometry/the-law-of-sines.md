@@ -1,7 +1,5 @@
 # The Law of Sines
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/law-of-sines/
 
 ## Definition
 

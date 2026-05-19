@@ -1,8 +1,6 @@
 
 # Intervals
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/intervals/
 
 ## Definition
 
@@ -20,22 +18,13 @@ A bounded interval is one that is contained within a finite portion of the real 
 (a, b) = \{x \in \mathbb{R} : a < x < b\}
 \\]
 
-[field_math]
-|     | \\[ a\\] | \\[ b\\] |     |
-|:----|----------|----------|-----|
-|     | sign+l-in-o-h     | sign+r-in-o-h     |     |
-[/field_math]
+
 
 The closed interval with endpoints \\( a \\) and \\( b \\) is the set of all real numbers between \\( a \\) and \\( b \\), including both endpoints. It is defined as follows:
 \\[
 [a, b] = \{x \in \mathbb{R} : a \leq x \leq b\}
 \\]
 
-[field_math]
-|     | \\[ a\\] | \\[ b\\] |     |
-|:----|----------|----------|-----|
-|     | sign+l-in-c-h    | sign+r-in-c-h     |     |
-[/field_math]
 
 The two half-open intervals with endpoints \\( a \\) and \\( b \\) include one endpoint and
 exclude the other. They are defined as follows:
@@ -43,21 +32,11 @@ exclude the other. They are defined as follows:
 [a, b) = \{x \in \mathbb{R} : a \leq x < b\}
 \\]
 
-[field_math]
-|     | \\[ a\\] | \\[ b\\] |     |
-|:----|----------|----------|-----|
-|     | sign+l-in-c-h    | sign+r-in-o-h     |     |
-[/field_math]
 
 \\[
 (a, b] = \{x \in \mathbb{R} : a < x \leq b\}
 \\]
 
-[field_math]
-|     | \\[ a\\] | \\[ b\\] |     |
-|:----|----------|----------|-----|
-|     | sign+l-in-o-h    | sign+r-in-c-h     |     |
-[/field_math]
 
 A degenerate interval is the special case \\( [a, a] = \\{a\\} \\), which contains exactly one point. It satisfies the definition of an interval vacuously, since there are no two distinct points between which additional points could be required.
 
@@ -73,41 +52,21 @@ the corresponding bracket is always a parenthesis. The four unbounded intervals 
 [a, +\infty) = \{x \in \mathbb{R} : x \geq a\}
 \\]
 
-[field_math]
-|     | \\[ a\\] |     |
-|:----|----------|-----|
-|     | sign+l-c-h    |     |
-[/field_math]
 
 \\[
 (a, +\infty) = \{x \in \mathbb{R} : x > a\}
 \\]
 
-[field_math]
-|     | \\[ a\\] |     |
-|:----|----------|-----|
-|     | sign+l-o-h    |     |
-[/field_math]
 
 \\[
 (-\infty, b] = \{x \in \mathbb{R} : x \leq b\}
 \\]
 
-[field_math]
-|     | \\[ b\\] |     |
-|:----|----------|-----|
-|     | sign+r-c-h    |     |
-[/field_math]
 
 \\[
 (-\infty, b) = \{x \in \mathbb{R} : x < b\}
 \\]
 
-[field_math]
-|     | \\[ b\\] |     |
-|:----|----------|-----|
-|     | sign+r-o-h    |     |
-[/field_math]
 
 Finally, the entire real line is itself an interval, denoted \\( (-\infty, +\infty) = \mathbb{R} \\), which contains every real number and has no restriction of any kind.
 
@@ -117,13 +76,6 @@ Finally, the entire real line is itself an interval, denoted \\( (-\infty, +\inf
 Given two intervals, one may form new sets by combining them through the standard
 set-theoretic operations of intersection and union. The intersection \\( I \cap J \\) is the set of all points belonging to both intervals simultaneously. The intersection of two intervals is always an interval, possibly empty or degenerate. Consider for example \\( I = (1, 5) \\) and \\( J = (3, 7) \\). The values belonging to both are precisely those in \\( (3, 5) \\).
 
-[field_math]
-|     | \\[ 1\\] | \\[ 3\\] | \\[ 5\\] | \\[ 7\\] |     |
-|:----|----------|----------|----------|----------|-----|
-|     | sign+l-in-o |   | sign+r-in-o |  |     |
-|     |  | sign+l-in-o |  | sign+r-in-o |     |
-|     |  | sign+l-in-o-h | sign+r-in-o-h |  |     |
-[/field_math]
 
 The third row shows the intersection \\( (3, 5) \\), which is the portion shared by both
 intervals.
@@ -136,13 +88,6 @@ an interval if and only if the two intervals overlap or share an endpoint. Consi
 example, \\( I = (1, 5) \\) and \\( J = (3, 7) \\). Since the two intervals overlap, their
 union is the interval \\( (1, 7) \\).
 
-[field_math]
-|     | \\[ 1\\] | \\[ 3\\] | \\[ 5\\] | \\[ 7\\] |     |
-|:----|----------|----------|----------|----------|-----|
-|     | sign+l-in-o |  | sign+r-in-o |  |     |
-|     |  | sign+l-in-o |  | sign+r-in-o |     |
-|     | sign+l-in-o-h | sign+s-h |  | sign+r-in-o-h |     |
-[/field_math]
 
 The third row shows the union \\( (1, 7) \\). By contrast, the union \\( (1, 3) \cup (5, 7) \\)
 is not an interval, because the points between \\( 3 \\) and \\( 5 \\) belong to neither set.
@@ -162,11 +107,6 @@ is called the \\( \varepsilon \\)-neighborhood of \\( x_0 \\), or simply a neigh
 \\( \varepsilon \\), that is, all \\( x \\) satisfying \\( |x-x_0| < \varepsilon \\),
 where \\( |\cdot| \\) denotes the [absolute value](../absolute-value/).
 
-[field_math]
-|     | \\[ x_0 - \varepsilon\\] | \\[ x_0\\] | \\[ x_0 + \varepsilon\\] |     |
-|:----|--------------------------|------------|--------------------------|-----|
-|     | sign+l-in-o-h | sign+s-h | sign+r-in-o-h |     |
-[/field_math]
 
 Neighborhoods provide the language in which the definitions of [limit](../limits/), continuity, and differentiability are naturally expressed. A function \\( f \\) is continuous at \\( x_0 \\) if for every neighborhood of \\( f(x_0) \\) there exists a neighborhood of \\( x_0 \\) whose image under \\( f \\) is contained in the former. This formulation is equivalent to the classical \\( \varepsilon \\)-\\( \delta \\) definition and makes the role of intervals explicit.
 
@@ -198,11 +138,5 @@ This result makes precise the intuitive idea that an interval is a portion of th
 with no gaps. The condition of connectedness rules out sets such as \\( (1, 2) \cup (3, 4) \\),
 which fail to be intervals precisely because they can be separated into two disjoint open pieces.
 
-[field_math]
-|     | \\[ 1\\] | \\[ 2\\] | \\[ 3\\] | \\[ 4\\] |     |
-|:----|----------|----------|----------|----------|-----|
-|     | sign+l-in-o-h | sign+r-in-o-h |  |  |     |
-|     |  |  | sign+l-in-o-h | sign+r-in-o-h |     |
-[/field_math]
 
 > The two intervals occupy separate, non-overlapping portions of the real line and cannot be joined into a single connected piece, which confirms that their union is not an interval.

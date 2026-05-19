@@ -1,8 +1,6 @@
 
 # De Moivre’s Theorem
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/de-moivre-theorem/
 
 ## Motivation for De Moivre’s Theorem
 

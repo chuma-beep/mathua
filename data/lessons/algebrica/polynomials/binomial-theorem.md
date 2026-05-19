@@ -1,7 +1,5 @@
 ## Binomial Theorem
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/binomial-theorem/
 
 ## Statement
 

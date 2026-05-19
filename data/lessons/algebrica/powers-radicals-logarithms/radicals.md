@@ -1,7 +1,5 @@
 # Radicals
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/radicals/
 
 ## Definition of radicals
 

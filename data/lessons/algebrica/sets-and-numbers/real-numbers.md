@@ -1,8 +1,6 @@
 
 # Real Numbers
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/real-numbers/
 
 ## Field and order structure
 

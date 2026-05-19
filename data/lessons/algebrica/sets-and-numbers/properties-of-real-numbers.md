@@ -1,7 +1,5 @@
 # Properties of Real Numbers
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/properties-of-real-numbers/
 
 ## Order of operations
 

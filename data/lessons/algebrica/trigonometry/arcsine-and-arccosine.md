@@ -1,7 +1,5 @@
 # Arcsine and Arccosine
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/arcsine-and-arccosine/
 
 ## Arcsine
 
@@ -123,7 +121,7 @@ The arcsine function \\(f(x) = \arcsin(x)\\) assigns to each value \\(x \in [-1,
 * [Domain](../determining-the-domain-of-a-function/): \\(x \in [-1, 1]\\)
 * Range: \\(y \in [-\pi/2, \pi/2]\\)
 * Periodicity: the arcsine function is not periodic.
-* Parity: the function is [odd](https://algebrica.org/even-and-odd-functions/), satisfying \\(\arcsin(-x) = -\arcsin(x)\\).
+* Parity: the function is odd, satisfying \\(\arcsin(-x) = -\arcsin(x)\\).
 
 - - -
 

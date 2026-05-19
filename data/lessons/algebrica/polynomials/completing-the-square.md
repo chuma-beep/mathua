@@ -1,7 +1,5 @@
 ## Completing the square
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/completing-the-square/
 
 ## Introduction
 

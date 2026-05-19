@@ -1,7 +1,5 @@
 # Hyperbolic Sine and Cosine
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/hyperbolic-sine-and-cosine/
 
 ## Introduction to hyperbolic sine and cosine
 

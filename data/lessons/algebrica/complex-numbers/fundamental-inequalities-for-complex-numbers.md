@@ -1,7 +1,5 @@
 # Fundamental Inequalities for Complex Numbers
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/complex-number-fundamental-inequalities/
 
 ## Introduction
 
