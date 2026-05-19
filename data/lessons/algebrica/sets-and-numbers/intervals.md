@@ -4,9 +4,9 @@
 
 ## Definition
 
-An interval is a subset of the real line with the property that, whenever two points belong to it, every point lying between them also belongs to it. More precisely, a subset \\( I \subseteq \mathbb{R} \\) is an interval if and only if, for every pair of points \\( a, b \in I \\) with \\( a < b \\), the entire set \\( \{x \in \mathbb{R} : a \leq x \leq b\} \\) is contained in \\( I \\). This property, known as convexity on the [real line](../real-numbers/), distinguishes intervals from arbitrary subsets of \\( \mathbb{R} \\) such as finite sets or unions of disconnected pieces.
+An interval is a subset of the real line with the property that, whenever two points belong to it, every point lying between them also belongs to it. More precisely, a subset \\( I \subseteq \mathbb{R} \\) is an interval if and only if, for every pair of points \\( a, b \in I \\) with \\( a < b \\), the entire set \\( \{x \in \mathbb{R} : a \leq x \leq b\} \\) is contained in \\( I \\). This property, known as convexity on the real line, distinguishes intervals from arbitrary subsets of \\( \mathbb{R} \\) such as finite sets or unions of disconnected pieces.
 
-Intervals are among the most fundamental objects in mathematical analysis. They appear as [domains of functions](../determining-the-domain-of-a-function/), as regions of integration](../definite-integrals/), as sets on which [continuity](../continuous-functions/) and [differentiability](../derivatives/) are studied and as the building blocks for describing more complex subsets of the real line.
+Intervals are among the most fundamental objects in mathematical analysis. They appear as domains of functions, as regions of integration, as sets on which continuity and differentiability are studied and as the building blocks for describing more complex subsets of the real line.
 
 Intervals are classified according to whether their endpoints are included or excluded, and  according to whether they are bounded or extend indefinitely in one or both directions.
 
@@ -105,10 +105,10 @@ neighborhood of a point. Given a point \\( x_0 \in \mathbb{R} \\) and a real num
 is called the \\( \varepsilon \\)-neighborhood of \\( x_0 \\), or simply a neighborhood of
 \\( x_0 \\). It consists of all points whose distance from \\( x_0 \\) is strictly less than
 \\( \varepsilon \\), that is, all \\( x \\) satisfying \\( |x-x_0| < \varepsilon \\),
-where \\( |\cdot| \\) denotes the [absolute value](../absolute-value/).
+where \\( |\cdot| \\) denotes the absolute value.
 
 
-Neighborhoods provide the language in which the definitions of [limit](../limits/), continuity, and differentiability are naturally expressed. A function \\( f \\) is continuous at \\( x_0 \\) if for every neighborhood of \\( f(x_0) \\) there exists a neighborhood of \\( x_0 \\) whose image under \\( f \\) is contained in the former. This formulation is equivalent to the classical \\( \varepsilon \\)-\\( \delta \\) definition and makes the role of intervals explicit.
+Neighborhoods provide the language in which the definitions of limit, continuity, and differentiability are naturally expressed. A function \\( f \\) is continuous at \\( x_0 \\) if for every neighborhood of \\( f(x_0) \\) there exists a neighborhood of \\( x_0 \\) whose image under \\( f \\) is contained in the former. This formulation is equivalent to the classical \\( \varepsilon \\)-\\( \delta \\) definition and makes the role of intervals explicit.
 
 A point \\( x_0 \\) is said to be interior to a set \\( S \subseteq \mathbb{R} \\) if some neighborhood of \\( x_0 \\) is entirely contained in \\( S \\). Every point of an open interval is interior to it, which is one reason open intervals play a privileged role in analysis. By contrast, the endpoints of a closed interval are not interior points: every
 neighborhood of an endpoint contains points outside the interval.
@@ -125,7 +125,7 @@ The length of a bounded interval with endpoints \\( a \\) and \\( b \\) is defin
 This reflects the fact that a single point has no extent: adding or removing a finite number of points from an interval does not alter its length. A degenerate interval \\( [a, a] \\) has length \\( \ell([a,a]) = 0 \\), consistently with this observation. Unbounded intervals have infinite length, in the sense that for every \\( M > 0 \\) there exist points in the
 interval whose distance exceeds \\( M \\), so no finite value can be assigned as their length.
 
-This notion of length is the starting point for the theory of measure on the real [line](../lines/), which assigns a generalized notion of size to arbitrary subsets of \\( \mathbb{R} \\). The measure of an interval \\( [a, b] \\) coincides with its length \\( b - a \\), and the extension of this assignment to more complex sets, through the notion of outer measure and measurability, forms the foundation of the [Lebesgue integral](../riemann-integrability-criteria/).
+This notion of length is the starting point for the theory of measure on the real line, which assigns a generalized notion of size to arbitrary subsets of \\( \mathbb{R} \\). The measure of an interval \\( [a, b] \\) coincides with its length \\( b - a \\), and the extension of this assignment to more complex sets, through the notion of outer measure and measurability, forms the foundation of the Lebesgue integral.
 
 - - -
 ## Characterization of intervals

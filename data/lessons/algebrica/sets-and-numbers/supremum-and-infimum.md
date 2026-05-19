@@ -4,7 +4,7 @@
 
 ## The completeness axiom
 
-Although [real numbers](../real-numbers/) are frequently introduced via their algebraic properties, the essential distinction between \\( \mathbb{R} \\) and \\( \mathbb{Q} \\) lies in their order structure, particularly a unique property of that order. Specifically, every non-empty subset of \\( \mathbb{R} \\) that is bounded above possesses a least upper bound that remains within \\( \mathbb{R} \\). This property is known as the completeness axiom and serves as a foundational characteristic of the real line. The notions of supremum and infimum provide practical means to apply this axiom.
+Although real numbers are frequently introduced via their algebraic properties, the essential distinction between \\( \mathbb{R} \\) and \\( \mathbb{Q} \\) lies in their order structure, particularly a unique property of that order. Specifically, every non-empty subset of \\( \mathbb{R} \\) that is bounded above possesses a least upper bound that remains within \\( \mathbb{R} \\). This property is known as the completeness axiom and serves as a foundational characteristic of the real line. The notions of supremum and infimum provide practical means to apply this axiom.
 
 - - -
 ## Upper and lower bounds
@@ -43,7 +43,7 @@ Together, these conditions determine \\( s \\). There can be only one least uppe
 
 \\[ s \leq s' \\, \wedge \\, s' \leq s \\, \to s = s' \\]
 
-An equivalent characterisation states that \\( s = \sup A \\) if and only if \\( s \\) is an upper bound of \\( A \\) and there exists a [sequence](../sequences/) \\( (a_n) \subseteq A \\) such that \\( a_n \to s \\).
+An equivalent characterisation states that \\( s = \sup A \\) if and only if \\( s \\) is an upper bound of \\( A \\) and there exists a sequence \\( (a_n) \subseteq A \\) such that \\( a_n \to s \\).
 
 > The completeness axiom ensures that \\( \sup A \\) exists in \\( \mathbb{R} \\) whenever \\( A \\) is non-empty and bounded above. This property does not hold in \\( \mathbb{Q} \\). For example, the set \\( \{q \in \mathbb{Q} : q^2 < 2\} \\) is bounded above in \\( \mathbb{Q} \\), but its least upper bound is \\( \sqrt{2} \\), which is not a rational number. In this case, the supremum exists, but it does not belong to the space. Such a situation cannot occur in \\( \mathbb{R} \\).
 
@@ -62,7 +62,7 @@ Together, these conditions uniquely determine \\( i \\). There can be only one g
 
 \\[ i \geq i' \\, \wedge \\, i' \geq i \\, \to i = i' \\]
 
-An equivalent characterisation states that \\( i = \inf A \\) if and only if \\( i \\) is a lower bound of \\( A \\) and there exists a [sequence](../sequences/) \\( (a_n) \subseteq A \\) such that \\( a_n \to i \\).
+An equivalent characterisation states that \\( i = \inf A \\) if and only if \\( i \\) is a lower bound of \\( A \\) and there exists a sequence \\( (a_n) \subseteq A \\) such that \\( a_n \to i \\).
 
 - - -
 ## Supremum and maximum, infimum and minimum
@@ -84,12 +84,12 @@ In general, the following holds:
 \\[ \max A \text{ exists} \to \max A = \sup A \\]
 \\[ \min A \text{ exists} \to \min A = \inf A \\]
 
-The converse does not hold in general. Whether a function actually attains its supremum is a non-trivial question. The [Weierstrass theorem](../weierstrass-theorem/) gives a sufficient condition: if a function is continuous on a closed and bounded interval, then the supremum and infimum are attained, and the maximum and minimum exist. Outside these conditions, the question must be examined case by case.
+The converse does not hold in general. Whether a function actually attains its supremum is a non-trivial question. The Weierstrass theorem gives a sufficient condition: if a function is continuous on a closed and bounded interval, then the supremum and infimum are attained, and the maximum and minimum exist. Outside these conditions, the question must be examined case by case.
 
 - - -
 ## Supremum and infimum of functions
 
-The concepts of supremum and infimum extend naturally to [functions](../functions/). For a function \\( f : D \to \mathbb{R} \\), the supremum of \\( f \\) over \\( D \\) is defined as the supremum of its image:
+The concepts of supremum and infimum extend naturally to functions. For a function \\( f : D \to \mathbb{R} \\), the supremum of \\( f \\) over \\( D \\) is defined as the supremum of its image:
 
 \\[ \sup_{x \in D} f(x) = \sup \{ f(x) : x \in D \} \\]
 
@@ -105,7 +105,7 @@ These quantities represent the least upper bound and greatest lower bound of the
 
 The supremum and infimum of a function are not necessarily attained. For instance, for \\( f(x) = x \\) defined on the open interval \\( (0, 1) \\), \\( \sup_{x \in (0,1)} f(x) = 1 \\), yet there is no \\( x \in (0, 1) \\) such that \\( f(x) = 1 \\). If the supremum is attained at some point \\( x_0 \in D \\), meaning \\( f(x_0) = \sup_{x \in D} f(x) \\), it coincides with the maximum of \\( f \\) over \\( D \\). The same relationship holds between the infimum and the minimum.
 
-> The definitions of supremum and infimum for a function prompt consideration of their distinction from [maximum and minimum](../maximum-minimum-and-inflection-points/) values. Supremum and infimum represent bounds that the function may approach but does not necessarily attain, whereas maximum and minimum refer to values that the function actually achieves at specific points in \\( D \\).
+> The definitions of supremum and infimum for a function prompt consideration of their distinction from maximum and minimum values. Supremum and infimum represent bounds that the function may approach but does not necessarily attain, whereas maximum and minimum refer to values that the function actually achieves at specific points in \\( D \\).
 
 - - -
 ## The approximation property
@@ -118,4 +118,4 @@ Equivalently, no number strictly less than \\( s \\) serves as an upper bound fo
 
 \\[ i \leq a < i + \varepsilon. \\]
 
-This property is used throughout analysis whenever one needs to extract elements of a set arbitrarily close to its supremum or infimum, and it appears naturally in existence arguments such as the proof of the Bolzano-Weierstrass theorem and the construction of the [Riemann integral](../riemann-integrability-criteria/).
+This property is used throughout analysis whenever one needs to extract elements of a set arbitrarily close to its supremum or infimum, and it appears naturally in existence arguments such as the proof of the Bolzano-Weierstrass theorem and the construction of the Riemann integral.

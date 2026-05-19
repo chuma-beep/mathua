@@ -4,7 +4,7 @@
 
 ## Field and order structure
 
-The real numbers are introduced as a structure characterised by a combination of algebraic and order properties. These properties determine their behaviour and distinguish it from all other numerical fields. The real numbers form a [field](../fields/) under addition and multiplication. This means that both operations are associative and commutative, multiplication distributes over addition, and every nonzero real number admits a multiplicative inverse. The additive identity is \\(0\\) and the multiplicative identity is \\(1\\). The algebraic axioms underlying this structure are discussed in detail in [Properties of Real Numbers](../properties-of-real-numbers/). Beyond its algebraic structure, \\(\mathbb{R}\\) carries a total order relation, denoted \\(<\\): for any two elements \\(x, y \in \mathbb{R}\\), exactly one of the following three relations holds:
+The real numbers are introduced as a structure characterised by a combination of algebraic and order properties. These properties determine their behaviour and distinguish it from all other numerical fields. The real numbers form a field under addition and multiplication. This means that both operations are associative and commutative, multiplication distributes over addition, and every nonzero real number admits a multiplicative inverse. The additive identity is \\(0\\) and the multiplicative identity is \\(1\\). The algebraic axioms underlying this structure are discussed in detail in Properties of Real Numbers. Beyond its algebraic structure, \\(\mathbb{R}\\) carries a total order relation, denoted \\(<\\): for any two elements \\(x, y \in \mathbb{R}\\), exactly one of the following three relations holds:
 
 \\[
 x < y \qquad x = y \qquad y < x
@@ -20,16 +20,16 @@ A field equipped with a total order satisfying these compatibility conditions is
 - - -
 ## The real line
 
-The real numbers admit a geometric interpretation that makes their order and completeness clear. Fix an arbitrary point on a straight line and label it \\(0\\). Fix a second point to its right and label it \\(1\\). Every real number \\(x\\) then corresponds to a unique point on the line: positive numbers lie to the right of \\(0\\), negative numbers to the left, at a distance from the origin equal to the [absolute value](../absolute-value/) \\(|x|\\). This correspondence is a bijection between \\(\mathbb{R}\\) and the points of the line and it preserves the order. \\(x < y\\) holds if and only if the point corresponding to \\(x\\) lies to the left of the point corresponding to \\(y\\).
+The real numbers admit a geometric interpretation that makes their order and completeness clear. Fix an arbitrary point on a straight line and label it \\(0\\). Fix a second point to its right and label it \\(1\\). Every real number \\(x\\) then corresponds to a unique point on the line: positive numbers lie to the right of \\(0\\), negative numbers to the left, at a distance from the origin equal to the absolute value \\(|x|\\). This correspondence is a bijection between \\(\mathbb{R}\\) and the points of the line and it preserves the order. \\(x < y\\) holds if and only if the point corresponding to \\(x\\) lies to the left of the point corresponding to \\(y\\).
 
 - - -
 ## The completeness axiom
 
-The property that distinguishes \\(\mathbb{R}\\) from \\(\mathbb{Q}\\) is completeness. It expresses the absence of gaps. Every position on the number line that could be approached by a [sequence](../sequences/) of rational numbers is actually occupied by a real number. The rational numbers, by contrast, leave the line with infinitely many holes, one for each irrational value.
+The property that distinguishes \\(\mathbb{R}\\) from \\(\mathbb{Q}\\) is completeness. It expresses the absence of gaps. Every position on the number line that could be approached by a sequence of rational numbers is actually occupied by a real number. The rational numbers, by contrast, leave the line with infinitely many holes, one for each irrational value.
 
 The formulation relies on the notion of an upper bound. A subset \\(S \subseteq \mathbb{R}\\) is said to be bounded above if there exists a real number \\(M\\) such that \\(x \leq M\\) for every \\(x \in S\\). Such a number \\(M\\) is called an upper bound of \\(S\\). When a smallest upper bound exists, it is called the supremum of \\(S\\), or least upper bound, and is denoted \\(\sup S\\).
 
-The completeness axiom of the real numbers can be stated as follows: every non-empty subset of \\(\mathbb{R}\\) that is bounded above has a [supremum](../supremum-and-infimum/) in \\(\mathbb{R}\\). This statement is known as the least upper bound property. The rational numbers fail to satisfy it. To see why, consider the following set:
+The completeness axiom of the real numbers can be stated as follows: every non-empty subset of \\(\mathbb{R}\\) that is bounded above has a supremum in \\(\mathbb{R}\\). This statement is known as the least upper bound property. The rational numbers fail to satisfy it. To see why, consider the following set:
 
 \\[
 S = \\{ q \in \mathbb{Q} : q^2 < 2 \\}
@@ -37,12 +37,12 @@ S = \\{ q \in \mathbb{Q} : q^2 < 2 \\}
 
 This set is non-empty and bounded above within \\(\mathbb{Q}\\), yet it has no least upper bound in \\(\mathbb{Q}\\). The value \\(\sqrt{2}\\), which plays the role of \\(\sup S\\), is irrational and therefore absent from \\(\mathbb{Q}\\). In \\(\mathbb{R}\\), the number \\(\sqrt{2}\\) exists and one has \\(\sup S = \sqrt{2}\\).
 
-A symmetric notion applies to sets bounded below. A subset \\(S \subseteq \mathbb{R}\\) is bounded below if there exists \\(m \in \mathbb{R}\\) such that \\(x \geq m\\) for all \\(x \in S\\). The greatest lower bound, or [infimum](../supremum-and-infimum/), is denoted \\(\inf S\\). The completeness axiom implies that every non-empty subset of \\(\mathbb{R}\\) bounded below has an infimum in \\(\mathbb{R}\\).
+A symmetric notion applies to sets bounded below. A subset \\(S \subseteq \mathbb{R}\\) is bounded below if there exists \\(m \in \mathbb{R}\\) such that \\(x \geq m\\) for all \\(x \in S\\). The greatest lower bound, or infimum, is denoted \\(\inf S\\). The completeness axiom implies that every non-empty subset of \\(\mathbb{R}\\) bounded below has an infimum in \\(\mathbb{R}\\).
 
 - - -
 ## The Archimedean property
 
-A consequence of completeness is the Archimedean property of \\(\mathbb{R}\\). It states that for every real number \\(x\\), there exists a [natural number](../natural-numbers/) \\(n\\) such that \\(n > x\\). Equivalently, the set of natural numbers \\(\mathbb{N}\\) is not bounded above in \\(\mathbb{R}\\). The argument runs as follows.
+A consequence of completeness is the Archimedean property of \\(\mathbb{R}\\). It states that for every real number \\(x\\), there exists a natural number \\(n\\) such that \\(n > x\\). Equivalently, the set of natural numbers \\(\mathbb{N}\\) is not bounded above in \\(\mathbb{R}\\). The argument runs as follows.
 
 + Suppose, for contradiction, that \\(\mathbb{N}\\) were bounded above in \\(\mathbb{R}\\).
 + By the completeness axiom, \\(\mathbb{N}\\) would then have a supremum that we call \\(s = \sup \mathbb{N}\\).
@@ -79,13 +79,13 @@ The order is given by inclusion: \\(A \leq B\\) if and only if \\(A \subseteq B\
 - - -
 ## Cauchy sequence construction
 
-A second construction of \\(\mathbb{R}\\) starts from a limitation of \\(\mathbb{Q}\\). Not every [Cauchy sequence](../cauchy-sequence/) of rational numbers converges to a rational number. A sequence \\((x_n)_{n \in \mathbb{N}}\\) in \\(\mathbb{Q}\\) is a Cauchy sequence if for every \\(\varepsilon \in \mathbb{Q}^+\\) there exists \\(N \in \mathbb{N}\\) such that:
+A second construction of \\(\mathbb{R}\\) starts from a limitation of \\(\mathbb{Q}\\). Not every Cauchy sequence of rational numbers converges to a rational number. A sequence \\((x_n)_{n \in \mathbb{N}}\\) in \\(\mathbb{Q}\\) is a Cauchy sequence if for every \\(\varepsilon \in \mathbb{Q}^+\\) there exists \\(N \in \mathbb{N}\\) such that:
 
 \\[
 m, n \geq N \implies |x_m - x_n| < \varepsilon
 \\]
 
-The terms of the sequence cluster together without the sequence needing to refer to a [limit](../limits/), which may not yet exist in \\(\mathbb{Q}\\). The sequence of rational approximations to \\(\sqrt{2}\\) is a standard example:
+The terms of the sequence cluster together without the sequence needing to refer to a limit, which may not yet exist in \\(\mathbb{Q}\\). The sequence of rational approximations to \\(\sqrt{2}\\) is a standard example:
 
 \\[
 \left(1,\, \frac{3}{2},\, \frac{7}{5},\, \frac{17}{12},\, \ldots\right)
@@ -119,7 +119,7 @@ The rational numbers are dense in \\(\mathbb{R}\\): between any two distinct rea
 
 Despite the density of \\(\mathbb{Q}\\) in \\(\mathbb{R}\\), the two sets differ in cardinality. The rational numbers are countable, meaning their elements can be placed in a one-to-one correspondence with the natural numbers. The real numbers are uncountable since no such correspondence exists. This result implies that the irrational numbers, which form the set \\(\mathbb{R} \setminus \mathbb{Q}\\), constitute the overwhelming majority of the real line.
 
-The Bolzano-Weierstrass theorem is a further consequence of completeness. It states that every bounded sequence of real numbers has a convergent subsequence. This result guarantees that bounded infinite sets cannot spread indefinitely without accumulating somewhere, and it underpins the theory of [limits](../limits), [continuous functions](../continuous-functions/), and compactness in \\(\mathbb{R}\\).
+The Bolzano-Weierstrass theorem is a further consequence of completeness. It states that every bounded sequence of real numbers has a convergent subsequence. This result guarantees that bounded infinite sets cannot spread indefinitely without accumulating somewhere, and it underpins the theory of limits, continuous functions, and compactness in \\(\mathbb{R}\\).
 
 - - -
 ## Uniqueness of \\(\mathbb{R}\\)
@@ -129,4 +129,4 @@ The real number system is the unique complete ordered field. Any two complete or
 - - -
 ## Intervals
 
-Among the subsets of \\(\mathbb{R}\\), [intervals](../intervals/) occupy a central role. An interval is a subset \\(I \subseteq \mathbb{R}\\) with the property that, whenever two points belong to it, every point lying between them also belongs to it. Intervals may be bounded, such as the open interval \\((a, b)\\) or the closed interval \\([a, b]\\), or unbounded, such as \\([a, +\infty)\\) or \\((-\infty, b)\\). The entire real line is itself an interval, denoted \\((-\infty, +\infty)\\).
+Among the subsets of \\(\mathbb{R}\\), intervals occupy a central role. An interval is a subset \\(I \subseteq \mathbb{R}\\) with the property that, whenever two points belong to it, every point lying between them also belongs to it. Intervals may be bounded, such as the open interval \\((a, b)\\) or the closed interval \\([a, b]\\), or unbounded, such as \\([a, +\infty)\\) or \\((-\infty, b)\\). The entire real line is itself an interval, denoted \\((-\infty, +\infty)\\).

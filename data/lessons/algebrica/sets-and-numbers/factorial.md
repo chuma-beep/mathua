@@ -2,7 +2,7 @@
 
 ## Definition
 
-The factorial of a non-negative [integer](../types-of-numbers/) \\(n\\), written \\(n!\\), is the product of all positive integers from \\(1\\) to \\(n\\):
+The factorial of a non-negative integer \\(n\\), written \\(n!\\), is the product of all positive integers from \\(1\\) to \\(n\\):
 
 \\[
 \begin{align}
@@ -19,7 +19,7 @@ For example, the factorial of \\(4\\) is computed as follows:
 
 By convention, the factorial of \\(0\\) is equal to \\(1\\).
 
-The factorial can also be expressed through a recursive [function](../functions/) defined by cases:
+The factorial can also be expressed through a recursive function defined by cases:
 
 \\[
 n! =
@@ -39,7 +39,7 @@ n! =
 \end{cases}
 \\]
 
-The factorial is used to compute the [binomial coefficient](../binomial-coefficient/), which represents the number of ways to select a given number of elements from a larger set.
+The factorial is used to compute the binomial coefficient, which represents the number of ways to select a given number of elements from a larger set.
 
 - - -
 -
@@ -82,7 +82,7 @@ In combinatorics, \\(n!\\) counts the possible permutations of \\(n\\) objects. 
 \end{array}
 \\]
 
-If the order of selection does not matter, many of these orderings become equivalent. Choosing the objects \\(1, 2, 3\\) is the same as choosing \\(3, 2, 1\\) or any other arrangement of the same three elements. Since each group of \\(k\\) elements can be arranged in \\(k!\\) different ways, dividing by \\(k!\\) eliminates these repetitions and yields the [binomial coefficient](../binomial-coefficient/):
+If the order of selection does not matter, many of these orderings become equivalent. Choosing the objects \\(1, 2, 3\\) is the same as choosing \\(3, 2, 1\\) or any other arrangement of the same three elements. Since each group of \\(k\\) elements can be arranged in \\(k!\\) different ways, dividing by \\(k!\\) eliminates these repetitions and yields the binomial coefficient:
 
 \\[
 \binom{n}{k} = \frac{n!}{k! \\, (n-k)!}
@@ -98,13 +98,13 @@ Starting from the recursive definition \\(n! = n \cdot (n-1)!\\) and substitutin
 \frac{n}{n!} = \frac{n}{n \cdot (n-1)!} = \frac{1}{(n-1)!}
 \\]
 
-A typical application is the derivation of the mean of the [Poisson distribution](../poisson-distribution/) or the rewriting of binomial coefficients in a simpler form.
+A typical application is the derivation of the mean of the Poisson distribution or the rewriting of binomial coefficients in a simpler form.
 
 - - -
 
 ## Relationship between the factorial and the gamma function
 
-The gamma function can be seen as the natural extension of the factorial. Where the factorial is defined only on the [natural numbers](../natural-numbers), the gamma function is defined for every positive real value. For any \\(c \in \mathbb{R}^+\\), the gamma function is defined by the following integral:
+The gamma function can be seen as the natural extension of the factorial. Where the factorial is defined only on the natural numbers, the gamma function is defined for every positive real value. For any \\(c \in \mathbb{R}^+\\), the gamma function is defined by the following integral:
 
 \\[
 \Gamma\(c\) = \int_{0}^{+\infty} x^{c - 1} e^{-x} \\, dx
@@ -118,7 +118,7 @@ For integer arguments, the gamma function agrees with the factorial, as shown by
 
 So the factorial can be seen as the discrete restriction of the gamma function to the natural numbers.
 
-> The gamma function also appears in the [Beta distribution](../beta-distribution/), where it provides the normalizing constant that makes the total probability integrate to one.
+> The gamma function also appears in the Beta distribution, where it provides the normalizing constant that makes the total probability integrate to one.
 
 - - -
 
@@ -130,7 +130,7 @@ Stirling's approximation is used to estimate \\(n!\\) for large values of \\(n\\
 n! \approx \sqrt{2\pi n} \left(\frac{n}{e}\right)^n
 \\]
 
-This approximation is needed because the factorial grows faster than both [polynomial](../polynomial-function/) and [exponential functions](../exponential-function/). Already for relatively small values, it can exceed \\(10^6\\), while \\(2^n\\) is still around \\(10^3\\).
+This approximation is needed because the factorial grows faster than both polynomial and exponential functions. Already for relatively small values, it can exceed \\(10^6\\), while \\(2^n\\) is still around \\(10^3\\).
 
 | \\(n\\) | Polynomial \\(n^2\\) | Exponential \\(2^n\\) | Factorial \\(n!\\) |
 |--------|---------------------|----------------------|-------------------|
@@ -151,4 +151,4 @@ This approximation becomes increasingly accurate as \\(n\\) grows. At \\(n = 10\
 n! \approx \sqrt{2\pi n} \left(\frac{n}{e}\right)^n \left(1 + \frac{1}{12n}\right)
 \\]
 
-> Stirling's approximation is used in the asymptotic analysis of [binomial coefficients](../binomial-coefficient/). For any base \\(a > 1\\), the factorial \\(n!\\) always dominates the [exponential](../exponential-function/) \\(a^n\\), that is, \\(\lim_{n \to \infty} a^n/n! = 0\\).
+> Stirling's approximation is used in the asymptotic analysis of binomial coefficients. For any base \\(a > 1\\), the factorial \\(n!\\) always dominates the exponential \\(a^n\\), that is, \\(\lim_{n \to \infty} a^n/n! = 0\\).

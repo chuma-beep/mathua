@@ -3,7 +3,7 @@
 
 ## Introduction to hyperbolic sine and cosine
 
-We have seen that the [sine](../sine-and-cosine/) of an angle can be introduced geometrically by looking at how a point moves along the [unit circle](../unit-circle/). The hyperbolic sine, instead, is obtained by relating a point on the right branch of the equilateral [hyperbola](../hyperbola/):
+We have seen that the sine of an angle can be introduced geometrically by looking at how a point moves along the unit circle. The hyperbolic sine, instead, is obtained by relating a point on the right branch of the equilateral hyperbola:
 
 \\[
 X^{2} - Y^{2} = 1
@@ -40,7 +40,7 @@ In this geometric interpretation, the pair \\(\bigl(\cosh(x),\\, \sinh(x)\bigr)\
 - - -
 ## Fundamental hyperbolic identity
 
-The hyperbolic sine and hyperbolic cosine satisfy a relationship that plays a role analogous to the [Pythagorean identity](../pythagorean-identity/). This relationship is known as the fundamental hyperbolic identity:
+The hyperbolic sine and hyperbolic cosine satisfy a relationship that plays a role analogous to the Pythagorean identity. This relationship is known as the fundamental hyperbolic identity:
 
 \\[
 \cosh^{2} x - \sinh^{2} x = 1
@@ -91,7 +91,7 @@ Here the horizontal coordinate \\(\cosh(x)\\) and the vertical coordinate \\(\si
 - - -
 ## Analytical expression of the hyperbolic sine
 
-A first derivation comes directly from the [exponential function](../exponential-function/). If we look at how \\(e^{x}\\) and \\(e^{-x}\\) behave, we notice that they naturally split into a symmetric and an antisymmetric part. Writing them as:
+A first derivation comes directly from the exponential function. If we look at how \\(e^{x}\\) and \\(e^{-x}\\) behave, we notice that they naturally split into a symmetric and an antisymmetric part. Writing them as:
 
 \\[e^{x} = \cosh(x) + \sinh(x)\\]
 \\[e^{-x} = \cosh(x) - \sinh(x)\\]
@@ -205,26 +205,26 @@ This value is therefore taken as the analytical definition of the hyperbolic cos
 = \frac{e^{x} + e^{-x}}{2}
 \\]
 
-> These analytic definitions express the hyperbolic sine and cosine directly in terms of the [exponential function](../exponential-function/). Their symmetry follows from the structure of the equilateral hyperbola.
+> These analytic definitions express the hyperbolic sine and cosine directly in terms of the exponential function. Their symmetry follows from the structure of the equilateral hyperbola.
 
 - - -
 ## Hyperbolic sine and cosine function
 
-The hyperbolic sine function \\(f(x) = \sinh(x)\\) associates each [real number](../types-of-numbers/) \\(x\\) with a value derived from the exponential function. Unlike the circular sine, it does not oscillate: its graph grows exponentially for large positive or negative values of \\(x\\), crossing the origin with slope \\(1\\). The function \\(f(x) = \sinh(x)\\) is defined for all real numbers, and its range also spans the entire real line.
+The hyperbolic sine function \\(f(x) = \sinh(x)\\) associates each real number \\(x\\) with a value derived from the exponential function. Unlike the circular sine, it does not oscillate: its graph grows exponentially for large positive or negative values of \\(x\\), crossing the origin with slope \\(1\\). The function \\(f(x) = \sinh(x)\\) is defined for all real numbers, and its range also spans the entire real line.
 
 + Domain: \\(x \in \mathbb{R}\\)  
 + Range: \\(y \in \mathbb{R}\\)  
 + Periodicity: not periodic; grows exponentially as \\(|x|\\) increases  
-+ Parity: [odd](../even-and-odd-functions/), \\(\sinh(-x) = -\sinh(x)\\)
++ Parity: odd, \\(\sinh(-x) = -\sinh(x)\\)
 
 - - -
 
-The hyperbolic cosine function \\(f(x) = \cosh(x)\\) assigns to each real number \\(x\\) a value obtained from the symmetric part of the exponential function. Unlike the circular cosine, it is not periodic: its graph has a minimum at \\(x = 0\\), where \\(\cosh(0) = 1\\), and increases exponentially as the [absolute value](../absolute-value/) of \\(x\\) becomes larger. The function \\(f(x) = \cosh(x)\\) is defined for all real numbers, and its range is given by \\(\cosh(x) \geq 1\\).
+The hyperbolic cosine function \\(f(x) = \cosh(x)\\) assigns to each real number \\(x\\) a value obtained from the symmetric part of the exponential function. Unlike the circular cosine, it is not periodic: its graph has a minimum at \\(x = 0\\), where \\(\cosh(0) = 1\\), and increases exponentially as the absolute value of \\(x\\) becomes larger. The function \\(f(x) = \cosh(x)\\) is defined for all real numbers, and its range is given by \\(\cosh(x) \geq 1\\).
 
 + Domain: \\( x \in \mathbb{R} \\)  
 + Range: \\( y \in \mathbb{R} : y \geq 1 \\)  
 + Periodicity: not periodic; grows exponentially as \\(|x|\\) increases  
-+ Parity: [even](../even-and-odd-functions/), \\(\cosh(-x) = \cosh(x)\\)
++ Parity: even, \\(\cosh(-x) = \cosh(x)\\)
 
 - - -
 ## Relation to the circular sine and cosine
@@ -242,7 +242,7 @@ X_{P} = \cosh(x) = \frac{e^{x} + e^{-x}}{2}
 Y_{P} = \sinh(x) = \frac{e^{x} - e^{-x}}{2}
 \\]
 
-In the circular setting, the corresponding quantities arise from the [unit circle](../unit-circle/) of radius \\(1\\), where a central angle \\( \theta \\) determines the circular [sine and cosine](../sine-and-cosine/), identified by the point:
+In the circular setting, the corresponding quantities arise from the unit circle of radius \\(1\\), where a central angle \\( \theta \\) determines the circular sine and cosine, identified by the point:
 \\[
 P(X_{P}, Y_{P}) = P(\cos\theta,\\, \sin\theta)
 \\]

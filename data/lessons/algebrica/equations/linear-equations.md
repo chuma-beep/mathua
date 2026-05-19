@@ -3,7 +3,7 @@
 
 ## Definition
 
-A linear equation in the unknowns \\(x_1, x_2, \ldots, x_n\\) is an algebraic [equation](../equations/) of degree one, in which each variable appears with exponent equal to \\(1\\) and never multiplied by another variable. Its standard form is:
+A linear equation in the unknowns \\(x_1, x_2, \ldots, x_n\\) is an algebraic equation of degree one, in which each variable appears with exponent equal to \\(1\\) and never multiplied by another variable. Its standard form is:
 
 \\[
 a_1x_1 + a_2x_2 + \ldots + a_nx_n = b
@@ -27,7 +27,7 @@ These two identities are the algebraic counterpart of what, geometrically, makes
 
 A linear equation may involve any finite number of unknowns. The expression \\(ax + by + c = 0\\), for example, is a linear equation in the two variables \\(x\\) and \\(y\\), with constant term \\(-c\\) once written in standard form.
 
-> Linear equations are the foundation on which [systems of linear equations](../systems-of-linear-equations/) and [matrix](../matrices/) calculus are built, and they provide the language in which problems involving several unknowns can be formulated and solved simultaneously.
+> Linear equations are the foundation on which systems of linear equations and matrix calculus are built, and they provide the language in which problems involving several unknowns can be formulated and solved simultaneously.
 
 - - -
 ## Type of solution
@@ -35,11 +35,11 @@ A linear equation may involve any finite number of unknowns. The expression \\(a
 The geometric nature of the solution set of a linear equation depends on the number of unknowns and on whether the equation is homogeneous. In every case the solution set is an affine subspace of \\(\mathbb{R}^n\\), that is, a translate of a linear subspace, and its dimension equals \\(n - 1\\) when the equation is non-degenerate.
 
 + With one unknown, the solution reduces to a single point on the real line.
-+ With two unknowns, the solutions form a [line](../lines/) in the plane, passing through the origin if the equation is homogeneous.
++ With two unknowns, the solutions form a line in the plane, passing through the origin if the equation is homogeneous.
 + With three unknowns, they form a plane in space, again through the origin in the homogeneous case.
 + With \\(n > 3\\) unknowns, the solution set is a hyperplane of \\(\mathbb{R}^n\\), namely an affine subspace of dimension \\(n - 1\\).
 
-> The drop in dimension by exactly one reflects the fact that a single linear equation imposes one scalar constraint on the \\(n\\) unknowns. Imposing further independent linear conditions corresponds to intersecting hyperplanes, and leads naturally to the theory of [systems of linear equations](../systems-of-linear-equations/).
+> The drop in dimension by exactly one reflects the fact that a single linear equation imposes one scalar constraint on the \\(n\\) unknowns. Imposing further independent linear conditions corresponds to intersecting hyperplanes, and leads naturally to the theory of systems of linear equations.
 
 - - -
 ## Linear equations in one variable
@@ -64,7 +64,7 @@ When \\(a = 0\\) and \\(b = 0\\), the equation becomes \\(0 = 0\\), an identity 
 
 When \\(a = 0\\) and \\(b \neq 0\\), the equation reduces to \\(0 = b\\), a contradiction with no solution. The solution set is empty and the equation is called impossible.
 
-The three cases above are not abstract curiosities. They appear systematically when the coefficients depend on one or more real parameters, giving rise to [linear equations with parameters](../linear-equations-with-parameters/) of the form \\(a(k)\, x = b(k)\\). The values of \\(k\\) for which \\(a(k) = 0\\) are precisely those that switch the equation between the determinate, indeterminate, and impossible regimes, and identifying them is the central problem in the parametric setting.
+The three cases above are not abstract curiosities. They appear systematically when the coefficients depend on one or more real parameters, giving rise to linear equations with parameters of the form \\(a(k)\, x = b(k)\\). The values of \\(k\\) for which \\(a(k) = 0\\) are precisely those that switch the equation between the determinate, indeterminate, and impossible regimes, and identifying them is the central problem in the parametric setting.
 
 - - -
 ## Example 1
@@ -75,7 +75,7 @@ Consider the equation:
 2x + 3 = 11x
 \\]
 
-The unknown \\(x\\) ranges over the whole set of [real numbers](../types-of-number/), without restrictions on its [domain](../determining-the-domain-of-a-function/). To solve the equation we move all terms containing \\(x\\) to one side and the constants to the other, reducing it to the standard form \\(ax = b\\):
+The unknown \\(x\\) ranges over the whole set of real numbers, without restrictions on its domain. To solve the equation we move all terms containing \\(x\\) to one side and the constants to the other, reducing it to the standard form \\(ax = b\\):
 
 \\[
 \begin{align}
@@ -114,7 +114,7 @@ A linear equation in two unknowns has the standard form:
 ax + by = c
 \\]
 
-with \\(a, b, c \in \mathbb{R}\\) and at least one between \\(a\\) and \\(b\\) different from zero. Geometrically, its solution set is a straight [line](../lines/) in the Cartesian plane, and the equation is the implicit representation of that line. The constant term \\(c\\) determines the position of the line: when \\(c \neq 0\\) the line does not pass through the origin, while when \\(c = 0\\) the equation reduces to the homogeneous form and the corresponding line passes through the origin.
+with \\(a, b, c \in \mathbb{R}\\) and at least one between \\(a\\) and \\(b\\) different from zero. Geometrically, its solution set is a straight line in the Cartesian plane, and the equation is the implicit representation of that line. The constant term \\(c\\) determines the position of the line: when \\(c \neq 0\\) the line does not pass through the origin, while when \\(c = 0\\) the equation reduces to the homogeneous form and the corresponding line passes through the origin.
 
 The general solution can be obtained by treating one of the unknowns as a free parameter. Assuming \\(b \neq 0\\) and setting \\(x = \lambda\\), the equation gives:
 
@@ -244,7 +244,7 @@ Specific points of the plane are obtained by assigning numerical values to the t
 
 A direct substitution confirms that all three triples satisfy the original equation.
 
-The two triples \\((1, 0, 1)\\) and \\((0, 1, 2)\\) are [linearly independent](../rank-of-a-matrix/) and span the whole plane, in the sense that every solution can be written as the linear combination \\(\lambda (1, 0, 1) + \mu (0, 1, 2)\\). This pair of vectors constitutes a basis of the two-dimensional subspace of \\(\mathbb{R}^3\\) defined by the equation, and the parametrisation written above is precisely the expression of a generic vector of the subspace in terms of this basis.
+The two triples \\((1, 0, 1)\\) and \\((0, 1, 2)\\) are linearly independent and span the whole plane, in the sense that every solution can be written as the linear combination \\(\lambda (1, 0, 1) + \mu (0, 1, 2)\\). This pair of vectors constitutes a basis of the two-dimensional subspace of \\(\mathbb{R}^3\\) defined by the equation, and the parametrisation written above is precisely the expression of a generic vector of the subspace in terms of this basis.
 
 The solution set of the equation \\(x + 2y - z = 0\\) is the plane through the origin described by:
 
@@ -255,7 +255,7 @@ The solution set of the equation \\(x + 2y - z = 0\\) is the plane through the o
 - - -
 ## Linear equations with a parameter
 
-A natural extension of the theory developed so far consists in allowing the coefficients to depend on one or more real parameters, rather than being fixed numbers. This gives rise to [linear equations with a parameter](../linear-equations-with-parameters/), a family of relations of the form:
+A natural extension of the theory developed so far consists in allowing the coefficients to depend on one or more real parameters, rather than being fixed numbers. This gives rise to linear equations with a parameter, a family of relations of the form:
 
 \\[
 a(k)\\, x + b(k) = c(k)

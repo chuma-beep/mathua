@@ -3,7 +3,7 @@
 
 ## Definition
 
-If \\(a\\) and \\(b\\) are positive [real numbers](../../properties-of-real-numbers/), where \\(a \neq 1\\), the logarithm of \\(b\\) to the base \\(a\\), denoted as \\(\log_a(b)\\), is defined as the real number \\(c\\) such that \\(a^c = b\\).
+If \\(a\\) and \\(b\\) are positive real numbers, where \\(a \neq 1\\), the logarithm of \\(b\\) to the base \\(a\\), denoted as \\(\log_a(b)\\), is defined as the real number \\(c\\) such that \\(a^c = b\\).
 
 \\[\log_a{b} = c \iff a^c = b \\]
 
@@ -11,7 +11,7 @@ The following conditions must be satisfied:
 
 \\[a>0 \quad a \neq 1 \quad b > 0 \\]
 
-In simpler terms, the logarithm of a number refers to the exponent to which a specified base must be raised to obtain that number. Therefore, the logarithm is the inverse operation of [exponentiation](../exponential-function).
+In simpler terms, the logarithm of a number refers to the exponent to which a specified base must be raised to obtain that number. Therefore, the logarithm is the inverse operation of exponentiation.
 
 + \\(a\\) is the base of the logarithm.
 + \\(b\\) is the argument.
@@ -20,19 +20,19 @@ In simpler terms, the logarithm of a number refers to the exponent to which a sp
 
 - - -
 
-The condition \\( a \neq 1 \\) is essential. In fact, when \\( a = 1 \\), the exponential expression \\( a^x \\) becomes \\( 1^x = 1 \quad \forall \\, x \in \mathbb{R} \\) In this case, the exponential function is constant and therefore not [invertible](../inverse-function/). Since the logarithm is defined as the inverse operation of exponentiation, it cannot be defined when the base is equal to \\(1\\). For this reason, the base of a logarithm must satisfy \\( a > 0 \\) and \\( a \neq 1 \\).
+The condition \\( a \neq 1 \\) is essential. In fact, when \\( a = 1 \\), the exponential expression \\( a^x \\) becomes \\( 1^x = 1 \quad \forall \\, x \in \mathbb{R} \\) In this case, the exponential function is constant and therefore not invertible. Since the logarithm is defined as the inverse operation of exponentiation, it cannot be defined when the base is equal to \\(1\\). For this reason, the base of a logarithm must satisfy \\( a > 0 \\) and \\( a \neq 1 \\).
 
 - - -
 ## Basic identities
 
-Understanding logarithms requires a review of the concept of [powers](../powers), as these two mathematical ideas are closely related. The following identities arise directly from the principle that logarithms are the inverse operation of exponentiation:
+Understanding logarithms requires a review of the concept of powers, as these two mathematical ideas are closely related. The following identities arise directly from the principle that logarithms are the inverse operation of exponentiation:
 
 \\[a^0 = 1 \to \log{_a}1 = 0 \\]
 \\[a^1 = a \to \log{_a}a = 1 \\]
 
 Since the exponential is always positive, it is not possible to determine the logarithm of a negative number. In formal terms, \\(\nexists\\) a number \\(c \in \mathbb{R}\\) such that \\(a^c < 0\\).
 
-+ Logarithms with base \\(e\\), known as natural or Napierian logarithms, are typically denoted as \\( \ln a \\) without specifying the base, where \\(e \approx 2.71828\\) is [Euler's number](../euler-number-limit-sequence//), the base of the natural exponential function \\(e^x\\).
++ Logarithms with base \\(e\\), known as natural or Napierian logarithms, are typically denoted as \\( \ln a \\) without specifying the base, where \\(e \approx 2.71828\\) is Euler's number, the base of the natural exponential function \\(e^x\\).
 
 + Logarithms with the base of the number \\(10\\), known as common logarithms, are typically denoted as \\( \text{Log} a \\) without specifying the base.
 
@@ -41,17 +41,17 @@ Since the exponential is always positive, it is not possible to determine the lo
 - - -
 ## Logarithmic function
 
-As previously introduced, the [logarithmic function](../logarithmic-function) is the [inverse](../inverse-function/) of the exponential function. Consequently, its [domain](../determining-the-domain-of-a-function/) and range are inverted compared to the exponential function. A logarithmic function is typically expressed in the following form:
+As previously introduced, the logarithmic function is the inverse of the exponential function. Consequently, its domain and range are inverted compared to the exponential function. A logarithmic function is typically expressed in the following form:
 
 \\[
 \log_a : (0,+\infty) \to \mathbb{R}, \quad a > 0,\\; a \neq 1
 \\]
 
-The domain is \\(x \in \mathbb{R}^+ \\) and the range is \\(\mathbb{R}\\). The function is [continuous](../continuous-functions/) and [differentiable](../derivatives/) on \\( (0,+\infty) \\).
+The domain is \\(x \in \mathbb{R}^+ \\) and the range is \\(\mathbb{R}\\). The function is continuous and differentiable on \\( (0,+\infty) \\).
 
 - - -
 
-The graph above illustrates the monotonic behaviour and asymptotic properties of the logarithmic function. For values of \\( a > 1 \\), the function \\(f(x) = \log_a x\\) is strictly increasing on \\( (0,+\infty) \\). It has a vertical [asymptote](../asymptotes/) at \\( x = 0 \\), and its limits are:
+The graph above illustrates the monotonic behaviour and asymptotic properties of the logarithmic function. For values of \\( a > 1 \\), the function \\(f(x) = \log_a x\\) is strictly increasing on \\( (0,+\infty) \\). It has a vertical asymptote at \\( x = 0 \\), and its limits are:
 
 \\[
 \begin{aligned}
@@ -71,12 +71,12 @@ For \\( 0 < a < 1 \\), the function is strictly decreasing on \\( (0,+\infty) \\
 \end{aligned}
 \\]
 
-> The logarithmic function is utilised across various disciplines, for example in computer science, where it is fundamental to the analysis of algorithmic complexity. For example, algorithms such as [binary search](../logarithmic-function) exhibit logarithmic time complexity, indicating that their performance remains efficient as input sizes increase. This characteristic demonstrates how logarithmic growth enables concise and effective representations of exponential processes.
+> The logarithmic function is utilised across various disciplines, for example in computer science, where it is fundamental to the analysis of algorithmic complexity. For example, algorithms such as binary search exhibit logarithmic time complexity, indicating that their performance remains efficient as input sizes increase. This characteristic demonstrates how logarithmic growth enables concise and effective representations of exponential processes.
 
 - - -
 ## Properties of logarithms
 
-Logarithms have properties that facilitate the manipulation of mathematical expressions and [equations](../equations). These properties are fundamentally linked to those of exponential functions as each logarithmic identity directly results from a corresponding law of exponents.
+Logarithms have properties that facilitate the manipulation of mathematical expressions and equations. These properties are fundamentally linked to those of exponential functions as each logarithmic identity directly results from a corresponding law of exponents.
 
 Because the logarithm is defined as the inverse of the exponential function, the following identities are valid:
 
@@ -98,11 +98,11 @@ The quotient rule states that the logarithm of a quotient of two numbers is equa
 
 - - -
 
-The property of the logarithm of a power states that the logarithm of a [power](../powers) of a number is equal to the product of the exponent and the logarithm of the base number: \\[ \log{_a}x^n = n \cdot \log{_a}x \\] This property directly follows from the properties of exponentials, as an expression like \\( x^n \\) can be understood as the result of multiplying \\( x \\) by itself \\( n \\) times.
+The property of the logarithm of a power states that the logarithm of a power of a number is equal to the product of the exponent and the logarithm of the base number: \\[ \log{_a}x^n = n \cdot \log{_a}x \\] This property directly follows from the properties of exponentials, as an expression like \\( x^n \\) can be understood as the result of multiplying \\( x \\) by itself \\( n \\) times.
 
 - - -
 
-From the previous property and the property of [radicals](../radicals), it follows that the logarithm of a radical is equal to the quotient between the logarithm of the radicand and the index of the root: \\[\log_a\sqrt[n]{b} = \frac{1}{n}\log_ab \\]
+From the previous property and the property of radicals, it follows that the logarithm of a radical is equal to the quotient between the logarithm of the radicand and the index of the root: \\[\log_a\sqrt[n]{b} = \frac{1}{n}\log_ab \\]
 
 - - -
 ## Fundamental inequality for the natural logarithm
@@ -228,7 +228,7 @@ While \\( y = \log_a(x) \\), we have proved that:
 - - -
 ## Logarithmic equations
 
-[Logarithmic equations](../logarithmic-equations) are mathematical expressions in which the variable appears within a logarithmic function. Solving such equations requires a thorough understanding of logarithmic properties, which are essential for isolating and determining the variable's value. A typical logarithmic equation is structured as follows:
+Logarithmic equations are mathematical expressions in which the variable appears within a logarithmic function. Solving such equations requires a thorough understanding of logarithmic properties, which are essential for isolating and determining the variable's value. A typical logarithmic equation is structured as follows:
 
 \\[ \log_af(x) = g(x) \\]
 
@@ -238,19 +238,19 @@ While \\( y = \log_a(x) \\), we have proved that:
 - - -
 ## The natural logarithm
 
-From an analytical standpoint, the natural logarithm is defined independently of exponentiation using a [definite integral](../definite-integrals/). For every real number \\( x > 0 \\), the natural logarithm is given by:
+From an analytical standpoint, the natural logarithm is defined independently of exponentiation using a definite integral. For every real number \\( x > 0 \\), the natural logarithm is given by:
 
 \\[
 \ln x = \int_1^x \frac{1}{t} \\, dt
 \\]
 
-This definition ensures that \\( \ln x \\) is well-defined for all positive real numbers because the function \\( \frac{1}{t} \\) is continuous on \\( (0,+\infty) \\). By the [Fundamental Theorem of Calculus](../fundamental-theorem-of-calculus/), the natural logarithm is differentiable and satisfies:
+This definition ensures that \\( \ln x \\) is well-defined for all positive real numbers because the function \\( \frac{1}{t} \\) is continuous on \\( (0,+\infty) \\). By the Fundamental Theorem of Calculus, the natural logarithm is differentiable and satisfies:
 
 \\[
 (\ln x)’ = \frac{1}{x} \qquad x>0
 \\]
 
-Furthermore, the natural logarithm is [strictly increasing](../increasing-and-decreasing-functions/) because its [derivative](../derivatives/) is positive on \\( (0,+\infty) \\). It is also concave, as:
+Furthermore, the natural logarithm is strictly increasing because its derivative is positive on \\( (0,+\infty) \\). It is also concave, as:
 
 \\[
 (\ln x)^{\prime\prime}= -\frac{1}{x^2} < 0

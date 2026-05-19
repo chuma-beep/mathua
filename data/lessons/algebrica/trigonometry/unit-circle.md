@@ -9,14 +9,14 @@ By convention, the counterclockwise direction is assigned a positive sign and th
 
 Let \\( S \\) be the point \\( (1, 0) \\) where the unit circle meets the positive \\( x \\)-axis, and let \\( T \\) be the point where the line through \\( O \\) and \\( P \\) intersects the vertical tangent to the circle at \\( S \\).
 
-- The length of the vertical segment \\( \overline{PR} \\) equals the [sine](../sine-and-cosine) of the angle \\( \theta \\).
-- The length of the horizontal segment \\( \overline{OR} \\) equals the [cosine](../sine-and-cosine) of the angle \\( \theta \\).
-- The length of the vertical segment \\( \overline{ST} \\) equals the [tangent](../tangent-and-cotangent) of the angle \\( \theta \\).
+- The length of the vertical segment \\( \overline{PR} \\) equals the sine of the angle \\( \theta \\).
+- The length of the horizontal segment \\( \overline{OR} \\) equals the cosine of the angle \\( \theta \\).
+- The length of the vertical segment \\( \overline{ST} \\) equals the tangent of the angle \\( \theta \\).
 
 - - -
 ## Fundamental trigonometric identity
 
-Once the notions of [sine and cosine](../sine-and-cosine/) are introduced through the geometry of the unit circle, their relationship becomes obvious. If a point \\( P \\) lies on the unit circle and the segment \\( \overline{OP} \\) forms an angle \\( \theta \\) with the positive \\( x \\)-axis, the right triangle with vertices at \\( O \\), \\( R \\), and \\( P \\) has hypotenuse of length \\( 1 \\), horizontal leg of length \\( \cos\theta \\), and vertical leg of length \\( \sin\theta \\). Applying the [Pythagorean theorem](../pythagorean-theorem/) to this triangle gives the following identity:
+Once the notions of sine and cosine are introduced through the geometry of the unit circle, their relationship becomes obvious. If a point \\( P \\) lies on the unit circle and the segment \\( \overline{OP} \\) forms an angle \\( \theta \\) with the positive \\( x \\)-axis, the right triangle with vertices at \\( O \\), \\( R \\), and \\( P \\) has hypotenuse of length \\( 1 \\), horizontal leg of length \\( \cos\theta \\), and vertical leg of length \\( \sin\theta \\). Applying the Pythagorean theorem to this triangle gives the following identity:
 
 \\[
 \sin^2\theta + \cos^2\theta = 1
@@ -62,9 +62,9 @@ x &= \cos\theta \\\\[6pt]
 y &= \sin\theta \\\\[6pt]
 \end{align}
 \\]
-When \\( \theta \\) is allowed to range over all of \\( \mathbb{R} \\), the same point may be reached multiple times, reflecting the periodicity of the trigonometric functions. Substituting the parametric expressions into the equation \\( x^2 + y^2 = 1 \\) recovers the [fundamental trigonometric identity](../pythagorean-identity/) \\( \sin^2\theta + \cos^2\theta = 1 \\), confirming that every point of this form lies on the unit circle.
+When \\( \theta \\) is allowed to range over all of \\( \mathbb{R} \\), the same point may be reached multiple times, reflecting the periodicity of the trigonometric functions. Substituting the parametric expressions into the equation \\( x^2 + y^2 = 1 \\) recovers the fundamental trigonometric identity \\( \sin^2\theta + \cos^2\theta = 1 \\), confirming that every point of this form lies on the unit circle.
 
-As an example, consider the angle \\( \theta = \pi/3 \\). The [parametric equations](../equations-with-parameters/) give the following values.
+As an example, consider the angle \\( \theta = \pi/3 \\). The parametric equations give the following values.
 
 \\[\cos\frac{\pi}{3} = \frac{1}{2}\\]
 \\[\sin\frac{\pi}{3} = \frac{\sqrt{3}}{2}\\]
@@ -91,7 +91,7 @@ corresponding point on the circle unchanged. This is expressed by the following 
 
 for every integer \\( k \in \mathbb{Z} \\). In particular, this means that the parametrization by \\( \theta \in \mathbb{R} \\) is not injective: infinitely many values of \\( \theta \\)  correspond to the same point on the circle, and a bijective correspondence is recovered only by restricting \\( \theta \\) to an interval of length \\( 2\pi \\), such as \\( [0, 2\pi) \\).
 
-This periodic behaviour is a defining property of the [sine and cosine](../sine-and-cosine/), which inherit it directly from the geometry of the unit circle.
+This periodic behaviour is a defining property of the sine and cosine, which inherit it directly from the geometry of the unit circle.
 
 - - -
 ## Notable angles and their coordinates
@@ -115,11 +115,11 @@ The values at \\(\theta = \pi/4\\) follow from a single observation: an isoscele
 - - -
 ## The unit circle and complex numbers
 
-The unit circle admits a natural interpretation in the context of complex numbers. Recall that a [complex number](../complex-numbers/) \\( z = x + iy \\) can be represented as a point \\( (x, y) \\) in the Cartesian plane. The modulus of \\( z \\) is defined as \\( |z| = \sqrt{x^2 + y^2} \\), so the condition \\( |z| = 1 \\) describes precisely the set of complex numbers lying on the unit circle. By the parametric representation established above, every such number can be written in the form:
+The unit circle admits a natural interpretation in the context of complex numbers. Recall that a complex number \\( z = x + iy \\) can be represented as a point \\( (x, y) \\) in the Cartesian plane. The modulus of \\( z \\) is defined as \\( |z| = \sqrt{x^2 + y^2} \\), so the condition \\( |z| = 1 \\) describes precisely the set of complex numbers lying on the unit circle. By the parametric representation established above, every such number can be written in the form:
 
  \\[ z = \cos\theta + i\sin\theta \\]
 
-for some angle \\( \theta \\). This expression coincides with the [exponential form of a complex number](../complex-numbers-exponential-form/), given by Euler's formula:
+for some angle \\( \theta \\). This expression coincides with the exponential form of a complex number, given by Euler's formula:
 
 \\[
 e^{i\theta} = \cos\theta + i\sin\theta
@@ -131,4 +131,4 @@ as \\( \theta \\) ranges over \\( \mathbb{R} \\), or equivalently the set
 geometrically to a rotation: if \\( z_1 = e^{i\alpha} \\) and \\( z_2 = e^{i\beta} \\),
 then \\( z_1 z_2 = e^{i(\alpha+\beta)} \\), which is the point obtained by rotating
 \\( z_1 \\) by the angle \\( \beta \\). This geometric interpretation underlies both
-[De Moivre's theorem](../de-moivre-theorem/) and the study of the [roots of unity](../roots-of-unity/).
+De Moivre's theorem and the study of the roots of unity.

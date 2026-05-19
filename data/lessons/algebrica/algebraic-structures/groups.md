@@ -3,7 +3,7 @@
 
 ## Definition
 
-A group is one of the most fundamental structures in abstract algebra. The concept arises when one isolates the essential properties shared by many mathematical objects: the [integers](../natural-numbers) under addition, the nonzero [real numbers](../real-numbers/) under multiplication, the symmetries of a geometric figure, and the invertible [matrices](../matrices/) of a given size all exhibit the same abstract pattern. In formal terms, a group is a set \\(G\\) together with a binary operation \\(\cdot : G \times G \to G\\) satisfying the following four axioms:
+A group is one of the most fundamental structures in abstract algebra. The concept arises when one isolates the essential properties shared by many mathematical objects: the integers under addition, the nonzero real numbers under multiplication, the symmetries of a geometric figure, and the invertible matrices of a given size all exhibit the same abstract pattern. In formal terms, a group is a set \\(G\\) together with a binary operation \\(\cdot : G \times G \to G\\) satisfying the following four axioms:
 
 + Closure: for all \\(a, b \in G\\), the element \\(a \cdot b\\) belongs to \\(G\\).
 + Associativity: For all \\(a, b, c \in G\\), one has \\((a \cdot b) \cdot c = a \cdot (b \cdot c)\\).
@@ -28,9 +28,9 @@ This reversal of order is a consequence of the associativity axiom and is someti
 - - -
 ## Algebraic hierarchy
 
-Groups are the most elementary objects in the hierarchy of algebraic structures. A group consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses. When a second operation is introduced and required to distribute over the first, the resulting structure is a [ring](../rings/).
+Groups are the most elementary objects in the hierarchy of algebraic structures. A group consists of a set equipped with a single binary operation satisfying closure, associativity, the existence of an identity element, and the existence of inverses. When a second operation is introduced and required to distribute over the first, the resulting structure is a ring.
 
-Imposing the further condition that every nonzero element be invertible under multiplication then yields a [field](../fields/). The three structures form a chain of increasing rigidity:
+Imposing the further condition that every nonzero element be invertible under multiplication then yields a field. The three structures form a chain of increasing rigidity:
 
 - A group carries one operation with inverses.
 - A ring carries two operations, with inverses guaranteed only for addition.
@@ -52,13 +52,13 @@ As an example, consider the group \\((\mathbb{Z}/6\mathbb{Z}, +)\\). The element
 
 The set \\(\mathbb{Z}\\) equipped with ordinary addition forms an abelian group. The identity element is \\(0\\), and the inverse of an integer \\(n\\) is \\(-n\\). This is an infinite group and arguably the most natural example of a group in elementary mathematics.
 
-Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\) equipped with addition [modulo](../modulo-operator/) \\(n\\) forms a finite abelian group of order \\(n\\). For example, in \\(\mathbb{Z}/5\mathbb{Z}\\) one has \\(3+4=2\\), since \\(7 \equiv 2 \pmod{5}\\). The identity element is \\(0\\) and the inverse of \\(k\\) is \\(n-k\\).
+Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\) equipped with addition modulo \\(n\\) forms a finite abelian group of order \\(n\\). For example, in \\(\mathbb{Z}/5\mathbb{Z}\\) one has \\(3+4=2\\), since \\(7 \equiv 2 \pmod{5}\\). The identity element is \\(0\\) and the inverse of \\(k\\) is \\(n-k\\).
 
 - - -
 
-Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set of all [invertible](../inverse-matrix/) \\(n \times n\\) matrices with entries in \\(F\\), denoted \\(\mathrm{GL}(n, F)\\), forms a group under matrix multiplication. The identity element is the identity matrix \\(I_n\\), and the inverse of a matrix \\(A\\) is its matrix inverse \\(A^{-1}\\). This group is not abelian for \\(n \geq 2\\), since matrix multiplication does not commute in general.
+Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set of all invertible \\(n \times n\\) matrices with entries in \\(F\\), denoted \\(\mathrm{GL}(n, F)\\), forms a group under matrix multiplication. The identity element is the identity matrix \\(I_n\\), and the inverse of a matrix \\(A\\) is its matrix inverse \\(A^{-1}\\). This group is not abelian for \\(n \geq 2\\), since matrix multiplication does not commute in general.
 
-Given a set \\(\{1, 2, \ldots, n\}\\), a permutation is a bijection from this set to itself. The collection of all such permutations forms a group under [composition of functions](../composite-functions/), denoted \\(S_n\\) and called the symmetric group on \\(n\\) elements. The identity element is the identity permutation, and the inverse of a permutation \\(\sigma\\) is the inverse function \\(\sigma^{-1}\\). The group \\(S_n\\) has order \\(n!\\) and is non-abelian for \\(n \geq 3\\).
+Given a set \\(\{1, 2, \ldots, n\}\\), a permutation is a bijection from this set to itself. The collection of all such permutations forms a group under composition of functions, denoted \\(S_n\\) and called the symmetric group on \\(n\\) elements. The identity element is the identity permutation, and the inverse of a permutation \\(\sigma\\) is the inverse function \\(\sigma^{-1}\\). The group \\(S_n\\) has order \\(n!\\) and is non-abelian for \\(n \geq 3\\).
 
 As a concrete illustration, consider \\(S_3\\), which has order \\(6\\). Let \\(\sigma\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 3\\), \\(3 \mapsto 1\\), and let \\(\tau\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 1\\), \\(3 \mapsto 3\\).
 
@@ -91,11 +91,11 @@ Since \\(\sigma \circ \tau \neq \tau \circ \sigma\\), the group \\(S_3\\) is ind
 
 A good way to appreciate the group axioms is to look at pairs consisting of a set and an operation that almost form a group, but fail on one specific point. Each failure isolates a different axiom and shows why the definition is cut exactly as it is.
 
-Consider the [natural numbers](../natural-numbers/) including zero, \\(\mathbb{N}_0 = \{0, 1, 2, \ldots\}\\), equipped with ordinary addition. The operation is closed and associative, and \\(0\\) acts as an identity element. The axiom that fails is the existence of inverses. In fact given any positive integer \\(n\\), there is no element in \\(\mathbb{N}_0\\) that added to \\(n\\) returns \\(0\\), because the candidate \\(-n\\) lies outside the set. The structure \\((\mathbb{N}_0, +)\\) is therefore not a group, but only a monoid.
+Consider the natural numbers including zero, \\(\mathbb{N}_0 = \{0, 1, 2, \ldots\}\\), equipped with ordinary addition. The operation is closed and associative, and \\(0\\) acts as an identity element. The axiom that fails is the existence of inverses. In fact given any positive integer \\(n\\), there is no element in \\(\mathbb{N}_0\\) that added to \\(n\\) returns \\(0\\), because the candidate \\(-n\\) lies outside the set. The structure \\((\mathbb{N}_0, +)\\) is therefore not a group, but only a monoid.
 
 - - -
 
-The [integers](../integers/) with multiplication, \\((\mathbb{Z}, \cdot)\\), are another example. Closure, associativity, and the identity \\(1\\) are all in place, yet the vast majority of integers lack a multiplicative inverse inside \\(\mathbb{Z}\\). The only elements that admit an inverse are \\(1\\) and \\(-1\\), since for any other integer \\(n\\) the reciprocal \\(1/n\\) is not an integer. Dropping all non-invertible elements would leave only the two-element set \\(\{1, -1\}\\), which is a group under multiplication but a much smaller object than the integers.
+The integers with multiplication, \\((\mathbb{Z}, \cdot)\\), are another example. Closure, associativity, and the identity \\(1\\) are all in place, yet the vast majority of integers lack a multiplicative inverse inside \\(\mathbb{Z}\\). The only elements that admit an inverse are \\(1\\) and \\(-1\\), since for any other integer \\(n\\) the reciprocal \\(1/n\\) is not an integer. Dropping all non-invertible elements would leave only the two-element set \\(\{1, -1\}\\), which is a group under multiplication but a much smaller object than the integers.
 
 The real numbers with multiplication, \\((\mathbb{R}, \cdot)\\), come even closer to being a group. Every real number different from zero has a multiplicative inverse, namely its reciprocal. The obstacle is a single element: zero has no multiplicative inverse, and its presence in the set is enough to disqualify the whole structure. The fix is to remove it. The set of nonzero reals \\(\mathbb{R}\setminus\{0\}\\) equipped with ordinary multiplication does form an abelian group, with identity \\(1\\) and inverse \\(a^{-1} = 1/a\\) for every \\(a \neq 0\\).
 
@@ -124,7 +124,7 @@ As an example, consider the set of even integers \\(2\mathbb{Z} = \{\ldots, -4, 
 - - -
 ## Group homomorphisms and isomorphisms
 
-A group homomorphism is a [function](../functions/) between two groups that preserves the group structure. Given two groups \\((G, \cdot)\\) and \\((H, \star)\\), a function \\(\varphi : G \to H\\) is a homomorphism if for all \\(a, b \in G\\) holds:
+A group homomorphism is a function between two groups that preserves the group structure. Given two groups \\((G, \cdot)\\) and \\((H, \star)\\), a function \\(\varphi : G \to H\\) is a homomorphism if for all \\(a, b \in G\\) holds:
 
 \\[
 \varphi(a \cdot b) = \varphi(a) \star \varphi(b)

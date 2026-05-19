@@ -3,9 +3,9 @@
 
 ## Introduction
 
-A [complex number](../complex-numbers-introduction/) \\( z \\) is an expression of the form \\( z = a + bi \\), where \\( a \\) and \\( b \\) are [real numbers](../properties-of-real-numbers/) and \\( i \\) is the imaginary unit, characterized by the defining relation \\( i^2 = -1 \\).
+A complex number \\( z \\) is an expression of the form \\( z = a + bi \\), where \\( a \\) and \\( b \\) are real numbers and \\( i \\) is the imaginary unit, characterized by the defining relation \\( i^2 = -1 \\).
 
-The [real number](../real-numbers/) \\( a \\) is called the real part of \\( z \\) and is denoted \\( \operatorname{Re}(z) \\). The real number \\( b \\) is called the imaginary part and is denoted \\( \operatorname{Im}(z) \\). The set of all complex numbers is defined as follows:
+The real number \\( a \\) is called the real part of \\( z \\) and is denoted \\( \operatorname{Re}(z) \\). The real number \\( b \\) is called the imaginary part and is denoted \\( \operatorname{Im}(z) \\). The set of all complex numbers is defined as follows:
 
 \\[
 \mathbb{C} := \\{\\, z = a + bi \mid a,\\, b \in \mathbb{R} \\,\\}
@@ -15,7 +15,7 @@ Every real number \\( a \in \mathbb{R} \\) can be identified with the complex nu
 
 - - -
 
-The set \\( \mathbb{C} \\), equipped with the addition and multiplication defined in the sections below, forms a [field](../fields/). Before examining each operation individually, it is useful to recall the field axioms that govern the arithmetic of complex numbers.
+The set \\( \mathbb{C} \\), equipped with the addition and multiplication defined in the sections below, forms a field. Before examining each operation individually, it is useful to recall the field axioms that govern the arithmetic of complex numbers.
 
 + Closure: for any \\( z_1, z_2 \in \mathbb{C} \\), the sum \\( z_1 + z_2 \\) and the product \\( z_1 \cdot z_2 \\) both belong to \\( \mathbb{C} \\).
 
@@ -34,7 +34,7 @@ z_1 \cdot (z_2 + z_3) = z_1 \cdot z_2 + z_1 \cdot z_3
 
 Two structural properties distinguish \\( \mathbb{C} \\) from \\( \mathbb{R} \\). Unlike \\( \mathbb{R} \\), the field \\( \mathbb{C} \\) is not an ordered field. There is no total order on \\( \mathbb{C} \\) compatible with its field operations, and expressions such as \\( z_1 < z_2 \\) are therefore undefined for general complex numbers.
 
-More remarkably, \\( \mathbb{C} \\) is algebraically closed. Every nonconstant [polynomial](../polynomials/) with coefficients in \\( \mathbb{C} \\) has at least one root in \\( \mathbb{C} \\). This result, known as the [fundamental theorem of algebra](../roots-of-a-polynomial/), has no analogue in \\( \mathbb{R} \\), where polynomials such as \\( x^2 + 1 \\) admit no [real roots](../roots-of-a-polynomial/).
+More remarkably, \\( \mathbb{C} \\) is algebraically closed. Every nonconstant polynomial with coefficients in \\( \mathbb{C} \\) has at least one root in \\( \mathbb{C} \\). This result, known as the fundamental theorem of algebra, has no analogue in \\( \mathbb{R} \\), where polynomials such as \\( x^2 + 1 \\) admit no real roots.
 
 - - -
 ## Sum and difference of complex numbers
@@ -74,7 +74,7 @@ z_1 + z_2 &= (-4 + 2i) + (6 - 7i) \\\\[6pt]
 
 - ---
 
-From a geometric point of view, complex numbers can be interpreted as [vectors](../vectors/) in the complex plane, where the horizontal axis represents the real part and the vertical axis represents the imaginary part. Given two complex numbers \\( z_1 \\) and \\( z_2 \\), represented as vectors from the origin, their sum \\( z_1 + z_2 \\) corresponds to vector addition by the parallelogram rule.
+From a geometric point of view, complex numbers can be interpreted as vectors in the complex plane, where the horizontal axis represents the real part and the vertical axis represents the imaginary part. Given two complex numbers \\( z_1 \\) and \\( z_2 \\), represented as vectors from the origin, their sum \\( z_1 + z_2 \\) corresponds to vector addition by the parallelogram rule.
 
 + The vector corresponding to \\( z_2 \\) is translated so that its tail coincides with the tip of the vector corresponding to \\( z_1 \\).
 
@@ -95,7 +95,7 @@ The product of two complex numbers is defined by applying the distributive prope
 
 This formula need not be memorized as a rule: it is simply the result of distributing the multiplication and substituting \\( i^2 = -1 \\), as shown in the examples below.
 
-An important property of multiplication in \\( \mathbb{C} \\) is the multiplicativity of the modulus. Recalling that [the modulus](../complex-numbers-introduction/) of \\( z = a + bi \\) is defined as \\( |z| = \sqrt{a^2 + b^2} \\), one can verify that for any \\( z_1, z_2 \in \mathbb{C} \\) the following identity holds.
+An important property of multiplication in \\( \mathbb{C} \\) is the multiplicativity of the modulus. Recalling that the modulus of \\( z = a + bi \\) is defined as \\( |z| = \sqrt{a^2 + b^2} \\), one can verify that for any \\( z_1, z_2 \in \mathbb{C} \\) the following identity holds.
 
 \\[
 |z_1 \cdot z_2| = |z_1| \cdot |z_2|
@@ -107,12 +107,12 @@ This means that multiplication scales the moduli of the two factors. The same id
 \left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|}
 \\]
 
-The geometric significance of both identities becomes fully transparent in the [trigonometric representation](../complex-numbers-trigonometric-form/), where multiplication adds the arguments and division subtracts them.
+The geometric significance of both identities becomes fully transparent in the trigonometric representation, where multiplication adds the arguments and division subtracts them.
 
 - - -
 ## Properties of the complex conjugate
 
-The complex [conjugate](../complex-numbers-introduction/) satisfies several algebraic identities that follow directly from its definition. Let \\( z, z_1, z_2 \in \mathbb{C} \\). The conjugation map is an involution, meaning that applying it twice returns the original number:
+The complex conjugate satisfies several algebraic identities that follow directly from its definition. Let \\( z, z_1, z_2 \in \mathbb{C} \\). The conjugation map is an involution, meaning that applying it twice returns the original number:
 
 \\[
 \overline{\overline{z}} = z
@@ -206,4 +206,4 @@ z_1 \cdot z_2 = r_1 r_2 \bigl(\cos(\theta_1 + \theta_2) + i\sin(\theta_1 + \thet
 \frac{z_1}{z_2} = \frac{r_1}{r_2} \bigl(\cos(\theta_1 - \theta_2) + i\sin(\theta_1 - \theta_2)\bigr)
 \\]
 
-Multiplication therefore scales the moduli and adds the arguments, while division divides the moduli and subtracts the arguments. This geometric structure is entirely hidden in the algebraic form \\( a + bi \\), and becomes visible only in the [trigonometric](../complex-numbers-trigonometric-form/) and [exponential](../complex-numbers-exponential-form/) representations of complex numbers.
+Multiplication therefore scales the moduli and adds the arguments, while division divides the moduli and subtracts the arguments. This geometric structure is entirely hidden in the algebraic form \\( a + bi \\), and becomes visible only in the trigonometric and exponential representations of complex numbers.

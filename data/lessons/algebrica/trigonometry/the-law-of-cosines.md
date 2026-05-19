@@ -3,13 +3,13 @@
 
 ## Definition
 
-The law of cosines relates the sides of any triangle through the angle opposite to one of them. It can be viewed as a generalisation of the [Pythagorean theorem](../pythagorean-theorem/), valid not only for right triangles but for every triangle: the square of a side equals the sum of the squares of the other two sides, minus a corrective term that accounts for how open the angle between them is. For a triangle with sides \\(a, b, c\\) and angle \\(\theta\\) opposite to side \\(c\\), the law states:
+The law of cosines relates the sides of any triangle through the angle opposite to one of them. It can be viewed as a generalisation of the Pythagorean theorem, valid not only for right triangles but for every triangle: the square of a side equals the sum of the squares of the other two sides, minus a corrective term that accounts for how open the angle between them is. For a triangle with sides \\(a, b, c\\) and angle \\(\theta\\) opposite to side \\(c\\), the law states:
 
 \\[
 c^2 = a^2 + b^2 - 2ab \cos(\theta)
 \\]
 
-When \\(\theta = 90^\circ\\) the [cosine](../sine-and-cosine) term vanishes and the formula reduces exactly to the Pythagorean theorem, which confirms that the law of cosines is a strict generalisation of that result. For any other angle, the corrective term either subtracts from or adds to the sum \\(a^2 + b^2\\), depending on whether \\(\theta\\) is acute or obtuse.
+When \\(\theta = 90^\circ\\) the cosine term vanishes and the formula reduces exactly to the Pythagorean theorem, which confirms that the law of cosines is a strict generalisation of that result. For any other angle, the corrective term either subtracts from or adds to the sum \\(a^2 + b^2\\), depending on whether \\(\theta\\) is acute or obtuse.
 
 To derive the formula, drop the altitude \\(h\\) from the vertex opposite to \\(c\\) to the side \\(b\\). This divides \\(b\\) into two segments: \\(m = a\cos(\theta)\\) and \\(n = b - a\cos(\theta)\\), while the altitude itself satisfies \\(h = a\sin(\theta)\\). Applying the Pythagorean theorem to the right triangle formed by \\(n\\), \\(h\\) and \\(c\\) gives:
 
@@ -22,13 +22,13 @@ c^2 &= n^2 + h^2 \\\\[6pt]
 \end{align}
 \\]
 
-Since the [Pythagorean identity](../pythagorean-identity/) gives \\(\sin^2(\theta) + \cos^2(\theta) = 1\\), the expression simplifies to:
+Since the Pythagorean identity gives \\(\sin^2(\theta) + \cos^2(\theta) = 1\\), the expression simplifies to:
 
 \\[
 c^2 = a^2 + b^2 - 2ab\cos(\theta)
 \\]
 
-> The law of cosines is often used in conjunction with the [law of sines](../law-of-sines/), which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
+> The law of cosines is often used in conjunction with the law of sines, which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
 
 - - -
 ## Example 1
@@ -80,7 +80,7 @@ The angle opposite to the longest side is approximately \\(95.7^\circ\\).
 
 ## Vector interpretation
 
-The law of cosines admits a reading in terms of [vectors](../vectors&) that exposes its deeper structure and connects it to the inner product. Consider a triangle with vertex \\(O\\), and let \\(\vec{u}\\) and \\(\vec{v}\\) denote the two sides of length \\(a\\) and \\(b\\) issuing from \\(O\\), so that \\(a = \|\vec{u}\|\\) and \\(b = \|\vec{v}\|\\). The third side of the triangle, of length \\(c\\), is then represented by the vector \\(\vec{v} - \vec{u}\\), which joins the endpoints of \\(\vec{u}\\) and \\(\vec{v}\\). Expanding the squared norm of this vector through the bilinearity of the inner product gives:
+The law of cosines admits a reading in terms of vectors that exposes its deeper structure and connects it to the inner product. Consider a triangle with vertex \\(O\\), and let \\(\vec{u}\\) and \\(\vec{v}\\) denote the two sides of length \\(a\\) and \\(b\\) issuing from \\(O\\), so that \\(a = \|\vec{u}\|\\) and \\(b = \|\vec{v}\|\\). The third side of the triangle, of length \\(c\\), is then represented by the vector \\(\vec{v} - \vec{u}\\), which joins the endpoints of \\(\vec{u}\\) and \\(\vec{v}\\). Expanding the squared norm of this vector through the bilinearity of the inner product gives:
 
 \\[
 \begin{align}

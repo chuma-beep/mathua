@@ -3,25 +3,25 @@
 
 ## Definition
 
-An [exponential function](../exponential-function) is a function of the form \\( e^x \\) or \\( \alpha^x \\), with \\( \alpha > 0 \\) and \\( \alpha \neq 1 \\). The number \\( e \\) occupies a central position in analysis because it is the only base for which the exponential function reproduces itself under differentiation. For a general exponential function \\( \alpha^x \\) with \\( \alpha > 0 \\), differentiation introduces an additional factor:
+An exponential function is a function of the form \\( e^x \\) or \\( \alpha^x \\), with \\( \alpha > 0 \\) and \\( \alpha \neq 1 \\). The number \\( e \\) occupies a central position in analysis because it is the only base for which the exponential function reproduces itself under differentiation. For a general exponential function \\( \alpha^x \\) with \\( \alpha > 0 \\), differentiation introduces an additional factor:
 
 \\[
 \frac{d}{dx}\alpha^x = \alpha^x \ln \alpha
 \\]
 
-The [logarithmic](../logarithms/) term reflects how the chosen base scales the growth of the function. There is exactly one case in which this extra factor disappears. If \\( \ln \alpha = 1 \\), the derivative reduces to the function itself:
+The logarithmic term reflects how the chosen base scales the growth of the function. There is exactly one case in which this extra factor disappears. If \\( \ln \alpha = 1 \\), the derivative reduces to the function itself:
 
 \\[
 \frac{d}{dx}\alpha^x = \alpha^x
 \\]
 
-The unique number satisfying this condition is \\( e \approx 2.718 \\). Therefore \\( e^x \\) is the only exponential function that remains unchanged by differentiation, and the same property extends to integration. This structural feature explains why \\( e \\) plays such a fundamental role in calculus. The computation of the [integral](../indefinite-integrals/) of an exponential function reduces to two distinct cases, according to whether the base is \\( e \\) or a generic positive number \\( \alpha \neq 1 \\). The integral of \\( e^x \\) is given by:
+The unique number satisfying this condition is \\( e \approx 2.718 \\). Therefore \\( e^x \\) is the only exponential function that remains unchanged by differentiation, and the same property extends to integration. This structural feature explains why \\( e \\) plays such a fundamental role in calculus. The computation of the integral of an exponential function reduces to two distinct cases, according to whether the base is \\( e \\) or a generic positive number \\( \alpha \neq 1 \\). The integral of \\( e^x \\) is given by:
 
 \\[
 \int e^x \\,dx = e^x + c \tag{1}
 \\]
 
-The result follows from the fact that the [derivative](../derivatives/) of \\( e^x \\) is itself \\( e^x \\). By differentiating the right-hand side we obtain:
+The result follows from the fact that the derivative of \\( e^x \\) is itself \\( e^x \\). By differentiating the right-hand side we obtain:
 
 \\[
 \frac{d}{dx}\left[e^x + c\right] = \frac{d}{dx}e^x + \frac{d}{dx}c = e^x + 0 = e^x
@@ -63,7 +63,7 @@ Consider the following integral:
 \int \left( e^x + 3^x \right) \\, dx
 \\]
 
-By the [linearity property](../indefinite-integrals/) of the integral, the integral of a sum is equal to the sum of the integrals:
+By the linearity property of the integral, the integral of a sum is equal to the sum of the integrals:
 
 \\[
 \int \left( f(x) + g(x) \right) \\, dx = \int f(x) \\, dx + \int g(x) \\, dx
@@ -104,7 +104,7 @@ A frequent situation in applications is an exponential whose argument is a linea
 \int e^{ax+b} \\, dx = \frac{1}{a} \\, e^{ax+b} + c
 \\]
 
-The factor \\( \dfrac{1}{a} \\) compensates for the coefficient that the [chain rule](../the-derivative-of-a-composite-function/) introduces upon differentiation. A direct verification yields:
+The factor \\( \dfrac{1}{a} \\) compensates for the coefficient that the chain rule introduces upon differentiation. A direct verification yields:
 
 \\[
 \frac{d}{dx}\left[ \frac{1}{a} \\, e^{ax+b} + c \right] = \frac{1}{a} \cdot a \cdot e^{ax+b} = e^{ax+b}
@@ -112,7 +112,7 @@ The factor \\( \dfrac{1}{a} \\) compensates for the coefficient that the [chain 
 
 which coincides with the original integrand.
 
-When the exponent is a differentiable function \\( f(x) \\), the formula generalizes through [integration by substitution](../integration-by-substitution/):
+When the exponent is a differentiable function \\( f(x) \\), the formula generalizes through integration by substitution:
 
 \\[
 \int e^{f(x)} \cdot f'(x) \\, dx = e^{f(x)} + c
@@ -137,7 +137,7 @@ Consider the following integral, which involves a product of two exponential ter
 \int 8^x \cdot 2^{-3x + 4} \\, dx
 \\]
 
-The integrand can be simplified by applying the [properties of powers](../powers/). The exponent of \\( 2 \\) in the second factor can be split as:
+The integrand can be simplified by applying the properties of powers. The exponent of \\( 2 \\) in the second factor can be split as:
 
 \\[
 2^{-3x+4} = 2^{-3x} \cdot 2^4 = 16 \cdot 2^{-3x}
@@ -178,7 +178,7 @@ Consider the following integral, in which both factors are exponentials with lin
 \int 9^{x-1} \cdot 3^{-x+2} \\, dx
 \\]
 
-The two exponents can be separated by means of the [properties of powers](../powers/):
+The two exponents can be separated by means of the properties of powers:
 
 \\[
 9^{x-1} \cdot 3^{-x+2} = 9^x \cdot 9^{-1} \cdot 3^{-x} \cdot 3^2
@@ -305,7 +305,7 @@ The comparison with the previous example clarifies the role of the factor \\( x 
 - - -
 ## Integration by parts with exponential factors
 
-Several integrals involving the exponential function cannot be reduced to a canonical form through algebraic manipulation alone. When the integrand is the product of an exponential and a polynomial, or of an exponential and another transcendental function, the technique of [integration by parts](../integration-by-parts/) provides a systematic approach. The method is based on the formula:
+Several integrals involving the exponential function cannot be reduced to a canonical form through algebraic manipulation alone. When the integrand is the product of an exponential and a polynomial, or of an exponential and another transcendental function, the technique of integration by parts provides a systematic approach. The method is based on the formula:
 
 \\[
 \int u(x) \\, v'(x) \\, dx = u(x) \\, v(x) - \int u'(x) \\, v(x) \\, dx
@@ -341,7 +341,7 @@ A direct differentiation confirms the result which coincides with the original i
 
 - - -
 
-When the [polynomial](../polynomials/) factor has degree greater than \\( 1 \\), a single application of the formula is not sufficient and the procedure must be iterated. Consider the integral:
+When the polynomial factor has degree greater than \\( 1 \\), a single application of the formula is not sufficient and the procedure must be iterated. Consider the integral:
 
 \\[
 \int x^2 \\, e^x \\, dx

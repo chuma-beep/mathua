@@ -3,11 +3,11 @@
 
 ## Area under a function: from curve to integral
 
-Consider a [function](../functions/) \\( f(x) \\) defined on a [closed interval](../intervals/) \\( [a, b] \\). The definite integral of \\( f(x) \\) over this interval represents the oriented area of the region bounded by the graph of the function, the x-axis, and the vertical lines \\( x = a \\) and \\( x = b \\):
+Consider a function \\( f(x) \\) defined on a closed interval \\( [a, b] \\). The definite integral of \\( f(x) \\) over this interval represents the oriented area of the region bounded by the graph of the function, the x-axis, and the vertical lines \\( x = a \\) and \\( x = b \\):
 
 \\[\int_{a}^{b} f(x) \\, dx\\]
 
-When \\( f(x) \\) is [continuous](../continuous-functions/) on \\( [a, b] \\), this region is called a curvilinear trapezoid: a planar figure bounded above by the graph of \\( f(x) \\), below by the x-axis, and laterally by the vertical lines \\( x = a \\) and \\( x = b \\).
+When \\( f(x) \\) is continuous on \\( [a, b] \\), this region is called a curvilinear trapezoid: a planar figure bounded above by the graph of \\( f(x) \\), below by the x-axis, and laterally by the vertical lines \\( x = a \\) and \\( x = b \\).
 
 ![Img. 1](svg/definite-integrals-1.svg)
 
@@ -32,7 +32,7 @@ The lower sum \\( s_n^{-} \\) approximates the area from below, the upper sum \\
 
 ![Img. 3](svg/definite-integrals-3.svg)
 
-As the width \\( \Delta x \\) tends to zero, both sums converge to the same [limit](../limits/). A bounded function \\( f(x) \\) on \\( [a, b] \\) is said to be integrable if:
+As the width \\( \Delta x \\) tends to zero, both sums converge to the same limit. A bounded function \\( f(x) \\) on \\( [a, b] \\) is said to be integrable if:
 
 \\[\lim_{\Delta x \to 0} s_n^{-} = \lim_{\Delta x \to 0} s_n^{+} = I\\]
 
@@ -40,12 +40,12 @@ This common limit is the definite integral of \\( f(x) \\) over \\( [a, b] \\):
 
 \\[I = \int_{a}^{b} f(x) \\, dx\\]
 
-This approach, based on the convergence of lower and upper sums, is known as the [Riemann definition](../riemann-integrability-criteria/) of the integral. The values \\( a \\) and \\( b \\) are called the lower and upper limits of integration, and \\( f(x) \\) is the integrand. Geometrically, \\( f(x) \\) and \\( dx \\) represent the height and the base of the infinitesimal rectangles whose areas are summed in the limit.
+This approach, based on the convergence of lower and upper sums, is known as the Riemann definition of the integral. The values \\( a \\) and \\( b \\) are called the lower and upper limits of integration, and \\( f(x) \\) is the integrand. Geometrically, \\( f(x) \\) and \\( dx \\) represent the height and the base of the infinitesimal rectangles whose areas are summed in the limit.
 
 - - -
 ## Computing definite integrals
 
-If \\( f(x) \\) is a continuous function on \\( [a, b] \\) and \\( F(x) \\) is any [antiderivative](../indefinite-integrals/) of \\( f(x) \\), then:
+If \\( f(x) \\) is a continuous function on \\( [a, b] \\) and \\( F(x) \\) is any antiderivative of \\( f(x) \\), then:
 
 \\[\int_{a}^{b} f(x) \\, dx = F(b) - F(a)\\]
 
@@ -56,7 +56,7 @@ This formula is the conclusion of the Second Fundamental Theorem of Calculus. Th
 
 \\[F(x) = \int_a^x f(t) \\, dt\\]
 
-then \\( F'(x) = f(x) \\), making differentiation and integration inverse operations in a precise sense. Both results are covered in the dedicated page on the [Fundamental Theorem of Calculus](../fundamental-theorem-of-calculus/).
+then \\( F'(x) = f(x) \\), making differentiation and integration inverse operations in a precise sense. Both results are covered in the dedicated page on the Fundamental Theorem of Calculus.
 
 - - -
 ## Properties
@@ -106,7 +106,7 @@ The value \\( f\(c\) \\) is the average value of the function over the interval.
 
 \\[f\(c\) = \frac{1}{b - a} \int_{a}^{b} f(x) \\, dx\\]
 
-> The Mean Value Theorem for Integrals is the integral counterpart of [Lagrange's Mean Value Theorem](../lagrange-theorem/). While the latter guarantees a point where the instantaneous rate of change equals the average rate of change, this theorem guarantees a point where the function value equals the average value over the interval.
+> The Mean Value Theorem for Integrals is the integral counterpart of Lagrange's Mean Value Theorem. While the latter guarantees a point where the instantaneous rate of change equals the average rate of change, this theorem guarantees a point where the function value equals the average value over the interval.
 
 - - -
 ## Example 1
@@ -132,13 +132,13 @@ F(3) - F(0) &= \left( \frac{3 \cdot 9}{2} - \frac{27}{3} \right) - \left( \frac{
 &= \frac{9}{2}
 \end{align}\\]
 
-> For a systematic treatment of antiderivatives and their properties, see the page on [indefinite integrals](../indefinite-integrals/).
+> For a systematic treatment of antiderivatives and their properties, see the page on indefinite integrals.
 
 The area of the region bounded by the graph of \\( f(x) = 3x - x^2 \\) and the x-axis over \\( [0, 3] \\) is equal to: 
 
 \\[ \dfrac{9}{2} \\]
 
-> This is just a simple example that generally shows the procedure for calculating definite integrals. Very often, integrals are not so straightforward to compute, and it is necessary to resort to other solving methods such as [substitution](../integration-by-substitution/) and [integration by parts](../integration-by-parts/).
+> This is just a simple example that generally shows the procedure for calculating definite integrals. Very often, integrals are not so straightforward to compute, and it is necessary to resort to other solving methods such as substitution and integration by parts.
 
 - - -
 ## Example 2
@@ -147,7 +147,7 @@ Compute the following definite integral:
 
 \\[\int_{0}^{\pi} (x + \sin x) \\, dx\\]
 
-> This example combines a polynomial term with a trigonometric function. For a review of the relevant antiderivatives, see the page on [integrals of trigonometric functions](../integral-of-trigonometric-functions/).
+> This example combines a polynomial term with a trigonometric function. For a review of the relevant antiderivatives, see the page on integrals of trigonometric functions.
 
 - - -
 
@@ -184,13 +184,13 @@ The interval \\( [a, b] \\) must be divided into subintervals over which \\( f(x
 
 \\[\int_{a}^{b} f(x) \\, dx = \int_{a}^{c} f(x) \\, dx + \int_{c}^{b} f(x) \\, dx\\]
 
-For an [even function](../even-and-odd-functions/), symmetry about the y-axis implies that the contributions from \\( [-a, 0] \\) and \\( [0, a] \\) are equal, so:
+For an even function, symmetry about the y-axis implies that the contributions from \\( [-a, 0] \\) and \\( [0, a] \\) are equal, so:
 
 \\[\int_{-a}^{a} f(x) \\, dx = 2\int_{0}^{a} f(x) \\, dx\\]
 
 ![Img. 5](svg/definite-integrals-5.svg)
 
-For an [odd function](../even-and-odd-functions/), symmetry about the origin implies that the contributions from \\( [-a, 0] \\) and \\( [0, a] \\) are equal in magnitude but opposite in sign, so:
+For an odd function, symmetry about the origin implies that the contributions from \\( [-a, 0] \\) and \\( [0, a] \\) are equal in magnitude but opposite in sign, so:
 
 \\[\int_{-a}^{a} f(x) \\, dx = 0\\]
 
@@ -209,10 +209,10 @@ For an odd function, where the oriented integral vanishes, the geometric area is
 
 Everything covered on this page assumes that the interval \\( [a, b] \\) is finite and that \\( f(x) \\) remains bounded throughout. These conditions are not always satisfied: it is common to encounter integrals over unbounded intervals, or functions that diverge at some point in the domain.
 
-The standard [Riemann integral](../riemann-integrability-criteria/) cannot handle these cases directly. The approach is to replace the problematic bound with a parameter and take a limit. An integral over an unbounded interval is defined as:
+The standard Riemann integral cannot handle these cases directly. The approach is to replace the problematic bound with a parameter and take a limit. An integral over an unbounded interval is defined as:
 
 \\[\int_{a}^{+\infty} f(x) \\, dx = \lim_{t \to +\infty} \int_{a}^{t} f(x) \\, dx\\]
 
-When the limit exists and is finite, the integral converges; otherwise it diverges. These cases are treated in the dedicated page on [improper integrals](../improper-integrals/).
+When the limit exists and is finite, the integral converges; otherwise it diverges. These cases are treated in the dedicated page on improper integrals.
 
-> The definite integral, as developed on this page, measures signed area and provides a precise way to compute accumulated quantities. One of the most direct applications is finding the area of regions bounded by curves, a problem that reduces entirely to setting up and evaluating definite integrals of the kind studied here. This is covered in detail in the dedicated page on [finding areas by integration](../finding-areas-by-integration/).
+> The definite integral, as developed on this page, measures signed area and provides a precise way to compute accumulated quantities. One of the most direct applications is finding the area of regions bounded by curves, a problem that reduces entirely to setting up and evaluating definite integrals of the kind studied here. This is covered in detail in the dedicated page on finding areas by integration.

@@ -4,7 +4,7 @@
 
 ## Definition
 
-The modulo operator is one of the most frequently used operations in [integer](../integers/) arithmetic. Given two integers, it returns the remainder left over after dividing the first by the second. This operator plays a central role in number theory, computer science, and the construction of several algebraic structures. In formal terms, fiven two integers \\(a\\) and \\(n\\) with \\(n > 0\\), the modulo operator is defined as follows:
+The modulo operator is one of the most frequently used operations in integer arithmetic. Given two integers, it returns the remainder left over after dividing the first by the second. This operator plays a central role in number theory, computer science, and the construction of several algebraic structures. In formal terms, fiven two integers \\(a\\) and \\(n\\) with \\(n > 0\\), the modulo operator is defined as follows:
 
 \\[
 a \bmod n = r

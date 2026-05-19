@@ -15,11 +15,11 @@ The absolute value of a number represents its distance from zero on the number l
 \forall \\; x \in \mathbb{R}
 \\]
 
-For example, \\(|5| = 5\\), and \\(|-6| = -(-6) = 6\\). This means the expression \\(f(x) := |x|\\), with \\(x \in \mathbb{R}\\), defines a [function](../functions/) \\(f: \mathbb{R} \rightarrow \mathbb{R}\\), whose image is \\(f(\mathbb{R}) = [0, +\infty)\\).
+For example, \\(|5| = 5\\), and \\(|-6| = -(-6) = 6\\). This means the expression \\(f(x) := |x|\\), with \\(x \in \mathbb{R}\\), defines a function \\(f: \mathbb{R} \rightarrow \mathbb{R}\\), whose image is \\(f(\mathbb{R}) = [0, +\infty)\\).
 
 - - -
 
-The [absolute value function](../absolute-value-function/) assigns to each [real number](../real-numbers/) its distance from zero on the real line. This means that negative numbers are mapped to their positive counterparts, while positive numbers remain unchanged, since distance is always non-negative.
+The absolute value function assigns to each real number its distance from zero on the real line. This means that negative numbers are mapped to their positive counterparts, while positive numbers remain unchanged, since distance is always non-negative.
 
 More generally, the absolute value expression \\(|x - a|\\) can be interpreted as the distance between the point \\(x\\) and the point \\(a\\) on the number line. We have:
 
@@ -29,7 +29,7 @@ For instance, the distance between \\(x = 3\\) and \\(a = 7\\) is \\(|3 - 7| = |
 
 - - -
 
-The absolute value of a number \\( |x| \\) can also be represented using the [sign function](../sign-function/) \\( \operatorname{sgn}(x) \\), as:
+The absolute value of a number \\( |x| \\) can also be represented using the sign function \\( \operatorname{sgn}(x) \\), as:
 
 \\[
 |x| = x \cdot \operatorname{sgn}(x)
@@ -84,12 +84,12 @@ The principal square root of \\(x^2\\) is the absolute value of \\(x\\), not \\(
 \sqrt{x^2} = |x| \quad \\forall \\, x \in \mathbb{R}
 \\]
 
-> The properties listed here are the foundation for solving [equations with absolute value](../absolute-value-equations/) and [inequalities with absolute value](../inequalities-with-absolute-value/).
+> The properties listed here are the foundation for solving equations with absolute value and inequalities with absolute value.
 
 - - -
 ## Triangle inequality
 
-The triangle inequality represents a fundamental property of the absolute value on the real [line](../lines/). For any numbers \\( a, b \in \mathbb{R}\\), the following inequality holds:
+The triangle inequality represents a fundamental property of the absolute value on the real line. For any numbers \\( a, b \in \mathbb{R}\\), the following inequality holds:
 
 \\[
 |a + b| \le |a| + |b|
@@ -146,20 +146,20 @@ which gives \\( |a| - |b| \le |a - b| \\). By symmetry, swapping \\( a \\) and \
 - - -
 ## The graph of \\(y= |x|\\)
 
-The graph of the [absolute value function](../absolute-value-function/) \\( |x| \\) is symmetric with respect to the y-axis. This symmetry implies that the function is [even](../even-and-odd-functions/), meaning it satisfies the identity:
+The graph of the absolute value function \\( |x| \\) is symmetric with respect to the y-axis. This symmetry implies that the function is even, meaning it satisfies the identity:
 
 \\[|{-x}| = |x| \quad \text{for all } x \in \mathbb{R} \\]
 
 - - -
 ## Interpreting absolute value inequalities
 
-An inequality that involves an absolute value expresses a condition about distance on the number [line](../lines/). The notation \\(|A|\\) represents the distance of the quantity \\(A\\) from zero, which is always non-negative. Consider first the inequality:
+An inequality that involves an absolute value expresses a condition about distance on the number line. The notation \\(|A|\\) represents the distance of the quantity \\(A\\) from zero, which is always non-negative. Consider first the inequality:
 
 \\[
 |A| < k
 \\]
 
-It tells us that the distance between \\(A\\) and zero is smaller than \\(k\\). As mentioned earlier, geometrically, all numbers that satisfy this inequality are located within an open [interval](../intervals/) centered at the origin, extending \\(k\\) units to the left and \\(k\\) units to the right. Algebraically, this condition can be rewritten as:
+It tells us that the distance between \\(A\\) and zero is smaller than \\(k\\). As mentioned earlier, geometrically, all numbers that satisfy this inequality are located within an open interval centered at the origin, extending \\(k\\) units to the left and \\(k\\) units to the right. Algebraically, this condition can be rewritten as:
 
 \\[
 -k < A < k
@@ -179,12 +179,12 @@ the meaning changes completely. In this case, the distance of \\(A\\) from zero 
 A < -k \quad \text{or} \quad A > k
 \\]
 
-> Transformations of this kind are particularly useful when solving inequalities that contain absolute values. By rewriting the condition without the absolute value symbol, the problem is converted into one or more standard inequalities that can be solved using familiar algebraic techniques, such as interval analysis or [sign charts](../sign-analysis-in-inequalities/).
+> Transformations of this kind are particularly useful when solving inequalities that contain absolute values. By rewriting the condition without the absolute value symbol, the problem is converted into one or more standard inequalities that can be solved using familiar algebraic techniques, such as interval analysis or sign charts.
 
 - - -
 ## Absolute value as a norm
 
-The absolute value is not merely a convenient notation for removing signs. It is, more precisely, a norm on \\(\mathbb{R}\\), a function that assigns to each real number a non-negative length, in the same way that a norm on a [vector](../vectors/) space measures the size of a vector. A norm on a real vector space \\( V \\) is a function \\( \|\cdot\| : V \to [0, +\infty) \\) satisfying three conditions for all \\( x, y \in V \\) and all \\( \lambda \in \mathbb{R} \\):
+The absolute value is not merely a convenient notation for removing signs. It is, more precisely, a norm on \\(\mathbb{R}\\), a function that assigns to each real number a non-negative length, in the same way that a norm on a vector space measures the size of a vector. A norm on a real vector space \\( V \\) is a function \\( \|\cdot\| : V \to [0, +\infty) \\) satisfying three conditions for all \\( x, y \in V \\) and all \\( \lambda \in \mathbb{R} \\):
 
 \\[
 \|x\| = 0 \iff x = 0

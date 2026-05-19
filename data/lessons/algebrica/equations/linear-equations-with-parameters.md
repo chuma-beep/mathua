@@ -3,7 +3,7 @@
 
 ## Definition
 
-A first-degree [linear equation](../linear-equations/) involving parameters is an equation in which the unknown variable appears only to the first power, while some of the coefficients are represented by symbolic quantities rather than fixed numbers. A general form of such an equation is:
+A first-degree linear equation involving parameters is an equation in which the unknown variable appears only to the first power, while some of the coefficients are represented by symbolic quantities rather than fixed numbers. A general form of such an equation is:
 
 \\[
 a x + b = c
@@ -16,7 +16,7 @@ One way to interpret this structure is to view each triple \\((a, b, c)\\) as se
 
 This parametric perspective makes it possible to study not just a single equation, but an entire family of linear equations at once, highlighting how algebraic structure shifts as the parameters vary.
 
-> This page focuses on the linear case. For a broader discussion of parametric equations across different degrees, see [equations with parameters](../equations-with-parameters/).
+> This page focuses on the linear case. For a broader discussion of parametric equations across different degrees, see equations with parameters.
 
 - - -
 ## Classification of cases
@@ -109,7 +109,7 @@ Let us now examine a simple linear equation that depends on a real parameter. Co
 (2k - 3)x + (k + 1) = 4
 \\]
 
-where \\(k \in \mathbb{R}\\). The equation behaves as an ordinary [linear equation](../linear-equations/) as long as the coefficient of \\(x\\) does not vanish. This coefficient is \\(2k - 3\\), so the equation is solvable in the usual way whenever:
+where \\(k \in \mathbb{R}\\). The equation behaves as an ordinary linear equation as long as the coefficient of \\(x\\) does not vanish. This coefficient is \\(2k - 3\\), so the equation is solvable in the usual way whenever:
 
 \\[
 2k - 3 \neq 0

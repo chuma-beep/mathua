@@ -7,7 +7,7 @@ Let \\(\mathbb{R}\\) represent the field of real numbers. A polynomial in one va
 
 \\[a_{n}x^{n}+a_{n-1}x^{n-1}+\dotsb +a_{1}x+a_{0}\\]
 
-\\(n\\) is a non-negative integer and \\(a_0, a_1, \ldots, a_n \in \mathbb{R}\\) are referred to as the coefficients, with \\(a_n \neq 0\\). Each term \\(a_k x^k\\) is known as a monomial of degree \\(k\\). Polynomials are typically denoted by \\(P(x)\\) or \\(p(x)\\). The [set](../sets/) of all polynomials in \\(x\\) with real coefficients is denoted by \\(\mathbb{R}[x]\\). This set forms a [ring](../rings/) under two standard operations. For two polynomials:
+\\(n\\) is a non-negative integer and \\(a_0, a_1, \ldots, a_n \in \mathbb{R}\\) are referred to as the coefficients, with \\(a_n \neq 0\\). Each term \\(a_k x^k\\) is known as a monomial of degree \\(k\\). Polynomials are typically denoted by \\(P(x)\\) or \\(p(x)\\). The set of all polynomials in \\(x\\) with real coefficients is denoted by \\(\mathbb{R}[x]\\). This set forms a ring under two standard operations. For two polynomials:
 
 \\[P(x) = \sum_{k=0}^{n} a_k x^k\\]
 \\[Q(x) = \sum_{k=0}^{m} b_k x^k\\]
@@ -57,11 +57,11 @@ The degree of a polynomial directly influences the shape of its graph in the Car
 
 In this equation, \\(m\\) represents the slope (also known as the angular coefficient), and \\(q\\) denotes the y-intercept. For example, the equation \\(y = 2x + 1\\) defines a specific straight line. The graph shows the equation of the line \\( y = 2x + 1 \\).
 
-> In the equation of a straight line, the slope \\( m \\) corresponds to the [derivative](../derivatives) when the line is tangent to the graph of a function at a given point. In general, the derivative of a function at a point gives the slope of the tangent line at that point.
+> In the equation of a straight line, the slope \\( m \\) corresponds to the derivative when the line is tangent to the graph of a function at a given point. In general, the derivative of a function at a point gives the slope of the tangent line at that point.
 
 - - -
 
-Second-degree polynomials, also known as quadratic polynomials, have a graph that corresponds to a [parabola](../parabola) of the form:
+Second-degree polynomials, also known as quadratic polynomials, have a graph that corresponds to a parabola of the form:
 
 \\[y = ax^2 + bx + c \\]
 
@@ -78,7 +78,7 @@ where \\( a \\) determines the overall shape and orientation of the curve, \\( b
 
 ## End behavior of polynomial
 
-The end behavior of a polynomial is determined exclusively by its leading term, that is, the term of highest degree \\(a_n x^n\\). As \\(|x|\\) approaches infinity, all lower-degree terms become [asymptotically](../asymptotes/) negligible compared to the growth imposed by the power \\(x^n\\).
+The end behavior of a polynomial is determined exclusively by its leading term, that is, the term of highest degree \\(a_n x^n\\). As \\(|x|\\) approaches infinity, all lower-degree terms become asymptotically negligible compared to the growth imposed by the power \\(x^n\\).
 
 Consequently, the description of the polynomial’s behavior for \\(x \to -\infty\\) and \\(x \to +\infty\\) reduces to analyzing the interplay between the parity of the degree \\(n\\) and the sign of the leading coefficient \\(a_n\\).
 
@@ -107,21 +107,21 @@ In this case the polynomial exhibits the characteristic end behavior of a cubic 
 | odd            | \\(>0\\)  | \\(-\infty\\)        | \\(+\infty\\)        | opposite    | \\( \swarrow \\) \\( \nearrow \\)     |
 
 
-This behavior produces the familiar down–to–up orientation characteristic of all odd-degree polynomials with a positive leading coefficient. Understanding a polynomial’s end behavior directly from its algebraic structure is especially valuable when studying the overall [behavior of functions](../analyzing-the-graphs-of-functions/). By focusing on the leading term \\(a_n x^n\\), one can predict how the graph evolves as \\(x \to +\infty\\) or \\(x \to -\infty\\), since the rapid growth of \\(x^n\\) dominates and makes all lower-degree contributions negligible. In many cases, identifying the degree of the polynomial and the sign of its leading coefficient already provides a clear, immediate indication of the global shape of the function.
+This behavior produces the familiar down–to–up orientation characteristic of all odd-degree polynomials with a positive leading coefficient. Understanding a polynomial’s end behavior directly from its algebraic structure is especially valuable when studying the overall behavior of functions. By focusing on the leading term \\(a_n x^n\\), one can predict how the graph evolves as \\(x \to +\infty\\) or \\(x \to -\infty\\), since the rapid growth of \\(x^n\\) dominates and makes all lower-degree contributions negligible. In many cases, identifying the degree of the polynomial and the sign of its leading coefficient already provides a clear, immediate indication of the global shape of the function.
 
 - - -
 ## Monomials, binomials, trinomials
 
-A [monomial](../monomials) is a polynomial expression comprising only one term, a constant, a single variable, or a combination of constants and variables raised to non-negative integer powers. For instance, \\(3x^2\\) and \\(-5y\\) are both monomials.
+A monomial is a polynomial expression comprising only one term, a constant, a single variable, or a combination of constants and variables raised to non-negative integer powers. For instance, \\(3x^2\\) and \\(-5y\\) are both monomials.
 
-A [binomial](../binomials) is a polynomial expression consisting of two terms: constants, variables, or the product of constants and variables raised to non-negative integer powers. For example, \\(3x + 7\\) and \\(-2y^2 + 5y\\) are both binomials.
+A binomial is a polynomial expression consisting of two terms: constants, variables, or the product of constants and variables raised to non-negative integer powers. For example, \\(3x + 7\\) and \\(-2y^2 + 5y\\) are both binomials.
 
-A [trinomial](../trinomial) is a polynomial expression consisting of three terms, which can also be constants, variables, or the product of constants and variables raised to non-negative integer powers. For instance, \\(x^2-2x + 4\\) and \\(3y^3 + 2y^2- y\\) are both trinomials.
+A trinomial is a polynomial expression consisting of three terms, which can also be constants, variables, or the product of constants and variables raised to non-negative integer powers. For instance, \\(x^2-2x + 4\\) and \\(3y^3 + 2y^2- y\\) are both trinomials.
 
 - - -
 ## Sum or difference of two polynomials
 
-The [sum or difference](../adding-and-subtracting-polynomials/) of two polynomials of the same degree results in a polynomial of the same degree, or of lower degree if the terms of highest degree cancel out. For example, if we have two polynomials of degree \\(n\\), say \\(P(x)\\) and \\(Q(x)\\), then their sum or difference, denoted by \\(P(x) ± Q(x)\\), is also a polynomial of degree \\(\leq n\\).
+The sum or difference of two polynomials of the same degree results in a polynomial of the same degree, or of lower degree if the terms of highest degree cancel out. For example, if we have two polynomials of degree \\(n\\), say \\(P(x)\\) and \\(Q(x)\\), then their sum or difference, denoted by \\(P(x) ± Q(x)\\), is also a polynomial of degree \\(\leq n\\).
 
 The sum or difference of the two polynomials is obtained by adding or subtracting the corresponding coefficients of the like terms.
 
@@ -189,7 +189,7 @@ P(x)-Q(x) &= 2x^2+3x-1-2x^2+x-5 \\\\[0.5em]
 - - -
 ## How to divide two polynomials
 
-[Dividing two polynomials](../polynomial-division/) is a more complex process compared to their addition or subtraction. Given two polynomials \\( P(x) \\) and \\( D(x) \\), it is always possible to determine two polynomials \\( Q(x) \\) and \\( R(x) \\) such that:
+Dividing two polynomials is a more complex process compared to their addition or subtraction. Given two polynomials \\( P(x) \\) and \\( D(x) \\), it is always possible to determine two polynomials \\( Q(x) \\) and \\( R(x) \\) such that:
 
 \\[P(x) = Q(x) D(x) + R(x) \\]
 
@@ -209,16 +209,16 @@ R(x) = \frac{P(x)}{Q(x)}
 
 where \\( P(x) \\) and \\( Q(x) \\) are polynomials and \\( Q(x) \ne 0 \\).
 
-> In this context, it is worth exploring [rational equations](../rational-equations) and rational inequalities, which involve expressions where both the numerator and the denominator are polynomials.
+> In this context, it is worth exploring rational equations and rational inequalities, which involve expressions where both the numerator and the denominator are polynomials.
 
 - - -
 ## Factoring polynomials
 
-A number \\( \alpha \\) is said to be a [root](../roots-of-a-polynomial/) of the polynomial \\( P(x) \\) if \\( P(\alpha) = 0 \\). The root \\( \alpha \\) is called integer, rational, real, or complex depending on whether \\( \alpha \\) is an integer, a [rational number](../types-of-numbers), a real number, or a [complex number](../complex-numbers-introduction/).
+A number \\( \alpha \\) is said to be a root of the polynomial \\( P(x) \\) if \\( P(\alpha) = 0 \\). The root \\( \alpha \\) is called integer, rational, real, or complex depending on whether \\( \alpha \\) is an integer, a rational number, a real number, or a complex number.
 
 ---
 
-The existence of roots over \\( \mathbb{C} \\) is guaranteed by the [Fundamental Theorem of Algebra](../roots-of-a-polynomial/), which states that every non-constant polynomial with complex coefficients has at least one complex root. As a consequence, any polynomial of degree \\( n \\) over \\( \mathbb{C} \\) factors into exactly \\( n \\) linear factors, counted with multiplicity. Over \\( \mathbb{R} \\), the situation is more nuanced: real roots may not always exist, and irreducible quadratic factors with no real roots may appear in the factorization.
+The existence of roots over \\( \mathbb{C} \\) is guaranteed by the Fundamental Theorem of Algebra, which states that every non-constant polynomial with complex coefficients has at least one complex root. As a consequence, any polynomial of degree \\( n \\) over \\( \mathbb{C} \\) factors into exactly \\( n \\) linear factors, counted with multiplicity. Over \\( \mathbb{R} \\), the situation is more nuanced: real roots may not always exist, and irreducible quadratic factors with no real roots may appear in the factorization.
 
 Under the assumption that all roots are known, any polynomial \\( P(x) \\) with \\( P(0) \ne 0 \\) admits a factored representation in terms of its roots:
 
@@ -232,24 +232,24 @@ where the product runs over all roots \\( \rho \\) of the polynomial, real or co
 
 The manipulation of polynomials, together with a thorough understanding of their structural properties, underlies a wide range of techniques in algebra and analysis. The following topics extend the material covered in this page and are recommended as natural continuations.
 
-+ [Notable products](../notable-products/)
-+ [AC method](../factoring-ac-method/)
-+ [Completing the square](../factoring-completing-the-square/)
-+ [The Synthetic Division Method](../synthetic-division/)
++ Notable products
++ AC method
++ Completing the square
++ The Synthetic Division Method
 
 - - -
 ## Polynomial Equations
 
-A [polynomial equation](../polynomial-equations/) is an equation of the form:
+A polynomial equation is an equation of the form:
 
 \\[a_{n}x^{n}+a_{n-1}x^{n-1}+\dotsb +a_{2}x^{2}+a_{1}x+a_{0} = 0\\]
 
-Polynomial equations are classified according to the degree of the leading term. Depending on their degree, they are referred to as [linear](../linear-equations) (degree 1), [quadratic](../quadratic-equations) (degree 2), [cubic](../cubic-equations) (degree 3), or of higher degree when \\(n > 3\\).
+Polynomial equations are classified according to the degree of the leading term. Depending on their degree, they are referred to as linear (degree 1), quadratic (degree 2), cubic (degree 3), or of higher degree when \\(n > 3\\).
 
 - - -
 ## Polynomial functions
 
-A [polynomial function](../polynomial-function/) is a [function](../functions) of the form:
+A polynomial function is a function of the form:
 
 \\[y = a_{n}x^{n}+a_{n-1}x^{n-1}+\dotsb +a_{2}x^{2}+a_{1}x+a_{0} \\]
 
@@ -264,6 +264,6 @@ then the two polynomials are exactly the same, meaning they have the same coeffi
 
 Polynomial functions possess several notable analytical properties.
 
-+ Their domain is the entire real line \\(\mathbb{R}\\), and they are [continuous](../continuous-functions/) and smooth at every point, with no [discontinuities](../discontinuities-of-real-functions/), singularities, cusps, or corners.
-+ As a consequence of their global regularity, polynomial functions do not admit [asymptotes](../asymptotes/) of any kind.
-+ Regarding [symmetry](../even-and-odd-functions/), an odd polynomial function has an [inflection point](../maximum-minimum-and-inflection-points/) at the origin \\((0,0)\\), while an even polynomial function attains a local maximum or minimum at \\(x = 0\\).
++ Their domain is the entire real line \\(\mathbb{R}\\), and they are continuous and smooth at every point, with no discontinuities, singularities, cusps, or corners.
++ As a consequence of their global regularity, polynomial functions do not admit asymptotes of any kind.
++ Regarding symmetry, an odd polynomial function has an inflection point at the origin \\((0,0)\\), while an even polynomial function attains a local maximum or minimum at \\(x = 0\\).

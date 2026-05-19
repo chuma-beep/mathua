@@ -3,7 +3,7 @@
 
 ## Introduction
 
-While the [algebraic form](../complex-numbers-introduction/) \\( z = a + bi \\) is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their exponential form:
+While the algebraic form \\( z = a + bi \\) is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their exponential form:
 
 \\[z = r e^{i\theta}\\]
 
@@ -13,7 +13,7 @@ The quantities appearing in this expression have the following meaning:
 
 + \\( \theta = \arg(z) \\) is the argument, the angle in radians between the positive real axis and the vector representing \\( z \\).
 
-+ \\( r \\) and \\( \theta \\) retain their respective interpretations from the [trigonometric representation](../complex-numbers-trigonometric-form) of a complex number.
++ \\( r \\) and \\( \theta \\) retain their respective interpretations from the trigonometric representation of a complex number.
 
 > The point \\( P \\) can be represented either in rectangular coordinates \\( (a, b) \\) or in polar coordinates \\( (r, \theta) \\). This duality highlights the connection between the algebraic and geometric perspectives of complex numbers.
 
@@ -23,15 +23,15 @@ The equation \\(z = r e^{i\theta}\\) follows directly from Euler's formula:
 
 \\[e^{i\theta} = \cos\theta + i\sin\theta\\]
 
-This identity shows that the [exponential](../exponential-function) representation is equivalent to the trigonometric form:
+This identity shows that the exponential representation is equivalent to the trigonometric form:
 \\[z = r(\cos\theta + i\sin\theta)\\]
 
-Euler's formula can be established by expanding \\( e^{ix} \\), \\( \cos x \\), and \\( \sin x \\) as [Taylor series](../taylor-series/) and observing that the series for \\( e^{ix} \\) splits naturally into real and imaginary parts:
+Euler's formula can be established by expanding \\( e^{ix} \\), \\( \cos x \\), and \\( \sin x \\) as Taylor series and observing that the series for \\( e^{ix} \\) splits naturally into real and imaginary parts:
 \\[
 e^{ix} = \sum_{n=0}^{\infty} \frac{(ix)^n}{n!} = \cos x + i\sin x
 \\]
 
-> The formula involves Euler's number \\( e \\), a fundamental constant in mathematics. To understand its origin, one may consult the topic [Euler's number as the limit of a sequence](../euler-number-limit-sequence/), where it arises as the limit of a sequence. Geometrically, this corresponds to a reflection of \\( z \\) across the real axis in the complex plane.
+> The formula involves Euler's number \\( e \\), a fundamental constant in mathematics. To understand its origin, one may consult the topic Euler's number as the limit of a sequence, where it arises as the limit of a sequence. Geometrically, this corresponds to a reflection of \\( z \\) across the real axis in the complex plane.
 
 ---
 
@@ -51,7 +51,7 @@ Given a complex number \\( z = a + bi \\), the conversion to exponential form pr
 + Compute the modulus of \\( z \\) according to the definition:
 \\[r = \sqrt{a^2 + b^2}\\]
 
-+ Determine the argument \\( \theta \\), that is, the angle that the [vector](../vectors/) representing \\( z \\) forms with the positive real axis. When \\( a > 0 \\), one may use the formula:
++ Determine the argument \\( \theta \\), that is, the angle that the vector representing \\( z \\) forms with the positive real axis. When \\( a > 0 \\), one may use the formula:
 \\[\theta = \tan^{-1}\\!\left(\frac{b}{a}\right)\\]
 When \\( a \leq 0 \\), the quadrant of \\( z \\) must be taken into account to select the correct value of \\( \theta \\).
 
@@ -141,11 +141,11 @@ Similarly, provided \\( z_2 \neq 0 \\), the quotient is obtained by dividing the
 \\[
 \frac{z_1}{z_2} = \frac{r_1}{r_2}\\, e^{i(\theta_1 - \theta_2)}
 \\]
-Both operations correspond to simple geometric transformations in the complex plane: a dilation and a rotation. Integer [powers](../powers/) are handled with equal efficiency. For any integer \\( n \\), the rules of exponentiation give directly:
+Both operations correspond to simple geometric transformations in the complex plane: a dilation and a rotation. Integer powers are handled with equal efficiency. For any integer \\( n \\), the rules of exponentiation give directly:
 \\[
 z^n = \left(r e^{i\theta}\right)^n = r^n e^{in\theta}
 \\]
-The modulus is raised to the \\( n \\)-th power and the argument is scaled by \\( n \\). Applying Euler's formula to \\( e^{in\theta} \\), this is equivalent to [De Moivre's Theorem](../de-moivre-theorem/):
+The modulus is raised to the \\( n \\)-th power and the argument is scaled by \\( n \\). Applying Euler's formula to \\( e^{in\theta} \\), this is equivalent to De Moivre's Theorem:
 \\[
 (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta)
 \\]

@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Sine and cosine are the two primary trigonometric functions. Given an oriented angle \\( \theta \\), represented on the [unit circle](../unit-circle) by a point \\( P \\), the sine and cosine of \\( \theta \\) are defined respectively as the \\( y \\)-coordinate and the \\( x \\)-coordinate of \\( P \\). The unit circle is the circle of radius \\( 1 \\) centered at the origin, described by the equation:
+Sine and cosine are the two primary trigonometric functions. Given an oriented angle \\( \theta \\), represented on the unit circle by a point \\( P \\), the sine and cosine of \\( \theta \\) are defined respectively as the \\( y \\)-coordinate and the \\( x \\)-coordinate of \\( P \\). The unit circle is the circle of radius \\( 1 \\) centered at the origin, described by the equation:
 
 \\[
 x^2+y^2=1
@@ -31,9 +31,9 @@ Similarly, the cosine of \\( \theta \\) is defined as the \\( x \\)-coordinate o
 - - -
 ## Fundamental trigonometric identity
 
-The values of sine and cosine satisfy a property known as the [fundamental trigonometric identity](../pythagorean-identity):
+The values of sine and cosine satisfy a property known as the fundamental trigonometric identity:
 \\[ \sin^2\theta + \cos^2\theta = 1 \\]
-Geometrically, this identity represents the [Pythagorean theorem](../pythagorean-theorem/) applied to the triangle \\( OPR \\) inscribed in the unit circle, where \\( PR \\) and \\( \overline{OR} \\) correspond to the legs, and \\( \overline{OP} \\) is the hypotenuse of unit length.
+Geometrically, this identity represents the Pythagorean theorem applied to the triangle \\( OPR \\) inscribed in the unit circle, where \\( PR \\) and \\( \overline{OR} \\) correspond to the legs, and \\( \overline{OP} \\) is the hypotenuse of unit length.
 
 - - -
 ## Trigonometric identities
@@ -62,14 +62,14 @@ Geometrically, this identity represents the [Pythagorean theorem](../pythagorean
 \text{6. } \quad \cos(x+y) = \cos(x)\cos(y) - \sin(x)\sin(y)
 \\]
 
-> These identities capture the most essential relationships between sine and cosine. They follow directly from the geometry of the unit circle and form the foundation of many trigonometric transformations. For a broader overview, refer to the full collection of [trigonometric identities](../trigonometric-identities/).
+> These identities capture the most essential relationships between sine and cosine. They follow directly from the geometry of the unit circle and form the foundation of many trigonometric transformations. For a broader overview, refer to the full collection of trigonometric identities.
 
 - - -
 ## Periodicity
 
 Sine and cosine take values between \\(-1\\) and \\(1\\) because the lengths of segments \\( \overline{OR} \\) and \\( \overline{PR} \\) cannot exceed the radius, which is equal to 1.
 
-If an [integer](../integers/) multiple of a full revolution is added to an angle \\( \theta \\), the sine and cosine values remain unchanged because the point \\( P \\) returns to the same position on the unit circle. From this property, it follows that sine and cosine are periodic [functions](../functions) with a period of \\( 2 \pi \\):
+If an integer multiple of a full revolution is added to an angle \\( \theta \\), the sine and cosine values remain unchanged because the point \\( P \\) returns to the same position on the unit circle. From this property, it follows that sine and cosine are periodic functions with a period of \\( 2 \pi \\):
 \\[ \sin\theta = \sin(\theta + 2 \pi k) \quad k \in \mathbb{Z} \\]
 \\[ \cos\theta = \cos(\theta + 2 \pi k) \quad k \in \mathbb{Z} \\]
 This means that the functions repeat their values every \\( 2 \pi \\), reflecting the cyclic nature of circular motion.
@@ -77,13 +77,13 @@ This means that the functions repeat their values every \\( 2 \pi \\), reflectin
 - - -
 ## Tangent and cotangent
 
-The ratio of the sine to the cosine of an angle \\(\theta \\) is equal to the [tangent](../tangent-and-cotangent) of that angle:
+The ratio of the sine to the cosine of an angle \\(\theta \\) is equal to the tangent of that angle:
 
 \\[
 \\tan(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}
 \\]
 
-The ratio of the cosine to the sine of an angle \\(\theta \\) is equal to the [cotangent](../tangent-and-cotangent) of that angle:
+The ratio of the cosine to the sine of an angle \\(\theta \\) is equal to the cotangent of that angle:
 
 \\[
 \cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)}
@@ -129,25 +129,25 @@ x &= \pi/2   &\quad& \cos(\pi/2) = 0
 - - -
 ## Sine and cosine function
 
-The [sine function](../sine-function) \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding sine value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between -1 and 1. The function \\( f(x) = \sin x \\) has all real numbers in its [domain](../determining-the-domain-of-a-function/), but its range is \\( -1 \leq \sin(x) \leq 1 \\).
+The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding sine value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between -1 and 1. The function \\( f(x) = \sin x \\) has all real numbers in its domain, but its range is \\( -1 \leq \sin(x) \leq 1 \\).
 
 + Domain: \\(x \in \mathbb{R} \\)
 + Range: \\(y \in \mathbb{R} : -1 \leq y \leq\ 1 \\)
 + Periodicity: periodic in \\(x\\) with period \\( 2 \pi \\)
-+ Parity: [odd](../even-and-odd-functions/), \\( \sin(-x) = -\sin(x)\\)
++ Parity: odd, \\( \sin(-x) = -\sin(x)\\)
 - - -
 
-The [cosine function](../cosine-function) \\( f(x) = \cos(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding cosine value. Its graph is a periodic wave with a period of \\( 2 \pi \\) and an amplitude of 1, oscillating between -1 and 1. The function \\( f(x) = \cos x \\) has all real numbers in its domain, but its range is \\( -1 \leq \cos(x) \leq 1 \\).
+The cosine function \\( f(x) = \cos(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding cosine value. Its graph is a periodic wave with a period of \\( 2 \pi \\) and an amplitude of 1, oscillating between -1 and 1. The function \\( f(x) = \cos x \\) has all real numbers in its domain, but its range is \\( -1 \leq \cos(x) \leq 1 \\).
 
 + Domain: \\( x \in \mathbb{R} \\)
 + Range: \\( y \in \mathbb{R} : -1 \leq y \leq 1 \\)
 + Periodicity: periodic in \\( x \\) with period \\( 2\pi \\)
-+ Parity: [even](../even-and-odd-functions/), \\( \cos(-x) = \cos(x) \\)
++ Parity: even, \\( \cos(-x) = \cos(x) \\)
 
 - - -
 ## Sine and cosine in the hyperbolic setting
 
-In the circular case, the sine and cosine of an angle \\( \theta \\) are obtained from the [unit circle](../unit-circle/) of radius \\(1\\), where the point on the circumference provides the coordinates \\( (\cos\theta,\\, \sin\theta) \\).A closely related construction exists in the hyperbolic context, where the reference curve is the equilateral [hyperbola](../hyperbola/)
+In the circular case, the sine and cosine of an angle \\( \theta \\) are obtained from the unit circle of radius \\(1\\), where the point on the circumference provides the coordinates \\( (\cos\theta,\\, \sin\theta) \\).A closely related construction exists in the hyperbolic context, where the reference curve is the equilateral hyperbola
 
 \\[
 x^{2} - y^{2} = 1
@@ -162,12 +162,12 @@ Here, instead of an angle determined by a circular sector, one considers a hyper
 \sinh(x) = \frac{e^{x} - e^{-x}}{2}
 \\]
 
-These expressions mirror the circular definitions but arise from a different geometric framework. Just as \\( \cos\theta \\) and \\( \sin\theta \\) describe how a point moves around the unit circle, the [hyperbolic sine and cosine](../hyperbolic-sine-and-cosine/) ( \\( \sinh(x), \\, \cosh(x) \\) )  describe how a point evolves along the hyperbola as the hyperbolic sector grows.
+These expressions mirror the circular definitions but arise from a different geometric framework. Just as \\( \cos\theta \\) and \\( \sin\theta \\) describe how a point moves around the unit circle, the hyperbolic sine and cosine ( \\( \sinh(x), \\, \cosh(x) \\) )  describe how a point evolves along the hyperbola as the hyperbolic sector grows.
 
 - - -
 ## Trigonometric structure of complex numbers
 
-Sine and cosine are also the building blocks of the [trigonometric form of a complex number](../complex-numbers-trigonometric-form/). Any complex number \\( z = a + bi \\) can be written as:
+Sine and cosine are also the building blocks of the trigonometric form of a complex number. Any complex number \\( z = a + bi \\) can be written as:
 
 \\[z = r(\cos\theta + i\sin\theta)\\]
 
@@ -176,7 +176,7 @@ where \\( r = \sqrt{a^2 + b^2} \\) is the modulus and \\( \theta = \arctan(b/a) 
 - - -
 ## Applications in integration
 
-The identities and properties of sine and cosine are not limited to trigonometry. They become essential tools in [integrals](../indefinite-integrals/), particularly in the technique known as [trigonometric substitution](../trigonometric-substitution-for-integrals/), where expressions of the form:
+The identities and properties of sine and cosine are not limited to trigonometry. They become essential tools in integrals, particularly in the technique known as trigonometric substitution, where expressions of the form:
 
 \\[\sqrt{a^2 - x^2}\\]
 \\[\sqrt{x^2 + a^2}\\]
@@ -206,7 +206,7 @@ Beyond their geometric meaning on the unit circle, sine and cosine possess a dee
 \\]
 
 
-These identities express the fact that trigonometric waves with distinct frequencies do not overlap when averaged through integration over \\( [-\pi,\pi] \\). In other words, the contribution of one frequency disappears when tested against a different one across a complete period. This situation is analogous to perpendicular [vectors](../vectors/) in Euclidean geometry. There, two vectors are orthogonal if their dot product is zero. Here, the integral:
+These identities express the fact that trigonometric waves with distinct frequencies do not overlap when averaged through integration over \\( [-\pi,\pi] \\). In other words, the contribution of one frequency disappears when tested against a different one across a complete period. This situation is analogous to perpendicular vectors in Euclidean geometry. There, two vectors are orthogonal if their dot product is zero. Here, the integral:
 
 \\[
 \langle f, g \rangle =
@@ -215,5 +215,5 @@ These identities express the fact that trigonometric waves with distinct frequen
 
 plays an analogous role (it acts as an inner product). When this integral vanishes, the functions behave as mutually perpendicular directions in a functional space.
 
-> This property reveals that sine and cosine form a structurally independent system of oscillations. Because of this orthogonality, it becomes possible to isolate individual harmonic components inside a periodic function, an idea developed systematically in the theory of [Fourier Series](../fourier-series).
+> This property reveals that sine and cosine form a structurally independent system of oscillations. Because of this orthogonality, it becomes possible to isolate individual harmonic components inside a periodic function, an idea developed systematically in the theory of Fourier Series.
 

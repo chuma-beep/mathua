@@ -3,20 +3,20 @@
 
 ## Statement of the theorem
 
-The Rouché-Capelli theorem characterizes the solvability of a [linear system](../systems-of-linear-equations/) in terms of two matrix invariants: the [rank](../rank-of-a-matrix/) of the coefficient matrix and the rank of the augmented matrix. Consider a linear system of \\(m\\) equations in \\(n\\) unknowns written in matrix form:
+The Rouché-Capelli theorem characterizes the solvability of a linear system in terms of two matrix invariants: the rank of the coefficient matrix and the rank of the augmented matrix. Consider a linear system of \\(m\\) equations in \\(n\\) unknowns written in matrix form:
 
 \\[
 A\mathbf{x} = \mathbf{b}
 \\]
 
-Here \\(A \in M_{m,n}(\mathbb{R})\\) is the coefficient matrix, \\(\mathbf{x} \in \mathbb{R}^n\\) is the column of unknowns, and \\(\mathbf{b} \in \mathbb{R}^m\\) is the column of constant terms. The augmented [matrix](../matrices/) \\(A \mid \mathbf{b}\\) is obtained by appending \\(\mathbf{b}\\) as an additional column to \\(A\\), producing a matrix of size \\(m \times (n+1)\\).
+Here \\(A \in M_{m,n}(\mathbb{R})\\) is the coefficient matrix, \\(\mathbf{x} \in \mathbb{R}^n\\) is the column of unknowns, and \\(\mathbf{b} \in \mathbb{R}^m\\) is the column of constant terms. The augmented matrix \\(A \mid \mathbf{b}\\) is obtained by appending \\(\mathbf{b}\\) as an additional column to \\(A\\), producing a matrix of size \\(m \times (n+1)\\).
 
 The theorem can be stated as follows. Let \\(S\\) be a linear system of \\(m\\) equations in \\(n\\) unknowns with coefficient matrix \\(A\\) and augmented matrix \\(A \mid \mathbf{b}\\). Then:
 
 + the system \\(S\\) is consistent if and only if \\(r(A) = r(A \mid \mathbf{b})\\);
 + when \\(S\\) is consistent and \\(r(A) = r(A \mid \mathbf{b}) = r\\), the system admits a unique solution if \\(r = n\\), and infinitely many solutions depending on \\(n - r\\) free parameters if \\(r < n\\).
 
-The first part of the theorem is a criterion for [consistency](../systems-of-linear-equations/), formulated entirely in terms of the rank. The second part, which presupposes consistency, quantifies the dimension of the solution set as the difference \\(n - r\\) between the number of unknowns and the common value of the two ranks.
+The first part of the theorem is a criterion for consistency, formulated entirely in terms of the rank. The second part, which presupposes consistency, quantifies the dimension of the solution set as the difference \\(n - r\\) between the number of unknowns and the common value of the two ranks.
 
 - - -
 ## Geometric interpretation
@@ -34,7 +34,7 @@ Solving the system therefore amounts to expressing \\(\mathbf{b}\\) as a linear 
 - - -
 ## Proof of the consistency criterion
 
-The consistency part of the theorem can be proved by reducing the system to row echelon form via [Gaussian elimination](../solving-linear-systems-using-gaussian-elimination/) and analyzing the position of the pivots in the reduced matrix.
+The consistency part of the theorem can be proved by reducing the system to row echelon form via Gaussian elimination and analyzing the position of the pivots in the reduced matrix.
 
 We apply elementary row operations to the augmented matrix \\(A \mid \mathbf{b}\\) until a row echelon form \\(\tilde{A} \mid \tilde{\mathbf{b}}\\) is obtained. The same operations transform \\(A\\) into a row echelon matrix \\(\tilde{A}\\), since the coefficient block is unaffected by the column appended on the right. Elementary row operations preserve the rank, so the following equalities hold:
 

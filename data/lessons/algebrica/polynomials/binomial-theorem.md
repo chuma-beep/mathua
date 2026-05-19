@@ -3,7 +3,7 @@
 
 ## Statement
 
-The binomial theorem asserts that for any positive integer \\(n\\), the expression \\((a+b)^n\\) can be expanded as a finite sum of \\(n+1\\) terms. Each term consists of a binomial coefficient multiplied by a [power](../powers/) of \\(a\\) and a power of \\(b\\):
+The binomial theorem asserts that for any positive integer \\(n\\), the expression \\((a+b)^n\\) can be expanded as a finite sum of \\(n+1\\) terms. Each term consists of a binomial coefficient multiplied by a power of \\(a\\) and a power of \\(b\\):
 
 \\[
 (a + b)^n = \binom{n}{0} a^n b^0 + \binom{n}{1} a^{n-1} b^1 + \ldots + \binom{n}{n-1} a^1 b^{n-1} + \binom{n}{n} a^0 b^n
@@ -12,9 +12,9 @@ The binomial theorem asserts that for any positive integer \\(n\\), the expressi
 + The exponent \\(n\\) is a positive integer, that is \\(n \in \mathbb{N}^+\\).
 + The base \\(a\\) is raised to a decreasing power, from \\(n\\) down to \\(0\\)
 + The base \\(b\\) is raised to an increasing power, from \\(0\\) up to \\(n\\).
-+ The factor \\(\dbinom{n}{k}\\) is the [binomial coefficient](../binomial-coefficient/), where the index \\(k\\) takes integer values between \\(0\\) and \\(n\\).
++ The factor \\(\dbinom{n}{k}\\) is the binomial coefficient, where the index \\(k\\) takes integer values between \\(0\\) and \\(n\\).
 
-> The coefficients \\(\binom{n}{k}\\) appearing in the expansion correspond exactly to the entries of the \\(n\\)-th row of [Pascal's triangle](../binomial-coefficient/). The symmetry \\(\binom{n}{k} = \binom{n}{n-k}\\) reflects the fact that choosing \\(k\\) elements from a set of \\(n\\) is equivalent to leaving out the remaining \\(n-k\\).
+> The coefficients \\(\binom{n}{k}\\) appearing in the expansion correspond exactly to the entries of the \\(n\\)-th row of Pascal's triangle. The symmetry \\(\binom{n}{k} = \binom{n}{n-k}\\) reflects the fact that choosing \\(k\\) elements from a set of \\(n\\) is equivalent to leaving out the remaining \\(n-k\\).
 
 In its compact form, the binomial theorem can be expressed as a summation of \\(n+1\\) terms:
 
@@ -25,7 +25,7 @@ In its compact form, the binomial theorem can be expressed as a summation of \\(
 - - -
 ## Binomial coefficient
 
-The [binomial coefficient](../binomial-coefficient/) represents the number of ways to choose \\(k\\) items from a set of \\(n\\) elements, without regard to the order of selection. In combinatorics it is commonly read as "n choose k" and is denoted by:
+The binomial coefficient represents the number of ways to choose \\(k\\) items from a set of \\(n\\) elements, without regard to the order of selection. In combinatorics it is commonly read as "n choose k" and is denoted by:
 
 \\[
 \binom{n}{k} = \begin{cases}
@@ -37,7 +37,7 @@ The [binomial coefficient](../binomial-coefficient/) represents the number of wa
 - \\(n, k \in \mathbb{N}\\).
 - \\(n\\) is the total number of elements in the set.
 - \\(k\\) is the number of items to be selected.
-- \\(n!\\) and \\((n-k)!\\) are the [factorials](../factorial/) of the [natural numbers](../natural-numbers/) \\(n\\) and \\(n-k\\) respectively.
+- \\(n!\\) and \\((n-k)!\\) are the factorials of the natural numbers \\(n\\) and \\(n-k\\) respectively.
 
 - - -
 ## Proof
@@ -50,7 +50,7 @@ There are two standard proofs of the theorem. The first is based on a combinator
 
 Each term in the expanded product results from selecting either \\(a\\) or \\(b\\) from each factor. A term of the form \\(a^{n-k} b^k\\) occurs when \\(b\\) is chosen from exactly \\(k\\) of the \\(n\\) factors, and \\(a\\) from the remaining \\(n-k\\). The number of such selections is \\(\binom{n}{k}\\), which enumerates the \\(k\\)-element subsets of the \\(n\\) factors. Summing over all possible values of \\(k\\) from \\(0\\) to \\(n\\) establishes the theorem.
 
-The second proof uses [mathematical induction](../principle-of-mathematical-induction/) on \\(n\\). For \\(n = 1\\) the identity becomes \\((a+b)^1 = a + b\\), which is clearly valid. Assume the theorem holds for some integer \\(n \geq 1\\). Multiplying both sides of the inductive hypothesis by \\((a+b)\\) yields:
+The second proof uses mathematical induction on \\(n\\). For \\(n = 1\\) the identity becomes \\((a+b)^1 = a + b\\), which is clearly valid. Assume the theorem holds for some integer \\(n \geq 1\\). Multiplying both sides of the inductive hypothesis by \\((a+b)\\) yields:
 
 \\[
 \begin{align}
@@ -131,7 +131,7 @@ The coefficients \\(1, 3, 3, 1\\) form the third row of Pascal's triangle. The t
 (1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k
 \\]
 
-This form is particularly important since it expresses \\((1+x)^n\\) as a [polynomial](../polynomials/) in \\(x\\) whose coefficients are precisely the binomial coefficients of order \\(n\\). It also serves as the starting point for the generalization to real and complex exponents, known as the binomial series.
+This form is particularly important since it expresses \\((1+x)^n\\) as a polynomial in \\(x\\) whose coefficients are precisely the binomial coefficients of order \\(n\\). It also serves as the starting point for the generalization to real and complex exponents, known as the binomial series.
 
 Setting \\(x = 1\\) in the previous identity recovers the sum of binomial coefficients already discussed, while setting \\(x = -1\\) yields the alternating sum. These two evaluations show how the special case \\((1+x)^n\\) encodes, in a single expression, the structural identities satisfied by the binomial coefficients.
 

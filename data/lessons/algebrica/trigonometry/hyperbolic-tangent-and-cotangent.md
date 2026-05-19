@@ -3,7 +3,7 @@
 
 ## Introduction
 
-The hyperbolic tangent and cotangent arise from the hyperbolic sine and cosine in exactly the same way that the circular [tangent and cotangent](../tangent-and-cotangent/) arise from the circular [sine and cosine](../sine-and-cosine/). Given the [hyperbolic sine and cosine](../hyperbolic-sine-and-cosine/), both introduced in relation to the right branch of the equilateral hyperbola:
+The hyperbolic tangent and cotangent arise from the hyperbolic sine and cosine in exactly the same way that the circular tangent and cotangent arise from the circular sine and cosine. Given the hyperbolic sine and cosine, both introduced in relation to the right branch of the equilateral hyperbola:
 
 \\[
 X^{2} – Y^{2} = 1
@@ -17,7 +17,7 @@ Once the point \\(P(\cosh(x), \sinh(x))\\) on the hyperbola has been identified 
 \tanh(x) := \frac{\sinh(x)}{\cosh(x)}
 \\]
 
-> To make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\cosh x, \sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the [line](../lines/) passing through the origin \\( O \\) and \\( P \\), and consider the vertical line \\( x = 1 \\). Their intersection defines the point \\( T \\), which has coordinates \\( T = (1, \tanh x) \\), since the slope of the line \\( OP \\) is \\( \sinh x/ \cosh x = \tanh x \\). The vertical segment joining \\( (1,0) \\) to \\( T \\) therefore represents geometrically the length of the hyperbolic tangent.
+> To make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\cosh x, \sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the line passing through the origin \\( O \\) and \\( P \\), and consider the vertical line \\( x = 1 \\). Their intersection defines the point \\( T \\), which has coordinates \\( T = (1, \tanh x) \\), since the slope of the line \\( OP \\) is \\( \sinh x/ \cosh x = \tanh x \\). The vertical segment joining \\( (1,0) \\) to \\( T \\) therefore represents geometrically the length of the hyperbolic tangent.
 
 - - -
 
@@ -27,11 +27,11 @@ The hyperbolic cotangent is the reciprocal ratio, that is, the horizontal coordi
 \coth(x) := \frac{\cosh(x)}{\sinh(x)}
 \\]
 
-> As in the case illustrated above for the hyperbolic tangent, to make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\\cosh x, \\sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the [line](../lines/) passing through the origin \\( O \\) and \\( P \\), and consider the horizontal line \\( y = 1 \\). Their intersection defines the point \\( S \\), which has coordinates \\( S = (\\coth x, 1) \\), since the slope of the line \\( OP \\) is \\( \\sinh x / \\cosh x = \\tanh x \\), and thus its reciprocal gives \\( \\coth x = \\cosh x / \\sinh x \\). The horizontal segment joining \\( (0,1) \\) to \\( S \\) therefore represents geometrically the length of the hyperbolic cotangent.
+> As in the case illustrated above for the hyperbolic tangent, to make the construction more intuitive, consider the unit hyperbola \\( x^2 - y^2 = 1 \\) and the point \\( P = (\\cosh x, \\sinh x) \\), associated with a hyperbolic angle \\( x \\). Draw the line passing through the origin \\( O \\) and \\( P \\), and consider the horizontal line \\( y = 1 \\). Their intersection defines the point \\( S \\), which has coordinates \\( S = (\\coth x, 1) \\), since the slope of the line \\( OP \\) is \\( \\sinh x / \\cosh x = \\tanh x \\), and thus its reciprocal gives \\( \\coth x = \\cosh x / \\sinh x \\). The horizontal segment joining \\( (0,1) \\) to \\( S \\) therefore represents geometrically the length of the hyperbolic cotangent.
 
 - - -
 
-In this geometric picture, the hyperbolic tangent and cotangent measure a kind of slope of the point on the hyperbola relative to its two coordinates, in analogy with the way the circular tangent expresses the slope of the point on the [unit circle](../unit-circle/).
+In this geometric picture, the hyperbolic tangent and cotangent measure a kind of slope of the point on the hyperbola relative to its two coordinates, in analogy with the way the circular tangent expresses the slope of the point on the unit circle.
 
 - - -
 ## Fundamental hyperbolic identity for tangent and cotangent
@@ -76,7 +76,7 @@ Both identities record a direct consequence of the hyperbola equation: the coord
 - - -
 ## Analytical expression of the hyperbolic tangent
 
-Using the analytical expressions of the hyperbolic sine and cosine in terms of the [exponential function](../exponential-function/), we can write the hyperbolic tangent directly. Substituting:
+Using the analytical expressions of the hyperbolic sine and cosine in terms of the exponential function, we can write the hyperbolic tangent directly. Substituting:
 
 \\[ \sinh(x) = \frac{e^{x} – e^{-x}}{2}\\]
 \\[ \cosh(x) = \frac{e^{x} + e^{-x}}{2}\\]
@@ -99,7 +99,7 @@ or, equivalently, by multiplying by \\(e^{x}\\):
 \tanh(x) = \frac{e^{2x} – 1}{e^{2x} + 1}
 \\]
 
-All three expressions are equivalent and each makes apparent a different aspect of the function: in the first form, the numerator and denominator are the analytically defined [hyperbolic sine and cosine](../hyperbolic-sine-and-cosine/) themselves. In the latter two, the exponential growth as \\(x \to +\infty\\) or \\(x \to -\infty\\) becomes immediately visible, and from them one can read off at once that the function tends to \\(1\\) and \\(-1\\) respectively.
+All three expressions are equivalent and each makes apparent a different aspect of the function: in the first form, the numerator and denominator are the analytically defined hyperbolic sine and cosine themselves. In the latter two, the exponential growth as \\(x \to +\infty\\) or \\(x \to -\infty\\) becomes immediately visible, and from them one can read off at once that the function tends to \\(1\\) and \\(-1\\) respectively.
 
 - - -
 ## Analytical expression of the hyperbolic cotangent
@@ -121,7 +121,7 @@ The latter expressions show that for large positive \\(x\\) the function approac
 - - -
 ## Hyperbolic tangent and cotangent functions
 
-The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real numbers. Unlike the circular tangent, it does not have vertical [asymptotes](../asymptotes/): its graph is a smooth, monotonically increasing curve that passes through the origin with slope \\(1\\) and remains bounded for all \\(x\\). As \\(x \to +\infty\\) the function approaches \\(1\\) asymptotically, while as \\(x \to -\infty\\) it approaches \\(-1\\), so the range is the open interval \\((-1, 1)\\).
+The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real numbers. Unlike the circular tangent, it does not have vertical asymptotes: its graph is a smooth, monotonically increasing curve that passes through the origin with slope \\(1\\) and remains bounded for all \\(x\\). As \\(x \to +\infty\\) the function approaches \\(1\\) asymptotically, while as \\(x \to -\infty\\) it approaches \\(-1\\), so the range is the open interval \\((-1, 1)\\).
 
 - Domain: \\(x \in \mathbb{R}\\)
 - Range: \\(y \in (-1, 1)\\)

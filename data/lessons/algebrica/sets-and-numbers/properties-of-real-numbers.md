@@ -3,7 +3,7 @@
 
 ## Order of operations
 
-Before discussing the algebraic properties of [real numbers](../real-numbers), it is essential to clarify how operations are performed in an expression. The fundamental properties of real numbers allow us to manipulate expressions, but the order of operations ensures that every expression has a well-defined and unambiguous value. When an expression involves several operations at once, we follow a precise and universally accepted sequence. A commonly used mnemonic is PEMDAS:
+Before discussing the algebraic properties of real numbers, it is essential to clarify how operations are performed in an expression. The fundamental properties of real numbers allow us to manipulate expressions, but the order of operations ensures that every expression has a well-defined and unambiguous value. When an expression involves several operations at once, we follow a precise and universally accepted sequence. A commonly used mnemonic is PEMDAS:
 
 - P = Parentheses  
 - E = Exponents  
@@ -26,11 +26,11 @@ This means that expressions inside parentheses are evaluated first. Exponents ar
 - - -
 ## Density and completeness in \\(\mathbb{R}\\)
 
-The real numbers are said to be dense: between any two distinct real numbers, there always exists another. Formally, for every \\(a, b \in \mathbb{R}\\) with \\(a < b\\), there exists \\(c \in \mathbb{R}\\) such that \\(a < c < b\\). One natural choice is the [arithmetic mean](../arithmetic-mean/) \\(c = (a+b)/2\\), but infinitely many such values exist.
+The real numbers are said to be dense: between any two distinct real numbers, there always exists another. Formally, for every \\(a, b \in \mathbb{R}\\) with \\(a < b\\), there exists \\(c \in \mathbb{R}\\) such that \\(a < c < b\\). One natural choice is the arithmetic mean \\(c = (a+b)/2\\), but infinitely many such values exist.
 
 This sets \\(\mathbb{R}\\) apart from the integers, where gaps are plainly visible: there is no integer between \\(2\\) and \\(3\\). The rational numbers \\(\mathbb{Q}\\) are also dense, yet incomplete: they contain gaps at points such as \\(\sqrt{2}\\) and \\(\pi\\), which are real but not rational.
 
-> The real numbers are distinguished by being both dense and complete: every gap is filled, and the number line has no missing points. Completeness is a deeper structural property: every non-empty subset of \\(\mathbb{R}\\) bounded above has a least upper bound (supremum) in \\(\mathbb{R}\\), and every [Cauchy sequence](../cauchy-sequence/) of real numbers converges to a real limit. In contrast, \\(\mathbb{Q}\\) is dense but not complete: there exist Cauchy sequences of rationals that converge to an irrational limit.
+> The real numbers are distinguished by being both dense and complete: every gap is filled, and the number line has no missing points. Completeness is a deeper structural property: every non-empty subset of \\(\mathbb{R}\\) bounded above has a least upper bound (supremum) in \\(\mathbb{R}\\), and every Cauchy sequence of real numbers converges to a real limit. In contrast, \\(\mathbb{Q}\\) is dense but not complete: there exist Cauchy sequences of rationals that converge to an irrational limit.
 
 - - -
 ## Closure property
@@ -45,7 +45,7 @@ a + b \in \mathbb{R}
 a \cdot b \in \mathbb{R}
 \\]
 
-In plain terms: when you add or multiply two real numbers, you always get a real number back. The result never escapes the set. This may sound like a trivial observation but closure is far from automatic when working with other collections of numbers. The [integers](../integers), for instance, are closed under addition and multiplication, but division lets you out: \\(1 \div 2\\) is not an integer. Go one step further and subtract within the [natural numbers](../natural-numbers/): \\(3 - 5\\) has no answer there. Closure is therefore not a birthright of every number set, but something that has to be earned, checked operation by operation, set by set.
+In plain terms: when you add or multiply two real numbers, you always get a real number back. The result never escapes the set. This may sound like a trivial observation but closure is far from automatic when working with other collections of numbers. The integers, for instance, are closed under addition and multiplication, but division lets you out: \\(1 \div 2\\) is not an integer. Go one step further and subtract within the natural numbers: \\(3 - 5\\) has no answer there. Closure is therefore not a birthright of every number set, but something that has to be earned, checked operation by operation, set by set.
 
 > In the axiomatic treatment of the real numbers, closure is typically listed as the first field axiom. Without it, writing \\(a + b\\) would be meaningless — there would be no guarantee that the sum of two real numbers is itself a real number, and the entire arithmetic of \\(\mathbb{R}\\) would rest on uncertain ground.
 

@@ -3,7 +3,7 @@
 
 ## Definition
 
-A monomial is an algebraic expression consisting of a single term. It is written as the product of a numerical coefficient and one or more variables, each raised to a non-negative [integer](../integers/) exponent. The general form of a monomial is:
+A monomial is an algebraic expression consisting of a single term. It is written as the product of a numerical coefficient and one or more variables, each raised to a non-negative integer exponent. The general form of a monomial is:
 
 \\[
 a \cdot x_1^{n_1} \cdot x_2^{n_2} \cdot \dots \cdot x_k^{n_k}
@@ -26,16 +26,16 @@ Examples of monomials include:
 
 A monomial in \\(k\\) variables can be viewed as an element of the polynomial ring \\(\mathbb{R}[x_1, \dots, x_k]\\), where it corresponds to a single term of the form \\(a \cdot x_1^{n_1} \cdots x_k^{n_k}\\).
 
-> A [ring](../rings/) is an algebraic structure with two operations, addition and multiplication, that satisfy associativity, distributivity, and the existence of an additive identity and additive inverses.
+> A ring is an algebraic structure with two operations, addition and multiplication, that satisfy associativity, distributivity, and the existence of an additive identity and additive inverses.
 
 - - -
 
-A [polynomial](../polynomials/) is called homogeneous if all its terms have the same total degree. Since a monomial consists of a single term, every monomial is homogeneous by definition. The monomials of degree \\(d\\) in \\(k\\) variables form a basis for the \\(\mathbb{R}\\) [vector](../vectors/) space of homogeneous polynomials of degree \\(d\\). For example, \\(x^2, xy, y^2\\) form a basis for the space of homogeneous polynomials of degree \\(2\\) in two variables.
+A polynomial is called homogeneous if all its terms have the same total degree. Since a monomial consists of a single term, every monomial is homogeneous by definition. The monomials of degree \\(d\\) in \\(k\\) variables form a basis for the \\(\mathbb{R}\\) vector space of homogeneous polynomials of degree \\(d\\). For example, \\(x^2, xy, y^2\\) form a basis for the space of homogeneous polynomials of degree \\(2\\) in two variables.
 
 - - -
 ## Why exponents in a monomial must be non-negative integers
 
-The constraint that exponents be non-negative integers follows directly from the definition of a [polynomial](../polynomials): each variable must appear with an exponent in \\(\mathbb{N}\_0\\). This ensures that a monomial represents a finite product of variables, with no divisions or radicals involved. The following expressions are not monomials:
+The constraint that exponents be non-negative integers follows directly from the definition of a polynomial: each variable must appear with an exponent in \\(\mathbb{N}\_0\\). This ensures that a monomial represents a finite product of variables, with no divisions or radicals involved. The following expressions are not monomials:
 
 \\[
 3x^{-1} \qquad 5x^{1/2} \qquad \frac{4}{x}
@@ -62,7 +62,7 @@ The partial degree of a monomial with respect to a given variable is the exponen
 
 - - -
 
-The total number of monomials of degree \\(d\\) in \\(k\\) variables can be determined using the following [binomial coefficient](../binomial-coefficient/):
+The total number of monomials of degree \\(d\\) in \\(k\\) variables can be determined using the following binomial coefficient:
 
 \\[\binom{d+k-1}{k-1}\\]
 
@@ -89,7 +89,7 @@ For the expression \\(3x^2 + 2x\\), the monomials cannot be combined because the
 - - -
 ## Product of monomials
 
-Monomials can be multiplied by multiplying their coefficients and adding the [exponents](../powers) of the like variables. For instance, the product of \\( (3x^2)(2x^3) \\) can be computed as follows:
+Monomials can be multiplied by multiplying their coefficients and adding the exponents of the like variables. For instance, the product of \\( (3x^2)(2x^3) \\) can be computed as follows:
 
 - First, we multiply the coefficients: \\( 3 \times 2 = 6 \\)
 - Next, we add the exponents of the like variables: \\( 2+3 = 5 \\)
@@ -127,12 +127,12 @@ If the exponent in the divisor is greater than that in the dividend, the result 
 
 \\[ \frac{x^2}{3x^3} = \frac{1}{3} x^{2-3} = \frac{1}{3} x^{-1} = \frac{1}{3x} \\]
 
-Dividing monomials is straightforward when the bases are the same. In contrast, dividing polynomials is more complex and requires structured methods such as [long division](../polynomials) or [Ruffini's rule](../ruffinis-rule/).
+Dividing monomials is straightforward when the bases are the same. In contrast, dividing polynomials is more complex and requires structured methods such as long division or Ruffini's rule.
 
 - - -
 ## Powers
 
-When a monomial is raised to a [power](../powers), the exponent applies to each factor: the coefficient is raised to that power, and the exponents of the variables are multiplied by it. For a monomial raised to a positive integer power \\(n\\):
+When a monomial is raised to a power, the exponent applies to each factor: the coefficient is raised to that power, and the exponents of the variables are multiplied by it. For a monomial raised to a positive integer power \\(n\\):
 
 \\[(a \cdot x_1^{n_1} \cdots x_k^{n_k})^n = a^n \cdot x_1^{n_1 \cdot n} \cdots x_k^{n_k \cdot n}\\]
 

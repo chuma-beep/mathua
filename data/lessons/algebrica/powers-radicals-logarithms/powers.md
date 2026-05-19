@@ -3,7 +3,7 @@
 
 ## Introduction to powers
 
-Powers are mathematical operations that show how many times a [number](../types-of-numbers/) is to be multiplied by itself. The standard way of writing a power is \\(a^{\large{n}}\\) where \\(a\\) is the base and \\(n\\) is the exponent:
+Powers are mathematical operations that show how many times a number is to be multiplied by itself. The standard way of writing a power is \\(a^{\large{n}}\\) where \\(a\\) is the base and \\(n\\) is the exponent:
 \\[a^n = \underbrace{a \cdot a \cdot a \cdots a}_{n \text{ times}} \quad \text{with} \quad a \in \mathbb{R}, \quad n \in \mathbb{Z}^+ \tag{1}\\]
 
 > From a geometric perspective, when considering a positive number \\( a \\), it can be observed that the expressions \\( a^2 \\) and \\( a^3 \\) respectively denote the area of a square with its side length being \\( a \\) and the volume of a cube with its edge length being \\( a \\).
@@ -12,7 +12,7 @@ Powers are mathematical operations that show how many times a [number](../types-
 
 The value of the exponent \\( n \\) can be positive, negative, or zero. When the exponent is negative, it indicates a reciprocal relationship between powers, expressed as follows:
 \\[a^{-n} = \frac{1}{a^{n}}\\]
-This means that raising a number to a negative exponent is equivalent to taking the reciprocal of the same number raised to the corresponding positive exponent. If the exponent is fractional, for instance \\( n = \frac{1}{m} \\), the power can be rewritten in [radical](../radicals/) form as follows:
+This means that raising a number to a negative exponent is equivalent to taking the reciprocal of the same number raised to the corresponding positive exponent. If the exponent is fractional, for instance \\( n = \frac{1}{m} \\), the power can be rewritten in radical form as follows:
 \\[a^{\frac{1}{m}} = \sqrt[m]{a}\\]
 This expression represents the \\(m\\)-th root of \\( a \\). By combining both concepts, a negative fractional exponent can be interpreted as the reciprocal of a root:
 \\[a^{-\frac{1}{m}} = \frac{1}{\sqrt[m]{a}}\\]
@@ -31,14 +31,14 @@ The table below illustrates selected values of \\(a^n\\). Each row corresponds t
 | \\(2\\)  | \\( \dfrac{1}{4} \\) | \\( \dfrac{1}{2} \\) | \\( 1 \\) | \\( 2 \\) | \\( 4 \\) | ... |
 | ...     | ... | ... | ... | ... | ... | ... |
 
-> The symbol — indicates that the expression is undefined: negative exponents of zero involve division by zero, and \\(0^0\\) is an [indeterminate form](../indeterminate-forms/).
+> The symbol — indicates that the expression is undefined: negative exponents of zero involve division by zero, and \\(0^0\\) is an indeterminate form.
 
 If the base \\( a \\) is negative, the sign of \\( a^n \\) alternates according to the parity of \\( n \\). For instance, \\( (-1)^n = 1 \\) when \\( n \\) is even, and \\( (-1)^n = -1 \\) when \\( n \\) is odd. This alternating behaviour is particularly significant in the analysis of sequences and limits. Additionally, negative bases with fractional exponents must be treated carefully, since expressions such as \\( (-1)^{1/2} \\) are not defined in \\( \mathbb{R} \\).
 
 - - -
 ## Powers with real exponents
 
-The definition \\( a^n \\) in \\(1\\) is valid only for positive [integers](../integers/) \\( n \\), but the idea of repeated multiplication does not work when the exponent is not an integer. Extending this concept to [real](../properties-of-real-numbers/) exponents necessitates a different approach, one based on the [exponential function](../exponential-function/) and the [natural logarithm](../logarithms/). For any positive base \\( a > 0 \\) and real exponent \\( x \in \mathbb{R} \\), the power \\( a^x \\) is defined as follows.
+The definition \\( a^n \\) in \\(1\\) is valid only for positive integers \\( n \\), but the idea of repeated multiplication does not work when the exponent is not an integer. Extending this concept to real exponents necessitates a different approach, one based on the exponential function and the natural logarithm. For any positive base \\( a > 0 \\) and real exponent \\( x \in \mathbb{R} \\), the power \\( a^x \\) is defined as follows.
 \\[a^x = e^{x \ln a}\\]
 When \\( x \\) is a positive integer, it yields repeated multiplication. For rational \\( x \\), it aligns with the radical interpretation. To verify this, let \\( x = \frac{p}{q} \\) with \\( p, q \in \mathbb{Z} \\) and \\( q \neq 0 \\). Applying the definition yields the following:
 
@@ -46,7 +46,7 @@ When \\( x \\) is a positive integer, it yields repeated multiplication. For rat
 
 This confirms that the exponential definition reduces to the usual radical interpretation when the exponent is rational, and the two notations are fully consistent.The necessity of this extension can be illustrated by considering \\( 2^{\sqrt{2}} \\). Because \\( \sqrt{2} \\) is irrational and cannot be written as a fraction \\( \frac{m}{n} \\), the radical definition is inapplicable. Applying the real exponent definition yields the following:
 \\[2^{\sqrt{2}} = e^{\sqrt{2} \ln 2} \approx e^{0.9803} \approx 2.665\\]
-This value is well-defined and can be approximated to any specified degree of precision. This definition also explains why the base must satisfy \\( a > 0 \\). If \\( a \leq 0 \\), the expression \\( \ln a \\) is undefined in \\( \mathbb{R} \\), and the extension fails. This is consistent with the earlier observation that negative bases with fractional exponents do not yield real numbers. As a result, the function \\( f(x) = a^x \\) is [continuous](../continuous-functions/) and [differentiable](../derivatives/) for all real numbers when \\( a > 0 \\).
+This value is well-defined and can be approximated to any specified degree of precision. This definition also explains why the base must satisfy \\( a > 0 \\). If \\( a \leq 0 \\), the expression \\( \ln a \\) is undefined in \\( \mathbb{R} \\), and the extension fails. This is consistent with the earlier observation that negative bases with fractional exponents do not yield real numbers. As a result, the function \\( f(x) = a^x \\) is continuous and differentiable for all real numbers when \\( a > 0 \\).
 
 - - -
 ## Fundamental rules of powers
@@ -60,12 +60,12 @@ Raising any base not equal to zero to an exponent of zero always results in \\(1
 
 Any power of zero always results in zero because it corresponds to the product of \\( n \\) zeros, where \\( n \\) is the exponent:
 \\[0^n = 0 \quad \text{for } n > 0\\]
-The condition \\( n > 0 \\) is necessary because \\( 0^0 \\) is an [indeterminate form](../indeterminate-forms/). Depending on the context, it can be approached as a [limit](../limits) in two ways:
+The condition \\( n > 0 \\) is necessary because \\( 0^0 \\) is an indeterminate form. Depending on the context, it can be approached as a limit in two ways:
 \\[\lim_{x \to 0^+} 0^x = 0\\]
 \\[\lim_{x \to 0} x^0 = 1\\]
 The form \\( 0^0 \\) is therefore left undefined in the context of limits. More generally, the following expressions are indeterminate forms, meaning their value cannot be determined without further analysis of the specific limit: \\( 0^0 \\), \\( 1^{\infty} \\), and \\( \infty^0 \\).
 
-> In combinatorics and algebra, however, it is conventionally assigned the value \\( 1 \\), since it arises naturally in expressions such as the [binomial theorem](../binomial-theorem/).
+> In combinatorics and algebra, however, it is conventionally assigned the value \\( 1 \\), since it arises naturally in expressions such as the binomial theorem.
 
 - - -
 
@@ -144,7 +144,7 @@ This reasoning establishes that \\( a^0 = 1 \\). The condition \\( a \neq 0 \\) 
 - - -
 ## Power and exponential
 
-Sometimes, people mistakenly mix up the concepts of power and exponential function. A power is an arithmetic operation in which a base \\(a\\) is multiplied by itself \\(n\\) times, with \\(n\\) referred to as the exponent. The [exponential function](../exponential-function/), by contrast, is a function in which the variable appears in the exponent rather than the base, taking the form:
+Sometimes, people mistakenly mix up the concepts of power and exponential function. A power is an arithmetic operation in which a base \\(a\\) is multiplied by itself \\(n\\) times, with \\(n\\) referred to as the exponent. The exponential function, by contrast, is a function in which the variable appears in the exponent rather than the base, taking the form:
 \\[f(x) = e^x \quad \text{or} \quad f(x) = a^x\\]
 where \\(a > 0\\) and \\(a \neq 1\\).
 
@@ -163,4 +163,4 @@ This result establishes a profound connection between the exponential function a
 
 \\[e^{i\pi} + 1 = 0\\]
 
-This equation, known as Euler's identity, unites five fundamental mathematical constants in a single expression. A comprehensive discussion of complex exponents, including methods for computing powers and roots of complex numbers, is provided in the page [complex numbers in exponential form](../complex-numbers-exponential-form/).
+This equation, known as Euler's identity, unites five fundamental mathematical constants in a single expression. A comprehensive discussion of complex exponents, including methods for computing powers and roots of complex numbers, is provided in the page complex numbers in exponential form.

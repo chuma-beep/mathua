@@ -4,13 +4,13 @@
 
 ## Area between two curves using definite integrals
 
-Building on the concept of [definite integrals](../definite-integrals), which measure the area between a curve and the x-axis, we can extend the same idea to find the area enclosed between two curves. Let \\( f(x) \\) and \\( g(x) \\) be two [continuous](../continuous-functions/) functions defined on the same [interval](../intervals/) \\([a, b]\\), such that \\( f(x) \geq g(x) \\) for every \\( x \in [a, b] \\), and suppose their graphs enclose a region. The area of this region is given by:
+Building on the concept of definite integrals, which measure the area between a curve and the x-axis, we can extend the same idea to find the area enclosed between two curves. Let \\( f(x) \\) and \\( g(x) \\) be two continuous functions defined on the same interval \\([a, b]\\), such that \\( f(x) \geq g(x) \\) for every \\( x \in [a, b] \\), and suppose their graphs enclose a region. The area of this region is given by:
 
 \\[
 A = \int_a^b [f(x) - g(x)] \\, dx \tag{1}
 \\]
 
-> Since both \\( f \\) and \\( g \\) are continuous on \\([a,b]\\), their difference \\( f(x) - g(x) \\) is also continuous on the same interval. A continuous function on a closed and bounded interval is [Riemann-integrable](../riemann-integrability-criteria/). Therefore, the function \\( f(x) - g(x) \\) is integrable on \\([a,b]\\), and the area between the two curves is well defined through a definite integral.
+> Since both \\( f \\) and \\( g \\) are continuous on \\([a,b]\\), their difference \\( f(x) - g(x) \\) is also continuous on the same interval. A continuous function on a closed and bounded interval is Riemann-integrable. Therefore, the function \\( f(x) - g(x) \\) is integrable on \\([a,b]\\), and the area between the two curves is well defined through a definite integral.
 
 - - -
 
@@ -23,7 +23,7 @@ Intuitively, we can see that the area \\( A \\) is given by the difference betwe
 A = \int_a^b f(x) \\, dx  \\,\\,- \int_a^b g(x) \\, dx
 \\]
 
-By the [linearity of the integral](../indefinite-integrals), this becomes equation \\(1\\).
+By the linearity of the integral, this becomes equation \\(1\\).
 
 - - -
 ## Areas between intersecting curves
@@ -48,7 +48,7 @@ A = \int_{a}^{b} |f(x) - g(x)| \\, dx
 
 ![Img. 2](svg/finding-areas-by-integration-2.svg)
 
-The [absolute value](../absolute-value/) guarantees that each piece of area is counted as positive, regardless of which [function](../functions/) is larger on that subinterval.
+The absolute value guarantees that each piece of area is counted as positive, regardless of which function is larger on that subinterval.
 
 > The formula \\( A = \int_a^b |f(x)-g(x)|\\,dx \\) is valid provided that all intersection points of the two curves are included among the limits of integration. The absolute value ensures that the difference between the two functions is always taken as positive, so that no portion of the enclosed region cancels out when the curves swap their relative position.
 
@@ -155,7 +155,7 @@ The total area is:
 A = 4 + 4 = 8
 \\]
 
-The symmetry of the result is not a coincidence: \\( f(x) = x^3 - 3x \\) is an [odd function](../even-and-odd-functions/), and the two regions are mirror images of each other across the origin.
+The symmetry of the result is not a coincidence: \\( f(x) = x^3 - 3x \\) is an odd function, and the two regions are mirror images of each other across the origin.
 
 - - -
 ## Flowchart

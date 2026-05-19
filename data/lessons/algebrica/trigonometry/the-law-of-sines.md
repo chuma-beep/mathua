@@ -3,7 +3,7 @@
 
 ## Definition
 
-The law of sines states that in any triangle, the ratio between the length of a side and the [sine](../sine-and-cosine/) of its opposite angle is the same for all three sides. For a triangle with sides \\(a, b, c\\) opposite to angles \\(\alpha, \beta, \gamma\\) respectively, this common ratio equals twice the radius \\(r\\) of the circumscribed circle:
+The law of sines states that in any triangle, the ratio between the length of a side and the sine of its opposite angle is the same for all three sides. For a triangle with sides \\(a, b, c\\) opposite to angles \\(\alpha, \beta, \gamma\\) respectively, this common ratio equals twice the radius \\(r\\) of the circumscribed circle:
 
 \\[
 \frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2r
@@ -15,7 +15,7 @@ The law of sines is particularly useful when some sides or angles of a triangle 
 
 - - -
 
-To establish the equality of the three ratios, consider the altitude \\(h\\) drawn from the vertex opposite to side \\(c\\) to the side \\(c\\) itself. By the definition of the [sine](../sine-and-cosine/) function applied to angles \\(\alpha\\) and \\(\beta\\), one has \\(\sin(\alpha) = h/b\\) and \\(\sin(\beta) = h/a\\), from which \\(b\sin(\alpha) = h = a\sin(\beta)\\). Dividing both sides by \\(\sin(\alpha)\sin(\beta)\\) yields:
+To establish the equality of the three ratios, consider the altitude \\(h\\) drawn from the vertex opposite to side \\(c\\) to the side \\(c\\) itself. By the definition of the sine function applied to angles \\(\alpha\\) and \\(\beta\\), one has \\(\sin(\alpha) = h/b\\) and \\(\sin(\beta) = h/a\\), from which \\(b\sin(\alpha) = h = a\sin(\beta)\\). Dividing both sides by \\(\sin(\alpha)\sin(\beta)\\) yields:
 
 \\[
 \frac{a}{\sin(\alpha)} = \frac{b}{\sin(\beta)}
@@ -31,7 +31,7 @@ Since the first ratio equals the second and the second equals the third, all thr
 
 To see why the common value is \\(2r\\), note that when the triangle is inscribed in its circumcircle of radius \\(r\\), the inscribed angle theorem implies that the chord of length \\(a\\) subtends a central angle of \\(2\alpha\\). The relationship between a chord and the radius of the circle then gives \\(a = 2r\sin(\alpha)\\), from which \\(a/\sin(\alpha) = 2r\\). The same holds for the other two sides by symmetry.
 
-> The law of sines is often used in conjunction with the [law of cosines](../law-of-cosines/), which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
+> The law of sines is often used in conjunction with the law of cosines, which provides a complementary approach to solving triangles when different combinations of sides and angles are known.
 
 - - -
 

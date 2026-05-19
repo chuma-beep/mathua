@@ -3,20 +3,20 @@
 
 ## Introduction
 
-Tangent and cotangent are two trigonometric ratios derived from [sine and cosine](../sine-and-cosine). Given an oriented angle \\(\theta\\), the tangent is defined as the ratio of the sine of \\(\theta\\) to its cosine, and the cotangent as the reciprocal ratio:
+Tangent and cotangent are two trigonometric ratios derived from sine and cosine. Given an oriented angle \\(\theta\\), the tangent is defined as the ratio of the sine of \\(\theta\\) to its cosine, and the cotangent as the reciprocal ratio:
 
 \\[
 \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} \qquad \cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)}
 \\]
 
-Both admit a precise geometric interpretation on the [unit circle](../unit-circle), where they appear as signed lengths of segments associated with the terminal side of the angle. Unlike sine and cosine, which are defined for every real number, tangent and cotangent are not defined everywhere: the tangent is undefined where the cosine vanishes, and the cotangent where the sine vanishes.
+Both admit a precise geometric interpretation on the unit circle, where they appear as signed lengths of segments associated with the terminal side of the angle. Unlike sine and cosine, which are defined for every real number, tangent and cotangent are not defined everywhere: the tangent is undefined where the cosine vanishes, and the cotangent where the sine vanishes.
 
 - - -
 ## Tangent
 
 Consider the unit circle centered at the origin \\(\text{O} = (0,0)\\) with radius 1. Let \\(\theta\\) be an angle in standard position, and denote by \\(\text{P}\\) the point on the circle where the terminal side of \\(\theta\\) intersects it.
 
-* The point \\(\text{S} = (1, 0)\\) is where the circle meets the vertical line \\(x = 1\\). The line through \\(\text{S}\\) perpendicular to the \\(x\\)-axis is tangent to the [unit circle](../unit-circle) at \\(\text{S}\\).
+* The point \\(\text{S} = (1, 0)\\) is where the circle meets the vertical line \\(x = 1\\). The line through \\(\text{S}\\) perpendicular to the \\(x\\)-axis is tangent to the unit circle at \\(\text{S}\\).
 * Extend the ray from \\(\text{O}\\) through \\(\text{P}\\) until it meets this vertical tangent line at a point \\(\text{T}\\).
 * The signed length of the segment \\(\overline{ST}\\) defines the tangent of \\(\theta\\):
 
@@ -24,7 +24,7 @@ Consider the unit circle centered at the origin \\(\text{O} = (0,0)\\) with radi
 \tan(\theta) = \overline{ST}
 \\]
 
-From the definition, it follows that the trigonometric tangent is a numerical value representing a ratio, whereas the geometric tangent is a line. The two should not be confused: the trigonometric tangent quantifies the relationship between the [sine and cosine](../sine-and-cosine) of an angle, while the geometric tangent is the line touching a circle at exactly one point.
+From the definition, it follows that the trigonometric tangent is a numerical value representing a ratio, whereas the geometric tangent is a line. The two should not be confused: the trigonometric tangent quantifies the relationship between the sine and cosine of an angle, while the geometric tangent is the line touching a circle at exactly one point.
 
 Triangles \\(\text{OST}\\) and \\(\text{ORP}\\) are similar by construction. Their proportionality gives:
 
@@ -32,7 +32,7 @@ Triangles \\(\text{OST}\\) and \\(\text{ORP}\\) are similar by construction. The
 \frac{\overline{ST}}{\overline{OS}} = \frac{\overline{RP}}{\overline{OR}}
 \\]
 
-By the definition of [sine and cosine](../sine-and-cosine), one has \\(\overline{RP} = \sin(\theta)\\) and \\(\overline{OR} = \cos(\theta)\\), so that:
+By the definition of sine and cosine, one has \\(\overline{RP} = \sin(\theta)\\) and \\(\overline{OR} = \cos(\theta)\\), so that:
 
 \\[
 \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)}
@@ -75,7 +75,7 @@ x &= \pi/3   &\quad& \tan(\pi/3) = \sqrt{3}
 + \\[\text{5.} \quad  1 + \tan^{2}(x) = \sec^{2}(x)\\]
 + \\[\text{6.} \quad  \tan(x)\\,\cot(x) = 1\\]
 
-> These identities describe how tangent behaves under angle addition, subtraction, doubling, halving, and reciprocal relationships. They complement the identities for sine and cosine and are especially useful when simplifying expressions or transforming trigonometric equations. For a broader overview, refer to the full collection of [trigonometric identities](../trigonometric-identities/).
+> These identities describe how tangent behaves under angle addition, subtraction, doubling, halving, and reciprocal relationships. They complement the identities for sine and cosine and are especially useful when simplifying expressions or transforming trigonometric equations. For a broader overview, refer to the full collection of trigonometric identities.
 
 - - -
 ## Cotangent
@@ -109,24 +109,24 @@ Since the sine vanishes at \\(\theta = k\pi\\) for every \\(k \in \mathbb{Z}\\),
 - - -
 ## Tangent and cotangent functions
 
-The [tangent function](../tangent-function/) \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), expressed in radians, its corresponding tangent value. Its graph is a periodic curve with period \\(\pi\\), crossing the horizontal axis at every integer multiple of \\(\pi\\) and displaying vertical [asymptotes](../asymptotes/) at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\), where the cosine vanishes. The [domain](../determining-the-domain-of-a-function/) of \\(\tan(x)\\) consists of all [real numbers](../types-of-numbers) except these values, and its range is the entire real line.
+The tangent function \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), expressed in radians, its corresponding tangent value. Its graph is a periodic curve with period \\(\pi\\), crossing the horizontal axis at every integer multiple of \\(\pi\\) and displaying vertical asymptotes at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\), where the cosine vanishes. The domain of \\(\tan(x)\\) consists of all real numbers except these values, and its range is the entire real line.
 
 * Domain: \\( \left\\{ x \in \mathbb{R} : x \neq \frac{\pi}{2} + k\pi \text{ for all } k \in \mathbb{Z} \right\\} \\)
 * Range: \\( y \in \mathbb{R} \\)
 * Periodicity: periodic in \\( x \\) with period \\( \pi \\)
-* Parity: [odd](../even-and-odd-functions/), \\( \tan(-x) = -\tan(x) \\)
+* Parity: odd, \\( \tan(-x) = -\tan(x) \\)
 
 ---
 
-The [cotangent function](../cotangent-function) \\( f(x) = \cot(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding cotangent value. Its graph is a periodic curve with period \\( \pi \\), featuring vertical asymptotes at \\( x = k\pi \\) for \\( k \in \mathbb{Z} \\), where the sine vanishes. The domain excludes these points, and the range is the entire real line.
+The cotangent function \\( f(x) = \cot(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding cotangent value. Its graph is a periodic curve with period \\( \pi \\), featuring vertical asymptotes at \\( x = k\pi \\) for \\( k \in \mathbb{Z} \\), where the sine vanishes. The domain excludes these points, and the range is the entire real line.
 
 * Domain: \\( \left\\{ x \in \mathbb{R} : x \neq k\pi \text{ for all } k \in \mathbb{Z} \right\\} \\)
 * Range: \\( y \in \mathbb{R} \\)
 * Periodicity: periodic in \\( x \\) with period \\( \pi \\)
-* Parity: [odd](../even-and-odd-functions/), \\( \cot(-x) = -\cot(x) \\)
+* Parity: odd, \\( \cot(-x) = -\cot(x) \\)
 ## Tangent and cotangent in the complex setting
 
-In the theory of [complex numbers](../complex-numbers-introduction), the tangent and cotangent arise from the [trigonometric form](../complex-numbers-trigonometric-form) of a complex number. Any complex number \\(z = a + bi\\) can be written as:
+In the theory of complex numbers, the tangent and cotangent arise from the trigonometric form of a complex number. Any complex number \\(z = a + bi\\) can be written as:
 
 \\[
 z = r(\cos\theta + i\sin\theta)
@@ -140,7 +140,7 @@ where \\(r = \sqrt{a^2+b^2}\\) is the modulus and \\(\theta\\) is the argument. 
 
 so that the tangent of the argument of a complex number coincides with the ratio of its imaginary part to its real part. This is the basis of the formula \\(\theta = \arctan(b/a)\\), used to recover the argument from the Cartesian components of \\(z\\).
 
-A deeper connection emerges through the [exponential form](../complex-numbers-exponential-form). By Euler's formula:
+A deeper connection emerges through the exponential form. By Euler's formula:
 
 \\[
 e^{i\theta} = \cos\theta + i\sin\theta
@@ -152,7 +152,7 @@ one can express the tangent entirely in terms of complex exponentials:
 \tan(\theta) = \frac{\sin\theta}{\cos\theta} = \frac{e^{i\theta} - e^{-i\theta}}{i(e^{i\theta} + e^{-i\theta})}
 \\]
 
-This expression mirrors the structure of the [hyperbolic tangent](../hyperbolic-tangent-and-cotangent), which is defined as \\(\tanh(x) = (e^x - e^{-x})/(e^x + e^{-x})\\), and reveals that the two are related by the substitution \\(x \to i\theta\\):
+This expression mirrors the structure of the hyperbolic tangent, which is defined as \\(\tanh(x) = (e^x - e^{-x})/(e^x + e^{-x})\\), and reveals that the two are related by the substitution \\(x \to i\theta\\):
 
 \\[
 \tan(\theta) = -i\tanh(i\theta)
@@ -163,7 +163,7 @@ This identity reflects the deeper unity between circular and hyperbolic trigonom
 - - -
 ## The Weierstrass substitution
 
-The half-angle formula for the tangent is the starting point of one of the most useful techniques in [integral](../definite-integrals/) calculus, the Weierstrass substitution. The substitution is defined by:
+The half-angle formula for the tangent is the starting point of one of the most useful techniques in integral calculus, the Weierstrass substitution. The substitution is defined by:
 
 \\[
 t = \tan\\!\left(\frac{x}{2}\right)

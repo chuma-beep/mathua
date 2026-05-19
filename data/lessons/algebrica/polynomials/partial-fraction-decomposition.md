@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Partial fraction decomposition is a method that allows rewriting a [rational function](../rational-functions/) as a sum of fractions, based on the idea that when the denominator can be factored into its irreducible components, the original [function](../functions/) can be expressed as a combination of basic terms. Consider, for example, a rational function of the form:
+Partial fraction decomposition is a method that allows rewriting a rational function as a sum of fractions, based on the idea that when the denominator can be factored into its irreducible components, the original function can be expressed as a combination of basic terms. Consider, for example, a rational function of the form:
 
 \\[\frac{P(x)}{Q(x)}\\]
 
@@ -14,7 +14,7 @@ We have the following constraints:
 
 The procedure consists in factoring \\(Q(x)\\) and rewriting \\(P(x)/Q(x)\\) as a sum of fractions whose denominators are those factors. The result is a sum of elementary fractions, one term for each linear or irreducible quadratic factor of \\(Q(x)\\).
 
-> The method is useful, for instance, when [integrating rational functions](../integral-of-rational-functions/): each partial fraction has a standard antiderivative.
+> The method is useful, for instance, when integrating rational functions: each partial fraction has a standard antiderivative.
 
 - - -
 
@@ -24,7 +24,7 @@ To illustrate how the method works, consider the following rational function:
 \\[
 \frac{5x + 4}{(x - 2)(2x + 3)}
 \\]
-Both the numerator and the denominator are [polynomials](../polynomials/), and the degree of the numerator is strictly less than the degree of the denominator. Hence the expression is a proper rational function, and the conditions required for applying the partial fraction method are satisfied.
+Both the numerator and the denominator are polynomials, and the degree of the numerator is strictly less than the degree of the denominator. Hence the expression is a proper rational function, and the conditions required for applying the partial fraction method are satisfied.
 
 As a first step, we rewrite the function as a sum of two simpler terms, each having one of the linear factors of the denominator as its denominator. In other words, we seek constants \\(A\\) and \\(B\\) such that the expression can be written as
 \\[
@@ -71,7 +71,7 @@ Substituting the values of \\(A\\) and \\(B\\) into equation \\((1)\\), the orig
 
 ## Application to the computation of integrals
 
-As mentioned at the beginning, partial fraction decomposition is useful in practical settings, especially when [integrating rational functions](../integral-of-rational-functions/). Returning to the function from Example 1, consider the integral:
+As mentioned at the beginning, partial fraction decomposition is useful in practical settings, especially when integrating rational functions. Returning to the function from Example 1, consider the integral:
 
 \\[
 \int \frac{5x + 4}{(x - 2)(2x + 3)} \\, dx
@@ -83,13 +83,13 @@ In this form the expression is not straightforward to evaluate, but once the int
 \int \frac{5x + 4}{(x - 2)(2x + 3)} \\, dx = \int \left( \frac{2}{x - 2} + \frac{1}{2x + 3} \right) \\, dx
 \\]
 
-By the [linearity property](../indefinite-integrals/), the integral of a sum equals the sum of the integrals. Hence:
+By the linearity property, the integral of a sum equals the sum of the integrals. Hence:
 
 \\[
 \int \frac{5x + 4}{(x - 2)(2x + 3)} \\, dx = 2 \int \frac{1}{x - 2} \\, dx + \int \frac{1}{2x + 3} \\, dx
 \\]
 
-Each term on the right-hand side can now be evaluated using standard [logarithmic](../logarithms/) formulas:
+Each term on the right-hand side can now be evaluated using standard logarithmic formulas:
 
 \\[
 \int \frac{1}{x - 2} \\, dx = \ln|x - 2| + c_{1}
@@ -153,13 +153,13 @@ Let us now consider a more complicated example. We want to find the partial frac
 \frac{1}{x^{3} - 6x^{2} + 11x - 6}
 \\]
 
-Although the numerator is already as simple as possible, the denominator is a cubic polynomial, and its factorization will guide the entire decomposition process. Our first step is to factor the denominator into its irreducible components. Testing possible rational [roots](../roots-of-a-polynomial/), we find that \\(x = 1\\) satisfies:
+Although the numerator is already as simple as possible, the denominator is a cubic polynomial, and its factorization will guide the entire decomposition process. Our first step is to factor the denominator into its irreducible components. Testing possible rational roots, we find that \\(x = 1\\) satisfies:
 
 \\[
 1 - 6 + 11 - 6 = 0
 \\]
 
-so \\((x - 1)\\) is a factor. Dividing the polynomial by \\((x - 1)\\) using [synthetic division](../synthetic-division/) we have:
+so \\((x - 1)\\) is a factor. Dividing the polynomial by \\((x - 1)\\) using synthetic division we have:
 
 \\[
 \begin{array}{r|rrrr}
@@ -357,7 +357,7 @@ Substituting the three constants into the decomposition, the original rational f
 
 ## The case of improper rational functions
 
-In the form presented above, the partial fraction method requires the rational function to be proper, that is, \\(\deg P(x) < \deg Q(x)\\). When this condition fails, the function is improper, and a preliminary step precedes the decomposition. The numerator is divided by the denominator via [polynomial division](../polynomial-division/), yielding a quotient \\(S(x)\\) and a remainder \\(R(x)\\). The rational function then rewrites as:
+In the form presented above, the partial fraction method requires the rational function to be proper, that is, \\(\deg P(x) < \deg Q(x)\\). When this condition fails, the function is improper, and a preliminary step precedes the decomposition. The numerator is divided by the denominator via polynomial division, yielding a quotient \\(S(x)\\) and a remainder \\(R(x)\\). The rational function then rewrites as:
 
 \\[
 \frac{P(x)}{Q(x)} = S(x) + \frac{R(x)}{Q(x)}

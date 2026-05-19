@@ -3,11 +3,11 @@
 
 ## Definition
 
-Among the different [types of numbers](../types-of-numbers/), the integers emerge when we extend the [natural numbers](../natural-numbers) to include the additive opposites of every positive quantity. In this enlarged system we find all whole quantities, both positive and negative, together with zero. The [set](../sets/) is denoted by \\(\mathbb{Z}\\). Symbolically we write:
+Among the different types of numbers, the integers emerge when we extend the natural numbers to include the additive opposites of every positive quantity. In this enlarged system we find all whole quantities, both positive and negative, together with zero. The set is denoted by \\(\mathbb{Z}\\). Symbolically we write:
 \\[
 \mathbb{Z} = \{\ldots,-3,-2,-1,0,1,2,3,\ldots\}
 \\]
-an infinite collection of evenly spaced points along the number [line](../lines).
+an infinite collection of evenly spaced points along the number line.
 
 A rigorous construction models each integer as a class of ordered pairs of natural numbers. Take pairs \\((a,b)\\) with \\(a,b \in \mathbb{N}\\) and say that two pairs belong to the same class whenever:
 \\[
@@ -39,7 +39,7 @@ Although the components differ, both pairs encode the same overall difference, t
 - - -
 ## The Integers as an algebraic ring
 
-When we say that the integers form a [ring](../rings/), we mean that the set \\(\mathbb{Z}\\) comes equipped with two operations, addition and multiplication, that interact in a structured and predictable way. This structure ensures that arithmetic with integers behaves consistently, no matter how large or small the numbers involved may be.
+When we say that the integers form a ring, we mean that the set \\(\mathbb{Z}\\) comes equipped with two operations, addition and multiplication, that interact in a structured and predictable way. This structure ensures that arithmetic with integers behaves consistently, no matter how large or small the numbers involved may be.
 
 The ring axioms for \\((\mathbb{Z}, +, \cdot)\\) are the following. For all \\(a, b, c \in \mathbb{Z}\\):
 
@@ -148,7 +148,7 @@ The sum of the contributions confirms the conversion:
 - - -
 ## The modulo operator
 
-Modular arithmetic describes how integers behave when we are interested only in their remainders after division by a fixed integer \\(n\\). Within \\(\mathbb{Z}\\), two integers are said to be equivalent [modulo](../modulo-operator/) \\(n\\) when they differ by a multiple of \\(n\\). For example, in arithmetic modulo \\(12\\), the integers \\(14\\) and \\(2\\) represent the same residue class because \\(14 - 2 = 12\\). Addition and multiplication are carried out as usual, but the final result is replaced by its remainder upon division by \\(n\\). For example:
+Modular arithmetic describes how integers behave when we are interested only in their remainders after division by a fixed integer \\(n\\). Within \\(\mathbb{Z}\\), two integers are said to be equivalent modulo \\(n\\) when they differ by a multiple of \\(n\\). For example, in arithmetic modulo \\(12\\), the integers \\(14\\) and \\(2\\) represent the same residue class because \\(14 - 2 = 12\\). Addition and multiplication are carried out as usual, but the final result is replaced by its remainder upon division by \\(n\\). For example:
 
 \\[7 + 9 \equiv 4 \pmod{12}\\]
 \\[ 5 \times 7 \equiv 11 \pmod{12}\\]
@@ -172,7 +172,7 @@ System.out.println(result);  // Output: 1  (January)
 - - -
 ## Integers and the role of induction
 
-In mathematics, several structural properties of the integers depend on the recursive nature of the natural numbers. The naturals form the foundation from which the integers are constructed, and many statements about \\( \mathbb{Z} \\) can be traced back to properties first established on \\( \mathbb{N} \\). The mechanism that allows these stepwise constructions and proofs is the [Principle of Mathematical Induction](../principle-of-mathematical-induction/).
+In mathematics, several structural properties of the integers depend on the recursive nature of the natural numbers. The naturals form the foundation from which the integers are constructed, and many statements about \\( \mathbb{Z} \\) can be traced back to properties first established on \\( \mathbb{N} \\). The mechanism that allows these stepwise constructions and proofs is the Principle of Mathematical Induction.
 
 Starting from the formal definition of an inductive set, let us consider a set \\( A \subseteq \mathbb{N} \\) defined by a property \\( p(n) \\), such that \\(A = \lbrace n \in \mathbb{N} \mid p(n) \rbrace\\). Suppose the following conditions hold:
 

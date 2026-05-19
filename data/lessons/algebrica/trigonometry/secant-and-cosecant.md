@@ -3,7 +3,7 @@
 
 ## Secant
 
-Consider the [unit circle](../unit-circle/) centered at the origin \\(\text{O} = (0,0)\\) with radius \\(1\\). Let \\(\theta\\) be an angle in standard position, and denote by \\(\text{P}\\) the point on the circle where the terminal side of \\(\theta\\) intersects it. Draw the tangent line to the circle at the point \\(\text{P}\\), and let \\(\text{S}\\) be the point where this tangent line meets the \\(x\\)-axis. The secant of the angle \\(\theta\\) is defined as the signed length of the segment \\(\overline{OS}\\), that is, the abscissa \\(x_S\\) of the point \\(\text{S}\\):
+Consider the unit circle centered at the origin \\(\text{O} = (0,0)\\) with radius \\(1\\). Let \\(\theta\\) be an angle in standard position, and denote by \\(\text{P}\\) the point on the circle where the terminal side of \\(\theta\\) intersects it. Draw the tangent line to the circle at the point \\(\text{P}\\), and let \\(\text{S}\\) be the point where this tangent line meets the \\(x\\)-axis. The secant of the angle \\(\theta\\) is defined as the signed length of the segment \\(\overline{OS}\\), that is, the abscissa \\(x_S\\) of the point \\(\text{S}\\):
 
 \\[
 \sec(\theta) = \overline{OS} = x_S
@@ -15,7 +15,7 @@ To express this length in terms of familiar trigonometric quantities, consider t
 \sec(\theta) = \frac{1}{\cos(\theta)}
 \\]
 
-Since the secant is the reciprocal of the [cosine](../sine-and-cosine/), it is defined only at angles where the cosine does not vanish. The cosine equals zero at all odd multiples of \\(\pi/2\\), so the domain of the secant excludes precisely those values:
+Since the secant is the reciprocal of the cosine, it is defined only at angles where the cosine does not vanish. The cosine equals zero at all odd multiples of \\(\pi/2\\), so the domain of the secant excludes precisely those values:
 
 \\[
 \sec(\theta) = \frac{1}{\cos(\theta)}
@@ -24,7 +24,7 @@ Since the secant is the reciprocal of the [cosine](../sine-and-cosine/), it is d
 
 From the geometric construction, the secant measures the factor by which the unit radius must be extended to reach the point \\(\text{S}\\) where the tangent line at \\(\text{P}\\) meets the \\(x\\)-axis. This interpretation makes it evident why \\(|\sec(\theta)| \geq 1\\) wherever the function is defined: the intersection point \\(\text{S}\\) necessarily lies at a distance from the origin no smaller than the radius of the unit circle itself.
 
-> This section examines the secant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the [secant function](../secant-function/).
+> This section examines the secant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the secant function.
 
 - - -
 ## Common values of the secant
@@ -54,7 +54,7 @@ Below are some commonly known values of \\(\sec(\theta)\\) for selected angles, 
 
 + \\[ \text{5. } \quad \sec^{2} x - \tan^{2} x = 1 \\]
 
-> These formulas collect the most useful identities involving the secant, including the reciprocal definition, the Pythagorean identity, the symmetry relation, and common algebraic transformations. For a broader overview, refer to the full collection of [trigonometric identities](../trigonometric-identities/).
+> These formulas collect the most useful identities involving the secant, including the reciprocal definition, the Pythagorean identity, the symmetry relation, and common algebraic transformations. For a broader overview, refer to the full collection of trigonometric identities.
 
 - - -
 ## Cosecant
@@ -71,7 +71,7 @@ By an argument analogous to that given for the secant, applying similar triangle
 \csc(\theta) = \frac{1}{\sin(\theta)}
 \\]
 
-Since the cosecant is the reciprocal of the [sine](../sine-and-cosine/), it is defined only at angles where the sine does not vanish. The sine equals zero at all integer multiples of \\(\pi\\), so the domain of the cosecant excludes precisely those values:
+Since the cosecant is the reciprocal of the sine, it is defined only at angles where the sine does not vanish. The sine equals zero at all integer multiples of \\(\pi\\), so the domain of the cosecant excludes precisely those values:
 
 \\[
 \csc(\theta) = \frac{1}{\sin(\theta)} \qquad \forall\\, \theta \neq k\pi, \quad k \in \mathbb{Z}
@@ -79,12 +79,12 @@ Since the cosecant is the reciprocal of the [sine](../sine-and-cosine/), it is d
 
 Analogous to the secant, the cosecant measures the factor by which the unit radius must be extended to reach the point \\(\text{Q}\\) where the tangent line at \\(\text{P}\\) meets the \\(y\\)-axis. This interpretation makes it evident why \\(|\csc(\theta)| \geq 1\\) wherever the function is defined: the intersection point \\(\text{Q}\\) necessarily lies at a distance from the origin no smaller than the radius of the unit circle itself.
 
-> This section examines the cosecant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the [cosecant function](../cosecant-function/).
+> This section examines the cosecant from a geometric point of view. For the analytical properties of the function, including domain, symmetry, limits, derivatives, and integrals, see the dedicated entry on the cosecant function.
 
 - - -
 ## Geometric interpretation
 
-Both definitions stem from a single geometric object: the [tangent](../tangent-and-cotangent//) line drawn at \\(\text{P}\\) simultaneously determines the point \\(\text{S}\\) on the \\(x\\)-axis and the point \\(\text{Q}\\) on the \\(y\\)-axis, yielding the secant and the cosecant from one construction.
+Both definitions stem from a single geometric object: the tangent line drawn at \\(\text{P}\\) simultaneously determines the point \\(\text{S}\\) on the \\(x\\)-axis and the point \\(\text{Q}\\) on the \\(y\\)-axis, yielding the secant and the cosecant from one construction.
 
 This also makes transparent the asymmetric behaviour of the two functions. When the terminal side of \\(\theta\\) approaches a horizontal position, the tangent line at \\(\text{P}\\) becomes nearly parallel to the \\(x\\)-axis, driving \\(\text{S}\\) to infinity and making the secant unbounded, while \\(\text{Q}\\) remains well-defined. The situation is reversed when the terminal side approaches a vertical position.
 
@@ -106,21 +106,21 @@ Below are some commonly known values of \\(\csc(\theta)\\) for selected angles, 
 - - -
 ## Secant and cosecant functions
 
-The [secant function](../secant-function/) \\(f(x) = \sec(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\cos(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical [asymptotes](../asymptotes/) at the points where the cosine vanishes, that is, at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\). The [domain](../determining-the-domain-of-a-function/) of \\(\sec(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
+The secant function \\(f(x) = \sec(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\cos(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical asymptotes at the points where the cosine vanishes, that is, at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\). The domain of \\(\sec(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
 
 + Domain: \\( \{ x \in \mathbb{R} : \cos(x) \neq 0 \} = \{ x \in \mathbb{R} : x \neq \pi/2 + k\pi \text{ for all } k \in \mathbb{Z} \} \\)
 + Range: \\( y \in (-\infty, -1] \cup [1, \infty) \\)
 + Periodicity: periodic in \\( x \\) with period \\( 2\pi \\)
-+ Parity: [even](../even-and-odd-functions/), \\( \sec(-x) = \sec(x) \\)
++ Parity: even, \\( \sec(-x) = \sec(x) \\)
 
 ---
 
-The [cosecant function](../cosecant-function/) \\(f(x) = \csc(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\sin(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical asymptotes at the points where the sine vanishes, that is, at \\(x = k\pi\\) for \\(k \in \mathbb{Z}\\). The [domain](../determining-the-domain-of-a-function/) of \\(\csc(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
+The cosecant function \\(f(x) = \csc(x)\\) assigns to each angle \\(x\\), measured in radians, the value \\(1/\sin(x)\\). Its graph is a periodic curve with period \\(2\pi\\) and features vertical asymptotes at the points where the sine vanishes, that is, at \\(x = k\pi\\) for \\(k \in \mathbb{Z}\\). The domain of \\(\csc(x)\\) consists of all real numbers except those points, while its range is \\((-\infty, -1] \cup [1, +\infty)\\).
 
 + Domain: \\( \{ x \in \mathbb{R} : \sin(x) \neq 0 \} = \{ x \in \mathbb{R} : x \neq k\pi \text{ for all } k \in \mathbb{Z} \} \\)
 + Range: \\( y \in (-\infty, -1] \cup [1, \infty) \\)
 + Periodicity: periodic in \\( x \\) with period \\( 2\pi \\)
-+ Parity: [odd](../even-and-odd-functions/), \\( \csc(-x) = -\csc(x) \\)
++ Parity: odd, \\( \csc(-x) = -\csc(x) \\)
 
 - - -
 ## Trigonometric identities for the cosecant
@@ -135,6 +135,6 @@ The [cosecant function](../cosecant-function/) \\(f(x) = \csc(x)\\) assigns to e
 
 + \\[ \text{5. } \quad \csc^{2} x - \cot^{2} x = 1 \\]
 
-> These formulas collect the most useful identities involving the cosecant, including the reciprocal definition, the Pythagorean identity, the symmetry relation, and common algebraic transformations. For a broader overview, refer to the full collection of [trigonometric identities](../trigonometric-identities/).
+> These formulas collect the most useful identities involving the cosecant, including the reciprocal definition, the Pythagorean identity, the symmetry relation, and common algebraic transformations. For a broader overview, refer to the full collection of trigonometric identities.
 
 

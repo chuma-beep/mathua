@@ -4,7 +4,7 @@
 
 ## Motivation for De Moivre’s Theorem
 
-Suppose we want to compute the power of a complex number \\( z \in \mathbb{C} \\). The most straightforward approach is to start from its [algebraic form](../complex-numbers-introduction/) and expand the expression directly. For example, given \\(z = a + ib\\) we may want to calculate its square. We have:
+Suppose we want to compute the power of a complex number \\( z \in \mathbb{C} \\). The most straightforward approach is to start from its algebraic form and expand the expression directly. For example, given \\(z = a + ib\\) we may want to calculate its square. We have:
 
 \\[
 \begin{align}
@@ -13,12 +13,12 @@ z^2 &= (a + ib)^2 \\\\[0.5em]
 \end{align}
 \\]
 
-While this method is valid, as the exponent increases beyond three, the calculations become increasingly tedious and impractical. Expanding higher powers algebraically yields lengthy expressions and more terms, reducing the practicality of this approach. In these situations, [De Moivre's Theorem](../de-moivre-theorem/) provides a more efficient and elegant solution.
+While this method is valid, as the exponent increases beyond three, the calculations become increasingly tedious and impractical. Expanding higher powers algebraically yields lengthy expressions and more terms, reducing the practicality of this approach. In these situations, De Moivre's Theorem provides a more efficient and elegant solution.
 
 - - -
 ## De Moivre's theorem and exponential notation for complex numbers
 
-De Moivre's theorem provides a method for computing powers and roots of complex numbers, whether written in [trigonometric](../complex-numbers-trigonometric-form/) or [exponential form](../complex-numbers-exponential-form/). Consider a complex number \\( z \\) raised to an integer power \\( n \in \mathbb{Z} \\). That is,
+De Moivre's theorem provides a method for computing powers and roots of complex numbers, whether written in trigonometric or exponential form. Consider a complex number \\( z \\) raised to an integer power \\( n \in \mathbb{Z} \\). That is,
 
 \\[
 z^n \quad n \in \mathbb{Z}
@@ -30,7 +30,7 @@ Rewrite the number \\(z\\) in trigonometric form:
 z = r(\cos\theta + i\sin\theta)
 \\]
 
-For any [integer](../integers/) \\( n \\), the power \\( z^n \\) can be computed by raising the modulus to the \\( n \\)-th power and multiplying the angle by \\( n \\). The result is a new complex number in polar form. We have:
+For any integer \\( n \\), the power \\( z^n \\) can be computed by raising the modulus to the \\( n \\)-th power and multiplying the angle by \\( n \\). The result is a new complex number in polar form. We have:
 
 \\[
 z^n = r^n \left(\cos(n\theta) + i\sin(n\theta)\right)
@@ -69,7 +69,7 @@ De Moivre's Theorem states that for any integer \\( n \\) and any complex number
 z^n = r^n\bigl(\cos(n\theta) + i\sin(n\theta)\bigr)
 \\]
 
-The formula can be established by [induction](../principle-of-mathematical-induction/) on \\( n \\). The argument has two parts:
+The formula can be established by induction on \\( n \\). The argument has two parts:
 
 + Verifying the base case.
 + Showing that validity at step \\( n \\) forces validity at step \\( n + 1 \\).
@@ -88,7 +88,7 @@ Multiplying both sides by \\( z = r(\cos\theta + i\sin\theta) \\) and expanding 
 z^{n+1} = r^{n+1}\Bigl[\bigl(\cos(n\theta)\cos\theta - \sin(n\theta)\sin\theta\bigr) + i\bigl(\sin(n\theta)\cos\theta + \cos(n\theta)\sin\theta\bigr)\Bigr]
 \\]
 
-The two expressions in brackets are the addition formulas for [cosine and sine](../sine-and-cosine/) respectively and applying them yields:
+The two expressions in brackets are the addition formulas for cosine and sine respectively and applying them yields:
 
 \\[
 z^{n+1} = r^{n+1}\bigl(\cos\bigl((n+1)\theta\bigr) + i\sin\bigl((n+1)\theta\bigr)\bigr)
@@ -105,7 +105,7 @@ For example, squaring the complex number \\( z = re^{i\theta} \\) gives:
 z^2 = (re^{i\theta})^2 = r^2 e^{i2\theta}
 \\]
 
-The result is a new complex number whose modulus is \\( r^2 \\) and whose argument is \\( 2\theta. \\) In geometric terms, this means the [vector](../vectors/) is stretched by a factor of \\( r^2 \\) and rotated to double its original angle.
+The result is a new complex number whose modulus is \\( r^2 \\) and whose argument is \\( 2\theta. \\) In geometric terms, this means the vector is stretched by a factor of \\( r^2 \\) and rotated to double its original angle.
 
 - - -
 
@@ -118,7 +118,7 @@ First, we determine the modulus of \\( z \\):
 |z| = \sqrt{2^2 + 2^2} = \sqrt{8} = 2\sqrt{2}
 \\]
 
-> The modulus of a complex number represents its distance from the origin in the complex plane. It is calculated using the [Pythagorean theorem](../pythagorean-theorem/).
+> The modulus of a complex number represents its distance from the origin in the complex plane. It is calculated using the Pythagorean theorem.
 
 - - -
 
@@ -165,7 +165,7 @@ So the fourth power of \\( z = 2 + 2i \\) is the real number \\( -64 \\).
 - - -
 ## Deriving trigonometric identities
 
-One of the most practical applications of De Moivre's Theorem is the derivation of explicit formulas for [sine and cosine](../sine-and-cosine/), in particular for \\( \cos(n\theta) \\) and \\( \sin(n\theta) \\) in terms of powers of \\( \cos\theta \\) and \\( \sin\theta \\). The idea is straightforward: expand the left-hand side of the theorem using the [binomial formula](../binomial-coefficient/), then separate real and imaginary parts.
+One of the most practical applications of De Moivre's Theorem is the derivation of explicit formulas for sine and cosine, in particular for \\( \cos(n\theta) \\) and \\( \sin(n\theta) \\) in terms of powers of \\( \cos\theta \\) and \\( \sin\theta \\). The idea is straightforward: expand the left-hand side of the theorem using the binomial formula, then separate real and imaginary parts.
 
 For \\( n = 3 \\), the theorem gives:
 
@@ -195,7 +195,7 @@ Equating real and imaginary parts with the right-hand side:
 \sin(3\theta) = 3\cos^2\theta\sin\theta - \sin^3\theta
 \\]
 
-These are the triple angle formulas for cosine and sine. Both follow directly from a single application of the binomial expansion, with no need for repeated use of [addition formulas](../reduction-formulas-and-reference-angles/) or any other intermediate result. The same procedure extends to any integer \\( n \\): the binomial expansion of \\( (\cos\theta + i\sin\theta)^n \\) always yields \\( \cos(n\theta) \\) as its real part and \\( \sin(n\theta) \\) as its imaginary part.
+These are the triple angle formulas for cosine and sine. Both follow directly from a single application of the binomial expansion, with no need for repeated use of addition formulas or any other intermediate result. The same procedure extends to any integer \\( n \\): the binomial expansion of \\( (\cos\theta + i\sin\theta)^n \\) always yields \\( \cos(n\theta) \\) as its real part and \\( \sin(n\theta) \\) as its imaginary part.
 
 - - -
 ## Finding complex roots with De Moivre's theorem
@@ -229,7 +229,7 @@ Let's find all the complex solutions to the equation:
 z^3 = 1
 \\]
 
-At first glance, it seems obvious that \\( z = 1 \\) is a solution. But since we're working in the complex plane, we know there are three cube roots in total, equally spaced around the [unit circle](../unit-circle).
+At first glance, it seems obvious that \\( z = 1 \\) is a solution. But since we're working in the complex plane, we know there are three cube roots in total, equally spaced around the unit circle.
 
 Since the argument of a complex number is defined up to multiples of \\( 2\pi \\), we write \\( 1 \\) in exponential form as:
 
@@ -263,4 +263,4 @@ For \\( k = 2 \\):
 z_2 = e^{i \cdot \frac{4\pi}{3}} = \cos\left(\frac{4\pi}{3}\right) + i\sin\left(\frac{4\pi}{3}\right) = -\frac{1}{2} - \frac{\sqrt{3}}{2}i
 \\]
 
-These are the three cube roots of 1, arranged in the complex plane like the vertices of an equilateral triangle. Together, they form what are known as the [cube roots of unity](../roots-of-unity/).
+These are the three cube roots of 1, arranged in the complex plane like the vertices of an equilateral triangle. Together, they form what are known as the cube roots of unity.

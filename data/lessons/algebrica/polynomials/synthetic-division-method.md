@@ -3,7 +3,7 @@
 
 ## Introduction
 
-The synthetic division (or Ruffini's rule) is a method for dividing a polynomial by a binomial of the form \\((x - a)\\). It is widely used to factorize [polynomials](../polynomials) and to simplify the resolution of [equations](../equations) of degree higher than two, especially when these cannot be reduced to [quadratic equations](../quadratic-equations), [monomials](../monomials), or standard [trinomials](../trinomials). When \\(a\\) is a [root](../roots-of-a-polynomial/) of a polynomial \\(P(x)\\) of degree \\(n\\) and the [binomial](../binomials/) \\((x - r)\\) is a factor of \\(P(x)\\) we can write:
+The synthetic division (or Ruffini's rule) is a method for dividing a polynomial by a binomial of the form \\((x - a)\\). It is widely used to factorize polynomials and to simplify the resolution of equations of degree higher than two, especially when these cannot be reduced to quadratic equations, monomials, or standard trinomials. When \\(a\\) is a root of a polynomial \\(P(x)\\) of degree \\(n\\) and the binomial \\((x - r)\\) is a factor of \\(P(x)\\) we can write:
 
 \\[
 P(x) = (x - r)\\, Q(x)
@@ -17,7 +17,7 @@ Synthetic division is useful for two reasons:
 
 + Since each step lowers the degree of the polynomial, higher-degree equations become easier to deal with, and other roots or factors often show up along the way.
 
-Although this method is often used in conjunction with the rational root theorem, it is not the only available technique. Depending on how the expression is built, other tools, like [special products](../notable-products) or factoring methods such as [the AC method](../factoring-ac-method/), can sometimes get you to the factorization more easily or directly.
+Although this method is often used in conjunction with the rational root theorem, it is not the only available technique. Depending on how the expression is built, other tools, like special products or factoring methods such as the AC method, can sometimes get you to the factorization more easily or directly.
 
 - - -
 
@@ -240,7 +240,7 @@ P(x) = x^3 - 3x^2 + 4x - 4
 D(x) = x - (1 + i)
 \\]
 
-As mentioned earlier, synthetic division only works with polynomials that have real coefficients and divisors of the form \\(x - r\\) with \\(r \in \mathbb{R}\\). In this example the divisor has the form \\(x - r\\), but the value \\(r = 1 + i\\) is a [complex number](../complex-numbers-introduction/) rather than a real one, and for the reason explained above the synthetic division table cannot be used to carry out the division.
+As mentioned earlier, synthetic division only works with polynomials that have real coefficients and divisors of the form \\(x - r\\) with \\(r \in \mathbb{R}\\). In this example the divisor has the form \\(x - r\\), but the value \\(r = 1 + i\\) is a complex number rather than a real one, and for the reason explained above the synthetic division table cannot be used to carry out the division.
 
 Consider now the case when \\(1 + i\\) is a root of the polynomial, evaluating \\(P(x)\\) at this value we obtain:
 
@@ -266,6 +266,6 @@ Synthetic division consists of a sequence of operations, each requiring a consta
 
 Polynomial long division has a higher complexity of \\(O(n^2)\\). At each step you multiply and subtract polynomials of decreasing degree, and the total effort grows quadratically. Long division works with any kind of divisor, but when the divisor is linear, like \\((x - r)\\), synthetic division gives you the same result at a much lower cost.
 
-Polynomial factorization is harder. For polynomials with [integer](../integers/) coefficients, no polynomial-time algorithm is currently known, and in practice the process combines several techniques, like testing candidate roots. In this case synthetic division plays a key role: once a root is found, it removes the corresponding factor and leaves a simpler polynomial.
+Polynomial factorization is harder. For polynomials with integer coefficients, no polynomial-time algorithm is currently known, and in practice the process combines several techniques, like testing candidate roots. In this case synthetic division plays a key role: once a root is found, it removes the corresponding factor and leaves a simpler polynomial.
 
-The expressions \\(O(n)\\) and \\(O(n^2)\\) use [Big-O notation](../big-o-notation/), the standard way of describing how the number of operations of an algorithm scales with the size of the input.
+The expressions \\(O(n)\\) and \\(O(n^2)\\) use Big-O notation, the standard way of describing how the number of operations of an algorithm scales with the size of the input.

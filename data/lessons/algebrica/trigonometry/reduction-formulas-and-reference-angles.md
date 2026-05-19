@@ -3,7 +3,7 @@
 
 ## Using reference angles to rewrite angles
 
-Given an angle \\( \theta \\) in standard position on the [unit circle](../unit-circle/), the acute angle formed between its terminal side and the horizontal axis is called the reference angle of \\( \theta \\), and is usually denoted by \\( \alpha \\). The reference angle provides a direct link between the trigonometric functions of a generic angle and those of an acute angle in the first quadrant, where all values are positive and computable from elementary geometric considerations.
+Given an angle \\( \theta \\) in standard position on the unit circle, the acute angle formed between its terminal side and the horizontal axis is called the reference angle of \\( \theta \\), and is usually denoted by \\( \alpha \\). The reference angle provides a direct link between the trigonometric functions of a generic angle and those of an acute angle in the first quadrant, where all values are positive and computable from elementary geometric considerations.
 
 The identities that realize this link are known as reduction formulas. Each of them expresses a trigonometric function of \\( \theta \\) in terms of the same function, or its cofunction, evaluated at \\( \alpha \\), with a sign fixed by the quadrant in which \\( \theta \\) lies. The angle forms that appear most frequently are the following:
 
@@ -17,7 +17,7 @@ Every other case reduces to one of these by adding or subtracting an integer mul
 
 For each of these forms, two pieces of information completely determine the corresponding reduction formula: the quadrant of the angle, which fixes the signs of the four trigonometric functions, and the axis used as reference, which determines whether the reduction preserves each function or swaps it with its cofunction.
 
-Angles written as deviations from \\( \pi/2\\) or \\(3\pi/2\\) are measured from a vertical axis, and their reduction involves the exchange of [sine with cosine](../sine-and-cosine/) and of [tangent with cotangent](../tangent-and-cotangent/). Angles written as deviations from \\( \pi \\) or \\( 2\pi \\) are measured from a horizontal axis, and their reduction keeps each function unchanged. The table below gathers this information for all the forms considered on this page, listing the quadrant, the sign of each trigonometric function, and whether a cofunction swap occurs.
+Angles written as deviations from \\( \pi/2\\) or \\(3\pi/2\\) are measured from a vertical axis, and their reduction involves the exchange of sine with cosine and of tangent with cotangent. Angles written as deviations from \\( \pi \\) or \\( 2\pi \\) are measured from a horizontal axis, and their reduction keeps each function unchanged. The table below gathers this information for all the forms considered on this page, listing the quadrant, the sign of each trigonometric function, and whether a cofunction swap occurs.
 
 
 | Form | Quadrant | \\( \sin \\) | \\( \cos \\) | \\( \tan \\) | \\( \cot \\) | Cofunction swap |
@@ -44,7 +44,7 @@ A direct geometric analysis of the right triangle determined by the terminal sid
 \cos\left(\frac{\pi}{2}+\alpha\right) &= -\sin\alpha
 \end{align}
 \\]
-The geometric meaning of these identities is transparent. The [sine](../sine-and-cosine) of \\( \alpha \\), which measures the vertical segment associated with the acute angle in the first quadrant, coincides in length with the [cosine](../sine-and-cosine) of \\( \frac{\pi}{2}+\alpha \\), which measures the horizontal segment associated with the corresponding angle in the second quadrant. The only difference is the sign, since the latter segment extends to the left of the vertical axis and therefore carries a negative value. The identities for tangent and cotangent follow at once from the definitions:
+The geometric meaning of these identities is transparent. The sine of \\( \alpha \\), which measures the vertical segment associated with the acute angle in the first quadrant, coincides in length with the cosine of \\( \frac{\pi}{2}+\alpha \\), which measures the horizontal segment associated with the corresponding angle in the second quadrant. The only difference is the sign, since the latter segment extends to the left of the vertical axis and therefore carries a negative value. The identities for tangent and cotangent follow at once from the definitions:
 
 \\[
 \begin{align}
@@ -197,7 +197,7 @@ Both quotients carry a single minus sign, and the tangent and cotangent of \\( 2
 
 Beyond their immediate computational use, the reduction formulas reveal a structural feature of the trigonometric functions that is worth stating explicitly. Every identity derived on this page is a consequence of two elementary symmetries of the unit circle: the invariance of the coordinates under a rotation by \\( 2\pi \\), which encodes the periodicity of sine and cosine, and their behaviour under reflections with respect to the coordinate axes, which produces the sign changes and the cofunction swaps. In this sense, reduction formulas are the algebraic translation of how a point moves on the unit circle under a finite group of rigid transformations.
 
-This perspective has concrete consequences in several directions. In the solution of [trigonometric equations](../trigonometric-equations/), reduction formulas are what allows one to reduce any equation involving \\( \sin\theta \\), \\( \cos\theta \\), \\( \tan\theta \\) or \\( \cot\theta \\) to a problem on an acute reference angle, and then to recover the full set of solutions by exploiting periodicity. In [integral calculus](../indefinite-integrals/), they are routinely used to simplify integrands of the form \\( \sin(k\pi\pm x) \\) or \\( \cos(k\pi\pm x) \\) before applying standard integration techniques. In the study of [Fourier series](../fourier-series/), the same sign rules underlie the classification of a function as even, odd, or neither, and determine which coefficients of the series vanish. From a more advanced standpoint, the reduction formulas anticipate the general addition formulas:
+This perspective has concrete consequences in several directions. In the solution of trigonometric equations, reduction formulas are what allows one to reduce any equation involving \\( \sin\theta \\), \\( \cos\theta \\), \\( \tan\theta \\) or \\( \cot\theta \\) to a problem on an acute reference angle, and then to recover the full set of solutions by exploiting periodicity. In integral calculus, they are routinely used to simplify integrands of the form \\( \sin(k\pi\pm x) \\) or \\( \cos(k\pi\pm x) \\) before applying standard integration techniques. In the study of Fourier series, the same sign rules underlie the classification of a function as even, odd, or neither, and determine which coefficients of the series vanish. From a more advanced standpoint, the reduction formulas anticipate the general addition formulas:
 
 \\[
 \begin{align}

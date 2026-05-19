@@ -3,13 +3,13 @@
 
 ## Definition
 
-A linear transformation, represented by a square [matrix](../matrices/) \\(A\\), acts on vectors by moving them in space. It can stretch, compress, rotate, or reflect them, and in general the image of a [vector](../vectors/) points in a different direction from the original. Among all vectors however there are those for which the action of \\(A\\) is particularly simple. The transformation scales them by a constant factor, leaving their direction unchanged. Such vectors are called eigenvectors of \\(A\\), and the corresponding scaling factors are called eigenvalues.
+A linear transformation, represented by a square matrix \\(A\\), acts on vectors by moving them in space. It can stretch, compress, rotate, or reflect them, and in general the image of a vector points in a different direction from the original. Among all vectors however there are those for which the action of \\(A\\) is particularly simple. The transformation scales them by a constant factor, leaving their direction unchanged. Such vectors are called eigenvectors of \\(A\\), and the corresponding scaling factors are called eigenvalues.
 
 > Eigenvectors reveal the intrinsic geometry of a linear transformation, and the collection of eigenvalues encodes information about the matrix that is invariant under a wide class of coordinate changes.
 
 - - -
 
-Let \\(A\\) be a square [matrix](../matrices/) of order \\(n\\) with entries in \\(\mathbb{R}\\) or \\(\mathbb{C}\\). A non-zero [vector](../vectors/) \\(\mathbf{v}\\) is called an eigenvector of \\(A\\) if there exists a scalar \\(\lambda\\) such that the following equation holds:
+Let \\(A\\) be a square matrix of order \\(n\\) with entries in \\(\mathbb{R}\\) or \\(\mathbb{C}\\). A non-zero vector \\(\mathbf{v}\\) is called an eigenvector of \\(A\\) if there exists a scalar \\(\lambda\\) such that the following equation holds:
 
 \\[
 A\mathbf{v} = \lambda\mathbf{v}
@@ -27,7 +27,7 @@ The following diagram illustrates this idea for the square matrix:
 A = \begin{pmatrix} 2 & 1 \\\\ 1 & 2 \end{pmatrix}
 \\]
 
-The [unit circle](../unit-circle/) is mapped to an [ellipse](../ellipse/): most vectors change direction under the transformation. The two eigenvectors \\(\mathbf{v}\_1\\) and \\(\mathbf{v}\_2\\) are the exception. They remain on the same line through the origin, scaled by \\(\lambda_1 = 3\\) and \\(\lambda_2 = 1\\) respectively.
+The unit circle is mapped to an ellipse: most vectors change direction under the transformation. The two eigenvectors \\(\mathbf{v}\_1\\) and \\(\mathbf{v}\_2\\) are the exception. They remain on the same line through the origin, scaled by \\(\lambda_1 = 3\\) and \\(\lambda_2 = 1\\) respectively.
 
 - - -
 ## The characteristic equation
@@ -45,7 +45,7 @@ is called the characteristic equation of \\(A\\). Expanding the determinant yiel
 - - -
 ## Eigenspaces
 
-For each eigenvalue \\(\lambda_0\\), the [set](../sets/) of all vectors satisfying \\(A\mathbf{v} = \lambda_0\mathbf{v}\\) is a subspace of \\(\mathbb{R}^n\\) or \\(\mathbb{C}^n\\). It coincides with the [kernel](../?s=kernel) of \\(A - \lambda_0 I\\) and is called the eigenspace of \\(A\\) associated with \\(\lambda_0\\):
+For each eigenvalue \\(\lambda_0\\), the set of all vectors satisfying \\(A\mathbf{v} = \lambda_0\mathbf{v}\\) is a subspace of \\(\mathbb{R}^n\\) or \\(\mathbb{C}^n\\). It coincides with the kernel of \\(A - \lambda_0 I\\) and is called the eigenspace of \\(A\\) associated with \\(\lambda_0\\):
 
 \\[
 E_{\lambda_0} = \ker(A - \lambda_0 I) = \\{\\, \mathbf{v} : (A - \lambda_0 I)\mathbf{v} = \mathbf{0} \\,\\}
@@ -56,13 +56,13 @@ The dimension of \\(E_{\lambda_0}\\) is called the geometric multiplicity of \\(
 - - -
 ## Example 1
 
-Consider the following [matrix](../matrices/):
+Consider the following matrix:
 
 \\[
 A = \begin{pmatrix} 3 & 1 \\\\ 0 & 2 \end{pmatrix}
 \\]
 
-We compute the characteristic [polynomial](../polynomials/) by forming the matrix \\(A - \lambda I\\) and computing its [determinant](../determinant/). Since \\(A - \lambda I\\) is upper triangular, its determinant is the product of the diagonal entries:
+We compute the characteristic polynomial by forming the matrix \\(A - \lambda I\\) and computing its determinant. Since \\(A - \lambda I\\) is upper triangular, its determinant is the product of the diagonal entries:
 
 \\[
 \det(A - \lambda I) = (3 - \lambda)(2 - \lambda)
@@ -135,7 +135,7 @@ The first row gives \\(v_2 = 0\\) and the third row gives \\(v_3 = 0\\), while \
 \mathbf{v}\_2 = \begin{pmatrix} 1 \\\\ 0 \\\\ 0 \end{pmatrix}
 \\]
 
-The geometric multiplicity of \\(\lambda_1 = 2\\) is therefore one, while its algebraic multiplicity is two. Since these two values differ, the matrix \\(A\\) is not diagonalizable. It possesses only two [linearly independent](../rank-of-a-matrix/) eigenvectors, which is insufficient to form a basis of \\(\mathbb{R}^3\\).
+The geometric multiplicity of \\(\lambda_1 = 2\\) is therefore one, while its algebraic multiplicity is two. Since these two values differ, the matrix \\(A\\) is not diagonalizable. It possesses only two linearly independent eigenvectors, which is insufficient to form a basis of \\(\mathbb{R}^3\\).
 
 - - -
 ## Linear independence of eigenvectors
@@ -172,7 +172,7 @@ Let \\(\lambda_1, \lambda_2, \ldots, \lambda_n\\) be the eigenvalues of \\(A\\) 
 \text{tr}(A) = \lambda_1 + \lambda_2 + \cdots + \lambda_n
 \\]
 
-The [determinant](../determinant/) of \\(A\\) satisfies:
+The determinant of \\(A\\) satisfies:
 
 \\[
 \det(A) = \lambda_1 \cdot \lambda_2 \cdots \lambda_n

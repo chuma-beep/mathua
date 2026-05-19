@@ -3,9 +3,9 @@
 
 ## Introduction
 
-Complex numbers arise to overcome the limitations of the set of [real numbers](../types-of-numbers) \\(\mathbb{R}\\), particularly the impossibility of taking even-indexed roots of negative numbers. One major consequence of this restriction is the inability to determine the solutions of a [quadratic equation](../quadratic-equations) with a negative [discriminant](../quadratic-formula).
+Complex numbers arise to overcome the limitations of the set of real numbers \\(\mathbb{R}\\), particularly the impossibility of taking even-indexed roots of negative numbers. One major consequence of this restriction is the inability to determine the solutions of a quadratic equation with a negative discriminant.
 
-In the set of [real numbers](../properties-of-real-numbers/) \\( \mathbb{R} \\), it is impossible to find a number whose square is \\(-1\\), since the square of any real number is always non-negative. Consequently, solving the equation \\( p(x) = x^2 + 1 = 0 \\) has no solutions in \\( \mathbb{R} \\). Indeed, this would lead to \\( x^2 = -1 \\), which is never satisfied in the set of real numbers \\( \mathbb{R} \\).
+In the set of real numbers \\( \mathbb{R} \\), it is impossible to find a number whose square is \\(-1\\), since the square of any real number is always non-negative. Consequently, solving the equation \\( p(x) = x^2 + 1 = 0 \\) has no solutions in \\( \mathbb{R} \\). Indeed, this would lead to \\( x^2 = -1 \\), which is never satisfied in the set of real numbers \\( \mathbb{R} \\).
 
 Starting from this very equation, we introduce the symbol \\( i \\), known as the imaginary unit, which is defined by the property:
 \\[ i^2 = -1 \\]
@@ -15,19 +15,19 @@ In this way, the equation \\( x^2 + 1 = 0 \\) has two distinct complex roots, gi
 - - -
 ## Construction of the complex numbers
 
-The introduction of complex numbers is sometimes treated as a matter of convenient notation, as though the symbol \\( i \\) were simply declared to satisfy \\( i^2 = -1 \\) and the matter were settled.This approach leaves an important question unanswered: does such an object actually exist, and if so, in what mathematical sense? The answer requires a short excursion into the construction of \\( \mathbb{C} \\) from the [real numbers](../real-numbers).
+The introduction of complex numbers is sometimes treated as a matter of convenient notation, as though the symbol \\( i \\) were simply declared to satisfy \\( i^2 = -1 \\) and the matter were settled.This approach leaves an important question unanswered: does such an object actually exist, and if so, in what mathematical sense? The answer requires a short excursion into the construction of \\( \mathbb{C} \\) from the real numbers.
 
-The starting point is the Cartesian product \\( \mathbb{R}^2 \\), the set of all ordered pairs of real numbers. Each element of this set is a pair of the form \\( (a, b) \\) with \\( a, b \in \mathbb{R} \\). This [set](../sets/) is the familiar Euclidean plane but here we want to equip it with an algebraic structure that makes it a [field](../fields/). To do so, addition and multiplication must be defined on \\( \mathbb{R}^2 \\).
+The starting point is the Cartesian product \\( \mathbb{R}^2 \\), the set of all ordered pairs of real numbers. Each element of this set is a pair of the form \\( (a, b) \\) with \\( a, b \in \mathbb{R} \\). This set is the familiar Euclidean plane but here we want to equip it with an algebraic structure that makes it a field. To do so, addition and multiplication must be defined on \\( \mathbb{R}^2 \\).
 
 Addition is defined componentwise. Given two pairs \\( (a, b) \\) and \\( (c, d) \\), their sum is the following:
 \\[
 (a,\\, b) + (c,\\, d) \\;=\\; (a + c,\\; b + d)
 \\]
-This is the natural extension of [vector](../vectors/) addition in the plane and presents no difficulty.
+This is the natural extension of vector addition in the plane and presents no difficulty.
 
 - - -
 
-Multiplication is more subtle, and it is precisely here that the algebraic structure of the complex numbers diverges from that of \\( \mathbb{R}^2 \\) viewed merely as a [vector space](../vector-spaces/). The product of two pairs is defined as follows.
+Multiplication is more subtle, and it is precisely here that the algebraic structure of the complex numbers diverges from that of \\( \mathbb{R}^2 \\) viewed merely as a vector space. The product of two pairs is defined as follows.
 \\[
 (a,\\, b) \cdot (c,\\, d) \\;=\\; (ac - bd,\\; ad + bc)
 \\]
@@ -51,7 +51,7 @@ The notation \\( z = a + bi \\) is thus a compact encoding of the ordered pair \
 
 - - -
 
-It remains to verify that the algebraic properties expected of a field actually hold. The verification is mechanical but worth summarising. Under addition, \\( \mathbb{C} \\) forms an abelian [group](../groups/): commutativity and associativity are inherited directly from \\( \mathbb{R} \\), the additive identity is \\( (0, 0) \\), and the additive inverse of \\( (a, b) \\) is \\( (-a, -b) \\).
+It remains to verify that the algebraic properties expected of a field actually hold. The verification is mechanical but worth summarising. Under addition, \\( \mathbb{C} \\) forms an abelian group: commutativity and associativity are inherited directly from \\( \mathbb{R} \\), the additive identity is \\( (0, 0) \\), and the additive inverse of \\( (a, b) \\) is \\( (-a, -b) \\).
 
 Multiplication is also commutative and associative, as can be confirmed by direct computation, and the multiplicative identity is \\( (1, 0) \\). The distributive law holds. The only property requiring genuine attention is the existence of multiplicative inverses for nonzero elements. Given \\( (a, b) \neq (0, 0) \\), one checks that its multiplicative inverse is the following pair.
 \\[
@@ -61,7 +61,7 @@ The denominator \\( a^2 + b^2 \\) is strictly positive when \\( (a, b) \neq (0, 
 
 One may also observe that, as a vector space over \\( \mathbb{R} \\), the field \\( \mathbb{C} \\) has dimension two, with basis \\( \{1, i\} \\). This two-dimensionality is what makes the geometric interpretation in the complex plane so natural: the real and imaginary parts of a complex number serve as coordinates with respect to this basis.
 
-The construction just described also generalises: replacing \\( \mathbb{R} \\) with an arbitrary field \\( F \\) and seeking an extension in which a chosen irreducible [polynomial](../polynomials/) has a root leads to the broader theory of field extensions, of which \\( \mathbb{C} \cong \mathbb{R}[x]/(x^2 + 1) \\) is the simplest and most important example.
+The construction just described also generalises: replacing \\( \mathbb{R} \\) with an arbitrary field \\( F \\) and seeking an extension in which a chosen irreducible polynomial has a root leads to the broader theory of field extensions, of which \\( \mathbb{C} \cong \mathbb{R}[x]/(x^2 + 1) \\) is the simplest and most important example.
 
 - - -
 ## Definition
@@ -84,7 +84,7 @@ z = a + ib \quad \rightarrow \quad
 
 - - -
 
-While the algebraic form is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their polar [trigonometric form](../complex-numbers-trigonometric-form):
+While the algebraic form is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their polar trigonometric form:
 \\[z = r (\cos\theta + i\sin\theta) \\]
 Another representation is the exponential form:
 \\[z = r e^{i\theta} \\]
@@ -115,7 +115,7 @@ Given the complex number \\( z = a + bi \\), the modulus of \\( z \\) is defined
 |z| = \sqrt{a^2 + b^2}
 \\]
 
-It represents the distance from the origin to the point \\( (a, b) \\) in the complex plane. This definition is directly derived from the [Pythagorean theorem](../pythagorean-theorem/), since the modulus corresponds to the hypotenuse of a right triangle with legs of lengths \\( |a| \\) and \\( |b| \\):
+It represents the distance from the origin to the point \\( (a, b) \\) in the complex plane. This definition is directly derived from the Pythagorean theorem, since the modulus corresponds to the hypotenuse of a right triangle with legs of lengths \\( |a| \\) and \\( |b| \\):
 
 \\[
 |z|^2 = a^2 + b^2
@@ -146,7 +146,7 @@ The argument is not uniquely determined: any two angles differing by an integer 
 
 Computing the argument requires care, because the naive formula \\( \theta = \arctan(b/a) \\) is insufficient: the arctangent function returns values only in the interval \\( (-\pi/2,\, \pi/2) \\), which covers only the right half of the complex plane and fails entirely when \\( a = 0 \\). The correct determination of \\( \theta \\) depends on the quadrant in which \\( (a, b) \\) lies, and must be handled case by case.
 
-When \\( a > 0 \\), the point lies in the right half-plane and the principal argument is given by the [arctangent](../arctangent-and-arccotangent/).
+When \\( a > 0 \\), the point lies in the right half-plane and the principal argument is given by the arctangent.
 \\[
 \mathrm{Arg}(z) = \arctan\\!\left(\frac{b}{a}\right)
 \\]
@@ -171,7 +171,7 @@ This value is consistent with the geometric position of \\( z = -1 + i \\): the 
 - - -
 ## Properties of \\(\mathbb{C}\\)
 
-The [sum and product](../complex-number-operations) of complex numbers satisfy the associative, commutative, and distributive properties, just like the set of real numbers.
+The sum and product of complex numbers satisfy the associative, commutative, and distributive properties, just like the set of real numbers.
 Associative property for sum and product. When adding or multiplying complex numbers, the way in which the numbers are grouped does not affect the result.
 \\[(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3) \\]
 \\[(z_1 \cdot z_2) \cdot z_3 = z_1 \cdot (z_2 \cdot z_3) \\]
