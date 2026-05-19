@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
+import KatexContent from '../../components/KatexContent'
 import { getLessons, type LessonInfo } from '../../lib/api'
 
 export default function StudyPage() {
@@ -91,8 +92,8 @@ export default function StudyPage() {
                 <div className="text-mathua-secondary text-xs font-mono mb-4">
                   Concepts: {selectedLesson.concepts.join(', ')}
                 </div>
-                <div className="text-mathua-primary text-sm whitespace-pre-wrap leading-relaxed max-h-[60vh] overflow-y-auto">
-                  {selectedLesson.body}
+                <div className="text-mathua-primary text-sm leading-relaxed max-h-[60vh] overflow-y-auto">
+                  <KatexContent>{selectedLesson.body}</KatexContent>
                 </div>
               </div>
               <div className="mt-6 text-center">
