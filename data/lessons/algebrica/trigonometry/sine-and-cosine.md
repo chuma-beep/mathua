@@ -20,7 +20,9 @@ Consider an oriented angle \\( \theta \\) and the point \\( P \\) on the unit ci
 \sin(\theta) = \frac{\overline{OQ}}{\overline{OP}} = \frac{\overline{OQ}}{1} = y_P
 \\]
 
-Similarly, the cosine of \\( \theta \\) is defined as the \\( x \\)-coordinate of \\( P \\). It coincides with the ratio between the leg \\( \overline{OR} \\) and the hypotenuse \\( \overline{OP} \\), so that:
+Similarly, the cosine of \\( \theta \\) is defined as the \\( x \\)-coordinate of \\( P \\).
+
+![Unit circle with sine and cosine projections](svg/unit-circle-sine-cosine.svg) It coincides with the ratio between the leg \\( \overline{OR} \\) and the hypotenuse \\( \overline{OP} \\), so that:
 
 \\[
 \cos(\theta) = \frac{\overline{OR}}{\overline{OP}} = \frac{\overline{OR}}{1} = x_P
@@ -128,6 +130,8 @@ x &= \pi/2   &\quad& \cos(\pi/2) = 0
 
 - - -
 ## Sine and cosine function
+
+![Sine and cosine graphs](svg/sine-cosine-graph.svg)
 
 The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding sine value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between -1 and 1. The function \\( f(x) = \sin x \\) has all real numbers in its domain, but its range is \\( -1 \leq \sin(x) \leq 1 \\).
 

@@ -23,7 +23,7 @@ In this case, \\( A \\) is bounded below. A set is considered bounded if it is b
 
 Upper bounds, when they exist, are generally not unique. For example, if \\( M \\) is an upper bound of \\( A \\), then \\( M + 1 \\) and \\( M + 100 \\) are also upper bounds. The same applies symmetrically to lower bounds. If \\( m \\) is a lower bound of \\( A \\), so is \\( m - 1 \\). The least upper bound is called the supremum, and the greatest lower bound is called the infimum.
 
-- - -
+![Img. 1](svg/supremum-and-infimum-1.svg)
 
 + If \\( A \\) is non-empty but not bounded above, the supremum is conventionally defined as \\(\sup A = +\infty \\).
 
@@ -76,6 +76,8 @@ The supremum does not necessarily belong to the set \\( A \\). For example, cons
 \\[ \sup B = \max B = 1 \qquad \inf B = \min B = 0 \\]
 
 since the boundary points are included in the set.
+
+![Img. 2](svg/supremum-and-infimum-2.svg)
 
 - - -
 

@@ -1,0 +1,21 @@
+<svg width="400px" height="400px" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="dot" viewBox="0 0 10 10" refX="5" refY="5"><circle cx="5" cy="5" r="5" fill="#333"/></marker></defs>
+<rect width="400" height="400" fill="white"/>
+<line x1="30" y1="200" x2="370" y2="200" stroke="#999" stroke-width="1" stroke-linecap="round"/>
+<polygon points="370,200 362.6315120479769,203.1153467384692 362.6315120479769,196.8846532615308" fill="#999"/>
+<line x1="200" y1="370" x2="200" y2="30" stroke="#999" stroke-width="1" stroke-linecap="round"/>
+<polygon points="200,30 203.1153467384692,37.36848795202308 196.8846532615308,37.36848795202308" fill="#999"/>
+<circle cx="200" cy="200" r="140" fill="none" stroke="#333" stroke-width="2"/>
+<line x1="200" y1="200" x2="289.9902653561155" y2="92.75377796334308" stroke="#333" stroke-width="2"/>
+<line x1="289.9902653561155" y1="200" x2="289.9902653561155" y2="92.75377796334308" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,4"/>
+<line x1="200" y1="92.75377796334308" x2="289.9902653561155" y2="92.75377796334308" stroke="#2980b9" stroke-width="1.5" stroke-dasharray="6,4"/>
+<circle cx="289.9902653561155" cy="92.75377796334308" r="5" fill="#333"/>
+<path d="M 230 200 A 30 30 0 0 0 219.28362829059617 177.01866670643065" fill="none" stroke="#999" stroke-width="1"/>
+<text x="205" y="195" font-size="14" font-family="serif" fill="#999">O</text>
+<text x="370" y="215" font-size="14" font-family="serif" fill="#999">x</text>
+<text x="208" y="35" font-size="14" font-family="serif" fill="#999">y</text>
+<text x="297.9902653561155" y="84.75377796334308" font-size="15" font-family="serif" fill="#333">P</text>
+<text x="229.28362829059617" y="172.01866670643065" font-size="13" font-family="serif" fill="#999">θ</text>
+<text x="390" y="192" text-anchor="end" font-size="13" font-family="serif" fill="#e74c3c">cos(θ)</text>
+<text x="210" y="20" font-size="13" font-family="serif" fill="#2980b9">sin(θ)</text>
+</svg>
