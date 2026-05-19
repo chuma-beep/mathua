@@ -1,0 +1,33 @@
+<svg width="500px" height="500px" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="500" fill="white"/>
+<line x1="30" y1="250" x2="470" y2="250" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="470,250 462.6315120479769,253.1153467384692 462.6315120479769,246.8846532615308" fill="#BABABA"/>
+<line x1="250" y1="260" x2="250" y2="30" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round"/>
+<polygon points="250,30 253.1153467384692,37.36848795202308 246.8846532615308,37.36848795202308" fill="#BABABA"/>
+<circle cx="250" cy="250" r="170" fill="none" stroke="#333333" stroke-width="2"/>
+<line x1="250" y1="250" x2="359.2738936467117" y2="119.77244466977373" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="359.2738936467117" cy="119.77244466977373" r="4" fill="#2980b9"/>
+<path d="M 275.0 250.0 A 25 25 0 0 1 266.06969024216346 230.84888892202554" fill="none" stroke="#2980b9" stroke-width="1.5"/>
+<line x1="359.2738936467117" y1="119.77244466977373" x2="359.2738936467117" y2="250" stroke="#2980b9" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="367.2738936467117" y="123.77244466977373" font-size="12" font-family="serif" fill="#2980b9">θ</text>
+<line x1="250" y1="250" x2="140.7261063532883" y2="119.77244466977373" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="140.7261063532883" cy="119.77244466977373" r="4" fill="#e74c3c"/>
+<path d="M 233.9303097578365 230.84888892202554 A 25 25 0 0 1 225.0 250.0" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+<line x1="140.7261063532883" y1="119.77244466977373" x2="140.7261063532883" y2="250" stroke="#e74c3c" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="132.7261063532883" y="123.77244466977373" font-size="12" font-family="serif" fill="#e74c3c">θ</text>
+<line x1="250" y1="250" x2="140.7261063532883" y2="380.2275553302262" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="140.7261063532883" cy="380.2275553302262" r="4" fill="#27ae60"/>
+<path d="M 225.0 250.0 A 25 25 0 0 1 233.9303097578365 269.15111107797446" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+<line x1="140.7261063532883" y1="380.2275553302262" x2="140.7261063532883" y2="250" stroke="#27ae60" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="132.7261063532883" y="376.2275553302262" font-size="12" font-family="serif" fill="#27ae60">θ</text>
+<line x1="250" y1="250" x2="359.27389364671166" y2="380.2275553302263" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<circle cx="359.27389364671166" cy="380.2275553302263" r="4" fill="#2980b9"/>
+<path d="M 266.06969024216346 269.15111107797446 A 25 25 0 0 0 245.65879555832674 274.6201938253052" fill="none" stroke="#2980b9" stroke-width="1.5"/>
+<line x1="359.27389364671166" y1="380.2275553302263" x2="359.27389364671166" y2="250" stroke="#2980b9" stroke-width="1" stroke-linecap="round" stroke-dasharray="4,4"/>
+<text x="367.27389364671166" y="376.2275553302263" font-size="12" font-family="serif" fill="#2980b9">θ</text>
+<text x="435" y="90" font-size="11" font-family="serif" fill="#636363">Quadrant I</text>
+<text x="65" y="90" font-size="11" font-family="serif" fill="#636363" text-anchor="end">Quadrant II</text>
+<text x="65" y="410" font-size="11" font-family="serif" fill="#636363" text-anchor="end">Quadrant III</text>
+<text x="435" y="410" font-size="11" font-family="serif" fill="#636363">Quadrant IV</text>
+<text x="250" y="50" font-size="14" font-family="serif" fill="#333333" text-anchor="middle">Reference Angles on the Unit Circle</text>
+</svg>

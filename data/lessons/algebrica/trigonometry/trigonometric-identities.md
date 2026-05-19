@@ -1,5 +1,6 @@
 # Trigonometric Identities
 
+![Unit circle with labeled angles](svg/unit-circle-labeled.svg)
 
 ## Introduction
 

@@ -1,0 +1,12 @@
+<svg width="350px" height="300px" viewBox="0 0 350 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="350" height="300" fill="white"/>
+<polyline points="40,40 120,40 120,120 40,120" fill="none" stroke="#333333" stroke-width="2"/>
+<text x="80" y="80" font-size="14" font-family="serif" fill="#333333" text-anchor="middle">x²</text>
+<polyline points="40,125 120,125 120,145 40,145" fill="none" stroke="#e74c3c" stroke-width="2"/>
+<text x="80" y="135" font-size="13" font-family="serif" fill="#e74c3c" text-anchor="middle">bx</text>
+<polyline points="125,40 145,40 145,60 125,60" fill="none" stroke="#e74c3c" stroke-width="2"/>
+<text x="135" y="50" font-size="11" font-family="serif" fill="#e74c3c" text-anchor="middle">(b/2)²</text>
+<polyline points="40,40 140,40 140,140 40,140" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+<text x="90" y="160" font-size="13" font-family="serif" fill="#27ae60" text-anchor="middle">(x + b/2)²</text>
+<text x="175" y="285" font-size="13" font-family="serif" fill="#333333" text-anchor="middle">Completing the Square</text>
+</svg>

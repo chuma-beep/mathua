@@ -1,5 +1,6 @@
 ## Binomial Theorem
 
+![Pascal's triangle](svg/pascals-triangle.svg)
 
 ## Statement
 

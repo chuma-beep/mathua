@@ -287,7 +287,7 @@
   },
   {
     "id": "alg.factor.trinomial",
-    "label": "Factor trinomials of the form x\u00b2 + bx + c",
+    "label": "Factor trinomials of the form x² + bx + c",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -317,7 +317,7 @@
   },
   {
     "id": "alg.factor.ac_method",
-    "label": "Factor trinomials ax\u00b2 + bx + c using AC method",
+    "label": "Factor trinomials ax² + bx + c using AC method",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -614,6 +614,34 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.poly.monomial",
+    "label": "What is a monomial",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "alg.ineq.interval",
+    "label": "Interval notation",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "alg.ineq.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
     }
   }
 ]

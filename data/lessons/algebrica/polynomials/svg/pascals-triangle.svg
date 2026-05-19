@@ -1,0 +1,25 @@
+<svg width="500px" height="300px" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="300" fill="white"/>
+<text x="250" y="20" font-size="15" font-family="serif" fill="#333333" text-anchor="middle">Pascal's Triangle</text>
+<text x="250.0" y="40" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="225.0" y="75" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="275.0" y="75" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="200.0" y="110" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="250.0" y="110" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">2</text>
+<text x="300.0" y="110" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="175.0" y="145" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="225.0" y="145" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">3</text>
+<text x="275.0" y="145" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">3</text>
+<text x="325.0" y="145" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="150.0" y="180" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="200.0" y="180" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">4</text>
+<text x="250.0" y="180" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">6</text>
+<text x="300.0" y="180" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">4</text>
+<text x="350.0" y="180" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="125.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+<text x="175.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">5</text>
+<text x="225.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">10</text>
+<text x="275.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">10</text>
+<text x="325.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">5</text>
+<text x="375.0" y="215" font-size="12" font-family="serif" fill="#333333" text-anchor="middle">1</text>
+</svg>

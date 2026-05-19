@@ -1,5 +1,6 @@
 # Absolute value
 
+![Absolute value as distance from zero](svg/number-line-absolute-value.svg)
 
 ## Definition
 

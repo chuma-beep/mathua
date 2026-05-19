@@ -1,0 +1,24 @@
+<svg width="440px" height="440px" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+<rect width="440" height="440" fill="white"/>
+<line x1="40" y1="220" x2="410" y2="220" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="410,220 402.6315120479769,223.1153467384692 402.6315120479769,216.8846532615308" fill="#BABABA"/>
+<line x1="220" y1="230" x2="220" y2="30" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="220,30 223.1153467384692,37.36848795202308 216.8846532615308,37.36848795202308" fill="#BABABA"/>
+<circle cx="220" cy="220" r="150" fill="none" stroke="#333333" stroke-width="2"/>
+<line x1="220" y1="220" x2="342.8728066433488" y2="133.9635345473431" stroke="#333333" stroke-width="2" stroke-linecap="round"/>
+<line x1="220" y1="220" x2="342.8728066433488" y2="220" stroke="#2980b9" stroke-width="2" stroke-linecap="round"/>
+<line x1="342.8728066433488" y1="220" x2="342.8728066433488" y2="133.9635345473431" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+<polyline points="342.8728066433488,230 352.8728066433488,230 352.8728066433488,220" fill="none" stroke="#BABABA" stroke-width="1"/>
+<circle cx="220" cy="220" r="4" fill="#333333"/>
+<circle cx="342.8728066433488" cy="133.9635345473431" r="4" fill="#333333"/>
+<circle cx="342.8728066433488" cy="220" r="4" fill="#333333"/>
+<text x="225" y="215" font-size="14" font-family="serif" fill="#636363">O</text>
+<text x="348.8728066433488" y="127.9635345473431" font-size="13" font-family="serif" fill="#333333">P</text>
+<text x="348.8728066433488" y="225" font-size="13" font-family="serif" fill="#333333">R</text>
+<text x="408" y="235" font-size="14" font-family="serif" fill="#636363">x</text>
+<text x="228" y="32" font-size="14" font-family="serif" fill="#636363">y</text>
+<text x="289.4364033216744" y="176.98176727367155" font-size="14" font-family="serif" fill="#333333">1</text>
+<text x="281.4364033216744" y="238" font-size="13" font-family="serif" fill="#2980b9" text-anchor="middle">cos(θ)</text>
+<text x="352.8728066433488" y="176.98176727367155" font-size="13" font-family="serif" fill="#e74c3c">sin(θ)</text>
+<text x="220" y="50" font-size="13" font-family="serif" fill="#333333" text-anchor="middle">Right triangle inscribed in unit circle</text>
+</svg>

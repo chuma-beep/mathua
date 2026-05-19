@@ -9,7 +9,9 @@ The formal treatment developed here is algebraic and applies to vectors in the E
 
 Two directed segments that have the same length and the same direction are considered to represent the same vector, regardless of their position in space. This equivalence is the basis for the notion of a free vector, which is entirely characterised by its direction and magnitude, independently of where it is drawn.
 
-It is standard to denote vectors using boldface letters such as \\(\mathbf{v}\\), or alternatively with an arrow notation \\(\vec{v}\\). The zero vector, denoted \\(\mathbf{0}\\), has zero magnitude and no defined direction; it plays the role of the additive identity in vector arithmetic.
+It is standard to denote vectors using boldface letters such as \(\mathbf{v}\), or alternatively with an arrow notation \(\vec{v}\). The zero vector, denoted \(\mathbf{0}\), has zero magnitude and no defined direction; it plays the role of the additive identity in vector arithmetic.
+
+![Vector arrow in plane](svg/vector-arrow.svg)
 
 - - -
 ## Components and coordinate representation

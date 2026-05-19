@@ -1,5 +1,6 @@
 ## Completing the square
 
+![Visual representation of completing the square](svg/completing-square.svg)
 
 ## Introduction
 

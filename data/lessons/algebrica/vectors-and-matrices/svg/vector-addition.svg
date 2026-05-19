@@ -1,0 +1,21 @@
+<svg width="400px" height="350px" viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="350" fill="white"/>
+<line x1="20" y1="260" x2="380" y2="260" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="380,260 372.6315120479769,263.1153467384692 372.6315120479769,256.8846532615308" fill="#BABABA"/>
+<line x1="80" y1="270" x2="80" y2="20" stroke="#BABABA" stroke-width="1" stroke-linecap="round"/>
+<polygon points="80,20 83.1153467384692,27.36848795202308 76.8846532615308,27.36848795202308" fill="#BABABA"/>
+<text x="378" y="275" font-size="13" font-family="serif" fill="#636363">x</text>
+<text x="88" y="22" font-size="13" font-family="serif" fill="#636363">y</text>
+<text x="70" y="265" font-size="13" font-family="serif" fill="#636363">O</text>
+<line x1="80" y1="260" x2="220" y2="80" stroke="#2980b9" stroke-width="2.5" stroke-linecap="round"/>
+<polygon points="220,80 213.01708013015087,76.09630558428732 217.9352918419644,72.27102980843235" fill="#2980b9"/>
+<text x="230" y="75" font-size="14" font-family="serif" fill="#2980b9">u</text>
+<line x1="80" y1="260" x2="260" y2="200" stroke="#e74c3c" stroke-width="2.5" stroke-linecap="round"/>
+<polygon points="260,200 252.02447940855532,200.62535693443164 253.99479768750322,194.71440209758788" fill="#e74c3c"/>
+<text x="270" y="205" font-size="14" font-family="serif" fill="#e74c3c">v</text>
+<line x1="220" y1="80" x2="400" y2="20" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4,4"/>
+<line x1="260" y1="200" x2="400" y2="20" stroke="#BABABA" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4,4"/>
+<line x1="80" y1="260" x2="400" y2="20" stroke="#333333" stroke-width="2.5" stroke-linecap="round"/>
+<polygon points="400,20 392.2360015953,18.071184619561514 395.9744176814631,13.086629838010788" fill="#333333"/>
+<text x="410" y="15" font-size="14" font-family="serif" fill="#333333">u+v</text>
+</svg>

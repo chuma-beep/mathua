@@ -96,9 +96,11 @@ Due to the structure of the set \\( \mathbb{C} \\) as a Cartesian product, compl
 
 \\[ z = x + iy \\]
 
-can be represented as the point \\( (x, y) \\) in the plane, which is known as the Gaussian plane (or complex plane).
+can be represented as the point \( (x, y) \) in the plane, which is known as the Gaussian plane (or complex plane).
 
-A purely imaginary number is represented by the ordered pair \\( i = (0,1) \\).
+![Complex plane](svg/complex-plane.svg)
+
+A purely imaginary number is represented by the ordered pair \( i = (0,1) \).
 
 - - -
 ## Conjugate and modulus

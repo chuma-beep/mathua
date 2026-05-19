@@ -13,6 +13,10 @@ The identity takes the form
 
 where \\(\sin^2\theta\\) stands for \\((\sin\theta)^2\\) and \\(\cos^2\theta\\) stands for \\((\cos\theta)^2\\). To see why this holds, recall that the Pythagorean theorem states that, in any right triangle, the square of the hypotenuse equals the sum of the squares of the two legs.
 
+![Right triangle inscribed in unit circle](svg/right-triangle-unit-circle.svg)
+
+![Pythagorean theorem diagram](svg/pythagorean-theorem.svg)
+
 Denoting the hypotenuse by \\(c\\) and the legs by \\(a\\) and \\(b\\), the theorem reads
 
 \\[

@@ -35,7 +35,9 @@ While \\(\sinh(x)\\) reflects how far the point rises or falls along the branch 
 \cosh(x) := X_{P}
 \\]
 
-In this geometric interpretation, the pair \\(\bigl(\cosh(x),\\, \sinh(x)\bigr)\\) represents the coordinates of the unique point \\(P\\) that produces the assigned sector \\(A\\).
+In this geometric interpretation, the pair \(\bigl(\cosh(x),\, \sinh(x)\bigr)\) represents the coordinates of the unique point \(P\) that produces the assigned sector \(A\).
+
+![Hyperbola with cosh and sinh](svg/hyperbolic-functions.svg)
 
 - - -
 ## Fundamental hyperbolic identity

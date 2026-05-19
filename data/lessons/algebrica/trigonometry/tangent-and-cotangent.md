@@ -11,6 +11,8 @@ Tangent and cotangent are two trigonometric ratios derived from sine and cosine.
 
 Both admit a precise geometric interpretation on the unit circle, where they appear as signed lengths of segments associated with the terminal side of the angle. Unlike sine and cosine, which are defined for every real number, tangent and cotangent are not defined everywhere: the tangent is undefined where the cosine vanishes, and the cotangent where the sine vanishes.
 
+![Tangent on the unit circle](svg/unit-circle-tangent.svg)
+
 - - -
 ## Tangent
 

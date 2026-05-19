@@ -1,5 +1,6 @@
 # Linear Equations
 
+![Graph of a linear equation](svg/linear-equation-graph.svg)
 
 ## Definition
 

@@ -11,6 +11,8 @@ c^2 = a^2 + b^2 - 2ab \cos(\theta)
 
 When \\(\theta = 90^\circ\\) the cosine term vanishes and the formula reduces exactly to the Pythagorean theorem, which confirms that the law of cosines is a strict generalisation of that result. For any other angle, the corrective term either subtracts from or adds to the sum \\(a^2 + b^2\\), depending on whether \\(\theta\\) is acute or obtuse.
 
+![Law of cosines triangle](svg/law-of-cosines.svg)
+
 To derive the formula, drop the altitude \\(h\\) from the vertex opposite to \\(c\\) to the side \\(b\\). This divides \\(b\\) into two segments: \\(m = a\cos(\theta)\\) and \\(n = b - a\cos(\theta)\\), while the altitude itself satisfies \\(h = a\sin(\theta)\\). Applying the Pythagorean theorem to the right triangle formed by \\(n\\), \\(h\\) and \\(c\\) gives:
 
 \\[

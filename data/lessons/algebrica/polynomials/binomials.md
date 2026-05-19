@@ -153,6 +153,8 @@ Where \\( \dbinom{n}{k} \\) represents the binomial coefficient calculated as:
   \binom{n}{k} = \frac{n!}{k!(n - k)!}
   \\]
 
+![Pascal's triangle](svg/pascals-triangle.svg)
+
 The sum indicates that all terms are summed for \\( k \\) ranging from \\( 0 \\) to \\( n \\) and \\( a^{n - k}b^k \\) represents the partial terms of the expansion.
 
 - - -

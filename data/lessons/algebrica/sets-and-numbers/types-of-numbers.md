@@ -1,5 +1,6 @@
 # Types of Numbers
 
+![Venn diagram of number systems](svg/number-types-venn.svg)
 
 ## Introduction
 

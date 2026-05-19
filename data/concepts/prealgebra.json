@@ -530,5 +530,33 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "prealg.real.properties",
+    "label": "Properties of real numbers",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "prealg.var.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "prealg.real.concept",
+    "label": "Real numbers and the number line",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "dec.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
   }
 ]

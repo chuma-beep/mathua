@@ -17,6 +17,8 @@ c_1 v_1 + c_2 v_2 + \dots + c_k v_k
 
 where \\(c_1, c_2, \dots, c_k \in \mathbb{R} \\) are real scalars. Each vector \\( v_i \\) is multiplied by a scalar coefficient \\( c_i \\), and the resulting scaled vectors are then added. The scalars determine how strongly each vector contributes to the final result. Although the definition is elementary, it captures the fundamental mechanism through which vectors interact inside \\( \mathbb{R}^n \\).
 
+![Vector addition parallelogram](svg/vector-addition.svg)
+
 - - -
 
 A linear combination carries a concrete geometric meaning. Consider two vectors \\( v, w \in \mathbb{R}^n \\). By forming expressions of the type:

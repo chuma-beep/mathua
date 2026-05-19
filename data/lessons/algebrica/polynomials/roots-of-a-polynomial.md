@@ -1,5 +1,6 @@
 # Roots of a Polynomial
 
+![Graph showing polynomial roots on x-axis](svg/polynomial-roots-graph.svg)
 
 ## Definition
 
