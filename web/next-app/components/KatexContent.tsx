@@ -36,6 +36,13 @@ export default function KatexContent({ children }: { children: string }) {
               {children}
             </code>
           ),
+          img: ({ src, alt }) => {
+            let url = src
+            if (url && !url.startsWith('http') && !url.startsWith('/')) {
+              url = '/diagrams/algebrica/' + url.split('/').pop()
+            }
+            return <img src={url} alt={alt || ''} className="max-w-full h-auto my-4 mx-auto" />
+          },
         }}
       >
         {content}
