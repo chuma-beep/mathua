@@ -1,7 +1,5 @@
 # Matrix Diagonalization
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/matrix-diagonalization/
 
 ## The diagonalization condition
 

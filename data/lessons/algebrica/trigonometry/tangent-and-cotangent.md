@@ -1,7 +1,5 @@
 # Tangent and Cotangent
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/tangent-and-cotangent
 
 ## Introduction
 
@@ -186,4 +184,4 @@ The differential transforms accordingly:
 dx = \frac{2\\,dt}{1+t^{2}}
 \\]
 
-Any integral whose integrand is a rational function of \\(\sin x\\) and \\(\cos x\\) becomes an integral of a rational function in the single variable \\(t\\), which can be evaluated by [partial fraction decomposition](https://algebrica.org/partial-fraction-decomposition/). The half-angle identity thus connects trigonometric integration with the integration of rational functions.
+Any integral whose integrand is a rational function of \\(\sin x\\) and \\(\cos x\\) becomes an integral of a rational function in the single variable \\(t\\), which can be evaluated by partial fraction decomposition. The half-angle identity thus connects trigonometric integration with the integration of rational functions.

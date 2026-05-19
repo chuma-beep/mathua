@@ -1,7 +1,5 @@
 # Factoring Polynomials: AC Method
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/factoring-ac-method/
 
 ## Introduction
 

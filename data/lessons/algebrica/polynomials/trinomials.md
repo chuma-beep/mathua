@@ -1,7 +1,5 @@
 # Trinomials
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/trinomials/
 
 ## Definition
 
@@ -168,7 +166,7 @@ Thus, the trinomial is irreducible over \\(\mathbb{R}\\), and its two complex ro
 - - -
 ## The method of completing the square
 
-[Completing the square](https://algebrica.org/completing-the-square/) is a technique used to rewrite any quadratic trinomial of the form \\(ax^2 + bx + c\\) as an equivalent expression:
+Completing the square is a technique used to rewrite any quadratic trinomial of the form \\(ax^2 + bx + c\\) as an equivalent expression:
 
  \\[a(x - h)^2 + k\\]
 

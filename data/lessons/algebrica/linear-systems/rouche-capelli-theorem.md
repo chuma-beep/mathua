@@ -1,7 +1,5 @@
 # Rouché-Capelli Theorem
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/rouche-capelli-theorem/
 
 ## Statement of the theorem
 
@@ -23,7 +21,7 @@ The first part of the theorem is a criterion for [consistency](../systems-of-lin
 - - -
 ## Geometric interpretation
 
-The condition \\(r(A) = r(A \mid \mathbf{b})\\) admits a transparent geometric reading in terms of [linear combinations](https://algebrica.org/linear-combinations/) of the columns of \\(A\\). Denote by \\(C_1, C_2, \ldots, C_n \in \mathbb{R}^m\\) the columns of \\(A\\). The matrix-vector product can be written as:
+The condition \\(r(A) = r(A \mid \mathbf{b})\\) admits a transparent geometric reading in terms of linear combinations of the columns of \\(A\\). Denote by \\(C_1, C_2, \ldots, C_n \in \mathbb{R}^m\\) the columns of \\(A\\). The matrix-vector product can be written as:
 
 \\[
 A\mathbf{x} = x_1 C_1 + x_2 C_2 + \cdots + x_n C_n

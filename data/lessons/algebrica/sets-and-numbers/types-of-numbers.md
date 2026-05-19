@@ -1,7 +1,5 @@
 # Types of Numbers
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/types-of-numbers/
 
 ## Introduction
 
@@ -102,11 +100,11 @@ For rational numbers the decimal expansion is eventually periodic. For irrationa
 
 Geometrically, \\(\mathbb{R}\\) corresponds to the points of a continuous straight line, the real number line, with no gaps.
 
-Completeness is what distinguishes \\(\mathbb{R}\\) from \\(\mathbb{Q}\\): the sequence of rational approximations to \\(\sqrt{2}\\), for instance, has no limit within \\(\mathbb{Q}\\), but its limit exists in \\(\mathbb{R}\\). The topic of least upper bounds is treated in the entry on [supremum and infimum](https://algebrica.org/supremum-and-infimum/).
+Completeness is what distinguishes \\(\mathbb{R}\\) from \\(\mathbb{Q}\\): the sequence of rational approximations to \\(\sqrt{2}\\), for instance, has no limit within \\(\mathbb{Q}\\), but its limit exists in \\(\mathbb{R}\\). The topic of least upper bounds is treated in the entry on supremum and infimum.
 
 The set \\(\mathbb{R}\\) is also totally ordered: for any two real numbers \\(x\\) and \\(y\\), exactly one of the relations \\(x < y\\), \\(x = y\\), or \\(x > y\\) holds. Moreover, \\(\mathbb{R}\\) satisfies the Archimedean property: for every real number \\(x\\) there exists a natural number \\(n\\) such that \\(n > x\\). This rules out the existence of infinitely large or infinitely small elements within \\(\mathbb{R}\\).
 
-A further structural distinction separates \\(\mathbb{Q}\\) from \\(\mathbb{R}\\) at the level of cardinality. The rational numbers form a countable set, meaning their elements can be put in one-to-one correspondence with \\(\mathbb{N}\\). The real numbers, by contrast, are uncountable: no such correspondence exists, as shown by Cantor's diagonal argument. In this precise sense, the irrational numbers constitute the vast majority of the real line. The properties of the real number system are discussed further in the entry on [properties of real numbers](https://algebrica.org/properties-of-real-numbers/).
+A further structural distinction separates \\(\mathbb{Q}\\) from \\(\mathbb{R}\\) at the level of cardinality. The rational numbers form a countable set, meaning their elements can be put in one-to-one correspondence with \\(\mathbb{N}\\). The real numbers, by contrast, are uncountable: no such correspondence exists, as shown by Cantor's diagonal argument. In this precise sense, the irrational numbers constitute the vast majority of the real line. The properties of the real number system are discussed further in the entry on properties of real numbers.
 
 Since zero carries no sign, it does not belong to either the positive or negative reals. For this reason the following terminology is standard: a non-negative real number satisfies \\(x \geq 0\\), while a non-positive real number satisfies \\(x \leq 0\\).
 
@@ -139,4 +137,4 @@ z = a + bi
 
 where \\(a\\) and \\(b\\) are real numbers, called respectively the real part and the imaginary part of \\(z\\). When \\(b = 0\\) the number reduces to a real number, so \\(\mathbb{R} \subset \mathbb{C}\\). When \\(a = 0\\) and \\(b \neq 0\\) the number is called purely imaginary.
 
-The passage to \\(\mathbb{C}\\) makes it possible to take square roots of negative numbers and, more generally, to factor every polynomial completely: by the fundamental theorem of algebra, every non-constant polynomial with complex coefficients has at least one root in \\(\mathbb{C}\\). This closure property is not shared by \\(\mathbb{R}\\): the polynomial \\(x^2 + 1\\), for instance, has no real roots. A full treatment of complex numbers is given in the entry on [complex numbers](https://algebrica.org/complex-numbers-introduction/).
+The passage to \\(\mathbb{C}\\) makes it possible to take square roots of negative numbers and, more generally, to factor every polynomial completely: by the fundamental theorem of algebra, every non-constant polynomial with complex coefficients has at least one root in \\(\mathbb{C}\\). This closure property is not shared by \\(\mathbb{R}\\): the polynomial \\(x^2 + 1\\), for instance, has no real roots. A full treatment of complex numbers is given in the entry on complex numbers.

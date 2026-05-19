@@ -10,13 +10,18 @@ export default function KatexContent({ children }: { children: string }) {
   let content = children
 
   // Convert lesson LaTeX delimiters from Markdown-escaped form to $...$ / $$...$$
-  // The lesson files use \\(...\\) (inline) and \\[...\\] (display),
-  // which remark-math expects as $...$ and $$...$$.
+  // The lesson files use \\(...\\) (inline) and \\[...\\] (display).
+  // remark-math expects $...$ for inline and $$...$$ on their own lines for display.
   // Inside math content, also unescape \\ → \ so that \\{ becomes \{, \\sin becomes \sin, etc.
   content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner.replace(/\\\\/g, '\\') + '$')
+  // For display math, use block $$...$$ (own lines) when multi-line,
+  // and inline $\displaystyle ...$ when single-line (e.g. inside table cells).
   content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => {
     const clean = inner.replace(/\\\\/g, '\\')
-    return '\n$$\n' + clean + '\n$$\n'
+    if (inner.includes('\n')) {
+      return '\n$$\n' + clean.trim() + '\n$$\n'
+    }
+    return '$\\displaystyle ' + clean.trim() + '$'
   })
 
   return (

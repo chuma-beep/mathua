@@ -1,8 +1,6 @@
 
 # Intefinite integrals
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/indefinite-integrals/
 
 ## Primitives
 

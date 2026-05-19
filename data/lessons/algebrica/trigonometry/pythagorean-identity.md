@@ -1,7 +1,5 @@
 # Pythagorean Identity
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/pythagorean-identity/
 
 ## Definition
 
@@ -41,12 +39,12 @@ and solving for cosine gives:
 \cos\theta = \pm \sqrt{1 - \sin^2\theta}
 \\]
 
-In each case, the sign depends on the [quadrant](https://algebrica.org/identities-using-reference-angles/) in which \\(\theta\\) lies. In the first quadrant both functions are positive, so the positive square root applies; in the remaining quadrants the sign must be chosen in accordance with the known sign of the relevant function in that region.
+In each case, the sign depends on the quadrant in which \\(\theta\\) lies. In the first quadrant both functions are positive, so the positive square root applies; in the remaining quadrants the sign must be chosen in accordance with the known sign of the relevant function in that region.
 
 ---
 
-The same identity also gives rise to two further relationships, one involving [tangent](https://algebrica.org/tangent-and-cotangent) and [secant](https://algebrica.org/secant-and-cosecant), the other involving [cotangent](https://algebrica.org/tangent-and-cotangent) and
-[cosecant](https://algebrica.org/secant-and-cosecant).
+The same identity also gives rise to two further relationships, one involving tangent and secant, the other involving cotangent and
+cosecant.
 
 To obtain the first, divide both sides of \\(\sin^2\theta + \cos^2\theta = 1\\) by \\(\cos^2\theta\\):
 

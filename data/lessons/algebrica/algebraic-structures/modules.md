@@ -1,7 +1,5 @@
 # Modules
 
-Source: algebrica.org — CC BY-NC 4.0  
-[https://algebrica.org/modules/](https://algebrica.org/modules/)
 
 ## Definition
 

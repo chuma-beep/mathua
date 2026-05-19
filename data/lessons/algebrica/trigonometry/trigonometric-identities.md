@@ -1,7 +1,5 @@
 # Trigonometric Identities
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/trigonometric-identities/
 
 ## Introduction
 

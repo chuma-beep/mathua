@@ -1,7 +1,5 @@
 # Complex Numbers
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/complex-numbers-introduction/
 
 ## Introduction
 
@@ -88,7 +86,7 @@ z = a + ib \quad \rightarrow \quad
 
 While the algebraic form is the most familiar representation of complex numbers, an alternative and often more powerful way to express them is through their polar [trigonometric form](../complex-numbers-trigonometric-form):
 \\[z = r (\cos\theta + i\sin\theta) \\]
-Another representation is the [exponential form](https://algebrica.org/complex-numbers-exponential-form/):
+Another representation is the exponential form:
 \\[z = r e^{i\theta} \\]
 
 - - -

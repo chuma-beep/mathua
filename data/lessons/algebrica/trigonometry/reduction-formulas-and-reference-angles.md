@@ -1,7 +1,5 @@
 # Reduction Formulas and Reference Angles
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/reduction-formulas-and-reference-angles/
 
 ## Using reference angles to rewrite angles
 

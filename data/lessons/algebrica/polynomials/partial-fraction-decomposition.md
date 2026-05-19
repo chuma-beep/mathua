@@ -1,7 +1,5 @@
 # Partial Fraction Decomposition
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/partial-fraction-decomposition/
 
 ## Introduction
 

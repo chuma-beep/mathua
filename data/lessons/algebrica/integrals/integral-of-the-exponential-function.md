@@ -1,7 +1,5 @@
 # Integral of the Exponential Function
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/integral-of-the-exponential-function/
 
 ## Definition
 

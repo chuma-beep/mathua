@@ -1,7 +1,5 @@
 # Linear Equations with Parameters
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/linear-equations-with-parameters/
 
 ## Definition
 

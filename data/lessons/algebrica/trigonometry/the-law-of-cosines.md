@@ -1,7 +1,5 @@
 # The Law of Cosines
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/law-of-cosines/
 
 ## Definition
 

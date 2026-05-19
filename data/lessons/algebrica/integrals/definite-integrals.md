@@ -1,7 +1,5 @@
 # Definite integrals
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/definite-integrals/
 
 ## Area under a function: from curve to integral
 

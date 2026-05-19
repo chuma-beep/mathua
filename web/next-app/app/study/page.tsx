@@ -107,7 +107,6 @@ export default function StudyPage() {
             <div className="max-w-4xl mx-auto mt-8">
               <SectionHeader label="Study" title="Browse Lessons" />
               <p className="text-mathua-secondary text-sm text-center mt-2 mb-8">
-                Read through lesson content at your own pace. No timer, no pressure.
               </p>
 
               {sortedDomains.length === 0 && (

@@ -1,7 +1,5 @@
 # Riemann Integrability Criteria
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/riemann-integrability-criteria/
 
 ## Introduction
 

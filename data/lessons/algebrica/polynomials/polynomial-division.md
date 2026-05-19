@@ -1,7 +1,5 @@
 # Polynomial Division
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/polynomial-division/
 
 ## The division algorithm
 

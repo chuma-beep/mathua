@@ -1,7 +1,5 @@
 # Sine and Cosine
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/sine-and-cosine/
 
 ## Introduction
 
@@ -16,7 +14,7 @@ An oriented angle is positive when described by a counterclockwise rotation and 
 - - -
 ## Definition of sine and cosine
 
-Consider an oriented angle \\( \theta \\) and the point \\( P \\) on the [unit circle](https://algebrica.org/unit-circle) associated with \\( \theta \\). The sine of \\( \theta \\) is defined as the \\( y \\)-coordinate of \\( P \\). It coincides with the ratio between the leg \\( \overline{OQ} \\) and the hypotenuse \\( \overline{OP} \\) of the right triangle inscribed in the unit circle, and since \\( \overline{OP} = 1 \\), one obtains:
+Consider an oriented angle \\( \theta \\) and the point \\( P \\) on the unit circle associated with \\( \theta \\). The sine of \\( \theta \\) is defined as the \\( y \\)-coordinate of \\( P \\). It coincides with the ratio between the leg \\( \overline{OQ} \\) and the hypotenuse \\( \overline{OP} \\) of the right triangle inscribed in the unit circle, and since \\( \overline{OP} = 1 \\), one obtains:
 
 \\[
 \sin(\theta) = \frac{\overline{OQ}}{\overline{OP}} = \frac{\overline{OQ}}{1} = y_P
@@ -173,7 +171,7 @@ Sine and cosine are also the building blocks of the [trigonometric form of a com
 
 \\[z = r(\cos\theta + i\sin\theta)\\]
 
-where \\( r = \sqrt{a^2 + b^2} \\) is the modulus and \\( \theta = \arctan(b/a) \\) is the argument. In this representation, sine and cosine no longer describe a point on a circle, but the direction and magnitude of a [complex number](https://algebrica.org/complex-numbers-introduction/) in the plane.
+where \\( r = \sqrt{a^2 + b^2} \\) is the modulus and \\( \theta = \arctan(b/a) \\) is the argument. In this representation, sine and cosine no longer describe a point on a circle, but the direction and magnitude of a complex number in the plane.
 
 - - -
 ## Applications in integration

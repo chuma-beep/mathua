@@ -1,7 +1,5 @@
 # Rings
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/rings/
 
 ## Definition
 

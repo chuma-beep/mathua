@@ -1,7 +1,5 @@
 # Complex Numbers in Trigonometric Form
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/complex-numbers-trigonometric-form/
 
 ## Definition
 

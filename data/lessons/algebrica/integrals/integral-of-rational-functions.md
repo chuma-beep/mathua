@@ -1,7 +1,5 @@
 # Integral of Rational Functions
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/integral-of-rational-functions/
 
 ## Integration of rational functions with polynomial division
 

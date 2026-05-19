@@ -1,7 +1,5 @@
 # Logarithms
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/logarithms/
 
 ## Definition
 
@@ -271,7 +269,7 @@ This construction offers a rigorous analytical foundation for logarithms and acc
 - - -
 ## The AM-GM inequality via logarithms
 
-The [arithmetic mean](https://algebrica.org/arithmetic-mean/) and the [geometric mean](https://algebrica.org/geometric-mean/) of a finite set of positive real numbers satisfy a fundamental inequality: the arithmetic mean is always greater than or equal to the geometric mean. For positive real numbers \\(x_1, x_2, \ldots, x_n\\), this is stated as:
+The arithmetic mean and the geometric mean of a finite set of positive real numbers satisfy a fundamental inequality: the arithmetic mean is always greater than or equal to the geometric mean. For positive real numbers \\(x_1, x_2, \ldots, x_n\\), this is stated as:
 
 \\[
 \frac{x_1 + x_2 + \cdots + x_n}{n} \geq \left( x_1 x_2 \cdots x_n \right)^{\frac{1}{n}}
@@ -281,13 +279,13 @@ with equality if and only if \\(x_1 = x_2 = \cdots = x_n\\). The logarithm provi
 
 ---
 
-The key observation is that \\(\ln\\) is a strictly concave function on \\((0,+\infty)\\), since its second derivative satisfies \\((\ln x)\'' = -1/x^2 < 0\\) for all \\(x > 0\\). Since \\(\ln\\) is concave, the following holds for any positive real numbers \\(x_1, \ldots, x_n\\):
+The key observation is that \\(\ln\\) is a strictly concave function on \\((0,+\infty)\\), since its second derivative satisfies \\((\ln x)'' = -1/x^2 < 0\\) for all \\(x > 0\\). Since \\(\ln\\) is concave, the following holds for any positive real numbers \\(x_1, \ldots, x_n\\):
 
 \\[
 \frac{1}{n} \sum_{i=1}^{n} \ln x_i \leq \ln\\!\left( \frac{1}{n} \sum_{i=1}^{n} x_i \right)
 \\]
 
-The left-hand side is the arithmetic mean of \\(\ln x_1, \ldots, \ln x_n\\), which by the logarithmic form of the [geometric mean](https://algebrica.org/geometric-mean/) equals \\(\ln M_g\\). The right-hand side is \\(\ln M_a\\), where \\(M_a\\) denotes the [arithmetic mean](https://algebrica.org/arithmetic-mean/). The inequality therefore becomes:
+The left-hand side is the arithmetic mean of \\(\ln x_1, \ldots, \ln x_n\\), which by the logarithmic form of the geometric mean equals \\(\ln M_g\\). The right-hand side is \\(\ln M_a\\), where \\(M_a\\) denotes the arithmetic mean. The inequality therefore becomes:
 
 \\[
 \ln M_g \leq \ln M_a

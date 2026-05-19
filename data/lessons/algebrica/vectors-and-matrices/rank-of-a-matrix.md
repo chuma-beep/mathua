@@ -1,7 +1,5 @@
 # Rank of a Matrix
 
-Source: algebrica.org — CC BY-NC 4.0
-https://algebrica.org/rank-of-a-matrix/
 
 ## Definition
 
