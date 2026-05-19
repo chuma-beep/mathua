@@ -30,6 +30,12 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.lintrans.concept", &transformationsGen{})
 	reg.Register("linalg.vec.span", &spanGen{})
 	reg.Register("linalg.vec.basis", &basisGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("linalg.eigen.diagonalization", &generator.Stub{ConceptID: "linalg.eigen.diagonalization"})
+	reg.Register("linalg.matrix.rank", &generator.Stub{ConceptID: "linalg.matrix.rank"})
+	reg.Register("linalg.vector.cosine_similarity", &generator.Stub{ConceptID: "linalg.vector.cosine_similarity"})
+	reg.Register("linalg.vector.parametric", &generator.Stub{ConceptID: "linalg.vector.parametric"})
 }
 
 type vectorConceptGen struct{}

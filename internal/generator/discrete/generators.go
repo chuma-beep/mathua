@@ -24,6 +24,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("discrete.graphs.trees", &treesGen{})
 	reg.Register("discrete.sequences.recurrence", &recurrenceGen{})
 	reg.Register("discrete.proof.induction", &inductionGen{})
+
+	// stub generators for newly-added concepts
+	reg.Register("discrete.combinatorics.binomial_theorem", &generator.Stub{ConceptID: "discrete.combinatorics.binomial_theorem"})
 }
 
 // ----- 1. propositions -----
