@@ -289,5 +289,33 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "geo.coord.lines",
+    "label": "Lines in the coordinate plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "geo.coord.polar",
+    "label": "Polar coordinates",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]

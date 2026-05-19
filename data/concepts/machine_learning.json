@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ml.backpropagation",
+    "label": "Backpropagation in neural networks",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  }
+]

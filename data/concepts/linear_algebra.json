@@ -230,5 +230,62 @@
       "streak": 10,
       "avg_time_seconds": 25.0
     }
+  },
+  {
+    "id": "linalg.matrix.rank",
+    "label": "Rank of a matrix",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "linalg.det.2x2",
+      "linalg.det.3x3"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "linalg.eigen.diagonalization",
+    "label": "Matrix diagonalization",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "linalg.vector.parametric",
+    "label": "Vector and parametric equations of a line",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "linalg.vector.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "linalg.vector.cosine_similarity",
+    "label": "Cosine similarity between vectors",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]

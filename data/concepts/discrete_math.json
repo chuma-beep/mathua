@@ -198,5 +198,19 @@
       "streak": 10,
       "avg_time_seconds": 30.0
     }
+  },
+  {
+    "id": "discrete.combinatorics.binomial_theorem",
+    "label": "Binomial theorem",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "discrete.combinatorics.combinations"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]
