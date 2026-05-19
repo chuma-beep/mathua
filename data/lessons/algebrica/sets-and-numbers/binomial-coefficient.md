@@ -59,7 +59,7 @@ Pascal's Triangle satisfies the recurrence relation which directly follows from 
 - - -
 ## Fundamental properties of the binomial coefficient
 
-The edge property of the binomial coefficient expresses a basic rule that appears along the borders of [Pascal’s triangle](#pascal-triangle). It states that the coefficients located at the two ends of each row are always equal to one:
+The edge property of the binomial coefficient expresses a basic rule that appears along the borders of Pascal’s triangle. It states that the coefficients located at the two ends of each row are always equal to one:
 
 \\[
 \binom{n}{0} = \binom{n}{n} = 1
@@ -85,7 +85,7 @@ This property is fundamental in practical applications, as it provides a way to 
 
 - - -
 
-The [recursive property](#recursion) describes how each binomial coefficient can be derived from those in the previous row of Pascal’s triangle. According to this relationship, every coefficient is obtained as the sum of the two elements positioned directly above it:
+The recursive property describes how each binomial coefficient can be derived from those in the previous row of Pascal’s triangle. According to this relationship, every coefficient is obtained as the sum of the two elements positioned directly above it:
 
 \\[
 \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}

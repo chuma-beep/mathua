@@ -30,12 +30,7 @@ export default function KatexContent({ children }: { children: string }) {
         remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[rehypeKatex]}
         components={{
-          a: ({ href, children }) => (
-            <a href={href} target="_blank" rel="noopener noreferrer"
-               className="text-mathua-blue hover:underline">
-              {children}
-            </a>
-          ),
+          a: ({ children }) => <>{children}</>,
           code: ({ children }) => (
             <code className="bg-mathua-code px-1 rounded-none text-mathua-secondary">
               {children}
