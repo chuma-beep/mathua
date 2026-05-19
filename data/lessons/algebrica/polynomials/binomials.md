@@ -184,4 +184,4 @@ Combining all the terms, we get the expanded form:
 (a + b)^5 = a^5 + 5a^4b + 10a^3b^2 + 10a^2b^3 + 5ab^4 + b^5
 \\]  
 
-This example shows how the binomial theorem provides a systematic way to expand powers of a binomial expression, where each coefficient corresponds to a term in the fifth row of [Pascal’s triangle](binomial-coefficient/).
+This example shows how the binomial theorem provides a systematic way to expand powers of a binomial expression, where each coefficient corresponds to a term in the fifth row of Pascal’s triangle.

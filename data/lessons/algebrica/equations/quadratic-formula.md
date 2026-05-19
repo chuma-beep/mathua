@@ -13,7 +13,7 @@ The formula is derived by applying the method of completing the square to the ge
 
 + \\(a, b, c\\) are the coefficients of the equation, with \\(a \neq 0\\).
 + The plus-minus symbol reflects the fact that the formula yields two values, corresponding to the two roots of the polynomial.
-+ By the [Fundamental Theorem of Algebra](/roots-of-a-polynomial/), a polynomial of degree 2 has exactly two roots in \\(\mathbb{C}\\), counted with multiplicity. These may be two distinct real numbers, a repeated real root, or a pair of complex conjugates depending on the sign of the discriminant.
++ By the Fundamental Theorem of Algebra, a polynomial of degree 2 has exactly two roots in \\(\mathbb{C}\\), counted with multiplicity. These may be two distinct real numbers, a repeated real root, or a pair of complex conjugates depending on the sign of the discriminant.
 
 The quadratic formula is valid only when square roots can be computed. When the coefficients are real, the formula always yields solutions in \\(\mathbb{C}\\), since every complex number has a square root in \\(\mathbb{C}\\). This guarantees that no quadratic equation is ever without solutions, provided one works in the right setting.
 
