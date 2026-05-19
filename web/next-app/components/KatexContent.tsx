@@ -12,8 +12,12 @@ export default function KatexContent({ children }: { children: string }) {
   // Convert lesson LaTeX delimiters from Markdown-escaped form to $...$ / $$...$$
   // The lesson files use \\(...\\) (inline) and \\[...\\] (display),
   // which remark-math expects as $...$ and $$...$$.
-  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner + '$')
-  content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => '$$' + inner + '$$')
+  // Inside math content, also unescape \\ → \ so that \\{ becomes \{, \\sin becomes \sin, etc.
+  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner.replace(/\\\\/g, '\\') + '$')
+  content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => {
+    const clean = inner.replace(/\\\\/g, '\\')
+    return '\n$$\n' + clean + '\n$$\n'
+  })
 
   return (
     <div className="katex-content text-sm leading-relaxed">
