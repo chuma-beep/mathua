@@ -15,7 +15,7 @@ export interface ConceptDef {
   prerequisites: string[]
 }
 
-export type MasteryStatus = 'mastered' | 'learning' | 'locked'
+export type MasteryStatus = 'mastered' | 'practicing' | 'learning' | 'unseen' | 'locked'
 
 interface MathConceptGraph3DProps {
   theme?: 'dark' | 'light'
@@ -26,25 +26,43 @@ interface MathConceptGraph3DProps {
 }
 
 const DOMAIN_COLORS: Record<string, string> = {
-  counting:        '#c8a96e',
-  arithmetic:      '#4db8a0',
-  fractions:       '#a8a0f0',
-  'pre-algebra':   '#7dd3fc',
-  algebra:         '#e8a849',
-  'pre-calculus':  '#fda4af',
-  calculus:        '#e879f9',
-  'linear-algebra':'#86efac',
+  counting:             '#c8a96e',
+  arithmetic:           '#4db8a0',
+  fractions:            '#a8a0f0',
+  prealgebra:           '#7dd3fc',
+  algebra:              '#e8a849',
+  geometry:             '#86efac',
+  trigonometry:         '#fda4af',
+  complex_numbers:      '#e879f9',
+  precalculus:          '#fda4af',
+  calculus:             '#e879f9',
+  linear_algebra:       '#86efac',
+  statistics:           '#67e8f9',
+  discrete_math:        '#f0abab',
+  number_theory:        '#a8e6cf',
+  differential_equations:'#fdba74',
+  abstract_algebra:     '#c4b5fd',
+  topology:             '#f9a8d4',
 }
 
 const DOMAIN_COLORS_LIGHT: Record<string, string> = {
-  counting:        '#a0814a',
-  arithmetic:      '#3a9a8a',
-  fractions:       '#8a80d8',
-  'pre-algebra':   '#5ab8dc',
-  algebra:         '#c08a30',
-  'pre-calculus':  '#e88a99',
-  calculus:        '#c868e8',
-  'linear-algebra':'#68c88c',
+  counting:             '#a0814a',
+  arithmetic:           '#3a9a8a',
+  fractions:            '#8a80d8',
+  prealgebra:           '#5ab8dc',
+  algebra:              '#c08a30',
+  geometry:             '#68c88c',
+  trigonometry:         '#e88a99',
+  complex_numbers:      '#c868e8',
+  precalculus:          '#e88a99',
+  calculus:             '#c868e8',
+  linear_algebra:       '#68c88c',
+  statistics:           '#50c8d8',
+  discrete_math:        '#d08a8a',
+  number_theory:        '#80c8a8',
+  differential_equations:'#d09050',
+  abstract_algebra:     '#a090d0',
+  topology:             '#d080b0',
 }
 
 const FALLBACK_COLOR = '#5a6577'
@@ -86,15 +104,19 @@ interface GraphSceneProps {
 }
 
 const STATUS_COLORS_DARK: Record<string, string> = {
-  mastered: '#4db8a0',
-  learning: '#e8a849',
-  locked:   '#2a2d35',
+  mastered:   '#4db8a0',
+  practicing: '#60a5fa',
+  learning:   '#e8a849',
+  unseen:     '#5a6577',
+  locked:     '#2a2d35',
 }
 
 const STATUS_COLORS_LIGHT: Record<string, string> = {
-  mastered: '#3a9a8a',
-  learning: '#c08a30',
-  locked:   '#d0d0d0',
+  mastered:   '#3a9a8a',
+  practicing: '#3b82f6',
+  learning:   '#c08a30',
+  unseen:     '#9ca3af',
+  locked:     '#d0d0d0',
 }
 
 function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
@@ -102,7 +124,7 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
 
   if (showStatus) {
     if (node.onPath) return theme === 'dark' ? '#ffdd88' : '#b08020'
-    if (node.status === 'locked') return theme === 'dark' ? '#2a2d35' : '#d0d0d0'
+    if (node.status === 'locked' || node.status === 'unseen') return theme === 'dark' ? '#2a2d35' : '#d0d0d0'
     const statusMap = theme === 'dark' ? STATUS_COLORS_DARK : STATUS_COLORS_LIGHT
     return statusMap[node.status] ?? domainColor(node.domain, theme)
   }
@@ -142,7 +164,8 @@ const NodeMesh = React.memo(function NodeMesh({
   const meshRef = useRef<THREE.Mesh>(null)
   const ringRef = useRef<THREE.Mesh>(null)
   const color = nodeDisplayColor(node, theme)
-  const statusLabel = node.status && node.status !== 'locked' ? node.status : node.domain
+  const showStatus = node.status !== null && node.status !== 'locked' && node.status !== 'unseen'
+  const statusLabel = showStatus ? node.status : node.domain
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -191,9 +214,14 @@ const NodeMesh = React.memo(function NodeMesh({
           <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
             <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
             <div style={{ color, fontSize: isMobile ? '13px' : '12px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
-            {node.status && (
+            {showStatus && (
               <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
                 {node.status} {node.onPath ? '· on path' : ''}
+              </div>
+            )}
+            {!showStatus && (
+              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', fontFamily: monoFont }}>
+                Not started
               </div>
             )}
           </div>
@@ -438,6 +466,20 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
           </div>
         </div>
       )}
+      <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
+        <a
+          href={`/study?concept=${encodeURIComponent(concept.id)}`}
+          style={{ color: '#60a5fa', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
+        >
+          Study →
+        </a>
+        <a
+          href={`/session`}
+          style={{ color: 'var(--accent-teal)', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
+        >
+          Practice →
+        </a>
+      </div>
     </div>
   )
 }

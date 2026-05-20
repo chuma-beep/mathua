@@ -1,15 +1,17 @@
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Header from '../../components/Header'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
+import AsciiDivider from '../../components/AsciiDivider'
 import conceptsData from '../../data/concepts.json'
-import { getScores, getGraph, healthCheck, type GraphRes, type Scores } from '../../lib/api'
+import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import type { MasteryStatus } from '../../components/MathConceptGraph3D'
 
@@ -41,13 +43,52 @@ const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
   id: c.id, label: c.label, domain: c.domain, prerequisites: c.prerequisites,
 }))
 
+function statusToMastery(status: string): MasteryStatus {
+  switch (status) {
+    case 'MASTERED': return 'mastered'
+    case 'PRACTICING': return 'practicing'
+    case 'LEARNING': return 'learning'
+    default: return 'unseen'
+  }
+}
+
+const domainLabels: Record<string, string> = {
+  counting: 'Counting',
+  arithmetic: 'Arithmetic',
+  fractions: 'Fractions',
+  prealgebra: 'Pre-Algebra',
+  algebra: 'Algebra',
+  geometry: 'Geometry',
+  trigonometry: 'Trigonometry',
+  complex_numbers: 'Complex Numbers',
+  precalculus: 'Precalculus',
+  calculus: 'Calculus',
+  linear_algebra: 'Linear Algebra',
+  statistics: 'Statistics',
+  discrete_math: 'Discrete Math',
+  number_theory: 'Number Theory',
+  differential_equations: 'Diff. Eqs.',
+  abstract_algebra: 'Abstract Algebra',
+  topology: 'Topology',
+}
+
+const domainOrder = [
+  'counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry',
+  'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra',
+  'statistics', 'discrete_math', 'number_theory', 'differential_equations',
+  'abstract_algebra', 'topology',
+]
+
 export default function GraphPage() {
   const { theme, mounted } = useTheme()
+  const { push } = useRouter()
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [conceptStatuses] = useState<Record<string, MasteryStatus>>({})
+  const [conceptStatuses, setConceptStatuses] = useState<Record<string, MasteryStatus>>({})
+  const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
+  const [activeDomain, setActiveDomain] = useState<string | null>(null)
 
   useEffect(() => {
     const loggedInVal = isLoggedIn()
@@ -61,19 +102,44 @@ export default function GraphPage() {
         const user = getUserInfo()
         if (user) {
           getScores(user.student_id).then(setScores).catch(() => {})
+          getProgress(user.student_id).then(progress => {
+            const st: Record<string, MasteryStatus> = {}
+            for (const [cid, cp] of Object.entries(progress)) {
+              st[cid] = statusToMastery(cp.status)
+            }
+            setConceptStatuses(st)
+          }).catch(() => {})
+          getWeaknesses().then(w => {
+            const byDomain: Record<string, { id: string; label: string }[]> = {}
+            for (const [domain, entries] of Object.entries(w.by_domain)) {
+              byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))
+            }
+            setWeakByDomain(byDomain)
+          }).catch(() => {})
         }
       }
     })
   }, [])
 
-  const concepts = graphData
+  const concepts = useMemo(() => graphData
     ? graphData.nodes.map((n) => ({
         id: n.id,
         label: n.label,
         domain: n.domain,
         prerequisites: n.prerequisites,
       }))
-    : []
+    : [], [graphData])
+
+  const domains = useMemo(() => {
+    const set = new Set<string>()
+    for (const c of concepts) set.add(c.domain)
+    return domainOrder.filter(d => set.has(d))
+  }, [concepts])
+
+  const onPathNodes = useMemo(() => {
+    if (!activeDomain) return undefined
+    return concepts.filter(c => c.domain === activeDomain).map(c => c.id)
+  }, [activeDomain, concepts])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
@@ -89,7 +155,7 @@ export default function GraphPage() {
         </span>
         <SectionHeader label="Your knowledge graph" title="Explore the concept map" />
         {connected && loggedIn && scores ? (
-          <ProgressSummary scores={scores} />
+          <ProgressSummary scores={scores} weakByDomain={weakByDomain} />
         ) : connected && !loggedIn ? (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
             Sign in or{' '}
@@ -104,14 +170,48 @@ export default function GraphPage() {
         )}
       </section>
 
+      {domains.length > 0 && (
+        <div className="flex flex-wrap gap-2 justify-center mb-6">
+          <button
+            onClick={() => setActiveDomain(null)}
+            className={`font-mono text-[10px] uppercase px-3 h-7 border transition-colors ${
+              activeDomain === null
+                ? 'bg-mathua-blue text-white border-mathua-blue'
+                : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
+            }`}
+          >
+            All
+          </button>
+          {domains.map(d => (
+            <button
+              key={d}
+              onClick={() => setActiveDomain(activeDomain === d ? null : d)}
+              className={`font-mono text-[10px] uppercase px-3 h-7 border transition-colors ${
+                activeDomain === d
+                  ? 'bg-mathua-blue text-white border-mathua-blue'
+                  : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
+              }`}
+            >
+              {domainLabels[d] || d}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="my-8">
         <MathConceptGraph3D
           concepts={concepts.length > 0 ? concepts : fallbackConcepts}
           conceptStatuses={conceptStatuses}
           theme={theme}
+          onPathNodes={onPathNodes}
+          onNodeSelect={(nodeId) => {
+            const c = concepts.find(n => n.id === nodeId)
+            if (c) push(`/study?concept=${encodeURIComponent(c.id)}`)
+          }}
         />
       </div>
 
+      <AsciiDivider pattern="wave" />
       <Footer />
     </div>
     </>
