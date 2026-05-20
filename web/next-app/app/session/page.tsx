@@ -338,7 +338,7 @@ export default function SessionPage() {
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && beginSessionName()}
                 placeholder="Your name"
-                className="w-full border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                className="w-full bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
               />
               <div className="flex flex-col gap-3 mt-4">
                 <button
