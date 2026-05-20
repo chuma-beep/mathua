@@ -617,7 +617,8 @@ func (g *combinationsGen) Generate(difficulty float64) generator.Problem {
 type pascalGen struct{}
 
 func (g *pascalGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(7) + 2
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale)) + 2
 	row := pascalRow(n)
 	parts := make([]string, len(row))
 	for i, v := range row {
@@ -649,10 +650,11 @@ func pascalRow(n int) []int {
 type graphBasicsGen struct{}
 
 func (g *graphBasicsGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	vertices := []string{"A", "B", "C", "D", "E"}
 	n := len(vertices)
 
-	numEdges := rand.Intn(5) + 3
+	numEdges := rand.Intn(max(1, scale)) + 3
 
 	type edge struct {
 		from, to int

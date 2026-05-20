@@ -49,6 +49,10 @@ func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
 		{9, 12, 15}, {12, 9, 15},
 		{7, 24, 25}, {24, 7, 25},
 	}
+	if difficulty > 0.6 {
+		triples = append(triples,
+			[][3]int{{20, 21, 29}, {9, 40, 41}, {11, 60, 61}}...)
+	}
 	t := triples[rand.Intn(len(triples))]
 	x, y, mag := t[0], t[1], t[2]
 	if rand.Intn(2) == 0 {
@@ -67,8 +71,9 @@ func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
 type vectorAddGen struct{}
 
 func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
-	a, b := rand.Intn(9)-4, rand.Intn(9)-4
-	c, d := rand.Intn(9)-4, rand.Intn(9)-4
+	scale := int(1 + difficulty*5)
+	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if rand.Intn(2) == 0 {
 		sumX, sumY := a+c, b+d
 		return generator.Problem{
@@ -77,7 +82,7 @@ func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("(%d,%d) + (%d,%d) = (%d,%d)", a, b, c, d, sumX, sumY),
 		}
 	}
-	scalar := rand.Intn(4) + 2
+	scalar := rand.Intn(max(1, scale)) + 2
 	if rand.Intn(2) == 0 {
 		scalar = -scalar
 	}
@@ -91,8 +96,9 @@ func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
 type vectorDotGen struct{}
 
 func (g *vectorDotGen) Generate(difficulty float64) generator.Problem {
-	a, b := rand.Intn(7)-3, rand.Intn(7)-3
-	c, d := rand.Intn(7)-3, rand.Intn(7)-3
+	scale := int(1 + difficulty*5)
+	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	dot := a*c + b*d
 	return generator.Problem{
 		Question:    fmt.Sprintf("Compute the dot product: (%d,%d) · (%d,%d) = ?", a, b, c, d),
@@ -104,6 +110,7 @@ func (g *vectorDotGen) Generate(difficulty float64) generator.Problem {
 type matrixConceptGen struct{}
 
 func (g *matrixConceptGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	var rows, cols int
 	if rand.Intn(2) == 0 {
 		rows, cols = 2, 2
@@ -114,7 +121,7 @@ func (g *matrixConceptGen) Generate(difficulty float64) generator.Problem {
 	for i := range m {
 		m[i] = make([]int, cols)
 		for j := range m[i] {
-			m[i][j] = rand.Intn(9) + 1
+			m[i][j] = rand.Intn(max(1, scale*3)) + 1
 		}
 	}
 	r := rand.Intn(rows) + 1
@@ -134,14 +141,15 @@ func (g *matrixAddGen) Grade(expected, userAnswer string) grader.Result {
 }
 
 func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	a := make([][]int, 2)
 	b := make([][]int, 2)
 	for i := range a {
 		a[i] = make([]int, 2)
 		b[i] = make([]int, 2)
 		for j := range a[i] {
-			a[i][j] = rand.Intn(9) - 4
-			b[i][j] = rand.Intn(9) - 4
+			a[i][j] = rand.Intn(max(1, scale*2)) - scale
+			b[i][j] = rand.Intn(max(1, scale*2)) - scale
 		}
 	}
 	if rand.Intn(2) == 0 {
@@ -158,7 +166,7 @@ func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("%s + %s = %s (add corresponding entries)", formatMatrix(a), formatMatrix(b), formatMatrix(sum)),
 		}
 	}
-	scalar := rand.Intn(4) + 2
+	scalar := rand.Intn(max(1, scale)) + 2
 	if rand.Intn(2) == 0 {
 		scalar = -scalar
 	}
@@ -183,14 +191,15 @@ func (g *matrixMultGen) Grade(expected, userAnswer string) grader.Result {
 }
 
 func (g *matrixMultGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	a := make([][]int, 2)
 	b := make([][]int, 2)
 	for i := range a {
 		a[i] = make([]int, 2)
 		b[i] = make([]int, 2)
 		for j := range a[i] {
-			a[i][j] = rand.Intn(7) - 3
-			b[i][j] = rand.Intn(7) - 3
+			a[i][j] = rand.Intn(max(1, scale*2)) - scale
+			b[i][j] = rand.Intn(max(1, scale*2)) - scale
 		}
 	}
 	c := make([][]int, 2)
@@ -257,8 +266,9 @@ func (g *matrixIdentityGen) Generate(difficulty float64) generator.Problem {
 type det2x2Gen struct{}
 
 func (g *det2x2Gen) Generate(difficulty float64) generator.Problem {
-	a, b := rand.Intn(9)-4, rand.Intn(9)-4
-	c, d := rand.Intn(9)-4, rand.Intn(9)-4
+	scale := int(1 + difficulty*5)
+	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	det := a*d - b*c
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the determinant of %s.", formatMatrix2([][]int{{a, b}, {c, d}})),
@@ -270,11 +280,12 @@ func (g *det2x2Gen) Generate(difficulty float64) generator.Problem {
 type det3x3Gen struct{}
 
 func (g *det3x3Gen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	m := make([][]int, 3)
 	for i := range m {
 		m[i] = make([]int, 3)
 		for j := range m[i] {
-			m[i][j] = rand.Intn(7) - 3
+			m[i][j] = rand.Intn(max(1, scale*2)) - scale
 		}
 	}
 	a, b, c := m[0][0], m[0][1], m[0][2]
@@ -291,10 +302,11 @@ func (g *det3x3Gen) Generate(difficulty float64) generator.Problem {
 type systemsMatrixGen struct{}
 
 func (g *systemsMatrixGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(5) - 2
-	y := rand.Intn(5) - 2
-	a, b := rand.Intn(5)-2, rand.Intn(5)-2
-	c, d := rand.Intn(5)-2, rand.Intn(5)-2
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(max(1, scale*2)) - scale
+	y := rand.Intn(max(1, scale*2)) - scale
+	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if a == 0 && c == 0 {
 		a = 1
 		c = 2
@@ -315,10 +327,11 @@ func (g *systemsMatrixGen) Generate(difficulty float64) generator.Problem {
 type cramerGen struct{}
 
 func (g *cramerGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(5) - 2
-	y := rand.Intn(5) - 2
-	a, b := rand.Intn(5)-2, rand.Intn(5)-2
-	c, d := rand.Intn(5)-2, rand.Intn(5)-2
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(max(1, scale*2)) - scale
+	y := rand.Intn(max(1, scale*2)) - scale
+	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if a == 0 && c == 0 {
 		a = 1
 		c = 2
@@ -362,14 +375,15 @@ func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 			Explanation: "An eigenvalue λ satisfies det(A-λI)=0, meaning there exists a nonzero vector v with Av=λv.",
 		}
 	}
-	a, d := rand.Intn(5)-2, rand.Intn(5)-2
+	scale := int(1 + difficulty*5)
+	a, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if a == 0 {
 		a = 1
 	}
 	if d == 0 {
 		d = 2
 	}
-	lambda := rand.Intn(7) - 3
+	lambda := rand.Intn(max(1, scale*2)) - scale
 	det := (a - lambda) * (d - lambda)
 	answer := "no"
 	if det == 0 {
@@ -385,9 +399,10 @@ func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 type eigenComputeGen struct{}
 
 func (g *eigenComputeGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(7) - 3
-	c := rand.Intn(7) - 3
-	d := rand.Intn(7) - 3
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) - scale
+	c := rand.Intn(max(1, scale*2)) - scale
+	d := rand.Intn(max(1, scale*2)) - scale
 	if a == 0 {
 		a = 2
 	}
@@ -404,8 +419,9 @@ func (g *eigenComputeGen) Generate(difficulty float64) generator.Problem {
 type transformationsGen struct{}
 
 func (g *transformationsGen) Generate(difficulty float64) generator.Problem {
-	a, b := rand.Intn(5)+1, rand.Intn(5)+1
-	x, y := rand.Intn(5)-2, rand.Intn(5)-2
+	scale := int(1 + difficulty*5)
+	a, b := rand.Intn(max(1, scale*2))+1, rand.Intn(max(1, scale*2))+1
+	x, y := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	return generator.Problem{
 		Question:    fmt.Sprintf("Under the linear transformation T(x,y) = (%dx,%dy), where does the point (%d,%d) map to?", a, b, x, y),
 		Answer:      fmt.Sprintf("(%d,%d)", a*x, b*y),
@@ -416,9 +432,10 @@ func (g *transformationsGen) Generate(difficulty float64) generator.Problem {
 type spanGen struct{}
 
 func (g *spanGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	if rand.Intn(2) == 0 {
-		v1, v2 := rand.Intn(5)-2, rand.Intn(5)-2
-		w1, w2 := rand.Intn(5)-2, rand.Intn(5)-2
+		v1, v2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+		w1, w2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 		if v1 == 0 && v2 == 0 {
 			v1, v2 = 1, 0
 		}
@@ -436,11 +453,11 @@ func (g *spanGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("det([[%d,%d],[%d,%d]]) = %d. Since determinant is %s, the vectors %s span R².", v1, v2, w1, w2, det, map[bool]string{true: "nonzero", false: "zero"}[det != 0], answer),
 		}
 	}
-	k := rand.Intn(4) + 2
+	k := rand.Intn(max(1, scale)) + 2
 	if rand.Intn(2) == 0 {
 		k = -k
 	}
-	v1, v2 := rand.Intn(5)-2, rand.Intn(5)-2
+	v1, v2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if v1 == 0 && v2 == 0 {
 		v1, v2 = 1, 2
 	}
@@ -455,6 +472,7 @@ func (g *spanGen) Generate(difficulty float64) generator.Problem {
 type basisGen struct{}
 
 func (g *basisGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	qType := rand.Intn(3)
 	switch qType {
 	case 0:
@@ -470,8 +488,8 @@ func (g *basisGen) Generate(difficulty float64) generator.Problem {
 			Explanation: "R² has dimension 2 because it has a basis of 2 vectors, e.g., {(1,0), (0,1)}.",
 		}
 	default:
-		v1, v2 := rand.Intn(5)-2, rand.Intn(5)-2
-		w1, w2 := rand.Intn(5)-2, rand.Intn(5)-2
+		v1, v2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
+		w1, w2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 		if v1 == 0 && v2 == 0 {
 			v1, v2 = 1, 0
 		}

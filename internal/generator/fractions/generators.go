@@ -58,8 +58,9 @@ func toMixed(num, den int) (int, int, int) {
 type fracConceptGen struct{}
 
 func (g *fracConceptGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(5) + 3
-	num := rand.Intn(den-1) + 1
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*2)) + 3
+	num := rand.Intn(max(1, den-2)) + 1
 	bar := ""
 	for i := 0; i < den; i++ {
 		if i < num {
@@ -78,8 +79,9 @@ func (g *fracConceptGen) Generate(difficulty float64) generator.Problem {
 type fracPartsGen struct{}
 
 func (g *fracPartsGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(8) + 2
-	num := rand.Intn(den-1) + 1
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*2)) + 2
+	num := rand.Intn(max(1, den-2)) + 1
 	pick := rand.Intn(2)
 	if pick == 0 {
 		return generator.Problem{
@@ -98,8 +100,9 @@ func (g *fracPartsGen) Generate(difficulty float64) generator.Problem {
 type fracNumberLineGen struct{}
 
 func (g *fracNumberLineGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(4) + 2
-	num := rand.Intn(den-1) + 1
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale)) + 2
+	num := rand.Intn(max(1, den-2)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Where is %d/%d on a number line from 0 to 1?", num, den),
 		Answer:      fmt.Sprintf("%.2f", float64(num)/float64(den)),
@@ -110,9 +113,10 @@ func (g *fracNumberLineGen) Generate(difficulty float64) generator.Problem {
 type fracEquivalentGen struct{}
 
 func (g *fracEquivalentGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(5) + 2
-	num := rand.Intn(den-1) + 1
-	mult := rand.Intn(4) + 2
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*2)) + 2
+	num := rand.Intn(max(1, den-2)) + 1
+	mult := rand.Intn(max(1, scale)) + 2
 	goal := fracStr(num*mult, den*mult)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find an equivalent fraction to %d/%d by multiplying numerator and denominator by %d.", num, den, mult),
@@ -124,8 +128,9 @@ func (g *fracEquivalentGen) Generate(difficulty float64) generator.Problem {
 type fracSimplifyGen struct{}
 
 func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(10) + 4
-	factor := rand.Intn(4) + 2
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*3)) + 4
+	factor := rand.Intn(max(1, scale)) + 2
 	for den%factor != 0 {
 		den++
 	}
@@ -145,12 +150,13 @@ func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
 type fracCompareGen struct{}
 
 func (g *fracCompareGen) Generate(difficulty float64) generator.Problem {
-	aNum := rand.Intn(9) + 1
-	aDen := rand.Intn(8) + 2
-	bNum := rand.Intn(9) + 1
-	bDen := rand.Intn(8) + 2
+	scale := int(1 + difficulty*5)
+	aNum := rand.Intn(max(1, scale*2)) + 1
+	aDen := rand.Intn(max(1, scale*2)) + 2
+	bNum := rand.Intn(max(1, scale*2)) + 1
+	bDen := rand.Intn(max(1, scale*2)) + 2
 	for aNum*bDen == bNum*aDen {
-		bNum = rand.Intn(9) + 1
+		bNum = rand.Intn(max(1, scale*2)) + 1
 	}
 	av := float64(aNum) / float64(aDen)
 	bv := float64(bNum) / float64(bDen)
@@ -168,8 +174,9 @@ func (g *fracCompareGen) Generate(difficulty float64) generator.Problem {
 type fracBenchmarkGen struct{}
 
 func (g *fracBenchmarkGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(8) + 2
-	num := rand.Intn(den-1) + 1
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*2)) + 2
+	num := rand.Intn(max(1, den-2)) + 1
 	val := float64(num) / float64(den)
 	ans := "less"
 	comp := "<"
@@ -190,8 +197,9 @@ func (g *fracBenchmarkGen) Generate(difficulty float64) generator.Problem {
 type fracToDecimalGen struct{}
 
 func (g *fracToDecimalGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	den := []int{2, 4, 5, 8, 10, 20, 25}[rand.Intn(7)]
-	num := rand.Intn(den-1) + 1
+	num := rand.Intn(max(1, scale*2)) + 1
 	dec := float64(num) / float64(den)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert %d/%d to a decimal.", num, den),
@@ -203,8 +211,9 @@ func (g *fracToDecimalGen) Generate(difficulty float64) generator.Problem {
 type fracOpSameDenGen struct{ op string }
 
 func (g *fracOpSameDenGen) Generate(difficulty float64) generator.Problem {
-	den := rand.Intn(8) + 3
-	a := rand.Intn(den-2) + 1
+	scale := int(1 + difficulty*5)
+	den := rand.Intn(max(1, scale*2)) + 3
+	a := rand.Intn(max(1, den-2)) + 1
 	var b int
 	if g.op == "+" {
 		b = rand.Intn(den-a) + 1
@@ -228,10 +237,11 @@ func (g *fracOpSameDenGen) Generate(difficulty float64) generator.Problem {
 type fracOpDiffDenGen struct{ op string }
 
 func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
-	aDen := rand.Intn(6) + 2
-	bDen := rand.Intn(6) + 2
+	scale := int(1 + difficulty*5)
+	aDen := rand.Intn(max(1, scale*2)) + 2
+	bDen := rand.Intn(max(1, scale*2)) + 2
 	for aDen == bDen {
-		bDen = rand.Intn(6) + 2
+		bDen = rand.Intn(max(1, scale*2)) + 2
 	}
 	cm := lcm(aDen, bDen)
 	aNum := rand.Intn(aDen-1) + 1
@@ -260,10 +270,11 @@ func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
 type fracWordGen struct{ op string }
 
 func (g *fracWordGen) Generate(difficulty float64) generator.Problem {
-	aDen := rand.Intn(6) + 2
-	bDen := rand.Intn(6) + 2
+	scale := int(1 + difficulty*5)
+	aDen := rand.Intn(max(1, scale*2)) + 2
+	bDen := rand.Intn(max(1, scale*2)) + 2
 	for aDen == bDen {
-		bDen = rand.Intn(6) + 2
+		bDen = rand.Intn(max(1, scale*2)) + 2
 	}
 	cm := lcm(aDen, bDen)
 	aNum := rand.Intn(aDen-1) + 1
@@ -282,9 +293,10 @@ func (g *fracWordGen) Generate(difficulty float64) generator.Problem {
 type fracMultGen struct{ wholeMul bool }
 
 func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	if g.wholeMul {
-		whole := rand.Intn(9) + 2
-		den := rand.Intn(7) + 2
+		whole := rand.Intn(max(1, scale*2)) + 2
+		den := rand.Intn(max(1, scale)) + 2
 		num := rand.Intn(den-1) + 1
 		rn, rd := reduce(num*whole, den)
 		w, r, d := toMixed(rn, rd)
@@ -301,10 +313,10 @@ func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %s", whole, num, den, whole*num, den, mixStr(w, r, d)),
 		}
 	}
-	aNum := rand.Intn(6) + 1
-	aDen := rand.Intn(8) + 2
-	bNum := rand.Intn(6) + 1
-	bDen := rand.Intn(8) + 2
+	aNum := rand.Intn(max(1, scale)) + 1
+	aDen := rand.Intn(max(1, scale)) + 2
+	bNum := rand.Intn(max(1, scale)) + 1
+	bDen := rand.Intn(max(1, scale)) + 2
 	rn, rd := reduce(aNum*bNum, aDen*bDen)
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d/%d x %d/%d = ?", aNum, aDen, bNum, bDen),
@@ -316,10 +328,11 @@ func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
 type fracDivGen struct{ wholeDiv bool }
 
 func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	if g.wholeDiv {
-		whole := rand.Intn(9) + 2
-		aNum := rand.Intn(6) + 1
-		aDen := rand.Intn(8) + 2
+		whole := rand.Intn(max(1, scale*2)) + 2
+		aNum := rand.Intn(max(1, scale)) + 1
+		aDen := rand.Intn(max(1, scale)) + 2
 		rn, rd := reduce(aNum, aDen*whole)
 		return generator.Problem{
 			Question:    fmt.Sprintf("%d/%d / %d = ?", aNum, aDen, whole),
@@ -327,10 +340,10 @@ func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("%d/%d / %d = %d/(%d x %d) = %d/%d", aNum, aDen, whole, aNum, aDen, whole, rn, rd),
 		}
 	}
-	aNum := rand.Intn(6) + 1
-	aDen := rand.Intn(8) + 2
-	bNum := rand.Intn(6) + 1
-	bDen := rand.Intn(8) + 2
+	aNum := rand.Intn(max(1, scale)) + 1
+	aDen := rand.Intn(max(1, scale)) + 2
+	bNum := rand.Intn(max(1, scale)) + 1
+	bDen := rand.Intn(max(1, scale)) + 2
 	rn, rd := reduce(aNum*bDen, aDen*bNum)
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d/%d / %d/%d = ?", aNum, aDen, bNum, bDen),
@@ -342,8 +355,9 @@ func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
 type fracMixedConvertGen struct{}
 
 func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
-	whole := rand.Intn(6) + 1
-	den := rand.Intn(7) + 2
+	scale := int(1 + difficulty*5)
+	whole := rand.Intn(max(1, scale*2)) + 1
+	den := rand.Intn(max(1, scale*2)) + 2
 	num := rand.Intn(den-1) + 1
 	pick := rand.Intn(2)
 	if pick == 0 {
@@ -366,9 +380,10 @@ func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
 type fracMixedOpGen struct{ op string }
 
 func (g *fracMixedOpGen) Generate(difficulty float64) generator.Problem {
-	w1 := rand.Intn(4) + 1
-	w2 := rand.Intn(4) + 1
-	den := rand.Intn(6) + 2
+	scale := int(1 + difficulty*5)
+	w1 := rand.Intn(max(1, scale)) + 1
+	w2 := rand.Intn(max(1, scale)) + 1
+	den := rand.Intn(max(1, scale*2)) + 2
 	n1 := rand.Intn(den-1) + 1
 	n2 := rand.Intn(den-1) + 1
 	aImproper := w1*den + n1
@@ -403,9 +418,10 @@ func (g *fracMixedOpGen) Generate(difficulty float64) generator.Problem {
 type fracMixedMultGen struct{}
 
 func (g *fracMixedMultGen) Generate(difficulty float64) generator.Problem {
-	w1 := rand.Intn(3) + 1
-	w2 := rand.Intn(3) + 1
-	den := rand.Intn(5) + 2
+	scale := int(1 + difficulty*5)
+	w1 := rand.Intn(max(1, scale)) + 1
+	w2 := rand.Intn(max(1, scale)) + 1
+	den := rand.Intn(max(1, scale)) + 2
 	n1 := rand.Intn(den-1) + 1
 	n2 := rand.Intn(den-1) + 1
 	aImp := w1*den + n1

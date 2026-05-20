@@ -51,7 +51,8 @@ func (g *pointsLinesGen) Generate(difficulty float64) generator.Problem {
 type angleTypesGen struct{}
 
 func (g *angleTypesGen) Generate(difficulty float64) generator.Problem {
-	deg := rand.Intn(181)
+	scale := int(1 + difficulty*5)
+	deg := rand.Intn(max(1, scale*30))
 	ans := "straight"
 	if deg < 90 {
 		ans = "acute"
@@ -70,7 +71,8 @@ func (g *angleTypesGen) Generate(difficulty float64) generator.Problem {
 type angleMeasureGen struct{}
 
 func (g *angleMeasureGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(179) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*30)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("An angle of %d degrees is a:", a),
 		Answer:      classAngle(a),
@@ -94,7 +96,8 @@ func classAngle(d int) string {
 type complementaryGen struct{}
 
 func (g *complementaryGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(89) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*15)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Two angles are complementary. One is %d degrees. What is the other?", a),
 		Answer:      fmt.Sprintf("%d", 90-a),
@@ -105,7 +108,8 @@ func (g *complementaryGen) Generate(difficulty float64) generator.Problem {
 type verticalAnglesGen struct{}
 
 func (g *verticalAnglesGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(179) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*30)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Two lines intersect. One angle is %d degrees. What is the vertical angle?", a),
 		Answer:      fmt.Sprintf("%d", a),
@@ -116,7 +120,8 @@ func (g *verticalAnglesGen) Generate(difficulty float64) generator.Problem {
 type triangleTypesGen struct{}
 
 func (g *triangleTypesGen) Generate(difficulty float64) generator.Problem {
-	sides := []int{rand.Intn(8) + 2, rand.Intn(8) + 2, rand.Intn(8) + 2}
+	scale := int(1 + difficulty*5)
+	sides := []int{rand.Intn(max(1, scale*2)) + 2, rand.Intn(max(1, scale*2)) + 2, rand.Intn(max(1, scale*2)) + 2}
 	ans := "scalene"
 	if sides[0] == sides[1] && sides[1] == sides[2] {
 		ans = "equilateral"
@@ -133,8 +138,9 @@ func (g *triangleTypesGen) Generate(difficulty float64) generator.Problem {
 type triangleAnglesGen struct{}
 
 func (g *triangleAnglesGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(90) + 30
-	b := rand.Intn(180-a-20) + 20
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*15)) + 30
+	b := rand.Intn(max(1, scale*15)) + 20
 	c := 180 - a - b
 	return generator.Problem{
 		Question:    fmt.Sprintf("A triangle has angles %d and %d degrees. What is the third angle?", a, b),
@@ -146,8 +152,9 @@ func (g *triangleAnglesGen) Generate(difficulty float64) generator.Problem {
 type triangleAreaGen struct{}
 
 func (g *triangleAreaGen) Generate(difficulty float64) generator.Problem {
-	base := (rand.Intn(20) + 1) * 2
-	height := rand.Intn(20) + 1
+	scale := int(1 + difficulty*5)
+	base := (rand.Intn(max(1, scale*4)) + 1) * 2
+	height := rand.Intn(max(1, scale*4)) + 1
 	area := base * height / 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Triangle: base = %d, height = %d. Find the area.", base, height),
@@ -159,14 +166,14 @@ func (g *triangleAreaGen) Generate(difficulty float64) generator.Problem {
 type pythagoreanGen struct{}
 
 func (g *pythagoreanGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(12) + 3
-	b := rand.Intn(12) + 3
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*3)) + 3
+	b := rand.Intn(max(1, scale*3)) + 3
 	cSq := a*a + b*b
 	c := int(math.Sqrt(float64(cSq)))
-	// Ensure perfect square
 	for c*c != cSq {
-		a = rand.Intn(12) + 3
-		b = rand.Intn(12) + 3
+		a = rand.Intn(max(1, scale*3)) + 3
+		b = rand.Intn(max(1, scale*3)) + 3
 		cSq = a*a + b*b
 		c = int(math.Sqrt(float64(cSq)))
 	}
@@ -198,8 +205,9 @@ func (g *quadTypesGen) Generate(difficulty float64) generator.Problem {
 type quadAreaGen struct{}
 
 func (g *quadAreaGen) Generate(difficulty float64) generator.Problem {
-	base := rand.Intn(20) + 5
-	height := rand.Intn(20) + 5
+	scale := int(1 + difficulty*5)
+	base := rand.Intn(max(1, scale*4)) + 5
+	height := rand.Intn(max(1, scale*4)) + 5
 	shape := []string{"rectangle", "parallelogram"}[rand.Intn(2)]
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the area of a %s with base %d and height %d.", shape, base, height),
@@ -211,8 +219,9 @@ func (g *quadAreaGen) Generate(difficulty float64) generator.Problem {
 type quadPerimGen struct{}
 
 func (g *quadPerimGen) Generate(difficulty float64) generator.Problem {
-	w := rand.Intn(30) + 5
-	h := rand.Intn(30) + 5
+	scale := int(1 + difficulty*5)
+	w := rand.Intn(max(1, scale*5)) + 5
+	h := rand.Intn(max(1, scale*5)) + 5
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangle: width = %d, height = %d. Find the perimeter.", w, h),
 		Answer:      fmt.Sprintf("%d", 2*(w+h)),
@@ -236,7 +245,8 @@ func (g *circlePartsGen) Generate(difficulty float64) generator.Problem {
 type circumferenceGen struct{}
 
 func (g *circumferenceGen) Generate(difficulty float64) generator.Problem {
-	r := rand.Intn(20) + 5
+	scale := int(1 + difficulty*5)
+	r := rand.Intn(max(1, scale*4)) + 5
 	pi := 3.14
 	circ := math.Round(2 * pi * float64(r))
 	return generator.Problem{
@@ -249,7 +259,8 @@ func (g *circumferenceGen) Generate(difficulty float64) generator.Problem {
 type circleAreaGen struct{}
 
 func (g *circleAreaGen) Generate(difficulty float64) generator.Problem {
-	r := rand.Intn(10) + 3
+	scale := int(1 + difficulty*5)
+	r := rand.Intn(max(1, scale*2)) + 3
 	area := math.Round(3.14 * float64(r*r))
 	return generator.Problem{
 		Question:    fmt.Sprintf("Circle radius = %d. Find the area (use pi = 3.14).", r),
@@ -261,8 +272,9 @@ func (g *circleAreaGen) Generate(difficulty float64) generator.Problem {
 type coordPlotGen struct{}
 
 func (g *coordPlotGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(11) - 5
-	y := rand.Intn(11) - 5
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(max(1, scale*2)) - 5
+	y := rand.Intn(max(1, scale*2)) - 5
 	return generator.Problem{
 		Question:    fmt.Sprintf("What quadrant is the point (%d, %d) in?", x, y),
 		Answer:      quad(x, y),
@@ -288,12 +300,13 @@ func quad(x, y int) string {
 type coordDistanceGen struct{}
 
 func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
-	dx := rand.Intn(9) + 1
-	dy := rand.Intn(9) + 1
+	scale := int(1 + difficulty*5)
+	dx := rand.Intn(max(1, scale*4)) + 1
+	dy := rand.Intn(max(1, scale*4)) + 1
 	dist := int(math.Round(math.Sqrt(float64(dx*dx + dy*dy))))
 	for dist*dist != dx*dx+dy*dy {
-		dx = rand.Intn(8) + 1
-		dy = rand.Intn(8) + 1
+		dx = rand.Intn(max(1, scale*4)) + 1
+		dy = rand.Intn(max(1, scale*4)) + 1
 		dist = int(math.Round(math.Sqrt(float64(dx*dx + dy*dy))))
 	}
 	x1 := rand.Intn(5)
@@ -308,8 +321,9 @@ func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
 type coordMidpointGen struct{}
 
 func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
-	x1 := (rand.Intn(9) + 1) * 2
-	y1 := (rand.Intn(9) + 1) * 2
+	scale := int(1 + difficulty*5)
+	x1 := (rand.Intn(max(1, scale*2)) + 1) * 2
+	y1 := (rand.Intn(max(1, scale*2)) + 1) * 2
 	x2 := x1 + (rand.Intn(5)+1)*2
 	y2 := y1 + (rand.Intn(5)+1)*2
 	return generator.Problem{
@@ -322,9 +336,10 @@ func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
 type volumeGen struct{}
 
 func (g *volumeGen) Generate(difficulty float64) generator.Problem {
-	l := rand.Intn(10) + 2
-	w := rand.Intn(10) + 2
-	h := rand.Intn(10) + 2
+	scale := int(1 + difficulty*5)
+	l := rand.Intn(max(1, scale*2)) + 2
+	w := rand.Intn(max(1, scale*2)) + 2
+	h := rand.Intn(max(1, scale*2)) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find volume.", l, w, h),
 		Answer:      fmt.Sprintf("%d", l*w*h),
@@ -335,9 +350,10 @@ func (g *volumeGen) Generate(difficulty float64) generator.Problem {
 type surfaceAreaGen struct{}
 
 func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
-	l := rand.Intn(10) + 2
-	w := rand.Intn(10) + 2
-	h := rand.Intn(10) + 2
+	scale := int(1 + difficulty*5)
+	l := rand.Intn(max(1, scale*2)) + 2
+	w := rand.Intn(max(1, scale*2)) + 2
+	h := rand.Intn(max(1, scale*2)) + 2
 	sa := 2 * (l*w + l*h + w*h)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find surface area.", l, w, h),
@@ -349,10 +365,11 @@ func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
 type coordLinesGen struct{}
 
 func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
-	x1 := rand.Intn(5) - 2
-	y1 := rand.Intn(5) - 2
-	x2 := x1 + rand.Intn(4) + 1
-	y2 := y1 + rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	x1 := rand.Intn(max(1, scale)) - 2
+	y1 := rand.Intn(max(1, scale)) - 2
+	x2 := x1 + rand.Intn(max(1, scale)) + 1
+	y2 := y1 + rand.Intn(max(1, scale)) + 1
 	dx := x2 - x1
 	dy := y2 - y1
 	// slope = dy/dx

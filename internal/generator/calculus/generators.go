@@ -90,9 +90,10 @@ func Register(reg *generator.Registry) {
 type limitConceptGen struct{}
 
 func (g *limitConceptGen) Generate(difficulty float64) generator.Problem {
-	m := rand.Intn(4) + 1
-	b := rand.Intn(10) + 1
-	x0 := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	m := rand.Intn(scale*2) + 1
+	b := rand.Intn(scale*5) + 1
+	x0 := rand.Intn(scale*2) + 1
 	ans := m*x0 + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("As x approaches %d, what value does f(x)=%dx+%d approach?", x0, m, b),
@@ -104,7 +105,8 @@ func (g *limitConceptGen) Generate(difficulty float64) generator.Problem {
 type limitNumericGen struct{}
 
 func (g *limitNumericGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(4) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(scale*2) + 2
 	ans := 2 * a
 	return generator.Problem{
 		Question:    fmt.Sprintf("Estimate lim x→%d of (x²-%d)/(x-%d) by evaluating near x=%d.", a, a*a, a, a),
@@ -116,8 +118,9 @@ func (g *limitNumericGen) Generate(difficulty float64) generator.Problem {
 type limitPropertiesGen struct{}
 
 func (g *limitPropertiesGen) Generate(difficulty float64) generator.Problem {
-	fLim := rand.Intn(5) + 1
-	gLim := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	fLim := rand.Intn(scale*2) + 1
+	gLim := rand.Intn(scale*2) + 1
 	op := rand.Intn(5)
 	var ans int
 	var opStr, desc string
@@ -227,8 +230,9 @@ func (g *derivConceptGen) Generate(difficulty float64) generator.Problem {
 type derivPowerRuleGen struct{}
 
 func (g *derivPowerRuleGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(5) + 1
-	n := rand.Intn(4) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(scale*2) + 1
+	n := rand.Intn(scale) + 2
 	coef := a * n
 	exp := n - 1
 	return generator.Problem{
@@ -241,12 +245,13 @@ func (g *derivPowerRuleGen) Generate(difficulty float64) generator.Problem {
 type derivSumRuleGen struct{}
 
 func (g *derivSumRuleGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(4) + 2
-	n := rand.Intn(3) + 2
-	b := rand.Intn(4) + 2
-	m := rand.Intn(3) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 2
+	n := rand.Intn(max(2, scale)) + 2
+	b := rand.Intn(max(1, scale*2)) + 2
+	m := rand.Intn(max(2, scale)) + 2
 	for m == n {
-		m = rand.Intn(3) + 2
+		m = rand.Intn(max(2, scale)) + 2
 	}
 	coef1 := a * n
 	exp1 := n - 1
@@ -263,9 +268,10 @@ func (g *derivSumRuleGen) Generate(difficulty float64) generator.Problem {
 type derivProductRuleGen struct{}
 
 func (g *derivProductRuleGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(3) + 1
-	m := rand.Intn(2) + 1
-	a := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale)) + 1
+	m := rand.Intn(max(1, scale)) + 1
+	a := rand.Intn(max(1, scale*2)) + 1
 	// f(x) = x^n (x^m + a) = x^(n+m) + a·x^n
 	// f'(x) = (n+m)x^(n+m-1) + a·n·x^(n-1)
 	coef1 := n + m
@@ -294,9 +300,10 @@ func (g *derivQuotientRuleGen) Generate(difficulty float64) generator.Problem {
 type derivChainRuleGen struct{}
 
 func (g *derivChainRuleGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(3) + 1
-	b := rand.Intn(4) + 1
-	n := rand.Intn(2) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
+	n := rand.Intn(max(1, scale)) + 2
 	// f(x) = (ax+b)^n
 	// f'(x) = n·a·(ax+b)^(n-1)
 	coef := n * a
@@ -358,10 +365,11 @@ func (g *derivExpLogGen) Generate(difficulty float64) generator.Problem {
 type derivApplicationsGen struct{}
 
 func (g *derivApplicationsGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(3) + 1
-	b := rand.Intn(10) + 1
-	c := rand.Intn(10) + 1
-	t0 := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
+	c := rand.Intn(max(1, scale*2)) + 1
+	t0 := rand.Intn(max(1, scale*2)) + 1
 	vel := 2*a*t0 + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("If s(t)=%dt²+%dt+%d, what is velocity at t=%d?", a, b, c, t0),
@@ -373,7 +381,8 @@ func (g *derivApplicationsGen) Generate(difficulty float64) generator.Problem {
 type derivOptimizationGen struct{}
 
 func (g *derivOptimizationGen) Generate(difficulty float64) generator.Problem {
-	perim := (rand.Intn(4) + 3) * 4 // 12, 16, 20, 24
+	scale := int(1 + difficulty*5)
+	perim := (rand.Intn(max(1, scale*2)) + 3) * 4 // 12, 16, 20, 24
 	width := perim / 4
 	area := width * width
 	return generator.Problem{
@@ -386,8 +395,9 @@ func (g *derivOptimizationGen) Generate(difficulty float64) generator.Problem {
 type integralIndefiniteGen struct{}
 
 func (g *integralIndefiniteGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(4) + 1
-	n := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	n := rand.Intn(max(1, scale)) + 1
 	num := a
 	den := n + 1
 	exp := n + 1
@@ -408,7 +418,8 @@ func (g *integralIndefiniteGen) Generate(difficulty float64) generator.Problem {
 type integralPowerRuleGen struct{}
 
 func (g *integralPowerRuleGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale)) + 1
 	a := n + 1
 	exp := n + 1
 	coef := a / (n + 1)
@@ -428,7 +439,8 @@ func (g *integralPowerRuleGen) Generate(difficulty float64) generator.Problem {
 type integralSubstitutionGen struct{}
 
 func (g *integralSubstitutionGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(3) + 2
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale)) + 2
 	coef := n
 	exp := n - 1
 	answer := fmt.Sprintf("e^(x^%d)+C", n)
@@ -442,12 +454,13 @@ func (g *integralSubstitutionGen) Generate(difficulty float64) generator.Problem
 type integralDefiniteGen struct{}
 
 func (g *integralDefiniteGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(4) + 1
-	n := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	n := rand.Intn(max(1, scale)) + 1
 	lower := rand.Intn(2)
-	upper := rand.Intn(3) + 1
+	upper := rand.Intn(max(1, scale*2)) + 1
 	for upper <= lower {
-		upper = rand.Intn(3) + 1
+		upper = rand.Intn(max(1, scale*2)) + 1
 	}
 	f := func(x int) int {
 		return mathutil.IntPow(x, n+1) * a / (n + 1)
@@ -463,7 +476,8 @@ func (g *integralDefiniteGen) Generate(difficulty float64) generator.Problem {
 type integralFTCGen struct{}
 
 func (g *integralFTCGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale)) + 1
 	answer := fmt.Sprintf("x^%d", n)
 	return generator.Problem{
 		Question:    fmt.Sprintf("If F(x)=∫₀ˣ t^%d dt, what is F'(x)?", n),
@@ -497,8 +511,9 @@ func (g *integralVolumeGen) Generate(difficulty float64) generator.Problem {
 type derivImplicitGen struct{}
 
 func (g *derivImplicitGen) Generate(difficulty float64) generator.Problem {
-	r := rand.Intn(3) + 3
-	a := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	r := rand.Intn(max(1, scale*2)) + 3
+	a := rand.Intn(max(1, scale*2)) + 1
 	b := r*r - a*a
 	// Ensure integer b
 	for b <= 0 {
@@ -533,8 +548,9 @@ func (g *derivImplicitGen) Generate(difficulty float64) generator.Problem {
 type derivRelatedRatesGen struct{}
 
 func (g *derivRelatedRatesGen) Generate(difficulty float64) generator.Problem {
-	dr := rand.Intn(3) + 1
-	r := rand.Intn(3) + 3
+	scale := int(1 + difficulty*5)
+	dr := rand.Intn(max(1, scale*2)) + 1
+	r := rand.Intn(max(1, scale*2)) + 3
 	ans := 2 * 3 * r * dr
 	answer := fmt.Sprintf("%dπ", ans)
 	return generator.Problem{
@@ -687,8 +703,9 @@ func (g *fermatGen) Generate(difficulty float64) generator.Problem {
 type differenceQuotientGen struct{}
 
 func (g *differenceQuotientGen) Generate(difficulty float64) generator.Problem {
-	h := rand.Intn(2) + 1
-	x0 := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	h := rand.Intn(max(1, scale)) + 1
+	x0 := rand.Intn(max(1, scale*2)) + 1
 	fx := x0 * x0
 	fxh := (x0 + h) * (x0 + h)
 	ans := (fxh - fx) / h
@@ -702,7 +719,8 @@ func (g *differenceQuotientGen) Generate(difficulty float64) generator.Problem {
 type differentialGen struct{}
 
 func (g *differentialGen) Generate(difficulty float64) generator.Problem {
-	x0 := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	x0 := rand.Intn(max(1, scale*2)) + 1
 	dx := 0.1 + float64(rand.Intn(5))/10.0
 	fpx := float64(2 * x0)
 	dy := fpx * dx
@@ -751,13 +769,14 @@ func (g *nonDiffGen) Generate(difficulty float64) generator.Problem {
 type partialDerivGen struct{}
 
 func (g *partialDerivGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(3) + 1
-	b := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
 	// f(x,y) = a·x²·y + b·xy²
 	// ∂f/∂x = 2a·xy + b·y²
 	// ∂f/∂y = a·x² + 2b·xy
-	x0 := rand.Intn(3) + 1
-	y0 := rand.Intn(3) + 1
+	x0 := rand.Intn(max(1, scale*2)) + 1
+	y0 := rand.Intn(max(1, scale*2)) + 1
 	which := rand.Intn(2)
 	var answerStr string
 	if which == 0 {
@@ -790,8 +809,9 @@ func (g *arcLengthGen) Generate(difficulty float64) generator.Problem {
 type expIntegralGen struct{}
 
 func (g *expIntegralGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(3) + 1
-	b := rand.Intn(2) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find ∫%d·e^(%dx) dx.", a, b),
 		Answer:      fmt.Sprintf("(%d/%d)e^(%dx)+C", a, b, b),
