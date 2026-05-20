@@ -22,6 +22,7 @@ import {
   startGoalDiagnosticName,
   getGoalPlan,
   setDailyXPGoal,
+  getDueReviews,
   type Question,
   type AnswerResult,
   type Scores,
@@ -54,6 +55,7 @@ export default function SessionPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [showTimer, setShowTimer] = useState(false)
+  const [dueReviews, setDueReviews] = useState(0)
   const [elapsed, setElapsed] = useState(0)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
@@ -126,6 +128,7 @@ export default function SessionPage() {
       setSessionStats({ correct: 0, total: 0 })
       const s = await getScores(res.student_id).catch(() => null)
       if (s) setScores(s)
+      getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
     } catch {
       clearToken()
       setScreen('name')
@@ -459,10 +462,19 @@ export default function SessionPage() {
               </div>
             )}
 
+            {dueReviews > 0 && (
+              <div className="bg-mathua-surface border border-yellow-500/40 rounded-none p-3 mb-4 text-center">
+                <p className="font-mono text-xs text-yellow-400">
+                  {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
+                </p>
+              </div>
+            )}
+
             {question && (
               <div className="flex gap-8 items-start mt-4 max-md:flex-col">
                 <div className="w-[200px] flex-shrink-0 max-md:w-full">
-                  <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4">
+                  {/* Desktop sidebar */}
+                  <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4 max-md:hidden">
                     <div
                       className="transition-opacity duration-200"
                       key={lastResult?.streak ?? 0}
@@ -548,6 +560,30 @@ export default function SessionPage() {
                       {(scores.xp_today ?? 0) >= (scores.daily_xp_goal || 150) && (
                         <div className="mt-1 font-mono text-[10px] text-mathua-blue uppercase">Goal reached! ★</div>
                       )}
+                    </div>
+                  </div>
+                  {/* Mobile stats bar */}
+                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-2">
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Streak</span>
+                      <span className="font-mono text-sm text-mathua-green">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
+                    </div>
+                    <div className="w-px h-8 bg-mathua-border" />
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Session</span>
+                      <span className={`font-mono text-sm ${sessionStats.total > 0 && sessionStats.correct / sessionStats.total >= 0.8 ? 'text-mathua-green' : sessionStats.total > 0 && sessionStats.correct / sessionStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
+                        {sessionStats.correct}/{sessionStats.total}
+                      </span>
+                    </div>
+                    <div className="w-px h-8 bg-mathua-border" />
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Mastered</span>
+                      <span className="font-mono text-sm text-mathua-blue">{scores.concepts_mastered}</span>
+                    </div>
+                    <div className="w-px h-8 bg-mathua-border" />
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">XP today</span>
+                      <span className="font-mono text-sm text-mathua-blue">{scores.xp_today ?? 0}</span>
                     </div>
                   </div>
                 </div>

@@ -12,6 +12,10 @@ import LessonQuiz from '../../components/LessonQuiz'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessons, type LessonInfo } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
+import conceptsData from '../../data/concepts.json'
+
+type ConceptEntry = { id: string; label: string; domain: string }
+const conceptLabels = new Map<string, string>((conceptsData as ConceptEntry[]).map(c => [c.id, c.label]))
 
 const domainOrder = [
   'counting', 'arith', 'fractions', 'prealgebra',
@@ -97,10 +101,16 @@ export default function StudyPage() {
   }, [lessonsByDomain])
 
   const allLessons = useMemo(() => {
-    const items: { title: string; body: string; domain: string; concepts: string[] }[] = []
+    const items: { title: string; body: string; domain: string; concepts: string[]; conceptLabels: string[] }[] = []
     for (const [domain, lessons] of Object.entries(lessonsByDomain)) {
       for (const l of lessons) {
-        items.push({ title: l.title, body: l.body, domain, concepts: l.concepts })
+        items.push({
+          title: l.title,
+          body: l.body,
+          domain,
+          concepts: l.concepts,
+          conceptLabels: l.concepts.map(cid => conceptLabels.get(cid) || cid),
+        })
       }
     }
     return items

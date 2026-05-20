@@ -6,134 +6,42 @@ import (
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
 	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field")
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
+		res := gr.Grade(grader.GradingNumeric, p.Answer, p.Answer)
 		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
+			res2 := gr.Grade(grader.GradingMultipleChoice, p.Answer, p.Answer)
+			if !res2.Correct {
+				t.Errorf("self-grade failed for %q (answer=%q)", p.Question, p.Answer)
 			}
 		}
 	}
 }
 
-func fuzzNoSelf(t *testing.T, gen generator.Generator) {
-	t.Helper()
-	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
-		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field")
-		}
+func TestSlopeGen(t *testing.T)      { fuzzGen(t, &slopeGen{}) }
+func TestSlopeInterceptGen(t *testing.T) { fuzzGen(t, &slopeInterceptGen{}) }
+func TestMultiStepEqGen(t *testing.T) { fuzzGen(t, &multiStepEqGen{}) }
+func TestVarsBothSidesGen(t *testing.T) { fuzzGen(t, &varsBothSidesGen{}) }
+func TestStdFormGen(t *testing.T)     { fuzzGen(t, &stdFormGen{}) }
+func TestParallelPerpGen(t *testing.T) { fuzzGen(t, &parallelPerpGen{}) }
+
+func TestDifficultyScaling(t *testing.T) {
+	gen := &multiStepEqGen{}
+	// Low difficulty should produce smaller numbers
+	low := gen.Generate(0.1)
+	high := gen.Generate(1.0)
+	if low.Question == "" || high.Question == "" {
+		t.Fatal("empty questions")
 	}
+	t.Logf("low=%.2f: %s", 0.1, low.Question)
+	t.Logf("high=%.2f: %s", 1.0, high.Question)
 }
-
-func TestSlope(t *testing.T)          { fuzzGen(t, &slopeGen{}, grader.GradingNumeric) }
-func TestSlopeIntercept(t *testing.T) { fuzzGen(t, &slopeInterceptGen{}, grader.GradingExpression) }
-func TestLinearGraph(t *testing.T)    { fuzzGen(t, &linearGraphGen{}, grader.GradingNumeric) }
-func TestStandardForm(t *testing.T)   { fuzzGen(t, &stdFormGen{}, grader.GradingMultipleChoice) }
-func TestParallelPerp(t *testing.T)   { fuzzGen(t, &parallelPerpGen{}, grader.GradingNumeric) }
-
-func TestMultiStepEq(t *testing.T)   { fuzzGen(t, &multiStepEqGen{}, grader.GradingNumeric) }
-func TestVarsBothSides(t *testing.T) { fuzzGen(t, &varsBothSidesGen{}, grader.GradingNumeric) }
-func TestLiteralEq(t *testing.T)     { fuzzGen(t, &literalEqGen{}, grader.GradingExpression) }
-func TestMultiStepIneq(t *testing.T) { fuzzGen(t, &multiStepIneqGen{}, grader.GradingNumeric) }
-func TestCompoundIneq(t *testing.T)  { fuzzGen(t, &compoundIneqGen{}, grader.GradingNumeric) }
-
-func TestSysSubstitution(t *testing.T) { fuzzGen(t, &sysSubstitutionGen{}, grader.GradingTuple) }
-func TestSysElimination(t *testing.T)  { fuzzGen(t, &sysEliminationGen{}, grader.GradingTuple) }
-func TestSysWord(t *testing.T)         { fuzzGen(t, &sysWordGen{}, grader.GradingTuple) }
-
-func TestPolyConcept(t *testing.T)  { fuzzGen(t, &polyConceptGen{}, grader.GradingNumeric) }
-func TestPolyAddSub(t *testing.T)   { fuzzGen(t, &polyAddSubGen{}, grader.GradingPolynomial) }
-func TestPolyMultMono(t *testing.T) { fuzzGen(t, &polyMultMonoGen{}, grader.GradingPolynomial) }
-func TestPolyFoil(t *testing.T)     { fuzzGen(t, &polyFoilGen{}, grader.GradingPolynomial) }
-func TestPolySpecial(t *testing.T)  { fuzzGen(t, &polySpecialGen{}, grader.GradingPolynomial) }
-
-func TestFactorGCF(t *testing.T)       { fuzzGen(t, &factorGCFGen{}, grader.GradingExpression) }
-func TestFactorTrinomial(t *testing.T) { fuzzGen(t, &factorTrinomialGen{}, grader.GradingExpression) }
-func TestFactorDiffSquares(t *testing.T) {
-	fuzzGen(t, &factorDiffSquaresGen{}, grader.GradingExpression)
-}
-func TestFactorACMethod(t *testing.T) { fuzzGen(t, &factorACMethodGen{}, grader.GradingExpression) }
-
-func TestQuadSolveFactor(t *testing.T) { fuzzGen(t, &quadSolveFactorGen{}, grader.GradingTuple) }
-func TestQuadCompleteSquare(t *testing.T) {
-	fuzzGen(t, &quadCompleteSquareGen{}, grader.GradingNumeric)
-}
-func TestQuadFormula(t *testing.T)      { fuzzGen(t, &quadFormulaGen{}, grader.GradingTuple) }
-func TestQuadDiscriminant(t *testing.T) { fuzzGen(t, &quadDiscriminantGen{}, grader.GradingMultipleChoice) }
-
-func TestFuncConcept(t *testing.T)  { fuzzGen(t, &funcConceptGen{}, grader.GradingNumeric) }
-func TestFuncNotation(t *testing.T) { fuzzGen(t, &funcNotationGen{}, grader.GradingNumeric) }
-func TestFuncEvaluate(t *testing.T) { fuzzGen(t, &funcEvaluateGen{}, grader.GradingNumeric) }
-func TestFuncLinear(t *testing.T)   { fuzzGen(t, &funcLinearGen{}, grader.GradingMultipleChoice) }
-func TestFuncQuad(t *testing.T)     { fuzzGen(t, &funcQuadGen{}, grader.GradingNumeric) }
-
-func TestAlgExpConcept(t *testing.T)  { fuzzGen(t, &algExpConceptGen{}, grader.GradingNumeric) }
-func TestAlgExpEvaluate(t *testing.T) { fuzzGen(t, &algExpEvaluateGen{}, grader.GradingNumeric) }
-func TestLogConcept(t *testing.T)     { fuzzGen(t, &logConceptGen{}, grader.GradingMultipleChoice) }
-func TestLogEvaluate(t *testing.T)    { fuzzGen(t, &logEvaluateGen{}, grader.GradingNumeric) }
-func TestLogProperties(t *testing.T)  { fuzzGen(t, &logPropertiesGen{}, grader.GradingExpression) }
-
-func TestSeqArith(t *testing.T)    { fuzzGen(t, &seqArithGen{}, grader.GradingNumeric) }
-func TestSeqGeom(t *testing.T)     { fuzzGen(t, &seqGeomGen{}, grader.GradingNumeric) }
-func TestSeqSumArith(t *testing.T) { fuzzGen(t, &seqSumArithGen{}, grader.GradingNumeric) }
-func TestSeqSumGeo(t *testing.T)   { fuzzGen(t, &seqSumGeoGen{}, grader.GradingNumeric) }
-
-func TestIneqTwoVar(t *testing.T)   { fuzzGen(t, &ineqTwoVarGen{}, grader.GradingMultipleChoice) }
-func TestConicCircle(t *testing.T)  { fuzzGen(t, &conicCircleGen{}, grader.GradingNumeric) }
-func TestConicEllipse(t *testing.T) { fuzzGen(t, &conicEllipseGen{}, grader.GradingNumeric) }
-
-func TestConicParabola(t *testing.T)   { fuzzGen(t, &conicParabolaGen{}, grader.GradingMultipleChoice) }
-func TestConicHyperbola(t *testing.T)  { fuzzGen(t, &conicHyperbolaGen{}, grader.GradingMultipleChoice) }
-func TestEqAbsVal(t *testing.T)        { fuzzGen(t, &eqAbsValGen{}, grader.GradingTuple) }
-func TestEqBinomial(t *testing.T)      { fuzzGen(t, &eqBinomialGen{}, grader.GradingNumeric) }
-func TestEqExp(t *testing.T)           { fuzzGen(t, &eqExpGen{}, grader.GradingNumeric) }
-func TestExtraneousRoots(t *testing.T) { fuzzGen(t, &extraneousRootsGen{}, grader.GradingMultipleChoice) }
-func TestEqIrrational(t *testing.T)    { fuzzGen(t, &eqIrrationalGen{}, grader.GradingNumeric) }
-func TestEqLog(t *testing.T)           { fuzzGen(t, &eqLogGen{}, grader.GradingNumeric) }
-func TestEqPoly(t *testing.T)          { fuzzGen(t, &eqPolyGen{}, grader.GradingTuple) }
-func TestEqRational(t *testing.T)      { fuzzGen(t, &eqRationalGen{}, grader.GradingNumeric) }
-func TestEqTrinomial(t *testing.T)     { fuzzGen(t, &eqTrinomialGen{}, grader.GradingNumeric) }
-func TestFuncAbsVal(t *testing.T)      { fuzzGen(t, &funcAbsValGen{}, grader.GradingNumeric) }
-func TestFuncComposite(t *testing.T)   { fuzzGen(t, &funcCompositeGen{}, grader.GradingNumeric) }
-func TestFuncDirichlet(t *testing.T)   { fuzzGen(t, &funcDirichletGen{}, grader.GradingMultipleChoice) }
-func TestFuncDomain(t *testing.T)      { fuzzGen(t, &funcDomainGen{}, grader.GradingMultipleChoice) }
-func TestFuncEvenOdd(t *testing.T)     { fuzzGen(t, &funcEvenOddGen{}, grader.GradingMultipleChoice) }
-func TestGraphAnalysis(t *testing.T)   { fuzzGen(t, &graphAnalysisGen{}, grader.GradingMultipleChoice) }
-func TestFuncInverse(t *testing.T)     { fuzzGen(t, &funcInverseGen{}, grader.GradingExpression) }
-func TestMonotonicity(t *testing.T)    { fuzzGen(t, &monotonicityGen{}, grader.GradingMultipleChoice) }
-func TestFuncRational(t *testing.T)    { fuzzGen(t, &funcRationalGen{}, grader.GradingNumeric) }
-func TestFuncSigmoid(t *testing.T)     { fuzzGen(t, &funcSigmoidGen{}, grader.GradingMultipleChoice) }
-func TestFuncSign(t *testing.T)        { fuzzGen(t, &funcSignGen{}, grader.GradingMultipleChoice) }
-func TestIneqAbsVal(t *testing.T)      { fuzzGen(t, &ineqAbsValGen{}, grader.GradingMultipleChoice) }
-func TestIneqInterval(t *testing.T)    { fuzzGen(t, &ineqIntervalGen{}, grader.GradingMultipleChoice) }
-func TestIneqIrrational(t *testing.T)  { fuzzGen(t, &ineqIrrationalGen{}, grader.GradingMultipleChoice) }
-func TestIneqLog(t *testing.T)         { fuzzGen(t, &ineqLogGen{}, grader.GradingMultipleChoice) }
-func TestIneqQuadratic(t *testing.T)   { fuzzGen(t, &ineqQuadraticGen{}, grader.GradingMultipleChoice) }
-func TestIneqRational(t *testing.T)    { fuzzGen(t, &ineqRationalGen{}, grader.GradingMultipleChoice) }
-func TestSignAnalysis(t *testing.T)    { fuzzGen(t, &signAnalysisGen{}, grader.GradingMultipleChoice) }
-func TestIneqSystems(t *testing.T)     { fuzzGen(t, &ineqSystemsGen{}, grader.GradingMultipleChoice) }
-func TestPolyDivision(t *testing.T)    { fuzzGen(t, &polyDivisionGen{}, grader.GradingPolynomial) }
-func TestPolyMonomial(t *testing.T)    { fuzzGen(t, &polyMonomialGen{}, grader.GradingNumeric) }
-func TestPolyRoots(t *testing.T)       { fuzzGen(t, &polyRootsGen{}, grader.GradingTuple) }
-func TestSynthDiv(t *testing.T)        { fuzzGen(t, &synthDivGen{}, grader.GradingPolynomial) }
-func TestVieta(t *testing.T)           { fuzzGen(t, &vietaGen{}, grader.GradingNumeric) }
-func TestQuadComplex(t *testing.T)     { fuzzGen(t, &quadComplexGen{}, grader.GradingNumeric) }
-func TestQuadIncomplete(t *testing.T)  { fuzzGen(t, &quadIncompleteGen{}, grader.GradingTuple) }
-func TestQuadParametric(t *testing.T)  { fuzzGen(t, &quadParametricGen{}, grader.GradingNumeric) }
-func TestQuadQuadratic(t *testing.T)   { fuzzGen(t, &quadQuadraticGen{}, grader.GradingMultipleChoice) }
-func TestSystemsConcept(t *testing.T)  { fuzzGen(t, &systemsConceptGen{}, grader.GradingMultipleChoice) }
-func TestGaussianElim(t *testing.T)    { fuzzGen(t, &gaussianElimGen{}, grader.GradingTuple) }

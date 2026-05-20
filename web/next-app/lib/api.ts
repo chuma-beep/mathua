@@ -404,3 +404,14 @@ export async function getLessonPractice(conceptId: string, count = 5): Promise<L
 	if (!res.ok) throw new Error(`Lesson practice fetch failed: ${res.status}`)
 	return res.json()
 }
+
+export interface DueReviewsRes {
+	count: number
+}
+
+export async function getDueReviews(): Promise<DueReviewsRes> {
+	const headers: Record<string, string> = { ...getAuthHeaders() }
+	const res = await fetch(`${API_BASE}/api/reviews/due`, { headers })
+	if (!res.ok) return { count: 0 }
+	return res.json()
+}

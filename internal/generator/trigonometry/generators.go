@@ -69,32 +69,40 @@ func (g *radiansGen) Generate(difficulty float64) generator.Problem {
 
 type unitCircleGen struct{}
 
+var unitCircleAngles = []struct {
+	label string
+	sin   string
+	cos   string
+	easy  bool
+}{
+	{"0°", "0", "1", true},
+	{"30°", "1/2", "√3/2", true},
+	{"45°", "√2/2", "√2/2", true},
+	{"60°", "√3/2", "1/2", true},
+	{"90°", "1", "0", true},
+	{"180°", "0", "-1", true},
+	{"270°", "-1", "0", true},
+	{"360°", "0", "1", true},
+	{"120°", "√3/2", "-1/2", false},
+	{"135°", "√2/2", "-√2/2", false},
+	{"150°", "1/2", "-√3/2", false},
+	{"210°", "-1/2", "-√3/2", false},
+	{"225°", "-√2/2", "-√2/2", false},
+	{"240°", "-√3/2", "-1/2", false},
+	{"300°", "-√3/2", "1/2", false},
+	{"315°", "-√2/2", "√2/2", false},
+	{"330°", "-1/2", "√3/2", false},
+}
+
 func (g *unitCircleGen) Generate(difficulty float64) generator.Problem {
-	type angle struct {
-		label string
-		sin   string
-		cos   string
+	// Easy → pick from quadrant 1 + axes; Hard → pick from any quadrant
+	var candidates []struct{ label, sin, cos string }
+	for _, a := range unitCircleAngles {
+		if difficulty > 0.4 || a.easy {
+			candidates = append(candidates, struct{ label, sin, cos string }{a.label, a.sin, a.cos})
+		}
 	}
-	angles := []angle{
-		{"0°", "0", "1"},
-		{"30°", "1/2", "√3/2"},
-		{"45°", "√2/2", "√2/2"},
-		{"60°", "√3/2", "1/2"},
-		{"90°", "1", "0"},
-		{"120°", "√3/2", "-1/2"},
-		{"135°", "√2/2", "-√2/2"},
-		{"150°", "1/2", "-√3/2"},
-		{"180°", "0", "-1"},
-		{"210°", "-1/2", "-√3/2"},
-		{"225°", "-√2/2", "-√2/2"},
-		{"240°", "-√3/2", "-1/2"},
-		{"270°", "-1", "0"},
-		{"300°", "-√3/2", "1/2"},
-		{"315°", "-√2/2", "√2/2"},
-		{"330°", "-1/2", "√3/2"},
-		{"360°", "0", "1"},
-	}
-	a := angles[rand.Intn(len(angles))]
+	a := candidates[rand.Intn(len(candidates))]
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
 			Question:    fmt.Sprintf("What is sin(%s)?", a.label),
@@ -124,8 +132,35 @@ var pythagoreanTriples = []triple{
 	{12, 16, 20},
 }
 
+var easySinTriples = []triple{
+	{3, 4, 5},
+	{6, 8, 10},
+	{5, 12, 13},
+	{9, 12, 15},
+}
+
+var hardSinTriples = []triple{
+	{8, 15, 17},
+	{7, 24, 25},
+	{9, 40, 41},
+	{10, 24, 26},
+	{12, 16, 20},
+	{15, 8, 17},
+	{24, 7, 25},
+	{40, 9, 41},
+}
+
 func (g *sinCosDefGen) Generate(difficulty float64) generator.Problem {
-	t := pythagoreanTriples[rand.Intn(len(pythagoreanTriples))]
+	var triples []triple
+	if difficulty > 0.5 {
+		triples = hardSinTriples
+	} else {
+		triples = easySinTriples
+	}
+	if difficulty > 0.7 && rand.Intn(2) == 0 {
+		triples = append(triples, easySinTriples...)
+	}
+	t := triples[rand.Intn(len(triples))]
 	if rand.Intn(2) == 0 {
 		gcd := mathutil.GCD(t.opp, t.hyp)
 		num := t.opp / gcd
