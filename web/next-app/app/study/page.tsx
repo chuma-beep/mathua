@@ -9,7 +9,9 @@ import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
+import MasteryBadge from '../../components/MasteryBadge'
 import { getLessons, type LessonInfo } from '../../lib/api'
+import { getUserInfo } from '../../lib/auth'
 
 const domainOrder = [
   'counting', 'arith', 'fractions', 'prealgebra',
@@ -61,6 +63,16 @@ const domainLabels: Record<string, string> = {
   'nt': 'Number Theory',
 }
 
+function lessonProgress(lesson: LessonInfo): { mastered: number; total: number } {
+  if (!lesson.progress) return { mastered: 0, total: lesson.concepts.length }
+  let mastered = 0
+  for (const cid of lesson.concepts) {
+    const p = lesson.progress[cid]
+    if (p && p.status === 'MASTERED') mastered++
+  }
+  return { mastered, total: lesson.concepts.length }
+}
+
 export default function StudyPage() {
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
@@ -68,7 +80,9 @@ export default function StudyPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getLessons().then(res => {
+    const user = getUserInfo()
+    const studentId = user?.student_id
+    getLessons(studentId).then(res => {
       setLessonsByDomain(res.lessons)
       setLoading(false)
     }).catch(() => setLoading(false))
@@ -129,23 +143,34 @@ export default function StudyPage() {
                 ← All domains
               </button>
               <SectionHeader label="Lesson" title={selectedLesson.title} />
-              <div className="bg-mathua-surface border border-mathua-border rounded-none p-8 mt-6">
-                <div className="text-mathua-secondary text-xs font-mono mb-4">
-                  Concepts: {selectedLesson.concepts.join(', ')}
+
+              <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mt-6 mb-6">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <span className="text-mathua-muted text-xs font-mono">Concepts in this lesson:</span>
+                  {selectedLesson.concepts.map((cid) => {
+                    const p = selectedLesson.progress?.[cid]
+                    return (
+                      <Link
+                        key={cid}
+                        href={`/concept?id=${encodeURIComponent(cid)}`}
+                        className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1 text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors rounded-none"
+                      >
+                        <MasteryBadge status={p?.status} size="sm" />
+                        <span>{cid}</span>
+                      </Link>
+                    )
+                  })}
                 </div>
+              </div>
+
+              <div className="bg-mathua-surface border border-mathua-border rounded-none p-8">
                 <KatexContent>{selectedLesson.body}</KatexContent>
               </div>
-              <div className="mt-6">
-                {selectedLesson.concepts.map((cid) => (
-                  <Link
-                    key={cid}
-                    href={`/concept?id=${encodeURIComponent(cid)}`}
-                    className="inline-block mr-2 mb-2 border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-3 py-1 text-xs font-mono rounded-none transition-colors"
-                  >
-                    Practice: {cid}
-                  </Link>
-                ))}
-              </div>
+
+              {selectedLesson.concepts.slice(0, 3).map(cid => (
+                <LessonQuiz key={cid} conceptId={cid} limit={4} />
+              ))}
+
               <div className="mt-8 text-center">
                 <Link
                   href={`/session`}
@@ -211,25 +236,49 @@ export default function StudyPage() {
                     </span>
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {lessonsByDomain[domain].map((lesson, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setSelectedLesson(lesson)}
-                        className="text-left bg-mathua-surface border border-mathua-border rounded-none p-4 hover:border-mathua-blue transition-colors group"
-                      >
-                        <div className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors">
-                          {lesson.title}
-                        </div>
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="font-mono text-[10px] text-mathua-muted">
-                            {lesson.concepts.length} concept{lesson.concepts.length !== 1 ? 's' : ''}
-                          </span>
-                          <span className="text-[10px] text-mathua-blue opacity-0 group-hover:opacity-100 transition-opacity">
-                            View →
-                          </span>
-                        </div>
-                      </button>
-                    ))}
+                    {lessonsByDomain[domain].map((lesson, i) => {
+                      const { mastered, total } = lessonProgress(lesson)
+                      const pct = total > 0 ? Math.round((mastered / total) * 100) : 0
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => setSelectedLesson(lesson)}
+                          className="text-left bg-mathua-surface border border-mathua-border rounded-none p-4 hover:border-mathua-blue transition-colors group"
+                        >
+                          <div className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors">
+                            {lesson.title}
+                          </div>
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <span className="font-mono text-[10px] text-mathua-muted">
+                              {total} concept{total !== 1 ? 's' : ''}
+                            </span>
+                            {lesson.progress && (
+                              <>
+                                <div className="flex-1 max-w-[100px] h-1.5 bg-mathua-code rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full bg-mathua-blue rounded-full transition-all"
+                                    style={{ width: `${pct}%` }}
+                                  />
+                                </div>
+                                <span className="font-mono text-[10px] text-mathua-muted">
+                                  {mastered}/{total}
+                                </span>
+                              </>
+                            )}
+                            <span className="text-[10px] text-mathua-blue opacity-0 group-hover:opacity-100 transition-opacity ml-auto">
+                              View →
+                            </span>
+                          </div>
+                          {lesson.progress && (
+                            <div className="flex items-center gap-1 mt-1.5">
+                              {lesson.concepts.map((cid) => (
+                                <MasteryBadge key={cid} status={lesson.progress?.[cid]?.status} size="sm" />
+                              ))}
+                            </div>
+                          )}
+                        </button>
+                      )
+                    })}
                   </div>
                 </div>
               ))}
