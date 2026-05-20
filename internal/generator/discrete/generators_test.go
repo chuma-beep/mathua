@@ -42,4 +42,5 @@ func TestGraphBasics(t *testing.T)  { fuzzGen(t, &graphBasicsGen{}, grader.Gradi
 func TestGraphPaths(t *testing.T)   { fuzzGen(t, &graphPathsGen{}, grader.GradingMultipleChoice) }
 func TestGraphTrees(t *testing.T)   { fuzzGen(t, &treesGen{}, grader.GradingNumeric) }
 func TestRecurrence(t *testing.T)   { fuzzGen(t, &recurrenceGen{}, grader.GradingNumeric) }
-func TestInduction(t *testing.T)    { fuzzGen(t, &inductionGen{}, grader.GradingMultipleChoice) }
+func TestInduction(t *testing.T)         { fuzzGen(t, &inductionGen{}, grader.GradingMultipleChoice) }
+func TestBinomialTheorem(t *testing.T)  { fuzzGen(t, &binomialTheoremGen{}, grader.GradingNumeric) }

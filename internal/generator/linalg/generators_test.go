@@ -46,4 +46,8 @@ func TestTransformations(t *testing.T) {
 	fuzzGen(t, &transformationsGen{}, grader.GradingTuple)
 }
 func TestSpan(t *testing.T)  { fuzzGen(t, &spanGen{}, grader.GradingMultipleChoice) }
-func TestBasis(t *testing.T) { fuzzGen(t, &basisGen{}, grader.GradingMultipleChoice) }
+func TestBasis(t *testing.T)         { fuzzGen(t, &basisGen{}, grader.GradingMultipleChoice) }
+func TestDiagonalization(t *testing.T) { fuzzGen(t, &diagonalizationGen{}, grader.GradingMultipleChoice) }
+func TestRank(t *testing.T)            { fuzzGen(t, &rankGen{}, grader.GradingNumeric) }
+func TestCosineSimilarity(t *testing.T) { fuzzGen(t, &cosineSimilarityGen{}, grader.GradingNumeric) }
+func TestParametric(t *testing.T)      { fuzzGen(t, &parametricGen{}, grader.GradingMultipleChoice) }

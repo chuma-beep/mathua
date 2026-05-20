@@ -382,6 +382,41 @@ func main() {
 		}
 	}
 
+	m.OnConceptDetail = func(conceptID string) tui.ConceptDetailMsg {
+		detail, err := eng.ConceptDetail(studentID, conceptID)
+		if err != nil {
+			return tui.ConceptDetailMsg{}
+		}
+		prereqs := make([]tui.PrereqInfo, len(detail.Prerequisites))
+		for i, p := range detail.Prerequisites {
+			prereqs[i] = tui.PrereqInfo{
+				ID:         p.ID,
+				Label:      p.Label,
+				Status:     p.Status,
+				MasteryPct: p.MasteryPct,
+			}
+		}
+		msg := tui.ConceptDetailMsg{
+			ConceptID:    detail.Concept.ID,
+			Label:        detail.Concept.Label,
+			Domain:       detail.Concept.Domain,
+			Subdomain:    detail.Concept.Subdomain,
+			Prerequisites: prereqs,
+			Unlocked:     detail.Unlocked,
+		}
+		if detail.Lesson != nil {
+			msg.LessonTitle = detail.Lesson.Title
+			msg.LessonBody = detail.Lesson.Body
+		}
+		if detail.Progress != nil {
+			msg.Status = detail.Progress.Status
+			msg.Streak = detail.Progress.Streak
+			msg.StreakNeeded = detail.Progress.RequiredStreak
+			msg.MasteryPct = detail.Progress.MasteryPct
+		}
+		return msg
+	}
+
 	m.OnDiagStart = func() tui.DiagQuestionMsg {
 		if diagSession == nil || eng.IsDiagnosticComplete(diagSession) {
 			diagSession = eng.StartDiagnostic()

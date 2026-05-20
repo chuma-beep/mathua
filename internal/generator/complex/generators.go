@@ -20,9 +20,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("complex.adv.de_moivre", &deMoivreGen{})
 	reg.Register("complex.adv.roots", &rootsGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("complex.adv.exponential", &generator.Stub{ConceptID: "complex.adv.exponential"})
-	reg.Register("complex.adv.inequalities", &generator.Stub{ConceptID: "complex.adv.inequalities"})
+	reg.Register("complex.adv.exponential", &exponentialGen{})
+	reg.Register("complex.adv.inequalities", &inequalitiesGen{})
 }
 
 func fmtComplex(r, i int) string {
@@ -201,6 +200,84 @@ func (g *deMoivreGen) Generate(difficulty float64) generator.Problem {
 }
 
 type rootsGen struct{}
+
+type exponentialGen struct{}
+
+func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		theta    int
+		realPart int
+		imagPart int
+	}
+	angles := []entry{
+		{0, 1, 0},
+		{90, 0, 1},
+		{180, -1, 0},
+		{270, 0, -1},
+		{45, 0, 1},  // actually √2/2, but approximated with magnitude
+		{60, 0, 1},  // actually 1/2, but we use magnitude
+	}
+	e := angles[rand.Intn(len(angles))]
+	r := rand.Intn(4) + 2
+	if e.theta != 0 && e.theta != 90 && e.theta != 180 && e.theta != 270 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Does e^(iθ) = cos θ + i sin θ hold for θ = %d°? (yes/no)", e.theta),
+			Answer:      "yes",
+			Explanation: "Euler's formula e^(iθ) = cos θ + i sin θ holds for all real θ.",
+		}
+	}
+	realPart := r * e.realPart
+	imagPart := r * e.imagPart
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Write %d e^(i·%d°) in rectangular form (a+bi).", r, e.theta),
+			Answer:      fmtComplex(realPart, imagPart),
+			Explanation: fmt.Sprintf("%d(cos %d° + i sin %d°) = %d(%d) + %d(%d)i = %s", r, e.theta, e.theta, r, e.realPart, r, e.imagPart, fmtComplex(realPart, imagPart)),
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Convert %s to polar exponential form using Euler's formula.", fmtComplex(realPart, imagPart)),
+		Answer:      fmt.Sprintf("%d e^(i·%d°)", r, e.theta),
+		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = %d°, so %s = %d e^(i·%d°)", realPart, imagPart, r, e.theta, fmtComplex(realPart, imagPart), r, e.theta),
+	}
+}
+
+type inequalitiesGen struct{}
+
+func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		a, b    int
+		desc    string
+	}
+	entries := []entry{
+		{3, 4, "|3+4i|"},
+		{5, 12, "|5+12i|"},
+		{8, 6, "|8+6i|"},
+		{7, 24, "|7+24i|"},
+		{9, 12, "|9+12i|"},
+	}
+	e := entries[rand.Intn(len(entries))]
+	if rand.Intn(2) == 0 {
+		mag := int(math.Sqrt(float64(e.a*e.a + e.b*e.b)))
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is %s?", e.desc),
+			Answer:      fmt.Sprintf("%d", mag),
+			Explanation: fmt.Sprintf("|%d+%di| = √(%d²+%d²) = √%d = %d", e.a, e.b, e.a, e.b, e.a*e.a+e.b*e.b, mag),
+		}
+	}
+	r1 := rand.Intn(5) + 1
+	i1 := rand.Intn(5) + 1
+	r2 := rand.Intn(5) + 1
+	i2 := rand.Intn(5) + 1
+	// Triangle inequality: |z1+z2| ≤ |z1|+|z2|
+	s := fmtComplex(r1, i1)
+	t := fmtComplex(r2, i2)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Let z₁=%s, z₂=%s. Which is always true? (enter '≤' for |z₁+z₂| ≤ |z₁|+|z₂|, or '≥' for the reverse)", s, t),
+		Answer:      "≤",
+		Explanation: "The triangle inequality |z₁+z₂| ≤ |z₁|+|z₂| holds for all complex numbers.",
+	}
+}
 
 func (g *rootsGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(4) + 1

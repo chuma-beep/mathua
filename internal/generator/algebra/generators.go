@@ -63,48 +63,47 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.conic.circle", &conicCircleGen{})
 	reg.Register("alg.conic.ellipse", &conicEllipseGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("alg.conic.parabola", &generator.Stub{ConceptID: "alg.conic.parabola"})
-	reg.Register("alg.conic.hyperbola", &generator.Stub{ConceptID: "alg.conic.hyperbola"})
-	reg.Register("alg.eq.absolute_value", &generator.Stub{ConceptID: "alg.eq.absolute_value"})
-	reg.Register("alg.eq.binomial", &generator.Stub{ConceptID: "alg.eq.binomial"})
-	reg.Register("alg.eq.exponential", &generator.Stub{ConceptID: "alg.eq.exponential"})
-	reg.Register("alg.eq.extraneous_roots", &generator.Stub{ConceptID: "alg.eq.extraneous_roots"})
-	reg.Register("alg.eq.irrational", &generator.Stub{ConceptID: "alg.eq.irrational"})
-	reg.Register("alg.eq.logarithmic", &generator.Stub{ConceptID: "alg.eq.logarithmic"})
-	reg.Register("alg.eq.polynomial", &generator.Stub{ConceptID: "alg.eq.polynomial"})
-	reg.Register("alg.eq.rational", &generator.Stub{ConceptID: "alg.eq.rational"})
-	reg.Register("alg.eq.trinomial", &generator.Stub{ConceptID: "alg.eq.trinomial"})
-	reg.Register("alg.func.absolute_value", &generator.Stub{ConceptID: "alg.func.absolute_value"})
-	reg.Register("alg.func.composite", &generator.Stub{ConceptID: "alg.func.composite"})
-	reg.Register("alg.func.dirichlet", &generator.Stub{ConceptID: "alg.func.dirichlet"})
-	reg.Register("alg.func.domain", &generator.Stub{ConceptID: "alg.func.domain"})
-	reg.Register("alg.func.even_odd", &generator.Stub{ConceptID: "alg.func.even_odd"})
-	reg.Register("alg.func.graph_analysis", &generator.Stub{ConceptID: "alg.func.graph_analysis"})
-	reg.Register("alg.func.inverse", &generator.Stub{ConceptID: "alg.func.inverse"})
-	reg.Register("alg.func.monotonicity", &generator.Stub{ConceptID: "alg.func.monotonicity"})
-	reg.Register("alg.func.rational", &generator.Stub{ConceptID: "alg.func.rational"})
-	reg.Register("alg.func.sigmoid", &generator.Stub{ConceptID: "alg.func.sigmoid"})
-	reg.Register("alg.func.sign", &generator.Stub{ConceptID: "alg.func.sign"})
-	reg.Register("alg.ineq.absolute_value", &generator.Stub{ConceptID: "alg.ineq.absolute_value"})
-	reg.Register("alg.ineq.interval", &generator.Stub{ConceptID: "alg.ineq.interval"})
-	reg.Register("alg.ineq.irrational", &generator.Stub{ConceptID: "alg.ineq.irrational"})
-	reg.Register("alg.ineq.logarithmic", &generator.Stub{ConceptID: "alg.ineq.logarithmic"})
-	reg.Register("alg.ineq.quadratic", &generator.Stub{ConceptID: "alg.ineq.quadratic"})
-	reg.Register("alg.ineq.rational", &generator.Stub{ConceptID: "alg.ineq.rational"})
-	reg.Register("alg.ineq.sign_analysis", &generator.Stub{ConceptID: "alg.ineq.sign_analysis"})
-	reg.Register("alg.ineq.systems", &generator.Stub{ConceptID: "alg.ineq.systems"})
-	reg.Register("alg.poly.division", &generator.Stub{ConceptID: "alg.poly.division"})
-	reg.Register("alg.poly.monomial", &generator.Stub{ConceptID: "alg.poly.monomial"})
-	reg.Register("alg.poly.roots", &generator.Stub{ConceptID: "alg.poly.roots"})
-	reg.Register("alg.poly.synthetic_division", &generator.Stub{ConceptID: "alg.poly.synthetic_division"})
-	reg.Register("alg.poly.vieta", &generator.Stub{ConceptID: "alg.poly.vieta"})
-	reg.Register("alg.quad.complex", &generator.Stub{ConceptID: "alg.quad.complex"})
-	reg.Register("alg.quad.incomplete", &generator.Stub{ConceptID: "alg.quad.incomplete"})
-	reg.Register("alg.quad.parametric", &generator.Stub{ConceptID: "alg.quad.parametric"})
-	reg.Register("alg.quad.quadratic", &generator.Stub{ConceptID: "alg.quad.quadratic"})
-	reg.Register("alg.systems.concept", &generator.Stub{ConceptID: "alg.systems.concept"})
-	reg.Register("alg.systems.gaussian", &generator.Stub{ConceptID: "alg.systems.gaussian"})
+	reg.Register("alg.conic.parabola", &conicParabolaGen{})
+	reg.Register("alg.conic.hyperbola", &conicHyperbolaGen{})
+	reg.Register("alg.eq.absolute_value", &eqAbsValGen{})
+	reg.Register("alg.eq.binomial", &eqBinomialGen{})
+	reg.Register("alg.eq.exponential", &eqExpGen{})
+	reg.Register("alg.eq.extraneous_roots", &extraneousRootsGen{})
+	reg.Register("alg.eq.irrational", &eqIrrationalGen{})
+	reg.Register("alg.eq.logarithmic", &eqLogGen{})
+	reg.Register("alg.eq.polynomial", &eqPolyGen{})
+	reg.Register("alg.eq.rational", &eqRationalGen{})
+	reg.Register("alg.eq.trinomial", &eqTrinomialGen{})
+	reg.Register("alg.func.absolute_value", &funcAbsValGen{})
+	reg.Register("alg.func.composite", &funcCompositeGen{})
+	reg.Register("alg.func.dirichlet", &funcDirichletGen{})
+	reg.Register("alg.func.domain", &funcDomainGen{})
+	reg.Register("alg.func.even_odd", &funcEvenOddGen{})
+	reg.Register("alg.func.graph_analysis", &graphAnalysisGen{})
+	reg.Register("alg.func.inverse", &funcInverseGen{})
+	reg.Register("alg.func.monotonicity", &monotonicityGen{})
+	reg.Register("alg.func.rational", &funcRationalGen{})
+	reg.Register("alg.func.sigmoid", &funcSigmoidGen{})
+	reg.Register("alg.func.sign", &funcSignGen{})
+	reg.Register("alg.ineq.absolute_value", &ineqAbsValGen{})
+	reg.Register("alg.ineq.interval", &ineqIntervalGen{})
+	reg.Register("alg.ineq.irrational", &ineqIrrationalGen{})
+	reg.Register("alg.ineq.logarithmic", &ineqLogGen{})
+	reg.Register("alg.ineq.quadratic", &ineqQuadraticGen{})
+	reg.Register("alg.ineq.rational", &ineqRationalGen{})
+	reg.Register("alg.ineq.sign_analysis", &signAnalysisGen{})
+	reg.Register("alg.ineq.systems", &ineqSystemsGen{})
+	reg.Register("alg.poly.division", &polyDivisionGen{})
+	reg.Register("alg.poly.monomial", &polyMonomialGen{})
+	reg.Register("alg.poly.roots", &polyRootsGen{})
+	reg.Register("alg.poly.synthetic_division", &synthDivGen{})
+	reg.Register("alg.poly.vieta", &vietaGen{})
+	reg.Register("alg.quad.complex", &quadComplexGen{})
+	reg.Register("alg.quad.incomplete", &quadIncompleteGen{})
+	reg.Register("alg.quad.parametric", &quadParametricGen{})
+	reg.Register("alg.quad.quadratic", &quadQuadraticGen{})
+	reg.Register("alg.systems.concept", &systemsConceptGen{})
+	reg.Register("alg.systems.gaussian", &gaussianElimGen{})
 }
 
 // ---------------------------------------------------------------------------
@@ -877,5 +876,640 @@ func (g *conicEllipseGen) Generate(difficulty float64) generator.Problem {
 		Question:    fmt.Sprintf("What is the %s axis length of (x%+d)²/%d + (y%+d)²/%d = 1?", label, -h, a2, -k, b2),
 		Answer:      fmt.Sprintf("%d", val),
 		Explanation: fmt.Sprintf("The %s axis length is %d because %s² = %d.", label, val, label[:6], val*val),
+	}
+}
+
+// ============= conic =============
+
+type conicParabolaGen struct{}
+
+func (g *conicParabolaGen) Generate(difficulty float64) generator.Problem {
+	h := rand.Intn(5) - 2
+	k := rand.Intn(5) - 2
+	p := rand.Intn(3) + 1
+	if rand.Intn(2) == 0 { p = -p }
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Parabola: (x%+d)² = %d(y%+d). Which direction does it open?", -h, 4*p, -k),
+			Answer:      map[bool]string{true: "up", false: "down"}[p > 0],
+			Explanation: fmt.Sprintf("If 4p > 0, opens up; if 4p < 0, opens down. Here 4p = %d.", 4*p),
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Parabola: (y%+d)² = %d(x%+d). Which direction does it open?", -k, 4*p, -h),
+		Answer:      map[bool]string{true: "right", false: "left"}[p > 0],
+		Explanation: fmt.Sprintf("If 4p > 0, opens right; if 4p < 0, opens left. Here 4p = %d.", 4*p),
+	}
+}
+
+type conicHyperbolaGen struct{}
+
+func (g *conicHyperbolaGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(3) + 2
+	b := rand.Intn(2) + 1
+	h := rand.Intn(3) - 1
+	k := rand.Intn(3) - 1
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Hyperbola: (x%+d)²/%d - (y%+d)²/%d = 1. Which axis is transverse?", -h, a*a, -k, b*b),
+			Answer:      "horizontal (x-axis)",
+			Explanation: fmt.Sprintf("x term positive → horizontal transverse axis."),
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Hyperbola: (y%+d)²/%d - (x%+d)²/%d = 1. Which axis is transverse?", -k, a*a, -h, b*b),
+		Answer:      "vertical (y-axis)",
+		Explanation: fmt.Sprintf("y term positive → vertical transverse axis."),
+	}
+}
+
+// ============= equations =============
+
+type eqAbsValGen struct{}
+
+func (g *eqAbsValGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(8) + 1
+	b := rand.Intn(10) - 5
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: |x + %d| = %d", b, a),
+		Answer:      fmt.Sprintf("%d,%d", a-b, -a-b),
+		Explanation: fmt.Sprintf("x + %d = %d or x + %d = -%d → x = %d or x = %d.", b, a, b, a, a-b, -a-b),
+	}
+}
+
+type eqBinomialGen struct{}
+
+func (g *eqBinomialGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(6) + 1
+	k := rand.Intn(4) + 2
+	rhs := mathutil.IntPow(k, r)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: x^%d = %d", r, rhs),
+		Answer:      fmt.Sprintf("%d", k),
+		Explanation: fmt.Sprintf("x^%d = %d → x = %d^(1/%d) = %d.", r, rhs, rhs, r, k),
+	}
+}
+
+type eqExpGen struct{}
+
+func (g *eqExpGen) Generate(difficulty float64) generator.Problem {
+	b := rand.Intn(4) + 2
+	e := rand.Intn(4) + 1
+	p := rand.Intn(3) + 1
+	rhs := mathutil.IntPow(b, e+p)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: %d^(x-%d) = %d", b, p, rhs),
+		Answer:      fmt.Sprintf("%d", e+p),
+		Explanation: fmt.Sprintf("%d^(x-%d) = %d^%d → x-%d = %d → x = %d.", b, p, b, e+p, p, e, e+p),
+	}
+}
+
+type extraneousRootsGen struct{}
+
+func (g *extraneousRootsGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Why must you check solutions when squaring both sides of an equation?", "squaring can introduce extraneous roots", "Squaring is not reversible: if a=b then a²=b², but not vice versa."},
+		{"Solve √(x) = -2. How many solutions?", "0", "The principal square root is always ≥ 0, so √(x) = -2 has no solution."},
+		{"When solving √(x+3) = x-3, what should you check after finding candidates?", "substitute back into original equation", "Extraneous roots satisfy the squared equation but not the original."},
+		{"Multiplying both sides by a variable expression can introduce extraneous roots. (true/false)", "true", "If you multiply by something that equals 0 for some x, you may introduce extraneous solutions."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type eqIrrationalGen struct{}
+
+func (g *eqIrrationalGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(8) + 2
+	k := x * x
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: √(x) = %d", x),
+		Answer:      fmt.Sprintf("%d", k),
+		Explanation: fmt.Sprintf("Square both sides: x = %d² = %d.", x, k),
+	}
+}
+
+type eqLogGen struct{}
+
+func (g *eqLogGen) Generate(difficulty float64) generator.Problem {
+	b := rand.Intn(3) + 2
+	e := rand.Intn(3) + 1
+	v := mathutil.IntPow(b, e)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: log_%d(x) = %d", b, e),
+		Answer:      fmt.Sprintf("%d", v),
+		Explanation: fmt.Sprintf("log_%d(x) = %d → x = %d^%d = %d.", b, e, b, e, v),
+	}
+}
+
+type eqPolyGen struct{}
+
+func (g *eqPolyGen) Generate(difficulty float64) generator.Problem {
+	r1 := rand.Intn(6) - 3
+	r2 := rand.Intn(6) - 3
+	// (x - r1)(x - r2) = 0
+	b := -(r1 + r2)
+	c := r1 * r2
+	q := formatQuadratic(b, c)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve polynomial: %s = 0", q),
+		Answer:      fmt.Sprintf("%d,%d", r1, r2),
+		Explanation: fmt.Sprintf("(x %+d)(x %+d) = 0 → x = %d or x = %d.", -r1, -r2, r1, r2),
+	}
+}
+
+type eqRationalGen struct{}
+
+func (g *eqRationalGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(8) + 2
+	a := rand.Intn(5) + 1
+	b := rand.Intn(5) + 1
+	rhs := a * x / b
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: %dx/%d = %d", a, b, rhs),
+		Answer:      fmt.Sprintf("%d", x),
+		Explanation: fmt.Sprintf("Multiply both sides by %d: %dx = %d → x = %d.", b, a, rhs*b, x),
+	}
+}
+
+type eqTrinomialGen struct{}
+
+func (g *eqTrinomialGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(6) + 2
+	// x^2 + 2r x + r^2 = 0
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: x^2 + %dx + %d = 0", 2*r, r*r),
+		Answer:      fmt.Sprintf("%d", -r),
+		Explanation: fmt.Sprintf("(x + %d)² = 0 → x = %d.", r, -r),
+	}
+}
+
+// ============= functions =============
+
+type funcAbsValGen struct{}
+
+func (g *funcAbsValGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(10) - 5
+	return generator.Problem{
+		Question:    fmt.Sprintf("If f(x) = |x|, what is f(%d)?", x),
+		Answer:      fmt.Sprintf("%d", mathutil.Abs(x)),
+		Explanation: fmt.Sprintf("|%d| = %d.", x, mathutil.Abs(x)),
+	}
+}
+
+type funcCompositeGen struct{}
+
+func (g *funcCompositeGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(5) + 1
+	a := rand.Intn(4) + 1
+	b := rand.Intn(4) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("If f(x) = %dx and g(x) = x + %d, what is f(g(%d))?", a, b, x),
+		Answer:      fmt.Sprintf("%d", a*(x+b)),
+		Explanation: fmt.Sprintf("g(%d) = %d+%d = %d. f(g(%d)) = f(%d) = %d×%d = %d.", x, x, b, x+b, x, x+b, a, x+b, a*(x+b)),
+	}
+}
+
+type funcDirichletGen struct{}
+
+func (g *funcDirichletGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the Dirichlet function?", "D(x) = 1 if x is rational, 0 if x is irrational", "The Dirichlet function is nowhere continuous."},
+		{"Is the Dirichlet function continuous anywhere?", "no", "The Dirichlet function is discontinuous at every point."},
+		{"Is the Dirichlet function periodic?", "yes", "The Dirichlet function is periodic with any rational period."},
+		{"Is the Dirichlet function Riemann integrable?", "no", "The Dirichlet function is not Riemann integrable on any interval."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type funcDomainGen struct{}
+
+func (g *funcDomainGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the domain of f(x) = 1/x?", "x ≠ 0", "Division by zero is undefined, so x cannot be 0."},
+		{"What is the domain of f(x) = √(x)?", "x ≥ 0", "The square root of a negative number is not real."},
+		{"What is the domain of f(x) = ln(x)?", "x > 0", "The natural log of zero or negative numbers is undefined."},
+		{"What is the domain of f(x) = 1/(x-2)?", "x ≠ 2", "The denominator is zero at x = 2."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type funcEvenOddGen struct{}
+
+func (g *funcEvenOddGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Is f(x) = x² even or odd?", "even", "f(-x) = (-x)² = x² = f(x), so it is even."},
+		{"Is f(x) = x³ even or odd?", "odd", "f(-x) = (-x)³ = -x³ = -f(x), so it is odd."},
+		{"Is f(x) = sin(x) even or odd?", "odd", "sin(-x) = -sin(x), so sine is odd."},
+		{"Is f(x) = cos(x) even or odd?", "even", "cos(-x) = cos(x), so cosine is even."},
+		{"Is f(x) = x² + 1 even or odd?", "even", "f(-x) = (-x)²+1 = x²+1 = f(x), so it is even."},
+		{"Is f(x) = |x| even or odd?", "even", "|-x| = |x|, so absolute value is even."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type graphAnalysisGen struct{}
+
+func (g *graphAnalysisGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What does the y-intercept tell you about a function?", "the output when x = 0", "The y-intercept is f(0), the value at x = 0."},
+		{"On a graph, what are the x-intercepts?", "where f(x) = 0", "X-intercepts are the real roots/solutions of f(x) = 0."},
+		{"What does f'(x) > 0 on an interval tell you?", "f is increasing", "A positive derivative means the function is increasing."},
+		{"What does a vertical asymptote indicate?", "the function approaches ±∞ at that x", "As x → a, f(x) → ±∞ at a vertical asymptote x = a."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type funcInverseGen struct{}
+
+func (g *funcInverseGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) + 2
+	b := rand.Intn(10) - 5
+	return generator.Problem{
+		Question:    fmt.Sprintf("If f(x) = %dx + %d, what is f⁻¹(x)?", a, b),
+		Answer:      fmt.Sprintf("(x %+d)/%d", -b, a),
+		Explanation: fmt.Sprintf("y = %dx + %d → x = (y %+d)/%d → f⁻¹(x) = (x %+d)/%d.", a, b, -b, a, -b, a),
+	}
+}
+
+type monotonicityGen struct{}
+
+func (g *monotonicityGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) + 1
+	if rand.Intn(2) == 0 { a = -a }
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is f(x) = %dx increasing or decreasing on R?", a),
+		Answer:      map[bool]string{true: "increasing", false: "decreasing"}[a > 0],
+		Explanation: fmt.Sprintf("Slope = %d. %s slope means the function is %s.", a, map[bool]string{true: "Positive", false: "Negative"}[a > 0], map[bool]string{true: "increasing", false: "decreasing"}[a > 0]),
+	}
+}
+
+type funcRationalGen struct{}
+
+func (g *funcRationalGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(4) + 1
+	b := rand.Intn(4) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the vertical asymptote of f(x) = %d/(x-%d)?", a, b),
+		Answer:      fmt.Sprintf("%d", b),
+		Explanation: fmt.Sprintf("The denominator is zero at x = %d, so there is a vertical asymptote at x = %d.", b, b),
+	}
+}
+
+type funcSigmoidGen struct{}
+
+func (g *funcSigmoidGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the range of the sigmoid function σ(x) = 1/(1+e⁻ˣ)?", "(0, 1)", "The sigmoid maps all real numbers to the open interval (0,1)."},
+		{"What is σ(0) for the sigmoid function?", "0.5", "σ(0) = 1/(1+e⁰) = 1/2 = 0.5."},
+		{"The sigmoid function is commonly used as an ____ function in neural networks.", "activation", "The sigmoid is a popular activation function that introduces non-linearity."},
+		{"As x → ∞, σ(x) approaches ____.", "1", "As x → ∞, e⁻ˣ → 0, so σ(x) → 1."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type funcSignGen struct{}
+
+func (g *funcSignGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(10) - 5
+	if x == 0 { x = 3 }
+	ans := "positive"
+	if x < 0 { ans = "negative" }
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the sign of f(x) = x at x = %d?", x),
+		Answer:      ans,
+		Explanation: fmt.Sprintf("At x = %d, f(x) = %d, which is %s.", x, x, ans),
+	}
+}
+
+// ============= inequalities =============
+
+type ineqAbsValGen struct{}
+
+func (g *ineqAbsValGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: |x| < %d", a),
+		Answer:      fmt.Sprintf("-%d < x < %d", a, a),
+		Explanation: fmt.Sprintf("|x| < %d means -%d < x < %d.", a, a, a),
+	}
+}
+
+type ineqIntervalGen struct{}
+
+func (g *ineqIntervalGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) - 3
+	b := a + rand.Intn(5) + 2
+	types := []struct {
+		q string
+		a string
+	}{
+		{fmt.Sprintf("Write in interval notation: %d ≤ x < %d.", a, b), fmt.Sprintf("[%d,%d)", a, b)},
+		{fmt.Sprintf("Write in interval notation: x > %d.", a), fmt.Sprintf("(%d,∞)", a)},
+		{fmt.Sprintf("Write in interval notation: x ≤ %d.", b), fmt.Sprintf("(-∞,%d]", b)},
+		{fmt.Sprintf("Write in interval notation: %d < x < %d.", a, b), fmt.Sprintf("(%d,%d)", a, b)},
+	}
+	e := types[rand.Intn(len(types))]
+	return generator.Problem{
+		Question: e.q, Answer: e.a,
+		Explanation: fmt.Sprintf("The interval notation for this set is %s.", e.a),
+	}
+}
+
+type ineqIrrationalGen struct{}
+
+func (g *ineqIrrationalGen) Generate(difficulty float64) generator.Problem {
+	x := rand.Intn(8) + 2
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: √(x) > %d", x),
+		Answer:      fmt.Sprintf("x > %d", x*x),
+		Explanation: fmt.Sprintf("√(x) > %d → x > %d² = %d (x ≥ 0 implied).", x, x, x*x),
+	}
+}
+
+type ineqLogGen struct{}
+
+func (g *ineqLogGen) Generate(difficulty float64) generator.Problem {
+	b := rand.Intn(3) + 2
+	e := rand.Intn(3) + 1
+	v := mathutil.IntPow(b, e)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: log_%d(x) > %d", b, e),
+		Answer:      fmt.Sprintf("x > %d", v),
+		Explanation: fmt.Sprintf("log_%d(x) > %d → x > %d^%d = %d (base > 1 preserves inequality).", b, e, b, e, v),
+	}
+}
+
+type ineqQuadraticGen struct{}
+
+func (g *ineqQuadraticGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: x² - %d < 0", r*r),
+		Answer:      fmt.Sprintf("-%d < x < %d", r, r),
+		Explanation: fmt.Sprintf("x² - %d < 0 → (x-%d)(x+%d) < 0 → -%d < x < %d.", r*r, r, r, r, r),
+	}
+}
+
+type ineqRationalGen struct{}
+
+func (g *ineqRationalGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: 1/(x-%d) > 0", a),
+		Answer:      fmt.Sprintf("x > %d", a),
+		Explanation: fmt.Sprintf("numerator is always positive 1, so 1/(x-%d) > 0 when x-%d > 0 → x > %d.", a, a, a),
+	}
+}
+
+type signAnalysisGen struct{}
+
+func (g *signAnalysisGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("Analyze the sign of f(x) = (x+%d)(x-%d) for x < -%d.", r, r, r),
+		Answer:      "positive",
+		Explanation: fmt.Sprintf("For x < -%d: both (x+%d) and (x-%d) are negative, product is positive.", r, r, r),
+	}
+}
+
+type ineqSystemsGen struct{}
+
+func (g *ineqSystemsGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(4) + 2
+	b := rand.Intn(5) - 2
+	x := rand.Intn(4) + 1
+	y := a*x + b + rand.Intn(3)
+	satisfies := y > a*x + b
+	ans := map[bool]string{true: "yes", false: "no"}[satisfies]
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is (%d,%d) a solution to y > %dx + %d?", x, y, a, b),
+		Answer:      ans,
+		Explanation: fmt.Sprintf("At x=%d: RHS = %d(%d)+%d = %d. y=%d %s %d, so %s.", x, a, x, b, a*x+b, y, map[bool]string{true: ">", false: "≤"}[satisfies], a*x+b, ans),
+	}
+}
+
+// ============= polynomials =============
+
+type polyDivisionGen struct{}
+
+func (g *polyDivisionGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(6) + 1
+	a := rand.Intn(4) + 1
+	// (ax^2 + r*x) / x = ax + r
+	return generator.Problem{
+		Question:    fmt.Sprintf("Simplify: (%dx² + %dx) / x", a, r*a),
+		Answer:      fmt.Sprintf("%dx + %d", a, r*a),
+		Explanation: fmt.Sprintf("Divide each term: %dx²/x = %dx, %dx/x = %d.", a, a, r*a, r*a),
+	}
+}
+
+type polyMonomialGen struct{}
+
+func (g *polyMonomialGen) Generate(difficulty float64) generator.Problem {
+	a := rand.Intn(5) + 1
+	n := rand.Intn(4) + 2
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the degree of %dx^%d?", a, n),
+		Answer:      fmt.Sprintf("%d", n),
+		Explanation: fmt.Sprintf("The monomial %dx^%d has degree %d.", a, n, n),
+	}
+}
+
+type polyRootsGen struct{}
+
+func (g *polyRootsGen) Generate(difficulty float64) generator.Problem {
+	r1 := rand.Intn(6) - 3
+	r2 := rand.Intn(6) - 3
+	b := -(r1 + r2)
+	c := r1 * r2
+	return generator.Problem{
+		Question:    fmt.Sprintf("Find the roots of x² + %dx + %d = 0.", b, c),
+		Answer:      fmt.Sprintf("%d,%d", r1, r2),
+		Explanation: fmt.Sprintf("(x %+d)(x %+d) = 0 → roots are %d and %d.", -r1, -r2, r1, r2),
+	}
+}
+
+type synthDivGen struct{}
+
+func (g *synthDivGen) Generate(difficulty float64) generator.Problem {
+	r := rand.Intn(6) - 3
+	a := rand.Intn(4) + 1
+	b := rand.Intn(5) - 2
+	// (ax^2 + bx - ar) / (x - r) = ax + (ar + b)
+	return generator.Problem{
+		Question:    fmt.Sprintf("Use synthetic division to divide (%dx² + %dx) by (x - %d). What is the quotient?", a, b, r),
+		Answer:      fmt.Sprintf("%dx + %d", a, b+a*r),
+		Explanation: fmt.Sprintf("Synthetic division by %d gives coefficients %d and %d → %dx + %d.", r, a, b+a*r, a, b+a*r),
+	}
+}
+
+type vietaGen struct{}
+
+func (g *vietaGen) Generate(difficulty float64) generator.Problem {
+	r1 := rand.Intn(6) + 1
+	r2 := rand.Intn(6) + 1
+	b := -(r1 + r2)
+	c := r1 * r2
+	return generator.Problem{
+		Question:    fmt.Sprintf("For x² + %dx + %d = 0, what is the sum of the roots?", b, c),
+		Answer:      fmt.Sprintf("%d", r1+r2),
+		Explanation: fmt.Sprintf("By Vieta: sum of roots = -b = %d. Roots are %d and %d, sum = %d.", -b, r1, r2, r1+r2),
+	}
+}
+
+// ============= quadratics =============
+
+type quadComplexGen struct{}
+
+func (g *quadComplexGen) Generate(difficulty float64) generator.Problem {
+	b := rand.Intn(6) + 2
+	c := (b*b)/4 + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many real solutions does x² + %dx + %d = 0 have?", b, c),
+		Answer:      "0",
+		Explanation: fmt.Sprintf("Discriminant = %d² - 4(%d) = %d - %d = %d < 0 → two complex (non-real) solutions.", b, c, b*b, 4*c, b*b-4*c),
+	}
+}
+
+type quadIncompleteGen struct{}
+
+func (g *quadIncompleteGen) Generate(difficulty float64) generator.Problem {
+	k := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("Solve: x² - %d = 0", k*k),
+		Answer:      fmt.Sprintf("%d,%d", k, -k),
+		Explanation: fmt.Sprintf("x² = %d → x = ±√%d = ±%d.", k*k, k*k, k),
+	}
+}
+
+type quadParametricGen struct{}
+
+func (g *quadParametricGen) Generate(difficulty float64) generator.Problem {
+	p := rand.Intn(5) + 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("For what value(s) of k does x² + %dx + %d = 0 have exactly one solution?", 2*p, p*p),
+		Answer:      fmt.Sprintf("%d", p),
+		Explanation: fmt.Sprintf("Discriminant = 0: (%d)² - 4(%d) = %d - %d = 0 → k = %d.", 2*p, p*p, 4*p*p, 4*p*p, p),
+	}
+}
+
+type quadQuadraticGen struct{}
+
+func (g *quadQuadraticGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the standard form of a quadratic equation?", "ax² + bx + c = 0", "Standard form: ax² + bx + c = 0 where a ≠ 0."},
+		{"What is the quadratic formula?", "x = [-b ± √(b²-4ac)]/(2a)", "The quadratic formula solves ax² + bx + c = 0."},
+		{"What does the discriminant determine?", "the number and type of solutions", "b²-4ac > 0: two real; = 0: one real; < 0: two complex."},
+		{"The graph of a quadratic function is a ____.", "parabola", "f(x) = ax² + bx + c graphs as a parabola."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+// ============= systems =============
+
+type systemsConceptGen struct{}
+
+func (g *systemsConceptGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What does it mean to solve a system of equations?", "find values satisfying all equations simultaneously", "The solution makes every equation in the system true."},
+		{"How many solutions can a system of two linear equations have?", "0, 1, or infinitely many", "Two lines can intersect once, be parallel (0), or be the same line (∞)."},
+		{"What is a consistent system?", "a system with at least one solution", "Consistent: at least one solution exists."},
+		{"What is an inconsistent system?", "a system with no solution", "Inconsistent: parallel lines that never intersect."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
+	}
+}
+
+type gaussianElimGen struct{}
+
+func (g *gaussianElimGen) Generate(difficulty float64) generator.Problem {
+	// 2x2 system with integer solution
+	x := rand.Intn(5) - 2
+	y := rand.Intn(5) - 2
+	a := rand.Intn(4) + 1
+	b := rand.Intn(4) + 1
+	c := rand.Intn(4) + 1
+	d := rand.Intn(4) + 1
+	// Ensure determinant ≠ 0
+	for a*d-b*c == 0 {
+		d++
+	}
+	e1 := a*x + b*y
+	e2 := c*x + d*y
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Solve using elimination: %dx + %dy = %d, %dx + %dy = %d", a, b, e1, c, d, e2),
+			Answer:      fmt.Sprintf("(%d,%d)", x, y),
+			Explanation: fmt.Sprintf("Solution: x=%d, y=%d.", x, y),
+		}
+	}
+	// Row echelon form question
+	return generator.Problem{
+		Question:    fmt.Sprintf("Put the system %dx + %dy = %d, %dx + %dy = %d into row echelon form.", a, b, e1, c, d, e2),
+		Answer:      fmt.Sprintf("[[%d,%d,%d],[0,%d,%d]]", a, b, e1, d-c*b/a, e2-c*e1/a),
+		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] can be reduced.", a, b, e1, c, d, e2),
 	}
 }

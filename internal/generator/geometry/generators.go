@@ -6,6 +6,7 @@ import (
 	"math/rand"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mathutil"
 )
 
 func Register(reg *generator.Registry) {
@@ -30,9 +31,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("geo.solid.volume_rect", &volumeGen{})
 	reg.Register("geo.solid.surface_area", &surfaceAreaGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("geo.coord.lines", &generator.Stub{ConceptID: "geo.coord.lines"})
-	reg.Register("geo.coord.polar", &generator.Stub{ConceptID: "geo.coord.polar"})
+	reg.Register("geo.coord.lines", &coordLinesGen{})
+	reg.Register("geo.coord.polar", &coordPolarGen{})
 }
 
 type pointsLinesGen struct{}
@@ -343,5 +343,93 @@ func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find surface area.", l, w, h),
 		Answer:      fmt.Sprintf("%d", sa),
 		Explanation: fmt.Sprintf("SA = 2(lw + lh + wh) = 2(%d + %d + %d) = %d.", l*w, l*h, w*h, sa),
+	}
+}
+
+type coordLinesGen struct{}
+
+func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
+	x1 := rand.Intn(5) - 2
+	y1 := rand.Intn(5) - 2
+	x2 := x1 + rand.Intn(4) + 1
+	y2 := y1 + rand.Intn(4) + 1
+	dx := x2 - x1
+	dy := y2 - y1
+	// slope = dy/dx
+	gcd := mathutil.GCD(dy, dx)
+	mNum := dy / gcd
+	mDen := dx / gcd
+	if mDen < 0 {
+		mNum = -mNum
+		mDen = -mDen
+	}
+	// y - y1 = m(x - x1), solve for y-intercept
+	// y = mx + b, b = y1 - m*x1
+	// b = y1 - (dy/dx)*x1 = (y1*dx - dy*x1)/dx
+	bNum := y1*dx - dy*x1
+	bDen := dx
+	bGcd := mathutil.GCD(mathutil.Abs(bNum), mathutil.Abs(bDen))
+	bNum /= bGcd
+	bDen /= bGcd
+	if bDen < 0 {
+		bNum = -bNum
+		bDen = -bDen
+	}
+
+	var answer string
+	if mDen == 1 {
+		if bDen == 1 {
+			answer = fmt.Sprintf("y=%dx+%d", mNum, bNum)
+		} else {
+			answer = fmt.Sprintf("y=%dx+%d/%d", mNum, bNum, bDen)
+		}
+	} else {
+		if bDen == 1 {
+			answer = fmt.Sprintf("y=%d/%dx+%d", mNum, mDen, bNum)
+		} else {
+			answer = fmt.Sprintf("y=%d/%dx+%d/%d", mNum, mDen, bNum, bDen)
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Find the equation of the line through (%d,%d) and (%d,%d).", x1, y1, x2, y2),
+		Answer:      answer,
+		Explanation: fmt.Sprintf("Slope = (%d-%d)/(%d-%d) = %d/%d. Line through (%d,%d): y - %d = %d/%d(x - %d) → %s", y2, y1, x2, x1, dy, dx, x1, y1, y1, dy, dx, x1, answer),
+	}
+}
+
+type coordPolarGen struct{}
+
+func (g *coordPolarGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		r, theta int
+		x, y     int
+	}
+	entries := []entry{
+		{1, 0, 1, 0},
+		{1, 90, 0, 1},
+		{1, 180, -1, 0},
+		{1, 270, 0, -1},
+		{2, 0, 2, 0},
+		{3, 90, 0, 3},
+		{2, 180, -2, 0},
+		{4, 270, 0, -4},
+		{2, 45, 1, 1},     // approx (√2, √2) → 1,1
+		{3, 45, 2, 2},     // approx
+		{2, 135, -1, 1},   // approx
+		{2, 225, -1, -1},  // approx
+		{2, 315, 1, -1},   // approx
+	}
+	e := entries[rand.Intn(len(entries))]
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Convert (r=%d, θ=%d°) to rectangular coordinates.", e.r, e.theta),
+			Answer:      fmt.Sprintf("(%d,%d)", e.x, e.y),
+			Explanation: fmt.Sprintf("x = %d·cos(%d°) = %d, y = %d·sin(%d°) = %d → (%d,%d)", e.r, e.theta, e.x, e.r, e.theta, e.y, e.x, e.y),
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Convert (%d,%d) to polar coordinates (r > 0, 0 ≤ θ < 360).", e.x, e.y),
+		Answer:      fmt.Sprintf("(%d,%d°)", e.r, e.theta),
+		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = arctan(%d/%d) = %d° → (%d,%d°)", e.x, e.y, e.r, e.y, e.x, e.theta, e.r, e.theta),
 	}
 }

@@ -59,3 +59,5 @@ func TestCoordDistance(t *testing.T)  { fuzzGen(t, &coordDistanceGen{}, grader.G
 func TestCoordMidpoint(t *testing.T)  { fuzzGen(t, &coordMidpointGen{}, grader.GradingTuple) }
 func TestVolume(t *testing.T)         { fuzzGen(t, &volumeGen{}, grader.GradingNumeric) }
 func TestSurfaceArea(t *testing.T)    { fuzzGen(t, &surfaceAreaGen{}, grader.GradingNumeric) }
+func TestCoordLines(t *testing.T)     { fuzzGen(t, &coordLinesGen{}, grader.GradingMultipleChoice) }
+func TestCoordPolar(t *testing.T)     { fuzzGen(t, &coordPolarGen{}, grader.GradingMultipleChoice) }
