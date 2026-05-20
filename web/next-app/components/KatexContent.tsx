@@ -1,10 +1,30 @@
 'use client'
 
+import React, { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import 'katex/dist/katex.min.css'
+
+function headingId(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function extractText(children: ReactNode): string {
+  let text = ''
+  React.Children.forEach(children, (child) => {
+    if (typeof child === 'string' || typeof child === 'number') {
+      text += child
+    } else if (child && typeof child === 'object' && 'props' in child) {
+      text += extractText((child as any).props.children)
+    }
+  })
+  return text
+}
 
 export default function KatexContent({ children }: { children: string }) {
   let content = children
@@ -43,6 +63,18 @@ export default function KatexContent({ children }: { children: string }) {
             }
             return <img src={url} alt={alt || ''} className="max-w-full h-auto my-4 mx-auto" />
           },
+          h1: ({ children, ...props }) => {
+            const text = extractText(children)
+            return <h1 id={headingId(text)} {...props}>{children}</h1>
+          },
+          h2: ({ children, ...props }) => {
+            const text = extractText(children)
+            return <h2 id={headingId(text)} {...props}>{children}</h2>
+          },
+          h3: ({ children, ...props }) => {
+            const text = extractText(children)
+            return <h3 id={headingId(text)} {...props}>{children}</h3>
+          },
         }}
       >
         {content}
@@ -56,6 +88,9 @@ export default function KatexContent({ children }: { children: string }) {
         .katex-content li { margin: 0.25rem 0; }
         .katex-content hr { border: 0; border-top: 1px solid; margin: 1.5rem 0; opacity: 0.3; }
         .katex-content strong { font-weight: 700; }
+        .katex-content h1:hover .anchor-link,
+        .katex-content h2:hover .anchor-link,
+        .katex-content h3:hover .anchor-link { opacity: 1; }
       `}</style>
     </div>
   )
