@@ -58,6 +58,16 @@ type AttemptEntry struct {
 	Timestamp      time.Time
 }
 
+type Question struct {
+	ID          int
+	ConceptID   string
+	Question    string
+	Answer      string
+	Explanation string
+	Source      string
+	Difficulty  float64
+}
+
 type LeaderboardRow struct {
 	StudentID      string
 	Name           string
@@ -82,6 +92,10 @@ type Repository interface {
 	GetSession(id string) (*Session, error)
 	RecordAttempt(entry AttemptEntry) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
+
+	GetQuestions(conceptID string, count int) ([]Question, error)
+	GetQuestionCount(conceptID string) (int, error)
+	ImportQuestions(qs []Question) error
 
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
 

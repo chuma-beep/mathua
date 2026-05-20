@@ -383,6 +383,65 @@ func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]Attempt
 	return out, rows.Err()
 }
 
+// Questions
+
+func (s *SQLiteStore) GetQuestions(conceptID string, count int) ([]Question, error) {
+	rows, err := s.db.Query(`
+		SELECT id, concept_id, question, answer, explanation, source, difficulty
+		FROM questions
+		WHERE concept_id = ?
+		ORDER BY RANDOM()
+		LIMIT ?
+	`, conceptID, count)
+	if err != nil {
+		return nil, fmt.Errorf("get questions: %w", err)
+	}
+	defer rows.Close()
+
+	var out []Question
+	for rows.Next() {
+		var q Question
+		if err := rows.Scan(&q.ID, &q.ConceptID, &q.Question, &q.Answer, &q.Explanation, &q.Source, &q.Difficulty); err != nil {
+			return nil, fmt.Errorf("scan question: %w", err)
+		}
+		out = append(out, q)
+	}
+	return out, rows.Err()
+}
+
+func (s *SQLiteStore) GetQuestionCount(conceptID string) (int, error) {
+	row := s.db.QueryRow("SELECT COUNT(*) FROM questions WHERE concept_id = ?", conceptID)
+	var count int
+	if err := row.Scan(&count); err != nil {
+		return 0, fmt.Errorf("get question count: %w", err)
+	}
+	return count, nil
+}
+
+func (s *SQLiteStore) ImportQuestions(qs []Question) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin tx: %w", err)
+	}
+	defer tx.Rollback()
+
+	stmt, err := tx.Prepare(`
+		INSERT OR IGNORE INTO questions (concept_id, question, answer, explanation, source, difficulty)
+		VALUES (?, ?, ?, ?, ?, ?)
+	`)
+	if err != nil {
+		return fmt.Errorf("prepare: %w", err)
+	}
+	defer stmt.Close()
+
+	for _, q := range qs {
+		if _, err := stmt.Exec(q.ConceptID, q.Question, q.Answer, q.Explanation, q.Source, q.Difficulty); err != nil {
+			return fmt.Errorf("insert question: %w", err)
+		}
+	}
+	return tx.Commit()
+}
+
 // Leaderboard
 
 func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {

@@ -716,6 +716,30 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			count = n
 		}
 	}
+
+	type qInfo struct {
+		Question    string `json:"question"`
+		Answer      string `json:"answer"`
+		Explanation string `json:"explanation"`
+		Source      string `json:"source,omitempty"`
+	}
+
+	// Try DB first
+	dbQs, err := s.eng.GetQuestions(conceptID, count)
+	if err == nil && len(dbQs) > 0 {
+		questions := make([]qInfo, len(dbQs))
+		for i, q := range dbQs {
+			src := q.Source
+			if src == "" {
+				src = "curated"
+			}
+			questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
+		}
+		writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
+		return
+	}
+
+	// Fallback to generator
 	reg := s.eng.GetGeneratorRegistry()
 	if reg == nil {
 		writeJSON(w, map[string]interface{}{"questions": []interface{}{}})
@@ -726,14 +750,9 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), 404)
 		return
 	}
-	type qInfo struct {
-		Question    string `json:"question"`
-		Answer      string `json:"answer"`
-		Explanation string `json:"explanation"`
-	}
 	questions := make([]qInfo, len(problems))
 	for i, p := range problems {
-		questions[i] = qInfo{Question: p.Question, Answer: p.Answer, Explanation: p.Explanation}
+		questions[i] = qInfo{Question: p.Question, Answer: p.Answer, Explanation: p.Explanation, Source: "generator"}
 	}
 	writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
 }

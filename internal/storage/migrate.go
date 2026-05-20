@@ -60,4 +60,16 @@ CREATE INDEX IF NOT EXISTS idx_progress_student  ON concept_progress(student_id)
 CREATE INDEX IF NOT EXISTS idx_sessions_student  ON sessions(student_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_session  ON attempts(session_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timestamp);
+
+CREATE TABLE IF NOT EXISTS questions (
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    concept_id TEXT    NOT NULL,
+    question   TEXT    NOT NULL,
+    answer     TEXT    NOT NULL,
+    explanation TEXT   NOT NULL DEFAULT '',
+    source     TEXT    NOT NULL DEFAULT '',
+    difficulty REAL   NOT NULL DEFAULT 0.5
+);
+
+CREATE INDEX IF NOT EXISTS idx_questions_concept ON questions(concept_id);
 `
