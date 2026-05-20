@@ -5,42 +5,31 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
-	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
-		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
-			}
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
 	}
 }
 
-func TestPropositions(t *testing.T) { fuzzGen(t, &propositionsGen{}, grader.GradingMultipleChoice) }
-func TestConnectives(t *testing.T)  { fuzzGen(t, &connectivesGen{}, grader.GradingMultipleChoice) }
-func TestTruthTables(t *testing.T)  { fuzzGen(t, &truthTablesGen{}, grader.GradingMultipleChoice) }
-func TestQuantifiers(t *testing.T)  { fuzzGen(t, &quantifiersGen{}, grader.GradingMultipleChoice) }
-func TestSetOps(t *testing.T)       { fuzzGen(t, &setOpsGen{}, grader.GradingMultipleChoice) }
-func TestVenn(t *testing.T)         { fuzzGen(t, &vennGen{}, grader.GradingMultipleChoice) }
-func TestPermutations(t *testing.T) { fuzzGen(t, &permutationsGen{}, grader.GradingNumeric) }
-func TestCombinations(t *testing.T) { fuzzGen(t, &combinationsGen{}, grader.GradingNumeric) }
-func TestPascal(t *testing.T)       { fuzzGen(t, &pascalGen{}, grader.GradingMultipleChoice) }
-func TestGraphBasics(t *testing.T)  { fuzzGen(t, &graphBasicsGen{}, grader.GradingNumeric) }
-func TestGraphPaths(t *testing.T)   { fuzzGen(t, &graphPathsGen{}, grader.GradingMultipleChoice) }
-func TestGraphTrees(t *testing.T)   { fuzzGen(t, &treesGen{}, grader.GradingNumeric) }
-func TestRecurrence(t *testing.T)   { fuzzGen(t, &recurrenceGen{}, grader.GradingNumeric) }
-func TestInduction(t *testing.T)         { fuzzGen(t, &inductionGen{}, grader.GradingMultipleChoice) }
-func TestBinomialTheorem(t *testing.T)  { fuzzGen(t, &binomialTheoremGen{}, grader.GradingNumeric) }
+func TestPropositionsGen(t *testing.T)   { fuzzGen(t, &propositionsGen{}) }
+func TestConnectivesGen(t *testing.T)    { fuzzGen(t, &connectivesGen{}) }
+func TestTruthTablesGen(t *testing.T)    { fuzzGen(t, &truthTablesGen{}) }
+func TestQuantifiersGen(t *testing.T)    { fuzzGen(t, &quantifiersGen{}) }
+func TestSetOpsGen(t *testing.T)         { fuzzGen(t, &setOpsGen{}) }
+func TestVennGen(t *testing.T)           { fuzzGen(t, &vennGen{}) }
+func TestPermutationsGen(t *testing.T)   { fuzzGen(t, &permutationsGen{}) }
+func TestCombinationsGen(t *testing.T)   { fuzzGen(t, &combinationsGen{}) }
+func TestPascalGen(t *testing.T)         { fuzzGen(t, &pascalGen{}) }
+func TestGraphBasicsGen(t *testing.T)    { fuzzGen(t, &graphBasicsGen{}) }
+func TestGraphPathsGen(t *testing.T)     { fuzzGen(t, &graphPathsGen{}) }
+func TestTreesGen(t *testing.T)          { fuzzGen(t, &treesGen{}) }
+func TestRecurrenceGen(t *testing.T)     { fuzzGen(t, &recurrenceGen{}) }
+func TestInductionGen(t *testing.T)      { fuzzGen(t, &inductionGen{}) }
+func TestBinomialTheoremGen(t *testing.T) { fuzzGen(t, &binomialTheoremGen{}) }

@@ -80,10 +80,18 @@ type addGen struct {
 }
 
 func (g *addGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*float64(g.maxA-g.minA)/10)
+	diffA := g.maxA - g.minA
+	if diffA <= 0 {
+		diffA = 1
+	}
+	diffB := g.maxB - g.minB
+	if diffB <= 0 {
+		diffB = 1
+	}
+	scale := int(1 + difficulty*float64(diffA)/10)
 	scale = max(scale, 1)
-	a := rand.Intn(min(g.maxA-g.minA, scale*10)) + g.minA
-	b := rand.Intn(min(g.maxB-g.minB, scale*10)) + g.minB
+	a := rand.Intn(min(diffA, scale*10)) + g.minA
+	b := rand.Intn(min(diffB, scale*10)) + g.minB
 	if g.ensureCarry {
 		a = rand.Intn(90) + 10
 		onesA := a % 10
@@ -171,7 +179,11 @@ type placeValueGen struct {
 }
 
 func (g *placeValueGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(g.max) + 1
+	max := g.max
+	if max <= 1 {
+		max = 2
+	}
+	n := rand.Intn(max) + 1
 	var placeUnit int
 	switch g.label {
 	case "tens":
@@ -205,14 +217,18 @@ type roundGen struct {
 }
 
 func (g *roundGen) Generate(difficulty float64) generator.Problem {
-	lo := g.to
-	hi := g.to * 10
+	to := g.to
+	if to <= 0 {
+		to = 1
+	}
+	lo := to
+	hi := to * 10
 	n := rand.Intn(hi-lo) + lo
-	rounded := int(math.Round(float64(n)/float64(g.to))) * g.to
+	rounded := int(math.Round(float64(n)/float64(to))) * to
 	return generator.Problem{
-		Question:    fmt.Sprintf("Round %d to the nearest %d.", n, g.to),
+		Question:    fmt.Sprintf("Round %d to the nearest %d.", n, to),
 		Answer:      fmt.Sprintf("%d", rounded),
-		Explanation: fmt.Sprintf("%d rounded to nearest %d is %d.", n, g.to, rounded),
+		Explanation: fmt.Sprintf("%d rounded to nearest %d is %d.", n, to, rounded),
 	}
 }
 

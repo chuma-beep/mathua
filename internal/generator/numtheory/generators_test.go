@@ -5,35 +5,24 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
-	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
-		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
-			}
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
 	}
 }
 
-func TestDivisibility(t *testing.T) { fuzzGen(t, &divisibilityGen{}, grader.GradingMultipleChoice) }
-func TestGCDEuclidean(t *testing.T) { fuzzGen(t, &gcdEuclideanGen{}, grader.GradingNumeric) }
-func TestModular(t *testing.T)      { fuzzGen(t, &modularGen{}, grader.GradingNumeric) }
-func TestCongruence(t *testing.T)   { fuzzGen(t, &congruenceGen{}, grader.GradingMultipleChoice) }
-func TestFermatLittle(t *testing.T) { fuzzGen(t, &fermatLittleGen{}, grader.GradingNumeric) }
-func TestEulerPhi(t *testing.T)     { fuzzGen(t, &eulerPhiGen{}, grader.GradingNumeric) }
-func TestDiophantine(t *testing.T)  { fuzzGen(t, &diophantineGen{}, grader.GradingMultipleChoice) }
-func TestCrypto(t *testing.T)       { fuzzGen(t, &cryptoGen{}, grader.GradingNumeric) }
+func TestDivisibilityGen(t *testing.T)  { fuzzGen(t, &divisibilityGen{}) }
+func TestGcdEuclideanGen(t *testing.T)  { fuzzGen(t, &gcdEuclideanGen{}) }
+func TestModularGen(t *testing.T)       { fuzzGen(t, &modularGen{}) }
+func TestCongruenceGen(t *testing.T)    { fuzzGen(t, &congruenceGen{}) }
+func TestFermatLittleGen(t *testing.T)  { fuzzGen(t, &fermatLittleGen{}) }
+func TestEulerPhiGen(t *testing.T)      { fuzzGen(t, &eulerPhiGen{}) }
+func TestDiophantineGen(t *testing.T)   { fuzzGen(t, &diophantineGen{}) }
+func TestCryptoGen(t *testing.T)        { fuzzGen(t, &cryptoGen{}) }

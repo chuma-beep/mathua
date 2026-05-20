@@ -189,6 +189,12 @@ type skipCountGen struct {
 }
 
 func (g *skipCountGen) Generate(difficulty float64) generator.Problem {
+	if g.step <= 0 {
+		g.step = 1
+	}
+	if g.max <= 0 {
+		g.max = 10
+	}
 	steps := g.max / g.step
 	pos := rand.Intn(steps - 2)
 	current := (pos + 1) * g.step
