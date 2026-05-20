@@ -217,8 +217,23 @@ export default function StudyPage() {
                 <LessonQuiz key={cid} conceptId={cid} limit={4} />
               ))}
 
+              {selectedLesson.prerequisites && selectedLesson.prerequisites.length > 0 && (
+                <div className="mt-8">
+                  <p className="font-mono text-xs text-mathua-muted border-b border-mathua-border pb-2 mb-3">
+                    Requires: {selectedLesson.prerequisites.map((p, i) => (
+                      <span key={p.id}>
+                        {i > 0 && <span className="mx-1 text-mathua-border">·</span>}
+                        <Link href={`/concept?id=${encodeURIComponent(p.id)}`} className="text-mathua-blue hover:text-mathua-blue-hover transition-colors">
+                          {p.label}
+                        </Link>
+                      </span>
+                    ))}
+                  </p>
+                </div>
+              )}
+
               {selectedLesson.dependents && selectedLesson.dependents.length > 0 && (
-                <div className="mt-8 mb-8">
+                <div className="mt-6 mb-8">
                   <h3 className="font-serif text-sm text-mathua-muted mb-3 font-mono border-b border-mathua-border pb-2">
                     What to study next ({selectedLesson.dependents.length})
                   </h3>
