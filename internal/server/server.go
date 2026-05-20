@@ -714,11 +714,20 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	type prereqInfo struct {
+		ID         string  `json:"id"`
+		Label      string  `json:"label"`
+		Status     string  `json:"status"`
+		MasteryPct float64 `json:"mastery_pct"`
+	}
+
 	type lessonInfo struct {
-		Title    string                          `json:"title"`
-		Body     string                          `json:"body"`
-		Concepts []string                        `json:"concepts"`
-		Progress map[string]map[string]interface{} `json:"progress,omitempty"`
+		Title         string                            `json:"title"`
+		Body          string                            `json:"body"`
+		Concepts      []string                          `json:"concepts"`
+		Progress      map[string]map[string]interface{} `json:"progress,omitempty"`
+		Prerequisites []prereqInfo                      `json:"prerequisites,omitempty"`
+		Dependents    []prereqInfo                      `json:"dependents,omitempty"`
 	}
 	result := make(map[string][]lessonInfo)
 	for domain, lessons := range byDomain {
@@ -739,6 +748,45 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 					info.Progress = nil
 				}
 			}
+
+			// Convert progress map to the format LessonPrerequisites expects
+			var rawProgress map[string]*storage.ConceptProgress
+			if progressMap != nil {
+				rawProgress = make(map[string]*storage.ConceptProgress)
+				for cid, p := range progressMap {
+					rawProgress[cid] = &storage.ConceptProgress{
+						Status: p["status"].(string),
+						Streak: int(p["streak"].(float64)),
+					}
+				}
+			}
+
+			prereqs := s.eng.LessonPrerequisites(l.Concepts, rawProgress)
+			if len(prereqs) > 0 {
+				info.Prerequisites = make([]prereqInfo, len(prereqs))
+				for i, p := range prereqs {
+					info.Prerequisites[i] = prereqInfo{
+						ID:         p.ID,
+						Label:      p.Label,
+						Status:     p.Status,
+						MasteryPct: p.MasteryPct,
+					}
+				}
+			}
+
+			deps := s.eng.LessonDependents(l.Concepts, rawProgress)
+			if len(deps) > 0 {
+				info.Dependents = make([]prereqInfo, len(deps))
+				for i, d := range deps {
+					info.Dependents[i] = prereqInfo{
+						ID:         d.ID,
+						Label:      d.Label,
+						Status:     d.Status,
+						MasteryPct: d.MasteryPct,
+					}
+				}
+			}
+
 			result[domain] = append(result[domain], info)
 		}
 	}
