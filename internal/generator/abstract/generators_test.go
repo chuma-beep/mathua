@@ -34,3 +34,5 @@ func TestGroupExamples(t *testing.T) { fuzzGen(t, &groupExamplesGen{}, grader.Gr
 func TestSubgroup(t *testing.T)      { fuzzGen(t, &subgroupGen{}, grader.GradingMultipleChoice) }
 func TestRing(t *testing.T)          { fuzzGen(t, &ringGen{}, grader.GradingMultipleChoice) }
 func TestHomomorphism(t *testing.T)  { fuzzGen(t, &homomorphismGen{}, grader.GradingMultipleChoice) }
+func TestField(t *testing.T)         { fuzzGen(t, &fieldGen{}, grader.GradingMultipleChoice) }
+func TestModule(t *testing.T)        { fuzzGen(t, &moduleGen{}, grader.GradingMultipleChoice) }

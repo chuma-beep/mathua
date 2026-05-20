@@ -13,6 +13,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("abstract.group.subgroup", &subgroupGen{})
 	reg.Register("abstract.rings.def", &ringGen{})
 	reg.Register("abstract.group.homomorphism", &homomorphismGen{})
+	reg.Register("abstract.structures.field", &fieldGen{})
+	reg.Register("abstract.structures.module", &moduleGen{})
 }
 
 // ----- 1. group.def -----
@@ -190,6 +192,87 @@ func (g *homomorphismGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s from %s to %s a group homomorphism? (yes/no)", e.f, e.domain, e.codomain),
 		Answer:      e.isHomo,
+		Explanation: e.reason,
+	}
+}
+
+// ----- 6. field -----
+
+type fieldGen struct{}
+
+func (g *fieldGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		set     string
+		isField string
+		reason  string
+	}
+	table := []entry{
+		{"Q (rational numbers)", "yes", "Q is a field: every non-zero rational a/b has inverse b/a, and all field axioms are satisfied."},
+		{"R (real numbers)", "yes", "R is a field: every non-zero real has a multiplicative inverse, satisfying all field axioms."},
+		{"C (complex numbers)", "yes", "C is a field: every non-zero complex number a+bi has inverse (a-bi)/(a²+b²)."},
+		{"Z (integers)", "no", "Z is not a field: most integers lack multiplicative inverses (e.g., 2 has no inverse in Z)."},
+		{"2Z (even integers)", "no", "2Z is not a field: it has no multiplicative identity and lacks inverses."},
+		{"Z₅ (integers mod 5)", "yes", "Z₅ is a field because 5 is prime; every non-zero element has a multiplicative inverse mod 5."},
+		{"Z₆ (integers mod 6)", "no", "Z₆ is not a field: 2 and 3 are zero divisors with no multiplicative inverses mod 6."},
+		{"Z₁₁ (integers mod 11)", "yes", "Z₁₁ is a field because 11 is prime; every non-zero element is invertible mod 11."},
+		{"n×n matrices over R (n≥2)", "no", "Matrix multiplication is not commutative and many matrices have no inverse, so it fails field axioms."},
+		{"Z[i] (Gaussian integers)", "no", "Gaussian integers form a ring but not a field: 2 has no inverse in Z[i]."},
+		{"F₄ (finite field with 4 elements)", "yes", "F₄ exists because 4=2² is a prime power. Every non-zero element has an inverse."},
+	}
+	e := table[rand.Intn(len(table))]
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Is %s a field under addition and multiplication? (yes/no)", e.set),
+			Answer:      e.isField,
+			Explanation: e.reason,
+		}
+	}
+	// characteristic question
+	charTable := []struct {
+		field string
+		char  string
+		reason string
+	}{
+		{"Q", "0", "Q has characteristic 0: no finite sum of 1s equals 0."},
+		{"R", "0", "R has characteristic 0: no finite sum of 1s equals 0."},
+		{"C", "0", "C has characteristic 0: no finite sum of 1s equals 0."},
+		{"Z₅", "5", "Z₅ has characteristic 5: 1+1+1+1+1 = 5 ≡ 0 mod 5."},
+		{"Z₁₁", "11", "Z₁₁ has characteristic 11: 1+1+...+1 (11 times) ≡ 0 mod 11."},
+		{"F₄", "2", "F₄ has characteristic 2: 1+1 = 0 in any field of order 2ⁿ."},
+	}
+	c := charTable[rand.Intn(len(charTable))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the characteristic of %s?", c.field),
+		Answer:      c.char,
+		Explanation: c.reason,
+	}
+}
+
+// ----- 7. module -----
+
+type moduleGen struct{}
+
+func (g *moduleGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		set     string
+		ring    string
+		isModule string
+		reason  string
+	}
+	table := []entry{
+		{"R³ (3-tuples of reals)", "R", "yes", "R³ is an R-module: scalar multiplication of reals on 3-tuples satisfies all module axioms."},
+		{"Z (integers)", "Z", "yes", "Z is a Z-module: integer multiplication of integers satisfies all module axioms."},
+		{"any abelian group A", "Z", "yes", "Every abelian group is a Z-module with n·a = a + ... + a (n times)."},
+		{"Rⁿ (n-tuples of reals)", "R", "yes", "Rⁿ is a free R-module: componentwise operations satisfy all axioms."},
+		{"Z₆ (integers mod 6)", "Z", "yes", "Z₆ is a Z-module with scalar multiplication given by repeated addition mod 6."},
+		{"any vector space V over F", "F", "yes", "Every vector space over a field F is an F-module; modules generalise vector spaces."},
+		{"2Z (even integers)", "Z", "yes", "2Z is a Z-module: integer multiplication of even integers stays in 2Z."},
+		{"R as a vector space over Q", "Q", "yes", "R is a Q-vector space, hence a Q-module, though it is infinite-dimensional over Q."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is %s a module over %s? (yes/no)", e.set, e.ring),
+		Answer:      e.isModule,
 		Explanation: e.reason,
 	}
 }
