@@ -23,6 +23,8 @@ import {
   getGoalPlan,
   setDailyXPGoal,
   getDueReviews,
+  startReviewSession,
+  submitReviewAnswer,
   type Question,
   type AnswerResult,
   type Scores,
@@ -31,7 +33,7 @@ import {
 import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 
-type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice'
+type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'review'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
@@ -59,6 +61,10 @@ export default function SessionPage() {
   const [elapsed, setElapsed] = useState(0)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
+  // Review mode state
+  const [reviewSessionID, setReviewSessionID] = useState('')
+  const [reviewStats, setReviewStats] = useState({ correct: 0, total: 0 })
+  const [reviewDone, setReviewDone] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   // Diagnostic state (guest mode)
@@ -186,6 +192,63 @@ export default function SessionPage() {
     setSubmitted(false)
     setAnswer('')
   }, [])
+
+  const beginReviewSession = useCallback(async () => {
+    setError('')
+    setLoading(true)
+    try {
+      const res = await startReviewSession()
+      setReviewSessionID(res.session_id)
+      setQuestion(res.question)
+      setScreen('review')
+      setSubmitted(false)
+      setReviewStats({ correct: 0, total: 0 })
+      setReviewDone(false)
+      startRef.current = Date.now()
+    } catch {
+      setError('Could not start review session.')
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  const handleReviewSubmit = useCallback(async () => {
+    if (!answer.trim() || !question) return
+    const e = (Date.now() - startRef.current) / 1000
+    try {
+      const res = await submitReviewAnswer(reviewSessionID, answer.trim(), e)
+      setLastResult(res.result)
+      setSubmitted(true)
+      if (res.result) {
+        setReviewStats(prev => ({
+          correct: prev.correct + (res.result!.correct ? 1 : 0),
+          total: prev.total + 1,
+        }))
+      }
+      if (res.next_question) {
+        setQuestion(res.next_question)
+      } else {
+        setQuestion(null)
+        setReviewDone(true)
+      }
+      const s = await getScores(studentID).catch(() => null)
+      if (s) setScores(s)
+    } catch {
+      setError('Failed to submit review answer')
+    }
+  }, [answer, question, reviewSessionID, studentID])
+
+  const nextReviewQuestion = useCallback(() => {
+    if (reviewDone) {
+      setScreen('practice')
+      setReviewDone(false)
+      return
+    }
+    setLastResult(null)
+    setSubmitted(false)
+    setAnswer('')
+    startRef.current = Date.now()
+  }, [reviewDone])
 
   // Guest diagnostic logic
   const domainOrder = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
@@ -463,10 +526,16 @@ export default function SessionPage() {
             )}
 
             {dueReviews > 0 && (
-              <div className="bg-mathua-surface border border-yellow-500/40 rounded-none p-3 mb-4 text-center">
+              <div className="bg-mathua-surface border border-yellow-500/40 rounded-none p-3 mb-4 flex items-center justify-center gap-4">
                 <p className="font-mono text-xs text-yellow-400">
                   {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
                 </p>
+                <button
+                  onClick={beginReviewSession}
+                  className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none px-4 h-8 font-mono text-[11px] transition-colors"
+                >
+                  Review Now
+                </button>
               </div>
             )}
 
@@ -705,6 +774,193 @@ export default function SessionPage() {
                   <p className="text-mathua-blue text-center mt-4">
                     All available concepts mastered! Come back tomorrow for reviews.
                   </p>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {screen === 'review' && (
+          <>
+            {reviewDone ? (
+              <div className="max-w-xl mx-auto mt-8">
+                <div className="bg-mathua-surface border border-mathua-border rounded-none p-8 max-md:p-5 text-center">
+                  <h3 className="font-serif text-2xl font-medium text-mathua-green mb-2">
+                    Review Complete!
+                  </h3>
+                  <p className="font-mono text-sm text-mathua-secondary mb-4">
+                    You reviewed {reviewStats.total} concept{reviewStats.total !== 1 ? 's' : ''}
+                    {reviewStats.total > 0 && (
+                      <> — {reviewStats.correct}/{reviewStats.total} correct</>
+                    )}
+                  </p>
+                  <button
+                    onClick={nextReviewQuestion}
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm transition-colors"
+                  >
+                    Back to Practice
+                  </button>
+                </div>
+              </div>
+            ) : !question ? (
+              <div className="max-w-xl mx-auto mt-20 text-center">
+                <p className="text-mathua-muted text-sm mb-4">No reviews due.</p>
+                <button
+                  onClick={() => setScreen('practice')}
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
+                >
+                  Back to Practice
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-8 items-start mt-4 max-md:flex-col">
+                <div className="w-[200px] flex-shrink-0 max-md:w-full">
+                  <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4 max-md:hidden">
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Review</span>
+                      <div className="font-mono text-lg text-mathua-primary mt-1">
+                        <span className={reviewStats.total > 0 && reviewStats.correct / reviewStats.total >= 0.8 ? 'text-mathua-green' : reviewStats.total > 0 && reviewStats.correct / reviewStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}>
+                          {reviewStats.correct}/{reviewStats.total}
+                        </span>
+                        <span className="text-mathua-muted text-xs ml-1">correct</span>
+                      </div>
+                      {reviewStats.total > 0 && (
+                        <div className="mt-1 h-1 bg-mathua-code rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-yellow-500 rounded-full transition-all duration-500"
+                            style={{ width: `${(reviewStats.correct / reviewStats.total) * 100}%` }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Streak</span>
+                      <div className="font-mono text-2xl text-mathua-green mt-1">
+                        {submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Mastered total</span>
+                      <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.concepts_mastered}</div>
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Daily XP</span>
+                      <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.xp_today ?? 0}</div>
+                    </div>
+                  </div>
+                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-2">
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Review</span>
+                      <span className={`font-mono text-sm ${reviewStats.total > 0 && reviewStats.correct / reviewStats.total >= 0.8 ? 'text-mathua-green' : reviewStats.total > 0 && reviewStats.correct / reviewStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
+                        {reviewStats.correct}/{reviewStats.total}
+                      </span>
+                    </div>
+                    <div className="w-px h-8 bg-mathua-border" />
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Streak</span>
+                      <span className="font-mono text-sm text-mathua-green">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
+                    </div>
+                    <div className="w-px h-8 bg-mathua-border" />
+                    <div>
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Mastered</span>
+                      <span className="font-mono text-sm text-mathua-blue">{scores.concepts_mastered}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className={`bg-mathua-surface border rounded-none p-8 max-md:p-5 transition-colors duration-300 ${
+                    submitted && lastResult
+                      ? lastResult.correct ? 'border-green-500/40' : 'border-red-500/40'
+                      : 'border-yellow-500/30'
+                  }`}>
+                    <div className="mb-4 flex items-center gap-2">
+                      <span className="font-mono text-[10px] uppercase text-yellow-400">Review</span>
+                      <span className="text-mathua-muted text-[10px]">·</span>
+                      <span className="section-label">{question.concept_id}</span>
+                    </div>
+                    <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1 mb-6">
+                      {question.concept_name}
+                    </h3>
+                    <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
+                      {question.diagram ? (
+                        <div className="flex flex-col md:flex-row">
+                          <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
+                            <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                          </div>
+                          <div className="md:w-2/3 p-8 flex items-center justify-center">
+                            <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                              {question.question}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                          {question.question}
+                        </p>
+                      )}
+                    </div>
+                    {!submitted ? (
+                      <>
+                        <div className="flex gap-3 mb-4">
+                          <input
+                            ref={inputRef}
+                            type="text"
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
+                            placeholder="Your answer"
+                            className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
+                          />
+                          <button
+                            onClick={handleReviewSubmit}
+                            className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors"
+                          >
+                            Check Answer
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="space-y-4 animate-fadeIn">
+                        <div className={`border-t pt-4 ${lastResult?.correct ? 'border-green-500/20' : 'border-red-500/20'}`}>
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className={`text-2xl ${lastResult?.correct ? 'text-green-400' : 'text-red-400'}`}>
+                              {lastResult?.correct ? '✓' : '✗'}
+                            </span>
+                            <div>
+                              <p className={`font-serif text-lg font-medium ${lastResult?.correct ? 'text-green-400' : 'text-red-400'}`}>
+                                {lastResult?.correct ? 'Correct!' : 'Incorrect'}
+                              </p>
+                              {lastResult?.explanation && (
+                                <p className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</p>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-mathua-muted mb-4">
+                            <span>Streak: {lastResult?.streak ?? 0}/{lastResult?.required_streak ?? 0}</span>
+                            <span>Status: {lastResult?.new_status ?? 'UNSEEN'}{lastResult?.new_status === 'MASTERED' ? ' ★' : ''}</span>
+                            {lastResult && lastResult.xp > 0 && (
+                              <span className="text-yellow-400">+{lastResult.xp} XP</span>
+                            )}
+                          </div>
+                          {question ? (
+                            <button
+                              onClick={nextReviewQuestion}
+                              className="w-full border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 font-medium text-sm transition-colors"
+                            >
+                              Next Review Question
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => { setReviewDone(true); nextReviewQuestion() }}
+                              className="w-full border border-mathua-green text-mathua-green hover:bg-mathua-green hover:text-white rounded-none h-12 font-medium text-sm transition-colors"
+                            >
+                              See Summary
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
