@@ -20,7 +20,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'Mathua | Math Understanding Agent',
+  title: 'Mathua',
   description: 'An open-source adaptive math learning engine. Master the foundation. Earn the abstraction.',
 }
 

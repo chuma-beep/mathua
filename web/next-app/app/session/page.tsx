@@ -10,7 +10,7 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
-import Pipeline from '../../components/Pipeline'
+
 import {
   getConfig,
   startSession,
@@ -713,22 +713,6 @@ export default function SessionPage() {
       </section>
 
       <AsciiDivider pattern="wave" />
-
-      <section className="py-20 max-sm:py-12">
-        <SectionHeader label="Your state" title="Mastery pipeline" />
-        <div className="flex justify-center mt-6">
-          <Pipeline
-            states={[
-              { label: 'UNSEEN', status: 'unseen' },
-              { label: 'LEARNING', status: 'learning' },
-              { label: 'PRACTICING', status: 'practicing' },
-              { label: 'MASTERED', status: 'mastered' },
-              { label: 'DECAYING', status: 'decaying' },
-            ]}
-          />
-        </div>
-      </section>
-
       <Footer />
     </div>
     </>

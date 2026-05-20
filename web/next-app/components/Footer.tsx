@@ -16,13 +16,6 @@ const linkItemStyle: React.CSSProperties = {
   color: 'var(--text-muted)',
 }
 
-const footerTitleStyle: React.CSSProperties = {
-  fontFamily: "'IBM Plex Serif', serif",
-  fontSize: '1rem',
-  color: 'var(--text-secondary)',
-  marginBottom: '0.75rem',
-}
-
 const linkContainerStyle: React.CSSProperties = {
   fontFamily: "'IBM Plex Mono', monospace",
   fontSize: '12px',
@@ -50,10 +43,6 @@ export default function Footer({ className = '' }: FooterProps) {
         background: 'transparent',
       }}
     >
-      <div style={footerTitleStyle}>
-        Mathua: Math Understanding Agent
-      </div>
-
       <div style={linkContainerStyle}>
         <span className="link-underline" style={linkItemStyle}>Web App</span>
         <a href="https://github.com/chuma-beep/mathua" className="link-underline" style={linkStyle}>GitHub</a>
