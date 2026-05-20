@@ -33,7 +33,7 @@ function answersMatch(userAnswer: string, expected: string): boolean {
 export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   const [questions, setQuestions] = useState<PracticeQuestion[]>([])
   const [answers, setAnswers] = useState<Record<number, string>>({})
-  const [results, setResults] = useState<Record<number, 'correct' | 'incorrect' | 'revealed'>>({})
+  const [results, setResults] = useState<Record<number, 'correct' | 'incorrect'>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [score, setScore] = useState({ correct: 0, total: 0 })
@@ -66,10 +66,6 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
       setResults(prev => ({ ...prev, [i]: 'incorrect' }))
       setScore(prev => ({ ...prev, total: prev.total + 1 }))
     }
-  }
-
-  function handleReveal(i: number) {
-    setResults(prev => ({ ...prev, [i]: 'revealed' }))
   }
 
   function handleKeyDown(e: React.KeyboardEvent, i: number) {
@@ -117,7 +113,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
       <div className="space-y-3">
         {questions.map((q, i) => {
           const result = results[i]
-          const showAnswer = result === 'correct' || result === 'revealed'
+          const showAnswer = result !== undefined
           return (
             <div
               key={i}
@@ -160,15 +156,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           onClick={() => handleCheck(i)}
                           className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 py-1.5 text-xs font-mono rounded-none"
                         >
-                          Check
-                        </button>
-                      )}
-                      {result === undefined && (
-                        <button
-                          onClick={() => handleReveal(i)}
-                          className="text-mathua-muted hover:text-mathua-secondary text-xs font-mono transition-colors"
-                        >
-                          Reveal
+Submit
                         </button>
                       )}
                     </div>
