@@ -55,8 +55,9 @@ func Register(reg *generator.Registry) {
 type readTableGen struct{}
 
 func (g *readTableGen) Generate(difficulty float64) generator.Problem {
-	numRows := rand.Intn(2) + 3
-	numCols := rand.Intn(2) + 2
+	scale := int(1 + difficulty*5)
+	numRows := rand.Intn(max(1, scale/2)) + 3
+	numCols := rand.Intn(max(1, scale/2)) + 2
 	rowLabels := make([]string, numRows)
 	for i := 0; i < numRows; i++ {
 		items := []string{"Apples", "Oranges", "Bananas", "Grapes", "Mangoes", "Cherries", "Pears", "Plums"}
@@ -71,7 +72,7 @@ func (g *readTableGen) Generate(difficulty float64) generator.Problem {
 	for i := 0; i < numRows; i++ {
 		table[i] = make([]int, numCols)
 		for j := 0; j < numCols; j++ {
-			table[i][j] = rand.Intn(20) + 1
+			table[i][j] = rand.Intn(max(1, scale*4)) + 1
 		}
 	}
 	pickRow := rand.Intn(numRows)
@@ -108,6 +109,7 @@ func (g *readTableGen) Generate(difficulty float64) generator.Problem {
 type barGraphGen struct{}
 
 func (g *barGraphGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(3) + 3
 	labels := make([]string, n)
 	values := make([]int, n)
@@ -123,7 +125,7 @@ func (g *barGraphGen) Generate(difficulty float64) generator.Problem {
 			}
 		}
 		labels[i] = label
-		values[i] = rand.Intn(30) + 5
+		values[i] = rand.Intn(max(1, scale*6)) + 5
 	}
 	maxIdx := 0
 	for i := 1; i < n; i++ {
@@ -145,17 +147,18 @@ func (g *barGraphGen) Generate(difficulty float64) generator.Problem {
 type linePlotGen struct{}
 
 func (g *linePlotGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(3) + 4
 	xs := make([]int, n)
 	ys := make([]int, n)
 	startX := rand.Intn(5) + 1
-	startY := rand.Intn(20) + 5
+	startY := rand.Intn(max(1, scale*4)) + 5
 	for i := 0; i < n; i++ {
 		xs[i] = startX + i
 		if i == 0 {
 			ys[i] = startY
 		} else {
-			delta := rand.Intn(7) - 3
+			delta := rand.Intn(max(1, scale)) - 3
 			ys[i] = ys[i-1] + delta
 			if ys[i] < 0 {
 				ys[i] = 0
@@ -177,11 +180,12 @@ func (g *linePlotGen) Generate(difficulty float64) generator.Problem {
 type meanGen struct{}
 
 func (g *meanGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(4) + 4
 	vals := make([]int, n)
 	sum := 0
 	for i := 0; i < n; i++ {
-		vals[i] = rand.Intn(40) + 1
+		vals[i] = rand.Intn(max(1, scale*8)) + 1
 		sum += vals[i]
 	}
 	mean := float64(sum) / float64(n)
@@ -199,10 +203,11 @@ func (g *meanGen) Generate(difficulty float64) generator.Problem {
 type medianGen struct{}
 
 func (g *medianGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(5) + 5
 	vals := make([]int, n)
 	for i := 0; i < n; i++ {
-		vals[i] = rand.Intn(50) + 1
+		vals[i] = rand.Intn(max(1, scale*10)) + 1
 	}
 	sorted := make([]int, n)
 	copy(sorted, vals)
@@ -239,8 +244,9 @@ func (g *medianGen) Generate(difficulty float64) generator.Problem {
 type modeGen struct{}
 
 func (g *modeGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(5) + 5
-	base := rand.Intn(20) + 1
+	base := rand.Intn(max(1, scale*4)) + 1
 	modeVal := base + rand.Intn(10)
 	vals := make([]int, 0, n)
 	modeCount := rand.Intn(3) + 2
@@ -249,9 +255,9 @@ func (g *modeGen) Generate(difficulty float64) generator.Problem {
 	}
 	otherCount := n - modeCount
 	for i := 0; i < otherCount; i++ {
-		v := rand.Intn(30) + 1
+		v := rand.Intn(max(1, scale*6)) + 1
 		for v == modeVal {
-			v = rand.Intn(30) + 1
+			v = rand.Intn(max(1, scale*6)) + 1
 		}
 		vals = append(vals, v)
 	}
@@ -270,10 +276,11 @@ func (g *modeGen) Generate(difficulty float64) generator.Problem {
 type rangeGen struct{}
 
 func (g *rangeGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	n := rand.Intn(5) + 5
 	vals := make([]int, n)
-	minVal := rand.Intn(20) + 1
-	maxVal := minVal + rand.Intn(30) + 10
+	minVal := rand.Intn(max(1, scale*4)) + 1
+	maxVal := minVal + rand.Intn(max(1, scale*6)) + 10
 	for i := 0; i < n; i++ {
 		vals[i] = rand.Intn(maxVal-minVal+1) + minVal
 	}
@@ -323,13 +330,14 @@ func (g *sampleSpaceGen) Generate(difficulty float64) generator.Problem {
 type basicProbGen struct{}
 
 func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow", "orange", "purple"}
 	counts := make([]int, 3)
 	total := 0
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(5) + 1
+		counts[i] = rand.Intn(max(1, scale)) + 1
 		total += counts[i]
 	}
 	pick := rand.Intn(3)
@@ -349,13 +357,14 @@ func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
 type complementProbGen struct{}
 
 func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow", "orange", "purple"}
 	counts := make([]int, 3)
 	total := 0
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(5) + 1
+		counts[i] = rand.Intn(max(1, scale)) + 1
 		total += counts[i]
 	}
 	pick := rand.Intn(3)
@@ -375,13 +384,14 @@ func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
 type compoundProbGen struct{}
 
 func (g *compoundProbGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow"}
 	counts := make([]int, 3)
 	total := 0
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(4) + 2
+		counts[i] = rand.Intn(max(1, scale)) + 2
 		total += counts[i]
 	}
 	pick1 := rand.Intn(3)
@@ -476,8 +486,9 @@ func (g *covarianceGen) Generate(difficulty float64) generator.Problem {
 type geometricMeanGen struct{}
 
 func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(10) + 1
-	b := rand.Intn(10) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
 	p := float64(a * b)
 	gm := int(math.Sqrt(p))
 	for gm*gm != a*b {
@@ -496,8 +507,9 @@ func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
 type harmonicMeanGen struct{}
 
 func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
-	a := (rand.Intn(4) + 2) * 2
-	b := (rand.Intn(4) + 2) * 2
+	scale := int(1 + difficulty*5)
+	a := (rand.Intn(max(1, scale)) + 2) * 2
+	b := (rand.Intn(max(1, scale)) + 2) * 2
 	numer := 2 * a * b
 	denom := a + b
 	gcd := mathutil.GCD(numer, denom)
@@ -511,8 +523,9 @@ func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
 type rmsGen struct{}
 
 func (g *rmsGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(10) + 1
-	b := rand.Intn(10) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
 	sq := float64(a*a + b*b)
 	p := int(sq / 2)
 	rms := int(math.Sqrt(float64(p)))
@@ -533,10 +546,11 @@ func (g *rmsGen) Generate(difficulty float64) generator.Problem {
 type varianceGen struct{}
 
 func (g *varianceGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	vals := make([]int, 5)
 	sum := 0
 	for i := range vals {
-		vals[i] = (rand.Intn(5)+1)*2
+		vals[i] = (rand.Intn(max(1, scale))+1)*2
 		sum += vals[i]
 	}
 	mean := float64(sum) / float64(len(vals))

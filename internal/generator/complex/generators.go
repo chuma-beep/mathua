@@ -34,8 +34,9 @@ func fmtComplex(r, i int) string {
 type conceptGen struct{}
 
 func (g *conceptGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(8) + 1
-	b := rand.Intn(8) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*8)) + 1
+	b := rand.Intn(max(1, scale*8)) + 1
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
 			Question:    fmt.Sprintf("What is the real part of %s?", fmtComplex(a, b)),
@@ -53,10 +54,11 @@ func (g *conceptGen) Generate(difficulty float64) generator.Problem {
 type addSubGen struct{}
 
 func (g *addSubGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(8) + 1
-	b := rand.Intn(8) + 1
-	c := rand.Intn(8) + 1
-	d := rand.Intn(8) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*8)) + 1
+	b := rand.Intn(max(1, scale*8)) + 1
+	c := rand.Intn(max(1, scale*8)) + 1
+	d := rand.Intn(max(1, scale*8)) + 1
 	if rand.Intn(2) == 0 {
 		r := a + c
 		i := b + d
@@ -78,10 +80,11 @@ func (g *addSubGen) Generate(difficulty float64) generator.Problem {
 type multGen struct{}
 
 func (g *multGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(5) + 1
-	b := rand.Intn(5) + 1
-	c := rand.Intn(5) + 1
-	d := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*5)) + 1
+	b := rand.Intn(max(1, scale*5)) + 1
+	c := rand.Intn(max(1, scale*5)) + 1
+	d := rand.Intn(max(1, scale*5)) + 1
 	r := a*c - b*d
 	i := a*d + b*c
 	return generator.Problem{
@@ -94,8 +97,9 @@ func (g *multGen) Generate(difficulty float64) generator.Problem {
 type conjugateGen struct{}
 
 func (g *conjugateGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(8) + 1
-	b := rand.Intn(8) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*8)) + 1
+	b := rand.Intn(max(1, scale*8)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the conjugate of %s?", fmtComplex(a, b)),
 		Answer:      fmtComplex(a, -b),
@@ -106,10 +110,11 @@ func (g *conjugateGen) Generate(difficulty float64) generator.Problem {
 type divideGen struct{}
 
 func (g *divideGen) Generate(difficulty float64) generator.Problem {
-	r := rand.Intn(4) + 1
-	s := rand.Intn(4) + 1
-	c := rand.Intn(3) + 1
-	d := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	r := rand.Intn(max(1, scale*4)) + 1
+	s := rand.Intn(max(1, scale*4)) + 1
+	c := rand.Intn(max(1, scale*3)) + 1
+	d := rand.Intn(max(1, scale*3)) + 1
 	numR := r*c - s*d
 	numI := r*d + s*c
 	return generator.Problem{
@@ -122,6 +127,7 @@ func (g *divideGen) Generate(difficulty float64) generator.Problem {
 type polarGen struct{}
 
 func (g *polarGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	if rand.Intn(2) == 0 {
 		type angle struct {
 			deg     int
@@ -135,7 +141,7 @@ func (g *polarGen) Generate(difficulty float64) generator.Problem {
 			{270, 0, -1},
 		}
 		a := angles[rand.Intn(len(angles))]
-		r := rand.Intn(4) + 2
+		r := rand.Intn(max(1, scale*4)) + 2
 		realPart := r * a.cosReal
 		imagPart := r * a.sinImag
 		return generator.Problem{
@@ -167,13 +173,14 @@ func (g *polarGen) Generate(difficulty float64) generator.Problem {
 type deMoivreGen struct{}
 
 func (g *deMoivreGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	type stdAngle struct{ deg int }
 	angles := []stdAngle{
 		{30}, {45}, {60}, {90},
 	}
 	angle := angles[rand.Intn(len(angles))]
-	r := rand.Intn(4) + 2
-	n := rand.Intn(2) + 2
+	r := rand.Intn(max(1, scale*4)) + 2
+	n := rand.Intn(max(1, scale*2)) + 2
 
 	newR := mathutil.IntPow(r, n)
 	newDeg := (angle.deg * n) % 360
@@ -204,6 +211,7 @@ type rootsGen struct{}
 type exponentialGen struct{}
 
 func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	type entry struct {
 		theta    int
 		realPart int
@@ -214,11 +222,11 @@ func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
 		{90, 0, 1},
 		{180, -1, 0},
 		{270, 0, -1},
-		{45, 0, 1},  // actually √2/2, but approximated with magnitude
-		{60, 0, 1},  // actually 1/2, but we use magnitude
+		{45, 0, 1},
+		{60, 0, 1},
 	}
 	e := angles[rand.Intn(len(angles))]
-	r := rand.Intn(4) + 2
+	r := rand.Intn(max(1, scale*4)) + 2
 	if e.theta != 0 && e.theta != 90 && e.theta != 180 && e.theta != 270 {
 		return generator.Problem{
 			Question:    fmt.Sprintf("Does e^(iθ) = cos θ + i sin θ hold for θ = %d°? (yes/no)", e.theta),
@@ -245,6 +253,7 @@ func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
 type inequalitiesGen struct{}
 
 func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
+	scale := int(1 + difficulty*5)
 	type entry struct {
 		a, b    int
 		desc    string
@@ -265,10 +274,10 @@ func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
 			Explanation: fmt.Sprintf("|%d+%di| = √(%d²+%d²) = √%d = %d", e.a, e.b, e.a, e.b, e.a*e.a+e.b*e.b, mag),
 		}
 	}
-	r1 := rand.Intn(5) + 1
-	i1 := rand.Intn(5) + 1
-	r2 := rand.Intn(5) + 1
-	i2 := rand.Intn(5) + 1
+	r1 := rand.Intn(max(1, scale*5)) + 1
+	i1 := rand.Intn(max(1, scale*5)) + 1
+	r2 := rand.Intn(max(1, scale*5)) + 1
+	i2 := rand.Intn(max(1, scale*5)) + 1
 	// Triangle inequality: |z1+z2| ≤ |z1|+|z2|
 	s := fmtComplex(r1, i1)
 	t := fmtComplex(r2, i2)
@@ -280,8 +289,9 @@ func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
 }
 
 func (g *rootsGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(4) + 1
-	b := rand.Intn(4) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*4)) + 1
+	b := rand.Intn(max(1, scale*4)) + 1
 	c := a*a - b*b
 	d := 2 * a * b
 

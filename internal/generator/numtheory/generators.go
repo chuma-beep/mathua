@@ -22,17 +22,18 @@ func Register(reg *generator.Registry) {
 type divisibilityGen struct{}
 
 func (g *divisibilityGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(45) + 6
-	d := rand.Intn(10) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*45)) + 6
+	d := rand.Intn(max(1, scale*10)) + 2
 	divisible := a%d == 0
-	if rand.Intn(2) == 0 {
+	if rand.Intn(max(1, scale*2)) == 0 {
 		for a%d == 0 {
-			a = rand.Intn(45) + 6
+			a = rand.Intn(max(1, scale*45)) + 6
 		}
 		divisible = false
 	} else {
 		for a%d != 0 {
-			a = rand.Intn(45) + 6
+			a = rand.Intn(max(1, scale*45)) + 6
 		}
 		divisible = true
 	}
@@ -52,8 +53,9 @@ func (g *divisibilityGen) Generate(difficulty float64) generator.Problem {
 type gcdEuclideanGen struct{}
 
 func (g *gcdEuclideanGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(37) + 12
-	b := rand.Intn(37) + 12
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*37)) + 12
+	b := rand.Intn(max(1, scale*37)) + 12
 	gcd := mathutil.GCD(a, b)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the GCD of %d and %d using the Euclidean algorithm.", a, b),
@@ -65,8 +67,9 @@ func (g *gcdEuclideanGen) Generate(difficulty float64) generator.Problem {
 type modularGen struct{}
 
 func (g *modularGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(30) + 5
-	m := rand.Intn(16) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*30)) + 5
+	m := rand.Intn(max(1, scale*16)) + 2
 	ans := a % m
 	return generator.Problem{
 		Question:    fmt.Sprintf("Compute %d mod %d.", a, m),
@@ -78,12 +81,13 @@ func (g *modularGen) Generate(difficulty float64) generator.Problem {
 type congruenceGen struct{}
 
 func (g *congruenceGen) Generate(difficulty float64) generator.Problem {
-	m := rand.Intn(10) + 2
-	a := rand.Intn(30) + 1
-	b := a + m*rand.Intn(5)
+	scale := int(1 + difficulty*5)
+	m := rand.Intn(max(1, scale*10)) + 2
+	a := rand.Intn(max(1, scale*30)) + 1
+	b := a + m*rand.Intn(max(1, scale*5))
 	congruent := true
-	if rand.Intn(2) == 0 {
-		b = a + m*rand.Intn(5) + rand.Intn(m-1) + 1
+	if rand.Intn(max(1, scale*2)) == 0 {
+		b = a + m*rand.Intn(max(1, scale*5)) + rand.Intn(m-1) + 1
 		congruent = false
 	}
 	ans := "no"
@@ -116,7 +120,8 @@ func (g *fermatLittleGen) Generate(difficulty float64) generator.Problem {
 type eulerPhiGen struct{}
 
 func (g *eulerPhiGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(23) + 8
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(max(1, scale*23)) + 8
 	phi := 0
 	for k := 1; k <= n; k++ {
 		if mathutil.GCD(k, n) == 1 {
@@ -133,8 +138,9 @@ func (g *eulerPhiGen) Generate(difficulty float64) generator.Problem {
 type diophantineGen struct{}
 
 func (g *diophantineGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(10) + 1
-	y := rand.Intn(10) + 1
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(max(1, scale*10)) + 1
+	y := rand.Intn(max(1, scale*10)) + 1
 	c := 3*x + 5*y
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find an integer solution to 3x + 5y = %d.", c),

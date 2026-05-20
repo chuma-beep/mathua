@@ -66,8 +66,9 @@ func Register(reg *generator.Registry) {
 type decCompareGen struct{}
 
 func (g *decCompareGen) Generate(difficulty float64) generator.Problem {
-	a := float64(rand.Intn(10000)) / 100
-	b := float64(rand.Intn(10000)) / 100
+	scale := int(1 + difficulty*5)
+	a := float64(rand.Intn(scale*2000)) / 100
+	b := float64(rand.Intn(scale*2000)) / 100
 	ans := ">"
 	if b > a {
 		ans = "<"
@@ -82,8 +83,9 @@ func (g *decCompareGen) Generate(difficulty float64) generator.Problem {
 type decAddSubGen struct{ op string }
 
 func (g *decAddSubGen) Generate(difficulty float64) generator.Problem {
-	a := float64(rand.Intn(50000)) / 100
-	b := float64(rand.Intn(30000)) / 100
+	scale := int(1 + difficulty*5)
+	a := float64(rand.Intn(scale*10000)) / 100
+	b := float64(rand.Intn(scale*6000)) / 100
 	var result float64
 	if g.op == "+" {
 		result = a + b
@@ -100,8 +102,9 @@ func (g *decAddSubGen) Generate(difficulty float64) generator.Problem {
 type decMultGen struct{}
 
 func (g *decMultGen) Generate(difficulty float64) generator.Problem {
-	a := float64(rand.Intn(500)) / 10
-	b := float64(rand.Intn(200)) / 10
+	scale := int(1 + difficulty*5)
+	a := float64(rand.Intn(scale*100)) / 10
+	b := float64(rand.Intn(scale*40)) / 10
 	return generator.Problem{
 		Question:    fmt.Sprintf("%.1f x %.1f = ?", a, b),
 		Answer:      fmt.Sprintf("%.2f", a*b),
@@ -112,8 +115,9 @@ func (g *decMultGen) Generate(difficulty float64) generator.Problem {
 type decDivGen struct{}
 
 func (g *decDivGen) Generate(difficulty float64) generator.Problem {
-	b := float64(rand.Intn(90)+10) / 10
-	q := float64(rand.Intn(50)) / 10
+	scale := int(1 + difficulty*5)
+	b := float64(rand.Intn(max(1, scale*20))+10) / 10
+	q := float64(rand.Intn(max(1, scale*10))) / 10
 	a := b * q
 	return generator.Problem{
 		Question:    fmt.Sprintf("%.2f / %.1f = ?", a, b),
@@ -155,7 +159,8 @@ func (g *decToFracGen) Generate(difficulty float64) generator.Problem {
 type decRoundGen struct{}
 
 func (g *decRoundGen) Generate(difficulty float64) generator.Problem {
-	n := float64(rand.Intn(100000)) / 1000
+	scale := int(1 + difficulty*5)
+	n := float64(rand.Intn(scale*20000)) / 1000
 	r := math.Round(n*100) / 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("Round %g to the nearest hundredth (2 decimal places).", n),
@@ -169,7 +174,8 @@ func (g *decRoundGen) Generate(difficulty float64) generator.Problem {
 type pctConceptGen struct{}
 
 func (g *pctConceptGen) Generate(difficulty float64) generator.Problem {
-	p := rand.Intn(100) + 1
+	scale := int(1 + difficulty*5)
+	p := rand.Intn(scale*20) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("How do you write %d percent as a fraction?", p),
 		Answer:      fmt.Sprintf("%d/100", p),
@@ -180,7 +186,8 @@ func (g *pctConceptGen) Generate(difficulty float64) generator.Problem {
 type pctToDecGen struct{}
 
 func (g *pctToDecGen) Generate(difficulty float64) generator.Problem {
-	p := rand.Intn(150) + 1
+	scale := int(1 + difficulty*5)
+	p := rand.Intn(scale*30) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert %d%% to a decimal.", p),
 		Answer:      fmt.Sprintf("%g", float64(p)/100),
@@ -191,7 +198,8 @@ func (g *pctToDecGen) Generate(difficulty float64) generator.Problem {
 type pctFromDecGen struct{}
 
 func (g *pctFromDecGen) Generate(difficulty float64) generator.Problem {
-	d := float64(rand.Intn(100)) / 100
+	scale := int(1 + difficulty*5)
+	d := float64(rand.Intn(scale*20)) / 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert %g to a percent.", d),
 		Answer:      fmt.Sprintf("%g", d*100),
@@ -202,8 +210,9 @@ func (g *pctFromDecGen) Generate(difficulty float64) generator.Problem {
 type pctOfNumberGen struct{}
 
 func (g *pctOfNumberGen) Generate(difficulty float64) generator.Problem {
-	p := rand.Intn(50) + 10
-	n := (rand.Intn(40) + 10) * 10
+	scale := int(1 + difficulty*5)
+	p := rand.Intn(max(1, scale*10)) + 10
+	n := (rand.Intn(max(1, scale*8)) + 10) * 10
 	result := float64(p) / 100 * float64(n)
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is %d%% of %d?", p, n),
@@ -215,8 +224,9 @@ func (g *pctOfNumberGen) Generate(difficulty float64) generator.Problem {
 type pctFindRateGen struct{}
 
 func (g *pctFindRateGen) Generate(difficulty float64) generator.Problem {
-	p := rand.Intn(40) + 20
-	total := (rand.Intn(40) + 10) * 10
+	scale := int(1 + difficulty*5)
+	p := rand.Intn(max(1, scale*8)) + 20
+	total := (rand.Intn(max(1, scale*8)) + 10) * 10
 	part := p * total / 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d is what percent of %d?", part, total),
@@ -228,8 +238,9 @@ func (g *pctFindRateGen) Generate(difficulty float64) generator.Problem {
 type pctIncreaseGen struct{}
 
 func (g *pctIncreaseGen) Generate(difficulty float64) generator.Problem {
-	orig := (rand.Intn(90) + 10) * 10
-	p := rand.Intn(30) + 10
+	scale := int(1 + difficulty*5)
+	orig := (rand.Intn(scale*20) + 10) * 10
+	p := rand.Intn(max(1, scale*6)) + 10
 	inc := float64(orig) * float64(p) / 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is a %d%% increase on %d?", p, orig),
@@ -241,8 +252,9 @@ func (g *pctIncreaseGen) Generate(difficulty float64) generator.Problem {
 type pctDiscountGen struct{}
 
 func (g *pctDiscountGen) Generate(difficulty float64) generator.Problem {
-	orig := (rand.Intn(90) + 10) * 10
-	p := rand.Intn(40) + 10
+	scale := int(1 + difficulty*5)
+	orig := (rand.Intn(scale*20) + 10) * 10
+	p := rand.Intn(max(1, scale*8)) + 10
 	disc := float64(orig) * float64(p) / 100
 	return generator.Problem{
 		Question:    fmt.Sprintf("Price: $%d. %d%% off. What is the sale price?", orig, p),
@@ -254,8 +266,9 @@ func (g *pctDiscountGen) Generate(difficulty float64) generator.Problem {
 type pctTaxTipGen struct{}
 
 func (g *pctTaxTipGen) Generate(difficulty float64) generator.Problem {
-	amount := (rand.Intn(90) + 10)
-	rate := rand.Intn(15) + 5
+	scale := int(1 + difficulty*5)
+	amount := (rand.Intn(scale*20) + 10)
+	rate := rand.Intn(max(1, scale*3)) + 5
 	tip := float64(amount) * float64(rate) / 100
 	items := []string{"bill", "meal", "service"}
 	item := items[rand.Intn(len(items))]
@@ -271,7 +284,8 @@ func (g *pctTaxTipGen) Generate(difficulty float64) generator.Problem {
 type absValueGen struct{}
 
 func (g *absValueGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(30) - 15
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(scale*6) - 15
 	return generator.Problem{
 		Question:    fmt.Sprintf("|%d| = ?", n),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(n)),
@@ -282,8 +296,9 @@ func (g *absValueGen) Generate(difficulty float64) generator.Problem {
 type negOrderOpsGen struct{}
 
 func (g *negOrderOpsGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(9) - 4
-	b := rand.Intn(9) - 4
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(scale*2) - 4
+	b := rand.Intn(scale*2) - 4
 	if b == 0 {
 		b = 1
 	}
@@ -320,10 +335,11 @@ func (g *ratioConceptGen) Grade(expected, userAnswer string) grader.Result {
 }
 
 func (g *ratioConceptGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(9) + 1
-	b := rand.Intn(9) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale*2)) + 1
 	for a == b {
-		b = rand.Intn(9) + 1
+		b = rand.Intn(max(1, scale*2)) + 1
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write the ratio of %d to %d in simplest form.", a, b),
@@ -354,9 +370,10 @@ func (g *ratioSimplifyGen) Grade(expected, userAnswer string) grader.Result {
 }
 
 func (g *ratioSimplifyGen) Generate(difficulty float64) generator.Problem {
-	f := rand.Intn(5) + 2
-	a := (rand.Intn(6) + 2) * f
-	b := (rand.Intn(6) + 2) * f
+	scale := int(1 + difficulty*5)
+	f := rand.Intn(max(1, scale)) + 2
+	a := (rand.Intn(max(1, scale)) + 2) * f
+	b := (rand.Intn(max(1, scale)) + 2) * f
 	for a == b {
 		b += f
 	}
@@ -371,11 +388,11 @@ func (g *ratioSimplifyGen) Generate(difficulty float64) generator.Problem {
 type ratioProportionGen struct{}
 
 func (g *ratioProportionGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(9) + 1
-	b := rand.Intn(5) + 2
-	mult := rand.Intn(3) + 2
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(max(1, scale*2)) + 1
+	b := rand.Intn(max(1, scale)) + 2
+	mult := rand.Intn(max(1, scale/2+1)) + 2
 	x := a * mult
-	// a/b = ?/c where c = b*mult
 	c := b * mult
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve the proportion: %d/%d = x/%d", a, b, c),
@@ -387,8 +404,9 @@ func (g *ratioProportionGen) Generate(difficulty float64) generator.Problem {
 type ratioRateGen struct{}
 
 func (g *ratioRateGen) Generate(difficulty float64) generator.Problem {
-	dist := (rand.Intn(30) + 10) * 10
-	time := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	dist := (rand.Intn(max(1, scale*6)) + 10) * 10
+	time := rand.Intn(max(1, scale)) + 1
 	speed := dist / time
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d miles in %d hours. What is the rate in miles per hour?", dist, time),
@@ -400,13 +418,14 @@ func (g *ratioRateGen) Generate(difficulty float64) generator.Problem {
 type ratioScaleGen struct{}
 
 func (g *ratioScaleGen) Generate(difficulty float64) generator.Problem {
-	scale := rand.Intn(5) + 2
-	length := (rand.Intn(10) + 1) * 2
-	actual := length * scale
+	scale := int(1 + difficulty*5)
+	factor := rand.Intn(max(1, scale)) + 2
+	length := (rand.Intn(scale*2) + 1) * 2
+	actual := length * factor
 	return generator.Problem{
-		Question:    fmt.Sprintf("Scale is 1:%d. Model length is %d cm. What is the actual length?", scale, length),
+		Question:    fmt.Sprintf("Scale is 1:%d. Model length is %d cm. What is the actual length?", factor, length),
 		Answer:      fmt.Sprintf("%d", actual),
-		Explanation: fmt.Sprintf("%d x %d = %d cm.", length, scale, actual),
+		Explanation: fmt.Sprintf("%d x %d = %d cm.", length, factor, actual),
 	}
 }
 
@@ -415,8 +434,9 @@ func (g *ratioScaleGen) Generate(difficulty float64) generator.Problem {
 type expNegGen struct{}
 
 func (g *expNegGen) Generate(difficulty float64) generator.Problem {
-	base := rand.Intn(6) + 2
-	exp := rand.Intn(3) + 1
+	scale := int(1 + difficulty*5)
+	base := rand.Intn(max(1, scale)) + 2
+	exp := rand.Intn(max(1, scale/2+1)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: %d^-%d", base, exp),
 		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
@@ -427,7 +447,8 @@ func (g *expNegGen) Generate(difficulty float64) generator.Problem {
 type expZeroGen struct{}
 
 func (g *expZeroGen) Generate(difficulty float64) generator.Problem {
-	base := rand.Intn(9) + 2
+	scale := int(1 + difficulty*5)
+	base := rand.Intn(scale*2) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d^0 = ?", base),
 		Answer:      "1",
@@ -438,8 +459,9 @@ func (g *expZeroGen) Generate(difficulty float64) generator.Problem {
 type sciNotationGen struct{}
 
 func (g *sciNotationGen) Generate(difficulty float64) generator.Problem {
-	coeff := float64(rand.Intn(90)+10) / 10
-	exp := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	coeff := float64(rand.Intn(scale*20)+10) / 10
+	exp := rand.Intn(max(1, scale)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write %g x 10^%d as a standard number.", coeff, exp),
 		Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
@@ -497,11 +519,11 @@ func parseSciNotationValue(s string) (*float64, *int) {
 }
 
 func (g *sciNotationOpsGen) Generate(difficulty float64) generator.Problem {
-	a := float64(rand.Intn(90)+10) / 10
-	b := float64(rand.Intn(90)+10) / 10
-	ea := rand.Intn(5) + 1
-	// Multiply: (a x 10^ea) x (b x 10^eb)
-	eb := rand.Intn(3)
+	scale := int(1 + difficulty*5)
+	a := float64(rand.Intn(scale*20)+10) / 10
+	b := float64(rand.Intn(scale*20)+10) / 10
+	ea := rand.Intn(max(1, scale)) + 1
+	eb := rand.Intn(max(1, scale/2+1))
 	coeff := a * b
 	totalExp := ea + eb
 	for coeff >= 10 {
@@ -520,7 +542,8 @@ func (g *sciNotationOpsGen) Generate(difficulty float64) generator.Problem {
 type varConceptGen struct{}
 
 func (g *varConceptGen) Generate(difficulty float64) generator.Problem {
-	n := rand.Intn(9) + 2
+	scale := int(1 + difficulty*5)
+	n := rand.Intn(scale*2) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("If x = %d, what is 3x?", n),
 		Answer:      fmt.Sprintf("%d", 3*n),
@@ -531,9 +554,10 @@ func (g *varConceptGen) Generate(difficulty float64) generator.Problem {
 type exprEvalGen struct{}
 
 func (g *exprEvalGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(9) + 2
-	a := rand.Intn(6) + 2
-	b := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*2) + 2
+	a := rand.Intn(scale) + 2
+	b := rand.Intn(scale) + 1
 	result := a*x + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate %dx + %d when x = %d.", a, b, x),
@@ -545,9 +569,10 @@ func (g *exprEvalGen) Generate(difficulty float64) generator.Problem {
 type likeTermsGen struct{}
 
 func (g *likeTermsGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(9) + 2
-	b := rand.Intn(9) + 2
-	c := rand.Intn(6) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(scale*2) + 2
+	b := rand.Intn(scale*2) + 2
+	c := rand.Intn(scale) + 1
 	resultCoef := a + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Combine like terms: %dx + %dx + %d", a, b, c),
@@ -559,9 +584,10 @@ func (g *likeTermsGen) Generate(difficulty float64) generator.Problem {
 type distributeGen struct{}
 
 func (g *distributeGen) Generate(difficulty float64) generator.Problem {
-	a := rand.Intn(8) + 2
-	b := rand.Intn(5) + 1
-	c := rand.Intn(5) + 1
+	scale := int(1 + difficulty*5)
+	a := rand.Intn(scale*2) + 2
+	b := rand.Intn(scale) + 1
+	c := rand.Intn(scale) + 1
 	resultB := a * b
 	resultC := a * c
 	return generator.Problem{
@@ -576,8 +602,9 @@ func (g *distributeGen) Generate(difficulty float64) generator.Problem {
 type eqOneStepAddGen struct{}
 
 func (g *eqOneStepAddGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(20) + 1
-	b := rand.Intn(30) - 15
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*4) + 1
+	b := rand.Intn(scale*5) - scale*2
 	a := x - b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: x + %d = %d", b, a+b),
@@ -589,8 +616,9 @@ func (g *eqOneStepAddGen) Generate(difficulty float64) generator.Problem {
 type eqOneStepMultGen struct{}
 
 func (g *eqOneStepMultGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(12) + 2
-	coeff := rand.Intn(9) + 2
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*2) + 2
+	coeff := rand.Intn(scale*2) + 2
 	rhs := coeff * x
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: %dx = %d", coeff, rhs),
@@ -602,9 +630,10 @@ func (g *eqOneStepMultGen) Generate(difficulty float64) generator.Problem {
 type eqTwoStepGen struct{}
 
 func (g *eqTwoStepGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(10) + 2
-	a := rand.Intn(9) + 2
-	b := rand.Intn(15) - 7
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*2) + 2
+	a := rand.Intn(scale*2) + 2
+	b := rand.Intn(scale*3) - scale
 	rhs := a*x + b
 	lhs := formatExpr(a, b)
 	return generator.Problem{
@@ -617,10 +646,11 @@ func (g *eqTwoStepGen) Generate(difficulty float64) generator.Problem {
 type eqWordGen struct{}
 
 func (g *eqWordGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(20) + 5
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*4) + 5
 	items := []string{"apples", "coins", "tickets", "pencils"}
 	item := items[rand.Intn(len(items))]
-	cost := rand.Intn(3) + 2
+	cost := rand.Intn(scale) + 2
 	total := x * cost
 	return generator.Problem{
 		Question:    fmt.Sprintf("You bought %d %s for $%d. How much does each %s cost?", x, item, total, strings.TrimSuffix(item, "s")),
@@ -634,8 +664,9 @@ func (g *eqWordGen) Generate(difficulty float64) generator.Problem {
 type ineqOneStepGen struct{}
 
 func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(9) + 2
-	b := rand.Intn(15) - 7
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*2) + 2
+	b := rand.Intn(scale*3) - scale
 	c := x + b - 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: x + %d > %d", b, c),
@@ -647,13 +678,10 @@ func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
 type ineqTwoStepGen struct{}
 
 func (g *ineqTwoStepGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(8) + 2
-	a := rand.Intn(5) + 2
-	b := rand.Intn(8) - 3
-	// We want ax + b < c where x is the largest integer solution.
-	// x must satisfy: ax + b < c
-	// x+1 must NOT satisfy: a(x+1) + b >= c
-	// So c in (ax + b, a(x+1) + b]
+	scale := int(1 + difficulty*5)
+	x := rand.Intn(scale*2) + 2
+	a := rand.Intn(scale) + 2
+	b := rand.Intn(scale*2) - scale
 	c := a*x + b + rand.Intn(a) + 1
 	q := formatIneq(a, b, c)
 	return generator.Problem{
