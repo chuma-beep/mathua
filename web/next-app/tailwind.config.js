@@ -53,11 +53,16 @@ module.exports = {
           '0%': { width: '0%' },
           '100%': { width: 'var(--progress-width)' },
         },
+        'fadeIn': {
+          '0%': { opacity: '0', transform: 'translateY(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
         'ascii-reveal': 'ascii-reveal 1.5s steps(30) forwards',
         'ascii-pulse': 'ascii-pulse 2s ease-in-out infinite',
         'progress-fill': 'progress-fill 0.8s ease-out forwards',
+        'fadeIn': 'fadeIn 0.3s ease-out forwards',
       },
       backgroundImage: {
         'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E\")",
