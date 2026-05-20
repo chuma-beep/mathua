@@ -966,5 +966,897 @@
   {
     "concept_id": "linalg.vector.dot",
     "source": "algebrica/vectors-and-matrices/vectors.md"
+  },
+  {
+    "concept_id": "alg.linear.slope",
+    "source": "wikipedia/alg.linear.slope.md"
+  },
+  {
+    "concept_id": "trig.unit_circle",
+    "source": "wikipedia/trig.unit_circle.md"
+  },
+  {
+    "concept_id": "alg.eq.vars_both_sides",
+    "source": "wikipedia/alg.eq.vars_both_sides.md"
+  },
+  {
+    "concept_id": "alg.exp.evaluate",
+    "source": "wikipedia/alg.exp.evaluate.md"
+  },
+  {
+    "concept_id": "alg.factor.diff_squares",
+    "source": "wikipedia/alg.factor.diff_squares.md"
+  },
+  {
+    "concept_id": "alg.factor.gcf",
+    "source": "wikipedia/alg.factor.gcf.md"
+  },
+  {
+    "concept_id": "alg.func.evaluate",
+    "source": "wikipedia/alg.func.evaluate.md"
+  },
+  {
+    "concept_id": "alg.func.notation",
+    "source": "wikipedia/alg.func.notation.md"
+  },
+  {
+    "concept_id": "alg.ineq.compound",
+    "source": "wikipedia/alg.ineq.compound.md"
+  },
+  {
+    "concept_id": "alg.ineq.two_var",
+    "source": "wikipedia/alg.ineq.two_var.md"
+  },
+  {
+    "concept_id": "alg.linear.parallel_perp",
+    "source": "wikipedia/alg.linear.parallel_perp.md"
+  },
+  {
+    "concept_id": "alg.linear.standard_form",
+    "source": "wikipedia/alg.linear.standard_form.md"
+  },
+  {
+    "concept_id": "alg.poly.mult_mono",
+    "source": "wikipedia/alg.poly.mult_mono.md"
+  },
+  {
+    "concept_id": "alg.seq.sum_arith",
+    "source": "wikipedia/alg.seq.sum_arith.md"
+  },
+  {
+    "concept_id": "alg.systems.word",
+    "source": "wikipedia/alg.systems.word.md"
+  },
+  {
+    "concept_id": "arith.add.carry",
+    "source": "wikipedia/arith.add.carry.md"
+  },
+  {
+    "concept_id": "arith.add.double",
+    "source": "wikipedia/arith.add.double.md"
+  },
+  {
+    "concept_id": "arith.add.single",
+    "source": "wikipedia/arith.add.single.md"
+  },
+  {
+    "concept_id": "arith.add.triple",
+    "source": "wikipedia/arith.add.triple.md"
+  },
+  {
+    "concept_id": "arith.add.word",
+    "source": "wikipedia/arith.add.word.md"
+  },
+  {
+    "concept_id": "arith.dec.intro",
+    "source": "wikipedia/arith.dec.intro.md"
+  },
+  {
+    "concept_id": "arith.div.concept",
+    "source": "wikipedia/arith.div.concept.md"
+  },
+  {
+    "concept_id": "arith.div.word",
+    "source": "wikipedia/arith.div.word.md"
+  },
+  {
+    "concept_id": "arith.exp.neg",
+    "source": "wikipedia/arith.exp.neg.md"
+  },
+  {
+    "concept_id": "arith.exp.zero",
+    "source": "wikipedia/arith.exp.zero.md"
+  },
+  {
+    "concept_id": "arith.factor.find",
+    "source": "wikipedia/arith.factor.find.md"
+  },
+  {
+    "concept_id": "arith.factor.gcf",
+    "source": "wikipedia/arith.factor.gcf.md"
+  },
+  {
+    "concept_id": "arith.factor.lcm",
+    "source": "wikipedia/arith.factor.lcm.md"
+  },
+  {
+    "concept_id": "arith.factor.prime",
+    "source": "wikipedia/arith.factor.prime.md"
+  },
+  {
+    "concept_id": "arith.factor.prime_fact",
+    "source": "wikipedia/arith.factor.prime_fact.md"
+  },
+  {
+    "concept_id": "arith.mult.2_5_10",
+    "source": "wikipedia/arith.mult.2_5_10.md"
+  },
+  {
+    "concept_id": "arith.mult.concept",
+    "source": "wikipedia/arith.mult.concept.md"
+  },
+  {
+    "concept_id": "arith.mult.double",
+    "source": "wikipedia/arith.mult.double.md"
+  },
+  {
+    "concept_id": "arith.mult.triple",
+    "source": "wikipedia/arith.mult.triple.md"
+  },
+  {
+    "concept_id": "arith.mult.word",
+    "source": "wikipedia/arith.mult.word.md"
+  },
+  {
+    "concept_id": "arith.neg.add_sub",
+    "source": "wikipedia/arith.neg.add_sub.md"
+  },
+  {
+    "concept_id": "arith.neg.mult_div",
+    "source": "wikipedia/arith.neg.mult_div.md"
+  },
+  {
+    "concept_id": "arith.neg.number_line",
+    "source": "wikipedia/arith.neg.number_line.md"
+  },
+  {
+    "concept_id": "arith.neg.order_ops",
+    "source": "wikipedia/arith.neg.order_ops.md"
+  },
+  {
+    "concept_id": "arith.order_ops.full",
+    "source": "wikipedia/arith.order_ops.full.md"
+  },
+  {
+    "concept_id": "arith.order_ops.nested",
+    "source": "wikipedia/arith.order_ops.nested.md"
+  },
+  {
+    "concept_id": "arith.round.hundreds",
+    "source": "wikipedia/arith.round.hundreds.md"
+  },
+  {
+    "concept_id": "arith.round.tens",
+    "source": "wikipedia/arith.round.tens.md"
+  },
+  {
+    "concept_id": "arith.round.thousands",
+    "source": "wikipedia/arith.round.thousands.md"
+  },
+  {
+    "concept_id": "arith.sci_notation.ops",
+    "source": "wikipedia/arith.sci_notation.ops.md"
+  },
+  {
+    "concept_id": "arith.sub.borrow",
+    "source": "wikipedia/arith.sub.borrow.md"
+  },
+  {
+    "concept_id": "arith.sub.double",
+    "source": "wikipedia/arith.sub.double.md"
+  },
+  {
+    "concept_id": "arith.sub.single",
+    "source": "wikipedia/arith.sub.single.md"
+  },
+  {
+    "concept_id": "arith.sub.word",
+    "source": "wikipedia/arith.sub.word.md"
+  },
+  {
+    "concept_id": "calc.deriv.exp_log",
+    "source": "wikipedia/calc.deriv.exp_log.md"
+  },
+  {
+    "concept_id": "calc.deriv.implicit",
+    "source": "wikipedia/calc.deriv.implicit.md"
+  },
+  {
+    "concept_id": "calc.limit.infinity",
+    "source": "wikipedia/calc.limit.infinity.md"
+  },
+  {
+    "concept_id": "calc.limit.numeric",
+    "source": "wikipedia/calc.limit.numeric.md"
+  },
+  {
+    "concept_id": "complex.add_sub",
+    "source": "wikipedia/complex.add_sub.md"
+  },
+  {
+    "concept_id": "complex.concept",
+    "source": "wikipedia/complex.concept.md"
+  },
+  {
+    "concept_id": "complex.divide",
+    "source": "wikipedia/complex.divide.md"
+  },
+  {
+    "concept_id": "complex.mult",
+    "source": "wikipedia/complex.mult.md"
+  },
+  {
+    "concept_id": "complex.polar",
+    "source": "wikipedia/complex.polar.md"
+  },
+  {
+    "concept_id": "complex.roots",
+    "source": "wikipedia/complex.roots.md"
+  },
+  {
+    "concept_id": "count.compare",
+    "source": "wikipedia/count.compare.md"
+  },
+  {
+    "concept_id": "count.ordinal",
+    "source": "wikipedia/count.ordinal.md"
+  },
+  {
+    "concept_id": "count.skip_10",
+    "source": "wikipedia/count.skip_10.md"
+  },
+  {
+    "concept_id": "count.skip_2",
+    "source": "wikipedia/count.skip_2.md"
+  },
+  {
+    "concept_id": "count.skip_5",
+    "source": "wikipedia/count.skip_5.md"
+  },
+  {
+    "concept_id": "dec.add",
+    "source": "wikipedia/dec.add.md"
+  },
+  {
+    "concept_id": "dec.compare",
+    "source": "wikipedia/dec.compare.md"
+  },
+  {
+    "concept_id": "dec.div",
+    "source": "wikipedia/dec.div.md"
+  },
+  {
+    "concept_id": "dec.from_frac",
+    "source": "wikipedia/dec.from_frac.md"
+  },
+  {
+    "concept_id": "dec.mult",
+    "source": "wikipedia/dec.mult.md"
+  },
+  {
+    "concept_id": "dec.round",
+    "source": "wikipedia/dec.round.md"
+  },
+  {
+    "concept_id": "dec.sub",
+    "source": "wikipedia/dec.sub.md"
+  },
+  {
+    "concept_id": "dec.to_frac",
+    "source": "wikipedia/dec.to_frac.md"
+  },
+  {
+    "concept_id": "discrete.graphs.basics",
+    "source": "wikipedia/discrete.graphs.basics.md"
+  },
+  {
+    "concept_id": "frac.add.diff",
+    "source": "wikipedia/frac.add.diff.md"
+  },
+  {
+    "concept_id": "frac.add.same",
+    "source": "wikipedia/frac.add.same.md"
+  },
+  {
+    "concept_id": "frac.add.word",
+    "source": "wikipedia/frac.add.word.md"
+  },
+  {
+    "concept_id": "frac.benchmark",
+    "source": "wikipedia/frac.benchmark.md"
+  },
+  {
+    "concept_id": "frac.compare",
+    "source": "wikipedia/frac.compare.md"
+  },
+  {
+    "concept_id": "frac.concept",
+    "source": "wikipedia/frac.concept.md"
+  },
+  {
+    "concept_id": "frac.div",
+    "source": "wikipedia/frac.div.md"
+  },
+  {
+    "concept_id": "frac.div.whole",
+    "source": "wikipedia/frac.div.whole.md"
+  },
+  {
+    "concept_id": "frac.equivalent",
+    "source": "wikipedia/frac.equivalent.md"
+  },
+  {
+    "concept_id": "frac.mixed.add",
+    "source": "wikipedia/frac.mixed.add.md"
+  },
+  {
+    "concept_id": "frac.mixed.convert",
+    "source": "wikipedia/frac.mixed.convert.md"
+  },
+  {
+    "concept_id": "frac.mixed.mult",
+    "source": "wikipedia/frac.mixed.mult.md"
+  },
+  {
+    "concept_id": "frac.mixed.sub",
+    "source": "wikipedia/frac.mixed.sub.md"
+  },
+  {
+    "concept_id": "frac.mult",
+    "source": "wikipedia/frac.mult.md"
+  },
+  {
+    "concept_id": "frac.mult.whole",
+    "source": "wikipedia/frac.mult.whole.md"
+  },
+  {
+    "concept_id": "frac.on_number_line",
+    "source": "wikipedia/frac.on_number_line.md"
+  },
+  {
+    "concept_id": "frac.parts",
+    "source": "wikipedia/frac.parts.md"
+  },
+  {
+    "concept_id": "frac.simplify",
+    "source": "wikipedia/frac.simplify.md"
+  },
+  {
+    "concept_id": "frac.sub.diff",
+    "source": "wikipedia/frac.sub.diff.md"
+  },
+  {
+    "concept_id": "frac.sub.same",
+    "source": "wikipedia/frac.sub.same.md"
+  },
+  {
+    "concept_id": "frac.to_decimal",
+    "source": "wikipedia/frac.to_decimal.md"
+  },
+  {
+    "concept_id": "geo.basic.angle_measure",
+    "source": "wikipedia/geo.basic.angle_measure.md"
+  },
+  {
+    "concept_id": "geo.basic.angles",
+    "source": "wikipedia/geo.basic.angles.md"
+  },
+  {
+    "concept_id": "geo.basic.complementary",
+    "source": "wikipedia/geo.basic.complementary.md"
+  },
+  {
+    "concept_id": "geo.basic.points_lines",
+    "source": "wikipedia/geo.basic.points_lines.md"
+  },
+  {
+    "concept_id": "geo.basic.vertical",
+    "source": "wikipedia/geo.basic.vertical.md"
+  },
+  {
+    "concept_id": "geo.circle.parts",
+    "source": "wikipedia/geo.circle.parts.md"
+  },
+  {
+    "concept_id": "geo.coord.distance",
+    "source": "wikipedia/geo.coord.distance.md"
+  },
+  {
+    "concept_id": "geo.coord.midpoint",
+    "source": "wikipedia/geo.coord.midpoint.md"
+  },
+  {
+    "concept_id": "geo.coord.plot",
+    "source": "wikipedia/geo.coord.plot.md"
+  },
+  {
+    "concept_id": "geo.quad.area",
+    "source": "wikipedia/geo.quad.area.md"
+  },
+  {
+    "concept_id": "geo.quad.perimeter",
+    "source": "wikipedia/geo.quad.perimeter.md"
+  },
+  {
+    "concept_id": "geo.quad.types",
+    "source": "wikipedia/geo.quad.types.md"
+  },
+  {
+    "concept_id": "geo.solid.surface_area",
+    "source": "wikipedia/geo.solid.surface_area.md"
+  },
+  {
+    "concept_id": "geo.solid.volume_rect",
+    "source": "wikipedia/geo.solid.volume_rect.md"
+  },
+  {
+    "concept_id": "geo.triangle.angles",
+    "source": "wikipedia/geo.triangle.angles.md"
+  },
+  {
+    "concept_id": "geo.triangle.types",
+    "source": "wikipedia/geo.triangle.types.md"
+  },
+  {
+    "concept_id": "linalg.systems.matrix",
+    "source": "wikipedia/linalg.systems.matrix.md"
+  },
+  {
+    "concept_id": "ode.concept",
+    "source": "wikipedia/ode.concept.md"
+  },
+  {
+    "concept_id": "pct.find_rate",
+    "source": "wikipedia/pct.find_rate.md"
+  },
+  {
+    "concept_id": "pct.from_dec",
+    "source": "wikipedia/pct.from_dec.md"
+  },
+  {
+    "concept_id": "pct.increase",
+    "source": "wikipedia/pct.increase.md"
+  },
+  {
+    "concept_id": "pct.of_number",
+    "source": "wikipedia/pct.of_number.md"
+  },
+  {
+    "concept_id": "pct.to_dec",
+    "source": "wikipedia/pct.to_dec.md"
+  },
+  {
+    "concept_id": "prealg.eq.one_step_add",
+    "source": "wikipedia/prealg.eq.one_step_add.md"
+  },
+  {
+    "concept_id": "prealg.eq.one_step_mult",
+    "source": "wikipedia/prealg.eq.one_step_mult.md"
+  },
+  {
+    "concept_id": "prealg.eq.two_step",
+    "source": "wikipedia/prealg.eq.two_step.md"
+  },
+  {
+    "concept_id": "prealg.eq.word",
+    "source": "wikipedia/prealg.eq.word.md"
+  },
+  {
+    "concept_id": "prealg.ineq.one_step",
+    "source": "wikipedia/prealg.ineq.one_step.md"
+  },
+  {
+    "concept_id": "prealg.ineq.two_step",
+    "source": "wikipedia/prealg.ineq.two_step.md"
+  },
+  {
+    "concept_id": "ratio.simplify",
+    "source": "wikipedia/ratio.simplify.md"
+  },
+  {
+    "concept_id": "stat.prob.basic",
+    "source": "wikipedia/stat.prob.basic.md"
+  },
+  {
+    "concept_id": "stat.prob.counting",
+    "source": "wikipedia/stat.prob.counting.md"
+  },
+  {
+    "concept_id": "stat.prob.sample_space",
+    "source": "wikipedia/stat.prob.sample_space.md"
+  },
+  {
+    "concept_id": "topo.continuous",
+    "source": "wikipedia/topo.continuous.md"
+  },
+  {
+    "concept_id": "topo.metric",
+    "source": "wikipedia/topo.metric.md"
+  },
+  {
+    "concept_id": "topo.open_closed",
+    "source": "wikipedia/topo.open_closed.md"
+  },
+  {
+    "concept_id": "trig.graph_cos",
+    "source": "wikipedia/trig.graph_cos.md"
+  },
+  {
+    "concept_id": "trig.graph_sin",
+    "source": "wikipedia/trig.graph_sin.md"
+  },
+  {
+    "concept_id": "trig.period",
+    "source": "wikipedia/trig.period.md"
+  },
+  {
+    "concept_id": "trig.reciprocal",
+    "source": "wikipedia/trig.reciprocal.md"
+  },
+  {
+    "concept_id": "trig.reference_angle",
+    "source": "wikipedia/trig.reference_angle.md"
+  },
+  {
+    "concept_id": "trig.sin_cos_def",
+    "source": "wikipedia/trig.sin_cos_def.md"
+  },
+  {
+    "concept_id": "trig.special_angles",
+    "source": "wikipedia/trig.special_angles.md"
+  },
+  {
+    "concept_id": "alg.func.linear",
+    "source": "wikipedia/alg.func.linear.md"
+  },
+  {
+    "concept_id": "alg.quad.discriminant",
+    "source": "wikipedia/alg.quad.discriminant.md"
+  },
+  {
+    "concept_id": "arith.abs_value",
+    "source": "wikipedia/arith.abs_value.md"
+  },
+  {
+    "concept_id": "arith.div.basic",
+    "source": "wikipedia/arith.div.basic.md"
+  },
+  {
+    "concept_id": "arith.div.long",
+    "source": "wikipedia/arith.div.long.md"
+  },
+  {
+    "concept_id": "arith.div.remainder",
+    "source": "wikipedia/arith.div.remainder.md"
+  },
+  {
+    "concept_id": "arith.factor.composite",
+    "source": "wikipedia/arith.factor.composite.md"
+  },
+  {
+    "concept_id": "arith.mult.tables",
+    "source": "wikipedia/arith.mult.tables.md"
+  },
+  {
+    "concept_id": "arith.order_ops.basic",
+    "source": "wikipedia/arith.order_ops.basic.md"
+  },
+  {
+    "concept_id": "arith.place.hundreds",
+    "source": "wikipedia/arith.place.hundreds.md"
+  },
+  {
+    "concept_id": "arith.sci_notation",
+    "source": "wikipedia/arith.sci_notation.md"
+  },
+  {
+    "concept_id": "arith.sqrt.perfect",
+    "source": "wikipedia/arith.sqrt.perfect.md"
+  },
+  {
+    "concept_id": "calc.deriv.product_rule",
+    "source": "wikipedia/calc.deriv.product_rule.md"
+  },
+  {
+    "concept_id": "calc.deriv.quotient_rule",
+    "source": "wikipedia/calc.deriv.quotient_rule.md"
+  },
+  {
+    "concept_id": "calc.deriv.related_rates",
+    "source": "wikipedia/calc.deriv.related_rates.md"
+  },
+  {
+    "concept_id": "calc.deriv.sum_rule",
+    "source": "wikipedia/calc.deriv.sum_rule.md"
+  },
+  {
+    "concept_id": "calc.deriv.trig",
+    "source": "wikipedia/calc.deriv.trig.md"
+  },
+  {
+    "concept_id": "calc.integral.power_rule",
+    "source": "wikipedia/calc.integral.power_rule.md"
+  },
+  {
+    "concept_id": "calc.integral.volume",
+    "source": "wikipedia/calc.integral.volume.md"
+  },
+  {
+    "concept_id": "complex.conjugate",
+    "source": "wikipedia/complex.conjugate.md"
+  },
+  {
+    "concept_id": "discrete.graphs.paths",
+    "source": "wikipedia/discrete.graphs.paths.md"
+  },
+  {
+    "concept_id": "discrete.graphs.trees",
+    "source": "wikipedia/discrete.graphs.trees.md"
+  },
+  {
+    "concept_id": "discrete.induction",
+    "source": "wikipedia/discrete.induction.md"
+  },
+  {
+    "concept_id": "discrete.logic.connectives",
+    "source": "wikipedia/discrete.logic.connectives.md"
+  },
+  {
+    "concept_id": "discrete.logic.quantifiers",
+    "source": "wikipedia/discrete.logic.quantifiers.md"
+  },
+  {
+    "concept_id": "discrete.logic.truth_tables",
+    "source": "wikipedia/discrete.logic.truth_tables.md"
+  },
+  {
+    "concept_id": "discrete.recurrence",
+    "source": "wikipedia/discrete.recurrence.md"
+  },
+  {
+    "concept_id": "discrete.sets.venn",
+    "source": "wikipedia/discrete.sets.venn.md"
+  },
+  {
+    "concept_id": "geo.circle.area",
+    "source": "wikipedia/geo.circle.area.md"
+  },
+  {
+    "concept_id": "geo.circle.circumference",
+    "source": "wikipedia/geo.circle.circumference.md"
+  },
+  {
+    "concept_id": "nt.congruence",
+    "source": "wikipedia/nt.congruence.md"
+  },
+  {
+    "concept_id": "nt.crypto",
+    "source": "wikipedia/nt.crypto.md"
+  },
+  {
+    "concept_id": "nt.diophantine",
+    "source": "wikipedia/nt.diophantine.md"
+  },
+  {
+    "concept_id": "nt.euler_phi",
+    "source": "wikipedia/nt.euler_phi.md"
+  },
+  {
+    "concept_id": "nt.fermat_little",
+    "source": "wikipedia/nt.fermat_little.md"
+  },
+  {
+    "concept_id": "nt.gcd_euclidean",
+    "source": "wikipedia/nt.gcd_euclidean.md"
+  },
+  {
+    "concept_id": "nt.modular",
+    "source": "wikipedia/nt.modular.md"
+  },
+  {
+    "concept_id": "ode.exact",
+    "source": "wikipedia/ode.exact.md"
+  },
+  {
+    "concept_id": "ode.homogeneous",
+    "source": "wikipedia/ode.homogeneous.md"
+  },
+  {
+    "concept_id": "pct.concept",
+    "source": "wikipedia/pct.concept.md"
+  },
+  {
+    "concept_id": "pct.discount",
+    "source": "wikipedia/pct.discount.md"
+  },
+  {
+    "concept_id": "pct.tax_tip",
+    "source": "wikipedia/pct.tax_tip.md"
+  },
+  {
+    "concept_id": "prealg.expr.distribute",
+    "source": "wikipedia/prealg.expr.distribute.md"
+  },
+  {
+    "concept_id": "prealg.expr.evaluate",
+    "source": "wikipedia/prealg.expr.evaluate.md"
+  },
+  {
+    "concept_id": "prealg.expr.like_terms",
+    "source": "wikipedia/prealg.expr.like_terms.md"
+  },
+  {
+    "concept_id": "prealg.var.concept",
+    "source": "wikipedia/prealg.var.concept.md"
+  },
+  {
+    "concept_id": "ratio.concept",
+    "source": "wikipedia/ratio.concept.md"
+  },
+  {
+    "concept_id": "ratio.proportion",
+    "source": "wikipedia/ratio.proportion.md"
+  },
+  {
+    "concept_id": "ratio.rate",
+    "source": "wikipedia/ratio.rate.md"
+  },
+  {
+    "concept_id": "stat.data.read_table",
+    "source": "wikipedia/stat.data.read_table.md"
+  },
+  {
+    "concept_id": "stat.prob.complement",
+    "source": "wikipedia/stat.prob.complement.md"
+  },
+  {
+    "concept_id": "trig.inverse",
+    "source": "wikipedia/trig.inverse.md"
+  },
+  {
+    "concept_id": "trig.law_cosines",
+    "source": "wikipedia/trig.law_cosines.md"
+  },
+  {
+    "concept_id": "trig.law_sines",
+    "source": "wikipedia/trig.law_sines.md"
+  },
+  {
+    "concept_id": "trig.pythagorean_id",
+    "source": "wikipedia/trig.pythagorean_id.md"
+  },
+  {
+    "concept_id": "alg.linear.graph",
+    "source": "wikipedia/alg.linear.graph.md"
+  },
+  {
+    "concept_id": "arith.place.tens",
+    "source": "wikipedia/arith.place.tens.md"
+  },
+  {
+    "concept_id": "arith.place.thousands",
+    "source": "wikipedia/arith.place.thousands.md"
+  },
+  {
+    "concept_id": "complex.de_moivre",
+    "source": "wikipedia/complex.de_moivre.md"
+  },
+  {
+    "concept_id": "count.backwards",
+    "source": "wikipedia/count.backwards.md"
+  },
+  {
+    "concept_id": "count.cardinality",
+    "source": "wikipedia/count.cardinality.md"
+  },
+  {
+    "concept_id": "count.number_line",
+    "source": "wikipedia/count.number_line.md"
+  },
+  {
+    "concept_id": "count.objects",
+    "source": "wikipedia/count.objects.md"
+  },
+  {
+    "concept_id": "count.objects_20",
+    "source": "wikipedia/count.objects_20.md"
+  },
+  {
+    "concept_id": "geo.triangle.area",
+    "source": "wikipedia/geo.triangle.area.md"
+  },
+  {
+    "concept_id": "linalg.basis",
+    "source": "wikipedia/linalg.basis.md"
+  },
+  {
+    "concept_id": "linalg.cramer",
+    "source": "wikipedia/linalg.cramer.md"
+  },
+  {
+    "concept_id": "linalg.span",
+    "source": "wikipedia/linalg.span.md"
+  },
+  {
+    "concept_id": "linalg.transformations",
+    "source": "wikipedia/linalg.transformations.md"
+  },
+  {
+    "concept_id": "ode.laplace",
+    "source": "wikipedia/ode.laplace.md"
+  },
+  {
+    "concept_id": "ode.linear_first",
+    "source": "wikipedia/ode.linear_first.md"
+  },
+  {
+    "concept_id": "ode.separable",
+    "source": "wikipedia/ode.separable.md"
+  },
+  {
+    "concept_id": "ode.systems",
+    "source": "wikipedia/ode.systems.md"
+  },
+  {
+    "concept_id": "ratio.scale",
+    "source": "wikipedia/ratio.scale.md"
+  },
+  {
+    "concept_id": "stat.data.bar_graph",
+    "source": "wikipedia/stat.data.bar_graph.md"
+  },
+  {
+    "concept_id": "stat.data.line_plot",
+    "source": "wikipedia/stat.data.line_plot.md"
+  },
+  {
+    "concept_id": "stat.data.mode",
+    "source": "wikipedia/stat.data.mode.md"
+  },
+  {
+    "concept_id": "abstract.homomorphism",
+    "source": "wikipedia/abstract.homomorphism.md"
+  },
+  {
+    "concept_id": "abstract.ring",
+    "source": "wikipedia/abstract.ring.md"
+  },
+  {
+    "concept_id": "abstract.subgroup",
+    "source": "wikipedia/abstract.subgroup.md"
+  },
+  {
+    "concept_id": "stat.data.range",
+    "source": "wikipedia/stat.data.range.md"
+  },
+  {
+    "concept_id": "trig.radians",
+    "source": "wikipedia/trig.radians.md"
+  },
+  {
+    "concept_id": "trig.tan_def",
+    "source": "wikipedia/trig.tan_def.md"
+  },
+  {
+    "concept_id": "ode.nonhomogeneous",
+    "source": "wikipedia/ode.nonhomogeneous.md"
+  },
+  {
+    "concept_id": "stat.prob.compound",
+    "source": "wikipedia/stat.prob.compound.md"
+  },
+  {
+    "concept_id": "nt.divisibility",
+    "source": "wikipedia/nt.divisibility.md"
   }
 ]
