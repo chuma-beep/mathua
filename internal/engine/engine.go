@@ -442,6 +442,14 @@ func (e *Engine) GetDAG() *concepts.DAG {
 
 func (e *Engine) GetGeneratorRegistry() *generator.Registry { return e.registry }
 
+func (e *Engine) GetQuestions(conceptID string, count int) ([]storage.Question, error) {
+	return e.repo.GetQuestions(conceptID, count)
+}
+
+func (e *Engine) GetQuestionCount(conceptID string) (int, error) {
+	return e.repo.GetQuestionCount(conceptID)
+}
+
 func (e *Engine) GetLessonLoader() *lessons.Loader {
 	return e.ll
 }
