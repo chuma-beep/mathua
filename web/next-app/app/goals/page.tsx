@@ -66,6 +66,7 @@ export default function GoalsPage() {
   const conceptId = useRef('')
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
+  const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
@@ -155,6 +156,9 @@ export default function GoalsPage() {
       conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
+      // Estimate total: ~10 + log2(selected concepts)
+      const est = Math.min(10 + Math.ceil(Math.log2(ids.length) * 5), 50)
+      setEstimatedTotal(est)
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
@@ -277,42 +281,77 @@ export default function GoalsPage() {
           {/* === STEP 2: Diagnostic === */}
           {step === 'diagnostic' && (
             <>
-              <SectionHeader label={`Question ${questionCount}`} title={conceptName} />
+              <SectionHeader label={`Question ${questionCount} of ~${estimatedTotal}`} title={conceptName} />
               <div className="max-w-2xl mx-auto">
-                <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
+                {/* Progress bar */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-[10px] font-mono text-mathua-muted mb-1">
+                    <span>Progress</span>
+                    <span>{questionCount > estimatedTotal ? estimatedTotal : questionCount} / {estimatedTotal}</span>
+                  </div>
+                  <div className="h-1.5 bg-mathua-code rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-mathua-blue rounded-full transition-all duration-500"
+                      style={{ width: `${Math.min((questionCount / estimatedTotal) * 100, 100)}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Accuracy display */}
+                {accuracy.total > 0 && (
+                  <div className="mb-4 flex items-center gap-2 text-xs font-mono text-mathua-muted justify-center">
+                    <span className={accuracy.correct / accuracy.total >= 0.7 ? 'text-mathua-green' : accuracy.correct / accuracy.total < 0.4 ? 'text-mathua-red' : ''}>
+                      {accuracy.correct}/{accuracy.total}
+                    </span>
+                    <span>correct</span>
+                    <div className="w-20 h-1 bg-mathua-code rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-mathua-blue rounded-full transition-all"
+                        style={{ width: `${(accuracy.correct / Math.max(accuracy.total, 1)) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className={`bg-mathua-surface border rounded-lg p-6 mb-6 transition-colors duration-200 ${
+                  lastResult
+                    ? lastResult.correct ? 'border-green-500/40' : 'border-red-500/40'
+                    : 'border-mathua-border'
+                }`}>
                   <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
                     <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">
                       {question}
                     </p>
                   </div>
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      value={answerInput}
-                      onChange={(e) => setAnswerInput(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
-                      placeholder="Your answer..."
-                      disabled={loading || lastResult !== null}
-                      className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
-                    />
-                    <button
-                      onClick={submitAnswer}
-                      disabled={!answerInput.trim() || loading || lastResult !== null}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
-                    >
-                      Check Answer
-                    </button>
-                  </div>
-                </div>
 
-                {lastResult && (
-                  <div className={`bg-mathua-surface border rounded-lg p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
-                    <p className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</p>
-                  </div>
-                )}
-
-                <div className="text-center text-mathua-muted text-xs font-mono">
-                  {accuracy.total > 0 && `${accuracy.correct}/${accuracy.total} correct`}
+                  {!lastResult ? (
+                    <div className="flex gap-3">
+                      <input
+                        type="text"
+                        value={answerInput}
+                        onChange={(e) => setAnswerInput(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
+                        placeholder="Your answer..."
+                        disabled={loading}
+                        className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                      />
+                      <button
+                        onClick={submitAnswer}
+                        disabled={!answerInput.trim() || loading}
+                        className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap"
+                      >
+                        Check Answer
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="animate-fadeIn text-center">
+                      <p className={`text-base font-medium mb-2 ${lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>
+                        {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
+                      </p>
+                      <p className="text-mathua-secondary text-sm">{lastResult.feedback}</p>
+                      {loading && <p className="text-mathua-muted text-xs mt-2">Loading next question…</p>}
+                    </div>
+                  )}
                 </div>
               </div>
             </>
@@ -323,55 +362,88 @@ export default function GoalsPage() {
             <>
               <SectionHeader label="Your results" title="Here's what we found" />
 
-              <div className="max-w-2xl mx-auto text-center">
-                <div className="text-5xl font-light font-mono text-mathua-blue mb-2">
-                  {Math.round(plan.readiness * 100)}%
+              <div className="max-w-2xl mx-auto">
+                {/* Readiness meter */}
+                <div className="text-center mb-10">
+                  <div className="relative inline-flex items-center justify-center">
+                    <svg width="140" height="140" className="-rotate-90">
+                      <circle cx="70" cy="70" r="60" fill="none" stroke="var(--code-bg)" strokeWidth="10" />
+                      <circle
+                        cx="70" cy="70" r="60" fill="none" stroke="var(--accent-blue)"
+                        strokeWidth="10" strokeLinecap="round"
+                        strokeDasharray={`${2 * Math.PI * 60}`}
+                        strokeDashoffset={`${2 * Math.PI * 60 * (1 - plan.readiness)}`}
+                        className="transition-all duration-1000"
+                      />
+                    </svg>
+                    <span className="absolute text-3xl font-mono font-light text-mathua-primary">
+                      {Math.round(plan.readiness * 100)}%
+                    </span>
+                  </div>
+                  <p className="text-mathua-secondary text-sm mt-2">
+                    readiness for your selected topics
+                  </p>
+                  {plan.total_tested > 0 && (
+                    <p className="text-mathua-muted text-xs font-mono mt-1">
+                      {plan.correct_count}/{plan.total_tested} correct
+                    </p>
+                  )}
                 </div>
-                <p className="text-mathua-secondary text-sm mb-8">
-                  readiness for your selected topics
-                  {plan.total_tested > 0 && ` (${plan.correct_count}/${plan.total_tested} correct)`}
-                </p>
 
-                {Object.keys(plan.weak_areas).length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="font-serif text-lg text-mathua-primary mb-4">Areas needing attention</h3>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                      {Object.entries(plan.weak_areas).map(([domain, concepts]) => {
-                        const label = domainLabels[domain] || domain
-                        return (
-                          <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-lg p-4 min-w-[160px]">
-                            <div className="font-mono text-[10px] uppercase text-mathua-muted mb-1">{label}</div>
-                            <div className="font-mono text-xl text-mathua-red">{concepts.length}</div>
-                            <div className="text-mathua-secondary text-xs mt-1">to review</div>
-                          </div>
-                        )
-                      })}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  {/* Weak areas */}
+                  {Object.keys(plan.weak_areas).length > 0 && (
+                    <div>
+                      <h3 className="font-serif text-sm text-mathua-red mb-3 font-mono border-b border-mathua-border pb-2">
+                        Needs attention ({Object.values(plan.weak_areas).flat().length})
+                      </h3>
+                      <div className="space-y-2">
+                        {Object.entries(plan.weak_areas).map(([domain, concepts]) => {
+                          const label = domainLabels[domain] || domain
+                          return (
+                            <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-3">
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono text-xs text-mathua-primary">{label}</span>
+                                <span className="font-mono text-xs text-mathua-red">{concepts.length}</span>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {Object.keys(plan.strong_areas).length > 0 && (
-                  <div className="mb-8">
-                    <h3 className="font-serif text-lg text-mathua-primary mb-4">Strong areas</h3>
-                    <div className="flex flex-wrap gap-3 justify-center">
-                      {Object.entries(plan.strong_areas).map(([domain, concepts]) => {
-                        const label = domainLabels[domain] || domain
-                        return (
-                          <span key={domain} className="bg-mathua-surface border border-mathua-border rounded px-3 py-1.5 text-mathua-secondary text-sm">
-                            {label} <span className="text-mathua-green">({concepts.length})</span>
-                          </span>
-                        )
-                      })}
+                  {/* Strong areas */}
+                  {Object.keys(plan.strong_areas).length > 0 && (
+                    <div>
+                      <h3 className="font-serif text-sm text-mathua-green mb-3 font-mono border-b border-mathua-border pb-2">
+                        Strong areas ({Object.values(plan.strong_areas).flat().length})
+                      </h3>
+                      <div className="space-y-2">
+                        {Object.entries(plan.strong_areas).map(([domain, concepts]) => {
+                          const label = domainLabels[domain] || domain
+                          return (
+                            <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-3">
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono text-xs text-mathua-primary">{label}</span>
+                                <span className="font-mono text-xs text-mathua-green">{concepts.length}</span>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
 
-                <button
-                  onClick={startPractice}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm"
-                >
-                  Start practicing
-                </button>
+                <div className="text-center">
+                  <button
+                    onClick={startPractice}
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm"
+                  >
+                    Start practicing →
+                  </button>
+                </div>
               </div>
             </>
           )}

@@ -8,6 +8,7 @@ interface SearchItem {
   body: string
   domain: string
   concepts: string[]
+  conceptLabels?: string[]
 }
 
 interface SearchBarProps {
@@ -26,6 +27,7 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
       keys: [
         { name: 'title', weight: 2 },
         { name: 'concepts', weight: 1.5 },
+        { name: 'conceptLabels', weight: 1.5 },
         { name: 'body', weight: 1 },
         { name: 'domain', weight: 1 },
       ],

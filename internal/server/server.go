@@ -9,11 +9,13 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/grader"
+	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -70,6 +72,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
+	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
@@ -915,6 +918,32 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 	}
+}
+
+// GET /api/reviews/due — returns count of concepts due for review
+func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeJSON(w, map[string]interface{}{"count": 0})
+		return
+	}
+	progress, err := s.eng.GetProgress(studentID)
+	if err != nil {
+		writeJSON(w, map[string]interface{}{"count": 0})
+		return
+	}
+	now := time.Now()
+	count := 0
+	for _, p := range progress {
+		if p.NextReviewDue != nil && p.NextReviewDue.Before(now) && p.Status != string(mastery.StatusMastered) {
+			count++
+		}
+	}
+	writeJSON(w, map[string]interface{}{"count": count})
 }
 
 // GET /api/courses

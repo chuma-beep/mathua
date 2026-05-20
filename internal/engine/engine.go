@@ -132,6 +132,26 @@ func (e *Engine) ActivePath(studentID string) map[string]bool {
 	return e.activePath[studentID]
 }
 
+// computeDifficulty returns a difficulty score (0.3–1.0) based on the student's
+// performance for the given concept. Weak/struggling students get easier questions.
+func (e *Engine) computeDifficulty(studentID, conceptID string) float64 {
+	weakness := 0.5
+	if m := e.WeaknessMap(studentID); m != nil {
+		if w, ok := m[conceptID]; ok {
+			weakness = w
+		}
+	}
+	// Higher weakness → lower difficulty (easier questions)
+	d := 0.3 + (1-weakness)*0.5
+	if d < 0.3 {
+		d = 0.3
+	}
+	if d > 1.0 {
+		d = 1.0
+	}
+	return d
+}
+
 func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	progress, err := e.repo.GetAllProgress(studentID)
 	if err != nil {
@@ -188,7 +208,8 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	if next == nil {
 		return nil, nil
 	}
-	prob, err := e.registry.Generate(next.Concept.ID, 0.5)
+	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
+	prob, err := e.registry.Generate(next.Concept.ID, difficulty)
 	if err != nil {
 		return nil, fmt.Errorf("generate problem: %w", err)
 	}
@@ -582,7 +603,8 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 		}
 	}
 
-	prob, err := e.registry.Generate(conceptID, 0.5)
+	difficulty := e.computeDifficulty(studentID, conceptID)
+	prob, err := e.registry.Generate(conceptID, difficulty)
 	if err != nil {
 		return nil, fmt.Errorf("generate problem: %w", err)
 	}

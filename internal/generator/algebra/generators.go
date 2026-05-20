@@ -113,12 +113,14 @@ func Register(reg *generator.Registry) {
 type slopeGen struct{}
 
 func (g *slopeGen) Generate(difficulty float64) generator.Problem {
-	x1 := rand.Intn(10)
-	y1 := rand.Intn(10)
-	x2 := x1 + rand.Intn(8) + 1
-	y2 := y1 + rand.Intn(10) + 1
-	if rand.Intn(2) == 0 {
-		y2 = y1 - rand.Intn(y1+1)
+	// Higher difficulty → wider range, negative slopes more likely
+	lim := int(3 + difficulty*12)
+	x1 := rand.Intn(lim)
+	y1 := rand.Intn(lim)
+	x2 := x1 + rand.Intn(int(difficulty*7)+2) + 1
+	y2 := y1 + rand.Intn(lim) + 1
+	if rand.Intn(2) == 0 || difficulty > 0.6 {
+		y2 = y1 - rand.Intn(max(y1, 1)+1)
 	}
 	dy := y2 - y1
 	dx := x2 - x1
@@ -134,11 +136,23 @@ func (g *slopeGen) Generate(difficulty float64) generator.Problem {
 type slopeInterceptGen struct{}
 
 func (g *slopeInterceptGen) Generate(difficulty float64) generator.Problem {
-	m := rand.Intn(5) + 1
+	// Higher difficulty → fractional slopes and larger intercepts
+	if difficulty > 0.6 && rand.Intn(2) == 0 {
+		m := rand.Intn(3) + 1
+		n := rand.Intn(3) + 2
+		if rand.Intn(2) == 0 { m = -m }
+		b := rand.Intn(int(5+difficulty*10)) - int(3+difficulty*5)
+		return generator.Problem{
+			Question:    fmt.Sprintf("Write the equation of a line with slope %d/%d and y-intercept %d (y = mx + b).", m, n, b),
+			Answer:      fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
+			Explanation: fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
+		}
+	}
+	m := rand.Intn(int(1+difficulty*5)) + 1
 	if rand.Intn(2) == 0 {
 		m = -m
 	}
-	b := rand.Intn(10) - 5
+	b := rand.Intn(int(5+difficulty*8)) - int(3+difficulty*4)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write the equation of a line with slope %d and y-intercept %d (y = mx + b).", m, b),
 		Answer:      formatLinear(m, b),
@@ -215,9 +229,10 @@ func (g *parallelPerpGen) Generate(difficulty float64) generator.Problem {
 type multiStepEqGen struct{}
 
 func (g *multiStepEqGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(10) + 2
-	a := rand.Intn(6) + 2
-	b := rand.Intn(10) + 2
+	scale := int(1 + difficulty*8)
+	x := rand.Intn(scale*2) + 2
+	a := rand.Intn(scale) + 2
+	b := rand.Intn(scale*2) + 2
 	c := a*x + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: %dx + %d = %d", a, b, c),
@@ -229,13 +244,14 @@ func (g *multiStepEqGen) Generate(difficulty float64) generator.Problem {
 type varsBothSidesGen struct{}
 
 func (g *varsBothSidesGen) Generate(difficulty float64) generator.Problem {
-	x := rand.Intn(8) + 2
-	a := rand.Intn(5) + 2
-	c := rand.Intn(5) + 1
+	scale := int(1 + difficulty*7)
+	x := rand.Intn(scale*2) + 2
+	a := rand.Intn(scale) + 2
+	c := rand.Intn(scale) + 1
 	for a == c {
 		c++
 	}
-	b := rand.Intn(10) + 1
+	b := rand.Intn(scale*2) + 1
 	d := (a-c)*x + b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: %dx + %d = %dx + %d", a, b, c, d),
