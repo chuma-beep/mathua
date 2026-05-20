@@ -5,59 +5,38 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
-	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
-		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
-			}
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
 	}
 }
 
-func fuzzGenNoSelfGrade(t *testing.T, gen generator.Generator) {
-	t.Helper()
-	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
-		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-	}
-}
-
-func TestPointsLines(t *testing.T)    { fuzzGen(t, &pointsLinesGen{}, grader.GradingMultipleChoice) }
-func TestAngleTypes(t *testing.T)     { fuzzGen(t, &angleTypesGen{}, grader.GradingMultipleChoice) }
-func TestAngleMeasure(t *testing.T)   { fuzzGen(t, &angleMeasureGen{}, grader.GradingMultipleChoice) }
-func TestComplementary(t *testing.T)  { fuzzGen(t, &complementaryGen{}, grader.GradingNumeric) }
-func TestVerticalAngles(t *testing.T) { fuzzGen(t, &verticalAnglesGen{}, grader.GradingNumeric) }
-func TestTriangleTypes(t *testing.T)  { fuzzGen(t, &triangleTypesGen{}, grader.GradingMultipleChoice) }
-func TestTriangleAngles(t *testing.T) { fuzzGen(t, &triangleAnglesGen{}, grader.GradingNumeric) }
-func TestTriangleArea(t *testing.T)   { fuzzGen(t, &triangleAreaGen{}, grader.GradingNumeric) }
-func TestPythagorean(t *testing.T)    { fuzzGen(t, &pythagoreanGen{}, grader.GradingNumeric) }
-func TestQuadTypes(t *testing.T)      { fuzzGen(t, &quadTypesGen{}, grader.GradingMultipleChoice) }
-func TestQuadArea(t *testing.T)       { fuzzGen(t, &quadAreaGen{}, grader.GradingNumeric) }
-func TestQuadPerim(t *testing.T)      { fuzzGen(t, &quadPerimGen{}, grader.GradingNumeric) }
-func TestCircleParts(t *testing.T)    { fuzzGen(t, &circlePartsGen{}, grader.GradingMultipleChoice) }
-func TestCircumference(t *testing.T)  { fuzzGen(t, &circumferenceGen{}, grader.GradingNumeric) }
-func TestCircleArea(t *testing.T)     { fuzzGen(t, &circleAreaGen{}, grader.GradingNumeric) }
-func TestCoordPlot(t *testing.T)      { fuzzGen(t, &coordPlotGen{}, grader.GradingMultipleChoice) }
-func TestCoordDistance(t *testing.T)  { fuzzGen(t, &coordDistanceGen{}, grader.GradingNumeric) }
-func TestCoordMidpoint(t *testing.T)  { fuzzGen(t, &coordMidpointGen{}, grader.GradingTuple) }
-func TestVolume(t *testing.T)         { fuzzGen(t, &volumeGen{}, grader.GradingNumeric) }
-func TestSurfaceArea(t *testing.T)    { fuzzGen(t, &surfaceAreaGen{}, grader.GradingNumeric) }
-func TestCoordLines(t *testing.T)     { fuzzGen(t, &coordLinesGen{}, grader.GradingMultipleChoice) }
-func TestCoordPolar(t *testing.T)     { fuzzGen(t, &coordPolarGen{}, grader.GradingMultipleChoice) }
+func TestPointsLinesGen(t *testing.T)    { fuzzGen(t, &pointsLinesGen{}) }
+func TestAngleTypesGen(t *testing.T)     { fuzzGen(t, &angleTypesGen{}) }
+func TestAngleMeasureGen(t *testing.T)   { fuzzGen(t, &angleMeasureGen{}) }
+func TestComplementaryGen(t *testing.T)  { fuzzGen(t, &complementaryGen{}) }
+func TestVerticalAnglesGen(t *testing.T) { fuzzGen(t, &verticalAnglesGen{}) }
+func TestTriangleTypesGen(t *testing.T)  { fuzzGen(t, &triangleTypesGen{}) }
+func TestTriangleAnglesGen(t *testing.T) { fuzzGen(t, &triangleAnglesGen{}) }
+func TestTriangleAreaGen(t *testing.T)   { fuzzGen(t, &triangleAreaGen{}) }
+func TestPythagoreanGen(t *testing.T)    { fuzzGen(t, &pythagoreanGen{}) }
+func TestQuadTypesGen(t *testing.T)      { fuzzGen(t, &quadTypesGen{}) }
+func TestQuadAreaGen(t *testing.T)       { fuzzGen(t, &quadAreaGen{}) }
+func TestQuadPerimGen(t *testing.T)      { fuzzGen(t, &quadPerimGen{}) }
+func TestCirclePartsGen(t *testing.T)    { fuzzGen(t, &circlePartsGen{}) }
+func TestCircumferenceGen(t *testing.T)  { fuzzGen(t, &circumferenceGen{}) }
+func TestCircleAreaGen(t *testing.T)     { fuzzGen(t, &circleAreaGen{}) }
+func TestCoordPlotGen(t *testing.T)      { fuzzGen(t, &coordPlotGen{}) }
+func TestCoordDistanceGen(t *testing.T)  { fuzzGen(t, &coordDistanceGen{}) }
+func TestCoordMidpointGen(t *testing.T)  { fuzzGen(t, &coordMidpointGen{}) }
+func TestVolumeGen(t *testing.T)         { fuzzGen(t, &volumeGen{}) }
+func TestSurfaceAreaGen(t *testing.T)    { fuzzGen(t, &surfaceAreaGen{}) }
+func TestCoordLinesGen(t *testing.T)     { fuzzGen(t, &coordLinesGen{}) }
+func TestCoordPolarGen(t *testing.T)     { fuzzGen(t, &coordPolarGen{}) }

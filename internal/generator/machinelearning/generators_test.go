@@ -1,4 +1,4 @@
-package topology
+package machinelearning
 
 import (
 	"math/rand"
@@ -18,6 +18,4 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestMetricGen(t *testing.T)     { fuzzGen(t, &metricGen{}) }
-func TestOpenClosedGen(t *testing.T) { fuzzGen(t, &openClosedGen{}) }
-func TestContinuousGen(t *testing.T) { fuzzGen(t, &continuousGen{}) }
+func TestBackpropGen(t *testing.T) { fuzzGen(t, &backpropGen{}) }

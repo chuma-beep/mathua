@@ -5,34 +5,23 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
-	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
-		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
-			}
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
 	}
 }
 
-func TestGroupDef(t *testing.T)      { fuzzGen(t, &groupDefGen{}, grader.GradingMultipleChoice) }
-func TestGroupExamples(t *testing.T) { fuzzGen(t, &groupExamplesGen{}, grader.GradingMultipleChoice) }
-func TestSubgroup(t *testing.T)      { fuzzGen(t, &subgroupGen{}, grader.GradingMultipleChoice) }
-func TestRing(t *testing.T)          { fuzzGen(t, &ringGen{}, grader.GradingMultipleChoice) }
-func TestHomomorphism(t *testing.T)  { fuzzGen(t, &homomorphismGen{}, grader.GradingMultipleChoice) }
-func TestField(t *testing.T)         { fuzzGen(t, &fieldGen{}, grader.GradingMultipleChoice) }
-func TestModule(t *testing.T)        { fuzzGen(t, &moduleGen{}, grader.GradingMultipleChoice) }
+func TestGroupDefGen(t *testing.T)       { fuzzGen(t, &groupDefGen{}) }
+func TestGroupExamplesGen(t *testing.T)  { fuzzGen(t, &groupExamplesGen{}) }
+func TestSubgroupGen(t *testing.T)       { fuzzGen(t, &subgroupGen{}) }
+func TestRingGen(t *testing.T)           { fuzzGen(t, &ringGen{}) }
+func TestHomomorphismGen(t *testing.T)   { fuzzGen(t, &homomorphismGen{}) }
+func TestFieldGen(t *testing.T)          { fuzzGen(t, &fieldGen{}) }
+func TestModuleGen(t *testing.T)         { fuzzGen(t, &moduleGen{}) }

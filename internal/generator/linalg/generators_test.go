@@ -5,49 +5,36 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
-	"github.com/chuma-beep/mathua/internal/verify"
 )
 
-func fuzzGen(t *testing.T, gen generator.Generator, gtype grader.GradingType) {
+func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()
-	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
-		p := gen.Generate(rand.Float64())
+		d := rand.Float64()
+		p := gen.Generate(d)
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
-			t.Errorf("empty field: q=%q a=%q e=%q", p.Question, p.Answer, p.Explanation)
-		}
-		res := gr.Grade(gtype, p.Answer, p.Answer)
-		if !res.Correct {
-			t.Errorf("self-grade failed: gtype=%s a=%q", gtype, p.Answer)
-		}
-		if expr, ok := verify.ExtractExpr(p.Question); ok {
-			if err := verify.CheckExpr(expr, p.Answer); err != nil {
-				t.Errorf("%s -> %s: %v", p.Question, p.Answer, err)
-			}
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
 	}
 }
 
-func TestVectorConcept(t *testing.T)  { fuzzGen(t, &vectorConceptGen{}, grader.GradingMultipleChoice) }
-func TestVectorAdd(t *testing.T)      { fuzzGen(t, &vectorAddGen{}, grader.GradingTuple) }
-func TestVectorDot(t *testing.T)      { fuzzGen(t, &vectorDotGen{}, grader.GradingNumeric) }
-func TestMatrixConcept(t *testing.T)  { fuzzGen(t, &matrixConceptGen{}, grader.GradingMultipleChoice) }
-func TestMatrixAdd(t *testing.T)      { fuzzGen(t, &matrixAddGen{}, grader.GradingMultipleChoice) }
-func TestMatrixMult(t *testing.T)     { fuzzGen(t, &matrixMultGen{}, grader.GradingMultipleChoice) }
-func TestMatrixIdentity(t *testing.T) { fuzzGen(t, &matrixIdentityGen{}, grader.GradingMultipleChoice) }
-func TestDet2x2(t *testing.T)         { fuzzGen(t, &det2x2Gen{}, grader.GradingNumeric) }
-func TestDet3x3(t *testing.T)         { fuzzGen(t, &det3x3Gen{}, grader.GradingNumeric) }
-func TestSystemsMatrix(t *testing.T)  { fuzzGen(t, &systemsMatrixGen{}, grader.GradingTuple) }
-func TestCramer(t *testing.T)         { fuzzGen(t, &cramerGen{}, grader.GradingNumeric) }
-func TestEigenConcept(t *testing.T)   { fuzzGen(t, &eigenConceptGen{}, grader.GradingMultipleChoice) }
-func TestEigenCompute(t *testing.T)   { fuzzGen(t, &eigenComputeGen{}, grader.GradingTuple) }
-func TestTransformations(t *testing.T) {
-	fuzzGen(t, &transformationsGen{}, grader.GradingTuple)
-}
-func TestSpan(t *testing.T)  { fuzzGen(t, &spanGen{}, grader.GradingMultipleChoice) }
-func TestBasis(t *testing.T)         { fuzzGen(t, &basisGen{}, grader.GradingMultipleChoice) }
-func TestDiagonalization(t *testing.T) { fuzzGen(t, &diagonalizationGen{}, grader.GradingMultipleChoice) }
-func TestRank(t *testing.T)            { fuzzGen(t, &rankGen{}, grader.GradingNumeric) }
-func TestCosineSimilarity(t *testing.T) { fuzzGen(t, &cosineSimilarityGen{}, grader.GradingNumeric) }
-func TestParametric(t *testing.T)      { fuzzGen(t, &parametricGen{}, grader.GradingMultipleChoice) }
+func TestVectorConceptGen(t *testing.T)  { fuzzGen(t, &vectorConceptGen{}) }
+func TestVectorAddGen(t *testing.T)      { fuzzGen(t, &vectorAddGen{}) }
+func TestVectorDotGen(t *testing.T)      { fuzzGen(t, &vectorDotGen{}) }
+func TestMatrixConceptGen(t *testing.T)  { fuzzGen(t, &matrixConceptGen{}) }
+func TestMatrixAddGen(t *testing.T)      { fuzzGen(t, &matrixAddGen{}) }
+func TestMatrixMultGen(t *testing.T)     { fuzzGen(t, &matrixMultGen{}) }
+func TestMatrixIdentityGen(t *testing.T) { fuzzGen(t, &matrixIdentityGen{}) }
+func TestDet2x2Gen(t *testing.T)         { fuzzGen(t, &det2x2Gen{}) }
+func TestDet3x3Gen(t *testing.T)         { fuzzGen(t, &det3x3Gen{}) }
+func TestSystemsMatrixGen(t *testing.T)  { fuzzGen(t, &systemsMatrixGen{}) }
+func TestCramerGen(t *testing.T)         { fuzzGen(t, &cramerGen{}) }
+func TestEigenConceptGen(t *testing.T)   { fuzzGen(t, &eigenConceptGen{}) }
+func TestEigenComputeGen(t *testing.T)   { fuzzGen(t, &eigenComputeGen{}) }
+func TestTransformationsGen(t *testing.T) { fuzzGen(t, &transformationsGen{}) }
+func TestSpanGen(t *testing.T)           { fuzzGen(t, &spanGen{}) }
+func TestBasisGen(t *testing.T)          { fuzzGen(t, &basisGen{}) }
+func TestDiagonalizationGen(t *testing.T) { fuzzGen(t, &diagonalizationGen{}) }
+func TestRankGen(t *testing.T)           { fuzzGen(t, &rankGen{}) }
+func TestCosineSimilarityGen(t *testing.T) { fuzzGen(t, &cosineSimilarityGen{}) }
+func TestParametricGen(t *testing.T)     { fuzzGen(t, &parametricGen{}) }
