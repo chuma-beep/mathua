@@ -666,7 +666,7 @@ func (s *Server) handleWeaknesses(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]interface{}{"by_domain": byDomain})
 }
 
-// GET /api/lessons
+// GET /api/lessons  Optional: ?student_id=... for per-concept progress
 func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -678,19 +678,68 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	byDomain := ll.LessonsByDomain()
+
+	// Collect all concept IDs to fetch progress in one batch
+	allConcepts := make(map[string]bool)
+	for _, lessons := range byDomain {
+		for _, l := range lessons {
+			for _, cid := range l.Concepts {
+				allConcepts[cid] = true
+			}
+		}
+	}
+
+	// Try to load progress if student_id is provided
+	var progressMap map[string]map[string]interface{}
+	if sid := r.URL.Query().Get("student_id"); sid != "" {
+		if p, err := s.eng.GetProgress(sid); err == nil && p != nil {
+			progressMap = make(map[string]map[string]interface{})
+			for cid, cp := range p {
+				if allConcepts[cid] {
+					mastery := float64(0)
+					if cp.Status == "MASTERED" {
+						mastery = 1.0
+					} else if cp.Status == "PRACTICING" {
+						mastery = 0.6
+					} else if cp.Status == "LEARNING" {
+						mastery = 0.3
+					}
+					progressMap[cid] = map[string]interface{}{
+						"status":  cp.Status,
+						"mastery": mastery,
+						"streak":  cp.Streak,
+					}
+				}
+			}
+		}
+	}
+
 	type lessonInfo struct {
-		Title    string   `json:"title"`
-		Body     string   `json:"body"`
-		Concepts []string `json:"concepts"`
+		Title    string                          `json:"title"`
+		Body     string                          `json:"body"`
+		Concepts []string                        `json:"concepts"`
+		Progress map[string]map[string]interface{} `json:"progress,omitempty"`
 	}
 	result := make(map[string][]lessonInfo)
 	for domain, lessons := range byDomain {
 		for _, l := range lessons {
-			result[domain] = append(result[domain], lessonInfo{
+			info := lessonInfo{
 				Title:    l.Title,
 				Body:     l.Body,
 				Concepts: l.Concepts,
-			})
+			}
+			if progressMap != nil {
+				info.Progress = make(map[string]map[string]interface{})
+				for _, cid := range l.Concepts {
+					if p, ok := progressMap[cid]; ok {
+						info.Progress[cid] = p
+					}
+				}
+				if len(info.Progress) == 0 {
+					info.Progress = nil
+				}
+			}
+			result[domain] = append(result[domain], info)
 		}
 	}
 	writeJSON(w, map[string]interface{}{"lessons": result})

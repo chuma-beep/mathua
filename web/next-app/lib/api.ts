@@ -316,18 +316,26 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 	})
 }
 
+export interface ConceptProgress {
+	status: string
+	mastery: number
+	streak: number
+}
+
 export interface LessonInfo {
 	title: string
 	body: string
 	concepts: string[]
+	progress?: Record<string, ConceptProgress>
 }
 
 export interface LessonsRes {
 	lessons: Record<string, LessonInfo[]>
 }
 
-export async function getLessons(): Promise<LessonsRes> {
-	const res = await fetch(`${API_BASE}/api/lessons`)
+export async function getLessons(studentId?: string): Promise<LessonsRes> {
+	const url = studentId ? `${API_BASE}/api/lessons?student_id=${encodeURIComponent(studentId)}` : `${API_BASE}/api/lessons`
+	const res = await fetch(url)
 	if (!res.ok) return { lessons: {} }
 	return res.json()
 }
