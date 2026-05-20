@@ -30,7 +30,7 @@ import {
 import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 
-type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'feedback'
+type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
@@ -43,7 +43,9 @@ export default function SessionPage() {
   const [sessionID, setSessionID] = useState('')
   const [question, setQuestion] = useState<Question | null>(null)
   const [lastResult, setLastResult] = useState<AnswerResult | null>(null)
+  const [submitted, setSubmitted] = useState(false)
   const [answer, setAnswer] = useState('')
+  const [sessionStats, setSessionStats] = useState({ correct: 0, total: 0 })
   const [scores, setScores] = useState<Scores>({
     lifetime_points: 0, weekly_score: 0, speed_bonus: 0,
     concepts_mastered: 0, current_streak: 0, level: 'Novice',
@@ -55,6 +57,7 @@ export default function SessionPage() {
   const [elapsed, setElapsed] = useState(0)
   const startRef = useRef(Date.now())
   const timerRef = useRef<ReturnType<typeof setInterval>>()
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // Diagnostic state (guest mode)
   const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
@@ -95,19 +98,20 @@ export default function SessionPage() {
   }, [])
 
   useEffect(() => {
-    if (screen === 'practice') {
+    if (screen === 'practice' && !submitted) {
       startRef.current = Date.now()
+      inputRef.current?.focus()
     }
-  }, [screen, question])
+  }, [screen, question, submitted])
 
   useEffect(() => {
-    if (screen === 'practice' && showTimer) {
+    if (screen === 'practice' && !submitted && showTimer) {
       timerRef.current = setInterval(() => {
         setElapsed((Date.now() - startRef.current) / 1000)
       }, 100)
     }
     return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [screen, showTimer])
+  }, [screen, submitted, showTimer])
 
   const beginSessionAuth = useCallback(async () => {
     setError('')
@@ -118,6 +122,8 @@ export default function SessionPage() {
       setSessionID(res.session_id)
       setQuestion(res.question)
       setScreen('practice')
+      setSubmitted(false)
+      setSessionStats({ correct: 0, total: 0 })
       const s = await getScores(res.student_id).catch(() => null)
       if (s) setScores(s)
     } catch {
@@ -138,6 +144,8 @@ export default function SessionPage() {
       setSessionID(res.session_id)
       setQuestion(res.question)
       setScreen('practice')
+      setSubmitted(false)
+      setSessionStats({ correct: 0, total: 0 })
       const s = await getScores(res.student_id).catch(() => null)
       if (s) setScores(s)
     } catch {
@@ -151,9 +159,13 @@ export default function SessionPage() {
     try {
       const res = await submitAnswer(sessionID, answer.trim(), e)
       setLastResult(res.result)
-      setAnswer('')
-      setScreen('feedback')
-      // Pre-load next question
+      setSubmitted(true)
+      if (res.result) {
+        setSessionStats(prev => ({
+          correct: prev.correct + (res.result!.correct ? 1 : 0),
+          total: prev.total + 1,
+        }))
+      }
       if (res.next_question) {
         setQuestion(res.next_question)
       } else {
@@ -168,7 +180,8 @@ export default function SessionPage() {
 
   const nextQuestion = useCallback(() => {
     setLastResult(null)
-    setScreen('practice')
+    setSubmitted(false)
+    setAnswer('')
   }, [])
 
   // Guest diagnostic logic
@@ -432,170 +445,234 @@ export default function SessionPage() {
           </div>
         )}
 
-        {screen === 'practice' && question && (
+        {screen === 'practice' && (
           <>
-            <div className="flex gap-8 items-start mt-4 max-md:flex-col">
-              <div className="w-[200px] flex-shrink-0 max-md:w-full">
-                <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4">
-                  <div>
-                    <span className="font-mono text-[10px] uppercase text-mathua-muted">Streak</span>
-                    <div className="font-mono text-2xl text-mathua-green mt-1">
-                      {lastResult ? lastResult.streak : '--'}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Timer</span>
-                      <button
-                        onClick={() => {
-                          const next = !showTimer
-                          setShowTimer(next)
-                          updateSettings({ show_timer: next }).catch(() => {})
-                        }}
-                        className={`font-mono text-[10px] px-2 py-0.5 border transition-colors ${
-                          showTimer
-                            ? 'bg-mathua-blue text-white border-mathua-blue'
-                            : 'text-mathua-muted border-mathua-border hover:text-mathua-primary'
-                        }`}
-                      >
-                        {showTimer ? 'ON' : 'OFF'}
-                      </button>
-                    </div>
-                    {showTimer && (
-                      <div className="font-mono text-2xl text-mathua-primary mt-2">{elapsed.toFixed(1)}s</div>
-                    )}
-                  </div>
-                  <div>
-                    <span className="font-mono text-[10px] uppercase text-mathua-muted">Mastered total</span>
-                    <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.concepts_mastered}</div>
-                  </div>
-                  <div>
-                    <span className="font-mono text-[10px] uppercase text-mathua-muted">Daily XP</span>
-                    <div className="flex items-baseline gap-2 mt-1">
-                      <span className="font-mono text-2xl text-mathua-blue">{scores.xp_today ?? 0}</span>
-                      <span className="font-mono text-[10px] text-mathua-muted">/ {scores.daily_xp_goal ?? 150}</span>
-                      <button
-                        onClick={() => {
-                          const g = prompt('Set daily XP goal:', String(scores.daily_xp_goal || 150))
-                          if (g) {
-                            const n = parseInt(g, 10)
-                            if (n > 0 && n <= 10000) {
-                              setDailyXPGoal(n).then(() => {
-                                setScores(prev => ({ ...prev, daily_xp_goal: n }))
-                              }).catch(() => {})
-                            }
-                          }
-                        }}
-                        className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover ml-1"
-                      >
-                        edit
-                      </button>
-                    </div>
-                    <div className="mt-2 h-1.5 bg-mathua-code rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-mathua-blue rounded-full transition-all duration-500"
-                        style={{ width: `${Math.min(((scores.xp_today ?? 0) / (scores.daily_xp_goal || 150)) * 100, 100)}%` }}
-                      />
-                    </div>
-                    {(scores.xp_today ?? 0) >= (scores.daily_xp_goal || 150) && (
-                      <div className="mt-1 font-mono text-[10px] text-mathua-blue uppercase">Goal reached! ★</div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="flex-1">
-                <div className="bg-mathua-surface border border-mathua-border rounded-none p-8 max-md:p-5">
-                  <div className="mb-6">
-                    <span className="section-label">{question.concept_id}</span>
-                    <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1">
-                      {question.concept_name}
-                    </h3>
-                  </div>
-                  <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
-                    {question.diagram ? (
-                      <div className="flex flex-col md:flex-row">
-                        <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
-                          <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
-                        </div>
-                        <div className="md:w-2/3 p-8 flex items-center justify-center">
-                          <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
-                            {question.question}
-                          </p>
-                        </div>
-                      </div>
-                    ) : (
-                      <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
-                        {question.question}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex gap-3 mb-4">
-                    <input
-                      type="text"
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                      placeholder="Your answer"
-                      className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
-                    />
-                    <button
-                      onClick={handleSubmit}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
-                    >
-                      Check Answer
-                    </button>
-                  </div>
-                  {question.lesson && (
-                    <details className="mt-2">
-                      <summary className="text-mathua-secondary text-sm cursor-pointer hover:text-mathua-blue">
-                        Show lesson: {question.lesson.Title}
-                      </summary>
-                      <div className="mt-2 bg-mathua-code border border-mathua-border rounded-none p-4 text-xs text-mathua-muted max-h-80 overflow-auto leading-relaxed">
-                        <KatexContent>{question.lesson.Body.slice(0, 3000)}</KatexContent>
-                      </div>
-                    </details>
-                  )}
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {screen === 'feedback' && lastResult && (
-          <div className="max-w-xl mx-auto mt-8">
-            <div className={`bg-mathua-surface border rounded-none p-8 max-md:p-5 ${
-              lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'
-            }`}>
-              <h3 className={`font-serif text-2xl font-medium mb-2 ${
-                lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'
-              }`}>
-                {lastResult.correct ? 'Correct!' : 'Incorrect'}
-              </h3>
-              {lastResult.explanation && (
-                <p className="text-mathua-secondary text-sm mb-2">
-                  {lastResult.explanation}
-                </p>
-              )}
-              <p className="text-mathua-muted text-xs mb-6">
-                Streak: {lastResult.streak}/{lastResult.required_streak} ·
-                Status: {lastResult.new_status}
-                {lastResult.new_status === 'MASTERED' && ' ★'}
-                {lastResult.xp > 0 && ` ·  +${lastResult.xp} XP`}
-              </p>
-              {question ? (
+            {!question && !submitted && (
+              <div className="max-w-xl mx-auto mt-20 text-center">
+                <p className="text-mathua-muted text-sm mb-4">No questions available.</p>
                 <button
-                  onClick={nextQuestion}
-                  className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm"
+                  onClick={() => beginSessionAuth()}
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm"
                 >
-                  Next Question
+                  Start new session
                 </button>
-              ) : (
-                <p className="text-mathua-blue text-center">
-                  All available concepts mastered! Come back tomorrow for reviews.
-                </p>
-              )}
-            </div>
-          </div>
+              </div>
+            )}
+
+            {question && (
+              <div className="flex gap-8 items-start mt-4 max-md:flex-col">
+                <div className="w-[200px] flex-shrink-0 max-md:w-full">
+                  <div className="bg-mathua-surface border border-mathua-border rounded-none p-5 space-y-4">
+                    <div
+                      className="transition-opacity duration-200"
+                      key={lastResult?.streak ?? 0}
+                    >
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Streak</span>
+                      <div className="font-mono text-2xl text-mathua-green mt-1">
+                        {submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[10px] uppercase text-mathua-muted">Timer</span>
+                        <button
+                          onClick={() => {
+                            const next = !showTimer
+                            setShowTimer(next)
+                            updateSettings({ show_timer: next }).catch(() => {})
+                          }}
+                          className={`font-mono text-[10px] px-2 py-0.5 border transition-colors ${
+                            showTimer
+                              ? 'bg-mathua-blue text-white border-mathua-blue'
+                              : 'text-mathua-muted border-mathua-border hover:text-mathua-primary'
+                          }`}
+                        >
+                          {showTimer ? 'ON' : 'OFF'}
+                        </button>
+                      </div>
+                      {showTimer && (
+                        <div className="font-mono text-2xl text-mathua-primary mt-2">
+                          {!submitted ? `${elapsed.toFixed(1)}s` : `—`}
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">This session</span>
+                      <div className="font-mono text-lg text-mathua-primary mt-1">
+                        <span className={sessionStats.total > 0 && sessionStats.correct / sessionStats.total >= 0.8 ? 'text-mathua-green' : sessionStats.total > 0 && sessionStats.correct / sessionStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}>
+                          {sessionStats.correct}/{sessionStats.total}
+                        </span>
+                        <span className="text-mathua-muted text-xs ml-1">correct</span>
+                      </div>
+                      {sessionStats.total > 0 && (
+                        <div className="mt-1 h-1 bg-mathua-code rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-mathua-blue rounded-full transition-all duration-500"
+                            style={{ width: `${(sessionStats.correct / sessionStats.total) * 100}%` }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Mastered total</span>
+                      <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.concepts_mastered}</div>
+                    </div>
+                    <div>
+                      <span className="font-mono text-[10px] uppercase text-mathua-muted">Daily XP</span>
+                      <div className="flex items-baseline gap-2 mt-1">
+                        <span className="font-mono text-2xl text-mathua-blue">{scores.xp_today ?? 0}</span>
+                        <span className="font-mono text-[10px] text-mathua-muted">/ {scores.daily_xp_goal ?? 150}</span>
+                        <button
+                          onClick={() => {
+                            const g = prompt('Set daily XP goal:', String(scores.daily_xp_goal || 150))
+                            if (g) {
+                              const n = parseInt(g, 10)
+                              if (n > 0 && n <= 10000) {
+                                setDailyXPGoal(n).then(() => {
+                                  setScores(prev => ({ ...prev, daily_xp_goal: n }))
+                                }).catch(() => {})
+                              }
+                            }
+                          }}
+                          className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover ml-1"
+                        >
+                          edit
+                        </button>
+                      </div>
+                      <div className="mt-2 h-1.5 bg-mathua-code rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-mathua-blue rounded-full transition-all duration-500"
+                          style={{ width: `${Math.min(((scores.xp_today ?? 0) / (scores.daily_xp_goal || 150)) * 100, 100)}%` }}
+                        />
+                      </div>
+                      {(scores.xp_today ?? 0) >= (scores.daily_xp_goal || 150) && (
+                        <div className="mt-1 font-mono text-[10px] text-mathua-blue uppercase">Goal reached! ★</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className={`bg-mathua-surface border rounded-none p-8 max-md:p-5 transition-colors duration-300 ${
+                    submitted && lastResult
+                      ? lastResult.correct ? 'border-green-500/40' : 'border-red-500/40'
+                      : 'border-mathua-border'
+                  }`}>
+                    <div className="mb-6">
+                      <span className="section-label">{question.concept_id}</span>
+                      <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1">
+                        {question.concept_name}
+                      </h3>
+                    </div>
+
+                    <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
+                      {question.diagram ? (
+                        <div className="flex flex-col md:flex-row">
+                          <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
+                            <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                          </div>
+                          <div className="md:w-2/3 p-8 flex items-center justify-center">
+                            <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                              {question.question}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                          {question.question}
+                        </p>
+                      )}
+                    </div>
+
+                    {!submitted ? (
+                      <>
+                        <div className="flex gap-3 mb-4">
+                          <input
+                            ref={inputRef}
+                            type="text"
+                            value={answer}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                            placeholder="Your answer"
+                            className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                          />
+                          <button
+                            onClick={handleSubmit}
+                            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap"
+                          >
+                            Check Answer
+                          </button>
+                        </div>
+                        {question.lesson && (
+                          <details className="mt-2">
+                            <summary className="text-mathua-secondary text-sm cursor-pointer hover:text-mathua-blue">
+                              Show lesson: {question.lesson.Title}
+                            </summary>
+                            <div className="mt-2 bg-mathua-code border border-mathua-border rounded-none p-4 text-xs text-mathua-muted max-h-80 overflow-auto leading-relaxed">
+                              <KatexContent>{question.lesson.Body.slice(0, 3000)}</KatexContent>
+                            </div>
+                          </details>
+                        )}
+                      </>
+                    ) : (
+                      <div className="space-y-4 animate-fadeIn">
+                        <div className={`border-t pt-4 ${lastResult?.correct ? 'border-green-500/20' : 'border-red-500/20'}`}>
+                          <div className="flex items-center gap-3 mb-3">
+                            <span className={`text-2xl ${lastResult?.correct ? 'text-green-400' : 'text-red-400'}`}>
+                              {lastResult?.correct ? '✓' : '✗'}
+                            </span>
+                            <div>
+                              <p className={`font-serif text-lg font-medium ${lastResult?.correct ? 'text-green-400' : 'text-red-400'}`}>
+                                {lastResult?.correct ? 'Correct!' : 'Incorrect'}
+                              </p>
+                              {lastResult?.explanation && (
+                                <p className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</p>
+                              )}
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-mathua-muted mb-4">
+                            <span>Streak: {lastResult?.streak ?? 0}/{lastResult?.required_streak ?? 0}</span>
+                            <span>Status: {lastResult?.new_status ?? 'UNSEEN'}{lastResult?.new_status === 'MASTERED' ? ' ★' : ''}</span>
+                            {lastResult && lastResult.xp > 0 && (
+                              <span className="text-yellow-400">+{lastResult.xp} XP</span>
+                            )}
+                          </div>
+                          {question ? (
+                            <button
+                              onClick={nextQuestion}
+                              className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm transition-colors"
+                            >
+                              Next Question
+                            </button>
+                          ) : (
+                            <p className="text-mathua-blue text-center text-sm">
+                              All available concepts mastered! Come back tomorrow for reviews.
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {submitted && !question && lastResult && (
+              <div className="max-w-xl mx-auto mt-8">
+                <div className={`bg-mathua-surface border rounded-none p-8 max-md:p-5 ${
+                  lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'
+                }`}>
+                  <h3 className={`font-serif text-2xl font-medium mb-2 ${
+                    lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'
+                  }`}>
+                    {lastResult.correct ? 'Correct!' : 'Incorrect'}
+                  </h3>
+                  <p className="text-mathua-blue text-center mt-4">
+                    All available concepts mastered! Come back tomorrow for reviews.
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </section>
 
