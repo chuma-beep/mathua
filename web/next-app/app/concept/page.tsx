@@ -11,16 +11,22 @@ import KatexContent from '../../components/KatexContent'
 import LessonQuiz from '../../components/LessonQuiz'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
 function extractToc(body: string): { id: string; label: string; level: number }[] {
   const headings: { id: string; label: string; level: number }[] = []
   const lines = body.split('\n')
-  let counter = 0
   for (const line of lines) {
     const match = line.match(/^(#{2,3})\s+(.+)/)
     if (match) {
       const level = match[1].length
       const label = match[2].trim()
-      const id = `toc-${counter++}`
+      const id = slugify(label)
       headings.push({ id, label, level })
     }
   }
