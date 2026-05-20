@@ -73,6 +73,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
+	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.authMiddleware(s.handleReviewsSession))))
+	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.authMiddleware(s.handleReviewsAnswer))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
@@ -944,6 +946,55 @@ func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, map[string]interface{}{"count": count})
+}
+
+// POST /api/reviews/session — creates a review-only session
+func (s *Server) handleReviewsSession(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID := r.Context().Value(authStudentKey{}).(string)
+	sess, err := s.repo.CreateSession(studentID)
+	if err != nil {
+		writeError(w, "failed to create session", 500)
+		return
+	}
+	q, err := s.eng.NextReviewQuestion(sess.ID, studentID)
+	if err != nil {
+		writeError(w, "failed to get review question", 500)
+		return
+	}
+	writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
+}
+
+// POST /api/reviews/answer — submits a review answer and returns the next review question
+func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req answerReq
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "missing student id", 400)
+		return
+	}
+	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
+	if err != nil {
+		writeError(w, "failed to submit answer", 500)
+		return
+	}
+	next, err := s.eng.NextReviewQuestion(req.SessionID, studentID)
+	if err != nil {
+		writeError(w, "failed to get next review question", 500)
+		return
+	}
+	writeJSON(w, answerRes{Result: result, NextQuestion: next, Done: next == nil})
 }
 
 // GET /api/courses

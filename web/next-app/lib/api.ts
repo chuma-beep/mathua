@@ -415,3 +415,34 @@ export async function getDueReviews(): Promise<DueReviewsRes> {
 	if (!res.ok) return { count: 0 }
 	return res.json()
 }
+
+export async function startReviewSession(): Promise<StartSessionRes> {
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json',
+		...getAuthHeaders(),
+	}
+	const res = await fetch(`${API_BASE}/api/reviews/session`, {
+		method: 'POST',
+		headers,
+	})
+	if (!res.ok) throw new Error(`Review session start failed: ${res.status}`)
+	return res.json()
+}
+
+export async function submitReviewAnswer(
+	sessionID: string,
+	answer: string,
+	elapsed: number,
+): Promise<AnswerRes> {
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json',
+		...getAuthHeaders(),
+	}
+	const res = await fetch(`${API_BASE}/api/reviews/answer`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify({ session_id: sessionID, answer, elapsed }),
+	})
+	if (!res.ok) throw new Error(`Review answer submit failed: ${res.status}`)
+	return res.json()
+}

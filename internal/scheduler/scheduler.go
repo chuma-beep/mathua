@@ -138,6 +138,40 @@ func computePriority(snap *ConceptSnapshot, now time.Time, isDecaying bool) floa
 	return priority
 }
 
+// NextReview picks the next due-for-review concept.
+// It only considers candidates whose IsReview flag is true.
+func (s *Scheduler) NextReview(
+	snapshots map[string]*ConceptSnapshot,
+	prevConceptID string,
+) *NextConcept {
+	now := time.Now().UTC()
+	candidates := buildCandidates(s.dag, snapshots, now, prevConceptID)
+	if len(candidates) == 0 && prevConceptID != "" {
+		candidates = buildCandidates(s.dag, snapshots, now, "")
+	}
+	var reviews []Candidate
+	for _, c := range candidates {
+		if c.IsReview {
+			reviews = append(reviews, c)
+		}
+	}
+	if len(reviews) == 0 {
+		return nil
+	}
+	sort.Slice(reviews, func(i, j int) bool {
+		if reviews[i].Priority != reviews[j].Priority {
+			return reviews[i].Priority > reviews[j].Priority
+		}
+		return reviews[i].Concept.ID < reviews[j].Concept.ID
+	})
+	topPriority := reviews[0].Priority
+	same := 1
+	for same < len(reviews) && reviews[same].Priority == topPriority {
+		same++
+	}
+	return &NextConcept{Concept: reviews[rand.Intn(same)].Concept, IsReview: true}
+}
+
 func selectWithBalance(candidates []Candidate, reviewCount, newCount int) Candidate {
 	targetReviewRatio := 0.3
 	total := reviewCount + newCount + 1

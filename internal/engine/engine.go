@@ -239,6 +239,74 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	}, nil
 }
 
+// NextReviewQuestion only serves concepts due for spaced-repetition review.
+func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, error) {
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return nil, fmt.Errorf("load progress: %w", err)
+	}
+	snapshots := make(map[string]*scheduler.ConceptSnapshot, len(progress))
+	for cid, p := range progress {
+		c := e.dag.Concept(cid)
+		reqStreak := 0
+		timeThresh := 0.0
+		if c != nil {
+			reqStreak = c.MasteryThreshold.Streak
+			timeThresh = c.MasteryThreshold.AvgTimeSeconds
+		}
+		snapshots[cid] = &scheduler.ConceptSnapshot{
+			Status:         mastery.Status(p.Status),
+			Streak:         p.Streak,
+			LastAttempted:  timeOrZero(p.LastAttempted),
+			LastReviewed:   timeOrZero(p.LastReviewed),
+			NextReviewDue:  p.NextReviewDue,
+			RequiredStreak: reqStreak,
+			TimeThreshold:  timeThresh,
+			WeaknessScore:  p.WeaknessScore,
+		}
+	}
+
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
+	as := e.sessions[sessionID]
+	if as == nil {
+		as = &activeSession{}
+	}
+	next := e.sched.NextReview(snapshots, as.lastConceptID)
+	if next == nil {
+		return nil, nil
+	}
+	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
+	prob, err := e.registry.Generate(next.Concept.ID, difficulty)
+	if err != nil {
+		return nil, fmt.Errorf("generate problem: %w", err)
+	}
+	as.conceptID = next.Concept.ID
+	as.conceptName = next.Concept.Label
+	as.expectedAnswer = prob.Answer
+	as.explanation = prob.Explanation
+	as.requiredStreak = next.Concept.MasteryThreshold.Streak
+	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
+	as.isReview = true
+	e.sessions[sessionID] = as
+
+	var lesson *lessons.Lesson
+	if e.ll != nil {
+		lesson = e.ll.Lesson(next.Concept.ID)
+	}
+	diagram := diagramForConcept(next.Concept.ID)
+
+	return &Question{
+		ConceptID:   next.Concept.ID,
+		ConceptName: next.Concept.Label,
+		Question:    prob.Question,
+		IsReview:    true,
+		Lesson:      lesson,
+		Diagram:     diagram,
+	}, nil
+}
+
 var conceptDiagrams = map[string]string{
 	// Integrals
 	"calc.integral.definite":          "/diagrams/algebrica/definite-integrals-1.svg",
