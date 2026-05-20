@@ -8,7 +8,24 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
+import LessonQuiz from '../../components/LessonQuiz'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
+
+function extractToc(body: string): { id: string; label: string; level: number }[] {
+  const headings: { id: string; label: string; level: number }[] = []
+  const lines = body.split('\n')
+  let counter = 0
+  for (const line of lines) {
+    const match = line.match(/^(#{2,3})\s+(.+)/)
+    if (match) {
+      const level = match[1].length
+      const label = match[2].trim()
+      const id = `toc-${counter++}`
+      headings.push({ id, label, level })
+    }
+  }
+  return headings
+}
 
 function ConceptContent() {
   const searchParams = useSearchParams()
@@ -63,16 +80,29 @@ function ConceptContent() {
     LEARNING: 'text-yellow-600',
   }
   const statusColor = statusColors[detail.progress?.status ?? ''] || 'text-mathua-muted'
+  const toc = extractToc(detail.lesson?.body || '')
 
   return (
     <>
       <Header />
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
         <section className="pt-8">
-          <span className="flex justify-between items-center mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
-              ← Back
+          <span className="flex items-center gap-2 mb-4 text-xs font-mono">
+            <Link href="/" className="text-mathua-secondary hover:text-mathua-primary">
+              Home
             </Link>
+            <span className="text-mathua-muted">/</span>
+            <Link href="/study" className="text-mathua-secondary hover:text-mathua-primary">
+              Study
+            </Link>
+            {detail.concept && (
+              <>
+                <span className="text-mathua-muted">/</span>
+                <span className="text-mathua-muted">{detail.concept.domain}</span>
+                <span className="text-mathua-muted">/</span>
+                <span className="text-mathua-primary">{detail.concept.label}</span>
+              </>
+            )}
           </span>
 
           <div className="max-w-4xl mx-auto mt-8 mb-16">
@@ -150,17 +180,45 @@ function ConceptContent() {
 
             {detail.lesson && (
               <div className="mb-8">
-                <h3 className="font-serif text-sm text-mathua-muted mb-3 font-mono">lesson</h3>
-                <div className="bg-mathua-surface border border-mathua-border rounded-none p-6">
-                  <div className="text-mathua-secondary text-xs font-mono mb-4">
-                    {detail.lesson.title}
-                  </div>
-                  {detail.lesson.concepts && detail.lesson.concepts.length > 0 && (
-                    <div className="text-mathua-muted text-[10px] font-mono mb-4">
-                      concepts: {detail.lesson.concepts.join(', ')}
-                    </div>
+                <div className="flex gap-6">
+                  {toc.length > 0 && (
+                    <aside className="hidden lg:block w-48 shrink-0">
+                      <div className="sticky top-24">
+                        <h4 className="font-mono text-[10px] uppercase text-mathua-muted mb-3 tracking-wider">
+                          In this lesson
+                        </h4>
+                        <nav className="space-y-1">
+                          {toc.map((h) => (
+                            <a
+                              key={h.id}
+                              href={`#${h.id}`}
+                              className={`block font-mono text-xs text-mathua-secondary hover:text-mathua-blue transition-colors ${
+                                h.level === 3 ? 'pl-3' : ''
+                              }`}
+                            >
+                              {h.label}
+                            </a>
+                          ))}
+                        </nav>
+                      </div>
+                    </aside>
                   )}
-                  <KatexContent>{detail.lesson.body}</KatexContent>
+                  <div className="flex-1 min-w-0">
+                    <div className="bg-mathua-surface border border-mathua-border rounded-none p-6">
+                      <div className="text-mathua-secondary text-xs font-mono mb-4">
+                        {detail.lesson.title}
+                      </div>
+                      {detail.lesson.concepts && detail.lesson.concepts.length > 0 && (
+                        <div className="text-mathua-muted text-[10px] font-mono mb-4">
+                          concepts: {detail.lesson.concepts.join(', ')}
+                        </div>
+                      )}
+                      <div id="lesson-body">
+                        <KatexContent>{detail.lesson.body}</KatexContent>
+                      </div>
+                    </div>
+                    <LessonQuiz conceptId={conceptId} />
+                  </div>
                 </div>
               </div>
             )}

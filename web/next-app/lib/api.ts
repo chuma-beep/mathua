@@ -364,3 +364,20 @@ export async function getConceptDetail(conceptId: string): Promise<ConceptDetail
 	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
 	return res.json()
 }
+
+export interface PracticeQuestion {
+	question: string
+	answer: string
+	explanation: string
+}
+
+export interface LessonPracticeRes {
+	questions: PracticeQuestion[]
+	concept_id: string
+}
+
+export async function getLessonPractice(conceptId: string, count = 5): Promise<LessonPracticeRes> {
+	const res = await fetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?count=${count}`)
+	if (!res.ok) throw new Error(`Lesson practice fetch failed: ${res.status}`)
+	return res.json()
+}

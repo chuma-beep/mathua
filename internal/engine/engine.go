@@ -440,6 +440,8 @@ func (e *Engine) GetDAG() *concepts.DAG {
 	return e.dag
 }
 
+func (e *Engine) GetGeneratorRegistry() *generator.Registry { return e.registry }
+
 func (e *Engine) GetLessonLoader() *lessons.Loader {
 	return e.ll
 }

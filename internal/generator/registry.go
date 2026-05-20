@@ -73,6 +73,31 @@ func (r *Registry) Generate(conceptID string, difficulty float64) (Problem, erro
 	return gen.Generate(difficulty), nil
 }
 
+func (r *Registry) BatchGenerate(conceptID string, count int, difficulty float64) ([]Problem, error) {
+	if count < 1 {
+		count = 1
+	}
+	if count > 20 {
+		count = 20
+	}
+	r.mu.RLock()
+	gen, exists := r.gens[conceptID]
+	r.mu.RUnlock()
+	if !exists {
+		return nil, fmt.Errorf("no generator registered for concept %q", conceptID)
+	}
+	problems := make([]Problem, 0, count)
+	seen := make(map[string]bool)
+	for i := 0; i < count*3 && len(problems) < count; i++ {
+		p := gen.Generate(difficulty)
+		if !seen[p.Question] {
+			seen[p.Question] = true
+			problems = append(problems, p)
+		}
+	}
+	return problems, nil
+}
+
 func (r *Registry) Has(conceptID string) bool {
 	r.mu.RLock()
 	defer r.mu.RUnlock()

@@ -71,5 +71,33 @@
       "streak": 10,
       "avg_time_seconds": 28.0
     }
+  },
+  {
+    "id": "abstract.structures.field",
+    "label": "Fields: definition, examples, and properties",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.structures.module",
+    "label": "Modules: definition, examples, and properties",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.structures.field"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

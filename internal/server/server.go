@@ -71,6 +71,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
+	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 }
@@ -693,6 +694,48 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, map[string]interface{}{"lessons": result})
+}
+
+// GET /api/lessons/{conceptId}/practice
+func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	path := strings.TrimPrefix(r.URL.Path, "/api/lessons/")
+	parts := strings.SplitN(path, "/", 2)
+	if len(parts) < 2 || parts[1] != "practice" {
+		http.Error(w, `{"error":"not found"}`, 404)
+		return
+	}
+	conceptID := parts[0]
+	count := 5
+	if c := r.URL.Query().Get("count"); c != "" {
+		var n int
+		if _, err := fmt.Sscanf(c, "%d", &n); err == nil && n > 0 && n <= 20 {
+			count = n
+		}
+	}
+	reg := s.eng.GetGeneratorRegistry()
+	if reg == nil {
+		writeJSON(w, map[string]interface{}{"questions": []interface{}{}})
+		return
+	}
+	problems, err := reg.BatchGenerate(conceptID, count, 0.5)
+	if err != nil {
+		writeError(w, err.Error(), 404)
+		return
+	}
+	type qInfo struct {
+		Question    string `json:"question"`
+		Answer      string `json:"answer"`
+		Explanation string `json:"explanation"`
+	}
+	questions := make([]qInfo, len(problems))
+	for i, p := range problems {
+		questions[i] = qInfo{Question: p.Question, Answer: p.Answer, Explanation: p.Explanation}
+	}
+	writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
 }
 
 // POST /api/goals/xp  Body: { "goal": 200 }

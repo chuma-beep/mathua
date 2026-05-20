@@ -20,6 +20,14 @@
     "source": "algebrica/algebraic-structures/vector-spaces.md"
   },
   {
+    "concept_id": "abstract.structures.field",
+    "source": "algebrica/algebraic-structures/fields.md"
+  },
+  {
+    "concept_id": "abstract.structures.module",
+    "source": "algebrica/algebraic-structures/modules.md"
+  },
+  {
     "concept_id": "complex.adv.exponential",
     "source": "algebrica/complex-numbers/complex-numbers-in-exponential-form.md"
   },
