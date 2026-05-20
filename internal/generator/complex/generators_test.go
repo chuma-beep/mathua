@@ -36,4 +36,6 @@ func TestConjugate(t *testing.T) { fuzzGen(t, &conjugateGen{}, grader.GradingCom
 func TestDivide(t *testing.T)    { fuzzGen(t, &divideGen{}, grader.GradingComplex) }
 func TestPolar(t *testing.T)     { fuzzGen(t, &polarGen{}, grader.GradingComplex) }
 func TestDeMoivre(t *testing.T)  { fuzzGen(t, &deMoivreGen{}, grader.GradingComplex) }
-func TestRoots(t *testing.T)     { fuzzGen(t, &rootsGen{}, grader.GradingComplex) }
+func TestRoots(t *testing.T)       { fuzzGen(t, &rootsGen{}, grader.GradingComplex) }
+func TestExponential(t *testing.T) { fuzzGen(t, &exponentialGen{}, grader.GradingMultipleChoice) }
+func TestInequalities(t *testing.T) { fuzzGen(t, &inequalitiesGen{}, grader.GradingMultipleChoice) }

@@ -16,6 +16,7 @@ const (
 	ScreenDiagnostic
 	ScreenDiagFeedback
 	ScreenBrowse
+	ScreenConceptDetail
 )
 
 type ConceptNode struct {
@@ -115,6 +116,28 @@ type SubdomainProgress struct {
 	Total    int
 }
 
+type ConceptDetailMsg struct {
+	ConceptID    string
+	Label        string
+	Domain       string
+	Subdomain    string
+	LessonTitle  string
+	LessonBody   string
+	Prerequisites []PrereqInfo
+	Unlocked     bool
+	Status       string
+	Streak       int
+	StreakNeeded int
+	MasteryPct   float64
+}
+
+type PrereqInfo struct {
+	ID         string
+	Label      string
+	Status     string
+	MasteryPct float64
+}
+
 type WelcomeStatsMsg struct {
 	TotalMastered  int
 	TotalConcepts  int
@@ -150,6 +173,8 @@ type Model struct {
 	browseSub      int
 	browseLevel    int // 0=domains, 1=subdomains, 2=concepts
 
+	conceptDetail ConceptDetailMsg
+
 	OnSubmit   func(conceptID, answer string, elapsed float64) SubmitResultMsg
 	OnNext     func() SessionMsg
 	OnProgress func() ProgressMsg
@@ -159,6 +184,7 @@ type Model struct {
 	OnDiagSubmit func(conceptID, answer string, elapsed float64) DiagFeedbackMsg
 	OnBrowse   func() ConceptTreeMsg
 	OnSelectConcept func(conceptID string) SessionMsg
+	OnConceptDetail func(conceptID string) ConceptDetailMsg
 }
 
 func New() Model {
@@ -237,6 +263,11 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.browseDomain = 0
 		m.browseSub = 0
 		m.screen = ScreenBrowse
+		return m, nil
+
+	case ConceptDetailMsg:
+		m.conceptDetail = msg
+		m.screen = ScreenConceptDetail
 		return m, nil
 
 	case tea.KeyMsg:
@@ -356,10 +387,7 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 					if m.browseSub < len(subs) {
 						concepts := subs[m.browseSub].Concepts
 						if len(concepts) > 0 {
-							c := concepts[0]
-							if c.Unlocked {
-								return m, loadConceptPractice(m.OnSelectConcept, c.ID)
-							}
+							return m, loadConceptDetail(m.OnConceptDetail, concepts[0].ID)
 						}
 					}
 				}
@@ -391,15 +419,25 @@ func (m Model) handleKey(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 						if m.browseSub < len(subs) {
 							concepts := subs[m.browseSub].Concepts
 							if idx >= 1 && idx <= len(concepts) {
-								c := concepts[idx-1]
-								if c.Unlocked {
-									return m, loadConceptPractice(m.OnSelectConcept, c.ID)
-								}
+								return m, loadConceptDetail(m.OnConceptDetail, concepts[idx-1].ID)
 							}
 						}
 					}
 				}
 			}
+			return m, nil
+		}
+
+	case ScreenConceptDetail:
+		switch msg.String() {
+		case "q":
+			return m, tea.Quit
+		case "p":
+			if m.conceptDetail.Unlocked {
+				return m, loadConceptPractice(m.OnSelectConcept, m.conceptDetail.ConceptID)
+			}
+		case "b", "esc":
+			m.screen = ScreenBrowse
 			return m, nil
 		}
 
@@ -481,6 +519,12 @@ func loadStudyLessons(fn func() []StudyLesson) tea.Cmd {
 func loadConceptTree(fn func() ConceptTreeMsg) tea.Cmd {
 	return func() tea.Msg {
 		return fn()
+	}
+}
+
+func loadConceptDetail(fn func(conceptID string) ConceptDetailMsg, conceptID string) tea.Cmd {
+	return func() tea.Msg {
+		return fn(conceptID)
 	}
 }
 

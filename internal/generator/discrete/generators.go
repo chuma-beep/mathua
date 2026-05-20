@@ -25,8 +25,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("discrete.sequences.recurrence", &recurrenceGen{})
 	reg.Register("discrete.proof.induction", &inductionGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("discrete.combinatorics.binomial_theorem", &generator.Stub{ConceptID: "discrete.combinatorics.binomial_theorem"})
+	reg.Register("discrete.combinatorics.binomial_theorem", &binomialTheoremGen{})
 }
 
 // ----- 1. propositions -----
@@ -891,7 +890,47 @@ func (g *recurrenceGen) Generate(difficulty float64) generator.Problem {
 	}
 }
 
-// ----- 14. induction -----
+// ----- 14. binomial theorem -----
+
+type binomialTheoremGen struct{}
+
+func (g *binomialTheoremGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		n, k   int
+		coeff  int
+	}
+	entries := []entry{
+		{4, 2, 6},
+		{5, 2, 10},
+		{5, 3, 10},
+		{6, 2, 15},
+		{6, 3, 20},
+		{7, 2, 21},
+		{7, 3, 35},
+		{8, 2, 28},
+		{8, 3, 56},
+		{4, 1, 4},
+		{4, 3, 4},
+		{5, 1, 5},
+		{5, 4, 5},
+	}
+	if rand.Intn(2) == 0 {
+		e := entries[rand.Intn(len(entries))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("Using the binomial theorem, what is the coefficient of x^%d y^%d in (x+y)^%d?", e.k, e.n-e.k, e.n),
+			Answer:      fmt.Sprintf("%d", e.coeff),
+			Explanation: fmt.Sprintf("C(%d,%d) = %d!/(%d!(%d-%d)!) = %d", e.n, e.k, e.n, e.k, e.n, e.k, e.coeff),
+		}
+	}
+	e2 := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is C(%d,%d) in the expansion of (x+y)^%d?", e2.n, e2.k, e2.n),
+		Answer:      fmt.Sprintf("%d", e2.coeff),
+		Explanation: fmt.Sprintf("C(%d,%d) = %d", e2.n, e2.k, e2.coeff),
+	}
+}
+
+// ----- 15. induction -----
 
 type inductionGen struct{}
 

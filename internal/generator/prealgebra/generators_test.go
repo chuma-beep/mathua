@@ -99,3 +99,7 @@ func TestEqTwoStep(t *testing.T)     { fuzzGen(t, &eqTwoStepGen{}, grader.Gradin
 func TestEqWord(t *testing.T)        { fuzzGen(t, &eqWordGen{}, grader.GradingNumeric) }
 func TestIneqOneStep(t *testing.T)   { fuzzGen(t, &ineqOneStepGen{}, grader.GradingNumeric) }
 func TestIneqTwoStep(t *testing.T)   { fuzzGen(t, &ineqTwoStepGen{}, grader.GradingNumeric) }
+
+func TestRealConcept(t *testing.T)   { fuzzGen(t, &realConceptGen{}, grader.GradingMultipleChoice) }
+func TestRealProperties(t *testing.T) { fuzzGen(t, &realPropertiesGen{}, grader.GradingMultipleChoice) }
+func TestTypes(t *testing.T)          { fuzzGen(t, &typesGen{}, grader.GradingMultipleChoice) }

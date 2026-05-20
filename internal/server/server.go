@@ -71,6 +71,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
+	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 }
 
@@ -785,6 +786,26 @@ func (s *Server) handleCourseDiagnostic(w http.ResponseWriter, r *http.Request) 
 		"course_id":   courseID,
 		"path_length": len(path.Concepts),
 	})
+}
+
+// GET /api/concepts/{id}
+func (s *Server) handleConceptDetail(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	conceptID := strings.TrimPrefix(r.URL.Path, "/api/concepts/")
+	if conceptID == "" {
+		writeError(w, "missing concept id", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	detail, err := s.eng.ConceptDetail(studentID, conceptID)
+	if err != nil {
+		writeError(w, err.Error(), 404)
+		return
+	}
+	writeJSON(w, detail)
 }
 
 func writeJSON(w http.ResponseWriter, v interface{}) {

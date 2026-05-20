@@ -331,3 +331,36 @@ export async function getLessons(): Promise<LessonsRes> {
 	if (!res.ok) return { lessons: {} }
 	return res.json()
 }
+
+export interface ConceptDetailRes {
+	concept: {
+		id: string
+		label: string
+		domain: string
+		subdomain: string
+	}
+	lesson?: {
+		title: string
+		body: string
+		concepts: string[]
+	}
+	prerequisites: {
+		id: string
+		label: string
+		status: string
+		mastery_pct: number
+	}[]
+	unlocked: boolean
+	progress?: {
+		status: string
+		streak: number
+		required_streak: number
+		mastery_pct: number
+	}
+}
+
+export async function getConceptDetail(conceptId: string): Promise<ConceptDetailRes> {
+	const res = await fetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`)
+	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
+	return res.json()
+}

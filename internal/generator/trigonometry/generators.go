@@ -25,15 +25,14 @@ func Register(reg *generator.Registry) {
 	reg.Register("trig.adv.law_sines", &lawSinesGen{})
 	reg.Register("trig.adv.law_cosines", &lawCosinesGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("trig.adv.arctan", &generator.Stub{ConceptID: "trig.adv.arctan"})
-	reg.Register("trig.basics.right_triangle", &generator.Stub{ConceptID: "trig.basics.right_triangle"})
-	reg.Register("trig.eq.basic", &generator.Stub{ConceptID: "trig.eq.basic"})
-	reg.Register("trig.eq.homogeneous", &generator.Stub{ConceptID: "trig.eq.homogeneous"})
-	reg.Register("trig.hyperbolic.sinh_cosh", &generator.Stub{ConceptID: "trig.hyperbolic.sinh_cosh"})
-	reg.Register("trig.hyperbolic.tanh_coth", &generator.Stub{ConceptID: "trig.hyperbolic.tanh_coth"})
-	reg.Register("trig.ident.identities", &generator.Stub{ConceptID: "trig.ident.identities"})
-	reg.Register("trig.ineq.basic", &generator.Stub{ConceptID: "trig.ineq.basic"})
+	reg.Register("trig.adv.arctan", &arctanGen{})
+	reg.Register("trig.basics.right_triangle", &rightTriangleGen{})
+	reg.Register("trig.eq.basic", &trigEqBasicGen{})
+	reg.Register("trig.eq.homogeneous", &trigEqHomogeneousGen{})
+	reg.Register("trig.hyperbolic.sinh_cosh", &sinhCoshGen{})
+	reg.Register("trig.hyperbolic.tanh_coth", &tanhCothGen{})
+	reg.Register("trig.ident.identities", &trigIdentGen{})
+	reg.Register("trig.ineq.basic", &trigIneqGen{})
 }
 
 type radiansGen struct{}
@@ -480,5 +479,230 @@ func (g *lawCosinesGen) Generate(difficulty float64) generator.Problem {
 		Question:    fmt.Sprintf("In triangle ABC, a = %d, b = %d, and C = %d°. Find side c using the law of cosines.", c.a, c.b, c.C),
 		Answer:      fmt.Sprintf("%.1f", cRounded),
 		Explanation: fmt.Sprintf("c² = a² + b² - 2ab·cos(C) = %d² + %d² - 2(%d)(%d)·cos(%d°) = %d + %d - %d = %d, so c = √%d ≈ %.1f.", c.a, c.b, c.a, c.b, c.C, c.a*c.a, c.b*c.b, c.a*c.b, c.c2, c.c2, cRounded),
+	}
+}
+
+// arctan: compute arctan values and properties
+type arctanGen struct{}
+
+func (g *arctanGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is arctan(1) in degrees?", "45", "tan(45°) = 1, so arctan(1) = 45°."},
+		{"What is arctan(0) in degrees?", "0", "tan(0°) = 0, so arctan(0) = 0°."},
+		{"What is arctan(√3) in degrees?", "60", "tan(60°) = √3, so arctan(√3) = 60°."},
+		{"What is arctan(1/√3) in degrees?", "30", "tan(30°) = 1/√3, so arctan(1/√3) = 30°."},
+		{"What is the range of arctan(x)? (in degrees)", "-90 to 90", "arctan(x) returns values in (-90°, 90°)."},
+		{"Is arctan(x) an odd function? (yes/no)", "yes", "arctan(-x) = -arctan(x), so it is odd."},
+		{"As x → ∞, arctan(x) approaches what value in degrees?", "90", "lim_{x→∞} arctan(x) = 90°."},
+		{"As x → -∞, arctan(x) approaches what value in degrees?", "-90", "lim_{x→-∞} arctan(x) = -90°."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// right triangle trig: SOH CAH TOA
+type rightTriangleGen struct{}
+
+func (g *rightTriangleGen) Generate(difficulty float64) generator.Problem {
+	type triple struct{ opp, adj, hyp int }
+	triples := []triple{
+		{3, 4, 5}, {4, 3, 5},
+		{5, 12, 13}, {12, 5, 13},
+		{6, 8, 10}, {8, 6, 10},
+		{7, 24, 25}, {24, 7, 25},
+		{8, 15, 17}, {15, 8, 17},
+		{9, 12, 15}, {12, 9, 15},
+	}
+	t := triples[rand.Intn(len(triples))]
+	angle := rand.Intn(2) // 0 = angle opposite side opp, 1 = angle adjacent to side opp
+	opp := t.opp
+	adj := t.adj
+	if angle == 0 {
+		opp = t.adj
+	}
+	funcs := []string{"sin", "cos", "tan"}
+	f := funcs[rand.Intn(len(funcs))]
+	var ans string
+	switch f {
+	case "sin":
+		ans = fmt.Sprintf("%d/%d", opp, t.hyp)
+	case "cos":
+		ans = fmt.Sprintf("%d/%d", adj, t.hyp)
+	case "tan":
+		ans = fmt.Sprintf("%d/%d", opp, adj)
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("In a right triangle with sides %d, %d, %d, what is %s of the angle opposite the side of length %d? (as a fraction)", t.opp, t.adj, t.hyp, f, t.opp),
+		Answer:      ans,
+		Explanation: fmt.Sprintf("SOH CAH TOA: %s(θ) = %s", f, ans),
+	}
+}
+
+// basic trig equations
+type trigEqBasicGen struct{}
+
+func (g *trigEqBasicGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Solve sin(x) = 0 for 0° ≤ x < 360°.", "0°,180°", "sin(x) = 0 when x = 0° or x = 180° in [0°,360°)."},
+		{"Solve cos(x) = 0 for 0° ≤ x < 360°.", "90°,270°", "cos(x) = 0 when x = 90° or x = 270° in [0°,360°)."},
+		{"Solve sin(x) = 1 for 0° ≤ x < 360°.", "90°", "sin(x) = 1 only at x = 90° in [0°,360°)."},
+		{"Solve cos(x) = 1 for 0° ≤ x < 360°.", "0°", "cos(x) = 1 only at x = 0° in [0°,360°)."},
+		{"Solve sin(x) = -1 for 0° ≤ x < 360°.", "270°", "sin(x) = -1 only at x = 270° in [0°,360°)."},
+		{"Solve tan(x) = 0 for 0° ≤ x < 360°.", "0°,180°", "tan(x) = sin(x)/cos(x), so tan(x) = 0 when sin(x) = 0 at x = 0°,180°."},
+		{"Solve sin(x) = 1/2 for 0° ≤ x < 360°.", "30°,150°", "sin(30°) = 1/2 and sin(150°) = 1/2 in [0°,360°)."},
+		{"Solve cos(x) = 1/2 for 0° ≤ x < 360°.", "60°,300°", "cos(60°) = 1/2 and cos(300°) = 1/2 in [0°,360°)."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// homogeneous trig equations
+type trigEqHomogeneousGen struct{}
+
+func (g *trigEqHomogeneousGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What substitution is used to solve a sin(x) + b cos(x) = 0?", "tan(x) = -b/a", "Divide both sides by cos(x): a tan(x) + b = 0 → tan(x) = -b/a."},
+		{"Solve sin(x) - cos(x) = 0 for 0° ≤ x < 360°.", "45°,225°", "sin(x) = cos(x) → tan(x) = 1 → x = 45°, 225°."},
+		{"Solve sin(x) + cos(x) = 0 for 0° ≤ x < 360°.", "135°,315°", "sin(x) = -cos(x) → tan(x) = -1 → x = 135°, 315°."},
+		{"Solve √3 sin(x) - cos(x) = 0 for 0° ≤ x < 360°.", "30°,210°", "√3 sin(x) = cos(x) → tan(x) = 1/√3 → x = 30°, 210°."},
+		{"Solve sin(x) - √3 cos(x) = 0 for 0° ≤ x < 360°.", "60°,240°", "sin(x) = √3 cos(x) → tan(x) = √3 → x = 60°, 240°."},
+		{"What is the general method to solve a sin(x) + b cos(x) = 0?", "divide by cos(x)", "Dividing by cos(x) gives a tan(x) + b = 0, which can be solved for x."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// hyperbolic: sinh and cosh
+type sinhCoshGen struct{}
+
+func (g *sinhCoshGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the definition of sinh(x)?", "(e^x - e^(-x))/2", "sinh(x) = (e^x - e^(-x))/2, the odd part of the exponential function."},
+		{"What is the definition of cosh(x)?", "(e^x + e^(-x))/2", "cosh(x) = (e^x + e^(-x))/2, the even part of the exponential function."},
+		{"What is cosh²(x) - sinh²(x)?", "1", "cosh²(x) - sinh²(x) = 1 (the hyperbolic analogue of cos²+sin²=1)."},
+		{"Is sinh(x) an even or odd function?", "odd", "sinh(-x) = -sinh(x), so sinh is odd."},
+		{"Is cosh(x) an even or odd function?", "even", "cosh(-x) = cosh(x), so cosh is even."},
+		{"What is the derivative of sinh(x)?", "cosh(x)", "d/dx sinh(x) = cosh(x)."},
+		{"What is the derivative of cosh(x)?", "sinh(x)", "d/dx cosh(x) = sinh(x)."},
+		{"What is the identity relating cosh²(x) and sinh²(x)?", "cosh²(x) - sinh²(x) = 1", "cosh²(x) - sinh²(x) = 1 is the fundamental hyperbolic identity."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// hyperbolic: tanh and coth
+type tanhCothGen struct{}
+
+func (g *tanhCothGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the definition of tanh(x)?", "sinh(x)/cosh(x)", "tanh(x) = sinh(x)/cosh(x) = (e^x - e^(-x))/(e^x + e^(-x))."},
+		{"What is the definition of coth(x)?", "cosh(x)/sinh(x)", "coth(x) = cosh(x)/sinh(x) = 1/tanh(x)."},
+		{"What is tanh(0)?", "0", "tanh(0) = sinh(0)/cosh(0) = 0/1 = 0."},
+		{"As x → ∞, tanh(x) approaches what value?", "1", "lim_{x→∞} tanh(x) = 1 because e^x dominates e^(-x)."},
+		{"As x → -∞, tanh(x) approaches what value?", "-1", "lim_{x→-∞} tanh(x) = -1 because e^(-x) dominates e^x."},
+		{"What is the range of tanh(x)?", "(-1, 1)", "tanh(x) maps real numbers to the open interval (-1, 1)."},
+		{"What is 1 - tanh²(x)?", "sech²(x)", "1 - tanh²(x) = sech²(x) = 1/cosh²(x)."},
+		{"Is tanh(x) an even or odd function?", "odd", "tanh(-x) = -tanh(x), so tanh is odd."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// trig identities
+type trigIdentGen struct{}
+
+func (g *trigIdentGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Simplify sin²(x) + cos²(x).", "1", "sin²(x) + cos²(x) = 1 (the Pythagorean identity)."},
+		{"Simplify 1 + tan²(x).", "sec²(x)", "1 + tan²(x) = sec²(x), derived from sin²+cos²=1 divided by cos²."},
+		{"Simplify 1 + cot²(x).", "csc²(x)", "1 + cot²(x) = csc²(x), derived from sin²+cos²=1 divided by sin²."},
+		{"What is sin(2x) in terms of sin(x) and cos(x)?", "2 sin(x) cos(x)", "sin(2x) = 2 sin(x) cos(x) (double angle formula)."},
+		{"What is cos(2x) in terms of cos(x)?", "2cos²(x) - 1", "cos(2x) = 2cos²(x) - 1 = cos²(x) - sin²(x) = 1 - 2sin²(x)."},
+		{"What is sin(-x) in terms of sin(x)?", "-sin(x)", "sin(-x) = -sin(x) (sine is odd)."},
+		{"What is cos(-x) in terms of cos(x)?", "cos(x)", "cos(-x) = cos(x) (cosine is even)."},
+		{"Simplify sin(x)cos(y) + cos(x)sin(y).", "sin(x+y)", "sin(x+y) = sin(x)cos(y) + cos(x)sin(y) (addition formula)."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+// basic trig inequalities
+type trigIneqGen struct{}
+
+func (g *trigIneqGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"For 0° < x < 90°, is sin(x) increasing or decreasing?", "increasing", "sin(x) increases from 0 to 1 on [0°, 90°]."},
+		{"For 0° < x < 90°, is cos(x) increasing or decreasing?", "decreasing", "cos(x) decreases from 1 to 0 on [0°, 90°]."},
+		{"For 0° < x < 90°, is tan(x) increasing or decreasing?", "increasing", "tan(x) increases from 0 to ∞ on [0°, 90°)."},
+		{"What is the maximum value of sin(x)?", "1", "The maximum of sin(x) is 1, achieved at x = 90°."},
+		{"What is the minimum value of sin(x)?", "-1", "The minimum of sin(x) is -1, achieved at x = 270°."},
+		{"What is the maximum value of cos(x)?", "1", "The maximum of cos(x) is 1, achieved at x = 0°."},
+		{"What is the minimum value of cos(x)?", "-1", "The minimum of cos(x) is -1, achieved at x = 180°."},
+		{"For 90° < x < 180°, is sin(x) positive or negative?", "positive", "sin(x) is positive in Quadrant II (90° to 180°)."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
 	}
 }

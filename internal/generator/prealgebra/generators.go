@@ -56,10 +56,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("prealg.ineq.one_step", &ineqOneStepGen{})
 	reg.Register("prealg.ineq.two_step", &ineqTwoStepGen{})
 
-	// stub generators for newly-added concepts
-	reg.Register("prealg.real.concept", &generator.Stub{ConceptID: "prealg.real.concept"})
-	reg.Register("prealg.real.properties", &generator.Stub{ConceptID: "prealg.real.properties"})
-	reg.Register("prealg.types", &generator.Stub{ConceptID: "prealg.types"})
+	reg.Register("prealg.real.concept", &realConceptGen{})
+	reg.Register("prealg.real.properties", &realPropertiesGen{})
+	reg.Register("prealg.types", &typesGen{})
 }
 
 // Decimals
@@ -677,4 +676,86 @@ func formatExpr(a, b int) string {
 		return fmt.Sprintf("%dx - %d", a, -b)
 	}
 	return fmt.Sprintf("%dx + %d", a, b)
+}
+
+type realConceptGen struct{}
+
+func (g *realConceptGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What is the defining property of a rational number?", "can be expressed as a/b", "A rational number can be written as a/b where a and b are integers, b ≠ 0."},
+		{"Is π a rational number? (yes/no)", "no", "π cannot be expressed as a ratio of two integers."},
+		{"Is √2 a rational number? (yes/no)", "no", "√2 cannot be expressed as a ratio of two integers."},
+		{"Is 0.333... a rational number? (yes/no)", "yes", "0.333... = 1/3, so it is rational."},
+		{"The set of real numbers contains which two main subsets?", "rational and irrational", "Real numbers are the union of rational and irrational numbers."},
+		{"Every integer is also a rational number. (true/false)", "true", "Any integer n can be written as n/1."},
+		{"Is √4 a rational number? (yes/no)", "yes", "√4 = 2 = 2/1, so it is rational."},
+		{"What is the name for a non-repeating, non-terminating decimal?", "irrational", "Irrational numbers have decimal representations that neither terminate nor repeat."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+type realPropertiesGen struct{}
+
+func (g *realPropertiesGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Which property says a + b = b + a?", "commutative", "The commutative property states that order does not matter for addition: a + b = b + a."},
+		{"Which property says (a + b) + c = a + (b + c)?", "associative", "The associative property states that grouping does not matter for addition."},
+		{"Which property says a(b + c) = ab + ac?", "distributive", "The distributive property distributes multiplication over addition."},
+		{"What is the additive identity element?", "0", "Adding 0 to any number gives the same number."},
+		{"What is the multiplicative identity element?", "1", "Multiplying any number by 1 gives the same number."},
+		{"What is the additive inverse of 5?", "-5", "The additive inverse of a number is what you add to it to get 0."},
+		{"What is the multiplicative inverse of 3?", "1/3", "The multiplicative inverse of a number is what you multiply it by to get 1."},
+		{"Which property says (a × b) × c = a × (b × c)?", "associative", "The associative property for multiplication states that grouping does not matter."},
+		{"Which property says a × b = b × a?", "commutative", "The commutative property for multiplication states that order does not matter."},
+		{"The identity property of multiplication states a × 1 = ?", "a", "Multiplying by 1 gives the original number."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
+}
+
+type typesGen struct{}
+
+func (g *typesGen) Generate(difficulty float64) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What type of number is 5? (natural, integer, rational, irrational, real)", "natural", "5 is a natural number (counting number)."},
+		{"What type of number is -3? (natural, integer, rational, irrational, real)", "integer", "-3 is an integer (not a natural number because it is negative)."},
+		{"What type of number is 0? (natural, integer, rational, irrational, real)", "integer", "0 is an integer but not a natural number."},
+		{"What type of number is 2/3? (natural, integer, rational, irrational, real)", "rational", "2/3 is a rational number because it can be expressed as a fraction."},
+		{"What type of number is 0.5? (natural, integer, rational, irrational, real)", "rational", "0.5 = 1/2, so it is rational."},
+		{"What type of number is √2? (natural, integer, rational, irrational, real)", "irrational", "√2 cannot be expressed as a fraction of integers."},
+		{"What type of number is π? (natural, integer, rational, irrational, real)", "irrational", "π is irrational (cannot be expressed as a fraction)."},
+		{"All integers are also which larger set of numbers?", "rational", "Every integer n can be written as n/1."},
+		{"Which set contains all others: natural, integer, rational, real?", "real", "Real numbers contain all rational and irrational numbers."},
+		{"Is 0 a natural number? (yes/no)", "no", "Natural numbers are positive counting numbers: 1, 2, 3, ..."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{
+		Question:    e.question,
+		Answer:      e.answer,
+		Explanation: e.exp,
+	}
 }

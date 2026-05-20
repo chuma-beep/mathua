@@ -39,6 +39,8 @@ func (m Model) View() string {
 		body = m.viewDiagnostic()
 	case ScreenDiagFeedback:
 		body = m.viewDiagFeedback()
+	case ScreenConceptDetail:
+		body = m.viewConceptDetail()
 	}
 
 	header := m.viewHeader()
@@ -84,6 +86,8 @@ func (m Model) viewFooter() string {
 		items = [][2]string{{"1-9", "select"}, {"w", "welcome"}, {"q", "quit"}}
 	case ScreenProgress:
 		items = [][2]string{{"enter", "continue"}, {"w", "welcome"}, {"q", "quit"}}
+	case ScreenConceptDetail:
+		items = [][2]string{{"p", "practice"}, {"b", "browse"}, {"q", "quit"}}
 	}
 	var parts []string
 	for i, kv := range items {
@@ -331,6 +335,94 @@ func (m Model) viewStudy() string {
 
 	b.WriteString("\n")
 	b.WriteString(ContinueStyle.Render("press number to read  |  w for welcome  |  q to quit"))
+
+	return ContentStyle.Render(b.String())
+}
+
+// Concept Detail screen
+
+func (m Model) viewConceptDetail() string {
+	d := m.conceptDetail
+	w := m.width - 10
+
+	var b strings.Builder
+
+	b.WriteString(
+		WelcomeTitleStyle.Render(d.Label) +
+			"\n" +
+			DomainStyle.Render(d.Domain+"  |  "+d.Subdomain+"  |  "+d.ConceptID),
+	)
+	b.WriteString("\n\n")
+
+	if d.Unlocked {
+		b.WriteString(NextUnlockedStyle.Render("unlocked"))
+	} else {
+		b.WriteString(lipgloss.NewStyle().Foreground(lipgloss.Color(colRed)).Render("locked — prerequisites not met"))
+	}
+	b.WriteString("\n\n")
+
+	if d.StreakNeeded > 0 {
+		bar := masteryBar(d.MasteryPct, 20)
+		pctStr := MasteryValueStyle.Render(fmt.Sprintf("%.0f%%", d.MasteryPct*100))
+		statusStr := ""
+		switch d.Status {
+		case "MASTERED":
+			statusStr = MasteryAchievedStyle.Render("  mastered")
+		case "PRACTICING":
+			statusStr = DomainCountStyle.Render("  practicing")
+		case "LEARNING":
+			statusStr = DomainCountStyle.Render("  learning")
+		default:
+			statusStr = DomainStyle.Render("  unseen")
+		}
+		b.WriteString(MasteryLabelStyle.Render("mastery  ") + bar + "  " + pctStr + statusStr)
+		b.WriteString("\n\n")
+	}
+
+	// Prerequisites section
+	if len(d.Prerequisites) > 0 {
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n")
+		b.WriteString(StatLabelStyle.Render("prerequisites"))
+		b.WriteString("\n\n")
+		for _, p := range d.Prerequisites {
+			statusColor := colDim
+			statusLabel := "unseen"
+			switch p.Status {
+			case "MASTERED":
+				statusColor = colGreen
+				statusLabel = "mastered"
+			case "PRACTICING":
+				statusColor = colGold
+				statusLabel = "practicing"
+			case "LEARNING":
+				statusColor = colGoldDim
+				statusLabel = "learning"
+			}
+			pBar := masteryBar(p.MasteryPct, 10)
+			b.WriteString("  " +
+				StatLabelStyle.Render(p.Label) + "  " +
+				lipgloss.NewStyle().Foreground(lipgloss.Color(statusColor)).Render(statusLabel) + "  " +
+				pBar,
+			)
+			b.WriteString("\n")
+		}
+		b.WriteString("\n")
+	}
+
+	// Lesson body
+	if d.LessonBody != "" {
+		b.WriteString(DividerStyle.Render(strings.Repeat("-", w)))
+		b.WriteString("\n")
+		b.WriteString(StatLabelStyle.Render("lesson"))
+		b.WriteString("\n\n")
+		body := stripLatexDelimiters(d.LessonBody)
+		if len(body) > 2000 {
+			body = body[:2000] + "\n\n[... truncated ...]"
+		}
+		b.WriteString(QuestionTextStyle.Render(body))
+		b.WriteString("\n\n")
+	}
 
 	return ContentStyle.Render(b.String())
 }
