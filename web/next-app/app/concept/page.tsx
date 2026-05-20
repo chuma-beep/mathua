@@ -207,6 +207,21 @@ function ConceptContent() {
               </div>
             )}
 
+            {detail.prerequisites.length > 0 && (
+              <div className="mb-8">
+                <p className="font-mono text-xs text-mathua-muted border-b border-mathua-border pb-2 mb-3">
+                  Requires: {detail.prerequisites.map((p, i) => (
+                    <span key={p.id}>
+                      {i > 0 && <span className="mx-1 text-mathua-border">·</span>}
+                      <Link href={`/concept?id=${encodeURIComponent(p.id)}`} className="text-mathua-blue hover:text-mathua-blue-hover transition-colors">
+                        {p.label}
+                      </Link>
+                    </span>
+                  ))}
+                </p>
+              </div>
+            )}
+
             {detail.lesson && (
               <div className="mb-8">
                 <div className="flex gap-6">
