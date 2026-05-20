@@ -163,6 +163,42 @@ export default function StudyPage() {
                 </div>
               </div>
 
+              {selectedLesson.prerequisites && selectedLesson.prerequisites.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="font-serif text-sm text-mathua-muted mb-3 font-mono border-b border-mathua-border pb-2">
+                    Before you start ({selectedLesson.prerequisites.length})
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedLesson.prerequisites.map((p) => {
+                      const pColor = p.status === 'MASTERED' ? 'text-green-400' : p.status === 'PRACTICING' ? 'text-yellow-400' : p.status === 'LEARNING' ? 'text-yellow-600' : 'text-mathua-muted'
+                      return (
+                        <Link
+                          key={p.id}
+                          href={`/concept?id=${encodeURIComponent(p.id)}`}
+                          className="bg-mathua-surface border border-mathua-border rounded-none p-3 hover:border-mathua-blue transition-colors block"
+                        >
+                          <div className="flex items-center gap-2">
+                            <MasteryBadge status={p.status} size="sm" />
+                            <div className="font-mono text-xs text-mathua-primary">{p.label}</div>
+                          </div>
+                          <div className="flex items-center gap-2 mt-1.5">
+                            <div className="flex-1 h-1 bg-mathua-bg rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-mathua-blue transition-all"
+                                style={{ width: `${Math.round(p.mastery_pct * 100)}%` }}
+                              />
+                            </div>
+                            <span className="font-mono text-[10px] text-mathua-muted">
+                              {Math.round(p.mastery_pct * 100)}%
+                            </span>
+                          </div>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
               <div className="bg-mathua-surface border border-mathua-border rounded-none p-8">
                 <KatexContent>{selectedLesson.body}</KatexContent>
               </div>
@@ -170,6 +206,28 @@ export default function StudyPage() {
               {selectedLesson.concepts.slice(0, 3).map(cid => (
                 <LessonQuiz key={cid} conceptId={cid} limit={4} />
               ))}
+
+              {selectedLesson.dependents && selectedLesson.dependents.length > 0 && (
+                <div className="mt-8 mb-8">
+                  <h3 className="font-serif text-sm text-mathua-muted mb-3 font-mono border-b border-mathua-border pb-2">
+                    What to study next ({selectedLesson.dependents.length})
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedLesson.dependents.map((d) => (
+                      <Link
+                        key={d.id}
+                        href={`/concept?id=${encodeURIComponent(d.id)}`}
+                        className="bg-mathua-surface border border-mathua-border rounded-none p-3 hover:border-mathua-blue transition-colors block"
+                      >
+                        <div className="flex items-center gap-2">
+                          <MasteryBadge status={d.status} size="sm" />
+                          <div className="font-mono text-xs text-mathua-primary">{d.label}</div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="mt-8 text-center">
                 <Link

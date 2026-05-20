@@ -184,6 +184,29 @@ function ConceptContent() {
               </div>
             )}
 
+            {detail.dependents && detail.dependents.length > 0 && (
+              <div className="mb-8">
+                <h3 className="font-serif text-sm text-mathua-muted mb-3 font-mono">
+                  builds toward ({detail.dependents.length})
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {detail.dependents.map((d) => {
+                    const dColor = d.status === 'MASTERED' ? 'text-green-400' : d.status === 'PRACTICING' ? 'text-yellow-400' : d.status === 'LEARNING' ? 'text-yellow-600' : 'text-mathua-muted'
+                    return (
+                      <Link
+                        key={d.id}
+                        href={`/concept?id=${encodeURIComponent(d.id)}`}
+                        className="bg-mathua-surface border border-mathua-border rounded-none p-3 hover:border-mathua-blue transition-colors block"
+                      >
+                        <div className="font-mono text-xs text-mathua-primary">{d.label}</div>
+                        <span className={`font-mono text-[10px] ${dColor}`}>{d.status}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
             {detail.lesson && (
               <div className="mb-8">
                 <div className="flex gap-6">

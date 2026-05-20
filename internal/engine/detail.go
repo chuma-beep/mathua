@@ -11,6 +11,7 @@ type ConceptDetail struct {
 	Concept       ConceptInfo      `json:"concept"`
 	Lesson        *LessonInfo      `json:"lesson,omitempty"`
 	Prerequisites []PrereqInfo     `json:"prerequisites"`
+	Dependents    []PrereqInfo     `json:"dependents,omitempty"`
 	Unlocked      bool             `json:"unlocked"`
 	Progress      *ProgressInfo    `json:"progress,omitempty"`
 }
@@ -124,5 +125,127 @@ func (e *Engine) ConceptDetail(studentID, conceptID string) (*ConceptDetail, err
 		}
 	}
 
+	for _, dep := range e.dag.DependentsOf(conceptID) {
+		status := string(mastery.StatusUnseen)
+		masteryPct := 0.0
+		if p, ok := progress[dep.ID]; ok {
+			status = p.Status
+		}
+		detail.Dependents = append(detail.Dependents, PrereqInfo{
+			ID:         dep.ID,
+			Label:      dep.Label,
+			Status:     status,
+			MasteryPct: masteryPct,
+		})
+	}
+
 	return detail, nil
+}
+
+// LessonPrerequisites computes the aggregate prerequisites for a lesson
+// (the set of concepts a lesson covers). It returns unique prerequisites
+// that are NOT covered by the lesson itself, with optional progress info.
+func (e *Engine) LessonPrerequisites(conceptIDs []string, progress map[string]*storage.ConceptProgress) []PrereqInfo {
+	inLesson := make(map[string]bool, len(conceptIDs))
+	for _, cid := range conceptIDs {
+		inLesson[cid] = true
+	}
+
+	prereqSet := make(map[string]bool)
+	for _, cid := range conceptIDs {
+		c := e.dag.Concept(cid)
+		if c == nil {
+			continue
+		}
+		for _, pid := range c.Prerequisites {
+			if !inLesson[pid] {
+				prereqSet[pid] = true
+			}
+		}
+	}
+
+	prereqs := make([]PrereqInfo, 0, len(prereqSet))
+	for pid := range prereqSet {
+		c := e.dag.Concept(pid)
+		label := pid
+		if c != nil {
+			label = c.Label
+		}
+
+		status := string(mastery.StatusUnseen)
+		masteryPct := 0.0
+		if p, ok := progress[pid]; ok {
+			status = p.Status
+			if c != nil && c.MasteryThreshold.Streak > 0 {
+				masteryPct = float64(p.Streak) / float64(c.MasteryThreshold.Streak)
+				if masteryPct > 1 {
+					masteryPct = 1
+				}
+			}
+		}
+
+		prereqs = append(prereqs, PrereqInfo{
+			ID:         pid,
+			Label:      label,
+			Status:     status,
+			MasteryPct: masteryPct,
+		})
+	}
+	return prereqs
+}
+
+// LessonDependents computes the concepts that depend on any of the given
+// concept IDs. Useful for showing "what to study next" after a lesson.
+func (e *Engine) LessonDependents(conceptIDs []string, progress map[string]*storage.ConceptProgress) []PrereqInfo {
+	inSet := make(map[string]bool, len(conceptIDs))
+	for _, cid := range conceptIDs {
+		inSet[cid] = true
+	}
+
+	depSet := make(map[string]bool)
+	for _, cid := range conceptIDs {
+		for _, dep := range e.dag.DependentsOf(cid) {
+			if !inSet[dep.ID] {
+				depSet[dep.ID] = true
+			}
+		}
+	}
+
+	deps := make([]PrereqInfo, 0, len(depSet))
+	for did := range depSet {
+		c := e.dag.Concept(did)
+		label := did
+		if c != nil {
+			label = c.Label
+		}
+
+		status := string(mastery.StatusUnseen)
+		masteryPct := 0.0
+		if p, ok := progress[did]; ok {
+			status = p.Status
+		}
+
+		deps = append(deps, PrereqInfo{
+			ID:         did,
+			Label:      label,
+			Status:     status,
+			MasteryPct: masteryPct,
+		})
+	}
+	return deps
+}
+
+// LessonDependentsByDomain groups dependents by their concept domain.
+func (e *Engine) LessonDependentsByDomain(conceptIDs []string, progress map[string]*storage.ConceptProgress) map[string][]PrereqInfo {
+	deps := e.LessonDependents(conceptIDs, progress)
+	byDomain := make(map[string][]PrereqInfo)
+	for _, d := range deps {
+		c := e.dag.Concept(d.ID)
+		domain := "general"
+		if c != nil {
+			domain = c.Domain
+		}
+		byDomain[domain] = append(byDomain[domain], d)
+	}
+	return byDomain
 }

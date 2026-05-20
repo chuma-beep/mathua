@@ -317,16 +317,25 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 }
 
 export interface ConceptProgress {
-	status: string
-	mastery: number
-	streak: number
+    status: string
+    mastery: number
+    streak: number
+}
+
+export interface PrereqInfo {
+    id: string
+    label: string
+    status: string
+    mastery_pct: number
 }
 
 export interface LessonInfo {
-	title: string
-	body: string
-	concepts: string[]
-	progress?: Record<string, ConceptProgress>
+    title: string
+    body: string
+    concepts: string[]
+    progress?: Record<string, ConceptProgress>
+    prerequisites?: PrereqInfo[]
+    dependents?: PrereqInfo[]
 }
 
 export interface LessonsRes {
@@ -353,6 +362,12 @@ export interface ConceptDetailRes {
 		concepts: string[]
 	}
 	prerequisites: {
+		id: string
+		label: string
+		status: string
+		mastery_pct: number
+	}[]
+	dependents?: {
 		id: string
 		label: string
 		status: string
