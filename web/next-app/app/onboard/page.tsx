@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
@@ -257,7 +258,7 @@ export default function OnboardPage() {
               <div className="max-w-2xl mx-auto">
                 <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
                   <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
-                    <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</p>
+                    <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</KatexContent>
                   </div>
                   <div className="flex gap-3">
                     <input

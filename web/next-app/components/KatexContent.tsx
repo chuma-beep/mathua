@@ -26,7 +26,7 @@ function extractText(children: ReactNode): string {
   return text
 }
 
-export default function KatexContent({ children }: { children: string }) {
+export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
   let content = children
 
   // Decode common HTML entities before any LaTeX processing
@@ -132,7 +132,7 @@ export default function KatexContent({ children }: { children: string }) {
   })
 
   return (
-    <div className="katex-content text-sm leading-relaxed">
+    <div className={`katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: true, errorColor: '#cc0000' }]]}

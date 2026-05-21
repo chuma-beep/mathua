@@ -472,7 +472,7 @@ export default function SessionPage() {
             <SectionHeader label={`Question ${diagCount}`} title={diagConceptName} />
             <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-6">
               <div className="bg-mathua-code border border-mathua-border rounded-none p-6 text-center mb-4">
-                <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</p>
+                <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</KatexContent>
               </div>
               <div className="flex gap-3">
                 <input
@@ -671,28 +671,28 @@ export default function SessionPage() {
 
                     <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
                       {question.diagram ? (
-                        <div className="flex flex-col md:flex-row">
-                          <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
-                            <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
-                          </div>
-                           <div className="md:w-2/3 p-8 flex items-center justify-center">
-                             <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
-                               {question.question}
-                             </p>
+                         <div className="flex flex-col md:flex-row">
+                           <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
+                             <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                            </div>
-                         </div>
-                       ) : (
-                         <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
-                           {question.question}
-                         </p>
-                       )}
-                     </div>
+                            <div className="md:w-2/3 p-8 flex items-center justify-center">
+                              <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                                {question.question}
+                              </KatexContent>
+                            </div>
+                          </div>
+                         ) : (
+                          <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                            {question.question}
+                          </KatexContent>
+                         )}
+                      </div>
 
-                     {!submitted ? (
-                       <>
-                         <div className="flex gap-3 mb-4">
-                           <input
-                             ref={inputRef}
+                      {!submitted ? (
+                        <>
+                          <div className="flex gap-3 mb-4">
+                            <input
+                              ref={inputRef}
                              type="text"
                              value={answer}
                              onChange={(e) => setAnswer(e.target.value)}
@@ -878,32 +878,32 @@ export default function SessionPage() {
                       <span className="text-mathua-muted text-[10px]">·</span>
                       <span className="section-label">{question.concept_id}</span>
                     </div>
-                    <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1 mb-6">
-                      {question.concept_name}
-                    </h3>
-                    <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
-                      {question.diagram ? (
-                        <div className="flex flex-col md:flex-row">
-                          <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
-                            <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
-                          </div>
-                           <div className="md:w-2/3 p-8 flex items-center justify-center">
-                             <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
-                               {question.question}
-                             </p>
+                      <h3 className="font-serif text-2xl font-medium text-mathua-primary mt-1 mb-6">
+                       {question.concept_name}
+                     </h3>
+                     <div className={`bg-mathua-code border border-mathua-border rounded-none mb-6 ${question.diagram ? 'p-0' : 'p-8 text-center'}`}>
+                       {question.diagram ? (
+                         <div className="flex flex-col md:flex-row">
+                           <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
+                             <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                            </div>
-                         </div>
-                       ) : (
-                         <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
-                           {question.question}
-                         </p>
-                       )}
-                     </div>
-                     {!submitted ? (
-                       <>
-                         <div className="flex gap-3 mb-4">
-                           <input
-                             ref={inputRef}
+                            <div className="md:w-2/3 p-8 flex items-center justify-center">
+                              <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                                {question.question}
+                              </KatexContent>
+                            </div>
+                          </div>
+                         ) : (
+                          <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                            {question.question}
+                          </KatexContent>
+                         )}
+                      </div>
+                      {!submitted ? (
+                        <>
+                          <div className="flex gap-3 mb-4">
+                            <input
+                              ref={inputRef}
                              type="text"
                              value={answer}
                              onChange={(e) => setAnswer(e.target.value)}
