@@ -675,20 +675,20 @@ export default function SessionPage() {
                           <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
                             <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                           </div>
-                          <div className="md:w-2/3 p-8 flex items-center justify-center">
-                            <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
-                              {question.question}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
-                          {question.question}
-                        </p>
-                      )}
-                    </div>
+                           <div className="md:w-2/3 p-8 flex items-center justify-center">
+                             <p className="text-mathua-primary text-xl md:text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                               {question.question}
+                             </p>
+                           </div>
+                         </div>
+                       ) : (
+                         <p className="text-mathua-primary text-xl md:text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                           {question.question}
+                         </p>
+                       )}
+                     </div>
 
-                    {!submitted ? (
+                     {!submitted ? (
                       <>
                         <div className="flex gap-3 mb-4">
                           <input
@@ -887,27 +887,27 @@ export default function SessionPage() {
                           <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
                             <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                           </div>
-                          <div className="md:w-2/3 p-8 flex items-center justify-center">
-                            <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
-                              {question.question}
-                            </p>
-                          </div>
-                        </div>
-                      ) : (
-                        <p className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
-                          {question.question}
-                        </p>
-                      )}
-                    </div>
-                    {!submitted ? (
-                      <>
-                        <div className="flex gap-3 mb-4">
-                          <input
-                            ref={inputRef}
-                            type="text"
-                            value={answer}
-                            onChange={(e) => setAnswer(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
+                           <div className="md:w-2/3 p-8 flex items-center justify-center">
+                             <p className="text-mathua-primary text-xl md:text-2xl font-mono font-light whitespace-pre-wrap text-center">
+                               {question.question}
+                             </p>
+                           </div>
+                         </div>
+                       ) : (
+                         <p className="text-mathua-primary text-xl md:text-2xl font-mono font-light whitespace-pre-wrap p-8">
+                           {question.question}
+                         </p>
+                       )}
+                     </div>
+                     {!submitted ? (
+                       <>
+                         <div className="flex gap-3 mb-4">
+                           <input
+                             ref={inputRef}
+                             type="text"
+                             value={answer}
+                             onChange={(e) => setAnswer(e.target.value)}
+                             onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
                             placeholder="Your answer"
                             className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
                           />

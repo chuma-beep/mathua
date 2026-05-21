@@ -111,7 +111,7 @@ function ConceptContent() {
             )}
           </span>
 
-          <div className="max-w-4xl mx-auto mt-8 mb-16">
+          <div className="max-w-7xl mx-auto mt-8 mb-16">
             <SectionHeader label={detail.concept.domain} title={detail.concept.label} />
             <p className="text-mathua-muted text-xs font-mono text-center -mt-4 mb-8">
               {detail.concept.domain}.{detail.concept.subdomain} &middot; {detail.concept.id}
@@ -248,7 +248,7 @@ function ConceptContent() {
                     </aside>
                   )}
                   <div className="flex-1 min-w-0">
-                    <div className="bg-mathua-surface border border-mathua-border rounded-none p-6">
+                    <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 md:p-8 lg:p-10">
                       <div className="text-mathua-secondary text-xs font-mono mb-4">
                         {detail.lesson.title}
                       </div>

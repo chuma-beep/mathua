@@ -422,7 +422,7 @@ function DomainDrillDown({
   const icon = domainIcon(domain)
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 mb-16">
+    <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
         onClick={onBack}
         className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
@@ -533,7 +533,7 @@ function LessonDetail({
   onBack: () => void
 }) {
   return (
-    <div className="max-w-4xl mx-auto mt-8 mb-16">
+    <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
         onClick={onBack}
         className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
@@ -594,7 +594,7 @@ function LessonDetail({
         </div>
       )}
 
-      <div className="bg-mathua-surface border border-mathua-border p-8">
+      <div className="bg-mathua-surface border border-mathua-border p-6 md:p-8 lg:p-10">
         <KatexContent>{lesson.body}</KatexContent>
       </div>
 
