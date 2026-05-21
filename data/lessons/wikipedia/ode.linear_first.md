@@ -116,34 +116,10 @@ a_0 + a_1t + a_2 t^2 + \cdots + a_nt^n = 0.
 \]
 
 When these roots are all distinct, one has distinct solutions that are not necessarily real, even if the coefficients of the equation are real. These solutions can be shown to be linearly independent, by considering the Vandermonde determinant of the values of these solutions at *x* = 0,... , *n* – 1. Together they form a basis of the vector space of solutions of the differential equation (that is, the kernel of the differential operator).
-{| class="toccolours floatright" style="width:35%; margin: 0.5em 0 0.5em 1em;"
-! style="background:#ffffaa; padding: 3px 5px 3px 5px; font-size:larger;" | Example
-|-
-| style="font-size:100%; padding:0 5px 0 5px;" |
+| | Example |
+| --- |
+| | \[ y**'-2y**+2y''-2y'+y=0 \] has the characteristic equation \[ z^4-2z^3+2z^2-2z+0. \] This has zeros, −*i*, and 1 (multiplicity 2). The solution basis is thus \[ e^{ix},\; e^{-ix},\; e^x,\; xe^x. \] A real basis of solution is thus \[ \cos x,\; \sin x,\; e^x,\; xe^x. \] |
 
-\[
-y**'-2y**+2y''-2y'+y=0
-\]
-
-has the characteristic equation
-
-\[
-z^4-2z^3+2z^2-2z+0.
-\]
-
-This has zeros, −*i*, and 1 (multiplicity 2). The solution basis is thus
-
-\[
-e^{ix},\; e^{-ix},\; e^x,\; xe^x.
-\]
-
-A real basis of solution is thus
-
-\[
-\cos x,\; \sin x,\; e^x,\; xe^x.
-\]
-
-|}
 In the case where the characteristic polynomial has only simple roots, the preceding provides a complete basis of the solutions vector space. In the case of multiple roots, more linearly independent solutions are needed for having a basis. These have the form
 
 \[

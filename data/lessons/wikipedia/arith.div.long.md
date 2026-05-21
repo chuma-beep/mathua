@@ -293,51 +293,26 @@ The final quotient is \(q = q_{k-l}\) and the final remainder is \(r = r_{k-l}\)
 ### Examples
 In base 10, using the example above with \(n = 1260257\) and \(m = 37\), the initial values \(q_{-1} = 0\) and \(r_{-1} = 1\).
 
-{| class="wikitable"
-|-
-! \(0 \leq i \leq k - l\)
-! \(\alpha_{i+l-1}\)
-! \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\)
-! \(\beta_{i}\)
-! \(r_{i} = d_{i} - m \beta_{i}\)
-! \(q_{i} = b q_{i-1} + \beta_{i}\)
-|-
-| 0 || 2 || \(10 \cdot 1 + 2 = 12\) || 0 || \(12 - 37 \cdot 0 = 12\) || \(10 \cdot 0 + 0 = 0\)
-|-
-| 1 || 6 || \(10 \cdot 12 + 6 = 126\) || 3 || \(126 - 37 \cdot 3 = 15\) || \(10 \cdot 0 + 3 = 3\)
-|-
-| 2 || 0 || \(10 \cdot 15 + 0 = 150\) || 4 || \(150 - 37 \cdot 4 = 2\) || \(10 \cdot 3 + 4 = 34\)
-|-
-| 3 || 2 || \(10 \cdot 2 + 2 = 22\) || 0 || \(22 - 37 \cdot 0 = 22\) || \(10 \cdot 34 + 0 = 340\)
-|-
-| 4 || 5 || \(10 \cdot 22 + 5 = 225\) || 6 || \(225 - 37 \cdot 6 = 3\) || \(10 \cdot 340 + 6 = 3406\)
-|-
-| 5 || 7 || \(10 \cdot 3 + 7 = 37\) || 1 || \(37 - 37 \cdot 1 = 0\) || \(10 \cdot 3406 + 1 = 34061\)
-|}
+| \(0 \leq i \leq k - l\) | \(\alpha_{i+l-1}\) | \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\) | \(\beta_{i}\) | \(r_{i} = d_{i} - m \beta_{i}\) | \(q_{i} = b q_{i-1} + \beta_{i}\) |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 2 | \(10 \cdot 1 + 2 = 12\) | 0 | \(12 - 37 \cdot 0 = 12\) | \(10 \cdot 0 + 0 = 0\) |
+| 1 | 6 | \(10 \cdot 12 + 6 = 126\) | 3 | \(126 - 37 \cdot 3 = 15\) | \(10 \cdot 0 + 3 = 3\) |
+| 2 | 0 | \(10 \cdot 15 + 0 = 150\) | 4 | \(150 - 37 \cdot 4 = 2\) | \(10 \cdot 3 + 4 = 34\) |
+| 3 | 2 | \(10 \cdot 2 + 2 = 22\) | 0 | \(22 - 37 \cdot 0 = 22\) | \(10 \cdot 34 + 0 = 340\) |
+| 4 | 5 | \(10 \cdot 22 + 5 = 225\) | 6 | \(225 - 37 \cdot 6 = 3\) | \(10 \cdot 340 + 6 = 3406\) |
+| 5 | 7 | \(10 \cdot 3 + 7 = 37\) | 1 | \(37 - 37 \cdot 1 = 0\) | \(10 \cdot 3406 + 1 = 34061\) |
 
 Thus, \(q = 34061\) and \(r = 0\).
 
 In base 16, with \(n = \text{f412df}\) and \(m = 12\), the initial values are \(q_{-1} = 0\) and \(r_{-1} = \text{f}\).
 
-{| class="wikitable"
-|-
-! \(0 \leq i \leq k - l\)
-! \(\alpha_{i+l-1}\)
-! \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\)
-! \(\beta_{i}\)
-! \(r_{i} = d_{i} - m \beta_{i}\)
-! \(q_{i} = b q_{i-1} + \beta_{i}\)
-|-
-| 0 || 4 || \(10 \cdot \text{f} + 4 = \text{f4}\) || \(\text{d}\) || \(\text{f4} - 12 \cdot \text{d} = \text{a}\) || \(10 \cdot 0 + \text{d} = \text{d}\)
-|-
-| 1 || 1 || \(10 \cdot \text{a} + 1 = \text{a1}\) || 8 || \(\text{a1} - 12 \cdot 8 = 11\) || \(10 \cdot \text{d} + 8 = \text{d8}\)
-|-
-| 2 || 2 || \(10 \cdot 11 + 2 = 112\) || \(\text{f}\) || \(112 - 12 \cdot \text{f} = 4\) || \(10 \cdot \text{d8} + \text{f} = \text{d8f}\)
-|-
-| 3 || \(\text{d} = 13\) || \(10 \cdot 4 + \text{d} = \text{4d}\) || 4 || \(\text{4d} - 12 \cdot 4 = 5\) || \(10 \cdot \text{d8f} + 4 = \text{d8f4}\)
-|-
-| 4 || \(\text{f} = 15\) || \(10 \cdot 5 + \text{f} = \text{5f}\) || 5 || \(\text{5f} - 12 \cdot 5 = 5\) || \(10 \cdot \text{d8f4} + 5 = \text{d8f45}\)
-|}
+| \(0 \leq i \leq k - l\) | \(\alpha_{i+l-1}\) | \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\) | \(\beta_{i}\) | \(r_{i} = d_{i} - m \beta_{i}\) | \(q_{i} = b q_{i-1} + \beta_{i}\) |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 4 | \(10 \cdot \text{f} + 4 = \text{f4}\) | \(\text{d}\) | \(\text{f4} - 12 \cdot \text{d} = \text{a}\) | \(10 \cdot 0 + \text{d} = \text{d}\) |
+| 1 | 1 | \(10 \cdot \text{a} + 1 = \text{a1}\) | 8 | \(\text{a1} - 12 \cdot 8 = 11\) | \(10 \cdot \text{d} + 8 = \text{d8}\) |
+| 2 | 2 | \(10 \cdot 11 + 2 = 112\) | \(\text{f}\) | \(112 - 12 \cdot \text{f} = 4\) | \(10 \cdot \text{d8} + \text{f} = \text{d8f}\) |
+| 3 | \(\text{d} = 13\) | \(10 \cdot 4 + \text{d} = \text{4d}\) | 4 | \(\text{4d} - 12 \cdot 4 = 5\) | \(10 \cdot \text{d8f} + 4 = \text{d8f4}\) |
+| 4 | \(\text{f} = 15\) | \(10 \cdot 5 + \text{f} = \text{5f}\) | 5 | \(\text{5f} - 12 \cdot 5 = 5\) | \(10 \cdot \text{d8f4} + 5 = \text{d8f45}\) |
 
 Thus, \(q = \text{d8f45}\) and \(r = \text{5}\).
 
@@ -347,25 +322,14 @@ and
 \(m = \text{12}_{16} = 1 \cdot 16^1 + 2 \cdot 16^0 = 18\)
 with \(b = 16\). The initial values are \(q_{-1} = 0\) and \(r_{-1} = 15\).
 
-{| class="wikitable"
-|-
-! \(0 \leq i \leq k - l\)
-! \(\alpha_{i+l-1}\)
-! \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\)
-! \(\beta_{i}\)
-! \(r_{i} = d_{i} - m \beta_{i}\)
-! \(q_{i} = b q_{i-1} + \beta_{i}\)
-|-
-| 0 || 4 || \(16 \cdot 15 + 4 = 244\) || \(13 = \text{d}\) || \(244 - 18 \cdot 13 = 10\) || \(16 \cdot 0 + 13 = 13\)
-|-
-| 1 || 1 || \(16 \cdot 10 + 1 = 161\) || 8 || \(161 - 18 \cdot 8 = 17\) || \(16 \cdot 13 + 8\)
-|-
-| 2 || 2 || \(16 \cdot 17 + 2 = 274\) || \(15 = \text{f}\) || \(274 - 18 \cdot 15 = 4\) || \(16 \cdot (16 \cdot 13 + 8) + 15 = 16^2 \cdot 13 + 16 \cdot 8 + 15\)
-|-
-| 3 || \(\text{d} = 13\) || \(16 \cdot 4 + 13 = 77\) || 4 || \(77 - 18 \cdot 4 = 5\) || \(16 \cdot (16^2 \cdot 13 + 16 \cdot 8 + 15) + 4 = 16^3 \cdot 13 + 16^2 \cdot 8 + 16 \cdot 15 + 4\)
-|-
-| 4 || \(\text{f} = 15\) || \(16 \cdot 5 + 15 = 95\) || 5 || \(95 - 18 \cdot 5 = 5\) || \(16 \cdot (16^3 \cdot 13 + 16^2 \cdot 8 + 16 \cdot 15 + 4 = 16^4 \cdot 13 + 16^3 \cdot 8 + 16^2 \cdot 15 + 16^1 \cdot 4 + 5\)
-|}
+| \(0 \leq i \leq k - l\) | \(\alpha_{i+l-1}\) | \(d_{i} = b r_{i-1} + \alpha_{i+l-1}\) | \(\beta_{i}\) | \(r_{i} = d_{i} - m \beta_{i}\) | \(q_{i} = b q_{i-1} + \beta_{i}\) |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 4 | \(16 \cdot 15 + 4 = 244\) | \(13 = \text{d}\) | \(244 - 18 \cdot 13 = 10\) | \(16 \cdot 0 + 13 = 13\) |
+| 1 | 1 | \(16 \cdot 10 + 1 = 161\) | 8 | \(161 - 18 \cdot 8 = 17\) | \(16 \cdot 13 + 8\) |
+| 2 | 2 | \(16 \cdot 17 + 2 = 274\) | \(15 = \text{f}\) | \(274 - 18 \cdot 15 = 4\) | \(16 \cdot (16 \cdot 13 + 8) + 15 = 16^2 \cdot 13 + 16 \cdot 8 + 15\) |
+| 3 | \(\text{d} = 13\) | \(16 \cdot 4 + 13 = 77\) | 4 | \(77 - 18 \cdot 4 = 5\) | \(16 \cdot (16^2 \cdot 13 + 16 \cdot 8 + 15) + 4 = 16^3 \cdot 13 + 16^2 \cdot 8 + 16 \cdot 15 + 4\) |
+| 4 | \(\text{f} = 15\) | \(16 \cdot 5 + 15 = 95\) | 5 | \(95 - 18 \cdot 5 = 5\) | \(16 \cdot (16^3 \cdot 13 + 16^2 \cdot 8 + 16 \cdot 15 + 4 = 16^4 \cdot 13 + 16^3 \cdot 8 + 16^2 \cdot 15 + 16^1 \cdot 4 + 5\) |
+
 Thus, \(q = 16^4 \cdot 13 + 16^3 \cdot 8 + 16^2 \cdot 15 + 16^1 \cdot 4 + 5 = \text{d8f45}_{16}\) and \(r = 5 = \text{5}_{16}\).
 
 This algorithm can be done using the same kind of pencil-and-paper notations as shown in above sections.

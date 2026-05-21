@@ -30,64 +30,46 @@ This is equivalent to the definition above, and may be used as an alternative de
 
 The absolute value has the following four fundamental properties (\(a\), \(b\) are real numbers), that are used for generalization of this notion to other domains:
 
-{| style="margin-left:1.6em"
-|-
-| style="width: 250px" |\(|a| \ge 0\)
-| Non-negativity
-|-
-|\(|a| = 0 \iff a = 0\)
-|Positive-definiteness
-|-
-|\(|ab| = \left|a\right| \left|b\right|\)
-|Multiplicativity
-|-
-|\(|a+b| \le |a| + |b|\)
-| Subadditivity, specifically the triangle inequality
-|}
+<dl>
+  <dt>|\(|a| \ge 0\)</dt>
+  <dd>Non-negativity</dd>
+  <dt>\(|a| = 0 \iff a = 0\)</dt>
+  <dd>Positive-definiteness</dd>
+  <dt>\(|ab| = \left|a\right| \left|b\right|\)</dt>
+  <dd>Multiplicativity</dd>
+  <dt>\(|a+b| \le |a| + |b|\)</dt>
+  <dd>Subadditivity, specifically the triangle inequality</dd>
+</dl>
 
 Non-negativity, positive definiteness, and multiplicativity are readily apparent from the definition. To see that subadditivity holds, first note that \(|a+b|=s(a+b)\) where \(s=\pm 1\), with its sign chosen to make the result positive. Now; since \(-1 \cdot x \le |x|\) and \(+1 \cdot x \le |x|\), it follows that, whichever of \(\pm1\) is the value of \(s\), one has \(s \cdot x\leq |x|\) for all real \(x\). Consequently, \(|a+b|=s \cdot (a+b) = s \cdot a + s \cdot b \leq |a| + |b|\), as desired.
 
 Some additional useful properties are given below. These are either immediate consequences of the definition or implied by the four fundamental properties above.
 
-{| style="margin-left:1.6em"
-|-
-| style="width:250px" |\(\bigl| \left|a\right| \bigr| = |a|\)
-|Idempotence (the absolute value of the absolute value is the absolute value)
-|-
-| style="width:250px" |\(\left|-a\right| = |a|\)
-|Evenness (reflection symmetry of the graph)
-|-
-|\(|a - b| = 0 \iff a = b\)
-|Identity of indiscernibles (equivalent to positive-definiteness)
-|-
-|\(|a - b| \le |a - c| + |c - b|\)
-|Triangle inequality (equivalent to subadditivity)
-|-
-|\(\left|\frac{a}{b}\right| = \frac{|a|}{|b|}\\) (if \(b \ne 0\))
-|Preservation of division – equivalent to multiplicativity
-|-
-|\(|a-b| \geq \bigl| \left|a\right| - \left|b\right| \bigr|\)
-|Reverse triangle inequality – equivalent to subadditivity
-|}
+<dl>
+  <dt>|\(\bigl| \left|a\right| \bigr| = |a|\)</dt>
+  <dd>Idempotence (the absolute value of the absolute value is the absolute value)</dd>
+  <dt>|\(\left|-a\right| = |a|\)</dt>
+  <dd>Evenness (reflection symmetry of the graph)</dd>
+  <dt>\(|a - b| = 0 \iff a = b\)</dt>
+  <dd>Identity of indiscernibles (equivalent to positive-definiteness)</dd>
+  <dt>\(|a - b| \le |a - c| + |c - b|\)</dt>
+  <dd>Triangle inequality (equivalent to subadditivity)</dd>
+  <dt>\(\left|\frac{a}{b}\right| = \frac{|a|}{|b|}\\) (if \(b \ne 0\))</dt>
+  <dd>Preservation of division – equivalent to multiplicativity</dd>
+  <dt>\(|a-b| \geq \bigl| \left|a\right| - \left|b\right| \bigr|\)</dt>
+  <dd>Reverse triangle inequality – equivalent to subadditivity</dd>
+</dl>
 
 Two other useful properties concerning inequalities are:
-{| style="margin-left:1.6em"
-|-
-|\(|a| \le b \iff -b \le a \le b\)
-|-
-|\(|a| \ge b \iff a \le -b\\) or \(a \ge b\)
-|}
+| \(|a| \le b \iff -b \le a \le b\) |
+| --- |
+| \(|a| \ge b \iff a \le -b\\) or \(a \ge b\) |
 
 These relations may be used to solve inequalities involving absolute values. For example:
 
-{| style="margin-left:1.6em"
-|-
-|\(|x-3| \le 9\)
-|\(\iff -9 \le x-3 \le 9\)
-|-
-|
-|\(\iff -6 \le x \le 12\)
-|}
+| \(|x-3| \le 9\) | \(\iff -9 \le x-3 \le 9\) |
+| --- | --- |
+| \(\iff -6 \le x \le 12\) |  |
 
 The absolute value, as "distance from zero", is used to define the absolute difference between arbitrary real numbers, the standard metric on the real numbers.
 

@@ -22,32 +22,13 @@ For example, using in the sense of multivalued functions, just as the square roo
 
 The principal inverses are listed in the following table.
 
-{| class="wikitable" style="text-align:center"
-|-
-! scope="col" | Name
-! scope="col" | Usual notation
-! scope="col" | Definition
-! scope="col" | Domain of for real result
-! scope="col" | Range of usual principal value (radians)
-! scope="col" | Range of usual principal value (degrees)
-|-
-! scope="row" | arcsine
-| *y* = arcsin(*x*) || *x* = sin(*y*) || −1 ≤ *x* ≤ 1 || −|| −90° ≤ *y* ≤ 90°
-|-
-! scope="row" | arccosine
-| *y* = arccos(*x*) || *x* = cos(*y*) || −1 ≤ *x* ≤ 1 || 0 ≤ *y* ≤ π || 0° ≤ *y* ≤ 180°
-|-
-! scope="row" | arctangent
-| *y* = arctan(*x*) || *x* = tan(*y*) || all real numbers || −|| −90° < *y* < 90°
-|-
-! scope="row" | arccotangent
-| *y* = arccot(*x*) || *x* = cot(*y*) || all real numbers || 0 < *y* < π || 0° < *y* < 180°
-|-
-! scope="row" | arcsecant
-| *y* = arcsec(*x*) || *x* = sec(*y*) || |*x*| ≥ 1 || 0 ≤ *y* < or || 0° ≤ *y* < 90° or 90° < *y* ≤ 180°
-|-
-! scope="row" | arccosecant
-| *y* = arccsc(*x*) ||*x* = csc(*y*) || |*x*| ≥ 1 || − or 0 < *y* ≤ || −90° ≤ *y* < 0 or 0° < *y* ≤ 90°
-|-
-|}
+| scope="col" | Name | scope="col" | Usual notation | scope="col" | Definition | scope="col" | Domain of for real result | scope="col" | Range of usual principal value (radians) | scope="col" | Range of usual principal value (degrees) |
+| --- | --- | --- | --- | --- | --- |
+| scope="row" | arcsine | *y* = arcsin(*x*) | *x* = sin(*y*) | −1 ≤ *x* ≤ 1 | − | −90° ≤ *y* ≤ 90° |
+| scope="row" | arccosine | *y* = arccos(*x*) | *x* = cos(*y*) | −1 ≤ *x* ≤ 1 | 0 ≤ *y* ≤ π | 0° ≤ *y* ≤ 180° |
+| scope="row" | arctangent | *y* = arctan(*x*) | *x* = tan(*y*) | all real numbers | − | −90° < *y* < 90° |
+| scope="row" | arccotangent | *y* = arccot(*x*) | *x* = cot(*y*) | all real numbers | 0 < *y* < π | 0° < *y* < 180° |
+| scope="row" | arcsecant | *y* = arcsec(*x*) | *x* = sec(*y*) | |*x*| ≥ 1 | 0 ≤ *y* < or | 0° ≤ *y* < 90° or 90° < *y* ≤ 180° |
+| scope="row" | arccosecant | *y* = arccsc(*x*) | *x* = csc(*y*) | |*x*| ≥ 1 | − or 0 < *y* ≤ | −90° ≤ *y* < 0 or 0° < *y* ≤ 90° |
+
 Note: Some authors define the range of arcsecant to be \(\arccot(z)\)

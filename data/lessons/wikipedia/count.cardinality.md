@@ -19,24 +19,11 @@ The basic concepts of cardinality go back as early as the 6th century BCE, and t
 Cardinality is an inherent property of sets which defines their size, roughly meaning the number of individual objects they contain. Fundamentally however, it is different from the concepts of number or counting as the cardinalities of two sets can be compared without referring to their number of elements, or defining number at all. For example, in the image above, a set of apples is compared to a set of oranges such that every fruit is used exactly once which shows these two sets have the same cardinality, even if one doesn't know how many of each there are. Thus, cardinality is measured by putting sets in one-to-one correspondence. If it is possible, the sets are said to have the *same cardinality*, and if not, one set is said to be *strictly larger* or *strictly smaller* than the other.
 
 ### Sets and functions
-{| class="wikitable floatright" style="text-align:center"
-!
-!not surjective
-!surjective
-|-
-!not
-injective
-|
-**general** **function**
-|
-**surjective** **only**
-|-
-!injective
-|
-**injective** **only**
-|
-**bijective**
-|}
+| not surjective | surjective |
+| --- | --- |
+| not injective **general** **function** **surjective** **only** |  |
+| injective **injective** **only** **bijective** |  |
+
 The basic concepts of cardinality are developed in terms of sets and functions, which are somewhat more abstract than their counterparts outside of mathematics. Informally, a set can be understood as any collection of objects, usually represented with curly braces. For example, \(S = \{1,2,3\}\) specifies a set, called , which contains the numbers 1, 2, and 3. The symbol represents set membership, for example says "1 is a member of the set " which is true by the definition of above. Here is finite, but that is not a requirement in general. The only requirement for a set is that it is well-defined. That is, for any object, one can determine whether belongs to that set , or does not belong to that set. One example of an infinite set is the set of all natural numbers \(\{ 1,2,3,\cdots \}\).
 
 A function, or correspondence, maps members of one set to the members of another, often represented with an arrow diagram. For example, the adjacent table depicts several functions which map sets of natural numbers to sets of letters. If a function does not map two members to the same place, it is called injective. If a function covers every member in the output set, it is called surjective. If a function is both injective and surjective, it is called bijective or a one-to-one correspondence. Functions are not limited to those one can draw an arrow diagram for, so long as the function is well-defined. That is, for each possible input, one can determine the output. For example, one may define a function on the natural numbers by multiplying by two:

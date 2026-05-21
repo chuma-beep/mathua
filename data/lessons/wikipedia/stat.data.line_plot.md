@@ -10,31 +10,15 @@ Some of the earliest known line charts are generally credited to Francis Hauksbe
 ## Example
 In the experimental sciences, data collected from experiments are often visualized by a graph. For example, if one collects data on the speed of an object at certain points in time, one can visualize the data in a data table such as the following:
 
-{| class="wikitable"
-! Elapsed Time (s)
-! Speed (m s\(^{−1}\))
-|-
-| 0
-| 0
-|-
-| 1
-| 3
-|-
-| 2
-| 7
-|-
-| 3
-| 12
-|-
-| 4
-| 18
-|-
-| 5
-| 30
-|-
-| 6
-| 45.6
-|}
+| Elapsed Time (s) | Speed (m s\(^{−1}\)) |
+| --- | --- |
+| 0 | 0 |
+| 1 | 3 |
+| 2 | 7 |
+| 3 | 12 |
+| 4 | 18 |
+| 5 | 30 |
+| 6 | 45.6 |
 
 Such a table representation of data is a great way to display exact values, but it can prevent the discovery and understanding of patterns in the values. In addition, a table display is often erroneously considered to be an objective, neutral collection or storage of the data (and may in that sense even be erroneously considered to be the data itself) whereas it is in fact just one of various possible visualizations of the data.
 

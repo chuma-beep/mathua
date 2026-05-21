@@ -7,26 +7,16 @@ A **perimeter** is the length of a closed boundary that encompasses, surrounds, 
 Calculating the perimeter has several practical applications. A calculated perimeter is the length of fence required to surround a yard or garden. The perimeter of a wheel/circle (its circumference) describes how far it will roll in one revolution. Similarly, the amount of string wound around a spool is related to the spool's perimeter; if the length of the string was exact, it would equal the perimeter.
 
 ## Formulas
-{| class="wikitable sortable mw-collapsible"
-|+
-! shape !! formula || variables
-|-
-| circle || \(2 \pi r = \pi d\) || where \(r\) is the radius of the circle and \(d\) is the diameter.
-|-
-| semicircle || \((\pi+2)r\)|| where \(r\) is the radius of the semicircle.
-|-
-| triangle || \(a + b + c\,\) || where \(a\), \(b\) and \(c\) are the lengths of the sides of the triangle.
-|-
-| square/rhombus || \(4a\) || where \(a\) is the side length.
-|-
-| rectangle || \(2(l+w)\) || where \(l\) is the length and \(w\) is the width.
-|-
-| equilateral polygon || \(n \times a\,\) || where \(n\) is the number of sides and \(a\) is the length of one of the sides.
-|-
-| regular polygon || \(2nb \sin\left(\frac{\pi}{n}\right)\) || where \(n\) is the number of sides and \(b\) is the distance between center of the polygon and one of the vertices of the polygon.
-|-
-| general polygon || \(a_1 + a_2 + a_3 + \cdots + a_n = \sum_{i=1}^n a_i\) || where \(a_{i}\) is the length of the \(i\)-th (1st, 2nd, 3rd... *n*th) side of an *n*-sided polygon.
-|}
+| shape | formula || variables |  |
+| --- | --- | --- |
+| circle | \(2 \pi r = \pi d\) | where \(r\) is the radius of the circle and \(d\) is the diameter. |
+| semicircle | \((\pi+2)r\) | where \(r\) is the radius of the semicircle. |
+| triangle | \(a + b + c\,\) | where \(a\), \(b\) and \(c\) are the lengths of the sides of the triangle. |
+| square/rhombus | \(4a\) | where \(a\) is the side length. |
+| rectangle | \(2(l+w)\) | where \(l\) is the length and \(w\) is the width. |
+| equilateral polygon | \(n \times a\,\) | where \(n\) is the number of sides and \(a\) is the length of one of the sides. |
+| regular polygon | \(2nb \sin\left(\frac{\pi}{n}\right)\) | where \(n\) is the number of sides and \(b\) is the distance between center of the polygon and one of the vertices of the polygon. |
+| general polygon | \(a_1 + a_2 + a_3 + \cdots + a_n = \sum_{i=1}^n a_i\) | where \(a_{i}\) is the length of the \(i\)-th (1st, 2nd, 3rd... *n*th) side of an *n*-sided polygon. |
 
 The perimeter is the distance around a shape. Perimeters for more general shapes can be calculated, as any path, with \(\int_0^L \mathrm{d}s\), where \(L\) is the length of the path and \(ds\) is an infinitesimal line element. Both of these must be replaced by algebraic forms in order to be practically calculated. If the perimeter is given as a closed piecewise smooth plane curve \(\gamma: [a,b] \to \mathbb{R}^2\) with
 \(\gamma(t)=\begin{pmatrix}x(t)\\y(t)\end{pmatrix}\)

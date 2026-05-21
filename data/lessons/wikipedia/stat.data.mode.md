@@ -29,28 +29,11 @@ The algorithm requires as a first step to sort the sample in ascending order. It
 
 ## Comparison of mean, median and mode
 
-{| class="wikitable"
-|+ Comparison of common averages of values { 1, 2, 2, 3, 4, 7, 9 }
-! Type
-! Description
-! Example
-! Result
-|-
-| align="center" | Arithmetic mean
-| *Sum of values of a data set divided by number of values*
-| align="center" | (1+2+2+3+4+7+9) / 7
-| align="center" | **4**
-|-
-| align="center" | Median
-| *Middle value separating the greater and lesser halves of a data set*
-| align="center" | 1, 2, 2, **3**, 4, 7, 9
-| align="center" | **3**
-|-
-| align="center" | Mode
-| *Most frequent value in a data set*
-| align="center" | 1, **2**, **2**, 3, 4, 7, 9
-| align="center" | **2**
-|}
+| Type | Description | Example | Result |
+| --- | --- | --- | --- |
+| | Arithmetic mean | *Sum of values of a data set divided by number of values* | | (1+2+2+3+4+7+9) / 7 | | **4** |
+| | Median | *Middle value separating the greater and lesser halves of a data set* | | 1, 2, 2, **3**, 4, 7, 9 | | **3** |
+| | Mode | *Most frequent value in a data set* | | 1, **2**, **2**, 3, 4, 7, 9 | | **2** |
 
 ### Use
 Unlike mean and median, the concept of mode also makes sense for "nominal data" (i.e., not consisting of numerical values in the case of mean, or even of ordered values in the case of median). For example, taking a sample of Korean family names, one might find that "Kim" occurs more often than any other name. Then "Kim" would be the mode of the sample. In any voting system where a plurality determines victory, a single modal value determines the victor, while a multi-modal outcome would require some tie-breaking procedure to take place.

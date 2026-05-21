@@ -135,33 +135,13 @@ For example, in a bag of 2 red balls and 2 blue balls (4 balls in total), the pr
 In probability theory and applications, *Bayes' rule* relates the odds of event \(A_1\) to event \(A_2,\) before (prior to) and after (posterior to) conditioning on another event \(B.\) The odds on \(A_1\) to event \(A_2\) is simply the ratio of the probabilities of the two events. When arbitrarily many events \(A\) are of interest, not just two, the rule can be rephrased as *posterior is proportional to prior times likelihood*, \(P(A|B)\propto P(A) P(B|A)\) where the proportionality symbol means that the left hand side is proportional to (i.e., equals a constant times) the right hand side as \(A\) varies, for fixed or given \(B\) (Lee, 2012; Bertsch McGrayne, 2012). In this form it goes back to Laplace (1774) and to Cournot (1843); see Fienberg (2005).
 
 ### Summary of probabilities
-{| class="wikitable plainrowheaders" style="text-align: left;"
-|+Summary of probabilities
-|-
-! scope="col" | Event
-! scope="col" | Probability
-|-
-! scope="row" style="text-align: center;" | A
-| \(P(A)\in[0,1]\)
-|-
-! scope="row" style="text-align: center;" | not A
-| \(P(A^\complement)=1-P(A)\,\)
-|-
-! scope="row" style="text-align: center;" | A or B
-| \(\begin{align}
-P(A\cup B) & = P(A)+P(B)-P(A\cap B) \\
-P(A\cup B) & = P(A)+P(B) \qquad\mbox{if A and B are mutually exclusive} \\
-\end{align}\)
-|-
-! scope="row" style="text-align: center;" | A and B
-| \(\begin{align}
-P(A\cap B) & = P(A|B)P(B) = P(B|A)P(A)\\
-P(A\cap B) & = P(A)P(B) \qquad\mbox{if A and B are independent}\\
-\end{align}\)
-|-
-! scope="row" style="text-align: center;" | A given B
-| \(P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)} \,\)
-|}
+| scope="col" | Event | scope="col" | Probability |
+| --- | --- |
+| scope="row" | A | \(P(A)\in[0,1]\) |
+| scope="row" | not A | \(P(A^\complement)=1-P(A)\,\) |
+| scope="row" | A or B | \(\begin{align} P(A\cup B) & = P(A)+P(B)-P(A\cap B) \\ P(A\cup B) & = P(A)+P(B) \qquad\mbox{if A and B are mutually exclusive} \\ \end{align}\) |
+| scope="row" | A and B | \(\begin{align} P(A\cap B) & = P(A|B)P(B) = P(B|A)P(A)\\ P(A\cap B) & = P(A)P(B) \qquad\mbox{if A and B are independent}\\ \end{align}\) |
+| scope="row" | A given B | \(P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)} \,\) |
 
 ## Relation to randomness and probability in quantum mechanics
 

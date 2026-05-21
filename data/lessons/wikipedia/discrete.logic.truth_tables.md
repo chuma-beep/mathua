@@ -19,90 +19,104 @@ From the summary of Anellis's paper:
 ## Applications
 Truth tables can be used to prove many other logical equivalences. For example, consider the following truth table:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|+ \((p\rightarrow q)\equiv(\neg p\vee q)\)
-|- style="background:paleturquoise"
-! style="width:12%" | \(p\)
-! style="width:12%" | \(q\)
-! style="width:12%" | \(\neg p\)
-! style="width:12%" | \(\neg p\vee q\)
-! style="width:12%" | \(p\rightarrow q\)
-|-
-| || || || ||
-|-
-| || || || ||
-|-
-| || || || ||
-|-
-| || || || ||
-|}
+| | \(p\) | | \(q\) | | \(\neg p\) | | \(\neg p\vee q\) | | \(p\rightarrow q\) |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
 
 This demonstrates the fact that \(p\rightarrow q\) is logically equivalent to \(\neg p\vee q\).
 
 ### Truth table for logic gates
 Here is a truth table that gives definitions of each of the 6 possible 2-input logic gate functions of two Boolean variables P and Q:
 
-{| class="wikitable" style="margin:1em auto 1em auto; text-align:center;"
-|-
-! \(P\) || \(Q\) || \(P\and Q\) || \(P\vee Q\) || \(P\uparrow Q\) || \(P\downarrow Q\) || \(P\nleftrightarrow Q\) || \(P\leftrightarrow Q\)
-|-
-| || || || || || || ||
-|-
-| || || || || || || ||
-|-
-| || || || || || || ||
-|-
-| || || || || || || ||
-|-
-| colspan="2" |Name(function)
-| AND(conjunction)
-| OR(disjunction)
-| NAND(non-conjunction)
-| NOR(non-disjunction)
-| XOR(non-equivalence)
-| XNOR(equivalence)
-|-
-| colspan="8" |
-*where* *means* **true** *and* *means* **false**
-|}
+<table>
+  <tr>
+    <th>\(P\) || \(Q\) || \(P\and Q\) || \(P\vee Q\) || \(P\uparrow Q\) || \(P\downarrow Q\) || \(P\nleftrightarrow Q\) || \(P\leftrightarrow Q\)</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>|Name(function)</td>
+    <td>AND(conjunction)</td>
+    <td>OR(disjunction)</td>
+    <td>NAND(non-conjunction)</td>
+    <td>NOR(non-disjunction)</td>
+    <td>XOR(non-equivalence)</td>
+    <td>XNOR(equivalence)</td>
+  </tr>
+  <tr>
+    <td>| *where* *means* **true** *and* *means* **false**</td>
+  </tr>
+</table>
 
 ### Condensed truth tables for binary operators
 For binary operators, a condensed form of truth table is also used, where the row headings and the column headings specify the operands and the table cells specify the result. For example, Boolean logic uses this condensed truth table notation:
 
-{|
-|-
+<table>
+  <tr>
+    <td>| {|</td>
+  </tr>
+  <tr>
+    <th>∧</th>
+    <th>T</th>
+    <th>F</th>
+  </tr>
+  <tr>
+    <th>T</th>
+  </tr>
+  <tr>
+    <th>F</th>
+  </tr>
+</table>
+
+| ∧ | T | F |
+| --- | --- | --- |
+| T |  |  |
+| F |  |  |
+
 | style="width:80px;"|
 |
-{| class="wikitable" style="margin:1em auto 1em auto; text-align:center;"
-|-
-! ∧
-! T
-! F
-|-
-! T
-|
-|
-|-
-! F
-|
-|
-|}
-| style="width:80px;"|
-|
-{| class="wikitable" style="margin:1em auto 1em auto; text-align:center;"
-|-
-! ∨
-! T
-! F
-|-
-! T
-|
-|
-|-
-! F
-|
-|
-|}
+| ∨ | T | F |
+| --- | --- | --- |
+| T |  |  |
+| F |  |  |
+
 |}
 
 This notation is useful especially if the operations are commutative, although one can additionally specify that the rows are the first operand and the columns are the second operand. This condensed notation is particularly useful in discussing multi-valued extensions of logic, as it significantly cuts down on combinatoric explosion of the number of rows otherwise needed. It also provides for quickly recognizable characteristic "shape" of the distribution of the values in the table which can assist the reader in grasping the rules more quickly.
@@ -121,34 +135,8 @@ Truth tables are a simple and straightforward way to encode Boolean functions, h
 ### Applications of truth tables in digital electronics
 In digital electronics and computer science (fields of applied logic engineering and mathematics), truth tables can be used to reduce basic Boolean operations to simple correlations of inputs to outputs, without the use of logic gates or code. For example, a binary addition can be represented with the truth table:
 
-{| class="wikitable"
-|+ Binary addition
-|-
-! style="width:80px" |
-! style="width:80px" |
-! style="width:80px" |
-! style="width:80px" |
-|-
-|
-|
-|
-|
-|-
-|
-|
-|
-|
-|-
-|
-|
-|
-|
-|-
-|
-|
-|
-|
-|}
+| | | | | | | | |
+| --- | --- | --- | --- |
 
 where A is the first operand, B is the second operand, C is the carry digit, and R is the result.
 
@@ -192,163 +180,341 @@ Lee Archie, a professor at Lander University, recommends this procedure, which i
 # Then continue to the next left-hand column and double the numbers of 's and 's until completed.
 
 This method results in truth-tables such as the following table for *P* → (*Q* ∨ *R* → (*R* → ¬*P*)), produced by Stephen Cole Kleene:
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! \(P\)
-! \(Q\)
-! \(R\)
-! \(P\rightarrow (Q\vee R\rightarrow(R\rightarrow \neg P))\)
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|-
-| || || ||
-|}
+| \(P\) | \(Q\) | \(R\) | \(P\rightarrow (Q\vee R\rightarrow(R\rightarrow \neg P))\) |
+| --- | --- | --- | --- |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
 
 ### Combinatorial method
 Colin Howson, on the other hand, believes that "it is a good practical rule" to do the following:to start with all Ts, then all the ways (three) two Ts can be combined with one F, then all the ways (three) one T can be combined with two Fs, and then finish with all Fs. If a compound is built up from n distinct sentence letters, its truth table will have 2\(^{n}\) rows; since there are two ways of assigning T or F to the first letter, and for each of these there will be two ways of assigning T or F to the second, and for each of these there will be two ways of assigning T or F to the third, and so on, giving 2.2.2. …, n times, which is equal to 2\(^{n}\).
 
 This results in truth tables like this table "showing that (*A*→*C*)∧(*B*→*C*) and (*A*∨*B*)→*C* are truth-functionally equivalent", modeled after a table produced by Howson:
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-! \(A\)
-! \(B\)
-! \(C\)
-! \((A\rightarrow C)\and(B\rightarrow C)\)
-! \((A\vee B)\rightarrow C\)
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|-
-| || ||
-|||
-|}
+| \(A\) | \(B\) | \(C\) | \((A\rightarrow C)\and(B\rightarrow C)\) | \((A\vee B)\rightarrow C\) |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
+|  |  |  |  |  |
 
 ## Size of truth tables
 If there are *n* input variables then there are 2\(^{*n*}\) possible combinations of their truth values. A given function may produce true or false for each combination so the number of different functions of *n* variables is the double exponential 2\(^{2*n*}\).
 
-{| class="wikitable" style="text-align:right;"
-|-
-! *n* !! 2\(^{*n*}\) !! colspan="2" | 2\(^{2*n*}\)
-|-
-| 0 || 1 || style="border-right:0px solid transparent;" | 2 || style="border-left:0px solid transparent;" |
-|-
-| 1 || 2 || style="border-right:0px solid transparent;" | 4 || style="border-left:0px solid transparent;" |
-|-
-| 2 || 4 || style="border-right:0px solid transparent;" | 16 || style="border-left:0px solid transparent;" |
-|-
-| 3 || 8 || style="border-right:0px solid transparent;" | 256 || style="border-left:0px solid transparent;" |
-|-
-| 4 || 16 || style="border-right:0px solid transparent;" | 65,536 || style="border-left:0px solid transparent;text-align:left;" |
-|-
-| 5 || 32 || style="border-right:0px solid transparent;" | 4,294,967,296 || style="border-left:0px solid transparent;text-align:left;" | ≈ 4.3
-|-
-| 6 || 64 || style="border-right:0px solid transparent;" | 18,446,744,073,709,551,616 || style="border-left:0px solid transparent;text-align:left;" | ≈ 1.8
-|-
-| 7 || 128 || style="border-right:0px solid transparent;" | || style="border-left:0px solid transparent;text-align:left;" | ≈ 3.4
-|-
-| 8 || 256 || style="border-right:0px solid transparent;" | || style="border-left:0px solid transparent;text-align:left;" | ≈ 1.2
-|}
+<table>
+  <tr>
+    <th>*n*</th>
+    <th>2\(^{*n*}\)</th>
+    <th>| 2\(^{2*n*}\)</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>1</td>
+    <td>| 2</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2</td>
+    <td>| 4</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>4</td>
+    <td>| 16</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>8</td>
+    <td>| 256</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>16</td>
+    <td>| 65,536</td>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>32</td>
+    <td>| 4,294,967,296</td>
+    <td>| ≈ 4.3</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>64</td>
+    <td>| 18,446,744,073,709,551,616</td>
+    <td>| ≈ 1.8</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>128</td>
+    <td>|</td>
+    <td>| ≈ 3.4</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>256</td>
+    <td>|</td>
+    <td>| ≈ 1.2</td>
+  </tr>
+</table>
 
 Truth tables for functions of three or more variables are rarely given.
 
 ## Function Tables
 It can be useful to have the output of a truth table expressed as a function of some variable values, instead of just a literal truth or false value. These may be called "function tables" to differentiate them from the more general "truth tables". For example, one value, may be used with an XOR gate to conditionally invert another value,. In other words, when is false, the output and when is true, the output is \(\neg X\). The function table for this would look like:
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-! \(G\) !! \(G\nleftrightarrow X\)
-|-
-| F || \(X\)
-|-
-| T || \(\neg X\)
-|}
+| \(G\) | \(G\nleftrightarrow X\) |
+| --- | --- |
+| F | \(X\) |
+| T | \(\neg X\) |
 
 Similarly, a 4-to-1 multiplexer with select inputs \(S_0\) and \(S_1\), data inputs , and , and output (as displayed in the image) would have this function table:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-! \(S_1\) !! \(S_0\) !! 
-|-
-| F || F ||
-|-
-| F || T ||
-|-
-| T || F ||
-|-
-| T || T ||
-|}
+| \(S_1\) | \(S_0\) |  |
+| --- | --- | --- |
+| F | F |  |
+| F | T |  |
+| T | F |  |
+| T | T |  |
 
 ## Sentential operator truth tables
 ### Overview table
 Here is an extended truth table giving definitions of all sixteen possible truth functions of two Boolean variables ***p*** and ***q***:
 
-{| class="wikitable" style="margin:left margin:1em auto 1em auto; text-align:center;"
-|-
-! \(p\) || \(q\)
-! style="background:black" |
-!\(\bot\)||\(p\downarrow q\)||\(p\nleftarrow q\)||\(\neg p\)||\(p\nrightarrow q\)||\(\neg q\)||\(p\nleftrightarrow q\)||\(p\uparrow q\)||\(p\and q\)||\(p\leftrightarrow q\)||\(q\)||\(p\rightarrow q\)||\(p\)||\(p\leftarrow q\)||\(p\vee q\)||\(\top\)
-|-
-| ||
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| ||
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| ||
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| ||
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| colspan="19" style="background:black" |
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || || || || || || || || || || || || || || || ||
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || \(\bot\) || \(p\downarrow q\) || \(p\nrightarrow q\) || \(\neg q\) || \(p\nleftarrow q\) || \(\neg p\) || \(p\nleftrightarrow q\) || \(p\uparrow q\) || \(p\and q\) || \(p\leftrightarrow q\) || \(p\) || \(p\leftarrow q\) || \(q\) || \(p\rightarrow q\) || \(p\vee q\) || \(\top\)
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || \(\top\) || \(p\vee q\) || \(p\leftarrow q\) || \(p\) || \(p\rightarrow q\) || \(q\) || \(p\leftrightarrow q\) || \(p\and q\) || \(p\uparrow q\) || \(p\nleftrightarrow q\) || \(\neg q\) || \(p\nrightarrow q\) || \(\neg p\) || \(p\nleftarrow q\) || \(p\downarrow q\) || \(\bot\)
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || \(\top\) || \(p\uparrow q\) || \(p\rightarrow q\) || \(\neg p\) || \(p\leftarrow q\) || \(\neg q\) || \(p\leftrightarrow q\) || \(p\downarrow q\) || \(p\vee q\) || \(p\nleftrightarrow q\) || \(q\) || \(p\nleftarrow q\) || \(p\) || \(p\nrightarrow q\) || \(p\and q\) || \(\bot\)
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || || || F || || || || F || || T || T || T, F || T || || || F ||
-|-
-| colspan="2" style="background: #;" |
-| style="background:black" | || || || || || F || || F || || T || T || || || T, F || T || F ||
-|}
+<table>
+  <tr>
+    <th>\(p\) || \(q\)</th>
+    <th>|</th>
+    <th>\(\bot\)||\(p\downarrow q\)||\(p\nleftarrow q\)||\(\neg p\)||\(p\nrightarrow q\)||\(\neg q\)||\(p\nleftrightarrow q\)||\(p\uparrow q\)||\(p\and q\)||\(p\leftrightarrow q\)||\(q\)||\(p\rightarrow q\)||\(p\)||\(p\leftarrow q\)||\(p\vee q\)||\(\top\)</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>|</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td>\(\bot\)</td>
+    <td>\(p\downarrow q\)</td>
+    <td>\(p\nrightarrow q\)</td>
+    <td>\(\neg q\)</td>
+    <td>\(p\nleftarrow q\)</td>
+    <td>\(\neg p\)</td>
+    <td>\(p\nleftrightarrow q\)</td>
+    <td>\(p\uparrow q\)</td>
+    <td>\(p\and q\)</td>
+    <td>\(p\leftrightarrow q\)</td>
+    <td>\(p\)</td>
+    <td>\(p\leftarrow q\)</td>
+    <td>\(q\)</td>
+    <td>\(p\rightarrow q\)</td>
+    <td>\(p\vee q\)</td>
+    <td>\(\top\)</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td>\(\top\)</td>
+    <td>\(p\vee q\)</td>
+    <td>\(p\leftarrow q\)</td>
+    <td>\(p\)</td>
+    <td>\(p\rightarrow q\)</td>
+    <td>\(q\)</td>
+    <td>\(p\leftrightarrow q\)</td>
+    <td>\(p\and q\)</td>
+    <td>\(p\uparrow q\)</td>
+    <td>\(p\nleftrightarrow q\)</td>
+    <td>\(\neg q\)</td>
+    <td>\(p\nrightarrow q\)</td>
+    <td>\(\neg p\)</td>
+    <td>\(p\nleftarrow q\)</td>
+    <td>\(p\downarrow q\)</td>
+    <td>\(\bot\)</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td>\(\top\)</td>
+    <td>\(p\uparrow q\)</td>
+    <td>\(p\rightarrow q\)</td>
+    <td>\(\neg p\)</td>
+    <td>\(p\leftarrow q\)</td>
+    <td>\(\neg q\)</td>
+    <td>\(p\leftrightarrow q\)</td>
+    <td>\(p\downarrow q\)</td>
+    <td>\(p\vee q\)</td>
+    <td>\(p\nleftrightarrow q\)</td>
+    <td>\(q\)</td>
+    <td>\(p\nleftarrow q\)</td>
+    <td>\(p\)</td>
+    <td>\(p\nrightarrow q\)</td>
+    <td>\(p\and q\)</td>
+    <td>\(\bot\)</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td>F</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>F</td>
+    <td></td>
+    <td>T</td>
+    <td>T</td>
+    <td>T, F</td>
+    <td>T</td>
+    <td></td>
+    <td></td>
+    <td>F</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>|</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>F</td>
+    <td></td>
+    <td>F</td>
+    <td></td>
+    <td>T</td>
+    <td>T</td>
+    <td></td>
+    <td></td>
+    <td>T, F</td>
+    <td>T</td>
+    <td>F</td>
+  </tr>
+</table>
 
 where
 
@@ -364,69 +530,172 @@ The **R id** row shows the operator's right identities if it has any values such
 
 ### Wittgenstein table
 In proposition 5.101 of the *Tractatus Logico-Philosophicus*, Wittgenstein listed the table above as follows:
-{| class="wikitable" style="margin:left margin:1em auto 1em auto; text-align:left;"
-|-
-! scope=col |
-! scope=col | Truthvalues
-! scope=col |
-! scope=col colspan="2" | Operator
-! scope=col | Operation name
-! scope=col | Tractatus
-|-
-| 0 ||(F F F F)(p, q)|| ⊥ || false || **Opq** || Contradiction || p and not p; and q and not q
-|-
-| 1 ||(F F F T)(p, q)|| NOR || **p** ↓ **q** || **Xpq** || Logical NOR || neither *p* nor *q*
-|-
-| 2 ||(F F T F)(p, q)|| ↚ || **p** ↚ **q** || **Mpq** || Converse nonimplication ||*q* and not *p*
-|-
-| 3 ||(F F T T)(p, q)|| **¬p**, **~p** || **¬p** || **Np**, **Fpq** || Negation || not *p*
-|-
-| 4 ||(F T F F)(p, q)|| ↛ || **p** ↛ **q**
-|| **Lpq** || Material nonimplication ||*p* and not *q*
-|-
-| 5 ||(F T F T)(p, q)|| **¬q**, **~q** || **¬q** || **Nq**, **Gpq** || Negation || not *q*
-|-
-| 6 ||(F T T F)(p, q)|| XOR ||**p** ⊕ **q** || **Jpq** || Exclusive disjunction || *p* or *q*, but not both
-|-
-| 7 || (F T T T)(p, q)|| NAND || **p** ↑ **q** || **Dpq** || Logical NAND || not both *p* and *q*
-|-
-| 8 || (T F F F)(p, q)|| AND || **p** ∧ **q** || **Kpq** || Logical conjunction || *p* and *q*
-|-
-| 9 || (T F F T)(p, q)|| XNOR || **p** iff **q** || **Epq** || Logical biconditional || if *p* then *q*; and if *q* then *p*
-|-
-| 10 || (T F T F)(p, q)|| **q** || **q** || **Hpq** || Projection function || *q*
-|-
-| 11 || (T F T T)(p, q)|| **p** → **q** || if **p** then **q** || **Cpq** || Material implication || if *p* then *q*
-|-
-| 12 || (T T F F)(p, q)|| **p** || **p** || **Ipq** || Projection function || *p*
-|-
-| 13 || (T T F T)(p, q)|| **p** ← **q** || if **q** then **p** || **Bpq** || Converse implication || if *q* then *p*
-|-
-| 14 || (T T T F)(p, q)|| OR || **p** ∨ **q** || **Apq** || Logical disjunction || *p* or *q*
-|-
-| 15 || (T T T T)(p, q)|| ⊤ || true || **Vpq** || Tautology || if p then p; and if q then q
-|}
+<table>
+  <tr>
+    <th>scope=col |</th>
+    <th>scope=col | Truthvalues</th>
+    <th>scope=col |</th>
+    <th>scope=col | Operator</th>
+    <th>scope=col | Operation name</th>
+    <th>scope=col | Tractatus</th>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>(F F F F)(p, q)</td>
+    <td>⊥</td>
+    <td>false</td>
+    <td>**Opq**</td>
+    <td>Contradiction</td>
+    <td>p and not p; and q and not q</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>(F F F T)(p, q)</td>
+    <td>NOR</td>
+    <td>**p** ↓ **q**</td>
+    <td>**Xpq**</td>
+    <td>Logical NOR</td>
+    <td>neither *p* nor *q*</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>(F F T F)(p, q)</td>
+    <td>↚</td>
+    <td>**p** ↚ **q**</td>
+    <td>**Mpq**</td>
+    <td>Converse nonimplication</td>
+    <td>*q* and not *p*</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>(F F T T)(p, q)</td>
+    <td>**¬p**, **~p**</td>
+    <td>**¬p**</td>
+    <td>**Np**, **Fpq**</td>
+    <td>Negation</td>
+    <td>not *p*</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>(F T F F)(p, q)</td>
+    <td>↛</td>
+    <td>**p** ↛ **q**</td>
+    <td>| **Lpq**</td>
+    <td>Material nonimplication</td>
+    <td>*p* and not *q*</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>(F T F T)(p, q)</td>
+    <td>**¬q**, **~q**</td>
+    <td>**¬q**</td>
+    <td>**Nq**, **Gpq**</td>
+    <td>Negation</td>
+    <td>not *q*</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>(F T T F)(p, q)</td>
+    <td>XOR</td>
+    <td>**p** ⊕ **q**</td>
+    <td>**Jpq**</td>
+    <td>Exclusive disjunction</td>
+    <td>*p* or *q*, but not both</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>(F T T T)(p, q)</td>
+    <td>NAND</td>
+    <td>**p** ↑ **q**</td>
+    <td>**Dpq**</td>
+    <td>Logical NAND</td>
+    <td>not both *p* and *q*</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>(T F F F)(p, q)</td>
+    <td>AND</td>
+    <td>**p** ∧ **q**</td>
+    <td>**Kpq**</td>
+    <td>Logical conjunction</td>
+    <td>*p* and *q*</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>(T F F T)(p, q)</td>
+    <td>XNOR</td>
+    <td>**p** iff **q**</td>
+    <td>**Epq**</td>
+    <td>Logical biconditional</td>
+    <td>if *p* then *q*; and if *q* then *p*</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>(T F T F)(p, q)</td>
+    <td>**q**</td>
+    <td>**q**</td>
+    <td>**Hpq**</td>
+    <td>Projection function</td>
+    <td>*q*</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>(T F T T)(p, q)</td>
+    <td>**p** → **q**</td>
+    <td>if **p** then **q**</td>
+    <td>**Cpq**</td>
+    <td>Material implication</td>
+    <td>if *p* then *q*</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>(T T F F)(p, q)</td>
+    <td>**p**</td>
+    <td>**p**</td>
+    <td>**Ipq**</td>
+    <td>Projection function</td>
+    <td>*p*</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>(T T F T)(p, q)</td>
+    <td>**p** ← **q**</td>
+    <td>if **q** then **p**</td>
+    <td>**Bpq**</td>
+    <td>Converse implication</td>
+    <td>if *q* then *p*</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>(T T T F)(p, q)</td>
+    <td>OR</td>
+    <td>**p** ∨ **q**</td>
+    <td>**Apq**</td>
+    <td>Logical disjunction</td>
+    <td>*p* or *q*</td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td>(T T T T)(p, q)</td>
+    <td>⊤</td>
+    <td>true</td>
+    <td>**Vpq**</td>
+    <td>Tautology</td>
+    <td>if p then p; and if q then q</td>
+  </tr>
+</table>
 
 The truth table represented by each row is obtained by appending the sequence given in **Truthvalues**\(_{row}\) to the table
-{| class="wikitable" style="margin:left margin:1em auto 1em auto; text-align:left;"
-!scope=row | *p*
-| T || T || F || F
-|-
-!scope=row | *q*
-| T || F || T || F
-|}
+| scope=row | *p* | T | T | F | F |
+| --- | --- | --- | --- | --- |
+| scope=row | *q* | T | F | T | F |
 
 For example, the table
-{| class="wikitable" style="margin:left margin:1em auto 1em auto; text-align:left;"
-!scope=row | *p*
-| T || T || F || F
-|-
-!scope=row | *q*
-| T || F || T || F
-|-
-!scope=row | *11*
-| T || F || T || T
-|}
+| scope=row | *p* | T | T | F | F |
+| --- | --- | --- | --- | --- |
+| scope=row | *q* | T | F | T | F |
+| scope=row | *11* | T | F | T | T |
+
 represents the truth table for Material implication. Logical operators can also be visualized using Venn diagrams.
 
 ### Nullary operations
@@ -436,31 +705,17 @@ There are 2 nullary operations:
 
 #### Logical true
 The output value is always true, because this operator has zero operands and therefore no input values
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:80px" | *p*
-! style="width:80px" | *T*
-|-
-| T
-| T
-|-
-| F
-| T
-|}
+| | *p* | | *T* |
+| --- | --- |
+| T | T |
+| F | T |
 
 #### Logical false
 The output value is never true: that is, always false, because this operator has zero operands and therefore no input values
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:80px" | *p*
-! style="width:80px" | *F*
-|-
-| T
-| F
-|-
-| F
-| F
-|}
+| | *p* | | *F* |
+| --- | --- |
+| T | F |
+| F | F |
 
 ### Unary operations
 There are 2 unary operations:
@@ -472,34 +727,20 @@ Logical identity is an operation on one logical value p, for which the output va
 
 The truth table for the logical identity operator is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:80px" | *p*
-! style="width:80px" | *p*
-|-
-| T
-| T
-|-
-| F
-| F
-|}
+| | *p* | | *p* |
+| --- | --- |
+| T | T |
+| F | F |
 
 #### Logical negation
 Logical negation is an operation on one logical value, typically the value of a proposition, that produces a value of *true* if its operand is false and a value of *false* if its operand is true.
 
 The truth table for **NOT p** (also written as **¬p**, **Np**, **Fpq**, or **~p**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:80px" | *p*
-! style="width:80px" | *¬p*
-|-
-| T
-| F
-|-
-| F
-| T
-|}
+| | *p* | | *¬p* |
+| --- | --- |
+| T | F |
+| F | T |
 
 ### Binary operations
 There are 16 possible truth functions of two binary variables, each operator has its own name.
@@ -509,20 +750,12 @@ Logical conjunction is an operation on two logical values, typically the values 
 
 The truth table for **p AND q** (also written as **p ∧ q**, **Kpq**, **p & q**, or **p** \(\cdot\) **q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ∧ *q*
-|-
-| T || T || T
-|-
-| T || F || F
-|-
-| F || T || F
-|-
-| F || F || F
-|}
+| | *p* | | *q* | | *p* ∧ *q* |
+| --- | --- | --- |
+| T | T | T |
+| T | F | F |
+| F | T | F |
+| F | F | F |
 
 In ordinary language terms, if both *p* and *q* are true, then the conjunction *p* ∧ *q* is true. For all other assignments of logical values to *p* and to *q* the conjunction *p* ∧ *q* is false.
 
@@ -533,20 +766,12 @@ Logical disjunction is an operation on two logical values, typically the values 
 
 The truth table for **p OR q** (also written as **p ∨ q**, **Apq**, **p || q**, or **p + q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ∨ *q*
-|-
-| T || T || T
-|-
-| T || F || T
-|-
-| F || T || T
-|-
-| F || F || F
-|}
+| | *p* | | *q* | | *p* ∨ *q* |
+| --- | --- | --- |
+| T | T | T |
+| T | F | T |
+| F | T | T |
+| F | F | F |
 
 Stated in English, if *p*, then *p* ∨ *q* is *p*, otherwise *p* ∨ *q* is *q*.
 
@@ -555,37 +780,21 @@ Logical implication and the material conditional are both associated with an dis
 
 The truth table associated with the logical implication **p implies q** (symbolized as **p ⇒ q**, or more rarely **Cpq**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ⇒ *q*
-|-
-| T || T || T
-|-
-| T || F || F
-|-
-| F || T || T
-|-
-| F || F || T
-|}
+| | *p* | | *q* | | *p* ⇒ *q* |
+| --- | --- | --- |
+| T | T | T |
+| T | F | F |
+| F | T | T |
+| F | F | T |
 
 The truth table associated with the material conditional **if p then q** (symbolized as **p → q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* → *q*
-|-
-| T || T || T
-|-
-| T || F || F
-|-
-| F || T || T
-|-
-| F || F || T
-|}
+| | *p* | | *q* | | *p* → *q* |
+| --- | --- | --- |
+| T | T | T |
+| T | F | F |
+| F | T | T |
+| F | F | T |
 
 **p ⇒ q** and **p → q** are equivalent to **¬p ∨ q**.
 
@@ -594,20 +803,12 @@ Logical equality (also known as biconditional or exclusive nor) is an operation 
 
 The truth table for **p XNOR q** (also written as **p ↔ q**, **Epq**, **p = q**, or **p ≡ q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ↔ *q*
-|-
-| T || T || T
-|-
-| T || F || F
-|-
-| F || T || F
-|-
-| F || F || T
-|}
+| | *p* | | *q* | | *p* ↔ *q* |
+| --- | --- | --- |
+| T | T | T |
+| T | F | F |
+| F | T | F |
+| F | F | T |
 
 So p EQ q is true if p and q have the same truth value (both true or both false), and false if they have different truth values.
 
@@ -616,20 +817,12 @@ Exclusive disjunction is an operation on two logical values, typically the value
 
 The truth table for **p XOR q** (also written as **Jpq**, or **p ⊕ q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | **p** ⊕ **q**
-|-
-| T || T || F
-|-
-| T || F || T
-|-
-| F || T || T
-|-
-| F || F || F
-|}
+| | *p* | | *q* | | **p** ⊕ **q** |
+| --- | --- | --- |
+| T | T | F |
+| T | F | T |
+| F | T | T |
+| F | F | F |
 
 For two propositions, **XOR** can also be written as (p ∧ ¬q) ∨ (¬p ∧ q).
 
@@ -638,20 +831,12 @@ The logical NAND is an operation on two logical values, typically the values of 
 
 The truth table for **p NAND q** (also written as **p ↑ q**, **Dpq**, or **p | q**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ↑ *q*
-|-
-| T || T || F
-|-
-| T || F || T
-|-
-| F || T || T
-|-
-| F || F || T
-|}
+| | *p* | | *q* | | *p* ↑ *q* |
+| --- | --- | --- |
+| T | T | F |
+| T | F | T |
+| F | T | T |
+| F | F | T |
 
 It is frequently useful to express a logical operation as a compound operation, that is, as an operation that is built up or composed from other operations. Many such compositions are possible, depending on the operations that are taken as basic or "primitive" and the operations that are taken as composite or "derivative".
 
@@ -659,65 +844,33 @@ In the case of logical NAND, it is clearly expressible as a compound of NOT and 
 
 The negation of a conjunction: ¬(*p* ∧ *q*), and the disjunction of negations: (¬*p*) ∨ (¬*q*) can be tabulated as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ∧ *q*
-! style="width:15%" | ¬(*p* ∧ *q*)
-! style="width:15%" | ¬*p*
-! style="width:15%" | ¬*q*
-! style="width:15%" | (¬*p*) ∨ (¬*q*)
-|-
-| T || T || T || F || F || F || F
-|-
-| T || F || F || T || F || T || T
-|-
-| F || T || F || T || T || F || T
-|-
-| F || F || F || T || T || T || T
-|}
+| | *p* | | *q* | | *p* ∧ *q* | | ¬(*p* ∧ *q*) | | ¬*p* | | ¬*q* | | (¬*p*) ∨ (¬*q*) |
+| --- | --- | --- | --- | --- | --- | --- |
+| T | T | T | F | F | F | F |
+| T | F | F | T | F | T | T |
+| F | T | F | T | T | F | T |
+| F | F | F | T | T | T | T |
 
 #### Logical NOR
 The logical NOR is an operation on two logical values, typically the values of two propositions, that produces a value of *true* if both of its operands are false. In other words, it produces a value of *false* if at least one of its operands is true. ↓ is also known as the Peirce arrow after its inventor, Charles Sanders Peirce, and is a Sole sufficient operator.
 
 The truth table for **p NOR q** (also written as **p ↓ q**, or **Xpq**) is as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:15%" | *p*
-! style="width:15%" | *q*
-! style="width:15%" | *p* ↓ *q*
-|-
-| T || T || F
-|-
-| T || F || F
-|-
-| F || T || F
-|-
-| F || F || T
-|}
+| | *p* | | *q* | | *p* ↓ *q* |
+| --- | --- | --- |
+| T | T | F |
+| T | F | F |
+| F | T | F |
+| F | F | T |
 
 The negation of a disjunction ¬(*p* ∨ *q*), and the conjunction of negations (¬*p*) ∧ (¬*q*) can be tabulated as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:center;"
-|-
-! style="width:10%" | *p*
-! style="width:10%" | *q*
-! style="width:10%" | *p* ∨ *q*
-! style="width:10%" | ¬(*p* ∨ *q*)
-! style="width:10%" | ¬*p*
-! style="width:10%" | ¬*q*
-! style="width:10%" | (¬*p*) ∧ (¬*q*)
-|-
-| T || T || T || F || F || F || F
-|-
-| T || F || T || F || F || T || F
-|-
-| F || T || T || F || T || F || F
-|-
-| F || F || F || T || T || T || T
-|}
+| | *p* | | *q* | | *p* ∨ *q* | | ¬(*p* ∨ *q*) | | ¬*p* | | ¬*q* | | (¬*p*) ∧ (¬*q*) |
+| --- | --- | --- | --- | --- | --- | --- |
+| T | T | T | F | F | F | F |
+| T | F | T | F | F | T | F |
+| F | T | T | F | T | F | F |
+| F | F | F | T | T | T | T |
 
 Inspection of the tabular derivations for NAND and NOR, under each assignment of logical values to the functional arguments *p* and *q*, produces the identical patterns of functional values for ¬(*p* ∧ *q*) as for (¬*p*) ∨ (¬*q*), and for ¬(*p* ∨ *q*) as for (¬*p*) ∧ (¬*q*). Thus the first and second expressions in each pair are logically equivalent, and may be substituted for each other in all contexts that pertain solely to their logical values.
 

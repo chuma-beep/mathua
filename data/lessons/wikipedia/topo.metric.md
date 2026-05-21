@@ -458,13 +458,12 @@ A **semimetric** on \(X\) is a function \(d: X \times X \to \R\) that satisfies 
 
 Some authors work with a weaker form of the triangle inequality, such as:
 
-{|
-|\(d(x,z)\leq \rho\,(d(x,y)+d(y,z))\)
-|ρ-relaxed triangle inequality
-|-
-|\(d(x,z)\leq \rho\,\max\{d(x,y),d(y,z)\}\)
-|ρ-inframetric inequality
-|}
+<dl>
+  <dt>\(d(x,z)\leq \rho\,(d(x,y)+d(y,z))\)</dt>
+  <dd>ρ-relaxed triangle inequality</dd>
+  <dt>\(d(x,z)\leq \rho\,\max\{d(x,y),d(y,z)\}\)</dt>
+  <dd>ρ-inframetric inequality</dd>
+</dl>
 
 The ρ-inframetric inequality implies the ρ-relaxed triangle inequality (assuming the first axiom), and the ρ-relaxed triangle inequality implies the 2ρ-inframetric inequality. Semimetrics satisfying these equivalent conditions have sometimes been referred to as *quasimetrics*, *nearmetrics* or **inframetrics**.
 
