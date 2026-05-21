@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
@@ -319,9 +320,9 @@ export default function GoalsPage() {
                     : 'border-mathua-border'
                 }`}>
                   <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
-                    <p className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">
+                    <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">
                       {question}
-                    </p>
+                    </KatexContent>
                   </div>
 
                   {!lastResult ? (

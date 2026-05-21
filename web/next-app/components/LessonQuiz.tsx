@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import KatexContent from './KatexContent'
 import { getLessonPractice, type PracticeQuestion } from '../lib/api'
 
 interface LessonQuizProps {
@@ -131,9 +132,9 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                     {i + 1}.
                   </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">
+                    <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">
                       {q.question}
-                    </p>
+                    </KatexContent>
 
                     <div className="mt-2 flex items-center gap-2">
                       <input
