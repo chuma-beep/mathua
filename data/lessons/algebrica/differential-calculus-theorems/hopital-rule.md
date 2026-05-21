@@ -123,28 +123,3 @@ The resulting expression is now an indeterminate form of type \\(\dfrac{\infty}{
   * **University of British Columbia (Feldman, Rechnitzer, Yeager)**. [L’Hôpital’s Rule](https://personal.math.ubc.ca/~CLP/CLP1/clp_1_dc/sec_4_7.html)
 
   * **MAA Convergence, (D. E. Otero, Xavier University)**. [L’Hôpital’s Rule](https://old.maa.org/press/periodicals/convergence/l-h-pital-s-rule-a-mini-primary-source-project-for-calculus-1-students)
-
-
-Differential Calculus Theorems
-
-Core theorems describe the behavior of differentiable functions, including limits, tangents, and mean value properties.
-
-2k
-
-[Weierstrass Theorem](https://algebrica.org/weierstrass-theorem/)
-
-4.7k
-
-[Fermat’s Theorem](https://algebrica.org/fermat-theorem/)
-
-2.7k
-
-[Rolle’s Theorem](https://algebrica.org/rolles-theorem/)
-
-2.1k
-
-[Lagrange’s Theorem](https://algebrica.org/lagrange-theorem/)
-
-3k
-
-[Cauchy’s Theorem](https://algebrica.org/cauchy-theorem/)

@@ -229,31 +229,3 @@ Requires
 Enables
 
 The following concepts, [Quadratic Equations](https://algebrica.org/quadratic-equations/), are required as prerequisites for this entry.
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

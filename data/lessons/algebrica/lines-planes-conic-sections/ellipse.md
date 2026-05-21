@@ -114,34 +114,3 @@ Therefore, the equation of the ellipse passing through the points mentioned abov
   * Vertices: the four points where an ellipse intersects the coordinate axes.
 
   * Eccentricity \\(e\\): the ratio of the focal distance \\( 2c \\) to the length of the major axis \\( 2a \\), \\( e = c/a \\). It is a measure of how stretched the ellipse is, with \\( 0 \leq e < 1 \\).
-
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

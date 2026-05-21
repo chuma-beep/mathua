@@ -67,35 +67,3 @@ Therefore, the derivative of \\( y = x^2 \\) is equal to:
 
 
 ##### The proposed functions are designed to help you consolidate your understanding of composite function derivatives. Try solving them independently before checking the solutions provided.
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

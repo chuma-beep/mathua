@@ -149,38 +149,3 @@ Composition| \\[\lim_{x \to x_0} \varphi(f(x)) = \varphi(L) \quad \varphi \text{
   * **University of Wisconsin, J. Robbin**. [Calculus: Lecture Notes](https://people.math.wisc.edu/~angenent/Free-Lecture-Notes/free221.pdf)
 
   * **University of California Davis, J. K. Hunter**. [Limits of Functions](https://www.math.ucdavis.edu/~hunter/m125a/intro_analysis_ch2.pdf)
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)

@@ -219,39 +219,3 @@ A further level of complexity arises when radicals are nested, as in inequalitie
 \\[\sqrt{a + \sqrt{f(x)}} \leq g(x)\\]
 
 In such cases the procedure described above must be applied iteratively: one first isolates the outer radical and squares, then addresses the inner radical by repeating the same analysis. At each step the domain conditions accumulate, and the intersection of all of them must be carried through to the final solution. The same monotonicity considerations apply at every level of nesting.
-
-Inequalities
-
-Inequalities express order relations between quantities, defining ranges and constraints.
-
-2.6k
-
-[Linear Inequalities](https://algebrica.org/linear-inequalities/)
-
-2.5k
-
-[Quadratic Inequalities](https://algebrica.org/quadratic-inequalities/)
-
-2.7k
-
-[Sign Analysis in Inequalities](https://algebrica.org/sign-analysis-in-inequalities/)
-
-1.2k
-
-[Rational Inequalities](https://algebrica.org/rational-inequalities/)
-
-1.2k
-
-[Inequalities with Absolute Value](https://algebrica.org/inequalities-with-absolute-value/)
-
-3.6k
-
-[Logarithmic Inequalities](https://algebrica.org/logarithmic-inequalities/)
-
-869
-
-[Trigonometric Inequalities](https://algebrica.org/trigonometric-inequalities/)
-
-1.3k
-
-[Systems of Inequalities](https://algebrica.org/systems-of-inequalities/)

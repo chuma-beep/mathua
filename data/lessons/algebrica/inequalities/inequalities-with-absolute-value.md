@@ -235,39 +235,3 @@ The left inequality \\(-(2x - 3) \leq x - 1\\) simplifies to \\(-2x + 3 \leq x -
 The three critical values appearing in the graph reflect the three independent conditions derived during the solution: the threshold \\(\frac{4}{3}\\) from the left inequality, the threshold \\(\frac{3}{2}\\) from the positivity requirement on \\(g(x)\\), and the threshold \\(2\\) from the right inequality. Since each condition is more restrictive than the previous one, the effective solution is determined entirely by the rightmost bound.
 
 The solution is therefore the interval \\([2, +\infty)\\).
-
-Inequalities
-
-Inequalities express order relations between quantities, defining ranges and constraints.
-
-2.6k
-
-[Linear Inequalities](https://algebrica.org/linear-inequalities/)
-
-2.5k
-
-[Quadratic Inequalities](https://algebrica.org/quadratic-inequalities/)
-
-2.7k
-
-[Sign Analysis in Inequalities](https://algebrica.org/sign-analysis-in-inequalities/)
-
-1.2k
-
-[Rational Inequalities](https://algebrica.org/rational-inequalities/)
-
-1.1k
-
-[Irrational Inequalities](https://algebrica.org/irrational-inequalities/)
-
-3.6k
-
-[Logarithmic Inequalities](https://algebrica.org/logarithmic-inequalities/)
-
-869
-
-[Trigonometric Inequalities](https://algebrica.org/trigonometric-inequalities/)
-
-1.3k
-
-[Systems of Inequalities](https://algebrica.org/systems-of-inequalities/)

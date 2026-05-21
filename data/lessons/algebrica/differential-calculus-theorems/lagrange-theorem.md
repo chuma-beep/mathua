@@ -130,28 +130,3 @@ The solution is: \\[c = \dfrac{4+\sqrt{19}}{3} \\]
   * **University of California Davis, D. Kouba**. [Mean Value Theorem – Problems and Proofs](https://www.math.ucdavis.edu/~kouba/CalcOneDIRECTORY/meanvaluetheoremdirectory/MeanValueTheorem.html)
 
   * **University of Cambridge, W. T. Gowers**. [What is the point of the Mean Value Theorem?](https://www.dpmms.cam.ac.uk/~wtg10/meanvalue.html)
-
-
-Differential Calculus Theorems
-
-Core theorems describe the behavior of differentiable functions, including limits, tangents, and mean value properties.
-
-2k
-
-[Weierstrass Theorem](https://algebrica.org/weierstrass-theorem/)
-
-4.7k
-
-[Fermat’s Theorem](https://algebrica.org/fermat-theorem/)
-
-2.7k
-
-[Rolle’s Theorem](https://algebrica.org/rolles-theorem/)
-
-3k
-
-[Cauchy’s Theorem](https://algebrica.org/cauchy-theorem/)
-
-1.5k
-
-[L’Hôpital’s Rule](https://algebrica.org/hopital-rule/)

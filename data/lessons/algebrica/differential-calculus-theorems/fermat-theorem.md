@@ -107,28 +107,3 @@ Conversely, on open intervals or unbounded [domains](<../determining-the-domain-
   * **UC Davis J. Hunter**. [Differentiable Functions](https://www.math.ucdavis.edu/~hunter/m125a/intro_analysis_ch4.pdf)
 
   * **MIT J. Starr**. [Critical Points and Extrema](https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2005/e623940ed32c0dc3f942b64b9db07485_lecture_9.pdf)
-
-
-Differential Calculus Theorems
-
-Core theorems describe the behavior of differentiable functions, including limits, tangents, and mean value properties.
-
-2k
-
-[Weierstrass Theorem](https://algebrica.org/weierstrass-theorem/)
-
-2.7k
-
-[Rolle’s Theorem](https://algebrica.org/rolles-theorem/)
-
-2.1k
-
-[Lagrange’s Theorem](https://algebrica.org/lagrange-theorem/)
-
-3k
-
-[Cauchy’s Theorem](https://algebrica.org/cauchy-theorem/)
-
-1.5k
-
-[L’Hôpital’s Rule](https://algebrica.org/hopital-rule/)

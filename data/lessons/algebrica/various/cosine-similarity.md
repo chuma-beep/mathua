@@ -178,15 +178,3 @@ Requires
 Enables
 
 The following concepts, [Cosine Function](https://algebrica.org/cosine-function/), [Vector Spaces](https://algebrica.org/vector-spaces/), [Vectors](https://algebrica.org/vectors/), are required as prerequisites for this entry.
-
-Other Topics
-
-Topics that warrant a complete treatment but do not yet belong to a defined category.
-
-16.3k
-
-[Propositional Logic](https://algebrica.org/propositional-logic/)
-
-1.6k
-
-[The Backpropagation Algorithm](https://algebrica.org/backpropagation/)

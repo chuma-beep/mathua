@@ -92,21 +92,3 @@ From equation 1: \\[x + y + z = 6 \Rightarrow x = 6 - y - z = 6 - 4 - 2 = 0 \\]
 The solution is
 
 \\[x = 0 \quad y = 4 \quad z = 2 \\]
-
-Linear Systems
-
-A linear system is a set of equations solved simultaneously by values that satisfy all of them.
-
-2k
-
-[Systems of Linear Equations](https://algebrica.org/systems-of-linear-equations/)
-
-3.4k
-
-[Cramer’s Rule](https://algebrica.org/cramers-rule/)
-
-1.2k
-
-[Rouché-Capelli Theorem](https://algebrica.org/rouche-capelli-theorem/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/linear-systems/rouche-capelli-theorem.md?plain=1)

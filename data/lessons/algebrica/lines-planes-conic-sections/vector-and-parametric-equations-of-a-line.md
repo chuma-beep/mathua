@@ -89,33 +89,3 @@ The parametric form takes that same rule and writes it out in terms of coordinat
 \\[\begin{cases} x = x_0 + kt \\\\[0.5em] y = y_0 + ht \end{cases} \quad t \in \mathbb{R} \\]
 
 Both forms describe the same set of points. The vector form is compact and geometric; the parametric form is explicit and ready to calculate with. Use whichever makes more sense for the problem you’re solving, they’re mathematically identical.
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

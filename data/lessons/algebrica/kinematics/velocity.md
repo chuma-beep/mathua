@@ -85,16 +85,3 @@ This means that for every second that passes, the car moves exactly 20 meters fo
   * Velocity describes how fast and in what direction an object moves.
   * Scalar velocity refers to the absolute value of velocity, representing only the speed of the object without considering the direction.
   * Vector velocity is the rate of change of position with respect to time, expressed as a vector tangent to the trajectory and oriented in the direction of motion.
-
-
-Kinematics
-
-Kinematics studies motion through trajectories, velocities, and accelerations.
-
-1.2k
-
-[Uniformly Accelerated Motion: Acceleration](https://algebrica.org/acceleration/)
-
-1.1k
-
-[Simple Harmonic Motion](https://algebrica.org/simple-harmonic-motion/)

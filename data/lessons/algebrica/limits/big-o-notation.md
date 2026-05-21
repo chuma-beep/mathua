@@ -161,38 +161,3 @@ It’s important to note the relationship between big O and [little-o notation](
   * **Rice University, J. A. Dobelman**. [Big O and Little o](https://www.stat.rice.edu/~dobelman/notes_papers/math/big_O.little_o.pdf)
 
   * **Simon Fraser University, R. Lockhart**. [Landau Notation: Big O and Little o](https://www.sfu.ca/~lockhart/richard/830/20_3/lectures/Landau/web.pdf)
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-942
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)

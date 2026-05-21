@@ -217,36 +217,3 @@ The Hessian is fundamental in the second-order analysis of \\( f \\). At a criti
   * **UC Berkeley**. [Multivariable Calculus Worksheets](https://math.berkeley.edu/sites/default/files/bulk_6/Math53.Berkeley.pdf)
 
   * **City University of New York, A. Máté**. [On the Equality of Mixed Partial Derivatives](http://www.sci.brooklyn.cuny.edu/~mate/misc/mixedpartial.pdf)
-
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)

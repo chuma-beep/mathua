@@ -119,39 +119,3 @@ Expanding and simplifying, we obtain \\[x^2 - x - 1 > 0 \\]
 The associated [quadratic equation](<../quadratic-equations>) has roots: \\[x = \frac{1 \pm \sqrt{5}}{2} \\]
 
 The inequality is satisfied outside the interval determined by these roots. Intersecting this result with the domain \\((-1,2)\\), we finally obtain the solution set: \\[-1 < x < \frac{1-\sqrt{5}}{2}\\]
-
-Inequalities
-
-Inequalities express order relations between quantities, defining ranges and constraints.
-
-2.6k
-
-[Linear Inequalities](https://algebrica.org/linear-inequalities/)
-
-2.5k
-
-[Quadratic Inequalities](https://algebrica.org/quadratic-inequalities/)
-
-2.7k
-
-[Sign Analysis in Inequalities](https://algebrica.org/sign-analysis-in-inequalities/)
-
-1.2k
-
-[Rational Inequalities](https://algebrica.org/rational-inequalities/)
-
-1.1k
-
-[Irrational Inequalities](https://algebrica.org/irrational-inequalities/)
-
-1.2k
-
-[Inequalities with Absolute Value](https://algebrica.org/inequalities-with-absolute-value/)
-
-869
-
-[Trigonometric Inequalities](https://algebrica.org/trigonometric-inequalities/)
-
-1.3k
-
-[Systems of Inequalities](https://algebrica.org/systems-of-inequalities/)

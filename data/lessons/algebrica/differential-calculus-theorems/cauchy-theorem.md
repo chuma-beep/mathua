@@ -88,28 +88,3 @@ Consider the particular case in which \\(g(b) = g(a)\\). In this situation, the 
   * **University of Maryland**. [The Cauchy Mean Value Theorem and Consequences](https://math.umd.edu/~immortal/MATH410/lecturenotes/ch4-4.pdf)
 
   * **UC Berkeley A. Vizeff**. [Mean Value Theorem and L’Hôpital’s Rule](https://math.berkeley.edu/~avizeff/calculus-I-F23/lecture-16.pdf)
-
-
-Differential Calculus Theorems
-
-Core theorems describe the behavior of differentiable functions, including limits, tangents, and mean value properties.
-
-2k
-
-[Weierstrass Theorem](https://algebrica.org/weierstrass-theorem/)
-
-4.7k
-
-[Fermat’s Theorem](https://algebrica.org/fermat-theorem/)
-
-2.7k
-
-[Rolle’s Theorem](https://algebrica.org/rolles-theorem/)
-
-2.1k
-
-[Lagrange’s Theorem](https://algebrica.org/lagrange-theorem/)
-
-1.5k
-
-[L’Hôpital’s Rule](https://algebrica.org/hopital-rule/)

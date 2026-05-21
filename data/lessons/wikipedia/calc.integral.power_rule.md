@@ -8,7 +8,7 @@ In calculus, the **power rule** is used to differentiate functions of the form \
 Let \(f\) be a function satisfying \(f(x)=x^r\) for all \(x\), where \(r \in \mathbb{R}\). Then,
 \(f'(x) = rx^{r-1} \,. \)
 The power rule for integration states that
-\(\int\! x^r \, dx=\frac{x^{r+1{r+1}+C\)
+\(\int\! x^r \, dx=\frac{x^{r+1}}{r+1}+C\)
 for any real number \(r \neq -1\). It can be derived by inverting the power rule for differentiation. In this equation C is any constant.
 
 ## Proofs

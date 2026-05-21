@@ -178,33 +178,3 @@ By substituting these values into the equation of the pencil of lines, we obtain
 Therefore, the equations of the two tangent lines are given by:
 
 \\[\begin{align*} y &= \left(6 - 2\sqrt{11}\right)x + 6\sqrt{11} - 24 \\\\[0.5em] y &= \left(6 + 2\sqrt{11}\right)x - 6\sqrt{11} - 24 \end{align*} \\]
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

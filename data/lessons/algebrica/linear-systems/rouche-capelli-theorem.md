@@ -163,19 +163,3 @@ Requires
 Enables
 
 The following concepts, [Matrices](https://algebrica.org/matrices/), [Systems of Linear Equations](https://algebrica.org/systems-of-linear-equations/), are required as prerequisites for this entry.
-
-Linear Systems
-
-A linear system is a set of equations solved simultaneously by values that satisfy all of them.
-
-2k
-
-[Systems of Linear Equations](https://algebrica.org/systems-of-linear-equations/)
-
-3.4k
-
-[Cramer’s Rule](https://algebrica.org/cramers-rule/)
-
-1.1k
-
-[Gaussian Elimination](https://algebrica.org/solving-linear-systems-using-gaussian-elimination/)
