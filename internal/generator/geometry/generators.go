@@ -178,7 +178,7 @@ func (g *pythagoreanGen) Generate(difficulty float64) generator.Problem {
 		c = int(math.Sqrt(float64(cSq)))
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Right triangle: legs = %d and %d. Find the hypotenuse c.", a, b),
+		Question:    fmt.Sprintf("Right triangle: legs \\(= %d\\) and \\(%d\\). Find the hypotenuse \\(c\\).", a, b),
 		Answer:      fmt.Sprintf("%d", c),
 		Explanation: fmt.Sprintf("c^2 = %d^2 + %d^2 = %d + %d = %d, so c = sqrt(%d) = %d.", a, b, a*a, b*b, c*c, c*c, c),
 	}
@@ -276,7 +276,7 @@ func (g *coordPlotGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(max(1, scale*2)) - 5
 	y := rand.Intn(max(1, scale*2)) - 5
 	return generator.Problem{
-		Question:    fmt.Sprintf("What quadrant is the point (%d, %d) in?", x, y),
+		Question:    fmt.Sprintf("What quadrant is the point \\((%d, %d)\\) in?", x, y),
 		Answer:      quad(x, y),
 		Explanation: fmt.Sprintf("(%d,%d) is in %s.", x, y, quad(x, y)),
 	}
@@ -312,7 +312,7 @@ func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
 	x1 := rand.Intn(5)
 	y1 := rand.Intn(5)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the distance between (%d,%d) and (%d,%d).", x1, y1, x1+dx, y1+dy),
+		Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x1+dx, y1+dy),
 		Answer:      fmt.Sprintf("%d", dist),
 		Explanation: fmt.Sprintf("sqrt((%d-%d)^2 + (%d-%d)^2) = sqrt(%d + %d) = sqrt(%d) = %d.", x1+dx, x1, y1+dy, y1, dx*dx, dy*dy, dx*dx+dy*dy, dist),
 	}
@@ -327,7 +327,7 @@ func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
 	x2 := x1 + (rand.Intn(5)+1)*2
 	y2 := y1 + (rand.Intn(5)+1)*2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the midpoint of (%d,%d) and (%d,%d).", x1, y1, x2, y2),
+		Question:    fmt.Sprintf("Find the midpoint of \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      fmt.Sprintf("(%.1f, %.1f)", float64(x1+x2)/2, float64(y1+y2)/2),
 		Explanation: fmt.Sprintf("Midpoint = ((%d+%d)/2, (%d+%d)/2) = (%.1f, %.1f).", x1, x2, y1, y2, float64(x1+x2)/2, float64(y1+y2)/2),
 	}
@@ -408,7 +408,7 @@ func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the equation of the line through (%d,%d) and (%d,%d).", x1, y1, x2, y2),
+		Question:    fmt.Sprintf("Find the equation of the line through \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Slope = (%d-%d)/(%d-%d) = %d/%d. Line through (%d,%d): y - %d = %d/%d(x - %d) → %s", y2, y1, x2, x1, dy, dx, x1, y1, y1, dy, dx, x1, answer),
 	}
@@ -439,13 +439,13 @@ func (g *coordPolarGen) Generate(difficulty float64) generator.Problem {
 	e := entries[rand.Intn(len(entries))]
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Convert (r=%d, θ=%d°) to rectangular coordinates.", e.r, e.theta),
+			Question:    fmt.Sprintf("Convert \\((r=%d, \\theta=%d^{\\circ})\\) to rectangular coordinates.", e.r, e.theta),
 			Answer:      fmt.Sprintf("(%d,%d)", e.x, e.y),
 			Explanation: fmt.Sprintf("x = %d·cos(%d°) = %d, y = %d·sin(%d°) = %d → (%d,%d)", e.r, e.theta, e.x, e.r, e.theta, e.y, e.x, e.y),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert (%d,%d) to polar coordinates (r > 0, 0 ≤ θ < 360).", e.x, e.y),
+		Question:    fmt.Sprintf("Convert \\((%d,%d)\\) to polar coordinates \\((r > 0, 0 \\leq \\theta < 360)\\).", e.x, e.y),
 		Answer:      fmt.Sprintf("(%d,%d°)", e.r, e.theta),
 		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = arctan(%d/%d) = %d° → (%d,%d°)", e.x, e.y, e.r, e.y, e.x, e.theta, e.r, e.theta),
 	}
