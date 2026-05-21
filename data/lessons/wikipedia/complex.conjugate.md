@@ -37,4 +37,4 @@ z\overline{z} = {\left| z \right|}^2.
 \]
  This allows easy computation of the multiplicative inverse of a complex number given in rectangular coordinates:
 \[
-z^{-1} = \frac{\overline{z z \right
+z^{-1} = \frac{\overline{z{|z|^2}

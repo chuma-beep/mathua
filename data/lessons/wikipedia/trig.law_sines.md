@@ -5,13 +5,13 @@
 In trigonometry, the **law of sines** (sometimes called the **sine formula** or **sine rule**) is a mathematical equation relating the lengths of the sides of any triangle to the sines of its angles. According to the law,
 
 \[
-\frac{a}{\sin{\alpha\,=\, \frac{b}{\sin{\beta\,=\, \frac{c}{\sin{\gamma\,=\, 2R,
+\frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2R,
 \]
 
 where *a*, *b*, and *c* are the lengths of the sides of a triangle, and *α*, *β*, and *γ* are the opposite angles (see figure 2), while *R* is the radius of the triangle's circumcircle. When the last part of the equation is not used, the law is sometimes stated using the reciprocals;
 
 \[
-\frac{\sin{\alpha{a} \,=\, \frac{\sin{\beta{b} \,=\, \frac{\sin{\gamma{c}.
+\frac{\sin \alpha}{a} = \frac{\sin \beta}{b} = \frac{\sin \gamma}{c}.
 \]
 
 The law of sines can be used to compute the remaining sides of a triangle when two angles and a side are known—a technique known as triangulation. It can also be used when two sides and one of the non-enclosed angles are known. In some such cases, the triangle is not uniquely determined by this data (called the *ambiguous case*) and the technique gives two possible values for the enclosed angle.
@@ -37,7 +37,7 @@ Given a general triangle, the following conditions would need to be fulfilled fo
 If all the above conditions are true, then each of angles *β* and *β′* produces a valid triangle, meaning that both of the following are true:
 
 \[
-{\gamma}' = \arcsin\frac{c \sin{\alpha{a} \quad \text{or} \quad {\gamma} = \pi - \arcsin\frac{c \sin{\alpha{a}.
+{\gamma}' = \arcsin\frac{c \sin \alpha}{a} \quad \text{or} \quad {\gamma} = \pi - \arcsin\frac{c \sin \alpha}{a}.
 \]
 
 From there we can find the corresponding *β* and *b* or *β′* and *b′* if required, where *b* is the side bounded by vertices *A* and *C* and *b′* is bounded by *A* and *C′*.
@@ -78,7 +78,7 @@ If the lengths of two sides of the triangle *a* and *b* are equal to *x*, the th
 In the identity
 
 \[
-\frac{a}{\sin{\alpha= \frac{b}{\sin{\beta= \frac{c}{\sin{\gamma,
+\frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma},
 \]
 
 the common value of the three fractions is actually the diameter of the triangle's circumcircle. This result dates back to Ptolemy.

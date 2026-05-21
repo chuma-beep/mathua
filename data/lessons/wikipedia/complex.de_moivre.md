@@ -129,9 +129,9 @@ can be represented in the form
 In this representation,
 \(k = \sqrt{d^2 + a^2 + b^2 + c^2},\)
 and the trigonometric functions are defined as
-\(\cos \theta = \frac{d}{k} \quad \mbox{and} \quad \sin \theta = \pm \frac{\sqrt{a^2 + b^2 + c^2{k}.\)
+\(\cos \theta = \frac{d}{k} \quad \mbox{and} \quad \sin \theta = \pm \frac{\sqrt{a^2 + b^2 + c^2}.\)
 In the case that *a*\(^{2}\) + *b*\(^{2}\) + *c*\(^{2}\) ≠ 0,
-\(\varepsilon = \pm \frac{a\mathbf{\hat i} + b\mathbf{\hat j} + c\mathbf{\hat k{\sqrt{a^2 + b^2 + c^2,\)
+\(\varepsilon = \pm \frac{a\mathbf{\hat i} + b\mathbf{\hat j} + c\mathbf{\hat k{\sqrt{a^2 + b^2 + c^2\),
 that is, the unit vector. This leads to the variation of De Moivre's formula:
 
 \(q^n = k^n(\cos n \theta + \varepsilon \sin n \theta).\)

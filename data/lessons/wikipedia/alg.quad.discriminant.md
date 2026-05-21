@@ -115,7 +115,7 @@ This results from the expression of the discriminant in terms of the roots
 \end{aligned}\)
 This results from the expression in terms of the roots, or of the quasi-homogeneity of the discriminant.
 * *Invariance by inversion*: The reciprocal polynomial of \(P(x) = a_nx^n + \cdots + a_0\) with \(a_0 \neq 0\) is:
-\(P^{\mathrm{r\!\!\;(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.\) Then:
+\(P^{\mathrm{r(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.\) Then:
 \(\operatorname{Disc}_x(P^{\mathrm{r\!\!\,(x)) = \operatorname{Disc}_x(P(x)).\)
 
 ### Invariance under ring homomorphisms
@@ -214,7 +214,7 @@ In the case of a homogeneous bivariate polynomial of degree *d*, this general di
 
 A quadratic form is a function over a vector space, which is defined over some basis by a homogeneous polynomial of degree 2:
 
-\(Q(x_1,\ldots,x_n) \ =\ \sum_{i=1}^n a_{ii} x_i^2+\sum_{1\le i ×)^{2}, the quotient of the multiplicative monoid of *K* by the subgroup of the nonzero squares (that is, two elements of *K* are in the same equivalence class if one is the product of the other by a nonzero square). It follows that over the complex numbers, a discriminant is equivalent to 0 or 1. Over the real numbers, a discriminant is equivalent to −1, 0, or 1. Over the rational numbers, a discriminant is equivalent to a unique square-free integer.
+\(Q(x_1,\ldots,x_n) \ =\ \sum_{i=1}^n a_{ii} x_i^2+\sum_{1\le i ×)^{2}\), the quotient of the multiplicative monoid of *K* by the subgroup of the nonzero squares (that is, two elements of *K* are in the same equivalence class if one is the product of the other by a nonzero square). It follows that over the complex numbers, a discriminant is equivalent to 0 or 1. Over the real numbers, a discriminant is equivalent to −1, 0, or 1. Over the rational numbers, a discriminant is equivalent to a unique square-free integer.
 
 By a theorem of Jacobi, a quadratic form over a field of characteristic different from 2 can be expressed, after a linear change of variables, in **diagonal form** as
 \(a_1x_1^2 + \cdots + a_nx_n^2.\)

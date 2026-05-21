@@ -48,21 +48,24 @@ The calculation of percentages is carried out and taught in different ways depen
 
 Example:
 
-42 kg is 7%. How much is (corresponds to) 100%?Given are *W* (percentage) and *p* % (percentage).We are looking for *G* (basic value).
-{| class="wikitable"
-|-
-!class="backgroundcolor3"| With general formula
-!class="backgroundcolor6"| With own ratio equation (Proportion)
-!class="backgroundcolor4"| With “What is 1%?” (Rule of 3) \(\frac{p\,\%}{42\,\text{kg=\frac{100\,\%}{7\ \%}\)
-|-
-| \(\frac{p\,\%}{100\,\%}=\frac{W}{G}\)multiple rearrangements result in:\(G=\frac{W}{p\,\%}\cdot{100\,\%}\)\(G=\frac{42\,\text{ kg{7\,\%}\cdot{100\,\%}=600\,\text{kg}\)
-|\(\frac{G}{42\,\text{kg=\frac{100\,\%}{7\,\%}\)simple conversion yields:\(G=\frac{42\,\text{kg{7\,\%}\cdot{100\,\%}=600\,\text{ kg}\)
-| \(\frac{42\,\text{kg}:{ \color{red}7{7\,\%:{ \color{red}7=\frac{6\,\text{ kg{1\,\%}=\frac{6\,\text{kg}\cdot { \color{red}100{1\,\%\cdot { \color{red}100\)without changing the last counter is:\(G=6\,\text{kg}\cdot 100=600\,\text{ kg}\)
-|-
-|class="backgroundcolor3"| Advantage:• One formula for all tasks
-|class="backgroundcolor6"| Advantages:• Without a formula• Easy to change over if the size you are looking forhere *G*is in the top left of the counter.
-|class="backgroundcolor4"| Advantages:• Without a formula• Simple rule of three – here as a chain of equations• Application for mental arithmetic
-|}
+Example: 42 kg is 7%. How much is 100%?
+
+Given *W* (percentage) = 42 kg and *p*% = 7%. Looking for *G* (base value).
+
+**Method 1 — formula:**
+\[
+\frac{p\%}{100\%} = \frac{W}{G} \quad\Rightarrow\quad G = \frac{W}{p\%} \cdot 100\% = \frac{42}{7\%} \cdot 100\% = 600\text{ kg}
+\]
+
+**Method 2 — proportion:**
+\[
+\frac{G}{42} = \frac{100\%}{7\%} \quad\Rightarrow\quad G = \frac{42 \cdot 100\%}{7\%} = 600\text{ kg}
+\]
+
+**Method 3 — rule of three (1% first):**
+\[
+\frac{42}{7} = 6\text{ kg (1\%)} \quad\Rightarrow\quad G = 6 \cdot 100 = 600\text{ kg}
+\]
 
 ## Percentage increase and decrease
 

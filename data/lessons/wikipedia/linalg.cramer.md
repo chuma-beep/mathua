@@ -156,11 +156,11 @@ Carrying out the differentiation on the left-hand side, we get:
 \(\begin{align}
 	\frac{\partial}{\partial\bar x^{\ell\det\left(\frac{\partial x}{\partial\bar{x\right)
 	&=(-1)^{i+j}\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det M(i|j)\\
-	&=\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{(-1)^{i+j{\det\left(\frac{\partial x}{\partial\bar{x\right)}\det M(i|j)=(\ast),
+	&=\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)=(\ast),
 	\end{align}\)
 where \(M(i|j)\) denotes the matrix obtained from \(\left(\frac{\partial x}{\partial\bar{x\right)\) by deleting the \(i\)th row and \(j\)th column.
 But Cramer's Rule says that
-\(\frac{(-1)^{i+j{\det\left(\frac{\partial x}{\partial\bar{x\right)}\det M(i|j)\)
+\(\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)\)
 is the \((j,i)\)th entry of the matrix \(\left(\frac{\partial \bar{x{\partial x}\right)\).
 Thus
 \((\ast)=\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\frac{\partial\bar x^{j{\partial x^{i,\)
