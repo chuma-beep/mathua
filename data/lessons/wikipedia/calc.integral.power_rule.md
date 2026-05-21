@@ -17,4 +17,4 @@ Let \(f(x) = x^r\), where \(r\) is any real number.
 
 If \(f(x) = e^x\), then \(\ln (f(x)) = x\), where \(\ln\) is the natural logarithm function,
 or \(f'(x) = f(x) = e^x\), as was required.
-Therefore, applying the chain rule to nowrap
+Therefore, applying the chain rule to...

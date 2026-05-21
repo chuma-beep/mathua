@@ -180,4 +180,4 @@ Combining the \({dy \over dx}\) terms gives
 
 \({\partial I\over\partial x}+{dy \over dx}\left({\partial I\over\partial y}+{\partial J\over\partial x}+{\partial J\over\partial y}{dy \over dx}\right)+{d^2y \over dx^2} (J(x,y))=0\)
 
-If the equation is exact, then nowrap
+If the equation is exact, then...

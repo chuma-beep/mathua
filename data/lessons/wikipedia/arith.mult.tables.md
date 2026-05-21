@@ -102,7 +102,7 @@ For other examples, see group.
 
 Hypercomplex number multiplication tables show the non-commutative results of multiplying two hypercomplex imaginary units. The simplest example is that of the quaternion multiplication table , and ):
 
-| width=15 nowrap|↓ × → | width=15|1 | width=15|**i** | width=15|**j** | width=15|**k** |
+| ↓ × → | 1 | **i** | **j** | **k** |
 | --- | --- | --- | --- | --- |
 | 1 | 1 | **i** | **j** | **k** |
 | **i** | **i** | −1 | **k** | −**j** |

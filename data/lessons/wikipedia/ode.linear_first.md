@@ -126,4 +126,4 @@ In the case where the characteristic polynomial has only simple roots, the prece
 x^ke^{\alpha x},
 \]
 
-where is a nonnegative integer, is a root of the characteristic polynomial of multiplicity , and *k* < *m*. For proving that these functions are solutions, one may remark that if is a root of the characteristic polynomial of multiplicity , the characteristic polynomial may be factored as *P*(*t*)(*t* − *α*)\(^{*m*}\). Thus, applying the differential operator of the equation is equivalent with applying first times the operator nowrap
+where is a nonnegative integer, is a root of the characteristic polynomial of multiplicity , and *k* < *m*. For proving that these functions are solutions, one may remark that if is a root of the characteristic polynomial of multiplicity , the characteristic polynomial may be factored as *P*(*t*)(*t* − *α*)\(^{*m*}\). Thus, applying the differential operator of the equation is equivalent with applying first times the operator.
