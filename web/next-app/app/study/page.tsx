@@ -765,11 +765,13 @@ function StudyContent() {
       <Header />
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
         <section className="pt-8">
-          <span className="flex justify-between items-center mb-4">
-            <Link href={backHref} className="text-mathua-secondary text-sm hover:text-mathua-primary">
-              ← Back
-            </Link>
-          </span>
+          {!selectedLesson && (
+            <span className="flex justify-between items-center mb-4">
+              <Link href={backHref} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+                ← Back
+              </Link>
+            </span>
+          )}
 
           {selectedLesson ? (
             // ── Lesson Detail ──

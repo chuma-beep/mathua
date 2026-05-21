@@ -35,9 +35,16 @@ export default function KatexContent({ children }: { children: string }) {
 
   // --- Inline math ---
   // Algebrica style: \\(...\\) — unescape \\ back to \ inside
-  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner.replace(/\\\\/g, '\\') + '$')
+  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => {
+    const clean = inner.replace(/\\\\/g, '\\')
+    if (clean.includes('\n')) return '\n$$\n' + clean.trim() + '\n$$\n'
+    return '$' + clean + '$'
+  })
   // Wikipedia style: \(...\) — backslashes inside are already single
-  content = content.replace(/\\\(([\s\S]*?)\\\)/g, (_, inner) => '$' + inner + '$')
+  content = content.replace(/\\\(([\s\S]*?)\\\)/g, (_, inner) => {
+    if (inner.includes('\n')) return '\n$$\n' + inner.trim() + '\n$$\n'
+    return '$' + inner + '$'
+  })
 
   // --- Display math ---
   // Use block $$...$$ (own lines) when multi-line,
