@@ -59,6 +59,6 @@ In functional analysis, a closed linear span of a set of vectors is the minimal 
 
 Suppose that is a normed vector space and let be any non-empty subset of. The **closed linear span** of , denoted by \(\overline{\operatorname{Sp(E)\) or \(\overline{\operatorname{Span(E)\), is the intersection of all the closed linear subspaces of which contain. One mathematical formulation of this is
 
-\(\overline{\operatorname{Sp(E) = \{u\in X | \forall\varepsilon > 0\,\exists x\in\operatorname{Sp}(E) : \|x - u\|<\varepsilon\}.\)
+\(\overline{\operatorname{Sp(E)= \{u\in X \mid \forall\varepsilon > 0\,\exists x\in\operatorname{Sp}(E) : \|x - u\|<\varepsilon\}.\)
 
 The closed linear span of the set of functions *x\(^{n}\)* on the interval [0, 1], where *n* is a non-negative integer, depends on the norm used. If the *L*\(^{2}\) norm is used, then the closed linear span is the Hilbert space of square-integrable functions on the interval. But if the maximum norm is used, the closed linear span will be the space of continuous functions on the interval. In either case, the closed linear span contains functions that are not polynomials, and so are not in the linear span itself. However, the cardinality of the set of functions in the closed linear span is the cardinality of the continuum, which is the same cardinality as for the set of polynomials.

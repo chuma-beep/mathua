@@ -395,7 +395,7 @@ This result suffices to show that the number of steps in Euclid's algorithm can 
 #### Average
 The average number of steps taken by the Euclidean algorithm has been defined in three different ways. The first definition is the average time *T*(*a*) required to calculate the GCD of a given number *a* and a smaller natural number *b* chosen with equal probability from the integers 0 to *a* − 1
 
-\(T(a) = \frac 1 a \sum_{0 \leq b−(1/6)+*ε*, where *ε* is infinitesimal. The constant *C* in this formula is called Porter's constant and equals
+\(T(a) = \frac 1 a \sum_{0 \leq b−(1/6)\)+*ε*, where *ε* is infinitesimal. The constant *C* in this formula is called Porter's constant and equals
 \(C= -\frac 1 2 + \frac{6 \ln 2}{\pi^2}\left(4\gamma -\frac{24}{\pi^2}\zeta'(2) + 3\ln 2 - 2\right) \approx 1.467\)
 where *γ* is the Euler–Mascheroni constant and *ζ* is the derivative of the Riemann zeta function. The leading coefficient (12/π\(^{2}\)) ln 2 was determined by two independent methods.
 

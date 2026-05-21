@@ -85,8 +85,7 @@ There are various equivalent definitions of the constant π. The conventional de
 However, because the circumference of a circle is not a primitive analytical concept, this definition is not suitable in modern rigorous treatments. A standard modern definition is that is equal to twice the least positive root of the cosine function or, equivalently, the half-period of the sine (or cosine) function. The cosine function can be defined either as a power series, or as the solution of a certain differential equation. This avoids any reference to circles in the definition of , so that statements about the relation of to the circumference and area of circles are actually theorems, rather than definitions, that follow from the analytical definitions of concepts like "area" and "circumference".
 
 The analytical definitions are seen to be equivalent, if it is agreed that the circumference of the circle is measured as a rectifiable curve by means of the integral
-\(C = 2\int_{-R}^R \frac{R\,dx}{\sqrt{R^2-x^2= 2R\int_{-1}^1\frac{dx}{\sqrt{1-x^2.\)
-The integral appearing on the right is an abelian integral whose value is a half-period of the sine function, equal to. Thus \(C=2\pi R=\pi D\) is seen to be true as a theorem.
+\(C = 2\int_{-R}^R \frac{R\,dx}{\sqrt{R^2-x^2= 2R\int_{-1}^1\frac{dx}{\sqrt{1-x^2.\) on the right is an abelian integral whose value is a half-period of the sine function, equal to. Thus \(C=2\pi R=\pi D\) is seen to be true as a theorem.
 
 Several of the arguments that follow use only concepts from elementary calculus to reproduce the formula \(A=\pi r^2\), but in many cases to regard these as actual proofs, they rely implicitly on the fact that one can develop trigonometric functions and the fundamental constant in a way that is totally independent of their relation to geometry. We have indicated where appropriate how each of these proofs can be made totally independent of all trigonometry, but in some cases that requires more sophisticated mathematical ideas than those afforded by elementary calculus.
 
@@ -243,7 +242,7 @@ This for *n* = 48 gives a better approximation (about 3.14159292) than Archimede
 Let one side of an inscribed regular *n-*gon have length *s\(_{n}\)* and touch the circle at points A and B. Let A′ be the point opposite A on the circle, so that A′A is a diameter, and A′AB is an inscribed triangle on a diameter. By Thales' theorem, this is a right triangle with right angle at B. Let the length of A′B be *c\(_{n}\)*, which we call the complement of *s\(_{n}\)*; thus *c\(_{n}\)*\(^{2}\)+*s\(_{n}\)*\(^{2}\) = (2*r*)\(^{2}\). Let C bisect the arc from A to B, and let C′ be the point opposite C on the circle. Thus the length of CA is *s*\(_{2*n*}\), the length of C′A is *c*\(_{2*n*}\), and C′CA is itself a right triangle on diameter C′C. Because C bisects the arc from A to B, C′C perpendicularly bisects the chord from A to B, say at P. Triangle C′AP is thus a right triangle, and is similar to C′CA since they share the angle at C′. Thus all three corresponding sides are in the same proportion; in particular, we have C′A : C′C = C′P : C′A and AP : C′A = CA : C′C. The center of the circle, O, bisects A′A, so we also have triangle OAP similar to A′AB, with OP half the length of A′B. In terms of side lengths, this gives us
 \(\begin{align}
  c_{2n}^2 &{}= \left( r + \frac{1}{2} c_n \right) 2r \\
- c_{2n} &{}= \frac{s_n}{s_{2n.
+ c_{2n} &{}= \frac{s_n}{s_{2n
 \end{align}\)
 In the first equation C′P is C′O+OP, length *r* + *c\(_{n}\)*, and C′C is the diameter, 2*r*. For a unit circle we have the famous doubling equation of Ludolph van Ceulen,
 \(c_{2n} = \sqrt{2+c_n}. \)

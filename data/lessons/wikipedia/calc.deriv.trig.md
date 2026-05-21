@@ -373,9 +373,9 @@ Where
 
 Then, applying the chain rule to \(\arccos \left(\frac{1}{x}\right)\):
 
-\(\frac{dy}{dx} = -\frac{1}{\sqrt{1-(\frac{1}{x})^2\cdot \left(-\frac{1}{x^2}\right)
+\(\frac{dy}{dx} = -\frac{1}{\sqrt{1-\left(\frac{1}{x}\right)^2\cdot \left(-\frac{1}{x^2}\right)
  = \frac{1}{x^2\sqrt{1-\frac{1}{x^2}
- = \frac{1}{x^2\frac{\sqrt{x^2-1{\sqrt{x^2}
+ = \frac{1}{x^2} \cdot \frac{\sqrt{x^2-1{\sqrt{x^2
  = \frac{1}{\sqrt{x^2}\sqrt{x^2-1
  = \frac{1}{|x|\sqrt{x^2-1\)
 
@@ -408,6 +408,6 @@ Then, applying the chain rule to \(\arcsin \left(\frac{1}{x}\right)\):
 
 \(\frac{dy}{dx} =\frac{1}{\sqrt{1-(\frac{1}{x})^2\cdot \left(-\frac{1}{x^2}\right)
  = -\frac{1}{x^2\sqrt{1-\frac{1}{x^2}
- = -\frac{1}{x^2\frac{\sqrt{x^2-1{\sqrt{x^2}
+ = -\frac{1}{x^2} \cdot \frac{\sqrt{x^2-1{\sqrt{x^2
  = -\frac{1}{\sqrt{x^2}\sqrt{x^2-1
  = -\frac{1}{|x|\sqrt{x^2-1\)

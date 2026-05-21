@@ -67,4 +67,4 @@ The alternative formula uses only integers:
 ### Fourier transform
 The totient is the discrete Fourier transform of the gcd, evaluated at 1. Let
 
-\(\mathcal{F} \{ \mathbf{x} \}[m] = \sum\limits_{k=1}^n x_k \cdot e^*q*
+\(\mathcal{F} \{ \mathbf{x} \}[m] = \sum\limits_{k=1}^n x_k \cdot e^{-2\pi i k m / n}.\)

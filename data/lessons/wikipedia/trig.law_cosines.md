@@ -47,4 +47,4 @@ Using notation as in Fig. 2, Euclid's statement of proposition II.12 can be repr
 
 \(AB^2 = CA^2 + CB^2 + 2 (CA)(CH).\)
 
-To transform this into the familiar expression for the law of cosines, substitute , and \(CH = a \cos(\pi - \gamma)\\)\cos \gamma\right
+To transform this into the familiar expression for the law of cosines, substitute , and \(CH = a \cos(\pi - \gamma)\)

@@ -78,9 +78,9 @@ A positive number has two square roots, one positive, and one negative, which ar
 
 The square roots of an integer are algebraic integers—more specifically quadratic integers.
 
-The square root of a positive integer is the product of the roots of its prime factors, because the square root of a product is the product of the square roots of the factors. Since \(\sqrt{p^{2k= p^k,\) only roots of those primes having an odd power in the factorization are necessary. More precisely, the square root of a prime factorization is
+The square root of a positive integer is the product of the roots of its prime factors, because the square root of a product is the product of the square roots of the factors. Since \(\sqrt{p^{2k= p^k\), only roots of those primes having an odd power in the factorization are necessary. More precisely, the square root of a prime factorization is
 \[
-\sqrt{p_1^{2e_1+1} \cdots p_k^{2e_k+1}p_{k+1}^{2e_{k+1\dots p_n^{2e_n= p_1^{e_1} \dots p_n^{e_n} \sqrt{p_1\dots p_k}.
+\sqrt{p_1^{2e_1+1} \cdots p_k^{2e_k+1}p_{k+1}^{2e_{k+1\cdots p_n^{2e_n= p_1^{e_1} \cdots p_n^{e_n} \sqrt{p_1\cdots p_k}.
 \]
 
 ### As decimal expansions
