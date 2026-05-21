@@ -19,7 +19,7 @@ Thus, the sequence of functions is:
 
 Graphically, this situation can be observed as follows:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sequence-functions-1.png)
+![](/diagrams/algebrica/sequence-functions-1.png)
 
 The graph shows how, as the index \\(n\\) increases, the slope of the line \\(f_n(x)\\) progressively decreases. This reflects the fact that the function flattens toward the zero function \\(f(x) = 0\\) for every \\(x\\). In other words, the sequence of functions \\(f_n(x)\\) converges pointwise to the zero function as \\(n\\) approaches infinity.
 

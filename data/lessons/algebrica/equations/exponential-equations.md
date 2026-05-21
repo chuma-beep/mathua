@@ -15,7 +15,7 @@ We assume that \\( a \\) and \\( b \\) are positive [real numbers](<../types-of-
 
 We recall the general behavior of the [exponential function](<../exponential-function>), for example, when \\( a > 1 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/exponential-function-1.png)
+![](/diagrams/algebrica/exponential-function-1.png)
 
 In this case the graph of the function \\( y = a^x \\) lies entirely above the x-axis, never touches it, always passes through the point \\( (0, 1) \\) on the y-axis, and increases from left to right.
 

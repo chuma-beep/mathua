@@ -11,7 +11,7 @@ Solving an inequality involves determining the solution set, that is, all the va
 
 Given two real numbers \\( a \\) and \\( b \\) with \\( a < b \\), a bounded interval is defined as the set of real numbers between \\( a \\) and \\( b \\), where \\( a \\) and \\( b \\) are the lower and upper bounds, respectively. An unbounded interval is the set of numbers that either precede \\( a \\) or follow \\( a \\). If the endpoints of a bounded interval are included, the interval is called closed, otherwise, it is called open.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/inequalities-1.png)
+![](/diagrams/algebrica/inequalities-1.png)
 
 The inequality sign determines whether the solution interval is open or closed at its boundary. A strict inequality, expressed with \\( > \\) or \\( < \\), excludes the boundary value, yielding an open interval. A non-strict inequality, expressed with \\( \geq \\) or \\( \leq \\), includes it, yielding a closed or half-open interval.
 

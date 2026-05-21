@@ -13,7 +13,7 @@ There are two cases to consider when examining the logarithmic function \\( \log
   * If \\( 0 < a < 1 \\), the function is decreasing, meaning it diminishes as \\( x \\) increases.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/logharithm-6.png)
+![](/diagrams/algebrica/logharithm-6.png)
 
 In both cases, the only point where the logarithmic function takes the value \\( 0 \\) is at \\( x = 1 \\). This is because: \\(\log_a(1) = 0\\). This result is true because by definition, by the property of [powers](<../powers>), we have \\( a^0 = 1 \\).
 

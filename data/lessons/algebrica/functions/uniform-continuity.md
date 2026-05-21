@@ -21,7 +21,7 @@ Consider a function \\( f : A \subset \mathbb{R} \to \mathbb{R} \\). The functio
 
 The essential feature of this definition is that the value of \\( \delta \\) depends solely on \\( \varepsilon \\), and not on the particular points \\( x \\) and \\( y \\). The same \\( \delta \\) must be valid for every pair of points in the domain.
 
-![Uniform continuity.](https://algebrica.org/wp-content/uploads/resources/images/uniform-continuity-1.png)
+![Uniform continuity.](/diagrams/algebrica/uniform-continuity-1.png)
 
 The graph shows the global nature of the condition, highlighting that the same \\( \delta \\) controls the function’s variation throughout the domain. Specifically, whenever \\( |x - y| < \delta \\), it follows that \\( |f(x) - f(y)| < \varepsilon \\) for all \\( x, y \in A \\).
 

@@ -16,7 +16,7 @@ To each subdivision point we associate the point \\( (x_k, f(x_k)) \\) on the gr
 
 \\[\ell_k = \sqrt{(x_k - x_{k-1})^2 + (f(x_k) - f(x_{k-1}))^2} \\]
 
-![arc-length-of-a-curve-1](https://algebrica.org/wp-content/themes/algebrica-dev/svg/integrals/arc-length-of-a-curve-1.svg)
+![arc-length-of-a-curve-1](/diagrams/algebrica/arc-length-of-a-curve-1.svg)
 
 Since \\( f \\) is differentiable on \\([x_{k-1}, x_k]\\), the [mean value theorem](<../definite-integrals/>) guarantees the existence of a point \\( \xi_k \\) in the open interval \\( (x_{k-1}, x_k) \\) such that:
 

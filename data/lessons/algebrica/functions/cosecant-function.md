@@ -17,7 +17,7 @@ Its graph is a periodic curve with period \\(2\pi\\). Since the sine function re
 
 where the reciprocal \\(1/\sin(x)\\) becomes undefined.
 
-![Cosecant graph with asymptotic behaviour.](https://algebrica.org/wp-content/uploads/resources/images/cosecant-1.png)
+![Cosecant graph with asymptotic behaviour.](/diagrams/algebrica/cosecant-1.png)
 
 These asymptotes divide the graph into separate branches, each rising or falling without bound as the angle gets close to those points. The [domain](<../determining-the-domain-of-a-function/>) of \\(\csc(x)\\) includes all real numbers except the angles where \\(\sin(x) = 0\\). Its range is made up of the two [unbounded intervals](<../intervals/>) \\((-\infty, -1] \cup [1, \infty)\\), reflecting the fact that the sine function never exceeds 1 in absolute value, so its reciprocal must always have magnitude at least 1.
 

@@ -20,7 +20,7 @@ Enables
 
 The key ideas behind quadratic equations are closely linked to the geometry of the [parabola](<../parabola/>) and to the behaviour of the [discriminant](<../quadratic-formula/>). These elements determine how the graph bends, where its vertex lies, and whether the equation has two real solutions, a repeated solution, or a pair of [complex roots](<../quadratic-equations-with-complex-solutions/>).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quadratic-equations-params-6.png)
+![](/diagrams/algebrica/quadratic-equations-params-6.png)
 
 In many situations, however, the coefficients are not constant but depend on an external quantity that we treat as a parameter. Instead of being fixed, the numbers \\( a \\), \\( b \\), and \\( c \\) become functions of a real parameter \\( k \\). A parametrised quadratic equation can therefore be written in the more general form:
 

@@ -15,7 +15,7 @@ In other words, the function approaches the horizontal line \\( y = L \\) as \\(
 
 \\[y = \frac{x + 1}{x} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/asymptotes-1.png)
+![](/diagrams/algebrica/asymptotes-1.png)
 
 By computing the limit as \\( x \to \pm\infty \\), we obtain:
 
@@ -33,7 +33,7 @@ In other words, the function diverges as \\( x \\) approaches \\( x_0 \\) from t
 
 \\[y = \frac{1}{x - 1}\\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/asymptotes-2.png)
+![](/diagrams/algebrica/asymptotes-2.png)
 
 We observe that the [rational function](<../rational-functions>) is undefined at \\( x = 1 \\), since the denominator becomes zero. To analyze the behavior of \\( f(x) \\) near \\( x = 1 \\), we compute the one-sided limits:
 
@@ -67,7 +67,7 @@ Let us consider the function:
 
 \\[f(x) = \frac{x^2 + 1}{x} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/asymptotes-3-1.png)
+![](/diagrams/algebrica/asymptotes-3-1.png)
 
 To determine whether this function has an oblique asymptote as \\( x \to \pm\infty \\), we begin by analyzing its behavior for large values of \\( x \\). We start by computing the limit:
 

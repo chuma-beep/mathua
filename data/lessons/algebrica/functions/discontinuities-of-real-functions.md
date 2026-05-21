@@ -21,7 +21,7 @@ A function \\( f \\) is [continuous](<../continuous-functions/>) at \\( x_0 \\) 
 
 [Polynomials](<../polynomials/>) constitute a fundamental class of elementary continuous functions. These functions represent smooth curves in the plane and exhibit no points of discontinuity. Below is the graph of the quadratic function \\( x^2 + 2x + 1 \\), which represents a [parabola](<../parabola/>):
 
-![The graph of a second-degree polynomial is a continuous parabola, with no jumps or interruptions.](https://algebrica.org/wp-content/uploads/resources/images/discontinuity.png)
+![The graph of a second-degree polynomial is a continuous parabola, with no jumps or interruptions.](/diagrams/algebrica/discontinuity.png)
 
 A discontinuity at \\( x_0 \\) arises whenever this equality does not hold, and the specific way in which the condition fails determines the type of discontinuity.
 
@@ -81,7 +81,7 @@ To analyse the jump discontinuity, consider the following simple function, which
 
 \\[f(x) = \begin{cases} 0 & \text{if } x < 1 \\\\[6pt] 2 & \text{if } x \ge 1 \end{cases} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/discontinuity-2.png)
+![](/diagrams/algebrica/discontinuity-2.png)
 
 For values of \\(x\\) approaching \\(1\\) from the left, the function remains constant at \\(0\\). Therefore:
 
@@ -107,7 +107,7 @@ For example, consider the following function:
 
 \\[f(x) = \frac{1}{x - 2} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/discontinuity-3.png)
+![](/diagrams/algebrica/discontinuity-3.png)
 
 The behaviour of this function near \\( x_0 = 2 \\) is analysed as follows. As \\( x \to 2^- \\), the denominator \\( x - 2 \\) becomes negative and approaches zero, causing the function to decrease without bound. Therefore we have:
 

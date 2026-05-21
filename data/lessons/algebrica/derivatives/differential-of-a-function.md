@@ -14,7 +14,7 @@ From the formula, it follows that the first derivative of a function is the rati
 
 \\[f’(x) = \frac{\mathrm{d}y}{\mathrm{d}x} \tag{3} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/differential.png)
+![](/diagrams/algebrica/differential.png)
 
 From a geometric point of view, consider the triangle ABC. By the properties of [trigonometry](<../tag/trigonometry/>) and of right triangles, the side \\(\overline{BC}\\) can be rewritten as:
 

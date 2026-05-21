@@ -76,6 +76,29 @@ def api_call(params):
             raise
 
 
+def check_redirect(title):
+    """Check if a page is a redirect before fetching content."""
+    params = {
+        "action": "query",
+        "titles": title,
+        "redirects": "1",
+        "format": "json",
+        "formatversion": "2",
+    }
+    try:
+        data = api_call(params)
+        pages = data.get("query", {}).get("pages", [])
+        for p in pages:
+            if "redirect" in p.get("title", "").lower() or p.get("pageid", 0) == 0:
+                return True
+        # Check if any redirect happened
+        if data.get("query", {}).get("redirects"):
+            return True
+    except Exception:
+        pass
+    return False
+
+
 def fetch_wikitext(title, section=None):
     params = {
         "action": "parse",
@@ -88,7 +111,11 @@ def fetch_wikitext(title, section=None):
         params["section"] = str(section)
     try:
         data = api_call(params)
-        return data["parse"]["wikitext"]
+        wt = data["parse"]["wikitext"]
+        if wt.strip().startswith("#REDIRECT"):
+            print(f"  [skip] page/section is a redirect: {title}", file=sys.stderr)
+            return ""
+        return wt
     except Exception as e:
         print(f"  [error] fetching section {section}: {e}", file=sys.stderr)
         return ""
@@ -114,8 +141,7 @@ def fetch_sections(title):
 
 
 def remove_file_refs(text):
-    """Remove [[File:...]], [[Image:...]], [[Category:...]] entirely."""
-    # Remove [[File:...]], [[Image:...]], [[Category:...]] handling nested [[...]]
+    """Remove remaining [[Category:...]] and any unconverted [[File:...]]/[[Image:...]] refs."""
     result = []
     i = 0
     while i < len(text):
@@ -152,28 +178,24 @@ def remove_refs(text):
 
 
 def remove_templates(text):
-    """Remove {{...}} templates, converting simple formatting ones."""
-    # Convert {{tmath|...}} and {{tmath|1=...}} → LaTeX
+    """Remove {{...}} templates, converting simple formatting ones.
+    Uses a loop to handle nested templates (innermost first)."""
+    # First pass: convert known formatting templates before stripping
     def tmath_replacer(m):
         inner = m.group(1)
         if inner.startswith('1='):
             inner = inner[2:]
         return '\\(%s\\)' % inner.strip()
     text = re.sub(r'\{\{tmath\|([^}]+)\}\}', tmath_replacer, text)
-    # Convert {{mvar|...}} → \(...\)
     text = re.sub(r'\{\{mvar\|([^}]+)\}\}', r'\\(\1\\)', text)
-    # Convert {{frac|a|b}} → a/b
     text = re.sub(r'\{\{frac\|([^|}]+)\|([^|}]+)\}\}', r'\1/\2', text)
-    # Convert {{sqrt|a}} → sqrt(a)
     text = re.sub(r'\{\{sqrt\|([^}]+)\}\}', r'sqrt(\1)', text)
-    # Convert {{abs|a}} → |a|
     text = re.sub(r'\{\{abs\|([^}]+)\}\}', r'|\1|', text)
-    # Convert {{nobreak|...}}, {{nowrap|...}} → just content
     text = re.sub(r'\{\{(?:nobreak|nowrap)\|([^}]+)\}\}', r'\1', text)
-    # Convert {{math|...}} → just content  
     text = re.sub(r'\{\{math\|([^}]+)\}\}', r'\1', text)
-    # Handle {{...}} with pipe-separated params: keep first content param, drop named (1=...)
-    def general_template(m):
+
+    # Handle nested templates by repeatedly stripping innermost {{...}}
+    def strip_inner_template(m):
         inner = m.group(1)
         parts = inner.split('|')
         if len(parts) <= 1:
@@ -183,16 +205,82 @@ def remove_templates(text):
             if '=' in p:
                 continue
             significant.append(p)
-        return ''.join(significant) if significant else parts[-1].split('=')[-1] if '=' in parts[-1] else ''
-    text = re.sub(r'\{\{([^{}]+)\}\}', general_template, text)
+        if significant:
+            return ''.join(significant)
+        if '=' in parts[-1]:
+            return parts[-1].split('=')[-1]
+        return ''
+
+    changed = True
+    while changed:
+        changed = False
+        new_text = re.sub(r'\{\{([^{}]+)\}\}', lambda m: strip_inner_template(m) or '', text)
+        if new_text != text:
+            changed = True
+            text = new_text
     # Clean up any leftover single braces from unmatched templates
     text = re.sub(r'^[\}\{]+', '', text)
     text = re.sub(r'[\}\{]+$', '', text)
     return text
 
 
+def convert_file_refs(text):
+    """Convert standalone File: and Image: references to Markdown images.
+    Handles: File:Diagram.svg|Caption → ![Caption](/diagrams/wikipedia/Diagram.svg)"""
+    def file_replacer(m):
+        prefix = m.group(1)  # File or Image
+        filename = m.group(2).strip()
+        caption = m.group(3).strip() if m.group(3) else filename
+        # Remove any size specifiers like |400px
+        filename = re.sub(r'\|[0-9]+px', '', filename)
+        caption = re.sub(r'\|[0-9]+px', '', caption)
+        return '![' + caption + '](/diagrams/wikipedia/' + filename + ')'
+
+    text = re.sub(
+        r'^\[\[(File|Image):([^\|\]]+)(?:\|([^\]]*))?\]\]',
+        file_replacer,
+        text,
+        flags=re.MULTILINE,
+    )
+    # Also handle bare File:/Image: without [[ ]]
+    text = re.sub(
+        r'^(File|Image):([^\|\n]+)(?:\|([^\n]*))?',
+        file_replacer,
+        text,
+        flags=re.MULTILINE,
+    )
+    return text
+
+
+def convert_wiki_tables(text):
+    """Convert {| |} wiki table syntax to Markdown tables where possible.
+    Complex tables (with colspan, rowspan, etc.) are stripped entirely."""
+    # Strip complex tables that have colspan/rowspan or are clearly layout-only
+    if re.search(r'colspan|rowspan|style=|[|]{|}\|', text):
+        text = re.sub(
+            r'\{\|.*?\|\}',
+            '',
+            text,
+            flags=re.DOTALL,
+        )
+    # Attempt simple table conversion for basic {| ... |} syntax
+    # For now, strip all remaining wiki table markup that wasn't caught
+    text = re.sub(r'^\{\|.*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\|\}.*', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\|[\+\!].*', '', text, flags=re.MULTILINE)
+    # Convert simple |- row separators to blank lines
+    text = re.sub(r'^\|-\s*$', '', text, flags=re.MULTILINE)
+    # Convert | cell delimiter to | for simple rows
+    text = re.sub(r'^\|(.*?)\|$', r'| \1 |', text, flags=re.MULTILINE)
+    # Clean up remaining wiki table artifacts
+    text = re.sub(r'\|\}', '', text)
+    return text
+
+
 def convert_links(text):
     """Convert [[Target|display]] → display and [[Target]] → Target."""
+    # Process file refs BEFORE regular links so image syntax takes priority
+    text = convert_file_refs(text)
     text = re.sub(r'\[\[([^\]]*\|([^\]]*))\]\]', r'\2', text)
     text = re.sub(r'\[\[([^\]]+)\]\]', r'\1', text)
     text = re.sub(r'\[(https?://[^\s\]]+)\s+([^\]]+)\]', r'\2', text)
@@ -249,11 +337,16 @@ def clean_wikitext(wikitext):
     text = remove_refs(text)
     text = remove_file_refs(text)
     text = remove_gallery(text)
+    # Convert wiki tables before math to avoid mangling LaTeX inside cells
+    text = convert_wiki_tables(text)
     # Process math (convert <math>...</math> to LaTeX)
     text = convert_math(text)
     # Convert <sup>/<sub> to LaTeX notation (remaining after template removal)
     text = re.sub(r'<sup>([^<]+)</sup>', r'\\(^{\1}\\)', text)
     text = re.sub(r'<sub>([^<]+)</sub>', r'\\(_{\1}\\)', text)
+    # Remove entire <table> and <dl> blocks (too complex for clean conversion)
+    text = re.sub(r'<table[^>]*>.*?</table>', '', text, flags=re.DOTALL)
+    text = re.sub(r'<dl[^>]*>.*?</dl>', '', text, flags=re.DOTALL)
     # Remove any remaining HTML tags except <b>, <i>, <em>, <strong>
     text = re.sub(r'</(?!b>|i>|em>|strong>)[a-z]+\s*>', '', text)
     text = re.sub(r'<(?![/]?b>|[/]?i>|[/]?em>|[/]?strong>)[a-z]+[^>]*>', '', text, flags=re.DOTALL)

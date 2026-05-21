@@ -87,7 +87,4 @@ be a basis of. By definition of a basis, every **v** in may be written, in a uni
 \mathbf v = \lambda_1 \mathbf b_1 + \cdots + \lambda_n \mathbf b_n,
 \]
 
-where the coefficients \(\lambda_1, \ldots, \lambda_n\) are scalars (that is, elements of ), which are called the *coordinates* of **v** over. However, if one talks of the *set* of the coefficients, one loses the correspondence between coefficients and basis elements, and several vectors may have the same *set* of coefficients. For example, \(3 \mathbf b_1 + 2 \mathbf b_2\) and \(2 \mathbf b_1 + 3 \mathbf b_2\) have the same set of coefficients 
-\[
-N\leq {\exp}\bigl(\tfrac14\varepsilon^2n\bigr)\sqrt{-\ln(1-\theta)}
-\]
+where the coefficients \(\lambda_1, \ldots, \lambda_n\) are scalars (that is, elements of ), which are called the *coordinates* of **v** over. However, if one talks of the *set* of the coefficients, one loses the correspondence between coefficients and basis elements, and several vectors may have the same *set* of coefficients. For example, \(3 \mathbf b_1 + 2 \mathbf b_2\) and \(2 \mathbf b_1 + 3 \mathbf b_2\) have the same set of coefficients.

@@ -50,7 +50,7 @@ Here \\( J_g(x) \\) denotes the Jacobian matrix of \\( g \\) at \\( x \\), that 
 
 To make the reasoning precise, it is convenient to describe the computation performed by a neural network by means of a directed computational graph. In this graph, square nodes represent variables (parameters, activations, inputs, outputs) while circular nodes represent operations (matrix multiplication, application of a nonlinearity, computation of the loss). Directed edges indicate the dependencies between variables and operations.
 
-![Neural network.](https://algebrica.org/wp-content/uploads/resources/images/neural-network.png)
+![Neural network.](/diagrams/algebrica/neural-network.png)
 
 > For simplicity, in the example presented below, the effect of bias terms along the backpropagation chain is not explicitly considered, as their contribution follows analogous derivative rules.
 
@@ -75,7 +75,7 @@ The concrete technique by which backpropagation is implemented is called reverse
 
 \\[\frac{\partial L}{\partial L} = 1 \\]
 
-![Nerual network: backpropagation.](https://algebrica.org/wp-content/uploads/resources/images/neural-network-2.png)
+![Nerual network: backpropagation.](/diagrams/algebrica/neural-network-2.png)
 
 This initial value constitutes the starting point from which the gradient is propagated backwards through all the nodes of the graph. In the following steps, we trace this propagation in detail, moving from the output layer back to the first set of parameters, and deriving at each stage the gradient that will eventually be used to update the weights.
 
@@ -85,7 +85,7 @@ The next node encountered when proceeding backwards is the one that computes the
 
 \\[\frac{\partial L}{\partial \mathbf{o}} = \left(\frac{\partial L}{\partial L} \cdot \frac{\partial L}{\partial \mathbf{o}}\right) = \frac{\partial L}{\partial \mathbf{o}} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/neural-network-3.png)
+![](/diagrams/algebrica/neural-network-3.png)
 
 This gradient depends on the specific form of the loss function. For a quadratic loss \\(\ell(\mathbf{o}, \mathbf{y}) = |\mathbf{o} - \mathbf{y}|^2\\), for instance, one has \\(\frac{\partial L}{\partial \mathbf{o}} = 2(\mathbf{o} - \mathbf{y})\\). The concrete value of \\(\mathbf{o}\\) is available because it was computed and stored during the forward pass.
 
@@ -95,7 +95,7 @@ The second linear layer computes \\(\mathbf{o} = W^{(2)} \mathbf{h}\\). To deter
 
 \\[\frac{\partial L}{\partial W^{(2)}} = \frac{\partial L}{\partial \mathbf{o}} \cdot \frac{\partial \mathbf{o}}{\partial W^{(2)}} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/neural-network-4.png)
+![](/diagrams/algebrica/neural-network-4.png)
 
 Since \\(\mathbf{o} = W^{(2)} \mathbf{h}\\) is a linear transformation, the derivative of \\(\mathbf{o}\\) with respect to \\(W^{(2)}\\) applied to the already known gradient produces the following result:
 
@@ -109,7 +109,7 @@ Before being able to ascend to the first layer, it is necessary to compute the g
 
 \\[\frac{\partial L}{\partial \mathbf{h}} = \left(\frac{\partial \mathbf{o}}{\partial \mathbf{h}}\right)^{\top} \frac{\partial L}{\partial \mathbf{o}} = \left(W^{(2)}\right)^{\top} \frac{\partial L}{\partial \mathbf{o}} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/neural-network-5.png)
+![](/diagrams/algebrica/neural-network-5.png)
 
 The transpose of \\(W^{(2)}\\) arises naturally in the computation of the gradient with respect to the input of a linear transformation, and this is the mechanism that allows the error signal to propagate from the output towards the input of the network.
 
@@ -119,7 +119,7 @@ The next node in the graph, proceeding further backwards, is the one that applie
 
 \\[\frac{\partial L}{\partial \mathbf{z}} = \frac{\partial L}{\partial \mathbf{h}} \odot \phi’(\mathbf{z}) \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/neural-network-6.png)
+![](/diagrams/algebrica/neural-network-6.png)
 
 Here \\(\odot\\) denotes the element-wise product and \\(\phi’(\mathbf{z})\\) is the [vector](<../vectors/>) containing the values of the derivative of \\(\phi\\) evaluated at the points \\(z_1, z_2, \ldots, z_d\\) stored during the forward pass. This formula highlights an important aspect: if the derivative of the activation function is systematically small, the gradient attenuates at every layer until it vanishes in the deepest layers. This phenomenon is known as the vanishing gradient problem and is one of the reasons why the choice of activation function has important consequences for the training of deep networks.
 
@@ -140,7 +140,7 @@ The last parametric node encountered when ascending the graph is the multiplicat
 
 \\[\frac{\partial L}{\partial W^{(1)}} = \frac{\partial L}{\partial \mathbf{z}} \, \mathbf{x}^{\top} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/neural-network-7.png)
+![](/diagrams/algebrica/neural-network-7.png)
 
 Here again the gradient has the same shape as the weight matrix, and is expressed as the outer product between the error signal propagated up to this point and the input vector \\(\mathbf{x}\\), also available from the forward pass.
 

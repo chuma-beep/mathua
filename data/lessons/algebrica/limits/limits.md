@@ -6,7 +6,7 @@ The concept of a **limit** is fundamental in mathematics. Intuitively, the limit
 
 A neighbourhood of \\( x \\) refers to an interval consisting of all points sufficiently close to \\( x \\). More formally, a neighbourhood of \\( x \\) is any open interval \\( (x - \delta, x + \delta) \\) where \\( \delta > 0 \\). This concept is essential for defining limits and understanding the behaviour of functions as they approach a given point.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/limits-1.png)
+![](/diagrams/algebrica/limits-1.png)
 
 The smaller the neighbourhood, the closer the points are to \\( x \\). In other words, as the interval \\( (x - \delta, x + \delta) \\) becomes narrower (with \\( \delta \\) approaching zero), the distance between the points within the neighbourhood and \\( x \\) decreases.
 
@@ -44,7 +44,7 @@ Additionally, the value of the limit itself can be either a finite number or \\(
 
 When the limit of \\( f(x) \\) exists and tends to \\(\pm \infty\\) as \\( x \\) approaches a finite real number, the behaviour of the function can resemble the simplified pattern shown in the figure. The line \\( x = k \\) is called a **vertical asymptote** :
 
-![](https://algebrica.org/wp-content/uploads/resources/images/limits-2.png)
+![](/diagrams/algebrica/limits-2.png)
 
 In the example, we have the case where the right-hand and left-hand limits of \\( f(x) \\) are, respectively:
 
@@ -53,7 +53,7 @@ In the example, we have the case where the right-hand and left-hand limits of \\
 
 When the limit of \\( f(x) \\) exists and approaches a finite value \\( L \\) as \\( x \\) tends to \\( \pm \infty \\), the behaviour of the function can resemble the simplified pattern shown in the figure. The line \\( y = L \\) is called a **horizontal asymptote** :
 
-![](https://algebrica.org/wp-content/uploads/resources/images/limits-3.png)
+![](/diagrams/algebrica/limits-3.png)
 
 In the example, we have the case where the right-hand and left-hand limits of \\( f(x) \\) are, respectively:
 

@@ -17,7 +17,7 @@ Its graph is a periodic curve with period \\(2\pi\\). Because cosine reaches the
 
 where the reciprocal \\(1/\cos(x)\\) becomes undefined.
 
-![Secant graph with asymptotic behaviour.](https://algebrica.org/wp-content/uploads/resources/images/secant-1-1.png)
+![Secant graph with asymptotic behaviour.](/diagrams/algebrica/secant-1-1.png)
 
 These asymptotes separate the graph into distinct branches in which the function grows without bound as the angle approaches any of these points. The [domain](<../determining-the-domain-of-a-function/>) of \\(\sec(x)\\) is therefore the set of all real numbers except the points where \\(\cos(x)=0\\). Its range consists of the unbounded intervals \\((-\infty, -1] \cup [1, \infty)\\) reflecting the fact that the cosine function never takes values whose absolute value exceeds \\(1\\), making its reciprocal always greater than or equal to 1 in magnitude.
 

@@ -14,7 +14,7 @@ The condition \\( h \neq 0 \\) is necessary: for \\( h = 0 \\) the points \\( A 
 
 the **difference quotient** of \\(f\\) at the point \\(c\\) is the slope of the line passing through \\(A\\) and \\(B\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/difference-quotient-2.png)
+![](/diagrams/algebrica/difference-quotient-2.png)
 
 The difference quotient is fundamental to the definition of the [derivative](<../derivatives>). The derivative of a function at a point is the [limit](<../limits/>) of the difference quotient as \\(h\\) approaches zero.
 

@@ -18,7 +18,7 @@ Recall that given a complex number \\(z = a + bi\\), its [conjugate](<../complex
 
 The number \\(\overline{z}\\) is represented in the Gaussian plane by the point symmetric to \\(z\\) with respect to the \\(x\\)-axis.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quad-eq-complex-roots.png)
+![](/diagrams/algebrica/quad-eq-complex-roots.png)
 
 ##### This geometric interpretation highlights how conjugate roots naturally arise when solving quadratic equations with negative discriminant, providing a visual link between algebraic expressions and their representation in the complex plane.
 

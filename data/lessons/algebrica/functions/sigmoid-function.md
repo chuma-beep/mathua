@@ -28,7 +28,7 @@ The sigmoid function can be written in equivalent forms that are sometimes more 
 
 This expression is entirely equivalent to the original definition and can simplify certain algebraic manipulations.
 
-![Sigmoid function.](https://algebrica.org/wp-content/uploads/resources/images/sigmoid-function.png)
+![Sigmoid function.](/diagrams/algebrica/sigmoid-function.png)
 
   * The [domain](<../determining-the-domain-of-a-function/>) is \\(\mathbb{R}\\), while the range is the open interval \\((0,1)\\).
   * The function is strictly increasing on \\(\mathbb{R}\\), since its [derivative](<../derivatives/>) is always positive, and is therefore bijective from \\(\mathbb{R}\\) onto \\((0,1)\\).
@@ -84,7 +84,7 @@ Applying the product rule and substituting the expression for \\(\sigma’(x)\\)
 
 The sign of \\(\sigma’'(x)\\) is determined entirely by the factor \\(1 - 2\sigma(x)\\), since \\(\sigma(x)(1 - \sigma(x)) > 0\\) for all \\(x \in \mathbb{R}\\). Since \\(\sigma\\) is strictly increasing and \\(\sigma(0) = \tfrac{1}{2}\\), the factor \\(1 - 2\sigma(x)\\) is positive for \\(x < 0\\) and negative for \\(x > 0\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sigmoid-function-second-derivative-1-1024x558.png)
+![](/diagrams/algebrica/sigmoid-function-second-derivative-1-1024x558.png)
 
 It follows that the function is concave upward on \\((-\infty, 0)\\) and concave downward on \\((0, +\infty)\\). The point \\(x = 0\\) is therefore an inflection point, at which \\(\sigma’'(0) = 0\\) and the concavity changes sign.
 

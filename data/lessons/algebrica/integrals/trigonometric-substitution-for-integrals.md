@@ -98,7 +98,7 @@ The standard correspondences for \\(\sqrt{a^2-x^2}\\) can be summarized as follo
 
 When working with trigonometric substitutions, it is often useful to visualize the relationship between \\(\theta\\) and \\(x\\) through a right triangle. Reading the values of the trigonometric functions directly from the sides of the triangle removes the need to solve for \\(\theta\\) explicitly.
 
-![trigonometric-substitution-for-integrals](https://algebrica.org/wp-content/themes/algebrica-dev/svg/integrals/trigonometric-substitution-for-integrals-1.svg)
+![trigonometric-substitution-for-integrals](/diagrams/algebrica/trigonometric-substitution-for-integrals-1.svg)
 
 From \\(x = a\sin\theta\\), we construct a right triangle where:
 

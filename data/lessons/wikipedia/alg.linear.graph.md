@@ -18,10 +18,10 @@ Given a graph , its line graph *L*(*G*) is a graph such that
 ## Example
 The following figures show a graph (left, with blue vertices) and its line graph (right, with green vertices). Each vertex of the line graph is shown labeled with the pair of endpoints of the corresponding edge in the original graph. For instance, the green vertex on the right labeled 1,3 corresponds to the edge on the left between the blue vertices 1 and 3. Green vertex 1,3 is adjacent to three other green vertices: 1,4 and 1,2 (corresponding to edges sharing the endpoint 1 in the blue graph) and 4,3 (corresponding to an edge sharing the endpoint 3 in the blue graph).
 
-File:Line graph construction 1.svg|Graph *G*
-File:Line graph construction 2.svg|Vertices in L(*G*) constructed from edges in *G*
-File:Line graph construction 3.svg|Added edges in L(*G*)
-File:Line graph construction 4.svg|The line graph L(*G*)
+![Graph *G*](/diagrams/wikipedia/Line_graph_construction_1.svg)
+![Vertices in L(*G*)](/diagrams/wikipedia/Line_graph_construction_2.svg)
+![Added edges in L(*G*)](/diagrams/wikipedia/Line_graph_construction_3.svg)
+![The line graph L(*G*)](/diagrams/wikipedia/Line_graph_construction_4.svg)
 
 ## Properties
 ### Translated properties of the underlying graph

@@ -4,7 +4,7 @@
 
 A simple harmonic motion is a straight-line motion obtained by projecting the uniform circular motion of a body onto a fixed diameter of the circle. In this case, a material point repeatedly moves along the diameter, oscillating back and forth, and returning to the same position at regular [intervals](<../intervals/>) of time equal to the period of the motion.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/harmonic-motion-1.png)
+![](/diagrams/algebrica/harmonic-motion-1.png)
 
 This projection creates a smooth and continuous oscillation, where the displacement from the center varies [sinusoidally](<../sine-and-cosine>) with time. The position as a function of time for simple harmonic motion is given by the equation:
 

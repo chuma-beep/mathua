@@ -55,8 +55,8 @@ The difference between Euler and Venn diagrams can be seen in the following exam
 
 The Euler and the Venn diagram of those sets are:
 
-File:3-set Euler diagram.svg|Euler diagram
-File:3-set Venn diagram.svg|Venn diagram
+![Euler diagram](/diagrams/wikipedia/3-set_Euler_diagram.svg)
+![Venn diagram](/diagrams/wikipedia/3-set_Venn_diagram.svg)
 
 ## Extensions to higher numbers of sets
 Venn diagrams typically represent two or three sets, but there are forms that allow for higher numbers. Shown below, four intersecting spheres form the highest order Venn diagram that has the symmetry of a simplex and can be visually represented. The 16 intersections correspond to the vertices of a tesseract (or the cells of a 16-cell, respectively).
@@ -66,20 +66,20 @@ Venn diagrams typically represent two or three sets, but there are forms that al
 
 For higher numbers of sets, some loss of symmetry in the diagrams is unavoidable. Venn was keen to find "symmetrical figures... elegant in themselves," that represented higher numbers of sets, and he devised an *elegant* four-set diagram using ellipses (see below). He also gave a construction for Venn diagrams for *any* number of sets, where each successive curve that delimits a set interleaves with previous curves, starting with the three-circle diagram.
 
-Image:Venn4.svg|Venn's construction for four sets (use Gray code to compute, the digit 1 means in the set, and the digit 0 means not in the set)
-Image:Venn5.svg|Venn's construction for five sets
-Image:Venn6.svg|Venn's construction for six sets
-Image:Venn's four ellipse construction.svg|Venn's four-set diagram using ellipses
-Image:CirclesN4xb.svg|**Non-example:** This Euler diagram is a Venn diagram for four sets as it has only 14 regions as opposed to 2\(^{4}\) = 16 regions (including the white region); there is no region where only the yellow and blue, or only the red and green circles meet.
-File:Symmetrical 5-set Venn diagram.svg|Five-set Venn diagram using congruent ellipses in a five-fold rotationally symmetrical arrangement devised by Branko Grünbaum. Labels have been simplified for greater readability; for example, **A** denotes **A** ∩ **B**\(^{c}\) ∩ **C**\(^{c}\) ∩ **D**\(^{c}\) ∩ **E**\(^{c}\), while **BCE** denotes **A**\(^{c}\) ∩ **B** ∩ **C** ∩ **D**\(^{c}\) ∩ **E**.
-File:6-set_Venn_diagram.svg|Six-set Venn diagram made of only triangles (interactive version)
+![Venn's construction for four sets](/diagrams/wikipedia/Venn4.svg)
+![Venn's construction for five sets](/diagrams/wikipedia/Venn5.svg)
+![Venn's construction for six sets](/diagrams/wikipedia/Venn6.svg)
+![Venn's four-set diagram using ellipses](/diagrams/wikipedia/Venns_four_ellipse_construction.svg)
+![Non-example: Euler diagram](/diagrams/wikipedia/CirclesN4xb.svg)
+![Five-set Venn diagram](/diagrams/wikipedia/Symmetrical_5-set_Venn_diagram.svg)
+![Six-set Venn diagram made of only triangles](/diagrams/wikipedia/6-set_Venn_diagram.svg)
 
 ### Edwards–Venn diagrams
 
-Image:Venn-three.svg| Three sets
-Image:Edwards-Venn-four.svg| Four sets
-Image:Edwards-Venn-five.svg| Five sets
-Image:Edwards-Venn-six.svg| Six sets
+![Three sets](/diagrams/wikipedia/Venn-three.svg)
+![Four sets](/diagrams/wikipedia/Edwards-Venn-four.svg)
+![Five sets](/diagrams/wikipedia/Edwards-Venn-five.svg)
+![Six sets](/diagrams/wikipedia/Edwards-Venn-six.svg)
 
 Anthony William Fairbank Edwards constructed a series of Venn diagrams for higher numbers of sets by segmenting the surface of a sphere, which became known as Edwards–Venn diagrams. For example, three sets can be easily represented by taking three hemispheres of the sphere at right angles (*x* = 0, *y* = 0 and *z* = 0). A fourth set can be added to the representation, by taking a curve similar to the seam on a tennis ball, which winds up and down around the equator, and so on. The resulting sets can then be projected back to a plane, to give *cogwheel* diagrams with increasing numbers of teeth—as shown here. These diagrams were devised while designing a stained-glass window in memory of Venn.
 

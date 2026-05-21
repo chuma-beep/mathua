@@ -105,7 +105,7 @@ Therefore, the function \\( x(x^2 - 2) \\) is positive for:
 
 We then represent on the Cartesian plane the intervals where the function must be located, excluding those in gray.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/graph-functions-1-2.png)
+![](/diagrams/algebrica/graph-functions-1-2.png)
 
 ## Asymptotes
 
@@ -195,7 +195,7 @@ At this point, we have all the necessary information to construct a qualitative-
 
 In the given example, we obtain the following graph:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/graph-functions-2.png)
+![](/diagrams/algebrica/graph-functions-2.png)
 
 In conclusion, studying the graph of a function requires a structured approach that involves identifying key properties such as domain, symmetry, intercepts, sign analysis, asymptotes, monotonicity, concavity, and critical points. Following these steps systematically ensures a precise and thorough understanding of the function’s behavior.
 

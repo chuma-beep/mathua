@@ -16,7 +16,7 @@ which extends the [factorial](<../factorial/>) to the real [domain](<../determin
 
 The support of the distribution is the positive half-line, reflecting the fact that it models durations, waiting times, or other quantities that cannot take negative values. The interaction between \\( \alpha \\) and \\( \beta \\) shapes the overall behavior: \\( \alpha \\) governs the internal structure, while \\( \beta \\) sets the scale.
 
-![Plot of the gamma distribution for different parameter values.](https://algebrica.org/wp-content/uploads/resources/images/gamma-distribution.png)
+![Plot of the gamma distribution for different parameter values.](/diagrams/algebrica/gamma-distribution.png)
 
 When \\(\alpha\\) grows beyond \\(1\\), the gamma density no longer peaks at zero but forms a maximum at a positive value of \\( x \\). As \\(\alpha\\) increases, this peak moves to the right and the overall shape becomes smoother and less skewed.
 

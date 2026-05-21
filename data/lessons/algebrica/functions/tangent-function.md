@@ -4,7 +4,7 @@
 
 The tangent function \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), expressed in radians, its corresponding [tangent](<../tangent-and-cotangent>) value. Its graph is a periodic curve with a period of \\(\pi\\) and features vertical [asymptotes](<../asymptotes/>) where the cosine of \\(x\\) equals zero, specifically at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\). The function \\(f(x) = \tan(x)\\) has a [domain](<../determining-the-domain-of-a-function/>) of all real numbers except these points, and its range is all real numbers.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/tangent-function.png)
+![](/diagrams/algebrica/tangent-function.png)
 
 A useful way to read this graph is to keep in mind that the tangent is defined as  
 \\[\tan(x) = \frac{\sin(x)}{\cos(x)} \\] Thinking of it as a ratio helps make sense of the curve: the tangent varies gently where the underlying [sine and cosine](<../sine-and-cosine/>) change smoothly, while it rises or falls sharply as the cosine approaches zero, shaping the overall appearance of the graph.

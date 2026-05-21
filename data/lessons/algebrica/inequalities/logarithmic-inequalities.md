@@ -43,7 +43,7 @@ The procedure can be structured into four fundamental steps:
 
 To explain the role played by the base of the logarithm, let us recall the behavior of the [logarithmic function](<../logarithmic-function/>) when \\(0 < a < 1\\). From its graph, we observe that the function is strictly decreasing over its entire domain, with a vertical asymptote along the \\(y\\)-axis:
 
-![Graph of the logarithmic function with base between zero and one.](https://algebrica.org/wp-content/uploads/resources/images/logharithm-5-1.png)
+![Graph of the logarithmic function with base between zero and one.](/diagrams/algebrica/logharithm-5-1.png)
 
 ##### The dashed curve represents the logarithmic function with base \\(a > 1\\). In this case, the function is strictly increasing. In both cases, when \\(x = 1\\), the value of the logarithmic function is \\(0\\), and the graphs intersect at the point \\((1,0)\\).
 

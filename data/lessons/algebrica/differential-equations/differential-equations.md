@@ -77,7 +77,7 @@ The solutions are represented by the integral curves given by the equation:
 
 \\[y(x) = \frac{3}{2}x^2 + c\\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/differential-equations-1-1.png)
+![](/diagrams/algebrica/differential-equations-1-1.png)
 
 
 ##### Each curve represents a particular solution of the general form. The value of \\( C \\) determines the vertical position (a vertical translation) of the curve. All the curves share the same upward-opening [parabolic](<../parabola>) shape, but they are vertically shifted depending on the value of \\( C \\). Together, this family of curves represents the complete set of solutions to the differential equation.
@@ -138,7 +138,7 @@ Since \\( c \\) is an arbitrary constant in \\( \mathbb{R} \\), which may be eit
 
 The solutions are represented by the following integral curves:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/differential-equations-2.png)
+![](/diagrams/algebrica/differential-equations-2.png)
 
 Therefore, the general solution is:
 

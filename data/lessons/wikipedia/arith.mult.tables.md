@@ -41,72 +41,26 @@ Tables showing all products of numbers from 1 to 10 or 1 to 12 are the sizes mos
 
 The common multi-digit multiplication algorithms taught in school break that problem down into a sequence of single-digit multiplication and multi-digit addition problems. Single-digit multiplication can be summarized in a 100-entry table of all products of digits from 0 to 9. Because 0 × *a* = 0 for any number , the rows and columns for multiplication by 0 are typically left out. Multiplication of integers is commutative, *a* × *b* = *b* × *a*. Therefore, the table is symmetric across its main diagonal, and can be reduced to 45 entries by only showing entries *a* × *b* where *a* ≥ *b*, as shown below. The table could be reduced further (to 36 entries) by leaving off rows and columns for multiplication by 1, the multiplicative identity, which satisfies *a* × 1 = *a*.
 
-| |1 | 1 | | | colspan=7, | |  |  |  |  |  |  |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| |2 | 2 | 4 | | | colspan=6, | |  |  |  |  |  |
-| style="text-align: right;|3 | 3 | 6 | 9 | | | colspan=5, | |  |  |  |  |
-| |4 | 4 | 8 | 12 | 16 | | | colspan=4, | |  |  |  |
-| |5 | 5 | 10 | 15 | 20 | 25 | | | colspan=3, | |  |  |
-| |6 | 6 | 12 | 18 | 24 | 30 | 36 | | | colspan=2, | |  |
-| |7 | 7 | 14 | 21 | 28 | 35 | 42 | 49 | | | | |
-| |8 | 8 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | | |
-| |9 | 9 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
-| |× | |1 | |2 | |3 | |4 | |5 | |6 | |7 | |8 | |9 |
+The condensed triangular table (showing only \(a \times b\) where \(a \ge b\)):
+
+|   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | 1 |   |   |   |   |   |   |   |   |
+| 2 | 2 | 4 |   |   |   |   |   |   |   |
+| 3 | 3 | 6 | 9 |   |   |   |   |   |   |
+| 4 | 4 | 8 | 12 | 16 |   |   |   |   |   |
+| 5 | 5 | 10 | 15 | 20 | 25 |   |   |   |   |
+| 6 | 6 | 12 | 18 | 24 | 30 | 36 |   |   |   |
+| 7 | 7 | 14 | 21 | 28 | 35 | 42 | 49 |   |   |
+| 8 | 8 | 16 | 24 | 32 | 40 | 48 | 56 | 64 |   |
+| 9 | 9 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 |
 
 The traditional rote learning of multiplication was based on memorization of columns in the table, arranged as follows.
-
-| | | | | | | | |
-| --- | --- | --- | --- |
 
 This form of writing the multiplication table in columns with complete number sentences is still used in some countries, such as Colombia, Bosnia and Herzegovina, instead of the modern grids above.
 
 ## Patterns in the tables
-There is a pattern in the multiplication table that can help people to memorize the table more easily. It uses the figures below:
-
-<table>
-  <tr>
-    <td>|→</td>
-    <td>|</td>
-    <td>|→</td>
-  </tr>
-  <tr>
-    <td>|↑</td>
-    <th>|1</th>
-    <th>2</th>
-    <th>|3</th>
-    <td>|↓</td>
-    <td>|↑</td>
-    <th>|2</th>
-    <th>|4</th>
-    <td>|↓</td>
-  </tr>
-  <tr>
-    <th>4 || 5 || 6</th>
-    <th>|| ||</th>
-  </tr>
-  <tr>
-    <th>|7</th>
-    <th>8</th>
-    <th>|9</th>
-    <th>|6</th>
-    <th>|8</th>
-  </tr>
-  <tr>
-    <td>|←</td>
-    <td>|←</td>
-  </tr>
-  <tr>
-    <th>0 ||</th>
-    <th>|5</th>
-    <td>|</td>
-    <th>|0</th>
-    <td>|</td>
-  </tr>
-  <tr>
-    <td>|Figure 1: Odd</td>
-    <td>|Figure 2: Even</td>
-  </tr>
-</table>
+There is a pattern in the multiplication table that can help people to memorize the table more easily.
 
 Figure 1 is used for multiples of 1, 3, 7, and 9. Figure 2 is used for the multiples of 2, 4, 6, and 8. These patterns can be used to memorize the multiples of any number from 0 to 10, except 5. As you would start on the number you are multiplying, when you multiply by 0, you stay on 0 (0 is external and so the arrows have no effect on 0, otherwise 0 is used as a link to create a perpetual cycle). The pattern also works with multiples of 10, by starting at 1 and simply adding 0, giving you 10, then just apply every number in the pattern to the "tens" unit as you would normally do as usual to the "ones" unit.
 

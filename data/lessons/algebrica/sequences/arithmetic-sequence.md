@@ -15,14 +15,14 @@ A [sequence](<../sequences>) \\( a_n \\) is called an **arithmetic sequence** (o
 
 Let’s consider, for example, the sequence of non-negative even numbers:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/arithmetic-sequence.png)
+![](/diagrams/algebrica/arithmetic-sequence.png)
 
 
 An arithmetic sequence can also be defined using a recursive formula:
 
 \\[a_n = a_1 + n \cdot d \quad \text{where } a_1, d \in \mathbb{R} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/arithmetic-sequence-2.png)
+![](/diagrams/algebrica/arithmetic-sequence-2.png)
 
 An arithmetic progression exhibits a characteristic stepwise pattern, where the height of each step corresponds to the common difference between consecutive terms in the sequence.
 

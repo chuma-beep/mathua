@@ -308,7 +308,7 @@ when *n* is a positive integer (this rule is true even if *n* is not positive or
 
 \[
 \begin{align}
-\frac{d x^{n+1{dx}
+\frac{d x^{n+1}}{dx}
 &{}= \frac{d}{dx} \left( x^n\cdot x\right) \\[1ex]
 &{}= x \frac{d}{dx} x^n + x^n \frac{d}{dx} x & \text{(the product rule is used here)} \\[1ex]
 &{}= x\left(n x^{n-1}\right) + x^n\cdot 1 & \text{(the induction hypothesis is used here)} \\[1ex]

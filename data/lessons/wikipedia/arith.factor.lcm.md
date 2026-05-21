@@ -141,34 +141,25 @@ Under this ordering, the positive integers become a lattice, with meet given by 
 
 The following pairs of dual formulas are special cases of general lattice-theoretic identities.
 
-{| style="margin:0;" cellpadding="0" border="0" cellspacing="0"
-|
-;Commutative laws
+**Commutative laws**
 \(\operatorname{lcm}(a, b) = \operatorname{lcm}(b, a),\)
 \(\gcd(a, b) =\gcd( b, a).\)
-|     
-|
-;Associative laws
+
+**Associative laws**
 \(\operatorname{lcm}(a,\operatorname{lcm}(b, c)) = \operatorname{lcm}(\operatorname{lcm}( b),c),\)
 \(\gcd(a, \gcd(b, c)) = \gcd(\gcd(a,b), c).\)
-|     
-|
-;Absorption laws:
+
+**Absorption laws:**
 \(\operatorname{lcm}(a, \gcd(a,b)) = a,\)
 \(\gcd(a, \operatorname{lcm}(a, b)) = a.\)
-|}
 
-{| style="margin:0;" cellpadding="0" border="0" cellspacing="0"
-|
-;Idempotent laws
+**Idempotent laws**
 \(\operatorname{lcm}(a, a) = a,\)
 \(\gcd(a, a) = a.\)
-|     
-|
-;Define divides in terms of lcm and gcd
+
+**Define divides in terms of lcm and gcd**
 \(a \ge b \iff a = \operatorname{lcm}(a,b),\)
 \(a \le b \iff a = \gcd(a,b).\)
-|}
 
 It can also be shown that this lattice is distributive; that is, lcm distributes over gcd and gcd distributes over lcm:
 

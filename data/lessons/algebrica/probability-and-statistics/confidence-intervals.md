@@ -43,7 +43,7 @@ which follows the standard normal distribution when the population variance \\( 
 
 where \\( z_{\alpha/2} \\) is the critical value such that the area in the two tails of the standard normal curve sums to \\( \alpha \\), and each tail individually accounts for \\( \alpha/2 \\). In other words, \\( z_{\alpha/2} \\) is chosen so that the area to its right under the standard normal density is exactly \\( \alpha/2 \\).
 
-![Confidence intervals.](https://algebrica.org/wp-content/uploads/resources/images/confidence-intervals.png)
+![Confidence intervals.](/diagrams/algebrica/confidence-intervals.png)
 
 To solve for the population mean \\( \mu \\), we substitute the expression for \\( Z \\) into the probability statement above, obtaining:
 

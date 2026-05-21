@@ -31,14 +31,14 @@ where \\(a, b, c, a’, b’, c’ \in \mathbb{C}\\), then the conic is said to 
 
 The **parabola** is a plane curve defined as the set of all points that are equidistant from a fixed point \\(F \\) called the focus, and a fixed line \\( d \\) called the directrix.
 
-![Parabola](https://algebrica.org/wp-content/uploads/resources/images/parabola-1.png)
+![Parabola](/diagrams/algebrica/parabola-1.png)
 
 The length of the segment \\( \overline{FP} \\) is the same as that of the segment \\( \overline{PD} \\). The parabola is one of the so-called conic sections which includes the circle, ellipse, and hyperbola. These curves can be obtained by intersecting a conical surface with a plane. The specific curve formed depends on the angle at which the plane intersects the cone.
 
 
 The line passing through the focus and perpendicular to the directrix is called the axis of the parabola. The point \\( V \\) where the parabola intersects this axis is known as the vertex.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-2.png)
+![](/diagrams/algebrica/parabola-2.png)
 
 The equation of a parabola with its vertex at the origin and its axis coinciding with the y-axis of the Cartesian plane is given by:
 
@@ -55,12 +55,12 @@ The equation of the directrix is:
 
 When the coefficient \\( a > 0 \\), the parabola opens upward. Therefore, \\( y \geq 0 \\) for every value of \\( x \\). The focus is also located on the positive half of the y-axis.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-3.png)
+![](/diagrams/algebrica/parabola-3.png)
 
 
 The coefficient \\( a \\) determines another characteristic of the parabola, namely its width or opening. If \\( a > 0 \\), as the value of \\( a \\) increases, the opening becomes narrower. Similarly, if \\( a < 0 \\) as the [absolute value](<../absolute-value>) of \\( a \\) increases, the opening also becomes narrower.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-4.png)
+![](/diagrams/algebrica/parabola-4.png)
 
 ## The parabola in standard quadratic form
 
@@ -94,7 +94,7 @@ The equation of the directrix is:
 
 Graphically, a generic \\(y = ax^2 + bx + c\\) parabola with its axis parallel to the y-axis looks like the following:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-5-1.png)
+![](/diagrams/algebrica/parabola-5-1.png)
 
   * When \\( b = 0 \\) and \\( c \neq 0 \\) the equation becomes \\(y = ax^2 + c\\). The parabola has its vertex at \\( V(0, c) \\), and its axis of symmetry is the y-axis.
 
@@ -118,7 +118,7 @@ The solutions of equation \\((5)\\) represent the \\( x \\)-coordinates of the i
 
 Below is the representation of a secant line intersecting the parabola at two points.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-6-2.png)
+![](/diagrams/algebrica/parabola-6-2.png)
 
 
 Now, let’s consider a point \\( P \\) on the plane and determine the lines passing through this point that are tangent to the parabola. There are three possible cases:
@@ -128,7 +128,7 @@ Now, let’s consider a point \\( P \\) on the plane and determine the lines pas
   * There is no line tangent to the parabola: in this case, the point \\(P\\) is internal to the parabola.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-7.png)
+![](/diagrams/algebrica/parabola-7.png)
 
 To find the equations of the lines passing through a given point \\( P(x_0, y_0) \\) and tangent to the parabola described by the equation \\( y = ax^2 + bx + c \\), we need to formulate and solve the system consisting of the parabola’s equation and the equation of the pencil of lines passing through \\( P \\). We have:
 

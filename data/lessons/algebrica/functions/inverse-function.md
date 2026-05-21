@@ -28,7 +28,7 @@ However, if we restrict the domain to \\( [0, +\infty) \\), the function becomes
 
 \\[f(x) = x^2 \rightarrow f^{-1}(x) = \sqrt{x} \quad \text{for} \; x \geq 0 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/inverse-function-1.png)
+![](/diagrams/algebrica/inverse-function-1.png)
 
 The graph of a function and that of its inverse are symmetric with respect to the line \\(y = x\\), which is the diagonal bisecting the first and third quadrants of the Cartesian plane.
 

@@ -21,7 +21,7 @@ Then, under these hypotheses, the function \\( g(x) \\) also admits a limit as \
 
 In the graph, the black curve representing \\( f(x) \\) lies entirely between the lower bound \\( g(x) \\) and the upper bound \\( h(x) \\). As both bounding functions tend to \\( \ell \\), the function \\( f(x) \\) is forced to approach the same limit.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/squeeze-theorem.png)
+![](/diagrams/algebrica/squeeze-theorem.png)
 
 This demonstrates the geometric intuition underlying the theorem: if a function is bounded above and below by two functions that both converge to the same value, then it must converge to that value.
 

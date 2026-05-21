@@ -31,7 +31,7 @@ Consider the setting: \\( f : A \subseteq \mathbb{R}^2 \to \mathbb{R} \\), where
 
 Geometrically, \\( \frac{\partial f}{\partial x}(x_0, y_0) \\) represents the slope of the curve formed by intersecting the graph of \\( f \\) with the plane \\( y = y_0 \\), while \\( \frac{\partial f}{\partial y}(x_0, y_0) \\) corresponds to the slope of the intersection with the plane \\( x = x_0 \\). Along each of these curves, \\( f \\) becomes a function of a single real variable.
 
-![Partial derivatives.](https://algebrica.org/wp-content/uploads/resources/images/partial-derivatives-1.png)
+![Partial derivatives.](/diagrams/algebrica/partial-derivatives-1.png)
 
 For example, consider the function of two variables:
 

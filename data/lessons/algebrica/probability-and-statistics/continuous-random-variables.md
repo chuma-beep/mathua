@@ -31,7 +31,7 @@ To determine the probability distribution of a continuous random variable \\( X 
 
 The resulting probability corresponds to the area under the curve of the probability density function \\( f(x) \\) between the limits \\( a \\) and \\( b \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/continuous-random-vars-1.png)
+![](/diagrams/algebrica/continuous-random-vars-1.png)
 
 
 To describe a continuous probability distribution, we use a **probability density function** \\( f(x) \\). This function defines how the probability is distributed across the possible values of the random variable \\( X \\). A function \\( f(x) \\) qualifies as a valid probability density if it satisfies the following conditions:

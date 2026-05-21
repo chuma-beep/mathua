@@ -10,12 +10,12 @@
 | \(\cot(x)\) | \(-\csc^2(x)\) |
 | \(\sec(x)\) | \(\sec(x)\tan(x)\) |
 | \(\csc(x)\) | \(-\csc(x)\cot(x)\) |
-| \(\arcsin(x)\) | \(\frac{1}{\sqrt{1-x^2\) |
-| \(\arccos(x)\) | \(-\frac{1}{\sqrt{1-x^2\) |
+| \(\arcsin(x)\) | \(\frac{1}{\sqrt{1-x^2}}\) |
+| \(\arccos(x)\) | \(-\frac{1}{\sqrt{1-x^2}}\) |
 | \(\arctan(x)\) | \(\frac{1}{x^2+1}\) |
 | \(\arccot(x)\) | \(-\frac{1}{x^2+1}\) |
-| \(\arcsec(x)\) | \(\frac{1}{|x|\sqrt{x^2-1\) |
-| \(\arccsc(x)\) | \(-\frac{1}{|x|\sqrt{x^2-1\) |
+| \(\arcsec(x)\) | \(\frac{1}{|x|\sqrt{x^2-1}}\) |
+| \(\arccsc(x)\) | \(-\frac{1}{|x|\sqrt{x^2-1}}\) |
 
 The **differentiation of trigonometric functions** is the mathematical process of finding the derivative of a trigonometric function, or its rate of change with respect to a variable. For example, the derivative of the sine function is written (*a*) = cos(*a*), meaning that the rate of change of sin(*x*) at a particular angle *x = a* is given by the cosine of that angle.
 
@@ -98,17 +98,17 @@ Using the limit for the sine function, the fact that the tangent function is odd
 
 ### Derivative of the sine function
 We calculate the derivative of the sine function from the limit definition:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\sin\theta = \lim_{\delta \to 0} \frac{\sin(\theta + \delta) - \sin \theta}{\delta}. \)
+\(\frac{d}{d\theta}\,\sin\theta = \lim_{\delta \to 0} \frac{\sin(\theta + \delta) - \sin \theta}{\delta}. \)
 
 Using the angle addition formula sin α cos β + sin β cos α, we have:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\sin\theta
+\(\frac{d}{d\theta}\,\sin\theta
  =
 \lim_{\delta \to 0} \frac{\sin\theta\cos\delta + \sin\delta\cos\theta-\sin\theta}{\delta}
  =
 \lim_{\delta \to 0} \left( \frac{\sin\delta}{\delta} \cos\theta
 + \frac{\cos\delta -1}{\delta}\sin\theta \right). \)
 Using the limits for the sine and for the cosine functions:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\sin\theta
+\(\frac{d}{d\theta}\,\sin\theta
  =
 (1)\cos\theta + (0)\sin\theta
  =
@@ -118,18 +118,18 @@ Using the limits for the sine and for the cosine functions:
 #### From the definition of derivative
 We again calculate the derivative of the cosine function from the limit definition:
 
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\cos\theta
+\(\frac{d}{d\theta}\,\cos\theta
  =
 \lim_{\delta \to 0} \frac{\cos(\theta+\delta)-\cos\theta}{\delta}. \)
 
 Using the angle addition formula cos α cos β – sin α sin β, we have:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\cos\theta
+\(\frac{d}{d\theta}\,\cos\theta
  =
 \lim_{\delta \to 0} \frac{\cos\theta\cos\delta - \sin\theta\sin\delta-\cos\theta}{\delta}
  =
 \lim_{\delta \to 0} \left(\frac{\cos\delta -1}{\delta}\cos\theta \,-\, \frac{\sin\delta}{\delta} \sin\theta \right). \)
 Using the limits for the sine and cosine functions:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\cos\theta
+\(\frac{d}{d\theta}\,\cos\theta
  = (0) \cos\theta - (1) \sin\theta = -\sin\theta \,. \)
 
 #### From the chain rule
@@ -149,20 +149,20 @@ Therefore, we have proven that
 ### Derivative of the tangent function
 #### From the definition of derivative
 To calculate the derivative of the tangent function tan *θ*, we use first principles. By definition:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\tan\theta
+\(\frac{d}{d\theta}\,\tan\theta
  = \lim_{\delta \to 0} \left( \frac{\tan(\theta+\delta)-\tan\theta}{\delta} \right). \)
 Using the well-known angle formula (tan α + tan β) / (1 - tan α tan β), we have:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\tan\theta
+\(\frac{d}{d\theta}\,\tan\theta
  = \lim_{\delta \to 0} \left[ \frac{\frac{\tan\theta + \tan\delta}{1 - \tan\theta\tan\delta} - \tan\theta}{\delta} \right]
  = \lim_{\delta \to 0} \left[ \frac{\tan\theta + \tan\delta - \tan\theta + \tan^2\theta\tan\delta}{\delta \left( 1 - \tan\theta\tan\delta \right)} \right]. \)
 Using the fact that the limit of a product is the product of the limits:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\tan\theta
+\(\frac{d}{d\theta}\,\tan\theta
  = \lim_{\delta \to 0} \frac{\tan\delta}{\delta} \times \lim_{\delta \to 0} \left( \frac{1 + \tan^2\theta}{1 - \tan\theta\tan\delta} \right). \)
 Using the limit for the tangent function, and the fact that tan *δ* tends to 0 as δ tends to 0:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\tan\theta
+\(\frac{d}{d\theta}\,\tan\theta
  = 1 \times \frac{1 + \tan^2\theta}{1 - 0} = 1 + \tan^2\theta. \)
 We see immediately that:
-\(\frac{\operatorname{d{\operatorname{d}\!\theta}\,\tan\theta
+\(\frac{d}{d\theta}\,\tan\theta
  = 1 + \frac{\sin^2\theta}{\cos^2\theta}
  = \frac{\cos^2\theta + \sin^2\theta}{\cos^2\theta}
  = \frac{1}{\cos^2\theta}
@@ -170,14 +170,14 @@ We see immediately that:
 
 #### From the quotient rule
 One can also compute the derivative of the tangent function using the quotient rule.
-\(\frac{\operatorname{d{\operatorname{d}\!\theta} \tan\theta
- = \frac{\operatorname{d{\operatorname{d}\!\theta} \frac{\sin\theta}{\cos\theta}
+\(\frac{d}{d\theta} \tan\theta
+ = \frac{d}{d\theta} \frac{\sin\theta}{\cos\theta}
  = \frac{\left(\sin\theta\right)^\prime \cdot \cos\theta - \sin\theta \cdot \left(\cos\theta\right)^\prime}{ \cos^2 \theta }
  = \frac{\cos^2 \theta + \sin^2 \theta}{\cos^2 \theta}\)
 The numerator can be simplified to 1 by the Pythagorean identity, giving us,
 \(\frac{1}{\cos^2 \theta} = \sec^2 \theta\)
 Therefore,
-\(\frac{\operatorname{d{\operatorname{d}\!\theta} \tan\theta = \sec^2 \theta\)
+\(\frac{d}{d\theta} \tan\theta = \sec^2 \theta\)
 
 ## Proofs of derivatives of inverse trigonometric functions
 The following derivatives are found by setting a variable *y* equal to the inverse trigonometric function that we wish to take the derivative of. Using implicit differentiation and then solving for *dy*/*dx*, the derivative of the inverse function is found in terms of *y*. To convert *dy*/*dx* back into being in terms of *x*, we can draw a reference triangle on the unit circle, letting *θ* be y. Using the Pythagorean theorem and the definition of the regular trigonometric functions, we can finally express *dy*/*dx* in terms of *x*.
@@ -333,7 +333,7 @@ Then
 \(\frac{dx}{dy} = \sec y \tan y = |x|\sqrt{x^2-1}\)
 (The absolute value in the expression is necessary as the product of secant and tangent in the interval of y is always nonnegative, while the radical \(\sqrt{x^2-1}\) is always nonnegative by definition of the principal square root, so the remaining factor must also be nonnegative, which is achieved by using the absolute value of x.)
 
-\(\frac{dy}{dx} = \frac{1}{|x|\sqrt{x^2-1\)
+\(\frac{dy}{dx} = \frac{1}{|x|\sqrt{x^2-1}}\)
 
 #### Using the chain rule
 Alternatively, the derivative of arcsecant may be derived from the derivative of arccosine using the chain rule.
@@ -348,11 +348,11 @@ Where
 
 Then, applying the chain rule to \(\arccos \left(\frac{1}{x}\right)\):
 
-\(\frac{dy}{dx} = -\frac{1}{\sqrt{1-\left(\frac{1}{x}\right)^2\cdot \left(-\frac{1}{x^2}\right)
- = \frac{1}{x^2\sqrt{1-\frac{1}{x^2}
- = \frac{1}{x^2} \cdot \frac{\sqrt{x^2-1{\sqrt{x^2
- = \frac{1}{\sqrt{x^2}\sqrt{x^2-1
- = \frac{1}{|x|\sqrt{x^2-1\)
+\(\frac{dy}{dx} = -\frac{1}{\sqrt{1-\left(\frac{1}{x}\right)^2}} \cdot \left(-\frac{1}{x^2}\right)
+ = \frac{1}{x^2\sqrt{1-\frac{1}{x^2}}}
+ = \frac{1}{x^2} \cdot \frac{\sqrt{x^2-1}}{\sqrt{x^2}}
+ = \frac{1}{\sqrt{x^2}\sqrt{x^2-1}}
+ = \frac{1}{|x|\sqrt{x^2-1}}\)
 
 ### Differentiating the inverse cosecant function
 #### Using implicit differentiation
@@ -381,8 +381,8 @@ Where
 
 Then, applying the chain rule to \(\arcsin \left(\frac{1}{x}\right)\):
 
-\(\frac{dy}{dx} =\frac{1}{\sqrt{1-(\frac{1}{x})^2\cdot \left(-\frac{1}{x^2}\right)
- = -\frac{1}{x^2\sqrt{1-\frac{1}{x^2}
- = -\frac{1}{x^2} \cdot \frac{\sqrt{x^2-1{\sqrt{x^2
- = -\frac{1}{\sqrt{x^2}\sqrt{x^2-1
- = -\frac{1}{|x|\sqrt{x^2-1\)
+\(\frac{dy}{dx} = \frac{1}{\sqrt{1-(\frac{1}{x})^2}} \cdot \left(-\frac{1}{x^2}\right)
+ = -\frac{1}{x^2\sqrt{1-\frac{1}{x^2}}}
+ = -\frac{1}{x^2} \cdot \frac{\sqrt{x^2-1}}{\sqrt{x^2}}
+ = -\frac{1}{\sqrt{x^2}\sqrt{x^2-1}}
+ = -\frac{1}{|x|\sqrt{x^2-1}}\)

@@ -15,7 +15,7 @@ In order for the equation to describe a quadratic curve, at least one among \\(a
 
 The specific type of conic obtained depends on the relative values of these coefficients, and in particular on the sign of the [discriminant](<../quadratic-formula/>) associated with the quadratic part. The circumference corresponds to the simplest and most symmetric case, in which the coefficients of \\(x^2\\) and \\(y^2\\) are equal and the mixed term \\(a_{12}xy\\) vanishes.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/conic-circle-1.png)
+![](/diagrams/algebrica/conic-circle-1.png)
 
 From a geometric standpoint, this algebraic symmetry reflects the way the plane intersects the cone. When the cutting plane is perpendicular to the axis of the cone, the resulting section is a circumference, whose points are all equidistant from the axis itself. Any deviation from this perpendicularity breaks the symmetry between the two quadratic coefficients and produces one of the other conic sections.
 
@@ -25,7 +25,7 @@ Given a point \\(C\\) in the plane, called the center, the circumference is defi
 
 \\[d(P, C) = r \qquad r \in \mathbb{R} \quad \ r > 0 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-5.png)
+![](/diagrams/algebrica/circumference-5.png)
 
 Let \\(C = (x_0, y_0)\\) be the coordinates of the center and \\(P = (x, y)\\) a generic point of the circumference. Using the formula for the distance between two points in the plane, the condition \\(d(P,C) = r\\) becomes:
 
@@ -90,7 +90,7 @@ The terms circle and circumference are often used interchangeably but they refer
 
 Once the circumference has been defined, it is useful to introduce the basic geometric elements associated with it: the radius, the chord, the diameter, and the circle itself. These elements appear in the study of conics and in trigonometric applications and each of them identifies a specific relationship between points, segments, and regions of the plane.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-2.png)
+![](/diagrams/algebrica/circumference-2.png)
 
   * A radius is any [line](<../lines>) segment that connects the center of the circumference to a point on the circumference itself.
   * A chord is any segment whose endpoints both lie on the circumference.
@@ -102,7 +102,7 @@ Among these elements, the chord plays a particularly important role, because its
 
 \\[c = 2r \cdot \sin\\!\left(\frac{\theta}{2}\right) \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-10.png)
+![](/diagrams/algebrica/circumference-10.png)
 
 The formula has a geometric interpretation: the chord, together with the two radii joining its endpoints to the center, forms an isosceles triangle whose apex angle is \\(\theta\\), and the expression \\(2r\sin(\theta/2)\\) is precisely the length of the base of that triangle.
 
@@ -110,7 +110,7 @@ The formula has a geometric interpretation: the chord, together with the two rad
 
 An arc is a portion of a circumference bounded by two of its points. The endpoints of a chord divide the circumference into two arcs, and we say that the chord subtends the two arcs, or equivalently that each arc is subtended by the chord.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-3-1.png)
+![](/diagrams/algebrica/circumference-3-1.png)
 
 If \\(\theta\\) denotes the central angle corresponding to the arc, measured in radians, and \\(r\\) the radius of the circumference, the length of the arc is given by the formula:
 
@@ -121,7 +121,7 @@ A circular sector is the portion of a circle enclosed between an arc and the two
 
 \\[A = \frac{1}{2} r^2 \theta \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-6.png)
+![](/diagrams/algebrica/circumference-6.png)
 
 Arcs represent measurable portions of a circumference, and are directly linked to central angles. Sectors, defined by an arc and two radii, allow us to compute areas and relate angular measures to linear distances. These concepts are essential for deriving arc length formulas and solving problems in trigonometry.
 
@@ -149,7 +149,7 @@ This is the simplest non-trivial instance of the general form, and it coincides 
 
 The position of a line with respect to a circumference depends on the distance between the line and the center. A [line](<../lines/>) can be classified as secant, tangent, or external to the circumference, and denoting by \\(D\\) the distance from the center to the line and by \\(r\\) the radius, the three cases are mutually exclusive and cover all possibilities.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/circumference-4.png)
+![](/diagrams/algebrica/circumference-4.png)
 
   * A line is secant when it intersects the circumference at two distinct points, and this happens when \\(D < r\\).
   * A line is tangent when it touches the circumference at exactly one point, and this happens when \\(D = r\\).

@@ -16,7 +16,7 @@ The image shows the density of the uniform distribution over the interval \\([a,
 
 \\[P(X = x_0) = 0 \\]
 
-![The figure illustrates the density of the uniform distribution on the interval \[a,b\], showing its constant height and the equal likelihood assigned to all values within the range.](https://algebrica.org/wp-content/uploads/resources/images/uniform-distribution.png)
+![The figure illustrates the density of the uniform distribution on the interval \[a,b\], showing its constant height and the equal likelihood assigned to all values within the range.](/diagrams/algebrica/uniform-distribution.png)
 
 ## Key features
 

@@ -15,11 +15,11 @@ More specifically, suppose we have a function \\( f(x): \mathbb{R} \rightarrow \
 
 \\[f(x) = f(-x) \quad \text{for all } x \in D \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/even-odd-functions-1.png)
+![](/diagrams/algebrica/even-odd-functions-1.png)
 
 As shown in the figure, the function \\( f(x) = x^2 \\) is a [parabola](<../parabola>) symmetric with respect to the \\(y\\)-axis. In general, functions of the form \\( f(x) = x^4 \\), \\( x^6 \\), or more generally \\( x^{2n} \\), where the exponent is even, are examples of even functions.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/even-odd-functions-2-1.png)
+![](/diagrams/algebrica/even-odd-functions-2-1.png)
 
 Another example of an even function is the [cosine function](<../cosine-function>). It is a periodic function with period \\( 2\pi \\), and its graph is symmetric with respect to the \\(y\\)-axis. In fact, it is easy to verify that: \\[\cos(\pi) = \cos(-\pi) = -1 \\]
 
@@ -36,7 +36,7 @@ This symmetry directly influences how we evaluate definite integrals over interv
 
 \\[\int_{-a}^{a} f(x),dx = 2\int_0^a f(x),dx \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/definite-integrals-5.png)
+![](/diagrams/algebrica/definite-integrals-5.png)
 
 That is, the total area under the curve from \\(-a\\) to \\(a\\) is simply twice the area from 0 to (a). This works because the portion of the graph on the negative side of the \\(x\\)-axis is a mirror image of the positive side, and contributes the same value to the integral.
 
@@ -46,11 +46,11 @@ Suppose we have a function \\( f(x): \mathbb{R} \rightarrow \mathbb{R} \\), and 
 
 \\[f(-x) = -f(x) \quad \text{for all } x \in D \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/even-odd-functions-3.png)
+![](/diagrams/algebrica/even-odd-functions-3.png)
 
 As shown in the figure, the function \\( f(x) = x^3 \\) is symmetric with respect to the origin. Functions of the form \\( f(x) = x^3 \\), \\( x^5 \\), or more generally \\( x^{2n+1} \\), where the exponent is odd, are examples of odd functions.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/even-odd-functions-4-1.png)
+![](/diagrams/algebrica/even-odd-functions-4-1.png)
 
 Another example of an odd function is the [sine function](<../sine-function>). It is a periodic function with period \\( 2\pi \\), and its graph is symmetric with respect to the origin. In fact, it is easy to verify that:  
 \\[\sin(-\pi) = -\sin(\pi) = 0 \\]
@@ -61,7 +61,7 @@ In the case of an odd function, the area between \\( [-a, 0] \\) is equal in mag
 
 \\[\int_{-a}^{a} f(x) \, dx = 0 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/definite-integrals-6.png)
+![](/diagrams/algebrica/definite-integrals-6.png)
 
 In both situations, the area enclosed between the graph of \\( f(x) \\) and the \\( x \\)-axis over the interval \\( [-a, a] \\) is given by:
 

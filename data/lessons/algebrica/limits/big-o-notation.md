@@ -10,7 +10,7 @@ Let \\(f(x)\\) and \\(g(x)\\) be two functions defined on a set \\(A\\), and let
 
 This notation indicates that \\(f(x)\\) grows asymptotically no faster than \\(g(x)\\) near \\(x_0\\). To illustrate this definition, let \\( f(x) = 3x^2 + 2x + 1 \\) and \\( g(x) = x^2 \\). The graph displays \\( f(x) \\) together with \\( 6x^2 = M \cdot g(x) \\), which serves as the asymptotic upper bound.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/big-o-notation-1.png)
+![](/diagrams/algebrica/big-o-notation-1.png)
 
 For all \\( x \geq 1 \\), the curve \\( f(x) \\) remains entirely below \\( 6x^2 \\). Although both curves exhibit the same growth rate, \\( f(x) \\) does not exceed its bound. This relationship represents the geometric interpretation of \\( f(x) = O(x^2) \\).
 

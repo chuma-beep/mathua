@@ -15,7 +15,7 @@ If a material point moves along a straight-line path at constant velocity, meani
 
 Let’s consider two points, \\( x_1 \\) and \\( x_2 \\), representing the position \\( P \\) of a point at two successive moments in time, \\( t_1 \\) and \\( t_2 \\), respectively.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/velocity-1-1.png)
+![](/diagrams/algebrica/velocity-1-1.png)
 
 We can express the following relationship:
 
@@ -32,7 +32,7 @@ Let us now imagine that the position \\( P \\) of the point at time \\( t \\) is
 
 \\[\lim_{\Delta t \to 0} \frac{\Delta \mathbf{r}}{\Delta t} = \frac{d\mathbf{r}}{dt} = \mathbf{v} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/velocity-2.png)
+![](/diagrams/algebrica/velocity-2.png)
 
 Thus, we can define the **velocity vector** as:
 

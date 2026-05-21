@@ -59,7 +59,7 @@ In general, sign analysis of inequalities follows a systematic procedure that ap
 
 Plotting the curve on the axes, we obtain:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sign-analysis-1.png)
+![](/diagrams/algebrica/sign-analysis-1.png)
 
 In this way, we have solved the inequality using the sign table without resorting to solving the associated quadratic equation using the [quadratic formula](<../quadratic-formula>), which would have led to the same result.
 
