@@ -15,15 +15,15 @@ In the following Diophantine equations, and are the unknowns and the other lette
 {| class="wikitable"
 | \(ax+by = c\)||This is a linear Diophantine equation, related to Bézout's identity.
 |-
-| \(w^3 + x^3 = y^3 + z^3\)|| The smallest nontrivial solution in positive integers is 1=12\(^{3}\) + 1\(^{3}\) = 9\(^{3}\) + 10\(^{3}\) = 1729. It was famously given as an evident property of 1729, a taxicab number (also named Hardy–Ramanujan number) by Ramanujan to Hardy while meeting in 1917. There are infinitely many nontrivial solutions.
+| \(w^3 + x^3 = y^3 + z^3\)|| The smallest nontrivial solution in positive integers is 12\(^{3}\) + 1\(^{3}\) = 9\(^{3}\) + 10\(^{3}\) = 1729. It was famously given as an evident property of 1729, a taxicab number (also named Hardy–Ramanujan number) by Ramanujan to Hardy while meeting in 1917. There are infinitely many nontrivial solutions.
 |-
-| \(x^n + y^n = z^n\)||For 1= *n* = 2 there are infinitely many solutions (*x, y, z*): the Pythagorean triples. For larger integer values of , Fermat's Last Theorem (initially claimed in 1637 by Fermat and proved by Andrew Wiles in 1995) states there are no positive integer solutions (*x, y, z*).
+| \(x^n + y^n = z^n\)||For *n* = 2 there are infinitely many solutions (*x, y, z*): the Pythagorean triples. For larger integer values of , Fermat's Last Theorem (initially claimed in 1637 by Fermat and proved by Andrew Wiles in 1995) states there are no positive integer solutions (*x, y, z*).
 |-
 | \(x^2 - ny^2 = \pm 1\)|| This is Pell's equation, which is named after the English mathematician John Pell. It was studied by Brahmagupta in the 7th century, as well as by Fermat in the 17th century.
 |-
 | \(\frac 4 n = \frac 1 x + \frac 1 y + \frac 1 z\)||The Erdős–Straus conjecture states that, for every positive integer ≥ 2, there exists a solution in , and , all as positive integers. Although not usually stated in polynomial form, this example is equivalent to the polynomial equation \(4xyz = n(yz+xz+xy).\)
 |-
-| \(x^4 + y^4 + z^4 = w^4\)||Conjectured incorrectly by Euler to have no nontrivial solutions. Proved by Elkies to have infinitely many nontrivial solutions, with a computer search by Frye determining the smallest nontrivial solution, 1=95800\(^{4}\) + 217519\(^{4}\) + 414560\(^{4}\) = 422481\(^{4}\).
+| \(x^4 + y^4 + z^4 = w^4\)||Conjectured incorrectly by Euler to have no nontrivial solutions. Proved by Elkies to have infinitely many nontrivial solutions, with a computer search by Frye determining the smallest nontrivial solution, 95800\(^{4}\) + 217519\(^{4}\) + 414560\(^{4}\) = 422481\(^{4}\).
 |}
 
 ## Linear Diophantine equations
@@ -31,7 +31,7 @@ In the following Diophantine equations, and are the unknowns and the other lette
 The simplest linear Diophantine equation takes the form
 \(ax+by=c,\)
 where , and are given integers. The solutions are described by the following theorem:
-*This Diophantine equation has a solution* (where and are integers) *if and only if* *is a multiple of the greatest common divisor of* *and*. *Moreover, if* (*x, y*) *is a solution, then the other solutions have the form* (*x* + *kv, y* − *ku*), *where* *is an arbitrary integer, and* *and* *are the quotients of* *and* *(respectively) by the greatest common divisor of* *and*. **Proof:** If is this greatest common divisor, Bézout's identity asserts the existence of integers and such that 1=*ae* + *bf* = *d*. If is a multiple of , then 1=*c* = *dh* for some integer , and (*eh, fh*) is a solution. On the other hand, for every pair of integers and , the greatest common divisor of and divides *ax* + *by*. Thus, if the equation has a solution, then must be a multiple of. If 1=*a* = *ud* and *b* , then for every solution (*x, y*), we have
+*This Diophantine equation has a solution* (where and are integers) *if and only if* *is a multiple of the greatest common divisor of* *and*. *Moreover, if* (*x, y*) *is a solution, then the other solutions have the form* (*x* + *kv, y* − *ku*), *where* *is an arbitrary integer, and* *and* *are the quotients of* *and* *(respectively) by the greatest common divisor of* *and*. **Proof:** If is this greatest common divisor, Bézout's identity asserts the existence of integers and such that *ae* + *bf* = *d*. If is a multiple of , then *c* = *dh* for some integer , and (*eh, fh*) is a solution. On the other hand, for every pair of integers and , the greatest common divisor of and divides *ax* + *by*. Thus, if the equation has a solution, then must be a multiple of. If *a* = *ud* and *b* , then for every solution (*x, y*), we have
 \(\begin{align}
 a(x+kv) + b(y-ku) &= ax+by+k(av-bu) \\
 &= ax+by+k(udv-vdu) \\
@@ -63,15 +63,15 @@ The computation of the Smith normal form of provides two unimodular matrices (th
 \(B = [b_{i,j}] = UAV\)
 is such that is not zero for not greater than some integer , and all the other entries are zero. The system to be solved may thus be rewritten as
 \(B (V^{-1}X) = UC.\)
-Calling the entries of *V* and those of 1=*D* = *UC*, this leads to the system
+Calling the entries of *V* and those of *D* = *UC*, this leads to the system
 \(\begin{align}
 & b_{i,i}y_i = d_i, \quad 1 \leq i \leq k \\
 & 0y_i = d_i, \quad k < i \leq n.
 \end{align}\)
 
-This system is equivalent to the given one in the following sense: A column matrix of integers is a solution of the given system if and only if 1=*x* = *Vy* for some column matrix of integers such that 1=*By* = *D*.
+This system is equivalent to the given one in the following sense: A column matrix of integers is a solution of the given system if and only if *x* = *Vy* for some column matrix of integers such that *By* = *D*.
 
-It follows that the system has a solution if and only if divides for *i* ≤ *k* and 1=*d\(_{i}\)* = 0 for *i* > *k*. If this condition is fulfilled, the solutions of the given system are
+It follows that the system has a solution if and only if divides for *i* ≤ *k* and *d\(_{i}\)* = 0 for *i* > *k*. If this condition is fulfilled, the solutions of the given system are
 \(V\,
 \begin{bmatrix}
 \frac{d_1}{b_{1,1\\
@@ -141,13 +141,13 @@ x_2 &= r_2 + t_2(x_1-r_1)\\
 &\;\;\vdots\\
 x_{n-1} &= r_{n-1} + t_{n-1}(x_1-r_1).
 \end{align}\)
-Substituting this in , one gets a polynomial of degree two in *x*, that is zero for 1=*x*. It is thus divisible by *x*. The quotient is linear in *x*, and may be solved for expressing *x* as a quotient of two polynomials of degree at most two in \(t_2, \ldots, t_{n-1},\) with integer coefficients:
+Substituting this in , one gets a polynomial of degree two in *x*, that is zero for *x*. It is thus divisible by *x*. The quotient is linear in *x*, and may be solved for expressing *x* as a quotient of two polynomials of degree at most two in \(t_2, \ldots, t_{n-1},\) with integer coefficients:
 \(x_1=\frac{f_1(t_2, \ldots, t_{n-1})}{f_n(t_2, \ldots, t_{n-1})}.\)
-Substituting this in the expressions for \(x_2, \ldots, x_{n-1},\) one gets, for 1=*i* = 1, …, *n* − 1,
+Substituting this in the expressions for \(x_2, \ldots, x_{n-1},\) one gets, for *i* = 1, …, *n* − 1,
 \(x_i=\frac{f_i(t_2, \ldots, t_{n-1})}{f_n(t_2, \ldots, t_{n-1})},\)
 where \(f_1, \ldots, f_n\) are polynomials of degree at most two with integer coefficients.
 
-Then, one can return to the homogeneous case. Let, for 1=*i* = 1, …, *n*,
+Then, one can return to the homogeneous case. Let, for *i* = 1, …, *n*,
 \(F_i(t_1, \ldots, t_{n-1})=t_1^2 f_i\left(\frac{t_2}{t_1}, \ldots, \frac{t_{n-1{t_1} \right),\)
 be the homogenization of \(f_i.\) These quadratic polynomials with integer coefficients form a parameterization of the projective hypersurface defined by :
 \(\begin{align}
@@ -156,11 +156,11 @@ x_1&= F_1(t_1, \ldots, t_{n-1})\\
 x_n&= F_n(t_1, \ldots, t_{n-1}).
 \end{align}\)
 
-A point of the projective hypersurface defined by is rational if and only if it may be obtained from rational values of \(t_1, \ldots, t_{n-1}.\) As \(F_1, \ldots,F_n\) are homogeneous polynomials, the point is not changed if all are multiplied by the same rational number. Thus, one may suppose that \(t_1, \ldots, t_{n-1}\) are coprime integers. It follows that the integer solutions of the Diophantine equation are exactly the sequences \((x_1, \ldots, x_n)\) where, for 1=*i* = 1,.. ., *n*,
+A point of the projective hypersurface defined by is rational if and only if it may be obtained from rational values of \(t_1, \ldots, t_{n-1}.\) As \(F_1, \ldots,F_n\) are homogeneous polynomials, the point is not changed if all are multiplied by the same rational number. Thus, one may suppose that \(t_1, \ldots, t_{n-1}\) are coprime integers. It follows that the integer solutions of the Diophantine equation are exactly the sequences \((x_1, \ldots, x_n)\) where, for *i* = 1,... , *n*,
 \(x_i= k\,\frac{F_i(t_1, \ldots, t_{n-1})}{d},\)
 where is an integer, \(t_1, \ldots, t_{n-1}\) are coprime integers, and is the greatest common divisor of the integers \(F_i(t_1, \ldots, t_{n-1}).\)
 
-One could hope that the coprimality of could imply that 1=*d* = 1. Unfortunately this is not the case, as shown in the next section.
+One could hope that the coprimality of could imply that *d* = 1. Unfortunately this is not the case, as shown in the next section.
 
 #### Example of Pythagorean triples
 The equation
@@ -170,7 +170,7 @@ is probably the first homogeneous Diophantine equation of degree two that has be
 For retrieving exactly Euclid's formula, we start from the solution (−1, 0, 1), corresponding to the point (−1, 0) of the unit circle. A line passing through this point may be parameterized by its slope:
 \(y=t(x+1).\)
 Putting this in the circle equation
-\(x^2+y^2-1=0,\)
+\(x^2+y^2-0,\)
 one gets
 \(x^2-1 +t^2(x+1)^2=0.\)
 Dividing by *x* + 1, results in
@@ -185,9 +185,9 @@ x&=k\,\frac{s^2-t^2}{d}\\
 y&=k\,\frac{2st}{d}\\
 z&=k\,\frac{s^2+t^2}{d},
 \end{align}\)
-where is any integer, and are coprime integers, and is the greatest common divisor of the three numerators. In fact, 1=*d* = 2 if and are both odd, and 1=*d* = 1 if one is odd and the other is even.
+where is any integer, and are coprime integers, and is the greatest common divisor of the three numerators. In fact, *d* = 2 if and are both odd, and *d* = 1 if one is odd and the other is even.
 
-The *primitive triples* are the solutions where 1=*k* = 1 and *s* > *t* > 0.
+The *primitive triples* are the solutions where *k* = 1 and *s* > *t* > 0.
 
 This description of the solutions differs slightly from Euclid's formula because Euclid's formula considers only the solutions such that , and are all positive, and does not distinguish between two triples that differ by the exchange of and ,
 
@@ -209,7 +209,7 @@ The given information is that a father's age is 1 less than twice that of his so
 Many well known puzzles in the field of recreational mathematics lead to diophantine equations. Examples include the cannonball problem, Archimedes's cattle problem and the monkey and the coconuts.
 
 ### 17th and 18th centuries
-In 1637, Pierre de Fermat scribbled on the margin of his copy of *Arithmetica*: "It is impossible to separate a cube into two cubes, or a fourth power into two fourth powers, or in general, any power higher than the second into two like powers." Stated in more modern language, "The equation 1=*a* = *c*has no solutions for any higher than 2." Following this, he wrote: "I have discovered a truly marvelous proof of this proposition, which this margin is too narrow to contain." Such a proof eluded mathematicians for centuries, however, and as such his statement became famous as Fermat's Last Theorem. It was not until 1995 that it was proven by the British mathematician Andrew Wiles.
+In 1637, Pierre de Fermat scribbled on the margin of his copy of *Arithmetica*: "It is impossible to separate a cube into two cubes, or a fourth power into two fourth powers, or in general, any power higher than the second into two like powers." Stated in more modern language, "The equation *a* = *c*has no solutions for any higher than 2." Following this, he wrote: "I have discovered a truly marvelous proof of this proposition, which this margin is too narrow to contain." Such a proof eluded mathematicians for centuries, however, and as such his statement became famous as Fermat's Last Theorem. It was not until 1995 that it was proven by the British mathematician Andrew Wiles.
 
 In 1657, Fermat attempted to solve the Diophantine equation 61*x*\(^{2}\) + 1 (solved by Brahmagupta over 1000 years earlier). The equation was eventually solved by Euler in the early 18th century, who also solved a number of other Diophantine equations. The smallest solution of this equation in positive integers is *x* , *y* (see Chakravala method).
 
@@ -237,8 +237,8 @@ which can be expressed as "How many ways can a given integer be written as the s
 which does not always have a solution for positive. ## Exponential Diophantine equations
 If a Diophantine equation has as an additional variable or variables occurring as exponents, it is an exponential Diophantine equation. Examples include:
 
-* the Ramanujan–Nagell equation, 1=2\(^{*n*}\) − 7 = *x*\(^{2}\)
-* the equation of the Fermat–Catalan conjecture and Beal's conjecture, 1=*a\(^{m}\)* + *b\(^{n}\)* = *c\(^{k}\)* with inequality restrictions on the exponents
-* the Erdős–Moser equation, 1=1\(^{*k*}\) + 2\(^{*k*}\) + ⋯ + (*m* − 1)\(^{*k*}\) = *m\(^{k}\)*
+* the Ramanujan–Nagell equation, 2\(^{*n*}\) − 7 = *x*\(^{2}\)
+* the equation of the Fermat–Catalan conjecture and Beal's conjecture, *a\(^{m}\)* + *b\(^{n}\)* = *c\(^{k}\)* with inequality restrictions on the exponents
+* the Erdős–Moser equation, 1\(^{*k*}\) + 2\(^{*k*}\) + ⋯ + (*m* − 1)\(^{*k*}\) = *m\(^{k}\)*
 
 A general theory for such equations is not available; particular cases such as Catalan's conjecture and Fermat's Last Theorem have been tackled. However, the majority are solved via ad-hoc methods such as Størmer's theorem or even trial and error.

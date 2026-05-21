@@ -11,8 +11,8 @@ In a first-order logic statement, quantifications in the same type (either unive
 First-order quantifiers approximate the meanings of some natural language quantifiers such as "some" and "all". However, many natural language quantifiers can only be analyzed in terms of generalized quantifiers.
 
 ## Relations to logical conjunction and disjunction
-For a finite domain of discourse \(D = \{a_1,...a_n\}\), the universally quantified formula \(\forall x \in D \; P(x)\) is equivalent to the logical conjunction \(P(a_1) \land.. . \land P(a_n)\).
-Dually, the existentially quantified formula \(\exists x \in D \; P(x)\) is equivalent to the logical disjunction \(P(a_1) \lor.. . \lor P(a_n)\).
+For a finite domain of discourse \(D = \{a_1,...a_n\}\), the universally quantified formula \(\forall x \in D \; P(x)\) is equivalent to the logical conjunction \(P(a_1) \land... \land P(a_n)\).
+Dually, the existentially quantified formula \(\exists x \in D \; P(x)\) is equivalent to the logical disjunction \(P(a_1) \lor... \lor P(a_n)\).
 For example, if \(B = \{ 0,1 \}\) is the set of binary digits, the formula \(\forall x \in B \; x = x^2\) abbreviates \(0 = 0^2 \land 1 = 1^2\), which evaluates to *true*.
 
 ### Infinite domain of discourse
@@ -168,19 +168,19 @@ The syntax of a formula can be given by a syntax tree. A quantifier has a scope,
 
 the occurrence of both *x* and *y* in *C*(*y*, *x*) is free, while the occurrence of *x* and *y* in *B*(*y*, *x*) is bound (i.e. non-free).
 
-An interpretation for first-order predicate calculus assumes as given a domain of individuals *X*. A formula *A* whose free variables are *x*\(_{1}\),.. ., *x*\(_{n}\) is interpreted as a Boolean-valued function *F*(*v*\(_{1}\),.. ., *v*\(_{*n*}\)) of *n* arguments, where each argument ranges over the domain *X*. Boolean-valued means that the function assumes one of the values **T** (interpreted as truth) or **F** (interpreted as falsehood). The interpretation of the formula
+An interpretation for first-order predicate calculus assumes as given a domain of individuals *X*. A formula *A* whose free variables are *x*\(_{1}\),... , *x*\(_{n}\) is interpreted as a Boolean-valued function *F*(*v*\(_{1}\),... , *v*\(_{*n*}\)) of *n* arguments, where each argument ranges over the domain *X*. Boolean-valued means that the function assumes one of the values **T** (interpreted as truth) or **F** (interpreted as falsehood). The interpretation of the formula
 
 \[
 \forall x_n A(x_1, \ldots , x_n)
 \]
 
-is the function *G* of *n*-1 arguments such that *G*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\)) = **T** if and only if *F*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\), *w*) = **T** for every *w* in *X*. If *F*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\), *w*) = **F** for at least one value of *w*, then *G*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\)) = **F**. Similarly the interpretation of the formula
+is the function *G* of *n*-1 arguments such that *G*(*v*\(_{1}\),... , *v*\(_{*n*-1}\)) = **T** if and only if *F*(*v*\(_{1}\),... , *v*\(_{*n*-1}\), *w*) = **T** for every *w* in *X*. If *F*(*v*\(_{1}\),... , *v*\(_{*n*-1}\), *w*) = **F** for at least one value of *w*, then *G*(*v*\(_{1}\),... , *v*\(_{*n*-1}\)) = **F**. Similarly the interpretation of the formula
 
 \[
 \exists x_n A(x_1, \ldots , x_n)
 \]
 
-is the function *H* of *n*-1 arguments such that *H*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\)) = **T** if and only if *F*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\), *w*) = **T** for at least one *w* and *H*(*v*\(_{1}\),.. ., *v*\(_{*n*-1}\)) = **F** otherwise.
+is the function *H* of *n*-1 arguments such that *H*(*v*\(_{1}\),... , *v*\(_{*n*-1}\)) = **T** if and only if *F*(*v*\(_{1}\),... , *v*\(_{*n*-1}\), *w*) = **T** for at least one *w* and *H*(*v*\(_{1}\),... , *v*\(_{*n*-1}\)) = **F** otherwise.
 
 The semantics for uniqueness quantification requires first-order predicate calculus with equality. This means there is given a distinguished two-placed predicate "="; the semantics is also modified accordingly so that "=" is always interpreted as the two-place equality relation on *X*. The interpretation of
 

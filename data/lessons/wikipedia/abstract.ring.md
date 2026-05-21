@@ -17,16 +17,16 @@ Rings appear in the following chain of class inclusions:
 ## Definition
 A **ring** is a set equipped with two binary operations for each ordered pair of elements of. + (addition) and ⋅ (multiplication) satisfying the following three sets of axioms, called the **ring axioms**:
 # is an abelian group under addition, meaning that:
-#* 1=(*a* + *b*) + *c* = *a* + (*b* + *c*) for all *a*, *b*, *c* in (that is, + is associative).
-#* 1=*a* + *b* = *b* + *a* for all *a*, *b* in (that is, + is commutative).
-#* There is an element 0 in such that 1=*a* + 0 = *a* for all in (that is, 0 is an additive identity).
-#* For each in there exists −*a* in such that 1=*a* + (−*a*) = 0 (that is, −*a* is the additive inverse of ).
+#* (*a* + *b*) + *c* = *a* + (*b* + *c*) for all *a*, *b*, *c* in (that is, + is associative).
+#* *a* + *b* = *b* + *a* for all *a*, *b* in (that is, + is commutative).
+#* There is an element 0 in such that *a* + 0 = *a* for all in (that is, 0 is an additive identity).
+#* For each in there exists −*a* in such that *a* + (−*a*) = 0 (that is, −*a* is the additive inverse of ).
 # is a monoid under multiplication, meaning that:
-#* 1=(*a* · *b*) · *c* = *a* · (*b* · *c*) for all *a*, *b*, *c* in (that is, ⋅ is associative).
-#* There is an element 1 in such that 1=*a* · 1 = *a* and 1=1 · *a* = *a* for all in (that is, 1 is a multiplicative identity).
+#* (*a* · *b*) · *c* = *a* · (*b* · *c*) for all *a*, *b*, *c* in (that is, ⋅ is associative).
+#* There is an element 1 in such that *a* · 1 = *a* and 1 · *a* = *a* for all in (that is, 1 is a multiplicative identity).
 # Multiplication is distributive with respect to addition, meaning that:
-#* 1=*a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all *a*, *b*, *c* in (left distributivity).
-#* 1=(*b* + *c*) · *a* = (*b* · *a*) + (*c* · *a*) for all *a*, *b*, *c* in (right distributivity).
+#* *a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all *a*, *b*, *c* in (left distributivity).
+#* (*b* + *c*) · *a* = (*b* · *a*) + (*c* · *a*) for all *a*, *b*, *c* in (right distributivity).
 
 In notation, the multiplication symbol · is often omitted, in which case *a* · *b* is written as *ab*.
 
@@ -37,7 +37,7 @@ Although ring addition is commutative, ring multiplication is not required to be
 
 In a ring, multiplicative inverses are not required to exist. A nonzero ring in which every nonzero element has a multiplicative inverse is called a division ring and a commutative division ring is called a field.
 
-The additive group of a ring is the underlying set equipped with only the operation of addition. Although the definition requires that the additive group be abelian, this can be inferred from the other ring axioms. The proof makes use of the "1", and does not work in a rng. (For a rng, omitting the axiom of commutativity of addition leaves it inferable from the remaining rng assumptions only for elements that are products: 1=*ab* + *cd* = *cd* + *ab*.)
+The additive group of a ring is the underlying set equipped with only the operation of addition. Although the definition requires that the additive group be abelian, this can be inferred from the other ring axioms. The proof makes use of the "1", and does not work in a rng. (For a rng, omitting the axiom of commutativity of addition leaves it inferable from the remaining rng assumptions only for elements that are products: *ab* + *cd* = *cd* + *ab*.)
 
 Some authors use the term "ring" to refer to structures in which there is no requirement for multiplication to be associative; see the nonassociative ring subsection below. For these authors, every algebra is a "ring".
 
@@ -53,15 +53,15 @@ Some basic properties of a ring follow immediately from the axioms:
 * The additive identity is unique.
 * The additive inverse of each element is unique.
 * The multiplicative identity is unique.
-* For any element in a ring , one has 1=*x*0 = 0 = 0*x* (zero is an absorbing element with respect to multiplication) and 1=(–1)*x* = –*x*.
-* If 1=0 = 1 in a ring (or more generally, 0 is a unit element), then has only one element, and is called the zero ring.
+* For any element in a ring , one has *x*0 = 0 = 0*x* (zero is an absorbing element with respect to multiplication) and (–1)*x* = –*x*.
+* If 0 = 1 in a ring (or more generally, 0 is a unit element), then has only one element, and is called the zero ring.
 * If a ring contains the zero ring as a subring, then itself is the zero ring.
-* The binomial formula holds for any and satisfying 1=*xy* = *yx*.
+* The binomial formula holds for any and satisfying *xy* = *yx*.
 
 ### Example: Integers modulo 4
 
 Equip the set \(\Z /4\Z = \left\{\overline{0}, \overline{1}, \overline{2}, \overline{3}\right\}\) with the following operations:
-* The sum \(\overline{x} + \overline{y}\) in is the remainder when the integer *x* + *y* is divided by 4 (as *x* + *y* is always smaller than 8, this remainder is either *x* + *y* or 1=*x* + *y* − 4). For example, \(\overline{2} + \overline{3} = \overline{1}\) and \(\overline{3} + \overline{3} = \overline{2}.\)
+* The sum \(\overline{x} + \overline{y}\) in is the remainder when the integer *x* + *y* is divided by 4 (as *x* + *y* is always smaller than 8, this remainder is either *x* + *y* or *x* + *y* − 4). For example, \(\overline{2} + \overline{3} = \overline{1}\) and \(\overline{3} + \overline{3} = \overline{2}.\)
 * The product \(\overline{x} \cdot \overline{y}\) in is the remainder when the integer is divided by 4. For example, \(\overline{2} \cdot \overline{3} = \overline{2}\) and \(\overline{3} \cdot \overline{3} = \overline{1}.\)
 
 Then is a ring: each axiom follows from the corresponding axiom for If is an integer, the remainder of when divided by 4 may be considered as an element of and this element is often denoted by "*x* mod 4" or \(\overline x,\) which is consistent with the notation for 0, 1, 2, 3. The additive inverse of any \(\overline x\) in is \(-\overline x=\overline{-x}.\) For example, \(-\overline{3} = \overline{-3} = \overline{1}.\)
@@ -80,7 +80,7 @@ More generally, for any ring , commutative or not, and any nonnegative integer ,
 The study of rings originated from the theory of polynomial rings and the theory of algebraic integers. In 1871, Richard Dedekind defined the concept of the ring of integers of a number field. In this context, he introduced the terms "ideal" (inspired by Ernst Kummer's notion of ideal number) and "module" and studied their properties. Dedekind did not use the term "ring" and did not define the concept of a ring in a general setting.
 
 ### Hilbert
-The term "Zahlring" (number ring) was coined by David Hilbert in 1892 and published in 1897. According to Harvey Cohn, Hilbert used the term for a ring that had the property of "circling directly back" to an element of itself (in the sense of an equivalence). Specifically, in a ring of algebraic integers, all high powers of an algebraic integer can be written as an integral combination of a fixed set of lower powers, and thus the powers "cycle back". For instance, if 1=*a* then:
+The term "Zahlring" (number ring) was coined by David Hilbert in 1892 and published in 1897. According to Harvey Cohn, Hilbert used the term for a ring that had the property of "circling directly back" to an element of itself (in the sense of an equivalence). Specifically, in a ring of algebraic integers, all high powers of an algebraic integer can be written as an integral combination of a fixed set of lower powers, and thus the powers "cycle back". For instance, if *a* then:
 \(\begin{align}
 a^3 &= 4a-1, \\
 a^4 &= 4a^2-a, \\
@@ -120,7 +120,7 @@ Authors who follow either convention for the use of the term "ring" may use one 
 * If is a set, then the power set of becomes a ring if we define addition to be the symmetric difference of sets and multiplication to be intersection. This is an example of a Boolean ring.
 
 ### Noncommutative rings
-* For any ring and any natural number , the set of all square -by- matrices with entries from , forms a ring with matrix addition and matrix multiplication as operations. For 1=*n* = 1, this matrix ring is isomorphic to itself. For *n* > 1 (and not the zero ring), this matrix ring is noncommutative.
+* For any ring and any natural number , the set of all square -by- matrices with entries from , forms a ring with matrix addition and matrix multiplication as operations. For *n* = 1, this matrix ring is isomorphic to itself. For *n* > 1 (and not the zero ring), this matrix ring is noncommutative.
 * If *G* is an abelian group, then the endomorphisms of *G* form a ring, the endomorphism ring End(*G*) of *G*. The operations in this ring are addition and composition of endomorphisms. More generally, if is a left module over a ring , then the set of all -linear maps forms a ring, also called the endomorphism ring and denoted by End.
 *The endomorphism ring of an elliptic curve. It is a commutative ring if the elliptic curve is defined over a field of characteristic zero.
 * If *G* is a group and is a ring, the group ring of *G* over is a free module over having *G* as basis. Multiplication is defined by the rules that the elements of *G* commute with the elements of and multiply together as they do in the group *G*.
@@ -134,16 +134,16 @@ Authors who follow either convention for the use of the term "ring" may use one 
 \]
  Then is a rng, but not a ring: the Dirac delta function has the property of a multiplicative identity, but it is not a function and hence is not an element of. ## Basic concepts
 ### Products and powers
-For each nonnegative integer , given a sequence of elements of , one can define the product \(\textstyle P_n = \prod_{i=1}^n a_i\) recursively: let 1=*P*\(_{0}\) = 1 and let 1=*P*\(_{*m*}\) = *P*\(_{*m*−1}\)*a*\(_{*m*}\) for 1 ≤ *m* ≤ *n*.
+For each nonnegative integer , given a sequence of elements of , one can define the product \(\textstyle P_n = \prod_{i=1}^n a_i\) recursively: let *P*\(_{0}\) = 1 and let *P*\(_{*m*}\) = *P*\(_{*m*−1}\)*a*\(_{*m*}\) for 1 ≤ *m* ≤ *n*.
 
-As a special case, one can define nonnegative integer powers of an element of a ring: 1=*a* and 1=*a**a*for *n* ≥ 1. Then 1=*a*\(^{*m*+*n*}\) = *a*\(^{*m*}\)*a*\(^{*n*}\) for all *m*, *n* ≥ 0.
+As a special case, one can define nonnegative integer powers of an element of a ring: *a* and *a**a*for *n* ≥ 1. Then *a*\(^{*m*+*n*}\) = *a*\(^{*m*}\)*a*\(^{*n*}\) for all *m*, *n* ≥ 0.
 
 ### Elements in a ring
-A left zero divisor of a ring is an element in the ring such that there exists a nonzero element of such that 1=*ab* = 0. A right zero divisor is defined similarly.
+A left zero divisor of a ring is an element in the ring such that there exists a nonzero element of such that *ab* = 0. A right zero divisor is defined similarly.
 
-A nilpotent element is an element such that 1=*a for some *n'' > 0. One example of a nilpotent element is a nilpotent matrix. A nilpotent element in a nonzero ring is necessarily a zero divisor.
+A nilpotent element is an element such that *a for some *n'' > 0. One example of a nilpotent element is a nilpotent matrix. A nilpotent element in a nonzero ring is necessarily a zero divisor.
 
-An idempotent \(e\) is an element such that 1=*e*. One example of an idempotent element is a projection in linear algebra.
+An idempotent \(e\) is an element such that *e*. One example of an idempotent element is a projection in linear algebra.
 
 A unit is an element having a multiplicative inverse; in this case the inverse is unique, and is denoted by *a*. The set of units of a ring is a group under ring multiplication; this group is denoted by *R* or *R** or *U*(*R*). For example, if is the ring of all square matrices of size over a field, then *R* consists of the set of all invertible matrices of size , and is called the general linear group.
 
@@ -156,9 +156,9 @@ For example, the ring of integers is a subring of the field of real numbers and 
 
 An intersection of subrings is a subring. Given a subset of , the smallest subring of containing is the intersection of all subrings of containing , and it is called *the subring generated by E*.
 
-For a ring , the smallest subring of is called the *characteristic subring* of. It can be generated through addition of copies of 1 and −1. It is possible that 1=*n* · 1 = 1 + 1 +.. . + 1 ( times) can be zero. If is the smallest positive integer such that this occurs, then is called the *characteristic* of. In some rings, *n* · 1 is never zero for any positive integer , and those rings are said to have *characteristic zero*.
+For a ring , the smallest subring of is called the *characteristic subring* of. It can be generated through addition of copies of 1 and −1. It is possible that *n* · 1 = 1 + 1 +... + 1 ( times) can be zero. If is the smallest positive integer such that this occurs, then is called the *characteristic* of. In some rings, *n* · 1 is never zero for any positive integer , and those rings are said to have *characteristic zero*.
 
-Given a ring , let Z(*R*) denote the set of all elements in such that commutes with every element in : 1=*xy* = *yx* for any in. Then Z(*R*) is a subring of , called the center of. More generally, given a subset of , let be the set of all elements in that commute with every element in. Then is a subring of , called the centralizer (or commutant) of. The center is the centralizer of the entire ring. Elements or subsets of the center are said to be *central* in ; they (each individually) generate a subring of the center.
+Given a ring , let Z(*R*) denote the set of all elements in such that commutes with every element in : *xy* = *yx* for any in. Then Z(*R*) is a subring of , called the center of. More generally, given a subset of , let be the set of all elements in that commute with every element in. Then is a subring of , called the centralizer (or commutant) of. The center is the centralizer of the entire ring. Elements or subsets of the center are said to be *central* in ; they (each individually) generate a subring of the center.
 
 ### Ideal
 
@@ -203,8 +203,8 @@ The notion of quotient ring is analogous to the notion of a quotient group. Give
 for all *a*, *b* in. The ring *R* / *I* is also called a **factor ring**.
 
 As with a quotient group, there is a canonical homomorphism *p* : *R* → *R* / *I*, given by *x* ↦ *x* + *I*. It is surjective and satisfies the following universal property:
-* If *f* : *R* → *S* is a ring homomorphism such that 1=*f*(*I*) = 0, then there is a unique homomorphism \(\overline{f} : R/I \to S\) such that \(f = \overline{f} \circ p.\)
-For any ring homomorphism *f* : *R* → *S*, invoking the universal property with 1=*I* = ker *f* produces a homomorphism \(\overline{f} : R / \ker f \to S\) that gives an isomorphism from *R* / ker *f* to the image of. ## Modules
+* If *f* : *R* → *S* is a ring homomorphism such that *f*(*I*) = 0, then there is a unique homomorphism \(\overline{f} : R/I \to S\) such that \(f = \overline{f} \circ p.\)
+For any ring homomorphism *f* : *R* → *S*, invoking the universal property with *I* = ker *f* produces a homomorphism \(\overline{f} : R / \ker f \to S\) that gives an isomorphism from *R* / ker *f* to the image of. ## Modules
 
 The concept of a *module over a ring* generalizes the concept of a vector space (over a field) by generalizing from multiplication of vectors with elements of a field (scalar multiplication) to multiplication with elements of a ring. More precisely, given a ring , an -module is an abelian group equipped with an operation *R* × *M* → *M* (associating an element of to every pair of an element of and an element of ) that satisfies certain axioms. This operation is commonly denoted by juxtaposition and called multiplication. The axioms of modules are the following: for all *a*, *b* in and all *x*, *y* in ,
  is an abelian group under addition.
@@ -214,15 +214,15 @@ The concept of a *module over a ring* generalizes the concept of a vector space 
 & 1x = x \\
 & (ab)x = a(bx)
 \end{align}\)
-When the ring is noncommutative these axioms define *left modules*; *right modules* are defined similarly by writing instead of. This is not only a change of notation, as the last axiom of right modules (that is 1=*x*(*ab*) = (*xa*)*b*) becomes 1=(*ab*)*x* = *b*(*ax*), if left multiplication (by ring elements) is used for a right module.
+When the ring is noncommutative these axioms define *left modules*; *right modules* are defined similarly by writing instead of. This is not only a change of notation, as the last axiom of right modules (that is *x*(*ab*) = (*xa*)*b*) becomes (*ab*)*x* = *b*(*ax*), if left multiplication (by ring elements) is used for a right module.
 
 Basic examples of modules are ideals, including the ring itself.
 
 Although similarly defined, the theory of modules is much more complicated than that of vector space, mainly, because, unlike vector spaces, modules are not characterized (up to an isomorphism) by a single invariant (the dimension of a vector space). In particular, not all modules have a basis.
 
-The axioms of modules imply that 1=(−1)*x* = −*x*, where the first minus denotes the additive inverse in the ring and the second minus the additive inverse in the module. Using this and denoting repeated addition by a multiplication by a positive integer allows identifying abelian groups with modules over the ring of integers.
+The axioms of modules imply that (−1)*x* = −*x*, where the first minus denotes the additive inverse in the ring and the second minus the additive inverse in the module. Using this and denoting repeated addition by a multiplication by a positive integer allows identifying abelian groups with modules over the ring of integers.
 
-Any ring homomorphism induces a structure of a module: if *f* : *R* → *S* is a ring homomorphism, then is a left module over by the multiplication: 1=*rs* = *f*(*r*)*s*. If is commutative or if *f*(*R*) is contained in the center of , the ring is called a -algebra. In particular, every ring is an algebra over the integers.
+Any ring homomorphism induces a structure of a module: if *f* : *R* → *S* is a ring homomorphism, then is a left module over by the multiplication: *rs* = *f*(*r*)*s*. If is commutative or if *f*(*R*) is contained in the center of , the ring is called a -algebra. In particular, every ring is an algebra over the integers.
 
 ## Constructions
 ### Direct product
@@ -252,7 +252,7 @@ as a direct sum of abelian groups (because for abelian groups finite products ar
 1 = e_1 + \cdots + e_n, \quad e_i \in \mathfrak{a}_i.
 \]
 
-By the conditions on \(\mathfrak{a}_i,\) one has that are central idempotents and 1=*e* = 0, *i* ≠ *j* (orthogonal). Again, one can reverse the construction. Namely, if one is given a partition of 1 in orthogonal central idempotents, then let \(\mathfrak{a}_i = R e_i,\) which are two-sided ideals. If each is not a sum of orthogonal central idempotents, then their direct sum is isomorphic to. An important application of an infinite direct product is the construction of a projective limit of rings (see below). Another application is a restricted product of a family of rings (cf. adele ring).
+By the conditions on \(\mathfrak{a}_i,\) one has that are central idempotents and *e* = 0, *i* ≠ *j* (orthogonal). Again, one can reverse the construction. Namely, if one is given a partition of 1 in orthogonal central idempotents, then let \(\mathfrak{a}_i = R e_i,\) which are two-sided ideals. If each is not a sum of orthogonal central idempotents, then their direct sum is isomorphic to. An important application of an infinite direct product is the construction of a projective limit of rings (see below). Another application is a restricted product of a family of rings (cf. adele ring).
 
 ### Polynomial ring
 
@@ -265,7 +265,7 @@ If is an integral domain, then *R*[*t*] is also an integral domain; its field of
 Let \(R \subseteq S\) be commutative rings. Given an element of , one can consider the ring homomorphism
 \(R[t] \to S, \quad f \mapsto f(x)\)
 
-(that is, the substitution). If 1=*S* = *R*[*t*] and 1=*x* = *t*, then 1=*f*(*t*) = *f*. Because of this, the polynomial is often also denoted by *f*(*t*). The image of the map is denoted by *R*[*x*]; it is the same thing as the subring of generated by and. Example: \(k\left[t^2, t^3\right]\) denotes the image of the homomorphism
+(that is, the substitution). If *S* = *R*[*t*] and *x* = *t*, then *f*(*t*) = *f*. Because of this, the polynomial is often also denoted by *f*(*t*). The image of the map is denoted by *R*[*x*]; it is the same thing as the subring of generated by and. Example: \(k\left[t^2, t^3\right]\) denotes the image of the homomorphism
 \(k[x, y] \to k[t], \, f \mapsto f\left(t^2, t^3\right).\)
 
 In other words, it is the subalgebra of *k*[*t*] generated by *t* and *t*.
@@ -289,7 +289,7 @@ together with multiplication and addition that mimic those for convergent series
 
 Let be a ring (not necessarily commutative). The set of all square matrices of size with entries in forms a ring with the entry-wise addition and the usual matrix multiplication. It is called the matrix ring and is denoted by M. Given a right -module , the set of all -linear maps from to itself forms a ring with addition that is of function and multiplication that is of composition of functions; it is called the endomorphism ring of and is denoted by End.
 
-As in linear algebra, a matrix ring may be canonically interpreted as an endomorphism ring: \(\operatorname{End}_R(R^n) \simeq \operatorname{M}_n(R).\) This is a special case of the following fact: If \(f: \oplus_1^n U \to \oplus_1^n U\) is an -linear map, then may be written as a matrix with entries in 1=*S* = End, resulting in the ring isomorphism:
+As in linear algebra, a matrix ring may be canonically interpreted as an endomorphism ring: \(\operatorname{End}_R(R^n) \simeq \operatorname{M}_n(R).\) This is a special case of the following fact: If \(f: \oplus_1^n U \to \oplus_1^n U\) is an -linear map, then may be written as a matrix with entries in *S* = End, resulting in the ring isomorphism:
 \(\operatorname{End}_R(\oplus_1^n U) \to \operatorname{M}_n(S), \quad f \mapsto (f_{ij}).\)
 
 Any ring homomorphism *R* → *S* induces M(*S*).
@@ -301,7 +301,7 @@ The Artin–Wedderburn theorem states any semisimple ring (cf. below) is of this
 A ring and the matrix ring M over it are Morita equivalent: the category of right modules of is equivalent to the category of right modules over M. In particular, two-sided ideals in correspond in one-to-one to two-sided ideals in M.
 
 ### Limits and colimits of rings
-Let be a sequence of rings such that is a subring of *R* for all. Then the union (or filtered colimit) of is the ring \(\varinjlim R_i\) defined as follows: it is the disjoint union of all 's modulo the equivalence relation *x* ~ *y* if and only if 1=*x* = *y* in for sufficiently large. Examples of colimits:
+Let be a sequence of rings such that is a subring of *R* for all. Then the union (or filtered colimit) of is the ring \(\varinjlim R_i\) defined as follows: it is the disjoint union of all 's modulo the equivalence relation *x* ~ *y* if and only if *x* = *y* in for sufficiently large. Examples of colimits:
 * A polynomial ring in infinitely many variables: \(R[t_1, t_2, \cdots] = \varinjlim R[t_1, t_2, \cdots, t_m].\)
 * The algebraic closure of finite fields of the same characteristic \(\overline{\mathbf{F_p = \varinjlim \mathbf{F}_{p^m}.\)
 * The function field of an algebraic variety over a field is \(\varinjlim k[U]\) where the limit runs over all the coordinate rings *k*[*U*] of nonempty open subsets (more succinctly it is the stalk of the structure sheaf at the generic point.)

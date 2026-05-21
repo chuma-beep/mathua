@@ -9,7 +9,7 @@ The midpoint of a segment in *n*-dimensional space whose endpoints are \(A = (a_
 
 \(\frac{A+B}{2}.\)
 
-That is, the *i*\(^{th}\) coordinate of the midpoint (*i* = 1, 2,.. ., *n*) is
+That is, the *i*\(^{th}\) coordinate of the midpoint (*i* = 1, 2,... , *n*) is
 
 \(\frac{a_i+b_i} 2.\)
 

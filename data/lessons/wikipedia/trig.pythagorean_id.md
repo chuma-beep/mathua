@@ -29,7 +29,7 @@ The Pythagorean identity follows by squaring both definitions above, and adding;
 \frac{\mathrm{opposite}^2 + \mathrm{adjacent}^2}{\mathrm{hypotenuse}^2}
 \]
 
-which by the Pythagorean theorem is equal to 1. This definition is valid for all angles, due to the definition of defining 1= *x* = cos *θ* and 1= *y* sin *θ* for the unit circle and thus 1= *x* = *c* and 1= *y* = *c* for a circle of radius and reflecting our triangle in the and setting 1= *a* = *x* and 1= *b* = *y*.
+which by the Pythagorean theorem is equal to 1. This definition is valid for all angles, due to the definition of defining *x* = cos *θ* and *y* sin *θ* for the unit circle and thus *x* = *c* and *y* = *c* for a circle of radius and reflecting our triangle in the and setting *a* = *x* and *b* = *y*.
 
 Alternatively, the identities found at Trigonometric symmetry, shifts, and periodicity may be employed. By the periodicity identities we can say if the formula is true for −*π* < *θ* ≤ *π* then it is true for all real. Next we prove the identity in the range. To do this we let *t* , will now be in the range 0 < *t* ≤. We can then make use of squared versions of some basic shift identities (squaring conveniently removes the minus signs):
 
@@ -61,12 +61,12 @@ The two identities
 \end{align}
 \]
 
-In this way, this trigonometric identity involving the tangent and the secant follows from the Pythagorean theorem. The angle opposite the leg of length 1 (this angle can be labeled 1= *φ* = ) has cotangent equal to the length of the other leg, and cosecant equal to the length of the hypotenuse. In that way, this trigonometric identity involving the cotangent and the cosecant also follows from the Pythagorean theorem.
+In this way, this trigonometric identity involving the tangent and the secant follows from the Pythagorean theorem. The angle opposite the leg of length 1 (this angle can be labeled *φ* = ) has cotangent equal to the length of the other leg, and cosecant equal to the length of the hypotenuse. In that way, this trigonometric identity involving the cotangent and the cosecant also follows from the Pythagorean theorem.
 
 The following table gives the identities with the factor or divisor that relates them to the main identity.
 
 {| class="wikitable"
-|+ Identities derived by dividing 1= + |*θ*= 1
+|+ Identities derived by dividing + |*θ*= 1
 |-
 ! scope="col" | Divisor
 ! scope="col" | Divisor Equation
@@ -107,7 +107,7 @@ Consequently, from the equation for the unit circle,
 
 the Pythagorean identity.
 
-In the figure, the point has a -coordinate, and is appropriately given by 1=*x* = cos *θ*, which is a negative number: 1=cos *θ* = −cos(*π* − *θ*). Point has a positive -coordinate, and 1= sin *θ* = sin(*π* − *θ*) > 0. As increases from zero to the full circle 1= *θ* = 2*π*, the sine and cosine change signs in the various quadrants to keep and with the correct signs. The figure shows how the sign of the sine function varies as the angle changes quadrant.
+In the figure, the point has a -coordinate, and is appropriately given by *x* = cos *θ*, which is a negative number: cos *θ* = −cos(*π* − *θ*). Point has a positive -coordinate, and sin *θ* = sin(*π* − *θ*) > 0. As increases from zero to the full circle *θ* = 2*π*, the sine and cosine change signs in the various quadrants to keep and with the correct signs. The figure shows how the sign of the sine function varies as the angle changes quadrant.
 
 Because the - and -axes are perpendicular, this Pythagorean identity is equivalent to the Pythagorean theorem for triangles with hypotenuse of length 1 (which is in turn equivalent to the full Pythagorean theorem by applying a similar-triangles argument). See Unit circle for a short explanation.
 
@@ -160,7 +160,7 @@ Sine and cosine can be defined as the two solutions to the differential equation
 y'' + y = 0
 \]
 
-satisfying respectively 1=*y*(0) = 0, 1= and 1=*y*(0) = 1, 1=. It follows from the theory of ordinary differential equations that the first solution, sine, has the second, cosine, as its derivative, and it follows from this that the derivative of cosine is the negative of the sine. The identity is equivalent to the assertion that the function
+satisfying respectively *y*(0) = 0, and *y*(0) = 1,. It follows from the theory of ordinary differential equations that the first solution, sine, has the second, cosine, as its derivative, and it follows from this that the derivative of cosine is the negative of the sine. The identity is equivalent to the assertion that the function
 
 \[
 z = \sin^2 x + \cos^2 x
@@ -172,7 +172,7 @@ is constant and equal to 1. Differentiating using the chain rule gives:
 \frac{d}{dx} z = 2 \sin x \cos x + 2 \cos x(-\sin x) = 0,
 \]
 
-so is constant. A calculation confirms that 1=*z*(0) = 1, and is a constant so 1=*z* = 1 for all , so the Pythagorean identity is established.
+so is constant. A calculation confirms that *z*(0) = 1, and is a constant so *z* = 1 for all , so the Pythagorean identity is established.
 
 A similar proof can be completed using power series as above to establish that the sine has as its derivative the cosine, and the cosine has as its derivative the negative sine. In fact, the definitions by ordinary differential equation and by power series lead to similar derivations of most identities.
 

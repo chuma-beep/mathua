@@ -9,8 +9,8 @@ It is expressed in the same units as the data.
 The range provides an indication of statistical dispersion. Robust measures of range include the interdecile range and the interquartile range.
 
 ## Range of continuous IID random variables
-For *n* independent and identically distributed continuous random variables *X*\(_{1}\), *X*\(_{2}\),.. ., *X*\(_{*n*}\) with the cumulative distribution function G(*x*) and a probability density function g(*x*), let T denote the range of them, that is, T= max(*X*\(_{1}\), *X*\(_{2}\),.. ., *X*\(_{*n*}\))-
-min(*X*\(_{1}\), *X*\(_{2}\),.. ., *X*\(_{*n*}\)).
+For *n* independent and identically distributed continuous random variables *X*\(_{1}\), *X*\(_{2}\),... , *X*\(_{*n*}\) with the cumulative distribution function G(*x*) and a probability density function g(*x*), let T denote the range of them, that is, T= max(*X*\(_{1}\), *X*\(_{2}\),... , *X*\(_{*n*}\))-
+min(*X*\(_{1}\), *X*\(_{2}\),... , *X*\(_{*n*}\)).
 
 ### Distribution
 The range, T, has the cumulative distribution function

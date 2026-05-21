@@ -14,8 +14,8 @@ A familiar setting exhibiting modular arithmetic is the hour hand on a 12-hour c
 Similarly, if one waits 8 hours and then 8 more hours (thus 16 hours in total), the clock will show the same time change as if one waited 4 hours. This is reflected by the identity 2 × 8 ≡ 4 (mod 12). After a wait of exactly 12 hours, the hour hand will be right where it started, so 12 acts as 0; one writes 12 ≡ 0 (mod 12).
 
 ## Congruence
-Given an integer *m* ≥ 1, called a **modulus**, two integers and are said to be **congruent** modulo , if their difference 1=*a* − *b* is an integer multiple of ; that is, if there is an integer *k* such that
-1=*a* − *b* = *km*.
+Given an integer *m* ≥ 1, called a **modulus**, two integers and are said to be **congruent** modulo , if their difference *a* − *b* is an integer multiple of ; that is, if there is an integer *k* such that
+*a* − *b* = *km*.
 Congruence modulo is a congruence relation, meaning that it is an equivalence relation compatible with addition, subtraction, and multiplication. Congruence modulo is denoted by
 
 \(a \equiv b \pmod m.\)
@@ -27,15 +27,15 @@ This notation is not to be confused with the notation *b* mod *m* or (*b* mod *m
 The congruence relation *a* ≡ *b* (mod *m*) may be rewritten as
 \(\exists k\in\Z\quad a=km+b,\)
 explicitly showing its relationship with Euclidean division. However, the *b* here need not be the remainder in the division of *a* by *m*. Rather, *a* ≡ *b* (mod *m*) asserts that *a* and *b* have the same remainder when divided by *m*. That is,
-1=*a* = *p m* + *r*,
-1=*b* = *q m* + *r*,
-where 0 ≤ *r* < *m* is the common remainder. We recover the previous relation (1=*a* − *b* = *k m*) by subtracting these two expressions and setting 1=*k* = *p* − *q*.
+*a* = *p m* + *r*,
+*b* = *q m* + *r*,
+where 0 ≤ *r* < *m* is the common remainder. We recover the previous relation (*a* − *b* = *k m*) by subtracting these two expressions and setting *k* = *p* − *q*.
 
 Because the congruence modulo is defined by the divisibility by and because −1 is a unit in the ring of integers, a number is divisible by −*m* exactly if it is divisible by. This means that every non-zero integer may be taken as a modulus.
 ### Examples
 In modulus 12, one can assert that:
 38 ≡ 14 (mod 12)
-because the difference is 1=38 − 14 = 24 = 2 × 12, a multiple of 12. Equivalently, 38 and 14 have the same remainder 2 when divided by 12.
+because the difference is 38 − 14 = 24 = 2 × 12, a multiple of 12. Equivalently, 38 and 14 have the same remainder 2 when divided by 12.
 
 The definition of congruence also applies to negative values. For example:
 \(\begin{align}
@@ -71,14 +71,14 @@ For cancellation of common terms, we have the following rules:
 * If *k a* ≡ *k b* (mod *m*) and *k* is coprime with *m*, then *a* ≡ *b* (mod *m*).
 * If *k a* ≡ *k b* (mod *k m*) and *k* ≠ 0, then *a* ≡ *b* (mod *m*).
 
-The last rule can be used to move modular arithmetic into division. If *b* divides *a*, then 1=(*a*/*b*) mod *m* = (*a* mod (*b m*)) / *b*.
+The last rule can be used to move modular arithmetic into division. If *b* divides *a*, then (*a*/*b*) mod *m* = (*a* mod (*b m*)) / *b*.
 
 The modular multiplicative inverse is defined by the following rules:
 * Existence: There exists an integer denoted *a*\(^{−1}\) such that *aa*\(^{−1}\) ≡ 1 (mod *m*) if and only if *a* is coprime with *m*. This integer *a*\(^{−1}\) is called a *modular multiplicative inverse* of modulo *m*.
-* If *a* ≡ *b* (mod *m*) and *a*\(^{−1}\) exists, then *a*\(^{−1}\) ≡ *b*\(^{−1}\) (mod *m*) (compatibility with multiplicative inverse, and, if 1=*a* = *b*, uniqueness modulo *m*).
+* If *a* ≡ *b* (mod *m*) and *a*\(^{−1}\) exists, then *a*\(^{−1}\) ≡ *b*\(^{−1}\) (mod *m*) (compatibility with multiplicative inverse, and, if *a* = *b*, uniqueness modulo *m*).
 * If *ax* ≡ *b* (mod *m*) and *a* is coprime to *m*, then the solution to this linear congruence is given by *x* ≡ *a*\(^{−1}\)*b* (mod *m*).
 
-The multiplicative inverse *x* ≡ *a*\(^{−1}\) (mod *m*) may be efficiently computed by solving Bézout's equation 1=*a x* + *m y* = 1 for *x*, *y*, by using the Extended Euclidean algorithm.
+The multiplicative inverse *x* ≡ *a*\(^{−1}\) (mod *m*) may be efficiently computed by solving Bézout's equation *a x* + *m y* = 1 for *x*, *y*, by using the Extended Euclidean algorithm.
 
 In particular, if *p* is a prime number, then *a* is coprime with *p* for every *a* such that 0 < *a* < *p*; thus a multiplicative inverse exists for all *a* that is not congruent to zero modulo *p*.
 
@@ -98,13 +98,13 @@ Some of the more advanced properties of congruence relations are the following:
 ## Congruence classes
 The congruence relation is an equivalence relation. The equivalence class modulo of an integer *a* is the set of all integers of the form *a* + *k m*, where is any integer. It is called the **congruence class** or **residue class** of *a* modulo *m*, and may be denoted (*a* mod *m*), or as or [*a*] when the modulus *m* is known from the context.
 
-Each residue class modulo *m* contains exactly one integer in the range \(0,.. ., |m| - 1\). Thus, these \(|m|\) integers are representatives of their respective residue classes.
+Each residue class modulo *m* contains exactly one integer in the range \(0,... , |m| - 1\). Thus, these \(|m|\) integers are representatives of their respective residue classes.
 
 It is generally easier to work with integers than sets of integers; that is, the representatives most often considered, rather than their residue classes.
 
 Consequently, (*a* mod *m*) denotes generally the unique integer such that 0 ≤ *r* < *m* and *r* ≡ *a* (mod *m*); it is called the **residue** of *a* modulo *m*.
 
-In particular, 1=(*a* mod *m*) = (*b* mod *m*) is equivalent to *a* ≡ *b* (mod *m*), and this explains why "1==" is often used instead of "≡" in this context.
+In particular, (*a* mod *m*) = (*b* mod *m*) is equivalent to *a* ≡ *b* (mod *m*), and this explains why "=" is often used instead of "≡" in this context.
 
 ## Residue systems
 Each residue class modulo *m* may be represented by any one of its members, although we usually represent each residue class by the smallest nonnegative integer which belongs to that class (since this is the proper remainder which results from division). Any two members of different residue classes modulo *m* are incongruent modulo *m*. Furthermore, every integer belongs to one and only one residue class modulo *m*.
@@ -140,7 +140,7 @@ The set of all congruence classes modulo *m* is a ring called the **ring of inte
 For *m* > 0 one has
 \(\mathbb{Z}/m\mathbb{Z} = \left\{ \overline{a}_m \mid a \in \mathbb{Z}\right\} = \left\{ \overline{0}_m, \overline{1}_m, \overline{2}_m,\ldots, \overline{m{-}1}_m \right\}.\)
 
-When 1=*m* = 1, \(\mathbb{Z}/m\mathbb{Z}\) is the zero ring; when 1=*m* = 0, \(\mathbb{Z}/m\mathbb{Z}\) is not an empty set; rather, it is isomorphic to \(\mathbb{Z}\); since. Addition, subtraction, and multiplication are defined on \(\mathbb{Z}/m\mathbb{Z}\) by the following rules:
+When *m* = 1, \(\mathbb{Z}/m\mathbb{Z}\) is the zero ring; when *m* = 0, \(\mathbb{Z}/m\mathbb{Z}\) is not an empty set; rather, it is isomorphic to \(\mathbb{Z}\); since. Addition, subtraction, and multiplication are defined on \(\mathbb{Z}/m\mathbb{Z}\) by the following rules:
 * \(\overline{a}_m + \overline{b}_m = \overline{(a + b)}_m\)
 * \(\overline{a}_m - \overline{b}_m = \overline{(a - b)}_m\)
 * \(\overline{a}_m \overline{b}_m = \overline{(a b)}_m.\)
@@ -151,7 +151,7 @@ as in the arithmetic for the 24-hour clock.
 
 The notation \(\mathbb{Z}/m\mathbb{Z}\) is used because this ring is the quotient ring of \(\mathbb{Z}\) by the ideal \(m\mathbb{Z}\), the set formed by all multiples of *m*, that is, all numbers *k m* with \(k\in\mathbb{Z}.\)
 
-Under addition, \(\mathbb Z/m\Z\) is a cyclic group. All finite cyclic groups are isomorphic with \(\mathbb Z/m\mathbb Z\) for some. The ring of integers modulo *m* is a field; that is, every nonzero element has a multiplicative inverse, if and only if *m* is prime. If 1=*m* = *p* is a prime power with *k* > 1, there exists a unique (up to isomorphism) finite field \(\mathrm{GF}(m) =\mathbb F_m\) with *m* elements, which is *not* isomorphic to \(\mathbb Z/m\mathbb Z\), which fails to be a field because it has zero-divisors.
+Under addition, \(\mathbb Z/m\Z\) is a cyclic group. All finite cyclic groups are isomorphic with \(\mathbb Z/m\mathbb Z\) for some. The ring of integers modulo *m* is a field; that is, every nonzero element has a multiplicative inverse, if and only if *m* is prime. If *m* = *p* is a prime power with *k* > 1, there exists a unique (up to isomorphism) finite field \(\mathrm{GF}(m) =\mathbb F_m\) with *m* elements, which is *not* isomorphic to \(\mathbb Z/m\mathbb Z\), which fails to be a field because it has zero-divisors.
 
 If *m* > 1, \((\mathbb Z/m\mathbb Z)^\times\) denotes the multiplicative group of the integers modulo *m* that are invertible. It consists of the congruence classes , where *a* is coprime to *m*; these are precisely the classes possessing a multiplicative inverse. They form an abelian group under multiplication; its order is *φ*(*m*), where is Euler's totient function.
 

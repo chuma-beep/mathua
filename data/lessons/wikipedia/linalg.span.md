@@ -14,7 +14,7 @@ Given a vector space over a field , the span of a set of vectors (not necessaril
 \operatorname{span}(S) = \biggl \{ \lambda_1 \mathbf v_1 + \lambda_2 \mathbf v_2 + \cdots + \lambda_n \mathbf v_n \mid n \in \N,\; \mathbf v_1,...,\mathbf v_n \in S, \; \lambda_1,...,\lambda_n \in K \biggr \}
 \]
 
-When is empty, the only possibility is 1=*n* = 0, and the previous expression for \(\operatorname{span}(S)\) reduces to the empty sum. The standard convention for the empty sum implies thus \(\text{span}(\empty) = \{\mathbf 0\},\) a property that is immediate with the other definitions. However, many introductory textbooks simply include this fact as part of the definition.
+When is empty, the only possibility is *n* = 0, and the previous expression for \(\operatorname{span}(S)\) reduces to the empty sum. The standard convention for the empty sum implies thus \(\text{span}(\empty) = \{\mathbf 0\},\) a property that is immediate with the other definitions. However, many introductory textbooks simply include this fact as part of the definition.
 
 When \(S=\{\mathbf v_1,\ldots, \mathbf v_n\}\) is finite, one has
 
@@ -46,7 +46,7 @@ Let be a finite-dimensional vector space. Any set of vectors that spans can be r
 ## Generalizations
 Generalizing the definition of the span of points in space, a subset of the ground set of a matroid is called a spanning set if the rank of equals the rank of the entire ground set
 
-The vector space definition can also be generalized to modules. Given an -module and a collection of elements *a*\(_{1}\),.. ., *a\(_{n}\)* of , the submodule of spanned by *a*\(_{1}\),.. ., *a\(_{n}\)* is the sum of cyclic modules
+The vector space definition can also be generalized to modules. Given an -module and a collection of elements *a*\(_{1}\),... , *a\(_{n}\)* of , the submodule of spanned by *a*\(_{1}\),... , *a\(_{n}\)* is the sum of cyclic modules
 
 \[
 Ra_1 + \cdots + Ra_n = \left\{ \sum_{k=1}^n r_k a_k \bigg| r_k \in R \right\}

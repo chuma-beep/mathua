@@ -104,7 +104,7 @@ Generally, if \(z=r\left(\cos x+i\sin x\right)\) (in polar form) and are arbitra
 \(z^w = r^w \left(\cos x + i\sin x\right)^w = \lbrace r^w \cos(xw + 2\pi kw) + i r^w \sin(xw + 2\pi kw) | k \in \mathbb{Z}\rbrace\,.\)
 (Note that if is a rational number that equals *p* / *q* in lowest terms then this set will have exactly distinct values rather than infinitely many. In particular, if is an integer then the set will have exactly one value, as previously discussed.) In contrast, de Moivre's formula gives
 \(r^w (\cos xw + i\sin xw)\, \)
-which is just the single value from this set corresponding to 1=*k* = 0.
+which is just the single value from this set corresponding to *k* = 0.
 
 ## Analogues in other settings
 ### Hyperbolic trigonometry

@@ -16,11 +16,11 @@ Suppose one throws an ordinary six-sided die eight times. What is the probabilit
 
 It may be tempting to say that
 
-Pr(["1" on 1st trial] or ["1" on second trial] or.. . or ["1" on 8th trial])
+Pr(["1" on 1st trial] or ["1" on second trial] or... or ["1" on 8th trial])
 
-= Pr("1" on 1st trial) + Pr("1" on second trial) +.. . + P("1" on 8th trial)
+= Pr("1" on 1st trial) + Pr("1" on second trial) +... + P("1" on 8th trial)
 
-= 1/6 + 1/6 +.. . + 1/6
+= 1/6 + 1/6 +... + 1/6
 
 = 8/6
 
@@ -32,11 +32,11 @@ One may resolve this overlap by the principle of inclusion-exclusion, or, in thi
 
 Pr(at least one "1") = 1 − Pr(no "1"s)
 
-= 1 − Pr([no "1" on 1st trial] and [no "1" on 2nd trial] and.. . and [no "1" on 8th trial])
+= 1 − Pr([no "1" on 1st trial] and [no "1" on 2nd trial] and... and [no "1" on 8th trial])
 
-= 1 − Pr(no "1" on 1st trial) × Pr(no "1" on 2nd trial) ×.. . × Pr(no "1" on 8th trial)
+= 1 − Pr(no "1" on 1st trial) × Pr(no "1" on 2nd trial) ×... × Pr(no "1" on 8th trial)
 
-= 1 −(5/6) × (5/6) ×.. . × (5/6)
+= 1 −(5/6) × (5/6) ×... × (5/6)
 
 = 1 − (5/6)\(^{8}\)
 

@@ -61,9 +61,7 @@ Explicitly, the recurrence yields the equations
 etc.
 
 We obtain the sequence of Fibonacci numbers, which begins
-0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89,.. .
-
-The recurrence can be solved by methods described below yielding Binet's formula, which involves powers of the two roots of the characteristic polynomial \(t^2 = t + 1\); the generating function of the sequence is the rational function
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89,... The recurrence can be solved by methods described below yielding Binet's formula, which involves powers of the two roots of the characteristic polynomial \(t^2 = t + 1\); the generating function of the sequence is the rational function
 \(\frac{t}{1-t-t^2}.\)
 
 ### Binomial coefficients

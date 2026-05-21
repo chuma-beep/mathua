@@ -40,7 +40,7 @@ For example, in the expression \(\sum_{n=1}^{3} (2nx),\) the variable *n* is bou
 \[
 \sum_{n=1}^{3} (2nx)\equiv 12x.
 \]
- The value for 1=*x* = 3 is 36, which can be denoted
+ The value for *x* = 3 is 36, which can be denoted
 \[
 \sum_{n=1}^{3} (2nx)\Big|_{x=3}= 36.
 \]
@@ -72,7 +72,7 @@ The term 'expression' is part of the language of mathematics, that is to say, it
 
 The alphabet consists of:
 
-* A set of individual constants: Symbols representing fixed objects in the domain of discourse, such as numerals (1, 2.5, 1/7,.. .), sets (\(\varnothing, \{1,2,3\}\),.. .), truth values (T or F), etc.
+* A set of individual constants: Symbols representing fixed objects in the domain of discourse, such as numerals (1, 2.5, 1/7,... ), sets (\(\varnothing, \{1,2,3\}\),... ), truth values (T or F), etc.
 * A set of individual variables: A countably infinite amount of symbols representing variables used for representing an unspecified object in the domain. (Usually letters like , or )
 * A set of operations: Function symbols representing operations that can be performed on elements over the domain, like addition (+), multiplication (×), or set operations like union (∪), or intersection (∩). (Functions can be understood as unary operations)
 * Brackets ( )
@@ -80,8 +80,8 @@ The alphabet consists of:
 With this alphabet, the recursive rules for forming a well-formed expression (WFE) are as follows:
 
 * Any constant or variable as defined are the atomic expressions, the simplest well-formed expressions (WFE's). For instance, the constant \(2\) or the variable \(x\) are syntactically correct expressions.
-* Let \(F\) be a metavariable for any n-ary operation over the domain, and let \(\phi_1, \phi_2,.. . \phi_n\) be metavariables for any WFE's.
-Then \(F(\phi_1, \phi_2,.. . \phi_n)\) is also well-formed. Here represented with prefix notation, but other notations may be used such as Infix notation like \(3+4\), or possibly non-linear notations such as with matrices or summation notation if allowed.
+* Let \(F\) be a metavariable for any n-ary operation over the domain, and let \(\phi_1, \phi_2,... \phi_n\) be metavariables for any WFE's.
+Then \(F(\phi_1, \phi_2,... \phi_n)\) is also well-formed. Here represented with prefix notation, but other notations may be used such as Infix notation like \(3+4\), or possibly non-linear notations such as with matrices or summation notation if allowed.
 For instance, if the domain of discourse is the real numbers, \(F\) can denote the binary operation +, then \(\phi_1 + \phi_2\) is well-formed. Or \(F\) can be the unary operation \(\surd\) so \(\sqrt{\phi_1}\) is well-formed.
 Brackets are initially around each non-atomic expression, but they can be deleted in cases where there is a defined order of operations, or where order doesn't matter (i.e. where operations are associative).
 
@@ -123,7 +123,7 @@ For evaluating the univariate polynomial \(a_nx^n+a_{n-1}x^{n-1}+\cdots +a_0,\) 
 
 ## Types of expressions
 ### Algebraic expression
-An *algebraic expression* is an expression built up from algebraic constants, variables, and the algebraic operations (addition, subtraction, multiplication, division and exponentiation by a rational number). For example, 1=3*x*\(^{2}\) − 2*xy* + *c* is an algebraic expression. Since taking the square root is the same as raising to the power , the following is also an algebraic expression:
+An *algebraic expression* is an expression built up from algebraic constants, variables, and the algebraic operations (addition, subtraction, multiplication, division and exponentiation by a rational number). For example, 3*x*\(^{2}\) − 2*xy* + *c* is an algebraic expression. Since taking the square root is the same as raising to the power , the following is also an algebraic expression:
 \(\sqrt{\frac{1-x^2}{1+x^2\)
 See also: Algebraic equation and Algebraic closure
 

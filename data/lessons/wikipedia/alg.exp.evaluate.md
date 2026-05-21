@@ -3,7 +3,7 @@
 # Evaluate exponential expressions
 
 ## History
-In *The Sand Reckoner*, Archimedes proved the law of exponents, 1=10\(^{*a*}\) · 10\(^{*b*}\) = 10\(^{*a*+*b*}\), necessary to manipulate powers of 10. He then used powers of 10 to estimate the number of grains of sand that can be contained in the universe.
+In *The Sand Reckoner*, Archimedes proved the law of exponents, 10\(^{*a*}\) · 10\(^{*b*}\) = 10\(^{*a*+*b*}\), necessary to manipulate powers of 10. He then used powers of 10 to estimate the number of grains of sand that can be contained in the universe.
 
 In the 9th century, the Persian mathematician Al-Khwarizmi used the terms مَال (*māl*, "possessions", "property") for a square—the Muslims, "like most mathematicians of those and earlier times, thought of a squared number as a depiction of an area, especially of land, hence property"—and كَعْبَة (*Kaʿbah*, "cube") for a cube, which later Islamic mathematicians represented in mathematical notation as the letters *mīm* (m) and *kāf* (k), respectively, by the 15th century, as seen in the work of Abu'l-Hasan ibn Ali al-Qalasadi.
 Nicolas Chuquet used a form of exponential notation in the 15th century, for example 12\(^{2}\) to represent 12*x*\(^{2}\). This was later used by Henricus Grammateus and Michael Stifel in the 16th century. In the late 16th century, Jost Bürgi would use Roman numerals for exponents in a way similar to that of Chuquet, for example for 4*x*\(^{3}\).

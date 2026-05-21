@@ -354,13 +354,13 @@ where
 
 T = true.
 F = false.
-The **Com** row indicates whether an operator, **op**, is commutative – 1=*P* op *Q* = *Q* op *P*.
-The **Assoc** row indicates whether an operator, **op**, is associative – 1=(*P* op *Q*) op *R* = *P* op (*Q* op *R*).
-The **Adj** row shows the operator **op2** such that 1=*P* op *Q* = *Q* op2 *P*.
-The **Neg** row shows the operator **op2** such that 1=*P* op *Q* = ¬(*P* op2 *Q*).
+The **Com** row indicates whether an operator, **op**, is commutative – *P* op *Q* = *Q* op *P*.
+The **Assoc** row indicates whether an operator, **op**, is associative – (*P* op *Q*) op *R* = *P* op (*Q* op *R*).
+The **Adj** row shows the operator **op2** such that *P* op *Q* = *Q* op2 *P*.
+The **Neg** row shows the operator **op2** such that *P* op *Q* = ¬(*P* op2 *Q*).
 The **Dual** row shows the dual operation obtained by interchanging T with F, and AND with OR.
-The **L id** row shows the operator's left identities if it has any values such that 1=*I* op *Q* = *Q*.
-The **R id** row shows the operator's right identities if it has any values such that 1=*P* op *I* = *P*.
+The **L id** row shows the operator's left identities if it has any values such that *I* op *Q* = *Q*.
+The **R id** row shows the operator's right identities if it has any values such that *P* op *I* = *P*.
 
 ### Wittgenstein table
 In proposition 5.101 of the *Tractatus Logico-Philosophicus*, Wittgenstein listed the table above as follows:

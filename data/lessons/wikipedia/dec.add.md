@@ -11,7 +11,7 @@ More generally, a decimal with *n* digits after the separator (a point or comma)
 It follows that a number is a decimal fraction if and only if it has a finite decimal representation.
 
 Expressed as fully reduced fractions, the decimal numbers are those whose denominator is a product of a power of 2 and a power of 5. Thus the smallest denominators of decimal numbers are
-\(1=2^0\cdot 5^0, 2=2^1\cdot 5^0, 4=2^2\cdot 5^0, 5=2^0\cdot 5^1, 8=2^3\cdot 5^0, 10=2^1\cdot 5^1, 16=2^4\cdot 5^0, 20=2^2\cdot5^1, 25=2^0\cdot 5^2, \ldots\)
+\(2^0\cdot 5^0, 2=2^1\cdot 5^0, 4=2^2\cdot 5^0, 5=2^0\cdot 5^1, 8=2^3\cdot 5^0, 10=2^1\cdot 5^1, 16=2^4\cdot 5^0, 20=2^2\cdot5^1, 25=2^0\cdot 5^2, \ldots\)
 
 ### Approximation using decimal numbers
 Decimal numerals do not allow an exact representation for all real numbers. Nevertheless, they allow approximating every real number with any desired accuracy, e.g., the decimal 3.14159 approximates , being less than 10\(^{−5}\) off; so decimals are widely used in science, engineering and everyday life.

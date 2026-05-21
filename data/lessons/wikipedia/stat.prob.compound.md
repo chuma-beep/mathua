@@ -72,7 +72,7 @@ A probability is a way of assigning every event a value between zero and one, wi
 
 The probability of an event *A* is written as \(P(A)\), \(p(A)\), or \(\text{Pr}(A)\). This mathematical definition of probability can extend to infinite sample spaces, and even uncountable sample spaces, using the concept of a measure.
 
-The *opposite* or *complement* of an event *A* is the event [not *A*] (that is, the event of *A* not occurring), often denoted as \(A', A^c\), \(\overline{A}, A^\complement, \neg A\), or \({\sim}A\); its probability is given by 1= *P*(not *A*) = 1 − *P*(*A*). As an example, the chance of not rolling a six on a six-sided die is 1=1 – (chance of rolling a six) = 1=1 −. For a more comprehensive treatment, see Complementary event.
+The *opposite* or *complement* of an event *A* is the event [not *A*] (that is, the event of *A* not occurring), often denoted as \(A', A^c\), \(\overline{A}, A^\complement, \neg A\), or \({\sim}A\); its probability is given by *P*(not *A*) = 1 − *P*(*A*). As an example, the chance of not rolling a six on a six-sided die is 1 – (chance of rolling a six) = 1 −. For a more comprehensive treatment, see Complementary event.
 
 If two events *A* and *B* occur on a single performance of an experiment, this is called the intersection or joint probability of *A* and *B*, denoted as \(P(A \cap B).\)
 

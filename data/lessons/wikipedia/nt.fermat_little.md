@@ -57,7 +57,7 @@ Euler's theorem is a generalization of Fermat's little theorem: For any modulus 
 a^{\varphi (n)} \equiv 1 \pmod n,
 \]
 
-where *φ*(*n*) denotes Euler's totient function (which counts the integers from 1 to that are coprime to ). Fermat's little theorem is indeed a special case, because if is a prime number, then 1=*φ*(*n*) = *n* − 1.
+where *φ*(*n*) denotes Euler's totient function (which counts the integers from 1 to that are coprime to ). Fermat's little theorem is indeed a special case, because if is a prime number, then *φ*(*n*) = *n* − 1.
 
 A corollary of Euler's theorem is: For every positive integer , if the integer is coprime with , then
 
@@ -65,7 +65,7 @@ A corollary of Euler's theorem is: For every positive integer , if the integer i
 x \equiv y \pmod{\varphi(n)}\quad\text{implies}\quad a^x \equiv a^y \pmod n,
 \]
 
-for any integers and. This follows from Euler's theorem; since, if \(x \equiv y \pmod{\varphi(n)}\), then 1=*x* = *y* + *kφ*(*n*) for some integer , and one has
+for any integers and. This follows from Euler's theorem; since, if \(x \equiv y \pmod{\varphi(n)}\), then *x* = *y* + *kφ*(*n*) for some integer , and one has
 
 \[
 a^x = a^{y + \varphi(n)k} = a^y (a^{\varphi(n)})^k \equiv a^y 1^k \equiv a^y \pmod n.
@@ -89,9 +89,9 @@ It follows that
 x\equiv x^{ef}\equiv (x^e)^f \equiv y^f \pmod n.
 \]
 
-On the other hand, if 1=*n* = *pq* is the product of two distinct prime numbers, then 1=*φ*(*n*) = (*p* − 1)(*q* − 1). In this case, finding from and is as difficult as computing *φ*(*n*) (this has not been proven, but no algorithm is known for computing without knowing *φ*(*n*)). Knowing only , the computation of *φ*(*n*) has essentially the same difficulty as the factorization of ; since 1=*φ*(*n*) = (*p* − 1)(*q* − 1), and conversely, the factors and are the (integer) solutions of the equation *x* 0.
+On the other hand, if *n* = *pq* is the product of two distinct prime numbers, then *φ*(*n*) = (*p* − 1)(*q* − 1). In this case, finding from and is as difficult as computing *φ*(*n*) (this has not been proven, but no algorithm is known for computing without knowing *φ*(*n*)). Knowing only , the computation of *φ*(*n*) has essentially the same difficulty as the factorization of ; since *φ*(*n*) = (*p* − 1)(*q* − 1), and conversely, the factors and are the (integer) solutions of the equation *x* 0.
 
-The basic idea of RSA cryptosystem is thus: If a message is encrypted as 1=*y* = *x\(^{e}\)* (mod *n*), using public values of and , then, with the current knowledge, it cannot be decrypted without finding the (secret) factors and of. Fermat's little theorem is also related to the Carmichael function and Carmichael's theorem, as well as to Lagrange's theorem in group theory.
+The basic idea of RSA cryptosystem is thus: If a message is encrypted as *y* = *x\(^{e}\)* (mod *n*), using public values of and , then, with the current knowledge, it cannot be decrypted without finding the (secret) factors and of. Fermat's little theorem is also related to the Carmichael function and Carmichael's theorem, as well as to Lagrange's theorem in group theory.
 
 ## Converse
 The converse of Fermat's little theorem fails for Carmichael numbers. However, a slightly weaker variant of the converse is **Lehmer's theorem**:
@@ -125,8 +125,8 @@ is either a prime or a Carmichael number.
 
 ## Miller–Rabin primality test
 The Miller–Rabin primality test uses the following extension of Fermat's little theorem:
-If is an odd prime and 1=*p* − 1 = 2\(^{*s*}\)*d* with s > 0 and odd > 0, then for every coprime to , either *a*\(^{*d*}\) ≡ 1 (mod *p*) or there exists such that 0 ≤ *r* < *s* and *a*\(^{2*r*}\)*d* ≡ −1 (mod *p*).
+If is an odd prime and *p* − 1 = 2\(^{*s*}\)*d* with s > 0 and odd > 0, then for every coprime to , either *a*\(^{*d*}\) ≡ 1 (mod *p*) or there exists such that 0 ≤ *r* < *s* and *a*\(^{2*r*}\)*d* ≡ −1 (mod *p*).
 
-This result may be deduced from Fermat's little theorem by the fact that, if is an odd prime, then the integers modulo form a finite field, in which 1 modulo has exactly two square roots, 1 and −1 modulo. Note that *a*\(^{*d*}\) ≡ 1 (mod *p*) holds trivially for *a* ≡ 1 (mod *p*), because the congruence relation is compatible with exponentiation. And 1=*a*\(^{*d*}\) = *a*\(^{20}\)*d* ≡ −1 (mod *p*) holds trivially for *a* ≡ −1 (mod *p*) since is odd, for the same reason. That is why one usually chooses a random in the interval 1 < *a* < *p* − 1.
+This result may be deduced from Fermat's little theorem by the fact that, if is an odd prime, then the integers modulo form a finite field, in which 1 modulo has exactly two square roots, 1 and −1 modulo. Note that *a*\(^{*d*}\) ≡ 1 (mod *p*) holds trivially for *a* ≡ 1 (mod *p*), because the congruence relation is compatible with exponentiation. And *a*\(^{*d*}\) = *a*\(^{20}\)*d* ≡ −1 (mod *p*) holds trivially for *a* ≡ −1 (mod *p*) since is odd, for the same reason. That is why one usually chooses a random in the interval 1 < *a* < *p* − 1.
 
-The Miller–Rabin test uses this property in the following way: given an odd integer for which primality has to be tested, write 1=*p* − 1 = 2\(^{*s*}\)*d* with s > 0 and odd > 0, and choose a random such that 1 < *a* < *p* − 1; then compute 1=*b* = *a*\(^{*d*}\) mod *p*; if is not 1 nor −1, then square it repeatedly modulo until you get −1 or have squared *s* − 1 times. If *b* ≠ 1 and −1 has not been obtained by squaring, then is a *composite* and is a witness for the compositeness of. Otherwise, is a *strong probable prime to base a*; that is, it may be prime or not. If is composite, the probability that the test declares it a strong probable prime anyway is at most 1/4, in which case is a *strong pseudoprime*, and is a *strong liar*. Therefore after non-conclusive random tests, the probability that is composite is at most 4\(^{−*k*}\), and may thus be made as low as desired by increasing. In summary, the test either proves that a number is composite or asserts that it is prime with a probability of error that may be chosen as low as desired. The test is very simple to implement and computationally more efficient than all known deterministic tests. Therefore, it is generally used before starting a proof of primality.
+The Miller–Rabin test uses this property in the following way: given an odd integer for which primality has to be tested, write *p* − 1 = 2\(^{*s*}\)*d* with s > 0 and odd > 0, and choose a random such that 1 < *a* < *p* − 1; then compute *b* = *a*\(^{*d*}\) mod *p*; if is not 1 nor −1, then square it repeatedly modulo until you get −1 or have squared *s* − 1 times. If *b* ≠ 1 and −1 has not been obtained by squaring, then is a *composite* and is a witness for the compositeness of. Otherwise, is a *strong probable prime to base a*; that is, it may be prime or not. If is composite, the probability that the test declares it a strong probable prime anyway is at most 1/4, in which case is a *strong pseudoprime*, and is a *strong liar*. Therefore after non-conclusive random tests, the probability that is composite is at most 4\(^{−*k*}\), and may thus be made as low as desired by increasing. In summary, the test either proves that a number is composite or asserts that it is prime with a probability of error that may be chosen as low as desired. The test is very simple to implement and computationally more efficient than all known deterministic tests. Therefore, it is generally used before starting a proof of primality.

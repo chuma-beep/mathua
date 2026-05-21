@@ -8,7 +8,7 @@ In abstract algebra, a **congruence relation** (or simply **congruence**) is an 
 The definition of a congruence depends on the type of algebraic structure under consideration. Particular definitions of congruence can be made for groups, rings, vector spaces, modules, semigroups, lattices, and so forth. The common theme is that a congruence is an equivalence relation on an algebraic object that is compatible with the algebraic structure, in the sense that the operations are well-defined on the equivalence classes.
 
 ### General
-The general notion of a congruence relation can be formally defined in the context of universal algebra, a field which studies ideas common to all algebraic structures. In this setting, a relation \(R\) on a given algebraic structure is called **compatible** if for each \(n\) and each \(n\)-ary operation \(\mu\) defined on the structure: whenever \(a_1 \mathrel{R} a'_1\) and.. . and \(a_n \mathrel{R} a'_n\), then \(\mu(a_1,\ldots,a_n) \mathrel{R} \mu(a'_1,\ldots,a'_n)\).
+The general notion of a congruence relation can be formally defined in the context of universal algebra, a field which studies ideas common to all algebraic structures. In this setting, a relation \(R\) on a given algebraic structure is called **compatible** if for each \(n\) and each \(n\)-ary operation \(\mu\) defined on the structure: whenever \(a_1 \mathrel{R} a'_1\) and... and \(a_n \mathrel{R} a'_n\), then \(\mu(a_1,\ldots,a_n) \mathrel{R} \mu(a'_1,\ldots,a'_n)\).
 
 A congruence relation on the structure is then defined as an equivalence relation that is also compatible.
 
@@ -84,7 +84,5 @@ The function that maps every element of *A* to its equivalence class is a homomo
 The lattice **Con**(*A*) of all congruence relations on an algebra *A* is algebraic.
 
 John M. Howie described how semigroup theory illustrates congruence relations in universal algebra:
-In a group a congruence is determined if we know a single congruence class, in particular if we know the normal subgroup which is the class containing the identity. Similarly, in a ring a congruence is determined if we know the ideal which is the congruence class containing the zero. In semigroups there is no such fortunate occurrence, and we are therefore faced with the necessity of studying congruences as such. More than anything else, it is this necessity that gives semigroup theory its characteristic flavour. Semigroups are in fact the first and simplest type of algebra to which the methods of universal algebra must be applied.. .
-
-## Category theory
+In a group a congruence is determined if we know a single congruence class, in particular if we know the normal subgroup which is the class containing the identity. Similarly, in a ring a congruence is determined if we know the ideal which is the congruence class containing the zero. In semigroups there is no such fortunate occurrence, and we are therefore faced with the necessity of studying congruences as such. More than anything else, it is this necessity that gives semigroup theory its characteristic flavour. Semigroups are in fact the first and simplest type of algebra to which the methods of universal algebra must be applied... ## Category theory
 In category theory, a congruence relation *R* on a category *C* is given by: for each pair of objects *X*, *Y* in *C*, an equivalence relation *R*\(_{*X*,*Y*}\) on Hom(*X*,*Y*), such that the equivalence relations respect composition of morphisms. See for details.

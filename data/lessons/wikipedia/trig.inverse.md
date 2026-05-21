@@ -32,22 +32,22 @@ The principal inverses are listed in the following table.
 ! scope="col" | Range of usual principal value (degrees)
 |-
 ! scope="row" | arcsine
-| 1= *y* = arcsin(*x*) || 1=*x* = sin(*y*) || −1 ≤ *x* ≤ 1 || −|| −90° ≤ *y* ≤ 90°
+| *y* = arcsin(*x*) || *x* = sin(*y*) || −1 ≤ *x* ≤ 1 || −|| −90° ≤ *y* ≤ 90°
 |-
 ! scope="row" | arccosine
-| 1= *y* = arccos(*x*) || 1=*x* = cos(*y*) || −1 ≤ *x* ≤ 1 || 0 ≤ *y* ≤ π || 0° ≤ *y* ≤ 180°
+| *y* = arccos(*x*) || *x* = cos(*y*) || −1 ≤ *x* ≤ 1 || 0 ≤ *y* ≤ π || 0° ≤ *y* ≤ 180°
 |-
 ! scope="row" | arctangent
-| 1= *y* = arctan(*x*) || 1=*x* = tan(*y*) || all real numbers || −|| −90° < *y* < 90°
+| *y* = arctan(*x*) || *x* = tan(*y*) || all real numbers || −|| −90° < *y* < 90°
 |-
 ! scope="row" | arccotangent
-| 1= *y* = arccot(*x*) || 1=*x* = cot(*y*) || all real numbers || 0 < *y* < π || 0° < *y* < 180°
+| *y* = arccot(*x*) || *x* = cot(*y*) || all real numbers || 0 < *y* < π || 0° < *y* < 180°
 |-
 ! scope="row" | arcsecant
-| 1= *y* = arcsec(*x*) || 1=*x* = sec(*y*) || |*x*| ≥ 1 || 0 ≤ *y* < or || 0° ≤ *y* < 90° or 90° < *y* ≤ 180°
+| *y* = arcsec(*x*) || *x* = sec(*y*) || |*x*| ≥ 1 || 0 ≤ *y* < or || 0° ≤ *y* < 90° or 90° < *y* ≤ 180°
 |-
 ! scope="row" | arccosecant
-| 1= *y* = arccsc(*x*) ||1=*x* = csc(*y*) || |*x*| ≥ 1 || − or 0 < *y* ≤ || −90° ≤ *y* < 0 or 0° < *y* ≤ 90°
+| *y* = arccsc(*x*) ||*x* = csc(*y*) || |*x*| ≥ 1 || − or 0 < *y* ≤ || −90° ≤ *y* < 0 or 0° < *y* ≤ 90°
 |-
 |}
 Note: Some authors define the range of arcsecant to be \(\arccot(z)\)
