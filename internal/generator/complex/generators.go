@@ -39,13 +39,13 @@ func (g *conceptGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(max(1, scale*8)) + 1
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("What is the real part of %s?", fmtComplex(a, b)),
+			Question:    fmt.Sprintf("What is the real part of \\(%s\\)?", fmtComplex(a, b)),
 			Answer:      strconv.Itoa(a),
 			Explanation: fmt.Sprintf("The real part of %s is %d.", fmtComplex(a, b), a),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the imaginary part of %s?", fmtComplex(a, b)),
+		Question:    fmt.Sprintf("What is the imaginary part of \\(%s\\)?", fmtComplex(a, b)),
 		Answer:      strconv.Itoa(b),
 		Explanation: fmt.Sprintf("The imaginary part of %s is %d.", fmtComplex(a, b), b),
 	}
@@ -63,7 +63,7 @@ func (g *addSubGen) Generate(difficulty float64) generator.Problem {
 		r := a + c
 		i := b + d
 		return generator.Problem{
-			Question:    fmt.Sprintf("(%s) + (%s) = ?", fmtComplex(a, b), fmtComplex(c, d)),
+			Question:    fmt.Sprintf("\\((%s) + (%s) =\\) ?", fmtComplex(a, b), fmtComplex(c, d)),
 			Answer:      fmtComplex(r, i),
 			Explanation: fmt.Sprintf("(%s) + (%s) = (%d+%d) + (%d+%d)i = %s", fmtComplex(a, b), fmtComplex(c, d), a, c, b, d, fmtComplex(r, i)),
 		}
@@ -71,7 +71,7 @@ func (g *addSubGen) Generate(difficulty float64) generator.Problem {
 	r := a - c
 	i := b - d
 	return generator.Problem{
-		Question:    fmt.Sprintf("(%s) - (%s) = ?", fmtComplex(a, b), fmtComplex(c, d)),
+		Question:    fmt.Sprintf("\\((%s) - (%s) =\\) ?", fmtComplex(a, b), fmtComplex(c, d)),
 		Answer:      fmtComplex(r, i),
 		Explanation: fmt.Sprintf("(%s) - (%s) = (%d-%d) + (%d-%d)i = %s", fmtComplex(a, b), fmtComplex(c, d), a, c, b, d, fmtComplex(r, i)),
 	}
@@ -88,7 +88,7 @@ func (g *multGen) Generate(difficulty float64) generator.Problem {
 	r := a*c - b*d
 	i := a*d + b*c
 	return generator.Problem{
-		Question:    fmt.Sprintf("(%s)(%s) = ?", fmtComplex(a, b), fmtComplex(c, d)),
+		Question:    fmt.Sprintf("\\((%s)(%s) =\\) ?", fmtComplex(a, b), fmtComplex(c, d)),
 		Answer:      fmtComplex(r, i),
 		Explanation: fmt.Sprintf("(%s)(%s) = (%d)(%d) - (%d)(%d) + [(%d)(%d)+(%d)(%d)]i = %s", fmtComplex(a, b), fmtComplex(c, d), a, c, b, d, a, d, b, c, fmtComplex(r, i)),
 	}
@@ -101,7 +101,7 @@ func (g *conjugateGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(max(1, scale*8)) + 1
 	b := rand.Intn(max(1, scale*8)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the conjugate of %s?", fmtComplex(a, b)),
+		Question:    fmt.Sprintf("What is the conjugate of \\(%s\\)?", fmtComplex(a, b)),
 		Answer:      fmtComplex(a, -b),
 		Explanation: fmt.Sprintf("The conjugate of %s is %s.", fmtComplex(a, b), fmtComplex(a, -b)),
 	}
@@ -118,7 +118,7 @@ func (g *divideGen) Generate(difficulty float64) generator.Problem {
 	numR := r*c - s*d
 	numI := r*d + s*c
 	return generator.Problem{
-		Question:    fmt.Sprintf("(%s) / (%s) = ?", fmtComplex(numR, numI), fmtComplex(c, d)),
+		Question:    fmt.Sprintf("\\((%s) / (%s) =\\) ?", fmtComplex(numR, numI), fmtComplex(c, d)),
 		Answer:      fmtComplex(r, s),
 		Explanation: fmt.Sprintf("(%s) / (%s) = %s", fmtComplex(numR, numI), fmtComplex(c, d), fmtComplex(r, s)),
 	}
@@ -145,7 +145,7 @@ func (g *polarGen) Generate(difficulty float64) generator.Problem {
 		realPart := r * a.cosReal
 		imagPart := r * a.sinImag
 		return generator.Problem{
-			Question:    fmt.Sprintf("Convert %d(cos %d° + i sin %d°) to rectangular form.", r, a.deg, a.deg),
+			Question:    fmt.Sprintf("Convert \\(%d(\\cos %d^{\\circ} + i\\sin %d^{\\circ})\\) to rectangular form.", r, a.deg, a.deg),
 			Answer:      fmtComplex(realPart, imagPart),
 			Explanation: fmt.Sprintf("%d(cos %d° + i sin %d°) = %d(%d) + %d(%d)i = %s", r, a.deg, a.deg, r, a.cosReal, r, a.sinImag, fmtComplex(realPart, imagPart)),
 		}
@@ -164,7 +164,7 @@ func (g *polarGen) Generate(difficulty float64) generator.Problem {
 	theta := math.Atan2(float64(t.b), float64(t.a)) * 180 / math.Pi
 	thetaStr := strconv.Itoa(int(math.Round(theta)))
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert %s to polar form.", fmtComplex(t.a, t.b)),
+		Question:    fmt.Sprintf("Convert \\(%s\\) to polar form.", fmtComplex(t.a, t.b)),
 		Answer:      fmt.Sprintf("%d(cos %s° + i sin %s°)", t.r, thetaStr, thetaStr),
 		Explanation: fmt.Sprintf("r = √(a²+b²) = √(%d²+%d²) = %d. θ = arctan(b/a) = arctan(%d/%d) ≈ %s°", t.a, t.b, t.r, t.b, t.a, thetaStr),
 	}
@@ -200,7 +200,7 @@ func (g *deMoivreGen) Generate(difficulty float64) generator.Problem {
 	}
 
 	return generator.Problem{
-		Question:    fmt.Sprintf("[%d(cos %d° + i sin %d°)]^%d = ?", r, angle.deg, angle.deg, n),
+		Question:    fmt.Sprintf("\\([%d(\\cos %d^{\\circ} + i\\sin %d^{\\circ})]^{%d} =\\) ?", r, angle.deg, angle.deg, n),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("[%d(cos %d° + i sin %d°)]^%d = %d(cos %d×%d° + i sin %d×%d°) = %d(cos %d° + i sin %d°) = %s", r, angle.deg, angle.deg, n, r, angle.deg, n, angle.deg, n, newR, newDeg, newDeg, ans),
 	}
@@ -229,7 +229,7 @@ func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(max(1, scale*4)) + 2
 	if e.theta != 0 && e.theta != 90 && e.theta != 180 && e.theta != 270 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Does e^(iθ) = cos θ + i sin θ hold for θ = %d°? (yes/no)", e.theta),
+			Question:    fmt.Sprintf("Does \\(e^{i\\theta} = \\cos\\theta + i\\sin\\theta\\) hold for \\(\\theta = %d^{\\circ}\\)? (yes/no)", e.theta),
 			Answer:      "yes",
 			Explanation: "Euler's formula e^(iθ) = cos θ + i sin θ holds for all real θ.",
 		}
@@ -238,13 +238,13 @@ func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
 	imagPart := r * e.imagPart
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Write %d e^(i·%d°) in rectangular form (a+bi).", r, e.theta),
+			Question:    fmt.Sprintf("Write \\(%d e^{i \\cdot %d^{\\circ}}\\) in rectangular form \\((a+bi)\\).", r, e.theta),
 			Answer:      fmtComplex(realPart, imagPart),
 			Explanation: fmt.Sprintf("%d(cos %d° + i sin %d°) = %d(%d) + %d(%d)i = %s", r, e.theta, e.theta, r, e.realPart, r, e.imagPart, fmtComplex(realPart, imagPart)),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert %s to polar exponential form using Euler's formula.", fmtComplex(realPart, imagPart)),
+		Question:    fmt.Sprintf("Convert \\(%s\\) to polar exponential form using Euler's formula.", fmtComplex(realPart, imagPart)),
 		Answer:      fmt.Sprintf("%d e^(i·%d°)", r, e.theta),
 		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = %d°, so %s = %d e^(i·%d°)", realPart, imagPart, r, e.theta, fmtComplex(realPart, imagPart), r, e.theta),
 	}
@@ -259,11 +259,11 @@ func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
 		desc    string
 	}
 	entries := []entry{
-		{3, 4, "|3+4i|"},
-		{5, 12, "|5+12i|"},
-		{8, 6, "|8+6i|"},
-		{7, 24, "|7+24i|"},
-		{9, 12, "|9+12i|"},
+		{3, 4, "\\(|3+4i|\\)"},
+		{5, 12, "\\(|5+12i|\\)"},
+		{8, 6, "\\(|8+6i|\\)"},
+		{7, 24, "\\(|7+24i|\\)"},
+		{9, 12, "\\(|9+12i|\\)"},
 	}
 	e := entries[rand.Intn(len(entries))]
 	if rand.Intn(2) == 0 {
@@ -282,7 +282,7 @@ func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
 	s := fmtComplex(r1, i1)
 	t := fmtComplex(r2, i2)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Let z₁=%s, z₂=%s. Which is always true? (enter '≤' for |z₁+z₂| ≤ |z₁|+|z₂|, or '≥' for the reverse)", s, t),
+		Question:    fmt.Sprintf("Let \\(z_{1}=%s\\), \\(z_{2}=%s\\). Which is always true? (enter '\\(\\leq\\)' for \\(|z_{1}+z_{2}| \\leq |z_{1}|+|z_{2}|\\), or '\\(\\geq\\)' for the reverse)", s, t),
 		Answer:      "≤",
 		Explanation: "The triangle inequality |z₁+z₂| ≤ |z₁|+|z₂| holds for all complex numbers.",
 	}
@@ -296,7 +296,7 @@ func (g *rootsGen) Generate(difficulty float64) generator.Problem {
 	d := 2 * a * b
 
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the square roots of %s.", fmtComplex(c, d)),
+		Question:    fmt.Sprintf("Find the square roots of \\(%s\\).", fmtComplex(c, d)),
 		Answer:      fmt.Sprintf("±%s", fmtComplex(a, b)),
 		Explanation: fmt.Sprintf("(%s)² = %s, so the square roots are ±%s.", fmtComplex(a, b), fmtComplex(c, d), fmtComplex(a, b)),
 	}
