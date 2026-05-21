@@ -160,7 +160,7 @@ for circumradius (radius of the circumcircle) *R*, and
 ## Upper bound on the area
 The area *T* of any triangle with perimeter *p* satisfies
 
-\(T\le \tfrac{p^2}{12\sqrt{3\),
+\(T\le \tfrac{p^2}{12\sqrt{3}\),
 
 with equality holding if and only if the triangle is equilateral.
 

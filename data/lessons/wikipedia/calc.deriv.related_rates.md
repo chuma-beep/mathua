@@ -106,7 +106,7 @@ Define *y*(*t*) to be the distance of the vehicle heading North from the origin 
   <dd>Distribute differentiation operator</dd>
   <dt>\(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\)</dt>
   <dd>Apply chain rule to *x*(*t*) and *y*(*t*)}</dd>
-  <dt>\(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2\)</dt>
+  <dt>\(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2}\)</dt>
   <dd>Simplify.</dd>
 </dl>
 

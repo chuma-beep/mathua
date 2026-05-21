@@ -138,7 +138,7 @@ Let \((M,g)\) be a Riemannian manifold equipped with local coordinates \((x^1, x
 *is invariant under change of coordinates.*
 
 Let \((x^1,x^2,\ldots,x^n)\mapsto (\bar x^1,\ldots,\bar x^n)\) be a coordinate transformation with non-singular Jacobian. Then the classical transformation laws imply that \(A=\bar A^{k}\frac{\partial}{\partial\bar x^{k\) where \(\bar A^{k}=\frac{\partial \bar x^{k{\partial x^{jA^{j}\). Similarly, if \(g=g_{mk}\,dx^{m}\otimes dx^{k}=\bar{g}_{ij}\,d\bar x^{i}\otimes d\bar x^{j}\), then \(\bar{g}_{ij}=\,\frac{\partial x^{m{\partial\bar x^{i\frac{\partial x^{k{\partial \bar x^{jg_{mk}\).
-Writing this transformation law in terms of matrices yields \(\bar g=\left(\frac{\partial x}{\partial\bar{x\right)^{\text{Tg\left(\frac{\partial x}{\partial\bar{x\right)\), which implies \(\det\bar g=\left(\det\left(\frac{\partial x}{\partial\bar{x\right)\right)^{2}\det g\).
+Writing this transformation law in terms of matrices yields \(\bar g=\left(\frac{\partial x}{\partial\bar{x\right)^{\text{Tg\left(\frac{\partial x}{\partial\bar{x\right)}\), which implies \(\det\bar g=\left(\det\left(\frac{\partial x}{\partial\bar{x\right)\right)^{2}\det g\).
 
 Now one computes
 \(\begin{align}
@@ -146,7 +146,7 @@ Now one computes
 	&=\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{1}{\sqrt{\det\bar g\frac{\partial \bar x^k}{\partial x^{i\frac{\partial}{\partial\bar x^{k\left(\frac{\partial x^{i{\partial \bar x^{\ell\bar{A}^{\ell}\det\!\left(\frac{\partial x}{\partial\bar{x\right)^{\!\!-1}\!\sqrt{\det\bar g}\right).
 \end{align}\)
 In order to show that this equals
-\(\frac{1}{\sqrt{\det\bar g\frac{\partial}{\partial\bar x^{k\left(\bar A^{k}\sqrt{\det\bar{g\right)\),
+\(\frac{1}{\sqrt{\det\bar g\frac{\partial}{\partial\bar x^{k\left(\bar A^{k}\sqrt{\det\bar{g\right)}\),
 it is necessary and sufficient to show that
 \(\frac{\partial\bar x^{k{\partial x^{i\frac{\partial}{\partial\bar x^{k\left(\frac{\partial x^{i{\partial \bar x^{\ell\det\!\left(\frac{\partial x}{\partial\bar{x\right)^{\!\!\!-1}\right)=0\qquad\text{for all } \ell,\)
 which is equivalent to
@@ -158,16 +158,16 @@ Carrying out the differentiation on the left-hand side, we get:
 	&=(-1)^{i+j}\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det M(i|j)\\
 	&=\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)=(\ast),
 	\end{align}\)
-where \(M(i|j)\) denotes the matrix obtained from \(\left(\frac{\partial x}{\partial\bar{x\right)\) by deleting the \(i\)th row and \(j\)th column.
+where \(M(i|j)\) denotes the matrix obtained from \(\left(\frac{\partial x}{\partial\bar{x\right)\) by deleting the \(i\)th row and \(j}\)th column.
 But Cramer's Rule says that
 \(\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)\)
-is the \((j,i)\)th entry of the matrix \(\left(\frac{\partial \bar{x{\partial x}\right)\).
+is the \((j,i)}\)th entry of the matrix \(\left(\frac{\partial \bar{x{\partial x}\right)\).
 Thus
 \((\ast)=\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\frac{\partial\bar x^{j{\partial x^{i,\)
 completing the proof.
 
 #### Computing derivatives implicitly
-Consider the two equations \(F(x, y, u, v) = 0\) and \(G(x, y, u, v) = 0\). When *u* and *v* are independent variables, we can define \(x = X(u, v)\) and \(y = Y(u, v).\)
+Consider the two equations \(F(x, y, u, v) = 0\) and \(G(x, y, u, v) = 0\). When *u* and *v* are independent variables, we can define \(x = X(u, v)\) and \(y = Y(u, v).}\)
 
 An equation for \(\dfrac{\partial x}{\partial u}\) can be found by applying Cramer's rule.
 

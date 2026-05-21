@@ -69,9 +69,9 @@ There are various equivalent definitions of the constant π. The conventional de
 However, because the circumference of a circle is not a primitive analytical concept, this definition is not suitable in modern rigorous treatments. A standard modern definition is that is equal to twice the least positive root of the cosine function or, equivalently, the half-period of the sine (or cosine) function. The cosine function can be defined either as a power series, or as the solution of a certain differential equation. This avoids any reference to circles in the definition of , so that statements about the relation of to the circumference and area of circles are actually theorems, rather than definitions, that follow from the analytical definitions of concepts like "area" and "circumference".
 
 The analytical definitions are seen to be equivalent, if it is agreed that the circumference of the circle is measured as a rectifiable curve by means of the integral
-\(C = 2\int_{-R}^R \frac{R\,dx}{\sqrt{R^2-x^2= 2R\int_{-1}^1\frac{dx}{\sqrt{1-x^2.\) on the right is an abelian integral whose value is a half-period of the sine function, equal to. Thus \(C=2\pi R=\pi D\) is seen to be true as a theorem.
+\(C = 2\int_{-R}^R \frac{R\,dx}{\sqrt{R^2-x^2= 2R\int_{-1}^1\frac{dx}{\sqrt{1-x^2.\) on the right is an abelian integral whose value is a half-period of the sine function, equal to. Thus \(C=2\pi R=\pi D}\) is seen to be true as a theorem.
 
-Several of the arguments that follow use only concepts from elementary calculus to reproduce the formula \(A=\pi r^2\), but in many cases to regard these as actual proofs, they rely implicitly on the fact that one can develop trigonometric functions and the fundamental constant in a way that is totally independent of their relation to geometry. We have indicated where appropriate how each of these proofs can be made totally independent of all trigonometry, but in some cases that requires more sophisticated mathematical ideas than those afforded by elementary calculus.
+Several of the arguments that follow use only concepts from elementary calculus to reproduce the formula \(A=\pi r^2}\), but in many cases to regard these as actual proofs, they rely implicitly on the fact that one can develop trigonometric functions and the fundamental constant in a way that is totally independent of their relation to geometry. We have indicated where appropriate how each of these proofs can be made totally independent of all trigonometry, but in some cases that requires more sophisticated mathematical ideas than those afforded by elementary calculus.
 
 ### Onion proof
 
@@ -222,7 +222,7 @@ In the first equation C′P is C′O+OP, length *r* + *c\(_{n}\)*, and C′C i
 If we now circumscribe a regular *n-*gon, with side A″B″ parallel to AB, then OAB and OA″B″ are similar triangles, with A″B″ : AB = OC : OP. Call the circumscribed side *S\(_{n}\)*; then this is *S\(_{n}\)* : *s\(_{n}\)* = 1 : \(^{1}\)⁄\(_{2}\)*c\(_{n}\)*. (We have again used that OP is half the length of A′B.) Thus we obtain
 \(c_n = 2\frac{s_n}{S_n}. \)
 Call the inscribed perimeter *u\(_{n}\)* = *ns\(_{n}\)*, and the circumscribed perimeter *U\(_{n}\)* = *nS\(_{n}\)*. Then combining equations, we have
-\(c_{2n} = \frac{s_n}{s_{2n= 2 \frac{s_{2n{S_{2n,\)
+\(c_{2n} = \frac{s_n}{s_{2n= 2 \frac{s_{2n{S_{2n,}\)
 so that
 \(u_{2n}^2 = u_n U_{2n}. \)
 This gives a geometric mean equation.

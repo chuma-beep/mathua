@@ -131,10 +131,10 @@ In this representation,
 and the trigonometric functions are defined as
 \(\cos \theta = \frac{d}{k} \quad \mbox{and} \quad \sin \theta = \pm \frac{\sqrt{a^2 + b^2 + c^2}.\)
 In the case that *a*\(^{2}\) + *b*\(^{2}\) + *c*\(^{2}\) ≠ 0,
-\(\varepsilon = \pm \frac{a\mathbf{\hat i} + b\mathbf{\hat j} + c\mathbf{\hat k{\sqrt{a^2 + b^2 + c^2\),
+\(\varepsilon = \pm \frac{a\mathbf{\hat i} + b\mathbf{\hat j} + c\mathbf{\hat k{\sqrt{a^2 + b^2 + c^2}\),
 that is, the unit vector. This leads to the variation of De Moivre's formula:
 
-\(q^n = k^n(\cos n \theta + \varepsilon \sin n \theta).\)
+\(q^n = k^n(\cos n \theta + \varepsilon \sin n \theta).}\)
 
 #### Example
 To find the cube roots of
