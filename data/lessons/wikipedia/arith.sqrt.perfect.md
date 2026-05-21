@@ -14,7 +14,7 @@ Square roots of negative numbers can be discussed within the framework of comple
 
 ## History
 
-The Yale Babylonian Collection clay tablet YBC 7289 was created between 1800 BC and 1600 BC, showing \(\sqrt{2}\) and \(\frac{\sqrt{2{2} = \frac{1}{\sqrt{2\) respectively as 1;24,51,10 and 0;42,25,35 base 60 numbers on a square crossed by two diagonals. (1;24,51,10) base 60 corresponds to 1.41421296, which is correct to 5 decimal places (1.41421356...).
+The Yale Babylonian Collection clay tablet YBC 7289 was created between 1800 BC and 1600 BC, showing \(\sqrt{2}\) and \(\frac{\sqrt{2{2} = \frac{1}{\sqrt{2}\) respectively as 1;24,51,10 and 0;42,25,35 base 60 numbers on a square crossed by two diagonals. (1;24,51,10) base 60 corresponds to 1.41421296, which is correct to 5 decimal places (1.41421356...).
 
 The Rhind Mathematical Papyrus is a copy from 1650 BC of an earlier Berlin Papyrus and other textspossibly the Kahun Papyrusthat shows how the Egyptians extracted square roots by an inverse proportion method.
 
@@ -78,7 +78,7 @@ A positive number has two square roots, one positive, and one negative, which ar
 
 The square roots of an integer are algebraic integers—more specifically quadratic integers.
 
-The square root of a positive integer is the product of the roots of its prime factors, because the square root of a product is the product of the square roots of the factors. Since \(\sqrt{p^{2k= p^k\), only roots of those primes having an odd power in the factorization are necessary. More precisely, the square root of a prime factorization is
+The square root of a positive integer is the product of the roots of its prime factors, because the square root of a product is the product of the square roots of the factors. Since \(\sqrt{p^{2k= p^k}\), only roots of those primes having an odd power in the factorization are necessary. More precisely, the square root of a prime factorization is
 \[
 \sqrt{p_1^{2e_1+1} \cdots p_k^{2e_k+1}p_{k+1}^{2e_{k+1\cdots p_n^{2e_n= p_1^{e_1} \cdots p_n^{e_n} \sqrt{p_1\cdots p_k}.
 \]

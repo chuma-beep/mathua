@@ -115,7 +115,7 @@ This results from the expression of the discriminant in terms of the roots
 \end{aligned}\)
 This results from the expression in terms of the roots, or of the quasi-homogeneity of the discriminant.
 * *Invariance by inversion*: The reciprocal polynomial of \(P(x) = a_nx^n + \cdots + a_0\) with \(a_0 \neq 0\) is:
-\(P^{\mathrm{r(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.\) Then:
+\(P^{\mathrm{r(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.}\) Then:
 \(\operatorname{Disc}_x(P^{\mathrm{r\!\!\,(x)) = \operatorname{Disc}_x(P(x)).\)
 
 ### Invariance under ring homomorphisms

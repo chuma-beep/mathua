@@ -57,7 +57,7 @@ consisting of all *R*-linear combinations of the elements *a\(_{i}\)*. As with t
 ## Closed linear span (functional analysis)
 In functional analysis, a closed linear span of a set of vectors is the minimal closed set which contains the linear span of that set.
 
-Suppose that is a normed vector space and let be any non-empty subset of. The **closed linear span** of , denoted by \(\overline{\operatorname{Sp(E)\) or \(\overline{\operatorname{Span(E)\), is the intersection of all the closed linear subspaces of which contain. One mathematical formulation of this is
+Suppose that is a normed vector space and let be any non-empty subset of. The **closed linear span** of , denoted by \(\overline{\operatorname{Sp(E)\) or \(\overline{\operatorname{Span(E)}\), is the intersection of all the closed linear subspaces of which contain. One mathematical formulation of this is
 
 \(\overline{\operatorname{Sp(E)= \{u\in X \mid \forall\varepsilon > 0\,\exists x\in\operatorname{Sp}(E) : \|x - u\|<\varepsilon\}.\)
 

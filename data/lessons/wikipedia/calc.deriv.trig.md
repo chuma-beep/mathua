@@ -222,9 +222,9 @@ Where
 
 Then
 
-\(\cos y=x\,\!\)
+\(\cos y=x\,\!}\)
 
-Taking the derivative with respect to \(x\) on both sides and solving for dy/dx:
+Taking the derivative with respect to \(x}\) on both sides and solving for dy/dx:
 
 \({d \over dx}\cos y={d \over dx}x\)
 
@@ -240,12 +240,12 @@ Substituting \(x=\cos y\,\!\) in from above, we get
 
 \({dy \over dx} = -\frac{1}{\sqrt{1-x^2\)
 
-Alternatively, once the derivative of \(\arcsin x\) is established, the derivative of \(\arccos x\) follows immediately by differentiating the identity \(\arcsin x+\arccos x=\pi/2\) so that \((\arccos x)'=-(\arcsin x)'\).
+Alternatively, once the derivative of \(\arcsin x\) is established, the derivative of \(\arccos x\) follows immediately by differentiating the identity \(\arcsin x+\arccos x=\pi/2\) so that \((\arccos x)'=-(\arcsin x)'}\).
 
 ### Differentiating the inverse tangent function
 We let
 
-\(y=\arctan x\,\!\)
+\(y=\arctan x\,\!}\)
 
 Where
 
@@ -366,7 +366,7 @@ Then
 
 \(\frac{dx}{dy} = -\csc y \cot y = -|x|\sqrt{x^2-1}\)
 (The absolute value in the expression is necessary as the product of cosecant and cotangent in the interval of y is always nonnegative, while the radical \(\sqrt{x^2-1}\) is always nonnegative by definition of the principal square root, so the remaining factor must also be nonnegative, which is achieved by using the absolute value of x.)
-\(\frac{dy}{dx} = \frac{-1}{|x|\sqrt{x^2-1\)
+\(\frac{dy}{dx} = \frac{-1}{|x|\sqrt{x^2-1}\)
 
 #### Using the chain rule
 Alternatively, the derivative of arccosecant may be derived from the derivative of arcsine using the chain rule.
