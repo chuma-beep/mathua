@@ -51,7 +51,7 @@ When we form a linear combination of these vectors, the operation unfolds coordi
 
 \\[
 c_1 v_1 + \dots + c_k v_k
-\=
+=
 \begin{pmatrix}
 c_1 v_{11} + \dots + c_k v_{k1} \\\\
 c_1 v_{12} + \dots + c_k v_{k2} \\\\
@@ -124,7 +124,7 @@ Once the notion of linear combination is in place, a natural question arises: gi
 
 \\[
 \operatorname{span}(v_1, \dots, v_k)
-\=
+=
 \{ \sum_{i=1}^k c_i v_i \mid c_i \in \mathbb{R} \}
 \\]
 
@@ -230,7 +230,7 @@ c_2
 1 \\\\
 1
 \end{pmatrix}
-\=
+=
 \begin{pmatrix}
 3 \\\\
 7 \\\\

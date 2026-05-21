@@ -170,7 +170,7 @@ Thus, by substituting the values obtained into identity \\(1\\), we obtain:
 
 \\[
 \frac{7x + 5}{(x - 1)(3x + 2)}
-\=
+=
 \frac{4}{x - 1}
 \-
 \frac{5}{3x + 2}

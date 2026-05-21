@@ -72,7 +72,7 @@ For integrals over the entire real line, neither endpoint is finite, so a single
 is defined as:
 \\[
 \int_{-\infty}^{+\infty} f(x)\\,dx
-\=
+=
 \int_{-\infty}^c f(x)\\,dx
 \+
 \int_c^{+\infty} \\! f(x)\\,dx
@@ -90,11 +90,11 @@ Following the definition, we replace the infinite upper limit with a finite boun
 
 \\[
 \int_1^b \frac{1}{x^2}\\,dx
-\=
+=
 \int_1^b x^{-2}\\,dx
-\=
+=
 \left[ -x^{-1} \right]_1^b
-\= -\frac{1}{b} + 1
+= -\frac{1}{b} + 1
 \\]
 
 It remains to take the limit as \\(b \to +\infty\\). As \\(b\\) grows without bound, the term \\(\frac{1}{b}\\) vanishes, and we obtain:
@@ -121,16 +121,16 @@ looks structurally similar to the previous one, but the behavior is fundamentall
 
 \\[
 \int_1^b \frac{1}{x}\\,dx
-\=
+=
 \left[ \ln x \right]\_1^b
-\=
+=
 \ln b
 \\]
 
 Taking the limit as \\(b \to +\infty\\):
 \\[
 \lim_{b \to +\infty} \ln b
-\= +\infty
+= +\infty
 \\]
 
 The limit does not exist as a finite value, and therefore the integral diverges.
@@ -157,7 +157,7 @@ If the singularity occurs at an interior point \\(c \in (a,b)\\), the integral i
 
 \\[
 \int_a^b f(x)\\,dx
-\=
+=
 \int_a^c f(x)\\,dx
 \+
 \int_c^b f(x)\\,dx
@@ -185,21 +185,21 @@ We compute the antiderivative:
 
 \\[
 \int x^{-1/2}\\,dx
-\=
+=
 2x^{1/2} + c
 \\]
 
 Evaluating over \\([t,1]\\):
 \\[
 \int_t^1 x^{-1/2}\\,dx
-\=
+=
 2 - 2\sqrt{t}
 \\]
 
 Taking the limit as \\(t \to 0^+\\):
 \\[
 \lim_{t \to 0^+} (2 - 2\sqrt{t})
-\=2
+=2
 \\]
 The limit exists and is finite, so the integral converges and equals \\(2\\).
 
@@ -215,9 +215,9 @@ where \\(p\\) is a real parameter. The behavior of this integral depends entirel
 
 \\[
 \int_1^b x^{-p}\\,dx
-\=
+=
 \left[ \frac{x^{1-p}}{1-p} \right]_1^b
-\=
+=
 \frac{b^{1-p} - 1}{1-p}
 \\]
 
@@ -287,9 +287,9 @@ Finding an explicit antiderivative is possible here, it involves \\(\arctan x\\)
 
 \\[
 \lim_{x \to +\infty} \frac{\dfrac{1}{x^2+1}}{\dfrac{1}{x^2}}
-\=
+=
 \lim_{x \to +\infty} \frac{x^2}{x^2+1}
-\=1
+=1
 \\]
 
 The limit is finite and strictly positive. By the limit comparison test the two integrals
