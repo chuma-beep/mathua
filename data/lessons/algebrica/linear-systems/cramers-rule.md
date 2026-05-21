@@ -104,21 +104,3 @@ The solution to the system is:
 \\[x = 1 \quad\quad y = 2 \\]
 
 ##### Remember that the solution to a system of linear equations refers to the \\(n\\)-tuple of values that satisfies all equations in the system simultaneously. In this case, the pair \\( (x, y) = (1, 2) \\) is the only combination of values that makes both equations true at the same time.
-
-Linear Systems
-
-A linear system is a set of equations solved simultaneously by values that satisfy all of them.
-
-2k
-
-[Systems of Linear Equations](https://algebrica.org/systems-of-linear-equations/)
-
-1.1k
-
-[Gaussian Elimination](https://algebrica.org/solving-linear-systems-using-gaussian-elimination/)
-
-1.2k
-
-[Rouché-Capelli Theorem](https://algebrica.org/rouche-capelli-theorem/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/linear-systems/rouche-capelli-theorem.md?plain=1)

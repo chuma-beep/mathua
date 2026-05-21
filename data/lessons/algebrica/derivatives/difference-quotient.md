@@ -101,36 +101,3 @@ As \\( h \to 0 \\), this slope approaches \\( \dfrac{1}{4} \\) which is precisel
   * **Harvard University, O. Knill**. [Introduction to Calculus](https://people.math.harvard.edu/~knill/teaching/math1a_2012/handouts/math1a_2012.pdf)
 
   * **California State University San Marcos**. [Difference Quotient](https://www.csusm.edu/mathlab/documents/differencequotient-r6.pdf)
-
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

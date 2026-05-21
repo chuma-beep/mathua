@@ -70,33 +70,3 @@ In a hyperbola, the eccentricity is defined as the ratio between the focal dista
 ## A bridge between circular and hyperbolic trigonometry
 
 The equilateral hyperbola plays a central role in hyperbolic trigonometry. Just as the circular [sine and cosine](<../sine-and-cosine/>) are defined using the unit circle, the [hyperbolic sine and cosine](<../hyperbolic-sine-and-cosine/>) arise from the geometry of the hyperbola: \\[x^{2} - y^{2} = 1 \\] Here a hyperbolic sector determines a parameter \\(x\\), and the point \\(P\\)on the hyperbola associated with this sector has coordinates: \\[P_{x} = \cosh(x) = \frac{e^{x} + e^{-x}}{2} \\] \\[P_{y} = \sinh(x) = \frac{e^{x} - e^{-x}}{2} \\] This parallel between the circle and the hyperbola makes it clear that each curve gives rise to its own kind of trigonometric behaviour. The familiar circular functions have their hyperbolic counterparts, and the two settings fit together in a way that highlights the shared geometric idea behind both constructions.
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)

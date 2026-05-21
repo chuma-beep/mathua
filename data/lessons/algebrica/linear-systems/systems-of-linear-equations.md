@@ -83,21 +83,3 @@ We now compute the values of \\( x_1 \\), \\( x_2 \\), and \\( x_3 \\) from the 
 Therefore, the solutions of the system are:
 
 \\[x_1 = \dfrac{1}{2} \quad\quad x_2 = 2 \quad\quad x_3 = \dfrac{3}{2} \\]
-
-Linear Systems
-
-A linear system is a set of equations solved simultaneously by values that satisfy all of them.
-
-3.4k
-
-[Cramer’s Rule](https://algebrica.org/cramers-rule/)
-
-1.1k
-
-[Gaussian Elimination](https://algebrica.org/solving-linear-systems-using-gaussian-elimination/)
-
-1.2k
-
-[Rouché-Capelli Theorem](https://algebrica.org/rouche-capelli-theorem/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/linear-systems/rouche-capelli-theorem.md?plain=1)

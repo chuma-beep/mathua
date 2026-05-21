@@ -61,15 +61,3 @@ Evaluating the integral, we obtain:
 \\[y = v_0 t + \frac{1}{2} a_t t^2 \\]
 
 where \\( y \\) represents the displacement of the material point along the trajectory as a function of time.
-
-Kinematics
-
-Kinematics studies motion through trajectories, velocities, and accelerations.
-
-1.7k
-
-[Uniform Linear Motion: Velocity](https://algebrica.org/velocity/)
-
-1.1k
-
-[Simple Harmonic Motion](https://algebrica.org/simple-harmonic-motion/)

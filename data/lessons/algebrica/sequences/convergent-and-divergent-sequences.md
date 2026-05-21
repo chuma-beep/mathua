@@ -111,39 +111,3 @@ It exhibits the following behavior:
 As shown in the graph, when \\( q = 2 \\), the values of the geometric sequence \\( a_n = q^n \\) grow [exponentially](<../exponential-function>). As \\( n \\) increases, each term doubles the previous one, leading to a rapid escalation in magnitude.
 
 ##### Take a closer look at the difference between an [arithmetic progression](<../arithmetic-sequence>) and a geometric progression to better understand how their structures and growth patterns differ.
-
-Sequences
-
-Sequences are ordered collections of numbers defined by a rule, each indexed by natural numbers.
-
-1.5k
-
-[Principle of Mathematical Induction](https://algebrica.org/principle-of-mathematical-induction/)
-
-2.1k
-
-[Sequences](https://algebrica.org/sequences/)
-
-670
-
-[Monotone Sequences](https://algebrica.org/monotone-sequences/)
-
-1k
-
-[Arithmetic Sequence](https://algebrica.org/arithmetic-sequence/)
-
-1.1k
-
-[Geometric Sequence](https://algebrica.org/geometric-sequence/)
-
-1.4k
-
-[Cauchy Sequence](https://algebrica.org/cauchy-sequence/)
-
-2.1k
-
-[Euler’s Number as the Limit of a Sequence](https://algebrica.org/euler-number-limit-sequence/)
-
-1.4k
-
-[Sequences of Functions](https://algebrica.org/sequences-of-functions/)

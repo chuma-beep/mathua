@@ -129,33 +129,3 @@ Substituting \\( x = 1 \\) into one of the original equations, we find:
 So, the two lines intersect at the point:
 
 \\((x=1, y=3)\\)
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.9k
-
-[Polar Coordinates](https://algebrica.org/polar-coordinates/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

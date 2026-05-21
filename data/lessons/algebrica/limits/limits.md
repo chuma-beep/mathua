@@ -203,38 +203,3 @@ When working with limits, you use algebraic operations to combine, break apart, 
   * **University of California, Berkeley R. Wang**. [Limits](https://math.berkeley.edu/~ruiwang/pdf/104.pdf)
 
   * **MIT D. Jerison**. [Limits and Continuity](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/pages/1.-differentiation/part-a-definition-and-basic-rules/session-4-limits-and-continuity/)
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-941
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)

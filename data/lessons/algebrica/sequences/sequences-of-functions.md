@@ -116,39 +116,3 @@ Therefore, for all \\(n \geq N\\) and for all \\(x \in [0,1]\\), we have:
 \\[|f_n(x) - f(x)| < \varepsilon \\]
 
 This confirms that the sequence of functions \\(f_n(x) = \frac{x}{n}\\) converges uniformly to the limit function \\(f(x) = 0\\) on the interval \\([0,1]\\).
-
-Sequences
-
-Sequences are ordered collections of numbers defined by a rule, each indexed by natural numbers.
-
-1.5k
-
-[Principle of Mathematical Induction](https://algebrica.org/principle-of-mathematical-induction/)
-
-2.1k
-
-[Sequences](https://algebrica.org/sequences/)
-
-1.9k
-
-[Convergent and Divergent Sequences](https://algebrica.org/convergent-and-divergent-sequences/)
-
-671
-
-[Monotone Sequences](https://algebrica.org/monotone-sequences/)
-
-1k
-
-[Arithmetic Sequence](https://algebrica.org/arithmetic-sequence/)
-
-1.1k
-
-[Geometric Sequence](https://algebrica.org/geometric-sequence/)
-
-1.4k
-
-[Cauchy Sequence](https://algebrica.org/cauchy-sequence/)
-
-2.1k
-
-[Euler’s Number as the Limit of a Sequence](https://algebrica.org/euler-number-limit-sequence/)

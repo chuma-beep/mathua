@@ -250,36 +250,3 @@ The [vector](<../vectors/>) of all partial derivatives forms the gradient \\( \n
   * **Northwestern University**. [Real Analysis – Lecture Notes](https://sites.math.northwestern.edu/scg479/courses/notes/lecture-notes-320-3.pdf)
 
   * **Penn State University**. [Calculus – Derivatives and Applications](https://www.math.psu.edu/lamy/misc/Calc_Notes.pdf)
-
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

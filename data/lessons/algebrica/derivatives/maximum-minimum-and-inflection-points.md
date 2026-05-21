@@ -208,35 +208,3 @@ An inflection point occurs when the concavity of a function changes sign. This c
 
 
 ##### The proposed functions are carefully designed to help you consolidate your understanding of local maxima, minima, and inflection points. Each function requires you to compute the first and second derivatives, identify critical points, and analyze concavity changes. Some are more direct, while others involve algebraic manipulation or mixed expressions ([polynomial](<../polynomials>), [exponential](<../exponential-function/>), [logarithmic](<../logarithms/>), or [trigonometric](<../unit-circle/>)). Try to determine and classify all relevant points independently before checking the solutions.
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

@@ -112,39 +112,3 @@ Let us consider, for example, the geometric progression shown in the figure:
 Expanding the sequence, we observe that the common ratio is \\( r = -2 \\), which satisfies \\( r \leq -1 \\). As a result, the sequence displays an irregular oscillatory behavior, alternating the sign of each term while the absolute values grow exponentially.
 
 ![](/diagrams/algebrica/geometri-sequence-3-2.png)
-
-Sequences
-
-Sequences are ordered collections of numbers defined by a rule, each indexed by natural numbers.
-
-1.5k
-
-[Principle of Mathematical Induction](https://algebrica.org/principle-of-mathematical-induction/)
-
-2.1k
-
-[Sequences](https://algebrica.org/sequences/)
-
-1.9k
-
-[Convergent and Divergent Sequences](https://algebrica.org/convergent-and-divergent-sequences/)
-
-671
-
-[Monotone Sequences](https://algebrica.org/monotone-sequences/)
-
-1k
-
-[Arithmetic Sequence](https://algebrica.org/arithmetic-sequence/)
-
-1.4k
-
-[Cauchy Sequence](https://algebrica.org/cauchy-sequence/)
-
-2.1k
-
-[Euler’s Number as the Limit of a Sequence](https://algebrica.org/euler-number-limit-sequence/)
-
-1.4k
-
-[Sequences of Functions](https://algebrica.org/sequences-of-functions/)

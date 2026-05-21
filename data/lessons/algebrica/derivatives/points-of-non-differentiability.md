@@ -48,35 +48,3 @@ In general, let \\( f(x) \\) be a function continuous on an interval ([a,b]) and
 \\[f_{-}’ (x_o) = \lim_{x \to x_0^-} f’(x) \quad \text{and} \quad f_{+}’ (x_o) = \lim_{x \to x_0^+} f’(x) \\]
 
 if \\( \underset{x \to x_0^-}{\lim} f{\prime}(x) = \underset{x \to x_0^+}{\lim} f{\prime}(x) = \ell\\), with \\(\ell \in \mathbb{R}\\) then the function is differentiable at \\(x_0\\), and it follows that \\(f’(x_0) = \ell\\).
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

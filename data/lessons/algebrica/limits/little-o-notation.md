@@ -212,37 +212,3 @@ Requires
 Enables
 
 The following concepts, [Functions](https://algebrica.org/functions/), [Limits](https://algebrica.org/limits/), are required as prerequisites for this entry.
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-942
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)

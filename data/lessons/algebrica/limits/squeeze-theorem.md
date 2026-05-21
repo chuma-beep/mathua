@@ -147,38 +147,3 @@ we obtain
 
   * **MIT OpenCourseWare, C. Rodriguez**. [The Squeeze Theorem](https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec8.pdf)
   * **University of California, Berkeley, A. Vizeff**. [Limit Laws and the Squeeze Theorem](https://math.berkeley.edu/~avizeff/calculus-I-F22/lecture-4.pdf)
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-942
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)

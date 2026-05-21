@@ -25,35 +25,3 @@ where \\(\overline{AB} = \Delta x\\) and \\(\tan(\alpha) = f’(x)\\). The equal
 \\[\begin{align} \overline{BC} &= \overline{AB} \cdot \tan(\alpha) \tag{5} \\\\[0.5em] &= \Delta x \cdot f’(x) \\\\[0.5em] &= \mathrm{d}y \end{align} \\]
 
 In other words, the differential \\( dy \\) is the change in the ordinate of the tangent line to the curve when moving from point A with abscissa \\( x \\) to point B with abscissa \\( x + \Delta x \\).
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-1.6k
-
-[Derivative of a Composite Function](https://algebrica.org/the-derivative-of-a-composite-function/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

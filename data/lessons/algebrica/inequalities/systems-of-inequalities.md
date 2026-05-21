@@ -84,39 +84,3 @@ There are also more complex systems of inequalities consisting of \\( k \\) ineq
 \\[\begin{cases} f_1(x_1, x_2, \ldots x_m) \geq 0 \\\\[0.6em] f_2(x_1, x_2, \ldots x_m) \geq 0 \\\\[0.6em] \quad \quad \quad \vdots \\\\[0.6em] f_k(x_1, x_2, \ldots x_m) \geq 0 \end{cases} \\]
 
 These systems require more advanced solution methods, such as graphical methods, sign analysis, linear programming, and various numerical techniques. Therefore, they will be covered in more detail in other sections.
-
-Inequalities
-
-Inequalities express order relations between quantities, defining ranges and constraints.
-
-2.6k
-
-[Linear Inequalities](https://algebrica.org/linear-inequalities/)
-
-2.5k
-
-[Quadratic Inequalities](https://algebrica.org/quadratic-inequalities/)
-
-2.7k
-
-[Sign Analysis in Inequalities](https://algebrica.org/sign-analysis-in-inequalities/)
-
-1.2k
-
-[Rational Inequalities](https://algebrica.org/rational-inequalities/)
-
-1.1k
-
-[Irrational Inequalities](https://algebrica.org/irrational-inequalities/)
-
-1.2k
-
-[Inequalities with Absolute Value](https://algebrica.org/inequalities-with-absolute-value/)
-
-3.6k
-
-[Logarithmic Inequalities](https://algebrica.org/logarithmic-inequalities/)
-
-870
-
-[Trigonometric Inequalities](https://algebrica.org/trigonometric-inequalities/)

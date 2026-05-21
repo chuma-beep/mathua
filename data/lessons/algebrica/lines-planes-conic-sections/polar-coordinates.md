@@ -198,34 +198,3 @@ Canonical form| \\( \rho \ge 0,\ \theta \in [0, 2\pi) \\)| \\( \rho \ge 0,\ \the
   * **University of South Carolina**. [Polar Coordinates](https://people.math.sc.edu/josephcf/Teaching/142/Files/Lecture%20Notes/Chapter11/11.3.pdf)
 
   * **Purdue University**. [Polar Coordinates and Integration](https://www.math.purdue.edu/~neptamin/324Au17/Notes/15.4/15.4.pdf)
-
-
-Lines, Planes and Conic Sections
-
-Conic sections are curves formed by intersecting a plane with a cone.
-
-1.7k
-
-[Lines](https://algebrica.org/lines/)
-
-2k
-
-[Vector and Parametric Equations of a Line](https://algebrica.org/vector-and-parametric-equations-of-a-line/)
-
-1.8k
-
-[Parabola](https://algebrica.org/parabola/)
-
-4.3k
-
-[Circumference](https://algebrica.org/circumference/)
-
-3 comments
-
-1.8k
-
-[Ellipse](https://algebrica.org/ellipse/)
-
-1.8k
-
-[Hyperbola](https://algebrica.org/hyperbola/)

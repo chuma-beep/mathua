@@ -136,15 +136,3 @@ Differentiating again, we find the acceleration:
 Simplifying:
 
 \\[a(t) = -\frac{2\pi^2}{9} \sin\left( \frac{2\pi}{3} t \right) \\]
-
-Kinematics
-
-Kinematics studies motion through trajectories, velocities, and accelerations.
-
-1.7k
-
-[Uniform Linear Motion: Velocity](https://algebrica.org/velocity/)
-
-1.2k
-
-[Uniformly Accelerated Motion: Acceleration](https://algebrica.org/acceleration/)

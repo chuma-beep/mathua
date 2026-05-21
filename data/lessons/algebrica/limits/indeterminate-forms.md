@@ -187,38 +187,3 @@ All seven indeterminate forms share a fundamental limitation: the symbolic expre
   * **Harvard University, O. Knill**. [Infinity and Indeterminate Forms](https://people.math.harvard.edu/~knill/teaching/math1a2024/handouts/lecture10.pdf)
 
   * **University of Toronto – J. Campesato**. [Indeterminate Forms and L’Hôpital’s Rule](https://www.math.toronto.edu/campesat/ens/1819/lec21-1128.pdf)
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-942
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-3.8k
-
-[Asymptotes](https://algebrica.org/asymptotes/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)

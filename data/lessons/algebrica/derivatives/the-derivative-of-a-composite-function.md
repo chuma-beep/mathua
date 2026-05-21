@@ -128,36 +128,3 @@ The result is:
   * **Harvard University, O. Knill**. [Chain Rule](https://people.math.harvard.edu/~knill/teaching/math1a2020/handouts/lecture10.pdf)
   * **MIT OpenCourseWare, G. Strang**. [Derivatives by the Chain Rule](https://ocw.mit.edu/courses/res-18-001-calculus-fall-2023/mitres_18_001_f17_ch04.pdf)
   * **University of Toronto, J. Campesato**. [Differentiability and the Chain Rule](https://www.math.toronto.edu/campesat/ens/1920/1114.pdf)
-
-
-Derivatives
-
-The derivative describes a function’s rate of change.
-
-9.1k
-
-[Difference Quotient](https://algebrica.org/difference-quotient/)
-
-7.8k
-
-[Derivatives](https://algebrica.org/derivatives/)
-
-3.3k
-
-[Non-Differentiable Points](https://algebrica.org/points-of-non-differentiability/)
-
-1k
-
-[Differential of a Function](https://algebrica.org/differential-of-a-function/)
-
-1.4k
-
-[Derivative of Composite Power Functions](https://algebrica.org/derivative-of-composite-power-functions/)
-
-7.4k
-
-[Maximum, Minimum, and Inflection Points](https://algebrica.org/maximum-minimum-and-inflection-points/)
-
-1.4k
-
-[Partial Derivatives](https://algebrica.org/partial-derivatives/)

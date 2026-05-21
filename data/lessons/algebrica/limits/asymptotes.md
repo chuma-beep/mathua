@@ -127,38 +127,3 @@ Asymptotes come in different forms and follow specific rules that are worth keep
   * Vertical asymptotes typically occur at points where the function is undefined as a result of division by zero. These asymptotes correspond to non-removable discontinuities.
   * Horizontal asymptotes characterise the end behaviour of a function as it approaches a constant value when \\( x \\) becomes very large or very small.
   * Oblique asymptotes occur when the degree of the numerator exceeds that of the denominator by exactly one, causing the function to approach a slanted line as \\( x \\) approaches infinity.
-
-
-Limits
-
-Limits describe a function’s behavior near a point.
-
-5.9k
-
-[Limits](https://algebrica.org/limits/)
-
-942
-
-[Algebra of Limits](https://algebrica.org/algebra-of-limits/)
-
-1.6k
-
-[Squeeze Theorem](https://algebrica.org/squeeze-theorem/)
-
-4.1k
-
-[Remarkable Limits](https://algebrica.org/remarkable-limits/)
-
-0 comments[](https://github.com/antoniolupetti/algebrica/blob/main/limits/remarkable-limits.md?plain=1)
-
-1.9k
-
-[Indeterminate Forms of Limits](https://algebrica.org/indeterminate-forms/)
-
-5.1k
-
-[Little-o Notation](https://algebrica.org/little-o-notation/)
-
-1.8k
-
-[Big O Notation](https://algebrica.org/big-o-notation/)
