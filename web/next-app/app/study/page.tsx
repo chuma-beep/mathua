@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
@@ -77,7 +78,11 @@ function lessonProgress(lesson: LessonInfo): { mastered: number; total: number }
   return { mastered, total: lesson.concepts.length }
 }
 
-export default function StudyPage() {
+function StudyContent() {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const lessonTitle = searchParams.get('lesson')
+
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
@@ -90,6 +95,29 @@ export default function StudyPage() {
       setLessonsByDomain(res.lessons)
       setLoading(false)
     }).catch(() => setLoading(false))
+  }, [])
+
+  // Sync URL → state on mount/external changes
+  useEffect(() => {
+    if (!lessonTitle) {
+      setSelectedLesson(null)
+      return
+    }
+    for (const lessons of Object.values(lessonsByDomain)) {
+      const found = lessons.find(l => l.title === lessonTitle)
+      if (found) { setSelectedLesson(found); return }
+    }
+  }, [lessonTitle, lessonsByDomain])
+
+  // Popstate: browser back/forward clears selection
+  useEffect(() => {
+    const onPop = () => {
+      if (!window.location.search.includes('lesson=')) {
+        setSelectedLesson(null)
+      }
+    }
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
   }, [])
 
   const sortedDomains = useMemo(() => {
@@ -139,7 +167,7 @@ export default function StudyPage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4">
         <section className="pt-8">
           <span className="flex justify-between items-center mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+            <Link href={selectedLesson ? '/study' : '/'} className="text-mathua-secondary text-sm hover:text-mathua-primary">
               ← Back
             </Link>
           </span>
@@ -147,7 +175,10 @@ export default function StudyPage() {
           {selectedLesson ? (
             <div className="max-w-4xl mx-auto mt-8 mb-16">
               <button
-                onClick={() => setSelectedLesson(null)}
+                onClick={() => {
+                  setSelectedLesson(null)
+                  window.history.replaceState(null, '', '/study')
+                }}
                 className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
               >
                 ← All domains
@@ -274,7 +305,10 @@ export default function StudyPage() {
                 onSelect={(item) => {
                   const domain = item.domain
                   const lesson = lessonsByDomain[domain]?.find(l => l.title === item.title)
-                  if (lesson) setSelectedLesson(lesson)
+                  if (lesson) {
+                    setSelectedLesson(lesson)
+                    router.push('/study?lesson=' + encodeURIComponent(lesson.title))
+                  }
                 }}
               />
 
@@ -325,7 +359,10 @@ export default function StudyPage() {
                       return (
                         <button
                           key={i}
-                          onClick={() => setSelectedLesson(lesson)}
+                          onClick={() => {
+                            setSelectedLesson(lesson)
+                            router.push('/study?lesson=' + encodeURIComponent(lesson.title))
+                          }}
                           className="text-left bg-mathua-surface border border-mathua-border rounded-none p-4 hover:border-mathua-blue transition-colors group"
                         >
                           <div className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors">
@@ -373,5 +410,15 @@ export default function StudyPage() {
         <Footer />
       </div>
     </>
+  )
+}
+
+export default function StudyPage() {
+  return (
+    <Suspense fallback={
+      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><p className="text-mathua-muted text-sm">Loading lessons…</p></div><Footer /></>
+    }>
+      <StudyContent />
+    </Suspense>
   )
 }

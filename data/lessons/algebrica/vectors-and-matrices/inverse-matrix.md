@@ -113,7 +113,7 @@ A^{-1} = \\frac{1}{6}
 -4 & \\phantom{-}6 & \\phantom{-}0 \\\\[6pt]
 \\phantom{-}9 & -12 & \\phantom{-}3
 \\end{pmatrix}
-\=
+=
 \\begin{pmatrix}
 \\dfrac{1}{3} & 0 & 0 \\\\[10pt]
 -\\dfrac{2}{3} & 1 & 0 \\\\[10pt]

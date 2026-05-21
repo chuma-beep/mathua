@@ -262,7 +262,7 @@ For example:
 1 & 0 \\\\[6pt]
 0 & 1
 \\end{pmatrix}
-\=
+=
 \\begin{pmatrix}
 3 & 5 \\\\[6pt]
 1 & -2
