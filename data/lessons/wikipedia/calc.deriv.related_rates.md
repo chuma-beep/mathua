@@ -97,19 +97,18 @@ Define *y*(*t*) to be the distance of the vehicle heading North from the origin 
 
 **Express** *dc*/*dt* **using chain rule in terms of** *dx*/*dt* **and** *dy/dt:*
 
-{| cellpadding=5
-|-
-| \(\frac{dc}{dt} = \frac{d}{dt}\left(x^2 + y^2\right)^{1/2}\) || width="250pt" | Apply derivative operator to entire function
-|-
-| \(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\frac{d}{dt}\left(x^2 + y^2\right)\) || Square root is outside function; Sum of squares is inside function
-|-
-| \(=\frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[\frac{d}{dt}(x^2) + \frac{d}{dt}(y^2) \right]\) || Distribute differentiation operator
-|-
-| \(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\) || Apply chain rule to *x*(*t*) and *y*(*t*)}
-|-
-| \(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2\) || Simplify.
-|-
-|}
+<dl>
+  <dt>\(\frac{dc}{dt} = \frac{d}{dt}\left(x^2 + y^2\right)^{1/2}\)</dt>
+  <dd>| Apply derivative operator to entire function</dd>
+  <dt>\(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\frac{d}{dt}\left(x^2 + y^2\right)\)</dt>
+  <dd>Square root is outside function; Sum of squares is inside function</dd>
+  <dt>\(=\frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[\frac{d}{dt}(x^2) + \frac{d}{dt}(y^2) \right]\)</dt>
+  <dd>Distribute differentiation operator</dd>
+  <dt>\(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\)</dt>
+  <dd>Apply chain rule to *x*(*t*) and *y*(*t*)}</dd>
+  <dt>\(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2\)</dt>
+  <dd>Simplify.</dd>
+</dl>
 
 **Substitute in** *x* = 4 mi, *y* = 3 mi, *dx*/*dt* = −80 mi/hr, *dy*/*dt* = 60 mi/hr **and simplify**
 

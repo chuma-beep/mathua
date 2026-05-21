@@ -2,46 +2,21 @@
 
 # Derivatives of sine and cosine
 
-{|class="wikitable" style="margin:1em 0 1em 1em" align="right" hspace="3"
-! Function
-! Derivative
-|-
-| \(\sin(x)\)
-| \(\cos(x)\)
-|-
-|\(\cos(x)\)
-|\(-\sin(x)\)
-|-
-|\(\tan(x)\)
-|\(\sec^2(x)\)
-|-
-|\(\cot(x)\)
-|\(-\csc^2(x)\)
-|-
-|\(\sec(x)\)
-|\(\sec(x)\tan(x)\)
-|-
-|\(\csc(x)\)
-|\(-\csc(x)\cot(x)\)
-|-
-|\(\arcsin(x)\)
-|\(\frac{1}{\sqrt{1-x^2\)
-|-
-|\(\arccos(x)\)
-|\(-\frac{1}{\sqrt{1-x^2\)
-|-
-|\(\arctan(x)\)
-|\(\frac{1}{x^2+1}\)
-|-
-|\(\arccot(x)\)
-|\(-\frac{1}{x^2+1}\)
-|-
-|\(\arcsec(x)\)
-|\(\frac{1}{|x|\sqrt{x^2-1\)
-|-
-|\(\arccsc(x)\)
-|\(-\frac{1}{|x|\sqrt{x^2-1\)
-|}
+| Function | Derivative |
+| --- | --- |
+| \(\sin(x)\) | \(\cos(x)\) |
+| \(\cos(x)\) | \(-\sin(x)\) |
+| \(\tan(x)\) | \(\sec^2(x)\) |
+| \(\cot(x)\) | \(-\csc^2(x)\) |
+| \(\sec(x)\) | \(\sec(x)\tan(x)\) |
+| \(\csc(x)\) | \(-\csc(x)\cot(x)\) |
+| \(\arcsin(x)\) | \(\frac{1}{\sqrt{1-x^2\) |
+| \(\arccos(x)\) | \(-\frac{1}{\sqrt{1-x^2\) |
+| \(\arctan(x)\) | \(\frac{1}{x^2+1}\) |
+| \(\arccot(x)\) | \(-\frac{1}{x^2+1}\) |
+| \(\arcsec(x)\) | \(\frac{1}{|x|\sqrt{x^2-1\) |
+| \(\arccsc(x)\) | \(-\frac{1}{|x|\sqrt{x^2-1\) |
+
 The **differentiation of trigonometric functions** is the mathematical process of finding the derivative of a trigonometric function, or its rate of change with respect to a variable. For example, the derivative of the sine function is written (*a*) = cos(*a*), meaning that the rate of change of sin(*x*) at a particular angle *x = a* is given by the cosine of that angle.
 
 All derivatives of circular trigonometric functions can be found from those of sin(*x*) and cos(*x*) by means of the quotient rule applied to functions such as tan(*x*) = sin(*x*)/cos(*x*). Knowing these derivatives, the derivatives of the inverse trigonometric functions are found using implicit differentiation.

@@ -6,34 +6,8 @@ E series|the food additive codes|E number|the letter|E
 
 **Scientific notation** is a way of expressing numbers that are too large or too small to be conveniently written in decimal form; since to do so would require writing out an inconveniently long string of digits. It may be referred to as **scientific form** or **standard index form**, or **standard form** in the United Kingdom. This base ten notation is commonly used by scientists, mathematicians, and engineers, in part because it can simplify certain arithmetic operations. On scientific calculators, it is usually known as "SCI" display mode.
 
-{| class="wikitable" style="float:right; margin:5px;"
-!Decimal notation
-!Scientific notation
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|}
+| Decimal notation | Scientific notation |
+| --- | --- |
 
 In scientific notation, nonzero numbers are written in the form
 
@@ -57,34 +31,8 @@ Normalized scientific form is the typical form of expression of large numbers in
 Engineering notation (often named "ENG" on scientific calculators) differs from normalized scientific notation in that the exponent *n* is restricted to multiples of 3. Consequently, the absolute value of *m* is in the range 1 ≤ |*m*| < 1000, rather than 1 ≤ |*m*| < 10. Though similar in concept, engineering notation is rarely called *scientific notation*. Engineering notation allows the numbers to explicitly match their corresponding SI prefixes, which facilitates reading and oral communication. For example, can be read as "twelve-point-five nanometres" and written as , while its scientific notation equivalent would likely be read out as "one-point-two-five times ten-to-the-negative-eight metres".
 
 ### E notation
-{| class="wikitable" style="float:right; margin: 0.5em 0 1.3em 1.4em"
-!Explicit notation
-!E notation
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|-
-|
-|
-|}
+| Explicit notation | E notation |
+| --- | --- |
 
 Calculators and computer programs typically present very large or small numbers using scientific notation, and some can be configured to uniformly present all numbers that way. Because superscript exponents, like the ⟨\(^{7}\)⟩ in 10\(^{7}\), can be inconvenient to display or type, the letter "E" or "e" (for "exponent") is often used to represent "times ten raised to the power of", so that the notation *m* E *n* for a decimal significand *m* and integer exponent *n* means the same as *m* × 10\(^{*n*}\). For example is written as or , and is written as or. Sometimes the positive power is explicitly shown ( or ). While common in computer output, this abbreviated version of scientific notation is discouraged for published documents by some style guides.
 

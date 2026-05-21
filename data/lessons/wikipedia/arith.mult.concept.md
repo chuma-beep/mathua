@@ -17,17 +17,10 @@ r \cdot s \equiv \sum_{i=1}^s r = \underbrace{ r+r+\cdots+r }_{s\text{ times\equ
 ### Product of two integers
 An integer can be either zero, a nonzero natural number, or minus a nonzero natural number. The product of zero and another integer is always zero. The product of two nonzero integers is determined by the product of their positive amounts, combined with the sign derived from the following rule:
 
-{| class="wikitable" style="margin-left:1.6em; text-align: center;"
-! style="padding:0.2em 1em;" | ×
-! style="padding:0.2em 1em;" | +
-! style="padding:0.2em 1em;" | −
-|-
-! style="padding:0.2em 1em;" | +
-| + || −
-|-
-! style="padding:0.2em 1em;" | −
-| − || +
-|}
+| | × | | + | | − |
+| --- | --- | --- |
+| | + | + | − |
+| | − | − | + |
 
 (This rule is a consequence of the distributivity of multiplication over addition, and is not an *additional rule*.)
 

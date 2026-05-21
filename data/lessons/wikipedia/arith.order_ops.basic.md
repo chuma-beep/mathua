@@ -97,37 +97,23 @@ Furthermore, because many operators are not associative, the order within any si
 
 Dennis Ritchie, creator of the C language, said of the precedence in C (shared by programming languages that borrow those rules from C, for example, C++, Perl and PHP) that it would have been preferable to move the bitwise operators above the comparison operators. Many programmers have become accustomed to this order, but more recent popular languages like Python and Ruby do have this order reversed. The relative precedence levels of operators found in many C-style languages are as follows:
 
-{| class="wikitable"
-|1 || ()   []   ->. :: || Function call, scope, array/member access
-|-
-|2 || !   ~   -   +   *   &   sizeof   *type cast*   ++   --   || (most) unary operators, sizeof and type casts (right to left)
-|-
-|3 || *   /   % MOD || Multiplication, division, modulo
-|-
-|4 || +   - || Addition and subtraction
-|-
-|5 || <<   >> || Bitwise shift left and right
-|-
-|6 || <   <=   >   >= || Comparisons: less-than and greater-than
-|-
-|7 || ==   != || Comparisons: equal and not equal
-|-
-|8 || & || Bitwise AND
-|-
-|9 || ^ || Bitwise exclusive OR (XOR)
-|-
-|10 || | || Bitwise inclusive (normal) OR
-|-
-|11 || && || Logical AND
-|-
-|12 || || || Logical OR
-|-
-|13 || ? : || Conditional expression (ternary)
-|-
-|14 || =   +=   -=   *=   /=   %=   &=   |=   ^=   <<=   >>= || Assignment operators (right to left)
-|-
-|15 || , || Comma operator
-|}
+| 1 | () [] ->. :: | Function call, scope, array/member access |  |
+| --- | --- | --- | --- |
+| 2 | ! ~ - + * & sizeof *type cast* ++ -- | (most) unary operators, sizeof and type casts (right to left) |  |
+| 3 | * / % MOD | Multiplication, division, modulo |  |
+| 4 | + - | Addition and subtraction |  |
+| 5 | << >> | Bitwise shift left and right |  |
+| 6 | < <= > >= | Comparisons: less-than and greater-than |  |
+| 7 | == != | Comparisons: equal and not equal |  |
+| 8 | & | Bitwise AND |  |
+| 9 | ^ | Bitwise exclusive OR (XOR) |  |
+| 10 | | | Bitwise inclusive (normal) OR |  |
+| 11 | && | Logical AND |  |
+| 12 |  |  | Logical OR |
+| 13 | ? : | Conditional expression (ternary) |  |
+| 14 | = += -= *= /= %= &= |= ^= <<= >>= | Assignment operators (right to left) |  |
+| 15 | , | Comma operator |  |
+
 Examples:
 * !A + !B is interpreted as (!A) + (!B)
 * ++A + !B is interpreted as (++A) + (!B)

@@ -84,16 +84,11 @@ Then multiples of 21 are subtracted from 147 until the remainder is less than 21
 
 Since the last remainder is zero, the algorithm ends with 21 as the greatest common divisor of 1071 and 462. This agrees with the gcd(1071, 462) found by prime factorization above. In tabular form, the steps are:
 
-{| class="wikitable" id="basic_Euclidean_algorithm" style="margin-left:auto; margin-right:auto; text-align:center"
-|-
-!Step *k*!!Equation!!Quotient and remainder
-|-
-| 0 || 1071 = *q*\(_{0}\) 462 + *r*\(_{0}\) || *q*\(_{0}\) = 2 and *r*\(_{0}\) = 147
-|-
-| 1 || 462 = *q*\(_{1}\) 147 + *r*\(_{1}\) || *q*\(_{1}\) = 3 and *r*\(_{1}\) = 21
-|-
-| 2 || 147 = *q*\(_{2}\) 21 + *r*\(_{2}\) || *q*\(_{2}\) = 7 and *r*\(_{2}\) = 0; algorithm ends
-|}
+| Step *k* | Equation | Quotient and remainder |
+| --- | --- | --- |
+| 0 | 1071 = *q*\(_{0}\) 462 + *r*\(_{0}\) | *q*\(_{0}\) = 2 and *r*\(_{0}\) = 147 |
+| 1 | 462 = *q*\(_{1}\) 147 + *r*\(_{1}\) | *q*\(_{1}\) = 3 and *r*\(_{1}\) = 21 |
+| 2 | 147 = *q*\(_{2}\) 21 + *r*\(_{2}\) | *q*\(_{2}\) = 7 and *r*\(_{2}\) = 0; algorithm ends |
 
 ### Visualization
 The Euclidean algorithm can be visualized in terms of the tiling analogy given above for the greatest common divisor. Assume that we wish to cover an *a*×*b* rectangle with square tiles exactly, where *a* is the larger of the two numbers. We first attempt to tile the rectangle using *b*×*b* square tiles; however, this leaves an *r*\(_{0}\)×*b* residual rectangle untiled, where *r*\(_{0}\) < *b*. We then attempt to tile the residual rectangle with *r*\(_{0}\)×*r*\(_{0}\) square tiles. This leaves a second residual rectangle *r*\(_{1}\)×*r*\(_{0}\), which we attempt to tile using *r*\(_{1}\)×*r*\(_{1}\) square tiles, and so on. The sequence ends when there is no residual rectangle, i.e., when the square tiles cover the previous residual rectangle exactly. The length of the sides of the smallest square tile is the GCD of the dimensions of the original rectangle. For example, the smallest square tile in the adjacent figure is 21×21 (shown in red), and 21 is the GCD of 1071 and 462, the dimensions of the original rectangle (shown in green).

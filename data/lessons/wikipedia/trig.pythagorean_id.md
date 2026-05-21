@@ -65,28 +65,10 @@ In this way, this trigonometric identity involving the tangent and the secant fo
 
 The following table gives the identities with the factor or divisor that relates them to the main identity.
 
-{| class="wikitable"
-|+ Identities derived by dividing + |*θ*= 1
-|-
-! scope="col" | Divisor
-! scope="col" | Divisor Equation
-! scope="col" | Derived Identity
-! scope="col" | Derived Identity (Alternate)
-|-
-! scope="row" | 
-| \(\frac{\sin^2 \theta}{\cos^2 \theta} + \frac{\cos^2 \theta}{\cos^2 \theta} = \frac{1}{\cos^2 \theta}\)
-|| \(\tan^2 \theta + 1 = \sec^2 \theta\) || \(\begin{align}
-\sec^2\theta - \tan^2\theta = 1\\
-(\sec\theta - \tan\theta)(\sec\theta + \tan\theta) = 1\\
-\end{align}\)
-|-
-! scope="row" | 
-| \(\frac{\sin^2 \theta}{\sin^2 \theta} + \frac{\cos^2 \theta}{\sin^2 \theta} = \frac{1}{\sin^2 \theta}\)
-|| \(1 + \cot^2 \theta = \csc^2 \theta\) || \(\begin{align}
-\csc^2\theta - \cot^2\theta = 1\\
-(\csc\theta - \cot\theta)(\csc\theta + \cot\theta) = 1\\
-\end{align}\)
-|}
+| scope="col" | Divisor | scope="col" | Divisor Equation | scope="col" | Derived Identity | scope="col" | Derived Identity (Alternate) |
+| --- | --- | --- | --- |
+| scope="row" | | \(\frac{\sin^2 \theta}{\cos^2 \theta} + \frac{\cos^2 \theta}{\cos^2 \theta} = \frac{1}{\cos^2 \theta}\) | | \(\tan^2 \theta + 1 = \sec^2 \theta\) | \(\begin{align} \sec^2\theta - \tan^2\theta = 1\\ (\sec\theta - \tan\theta)(\sec\theta + \tan\theta) = 1\\ \end{align}\) |
+| scope="row" | | \(\frac{\sin^2 \theta}{\sin^2 \theta} + \frac{\cos^2 \theta}{\sin^2 \theta} = \frac{1}{\sin^2 \theta}\) | | \(1 + \cot^2 \theta = \csc^2 \theta\) | \(\begin{align} \csc^2\theta - \cot^2\theta = 1\\ (\csc\theta - \cot\theta)(\csc\theta + \cot\theta) = 1\\ \end{align}\) |
 
 ### Proof using the unit circle
 

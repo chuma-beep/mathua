@@ -12,19 +12,20 @@ While individual equations present a kind of puzzle and have been considered thr
 
 ## Examples
 In the following Diophantine equations, and are the unknowns and the other letters are given constants:
-{| class="wikitable"
-| \(ax+by = c\)||This is a linear Diophantine equation, related to Bézout's identity.
-|-
-| \(w^3 + x^3 = y^3 + z^3\)|| The smallest nontrivial solution in positive integers is 12\(^{3}\) + 1\(^{3}\) = 9\(^{3}\) + 10\(^{3}\) = 1729. It was famously given as an evident property of 1729, a taxicab number (also named Hardy–Ramanujan number) by Ramanujan to Hardy while meeting in 1917. There are infinitely many nontrivial solutions.
-|-
-| \(x^n + y^n = z^n\)||For *n* = 2 there are infinitely many solutions (*x, y, z*): the Pythagorean triples. For larger integer values of , Fermat's Last Theorem (initially claimed in 1637 by Fermat and proved by Andrew Wiles in 1995) states there are no positive integer solutions (*x, y, z*).
-|-
-| \(x^2 - ny^2 = \pm 1\)|| This is Pell's equation, which is named after the English mathematician John Pell. It was studied by Brahmagupta in the 7th century, as well as by Fermat in the 17th century.
-|-
-| \(\frac 4 n = \frac 1 x + \frac 1 y + \frac 1 z\)||The Erdős–Straus conjecture states that, for every positive integer ≥ 2, there exists a solution in , and , all as positive integers. Although not usually stated in polynomial form, this example is equivalent to the polynomial equation \(4xyz = n(yz+xz+xy).\)
-|-
-| \(x^4 + y^4 + z^4 = w^4\)||Conjectured incorrectly by Euler to have no nontrivial solutions. Proved by Elkies to have infinitely many nontrivial solutions, with a computer search by Frye determining the smallest nontrivial solution, 95800\(^{4}\) + 217519\(^{4}\) + 414560\(^{4}\) = 422481\(^{4}\).
-|}
+<dl>
+  <dt>\(ax+by = c\)</dt>
+  <dd>This is a linear Diophantine equation, related to Bézout's identity.</dd>
+  <dt>\(w^3 + x^3 = y^3 + z^3\)</dt>
+  <dd>The smallest nontrivial solution in positive integers is 12\(^{3}\) + 1\(^{3}\) = 9\(^{3}\) + 10\(^{3}\) = 1729. It was famously given as an evident property of 1729, a taxicab number (also named Hardy–Ramanujan number) by Ramanujan to Hardy while meeting in 1917. There are infinitely many nontrivial solutions.</dd>
+  <dt>\(x^n + y^n = z^n\)</dt>
+  <dd>For *n* = 2 there are infinitely many solutions (*x, y, z*): the Pythagorean triples. For larger integer values of , Fermat's Last Theorem (initially claimed in 1637 by Fermat and proved by Andrew Wiles in 1995) states there are no positive integer solutions (*x, y, z*).</dd>
+  <dt>\(x^2 - ny^2 = \pm 1\)</dt>
+  <dd>This is Pell's equation, which is named after the English mathematician John Pell. It was studied by Brahmagupta in the 7th century, as well as by Fermat in the 17th century.</dd>
+  <dt>\(\frac 4 n = \frac 1 x + \frac 1 y + \frac 1 z\)</dt>
+  <dd>The Erdős–Straus conjecture states that, for every positive integer ≥ 2, there exists a solution in , and , all as positive integers. Although not usually stated in polynomial form, this example is equivalent to the polynomial equation \(4xyz = n(yz+xz+xy).\)</dd>
+  <dt>\(x^4 + y^4 + z^4 = w^4\)</dt>
+  <dd>Conjectured incorrectly by Euler to have no nontrivial solutions. Proved by Elkies to have infinitely many nontrivial solutions, with a computer search by Frye determining the smallest nontrivial solution, 95800\(^{4}\) + 217519\(^{4}\) + 414560\(^{4}\) = 422481\(^{4}\).</dd>
+</dl>
 
 ## Linear Diophantine equations
 ### One equation

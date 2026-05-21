@@ -86,31 +86,19 @@ The square root of a positive integer is the product of the roots of its prime f
 ### As decimal expansions
 The square roots of the perfect squares (e.g., 0, 1, 4, 9, 16) are integers. In all other cases, the square roots of positive integers are irrational numbers, and hence have non-repeating decimals in their decimal representations. Decimal approximations of the square roots of the first few natural numbers are given in the following table.
 
-{|class="wikitable"
-! !! \(\sqrt{n},\) truncated to 50 decimal places
-|-
-|align="right" | 0 || 0
-|-
-|align="right" | 1 || 1
-|-
-|align="right" | 2 ||
-|-
-|align="right" | 3 ||
-|-
-|align="right" | 4 || 2
-|-
-|align="right" | 5 ||
-|-
-|align="right" | 6 ||
-|-
-|align="right" | 7 ||
-|-
-|align="right" | 8 ||
-|-
-|align="right" | 9 || 3
-|-
-|align="right" | 10 ||
-|}
+|  | \(\sqrt{n},\) truncated to 50 decimal places |
+| --- | --- |
+| | 0 | 0 |
+| | 1 | 1 |
+| | 2 |  |
+| | 3 |  |
+| | 4 | 2 |
+| | 5 |  |
+| | 6 |  |
+| | 7 |  |
+| | 8 |  |
+| | 9 | 3 |
+| | 10 |  |
 
 ### As expansions in other numeral systems
 As with before, the square roots of the perfect squares (e.g., 0, 1, 4, 9, 16) are integers. In all other cases, the square roots of positive integers are irrational numbers, and therefore have non-repeating digits in any standard positional notation system.
@@ -120,46 +108,46 @@ The square roots of small integers are used in both the SHA-1 and SHA-2 hash fun
 ### As periodic continued fractions
 A result from the study of irrational numbers as simple continued fractions was obtained by Joseph Louis Lagrange. Lagrange found that the representation of the square root of any non-square positive integer as a continued fraction is periodic. That is, a certain pattern of partial denominators repeats indefinitely in the continued fraction. In a sense these square roots are the very simplest irrational numbers, because they can be represented with a simple repeating pattern of integers.
 
-{|
-|-
-|align="right"|\(\sqrt{2}\)|| = [1; 2, 2,... ]
-|-
-|align="right"|\(\sqrt{3}\)|| = [1; 1, 2, 1, 2,... ]
-|-
-|align="right"|\(\sqrt{4}\)|| = [2]
-|-
-|align="right"|\(\sqrt{5}\)|| = [2; 4, 4,... ]
-|-
-|align="right"|\(\sqrt{6}\)|| = [2; 2, 4, 2, 4,... ]
-|-
-|align="right"|\(\sqrt{7}\)|| = [2; 1, 1, 1, 4, 1, 1, 1, 4,... ]
-|-
-|align="right"|\(\sqrt{8}\)||= [2; 1, 4, 1, 4,... ]
-|-
-|align="right"|\(\sqrt{9}\)|| = [3]
-|-
-|align="right"|\(\sqrt{10}\)|| = [3; 6, 6,... ]
-|-
-|align="right"|\(\sqrt{11}\)|| = [3; 3, 6, 3, 6,... ]
-|-
-|align="right"|\(\sqrt{12}\)|| = [3; 2, 6, 2, 6,... ]
-|-
-|align="right"|\(\sqrt{13}\)|| = [3; 1, 1, 1, 1, 6, 1, 1, 1, 1, 6,... ]
-|-
-|align="right"|\(\sqrt{14}\)|| = [3; 1, 2, 1, 6, 1, 2, 1, 6,... ]
-|-
-|align="right"|\(\sqrt{15}\)|| = [3; 1, 6, 1, 6,... ]
-|-
-|align="right"|\(\sqrt{16}\)|| = [4]
-|-
-|align="right"|\(\sqrt{17}\)|| = [4; 8, 8,... ]
-|-
-|align="right"|\(\sqrt{18}\)|| = [4; 4, 8, 4, 8,... ]
-|-
-|align="right"|\(\sqrt{19}\)|| = [4; 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2, 8,... ]
-|-
-|align="right"|\(\sqrt{20}\)|| = [4; 2, 8, 2, 8,... ]
-|}
+<dl>
+  <dt>|\(\sqrt{2}\)</dt>
+  <dd>= [1; 2, 2,... ]</dd>
+  <dt>|\(\sqrt{3}\)</dt>
+  <dd>= [1; 1, 2, 1, 2,... ]</dd>
+  <dt>|\(\sqrt{4}\)</dt>
+  <dd>= [2]</dd>
+  <dt>|\(\sqrt{5}\)</dt>
+  <dd>= [2; 4, 4,... ]</dd>
+  <dt>|\(\sqrt{6}\)</dt>
+  <dd>= [2; 2, 4, 2, 4,... ]</dd>
+  <dt>|\(\sqrt{7}\)</dt>
+  <dd>= [2; 1, 1, 1, 4, 1, 1, 1, 4,... ]</dd>
+  <dt>|\(\sqrt{8}\)</dt>
+  <dd>= [2; 1, 4, 1, 4,... ]</dd>
+  <dt>|\(\sqrt{9}\)</dt>
+  <dd>= [3]</dd>
+  <dt>|\(\sqrt{10}\)</dt>
+  <dd>= [3; 6, 6,... ]</dd>
+  <dt>|\(\sqrt{11}\)</dt>
+  <dd>= [3; 3, 6, 3, 6,... ]</dd>
+  <dt>|\(\sqrt{12}\)</dt>
+  <dd>= [3; 2, 6, 2, 6,... ]</dd>
+  <dt>|\(\sqrt{13}\)</dt>
+  <dd>= [3; 1, 1, 1, 1, 6, 1, 1, 1, 1, 6,... ]</dd>
+  <dt>|\(\sqrt{14}\)</dt>
+  <dd>= [3; 1, 2, 1, 6, 1, 2, 1, 6,... ]</dd>
+  <dt>|\(\sqrt{15}\)</dt>
+  <dd>= [3; 1, 6, 1, 6,... ]</dd>
+  <dt>|\(\sqrt{16}\)</dt>
+  <dd>= [4]</dd>
+  <dt>|\(\sqrt{17}\)</dt>
+  <dd>= [4; 8, 8,... ]</dd>
+  <dt>|\(\sqrt{18}\)</dt>
+  <dd>= [4; 4, 8, 4, 8,... ]</dd>
+  <dt>|\(\sqrt{19}\)</dt>
+  <dd>= [4; 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2, 8,... ]</dd>
+  <dt>|\(\sqrt{20}\)</dt>
+  <dd>= [4; 2, 8, 2, 8,... ]</dd>
+</dl>
 
 The square bracket notation used above is a short form for a continued fraction. Written in the more suggestive algebraic form, the simple continued fraction for the square root of 11, [3; 3, 6, 3, 6,... ], looks like this:
 \[

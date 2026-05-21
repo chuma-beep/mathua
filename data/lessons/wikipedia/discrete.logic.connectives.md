@@ -13,134 +13,170 @@ In formal languages, truth functions are denoted by fixed symbols, ensuring that
 
 Logical connectives can be used to link zero or more statements, so one can speak about *-ary logical connectives*. The boolean constants *True* and *False* can be thought of as nullary operators. Negation is a unary connective, and so on.
 
-{| class="floatright" style="margin-left:2em; margin-bottom:1ex; text-align:center; border: 1px solid #a2a9b1; color: black; padding:0.2em; background-color: #f8f9fa; font-size:90%;"
- ! colspan=2 | Symbol, name
- ! colspan=4 | Truthtable
- ! | Venndiagram
- |-
- ! colspan=7 | Zeroary connectives (constants)
- |-
- | \(\top\) || style="text-align:left; | Truth/tautology
- | colspan=4 | 1
- |
- |-
- | \(\bot\) || style="text-align:left; | Falsity/contradiction
- | colspan=4 | 0
- |
- |-
- ! colspan=7 | Unary connectives
- |- style="background-color:#ffff66;"
- | colspan=2 style="text-align:right;" | \(p\) =
- | colspan=2 | 0
- | colspan=2 | 1
- |-
- | || style="text-align:left; | Proposition \(p\)
- | colspan=2 | 0
- | colspan=2 | 1
- |
- |-
- | \(\neg\) || style="text-align:left; | Negation
- | colspan=2 | 1
- | colspan=2 | 0
- |
+<table>
+  <tr>
+    <th>colspan=2 | Symbol, name</th>
+    <th>colspan=4 | Truthtable</th>
+    <th>| Venndiagram</th>
+    <td>-</td>
+    <th>colspan=7 | Zeroary connectives (constants)</th>
+    <td>-</td>
+    <td>\(\top\)</td>
+    <td>style="text-align:left; | Truth/tautology</td>
+    <td>colspan=4 | 1</td>
+    <td>-</td>
+    <td>\(\bot\)</td>
+    <td>style="text-align:left; | Falsity/contradiction</td>
+    <td>colspan=4 | 0</td>
+    <td>-</td>
+    <th>colspan=7 | Unary connectives</th>
+    <td>-</td>
+    <td>colspan=2 | \(p\) =</td>
+    <td>colspan=2 | 0</td>
+    <td>colspan=2 | 1</td>
+    <td>-</td>
+    <td></td>
+    <td>style="text-align:left; | Proposition \(p\)</td>
+    <td>colspan=2 | 0</td>
+    <td>colspan=2 | 1</td>
+    <td>-</td>
+    <td>\(\neg\)</td>
+    <td>style="text-align:left; | Negation</td>
+    <td>colspan=2 | 1</td>
+    <td>colspan=2 | 0</td>
+    <td>-</td>
+    <th>colspan=9 | Binary connectives</th>
+    <td>-</td>
+    <td>colspan=2 | \(p\) =</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td>1</td>
+    <td>-</td>
+    <td>colspan=2 | \(q\) =</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\and\)</td>
+    <td>| Conjunction</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\uparrow\)</td>
+    <td>| Alternative denial</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>-</td>
+    <td>\(\vee\)</td>
+    <td>style="text-align:left; | Disjunction</td>
+    <td>0</td>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\downarrow\)</td>
+    <td>style="text-align:left; | Joint denial</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>0</td>
+    <td>-</td>
+    <td>\(\nleftrightarrow\)</td>
+    <td>style="text-align:left; | Exclusive or</td>
+    <td>0</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>-</td>
+    <td>\(\leftrightarrow\)</td>
+    <td>style="text-align:left; | Biconditional</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\rightarrow\)</td>
+    <td>style="text-align:left; | Material conditional</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\nrightarrow\)</td>
+    <td>style="text-align:left; | Material nonimplication</td>
+    <td>0</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>-</td>
+    <td>\(\leftarrow\)</td>
+    <td>style="text-align:left; | Converse implication</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>1</td>
+    <td>-</td>
+    <td>\(\nleftarrow\)</td>
+    <td>style="text-align:left; | Converse nonimplication</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td>-</td>
+    <td>colspan=7" | More information</td>
+    <td>} ### List of common logical connectives Commonly used logical connectives include the following ones. * Negation (not): \(\neg\), \(\sim\), \(N\) (prefix) in which \(\neg\) is the most modern and widely used, and \(\sim\) is also common; * Conjunction (and): \(\wedge\), \(\&\), \(K\) (prefix) in which \(\wedge\) is the most modern and widely used; * Disjunction (or): \(\vee\), \(A\) (prefix) in which \(\vee\) is the most modern and widely used; * Implication (if...then): \(\to\), \(\supset\), \(\Rightarrow\), \(C\) (prefix) in which \(\to\) is the most modern and widely used, and \(\supset\) is also common; * Equivalence (if and only if): \(\leftrightarrow\), \(\subset\!\!\!\supset\), \(\Leftrightarrow\), \(\equiv\), \(E\) (prefix) in which \(\leftrightarrow\) is the most modern and widely used, and \(\subset\!\!\!\supset\) is commonly used where \(\supset\) is also used. For example, the meaning of the statements *it is raining* (denoted by \(p\)) and *I am indoors* (denoted by \(q\)) is transformed, when the two are combined with logical connectives: * It is ***not*** raining (\(\neg p\)); * It is raining ***and*** I am indoors (\(p \wedge q\)); * It is raining ***or*** I am indoors (\(p \lor q\)); * ***If*** it is raining, ***then*** I am indoors (\(p \rightarrow q\)); * ***If*** I am indoors, ***then*** it is raining (\(q \rightarrow p\)); * I am indoors ***if and only if*** it is raining (\(p \leftrightarrow q\)). It is also common to consider the *always true* formula and the *always false* formula to be connective (in which case they are nullary). * True formula: \(\top\), \(1\), \(V\) (prefix), or \(\mathrm{T}\); * False formula: \(\bot\), \(0\), \(O\) (prefix), or \(\mathrm{F}\). This table summarizes the terminology: {|</td>
+  </tr>
+  <tr>
+    <th>Connective</th>
+    <th>In English</th>
+    <th>Noun for parts</th>
+    <th>Verb phrase</th>
+  </tr>
+  <tr>
+    <th>Conjunction</th>
+    <td>Both A and B</td>
+    <td>conjunct</td>
+    <td>A and B are conjoined</td>
+  </tr>
+  <tr>
+    <th>Disjunction</th>
+    <td>Either A or B, or both</td>
+    <td>disjunct</td>
+    <td>A and B are disjoined</td>
+  </tr>
+  <tr>
+    <th>Negation</th>
+    <td>It is not the case that A</td>
+    <td>negatum/negand</td>
+    <td>A is negated</td>
+  </tr>
+  <tr>
+    <th>Conditional</th>
+    <td>If A, then B</td>
+    <td>antecedent, consequent</td>
+    <td>B is implied by A</td>
+  </tr>
+  <tr>
+    <th>Biconditional</th>
+    <td>A if, and only if, B</td>
+    <td>equivalents</td>
+    <td>A and B are equivalent</td>
+  </tr>
+</table>
 
- |-
- ! colspan=9 | Binary connectives
- |- style="background-color:#ffff66;"
- | colspan=2 style="text-align:right;" | \(p\) =
- | 0 || 0 || 1 || 1
- |- style="background-color:#ffff66;"
- | colspan=2 style="text-align:right;" | \(q\) =
- | 0 || 1 || 0 || 1
- |-
- | \(\and\) || style="text-align:left;" | Conjunction
- |0||0||0||1||
- |-
- | \(\uparrow\) || style="text-align:left;" | Alternative denial
- |1||1||1||0||
- |-
- | \(\vee\) || style="text-align:left; | Disjunction
- |0||1||1||1||
- |-
- | \(\downarrow\) || style="text-align:left; | Joint denial
- |1||0||0||0||
- |-
- | \(\nleftrightarrow\) || style="text-align:left; | Exclusive or
- |0||1||1||0||
- |-
- | \(\leftrightarrow\) || style="text-align:left; | Biconditional
- |1||0||0||1||
- |-
- | \(\rightarrow\) || style="text-align:left; | Material conditional
- |1||1||0||1||
- |-
- | \(\nrightarrow\) || style="text-align:left; | Material nonimplication
- |0||0||1||0||
- |-
- | \(\leftarrow\) || style="text-align:left; | Converse implication
- |1||0||1||1||
- |-
- | \(\nleftarrow\) || style="text-align:left; | Converse nonimplication
- |0||1||0||0||
- |-
- | colspan=7" | More information
- |}
-
-### List of common logical connectives
-Commonly used logical connectives include the following ones.
-* Negation (not): \(\neg\), \(\sim\), \(N\) (prefix) in which \(\neg\) is the most modern and widely used, and \(\sim\) is also common;
-* Conjunction (and): \(\wedge\), \(\&\), \(K\) (prefix) in which \(\wedge\) is the most modern and widely used;
-* Disjunction (or): \(\vee\), \(A\) (prefix) in which \(\vee\) is the most modern and widely used;
-* Implication (if...then): \(\to\), \(\supset\), \(\Rightarrow\), \(C\) (prefix) in which \(\to\) is the most modern and widely used, and \(\supset\) is also common;
-* Equivalence (if and only if): \(\leftrightarrow\), \(\subset\!\!\!\supset\), \(\Leftrightarrow\), \(\equiv\), \(E\) (prefix) in which \(\leftrightarrow\) is the most modern and widely used, and \(\subset\!\!\!\supset\) is commonly used where \(\supset\) is also used.
-
-For example, the meaning of the statements *it is raining* (denoted by \(p\)) and *I am indoors* (denoted by \(q\)) is transformed, when the two are combined with logical connectives:
-
-* It is ***not*** raining (\(\neg p\));
-* It is raining ***and*** I am indoors (\(p \wedge q\));
-* It is raining ***or*** I am indoors (\(p \lor q\));
-* ***If*** it is raining, ***then*** I am indoors (\(p \rightarrow q\));
-* ***If*** I am indoors, ***then*** it is raining (\(q \rightarrow p\));
-* I am indoors ***if and only if*** it is raining (\(p \leftrightarrow q\)).
-
-It is also common to consider the *always true* formula and the *always false* formula to be connective (in which case they are nullary).
-* True formula: \(\top\), \(1\), \(V\) (prefix), or \(\mathrm{T}\);
-* False formula: \(\bot\), \(0\), \(O\) (prefix), or \(\mathrm{F}\).
-
-This table summarizes the terminology:
-
-{| class="wikitable" style="margin:1em auto; text-align:left;"
-|-
-! Connective
-! In English
-! Noun for parts
-! Verb phrase
-|-
-! Conjunction
-| Both A and B
-| conjunct
-| A and B are conjoined
-|-
-! Disjunction
-| Either A or B, or both
-| disjunct
-| A and B are disjoined
-|-
-! Negation
-| It is not the case that A
-| negatum/negand
-| A is negated
-|-
-! Conditional
-| If A, then B
-| antecedent, consequent
-| B is implied by A
-|-
-! Biconditional
-| A if, and only if, B
-| equivalents
-| A and B are equivalent
-|}
+| Connective | In English | Noun for parts | Verb phrase |
+| --- | --- | --- | --- |
+| Conjunction | Both A and B | conjunct | A and B are conjoined |
+| Disjunction | Either A or B, or both | disjunct | A and B are disjoined |
+| Negation | It is not the case that A | negatum/negand | A is negated |
+| Conditional | If A, then B | antecedent, consequent | B is implied by A |
+| Biconditional | A if, and only if, B | equivalents | A and B are equivalent |
 
 ### History of notations
 * Negation: the symbol \(\neg\) appeared in Heyting in 1930 (compare to Frege's symbol ⫟ in his Begriffsschrift); the symbol \(\sim\) appeared in Russell in 1908; an alternative notation is to add a horizontal line on top of the formula, as in \(\overline{p}\); another alternative notation is to use a prime symbol as in \(p'\).
@@ -176,32 +212,19 @@ Other apparent discrepancies between natural language and classical logic includ
 
 The following table shows the standard classically definable approximations for the English connectives.
 
-{| class="wikitable sortable"
-|-
-! English word !! Connective !! Symbol !! Logical gate
-|-
-| not || negation || \(\neg\) || NOT
-|-
-| and || conjunction || \(\and\) || AND
-|-
-| or || disjunction || \(\vee\) || OR
-|-
-| if...then || material implication || \(\rightarrow\) || IMPLY
-|-
-|... if || converse implication || \(\leftarrow\) ||
-|-
-| either...or || exclusive disjunction || \(\nleftrightarrow\) || XOR
-|-
-| if and only if || biconditional || \(\leftrightarrow\) || XNOR
-|-
-| not both || alternative denial || \(\uparrow\) || NAND
-|-
-| neither...nor || joint denial || \(\downarrow\) || NOR
-|-
-| but not || material nonimplication || \(\nrightarrow\) || NIMPLY
-|-
-| not...but || converse nonimplication || \(\nleftarrow\)
-|}
+| English word | Connective | Symbol | Logical gate |
+| --- | --- | --- | --- |
+| not | negation | \(\neg\) | NOT |
+| and | conjunction | \(\and\) | AND |
+| or | disjunction | \(\vee\) | OR |
+| if...then | material implication | \(\rightarrow\) | IMPLY |
+| ... if | converse implication | \(\leftarrow\) |  |
+| either...or | exclusive disjunction | \(\nleftrightarrow\) | XOR |
+| if and only if | biconditional | \(\leftrightarrow\) | XNOR |
+| not both | alternative denial | \(\uparrow\) | NAND |
+| neither...nor | joint denial | \(\downarrow\) | NOR |
+| but not | material nonimplication | \(\nrightarrow\) | NIMPLY |
+| not...but | converse nonimplication | \(\nleftarrow\) |  |
 
 ## Properties
 Some logical connectives possess properties that may be expressed in the theorems containing the connective. Some of those properties that a logical connective may have are:
@@ -226,19 +249,14 @@ In classical logic and some varieties of many-valued logic, conjunction and disj
 As a way of reducing the number of necessary parentheses, one may introduce precedence rules: ¬ has higher precedence than ∧, ∧ higher than ∨, and ∨ higher than →. So for example, \(P \vee Q \and{\neg R} \rightarrow S\) is short for \((P \vee (Q \and (\neg R))) \rightarrow S\).
 
 Here is a table that shows a commonly used precedence of logical operators.
-{| class="wikitable" style="text-align: center;"
-!Operator !!Precedence
-|-
-| \(\neg\) || 1
-|-
-| \(\and\) || 2
-|-
-| \(\vee\) || 3
-|-
-| \(\rightarrow\) || 4
-|-
-| \(\leftrightarrow\) || 5
-|}
+| Operator | Precedence |
+| --- | --- |
+| \(\neg\) | 1 |
+| \(\and\) | 2 |
+| \(\vee\) | 3 |
+| \(\rightarrow\) | 4 |
+| \(\leftrightarrow\) | 5 |
+
 However, not all compilers use the same order; for instance, an ordering in which disjunction is lower precedence than implication or bi-implication has also been used. Sometimes precedence between conjunction and disjunction is unspecified requiring to provide it explicitly in given formula with parentheses. The order of precedence determines which connective is the "main connective" when interpreting a non-atomic formula.
 
 ## Table and Hasse diagram
@@ -257,31 +275,12 @@ But not every usage of a logical connective in computer programming has a Boolea
 
 Logical connectives are used to define the fundamental operations of set theory, as follows:
 
-{| class="wikitable" style="margin:1em auto; text-align:left;"
-|+Set theory operations and connectives
-|-
-! Set operation
-! Connective
-! Definition
-|-
-| Intersection
-| Conjunction
-| \(A \cap B = \{x : x \in A \land x \in B \}\)
-|-
-| Union
-| Disjunction
-| \(A \cup B = \{x : x \in A \lor x \in B \}\)
-|-
-| Complement
-| Negation
-| \(\overline{A} = \{x : x \notin A \}\)
-|-
-| Subset
-| Implication
-| \(A \subseteq B \leftrightarrow (x \in A \rightarrow x \in B)\)
-|-
-| Equality
-| Biconditional
-| \(A = B \leftrightarrow (\forall X)[A \in X \leftrightarrow B \in X]\)
-|}
+| Set operation | Connective | Definition |
+| --- | --- | --- |
+| Intersection | Conjunction | \(A \cap B = \{x : x \in A \land x \in B \}\) |
+| Union | Disjunction | \(A \cup B = \{x : x \in A \lor x \in B \}\) |
+| Complement | Negation | \(\overline{A} = \{x : x \notin A \}\) |
+| Subset | Implication | \(A \subseteq B \leftrightarrow (x \in A \rightarrow x \in B)\) |
+| Equality | Biconditional | \(A = B \leftrightarrow (\forall X)[A \in X \leftrightarrow B \in X]\) |
+
 This definition of set equality is equivalent to the axiom of extensionality.

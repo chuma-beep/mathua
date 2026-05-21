@@ -31,157 +31,28 @@ Various approaches to a general definition of surface area were developed in the
 
 ## Common formulas
 
-{| class="wikitable"
-|+ Surface areas of common solids
-|-
-!Shape
-!Formula/Equation
-!Variables
-|-
-|Cube
-|\(6a^2\)
-|*a* = side length
-|-
-|Cuboid
-|\(2\left(lb+lh+bh\right)\)
-|
-**l* = length
-**b* = breadth
-**h* = height
-
-|-
-|Triangular prism
-|\(bh+l\left(p+q+r\right)\)
-|
-**b* = base length of triangle,
-**h* = height of triangle,
-**l* = distance between triangular bases,
-**p*, *q*, *r* = sides of triangle
-
-|-
-|All prisms
-|\(2B+Ph\)
-|
-**B* = the area of one base
-**P* = the perimeter of one base
-**h* = height
-
-|-
-|Sphere
-|\(4\pi r^2=\pi d^2\)
-|
-**r* = radius of sphere
-**d* = diameter
-
-|-
-|Hemisphere
-|\(3\pi r^2\)
-|*r* = radius of the hemisphere
-|-
-|Hemispherical shell
-|\(\pi \left(3R^2+r^2\right)\)
-|
-**R* = external radius of hemisphere
-**r* = internal radius of hemisphere
-
-|-
-|Spherical lune
-|\(2r^2\theta\)
-|
-**r* = radius of sphere
-**θ* = dihedral angle
-
-|-
-|Torus
-|\(\left(2\pi r\right)\left(2\pi R\right)=4\pi^2Rr\)
-|
-**r* = minor radius (radius of the tube)
-**R* = major radius (distance from center of tube to center of torus)
-
-|-
-|Closed cylinder
-|\(2\pi r^2+2\pi rh=2\pi r\left(r+h\right)\)
-|
-**r* = radius of the circular base
-**h* = height of the cylinder
-
-|-
-|Cylindrical annulus
-|\(\begin{align}
-& 2\pi Rh + 2\pi rh + 2\left(\pi R^2 - \pi r^2\right) \\
-&= 2\pi \left(R+r\right)\left(R-r+h\right)
-\end{align}\)
-|
-**R* = External radius
-**r* = Internal radius
-**h* = height
-
-|-
-|Capsule
-|\(2\pi r(2r+h)\)
-|
-**r* = radius of the hemispheres and cylinder
-**h* = height of the cylinder
-
-|-
-|Curved surface area of a cone
-|\(\pi r\sqrt{r^2+h^2}=\pi rs\)
-|
-*\(s=\sqrt{r^2+h^2}\)
-**s* = slant height of the cone
-**r* = radius of the circular base
-**h* = height of the cone
-
-|-
-|Full surface area of a cone
-|\(\pi r\left(r+\sqrt{r^2+h^2}\right)=\pi r\left(r +s\right)\)
-|
-**s* = slant height of the cone
-**r* = radius of the circular base
-**h* = height of the cone
-
-|-
-|Regular Pyramid
-|\(B+\frac{Ps}{2}\)
-|
-**B* = area of base
-**P* = perimeter of base
-**s* = slant height
-
-|-
-|Square pyramid
-|\(b^2 + 2bs = b^2+ 2b\sqrt{\left(\frac{b}{2}\right)^2+h^2}\)
-|
-**b* = base length
-**s* = slant height
-**h* = vertical height
-
-|-
-|Rectangular pyramid
-|\(lb+l\sqrt{\left(\frac{b}{2}\right)^2+h^2}+ b\sqrt{\left(\frac{l}{2}\right)^2+h^2}\)
-|
-**l* = length
-**b* = breadth
-**h* = height
-
-|-
-|Tetrahedron
-|\(\sqrt{3}a^2\)
-|*a* = side length
-|-
-|Surface of revolution
-|\(2\pi \int_a^b {f(x) \sqrt{1+(f'(x))^2} dx}\)
-|
-|-
-|Parametric surface
-|\(\iint_D \left \vert \vec{r}_u \times \vec{r}_v \right \vert dA\)
-|
-*\(\vec{r}\) = parametric vector equation of surface
-*\(\vec{r}_u\) = partial derivative of \(\vec{r}\) with respect to \(u\)
-*\(\vec{r}_v\) = partial derivative of \(\vec{r}\) with respect to \(v\)
-*\(D\) = shadow region
-
-|}
+| Shape | Formula/Equation | Variables |
+| --- | --- | --- |
+| Cube | \(6a^2\) | *a* = side length |
+| Cuboid | \(2\left(lb+lh+bh\right)\) **l* = length **b* = breadth **h* = height |  |
+| Triangular prism | \(bh+l\left(p+q+r\right)\) **b* = base length of triangle, **h* = height of triangle, **l* = distance between triangular bases, **p*, *q*, *r* = sides of triangle |  |
+| All prisms | \(2B+Ph\) **B* = the area of one base **P* = the perimeter of one base **h* = height |  |
+| Sphere | \(4\pi r^2=\pi d^2\) **r* = radius of sphere **d* = diameter |  |
+| Hemisphere | \(3\pi r^2\) | *r* = radius of the hemisphere |
+| Hemispherical shell | \(\pi \left(3R^2+r^2\right)\) **R* = external radius of hemisphere **r* = internal radius of hemisphere |  |
+| Spherical lune | \(2r^2\theta\) **r* = radius of sphere **θ* = dihedral angle |  |
+| Torus | \(\left(2\pi r\right)\left(2\pi R\right)=4\pi^2Rr\) **r* = minor radius (radius of the tube) **R* = major radius (distance from center of tube to center of torus) |  |
+| Closed cylinder | \(2\pi r^2+2\pi rh=2\pi r\left(r+h\right)\) **r* = radius of the circular base **h* = height of the cylinder |  |
+| Cylindrical annulus | \(\begin{align} & 2\pi Rh + 2\pi rh + 2\left(\pi R^2 - \pi r^2\right) \\ &= 2\pi \left(R+r\right)\left(R-r+h\right) \end{align}\) **R* = External radius **r* = Internal radius **h* = height |  |
+| Capsule | \(2\pi r(2r+h)\) **r* = radius of the hemispheres and cylinder **h* = height of the cylinder |  |
+| Curved surface area of a cone | \(\pi r\sqrt{r^2+h^2}=\pi rs\) *\(s=\sqrt{r^2+h^2}\) **s* = slant height of the cone **r* = radius of the circular base **h* = height of the cone |  |
+| Full surface area of a cone | \(\pi r\left(r+\sqrt{r^2+h^2}\right)=\pi r\left(r +s\right)\) **s* = slant height of the cone **r* = radius of the circular base **h* = height of the cone |  |
+| Regular Pyramid | \(B+\frac{Ps}{2}\) **B* = area of base **P* = perimeter of base **s* = slant height |  |
+| Square pyramid | \(b^2 + 2bs = b^2+ 2b\sqrt{\left(\frac{b}{2}\right)^2+h^2}\) **b* = base length **s* = slant height **h* = vertical height |  |
+| Rectangular pyramid | \(lb+l\sqrt{\left(\frac{b}{2}\right)^2+h^2}+ b\sqrt{\left(\frac{l}{2}\right)^2+h^2}\) **l* = length **b* = breadth **h* = height |  |
+| Tetrahedron | \(\sqrt{3}a^2\) | *a* = side length |
+| Surface of revolution | \(2\pi \int_a^b {f(x) \sqrt{1+(f'(x))^2} dx}\) |  |
+| Parametric surface | \(\iint_D \left \vert \vec{r}_u \times \vec{r}_v \right \vert dA\) *\(\vec{r}\) = parametric vector equation of surface *\(\vec{r}_u\) = partial derivative of \(\vec{r}\) with respect to \(u\) *\(\vec{r}_v\) = partial derivative of \(\vec{r}\) with respect to \(v\) *\(D\) = shadow region |  |
 
 ### Ratio of surface areas of a sphere and cylinder of the same radius and height
 

@@ -51,33 +51,83 @@ Therefore, it must be the case that the area enclosed by the circle is precisely
 
 Following Satō Moshun , Nicholas of Cusa and Leonardo da Vinci , we can use inscribed regular polygons in a different way. Suppose we inscribe a hexagon. Cut the hexagon into six triangles by splitting it from the center. Two opposite triangles both touch two common diameters; slide them along one so the radial edges are adjacent. They now form a parallelogram, with the hexagon sides making two opposite edges, one of which is the base, *s*. Two radial edges form slanted sides, and the height, *h* is equal to its apothem (as in the Archimedes proof). In fact, we can also assemble all the triangles into one big parallelogram by putting successive pairs next to each other. The same is true if we increase it to eight sides and so on. For a polygon with 2*n* sides, the parallelogram will have a base of length *ns*, and a height *h*. As the number of sides increases, the length of the parallelogram base approaches half the circle circumference, and its height approaches the circle radius. In the limit, the parallelogram becomes a rectangle with width *r* and height *r*.
 
-{| class="wikitable" frame="vsides" style="text-align:center" cellspacing="0" cellpadding="3"
-|+ ***Unit disk area by rearranging n polygons.***
-|-
-! colspan="2" | polygon
-| rowspan="11" style="padding:1px;"|
-! colspan="3" | parallelogram
-|-
-! *n* !! side !! base !! height !! area
-|-
-| align="right" | 4 || 1.4142136 || 2.8284271 || 0.7071068 || 2.0000000
-|-
-| align="right" | 6 || 1.0000000 || 3.0000000 || 0.8660254 || 2.5980762
-|-
-| align="right" | 8 || 0.7653669 || 3.0614675 || 0.9238795 || 2.8284271
-|-
-| align="right" | 10 || 0.6180340 || 3.0901699 || 0.9510565 || 2.9389263
-|-
-| align="right" | 12 || 0.5176381 || 3.1058285 || 0.9659258 || 3.0000000
-|-
-| align="right" | 14 || 0.4450419 || 3.1152931 || 0.9749279 || 3.0371862
-|-
-| align="right" | 16 || 0.3901806 || 3.1214452 || 0.9807853 || 3.0614675
-|-
-| align="right" | 96 || 0.0654382 || 3.1410320 || 0.9994646 || 3.1393502
-|-
-| ∞ || 1/∞ || || 1 ||
-|}
+<table>
+  <caption>***Unit disk area by rearranging n polygons.***</caption>
+  <tr>
+    <th>| polygon</th>
+    <td>|</td>
+    <th>| parallelogram</th>
+  </tr>
+  <tr>
+    <th>*n*</th>
+    <th>side</th>
+    <th>base</th>
+    <th>height</th>
+    <th>area</th>
+  </tr>
+  <tr>
+    <td>| 4</td>
+    <td>1.4142136</td>
+    <td>2.8284271</td>
+    <td>0.7071068</td>
+    <td>2.0000000</td>
+  </tr>
+  <tr>
+    <td>| 6</td>
+    <td>1.0000000</td>
+    <td>3.0000000</td>
+    <td>0.8660254</td>
+    <td>2.5980762</td>
+  </tr>
+  <tr>
+    <td>| 8</td>
+    <td>0.7653669</td>
+    <td>3.0614675</td>
+    <td>0.9238795</td>
+    <td>2.8284271</td>
+  </tr>
+  <tr>
+    <td>| 10</td>
+    <td>0.6180340</td>
+    <td>3.0901699</td>
+    <td>0.9510565</td>
+    <td>2.9389263</td>
+  </tr>
+  <tr>
+    <td>| 12</td>
+    <td>0.5176381</td>
+    <td>3.1058285</td>
+    <td>0.9659258</td>
+    <td>3.0000000</td>
+  </tr>
+  <tr>
+    <td>| 14</td>
+    <td>0.4450419</td>
+    <td>3.1152931</td>
+    <td>0.9749279</td>
+    <td>3.0371862</td>
+  </tr>
+  <tr>
+    <td>| 16</td>
+    <td>0.3901806</td>
+    <td>3.1214452</td>
+    <td>0.9807853</td>
+    <td>3.0614675</td>
+  </tr>
+  <tr>
+    <td>| 96</td>
+    <td>0.0654382</td>
+    <td>3.1410320</td>
+    <td>0.9994646</td>
+    <td>3.1393502</td>
+  </tr>
+  <tr>
+    <td>∞</td>
+    <td>1/∞</td>
+    <td></td>
+    <td>1</td>
+  </tr>
+</table>
 
 ## Modern proofs
 There are various equivalent definitions of the constant π. The conventional definition in pre-calculus geometry is the ratio of the circumference of a circle to its diameter:
@@ -204,27 +254,16 @@ In modern notation, we can reproduce his computation (and go further) as follows
 For a unit circle, an inscribed hexagon has *u*\(_{6}\) = 6, and a circumscribed hexagon has *U*\(_{6}\) = 4.
 Doubling seven times yields
 
-{| class="wikitable" frame="vsides" style="text-align:center" cellspacing="0" cellpadding="3"
-|+ **Archimedes doubling seven times; *n* = 6 × 2\(^{*k*}\).**
-|- style="background-color:#eeeeee"
-! *k* !! *n* !! *u\(_{n}\)* !! *U\(_{n}\)* !!
-|-
-| 0 || 6 || 6.0000000 || 6.9282032 || 3.2320508
-|-
-| 1 || 12 || 6.2116571 || 6.4307806 || 3.1606094
-|-
-| 2 || 24 || 6.2652572 || 6.3193199 || 3.1461443
-|-
-| 3 || 48 || 6.2787004 || 6.2921724 || 3.1427182
-|-
-| 4 || 96 || 6.2820639 || 6.2854292 || 3.1418733
-|-
-| 5 || 192 || 6.2829049 || 6.2837461 || 3.1416628
-|-
-| 6 || 384 || 6.2831152 || 6.2833255 || 3.1416102
-|-
-| 7 || 768 || 6.2831678 || 6.2832204 || 3.1415970
-|}
+| *k* | *n* | *u\(_{n}\)* | *U\(_{n}\)* |  |
+| --- | --- | --- | --- | --- |
+| 0 | 6 | 6.0000000 | 6.9282032 | 3.2320508 |
+| 1 | 12 | 6.2116571 | 6.4307806 | 3.1606094 |
+| 2 | 24 | 6.2652572 | 6.3193199 | 3.1461443 |
+| 3 | 48 | 6.2787004 | 6.2921724 | 3.1427182 |
+| 4 | 96 | 6.2820639 | 6.2854292 | 3.1418733 |
+| 5 | 192 | 6.2829049 | 6.2837461 | 3.1416628 |
+| 6 | 384 | 6.2831152 | 6.2833255 | 3.1416102 |
+| 7 | 768 | 6.2831678 | 6.2832204 | 3.1415970 |
 
 (Here approximates the circumference of the unit circle, which is 2, so approximates. )
 

@@ -212,50 +212,13 @@ and randomized Las Vegas algorithms where the random choices made by the algorit
 When the elliptic curve method concludes that a number is prime, it provides primality certificate that can be verified quickly.
 The elliptic curve primality test is the fastest in practice of the guaranteed-correct primality tests, but its runtime analysis is based on heuristic arguments rather than rigorous proofs. The AKS primality test has mathematically proven time complexity, but is slower than elliptic curve primality proving in practice. These methods can be used to generate large random prime numbers, by generating and testing random numbers until finding one that is prime; when doing this, a faster probabilistic test can quickly eliminate most composite numbers before a guaranteed-correct algorithm is used to verify that the remaining numbers are prime.
 
-The following table lists some of these tests. Their running time is given in terms of , the number to be tested and, for probabilistic algorithms, the number of tests performed. Moreover, \(\varepsilon\) is an arbitrarily small positive number, and log is the logarithm to an unspecified base. The big O notation means that each time bound should be multiplied by a constant factor to convert it from dimensionless units to units of time; this factor depends on implementation details such as the type of computer used to run the algorithm, but not on the input parameters and. {| class="wikitable sortable"
-|-
-! Test
-! Developed in
-! Type
-! Running time
-! Notes
-! class=unsortable| References
-|-
-| AKS primality test
-| 2002
-| deterministic
-| \(O((\log n)^{6+\varepsilon})\)
-|
-|
-|-
-| Elliptic curve primality proving
-| 1986
-| Las Vegas
-| \(O((\log n)^{4+\varepsilon})\) *heuristically*
-|
-|
-|-
-| Baillie–PSW primality test
-| 1980
-| Monte Carlo
-| \(O((\log n)^{2+\varepsilon})\)
-|
-|
-|-
-| Miller–Rabin primality test
-| 1980
-| Monte Carlo
-| \(O(k(\log n)^{2+\varepsilon})\)
-| error probability \(4^{-k}\)
-|
-|-
-| Solovay–Strassen primality test
-| 1977
-| Monte Carlo
-| \(O(k(\log n)^{2+\varepsilon})\)
-| error probability \(2^{-k}\)
-|
-|}
+The following table lists some of these tests. Their running time is given in terms of , the number to be tested and, for probabilistic algorithms, the number of tests performed. Moreover, \(\varepsilon\) is an arbitrarily small positive number, and log is the logarithm to an unspecified base. The big O notation means that each time bound should be multiplied by a constant factor to convert it from dimensionless units to units of time; this factor depends on implementation details such as the type of computer used to run the algorithm, but not on the input parameters and. | Test | Developed in | Type | Running time | Notes | class=unsortable| References |
+| --- | --- | --- | --- | --- | --- |
+| AKS primality test | 2002 | deterministic | \(O((\log n)^{6+\varepsilon})\) |  |  |
+| Elliptic curve primality proving | 1986 | Las Vegas | \(O((\log n)^{4+\varepsilon})\) *heuristically* |  |  |
+| Baillie–PSW primality test | 1980 | Monte Carlo | \(O((\log n)^{2+\varepsilon})\) |  |  |
+| Miller–Rabin primality test | 1980 | Monte Carlo | \(O(k(\log n)^{2+\varepsilon})\) | error probability \(4^{-k}\) |  |
+| Solovay–Strassen primality test | 1977 | Monte Carlo | \(O(k(\log n)^{2+\varepsilon})\) | error probability \(2^{-k}\) |  |
 
 ### Special-purpose algorithms and the largest known prime
 
@@ -263,43 +226,13 @@ In addition to the aforementioned tests that apply to any natural number, some n
 
 The following table gives the largest known primes of various types. Some of these primes have been found using distributed computing. In 2009, the Great Internet Mersenne Prime Search project was awarded a US$100,000 prize for first discovering a prime with at least 10 million digits. The Electronic Frontier Foundation also offers $150,000 and $250,000 for primes with at least 100 million digits and 1 billion digits, respectively.
 
-{| class="wikitable"
-|-
-! Type
-! Prime
-! Number of decimal digits
-! Date
-! Found by
-|-
-| Mersenne prime
-| 2\(^{136,279,841}\) − 1
-| style="text-align:right;"| 41,024,320
-| October 12, 2024
-| Luke Durant, Great Internet Mersenne Prime Search
-|-
-| Proth prime
-| 10,223 × 2\(^{31,172,165}\) + 1
-| style="text-align:right;"| 9,383,761
-| October 31, 2016
-| Péter Szabolcs, PrimeGrid
-|-
-| factorial prime
-| 208,003! − 1
-| style="text-align:right;"| 1,015,843
-| July 2016
-| Sou Fukui
-|-
-| primorial prime, denoted by , yields the product of the prime numbers up to , and a primorial prime is a prime of one of the forms. | 1,098,133# − 1
-| style="text-align:right;"| 476,311
-| March 2012
-| James P. Burt, PrimeGrid
-|-
-| twin primes
-| 2,996,863,034,895 × 2\(^{1,290,000}\) ± 1
-| style="text-align:right;"| 388,342
-| September 2016
-| Tom Greer, PrimeGrid
-|}
+| Type | Prime | Number of decimal digits | Date | Found by |
+| --- | --- | --- | --- | --- |
+| Mersenne prime | 2\(^{136,279,841}\) − 1 | | 41,024,320 | October 12, 2024 | Luke Durant, Great Internet Mersenne Prime Search |
+| Proth prime | 10,223 × 2\(^{31,172,165}\) + 1 | | 9,383,761 | October 31, 2016 | Péter Szabolcs, PrimeGrid |
+| factorial prime | 208,003! − 1 | | 1,015,843 | July 2016 | Sou Fukui |
+| primorial prime, denoted by , yields the product of the prime numbers up to , and a primorial prime is a prime of one of the forms. | 1,098,133# − 1 | | 476,311 | March 2012 | James P. Burt, PrimeGrid |  |
+| twin primes | 2,996,863,034,895 × 2\(^{1,290,000}\) ± 1 | | 388,342 | September 2016 | Tom Greer, PrimeGrid |
 
 ### Integer factorization
 
