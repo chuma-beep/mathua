@@ -127,7 +127,7 @@ func (g *slopeGen) Generate(difficulty float64) generator.Problem {
 	frac := reduce(dy, dx)
 	num, den := frac.num, frac.den
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the slope between (%d,%d) and (%d,%d).", x1, y1, x2, y2),
+		Question:    fmt.Sprintf("Find the slope between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      fracOrInt(num, den),
 		Explanation: fmt.Sprintf("m = (%d - %d)/(%d - %d) = %d/%d = %s.", y2, y1, x2, x1, dy, dx, fracOrInt(num, den)),
 	}
@@ -143,7 +143,7 @@ func (g *slopeInterceptGen) Generate(difficulty float64) generator.Problem {
 		if rand.Intn(2) == 0 { m = -m }
 		b := rand.Intn(int(5+difficulty*10)) - int(3+difficulty*5)
 		return generator.Problem{
-			Question:    fmt.Sprintf("Write the equation of a line with slope %d/%d and y-intercept %d (y = mx + b).", m, n, b),
+			Question:    fmt.Sprintf("Write the equation of a line with slope \\(%d/%d\\) and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, n, b),
 			Answer:      fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
 			Explanation: fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
 		}
@@ -154,7 +154,7 @@ func (g *slopeInterceptGen) Generate(difficulty float64) generator.Problem {
 	}
 	b := rand.Intn(int(5+difficulty*8)) - int(3+difficulty*4)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Write the equation of a line with slope %d and y-intercept %d (y = mx + b).", m, b),
+		Question:    fmt.Sprintf("Write the equation of a line with slope %d and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, b),
 		Answer:      formatLinear(m, b),
 		Explanation: fmt.Sprintf("y = %dx + %d", m, b),
 	}
@@ -171,7 +171,7 @@ func (g *linearGraphGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(5) + 1
 	y := m*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Given y = %s, find y when x = %d.", formatLinear(m, b), x),
+		Question:    fmt.Sprintf("Given \\(y = %s\\), find \\(y\\) when \\(x = %d\\).", formatLinear(m, b), x),
 		Answer:      fmt.Sprintf("%d", y),
 		Explanation: fmt.Sprintf("y = %d(%d) + %d = %d + %d = %d.", m, x, b, m*x, b, y),
 	}
@@ -187,13 +187,13 @@ func (g *stdFormGen) Generate(difficulty float64) generator.Problem {
 	c := a*x + b*y
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Is (%d,%d) a solution to %dx + %dy = %d?", x, y, a, b, c),
+			Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(%dx + %dy = %d\\)?", x, y, a, b, c),
 			Answer:      "yes",
 			Explanation: fmt.Sprintf("%d(%d) + %d(%d) = %d + %d = %d. Yes!", a, x, b, y, a*x, b*y, c),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is (%d,%d) a solution to %dx + %dy = %d?", x+1, y, a, b, c),
+		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(%dx + %dy = %d\\)?", x+1, y, a, b, c),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("%d(%d) + %d(%d) = %d + %d = %d, not %d. No!", a, x+1, b, y, a*(x+1), b*y, a*(x+1)+b*y, c),
 	}
@@ -209,14 +209,14 @@ func (g *parallelPerpGen) Generate(difficulty float64) generator.Problem {
 	pick := rand.Intn(2)
 	if pick == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("A line parallel to y = %dx + 3 has slope:", m),
+			Question:    fmt.Sprintf("A line parallel to \\(y = %dx + 3\\) has slope:", m),
 			Answer:      fmt.Sprintf("%d", m),
 			Explanation: fmt.Sprintf("Parallel lines have equal slopes. Slope = %d.", m),
 		}
 	}
 	perp := reduce(-1, m)
 	return generator.Problem{
-		Question:    fmt.Sprintf("A line perpendicular to y = %dx + 3 has slope:", m),
+		Question:    fmt.Sprintf("A line perpendicular to \\(y = %dx + 3\\) has slope:", m),
 		Answer:      fracOrInt(perp.num, perp.den),
 		Explanation: fmt.Sprintf("Perpendicular slopes are negative reciprocals: -1/%d = %s.", m, fracOrInt(perp.num, perp.den)),
 	}
@@ -235,7 +235,7 @@ func (g *multiStepEqGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(scale*2) + 2
 	c := a*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d = %d", a, b, c),
+		Question:    fmt.Sprintf("Solve: \\(%dx + %d = %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%dx + %d = %d -> %dx = %d -> x = %d.", a, b, c, a, c-b, x),
 	}
@@ -254,7 +254,7 @@ func (g *varsBothSidesGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(scale*2) + 1
 	d := (a-c)*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d = %dx + %d", a, b, c, d),
+		Question:    fmt.Sprintf("Solve: \\(%dx + %d = %dx + %d\\)", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%dx + %d = %dx + %d -> %dx = %d -> x = %d.", a, b, c, d, a-c, d-b, x),
 	}
@@ -266,7 +266,7 @@ func (g *literalEqGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(6) + 2
 	b := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve for y: %dx + %dy = z", a, b),
+		Question:    fmt.Sprintf("Solve for \\(y\\): \\(%dx + %dy = z\\)", a, b),
 		Answer:      fmt.Sprintf("y = (z - %dx)/%d", a, b),
 		Explanation: fmt.Sprintf("%dy = z - %dx -> y = (z - %dx)/%d.", b, a, a, b),
 	}
@@ -280,7 +280,7 @@ func (g *multiStepIneqGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(10) + 1
 	c := a*(x-1) + b + rand.Intn(a)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %d > %d", a, b, c),
+		Question:    fmt.Sprintf("Solve: \\(%dx + %d > %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%dx + %d > %d -> %dx > %d -> x > %d, so x >= %d.", a, b, c, a, c-b, c-b, x),
 	}
@@ -300,7 +300,7 @@ func (g *compoundIneqGen) Generate(difficulty float64) generator.Problem {
 	a := b*(x-1) + c + 1
 	d := b*x + c + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %d < %dx + %d < %d", a, b, c, d),
+		Question:    fmt.Sprintf("Solve: \\(%d < %dx + %d < %d\\)", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%d < %dx + %d < %d -> %.1f < x < %.1f -> x = %d.", a, b, c, d, float64(a-c)/float64(b), float64(d-c)/float64(b), x),
 	}
@@ -316,7 +316,7 @@ func (g *sysSubstitutionGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	y := rand.Intn(8) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: y = %d,  x + y = %d", y, x+y),
+		Question:    fmt.Sprintf("Solve: \\(y = %d\\),  \\(x + y = %d\\)", y, x+y),
 		Answer:      fmt.Sprintf("(%d,%d)", x, y),
 		Explanation: fmt.Sprintf("Substitute y=%d: x + %d = %d -> x = %d. Solution: (%d,%d).", y, y, x+y, x, x, y),
 	}
@@ -333,7 +333,7 @@ func (g *sysEliminationGen) Generate(difficulty float64) generator.Problem {
 	eq1 := a*x + b*y
 	eq2 := c*x + b*y
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx + %dy = %d,  %dx + %dy = %d", a, b, eq1, c, b, eq2),
+		Question:    fmt.Sprintf("Solve: \\(%dx + %dy = %d\\),  \\(%dx + %dy = %d\\)", a, b, eq1, c, b, eq2),
 		Answer:      fmt.Sprintf("(%d,%d)", x, y),
 		Explanation: fmt.Sprintf("Subtract: %dx = %d -> x = %d; y = %d. Solution: (%d,%d).", a-c, eq1-eq2, x, y, x, y),
 	}
@@ -363,7 +363,7 @@ func (g *polyConceptGen) Generate(difficulty float64) generator.Problem {
 	coeff := rand.Intn(6) + 2
 	exp := rand.Intn(3) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the degree of %dx^%d + 3x + 1?", coeff, exp),
+		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d} + 3x + 1\\)?", coeff, exp),
 		Answer:      fmt.Sprintf("%d", exp),
 		Explanation: fmt.Sprintf("The highest exponent is %d, so the degree is %d.", exp, exp),
 	}
@@ -376,7 +376,7 @@ func (g *polyAddSubGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 2
 	c := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: (%dx^2 + %dx) + (%dx^2 + %dx)", a, c, b, c),
+		Question:    fmt.Sprintf("Simplify: \\((%dx^{2} + %dx) + (%dx^{2} + %dx)\\)", a, c, b, c),
 		Answer:      fmt.Sprintf("%dx^2 + %dx", a+b, 2*c),
 		Explanation: fmt.Sprintf("%dx^2 + %dx^2 = %dx^2; %dx + %dx = %dx.", a, b, a+b, c, c, 2*c),
 	}
@@ -389,7 +389,7 @@ func (g *polyMultMonoGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 2
 	c := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: %dx(%dx + %d)", a, b, c),
+		Question:    fmt.Sprintf("Simplify: \\(%dx(%dx + %d)\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx^2 + %dx", a*b, a*c),
 		Explanation: fmt.Sprintf("%dx(%dx) + %dx(%d) = %dx^2 + %dx.", a, b, a, c, a*b, a*c),
 	}
@@ -403,7 +403,7 @@ func (g *polyFoilGen) Generate(difficulty float64) generator.Problem {
 	c := rand.Intn(6) + 1
 	d := rand.Intn(6) + 1
 	return generator.Problem{
-		Question: fmt.Sprintf("Simplify: (%dx + %d)(%dx + %d)", a, b, c, d),
+		Question: fmt.Sprintf("Simplify: \\((%dx + %d)(%dx + %d)\\)", a, b, c, d),
 		Answer:   fmt.Sprintf("%dx^2 + %dx + %d", a*c, a*d+b*c, b*d),
 		Explanation: fmt.Sprintf("FOIL: %dx^2 + %dx + %dx + %d = %dx^2 + %dx + %d.",
 			a*c, a*d, b*c, b*d, a*c, a*d+b*c, b*d),
@@ -416,7 +416,7 @@ func (g *polySpecialGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(6) + 1
 	b := rand.Intn(5) + 1
 	return generator.Problem{
-		Question: fmt.Sprintf("Simplify: (%dx + %d)^2", a, b),
+		Question: fmt.Sprintf("Simplify: \\((%dx + %d)^{2}\\)", a, b),
 		Answer:   fmt.Sprintf("%dx^2 + %dx + %d", a*a, 2*a*b, b*b),
 		Explanation: fmt.Sprintf("(%dx)^2 + 2(%dx)(%d) + %d^2 = %dx^2 + %dx + %d.",
 			a, a, b, b, a*a, 2*a*b, b*b),
@@ -434,7 +434,7 @@ func (g *factorGCFGen) Generate(difficulty float64) generator.Problem {
 	a := f * (rand.Intn(5) + 2)
 	b := f * (rand.Intn(5) + 1)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Factor: %dx + %d", a, b),
+		Question:    fmt.Sprintf("Factor: \\(%dx + %d\\)", a, b),
 		Answer:      fmt.Sprintf("%d(%dx + %d)", f, a/f, b/f),
 		Explanation: fmt.Sprintf("GCF is %d: %dx + %d = %d(%dx + %d).", f, a, b, f, a/f, b/f),
 	}
@@ -448,7 +448,7 @@ func (g *factorTrinomialGen) Generate(difficulty float64) generator.Problem {
 	b := r1 + r2
 	c := r1 * r2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Factor: x^2 + %dx + %d", b, c),
+		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\)", b, c),
 		Answer:      fmt.Sprintf("(x + %d)(x + %d)", r1, r2),
 		Explanation: fmt.Sprintf("Find two numbers that multiply to %d and add to %d: %d and %d.", c, b, r1, r2),
 	}
@@ -459,7 +459,7 @@ type factorDiffSquaresGen struct{}
 func (g *factorDiffSquaresGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(8) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Factor: x^2 - %d", a*a),
+		Question:    fmt.Sprintf("Factor: \\(x^{2} - %d\\)", a*a),
 		Answer:      fmt.Sprintf("(x + %d)(x - %d)", a, a),
 		Explanation: fmt.Sprintf("x^2 - %d = (x + %d)(x - %d).", a*a, a, a),
 	}
@@ -474,7 +474,7 @@ func (g *factorACMethodGen) Generate(difficulty float64) generator.Problem {
 	b := a + r1*r2
 	c := r1 * r2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Factor: x^2 + %dx + %d", b, c),
+		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\)", b, c),
 		Answer:      fmt.Sprintf("(x + %d)(x + %d)", r1, r2),
 		Explanation: fmt.Sprintf("Find numbers multiplying to %d and adding to %d: %d and %d.", c, b, r1, r2),
 	}
@@ -505,7 +505,7 @@ func (g *quadCompleteSquareGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(6) + 1
 	b := -2 * r
 	return generator.Problem{
-		Question:    fmt.Sprintf("Complete the square: x^2 + %dx + __ to make a perfect square.", b),
+		Question:    fmt.Sprintf("Complete the square: \\(x^{2} + %dx + \\_\\_)\\) to make a perfect square.", b),
 		Answer:      fmt.Sprintf("%d", r*r),
 		Explanation: fmt.Sprintf("(b/2)^2 = (%d/2)^2 = %d.", b, r*r),
 	}
@@ -539,7 +539,7 @@ func (g *quadDiscriminantGen) Generate(difficulty float64) generator.Problem {
 		count = "zero real"
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("How many real solutions? x^2 + %dx + %d = 0", b, c),
+		Question:    fmt.Sprintf("How many real solutions? \\(x^{2} + %dx + %d = 0\\)", b, c),
 		Answer:      count,
 		Explanation: fmt.Sprintf("Discriminant = %d^2 - 4(%d) = %d. %s solutions.", b, c, disc, count),
 	}
@@ -556,7 +556,7 @@ func (g *funcConceptGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 1
 	x := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("If f(x) = %dx + %d, what is f(%d)?", a, b, x),
+		Question:    fmt.Sprintf("If \\(f(x) = %dx + %d\\), what is \\(f(%d)\\)?", a, b, x),
 		Answer:      fmt.Sprintf("%d", a*x+b),
 		Explanation: fmt.Sprintf("f(%d) = %d(%d) + %d = %d.", x, a, x, b, a*x+b),
 	}
@@ -570,7 +570,7 @@ func (g *funcNotationGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 1
 	y := a*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("f(x) = %dx + %d. Find x when f(x) = %d.", a, b, y),
+		Question:    fmt.Sprintf("\\(f(x) = %dx + %d\\). Find \\(x\\) when \\(f(x) = %d\\).", a, b, y),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%dx + %d = %d -> %dx = %d -> x = %d.", a, b, y, a, y-b, x),
 	}
@@ -584,7 +584,7 @@ func (g *funcEvaluateGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 1
 	c := a*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("f(x) = %dx + %d. Find f(%d).", a, b, x),
+		Question:    fmt.Sprintf("\\(f(x) = %dx + %d\\). Find \\(f(%d)\\).", a, b, x),
 		Answer:      fmt.Sprintf("%d", c),
 		Explanation: fmt.Sprintf("f(%d) = %d(%d) + %d = %d.", x, a, x, b, c),
 	}
@@ -600,14 +600,14 @@ func (g *funcLinearGen) Generate(difficulty float64) generator.Problem {
 		}
 		b := rand.Intn(10) - 5
 		return generator.Problem{
-			Question:    fmt.Sprintf("Is y = %s a function? (yes/no)", formatLinear(m, b)),
+			Question:    fmt.Sprintf("Is \\(y = %s\\) a function? (yes/no)", formatLinear(m, b)),
 			Answer:      "yes",
 			Explanation: fmt.Sprintf("Linear equations always define functions (passes vertical line test)."),
 		}
 	}
 	c := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is x = %d a function? (yes/no)", c),
+		Question:    fmt.Sprintf("Is \\(x = %d\\) a function? (yes/no)", c),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("x = %d is a vertical line — it fails the vertical line test.", c),
 	}
@@ -619,7 +619,7 @@ func (g *funcQuadGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(4) + 1
 	b := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("f(x) = %dx^2 + %d. Find f(2).", a, b),
+		Question:    fmt.Sprintf("\\(f(x) = %dx^{2} + %d\\). Find \\(f(2)\\).", a, b),
 		Answer:      fmt.Sprintf("%d", 4*a+b),
 		Explanation: fmt.Sprintf("f(2) = %d(4) + %d = %d + %d = %d.", a, b, 4*a, b, 4*a+b),
 	}
@@ -635,7 +635,7 @@ func (g *algExpConceptGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(3) + 2
 	x := rand.Intn(4) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("If f(x) = %d^x, find f(%d).", a, x),
+		Question:    fmt.Sprintf("If \\(f(x) = %d^{x}\\), find \\(f(%d)\\).", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
 		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, mathutil.IntPow(a, x)),
 	}
@@ -647,7 +647,7 @@ func (g *algExpEvaluateGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(3) + 2
 	x := rand.Intn(4) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Evaluate: %d^%d", a, x),
+		Question:    fmt.Sprintf("Evaluate: \\(%d^{%d}\\)", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
 		Explanation: fmt.Sprintf("%d^%d = %d.", a, x, mathutil.IntPow(a, x)),
 	}
@@ -660,7 +660,7 @@ func (g *logConceptGen) Generate(difficulty float64) generator.Problem {
 	exp := rand.Intn(4) + 1
 	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Write as a logarithm: %d^%d = %d", base, exp, val),
+		Question:    fmt.Sprintf("Write as a logarithm: \\(%d^{%d} = %d\\)", base, exp, val),
 		Answer:      fmt.Sprintf("log_%d(%d) = %d", base, val, exp),
 		Explanation: fmt.Sprintf("log_%d(%d) = %d.", base, val, exp),
 	}
@@ -673,7 +673,7 @@ func (g *logEvaluateGen) Generate(difficulty float64) generator.Problem {
 	exp := rand.Intn(4) + 1
 	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Evaluate: log_%d(%d)", base, val),
+		Question:    fmt.Sprintf("Evaluate: \\(\\log_{%d}(%d)\\)", base, val),
 		Answer:      fmt.Sprintf("%d", exp),
 		Explanation: fmt.Sprintf("%d^%d = %d, so log_%d(%d) = %d.", base, exp, val, base, val, exp),
 	}
@@ -686,7 +686,7 @@ func (g *logPropertiesGen) Generate(difficulty float64) generator.Problem {
 	a := mathutil.IntPow(base, rand.Intn(3)+1)
 	b := mathutil.IntPow(base, rand.Intn(3)+2)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: log_%d(%d x %d)", base, a, b),
+		Question:    fmt.Sprintf("Simplify: \\(\\log_{%d}(%d \\times %d)\\)", base, a, b),
 		Answer:      fmt.Sprintf("log_%d(%d) + log_%d(%d)", base, a, base, b),
 		Explanation: fmt.Sprintf("log_b(xy) = log_b(x) + log_b(y)."),
 	}
@@ -704,7 +704,7 @@ func (g *seqArithGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(5) + 3
 	an := a1 + (n-1)*d
 	return generator.Problem{
-		Question:    fmt.Sprintf("Arithmetic sequence: %d, %d, %d, ... Find term %d.", a1, a1+d, a1+2*d, n),
+		Question:    fmt.Sprintf("Arithmetic sequence: \\(%d, %d, %d, \\ldots\\) Find term \\(%d\\).", a1, a1+d, a1+2*d, n),
 		Answer:      fmt.Sprintf("%d", an),
 		Explanation: fmt.Sprintf("a_n = a1 + (n-1)d = %d + (%d)(%d) = %d.", a1, n-1, d, an),
 	}
@@ -718,7 +718,7 @@ func (g *seqGeomGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(4) + 2
 	an := a1 * mathutil.IntPow(r, n-1)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Geometric sequence: %d, %d, %d, ... Find term %d.", a1, a1*r, a1*r*r, n),
+		Question:    fmt.Sprintf("Geometric sequence: \\(%d, %d, %d, \\ldots\\) Find term \\(%d\\).", a1, a1*r, a1*r*r, n),
 		Answer:      fmt.Sprintf("%d", an),
 		Explanation: fmt.Sprintf("a_n = a1 x r^(n-1) = %d x %d^%d = %d.", a1, r, n-1, an),
 	}
@@ -733,7 +733,7 @@ func (g *seqSumArithGen) Generate(difficulty float64) generator.Problem {
 	an := a1 + (n-1)*d
 	sum := n * (a1 + an) / 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find sum of arithmetic series: %d + %d + %d + ... (first %d terms).", a1, a1+d, a1+2*d, n),
+		Question:    fmt.Sprintf("Find sum of arithmetic series: \\(%d + %d + %d + \\cdots\\) (first \\(%d\\) terms).", a1, a1+d, a1+2*d, n),
 		Answer:      fmt.Sprintf("%d", sum),
 		Explanation: fmt.Sprintf("S_n = n(a1+an)/2 = %d(%d+%d)/2 = %d.", n, a1, an, sum),
 	}
@@ -750,7 +750,7 @@ func (g *seqSumGeoGen) Generate(difficulty float64) generator.Problem {
 	rn := mathutil.IntPow(r, n)
 	sum := a1 * (1 - rn) / (1 - r)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find sum of geometric series: %d + %d + %d + ... (first %d terms, r=%d).", a1, a1*r, a1*r*r, n, r),
+		Question:    fmt.Sprintf("Find sum of geometric series: \\(%d + %d + %d + \\cdots\\) (first \\(%d\\) terms, \\(r=%d\\)).", a1, a1*r, a1*r*r, n, r),
 		Answer:      fmt.Sprintf("%d", sum),
 		Explanation: fmt.Sprintf("S_n = a1(1-r^n)/(1-r) = %d(1-%d)/(1-%d) = %d.", a1, rn, r, sum),
 	}
@@ -849,7 +849,7 @@ func (g *ineqTwoVarGen) Generate(difficulty float64) generator.Problem {
 		ans = "yes"
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is (%d,%d) a solution to y %s %dx + %d?", testX, testY, op, m, b),
+		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(y %s %dx + %d\\)?", testX, testY, op, m, b),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x=%d: y should be %s %d. y=%d %s %d = %t.", testX, op, expected, testY, op, expected, satisfies),
 	}
@@ -863,7 +863,7 @@ func (g *conicCircleGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(4) + 2
 	r2 := r * r
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the radius of (x%+d)² + (y%+d)² = %d?", -h, -k, r2),
+		Question:    fmt.Sprintf("What is the radius of \\((x%+d)^{2} + (y%+d)^{2} = %d\\)?", -h, -k, r2),
 		Answer:      fmt.Sprintf("%d", r),
 		Explanation: fmt.Sprintf("The radius is √%d = %d.", r2, r),
 	}
@@ -889,7 +889,7 @@ func (g *conicEllipseGen) Generate(difficulty float64) generator.Problem {
 		val = a
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the %s axis length of (x%+d)²/%d + (y%+d)²/%d = 1?", label, -h, a2, -k, b2),
+		Question:    fmt.Sprintf("What is the %s axis length of \\(\\frac{(x%+d)^{2}}{%d} + \\frac{(y%+d)^{2}}{%d} = 1\\)?", label, -h, a2, -k, b2),
 		Answer:      fmt.Sprintf("%d", val),
 		Explanation: fmt.Sprintf("The %s axis length is %d because %s² = %d.", label, val, label[:6], val*val),
 	}
@@ -906,13 +906,13 @@ func (g *conicParabolaGen) Generate(difficulty float64) generator.Problem {
 	if rand.Intn(2) == 0 { p = -p }
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Parabola: (x%+d)² = %d(y%+d). Which direction does it open?", -h, 4*p, -k),
+			Question:    fmt.Sprintf("Parabola: \\((x%+d)^{2} = %d(y%+d)\\). Which direction does it open?", -h, 4*p, -k),
 			Answer:      map[bool]string{true: "up", false: "down"}[p > 0],
 			Explanation: fmt.Sprintf("If 4p > 0, opens up; if 4p < 0, opens down. Here 4p = %d.", 4*p),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Parabola: (y%+d)² = %d(x%+d). Which direction does it open?", -k, 4*p, -h),
+		Question:    fmt.Sprintf("Parabola: \\((y%+d)^{2} = %d(x%+d)\\). Which direction does it open?", -k, 4*p, -h),
 		Answer:      map[bool]string{true: "right", false: "left"}[p > 0],
 		Explanation: fmt.Sprintf("If 4p > 0, opens right; if 4p < 0, opens left. Here 4p = %d.", 4*p),
 	}
@@ -927,13 +927,13 @@ func (g *conicHyperbolaGen) Generate(difficulty float64) generator.Problem {
 	k := rand.Intn(3) - 1
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Hyperbola: (x%+d)²/%d - (y%+d)²/%d = 1. Which axis is transverse?", -h, a*a, -k, b*b),
+			Question:    fmt.Sprintf("Hyperbola: \\(\\frac{(x%+d)^{2}}{%d} - \\frac{(y%+d)^{2}}{%d} = 1\\). Which axis is transverse?", -h, a*a, -k, b*b),
 			Answer:      "horizontal (x-axis)",
 			Explanation: fmt.Sprintf("x term positive → horizontal transverse axis."),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Hyperbola: (y%+d)²/%d - (x%+d)²/%d = 1. Which axis is transverse?", -k, a*a, -h, b*b),
+		Question:    fmt.Sprintf("Hyperbola: \\(\\frac{(y%+d)^{2}}{%d} - \\frac{(x%+d)^{2}}{%d} = 1\\). Which axis is transverse?", -k, a*a, -h, b*b),
 		Answer:      "vertical (y-axis)",
 		Explanation: fmt.Sprintf("y term positive → vertical transverse axis."),
 	}
@@ -947,7 +947,7 @@ func (g *eqAbsValGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(8) + 1
 	b := rand.Intn(10) - 5
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: |x + %d| = %d", b, a),
+		Question:    fmt.Sprintf("Solve: \\(|x + %d| = %d\\)", b, a),
 		Answer:      fmt.Sprintf("%d,%d", a-b, -a-b),
 		Explanation: fmt.Sprintf("x + %d = %d or x + %d = -%d → x = %d or x = %d.", b, a, b, a, a-b, -a-b),
 	}
@@ -960,7 +960,7 @@ func (g *eqBinomialGen) Generate(difficulty float64) generator.Problem {
 	k := rand.Intn(4) + 2
 	rhs := mathutil.IntPow(k, r)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x^%d = %d", r, rhs),
+		Question:    fmt.Sprintf("Solve: \\(x^{%d} = %d\\)", r, rhs),
 		Answer:      fmt.Sprintf("%d", k),
 		Explanation: fmt.Sprintf("x^%d = %d → x = %d^(1/%d) = %d.", r, rhs, rhs, r, k),
 	}
@@ -974,7 +974,7 @@ func (g *eqExpGen) Generate(difficulty float64) generator.Problem {
 	p := rand.Intn(3) + 1
 	rhs := mathutil.IntPow(b, e+p)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %d^(x-%d) = %d", b, p, rhs),
+		Question:    fmt.Sprintf("Solve: \\(%d^{x-%d} = %d\\)", b, p, rhs),
 		Answer:      fmt.Sprintf("%d", e+p),
 		Explanation: fmt.Sprintf("%d^(x-%d) = %d^%d → x-%d = %d → x = %d.", b, p, b, e+p, p, e, e+p),
 	}
@@ -990,8 +990,8 @@ func (g *extraneousRootsGen) Generate(difficulty float64) generator.Problem {
 	}
 	entries := []entry{
 		{"Why must you check solutions when squaring both sides of an equation?", "squaring can introduce extraneous roots", "Squaring is not reversible: if a=b then a²=b², but not vice versa."},
-		{"Solve √(x) = -2. How many solutions?", "0", "The principal square root is always ≥ 0, so √(x) = -2 has no solution."},
-		{"When solving √(x+3) = x-3, what should you check after finding candidates?", "substitute back into original equation", "Extraneous roots satisfy the squared equation but not the original."},
+		{"Solve \\(\\sqrt{x} = -2\\). How many solutions?", "0", "The principal square root is always \\(\\geq 0\\), so \\(\\sqrt{x} = -2\\) has no solution."},
+		{"When solving \\(\\sqrt{x+3} = x-3\\), what should you check after finding candidates?", "substitute back into original equation", "Extraneous roots satisfy the squared equation but not the original."},
 		{"Multiplying both sides by a variable expression can introduce extraneous roots. (true/false)", "true", "If you multiply by something that equals 0 for some x, you may introduce extraneous solutions."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -1006,7 +1006,7 @@ func (g *eqIrrationalGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	k := x * x
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: √(x) = %d", x),
+		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} = %d\\)", x),
 		Answer:      fmt.Sprintf("%d", k),
 		Explanation: fmt.Sprintf("Square both sides: x = %d² = %d.", x, k),
 	}
@@ -1019,7 +1019,7 @@ func (g *eqLogGen) Generate(difficulty float64) generator.Problem {
 	e := rand.Intn(3) + 1
 	v := mathutil.IntPow(b, e)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: log_%d(x) = %d", b, e),
+		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) = %d\\)", b, e),
 		Answer:      fmt.Sprintf("%d", v),
 		Explanation: fmt.Sprintf("log_%d(x) = %d → x = %d^%d = %d.", b, e, b, e, v),
 	}
@@ -1049,7 +1049,7 @@ func (g *eqRationalGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) + 1
 	rhs := a * x / b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx/%d = %d", a, b, rhs),
+		Question:    fmt.Sprintf("Solve: \\(%dx/%d = %d\\)", a, b, rhs),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("Multiply both sides by %d: %dx = %d → x = %d.", b, a, rhs*b, x),
 	}
@@ -1061,7 +1061,7 @@ func (g *eqTrinomialGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(6) + 2
 	// x^2 + 2r x + r^2 = 0
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x^2 + %dx + %d = 0", 2*r, r*r),
+		Question:    fmt.Sprintf("Solve: \\(x^{2} + %dx + %d = 0\\)", 2*r, r*r),
 		Answer:      fmt.Sprintf("%d", -r),
 		Explanation: fmt.Sprintf("(x + %d)² = 0 → x = %d.", r, -r),
 	}
@@ -1074,7 +1074,7 @@ type funcAbsValGen struct{}
 func (g *funcAbsValGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(10) - 5
 	return generator.Problem{
-		Question:    fmt.Sprintf("If f(x) = |x|, what is f(%d)?", x),
+		Question:    fmt.Sprintf("If \\(f(x) = |x|\\), what is \\(f(%d)\\)?", x),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(x)),
 		Explanation: fmt.Sprintf("|%d| = %d.", x, mathutil.Abs(x)),
 	}
@@ -1087,7 +1087,7 @@ func (g *funcCompositeGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(4) + 1
 	b := rand.Intn(4) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("If f(x) = %dx and g(x) = x + %d, what is f(g(%d))?", a, b, x),
+		Question:    fmt.Sprintf("If \\(f(x) = %dx\\) and \\(g(x) = x + %d\\), what is \\(f(g(%d))\\)?", a, b, x),
 		Answer:      fmt.Sprintf("%d", a*(x+b)),
 		Explanation: fmt.Sprintf("g(%d) = %d+%d = %d. f(g(%d)) = f(%d) = %d×%d = %d.", x, x, b, x+b, x, x+b, a, x+b, a*(x+b)),
 	}
@@ -1122,10 +1122,10 @@ func (g *funcDomainGen) Generate(difficulty float64) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What is the domain of f(x) = 1/x?", "x ≠ 0", "Division by zero is undefined, so x cannot be 0."},
-		{"What is the domain of f(x) = √(x)?", "x ≥ 0", "The square root of a negative number is not real."},
-		{"What is the domain of f(x) = ln(x)?", "x > 0", "The natural log of zero or negative numbers is undefined."},
-		{"What is the domain of f(x) = 1/(x-2)?", "x ≠ 2", "The denominator is zero at x = 2."},
+		{"What is the domain of \\(f(x) = 1/x\\)?", "\\(x \\neq 0\\)", "Division by zero is undefined, so \\(x\\) cannot be \\(0\\)."},
+		{"What is the domain of \\(f(x) = \\sqrt{x}\\)?", "\\(x \\geq 0\\)", "The square root of a negative number is not real."},
+		{"What is the domain of \\(f(x) = \\ln(x)\\)?", "\\(x > 0\\)", "The natural log of zero or negative numbers is undefined."},
+		{"What is the domain of \\(f(x) = 1/(x-2)\\)?", "\\(x \\neq 2\\)", "The denominator is zero at \\(x = 2\\)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1142,12 +1142,12 @@ func (g *funcEvenOddGen) Generate(difficulty float64) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"Is f(x) = x² even or odd?", "even", "f(-x) = (-x)² = x² = f(x), so it is even."},
-		{"Is f(x) = x³ even or odd?", "odd", "f(-x) = (-x)³ = -x³ = -f(x), so it is odd."},
-		{"Is f(x) = sin(x) even or odd?", "odd", "sin(-x) = -sin(x), so sine is odd."},
-		{"Is f(x) = cos(x) even or odd?", "even", "cos(-x) = cos(x), so cosine is even."},
-		{"Is f(x) = x² + 1 even or odd?", "even", "f(-x) = (-x)²+1 = x²+1 = f(x), so it is even."},
-		{"Is f(x) = |x| even or odd?", "even", "|-x| = |x|, so absolute value is even."},
+		{"Is \\(f(x) = x^{2}\\) even or odd?", "even", "\\(f(-x) = (-x)^{2} = x^{2} = f(x)\\), so it is even."},
+		{"Is \\(f(x) = x^{3}\\) even or odd?", "odd", "\\(f(-x) = (-x)^{3} = -x^{3} = -f(x)\\), so it is odd."},
+		{"Is \\(f(x) = \\sin(x)\\) even or odd?", "odd", "\\(\\sin(-x) = -\\sin(x)\\), so sine is odd."},
+		{"Is \\(f(x) = \\cos(x)\\) even or odd?", "even", "\\(\\cos(-x) = \\cos(x)\\), so cosine is even."},
+		{"Is \\(f(x) = x^{2} + 1\\) even or odd?", "even", "\\(f(-x) = (-x)^{2}+1 = x^{2}+1 = f(x)\\), so it is even."},
+		{"Is \\(f(x) = |x|\\) even or odd?", "even", "\\(|-x| = |x|\\), so absolute value is even."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1181,7 +1181,7 @@ func (g *funcInverseGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(10) - 5
 	return generator.Problem{
-		Question:    fmt.Sprintf("If f(x) = %dx + %d, what is f⁻¹(x)?", a, b),
+		Question:    fmt.Sprintf("If \\(f(x) = %dx + %d\\), what is \\(f^{-1}(x)\\)?", a, b),
 		Answer:      fmt.Sprintf("(x %+d)/%d", -b, a),
 		Explanation: fmt.Sprintf("y = %dx + %d → x = (y %+d)/%d → f⁻¹(x) = (x %+d)/%d.", a, b, -b, a, -b, a),
 	}
@@ -1193,7 +1193,7 @@ func (g *monotonicityGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(5) + 1
 	if rand.Intn(2) == 0 { a = -a }
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is f(x) = %dx increasing or decreasing on R?", a),
+		Question:    fmt.Sprintf("Is \\(f(x) = %dx\\) increasing or decreasing on \\(\\mathbb{R}\\)?", a),
 		Answer:      map[bool]string{true: "increasing", false: "decreasing"}[a > 0],
 		Explanation: fmt.Sprintf("Slope = %d. %s slope means the function is %s.", a, map[bool]string{true: "Positive", false: "Negative"}[a > 0], map[bool]string{true: "increasing", false: "decreasing"}[a > 0]),
 	}
@@ -1205,7 +1205,7 @@ func (g *funcRationalGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(4) + 1
 	b := rand.Intn(4) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the vertical asymptote of f(x) = %d/(x-%d)?", a, b),
+		Question:    fmt.Sprintf("What is the vertical asymptote of \\(f(x) = \\frac{%d}{x-%d}\\)?", a, b),
 		Answer:      fmt.Sprintf("%d", b),
 		Explanation: fmt.Sprintf("The denominator is zero at x = %d, so there is a vertical asymptote at x = %d.", b, b),
 	}
@@ -1220,10 +1220,10 @@ func (g *funcSigmoidGen) Generate(difficulty float64) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What is the range of the sigmoid function σ(x) = 1/(1+e⁻ˣ)?", "(0, 1)", "The sigmoid maps all real numbers to the open interval (0,1)."},
-		{"What is σ(0) for the sigmoid function?", "0.5", "σ(0) = 1/(1+e⁰) = 1/2 = 0.5."},
+		{"What is the range of the sigmoid function \\(\\sigma(x) = 1/(1+e^{-x})\\)?", "\\((0, 1)\\)", "The sigmoid maps all real numbers to the open interval \\((0,1)\\)."},
+		{"What is \\(\\sigma(0)\\) for the sigmoid function?", "0.5", "\\(\\sigma(0) = 1/(1+e^{0}) = 1/2 = 0.5\\)."},
 		{"The sigmoid function is commonly used as an ____ function in neural networks.", "activation", "The sigmoid is a popular activation function that introduces non-linearity."},
-		{"As x → ∞, σ(x) approaches ____.", "1", "As x → ∞, e⁻ˣ → 0, so σ(x) → 1."},
+		{"As \\(x \\to \\infty\\), \\(\\sigma(x)\\) approaches ____.", "1", "As \\(x \\to \\infty\\), \\(e^{-x} \\to 0\\), so \\(\\sigma(x) \\to 1\\)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1239,7 +1239,7 @@ func (g *funcSignGen) Generate(difficulty float64) generator.Problem {
 	ans := "positive"
 	if x < 0 { ans = "negative" }
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the sign of f(x) = x at x = %d?", x),
+		Question:    fmt.Sprintf("What is the sign of \\(f(x) = x\\) at \\(x = %d\\)?", x),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x = %d, f(x) = %d, which is %s.", x, x, ans),
 	}
@@ -1252,7 +1252,7 @@ type ineqAbsValGen struct{}
 func (g *ineqAbsValGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: |x| < %d", a),
+		Question:    fmt.Sprintf("Solve: \\(|x| < %d\\)", a),
 		Answer:      fmt.Sprintf("-%d < x < %d", a, a),
 		Explanation: fmt.Sprintf("|x| < %d means -%d < x < %d.", a, a, a),
 	}
@@ -1267,10 +1267,10 @@ func (g *ineqIntervalGen) Generate(difficulty float64) generator.Problem {
 		q string
 		a string
 	}{
-		{fmt.Sprintf("Write in interval notation: %d ≤ x < %d.", a, b), fmt.Sprintf("[%d,%d)", a, b)},
-		{fmt.Sprintf("Write in interval notation: x > %d.", a), fmt.Sprintf("(%d,∞)", a)},
-		{fmt.Sprintf("Write in interval notation: x ≤ %d.", b), fmt.Sprintf("(-∞,%d]", b)},
-		{fmt.Sprintf("Write in interval notation: %d < x < %d.", a, b), fmt.Sprintf("(%d,%d)", a, b)},
+		{fmt.Sprintf("Write in interval notation: \\(%d \\leq x < %d\\).", a, b), fmt.Sprintf("[%d,%d)", a, b)},
+		{fmt.Sprintf("Write in interval notation: \\(x > %d\\).", a), fmt.Sprintf("(%d,\\infty)", a)},
+		{fmt.Sprintf("Write in interval notation: \\(x \\leq %d\\).", b), fmt.Sprintf("(-\\infty,%d]", b)},
+		{fmt.Sprintf("Write in interval notation: \\(%d < x < %d\\).", a, b), fmt.Sprintf("(%d,%d)", a, b)},
 	}
 	e := types[rand.Intn(len(types))]
 	return generator.Problem{
@@ -1284,7 +1284,7 @@ type ineqIrrationalGen struct{}
 func (g *ineqIrrationalGen) Generate(difficulty float64) generator.Problem {
 	x := rand.Intn(8) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: √(x) > %d", x),
+		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} > %d\\)", x),
 		Answer:      fmt.Sprintf("x > %d", x*x),
 		Explanation: fmt.Sprintf("√(x) > %d → x > %d² = %d (x ≥ 0 implied).", x, x, x*x),
 	}
@@ -1297,7 +1297,7 @@ func (g *ineqLogGen) Generate(difficulty float64) generator.Problem {
 	e := rand.Intn(3) + 1
 	v := mathutil.IntPow(b, e)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: log_%d(x) > %d", b, e),
+		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) > %d\\)", b, e),
 		Answer:      fmt.Sprintf("x > %d", v),
 		Explanation: fmt.Sprintf("log_%d(x) > %d → x > %d^%d = %d (base > 1 preserves inequality).", b, e, b, e, v),
 	}
@@ -1308,7 +1308,7 @@ type ineqQuadraticGen struct{}
 func (g *ineqQuadraticGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x² - %d < 0", r*r),
+		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d < 0\\)", r*r),
 		Answer:      fmt.Sprintf("-%d < x < %d", r, r),
 		Explanation: fmt.Sprintf("x² - %d < 0 → (x-%d)(x+%d) < 0 → -%d < x < %d.", r*r, r, r, r, r),
 	}
@@ -1319,7 +1319,7 @@ type ineqRationalGen struct{}
 func (g *ineqRationalGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: 1/(x-%d) > 0", a),
+		Question:    fmt.Sprintf("Solve: \\(\\frac{1}{x-%d} > 0\\)", a),
 		Answer:      fmt.Sprintf("x > %d", a),
 		Explanation: fmt.Sprintf("numerator is always positive 1, so 1/(x-%d) > 0 when x-%d > 0 → x > %d.", a, a, a),
 	}
@@ -1330,7 +1330,7 @@ type signAnalysisGen struct{}
 func (g *signAnalysisGen) Generate(difficulty float64) generator.Problem {
 	r := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Analyze the sign of f(x) = (x+%d)(x-%d) for x < -%d.", r, r, r),
+		Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x < -%d\\).", r, r, r),
 		Answer:      "positive",
 		Explanation: fmt.Sprintf("For x < -%d: both (x+%d) and (x-%d) are negative, product is positive.", r, r, r),
 	}
@@ -1346,7 +1346,7 @@ func (g *ineqSystemsGen) Generate(difficulty float64) generator.Problem {
 	satisfies := y > a*x + b
 	ans := map[bool]string{true: "yes", false: "no"}[satisfies]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is (%d,%d) a solution to y > %dx + %d?", x, y, a, b),
+		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(y > %dx + %d\\)?", x, y, a, b),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x=%d: RHS = %d(%d)+%d = %d. y=%d %s %d, so %s.", x, a, x, b, a*x+b, y, map[bool]string{true: ">", false: "≤"}[satisfies], a*x+b, ans),
 	}
@@ -1361,7 +1361,7 @@ func (g *polyDivisionGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(4) + 1
 	// (ax^2 + r*x) / x = ax + r
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: (%dx² + %dx) / x", a, r*a),
+		Question:    fmt.Sprintf("Simplify: \\((%dx^{2} + %dx) / x\\)", a, r*a),
 		Answer:      fmt.Sprintf("%dx + %d", a, r*a),
 		Explanation: fmt.Sprintf("Divide each term: %dx²/x = %dx, %dx/x = %d.", a, a, r*a, r*a),
 	}
@@ -1373,7 +1373,7 @@ func (g *polyMonomialGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(5) + 1
 	n := rand.Intn(4) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the degree of %dx^%d?", a, n),
+		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d}\\)?", a, n),
 		Answer:      fmt.Sprintf("%d", n),
 		Explanation: fmt.Sprintf("The monomial %dx^%d has degree %d.", a, n, n),
 	}
@@ -1387,7 +1387,7 @@ func (g *polyRootsGen) Generate(difficulty float64) generator.Problem {
 	b := -(r1 + r2)
 	c := r1 * r2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the roots of x² + %dx + %d = 0.", b, c),
+		Question:    fmt.Sprintf("Find the roots of \\(x^{2} + %dx + %d = 0\\).", b, c),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("(x %+d)(x %+d) = 0 → roots are %d and %d.", -r1, -r2, r1, r2),
 	}
@@ -1401,7 +1401,7 @@ func (g *synthDivGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(5) - 2
 	// (ax^2 + bx - ar) / (x - r) = ax + (ar + b)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Use synthetic division to divide (%dx² + %dx) by (x - %d). What is the quotient?", a, b, r),
+		Question:    fmt.Sprintf("Use synthetic division to divide \\((%dx^{2} + %dx)\\) by \\((x - %d)\\). What is the quotient?", a, b, r),
 		Answer:      fmt.Sprintf("%dx + %d", a, b+a*r),
 		Explanation: fmt.Sprintf("Synthetic division by %d gives coefficients %d and %d → %dx + %d.", r, a, b+a*r, a, b+a*r),
 	}
@@ -1415,7 +1415,7 @@ func (g *vietaGen) Generate(difficulty float64) generator.Problem {
 	b := -(r1 + r2)
 	c := r1 * r2
 	return generator.Problem{
-		Question:    fmt.Sprintf("For x² + %dx + %d = 0, what is the sum of the roots?", b, c),
+		Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\), what is the sum of the roots?", b, c),
 		Answer:      fmt.Sprintf("%d", r1+r2),
 		Explanation: fmt.Sprintf("By Vieta: sum of roots = -b = %d. Roots are %d and %d, sum = %d.", -b, r1, r2, r1+r2),
 	}
@@ -1429,7 +1429,7 @@ func (g *quadComplexGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(6) + 2
 	c := (b*b)/4 + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("How many real solutions does x² + %dx + %d = 0 have?", b, c),
+		Question:    fmt.Sprintf("How many real solutions does \\(x^{2} + %dx + %d = 0\\) have?", b, c),
 		Answer:      "0",
 		Explanation: fmt.Sprintf("Discriminant = %d² - 4(%d) = %d - %d = %d < 0 → two complex (non-real) solutions.", b, c, b*b, 4*c, b*b-4*c),
 	}
@@ -1440,7 +1440,7 @@ type quadIncompleteGen struct{}
 func (g *quadIncompleteGen) Generate(difficulty float64) generator.Problem {
 	k := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x² - %d = 0", k*k),
+		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d = 0\\)", k*k),
 		Answer:      fmt.Sprintf("%d,%d", k, -k),
 		Explanation: fmt.Sprintf("x² = %d → x = ±√%d = ±%d.", k*k, k*k, k),
 	}
@@ -1451,7 +1451,7 @@ type quadParametricGen struct{}
 func (g *quadParametricGen) Generate(difficulty float64) generator.Problem {
 	p := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("For what value(s) of k does x² + %dx + %d = 0 have exactly one solution?", 2*p, p*p),
+		Question:    fmt.Sprintf("For what value(s) of \\(k\\) does \\(x^{2} + %dx + %d = 0\\) have exactly one solution?", 2*p, p*p),
 		Answer:      fmt.Sprintf("%d", p),
 		Explanation: fmt.Sprintf("Discriminant = 0: (%d)² - 4(%d) = %d - %d = 0 → k = %d.", 2*p, p*p, 4*p*p, 4*p*p, p),
 	}
@@ -1466,10 +1466,10 @@ func (g *quadQuadraticGen) Generate(difficulty float64) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What is the standard form of a quadratic equation?", "ax² + bx + c = 0", "Standard form: ax² + bx + c = 0 where a ≠ 0."},
-		{"What is the quadratic formula?", "x = [-b ± √(b²-4ac)]/(2a)", "The quadratic formula solves ax² + bx + c = 0."},
-		{"What does the discriminant determine?", "the number and type of solutions", "b²-4ac > 0: two real; = 0: one real; < 0: two complex."},
-		{"The graph of a quadratic function is a ____.", "parabola", "f(x) = ax² + bx + c graphs as a parabola."},
+		{"What is the standard form of a quadratic equation?", "\\(ax^{2} + bx + c = 0\\)", "Standard form: \\(ax^{2} + bx + c = 0\\) where \\(a \\neq 0\\)."},
+		{"What is the quadratic formula?", "\\(x = [-b \\pm \\sqrt{b^{2}-4ac}]/(2a)\\)", "The quadratic formula solves \\(ax^{2} + bx + c = 0\\)."},
+		{"What does the discriminant determine?", "the number and type of solutions", "\\(b^{2}-4ac > 0\\): two real; \\(= 0\\): one real; \\(< 0\\): two complex."},
+		{"The graph of a quadratic function is a ____.", "parabola", "\\(f(x) = ax^{2} + bx + c\\) graphs as a parabola."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1517,14 +1517,14 @@ func (g *gaussianElimGen) Generate(difficulty float64) generator.Problem {
 	e2 := c*x + d*y
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("Solve using elimination: %dx + %dy = %d, %dx + %dy = %d", a, b, e1, c, d, e2),
+			Question:    fmt.Sprintf("Solve using elimination: \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\)", a, b, e1, c, d, e2),
 			Answer:      fmt.Sprintf("(%d,%d)", x, y),
 			Explanation: fmt.Sprintf("Solution: x=%d, y=%d.", x, y),
 		}
 	}
 	// Row echelon form question
 	return generator.Problem{
-		Question:    fmt.Sprintf("Put the system %dx + %dy = %d, %dx + %dy = %d into row echelon form.", a, b, e1, c, d, e2),
+		Question:    fmt.Sprintf("Put the system \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\) into row echelon form.", a, b, e1, c, d, e2),
 		Answer:      fmt.Sprintf("[[%d,%d,%d],[0,%d,%d]]", a, b, e1, d-c*b/a, e2-c*e1/a),
 		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] can be reduced.", a, b, e1, c, d, e2),
 	}
