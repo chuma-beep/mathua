@@ -33,7 +33,7 @@ The percent value is computed by multiplying the numeric value of the ratio by 1
 
 To calculate a percentage of a percentage, convert both percentages to fractions of 100, or to decimals, and multiply them. For example, 50% of 40% is:
 = 0.50 × 0.40 = 0.20 = = 20%.
-It is not correct to divide by 100 and use the percent sign at the same time; it would literally imply division by 10,000. For example, 25% = , not , which actually  A term such as would also be incorrect; since it would be read as 1 percent, even if the intent was to say 100%.
+It is not correct to divide by 100 and use the percent sign at the same time; it would literally imply division by 10,000. For example, 25% = , not , which actually A term such as would also be incorrect; since it would be read as 1 percent, even if the intent was to say 100%.
 
 Whenever communicating about a percentage, it is important to specify what it is relative to (i.e., what is the total that corresponds to 100%). The following problem illustrates this point.
 
