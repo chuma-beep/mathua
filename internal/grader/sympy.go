@@ -161,7 +161,10 @@ func (g *sympyGrader) restart() error {
 	if err != nil {
 		return err
 	}
-	*g = *ng
+	g.cmd = ng.cmd
+	g.stdin = ng.stdin
+	g.stdout = ng.stdout
+	g.nextID = ng.nextID
 	return nil
 }
 
