@@ -27,14 +27,14 @@ func (g *conceptGen) Generate(difficulty float64) generator.Problem {
 		e string
 	}
 	templates := []qa{
-		{"Is y' = 2x a differential equation? (yes/no)", "yes", "The equation contains a derivative y', so it is a differential equation."},
-		{"Is d²y/dx² + y = 0 a differential equation? (yes/no)", "yes", "The equation contains a second derivative d²y/dx², so it is a differential equation."},
-		{"Is dy/dx = 3x² a differential equation? (yes/no)", "yes", "The equation contains a derivative dy/dx, so it is a differential equation."},
-		{"Is y''' + 2y'' - y' + y = 0 a differential equation? (yes/no)", "yes", "The equation contains third derivatives, so it is a differential equation."},
-		{"Is x² + y² = 5 a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
-		{"Is 3x + 2y = 7 a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
-		{"Is sin(x) + cos(y) = 1 a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
-		{"Does the equation x³ - y³ = 10 contain a derivative? (yes/no)", "no", "The equation contains no derivative terms."},
+		{"Is \\(y' = 2x\\) a differential equation? (yes/no)", "yes", "The equation contains a derivative \\(y'\\), so it is a differential equation."},
+		{"Is \\(d^{2}y/dx^{2} + y = 0\\) a differential equation? (yes/no)", "yes", "The equation contains a second derivative \\(d^{2}y/dx^{2}\\), so it is a differential equation."},
+		{"Is \\(dy/dx = 3x^{2}\\) a differential equation? (yes/no)", "yes", "The equation contains a derivative \\(dy/dx\\), so it is a differential equation."},
+		{"Is \\(y''' + 2y'' - y' + y = 0\\) a differential equation? (yes/no)", "yes", "The equation contains third derivatives, so it is a differential equation."},
+		{"Is \\(x^{2} + y^{2} = 5\\) a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
+		{"Is \\(3x + 2y = 7\\) a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
+		{"Is \\(\\sin(x) + \\cos(y) = 1\\) a differential equation? (yes/no)", "no", "The equation contains no derivatives, so it is not a differential equation."},
+		{"Does the equation \\(x^{3} - y^{3} = 10\\) contain a derivative? (yes/no)", "no", "The equation contains no derivative terms."},
 	}
 	chosen := templates[rand.Intn(len(templates))]
 	return generator.Problem{
@@ -54,34 +54,34 @@ func (g *separableGen) Generate(difficulty float64) generator.Problem {
 	}
 	templates := []qa{
 		{
-			q: "Solve: dy/dx = x/y",
+			q: "Solve: \\(dy/dx = x/y\\)",
 			a: "y^2=x^2+C",
-			e: "Separate: y dy = x dx. Integrate: y²/2 = x²/2 + C. Multiply by 2: y² = x² + C.",
+			e: "Separate: \\(y dy = x dx\\). Integrate: \\(y^{2}/2 = x^{2}/2 + C\\). Multiply by 2: \\(y^{2} = x^{2} + C\\).",
 		},
 		{
-			q: "Solve: dy/dx = x",
+			q: "Solve: \\(dy/dx = x\\)",
 			a: "y=x^2/2+C",
-			e: "Rewrite as dy = x dx. Integrate: y = x²/2 + C.",
+			e: "Rewrite as \\(dy = x dx\\). Integrate: \\(y = x^{2}/2 + C\\).",
 		},
 		{
-			q: "Solve: dy/dx = 1/y",
+			q: "Solve: \\(dy/dx = 1/y\\)",
 			a: "y^2=2x+C",
-			e: "Separate: y dy = dx. Integrate: y²/2 = x + C. Multiply by 2: y² = 2x + C.",
+			e: "Separate: \\(y dy = dx\\). Integrate: \\(y^{2}/2 = x + C\\). Multiply by 2: \\(y^{2} = 2x + C\\).",
 		},
 		{
-			q: "Solve: dy/dx = x²/y",
+			q: "Solve: \\(dy/dx = x^{2}/y\\)",
 			a: "y^2=(2/3)x^3+C",
-			e: "Separate: y dy = x² dx. Integrate: y²/2 = x³/3 + C. Multiply by 2: y² = (2/3)x³ + C.",
+			e: "Separate: \\(y dy = x^{2} dx\\). Integrate: \\(y^{2}/2 = x^{3}/3 + C\\). Multiply by 2: \\(y^{2} = (2/3)x^{3} + C\\).",
 		},
 		{
-			q: "Solve: dy/dx = x²",
+			q: "Solve: \\(dy/dx = x^{2}\\)",
 			a: "y=x^3/3+C",
-			e: "Rewrite as dy = x² dx. Integrate: y = x³/3 + C.",
+			e: "Rewrite as \\(dy = x^{2} dx\\). Integrate: \\(y = x^{3}/3 + C\\).",
 		},
 		{
-			q: "Solve: dy/dx = 1/y²",
+			q: "Solve: \\(dy/dx = 1/y^{2}\\)",
 			a: "y^3=3x+C",
-			e: "Separate: y² dy = dx. Integrate: y³/3 = x + C. Multiply by 3: y³ = 3x + C.",
+			e: "Separate: \\(y^{2} dy = dx\\). Integrate: \\(y^{3}/3 = x + C\\). Multiply by 3: \\(y^{3} = 3x + C\\).",
 		},
 	}
 	t := templates[rand.Intn(len(templates))]
@@ -102,34 +102,34 @@ func (g *linearFirstGen) Generate(difficulty float64) generator.Problem {
 	}
 	templates := []qa{
 		{
-			q: "Solve: y' + 2y = 0",
+			q: "Solve: \\(y' + 2y = 0\\)",
 			a: "Ce^(-2x)",
-			e: "This is a homogeneous first-order linear ODE. The integrating factor is e^(2x). d/dx(ye^(2x)) = 0, so ye^(2x) = C, giving y = Ce^(-2x).",
+			e: "This is a homogeneous first-order linear ODE. The integrating factor is \\(e^{2x}\\). \\(\\frac{d}{dx}(ye^{2x}) = 0\\), so \\(ye^{2x} = C\\), giving \\(y = Ce^{-2x}\\).",
 		},
 		{
-			q: "Solve: y' + y = 0",
+			q: "Solve: \\(y' + y = 0\\)",
 			a: "Ce^(-x)",
-			e: "This is a homogeneous first-order linear ODE. The integrating factor is e^x. d/dx(ye^x) = 0, so ye^x = C, giving y = Ce^(-x).",
+			e: "This is a homogeneous first-order linear ODE. The integrating factor is \\(e^{x}\\). \\(\\frac{d}{dx}(ye^{x}) = 0\\), so \\(ye^{x} = C\\), giving \\(y = Ce^{-x}\\).",
 		},
 		{
-			q: "Solve: y' + 3y = 0",
+			q: "Solve: \\(y' + 3y = 0\\)",
 			a: "Ce^(-3x)",
-			e: "This is a homogeneous first-order linear ODE. The integrating factor is e^(3x). d/dx(ye^(3x)) = 0, so ye^(3x) = C, giving y = Ce^(-3x).",
+			e: "This is a homogeneous first-order linear ODE. The integrating factor is \\(e^{3x}\\). \\(\\frac{d}{dx}(ye^{3x}) = 0\\), so \\(ye^{3x} = C\\), giving \\(y = Ce^{-3x}\\).",
 		},
 		{
-			q: "Solve: y' + y = 1",
+			q: "Solve: \\(y' + y = 1\\)",
 			a: "1+Ce^(-x)",
-			e: "The integrating factor is e^x. d/dx(ye^x) = e^x. Integrate: ye^x = e^x + C, so y = 1 + Ce^(-x).",
+			e: "The integrating factor is \\(e^{x}\\). \\(\\frac{d}{dx}(ye^{x}) = e^{x}\\). Integrate: \\(ye^{x} = e^{x} + C\\), so \\(y = 1 + Ce^{-x}\\).",
 		},
 		{
-			q: "Solve: y' + 2y = 4",
+			q: "Solve: \\(y' + 2y = 4\\)",
 			a: "2+Ce^(-2x)",
-			e: "The integrating factor is e^(2x). d/dx(ye^(2x)) = 4e^(2x). Integrate: ye^(2x) = 2e^(2x) + C, so y = 2 + Ce^(-2x).",
+			e: "The integrating factor is \\(e^{2x}\\). \\(\\frac{d}{dx}(ye^{2x}) = 4e^{2x}\\). Integrate: \\(ye^{2x} = 2e^{2x} + C\\), so \\(y = 2 + Ce^{-2x}\\).",
 		},
 		{
-			q: "Solve: y' + y = e^x",
+			q: "Solve: \\(y' + y = e^{x}\\)",
 			a: "0.5e^x+Ce^(-x)",
-			e: "The integrating factor is e^x. d/dx(ye^x) = e^(2x). Integrate: ye^x = (1/2)e^(2x) + C, so y = (1/2)e^x + Ce^(-x).",
+			e: "The integrating factor is \\(e^{x}\\). \\(\\frac{d}{dx}(ye^{x}) = e^{2x}\\). Integrate: \\(ye^{x} = \\frac{1}{2}e^{2x} + C\\), so \\(y = \\frac{1}{2}e^{x} + Ce^{-x}\\).",
 		},
 	}
 	t := templates[rand.Intn(len(templates))]
@@ -150,44 +150,44 @@ func (g *exactGen) Generate(difficulty float64) generator.Problem {
 	}
 	templates := []qa{
 		{
-			q: "Is M dx + N dy = 0 exact when M = 2xy and N = x²? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = 2xy\\) and \\(N = x^{2}\\)? (yes/no)",
 			a: "yes",
-			e: "∂M/∂y = 2x and ∂N/∂x = 2x. Since ∂M/∂y = ∂N/∂x, the equation is exact.",
+			e: "\\(\\partial M/\\partial y = 2x\\) and \\(\\partial N/\\partial x = 2x\\). Since \\(\\partial M/\\partial y = \\partial N/\\partial x\\), the equation is exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = y and N = x? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = y\\) and \\(N = x\\)? (yes/no)",
 			a: "yes",
-			e: "∂M/∂y = 1 and ∂N/∂x = 1. Since ∂M/∂y = ∂N/∂x, the equation is exact.",
+			e: "\\(\\partial M/\\partial y = 1\\) and \\(\\partial N/\\partial x = 1\\). Since \\(\\partial M/\\partial y = \\partial N/\\partial x\\), the equation is exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = 3x²y and N = x³? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = 3x^{2}y\\) and \\(N = x^{3}\\)? (yes/no)",
 			a: "yes",
-			e: "∂M/∂y = 3x² and ∂N/∂x = 3x². Since ∂M/∂y = ∂N/∂x, the equation is exact.",
+			e: "\\(\\partial M/\\partial y = 3x^{2}\\) and \\(\\partial N/\\partial x = 3x^{2}\\). Since \\(\\partial M/\\partial y = \\partial N/\\partial x\\), the equation is exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = x² and N = y²? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = x^{2}\\) and \\(N = y^{2}\\)? (yes/no)",
 			a: "no",
-			e: "∂M/∂y = 0 and ∂N/∂x = 0. Since ∂M/∂y = ∂N/∂x = 0, this equation IS exact. (Trick: both partials are zero.)",
+			e: "\\(\\partial M/\\partial y = 0\\) and \\(\\partial N/\\partial x = 0\\). Since \\(\\partial M/\\partial y = \\partial N/\\partial x = 0\\), this equation IS exact. (Trick: both partials are zero.)",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = x and N = x? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = x\\) and \\(N = x\\)? (yes/no)",
 			a: "no",
-			e: "∂M/∂y = 0 and ∂N/∂x = 1. Since ∂M/∂y ≠ ∂N/∂x (0 ≠ 1), the equation is not exact.",
+			e: "\\(\\partial M/\\partial y = 0\\) and \\(\\partial N/\\partial x = 1\\). Since \\(\\partial M/\\partial y \\neq \\partial N/\\partial x\\) \\((0 \\neq 1)\\), the equation is not exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = y² and N = x? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = y^{2}\\) and \\(N = x\\)? (yes/no)",
 			a: "no",
-			e: "∂M/∂y = 2y and ∂N/∂x = 1. Since ∂M/∂y ≠ ∂N/∂x (2y ≠ 1 in general), the equation is not exact.",
+			e: "\\(\\partial M/\\partial y = 2y\\) and \\(\\partial N/\\partial x = 1\\). Since \\(\\partial M/\\partial y \\neq \\partial N/\\partial x\\) \\((2y \\neq 1\\) in general), the equation is not exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = xy and N = xy? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = xy\\) and \\(N = xy\\)? (yes/no)",
 			a: "no",
-			e: "∂M/∂y = x and ∂N/∂x = y. Since ∂M/∂y ≠ ∂N/∂x (x ≠ y in general), the equation is not exact.",
+			e: "\\(\\partial M/\\partial y = x\\) and \\(\\partial N/\\partial x = y\\). Since \\(\\partial M/\\partial y \\neq \\partial N/\\partial x\\) \\((x \\neq y\\) in general), the equation is not exact.",
 		},
 		{
-			q: "Is M dx + N dy = 0 exact when M = sin(y) and N = x*cos(y)? (yes/no)",
+			q: "Is \\(M dx + N dy = 0\\) exact when \\(M = \\sin(y)\\) and \\(N = x\\cos(y)\\)? (yes/no)",
 			a: "yes",
-			e: "∂M/∂y = cos(y) and ∂N/∂x = cos(y). Since ∂M/∂y = ∂N/∂x, the equation is exact.",
+			e: "\\(\\partial M/\\partial y = \\cos(y)\\) and \\(\\partial N/\\partial x = \\cos(y)\\). Since \\(\\partial M/\\partial y = \\partial N/\\partial x\\), the equation is exact.",
 		},
 	}
 	t := templates[rand.Intn(len(templates))]
@@ -213,7 +213,7 @@ func (g *homogeneousGen) Generate(difficulty float64) generator.Problem {
 	s := r1 + r2
 	prod := r1 * r2
 
-	charStr := fmt.Sprintf("r²")
+	charStr := "r^{2}"
 	if s > 0 {
 		charStr += fmt.Sprintf(" - %dr", s)
 	} else if s < 0 {
@@ -244,10 +244,10 @@ func (g *homogeneousGen) Generate(difficulty float64) generator.Problem {
 		answer = fmt.Sprintf("C1*e^(%dx)+C2*e^(%dx)", r1, r2)
 	}
 
-	explanation := fmt.Sprintf("Characteristic equation: %s. Roots: r = %d and r = %d. The general solution is y = C₁e^(%dx) + C₂e^(%dx).", charStr, r1, r2, r1, r2)
+	explanation := fmt.Sprintf("Characteristic equation: \\(%s\\). Roots: \\(r = %d\\) and \\(r = %d\\). The general solution is \\(y = C_{1}e^{%dx} + C_{2}e^{%dx}\\).", charStr, r1, r2, r1, r2)
 
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %s", eqStr),
+		Question:    fmt.Sprintf("Solve: \\(%s\\)", eqStr),
 		Answer:      answer,
 		Explanation: explanation,
 	}
@@ -263,34 +263,34 @@ func (g *nonhomogeneousGen) Generate(difficulty float64) generator.Problem {
 	}
 	templates := []qa{
 		{
-			q: "Solve: y'' + y = 1",
+			q: "Solve: \\(y'' + y = 1\\)",
 			a: "C1*cos(x)+C2*sin(x)+1",
-			e: "The homogeneous solution: y_c = C₁cos(x) + C₂sin(x) (characteristic r²+1=0, roots ±i). Particular solution: y_p = 1. General: y = C₁cos(x) + C₂sin(x) + 1.",
+			e: "The homogeneous solution: \\(y_c = C_{1}\\cos(x) + C_{2}\\sin(x)\\) (characteristic \\(r^{2}+1=0\\), roots \\(\\pm i\\)). Particular solution: \\(y_p = 1\\). General: \\(y = C_{1}\\cos(x) + C_{2}\\sin(x) + 1\\).",
 		},
 		{
-			q: "Solve: y'' + y = 2",
+			q: "Solve: \\(y'' + y = 2\\)",
 			a: "C1*cos(x)+C2*sin(x)+2",
-			e: "The homogeneous solution: y_c = C₁cos(x) + C₂sin(x). Particular solution: y_p = 2. General: y = C₁cos(x) + C₂sin(x) + 2.",
+			e: "The homogeneous solution: \\(y_c = C_{1}\\cos(x) + C_{2}\\sin(x)\\). Particular solution: \\(y_p = 2\\). General: \\(y = C_{1}\\cos(x) + C_{2}\\sin(x) + 2\\).",
 		},
 		{
-			q: "Solve: y'' - y = 1",
+			q: "Solve: \\(y'' - y = 1\\)",
 			a: "C1*e^x+C2*e^(-x)-1",
-			e: "The homogeneous solution: y_c = C₁e^x + C₂e^(-x) (characteristic r²-1=0, roots ±1). Particular solution: y_p = -1. General: y = C₁e^x + C₂e^(-x) - 1.",
+			e: "The homogeneous solution: \\(y_c = C_{1}e^{x} + C_{2}e^{-x}\\) (characteristic \\(r^{2}-1=0\\), roots \\(\\pm 1\\)). Particular solution: \\(y_p = -1\\). General: \\(y = C_{1}e^{x} + C_{2}e^{-x} - 1\\).",
 		},
 		{
-			q: "Solve: y'' - y = 2",
+			q: "Solve: \\(y'' - y = 2\\)",
 			a: "C1*e^x+C2*e^(-x)-2",
-			e: "The homogeneous solution: y_c = C₁e^x + C₂e^(-x). Particular solution: y_p = -2. General: y = C₁e^x + C₂e^(-x) - 2.",
+			e: "The homogeneous solution: \\(y_c = C_{1}e^{x} + C_{2}e^{-x}\\). Particular solution: \\(y_p = -2\\). General: \\(y = C_{1}e^{x} + C_{2}e^{-x} - 2\\).",
 		},
 		{
-			q: "Solve: y'' - 4y = 0",
+			q: "Solve: \\(y'' - 4y = 0\\)",
 			a: "C1*e^(2x)+C2*e^(-2x)",
-			e: "Characteristic equation: r² - 4 = 0, roots r = ±2. General solution: y = C₁e^(2x) + C₂e^(-2x).",
+			e: "Characteristic equation: \\(r^{2} - 4 = 0\\), roots \\(r = \\pm 2\\). General solution: \\(y = C_{1}e^{2x} + C_{2}e^{-2x}\\).",
 		},
 		{
-			q: "Solve: y'' - 4y = 1",
+			q: "Solve: \\(y'' - 4y = 1\\)",
 			a: "C1*e^(2x)+C2*e^(-2x)-0.25",
-			e: "The homogeneous solution: y_c = C₁e^(2x) + C₂e^(-2x). Particular solution: y_p = -1/4. General: y = C₁e^(2x) + C₂e^(-2x) - 1/4.",
+			e: "The homogeneous solution: \\(y_c = C_{1}e^{2x} + C_{2}e^{-2x}\\). Particular solution: \\(y_p = -1/4\\). General: \\(y = C_{1}e^{2x} + C_{2}e^{-2x} - 1/4\\).",
 		},
 	}
 	t := templates[rand.Intn(len(templates))]
@@ -311,38 +311,38 @@ func (g *laplaceGen) Generate(difficulty float64) generator.Problem {
 	}
 	templates := []qa{
 		{
-			q: "Find L{1}",
+			q: "Find \\(L\\{1\\}\\)",
 			a: "1/s",
-			e: "L{1} = ∫₀^∞ e^(-st) dt = 1/s for s > 0.",
+			e: "\\(L\\{1\\} = \\int_{0}^{\\infty} e^{-st} dt = 1/s\\) for \\(s > 0\\).",
 		},
 		{
-			q: "Find L{t}",
+			q: "Find \\(L\\{t\\}\\)",
 			a: "1/s^2",
-			e: "L{t} = 1/s² for s > 0.",
+			e: "\\(L\\{t\\} = 1/s^{2}\\) for \\(s > 0\\).",
 		},
 		{
-			q: "Find L{t²}",
+			q: "Find \\(L\\{t^{2}\\}\\)",
 			a: "2/s^3",
-			e: "L{t²} = 2/s³ for s > 0.",
+			e: "\\(L\\{t^{2}\\} = 2/s^{3}\\) for \\(s > 0\\).",
 		},
 	}
 	alphas := []int{1, 2, 3}
 	a := alphas[rand.Intn(len(alphas))]
 	templates = append(templates,
 		qa{
-			q: fmt.Sprintf("Find L{e^(%dt)}", a),
+			q: fmt.Sprintf("Find \\(L\\{e^{%dt}\\}\\)", a),
 			a: fmt.Sprintf("1/(s-%d)", a),
-			e: fmt.Sprintf("L{e^(%dt)} = 1/(s - %d) for s > %d.", a, a, a),
+			e: fmt.Sprintf("\\(L\\{e^{%dt}\\} = 1/(s - %d)\\) for \\(s > %d\\).", a, a, a),
 		},
 		qa{
-			q: fmt.Sprintf("Find L{sin(%dt)}", a),
+			q: fmt.Sprintf("Find \\(L\\{\\sin(%dt)\\}\\)", a),
 			a: fmt.Sprintf("%d/(s^2+%d)", a, a*a),
-			e: fmt.Sprintf("L{sin(%dt)} = %d/(s² + %d²) for s > 0.", a, a, a),
+			e: fmt.Sprintf("\\(L\\{\\sin(%dt)\\} = %d/(s^{2} + %d^{2})\\) for \\(s > 0\\).", a, a, a),
 		},
 		qa{
-			q: fmt.Sprintf("Find L{cos(%dt)}", a),
+			q: fmt.Sprintf("Find \\(L\\{\\cos(%dt)\\}\\)", a),
 			a: fmt.Sprintf("s/(s^2+%d)", a*a),
-			e: fmt.Sprintf("L{cos(%dt)} = s/(s² + %d²) for s > 0.", a, a),
+			e: fmt.Sprintf("\\(L\\{\\cos(%dt)\\} = s/(s^{2} + %d^{2})\\) for \\(s > 0\\).", a, a),
 		},
 	)
 
@@ -374,14 +374,14 @@ func (g *systemsGen) Generate(difficulty float64) generator.Problem {
 			e: "Each first-order ODE typically describes the derivative of one unknown function, so 3 equations means 3 unknown functions.",
 		},
 		{
-			q: "dx/dt = 2x, dy/dt = 3y. Are x and y independent? (yes/no)",
+			q: "\\(dx/dt = 2x\\), \\(dy/dt = 3y\\). Are \\(x\\) and \\(y\\) independent? (yes/no)",
 			a: "yes",
-			e: "The equations are uncoupled: dx/dt depends only on x, and dy/dt depends only on y. Each can be solved independently.",
+			e: "The equations are uncoupled: \\(dx/dt\\) depends only on \\(x\\), and \\(dy/dt\\) depends only on \\(y\\). Each can be solved independently.",
 		},
 		{
-			q: "dx/dt = x + y, dy/dt = x - y. Is this a coupled system? (yes/no)",
+			q: "\\(dx/dt = x + y\\), \\(dy/dt = x - y\\). Is this a coupled system? (yes/no)",
 			a: "yes",
-			e: "Yes, because dx/dt depends on y and dy/dt depends on x. The equations must be solved together.",
+			e: "Yes, because \\(dx/dt\\) depends on \\(y\\) and \\(dy/dt\\) depends on \\(x\\). The equations must be solved together.",
 		},
 		{
 			q: "Can a system of two first-order ODEs be converted into a single second-order ODE? (yes/no)",
@@ -389,7 +389,7 @@ func (g *systemsGen) Generate(difficulty float64) generator.Problem {
 			e: "Yes, by differentiating one equation and substituting the other, you can eliminate one variable to obtain a single higher-order ODE.",
 		},
 		{
-			q: "Does dx/dt = 2x represent a system of differential equations? (yes/no)",
+			q: "Does \\(dx/dt = 2x\\) represent a system of differential equations? (yes/no)",
 			a: "no",
 			e: "This is a single differential equation, not a system. A system requires at least two equations.",
 		},
