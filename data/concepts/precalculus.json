@@ -1,0 +1,212 @@
+[
+  {
+    "id": "precalc.func.transformations",
+    "label": "Function transformations: shifts, reflections, stretches",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "precalc.func.piecewise",
+    "label": "Piecewise-defined functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.evaluate",
+      "alg.ineq.interval"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "precalc.func.arith_combine",
+    "label": "Arithmetic combinations of functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.func.notation",
+      "alg.func.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "precalc.polar.coordinates",
+    "label": "Polar coordinates: conversion between polar and rectangular",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.radians",
+      "trig.basics.sin_cos_def",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "precalc.polar.graph",
+    "label": "Graphing polar equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polar",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "precalc.polar.coordinates"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.parametric.equations",
+    "label": "Parametric equations: converting between parametric and rectangular",
+    "domain": "precalculus",
+    "subdomain": "precalculus.parametric",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.func.evaluate",
+      "alg.func.linear",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "precalc.parametric.graph",
+    "label": "Graphing parametric equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.parametric",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "precalc.parametric.equations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "precalc.vector.basics",
+    "label": "Vectors: magnitude and direction",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "precalc.vector.ops",
+    "label": "Vector operations: addition, subtraction, scalar multiplication",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.basics"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "precalc.vector.dot",
+    "label": "Dot product and angle between vectors",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.ops",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "precalc.binomial_theorem",
+    "label": "Binomial theorem and Pascal's triangle",
+    "domain": "precalculus",
+    "subdomain": "precalculus.discrete",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.poly.mult_mono",
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "precalc.induction",
+    "label": "Mathematical induction",
+    "domain": "precalculus",
+    "subdomain": "precalculus.discrete",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "precalc.systems.nonlinear",
+    "label": "Nonlinear systems of equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.systems",
+    "grading_type": "tuple",
+    "prerequisites": [
+      "alg.systems.substitution",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "precalc.partial_fractions",
+    "label": "Partial fraction decomposition",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.factor.trinomial",
+      "alg.poly.division"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  }
+]
