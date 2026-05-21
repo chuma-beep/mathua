@@ -85,7 +85,7 @@ Each step either takes constant time, or involves finding a vertex cover of cons
 
 ## Iterating the line graph operator
  consider the sequence of graphs
-\(G, L(G), L(L(G)), L(L(L(G))), \dots.\\)
+\\(G, L(G), L(L(G)), L(L(L(G))), \dots.\\)
 They show that, when is a finite connected graph, only four behaviors are possible for this sequence:
 *If is a cycle graph then *L*(*G*) and each subsequent graph in this sequence are isomorphic to itself. These are the only connected graphs for which *L*(*G*) is isomorphic to. *If is a claw *K*, then *L*(*G*) and all subsequent graphs in the sequence are triangles.
 *If is a path graph then each subsequent graph in the sequence is a shorter path until eventually the sequence terminates with an empty graph.

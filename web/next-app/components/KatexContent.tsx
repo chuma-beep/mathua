@@ -29,6 +29,72 @@ function extractText(children: ReactNode): string {
 export default function KatexContent({ children }: { children: string }) {
   let content = children
 
+  // Decode common HTML entities before any LaTeX processing
+  content = content
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+
+  // Repair common LaTeX brace issues in Wikipedia-sourced content.
+  // Patterns like \frac{...{ or \sqrt{...{ are missing a closing } before {.
+  // This runs before delimiter conversion so it catches all LaTeX blocks.
+  function fixLatexBraces(s: string): string {
+    // Iterate until stable (each pass may fix one level of nesting)
+    let prev = ''
+    while (prev !== s) {
+      prev = s
+      // \frac{numerator}{denominator{  →  insert } before {
+      s = s.replace(
+        /(\\frac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
+        '$1{$2}{'
+      )
+      // \tfrac{numerator}{denominator{
+      s = s.replace(
+        /(\\tfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
+        '$1{$2}{'
+      )
+      // \cfrac{numerator}{denominator{
+      s = s.replace(
+        /(\\cfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
+        '$1{$2}{'
+      )
+      // \sqrt{...{
+      s = s.replace(
+        /(\\sqrt\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+      // \text{...{
+      s = s.replace(
+        /(\\text\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+      // \mathrm{...{
+      s = s.replace(
+        /(\\mathrm\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+      // \operatorname{...{
+      s = s.replace(
+        /(\\operatorname\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+      // \mathbf{...{
+      s = s.replace(
+        /(\\mathbf\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+      // \mbox{...{
+      s = s.replace(
+        /(\\mbox\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
+        '$1}{'
+      )
+    }
+    return s
+  }
+  content = fixLatexBraces(content)
+
   // Convert lesson LaTeX delimiters to $...$ / $$...$$
   // remark-math expects $...$ for inline and $$...$$ on their own lines for display.
   // Two styles: Algebrica (double backslash: \\(...\\) / \\[...\\]) and Wikipedia (single backslash: \(...\) / \[...\]).
@@ -69,7 +135,7 @@ export default function KatexContent({ children }: { children: string }) {
     <div className="katex-content text-sm leading-relaxed">
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[rehypeKatex]}
+        rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: true, errorColor: '#cc0000' }]]}
         components={{
           a: ({ children }) => <>{children}</>,
           code: ({ children }) => (

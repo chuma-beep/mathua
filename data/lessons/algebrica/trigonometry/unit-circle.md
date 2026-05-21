@@ -107,7 +107,7 @@ Some angles appear frequently in trigonometry. At these values of \\(\theta\\), 
 \end{align}
 \\]
 
-The values at \\(\theta = \pi/4\\) follow from a single observation: an isosceles right triangle inscribed in the unit circle has equal legs, so that \\( \cos(\pi/4) = \sin(\pi/4) = \sqrt{2}/2 .\\] The values at \\(\theta = \pi/6\\) and \\(\theta = \pi/3\\) come instead from the geometry of the equilateral triangle, whose interior angles all equal \\(\pi/3\\).
+The values at \\(\theta = \pi/4\\) follow from a single observation: an isosceles right triangle inscribed in the unit circle has equal legs, so that \\( \cos(\pi/4) = \sin(\pi/4) = \sqrt{2}/2 \\) The values at \\(\theta = \pi/6\\) and \\(\theta = \pi/3\\) come instead from the geometry of the equilateral triangle, whose interior angles all equal \\(\pi/3\\).
 
 ## The unit circle and complex numbers
 

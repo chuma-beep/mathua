@@ -53,7 +53,7 @@ A practical graphical criterion for deciding whether a curve in the plane repres
 
 ![](/diagrams/algebrica/functions-10-1.png)
 
-The figure shows that the curve on the left (a [parabola](<../parabola/>)) is a function, since each \\( x\ ) corresponds to exactly one \\( y \\), whereas the curve on the right is not, since for \\( x_2 \\) there are multiple possible values of \\( y \\).
+The figure shows that the curve on the left (a [parabola](<../parabola/>)) is a function, since each \\( x\ \\) corresponds to exactly one \\( y \\), whereas the curve on the right is not, since for \\( x_2 \\) there are multiple possible values of \\( y \\).
 
 ## Difference between codomain and range
 

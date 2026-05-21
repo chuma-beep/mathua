@@ -7,11 +7,11 @@ In calculus, the derivative of any linear combination of functions equals the sa
 ## Statement and derivation
 Let *f* and *g* be functions, with *α* and *β* constants. Now consider
 
-\(\frac{\mbox{d{\mbox{d} x} ( \alpha \cdot f(x) + \beta \cdot g(x) ).\)
+\(\frac{\mbox{d}}{\mbox{d}x} ( \alpha \cdot f(x) + \beta \cdot g(x) ).\)
 
 By the sum rule in differentiation, this is
 
-\(\frac{\mbox{d{\mbox{d} x} ( \alpha \cdot f(x) ) + \frac{\mbox{d{\mbox{d} x} (\beta \cdot g(x)),\)
+\(\frac{\mbox{d}}{\mbox{d}x} ( \alpha \cdot f(x) ) + \frac{\mbox{d}}{\mbox{d}x} (\beta \cdot g(x)),\)
 
 and by the constant factor rule in differentiation, this reduces to
 
@@ -19,7 +19,7 @@ and by the constant factor rule in differentiation, this reduces to
 
 Therefore,
 
-\(\frac{\mbox{d{\mbox{d} x}(\alpha \cdot f(x) + \beta \cdot g(x)) = \alpha \cdot f'(x) + \beta \cdot g'(x).\)
+\(\frac{\mbox{d}}{\mbox{d}x}(\alpha \cdot f(x) + \beta \cdot g(x)) = \alpha \cdot f'(x) + \beta \cdot g'(x).\)
 
 Omitting the brackets, this is often written as:
 
