@@ -72,7 +72,7 @@ func (g *modularGen) Generate(difficulty float64) generator.Problem {
 	m := rand.Intn(max(1, scale*16)) + 2
 	ans := a % m
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compute %d mod %d.", a, m),
+		Question:    fmt.Sprintf("Compute \\(%d \\bmod %d\\).", a, m),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("%d mod %d = %d because %d = %d x %d + %d.", a, m, ans, a, m, a/m, ans),
 	}
@@ -91,13 +91,13 @@ func (g *congruenceGen) Generate(difficulty float64) generator.Problem {
 		congruent = false
 	}
 	ans := "no"
-	exp := fmt.Sprintf("%d - %d = %d, which is not divisible by %d, so %d ≢ %d (mod %d).", a, b, a-b, m, a, b, m)
+	exp := fmt.Sprintf("\\(%d - %d = %d\\), which is not divisible by \\(%d\\), so \\(%d \\not\\equiv %d \\pmod{%d}\\).", a, b, a-b, m, a, b, m)
 	if congruent {
 		ans = "yes"
-		exp = fmt.Sprintf("%d - %d = %d, which is divisible by %d, so %d ≡ %d (mod %d).", a, b, a-b, m, a, b, m)
+		exp = fmt.Sprintf("\\(%d - %d = %d\\), which is divisible by \\(%d\\), so \\(%d \\equiv %d \\pmod{%d}\\).", a, b, a-b, m, a, b, m)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is %d ≡ %d (mod %d)? (yes/no)", a, b, m),
+		Question:    fmt.Sprintf("Is \\(%d \\equiv %d \\pmod{%d}\\)? (yes/no)", a, b, m),
 		Answer:      ans,
 		Explanation: exp,
 	}
@@ -111,9 +111,9 @@ func (g *fermatLittleGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(p-2) + 2
 	result := mathutil.IntPow(a, p-1) % p
 	return generator.Problem{
-		Question:    fmt.Sprintf("By Fermat's little theorem, what is %d^%d mod %d?", a, p-1, p),
+		Question:    fmt.Sprintf("By Fermat's little theorem, what is \\(%d^{%d} \\bmod %d\\)?", a, p-1, p),
 		Answer:      fmt.Sprintf("%d", result),
-		Explanation: fmt.Sprintf("Fermat's little theorem: %d^(%d) ≡ 1 (mod %d), so %d^%d mod %d = %d.", a, p-1, p, a, p-1, p, result),
+		Explanation: fmt.Sprintf("Fermat's little theorem: \\(%d^{%d} \\equiv 1 \\pmod{%d}\\), so \\(%d^{%d} \\bmod %d = %d\\).", a, p-1, p, a, p-1, p, result),
 	}
 }
 
@@ -129,9 +129,9 @@ func (g *eulerPhiGen) Generate(difficulty float64) generator.Problem {
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is φ(%d) (Euler's totient)?", n),
+		Question:    fmt.Sprintf("What is \\(\\varphi(%d)\\) (Euler's totient)?", n),
 		Answer:      fmt.Sprintf("%d", phi),
-		Explanation: fmt.Sprintf("φ(%d) = %d (numbers 1..%d coprime to %d).", n, phi, n, n),
+		Explanation: fmt.Sprintf("\\(\\varphi(%d) = %d\\) (numbers \\(1 \\ldots %d\\) coprime to %d).", n, phi, n, n),
 	}
 }
 
@@ -143,7 +143,7 @@ func (g *diophantineGen) Generate(difficulty float64) generator.Problem {
 	y := rand.Intn(max(1, scale*10)) + 1
 	c := 3*x + 5*y
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find an integer solution to 3x + 5y = %d.", c),
+		Question:    fmt.Sprintf("Find an integer solution to \\(3x + 5y = %d\\).", c),
 		Answer:      fmt.Sprintf("x=%d,y=%d", x, y),
 		Explanation: fmt.Sprintf("3(%d) + 5(%d) = %d + %d = %d.", x, y, 3*x, 5*y, c),
 	}
@@ -160,7 +160,7 @@ func (g *cryptoGen) Generate(difficulty float64) generator.Problem {
 	}
 	n := p * q
 	return generator.Problem{
-		Question:    fmt.Sprintf("In RSA, if p=%d and q=%d, what is n?", p, q),
+		Question:    fmt.Sprintf("In RSA, if \\(p=%d\\) and \\(q=%d\\), what is \\(n\\)?", p, q),
 		Answer:      fmt.Sprintf("%d", n),
 		Explanation: fmt.Sprintf("n = p x q = %d x %d = %d.", p, q, n),
 	}

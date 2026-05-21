@@ -70,7 +70,7 @@ func (g *fracConceptGen) Generate(difficulty float64) generator.Problem {
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What fraction of the bar is filled?\n\n%s", bar),
+		Question:    fmt.Sprintf("What fraction of the bar is filled?\n\n\\(%s\\)", bar),
 		Answer:      fracStr(num, den),
 		Explanation: fmt.Sprintf("%d out of %d equal parts are filled = %d/%d", num, den, num, den),
 	}
@@ -85,13 +85,13 @@ func (g *fracPartsGen) Generate(difficulty float64) generator.Problem {
 	pick := rand.Intn(2)
 	if pick == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("In the fraction %d/%d, what is the denominator?", num, den),
+			Question:    fmt.Sprintf("In the fraction \\(\\frac{%d}{%d}\\), what is the denominator?", num, den),
 			Answer:      strconv.Itoa(den),
 			Explanation: fmt.Sprintf("The denominator %d tells how many equal parts make the whole.", den),
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("In the fraction %d/%d, what is the numerator?", num, den),
+		Question:    fmt.Sprintf("In the fraction \\(\\frac{%d}{%d}\\), what is the numerator?", num, den),
 		Answer:      strconv.Itoa(num),
 		Explanation: fmt.Sprintf("The numerator %d tells how many parts we have.", num),
 	}
@@ -104,7 +104,7 @@ func (g *fracNumberLineGen) Generate(difficulty float64) generator.Problem {
 	den := rand.Intn(max(1, scale)) + 2
 	num := rand.Intn(max(1, den-2)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Where is %d/%d on a number line from 0 to 1?", num, den),
+		Question:    fmt.Sprintf("Where is \\(\\frac{%d}{%d}\\) on a number line from \\(0\\) to \\(1\\)?", num, den),
 		Answer:      fmt.Sprintf("%.2f", float64(num)/float64(den)),
 		Explanation: fmt.Sprintf("%d/%d = %.2f, located between 0 and 1.", num, den, float64(num)/float64(den)),
 	}
@@ -119,7 +119,7 @@ func (g *fracEquivalentGen) Generate(difficulty float64) generator.Problem {
 	mult := rand.Intn(max(1, scale)) + 2
 	goal := fracStr(num*mult, den*mult)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find an equivalent fraction to %d/%d by multiplying numerator and denominator by %d.", num, den, mult),
+		Question:    fmt.Sprintf("Find an equivalent fraction to \\(\\frac{%d}{%d}\\) by multiplying numerator and denominator by \\(%d\\).", num, den, mult),
 		Answer:      goal,
 		Explanation: fmt.Sprintf("%d/%d x %d/%d = %d/%d", num, den, mult, mult, num*mult, den*mult),
 	}
@@ -141,7 +141,7 @@ func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
 	num := (rand.Intn(maxNum) + 1) * factor
 	n, d := reduce(num, den)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: %d/%d", num, den),
+		Question:    fmt.Sprintf("Simplify: \\(\\frac{%d}{%d}\\)", num, den),
 		Answer:      fracStr(n, d),
 		Explanation: fmt.Sprintf("Divide numerator and denominator by %d: %d/%d = %d/%d", mathutil.GCD(num, den), num, den, n, d),
 	}
@@ -165,7 +165,7 @@ func (g *fracCompareGen) Generate(difficulty float64) generator.Problem {
 		ans = "<"
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compare: %d/%d __ %d/%d  (enter > or <)", aNum, aDen, bNum, bDen),
+		Question:    fmt.Sprintf("Compare: \\(\\frac{%d}{%d} \\_\\_ \\frac{%d}{%d}\\) (enter > or <)", aNum, aDen, bNum, bDen),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("%d/%d = %.3f, %d/%d = %.3f, so %d/%d %s %d/%d", aNum, aDen, av, bNum, bDen, bv, aNum, aDen, ans, bNum, bDen),
 	}
@@ -188,7 +188,7 @@ func (g *fracBenchmarkGen) Generate(difficulty float64) generator.Problem {
 		comp = "="
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is %d/%d greater than, less than, or equal to 1/2?", num, den),
+		Question:    fmt.Sprintf("Is \\(\\frac{%d}{%d}\\) greater than, less than, or equal to \\(\\frac{1}{2}\\)?", num, den),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("1/2 = %d/%d, and %d/%d %s 1/2", den/2, den, num, den, comp),
 	}
@@ -202,7 +202,7 @@ func (g *fracToDecimalGen) Generate(difficulty float64) generator.Problem {
 	num := rand.Intn(max(1, scale*2)) + 1
 	dec := float64(num) / float64(den)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert %d/%d to a decimal.", num, den),
+		Question:    fmt.Sprintf("Convert \\(\\frac{%d}{%d}\\) to a decimal.", num, den),
 		Answer:      fmt.Sprintf("%g", dec),
 		Explanation: fmt.Sprintf("%d / %d = %g", num, den, dec),
 	}
@@ -228,7 +228,7 @@ func (g *fracOpSameDenGen) Generate(difficulty float64) generator.Problem {
 	}
 	rn, rd := reduce(result, den)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d/%d %s %d/%d = ?", a, den, g.op, b, den),
+		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} %s \\frac{%d}{%d} =\\) ?", a, den, g.op, b, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d %s %d)/%d = %d/%d", a, g.op, b, den, rn, rd),
 	}
@@ -261,7 +261,7 @@ func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
 	}
 	rn, rd := reduce(result, cm)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d/%d %s %d/%d = ?", aNum, aDen, g.op, bNum, bDen),
+		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} %s \\frac{%d}{%d} =\\) ?", aNum, aDen, g.op, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("LCM(%d,%d)=%d: %d/%d %s %d/%d = %d/%d", aDen, bDen, cm, aScaled, cm, g.op, bScaled, cm, rn, rd),
 	}
@@ -284,7 +284,7 @@ func (g *fracWordGen) Generate(difficulty float64) generator.Problem {
 	result := aS + bS
 	rn, rd := reduce(result, cm)
 	return generator.Problem{
-		Question:    fmt.Sprintf("You eat %d/%d of a pizza. Your friend eats %d/%d. How much pizza was eaten total?", aNum, aDen, bNum, bDen),
+		Question:    fmt.Sprintf("You eat \\(\\frac{%d}{%d}\\) of a pizza. Your friend eats \\(\\frac{%d}{%d}\\). How much pizza was eaten total?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("%d/%d + %d/%d = %d/%d of the pizza.", aNum, aDen, bNum, bDen, rn, rd),
 	}
@@ -302,13 +302,13 @@ func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
 		w, r, d := toMixed(rn, rd)
 		if r == 0 {
 			return generator.Problem{
-				Question:    fmt.Sprintf("%d x %d/%d = ?", whole, num, den),
+			Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
 				Answer:      strconv.Itoa(w),
 				Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %d", whole, num, den, whole*num, den, w),
 			}
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("%d x %d/%d = ?", whole, num, den),
+			Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
 			Answer:      fmt.Sprintf("%d/%d", rn, rd),
 			Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %s", whole, num, den, whole*num, den, mixStr(w, r, d)),
 		}
@@ -319,7 +319,7 @@ func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
 	bDen := rand.Intn(max(1, scale)) + 2
 	rn, rd := reduce(aNum*bNum, aDen*bDen)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d/%d x %d/%d = ?", aNum, aDen, bNum, bDen),
+		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\times \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d x %d)/(%d x %d) = %d/%d", aNum, bNum, aDen, bDen, rn, rd),
 	}
@@ -335,7 +335,7 @@ func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
 		aDen := rand.Intn(max(1, scale)) + 2
 		rn, rd := reduce(aNum, aDen*whole)
 		return generator.Problem{
-			Question:    fmt.Sprintf("%d/%d / %d = ?", aNum, aDen, whole),
+			Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div %d =\\) ?", aNum, aDen, whole),
 			Answer:      fmt.Sprintf("%d/%d", rn, rd),
 			Explanation: fmt.Sprintf("%d/%d / %d = %d/(%d x %d) = %d/%d", aNum, aDen, whole, aNum, aDen, whole, rn, rd),
 		}
@@ -346,7 +346,7 @@ func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
 	bDen := rand.Intn(max(1, scale)) + 2
 	rn, rd := reduce(aNum*bDen, aDen*bNum)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d/%d / %d/%d = ?", aNum, aDen, bNum, bDen),
+		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("Flip and multiply: %d/%d x %d/%d = %d/%d", aNum, aDen, bDen, bNum, rn, rd),
 	}
@@ -363,7 +363,7 @@ func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
 	if pick == 0 {
 		improper := whole*den + num
 		return generator.Problem{
-			Question:    fmt.Sprintf("Convert %d %d/%d to an improper fraction.", whole, num, den),
+			Question:    fmt.Sprintf("Convert \\(%d \\frac{%d}{%d}\\) to an improper fraction.", whole, num, den),
 			Answer:      fmt.Sprintf("%d/%d", improper, den),
 			Explanation: fmt.Sprintf("%d x %d + %d = %d, so %d %d/%d = %d/%d", whole, den, num, improper, whole, num, den, improper, den),
 		}
@@ -371,7 +371,7 @@ func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
 	improper := whole*den + num
 	w, r, d := toMixed(improper, den)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert %d/%d to a mixed number.", improper, den),
+		Question:    fmt.Sprintf("Convert \\(\\frac{%d}{%d}\\) to a mixed number.", improper, den),
 		Answer:      fmt.Sprintf("%d %d/%d", w, r, d),
 		Explanation: fmt.Sprintf("%d / %d = %d remainder %d, so %d/%d = %d %d/%d", improper, den, w, r, improper, den, w, r, d),
 	}

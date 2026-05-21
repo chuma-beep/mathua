@@ -125,10 +125,10 @@ func (g *truthTablesGen) Generate(difficulty float64) generator.Problem {
 		description string
 	}
 	exprs := []expr{
-		{"p AND q", "p ∧ q"},
-		{"p OR q", "p ∨ q"},
-		{"NOT p", "¬p"},
-		{"p XOR q", "p ⊕ q"},
+		{"p AND q", "\\(p \\land q\\)"},
+		{"p OR q", "\\(p \\lor q\\)"},
+		{"NOT p", "\\(\\lnot p\\)"},
+		{"p XOR q", "\\(p \\oplus q\\)"},
 	}
 	e := exprs[rand.Intn(len(exprs))]
 
@@ -140,7 +140,7 @@ func (g *truthTablesGen) Generate(difficulty float64) generator.Problem {
 	if rand.Intn(2) == 0 {
 		rows := 1 << vars
 		return generator.Problem{
-			Question:    fmt.Sprintf("How many rows are in a truth table for %s?", e.name),
+			Question:    			fmt.Sprintf("How many rows are in a truth table for \\(%s\\)?", e.description),
 			Answer:      fmt.Sprintf("%d", rows),
 			Explanation: fmt.Sprintf("With %d variable(s), there are 2^%d = %d rows.", vars, vars, rows),
 		}
@@ -295,13 +295,13 @@ func (g *quantifiersGen) Generate(difficulty float64) generator.Problem {
 	}
 
 	e := entries[rand.Intn(len(entries))]
-	quant := "∀"
+	quant := "\\forall"
 	if !e.isForAll {
-		quant = "∃"
+		quant = "\\exists"
 	}
 
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is %sx ∈ %s: x %s true? (true/false)", quant, setStr, e.condDesc),
+		Question:    fmt.Sprintf("Is \\(%s x \\in %s: x %s\\) true? (true/false)", quant, setStr, e.condDesc),
 		Answer:      e.expected,
 		Explanation: fmt.Sprintf("%sx ∈ %s: x %s is %s because %s", quant, setStr, e.condDesc, e.expected, e.reason),
 	}
@@ -336,22 +336,22 @@ func (g *setOpsGen) Generate(difficulty float64) generator.Problem {
 		exp    string
 	}{
 		{
-			"union", fmt.Sprintf("A ∪ B where A=%s, B=%s", aStr, bStr),
+			"union", fmt.Sprintf("\\(A \\cup B\\) where \\(A=%s\\), \\(B=%s\\)", aStr, bStr),
 			formatSet(union(p.a, p.b)),
 			fmt.Sprintf("A ∪ B = %s (all elements in A or B)", formatSet(union(p.a, p.b))),
 		},
 		{
-			"intersection", fmt.Sprintf("A ∩ B where A=%s, B=%s", aStr, bStr),
+			"intersection", fmt.Sprintf("\\(A \\cap B\\) where \\(A=%s\\), \\(B=%s\\)", aStr, bStr),
 			formatSet(intersection(p.a, p.b)),
 			fmt.Sprintf("A ∩ B = %s (elements in both A and B)", formatSet(intersection(p.a, p.b))),
 		},
 		{
-			"complement", fmt.Sprintf("the complement of A=%s in U=%s", aStr, formatSet(allElements)),
+			"complement", fmt.Sprintf("the complement of \\(A=%s\\) in \\(U=%s\\)", aStr, formatSet(allElements)),
 			formatSet(complement(p.a, allElements)),
 			fmt.Sprintf("A' = %s (elements in U but not in A)", formatSet(complement(p.a, allElements))),
 		},
 		{
-			"difference", fmt.Sprintf("A − B where A=%s, B=%s", aStr, bStr),
+			"difference", fmt.Sprintf("\\(A - B\\) where \\(A=%s\\), \\(B=%s\\)", aStr, bStr),
 			formatSet(difference(p.a, p.b)),
 			fmt.Sprintf("A − B = %s (elements in A but not in B)", formatSet(difference(p.a, p.b))),
 		},
@@ -477,22 +477,22 @@ func (g *vennGen) Generate(difficulty float64) generator.Problem {
 	}
 	questions := []qType{
 		{
-			fmt.Sprintf("Given |A|=%d, |B|=%d, |A∩B|=%d, |U|=%d, how many elements are in A∪B?", s.a, s.b, s.both, s.universe),
+			fmt.Sprintf("Given \\(|A|=%d\\), \\(|B|=%d\\), \\(|A \\cap B|=%d\\), \\(|U|=%d\\), how many elements are in \\(A \\cup B\\)?", s.a, s.b, s.both, s.universe),
 			unionSize,
 			fmt.Sprintf("|A∪B| = |A| + |B| − |A∩B| = %d + %d − %d = %d", s.a, s.b, s.both, unionSize),
 		},
 		{
-			fmt.Sprintf("Given |A|=%d, |B|=%d, |A∩B|=%d, |U|=%d, how many elements are in the complement of A∪B?", s.a, s.b, s.both, s.universe),
+			fmt.Sprintf("Given \\(|A|=%d\\), \\(|B|=%d\\), \\(|A \\cap B|=%d\\), \\(|U|=%d\\), how many elements are in the complement of \\(A \\cup B\\)?", s.a, s.b, s.both, s.universe),
 			compUnion,
 			fmt.Sprintf("|(A∪B)'| = |U| − |A∪B| = %d − %d = %d", s.universe, unionSize, compUnion),
 		},
 		{
-			fmt.Sprintf("Given |A|=%d, |B|=%d, |A∩B|=%d, how many elements are in A only (not in B)?", s.a, s.b, s.both),
+			fmt.Sprintf("Given \\(|A|=%d\\), \\(|B|=%d\\), \\(|A \\cap B|=%d\\), how many elements are in \\(A\\) only (not in \\(B\\))?", s.a, s.b, s.both),
 			onlyA,
 			fmt.Sprintf("|A only| = |A| − |A∩B| = %d − %d = %d", s.a, s.both, onlyA),
 		},
 		{
-			fmt.Sprintf("Given |A|=%d, |B|=%d, |A∩B|=%d, how many elements are in B only (not in A)?", s.a, s.b, s.both),
+			fmt.Sprintf("Given \\(|A|=%d\\), \\(|B|=%d\\), \\(|A \\cap B|=%d\\), how many elements are in \\(B\\) only (not in \\(A\\))?", s.a, s.b, s.both),
 			onlyB,
 			fmt.Sprintf("|B only| = |B| − |A∩B| = %d − %d = %d", s.b, s.both, onlyB),
 		},
@@ -541,7 +541,7 @@ func (g *permutationsGen) Generate(difficulty float64) generator.Problem {
 		{
 			"How many ways to pick 1st, 2nd, and 3rd place from 10 runners?",
 			720,
-			"10 × 9 × 8 = 720 (10P3 = 10! / 7!)",
+			"\\(10 \\times 9 \\times 8 = 720\\) (\\(_{10}P_{3} = 10! / 7!\\))",
 		},
 		{
 			"How many ways to pick 1st and 2nd place from 8 runners?",
@@ -843,42 +843,42 @@ func (g *recurrenceGen) Generate(difficulty float64) generator.Problem {
 	}
 	questions := []qType{
 		{
-			"If a_n = a_(n-1) + 2 and a_1 = 1, what is a_4?",
+			"If \\(a_{n} = a_{n-1} + 2\\) and \\(a_{1} = 1\\), what is \\(a_{4}\\)?",
 			"7",
 			"a_2 = 1+2 = 3, a_3 = 3+2 = 5, a_4 = 5+2 = 7",
 		},
 		{
-			"If a_n = a_(n-1) + 3 and a_1 = 2, what is a_4?",
+			"If \\(a_{n} = a_{n-1} + 3\\) and \\(a_{1} = 2\\), what is \\(a_{4}\\)?",
 			"11",
 			"a_2 = 2+3 = 5, a_3 = 5+3 = 8, a_4 = 8+3 = 11",
 		},
 		{
-			"If a_n = 2*a_(n-1) and a_1 = 3, what is a_4?",
+			"If \\(a_{n} = 2a_{n-1}\\) and \\(a_{1} = 3\\), what is \\(a_{4}\\)?",
 			"24",
-			"a_2 = 2*3 = 6, a_3 = 2*6 = 12, a_4 = 2*12 = 24",
+			"\\(a_{2} = 2 \\times 3 = 6\\), \\(a_{3} = 2 \\times 6 = 12\\), \\(a_{4} = 2 \\times 12 = 24\\)",
 		},
 		{
-			"If a_n = a_(n-1) * 2 and a_1 = 5, what is a_5?",
+			"If \\(a_{n} = 2a_{n-1}\\) and \\(a_{1} = 5\\), what is \\(a_{5}\\)?",
 			"80",
-			"a_2 = 5*2 = 10, a_3 = 10*2 = 20, a_4 = 20*2 = 40, a_5 = 40*2 = 80",
+			"\\(a_{2} = 5 \\times 2 = 10\\), \\(a_{3} = 10 \\times 2 = 20\\), \\(a_{4} = 20 \\times 2 = 40\\), \\(a_{5} = 40 \\times 2 = 80\\)",
 		},
 		{
-			"What is a_5 if a_n = 2n - 1?",
+			"What is \\(a_{5}\\) if \\(a_{n} = 2n - 1\\)?",
 			"9",
 			"a_5 = 2(5) − 1 = 10 − 1 = 9",
 		},
 		{
-			"What is a_6 if a_n = 3n + 1?",
+			"What is \\(a_{6}\\) if \\(a_{n} = 3n + 1\\)?",
 			"19",
 			"a_6 = 3(6) + 1 = 18 + 1 = 19",
 		},
 		{
-			"What is a_10 if a_n = n^2?",
+			"What is \\(a_{10}\\) if \\(a_{n} = n^{2}\\)?",
 			"100",
 			"a_10 = 10^2 = 100",
 		},
 		{
-			"If a_n = a_(n-1) + a_(n-2) and a_1 = 1, a_2 = 1, what is a_6?",
+			"If \\(a_{n} = a_{n-1} + a_{n-2}\\) and \\(a_{1} = 1\\), \\(a_{2} = 1\\), what is \\(a_{6}\\)?",
 			"8",
 			"a_3=2, a_4=3, a_5=5, a_6=8 (Fibonacci sequence)",
 		},
@@ -919,14 +919,14 @@ func (g *binomialTheoremGen) Generate(difficulty float64) generator.Problem {
 	if rand.Intn(2) == 0 {
 		e := entries[rand.Intn(len(entries))]
 		return generator.Problem{
-			Question:    fmt.Sprintf("Using the binomial theorem, what is the coefficient of x^%d y^%d in (x+y)^%d?", e.k, e.n-e.k, e.n),
+			Question:    fmt.Sprintf("Using the binomial theorem, what is the coefficient of \\(x^{%d} y^{%d}\\) in \\((x+y)^{%d}\\)?", e.k, e.n-e.k, e.n),
 			Answer:      fmt.Sprintf("%d", e.coeff),
 			Explanation: fmt.Sprintf("C(%d,%d) = %d!/(%d!(%d-%d)!) = %d", e.n, e.k, e.n, e.k, e.n, e.k, e.coeff),
 		}
 	}
 	e2 := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is C(%d,%d) in the expansion of (x+y)^%d?", e2.n, e2.k, e2.n),
+		Question:    fmt.Sprintf("What is \\(C(%d,%d)\\) in the expansion of \\((x+y)^{%d}\\)?", e2.n, e2.k, e2.n),
 		Answer:      fmt.Sprintf("%d", e2.coeff),
 		Explanation: fmt.Sprintf("C(%d,%d) = %d", e2.n, e2.k, e2.coeff),
 	}
