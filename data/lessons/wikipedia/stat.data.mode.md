@@ -2,7 +2,7 @@
 
 # Find the mode
 
-In statistics, the **mode** is the value that appears most often in a set of data values. If is a discrete random variable, the mode is the value at which the probability mass function 1=P(*X*) takes its maximum value, i.e., 1=*x* = argmax\(_{*x**i*}\) P(*X* = *x*\(_{*i*}\)). In other words, it is the value that is most likely to be sampled.
+In statistics, the **mode** is the value that appears most often in a set of data values. If is a discrete random variable, the mode is the value at which the probability mass function P(*X*) takes its maximum value, i.e., *x* = argmax\(_{*x**i*}\) P(*X* = *x*\(_{*i*}\)). In other words, it is the value that is most likely to be sampled.
 
 Like the statistical mean and median, the mode is a summary statistic about the central tendency of a random variable or a population. The numerical value of the mode is the same as that of the mean and median in a normal distribution, but it may be very different in highly skewed distributions.
 

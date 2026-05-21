@@ -4,11 +4,11 @@
 
 In mathematics, a **variable** (from Latin ) is a symbol, typically a letter, that refers to an unspecified mathematical object. One says colloquially that the variable *represents* or *denotes* the object, and that any valid candidate for the object is the value of the variable. The values a variable can take are usually of the same kind, often numbers. More specifically, the values involved may form a set, such as the set of real numbers.
 
-The object may not always exist, or it might be uncertain whether any valid candidate exists or not. For example, one could represent two integers by the variables and and require that the value of the square of is twice the square of , which in algebraic notation can be written 1=*p*\(^{2}\) = 2 *q*\(^{2}\). A definitive proof that this relationship is impossible to satisfy when and are restricted to integer numbers isn't obvious, but it has been known since ancient times and has had a big influence on mathematics ever since.
+The object may not always exist, or it might be uncertain whether any valid candidate exists or not. For example, one could represent two integers by the variables and and require that the value of the square of is twice the square of , which in algebraic notation can be written *p*\(^{2}\) = 2 *q*\(^{2}\). A definitive proof that this relationship is impossible to satisfy when and are restricted to integer numbers isn't obvious, but it has been known since ancient times and has had a big influence on mathematics ever since.
 
-Originally, the term *variable* was used primarily for the argument of a function, in which case its value could be thought of as *varying* within the domain of the function. This is the motivation for the choice of the term. Also, variables are used for denoting values of functions, such as the symbol *y* in the equation 1=*y* = *f*(*x*), where is the argument and denotes the function itself.
+Originally, the term *variable* was used primarily for the argument of a function, in which case its value could be thought of as *varying* within the domain of the function. This is the motivation for the choice of the term. Also, variables are used for denoting values of functions, such as the symbol *y* in the equation *y* = *f*(*x*), where is the argument and denotes the function itself.
 
-A variable may represent an unspecified number that remains fixed during the resolution of a problem; in which case, it is often called a parameter. A variable may denote an unknown number that has to be determined; in which case, it is called an unknown; for example, in the quadratic equation 1=*ax*\(^{2}\) + *bx* + *c* = 0, the variables *a*, *b*, *c* are parameters, and *x* is the unknown.
+A variable may represent an unspecified number that remains fixed during the resolution of a problem; in which case, it is often called a parameter. A variable may denote an unknown number that has to be determined; in which case, it is called an unknown; for example, in the quadratic equation *ax*\(^{2}\) + *bx* + *c* = 0, the variables *a*, *b*, *c* are parameters, and *x* is the unknown.
 
 Sometimes the same symbol can be used to denote both a variable and a constant, that is a well defined mathematical object. For example, the Greek letter *π* generally represents the number *π*, but has also been used to denote a projection. Similarly, the letter *e* often denotes Euler's number, but has been used to denote an unassigned coefficient for quartic function and higher degree polynomials. Even the symbol 1 has been used to denote an identity element of an arbitrary field. These two notions are used almost identically, therefore one usually must be told whether a given symbol denotes a variable or a constant.
 
@@ -20,13 +20,13 @@ In mathematical logic, a *variable* is a symbol that either represents an unspec
 
 ### Early history
 
-The earliest uses of an "unknown quantity" date back to at least the Ancient Egyptians with the Moscow Mathematical Papyrus (c. 1500 BC) which described problems with unknowns rhetorically, called the "Aha problems". The "Aha problems" involve finding unknown quantities (referred to as *aha*, "stack") if the sum of the quantity and part(s) of it are given (The Rhind Mathematical Papyrus also contains four of these types of problems). For example, problem 19 asks one to calculate a quantity taken times and added to 4 to make 10. In modern mathematical notation: 1=. Around the same time in Mesopotamia, mathematics of the Old Babylonian period (c. 2000 BC – 1500 BC) was more advanced, also studying quadratic and cubic equations.
+The earliest uses of an "unknown quantity" date back to at least the Ancient Egyptians with the Moscow Mathematical Papyrus (c. 1500 BC) which described problems with unknowns rhetorically, called the "Aha problems". The "Aha problems" involve finding unknown quantities (referred to as *aha*, "stack") if the sum of the quantity and part(s) of it are given (The Rhind Mathematical Papyrus also contains four of these types of problems). For example, problem 19 asks one to calculate a quantity taken times and added to 4 to make 10. In modern mathematical notation:. Around the same time in Mesopotamia, mathematics of the Old Babylonian period (c. 2000 BC – 1500 BC) was more advanced, also studying quadratic and cubic equations.
 
 In works of ancient Greece such as Euclid's *Elements* (c. 300 BC), mathematics was described geometrically. For example, *The Elements*, proposition 1 of Book II, Euclid includes the proposition:
 
 *"If there be two straight lines, and one of them be cut into any number of segments whatever, the rectangle contained by the two straight lines is equal to the rectangles contained by the uncut straight line and each of the segments."*
 
-This corresponds to the algebraic identity 1=*a*(*b* + *c*) = *ab* + *ac* (distributivity), but is described entirely geometrically. Euclid, and other greek geometers, also used single letters refer to geometric points and shapes. This kind of algebra is now sometimes called Greek geometric algebra.
+This corresponds to the algebraic identity *a*(*b* + *c*) = *ab* + *ac* (distributivity), but is described entirely geometrically. Euclid, and other greek geometers, also used single letters refer to geometric points and shapes. This kind of algebra is now sometimes called Greek geometric algebra.
 
 Diophantus of Alexandria, pioneered a form of syncopated algebra in his *Arithmetica* (c. 200 AD), which introduced symbolic manipulation of expressions with unknowns and powers, but without modern symbols for relations (such as equality or inequality) or exponents. An unknown number was called \(\zeta\). The square of \(\zeta\) was \(\Delta^v\); the cube was \(K^v\); the fourth power was \(\Delta^v\Delta\); and the fifth power was \(\Delta K^v\). So for example, what would be written in modern notation as:
 
@@ -44,7 +44,7 @@ At the end of the 16th century, François Viète introduced the idea of represen
 
 In 1637, René Descartes "invented the convention of representing unknowns in equations by *x*, *y*, and *z*, and knowns by *a*, *b*, and *c*". Contrarily to Viète's convention, Descartes' is still commonly in use. The history of the letter x in math was discussed in an 1887 Scientific American article.
 
-Starting in the 1660s, Isaac Newton and Gottfried Wilhelm Leibniz independently developed the infinitesimal calculus, which essentially consists of studying how an infinitesimal variation of a *time-varying quantity,* called a Fluent, induces a corresponding variation of another quantity which is a *function* of the first variable. Almost a century later, Leonhard Euler fixed the terminology of infinitesimal calculus, and introduced the notation 1=*y* = *f*(*x*) for a function *f*, its **variable** *x* and its value *y*. Until the end of the 19th century, the word *variable* referred almost exclusively to the arguments and the values of functions.
+Starting in the 1660s, Isaac Newton and Gottfried Wilhelm Leibniz independently developed the infinitesimal calculus, which essentially consists of studying how an infinitesimal variation of a *time-varying quantity,* called a Fluent, induces a corresponding variation of another quantity which is a *function* of the first variable. Almost a century later, Leonhard Euler fixed the terminology of infinitesimal calculus, and introduced the notation *y* = *f*(*x*) for a function *f*, its **variable** *x* and its value *y*. Until the end of the 19th century, the word *variable* referred almost exclusively to the arguments and the values of functions.
 
 In the second half of the 19th century, it appeared that the foundation of infinitesimal calculus was not formalized enough to deal with apparent paradoxes such as a nowhere differentiable continuous function. To solve this problem, Karl Weierstrass introduced a new formalism consisting of replacing the intuitive notion of limit by a formal definition. The older notion of limit was "when the *variable* *x* varies and tends toward *a*, then *f*(*x*) tends toward *L*", without any accurate definition of "tends". Weierstrass replaced this sentence by the formula
 \((\forall \epsilon >0) (\exists \eta >0) (\forall x) \;|x-a|<\eta\)\(\; \Rightarrow |L-f(x)|<\epsilon,\)
@@ -62,7 +62,7 @@ Specific branches and applications of mathematics have specific naming conventio
 ### Conventional variable names
 
 * *a*, *b*, *c*, *d* (sometimes extended to *e*, *f*) for parameters or coefficients
-* *a*\(_{0}\), *a*\(_{1}\), *a*\(_{2}\),.. . for situations where distinct letters are inconvenient
+* *a*\(_{0}\), *a*\(_{1}\), *a*\(_{2}\),... for situations where distinct letters are inconvenient
 * *a\(_{i}\)* or *u\(_{i}\)* for the *i*th term of a sequence or the *i*th coefficient of a series
 * *f*, *g*, *h* for functions (as in *f*(*x*))
 * *i*, *j*, *k* (sometimes *l* or *h*) for varying integers or indices in an indexed family, or unit vectors
@@ -86,7 +86,7 @@ It is common for variables to play different roles in the same mathematical form
 \(ax^3+bx^2+cx+d=0,\)
 is interpreted as having five variables: four, *a*, *b*, *c*, *d*, which are taken to be given numbers and the fifth variable, *x*, is understood to be an *unknown* number. To distinguish them, the variable *x* is called *an unknown*, and the other variables are called *parameters* or *coefficients*, or sometimes *constants*, although this last terminology is incorrect for an equation, and should be reserved for the function defined by the left-hand side of this equation.
 
-In the context of functions, the term *variable* refers commonly to the arguments of the functions. This is typically the case in sentences like "function of a real variable", "*x* is the variable of the function 1=*f* : *x* ↦ *f*(*x*)", "*f* is a function of the variable *x*" (meaning that the argument of the function is referred to by the variable *x*).
+In the context of functions, the term *variable* refers commonly to the arguments of the functions. This is typically the case in sentences like "function of a real variable", "*x* is the variable of the function *f* : *x* ↦ *f*(*x*)", "*f* is a function of the variable *x*" (meaning that the argument of the function is referred to by the variable *x*).
 
 In the same context, variables that are independent of *x* define constant functions and are therefore called *constant*. For example, a *constant of integration* is an arbitrary constant function that is added to a particular antiderivative to obtain the other antiderivatives. Because of the strong relationship between polynomials and polynomial functions, the term "constant" is often used to denote the coefficients of a polynomial, which are constant functions of the indeterminates.
 
@@ -101,7 +101,7 @@ All these denominations of variables are of semantic nature, and the way of comp
 
 ### Dependent and independent variables
 
-In calculus and its application to physics and other sciences, it is rather common to consider a variable, say *y*, whose possible values depend on the value of another variable, say *x*. In mathematical terms, the *dependent* variable *y* represents the value of a function of *x*. To simplify formulas, it is often useful to use the same symbol for the dependent variable *y* and the function mapping *x* onto *y*. For example, the state of a physical system depends on measurable quantities such as the pressure, the temperature, the spatial position,.. ., and all these quantities vary when the system evolves, that is, they are function of the time. In the formulas describing the system, these quantities are represented by variables which are dependent on the time, and thus considered implicitly as functions of the time.
+In calculus and its application to physics and other sciences, it is rather common to consider a variable, say *y*, whose possible values depend on the value of another variable, say *x*. In mathematical terms, the *dependent* variable *y* represents the value of a function of *x*. To simplify formulas, it is often useful to use the same symbol for the dependent variable *y* and the function mapping *x* onto *y*. For example, the state of a physical system depends on measurable quantities such as the pressure, the temperature, the spatial position,... , and all these quantities vary when the system evolves, that is, they are function of the time. In the formulas describing the system, these quantities are represented by variables which are dependent on the time, and thus considered implicitly as functions of the time.
 
 Therefore, in a formula, a **dependent variable** is a variable that is implicitly a function of another (or several other) variables. An **independent variable** is a variable that is not dependent.
 
@@ -114,7 +114,7 @@ then *x* is a variable standing for the argument of the function being defined, 
 
 In the identity
 \(\sum_{i=1}^n i = \frac{n^2+n}2\)
-the variable *i* is a summation variable which designates in turn each of the integers 1, 2,.. ., *n* (it is also called **index** because its variation is over a discrete set of values) while *n* is a parameter (it does not vary within the formula).
+the variable *i* is a summation variable which designates in turn each of the integers 1, 2,... , *n* (it is also called **index** because its variation is over a discrete set of values) while *n* is a parameter (it does not vary within the formula).
 
 In the theory of polynomials, a polynomial of degree 2 is generally denoted as *ax*\(^{2}\) + *bx* + *c*, where *a*, *b* and *c* are called coefficients (they are assumed to be fixed, i.e., parameters of the problem considered) while *x* is called a variable. When studying this polynomial for its polynomial function this *x* stands for the function argument. When studying the polynomial as an object in itself, *x* is taken to be an indeterminate, and would often be written with a capital letter instead to indicate this status.
 

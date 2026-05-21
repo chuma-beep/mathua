@@ -188,7 +188,7 @@ The following table shows the standard classically definable approximations for 
 |-
 | if...then || material implication || \(\rightarrow\) || IMPLY
 |-
-|.. .if || converse implication || \(\leftarrow\) ||
+|... if || converse implication || \(\leftarrow\) ||
 |-
 | either...or || exclusive disjunction || \(\nleftrightarrow\) || XOR
 |-
@@ -208,13 +208,13 @@ Some logical connectives possess properties that may be expressed in the theorem
 
 ; Associativity: Within an expression containing two or more of the same associative connectives in a row, the order of the operations does not matter as long as the sequence of the operands is not changed.
 ; Commutativity:The operands of the connective may be swapped, preserving logical equivalence to the original expression.
-; Distributivity: A connective denoted by · distributes over another connective denoted by +, if 1=*a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all operands ,. ; Idempotence: Whenever the operands of the operation are the same, the compound is logically equivalent to the operand.
-; Absorption: A pair of connectives ∧, ∨ satisfies the absorption law if \(a\land(a\lor b)=a\) for all operands ,. ; Monotonicity: If *f*(*a*\(_{1}\),.. ., *a*\(_{*n*}\)) ≤ *f*(*b*\(_{1}\),.. ., *b*\(_{*n*}\)) for all *a*\(_{1}\),.. ., *a*\(_{*n*}\), *b*\(_{1}\),.. ., *b*\(_{*n*}\) ∈ {0,1} such that *a*\(_{1}\) ≤ *b*\(_{1}\), *a*\(_{2}\) ≤ *b*\(_{2}\),.. ., *a*\(_{*n*}\) ≤ *b*\(_{*n*}\). E.g., ∨, ∧, ⊤, ⊥.
+; Distributivity: A connective denoted by · distributes over another connective denoted by +, if *a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all operands ,. ; Idempotence: Whenever the operands of the operation are the same, the compound is logically equivalent to the operand.
+; Absorption: A pair of connectives ∧, ∨ satisfies the absorption law if \(a\land(a\lor b)=a\) for all operands ,. ; Monotonicity: If *f*(*a*\(_{1}\),... , *a*\(_{*n*}\)) ≤ *f*(*b*\(_{1}\),... , *b*\(_{*n*}\)) for all *a*\(_{1}\),... , *a*\(_{*n*}\), *b*\(_{1}\),... , *b*\(_{*n*}\) ∈ {0,1} such that *a*\(_{1}\) ≤ *b*\(_{1}\), *a*\(_{2}\) ≤ *b*\(_{2}\),... , *a*\(_{*n*}\) ≤ *b*\(_{*n*}\). E.g., ∨, ∧, ⊤, ⊥.
 ; Affinity: Each variable always makes a difference in the truth-value of the operation or it never makes a difference. E.g., ¬, ↔, \(\nleftrightarrow\), ⊤, ⊥.
-; Duality: To read the truth-value assignments for the operation from top to bottom on its truth table is the same as taking the complement of reading the table of the same or another connective from bottom to top. Without resorting to truth tables it may be formulated as 1=*g̃*(¬*a*\(_{1}\),.. ., ¬*a*\(_{*n*}\)) = ¬*g*(*a*\(_{1}\),.. ., *a*\(_{*n*}\)). E.g., ¬.
+; Duality: To read the truth-value assignments for the operation from top to bottom on its truth table is the same as taking the complement of reading the table of the same or another connective from bottom to top. Without resorting to truth tables it may be formulated as *g̃*(¬*a*\(_{1}\),... , ¬*a*\(_{*n*}\)) = ¬*g*(*a*\(_{1}\),... , *a*\(_{*n*}\)). E.g., ¬.
 ; Truth-preserving: The compound all those arguments are tautologies is a tautology itself. E.g., ∨, ∧, ⊤, →, ↔, ⊂ (see validity).
 ; Falsehood-preserving: The compound all those argument are contradictions is a contradiction itself. E.g., ∨, ∧, \(\nleftrightarrow\), ⊥, ⊄, ⊅ (see validity).
-; Involutivity (for unary connectives): 1=*f*(*f*(*a*)) = *a*. E.g. negation in classical logic.
+; Involutivity (for unary connectives): *f*(*f*(*a*)) = *a*. E.g. negation in classical logic.
 
 For classical and intuitionistic logic, the "=" symbol means that corresponding implications "...→..." and "...←..." for logical compounds can be both proved as theorems, and the "≤" symbol means that "...→..." for logical compounds is a consequence of corresponding "...→..." connectives for propositional variables. Some many-valued logics may have incompatible definitions of equivalence and order (entailment).
 

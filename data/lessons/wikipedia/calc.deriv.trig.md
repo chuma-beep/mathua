@@ -75,7 +75,7 @@ Since each region is contained in the next, one has:
 \(\text{Area}(R_1) < \text{Area}(R_2) < \text{Area}(R_3) \implies
 \tfrac{1}{2}\sin\theta < \tfrac{1}{2}\theta < \tfrac{1}{2}\tan\theta \,. \)
 
-Moreover; since 1=sin *θ* > 0 in the first quadrant, we may divide through by sin *θ*, giving:
+Moreover; since sin *θ* > 0 in the first quadrant, we may divide through by sin *θ*, giving:
 \(1 < \frac{\theta}{\sin\theta} < \frac{1}{\cos\theta} \implies 1 > \frac{\sin\theta}{\theta} > \cos\theta \,. \)
 
 In the last step we took the reciprocals of the three positive terms, reversing the inequities.
@@ -99,7 +99,7 @@ The last section enables us to calculate this new limit relatively easily. This 
 \ =\
 \lim_{\theta \to 0}\, \frac{\cos^2\!\theta - 1}{\theta\,(\cos\theta + 1)}. \)
 
-Using 1=cos\(^{2}\)*θ* – 1 = –sin\(^{2}\)*θ*,
+Using cos\(^{2}\)*θ* – 1 = –sin\(^{2}\)*θ*,
 the fact that the limit of a product is the product of limits, and the limit result from the previous section, we find that:
 
 \(\lim_{\theta \to 0}\,\frac{\cos\theta - 1}{\theta}

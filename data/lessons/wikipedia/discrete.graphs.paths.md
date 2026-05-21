@@ -10,11 +10,11 @@ Paths are fundamental concepts of graph theory, described in the introductory se
 ### Walk, trail, and path
 
 * A **walk** is a finite or infinite sequence of edges which joins a sequence of vertices.
-Let 1=*G* = (*V*, *E*, *Φ*) be a graph. A finite walk is a sequence of edges (*e*\(_{1}\), *e*\(_{2}\),.. ., *e*\(_{*n* − 1}\)) for which there is a sequence of vertices (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) such that *Φ*(*e*\(_{*i*}\)) = {*v*\(_{*i*}\), *v*\(_{*i* + 1}\)} for 1=*i* = 1, 2,.. ., *n* − 1. (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) is the *vertex sequence* of the walk. The walk is *closed* if *v*\(_{1}\) = *v*\(_{*n*}\), and it is *open* otherwise. An infinite walk is a sequence of edges of the same type described here, but with no first or last vertex, and a semi-infinite walk (or ray) has a first vertex but no last vertex.
+Let *G* = (*V*, *E*, *Φ*) be a graph. A finite walk is a sequence of edges (*e*\(_{1}\), *e*\(_{2}\),... , *e*\(_{*n* − 1}\)) for which there is a sequence of vertices (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) such that *Φ*(*e*\(_{*i*}\)) = {*v*\(_{*i*}\), *v*\(_{*i* + 1}\)} for *i* = 1, 2,... , *n* − 1. (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) is the *vertex sequence* of the walk. The walk is *closed* if *v*\(_{1}\) = *v*\(_{*n*}\), and it is *open* otherwise. An infinite walk is a sequence of edges of the same type described here, but with no first or last vertex, and a semi-infinite walk (or ray) has a first vertex but no last vertex.
 * A **trail** is a walk in which all edges are distinct.
 * A **path** is a trail in which all vertices (and therefore also all edges) are distinct.
 
-If 1=*w* = (*e*\(_{1}\), *e*\(_{2}\),.. ., *e*\(_{*n* − 1}\)) is a finite walk with vertex sequence (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) then *w* is said to be a *walk from* *v*\(_{1}\) *to* *v*\(_{*n*}\). Similarly for a trail or a path. If there is a finite walk between two *distinct* vertices then there is also a finite trail and a finite path between them.
+If *w* = (*e*\(_{1}\), *e*\(_{2}\),... , *e*\(_{*n* − 1}\)) is a finite walk with vertex sequence (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) then *w* is said to be a *walk from* *v*\(_{1}\) *to* *v*\(_{*n*}\). Similarly for a trail or a path. If there is a finite walk between two *distinct* vertices then there is also a finite trail and a finite path between them.
 
 Some authors do not require that all vertices of a path be distinct and instead use the term **simple path** to refer to such a path where all vertices are distinct.
 
@@ -22,11 +22,11 @@ A weighted graph associates a value (*weight*) with every edge in the graph. The
 
 ### Directed walk, directed trail, and directed path
 * A **directed walk** is a finite or infinite sequence of edges directed in the same direction which joins a sequence of vertices.
-Let 1=*G* = (*V*, *E*, *Φ*) be a directed graph. A finite directed walk is a sequence of edges (*e*\(_{1}\), *e*\(_{2}\),.. ., *e*\(_{*n* − 1}\)) for which there is a sequence of vertices (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) such that 1=*Φ*(*e*\(_{*i*}\)) = (*v*\(_{*i*}\), *v*\(_{*i* + 1}\)) for 1=*i* = 1, 2,.. ., *n* − 1. (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) is the *vertex sequence* of the directed walk. The directed walk is *closed* if *v*\(_{1}\) = *v*\(_{*n*}\), and it is *open* otherwise. An infinite directed walk is a sequence of edges of the same type described here, but with no first or last vertex, and a semi-infinite directed walk (or ray) has a first vertex but no last vertex.
+Let *G* = (*V*, *E*, *Φ*) be a directed graph. A finite directed walk is a sequence of edges (*e*\(_{1}\), *e*\(_{2}\),... , *e*\(_{*n* − 1}\)) for which there is a sequence of vertices (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) such that *Φ*(*e*\(_{*i*}\)) = (*v*\(_{*i*}\), *v*\(_{*i* + 1}\)) for *i* = 1, 2,... , *n* − 1. (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) is the *vertex sequence* of the directed walk. The directed walk is *closed* if *v*\(_{1}\) = *v*\(_{*n*}\), and it is *open* otherwise. An infinite directed walk is a sequence of edges of the same type described here, but with no first or last vertex, and a semi-infinite directed walk (or ray) has a first vertex but no last vertex.
 * A **directed trail** is a directed walk in which all edges are distinct.
 * A **directed path** is a directed trail in which all vertices are distinct.
 
-If 1=*w* = (*e*\(_{1}\), *e*\(_{2}\),.. ., *e*\(_{*n* − 1}\)) is a finite directed walk with vertex sequence (*v*\(_{1}\), *v*\(_{2}\),.. ., *v*\(_{*n*}\)) then *w* is said to be a *walk from* *v*\(_{1}\) *to* *v*\(_{*n*}\). Similarly for a directed trail or a path. If there is a finite directed walk between two *distinct* vertices then there is also a finite directed trail and a finite directed path between them.
+If *w* = (*e*\(_{1}\), *e*\(_{2}\),... , *e*\(_{*n* − 1}\)) is a finite directed walk with vertex sequence (*v*\(_{1}\), *v*\(_{2}\),... , *v*\(_{*n*}\)) then *w* is said to be a *walk from* *v*\(_{1}\) *to* *v*\(_{*n*}\). Similarly for a directed trail or a path. If there is a finite directed walk between two *distinct* vertices then there is also a finite directed trail and a finite directed path between them.
 
 A "simple directed path" is a path where all vertices are distinct.
 

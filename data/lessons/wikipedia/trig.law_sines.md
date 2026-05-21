@@ -32,7 +32,7 @@ Given a general triangle, the following conditions would need to be fulfilled fo
 * The only information known about the triangle is the angle *α* and the sides *a* and *c*.
 * The angle *α* is acute (i.e., *α* < 90°).
 * The side *a* is shorter than the side *c* (i.e., *a* < *c*).
-* The side *a* is longer than the altitude *h* from angle *β*, where 1=*h* = *c* sin *α* (i.e., *a* > *h*).
+* The side *a* is longer than the altitude *h* from angle *β*, where *h* = *c* sin *α* (i.e., *a* > *h*).
 
 If all the above conditions are true, then each of angles *β* and *β′* produces a valid triangle, meaning that both of the following are true:
 
@@ -47,7 +47,7 @@ The following are examples of how to solve a problem using the law of sines.
 
 ### Example 1
 
-Given: side 1=*a* = 20, side 1=*c* = 24, and angle 1=*γ* = 40°. Angle *α* is desired.
+Given: side *a* = 20, side *c* = 24, and angle *γ* = 40°. Angle *α* is desired.
 
 Using the law of sines, we conclude that
 
@@ -59,7 +59,7 @@ Using the law of sines, we conclude that
 \alpha = \arcsin\left( \frac{20\sin (40^\circ)}{24} \right) \approx 32.39^\circ.
 \]
 
-Note that the potential solution 1=*α* = 147.61° is excluded because that would necessarily give 1=*α* + *β* + *γ* > 180°.
+Note that the potential solution *α* = 147.61° is excluded because that would necessarily give *α* + *β* + *γ* > 180°.
 
 ### Example 2
 

@@ -4,7 +4,7 @@
 
 In geometry, the area enclosed by a circle of radius is π*r*\(^{2}\). Here, the Greek letter represents the constant ratio of the circumference of any circle to its diameter, approximately equal to 3.14159.
 
-One method of deriving this formula, which originated with Archimedes, involves viewing the circle as the limit of a sequence of regular polygons with an increasing number of sides. The area of a regular polygon is half its perimeter multiplied by the distance from its center to its sides, and because the sequence tends to a circle, the corresponding formula–that the area is half the circumference times the radius–namely, 1=*A* = , holds for a circle.
+One method of deriving this formula, which originated with Archimedes, involves viewing the circle as the limit of a sequence of regular polygons with an increasing number of sides. The area of a regular polygon is half its perimeter multiplied by the distance from its center to its sides, and because the sequence tends to a circle, the corresponding formula–that the area is half the circumference times the radius–namely, *A* = , holds for a circle.
 
 ## Terminology
 Although often referred to as the area of a circle in informal contexts, strictly speaking, the term *disk* refers to the interior region of the circle, while circle is reserved for the boundary only, which is a curve and covers no area itself. Therefore, the *area of a disk* is the more precise phrase for the area enclosed by a circle.

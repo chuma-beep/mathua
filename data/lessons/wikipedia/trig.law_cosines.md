@@ -32,7 +32,7 @@ a=b\cos\gamma \pm \sqrt{c^2 -b^2\sin^2\gamma}\,.
 
 These formulas produce high round-off errors in floating point calculations if the triangle is very acute, i.e., if *c* is small relative to *a* and *b* or *γ* is small compared to 1. It is even possible to obtain a result slightly greater than one for the cosine of an angle.
 
-The third formula shown is the result of solving for *a* in the quadratic equation 1=*a*\(^{2}\) − 2*ab* cos *γ* + *b*\(^{2}\) − *c*\(^{2}\) = 0. This equation can have 2, 1, or 0 positive solutions corresponding to the number of possible triangles given the data. It will have two positive solutions if *b* sin *γ* < *c* < *b*, only one positive solution if 1=*c* = *b* sin *γ*, and no solution if *c* < *b* sin *γ*. These different cases are also explained by the side-side-angle congruence ambiguity.
+The third formula shown is the result of solving for *a* in the quadratic equation *a*\(^{2}\) − 2*ab* cos *γ* + *b*\(^{2}\) − *c*\(^{2}\) = 0. This equation can have 2, 1, or 0 positive solutions corresponding to the number of possible triangles given the data. It will have two positive solutions if *b* sin *γ* < *c* < *b*, only one positive solution if *c* = *b* sin *γ*, and no solution if *c* < *b* sin *γ*. These different cases are also explained by the side-side-angle congruence ambiguity.
 
 ## History
 Book II of Euclid's *Elements*, compiled c. 300 BC from material up to a century or two older, contains a geometric theorem corresponding to the law of cosines but expressed in the contemporary language of rectangle areas; Hellenistic trigonometry developed later, and sine and cosine per se first appeared centuries afterward in India.

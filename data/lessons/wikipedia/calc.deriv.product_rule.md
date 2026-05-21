@@ -231,7 +231,7 @@ For partial derivatives, we have
 = \sum_S {\partial^{|S|} u \over \prod_{i\in S} \partial x_i} \cdot {\partial^{n-|S|} v \over \prod_{i\not\in S} \partial x_i}
 \]
 
-where the index runs through all 2\(^{*n*}\) subsets of , and is the cardinality of. For example, when 1=*n* = 3,
+where the index runs through all 2\(^{*n*}\) subsets of , and is the cardinality of. For example, when *n* = 3,
 
 \[
 \begin{align} & {\partial^3 \over \partial x_1\,\partial x_2\,\partial x_3} (uv) \\[1ex]

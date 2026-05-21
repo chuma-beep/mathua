@@ -6,7 +6,7 @@ In arithmetic and number theory, the **least common multiple** (**LCM**), **lowe
 
 The least common multiple of the denominators of two fractions is the "lowest common denominator" (lcd), and can be used for adding, subtracting or comparing the fractions.
 
-The least common multiple of more than two integers *a*, *b*, *c*,.. . , usually denoted by lcm(*a*, *b*, *c*,.. . ), is defined as the smallest positive integer that is divisible by each of *a*, *b*, *c*,.. . ## Overview
+The least common multiple of more than two integers *a*, *b*, *c*,... , usually denoted by lcm(*a*, *b*, *c*,... ), is defined as the smallest positive integer that is divisible by each of *a*, *b*, *c*,... ## Overview
 A multiple of a number is the product of that number and an integer. For example, 10 is a multiple of 5 because 5 × 2 = 10, so 10 is divisible by 5 and 2. Because 10 is the smallest positive integer that is divisible by both 5 and 2, it is the least common multiple of 5 and 2. By the same principle, 10 is the least common multiple of −5 and −2 as well.
 
 ### Notation
@@ -17,15 +17,15 @@ The least common multiple of two integers *a* and *b* is denoted as lcm(*a*, *b*
 
 Multiples of 4 are:
 
-\(4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76,.. .\)
+\(4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76,... \)
 
 Multiples of 6 are:
 
-\(6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72,.. .\)
+\(6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72,... \)
 
 *Common multiples* of 4 and 6 are the numbers that are in both lists:
 
-\(12, 24, 36, 48, 60, 72,.. .\)
+\(12, 24, 36, 48, 60, 72,... \)
 
 In this list, the smallest number is 12. Hence, the *least common multiple* is 12.
 
@@ -114,9 +114,7 @@ According to the fundamental theorem of arithmetic, every integer greater than 1
 
 \(n = 2^{n_2} 3^{n_3} 5^{n_5} 7^{n_7} \cdots = \prod_p p^{n_p},\)
 
-where the exponents *n*\(_{2}\), *n*\(_{3}\),.. . are non-negative integers; for example, 84 = 2\(^{2}\) 3\(^{1}\) 5\(^{0}\) 7\(^{1}\) 11\(^{0}\) 13\(^{0}\).. .
-
-Given two positive integers \(a = \prod_p p^{a_p}\) and \(b = \prod_p p^{b_p}\), their greatest common divisor and least common multiple are given by the formulas
+where the exponents *n*\(_{2}\), *n*\(_{3}\),... are non-negative integers; for example, 84 = 2\(^{2}\) 3\(^{1}\) 5\(^{0}\) 7\(^{1}\) 11\(^{0}\) 13\(^{0}\)... Given two positive integers \(a = \prod_p p^{a_p}\) and \(b = \prod_p p^{b_p}\), their greatest common divisor and least common multiple are given by the formulas
 \(\gcd(a,b) = \prod_p p^{\min(a_p, b_p)}\)
 
 and

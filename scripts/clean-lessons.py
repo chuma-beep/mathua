@@ -146,6 +146,8 @@ def clean_template_residue(text: str) -> str:
     text = re.sub(r'\b\d+=\}\}', '', text)
     text = re.sub(r'\b1=\}', '', text)
     text = re.sub(r'\}\} ?', '', text)
+    # Strip remaining "1=" template parameter prefixes (param 1 = value)
+    text = re.sub(r'\b1=\s*', '', text)
     text = re.sub(r' +', ' ', text)
     text = re.sub(r'^:\s*', '', text, flags=re.MULTILINE)
     text = re.sub(r'\n{3,}', '\n\n', text)

@@ -65,7 +65,7 @@ The square root function is continuous for all nonnegative , and differentiable 
 f'(x) = \frac{1}{2\sqrt x}.
 \]
 
-The Taylor series of \(\sqrt{1 + x}\) about 1=*x* = 0 converges for |*x*| ≤ 1, and is given by
+The Taylor series of \(\sqrt{1 + x}\) about *x* = 0 converges for |*x*| ≤ 1, and is given by
 
 \[
 \sqrt{1 + x} = \sum_{n=0}^\infty \frac{(-1)^n(2n)!}{(1-2n)(n!)^2(4^n)}x^n = 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16} x^3 - \frac{5}{128} x^4 + \cdots,
@@ -122,51 +122,51 @@ A result from the study of irrational numbers as simple continued fractions was 
 
 {|
 |-
-|align="right"|\(\sqrt{2}\)|| = [1; 2, 2,.. .]
+|align="right"|\(\sqrt{2}\)|| = [1; 2, 2,... ]
 |-
-|align="right"|\(\sqrt{3}\)|| = [1; 1, 2, 1, 2,.. .]
+|align="right"|\(\sqrt{3}\)|| = [1; 1, 2, 1, 2,... ]
 |-
 |align="right"|\(\sqrt{4}\)|| = [2]
 |-
-|align="right"|\(\sqrt{5}\)|| = [2; 4, 4,.. .]
+|align="right"|\(\sqrt{5}\)|| = [2; 4, 4,... ]
 |-
-|align="right"|\(\sqrt{6}\)|| = [2; 2, 4, 2, 4,.. .]
+|align="right"|\(\sqrt{6}\)|| = [2; 2, 4, 2, 4,... ]
 |-
-|align="right"|\(\sqrt{7}\)|| = [2; 1, 1, 1, 4, 1, 1, 1, 4,.. .]
+|align="right"|\(\sqrt{7}\)|| = [2; 1, 1, 1, 4, 1, 1, 1, 4,... ]
 |-
-|align="right"|\(\sqrt{8}\)||= [2; 1, 4, 1, 4,.. .]
+|align="right"|\(\sqrt{8}\)||= [2; 1, 4, 1, 4,... ]
 |-
 |align="right"|\(\sqrt{9}\)|| = [3]
 |-
-|align="right"|\(\sqrt{10}\)|| = [3; 6, 6,.. .]
+|align="right"|\(\sqrt{10}\)|| = [3; 6, 6,... ]
 |-
-|align="right"|\(\sqrt{11}\)|| = [3; 3, 6, 3, 6,.. .]
+|align="right"|\(\sqrt{11}\)|| = [3; 3, 6, 3, 6,... ]
 |-
-|align="right"|\(\sqrt{12}\)|| = [3; 2, 6, 2, 6,.. .]
+|align="right"|\(\sqrt{12}\)|| = [3; 2, 6, 2, 6,... ]
 |-
-|align="right"|\(\sqrt{13}\)|| = [3; 1, 1, 1, 1, 6, 1, 1, 1, 1, 6,.. .]
+|align="right"|\(\sqrt{13}\)|| = [3; 1, 1, 1, 1, 6, 1, 1, 1, 1, 6,... ]
 |-
-|align="right"|\(\sqrt{14}\)|| = [3; 1, 2, 1, 6, 1, 2, 1, 6,.. .]
+|align="right"|\(\sqrt{14}\)|| = [3; 1, 2, 1, 6, 1, 2, 1, 6,... ]
 |-
-|align="right"|\(\sqrt{15}\)|| = [3; 1, 6, 1, 6,.. .]
+|align="right"|\(\sqrt{15}\)|| = [3; 1, 6, 1, 6,... ]
 |-
 |align="right"|\(\sqrt{16}\)|| = [4]
 |-
-|align="right"|\(\sqrt{17}\)|| = [4; 8, 8,.. .]
+|align="right"|\(\sqrt{17}\)|| = [4; 8, 8,... ]
 |-
-|align="right"|\(\sqrt{18}\)|| = [4; 4, 8, 4, 8,.. .]
+|align="right"|\(\sqrt{18}\)|| = [4; 4, 8, 4, 8,... ]
 |-
-|align="right"|\(\sqrt{19}\)|| = [4; 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2, 8,.. .]
+|align="right"|\(\sqrt{19}\)|| = [4; 2, 1, 3, 1, 2, 8, 2, 1, 3, 1, 2, 8,... ]
 |-
-|align="right"|\(\sqrt{20}\)|| = [4; 2, 8, 2, 8,.. .]
+|align="right"|\(\sqrt{20}\)|| = [4; 2, 8, 2, 8,... ]
 |}
 
-The square bracket notation used above is a short form for a continued fraction. Written in the more suggestive algebraic form, the simple continued fraction for the square root of 11, [3; 3, 6, 3, 6,.. .], looks like this:
+The square bracket notation used above is a short form for a continued fraction. Written in the more suggestive algebraic form, the simple continued fraction for the square root of 11, [3; 3, 6, 3, 6,... ], looks like this:
 \[
 \sqrt{11} = 3 + \cfrac{1}{3 + \cfrac{1}{6 + \cfrac{1}{3 + \cfrac{1}{6 + \cfrac{1}{3 + \ddots}
 \]
 
-where the two-digit pattern {3, 6} repeats over and over again in the partial denominators. Since 1=11 = 3\(^{2}\) + 2, the above is also identical to the following generalized continued fractions:
+where the two-digit pattern {3, 6} repeats over and over again in the partial denominators. Since 11 = 3\(^{2}\) + 2, the above is also identical to the following generalized continued fractions:
 
 \[
 \sqrt{11} = 3 + \cfrac{2}{6 + \cfrac{2}{6 + \cfrac{2}{6 + \cfrac{2}{6 + \cfrac{2}{6 + \ddots} = 3 + \cfrac{6}{20 - 1 - \cfrac{1}{20 - \cfrac{1}{20 - \cfrac{1}{20 - \cfrac{1}{20 - \ddots}.
@@ -190,11 +190,11 @@ By trial-and-error, one can square an estimate for \(\sqrt{a}\) and raise or low
 
 as it allows one to adjust the estimate by some amount and measure the square of the adjustment in terms of the original estimate and its square.
 
-The most common iterative method of square root calculation by hand is known as the "Babylonian method" or "Heron's method" after the first-century Greek philosopher Heron of Alexandria, who first described it. The method uses the same iterative scheme as the Newton–Raphson method yields when applied to the function 1=*y* = *f*(*x*) = *x*\(^{2}\) − *a*, using the fact that its slope at any point is 1=*dy*/*dx* = *, but predates it by many centuries. The algorithm is to repeat a simple calculation that results in a number closer to the actual square root each time it is repeated with its result as the new input. The motivation is that if is an overestimate to the square root of a nonnegative real number then *a*/*x'' will be an underestimate and so the average of these two numbers is a better approximation than either of them. However, the inequality of arithmetic and geometric means shows this average is always an overestimate of the square root (as noted below), and so it can serve as a new overestimate with which to repeat the process, which converges as a consequence of the successive overestimates and underestimates being closer to each other after each iteration. To find :
+The most common iterative method of square root calculation by hand is known as the "Babylonian method" or "Heron's method" after the first-century Greek philosopher Heron of Alexandria, who first described it. The method uses the same iterative scheme as the Newton–Raphson method yields when applied to the function *y* = *f*(*x*) = *x*\(^{2}\) − *a*, using the fact that its slope at any point is *dy*/*dx* = *, but predates it by many centuries. The algorithm is to repeat a simple calculation that results in a number closer to the actual square root each time it is repeated with its result as the new input. The motivation is that if is an overestimate to the square root of a nonnegative real number then *a*/*x'' will be an underestimate and so the average of these two numbers is a better approximation than either of them. However, the inequality of arithmetic and geometric means shows this average is always an overestimate of the square root (as noted below), and so it can serve as a new overestimate with which to repeat the process, which converges as a consequence of the successive overestimates and underestimates being closer to each other after each iteration. To find :
 
 # Start with an arbitrary positive start value. The closer to the square root of , the fewer the iterations that will be needed to achieve the desired precision.
 # Replace by the average (*x* + *a*/*x*) / 2 between *x* and *a*/*x*.
-# Repeat from step 2, using this average as the new value of. That is, if an arbitrary guess for \(\sqrt{a}\) is *x*\(_{0}\), and 1 = *x*\(_{*n* + 1}\) = (*x\(_{n}\)* + *a*/*x\(_{n}\)*) / 2, then each *x*\(_{*n*}\) is an approximation of \(\sqrt{a}\) which is better for large than for small. If is positive, the convergence is quadratic, which means that in approaching the limit, the number of correct digits roughly doubles in each next iteration. If 1=*a* = 0, the convergence is only linear; however, \(\sqrt{0} = 0\) so in this case no iteration is needed.
+# Repeat from step 2, using this average as the new value of. That is, if an arbitrary guess for \(\sqrt{a}\) is *x*\(_{0}\), and 1 = *x*\(_{*n* + 1}\) = (*x\(_{n}\)* + *a*/*x\(_{n}\)*) / 2, then each *x*\(_{*n*}\) is an approximation of \(\sqrt{a}\) which is better for large than for small. If is positive, the convergence is quadratic, which means that in approaching the limit, the number of correct digits roughly doubles in each next iteration. If *a* = 0, the convergence is only linear; however, \(\sqrt{0} = 0\) so in this case no iteration is needed.
 
 Using the identity
 \[
@@ -205,13 +205,13 @@ the computation of the square root of a positive number can be reduced to that o
 
 The time complexity for computing a square root with digits of precision is equivalent to that of multiplying two -digit numbers.
 
-Another useful method for calculating the square root is the shifting nth root algorithm, applied for 1= *n* = 2.
+Another useful method for calculating the square root is the shifting nth root algorithm, applied for *n* = 2.
 
 The name of the square root function varies from programming language to programming language, with sqrt (often pronounced "squirt") being common, used in C and derived languages such as C++, JavaScript, PHP, and Python.
 
 ==Square roots of negative and complex numbers==
 
-The square of any positive or negative number is positive, and the square of 0 is 0. Therefore, no negative number can have a real square root. However, it is possible to work with a more inclusive set of numbers, called the complex numbers, that does contain solutions to the square root of a negative number. This is done by introducing a new number, denoted by *i* (sometimes by *j*, especially in the context of electricity where *i* traditionally represents electric current) and called the imaginary unit, which is *defined* such that 1=*i*\(^{2}\) = −1. Using this notation, we can think of *i* as the square root of −1, but we also have 1=(−*i*)\(^{2}\) = *i*\(^{2}\) = −1 and so −*i* is also a square root of −1. By convention, the principal square root of −1 is *i*, or more generally, if *x* is any nonnegative number, then the principal square root of −*x* is
+The square of any positive or negative number is positive, and the square of 0 is 0. Therefore, no negative number can have a real square root. However, it is possible to work with a more inclusive set of numbers, called the complex numbers, that does contain solutions to the square root of a negative number. This is done by introducing a new number, denoted by *i* (sometimes by *j*, especially in the context of electricity where *i* traditionally represents electric current) and called the imaginary unit, which is *defined* such that *i*\(^{2}\) = −1. Using this notation, we can think of *i* as the square root of −1, but we also have (−*i*)\(^{2}\) = *i*\(^{2}\) = −1 and so −*i* is also a square root of −1. By convention, the principal square root of −1 is *i*, or more generally, if *x* is any nonnegative number, then the principal square root of −*x* is
 
 \[
 \sqrt{-x} = i \sqrt x.
@@ -222,7 +222,7 @@ The right side (as well as its negative) is indeed a square root of −*x*; sinc
 (i\sqrt x)^2 = i^2(\sqrt x)^2 = (-1)x = -x.
 \]
 
-For every non-zero complex number there exist precisely two numbers such that 1=*w*\(^{2}\) = *z*: the principal square root of (defined below), and its negative.
+For every non-zero complex number there exist precisely two numbers such that *w*\(^{2}\) = *z*: the principal square root of (defined below), and its negative.
 
 ### Principal square root of a complex number
 

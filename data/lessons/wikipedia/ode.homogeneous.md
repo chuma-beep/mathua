@@ -10,7 +10,7 @@ A first order differential equation is said to be homogeneous if it may be writt
 f(x,y) \, dy = g(x,y) \, dx,
 \]
 
-where and are homogeneous functions of the same degree of and. In this case, the change of variable 1=*y* = *ux* leads to an equation of the form
+where and are homogeneous functions of the same degree of and. In this case, the change of variable *y* = *ux* leads to an equation of the form
 
 \[
 \frac{dx}{x} = h(u) \, du,
@@ -44,7 +44,7 @@ Thus,
 \]
 
 ### Solution method
-In the quotient \(\frac{M(tx,ty)}{N(tx,ty)} = \frac{M(x,y)}{N(x,y)}\), we can let 1=*t* = to simplify this quotient to a function of the single variable :
+In the quotient \(\frac{M(tx,ty)}{N(tx,ty)} = \frac{M(x,y)}{N(x,y)}\), we can let *t* = to simplify this quotient to a function of the single variable :
 
 \[
 \frac{M(x,y)}{N(x,y)} = \frac{M(tx,ty)}{N(tx,ty)} = \frac{M(1,y/x)}{N(1,y/x)}=f(y/x)\,.
@@ -56,7 +56,7 @@ That is
 \frac{dy}{dx} = -f(y/x).
 \]
 
-Introduce the change of variables 1=*y* = *ux*; differentiate using the product rule:
+Introduce the change of variables *y* = *ux*; differentiate using the product rule:
 
 \[
 \frac{dy}{dx}=\frac{d(ux)}{dx} = x\frac{du}{dx} + u\frac{dx}{dx} = x\frac{du}{dx} + u.
@@ -77,7 +77,7 @@ or
 which can now be integrated directly: ln *x* equals the antiderivative of the right-hand side (see ordinary differential equation).
 
 ### Special case
-A first order differential equation of the form (, , are all constants)
+A first order differential equation of the form (, are all constants)
 
 \[
 \left(ax + by + c\right) dx + \left(ex + fy + g\right) dy = 0
@@ -95,7 +95,7 @@ where
 \alpha=\frac{cf-bg}{af-be}; \;\; \beta=\frac{ag-ce}{af-be}\,.
 \]
 
-For cases where 1=*af* = *be*, introduce the change of variables 1=*u* = *ax* + *by* or 1=*u* = *ex* + *fy*; differentiation yields:
+For cases where *af* = *be*, introduce the change of variables *u* = *ax* + *by* or *u* = *ex* + *fy*; differentiation yields:
 
 \[
 \frac{du}{dx}=a-b\bigg(\frac{ac+au}{ag+eu}\bigg),

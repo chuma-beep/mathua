@@ -48,7 +48,7 @@ This states a general formula for the sum of the natural numbers less than or eq
 
 **Proof.** Let \(P(n)\) be the statement \(0 + 1 + 2 + \cdots + n = \tfrac{n(n + 1)}{2}.\) We give a proof by induction on \(n\).
 
-*Base case:* Show that the statement holds for the smallest natural number 1=*n* = 0.
+*Base case:* Show that the statement holds for the smallest natural number *n* = 0.
 
 \(P(0)\) is clearly true: \(0 = \tfrac{0(0 + 1)}{2}\,.\)
 
@@ -125,7 +125,7 @@ All variants of induction are special cases of transfinite induction; see below.
 
 ### Base case other than 0 or 1
 If one wishes to prove a statement, not for all natural numbers, but only for all numbers greater than or equal to a certain number , then the proof by induction consists of the following:
-# Showing that the statement holds when 1=*n* = *b*.
+# Showing that the statement holds when *n* = *b*.
 # Showing that if the statement holds for an arbitrary number *n* ≥ *b*, then the same statement also holds for *n* + 1.
 This can be used, for example, to show that 2\(^{*n*}\) ≥ *n* + 5 for *n* ≥ 3.
 
@@ -134,13 +134,13 @@ In this way, one can prove that some statement *P*(*n*) holds for all *n* ≥ 1,
 #### Example: forming dollar amounts by coins
 Assume an infinite supply of 4- and 5-dollar coins. Induction can be used to prove that any whole amount of dollars greater than or equal to 12 can be formed by a combination of such coins. Let *S*(*k*) denote the statement " dollars can be formed by a combination of 4- and 5-dollar coins". The proof that *S*(*k*) is true for all *k* ≥ 12 can then be achieved by induction on as follows:
 
-*Base case:* Showing that *S*(*k*) holds for 1=*k* = 12 is simple: take three 4-dollar coins.
+*Base case:* Showing that *S*(*k*) holds for *k* = 12 is simple: take three 4-dollar coins.
 
 *Induction step:* Given that *S*(*k*) holds for some value of *k* ≥ 12 (*induction hypothesis*), prove that *S*(*k* + 1) holds, too. Assume *S*(*k*) is true for some arbitrary *k* ≥ 12. If there is a solution for dollars that includes at least one 4-dollar coin, replace it by a 5-dollar coin to make *k* + 1 dollars. Otherwise, if only 5-dollar coins are used, must be a multiple of 5 and so at least 15; but then we can replace three 5-dollar coins by four 4-dollar coins to make *k* + 1 dollars. In each case, *S*(*k* + 1) is true.
 
 Therefore, by the principle of induction, *S*(*k*) holds for all *k* ≥ 12, and the proof is complete.
 
-In this example, although *S*(*k*) also holds for \(k \in \{ 4, 5, 8, 9, 10 \}\), the above proof cannot be modified to replace the minimum amount of 12 dollar to any lower value. For 1=*m* = 11, the base case is actually false; for 1=*m* = 10, the second case in the induction step (replacing three 5- by four 4-dollar coins) will not work; let alone for even lower. ### Induction on more than one counter
+In this example, although *S*(*k*) also holds for \(k \in \{ 4, 5, 8, 9, 10 \}\), the above proof cannot be modified to replace the minimum amount of 12 dollar to any lower value. For *m* = 11, the base case is actually false; for *m* = 10, the second case in the induction step (replacing three 5- by four 4-dollar coins) will not work; let alone for even lower. ### Induction on more than one counter
 It is sometimes desirable to prove a statement involving two natural numbers, and , by iterating the induction process. That is, one proves a base case and an induction step for , and in each of those proves a base case and an induction step for. See, for example, the proof of commutativity accompanying *addition of natural numbers*. More complicated arguments involving three or more counters are also possible.
 
 ### Infinite descent
@@ -226,7 +226,7 @@ However, there will be slight differences in the structure and the assumptions o
 \[
 \begin{align}
 4 \cdot 3+5 \cdot 0=12\\
-4 \cdot 2+5 \cdot 1=13\\
+4 \cdot 2+5 \cdot 13\\
 4 \cdot 1+5 \cdot 2=14\\
 4 \cdot 0+5 \cdot 3=15
 \end{align}
@@ -251,7 +251,7 @@ The induction step must be proved for all values of. To illustrate this, Joel E.
 
 *Induction step:* assume as induction hypothesis that within any set of \(n\) horses, there is only one color. Now look at any set of \(n+1\) horses. Number them: \(1, 2, 3, \dotsc, n, n+1\). Consider the sets \(\left\{1, 2, 3, \dotsc, n\right\}\) and \(\left\{2, 3, 4, \dotsc, n+1\right\}\). Each is a set of only \(n\) horses, therefore within each there is only one color. But the two sets overlap, so there must be only one color among all \(n+1\) horses.
 
-The base case \(n=1\) is trivial, and the induction step is correct in all cases \(n > 1\). However, the argument used in the induction step is incorrect for \(n+1=2\), because the statement that "the two sets overlap" is false for \(\left\{1\right\}\) and \(\left\{2\right\}\).
+The base case \(n=1\) is trivial, and the induction step is correct in all cases \(n > 1\). However, the argument used in the induction step is incorrect for \(n+2\), because the statement that "the two sets overlap" is false for \(\left\{1\right\}\) and \(\left\{2\right\}\).
 
 ## Formalization
 In **second-order logic**, one can write down the "axiom of induction" as follows:
@@ -269,7 +269,7 @@ The first quantifier in the axiom ranges over *predicates* rather than over indi
 The axiom of structural induction for the natural numbers was first formulated by Peano, who used it to specify the natural numbers together with the following four other axioms:
 
 # 0 is a natural number.
-# The successor function of every natural number yields a natural number 1=(*s*(*x*) = *x* + 1).
+# The successor function of every natural number yields a natural number (*s*(*x*) = *x* + 1).
 # The successor function is injective.
 # 0 is not in the range of. In **first-order ZFC set theory**, quantification over predicates is not allowed, but one can still express induction by quantification over sets:
 

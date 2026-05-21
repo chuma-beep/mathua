@@ -72,7 +72,7 @@ Venn diagrams typically represent two or three sets, but there are forms that al
 | style="vertical-align:top;"|
 |}
 
-For higher numbers of sets, some loss of symmetry in the diagrams is unavoidable. Venn was keen to find "symmetrical figures.. . elegant in themselves," that represented higher numbers of sets, and he devised an *elegant* four-set diagram using ellipses (see below). He also gave a construction for Venn diagrams for *any* number of sets, where each successive curve that delimits a set interleaves with previous curves, starting with the three-circle diagram.
+For higher numbers of sets, some loss of symmetry in the diagrams is unavoidable. Venn was keen to find "symmetrical figures... elegant in themselves," that represented higher numbers of sets, and he devised an *elegant* four-set diagram using ellipses (see below). He also gave a construction for Venn diagrams for *any* number of sets, where each successive curve that delimits a set interleaves with previous curves, starting with the three-circle diagram.
 
 Image:Venn4.svg|Venn's construction for four sets (use Gray code to compute, the digit 1 means in the set, and the digit 0 means not in the set)
 Image:Venn5.svg|Venn's construction for five sets

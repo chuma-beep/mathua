@@ -49,7 +49,7 @@ All the points extending forever in one direction from a particular point are to
 
 On the number line, the distance between two points is the unit length if and only if the difference of the represented numbers equals 1. Other choices are possible.
 
-One of the most common choices is the *logarithmic scale*, which is a representation of the *positive* numbers on a line, such that the distance of two points is the unit length, if the ratio of the represented numbers has a fixed value, typically 10. In such a logarithmic scale, the origin represents 1; one inch to the right, one has 10, one inch to the right of 10 one has 1=10×10 = 100, then 1=10×100 = 1000 = 10\(^{3}\), then 1=10×1000 = 10,000 = 10\(^{4}\), etc. Similarly, one inch to the left of 1, one has 1=1/10 = 10\(^{–1}\), then 1=1/100 = 10\(^{–2}\), etc.
+One of the most common choices is the *logarithmic scale*, which is a representation of the *positive* numbers on a line, such that the distance of two points is the unit length, if the ratio of the represented numbers has a fixed value, typically 10. In such a logarithmic scale, the origin represents 1; one inch to the right, one has 10, one inch to the right of 10 one has 10×10 = 100, then 10×100 = 1000 = 10\(^{3}\), then 10×1000 = 10,000 = 10\(^{4}\), etc. Similarly, one inch to the left of 1, one has 1/10 = 10\(^{–1}\), then 1/100 = 10\(^{–2}\), etc.
 
 This approach is useful, when one wants to represent, on the same figure, values with very different order of magnitude. For example, one requires a logarithmic scale for representing simultaneously the size of the different bodies that exist in the Universe, typically, a photon, an electron, an atom, a molecule, a human, the Earth, the Solar System, a galaxy, and the visible Universe.
 

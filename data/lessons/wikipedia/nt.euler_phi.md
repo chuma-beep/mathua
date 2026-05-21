@@ -39,7 +39,7 @@ If is prime and \(k\geq1\), then
 *Proof*: Since is a prime number, the only possible values of \(\gcd(p^{k},m)\) are \(1,p,p^{2},\dots,p^{k}\), and the only way to have \(\gcd(p^{k},m)>1\) is if is a multiple of , that is, \(m \in \{ p, 2p, 3p, \ldots, p^{k-1} p= p^{k}\}\), and there are \(p^{k-1}\) such multiples not greater than \(p^{k}\). Therefore, the other \(p^{k}-p^{k-1}\) numbers are all relatively prime to \(p^{k}\).
 
 #### Proof of Euler's product formula
-The fundamental theorem of arithmetic states that if *n* > 1 there is a unique expression \(n = p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r},\) where *p*\(_{1}\) < *p*\(_{2}\) <.. . < *p*\(_{*r*}\) are prime numbers and each *k*\(_{*i*}\) ≥ 1. (The case 1=*n* = 1 corresponds to the empty product.) Repeatedly using the multiplicative property of and the formula for *φ*(*p*\(^{*k*}\)) gives
+The fundamental theorem of arithmetic states that if *n* > 1 there is a unique expression \(n = p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r},\) where *p*\(_{1}\) < *p*\(_{2}\) <... < *p*\(_{*r*}\) are prime numbers and each *k*\(_{*i*}\) ≥ 1. (The case *n* = 1 corresponds to the empty product.) Repeatedly using the multiplicative property of and the formula for *φ*(*p*\(^{*k*}\)) gives
 
 \(\begin{array} {rcl}
 \varphi(n)&=& \varphi(p_1^{k_1})\, \varphi(p_2^{k_2})

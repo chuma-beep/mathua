@@ -25,7 +25,7 @@ Calculating the perimeter has several practical applications. A calculated perim
 |-
 | regular polygon || \(2nb \sin\left(\frac{\pi}{n}\right)\) || where \(n\) is the number of sides and \(b\) is the distance between center of the polygon and one of the vertices of the polygon.
 |-
-| general polygon || \(a_1 + a_2 + a_3 + \cdots + a_n = \sum_{i=1}^n a_i\) || where \(a_{i}\) is the length of the \(i\)-th (1st, 2nd, 3rd.. . *n*th) side of an *n*-sided polygon.
+| general polygon || \(a_1 + a_2 + a_3 + \cdots + a_n = \sum_{i=1}^n a_i\) || where \(a_{i}\) is the length of the \(i\)-th (1st, 2nd, 3rd... *n*th) side of an *n*-sided polygon.
 |}
 
 The perimeter is the distance around a shape. Perimeters for more general shapes can be calculated, as any path, with \(\int_0^L \mathrm{d}s\), where \(L\) is the length of the path and \(ds\) is an infinitesimal line element. Both of these must be replaced by algebraic forms in order to be practically calculated. If the perimeter is given as a closed piecewise smooth plane curve \(\gamma: [a,b] \to \mathbb{R}^2\) with

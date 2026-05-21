@@ -8,7 +8,7 @@ In mathematics, a **linear differential equation** is a differential equation th
 a_0(x)y + a_1(x)y' + a_2(x)y'' \cdots + a_n(x)y^{(n)} = b(x)
 \]
 
-where 1=*a*\(_{0}\)(*x*),.. ., and *b*(*x*) are arbitrary differentiable functions that do not need to be linear, and *y*′,.. ., *y*\(^{(*n*)}\) are the successive derivatives of an unknown function of the variable. Such an equation is an ordinary differential equation (ODE). A *linear differential equation* may also be a linear partial differential equation (PDE), if the unknown function depends on several variables, and the derivatives that appear in the equation are partial derivatives.
+where *a*\(_{0}\)(*x*),... , and *b*(*x*) are arbitrary differentiable functions that do not need to be linear, and *y*′,... , *y*\(^{(*n*)}\) are the successive derivatives of an unknown function of the variable. Such an equation is an ordinary differential equation (ODE). A *linear differential equation* may also be a linear partial differential equation (PDE), if the unknown function depends on several variables, and the derivatives that appear in the equation are partial derivatives.
 
 ## Types of solution
 
@@ -44,7 +44,7 @@ A **linear differential operator** (abbreviated, in this article, as *linear ope
 a_0(x)+a_1(x)\frac{d}{dx} + \cdots +a_n(x)\frac{d^n}{dx^n},
 \]
 
-where *a*\(_{0}\)(*x*),.. ., *a*\(_{*n*}\)(*x*) are differentiable functions, and the nonnegative integer is the *order* of the operator (if *a*\(_{*n*}\)(*x*) is not the zero function).
+where *a*\(_{0}\)(*x*),... , *a*\(_{*n*}\)(*x*) are differentiable functions, and the nonnegative integer is the *order* of the operator (if *a*\(_{*n*}\)(*x*) is not the zero function).
 
 Let be a linear differential operator. The application of to a function is usually denoted *Lf* or *Lf*(*X*), if one needs to specify the variable (this must not be confused with a multiplication). A linear differential operator is a linear operator; since it maps sums to sums and the product by a scalar to the product by the same scalar.
 
@@ -68,24 +68,24 @@ may be rewritten
 Ly=b(x).
 \]
 
-There may be several variants to this notation; in particular the variable of differentiation may appear explicitly or not in and the right-hand and of the equation, such as 1=*Ly*(*x*) = *b*(*x*) or 1=*Ly* = *b*.
+There may be several variants to this notation; in particular the variable of differentiation may appear explicitly or not in and the right-hand and of the equation, such as *Ly*(*x*) = *b*(*x*) or *Ly* = *b*.
 
-The *kernel* of a linear differential operator is its kernel as a linear mapping, that is the vector space of the solutions of the (homogeneous) differential equation 1=*Ly* = 0.
+The *kernel* of a linear differential operator is its kernel as a linear mapping, that is the vector space of the solutions of the (homogeneous) differential equation *Ly* = 0.
 
-In the case of an ordinary differential operator of order , Carathéodory's existence theorem implies that, under very mild conditions, the kernel of is a vector space of dimension , and that the solutions of the equation 1=*Ly*(*x*) = *b*(*x*) have the form
+In the case of an ordinary differential operator of order , Carathéodory's existence theorem implies that, under very mild conditions, the kernel of is a vector space of dimension , and that the solutions of the equation *Ly*(*x*) = *b*(*x*) have the form
 
 \[
 S_0(x) + c_1S_1(x) + \cdots + c_n S_n(x),
 \]
 
-where *c*\(_{1}\),.. ., *c*\(_{*n*}\) are arbitrary numbers. Typically, the hypotheses of Carathéodory's theorem are satisfied in an interval , if the functions *b*, *a*\(_{0}\),.. ., *a*\(_{*n*}\) are continuous in , and there is a positive real number such that 1=|*a*\(_{*n*}\)(*x*)| > *k* for every in. ## Homogeneous equation with constant coefficients
+where *c*\(_{1}\),... , *c*\(_{*n*}\) are arbitrary numbers. Typically, the hypotheses of Carathéodory's theorem are satisfied in an interval , if the functions *b*, *a*\(_{0}\),... , *a*\(_{*n*}\) are continuous in , and there is a positive real number such that |*a*\(_{*n*}\)(*x*)| > *k* for every in. ## Homogeneous equation with constant coefficients
 A homogeneous linear differential equation has *constant coefficients* if it has the form
 
 \[
 a_0y + a_1y' + a_2y'' + \cdots + a_n y^{(n)} = 0
 \]
 
-where *a*\(_{1}\),.. ., *a*\(_{*n*}\) are (real or complex) numbers. In other words, it has constant coefficients if it is defined by a linear operator with constant coefficients.
+where *a*\(_{1}\),... , *a*\(_{*n*}\) are (real or complex) numbers. In other words, it has constant coefficients if it is defined by a linear operator with constant coefficients.
 
 The study of these differential equations with constant coefficients dates back to Leonhard Euler, who introduced the exponential function \(e^{x}\), which is the unique solution of the equation \(f' = f\), such that \(f(0) = 1\). It follows that the th derivative of \(e^{cx}\) is \(c^ne^{cx}\), and this allows solving homogeneous linear differential equations rather easily.
 
@@ -95,7 +95,7 @@ Let
 a_0y + a_1y' + a_2y'' + \cdots + a_ny^{(n)} = 0
 \]
 
-be a homogeneous linear differential equation with constant coefficients (that is *a*\(_{0}\),.. ., *a*\(_{*n*}\) are real or complex numbers).
+be a homogeneous linear differential equation with constant coefficients (that is *a*\(_{0}\),... , *a*\(_{*n*}\) are real or complex numbers).
 
 Searching for solutions of this equation that have the form *e*\(^{*αx*}\) is equivalent to searching the constants such that
 
@@ -115,7 +115,7 @@ of the differential equation, which is the left-hand side of the characteristic 
 a_0 + a_1t + a_2 t^2 + \cdots + a_nt^n = 0.
 \]
 
-When these roots are all distinct, one has distinct solutions that are not necessarily real, even if the coefficients of the equation are real. These solutions can be shown to be linearly independent, by considering the Vandermonde determinant of the values of these solutions at 1=*x* = 0,.. ., *n* – 1. Together they form a basis of the vector space of solutions of the differential equation (that is, the kernel of the differential operator).
+When these roots are all distinct, one has distinct solutions that are not necessarily real, even if the coefficients of the equation are real. These solutions can be shown to be linearly independent, by considering the Vandermonde determinant of the values of these solutions at *x* = 0,... , *n* – 1. Together they form a basis of the vector space of solutions of the differential equation (that is, the kernel of the differential operator).
 {| class="toccolours floatright" style="width:35%; margin: 0.5em 0 0.5em 1em;"
 ! style="background:#ffffaa; padding: 3px 5px 3px 5px; font-size:larger;" | Example
 |-
@@ -128,7 +128,7 @@ y**'-2y**+2y''-2y'+y=0
 has the characteristic equation
 
 \[
-z^4-2z^3+2z^2-2z+1=0.
+z^4-2z^3+2z^2-2z+0.
 \]
 
 This has zeros, −*i*, and 1 (multiplicity 2). The solution basis is thus

@@ -41,7 +41,7 @@ and scalar multiplication
 \lambda (a,b) = (\lambda a, \lambda b),
 \]
 
-where \(\lambda\) is any real number. A simple basis of this vector space consists of the two vectors 1=**e**\(_{1}\) = (1, 0) and 1=**e**\(_{2}\) = (0, 1). These vectors form a basis (called the standard basis) because any vector 1=**v** = (*a*, *b*) of **R**\(^{2}\) may be uniquely written as
+where \(\lambda\) is any real number. A simple basis of this vector space consists of the two vectors **e**\(_{1}\) = (1, 0) and **e**\(_{2}\) = (0, 1). These vectors form a basis (called the standard basis) because any vector **v** = (*a*, *b*) of **R**\(^{2}\) may be uniquely written as
 \[
 \mathbf v = a \mathbf e_1 + b \mathbf e_2.
 \]
@@ -68,7 +68,7 @@ If is a vector space over a field , then:
 L\subseteq B\subseteq S.
 \]
 
-* has a basis (this is the preceding property with being the empty set, and 1=*S* = *V*).
+* has a basis (this is the preceding property with being the empty set, and *S* = *V*).
 * All bases of have the same cardinality, which is called the dimension of. This is the dimension theorem.
 * A generating set is a basis of if and only if it is minimal, that is, no proper subset of is also a generating set of. * A linearly independent set is a basis if and only if it is maximal, that is, it is not a proper subset of any linearly independent set.
 

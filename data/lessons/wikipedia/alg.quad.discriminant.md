@@ -138,7 +138,7 @@ When one is only interested in knowing whether a discriminant is zero (as is gen
 This is often interpreted as saying that \(\varphi(\operatorname{Disc}_x(A)) = 0\) if and only if \(A^\varphi\) has a multiple root (possibly at infinity).
 
 ### Product of polynomials
-If 1=*R* = *PQ* is a product of polynomials in *x*, then
+If *R* = *PQ* is a product of polynomials in *x*, then
 \(\begin{align}
 \operatorname{disc}_x(R) &= \operatorname{disc}_x(P)\operatorname{Res}_x(P,Q)^2\operatorname{disc}_x(Q)
 \\[5pt]
@@ -199,7 +199,7 @@ If \(a_0\) and \(a_n\) are permitted to be zero, the polynomials *A*(*x*, 1) and
 ## Use in algebraic geometry
 The typical use of discriminants in algebraic geometry is for studying plane algebraic curves, and more generally algebraic hypersurfaces. Let *V* be such a curve or hypersurface; *V* is defined as the zero set of a multivariate polynomial. This polynomial may be considered as a univariate polynomial in one of the indeterminates, with polynomials in the other indeterminates as coefficients. The discriminant with respect to the selected indeterminate defines a hypersurface *W* in the space of the other indeterminates. The points of *W* are exactly the projection of the points of *V* (including the points at infinity), which either are singular or have a tangent hyperplane that is parallel to the axis of the selected indeterminate.
 
-For example, let be a bivariate polynomial in and with real coefficients, so that 1=*f*  = 0 is the implicit equation of a real plane algebraic curve. Viewing as a univariate polynomial in with coefficients depending on , then the discriminant is a polynomial in whose roots are the -coordinates of the singular points, of the points with a tangent parallel to the -axis and of some of the asymptotes parallel to the -axis. In other words, the computation of the roots of the -discriminant and the -discriminant allows one to compute all of the remarkable points of the curve, except the inflection points.
+For example, let be a bivariate polynomial in and with real coefficients, so that *f*  = 0 is the implicit equation of a real plane algebraic curve. Viewing as a univariate polynomial in with coefficients depending on , then the discriminant is a polynomial in whose roots are the -coordinates of the singular points, of the points with a tangent parallel to the -axis and of some of the asymptotes parallel to the -axis. In other words, the computation of the roots of the -discriminant and the -discriminant allows one to compute all of the remarkable points of the curve, except the inflection points.
 
 ## Generalizations
 There are two classes of the concept of discriminant. The first class is the discriminant of an algebraic number field, which, in some cases including quadratic fields, is the discriminant of a polynomial defining the field.
@@ -272,7 +272,7 @@ More specifically, it is proportional to the squared volume of the fundamental d
 
 The discriminant is one of the most basic invariants of a number field, and occurs in several important analytic formulas such as the functional equation of the Dedekind zeta function of *K*, and the analytic class number formula for *K*. A theorem of Hermite states that there are only finitely many number fields of bounded discriminant, however determining this quantity is still an open problem, and the subject of current research.
 
-Let *K* be an algebraic number field, and let *O_{K}* be its ring of integers. Let *b*_{1},.. ., *b_{n}* be an integral basis of *O_{K}* (i.e. a basis as a **Z**-module), and let {σ_{1},.. ., σ_{*n*be the set of embeddings of *K* into the complex numbers (i.e. injective ring homomorphisms *K* → **C**). The **discriminant** of *K* is the square of the determinant of the *n* by *n* matrix *B* whose (*i*,*j*)-entry is σ_{*i*}(*b_{j}*). Symbolically,
+Let *K* be an algebraic number field, and let *O_{K}* be its ring of integers. Let *b*_{1},... , *b_{n}* be an integral basis of *O_{K}* (i.e. a basis as a **Z**-module), and let {σ_{1},... , σ_{*n*be the set of embeddings of *K* into the complex numbers (i.e. injective ring homomorphisms *K* → **C**). The **discriminant** of *K* is the square of the determinant of the *n* by *n* matrix *B* whose (*i*,*j*)-entry is σ_{*i*}(*b_{j}*). Symbolically,
 
 \(\Delta_K=\det\left(\begin{array}{cccc}
 \sigma_1(b_1) & \sigma_1(b_2) &\cdots & \sigma_1(b_n) \\
@@ -316,6 +316,6 @@ For each fundamental discriminant \(D_0 \neq 1\), there exists a unique (up to i
 #### Prime factorization
 Fundamental discriminants can also be characterized by their prime factorization. Consider the set \(S\) consisting of \(-8, 8, -4,\) the prime numbers congruent to 1 modulo 4, and the additive inverses of the prime numbers congruent to 3 modulo 4:
 \[
-S = \{-8, -4, 8, -3, 5, -7, -11, 13, 17, -19,.. . \}
+S = \{-8, -4, 8, -3, 5, -7, -11, 13, 17, -19,... \}
 \]
 An integer \(D \neq 1\) is a fundamental discriminant if and only if it is a product of elements of \(S\) that are pairwise coprime.

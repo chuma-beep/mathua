@@ -27,7 +27,7 @@ An (or series-reduced tree) is a tree in which there is no vertex of degree 2 (e
 
 ### Forest
 A is an undirected acyclic graph or equivalently a disjoint union of trees. Trivially so, each connected component of a forest is a tree. As special cases, the order-zero graph (a forest consisting of zero trees), a single tree, and an edgeless graph, are examples of forests.
-Since for every tree 1=*V* − *E* = 1, we can easily count the number of trees that are within a forest by subtracting the difference between total vertices and total edges. 1=*V* − *E* = number of trees in a forest.
+Since for every tree *V* − *E* = 1, we can easily count the number of trees that are within a forest by subtracting the difference between total vertices and total edges. *V* − *E* = number of trees in a forest.
 
 ### Polytree
 
@@ -84,7 +84,7 @@ with D ≈ 0.43992401257... and the same as above (cf. , chap. 2.3.4.4 and , cha
 
 The first few values of *r*(*n*) are
 1, 1, 2, 4, 9, 20, 48, 115, 286, 719, 1842, 4766, 12486, 32973, …. ## Types of trees
-* A *path graph* (or *linear graph*) consists of vertices arranged in a line, so that vertices and *i* + 1 are connected by an edge for 1=*i* = 1, …, *n* – 1.
+* A *path graph* (or *linear graph*) consists of vertices arranged in a line, so that vertices and *i* + 1 are connected by an edge for *i* = 1, …, *n* – 1.
 * A *starlike tree* consists of a central vertex called *root* and several path graphs attached to it. More formally, a tree is starlike if it has exactly one vertex of degree greater than 2.
 * A *star tree* is a tree which consists of a single internal vertex (and *n* – 1 leaves). In other words, a star tree of order is a tree of order with as many leaves as possible.
 * A *caterpillar tree* is a tree in which all vertices are within distance 1 of a central path subgraph.

@@ -25,7 +25,7 @@ Formally, a map \(f: A\to B\) preserves an operation \(\mu\) of arity \(k\), def
 f(\mu_A(a_1, \ldots, a_k)) = \mu_B(f(a_1), \ldots, f(a_k)),
 \]
 
-for all elements \(a_1,.. ., a_k\) in \(A\).
+for all elements \(a_1,... , a_k\) in \(A\).
 
 The operations that must be preserved by a homomorphism include 0-ary operations, that is the constants. In particular, when an identity element is required by the type of structure, the identity element of the first structure must be mapped to the corresponding identity element of the second structure.
 

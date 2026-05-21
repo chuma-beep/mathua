@@ -15,17 +15,17 @@ Two common methods for finding the volume of a solid of revolution are the disc 
 
 The disc method is used when the slice that was drawn is *perpendicular to* the axis of revolution; i.e. when integrating *parallel to* the axis of revolution.
 
-The volume of the solid formed by rotating the area between the curves of *f*(*y*) and *g*(*y*) and the lines 1=*y* = *a* and 1=*y* = *b* about the -axis is given by
+The volume of the solid formed by rotating the area between the curves of *f*(*y*) and *g*(*y*) and the lines *y* = *a* and *y* = *b* about the -axis is given by
 
 \[
 V = \pi \int_a^b \left| f(y)^2 - g(y)^2\right|\,dy\,. \]
 
-If 1=*g*(*y*) = 0 (e.g. revolving an area between the curve and the -axis), this reduces to:
+If *g*(*y*) = 0 (e.g. revolving an area between the curve and the -axis), this reduces to:
 
 \[
 V = \pi \int_a^b f(y)^2 \,dy\,. \]
 
-The method can be visualized by considering a thin horizontal rectangle at between *f*(*y*) on top and *g*(*y*) on the bottom, and revolving it about the -axis; it forms a ring (or disc in the case that 1=*g*(*y*) = 0), with outer radius *f*(*y*) and inner radius *g*(*y*). The area of a ring is π(*R*\(^{2}\) − *r*\(^{2}\)), where is the outer radius (in this case *f*(*y*)), and is the inner radius (in this case *g*(*y*)). The volume of each infinitesimal disc is therefore π*f*(*y*)\(^{2}\) *dy*. The limit of the Riemann sum of the volumes of the discs between and becomes integral (1).
+The method can be visualized by considering a thin horizontal rectangle at between *f*(*y*) on top and *g*(*y*) on the bottom, and revolving it about the -axis; it forms a ring (or disc in the case that *g*(*y*) = 0), with outer radius *f*(*y*) and inner radius *g*(*y*). The area of a ring is π(*R*\(^{2}\) − *r*\(^{2}\)), where is the outer radius (in this case *f*(*y*)), and is the inner radius (in this case *g*(*y*)). The volume of each infinitesimal disc is therefore π*f*(*y*)\(^{2}\) *dy*. The limit of the Riemann sum of the volumes of the discs between and becomes integral (1).
 
 Assuming the applicability of Fubini's theorem and the multivariate change of variables formula, the disk method may be derived in a straightforward manner by (denoting the solid as D):
 
@@ -37,12 +37,12 @@ V = \iiint_D dV = \int_a^b \int_{g(z)}^{f(z)} \int_0^{2\pi} r\,d\theta\,dr\,dz =
 
 The shell method (sometimes referred to as the "cylinder method") is used when the slice that was drawn is *parallel to* the axis of revolution; i.e. when integrating *perpendicular to* the axis of revolution.
 
-The volume of the solid formed by rotating the area between the curves of *f*(*x*) and *g*(*x*) and the lines 1=*x* = *a* and 1=*x* = *b* about the -axis is given by
+The volume of the solid formed by rotating the area between the curves of *f*(*x*) and *g*(*x*) and the lines *x* = *a* and *x* = *b* about the -axis is given by
 
 \[
 V = 2\pi \int_a^b x |f(x) - g(x)|\, dx\,. \]
 
-If 1=*g*(*x*) = 0 (e.g. revolving an area between curve and -axis), this reduces to:
+If *g*(*x*) = 0 (e.g. revolving an area between curve and -axis), this reduces to:
 
 \[
 V = 2\pi \int_a^b x | f(x) | \,dx\,. \]

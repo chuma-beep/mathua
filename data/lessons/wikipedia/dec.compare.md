@@ -10,7 +10,7 @@ For representing a non-negative number, a decimal numeral consists of
 *: \(a_ma_{m-1}\ldots a_0\)
 * or a decimal mark separating two sequences of digits (such as "20.70828")
 \(a_ma_{m-1}\ldots a_0.b_1b_2\ldots b_n\).
-If *m* > 0, that is, if the first sequence contains at least two digits, it is generally assumed that the first digit *a*\(_{*m*}\) is not zero. In some circumstances it may be useful to have one or more 0's on the left; this does not change the value represented by the decimal: for example, 1=3.14 = 03.14 = 003.14. Similarly, if the final digit on the right of the decimal mark is zero—that is, if 1=*b*\(_{*n*}\) = 0—it may be removed; conversely, trailing zeros may be added after the decimal mark without changing the represented number; for example, 1=15 = 15.0 = 15.00 and 1=5.2 = 5.20 = 5.200.
+If *m* > 0, that is, if the first sequence contains at least two digits, it is generally assumed that the first digit *a*\(_{*m*}\) is not zero. In some circumstances it may be useful to have one or more 0's on the left; this does not change the value represented by the decimal: for example, 3.14 = 03.14 = 003.14. Similarly, if the final digit on the right of the decimal mark is zero—that is, if *b*\(_{*n*}\) = 0—it may be removed; conversely, trailing zeros may be added after the decimal mark without changing the represented number; for example, 15 = 15.0 = 15.00 and 5.2 = 5.20 = 5.200.
 
 For representing a negative number, a minus sign is placed before *a*\(_{*m*}\).
 
