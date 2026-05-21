@@ -139,8 +139,8 @@ In probability theory and applications, *Bayes' rule* relates the odds of event 
 | --- | --- |
 | scope="row" | A | \(P(A)\in[0,1]\) |
 | scope="row" | not A | \(P(A^\complement)=1-P(A)\,\) |
-| scope="row" | A or B | \(\begin{align} P(A\cup B) & = P(A)+P(B)-P(A\cap B) \\ P(A\cup B) & = P(A)+P(B) \qquad\mbox{if A and B are mutually exclusive} \\ \end{align}\) |
-| scope="row" | A and B | \(\begin{align} P(A\cap B) & = P(A|B)P(B) = P(B|A)P(A)\\ P(A\cap B) & = P(A)P(B) \qquad\mbox{if A and B are independent}\\ \end{align}\) |
+| scope="row" | A or B | \(\begin{aligned} P(A\cup B) & = P(A)+P(B)-P(A\cap B) \\ P(A\cup B) & = P(A)+P(B) \qquad\mbox{if A and B are mutually exclusive} \\ \end{aligned}\) |
+| scope="row" | A and B | \(\begin{aligned} P(A\cap B) & = P(A|B)P(B) = P(B|A)P(A)\\ P(A\cap B) & = P(A)P(B) \qquad\mbox{if A and B are independent}\\ \end{aligned}\) |
 | scope="row" | A given B | \(P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{P(B|A)P(A)}{P(B)} \,\) |
 
 ## Relation to randomness and probability in quantum mechanics

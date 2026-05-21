@@ -69,11 +69,11 @@ It follows that:
 Algebraically, the right hand side simplifies as:
 
 \[
-\begin{align}
+\begin{aligned}
 \frac{k(k+1)}{2} + (k+1) &= \frac{k(k+1) + 2(k+1)}{2} \\
 &= \frac{(k+1)(k+2)}{2} \\
 &= \frac{(k+1)((k+1) + 1)}{2}.
-\end{align}
+\end{aligned}
 \]
 
 Equating the extreme left hand and right hand sides, we deduce that:
@@ -98,7 +98,7 @@ At first glance, it may appear that a more general version, \(\left|\sin nx\righ
 *Induction step:* We show the implication \(P(k) \implies P(k+1)\) for any natural number \(k\). Assume the induction hypothesis: for a given value \(n = k \geq 0\), the single case \(P(k)\) is true. Using the angle addition formula and the triangle inequality, we deduce:
 
 \[
-\begin{align}
+\begin{aligned}
 \left|\sin(k+1)x\right|
 &= \left|\sin kx \cos x+\sin x \cos kx\right| && \text{(angle addition)}
 \\
@@ -111,7 +111,7 @@ At first glance, it may appear that a more general version, \(\left|\sin nx\righ
 &\leq
 k\left|\sin x\right|+\left|\sin x\right| && \text{(induction hypothesis})\\
 &= (k+1)\left|\sin x\right|.
-\end{align}
+\end{aligned}
 \]
 
 The inequality between the extreme left-hand and right-hand quantities shows that \(P(k+1)\) is true, which completes the induction step.
@@ -224,12 +224,12 @@ However, there will be slight differences in the structure and the assumptions o
 *Base case:* Show that \(S(k)\) holds for \(k = 12,13,14,15\).
 
 \[
-\begin{align}
+\begin{aligned}
 4 \cdot 3+5 \cdot 0=12\\
 4 \cdot 2+5 \cdot 13\\
 4 \cdot 1+5 \cdot 2=14\\
 4 \cdot 0+5 \cdot 3=15
-\end{align}
+\end{aligned}
 \]
 
 The base case holds.

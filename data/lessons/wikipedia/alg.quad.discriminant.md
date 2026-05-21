@@ -76,19 +76,19 @@ If the polynomial is irreducible and its coefficients are rational numbers (or b
 The quartic polynomial
 \(ax^4+bx^3+cx^2+dx+e\,\)
 has discriminant
-\(\begin{align}
+\(\begin{aligned}
 & 256a^3e^3-192a^2bde^2-128a^2c^2e^2+144a^2cd^2e \\[4pt]
 &\quad -27a^2d^4+144ab^2ce^2-6ab^2d^2e-80abc^2de \\[4pt]
 &\quad +18abcd^3+16ac^4e-4ac^3d^2-27b^4e^2+18b^3cde \\[4pt]
 &\quad -4b^3d^3-4b^2c^3e+b^2c^2d^2.
-\end{align}\)
+\end{aligned}\)
 
 The depressed quartic polynomial
 \(x^4+cx^2+dx+e\,\)
 has discriminant
-\(\begin{align}
+\(\begin{aligned}
 {} & 16c^4e -4c^3d^2 -128c^2e^2+144cd^2e -27d^4 + 256e^3.
-\end{align}\)
+\end{aligned}\)
 
 The discriminant is zero if and only if at least two roots are equal. If the coefficients are real numbers and the discriminant is negative, then there are two real roots and two complex conjugate roots. Conversely, if the discriminant is positive, then the roots are either all real or all non-real.
 
@@ -139,11 +139,11 @@ This is often interpreted as saying that \(\varphi(\operatorname{Disc}_x(A)) = 0
 
 ### Product of polynomials
 If *R* = *PQ* is a product of polynomials in *x*, then
-\(\begin{align}
+\(\begin{aligned}
 \operatorname{disc}_x(R) &= \operatorname{disc}_x(P)\operatorname{Res}_x(P,Q)^2\operatorname{disc}_x(Q)
 \\[5pt]
 {}&=(-1)^{pq}\operatorname{disc}_x(P)\operatorname{Res}_x(P,Q)\operatorname{Res}_x(Q,P)\operatorname{disc}_x(Q),
-\end{align}\)
+\end{aligned}\)
 where \(\operatorname{Res}_x\) denotes the resultant with respect to the variable *x*, and *p* and *q* are the respective degrees of *P* and *Q*.
 
 This property follows immediately by substituting the expression for the resultant, and the discriminant, in terms of the roots of the respective polynomials.

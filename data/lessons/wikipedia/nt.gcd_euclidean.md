@@ -224,12 +224,12 @@ Rearranging this equation yields the recursion formula for step *k*, as required
 
 ### Matrix method
 The integers *s* and *t* can also be found using an equivalent matrix method. The sequence of equations of Euclid's algorithm
-\(\begin{align}
+\(\begin{aligned}
 a & = q_0 b + r_0 \\
 b & = q_1 r_0 + r_1 \\
 & \,\,\,\vdots \\
 r_{N-2} & = q_N r_{N-1} + 0
-\end{align}\)
+\end{aligned}\)
 can be written as a product of 2×2 quotient matrices multiplying a two-dimensional remainder vector
 
 \(\begin{pmatrix} a \\ b \end{pmatrix} =
@@ -303,12 +303,12 @@ This equation can be solved by the Euclidean algorithm, as described above. Find
 
 ### Chinese remainder theorem
 Euclid's algorithm can also be used to solve multiple linear Diophantine equations. Such equations arise in the Chinese remainder theorem, which describes a novel method to represent an integer *x*. Instead of representing an integer by its digits, it may be represented by its remainders *x*\(_{*i*}\) modulo a set of *N* coprime numbers *m*\(_{*i*}\):
-\(\begin{align}
+\(\begin{aligned}
 x_1 & \equiv x \pmod {m_1} \\
 x_2 & \equiv x \pmod {m_2} \\
 & \,\,\,\vdots \\
 x_N & \equiv x \pmod {m_N} \,.
-\end{align}\)
+\end{aligned}\)
 
 The goal is to determine *x* from its *N* remainders *x*\(_{*i*}\). The solution is to combine the multiple equations into a single linear Diophantine equation with a much larger modulus *M* that is the product of all the individual moduli *m*\(_{*i*}\), and define *M*\(_{*i*}\) as
 \(M_i = \frac M {m_i}.\)
@@ -328,18 +328,18 @@ The number 1 (expressed as a fraction 1/1) is placed at the root of the tree, an
 
 For example, 3/4 can be found by starting at the root, going to the left once, then to the right twice:
 
-\(\begin{align}
+\(\begin{aligned}
  & \gcd(3,4) & \leftarrow \\
 = {} & \gcd(3,1) & \rightarrow \\
 = {} & \gcd(2,1) & \rightarrow \\
 = {} & \gcd(1,1).
-\end{align}\)
+\end{aligned}\)
 
 The Euclidean algorithm has almost the same relationship to another binary tree on the rational numbers called the Calkin–Wilf tree. The difference is that the path is reversed: instead of producing a path from the root of the tree to a target, it produces a path from the target to the root.
 
 ### Continued fractions
 The Euclidean algorithm has a close relationship with continued fractions. The sequence of equations can be written in the form
-\(\begin{align}
+\(\begin{aligned}
 \frac a b &= q_0 + \frac{r_0} b \\
 \frac b {r_0} &= q_1 + \frac{r_1}{r_0} \\
 \frac{r_0}{r_1} &= q_2 + \frac{r_2}{r_1} \\
@@ -347,7 +347,7 @@ The Euclidean algorithm has a close relationship with continued fractions. The s
 \frac{r_{k-2{r_{k-1&= q_k + \frac{r_k}{r_{k-1\\
 & \,\,\, \vdots \\
 \frac{r_{N-2{r_{N-1&= q_N\,.
-\end{align}\)
+\end{aligned}\)
 
 The last term on the right-hand side always equals the inverse of the left-hand side of the next equation. Thus, the first two equations may be combined to form
 \(\frac a b = q_0 + \cfrac 1 {q_1 + \cfrac{r_1}{r_0\,.\)
@@ -443,10 +443,10 @@ The real-number Euclidean algorithm differs from its integer counterpart in two 
 and can be written as a finite continued fraction [*q*\(_{0}\); *q*\(_{1}\), *q*\(_{2}\),... , *q*\(_{*N*}\)]. If the algorithm does not stop, the fraction *a*/*b* is an irrational number and can be described by an infinite continued fraction [*q*\(_{0}\); *q*\(_{1}\), *q*\(_{2}\), …]. Examples of infinite continued fractions are the golden ratio *φ* = [1; 1, 1,... ] and the square root of two, sqrt[1; 2, 2,... ]. When applied to two arbitrary real numbers, the algorithm is unlikely to stop; since almost all ratios *a*/*b* of two real numbers are irrational.
 
 An infinite continued fraction may be truncated at a step *k* [*q*\(_{0}\); *q*\(_{1}\), *q*\(_{2}\),... , *q*\(_{*k*}\)] to yield an approximation to *a*/*b* that improves as is increased. The approximation is described by convergents *m*\(_{*k*}\)/*n*\(_{*k*}\); the numerator and denominators are coprime and obey the recurrence relation
-\(\begin{align}
+\(\begin{aligned}
  m_k &= q_k m_{k-1} + m_{k-2} \\
  n_k &= q_k n_{k-1} + n_{k-2},
- \end{align}\)
+ \end{aligned}\)
 where *m*\(_{−1}\) = *n*\(_{−2}\) = 1 and *m*\(_{−2}\) = *n*\(_{−1}\) = 0 are the initial values of the recursion. The convergent *m*\(_{*k*}\)/*n*\(_{*k*}\) is the best rational number approximation to *a*/*b* with denominator *n*\(_{*k*}\):
 \(\left|\frac{a}{b} - \frac{m_k}{n_k}\right| < \frac{1}{n_k^2}.\)
 
@@ -457,10 +457,10 @@ Polynomials in a single variable *x* can be added, multiplied and factored into 
 where *r*\(_{−2}\)(*x*) = *a*(*x*) and *r*\(_{−1}\)(*x*) = *b*(*x*). Each quotient polynomial is chosen such that each remainder is either zero or has a degree that is smaller than the degree of its predecessor: deg[*r*\(_{*k*}\)(*x*)] < deg[*r*\(_{*k*−1}\)(*x*)]. Since the degree is a nonnegative integer, and since it decreases with every step, the Euclidean algorithm concludes in a finite number of steps. The last nonzero remainder is the greatest common divisor of the original two polynomials, *a*(*x*) and *b*(*x*).
 
 For example, consider the following two quartic polynomials, which each factor into two quadratic polynomials
-\(\begin{align}
+\(\begin{aligned}
  a(x) &= x^4 - 4x^3 + 4x^2 - 3x + 14 = (x^2 - 5x + 7)(x^2 + x + 2) \qquad \text{and}\\
  b(x) &= x^4 + 8x^3 + 12x^2 + 17x + 6 = (x^2 + 7x + 3)(x^2 + x + 2).
- \end{align}\)
+ \end{aligned}\)
 
 Dividing *a*(*x*) by *b*(*x*) yields a remainder *r*\(_{0}\)(*x*) = *x*\(^{3}\) + (2/3)*x*\(^{2}\) + (5/3)*x* − (2/3). In the next step, *b*(*x*) is divided by *r*\(_{0}\)(*x*) yielding a remainder *r*\(_{1}\)(*x*) = *x*\(^{2}\) + *x* + 2. Finally, dividing *r*\(_{0}\)(*x*) by *r*\(_{1}\)(*x*) yields a zero remainder, indicating that *r*\(_{1}\)(*x*) is the greatest common divisor polynomial of *a*(*x*) and *b*(*x*), consistent with their factorization.
 

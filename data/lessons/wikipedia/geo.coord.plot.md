@@ -32,10 +32,10 @@ Alternatively, each coordinate of a point *P* can be taken as the distance from 
 
 Each pair of axes defines a *coordinate plane*. These planes divide space into eight *octants*. The octants are:
 
-\(\begin{align}
+\(\begin{aligned}
 (+x,+y,+z) && (-x,+y,+z) && (+x,-y,+z) && (+x,+y,-z) \\
 (+x,-y,-z) && (-x,+y,-z) && (-x,-y,+z) && (-x,-y,-z)
-\end{align}\)
+\end{aligned}\)
 
 The coordinates are usually written as three numbers (or algebraic formulas) surrounded by parentheses and separated by commas, as in (3, −2.5, 1) or (*t*, *u* + *v*, *π*/2). Thus, the origin has coordinates (0, 0, 0), and the unit points on the three axes are (1, 0, 0), (0, 1, 0), and (0, 0, 1).
 

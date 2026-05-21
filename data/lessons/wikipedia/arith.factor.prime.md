@@ -44,10 +44,10 @@ If 1 were to be considered a prime, many statements involving primes would need 
 ### Unique factorization
 
 Writing a number as a product of prime numbers is called a *prime factorization* of the number. For example:
-\(\begin{align}
+\(\begin{aligned}
  50 &= 2\times 5\times 5\\
  &=2\times 5^2.
- \end{align}\)
+ \end{aligned}\)
 The terms in the product are called *prime factors*. The same prime factor may occur more than once; this example has two copies of the prime factor \(5.\) When a prime occurs multiple times, exponentiation can be used to group together multiple copies of the same prime number: for example, in the second way of writing the product above, \(5^2\) denotes the square or second power of. The central importance of prime numbers to number theory and mathematics in general stems from the *fundamental theorem of arithmetic*. This theorem states that every integer larger than 1 can be written as a product of one or more primes. More strongly, this product is unique in the sense that any two prime factorizations of the same number will have the same numbers of copies of the same primes, although their ordering may differ. So, although there are many different ways of finding a factorization using an integer factorization algorithm, they all must produce the same result. Primes can thus be considered the "basic building blocks" of the natural numbers.
 
 Some proofs of the uniqueness of prime factorizations are based on Euclid's lemma: If is a prime number and divides a product \(ab\) of integers and \(b,\) then divides or divides (or both). Conversely, if a number has the property that when it divides a product it always divides at least one factor of the product, then must be prime.

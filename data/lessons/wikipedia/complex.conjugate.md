@@ -17,12 +17,12 @@ If a complex number is represented as a \(2 \times 2\) matrix, the notations are
 The following properties apply for all complex numbers \(z\) and , unless stated otherwise, and can be proved by writing \(z\) and \(w\) in the form. For any two complex numbers, conjugation is distributive over addition, subtraction, multiplication and division:
 
 \[
-\begin{align}
+\begin{aligned}
  \overline{z + w} &= \overline{z} + \overline{w}, \\
  \overline{z - w} &= \overline{z} - \overline{w}, \\
  \overline{zw} &= \overline{z} \; \overline{w}, \quad \text{and} \\
  \overline{\left(\frac{z}{w}\right)} &= \frac{\overline{z}}{\overline{w}},\quad \text{if } w \neq 0.
-\end{align}
+\end{aligned}
 \]
 
 A complex number is equal to its complex conjugate if its imaginary part is zero, that is, if the number is real. In other words, real numbers are the only fixed points of conjugation.

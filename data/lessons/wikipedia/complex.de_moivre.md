@@ -52,22 +52,22 @@ Now, considering S(*k* + 1):
 
 See angle sum and difference identities.
 
-We deduce that S(*k*) implies S(*k* + 1). By the principle of mathematical induction it follows that the result is true for all natural numbers. Now, S(0) is clearly true since cos(0*x*) + *i* sin(0*x*) 1. Finally, for the negative integer cases, we consider an exponent of −*n* for natural. \(\begin{align}
+We deduce that S(*k*) implies S(*k* + 1). By the principle of mathematical induction it follows that the result is true for all natural numbers. Now, S(0) is clearly true since cos(0*x*) + *i* sin(0*x*) 1. Finally, for the negative integer cases, we consider an exponent of −*n* for natural. \(\begin{aligned}
  \left(\cos x + i\sin x\right)^{-n} & = \big( \left(\cos x + i\sin x\right)^n \big)^{-1} \\
  & = \left(\cos nx + i\sin nx\right)^{-1} \\
  & = \cos nx - i\sin nx \qquad\qquad(*)\\
  & = \cos(-nx) + i\sin (-nx).\\
-\end{align}\)
+\end{aligned}\)
 The equation (*) is a result of the identity
 \(z^{-1} = \frac{\bar z}{|z|^2},\)
 for *z*. Hence, S(*n*) holds for all integers. ## Formulae for cosine and sine individually
 
 For an equality of complex numbers, one necessarily has equality both of the real parts and of the imaginary parts of both members of the equation. If , and therefore also cos *x* and sin *x*, are real numbers, then the identity of these parts can be written using binomial coefficients. This formula was given by 16th century French mathematician François Viète:
 
-\(\begin{align}
+\(\begin{aligned}
 \sin nx &= \sum_{k=0}^n \binom{n}{k} (\cos x)^k\,(\sin x)^{n-k}\,\sin\frac{(n-k)\pi}{2} \\
 \cos nx &= \sum_{k=0}^n \binom{n}{k} (\cos x)^k\,(\sin x)^{n-k}\,\cos\frac{(n-k)\pi}{2}.
-\end{align}\)
+\end{aligned}\)
 
 In each of these two equations, the final trigonometric function equals one or minus one or zero, thus removing half the entries in each of the sums. These equations are in fact valid even for complex values of , because both sides are entire (that is, holomorphic on the whole complex plane) functions of , and two such functions that coincide on the real axis necessarily coincide everywhere. Here are the concrete instances of these equations for *n* and *n* :
 
@@ -118,8 +118,8 @@ If is a rational number (but not necessarily an integer), then cosh *nx* + sinh 
 For any integer , the formula holds for any complex number \(z=x+iy\)
 \(( \cos z + i \sin z)^n = \cos {nz} + i \sin {nz}.\)
 where
-\(\begin{align} \cos z = \cos(x + iy) &= \cos x \cosh y - i \sin x \sinh y\, \\
-\sin z = \sin(x + iy) &= \sin x \cosh y + i \cos x \sinh y\,. \end{align}\)
+\(\begin{aligned} \cos z = \cos(x + iy) &= \cos x \cosh y - i \sin x \sinh y\, \\
+\sin z = \sin(x + iy) &= \sin x \cosh y + i \cos x \sinh y\,. \end{aligned}\)
 
 ### Quaternions
 To find the roots of a quaternion there is an analogous form of de Moivre's formula. A quaternion in the form

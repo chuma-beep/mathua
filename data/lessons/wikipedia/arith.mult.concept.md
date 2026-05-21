@@ -51,11 +51,11 @@ As changing the signs transforms least upper bounds into greatest lower bounds, 
 
 ### Product of two complex numbers
 Two complex numbers can be multiplied by the distributive law and the fact that \(i^2=-1\), as follows:
-\(\begin{align}
+\(\begin{aligned}
  (a + b\, i) \cdot (c + d\, i)
  &= a \cdot c + a \cdot d\, i + b \, i \cdot c + b \cdot d \cdot i^2\\
  &= (a \cdot c - b \cdot d) + (a \cdot d + b \cdot c) \, i
-\end{align}\)
+\end{aligned}\)
 
 The geometric meaning of complex multiplication can be understood by rewriting complex numbers in polar coordinates:
 

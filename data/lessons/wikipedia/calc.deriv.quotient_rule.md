@@ -11,26 +11,26 @@ It is provable in many ways by using other derivative rules.
 ### Example 1: Basic example
 Given \(h(x)=\frac{e^x}{x^2}\), let \(f(x)=e^x, g(x)=x^2\), then using the quotient rule:
 \[
-\begin{align}
+\begin{aligned}
  \frac{d}{dx} \left(\frac{e^x}{x^2}\right) &= \frac{\left(\frac{d}{dx}e^x\right)(x^2) - (e^x)\left(\frac{d}{dx} x^2\right)}{(x^2)^2} \\
  &= \frac{(e^x)(x^2) - (e^x)(2x)}{x^4} \\
  &= \frac{x^2 e^x - 2x e^x}{x^4} \\
  &= \frac{x e^x - 2 e^x}{x^3} \\
  &= \frac{e^x(x - 2)}{x^3}.
- \end{align}
+ \end{aligned}
 \]
 
 ### Example 2: Derivative of tangent function
 The quotient rule can be used to find the derivative of \(\tan x = \frac{\sin x}{\cos x}\) as follows:
 
 \[
-\begin{align}
+\begin{aligned}
  \frac{d}{dx} \tan x &= \frac{d}{dx} \left(\frac{\sin x}{\cos x}\right) \\
  &= \frac{\left(\frac{d}{dx}\sin x\right)(\cos x) - (\sin x)\left(\frac{d}{dx}\cos x\right)}{\cos^2 x} \\
  &= \frac{(\cos x)(\cos x) - (\sin x)(-\sin x)}{\cos^2 x} \\
  &= \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \\
  &= \frac{1}{\cos^2 x} = \sec^2 x.
- \end{align}
+ \end{aligned}
 \]
 
 ## Reciprocal rule
@@ -46,7 +46,7 @@ Utilizing the chain rule yields the same result.
 ### Proof from derivative definition and limit properties
 Let \(h(x) = \frac{f(x)}{g(x)}.\) Applying the definition of the derivative and properties of limits gives the following proof, with the term \(f(x) g(x)\) added and subtracted to allow splitting and factoring in subsequent steps without affecting the value:
 \[
-\begin{align}
+\begin{aligned}
  h'(x) &= \lim_{k\to 0} \frac{h(x+k) - h(x)}{k} \\
  &= \lim_{k\to 0} \frac{\frac{f(x+k)}{g(x+k)} - \frac{f(x)}{g(x)}}{k} \\
  &= \lim_{k\to 0} \frac{f(x+k)g(x) - f(x)g(x+k)}{k \cdot g(x)g(x+k)} \\
@@ -55,7 +55,7 @@ Let \(h(x) = \frac{f(x)}{g(x)}.\) Applying the definition of the derivative and 
  &= \left[\lim_{k\to 0} \frac{f(x+k)g(x) - f(x)g(x)}{k} - \lim_{k\to 0}\frac{f(x)g(x+k) - f(x)g(x)}{k} \right] \cdot \frac{1}{[g(x)]^2} \\
  &= \left[\lim_{k\to 0} \frac{f(x+k) - f(x)}{k} \cdot g(x) - f(x) \cdot \lim_{k\to 0}\frac{g(x+k) - g(x)}{k} \right] \cdot \frac{1}{[g(x)]^2} \\
  &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}.
- \end{align}
+ \end{aligned}
 \]
 The limit evaluation \(\lim_{k \to 0}\frac{1}{g(x+k)g(x)}=\frac{1}{[g(x)]^2}\) is justified by the differentiability of \(g(x)\), implying continuity, which can be expressed as \(\lim_{k \to 0}g(x+k) = g(x)\).
 
@@ -67,11 +67,11 @@ The product rule then gives \(f'(x)=g'(x)h(x) + g(x)h'(x).\)
 Solving for \(h'(x)\) and substituting back for \(h(x)\) gives:
 
 \[
-\begin{align}
+\begin{aligned}
  h'(x) &= \frac{f'(x) -g'(x)h(x)}{g(x)} \\
  &= \frac{f'(x) - g'(x)\cdot\frac{f(x)}{g(x)}}{g(x)} \\
  &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}.
- \end{align}
+ \end{aligned}
 \]
 
 ### Proof using the reciprocal rule or chain rule
@@ -87,7 +87,7 @@ To evaluate the derivative in the second term, apply the reciprocal rule, or the
 
 Substituting the result into the expression gives
 \[
-\begin{align}
+\begin{aligned}
  h'(x) &= f'(x)\cdot\frac{1}{g(x)} + f(x)\cdot\left[\frac{-g'(x)}{g(x)^2}\right] \\
 
  &= \frac{f'(x)}{g(x)} - \frac{f(x)g'(x)}{g(x)^2} \\
@@ -95,7 +95,7 @@ Substituting the result into the expression gives
  &= \frac{g(x)}{g(x)}\cdot\frac{f'(x)}{g(x)} - \frac{f(x)g'(x)}{g(x)^2} \\
 
  &= \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}.
- \end{align}
+ \end{aligned}
 \]
 
 ### Proof by logarithmic differentiation
@@ -120,12 +120,12 @@ Taking the logarithmic derivative of both sides,
 Solving for \(h'(x)\) and substituting back \(\tfrac{f(x)}{g(x)}\) for \(h(x)\) gives:
 
 \[
-\begin{align}
+\begin{aligned}
 h'(x)&=h(x)\left[\frac{f'(x)}{f(x)}-\frac{g'(x)}{g(x)}\right]\\
 &=\frac{f(x)}{g(x)}\left[\frac{f'(x)}{f(x)}-\frac{g'(x)}{g(x)}\right]\\
 &=\frac{f'(x)}{g(x)}-\frac{f(x)g'(x)}{g(x)^2}\\
 &=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}.
-\end{align}
+\end{aligned}
 \]
 
 Taking the absolute value of the functions is necessary for the logarithmic differentiation of functions that may have negative values, as logarithms are only real-valued for positive arguments. This works because \(\tfrac{d}{dx}(\ln|u|)=\tfrac{u'}{u}\), which justifies taking the absolute value of the functions for logarithmic differentiation.
