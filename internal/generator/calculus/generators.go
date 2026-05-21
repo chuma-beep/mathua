@@ -96,7 +96,7 @@ func (g *limitConceptGen) Generate(difficulty float64) generator.Problem {
 	x0 := rand.Intn(scale*2) + 1
 	ans := m*x0 + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("As x approaches %d, what value does f(x)=%dx+%d approach?", x0, m, b),
+		Question:    fmt.Sprintf("As \\(x\\) approaches %d, what value does \\(f(x)=%dx+%d\\) approach?", x0, m, b),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("Since f(x)=%dx+%d is continuous, the limit as x→%d equals f(%d)=%d(%d)+%d=%d.", m, b, x0, x0, m, x0, b, ans),
 	}
@@ -109,7 +109,7 @@ func (g *limitNumericGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(scale*2) + 2
 	ans := 2 * a
 	return generator.Problem{
-		Question:    fmt.Sprintf("Estimate lim x→%d of (x²-%d)/(x-%d) by evaluating near x=%d.", a, a*a, a, a),
+		Question:    fmt.Sprintf("Estimate \\(\\lim_{x \\to %d}\\) of \\(\\frac{x^{2}-%d}{x-%d}\\) by evaluating near \\(x=%d\\).", a, a*a, a, a),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("Factor: (x²-%d)/(x-%d) = (x-%d)(x+%d)/(x-%d) = x+%d for x≠%d. The limit as x→%d is %d+%d=%d.", a*a, a, a, a, a, a, a, a, a, a, ans),
 	}
@@ -151,7 +151,7 @@ func (g *limitPropertiesGen) Generate(difficulty float64) generator.Problem {
 		desc = fmt.Sprintf("lim(f/g) = lim f / lim g = %d/%d=%d.", fLim, gLim, ans)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("If lim f(x)=%d and lim g(x)=%d, what is lim (%s)?", fLim, gLim, opStr),
+		Question:    fmt.Sprintf("If \\(\\lim f(x)=%d\\) and \\(\\lim g(x)=%d\\), what is \\(\\lim (%s)\\)?", fLim, gLim, opStr),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: desc,
 	}
@@ -164,12 +164,12 @@ func (g *limitInfinityGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"lim x→∞ of 1/x", "0", "As x→∞, 1/x → 0."},
-		{"lim x→∞ of 1/x²", "0", "As x→∞, 1/x² → 0."},
-		{"lim x→∞ of x/(x+1)", "1", "Divide numerator and denominator by x: 1/(1+1/x) → 1."},
-		{"lim x→∞ of 2x/(x+1)", "2", "Divide numerator and denominator by x: 2/(1+1/x) → 2."},
-		{"lim x→∞ of (x²+1)/x²", "1", "(x²+1)/x² = 1+1/x² → 1."},
-		{"lim x→∞ of 3", "3", "The limit of a constant is the constant itself."},
+		{"\\(\\lim_{x \\to \\infty} 1/x\\)", "0", "As \\(x\\to\\infty\\), \\(1/x \\to 0\\)."},
+		{"\\(\\lim_{x \\to \\infty} 1/x^{2}\\)", "0", "As \\(x\\to\\infty\\), \\(1/x^{2} \\to 0\\)."},
+		{"\\(\\lim_{x \\to \\infty} x/(x+1)\\)", "1", "Divide numerator and denominator by \\(x\\): \\(1/(1+1/x) \\to 1\\)."},
+		{"\\(\\lim_{x \\to \\infty} 2x/(x+1)\\)", "2", "Divide numerator and denominator by \\(x\\): \\(2/(1+1/x) \\to 2\\)."},
+		{"\\(\\lim_{x \\to \\infty} (x^{2}+1)/x^{2}\\)", "1", "\\((x^{2}+1)/x^{2} = 1+1/x^{2} \\to 1\\)."},
+		{"\\(\\lim_{x \\to \\infty} 3\\)", "3", "The limit of a constant is the constant itself."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
@@ -186,14 +186,14 @@ func (g *limitContinuityGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Is f(x)=x² continuous at x=2?", "yes", "f(x)=x² is a polynomial, continuous everywhere. f(2)=4 and lim x→2 f(x)=4."},
-		{"Is f(x)=sin(x) continuous at x=0?", "yes", "sin(x) is continuous everywhere. sin(0)=0 and lim x→0 sin(x)=0."},
-		{"Is f(x)=e^x continuous at x=0?", "yes", "e^x is continuous everywhere. e^0=1 and lim x→0 e^x=1."},
-		{"Is f(x)=|x| continuous at x=0?", "yes", "|x| is continuous at 0. |0|=0 and lim x→0 |x|=0."},
-		{"Is f(x)=1/x continuous at x=0?", "no", "1/x has an infinite discontinuity at x=0 (vertical asymptote)."},
-		{"Is f(x)=1/x² continuous at x=0?", "no", "1/x² has an infinite discontinuity at x=0."},
-		{"Is f(x)=tan(x) continuous at x=π/2?", "no", "tan(x) has an infinite discontinuity at x=π/2."},
-		{"Is f(x)=|x|/x continuous at x=0?", "no", "|x|/x has a jump discontinuity at x=0 (left limit=-1, right limit=1)."},
+		{"Is \\(f(x)=x^{2}\\) continuous at \\(x=2\\)?", "yes", "\\(f(x)=x^{2}\\) is a polynomial, continuous everywhere. \\(f(2)=4\\) and \\(\\lim_{x \\to 2} f(x)=4\\)."},
+		{"Is \\(f(x)=\\sin(x)\\) continuous at \\(x=0\\)?", "yes", "\\(\\sin(x)\\) is continuous everywhere. \\(\\sin(0)=0\\) and \\(\\lim_{x \\to 0} \\sin(x)=0\\)."},
+		{"Is \\(f(x)=e^{x}\\) continuous at \\(x=0\\)?", "yes", "\\(e^{x}\\) is continuous everywhere. \\(e^{0}=1\\) and \\(\\lim_{x \\to 0} e^{x}=1\\)."},
+		{"Is \\(f(x)=|x|\\) continuous at \\(x=0\\)?", "yes", "\\(|x|\\) is continuous at 0. \\(|0|=0\\) and \\(\\lim_{x \\to 0} |x|=0\\)."},
+		{"Is \\(f(x)=1/x\\) continuous at \\(x=0\\)?", "no", "\\(1/x\\) has an infinite discontinuity at x=0 (vertical asymptote)."},
+		{"Is \\(f(x)=1/x^{2}\\) continuous at \\(x=0\\)?", "no", "\\(1/x^{2}\\) has an infinite discontinuity at \\(x=0\\)."},
+		{"Is \\(f(x)=\\tan(x)\\) continuous at \\(x=\\pi/2\\)?", "no", "\\(\\tan(x)\\) has an infinite discontinuity at \\(x=\\pi/2\\)."},
+		{"Is \\(f(x)=|x|/x\\) continuous at \\(x=0\\)?", "no", "\\(|x|/x\\) has a jump discontinuity at \\(x=0\\) (left limit \\(=-1\\), right limit \\(=1\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
@@ -212,12 +212,12 @@ func (g *derivConceptGen) Generate(difficulty float64) generator.Problem {
 		e string
 	}
 	table := []entry{
-		{"What is the slope of f(x)=x² at x=3?", 6, "f'(x)=2x, so f'(3)=2·3=6."},
-		{"What is the slope of f(x)=x² at x=2?", 4, "f'(x)=2x, so f'(2)=2·2=4."},
-		{"What is the slope of f(x)=x² at x=1?", 2, "f'(x)=2x, so f'(1)=2·1=2."},
-		{"What is the slope of f(x)=2x² at x=2?", 8, "f'(x)=4x, so f'(2)=4·2=8."},
-		{"What is the slope of f(x)=x³ at x=2?", 12, "f'(x)=3x², so f'(2)=3·4=12."},
-		{"What is the slope of f(x)=x³ at x=1?", 3, "f'(x)=3x², so f'(1)=3·1=3."},
+		{"What is the slope of \\(f(x)=x^{2}\\) at \\(x=3\\)?", 6, "\\(f'(x)=2x\\), so \\(f'(3)=2 \\cdot 3 = 6\\)."},
+		{"What is the slope of \\(f(x)=x^{2}\\) at \\(x=2\\)?", 4, "\\(f'(x)=2x\\), so \\(f'(2)=2 \\cdot 2 = 4\\)."},
+		{"What is the slope of \\(f(x)=x^{2}\\) at \\(x=1\\)?", 2, "\\(f'(x)=2x\\), so \\(f'(1)=2 \\cdot 1 = 2\\)."},
+		{"What is the slope of \\(f(x)=2x^{2}\\) at \\(x=2\\)?", 8, "\\(f'(x)=4x\\), so \\(f'(2)=4 \\cdot 2 = 8\\)."},
+		{"What is the slope of \\(f(x)=x^{3}\\) at \\(x=2\\)?", 12, "\\(f'(x)=3x^{2}\\), so \\(f'(2)=3 \\cdot 4 = 12\\)."},
+		{"What is the slope of \\(f(x)=x^{3}\\) at \\(x=1\\)?", 3, "\\(f'(x)=3x^{2}\\), so \\(f'(1)=3 \\cdot 1 = 3\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
@@ -236,7 +236,7 @@ func (g *derivPowerRuleGen) Generate(difficulty float64) generator.Problem {
 	coef := a * n
 	exp := n - 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find f'(x) if f(x)=%dx^%d.", a, n),
+		Question:    fmt.Sprintf("Find \\(f'(x)\\) if \\(f(x)=%dx^{%d}\\).", a, n),
 		Answer:      singleTerm(coef, exp),
 		Explanation: fmt.Sprintf("Power rule: f'(x)=%d·%d·x^(%d-1)=%s.", a, n, n, singleTerm(coef, exp)),
 	}
@@ -259,7 +259,7 @@ func (g *derivSumRuleGen) Generate(difficulty float64) generator.Problem {
 	exp2 := m - 1
 	answer := formatPoly([]term{{coef1, exp1}, {coef2, exp2}})
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find f'(x) if f(x)=%dx^%d+%dx^%d.", a, n, b, m),
+		Question:    fmt.Sprintf("Find \\(f'(x)\\) if \\(f(x)=%dx^{%d}+%dx^{%d}\\).", a, n, b, m),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("f'(x) = %d·%dx^%d + %d·%dx^%d = %s.", a, n, n-1, b, m, m-1, answer),
 	}
@@ -280,7 +280,7 @@ func (g *derivProductRuleGen) Generate(difficulty float64) generator.Problem {
 	exp2 := n - 1
 	answer := formatPoly([]term{{coef1, exp1}, {coef2, exp2}})
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find f'(x) if f(x)=x^%d(x^%d+%d).", n, m, a),
+		Question:    fmt.Sprintf("Find \\(f'(x)\\) if \\(f(x)=x^{%d}(x^{%d}+%d)\\).", n, m, a),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Product rule: f'(x)=%dx^%d·(x^%d+%d)+x^%d·%dx^%d = %s.", n, n-1, m, a, n, m, m-1, answer),
 	}
@@ -291,7 +291,7 @@ type derivQuotientRuleGen struct{}
 func (g *derivQuotientRuleGen) Generate(difficulty float64) generator.Problem {
 	// f(x) = (x+1)/(x-1), f'(x) = -2/(x-1)², ask for f'(2) = -2
 	return generator.Problem{
-		Question:    "Find f'(2) if f(x)=(x+1)/(x-1).",
+		Question:    "Find \\(f'(2)\\) if \\(f(x)=\\frac{x+1}{x-1}\\).",
 		Answer:      "-2",
 		Explanation: "Quotient rule: f'(x)=((x-1)·1-(x+1)·1)/(x-1)² = -2/(x-1)². f'(2) = -2/(1)² = -2.",
 	}
@@ -311,7 +311,7 @@ func (g *derivChainRuleGen) Generate(difficulty float64) generator.Problem {
 	inner := fmt.Sprintf("%dx+%d", a, b)
 	answer := fmt.Sprintf("%d(%s)^%d", coef, inner, inExp)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find f'(x) if f(x)=%s^%d.", inner, n),
+		Question:    fmt.Sprintf("Find \\(f'(x)\\) if \\(f(x)=%s^{%d}\\).", inner, n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Chain rule: f'(x)=%d·(%s)^%d·%d = %s.", n, inner, inExp, a, answer),
 	}
@@ -324,12 +324,12 @@ func (g *derivTrigGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Find f'(x) if f(x)=sin(x).", "cos(x)", "d/dx sin(x) = cos(x)."},
-		{"Find f'(x) if f(x)=cos(x).", "-sin(x)", "d/dx cos(x) = -sin(x)."},
-		{"What is d/dx sin(x)?", "cos(x)", "The derivative of sine is cosine."},
-		{"What is d/dx cos(x)?", "-sin(x)", "The derivative of cosine is -sine."},
-		{"Find f'(x) if f(x)=sin(2x).", "2cos(2x)", "Chain rule: d/dx sin(2x) = cos(2x)·2 = 2cos(2x)."},
-		{"Find f'(x) if f(x)=cos(3x).", "-3sin(3x)", "Chain rule: d/dx cos(3x) = -sin(3x)·3 = -3sin(3x)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\sin(x)\\).", "cos(x)", "\\(\\frac{d}{dx} \\sin(x) = \\cos(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\cos(x)\\).", "-sin(x)", "\\(\\frac{d}{dx} \\cos(x) = -\\sin(x)\\)."},
+		{"What is \\(\\frac{d}{dx} \\sin(x)\\)?", "cos(x)", "The derivative of sine is cosine."},
+		{"What is \\(\\frac{d}{dx} \\cos(x)\\)?", "-sin(x)", "The derivative of cosine is \\(-\\sin(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\sin(2x)\\).", "2cos(2x)", "Chain rule: \\(\\frac{d}{dx} \\sin(2x) = \\cos(2x) \\cdot 2 = 2\\cos(2x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\cos(3x)\\).", "-3sin(3x)", "Chain rule: \\(\\frac{d}{dx} \\cos(3x) = -\\sin(3x) \\cdot 3 = -3\\sin(3x)\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
@@ -346,13 +346,13 @@ func (g *derivExpLogGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Find f'(x) if f(x)=e^x.", "e^x", "d/dx e^x = e^x."},
-		{"Find f'(x) if f(x)=ln(x).", "1/x", "d/dx ln(x) = 1/x."},
-		{"Find f'(x) if f(x)=e^(3x).", "3e^(3x)", "Chain rule: d/dx e^(3x) = e^(3x)·3 = 3e^(3x)."},
-		{"Find f'(x) if f(x)=e^(2x).", "2e^(2x)", "Chain rule: d/dx e^(2x) = e^(2x)·2 = 2e^(2x)."},
-		{"Find f'(x) if f(x)=ln(2x).", "1/x", "Chain rule: d/dx ln(2x) = (1/(2x))·2 = 1/x."},
-		{"What is d/dx e^x?", "e^x", "The derivative of e^x is e^x."},
-		{"What is d/dx ln(x)?", "1/x", "The derivative of ln(x) is 1/x."},
+		{"Find \\(f'(x)\\) if \\(f(x)=e^{x}\\).", "e^x", "\\(\\frac{d}{dx} e^{x} = e^{x}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\ln(x)\\).", "1/x", "\\(\\frac{d}{dx} \\ln(x) = 1/x\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=e^{3x}\\).", "3e^(3x)", "Chain rule: \\(\\frac{d}{dx} e^{3x} = e^{3x} \\cdot 3 = 3e^{3x}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=e^{2x}\\).", "2e^(2x)", "Chain rule: \\(\\frac{d}{dx} e^{2x} = e^{2x} \\cdot 2 = 2e^{2x}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\ln(2x)\\).", "1/x", "Chain rule: \\(\\frac{d}{dx} \\ln(2x) = \\frac{1}{2x} \\cdot 2 = 1/x\\)."},
+		{"What is \\(\\frac{d}{dx} e^{x}\\)?", "e^x", "The derivative of \\(e^{x}\\) is \\(e^{x}\\)."},
+		{"What is \\(\\frac{d}{dx} \\ln(x)\\)?", "1/x", "The derivative of \\(\\ln(x)\\) is \\(1/x\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
@@ -372,7 +372,7 @@ func (g *derivApplicationsGen) Generate(difficulty float64) generator.Problem {
 	t0 := rand.Intn(max(1, scale*2)) + 1
 	vel := 2*a*t0 + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("If s(t)=%dt²+%dt+%d, what is velocity at t=%d?", a, b, c, t0),
+		Question:    fmt.Sprintf("If \\(s(t)=%dt^{2}+%dt+%d\\), what is velocity at \\(t=%d\\)?", a, b, c, t0),
 		Answer:      fmt.Sprintf("%d", vel),
 		Explanation: fmt.Sprintf("v(t)=s'(t)=%dt+%d. v(%d)=%d(%d)+%d=%d.", 2*a, b, t0, 2*a, t0, b, vel),
 	}
@@ -409,7 +409,7 @@ func (g *integralIndefiniteGen) Generate(difficulty float64) generator.Problem {
 		answer = fmt.Sprintf("(%d/%d)x^%d+C", num, den, exp)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∫%dx^%d dx.", a, n),
+		Question:    fmt.Sprintf("Find \\(\\int %d x^{%d} \\, dx\\).", a, n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Power rule for integration: ∫%dx^%d dx = %d/(%d)·x^(%d+1)+C = %s.", a, n, a, n, n, answer),
 	}
@@ -430,7 +430,7 @@ func (g *integralPowerRuleGen) Generate(difficulty float64) generator.Problem {
 		answer = fmt.Sprintf("%dx^%d", coef, exp)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∫%dx^%d dx (use power rule for integration, omit +C).", a, n),
+		Question:    fmt.Sprintf("Find \\(\\int %d x^{%d} \\, dx\\) (use power rule for integration, omit \\(+C\\)).", a, n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("∫%dx^%d dx = %d/(%d+1)·x^(%d+1)+C = %s+C.", a, n, a, n, n, answer),
 	}
@@ -445,7 +445,7 @@ func (g *integralSubstitutionGen) Generate(difficulty float64) generator.Problem
 	exp := n - 1
 	answer := fmt.Sprintf("e^(x^%d)+C", n)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∫%dx^%d·e^(x^%d) dx.", coef, exp, n),
+		Question:    fmt.Sprintf("Find \\(\\int %d x^{%d} e^{x^{%d}} \\, dx\\).", coef, exp, n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Let u=x^%d, du=%dx^%d dx. Integral becomes ∫e^u du = e^u+C = e^(x^%d)+C.", n, n, exp, n),
 	}
@@ -467,7 +467,7 @@ func (g *integralDefiniteGen) Generate(difficulty float64) generator.Problem {
 	}
 	ans := f(upper) - f(lower)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∫₀^%d %dx^%d dx.", upper, a, n),
+		Question:    fmt.Sprintf("Find \\(\\int_{0}^{%d} %d x^{%d} \\, dx\\).", upper, a, n),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("∫%dx^%d dx = %d/(%d)·x^(%d). From 0 to %d: %d·%d^(%d)/%d - 0 = %d.", a, n, a, n+1, n+1, upper, a, upper, n+1, n+1, ans),
 	}
@@ -480,7 +480,7 @@ func (g *integralFTCGen) Generate(difficulty float64) generator.Problem {
 	n := rand.Intn(max(1, scale)) + 1
 	answer := fmt.Sprintf("x^%d", n)
 	return generator.Problem{
-		Question:    fmt.Sprintf("If F(x)=∫₀ˣ t^%d dt, what is F'(x)?", n),
+		Question:    fmt.Sprintf("If \\(F(x)=\\int_{0}^{x} t^{%d} \\, dt\\), what is \\(F'(x)\\)?", n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("By the Fundamental Theorem of Calculus, F'(x)=x^%d.", n),
 	}
@@ -491,7 +491,7 @@ type integralAreaBetweenGen struct{}
 func (g *integralAreaBetweenGen) Generate(difficulty float64) generator.Problem {
 	// Area between y=x and y=x² from 0 to 1 = 1/6 ≈ 0.1667
 	return generator.Problem{
-		Question:    "Find area between y=x and y=x² from x=0 to x=1.",
+		Question:    "Find area between \\(y=x\\) and \\(y=x^{2}\\) from \\(x=0\\) to \\(x=1\\).",
 		Answer:      "0.1667",
 		Explanation: "∫(x-x²)dx from 0 to 1 = [x²/2-x³/3]₀¹ = 1/2-1/3 = 1/6 ≈ 0.1667.",
 	}
@@ -502,7 +502,7 @@ type integralVolumeGen struct{}
 func (g *integralVolumeGen) Generate(difficulty float64) generator.Problem {
 	// V = π∫(√x)²dx from 0 to 4 = π∫x dx = π·x²/2 from 0 to 4 = π·16/2 = 8π
 	return generator.Problem{
-		Question:    "Find the volume when y=√x from x=0 to 4 is revolved around the x-axis.",
+		Question:    "Find the volume when \\(y=\\sqrt{x}\\) from \\(x=0\\) to \\(4\\) is revolved around the \\(x\\)-axis.",
 		Answer:      "8π",
 		Explanation: "V = π∫(√x)²dx = π∫x dx = π[x²/2]₀⁴ = π(16/2-0) = 8π.",
 	}
@@ -539,7 +539,7 @@ func (g *derivImplicitGen) Generate(difficulty float64) generator.Problem {
 		answer = fmt.Sprintf("%d", num)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find dy/dx at (%d,%d) for x²+y²=%d.", a, bSqrt, r*r),
+		Question:    fmt.Sprintf("Find \\(dy/dx\\) at \\((%d,%d)\\) for \\(x^{2}+y^{2}=%d\\).", a, bSqrt, r*r),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("2x+2y·dy/dx=0 → dy/dx=-x/y. At (%d,%d): dy/dx=-%d/%d=%s.", a, bSqrt, a, bSqrt, answer),
 	}
@@ -554,7 +554,7 @@ func (g *derivRelatedRatesGen) Generate(difficulty float64) generator.Problem {
 	ans := 2 * 3 * r * dr
 	answer := fmt.Sprintf("%dπ", ans)
 	return generator.Problem{
-		Question:    fmt.Sprintf("A circle's radius grows at %d cm/s. How fast is area growing when r=%d?", dr, r),
+		Question:    fmt.Sprintf("A circle's radius grows at %d cm/s. How fast is area growing when \\(r=%d\\)?", dr, r),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("A=πr², dA/dt=2πr·dr/dt=2π(%d)(%d)=%dπ cm²/s.", r, dr, ans),
 	}
@@ -564,7 +564,7 @@ type integralPartsGen struct{}
 
 func (g *integralPartsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
-		Question:    "Find ∫x·e^x dx.",
+		Question:    "Find \\(\\int x e^{x} \\, dx\\).",
 		Answer:      "xe^x-e^x+C",
 		Explanation: "Integration by parts: let u=x, dv=e^x dx → du=dx, v=e^x. ∫x·e^x dx = x·e^x - ∫e^x dx = x·e^x - e^x + C.",
 	}
@@ -574,7 +574,7 @@ type integralPartialFractionsGen struct{}
 
 func (g *integralPartialFractionsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
-		Question:    "Find ∫1/(x²-1) dx.",
+		Question:    "Find \\(\\int \\frac{1}{x^{2}-1} \\, dx\\).",
 		Answer:      "(1/2)ln|x-1|-(1/2)ln|x+1|+C",
 		Explanation: "Partial fractions: 1/(x²-1) = 1/2·(1/(x-1) - 1/(x+1)). Integrate: (1/2)ln|x-1| - (1/2)ln|x+1| + C.",
 	}
@@ -710,7 +710,7 @@ func (g *differenceQuotientGen) Generate(difficulty float64) generator.Problem {
 	fxh := (x0 + h) * (x0 + h)
 	ans := (fxh - fx) / h
 	return generator.Problem{
-		Question:    fmt.Sprintf("For f(x)=x², what is the difference quotient (f(%d+h)-f(%d))/h for h=%d?", x0, x0, h),
+		Question:    fmt.Sprintf("For \\(f(x)=x^{2}\\), what is the difference quotient \\(\\frac{f(%d+h)-f(%d)}{h}\\) for \\(h=%d\\)?", x0, x0, h),
 		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("(f(%d+h)-f(%d))/h = ((%d+h)²-%d²)/h = (%d²+2·%d·h+h²-%d²)/h = (2·%d·h+h²)/h = 2·%d+h = %d.", x0, x0, x0, x0, x0, x0, x0, x0, x0, ans),
 	}
@@ -725,7 +725,7 @@ func (g *differentialGen) Generate(difficulty float64) generator.Problem {
 	fpx := float64(2 * x0)
 	dy := fpx * dx
 	return generator.Problem{
-		Question:    fmt.Sprintf("If y=x² at x=%d, approximate Δy using the differential dy when dx=%.1f.", x0, dx),
+		Question:    fmt.Sprintf("If \\(y=x^{2}\\) at \\(x=%d\\), approximate \\(\\Delta y\\) using the differential \\(dy\\) when \\(dx=%.1f\\).", x0, dx),
 		Answer:      fmt.Sprintf("%.2f", dy),
 		Explanation: fmt.Sprintf("dy = f'(x)dx = 2x·dx = 2·%d·%.1f = %.2f. The actual Δy is (%.1f)²-%d² = %.2f-%d = %.2f.", x0, dx, dy, float64(x0)+dx, x0, (float64(x0)+dx)*(float64(x0)+dx), x0*x0, (float64(x0)+dx)*(float64(x0)+dx)-float64(x0*x0)),
 	}
@@ -788,7 +788,7 @@ func (g *partialDerivGen) Generate(difficulty float64) generator.Problem {
 	}
 	dir := []string{"x", "y"}[which]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∂f/∂%s at (%d,%d) for f(x,y)=%dx²y+%dxy².", dir, x0, y0, a, b),
+		Question:    fmt.Sprintf("Find \\(\\partial f/\\partial %s\\) at \\((%d,%d)\\) for \\(f(x,y)=%dx^{2}y+%dxy^{2}\\).", dir, x0, y0, a, b),
 		Answer:      answerStr,
 		Explanation: answerStr,
 	}
@@ -800,7 +800,7 @@ type arcLengthGen struct{}
 
 func (g *arcLengthGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
-		Question:    "What is the formula for arc length of y=f(x) from x=a to x=b?",
+		Question:    "What is the formula for arc length of \\(y=f(x)\\) from \\(x=a\\) to \\(x=b\\)?",
 		Answer:      "∫√(1+(f'(x))²)dx from a to b",
 		Explanation: "Arc length = ∫ₐᵇ √(1+(f'(x))²) dx. For parametric curves, use ∫√((dx/dt)²+(dy/dt)²) dt.",
 	}
@@ -813,7 +813,7 @@ func (g *expIntegralGen) Generate(difficulty float64) generator.Problem {
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find ∫%d·e^(%dx) dx.", a, b),
+		Question:    fmt.Sprintf("Find \\(\\int %d e^{%d x} \\, dx\\).", a, b),
 		Answer:      fmt.Sprintf("(%d/%d)e^(%dx)+C", a, b, b),
 		Explanation: fmt.Sprintf("∫%d·e^(%dx) dx = %d·(1/%d)·e^(%dx)+C = (%d/%d)e^(%dx)+C.", a, b, a, b, b, a, b, b),
 	}
@@ -823,7 +823,7 @@ type improperIntegralGen struct{}
 
 func (g *improperIntegralGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
-		Question:    "Determine if ∫₁^∞ 1/x² dx converges or diverges.",
+		Question:    "Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x^{2}} \\, dx\\) converges or diverges.",
 		Answer:      "converges (to 1)",
 		Explanation: "∫₁^∞ 1/x² dx = lim_{b→∞} [-1/x]₁ᵇ = lim_{b→∞} (-1/b+1) = 1. The integral converges to 1.",
 	}
@@ -868,13 +868,13 @@ func (g *trigIntegralsGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Find ∫sin(x) dx.", "-cos(x)+C", "∫sin(x)dx = -cos(x)+C."},
-		{"Find ∫cos(x) dx.", "sin(x)+C", "∫cos(x)dx = sin(x)+C."},
-		{"Find ∫sec²(x) dx.", "tan(x)+C", "∫sec²(x)dx = tan(x)+C."},
-		{"Find ∫csc²(x) dx.", "-cot(x)+C", "∫csc²(x)dx = -cot(x)+C."},
-		{"Find ∫sec(x)tan(x) dx.", "sec(x)+C", "∫sec(x)tan(x)dx = sec(x)+C."},
-		{"Find ∫csc(x)cot(x) dx.", "-csc(x)+C", "∫csc(x)cot(x)dx = -csc(x)+C."},
-		{"Find ∫tan(x) dx.", "ln|sec(x)|+C", "∫tan(x)dx = -ln|cos(x)|+C = ln|sec(x)|+C."},
+		{"Find \\(\\int \\sin(x) \\, dx\\).", "-cos(x)+C", "\\(\\int \\sin(x) \\, dx = -\\cos(x)+C\\)."},
+		{"Find \\(\\int \\cos(x) \\, dx\\).", "sin(x)+C", "\\(\\int \\cos(x) \\, dx = \\sin(x)+C\\)."},
+		{"Find \\(\\int \\sec^{2}(x) \\, dx\\).", "tan(x)+C", "\\(\\int \\sec^{2}(x) \\, dx = \\tan(x)+C\\)."},
+		{"Find \\(\\int \\csc^{2}(x) \\, dx\\).", "-cot(x)+C", "\\(\\int \\csc^{2}(x) \\, dx = -\\cot(x)+C\\)."},
+		{"Find \\(\\int \\sec(x)\\tan(x) \\, dx\\).", "sec(x)+C", "\\(\\int \\sec(x)\\tan(x) \\, dx = \\sec(x)+C\\)."},
+		{"Find \\(\\int \\csc(x)\\cot(x) \\, dx\\).", "-csc(x)+C", "\\(\\int \\csc(x)\\cot(x) \\, dx = -\\csc(x)+C\\)."},
+		{"Find \\(\\int \\tan(x) \\, dx\\).", "ln|sec(x)|+C", "\\(\\int \\tan(x) \\, dx = \\ln|\\sec(x)|+C\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -887,11 +887,11 @@ func (g *trigSubstitutionGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What substitution is used for √(a²-x²)?", "x = a·sin(θ)", "For √(a²-x²), let x=a·sin(θ), then dx=a·cos(θ)dθ and √(a²-x²)=a·cos(θ)."},
-		{"What substitution is used for √(a²+x²)?", "x = a·tan(θ)", "For √(a²+x²), let x=a·tan(θ), then dx=a·sec²(θ)dθ and √(a²+x²)=a·sec(θ)."},
-		{"What substitution is used for √(x²-a²)?", "x = a·sec(θ)", "For √(x²-a²), let x=a·sec(θ), then dx=a·sec(θ)tan(θ)dθ and √(x²-a²)=a·tan(θ)."},
-		{"Find ∫1/√(1-x²) dx.", "arcsin(x)+C", "Let x=sin(θ), dx=cos(θ)dθ. ∫cos(θ)/cos(θ)dθ = ∫dθ = θ+C = arcsin(x)+C."},
-		{"Find ∫1/(1+x²) dx.", "arctan(x)+C", "Let x=tan(θ), dx=sec²(θ)dθ. ∫sec²(θ)/(1+tan²(θ))dθ = ∫dθ = θ+C = arctan(x)+C."},
+		{"What substitution is used for \\(\\sqrt{a^{2}-x^{2}}\\)?", "\\(x = a\\sin(\\theta)\\)", "For \\(\\sqrt{a^{2}-x^{2}}\\), let \\(x=a\\sin(\\theta)\\), then \\(dx=a\\cos(\\theta)d\\theta\\) and \\(\\sqrt{a^{2}-x^{2}} = a\\cos(\\theta)\\)."},
+		{"What substitution is used for \\(\\sqrt{a^{2}+x^{2}}\\)?", "\\(x = a\\tan(\\theta)\\)", "For \\(\\sqrt{a^{2}+x^{2}}\\), let \\(x=a\\tan(\\theta)\\), then \\(dx=a\\sec^{2}(\\theta)d\\theta\\) and \\(\\sqrt{a^{2}+x^{2}} = a\\sec(\\theta)\\)."},
+		{"What substitution is used for \\(\\sqrt{x^{2}-a^{2}}\\)?", "\\(x = a\\sec(\\theta)\\)", "For \\(\\sqrt{x^{2}-a^{2}}\\), let \\(x=a\\sec(\\theta)\\), then \\(dx=a\\sec(\\theta)\\tan(\\theta)d\\theta\\) and \\(\\sqrt{x^{2}-a^{2}} = a\\tan(\\theta)\\)."},
+		{"Find \\(\\int \\frac{1}{\\sqrt{1-x^{2}}} \\, dx\\).", "arcsin(x)+C", "Let \\(x=\\sin(\\theta), dx=\\cos(\\theta)d\\theta\\). \\(\\int \\frac{\\cos(\\theta)}{\\cos(\\theta)} d\\theta = \\int d\\theta = \\theta+C = \\arcsin(x)+C\\)."},
+		{"Find \\(\\int \\frac{1}{1+x^{2}} \\, dx\\).", "arctan(x)+C", "Let \\(x=\\tan(\\theta), dx=\\sec^{2}(\\theta)d\\theta\\). \\(\\int \\frac{\\sec^{2}(\\theta)}{1+\\tan^{2}(\\theta)} d\\theta = \\int d\\theta = \\theta+C = \\arctan(x)+C\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -904,10 +904,10 @@ func (g *weierstrassSubGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is the Weierstrass substitution?", "t = tan(x/2)", "Let t=tan(x/2). Then sin(x)=2t/(1+t²), cos(x)=(1-t²)/(1+t²), dx=2/(1+t²)dt."},
-		{"What is sin(x) in terms of t=tan(x/2)?", "2t/(1+t²)", "sin(x) = 2t/(1+t²) where t=tan(x/2)."},
-		{"What is cos(x) in terms of t=tan(x/2)?", "(1-t²)/(1+t²)", "cos(x) = (1-t²)/(1+t²) where t=tan(x/2)."},
-		{"What is dx in terms of t=tan(x/2)?", "2/(1+t²) dt", "dx = 2/(1+t²) dt where t=tan(x/2)."},
+		{"What is the Weierstrass substitution?", "\\(t = \\tan(x/2)\\)", "Let \\(t=\\tan(x/2)\\). Then \\(\\sin(x)=2t/(1+t^{2})\\), \\(\\cos(x)=(1-t^{2})/(1+t^{2})\\), \\(dx=2/(1+t^{2})dt\\)."},
+		{"What is \\(\\sin(x)\\) in terms of \\(t=\\tan(x/2)\\)?", "2t/(1+t^2)", "\\(\\sin(x) = 2t/(1+t^{2})\\) where \\(t=\\tan(x/2)\\)."},
+		{"What is \\(\\cos(x)\\) in terms of \\(t=\\tan(x/2)\\)?", "(1-t^2)/(1+t^2)", "\\(\\cos(x) = (1-t^{2})/(1+t^{2})\\) where \\(t=\\tan(x/2)\\)."},
+		{"What is \\(dx\\) in terms of \\(t=\\tan(x/2)\\)?", "2/(1+t^2) dt", "\\(dx = 2/(1+t^{2}) dt\\) where \\(t=\\tan(x/2)\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -938,11 +938,11 @@ func (g *asymptotesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What are the vertical asymptotes of f(x)=1/(x-2)?", "x=2", "The denominator is 0 at x=2, and the numerator is nonzero, so x=2 is a vertical asymptote."},
-		{"What is the horizontal asymptote of f(x)=1/x?", "y=0", "As x→∞, 1/x→0. As x→-∞, 1/x→0. So y=0 is the horizontal asymptote."},
-		{"What is the horizontal asymptote of f(x)=(2x+1)/(x-3)?", "y=2", "As x→∞, (2x+1)/(x-3)→2. The ratio of leading coefficients gives the horizontal asymptote."},
+		{"What are the vertical asymptotes of \\(f(x)=1/(x-2)\\)?", "x=2", "The denominator is \\(0\\) at \\(x=2\\), and the numerator is nonzero, so \\(x=2\\) is a vertical asymptote."},
+		{"What is the horizontal asymptote of \\(f(x)=1/x\\)?", "y=0", "As \\(x\\to\\infty\\), \\(1/x\\to 0\\). As \\(x\\to -\\infty\\), \\(1/x\\to 0\\). So \\(y=0\\) is the horizontal asymptote."},
+		{"What is the horizontal asymptote of \\(f(x)=\\frac{2x+1}{x-3}\\)?", "y=2", "As \\(x\\to\\infty\\), \\(\\frac{2x+1}{x-3}\\to 2\\). The ratio of leading coefficients gives the horizontal asymptote."},
 		{"Can a function cross its horizontal asymptote?", "yes", "A function CAN cross its horizontal asymptote (unlike vertical asymptotes). The asymptote describes end behavior only."},
-		{"What are the vertical asymptotes of f(x)=tan(x)?", "x=π/2 + nπ", "tan(x)=sin(x)/cos(x). Vertical asymptotes occur where cos(x)=0, i.e., at x=π/2+nπ."},
+		{"What are the vertical asymptotes of \\(f(x)=\\tan(x)\\)?", "\\(x=\\pi/2 + n\\pi\\)", "\\(\\tan(x)=\\sin(x)/\\cos(x)\\). Vertical asymptotes occur where \\(\\cos(x)=0\\), i.e., at \\(x=\\pi/2+n\\pi\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -955,10 +955,10 @@ func (g *discontinuityGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What kind of discontinuity does 1/x have at x=0?", "infinite", "1/x has an infinite discontinuity (vertical asymptote) at x=0."},
-		{"What kind of discontinuity does |x|/x have at x=0?", "jump", "The left limit is -1 and the right limit is 1, so there is a jump discontinuity."},
-		{"What kind of discontinuity does (x²-1)/(x-1) have at x=1?", "removable", "The function simplifies to x+1 for x≠1, and the limit as x→1 is 2. The discontinuity can be removed by defining f(1)=2."},
-		{"What kind of discontinuity does sin(1/x) have at x=0?", "essential", "sin(1/x) oscillates infinitely near 0, so the limit does not exist (essential/oscillatory discontinuity)."},
+		{"What kind of discontinuity does \\(1/x\\) have at \\(x=0\\)?", "infinite", "\\(1/x\\) has an infinite discontinuity (vertical asymptote) at \\(x=0\\)."},
+		{"What kind of discontinuity does \\(|x|/x\\) have at \\(x=0\\)?", "jump", "The left limit is \\(-1\\) and the right limit is \\(1\\), so there is a jump discontinuity."},
+		{"What kind of discontinuity does \\(\\frac{x^{2}-1}{x-1}\\) have at \\(x=1\\)?", "removable", "The function simplifies to \\(x+1\\) for \\(x\\neq 1\\), and the limit as \\(x\\to 1\\) is \\(2\\)."},
+		{"What kind of discontinuity does \\(\\sin(1/x)\\) have at \\(x=0\\)?", "essential", "\\(\\sin(1/x)\\) oscillates infinitely near \\(0\\), so the limit does not exist (essential/oscillatory discontinuity)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -971,12 +971,12 @@ func (g *indeterminateGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Is 0/0 an indeterminate form?", "yes", "0/0 is indeterminate — the limit could be any real number depending on the functions."},
-		{"Is ∞/∞ an indeterminate form?", "yes", "∞/∞ is indeterminate — the ratio of functions both approaching infinity could converge to anything."},
-		{"Is 0·∞ an indeterminate form?", "yes", "0·∞ is indeterminate — it can be rewritten as 0/0 or ∞/∞."},
-		{"Is ∞-∞ an indeterminate form?", "yes", "∞-∞ is indeterminate — the difference of two quantities approaching infinity could be anything."},
-		{"Is 0^∞ an indeterminate form?", "no", "0^∞ = 0. If the base approaches 0 and the exponent approaches ∞, the result is 0 (not indeterminate)."},
-		{"Is 1^∞ an indeterminate form?", "yes", "1^∞ is indeterminate — it often arises with exponential limits and can approach e, 1, or other values."},
+		{"Is \\(0/0\\) an indeterminate form?", "yes", "\\(0/0\\) is indeterminate — the limit could be any real number depending on the functions."},
+		{"Is \\(\\infty/\\infty\\) an indeterminate form?", "yes", "\\(\\infty/\\infty\\) is indeterminate — the ratio of functions both approaching infinity could converge to anything."},
+		{"Is \\(0 \\cdot \\infty\\) an indeterminate form?", "yes", "\\(0 \\cdot \\infty\\) is indeterminate — it can be rewritten as \\(0/0\\) or \\(\\infty/\\infty\\)."},
+		{"Is \\(\\infty - \\infty\\) an indeterminate form?", "yes", "\\(\\infty - \\infty\\) is indeterminate — the difference of two quantities approaching infinity could be anything."},
+		{"Is \\(0^{\\infty}\\) an indeterminate form?", "no", "\\(0^{\\infty} = 0\\). If the base approaches \\(0\\) and the exponent approaches \\(\\infty\\), the result is \\(0\\) (not indeterminate)."},
+		{"Is \\(1^{\\infty}\\) an indeterminate form?", "yes", "\\(1^{\\infty}\\) is indeterminate — it often arises with exponential limits and can approach \\(e\\), \\(1\\), or other values."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -989,11 +989,11 @@ func (g *lhopitalGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Find lim x→0 sin(x)/x using L'Hôpital's rule.", "1", "Both numerator and denominator → 0. L'Hôpital: lim x→0 cos(x)/1 = 1."},
-		{"Find lim x→0 (e^x-1)/x using L'Hôpital's rule.", "1", "Both → 0. L'Hôpital: lim x→0 e^x/1 = 1."},
-		{"Find lim x→∞ x/e^x using L'Hôpital's rule.", "0", "Both → ∞. L'Hôpital: lim x→∞ 1/e^x = 0."},
-		{"What condition is required for L'Hôpital's rule?", "both numerator and denominator → 0 or ±∞", "L'Hôpital's rule applies to 0/0 or ∞/∞ indeterminate forms."},
-		{"Does L'Hôpital's rule apply to lim x→0 x²·sin(1/x)/sin(x)?", "no (not 0/0 or ∞/∞ form)", "Wait, this IS 0/0. But L'Hôpital would be messy. The rule can be applied, but checking conditions carefully is needed."},
+		{"Find \\(\\lim_{x \\to 0} \\frac{\\sin(x)}{x}\\) using L'Hôpital's rule.", "1", "Both numerator and denominator \\(\\to 0\\). L'Hôpital: \\(\\lim_{x \\to 0} \\frac{\\cos(x)}{1} = 1\\)."},
+		{"Find \\(\\lim_{x \\to 0} \\frac{e^{x}-1}{x}\\) using L'Hôpital's rule.", "1", "Both \\(\\to 0\\). L'Hôpital: \\(\\lim_{x \\to 0} \\frac{e^{x}}{1} = 1\\)."},
+		{"Find \\(\\lim_{x \\to \\infty} \\frac{x}{e^{x}}\\) using L'Hôpital's rule.", "0", "Both \\(\\to \\infty\\). L'Hôpital: \\(\\lim_{x \\to \\infty} \\frac{1}{e^{x}} = 0\\)."},
+		{"What condition is required for L'Hôpital's rule?", "both numerator and denominator \\(\\to 0\\) or \\(\\pm \\infty\\)", "L'Hôpital's rule applies to \\(0/0\\) or \\(\\infty/\\infty\\) indeterminate forms."},
+		{"Does L'Hôpital's rule apply to \\(\\lim_{x \\to 0} \\frac{x^{2} \\cdot \\sin(1/x)}{\\sin(x)}\\)?", "no (not 0/0 or ∞/∞ form)", "Wait, this IS \\(0/0\\). But L'Hôpital would be messy. The rule can be applied, but checking conditions carefully is needed."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1040,8 +1040,8 @@ func (g *squeezeGen) Generate(difficulty float64) generator.Problem {
 	}
 	table := []entry{
 		{"What does the squeeze theorem say?", "if g(x)≤f(x)≤h(x) and lim g=lim h=L, then lim f=L", "The squeeze theorem: if f is bounded between g and h, and g and h have the same limit L, then f also approaches L."},
-		{"Find lim x→0 x²·sin(1/x) using the squeeze theorem.", "0", "-1≤sin(1/x)≤1 → -x²≤x²·sin(1/x)≤x². Since -x²→0 and x²→0, the squeeze theorem gives limit 0."},
-		{"Find lim x→0 x·cos(1/x) using the squeeze theorem.", "0", "-1≤cos(1/x)≤1 → -x≤x·cos(1/x)≤x. Since -x→0 and x→0, the limit is 0."},
+		{"Find \\(\\lim_{x \\to 0} x^{2} \\sin(1/x)\\) using the squeeze theorem.", "0", "\\(-1\\leq \\sin(1/x)\\leq 1 \\implies -x^{2} \\leq x^{2}\\sin(1/x) \\leq x^{2}\\). Since \\(-x^{2}\\to 0\\) and \\(x^{2}\\to 0\\), the squeeze theorem gives limit \\(0\\)."},
+		{"Find \\(\\lim_{x \\to 0} x \\cos(1/x)\\) using the squeeze theorem.", "0", "\\(-1\\leq \\cos(1/x)\\leq 1 \\implies -x \\leq x\\cos(1/x) \\leq x\\). Since \\(-x\\to 0\\) and \\(x\\to 0\\), the limit is \\(0\\)."},
 		{"What is a common way to apply the squeeze theorem?", "bound the function between two simpler functions with the same limit", "Bounding f(x) using inequalities, then showing the upper and lower bounds converge to the same limit."},
 	}
 	e := table[rand.Intn(len(table))]
@@ -1055,11 +1055,11 @@ func (g *supremumGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is the supremum of the set {1-1/n : n∈ℕ}?", "1", "The values approach 1 from below. 1 is an upper bound, and no smaller number is an upper bound. Supremum = 1."},
-		{"What is the infimum of the set {1/n : n∈ℕ}?", "0", "The values approach 0 from above. 0 is a lower bound, and no larger number is a lower bound. Infimum = 0."},
-		{"Is the supremum always in the set?", "no", "The supremum need not be in the set. E.g., sup{1-1/n}=1, but 1 is not in the set."},
+		{"What is the supremum of the set \\(\\{1-1/n : n \\in \\mathbb{N}\\}\\)?", "1", "The values approach \\(1\\) from below. \\(1\\) is an upper bound, and no smaller number is an upper bound. Supremum = 1."},
+		{"What is the infimum of the set \\(\\{1/n : n \\in \\mathbb{N}\\}\\)?", "0", "The values approach \\(0\\) from above. \\(0\\) is a lower bound, and no larger number is a lower bound. Infimum = 0."},
+		{"Is the supremum always in the set?", "no", "The supremum need not be in the set. E.g., \\(\\sup\\{1-1/n\\}=1\\), but \\(1\\) is not in the set."},
 		{"Is the maximum always in the set?", "yes", "If a maximum exists, it is the supremum and is also in the set. Unlike supremum, maximum must be attained."},
-		{"What is sup{x∈ℝ: x²<2}?", "√2", "The set is (-√2, √2). The supremum is √2 (the least upper bound), which is not in the set."},
+		{"What is \\(\\sup\\{x \\in \\mathbb{R} : x^{2}<2\\}\\)?", "\\(\\sqrt{2}\\)", "The set is \\((-\\sqrt{2}, \\sqrt{2})\\). The supremum is \\(\\sqrt{2}\\) (the least upper bound), which is not in the set."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1123,11 +1123,11 @@ func (g *seqConvergenceGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Does aₙ = 1/n converge? If so, to what?", "yes, to 0", "As n→∞, 1/n → 0. The sequence converges to 0."},
-		{"Does aₙ = n/(n+1) converge? If so, to what?", "yes, to 1", "n/(n+1) = 1/(1+1/n) → 1/(1+0) = 1."},
-		{"Does aₙ = (-1)ⁿ converge?", "no", "(-1)ⁿ oscillates between -1 and 1 without approaching a single limit."},
-		{"Does aₙ = n² converge?", "no (diverges to ∞)", "n² → ∞ as n→∞, so the sequence diverges."},
-		{"Does aₙ = 2ⁿ/n! converge? If so, to what?", "yes, to 0", "The factorial grows faster than the exponential, so 2ⁿ/n! → 0."},
+		{"Does \\(a_{n} = 1/n\\) converge? If so, to what?", "yes, to 0", "As \\(n\\to\\infty\\), \\(1/n \\to 0\\). The sequence converges to \\(0\\)."},
+		{"Does \\(a_{n} = n/(n+1)\\) converge? If so, to what?", "yes, to 1", "\\(n/(n+1) = 1/(1+1/n) \\to 1/(1+0) = 1\\)."},
+		{"Does \\(a_{n} = (-1)^{n}\\) converge?", "no", "\\((-1)^{n}\\) oscillates between \\(-1\\) and \\(1\\) without approaching a single limit."},
+		{"Does \\(a_{n} = n^{2}\\) converge?", "no (diverges to \\(\\infty\\))", "\\(n^{2} \\to \\infty\\) as \\(n\\to\\infty\\), so the sequence diverges."},
+		{"Does \\(a_{n} = 2^{n}/n!\\) converge? If so, to what?", "yes, to 0", "The factorial grows faster than the exponential, so \\(2^{n}/n! \\to 0\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1173,10 +1173,10 @@ func (g *eulerSeqGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What sequence defines Euler's number e?", "(1+1/n)ⁿ", "e = lim_{n→∞} (1+1/n)ⁿ ≈ 2.71828..."},
-		{"What is e to 3 decimal places?", "2.718", "e = lim (1+1/n)ⁿ = 2.718281828..."},
-		{"What is an alternative series representation of e?", "∑ 1/n!", "e = 1 + 1/1! + 1/2! + 1/3! + ... = ∑_{n=0}∞ 1/n!"},
-		{"Is e rational or irrational?", "irrational", "e is irrational (proved by Euler). It is also transcendental."},
+		{"What sequence defines Euler's number \\(e\\)?", "\\((1+1/n)^{n}\\)", "\\(e = \\lim_{n\\to\\infty} (1+1/n)^{n} \\approx 2.71828...\\)"},
+		{"What is \\(e\\) to 3 decimal places?", "2.718", "\\(e = \\lim (1+1/n)^{n} = 2.718281828...\\)"},
+		{"What is an alternative series representation of \\(e\\)?", "\\(\\sum 1/n!\\)", "\\(e = 1 + 1/1! + 1/2! + 1/3! + \\cdots = \\sum_{n=0}^{\\infty} 1/n!\\)"},
+		{"Is \\(e\\) rational or irrational?", "irrational", "\\(e\\) is irrational (proved by Euler). It is also transcendental."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1223,10 +1223,10 @@ func (g *harmonicSeriesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"Does the harmonic series ∑ 1/n converge or diverge?", "diverges", "The harmonic series ∑ 1/n diverges (slowly — like ln(n)), even though its terms → 0."},
-		{"What is the p-series ∑ 1/n^p: when does it converge?", "converges for p > 1", "∑ 1/n^p converges if p>1, diverges if p≤1. The harmonic series (p=1) is the boundary case."},
-		{"Approximately how large is the nth partial sum of the harmonic series?", "Hₙ ≈ ln(n) + γ (γ≈0.577)", "The harmonic numbers Hₙ = ∑_{k=1}ⁿ 1/k ≈ ln(n) + γ, where γ is the Euler-Mascheroni constant."},
-		{"Is ∑ 1/n² convergent or divergent?", "converges (to π²/6)", "∑ 1/n² converges (p=2>1). Its sum is π²/6 ≈ 1.645 (Basel problem)."},
+		{"Does the harmonic series \\(\\sum 1/n\\) converge or diverge?", "diverges", "The harmonic series \\(\\sum 1/n\\) diverges (slowly — like \\(\\ln(n)\\)), even though its terms \\(\\to 0\\)."},
+		{"What is the \\(p\\)-series \\(\\sum 1/n^{p}\\): when does it converge?", "converges for \\(p > 1\\)", "\\(\\sum 1/n^{p}\\) converges if \\(p>1\\), diverges if \\(p\\leq 1\\). The harmonic series \\((p=1)\\) is the boundary case."},
+		{"Approximately how large is the \\(n\\)th partial sum of the harmonic series?", "\\(H_{n} \\approx \\ln(n) + \\gamma\\) \\((\\gamma\\approx 0.577)\\)", "The harmonic numbers \\(H_{n} = \\sum_{k=1}^{n} 1/k \\approx \\ln(n) + \\gamma\\), where \\(\\gamma\\) is the Euler-Mascheroni constant."},
+		{"Is \\(\\sum 1/n^{2}\\) convergent or divergent?", "converges (to \\(\\pi^{2}/6\\))", "\\(\\sum 1/n^{2}\\) converges \\((p=2>1)\\). Its sum is \\(\\pi^{2}/6 \\approx 1.645\\) (Basel problem)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1255,11 +1255,11 @@ func (g *alternatingSeriesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is an alternating series?", "terms alternate in sign: ∑ (-1)ⁿaₙ", "An alternating series has terms that alternate between positive and negative."},
-		{"What does the alternating series test require?", "aₙ decreasing to 0", "If |aₙ| decreases monotonically and aₙ→0, then ∑ (-1)ⁿaₙ converges."},
-		{"Does ∑ (-1)ⁿ/n converge?", "yes (conditionally)", "By the alternating series test: 1/n decreases and →0. So it converges. It converges conditionally (∑ 1/n diverges)."},
-		{"Does ∑ (-1)ⁿ converge?", "no", "The terms do not → 0 (they alternate between -1 and 1). The series diverges by the nth term test."},
-		{"What is the error bound for an alternating series?", "|error| ≤ first omitted term", "For a convergent alternating series with decreasing terms, |S - Sₙ| ≤ aₙ₊₁ (the next term)."},
+		{"What is an alternating series?", "terms alternate in sign: \\(\\sum (-1)^{n}a_{n}\\)", "An alternating series has terms that alternate between positive and negative."},
+		{"What does the alternating series test require?", "\\(a_{n}\\) decreasing to \\(0\\)", "If \\(|a_{n}|\\) decreases monotonically and \\(a_{n}\\to 0\\), then \\(\\sum (-1)^{n}a_{n}\\) converges."},
+		{"Does \\(\\sum (-1)^{n}/n\\) converge?", "yes (conditionally)", "By the alternating series test: \\(1/n\\) decreases and \\(\\to 0\\). So it converges. It converges conditionally (\\(\\sum 1/n\\) diverges)."},
+		{"Does \\(\\sum (-1)^{n}\\) converge?", "no", "The terms do not \\(\\to 0\\) (they alternate between \\(-1\\) and \\(1\\)). The series diverges by the \\(n\\)th term test."},
+		{"What is the error bound for an alternating series?", "\\(|\\text{error}| \\leq\\) first omitted term", "For a convergent alternating series with decreasing terms, \\(|S - S_{n}| \\leq a_{n+1}\\) (the next term)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1272,10 +1272,10 @@ func (g *integralTestGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What does the integral test relate?", "∑ f(n) and ∫f(x)dx", "If f is positive, continuous, and decreasing on [1,∞), then ∑ f(n) converges iff ∫₁^∞ f(x) dx converges."},
-		{"Does ∑ 1/n² converge? Use integral test.", "yes", "∫₁^∞ 1/x² dx = [-1/x]₁^∞ = 1. The integral converges, so the series converges."},
-		{"Does ∑ 1/n converge? Use integral test.", "no", "∫₁^∞ 1/x dx = [ln(x)]₁^∞ = ∞. The integral diverges, so the series diverges."},
-		{"Apply integral test to ∑ 1/(n ln n) for n≥2.", "diverges", "∫₂^∞ 1/(x ln x) dx = [ln(ln x)]₂^∞ = ∞. So ∑ 1/(n ln n) diverges."},
+		{"What does the integral test relate?", "\\(\\sum f(n)\\) and \\(\\int f(x) \\, dx\\)", "If \\(f\\) is positive, continuous, and decreasing on \\([1,\\infty)\\), then \\(\\sum f(n)\\) converges iff \\(\\int_{1}^{\\infty} f(x) \\, dx\\) converges."},
+		{"Does \\(\\sum 1/n^{2}\\) converge? Use integral test.", "yes", "\\(\\int_{1}^{\\infty} 1/x^{2} \\, dx = [-1/x]_{1}^{\\infty} = 1\\). The integral converges, so the series converges."},
+		{"Does \\(\\sum 1/n\\) converge? Use integral test.", "no", "\\(\\int_{1}^{\\infty} 1/x \\, dx = [\\ln(x)]_{1}^{\\infty} = \\infty\\). The integral diverges, so the series diverges."},
+		{"Apply integral test to \\(\\sum 1/(n \\ln n)\\) for \\(n\\geq 2\\).", "diverges", "\\(\\int_{2}^{\\infty} 1/(x \\ln x) \\, dx = [\\ln(\\ln x)]_{2}^{\\infty} = \\infty\\). So \\(\\sum 1/(n \\ln n)\\) diverges."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1288,10 +1288,10 @@ func (g *rootTestGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What does the root test evaluate?", "lim sup (|aₙ|)^(1/n)", "If lim sup |aₙ|^(1/n) = L < 1, the series ∑ aₙ converges absolutely. If L > 1, it diverges. Inconclusive if L=1."},
-		{"Apply root test to ∑ (n/(n+1))^(n²).", "converges", "|aₙ|^(1/n) = (n/(n+1))ⁿ = 1/(1+1/n)ⁿ → 1/e < 1. The series converges."},
-		{"Apply root test to ∑ (1/2ⁿ).", "converges", "|aₙ|^(1/n) = 1/2 < 1. The series ∑ 1/2ⁿ converges by root test (it's a geometric series)."},
-		{"When might the root test be particularly useful?", "when aₙ involves nth powers", "The root test is especially useful when aₙ contains expressions like (something)ⁿ or n-th powers."},
+		{"What does the root test evaluate?", "\\(\\limsup |a_{n}|^{1/n}\\)", "If \\(\\limsup |a_{n}|^{1/n} = L < 1\\), the series \\(\\sum a_{n}\\) converges absolutely. If \\(L > 1\\), it diverges. Inconclusive if \\(L=1\\)."},
+		{"Apply root test to \\(\\sum (n/(n+1))^{n^{2}}\\).", "converges", "\\(|a_{n}|^{1/n} = (n/(n+1))^{n} = 1/(1+1/n)^{n} \\to 1/e < 1\\). The series converges."},
+		{"Apply root test to \\(\\sum (1/2^{n})\\).", "converges", "\\(|a_{n}|^{1/n} = 1/2 < 1\\). The series \\(\\sum 1/2^{n}\\) converges by root test (it's a geometric series)."},
+		{"When might the root test be particularly useful?", "when \\(a_{n}\\) involves \\(n\\)th powers", "The root test is especially useful when \\(a_{n}\\) contains expressions like \\((\\text{something})^{n}\\) or \\(n\\)-th powers."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1304,11 +1304,11 @@ func (g *powerSeriesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is the general form of a power series?", "∑ cₙ(x-a)ⁿ", "A power series centered at a: c₀ + c₁(x-a) + c₂(x-a)² + ..."},
-		{"What is the radius of convergence R?", "the series converges for |x-a|<R, diverges for |x-a|>R", "The radius R defines the interval where the power series converges absolutely."},
-		{"What is the power series for 1/(1-x)?", "∑ xⁿ (for |x|<1)", "1/(1-x) = 1 + x + x² + x³ + ... = ∑_{n=0}∞ xⁿ, which converges for |x|<1."},
-		{"What is the power series for e^x?", "∑ xⁿ/n!", "eˣ = 1 + x + x²/2! + x³/3! + ... = ∑_{n=0}∞ xⁿ/n!, which converges for all real x."},
-		{"What is the power series for sin(x)?", "∑ (-1)ⁿx^(2n+1)/(2n+1)!", "sin(x) = x - x³/3! + x⁵/5! - x⁷/7! + ..., converging for all real x."},
+		{"What is the general form of a power series?", "\\(\\sum c_{n}(x-a)^{n}\\)", "A power series centered at \\(a\\): \\(c_{0} + c_{1}(x-a) + c_{2}(x-a)^{2} + \\cdots\\)"},
+		{"What is the radius of convergence \\(R\\)?", "the series converges for \\(|x-a|<R\\), diverges for \\(|x-a|>R\\)", "The radius \\(R\\) defines the interval where the power series converges absolutely."},
+		{"What is the power series for \\(1/(1-x)\\)?", "\\(\\sum x^{n}\\) (for \\(|x|<1\\))", "\\(1/(1-x) = 1 + x + x^{2} + x^{3} + \\cdots = \\sum_{n=0}^{\\infty} x^{n}\\), which converges for \\(|x|<1\\)."},
+		{"What is the power series for \\(e^{x}\\)?", "\\(\\sum x^{n}/n!\\)", "\\(e^{x} = 1 + x + x^{2}/2! + x^{3}/3! + \\cdots = \\sum_{n=0}^{\\infty} x^{n}/n!\\), which converges for all real \\(x\\)."},
+		{"What is the power series for \\(\\sin(x)\\)?", "\\(\\sum (-1)^{n}x^{2n+1}/(2n+1)!\\)", "\\(\\sin(x) = x - x^{3}/3! + x^{5}/5! - x^{7}/7! + \\cdots\\), converging for all real \\(x\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1321,11 +1321,11 @@ func (g *taylorSeriesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is a Taylor series?", "f(x) = ∑ f⁽ⁿ⁾(a)(x-a)ⁿ/n!", "The Taylor series of f centered at a is ∑_{n=0}∞ f⁽ⁿ⁾(a)(x-a)ⁿ/n!."},
-		{"What is the Taylor series for e^x at x=0 (Maclaurin)?", "∑ xⁿ/n!", "eˣ = ∑ xⁿ/n! with radius of convergence R=∞."},
-		{"What is the Maclaurin series for sin(x)?", "∑ (-1)ⁿx^(2n+1)/(2n+1)!", "sin(x) = x - x³/3! + x⁵/5! - ... with R=∞."},
-		{"What is the Maclaurin series for cos(x)?", "∑ (-1)ⁿx^(2n)/(2n)!", "cos(x) = 1 - x²/2! + x⁴/4! - ... with R=∞."},
-		{"What is the Maclaurin series for ln(1+x)?", "∑ (-1)ⁿ⁺¹xⁿ/n (for |x|<1)", "ln(1+x) = x - x²/2 + x³/3 - x⁴/4 + ... with R=1."},
+		{"What is a Taylor series?", "\\(f(x) = \\sum \\frac{f^{(n)}(a)(x-a)^{n}}{n!}\\)", "The Taylor series of \\(f\\) centered at \\(a\\) is \\(\\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)(x-a)^{n}}{n!}\\)."},
+		{"What is the Taylor series for \\(e^{x}\\) at \\(x=0\\) (Maclaurin)?", "\\(\\sum x^{n}/n!\\)", "\\(e^{x} = \\sum_{n=0}^{\\infty} x^{n}/n!\\) with radius of convergence \\(R=\\infty\\)."},
+		{"What is the Maclaurin series for \\(\\sin(x)\\)?", "\\(\\sum (-1)^{n}x^{2n+1}/(2n+1)!\\)", "\\(\\sin(x) = x - x^{3}/3! + x^{5}/5! - \\cdots\\) with \\(R=\\infty\\)."},
+		{"What is the Maclaurin series for \\(\\cos(x)\\)?", "\\(\\sum (-1)^{n}x^{2n}/(2n)!\\)", "\\(\\cos(x) = 1 - x^{2}/2! + x^{4}/4! - \\cdots\\) with \\(R=\\infty\\)."},
+		{"What is the Maclaurin series for \\(\\ln(1+x)\\)?", "\\(\\sum (-1)^{n+1}x^{n}/n\\) (for \\(|x|<1\\))", "\\(\\ln(1+x) = x - x^{2}/2 + x^{3}/3 - x^{4}/4 + \\cdots\\) with \\(R=1\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1353,11 +1353,11 @@ func (g *fourierSeriesGen) Generate(difficulty float64) generator.Problem {
 		q, a, e string
 	}
 	table := []entry{
-		{"What is a Fourier series?", "∑ (aₙcos(nx) + bₙsin(nx))", "A Fourier series represents a periodic function as a sum of sines and cosines."},
-		{"What is a₀ in a Fourier series?", "the average value: (1/π)∫f(x)dx over one period", "a₀ = (1/π)∫_{-π}^{π} f(x)dx, giving twice the average value."},
-		{"What formula gives Fourier coefficient aₙ?", "aₙ = (1/π)∫f(x)cos(nx)dx", "aₙ = (1/π)∫_{-π}^{π} f(x)cos(nx)dx for n≥0."},
-		{"What formula gives Fourier coefficient bₙ?", "bₙ = (1/π)∫f(x)sin(nx)dx", "bₙ = (1/π)∫_{-π}^{π} f(x)sin(nx)dx for n≥1."},
-		{"What is the Fourier series of an odd function?", "only sine terms (aₙ=0)", "Odd functions have Fourier series with only sine terms: all aₙ=0."},
+		{"What is a Fourier series?", "\\(\\sum (a_{n}\\cos(nx) + b_{n}\\sin(nx))\\)", "A Fourier series represents a periodic function as a sum of sines and cosines."},
+		{"What is \\(a_{0}\\) in a Fourier series?", "the average value: \\((1/\\pi)\\int f(x) \\, dx\\) over one period", "\\(a_{0} = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x) \\, dx\\), giving twice the average value."},
+		{"What formula gives Fourier coefficient \\(a_{n}\\)?", "\\(a_{n} = \\frac{1}{\\pi} \\int f(x)\\cos(nx) \\, dx\\)", "\\(a_{n} = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x)\\cos(nx) \\, dx\\) for \\(n\\geq 0\\)."},
+		{"What formula gives Fourier coefficient \\(b_{n}\\)?", "\\(b_{n} = \\frac{1}{\\pi} \\int f(x)\\sin(nx) \\, dx\\)", "\\(b_{n} = \\frac{1}{\\pi} \\int_{-\\pi}^{\\pi} f(x)\\sin(nx) \\, dx\\) for \\(n\\geq 1\\)."},
+		{"What is the Fourier series of an odd function?", "only sine terms (\\(a_{n}=0\\))", "Odd functions have Fourier series with only sine terms: all \\(a_{n}=0\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
