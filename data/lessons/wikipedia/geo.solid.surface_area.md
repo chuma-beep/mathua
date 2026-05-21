@@ -12,7 +12,7 @@ This should provide a function
 
 \(S \mapsto A(S)\)
 
-which assigns a positive real number to a certain class of surfaces that satisfies several natural requirements. The most fundamental property of the surface area is its **additivity**: *the area of the whole is the sum of the areas of the parts*. More rigorously, if a surface *S* is a union of finitely many pieces *S*<sub>1</sub>, …, *S*<sub>*r*</sub> which do not overlap except at their boundaries, then
+which assigns a positive real number to a certain class of surfaces that satisfies several natural requirements. The most fundamental property of the surface area is its **additivity**: *the area of the whole is the sum of the areas of the parts*. More rigorously, if a surface *S* is a union of finitely many pieces *S*\(_{1}\), …, *S*\(_{*r*}\) which do not overlap except at their boundaries, then
 \(A(S) = A(S_1) + \cdots + A(S_r).\)
 
 Surface areas of flat polygonal shapes must agree with their geometrically defined area. Since surface area is a geometric notion, areas of congruent surfaces must be the same and the area must depend only on the shape of the surface, but not on its position and orientation in space. This means that surface area is invariant under the group of Euclidean motions. These properties uniquely characterize surface area for a wide class of geometric surfaces called *piecewise smooth*. Such surfaces consist of finitely many pieces that can be represented in the parametric form
@@ -23,14 +23,13 @@ with a continuously differentiable function \(\vec{r}.\) The area of an individu
 
 \(A(S_D) = \iint_D\left |\vec{r}_u\times\vec{r}_v\right | \, du \, dv.\)
 
-Thus the area of *S*<sub>*D*</sub> is obtained by integrating the length of the normal vector \(\vec{r}_u\times\vec{r}_v\) to the surface over the appropriate region *D* in the parametric *uv* plane. The area of the whole surface is then obtained by adding together the areas of the pieces, using additivity of surface area. The main formula can be specialized to different classes of surfaces, giving, in particular, formulas for areas of graphs *z* = *f*(*x*,*y*) and surfaces of revolution.
+Thus the area of *S*\(_{*D*}\) is obtained by integrating the length of the normal vector \(\vec{r}_u\times\vec{r}_v\) to the surface over the appropriate region *D* in the parametric *uv* plane. The area of the whole surface is then obtained by adding together the areas of the pieces, using additivity of surface area. The main formula can be specialized to different classes of surfaces, giving, in particular, formulas for areas of graphs *z* = *f*(*x*,*y*) and surfaces of revolution.
 
 One of the subtleties of surface area, as compared to arc length of curves, is that surface area cannot be defined simply as the limit of areas of polyhedral shapes approximating a given smooth surface. It was demonstrated by Hermann Schwarz that already for the cylinder, different choices of approximating flat surfaces can lead to different limiting values of the area; this example is known as the Schwarz lantern.
 
 Various approaches to a general definition of surface area were developed in the late nineteenth and the early twentieth century by Henri Lebesgue and Hermann Minkowski. While for piecewise smooth surfaces there is a unique natural notion of surface area, if a surface is very irregular, or rough, then it may not be possible to assign an area to it at all. A typical example is given by a surface with spikes spread throughout in a dense fashion. Many surfaces of this type occur in the study of fractals. Extensions of the notion of area which partially fulfill its function and may be defined even for very badly irregular surfaces are studied in geometric measure theory. A specific example of such an extension is the Minkowski content of the surface.
 
 ## Common formulas
-
 
 {| class="wikitable"
 |+ Surface areas of common solids
@@ -190,42 +189,21 @@ The below given formulas can be used to show that the surface area of a sphere a
 
 Let the radius be *r* and the height be *h* (which is 2*r* for the sphere).
 
-
 \[
 \begin{array}{rlll}
-\text{Sphere surface area}   & = 4 \pi r^2      &                    & = (2 \pi r^2) \times 2 \\
+\text{Sphere surface area} & = 4 \pi r^2 & & = (2 \pi r^2) \times 2 \\
 \text{Cylinder surface area} & = 2 \pi r (h + r) & = 2 \pi r (2r + r) & = (2 \pi r^2) \times 3
 \end{array}
 \]
 
-
 The discovery of this ratio is credited to Archimedes.
-
 
 ## In chemistry
 
-
 Surface area is important in chemical kinetics. Increasing the surface area of a substance generally increases the rate of a chemical reaction. For example, iron in a fine powder will combust, while in solid blocks it is stable enough to use in structures. For different applications a minimal or maximal surface area may be desired.
-
 
 ## In biology
 
 The surface area of an organism is important in several considerations, such as regulation of body temperature and digestion. Animals use their teeth to grind food down into smaller particles, increasing the surface area available for digestion. The epithelial tissue lining the digestive tract contains microvilli, greatly increasing the area available for absorption. Elephants have large ears, allowing them to regulate their own body temperature. In other instances, animals will need to minimize surface area; for example, people will fold their arms over their chest when cold to minimize heat loss.
 
-The surface area to volume ratio (SA:V) of a cell imposes upper limits on size, as the volume increases much faster than does the surface area, thus limiting the rate at which substances diffuse from the interior across the cell membrane to interstitial spaces or to other cells. Indeed, representing a cell as an idealized sphere of radius , the volume and surface area are, respectively, 1=*V* = (4/3)*πr*<sup>3</sup> and 1=*SA* = 4*πr*<sup>2</sup>. The resulting surface area to volume ratio is therefore 3/*r*. Thus, if a cell has a radius of 1 μm, the SA:V ratio is 3; whereas if the radius of the cell is instead 10 μm, then the SA:V ratio becomes 0.3. With a cell radius of 100, SA:V ratio is 0.03. Thus, the surface area falls off steeply with increasing volume.
-
-## See also
-* Perimeter length
-* Projected area
-* BET theory, technique for the measurement of the specific surface area of materials
-* Spherical area
-* Surface integral
-
-## References
-
-
-*
-
-## External links
-*Surface Area Video at Thinkwell
-
+The surface area to volume ratio (SA:V) of a cell imposes upper limits on size, as the volume increases much faster than does the surface area, thus limiting the rate at which substances diffuse from the interior across the cell membrane to interstitial spaces or to other cells. Indeed, representing a cell as an idealized sphere of radius , the volume and surface area are, respectively, 1=*V* = (4/3)*πr*\(^{3}\) and 1=*SA* = 4*πr*\(^{2}\). The resulting surface area to volume ratio is therefore 3/*r*. Thus, if a cell has a radius of 1 μm, the SA:V ratio is 3; whereas if the radius of the cell is instead 10 μm, then the SA:V ratio becomes 0.3. With a cell radius of 100, SA:V ratio is 0.03. Thus, the surface area falls off steeply with increasing volume.

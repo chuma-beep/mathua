@@ -4,7 +4,7 @@
 
 In logic, a **logical connective** (also called a **logical operator**, **sentential connective**, or **sentential operator**) is an operator that combines or modifies one or more logical variables or formulas, similarly to how arithmetic connectives like \(+\) and \(-\) combine or negate arithmetic expressions. For instance, in the syntax of propositional logic, the binary connective \(\lor\) (meaning "or") can be used to join the two logical formulas \(P\) and \(Q\), producing the complex formula \(P \lor Q\).
 
-Unlike in algebra, there are many symbols in use for each logical connective.  The table "Logical connectives" shows examples.
+Unlike in algebra, there are many symbols in use for each logical connective. The table "Logical connectives" shows examples.
 
 Common connectives include negation, disjunction, conjunction, implication, and equivalence. In standard systems of classical logic, these connectives are interpreted as truth functions, though they receive a variety of alternative interpretations in nonclassical logics. Their classical interpretations are similar to the meanings of natural language expressions such as English "not", "or", "and", and "if", but not identical. Discrepancies between natural language connectives and those of classical logic have motivated nonclassical approaches to natural language meaning.
 
@@ -16,7 +16,7 @@ Logical connectives can be used to link zero or more statements, so one can spea
 {| class="floatright" style="margin-left:2em; margin-bottom:1ex; text-align:center; border: 1px solid #a2a9b1; color: black; padding:0.2em; background-color: #f8f9fa; font-size:90%;"
  ! colspan=2 | Symbol, name
  ! colspan=4 | Truthtable
- !           | Venndiagram
+ ! | Venndiagram
  |-
  ! colspan=7 | Zeroary connectives (constants)
  |-
@@ -89,10 +89,10 @@ Logical connectives can be used to link zero or more statements, so one can spea
 ### List of common logical connectives
 Commonly used logical connectives include the following ones.
 * Negation (not): \(\neg\), \(\sim\), \(N\) (prefix) in which \(\neg\) is the most modern and widely used, and \(\sim\) is also common;
-* Conjunction (and): \(\wedge\), \(\&\), \(K\) (prefix)  in which \(\wedge\) is the most modern and widely used;
-* Disjunction (or): \(\vee\), \(A\) (prefix)  in which \(\vee\) is the most modern and widely used;
-* Implication (if...then): \(\to\), \(\supset\), \(\Rightarrow\), \(C\) (prefix)  in which \(\to\) is the most modern and widely used, and \(\supset\) is also common;
-* Equivalence (if and only if): \(\leftrightarrow\), \(\subset\!\!\!\supset\),  \(\Leftrightarrow\), \(\equiv\), \(E\) (prefix) in which \(\leftrightarrow\) is the most modern and widely used, and \(\subset\!\!\!\supset\) is commonly used where \(\supset\) is also used.
+* Conjunction (and): \(\wedge\), \(\&\), \(K\) (prefix) in which \(\wedge\) is the most modern and widely used;
+* Disjunction (or): \(\vee\), \(A\) (prefix) in which \(\vee\) is the most modern and widely used;
+* Implication (if...then): \(\to\), \(\supset\), \(\Rightarrow\), \(C\) (prefix) in which \(\to\) is the most modern and widely used, and \(\supset\) is also common;
+* Equivalence (if and only if): \(\leftrightarrow\), \(\subset\!\!\!\supset\), \(\Leftrightarrow\), \(\equiv\), \(E\) (prefix) in which \(\leftrightarrow\) is the most modern and widely used, and \(\subset\!\!\!\supset\) is commonly used where \(\supset\) is also used.
 
 For example, the meaning of the statements *it is raining* (denoted by \(p\)) and *I am indoors* (denoted by \(q\)) is transformed, when the two are combined with logical connectives:
 
@@ -165,7 +165,7 @@ One approach is to choose a *minimal* set, and define other connectives by some 
 
 Another approach is to use with equal rights connectives of a certain convenient and functionally complete, but *not minimal* set. This approach requires more propositional axioms, and each equivalence between logical forms must be either an axiom or provable as a theorem.
 
-The situation, however, is more complicated in intuitionistic logic. Of its five connectives, {∧, ∨, →, ¬, ⊥}, only negation "¬" can be reduced to other connectives (see  for more). Neither conjunction, disjunction, nor material conditional has an equivalent form constructed from the other four logical connectives.
+The situation, however, is more complicated in intuitionistic logic. Of its five connectives, {∧, ∨, →, ¬, ⊥}, only negation "¬" can be reduced to other connectives (see for more). Neither conjunction, disjunction, nor material conditional has an equivalent form constructed from the other four logical connectives.
 
 ## Natural language
 The standard logical connectives of classical logic have rough equivalents in the grammars of natural languages. In English, as in many languages, such expressions are typically grammatical conjunctions. However, they can also take the form of complementizers, verb suffixes, and particles. The denotations of natural language connectives is a major topic of research in formal semantics, a field that studies the logical structure of natural languages.
@@ -186,9 +186,9 @@ The following table shows the standard classically definable approximations for 
 |-
 | or || disjunction || \(\vee\) || OR
 |-
-| if...then || material implication  || \(\rightarrow\) || IMPLY
+| if...then || material implication || \(\rightarrow\) || IMPLY
 |-
-| ...if || converse implication || \(\leftarrow\) ||
+|.. .if || converse implication || \(\leftarrow\) ||
 |-
 | either...or || exclusive disjunction || \(\nleftrightarrow\) || XOR
 |-
@@ -208,12 +208,10 @@ Some logical connectives possess properties that may be expressed in the theorem
 
 ; Associativity: Within an expression containing two or more of the same associative connectives in a row, the order of the operations does not matter as long as the sequence of the operands is not changed.
 ; Commutativity:The operands of the connective may be swapped, preserving logical equivalence to the original expression.
-; Distributivity: A connective denoted by · distributes over another connective denoted by +, if 1=*a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all operands , , .
-; Idempotence: Whenever the operands of the operation are the same, the compound is logically equivalent to the operand.
-; Absorption: A pair of connectives ∧, ∨ satisfies the absorption law if \(a\land(a\lor b)=a\) for all operands , .
-; Monotonicity: If *f*(*a*<sub>1</sub>, ..., *a*<sub>*n*</sub>) ≤ *f*(*b*<sub>1</sub>, ..., *b*<sub>*n*</sub>) for all *a*<sub>1</sub>, ..., *a*<sub>*n*</sub>, *b*<sub>1</sub>, ..., *b*<sub>*n*</sub> ∈ {0,1} such that *a*<sub>1</sub> ≤ *b*<sub>1</sub>, *a*<sub>2</sub> ≤ *b*<sub>2</sub>, ..., *a*<sub>*n*</sub> ≤ *b*<sub>*n*</sub>. E.g., ∨, ∧, ⊤, ⊥.
-; Affinity: Each variable always makes a difference in the truth-value of the operation or it never makes a difference. E.g., ¬, ↔,  \(\nleftrightarrow\), ⊤, ⊥.
-; Duality: To read the truth-value assignments for the operation from top to bottom on its truth table is the same as taking the complement of reading the table of the same or another connective from bottom to top. Without resorting to truth tables it may be formulated as 1=*g̃*(¬*a*<sub>1</sub>, ..., ¬*a*<sub>*n*</sub>) = ¬*g*(*a*<sub>1</sub>, ..., *a*<sub>*n*</sub>). E.g., ¬.
+; Distributivity: A connective denoted by · distributes over another connective denoted by +, if 1=*a* · (*b* + *c*) = (*a* · *b*) + (*a* · *c*) for all operands ,. ; Idempotence: Whenever the operands of the operation are the same, the compound is logically equivalent to the operand.
+; Absorption: A pair of connectives ∧, ∨ satisfies the absorption law if \(a\land(a\lor b)=a\) for all operands ,. ; Monotonicity: If *f*(*a*\(_{1}\),.. ., *a*\(_{*n*}\)) ≤ *f*(*b*\(_{1}\),.. ., *b*\(_{*n*}\)) for all *a*\(_{1}\),.. ., *a*\(_{*n*}\), *b*\(_{1}\),.. ., *b*\(_{*n*}\) ∈ {0,1} such that *a*\(_{1}\) ≤ *b*\(_{1}\), *a*\(_{2}\) ≤ *b*\(_{2}\),.. ., *a*\(_{*n*}\) ≤ *b*\(_{*n*}\). E.g., ∨, ∧, ⊤, ⊥.
+; Affinity: Each variable always makes a difference in the truth-value of the operation or it never makes a difference. E.g., ¬, ↔, \(\nleftrightarrow\), ⊤, ⊥.
+; Duality: To read the truth-value assignments for the operation from top to bottom on its truth table is the same as taking the complement of reading the table of the same or another connective from bottom to top. Without resorting to truth tables it may be formulated as 1=*g̃*(¬*a*\(_{1}\),.. ., ¬*a*\(_{*n*}\)) = ¬*g*(*a*\(_{1}\),.. ., *a*\(_{*n*}\)). E.g., ¬.
 ; Truth-preserving: The compound all those arguments are tautologies is a tautology itself. E.g., ∨, ∧, ⊤, →, ↔, ⊂ (see validity).
 ; Falsehood-preserving: The compound all those argument are contradictions is a contradiction itself. E.g., ∨, ∧, \(\nleftrightarrow\), ⊥, ⊄, ⊅ (see validity).
 ; Involutivity (for unary connectives): 1=*f*(*f*(*a*)) = *a*. E.g. negation in classical logic.
@@ -223,7 +221,6 @@ For classical and intuitionistic logic, the "=" symbol means that corresponding 
 Both conjunction and disjunction are associative, commutative and idempotent in classical logic, most varieties of many-valued logic and intuitionistic logic. The same is true about distributivity of conjunction over disjunction and disjunction over conjunction, as well as for the absorption law.
 
 In classical logic and some varieties of many-valued logic, conjunction and disjunction are dual, and negation is self-dual, the latter is also self-dual in intuitionistic logic.
-
 
 ## Order of precedence
 As a way of reducing the number of necessary parentheses, one may introduce precedence rules: ¬ has higher precedence than ∧, ∧ higher than ∨, and ∨ higher than →. So for example, \(P \vee Q \and{\neg R} \rightarrow S\) is short for \((P \vee (Q \and (\neg R))) \rightarrow S\).
@@ -247,7 +244,6 @@ However, not all compilers use the same order; for instance, an ordering in whic
 ## Table and Hasse diagram
 The 16 logical connectives can be partially ordered to produce the following Hasse diagram. The partial order is defined by declaring that \(x \leq y\) if and only if whenever \(x\) holds then so does \(y.\)
 
-
 ## Applications
 Logical connectives are used in computer science and in set theory.
 
@@ -255,7 +251,7 @@ Logical connectives are used in computer science and in set theory.
 
 A truth-functional approach to logical operators is implemented as logic gates in digital circuits. Practically all digital circuits (the major exception is DRAM) are built up from NAND, NOR, NOT, and transmission gates; see more details in Truth function in computer science. Logical operators over bit vectors (corresponding to finite Boolean algebras) are bitwise operations.
 
-But not every usage of a logical connective in computer programming has a Boolean semantic. For example, lazy evaluation is sometimes implemented for *P* ∧ *Q* and *P* ∨ *Q*, so these connectives are not commutative if either or both of the expressions ,  have side effects. Also, a conditional, which in some sense corresponds to the material conditional connective, is essentially non-Boolean because for if (P) then Q;, the consequent Q is not executed if the antecedent P is false (although a compound as a whole is successful ≈ "true" in such case). This is closer to intuitionist and constructivist views on the material conditional— rather than to classical logic's views.
+But not every usage of a logical connective in computer programming has a Boolean semantic. For example, lazy evaluation is sometimes implemented for *P* ∧ *Q* and *P* ∨ *Q*, so these connectives are not commutative if either or both of the expressions , have side effects. Also, a conditional, which in some sense corresponds to the material conditional connective, is essentially non-Boolean because for if (P) then Q;, the consequent Q is not executed if the antecedent P is false (although a compound as a whole is successful ≈ "true" in such case). This is closer to intuitionist and constructivist views on the material conditional— rather than to classical logic's views.
 
 ### Set theory
 
@@ -289,46 +285,3 @@ Logical connectives are used to define the fundamental operations of set theory,
 | \(A = B \leftrightarrow (\forall X)[A \in X \leftrightarrow B \in X]\)
 |}
 This definition of set equality is equivalent to the axiom of extensionality.
-
-## See also
-
-
-* Boolean domain
-* Boolean function
-* Boolean logic
-* Boolean-valued function
-* Catuṣkoṭi
-* Dialetheism
-* Four-valued logic
-* List of Boolean algebra topics
-* Logical conjunction
-* Logical constant
-* Modal operator
-* Propositional calculus
-* Term logic
-* Tetralemma
-* Truth function
-* Truth table
-* Truth values
-
-
-## References
-
-
-## Sources
-*  (1959), *A Précis of Mathematical Logic*, translated from the French and German editions by Otto Bird, D. Reidel, Dordrecht, South Holland.
-*
-*
-*
-* .
-*
-
-## External links
-
-*
-* Lloyd Humberstone (2010), "Sentence Connectives in Formal Logic", Stanford Encyclopedia of Philosophy (an abstract algebraic logic approach to connectives)
-* John MacFarlane (2005), "Logical constants", Stanford Encyclopedia of Philosophy.
-
-
-da:Logisk konnektiv
-

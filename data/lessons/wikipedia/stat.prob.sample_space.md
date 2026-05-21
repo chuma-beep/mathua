@@ -27,37 +27,26 @@ For many experiments, there may be more than one plausible sample space availabl
 
 ## Equally likely outcomes
 
-
 Some treatments of probability assume that the various outcomes of an experiment are always defined so as to be equally likely. For any sample space with \(N\) equally likely outcomes, each outcome is assigned the probability \(\frac{1}{N}\). However, there are experiments that are not easily described by a sample space of equally likely outcomes—for example, if one were to toss a thumb tack many times and observe whether it landed with its point upward or downward, there is no physical symmetry to suggest that the two outcomes should be equally likely.
 
-Though most random phenomena do not have equally likely outcomes, it can be helpful to define a sample space in such a way that outcomes are at least approximately equally likely, since this condition significantly simplifies the computation of probabilities for events within the sample space. If each individual outcome occurs with the same probability, then the probability of any event becomes simply:
-\(\mathrm{P}(\text{event}) = \frac{\text{number of outcomes in event}}{\text{number of outcomes in sample space}}\)
+Though most random phenomena do not have equally likely outcomes, it can be helpful to define a sample space in such a way that outcomes are at least approximately equally likely; since this condition significantly simplifies the computation of probabilities for events within the sample space. If each individual outcome occurs with the same probability, then the probability of any event becomes simply:
+\(\mathrm{P}(\text{event}) = \frac{\text{number of outcomes in event{\text{number of outcomes in sample space\)
 
-For example, if two fair six-sided dice are thrown to generate two uniformly distributed integers, \(D_1\) and \(D_2\), each in the range from 1 to 6, inclusive, the 36 possible ordered pairs of outcomes \((D_1,D_2)\) constitute a sample space of equally likely events. In this case, the above formula applies, such as calculating the probability of a particular sum of the two rolls in an outcome. The probability of the event that the sum \(D_1 + D_2\) is five is \(\frac{4}{36}\), since four of the thirty-six equally likely pairs of outcomes sum to five.
+For example, if two fair six-sided dice are thrown to generate two uniformly distributed integers, \(D_1\) and \(D_2\), each in the range from 1 to 6, inclusive, the 36 possible ordered pairs of outcomes \((D_1,D_2)\) constitute a sample space of equally likely events. In this case, the above formula applies, such as calculating the probability of a particular sum of the two rolls in an outcome. The probability of the event that the sum \(D_1 + D_2\) is five is \(\frac{4}{36}\); since four of the thirty-six equally likely pairs of outcomes sum to five.
 
 If the sample space was all of the possible sums obtained from rolling two six-sided dice, the above formula can still be applied because the dice rolls are fair, but the number of outcomes in a given event will vary. A sum of two can occur with the outcome \(\{(1,1)\}\), so the probability is \(\frac{1}{36}\). For a sum of seven, the outcomes in the event are \(\{(1,6), (6,1), (2,5), (5,2), (3,4),(4,3)\}\), so the probability is \(\frac{6}{36}\).
 
 ### Simple random sample
-
 
 In statistics, inferences are made about characteristics of a population by studying a sample of that population's individuals. In order to arrive at a sample that presents an unbiased estimate of the true characteristics of the population, statisticians often seek to study a simple random sample—that is, a sample in which every individual in the population is equally likely to be included. The result of this is that every possible combination of individuals who could be chosen for the sample has an equal chance to be the sample that is selected (that is, the space of simple random samples of a given size from a given population is composed of equally likely outcomes).
 
 ## Infinitely large sample spaces
 In an elementary approach to probability, any subset of the sample space is usually called an event. However, this gives rise to problems when the sample space is continuous, so that a more precise definition of an event is necessary. Under this definition only measurable subsets of the sample space, constituting a σ-algebra over the sample space itself, are considered events.
 
-An example of an infinitely large sample space is measuring the lifetime of a light bulb. The corresponding sample space would be .
-
-## See also
+An example of an infinitely large sample space is measuring the lifetime of a light bulb. The corresponding sample space would be. ## See also
 * Parameter space
 * Probability space
 * Space (mathematics)
 * Set (mathematics)
 * Event (probability theory)
 * σ-algebra
-
-## References
-
-
-## External links
-*
-

@@ -7,7 +7,7 @@ A **Venn diagram** is a widely used diagram style that shows the logical relatio
 Very similar ideas had been proposed before Venn such as by Christian Weise in 1712 (*Nucleus Logicoe Wiesianoe*) and Leonhard Euler in 1768 (*Letters to a German Princess*). The idea was popularised by Venn in *Symbolic Logic*, Chapter V "Diagrammatic Representation", published in 1881.
 
 ## Details
-A Venn diagram, also called a *set diagram* or *logic diagram*, shows *all* possible logical relations between a finite collection of different sets.  These diagrams depict elements as points in the plane, and sets as regions inside closed curves.  A Venn diagram consists of multiple overlapping closed curves, usually circles, each representing a set. The points inside a curve labelled *S* represent elements of the set *S*, while points outside the boundary represent elements not in the set *S*.   This lends itself to intuitive visualizations; for example, the set of all elements that are members of both sets *S* and *T*, denoted *S* ∩ *T* and read "the intersection of *S* and *T*", is represented visually by the area of overlap of the regions *S* and *T*.
+A Venn diagram, also called a *set diagram* or *logic diagram*, shows *all* possible logical relations between a finite collection of different sets. These diagrams depict elements as points in the plane, and sets as regions inside closed curves. A Venn diagram consists of multiple overlapping closed curves, usually circles, each representing a set. The points inside a curve labelled *S* represent elements of the set *S*, while points outside the boundary represent elements not in the set *S*. This lends itself to intuitive visualizations; for example, the set of all elements that are members of both sets *S* and *T*, denoted *S* ∩ *T* and read "the intersection of *S* and *T*", is represented visually by the area of overlap of the regions *S* and *T*.
 
 In Venn diagrams, the curves are overlapped in every possible way, showing all possible relations between the sets. They are thus a special case of Euler diagrams, which do not necessarily show all relations. Venn diagrams were conceived around 1880 by John Venn. They are used to teach elementary set theory, as well as illustrate simple set relationships in probability, logic, statistics, linguistics, and computer science.
 
@@ -23,10 +23,9 @@ The combined region of the two sets is called their *union*, denoted by A ∪ B,
 
 ## History
 
-
 Venn diagrams were introduced in 1880 by John Venn in a paper entitled "On the Diagrammatic and Mechanical Representation of Propositions and Reasonings" in the *Philosophical Magazine and Journal of Science*, about the different ways to represent propositions by diagrams. The use of these types of diagrams in formal logic, according to Frank Ruskey and Mark Weston, predates Venn but are "rightly associated" with him as he "comprehensively surveyed and formalized their usage, and was the first to generalize them".
 
-Diagrams of overlapping circles representing unions and intersections, such as Borromean rings, were already in frequent use in the Middle Ages. However, the extent to which these types of diagrams can be considered precursors to Venn diagrams is disputed.  Euler diagrams, which are similar to Venn diagrams but do not necessarily contain all possible unions and intersections, were named after the mathematician Leonhard Euler in the 18th century. However, these diagrams, which are considered the precursors of Venn diagrams, can also be clearly traced back to the 16th century. Pioneers in this tradition of Euler diagrams included Erhard Weigel (1625–1699) and his students Johann Christoph Sturm (1635-1703) and Gottfried Wilhelm Leibniz (1646–1716). Christian Weise (1642–1708) is also worth mentioning, whose student Johann Christian Lange worked intensively on these diagrams. Euler further developed these diagrams, and Immanuel Kant (1724–1804) and his students popularized them in the 19th century.
+Diagrams of overlapping circles representing unions and intersections, such as Borromean rings, were already in frequent use in the Middle Ages. However, the extent to which these types of diagrams can be considered precursors to Venn diagrams is disputed. Euler diagrams, which are similar to Venn diagrams but do not necessarily contain all possible unions and intersections, were named after the mathematician Leonhard Euler in the 18th century. However, these diagrams, which are considered the precursors of Venn diagrams, can also be clearly traced back to the 16th century. Pioneers in this tradition of Euler diagrams included Erhard Weigel (1625–1699) and his students Johann Christoph Sturm (1635-1703) and Gottfried Wilhelm Leibniz (1646–1716). Christian Weise (1642–1708) is also worth mentioning, whose student Johann Christian Lange worked intensively on these diagrams. Euler further developed these diagrams, and Immanuel Kant (1724–1804) and his students popularized them in the 19th century.
 
 Venn did not use the term "Venn diagram" and referred to the concept as "Eulerian Circles". He became acquainted with Euler diagrams in 1862 and wrote that Venn diagrams did not occur to him "till much later", while attempting to adapt Euler diagrams to Boolean logic. In the opening sentence of his 1880 article Venn wrote that Euler diagrams were the only diagrammatic representation of logic to gain "any general acceptance".
 
@@ -43,12 +42,11 @@ Venn diagrams have been commonly used as a format for internet humor. One of the
 
 ## Overview
 
-
 A Venn diagram is constructed with a collection of simple closed curves drawn in a plane. According to Lewis, the "principle of these diagrams is that classes [or *sets*] be represented by regions in such relation to one another that all the possible logical relations of these classes can be indicated in the same diagram. That is, the diagram initially leaves room for any possible relation of the classes, and the actual or given relation, can then be specified by indicating that some particular region is null or is not-null".
 
 Venn diagrams normally comprise overlapping circles. The interior of the circle symbolically represents the elements of the set, while the exterior represents elements that are not members of the set. For instance, in a two-set Venn diagram, one circle may represent the group of all wooden objects, while the other circle may represent the set of all tables. The overlapping region, or *intersection*, would then represent the set of all wooden tables. Shapes other than circles can be employed as shown below by Venn's own higher set diagrams. Venn diagrams do not generally contain information on the relative or absolute sizes (cardinality) of sets. That is, they are schematic diagrams generally not drawn to scale.
 
-Venn diagrams are similar to Euler diagrams. However, a Venn diagram for *n* component sets must contain all 2<sup>*n*</sup> hypothetically possible zones, that correspond to some combination of inclusion or exclusion in each of the component sets. Euler diagrams contain only the actually possible zones in a given context. In Venn diagrams, a shaded zone may represent an empty zone, whereas in an Euler diagram, the corresponding zone is missing from the diagram. For example, if one set represents *dairy products* and another *cheeses*, the Venn diagram contains a zone for cheeses that are not dairy products. Assuming that in the context *cheese* means some type of dairy product, the Euler diagram has the cheese zone entirely contained within the dairy-product zone—there is no zone for (non-existent) non-dairy cheese. This means that as the number of contours increases, Euler diagrams are typically less visually complex than the equivalent Venn diagram, particularly if the number of non-empty intersections is small.
+Venn diagrams are similar to Euler diagrams. However, a Venn diagram for *n* component sets must contain all 2\(^{*n*}\) hypothetically possible zones, that correspond to some combination of inclusion or exclusion in each of the component sets. Euler diagrams contain only the actually possible zones in a given context. In Venn diagrams, a shaded zone may represent an empty zone, whereas in an Euler diagram, the corresponding zone is missing from the diagram. For example, if one set represents *dairy products* and another *cheeses*, the Venn diagram contains a zone for cheeses that are not dairy products. Assuming that in the context *cheese* means some type of dairy product, the Euler diagram has the cheese zone entirely contained within the dairy-product zone—there is no zone for (non-existent) non-dairy cheese. This means that as the number of contours increases, Euler diagrams are typically less visually complex than the equivalent Venn diagram, particularly if the number of non-empty intersections is small.
 
 The difference between Euler and Venn diagrams can be seen in the following example. Take the three sets:
 * \(A = \{1,\, 2,\, 5\}\)
@@ -57,10 +55,8 @@ The difference between Euler and Venn diagrams can be seen in the following exam
 
 The Euler and the Venn diagram of those sets are:
 
-
 File:3-set Euler diagram.svg|Euler diagram
 File:3-set Venn diagram.svg|Venn diagram
-
 
 ## Extensions to higher numbers of sets
 Venn diagrams typically represent two or three sets, but there are forms that allow for higher numbers. Shown below, four intersecting spheres form the highest order Venn diagram that has the symmetry of a simplex and can be visually represented. The 16 intersections correspond to the vertices of a tesseract (or the cells of a 16-cell, respectively).
@@ -76,17 +72,15 @@ Venn diagrams typically represent two or three sets, but there are forms that al
 | style="vertical-align:top;"|
 |}
 
-For higher numbers of sets, some loss of symmetry in the diagrams is unavoidable. Venn was keen to find "symmetrical figures ... elegant in themselves," that represented higher numbers of sets, and he devised an *elegant* four-set diagram using ellipses (see below). He also gave a construction for Venn diagrams for *any* number of sets, where each successive curve that delimits a set interleaves with previous curves, starting with the three-circle diagram.
-
+For higher numbers of sets, some loss of symmetry in the diagrams is unavoidable. Venn was keen to find "symmetrical figures.. . elegant in themselves," that represented higher numbers of sets, and he devised an *elegant* four-set diagram using ellipses (see below). He also gave a construction for Venn diagrams for *any* number of sets, where each successive curve that delimits a set interleaves with previous curves, starting with the three-circle diagram.
 
 Image:Venn4.svg|Venn's construction for four sets (use Gray code to compute, the digit 1 means in the set, and the digit 0 means not in the set)
 Image:Venn5.svg|Venn's construction for five sets
 Image:Venn6.svg|Venn's construction for six sets
 Image:Venn's four ellipse construction.svg|Venn's four-set diagram using ellipses
-Image:CirclesN4xb.svg|**Non-example:** This Euler diagram is  a Venn diagram for four sets as it has only 14 regions as opposed to 2<sup>4</sup> = 16 regions (including the white region); there is no region where only the yellow and blue, or only the red and green circles meet.
-File:Symmetrical 5-set Venn diagram.svg|Five-set Venn diagram using congruent ellipses in a five-fold rotationally symmetrical arrangement devised by Branko Grünbaum. Labels have been simplified for greater readability; for example, **A** denotes **A** ∩ **B**<sup>c</sup> ∩ **C**<sup>c</sup> ∩ **D**<sup>c</sup> ∩ **E**<sup>c</sup>, while **BCE** denotes **A**<sup>c</sup> ∩ **B** ∩ **C** ∩ **D**<sup>c</sup> ∩ **E**.
+Image:CirclesN4xb.svg|**Non-example:** This Euler diagram is a Venn diagram for four sets as it has only 14 regions as opposed to 2\(^{4}\) = 16 regions (including the white region); there is no region where only the yellow and blue, or only the red and green circles meet.
+File:Symmetrical 5-set Venn diagram.svg|Five-set Venn diagram using congruent ellipses in a five-fold rotationally symmetrical arrangement devised by Branko Grünbaum. Labels have been simplified for greater readability; for example, **A** denotes **A** ∩ **B**\(^{c}\) ∩ **C**\(^{c}\) ∩ **D**\(^{c}\) ∩ **E**\(^{c}\), while **BCE** denotes **A**\(^{c}\) ∩ **B** ∩ **C** ∩ **D**\(^{c}\) ∩ **E**.
 File:6-set_Venn_diagram.svg|Six-set Venn diagram made of only triangles (interactive version)
-
 
 ### Edwards–Venn diagrams
 
@@ -107,50 +101,8 @@ Henry John Stephen Smith devised similar *n*-set diagrams using sine curves with
 y_i = \frac{\sin\left(2^i x\right)}{2^i} \text{ where } 0 \leq i \leq n-1 \text{ and } i \in \mathbb{N}.
 \]
 
-
 Charles Lutwidge Dodgson (also known as Lewis Carroll) devised a five-set diagram known as Carroll's square. Joaquin and Boyles, on the other hand, proposed supplemental rules for the standard Venn diagram, in order to account for certain problem cases. For instance, regarding the issue of representing singular statements, they suggest to consider the Venn diagram circle as a representation of a set of things, and use first-order logic and set theory to treat categorical statements as statements about sets. Additionally, they propose to treat singular statements as statements about set membership. So, for example, to represent the statement "a is F" in this retooled Venn diagram, a small letter "a" may be placed inside the circle that represents the set F.
 
 ## Related concepts
 
 Venn diagrams correspond to truth tables for the propositions \(x\in A\), \(x\in B\), etc., in the sense that each region of Venn diagram corresponds to one row of the truth table. This type is also known as Johnston diagram. Another way of representing sets is with John F. Randolph's R-diagrams.
-
-## See also
-* Existential graph (by Charles Sanders Peirce)
-* Logical connective
-* Information diagram
-* Marquand diagram (and as further derivation Veitch chart and Karnaugh map)
-* Spherical octahedron – A stereographic projection of a regular octahedron makes a three-set Venn diagram, as three orthogonal great circles, each dividing space into two halves.
-* Stanhope Demonstrator
-* Three circles model
-* Triquetra
-* Vesica piscis
-* UpSet plot
-
-## Notes
-
-
-## References
-
-
-}}
-
-## Further reading
-
-*
-*
-*  (NB. The book comes with a 3-page foldout of a seven-bit cylindrical Venn diagram.)
-*
-*
-*
-
-
-## External links
-
-*
-* Lewis Carroll's Logic Game – Venn vs. Euler at Cut-the-knot
-* Six sets Venn diagrams made from triangles
-* Interactive seven sets Venn diagram
-* VBVenn, a free open source program for calculating and graphing quantitative two-circle Venn diagrams
-* InteractiVenn, a web-based tool for visualizing Venn diagrams
-* DeepVenn, a tool for creating area-proportional Venn Diagrams
-

@@ -3,4 +3,3 @@
 # Non-homogeneous second-order ODEs
 
 #REDIRECT Ordinary differential equation
-

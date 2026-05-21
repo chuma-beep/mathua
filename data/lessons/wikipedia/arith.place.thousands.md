@@ -3,4 +3,3 @@
 # Thousands place value
 
 #REDIRECTPositional notation
-

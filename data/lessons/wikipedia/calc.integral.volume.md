@@ -6,30 +6,26 @@ In geometry, a **solid of revolution** is a solid figure obtained by rotating a 
 
 Assuming that the curve does not cross the axis, the solid's volume is equal to the length of the circle described by the figure's centroid multiplied by the figure's area (Pappus's second centroid theorem).
 
-A **representative disc** is a three-dimensional volume element of a solid of revolution.  The element is created by rotating a line segment (of length ) around some axis (located  units away), so that a cylindrical volume of π*r*<sup>2</sup>*w* units is enclosed.
+A **representative disc** is a three-dimensional volume element of a solid of revolution. The element is created by rotating a line segment (of length ) around some axis (located units away), so that a cylindrical volume of π*r*\(^{2}\)*w* units is enclosed.
 
 ## Finding the volume
-Two common methods for finding the volume of a solid of revolution are the disc method and the shell method of integration. To apply these methods, it is easiest to draw the graph in question; identify the area that is to be revolved about the axis of revolution; determine the volume of either a disc-shaped slice of the solid, with thickness , or a cylindrical shell of width ; and then find the limiting sum of these volumes as  approaches 0, a value which may be found by evaluating a suitable integral. A more rigorous justification can be given by attempting to evaluate a triple integral in cylindrical coordinates with two different orders of integration.
+Two common methods for finding the volume of a solid of revolution are the disc method and the shell method of integration. To apply these methods, it is easiest to draw the graph in question; identify the area that is to be revolved about the axis of revolution; determine the volume of either a disc-shaped slice of the solid, with thickness , or a cylindrical shell of width ; and then find the limiting sum of these volumes as approaches 0, a value which may be found by evaluating a suitable integral. A more rigorous justification can be given by attempting to evaluate a triple integral in cylindrical coordinates with two different orders of integration.
 
 ### Disc method
-
 
 The disc method is used when the slice that was drawn is *perpendicular to* the axis of revolution; i.e. when integrating *parallel to* the axis of revolution.
 
 The volume of the solid formed by rotating the area between the curves of *f*(*y*) and *g*(*y*) and the lines 1=*y* = *a* and 1=*y* = *b* about the -axis is given by
 
 \[
-V = \pi \int_a^b \left| f(y)^2 - g(y)^2\right|\,dy\, .
-\]
+V = \pi \int_a^b \left| f(y)^2 - g(y)^2\right|\,dy\,. \]
 
 If 1=*g*(*y*) = 0 (e.g. revolving an area between the curve and the -axis), this reduces to:
 
 \[
-V = \pi \int_a^b f(y)^2 \,dy\, .
-\]
+V = \pi \int_a^b f(y)^2 \,dy\,. \]
 
-
-The method can be visualized by considering a thin horizontal rectangle at  between *f*(*y*) on top and *g*(*y*) on the bottom, and revolving it about the -axis; it forms a ring (or disc in the case that 1=*g*(*y*) = 0), with outer radius *f*(*y*) and inner radius *g*(*y*).  The area of a ring is π(*R*<sup>2</sup> − *r*<sup>2</sup>), where  is the outer radius (in this case *f*(*y*)), and  is the inner radius (in this case *g*(*y*)). The volume of each infinitesimal disc is therefore π*f*(*y*)<sup>2</sup> *dy*. The limit of the Riemann sum of the volumes of the discs between  and  becomes integral (1).
+The method can be visualized by considering a thin horizontal rectangle at between *f*(*y*) on top and *g*(*y*) on the bottom, and revolving it about the -axis; it forms a ring (or disc in the case that 1=*g*(*y*) = 0), with outer radius *f*(*y*) and inner radius *g*(*y*). The area of a ring is π(*R*\(^{2}\) − *r*\(^{2}\)), where is the outer radius (in this case *f*(*y*)), and is the inner radius (in this case *g*(*y*)). The volume of each infinitesimal disc is therefore π*f*(*y*)\(^{2}\) *dy*. The limit of the Riemann sum of the volumes of the discs between and becomes integral (1).
 
 Assuming the applicability of Fubini's theorem and the multivariate change of variables formula, the disk method may be derived in a straightforward manner by (denoting the solid as D):
 
@@ -37,26 +33,21 @@ Assuming the applicability of Fubini's theorem and the multivariate change of va
 V = \iiint_D dV = \int_a^b \int_{g(z)}^{f(z)} \int_0^{2\pi} r\,d\theta\,dr\,dz = 2\pi \int_a^b\int_{g(z)}^{f(z)} r\,dr\,dz = 2\pi \int_a^b \frac{1}{2}r^2\Vert^{f(z)}_{g(z)} \,dz = \pi \int_a^b (f(z)^2 - g(z)^2)\,dz
 \]
 
-
 ### Shell Method of Integration
-
 
 The shell method (sometimes referred to as the "cylinder method") is used when the slice that was drawn is *parallel to* the axis of revolution; i.e. when integrating *perpendicular to* the axis of revolution.
 
 The volume of the solid formed by rotating the area between the curves of *f*(*x*) and *g*(*x*) and the lines 1=*x* = *a* and 1=*x* = *b* about the -axis is given by
 
 \[
-V = 2\pi \int_a^b x |f(x) - g(x)|\, dx\, .
-\]
+V = 2\pi \int_a^b x |f(x) - g(x)|\, dx\,. \]
 
 If 1=*g*(*x*) = 0 (e.g. revolving an area between curve and -axis), this reduces to:
 
 \[
-V = 2\pi \int_a^b x | f(x) | \,dx\, .
-\]
+V = 2\pi \int_a^b x | f(x) | \,dx\,. \]
 
-
-The method can be visualized by considering a thin vertical rectangle at  with height *f*(*x*) − *g*(*x*), and revolving it about the -axis; it forms a cylindrical shell.  The lateral surface area of a cylinder is 2π*rh*, where  is the radius (in this case ), and  is the height (in this case *f*(*x*) − *g*(*x*)).  Summing up all of the surface areas along the interval gives the total volume.
+The method can be visualized by considering a thin vertical rectangle at with height *f*(*x*) − *g*(*x*), and revolving it about the -axis; it forms a cylindrical shell. The lateral surface area of a cylinder is 2π*rh*, where is the radius (in this case ), and is the height (in this case *f*(*x*) − *g*(*x*)). Summing up all of the surface areas along the interval gives the total volume.
 
 This method may be derived with the same triple integral, this time with a different order of integration:
 
@@ -64,52 +55,44 @@ This method may be derived with the same triple integral, this time with a diffe
 V = \iiint_D dV = \int_a^b \int_{g(r)}^{f(r)} \int_0^{2\pi} r\,d\theta\,dz\,dr = 2\pi \int_a^b\int_{g(r)}^{f(r)} r\,dz\,dr = 2\pi\int_a^b r(f(r) - g(r))\,dr.
 \]
 
-
 ## Parametric form
-
 
 When a curve is defined by its parametric form (*x*(*t*),*y*(*t*)) in some interval [*a*,*b*], the volumes of the solids generated by revolving the curve around the -axis or the -axis are given by
 
 \[
 \begin{align}
-V_x &= \int_a^b \pi y^2 \, \frac{dx}{dt} \, dt \, , \\
-V_y &= \int_a^b \pi x^2 \, \frac{dy}{dt} \, dt \, .
-\end{align}
+V_x &= \int_a^b \pi y^2 \, \frac{dx}{dt} \, dt \, \\
+V_y &= \int_a^b \pi x^2 \, \frac{dy}{dt} \, dt \,. \end{align}
 \]
-
 
 Under the same circumstances the areas of the surfaces of the solids generated by revolving the curve around the -axis or the -axis are given by
 
 \[
 \begin{align}
-A_x &= \int_a^b 2 \pi y \, \sqrt{ \left( \frac{dx}{dt} \right)^2 + \left( \frac{dy}{dt} \right)^2} \, dt \, , \\
-A_y &= \int_a^b 2 \pi x \, \sqrt{ \left( \frac{dx}{dt} \right)^2 + \left( \frac{dy}{dt} \right)^2} \, dt \, .
-\end{align}
+A_x &= \int_a^b 2 \pi y \, \sqrt{ \left( \frac{dx}{dt} \right)^2 + \left( \frac{dy}{dt} \right)^2} \, dt \, \\
+A_y &= \int_a^b 2 \pi x \, \sqrt{ \left( \frac{dx}{dt} \right)^2 + \left( \frac{dy}{dt} \right)^2} \, dt \,. \end{align}
 \]
-
 
 This can also be derived from multivariable integration. If a plane curve is given by \(\langle x(t), y(t) \rangle\) then its corresponding surface of revolution when revolved around the x-axis has Cartesian coordinates given by \(\mathbf{r}(t, \theta) = \langle y(t)\cos(\theta), y(t)\sin(\theta), x(t)\rangle\) with \(0 \leq \theta \leq 2\pi\). Then the surface area is given by the surface integral
 
 \[
-A_x = \iint_S dS = \iint_{[a, b] \times [0, 2\pi]} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt = \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt.
+A_x = \iint_S dS = \iint_{[a, b] \times [0, 2\pi]} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt = \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt.
 \]
-
 
 Computing the partial derivatives yields
 
 \[
-\frac{\partial \mathbf{r}}{\partial t} = \left\langle \frac{dy}{dt} \cos(\theta), \frac{dy}{dt} \sin(\theta), \frac{dx}{dt} \right\rangle,
+\frac{\partial \mathbf{r{\partial t} = \left\langle \frac{dy}{dt} \cos(\theta), \frac{dy}{dt} \sin(\theta), \frac{dx}{dt} \right\rangle,
 \]
 
-
 \[
-\frac{\partial \mathbf{r}}{\partial \theta} = \left\langle -y \sin(\theta), y \cos(\theta), 0 \right\rangle
+\frac{\partial \mathbf{r{\partial \theta} = \left\langle -y \sin(\theta), y \cos(\theta), 0 \right\rangle
 \]
 
 and computing the cross product yields
 
 \[
-\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta} = \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle = y \left\langle \cos(\theta)\frac{dx}{dt}, \sin(\theta)\frac{dx}{dt}, \frac{dy}{dt} \right\rangle
+\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta} = \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle = y \left\langle \cos(\theta)\frac{dx}{dt}, \sin(\theta)\frac{dx}{dt}, \frac{dy}{dt} \right\rangle
 \]
 
 where the trigonometric identity \(\sin^2(\theta) + \cos^2(\theta) = 1\) was used. With this cross product, we get
@@ -117,7 +100,7 @@ where the trigonometric identity \(\sin^2(\theta) + \cos^2(\theta) = 1\) was use
 \[
 \begin{align}
 A_x
-&= \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt \\[1ex]
+&= \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} \left\| \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle\right\|\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} y \sqrt{\cos^2(\theta)\left(\frac{dx}{dt} \right)^2 + \sin^2(\theta)\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} y \sqrt{\left(\frac{dx}{dt} \right)^2 + \left(\frac{dy}{dt} \right)^2}\ d\theta\ dt \\[1ex]
@@ -132,36 +115,14 @@ For a polar curve \(r=f(\theta)\) where \(\alpha\leq \theta\leq \beta\) and \(f(
 
 \[
 \begin{align}
-V_x &= \int_\alpha^\beta \left(\pi r^2\sin^2{\theta} \cos{\theta}\, \frac{dr}{d\theta}-\pi r^3\sin^3{\theta}\right)d\theta\,, \\
-V_y &= \int_\alpha^\beta \left(\pi r^2\sin{\theta} \cos^2{\theta}\, \frac{dr}{d\theta}+\pi r^3\cos^3{\theta}\right)d\theta \, .
-\end{align}
+V_x &= \int_\alpha^\beta \left(\pi r^2\sin^2{\theta} \cos{\theta}\, \frac{dr}{d\theta}-\pi r^3\sin^3{\theta}\right)d\theta\, \\
+V_y &= \int_\alpha^\beta \left(\pi r^2\sin{\theta} \cos^2{\theta}\, \frac{dr}{d\theta}+\pi r^3\cos^3{\theta}\right)d\theta \,. \end{align}
 \]
-
 
 The areas of the surfaces of the solids generated by revolving the curve around the -axis or the -axis are given
 
 \[
 \begin{align}
-A_x &= \int_\alpha^\beta 2 \pi r\sin{\theta} \, \sqrt{ r^2 + \left( \frac{dr}{d\theta} \right)^2} \, d\theta \, , \\
-A_y &= \int_\alpha^\beta 2 \pi r\cos{\theta} \, \sqrt{ r^2 + \left( \frac{dr}{d\theta} \right)^2} \, d\theta \, ,
-\end{align}
+A_x &= \int_\alpha^\beta 2 \pi r\sin{\theta} \, \sqrt{ r^2 + \left( \frac{dr}{d\theta} \right)^2} \, d\theta \, \\
+A_y &= \int_\alpha^\beta 2 \pi r\cos{\theta} \, \sqrt{ r^2 + \left( \frac{dr}{d\theta} \right)^2} \, d\theta \, \end{align}
 \]
-
-
-## See also
-
-* Cylindrical symmetry
-* Gabriel's Horn
-* Guldinus theorem
-* Pseudosphere
-* Surface of revolution
-* Ungula
-
-## Notes
-
-
-## References
-*
-* ()
-*
-

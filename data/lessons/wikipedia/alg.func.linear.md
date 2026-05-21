@@ -8,7 +8,7 @@ The characteristic property of linear functions is that when the input variable 
 Linear functions are related to linear equations.
 
 ## Properties
-A linear function is a polynomial function in which the variable  has degree at most one (a *linear polynomial*):
+A linear function is a polynomial function in which the variable has degree at most one (a *linear polynomial*):
 \(f(x)=ax+b\).
 Such a function is called *linear* because its graph, the set of all points \((x,f(x))\) in the Cartesian plane, is a line. The coefficient *a* is called the *slope* of the function and of the line (see below).
 
@@ -22,9 +22,7 @@ The graph \(y=f(x)=ax+b\) is a non-vertical line having exactly one intersection
 
 ## Slope
 
-The slope of a nonvertical line is a number that measures how steeply the line is slanted (rise-over-run). If the line is the graph of the linear function \(f(x) = ax + b\), this slope is given by the constant .
-
-The slope measures the constant rate of change of \(f(x)\) per unit change in *x*: whenever the input  is increased by one unit, the output changes by  units: \(f(x{+}1)=f(x)+a\), and more generally \(f(x{+}\Delta x)=f(x)+a\Delta x\) for any number \(\Delta x\). If the slope is positive, \(a > 0\), then the function \(f(x)\) is increasing; if \(a < 0\), then \(f(x)\) is decreasing
+The slope of a nonvertical line is a number that measures how steeply the line is slanted (rise-over-run). If the line is the graph of the linear function \(f(x) = ax + b\), this slope is given by the constant. The slope measures the constant rate of change of \(f(x)\) per unit change in *x*: whenever the input is increased by one unit, the output changes by units: \(f(x{+}1)=f(x)+a\), and more generally \(f(x{+}\Delta x)=f(x)+a\Delta x\) for any number \(\Delta x\). If the slope is positive, \(a > 0\), then the function \(f(x)\) is increasing; if \(a < 0\), then \(f(x)\) is decreasing
 
 In calculus, the derivative of a general function measures its rate of change. A linear function \(f(x)=ax+b\) has a constant rate of change equal to its slope , so its derivative is the constant function \(f\,'(x)=a\).
 
@@ -46,9 +44,9 @@ Its graph \(y=f(x)\) is the unique line passing through the points \((x_0,y_0\!)
 
 ## Relationship with linear equations
 
-Linear functions commonly arise from practical problems involving variables \(x,y\) with a linear relationship, that is, obeying a linear equation \(Ax+By=C\). If  \(B\neq 0\), one can solve this equation for *y*, obtaining
+Linear functions commonly arise from practical problems involving variables \(x,y\) with a linear relationship, that is, obeying a linear equation \(Ax+By=C\). If \(B\neq 0\), one can solve this equation for *y*, obtaining
 \(y = -\tfrac{A}{B}x +\tfrac{C}{B}=ax+b,\)
-where we denote \(a=-\tfrac{A}{B}\) and \(b=\tfrac{C}{B}\). That is, one may consider *y* as a dependent variable (output) obtained from the independent variable (input) *x* via a linear function: \(y = f(x) = ax+b\). In the *xy*-coordinate plane, the possible values of \((x,y)\) form a line, the graph of the function \(f(x)\).  If \(B=0\) in the original equation, the resulting line \(x=\tfrac{C}{A}\) is vertical, and cannot be written as \(y=f(x)\).
+where we denote \(a=-\tfrac{A}{B}\) and \(b=\tfrac{C}{B}\). That is, one may consider *y* as a dependent variable (output) obtained from the independent variable (input) *x* via a linear function: \(y = f(x) = ax+b\). In the *xy*-coordinate plane, the possible values of \((x,y)\) form a line, the graph of the function \(f(x)\). If \(B=0\) in the original equation, the resulting line \(x=\tfrac{C}{A}\) is vertical, and cannot be written as \(y=f(x)\).
 
 The features of the graph \(y = f(x) = ax+b\) can be interpreted in terms of the variables *x* and *y*. The *y*-intercept is the initial value \(y=f(0)=b\) at \(x=0\). The slope *a* measures the rate of change of the output *y* per unit change in the input *x*. In the graph, moving one unit to the right (increasing *x* by 1) moves the *y*-value up by *a*: that is, \(f(x{+}1) = f(x) + a\). Negative slope *a* indicates a decrease in *y* for each increase in *x*.
 
@@ -66,28 +64,11 @@ If the coefficient of the variable is not zero (*a* ≠ 0), then a linear functi
 
 A straight line, when drawn in a different kind of coordinate system may represent other functions.
 
-For example, it may represent an exponential function when its values are expressed in the logarithmic scale. It means that when log(*g*(*x*)) is a linear function of , the function  is exponential. With linear functions, increasing the input by one unit causes the output to increase by a fixed amount, which is the slope of the graph of the function. With exponential functions, increasing the input by one unit causes the output to increase by a fixed multiple, which is known as the base of the exponential function.
+For example, it may represent an exponential function when its values are expressed in the logarithmic scale. It means that when log(*g*(*x*)) is a linear function of , the function is exponential. With linear functions, increasing the input by one unit causes the output to increase by a fixed amount, which is the slope of the graph of the function. With exponential functions, increasing the input by one unit causes the output to increase by a fixed multiple, which is known as the base of the exponential function.
 
 If *both* arguments and values of a function are in the logarithmic scale (i.e., when log(*y*) is a linear function of log(*x*)), then the straight line represents a power law:
 \(\log_r y = a \log_r x + b \quad\Rightarrow\quad y = r^b\cdot x^a\)
 
-
 On the other hand, the graph of a linear function in terms of polar coordinates:
-\(r =f(\theta ) = a\theta  + b\)
+\(r =f(\theta ) = a\theta + b\)
 is an Archimedean spiral if \(a \neq 0\) and a circle otherwise.
-
-## See also
-* Affine map, a generalization
-* Arithmetic progression, a linear function of integer argument
-
-## Notes
-
-
-## References
-*
-*
-
-## External links
-* https://web.archive.org/web/20130524101825/http://www.math.okstate.edu/~noell/ebsm/linear.html
-* https://web.archive.org/web/20180722042342/https://corestandards.org/assets/CCSSI_Math%20Standards.pdf
-

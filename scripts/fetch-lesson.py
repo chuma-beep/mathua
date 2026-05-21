@@ -153,6 +153,15 @@ def remove_refs(text):
 
 def remove_templates(text):
     """Remove {{...}} templates, converting simple formatting ones."""
+    # Convert {{tmath|...}} and {{tmath|1=...}} → LaTeX
+    def tmath_replacer(m):
+        inner = m.group(1)
+        if inner.startswith('1='):
+            inner = inner[2:]
+        return '\\(%s\\)' % inner.strip()
+    text = re.sub(r'\{\{tmath\|([^}]+)\}\}', tmath_replacer, text)
+    # Convert {{mvar|...}} → \(...\)
+    text = re.sub(r'\{\{mvar\|([^}]+)\}\}', r'\\(\1\\)', text)
     # Convert {{frac|a|b}} → a/b
     text = re.sub(r'\{\{frac\|([^|}]+)\|([^|}]+)\}\}', r'\1/\2', text)
     # Convert {{sqrt|a}} → sqrt(a)
@@ -163,8 +172,19 @@ def remove_templates(text):
     text = re.sub(r'\{\{(?:nobreak|nowrap)\|([^}]+)\}\}', r'\1', text)
     # Convert {{math|...}} → just content  
     text = re.sub(r'\{\{math\|([^}]+)\}\}', r'\1', text)
-    # Remove all remaining {{...}} templates
-    text = re.sub(r'\{\{[^}]*\}\}', '', text)
+    # Handle {{...}} with pipe-separated params: keep first content param, drop named (1=...)
+    def general_template(m):
+        inner = m.group(1)
+        parts = inner.split('|')
+        if len(parts) <= 1:
+            return ''
+        significant = []
+        for p in parts[1:]:
+            if '=' in p:
+                continue
+            significant.append(p)
+        return ''.join(significant) if significant else parts[-1].split('=')[-1] if '=' in parts[-1] else ''
+    text = re.sub(r'\{\{([^{}]+)\}\}', general_template, text)
     # Clean up any leftover single braces from unmatched templates
     text = re.sub(r'^[\}\{]+', '', text)
     text = re.sub(r'[\}\{]+$', '', text)
@@ -231,12 +251,21 @@ def clean_wikitext(wikitext):
     text = remove_gallery(text)
     # Process math (convert <math>...</math> to LaTeX)
     text = convert_math(text)
-    # Remove any remaining HTML tags except <b>, <i>, <em>, <strong>, <sub>, <sup>
-    text = re.sub(r'</(?!b>|i>|em>|strong>|sub>|sup>)[a-z]+\s*>', '', text)
-    text = re.sub(r'<(?![/]?b>|[/]?i>|[/]?em>|[/]?strong>|[/]?sub>|[/]?sup>)[a-z]+[^>]*>', '', text, flags=re.DOTALL)
+    # Convert <sup>/<sub> to LaTeX notation (remaining after template removal)
+    text = re.sub(r'<sup>([^<]+)</sup>', r'\\(^{\1}\\)', text)
+    text = re.sub(r'<sub>([^<]+)</sub>', r'\\(_{\1}\\)', text)
+    # Remove any remaining HTML tags except <b>, <i>, <em>, <strong>
+    text = re.sub(r'</(?!b>|i>|em>|strong>)[a-z]+\s*>', '', text)
+    text = re.sub(r'<(?![/]?b>|[/]?i>|[/]?em>|[/]?strong>)[a-z]+[^>]*>', '', text, flags=re.DOTALL)
     # Convert links and formatting
     text = convert_links(text)
     text = convert_formatting(text)
+    # Strip irrelevant sections
+    text = re.sub(
+        r'^#{2,3}\s*(See also|Notes|References|Further reading|'
+        r'External links|Bibliography|Sources|Footnotes)\s*$.*',
+        '', text, flags=re.MULTILINE | re.DOTALL | re.IGNORECASE,
+    )
     # Clean up excessive whitespace
     text = re.sub(r'\n{4,}', '\n\n\n', text)
     text = re.sub(r' +\n', '\n', text)

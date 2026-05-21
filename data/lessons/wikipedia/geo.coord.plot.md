@@ -4,16 +4,13 @@
 
 ### One dimension
 
-
 An affine line with a chosen Cartesian coordinate system is called a *number line*. Every point on the line has a real-number coordinate, and every real number represents some point on the line.
 
 There are two degrees of freedom in the choice of Cartesian coordinate system for a line, which can be specified by choosing two distinct points along the line and assigning them to two distinct real numbers (most commonly zero and one). Other points can then be uniquely assigned to numbers by linear interpolation. Equivalently, one point can be assigned to a specific real number, for instance an *origin* point corresponding to zero, and an oriented length along the line can be chosen as a unit, with the orientation indicating the correspondence between directions along the line and positive or negative numbers. Each point corresponds to its signed distance from the origin (a number with an absolute value equal to the distance and a + or − sign chosen based on direction).
 
-A geometric transformation of the line can be represented by a function of a real variable, for example translation of the line corresponds to addition, and scaling the line corresponds to multiplication. Any two Cartesian coordinate systems on the line can be related to each-other by a linear function (function of the form  taking a specific point's coordinate in one system to its coordinate in the other system. Choosing a coordinate system for each of two different lines establishes an affine map from one line to the other taking each point on one line to the point on the other line with the same coordinate.
-
+A geometric transformation of the line can be represented by a function of a real variable, for example translation of the line corresponds to addition, and scaling the line corresponds to multiplication. Any two Cartesian coordinate systems on the line can be related to each-other by a linear function (function of the form taking a specific point's coordinate in one system to its coordinate in the other system. Choosing a coordinate system for each of two different lines establishes an affine map from one line to the other taking each point on one line to the point on the other line with the same coordinate.
 
 ### Two dimensions
-
 
 A Cartesian coordinate system in two dimensions (also called a **rectangular coordinate system** or a **Cartesian orthogonal coordinate system**) is defined by an ordered pair of perpendicular lines (axes), a single unit of length for both axes, and an orientation for each axis. The point where the axes meet is taken as the origin for both, thus turning each axis into a number line. For any point *P*, a line is drawn through *P* perpendicular to each axis, and the position where it meets the axis is interpreted as a number. The two numbers, in that chosen order, are the *Cartesian coordinates* of *P*. The reverse construction allows one to determine the point *P* given its coordinates.
 
@@ -25,11 +22,9 @@ A Euclidean plane with a chosen Cartesian coordinate system is called a ****. In
 
 The two axes divide the plane into four right angles, called *quadrants*. The quadrants may be named or numbered in various ways, but the quadrant where all coordinates are positive is usually called the *first quadrant*.
 
-If the coordinates of a point are (*x*, *y*), then its distances from the *X*-axis and from the *Y*-axis are |*y*| and |*x*|, respectively; where  denotes the absolute value of a number.
-
+If the coordinates of a point are (*x*, *y*), then its distances from the *X*-axis and from the *Y*-axis are |*y*| and |*x*|, respectively; where denotes the absolute value of a number.
 
 ### Three dimensions
-
 
 A Cartesian coordinate system for a three-dimensional space consists of an ordered triplet of lines (the *axes*) that go through a common point (the *origin*), and are pair-wise perpendicular; an orientation for each axis; and a single unit of length for all three axes. As in the two-dimensional case, each axis becomes a number line. For any point *P* of space, one considers a plane through *P* perpendicular to each coordinate axis, and interprets the point where that plane cuts the axis as a number. The Cartesian coordinates of *P* are those three numbers, in the chosen order. The reverse construction determines the point *P* given its three coordinates.
 
@@ -48,10 +43,8 @@ Standard names for the coordinates in the three axes are *abscissa*, *ordinate* 
 
 In mathematics, physics, and engineering contexts, the first two axes are often defined or depicted as horizontal, with the third axis pointing up. In that case the third coordinate may be called *height* or *altitude*. The orientation is usually chosen so that the 90-degree angle from the first axis to the second axis looks counter-clockwise when seen from the point (0, 0, 1); a convention that is commonly called *the right-hand rule*.
 
-
 ### Higher dimensions
 Since Cartesian coordinates are unique and non-ambiguous, the points of a Cartesian plane can be identified with pairs of real numbers; that is, with the Cartesian product \(\R^2 = \R\times\R\), where \(\R\) is the set of all real numbers. In the same way, the points in any Euclidean space of dimension *n* be identified with the tuples (lists) of *n* real numbers; that is, with the Cartesian product \(\R^n\).
 
 ### Generalizations
 The concept of Cartesian coordinates generalizes to allow axes that are not perpendicular to each other, and/or different units along each axis. In that case, each coordinate is obtained by projecting the point onto one axis along a direction that is parallel to the other axis (or, in general, to the hyperplane defined by all the other axes). In such an *oblique coordinate system* the computations of distances and angles must be modified from that in standard Cartesian systems, and many standard formulas (such as the Pythagorean formula for the distance) do not hold (see affine plane).
-

@@ -39,7 +39,6 @@ When \(p\) and \(q\) are expressed as complex numbers in the complex plane, the 
 
 ### Higher dimensions
 
-
 In three dimensions, for points given by their Cartesian coordinates, the distance is
 
 \(d(p,q)=\sqrt{(p_1-q_1)^2 + (p_2-q_2)^2 + (p_3-q_3)^2}.\)
@@ -75,26 +74,24 @@ According to the Beckman–Quarles theorem, any transformation of the Euclidean 
 
 ## Squared Euclidean distance
 
-
 In many applications, and in particular when comparing distances, it may be more convenient to omit the final square root in the calculation of Euclidean distances, as the square root does not change the order (\(d_1^2 > d_2^2\) if and only if \(d_1 > d_2\)). The value resulting from this omission is the square of the Euclidean distance, and is called the **squared Euclidean distance**. For instance, the Euclidean minimum spanning tree can be determined using only the ordering between distances, and not their numeric values. Comparing squared distances produces the same result but avoids an unnecessary square-root calculation and sidesteps issues of numerical precision. As an equation, the squared distance can be expressed as a sum of squares:
 
 \(d^2(p,q) = (p_1 - q_1)^2 + (p_2 - q_2)^2+\cdots+(p_n - q_n)^2.\)
 
 Beyond its application to distance comparison, squared Euclidean distance is of central importance in statistics, where it is used in the method of least squares, a standard method of fitting statistical estimates to data by minimizing the average of the squared distances between observed and estimated values, and as the simplest form of divergence to compare probability distributions. The addition of squared distances to each other, as is done in least squares fitting, corresponds to an operation on (unsquared) distances called Pythagorean addition. In cluster analysis, squared distances can be used to strengthen the effect of longer distances.
 
-Squared Euclidean distance does not form a metric space, as it does not satisfy the triangle inequality. However it is a smooth, strictly convex function of the two points, unlike the distance, which is non-smooth (near pairs of equal points) and convex but not strictly convex. The squared distance is thus preferred in optimization theory, since it allows convex analysis to be used. Since squaring is a monotonic function of non-negative values, minimizing squared distance is equivalent to minimizing the Euclidean distance, so the optimization problem is equivalent in terms of either, but easier to solve using squared distance.
+Squared Euclidean distance does not form a metric space, as it does not satisfy the triangle inequality. However it is a smooth, strictly convex function of the two points, unlike the distance, which is non-smooth (near pairs of equal points) and convex but not strictly convex. The squared distance is thus preferred in optimization theory; since it allows convex analysis to be used. Since squaring is a monotonic function of non-negative values, minimizing squared distance is equivalent to minimizing the Euclidean distance, so the optimization problem is equivalent in terms of either, but easier to solve using squared distance.
 
 The collection of all squared distances between pairs of points from a finite set may be stored in a Euclidean distance matrix, and is used in this form in distance geometry.
 
 ## Generalizations
 In more advanced areas of mathematics, when viewing Euclidean space as a vector space, its distance is associated with a norm called the Euclidean norm, defined as the distance of each vector from the origin. One of the important properties of this norm, relative to other norms, is that it remains unchanged under arbitrary rotations of space around the origin. By Dvoretzky's theorem, every finite-dimensional normed vector space has a high-dimensional subspace on which the norm is approximately Euclidean; the Euclidean norm is the
-only norm with this property. It can be extended to infinite-dimensional vector spaces as the *L*<sup>2</sup> norm or *L*<sup>2</sup> distance. The Euclidean distance gives Euclidean space the structure of a topological space, the Euclidean topology, with the open balls (subsets of points at less than a given distance from a given point) as its neighborhoods.
-
+only norm with this property. It can be extended to infinite-dimensional vector spaces as the *L*\(^{2}\) norm or *L*\(^{2}\) distance. The Euclidean distance gives Euclidean space the structure of a topological space, the Euclidean topology, with the open balls (subsets of points at less than a given distance from a given point) as its neighborhoods.
 
 Other common distances in real coordinate spaces and function spaces:
-*Chebyshev distance (*L*<sup>∞</sup> distance), which measures distance as the maximum of the distances in each coordinate.
-*Taxicab distance (*L*<sup>1</sup> distance), also called Manhattan distance, which measures distance as the sum of the distances in each coordinate.
-*Minkowski distance (*L*<sup>*p*</sup> distance), a generalization that unifies Euclidean distance, taxicab distance, and Chebyshev distance.
+*Chebyshev distance (*L*\(^{∞}\) distance), which measures distance as the maximum of the distances in each coordinate.
+*Taxicab distance (*L*\(^{1}\) distance), also called Manhattan distance, which measures distance as the sum of the distances in each coordinate.
+*Minkowski distance (*L*\(^{*p*}\) distance), a generalization that unifies Euclidean distance, taxicab distance, and Chebyshev distance.
 
 For points on surfaces in three dimensions, the Euclidean distance should be distinguished from the geodesic distance, the length of a shortest curve that belongs to the surface. In particular, for measuring great-circle distances on the Earth or other spherical or near-spherical surfaces, distances that have been used include the haversine distance giving great-circle distances between two points on a sphere from their longitudes and latitudes, and Vincenty's formulae also known as "Vincent distance" for distance on a spheroid.
 
@@ -102,6 +99,3 @@ For points on surfaces in three dimensions, the Euclidean distance should be dis
 Euclidean distance is the distance in Euclidean space. Both concepts are named after ancient Greek mathematician Euclid, whose *Elements* became a standard textbook in geometry for many centuries. Concepts of length and distance are widespread across cultures, can be dated to the earliest surviving "protoliterate" bureaucratic documents from Sumer in the fourth millennium BC (far before Euclid), and have been hypothesized to develop in children earlier than the related concepts of speed and time. But the notion of a distance, as a number defined from two points, does not actually appear in Euclid's *Elements*. Instead, Euclid approaches this concept implicitly, through the congruence of line segments, through the comparison of lengths of line segments, and through the concept of proportionality.
 
 The Pythagorean theorem is also ancient, but it could only take its central role in the measurement of distances after the invention of Cartesian coordinates by René Descartes in 1637. The distance formula itself was first published in 1731 by Alexis Clairaut. Because of this formula, Euclidean distance is also sometimes called Pythagorean distance. Although accurate measurements of long distances on the Earth's surface, which are not Euclidean, had again been studied in many cultures since ancient times (see history of geodesy), the idea that Euclidean distance might not be the only way of measuring distances between points in mathematical spaces came even later, with the 19th-century formulation of non-Euclidean geometry. The definition of the Euclidean norm and Euclidean distance for geometries of more than three dimensions also first appeared in the 19th century, in the work of Augustin-Louis Cauchy.
-
-## References
-

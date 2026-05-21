@@ -7,7 +7,7 @@ A **composite number** is a positive integer that can be formed by multiplying t
 The first 25 composite numbers (all up to 36) are:
 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 26, 27, 28, 30, 32, 33, 34, 35, 36.
 
-Every composite number can be written as the product of two or more (not necessarily distinct) primes. For example, the composite number 299 can be written as 13 × 23, and the composite number 360 can be written as 2<sup>3</sup> × 3<sup>2</sup> × 5; furthermore, this representation is unique up to the order of the factors. This fact is called the fundamental theorem of arithmetic.
+Every composite number can be written as the product of two or more (not necessarily distinct) primes. For example, the composite number 299 can be written as 13 × 23, and the composite number 360 can be written as 2\(^{3}\) × 3\(^{2}\) × 5; furthermore, this representation is unique up to the order of the factors. This fact is called the fundamental theorem of arithmetic.
 
 There are several known primality tests that can determine whether a number is prime or composite, which do not necessarily reveal the factorization of a composite input.
 
@@ -27,36 +27,10 @@ However, for prime numbers, the function also returns −1 and \(\mu(1) = 1\). F
 
 If *all* the prime factors of a number are repeated it is called a powerful number (too, all perfect powers are powerful numbers). If *none* of its prime factors are repeated, it is called squarefree. (All prime numbers and 1 are squarefree.)
 
-For example, 72 = 2<sup>3</sup> × 3<sup>2</sup>, all the prime factors are repeated, so 72 is a powerful number. 42 = 2 × 3 × 7, none of the prime factors are repeated, so 42 is squarefree.
-
+For example, 72 = 2\(^{3}\) × 3\(^{2}\), all the prime factors are repeated, so 72 is a powerful number. 42 = 2 × 3 × 7, none of the prime factors are repeated, so 42 is squarefree.
 
 Another way to classify composite numbers is by counting the number of divisors. All composite numbers have at least three divisors. In the case of squares of primes, those divisors are \(\{1, p, p^2\}\). A number *n* that has more divisors than any *x* < *n* is a highly composite number (though the first two such numbers are 1 and 2).
 
 Composite numbers have also been called "rectangular numbers", but that name can also refer to the pronic numbers, numbers that are the product of two consecutive integers.
 
 Yet another way to classify composite numbers is to determine whether all prime factors are either all below or all above some fixed (prime) number. Such numbers are called smooth numbers and rough numbers, respectively.
-
-## See also
-
-* Canonical representation of a positive integer
-* Integer factorization
-* Sieve of Eratosthenes
-* Table of prime factors
-* Divisor function
-* Prime omega function
-* Möbius function
-
-## Notes
-
-
-## References
-*
-*
-*
-*
-*
-
-## External links
-* Lists of composites with prime factorization (first 100, 1,000, 10,000, 100,000, and 1,000,000)
-* Divisor Plot (patterns found in large composite numbers)
-

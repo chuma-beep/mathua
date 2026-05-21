@@ -47,7 +47,6 @@ The following illustrates a simple table with four columns and nine rows. The fi
 
 ### Multi-dimensional table
 
-
 The concept of **dimension** is also a part of basic terminology. Any "simple" table can be represented as a "multi-dimensional"
 table by normalizing the data values into ordered hierarchies. A common example of such a table is a multiplication table.
 
@@ -72,10 +71,9 @@ the table:
 * Column 1 and row 1 will only correspond to cell (1,1);
 * Column 1 and row 2 will only correspond to cell (2,1) etc.
 
-The first column often presents information dimension description by which the rest of the table is navigated. This column is called "stub column". Tables may contain three or multiple dimensions and can be classified by the number of dimensions. Multi-dimensional tables may have super-rows - rows that describe additional dimensions for the rows that are presented below that row and are usually grouped in a tree-like structure.  This structure is typically visually presented with an appropriate number of white spaces in front of each stub's label.
+The first column often presents information dimension description by which the rest of the table is navigated. This column is called "stub column". Tables may contain three or multiple dimensions and can be classified by the number of dimensions. Multi-dimensional tables may have super-rows - rows that describe additional dimensions for the rows that are presented below that row and are usually grouped in a tree-like structure. This structure is typically visually presented with an appropriate number of white spaces in front of each stub's label.
 
 In literature tables often present numerical values, cumulative statistics, categorical values, and at times parallel descriptions in form of text. They can condense large amount of information to a limited space and therefore they are popular in scientific literature in many fields of study.
-
 
 ## Generic representation
 As a communication tool, a table allows a form of generalization of information from an unlimited number of different social or scientific contexts. It provides a familiar way to convey information that might otherwise not be obvious or readily understood.
@@ -104,7 +102,7 @@ For example, in the following diagram, two alternate representations of the same
 Modern software applications give users the ability to generate, format, and edit tables and tabular data for a wide variety of uses, such as in: word processing and spreadsheet applications, presentation software, and in HTML or another markup language.
 
 #### HTML
-Table cells are a key component in HTML and webpage building. It is part of the  component. A programmer may specify dimensions for a table cell, and use them to hold sections of webpages. A table cell in HTML is a non-empty element and is supposed to always be closed. There are two different kinds of table cell in HTML, namely: normal table cell and header cell. **<td>** denotes a table cell, the name implying 'data', while **<th>** denotes a table 'header'. The two can be used interchangeably, but it is recommended that header cell be only used for the top and side headers of a table. Furthermore, a table cell must be nested within a **<table>** tag *and* a **<tr>** (table row) tag. If there are more table cell tags in any given row than in any other, the particular **<tr>** must be given a  attribute declaring how many columns of cells wide it should be. By using the **rowspan** and **colspan** attributes, developers can combine multiple rows or columns, allowing them to design more complex and visually structured tables.
+Table cells are a key component in HTML and webpage building. It is part of the component. A programmer may specify dimensions for a table cell, and use them to hold sections of webpages. A table cell in HTML is a non-empty element and is supposed to always be closed. There are two different kinds of table cell in HTML, namely: normal table cell and header cell. **<td>** denotes a table cell, the name implying 'data', while **<th>** denotes a table 'header'. The two can be used interchangeably, but it is recommended that header cell be only used for the top and side headers of a table. Furthermore, a table cell must be nested within a **<table>** tag *and* a **<tr>** (table row) tag. If there are more table cell tags in any given row than in any other, the particular **<tr>** must be given a attribute declaring how many columns of cells wide it should be. By using the **rowspan** and **colspan** attributes, developers can combine multiple rows or columns, allowing them to design more complex and visually structured tables.
 
 The following table illustrates usage of colspan and rowpan:
 {| width="80%" align="center" style="font-variant:small-caps"
@@ -137,22 +135,13 @@ The following is an example of an HTML table containing 4 cells:
 |}
 HTML source:
 
+ Cell 1
 
-      Cell 1
+ Cell 2
 
+ Cell 3
 
-      Cell 2
-
-
-
-
-      Cell 3
-
-
-      Cell 4
-
-
-
+ Cell 4
 
 ### Software development
 Tables have uses in software development for both high-level specification and low-level implementation.
@@ -169,7 +158,6 @@ There are several specific situations in which tables are routinely used as a ma
 
 ### Publishing
 
-
 ### Mathematics
 
 Examples include:
@@ -181,32 +169,7 @@ In natural sciences, uses of tables include the periodic table in chemistry, and
 
 #### Periodic table
 
-
 #### Tide table
-
 
 ## Historical relationship to furniture
 In medieval counting houses, the tables were covered with a piece of checkered cloth, to count money.*Exchequer* is an archaic term for the English institution which accounted for money owed to the monarch. Thus the checkerboard tables of stacks of coins are a concrete realization of this information.
-
-## See also
-* Chart
-* Diagram
-* Abstract data type
-* Column (database)
-* Information graphics
-* Periodic table
-* Reference table
-* Row (database)
-* Table (database)
-* Table (HTML)
-* Tensor
-* Dependent and independent variables
-* Zebra striping
-
-## References
-
-
-## External links
-
-*
-

@@ -2,7 +2,7 @@
 
 # Complement of an event
 
-In probability theory, the **complement** of any event *A* is the event [not *A*], i.e. the event that *A* does not occur.  The event *A* and its complement [not *A*] are mutually exclusive and exhaustive. Generally, there is only one event *B* such that *A* and *B* are both mutually exclusive and exhaustive; that event is the complement of *A*.  The complement of an event *A* is usually denoted as *A′*, *A<sup>c</sup>*, \(\neg\)*A* or **. Given an event, the event and its complementary event define a Bernoulli trial: did the event occur or not?
+In probability theory, the **complement** of any event *A* is the event [not *A*], i.e. the event that *A* does not occur. The event *A* and its complement [not *A*] are mutually exclusive and exhaustive. Generally, there is only one event *B* such that *A* and *B* are both mutually exclusive and exhaustive; that event is the complement of *A*. The complement of an event *A* is usually denoted as *A′*, *A\(^{c}\)*, \(\neg\)*A* or **. Given an event, the event and its complementary event define a Bernoulli trial: did the event occur or not?
 
 For example, if a typical coin is tossed and one assumes that it cannot land on its edge, then it can either land showing "heads" or "tails." Because these two outcomes are mutually exclusive (i.e. the coin cannot simultaneously show both heads and tails) and collectively exhaustive (i.e. there are no other possible outcomes not represented between these two), they are therefore each other's complements. This means that [heads] is logically equivalent to [not tails], and [tails] is equivalent to [not heads].
 
@@ -11,17 +11,16 @@ In a random experiment, the probabilities of all possible events (the sample spa
 \(P(A^c) = 1 - P(A).\)
 Equivalently, the probabilities of an event and its complement must always total to 1. This does not, however, mean that *any* two events whose probabilities total to 1 are each other's complements; complementary events must also fulfill the condition of mutual exclusivity.
 
-
 ### Example of the utility of this concept
 Suppose one throws an ordinary six-sided die eight times. What is the probability that one sees a "1" at least once?
 
 It may be tempting to say that
 
-Pr(["1" on 1st trial] or ["1" on second trial] or ... or ["1" on 8th trial])
+Pr(["1" on 1st trial] or ["1" on second trial] or.. . or ["1" on 8th trial])
 
-= Pr("1" on 1st trial) + Pr("1" on second trial) + ... + P("1" on 8th trial)
+= Pr("1" on 1st trial) + Pr("1" on second trial) +.. . + P("1" on 8th trial)
 
-= 1/6 + 1/6 + ... + 1/6
+= 1/6 + 1/6 +.. . + 1/6
 
 = 8/6
 
@@ -33,24 +32,12 @@ One may resolve this overlap by the principle of inclusion-exclusion, or, in thi
 
 Pr(at least one "1") = 1 − Pr(no "1"s)
 
-= 1 − Pr([no "1" on 1st trial] and [no "1" on 2nd trial] and ... and [no "1" on 8th trial])
+= 1 − Pr([no "1" on 1st trial] and [no "1" on 2nd trial] and.. . and [no "1" on 8th trial])
 
-= 1 − Pr(no "1" on 1st trial) × Pr(no "1" on 2nd trial) × ... × Pr(no "1" on 8th trial)
+= 1 − Pr(no "1" on 1st trial) × Pr(no "1" on 2nd trial) ×.. . × Pr(no "1" on 8th trial)
 
-= 1 −(5/6) × (5/6) × ... × (5/6)
+= 1 −(5/6) × (5/6) ×.. . × (5/6)
 
-= 1 − (5/6)<sup>8</sup>
+= 1 − (5/6)\(^{8}\)
 
 = 0.7674...
-
-## See also
-*Logical complement
-*Exclusive disjunction
-*Binomial probability
-
-## References
-
-
-## External links
-**Complementary events* - (free) page from probability book of McGraw-Hill
-

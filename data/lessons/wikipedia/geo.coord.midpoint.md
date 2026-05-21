@@ -9,7 +9,7 @@ The midpoint of a segment in *n*-dimensional space whose endpoints are \(A = (a_
 
 \(\frac{A+B}{2}.\)
 
-That is, the *i*<sup>th</sup> coordinate of the midpoint (*i* = 1, 2, ..., *n*) is
+That is, the *i*\(^{th}\) coordinate of the midpoint (*i* = 1, 2,.. ., *n*) is
 
 \(\frac{a_i+b_i} 2.\)
 
@@ -43,31 +43,17 @@ Given two points of interest, finding the midpoint of the line segment they dete
 *The two bimedians of a convex quadrilateral are the line segments that connect the midpoints of opposite sides, hence each bisecting two sides. The two bimedians and the line segment joining the midpoints of the diagonals are concurrent at (all intersect at)a point called the "vertex centroid", which is the midpoint of all three of these segments.
 *The four "maltitudes" of a convex quadrilateral are the perpendiculars to a side through the midpoint of the opposite side, hence bisecting the latter side. If the quadrilateral is cyclic (inscribed in a circle), these maltitudes all meet at a common point called the "anticenter".
 *Brahmagupta's theorem states that if a cyclic quadrilateral is orthodiagonal (that is, has perpendicular diagonals), then the perpendicular to a side from the point of intersection of the diagonals always goes through the midpoint of the opposite side.
-*Varignon's theorem states that the midpoints of the sides of an arbitrary quadrilateral form the vertices of a parallelogram, and if the quadrilateral is not self-intersecting then the area of the parallelogram is half  the area of the quadrilateral.
+*Varignon's theorem states that the midpoints of the sides of an arbitrary quadrilateral form the vertices of a parallelogram, and if the quadrilateral is not self-intersecting then the area of the parallelogram is half the area of the quadrilateral.
 *The Newton line is the line that connects the midpoints of the two diagonals in a convex quadrilateral that is not a parallelogram. The line segments connecting the midpoints of opposite sides of a convex quadrilateral intersect in a point that lies on the Newton line.
 
 ### General polygons
 *A regular polygon has an inscribed circle which is tangent to each side of the polygon at its midpoint.
 *In a regular polygon with an even number of sides, the midpoint of a diagonal between opposite vertices is the polygon's center.
-*The midpoint-stretching polygon of a cyclic polygon  (a polygon whose vertices all fall on the same circle) is another cyclic polygon inscribed in the same circle, the polygon whose vertices are the midpoints of the circular arcs between the vertices of . Iterating the midpoint-stretching operation on an arbitrary initial polygon results in a sequence of polygons whose shapes converge to that of a regular polygon.
+*The midpoint-stretching polygon of a cyclic polygon (a polygon whose vertices all fall on the same circle) is another cyclic polygon inscribed in the same circle, the polygon whose vertices are the midpoints of the circular arcs between the vertices of. Iterating the midpoint-stretching operation on an arbitrary initial polygon results in a sequence of polygons whose shapes converge to that of a regular polygon.
 
 ## Generalizations
-The abovementioned formulas for the midpoint of a segment implicitly use the lengths of segments. However, in the generalization to affine geometry, where segment lengths are not defined, the midpoint can still be defined since it is an affine invariant. The synthetic affine definition of the midpoint  of a segment  is the projective harmonic conjugate of the point at infinity, , of the line . That is, the point  such that H[*A*,*B*; *P*,*M*]. When coordinates can be introduced in an affine geometry, the two definitions of midpoint will coincide.
+The abovementioned formulas for the midpoint of a segment implicitly use the lengths of segments. However, in the generalization to affine geometry, where segment lengths are not defined, the midpoint can still be defined since it is an affine invariant. The synthetic affine definition of the midpoint of a segment is the projective harmonic conjugate of the point at infinity, of the line. That is, the point such that H[*A*,*B*; *P*,*M*]. When coordinates can be introduced in an affine geometry, the two definitions of midpoint will coincide.
 
 The midpoint is not naturally defined in projective geometry since there is no distinguished point to play the role of the point at infinity (any point in a projective range may be projectively mapped to any other point in (the same or some other) projective range). However, fixing a point at infinity defines an affine structure on the projective line in question and the above definition can be applied.
 
 The definition of the midpoint of a segment may be extended to curve segments, such as geodesic arcs on a Riemannian manifold. Note that, unlike in the affine case, the *midpoint* between two points may not be uniquely determined.
-
-## See also
-*
-* Midpoint polygon
-*
-*
-
-## References
-
-
-## External links
-*Animation – showing the characteristics of the midpoint of a line segment
-*Midpoint Calculator - accurately compute middle values between numbers, times, and measurements online.
-

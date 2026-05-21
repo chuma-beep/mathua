@@ -7,11 +7,11 @@ In calculus, the derivative of any linear combination of functions equals the sa
 ## Statement and derivation
 Let *f* and *g* be functions, with *α* and *β* constants. Now consider
 
-\(\frac{\mbox{d}}{\mbox{d} x} ( \alpha \cdot f(x) + \beta \cdot g(x) ).\)
+\(\frac{\mbox{d{\mbox{d} x} ( \alpha \cdot f(x) + \beta \cdot g(x) ).\)
 
 By the sum rule in differentiation, this is
 
-\(\frac{\mbox{d}}{\mbox{d} x} ( \alpha \cdot f(x) ) + \frac{\mbox{d}}{\mbox{d} x} (\beta \cdot g(x)),\)
+\(\frac{\mbox{d{\mbox{d} x} ( \alpha \cdot f(x) ) + \frac{\mbox{d{\mbox{d} x} (\beta \cdot g(x)),\)
 
 and by the constant factor rule in differentiation, this reduces to
 
@@ -19,7 +19,7 @@ and by the constant factor rule in differentiation, this reduces to
 
 Therefore,
 
-\(\frac{\mbox{d}}{\mbox{d} x}(\alpha \cdot f(x) + \beta \cdot g(x)) = \alpha \cdot f'(x) + \beta \cdot g'(x).\)
+\(\frac{\mbox{d{\mbox{d} x}(\alpha \cdot f(x) + \beta \cdot g(x)) = \alpha \cdot f'(x) + \beta \cdot g'(x).\)
 
 Omitting the brackets, this is often written as:
 
@@ -41,7 +41,6 @@ We want to prove that \(j^{\prime}(x) = af^{\prime}(x) + bg^{\prime}(x)\).
 
 By definition, we can see that
 
-
 \[
 \begin{align}
 j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
@@ -50,26 +49,21 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
 \end{align}
 \]
 
-
 In order to use the limits law for the sum of limits, we need to know that \(\lim_{h \to 0} a\frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \to 0} b\frac{g(x + h) - g(x)}{h}\) both individually exist. For these smaller limits, we need to know that \(\lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \to 0} \frac{g(x + h) - g(x)}{h}\) both individually exist to use the coefficient law for limits. By definition, \(f^{\prime}(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\) and \(g^{\prime}(x) = \lim_{h \to 0} \frac{g(x + h) - g(x)}{h}\). So, if we know that \(f^{\prime}(x)\) and \(g^{\prime}(x)\) both exist, we will know that \(\lim_{h \to 0} \frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \to 0} \frac{g(x + h) - g(x)}{h}\) both individually exist. This allows us to use the coefficient law for limits to write
-
 
 \[
 \lim_{h \to 0} a\frac{f(x + h) - f(x)}{h}
 = a\lim_{h \to 0}\frac{f(x + h) - f(x)}{h}
 \]
 
-
 and
-
 
 \[
 \lim_{h \to 0} b\frac{g(x + h) - g(x)}{h}
 = b\lim_{h \to 0}\frac{g(x + h) - g(x)}{h}.
 \]
 
-
-With this, we can go back to apply the limit law for the sum of limits, since we know that \(\lim_{h \rightarrow 0} a\frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \rightarrow 0} b\frac{g(x + h) - g(x)}{h}\) both individually exist. From here, we can directly go back to the derivative we were working on.
+With this, we can go back to apply the limit law for the sum of limits; since we know that \(\lim_{h \rightarrow 0} a\frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \rightarrow 0} b\frac{g(x + h) - g(x)}{h}\) both individually exist. From here, we can directly go back to the derivative we were working on.
 \[
 \begin{align}
 j^{\prime}(x) &= \lim_{h \rightarrow 0} \left( a\frac{f(x + h) - f(x)}{h} + b\frac{g(x + h) - g(x)}{h} \right) \\
@@ -88,7 +82,6 @@ We want to prove that \(j^{\prime}(x) = f^{\prime}(x) + g^{\prime}(x)\).
 
 By definition, we can see that
 
-
 \[
 \begin{align}
 j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
@@ -98,7 +91,6 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
 \]
 In order to use the law for the sum of limits here, we need to show that the individual limits, \(\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \rightarrow 0} \frac{g(x + h) - g(x)}{h}\) both exist. By definition, \(f^{\prime}(x) = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\)and \(g^{\prime}(x) = \lim_{h \rightarrow 0} \frac{g(x + h) - g(x)}{h}\), so the limits exist whenever the derivatives \(f^{\prime}(x)\) and \(g^{\prime}(x)\) exist. So, assuming that the derivatives exist, we can continue the above derivation
 
-
 \[
 \begin{align}
 j^{\prime}(x) &= \lim_{h \rightarrow 0} \left( \frac{f(x + h) - f(x)}{h} + \frac{g(x + h) - g(x)}{h} \right) \\
@@ -106,7 +98,6 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \left( \frac{f(x + h) - f(x)}{h} + \frac
 &= f^{\prime}(x) + g^{\prime}(x)
 \end{align}
 \]
-
 
 Thus, we have shown what we wanted to show, that: \(j^{\prime}(x) = f^{\prime}(x) + g^{\prime}(x)\).
 
@@ -125,9 +116,7 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
 \end{align}
 \]
 
-
 In order to use the law for the difference of limits here, we need to show that the individual limits, \(\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) and \(\lim_{h \rightarrow 0} \frac{g(x + h) - g(x)}{h}\) both exist. By definition, \(f^{\prime}(x) = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) and that \(g^{\prime}(x) = \lim_{h \rightarrow 0} \frac{g(x + h) - g(x)}{h}\), so these limits exist whenever the derivatives \(f^{\prime}(x)\) and \(g^{\prime}(x)\) exist. So, assuming that the derivatives exist, we can continue the above derivation
-
 
 \[
 \begin{align}
@@ -136,7 +125,6 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \left( \frac{f(x + h) - f(x)}{h} - \frac
 &= f^{\prime}(x) - g^{\prime}(x)
 \end{align}
 \]
-
 
 Thus, we have shown what we wanted to show, that: \(j^{\prime}(x) = f^{\prime}(x) - g^{\prime}(x)\).
 
@@ -147,7 +135,6 @@ We want to prove that \(j^{\prime}(x) = af^{\prime}(x)\).
 
 By definition, we can see that:
 
-
 \[
 \begin{align}
 j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
@@ -156,18 +143,15 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} \frac{j(x + h) - j(x)}{h} \\
 \end{align}
 \]
 
-
 Now, in order to use a limit law for constant coefficients to show that
-
 
 \[
 \lim_{h \rightarrow 0} a\frac{f(x + h) - f(x)}{h} = a\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}
 \]
  we need to show that \(\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) exists.
-However, \(f^{\prime}(x) = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\), by the definition of the derivative. So, if \(f^{\prime}(x)\) exists, then  \(\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) exists.
+However, \(f^{\prime}(x) = \lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\), by the definition of the derivative. So, if \(f^{\prime}(x)\) exists, then \(\lim_{h \rightarrow 0} \frac{f(x + h) - f(x)}{h}\) exists.
 
 Thus, if we assume that \(f^{\prime}(x)\) exists, we can use the limit law and continue our proof.
-
 
 \[
 \begin{align}
@@ -177,21 +161,4 @@ j^{\prime}(x) &= \lim_{h \rightarrow 0} a\frac{f(x + h) - f(x)}{h} \\
 \end{align}
 \]
 
-
 Thus, we have proven that when \(j(x) = af(x)\), we have \(j^{\prime}(x) = af^{\prime}(x)\).
-
-## See also
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-
-## References
-

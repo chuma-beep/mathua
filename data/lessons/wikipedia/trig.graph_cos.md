@@ -8,7 +8,6 @@ The cross product and dot product are operations on two vectors in Euclidean vec
 \[
 \begin{align}
  \sin (\theta) &= \frac{|\mathbf{a} \times \mathbf{b}|}{|\mathbf{a}| |\mathbf{b}|}, \\
- \cos (\theta) &= \frac{\mathbf{a} \cdot \mathbf{b}}{|\mathbf{a}| |\mathbf{b}|}.
+ \cos (\theta) &= \frac{\mathbf{a} \cdot \mathbf{b{|\mathbf{a}| |\mathbf{b}|}.
 \end{align}
 \]
-

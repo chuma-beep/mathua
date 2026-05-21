@@ -2,8 +2,7 @@
 
 # Times tables 1 to 12
 
-*The Multiplication Table*}}
-
+*The Multiplication Table*
 
 In mathematics, a **multiplication table** (sometimes, less formally, a **times table**) is a mathematical table used to define a multiplication operation for an algebraic system.
 
@@ -13,7 +12,6 @@ The decimal multiplication table was traditionally taught as an essential part o
 ### Pre-modern times
 
 The oldest known multiplication tables were used by the Babylonians about 4000 years ago. However, they used a base of 60. The oldest known tables using a base of 10 are the Chinese decimal multiplication table on bamboo strips dating to about 305 BC, during China's Warring States period.
-
 
 The multiplication table is sometimes attributed to the ancient Greek mathematician Pythagoras (570–495 BC). It is also called the Table of Pythagoras in many languages (for example French, Italian and Russian), sometimes in English. The Greco-Roman mathematician Nichomachus (60–120 AD), a follower of Neopythagoreanism, included a multiplication table in his *Introduction to Arithmetic*, whereas the oldest surviving Greek multiplication table is on a wax tablet dated to the 1st century AD and currently housed in the British Museum.
 
@@ -25,7 +23,6 @@ In his 1820 book *The Philosophy of Arithmetic*, mathematician John Leslie publi
 In 1897, August Leopold Crelle published *Calculating tables giving the products of every two numbers from one to one thousand* which is a simple multiplication table for products up to 1000 × 10000.
 
 Tables showing all products of numbers from 1 to 10 or 1 to 12 are the sizes most commonly found in primary schools. The table below shows products up to 12 × 12:
-
 
 {|class="wikitable" style="text-align: right;"
 !style="width:7.14%"|×
@@ -79,9 +76,7 @@ Tables showing all products of numbers from 1 to 10 or 1 to 12 are the sizes mos
 | 12 || 24 || 36 || 48 || 60 || 72 || 84 || 96 || 108 || 120 || 132 || 144
 |}
 
-
 The common multi-digit multiplication algorithms taught in school break that problem down into a sequence of single-digit multiplication and multi-digit addition problems. Single-digit multiplication can be summarized in a 100-entry table of all products of digits from 0 to 9. Because 1= 0 × *a* = 0 for any number , the rows and columns for multiplication by 0 are typically left out. Multiplication of integers is commutative, 1= *a* × *b* = *b* × *a*. Therefore, the table is symmetric across its main diagonal, and can be reduced to 45 entries by only showing entries *a* × *b* where *a* ≥ *b*, as shown below. The table could be reduced further (to 36 entries) by leaving off rows and columns for multiplication by 1, the multiplicative identity, which satisfies 1= *a* × 1 = *a*.
-
 
 {|class="wikitable" style="text-align: right;"
 |-
@@ -124,9 +119,7 @@ The common multi-digit multiplication algorithms taught in school break that pro
 !style="text-align: right; width:7.14%"|9
 |}
 
-
 The traditional rote learning of multiplication was based on memorization of columns in the table, arranged as follows.
-
 
 {|
 !style="text-align: right; width:25%"|
@@ -296,12 +289,10 @@ The traditional rote learning of multiplication was based on memorization of col
 |
 |}
 
-
 This form of writing the multiplication table in columns with complete number sentences is still used in some countries, such as Colombia, Bosnia and Herzegovina, instead of the modern grids above.
 
 ## Patterns in the tables
 There is a pattern in the multiplication table that can help people to memorize the table more easily. It uses the figures below:
-
 
 {| cellpadding="0" cellspacing="0" style="text-align:center;width:20em;"
 | colspan="5" style="font-size:200%;"|→
@@ -320,7 +311,7 @@ There is a pattern in the multiplication table that can help people to memorize 
 | rowspan="3" style="font-size:200%;"|↓
 |-
 ! 4 || 5 || 6
-!  ||  ||
+! || ||
 |-
 ! style="border:1px solid silver;border-radius:1em;"|7
 ! 8
@@ -344,9 +335,7 @@ There is a pattern in the multiplication table that can help people to memorize 
 | colspan="5"|Figure 2: Even
 |}
 
-
 Figure 1 is used for multiples of 1, 3, 7, and 9. Figure 2 is used for the multiples of 2, 4, 6, and 8. These patterns can be used to memorize the multiples of any number from 0 to 10, except 5. As you would start on the number you are multiplying, when you multiply by 0, you stay on 0 (0 is external and so the arrows have no effect on 0, otherwise 0 is used as a link to create a perpetual cycle). The pattern also works with multiples of 10, by starting at 1 and simply adding 0, giving you 10, then just apply every number in the pattern to the "tens" unit as you would normally do as usual to the "ones" unit.
-
 
 For example, to recall all the multiples of 7:
 
@@ -356,14 +345,13 @@ For example, to recall all the multiples of 7:
 # After coming to the top of this column, start with the bottom of the next column, and travel in the same direction. The number is 8. So think of the next number after 21 that ends with 8, which is 28.
 # Proceed in the same way until the last number, 3, corresponding to 63.
 # Next, use the 0 at the bottom. It corresponds to 70.
-# Then, start again with the 7.  This time it will correspond to 77.
+# Then, start again with the 7. This time it will correspond to 77.
 # Continue like this.
 
 ## In abstract algebra
 Tables can also define binary operations on groups, fields, rings, and other algebraic systems. In such contexts they are called Cayley tables.
 
-For every natural number *n*, addition and multiplication in **Z<sub>*n*</sub>**, the ring of integers modulo *n*, is described by an *n* by *n* table . For example, the tables for **Z<sub>5</sub>** are:
-
+For every natural number *n*, addition and multiplication in **Z\(_{*n*}\)**, the ring of integers modulo *n*, is described by an *n* by *n* table. For example, the tables for **Z\(_{5}\)** are:
 
 {| class="wikitable" style="text-align: center; width:12em"
 |-
@@ -415,12 +403,11 @@ For every natural number *n*, addition and multiplication in **Z<sub>*n*</sub>**
 | 0 || 4 || 3 || 2 || 1
 |}
 
-
 For other examples, see group.
 
 ### Hypercomplex numbers
 
-Hypercomplex number multiplication tables show the non-commutative results of multiplying two hypercomplex imaginary units. The simplest example is that of the quaternion multiplication table , , and )}}:
+Hypercomplex number multiplication tables show the non-commutative results of multiplying two hypercomplex imaginary units. The simplest example is that of the quaternion multiplication table , and ):
 
 {|class="wikitable"
 |+Quaternion multiplication table
@@ -457,7 +444,6 @@ Hypercomplex number multiplication tables show the non-commutative results of mu
 |}
 
 ## Chinese and Japanese multiplication tables
-
 
 The Chinese multiplication table consists of eighty-one terms. It was historically called the *nine-nine table*, because in ancient times it started with 9 × 9: nine nines beget eighty-one, eight nines beget seventy-two, etc. It was known in China as early as the Spring and Autumn period, and survived through the age of the abacus; pupils in elementary school today still must memorize it. A shorter version of the table consists of only forty-five sentences:
 
@@ -574,7 +560,7 @@ The Chinese multiplication table consists of eighty-one terms. It was historical
 |九九八十一
 |}
 
-Mokkan discovered at Heijō Palace suggest that the multiplication table may have been introduced to Japan through Chinese mathematical treatises such as the Sunzi Suanjing, because their expression of the multiplication table share the character  in products less than ten. Chinese and Japanese share a similar system of eighty-one short, easily memorable sentences taught to students to help them learn the multiplication table up to 9 × 9. In current usage, the sentences that express products less than ten include an additional particle in both languages. In the case of modern Chinese, this is  (); and in Japanese, this is  (). This is useful for those who practice calculation with a suanpan or a soroban, because the sentences remind them to shift one column to the right when inputting a product that does not begin with a tens digit. In particular, the Japanese multiplication table uses non-standard pronunciations for numbers in some specific instances (such as the replacement of *san roku* with *saburoku*; indicated in bold below).
+Mokkan discovered at Heijō Palace suggest that the multiplication table may have been introduced to Japan through Chinese mathematical treatises such as the Sunzi Suanjing, because their expression of the multiplication table share the character in products less than ten. Chinese and Japanese share a similar system of eighty-one short, easily memorable sentences taught to students to help them learn the multiplication table up to 9 × 9. In current usage, the sentences that express products less than ten include an additional particle in both languages. In the case of modern Chinese, this is (); and in Japanese, this is (). This is useful for those who practice calculation with a suanpan or a soroban, because the sentences remind them to shift one column to the right when inputting a product that does not begin with a tens digit. In particular, the Japanese multiplication table uses non-standard pronunciations for numbers in some specific instances (such as the replacement of *san roku* with *saburoku*; indicated in bold below).
 
 {| class="wikitable plainrowheaders" style="max-width: 56em"
  |+ The Japanese multiplication table
@@ -589,7 +575,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 !style="width:10.4%" |8 *ha*
 !style="width:10.4%" |9 *ku*
 |-
-!1  *in*
+!1 *in*
 |*in'ichi ga ichi*
 |*inni ga ni*
 |*insan ga san*
@@ -600,9 +586,9 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*inhachi ga hachi*
 |*inku ga ku*
 |-
-!2  *ni*
+!2 *ni*
 |*ni ichi ga ni*
-|*ni  ga shi*
+|*ni ga shi*
 |*ni san ga roku*
 |*ni shi ga hachi*
 |*ni go jū*
@@ -611,7 +597,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*ni hachi jūroku*
 |*ni ku jūhachi*
 |-
-!3  *san*
+!3 *san*
 |*san ichi ga san*
 |*san ni ga roku*
 |* ga ku*
@@ -622,7 +608,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |* nijūshi*
 |*san ku nijūshichi*
 |-
-!4  *shi*
+!4 *shi*
 |*shi ichi ga shi*
 |*shi ni ga hachi*
 |*shi san jūni*
@@ -633,7 +619,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*shi ha sanjūni*
 |*shi ku sanjūroku*
 |-
-!5  *go*
+!5 *go*
 |*go ichi ga go*
 |*go ni jū*
 |*go san jūgo*
@@ -644,7 +630,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*go ha shijū*
 |* shijūgo*
 |-
-!6  *roku*
+!6 *roku*
 |*roku ichi ga roku*
 |*roku ni jūni*
 |*roku san jūhachi*
@@ -655,7 +641,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*roku ha shijūhachi*
 |* gojūshi*
 |-
-!7  *shichi*
+!7 *shichi*
 |*shichi ichi ga shichi*
 |*shichi ni jūshi*
 |*shichi san nijūichi*
@@ -666,7 +652,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |*shichi ha gojūroku*
 |*shichi ku rokujūsan*
 |-
-!8  *hachi*
+!8 *hachi*
 |*hachi ichi ga hachi*
 |*hachi ni jūroku*
 |*hachi san nijūshi*
@@ -677,7 +663,7 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 |* rokujūshi*
 |* shichijūni*
 |-
-!9  *ku*
+!9 *ku*
 |*ku ichi ga ku*
 |*ku ni jūhachi*
 |*ku san nijūshichi*
@@ -692,18 +678,8 @@ Mokkan discovered at Heijō Palace suggest that the multiplication table may hav
 ## Warring States decimal multiplication bamboo slips
 A bundle of 21 bamboo slips dated 305 BC in the Warring States period in the Tsinghua Bamboo Slips (清華簡) collection is the world's earliest known example of a decimal multiplication table.
 
-
 ## Standards-based mathematics reform in the US
 
 In 1989, the National Council of Teachers of Mathematics (NCTM) developed new standards which were based on the belief that all students should learn higher-order thinking skills, which recommended reduced emphasis on the teaching of traditional methods that relied on rote memorization, such as multiplication tables. Widely adopted texts such as Investigations in Numbers, Data, and Space (widely known as TERC after its producer, Technical Education Research Centers) omitted aids such as multiplication tables in early editions. NCTM made it clear in their 2006 Focal Points that basic mathematics facts must be learned, though there is no consensus on whether rote memorization is the best method. In recent years, a number of nontraditional methods have been devised to help children learn multiplication facts, including video-game style apps and books that aim to teach times tables through character-based stories.
 
 In 2024, the recommendation to learn the multiplication table was removed from the California Mathematics Curriculum Framework.
-
-## See also
-
-
-* Vedic square
-* IBM 1620, an early computer that used tables stored in memory to perform addition and multiplication
-
-## References
-

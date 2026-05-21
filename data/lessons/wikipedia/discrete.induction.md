@@ -4,7 +4,6 @@
 
 **Mathematical induction** is a method for proving that a statement \(P(n)\) is true for every natural number \(n\), that is, that the infinitely many cases \(P(0), P(1), P(2), P(3), \dots\)  all hold. This is done by first proving a simple case, then also showing that if we assume the claim is true for a given case, then the next case is also true. Informal metaphors help to explain this technique, such as falling dominoes or climbing a ladder:
 
-
 A **proof by induction** consists of two cases. The first, the **base case**, proves the statement for \(n = 0\) without assuming any knowledge of other cases. The second case, the **induction step**, proves that *if* the statement holds for any given case \(n = k\), *then* it must also hold for the next case \(n = k + 1\). These two steps establish that the statement holds for every natural number \(n\). The base case does not necessarily begin with \(n = 0\), but often with \(n = 1\), and possibly with any fixed natural number \(n = N\), establishing the truth of the statement for all natural numbers \(n \geq N\).
 
 The method can be extended to prove statements about more general well-founded structures, such as trees; this generalization, known as structural induction, is used in mathematical logic and computer science. Mathematical induction in this extended sense is closely related to recursion. Mathematical induction is an inference rule used in formal proofs, and is the foundation of most correctness proofs for computer programs.
@@ -20,18 +19,18 @@ Katz says in his history of mathematics
 
 In India, early implicit proofs by mathematical induction appear in Bhaskara's "cyclic method".
 
-None of these ancient mathematicians, however, explicitly stated the induction hypothesis. Another similar case (contrary to what Vacca has written, as Freudenthal carefully showed) was that of Francesco Maurolico in his *Arithmeticorum libri duo* (1575), who used the technique to prove that the sum of the first  odd integers is .
+None of these ancient mathematicians, however, explicitly stated the induction hypothesis. Another similar case (contrary to what Vacca has written, as Freudenthal carefully showed) was that of Francesco Maurolico in his *Arithmeticorum libri duo* (1575), who used the technique to prove that the sum of the first odd integers 
 
 The earliest rigorous use of induction was by Gersonides (1288–1344). The first explicit formulation of the principle of induction was given by Pascal in his *Traité du triangle arithmétique* (1665). Another Frenchman, Fermat, made ample use of a related principle: indirect proof by infinite descent.
 
 The induction hypothesis was also employed by the Swiss Jakob Bernoulli, and from then on it became well known. The modern formal treatment of the principle came only in the 19th century, with George Boole, Augustus De Morgan, Charles Sanders Peirce, Giuseppe Peano, and Richard Dedekind.
 
 ## Description
-The simplest and most common form of mathematical induction infers that a statement involving a natural number  (that is, an integer *n* ≥ 0 or 1) holds for all values of . The proof consists of two steps:
+The simplest and most common form of mathematical induction infers that a statement involving a natural number (that is, an integer *n* ≥ 0 or 1) holds for all values of. The proof consists of two steps:
 # The **** (or **initial case**): prove that the statement holds for 0, or 1.
 # The **** (or **inductive step**, or **step case**): prove that for every , if the statement holds for , then it holds for *n* + 1. In other words, assume that the statement holds for some arbitrary natural number , and prove that the statement holds for *n* + 1.
 
-The hypothesis in the induction step, that the statement holds for a particular , is called the **induction hypothesis** or **inductive hypothesis**. To prove the induction step, one assumes the induction hypothesis for  and then uses this assumption to prove that the statement holds for *n* + 1.
+The hypothesis in the induction step, that the statement holds for a particular , is called the **induction hypothesis** or **inductive hypothesis**. To prove the induction step, one assumes the induction hypothesis for and then uses this assumption to prove that the statement holds for *n* + 1.
 
 Authors who prefer to define natural numbers to begin at 0 use that value in the base case; those who define natural numbers to begin at 1 use that value.
 
@@ -42,7 +41,6 @@ Mathematical induction can be used to prove the following statement for all natu
 \[
 P(n)\!:\ \ 0 + 1 + 2 + \cdots + n = \frac{n(n + 1)}{2}.
 \]
-
 
 This states a general formula for the sum of the natural numbers less than or equal to a given number; in fact an infinite sequence of statements: \(0 = \tfrac{(0)(0+1)}2\), \(0+1 = \tfrac{(1)(1+1)}2\), \(0+1+2 = \tfrac{(2)(2+1)}2\), etc.
 
@@ -68,7 +66,6 @@ It follows that:
 (0 + 1 + 2 + \cdots + k )+ (k+1) = \frac{k(k+1)}2 + (k+1).
 \]
 
-
 Algebraically, the right hand side simplifies as:
 
 \[
@@ -78,7 +75,6 @@ Algebraically, the right hand side simplifies as:
 &= \frac{(k+1)((k+1) + 1)}{2}.
 \end{align}
 \]
-
 
 Equating the extreme left hand and right hand sides, we deduce that:
 \[
@@ -118,7 +114,6 @@ k\left|\sin x\right|+\left|\sin x\right| && \text{(induction hypothesis})\\
 \end{align}
 \]
 
-
 The inequality between the extreme left-hand and right-hand quantities shows that \(P(k+1)\) is true, which completes the induction step.
 
 *Conclusion:* The proposition \(P(n)\) holds for all natural numbers \(n.\) Q.E.D.
@@ -129,39 +124,32 @@ In practice, proofs by induction are often structured differently, depending on 
 All variants of induction are special cases of transfinite induction; see below.
 
 ### Base case other than 0 or 1
-If one wishes to prove a statement, not for all natural numbers, but only for all numbers  greater than or equal to a certain number , then the proof by induction consists of the following:
+If one wishes to prove a statement, not for all natural numbers, but only for all numbers greater than or equal to a certain number , then the proof by induction consists of the following:
 # Showing that the statement holds when 1=*n* = *b*.
 # Showing that if the statement holds for an arbitrary number *n* ≥ *b*, then the same statement also holds for *n* + 1.
-This can be used, for example, to show that 2<sup>*n*</sup> ≥ *n* + 5 for *n* ≥ 3.
+This can be used, for example, to show that 2\(^{*n*}\) ≥ *n* + 5 for *n* ≥ 3.
 
-In this way, one can prove that some statement *P*(*n*) holds for all *n* ≥ 1, or even for all *n* ≥ −5. This form of mathematical induction is actually a special case of the previous form, because if the statement to be proved is *P*(*n*) then proving it with these two rules is equivalent with proving *P*(*n* + *b*) for all natural numbers  with an induction base case 0.
+In this way, one can prove that some statement *P*(*n*) holds for all *n* ≥ 1, or even for all *n* ≥ −5. This form of mathematical induction is actually a special case of the previous form, because if the statement to be proved is *P*(*n*) then proving it with these two rules is equivalent with proving *P*(*n* + *b*) for all natural numbers with an induction base case 0.
 
 #### Example: forming dollar amounts by coins
-Assume an infinite supply of 4- and 5-dollar coins. Induction can be used to prove that any whole amount of dollars greater than or equal to 12 can be formed by a combination of such coins. Let *S*(*k*) denote the statement " dollars can be formed by a combination of 4- and 5-dollar coins". The proof that *S*(*k*) is true for all *k* ≥ 12 can then be achieved by induction on  as follows:
+Assume an infinite supply of 4- and 5-dollar coins. Induction can be used to prove that any whole amount of dollars greater than or equal to 12 can be formed by a combination of such coins. Let *S*(*k*) denote the statement " dollars can be formed by a combination of 4- and 5-dollar coins". The proof that *S*(*k*) is true for all *k* ≥ 12 can then be achieved by induction on as follows:
 
 *Base case:* Showing that *S*(*k*) holds for 1=*k* = 12 is simple: take three 4-dollar coins.
 
-*Induction step:* Given that *S*(*k*) holds for some value of *k* ≥ 12 (*induction hypothesis*), prove that *S*(*k* + 1) holds, too. Assume *S*(*k*) is true for some arbitrary *k* ≥ 12. If there is a solution for  dollars that includes at least one 4-dollar coin, replace it by a 5-dollar coin to make *k* + 1 dollars. Otherwise, if only 5-dollar coins are used,  must be a multiple of 5 and so at least 15; but then we can replace three 5-dollar coins by four 4-dollar coins to make *k* + 1 dollars. In each case, *S*(*k* + 1) is true.
+*Induction step:* Given that *S*(*k*) holds for some value of *k* ≥ 12 (*induction hypothesis*), prove that *S*(*k* + 1) holds, too. Assume *S*(*k*) is true for some arbitrary *k* ≥ 12. If there is a solution for dollars that includes at least one 4-dollar coin, replace it by a 5-dollar coin to make *k* + 1 dollars. Otherwise, if only 5-dollar coins are used, must be a multiple of 5 and so at least 15; but then we can replace three 5-dollar coins by four 4-dollar coins to make *k* + 1 dollars. In each case, *S*(*k* + 1) is true.
 
 Therefore, by the principle of induction, *S*(*k*) holds for all *k* ≥ 12, and the proof is complete.
 
-In this example, although *S*(*k*) also holds for \(k \in \{ 4, 5, 8, 9, 10 \}\), the above proof cannot be modified to replace the minimum amount of 12 dollar to any lower value . For 1=*m* = 11, the base case is actually false; for 1=*m* = 10, the second case in the induction step (replacing three 5- by four 4-dollar coins) will not work; let alone for even lower .
-
-### Induction on more than one counter
-It is sometimes desirable to prove a statement involving two natural numbers,  and , by iterating the induction process. That is, one proves a base case and an induction step for , and in each of those proves a base case and an induction step for . See, for example, the proof of commutativity accompanying *addition of natural numbers*. More complicated arguments involving three or more counters are also possible.
+In this example, although *S*(*k*) also holds for \(k \in \{ 4, 5, 8, 9, 10 \}\), the above proof cannot be modified to replace the minimum amount of 12 dollar to any lower value. For 1=*m* = 11, the base case is actually false; for 1=*m* = 10, the second case in the induction step (replacing three 5- by four 4-dollar coins) will not work; let alone for even lower. ### Induction on more than one counter
+It is sometimes desirable to prove a statement involving two natural numbers, and , by iterating the induction process. That is, one proves a base case and an induction step for , and in each of those proves a base case and an induction step for. See, for example, the proof of commutativity accompanying *addition of natural numbers*. More complicated arguments involving three or more counters are also possible.
 
 ### Infinite descent
 
-
-The method of infinite descent is a variation of mathematical induction which was used by Pierre de Fermat. It is used to show that some statement *Q*(*n*) is false for all natural numbers . Its traditional form consists of showing that if *Q*(*n*) is true for some natural number , it also holds for some strictly smaller natural number . Because there are no infinite decreasing sequences of natural numbers, this situation would be impossible, thereby showing (by contradiction) that *Q*(*n*) cannot be true for any .
-
-The validity of this method can be verified from the usual principle of mathematical induction. Using mathematical induction on the statement *P*(*n*) defined as "*Q*(*m*) is false for all natural numbers  less than or equal to ", it follows that *P*(*n*) holds for all , which means that *Q*(*n*) is false for every natural number .
-
-### Limited mathematical induction
+The method of infinite descent is a variation of mathematical induction which was used by Pierre de Fermat. It is used to show that some statement *Q*(*n*) is false for all natural numbers. Its traditional form consists of showing that if *Q*(*n*) is true for some natural number , it also holds for some strictly smaller natural number. Because there are no infinite decreasing sequences of natural numbers, this situation would be impossible, thereby showing (by contradiction) that *Q*(*n*) cannot be true for any. The validity of this method can be verified from the usual principle of mathematical induction. Using mathematical induction on the statement *P*(*n*) defined as "*Q*(*m*) is false for all natural numbers less than or equal to ", it follows that *P*(*n*) holds for all , which means that *Q*(*n*) is false for every natural number. ### Limited mathematical induction
 If one wishes to prove that a property *P* holds for all natural numbers less than or equal to a fixed , proving that *P* satisfies the following conditions suffices:
 
 # *P* holds for 0,
-# For any natural number  less than , if *P* holds for , then *P* holds for *x* + 1
+# For any natural number less than , if *P* holds for , then *P* holds for *x* + 1
 
 ### Prefix induction
 The most common form of proof by mathematical induction requires proving in the induction step that
@@ -170,8 +158,7 @@ The most common form of proof by mathematical induction requires proving in the 
 \forall k \, (P(k) \to P(k+1))
 \]
 
-
-whereupon the induction principle "automates"  applications of this step in getting from *P*(0) to *P*(*n*). This could be called "predecessor induction" because each step proves something about a number from something about that number's predecessor.
+whereupon the induction principle "automates" applications of this step in getting from *P*(0) to *P*(*n*). This could be called "predecessor induction" because each step proves something about a number from something about that number's predecessor.
 
 A variant of interest in computational complexity is "prefix induction", in which one proves the following statement in the induction step:
 
@@ -185,8 +172,7 @@ or equivalently
 \forall k\, \left( P\!\left(\left\lfloor \frac{k}{2} \right\rfloor \right) \to P(k) \right)
 \]
 
-
-The induction principle then "automates" log<sub>2</sub> *n* applications of this inference in getting from *P*(0) to *P*(*n*). In fact, it is called "prefix induction" because each step proves something about a number from something about the "prefix" of that number — as formed by truncating the low bit of its binary representation. It can also be viewed as an application of traditional induction on the length of that binary representation.
+The induction principle then "automates" log\(_{2}\) *n* applications of this inference in getting from *P*(0) to *P*(*n*). In fact, it is called "prefix induction" because each step proves something about a number from something about the "prefix" of that number — as formed by truncating the low bit of its binary representation. It can also be viewed as an application of traditional induction on the length of that binary representation.
 
 If traditional predecessor induction is interpreted computationally as an -step loop, then prefix induction would correspond to a log--step loop. Because of that, proofs using prefix induction are "more feasibly constructive" than proofs using predecessor induction.
 
@@ -200,13 +186,13 @@ One can take the idea a step further: one must prove
 
 whereupon the induction principle "automates" log log *n* applications of this inference in getting from *P*(0) to *P*(*n*). This form of induction has been used, analogously, to study log-time parallel computation.
 
-###  Complete (strong) induction
+### Complete (strong) induction
 Another variant, called **complete induction**, **course of values induction** or **strong induction** (in contrast to which the basic form of induction is sometimes known as **weak induction**), makes the induction step easier to prove by using a stronger hypothesis: one proves the statement \(P(m+1)\) under the assumption that \(P(n)\) holds for *all* natural numbers \(n\) less than \(m+1\); by contrast, the basic form only assumes \(P(m)\). The name "strong induction" does not mean that this method can prove more than "weak induction", but merely refers to the stronger hypothesis used in the induction step.
 
 In fact, it can be shown that the two methods are actually equivalent, as explained below. In this form of complete induction, one still has to prove the base case, \(P(0)\), and it may even be necessary to prove extra-base cases such as \(P(1)\) before the general argument applies, as in the example below of the Fibonacci number \(F_{n}\).
 
 Although the form just described requires one to prove the base case, this is unnecessary if one can prove \(P(m)\) (assuming \(P(n)\) for all lower \(n\)) for all \(m \geq 0\). This is a special case of transfinite induction as described below, although it is no longer equivalent to ordinary induction. In this form the base case is subsumed by the case \(m = 0\), where \(P(0)\) is proved with no other \(P(n)\) assumed; this case may need to be handled separately, but sometimes the same argument applies for \(m = 0\) and \(m > 0\), making the proof simpler and more elegant.
-In this method, however, it is vital to ensure that the proof of \(P(m)\) does not implicitly assume that \(m > 0\), e.g. by saying "choose an arbitrary \(n < m\)", or by assuming that a set of  elements has an element.
+In this method, however, it is vital to ensure that the proof of \(P(m)\) does not implicitly assume that \(m > 0\), e.g. by saying "choose an arbitrary \(n < m\)", or by assuming that a set of elements has an element.
 #### Equivalence with ordinary induction
 Complete induction is equivalent to ordinary mathematical induction as described above, in the sense that a proof by one method can be transformed into a proof by the other. Suppose there is a proof of \(P(n)\) by complete induction. Then, this proof can be transformed into an ordinary induction proof by assuming a stronger inductive hypothesis. Let \(Q(n)\) be the statement "\(P(m)\) holds for all \(m\) such that \(0\leq m \leq n\)"—this becomes the inductive hypothesis for ordinary induction. We can then show \(Q(0)\) and \(Q(n + 1)\) for \(n \in \mathbb N\) assuming only \(Q(n)\) and show that \(Q(n)\) implies \(P(n)\).
 
@@ -231,7 +217,6 @@ We shall look to prove the same example as above, this time with *strong inducti
 S(n): \,\,n \geq 12 \implies \,\exists\, a,b\in\mathbb{N}. \,\, n = 4a+5b
 \]
 
-
 However, there will be slight differences in the structure and the assumptions of the proof, starting with the extended base case.
 
 **Proof.**
@@ -247,7 +232,6 @@ However, there will be slight differences in the structure and the assumptions o
 \end{align}
 \]
 
-
 The base case holds.
 
 *Induction step:* Given some \(j>15\), assume \(S(m)\) holds for all \(m\) with \(12 \leq m< j\). Prove that \(S(j)\) holds.
@@ -261,7 +245,7 @@ inequality of arithmetic and geometric means for all powers of 2, and then used 
 
 ## Example of error in the induction step
 
-The induction step must be proved for all values of . To illustrate this, Joel E. Cohen proposed the following argument, which purports to prove by mathematical induction that all horses are of the same color:
+The induction step must be proved for all values of. To illustrate this, Joel E. Cohen proposed the following argument, which purports to prove by mathematical induction that all horses are of the same color:
 
 *Base case:* in a set of only *one* horse, there is only one color.
 
@@ -276,20 +260,18 @@ In **second-order logic**, one can write down the "axiom of induction" as follow
 \forall P\,\Bigl( P(0) \land \forall k \bigl( P(k) \to P(k+1)\bigr ) \to \forall n \,\bigl(P(n)\bigr)\Bigr),
 \]
 
-where *P*(·) is a variable for predicates involving one natural number and  and  are variables for natural numbers.
+where *P*(·) is a variable for predicates involving one natural number and and are variables for natural numbers.
 
-In words, the base case *P*(0) and the induction step (namely, that the induction hypothesis *P*(*k*) implies *P*(*k* + 1)) together imply that *P*(*n*) for any natural number . The axiom of induction asserts the validity of inferring that *P*(*n*) holds for any natural number  from the base case and the induction step.
+In words, the base case *P*(0) and the induction step (namely, that the induction hypothesis *P*(*k*) implies *P*(*k* + 1)) together imply that *P*(*n*) for any natural number. The axiom of induction asserts the validity of inferring that *P*(*n*) holds for any natural number from the base case and the induction step.
 
 The first quantifier in the axiom ranges over *predicates* rather than over individual numbers. This is a second-order quantifier, which means that this axiom is stated in second-order logic. Axiomatizing arithmetic induction in first-order logic requires an axiom schema containing a separate axiom for each possible predicate. The article Peano axioms contains further discussion of this issue.
 
 The axiom of structural induction for the natural numbers was first formulated by Peano, who used it to specify the natural numbers together with the following four other axioms:
 
 # 0 is a natural number.
-# The successor function  of every natural number yields a natural number 1=(*s*(*x*) = *x* + 1).
+# The successor function of every natural number yields a natural number 1=(*s*(*x*) = *x* + 1).
 # The successor function is injective.
-# 0 is not in the range of .
-
-In **first-order ZFC set theory**, quantification over predicates is not allowed, but one can still express induction by quantification over sets:
+# 0 is not in the range of. In **first-order ZFC set theory**, quantification over predicates is not allowed, but one can still express induction by quantification over sets:
 
 \[
 \forall A \Bigl( 0 \in A \land \forall k \in \N \bigl( k \in A \to (k+1) \in A \bigr) \to \N\subseteq A\Bigr)
@@ -307,65 +289,20 @@ Applied to a well-founded set, transfinite induction can be formulated as a sing
 This form of induction, when applied to a set of ordinal numbers (which form a well-ordered and hence well-founded class), is called *transfinite induction*. It is an important proof technique in set theory, topology and other fields.
 
 Proofs by transfinite induction typically distinguish three cases:
-# when  is a minimal element, i.e. there is no element smaller than ;
-# when  has a direct predecessor, i.e. the set of elements which are smaller than  has a largest element;
-# when  has no direct predecessor, i.e.  is a so-called limit ordinal.
+# when is a minimal element, i.e. there is no element smaller than ;
+# when has a direct predecessor, i.e. the set of elements which are smaller than has a largest element;
+# when has no direct predecessor, i.e. is a so-called limit ordinal.
 
-Strictly speaking, it is not necessary in transfinite induction to prove a base case, because it is a vacuous special case of the proposition that if *P* is true of all *n* < *m*, then *P* is true of . It is vacuously true precisely because there are no values of *n* < *m* that could serve as counterexamples. So the special cases are special cases of the general case.
+Strictly speaking, it is not necessary in transfinite induction to prove a base case, because it is a vacuous special case of the proposition that if *P* is true of all *n* < *m*, then *P* is true of. It is vacuously true precisely because there are no values of *n* < *m* that could serve as counterexamples. So the special cases are special cases of the general case.
 
 ## Relationship to the well-ordering principle
 The principle of mathematical induction is usually stated as an axiom of the natural numbers; see Peano axioms. It is strictly stronger than the well-ordering principle in the context of the other Peano axioms. Suppose the following:
-* The trichotomy axiom: For any natural numbers  and ,  is less than or equal to  if and only if  is not less than .
-* For any natural number , *n* + 1 is greater than *n*.
+* The trichotomy axiom: For any natural numbers and , is less than or equal to if and only if is not less than. * For any natural number , *n* + 1 is greater than *n*.
 * For any natural number , no natural number is between *n* and *n* + 1.
 * No natural number is less than zero.
 
 It can then be proved that induction, given the above-listed axioms, implies the well-ordering principle. The following proof uses complete induction and the first and fourth axioms.
 
-**Proof.** Suppose there exists a non-empty set, , of natural numbers that has no least element. Let *P*(*n*) be the assertion that  is not in . Then *P*(0) is true, for if it were false then 0 is the least element of . Furthermore, let  be a natural number, and suppose *P*(*m*) is true for all natural numbers  less than *n* + 1. Then if *P*(*n* + 1) is false *n* + 1 is in , thus being a minimal element in , a contradiction. Thus *P*(*n* + 1) is true. Therefore, by the complete induction principle, *P*(*n*) holds for all natural numbers ; so  is empty, a contradiction. Q.E.D.
+**Proof.** Suppose there exists a non-empty set, of natural numbers that has no least element. Let *P*(*n*) be the assertion that is not in. Then *P*(0) is true, for if it were false then 0 is the least element of. Furthermore, let be a natural number, and suppose *P*(*m*) is true for all natural numbers less than *n* + 1. Then if *P*(*n* + 1) is false *n* + 1 is in , thus being a minimal element in , a contradiction. Thus *P*(*n* + 1) is true. Therefore, by the complete induction principle, *P*(*n*) holds for all natural numbers ; so is empty, a contradiction. Q.E.D.
 
-{{Dark mode invert|image=y|}}
-On the other hand, the set \(\{(0, n) : n \in \mathbb{N}\} \cup \{(1, n) : n \in \mathbb{N}\}\), shown in the picture, is well-ordered by the lexicographic order.
-Moreover, except for the induction axiom, it satisfies all Peano axioms, where Peano's constant 0 is interpreted as the pair (0, 0), and Peano's *successor* function is defined on pairs by 1=succ(*x*, *n*) = (*x*, *n* + 1) for all \(x \in \{0,1\}\) and \(n \in \mathbb{N}\).
-As an example for the violation of the induction axiom, define the predicate *P*(*x*, *n*) as 1=(*x*, *n*) = (0, 0) or 1=(*x*, *n*) = succ(*y*, *m*) for some \(y \in \{0,1\}\) and \(m \in \mathbb{N}\). Then the base case *P*(0, 0) is trivially true, and so is the induction step: if *P*(*x*, *n*), then *P*(succ(*x*, *n*)). However, *P* is not true for all pairs in the set, since *P*(1,0) is false.
-
-Peano's axioms with the induction principle uniquely model the natural numbers. Replacing the induction principle with the well-ordering principle allows for more exotic models that fulfill all the axioms.
-
-It is mistakenly printed in several books and sources that the well-ordering principle is equivalent to the induction axiom. In the context of the other Peano axioms, this is not the case, but in the context of other axioms, they are equivalent; specifically, the well-ordering principle implies the induction axiom in the context of the first two above listed axioms and
-* Every natural number is either 0 or *n* + 1 for some natural number .
-
-A common mistake in many erroneous proofs is to assume that *n* − 1 is a unique and well-defined natural number, a property which is not implied by the other Peano axioms.
-
-## See also
-* Induction puzzles
-* Proof by exhaustion
-
-## Notes
-
-
-
-### Introduction
-*  (Ch. 8.)
-*
-*
-*  (Section 1.2.1: Mathematical Induction, pp. 11–21.)
-*  (Section 3.8: Transfinite induction, pp. 28–29.)
-
-### History
-*
-*
-*
-*
-*
-*
-*  Reprinted (CP 3.252–288), (W 4:299–309)
-*
-*
-*
-*
-*
-*
-*
-*
-*
-
+Dark mode invert

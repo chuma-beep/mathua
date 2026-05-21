@@ -36,8 +36,8 @@ In the division of 42 by 5, we have:
 42 = 8 × 5 + 2,
 and since 2 < 5/2, 2 is both the least positive remainder and the least absolute remainder.
 
-In these examples, the (negative) least absolute remainder is obtained from the least positive remainder by subtracting 5, which is *d*. This holds in general. When dividing by *d*, either both remainders are positive and therefore equal, or they have opposite signs. If the positive remainder is *r*<sub>1</sub>, and the negative one is *r*<sub>2</sub>, then
-*r*<sub>1</sub> = *r*<sub>2</sub> + *d*.
+In these examples, the (negative) least absolute remainder is obtained from the least positive remainder by subtracting 5, which is *d*. This holds in general. When dividing by *d*, either both remainders are positive and therefore equal, or they have opposite signs. If the positive remainder is *r*\(_{1}\), and the negative one is *r*\(_{2}\), then
+*r*\(_{1}\) = *r*\(_{2}\) + *d*.
 
 ## For floating-point numbers
 When *a* and *d* are floating-point numbers, with *d* non-zero, *a* can be divided by *d* without remainder, with the quotient being another floating-point number. If the quotient is constrained to being an integer, however, the concept of remainder is still necessary. It can be proved that there exists a unique integer quotient *q* and a unique floating-point remainder *r* such that 1=*a* = *qd* + *r* with 0 ≤ *r* < |*d*|.
@@ -68,7 +68,6 @@ Extending the definition of remainder for floating-point numbers, as described a
 
 ## In programming languages
 
-
 While there are no difficulties inherent in the definitions, there are implementation issues that arise when negative numbers are involved in calculating remainders. Different programming languages have adopted different conventions. For example:
 * Pascal chooses the result of the *mod* operation positive, but does not allow *d* to be negative or zero (so, 1=*a* = (*a* div *d* ) × *d* + *a* mod *d* is not always valid).
 * C (since C99) chooses the remainder with the same sign as the dividend *a*. (Earlier versions of the C language allowed other choices.)
@@ -76,7 +75,6 @@ While there are no difficulties inherent in the definitions, there are implement
 * Scheme offers two functions, *remainder* and *modulo* – Ada, PL/I and CSS have *mod* and *rem*, while Fortran has *mod* and *modulo*; in each case, the former agrees in sign with the dividend *a*, and the latter with the divisor *d*. Common Lisp and Haskell also have *mod* and *rem*, but *mod* uses the sign of the divisor and *rem* uses the sign of the dividend.
 
 ## Polynomial division
-
 
 Euclidean division of polynomials is very similar to Euclidean division of integers and leads to polynomial remainders. Its existence is based on the following theorem: Given two univariate polynomials *a*(*x*) and *b*(*x*) (where *b*(*x*) is a non-zero polynomial) defined over a field (in particular, the reals or complex numbers), there exist two polynomials *q*(*x*) (the *quotient*) and *r*(*x*) (the *remainder*) which satisfy:
 *a*(*x*) = *b*(*x*)*q*(*x*) + *r*(*x*)
@@ -87,36 +85,3 @@ where "deg(...)" denotes the degree of the polynomial (the degree of the constan
 This differs from the Euclidean division of integers in that, for the integers, the degree condition is replaced by the bounds on the remainder *r* (non-negative and less than the divisor, which insures that *r* is unique.) The similarity between Euclidean division for integers and that for polynomials motivates the search for the most general algebraic setting in which Euclidean division is valid. The rings for which such a theorem exists are called Euclidean domains, but in this generality, uniqueness of the quotient and remainder is not guaranteed.
 
 Polynomial division leads to a result known as the polynomial remainder theorem: If a polynomial *f*(*x*) is divided by *x* − *k*, the remainder is the constant 1=*r* = *f*(*k*).
-
-## See also
-
-* Chinese remainder theorem
-* Divisibility rule
-* Egyptian multiplication and division
-* Euclidean algorithm
-* Long division
-* Modular arithmetic
-* Polynomial long division
-* Synthetic division
-* Ruffini's rule, a special case of synthetic division
-* Taylor's theorem
-
-
-## Notes
-
-
-## References
-*
-*
-*
-*
-*
-*
-
-
-## Further reading
-*
-*
-*
-*
-

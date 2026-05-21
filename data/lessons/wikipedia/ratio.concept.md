@@ -6,12 +6,12 @@ In mathematics, a **ratio** () shows how many times one number contains another.
 
 The numbers in a ratio may be quantities of any kind, such as counts of people or objects, or such as measurements of lengths, weights, time, etc. In most contexts, both numbers are restricted to be positive.
 
-A ratio may be specified either by giving both constituting numbers, written as "*a* to *b*" or "*a*:*b*", or by giving just the value of their quotient }} Equal quotients correspond to equal ratios.
+A ratio may be specified either by giving both constituting numbers, written as "*a* to *b*" or "*a*:*b*", or by giving just the value of their quotient Equal quotients correspond to equal ratios.
 A statement expressing the equality of two ratios is called a ***proportion***.
 
 Consequently, a ratio may be considered as an ordered pair of numbers, a fraction with the first number in the numerator and the second in the denominator, or as the value denoted by this fraction. Ratios of counts, given by (non-zero) natural numbers, are rational numbers, and may sometimes be natural numbers.
 
-A more specific definition adopted in physical sciences (especially in metrology) for *ratio* is the dimensionless quotient between two physical quantities measured with the same unit. A quotient of two quantities that are measured with  units may be called a *rate*.
+A more specific definition adopted in physical sciences (especially in metrology) for *ratio* is the dimensionless quotient between two physical quantities measured with the same unit. A quotient of two quantities that are measured with units may be called a *rate*.
 
 ## Notation and terminology
 The ratio of numbers *A* and *B* can be expressed as:
@@ -20,9 +20,7 @@ The ratio of numbers *A* and *B* can be expressed as:
 * *A* is to *B* (when followed by "as *C* is to *D*"; see below)
 * a fraction with *A* as numerator and *B* as denominator that represents the quotient (i.e., *A* divided by *B, or* \(\tfrac{A}{B}\)). This can be expressed as a simple or a decimal fraction, or as a percentage, etc.
 
-When a ratio is written in the form *A*:*B*, the two-dot character is sometimes the colon punctuation mark. In Unicode, this is , although Unicode also provides a dedicated ratio character, .
-
-The numbers *A* and *B* are sometimes called *terms of the ratio*, with *A* being the *antecedent* and *B* being the *consequent*.
+When a ratio is written in the form *A*:*B*, the two-dot character is sometimes the colon punctuation mark. In Unicode, this although Unicode also provides a dedicated ratio character,. The numbers *A* and *B* are sometimes called *terms of the ratio*, with *A* being the *antecedent* and *B* being the *consequent*.
 
 A statement expressing the equality of two ratios *A*:*B* and *C*:*D* is called a **proportion**, written as *A*:*B* = *C*:*D* or *A*:*B*∷*C*:*D*. This latter form, when spoken or written in the English language, is often expressed as
 (*A* is to *B*) as (*C* is to *D*).
@@ -36,7 +34,7 @@ A good concrete mix (in volume units) is sometimes quoted as:
 The meaning of such a proportion of ratios with more than two terms is that the ratio of any two terms on the left-hand side is equal to the ratio of the corresponding two terms on the right-hand side.
 
 ## History and etymology
-It is possible to trace the origin of the word "ratio" to the ancient Greek  (*logos*). Early translators rendered this into Latin as **' ("reason"; as in the word "rational"). A more modern interpretation of Euclid's meaning is more akin to computation or reckoning. Medieval writers used the word **' ("proportion") to indicate ratio and ** ("proportionality") for the equality of ratios.
+It is possible to trace the origin of the word "ratio" to the ancient Greek (*logos*). Early translators rendered this into Latin as **' ("reason"; as in the word "rational"). A more modern interpretation of Euclid's meaning is more akin to computation or reckoning. Medieval writers used the word **' ("proportion") to indicate ratio and ** ("proportionality") for the equality of ratios.
 
 Euclid collected the results appearing in the Elements from earlier sources. The Pythagoreans developed a theory of ratio and proportion as applied to numbers. The Pythagoreans' conception of number included only what would today be called rational numbers, casting doubt on the validity of the theory in geometry where, as the Pythagoreans also discovered, incommensurable ratios (corresponding to irrational numbers) exist. The discovery of a theory of ratios that does not assume commensurability is probably due to Eudoxus of Cnidus. The exposition of the theory of proportions that appears in Book VII of The Elements reflects the earlier theory of ratios of commensurables.
 
@@ -49,7 +47,7 @@ Euclid does not define the term "measure" as used here, However, one may infer t
 
 Definition 3 describes what a ratio is in a general way. It is not rigorous in a mathematical sense and some have ascribed it to Euclid's editors rather than Euclid himself. Euclid defines a ratio as between two quantities *of the same type*, so by this definition the ratios of two lengths or of two areas are defined, but not the ratio of a length and an area. Definition 4 makes this more rigorous. It states that a ratio of two quantities exists, when there is a multiple of each that exceeds the other. In modern notation, a ratio exists between quantities *p* and *q*, if there exist integers *m* and *n* such that *mp*>*q* and *nq*>*p*. This condition is known as the Archimedean property.
 
-Definition 5 is the most complex and difficult. It defines what it means for two ratios to be equal. Today, this can be done by simply stating that ratios are equal when the quotients of the terms are equal, but such a definition would have been meaningless to Euclid. In modern notation, Euclid's definition of equality is that given quantities *p*, *q*, *r* and *s*, *p*:*q*∷*r*:*s* if and only if, for any positive integers *m* and *n*, *np* < *mq*, *np* = *mq*, or *np* > *mq* according as *nr* < *ms*, *nr* = *ms*, or *nr* > *ms*, respectively. This definition has affinities with Dedekind cuts as, with *n* and *q* both positive, *np* stands to *mq* as  stands to the rational number  (dividing both terms by *nq*).
+Definition 5 is the most complex and difficult. It defines what it means for two ratios to be equal. Today, this can be done by simply stating that ratios are equal when the quotients of the terms are equal, but such a definition would have been meaningless to Euclid. In modern notation, Euclid's definition of equality is that given quantities *p*, *q*, *r* and *s*, *p*:*q*∷*r*:*s* if and only if, for any positive integers *m* and *n*, *np* < *mq*, *np* = *mq*, or *np* > *mq* according as *nr* < *ms*, *nr* = *ms*, or *nr* > *ms*, respectively. This definition has affinities with Dedekind cuts as, with *n* and *q* both positive, *np* stands to *mq* as stands to the rational number (dividing both terms by *nq*).
 
 Definition 6 says that quantities that have the same ratio are *proportional* or *in proportion*. Euclid uses the Greek ἀναλόγον (analogon), this has the same root as λόγος and is related to the English word "analog".
 
@@ -67,7 +65,7 @@ Fractions can also be inferred from ratios with more than two entities; however,
 ## Proportions and percentage ratios
 If we multiply all quantities involved in a ratio by the same number, the ratio remains valid. For example, a ratio of 3:2 is the same as 12:8. It is usual either to reduce terms to the lowest common denominator, or to express them in parts per hundred (percent).
 
-If a mixture contains substances *A*, *B*, *C* and *D* in the ratio 5:9:4:2, then there are 5 parts of *A* for every *9* parts of *B*, 4 parts of *C*, and 2 parts of *D*. As  20,}} the total mixture contains 5/20 of *A* (5 parts out of 20), 9/20 of *B*, 4/20 of *C*, and 2/20 of *D*. If we divide all numbers by the total and multiply by 100, we have converted to percentages: 25% *A*, 45% *B*, 20% *C*, and 10% *D* (equivalent to writing the ratio as 25:45:20:10).
+If a mixture contains substances *A*, *B*, *C* and *D* in the ratio 5:9:4:2, then there are 5 parts of *A* for every *9* parts of *B*, 4 parts of *C*, and 2 parts of *D*. As 20,the total mixture contains 5/20 of *A* (5 parts out of 20), 9/20 of *B*, 4/20 of *C*, and 2/20 of *D*. If we divide all numbers by the total and multiply by 100, we have converted to percentages: 25% *A*, 45% *B*, 20% *C*, and 10% *D* (equivalent to writing the ratio as 25:45:20:10).
 
 If the two or more ratio quantities encompass all of the quantities in a particular situation, it is said that "the whole" contains the sum of the parts: for example, a fruit basket containing two apples and three oranges and no other fruit is made up of two parts apples and three parts oranges. In this case, \(\tfrac{2}{5}\), or 40% of the whole is apples and \(\tfrac{3}{5}\), or 60% of the whole is oranges. This comparison of a specific quantity to "the whole" is called a proportion.
 
@@ -85,16 +83,16 @@ Sometimes it is useful to write a ratio in the form 1:*x* or *x*:1, where *x* is
 Where the context makes the meaning clear, a ratio in this form is sometimes written without the 1 and the ratio symbol (:), though, mathematically, this makes it a factor or multiplier.
 
 ## Irrational ratios
-Ratios may also be established between incommensurable quantities (quantities whose ratio, as value of a fraction, amounts to an irrational number). The earliest discovered example, found by the Pythagoreans, is the ratio of the length of the diagonal  to the length of a side  of a square, which is the square root of 2, formally \(a:d = 1:\sqrt{2}.\) Another example is the ratio of a circle's circumference to its diameter, which is called , and is not just an irrational number, but a transcendental number.
+Ratios may also be established between incommensurable quantities (quantities whose ratio, as value of a fraction, amounts to an irrational number). The earliest discovered example, found by the Pythagoreans, is the ratio of the length of the diagonal to the length of a side of a square, which is the square root of 2, formally \(a:d = 1:\sqrt{2}.\) Another example is the ratio of a circle's circumference to its diameter, which is called , and is not just an irrational number, but a transcendental number.
 
-Also well known is the golden ratio of two (mostly) lengths  and , which is defined by the proportion
+Also well known is the golden ratio of two (mostly) lengths and , which is defined by the proportion
 \(a:b = (a+b):a \quad\) or, equivalently \(\quad a:b = (1+b/a):1.\)
 Taking the ratios as fractions and \(a:b\) as having the value , yields the equation
 \(x=1+\tfrac 1x \quad\) or \(\quad x^2-x-1 = 0,\)
-which has the positive, irrational solution \(x=\tfrac{a}{b}=\tfrac{1+\sqrt{5}}{2}.\)
+which has the positive, irrational solution \(x=\tfrac{a}{b}=\tfrac{1+\sqrt{5{2}.\)
 Thus at least one of *a* and *b* has to be irrational for them to be in the golden ratio. An example of an occurrence of the golden ratio in math is as the limiting value of the ratio of two consecutive Fibonacci numbers: even though all these ratios are ratios of two integers and hence are rational, the limit of the sequence of these rational ratios is the irrational golden ratio.
 
-Similarly, the silver ratio of  and  is defined by the proportion
+Similarly, the silver ratio of and is defined by the proportion
 \(a:b = (2a+b):a \quad (= (2+b/a):1),\) corresponding to \(x^2-2x-1 = 0.\)
 This equation has the positive, irrational solution \(x = \tfrac{a}{b}=1+\sqrt{2},\) so again at least one of the two quantities *a* and *b* in the silver ratio must be irrational.
 
@@ -119,41 +117,3 @@ In barycentric coordinates, a point with coordinates *α, β, γ* is the point u
 In trilinear coordinates, a point with coordinates *x*:*y*:*z* has perpendicular distances to side *BC* (across from vertex *A*) and side *CA* (across from vertex *B*) in the ratio *x*:*y*, distances to side *CA* and side *AB* (across from *C*) in the ratio *y*:*z*, and therefore distances to sides *BC* and *AB* in the ratio *x*:*z*.
 
 Since all information is expressed in terms of ratios (the individual numbers denoted by *α, β, γ, x, y,* and *z* have no meaning by themselves), a triangle analysis using barycentric or trilinear coordinates applies regardless of the size of the triangle.
-
-## See also
-*Cross ratio
-*Dilution ratio
-*Displacement–length ratio
-*Dimensionless quantity
-*Financial ratio
-*Fold change
-*Interval (music)
-*Odds ratio
-*Parts-per notation
-*Price–performance ratio
-*Proportionality (mathematics)
-*Ratio distribution
-*Ratio estimator
-*Rate (mathematics)
-*Ratio (Twitter)
-*Rate ratio
-*Relative risk
-*Rule of three (mathematics)
-*Scale (map)
-*Scale (ratio)
-*Sex ratio
-*Superparticular ratio
-*Slope
-
-## References
-
-
-## Further reading
-*"Ratio" *The Penny Cyclopædia* vol. 19, The Society for the Diffusion of Useful Knowledge (1841) Charles Knight and Co., London pp. 307ff
-*"Proportion" *New International Encyclopedia, Vol. 19* 2nd ed. (1916) Dodd Mead & Co. pp270-271
-*"Ratio and Proportion" *Fundamentals of practical mathematics*, George Wentworth, David Eugene Smith, Herbert Druery Harper (1922) Ginn and Co. pp. 55ff
-*
-*D.E. Smith, *History of Mathematics, vol 2* Ginn and Company (1925) pp. 477ff.  Reprinted 1958 by Dover Publications.
-
-## External links
-
