@@ -62,7 +62,7 @@ func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
 		y = -y
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the magnitude of vector (%d,%d)?", x, y),
+		Question:    fmt.Sprintf("What is the magnitude of vector \\((%d,%d)\\)?", x, y),
 		Answer:      fmt.Sprintf("%d", mag),
 		Explanation: fmt.Sprintf("|(%d,%d)| = sqrt(%d²+%d²) = sqrt(%d+%d) = sqrt(%d) = %d", x, y, x, y, x*x, y*y, x*x+y*y, mag),
 	}
@@ -77,7 +77,7 @@ func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
 	if rand.Intn(2) == 0 {
 		sumX, sumY := a+c, b+d
 		return generator.Problem{
-			Question:    fmt.Sprintf("Add vectors: (%d,%d) + (%d,%d) = ?", a, b, c, d),
+			Question:    fmt.Sprintf("Add vectors: \\((%d,%d) + (%d,%d) =\\) ?", a, b, c, d),
 			Answer:      fmt.Sprintf("(%d,%d)", sumX, sumY),
 			Explanation: fmt.Sprintf("(%d,%d) + (%d,%d) = (%d,%d)", a, b, c, d, sumX, sumY),
 		}
@@ -87,7 +87,7 @@ func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
 		scalar = -scalar
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compute scalar multiplication: %d * (%d,%d) = ?", scalar, a, b),
+		Question:    fmt.Sprintf("Compute scalar multiplication: \\(%d \\cdot (%d,%d) =\\) ?", scalar, a, b),
 		Answer:      fmt.Sprintf("(%d,%d)", scalar*a, scalar*b),
 		Explanation: fmt.Sprintf("%d * (%d,%d) = (%d,%d)", scalar, a, b, scalar*a, scalar*b),
 	}
@@ -101,7 +101,7 @@ func (g *vectorDotGen) Generate(difficulty float64) generator.Problem {
 	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	dot := a*c + b*d
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compute the dot product: (%d,%d) · (%d,%d) = ?", a, b, c, d),
+		Question:    fmt.Sprintf("Compute the dot product: \\((%d,%d) \\cdot (%d,%d) =\\) ?", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", dot),
 		Explanation: fmt.Sprintf("(%d,%d) · (%d,%d) = %d*%d + %d*%d = %d+%d = %d", a, b, c, d, a, c, b, d, a*c, b*d, dot),
 	}
@@ -128,7 +128,7 @@ func (g *matrixConceptGen) Generate(difficulty float64) generator.Problem {
 	c := rand.Intn(cols) + 1
 	answer := m[r-1][c-1]
 	return generator.Problem{
-		Question:    fmt.Sprintf("In the matrix %s, what is the (%d,%d) entry?", formatMatrix(m), r, c),
+		Question:    fmt.Sprintf("In the matrix \\(%s\\), what is the \\((%d,%d)\\) entry?", formatMatrix(m), r, c),
 		Answer:      fmt.Sprintf("%d", answer),
 		Explanation: fmt.Sprintf("The entry at row %d, column %d is %d.", r, c, answer),
 	}
@@ -161,7 +161,7 @@ func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
 			}
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("Add matrices: %s + %s = ?", formatMatrix(a), formatMatrix(b)),
+			Question:    fmt.Sprintf("Add matrices: \\(%s + %s =\\) ?", formatMatrix(a), formatMatrix(b)),
 			Answer:      formatMatrix(sum),
 			Explanation: fmt.Sprintf("%s + %s = %s (add corresponding entries)", formatMatrix(a), formatMatrix(b), formatMatrix(sum)),
 		}
@@ -178,7 +178,7 @@ func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compute scalar multiplication: %d * %s = ?", scalar, formatMatrix(a)),
+		Question:    fmt.Sprintf("Compute scalar multiplication: \\(%d \\cdot %s =\\) ?", scalar, formatMatrix(a)),
 		Answer:      formatMatrix(prod),
 		Explanation: fmt.Sprintf("%d * %s = %s", scalar, formatMatrix(a), formatMatrix(prod)),
 	}
@@ -211,7 +211,7 @@ func (g *matrixMultGen) Generate(difficulty float64) generator.Problem {
 	c[1][0] = a[1][0]*b[0][0] + a[1][1]*b[1][0]
 	c[1][1] = a[1][0]*b[0][1] + a[1][1]*b[1][1]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Multiply matrices: %s × %s = ?", formatMatrix(a), formatMatrix(b)),
+		Question:    fmt.Sprintf("Multiply matrices: \\(%s \\times %s =\\) ?", formatMatrix(a), formatMatrix(b)),
 		Answer:      formatMatrix(c),
 		Explanation: fmt.Sprintf("%s × %s = %s", formatMatrix(a), formatMatrix(b), formatMatrix(c)),
 	}
@@ -257,7 +257,7 @@ func (g *matrixIdentityGen) Generate(difficulty float64) generator.Problem {
 	inv[1][0] = -cVal / det
 	inv[1][1] = a / det
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the inverse of the matrix %s.", formatMatrix2([][]int{{a, b}, {cVal, d}})),
+		Question:    fmt.Sprintf("Find the inverse of the matrix \\(%s\\).", formatMatrix2([][]int{{a, b}, {cVal, d}})),
 		Answer:      formatMatrix(inv),
 		Explanation: fmt.Sprintf("det = %d*%d - %d*%d = %d, inverse = (1/%d)×[[%d,%d],[%d,%d]] = %s", a, d, b, cVal, a*d-b*cVal, det, d, -b, -cVal, a, formatMatrix(inv)),
 	}
@@ -271,7 +271,7 @@ func (g *det2x2Gen) Generate(difficulty float64) generator.Problem {
 	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	det := a*d - b*c
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the determinant of %s.", formatMatrix2([][]int{{a, b}, {c, d}})),
+		Question:    fmt.Sprintf("Find the determinant of \\(%s\\).", formatMatrix2([][]int{{a, b}, {c, d}})),
 		Answer:      fmt.Sprintf("%d", det),
 		Explanation: fmt.Sprintf("det = %d*%d - %d*%d = %d-%d = %d", a, d, b, c, a*d, b*c, det),
 	}
@@ -293,7 +293,7 @@ func (g *det3x3Gen) Generate(difficulty float64) generator.Problem {
 	gVal, h, i := m[2][0], m[2][1], m[2][2]
 	det := a*(e*i-f*h) - b*(d*i-f*gVal) + c*(d*h-e*gVal)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the determinant of %s.", formatMatrix(m)),
+		Question:    fmt.Sprintf("Find the determinant of \\(%s\\).", formatMatrix(m)),
 		Answer:      fmt.Sprintf("%d", det),
 		Explanation: fmt.Sprintf("det = %d*(%d*%d-%d*%d) - %d*(%d*%d-%d*%d) + %d*(%d*%d-%d*%d) = %d", a, e, i, f, h, b, d, i, f, gVal, c, d, h, e, gVal, det),
 	}
@@ -318,7 +318,7 @@ func (g *systemsMatrixGen) Generate(difficulty float64) generator.Problem {
 	e1 := a*x + b*y
 	e2 := c*x + d*y
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve the linear system using matrices: %dx + %dy = %d, %dx + %dy = %d", a, b, e1, c, d, e2),
+		Question:    fmt.Sprintf("Solve the linear system using matrices: \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\)", a, b, e1, c, d, e2),
 		Answer:      fmt.Sprintf("(%d,%d)", x, y),
 		Explanation: fmt.Sprintf("The solution is x=%d, y=%d.", x, y),
 	}
@@ -351,7 +351,7 @@ func (g *cramerGen) Generate(difficulty float64) generator.Problem {
 		detX := e1*d - b*e2
 		valX := detX / det
 		return generator.Problem{
-			Question:    fmt.Sprintf("Use Cramer's rule to find x: %dx + %dy = %d, %dx + %dy = %d", a, b, e1, c, d, e2),
+			Question:    fmt.Sprintf("Use Cramer's rule to find \\(x\\): \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\)", a, b, e1, c, d, e2),
 			Answer:      fmt.Sprintf("%d", valX),
 			Explanation: fmt.Sprintf("x = det([[%d,%d],[%d,%d]]) / det([[%d,%d],[%d,%d]]) = (%d*%d-%d*%d)/(%d*%d-%d*%d) = %d/%d = %d", e1, b, e2, d, a, b, c, d, e1, d, b, e2, a, d, b, c, detX, det, valX),
 		}
@@ -359,7 +359,7 @@ func (g *cramerGen) Generate(difficulty float64) generator.Problem {
 	detY := a*e2 - e1*c
 	valY := detY / det
 	return generator.Problem{
-		Question:    fmt.Sprintf("Use Cramer's rule to find y: %dx + %dy = %d, %dx + %dy = %d", a, b, e1, c, d, e2),
+		Question:    fmt.Sprintf("Use Cramer's rule to find \\(y\\): \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\)", a, b, e1, c, d, e2),
 		Answer:      fmt.Sprintf("%d", valY),
 		Explanation: fmt.Sprintf("y = det([[%d,%d],[%d,%d]]) / det([[%d,%d],[%d,%d]]) = (%d*%d-%d*%d)/(%d*%d-%d*%d) = %d/%d = %d", a, e1, c, e2, a, b, c, d, a, e2, e1, c, a, d, b, c, detY, det, valY),
 	}
@@ -370,9 +370,9 @@ type eigenConceptGen struct{}
 func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
-			Question:    "What is an eigenvalue λ of a square matrix A?",
-			Answer:      "A scalar λ such that det(A-λI)=0, equivalently Av=λv for some nonzero v",
-			Explanation: "An eigenvalue λ satisfies det(A-λI)=0, meaning there exists a nonzero vector v with Av=λv.",
+			Question:    "What is an eigenvalue \\(\\lambda\\) of a square matrix \\(A\\)?",
+			Answer:      "A scalar \\(\\lambda\\) such that \\(\\det(A-\\lambda I)=0\\), equivalently \\(Av=\\lambda v\\) for some nonzero \\(v\\)",
+			Explanation: "An eigenvalue \\(\\lambda\\) satisfies \\(\\det(A-\\lambda I)=0\\), meaning there exists a nonzero vector \\(v\\) with \\(Av=\\lambda v\\).",
 		}
 	}
 	scale := int(1 + difficulty*5)
@@ -390,7 +390,7 @@ func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 		answer = "yes"
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is λ=%d an eigenvalue of matrix %s?", lambda, formatMatrix2([][]int{{a, 0}, {0, d}})),
+		Question:    fmt.Sprintf("Is \\(\\lambda=%d\\) an eigenvalue of matrix \\(%s\\)?", lambda, formatMatrix2([][]int{{a, 0}, {0, d}})),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("det(A-λI) = det([[%d,%d],[%d,%d]]) = (%d)*(%d) = %d. Since det %s 0, λ=%d %s an eigenvalue.", a-lambda, 0, 0, d-lambda, a-lambda, d-lambda, det, map[bool]string{true: "=", false: "≠"}[det == 0], lambda, map[bool]string{true: "is", false: "is not"}[det == 0]),
 	}
@@ -410,7 +410,7 @@ func (g *eigenComputeGen) Generate(difficulty float64) generator.Problem {
 		d = 1
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the eigenvalues of the triangular matrix %s.", formatMatrix2([][]int{{a, c}, {0, d}})),
+		Question:    fmt.Sprintf("Find the eigenvalues of the triangular matrix \\(%s\\).", formatMatrix2([][]int{{a, c}, {0, d}})),
 		Answer:      fmt.Sprintf("%d,%d", a, d),
 		Explanation: fmt.Sprintf("For a triangular matrix, eigenvalues are the diagonal entries: λ₁=%d, λ₂=%d.", a, d),
 	}
@@ -423,7 +423,7 @@ func (g *transformationsGen) Generate(difficulty float64) generator.Problem {
 	a, b := rand.Intn(max(1, scale*2))+1, rand.Intn(max(1, scale*2))+1
 	x, y := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	return generator.Problem{
-		Question:    fmt.Sprintf("Under the linear transformation T(x,y) = (%dx,%dy), where does the point (%d,%d) map to?", a, b, x, y),
+		Question:    fmt.Sprintf("Under the linear transformation \\(T(x,y) = (%dx,%dy)\\), where does the point \\((%d,%d)\\) map to?", a, b, x, y),
 		Answer:      fmt.Sprintf("(%d,%d)", a*x, b*y),
 		Explanation: fmt.Sprintf("T(%d,%d) = (%d*%d, %d*%d) = (%d,%d)", x, y, a, x, b, y, a*x, b*y),
 	}
@@ -448,7 +448,7 @@ func (g *spanGen) Generate(difficulty float64) generator.Problem {
 			answer = "yes"
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("Do the vectors v=(%d,%d) and w=(%d,%d) span R²?", v1, v2, w1, w2),
+			Question:    fmt.Sprintf("Do the vectors \\(v=(%d,%d)\\) and \\(w=(%d,%d)\\) span \\(\\mathbb{R}^{2}\\)?", v1, v2, w1, w2),
 			Answer:      answer,
 			Explanation: fmt.Sprintf("det([[%d,%d],[%d,%d]]) = %d. Since determinant is %s, the vectors %s span R².", v1, v2, w1, w2, det, map[bool]string{true: "nonzero", false: "zero"}[det != 0], answer),
 		}
@@ -463,7 +463,7 @@ func (g *spanGen) Generate(difficulty float64) generator.Problem {
 	}
 	w1, w2 := k*v1, k*v2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Do the vectors v=(%d,%d) and w=(%d,%d) span R²?", v1, v2, w1, w2),
+		Question:    fmt.Sprintf("Do the vectors \\(v=(%d,%d)\\) and \\(w=(%d,%d)\\) span \\(\\mathbb{R}^{2}\\)?", v1, v2, w1, w2),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("w = %d*v, so the vectors are linearly dependent. Two dependent vectors cannot span R².", k),
 	}
@@ -477,15 +477,15 @@ func (g *basisGen) Generate(difficulty float64) generator.Problem {
 	switch qType {
 	case 0:
 		return generator.Problem{
-			Question:    "What is the dimension of R³?",
+			Question:    "What is the dimension of \\(\\mathbb{R}^{3}\\)?",
 			Answer:      "3",
-			Explanation: "R³ has dimension 3 because it has a basis of 3 vectors, e.g., {(1,0,0), (0,1,0), (0,0,1)}.",
+			Explanation: "\\(\\mathbb{R}^{3}\\) has dimension 3 because it has a basis of 3 vectors, e.g., \\(\\{(1,0,0), (0,1,0), (0,0,1)\\}\\).",
 		}
 	case 1:
 		return generator.Problem{
-			Question:    "What is the dimension of R²?",
+			Question:    "What is the dimension of \\(\\mathbb{R}^{2}\\)?",
 			Answer:      "2",
-			Explanation: "R² has dimension 2 because it has a basis of 2 vectors, e.g., {(1,0), (0,1)}.",
+			Explanation: "\\(\\mathbb{R}^{2}\\) has dimension 2 because it has a basis of 2 vectors, e.g., \\(\\{(1,0), (0,1)\\}\\).",
 		}
 	default:
 		v1, v2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
@@ -502,7 +502,7 @@ func (g *basisGen) Generate(difficulty float64) generator.Problem {
 			answer = "yes"
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("Is the set {(%d,%d), (%d,%d)} a basis for R²?", v1, v2, w1, w2),
+			Question:    fmt.Sprintf("Is the set \\(\\{(%d,%d), (%d,%d)\\}\\) a basis for \\(\\mathbb{R}^{2}\\)?", v1, v2, w1, w2),
 			Answer:      answer,
 			Explanation: fmt.Sprintf("det = %d, so the vectors are %s. Since they %s span R² and are %s, they %s a basis.", det, map[bool]string{true: "linearly independent", false: "linearly dependent"}[det != 0], map[bool]string{true: "do", false: "do not"}[det != 0], map[bool]string{true: "independent", false: "dependent"}[det != 0], map[bool]string{true: "form", false: "do not form"}[det != 0]),
 		}
@@ -603,7 +603,7 @@ func (g *diagonalizationGen) Generate(difficulty float64) generator.Problem {
 	e := entries[rand.Intn(len(entries))]
 	answer := fmt.Sprintf("P=[[%d,%d],[%d,%d]] D=[[%d,0],[0,%d]]", e.a, e.b, e.c, e.d, e.l1, e.l2)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find matrices P and D (diagonal) such that A = PDP⁻¹ for A = %s.", formatMatrix2([][]int{{e.a, e.b}, {e.c, e.d}})),
+		Question:    fmt.Sprintf("Find matrices \\(P\\) and \\(D\\) (diagonal) such that \\(A = PDP^{-1}\\) for \\(A = %s\\).", formatMatrix2([][]int{{e.a, e.b}, {e.c, e.d}})),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Eigenvalues are λ=%d and λ=%d. The eigenvectors form the columns of P: %s", e.l1, e.l2, answer),
 	}
@@ -662,7 +662,7 @@ func (g *rankGen) Generate(difficulty float64) generator.Problem {
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the rank of matrix %s?", formatMatrix(e.matrix)),
+		Question:    fmt.Sprintf("What is the rank of matrix \\(%s\\)?", formatMatrix(e.matrix)),
 		Answer:      fmt.Sprintf("%d", e.rank),
 		Explanation: fmt.Sprintf("The rank is %d (the number of linearly independent rows/columns).", e.rank),
 	}
@@ -694,7 +694,7 @@ func (g *cosineSimilarityGen) Generate(difficulty float64) generator.Problem {
 	uMag := int(math.Sqrt(float64(e.u[0]*e.u[0] + e.u[1]*e.u[1])))
 	vMag := int(math.Sqrt(float64(e.v[0]*e.v[0] + e.v[1]*e.v[1])))
 	return generator.Problem{
-		Question:    fmt.Sprintf("Compute the cosine similarity between u=%s and v=%s.", uStr, vStr),
+		Question:    fmt.Sprintf("Compute the cosine similarity between \\(u=%s\\) and \\(v=%s\\).", uStr, vStr),
 		Answer:      fmt.Sprintf("%d", e.cos),
 		Explanation: fmt.Sprintf("cos(θ) = (u·v)/(|u||v|) = (%d)/(%d×%d) = %d/%d = %d", dot, uMag, vMag, dot, uMag*vMag, e.cos),
 	}
@@ -719,7 +719,7 @@ func (g *parametricGen) Generate(difficulty float64) generator.Problem {
 	}
 	e := directions[rand.Intn(len(directions))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the parametric equations for the line through (%d,%d) with direction vector (%d,%d).", e.x0, e.y0, e.dx, e.dy),
+		Question:    fmt.Sprintf("Find the parametric equations for the line through \\((%d,%d)\\) with direction vector \\((%d,%d)\\).", e.x0, e.y0, e.dx, e.dy),
 		Answer:      fmt.Sprintf("x=%d+%dt,y=%d+%dt", e.x0, e.dx, e.y0, e.dy),
 		Explanation: fmt.Sprintf("The parametric form is (x,y) = (%d,%d) + t(%d,%d), so x=%d+%dt, y=%d+%dt.", e.x0, e.y0, e.dx, e.dy, e.x0, e.dx, e.y0, e.dy),
 	}
