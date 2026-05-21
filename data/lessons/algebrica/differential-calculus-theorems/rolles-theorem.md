@@ -11,7 +11,7 @@ Given a function \\(f(x)\\) defined on a closed and bounded interval \\([a, b]\\
 
 Then, there exists at least one point \\(c \in (a, b)\\) such that \\(f’ \left(c \right) = 0 \\)
 
-###### Rolle’s Theorem is a special case of the [Mean Value Theorem](<../lagrange-theorem/>) (Lagrange). Under the same hypotheses of continuity on \\([a,b]\\) and differentiability on \\((a,b)\\), if \\( f(a) = f(b) \\), then the secant slope is zero and there exists \\( c \in (a,b) \\) such that \\( f’(c) = 0 ).
+###### Rolle’s Theorem is a special case of the [Mean Value Theorem](<../lagrange-theorem/>) (Lagrange). Under the same hypotheses of continuity on \\([a,b]\\) and differentiability on \\((a,b)\\), if \\( f(a) = f(b) \\), then the secant slope is zero and there exists \\( c \in (a,b) \\) such that \\( f’(c) = 0 \\).
 
 ## A geometric view of Rolle’s theorem
 

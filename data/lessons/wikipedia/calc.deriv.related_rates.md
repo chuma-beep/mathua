@@ -50,11 +50,11 @@ When solved for the wanted rate of change, *dy*/*dt*, gives us
 \(\frac{d}{dt}\left(x^2\right)+\frac{d}{dt}\left(y^2\right)=\frac{d}{dt}\left(h^2\right)\)
 \((2x)\frac{dx}{dt}+(2y)\frac{dy}{dt}=(2h)\frac{dh}{dt}\)
 \(x\frac{dx}{dt}+y\frac{dy}{dt}=h\frac{dh}{dt}\)
-\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt{y}.\)
+\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt}}{y}.\)
 
 Step 4 & 5:
 Using the variables from step 1 gives us:
-\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt{y}.\)
+\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt}}{y}.\)
 \(\frac{dy}{dt}=\frac{10\times0-6\times3}{y}=-\frac{18}{y}.\)
 Solving for y using the Pythagorean Theorem gives:
 \(x^2+y^2=h^2\)
@@ -106,16 +106,16 @@ Define *y*(*t*) to be the distance of the vehicle heading North from the origin 
   <dd>Distribute differentiation operator</dd>
   <dt>\(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\)</dt>
   <dd>Apply chain rule to *x*(*t*) and *y*(*t*)}</dd>
-  <dt>\(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2}\)</dt>
+  <dt>\(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt}}{\sqrt{x^2 + y^2}}\)</dt>
   <dd>Simplify.</dd>
 </dl>
 
 **Substitute in** *x* = 4 mi, *y* = 3 mi, *dx*/*dt* = −80 mi/hr, *dy*/*dt* = 60 mi/hr **and simplify**
 
 \(\begin{align}
-\frac{dc}{dt} & = \frac{4 \text{ mi} \cdot (-80 \text{ mi}/\text{hr}) + 3 \text{ mi} \cdot (60) \text{mi}/\text{hr{\sqrt{(4 \text{ mi})^2 + (3 \text{ mi})^2\\
-& = \frac{-320 \text{ mi}^2/\text{hr} + 180 \text{ mi}^2/\text{hr{5\text{ mi\\
-&= \frac{-140 \text{ mi}^2/\text{hr{5\text{ mi\\
+\frac{dc}{dt} & = \frac{4 \text{ mi} \cdot (-80 \text{ mi}/\text{hr}) + 3 \text{ mi} \cdot (60) \text{mi}/\text{hr}}{\sqrt{(4 \text{ mi})^2 + (3 \text{ mi})^2}} \\
+& = \frac{-320 \text{ mi}^2/\text{hr} + 180 \text{ mi}^2/\text{hr}}{5\text{ mi}} \\
+&= \frac{-140 \text{ mi}^2/\text{hr}}{5\text{ mi}} \\
 & = -28 \text{ mi}/\text{hr}
 \end{align}\)
 

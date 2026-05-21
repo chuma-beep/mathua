@@ -48,7 +48,7 @@ Let \(h(x) = \frac{f(x)}{g(x)}.\) Applying the definition of the derivative and 
 \[
 \begin{align}
  h'(x) &= \lim_{k\to 0} \frac{h(x+k) - h(x)}{k} \\
- &= \lim_{k\to 0} \frac{\frac{f(x+k)}{g(x+k)} - \frac{f(x)}{g(x){k} \\
+ &= \lim_{k\to 0} \frac{\frac{f(x+k)}{g(x+k)} - \frac{f(x)}{g(x)}}{k} \\
  &= \lim_{k\to 0} \frac{f(x+k)g(x) - f(x)g(x+k)}{k \cdot g(x)g(x+k)} \\
  &= \lim_{k\to 0} \frac{f(x+k)g(x) - f(x)g(x+k)}{k} \cdot \lim_{k\to 0}\frac{1}{g(x)g(x+k)} \\
  &= \lim_{k\to 0} \left[\frac{f(x+k)g(x) - f(x)g(x) + f(x)g(x) - f(x)g(x+k)}{k} \right] \cdot \frac{1}{[g(x)]^2} \\
@@ -69,7 +69,7 @@ Solving for \(h'(x)\) and substituting back for \(h(x)\) gives:
 \[
 \begin{align}
  h'(x) &= \frac{f'(x) -g'(x)h(x)}{g(x)} \\
- &= \frac{f'(x) - g'(x)\cdot\frac{f(x)}{g(x){g(x)} \\
+ &= \frac{f'(x) - g'(x)\cdot\frac{f(x)}{g(x)}}{g(x)} \\
  &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}.
  \end{align}
 \]
@@ -92,7 +92,7 @@ Substituting the result into the expression gives
 
  &= \frac{f'(x)}{g(x)} - \frac{f(x)g'(x)}{g(x)^2} \\
 
- &= {\frac{g(x)}{g(x)\cdot{\frac{f'(x)}{g(x)- \frac{f(x)g'(x)}{g(x)^2} \\
+ &= \frac{g(x)}{g(x)}\cdot\frac{f'(x)}{g(x)} - \frac{f(x)g'(x)}{g(x)^2} \\
 
  &= \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2}.
  \end{align}

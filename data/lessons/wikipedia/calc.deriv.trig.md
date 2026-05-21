@@ -136,15 +136,15 @@ Using the limits for the sine and cosine functions:
 To compute the derivative of the cosine function from the chain rule, first observe the following three facts:
 \(\cos\theta = \sin\left(\tfrac{\pi}{2}-\theta\right)\)
 \(\sin\theta = \cos\left(\tfrac{\pi}{2}-\theta\right)\)
-\(\tfrac{\operatorname{d{\operatorname{d}\!\theta} \sin\theta = \cos\theta\)
+\(\frac{\operatorname{d}}{\operatorname{d}\!\theta}\sin\theta = \cos\theta\)
 The first and the second are trigonometric identities, and the third is proven above. Using these three facts, we can write the following,
-\(\tfrac{\operatorname{d{\operatorname{d}\!\theta} \cos\theta = \tfrac{\operatorname{d{\operatorname{d}\!\theta} \sin\left(\tfrac{\pi}{2}-\theta\right)\)
+\(\frac{\operatorname{d}}{\operatorname{d}\!\theta}\cos\theta = \frac{\operatorname{d}}{\operatorname{d}\!\theta}\sin\left(\frac{\pi}{2}-\theta\right)\)
 We can differentiate this using the chain rule. Letting \(f(x) = \sin x,\ \ g(\theta) =\tfrac{\pi}{2}-\theta\), we have:
 
-\(\tfrac{\operatorname{d{\operatorname{d}\!\theta} f\!\left(g\!\left(\theta\right)\right) = f^\prime\!\left(g\!\left(\theta\right)\right) \cdot g^\prime\!\left(\theta\right) = \cos\left(\tfrac{\pi}{2}-\theta\right) \cdot (0-1) = -\sin\theta\).
+\(\frac{\operatorname{d}}{\operatorname{d}\!\theta} f\!\left(g\!\left(\theta\right)\right) = f^\prime\!\left(g\!\left(\theta\right)\right) \cdot g^\prime\!\left(\theta\right) = \cos\left(\frac{\pi}{2}-\theta\right) \cdot (0-1) = -\sin\theta\).
 
 Therefore, we have proven that
-\(\tfrac{\operatorname{d{\operatorname{d}\!\theta} \cos\theta = -\sin\theta\).
+\(\frac{\operatorname{d}}{\operatorname{d}\!\theta}\cos\theta = -\sin\theta\).
 
 ### Derivative of the tangent function
 #### From the definition of derivative
@@ -209,7 +209,7 @@ Substituting \(x=\sin y\) in from above,
 
 \(\sqrt{1-x^2} \cdot {dy \over dx} =1\)
 
-\({dy \over dx}=\frac{1}{\sqrt{1-x^2\)
+\(\frac{dy}{dx}=\frac{1}{\sqrt{1-x^2}}\)
 
 ### Differentiating the inverse cosine function
 We let
@@ -238,7 +238,7 @@ Substituting \(x=\cos y\,\!\) in from above, we get
 
 \(-\sqrt{1-x^2} \cdot {dy \over dx} =1\)
 
-\({dy \over dx} = -\frac{1}{\sqrt{1-x^2\)
+\(\frac{dy}{dx} = -\frac{1}{\sqrt{1-x^2}}\)
 
 Alternatively, once the derivative of \(\arcsin x\) is established, the derivative of \(\arccos x\) follows immediately by differentiating the identity \(\arcsin x+\arccos x=\pi/2\) so that \((\arccos x)'=-(\arcsin x)'}\).
 
@@ -366,7 +366,7 @@ Then
 
 \(\frac{dx}{dy} = -\csc y \cot y = -|x|\sqrt{x^2-1}\)
 (The absolute value in the expression is necessary as the product of cosecant and cotangent in the interval of y is always nonnegative, while the radical \(\sqrt{x^2-1}\) is always nonnegative by definition of the principal square root, so the remaining factor must also be nonnegative, which is achieved by using the absolute value of x.)
-\(\frac{dy}{dx} = \frac{-1}{|x|\sqrt{x^2-1}\)
+\(\frac{dy}{dx} = \frac{-1}{|x|\sqrt{x^2-1}}\))
 
 #### Using the chain rule
 Alternatively, the derivative of arccosecant may be derived from the derivative of arcsine using the chain rule.

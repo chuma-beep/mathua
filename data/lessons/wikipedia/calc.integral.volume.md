@@ -76,23 +76,23 @@ A_y &= \int_a^b 2 \pi x \, \sqrt{ \left( \frac{dx}{dt} \right)^2 + \left( \frac{
 This can also be derived from multivariable integration. If a plane curve is given by \(\langle x(t), y(t) \rangle\) then its corresponding surface of revolution when revolved around the x-axis has Cartesian coordinates given by \(\mathbf{r}(t, \theta) = \langle y(t)\cos(\theta), y(t)\sin(\theta), x(t)\rangle\) with \(0 \leq \theta \leq 2\pi\). Then the surface area is given by the surface integral
 
 \[
-A_x = \iint_S dS = \iint_{[a, b] \times [0, 2\pi]} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt = \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt.
+A_x = \iint_S dS = \iint_{[a, b] \times [0, 2\pi]} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt = \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt.
 \]
 
 Computing the partial derivatives yields
 
 \[
-\frac{\partial \mathbf{r{\partial t} = \left\langle \frac{dy}{dt} \cos(\theta), \frac{dy}{dt} \sin(\theta), \frac{dx}{dt} \right\rangle,
+\frac{\partial \mathbf{r}}{\partial t} = \left\langle \frac{dy}{dt} \cos(\theta), \frac{dy}{dt} \sin(\theta), \frac{dx}{dt} \right\rangle,
 \]
 
 \[
-\frac{\partial \mathbf{r{\partial \theta} = \left\langle -y \sin(\theta), y \cos(\theta), 0 \right\rangle
+\frac{\partial \mathbf{r}}{\partial \theta} = \left\langle -y \sin(\theta), y \cos(\theta), 0 \right\rangle
 \]
 
 and computing the cross product yields
 
 \[
-\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta} = \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle = y \left\langle \cos(\theta)\frac{dx}{dt}, \sin(\theta)\frac{dx}{dt}, \frac{dy}{dt} \right\rangle
+\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta} = \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle = y \left\langle \cos(\theta)\frac{dx}{dt}, \sin(\theta)\frac{dx}{dt}, \frac{dy}{dt} \right\rangle
 \]
 
 where the trigonometric identity \(\sin^2(\theta) + \cos^2(\theta) = 1\) was used. With this cross product, we get
@@ -100,7 +100,7 @@ where the trigonometric identity \(\sin^2(\theta) + \cos^2(\theta) = 1\) was use
 \[
 \begin{align}
 A_x
-&= \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r{\partial t} \times \frac{\partial \mathbf{r{\partial \theta}\right\|\ d\theta\ dt \\[1ex]
+&= \int_a^b \int_0^{2\pi} \left\|\frac{\partial \mathbf{r}}{\partial t} \times \frac{\partial \mathbf{r}}{\partial \theta}\right\|\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} \left\| \left\langle y \cos(\theta)\frac{dx}{dt}, y \sin(\theta)\frac{dx}{dt}, y \frac{dy}{dt} \right\rangle\right\|\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} y \sqrt{\cos^2(\theta)\left(\frac{dx}{dt} \right)^2 + \sin^2(\theta)\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\ d\theta\ dt \\[1ex]
 &= \int_a^b \int_0^{2\pi} y \sqrt{\left(\frac{dx}{dt} \right)^2 + \left(\frac{dy}{dt} \right)^2}\ d\theta\ dt \\[1ex]

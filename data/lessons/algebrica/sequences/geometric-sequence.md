@@ -102,7 +102,7 @@ The previously shown progression:
 
 \\[a_n = 2 \cdot 3^{n - 1} \\]
 
-diverges because the common ratio between its terms is \\( r = 3 \\), which satisfies \\( r > 1 \\). As a result, the terms grow exponentially and tend to \\( +\infty \\) as \\( n )\ increases.
+diverges because the common ratio between its terms is \\( r = 3 \\), which satisfies \\( r > 1 \\). As a result, the terms grow exponentially and tend to \\( +\infty \\) as \\( n \\)\ increases.
 
 
 Let us consider, for example, the geometric progression shown in the figure:

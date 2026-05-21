@@ -19,7 +19,7 @@ In the case of [discrete random variables](<../discrete-random-variables>), the 
 
 \\[\sigma^2 = E[(X - \mu)^2] = \sum_x (x - \mu)^2 f(x) \\]
 
-  * \\(x\\) represents each possible value that the random variable \\(X) can take
+  * \\(x\\) represents each possible value that the random variable \\(X\\) can take
   * \\(\mu = E[X]\\) is the [expected value](<../mean-or-expected-value-of-a-random-variable>) or theoretical mean of the variable
   * \\(f(x)\\) is the probability mass function, which assigns a probability to each possible outcome of \\(X\\).
 
