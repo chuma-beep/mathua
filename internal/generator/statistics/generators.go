@@ -348,7 +348,7 @@ func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
 		bagParts[i] = fmt.Sprintf("%d %s", counts[i], colorNames[i])
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("A bag contains %s. What is P(%s)?", strings.Join(bagParts, ", "), colorNames[pick]),
+		Question:    fmt.Sprintf("A bag contains %s. What is \\(P(%s)\\)?", strings.Join(bagParts, ", "), colorNames[pick]),
 		Answer:      fmt.Sprintf("%d/%d", fav/gcd, total/gcd),
 		Explanation: fmt.Sprintf("P(%s) = %d/%d = %d/%d", colorNames[pick], fav, total, fav/gcd, total/gcd),
 	}
@@ -375,7 +375,7 @@ func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
 		bagParts[i] = fmt.Sprintf("%d %s", counts[i], colorNames[i])
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("A bag contains %s. What is P(not %s)?", strings.Join(bagParts, ", "), colorNames[pick]),
+		Question:    fmt.Sprintf("A bag contains %s. What is \\(P(\\text{not }%s)\\)?", strings.Join(bagParts, ", "), colorNames[pick]),
 		Answer:      fmt.Sprintf("%d/%d", other/gcd, total/gcd),
 		Explanation: fmt.Sprintf("P(not %s) = 1 - P(%s) = 1 - %d/%d = %d/%d", colorNames[pick], colorNames[pick], counts[pick], total, other/gcd, total/gcd),
 	}
@@ -406,7 +406,7 @@ func (g *compoundProbGen) Generate(difficulty float64) generator.Problem {
 		bagParts[i] = fmt.Sprintf("%d %s", counts[i], colorNames[i])
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("A bag contains %s. You draw one marble, then another without replacement. What is P(%s and then %s)?", strings.Join(bagParts, ", "), n1, n2),
+		Question:    fmt.Sprintf("A bag contains %s. You draw one marble, then another without replacement. What is \\(P(%s \\text{ and then } %s)\\)?", strings.Join(bagParts, ", "), n1, n2),
 		Answer:      fmt.Sprintf("%d/%d", num/gcd, den/gcd),
 		Explanation: fmt.Sprintf("P(%s then %s) = %d/%d x %d/%d = %d/%d = %d/%d", n1, n2, c1, total, c2, total-1, num, den, num/gcd, den/gcd),
 	}
@@ -498,7 +498,7 @@ func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
 		gm = int(math.Sqrt(p))
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the geometric mean of %d and %d.", a, b),
+		Question:    fmt.Sprintf("Find the geometric mean of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d", gm),
 		Explanation: fmt.Sprintf("Geometric mean = √(%d × %d) = √%d = %d", a, b, a*b, gm),
 	}
@@ -514,7 +514,7 @@ func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
 	denom := a + b
 	gcd := mathutil.GCD(numer, denom)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the harmonic mean of %d and %d.", a, b),
+		Question:    fmt.Sprintf("Find the harmonic mean of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d/%d", numer/gcd, denom/gcd),
 		Explanation: fmt.Sprintf("H = 2/(1/%d + 1/%d) = 2/(%d/%d) = %d/%d = %d/%d", a, b, a+b, a*b, 2*a*b, a+b, numer/gcd, denom/gcd),
 	}
@@ -537,7 +537,7 @@ func (g *rmsGen) Generate(difficulty float64) generator.Problem {
 		rms = int(math.Sqrt(float64(p)))
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the root mean square (RMS) of %d and %d.", a, b),
+		Question:    fmt.Sprintf("Find the root mean square (RMS) of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d", rms),
 		Explanation: fmt.Sprintf("RMS = √((%d²+%d²)/2) = √((%d+%d)/2) = √(%d) = %d", a, b, a*a, b*b, p, rms),
 	}

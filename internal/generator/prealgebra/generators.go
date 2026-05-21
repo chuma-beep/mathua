@@ -287,7 +287,7 @@ func (g *absValueGen) Generate(difficulty float64) generator.Problem {
 	scale := int(1 + difficulty*5)
 	n := rand.Intn(scale*6) - 15
 	return generator.Problem{
-		Question:    fmt.Sprintf("|%d| = ?", n),
+		Question:    fmt.Sprintf("\\(|%d| =\\) ?", n),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(n)),
 		Explanation: fmt.Sprintf("The absolute value of %d is %d.", n, mathutil.Abs(n)),
 	}
@@ -305,7 +305,7 @@ func (g *negOrderOpsGen) Generate(difficulty float64) generator.Problem {
 	c := rand.Intn(5) + 2
 	result := a + b*c
 	return generator.Problem{
-		Question:    fmt.Sprintf("Evaluate: %d + (%d) x %d", a, b, c),
+		Question:    fmt.Sprintf("Evaluate: \\(%d + (%d) \\times %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("%d + (%d) x %d = %d + %d = %d", a, b, c, a, b*c, result),
 	}
@@ -395,7 +395,7 @@ func (g *ratioProportionGen) Generate(difficulty float64) generator.Problem {
 	x := a * mult
 	c := b * mult
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve the proportion: %d/%d = x/%d", a, b, c),
+		Question:    fmt.Sprintf("Solve the proportion: \\(\\frac{%d}{%d} = \\frac{x}{%d}\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%d/%d = x/%d, cross-multiply: %dx = %dx%d, x = %d", a, b, c, a, c, b, x),
 	}
@@ -438,7 +438,7 @@ func (g *expNegGen) Generate(difficulty float64) generator.Problem {
 	base := rand.Intn(max(1, scale)) + 2
 	exp := rand.Intn(max(1, scale/2+1)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: %d^-%d", base, exp),
+		Question:    fmt.Sprintf("Simplify: \\(%d^{-%d}\\)", base, exp),
 		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
 		Explanation: fmt.Sprintf("%d^-%d = 1/%d^%d = 1/%d", base, exp, base, exp, mathutil.IntPow(base, exp)),
 	}
@@ -450,7 +450,7 @@ func (g *expZeroGen) Generate(difficulty float64) generator.Problem {
 	scale := int(1 + difficulty*5)
 	base := rand.Intn(scale*2) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d^0 = ?", base),
+		Question:    fmt.Sprintf("\\(%d^{0} =\\) ?", base),
 		Answer:      "1",
 		Explanation: fmt.Sprintf("Any non-zero number raised to 0 equals 1. %d^0 = 1.", base),
 	}
@@ -463,7 +463,7 @@ func (g *sciNotationGen) Generate(difficulty float64) generator.Problem {
 	coeff := float64(rand.Intn(scale*20)+10) / 10
 	exp := rand.Intn(max(1, scale)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Write %g x 10^%d as a standard number.", coeff, exp),
+		Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, exp),
 		Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
 		Explanation: fmt.Sprintf("%g x 10^%d = %g", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
 	}
@@ -531,7 +531,7 @@ func (g *sciNotationOpsGen) Generate(difficulty float64) generator.Problem {
 		totalExp++
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("(%g x 10^%d) x (%g x 10^%d) = ? (in scientific notation)", a, ea, b, eb),
+		Question:    fmt.Sprintf("\\((%g \\times 10^{%d}) \\times (%g \\times 10^{%d}) =\\) ? (in scientific notation)", a, ea, b, eb),
 		Answer:      fmt.Sprintf("%g x 10^%d", coeff, totalExp),
 		Explanation: fmt.Sprintf("(%g x %g) x 10^(%d+%d) = %g x 10^%d", a, b, ea, eb, coeff, totalExp),
 	}
@@ -545,7 +545,7 @@ func (g *varConceptGen) Generate(difficulty float64) generator.Problem {
 	scale := int(1 + difficulty*5)
 	n := rand.Intn(scale*2) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("If x = %d, what is 3x?", n),
+		Question:    fmt.Sprintf("If \\(x = %d\\), what is \\(3x\\)?", n),
 		Answer:      fmt.Sprintf("%d", 3*n),
 		Explanation: fmt.Sprintf("3x means 3 times x. 3 x %d = %d.", n, 3*n),
 	}
@@ -560,7 +560,7 @@ func (g *exprEvalGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(scale) + 1
 	result := a*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Evaluate %dx + %d when x = %d.", a, b, x),
+		Question:    fmt.Sprintf("Evaluate \\(%dx + %d\\) when \\(x = %d\\).", a, b, x),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("%d(%d) + %d = %d + %d = %d.", a, x, b, a*x, b, result),
 	}
@@ -575,7 +575,7 @@ func (g *likeTermsGen) Generate(difficulty float64) generator.Problem {
 	c := rand.Intn(scale) + 1
 	resultCoef := a + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Combine like terms: %dx + %dx + %d", a, b, c),
+		Question:    fmt.Sprintf("Combine like terms: \\(%dx + %dx + %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultCoef, c),
 		Explanation: fmt.Sprintf("%dx + %dx = %dx, plus %d = %dx + %d", a, b, resultCoef, c, resultCoef, c),
 	}
@@ -591,7 +591,7 @@ func (g *distributeGen) Generate(difficulty float64) generator.Problem {
 	resultB := a * b
 	resultC := a * c
 	return generator.Problem{
-		Question:    fmt.Sprintf("Simplify: %d(%dx + %d)", a, b, c),
+		Question:    fmt.Sprintf("Simplify: \\(%d(%dx + %d)\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultB, resultC),
 		Explanation: fmt.Sprintf("%d(%dx + %d) = %d(%dx) + %d(%d) = %dx + %d", a, b, c, a, b, a, c, resultB, resultC),
 	}
@@ -607,7 +607,7 @@ func (g *eqOneStepAddGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(scale*5) - scale*2
 	a := x - b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x + %d = %d", b, a+b),
+		Question:    fmt.Sprintf("Solve: \\(x + %d = %d\\)", b, a+b),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("x + %d = %d, subtract %d: x = %d", b, a+b, b, x),
 	}
@@ -621,7 +621,7 @@ func (g *eqOneStepMultGen) Generate(difficulty float64) generator.Problem {
 	coeff := rand.Intn(scale*2) + 2
 	rhs := coeff * x
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: %dx = %d", coeff, rhs),
+		Question:    fmt.Sprintf("Solve: \\(%dx = %d\\)", coeff, rhs),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("%dx = %d, divide by %d: x = %d", coeff, rhs, coeff, x),
 	}
@@ -669,7 +669,7 @@ func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
 	b := rand.Intn(scale*3) - scale
 	c := x + b - 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: x + %d > %d", b, c),
+		Question:    fmt.Sprintf("Solve: \\(x + %d > %d\\)", b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d.", b, c, b, c-b),
 	}
@@ -715,13 +715,13 @@ func (g *realConceptGen) Generate(difficulty float64) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What is the defining property of a rational number?", "can be expressed as a/b", "A rational number can be written as a/b where a and b are integers, b ≠ 0."},
-		{"Is π a rational number? (yes/no)", "no", "π cannot be expressed as a ratio of two integers."},
-		{"Is √2 a rational number? (yes/no)", "no", "√2 cannot be expressed as a ratio of two integers."},
-		{"Is 0.333... a rational number? (yes/no)", "yes", "0.333... = 1/3, so it is rational."},
+		{"What is the defining property of a rational number?", "can be expressed as \\(a/b\\)", "A rational number can be written as \\(a/b\\) where \\(a\\) and \\(b\\) are integers, \\(b \\neq 0\\)."},
+		{"Is \\(\\pi\\) a rational number? (yes/no)", "no", "\\(\\pi\\) cannot be expressed as a ratio of two integers."},
+		{"Is \\(\\sqrt{2}\\) a rational number? (yes/no)", "no", "\\(\\sqrt{2}\\) cannot be expressed as a ratio of two integers."},
+		{"Is \\(0.333\\ldots\\) a rational number? (yes/no)", "yes", "\\(0.333\\ldots = 1/3\\), so it is rational."},
 		{"The set of real numbers contains which two main subsets?", "rational and irrational", "Real numbers are the union of rational and irrational numbers."},
-		{"Every integer is also a rational number. (true/false)", "true", "Any integer n can be written as n/1."},
-		{"Is √4 a rational number? (yes/no)", "yes", "√4 = 2 = 2/1, so it is rational."},
+		{"Every integer is also a rational number. (true/false)", "true", "Any integer \\(n\\) can be written as \\(n/1\\)."},
+		{"Is \\(\\sqrt{4}\\) a rational number? (yes/no)", "yes", "\\(\\sqrt{4} = 2 = 2/1\\), so it is rational."},
 		{"What is the name for a non-repeating, non-terminating decimal?", "irrational", "Irrational numbers have decimal representations that neither terminate nor repeat."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -774,8 +774,8 @@ func (g *typesGen) Generate(difficulty float64) generator.Problem {
 		{"What type of number is 0? (natural, integer, rational, irrational, real)", "integer", "0 is an integer but not a natural number."},
 		{"What type of number is 2/3? (natural, integer, rational, irrational, real)", "rational", "2/3 is a rational number because it can be expressed as a fraction."},
 		{"What type of number is 0.5? (natural, integer, rational, irrational, real)", "rational", "0.5 = 1/2, so it is rational."},
-		{"What type of number is √2? (natural, integer, rational, irrational, real)", "irrational", "√2 cannot be expressed as a fraction of integers."},
-		{"What type of number is π? (natural, integer, rational, irrational, real)", "irrational", "π is irrational (cannot be expressed as a fraction)."},
+		{"What type of number is \\(\\sqrt{2}\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\sqrt{2}\\) cannot be expressed as a fraction of integers."},
+		{"What type of number is \\(\\pi\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\pi\\) is irrational (cannot be expressed as a fraction)."},
 		{"All integers are also which larger set of numbers?", "rational", "Every integer n can be written as n/1."},
 		{"Which set contains all others: natural, integer, rational, real?", "real", "Real numbers contain all rational and irrational numbers."},
 		{"Is 0 a natural number? (yes/no)", "no", "Natural numbers are positive counting numbers: 1, 2, 3, ..."},
