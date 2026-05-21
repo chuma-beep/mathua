@@ -132,7 +132,7 @@ export default function KatexContent({ children }: { children: string }) {
   })
 
   return (
-    <div className="katex-content text-sm md:text-base leading-relaxed">
+    <div className="katex-content text-sm leading-relaxed">
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
         rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: true, errorColor: '#cc0000' }]]}
@@ -167,16 +167,17 @@ export default function KatexContent({ children }: { children: string }) {
         {content}
       </ReactMarkdown>
       <style jsx global>{`
-        .katex-content { overflow-x: auto; overflow-wrap: break-word; font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
+        .katex-content { overflow-x: clip; overflow-wrap: break-word; }
         .katex-content h1 { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); font-weight: 700; margin: 1.5rem 0 0.75rem; font-family: var(--font-serif); }
         .katex-content h2 { font-size: clamp(1.1rem, 0.9rem + 0.6vw, 1.5rem); font-weight: 700; margin: 1.25rem 0 0.5rem; font-family: var(--font-serif); }
         .katex-content h3 { font-size: clamp(1rem, 0.9rem + 0.3vw, 1.25rem); font-weight: 600; margin: 1rem 0 0.5rem; }
-        .katex-content p { margin: 0.75rem 0; }
+        .katex-content p { margin: 0.75rem 0; font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
         .katex-content ul, .katex-content ol { margin: 0.5rem 0; padding-left: 1.5rem; }
-        .katex-content li { margin: 0.25rem 0; }
+        .katex-content li { margin: 0.25rem 0; font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
+        .katex-content .katex { font-size: 1.05875rem; }
         .katex-content hr { border: 0; border-top: 1px solid; margin: 1.5rem 0; opacity: 0.3; }
         .katex-content strong { font-weight: 700; }
-        .katex-content table { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem); }
+        .katex-content table { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.875rem; }
         .katex-content th, .katex-content td { border: 1px solid; border-color: var(--border); padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
         .katex-content th { font-weight: 600; background: var(--code-bg); }
         .katex-content h1:hover .anchor-link,
