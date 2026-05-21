@@ -22,7 +22,7 @@ Before introducing cosine similarity, it is worth examining a more elementary ap
 
 This formula measures the straight-line distance between the two points in \\(n\\)-dimensional space that the vectors identify.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/euclidean-distance.png)
+![](/diagrams/algebrica/euclidean-distance.png)
 
 A small value of \\(d(\mathbf{u}, \mathbf{v})\\) indicates that the two vectors are geometrically close to each other, while a large value indicates that they are far apart. Since the Euclidean distance is an unbounded quantity, it is sometimes convenient to convert it into a similarity score that takes values in a bounded interval. One common way to do this is through the following transformation:
 
@@ -45,7 +45,7 @@ In compact notation, using the dot product and the Euclidean norm, the same expr
 
 In these expressions, \\(V_x \cdot V_y\\) denotes the dot product of the two vectors, while \\(\|V_x\|\\) and \\(\|V_y\|\\) are their respective Euclidean norms. Dividing by the product of the norms is precisely the normalization step that removes the effect of vector magnitude and retains only directional information.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/cosine-similarity.png)
+![](/diagrams/algebrica/cosine-similarity.png)
 
 The value of cosine similarity ranges between \\(-1\\) and \\(1\\). In text analysis, where vector components are non-negative by construction, the range is restricted to \\([0, 1]\\). A value close to \\(1\\) indicates that the angle between the two vectors is small, meaning the vectors are nearly parallel and the corresponding documents are highly similar. A value close to \\(0\\) indicates that the vectors are nearly orthogonal, and therefore that the two documents share little to no common content.
 

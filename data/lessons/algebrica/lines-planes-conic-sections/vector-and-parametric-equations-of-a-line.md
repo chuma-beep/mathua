@@ -11,7 +11,7 @@ Let’s consider a directed vector \\( \vec{v} \\). The line passing through a p
 
 \\[P - P_0 = t \vec{v} \quad \text{with} \quad t \in \mathbb{R} \\]
 
-![Vector equations of a line.](https://algebrica.org/wp-content/uploads/resources/images/vector-equation-line-1.png)
+![Vector equations of a line.](/diagrams/algebrica/vector-equation-line-1.png)
 
 Here, \\( P_0 \\) is a fixed point on the line, \\( \vec{v} \\) is a direction vector, and \\( t \\) is a real parameter. The point \\( P \\) varies along the line as \\( t \\) changes.
 

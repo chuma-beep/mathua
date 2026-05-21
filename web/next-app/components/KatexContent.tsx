@@ -29,19 +29,33 @@ function extractText(children: ReactNode): string {
 export default function KatexContent({ children }: { children: string }) {
   let content = children
 
-  // Convert lesson LaTeX delimiters from Markdown-escaped form to $...$ / $$...$$
-  // The lesson files use \\(...\\) (inline) and \\[...\\] (display).
+  // Convert lesson LaTeX delimiters to $...$ / $$...$$
   // remark-math expects $...$ for inline and $$...$$ on their own lines for display.
-  // Inside math content, also unescape \\ → \ so that \\{ becomes \{, \\sin becomes \sin, etc.
+  // Two styles: Algebrica (double backslash: \\(...\\) / \\[...\\]) and Wikipedia (single backslash: \(...\) / \[...\]).
+
+  // --- Inline math ---
+  // Algebrica style: \\(...\\) — unescape \\ back to \ inside
   content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => '$' + inner.replace(/\\\\/g, '\\') + '$')
-  // For display math, use block $$...$$ (own lines) when multi-line,
+  // Wikipedia style: \(...\) — backslashes inside are already single
+  content = content.replace(/\\\(([\s\S]*?)\\\)/g, (_, inner) => '$' + inner + '$')
+
+  // --- Display math ---
+  // Use block $$...$$ (own lines) when multi-line,
   // and inline $\displaystyle ...$ when single-line (e.g. inside table cells).
+  // Algebrica style: \\[...\\]
   content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => {
     const clean = inner.replace(/\\\\/g, '\\')
     if (inner.includes('\n')) {
       return '\n$$\n' + clean.trim() + '\n$$\n'
     }
     return '$\\displaystyle ' + clean.trim() + '$'
+  })
+  // Wikipedia style: \[...\]
+  content = content.replace(/\\\[([\s\S]*?)\\\]/g, (_, inner) => {
+    if (inner.includes('\n')) {
+      return '\n$$\n' + inner.trim() + '\n$$\n'
+    }
+    return '$\\displaystyle ' + inner.trim() + '$'
   })
 
   return (

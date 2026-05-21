@@ -21,7 +21,7 @@ The following properties apply for all complex numbers \(z\) and , unless stated
  \overline{z + w} &= \overline{z} + \overline{w}, \\
  \overline{z - w} &= \overline{z} - \overline{w}, \\
  \overline{zw} &= \overline{z} \; \overline{w}, \quad \text{and} \\
- \overline{\left(\frac{z}{w}\right)} &= \frac{\overline{z{\overline{w,\quad \text{if } w \neq 0.
+ \overline{\left(\frac{z}{w}\right)} &= \frac{\overline{z}}{\overline{w}},\quad \text{if } w \neq 0.
 \end{align}
 \]
 
@@ -37,4 +37,4 @@ z\overline{z} = {\left| z \right|}^2.
 \]
  This allows easy computation of the multiplicative inverse of a complex number given in rectangular coordinates:
 \[
-z^{-1} = \frac{\overline{z{|z|^2}
+z^{-1} = \frac{\overline{z}}{|z|^2}

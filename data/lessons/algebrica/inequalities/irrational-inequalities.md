@@ -43,7 +43,7 @@ without any additional domain conditions, since the function is monotone on all 
 
 When the index is even, the situation is more delicate. The function \\(\sqrt[n]{x}\\) is defined only for non-negative arguments, and its range is restricted to non-negative values. This means that any inequality of the form \\(\sqrt[n]{f(x)} \leq g(x)\\) with \\(n\\) even carries implicit constraints.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/irr-ineq-1.png)
+![](/diagrams/algebrica/irr-ineq-1.png)
 
 The radicand must be non-negative, and, depending on the sign of \\(g(x)\\), the inequality may be satisfied trivially or may need to be squared. The even-index case therefore splits naturally into sub-cases depending on the sign of the right-hand side.
 

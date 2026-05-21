@@ -10,7 +10,7 @@ These qualitative features are described by the notions of **convexity** and **c
 
 A function \\(f\\) is said to be convex on an interval when, for any two points \\(a\\) and \\(b\\) within that interval, the straight line that connects \\((a, f(a))\\) and \\((b, f(b))\\) remains above the graph of \\(f\\) at every point between \\(a\\) and \\(b\\). In other words, the chord linking these two points does not dip below the curve.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/convexity-1-1.png)
+![](/diagrams/algebrica/convexity-1-1.png)
 
 The equation of the secant line passing through the points \\((a, f(a))\\) and \\((b, f(b))\\) is
 
@@ -34,7 +34,7 @@ and consequently:
 
 A function \\(f\\) is concave on an interval when, for any two points \\(a\\) and \\(b\\) in that interval, the line segment joining \\((a, f(a))\\) and \\((b, f(b))\\) lies below the graph of \\(f\\) for every point between \\(a\\) and \\(b\\). Equivalently, the chord connecting the two points never rises above the curve.
 
-![The graph illustrates how the concavity of the function ensures that every secant line lies below the curve.](https://algebrica.org/wp-content/uploads/resources/images/convexity-1-2.png)
+![The graph illustrates how the concavity of the function ensures that every secant line lies below the curve.](/diagrams/algebrica/convexity-1-2.png)
 
 In an analogous way to the convex case, the equation of the secant line passing through the points ((a, f(a))) and ((b, f(b))) is
 

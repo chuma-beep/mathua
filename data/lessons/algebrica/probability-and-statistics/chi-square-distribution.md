@@ -31,7 +31,7 @@ If we set \\(\alpha = k/2\\) and \\(\beta = 2\\), the gamma density reduces exac
 
 The behavior of the chi-square distribution is governed by the degrees of freedom \\(k\\). As \\(k\\) increases, the mode shifts to the right, the variance grows, and the distribution exhibits reduced skewness, gradually approaching a normal shape for large \\(k\\).
 
-![Chi-squared distribution.](https://algebrica.org/wp-content/uploads/resources/images/chi-squared-distribution.png)
+![Chi-squared distribution.](/diagrams/algebrica/chi-squared-distribution.png)
 
 ##### The chi-square distribution plays a central role in hypothesis testing and in the estimation of variance-related parameters, as it provides the theoretical foundation for many procedures that assess how well observed data agree with a statistical model and how much variability can be attributed to random fluctuations.
 
@@ -72,7 +72,7 @@ Because the chi-square distribution is asymmetric and lacks a simple closed-form
 
 When using these critical values, it is important to understand what they represent. In many statistical procedures, one is interested in the value \\(\chi^{2}_{\alpha}\\) for which the area in the right tail of the chi-square distribution equals \\(\alpha\\). This value satisfies: \\[P(\chi^{2}_{k} > \chi^{2}_{\alpha}) = \alpha \\] meaning that only a fraction \\(\alpha\\) of the total probability lies to the right of the critical point.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/chi-squared-distribution-2.png)
+![](/diagrams/algebrica/chi-squared-distribution-2.png)
 
 The shaded region in the figure illustrates precisely this idea: the dark area corresponds to the probability \\(\alpha\\), and the boundary between the shaded and unshaded regions marks the critical value \\(\chi^{2}_{\alpha}\\).
 

@@ -15,7 +15,7 @@ These points are categorized into three main types, which we will discuss below.
 
 An **inflection point** is a point where the concavity of a function changes. In this case, we have a point of non-differentiability \\( c \\) of the function, which results in an [inflection point](https://algebrica.org/maximum-minimum-and-inflection-points/) with a tangent parallel to the \\( y \\)-axis (a vertical tangent). At such a point, the following occurs:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/non-differentiable-points-1.png)
+![](/diagrams/algebrica/non-differentiable-points-1.png)
 
 This behavior indicates that the slope of the tangent becomes vertical at \\( x = c \\) while the function may change concavity around this point. In the case shown in the figure, we have \\[f_{-}’ \left (c \right) = f_{+}’ \left(c \right) = +\infty \\]
 
@@ -25,7 +25,7 @@ If the curve were reflected across the y-axis, we would have \\[f_{-}’ \left (
 
 In the case of **cusps** , the right-hand and left-hand limits are infinite and have opposite signs.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/non-differentiable-points-2.png)
+![](/diagrams/algebrica/non-differentiable-points-2.png)
 
 In the case shown in the figure, we have: \\[f_{-}’ \left( c \right) = -\infty \quad \text{and} \quad f_{+}’ \left( c \right) = +\infty \\]
 
@@ -35,7 +35,7 @@ If the cusp were facing upwards instead of downwards, we would have: \\[f_{-}’
 
 A **corner** occurs when the left-hand derivative and the right-hand derivative exist but are not equal. In the case of corners points, there are two tangents to the graph at the same point, and they are different from each other.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/non-differentiable-points-3.png)
+![](/diagrams/algebrica/non-differentiable-points-3.png)
 
 In this case we have:
 

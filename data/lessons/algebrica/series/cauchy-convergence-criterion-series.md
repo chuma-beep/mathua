@@ -101,7 +101,7 @@ Since the right-hand side tends to zero as \\( n \to \infty \\), for any \\( \va
 
 This behavior is illustrated in the following plot, which shows how the partial sums \\( s_n \\) rapidly approach the exact value of the series, which is \\(2\\) when \\( x = 0.5 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/series-cauchy-1.png)
+![](/diagrams/algebrica/series-cauchy-1.png)
 
 This satisfies Cauchy’s convergence criterion. So the series converges for \\( x = 0.5 \\).
 

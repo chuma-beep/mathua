@@ -16,7 +16,7 @@ In this case, we write:
 
 In other words, this means that the terms of the sequence get increasingly close to the number \\( \ell \\) as \\( n \\) grows larger. No matter how tight a margin \\( \varepsilon \\), from a certain index onward all terms will stay within that distance from \\( \ell \\). For example, consider the following sequence: \\[a_n = \left( \frac{1}{n}\right)_{n\geq} = \left(1, \frac{1}{2}, \frac{1}{3}, \ldots \right) \\]
 
-![Convergent sequence.](https://algebrica.org/wp-content/uploads/resources/images/sequences-conv-1.png)
+![Convergent sequence.](/diagrams/algebrica/sequences-conv-1.png)
 
 As \\( n \\) increases, the terms become smaller and smaller, approaching zero. This is a classic example of a sequence that converges to 0. A sequence is said to be **infinitesimal** when its terms get arbitrarily close to zero as the index grows and:
 
@@ -90,7 +90,7 @@ Oscillating sequences are a special type of bounded sequence. Let us consider th
 
 As the index \\(n\\) increases, the terms of the sequence alternate consistently between \\(+1\\) and \\(-1\\). This type of sequence does not approach any finite value and is called an **oscillating sequence**. It does not converge to a finite limit, nor does it diverge to \\( +\infty \\) or \\( -\infty \\), and its terms continue to fluctuate between different values
 
-![Oscillating sequence.](https://algebrica.org/wp-content/uploads/resources/images/sequences-conv-2.png)
+![Oscillating sequence.](/diagrams/algebrica/sequences-conv-2.png)
 
 ## Geometric sequence
 
@@ -106,7 +106,7 @@ It exhibits the following behavior:
   * It is oscillatory (irregular) if \\( q \leq -1 \\), due to alternating signs and unbounded growth.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sequences-conv-3.png)
+![](/diagrams/algebrica/sequences-conv-3.png)
 
 As shown in the graph, when \\( q = 2 \\), the values of the geometric sequence \\( a_n = q^n \\) grow [exponentially](<../exponential-function>). As \\( n \\) increases, each term doubles the previous one, leading to a rapid escalation in magnitude.
 

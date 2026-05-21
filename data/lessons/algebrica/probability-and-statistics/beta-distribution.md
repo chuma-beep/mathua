@@ -35,11 +35,11 @@ The shape of the beta distribution depends on the values of its parameters \\( \
 The figure illustrates one of the possible shapes of the beta distribution when both parameters \\( \alpha \\) and \\( \beta \\) are less than 1 and equal to each other. In this configuration, the distribution takes on a characteristic U-shaped form, with the density approaching infinity near the boundaries of the interval \\( (0, 1) \\). It is possible to observe a minimum point located at \\( x = x_0 \\), corresponding to the lowest value of the probability density within the [domain](<../determining-the-domain-of-a-function/>).
 
 ![Typical U-shaped form of the Beta distribution with α < 1, β < 1, and α = β.
-](https://algebrica.org/wp-content/uploads/resources/images/beta-distribution-1.png)
+](/diagrams/algebrica/beta-distribution-1.png)
 
 An interesting case occurs when the two parameters are equal, that is \\( \alpha = \beta \\), and both are greater than \\(1\\). In this situation, the beta distribution becomes symmetric with respect to the vertical line \\( x = \tfrac{1}{2} \\) and takes on a unimodal (that is, a single-peaked curve), bell-shaped form with a single central peak. As the values of \\( \alpha \\) and \\( \beta \\) increase, the curve becomes progressively narrower and increasingly similar to a [normal distribution](<../normal-distribution>) centered around \\( x = 0.5 \\).
 
-![As α and β increase, the Beta distribution approaches a normal curve centered at 0.5.](https://algebrica.org/wp-content/uploads/resources/images/beta-distribution-2.png)
+![As α and β increase, the Beta distribution approaches a normal curve centered at 0.5.](/diagrams/algebrica/beta-distribution-2.png)
 
 To be more precise, this is an [asymptotic](<../asymptotes/>) approximation that holds for large values of \\( \alpha \\) and \\( \beta \\). For sufficiently large parameters, the Beta distribution can be approximated by a normal distribution with:
 

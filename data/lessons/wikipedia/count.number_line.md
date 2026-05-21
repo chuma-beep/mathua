@@ -31,12 +31,12 @@ Two numbers can be multiplied as in this example: To multiply 5 × 3, note that 
 
 Division can be performed as in the following example: To divide 6 by 2—that is, to find out how many times 2 goes into 6—note that the length from 0 to 2 lies at the beginning of the length from 0 to 6; pick up the former length and put it down again to the right of its original position, with the end formerly at 0 now placed at 2, and then move the length to the right of its latest position again. This puts the right end of the length 2 at the right end of the length from 0 to 6. Since three lengths of 2 filled the length 6, 2 goes into 6 three times (that is, 6 ÷ 2 = 3).
 
-File:Number line with x smaller than y.svg|The ordering on the number line: Greater elements are in direction of the arrow.
-File:Number line with addition of -2 and 3.svg|The difference 3−2=3+(−2) on the real number line
-File:Number line with addition of 1 and 2.svg|The addition 1+2 on the real number line
-File:Absolute difference.svg|The absolute difference.
-File:Number line multiplication 2 with 1,5.svg|The multiplication 2×1.5 on the real number line
-File:Number line division 3 with 2.svg|The division 3÷2 on the real number line
+![Ordering on the number line](/diagrams/wikipedia/Number_line_with_x_smaller_than_y.svg)
+![Difference on the number line](/diagrams/wikipedia/Number_line_with_addition_of_-2_and_3.svg)
+![Addition on the number line](/diagrams/wikipedia/Number_line_with_addition_of_1_and_2.svg)
+![Absolute difference](/diagrams/wikipedia/Absolute_difference.svg)
+![Multiplication on the number line](/diagrams/wikipedia/Number_line_multiplication_2_with_15.svg)
+![Division on the number line](/diagrams/wikipedia/Number_line_division_3_with_2.svg)
 
 ## Portions of the number line
 

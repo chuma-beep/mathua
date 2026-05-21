@@ -11,7 +11,7 @@ The Cartesian coordinate system describes a point in the plane by projecting it 
 
 Every point \\( Q \neq O \\) determines a distance from the pole \\(\rho = |OQ|\\) and an oriented angle \\( \theta \\) between the polar axis and the ray \\( OQ \\). The ordered pair \\((\rho, \theta)\\)is called a system of polar coordinates for \\( Q \\). The first component \\( \rho \\) is called the radius [vector](<../vectors/>), and the second component \\( \theta \\) is called the anomaly.
 
-![Polar coordinates.](https://algebrica.org/wp-content/uploads/resources/images/polar-coordinates-1-1.png)
+![Polar coordinates.](/diagrams/algebrica/polar-coordinates-1-1.png)
 
 Let \\( (x,y) \\) be the Cartesian coordinates of \\( Q \\), and \\( (\rho,\theta) \\) its polar coordinates. Consider the [right triangle](<../right-triangle-trigonometry/>) formed by the origin \\( O \\), the point \\( Q \\), and its projection onto the \\( x \\)-axis. The hypotenuse is the segment \\( OQ \\) of length \\( \rho \\), and the angle at the origin is \\( \theta \\). Resolving this segment into its horizontal and vertical components yields:
 
@@ -159,7 +159,7 @@ To describe the direction of \\( Q \\), we proceed in two steps.
   * The triple \\( (\rho, \theta, \psi) \\) provides a radial–angular description of the point in space.
 
 
-![Polar coordinates in space.](https://algebrica.org/wp-content/uploads/resources/images/polar-coordinates-2-1.png)
+![Polar coordinates in space.](/diagrams/algebrica/polar-coordinates-2-1.png)
 
 Here \\( \rho \\) denotes the radial distance, \\( \theta \\) the azimuthal angle in the \\( XY \\)-plane, and \\( \psi \\) the zenith measured from the positive \\( z \\)-axis. From the [right-triangle relations](<../right-triangle-trigonometry/>) in the associated geometry, one obtains:
 

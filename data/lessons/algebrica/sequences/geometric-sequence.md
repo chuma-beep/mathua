@@ -20,7 +20,7 @@ Let us consider, for example, the sequence with general term:
 
 This sequence is a geometric progression starting at 3, where each term is obtained by multiplying the previous one by \\( r = 2 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/geometri-sequence-1.png)
+![](/diagrams/algebrica/geometri-sequence-1.png)
 
 
 A geometric progression can also be defined recursively, meaning that each term is determined from the previous one. The recursive definition is given by:
@@ -32,7 +32,7 @@ A geometric progression can also be defined recursively, meaning that each term 
   * \\( a_n \\) is the general term of the sequence.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/geometri-sequence-2-1.png)
+![](/diagrams/algebrica/geometri-sequence-2-1.png)
 
 A geometric progression exhibits a characteristic exponential growth pattern, where the ratio between consecutive terms remains constant, leading to rapid increases (or decreases) in magnitude.
 
@@ -111,7 +111,7 @@ Let us consider, for example, the geometric progression shown in the figure:
 
 Expanding the sequence, we observe that the common ratio is \\( r = -2 \\), which satisfies \\( r \leq -1 \\). As a result, the sequence displays an irregular oscillatory behavior, alternating the sign of each term while the absolute values grow exponentially.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/geometri-sequence-3-2.png)
+![](/diagrams/algebrica/geometri-sequence-3-2.png)
 
 Sequences
 

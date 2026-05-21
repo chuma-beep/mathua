@@ -13,7 +13,7 @@ The **exponential distribution** characterizes the time elapsed between random, 
 
 This function represents a continuous probability model that quantifies the likelihood of waiting a certain amount of time before an event occurs in a process with a constant rate of occurrence.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/exponential-distribution-1.png)
+![](/diagrams/algebrica/exponential-distribution-1.png)
 
 From the definition of the exponential distribution, and as illustrated in the figure above, we can observe that the total area under the curve of \\( f(x; \lambda) \\) equals one. In other words, the probability density function is normalized, satisfying the fundamental property
 

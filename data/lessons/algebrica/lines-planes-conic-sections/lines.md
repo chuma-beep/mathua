@@ -17,13 +17,13 @@ A line is **parallel** to the y-axis when it runs vertically and all of its poin
 
 \\[x = k\\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/line-1.png)
+![](/diagrams/algebrica/line-1.png)
 
 A line is parallel to the x-axis when it runs horizontally and all of its points share the same y-coordinate. This type of line does not move up or down as you go left or right. It remains perfectly horizontal. Its equation is:
 
 \\[y = k \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/line-3.png)
+![](/diagrams/algebrica/line-3.png)
 
 ##### Horizontal lines have a slope of zero and extend infinitely in both directions.
 
@@ -33,7 +33,7 @@ In general terms, the **equation of a line** can be written in explicit form as:
 
 \\[y = mx + q \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/lines-4.png)
+![](/diagrams/algebrica/lines-4.png)
 
 \\(m\\) is the slope of the line and \\(q\\) is the y-intercept. The x-intercept of a line is the value of x for which y = 0 (in other words, it is the root of the line’s equation).
 
@@ -55,7 +55,7 @@ A [linear equation](<../linear-equation>) in two variables, written as \\( y = m
 
 The distance from a point \\( P(x_P, y_P) \\) to a line \\( r \\) given by the equation \\(ax + by + c = 0 \\) is the length of the segment connecting the point \\( P \\) to the foot of the perpendicular dropped from \\( P \\) onto the line.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/lines-6.png)
+![](/diagrams/algebrica/lines-6.png)
 
 This distance is calculated using the formula:
 
@@ -124,7 +124,7 @@ Substituting \\( x = 1 \\) into one of the original equations, we find:
 
 \\[y = 2(1) + 1 = 3 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/lines-5.png)
+![](/diagrams/algebrica/lines-5.png)
 
 So, the two lines intersect at the point:
 

@@ -38,7 +38,7 @@ The tangential acceleration, denoted by \\( \mathbf{a}_t \\), corresponds to the
 
 where \\( v \\) represents the magnitude of the velocity vector \\( \mathbf{v} \\) and \\(\mathbf{i}\\) represents a directed and oriented vector.
 
-![The acceleration vector consists of two parts: a tangential component and a normal component.](https://algebrica.org/wp-content/uploads/resources/images/acceleration-1.png)
+![The acceleration vector consists of two parts: a tangential component and a normal component.](/diagrams/algebrica/acceleration-1.png)
 
   * If the magnitude of the velocity changes, there is tangential acceleration \\((a_t \neq 0)\\).
   * If the magnitude of the velocity remains constant, the tangential acceleration is zero \\((a_t = 0)\\).

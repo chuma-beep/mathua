@@ -13,7 +13,7 @@ Specifically, \\(\operatorname{sgn}(x)\\) returns \\(-1\\) for negative values, 
 
 The graph of \\(y = \operatorname{sgn}(x)\\) consists of two horizontal rays and one isolated point. The ray on \\(y = -1\\) extends over all \\(x < 0\\), the ray on \\(y = 1\\) extends over all \\(x > 0\\), and the isolated point at the origin \\((0, 0)\\) lies on \\(y = 0\\). The two rays approach but do not intersect the y-axis.
 
-![Sign function.](https://algebrica.org/wp-content/uploads/resources/images/sign-function-1.png)
+![Sign function.](/diagrams/algebrica/sign-function-1.png)
 
 The sign function is classified as an [odd function](<../even-and-odd-functions/>) because it satisfies the identity:
 
@@ -93,7 +93,7 @@ The [Heaviside step function](<../heaviside-function/>) \\(H(x)\\) is defined as
 
 \\[H(x) = \begin{cases} 0 & \text{if } x < 0 \\\\[6pt] \dfrac{1}{2} & \text{if } x = 0 \\\\[8pt] 1 & \text{if } x > 0 \end{cases} \\]
 
-![Heaviside step function.](https://algebrica.org/wp-content/uploads/resources/images/Heaviside-function-1.png)
+![Heaviside step function.](/diagrams/algebrica/Heaviside-function-1.png)
 
 The sign function and the Heaviside step function are related by a simple linear transformation. Specifically:
 

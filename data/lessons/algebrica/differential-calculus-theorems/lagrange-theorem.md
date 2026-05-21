@@ -12,7 +12,7 @@ The Lagrange’s theorem, also known as the mean value theorem, states the follo
 
 From a geometric point of view, the theorem states that there exists at least one point \\( c \\) where the tangent line at that point is parallel to the secant line connecting points \\( A \\) and \\( B \\) on the graph.
 
-![Lagrange’s theorem.](https://algebrica.org/wp-content/uploads/resources/images/lagrange-theoreme-4.png)
+![Lagrange’s theorem.](/diagrams/algebrica/lagrange-theoreme-4.png)
 
 In the right-angled triangle \\( ABH \\), we have \\(\overline{BH} = \overline{AH} \cdot \tan{\alpha}\\) that is:
 
@@ -71,7 +71,7 @@ which corresponds exactly to the thesis we wanted to prove.
 
 From Lagrange’s theorem, it follows that if a function \\( f(x) \\) is continuous on the interval \\([a,b]\\), differentiable on the interval \\( ]a,b[ \\), and \\( f’(x) \\) is zero at every point in the interior of the interval, then \\( f(x) \\) is constant on the entire interval \\([a,b]\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/lagrange-theorem-2.png)
+![](/diagrams/algebrica/lagrange-theorem-2.png)
 
 Indeed, if we take a point \\(\overline{x} \in [a,b]\\) and apply the theorem to the interval \\([a, \overline{x}]\\), then there exists a point \\(c \in ]a, \overline{x}[\\) such that: \\[f’\left( c \right) = \frac{f(\overline{x})-f(a)}{\overline{x}-a} \\]
 

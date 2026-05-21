@@ -14,7 +14,7 @@ Given two fixed points in the plane, \\( F_1 \\) and \\( F_2 \\), an ellipse is 
 
 \\[\overline{PF_1} + \overline{PF_2} = \text{constant} \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/ellipse-1.png)
+![](/diagrams/algebrica/ellipse-1.png)
 
 \\( F_1 \\) and \\( F_2 \\) are the foci of the ellipse. Assuming that the focus \\( F_1 \\) has coordinates \\( (-c, 0) \\) and the focus \\( F_2 \\) has coordinates \\( (c, 0) \\), the distance between \\( F_1 \\) and \\( F_2 \\) is called the focal distance and is equal to \\( 2c \\). The midpoint of the segment \\( \overline{F_1F_2} \\) is the center of the ellipse.
 
@@ -24,7 +24,7 @@ We define the major axis and minor axis of the ellipse, respectively, as the lon
 
 By choosing a point \\( P = (a, 0) \\), located at the right endpoint of the major axis, we consider the case where the ellipse intersects the \\( x \\)-axis at its farthest horizontal extent. In this configuration, the distance from the left focus \\( F_1 = (-c, 0) \\) to the point \\( P \\) is \\(\overline{F_1P} = a + c\\). Similarly, we have \\(\overline{F_2P} = a + c\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/ellipse-2.png)
+![](/diagrams/algebrica/ellipse-2.png)
 
 From this, we conclude that the constant sum of the distances from any point on the ellipse to the two foci is:
 
@@ -46,7 +46,7 @@ Because that’s what defines it. An ellipse is the set of all points for which 
 
 An ellipse intersects the coordinate axes at four key points, its vertices. The two on the major axis represent the farthest horizontal reach.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/ellipse-3.png)
+![](/diagrams/algebrica/ellipse-3.png)
 
 The two on the minor axis define the vertical extent. All are symmetric with respect to the center and capture the ellipse’s full geometric footprint.
 
@@ -56,7 +56,7 @@ The ratio between the focal distance and the length of the major axis of an elli
 
 \\[0 \leq e < 1 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/ellipse-4.png)
+![](/diagrams/algebrica/ellipse-4.png)
 
 The closer \\( e \\) is to 0, the more circular the ellipse appears. As \\( e \\) approaches 1, the ellipse becomes increasingly elongated. The value of the eccentricity \\( e \\) is given by:
 

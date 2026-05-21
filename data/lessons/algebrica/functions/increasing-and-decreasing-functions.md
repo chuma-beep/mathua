@@ -14,7 +14,7 @@ Understanding the behavior of [functions](<../functions>) is fundamental in math
 
 Let \\( y = f(x)\\) be a function defined on a [domain](<../determining-the-domain-of-a-function/>) \\( X \subseteq \mathbb{R} \\). We say that \\( f \\) is **strictly increasing** on an interval \\(I \subseteq X \\) if, for any two values \\( x_1, x_2 \in I \\) such that \\( x_1 < x_2 \\), the following condition holds: \\[f(x_1) < f(x_2) \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/increasing-decreasing-functions-1-3.png)
+![](/diagrams/algebrica/increasing-decreasing-functions-1-3.png)
 
 This means that as the input \\( x \\) increases within the interval \\( I \\), the output \\( f(x) \\) also strictly increases, without any flat or decreasing segments.
 
@@ -23,7 +23,7 @@ Let \\( y = f(x) \\) be a function defined on a domain \\( X \subseteq \mathbb{R
 
 \\[f(x_1) > f(x_2) \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/increasing-decreasing-functions-2-1.png)
+![](/diagrams/algebrica/increasing-decreasing-functions-2-1.png)
 
 This means that as the input \\( x \\) increases within the interval \\( I \\), the output \\( f(x) \\) strictly decreases, with no flat or increasing sections.
 
@@ -52,7 +52,7 @@ In general, given a function \\( y = f(x) \\) that is [continuous](<../continuou
 
 To demonstrate these properties, we use the [Lagrange’s Theorem](<../lagrange-theorem>). Let’s imagine having two points \\( a \\) and \\( b \\) \\(\in I \\) with \\( a < b \\). Next, let us consider a point \\( c \\) belonging to the interval \\( ]a, b[ \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/increasing-decreasing-function.png)
+![](/diagrams/algebrica/increasing-decreasing-function.png)
 
 By the Lagrange’s Theorem, we have:
 
@@ -90,7 +90,7 @@ Therefore, the derivative \\( x(x^2 - 1) \\) is positive for:
 
 Graphically, its behavior is as follows:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/increasing-decreasing-functions-2.png)
+![](/diagrams/algebrica/increasing-decreasing-functions-2.png)
 
 Therefore, the function is increasing in the interval \\((-1,0) \cup (1,+\infty)\\) and decreasing in the interval \\((-\infty, -1) \cup (0,1)\\).
 

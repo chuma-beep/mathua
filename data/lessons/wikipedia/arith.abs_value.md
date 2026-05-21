@@ -54,7 +54,7 @@ Some additional useful properties are given below. These are either immediate co
   <dd>Identity of indiscernibles (equivalent to positive-definiteness)</dd>
   <dt>\(|a - b| \le |a - c| + |c - b|\)</dt>
   <dd>Triangle inequality (equivalent to subadditivity)</dd>
-  <dt>\(\left|\frac{a}{b}\right| = \frac{|a|}{|b|}\\) (if \(b \ne 0\))</dt>
+  <dt>\(\left|\frac{a}{b}\right| = \frac{|a|}{|b|}\) (if \(b \ne 0\))</dt>
   <dd>Preservation of division – equivalent to multiplicativity</dd>
   <dt>\(|a-b| \geq \bigl| \left|a\right| - \left|b\right| \bigr|\)</dt>
   <dd>Reverse triangle inequality – equivalent to subadditivity</dd>
@@ -63,7 +63,7 @@ Some additional useful properties are given below. These are either immediate co
 Two other useful properties concerning inequalities are:
 | \(|a| \le b \iff -b \le a \le b\) |
 | --- |
-| \(|a| \ge b \iff a \le -b\\) or \(a \ge b\) |
+| \(|a| \ge b \iff a \le -b\) or \(a \ge b\) |
 
 These relations may be used to solve inequalities involving absolute values. For example:
 

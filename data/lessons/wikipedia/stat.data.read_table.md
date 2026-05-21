@@ -57,33 +57,9 @@ In literature tables often present numerical values, cumulative statistics, cate
 As a communication tool, a table allows a form of generalization of information from an unlimited number of different social or scientific contexts. It provides a familiar way to convey information that might otherwise not be obvious or readily understood.
 
 For example, in the following diagram, two alternate representations of the same information are presented side by side. On the left is the NFPA 704 standard "fire diamond" with example values indicated and on the right is a simple table displaying the same values, along with additional information. Both representations convey essentially the same information, but the tabular representation is arguably more comprehensible to someone who is not familiar with the NFPA 704 standard. The tabular representation may not, however, be ideal for every circumstance (for example because of space limitations, or safety reasons).
-<table>
-  <caption>style="white-space:nowrap" |Risk levels of hazardous materials in this facility</caption>
-  <tr>
-    <th>Standard Representation</th>
-    <th>Tabular Representation</th>
-  </tr>
-  <tr>
-    <td>| {|</td>
-  </tr>
-  <tr>
-    <th>Health Risk</th>
-    <th>Flammability</th>
-    <th>Reactivity</th>
-    <th>Special</th>
-  </tr>
-  <tr>
-    <td>Level 3</td>
-    <td>Level 2</td>
-    <td>Level 1</td>
-  </tr>
-</table>
-
 | Health Risk | Flammability | Reactivity | Special |
 | --- | --- | --- | --- |
 | Level 3 | Level 2 | Level 1 |  |
-
-|}
 
 ## Information technology
 ### Software applications

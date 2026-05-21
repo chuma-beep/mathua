@@ -31,7 +31,7 @@ If the parabola is expressed in the standard form \\( f(y) = ay^2 + by + c \\), 
 
 Graphically, a generic \\(y = ax^2 + bx + c\\) parabola with its axis parallel to the y-axis looks like the following:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/parabola-5-1.png)
+![](/diagrams/algebrica/parabola-5-1.png)
 
   * When \\( b = 0 \\) and \\( c \neq 0 \\) the equation becomes \\(y = ax^2 + c\\). The parabola has its vertex at \\( V(0, c) \\), and its axis of symmetry is the y-axis.
 

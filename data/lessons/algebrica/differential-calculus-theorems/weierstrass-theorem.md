@@ -8,7 +8,7 @@ Let \\( f : [a,b] \to \mathbb{R} \\) be a continuous [function](<../functions/>)
 
 In other words, a [continuous function](<../continuous-functions/>) on a closed interval attains both its minimum and its maximum. This result is often referred to as the Extreme Value Theorem. The following graph illustrates the theorem: the function reaches a maximum and a minimum at two interior points of the interval \\( [a, b] \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/weierstrass-theorem-1.png)
+![](/diagrams/algebrica/weierstrass-theorem-1.png)
 
 It is helpful to relate the notation to the figure. The quantity \\( f(x_{\max}) \\) denotes the value of the function at the point marked Max in the graph, that is, the highest point reached on the interval. Likewise, \\( f(x_{\min}) \\) represents the value of the function at the point marked min, where the graph attains its lowest value.
 
@@ -28,7 +28,7 @@ A full proof lies beyond this page, but the main idea is straightforward. On a c
 
 Consider the function \\( f(x) = x \\) on the open interval \\( (0,1) \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/weierstrass-theorem-2.png)
+![](/diagrams/algebrica/weierstrass-theorem-2.png)
 
 The function is continuous, yet it has no maximum and no minimum on that interval. The infimum is \\( 0 \\) and the supremum is \\( 1 \\), but neither value is attained because the endpoints are not included.
 

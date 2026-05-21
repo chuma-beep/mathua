@@ -17,7 +17,7 @@ This allows statistical problems to be solved using a single universal reference
 
 **The standard Z table** lists, for each cell, the cumulative probability to the left of a given \\(Z\\) value. In other words, it shows the probability that a standard normal variable takes on a value less than or equal to a specified Z-score. These values correspond to the area under the standard normal curve from negative infinity up to the chosen point on the horizontal axis, represented by the value of \\( z \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-standard-1.png)
+![](/diagrams/algebrica/normal-distribution-standard-1.png)
 
 The complete Z table is extensive, as it contains values for a wide range of Z-scores. For brevity, only a portion of the table is shown below as an illustrative extract.
 
@@ -65,7 +65,7 @@ This means that approximately 56.36% of the observations in a standard normal di
 
 \\[P(Z < 0.16) = 0.5636 \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-standard-2-1.png)
+![](/diagrams/algebrica/normal-distribution-standard-2-1.png)
 
 Since the total area under the standard normal curve equals \\(1\\), and the distribution is symmetric with respect to its [mean](<../mean-or-expected-value-of-a-random-variable/>), we can immediately deduce that
 
@@ -108,7 +108,7 @@ z| .00| .01| .02| .03| .04| **.05**| .06| .07| .08| …
 
 From the intersection of the selected row and column, we obtain a probability value equal to \\( 0.1056 \\). The figure below illustrates where this probability is located under the standard normal curve, corresponding to the cumulative area to the left of \\( z = -1.25 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-standard-4.png)
+![](/diagrams/algebrica/normal-distribution-standard-4.png)
 
 From the standard normal table, we obtain
 

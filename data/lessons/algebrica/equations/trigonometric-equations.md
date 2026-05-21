@@ -19,7 +19,7 @@ Let’s start with the simplest cases. Consider, for example, equations involvin
 
 To solve this equation, we need to determine all angles \\( x \\) whose [sine](<../sine-and-cosine>) equals \\( m \\). Since the sine function is defined in the range \\( -1 \leq m \leq 1 \\), this constraint must be satisfied; otherwise, the equation has no real solutions and is considered impossible. On the [unit circle](<../unit-circle>), we can visualize this equation by drawing a horizontal line at \\( y = m \\) which intersects the circle at two points in the first and second quadrants, provided that \\( -1 \leq m \leq 1 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/trigonometric-equations-1.png)
+![](/diagrams/algebrica/trigonometric-equations-1.png)
 
 These intersection points correspond to two angles:
 
@@ -34,7 +34,7 @@ where \\( k \\) is any [integer](<../integers/>), accounting for the periodic na
 
 For example, we want to solve the equation \\(\cos x = 1/2\\) within the interval \\( [0, 2\pi] \\). Let’s plot a line at the value \\(1/2\\) on the graph of the [cosine function](<../cosine-function>).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/trigonometric-equations-2.png)
+![](/diagrams/algebrica/trigonometric-equations-2.png)
 
 From known [cosine](<../sine-and-cosine>) values, we recall that:
 
@@ -47,7 +47,7 @@ Since cosine is positive in the first and fourth quadrants, the two solutions wi
 
 Let’s now try to solve the equation \\( \tan x = 2 \\). Let’s plot a line at the value \\( 2 \\) on the graph of the [tangent function](<../tangent-function>).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/trigonometric-equations-3.png)
+![](/diagrams/algebrica/trigonometric-equations-3.png)
 
 To determine the solutions, we first identify the principal angle \\( x \\) such that:
 

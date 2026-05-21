@@ -11,7 +11,7 @@ If this limit exists for every \\( x \\) in an interval, then the derivative def
 
 When \\( h \to 0 \\), the point \\( B \\) approaches the point \\( A \\), and the [line](<../lines/>) \\( AB \\) becomes the tangent line to the curve at point \\( A \\). The slope of the tangent line at \\( A \\) is called the derivative of the function at point \\( c \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/derivatives-1.png)
+![](/diagrams/algebrica/derivatives-1.png)
 
 With reference to the tangent at point \\(A\\) of the function \\( y = mx + q \\), the derivative \\( f’(x) \\) represents the value of the slope coefficient \\( m \\).
 

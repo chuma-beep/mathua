@@ -16,7 +16,7 @@ converges or diverges if and only if the improper integral
 does the same, assuming that \\( f \\) is [continuous](<../continuous-functions/>) on \\( [1, +\infty). \\)
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/integral-test-series-1.png)
+![](/diagrams/algebrica/integral-test-series-1.png)
 
 The graph illustrates the connection between a series and an improper integral as stated by the Integral Test.
 

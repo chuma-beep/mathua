@@ -16,7 +16,7 @@ Given a [function](<../functions/>) \\( y = f(x) \\) defined on a closed and bou
 
 The following graph illustrates theorem. At a local maximum point \\( \mu \\) within the interval \\( I \\), the derivative of the function is equal to zero.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/fermat-1.png)
+![](/diagrams/algebrica/fermat-1.png)
 
 ###### In certain cases, the derivative of a function becomes zero at a point that is neither a maximum nor a minimum. Such points are referred to as stationary points without an extremum, including stationary [inflection points](<../maximum-minimum-and-inflection-points/>), where the derivative is zero but the function maintains its direction.
 
@@ -78,7 +78,7 @@ Evaluating the function confirms this classification: \\(f(0) = 2 \\) is a local
 
 The function \\( f(x) = x^3 \\) provides a clear example showing that a zero derivative does not necessarily imply the presence of a local extremum.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/fermat-2.png)
+![](/diagrams/algebrica/fermat-2.png)
 
 The derivative is:
 
@@ -94,7 +94,7 @@ The presence of a stationary point—namely, a point at which the derivative van
 
 which attains a global minimum at \\(x = 0\\) even though the derivative does not exist at that point.
 
-![The function | x | has an absolute minimum at the origin, but it is not differentiable there, so Fermat’s theorem does not apply.](https://algebrica.org/wp-content/uploads/resources/images/fermath-theorem-4.png)
+![The function | x | has an absolute minimum at the origin, but it is not differentiable there, so Fermat’s theorem does not apply.](/diagrams/algebrica/fermath-theorem-4.png)
 
 This example illustrates that extrema may occur not only where the derivative is zero, but also where differentiability fails or at boundary points of the domain. When dealing with closed intervals, a function may reach its extrema at the endpoints regardless of the behavior of the derivative in the interior.
 

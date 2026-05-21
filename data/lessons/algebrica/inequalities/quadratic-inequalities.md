@@ -59,7 +59,7 @@ When the inequality is of the form \\(ax^2+bx+c \leq 0\\) or \\(ax^2+bx+c < 0\\)
 
 From a geometric perspective, recalling that a second-degree polynomial represents a [parabola](<../parabola/>), we obtain the following intervals:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quadratic-inequalities-1-1.png)
+![](/diagrams/algebrica/quadratic-inequalities-1-1.png)
 
 ###### Unless otherwise specified, the assumption \\(a > 0\\) is maintained throughout this page. If \\(a < 0\\), the parabola opens downward, and the solution sets in the subsequent sections are reversed: expressions positive for \\(a > 0\\) become negative for \\(a < 0\\), and the converse holds.
 
@@ -77,7 +77,7 @@ When the inequality is of the form \\(ax^2+bx+c \leq 0\\) or \\(ax^2+bx+c < 0\\)
 
 From a geometric point of view, when \\(\Delta = 0\\), the curve always takes positive values (assuming the coefficient \\(a\\) is greater than zero). The only point where the curve touches the x-axis is at the double root, where the value of the expression is zero \\(x_1 = x_2\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quadratic-inequalities-2.png)
+![](/diagrams/algebrica/quadratic-inequalities-2.png)
 
 ## Solutions when \\(\Delta \lt 0\\)
 
@@ -88,7 +88,7 @@ Given \\( \Delta < 0 \\), the associated quadratic equation has [complex roots](
   * When the inequality is of the form \\(ax^2+bx+c \leq 0 \\) or \\(ax^2+bx+c \lt 0 \\) we have for both cases: \\(\not\exists \; x\\)
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quadratic-inequalities-3.png)
+![](/diagrams/algebrica/quadratic-inequalities-3.png)
 
 When the coefficient \\( a \\) is positive, the concavity of the parabola is upward, while when \\( a \\) is negative, the concavity is downward. In the examples, we assumed the expressions were rewritten in the form \\( ax^2 + bx + c > 0 \\) with \\( a \\) positive, resulting in a concave-up parabola.
 
@@ -162,7 +162,7 @@ In interval notation, the solution set is:
 
 Plotting the curve on the axes, we obtain:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/quadratic-inequalities-4-1.png)
+![](/diagrams/algebrica/quadratic-inequalities-4-1.png)
 
 In this way, we have solved the inequality using the sign table without resorting to solving the associated quadratic equation using the [quadratic formula](<../quadratic-formula>), which would have led to the same result.
 
@@ -174,7 +174,7 @@ The discriminant of the associated equation \\(3x^2 - 2x + 5 = 0\\) is computed 
 
 Because \\(\Delta < 0\\) and the leading coefficient \\(a = 3 > 0\\), the parabola opens upward and does not intersect the x-axis.
 
-![Quadratic inequalities.](https://algebrica.org/wp-content/uploads/resources/images/quadratic-inequalities-8.png)
+![Quadratic inequalities.](/diagrams/algebrica/quadratic-inequalities-8.png)
 
 As a result, the quadratic expression remains strictly positive for all real values of \\(x\\).
 

@@ -19,7 +19,7 @@ A sequence of the form \\( a_n = \frac{1}{n} \\) is a Cauchy sequence, where the
   * the distance between any two terms \\( a_n \\) and \\( a_m \\), for large \\( n \\) and \\( m \\), becomes smaller and smaller.
 
 
-![Convergent sequence.](https://algebrica.org/wp-content/uploads/resources/images/sequences-conv-1.png)
+![Convergent sequence.](/diagrams/algebrica/sequences-conv-1.png)
 
 As \\( n \\) increases, the terms become smaller and smaller, approaching zero. This is a classic example of a sequence that converges to 0.
 
@@ -36,7 +36,7 @@ This is the sum of the first \\( n \\) terms of a geometric progression with rat
 \\( \begin{align}\\\\[0.5em]\dfrac{1}{2^{n+1}}, \dfrac{1}{2^{n+2}}, \dots \end{align}\\)
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/cauchy-sequence-1.png)
+![](/diagrams/algebrica/cauchy-sequence-1.png)
 
 In the limit, this sequence converges to \\( 2 \\), reinforcing that it is both a Cauchy and convergent sequence.
 

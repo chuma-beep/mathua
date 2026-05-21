@@ -24,7 +24,7 @@ This limit demonstrates that \\( x^2 \\) grows asymptotically slower than \\( x 
 
 Let’s explore why this is the case. If we compare \\(x\\) and \\(x^2\\) as \\(x\\) approaches zero, we observe that both functions tend to zero, but at different rates. The graph clearly shows that, near zero, \\(x^2\\) is much smaller than \\(x\\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/little-o-1.png)
+![](/diagrams/algebrica/little-o-1.png)
 
 Here are a few examples:
 

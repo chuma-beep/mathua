@@ -17,7 +17,7 @@ For a student’s \\(t\\) random variable \\( T \\) with \\( k \\) degrees of fr
 
 This expression shows how the shape of the distribution depends on the parameter \\( k \\). Smaller values of \\( k \\) produce heavier tails, reflecting the additional uncertainty associated with estimating the population variance. As \\( k \to \infty \\), the density converges to the standard normal distribution \\(\mathcal{N}(x; 0, 1). \\)
 
-![](https://algebrica.org/wp-content/uploads/resources/images/student-t-distribution.png)
+![](/diagrams/algebrica/student-t-distribution.png)
 
 ##### The plot visually highlights how the \\(t\\) curves gradually tighten around the center as the degrees of freedom grow, illustrating the smooth transition from a heavier-tailed distribution to the familiar bell shape of the normal model.
 
@@ -51,7 +51,7 @@ The student’s \\(t\\) distribution is symmetric around zero, and this structur
 
 which states that the \\(t\\) value leaving an area of \\(1 - \alpha\\) in the right tail is simply the negative of the \\(t\\) value leaving an area of \\(\alpha\\) in that same tail. Equivalently, the [quantile](<../median/>) on the left that captures probability \\(\alpha\\) is positioned at the same height as its right-tail counterpart but reflected across the vertical axis.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/student-t-distribution-2.png)
+![](/diagrams/algebrica/student-t-distribution-2.png)
 
 Assuming that the area to the left of \\( t_{1-\alpha} \\) is roughly 12%, the area to the right of \\( t_{\alpha} \\) is approximately the same, about 12%. Taken together, the two tails account for about 24% of the total area under the curve.
 

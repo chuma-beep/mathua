@@ -14,14 +14,14 @@ Given two fixed points in the plane, \\( F_1 \\) and \\( F_2 \\), a hyperbola is
 
 \\[\left| PF_1 - PF_2 \right| = \text{constant} \\]
 
-![Standard chart of a hyperbola.](https://algebrica.org/wp-content/uploads/resources/images/hyperbola-1.png)
+![Standard chart of a hyperbola.](/diagrams/algebrica/hyperbola-1.png)
 
 \\(F_1\\) and \\(F_2\\) are the foci of the hyperbola. The midpoint of the segment \\( \overline{F_1F_2} \\) is called the center (which, in the figure, coincides with the origin of the Cartesian axes). The midpoint of the segment \\( \overline{F_1F_2} \\) is called the center.
 
 
 Only the x-axis (also called the focal or transverse axis) intersects the hyperbola at two real points: \\( A(a, 0) \\) and \\( A’(-a, 0) \\), known as the vertices. The y-axis does not intersect the hyperbola and is referred to as the non-transverse axis.
 
-![Asymptotes of a hyperbola.](https://algebrica.org/wp-content/uploads/resources/images/hyperbola-2.png)
+![Asymptotes of a hyperbola.](/diagrams/algebrica/hyperbola-2.png)
 
 The [asymptotes](<../asymptotes/>) of a hyperbola are straight lines that the curve approaches but never intersects. They represent the directions along which the branches of the hyperbola extend infinitely. In the case of a standard hyperbola centered at the origin, the asymptotes are given by the equations:
 
@@ -52,7 +52,7 @@ If in the canonical equation of a hyperbola we have \\( a = b \\), the hyperbola
 
 \\[\frac{x^2}{a^2} - \frac{y^2}{a^2} = 1 \quad \rightarrow \quad x^2 - y^2 = a^2 \\]
 
-![Rectangular hyperbola graph.](https://algebrica.org/wp-content/uploads/resources/images/hyperbola-4.png)
+![Rectangular hyperbola graph.](/diagrams/algebrica/hyperbola-4.png)
 
 ##### In the Cartesian plane, the bisectors of the quadrants are the two lines \\( y = x \\) and \\( y = -x \\), which symmetrically divide the space with respect to the axes.
 
@@ -63,7 +63,7 @@ In a hyperbola, the eccentricity is defined as the ratio between the focal dista
 \\[e = \frac{c}{a} = \frac{\sqrt {a^2 + b^2}}{a} \\]
 
 ![Eccentricity of a hyperbola.
-](https://algebrica.org/wp-content/uploads/resources/images/hyperbola-3.png)
+](/diagrams/algebrica/hyperbola-3.png)
 
 ##### Eccentricity describes how open a hyperbola is. When \\( e = 1 \\), the branches of the hyperbola are relatively narrow. As \\( e \\) increases, the foci move farther from the center, and the branches open wider. The eccentricity does not depend on the size of the hyperbola, but on the ratio between distances: it is a pure measure of shape.
 

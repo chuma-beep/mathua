@@ -6,12 +6,12 @@ The maximum and minimum of a function \\( f(x) \\) represent, respectively, the 
 
 Given a function \\( y = f(x) \\) with domain \\( D \\), a point \\( x_0 \in D \\) is a **global maximum** if \\( f(x_0) \geq f(x) \\) for every \\( x \in D \\). The value \\( f(x_0) = M \\) is the global maximum of the function.
 
-![Graph of a function f\(x\) showing a maximum point, where the curve reaches its highest value at a smooth peak.](https://algebrica.org/wp-content/uploads/resources/images/max-min-1.png)
+![Graph of a function f\(x\) showing a maximum point, where the curve reaches its highest value at a smooth peak.](/diagrams/algebrica/max-min-1.png)
 
 
 Given a function \\( y = f(x) \\) with domain \\( D \\), a point \\( x_0 \in D \\) is a **global minimum** if \\( f(x_0) \leq f(x) \\) for every \\( x \in D \\). The value \\( f(x_0) = m \\) is the global minimum of the function.
 
-![Graph of a function f\(x\) showing a minimum point, where the curve reaches its lowest value at a smooth valley.](https://algebrica.org/wp-content/uploads/resources/images/max-min-2.png)
+![Graph of a function f\(x\) showing a minimum point, where the curve reaches its lowest value at a smooth valley.](/diagrams/algebrica/max-min-2.png)
 
 If the global maximum and global minimum of a function exist, they are unique. By the [Weierstrass’s Theorem](<../weierstrass-theorem/>), if a function is [continuous](<../continuous-functions/>) on a closed and bounded interval \\([a, b]\\), then it attains both a global maximum and a global minimum on that interval.
 
@@ -21,7 +21,7 @@ In some cases, a function can display more than one peak or valley within a part
 
 Given a function \\( y = f(x) \\) defined on an interval \\([a, b]\\), the point \\( x_0 \in [a, b] \\) is a **local maximum** if there exists a neighborhood \\( I \\) of the point \\( x_0 \\) such that \\( f(x_0) \geq f(x) \\) for every \\( x \\) in the interval \\( I \\).
 
-![Graph of a function f\(x\) showing a local maximum point, where the curve reaches a temporary highest value compared to nearby points.](https://algebrica.org/wp-content/uploads/resources/images/max-min-3-1.png)
+![Graph of a function f\(x\) showing a local maximum point, where the curve reaches a temporary highest value compared to nearby points.](/diagrams/algebrica/max-min-3-1.png)
 
 In more formal terms, given a function \\( y = f(x) \\) that is defined and continuous in a neighborhood of the point \\( x_0 \\), and differentiable in the same neighborhood for every \\( x \neq x_0 \\), if for every \\( x \\) in the neighborhood the following conditions hold:
 
@@ -37,7 +37,7 @@ then, \\( x_0 \\) is a point of **local maximum** for the function \\( f(x) \\).
 
 Given a function \\( y = f(x) \\) defined on an interval \\([a, b]\\), the point \\( x_0 \in [a, b] \\) is a **local minimum** if there exists a neighborhood \\( I \\) of the point \\( x_0 \\) such that \\( f(x_0) \leq f(x) \\) for every \\( x \\) in the interval \\( I \\).
 
-![Graph of a function f\(x\) showing a local minimum point, where the curve reaches a temporary lowest value compared to nearby points.](https://algebrica.org/wp-content/uploads/resources/images/max-min-4.png)
+![Graph of a function f\(x\) showing a local minimum point, where the curve reaches a temporary lowest value compared to nearby points.](/diagrams/algebrica/max-min-4.png)
 
 If the following conditions hold:
 
@@ -59,14 +59,14 @@ We say that the function \\( f(x) \\) is **concave upward** at \\( x_0 \\) if th
 
 \\[f(x) > t(x) \quad \forall x \in I - \lbrace x_0 \rbrace \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/max-min-5.png)
+![](/diagrams/algebrica/max-min-5.png)
 
 
 Similarly, we say that the function \\( f(x) \\) is **concave downward** at \\( x_0 \\) if there exists a neighborhood \\( I \\) of \\( x_0 \\) such that, for every \\( x \in I \\) with \\( x \neq x_0 \\), the function \\( f(x) \\) takes values less than those of the line \\( y = t(x) \\).
 
 \\[f(x) < t(x) \quad \forall x \in I - \lbrace x_0 \rbrace \\]
 
-![](https://algebrica.org/wp-content/uploads/resources/images/maximum-minimum-6-1.png)
+![](/diagrams/algebrica/maximum-minimum-6-1.png)
 
 The concepts of concavity and convexity are discussed in detail and in their analytical formulation in the entry [Convexity and Concavity of Functions](<../convexity-and-concavity-of-functions/>)
 
@@ -80,11 +80,11 @@ Let us consider the case where a function \\( y = f(x) \\) is defined on an inte
 
 The point \\( x_0 \\) is defined as an inflection point if the function changes concavity at \\( x_0 \\).
 
-![An _inflection point_ is a point where the concavity of a function changes.](https://algebrica.org/wp-content/uploads/resources/images/maximum-minimum-7.png)
+![An _inflection point_ is a point where the concavity of a function changes.](/diagrams/algebrica/maximum-minimum-7.png)
 
 An inflection point is called horizontal if the tangent at the inflection point is parallel to the x-axis. When the tangent is parallel to the y-axis, the inflection point is called vertical. In all other cases, as in the case shown in the figure, it is called oblique.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/maximum-minimum-8.png)
+![](/diagrams/algebrica/maximum-minimum-8.png)
 
 \\( x_0 \\) is an **horizontal inflection point** for a function \\( f(x) \\) if \\( f’(x) = 0 \\) and the sign of \\( f’(x) \\) is the same\\(^1\\) for every \\( x \neq x_0 \\) in the neighborhood \\( I \\).
 

@@ -10,7 +10,7 @@ A function is a mathematical rule that connects two non-empty [subsets](<../sets
   * The variable \\( x \\) is called the independent variable, while \\( y \\) is the dependent variable.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/functions-5.png)
+![](/diagrams/algebrica/functions-5.png)
 
 > If such a rule holds, we say that the function is well-defined. Otherwise, the relation is not a function, since it either assigns no value or more than one value to an element of the domain.
 
@@ -30,7 +30,7 @@ An alternative definition states that a function \\(f : A \to B\\) is bijective 
 
 For greater clarity, let us illustrate the case in which we face a situation similar to the one shown in the previous figure, but where it is not possible to define a function. In formal terms, this occurs when there exist at least two distinct points \\( (x, y_1) \\) and \\( (x, y_2) \\) such that \\( y_1 \ne y_2 \\). In this case, the relation does not satisfy the definition of a function, since a single value of \\( x \\) is associated with more than one value of \\( y \\).
 
-![What is not a function.](https://algebrica.org/wp-content/uploads/resources/images/functions-4-1.png)
+![What is not a function.](/diagrams/algebrica/functions-4-1.png)
 
 In the image, a single element of the domain, denoted by \\( x_0 \\), corresponds to two distinct values in the codomain. This situation is not admissible according to the very definition of a function. Formally, a relation \\( R \subseteq A \times B \\) is a function if and only if:
 
@@ -51,7 +51,7 @@ A practical graphical criterion for deciding whether a curve in the plane repres
   * If some vertical line crosses the curve in two or more points, the curve does not represent a function, because that value of \\( x \\) would be associated with multiple outputs.
 
 
-![](https://algebrica.org/wp-content/uploads/resources/images/functions-10-1.png)
+![](/diagrams/algebrica/functions-10-1.png)
 
 The figure shows that the curve on the left (a [parabola](<../parabola/>)) is a function, since each \\( x\ ) corresponds to exactly one \\( y \\), whereas the curve on the right is not, since for \\( x_2 \\) there are multiple possible values of \\( y \\).
 

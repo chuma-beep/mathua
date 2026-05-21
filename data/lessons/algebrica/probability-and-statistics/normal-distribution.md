@@ -8,7 +8,7 @@ The **normal distribution** , also known as the Gaussian distribution, is one of
 
 As previously introduced, the normal distribution has a distinctive bell-shaped form and follows a set of well-defined mathematical properties that make it unique among continuous probability distributions.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-1.png)
+![](/diagrams/algebrica/normal-distribution-1.png)
 
   * The total area under the curve equals \\(1\\). This means that the integral of its probability density function over the entire real line, from \\( -\infty \\) to \\( +\infty \\), is equal to \\(1\\).
   * The curve is symmetric around the mean \\( \mu \\). In other words, it looks the same on both sides of the mean, with half of the total probability lying to the left and the other half to the right.
@@ -49,7 +49,7 @@ As discussed above, the integral of the normal density function over the entire 
 
 From the integral it follows that, if we want to compute the area under the curve between two points \\( x_0 \\) and \\( x_1 \\), we must evaluate the [definite integral](<../definite-integrals/>) of the normal density function within that [interval](<../intervals/>).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-2.png)
+![](/diagrams/algebrica/normal-distribution-2.png)
 
 It follows intuitively that the shaded area under the curve represents the probability that the random variable \\( X \\) assumes a value within the interval \\([x_0, x_1]\\). In other words, the integral of the normal density function over this range quantifies the likelihood of observing \\( X \\) between those two limits. Formally, the probability that the random variable \\( X \\) takes a value between \\( x_0 \\) and \\( x_1 \\) is given by:
 
@@ -85,7 +85,7 @@ This formulation highlights how the process of standardization provides a direct
 In a normal distribution, probabilities are symmetrically arranged around the mean.  
 There exists a fundamental relationship between these probabilities and their distance from the mean, known as the 68–95–99.7 rule or three-sigma rule, which describes how most of the probability mass is concentrated near the center of the distribution.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/normal-distribution-3.png)
+![](/diagrams/algebrica/normal-distribution-3.png)
 
   * Approximately 68% of all values fall within one standard deviation of the mean, with about 34.1% on each side.
   * Expanding the range to two standard deviations includes roughly 95% of the data

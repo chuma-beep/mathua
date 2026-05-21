@@ -17,7 +17,7 @@ Then, there exists at least one point \\(c \in (a, b)\\) such that \\(f’ \left
 
 From a geometric point of view, Rolle’s theorem states that there always exists at least one point \\(c\\) where the tangent to the graph is parallel to the line \\(AB\\) passing through the points \\(A\\) and \\(B\\), and thus parallel to the \\(x\\)-axis.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/rolle-theorem-1-1.png)
+![](/diagrams/algebrica/rolle-theorem-1-1.png)
 
 ##### Rolle’s Theorem helps illustrate the idea that a function reaching the same value at two points must have a flat tangent somewhere in between. This concept underlies many real-world applications, such as finding the peak of a parabolic trajectory.
 

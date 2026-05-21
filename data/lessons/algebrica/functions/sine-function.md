@@ -4,7 +4,7 @@
 
 The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding [sine](<../sine-and-cosine>) value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between \\(-1\\) and \\(1\\). The function \\( f(x) = \cos x \\) has all real numbers in its [domain](<../determining-the-domain-of-a-function/>), but its range is \\( -1 \leq \cos(x) \leq 1 \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sine-cosine-3-1.png)
+![](/diagrams/algebrica/sine-cosine-3-1.png)
 
 ##### Together with the [cosine function](<../cosine-function>), it represents one of the fundamental models of periodic waves, and is widely used to describe cyclic phenomena in physics, engineering, and mathematics. For example, in simple [harmonic motion](<../simple-harmonic-motion/>) in physics, the sine function typically appears in the equations for both displacement and [velocity](<../velocity>), describing the oscillatory behavior of systems like springs and pendulums.
 

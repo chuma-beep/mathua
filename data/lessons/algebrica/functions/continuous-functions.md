@@ -8,7 +8,7 @@ The concept of continuity of a [function](<../functions>) is used to determine w
 
 In other words, this means that the limit of the function as \\( x \\) approaches \\( x_0 \\) exists and is finite, and that this limit is equal to the value of the function at \\( x_0 \\). For example, the function \\( f(x) = \sin(x) \\) is continuous on all of \\( \mathbb{R} \\). At every point \\( x_0 \in \mathbb{R} \\), the limit of \\( \sin(x) \\) as \\( x \to x_0 \\) exists, is finite, and satisfies \\( \lim_{x \to x_0} \sin(x) = \sin(x_0) \\).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/sine-graph.png)
+![](/diagrams/algebrica/sine-graph.png)
 
 In fact, consider \\( x_0 = \frac{\pi}{2} \\) as a specific example. We have:
 
@@ -41,7 +41,7 @@ Next, we evaluate the function directly at the point:
 
 Since the function is a first-degree [polynomial](<../polynomials>), its graph is a straight [line](<../lines>).
 
-![](https://algebrica.org/wp-content/uploads/resources/images/continuous-functions.png)
+![](/diagrams/algebrica/continuous-functions.png)
 
 The limit exists, is finite, and coincides with the value of the function at that point. Therefore, we can conclude that
 
@@ -63,7 +63,7 @@ Just as with continuity at a point, continuity over a closed interval can be exp
 
 For example, the function \\( f(x) = \sqrt{x} \\) defined on the interval \\([0, 4]\\) is continuous at every interior point, as the square root function is continuous on \\( (0, +\infty) \\).
 
-![Example of continuous function.](https://algebrica.org/wp-content/uploads/resources/images/continuity-2.png)
+![Example of continuous function.](/diagrams/algebrica/continuity-2.png)
 
 At the left and right endpoints, the one-sided continuity conditions are respectively satisfied: \\[\begin{align} \lim_{x \to 0^+} \sqrt{x} &= 0 = f(0) \\\\[6pt] \lim_{x \to 4^-} \sqrt{x} &= 2 = f(4) \end{align} \\]
 

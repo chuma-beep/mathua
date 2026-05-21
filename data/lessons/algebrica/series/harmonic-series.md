@@ -12,7 +12,7 @@ where each term is the reciprocal of a [natural number](<../natural-numbers>). D
 
 At first glance, one might think that as \\( n \to \infty \\), the terms of the harmonic series tend to zero and therefore the series itself might converge. However, this is a logical error: although the terms \\( \frac{1}{n} \\) do approach zero, they do not do so fast enough for the series to converge.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/harmonic-series-1-2.png)
+![](/diagrams/algebrica/harmonic-series-1-2.png)
 
 ##### Here is the graph of the partial sums of the harmonic series up to \\(n = 100.\\) As can be seen, the curve rises slowly yet unceasingly, confirming that the series is divergent.
 

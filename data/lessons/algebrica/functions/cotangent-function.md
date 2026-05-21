@@ -4,7 +4,7 @@
 
 The cotangent function \\( f(x) = \cot(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding [cotangent](<../tangent-and-cotangent>) value. Its graph is a periodic curve with a period of \\( \pi \\) and features vertical [asymptotes](<../asymptotes>) where the sine of \\( x \\) equals zero, specifically at \\( x = k\pi \\) for \\( k \in \mathbb{Z} \\). The function \\( f(x) = \cot(x) \\) has a [domain](<../determining-the-domain-of-a-function/>) of all real numbers except these points, and its range is all real numbers.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/cotangent-chart-1.png)
+![](/diagrams/algebrica/cotangent-chart-1.png)
 
   * Domain: \\( { x \in \mathbb{R} : x \neq k\pi \text{ for all } k \in \mathbb{Z} } \\)
   * Range: \\( y \in \mathbb{R} \\)

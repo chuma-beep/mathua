@@ -8,7 +8,7 @@ The [absolute value](<../absolute-value>) of a number, is defined as follows:
 
 The absolute value function assigns to each real number its distance from zero on the number line. This means that negative numbers are mapped to their positive counterparts, while positive numbers remain unchanged, since distance is always non-negative.
 
-![Geometrically, the absolute value of x, written |x|, represents the distance between x and 0 on the number line.](https://algebrica.org/wp-content/uploads/resources/images/absolute-value-1.png)
+![Geometrically, the absolute value of x, written |x|, represents the distance between x and 0 on the number line.](/diagrams/algebrica/absolute-value-1.png)
 
 More generally, the absolute value expression \\(|x - a|\\) can be interpreted as the distance between the point \\(x\\) and the point \\(a\\) on the number line. We have:
 
@@ -24,7 +24,7 @@ The absolute value function is:
 
 The graph of \\(y= |x|\\) is:
 
-![The graph of the absolute value function is symmetric with respect to the y-axis. This symmetry implies that the function is even.](https://algebrica.org/wp-content/uploads/resources/images/absolute-value-6.png)
+![The graph of the absolute value function is symmetric with respect to the y-axis. This symmetry implies that the function is even.](/diagrams/algebrica/absolute-value-6.png)
 
 
 The graph of the absolute value function \\( |x| \\) is symmetric with respect to the y-axis. This symmetry implies that the function is [even](<../even-and-odd-functions/>), meaning it satisfies the identity:
@@ -51,7 +51,7 @@ Let us consider the [parabola](<../parabola>) defined by the equation
 
 This graph includes a portion of the curve that lies below the x-axis, specifically in the interval where the function takes negative values.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/absolute-value-3.png)
+![](/diagrams/algebrica/absolute-value-3.png)
 
 To find this interval, we solve:
 
@@ -62,7 +62,7 @@ So, the function \\( y = x^2 - 1 \\) is negative on the open interval \\( (-1, 1
 
 To graph the function \\( f(x) = |x^2 - 1| \\), we start from the graph of \\( y = x^2 - 1 \\). We leave unchanged the portions of the graph that lie on or above the x-axis, and we reflect across the x-axis all portions that were originally below it. We obtain:
 
-![](https://algebrica.org/wp-content/uploads/resources/images/absolute-value-4.png)
+![](/diagrams/algebrica/absolute-value-4.png)
 
 This transformation ensures that all function values become non-negative, as required by the absolute value.
 

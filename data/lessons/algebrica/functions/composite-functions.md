@@ -8,7 +8,7 @@ When we talk about composite functions, we refer to the process of applying one 
 
 This means that we first apply \\( f \\) to the input \\( x \\), and then apply \\( g \\) to the result.
 
-![](https://algebrica.org/wp-content/uploads/resources/images/composite-functions-1-1.png)
+![](/diagrams/algebrica/composite-functions-1-1.png)
 
 ##### This diagram illustrates the concept of a composite function: the input \\( x \\) from set \\( A \\) is first mapped to \\( f(x) \\) in set \\( B \\), and then \\( f(x) \\) is mapped to \\( g(f(x)) \\) in set \\( C \\), resulting in the composition \\( g \circ f \\).
 
