@@ -66,12 +66,12 @@ Note that the potential solution *α* = 147.61° is excluded because that would 
 If the lengths of two sides of the triangle *a* and *b* are equal to *x*, the third side has length *c*, and the angles opposite the sides of lengths *a*, *b*, and *c* are *α*, *β*, and *γ* respectively then
 
 \[
-\begin{align}
+\begin{aligned}
 & \alpha = \beta = \frac{180^\circ-\gamma}{2}= 90^\circ-\frac{\gamma}{2} \\[6pt]
 & \sin \alpha = \sin \beta = \sin \left(90^\circ-\frac{\gamma}{2}\right) = \cos \left(\frac{\gamma}{2}\right) \\[6pt]
 & \frac{c}{\sin \gamma}=\frac{a}{\sin \alpha}=\frac{x}{\cos \left(\frac{\gamma}{2}\right)} \\[6pt]
 & \frac{c \cos \left(\frac{\gamma}{2}\right)}{\sin \gamma} = x
-\end{align}
+\end{aligned}
 \]
 
 ## Relation to the circumcircle

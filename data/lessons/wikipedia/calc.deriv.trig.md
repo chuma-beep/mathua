@@ -313,11 +313,11 @@ Substituting \(x=\cot y\),
 \(\frac{dy}{dx}=-\frac{1}{1+x^2}\)
 Alternatively, as the derivative of \(\arctan x\) is derived as shown above, then using the identity \(\arctan x+\arccot x=\dfrac{\pi}{2}\) follows immediately that
 \[
-\begin{align}
+\begin{aligned}
 \dfrac{d}{dx}\arccot x
 &=\dfrac{d}{dx}\left(\dfrac{\pi}{2}-\arctan x\right)\\
 &=-\dfrac{1}{1+x^2}
-\end{align}
+\end{aligned}
 \]
 
 ### Differentiating the inverse secant function

@@ -81,14 +81,14 @@ The study of rings originated from the theory of polynomial rings and the theory
 
 ### Hilbert
 The term "Zahlring" (number ring) was coined by David Hilbert in 1892 and published in 1897. According to Harvey Cohn, Hilbert used the term for a ring that had the property of "circling directly back" to an element of itself (in the sense of an equivalence). Specifically, in a ring of algebraic integers, all high powers of an algebraic integer can be written as an integral combination of a fixed set of lower powers, and thus the powers "cycle back". For instance, if *a* then:
-\(\begin{align}
+\(\begin{aligned}
 a^3 &= 4a-1, \\
 a^4 &= 4a^2-a, \\
 a^5 &= -a^2+16a-4, \\
 a^6 &= 16a^2-8a+1, \\
 a^7 &= -8a^2+65a-16, \\
 \vdots \ & \qquad \vdots
-\end{align}\)
+\end{aligned}\)
 and so on; in general, *a* is going to be an integral linear combination of 1, *a*, and *a*.
 
 ### Fraenkel and Noether
@@ -175,11 +175,11 @@ For commutative rings, the ideals generalize the classical notion of divisibilit
 ### Homomorphism
 
 A **homomorphism** from a ring (*R*, +, **⋅**) to a ring (*S*, ‡, ∗) is a function from to  that preserves the ring operations; namely, such that, for all *a*, *b* in the following identities hold:
-\(\begin{align}
+\(\begin{aligned}
 & f(a+b) = f(a) \ddagger f(b) \\
 & f(a\cdot b) = f(a)*f(b) \\
 & f(1_R) = 1_S
-\end{align}\)
+\end{aligned}\)
 
 If one is working with , then the third condition is dropped.
 
@@ -196,10 +196,10 @@ Given a ring homomorphism *f* : *R* → *S*, the set of all elements mapped to 0
 ### Quotient ring
 
 The notion of quotient ring is analogous to the notion of a quotient group. Given a ring (*R*, +, **⋅**) and a two-sided ideal of (*R*, +, **⋅**), view as subgroup of (*R*, +); then the **quotient ring** *R* / *I* is the set of cosets of together with the operations
-\(\begin{align}
+\(\begin{aligned}
 & (a+I)+(b+I) = (a+b)+I, \\
 & (a+I)(b+I) = (ab)+I.
-\end{align}\)
+\end{aligned}\)
 for all *a*, *b* in. The ring *R* / *I* is also called a **factor ring**.
 
 As with a quotient group, there is a canonical homomorphism *p* : *R* → *R* / *I*, given by *x* ↦ *x* + *I*. It is surjective and satisfies the following universal property:
@@ -208,12 +208,12 @@ For any ring homomorphism *f* : *R* → *S*, invoking the universal property wit
 
 The concept of a *module over a ring* generalizes the concept of a vector space (over a field) by generalizing from multiplication of vectors with elements of a field (scalar multiplication) to multiplication with elements of a ring. More precisely, given a ring , an -module is an abelian group equipped with an operation *R* × *M* → *M* (associating an element of to every pair of an element of and an element of ) that satisfies certain axioms. This operation is commonly denoted by juxtaposition and called multiplication. The axioms of modules are the following: for all *a*, *b* in and all *x*, *y* in ,
  is an abelian group under addition.
-\(\begin{align}
+\(\begin{aligned}
 & a(x+y) = ax+ay \\
 & (a+b)x = ax+bx \\
 & 1x = x \\
 & (ab)x = a(bx)
-\end{align}\)
+\end{aligned}\)
 When the ring is noncommutative these axioms define *left modules*; *right modules* are defined similarly by writing instead of. This is not only a change of notation, as the last axiom of right modules (that is *x*(*ab*) = (*xa*)*b*) becomes (*ab*)*x* = *b*(*ax*), if left multiplication (by ring elements) is used for a right module.
 
 Basic examples of modules are ideals, including the ring itself.
@@ -228,10 +228,10 @@ Any ring homomorphism induces a structure of a module: if *f* : *R* → *S* is a
 ### Direct product
 
 Let and be rings. Then the product *R* × *S* can be equipped with the following natural ring structure:
-\(\begin{align}
+\(\begin{aligned}
 & (r_1,s_1) + (r_2,s_2) = (r_1+r_2,s_1+s_2) \\
 & (r_1,s_1) \cdot (r_2,s_2)=(r_1\cdot r_2,s_1\cdot s_2)
-\end{align}\)
+\end{aligned}\)
 for all *r*in and *s*in. The ring *R* × *S* with the above operations of addition and multiplication and the multiplicative identity (1, 1) is called the **direct product** of with. The same construction also works for an arbitrary family of rings: if are rings indexed by a set , then \(\prod_{i \in I} R_i\) is a ring with componentwise addition and multiplication.
 
 Let be a commutative ring and \(\mathfrak{a}_1, \cdots, \mathfrak{a}_n\) be ideals such that \(\mathfrak{a}_i + \mathfrak{a}_j = (1)\) whenever *i* ≠ *j*. Then the Chinese remainder theorem says there is a canonical ring isomorphism:

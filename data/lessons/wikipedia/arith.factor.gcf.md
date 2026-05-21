@@ -65,10 +65,10 @@ In practice, this method is only feasible for small numbers, as computing prime 
 The method introduced by Euclid for computing greatest common divisors is based on the fact that, given two positive integers and such that *a* > *b*, the common divisors of and are the same as the common divisors of *a* – *b* and. So, Euclid's method for computing the greatest common divisor of two positive integers consists of replacing the larger number with the difference of the numbers, and repeating this until the two numbers are equal: that is their greatest common divisor.
 
 For example, to compute gcd(48,18), one proceeds as follows:
-\(\begin{align}\gcd(48,18)\quad&\to\quad \gcd(48-18, 18)= \gcd(30,18)\\
+\(\begin{aligned}\gcd(48,18)\quad&\to\quad \gcd(48-18, 18)= \gcd(30,18)\\
 &\to \quad \gcd(30-18, 18)= \gcd(12,18)\\
 &\to \quad \gcd(12,18-12)= \gcd(12,6)\\
-&\to \quad \gcd(12-6,6)= \gcd(6,6).\end{align}\)
+&\to \quad \gcd(12-6,6)= \gcd(6,6).\end{aligned}\)
 So gcd6.
 
 This method can be very slow if one number is much larger than the other. So, the variant that follows is generally preferred.
@@ -78,9 +78,9 @@ This method can be very slow if one number is much larger than the other. So, th
 A more efficient method is the *Euclidean algorithm*, a variant in which the difference of the two numbers and is replaced by the *remainder* of the Euclidean division (also called *division with remainder*) of by. Denoting this remainder as *a* mod *b*, the algorithm replaces (*a*, *b*) with (*b*, *a* mod *b*) repeatedly until the pair is (*d*, 0), where is the greatest common divisor.
 
 For example, to compute gcd(48,18), the computation is as follows:
-\(\begin{align}\gcd(48,18)\quad&\to\quad \gcd(18, 48\bmod 18)= \gcd(18, 12)\\
+\(\begin{aligned}\gcd(48,18)\quad&\to\quad \gcd(18, 48\bmod 18)= \gcd(18, 12)\\
 &\to \quad \gcd(12, 18\bmod 12)= \gcd(12,6)\\
-&\to \quad \gcd(6,12\bmod 6)= \gcd(6,0).\end{align}\)
+&\to \quad \gcd(6,12\bmod 6)= \gcd(6,0).\end{aligned}\)
 This again gives gcd6.
 
 ### Binary GCD algorithm

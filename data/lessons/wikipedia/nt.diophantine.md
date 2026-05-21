@@ -33,11 +33,11 @@ The simplest linear Diophantine equation takes the form
 \(ax+by=c,\)
 where , and are given integers. The solutions are described by the following theorem:
 *This Diophantine equation has a solution* (where and are integers) *if and only if* *is a multiple of the greatest common divisor of* *and*. *Moreover, if* (*x, y*) *is a solution, then the other solutions have the form* (*x* + *kv, y* − *ku*), *where* *is an arbitrary integer, and* *and* *are the quotients of* *and* *(respectively) by the greatest common divisor of* *and*. **Proof:** If is this greatest common divisor, Bézout's identity asserts the existence of integers and such that *ae* + *bf* = *d*. If is a multiple of , then *c* = *dh* for some integer , and (*eh, fh*) is a solution. On the other hand, for every pair of integers and , the greatest common divisor of and divides *ax* + *by*. Thus, if the equation has a solution, then must be a multiple of. If *a* = *ud* and *b* , then for every solution (*x, y*), we have
-\(\begin{align}
+\(\begin{aligned}
 a(x+kv) + b(y-ku) &= ax+by+k(av-bu) \\
 &= ax+by+k(udv-vdu) \\
 &= ax+by,
-\end{align}\)
+\end{aligned}\)
 showing that (*x* + *kv, y* − *ku*) is another solution. Finally, given two solutions such that
 \(ax_1 + by_1 = ax_2 + by_2 = c,\)
 one deduces that \(u(x_2 - x_1) + v(y_2 - y_1) = 0.\)
@@ -49,11 +49,11 @@ which completes the proof.
 
 ### Chinese remainder theorem
 The Chinese remainder theorem describes an important class of linear Diophantine systems of equations: let \(n_1, \dots, n_k\) be pairwise coprime integers greater than one, \(a_1, \dots, a_k\) be arbitrary integers, and be the product \(n_1 \cdots n_k.\) The Chinese remainder theorem asserts that the following linear Diophantine system has exactly one solution \((x, x_1, \dots, x_k)\) such that 0 ≤ *x* < *N*, and that the other solutions are obtained by adding to a multiple of :
-\(\begin{align}
+\(\begin{aligned}
 x &= a_1 + n_1\,x_1\\
 &\;\;\vdots\\
 x &= a_k + n_k\,x_k
-\end{align}\)
+\end{aligned}\)
 
 ### System of linear Diophantine equations
 More generally, every system of linear Diophantine equations may be solved by computing the Smith normal form of its matrix, in a way that is similar to the use of the reduced row echelon form to solve a system of linear equations over a field. Using matrix notation every system of linear Diophantine equations may be written
@@ -65,10 +65,10 @@ The computation of the Smith normal form of provides two unimodular matrices (th
 is such that is not zero for not greater than some integer , and all the other entries are zero. The system to be solved may thus be rewritten as
 \(B (V^{-1}X) = UC.\)
 Calling the entries of *V* and those of *D* = *UC*, this leads to the system
-\(\begin{align}
+\(\begin{aligned}
 & b_{i,i}y_i = d_i, \quad 1 \leq i \leq k \\
 & 0y_i = d_i, \quad k < i \leq n.
-\end{align}\)
+\end{aligned}\)
 
 This system is equivalent to the given one in the following sense: A column matrix of integers is a solution of the given system if and only if *x* = *Vy* for some column matrix of integers such that *By* = *D*.
 
@@ -137,11 +137,11 @@ does not change the rational points, and transforms into a homogeneous polynomia
 If the polynomial is a product of linear polynomials (possibly with non-rational coefficients), then it defines two hyperplanes. The intersection of these hyperplanes is a rational flat, and contains rational singular points. This case is thus a special instance of the preceding case.
 
 In the general case, consider the parametric equation of a line passing through :
-\(\begin{align}
+\(\begin{aligned}
 x_2 &= r_2 + t_2(x_1-r_1)\\
 &\;\;\vdots\\
 x_{n-1} &= r_{n-1} + t_{n-1}(x_1-r_1).
-\end{align}\)
+\end{aligned}\)
 Substituting this in , one gets a polynomial of degree two in *x*, that is zero for *x*. It is thus divisible by *x*. The quotient is linear in *x*, and may be solved for expressing *x* as a quotient of two polynomials of degree at most two in \(t_2, \ldots, t_{n-1},\) with integer coefficients:
 \(x_1=\frac{f_1(t_2, \ldots, t_{n-1})}{f_n(t_2, \ldots, t_{n-1})}.\)
 Substituting this in the expressions for \(x_2, \ldots, x_{n-1},\) one gets, for *i* = 1, …, *n* − 1,
@@ -151,11 +151,11 @@ where \(f_1, \ldots, f_n\) are polynomials of degree at most two with integer co
 Then, one can return to the homogeneous case. Let, for *i* = 1, …, *n*,
 \(F_i(t_1, \ldots, t_{n-1})=t_1^2 f_i\left(\frac{t_2}{t_1}, \ldots, \frac{t_{n-1{t_1} \right),\)
 be the homogenization of \(f_i.\) These quadratic polynomials with integer coefficients form a parameterization of the projective hypersurface defined by :
-\(\begin{align}
+\(\begin{aligned}
 x_1&= F_1(t_1, \ldots, t_{n-1})\\
 &\;\;\vdots\\
 x_n&= F_n(t_1, \ldots, t_{n-1}).
-\end{align}\)
+\end{aligned}\)
 
 A point of the projective hypersurface defined by is rational if and only if it may be obtained from rational values of \(t_1, \ldots, t_{n-1}.\) As \(F_1, \ldots,F_n\) are homogeneous polynomials, the point is not changed if all are multiplied by the same rational number. Thus, one may suppose that \(t_1, \ldots, t_{n-1}\) are coprime integers. It follows that the integer solutions of the Diophantine equation are exactly the sequences \((x_1, \ldots, x_n)\) where, for *i* = 1,... , *n*,
 \(x_i= k\,\frac{F_i(t_1, \ldots, t_{n-1})}{d},\)
@@ -181,11 +181,11 @@ which is easy to solve in :
 It follows
 \(y=t(x+1) = \frac{2t}{1+t^2}.\)
 Homogenizing as described above one gets all solutions as
-\(\begin{align}
+\(\begin{aligned}
 x&=k\,\frac{s^2-t^2}{d}\\
 y&=k\,\frac{2st}{d}\\
 z&=k\,\frac{s^2+t^2}{d},
-\end{align}\)
+\end{aligned}\)
 where is any integer, and are coprime integers, and is the greatest common divisor of the three numerators. In fact, *d* = 2 if and are both odd, and *d* = 1 if one is odd and the other is even.
 
 The *primitive triples* are the solutions where *k* = 1 and *s* > *t* > 0.

@@ -102,10 +102,10 @@ which in matrix format is
 
 Assume *a*\(_{1}\)*b*\(_{2}\) − *b*\(_{1}\)*a*\(_{2}\) is nonzero. Then, with the help of determinants, and can be found with Cramer's rule as
 
-\(\begin{align}
+\(\begin{aligned}
 x &= \frac{\begin{vmatrix} {\color{red}{c_1& b_1 \\ {\color{red}{c_2& b_2 \end{vmatrix{\begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix= { {\color{red}c_1}b_2 - b_1{\color{red}c_2} \over a_1b_2 - b_1a_2}, \quad
 y = \frac{\begin{vmatrix} a_1 & {\color{red}{c_1\\ a_2 & {\color{red}{c_2\end{vmatrix{\begin{vmatrix} a_1 & b_1 \\ a_2 & b_2 \end{vmatrix = { a_1{\color{red}c_2} - {\color{red}c_1}a_2 \over a_1b_2 - b_1a_2}
-\end{align}.\)
+\end{aligned}.\)
 
 The rules for 3 × 3 matrices are similar. Given
 
@@ -141,10 +141,10 @@ Let \((x^1,x^2,\ldots,x^n)\mapsto (\bar x^1,\ldots,\bar x^n)\) be a coordinate t
 Writing this transformation law in terms of matrices yields \(\bar g=\left(\frac{\partial x}{\partial\bar{x\right)^{\text{Tg\left(\frac{\partial x}{\partial\bar{x\right)}\), which implies \(\det\bar g=\left(\det\left(\frac{\partial x}{\partial\bar{x\right)\right)^{2}\det g\).
 
 Now one computes
-\(\begin{align}
+\(\begin{aligned}
 \operatorname{div} A &=\frac{1}{\sqrt{\det g\frac{\partial}{\partial x^{i\left( A^{i}\sqrt{\det g}\right)\\
 	&=\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{1}{\sqrt{\det\bar g\frac{\partial \bar x^k}{\partial x^{i\frac{\partial}{\partial\bar x^{k\left(\frac{\partial x^{i{\partial \bar x^{\ell\bar{A}^{\ell}\det\!\left(\frac{\partial x}{\partial\bar{x\right)^{\!\!-1}\!\sqrt{\det\bar g}\right).
-\end{align}\)
+\end{aligned}\)
 In order to show that this equals
 \(\frac{1}{\sqrt{\det\bar g\frac{\partial}{\partial\bar x^{k\left(\bar A^{k}\sqrt{\det\bar{g\right)}\),
 it is necessary and sufficient to show that
@@ -153,11 +153,11 @@ which is equivalent to
 \(\frac{\partial}{\partial \bar x^{\ell\det\left(\frac{\partial x}{\partial\bar{x\right)
 =\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{\partial\bar x^{k{\partial x^{i\frac{\partial^{2}x^{i{\partial\bar x^{k}\partial\bar x^{\ell.\)
 Carrying out the differentiation on the left-hand side, we get:
-\(\begin{align}
+\(\begin{aligned}
 	\frac{\partial}{\partial\bar x^{\ell\det\left(\frac{\partial x}{\partial\bar{x\right)
 	&=(-1)^{i+j}\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det M(i|j)\\
 	&=\frac{\partial^{2}x^{i{\partial\bar x^{\ell}\partial\bar x^{j\det\left(\frac{\partial x}{\partial\bar{x\right)\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)=(\ast),
-	\end{align}\)
+	\end{aligned}\)
 where \(M(i|j)\) denotes the matrix obtained from \(\left(\frac{\partial x}{\partial\bar{x\right)\) by deleting the \(i\)th row and \(j}\)th column.
 But Cramer's Rule says that
 \(\frac{(-1)^{i+j}\det\left(\frac{\partial x}{\partial\bar{x\right)\det M(i|j)\)

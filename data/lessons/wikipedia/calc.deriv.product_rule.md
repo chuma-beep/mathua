@@ -17,10 +17,10 @@ The rule may be extended or generalized to products of three or more functions, 
 Discovery of this rule is credited to Gottfried Leibniz, who demonstrated it using "infinitesimals" (a precursor to the modern differential). (However, J. M. Child, a translator of Leibniz's papers, argues that it is due to Isaac Barrow.) Here is Leibniz's argument: Let *u* and *v* be functions. Then *d(uv)* is the same thing as the difference between two successive *uv*'s; let one of these be *uv*, and the other *u+du* times *v+dv*; then:
 
 \[
-\begin{align}
+\begin{aligned}
 d(u\cdot v) & {} = (u + du)\cdot (v + dv) - u\cdot v \\
 & {} = u\cdot dv + v\cdot du + du\cdot dv.
-\end{align}
+\end{aligned}
 \]
 
 Since the term *du*·*dv* is "negligible" (compared to *du* and *dv*), Leibniz concluded that
@@ -54,7 +54,7 @@ Both Leibniz and Newton gave proofs that are not rigorous by modern standards. L
 Let *h*(*x*) and suppose that and are each differentiable at. We want to prove that is differentiable at and that its derivative, *, is given by **(*x''). To do this, \(f(x)g(x+\Delta x)-f(x)g(x+\Delta x)\) (which is zero, and thus does not change the value) is added to the numerator to permit its factoring, and then properties of limits are used.
 
 \[
-\begin{align}
+\begin{aligned}
  h'(x) &= \lim_{\Delta x\to 0} \frac{h(x+\Delta x)-h(x)}{\Delta x} \\[5pt]
  &= \lim_{\Delta x\to 0} \frac{f(x+\Delta x)g(x+\Delta x)-f(x)g(x)}{\Delta x} \\[5pt]
  &= \lim_{\Delta x\to 0} \frac{f(x+\Delta x)g(x+\Delta x)-f(x)g(x+\Delta x)+f(x)g(x+\Delta x)-f(x)g(x)}{\Delta x} \\[5pt]
@@ -62,7 +62,7 @@ Let *h*(*x*) and suppose that and are each differentiable at. We want to prove t
  &= \lim_{\Delta x\to 0} \frac{f(x+\Delta x)-f(x)}{\Delta x} \cdot \lim_{\Delta x\to 0} g(x+\Delta x)
  + \lim_{\Delta x\to 0} f(x) \cdot \lim_{\Delta x\to 0} \frac{g(x+\Delta x)-g(x)}{\Delta x} \\[5pt]
  &= f'(x)g(x)+f(x)g'(x).
-\end{align}
+\end{aligned}
 \]
 
 The fact that \(\lim_{\Delta x\to0} g(x+\Delta x) = g(x)\) follows from the fact that differentiable functions are continuous.
@@ -81,10 +81,10 @@ g(x+h) = g(x) + g'(x)h + \varepsilon_2(h),
 where the error terms are small with respect to *h*: that is, \(\lim_{h \to 0} \frac{\varepsilon_1(h)}{h} = \lim_{h \to 0} \frac{\varepsilon_2(h)}{h} = 0,\) also written \(\varepsilon_1, \varepsilon_2 \sim o(h)\). Then:
 
 \[
-\begin{align}
+\begin{aligned}
  f(x+h)g(x+h) - f(x)g(x) &= (f(x) + f'(x)h +\varepsilon_1(h))(g(x) + g'(x)h + \varepsilon_2(h)) - f(x)g(x) \\[.5em]
  &= f(x)g(x) + f'(x)g(x)h + f(x)g'(x)h -f(x)g(x) + \text{error terms} \\[.5em]
- &= f'(x)g(x)h + f(x)g'(x)h + o(h). \end{align}
+ &= f'(x)g(x)h + f(x)g'(x)h + o(h). \end{aligned}
 \]
 
 The "error terms" consist of items such as \(f(x)\varepsilon_2(h), f'(x)g'(x)h^2\) and \(hf'(x)\varepsilon_1(h)\) which are easily seen to have magnitude \(o(h).\) Dividing by \(h\) and taking the limit \(h\to 0\) gives the result.
@@ -99,11 +99,11 @@ uv=q(u+v)-q(u-v),
 and differentiating both sides gives:
 
 \[
-\begin{align}
+\begin{aligned}
 f' &= q'(u+v)(u'+v') - q'(u-v)(u'-v') \\[4pt]
 &= \left(\tfrac12(u+v)(u'+v')\right) - \left(\tfrac12(u-v)(u'-v')\right) \\[4pt]
 &= \tfrac12(uu' + vu' + uv' + vv') - \tfrac12(uu' - vu' - uv' + vv') \\[4pt]
-&= vu'+uv'. \end{align}
+&= vu'+uv'. \end{aligned}
 \]
 
 ### Multivariable chain rule
@@ -117,13 +117,13 @@ The product rule can be considered a special case of the chain rule for several 
 Let *u* and *v* be continuous functions in *x*, and let *dx*, *du* and *dv* be infinitesimals within the framework of non-standard analysis, specifically the hyperreal numbers. Using st to denote the standard part function that associates to a finite hyperreal number the real infinitely close to it, this gives
 
 \[
-\begin{align}
+\begin{aligned}
  \frac{d(uv)}{dx} &= \operatorname{st}\left(\frac{(u + du)(v + dv) - uv}{dx}\right) \\
  &= \operatorname{st}\left(\frac{uv + u \cdot dv + v \cdot du + du \cdot dv -uv}{dx}\right) \\
  &= \operatorname{st}\left(\frac{u \cdot dv + v \cdot du + du \cdot dv}{dx}\right) \\
  &= \operatorname{st}\left(u \frac{dv}{dx} + (v + dv) \frac{du}{dx}\right) \\
  &= u \frac{dv}{dx} + v \frac{du}{dx}.
- \end{align}
+ \end{aligned}
 \]
 
 This was essentially Leibniz's proof exploiting the transcendental law of homogeneity (in place of the standard part above).
@@ -132,12 +132,12 @@ This was essentially Leibniz's proof exploiting the transcendental law of homoge
 In the context of Lawvere's approach to infinitesimals, let \(dx\) be a nilsquare infinitesimal. Then \(du = u'\ dx\) and \(dv = v'\ dx\), so that
 
 \[
-\begin{align}
+\begin{aligned}
 d(uv) & = (u + du)(v + dv) -uv \\
  & = uv + u \cdot dv + v \cdot du + du \cdot dv - uv \\
  & = u \cdot dv + v \cdot du + du \cdot dv \\
  & = u \cdot dv + v \cdot du
-\end{align}
+\end{aligned}
 \]
 
 since \(du \, dv = u' v' (dx)^2 = 0.\) Dividing by \(dx\) then gives \(\frac{d(uv)}{dx} = u \frac{dv}{dx} + v \frac{du}{dx}\) or \((uv)' = u \cdot v' + v \cdot u'\).
@@ -164,11 +164,11 @@ Taking the logarithmic derivative of both sides and then solving for \(h'(x)\):
 Solving for \(h'(x)\) and substituting back \(f(x) g(x)\) for \(h(x)\) gives:
 
 \[
-\begin{align}
+\begin{aligned}
 h'(x) &= h(x)\left(\frac{f'(x)}{f(x)} + \frac{g'(x)}{g(x)}\right) \\
 &= f(x) g(x)\left(\frac{f'(x)}{f(x)} + \frac{g'(x)}{g(x)}\right) \\
 &= f'(x) g(x) + f(x) g'(x).
-\end{align}
+\end{aligned}
 \]
 
 Note: Taking the absolute value of the functions is necessary for the logarithmic differentiation of functions that may have negative values, as logarithms are only real-valued for positive arguments. This works because \(\tfrac{d}{dx}(\ln |u|) = \tfrac{u'}{u}\), which justifies taking the absolute value of the functions for logarithmic differentiation.
@@ -234,12 +234,12 @@ For partial derivatives, we have
 where the index runs through all 2\(^{*n*}\) subsets of , and is the cardinality of. For example, when *n* = 3,
 
 \[
-\begin{align} & {\partial^3 \over \partial x_1\,\partial x_2\,\partial x_3} (uv) \\[1ex]
+\begin{aligned} & {\partial^3 \over \partial x_1\,\partial x_2\,\partial x_3} (uv) \\[1ex]
 = {} & u \cdot{\partial^3 v \over \partial x_1\,\partial x_2\,\partial x_3} + {\partial u \over \partial x_1}\cdot{\partial^2 v \over \partial x_2\,\partial x_3} + {\partial u \over \partial x_2}\cdot{\partial^2 v \over \partial x_1\,\partial x_3} + {\partial u \over \partial x_3}\cdot{\partial^2 v \over \partial x_1\,\partial x_2} \\[1ex]
 & + {\partial^2 u \over \partial x_1\,\partial x_2}\cdot{\partial v \over \partial x_3}
 + {\partial^2 u \over \partial x_1\,\partial x_3}\cdot{\partial v \over \partial x_2}
 + {\partial^2 u \over \partial x_2\,\partial x_3}\cdot{\partial v \over \partial x_1}
-+ {\partial^3 u \over \partial x_1\,\partial x_2\,\partial x_3}\cdot v. \\[-3ex]&\end{align}
++ {\partial^3 u \over \partial x_1\,\partial x_2\,\partial x_3}\cdot v. \\[-3ex]&\end{aligned}
 \]
 
 ### Banach space
@@ -307,13 +307,13 @@ Among the applications of the product rule is a proof that
 when *n* is a positive integer (this rule is true even if *n* is not positive or is not an integer, but the proof of that must rely on other methods). The proof is by mathematical induction on the exponent *n*. If *n* = 0 then *x*\(^{*n*}\) is constant and *nx*\(^{*n* − 1}\) = 0. The rule holds in that case because the derivative of a constant function is 0. If the rule holds for any particular exponent *n*, then for the next value, *n* + 1, we have
 
 \[
-\begin{align}
+\begin{aligned}
 \frac{d x^{n+1}}{dx}
 &{}= \frac{d}{dx} \left( x^n\cdot x\right) \\[1ex]
 &{}= x \frac{d}{dx} x^n + x^n \frac{d}{dx} x & \text{(the product rule is used here)} \\[1ex]
 &{}= x\left(n x^{n-1}\right) + x^n\cdot 1 & \text{(the induction hypothesis is used here)} \\[1ex]
 &{}= \left(n + 1\right) x^n.
-\end{align}
+\end{aligned}
 \]
 
 Therefore, if the proposition is true for *n*, it is true also for *n* + 1, and therefore for all natural *n*.

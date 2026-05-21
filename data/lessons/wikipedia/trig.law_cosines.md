@@ -4,11 +4,11 @@
 
 In trigonometry, the **law of cosines** (also known as the **cosine formula** or **cosine rule**) relates the lengths of the sides of a triangle to the cosine of one of its angles. For a triangle with sides , and , opposite respective angles , and (see Fig. 1), the law of cosines states:
 
-\(\begin{align}
+\(\begin{aligned}
 c^2 &= a^2 + b^2 - 2ab\cos\gamma, \\[3mu]
 a^2 &= b^2+c^2-2bc\cos\alpha, \\[3mu]
 b^2 &= a^2+c^2-2ac\cos\beta.
-\end{align}\)
+\end{aligned}\)
 
 The law of cosines generalizes the Pythagorean theorem, which holds only for right triangles: if is a right angle then , and the law of cosines reduces to. The law of cosines is useful for solving a triangle when all three sides or two sides and their included angle are given.
 

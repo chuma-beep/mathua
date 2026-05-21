@@ -29,10 +29,10 @@ Rates are relevant to many aspects of everyday life. For example:
 
 ## Rate of change
 Consider the case where the numerator \(f\) of a rate is a function \(f(a)\) where \(a\) happens to be the denominator of the rate \(\delta f/\delta a\). A rate of change of \(f\) with respect to \(a\) (where \(a\) is incremented by \(h\)) can be formally defined in two ways:
-\(\begin{align}
+\(\begin{aligned}
 \mbox{Average rate of change} &= \frac{f(x + h) - f(x)}{h}\\
 \mbox{Instantaneous rate of change} &= \lim_{h \to 0}\frac{f(x + h) - f(x)}{h}
-\end{align}\)
+\end{aligned}\)
 where *f*(*x*) is the function with respect to *x* over the interval from *a* to *a*+*h*. An instantaneous rate of change is equivalent to a derivative.
 
 For example, the average speed of a car can be calculated using the total distance traveled between two points, divided by the travel time. In contrast, the instantaneous velocity can be determined by viewing a speedometer.

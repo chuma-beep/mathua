@@ -38,11 +38,11 @@ In modulus 12, one can assert that:
 because the difference is 38 − 14 = 24 = 2 × 12, a multiple of 12. Equivalently, 38 and 14 have the same remainder 2 when divided by 12.
 
 The definition of congruence also applies to negative values. For example:
-\(\begin{align}
+\(\begin{aligned}
 2 &\equiv -3 \pmod 5\\
 -8 &\equiv \phantom{+}7 \pmod 5\\
 -3 &\equiv -8 \pmod 5.
-\end{align}\)
+\end{aligned}\)
 
 ## Basic properties
 

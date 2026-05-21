@@ -24,25 +24,25 @@ Following Archimedes' argument in *The Measurement of a Circle* (c. 260 BCE), co
 #### Not greater
 
 Suppose that the area *C* enclosed by the circle is greater than the area *T* = *cr*/2 of the triangle. Let *E* denote the excess amount. Inscribe a square in the circle, so that its four corners lie on the circle. Between the square and the circle are four segments. If the total area of those gaps, *G*\(_{4}\), is greater than *E*, split each arc in half. This makes the inscribed square into an inscribed octagon, and produces eight segments with a smaller total gap, *G*\(_{8}\). Continue splitting until the total gap area, *G\(_{n}\)*, is less than *E*. Now the area of the inscribed polygon, *P\(_{n}\)* = *C* − *G\(_{n}\)*, must be greater than that of the triangle.
-\(\begin{align}
+\(\begin{aligned}
  E &{}= C - T \\
  &{}> G_n \\
  P_n &{}= C - G_n \\
  &{}> C - E \\
  P_n &{}> T
-\end{align}\)
+\end{aligned}\)
 But this forces a contradiction, as follows. Draw a perpendicular from the center to the midpoint of a side of the polygon; its length, *h*, is less than the circle radius. Also, let each side of the polygon have length *s*; then the sum of the sides is *ns*, which is less than the circle circumference. The polygon area consists of *n* equal triangles with height *h* and base *s*, thus equals *nhs*/2. But since *h* < *r* and *ns* < *c*, the polygon area must be less than the triangle area, *cr*/2, a contradiction. Therefore, our supposition that *C* might be greater than *T* must be wrong.
 
 #### Not less
 
 Suppose that the area enclosed by the circle is less than the area *T* of the triangle. Let *D* denote the deficit amount. Circumscribe a square, so that the midpoint of each edge lies on the circle. If the total area gap between the square and the circle, *G*\(_{4}\), is greater than *D*, slice off the corners with circle tangents to make a circumscribed octagon, and continue slicing until the gap area is less than *D*. The area of the polygon, *P\(_{n}\)*, must be less than *T*.
-\(\begin{align}
+\(\begin{aligned}
  D &{}= T - C \\
  &{}> G_n \\
  P_n &{}= C + G_n \\
  &{}< C + D \\
  P_n &{}< T
-\end{align}\)
+\end{aligned}\)
 This, too, forces a contradiction. For, a perpendicular to the midpoint of each polygon side is a radius, of length *r*. And since the total side length is greater than the circumference, the polygon consists of *n* identical triangles with total area greater than *T*. Again we have a contradiction, so our supposition that *C* might be less than *T* must be wrong as well.
 
 Therefore, it must be the case that the area enclosed by the circle is precisely the same as the area of the triangle. This concludes the proof.
@@ -76,57 +76,57 @@ Several of the arguments that follow use only concepts from elementary calculus 
 ### Onion proof
 
 Using calculus, we can sum the area incrementally, partitioning the disk into thin concentric rings like the layers of an onion. This is the method of shell integration in two dimensions. For an infinitesimally thin ring of the "onion" of radius *t*, the accumulated area is 2*t dt*, the circumferential length of the ring times its infinitesimal width (one can approximate this ring by a rectangle with width=2*t* and height=*dt*). This gives an elementary integral for a disk of radius *r*.
-\(\begin{align}
+\(\begin{aligned}
  \mathrm{Area}(r) &{}= \int_0^{r} 2 \pi t \, dt \\
  &{}= 2\pi \left[\frac{t^2}{2} \right]_{0}^{r}\\
  &{}= \pi r^2.
-\end{align}\)
+\end{aligned}\)
 
 It is rigorously justified by the multivariate substitution rule in polar coordinates. Namely, the area is given by a double integral of the constant function 1 over the disk itself. If *D* denotes the disk, then the double integral can be computed in polar coordinates as follows:
-\(\begin{align}
+\(\begin{aligned}
  \mathrm{Area}(r) &{}= \iint_D 1\ d(x, y)\\
  &{} = \iint_D t\ dt\ d\theta\\
  &{} = \int_0^r \int_0^{2\pi} t\ d\theta\ dt\\
  &{} = \int_0^r \left[ t\theta \right]_{0}^{2\pi} dt\\
  &{}= \int_0^{r} 2 \pi t \, dt \\
- \end{align}\)
+ \end{aligned}\)
 which is the same result as obtained above.
 
 An equivalent rigorous justification, without relying on the special coordinates of trigonometry, uses the coarea formula. Define a function \(\rho:\mathbb R^2\to\mathbb R\) by \(\rho(x,y)=\sqrt{x^2+y^2}\). Note ρ is a Lipschitz function whose gradient is a unit vector \(|\nabla\rho|=1\) (almost everywhere). Let *D* be the disc \(\rho<1\) in \(\mathbb R^2\). We will show that \(\mathcal L^2(D)=\pi\), where \(\mathcal L^2\) is the two-dimensional Lebesgue measure in \(\mathbb R^2\). We shall assume that the one-dimensional Hausdorff measure of the circle \(\rho=r\) is \(2\pi r\), the circumference of the circle of radius *r*. (This can be taken as the definition of circumference.) Then, by the coarea formula,
-\(\begin{align}
+\(\begin{aligned}
 \mathcal L^2(D) &= \iint_D |\nabla \rho|\,d\mathcal{L}^2\\
 &= \int_{\mathbb R} \mathcal H^1(\rho^{-1}(r)\cap D)\,dr\\
 &= \int_0^1\mathcal H^1(\rho^{-1}(r))\,dr \\
 &= \int_0^1 2\pi r\, dr= \pi.
-\end{align}\)
+\end{aligned}\)
 
 ### Triangle proof
 
 Similar to the onion proof outlined above, we could exploit calculus in a different way in order to arrive at the formula for the area of a disk. Consider unwrapping the concentric circles to straight strips. This will form a right angled triangle with r as its height and 2r (being the outer slice of onion) as its base.
 
 Finding the area of this triangle will give the area of the disk
-\(\begin{align}
+\(\begin{aligned}
 \text{Area} &{}= \frac{1}{2} \cdot \text{base} \cdot \text{height} \\[6pt]
  &{}= \frac{1}{2} \cdot 2 \pi r \cdot r \\[6pt]
  &{}= \pi r^2
-\end{align}\)
+\end{aligned}\)
 
 The opposite and adjacent angles for this triangle are respectively in degrees 9.0430611..., 80.956939... and in radians 0.1578311... , 1.4129651....
 
 Explicitly, we imagine dividing up a circle into triangles, each with a height equal to the circle's radius and a base that is infinitesimally small. The area of each of these triangles is equal to \(1/2\cdot r \cdot du\). By summing up (integrating) all of the areas of these triangles, we arrive at the formula for the circle's area:
-\(\begin{align}
+\(\begin{aligned}
  \mathrm{Area}(r) &{}= \int_0^{2\pi r} \frac{1}{2} r \, du \\[6pt]
  &{}= \left[ \frac{1}{2} r u \right]_{0}^{2 \pi r}\\[6pt]
  &{}= \pi r^2.
-\end{align}\)
+\end{aligned}\)
 
 It too can be justified by a double integral of the constant function 1 over the disk by reversing the order of integration and using a change of variables in the above iterated integral:
-\(\begin{align}
+\(\begin{aligned}
  \mathrm{Area}(r) &{}= \iint_D 1\ d(x, y)\\
  &{} = \iint_D t\ dt\ d\theta\\
  &{} = \int_0^{2\pi} \int_0^r t\ dt\ d\theta\\
  &{} = \int_0^{2\pi} \frac{1}{2}r^2\ d\theta\\
- \end{align}\)
+ \end{aligned}\)
 Making the substitution \(u = r\theta,\ du = r\ d\theta\) converts the integral to
 \(\int_0^{2\pi r} \frac{1}{2} \frac{r^2}{r} du = \int_0^{2\pi r} \frac{1}{2} r\ du\)
 which is the same as the above result.
@@ -143,11 +143,11 @@ The integral of *ds* over the whole circle \(\partial D\) is just the arc length
 Another proof that uses triangles considers the area enclosed by a circle to be made up of an infinite number of triangles (i.e. the triangles each have an angle of *dθ* at the center of the circle), each with an area of ½·*r*·*r*·sin(*dθ*) = ½·*r*^{2}·*dθ* (derived from the expression for the area of a triangle: ½·*ab*·sin(*C*)). Note that sin(*dθ*) ≈ *dθ* due to small angle approximation. Through summing the areas of the triangles, the expression for the area of the circle can therefore be found:
 
 \[
-\begin{align}
+\begin{aligned}
  \mathrm{Area}&{}= \int_0^{2\pi} \frac{1}{2} r^2 \, d \theta \\
  &{}= \left[ \frac{1}{2} r^2 \theta \right]_{0}^{2 \pi}\\
  &{}= \pi r^2.
-\end{align}
+\end{aligned}
 \]
 
 ### Semicircle proof
@@ -156,11 +156,11 @@ Note that the area of a semicircle of radius *r* can be computed by the integral
 By trigonometric substitution, we substitute \(x=r \sin\theta\), hence \(dx=r\cos \theta\, d\theta.\)
 
 \[
-\begin{align}\int_{-r}^r \sqrt{r^2 - x^2}\,dx
+\begin{aligned}\int_{-r}^r \sqrt{r^2 - x^2}\,dx
 &=\int_{-\frac{\pi}{2^{\frac{\pi}{2\sqrt{r^2\left(1-\sin ^2 \theta\right)} \cdot r \cos \theta\, d \theta \\[5pt]
 &=2r^2\int_{0}^{\frac{\pi}{2\cos ^2 \theta\, d \theta \\[5pt]
 &=\frac{\pi r^2}{2}.
-\end{align}
+\end{aligned}
 \]
 
 The last step follows since the trigonometric identity \(\cos(\theta)=\sin(\pi/2-\theta)\) implies that \(\cos^2\theta\) and \(\sin^2\theta\) have equal integrals over the interval \([0,\pi/2]\), using integration by substitution. But on the other hand; since \(\cos^2\theta+\sin^2\theta=1\), the sum of the two integrals is the length of that interval, which is \(\pi/2\). Consequently, the integral of \(\cos^2 \theta\) is equal to half the length of that interval, which is \(\pi/4\).
@@ -213,10 +213,10 @@ This for *n* = 48 gives a better approximation (about 3.14159292) than Archimede
 ### Derivation of Archimedes' doubling formulae
 
 Let one side of an inscribed regular *n-*gon have length *s\(_{n}\)* and touch the circle at points A and B. Let A′ be the point opposite A on the circle, so that A′A is a diameter, and A′AB is an inscribed triangle on a diameter. By Thales' theorem, this is a right triangle with right angle at B. Let the length of A′B be *c\(_{n}\)*, which we call the complement of *s\(_{n}\)*; thus *c\(_{n}\)*\(^{2}\)+*s\(_{n}\)*\(^{2}\) = (2*r*)\(^{2}\). Let C bisect the arc from A to B, and let C′ be the point opposite C on the circle. Thus the length of CA is *s*\(_{2*n*}\), the length of C′A is *c*\(_{2*n*}\), and C′CA is itself a right triangle on diameter C′C. Because C bisects the arc from A to B, C′C perpendicularly bisects the chord from A to B, say at P. Triangle C′AP is thus a right triangle, and is similar to C′CA since they share the angle at C′. Thus all three corresponding sides are in the same proportion; in particular, we have C′A : C′C = C′P : C′A and AP : C′A = CA : C′C. The center of the circle, O, bisects A′A, so we also have triangle OAP similar to A′AB, with OP half the length of A′B. In terms of side lengths, this gives us
-\(\begin{align}
+\(\begin{aligned}
  c_{2n}^2 &{}= \left( r + \frac{1}{2} c_n \right) 2r \\
  c_{2n} &{}= \frac{s_n}{s_{2n
-\end{align}\)
+\end{aligned}\)
 In the first equation C′P is C′O+OP, length *r* + *c\(_{n}\)*, and C′C is the diameter, 2*r*. For a unit circle we have the famous doubling equation of Ludolph van Ceulen,
 \(c_{2n} = \sqrt{2+c_n}. \)
 If we now circumscribe a regular *n-*gon, with side A″B″ parallel to AB, then OAB and OA″B″ are similar triangles, with A″B″ : AB = OC : OP. Call the circumscribed side *S\(_{n}\)*; then this is *S\(_{n}\)* : *s\(_{n}\)* = 1 : \(^{1}\)⁄\(_{2}\)*c\(_{n}\)*. (We have again used that OP is half the length of A′B.) Thus we obtain

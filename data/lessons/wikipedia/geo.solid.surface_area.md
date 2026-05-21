@@ -43,7 +43,7 @@ Various approaches to a general definition of surface area were developed in the
 | Spherical lune | \(2r^2\theta\) **r* = radius of sphere **θ* = dihedral angle |  |
 | Torus | \(\left(2\pi r\right)\left(2\pi R\right)=4\pi^2Rr\) **r* = minor radius (radius of the tube) **R* = major radius (distance from center of tube to center of torus) |  |
 | Closed cylinder | \(2\pi r^2+2\pi rh=2\pi r\left(r+h\right)\) **r* = radius of the circular base **h* = height of the cylinder |  |
-| Cylindrical annulus | \(\begin{align} & 2\pi Rh + 2\pi rh + 2\left(\pi R^2 - \pi r^2\right) \\ &= 2\pi \left(R+r\right)\left(R-r+h\right) \end{align}\) **R* = External radius **r* = Internal radius **h* = height |  |
+| Cylindrical annulus | \(\begin{aligned} & 2\pi Rh + 2\pi rh + 2\left(\pi R^2 - \pi r^2\right) \\ &= 2\pi \left(R+r\right)\left(R-r+h\right) \end{aligned}\) **R* = External radius **r* = Internal radius **h* = height |  |
 | Capsule | \(2\pi r(2r+h)\) **r* = radius of the hemispheres and cylinder **h* = height of the cylinder |  |
 | Curved surface area of a cone | \(\pi r\sqrt{r^2+h^2}=\pi rs\) *\(s=\sqrt{r^2+h^2}\) **s* = slant height of the cone **r* = radius of the circular base **h* = height of the cone |  |
 | Full surface area of a cone | \(\pi r\left(r+\sqrt{r^2+h^2}\right)=\pi r\left(r +s\right)\) **s* = slant height of the cone **r* = radius of the circular base **h* = height of the cone |  |

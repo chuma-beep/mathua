@@ -191,10 +191,10 @@ The semantics for uniqueness quantification requires first-order predicate calcu
 then is the function of *n*-1 arguments, which is the logical *and* of the interpretations of
 
 \[
-\begin{align}
+\begin{aligned}
 \exists x_n & A(x_1, \ldots , x_n) \\
 \forall y,z & \big( A(x_1, \ldots ,x_{n-1}, y) \wedge A(x_1, \ldots ,x_{n-1}, z) \implies y = z \big).
-\end{align}
+\end{aligned}
 \]
 
 Each kind of quantification defines a corresponding closure operator on the set of formulas, by adding, for each free variable *x*, a quantifier to bind *x*. For example, the *existential closure* of the open formula *n*>2 ∧ *x*\(^{*n*}\)+*y*\(^{*n*}\)=*z*\(^{*n*}\) is the closed formula ∃*n* ∃*x* ∃*y* ∃*z* (*n*>2 ∧ *x*\(^{*n*}\)+*y*\(^{*n*}\)=*z*\(^{*n*}\)); the latter formula, when interpreted over the positive integers, is known to be false by Fermat's Last Theorem. As another example, equational axioms, like *x*+*y*=*y*+*x*, are usually meant to denote their *universal closure*, like ∀*x* ∀*y* (*x*+*y*=*y*+*x*) to express commutativity.

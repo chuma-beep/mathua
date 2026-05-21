@@ -47,18 +47,18 @@ Finally, it remains is to prove the formula for −*π* < *θ* < 0; this can be 
 
 The two identities
 \[
-\begin{align}
+\begin{aligned}
 1 + \tan^2 \theta &= \sec^2 \theta \\
 1 + \cot^2 \theta &= \csc^2 \theta
-\end{align}
+\end{aligned}
 \]
  are also called Pythagorean trigonometric identities. If one leg of a right triangle has length 1, then the tangent of the angle adjacent to that leg is the length of the other leg, and the secant of the angle is the length of the hypotenuse.
 
 \[
-\begin{align}
+\begin{aligned}
 \tan \theta &= \frac{b}{a}\, \\
 \sec \theta &= \frac{c}{a}\,.
-\end{align}
+\end{aligned}
 \]
 
 In this way, this trigonometric identity involving the tangent and the secant follows from the Pythagorean theorem. The angle opposite the leg of length 1 (this angle can be labeled *φ* = ) has cotangent equal to the length of the other leg, and cosecant equal to the length of the hypotenuse. In that way, this trigonometric identity involving the cotangent and the cosecant also follows from the Pythagorean theorem.
@@ -67,8 +67,8 @@ The following table gives the identities with the factor or divisor that relates
 
 | scope="col" | Divisor | scope="col" | Divisor Equation | scope="col" | Derived Identity | scope="col" | Derived Identity (Alternate) |
 | --- | --- | --- | --- |
-| scope="row" | | \(\frac{\sin^2 \theta}{\cos^2 \theta} + \frac{\cos^2 \theta}{\cos^2 \theta} = \frac{1}{\cos^2 \theta}\) | | \(\tan^2 \theta + 1 = \sec^2 \theta\) | \(\begin{align} \sec^2\theta - \tan^2\theta = 1\\ (\sec\theta - \tan\theta)(\sec\theta + \tan\theta) = 1\\ \end{align}\) |
-| scope="row" | | \(\frac{\sin^2 \theta}{\sin^2 \theta} + \frac{\cos^2 \theta}{\sin^2 \theta} = \frac{1}{\sin^2 \theta}\) | | \(1 + \cot^2 \theta = \csc^2 \theta\) | \(\begin{align} \csc^2\theta - \cot^2\theta = 1\\ (\csc\theta - \cot\theta)(\csc\theta + \cot\theta) = 1\\ \end{align}\) |
+| scope="row" | | \(\frac{\sin^2 \theta}{\cos^2 \theta} + \frac{\cos^2 \theta}{\cos^2 \theta} = \frac{1}{\cos^2 \theta}\) | | \(\tan^2 \theta + 1 = \sec^2 \theta\) | \(\begin{aligned} \sec^2\theta - \tan^2\theta = 1\\ (\sec\theta - \tan\theta)(\sec\theta + \tan\theta) = 1\\ \end{aligned}\) |
+| scope="row" | | \(\frac{\sin^2 \theta}{\sin^2 \theta} + \frac{\cos^2 \theta}{\sin^2 \theta} = \frac{1}{\sin^2 \theta}\) | | \(1 + \cot^2 \theta = \csc^2 \theta\) | \(\begin{aligned} \csc^2\theta - \cot^2\theta = 1\\ (\csc\theta - \cot\theta)(\csc\theta + \cot\theta) = 1\\ \end{aligned}\) |
 
 ### Proof using the unit circle
 
@@ -97,32 +97,32 @@ Because the - and -axes are perpendicular, this Pythagorean identity is equivale
 The trigonometric functions may also be defined using power series, namely for (an angle measured in radians):
 
 \[
-\begin{align}
+\begin{aligned}
  \sin x &= \sum_{n = 0}^\infty \frac{(-1)^n}{(2n + 1)!} x^{2n + 1},\\
  \cos x &= \sum_{n = 0}^\infty \frac{(-1)^n}{(2n)!} x^{2n}.
-\end{align}
+\end{aligned}
 \]
 
 Using the multiplication formula for power series at Multiplication and division of power series (suitably modified to account for the form of the series here) we obtain
 
 \[
-\begin{align}
+\begin{aligned}
 \sin^2 x & = \sum_{i = 0}^\infty \sum_{j = 0}^\infty \frac{(-1)^i}{(2i + 1)!} \frac{(-1)^j}{(2j + 1)!} x^{(2i + 1) + (2j + 1)} \\
 & = \sum_{n = 1}^\infty \left(\sum_{i = 0}^{n - 1} \frac{(-1)^{n - 1{(2i + 1)!(2(n - i - 1) + 1)!}\right) x^{2n} \\
 & = \sum_{n = 1}^\infty \left( \sum_{i = 0}^{n - 1} {2n \choose 2i + 1} \right) \frac{(-1)^{n - 1{(2n)!} x^{2n},\\
 \cos^2 x & = \sum_{i = 0}^\infty \sum_{j = 0}^\infty \frac{(-1)^i}{(2i)!} \frac{(-1)^j}{(2j)!} x^{(2i) + (2j)} \\
 & = \sum_{n = 0}^\infty \left(\sum_{i = 0}^n \frac{(-1)^n}{(2i)!(2(n - i))!}\right) x^{2n} \\
 & = \sum_{n = 0}^\infty \left( \sum_{i = 0}^n {2n \choose 2i} \right) \frac{(-1)^n}{(2n)!} x^{2n}.
-\end{align}
+\end{aligned}
 \]
 
 In the expression for sin\(^{2}\), must be at least 1, while in the expression for cos\(^{2}\), the constant term is equal to 1. The remaining terms of their sum are (with common factors removed)
 
 \[
-\begin{align}
+\begin{aligned}
 \sum_{i = 0}^n {2n \choose 2i} - \sum_{i = 0}^{n - 1} {2n \choose 2i + 1} &= \sum_{j = 0}^{2n} (-1)^j {2n \choose j} \\
 &= (1 - 1)^{2n} = 0
-\end{align}
+\end{aligned}
 \]
 
 by the binomial theorem. Consequently,
@@ -164,11 +164,11 @@ This proof of the identity has no direct connection with Euclid's demonstration 
 Factoring \(\cos^2 \theta + \sin^2 \theta\) as the complex difference of two squares and using Euler's formula \(e^{i\theta} = \cos\theta + i\sin\theta\),
 
 \[
-\begin{align}
+\begin{aligned}
 \cos^2 \theta + \sin^2 \theta
 &= \cos^2 \theta - i^2 \sin^2 \theta \\[3mu]
 &= (\cos\theta + i\sin\theta)(\cos\theta - i\sin\theta) \\[3mu]
 &= e^{i\theta}e^{-i\theta} \\
 &= e^{i\theta-i\theta} = e^0 = 1
-\end{align}
+\end{aligned}
 \]

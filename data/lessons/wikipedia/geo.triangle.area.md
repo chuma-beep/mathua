@@ -47,11 +47,11 @@ A triangle's shape is uniquely determined by the lengths of the sides, so its me
 where \(s= \tfrac12(a+b+c)\) is the semiperimeter, or half of the triangle's perimeter.
 
 Three other equivalent ways of writing Heron's formula are
-\(\begin{align}
+\(\begin{aligned}
 T &= \tfrac14 \sqrt{(a^2+b^2+c^2)^2-2(a^4+b^4+c^4)} \\[5mu]
 &= \tfrac14 \sqrt{2(a^2b^2+a^2c^2+b^2c^2)-(a^4+b^4+c^4)} \\[5mu]
 &= \tfrac14 \sqrt{(a+b+c)(-a+b+c)(a-b+c)(a+b-c)}.
-\end{align}\)
+\end{aligned}\)
 
 ### Formulas resembling Heron's formula
 Three formulas have the same structure as Heron's formula but are expressed in terms of different variables. First, denoting the medians from sides \(a\), \(b\), and \(c\) respectively as \(m_a\), \(m_b\), and \(m_c\) and their semi-sum \(\sigma = (m_a + m_b + m_c)/2\), we have

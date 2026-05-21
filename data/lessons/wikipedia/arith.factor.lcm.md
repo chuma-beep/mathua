@@ -81,11 +81,11 @@ Example: lcm(8,9,21)
 
 Factor each number and express it as a product of prime number powers.
 
-\(\begin{align}
+\(\begin{aligned}
 8 & = 2^3 \\
 9 & = 3^2 \\
 21 & = 3^1 \cdot 7^1
-\end{align}\)
+\end{aligned}\)
 
 The lcm will be the product of multiplying the highest power of each prime number together. The highest power of the three prime numbers 2, 3, and 7 is 2\(^{3}\), 3\(^{2}\), and 7\(^{1}\), respectively. Thus,
 
@@ -126,11 +126,11 @@ this gives
 \(\gcd(a,b) \operatorname{lcm}(a,b) = ab.\)
 
 In fact, every rational number can be written uniquely as the product of primes, if negative exponents are allowed. When this is done, the above formulas remain valid. For example:
-\(\begin{align}
+\(\begin{aligned}
  4 &= 2^2 3^0, & 6 &= 2^1 3^1, & \gcd(4, 6) &= 2^1 3^0 = 2, & \operatorname{lcm}(4,6) &= 2^2 3^1 = 12. \\[8pt]
  \tfrac{1}{3} &= 2^0 3^{-1} 5^0, & \tfrac{2}{5} &= 2^1 3^0 5^{-1}, & \gcd\left(\tfrac13, \tfrac{2}{5}\right) &= 2^0 3^{-1} 5^{-1} = \tfrac{1}{15}, & \operatorname{lcm}\left(\tfrac{1}{3}, \tfrac{2}{5}\right) &= 2^1 3^0 5^0 = 2, \\[8pt]
  \tfrac{1}{6} &= 2^{-1} 3^{-1}, & \tfrac{3}{4} &= 2^{-2} 3^1, & \gcd\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-2} 3^{-1} = \tfrac{1}{12}, & \operatorname{lcm}\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-1} 3^1 = \tfrac{3}{2}.
-\end{align}\)
+\end{aligned}\)
 
 ### Lattice-theoretic
 The positive integers may be partially ordered by divisibility: if *a* divides *b* (that is, if *b* is an integer multiple of *a*) write *a* ≤ *b* (or equivalently, *b* ≥ *a*). (Note that the usual magnitude-based definition of ≤ is not used here.)

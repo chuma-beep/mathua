@@ -112,12 +112,12 @@ Define *y*(*t*) to be the distance of the vehicle heading North from the origin 
 
 **Substitute in** *x* = 4 mi, *y* = 3 mi, *dx*/*dt* = −80 mi/hr, *dy*/*dt* = 60 mi/hr **and simplify**
 
-\(\begin{align}
+\(\begin{aligned}
 \frac{dc}{dt} & = \frac{4 \text{ mi} \cdot (-80 \text{ mi}/\text{hr}) + 3 \text{ mi} \cdot (60) \text{mi}/\text{hr}}{\sqrt{(4 \text{ mi})^2 + (3 \text{ mi})^2}} \\
 & = \frac{-320 \text{ mi}^2/\text{hr} + 180 \text{ mi}^2/\text{hr}}{5\text{ mi}} \\
 &= \frac{-140 \text{ mi}^2/\text{hr}}{5\text{ mi}} \\
 & = -28 \text{ mi}/\text{hr}
-\end{align}\)
+\end{aligned}\)
 
 Consequently, the two vehicles are getting closer together at a rate of 28 mi/hr.
 
