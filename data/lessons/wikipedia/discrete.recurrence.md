@@ -17,15 +17,15 @@ A *recurrence relation* is an equation that expresses each element of a sequence
 \(u_n=\varphi(n, u_{n-1})\quad\text{for}\quad n>0,\)
 where
 \(\varphi:\mathbb N\times X \to X\)
-is a function, where  is a set to which the elements of a sequence must belong. For any \(u_0\in X\), this defines a unique sequence with \(u_0\) as its first element, called the *initial value*.
+is a function, where is a set to which the elements of a sequence must belong. For any \(u_0\in X\), this defines a unique sequence with \(u_0\) as its first element, called the *initial value*.
 
 It is easy to modify the definition for getting sequences starting from the term of index 1 or higher.
 
-This defines recurrence relation of *first order*. A recurrence relation of *order*  has the form
+This defines recurrence relation of *first order*. A recurrence relation of *order* has the form
 \(u_n=\varphi(n, u_{n-1}, u_{n-2}, \ldots, u_{n-k})\quad\text{for}\quad n\ge k,\)
 
-where \(\varphi: \mathbb N\times X^k \to X\) is a function that involves  consecutive elements of the sequence.
-In this case,  initial values are needed for defining a sequence.
+where \(\varphi: \mathbb N\times X^k \to X\) is a function that involves consecutive elements of the sequence.
+In this case, initial values are needed for defining a sequence.
 
 ## Examples
 ### Factorial
@@ -45,7 +45,7 @@ An example of a recurrence relation is the logistic map defined by
 for a given constant \(r.\) The behavior of the sequence depends dramatically on \(r,\) but is stable when the initial condition \(x_0\) varies.
 
 ### Fibonacci numbers
-The recurrence of order two satisfied by the Fibonacci numbers is the canonical example of a homogeneous linear recurrence relation with constant coefficients (see below).  The Fibonacci sequence is defined using the recurrence
+The recurrence of order two satisfied by the Fibonacci numbers is the canonical example of a homogeneous linear recurrence relation with constant coefficients (see below). The Fibonacci sequence is defined using the recurrence
 
 \(F_n = F_{n-1}+F_{n-2}\)
 
@@ -61,7 +61,7 @@ Explicitly, the recurrence yields the equations
 etc.
 
 We obtain the sequence of Fibonacci numbers, which begins
-0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89,.. .
 
 The recurrence can be solved by methods described below yielding Binet's formula, which involves powers of the two roots of the characteristic polynomial \(t^2 = t + 1\); the generating function of the sequence is the rational function
 \(\frac{t}{1-t-t^2}.\)
@@ -85,23 +85,23 @@ It is thus a special case of finite difference.
 
 When using the index notation for sequences, the definition becomes
 \((\Delta a)_n= a_{n+1} - a_n.\)
-The parentheses around \(\Delta f\) and \(\Delta a\) are generally omitted, and \(\Delta a_n\) must be understood as the term of index  in the sequence \(\Delta a,\) and not \(\Delta\) applied to the element \(a_n.\)
+The parentheses around \(\Delta f\) and \(\Delta a\) are generally omitted, and \(\Delta a_n\) must be understood as the term of index in the sequence \(\Delta a,\) and not \(\Delta\) applied to the element \(a_n.\)
 
-Given sequence \(a=(a_n)_{n\in \N},\) the **** of  is \(\Delta a.\)
+Given sequence \(a=(a_n)_{n\in \N},\) the **** of is \(\Delta a.\)
 
 The **** is
 \(\Delta^2 a=(\Delta\circ\Delta)a= \Delta(\Delta a).\) A simple computation shows that
 \(\Delta^2 a_n= a_{n+2} - 2a_{n+1} + a_n.\)
 
-More generally: the  *th difference* is defined recursively as \(\Delta^k=\Delta\circ \Delta^{k-1},\) and one has
+More generally: the *th difference* is defined recursively as \(\Delta^k=\Delta\circ \Delta^{k-1},\) and one has
 \(\Delta^k a_n = \sum_{t=0}^k (-1)^t \binom{k}{t} a_{n+k-t}.\)
 
 This relation can be inverted, giving
-\(a_{n+k} = a_n + {k\choose 1} \Delta a_n  + \cdots + {k\choose k} \Delta^k(a_n).\)
+\(a_{n+k} = a_n + {k\choose 1} \Delta a_n + \cdots + {k\choose k} \Delta^k(a_n).\)
 
-A **** of order  is an equation that involves the  first differences of a sequence or a function, in the same way as a differential equation of order  relates the  first derivatives of a function.
+A **** of order is an equation that involves the first differences of a sequence or a function, in the same way as a differential equation of order relates the first derivatives of a function.
 
-The two above relations allow transforming a recurrence relation of order  into a difference equation of order , and, conversely, a difference equation of order  into recurrence relation of order . Each transformation is the inverse of the other, and the sequences that are solution of the difference equation are exactly those that satisfies the recurrence relation.
+The two above relations allow transforming a recurrence relation of order into a difference equation of order , and, conversely, a difference equation of order into recurrence relation of order. Each transformation is the inverse of the other, and the sequences that are solution of the difference equation are exactly those that satisfies the recurrence relation.
 
 For example, the difference equation
 \(3\Delta^2 a_n + 2\Delta a_n + 7a_n = 0\)
@@ -121,16 +121,15 @@ Single-variable or one-dimensional recurrence relations are about sequences (i.e
 ## Solving
 ### Solving linear recurrence relations with constant coefficients
 
-
 ### Solving first-order non-homogeneous recurrence relations with variable coefficients
 Moreover, for the general first-order non-homogeneous linear recurrence relation with variable coefficients:
 
 \(a_{n+1} = f_n a_n + g_n, \qquad f_n \neq 0,\)
 there is also a nice method to solve it:
 \(a_{n+1} - f_n a_n = g_n\)
-\(\frac{a_{n+1}}{\prod_{k=0}^n f_k} - \frac{f_n a_n}{\prod_{k=0}^n f_k} = \frac{g_n}{\prod_{k=0}^n f_k}\)
+\(\frac{a_{n+1{\prod_{k=0}^n f_k} - \frac{f_n a_n}{\prod_{k=0}^n f_k} = \frac{g_n}{\prod_{k=0}^n f_k}\)
 
-\(\frac{a_{n+1}}{\prod_{k=0}^n f_k} - \frac{a_n}{\prod_{k=0}^{n-1} f_k} = \frac{g_n}{\prod_{k=0}^n f_k}\)
+\(\frac{a_{n+1{\prod_{k=0}^n f_k} - \frac{a_n}{\prod_{k=0}^{n-1} f_k} = \frac{g_n}{\prod_{k=0}^n f_k}\)
 
 Let
 \(A_n = \frac{a_n}{\prod_{k=0}^{n-1} f_k},\)
@@ -165,8 +164,7 @@ the confluent hypergeometric series. Sequences which are the solutions of linear
 Furthermore, for the general non-homogeneous linear recurrence relation with constant coefficients, one can solve it based on variation of parameter.
 ### Solving first-order rational difference equations
 
-
-A first order rational difference equation has the form \(w_{t+1} = \tfrac{aw_t+b}{cw_t+d}\). Such an equation can be solved by writing \(w_t\) as a nonlinear transformation of another variable \(x_t\) which itself evolves linearly.  Then standard methods can be used to solve the linear difference equation in \(x_t\).
+A first order rational difference equation has the form \(w_{t+1} = \tfrac{aw_t+b}{cw_t+d}\). Such an equation can be solved by writing \(w_t\) as a nonlinear transformation of another variable \(x_t\) which itself evolves linearly. Then standard methods can be used to solve the linear difference equation in \(x_t\).
 
 ## Stability
 ### Stability of linear higher-order recurrences
@@ -182,7 +180,6 @@ The recurrence is stable, meaning that the iterates converge asymptotically to a
 
 ### Stability of linear first-order matrix recurrences
 
-
 In the first-order matrix difference equation
 
 \([x_t - x^*] = A[x_{t-1}-x^*]\)
@@ -194,13 +191,13 @@ Consider the nonlinear first-order recurrence
 
 \(x_n=f(x_{n-1}).\)
 
-This recurrence is locally stable, meaning that it converges to a fixed point \(x^*\) from points sufficiently close to \(x^*\), if the slope of \(f\)  in the neighborhood of \(x^*\) is smaller than unity in absolute value:  that is,
+This recurrence is locally stable, meaning that it converges to a fixed point \(x^*\) from points sufficiently close to \(x^*\), if the slope of \(f\) in the neighborhood of \(x^*\) is smaller than unity in absolute value: that is,
 
 \(| f' (x^*) | < 1.\)
 
-A nonlinear recurrence could have multiple fixed points, in which case some fixed points may be locally stable and others locally unstable; for continuous *f*  two adjacent fixed points cannot both be locally stable.
+A nonlinear recurrence could have multiple fixed points, in which case some fixed points may be locally stable and others locally unstable; for continuous *f* two adjacent fixed points cannot both be locally stable.
 
-A nonlinear recurrence relation could also have a cycle of period \(k\) for \(k > 1\).  Such a cycle is stable, meaning that it attracts a set of initial conditions of positive measure, if the composite function
+A nonlinear recurrence relation could also have a cycle of period \(k\) for \(k > 1\). Such a cycle is stable, meaning that it attracts a set of initial conditions of positive measure, if the composite function
 
 \(g(x) := f \circ f \circ \cdots \circ f(x)\)
 
@@ -210,7 +207,7 @@ with \(f\) appearing \(k\) times is locally stable according to the same criteri
 
 where \(x^*\) is any point on the cycle.
 
-In a chaotic recurrence relation, the variable \(x\) stays in a bounded region but never converges to a fixed point or an attracting cycle; any fixed points or cycles of the equation are unstable.  See also logistic map, dyadic transformation, and tent map.
+In a chaotic recurrence relation, the variable \(x\) stays in a bounded region but never converges to a fixed point or an attracting cycle; any fixed points or cycles of the equation are unstable. See also logistic map, dyadic transformation, and tent map.
 
 ## Relationship to differential equations
 When solving an ordinary differential equation numerically, one typically encounters a recurrence relation. For example, when solving the initial value problem
@@ -243,7 +240,7 @@ Integrodifference equations are a form of recurrence relation important to spati
 ### Computer science
 Recurrence relations are also of fundamental importance in analysis of algorithms. If an algorithm is designed so that it will break a problem into smaller subproblems (divide and conquer), its running time is described by a recurrence relation.
 
-A simple example is the time an algorithm takes to find an element in an ordered vector with \(n\) elements,  in the worst case.
+A simple example is the time an algorithm takes to find an element in an ordered vector with \(n\) elements, in the worst case.
 
 A naive algorithm will search from left to right, one element at a time. The worst possible scenario is when the required element is the last, so the number of comparisons is \(n\).
 
@@ -261,57 +258,13 @@ For example, the equation for a "feedforward" IIR comb filter of delay \(T\) is:
 
 \(y_t = (1 - \alpha) x_t + \alpha y_{t - T},\)
 
-where \(x_t\) is the input at time \(t\), \(y_t\) is the output at time \(t\), and \(\alpha\) controls how much of the delayed signal is fed back into the output.  From this we can see that
+where \(x_t\) is the input at time \(t\), \(y_t\) is the output at time \(t\), and \(\alpha\) controls how much of the delayed signal is fed back into the output. From this we can see that
 
 \(y_t = (1 - \alpha) x_t + \alpha ((1-\alpha) x_{t-T} + \alpha y_{t - 2T})\)
-\(y_t = (1 - \alpha) x_t + (\alpha-\alpha^2) x_{t-T}  + \alpha^2 y_{t - 2T}\)
+\(y_t = (1 - \alpha) x_t + (\alpha-\alpha^2) x_{t-T} + \alpha^2 y_{t - 2T}\)
 
 etc.
 
 ### Economics
 
-Recurrence relations, especially linear recurrence relations, are used extensively in both theoretical and empirical economics.  In particular, in macroeconomics one might develop a model of various broad sectors of the economy (the financial sector, the goods sector, the labor market, etc.) in which some agents' actions depend on lagged variables.  The model would then be solved for current values of key variables (interest rate, real GDP, etc.) in terms of past and current values of other variables.
-
-## See also
-
-
-* Circle points segments proof
-* Combinatorial principles
-* Continued fraction
-* Holonomic sequences
-* Infinite impulse response
-* Integration by reduction formulae
-* Iterated function
-* Lagged Fibonacci generator
-* Master theorem (analysis of algorithms)
-* Mathematical induction
-* Orthogonal polynomials
-* Recursion
-* Recursion (computer science)
-* Time scale calculus
-
-
-## References
-### Footnotes
-
-
-### Bibliography
-*
-*
-*
-*
-* Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. *Introduction to Algorithms*, Second Edition. MIT Press and McGraw-Hill, 1990. . Chapter 4: Recurrences, pp. 62–90.
-*
-*
-* chapter 7.
-*  Chapter 9.1: Difference Equations.
-*
-*  at EqWorld - The World of Mathematical Equations.
-*  at EqWorld - The World of Mathematical Equations.
-*
-
-## External links
-*
-*
-*  OEIS index to a few thousand examples of linear recurrences, sorted by order (number of terms) and signature (vector of values of the constant coefficients)
-
+Recurrence relations, especially linear recurrence relations, are used extensively in both theoretical and empirical economics. In particular, in macroeconomics one might develop a model of various broad sectors of the economy (the financial sector, the goods sector, the labor market, etc.) in which some agents' actions depend on lagged variables. The model would then be solved for current values of key variables (interest rate, real GDP, etc.) in terms of past and current values of other variables.

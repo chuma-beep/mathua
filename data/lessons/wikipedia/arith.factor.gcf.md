@@ -2,7 +2,7 @@
 
 # Greatest common factor
 
-In mathematics, the **greatest common divisor** (**GCD**), also known as **greatest common factor (GCF)**, of two or more integers, which are not all zero, is the largest positive integer that divides each of the integers. For two integers *x*, *y*, the greatest common divisor of *x* and *y* is denoted \(\gcd (x,y)\). For example, the GCD of 8 and 12 is 4, that is, 1=gcd(8, 12) = 4.
+In mathematics, the **greatest common divisor** (**GCD**), also known as **greatest common factor (GCF)**, of two or more integers, which are not all zero, is the largest positive integer that divides each of the integers. For two integers *x*, *y*, the greatest common divisor of *x* and *y* is denoted \(\gcd (x,y)\). For example, the GCD of 8 and 12 is 4, that is, gcd4.
 
 In the name "greatest common divisor", the adjective "greatest" may be replaced by "highest", and the word "divisor" may be replaced by "factor", so that other names include **highest common factor (HCF)**, etc. Historically, other names for the same concept have included **greatest common measure**.
 
@@ -10,13 +10,13 @@ This notion can be extended to polynomials (see *Polynomial greatest common divi
 
 ## Overview
 ### Definition
-The *greatest common divisor* (GCD) of integers  and , at least one of which is nonzero, is the greatest positive integer  such that  is a divisor of both  and ; that is, there are integers  and  such that 1=*a* = *de* and 1=*b* = *df*, and  is the largest such integer. The GCD of  and  is generally denoted gcd(*a*, *b*). explains this as: "Many authors write (*a*, *b*) for g.c.d.(*a*, *b*). We do not, because we shall often use (*a*, *b*) to represent a point in the Euclidean plane."}}
+The *greatest common divisor* (GCD) of integers and , at least one of which is nonzero, is the greatest positive integer such that is a divisor of both and ; that is, there are integers and such that 1=*a* = *de* and 1=*b* = *df*, and is the largest such integer. The GCD of and is generally denoted gcd(*a*, *b*). explains this as: "Many authors write (*a*, *b*) for g.c.d.(*a*, *b*). We do not, because we shall often use (*a*, *b*) to represent a point in the Euclidean plane."
 
-When one of *a* and *b* is zero, the GCD is the absolute value of the nonzero integer: 1=gcd(*a*, 0) = gcd(0, *a*) = |*a*|. This case is important as the terminating step of the Euclidean algorithm.
+When one of *a* and *b* is zero, the GCD is the absolute value of the nonzero integer: gcdgcd(0, *a*) = |*a*|. This case is important as the terminating step of the Euclidean algorithm.
 
-The above definition is unsuitable for defining gcd(0, 0), since there is no greatest integer *n* such that 1=0 × *n* = 0. However, zero is its own greatest divisor if *greatest* is understood in the context of the divisibility relation, so gcd(0, 0) is commonly defined as 0. This preserves the usual identities for GCD, and in particular Bézout's identity, namely that gcd(*a*, *b*) generates the same ideal as . This convention is followed by many computer algebra systems. Nonetheless, some authors leave gcd(0, 0) undefined.
+The above definition is unsuitable for defining gcd(0, 0); since there is no greatest integer *n* such that 1=0 × *n* = 0. However, zero is its own greatest divisor if *greatest* is understood in the context of the divisibility relation, so gcd(0, 0) is commonly defined as 0. This preserves the usual identities for GCD, and in particular Bézout's identity, namely that gcd(*a*, *b*) generates the same ideal as. This convention is followed by many computer algebra systems. Nonetheless, some authors leave gcd(0, 0) undefined.
 
-The GCD of  and  is their greatest positive common divisor in the preorder relation of divisibility. This means that the common divisors of  and  are exactly the divisors of their GCD. This is commonly proved by using either Euclid's lemma, the fundamental theorem of arithmetic, or the Euclidean algorithm. This is the meaning of "greatest" that is used for the generalizations of the concept of GCD.
+The GCD of and is their greatest positive common divisor in the preorder relation of divisibility. This means that the common divisors of and are exactly the divisors of their GCD. This is commonly proved by using either Euclid's lemma, the fundamental theorem of arithmetic, or the Euclidean algorithm. This is the meaning of "greatest" that is used for the generalizations of the concept of GCD.
 
 ### Example
 The number 54 can be expressed as a product of two integers in several different ways:
@@ -43,7 +43,7 @@ For example, a 24-by-60 rectangular area can be divided into a grid of: 1-by-1 s
 ## Applications
 ### Reducing fractions
 
-The greatest common divisor is useful for reducing fractions to the lowest terms. For example, 1=gcd(42, 56) = 14, therefore,
+The greatest common divisor is useful for reducing fractions to the lowest terms. For example, gcd14, therefore,
 \(\frac{42}{56}=\frac{3 \cdot 14 }{ 4 \cdot 14}=\frac{3 }{ 4}.\)
 
 ### Least common multiple
@@ -53,62 +53,55 @@ The least common multiple of two integers that are not both zero can be computed
 
 ## Calculation
 
-
 ### Using prime factorizations
-Greatest common divisors can be computed by determining the prime factorizations of the two numbers and comparing factors. For example, to compute gcd(48, 180), we find the prime factorizations 48 = 2<sup>4</sup> · 3<sup>1</sup> and 180 = 2<sup>2</sup> · 3<sup>2</sup> · 5<sup>1</sup>; the GCD is then 2<sup>min(4,2)</sup> · 3<sup>min(1,2)</sup> · 5<sup>min(0,1)</sup> = 2<sup>2</sup> · 3<sup>1</sup> · 5<sup>0</sup> = 12 The corresponding LCM is then
-2<sup>max(4,2)</sup> · 3<sup>max(1,2)</sup> · 5<sup>max(0,1)</sup> =
-2<sup>4</sup> · 3<sup>2</sup> · 5<sup>1</sup>  = 720.
+Greatest common divisors can be computed by determining the prime factorizations of the two numbers and comparing factors. For example, to compute gcd(48, 180), we find the prime factorizations 48 = 2\(^{4}\) · 3\(^{1}\) and 180 = 2\(^{2}\) · 3\(^{2}\) · 5\(^{1}\); the GCD is then 2\(^{min(4,2)}\) · 3\(^{min(1,2)}\) · 5\(^{min(0,1)}\) = 2\(^{2}\) · 3\(^{1}\) · 5\(^{0}\) = 12 The corresponding LCM is then
+2\(^{max(4,2)}\) · 3\(^{max(1,2)}\) · 5\(^{max(0,1)}\) =
+2\(^{4}\) · 3\(^{2}\) · 5\(^{1}\) = 720.
 
 In practice, this method is only feasible for small numbers, as computing prime factorizations takes too long.
 
 ### Euclid's algorithm
 
-The method introduced by Euclid for computing greatest common divisors is based on the fact that, given two positive integers  and  such that *a* > *b*, the common divisors of  and  are the same as the common divisors of *a* – *b* and .
-
-So, Euclid's method for computing the greatest common divisor of two positive integers consists of replacing the larger number with the difference of the numbers, and repeating this until the two numbers are equal: that is their greatest common divisor.
+The method introduced by Euclid for computing greatest common divisors is based on the fact that, given two positive integers and such that *a* > *b*, the common divisors of and are the same as the common divisors of *a* – *b* and. So, Euclid's method for computing the greatest common divisor of two positive integers consists of replacing the larger number with the difference of the numbers, and repeating this until the two numbers are equal: that is their greatest common divisor.
 
 For example, to compute gcd(48,18), one proceeds as follows:
 \(\begin{align}\gcd(48,18)\quad&\to\quad \gcd(48-18, 18)= \gcd(30,18)\\
 &\to \quad \gcd(30-18, 18)= \gcd(12,18)\\
 &\to \quad \gcd(12,18-12)= \gcd(12,6)\\
 &\to \quad \gcd(12-6,6)= \gcd(6,6).\end{align}\)
-So 1=gcd(48, 18) = 6.
+So gcd6.
 
 This method can be very slow if one number is much larger than the other. So, the variant that follows is generally preferred.
 
 ### Euclidean algorithm
 
-
-A more efficient method is the *Euclidean algorithm*, a variant in which the difference of the two numbers  and  is replaced by the *remainder* of the Euclidean division (also called *division with remainder*) of  by .
-
-Denoting this remainder as *a* mod *b*, the algorithm replaces (*a*, *b*) with (*b*, *a* mod *b*) repeatedly until the pair is (*d*, 0), where  is the greatest common divisor.
+A more efficient method is the *Euclidean algorithm*, a variant in which the difference of the two numbers and is replaced by the *remainder* of the Euclidean division (also called *division with remainder*) of by. Denoting this remainder as *a* mod *b*, the algorithm replaces (*a*, *b*) with (*b*, *a* mod *b*) repeatedly until the pair is (*d*, 0), where is the greatest common divisor.
 
 For example, to compute gcd(48,18), the computation is as follows:
 \(\begin{align}\gcd(48,18)\quad&\to\quad \gcd(18, 48\bmod 18)= \gcd(18, 12)\\
 &\to \quad \gcd(12, 18\bmod 12)= \gcd(12,6)\\
 &\to \quad \gcd(6,12\bmod 6)= \gcd(6,0).\end{align}\)
-This again gives 1=gcd(48, 18) = 6.
+This again gives gcd6.
 
 ### Binary GCD algorithm
-
 
 The binary GCD algorithm is a variant of Euclid's algorithm that is specially adapted to the binary representation of the numbers, which is used in most computers.
 
 The binary GCD algorithm differs from Euclid's algorithm essentially by dividing by two every even number that is encountered during the computation. Its efficiency results from the fact that, in binary representation, testing parity consists of testing the right-most digit, and dividing by two consists of removing the right-most digit.
 
-The method is as follows, starting with  *a* and *b* that are the two positive integers whose GCD is sought.
-# If *a* and *b* are both even, then divide both by two until at least one of them becomes odd; let  be the number of these paired divisions.
+The method is as follows, starting with *a* and *b* that are the two positive integers whose GCD is sought.
+# If *a* and *b* are both even, then divide both by two until at least one of them becomes odd; let be the number of these paired divisions.
 # If *a* is even, then divide it by two until it becomes odd.
 # If *b* is even, then divide it by two until it becomes odd.
 #: Now, *a* and *b* are both odd and will remain odd until the end of the computation
 # While *a* ≠ *b* do
-#* If *a* > *b*, then replace  with *a* – *b* and divide the result by two until  becomes odd (as *a* and *b* are both odd, there is, at least, one division by 2).
-#* If *a* < *b*, then replace  with *b* – *a* and divide the result by two until  becomes odd.
+#* If *a* > *b*, then replace with *a* – *b* and divide the result by two until becomes odd (as *a* and *b* are both odd, there is, at least, one division by 2).
+#* If *a* < *b*, then replace with *b* – *a* and divide the result by two until becomes odd.
 # Now, 1=*a* = *b*, and the greatest common divisor is \(2^d a.\)
 
-Step 1 determines  as the highest power of 2 that divides *a* and *b*, and thus their greatest common divisor. None of the steps changes the set of the odd common divisors of *a* and *b*. This shows that when the algorithm stops, the result is correct. The algorithm stops eventually, since each steps divides at least one of the operands by at least 2. Moreover, the number of divisions by 2 and thus the number of subtractions is at most the total number of digits.
+Step 1 determines as the highest power of 2 that divides *a* and *b*, and thus their greatest common divisor. None of the steps changes the set of the odd common divisors of *a* and *b*. This shows that when the algorithm stops, the result is correct. The algorithm stops eventually; since each steps divides at least one of the operands by at least 2. Moreover, the number of divisions by 2 and thus the number of subtractions is at most the total number of digits.
 
-Example: (*a*, *b*, *d*) = (48, 18, 0) → (24, 9, 1) → (12, 9, 1) → (6, 9, 1) → (3, 9, 1) → (3, 3, 1) ; the original GCD is thus the product 6 of 1=2<sup>*d*</sup> = 2<sup>1</sup> and 1=*a* = *b* = 3.
+Example: (*a*, *b*, *d*) = (48, 18, 0) → (24, 9, 1) → (12, 9, 1) → (6, 9, 1) → (3, 9, 1) → (3, 3, 1) ; the original GCD is thus the product 6 of 1=2\(^{*d*}\) = 2\(^{1}\) and 1=*a* = *b* = 3.
 
 The binary GCD algorithm is particularly easy to implement and particularly efficient on binary computers. Its computational complexity is
 \(O((\log a + \log b)^2).\)
@@ -125,7 +118,6 @@ This algorithm improves speed, because it reduces the number of operations on ve
 
 ### Other methods
 
-
 If *a* and *b* are both nonzero, the greatest common divisor of *a* and *b* can be computed by using least common multiple (LCM) of *a* and *b*:
 \(\gcd(a,b)=\frac{|a\cdot b|}{\operatorname{lcm}(a,b)}\),
 but more commonly the LCM is computed from the GCD.
@@ -138,46 +130,46 @@ Keith Slavin has shown that for odd *a* ≥ 1:
 \(\gcd(a,b)=\log_2\prod_{k=0}^{a-1} (1+e^{-2i\pi k b/a})\)
 which is a function that can be evaluated for complex *b*. Wolfgang Schramm has shown that
 \(\gcd(a,b)=\sum\limits_{k=1}^a \exp (2\pi ikb/a) \cdot \sum\limits_{d\left| a\right.} \frac{c_d (k)}{d}\)
-is an entire function in the variable *b* for all positive integers *a* where *c*<sub>*d*</sub>(*k*) is Ramanujan's sum.
+is an entire function in the variable *b* for all positive integers *a* where *c*\(_{*d*}\)(*k*) is Ramanujan's sum.
 
 ### Complexity
-The computational complexity of the computation of greatest common divisors has been widely studied. If one uses the Euclidean algorithm and the elementary algorithms for multiplication and division, the computation of the greatest common divisor of two integers of at most  bits is *O*(*n*<sup>2</sup>). This means that the computation of greatest common divisor has, up to a constant factor, the same complexity as the multiplication.
+The computational complexity of the computation of greatest common divisors has been widely studied. If one uses the Euclidean algorithm and the elementary algorithms for multiplication and division, the computation of the greatest common divisor of two integers of at most bits is *O*(*n*\(^{2}\)). This means that the computation of greatest common divisor has, up to a constant factor, the same complexity as the multiplication.
 
-However, if a fast multiplication algorithm is used, one may modify the Euclidean algorithm for improving the complexity, but the computation of a greatest common divisor becomes slower than the multiplication. More precisely, if the multiplication of two integers of *n* bits takes a time of *T*(*n*), then the fastest known algorithm for greatest common divisor has a complexity *O*(*T*(*n*) log *n*). This implies that the fastest known algorithm has a complexity of *O*(*n* (log *n*)<sup>2</sup>).
+However, if a fast multiplication algorithm is used, one may modify the Euclidean algorithm for improving the complexity, but the computation of a greatest common divisor becomes slower than the multiplication. More precisely, if the multiplication of two integers of *n* bits takes a time of *T*(*n*), then the fastest known algorithm for greatest common divisor has a complexity *O*(*T*(*n*) log *n*). This implies that the fastest known algorithm has a complexity of *O*(*n* (log *n*)\(^{2}\)).
 
 Previous complexities are valid for the usual models of computation, specifically multitape Turing machines and random-access machines.
 
 The computation of the greatest common divisors belongs thus to the class of problems solvable in quasilinear time. *A fortiori*, the corresponding decision problem belongs to the class P of problems solvable in polynomial time. The GCD problem is not known to be in NC, and so there is no known way to parallelize it efficiently; nor is it known to be P-complete, which would imply that it is unlikely to be possible to efficiently parallelize GCD computation. Shallcross et al. showed that a related problem (EUGCD, determining the remainder sequence arising during the Euclidean algorithm) is NC-equivalent to the problem of integer linear programming with two variables; if either problem is in **NC** or is **P-complete**, the other is as well. Since **NC** contains NL, it is also unknown whether a space-efficient algorithm for computing the GCD exists, even for nondeterministic Turing machines.
 
-Although the problem is not known to be in **NC**, parallel algorithms asymptotically faster than the Euclidean algorithm exist; the fastest known deterministic algorithm is by Chor and Goldreich, which (in the CRCW-PRAM model) can solve the problem in *O*(*n*/log *n*) time with *n*<sup>1+*ε*</sup> processors. Randomized algorithms can solve the problem in *O*((log *n*)<sup>2</sup>) time on \(O\left(e^{\sqrt{n \log n}}\right)\) processors (this is superpolynomial).
+Although the problem is not known to be in **NC**, parallel algorithms asymptotically faster than the Euclidean algorithm exist; the fastest known deterministic algorithm is by Chor and Goldreich, which (in the CRCW-PRAM model) can solve the problem in *O*(*n*/log *n*) time with *n*\(^{1+*ε*}\) processors. Randomized algorithms can solve the problem in *O*((log *n*)\(^{2}\)) time on \(O\left(e^{\sqrt{n \log n\right)\) processors (this is superpolynomial).
 
 ## Properties
-* For every positive integer *a*, 1=gcd(*a*, *a*) = *a*.
+* For every positive integer *a*, gcd*a*.
 * Every common divisor of *a* and *b* is a divisor of gcd(*a*, *b*).
 * gcd(*a*, *b*), where *a* and *b* are not both zero, may be defined alternatively and equivalently as the smallest positive integer *d* which can be written in the form 1=*d* = *a*⋅*p* + *b*⋅*q*, where *p* and *q* are integers. This expression is called Bézout's identity. Numbers *p* and *q* like this can be computed with the extended Euclidean algorithm.
-* 1=gcd(*a*, 0) = |*a*|, for *a* ≠ 0, since any number is a divisor of 0, and the greatest divisor of *a* is |*a*|. This is usually used as the base case in the Euclidean algorithm.
-* If *a* divides the product *b*⋅*c*, and 1=gcd(*a*, *b*) = *d*, then *a*/*d* divides *c*.
-* If *m* is a positive integer, then 1=gcd(*m*⋅*a*, *m*⋅*b*) = *m*⋅gcd(*a*, *b*).
-* If *m* is any integer, then 1=gcd(*a* + *m*⋅*b*, *b*) = gcd(*a*, *b*). Equivalently, 1=gcd(*a* mod *b*,*b*) = gcd(*a*,*b*).
-* If *m* is a positive common divisor of *a* and *b*, then 1=gcd(*a*/*m*, *b*/*m*) = gcd(*a*, *b*)/*m*.
-* If 1=gcd(*a*, *b*) = *d*, then 1=gcd(*a*/*d*, *b*/*d*) = 1.
-* The GCD is a commutative function: 1=gcd(*a*, *b*) = gcd(*b*, *a*).
-* The GCD is an associative function: 1=gcd(*a*, gcd(*b*, *c*)) = gcd(gcd(*a*, *b*), *c*). Thus 1=gcd(*a*, *b*, *c*, ...) can be used to denote the GCD of multiple arguments.
-* The GCD is a multiplicative function in the following sense: if *a*<sub>1</sub> and *a*<sub>2</sub> are relatively prime, then 1=gcd(*a*<sub>1</sub>⋅*a*<sub>2</sub>, *b*) = gcd(*a*<sub>1</sub>, *b*)⋅gcd(*a*<sub>2</sub>, *b*).
+* gcd|*a*|, for *a* ≠ 0; since any number is a divisor of 0, and the greatest divisor of *a* is |*a*|. This is usually used as the base case in the Euclidean algorithm.
+* If *a* divides the product *b*⋅*c*, and gcd*d*, then *a*/*d* divides *c*.
+* If *m* is a positive integer, then gcd*m*⋅gcd(*a*, *b*).
+* If *m* is any integer, then gcdgcd(*a*, *b*). Equivalently, gcdgcd(*a*,*b*).
+* If *m* is a positive common divisor of *a* and *b*, then gcdgcd(*a*, *b*)/*m*.
+* If gcd*d*, then gcd1.
+* The GCD is a commutative function: gcdgcd(*b*, *a*).
+* The GCD is an associative function: 1=gcd(*a*, gcd(*b*, *c*)) = gcd(gcd(*a*, *b*), *c*). Thus 1=gcd(*a*, *b*, *c*,.. .) can be used to denote the GCD of multiple arguments.
+* The GCD is a multiplicative function in the following sense: if *a*\(_{1}\) and *a*\(_{2}\) are relatively prime, then 1=gcd(*a*\(_{1}\)⋅*a*\(_{2}\), *b*) = gcd(*a*\(_{1}\), *b*)⋅gcd(*a*\(_{2}\), *b*).
 * gcd(*a*, *b*) is closely related to the least common multiple lcm(*a*, *b*): we have
 *: 1=gcd(*a*, *b*)⋅lcm(*a*, *b*) = |*a*⋅*b*|.
 This formula is often used to compute least common multiples: one first computes the GCD with Euclid's algorithm and then divides the product of the given numbers by their GCD.
 * The following versions of distributivity hold true:
 *: 1=gcd(*a*, lcm(*b*, *c*)) = lcm(gcd(*a*, *b*), gcd(*a*, *c*))
 *: 1=lcm(*a*, gcd(*b*, *c*)) = gcd(lcm(*a*, *b*), lcm(*a*, *c*)).
-* If we have the unique prime factorizations of 1=*a* = *p*<sub>1</sub><sup>*e*<sub>1</sub></sup> *p*<sub>2</sub><sup>*e*<sub>2</sub></sup> ⋅⋅⋅ *p*<sub>*m*</sub><sup>*e*<sub>*m*</sub></sup> and 1=*b* = *p*<sub>1</sub><sup>*f*<sub>1</sub></sup> *p*<sub>2</sub><sup>*f*<sub>2</sub></sup> ⋅⋅⋅ *p*<sub>*m*</sub><sup>*f*<sub>*m*</sub></sup> where 1=*e*<sub>*i*</sub> ≥ 0 and 1=*f*<sub>*i*</sub> ≥ 0, then the GCD of *a* and *b* is
-*: 1=gcd(*a*,*b*) = *p*<sub>1</sub><sup>min(*e*<sub>1</sub>,*f*<sub>1</sub>)</sup> *p*<sub>2</sub><sup>min(*e*<sub>2</sub>,*f*<sub>2</sub>)</sup> ⋅⋅⋅ *p*<sub>*m*</sub><sup>min(*e*<sub>*m*</sub>,*f*<sub>*m*</sub>)</sup>.
-* It is sometimes useful to define 1=gcd(0, 0) = 0 and 1=lcm(0, 0) = 0 because then the natural numbers become a complete distributive lattice with GCD as meet and LCM as join operation. This extension of the definition is also compatible with the generalization for commutative rings given below.
+* If we have the unique prime factorizations of 1=*a* = *p*\(_{1}\)\(^{*e*\(_{1}\)}\) *p*\(_{2}\)\(^{*e*\(_{2}\)}\) ⋅⋅⋅ *p*\(_{*m*}\)\(^{*e*\(_{*m*}\)}\) and 1=*b* = *p*\(_{1}\)\(^{*f*\(_{1}\)}\) *p*\(_{2}\)\(^{*f*\(_{2}\)}\) ⋅⋅⋅ *p*\(_{*m*}\)\(^{*f*\(_{*m*}\)}\) where 1=*e*\(_{*i*}\) ≥ 0 and 1=*f*\(_{*i*}\) ≥ 0, then the GCD of *a* and *b* is
+*: gcd*p*\(_{1}\)\(^{min(*e*\(_{1}\),*f*\(_{1}\))}\) *p*\(_{2}\)\(^{min(*e*\(_{2}\),*f*\(_{2}\))}\) ⋅⋅⋅ *p*\(_{*m*}\)\(^{min(*e*\(_{*m*}\),*f*\(_{*m*}\))}\).
+* It is sometimes useful to define gcd0 and lcm0 because then the natural numbers become a complete distributive lattice with GCD as meet and LCM as join operation. This extension of the definition is also compatible with the generalization for commutative rings given below.
 * In a Cartesian coordinate system, gcd(*a*, *b*) can be interpreted as the number of segments between points with integral coordinates on the straight line segment joining the points (0, 0) and (*a*, *b*).
 * For non-negative integers *a* and *b*, where *a* and *b* are not both zero, provable by considering the Euclidean algorithm in base *n*:
-*: 1=gcd(*n*<sup>*a*</sup> − 1, *n*<sup>*b*</sup> − 1) = *n*<sup>gcd(*a*,*b*)</sup> − 1.
+*: 1=gcd(*n*\(^{*a*}\) − 1, *n*\(^{*b*}\) − 1) = *n*\(^{gcd(*a*,*b*)}\) − 1.
 * An identity involving Euler's totient function:
-*: \(\gcd(a,b) = \sum_{k|a \text{ and }k|b} \varphi(k) .\)
+*: \(\gcd(a,b) = \sum_{k|a \text{ and }k|b} \varphi(k). \)
 * GCD Summatory function (Pillai's arithmetical function):
 \(\sum_{k=1}^n \gcd(k,n)
 = \sum_{d|n} d \varphi \left( \frac n d \right)
@@ -185,9 +177,9 @@ This formula is often used to compute least common multiples: one first computes
 =n\prod_{p|n}\left(1+\nu_p(n)\left(1-\frac{1}{p}\right)\right)\) where \(\nu_p(n)\) is the *p*-adic valuation.
 
 ## Probabilities and expected value
-In 1972, James E. Nymann showed that *k* integers, chosen independently and uniformly from , are coprime with probability 1/*ζ*(*k*) as *n* goes to infinity, where *ζ* refers to the Riemann zeta function. (See coprime for a derivation.) This result was extended in 1987 to show that the probability that *k* random integers have greatest common divisor *d* is *d*<sup>−*k*</sup>/ζ(*k*).
+In 1972, James E. Nymann showed that *k* integers, chosen independently and uniformly from , are coprime with probability 1/*ζ*(*k*) as *n* goes to infinity, where *ζ* refers to the Riemann zeta function. (See coprime for a derivation.) This result was extended in 1987 to show that the probability that *k* random integers have greatest common divisor *d* is *d*\(^{−*k*}\)/ζ(*k*).
 
-Using this information, the expected value of the greatest common divisor function can be seen (informally) to not exist when 1=*k* = 2. In this case the probability that the GCD equals *d* is *d*<sup>−2</sup>/*ζ*(2), so we have
+Using this information, the expected value of the greatest common divisor function can be seen (informally) to not exist when 1=*k* = 2. In this case the probability that the GCD equals *d* is *d*\(^{−2}\)/*ζ*(2), so we have
 \(\mathrm{E}( \mathrm{2} ) = \sum_{d=1}^\infty d (d^{-2}/\zeta(2)) = \frac{1}{\zeta(2)} \sum_{d=1}^\infty \frac{1}{d}.\)
 
 This last summation is the harmonic series, which diverges. However, when *k* ≥ 3, the expected value is well-defined, and by the above argument, it is
@@ -197,46 +189,18 @@ For 1=*k* = 3, this is approximately equal to 1.3684. For 1=*k* = 4, it is appro
 
 ## In commutative rings
 
-
 The notion of greatest common divisor can more generally be defined for elements of an arbitrary commutative ring, although in general there need not exist one for every pair of elements.
 
-* If  is a commutative ring, and  and  are in , then an element  of  is called a *common divisor* of  and  if it divides both  and  (that is, if there are elements  and  in  such that *d*·*x* = *a* and *d*·*y* = *b*).
-* If  is a common divisor of  and , and every common divisor of  and  divides , then  is called a *greatest common divisor* of  and *b*.
+* If is a commutative ring, and and are in , then an element of is called a *common divisor* of and if it divides both and (that is, if there are elements and in such that *d*·*x* = *a* and *d*·*y* = *b*).
+* If is a common divisor of and , and every common divisor of and divides , then is called a *greatest common divisor* of and *b*.
 
-With this definition, two elements  and  may very well have several greatest common divisors, or none at all. If  is an integral domain, then any two GCDs of  and  must be associate elements, since by definition either one must divide the other. Indeed, if a GCD exists, any one of its associates is a GCD as well.
+With this definition, two elements and may very well have several greatest common divisors, or none at all. If is an integral domain, then any two GCDs of and must be associate elements; since by definition either one must divide the other. Indeed, if a GCD exists, any one of its associates is a GCD as well.
 
-Existence of a GCD is not assured in arbitrary integral domains. However, if  is a unique factorization domain or any other GCD domain, then any two elements have a GCD. If  is a Euclidean domain in which euclidean division is given algorithmically (as is the case for instance when 1=*R* = *F*[*X*] where  is a field, or when  is the ring of Gaussian integers), then greatest common divisors can be computed using a form of the Euclidean algorithm based on the division procedure.
+Existence of a GCD is not assured in arbitrary integral domains. However, if is a unique factorization domain or any other GCD domain, then any two elements have a GCD. If is a Euclidean domain in which euclidean division is given algorithmically (as is the case for instance when 1=*R* = *F*[*X*] where is a field, or when is the ring of Gaussian integers), then greatest common divisors can be computed using a form of the Euclidean algorithm based on the division procedure.
 
 The following is an example of an integral domain with two elements that do not have a GCD:
 \(R = \mathbb{Z}\left[\sqrt{-3}\,\,\right],\quad a = 4 = 2\cdot 2 = \left(1+\sqrt{-3}\,\,\right)\left(1-\sqrt{-3}\,\,\right),\quad b = \left(1+\sqrt{-3}\,\,\right)\cdot 2.\)
 
-The elements 2 and \(1 + \sqrt{-3}\) are two maximal common divisors (that is, any common divisor which is a multiple of 2 is associated to 2, the same holds for \(1 + \sqrt{-3}\), but they are not associated, so there is no greatest common divisor of  and *b*.
+The elements 2 and \(1 + \sqrt{-3}\) are two maximal common divisors (that is, any common divisor which is a multiple of 2 is associated to 2, the same holds for \(1 + \sqrt{-3}\), but they are not associated, so there is no greatest common divisor of and *b*.
 
-Corresponding to the Bézout property we may, in any commutative ring, consider the collection of elements of the form *pa* + *qb*, where  and  range over the ring. This is the ideal generated by  and , and is denoted simply (*a*, *b*). In a ring all of whose ideals are principal (a principal ideal domain or PID), this ideal will be identical with the set of multiples of some ring element *d*; then this  is a greatest common divisor of  and *b*. But the ideal (*a*, *b*) can be useful even when there is no greatest common divisor of  and *b*. (Indeed, Ernst Kummer used this ideal as a replacement for a GCD in his treatment of Fermat's Last Theorem, although he envisioned it as the set of multiples of some hypothetical, or *ideal*, ring element , whence the ring-theoretic term.)
-
-## See also
-* Bézout domain
-* Lowest common denominator
-* Unitary divisor
-
-## Notes
-
-
-## References
-
-*
-*
-*
-*
-
-
-## Further reading
-
-* Donald Knuth. *The Art of Computer Programming*, Volume 2: *Seminumerical Algorithms*, Third Edition. Addison-Wesley, 1997. . Section 4.5.2: The Greatest Common Divisor, pp. 333–356.
-* Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. *Introduction to Algorithms*, Second Edition. MIT Press and McGraw-Hill, 2001. . Section 31.2: Greatest common divisor, pp. 856–862.
-* Saunders Mac Lane and Garrett Birkhoff. *A Survey of Modern Algebra*, Fourth Edition. MacMillan Publishing Co., 1977. . 1–7: "The Euclidean Algorithm."
-
-
-## External links
-* gcd(x,y) = y function graph: https://www.desmos.com/calculator/6nizzenog5
-
+Corresponding to the Bézout property we may, in any commutative ring, consider the collection of elements of the form *pa* + *qb*, where and range over the ring. This is the ideal generated by and , and is denoted simply (*a*, *b*). In a ring all of whose ideals are principal (a principal ideal domain or PID), this ideal will be identical with the set of multiples of some ring element *d*; then this is a greatest common divisor of and *b*. But the ideal (*a*, *b*) can be useful even when there is no greatest common divisor of and *b*. (Indeed, Ernst Kummer used this ideal as a replacement for a GCD in his treatment of Fermat's Last Theorem, although he envisioned it as the set of multiples of some hypothetical, or *ideal*, ring element , whence the ring-theoretic term.)

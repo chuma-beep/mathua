@@ -2,7 +2,7 @@
 
 # Percentage as parts per hundred
 
-In mathematics, a **percentage**, **percent**, or **per cent** (|by a hundred}}) is a number or ratio expressed as a fraction of 100. It is often denoted using the *percent sign* (%), although the abbreviations *pct.*, *pct*, and sometimes *pc* are also used. A percentage is a dimensionless number (pure number), primarily used for expressing proportions, but percent is nonetheless a unit of measurement in its orthography and usage.
+In mathematics, a **percentage**, **percent**, or **per cent** (|by a hundred) is a number or ratio expressed as a fraction of 100. It is often denoted using the *percent sign* (%), although the abbreviations *pct.*, *pct*, and sometimes *pc* are also used. A percentage is a dimensionless number (pure number), primarily used for expressing proportions, but percent is nonetheless a unit of measurement in its orthography and usage.
 
 ## Examples
 For example, 45% (read as "forty-five percent") is equal to the fraction , or 0.45.
@@ -14,32 +14,30 @@ Percentages are often used to express a proportionate part of a total.
 If 50% of the total number of students in the class are male, that means that 50 out of every 100 students are male. If there are 500 students, then 250 of them are male.
 
 ### Example 2
-An increase of $0.15 on a price of $2.50 is an increase by a fraction of  = 0.06. Expressed as a percentage, this is a 6% increase.
+An increase of $0.15 on a price of $2.50 is an increase by a fraction of = 0.06. Expressed as a percentage, this is a 6% increase.
 
 While many percentage values are between 0 and 100, there is no mathematical restriction and percentages may take on other values. For example, it is common to refer to values such as 111% or −35%, especially for percent changes and comparisons.
 
 ## History
-In Ancient Rome, long before the existence of the decimal system, computations were often made in fractions in the multiples of . For example, Augustus levied a tax of  on goods sold at auction known as *centesima rerum venalium*. Computation with these fractions was equivalent to computing percentages.
+In Ancient Rome, long before the existence of the decimal system, computations were often made in fractions in the multiples of. For example, Augustus levied a tax of on goods sold at auction known as *centesima rerum venalium*. Computation with these fractions was equivalent to computing percentages.
 
 As denominations of money grew in the Middle Ages, computations with a denominator of 100 became increasingly standard, such that from the late 15th century to the early 16th century, it became common for arithmetic texts to include such computations. Many of these texts applied these methods to profit and loss, interest rates, and the Rule of Three. By the 17th century, it was standard to quote interest rates in hundredths.
 
 ## Percent sign
 
-
 The term "percent" is derived from the Latin *per centum*, meaning "hundred" or "by the hundred".
 The sign for "percent" evolved by gradual contraction of the Italian term *per cento*, meaning "for a hundred". The "per" was often abbreviated as "p."—eventually disappeared entirely. The "cento" was contracted to two circles separated by a horizontal line, from which the modern "%" symbol is derived.
 
 ## Calculations
-The percent value is computed by multiplying the numeric value of the ratio by 100. For example, to find 50 apples as a percentage of 1,250 apples, one first computes the ratio  = 0.04, and then multiplies by 100 to obtain 4%. The percent value can also be found by multiplying first instead of later, so in this example, the 50 would be multiplied by 100 to give 5,000, and this result would be divided by 1,250 to give 4%.
+The percent value is computed by multiplying the numeric value of the ratio by 100. For example, to find 50 apples as a percentage of 1,250 apples, one first computes the ratio = 0.04, and then multiplies by 100 to obtain 4%. The percent value can also be found by multiplying first instead of later, so in this example, the 50 would be multiplied by 100 to give 5,000, and this result would be divided by 1,250 to give 4%.
 
 To calculate a percentage of a percentage, convert both percentages to fractions of 100, or to decimals, and multiply them. For example, 50% of 40% is:
-1=  = 0.50 × 0.40 = 0.20 =  = 20%.}}
-It is not correct to divide by 100 and use the percent sign at the same time; it would literally imply division by 10,000. For example, 1= 25% = , not , which actually is 1= . A term such as  would also be incorrect, since it would be read as 1 percent, even if the intent was to say 100%.
+1= = 0.50 × 0.40 = 0.20 = = 20%.
+It is not correct to divide by 100 and use the percent sign at the same time; it would literally imply division by 10,000. For example, 1= 25% = , not , which actually is 1=. A term such as would also be incorrect; since it would be read as 1 percent, even if the intent was to say 100%.
 
 Whenever communicating about a percentage, it is important to specify what it is relative to (i.e., what is the total that corresponds to 100%). The following problem illustrates this point.
 
-
-We are asked to compute the ratio of female computer science majors to all computer science majors. We know that 60% of all students are female, and among these 5% are computer science majors, so we conclude that  ×  =  or 3% of all students are female computer science majors. Dividing this by the 10% of all students that are computer science majors, we arrive at the answer:  =  or 30% of all computer science majors are female.
+We are asked to compute the ratio of female computer science majors to all computer science majors. We know that 60% of all students are female, and among these 5% are computer science majors, so we conclude that × = or 3% of all students are female computer science majors. Dividing this by the 10% of all students that are computer science majors, we arrive at the answer: = or 30% of all computer science majors are female.
 
 This example is closely related to the concept of conditional probability.
 
@@ -55,11 +53,11 @@ Example:
 |-
 !class="backgroundcolor3"| With general formula
 !class="backgroundcolor6"| With own ratio equation (Proportion)
-!class="backgroundcolor4"| With “What is 1%?” (Rule of 3) \(\frac{p\,\%}{42\,\text{kg}}=\frac{100\,\%}{7\ \%}\)
+!class="backgroundcolor4"| With “What is 1%?” (Rule of 3) \(\frac{p\,\%}{42\,\text{kg=\frac{100\,\%}{7\ \%}\)
 |-
-| \(\frac{p\,\%}{100\,\%}=\frac{W}{G}\)multiple rearrangements result in:\(G=\frac{W}{p\,\%}\cdot{100\,\%}\)\(G=\frac{42\,\text{ kg}}{7\,\%}\cdot{100\,\%}=600\,\text{kg}\)
-|\(\frac{G}{42\,\text{kg}}=\frac{100\,\%}{7\,\%}\)simple conversion yields:\(G=\frac{42\,\text{kg}}{7\,\%}\cdot{100\,\%}=600\,\text{ kg}\)
-| \(\frac{42\,\text{kg}:{ \color{red}7}}{7\,\%:{ \color{red}7}}=\frac{6\,\text{ kg}}{1\,\%}=\frac{6\,\text{kg}\cdot { \color{red}100}}{1\,\%\cdot { \color{red}100}}\)without changing the last counter is:\(G=6\,\text{kg}\cdot 100=600\,\text{ kg}\)
+| \(\frac{p\,\%}{100\,\%}=\frac{W}{G}\)multiple rearrangements result in:\(G=\frac{W}{p\,\%}\cdot{100\,\%}\)\(G=\frac{42\,\text{ kg{7\,\%}\cdot{100\,\%}=600\,\text{kg}\)
+|\(\frac{G}{42\,\text{kg=\frac{100\,\%}{7\,\%}\)simple conversion yields:\(G=\frac{42\,\text{kg{7\,\%}\cdot{100\,\%}=600\,\text{ kg}\)
+| \(\frac{42\,\text{kg}:{ \color{red}7{7\,\%:{ \color{red}7=\frac{6\,\text{ kg{1\,\%}=\frac{6\,\text{kg}\cdot { \color{red}100{1\,\%\cdot { \color{red}100\)without changing the last counter is:\(G=6\,\text{kg}\cdot 100=600\,\text{ kg}\)
 |-
 |class="backgroundcolor3"| Advantage:• One formula for all tasks
 |class="backgroundcolor6"| Advantages:• Without a formula• Easy to change over if the size you are looking forhere *G*is in the top left of the counter.
@@ -67,7 +65,6 @@ Example:
 |}
 
 ## Percentage increase and decrease
-
 
 Due to inconsistent usage, it is not always clear from the context what a percentage is relative to. When speaking of a "10% rise" or a "10% fall" in a quantity, the usual interpretation is that this is relative to the *initial value* of that quantity. For example, if an item is initially priced at $200 and the price rises 10% (an increase of $20), the new price will be $220. Note that this final price is 110% of the initial price (100% + 10% = 110%).
 
@@ -82,9 +79,9 @@ In general, a change of *x* percent in a quantity results in a final amount that
 ## Compounding percentages
 Percent changes applied sequentially *do not add up* in the usual way. For example, if the 10% increase in price considered earlier (on the $200 item, raising its price to $220) is followed by a 10% decrease in the price (a decrease of $22), then the final price will be $198—*not* the original price of $200. The reason for this apparent discrepancy is that the two percent changes (+10% and −10%) are measured relative to different initial values ($200 and $220, respectively), and thus do not "cancel out".
 
-In general, if an increase of *x* percent is followed by a decrease of *x* percent, and the initial amount was *p*, the final amount is 1= *p*(1 + 0.01)}}; hence the net change is an overall decrease by *x* percent *of* *x* percent (the square of the original percent change when expressed as a decimal number).  Thus, in the above example, after an increase and decrease of 1= *x* = 10 percent, the final amount, $198, was 10% of 10%, or 1%, less than the initial amount of $200. The net change is the same for a decrease of *x* percent, followed by an increase of *x* percent; the final amount is 1= *p*(1 - 0.01)}}. This multiplicative nature means that calculating a percentage of a percentage requires treating each as a fraction of the whole. For instance, determining a 20% portion within a 50% segment results in 10% of the total ($0.20 \times 0.50 = 0.10$). This distinction is vital in financial modeling and statistical analysis to avoid "additive fallacies" when dealing with nested ratios. A step-by-step breakdown of these multi-layered calculations can be used to verify complex results involving such nested percentages.
+In general, if an increase of *x* percent is followed by a decrease of *x* percent, and the initial amount was *p*, the final amount is 1= *p*(1 + 0.01); hence the net change is an overall decrease by *x* percent *of* *x* percent (the square of the original percent change when expressed as a decimal number). Thus, in the above example, after an increase and decrease of 1= *x* = 10 percent, the final amount, $198, was 10% of 10%, or 1%, less than the initial amount of $200. The net change is the same for a decrease of *x* percent, followed by an increase of *x* percent; the final amount is 1= *p*(1 - 0.01). This multiplicative nature means that calculating a percentage of a percentage requires treating each as a fraction of the whole. For instance, determining a 20% portion within a 50% segment results in 10% of the total ($0.20 \times 0.50 = 0.10$). This distinction is vital in financial modeling and statistical analysis to avoid "additive fallacies" when dealing with nested ratios. A step-by-step breakdown of these multi-layered calculations can be used to verify complex results involving such nested percentages.
 
-This can be expanded for a case where one does not have the same percent change. If the initial amount *p* leads to a percent change *x*, and the second percent change is *y*, then the final amount is 1= *p*(1 + 0.01.  To change the above example, after an increase of 1= *x* = 10 percent and decrease of 1= *y* = −5 percent, the final amount, $209, is 4.5% more than the initial amount of $200.
+This can be expanded for a case where one does not have the same percent change. If the initial amount *p* leads to a percent change *x*, and the second percent change is *y*, then the final amount is 1= *p*(1 + 0.01. To change the above example, after an increase of 1= *x* = 10 percent and decrease of 1= *y* = −5 percent, the final amount, $209, is 4.5% more than the initial amount of $200.
 
 As shown above, percent changes can be applied in any order and have the same effect.
 
@@ -93,7 +90,6 @@ In the case of interest rates, a very common but ambiguous way to say that an in
 In financial markets, it is common to refer to an increase of one percentage point (e.g. from 3% per annum to 4% per annum) as an increase of "100 basis points".
 
 ## Word and symbol
-
 
 In most forms of English, *percent* is usually written as two words (*per cent*), although *percentage* and *percentile* are written as one word. In American English, *percent* is the most common variant (but *per mille* is written as two words).
 
@@ -106,7 +102,7 @@ However, the International System of Units and the ISO 31-0 standard require a s
 
 ## Other uses
 
-The word "percentage" is often a misnomer in the context of sports statistics, when the referenced number is expressed as a decimal proportion, not a percentage: "The Phoenix Suns' Shaquille O'Neal led the NBA with a .609 field goal percentage (FG%) during the 2008–09 season." (O'Neal made 60.9% of his shots, not 0.609%.) Likewise, the winning percentage of a team, the fraction of matches that the club has won, is also usually expressed as a decimal proportion; a team that has a .500 winning percentage has won 50% of their matches. The practice is probably related to the similar way that batting averages are quoted.
+The word "percentage" is often a misnomer in the context of sports statistics, when the referenced number is expressed as a decimal proportion, not a percentage: "The Phoenix Suns' Shaquille O'Neal led the NBA with 609 field goal percentage (FG%) during the 2008–09 season." (O'Neal made 60.9% of his shots, not 0.609%.) Likewise, the winning percentage of a team, the fraction of matches that the club has won, is also usually expressed as a decimal proportion; a team that has 500 winning percentage has won 50% of their matches. The practice is probably related to the similar way that batting averages are quoted.
 
 As "percent" it is used to describe the grade or slope, the steepness of a road or railway, formula for which is 100 ×  which could also be expressed as the tangent of the angle of inclination times 100. This is the ratio of distances a vehicle would advance vertically and horizontally, respectively, when going up- or downhill, expressed in percent.
 
@@ -124,19 +120,3 @@ Percentage is also used to express composition of a mixture by mass percent and 
 ## Practical applications
 * Baker percentage
 * Volume percent
-
-## See also
-*Relative change and difference
-*Percent difference
-*Percentage change
-*Parts-per notation
-*Per-unit system
-*Percent point function
-
-## References
-
-
-## External links
-
-*
-

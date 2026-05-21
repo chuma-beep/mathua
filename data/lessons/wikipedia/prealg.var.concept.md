@@ -2,13 +2,13 @@
 
 # What is a variable
 
-In mathematics, a **variable** (from Latin  ) is a symbol, typically a letter, that refers to an unspecified mathematical object. One says colloquially that the variable *represents* or *denotes* the object, and that any valid candidate for the object is the value of the variable. The values a variable can take are usually of the same kind, often numbers. More specifically, the values involved may form a set, such as the set of real numbers.
+In mathematics, a **variable** (from Latin ) is a symbol, typically a letter, that refers to an unspecified mathematical object. One says colloquially that the variable *represents* or *denotes* the object, and that any valid candidate for the object is the value of the variable. The values a variable can take are usually of the same kind, often numbers. More specifically, the values involved may form a set, such as the set of real numbers.
 
-The object may not always exist, or it might be uncertain whether any valid candidate exists or not. For example, one could represent two integers by the variables  and  and require that the value of the square of  is twice the square of , which in algebraic notation can be written 1=*p*<sup>2</sup> = 2 *q*<sup>2</sup>. A definitive proof that this relationship is impossible to satisfy when  and  are restricted to integer numbers isn't obvious, but it has been known since ancient times and has had a big influence on mathematics ever since.
+The object may not always exist, or it might be uncertain whether any valid candidate exists or not. For example, one could represent two integers by the variables and and require that the value of the square of is twice the square of , which in algebraic notation can be written 1=*p*\(^{2}\) = 2 *q*\(^{2}\). A definitive proof that this relationship is impossible to satisfy when and are restricted to integer numbers isn't obvious, but it has been known since ancient times and has had a big influence on mathematics ever since.
 
-Originally, the term *variable* was used primarily for the argument of a function, in which case its value could be thought of as *varying* within the domain of the function. This is the motivation for the choice of the term. Also, variables are used for denoting values of functions, such as the symbol *y* in the equation 1=*y* = *f*(*x*), where  is the argument and  denotes the function itself.
+Originally, the term *variable* was used primarily for the argument of a function, in which case its value could be thought of as *varying* within the domain of the function. This is the motivation for the choice of the term. Also, variables are used for denoting values of functions, such as the symbol *y* in the equation 1=*y* = *f*(*x*), where is the argument and denotes the function itself.
 
-A variable may represent an unspecified number that remains fixed during the resolution of a problem; in which case, it is often called a parameter. A variable may denote an unknown number that has to be determined; in which case, it is called an unknown; for example, in the quadratic equation 1=*ax*<sup>2</sup> + *bx* + *c* = 0, the variables *a*, *b*, *c* are parameters, and *x* is the unknown.
+A variable may represent an unspecified number that remains fixed during the resolution of a problem; in which case, it is often called a parameter. A variable may denote an unknown number that has to be determined; in which case, it is called an unknown; for example, in the quadratic equation 1=*ax*\(^{2}\) + *bx* + *c* = 0, the variables *a*, *b*, *c* are parameters, and *x* is the unknown.
 
 Sometimes the same symbol can be used to denote both a variable and a constant, that is a well defined mathematical object. For example, the Greek letter *π* generally represents the number *π*, but has also been used to denote a projection. Similarly, the letter *e* often denotes Euler's number, but has been used to denote an unassigned coefficient for quartic function and higher degree polynomials. Even the symbol 1 has been used to denote an identity element of an arbitrary field. These two notions are used almost identically, therefore one usually must be told whether a given symbol denotes a variable or a constant.
 
@@ -18,11 +18,9 @@ In mathematical logic, a *variable* is a symbol that either represents an unspec
 
 ## History
 
-
 ### Early history
 
-The earliest uses of an "unknown quantity" date back to at least the Ancient Egyptians with the Moscow Mathematical Papyrus (c. 1500 BC) which described problems with unknowns rhetorically, called the "Aha problems". The "Aha problems" involve finding unknown quantities (referred to as *aha*, "stack") if the sum of the quantity and part(s) of it are given (The Rhind Mathematical Papyrus also contains four of these types of problems). For example, problem 19 asks one to calculate a quantity taken  times and added to 4 to make 10. In modern mathematical notation: 1=. Around the same time in Mesopotamia, mathematics of the Old Babylonian period (c. 2000 BC – 1500 BC) was more advanced, also studying quadratic and cubic equations.
-
+The earliest uses of an "unknown quantity" date back to at least the Ancient Egyptians with the Moscow Mathematical Papyrus (c. 1500 BC) which described problems with unknowns rhetorically, called the "Aha problems". The "Aha problems" involve finding unknown quantities (referred to as *aha*, "stack") if the sum of the quantity and part(s) of it are given (The Rhind Mathematical Papyrus also contains four of these types of problems). For example, problem 19 asks one to calculate a quantity taken times and added to 4 to make 10. In modern mathematical notation: 1=. Around the same time in Mesopotamia, mathematics of the Old Babylonian period (c. 2000 BC – 1500 BC) was more advanced, also studying quadratic and cubic equations.
 
 In works of ancient Greece such as Euclid's *Elements* (c. 300 BC), mathematics was described geometrically. For example, *The Elements*, proposition 1 of Book II, Euclid includes the proposition:
 
@@ -55,21 +53,21 @@ in which none of the five variables is considered as varying.
 This static formulation led to the modern notion of variable, which is simply a symbol representing a mathematical object that either is unknown, or may be replaced by any element of a given set (e.g., the set of real numbers).
 
 ## Notation
-Variables are generally denoted by a single letter, most often from the Latin alphabet and less often from the Greek, which may be lowercase or capitalized. The letter may be followed by a subscript: a number (as in *x*<sub>2</sub>), another variable (*x*<sub>*i*</sub>), a word or abbreviation of a word as a label (*x*<sub>total</sub>) or a mathematical expression (*x*<sub>2*i*+1</sub>). Under the influence of computer science, some variable names in pure mathematics consist of several letters and digits. Following René Descartes (1596–1650), letters at the beginning of the alphabet such as *a*, *b*, *c* are commonly used for known values and parameters, and letters at the end of the alphabet such as *x*, *y*, *z* are commonly used for unknowns and variables of functions. In printed mathematics, the norm is to set variables and constants in an italic typeface.
+Variables are generally denoted by a single letter, most often from the Latin alphabet and less often from the Greek, which may be lowercase or capitalized. The letter may be followed by a subscript: a number (as in *x*\(_{2}\)), another variable (*x*\(_{*i*}\)), a word or abbreviation of a word as a label (*x*\(_{total}\)) or a mathematical expression (*x*\(_{2*i*+1}\)). Under the influence of computer science, some variable names in pure mathematics consist of several letters and digits. Following René Descartes (1596–1650), letters at the beginning of the alphabet such as *a*, *b*, *c* are commonly used for known values and parameters, and letters at the end of the alphabet such as *x*, *y*, *z* are commonly used for unknowns and variables of functions. In printed mathematics, the norm is to set variables and constants in an italic typeface.
 
-For example, a general quadratic function is conventionally written as *ax*<sup>2</sup> + *bx* + *c*, where *a*, *b* and *c* are parameters (also called constants, because they are constant functions), while *x* is the variable of the function. A more explicit way to denote this function is *x* ↦ *ax*<sup>2</sup> + *bx* + *c*, which clarifies the function-argument status of *x* and the constant status of *a*, *b* and *c*. Since *c* occurs in a term that is a constant function of *x*, it is called the constant term.
+For example, a general quadratic function is conventionally written as *ax*\(^{2}\) + *bx* + *c*, where *a*, *b* and *c* are parameters (also called constants, because they are constant functions), while *x* is the variable of the function. A more explicit way to denote this function is *x* ↦ *ax*\(^{2}\) + *bx* + *c*, which clarifies the function-argument status of *x* and the constant status of *a*, *b* and *c*. Since *c* occurs in a term that is a constant function of *x*, it is called the constant term.
 
 Specific branches and applications of mathematics have specific naming conventions for variables. Variables with similar roles or meanings are often assigned consecutive letters or the same letter with different subscripts. For example, the three axes in 3D coordinate space are conventionally called *x*, *y*, and *z*. In physics, the names of variables are largely determined by the physical quantity they describe, but various naming conventions exist. A convention often followed in probability and statistics is to use *X*, *Y*, *Z* for the names of random variables, keeping *x*, *y*, *z* for variables representing corresponding better-defined values.
 
 ### Conventional variable names
 
 * *a*, *b*, *c*, *d* (sometimes extended to *e*, *f*) for parameters or coefficients
-* *a*<sub>0</sub>, *a*<sub>1</sub>, *a*<sub>2</sub>, ... for situations where distinct letters are inconvenient
-* *a<sub>i</sub>* or *u<sub>i</sub>* for the *i*th term of a sequence or the *i*th coefficient of a series
+* *a*\(_{0}\), *a*\(_{1}\), *a*\(_{2}\),.. . for situations where distinct letters are inconvenient
+* *a\(_{i}\)* or *u\(_{i}\)* for the *i*th term of a sequence or the *i*th coefficient of a series
 * *f*, *g*, *h* for functions (as in *f*(*x*))
 * *i*, *j*, *k* (sometimes *l* or *h*) for varying integers or indices in an indexed family, or unit vectors
 * *l* and *w* for the length and width of a figure
-* *l*  also for a line, or in number theory for a prime number not equal to *p*
+* *l* also for a line, or in number theory for a prime number not equal to *p*
 * *n* (with *m* as a second choice) for a fixed integer, such as a count of objects or the degree of a polynomial
 * *p* for a prime number or a probability
 * *q* for a prime power or a quotient
@@ -103,7 +101,7 @@ All these denominations of variables are of semantic nature, and the way of comp
 
 ### Dependent and independent variables
 
-In calculus and its application to physics and other sciences, it is rather common to consider a variable, say *y*, whose possible values depend on the value of another variable, say *x*. In mathematical terms, the *dependent* variable *y* represents the value of a function of *x*. To simplify formulas, it is often useful to use the same symbol for the dependent variable *y* and the function mapping *x* onto *y*. For example, the state of a physical system depends on measurable quantities such as the pressure, the temperature, the spatial position, ..., and all these quantities vary when the system evolves, that is, they are function of the time. In the formulas describing the system, these quantities are represented by variables which are dependent on the time, and thus considered implicitly as functions of the time.
+In calculus and its application to physics and other sciences, it is rather common to consider a variable, say *y*, whose possible values depend on the value of another variable, say *x*. In mathematical terms, the *dependent* variable *y* represents the value of a function of *x*. To simplify formulas, it is often useful to use the same symbol for the dependent variable *y* and the function mapping *x* onto *y*. For example, the state of a physical system depends on measurable quantities such as the pressure, the temperature, the spatial position,.. ., and all these quantities vary when the system evolves, that is, they are function of the time. In the formulas describing the system, these quantities are represented by variables which are dependent on the time, and thus considered implicitly as functions of the time.
 
 Therefore, in a formula, a **dependent variable** is a variable that is implicitly a function of another (or several other) variables. An **independent variable** is a variable that is not dependent.
 
@@ -116,14 +114,14 @@ then *x* is a variable standing for the argument of the function being defined, 
 
 In the identity
 \(\sum_{i=1}^n i = \frac{n^2+n}2\)
-the variable *i* is a summation variable which designates in turn each of the integers 1, 2, ...,  *n* (it is also called **index** because its variation is over a discrete set of values) while *n* is a parameter (it does not vary within the formula).
+the variable *i* is a summation variable which designates in turn each of the integers 1, 2,.. ., *n* (it is also called **index** because its variation is over a discrete set of values) while *n* is a parameter (it does not vary within the formula).
 
-In the theory of polynomials, a polynomial of degree 2 is generally denoted as *ax*<sup>2</sup> + *bx* + *c*, where *a*, *b* and *c* are called coefficients (they are assumed to be fixed, i.e., parameters of the problem considered) while *x* is called a variable. When studying this polynomial for its polynomial function this *x* stands for the function argument. When studying the polynomial as an object in itself, *x* is taken to be an indeterminate, and would often be written with a capital letter instead to indicate this status.
+In the theory of polynomials, a polynomial of degree 2 is generally denoted as *ax*\(^{2}\) + *bx* + *c*, where *a*, *b* and *c* are called coefficients (they are assumed to be fixed, i.e., parameters of the problem considered) while *x* is called a variable. When studying this polynomial for its polynomial function this *x* stands for the function argument. When studying the polynomial as an object in itself, *x* is taken to be an indeterminate, and would often be written with a capital letter instead to indicate this status.
 
 #### Example: the ideal gas law
 Consider the equation describing the ideal gas law,
 \(PV = Nk_\text{B}T.\)
-This equation would generally be interpreted to have four variables, and one constant. The constant is *k*<sub>B</sub>, the Boltzmann constant. One of the variables, *N*, the number of particles, is a positive integer (and therefore a discrete variable), while the other three, *P*, *V* and *T*, for pressure, volume and temperature, are continuous variables.
+This equation would generally be interpreted to have four variables, and one constant. The constant is *k*\(_{B}\), the Boltzmann constant. One of the variables, *N*, the number of particles, is a positive integer (and therefore a discrete variable), while the other three, *P*, *V* and *T*, for pressure, volume and temperature, are continuous variables.
 
 One could rearrange this equation to obtain *P* as a function of the other variables,
 \(P(V, N, T) = \frac{Nk_\text{B}T}{V}.\)
@@ -133,37 +131,13 @@ However, in an experiment, in order to determine the dependence of pressure on a
 \(P(T) = \frac{Nk_\text{B}T}{V},\)
 where now *N* and *V* are also regarded as constants. Mathematically, this constitutes a partial application of the earlier function *P*.
 
-This illustrates how independent variables and constants are largely dependent on the point of view taken. One could even regard *k*<sub>B</sub> as a variable to obtain a function
+This illustrates how independent variables and constants are largely dependent on the point of view taken. One could even regard *k*\(_{B}\) as a variable to obtain a function
 \(P(V, N, T, k_\text{B}) = \frac{Nk_\text{B}T}{V}.\)
 
 ## Moduli spaces
-
 
 Considering constants and variables can lead to the concept of moduli spaces. For illustration, consider the equation for a parabola,
 \(y = ax^2 + bx + c,\)
 where *a*, *b*, *c*, *x* and *y* are all considered to be real. The set of points (*x*, *y*) in the 2D plane satisfying this equation trace out the graph of a parabola. Here, *a*, *b* and *c* are regarded as constants, which specify the parabola, while *x* and *y* are variables.
 
 Then instead regarding *a*, *b* and *c* as variables, we observe that each set of 3-tuples (*a*, *b*, *c*) corresponds to a different parabola. That is, they specify coordinates on the 'space of parabolas': this is known as a **moduli space of parabolas**.
-
-## See also
-* Lambda calculus
-* Observable variable
-* Physical constant
-* Propositional variable
-
-## References
-
-
-## Bibliography
-
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-

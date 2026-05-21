@@ -22,7 +22,7 @@ be a polynomial of degree *n* (this means \(a_n\ne 0\)), such that the coefficie
 \(A'(x) = na_nx^{n-1}+(n-1)a_{n-1}x^{n-2}+\cdots+a_1,\)
 is a polynomial in \(a_0, \ldots, a_n\) with integer coefficients, which is the determinant of the Sylvester matrix of *A* and *A*. The nonzero entries of the first column of the Sylvester matrix are \(a_n\) and \(na_n,\) and the resultant is thus a multiple of \(a_n.\) Hence the discriminant—up to its sign—is defined as the quotient of the resultant of *A* and ''A' by \(a_n\):
 
-\(\operatorname{Disc}_x(A) = \frac{(-1)^{n(n-1)/2}}{a_n} \operatorname{Res}_x(A,A')\)
+\(\operatorname{Disc}_x(A) = \frac{(-1)^{n(n-1)/2{a_n} \operatorname{Res}_x(A,A')\)
 where the resultant is computed with \(A'\) considered of degree \(n-1,\) even if it has a lower degree, which occurs when the characteristic divides \(n\).
 
 Historically, this sign has been chosen such that, over the reals, the discriminant will be positive when all the roots of the polynomial are real. The division by \(a_n\) may not be well defined if the ring of the coefficients contains zero divisors. Such a problem may be avoided by replacing \(a_n\) by 1 in the first column of the Sylvester matrix—*before* computing the determinant. In any case, the discriminant is a polynomial in \(a_0, \ldots, a_n\) with integer coefficients.
@@ -43,17 +43,13 @@ This expression for the discriminant is often taken as a definition. It makes cl
 The discriminant of a linear polynomial (degree 1) is rarely considered. If needed, it is commonly defined to be equal to 1 (using the usual conventions for the empty product and considering that one of the two blocks of the Sylvester matrix is empty). There is no common convention for the discriminant of a constant polynomial (i.e., polynomial of degree 0).
 
 For small degrees, the discriminant is rather simple (see below), but for higher degrees, it may become unwieldy. For example, the discriminant of a general quartic has 16 terms, that of a quintic has 59 terms, and that of a sextic has 246 terms.
-This is OEIS sequence .
-
-
-### Degree 2
-
+This is OEIS sequence. ### Degree 2
 
 The quadratic polynomial \(ax^2+bx+c \,\) has discriminant
 \(b^2-4ac\,.\)
 
 The square root of the discriminant appears in the quadratic formula for the roots of the quadratic polynomial:
-\(x_{1,2}=\frac{-b \pm \sqrt {b^2-4ac}}{2a}.\)
+\(x_{1,2}=\frac{-b \pm \sqrt {b^2-4ac{2a}.\)
 
 where the discriminant is zero if and only if the two roots are equal. If *a*, *b*, *c* are real numbers, the polynomial has two distinct real roots if the discriminant is positive, and two complex conjugate roots if it is negative.
 
@@ -62,7 +58,6 @@ The discriminant is the product of *a* and the square of the difference of the r
 If *a*, *b*, *c* are rational numbers, then the discriminant is the square of a rational number if and only if the two roots are rational numbers.
 
 ### Degree 3
-
 
 The cubic polynomial \(ax^3+bx^2+cx+d \,\) has discriminant
 \(b^2c^2-4ac^3-4b^3d-27a^2d^2+18abcd\,.\)
@@ -119,9 +114,9 @@ This results from the expression of the discriminant in terms of the roots
 \operatorname{Disc}_x(\alpha P(x)) &= \alpha^{2n-2}\operatorname{Disc}_x(P(x))
 \end{aligned}\)
 This results from the expression in terms of the roots, or of the quasi-homogeneity of the discriminant.
-* *Invariance by inversion*:  The reciprocal polynomial of \(P(x) = a_nx^n + \cdots + a_0\) with  \(a_0 \neq 0\)  is:
-\(P^{\mathrm{r}}\!\!\;(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.\) Then:
-\(\operatorname{Disc}_x(P^{\mathrm{r}}\!\!\,(x)) = \operatorname{Disc}_x(P(x)).\)
+* *Invariance by inversion*: The reciprocal polynomial of \(P(x) = a_nx^n + \cdots + a_0\) with \(a_0 \neq 0\) is:
+\(P^{\mathrm{r\!\!\;(x) = x^nP(1/x) = a_0x^n +\cdots +a_n.\) Then:
+\(\operatorname{Disc}_x(P^{\mathrm{r\!\!\,(x)) = \operatorname{Disc}_x(P(x)).\)
 
 ### Invariance under ring homomorphisms
 Let \(\varphi\colon R \to S\) be a homomorphism of commutative rings. Given a polynomial
@@ -156,7 +151,7 @@ This property follows immediately by substituting the expression for the resulta
 ### Homogeneity
 The discriminant is a homogeneous polynomial in the coefficients; it is also a homogeneous polynomial in the roots and thus quasi-homogeneous in the coefficients.
 
-The discriminant of a polynomial of degree *n* is homogeneous of degree 2*n* − 2 in the coefficients. This can be seen in two ways. In terms of the roots-and-leading-term formula, multiplying all the coefficients by  does not change the roots, but multiplies the leading term by . In terms of its expression as a determinant of a (2*n* − 1) × (2*n* − 1) matrix (the Sylvester matrix) divided by , the determinant is homogeneous of degree 2*n* − 1 in the entries, and dividing by  makes the degree 2*n* − 2.
+The discriminant of a polynomial of degree *n* is homogeneous of degree 2*n* − 2 in the coefficients. This can be seen in two ways. In terms of the roots-and-leading-term formula, multiplying all the coefficients by does not change the roots, but multiplies the leading term by. In terms of its expression as a determinant of a (2*n* − 1) × (2*n* − 1) matrix (the Sylvester matrix) divided by , the determinant is homogeneous of degree 2*n* − 1 in the entries, and dividing by makes the degree 2*n* − 2.
 
 The discriminant of a polynomial of degree *n* is homogeneous of degree *n*(*n* − 1) in the roots. This follows from the expression of the discriminant in terms of the roots, which is the product of a constant and \(\binom{n}{2} = \frac{n(n-1)}{2}\) squared differences of roots.
 
@@ -172,14 +167,14 @@ and also the equation
 \(ni_0 +(n-1)i_1+ \cdots+ i_{n-1}=n(n-1),\)
 which is obtained by subtracting the second equation from the first one multiplied by *n*.
 
-This restricts the possible terms in the discriminant. For the general quadratic polynomial, the discriminant \(b^2-4ac\) is a homogeneous polynomial of degree 2 which has only two terms, while the general homogeneous polynomial of degree two in three variables has 6 terms. The discriminant of the  general cubic polynomial is a homogeneous polynomial of degree 4 in four variables; it has five terms, which is the maximum allowed by the above rules, while the general homogeneous polynomial of degree 4 in 4 variables has 35 terms.
+This restricts the possible terms in the discriminant. For the general quadratic polynomial, the discriminant \(b^2-4ac\) is a homogeneous polynomial of degree 2 which has only two terms, while the general homogeneous polynomial of degree two in three variables has 6 terms. The discriminant of the general cubic polynomial is a homogeneous polynomial of degree 4 in four variables; it has five terms, which is the maximum allowed by the above rules, while the general homogeneous polynomial of degree 4 in 4 variables has 35 terms.
 
 For higher degrees, there may be monomials which satisfy above rules and do not appear in the discriminant. The first example is for the quartic polynomial \(ax^4 + bx^3 + cx^2 + dx + e\), in which case the monomial \(bc^4d\) satisfies the rules without appearing in the discriminant.
 
 ## Real roots
 In this section, all polynomials have real coefficients.
 
-It has been seen in  that the sign of the discriminant provides useful information on the nature of the roots for polynomials of degree 2 and 3. For higher degrees, the information provided by the discriminant is less complete, but still useful. More precisely, for a polynomial of degree *n*, one has:
+It has been seen in that the sign of the discriminant provides useful information on the nature of the roots for polynomials of degree 2 and 3. For higher degrees, the information provided by the discriminant is less complete, but still useful. More precisely, for a polynomial of degree *n*, one has:
 * The polynomial has a multiple root if and only if its discriminant is zero.
 * If the discriminant is positive, the number of non-real roots is a multiple of 4. That is, there is a nonnegative integer *k* ≤ *n*/4 such that there are 2*k* pairs of complex conjugate roots and *n* − 4*k* real roots.
 * If the discriminant is negative, the number of non-real roots is not a multiple of 4. That is, there is a nonnegative integer *k* ≤ (*n* − 2)/4 such that there are 2*k* + 1 pairs of complex conjugate roots and *n* − 4*k* + 2 real roots.
@@ -199,12 +194,12 @@ and
 
 Because of these properties, the quantity \(\operatorname{Disc}^h (A)\) is called the *discriminant* or the *homogeneous discriminant* of *A*.
 
-If \(a_0\) and \(a_n\) are permitted to be zero, the polynomials *A*(*x*, 1) and *A*(1, *y*) may have a degree smaller than *n*. In this case, above formulas and definition remain valid, if the discriminants are computed as if all polynomials would have the degree . This means that the discriminants must be computed with \(a_0\) and \(a_n\) indeterminate, the substitution for them of their actual values being done *after* this computation. Equivalently, the formulas of  must be used.
+If \(a_0\) and \(a_n\) are permitted to be zero, the polynomials *A*(*x*, 1) and *A*(1, *y*) may have a degree smaller than *n*. In this case, above formulas and definition remain valid, if the discriminants are computed as if all polynomials would have the degree. This means that the discriminants must be computed with \(a_0\) and \(a_n\) indeterminate, the substitution for them of their actual values being done *after* this computation. Equivalently, the formulas of must be used.
 
 ## Use in algebraic geometry
 The typical use of discriminants in algebraic geometry is for studying plane algebraic curves, and more generally algebraic hypersurfaces. Let *V* be such a curve or hypersurface; *V* is defined as the zero set of a multivariate polynomial. This polynomial may be considered as a univariate polynomial in one of the indeterminates, with polynomials in the other indeterminates as coefficients. The discriminant with respect to the selected indeterminate defines a hypersurface *W* in the space of the other indeterminates. The points of *W* are exactly the projection of the points of *V* (including the points at infinity), which either are singular or have a tangent hyperplane that is parallel to the axis of the selected indeterminate.
 
-For example, let  be a bivariate polynomial in  and  with real coefficients, so that 1=*f*  = 0 is the implicit equation of a real plane algebraic curve. Viewing  as a univariate polynomial in  with coefficients depending on , then the discriminant is a polynomial in  whose roots are the -coordinates of the singular points, of the points with a tangent parallel to the -axis and of some of the asymptotes parallel to the -axis. In other words, the computation of the roots of the -discriminant and the -discriminant allows one to compute all of the remarkable points of the curve, except the inflection points.
+For example, let be a bivariate polynomial in and with real coefficients, so that 1=*f*  = 0 is the implicit equation of a real plane algebraic curve. Viewing as a univariate polynomial in with coefficients depending on , then the discriminant is a polynomial in whose roots are the -coordinates of the singular points, of the points with a tangent parallel to the -axis and of some of the asymptotes parallel to the -axis. In other words, the computation of the roots of the -discriminant and the -discriminant allows one to compute all of the remarkable points of the curve, except the inflection points.
 
 ## Generalizations
 There are two classes of the concept of discriminant. The first class is the discriminant of an algebraic number field, which, in some cases including quadratic fields, is the discriminant of a polynomial defining the field.
@@ -213,20 +208,20 @@ Discriminants of the second class arise for problems depending on coefficients, 
 
 Let *A* be a homogeneous polynomial in *n* indeterminates over a field of characteristic 0, or of a prime characteristic that does not divide the degree of the polynomial. The polynomial *A* defines a projective hypersurface, which has singular points if and only the *n* partial derivatives of *A* have a nontrivial common zero. This is the case if and only if the multivariate resultant of these partial derivatives is zero, and this resultant may be considered as the discriminant of *A*. However, because of the integer coefficients resulting of the derivation, this multivariate resultant may be divisible by a power of *n*, and it is better to take, as a discriminant, the primitive part of the resultant, computed with generic coefficients. The restriction on the characteristic is needed because otherwise a common zero of the partial derivative is not necessarily a zero of the polynomial (see Euler's identity for homogeneous polynomials).
 
-In the case of a homogeneous bivariate polynomial of degree *d*, this general discriminant is \(d^{d-2}\) times the discriminant defined in . Several other classical types of discriminants, that are instances of the general definition are described in next sections.
+In the case of a homogeneous bivariate polynomial of degree *d*, this general discriminant is \(d^{d-2}\) times the discriminant defined in. Several other classical types of discriminants, that are instances of the general definition are described in next sections.
 
 ### Quadratic forms
 
 A quadratic form is a function over a vector space, which is defined over some basis by a homogeneous polynomial of degree 2:
 
-\(Q(x_1,\ldots,x_n) \ =\ \sum_{i=1}^n a_{ii} x_i^2+\sum_{1\le i ×</sup>)<sup>2</sup>, the quotient of the multiplicative monoid of *K* by the subgroup of the nonzero squares (that is, two elements of *K* are in the same equivalence class if one is the product of the other by a nonzero square). It follows that over the complex numbers, a discriminant is equivalent to 0 or 1. Over the real numbers, a discriminant is equivalent to −1, 0, or 1. Over the rational numbers, a discriminant is equivalent to a unique square-free integer.
+\(Q(x_1,\ldots,x_n) \ =\ \sum_{i=1}^n a_{ii} x_i^2+\sum_{1\le i ×)^{2}, the quotient of the multiplicative monoid of *K* by the subgroup of the nonzero squares (that is, two elements of *K* are in the same equivalence class if one is the product of the other by a nonzero square). It follows that over the complex numbers, a discriminant is equivalent to 0 or 1. Over the real numbers, a discriminant is equivalent to −1, 0, or 1. Over the rational numbers, a discriminant is equivalent to a unique square-free integer.
 
 By a theorem of Jacobi, a quadratic form over a field of characteristic different from 2 can be expressed, after a linear change of variables, in **diagonal form** as
 \(a_1x_1^2 + \cdots + a_nx_n^2.\)
 More precisely, a quadratic form may be expressed as a sum
 \(\sum_{i=1}^n a_i L_i^2\)
-where the *L*<sub>*i*</sub> are independent linear forms and  is the number of the variables (some of the *a*<sub>*i*</sub> may be zero). Equivalently, for any symmetric matrix *A*, there is an elementary matrix *S* such that \(S^\mathrm T A\,S\) is a diagonal matrix.
-Then the discriminant is the product of the *a*<sub>*i*</sub>, which is well-defined as a class in *K*/(*K*<sup>×</sup>)<sup>2</sup>.
+where the *L*_{*i*} are independent linear forms and is the number of the variables (some of the *a*_{*i*} may be zero). Equivalently, for any symmetric matrix *A*, there is an elementary matrix *S* such that \(S^\mathrm T A\,S\) is a diagonal matrix.
+Then the discriminant is the product of the *a*_{*i*}, which is well-defined as a class in *K*/(*K*^{×})^{2}.
 
 Geometrically, the discriminant of a quadratic form in three variables is the equation of a quadratic projective curve. The discriminant is zero if and only if the curve is decomposed in lines (possibly over an algebraically closed extension of the field).
 
@@ -277,7 +272,7 @@ More specifically, it is proportional to the squared volume of the fundamental d
 
 The discriminant is one of the most basic invariants of a number field, and occurs in several important analytic formulas such as the functional equation of the Dedekind zeta function of *K*, and the analytic class number formula for *K*. A theorem of Hermite states that there are only finitely many number fields of bounded discriminant, however determining this quantity is still an open problem, and the subject of current research.
 
-Let *K* be an algebraic number field, and let *O<sub>K</sub>* be its ring of integers. Let *b*<sub>1</sub>, ..., *b<sub>n</sub>* be an integral basis of *O<sub>K</sub>* (i.e. a basis as a **Z**-module), and let {σ<sub>1</sub>, ..., σ<sub>*n*</sub>} be the set of embeddings of *K* into the complex numbers (i.e. injective ring homomorphisms *K* → **C**). The **discriminant** of *K* is the square of the determinant of the *n* by *n* matrix *B* whose (*i*,*j*)-entry is σ<sub>*i*</sub>(*b<sub>j</sub>*). Symbolically,
+Let *K* be an algebraic number field, and let *O_{K}* be its ring of integers. Let *b*_{1},.. ., *b_{n}* be an integral basis of *O_{K}* (i.e. a basis as a **Z**-module), and let {σ_{1},.. ., σ_{*n*be the set of embeddings of *K* into the complex numbers (i.e. injective ring homomorphisms *K* → **C**). The **discriminant** of *K* is the square of the determinant of the *n* by *n* matrix *B* whose (*i*,*j*)-entry is σ_{*i*}(*b_{j}*). Symbolically,
 
 \(\Delta_K=\det\left(\begin{array}{cccc}
 \sigma_1(b_1) & \sigma_1(b_2) &\cdots & \sigma_1(b_n) \\
@@ -286,8 +281,7 @@ Let *K* be an algebraic number field, and let *O<sub>K</sub>* be its ring of int
 \sigma_n(b_1) & \cdots & \cdots & \sigma_n(b_n)
 \end{array}\right)^2.\)
 
-
-The discriminant of *K* can be referred to as the absolute discriminant of *K* to distinguish it from the  of an extension *K*/*L* of number fields. The latter is an ideal in the ring of integers of *L*, and like the absolute discriminant it indicates which primes are ramified in *K*/*L*. It is a generalization of the absolute discriminant allowing for *L* to be bigger than **Q**; in fact, when *L* = **Q**, the relative discriminant of *K*/**Q** is the principal ideal of **Z** generated by the absolute discriminant of *K*.
+The discriminant of *K* can be referred to as the absolute discriminant of *K* to distinguish it from an extension *K*/*L* of number fields. The latter is an ideal in the ring of integers of *L*, and like the absolute discriminant it indicates which primes are ramified in *K*/*L*. It is a generalization of the absolute discriminant allowing for *L* to be bigger than **Q**; in fact, when *L* = **Q**, the relative discriminant of *K*/**Q** is the principal ideal of **Z** generated by the absolute discriminant of *K*.
 ### Fundamental discriminants
 A specific type of discriminant useful in the study of quadratic fields is the fundamental discriminant. It arises in the theory of integral binary quadratic forms, which are expressions of the form:
 \[
@@ -309,9 +303,7 @@ The first eleven positive fundamental discriminants are:
 
 The first eleven negative fundamental discriminants are:
 
-−3, −4, −7, −8, −11, −15, −19, −20, −23, −24, −31 .
-
-#### Quadratic number fields
+−3, −4, −7, −8, −11, −15, −19, −20, −23, −24, −31. #### Quadratic number fields
 A quadratic field is a field extension of the rational numbers \(\mathbb{Q}\) that has degree 2. The discriminant of a quadratic field plays a role analogous to the discriminant of a quadratic form.
 
 There exists a fundamental connection: an integer \(D_0\) is a fundamental discriminant if and only if:
@@ -324,14 +316,6 @@ For each fundamental discriminant \(D_0 \neq 1\), there exists a unique (up to i
 #### Prime factorization
 Fundamental discriminants can also be characterized by their prime factorization. Consider the set \(S\) consisting of \(-8, 8, -4,\) the prime numbers congruent to 1 modulo 4, and the additive inverses of the prime numbers congruent to 3 modulo 4:
 \[
-S = \{-8, -4, 8, -3, 5, -7, -11, 13, 17, -19, ... \}
+S = \{-8, -4, 8, -3, 5, -7, -11, 13, 17, -19,.. . \}
 \]
 An integer \(D \neq 1\) is a fundamental discriminant if and only if it is a product of elements of \(S\) that are pairwise coprime.
-
-## References
-
-
-## External links
-*Wolfram Mathworld: Polynomial Discriminant
-*Planetmath: Discriminant
-

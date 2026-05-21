@@ -10,7 +10,7 @@ A first order differential equation is said to be homogeneous if it may be writt
 f(x,y) \, dy = g(x,y) \, dx,
 \]
 
-where  and  are homogeneous functions of the same degree of  and . In this case, the change of variable 1=*y* = *ux* leads to an equation of the form
+where and are homogeneous functions of the same degree of and. In this case, the change of variable 1=*y* = *ux* leads to an equation of the form
 
 \[
 \frac{dx}{x} = h(u) \, du,
@@ -25,22 +25,17 @@ The term *homogeneous* was first applied to differential equations by Johann Ber
 
 ## Homogeneous first-order differential equations
 
-
 A first-order ordinary differential equation in the form:
-
 
 \[
 M(x,y)\,dx + N(x,y)\,dy = 0
 \]
 
-
-is a homogeneous type if both functions *M*(*x*, *y*) and *N*(*x*, *y*) are homogeneous functions of the same degree . That is, multiplying each variable by a parameter λ, we find
-
+is a homogeneous type if both functions *M*(*x*, *y*) and *N*(*x*, *y*) are homogeneous functions of the same degree. That is, multiplying each variable by a parameter λ, we find
 
 \[
 M(\lambda x, \lambda y) = \lambda^n M(x,y) \quad \text{and} \quad N(\lambda x, \lambda y) = \lambda^n N(x,y)\,.
 \]
-
 
 Thus,
 
@@ -48,10 +43,8 @@ Thus,
 \frac{M(\lambda x, \lambda y)}{N(\lambda x, \lambda y)} = \frac{M(x,y)}{N(x,y)}\,.
 \]
 
-
 ### Solution method
-In the quotient \(\frac{M(tx,ty)}{N(tx,ty)} = \frac{M(x,y)}{N(x,y)}\), we can let 1=*t* =  to simplify this quotient to a function  of the single variable :
-
+In the quotient \(\frac{M(tx,ty)}{N(tx,ty)} = \frac{M(x,y)}{N(x,y)}\), we can let 1=*t* = to simplify this quotient to a function of the single variable :
 
 \[
 \frac{M(x,y)}{N(x,y)} = \frac{M(tx,ty)}{N(tx,ty)} = \frac{M(1,y/x)}{N(1,y/x)}=f(y/x)\,.
@@ -63,14 +56,11 @@ That is
 \frac{dy}{dx} = -f(y/x).
 \]
 
-
 Introduce the change of variables 1=*y* = *ux*; differentiate using the product rule:
-
 
 \[
 \frac{dy}{dx}=\frac{d(ux)}{dx} = x\frac{du}{dx} + u\frac{dx}{dx} = x\frac{du}{dx} + u.
 \]
-
 
 This transforms the original differential equation into the separable form
 
@@ -87,18 +77,17 @@ or
 which can now be integrated directly: ln *x* equals the antiderivative of the right-hand side (see ordinary differential equation).
 
 ### Special case
-A first order differential equation of the form (, , , , ,  are all constants)
+A first order differential equation of the form (, , are all constants)
 
 \[
 \left(ax + by + c\right) dx + \left(ex + fy + g\right) dy = 0
 \]
 
 where *af* ≠ *be*
-can be transformed into a homogeneous type by a linear transformation of both variables ( and  are constants):
+can be transformed into a homogeneous type by a linear transformation of both variables ( and are constants):
 
 \[
-t = x + \alpha; \;\; z = y + \beta \,,
-\]
+t = x + \alpha; \;\; z = y + \beta \, \]
 
 where
 
@@ -122,60 +111,34 @@ for each respective substitution. Both may be solved via separation of variables
 
 ## Homogeneous linear differential equations
 
-A linear differential equation is  **homogeneous** if it is a homogeneous linear equation in the unknown function and its derivatives. It follows that, if *φ*(*x*) is a solution, so is *cφ*(*x*), for any (non-zero) constant . In order for this condition to hold, each nonzero term of the linear differential equation must depend on the unknown function or any derivative of it. A linear differential equation that fails this condition is called **inhomogeneous.**
+A linear differential equation is **homogeneous** if it is a homogeneous linear equation in the unknown function and its derivatives. It follows that, if *φ*(*x*) is a solution, so is *cφ*(*x*), for any (non-zero) constant. In order for this condition to hold, each nonzero term of the linear differential equation must depend on the unknown function or any derivative of it. A linear differential equation that fails this condition is called **inhomogeneous.**
 
-A linear differential equation can be represented as a linear operator acting on *y*(*x*) where  is usually the independent variable and  is the dependent variable. Therefore, the general form of a linear homogeneous differential equation is
-
+A linear differential equation can be represented as a linear operator acting on *y*(*x*) where is usually the independent variable and is the dependent variable. Therefore, the general form of a linear homogeneous differential equation is
 
 \[
 L(y) = 0
 \]
 
-
-where  is a differential operator, a sum of derivatives (defining the "0th derivative" as the original, non-differentiated function), each multiplied by a function *f*<sub>*i*</sub> of :
-
+where is a differential operator, a sum of derivatives (defining the "0th derivative" as the original, non-differentiated function), each multiplied by a function *f*\(_{*i*}\) of :
 
 \[
-L = \sum_{i=0}^n f_i(x)\frac{d^i}{dx^i} \, ,
-\]
+L = \sum_{i=0}^n f_i(x)\frac{d^i}{dx^i} \, \]
 
-where *f*<sub>*i*</sub> may be constants, but not all *f*<sub>*i*</sub> may be zero.
+where *f*\(_{*i*}\) may be constants, but not all *f*\(_{*i*}\) may be zero.
 
 For example, the following linear differential equation is homogeneous:
 
-
 \[
-\sin(x) \frac{d^2y}{dx^2} + 4 \frac{dy}{dx} + y = 0 \,,
-\]
-
+\sin(x) \frac{d^2y}{dx^2} + 4 \frac{dy}{dx} + y = 0 \, \]
 
 whereas the following two are inhomogeneous:
-
 
 \[
 2 x^2 \frac{d^2y}{dx^2} + 4 x \frac{dy}{dx} + y = \cos(x) \,;
 \]
-
 
 \[
 2 x^2 \frac{d^2y}{dx^2} - 3 x \frac{dy}{dx} + y = 2 \,.
 \]
 
 The existence of a constant term is a sufficient condition for an equation to be inhomogeneous, as in the above example.
-
-## See also
-* Separation of variables
-
-## Notes
-
-
-## References
-* . (This is a good introductory reference on differential equations.)
-* . (This is a classic reference on ODEs, first published in 1926.)
-*
-*
-
-## External links
-*Homogeneous differential equations at MathWorld
-*Wikibooks: Ordinary Differential Equations/Substitution 1
-

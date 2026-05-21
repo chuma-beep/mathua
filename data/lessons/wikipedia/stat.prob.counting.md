@@ -2,7 +2,7 @@
 
 # Fundamental counting principle
 
-In combinatorics, the **rule of product** or **multiplication principle** is a basic counting principle (a.k.a. the **fundamental principle of counting**). Stated simply, it is the intuitive idea that if there are  ways of doing something and  ways of doing another thing, then there are *a* · *b* ways of performing both actions.
+In combinatorics, the **rule of product** or **multiplication principle** is a basic counting principle (a.k.a. the **fundamental principle of counting**). Stated simply, it is the intuitive idea that if there are ways of doing something and ways of doing another thing, then there are *a* · *b* ways of performing both actions.
 
 ## Examples
 \(\begin{matrix}
@@ -32,18 +32,9 @@ In set theory, this multiplication principle is often taken to be the definition
 
 where \(\times\) is the Cartesian product operator. These sets need not be finite, nor is it necessary to have only finitely many factors in the product.
 
-An extension of the rule of product considers there are  different types of objects, say sweets, to be associated with  objects, say people. How many different ways can the people receive their sweets?
+An extension of the rule of product considers there are different types of objects, say sweets, to be associated with objects, say people. How many different ways can the people receive their sweets?
 
-Each person may receive any of the  sweets available, and there are  people, so there are \(\overbrace{n\cdots\cdot n}^k = n^k\) ways to do this.
+Each person may receive any of the sweets available, and there are people, so there are \(\overbrace{n\cdots\cdot n}^k = n^k\) ways to do this.
 
 ## Related concepts
 The rule of sum is another basic counting principle. Stated simply, it is the idea that if we have *a* ways of doing something and *b* ways of doing another thing and we can not do both at the same time, then there are *a* + *b* ways to choose one of the actions.
-
-## See also
-*Combinatorial principles
-
-## References
-
-
-fi:Todennäköisyysteoria#Tuloperiaate ja summaperiaate
-

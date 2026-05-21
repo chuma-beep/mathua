@@ -2,7 +2,7 @@
 
 # Unit rates
 
-Rate}}
+Rate
 
 In mathematics, a **rate** is the quotient of two quantities, often represented as a fraction. If the divisor (or fraction denominator) in the rate is equal to one expressed as a single unit, and if it is assumed that this quantity can be changed systematically (i.e., is an independent variable), then the dividend (the fraction numerator) of the rate expresses the corresponding **rate of change** in the other (dependent) variable. In some cases, it may be regarded as a change to a value, which is caused by a change of a value in respect to another value. For example, acceleration is a change in velocity with respect to time.
 
@@ -16,12 +16,11 @@ A rate defined using two numbers of the same units will result in a dimensionles
 
 ## Properties and examples
 
-
 Rates and ratios often vary with time, location, particular element (or subset) of a set of objects, etc. Thus they are often mathematical functions.
 
 A rate (or ratio) may often be thought of as an output-input ratio, benefit-cost ratio, all considered in the broad sense. For example, miles per hour in transportation is the output (or benefit) in terms of miles of travel, which one gets from spending an hour (a cost in time) of traveling (at this velocity).
 
-A set of sequential indices may be used to enumerate elements (or subsets) of a set of ratios under study. For example, in finance, one could define *i* by assigning consecutive integers to companies, to political subdivisions (such as states), to different investments, etc. The reason for using indices *i* is so a set of ratios (1=*i* = 0, *N*) can be used in an equation to calculate a function of the rates such as an average of a set of ratios. For example, the average velocity found from the set of *v<sub>i</sub>*'s mentioned above. Finding averages may involve using weighted averages and possibly using the harmonic mean.
+A set of sequential indices may be used to enumerate elements (or subsets) of a set of ratios under study. For example, in finance, one could define *i* by assigning consecutive integers to companies, to political subdivisions (such as states), to different investments, etc. The reason for using indices *i* is so a set of ratios (1=*i* = 0, *N*) can be used in an equation to calculate a function of the rates such as an average of a set of ratios. For example, the average velocity found from the set of *v\(_{i}\)*'s mentioned above. Finding averages may involve using weighted averages and possibly using the harmonic mean.
 
 A ratio 1=*r* = *a*/*b* has both a numerator *a* and a denominator *b*. The value of *a* and *b* may be a real number or integer. The inverse of a ratio *r* is 1=1/*r* = *b*/*a*. A rate may be equivalently expressed as an inverse of its value if the ratio of its units is also inverse. For example, 5 miles (mi) per kilowatt-hour (kWh) corresponds to 1/5 kWh/mi (or 200 Wh/mi).
 
@@ -39,7 +38,6 @@ where *f*(*x*) is the function with respect to *x* over the interval from *a* to
 For example, the average speed of a car can be calculated using the total distance traveled between two points, divided by the travel time. In contrast, the instantaneous velocity can be determined by viewing a speedometer.
 
 ## List of temporal rates
-
 
 In chemistry and physics:
 * Speed, the rate of change of position, or the change of position per unit of time
@@ -77,15 +75,3 @@ Miscellaneous definitions:
 * Birth rate, and mortality rate, the number of births or deaths scaled to the size of that population, per unit of time
 * Literacy rate, the proportion of the population over age fifteen that can read and write
 * Sex ratio or gender ratio, the ratio of males to females in a population
-
-## See also
-* Derivative
-* Gradient
-* Hertz
-* Slope
-
-## References
-
-
-de:Rate
-

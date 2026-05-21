@@ -3,4 +3,3 @@
 # Divisibility rules
 
 #REDIRECT Divisor
-

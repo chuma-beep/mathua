@@ -3,7 +3,3 @@
 # Tangent definition and ratio identity
 
 #REDIRECT Trigonometric functions
-
-
-}}
-

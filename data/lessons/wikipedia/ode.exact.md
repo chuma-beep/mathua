@@ -71,7 +71,7 @@ Begin by integrating the first equation with respect to \(x\). In practice, it d
 \(\psi(x, y) = \int M(x, y) \, dx + h(y)\)
 \(\psi(x, y) = Q(x, y) + h(y)\)
 
-where \(Q(x, y)\) is any differentiable function such that \(Q_x = M\). The function \(h(y)\) plays the role of a constant of integration, but instead of just a constant, it is a function of \(y\), since \(M\) is a function of both \(x\) and \(y\) and we are only integrating with respect to \(x\).
+where \(Q(x, y)\) is any differentiable function such that \(Q_x = M\). The function \(h(y)\) plays the role of a constant of integration, but instead of just a constant, it is a function of \(y\); since \(M\) is a function of both \(x\) and \(y\) and we are only integrating with respect to \(x\).
 
 Now to show that it is always possible to find an \(h(y)\) such that \(\psi _y = N\).
 \(\psi(x, y) = Q(x, y) + h(y)\)
@@ -137,7 +137,7 @@ Therefore,
 
 where \(Q(x, y)\) and \(P(x, y)\) are differentiable functions such that \(Q_x = M\) and \(P_y = N\).
 
-In order for this to be true and for both sides to result in the exact same expression, namely \(\psi(x, y)\), then \(h(y)\) *must* be contained within the expression for \(P(x, y)\) because it cannot be contained within \(g(x)\), since it is entirely a function of \(y\) and not \(x\) and is therefore not allowed to have anything to do with \(x\). By analogy, \(g(x)\) *must* be contained within the expression \(Q(x, y)\).
+In order for this to be true and for both sides to result in the exact same expression, namely \(\psi(x, y)\), then \(h(y)\) *must* be contained within the expression for \(P(x, y)\) because it cannot be contained within \(g(x)\); since it is entirely a function of \(y\) and not \(x\) and is therefore not allowed to have anything to do with \(x\). By analogy, \(g(x)\) *must* be contained within the expression \(Q(x, y)\).
 
 Ergo,
 \(Q(x, y) = g(x) + f(x, y) \text{ and } P(x, y) = h(y) + d(x, y)\)
@@ -180,150 +180,4 @@ Combining the \({dy \over dx}\) terms gives
 
 \({\partial I\over\partial x}+{dy \over dx}\left({\partial I\over\partial y}+{\partial J\over\partial x}+{\partial J\over\partial y}{dy \over dx}\right)+{d^2y \over dx^2} (J(x,y))=0\)
 
-If the equation is exact, then {{nowrap|\({\partial J\over\partial x}={\partial I\over\partial y}\).}} Additionally, the total derivative of \(J(x,y)\) is equal to its implicit ordinary derivative \({dJ \over dx}\). This leads to the rewritten equation
-
-\({\partial I\over\partial x}+{dy \over dx}\left({\partial J\over\partial x}+{dJ \over dx}\right)+{d^2y \over dx^2} (J(x,y))=0\)
-
-Now, let there be some second-order differential equation
-
-\(f(x,y)+g\left(x,y,{dy \over dx}\right){dy \over dx}+{d^2y \over dx^2} (J(x,y))=0\)
-
-If \({\partial J\over\partial x}={\partial I\over\partial y}\) for exact differential equations, then
-
-\(\int \left({\partial I\over\partial y}\right) \, dy=\int \left({\partial J\over\partial x}\right) \, dy\)
-
-and
-
-\(\int \left({\partial I\over\partial y}\right) \, dy=\int \left({\partial J\over\partial x}\right) \, dy=I(x,y)-h(x)\)
-
-where \(h(x)\) is some arbitrary function only of \(x\) that was differentiated away to zero upon taking the partial derivative of \(I(x,y)\) with respect to \(y\). Although the sign on \(h(x)\) could be positive, it is more intuitive to think of the integral's result as \(I(x,y)\) that is missing some original extra function \(h(x)\) that was partially differentiated to zero.
-
-Next, if
-
-\({dI\over dx}={\partial I\over\partial x}+{\partial I\over\partial y}{dy \over dx}\)
-
-then the term \({\partial I\over\partial x}\) should be a function only of \(x\) and \(y\), since partial differentiation with respect to \(x\) will hold \(y\) constant and not produce any derivatives of \(y\). In the second-order equation
-
-\(f(x,y)+g\left(x,y,{dy \over dx}\right){dy \over dx}+{d^2y \over dx^2} (J(x,y))=0\)
-
-only the term \(f(x,y)\) is a term purely of \(x\) and \(y\). Let \({\partial I\over\partial x} = f(x,y)\). If \({\partial I\over\partial x}=f(x,y)\), then
-
-\(f(x,y)={ dI\over dx}-{\partial I\over\partial y}{dy \over dx}\)
-
-Since the total derivative of \(I(x,y)\) with respect to \(x\) is equivalent to the implicit ordinary derivative \({dI \over dx}\) , then
-
-\(f(x,y)+{\partial I\over\partial y}{dy \over dx}={dI \over dx}={d \over dx}(I(x,y)-h(x))+{dh(x) \over dx}\)
-
-So,
-
-\({dh(x) \over dx}=f(x,y)+{\partial I\over\partial y}{dy \over dx}-{d \over dx}(I(x,y)-h(x))\)
-
-and
-
-\(h(x) =\int\left(f(x,y)+{\partial I\over\partial y}{dy \over dx}-{d \over dx}(I(x,y)-h(x))\right) \, dx\)
-
-Thus, the second-order differential equation
-
-\(f(x,y)+g\left(x,y,{dy \over dx}\right){dy \over dx}+{d^2y \over dx^2} (J(x,y))=0\)
-
-is exact only if \(g\left(x,y,{dy \over dx}\right)={ dJ\over dx}+{\partial J\over\partial x}={dJ \over dx}+{\partial J\over\partial x}\) and only if the below expression
-
-\(\int\left(f(x,y)+{\partial I\over\partial y}{dy \over dx}-{d \over dx} (I(x,y)-h(x)) \right) \, dx=\int \left(f(x,y)-{\partial \left(I(x,y)-h(x)\right)\over\partial x}\right) \, dx\)
-
-is a function solely of \(x\). Once \(h(x)\) is calculated with its arbitrary constant, it is added to \(I(x,y)-h(x)\) to make \(I(x,y)\). If the equation is exact, then we can reduce to the first-order exact form which is solvable by the usual method for first-order exact equations.
-
-\(I(x,y)+J(x,y){dy \over dx}=0\)
-
-Now, however, in the final implicit solution there will be a \(C_1x\) term from integration of \(h(x)\) with respect to \(x\) twice as well as a \(C_2\), two arbitrary constants as expected from a second-order equation.
-
-### Example
-Given the differential equation
-
-\((1-x^2)y''-4xy'-2y=0\)
-
-one can always easily check for exactness by examining the \(y''\) term. In this case, both the partial and total derivative of \(1-x^2\) with respect to \(x\) are \(-2x\), so their sum is \(-4x\), which is exactly the term in front of \(y'\). With one of the conditions for exactness met, one can calculate that
-
-\(\int (-2x) \, dy=I(x,y)-h(x)=-2xy\)
-
-Letting \(f(x,y)=-2y\), then
-
-\(\int \left(-2y-2xy'-{d \over dx} (-2xy)\right) \, dx=\int (-2y-2xy'+2xy'+2y) \, dx=\int (0) \, dx = h(x)\)
-
-So, \(h(x)\) is indeed a function only of \(x\) and the second-order differential equation is exact. Therefore, \(h(x)=C_1\) and \(I(x,y)=-2xy+C_1\). Reduction to a first-order exact equation yields
-
-\(-2xy+C_1+(1-x^2)y'=0\)
-
-Integrating \(I(x,y)\) with respect to \(x\) yields
-
-\(-x^2y+C_1x+i(y)=0\)
-
-where \(i(y)\) is some arbitrary function of \(y\). Differentiating with respect to \(y\) gives an equation correlating the derivative and the \(y'\) term.
-
-\(-x^2+i'(y)=1-x^2\)
-
-So, \(i(y)=y+C_2\) and the full implicit solution becomes
-
-\(C_1x+C_2+y-x^2y=0\)
-
-Solving explicitly for \(y\) yields
-
-\(y= \frac{C_1x+C_2}{1-x^2}\)
-
-## Higher-order exact differential equations
-The concepts of exact differential equations can be extended to any order. Starting with the exact second-order equation
-
-\({d^2y \over dx^2}(J(x,y))+{dy \over dx}\left({dJ \over dx}+{\partial J\over\partial x}\right)+f(x,y)=0\)
-
-it was previously shown that equation is defined such that
-
-\(f(x,yt)={dht(x) \over dx}+{d \over dx}(I(x,y)-h(x))-{\partial J\over\partial x}{dy \over dx}\)
-
-Implicit differentiation of the exact second-order equation \(n\) times will yield an \((n+2)\)th-order differential equation with new conditions for exactness that can be readily deduced from the form of the equation produced. For example, differentiating the above second-order differential equation once to yield a third-order exact equation gives the following form
-
-\({d^3y \over dx^3}(J(x,y))+{d^2y \over dx^2}{dJ \over dx}+{d^2y \over dx^2}\left({dJ \over dx}+{\partial J\over\partial x}\right)+{dy \over dx}\left({d^2J \over dx^2}+{d \over dx}\left({\partial J\over\partial x}\right)\right)+{df(x,y) \over dx}=0\)
-
-where
-
-\({df(x,y) \over dx}={d^2h(x) \over dx^2}+{d^2 \over dx^2} (I(x,y)-h(x))-{d^2y \over dx^2}{\partial J\over\partial x}-{dy \over dx}{d \over dx}\left({\partial J\over\partial x}\right)=F\left(x,y,{dy \over dx}\right)\)
-and where \(F\left(x,y,{dy \over dx}\right)\)
-is a function only of \(x,y\) and \({dy \over dx}\). Combining all \({dy \over dx}\) and \({d^2y \over dx^2}\) terms not coming from \(F\left(x,y,{dy \over dx}\right)\) gives
-
-\({d^3y \over dx^3}(J(x,y))+{d^2y \over dx^2}\left(2{dJ \over dx}+{\partial J\over\partial x}\right)+{dy \over dx}\left({d^2J \over dx^2}+{d \over dx}\left({\partial J\over\partial x}\right)\right)+F\left(x,y,{dy \over dx}\right)=0\)
-
-Thus, the three conditions for exactness for a third-order differential equation are: the \({d^2y \over dx^2}\) term must be \(2{dJ \over dx}+{\partial J\over\partial x}\), the \({dy \over dx}\) term must be \({d^2J \over dx^2}+{d \over dx}\left({\partial J\over\partial x}\right)\) and
-
-\(F\left(x,y,{dy \over dx}\right)-{d^2 \over dx^2} (I(x,y)-h(x))+{d^2y \over dx^2}{\partial J\over\partial x}+{dy \over dx}{d \over dx}\left({\partial J\over\partial x}\right)\)
-
-must be a function solely of \(x\).
-
-### Example
-Consider the nonlinear third-order differential equation
-
-\(yy*'+3y'y*+12x^2=0\)
-
-If \(J(x,y)=y\), then \(y*\left(2{dJ \over dx}+{\partial J\over\partial x}\right)\) is \(2y'y*\) and \(y'\left({d^2J \over dx^2}+{d \over dx}\left({\partial J\over\partial x}\right)\right)=y'y*\)which together sum to \(3y'y*\). Fortunately, this appears in our equation. For the last condition of exactness,
-
-\(F\left(x,y,{dy \over dx}\right)-{d^2 \over dx^2}\left(I(x,y)-h(x)\right)+{d^2y \over dx^2}{\partial J\over\partial x}+{dy \over dx}{d \over dx}\left({\partial J\over\partial x}\right)=12x^2-0+0+0=12x^2\)
-
-which is indeed a function only of \(x\). So, the differential equation is exact. Integrating twice yields that \(h(x)=x^4+C_1x+C_2=I(x,y)\). Rewriting the equation as a first-order exact differential equation yields
-
-\(x^4+C_1x+C_2+yy'=0\)
-
-Integrating \(I(x,y)\) with respect to \(x\) gives that \({x^5\over 5}+C_1x^2+C_2x+i(y)=0\). Differentiating with respect to \(y\) and equating that to the term in front of \(y'\) in the first-order equation gives that \(i'(y)=y\) and that \(i(y)={y^2\over 2}+C_3\). The full implicit solution becomes
-
-\({x^5\over 5}+C_1x^2+C_2x+C_3+{y^2\over 2}=0\)
-
-The explicit solution, then, is
-
-\(y=\pm\sqrt{C_1x^2+C_2x+C_3-\frac{2x^5}{5}}\)
-
-## See also
-* Exact differential
-* Inexact differential equation
-
-## References
-
-
-## Further reading
-* Boyce, William E.; DiPrima, Richard C. (1986).  *Elementary Differential Equations* (4th ed.).  New York: John Wiley & Sons, Inc.
-
+If the equation is exact, then nowrap

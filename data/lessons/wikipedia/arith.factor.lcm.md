@@ -2,13 +2,11 @@
 
 # Least common multiple
 
-In arithmetic and number theory, the **least common multiple** (**LCM**), **lowest common multiple**, or **smallest common multiple** (**SCM**) of two integers *a* and *b*, usually denoted by lcm(*a*, *b*), is the smallest positive integer that is divisible by both *a* and *b*. Since division of integers by zero is undefined, this definition has meaning only if *a* and *b* are both different from zero. However, some authors define lcm(*a*, 0) as 0 for all *a*, since 0 is the only common multiple of *a* and 0.
+In arithmetic and number theory, the **least common multiple** (**LCM**), **lowest common multiple**, or **smallest common multiple** (**SCM**) of two integers *a* and *b*, usually denoted by lcm(*a*, *b*), is the smallest positive integer that is divisible by both *a* and *b*. Since division of integers by zero is undefined, this definition has meaning only if *a* and *b* are both different from zero. However, some authors define lcm(*a*, 0) as 0 for all *a*; since 0 is the only common multiple of *a* and 0.
 
 The least common multiple of the denominators of two fractions is the "lowest common denominator" (lcd), and can be used for adding, subtracting or comparing the fractions.
 
-The least common multiple of more than two integers *a*, *b*, *c*, . . . , usually denoted by lcm(*a*, *b*, *c*, . . .), is defined as the smallest positive integer that is divisible by each of *a*, *b*, *c*, . . .
-
-## Overview
+The least common multiple of more than two integers *a*, *b*, *c*,.. . , usually denoted by lcm(*a*, *b*, *c*,.. . ), is defined as the smallest positive integer that is divisible by each of *a*, *b*, *c*,.. . ## Overview
 A multiple of a number is the product of that number and an integer. For example, 10 is a multiple of 5 because 5 × 2 = 10, so 10 is divisible by 5 and 2. Because 10 is the smallest positive integer that is divisible by both 5 and 2, it is the least common multiple of 5 and 2. By the same principle, 10 is the least common multiple of −5 and −2 as well.
 
 ### Notation
@@ -19,15 +17,15 @@ The least common multiple of two integers *a* and *b* is denoted as lcm(*a*, *b*
 
 Multiples of 4 are:
 
-\(4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, ...\)
+\(4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76,.. .\)
 
 Multiples of 6 are:
 
-\(6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, ...\)
+\(6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72,.. .\)
 
 *Common multiples* of 4 and 6 are the numbers that are in both lists:
 
-\(12, 24, 36, 48, 60, 72, ...\)
+\(12, 24, 36, 48, 60, 72,.. .\)
 
 In this list, the smallest number is 12. Hence, the *least common multiple* is 12.
 
@@ -45,7 +43,6 @@ Suppose there are two meshing gears in a machine, having *m* and *n* teeth, resp
 
 Suppose there are three planets revolving around a star that take *l*, *m*, and *n* units of time, respectively, to complete their orbits. Assume that *l*, *m*, and *n* are integers. Assuming the planets started moving around the star after an initial linear alignment, all the planets attain a linear alignment again after \(\operatorname{lcm}(l, m, n)\) units of time. At this time, the first, second and third planet will have completed \(\frac{\operatorname{lcm}(l, m, n)}{l}\), \(\frac{\operatorname{lcm}(l, m, n)}{m}\) and \(\frac{\operatorname{lcm}(l, m, n)}{n}\) orbits, respectively, around the star.
 
-
 ## Calculation
 There are several ways to compute least common multiples.
 
@@ -57,7 +54,7 @@ To avoid introducing integers that are larger than the result, it is convenient 
 \(\operatorname{lcm}(a,b)=|a|\,\frac{|b|}{\gcd(a,b)} = |b|\,\frac{|a|}{\gcd(a,b)} ,\)
 where the result of the division is always an integer.
 
-These formulas are also valid when exactly one of *a* and *b* is 0, since 1=gcd(*a*, 0) = |*a*|. However, if both *a* and *b* are 0, these formulas would cause division by zero; so, 1=lcm(0, 0) = 0 must be considered as a special case.
+These formulas are also valid when exactly one of *a* and *b* is 0; since gcd|*a*|. However, if both *a* and *b* are 0, these formulas would cause division by zero; so, lcm0 must be considered as a special case.
 
 To return to the example above,
 
@@ -65,7 +62,7 @@ To return to the example above,
 =6\times\frac {21}{\gcd(21,6)}
 =6\times\frac {21} 3
 =6\times 7
-=  42.\)
+= 42.\)
 
 There are fast algorithms, such as the Euclidean algorithm for computing the gcd that do not require the numbers to be factored. For very large integers, there are even faster algorithms for the three involved operations (multiplication, gcd, and division); see Fast multiplication. As these algorithms are more efficient with factors of similar size, it is more efficient to divide the largest argument of the lcm by the gcd of the arguments, as in the example above.
 
@@ -90,11 +87,11 @@ Factor each number and express it as a product of prime number powers.
 21 & = 3^1 \cdot 7^1
 \end{align}\)
 
-The lcm will be the product of multiplying the highest power of each prime number together. The highest power of the three prime numbers 2, 3, and 7 is 2<sup>3</sup>, 3<sup>2</sup>, and 7<sup>1</sup>, respectively. Thus,
+The lcm will be the product of multiplying the highest power of each prime number together. The highest power of the three prime numbers 2, 3, and 7 is 2\(^{3}\), 3\(^{2}\), and 7\(^{1}\), respectively. Thus,
 
 \(\operatorname{lcm}(8,9,21) = 2^3 \cdot 3^2 \cdot 7^1 = 8 \cdot 9 \cdot 7 = 504.\)
 
-This method is not as efficient as reducing to the greatest common divisor, since there is no known general efficient algorithm for integer factorization.
+This method is not as efficient as reducing to the greatest common divisor; since there is no known general efficient algorithm for integer factorization.
 
 The same method can also be illustrated with a Venn diagram as follows, with the prime factorization of each of the two numbers demonstrated in each circle and *all* factors they share in common in the intersection. The lcm then can be found by multiplying all of the prime numbers in the diagram.
 
@@ -104,7 +101,6 @@ Here is an example:
 180 = 2 × 2 × 3 × 3 × 5,
 
 sharing two "2"s and a "3" in common:
-
 
 Least common multiple = 2 × 2 × 2 × 2 × 3 × 3 × 5 = 720
 Greatest common divisor = 2 × 2 × 3 = 12
@@ -118,7 +114,7 @@ According to the fundamental theorem of arithmetic, every integer greater than 1
 
 \(n = 2^{n_2} 3^{n_3} 5^{n_5} 7^{n_7} \cdots = \prod_p p^{n_p},\)
 
-where the exponents *n*<sub>2</sub>, *n*<sub>3</sub>, ... are non-negative integers; for example, 84 = 2<sup>2</sup> 3<sup>1</sup> 5<sup>0</sup> 7<sup>1</sup> 11<sup>0</sup> 13<sup>0</sup> ...
+where the exponents *n*\(_{2}\), *n*\(_{3}\),.. . are non-negative integers; for example, 84 = 2\(^{2}\) 3\(^{1}\) 5\(^{0}\) 7\(^{1}\) 11\(^{0}\) 13\(^{0}\).. .
 
 Given two positive integers \(a = \prod_p p^{a_p}\) and \(b = \prod_p p^{b_p}\), their greatest common divisor and least common multiple are given by the formulas
 \(\gcd(a,b) = \prod_p p^{\min(a_p, b_p)}\)
@@ -133,9 +129,9 @@ this gives
 
 In fact, every rational number can be written uniquely as the product of primes, if negative exponents are allowed. When this is done, the above formulas remain valid. For example:
 \(\begin{align}
-  4 &= 2^2 3^0,                   & 6 &= 2^1 3^1,    & \gcd(4, 6) &= 2^1 3^0 = 2,    & \operatorname{lcm}(4,6) &= 2^2  3^1 = 12. \\[8pt]
-  \tfrac{1}{3} &= 2^0 3^{-1} 5^0, & \tfrac{2}{5} &= 2^1 3^0 5^{-1}, & \gcd\left(\tfrac13, \tfrac{2}{5}\right) &= 2^0 3^{-1} 5^{-1} = \tfrac{1}{15}, & \operatorname{lcm}\left(\tfrac{1}{3}, \tfrac{2}{5}\right) &= 2^1 3^0 5^0 = 2, \\[8pt]
-  \tfrac{1}{6} &= 2^{-1} 3^{-1},  & \tfrac{3}{4} &= 2^{-2} 3^1, & \gcd\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-2} 3^{-1} = \tfrac{1}{12}, & \operatorname{lcm}\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-1} 3^1 = \tfrac{3}{2}.
+ 4 &= 2^2 3^0, & 6 &= 2^1 3^1, & \gcd(4, 6) &= 2^1 3^0 = 2, & \operatorname{lcm}(4,6) &= 2^2 3^1 = 12. \\[8pt]
+ \tfrac{1}{3} &= 2^0 3^{-1} 5^0, & \tfrac{2}{5} &= 2^1 3^0 5^{-1}, & \gcd\left(\tfrac13, \tfrac{2}{5}\right) &= 2^0 3^{-1} 5^{-1} = \tfrac{1}{15}, & \operatorname{lcm}\left(\tfrac{1}{3}, \tfrac{2}{5}\right) &= 2^1 3^0 5^0 = 2, \\[8pt]
+ \tfrac{1}{6} &= 2^{-1} 3^{-1}, & \tfrac{3}{4} &= 2^{-2} 3^1, & \gcd\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-2} 3^{-1} = \tfrac{1}{12}, & \operatorname{lcm}\left(\tfrac{1}{6}, \tfrac{3}{4}\right) &= 2^{-1} 3^1 = \tfrac{3}{2}.
 \end{align}\)
 
 ### Lattice-theoretic
@@ -155,7 +151,7 @@ The following pairs of dual formulas are special cases of general lattice-theore
 |     
 |
 ;Associative laws
-\(\operatorname{lcm}(a,\operatorname{lcm}(b, c)) = \operatorname{lcm}(\operatorname{lcm}(a , b),c),\)
+\(\operatorname{lcm}(a,\operatorname{lcm}(b, c)) = \operatorname{lcm}(\operatorname{lcm}( b),c),\)
 \(\gcd(a, \gcd(b, c)) = \gcd(\gcd(a,b), c).\)
 |     
 |
@@ -200,24 +196,4 @@ where the absolute bars || denote the cardinality of a set.
 ## In commutative rings
 The least common multiple can be defined generally over commutative rings as follows:
 
-Let  and  be elements of a commutative ring . A *common multiple* of  and  is an element  of  such that both  and  divide  (that is, there exist elements  and  of  such that *ax*  and *by* ). A *least common multiple* of  and  is a common multiple that is minimal, in the sense that for any other common multiple  of  and ,  divides .
-
-In general, two elements in a commutative ring can have no least common multiple or more than one. However, any two least common multiples of the same pair of elements are associates. In a unique factorization domain, any two elements have a least common multiple. In a principal ideal domain, the least common multiple of  and  can be characterised as a generator of the intersection of the ideals generated by  and  (the intersection of a collection of ideals is always an ideal).
-
-## See also
-*Anomalous cancellation
-*Coprime integers
-*Chebyshev function
-
-## Notes
-
-
-## References
-*
-*
-*
-*
-*
-*
-*
-
+Let and be elements of a commutative ring. A *common multiple* of and is an element of such that both and divide (that is, there exist elements and of such that *ax* and *by* ). A *least common multiple* of and is a common multiple that is minimal, in the sense that for any other common multiple of and , divides. In general, two elements in a commutative ring can have no least common multiple or more than one. However, any two least common multiples of the same pair of elements are associates. In a unique factorization domain, any two elements have a least common multiple. In a principal ideal domain, the least common multiple of and can be characterised as a generator of the intersection of the ideals generated by and (the intersection of a collection of ideals is always an ideal).

@@ -2,7 +2,7 @@
 
 # Related rates
 
-In differential calculus, **related rates** problems involve finding a rate at which a quantity changes by relating that quantity to other quantities whose rates of change are known.  The rate of change is usually with respect to time.  Because science and engineering often relate quantities to each other, the methods of related rates have broad applications in these fields.  Differentiation with respect to time or one of the other variables requires application of the chain rule, since most problems involve several variables with respect to the input variable.
+In differential calculus, **related rates** problems involve finding a rate at which a quantity changes by relating that quantity to other quantities whose rates of change are known. The rate of change is usually with respect to time. Because science and engineering often relate quantities to each other, the methods of related rates have broad applications in these fields. Differentiation with respect to time or one of the other variables requires application of the chain rule; since most problems involve several variables with respect to the input variable.
 
 Fundamentally, if a function \(F\) is defined such that \(F = f(x)\), then the derivative of the function \(F\) can be taken with respect to another variable. We assume \(x\) is a function of \(t\), i.e. \(x=g(t)\). Then \(F=f(g(t))\), so
 
@@ -21,12 +21,11 @@ For example, if \(F(x)= G(y)+ H(z)\) then
 The most common way to approach related rates problems is the following:
 #Identify the known variables, including rates of change and the rate of change that is to be found. (Drawing a picture or representation of the problem can help to keep everything in order)
 #Construct an equation relating the quantities whose rates of change are known to the quantity whose rate of change is to be found.
-#Differentiate both sides of the equation with respect to time (or other rate of change).  Often, the  chain rule is employed at this step.
+#Differentiate both sides of the equation with respect to time (or other rate of change). Often, the chain rule is employed at this step.
 #Substitute the known rates of change and the known quantities into the equation.
 #Solve for the wanted rate of change.
 
-Errors in this procedure are often caused by plugging in the known values for the variables *before* (rather than after) finding the derivative with respect to time. Doing so will yield an incorrect result, since if those values are substituted for the variables before differentiation, those variables will become constants; and when the equation is differentiated, zeroes appear in places of all variables for which the values were plugged in.
-
+Errors in this procedure are often caused by plugging in the known values for the variables *before* (rather than after) finding the derivative with respect to time. Doing so will yield an incorrect result; since if those values are substituted for the variables before differentiation, those variables will become constants; and when the equation is differentiated, zeroes appear in places of all variables for which the values were plugged in.
 
 ## Example
 A 10-meter ladder is leaning against the wall of a building, and the base of the ladder is sliding away from the building at a rate of 3 meters per second. How fast is the top of the ladder sliding down the wall when the base of the ladder is 6 meters from the wall?
@@ -51,11 +50,11 @@ When solved for the wanted rate of change, *dy*/*dt*, gives us
 \(\frac{d}{dt}\left(x^2\right)+\frac{d}{dt}\left(y^2\right)=\frac{d}{dt}\left(h^2\right)\)
 \((2x)\frac{dx}{dt}+(2y)\frac{dy}{dt}=(2h)\frac{dh}{dt}\)
 \(x\frac{dx}{dt}+y\frac{dy}{dt}=h\frac{dh}{dt}\)
-\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt}}{y}.\)
+\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt{y}.\)
 
 Step 4 & 5:
 Using the variables from step 1 gives us:
-\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt}}{y}.\)
+\(\frac{dy}{dt}=\frac{h\frac{dh}{dt}-x\frac{dx}{dt{y}.\)
 \(\frac{dy}{dt}=\frac{10\times0-6\times3}{y}=-\frac{18}{y}.\)
 Solving for y using the Pythagorean Theorem gives:
 \(x^2+y^2=h^2\)
@@ -65,15 +64,14 @@ Solving for y using the Pythagorean Theorem gives:
 Plugging in 8 for the equation:
 \(-\frac{18}{y}=-\frac{18}{8}=-\frac{9}{4}\)
 
-It is generally assumed that negative values represent the downward direction. In doing such, the top of the ladder is sliding down the wall at a rate of  meters per second.
+It is generally assumed that negative values represent the downward direction. In doing such, the top of the ladder is sliding down the wall at a rate of meters per second.
 
 ## Physics examples
-Because one physical quantity often depends on another, which, in turn depends on others, such as time, related-rates methods have broad applications in Physics.  This section presents an example of related rates kinematics  and electromagnetic induction.
+Because one physical quantity often depends on another, which, in turn depends on others, such as time, related-rates methods have broad applications in Physics. This section presents an example of related rates kinematics and electromagnetic induction.
 
 ### Relative kinematics of two vehicles
 
-
-For example, one can consider the kinematics problem where one vehicle is heading West toward an intersection at 80 miles per hour while another is heading North away from the intersection at 60 miles per hour.  One can ask whether the vehicles are getting closer or further apart and at what rate at the moment when the North bound vehicle is 3 miles North of the intersection and the West bound vehicle is 4 miles East of the intersection.
+For example, one can consider the kinematics problem where one vehicle is heading West toward an intersection at 80 miles per hour while another is heading North away from the intersection at 60 miles per hour. One can ask whether the vehicles are getting closer or further apart and at what rate at the moment when the North bound vehicle is 3 miles North of the intersection and the West bound vehicle is 4 miles East of the intersection.
 
 **Big idea:** use chain rule to compute rate of change of distance between two vehicles.
 
@@ -101,24 +99,24 @@ Define *y*(*t*) to be the distance of the vehicle heading North from the origin 
 
 {| cellpadding=5
 |-
-| \(\frac{dc}{dt} = \frac{d}{dt}\left(x^2 + y^2\right)^{1/2}\) || width="250pt" |  Apply derivative operator to entire function
+| \(\frac{dc}{dt} = \frac{d}{dt}\left(x^2 + y^2\right)^{1/2}\) || width="250pt" | Apply derivative operator to entire function
 |-
 | \(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\frac{d}{dt}\left(x^2 + y^2\right)\) || Square root is outside function; Sum of squares is inside function
 |-
 | \(=\frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[\frac{d}{dt}(x^2) + \frac{d}{dt}(y^2) \right]\) || Distribute differentiation operator
 |-
-| \(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\)  || Apply chain rule to *x*(*t*) and *y*(*t*)}
+| \(= \frac{1}{2}\left(x^2 + y^2\right)^{-1/2}\left[ 2x\frac{dx}{dt} + 2y\frac{dy}{dt}\right]\) || Apply chain rule to *x*(*t*) and *y*(*t*)}
 |-
-| \(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt}}{\sqrt{x^2 + y^2}}\)  || Simplify.
+| \(= \frac{x\frac{dx}{dt} + y\frac{dy}{dt{\sqrt{x^2 + y^2\) || Simplify.
 |-
 |}
 
 **Substitute in** *x* = 4 mi, *y* = 3 mi, *dx*/*dt* = −80 mi/hr, *dy*/*dt* = 60 mi/hr **and simplify**
 
 \(\begin{align}
-\frac{dc}{dt} & = \frac{4 \text{ mi} \cdot (-80 \text{ mi}/\text{hr}) + 3 \text{ mi} \cdot (60) \text{mi}/\text{hr}}{\sqrt{(4 \text{ mi})^2 + (3 \text{ mi})^2}}\\
-& = \frac{-320 \text{ mi}^2/\text{hr} + 180 \text{ mi}^2/\text{hr}}{5\text{ mi}}\\
-&= \frac{-140 \text{ mi}^2/\text{hr}}{5\text{ mi}}\\
+\frac{dc}{dt} & = \frac{4 \text{ mi} \cdot (-80 \text{ mi}/\text{hr}) + 3 \text{ mi} \cdot (60) \text{mi}/\text{hr{\sqrt{(4 \text{ mi})^2 + (3 \text{ mi})^2\\
+& = \frac{-320 \text{ mi}^2/\text{hr} + 180 \text{ mi}^2/\text{hr{5\text{ mi\\
+&= \frac{-140 \text{ mi}^2/\text{hr{5\text{ mi\\
 & = -28 \text{ mi}/\text{hr}
 \end{align}\)
 
@@ -135,11 +133,8 @@ Faraday's law of electromagnetic induction states that the induced electromotive
 
 If the loop area *A* and magnetic field *B* are held constant, but the loop is rotated so that the angle *θ* is a known function of time, the rate of change of *θ* can be related to the rate of change of \(\Phi_B\) (and therefore the electromotive force) by taking the time derivative of the flux relation
 
-\(\mathcal{E} = -\frac{d\Phi_B}{dt} =  B A \sin\theta \frac{d\theta}{dt}\)
+\(\mathcal{E} = -\frac{d\Phi_B}{dt} = B A \sin\theta \frac{d\theta}{dt}\)
 
 If for example, the loop is rotating at a constant angular velocity *ω*, so that *θ* = *ωt*, then
 
 \(\mathcal{E}= \omega B A \sin\omega t\)
-
-## References
-

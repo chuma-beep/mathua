@@ -2,7 +2,7 @@
 
 # Identify and collect like terms
 
-In mathematics, **like terms** are summands  in a sum that differ only by a numerical factor. Like terms can be regrouped by adding their coefficients.
+In mathematics, **like terms** are summands in a sum that differ only by a numerical factor. Like terms can be regrouped by adding their coefficients.
 Typically, in a polynomial expression, like terms are those that contain the same variables to the same powers, possibly with different coefficients.
 
 More generally, when some variable are considered as parameters, like terms are defined similarly, but "numerical factors" must be replaced by "factors depending only on the parameters".
@@ -57,9 +57,3 @@ The like terms in this expression are the terms that can be grouped together by 
 \(11x^2y-2y-11y^2\)
 
 The expression is considered simplified when all like terms have been combined, and all terms present are unlike. In this case, all terms now have different unknown factors, and are thus unlike, and so the expression is completely simplified.
-
-## Footnotes
-
-
-es:Monomio#Monomios semejantes
-

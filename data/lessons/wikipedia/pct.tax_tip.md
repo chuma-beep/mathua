@@ -2,7 +2,7 @@
 
 # Tax and tip calculations
 
-A **sales tax** is a tax paid to a governing body for the sales of certain goods and services. Usually, laws allow the seller to collect funds for the tax from the consumer at the point of purchase.  When a tax on goods or services is paid to a governing body directly by a consumer, it is usually called a use tax. Often, laws provide for the exemption of certain goods or services from sales and use tax, such as food, education, and medicines. A value-added tax (VAT) collected on goods and services is related to a sales tax. See Comparison with sales tax for key differences.
+A **sales tax** is a tax paid to a governing body for the sales of certain goods and services. Usually, laws allow the seller to collect funds for the tax from the consumer at the point of purchase. When a tax on goods or services is paid to a governing body directly by a consumer, it is usually called a use tax. Often, laws provide for the exemption of certain goods or services from sales and use tax, such as food, education, and medicines. A value-added tax (VAT) collected on goods and services is related to a sales tax. See Comparison with sales tax for key differences.
 
 ## Types
 
@@ -64,7 +64,6 @@ The Roman emperor Augustus collected funds for his military aerarium in AD 6 wit
 
 ### In the United States
 
-
 Although the United States government has never used a general sales tax, an excise tax on whiskey enacted in 1791 was one of its first fund raising efforts. The unpopularity of this tax with farmers on the western frontier led to the Whiskey Rebellion in 1794.
 
 Federal and state sales taxes in the United States remained selective, rather than general, through the 19th century. However, excise taxes were applied to so many specific commodities during the Civil War that they functioned collectively as a general sales tax.
@@ -79,7 +78,6 @@ The 2010 health care reform law imposed a 10 percent federal sales tax on indoor
 
 ### In Canada
 
-
 Canada uses a value-added federal Goods and Services Tax with a rate of 5 percent, effective since January 1, 2008. Alberta, Yukon, Northwest Territories, and Nunavut have no territorial sales taxes, so only the GST is collected. Other provinces have either a Provincial Sales Tax (PST) or the Harmonized Sales Tax (HST), which is a single, blended combination of the GST and PST.
 
 ## Sales tax mitigation
@@ -88,22 +86,3 @@ Businesses can reduce the impact of sales tax for themselves and their customers
 * New facilities. Jurisdictions with no sales tax or broad exemptions for certain types of business operations would be an obvious consideration in selecting a site for a new manufacturing plant, warehouse, or administrative office.
 * Delivery location. For a business operating in several jurisdictions, choosing the best location in which to take delivery can reduce or eliminate the sales tax liability. That is particularly important for an item to be sold or used in another jurisdiction with a lower tax rate or an exemption for that item. Businesses should consider whether a temporary storage exemption applies to merchandise initially accepted in a jurisdiction with a higher tax rate.
 * Periodic review of record-keeping procedures related to sales and use tax. Proper supporting detail, including exemption and resale certificates, invoices and other records must be available to defend the company in the event of a sales and use tax audit. Without proper documentation, a seller may be held liable for tax not collected from a buyer.
-
-## See also
-* Consumption tax
-* Excise tax
-* Goods and Services Tax (Australia)
-* Local option sales tax
-* Sales Tax Audit
-* Sales and use taxes in California
-* Sales taxes in Canada
-* Sales taxes in the United States
-* Streamlined Sales Tax Project
-* Value-added tax
-
-## References
-
-
-## External links
-*
-

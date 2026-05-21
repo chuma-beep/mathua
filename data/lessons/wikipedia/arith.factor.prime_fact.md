@@ -3,4 +3,3 @@
 # Prime factorization
 
 #REDIRECT Integer factorization
-

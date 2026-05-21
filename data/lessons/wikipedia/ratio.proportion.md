@@ -29,7 +29,6 @@ If \(\ \frac ab=\frac cd\), then \(\ ad=bc\)
 ## History
 A Greek mathematician Eudoxus provided a definition for the meaning of the equality between two ratios. This definition of proportion forms the subject of Euclid's Book V, where we can read:
 
-
 Later, the realization that ratios are numbers allowed to switch from solving proportions to equations, and from transformation of proportions to algebraic transformations.
 
 ## Related concepts
@@ -38,12 +37,4 @@ An equation of the form \(a-b = c-d\) is called **arithmetic proportion** or **d
 
 ### Harmonic proportion
 
-If the means of the geometric proportion are equal, and the rightmost extreme is equal to the difference between the leftmost extreme and a mean, then such a proportion is called **harmonic**: \(a : b = b : (a - b)\). In this case the ratio \(a : b\) is called *golden ratio*.
-
-## See also
-* Ratio
-* Proportionality
-* Correlation
-
-## References
-
+If the means of the geometric proportion are equal, and the rightmost extreme is equal to the difference between the leftmost extreme and a mean, then such a proportion is called **harmonic**: \( b = b : (a - b)\). In this case the ratio \( b\) is called *golden ratio*.

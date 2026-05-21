@@ -8,7 +8,6 @@ Examples of systems of differential equations often emerge in the real world fro
 
 ## Linear systems of differential equations
 
-
 A first-order linear system of ODEs is a system in which every equation is first order and depends on the unknown functions linearly. Here, we consider systems with an equal number of unknown functions and equations. These may be written as
 
 \(\frac{dx_j}{dt} = a_{j1}(t) x_1 + \ldots + a_{jn}(t)x_n + g_{j}(t), \qquad j=1,\ldots,n\)
@@ -17,11 +16,11 @@ where \(n\) is a positive integer and \(a_{ji}(t),g_{j}(t)\) are arbitrary funct
 
 A first-order linear system of ODEs may be written in matrix form:
 
-\(\frac{d}{dt} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} a_{11} & \ldots & a_{1n} \\ a_{21} & \ldots & a_{2 n} \\ \vdots & \ldots & \vdots \\ a_{n1} &  & a_{n n}  \end{bmatrix}  \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} + \begin{bmatrix} g_1 \\ g_2 \\ \vdots \\ g_n \end{bmatrix} ,\)
+\(\frac{d}{dt} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} = \begin{bmatrix} a_{11} & \ldots & a_{1n} \\ a_{21} & \ldots & a_{2 n} \\ \vdots & \ldots & \vdots \\ a_{n1} & & a_{n n} \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} + \begin{bmatrix} g_1 \\ g_2 \\ \vdots \\ g_n \end{bmatrix} ,\)
 
 or simply
 
-\(\mathbf{\dot{x}}(t) = \mathbf{A}(t)\mathbf{x}(t) + \mathbf{g}(t)\).
+\(\mathbf{\dot{x(t) = \mathbf{A}(t)\mathbf{x}(t) + \mathbf{g}(t)\).
 
 ### Homogeneous systems of differential equations
 A linear system is said to be homogeneous if \(g_j(t)=0\) for each \(j\) and for all values of \(t\); otherwise, it is referred to as non-homogeneous. Homogeneous systems have the property that if \(\mathbf{x_1},\ldots ,\mathbf{x_p}\) are linearly independent solutions to the system, then any linear combination of these, \(C_1 \mathbf{x _1}+ \ldots + C_p \mathbf{x _p}\), is also a solution to the linear system where \(C_1, \ldots, C_p\) are constant.
@@ -31,13 +30,13 @@ The case where the coefficients \(a_{ji}(t)\) are all constant has a general sol
 ## Linear independence of solutions
 For an arbitrary system of ODEs, a set of solutions \(\mathbf{x_1}(t), \ldots ,\mathbf{x_n}(t)\) are said to be linearly independent if:
 
-\(C_1\mathbf{x_1}(t) + \ldots + C_n \mathbf{x_n}(t) = 0 \quad  \forall t\)  is satisfied only for \(C_1 = \ldots = C_n=0\).
+\(C_1\mathbf{x_1}(t) + \ldots + C_n \mathbf{x_n}(t) = 0 \quad \forall t\) is satisfied only for \(C_1 = \ldots = C_n=0\).
 
 A second-order differential equation \(\ddot{x} = f(t,x,\dot{x})\) may be converted into a system of first order linear differential equations by defining \(y=\dot{x}\), which gives us the first-order system:
 
 \(\begin{cases} \dot{x} & = & y \\ \dot{y} & = & f(t,x,y) \end{cases}\)
 
-Just as with any linear system of two equations, two solutions may be called linearly independent if \(C_1 \mathbf{x}_1 + C_2 \mathbf{x}_2=\mathbf{0 }\) implies \(C_1 = C_2 = 0\), or equivalently that their Wronskian \(\begin{vmatrix} x_1 & x_ 2 \\ \dot{x}_ 1 & \dot{x}_ 2 \end{vmatrix}\)  is non-zero. For second-order systems, any two solutions to a second-order ODE are called linearly independent if their Wronskian is non-zero as well.
+Just as with any linear system of two equations, two solutions may be called linearly independent if \(C_1 \mathbf{x}_1 + C_2 \mathbf{x}_2=\mathbf{0 }\) implies \(C_1 = C_2 = 0\), or equivalently that their Wronskian \(\begin{vmatrix} x_1 & x_ 2 \\ \dot{x}_ 1 & \dot{x}_ 2 \end{vmatrix}\) is non-zero. For second-order systems, any two solutions to a second-order ODE are called linearly independent if their Wronskian is non-zero as well.
 
 ## Overdetermination of systems of differential equations
 Like any system of equations, a system of linear differential equations is said to be overdetermined if there are more equations than the unknowns. For an overdetermined system to have a solution, it needs to satisfy certain compatibility conditions. For example, consider the system:
@@ -56,27 +55,6 @@ Other examples of nonlinear systems of differential equations include the Lotka�
 
 ## Differential system
 
-
 A **differential system** is a means of studying a system of partial differential equations using geometric ideas such as differential forms and vector fields.
 
 For example, the compatibility conditions of an overdetermined system of differential equations can be succinctly stated in terms of differential forms (i.e., for a form to be exact, it needs to be closed). See integrability conditions for differential systems for more.
-
-## See also
-*Integral geometry
-*Cartan–Kuranishi prolongation theorem
-
-## Notes
-
-
-## References
-*L. Ehrenpreis, *The Universality of the Radon Transform*, Oxford Univ. Press, 2003.
-*Gromov, M. (1986), Partial differential relations, Springer,
-*M. Kuranishi, "Lectures on involutive systems of partial differential equations", Publ. Soc. Mat. São Paulo (1967)
-*Pierre Schapira, *Microdifferential systems in the complex domain,* Grundlehren der Math- ematischen Wissenschaften, vol. 269, Springer-Verlag, 1985.
-
-## Further reading
-*https://mathoverflow.net/questions/273235/a-very-basic-question-about-projections-in-formal-pde-theory
-*https://www.encyclopediaofmath.org/index.php/Involutional_system
-*https://www.encyclopediaofmath.org/index.php/Complete_system
-*https://www.encyclopediaofmath.org/index.php/Partial_differential_equations_on_a_manifold
-
