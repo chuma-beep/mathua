@@ -132,17 +132,20 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                     {i + 1}.
                   </span>
                   <div className="flex-1 min-w-0">
-                    <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">
-                      {q.question}
-                    </KatexContent>
+                    <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                       <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">
+                         {q.question}
+                       </KatexContent>
+                     </div>
 
-                    <div className="mt-2 flex items-center gap-2">
-                      <input
-                        type="text"
-                        value={answers[i] || ''}
-                        onChange={e => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
-                        onKeyDown={e => handleKeyDown(e, i)}
-                        placeholder="Your answer…"
+                     <div className="mt-2 flex items-center gap-2">
+                       <input
+                         type="text"
+                         value={answers[i] || ''}
+                         onChange={e => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
+                         onPaste={e => e.preventDefault()}
+                         onKeyDown={e => handleKeyDown(e, i)}
+                         placeholder="Your answer…"
                         disabled={result !== undefined}
                         className={`flex-1 bg-mathua-bg border px-2.5 py-1.5 text-xs font-mono text-mathua-primary outline-none transition-colors rounded-none ${
                           result === 'correct'

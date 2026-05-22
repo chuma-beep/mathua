@@ -258,15 +258,18 @@ export default function OnboardPage() {
               <div className="max-w-2xl mx-auto">
                 <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
                   <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
-                    <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</KatexContent>
-                  </div>
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      value={answerInput}
-                      onChange={(e) => setAnswerInput(e.target.value)}
-                      onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
-                      placeholder="Your answer..."
+                    <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</KatexContent>
+                     </div>
+                   </div>
+                   <div className="flex gap-3">
+                     <input
+                       type="text"
+                       value={answerInput}
+                       onChange={(e) => setAnswerInput(e.target.value)}
+                       onPaste={(e) => e.preventDefault()}
+                       onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
+                       placeholder="Your answer..."
                       disabled={loading || lastResult !== null}
                       className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
