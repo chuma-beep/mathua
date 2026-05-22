@@ -130,7 +130,15 @@ func (e *Engine) PlannerCourses() []*planning.Course {
 func (e *Engine) ActivePath(studentID string) map[string]bool {
 	e.mu.Lock()
 	defer e.mu.Unlock()
-	return e.activePath[studentID]
+	path := e.activePath[studentID]
+	if path == nil {
+		return nil
+	}
+	cp := make(map[string]bool, len(path))
+	for k, v := range path {
+		cp[k] = v
+	}
+	return cp
 }
 
 // computeDifficulty returns a difficulty score (0.3–1.0) based on the student's
@@ -348,21 +356,38 @@ func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string
 func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapsedSeconds float64) (*AnswerResult, error) {
 	e.mu.Lock()
 	as := e.sessions[sessionID]
-	e.mu.Unlock()
 	if as == nil {
+		e.mu.Unlock()
 		return nil, fmt.Errorf("no active question for session %q", sessionID)
 	}
+	// Copy session fields under lock to avoid races with NextQuestion/NextReviewQuestion
+	sessionFields := struct {
+		conceptID      string
+		expectedAnswer string
+		explanation    string
+		requiredStreak int
+		timeThreshold  float64
+		isReview       bool
+	}{
+		conceptID:      as.conceptID,
+		expectedAnswer: as.expectedAnswer,
+		explanation:    as.explanation,
+		requiredStreak: as.requiredStreak,
+		timeThreshold:  as.timeThreshold,
+		isReview:       as.isReview,
+	}
+	e.mu.Unlock()
 
-	gr := e.gradeAnswer(as.conceptID, as.expectedAnswer, answer)
+	gr := e.gradeAnswer(sessionFields.conceptID, sessionFields.expectedAnswer, answer)
 
-	progress, err := e.repo.GetProgress(studentID, as.conceptID)
+	progress, err := e.repo.GetProgress(studentID, sessionFields.conceptID)
 	if err != nil {
 		return nil, fmt.Errorf("get progress: %w", err)
 	}
 	if progress == nil {
 		progress = &storage.ConceptProgress{
 			StudentID:  studentID,
-			ConceptID:  as.conceptID,
+			ConceptID:  sessionFields.conceptID,
 			Status:     string(mastery.StatusUnseen),
 			SM2EFactor: 2.5,
 		}
@@ -382,7 +407,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	}
 
 	// Weakness score update
-	conceptThreshold := as.timeThreshold
+	conceptThreshold := sessionFields.timeThreshold
 	if conceptThreshold == 0 {
 		conceptThreshold = 10.0
 	}
@@ -401,9 +426,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	// Mastery transition
 	ctx := mastery.TransitionCtx{
 		Streak:            progress.Streak,
-		RequiredStreak:    as.requiredStreak,
+		RequiredStreak:    sessionFields.requiredStreak,
 		AvgResponseTime:   progress.AvgResponseTime,
-		ResponseThreshold: as.timeThreshold,
+		ResponseThreshold: sessionFields.timeThreshold,
 	}
 	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
 	oldStatus := progress.Status
@@ -416,8 +441,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 
 	// SM-2 update
 	quality := mastery.SM2Quality(
-		gr.Correct && progress.Streak >= as.requiredStreak,
-		progress.AvgResponseTime/as.timeThreshold,
+		gr.Correct && progress.Streak >= sessionFields.requiredStreak,
+		progress.AvgResponseTime/sessionFields.timeThreshold,
 	)
 	prevSM2 := scheduler.SM2{
 		Repetitions: progress.SM2Repetitions,
@@ -436,7 +461,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	if newStatus == mastery.StatusMastered {
 		progress.WeaknessScore = 0.0
 	}
-	if progress.Streak >= as.requiredStreak && progress.AvgResponseTime <= as.timeThreshold {
+	if progress.Streak >= sessionFields.requiredStreak && progress.AvgResponseTime <= sessionFields.timeThreshold {
 		now := nowUTC()
 		progress.LastReviewed = &now
 		nextReview := now.AddDate(0, 0, nextSM2.Interval)
@@ -453,9 +478,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
 		SessionID:      sessionID,
 		StudentID:      studentID,
-		ConceptID:      as.conceptID,
+		ConceptID:      sessionFields.conceptID,
 		Answer:         answer,
-		Expected:       as.expectedAnswer,
+		Expected:       sessionFields.expectedAnswer,
 		Correct:        gr.Correct,
 		ElapsedSeconds: elapsedSeconds,
 		Timestamp:      nowUTC(),
@@ -465,10 +490,10 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 
 	explanation := ""
 	if !gr.Correct {
-		explanation = as.explanation
+		explanation = sessionFields.explanation
 	}
 
-	xp := computeXP(gr.Correct, elapsedSeconds, as.timeThreshold, progress.Streak, as.isReview)
+	xp := computeXP(gr.Correct, elapsedSeconds, sessionFields.timeThreshold, progress.Streak, sessionFields.isReview)
 	if xp > 0 {
 		if err := e.repo.AddXP(studentID, xp); err != nil {
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
@@ -491,9 +516,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		NewStatus:      newStatus,
 		Explanation:    explanation,
 		Streak:         progress.Streak,
-		RequiredStreak: as.requiredStreak,
+		RequiredStreak: sessionFields.requiredStreak,
 		XP:             xp,
-		ExpectedAnswer: as.expectedAnswer,
+		ExpectedAnswer: sessionFields.expectedAnswer,
 	}, nil
 }
 
@@ -599,7 +624,11 @@ func (e *Engine) StartGoalDiagnostic(studentID string, conceptIDs []string) (*di
 }
 
 func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session) error {
-	for _, att := range session.Attempts {
+	session.Lock()
+	attempts := make([]diagnostic.Attempt, len(session.Attempts))
+	copy(attempts, session.Attempts)
+	session.Unlock()
+	for _, att := range attempts {
 		status := string(mastery.StatusUnseen)
 		weakness := 1.0
 		if att.Correct && att.Fast {
@@ -827,22 +856,30 @@ func (e *Engine) PropagateWeakness(studentID string) {
 func (e *Engine) AdjustPlan(studentID string) {
 	e.mu.Lock()
 	path := e.activePath[studentID]
-	e.mu.Unlock()
 	if len(path) == 0 {
+		e.mu.Unlock()
 		return
 	}
+	// Copy the path under lock to avoid holding the mutex during the DB call
+	pathCopy := make(map[string]bool, len(path))
+	for k, v := range path {
+		pathCopy[k] = v
+	}
+	e.mu.Unlock()
+
 	progress, err := e.repo.GetAllProgress(studentID)
 	if err != nil {
 		return
 	}
+
 	e.mu.Lock()
-	for cid := range path {
+	defer e.mu.Unlock()
+	// Reconcile: start with the current active path, not the stale copy
+	for cid := range e.activePath[studentID] {
 		if p, ok := progress[cid]; ok && p.Status == string(mastery.StatusMastered) && p.WeaknessScore < 0.2 {
-			delete(path, cid)
+			delete(e.activePath[studentID], cid)
 		}
 	}
-	e.activePath[studentID] = path
-	e.mu.Unlock()
 }
 
 func timeOrZero(t *time.Time) time.Time {
