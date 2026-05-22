@@ -350,7 +350,7 @@ func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("A bag contains %s. What is \\(P(%s)\\)?", strings.Join(bagParts, ", "), colorNames[pick]),
 		Answer:      fmt.Sprintf("%d/%d", fav/gcd, total/gcd),
-		Explanation: fmt.Sprintf("P(%s) = %d/%d = %d/%d", colorNames[pick], fav, total, fav/gcd, total/gcd),
+		Explanation: fmt.Sprintf("\\(P(%s) = \\frac{%d}{%d} = \\frac{%d}{%d}\\)", colorNames[pick], fav, total, fav/gcd, total/gcd),
 	}
 }
 
@@ -377,7 +377,7 @@ func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("A bag contains %s. What is \\(P(\\text{not }%s)\\)?", strings.Join(bagParts, ", "), colorNames[pick]),
 		Answer:      fmt.Sprintf("%d/%d", other/gcd, total/gcd),
-		Explanation: fmt.Sprintf("P(not %s) = 1 - P(%s) = 1 - %d/%d = %d/%d", colorNames[pick], colorNames[pick], counts[pick], total, other/gcd, total/gcd),
+		Explanation: fmt.Sprintf("\\(P(\\text{not }%s) = 1 - P(%s) = 1 - \\frac{%d}{%d} = \\frac{%d}{%d}\\)", colorNames[pick], colorNames[pick], counts[pick], total, other/gcd, total/gcd),
 	}
 }
 
@@ -408,7 +408,7 @@ func (g *compoundProbGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("A bag contains %s. You draw one marble, then another without replacement. What is \\(P(%s \\text{ and then } %s)\\)?", strings.Join(bagParts, ", "), n1, n2),
 		Answer:      fmt.Sprintf("%d/%d", num/gcd, den/gcd),
-		Explanation: fmt.Sprintf("P(%s then %s) = %d/%d x %d/%d = %d/%d = %d/%d", n1, n2, c1, total, c2, total-1, num, den, num/gcd, den/gcd),
+		Explanation: fmt.Sprintf("\\(P(%s \\text{ then } %s) = \\frac{%d}{%d} \\times \\frac{%d}{%d} = \\frac{%d}{%d} = \\frac{%d}{%d}\\)", n1, n2, c1, total, c2, total-1, num, den, num/gcd, den/gcd),
 	}
 }
 
@@ -500,7 +500,7 @@ func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the geometric mean of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d", gm),
-		Explanation: fmt.Sprintf("Geometric mean = √(%d × %d) = √%d = %d", a, b, a*b, gm),
+		Explanation: fmt.Sprintf("\\(\\text{Geometric mean} = \\sqrt{%d \\times %d} = \\sqrt{%d} = %d\\)", a, b, a*b, gm),
 	}
 }
 
@@ -516,7 +516,7 @@ func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the harmonic mean of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d/%d", numer/gcd, denom/gcd),
-		Explanation: fmt.Sprintf("H = 2/(1/%d + 1/%d) = 2/(%d/%d) = %d/%d = %d/%d", a, b, a+b, a*b, 2*a*b, a+b, numer/gcd, denom/gcd),
+		Explanation: fmt.Sprintf("\\(H = \\frac{2}{\\frac{1}{%d} + \\frac{1}{%d}} = \\frac{2}{\\frac{%d}{%d}} = \\frac{%d}{%d} = \\frac{%d}{%d}\\)", a, b, a+b, a*b, 2*a*b, a+b, numer/gcd, denom/gcd),
 	}
 }
 
@@ -539,7 +539,7 @@ func (g *rmsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the root mean square (RMS) of \\(%d\\) and \\(%d\\).", a, b),
 		Answer:      fmt.Sprintf("%d", rms),
-		Explanation: fmt.Sprintf("RMS = √((%d²+%d²)/2) = √((%d+%d)/2) = √(%d) = %d", a, b, a*a, b*b, p, rms),
+		Explanation: fmt.Sprintf("\\(\\text{RMS} = \\sqrt{\\frac{%d^{2}+%d^{2}}{2}} = \\sqrt{\\frac{%d+%d}{2}} = \\sqrt{%d} = %d\\)", a, b, a*a, b*b, p, rms),
 	}
 }
 
@@ -567,7 +567,7 @@ func (g *varianceGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the population variance of: %s", strings.Join(valStrs, ", ")),
 		Answer:      fmt.Sprintf("%.0f", popVar),
-		Explanation: fmt.Sprintf("Mean = %d/%d = %.0f. Variance = Σ(xᵢ-x̄)²/n = %.0f/%d = %.0f", sum, len(vals), mean, ss, len(vals), popVar),
+		Explanation: fmt.Sprintf("\\(\\text{Mean} = \\frac{%d}{%d} = %.0f\\). \\(\\text{Variance} = \\frac{\\Sigma(x_i - \\bar{x})^{2}}{n} = \\frac{%.0f}{%d} = %.0f\\)", sum, len(vals), mean, ss, len(vals), popVar),
 	}
 }
 

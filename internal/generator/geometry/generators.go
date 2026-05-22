@@ -212,7 +212,7 @@ func (g *quadAreaGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the area of a %s with base %d and height %d.", shape, base, height),
 		Answer:      fmt.Sprintf("%d", base*height),
-		Explanation: fmt.Sprintf("Area = base x height = %d x %d = %d.", base, height, base*height),
+		Explanation: fmt.Sprintf("\\(\\text{Area} = \\text{base} \\times \\text{height} = %d \\times %d = %d\\).", base, height, base*height),
 	}
 }
 
@@ -225,7 +225,7 @@ func (g *quadPerimGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangle: width = %d, height = %d. Find the perimeter.", w, h),
 		Answer:      fmt.Sprintf("%d", 2*(w+h)),
-		Explanation: fmt.Sprintf("Perimeter = 2 x (width + height) = 2 x (%d + %d) = %d.", w, h, 2*(w+h)),
+		Explanation: fmt.Sprintf("\\(\\text{Perimeter} = 2(\\text{width} + \\text{height}) = 2(%d + %d) = %d\\).", w, h, 2*(w+h)),
 	}
 }
 
@@ -252,7 +252,7 @@ func (g *circumferenceGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Circle radius = %d. Find the circumference (use pi = 3.14).", r),
 		Answer:      fmt.Sprintf("%.0f", circ),
-		Explanation: fmt.Sprintf("C = 2 x pi x r = 2 x 3.14 x %d = %.0f.", r, 2*3.14*float64(r)),
+		Explanation: fmt.Sprintf("\\(C = 2 \\pi r = 2 \\times 3.14 \\times %d = %.0f\\).", r, 2*3.14*float64(r)),
 	}
 }
 
@@ -265,7 +265,7 @@ func (g *circleAreaGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Circle radius = %d. Find the area (use pi = 3.14).", r),
 		Answer:      fmt.Sprintf("%.0f", area),
-		Explanation: fmt.Sprintf("A = pi x r^2 = 3.14 x %d^2 = 3.14 x %d = %.0f.", r, r*r, 3.14*float64(r*r)),
+		Explanation: fmt.Sprintf("\\(A = \\pi r^{2} = 3.14 \\times %d^{2} = 3.14 \\times %d = %.0f\\).", r, r*r, 3.14*float64(r*r)),
 	}
 }
 
@@ -314,7 +314,7 @@ func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x1+dx, y1+dy),
 		Answer:      fmt.Sprintf("%d", dist),
-		Explanation: fmt.Sprintf("sqrt((%d-%d)^2 + (%d-%d)^2) = sqrt(%d + %d) = sqrt(%d) = %d.", x1+dx, x1, y1+dy, y1, dx*dx, dy*dy, dx*dx+dy*dy, dist),
+		Explanation: fmt.Sprintf("\\(\\sqrt{(%d-%d)^{2} + (%d-%d)^{2}} = \\sqrt{%d + %d} = \\sqrt{%d} = %d\\).", x1+dx, x1, y1+dy, y1, dx*dx, dy*dy, dx*dx+dy*dy, dist),
 	}
 }
 
@@ -329,7 +329,7 @@ func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the midpoint of \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      fmt.Sprintf("(%.1f, %.1f)", float64(x1+x2)/2, float64(y1+y2)/2),
-		Explanation: fmt.Sprintf("Midpoint = ((%d+%d)/2, (%d+%d)/2) = (%.1f, %.1f).", x1, x2, y1, y2, float64(x1+x2)/2, float64(y1+y2)/2),
+		Explanation: fmt.Sprintf("\\(\\text{Midpoint} = \\left(\\frac{%d+%d}{2}, \\frac{%d+%d}{2}\\right) = (%.1f, %.1f)\\).", x1, x2, y1, y2, float64(x1+x2)/2, float64(y1+y2)/2),
 	}
 }
 
@@ -343,7 +343,7 @@ func (g *volumeGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find volume.", l, w, h),
 		Answer:      fmt.Sprintf("%d", l*w*h),
-		Explanation: fmt.Sprintf("V = l x w x h = %d x %d x %d = %d.", l, w, h, l*w*h),
+		Explanation: fmt.Sprintf("\\(V = l \\times w \\times h = %d \\times %d \\times %d = %d\\).", l, w, h, l*w*h),
 	}
 }
 
@@ -358,7 +358,7 @@ func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find surface area.", l, w, h),
 		Answer:      fmt.Sprintf("%d", sa),
-		Explanation: fmt.Sprintf("SA = 2(lw + lh + wh) = 2(%d + %d + %d) = %d.", l*w, l*h, w*h, sa),
+		Explanation: fmt.Sprintf("\\(\\text{SA} = 2(lw + lh + wh) = 2(%d + %d + %d) = %d\\).", l*w, l*h, w*h, sa),
 	}
 }
 
@@ -410,7 +410,7 @@ func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the equation of the line through \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      answer,
-		Explanation: fmt.Sprintf("Slope = (%d-%d)/(%d-%d) = %d/%d. Line through (%d,%d): y - %d = %d/%d(x - %d) → %s", y2, y1, x2, x1, dy, dx, x1, y1, y1, dy, dx, x1, answer),
+		Explanation: fmt.Sprintf("\\(\\text{Slope} = \\frac{%d-%d}{%d-%d} = \\frac{%d}{%d}\\). Line through \\((%d,%d)\\): \\(y - %d = \\frac{%d}{%d}(x - %d) \\to %s\\)", y2, y1, x2, x1, dy, dx, x1, y1, y1, dy, dx, x1, answer),
 	}
 }
 
@@ -441,12 +441,12 @@ func (g *coordPolarGen) Generate(difficulty float64) generator.Problem {
 		return generator.Problem{
 			Question:    fmt.Sprintf("Convert \\((r=%d, \\theta=%d^{\\circ})\\) to rectangular coordinates.", e.r, e.theta),
 			Answer:      fmt.Sprintf("(%d,%d)", e.x, e.y),
-			Explanation: fmt.Sprintf("x = %d·cos(%d°) = %d, y = %d·sin(%d°) = %d → (%d,%d)", e.r, e.theta, e.x, e.r, e.theta, e.y, e.x, e.y),
+			Explanation: fmt.Sprintf("\\(x = %d \\cdot \\cos(%d^{\\circ}) = %d\\), \\(y = %d \\cdot \\sin(%d^{\\circ}) = %d \\to (%d,%d)\\)", e.r, e.theta, e.x, e.r, e.theta, e.y, e.x, e.y),
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert \\((%d,%d)\\) to polar coordinates \\((r > 0, 0 \\leq \\theta < 360)\\).", e.x, e.y),
 		Answer:      fmt.Sprintf("(%d,%d°)", e.r, e.theta),
-		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = arctan(%d/%d) = %d° → (%d,%d°)", e.x, e.y, e.r, e.y, e.x, e.theta, e.r, e.theta),
+		Explanation: fmt.Sprintf("\\(r = \\sqrt{%d^{2}+%d^{2}} = %d\\), \\(\\theta = \\arctan\\left(\\frac{%d}{%d}\\right) = %d^{\\circ} \\to (%d,%d^{\\circ})\\)", e.x, e.y, e.r, e.y, e.x, e.theta, e.r, e.theta),
 	}
 }
