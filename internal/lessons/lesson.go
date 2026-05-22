@@ -97,9 +97,10 @@ func (l *Loader) Count() int {
 }
 
 func extractTitle(md string) string {
-	lines := strings.SplitN(md, "\n", 3)
-	if len(lines) > 0 && strings.HasPrefix(lines[0], "# ") {
-		return strings.TrimPrefix(lines[0], "# ")
+	for _, line := range strings.Split(md, "\n") {
+		if strings.HasPrefix(line, "# ") {
+			return strings.TrimPrefix(line, "# ")
+		}
 	}
 	return ""
 }
