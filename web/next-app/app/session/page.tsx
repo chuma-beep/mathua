@@ -92,7 +92,7 @@ export default function SessionPage() {
         if (u) {
           setUser(u)
           setScreen('practice')
-          getSettings().then(s => setShowTimer(s.show_timer ?? false)).catch(() => {})
+          getSettings().then(s => setShowTimer(s.show_timer ?? false)).catch(() => console.error('getSettings failed'))
           beginSessionAuth()
         } else {
           setScreen('name')
@@ -133,8 +133,9 @@ export default function SessionPage() {
       setSubmitted(false)
       setSessionStats({ correct: 0, total: 0 })
       const s = await getScores(res.student_id).catch(() => null)
+      if (!s) console.error('getScores failed')
       if (s) setScores(s)
-      getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
+      getDueReviews().then(r => setDueReviews(r.count)).catch(() => console.error('getDueReviews failed'))
     } catch {
       clearToken()
       setScreen('name')
@@ -157,6 +158,7 @@ export default function SessionPage() {
       setSessionStats({ correct: 0, total: 0 })
       const s = await getScores(res.student_id).catch(() => null)
       if (s) setScores(s)
+      if (!s) console.error('getScores failed')
     } catch {
       setError('Could not connect to server. Is the backend running?')
     } finally { setLoading(false) }
@@ -328,7 +330,7 @@ export default function SessionPage() {
               setSessionID(sessData.session_id)
               setQuestion(sessData.question)
               setScreen('practice')
-              getScores(guestStudentID.current).then(setScores).catch(() => {})
+              getScores(guestStudentID.current).then(setScores).catch(() => console.error('getScores failed'))
             }
           } catch {
             setError('Could not generate plan.')
@@ -560,7 +562,7 @@ export default function SessionPage() {
                           onClick={() => {
                             const next = !showTimer
                             setShowTimer(next)
-                            updateSettings({ show_timer: next }).catch(() => {})
+                            updateSettings({ show_timer: next }).catch(() => console.error('updateSettings failed'))
                           }}
                           className={`font-mono text-[10px] px-2 py-0.5 border transition-colors ${
                             showTimer
@@ -611,7 +613,7 @@ export default function SessionPage() {
                               if (n > 0 && n <= 10000) {
                                 setDailyXPGoal(n).then(() => {
                                   setScores(prev => ({ ...prev, daily_xp_goal: n }))
-                                }).catch(() => {})
+                                }).catch(() => console.error('setDailyXPGoal failed'))
                               }
                             }
                           }}

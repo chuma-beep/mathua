@@ -117,7 +117,9 @@ func generateToken(studentID string) (string, error) {
 
 func generateSecret() []byte {
 	b := make([]byte, 32)
-	_, _ = rand.Read(b)
+	if _, err := rand.Read(b); err != nil {
+		log.Fatalf("auth: failed to generate random secret: %v", err)
+	}
 	return b
 }
 

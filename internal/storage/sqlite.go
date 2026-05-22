@@ -3,6 +3,7 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
@@ -132,7 +133,12 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 	if st.Settings == "" {
 		st.Settings = "{}"
 	}
-	st.CreatedAt, _ = time.Parse(time.RFC3339, createdAt)
+	if createdAt != "" {
+		st.CreatedAt, err = time.Parse(time.RFC3339, createdAt)
+		if err != nil {
+			st.CreatedAt = time.Now()
+		}
+	}
 	return &st, nil
 }
 
@@ -328,7 +334,11 @@ func (s *SQLiteStore) GetSession(id string) (*Session, error) {
 		}
 		return nil, fmt.Errorf("get session: %w", err)
 	}
-	ses.StartedAt, _ = time.Parse(time.RFC3339, startedAt)
+	if startedAt != "" {
+		if t, err := time.Parse(time.RFC3339, startedAt); err == nil {
+			ses.StartedAt = t
+		}
+	}
 	return &ses, nil
 }
 
@@ -377,7 +387,11 @@ func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]Attempt
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
 		e.Correct = correct != 0
-		e.Timestamp, _ = time.Parse(time.RFC3339, ts)
+		if ts != "" {
+			if t, err := time.Parse(time.RFC3339, ts); err == nil {
+				e.Timestamp = t
+			}
+		}
 		out = append(out, e)
 	}
 	return out, rows.Err()
@@ -423,7 +437,11 @@ func (s *SQLiteStore) ImportQuestions(qs []Question) error {
 	if err != nil {
 		return fmt.Errorf("begin tx: %w", err)
 	}
-	defer tx.Rollback()
+	defer func() {
+		if err := tx.Rollback(); err != nil && err != sql.ErrTxDone {
+			log.Printf("warning: transaction rollback failed: %v", err)
+		}
+	}()
 
 	stmt, err := tx.Prepare(`
 		INSERT OR IGNORE INTO questions (concept_id, question, answer, explanation, source, difficulty)

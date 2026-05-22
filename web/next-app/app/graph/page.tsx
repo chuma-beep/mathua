@@ -101,21 +101,21 @@ export default function GraphPage() {
       if (ok && loggedInVal) {
         const user = getUserInfo()
         if (user) {
-          getScores(user.student_id).then(setScores).catch(() => {})
+          getScores(user.student_id).then(setScores).catch(() => console.error('getScores failed'))
           getProgress(user.student_id).then(progress => {
             const st: Record<string, MasteryStatus> = {}
             for (const [cid, cp] of Object.entries(progress)) {
               st[cid] = statusToMastery(cp.status)
             }
             setConceptStatuses(st)
-          }).catch(() => {})
+          }).catch(() => console.error('getProgress failed'))
           getWeaknesses().then(w => {
             const byDomain: Record<string, { id: string; label: string }[]> = {}
             for (const [domain, entries] of Object.entries(w.by_domain)) {
               byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))
             }
             setWeakByDomain(byDomain)
-          }).catch(() => {})
+          }).catch(() => console.error('getWeaknesses failed'))
         }
       }
     })

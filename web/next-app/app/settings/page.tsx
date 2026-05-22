@@ -24,7 +24,8 @@ export default function SettingsPage() {
     getSettings().then(s => {
       setSettings(s)
       setLoading(false)
-    }).catch(() => {
+    }).catch((e) => {
+      console.error('getSettings failed:', e)
       setLoading(false)
     })
   }, [push])

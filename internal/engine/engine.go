@@ -2,6 +2,7 @@ package engine
 
 import (
 	"fmt"
+	"log"
 	"sort"
 	"sync"
 	"time"
@@ -469,7 +470,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 
 	xp := computeXP(gr.Correct, elapsedSeconds, as.timeThreshold, progress.Streak, as.isReview)
 	if xp > 0 {
-		_ = e.repo.AddXP(studentID, xp)
+		if err := e.repo.AddXP(studentID, xp); err != nil {
+			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
+		}
 	}
 
 	e.mu.Lock()
@@ -815,7 +818,9 @@ func (e *Engine) PropagateWeakness(studentID string) {
 			}
 		}
 		prog.WeaknessScore = u.w
-		_ = e.repo.UpsertProgress(prog)
+		if err := e.repo.UpsertProgress(prog); err != nil {
+			log.Printf("warning: failed to propagate weakness for %s/%s: %v", studentID, u.cid, err)
+		}
 	}
 }
 
@@ -853,4 +858,10 @@ func ptrTime(t time.Time) *time.Time {
 
 func nowUTC() time.Time {
 	return time.Now().UTC()
+}
+
+func (e *Engine) Close() {
+	if e.gr != nil {
+		e.gr.Close()
+	}
 }

@@ -17,6 +17,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -610,7 +611,9 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), 500)
 		return
 	}
-	_ = s.repo.SetDiagnosticCompleted(studentID)
+	if err := s.repo.SetDiagnosticCompleted(studentID); err != nil {
+		log.Printf("warning: failed to set diagnostic completed: %v", err)
+	}
 
 	// Clean up session
 	s.mu.Lock()
@@ -922,7 +925,10 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		var parsed interface{}
-		json.Unmarshal([]byte(settings), &parsed)
+		if err := json.Unmarshal([]byte(settings), &parsed); err != nil {
+			log.Printf("warning: failed to parse settings JSON: %v; returning empty", err)
+			parsed = map[string]interface{}{}
+		}
 		writeJSON(w, parsed)
 	case http.MethodPut:
 		var req map[string]interface{}
@@ -1083,7 +1089,9 @@ func decodeJSON(w http.ResponseWriter, r *http.Request, v interface{}) error {
 
 func writeJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(v)
+	if err := json.NewEncoder(w).Encode(v); err != nil {
+		log.Printf("warning: failed to encode JSON response: %v", err)
+	}
 }
 
 func writeError(w http.ResponseWriter, msg string, code int) {
@@ -1189,7 +1197,11 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "student not found", 404)
 		return
 	}
-	scores, _ := s.eng.GetScores(studentID)
+	scores, err := s.eng.GetScores(studentID)
+	if err != nil {
+		log.Printf("warning: failed to get scores for %s: %v", studentID, err)
+		scores = &scoring.Scores{}
+	}
 	writeJSON(w, map[string]interface{}{
 		"student_id":           st.ID,
 		"name":                 st.Name,
@@ -1203,7 +1215,10 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 
 func newUUID() string {
 	b := make([]byte, 16)
-	_, _ = rand.Read(b)
+	if _, err := rand.Read(b); err != nil {
+		log.Printf("warning: crypto/rand.Read failed: %v; using time-based UUID", err)
+		return fmt.Sprintf("uuid-%x", time.Now().UnixNano())
+	}
 	b[6] = (b[6] & 0x0f) | 0x40
 	b[8] = (b[8] & 0x3f) | 0x80
 	return fmt.Sprintf("%08x-%04x-%04x-%04x-%012x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])

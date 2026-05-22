@@ -668,7 +668,7 @@ function StudyContent() {
     getLessons(studentId).then(res => {
       setLessonsByDomain(res.lessons)
       setLoading(false)
-    }).catch(() => setLoading(false))
+    }).catch((e) => { console.error('getLessons failed:', e); setLoading(false) })
   }, [])
 
   // URL → state sync

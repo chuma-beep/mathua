@@ -1,6 +1,66 @@
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 
 import { getAuthHeaders } from './auth'
+import { z } from 'zod'
+
+const QuestionSchema = z.object({
+  concept_id: z.string(),
+  concept_name: z.string(),
+  question: z.string(),
+  is_review: z.boolean(),
+  lesson: z.object({ Title: z.string(), Body: z.string(), Concepts: z.array(z.string()) }).optional(),
+  diagram: z.string().optional(),
+})
+
+const StartSessionResSchema = z.object({
+  student_id: z.string(),
+  session_id: z.string(),
+  question: QuestionSchema.nullable(),
+})
+
+const AnswerResultSchema = z.object({
+  correct: z.boolean(),
+  feedback: z.string(),
+  new_status: z.string(),
+  explanation: z.string(),
+  streak: z.number(),
+  required_streak: z.number(),
+  xp: z.number(),
+})
+
+const AnswerResSchema = z.object({
+  result: AnswerResultSchema.nullable(),
+  next_question: QuestionSchema.nullable(),
+  done: z.boolean(),
+})
+
+const AuthResSchema = z.object({
+  token: z.string(),
+  student_id: z.string(),
+  name: z.string(),
+  diagnostic_completed: z.boolean(),
+})
+
+const ScoresSchema = z.object({
+  lifetime_points: z.number(),
+  weekly_score: z.number(),
+  speed_bonus: z.number(),
+  concepts_mastered: z.number(),
+  current_streak: z.number(),
+  level: z.string(),
+  xp_total: z.number(),
+  xp_today: z.number(),
+  daily_xp_goal: z.number(),
+})
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function validateResponse(_schema: z.ZodTypeAny, data: unknown, _name: string) {
+  const result = _schema.safeParse(data)
+  if (!result.success) {
+    console.error(`API validation error (${_name}):`, result.error.issues)
+  }
+  return data
+}
 
 export interface StartSessionRes {
   student_id: string
@@ -88,7 +148,7 @@ export async function startSession(): Promise<StartSessionRes> {
     headers,
   })
   if (!res.ok) throw new Error(`Session start failed: ${res.status}`)
-  return res.json()
+  return validateResponse(StartSessionResSchema, await res.json(), 'startSession') as StartSessionRes
 }
 
 export async function startSessionName(name: string): Promise<StartSessionRes> {
@@ -116,7 +176,7 @@ export async function submitAnswer(
     body: JSON.stringify({ session_id: sessionID, answer, elapsed }),
   })
   if (!res.ok) throw new Error(`Answer submit failed: ${res.status}`)
-  return res.json()
+  return validateResponse(AnswerResSchema, await res.json(), 'submitAnswer') as AnswerRes
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
@@ -128,7 +188,7 @@ export async function getProgress(studentID: string): Promise<Record<string, Con
 export async function getScores(studentID: string): Promise<Scores> {
   const res = await fetch(`${API_BASE}/api/scores/${studentID}`)
   if (!res.ok) throw new Error(`Scores fetch failed: ${res.status}`)
-  return res.json()
+  return validateResponse(ScoresSchema, await res.json(), 'getScores') as Scores
 }
 
 export async function getGraph(): Promise<GraphRes> {
@@ -176,7 +236,7 @@ export async function signup(name: string, username: string, password: string): 
     body: JSON.stringify({ name, username, password }),
   })
   if (!res.ok) throw new Error('Signup failed')
-  return res.json()
+  return validateResponse(AuthResSchema, await res.json(), 'signup') as AuthRes
 }
 
 export async function login(username: string, password: string): Promise<AuthRes> {
@@ -186,7 +246,7 @@ export async function login(username: string, password: string): Promise<AuthRes
 		body: JSON.stringify({ username, password }),
 	})
 	if (!res.ok) throw new Error('Invalid credentials')
-	return res.json()
+	return validateResponse(AuthResSchema, await res.json(), 'login') as AuthRes
 }
 
 // Goal-based diagnostic API
@@ -309,11 +369,12 @@ export async function getSettings(): Promise<UserSettings> {
 }
 
 export async function updateSettings(settings: UserSettings): Promise<void> {
-	await fetch(`${API_BASE}/api/settings`, {
+	const res = await fetch(`${API_BASE}/api/settings`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify(settings),
 	})
+	if (!res.ok) throw new Error(`Update settings failed: ${res.status}`)
 }
 
 export interface ConceptProgress {

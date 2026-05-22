@@ -28,7 +28,8 @@
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "zod": "^4.4.3"
   },
   "engines": {
     "node": ">=18.17.0"

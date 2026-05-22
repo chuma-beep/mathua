@@ -53,7 +53,7 @@ export default function LeaderboardPage() {
   useEffect(() => {
     getLeaderboard()
       .then((data) => finishLoading(data))
-      .catch(() => setLoading(false))
+      .catch((e) => { console.error('leaderboard fetch failed:', e); setLoading(false) })
   }, [finishLoading])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
