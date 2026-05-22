@@ -565,7 +565,7 @@ func (g *expConceptGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("What does \\(%d^{%d}\\) mean?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^%d = %s = %d", base, exp, strings.Repeat(fmt.Sprintf("%dx", base), exp-1)+fmt.Sprintf("%d", base), mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("\\(%d^{%d} = %s = %d\\)", base, exp, strings.Repeat(fmt.Sprintf("%d \\times ", base), exp-1)+fmt.Sprintf("%d", base), mathutil.IntPow(base, exp)),
 	}
 }
 
@@ -581,7 +581,7 @@ func (g *expEvalGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d^{%d} =\\) ?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^%d = %d", base, exp, mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\)", base, exp, mathutil.IntPow(base, exp)),
 	}
 }
 
@@ -595,7 +595,7 @@ func (g *expProductRuleGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(%d^{%d} \\times %d^{%d}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1+e2),
-		Explanation: fmt.Sprintf("%d^%d x %d^%d = %d^(%d+%d) = %d^%d", base, e1, base, e2, base, e1, e2, base, e1+e2),
+		Explanation: fmt.Sprintf("\\(%d^{%d} \\times %d^{%d} = %d^{%d+%d} = %d^{%d}\\)", base, e1, base, e2, base, e1, e2, base, e1+e2),
 	}
 }
 
@@ -609,7 +609,7 @@ func (g *expQuotientRuleGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(\\frac{%d^{%d}}{%d^{%d}}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1-e2),
-		Explanation: fmt.Sprintf("%d^%d / %d^%d = %d^(%d-%d) = %d^%d", base, e1, base, e2, base, e1, e2, base, e1-e2),
+		Explanation: fmt.Sprintf("\\(\\frac{%d^{%d}}{%d^{%d}} = %d^{%d-%d} = %d^{%d}\\)", base, e1, base, e2, base, e1, e2, base, e1-e2),
 	}
 }
 
@@ -623,7 +623,7 @@ func (g *expPowerRuleGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\((%d^{%d})^{%d}\\)", base, e1, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1*e2),
-		Explanation: fmt.Sprintf("(%d^%d)^%d = %d^(%dx%d) = %d^%d", base, e1, e2, base, e1, e2, base, e1*e2),
+		Explanation: fmt.Sprintf("\\((%d^{%d})^{%d} = %d^{%d \\times %d} = %d^{%d}\\)", base, e1, e2, base, e1, e2, base, e1*e2),
 	}
 }
 
@@ -638,7 +638,7 @@ func (g *sqrtPerfectGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(\\sqrt{%d} =\\) ?", r*r),
 		Answer:      fmt.Sprintf("%d", r),
-		Explanation: fmt.Sprintf("sqrt(%d) = %d because %d x %d = %d", r*r, r, r, r, r*r),
+		Explanation: fmt.Sprintf("\\(\\sqrt{%d} = %d\\) because \\(%d \\times %d = %d\\)", r*r, r, r, r, r*r),
 	}
 }
 
@@ -655,7 +655,7 @@ func (g *sqrtSimplifyGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(\\sqrt{%d}\\)", n),
 		Answer:      fmt.Sprintf("%d sqrt(%d)", square, b),
-		Explanation: fmt.Sprintf("sqrt(%d) = sqrt(%dx%d) = sqrt(%d) x sqrt(%d) = %d sqrt(%d)", n, square*square, b, square*square, b, square, b),
+		Explanation: fmt.Sprintf("\\(\\sqrt{%d} = \\sqrt{%d \\times %d} = \\sqrt{%d} \\times \\sqrt{%d} = %d \\sqrt{%d}\\)", n, square*square, b, square*square, b, square, b),
 	}
 }
 
@@ -755,6 +755,6 @@ func (g *decIntroGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write %d.%d as a mixed number.", ones, tenths),
 		Answer:      fmt.Sprintf("%d %d/10", ones, tenths),
-		Explanation: fmt.Sprintf("%d.%d = %d and %d/10", ones, tenths, ones, tenths),
+		Explanation: fmt.Sprintf("\\(%d.%d = %d\\ \\text{and}\\ \\frac{%d}{10}\\)", ones, tenths, ones, tenths),
 	}
 }

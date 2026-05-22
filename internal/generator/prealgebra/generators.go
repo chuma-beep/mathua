@@ -231,7 +231,7 @@ func (g *pctFindRateGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d is what percent of %d?", part, total),
 		Answer:      fmt.Sprintf("%d", p),
-		Explanation: fmt.Sprintf("%d/%d = %d/%d = %d%%", part, total, p, 100, p),
+		Explanation: fmt.Sprintf("\\(\\frac{%d}{%d} = \\frac{%d}{%d} = %d\\%%\\)", part, total, p, 100, p),
 	}
 }
 
@@ -307,7 +307,7 @@ func (g *negOrderOpsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: \\(%d + (%d) \\times %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", result),
-		Explanation: fmt.Sprintf("%d + (%d) x %d = %d + %d = %d", a, b, c, a, b*c, result),
+		Explanation: fmt.Sprintf("\\(%d + (%d) \\times %d = %d + %d = %d\\)", a, b, c, a, b*c, result),
 	}
 }
 
@@ -381,7 +381,7 @@ func (g *ratioSimplifyGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify the ratio %d:%d", a, b),
 		Answer:      fmt.Sprintf("%d:%d", a/d, b/d),
-		Explanation: fmt.Sprintf("Divide both by %d: %d/%d : %d/%d = %d:%d", d, a, d, b, d, a/d, b/d),
+		Explanation: fmt.Sprintf("Divide both by %d: \\(\\frac{%d}{%d} : \\frac{%d}{%d} = %d:%d\\)", d, a, d, b, d, a/d, b/d),
 	}
 }
 
@@ -397,7 +397,7 @@ func (g *ratioProportionGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve the proportion: \\(\\frac{%d}{%d} = \\frac{x}{%d}\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%d/%d = x/%d, cross-multiply: %dx = %dx%d, x = %d", a, b, c, a, c, b, x),
+		Explanation: fmt.Sprintf("\\(\\frac{%d}{%d} = \\frac{x}{%d}\\), cross-multiply: \\(%dx = %d \\times %d\\), \\(x = %d\\)", a, b, c, a, c, b, x),
 	}
 }
 
@@ -440,7 +440,7 @@ func (g *expNegGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(%d^{-%d}\\)", base, exp),
 		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
-		Explanation: fmt.Sprintf("%d^-%d = 1/%d^%d = 1/%d", base, exp, base, exp, mathutil.IntPow(base, exp)),
+		Explanation: fmt.Sprintf("\\(%d^{-%d} = \\frac{1}{%d^{%d}} = \\frac{1}{%d}\\)", base, exp, base, exp, mathutil.IntPow(base, exp)),
 	}
 }
 
@@ -465,7 +465,7 @@ func (g *sciNotationGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, exp),
 		Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
-		Explanation: fmt.Sprintf("%g x 10^%d = %g", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
+		Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\)", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
 	}
 }
 
@@ -533,7 +533,7 @@ func (g *sciNotationOpsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\((%g \\times 10^{%d}) \\times (%g \\times 10^{%d}) =\\) ? (in scientific notation)", a, ea, b, eb),
 		Answer:      fmt.Sprintf("%g x 10^%d", coeff, totalExp),
-		Explanation: fmt.Sprintf("(%g x %g) x 10^(%d+%d) = %g x 10^%d", a, b, ea, eb, coeff, totalExp),
+		Explanation: fmt.Sprintf("\\((%g \\times %g) \\times 10^{%d+%d} = %g \\times 10^{%d}\\)", a, b, ea, eb, coeff, totalExp),
 	}
 }
 
@@ -562,7 +562,7 @@ func (g *exprEvalGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate \\(%dx + %d\\) when \\(x = %d\\).", a, b, x),
 		Answer:      fmt.Sprintf("%d", result),
-		Explanation: fmt.Sprintf("%d(%d) + %d = %d + %d = %d.", a, x, b, a*x, b, result),
+		Explanation: fmt.Sprintf("\\(%d(%d) + %d = %d + %d = %d\\)", a, x, b, a*x, b, result),
 	}
 }
 
@@ -577,7 +577,7 @@ func (g *likeTermsGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Combine like terms: \\(%dx + %dx + %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultCoef, c),
-		Explanation: fmt.Sprintf("%dx + %dx = %dx, plus %d = %dx + %d", a, b, resultCoef, c, resultCoef, c),
+		Explanation: fmt.Sprintf("\\(%dx + %dx = %dx\\), plus \\(%d = %dx + %d\\)", a, b, resultCoef, c, resultCoef, c),
 	}
 }
 
@@ -593,7 +593,7 @@ func (g *distributeGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(%d(%dx + %d)\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultB, resultC),
-		Explanation: fmt.Sprintf("%d(%dx + %d) = %d(%dx) + %d(%d) = %dx + %d", a, b, c, a, b, a, c, resultB, resultC),
+		Explanation: fmt.Sprintf("\\(%d(%dx + %d) = %d(%dx) + %d(%d) = %dx + %d\\)", a, b, c, a, b, a, c, resultB, resultC),
 	}
 }
 
@@ -609,7 +609,7 @@ func (g *eqOneStepAddGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(x + %d = %d\\)", b, a+b),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("x + %d = %d, subtract %d: x = %d", b, a+b, b, x),
+		Explanation: fmt.Sprintf("\\(x + %d = %d\\), subtract %d: \\(x = %d\\)", b, a+b, b, x),
 	}
 }
 
@@ -623,7 +623,7 @@ func (g *eqOneStepMultGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(%dx = %d\\)", coeff, rhs),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%dx = %d, divide by %d: x = %d", coeff, rhs, coeff, x),
+		Explanation: fmt.Sprintf("\\(%dx = %d\\), divide by %d: \\(x = %d\\)", coeff, rhs, coeff, x),
 	}
 }
 
@@ -639,7 +639,7 @@ func (g *eqTwoStepGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: %s = %d", lhs, rhs),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("%s = %d -> %dx = %d -> x = %d.", lhs, rhs, a, rhs-b, x),
+		Explanation: fmt.Sprintf("\\(%s = %d \\to %dx = %d \\to x = %d\\)", lhs, rhs, a, rhs-b, x),
 	}
 }
 
@@ -655,7 +655,7 @@ func (g *eqWordGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("You bought %d %s for $%d. How much does each %s cost?", x, item, total, strings.TrimSuffix(item, "s")),
 		Answer:      fmt.Sprintf("%d", cost),
-		Explanation: fmt.Sprintf("Let p = price. %d x p = %d. p = %d / %d = %d.", x, total, total, x, cost),
+		Explanation: fmt.Sprintf("Let p = price. \\(%d \\times p = %d\\). \\(p = \\frac{%d}{%d} = %d\\)", x, total, total, x, cost),
 	}
 }
 
@@ -671,7 +671,7 @@ func (g *ineqOneStepGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(x + %d > %d\\)", b, c),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("x + %d > %d, subtract %d: x > %d.", b, c, b, c-b),
+		Explanation: fmt.Sprintf("\\(x + %d > %d\\), subtract %d: \\(x > %d\\)", b, c, b, c-b),
 	}
 }
 
@@ -687,7 +687,7 @@ func (g *ineqTwoStepGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    q,
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("Solve %s -> %dx < %d -> x < %.1f -> x = %d.", q, a, c-b, float64(c-b)/float64(a), x),
+		Explanation: fmt.Sprintf("Solve \\(%s \\to %dx < %d \\to x < %.1f \\to x = %d\\)", q, a, c-b, float64(c-b)/float64(a), x),
 	}
 }
 
