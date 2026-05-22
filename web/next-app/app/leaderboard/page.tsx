@@ -156,9 +156,6 @@ export default function LeaderboardPage() {
             <ProgressionLevels levels={LEVELS} />
           </div>
         </div>
-        <p className="text-center text-mathua-muted text-[13px] italic mt-4">
-          Your level is permanent and never decreases.
-        </p>
       </section>
 
       <Footer />
