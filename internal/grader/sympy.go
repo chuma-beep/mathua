@@ -5,7 +5,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -14,65 +13,40 @@ import (
 )
 
 var sympyServicePath string
+var findOnce sync.Once
 
-func init() {
-	paths := []string{
-		"grading/sympy_service.py",                  // cwd = project root
-		"../../grading/sympy_service.py",             // cwd = internal/grader/
-		"../grading/sympy_service.py",                // cwd = internal/
-		"../../../grading/sympy_service.py",           // cwd = internal/generator/complex/
-	}
-	if exe, err := os.Executable(); err == nil {
-		d := filepath.Dir(exe)
-		paths = append(paths,
-			filepath.Join(d, "grading", "sympy_service.py"),
-			filepath.Join(d, "..", "..", "grading", "sympy_service.py"),
-		)
-	}
-	if wd, err := os.Getwd(); err == nil {
-		for _, rel := range []string{"grading/sympy_service.py", "../../grading/sympy_service.py", "../../../grading/sympy_service.py"} {
-			paths = append(paths, filepath.Join(wd, rel))
+func findSymPyService() string {
+	findOnce.Do(func() {
+		paths := []string{
+			"grading/sympy_service.py",
+			"../../grading/sympy_service.py",
+			"../grading/sympy_service.py",
+			"../../../grading/sympy_service.py",
 		}
-	}
-	for _, p := range paths {
-		abs, _ := filepath.Abs(p)
-		if _, err := os.Stat(abs); err == nil {
-			sympyServicePath = abs
-			return
+		if p := os.Getenv("SYMPY_SERVICE_PATH"); p != "" {
+			paths = append([]string{p}, paths...)
 		}
-	}
-}
-
-type sympyGrader struct {
-	cmd    *exec.Cmd
-	stdin  io.WriteCloser
-	stdout *bufio.Scanner
-	mu     sync.Mutex
-	nextID int
-}
-
-func newSympyGrader() (*sympyGrader, error) {
-	if sympyServicePath == "" {
-		return nil, fmt.Errorf("sympy_service.py not found")
-	}
-	cmd := exec.Command("python3", sympyServicePath)
-	stdin, err := cmd.StdinPipe()
-	if err != nil {
-		return nil, fmt.Errorf("stdin pipe: %w", err)
-	}
-	stdout, err := cmd.StdoutPipe()
-	if err != nil {
-		return nil, fmt.Errorf("stdout pipe: %w", err)
-	}
-	cmd.Stderr = os.Stderr
-	if err := cmd.Start(); err != nil {
-		return nil, fmt.Errorf("start sympy: %w", err)
-	}
-	return &sympyGrader{
-		cmd:    cmd,
-		stdin:  stdin,
-		stdout: bufio.NewScanner(stdout),
-	}, nil
+		if exe, err := os.Executable(); err == nil {
+			d := filepath.Dir(exe)
+			paths = append(paths,
+				filepath.Join(d, "grading", "sympy_service.py"),
+				filepath.Join(d, "..", "..", "grading", "sympy_service.py"),
+			)
+		}
+		if wd, err := os.Getwd(); err == nil {
+			for _, rel := range []string{"grading/sympy_service.py", "../../grading/sympy_service.py", "../../../grading/sympy_service.py"} {
+				paths = append(paths, filepath.Join(wd, rel))
+			}
+		}
+		for _, p := range paths {
+			abs, _ := filepath.Abs(p)
+			if _, err := os.Stat(abs); err == nil {
+				sympyServicePath = abs
+				return
+			}
+		}
+	})
+	return sympyServicePath
 }
 
 type sympyRequest struct {
@@ -87,92 +61,72 @@ type sympyResponse struct {
 	Feedback string `json:"feedback"`
 }
 
-func (g *sympyGrader) grade(expected, answer string) Result {
-	g.mu.Lock()
-	defer g.mu.Unlock()
-
-	if g.cmd == nil || g.cmd.ProcessState != nil && g.cmd.ProcessState.Exited() {
-		if err := g.restart(); err != nil {
-			return Result{Correct: false, Score: 0, Feedback: "Grading service unavailable"}
-		}
+func gradeSymPy(expected, answer string) Result {
+	path := findSymPyService()
+	if path == "" {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service not found"}
 	}
 
-	g.nextID++
+	ctx, cancel := context.WithTimeout(context.Background(), 12*time.Second)
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, "python3", path)
+	stdin, err := cmd.StdinPipe()
+	if err != nil {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service pipe error"}
+	}
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service pipe error"}
+	}
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Start(); err != nil {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service start error"}
+	}
+
 	req := sympyRequest{
-		ID:       fmt.Sprintf("%d", g.nextID),
+		ID:       "1",
 		Expected: expected,
 		Answer:   answer,
 	}
 	data, err := json.Marshal(req)
 	if err != nil {
+		cmd.Process.Kill()
+		cmd.Wait()
 		return Result{Correct: false, Score: 0, Feedback: "Internal error"}
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	if _, err := stdin.Write(append(data, '\n')); err != nil {
+		cmd.Process.Kill()
+		cmd.Wait()
+		return Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
+	}
+	stdin.Close()
 
-	done := make(chan Result, 1)
-
-	go func() {
-		if _, err := g.stdin.Write(append(data, '\n')); err != nil {
-			done <- Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
-			return
+	scanner := bufio.NewScanner(stdout)
+	if scanner.Scan() {
+		line := scanner.Text()
+		var resp sympyResponse
+		if err := json.Unmarshal([]byte(line), &resp); err != nil {
+			cmd.Process.Kill()
+			cmd.Wait()
+			return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
 		}
-		if g.stdout.Scan() {
-			line := g.stdout.Text()
-			var resp sympyResponse
-			if err := json.Unmarshal([]byte(line), &resp); err != nil {
-				done <- Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
-				return
-			}
-			if resp.Correct {
-				done <- Result{Correct: true, Score: 1}
-			} else {
-				feedback := resp.Feedback
-				if feedback == "" {
-					feedback = "Incorrect"
-				}
-				done <- Result{Correct: false, Score: 0, Feedback: feedback}
-			}
-		} else {
-			err := g.stdout.Err()
-			if err == nil {
-				err = fmt.Errorf("connection closed")
-			}
-			done <- Result{Correct: false, Score: 0, Feedback: fmt.Sprintf("Grading service error: %v", err)}
+		cmd.Wait()
+		if resp.Correct {
+			return Result{Correct: true, Score: 1}
 		}
-	}()
+		feedback := resp.Feedback
+		if feedback == "" {
+			feedback = "Incorrect"
+		}
+		return Result{Correct: false, Score: 0, Feedback: feedback}
+	}
 
-	select {
-	case r := <-done:
-		return r
-	case <-ctx.Done():
-		g.cmd.Process.Kill()
+	err = cmd.Wait()
+	if ctx.Err() != nil {
 		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
 	}
-}
-
-func (g *sympyGrader) restart() error {
-	if g.cmd != nil {
-		g.cmd.Process.Kill()
-		g.cmd.Wait()
-	}
-	ng, err := newSympyGrader()
-	if err != nil {
-		return err
-	}
-	g.cmd = ng.cmd
-	g.stdin = ng.stdin
-	g.stdout = ng.stdout
-	g.nextID = ng.nextID
-	return nil
-}
-
-func (g *sympyGrader) close() {
-	g.mu.Lock()
-	defer g.mu.Unlock()
-	if g.cmd != nil {
-		g.cmd.Process.Kill()
-		g.cmd.Wait()
-	}
+	return Result{Correct: false, Score: 0, Feedback: fmt.Sprintf("Grading service error: %v", err)}
 }

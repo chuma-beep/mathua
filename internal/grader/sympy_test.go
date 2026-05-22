@@ -11,7 +11,7 @@ func sympyAvailable(t *testing.T) bool {
 		t.Log("SymPy not available, skipping test")
 		return false
 	}
-	if sympyServicePath == "" {
+	if findSymPyService() == "" {
 		t.Log("sympy_service.py not found, skipping test")
 		return false
 	}

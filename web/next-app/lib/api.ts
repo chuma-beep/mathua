@@ -53,13 +53,13 @@ const ScoresSchema = z.object({
   daily_xp_goal: z.number(),
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function validateResponse(_schema: z.ZodTypeAny, data: unknown, _name: string) {
-  const result = _schema.safeParse(data)
+function validateResponse<T>(schema: z.ZodType<T>, data: unknown, name: string): T {
+  const result = schema.safeParse(data)
   if (!result.success) {
-    console.error(`API validation error (${_name}):`, result.error.issues)
+    console.error(`API validation error (${name}):`, result.error.issues)
+    throw new Error(`API response validation failed for ${name}`)
   }
-  return data
+  return result.data as T
 }
 
 export interface StartSessionRes {
