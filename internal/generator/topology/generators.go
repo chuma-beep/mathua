@@ -25,42 +25,42 @@ func (g *metricGen) Generate(difficulty float64) generator.Problem {
 	}
 	table := []entry{
 		{
-			"Is the usual distance d(x,y)=|x-y| a metric on R? (yes/no)",
+			"Is the usual distance \\(d(x,y)=|x-y|\\) a metric on \\(\\mathbb{R}\\)? (yes/no)",
 			"yes",
 			"d(x,y)=|x-y| satisfies all metric axioms: non-negativity, identity of indiscernibles, symmetry, and triangle inequality.",
 		},
 		{
-			"In a metric space, is it true that d(x,y)=0 if and only if x=y? (yes/no)",
+			"In a metric space, is it true that \\(d(x,y)=0\\) if and only if \\(x=y\\)? (yes/no)",
 			"yes",
 			"This is the identity of indiscernibles axiom: d(x,y)=0 ⇔ x=y.",
 		},
 		{
-			"In a metric space, is d(x,z) ≤ d(x,y)+d(y,z)? (yes/no)",
+			"In a metric space, is \\(d(x,z) \\leq d(x,y)+d(y,z)\\)? (yes/no)",
 			"yes",
 			"This is the triangle inequality, one of the defining properties of a metric.",
 		},
 		{
-			"Is d(x,y) = (x-y)² a metric on R? (yes/no)",
+			"Is \\(d(x,y) = (x-y)^{2}\\) a metric on \\(\\mathbb{R}\\)? (yes/no)",
 			"no",
 			"It violates the triangle inequality. For example, d(0,2)=4 but d(0,1)+d(1,2)=1+1=2 < 4.",
 		},
 		{
-			"In a metric space, is d(x,y) always non-negative? (yes/no)",
+			"In a metric space, is \\(d(x,y)\\) always non-negative? (yes/no)",
 			"yes",
 			"Non-negativity is one of the metric axioms: d(x,y) ≥ 0 for all x,y.",
 		},
 		{
-			"Is the discrete metric (d(x,y)=1 if x≠y, 0 if x=y) a metric? (yes/no)",
+			"Is the discrete metric \\((d(x,y)=1\\) if \\(x\\neq y\\), \\(0\\) if \\(x=y)\\) a metric? (yes/no)",
 			"yes",
 			"The discrete metric satisfies all metric axioms including the triangle inequality.",
 		},
 		{
-			"In a metric space, is d(x,y) = d(y,x)? (yes/no)",
+			"In a metric space, is \\(d(x,y) = d(y,x)\\)? (yes/no)",
 			"yes",
 			"Symmetry is one of the metric axioms: d(x,y) = d(y,x) for all x,y.",
 		},
 		{
-			"Is d(x,y) = |x²-y²| a metric on R? (yes/no)",
+			"Is \\(d(x,y) = |x^{2}-y^{2}|\\) a metric on \\(\\mathbb{R}\\)? (yes/no)",
 			"no",
 			"It is not a metric because d(1,-1)=0 but 1≠-1, violating the identity of indiscernibles.",
 		},
@@ -122,20 +122,20 @@ func (g *continuousGen) Generate(difficulty float64) generator.Problem {
 		reason     string
 	}
 	table := []entry{
-		{"f(x)=x²", "R", "yes", "f(x)=x² is a polynomial, and all polynomials are continuous on R."},
-		{"f(x)=1/x", "R", "no", "f(x)=1/x is discontinuous at x=0 because the limit as x→0 does not exist (approaches ±∞)."},
-		{"the floor function ⌊x⌋", "R", "no", "The floor function is discontinuous at every integer because the left and right limits differ."},
-		{"f(x)=sin(x)", "R", "yes", "sin(x) is continuous on R — it is a trigonometric function with no breaks."},
-		{"f(x)=eˣ", "R", "yes", "f(x)=eˣ is continuous on R as an exponential function."},
-		{"f(x)=|x|", "R", "yes", "f(x)=|x| is continuous on R (although it is not differentiable at x=0, continuity is satisfied)."},
-		{"f(x)=1/(x²−1)", "R", "no", "f(x)=1/(x²−1) is discontinuous at x=±1 where the denominator is zero."},
-		{"f(x)=√x", "[0,∞)", "yes", "f(x)=√x is continuous on its domain [0,∞)."},
-		{"f(x)=tan(x)", "R", "no", "tan(x) is discontinuous at x=π/2 + nπ where the function approaches ±∞."},
-		{"f(x)=x³−3x+1", "R", "yes", "f(x)=x³−3x+1 is a polynomial, and all polynomials are continuous on R."},
+		{"\\(f(x)=x^{2}\\)", "\\(\\mathbb{R}\\)", "yes", "\\(f(x)=x^{2}\\) is a polynomial, and all polynomials are continuous on \\(\\mathbb{R}\\)."},
+		{"\\(f(x)=1/x\\)", "\\(\\mathbb{R}\\)", "no", "\\(f(x)=1/x\\) is discontinuous at \\(x=0\\) because the limit as \\(x\\to 0\\) does not exist (approaches \\(\\pm \\infty\\))."},
+		{"the floor function \\(\\lfloor x \\rfloor\\)", "\\(\\mathbb{R}\\)", "no", "The floor function is discontinuous at every integer because the left and right limits differ."},
+		{"\\(f(x)=\\sin(x)\\)", "\\(\\mathbb{R}\\)", "yes", "\\(\\sin(x)\\) is continuous on \\(\\mathbb{R}\\) — it is a trigonometric function with no breaks."},
+		{"\\(f(x)=e^{x}\\)", "\\(\\mathbb{R}\\)", "yes", "\\(f(x)=e^{x}\\) is continuous on \\(\\mathbb{R}\\) as an exponential function."},
+		{"\\(f(x)=|x|\\)", "\\(\\mathbb{R}\\)", "yes", "\\(f(x)=|x|\\) is continuous on \\(\\mathbb{R}\\) (although it is not differentiable at \\(x=0\\), continuity is satisfied)."},
+		{"\\(f(x)=1/(x^{2}-1)\\)", "\\(\\mathbb{R}\\)", "no", "\\(f(x)=1/(x^{2}-1)\\) is discontinuous at \\(x=\\pm 1\\) where the denominator is zero."},
+		{"\\(f(x)=\\sqrt{x}\\)", "\\([0,\\infty)\\)", "yes", "\\(f(x)=\\sqrt{x}\\) is continuous on its domain \\([0,\\infty)\\)."},
+		{"\\(f(x)=\\tan(x)\\)", "\\(\\mathbb{R}\\)", "no", "\\(\\tan(x)\\) is discontinuous at \\(x=\\pi/2 + n\\pi\\) where the function approaches \\(\\pm \\infty\\)."},
+		{"\\(f(x)=x^{3}-3x+1\\)", "\\(\\mathbb{R}\\)", "yes", "\\(f(x)=x^{3}-3x+1\\) is a polynomial, and all polynomials are continuous on \\(\\mathbb{R}\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is %s continuous on %s? (yes/no)", e.f, e.domain),
+		Question:    fmt.Sprintf("Is \\(%s\\) continuous on \\(%s\\)? (yes/no)", e.f, e.domain),
 		Answer:      e.continuous,
 		Explanation: e.reason,
 	}

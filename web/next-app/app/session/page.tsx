@@ -491,7 +491,7 @@ export default function SessionPage() {
             </div>
             {diagLastResult && (
               <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${diagLastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
-                <p className={diagLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{diagLastResult.feedback}</p>
+                <KatexContent className={diagLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{diagLastResult.feedback}</KatexContent>
               </div>
             )}
             <div className="text-center text-mathua-muted text-xs font-mono">
@@ -730,7 +730,7 @@ export default function SessionPage() {
                                 {lastResult?.correct ? 'Correct!' : 'Incorrect'}
                               </p>
                               {lastResult?.explanation && (
-                                <p className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</p>
+                                <KatexContent className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</KatexContent>
                               )}
                             </div>
                           </div>
@@ -931,7 +931,7 @@ export default function SessionPage() {
                                 {lastResult?.correct ? 'Correct!' : 'Incorrect'}
                               </p>
                               {lastResult?.explanation && (
-                                <p className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</p>
+                                <KatexContent className="text-mathua-secondary text-xs mt-1">{lastResult.explanation}</KatexContent>
                               )}
                             </div>
                           </div>

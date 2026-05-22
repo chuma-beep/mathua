@@ -282,7 +282,7 @@ export default function OnboardPage() {
 
                 {lastResult && (
                   <div className={`bg-mathua-surface border rounded-lg p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
-                    <p className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</p>
+                    <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
                   </div>
                 )}
 
