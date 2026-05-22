@@ -537,19 +537,25 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 	correct := false
 	explanation := ""
+		session.Lock()
 	if session.LastProblem != nil {
 		gt := "numeric"
 		if concept != nil {
 			gt = concept.GradingType
 		}
+		expected := session.LastProblem.Answer
+		expExplanation := session.LastProblem.Explanation
+		session.Unlock()
 		graderRouter := s.eng.GetGrader()
 		if graderRouter != nil {
-			grResult := graderRouter.Grade(grader.GradingType(gt), session.LastProblem.Answer, req.Answer)
+			grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
 			correct = grResult.Correct
 		} else {
-			correct = session.LastProblem.Answer == req.Answer
+			correct = expected == req.Answer
 		}
-		explanation = session.LastProblem.Explanation
+		explanation = expExplanation
+	} else {
+		session.Unlock()
 	}
 	fast := req.Elapsed < timeThresh
 
@@ -604,7 +610,11 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "diagnostic session not found", 404)
 		return
 	}
+	session.Lock()
 	studentID := session.StudentID
+	attempts := make([]diagnostic.Attempt, len(session.Attempts))
+	copy(attempts, session.Attempts)
+	session.Unlock()
 
 	// Persist diagnostic results
 	if err := s.eng.ApplyGoalResults(studentID, session); err != nil {
@@ -620,11 +630,11 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	delete(s.diagSessions, req.SessionID)
 	s.mu.Unlock()
 
-	// Compute readiness and weak areas
+	// Compute readiness and weak areas (use copied attempts for thread safety)
 	weakByDomain := make(map[string][]map[string]interface{})
 	strongByDomain := make(map[string][]string)
 
-	for _, att := range session.Attempts {
+	for _, att := range attempts {
 		c := s.eng.GetDAG().Concept(att.ConceptID)
 		domain := "unknown"
 		label := att.ConceptID
@@ -643,9 +653,9 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	total := len(session.Attempts)
+	total := len(attempts)
 	correct := 0
-	for _, att := range session.Attempts {
+	for _, att := range attempts {
 		if att.Correct {
 			correct++
 		}

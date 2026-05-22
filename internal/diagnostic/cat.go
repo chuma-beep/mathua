@@ -1,6 +1,7 @@
 package diagnostic
 
 import (
+	"sync"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -15,6 +16,8 @@ const (
 )
 
 type Session struct {
+	sync.Mutex
+
 	ID            string
 	StudentID     string
 	Position      int
@@ -64,6 +67,8 @@ func (e *Engine) StartWithPath(path []*concepts.Concept) *Session {
 }
 
 func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
+	s.Lock()
+	defer s.Unlock()
 	if s.State == StateDone || s.Position < 0 || s.Position >= len(s.order) {
 		s.LastProblem = nil
 		return nil, "", nil
@@ -78,8 +83,9 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 }
 
 // RecordAnswer processes a diagnostic answer and updates the session state.
-// threshold is the concept's mastery time threshold.
 func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) {
+	s.Lock()
+	defer s.Unlock()
 	s.Attempts = append(s.Attempts, Attempt{
 		ConceptID: conceptID,
 		Correct:   correct,
@@ -106,11 +112,15 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 }
 
 func (e *Engine) IsComplete(s *Session) bool {
+	s.Lock()
+	defer s.Unlock()
 	return s.State == StateDone
 }
 
 // FrontierEstimate returns the estimated concept index where the student's
 // knowledge frontier lies (the highest concept index they can answer).
 func (e *Engine) FrontierEstimate(s *Session) int {
+	s.Lock()
+	defer s.Unlock()
 	return s.High
 }
