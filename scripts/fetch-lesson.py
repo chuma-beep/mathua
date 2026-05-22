@@ -58,8 +58,8 @@ LAST_CALL = 0
 def api_call(params):
     global LAST_CALL
     elapsed = time.time() - LAST_CALL
-    if elapsed < 0.5:
-        time.sleep(0.5 - elapsed)
+    if elapsed < 1.5:
+        time.sleep(1.5 - elapsed)
     url = API + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers=HEADERS)
     for attempt in range(3):
@@ -68,8 +68,8 @@ def api_call(params):
             with urllib.request.urlopen(req, timeout=15) as resp:
                 return json.loads(resp.read())
         except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < 2:
-                wait = 2 ** (attempt + 1)
+            if e.code == 429 and attempt < 3:
+                wait = 5 * (2 ** attempt)
                 print(f"  [rate-limit] retrying in {wait}s...", file=sys.stderr)
                 time.sleep(wait)
                 continue
@@ -177,50 +177,258 @@ def remove_refs(text):
     return text
 
 
+def _find_matching_end(text, start):
+    """Find the matching }} for {{ at start, handling nested {{...}}."""
+    if text[start:start+2] != '{{':
+        return -1
+    depth = 1
+    i = start + 2
+    while i < len(text) - 1:
+        if text[i:i+2] == '{{':
+            depth += 1
+            i += 2
+        elif text[i:i+2] == '}}':
+            depth -= 1
+            i += 2
+            if depth == 0:
+                return i
+        else:
+            i += 1
+    return -1
+
+
+def _split_params(param_str):
+    """Split template parameter string on |, respecting nested {{...}}."""
+    parts = []
+    depth = 0
+    cur = []
+    i = 0
+    while i < len(param_str):
+        ch = param_str[i]
+        if ch == '{' and param_str[i:i+2] == '{{':
+            depth += 1
+            cur.append(ch)
+            i += 1
+        elif ch == '}' and param_str[i:i+2] == '}}':
+            depth -= 1
+            cur.append(ch)
+            i += 1
+        elif ch == '|' and depth == 0:
+            parts.append(''.join(cur).strip())
+            cur = []
+        else:
+            cur.append(ch)
+        i += 1
+    if cur:
+        parts.append(''.join(cur).strip())
+    return parts
+
+
+def _strip_named_prefix(param):
+    """Strip '1=', '2=', etc. prefix from a template parameter."""
+    m = re.match(r'^\d+=(.*)', param)
+    if m:
+        return m.group(1)
+    return param
+
+
+def _process_known_template(name, params):
+    """Process a known template by name, returning replacement text."""
+    name = name.strip().lower()
+
+    if name == 'tmath':
+        if not params:
+            return ''
+        inner = _strip_named_prefix(params[0])
+        return '\\(%s\\)' % inner.strip()
+    if name in ('mvar', 'var'):
+        if not params:
+            return ''
+        return '\\(%s\\)' % _strip_named_prefix(params[0]).strip()
+    if name == 'math':
+        if not params:
+            return ''
+        return _strip_named_prefix(params[0]).strip()
+    if name == 'frac':
+        if len(params) >= 2:
+            return '%s/%s' % (_strip_named_prefix(params[0]), _strip_named_prefix(params[1]))
+        return ''
+    if name in ('sfrac', 'cfrac', 'xfrac'):
+        if len(params) >= 2:
+            return '%s/%s' % (_strip_named_prefix(params[0]), _strip_named_prefix(params[1]))
+        return ''
+    if name == 'sqrt':
+        if not params:
+            return ''
+        return 'sqrt(%s)' % _strip_named_prefix(params[0])
+    if name == 'abs':
+        if not params:
+            return ''
+        return '|%s|' % _strip_named_prefix(params[0])
+    if name in ('nobreak', 'nowrap'):
+        if not params:
+            return ''
+        return _strip_named_prefix(params[0])
+    if name in ('big', 'small', 'center', 'left', 'right'):
+        if not params:
+            return ''
+        return _strip_named_prefix(params[0])
+    if name in ('abbr', 'tooltip'):
+        if not params:
+            return ''
+        return _strip_named_prefix(params[0])
+    if name == 'chem':
+        if not params:
+            return ''
+        return '\\ce{%s}' % _strip_named_prefix(params[0])
+    if name == 'lang':
+        return _strip_named_prefix(params[-1]) if params else ''
+    if name in ('ill', 'interlanguage link'):
+        return _strip_named_prefix(params[0]) if params else ''
+    if name == 'val':
+        if not params:
+            return ''
+        return _strip_named_prefix(params[0])
+    if name in ('su', 'sup', 'sub'):
+        return _strip_named_prefix(params[0]) if params else ''
+    if name in ('clarify', 'dubious', 'definition', 'example'):
+        return _strip_named_prefix(params[0]) if params else ''
+    if name == 'not a typo':
+        return _strip_named_prefix(params[0]) if params else ''
+    if name == 'proper name':
+        return _strip_named_prefix(params[0]) if params else ''
+    if name in ('citation needed', 'cn', 'fact', 'who', 'when', 'where'):
+        return ''
+    if name == 'pi':
+        return 'π'
+    if name in ('e (mathematical constant)', 'munich'):
+        return 'e'
+    if name in ('i (number)', 'imaginary unit'):
+        return 'i'
+    if name in ('sqrt', 'radical'):
+        return '√'
+    if name == 'p/sigma':
+        return 'σ'
+    if name == 'pi/phi':
+        return 'φ'
+    if name == "euler's number":
+        return 'e'
+    if name == 'prime':
+        return '′'
+    if name == 'prime/prime':
+        return '″'
+    if name == '1/2':
+        return '½'
+    if name == '1/3':
+        return '⅓'
+    if name == '2/3':
+        return '⅔'
+    if name == '1/4':
+        return '¼'
+    if name == '3/4':
+        return '¾'
+    if name == '1/8':
+        return '⅛'
+    if name in ('ndash', 'spaced ndash'):
+        return ' – '
+    if name in ('mdash', 'spaced mdash'):
+        return ' — '
+    if name in ('clear', '-', 'clear left', 'clear right'):
+        return ''
+    if name in ('sfn', 'harvnb', 'sfnp', 'harv', 'harvc', 'sfnref'):
+        return ''
+    if name in ('reflist', 'notelist', 'notelist-ua', 'notelist-lr'):
+        return ''
+    if name in ('colbegin', 'colend', 'col-begin', 'col-end', 'div col', 'div col end'):
+        return ''
+    if name in ('plainlist', 'plain list', 'ubl', 'unbulleted list', 'ordered list'):
+        return ''
+    if name in ('short description', 'use dmy dates', 'use mdy dates', 'use british english',
+                'use american english', 'good article', 'featured article'):
+        return ''
+    if name in ('infobox', 'infobox website', 'infobox book', 'infobox person',
+                'infobox scientist', 'infobox mathematician'):
+        return ''
+    if name == '':
+        return ''
+    if name == '=':
+        return '='
+    if name == '!':
+        return '|'
+    if name == '(':
+        return '{{'
+    if name == ')':
+        return '}}'
+    if name == "'":
+        return "'"
+    if name == "'s" or name == "'s":
+        return "'s"
+    if name in ('displaystyle', 'dspl', 'd'):
+        return params[0] if params else ''
+    if name == 'strlen':
+        return ''
+    if name in ('main', 'see', 'further', 'details', 'category see also'):
+        return ''
+    if name in ('anchor', 'visible anchor', 'vanchor'):
+        return ''
+    if name == 'as of':
+        return _strip_named_prefix(params[0]) if params else ''
+
+    # Unknown template: try to extract text from positional parameters
+    if params:
+        # Skip named params, collect positional ones
+        text_parts = []
+        for p in params:
+            if '=' not in p:
+                text_parts.append(_strip_named_prefix(p))
+        if text_parts:
+            return ''.join(text_parts)
+    return ''
+
+
 def remove_templates(text):
     """Remove {{...}} templates, converting simple formatting ones.
-    Uses a loop to handle nested templates (innermost first)."""
-    # First pass: convert known formatting templates before stripping
-    def tmath_replacer(m):
-        inner = m.group(1)
-        if inner.startswith('1='):
-            inner = inner[2:]
-        return '\\(%s\\)' % inner.strip()
-    text = re.sub(r'\{\{tmath\|([^}]+)\}\}', tmath_replacer, text)
-    text = re.sub(r'\{\{mvar\|([^}]+)\}\}', r'\\(\1\\)', text)
-    text = re.sub(r'\{\{frac\|([^|}]+)\|([^|}]+)\}\}', r'\1/\2', text)
-    text = re.sub(r'\{\{sqrt\|([^}]+)\}\}', r'sqrt(\1)', text)
-    text = re.sub(r'\{\{abs\|([^}]+)\}\}', r'|\1|', text)
-    text = re.sub(r'\{\{(?:nobreak|nowrap)\|([^}]+)\}\}', r'\1', text)
-    text = re.sub(r'\{\{math\|([^}]+)\}\}', r'\1', text)
-
-    # Handle nested templates by repeatedly stripping innermost {{...}}
-    def strip_inner_template(m):
-        inner = m.group(1)
-        parts = inner.split('|')
-        if len(parts) <= 1:
-            return ''
-        significant = []
-        for p in parts[1:]:
-            if '=' in p:
+    Handles nested braces (including LaTeX) inside templates."""
+    result = []
+    i = 0
+    while i < len(text):
+        if text[i:i+2] == '{{':
+            end = _find_matching_end(text, i)
+            if end == -1:
+                result.append(text[i])
+                i += 1
                 continue
-            significant.append(p)
-        if significant:
-            return ''.join(significant)
-        if '=' in parts[-1]:
-            return parts[-1].split('=')[-1]
-        return ''
-
-    changed = True
-    while changed:
-        changed = False
-        new_text = re.sub(r'\{\{([^{}]+)\}\}', lambda m: strip_inner_template(m) or '', text)
-        if new_text != text:
-            changed = True
-            text = new_text
-    # Clean up any leftover single braces from unmatched templates
+            inner = text[i+2:end-2]
+            pipe_idx = -1
+            depth = 0
+            for j, ch in enumerate(inner):
+                if ch == '{' and inner[j:j+2] == '{{':
+                    depth += 1
+                elif ch == '}' and inner[j:j+2] == '}}':
+                    depth -= 1
+                elif ch == '|' and depth == 0:
+                    pipe_idx = j
+                    break
+            if pipe_idx == -1:
+                name = inner.strip()
+                params = []
+            else:
+                name = inner[:pipe_idx]
+                param_str = inner[pipe_idx+1:]
+                params = _split_params(param_str)
+            replacement = _process_known_template(name, params)
+            result.append(replacement)
+            i = end
+        else:
+            result.append(text[i])
+            i += 1
+    # Clean up leftover stray braces
+    text = ''.join(result)
     text = re.sub(r'^[\}\{]+', '', text)
     text = re.sub(r'[\}\{]+$', '', text)
+    # Remove any remaining single braces (from unmatched or partial templates)
+    text = re.sub(r'\}\}', '', text)
+    text = re.sub(r'\{\{', '', text)
     return text
 
 
@@ -430,6 +638,14 @@ def fetch_and_generate(concept_id, wiki_title, sections):
                 deduped.append(line)
             parts.append('\n'.join(deduped))
         sections_text = '\n\n'.join(parts)
+        # Fallback: if sections returned nothing, try full-page fetch
+        if not sections_text.strip():
+            print(f"  sections returned empty, falling back to full page...")
+            wt = fetch_wikitext(wiki_title)
+            if not wt:
+                print(f"  [error] could not fetch page '{wiki_title}'", file=sys.stderr)
+                return None
+            sections_text = clean_wikitext(wt)
     else:
         print(f"  fetching full page...")
         wt = fetch_wikitext(wiki_title)
@@ -470,15 +686,18 @@ def process_batch(batch_path):
     with open(batch_path) as f:
         batch = json.load(f)
 
-    for item in batch:
+    for i, item in enumerate(batch):
         cid = item["concept_id"]
         wp = item["wikipedia"]
         secs = item.get("sections", [])
-        print(f"\n{cid} ← Wikipedia: {wp}" + (f" sections {secs}" if secs else ""))
+        print(f"\n[{i+1}/{len(batch)}] {cid} ← Wikipedia: {wp}" + (f" sections {secs}" if secs else ""))
         out = fetch_and_generate(cid, wp, secs)
         if out:
             rel_path = "wikipedia/" + cid + ".md"
             register_lesson(cid, rel_path)
+        # Delay between lessons to avoid rate limiting
+        if i < len(batch) - 1:
+            time.sleep(2.0)
 
 
 def main():
