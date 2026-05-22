@@ -40,9 +40,9 @@ func (g *backpropGen) Generate(difficulty float64) generator.Problem {
 			"Gradient descent updates weights in the opposite direction of the gradient to minimize the loss.",
 		},
 		{
-			"In a neural network with sigmoid activation, what is the derivative of σ(x) = 1/(1+e⁻ˣ) in terms of σ(x)?",
+			"In a neural network with sigmoid activation, what is the derivative of \\(\\sigma(x) = 1/(1+e^{-x})\\) in terms of \\(\\sigma(x)\\)?",
 			"σ(x)(1-σ(x))",
-			"The derivative of the sigmoid function is σ(x)(1-σ(x)), which makes backpropagation efficient.",
+			"The derivative of the sigmoid function is \\(\\sigma(x)(1-\\sigma(x))\\), which makes backpropagation efficient.",
 		},
 		{
 			"What does the learning rate control in gradient descent with backpropagation?",

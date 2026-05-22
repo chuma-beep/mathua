@@ -167,14 +167,14 @@ Submit
                     )}
                     {result === 'incorrect' && (
                       <p className="mt-2 text-xs font-mono text-red-400">
-                        ✗ Expected: {q.answer}
+                        ✗ Expected: <KatexContent>{q.answer}</KatexContent>
                       </p>
                     )}
 
                     {showAnswer && q.explanation && (
-                      <p className="mt-1.5 text-xs font-mono text-mathua-secondary">
+                      <KatexContent className="mt-1.5 text-xs font-mono text-mathua-secondary">
                         {q.explanation}
-                      </p>
+                      </KatexContent>
                     )}
                   </div>
                 </div>

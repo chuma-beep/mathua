@@ -349,7 +349,7 @@ export default function GoalsPage() {
                       <p className={`text-base font-medium mb-2 ${lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>
                         {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
                       </p>
-                      <p className="text-mathua-secondary text-sm">{lastResult.feedback}</p>
+                      <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
                       {loading && <p className="text-mathua-muted text-xs mt-2">Loading next question…</p>}
                     </div>
                   )}

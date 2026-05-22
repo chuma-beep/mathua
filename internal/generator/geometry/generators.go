@@ -159,7 +159,7 @@ func (g *triangleAreaGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Triangle: base = %d, height = %d. Find the area.", base, height),
 		Answer:      fmt.Sprintf("%d", area),
-		Explanation: fmt.Sprintf("Area = base x height / 2 = %d x %d / 2 = %d.", base, height, area),
+		Explanation: fmt.Sprintf("\\(\\text{Area} = \\frac{\\text{base} \\times \\text{height}}{2} = \\frac{%d \\times %d}{2} = %d\\).", base, height, area),
 	}
 }
 
@@ -180,7 +180,7 @@ func (g *pythagoreanGen) Generate(difficulty float64) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("Right triangle: legs \\(= %d\\) and \\(%d\\). Find the hypotenuse \\(c\\).", a, b),
 		Answer:      fmt.Sprintf("%d", c),
-		Explanation: fmt.Sprintf("c^2 = %d^2 + %d^2 = %d + %d = %d, so c = sqrt(%d) = %d.", a, b, a*a, b*b, c*c, c*c, c),
+		Explanation: fmt.Sprintf("\\(c^{2} = %d^{2} + %d^{2} = %d + %d = %d\\), so \\(c = \\sqrt{%d} = %d\\).", a, b, a*a, b*b, c*c, c*c, c),
 	}
 }
 
