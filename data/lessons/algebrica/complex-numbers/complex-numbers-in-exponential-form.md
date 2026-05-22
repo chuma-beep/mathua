@@ -173,3 +173,43 @@ w_2 &= 2e^{i \cdot 4\pi/3} = 2\\!\left(-\frac{1}{2} - i\frac{\sqrt{3}}{2}\right)
 \\]
 
 > The three roots have equal modulus \\( 2 \\) and are separated by angles of \\( 2\pi/3 \\), forming the vertices of an equilateral triangle inscribed in a circle of radius \\( 2 \\) centered at the origin.
+
+---
+
+## Euler's Formula and Euler's Identity
+
+Euler's formula gives the fundamental relation between the exponential function and the trigonometric functions:
+
+$$e^{i\theta} = \cos\theta + i\sin\theta$$
+
+Specialising at \\(\theta = \pi\\) yields Euler's identity:
+
+$$e^{i\pi} + 1 = 0$$
+
+which combines the five fundamental constants \\(0, 1, i, e, \pi\\) in a single equation.
+
+### Proof via Taylor series
+
+For a real variable \\(x\\), the Taylor series are:
+
+$$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}, \qquad
+\cos x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n}}{(2n)!}, \qquad
+\sin x = \sum_{n=0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!}$$
+
+Substituting \\(x = i\theta\\) into the exponential series:
+
+$$e^{i\theta} = \sum_{n=0}^{\infty} \frac{(i\theta)^n}{n!}
+= \sum_{k=0}^{\infty} \frac{i^{2k}\theta^{2k}}{(2k)!} + \sum_{k=0}^{\infty} \frac{i^{2k+1}\theta^{2k+1}}{(2k+1)!}$$
+
+Since \\(i^{2k} = (-1)^k\\) and \\(i^{2k+1} = i(-1)^k\\), this becomes:
+
+$$e^{i\theta} = \sum_{k=0}^{\infty} (-1)^k \frac{\theta^{2k}}{(2k)!} + i\sum_{k=0}^{\infty} (-1)^k \frac{\theta^{2k+1}}{(2k+1)!}
+= \cos\theta + i\sin\theta$$
+
+### Connection with the exponential form
+
+Euler's formula is the bridge between the trigonometric form and the exponential form:
+
+$$z = r(\cos\theta + i\sin\theta) = r e^{i\theta}$$
+
+The exponential form simplifies multiplication, division, and powers to operations on moduli and arguments, making it the most compact representation for algebraic manipulation of complex numbers.
