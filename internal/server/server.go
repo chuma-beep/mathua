@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -19,9 +20,23 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
+var corsOrigin = func() string {
+	if o := os.Getenv("CORS_ORIGIN"); o != "" {
+		log.Printf("cors: allowing origin %q", o)
+		return o
+	}
+	log.Println("cors: allowing all origins (set CORS_ORIGIN to restrict)")
+	return "*"
+}()
+
 func cors(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		origin := r.Header.Get("Origin")
+		if corsOrigin == "*" || corsOrigin == origin {
+			w.Header().Set("Access-Control-Allow-Origin", corsOrigin)
+		} else if corsOrigin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", corsOrigin)
+		}
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		if r.Method == http.MethodOptions {
@@ -38,6 +53,7 @@ type Server struct {
 	auth         *auth.AuthService
 	diagSessions map[string]*diagnostic.Session
 	mu           sync.Mutex
+	authLimiter  *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
@@ -46,12 +62,13 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 		repo:         repo,
 		auth:         auth,
 		diagSessions: make(map[string]*diagnostic.Session),
+		authLimiter:  newRateLimiter(5, 10, time.Minute),
 	}
 }
 
 func (s *Server) Register(mux *http.ServeMux) {
-	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.handleSignup)))
-	mux.HandleFunc("/api/auth/login", logRequest(cors(s.handleLogin)))
+	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.authLimiter.middleware(s.handleSignup))))
+	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 
 	mux.HandleFunc("/api/session", logRequest(cors(s.authMiddleware(s.handleSession))))
@@ -126,7 +143,7 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 			Name      string `json:"name"`
 			StudentID string `json:"student_id"`
 		}
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		if err := decodeJSON(w, r, &req); err != nil {
 			http.Error(w, `{"error":"invalid request"}`, 400)
 			return
 		}
@@ -156,7 +173,11 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
 		return
 	}
-	studentID := r.Context().Value(authStudentKey{}).(string)
+	studentID, ok := r.Context().Value(authStudentKey{}).(string)
+	if !ok || studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
 	sess, err := s.repo.CreateSession(studentID)
 	if err != nil {
 		writeError(w, "failed to create session", 500)
@@ -188,7 +209,7 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req answerReq
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -344,7 +365,7 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 	var req diagAnswerReq
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -388,7 +409,7 @@ func (s *Server) handleGoal(w http.ResponseWriter, r *http.Request) {
 		ConceptIDs []string `json:"concept_ids"`
 		Domain     string   `json:"domain"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -443,7 +464,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		ConceptIDs []string `json:"concept_ids"`
 		Name       string   `json:"name"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -495,7 +516,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		Answer    string  `json:"answer"`
 		Elapsed   float64 `json:"elapsed"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -571,7 +592,7 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		SessionID string `json:"session_id"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -759,9 +780,11 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 			if progressMap != nil {
 				rawProgress = make(map[string]*storage.ConceptProgress)
 				for cid, p := range progressMap {
+					status, _ := p["status"].(string)
+					streakFloat, _ := p["streak"].(float64)
 					rawProgress[cid] = &storage.ConceptProgress{
-						Status: p["status"].(string),
-						Streak: int(p["streak"].(float64)),
+						Status: status,
+						Streak: int(streakFloat),
 					}
 				}
 			}
@@ -869,7 +892,7 @@ func (s *Server) handleSetDailyXPGoal(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		Goal int `json:"goal"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -903,7 +926,7 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, parsed)
 	case http.MethodPut:
 		var req map[string]interface{}
-		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		if err := decodeJSON(w, r, &req); err != nil {
 			writeError(w, "invalid request", 400)
 			return
 		}
@@ -954,7 +977,11 @@ func (s *Server) handleReviewsSession(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
-	studentID := r.Context().Value(authStudentKey{}).(string)
+	studentID, ok := r.Context().Value(authStudentKey{}).(string)
+	if !ok || studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
 	sess, err := s.repo.CreateSession(studentID)
 	if err != nil {
 		writeError(w, "failed to create session", 500)
@@ -975,7 +1002,7 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req answerReq
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -1047,6 +1074,13 @@ func (s *Server) handleConceptDetail(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, detail)
 }
 
+const maxBodySize int64 = 1 << 20 // 1 MB
+
+func decodeJSON(w http.ResponseWriter, r *http.Request, v interface{}) error {
+	r.Body = http.MaxBytesReader(w, r.Body, maxBodySize)
+	return json.NewDecoder(r.Body).Decode(v)
+}
+
 func writeJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(v)
@@ -1088,7 +1122,7 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req signupReq
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
@@ -1119,7 +1153,7 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req loginReq
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}

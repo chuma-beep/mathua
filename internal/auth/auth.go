@@ -3,7 +3,9 @@ package auth
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"log"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -12,16 +14,33 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
-var jwtSecret = loadSecret()
+var (
+	jwtSecretOnce sync.Once
+	jwtSecret     []byte
+)
 
 func loadSecret() []byte {
 	if s := os.Getenv("JWT_SECRET"); s != "" {
 		if b, err := hex.DecodeString(s); err == nil && len(b) == 32 {
+			log.Println("auth: using JWT_SECRET from environment (hex-encoded, 32 bytes)")
 			return b
 		}
+		if len(s) < 32 {
+			log.Fatalf("auth: JWT_SECRET must be at least 32 characters long (got %d)", len(s))
+		}
+		log.Println("auth: using JWT_SECRET from environment")
 		return []byte(s)
 	}
-	return generateSecret()
+	secret := generateSecret()
+	log.Println("auth: generated random JWT secret (set JWT_SECRET for persistence)")
+	return secret
+}
+
+func getJWTSecret() []byte {
+	jwtSecretOnce.Do(func() {
+		jwtSecret = loadSecret()
+	})
+	return jwtSecret
 }
 
 type Claims struct {
@@ -36,6 +55,8 @@ type AuthService struct {
 func New(repo storage.Repository) *AuthService {
 	return &AuthService{repo: repo}
 }
+
+func SecretMinLength() int { return 32 }
 
 func (a *AuthService) Signup(name, username, password string) (string, *storage.Student, error) {
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
@@ -74,7 +95,7 @@ func (a *AuthService) Login(username, password string) (string, *storage.Student
 func (a *AuthService) ValidateToken(tokenStr string) (string, error) {
 	claims := &Claims{}
 	_, err := jwt.ParseWithClaims(tokenStr, claims, func(t *jwt.Token) (interface{}, error) {
-		return jwtSecret, nil
+		return getJWTSecret(), nil
 	})
 	if err != nil {
 		return "", err
@@ -91,7 +112,7 @@ func generateToken(studentID string) (string, error) {
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(jwtSecret)
+	return token.SignedString(getJWTSecret())
 }
 
 func generateSecret() []byte {

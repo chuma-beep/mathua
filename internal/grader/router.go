@@ -44,6 +44,12 @@ func (r *Router) Grade(gradingType GradingType, expected, answer string) Result 
 	}
 }
 
+func (r *Router) Close() {
+	if r.sympy != nil {
+		r.sympy.close()
+	}
+}
+
 func (r *Router) sympyGrade(expected, answer string) Result {
 	if r.sympy == nil {
 		var err error

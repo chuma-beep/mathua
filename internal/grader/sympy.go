@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -44,7 +45,7 @@ func init() {
 
 type sympyGrader struct {
 	cmd    *exec.Cmd
-	stdin  *os.File
+	stdin  io.WriteCloser
 	stdout *bufio.Scanner
 	mu     sync.Mutex
 	nextID int
@@ -67,10 +68,9 @@ func newSympyGrader() (*sympyGrader, error) {
 	if err := cmd.Start(); err != nil {
 		return nil, fmt.Errorf("start sympy: %w", err)
 	}
-	f := stdin.(*os.File)
 	return &sympyGrader{
 		cmd:    cmd,
-		stdin:  f,
+		stdin:  stdin,
 		stdout: bufio.NewScanner(stdout),
 	}, nil
 }
@@ -114,7 +114,7 @@ func (g *sympyGrader) grade(expected, answer string) Result {
 	done := make(chan Result, 1)
 
 	go func() {
-		if _, err := g.stdin.WriteString(string(data) + "\n"); err != nil {
+		if _, err := g.stdin.Write(append(data, '\n')); err != nil {
 			done <- Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
 			return
 		}

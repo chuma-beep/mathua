@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import { renderMermaidSVG } from 'beautiful-mermaid'
+import DOMPurify from 'isomorphic-dompurify'
 import { useTheme } from '../hooks/useTheme'
 
 interface MermaidDiagramProps {
@@ -87,7 +88,7 @@ export default function MermaidDiagram({ code, className = '' }: MermaidDiagramP
         justifyContent: 'center',
         margin: '24px 0',
       }}
-      dangerouslySetInnerHTML={{ __html: svg }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svg) }}
     />
   )
 }
