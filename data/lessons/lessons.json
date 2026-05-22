@@ -973,7 +973,7 @@
   },
   {
     "concept_id": "trig.unit_circle",
-    "source": "wikipedia/trig.unit_circle.md"
+    "source": "algebrica/trigonometry/unit-circle.md"
   },
   {
     "concept_id": "alg.eq.vars_both_sides",
@@ -1181,27 +1181,27 @@
   },
   {
     "concept_id": "complex.add_sub",
-    "source": "wikipedia/complex.add_sub.md"
+    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
     "concept_id": "complex.concept",
-    "source": "wikipedia/complex.concept.md"
+    "source": "algebrica/complex-numbers/complex-numbers.md"
   },
   {
     "concept_id": "complex.divide",
-    "source": "wikipedia/complex.divide.md"
+    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
     "concept_id": "complex.mult",
-    "source": "wikipedia/complex.mult.md"
+    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
     "concept_id": "complex.polar",
-    "source": "wikipedia/complex.polar.md"
+    "source": "algebrica/complex-numbers/complex-numbers-in-trigonometric-form.md"
   },
   {
     "concept_id": "complex.roots",
-    "source": "wikipedia/complex.roots.md"
+    "source": "algebrica/complex-numbers/roots-of-unity.md"
   },
   {
     "concept_id": "count.compare",
@@ -1413,7 +1413,7 @@
   },
   {
     "concept_id": "ode.concept",
-    "source": "wikipedia/ode.concept.md"
+    "source": "algebrica/differential-equations/differential-equations.md"
   },
   {
     "concept_id": "pct.find_rate",
@@ -1489,11 +1489,11 @@
   },
   {
     "concept_id": "trig.graph_cos",
-    "source": "wikipedia/trig.graph_cos.md"
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
     "concept_id": "trig.graph_sin",
-    "source": "wikipedia/trig.graph_sin.md"
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
     "concept_id": "trig.period",
@@ -1501,19 +1501,19 @@
   },
   {
     "concept_id": "trig.reciprocal",
-    "source": "wikipedia/trig.reciprocal.md"
+    "source": "algebrica/trigonometry/secant-and-cosecant.md"
   },
   {
     "concept_id": "trig.reference_angle",
-    "source": "wikipedia/trig.reference_angle.md"
+    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
   },
   {
     "concept_id": "trig.sin_cos_def",
-    "source": "wikipedia/trig.sin_cos_def.md"
+    "source": "algebrica/trigonometry/sine-and-cosine.md"
   },
   {
     "concept_id": "trig.special_angles",
-    "source": "wikipedia/trig.special_angles.md"
+    "source": "algebrica/trigonometry/reduction-formulas-and-reference-angles.md"
   },
   {
     "concept_id": "alg.func.linear",
@@ -1525,7 +1525,7 @@
   },
   {
     "concept_id": "arith.abs_value",
-    "source": "wikipedia/arith.abs_value.md"
+    "source": "algebrica/sets-and-numbers/absolute-value.md"
   },
   {
     "concept_id": "arith.div.basic",
@@ -1593,7 +1593,7 @@
   },
   {
     "concept_id": "complex.conjugate",
-    "source": "wikipedia/complex.conjugate.md"
+    "source": "algebrica/complex-numbers/operations-with-complex-numbers.md"
   },
   {
     "concept_id": "discrete.graphs.paths",
@@ -1605,7 +1605,7 @@
   },
   {
     "concept_id": "discrete.induction",
-    "source": "wikipedia/discrete.induction.md"
+    "source": "algebrica/sequences/principle-of-mathematical-induction.md"
   },
   {
     "concept_id": "discrete.logic.connectives",
@@ -1637,7 +1637,7 @@
   },
   {
     "concept_id": "nt.congruence",
-    "source": "wikipedia/nt.congruence.md"
+    "source": "algebrica/sets-and-numbers/modulo-operator.md"
   },
   {
     "concept_id": "nt.crypto",
@@ -1649,7 +1649,7 @@
   },
   {
     "concept_id": "nt.euler_phi",
-    "source": "wikipedia/nt.euler_phi.md"
+    "source": "algebrica/sets-and-numbers/natural-numbers.md"
   },
   {
     "concept_id": "nt.fermat_little",
@@ -1661,7 +1661,7 @@
   },
   {
     "concept_id": "nt.modular",
-    "source": "wikipedia/nt.modular.md"
+    "source": "algebrica/sets-and-numbers/modulo-operator.md"
   },
   {
     "concept_id": "ode.exact",
@@ -1721,19 +1721,19 @@
   },
   {
     "concept_id": "trig.inverse",
-    "source": "wikipedia/trig.inverse.md"
+    "source": "algebrica/trigonometry/arcsine-and-arccosine.md"
   },
   {
     "concept_id": "trig.law_cosines",
-    "source": "wikipedia/trig.law_cosines.md"
+    "source": "algebrica/trigonometry/the-law-of-cosines.md"
   },
   {
     "concept_id": "trig.law_sines",
-    "source": "wikipedia/trig.law_sines.md"
+    "source": "algebrica/trigonometry/the-law-of-sines.md"
   },
   {
     "concept_id": "trig.pythagorean_id",
-    "source": "wikipedia/trig.pythagorean_id.md"
+    "source": "algebrica/trigonometry/pythagorean-identity.md"
   },
   {
     "concept_id": "alg.linear.graph",
@@ -1749,7 +1749,7 @@
   },
   {
     "concept_id": "complex.de_moivre",
-    "source": "wikipedia/complex.de_moivre.md"
+    "source": "algebrica/complex-numbers/de-moivre-theorem.md"
   },
   {
     "concept_id": "count.backwards",
@@ -1777,19 +1777,19 @@
   },
   {
     "concept_id": "linalg.basis",
-    "source": "wikipedia/linalg.basis.md"
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
     "concept_id": "linalg.cramer",
-    "source": "wikipedia/linalg.cramer.md"
+    "source": "algebrica/linear-systems/cramers-rule.md"
   },
   {
     "concept_id": "linalg.span",
-    "source": "wikipedia/linalg.span.md"
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
     "concept_id": "linalg.transformations",
-    "source": "wikipedia/linalg.transformations.md"
+    "source": "algebrica/vectors-and-matrices/linear-combinations.md"
   },
   {
     "concept_id": "ode.laplace",
@@ -1825,15 +1825,15 @@
   },
   {
     "concept_id": "abstract.homomorphism",
-    "source": "wikipedia/abstract.homomorphism.md"
+    "source": "algebrica/algebraic-structures/vector-spaces.md"
   },
   {
     "concept_id": "abstract.ring",
-    "source": "wikipedia/abstract.ring.md"
+    "source": "algebrica/algebraic-structures/rings.md"
   },
   {
     "concept_id": "abstract.subgroup",
-    "source": "wikipedia/abstract.subgroup.md"
+    "source": "algebrica/algebraic-structures/groups.md"
   },
   {
     "concept_id": "stat.data.range",
@@ -1845,7 +1845,7 @@
   },
   {
     "concept_id": "trig.tan_def",
-    "source": "wikipedia/trig.tan_def.md"
+    "source": "algebrica/trigonometry/tangent-and-cotangent.md"
   },
   {
     "concept_id": "ode.nonhomogeneous",
@@ -1857,6 +1857,6 @@
   },
   {
     "concept_id": "nt.divisibility",
-    "source": "wikipedia/nt.divisibility.md"
+    "source": "algebrica/sets-and-numbers/integers.md"
   }
 ]

@@ -1,3 +1,78 @@
 > Content sourced from [Wikipedia](https://en.wikipedia.org/wiki/Amplitude) — CC BY-SA 4.0
 
 # Amplitude, period, and phase shift
+
+amplitude in classical physics
+
+The **amplitude** of a periodic variable is a measure of its change in a single period (such as time or spatial period). The amplitude of a non-periodic signal is its magnitude compared with a reference value. There are various definitions of amplitude (see below), which are all functions of the magnitude of the differences between the variable's extreme values. In older texts, the phase of a periodic function is sometimes called the amplitude.
+
+## Definitions
+
+
+### Peak amplitude
+In audio system measurements, telecommunications and others where the measurand is a signal that swings above and below a reference value but is not sinusoidal, peak amplitude is often used. If the reference is zero, this is the maximum absolute value of the signal; if the reference is a mean value (DC component), the peak amplitude is the maximum absolute value of the difference from that reference.
+
+### Peak-to-peak amplitude
+**Peak-to-peak amplitude** (abbreviated **p–p** or **PtP** or **PtoP**) is the change between *peak* (highest signal value) and *trough* (lowest signal value, which can be negative). With appropriate circuitry, peak-to-peak amplitudes of electric oscillations can be measured by meters or by viewing the waveform on an oscilloscope. Peak-to-peak is a straightforward measurement on an oscilloscope, the peaks of the waveform being easily identified and measured against the graticule. This remains a common way of specifying amplitude, but sometimes other measures of amplitude are more appropriate. When applied to voltages, it is often denoted *V*\(_{pp}\).
+
+### Semi-amplitude
+
+Semi-amplitude means half of the peak-to-peak amplitude.
+The majority of scientific literature employs the term *amplitude* or *peak amplitude* to mean semi-amplitude.
+
+It is the most widely used measure of orbital wobble in astronomy and the measurement of small radial velocity semi-amplitudes of nearby stars is important in the search for exoplanets (see Doppler spectroscopy).
+
+### Root mean square amplitude
+
+
+Root mean square (RMS) amplitude is used especially in electrical engineering: the RMS is defined as the square root of the mean over time of the square of the vertical distance of the graph from the rest state;
+i.e. the RMS of the AC waveform (with no DC component).
+
+For complicated waveforms, especially non-repeating signals like noise, the RMS amplitude is usually used because it is both unambiguous and has physical significance. For example, the *average* power transmitted by an acoustic or electromagnetic wave or by an electrical signal is proportional to the square of the RMS amplitude (and not, in general, to the square of the peak amplitude).
+
+For alternating current electric power, the  universal practice is to specify RMS values of a sinusoidal waveform. One property of root mean square voltages and currents is that they produce the same heating effect as a direct current in a given resistance.
+
+The peak-to-peak value is used, for example, when choosing rectifiers for power supplies, or when estimating the maximum voltage that insulation must withstand. Some common voltmeters are calibrated for RMS amplitude, but respond to the average value of a rectified waveform. Many digital voltmeters and all moving coil meters are in this category. The RMS calibration is only correct for a sine wave input since the ratio between peak, average and RMS values is dependent on waveform. If the wave shape being measured is greatly different from a sine wave, the relationship between RMS and average value changes. True RMS-responding meters were used in radio frequency measurements, where instruments measured the heating effect in a resistor to measure a current. The advent of microprocessor-controlled meters capable of calculating RMS by sampling the waveform has made true RMS measurement commonplace.
+
+### Pulse amplitude
+In telecommunications, *pulse amplitude* is the magnitude of a pulse parameter, such as the voltage level, current level, field intensity, or power level.
+
+Pulse amplitude is measured with respect to a specified reference and therefore should be modified by qualifiers, such as *average*, *instantaneous*, *peak*, or *root-mean-square*.
+
+Pulse amplitude also applies to the amplitude of frequency- and phase-modulated waveform envelopes.
+
+### Ambiguity
+For symmetric periodic waves, like sine waves, square waves, or triangle waves, *peak amplitude* and *semi amplitude* are the same.
+However, for an asymmetric wave or wave packet (periodic pulses in one direction, for example), the peak amplitude becomes ambiguous. This is because the value is different depending on whether the maximum positive signal is measured relative to the mean, the maximum negative signal is measured relative to the mean, or the maximum positive signal is measured relative to the maximum negative signal (the *peak-to-peak amplitude*) and then divided by two (the *semi-amplitude*). In electrical engineering, the usual solution to this ambiguity is to measure the amplitude from a defined reference potential (such as ground or 0 V). Strictly speaking, this is no longer amplitude since there is the possibility that a constant (DC component) is included in the measurement.
+
+## Formal representation
+In this simple wave equation
+\(x = A \sin(\omega [t - K]) + b \ ,\)
+
+*\(|A|\) is the amplitude (or peak amplitude),
+*\(x\) is the oscillating variable,
+*\(\omega\) is angular frequency,
+*\(t\) is time,
+*\(K\) and \(b\) are arbitrary constants representing time and displacement offsets respectively.
+
+## Units
+The units of the amplitude depend on the type of wave, but are always in the same units as the oscillating variable. A more general representation of the wave equation is more complex, but the role of amplitude remains analogous to this simple case.
+
+For waves on a string, or in a medium such as water, the amplitude is a displacement.
+
+The amplitude of sound waves and audio signals (which relates to the volume) conventionally refers to the amplitude of the air pressure in the wave, but sometimes the amplitude of the displacement (movements of the air or the diaphragm of a speaker) is described. The logarithm of the amplitude squared is usually quoted in dB, so a null amplitude corresponds to −∞ dB. Loudness is related to amplitude and intensity and is one of the most salient qualities of a sound, although in general sounds it can be recognized independently of amplitude. The square of the amplitude is proportional to the intensity of the wave.
+
+For electromagnetic radiation, the amplitude of a photon corresponds to the changes in the electric field of the wave. However, radio signals may be carried by electromagnetic radiation; the intensity of the radiation (amplitude modulation) or the frequency of the radiation (frequency modulation) is oscillated and then the individual oscillations are varied (modulated) to produce the signal.
+
+## Amplitude envelopes
+Amplitude envelope refers to the changes in the amplitude of a sound over time, and is an influential property as it affects perception of timbre. A flat tone has a steady state amplitude that remains constant during time, which is represented by a scalar.  Other sounds can have percussive amplitude envelopes featuring an abrupt onset followed by an immediate exponential decay.
+
+Percussive amplitude envelopes are characteristic of various impact sounds: two wine glasses clinking together, hitting a drum, slamming a door, etc. where the amplitude is transient and must be represented as either a continuous function or a discrete vector. Percussive amplitude envelopes model many common sounds that have a transient loudness attack, decay, sustain, and release.
+
+## Amplitude normalization
+With waveforms containing many overtones, complex transient timbres can be achieved by assigning each overtone to its own distinct transient amplitude envelope. Unfortunately, this has the effect of modulating the loudness of the sound as well. It makes more sense to separate loudness and harmonic quality to be parameters controlled independently of each other.
+
+To do so, harmonic amplitude envelopes are frame-by-frame normalized to become amplitude *proportion* envelopes, where at each time frame all the harmonic amplitudes will add to 100% (or 1). This way, the main loudness-controlling envelope can be cleanly controlled.
+
+In Sound Recognition, max amplitude normalization can be used to help align the key harmonic features of 2 alike sounds, allowing similar timbres to be recognized independent of loudness.
+
