@@ -147,6 +147,7 @@ func main() {
 		if err := httpSrv.Shutdown(ctx); err != nil {
 			log.Fatalf("forced shutdown: %v", err)
 		}
+		eng.Close()
 		fmt.Println("server stopped")
 	} else {
 		m := tui.New()

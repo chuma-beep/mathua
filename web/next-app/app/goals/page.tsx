@@ -85,13 +85,13 @@ export default function GoalsPage() {
     if (loggedIn) {
       const user = getUserInfo()
       if (user) {
-        getScores(user.student_id).then(setScores).catch(() => {})
+        getScores(user.student_id).then(setScores).catch(e => console.error('scores fetch failed:', e))
       }
       fetch('/api/weaknesses', {
         headers: { Authorization: `Bearer ${token || ''}` },
       }).then(r => r.json()).then(d => {
         if (d.by_domain) setWeakByDomain(d.by_domain)
-      }).catch(() => {})
+      }).catch(e => console.error('weaknesses fetch failed:', e))
     }
     buildDomains()
   }, [mounted])
