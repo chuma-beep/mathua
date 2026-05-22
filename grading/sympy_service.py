@@ -4,6 +4,7 @@ import sys
 import json
 import re
 import random
+import signal
 
 from sympy.parsing.sympy_parser import (
     parse_expr,
@@ -12,6 +13,9 @@ from sympy.parsing.sympy_parser import (
     convert_xor,
 )
 from sympy import simplify, expand, trigsimp, radsimp, powsimp, factor, pi, E, I, Symbol
+
+MAX_INPUT_LENGTH = 500
+ALLOWED_CHARS = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/^()[]=., _|pi eEInaxbyczt")
 
 TRANSFORMATIONS = standard_transformations + (
     implicit_multiplication_application,
@@ -32,6 +36,9 @@ COMMON_SYMBOLS = {
     'E': E,
     'I': I,
 }
+
+# Seed random for deterministic grading
+random.seed(42)
 
 
 def preprocess(s: str) -> str:
@@ -126,10 +133,7 @@ def _try_parse(s: str):
     try:
         return parse_expr(s, transformations=TRANSFORMATIONS, local_dict=COMMON_SYMBOLS)
     except Exception:
-        try:
-            return parse_expr(s, transformations=TRANSFORMATIONS)
-        except Exception:
-            return None
+        return None
 
 
 def _symbolic_equal(ee, ea) -> tuple[bool, str]:
@@ -159,7 +163,7 @@ def _symbolic_equal(ee, ea) -> tuple[bool, str]:
     try:
         if ee.equals(ea):
             return True, ""
-    except Exception:
+    except Exception as ex:
         pass
 
     return False, "Not equivalent"
@@ -188,13 +192,18 @@ def _numerical_check(ee, ea, num_points: int = 10) -> tuple[bool, str]:
 
             if abs(ee_val - ea_val) > 1e-6:
                 return False, "Not equivalent"
-        except Exception:
+        except Exception as ex:
             continue
 
     return True, ""
 
 
 def grade(expected: str, answer: str) -> tuple[bool, str]:
+    if len(expected) > MAX_INPUT_LENGTH or len(answer) > MAX_INPUT_LENGTH:
+        return False, "Input too long"
+    if not set(expected).issubset(ALLOWED_CHARS) or not set(answer).issubset(ALLOWED_CHARS):
+        return False, "Input contains disallowed characters"
+
     e = preprocess(expected)
     a = preprocess(answer)
 
@@ -211,6 +220,9 @@ def grade(expected: str, answer: str) -> tuple[bool, str]:
     return _numerical_check(ee, ea)
 
 
+def _timeout_handler(signum, frame):
+    raise TimeoutError("Grading timed out")
+
 def main():
     for line in sys.stdin:
         line = line.strip()
@@ -218,8 +230,15 @@ def main():
             continue
         try:
             req = json.loads(line)
-            correct, feedback = grade(req["expected"], req["answer"])
+            signal.signal(signal.SIGALRM, _timeout_handler)
+            signal.alarm(10)
+            try:
+                correct, feedback = grade(req["expected"], req["answer"])
+            finally:
+                signal.alarm(0)
             resp = {"id": req["id"], "correct": correct, "feedback": feedback}
+        except TimeoutError:
+            resp = {"id": req.get("id", ""), "correct": False, "feedback": "Grading timed out"}
         except Exception as ex:
             resp = {"id": req.get("id", ""), "correct": False, "feedback": f"Service error: {ex}"}
         sys.stdout.write(json.dumps(resp) + "\n")

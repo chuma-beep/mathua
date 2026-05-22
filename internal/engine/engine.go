@@ -454,7 +454,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 	progress.SM2EFactor = nextSM2.EFactor
 	progress.SM2Interval = nextSM2.Interval
 
-	if newStatus == mastery.StatusMastered && mastery.Status(progress.Status) != mastery.StatusMastered {
+	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
 		now := nowUTC()
 		progress.MasteredAt = &now
 	}

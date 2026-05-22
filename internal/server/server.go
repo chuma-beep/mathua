@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 	"sync"
 	"time"
@@ -21,22 +20,12 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
-var corsOrigin = func() string {
-	if o := os.Getenv("CORS_ORIGIN"); o != "" {
-		log.Printf("cors: allowing origin %q", o)
-		return o
-	}
-	log.Println("cors: allowing all origins (set CORS_ORIGIN to restrict)")
-	return "*"
-}()
-
 func cors(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if corsOrigin == "*" || corsOrigin == origin {
-			w.Header().Set("Access-Control-Allow-Origin", corsOrigin)
-		} else if corsOrigin != "" {
-			w.Header().Set("Access-Control-Allow-Origin", corsOrigin)
+		if origin != "" {
+			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Vary", "Origin")
 		}
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")

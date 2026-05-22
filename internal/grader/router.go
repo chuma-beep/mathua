@@ -3,7 +3,6 @@ package grader
 type Router struct {
 	numeric    *numericGrader
 	symbolic   *symbolicGrader
-	sympy      *sympyGrader
 	choice     *choiceGrader
 	comparison *comparisonGrader
 	ordering   *orderingGrader
@@ -28,7 +27,7 @@ func (r *Router) Grade(gradingType GradingType, expected, answer string) Result 
 	case GradingNumeric:
 		return r.numeric.grade(expected, answer)
 	case GradingPolynomial, GradingExpression:
-		return r.sympyGrade(expected, answer)
+		return gradeSymPy(expected, answer)
 	case GradingMultipleChoice:
 		return r.choice.grade(expected, answer)
 	case GradingComparison:
@@ -44,20 +43,4 @@ func (r *Router) Grade(gradingType GradingType, expected, answer string) Result 
 	}
 }
 
-func (r *Router) Close() {
-	if r.sympy != nil {
-		r.sympy.close()
-	}
-}
-
-func (r *Router) sympyGrade(expected, answer string) Result {
-	if r.sympy == nil {
-		var err error
-		r.sympy, err = newSympyGrader()
-		if err != nil {
-			// Fall back to string-based symbolic grader
-			return r.symbolic.grade(expected, answer)
-		}
-	}
-	return r.sympy.grade(expected, answer)
-}
+func (r *Router) Close() {}

@@ -128,7 +128,7 @@ func main() {
 		}
 		httpSrv := &http.Server{
 			Addr:         fmt.Sprintf(":%d", *port),
-			Handler:      mux,
+			Handler:      securityHeaders(mux),
 			ReadTimeout:  15 * time.Second,
 			WriteTimeout: 30 * time.Second,
 			IdleTimeout:  60 * time.Second,
@@ -517,20 +517,35 @@ func main() {
 
 // nextStaticFS wraps http.FileServer to support Next.js static exports
 // where routes like /session map to session.html files.
+func securityHeaders(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("Referrer-Policy", "no-referrer")
+		w.Header().Set("X-XSS-Protection", "0")
+		next.ServeHTTP(w, r)
+	})
+}
+
 func nextStaticFS(root string) http.Handler {
 	fs := http.FileServer(http.Dir(root))
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		cleaned := filepath.Clean(r.URL.Path)
+		if strings.Contains(cleaned, "..") {
+			http.NotFound(w, r)
+			return
+		}
 		if r.URL.Path == "/" {
 			fs.ServeHTTP(w, r)
 			return
 		}
-		localPath := filepath.Join(root, r.URL.Path)
+		localPath := filepath.Join(root, cleaned)
 		if _, err := os.Stat(localPath); err == nil {
 			fs.ServeHTTP(w, r)
 			return
 		}
-		if filepath.Ext(r.URL.Path) == "" {
-			htmlPath := r.URL.Path + ".html"
+		if filepath.Ext(cleaned) == "" {
+			htmlPath := cleaned + ".html"
 			if _, err := os.Stat(filepath.Join(root, htmlPath)); err == nil {
 				r.URL.Path = htmlPath
 				fs.ServeHTTP(w, r)

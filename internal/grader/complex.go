@@ -13,9 +13,7 @@ var (
 	plusMinusRe = regexp.MustCompile(`±`)
 )
 
-type complexGrader struct {
-	sympy *sympyGrader
-}
+type complexGrader struct{}
 
 func (g *complexGrader) grade(expected, answer string) Result {
 	hasPlusMinus := strings.Contains(expected, "±") || strings.Contains(answer, "±")
@@ -23,22 +21,14 @@ func (g *complexGrader) grade(expected, answer string) Result {
 	e := preprocessComplex(expected)
 	a := preprocessComplex(answer)
 
-	if g.sympy == nil {
-		var err error
-		g.sympy, err = newSympyGrader()
-		if err != nil {
-			return Result{Correct: false, Score: 0, Feedback: "Complex grading unavailable"}
-		}
-	}
-
-	result := g.sympy.grade(e, a)
+	result := gradeSymPy(e, a)
 	if result.Correct {
 		return result
 	}
 
 	if hasPlusMinus {
 		negE := negateComplexExpr(e)
-		result2 := g.sympy.grade(negE, a)
+		result2 := gradeSymPy(negE, a)
 		if result2.Correct {
 			return result2
 		}

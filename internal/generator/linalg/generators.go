@@ -617,17 +617,17 @@ func gradeMatrixPair(expected, userAnswer string) grader.Result {
 			return "", "", false
 		}
 		pPart := strings.TrimPrefix(parts[0], "P=")
-		return pPart, parts[1], false
+		return pPart, parts[1], true
 	}
 	eP, eD, ok := parsePair(expected)
-	_, _, _ = eP, eD, ok
+	if !ok {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Expected format: P=[[...]] D=[[...]]"}
+	}
 	aP, aD, ok2 := parsePair(userAnswer)
-	_ = aP
-	_ = aD
 	if !ok2 {
 		return grader.Result{Correct: false, Score: 0, Feedback: "Expected format: P=[[...]] D=[[...]]"}
 	}
-	// Compare matrices in the pair — we just check exact string match for simplicity
+	// Compare matrices — check both orderings in case eigenvalues are swapped
 	norm := func(s string) string {
 		s = strings.ReplaceAll(s, " ", "")
 		s = strings.ReplaceAll(s, "\n", "")
@@ -636,7 +636,13 @@ func gradeMatrixPair(expected, userAnswer string) grader.Result {
 	if norm(expected) == norm(userAnswer) {
 		return grader.Result{Correct: true, Score: 1}
 	}
-	// Also check if eigenvalues are swapped
+	// Check swapped: P1 D1 <-> P2 D2
+	if norm(eP) == norm(aP) && norm(eD) == norm(aD) {
+		return grader.Result{Correct: true, Score: 1}
+	}
+	if norm(eP) == norm(aD) && norm(eD) == norm(aP) {
+		return grader.Result{Correct: true, Score: 1}
+	}
 	return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect P or D"}
 }
 

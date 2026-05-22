@@ -135,7 +135,7 @@ export default function KatexContent({ children, className = '' }: { children: s
     <div className={`katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: true, errorColor: '#cc0000' }]]}
+        rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: false, errorColor: '#cc0000' }]]}
         components={{
           a: ({ children }) => <>{children}</>,
           code: ({ children }) => (
