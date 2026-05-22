@@ -51,6 +51,9 @@ func Load(lessonsDir string) (*Loader, error) {
 			continue
 		}
 		title := extractTitle(string(body))
+		if title == "" {
+			title = titleFromFilename(source)
+		}
 		lesson := &Lesson{
 			Title:    title,
 			Body:     string(body),
@@ -98,9 +101,20 @@ func (l *Loader) Count() int {
 
 func extractTitle(md string) string {
 	for _, line := range strings.Split(md, "\n") {
-		if strings.HasPrefix(line, "# ") {
-			return strings.TrimPrefix(line, "# ")
+		trimmed := strings.TrimLeft(line, "#")
+		if len(trimmed) < len(line) && strings.HasPrefix(trimmed, " ") {
+			return strings.TrimSpace(trimmed)
 		}
 	}
 	return ""
+}
+
+func titleFromFilename(path string) string {
+	base := filepath.Base(path)
+	base = strings.TrimSuffix(base, ".md")
+	name := strings.ReplaceAll(base, "-", " ")
+	if len(name) > 0 {
+		name = strings.ToUpper(name[:1]) + name[1:]
+	}
+	return name
 }
