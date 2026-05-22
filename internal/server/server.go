@@ -20,6 +20,11 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
+// MinAnswerSeconds is the minimum time in seconds a human should realistically
+// take to read a question and type an answer. Answers faster than this are likely
+// automated or copy-pasted submissions.
+const MinAnswerSeconds = 0.3
+
 func cors(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
@@ -212,6 +217,10 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	if studentID == "" {
 		writeError(w, "missing student id", 400)
+		return
+	}
+	if req.Elapsed < MinAnswerSeconds {
+		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
 	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
@@ -508,6 +517,10 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.Elapsed < MinAnswerSeconds {
+		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
 	s.mu.Lock()
@@ -1014,6 +1027,10 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
 	if studentID == "" {
 		writeError(w, "missing student id", 400)
+		return
+	}
+	if req.Elapsed < MinAnswerSeconds {
+		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
 	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
