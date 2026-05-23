@@ -37,6 +37,11 @@ export default function KatexContent({ children, className = '' }: { children: s
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
 
+  // Convert ORCCA-style \amp alignment markers to proper & for LaTeX.
+  // The content uses \amp=, \amp+, \amp& etc. (from PreTeXt XML conversion) which
+  // KaTeX doesn't recognize — it needs &=, +, & etc. inside aligned/array environments.
+  content = content.replace(/\\amp/g, '&')
+
   // Repair common LaTeX brace issues in Wikipedia-sourced content.
   // Patterns like \frac{...{ or \sqrt{...{ are missing a closing } before {.
   // This runs before delimiter conversion so it catches all LaTeX blocks.
@@ -131,11 +136,36 @@ export default function KatexContent({ children, className = '' }: { children: s
     return '$\\displaystyle ' + inner.trim() + '$'
   })
 
+  // ORCCA content wraps multi-line display math (aligned, array) in single $...$.
+  // remark-math only allows single-line math inside $...$ (inline),
+  // so convert multi-line $...$ to $$...$$ (display math) before passing to ReactMarkdown.
+  content = content.replace(/^\s*\$([\s\S]*?\n[\s\S]*?)\$\s*$/gm, '$$\n$1\n$$')
+
   return (
     <div className={`katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[[rehypeKatex, { throwOnError: false, trust: false, errorColor: '#cc0000' }]]}
+        rehypePlugins={[[rehypeKatex, {
+          throwOnError: false,
+          trust: false,
+          errorColor: '#cc0000',
+          macros: {
+            // xfrac-style \sfrac → \frac
+            "\\sfrac": "\\frac{#1}{#2}",
+            // PreTeXt/ORCCA custom commands used throughout lesson content
+            "\\substitute": "{#1}",
+            "\\highlight": "\\text{#1}",
+            "\\secondhighlight": "\\text{#1}",
+            "\\addright": "{#1}",
+            "\\subtractright": "{#1}",
+            "\\divideunder": "\\frac{#1}{#2}",
+            "\\negate": "{#1}",
+            "\\multiplyleft": "{#1}",
+            "\\wonder": "\\stackrel{?}{#1}",
+            "\\confirm": "\\stackrel{\\checkmark}{#1}",
+            "\\reject": "\\stackrel{\\times}{#1}",
+          },
+        }]]}
         components={{
           a: ({ children }) => <>{children}</>,
           code: ({ children }) => (
