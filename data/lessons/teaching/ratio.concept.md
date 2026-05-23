@@ -128,7 +128,7 @@ With whole numbers and integers, operations of addition and subtraction are rela
 
 **Adding/Subtracting with Fractions Having the Same Denominator**
 To add or subtract two fractions having the same denominator, *keep* that
-          denominator, and add or subtract the numerators. \frac{a}{b}+\frac{c}{b}\amp=\frac{a+c}{b}\amp\frac{a}{b}-\frac{c}{b}\amp=\frac{a-c}{b} If it's possible, useful, or required of you, simplify the result by reducing to lowest
+          denominator, and add or subtract the numerators. $$\begin{aligned}\frac{a}{b}+\frac{c}{b}\amp=\frac{a+c}{b}\amp\frac{a}{b}-\frac{c}{b}\amp=\frac{a-c}{b}\end{aligned}$$ If it's possible, useful, or required of you, simplify the result by reducing to lowest
           terms.
 
 **Fraction Addition and Subtraction**
@@ -148,7 +148,7 @@ This example was not something you can apply to other fraction addition situatio
       the denominators here worked especially well with money amounts. But there is something we can
       learn here. The fraction $\frac{3}{4}$ was equivalent to $\frac{75}{100}$ , and the
       other fraction $\frac{2}{10}$ was equivalent to $\frac{20}{100}$ . These *equivalent* fractions have the same denominator and are therefore "easy" to add.
-      What we saw happen was: \frac{3}{4}+\frac{2}{10}\amp=\frac{75}{100}+\frac{20}{100} \amp=\frac{95}{100}
+      What we saw happen was: $$\begin{aligned}\frac{3}{4}+\frac{2}{10}\amp=\frac{75}{100}+\frac{20}{100} \\ \amp=\frac{95}{100}\end{aligned}$$
 
 This realization gives us a strategy for adding (or subtracting) fractions.
 
