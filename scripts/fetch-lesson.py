@@ -424,11 +424,25 @@ def remove_templates(text):
             i += 1
     # Clean up leftover stray braces
     text = ''.join(result)
+
+    # Protect <math>...</math> blocks from the blanket brace cleanup below.
+    # The final regexes strip all {{ and }} from the text, but those patterns
+    # appear legitimately inside LaTeX math content (e.g. \frac{\text{rise}}{\text{run}}).
+    # Without protection, the }} between numerator and denominator gets removed.
+    math_blocks = []
+    def save_math(m):
+        math_blocks.append(m.group(0))
+        return f"\x00MATH{len(math_blocks)-1}\x00"
+    text = re.sub(r'<math[^>]*>.*?</math>', save_math, text, flags=re.DOTALL)
+
     text = re.sub(r'^[\}\{]+', '', text)
     text = re.sub(r'[\}\{]+$', '', text)
-    # Remove any remaining single braces (from unmatched or partial templates)
     text = re.sub(r'\}\}', '', text)
     text = re.sub(r'\{\{', '', text)
+
+    # Restore math blocks
+    text = re.sub(r'\x00MATH(\d+)\x00', lambda m: math_blocks[int(m.group(1))], text)
+
     return text
 
 
