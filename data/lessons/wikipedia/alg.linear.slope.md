@@ -7,7 +7,7 @@
 
 The slope of a line in the plane containing the *x* and *y* axes is generally represented by the letter *m*, and is defined as the change in the *y* coordinate divided by the corresponding change in the *x* coordinate, between two distinct points on the line. This is described by the following equation:
 
-\(m = \frac{\Delta y}{\Delta x} = \frac{\text{vertical} \, \text{change} }{\text{horizontal} \, \text{change} }= \frac{\text{rise{\text{run.\)
+\(m = \frac{\Delta y}{\Delta x} = \frac{\text{vertical} \, \text{change} }{\text{horizontal} \, \text{change} }= \frac{\text{rise}}{\text{run}}.\)
 (The Greek letter *delta*, Δ, is commonly used in mathematics to mean "difference" or "change".)
 
 Given two points \((x_1,y_1)\) and \((x_2,y_2)\), the change in \(x\) from one to the other is \(x_2-x_1\) (*run*), while the change in \(y\) is \(y_2-y_1\) (*rise*). Substituting both quantities into the above equation generates the formula:
