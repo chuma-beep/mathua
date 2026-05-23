@@ -2,10 +2,11 @@
 
 import React, { ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
-import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import 'katex/dist/katex.min.css'
+import remarkMath from 'remark-math'
 
 function headingId(text: string): string {
   return text
@@ -28,6 +29,10 @@ function extractText(children: ReactNode): string {
 
 export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
   let content = children
+
+  if (typeof window !== 'undefined') {
+    console.debug('[KC] raw:', JSON.stringify(children.slice(0, 200)))
+  }
 
   // Decode common HTML entities before any LaTeX processing
   content = content
@@ -141,11 +146,49 @@ export default function KatexContent({ children, className = '' }: { children: s
   // so convert multi-line $...$ to $$...$$ (display math) before passing to ReactMarkdown.
   content = content.replace(/^\s*\$([\s\S]*?\n[\s\S]*?)\$\s*$/gm, '$$\n$1\n$$')
 
+  // --- Convert $...$ and $$...$$ to HTML spans with math-* CSS classes ---
+  // This bypasses the remark-math parser entirely, avoiding a stateful
+  // tokenizer bug that drops subsequent $...$ expressions in long content.
+  // rehype-katex inherently handles elements with math-inline / math-display classes.
+
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  }
+
+  // Display math: $$...$$
+  content = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
+    return '<span class="math-display">' + escapeHtml(inner.trim()) + '</span>'
+  })
+
+  // Inline math: $...$
+  content = content.replace(/\$([^$]+?)\$/g, (_, inner: string) => {
+    const trimmed = inner.trim()
+    if (trimmed.includes('\n')) {
+      return '<span class="math-display">' + escapeHtml(trimmed) + '</span>'
+    }
+    return '<span class="math-inline">' + escapeHtml(trimmed) + '</span>'
+  })
+
+  if (typeof window !== 'undefined') {
+    const hasDollar = content.includes('$')
+    const hasDisplay = content.includes('$$')
+    const rT = typeof remarkMath
+    const gT = typeof remarkGfm
+    const cT = typeof rehypeKatex
+    let remarkTest = 'N/A'
+    try {
+      remarkTest = remarkMath.name || 'no-name'
+    } catch (e: any) {
+      remarkTest = 'ERR:' + e.message
+    }
+    console.debug('[KC] after:', JSON.stringify(content.slice(0, 300)), { hasDollar, hasDisplay, typeofRemark: rT, typeofGfm: gT, typeofRehype: cT, remarkName: remarkTest })
+  }
+
   return (
     <div className={`katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
-        remarkPlugins={[remarkMath, remarkGfm]}
-        rehypePlugins={[[rehypeKatex, {
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw, [rehypeKatex, {
           throwOnError: false,
           trust: false,
           errorColor: '#cc0000',
