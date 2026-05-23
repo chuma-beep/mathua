@@ -26,6 +26,7 @@
     "react-katex": "^3.0.1",
     "react-markdown": "^10.1.0",
     "rehype-katex": "^7.0.1",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "three": "^0.160.0",
