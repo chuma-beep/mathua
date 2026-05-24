@@ -88,8 +88,8 @@ func TestLoad_NoTitle(t *testing.T) {
 		t.Fatalf("load: %v", err)
 	}
 	l := loader.Lesson("c")
-	if l.Title != "" {
-		t.Errorf("expected empty title, got %q", l.Title)
+	if l.Title != "Notitle" {
+		t.Errorf("expected %q, got %q", "Notitle", l.Title)
 	}
 }
 
