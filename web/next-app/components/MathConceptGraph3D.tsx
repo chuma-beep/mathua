@@ -544,6 +544,7 @@ export default function MathConceptGraph3D({
         borderRadius: 0,
         overflow: 'hidden',
         border: '0.5px solid var(--border)',
+        background: 'var(--surface)',
       }}>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
