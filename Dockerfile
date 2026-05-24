@@ -17,6 +17,8 @@ COPY --from=builder /app/mathua .
 COPY --from=builder /app/web/next-app/out ./web/next-app/out
 COPY --from=builder /app/data ./data
 
-EXPOSE 8080
+ENV DATABASE_URL=/data/mathua.db
 
-CMD ["./mathua", "--serve"]
+EXPOSE 7860
+
+CMD ["./mathua", "--serve", "--port", "7860"]
