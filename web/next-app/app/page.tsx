@@ -255,7 +255,7 @@ export default function HomePage() {
             border: '0.5px solid var(--border)',
             borderRadius: 0,
             padding: '1.5rem',
-            background: 'var(--surface)',
+            background: 'var(--graph-surface)',
           }}
         >
           <MathConceptGraph3D
