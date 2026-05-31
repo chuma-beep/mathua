@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
 
 export const metadata: Metadata = {
@@ -6,7 +7,19 @@ export const metadata: Metadata = {
   description: 'How to contribute to Mathua — add concepts, write generators, and pass the validator.',
 }
 import AsciiDivider from '../../../components/AsciiDivider'
-import MermaidDiagram from '../../../components/MermaidDiagram'
+
+const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 400, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading workflow&hellip;
+    </div>
+  ),
+})
 
 const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
@@ -382,18 +395,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             {step}
           </div>
         ))}
-          <MermaidDiagram code={`graph LR
-    Concept[Add concept JSON] --> Gen[Write Go generator]
-    Concept -.->|optional| Lesson[Write lesson markdown]
-    Gen --> Test[Write fuzz test 1k samples]
-    Lesson -.-> Test
-    Test --> Run[Run go test + validate]
-    Run --> PR[Open PR]
-    PR --> CI{CI passes?}
-    CI -->|Yes| Review[Maintainer review]
-    CI -->|No| Fix[Fix issues]
-    Fix --> PR
-    Review --> Merge([Merged!])`} />
+          <PrWorkflow />
           <p style={{ ...bodyStyle, marginTop: '1rem' }}>
             Reviews usually happen within a few days. If a week passes with no response, feel
             free to ping the thread. We read every PR.

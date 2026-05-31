@@ -1,8 +1,34 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
-import MermaidDiagram from '../../../components/MermaidDiagram'
+
+const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureFlow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 440, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading architecture diagram&hellip;
+    </div>
+  ),
+})
+
+const DiagnosticFlow = dynamic(() => import('../../../components/DiagnosticFlow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 420, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading diagnostic diagram&hellip;
+    </div>
+  ),
+})
 
 const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
@@ -62,59 +88,7 @@ export default function ArchitecturePage() {
       </section>
 
       {/* High-level diagram */}
-      <MermaidDiagram code={`graph TD
-    subgraph UI[UI Layer]
-        Web[Web Browser\\nReact + KaTeX]
-        TUI[Desktop\\nBubble Tea]
-    end
-    subgraph API[API Layer]
-        Session[Session Service]
-        Graph[Graph Service]
-        Leaderboard[Leaderboard Service]
-        Diag[Diagnostic Service]
-    end
-    subgraph Engine[Core Engine]
-        Dag[DAG Loader]
-        Sched[Scheduler SM-2]
-        Gen[Generators]
-        Grade[Graders]
-        Score[Scoring]
-    end
-    subgraph Grading[Grading Layer]
-        Numeric[Numeric Go]
-        SymPy[SymPy Python]
-        Symbolic[Symbolic Go]
-        Choice[Choice Go]
-        Comp[Comparison Go]
-        Order[Ordering Go]
-    end
-    subgraph Storage[Storage]
-        SQLite[SQLite desktop]
-        PG[PostgreSQL web]
-    end
-    Web --> Session
-    Web --> Graph
-    Web --> Leaderboard
-    Web --> Diag
-    TUI --> Dag
-    TUI --> Sched
-    TUI --> Gen
-    Session --> Dag
-    Session --> Sched
-    Graph --> Dag
-    Diag --> Sched
-    Dag --> Sched
-    Sched --> Gen
-    Gen --> Grade
-    Grade --> Score
-    Gen --> Numeric
-    Gen --> SymPy
-    Gen --> Symbolic
-    Gen --> Choice
-    Gen --> Comp
-    Gen --> Order
-    Score --> SQLite
-    Score --> PG`} />
+      <ArchitectureFlow />
 
 
       {/* Metric cards */}
@@ -166,15 +140,7 @@ export default function ArchitecturePage() {
           (one per concept) to approximately 20–35.
         </p>
 
-        <MermaidDiagram code={`graph TD
-    Start((Start)) --> Mid[Test midpoint concept]
-    Mid --> Correct{Correct within time limit?}
-    Correct -->|Yes| Forward[Move forward: harder concepts]
-    Correct -->|No| Backward[Move backward: foundational concepts]
-    Forward --> Check{3 correct in a row?}
-    Backward --> Check
-    Check -->|Yes| Lock([Frontier locked])
-    Check -->|No| Mid`} />
+        <DiagnosticFlow />
 
         <div style={{ marginTop: '2rem' }}>
           {[
