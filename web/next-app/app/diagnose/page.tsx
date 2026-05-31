@@ -1,15 +1,28 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useTheme } from '../../hooks/useTheme'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
-import D2Diagram from '../../components/D2Diagram'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 
+const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 420, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading diagnostic&hellip;
+    </div>
+  ),
+})
+
 export default function DiagnosePage() {
-  const { theme, mounted } = useTheme()
+  const { mounted } = useTheme()
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
@@ -40,7 +53,7 @@ export default function DiagnosePage() {
         <SectionHeader label="Method" title="How the diagnostic works" />
 
         <div className="flex justify-center mt-8">
-          <D2Diagram name="cat-diagnostic" theme={theme} />
+          <DiagnosticFlow />
         </div>
 
         <ul className="max-w-[600px] mx-auto mt-8 space-y-3 list-none">

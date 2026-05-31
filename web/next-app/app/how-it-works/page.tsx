@@ -1,9 +1,29 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
 import AsciiDivider from '../../components/AsciiDivider'
-import MermaidDiagram from '../../components/MermaidDiagram'
+
+const StudentModelFlow = dynamic(() => import('../../components/StudentModelFlow'), {
+  ssr: false,
+  loading: () => <div style={{ height: 200, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
+})
+
+const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), {
+  ssr: false,
+  loading: () => <div style={{ height: 420, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
+})
+
+const SchedulerFlow = dynamic(() => import('../../components/SchedulerFlow'), {
+  ssr: false,
+  loading: () => <div style={{ height: 320, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
+})
+
+const GradingFlow = dynamic(() => import('../../components/GradingFlow'), {
+  ssr: false,
+  loading: () => <div style={{ height: 300, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
+})
 
 const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
@@ -227,13 +247,7 @@ export default function HowItWorksPage() {
               <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
               <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-teal)' }}>DECAYING</span>
             </div>
-            <MermaidDiagram code={`stateDiagram-v2
-    [*] --> UNSEEN
-    UNSEEN --> LEARNING: first correct
-    LEARNING --> PRACTICING: streak reached
-    PRACTICING --> MASTERED: threshold met
-    MASTERED --> DECAYING: interval elapsed
-    DECAYING --> PRACTICING: review correct`} />
+            <StudentModelFlow />
             <div className="overflow-x-auto my-4">
               <table
                 style={{
@@ -330,15 +344,7 @@ minimum value: 1.3`}
                 </li>
               ))}
             </ol>
-            <MermaidDiagram code={`graph TD
-    Start((Start)) --> Mid[Test midpoint concept]
-    Mid --> Correct{Correct within time limit?}
-    Correct -->|Yes| Forward[Move forward: harder concepts]
-    Correct -->|No| Backward[Move backward: foundational concepts]
-    Forward --> Check{3 correct in a row?}
-    Backward --> Check
-    Check -->|Yes| Lock([Frontier locked])
-    Check -->|No| Mid`} />
+            <DiagnosticFlow />
             <p style={bodyStyle}>
               The diagnostic takes 20–35 questions for most students. Without this algorithm, a
               naive assessment of 284 concepts would require up to 284 questions. The CAT approach,
@@ -391,15 +397,7 @@ minimum value: 1.3`}
               {rule}
             </div>
             ))}
-            <MermaidDiagram code={`graph TD
-    Submit[Question submitted] --> Score[Compute priority\\nfor each concept]
-    Score --> Enforce[Enforce hard rules]
-    Enforce --> R1[Prerequisites\\nmust be MASTERED]
-    Enforce --> R2[No same concept\\ntwice in a row]
-    Enforce --> R3[70% practice\\n30% review]
-    R1 --> Select[Select highest\\npriority concept]
-    R2 --> Select
-    R3 --> Select`} />
+            <SchedulerFlow />
           </section>
 
           <AsciiDivider pattern="dash" />
@@ -483,14 +481,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
               spawns a long-lived Python 3 subprocess. If Python or SymPy are not installed, it
               falls back to a pure-Go string normaliser (symbolic grader).
             </p>
-            <MermaidDiagram code={`graph LR
-    Input[Student Answer] --> Router{Router}
-    Router -->|numeric| Numeric[Numeric Go]
-    Router -->|polynomial / expression| SymPy[SymPy Python]
-    Router -->|multiple_choice| Choice[Choice Go]
-    Router -->|comparison| Comp[Comparison Go]
-    Router -->|ordering| Order[Ordering Go]
-    SymPy -->|no Python| Fallback[Symbolic Go fallback]`} />
+            <GradingFlow />
             <pre style={{
               ...codeBlockStyle,
               whiteSpace: 'pre',
