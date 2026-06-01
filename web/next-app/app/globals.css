@@ -129,3 +129,7 @@
 .link-underline:hover::after {
   transform: scaleX(1);
 }
+
+.react-flow svg {
+  display: unset;
+}

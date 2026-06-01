@@ -89,10 +89,10 @@ function BaseNode({ data, variant }: { data: { label: string }; variant: 'start'
 }
 
 const nodeTypes = {
-  startNode: (props: any) => <BaseNode {...props} variant="start" />,
-  decisionNode: (props: any) => <BaseNode {...props} variant="decision" />,
-  processNode: (props: any) => <BaseNode {...props} variant="process" />,
-  terminalNode: (props: any) => <BaseNode {...props} variant="terminal" />,
+  startNode: ({ data, ...props }: { data: { label: string } }) => <BaseNode data={data} {...props} variant="start" />,
+  decisionNode: ({ data, ...props }: { data: { label: string } }) => <BaseNode data={data} {...props} variant="decision" />,
+  processNode: ({ data, ...props }: { data: { label: string } }) => <BaseNode data={data} {...props} variant="process" />,
+  terminalNode: ({ data, ...props }: { data: { label: string } }) => <BaseNode data={data} {...props} variant="terminal" />,
 }
 
 export default function DiagnosticFlow() {
