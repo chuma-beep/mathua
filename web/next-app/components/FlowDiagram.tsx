@@ -1,12 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import {
   ReactFlow,
   Background,
   Controls,
   Handle,
   Position,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
 } from '@xyflow/react'
@@ -191,9 +193,7 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
   const { theme, mounted } = useTheme()
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
 
-  const { nodes, edges } = useMemo(() => {
-    const colors = themeColors[theme === 'dark' ? 'dark' : 'light']
-
+  const layoutedNodes = useMemo(() => {
     const initialNodes: Node[] = nodeDefs.map(n => ({
       id: n.id,
       type: 'flowNode',
@@ -201,7 +201,28 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
       data: { label: n.label, variant: n.variant ?? 'default', dir: direction },
     }))
 
-    const initialEdges: Edge[] = edgeDefs.map(e => ({
+    const g = new dagre.graphlib.Graph()
+    g.setGraph({ rankdir: direction, nodesep: nodeSep, ranksep: rankSep, marginx: 20, marginy: 20 })
+    g.setDefaultEdgeLabel(() => ({}))
+    initialNodes.forEach(node => {
+      const w = node.data.variant === 'start' ? 28 : NODE_WIDTH
+      const h = node.data.variant === 'start' ? 28 : NODE_HEIGHT
+      g.setNode(node.id, { width: w, height: h })
+    })
+    edgeDefs.forEach(edge => g.setEdge(edge.source, edge.target))
+    dagre.layout(g)
+
+    return initialNodes.map(node => {
+      const pos = g.node(node.id)
+      const w = node.data.variant === 'start' ? 28 : NODE_WIDTH
+      const h = node.data.variant === 'start' ? 28 : NODE_HEIGHT
+      return { ...node, position: { x: pos.x - w / 2, y: pos.y - h / 2 } }
+    })
+  }, [nodeDefs, edgeDefs, direction, nodeSep, rankSep])
+
+  const styledEdges = useMemo(() => {
+    const colors = themeColors[theme === 'dark' ? 'dark' : 'light']
+    return edgeDefs.map(e => ({
       id: e.id,
       source: e.source,
       target: e.target,
@@ -210,29 +231,18 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
       style: buildEdgeStyle(colors, e.color, e.dashed),
       labelStyle: buildEdgeLabelStyle(colors, e.color),
     }))
+  }, [edgeDefs, theme])
 
-    const g = new dagre.graphlib.Graph()
-    g.setGraph({ rankdir: direction, nodesep: nodeSep, ranksep: rankSep, marginx: 20, marginy: 20 })
-    g.setDefaultEdgeLabel(() => ({}))
+  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes)
+  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
 
-    initialNodes.forEach(node => {
-      const w = node.data.variant === 'start' ? 28 : NODE_WIDTH
-      const h = node.data.variant === 'start' ? 28 : NODE_HEIGHT
-      g.setNode(node.id, { width: w, height: h })
-    })
-    initialEdges.forEach(edge => g.setEdge(edge.source, edge.target))
+  useEffect(() => {
+    setNodes(layoutedNodes)
+  }, [layoutedNodes, setNodes])
 
-    dagre.layout(g)
-
-    const layoutedNodes = initialNodes.map(node => {
-      const pos = g.node(node.id)
-      const w = node.data.variant === 'start' ? 28 : NODE_WIDTH
-      const h = node.data.variant === 'start' ? 28 : NODE_HEIGHT
-      return { ...node, position: { x: pos.x - w / 2, y: pos.y - h / 2 } }
-    })
-
-    return { nodes: layoutedNodes, edges: initialEdges }
-  }, [nodeDefs, edgeDefs, direction, theme])
+  useEffect(() => {
+    setEdges(styledEdges)
+  }, [styledEdges, setEdges])
 
   if (!mounted) return <div style={{ height, width: '100%' }} />
 
@@ -241,6 +251,8 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.3 }}

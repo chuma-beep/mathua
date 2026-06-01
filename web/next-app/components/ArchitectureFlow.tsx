@@ -1,12 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import {
   ReactFlow,
   Background,
   Controls,
   Handle,
   Position,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
 } from '@xyflow/react'
@@ -204,36 +206,35 @@ export default function ArchitectureFlow() {
   const { theme, mounted } = useTheme()
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
 
-  const { nodes, edges } = useMemo(() => {
-    const layout = buildLayout()
+  const layout = buildLayout()
 
-    const resultNodes: Node[] = []
-    const resultEdges: Edge[] = []
-
-    layers.forEach((layer) => {
-      const lp = layout.layerPositions[layer.id]
-      resultNodes.push({
-        id: layer.id,
-        type: 'layerNode',
-        position: { x: lp.x, y: lp.y },
-        data: { label: layer.label },
-        style: { width: lp.w, height: lp.h },
-      })
-
-      layer.items.forEach((item) => {
-        const ip = layout.itemPositions[item.id]
-        resultNodes.push({
-          id: item.id,
-          type: 'flowNode',
-          parentId: layer.id,
-          position: { x: ip.x - lp.x, y: ip.y - lp.y },
-          data: { label: item.label },
-        })
+  const initialNodes: Node[] = []
+  layers.forEach((layer) => {
+    const lp = layout.layerPositions[layer.id]
+    initialNodes.push({
+      id: layer.id,
+      type: 'layerNode',
+      position: { x: lp.x, y: lp.y },
+      data: { label: layer.label },
+      style: { width: lp.w, height: lp.h },
+    })
+    layer.items.forEach((item) => {
+      const ip = layout.itemPositions[item.id]
+      initialNodes.push({
+        id: item.id,
+        type: 'flowNode',
+        parentId: layer.id,
+        position: { x: ip.x - lp.x, y: ip.y - lp.y },
+        data: { label: item.label },
       })
     })
+  })
 
+  const [nodes, , onNodesChange] = useNodesState(initialNodes)
+
+  const styledEdges = useMemo(() => {
+    const resultEdges: Edge[] = []
     const animatedEdges = new Set(['dag-sched', 'sched-gen', 'gen-grade', 'grade-score', 'score-sqlite', 'score-pg'])
-
     archEdges.forEach((e) => {
       const key = `${e.source}-${e.target}`
       resultEdges.push({
@@ -244,9 +245,14 @@ export default function ArchitectureFlow() {
         style: { stroke: animatedEdges.has(key) ? c.accentBlue : c.borderStrong, strokeWidth: 1.5 },
       })
     })
-
-    return { nodes: resultNodes, edges: resultEdges }
+    return resultEdges
   }, [theme])
+
+  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
+
+  useEffect(() => {
+    setEdges(styledEdges)
+  }, [styledEdges, setEdges])
 
   if (!mounted) return <div style={{ height: 440, width: '100%' }} />
 
@@ -255,6 +261,8 @@ export default function ArchitectureFlow() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.3 }}
