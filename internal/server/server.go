@@ -91,6 +91,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
+	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 }
 
 // POST /api/session
@@ -395,6 +396,35 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 // GET /api/health
 func (s *Server) handleHealth(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]string{"status": "ok"})
+}
+
+// GET /api/activity?days=365
+func (s *Server) handleActivity(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	days := 365
+	if d := r.URL.Query().Get("days"); d != "" {
+		if n, err := fmt.Sscanf(d, "%d", &days); err != nil || n != 1 || days < 1 || days > 3660 {
+			writeError(w, "days must be between 1 and 3660", 400)
+			return
+		}
+	}
+	activity, err := s.repo.GetDailyActivity(studentID, days)
+	if err != nil {
+		writeError(w, "failed to get activity", 500)
+		return
+	}
+	if activity == nil {
+		activity = []storage.DailyActivity{}
+	}
+	writeJSON(w, activity)
 }
 
 // POST /api/goal

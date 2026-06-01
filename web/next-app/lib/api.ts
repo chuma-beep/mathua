@@ -470,6 +470,20 @@ export interface DueReviewsRes {
 	count: number
 }
 
+export interface DailyActivity {
+	date: string
+	questions: number
+	correct: number
+	concepts: string[]
+}
+
+export async function getActivity(days: number = 365): Promise<DailyActivity[]> {
+	const headers: Record<string, string> = { ...getAuthHeaders() }
+	const res = await fetch(`${API_BASE}/api/activity?days=${days}`, { headers })
+	if (!res.ok) return []
+	return res.json()
+}
+
 export async function getDueReviews(): Promise<DueReviewsRes> {
 	const headers: Record<string, string> = { ...getAuthHeaders() }
 	const res = await fetch(`${API_BASE}/api/reviews/due`, { headers })

@@ -490,6 +490,47 @@ func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	return out, rows.Err()
 }
 
+// DailyActivity
+
+func (s *SQLiteStore) GetDailyActivity(studentID string, days int) ([]DailyActivity, error) {
+	limit := fmt.Sprintf("-%d days", days)
+	rows, err := s.db.Query(`
+		SELECT date(timestamp) as day,
+		       COUNT(*) as total,
+		       COALESCE(SUM(correct), 0) as correct_count,
+		       COALESCE(GROUP_CONCAT(DISTINCT concept_id), '') as concepts
+		FROM attempts
+		WHERE student_id = ? AND timestamp >= datetime('now', ?)
+		GROUP BY day
+		ORDER BY day
+	`, studentID, limit)
+	if err != nil {
+		return nil, fmt.Errorf("get daily activity: %w", err)
+	}
+	defer rows.Close()
+
+	var out []DailyActivity
+	for rows.Next() {
+		var da DailyActivity
+		var conceptsStr string
+		if err := rows.Scan(&da.Date, &da.Questions, &da.Correct, &conceptsStr); err != nil {
+			return nil, fmt.Errorf("scan daily activity: %w", err)
+		}
+		if conceptsStr != "" {
+			for _, cid := range strings.Split(conceptsStr, ",") {
+				cid = strings.TrimSpace(cid)
+				if cid != "" {
+					da.Concepts = append(da.Concepts, cid)
+				}
+			}
+		} else {
+			da.Concepts = []string{}
+		}
+		out = append(out, da)
+	}
+	return out, rows.Err()
+}
+
 // Helpers
 
 func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProgress, error) {
