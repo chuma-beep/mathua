@@ -10,7 +10,7 @@ import Pipeline from '../components/Pipeline'
 import FormulaBlock from '../components/FormulaBlock'
 import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
-import D2Diagram from '../components/D2Diagram'
+import PlatformsFlow from '../components/PlatformsFlow'
 import Footer from '../components/Footer'
 import conceptsData from '../data/concepts.json'
 
@@ -448,7 +448,7 @@ export default function HomePage() {
         </div>
 
         <div className="flex justify-center mt-8">
-          <D2Diagram name="platforms" theme={theme} />
+          <PlatformsFlow />
         </div>
       </section>
 

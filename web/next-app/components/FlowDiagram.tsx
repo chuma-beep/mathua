@@ -189,6 +189,8 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
 
   const { nodes, edges } = useMemo(() => {
+    const colors = themeColors[theme === 'dark' ? 'dark' : 'light']
+
     const initialNodes: Node[] = nodeDefs.map(n => ({
       id: n.id,
       type: 'flowNode',
@@ -202,8 +204,8 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
       target: e.target,
       animated: e.animated,
       label: e.label,
-      style: buildEdgeStyle(c, e.color, e.dashed),
-      labelStyle: buildEdgeLabelStyle(c, e.color),
+      style: buildEdgeStyle(colors, e.color, e.dashed),
+      labelStyle: buildEdgeLabelStyle(colors, e.color),
     }))
 
     const g = new dagre.graphlib.Graph()
@@ -227,7 +229,7 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
     })
 
     return { nodes: layoutedNodes, edges: initialEdges }
-  }, [nodeDefs, edgeDefs, direction, c])
+  }, [nodeDefs, edgeDefs, direction, theme])
 
   if (!mounted) return <div style={{ height, width: '100%' }} />
 
