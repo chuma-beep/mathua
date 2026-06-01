@@ -256,11 +256,8 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.3 }}
-        panActivationKeyCode={allowZoom ? undefined : null}
         nodesConnectable={false}
-        panOnDrag={allowZoom}
-        zoomOnScroll={allowZoom}
-        zoomOnDoubleClick={allowZoom}
+        {...(!allowZoom && { nodesDraggable: false, panOnDrag: false, zoomOnScroll: false, zoomOnDoubleClick: false })}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
