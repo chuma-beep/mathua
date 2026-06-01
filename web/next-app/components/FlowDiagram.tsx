@@ -189,7 +189,7 @@ function FlowNode({ data }: { data: { label: string; variant?: string; dir?: str
 
 const nodeTypes = { flowNode: FlowNode }
 
-export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, direction = 'LR', height = 400, allowZoom = false, rankSep = 60, nodeSep = 20 }: FlowDiagramProps) {
+export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, direction = 'LR', height = 400, allowZoom = true, rankSep = 60, nodeSep = 20 }: FlowDiagramProps) {
   const { theme, mounted } = useTheme()
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
 
