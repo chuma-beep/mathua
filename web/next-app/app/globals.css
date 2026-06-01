@@ -133,3 +133,31 @@
 .react-flow svg {
   display: unset;
 }
+
+[data-sonner-toaster] {
+  --normal-bg: var(--surface);
+  --normal-border: var(--border);
+  --normal-text: var(--text-primary);
+  --success-bg: var(--surface);
+  --success-border: var(--accent-green);
+  --error-bg: var(--surface);
+  --error-border: var(--accent-red);
+  --info-bg: var(--surface);
+  --info-border: var(--accent-blue);
+}
+
+[data-sonner-toaster][data-theme="dark"] {
+  --normal-bg: var(--surface);
+  --normal-border: var(--border);
+  --normal-text: var(--text-primary);
+}
+
+[data-sonner-toast] {
+  border-radius: 0 !important;
+  font-family: var(--font-ibm-plex-mono) !important;
+}
+
+[data-sonner-toast][data-styled="true"] {
+  border-radius: 0 !important;
+  border-width: 0.5px !important;
+}

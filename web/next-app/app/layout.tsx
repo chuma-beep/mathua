@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import { IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -50,6 +51,7 @@ export default function RootLayout({
           }}
         />
         <div className="relative z-10">{children}</div>
+        <Toaster />
       </body>
     </html>
   )

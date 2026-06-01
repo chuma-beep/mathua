@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
@@ -165,7 +166,7 @@ export default function GoalsPage() {
       setAnswerInput('')
       setStep('diagnostic')
     } catch {
-      alert('Could not start diagnostic. Make sure the server is running.')
+      toast.error("Something went wrong, but we're working on it.")
     } finally {
       setLoading(false)
     }
