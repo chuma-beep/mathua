@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { toast } from 'sonner'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
@@ -292,7 +293,7 @@ export default function SessionPage() {
       setDiagAnswer('')
       setScreen('diagnostic')
     } catch {
-      setError('Could not start diagnostic.')
+      toast.error("Something went wrong, but we're working on it.")
     } finally {
       setLoading(false)
     }
