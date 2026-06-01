@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import {
   ReactFlow,
   Background,
@@ -8,6 +8,8 @@ import {
   Handle,
   Position,
   MarkerType,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
 } from '@xyflow/react'
@@ -100,29 +102,30 @@ export default function DiagnosticFlow() {
   const isDark = theme === 'dark'
   const c = themeColors[isDark ? 'dark' : 'light']
 
-  const { nodes, edges } = useMemo(() => {
-    const gap = 64
-    const yStart = 4
-    const yMid = yStart + 28 + 6
-    const yBranch = yMid + 44 + gap
-    const yCheck = yBranch + 44 + gap
-    const yLocked = yCheck + 44 + gap
+  const gap = 64
+  const yStart = 4
+  const yMid = yStart + 28 + 6
+  const yBranch = yMid + 44 + gap
+  const yCheck = yBranch + 44 + gap
+  const yLocked = yCheck + 44 + gap
+  const midX = CX - NODE_W / 2 + 40
 
-    const midX = CX - NODE_W / 2 + 40
+  const initialNodes: Node[] = [
+    { id: 'start', type: 'startNode', position: { x: CX - 14, y: yStart }, data: { label: '' } },
+    { id: 'midpoint', type: 'decisionNode', position: { x: midX, y: yMid }, data: { label: 'Test midpoint\nconcept?' } },
+    { id: 'forward', type: 'processNode', position: { x: CX - NODE_W - 30, y: yBranch }, data: { label: 'Move forward:\nharder concepts' } },
+    { id: 'backward', type: 'processNode', position: { x: CX + 30, y: yBranch }, data: { label: 'Move backward:\nfoundational' } },
+    { id: 'check', type: 'decisionNode', position: { x: CX - NODE_W / 2, y: yCheck }, data: { label: '3 correct\nin a row?' } },
+    { id: 'locked', type: 'terminalNode', position: { x: CX - NODE_W / 2, y: yLocked }, data: { label: 'FRONTIER\nLOCKED' } },
+  ]
 
-    const ns: Node[] = [
-      { id: 'start', type: 'startNode', position: { x: CX - 14, y: yStart }, data: { label: '' } },
-      { id: 'midpoint', type: 'decisionNode', position: { x: midX, y: yMid }, data: { label: 'Test midpoint\nconcept?' } },
-      { id: 'forward', type: 'processNode', position: { x: CX - NODE_W - 30, y: yBranch }, data: { label: 'Move forward:\nharder concepts' } },
-      { id: 'backward', type: 'processNode', position: { x: CX + 30, y: yBranch }, data: { label: 'Move backward:\nfoundational' } },
-      { id: 'check', type: 'decisionNode', position: { x: CX - NODE_W / 2, y: yCheck }, data: { label: '3 correct\nin a row?' } },
-      { id: 'locked', type: 'terminalNode', position: { x: CX - NODE_W / 2, y: yLocked }, data: { label: 'FRONTIER\nLOCKED' } },
-    ]
+  const [nodes, , onNodesChange] = useNodesState(initialNodes)
 
+  const styledEdges = useMemo(() => {
     const edgeStyle = (color: string) => ({ stroke: color, strokeWidth: 1.5 })
     const labelStyle = (color: string) => ({ fontFamily: monoFont, fontSize: '10px', fill: color, fontWeight: 500 })
 
-    const es: Edge[] = [
+    return [
       { id: 'e-start-mid', source: 'start', target: 'midpoint', style: edgeStyle(c.borderStrong) },
       {
         id: 'e-mid-forward', source: 'midpoint', target: 'forward',
@@ -162,9 +165,13 @@ export default function DiagnosticFlow() {
         type: 'smoothstep',
       },
     ]
-
-    return { nodes: ns, edges: es }
   }, [theme])
+
+  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
+
+  useEffect(() => {
+    setEdges(styledEdges)
+  }, [styledEdges, setEdges])
 
   if (!mounted) return <div style={{ height: 440, width: '100%' }} />
 
@@ -177,6 +184,8 @@ export default function DiagnosticFlow() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.25 }}

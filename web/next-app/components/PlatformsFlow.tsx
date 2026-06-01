@@ -1,12 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import {
   ReactFlow,
   Background,
   Handle,
   Position,
   MarkerType,
+  useNodesState,
+  useEdgesState,
   type Node,
   type Edge,
 } from '@xyflow/react'
@@ -141,55 +143,46 @@ export default function PlatformsFlow() {
   const isDark = theme === 'dark'
   const c = themeColors[isDark ? 'dark' : 'light']
 
-  const { nodes, edges } = useMemo(() => {
-    const ws: Node[] = []
-
-    ws.push({
-      id: 'web', type: 'groupNode', position: { x: LEFT_X, y: 0 },
-      data: { label: 'Web browser' }, style: { width: GROUP_W, height: GROUP_H },
-      draggable: false,
+  const initialNodes: Node[] = []
+  initialNodes.push({
+    id: 'web', type: 'groupNode', position: { x: LEFT_X, y: 0 },
+    data: { label: 'Web browser' }, style: { width: GROUP_W, height: GROUP_H },
+  })
+  webItems.forEach((item, i) => {
+    initialNodes.push({
+      id: item.id, type: 'detailNode', parentId: 'web',
+      position: { x: 10, y: GROUP_HEADER_H + i * (CHILD_H + CHILD_GAP) },
+      data: { label: item.label },
+      style: { width: GROUP_W - 20, height: CHILD_H },
     })
-
-    webItems.forEach((item, i) => {
-      ws.push({
-        id: item.id, type: 'detailNode', parentId: 'web',
-        position: { x: 10, y: GROUP_HEADER_H + i * (CHILD_H + CHILD_GAP) },
-        data: { label: item.label },
-        style: { width: GROUP_W - 20, height: CHILD_H },
-        draggable: false,
-      })
+  })
+  initialNodes.push({
+    id: 'desktop', type: 'groupNode', position: { x: RIGHT_X, y: 0 },
+    data: { label: 'Desktop terminal' }, style: { width: GROUP_W, height: GROUP_H },
+  })
+  desktopItems.forEach((item, i) => {
+    initialNodes.push({
+      id: item.id, type: 'detailNode', parentId: 'desktop',
+      position: { x: 10, y: GROUP_HEADER_H + i * (CHILD_H + CHILD_GAP) },
+      data: { label: item.label },
+      style: { width: GROUP_W - 20, height: CHILD_H },
     })
+  })
+  const engineX = (LEFT_X + RIGHT_X + GROUP_W) / 2 - ENGINE_W / 2
+  initialNodes.push({
+    id: 'engine', type: 'engineNode', position: { x: engineX, y: ENGINE_Y },
+    data: { label: 'Engine' },
+    style: { width: ENGINE_W, height: ENGINE_H },
+  })
 
-    ws.push({
-      id: 'desktop', type: 'groupNode', position: { x: RIGHT_X, y: 0 },
-      data: { label: 'Desktop terminal' }, style: { width: GROUP_W, height: GROUP_H },
-      draggable: false,
-    })
+  const [nodes, , onNodesChange] = useNodesState(initialNodes)
 
-    desktopItems.forEach((item, i) => {
-      ws.push({
-        id: item.id, type: 'detailNode', parentId: 'desktop',
-        position: { x: 10, y: GROUP_HEADER_H + i * (CHILD_H + CHILD_GAP) },
-        data: { label: item.label },
-        style: { width: GROUP_W - 20, height: CHILD_H },
-        draggable: false,
-      })
-    })
-
-    const engineX = (LEFT_X + RIGHT_X + GROUP_W) / 2 - ENGINE_W / 2
-    ws.push({
-      id: 'engine', type: 'engineNode', position: { x: engineX, y: ENGINE_Y },
-      data: { label: 'Engine' },
-      style: { width: ENGINE_W, height: ENGINE_H },
-      draggable: false,
-    })
-
+  const styledEdges = useMemo(() => {
     const edgeLabelStyle: React.CSSProperties = {
       fontFamily: monoFont, fontSize: '10px',
       fontWeight: 500,
     }
-
-    const es: Edge[] = [
+    return [
       {
         id: 'e-web-engine', source: 'web', target: 'engine',
         label: 'REST API', animated: true,
@@ -205,9 +198,13 @@ export default function PlatformsFlow() {
         markerEnd: { type: MarkerType.ArrowClosed, color: c.accentBlue, width: 16, height: 16 },
       },
     ]
-
-    return { nodes: ws, edges: es }
   }, [theme])
+
+  const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
+
+  useEffect(() => {
+    setEdges(styledEdges)
+  }, [styledEdges, setEdges])
 
   const totalW = LEFT_X + GROUP_W + GROUP_GAP + GROUP_W + 10
   const totalH = ENGINE_Y + ENGINE_H + 40
@@ -226,6 +223,8 @@ export default function PlatformsFlow() {
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.25 }}
