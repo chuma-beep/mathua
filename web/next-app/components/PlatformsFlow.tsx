@@ -6,6 +6,7 @@ import {
   Background,
   Handle,
   Position,
+  MarkerType,
   type Node,
   type Edge,
 } from '@xyflow/react'
@@ -15,19 +16,19 @@ import { themeColors } from './FlowDiagram'
 
 const monoFont = "'IBM Plex Mono', monospace"
 
-const GROUP_W = 280
-const GROUP_HEADER_H = 26
-const CHILD_H = 36
-const CHILD_GAP = 6
-const GROUP_PAD_BOTTOM = 12
+const GROUP_W = 320
+const GROUP_HEADER_H = 28
+const CHILD_H = 42
+const CHILD_GAP = 10
+const GROUP_PAD_BOTTOM = 16
 
 const GROUP_H = GROUP_HEADER_H + 4 * CHILD_H + 3 * CHILD_GAP + GROUP_PAD_BOTTOM
-const GROUP_GAP = 40
-const LEFT_X = 4
+const GROUP_GAP = 60
+const LEFT_X = 10
 const RIGHT_X = LEFT_X + GROUP_W + GROUP_GAP
-const ENGINE_W = 170
-const ENGINE_H = 44
-const ENGINE_Y = GROUP_H + 32
+const ENGINE_W = 200
+const ENGINE_H = 52
+const ENGINE_Y = GROUP_H + 48
 
 function GroupNode({ data }: { data: { label: string } }) {
   const { theme } = useTheme()
@@ -175,7 +176,7 @@ export default function PlatformsFlow() {
       })
     })
 
-    const engineX = (LEFT_X + GROUP_W + RIGHT_X + GROUP_W) / 2 - ENGINE_W / 2
+    const engineX = (LEFT_X + RIGHT_X + GROUP_W) / 2 - ENGINE_W / 2
     ws.push({
       id: 'engine', type: 'engineNode', position: { x: engineX, y: ENGINE_Y },
       data: { label: 'Engine' },
@@ -191,25 +192,25 @@ export default function PlatformsFlow() {
     const es: Edge[] = [
       {
         id: 'e-web-engine', source: 'web', target: 'engine',
-        label: 'REST API',
+        label: 'REST API', animated: true,
         style: { stroke: c.accentBlue, strokeWidth: 1.5 },
         labelStyle: { ...edgeLabelStyle, fill: c.accentBlue },
-        markerEnd: { type: 'arrowclosed' as any, color: c.accentBlue, width: 16, height: 16 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: c.accentBlue, width: 16, height: 16 },
       },
       {
         id: 'e-desktop-engine', source: 'desktop', target: 'engine',
-        label: 'direct calls',
+        label: 'direct calls', animated: true,
         style: { stroke: c.accentBlue, strokeWidth: 1.5 },
         labelStyle: { ...edgeLabelStyle, fill: c.accentBlue },
-        markerEnd: { type: 'arrowclosed' as any, color: c.accentBlue, width: 16, height: 16 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: c.accentBlue, width: 16, height: 16 },
       },
     ]
 
     return { nodes: ws, edges: es }
   }, [theme])
 
-  const totalW = LEFT_X + GROUP_W + GROUP_GAP + GROUP_W + 4
-  const totalH = ENGINE_Y + ENGINE_H + 24
+  const totalW = LEFT_X + GROUP_W + GROUP_GAP + GROUP_W + 10
+  const totalH = ENGINE_Y + ENGINE_H + 40
 
   if (!mounted) return <div style={{ height: totalH, width: '100%' }} />
 
@@ -220,16 +221,21 @@ export default function PlatformsFlow() {
         border: '0.5px solid ' + c.border,
         background: 'transparent',
         margin: '0 auto',
-        overflow: 'hidden',
       }}
     >
       <ReactFlow
         nodes={nodes}
         edges={edges}
+        nodeTypes={nodeTypes}
         fitView
+        fitViewOptions={{ padding: 0.25 }}
+        panOnDrag={false}
+        zoomOnScroll={false}
+        zoomOnDoubleClick={false}
+        preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
-        <Background color={c.border} gap={24} size={0.5} />
+        <Background color={c.borderStrong} gap={24} size={1} />
       </ReactFlow>
     </div>
   )
