@@ -228,9 +228,9 @@ export default function PlatformsFlow() {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.25 }}
-        panOnDrag={false}
-        zoomOnScroll={false}
-        zoomOnDoubleClick={false}
+        panOnDrag={true}
+        zoomOnScroll={true}
+        zoomOnDoubleClick={true}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >

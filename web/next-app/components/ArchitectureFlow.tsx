@@ -266,11 +266,10 @@ export default function ArchitectureFlow() {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.3 }}
-        panActivationKeyCode={null}
         nodesConnectable={false}
-        panOnDrag={false}
-        zoomOnScroll={false}
-        zoomOnDoubleClick={false}
+        panOnDrag={true}
+        zoomOnScroll={true}
+        zoomOnDoubleClick={true}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
