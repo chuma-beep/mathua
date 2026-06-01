@@ -7,7 +7,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 
 const StudentModelFlow = dynamic(() => import('../../components/StudentModelFlow'), {
   ssr: false,
-  loading: () => <div style={{ height: 200, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
+  loading: () => <div style={{ height: 320, border: '0.5px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px' }}>Loading&hellip;</div>,
 })
 
 const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), {
@@ -172,7 +172,7 @@ export default function HowItWorksPage() {
   return (
     <>
       <Header links={[{ label: 'Docs', href: '/docs' }]} />
-      <div className="min-h-screen" style={{ background: 'var(--bg)' }}>
+      <div className="min-h-screen">
       <div className="flex max-w-[960px] mx-auto p-[32px_24px] gap-10 max-md:flex-col max-md:p-4">
         <NavSidebar activeSection={activeSection} />
 

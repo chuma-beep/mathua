@@ -67,6 +67,9 @@ interface FlowDiagramProps {
   edges: FlowEdgeDef[]
   direction?: 'LR' | 'TB'
   height?: number
+  allowZoom?: boolean
+  rankSep?: number
+  nodeSep?: number
 }
 
 const NODE_WIDTH = 150
@@ -184,7 +187,7 @@ function FlowNode({ data }: { data: { label: string; variant?: string; dir?: str
 
 const nodeTypes = { flowNode: FlowNode }
 
-export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, direction = 'LR', height = 400 }: FlowDiagramProps) {
+export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, direction = 'LR', height = 400, allowZoom = false, rankSep = 60, nodeSep = 20 }: FlowDiagramProps) {
   const { theme, mounted } = useTheme()
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
 
@@ -209,7 +212,7 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
     }))
 
     const g = new dagre.graphlib.Graph()
-    g.setGraph({ rankdir: direction, nodesep: 20, ranksep: 60, marginx: 20, marginy: 20 })
+    g.setGraph({ rankdir: direction, nodesep: nodeSep, ranksep: rankSep, marginx: 20, marginy: 20 })
     g.setDefaultEdgeLabel(() => ({}))
 
     initialNodes.forEach(node => {
@@ -241,16 +244,16 @@ export default function FlowDiagram({ nodes: nodeDefs, edges: edgeDefs, directio
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.3 }}
-        panActivationKeyCode={null}
+        panActivationKeyCode={allowZoom ? undefined : null}
         nodesConnectable={false}
-        panOnDrag={false}
-        zoomOnScroll={false}
-        zoomOnDoubleClick={false}
+        panOnDrag={allowZoom}
+        zoomOnScroll={allowZoom}
+        zoomOnDoubleClick={allowZoom}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
         <Background color={c.border} gap={24} size={0.5} />
-        <Controls showInteractive={false} />
+        <Controls showInteractive={allowZoom} />
       </ReactFlow>
     </div>
   )

@@ -19,5 +19,5 @@ export default function StudentModelFlow() {
     { id: 'e-decaying-practicing', source: 'decaying', target: 'practicing', label: 'review\ncorrect', dashed: true, color: 'green' },
   ]
 
-  return <FlowDiagram nodes={nodes} edges={edges} direction="LR" height={200} />
+  return <FlowDiagram nodes={nodes} edges={edges} direction="TB" height={320} rankSep={150} nodeSep={80} allowZoom />
 }
