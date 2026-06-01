@@ -1,0 +1,15 @@
+app = "mathua"
+primary_region = "ams"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+
+[[mounts]]
+  source = "mathua_data"
+  destination = "/data"

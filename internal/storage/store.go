@@ -75,6 +75,13 @@ type LeaderboardRow struct {
 	WeeklyMastered int
 }
 
+type DailyActivity struct {
+	Date      string   `json:"date"`
+	Questions int      `json:"questions"`
+	Correct   int      `json:"correct"`
+	Concepts  []string `json:"concepts"`
+}
+
 // Repository interface
 
 type Repository interface {
@@ -98,6 +105,7 @@ type Repository interface {
 	ImportQuestions(qs []Question) error
 
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
+	GetDailyActivity(studentID string, days int) ([]DailyActivity, error)
 
 	AddXP(studentID string, amount int) error
 	GetXP(studentID string) (total int, today int, err error)
