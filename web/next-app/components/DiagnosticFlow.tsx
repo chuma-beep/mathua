@@ -190,14 +190,11 @@ export default function DiagnosticFlow() {
         fitView
         fitViewOptions={{ padding: 0.25 }}
         nodesConnectable={false}
-        panOnDrag={true}
-        zoomOnScroll={true}
-        zoomOnDoubleClick={true}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
         <Background color={c.border} gap={20} size={0.5} />
-        <Controls showInteractive={false} />
+        <Controls />
       </ReactFlow>
     </div>
   )

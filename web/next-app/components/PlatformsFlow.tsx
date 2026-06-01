@@ -4,6 +4,7 @@ import { useMemo, useEffect } from 'react'
 import {
   ReactFlow,
   Background,
+  Controls,
   Handle,
   Position,
   MarkerType,
@@ -228,13 +229,11 @@ export default function PlatformsFlow() {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.25 }}
-        panOnDrag={true}
-        zoomOnScroll={true}
-        zoomOnDoubleClick={true}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
         <Background color={c.borderStrong} gap={24} size={1} />
+        <Controls />
       </ReactFlow>
     </div>
   )

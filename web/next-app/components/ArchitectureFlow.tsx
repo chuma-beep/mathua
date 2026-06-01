@@ -267,14 +267,11 @@ export default function ArchitectureFlow() {
         fitView
         fitViewOptions={{ padding: 0.3 }}
         nodesConnectable={false}
-        panOnDrag={true}
-        zoomOnScroll={true}
-        zoomOnDoubleClick={true}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}
       >
         <Background color={c.border} gap={24} size={0.5} />
-        <Controls showInteractive={false} />
+        <Controls />
       </ReactFlow>
     </div>
   )
