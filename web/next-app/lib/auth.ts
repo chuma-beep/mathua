@@ -1,33 +1,30 @@
 const TOKEN_KEY = 'mathua_token'
 const USER_KEY = 'mathua_user'
 
-let _token: string | null = null
-if (typeof window !== 'undefined') {
-  _token = localStorage.getItem(TOKEN_KEY)
-}
-
 export function getToken(): string | null {
-  return _token
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(TOKEN_KEY)
 }
 
 export function setToken(token: string) {
-  _token = token
   localStorage.setItem(TOKEN_KEY, token)
 }
 
 export function clearToken() {
-  _token = null
   localStorage.removeItem(TOKEN_KEY)
   localStorage.removeItem(USER_KEY)
+  window.dispatchEvent(new Event('auth-changed'))
 }
 
 export function isLoggedIn(): boolean {
-  return _token !== null
+  if (typeof window === 'undefined') return false
+  return localStorage.getItem(TOKEN_KEY) !== null
 }
 
 export function getAuthHeaders(): Record<string, string> {
-  if (_token) {
-    return { Authorization: `Bearer ${_token}` }
+  const token = getToken()
+  if (token) {
+    return { Authorization: `Bearer ${token}` }
   }
   return {}
 }

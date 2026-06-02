@@ -7,8 +7,8 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login } from '../../lib/api'
-import { setToken, setUserInfo } from '../../lib/auth'
+import { signup, login, validateToken } from '../../lib/api'
+import { setToken, setUserInfo, clearToken } from '../../lib/auth'
 
 type LoginState = {
   tab: 'login' | 'signup'
@@ -71,6 +71,13 @@ export default function LoginPage() {
         : await login(state.username.trim(), state.password)
       setToken(res.token)
       setUserInfo({ student_id: res.student_id, name: res.name, username: state.username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
+      const verified = await validateToken()
+      if (!verified.valid) {
+        clearToken()
+        dispatch({ type: 'SET_ERROR', error: 'Something went wrong, but we\'re working on it.' })
+        dispatch({ type: 'SET_LOADING', loading: false })
+        return
+      }
       push(res.diagnostic_completed ? '/session' : '/onboard')
     } catch (e: any) {
       dispatch({ type: 'SET_ERROR', error: e.message || 'Authentication failed' })

@@ -521,3 +521,10 @@ export async function submitReviewAnswer(
 	if (!res.ok) throw new Error(`Review answer submit failed: ${res.status}`)
 	return res.json()
 }
+
+export async function validateToken(): Promise<{ valid: boolean; student_id: string }> {
+	const headers = getAuthHeaders()
+	if (!headers.Authorization) return { valid: false, student_id: '' }
+	const res = await fetch(`${API_BASE}/api/me`, { headers })
+	return res.ok ? { valid: true, student_id: '' } : { valid: false, student_id: '' }
+}

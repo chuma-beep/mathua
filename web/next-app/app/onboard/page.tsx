@@ -212,7 +212,7 @@ export default function OnboardPage() {
               <div className="flex gap-3 justify-center mb-6">
                 <button
                   onClick={selectAll}
-                  className="bg-mathua-surface border border-mathua-border rounded-md h-10 px-6 text-sm text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                  className="bg-mathua-surface border border-mathua-border rounded-none h-10 px-6 text-sm text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
                 >
                   Select everything
                 </button>
@@ -225,7 +225,7 @@ export default function OnboardPage() {
                     <button
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
-                    className={`rounded-lg p-4 text-left transition-all text-sm ${
+                    className={`rounded-none p-4 text-left transition-all text-sm ${
                       d.selected
                         ? 'bg-mathua-blue text-white'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
@@ -244,7 +244,7 @@ export default function OnboardPage() {
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
                   {loading ? 'Loading…' : `Start diagnostic (${selectedConceptIds().length} concepts)`}
                 </button>
@@ -257,8 +257,8 @@ export default function OnboardPage() {
             <>
               <SectionHeader label={`Question ${questionCount}`} title={conceptName} />
               <div className="max-w-2xl mx-auto">
-                <div className="bg-mathua-surface border border-mathua-border rounded-lg p-6 mb-6">
-                  <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
+                <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-6">
+                  <div className="bg-mathua-code border border-mathua-border rounded-none p-6 text-center mb-4">
                     <div className="select-none" onCopy={(e) => e.preventDefault()}>
                        <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</KatexContent>
                      </div>
@@ -272,12 +272,12 @@ export default function OnboardPage() {
                        onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                        placeholder="Your answer..."
                       disabled={loading || lastResult !== null}
-                      className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                      className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
                     <button
                       onClick={submitAnswer}
                       disabled={!answerInput.trim() || loading || lastResult !== null}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50"
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
                     >
                       Check Answer
                     </button>
@@ -285,7 +285,7 @@ export default function OnboardPage() {
                 </div>
 
                 {lastResult && (
-                  <div className={`bg-mathua-surface border rounded-lg p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
+                  <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
                     <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
                   </div>
                 )}
@@ -316,7 +316,7 @@ export default function OnboardPage() {
                     {Object.entries(plan.weak_areas).map(([domain, concepts]) => {
                       const label = domainLabels[domain] || domain
                       return (
-                        <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-lg p-4 min-w-[160px]">
+                        <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-4 min-w-[160px]">
                           <div className="font-mono text-[10px] uppercase text-mathua-muted mb-1">{label}</div>
                           <div className="font-mono text-xl text-mathua-red">{concepts.length}</div>
                           <div className="text-mathua-secondary text-xs mt-1">to review</div>
@@ -334,7 +334,7 @@ export default function OnboardPage() {
                     {Object.entries(plan.strong_areas).map(([domain, concepts]) => {
                       const label = domainLabels[domain] || domain
                       return (
-                        <span key={domain} className="bg-mathua-surface border border-mathua-border rounded px-3 py-1.5 text-mathua-secondary text-sm">
+                        <span key={domain} className="bg-mathua-surface border border-mathua-border rounded-none px-3 py-1.5 text-mathua-secondary text-sm">
                           {label} <span className="text-mathua-green">({concepts.length})</span>
                         </span>
                       )
@@ -345,7 +345,7 @@ export default function OnboardPage() {
 
               <button
                 onClick={finishOnboarding}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm"
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm"
               >
                 Start learning
               </button>
