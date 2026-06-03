@@ -33,8 +33,8 @@ func fmtComplex(r, i int) string {
 
 type conceptGen struct{}
 
-func (g *conceptGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *conceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*8)) + 1
 	b := rand.Intn(max(1, scale*8)) + 1
 	if rand.Intn(2) == 0 {
@@ -53,8 +53,8 @@ func (g *conceptGen) Generate(difficulty float64) generator.Problem {
 
 type addSubGen struct{}
 
-func (g *addSubGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *addSubGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*8)) + 1
 	b := rand.Intn(max(1, scale*8)) + 1
 	c := rand.Intn(max(1, scale*8)) + 1
@@ -79,8 +79,8 @@ func (g *addSubGen) Generate(difficulty float64) generator.Problem {
 
 type multGen struct{}
 
-func (g *multGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *multGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*5)) + 1
 	b := rand.Intn(max(1, scale*5)) + 1
 	c := rand.Intn(max(1, scale*5)) + 1
@@ -96,8 +96,8 @@ func (g *multGen) Generate(difficulty float64) generator.Problem {
 
 type conjugateGen struct{}
 
-func (g *conjugateGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *conjugateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*8)) + 1
 	b := rand.Intn(max(1, scale*8)) + 1
 	return generator.Problem{
@@ -109,8 +109,8 @@ func (g *conjugateGen) Generate(difficulty float64) generator.Problem {
 
 type divideGen struct{}
 
-func (g *divideGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divideGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	r := rand.Intn(max(1, scale*4)) + 1
 	s := rand.Intn(max(1, scale*4)) + 1
 	c := rand.Intn(max(1, scale*3)) + 1
@@ -126,8 +126,8 @@ func (g *divideGen) Generate(difficulty float64) generator.Problem {
 
 type polarGen struct{}
 
-func (g *polarGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *polarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	if rand.Intn(2) == 0 {
 		type angle struct {
 			deg     int
@@ -172,8 +172,8 @@ func (g *polarGen) Generate(difficulty float64) generator.Problem {
 
 type deMoivreGen struct{}
 
-func (g *deMoivreGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *deMoivreGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	type stdAngle struct{ deg int }
 	angles := []stdAngle{
 		{30}, {45}, {60}, {90},
@@ -210,8 +210,8 @@ type rootsGen struct{}
 
 type exponentialGen struct{}
 
-func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *exponentialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	type entry struct {
 		theta    int
 		realPart int
@@ -252,8 +252,8 @@ func (g *exponentialGen) Generate(difficulty float64) generator.Problem {
 
 type inequalitiesGen struct{}
 
-func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *inequalitiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	type entry struct {
 		a, b    int
 		desc    string
@@ -288,8 +288,8 @@ func (g *inequalitiesGen) Generate(difficulty float64) generator.Problem {
 	}
 }
 
-func (g *rootsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *rootsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*4)) + 1
 	b := rand.Intn(max(1, scale*4)) + 1
 	c := a*a - b*b

@@ -37,7 +37,7 @@ func Register(reg *generator.Registry) {
 
 type radiansGen struct{}
 
-func (g *radiansGen) Generate(difficulty float64) generator.Problem {
+func (g *radiansGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		deg      int
 		radHTML  string
@@ -94,11 +94,11 @@ var unitCircleAngles = []struct {
 	{"\\(330^{\\circ}\\)", "\\(-1/2\\)", "\\(\\sqrt{3}/2\\)", false},
 }
 
-func (g *unitCircleGen) Generate(difficulty float64) generator.Problem {
+func (g *unitCircleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	// Easy → pick from quadrant 1 + axes; Hard → pick from any quadrant
 	var candidates []struct{ label, sin, cos string }
 	for _, a := range unitCircleAngles {
-		if difficulty > 0.4 || a.easy {
+		if ctx.Difficulty > 0.4 || a.easy {
 			candidates = append(candidates, struct{ label, sin, cos string }{a.label, a.sin, a.cos})
 		}
 	}
@@ -150,14 +150,14 @@ var hardSinTriples = []triple{
 	{40, 9, 41},
 }
 
-func (g *sinCosDefGen) Generate(difficulty float64) generator.Problem {
+func (g *sinCosDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	var triples []triple
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		triples = hardSinTriples
 	} else {
 		triples = easySinTriples
 	}
-	if difficulty > 0.7 && rand.Intn(2) == 0 {
+	if ctx.Difficulty > 0.7 && rand.Intn(2) == 0 {
 		triples = append(triples, easySinTriples...)
 	}
 	t := triples[rand.Intn(len(triples))]
@@ -183,7 +183,7 @@ func (g *sinCosDefGen) Generate(difficulty float64) generator.Problem {
 
 type tanDefGen struct{}
 
-func (g *tanDefGen) Generate(difficulty float64) generator.Problem {
+func (g *tanDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	// Half the time use right triangle sides, half use sin/cos ratio
 	if rand.Intn(2) == 0 {
 		t := pythagoreanTriples[rand.Intn(len(pythagoreanTriples))]
@@ -215,7 +215,7 @@ func (g *tanDefGen) Generate(difficulty float64) generator.Problem {
 
 type reciprocalGen struct{}
 
-func (g *reciprocalGen) Generate(difficulty float64) generator.Problem {
+func (g *reciprocalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	t := pythagoreanTriples[rand.Intn(len(pythagoreanTriples))]
 	funcs := []struct {
 		name  string
@@ -240,7 +240,7 @@ func (g *reciprocalGen) Generate(difficulty float64) generator.Problem {
 
 type pythagoreanIDGen struct{}
 
-func (g *pythagoreanIDGen) Generate(difficulty float64) generator.Problem {
+func (g *pythagoreanIDGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	t := pythagoreanTriples[rand.Intn(len(pythagoreanTriples))]
 	// Randomly ask for sin from cos or cos from sin
 	if rand.Intn(2) == 0 {
@@ -271,7 +271,7 @@ func (g *pythagoreanIDGen) Generate(difficulty float64) generator.Problem {
 
 type specialAnglesGen struct{}
 
-func (g *specialAnglesGen) Generate(difficulty float64) generator.Problem {
+func (g *specialAnglesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		label string
 		sin   string
@@ -302,7 +302,7 @@ func (g *specialAnglesGen) Generate(difficulty float64) generator.Problem {
 
 type referenceAngleGen struct{}
 
-func (g *referenceAngleGen) Generate(difficulty float64) generator.Problem {
+func (g *referenceAngleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		angle int
 		ref   int
@@ -328,7 +328,7 @@ func (g *referenceAngleGen) Generate(difficulty float64) generator.Problem {
 
 type graphSinGen struct{}
 
-func (g *graphSinGen) Generate(difficulty float64) generator.Problem {
+func (g *graphSinGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	questions := []struct {
 		q, a, e string
 	}{
@@ -353,7 +353,7 @@ func (g *graphSinGen) Generate(difficulty float64) generator.Problem {
 
 type graphCosGen struct{}
 
-func (g *graphCosGen) Generate(difficulty float64) generator.Problem {
+func (g *graphCosGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	questions := []struct {
 		q, a, e string
 	}{
@@ -378,7 +378,7 @@ func (g *graphCosGen) Generate(difficulty float64) generator.Problem {
 
 type periodGen struct{}
 
-func (g *periodGen) Generate(difficulty float64) generator.Problem {
+func (g *periodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	configs := []struct {
 		A      int
 		B      int
@@ -425,7 +425,7 @@ func (g *periodGen) Generate(difficulty float64) generator.Problem {
 
 type inverseGen struct{}
 
-func (g *inverseGen) Generate(difficulty float64) generator.Problem {
+func (g *inverseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		f      string
 		val    string
@@ -460,7 +460,7 @@ func (g *inverseGen) Generate(difficulty float64) generator.Problem {
 
 type lawSinesGen struct{}
 
-func (g *lawSinesGen) Generate(difficulty float64) generator.Problem {
+func (g *lawSinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type triangle struct {
 		A, B int
 		a    int
@@ -491,7 +491,7 @@ func (g *lawSinesGen) Generate(difficulty float64) generator.Problem {
 
 type lawCosinesGen struct{}
 
-func (g *lawCosinesGen) Generate(difficulty float64) generator.Problem {
+func (g *lawCosinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type triangle struct {
 		a, b int
 		C    int
@@ -520,7 +520,7 @@ func (g *lawCosinesGen) Generate(difficulty float64) generator.Problem {
 // arctan: compute arctan values and properties
 type arctanGen struct{}
 
-func (g *arctanGen) Generate(difficulty float64) generator.Problem {
+func (g *arctanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -547,7 +547,7 @@ func (g *arctanGen) Generate(difficulty float64) generator.Problem {
 // right triangle trig: SOH CAH TOA
 type rightTriangleGen struct{}
 
-func (g *rightTriangleGen) Generate(difficulty float64) generator.Problem {
+func (g *rightTriangleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type triple struct{ opp, adj, hyp int }
 	triples := []triple{
 		{3, 4, 5}, {4, 3, 5},
@@ -585,7 +585,7 @@ func (g *rightTriangleGen) Generate(difficulty float64) generator.Problem {
 // basic trig equations
 type trigEqBasicGen struct{}
 
-func (g *trigEqBasicGen) Generate(difficulty float64) generator.Problem {
+func (g *trigEqBasicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -612,7 +612,7 @@ func (g *trigEqBasicGen) Generate(difficulty float64) generator.Problem {
 // homogeneous trig equations
 type trigEqHomogeneousGen struct{}
 
-func (g *trigEqHomogeneousGen) Generate(difficulty float64) generator.Problem {
+func (g *trigEqHomogeneousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -637,7 +637,7 @@ func (g *trigEqHomogeneousGen) Generate(difficulty float64) generator.Problem {
 // hyperbolic: sinh and cosh
 type sinhCoshGen struct{}
 
-func (g *sinhCoshGen) Generate(difficulty float64) generator.Problem {
+func (g *sinhCoshGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -664,7 +664,7 @@ func (g *sinhCoshGen) Generate(difficulty float64) generator.Problem {
 // hyperbolic: tanh and coth
 type tanhCothGen struct{}
 
-func (g *tanhCothGen) Generate(difficulty float64) generator.Problem {
+func (g *tanhCothGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -691,7 +691,7 @@ func (g *tanhCothGen) Generate(difficulty float64) generator.Problem {
 // trig identities
 type trigIdentGen struct{}
 
-func (g *trigIdentGen) Generate(difficulty float64) generator.Problem {
+func (g *trigIdentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -718,7 +718,7 @@ func (g *trigIdentGen) Generate(difficulty float64) generator.Problem {
 // basic trig inequalities
 type trigIneqGen struct{}
 
-func (g *trigIneqGen) Generate(difficulty float64) generator.Problem {
+func (g *trigIneqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string

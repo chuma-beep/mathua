@@ -40,7 +40,7 @@ func Register(reg *generator.Registry) {
 
 type vectorConceptGen struct{}
 
-func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *vectorConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	triples := [][3]int{
 		{3, 4, 5}, {4, 3, 5},
 		{6, 8, 10}, {8, 6, 10},
@@ -49,7 +49,7 @@ func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
 		{9, 12, 15}, {12, 9, 15},
 		{7, 24, 25}, {24, 7, 25},
 	}
-	if difficulty > 0.6 {
+	if ctx.Difficulty > 0.6 {
 		triples = append(triples,
 			[][3]int{{20, 21, 29}, {9, 40, 41}, {11, 60, 61}}...)
 	}
@@ -70,8 +70,8 @@ func (g *vectorConceptGen) Generate(difficulty float64) generator.Problem {
 
 type vectorAddGen struct{}
 
-func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *vectorAddGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if rand.Intn(2) == 0 {
@@ -95,8 +95,8 @@ func (g *vectorAddGen) Generate(difficulty float64) generator.Problem {
 
 type vectorDotGen struct{}
 
-func (g *vectorDotGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *vectorDotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	dot := a*c + b*d
@@ -109,8 +109,8 @@ func (g *vectorDotGen) Generate(difficulty float64) generator.Problem {
 
 type matrixConceptGen struct{}
 
-func (g *matrixConceptGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *matrixConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	var rows, cols int
 	if rand.Intn(2) == 0 {
 		rows, cols = 2, 2
@@ -140,8 +140,8 @@ func (g *matrixAddGen) Grade(expected, userAnswer string) grader.Result {
 	return gradeMatrix(expected, userAnswer)
 }
 
-func (g *matrixAddGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *matrixAddGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := make([][]int, 2)
 	b := make([][]int, 2)
 	for i := range a {
@@ -190,8 +190,8 @@ func (g *matrixMultGen) Grade(expected, userAnswer string) grader.Result {
 	return gradeMatrix(expected, userAnswer)
 }
 
-func (g *matrixMultGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *matrixMultGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := make([][]int, 2)
 	b := make([][]int, 2)
 	for i := range a {
@@ -223,7 +223,7 @@ func (g *matrixIdentityGen) Grade(expected, userAnswer string) grader.Result {
 	return gradeMatrix(expected, userAnswer)
 }
 
-func (g *matrixIdentityGen) Generate(difficulty float64) generator.Problem {
+func (g *matrixIdentityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	candidates := [][4]int{
 		{2, 1, 1, 1}, // det=1
 		{3, 2, 2, 1}, // det=-1
@@ -265,8 +265,8 @@ func (g *matrixIdentityGen) Generate(difficulty float64) generator.Problem {
 
 type det2x2Gen struct{}
 
-func (g *det2x2Gen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *det2x2Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	c, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	det := a*d - b*c
@@ -279,8 +279,8 @@ func (g *det2x2Gen) Generate(difficulty float64) generator.Problem {
 
 type det3x3Gen struct{}
 
-func (g *det3x3Gen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *det3x3Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	m := make([][]int, 3)
 	for i := range m {
 		m[i] = make([]int, 3)
@@ -301,8 +301,8 @@ func (g *det3x3Gen) Generate(difficulty float64) generator.Problem {
 
 type systemsMatrixGen struct{}
 
-func (g *systemsMatrixGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *systemsMatrixGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x := rand.Intn(max(1, scale*2)) - scale
 	y := rand.Intn(max(1, scale*2)) - scale
 	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
@@ -326,8 +326,8 @@ func (g *systemsMatrixGen) Generate(difficulty float64) generator.Problem {
 
 type cramerGen struct{}
 
-func (g *cramerGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *cramerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x := rand.Intn(max(1, scale*2)) - scale
 	y := rand.Intn(max(1, scale*2)) - scale
 	a, b := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
@@ -367,7 +367,7 @@ func (g *cramerGen) Generate(difficulty float64) generator.Problem {
 
 type eigenConceptGen struct{}
 
-func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *eigenConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
 			Question:    "What is an eigenvalue \\(\\lambda\\) of a square matrix \\(A\\)?",
@@ -375,7 +375,7 @@ func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 			Explanation: "An eigenvalue \\(\\lambda\\) satisfies \\(\\det(A-\\lambda I)=0\\), meaning there exists a nonzero vector \\(v\\) with \\(Av=\\lambda v\\).",
 		}
 	}
-	scale := int(1 + difficulty*5)
+	scale := int(1 + ctx.Difficulty*5)
 	a, d := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	if a == 0 {
 		a = 1
@@ -398,8 +398,8 @@ func (g *eigenConceptGen) Generate(difficulty float64) generator.Problem {
 
 type eigenComputeGen struct{}
 
-func (g *eigenComputeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *eigenComputeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*2)) - scale
 	c := rand.Intn(max(1, scale*2)) - scale
 	d := rand.Intn(max(1, scale*2)) - scale
@@ -418,8 +418,8 @@ func (g *eigenComputeGen) Generate(difficulty float64) generator.Problem {
 
 type transformationsGen struct{}
 
-func (g *transformationsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a, b := rand.Intn(max(1, scale*2))+1, rand.Intn(max(1, scale*2))+1
 	x, y := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 	return generator.Problem{
@@ -431,8 +431,8 @@ func (g *transformationsGen) Generate(difficulty float64) generator.Problem {
 
 type spanGen struct{}
 
-func (g *spanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *spanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	if rand.Intn(2) == 0 {
 		v1, v2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
 		w1, w2 := rand.Intn(max(1, scale*2))-scale, rand.Intn(max(1, scale*2))-scale
@@ -471,8 +471,8 @@ func (g *spanGen) Generate(difficulty float64) generator.Problem {
 
 type basisGen struct{}
 
-func (g *basisGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *basisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	qType := rand.Intn(3)
 	switch qType {
 	case 0:
@@ -585,7 +585,7 @@ func (g *diagonalizationGen) Grade(expected, userAnswer string) grader.Result {
 	return gradeMatrixPair(expected, userAnswer)
 }
 
-func (g *diagonalizationGen) Generate(difficulty float64) generator.Problem {
+func (g *diagonalizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	// Diagonalizable matrices (real distinct eigenvalues)
 	type entry struct {
 		a, b, c, d int
@@ -649,7 +649,7 @@ func gradeMatrixPair(expected, userAnswer string) grader.Result {
 // Rank of a matrix
 type rankGen struct{}
 
-func (g *rankGen) Generate(difficulty float64) generator.Problem {
+func (g *rankGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		matrix [][]int
 		rank int
@@ -677,7 +677,7 @@ func (g *rankGen) Generate(difficulty float64) generator.Problem {
 // Cosine similarity between two vectors
 type cosineSimilarityGen struct{}
 
-func (g *cosineSimilarityGen) Generate(difficulty float64) generator.Problem {
+func (g *cosineSimilarityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		u, v [2]int
 		cos int
@@ -709,7 +709,7 @@ func (g *cosineSimilarityGen) Generate(difficulty float64) generator.Problem {
 // Parametric form of a line
 type parametricGen struct{}
 
-func (g *parametricGen) Generate(difficulty float64) generator.Problem {
+func (g *parametricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		x0, y0, dx, dy int
 	}

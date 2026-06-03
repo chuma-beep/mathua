@@ -57,8 +57,8 @@ func toMixed(num, den int) (int, int, int) {
 
 type fracConceptGen struct{}
 
-func (g *fracConceptGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 3
 	num := rand.Intn(max(1, den-2)) + 1
 	bar := ""
@@ -78,8 +78,8 @@ func (g *fracConceptGen) Generate(difficulty float64) generator.Problem {
 
 type fracPartsGen struct{}
 
-func (g *fracPartsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracPartsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 2
 	num := rand.Intn(max(1, den-2)) + 1
 	pick := rand.Intn(2)
@@ -99,8 +99,8 @@ func (g *fracPartsGen) Generate(difficulty float64) generator.Problem {
 
 type fracNumberLineGen struct{}
 
-func (g *fracNumberLineGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale)) + 2
 	num := rand.Intn(max(1, den-2)) + 1
 	return generator.Problem{
@@ -112,8 +112,8 @@ func (g *fracNumberLineGen) Generate(difficulty float64) generator.Problem {
 
 type fracEquivalentGen struct{}
 
-func (g *fracEquivalentGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracEquivalentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 2
 	num := rand.Intn(max(1, den-2)) + 1
 	mult := rand.Intn(max(1, scale)) + 2
@@ -127,8 +127,8 @@ func (g *fracEquivalentGen) Generate(difficulty float64) generator.Problem {
 
 type fracSimplifyGen struct{}
 
-func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*3)) + 4
 	factor := rand.Intn(max(1, scale)) + 2
 	for den%factor != 0 {
@@ -149,8 +149,8 @@ func (g *fracSimplifyGen) Generate(difficulty float64) generator.Problem {
 
 type fracCompareGen struct{}
 
-func (g *fracCompareGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	aNum := rand.Intn(max(1, scale*2)) + 1
 	aDen := rand.Intn(max(1, scale*2)) + 2
 	bNum := rand.Intn(max(1, scale*2)) + 1
@@ -173,8 +173,8 @@ func (g *fracCompareGen) Generate(difficulty float64) generator.Problem {
 
 type fracBenchmarkGen struct{}
 
-func (g *fracBenchmarkGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracBenchmarkGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 2
 	num := rand.Intn(max(1, den-2)) + 1
 	val := float64(num) / float64(den)
@@ -196,8 +196,8 @@ func (g *fracBenchmarkGen) Generate(difficulty float64) generator.Problem {
 
 type fracToDecimalGen struct{}
 
-func (g *fracToDecimalGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracToDecimalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := []int{2, 4, 5, 8, 10, 20, 25}[rand.Intn(7)]
 	num := rand.Intn(max(1, scale*2)) + 1
 	dec := float64(num) / float64(den)
@@ -210,8 +210,8 @@ func (g *fracToDecimalGen) Generate(difficulty float64) generator.Problem {
 
 type fracOpSameDenGen struct{ op string }
 
-func (g *fracOpSameDenGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracOpSameDenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 3
 	a := rand.Intn(max(1, den-2)) + 1
 	var b int
@@ -236,8 +236,8 @@ func (g *fracOpSameDenGen) Generate(difficulty float64) generator.Problem {
 
 type fracOpDiffDenGen struct{ op string }
 
-func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracOpDiffDenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	aDen := rand.Intn(max(1, scale*2)) + 2
 	bDen := rand.Intn(max(1, scale*2)) + 2
 	for aDen == bDen {
@@ -269,8 +269,8 @@ func (g *fracOpDiffDenGen) Generate(difficulty float64) generator.Problem {
 
 type fracWordGen struct{ op string }
 
-func (g *fracWordGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	aDen := rand.Intn(max(1, scale*2)) + 2
 	bDen := rand.Intn(max(1, scale*2)) + 2
 	for aDen == bDen {
@@ -292,8 +292,8 @@ func (g *fracWordGen) Generate(difficulty float64) generator.Problem {
 
 type fracMultGen struct{ wholeMul bool }
 
-func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	if g.wholeMul {
 		whole := rand.Intn(max(1, scale*2)) + 2
 		den := rand.Intn(max(1, scale)) + 2
@@ -327,8 +327,8 @@ func (g *fracMultGen) Generate(difficulty float64) generator.Problem {
 
 type fracDivGen struct{ wholeDiv bool }
 
-func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracDivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	if g.wholeDiv {
 		whole := rand.Intn(max(1, scale*2)) + 2
 		aNum := rand.Intn(max(1, scale)) + 1
@@ -354,8 +354,8 @@ func (g *fracDivGen) Generate(difficulty float64) generator.Problem {
 
 type fracMixedConvertGen struct{}
 
-func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracMixedConvertGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	whole := rand.Intn(max(1, scale*2)) + 1
 	den := rand.Intn(max(1, scale*2)) + 2
 	num := rand.Intn(den-1) + 1
@@ -379,8 +379,8 @@ func (g *fracMixedConvertGen) Generate(difficulty float64) generator.Problem {
 
 type fracMixedOpGen struct{ op string }
 
-func (g *fracMixedOpGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracMixedOpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	w1 := rand.Intn(max(1, scale)) + 1
 	w2 := rand.Intn(max(1, scale)) + 1
 	den := rand.Intn(max(1, scale*2)) + 2
@@ -417,8 +417,8 @@ func (g *fracMixedOpGen) Generate(difficulty float64) generator.Problem {
 
 type fracMixedMultGen struct{}
 
-func (g *fracMixedMultGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	w1 := rand.Intn(max(1, scale)) + 1
 	w2 := rand.Intn(max(1, scale)) + 1
 	den := rand.Intn(max(1, scale)) + 2

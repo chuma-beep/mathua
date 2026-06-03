@@ -30,8 +30,8 @@ var countSymbols = []string{"#", "@", "%", "&", "+", "=", "~", "$", "!", "?"}
 
 type countObjectsGen struct{}
 
-func (g *countObjectsGen) Generate(difficulty float64) generator.Problem {
-	max := int(3 + difficulty*7)
+func (g *countObjectsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	max := int(3 + ctx.Difficulty*7)
 	n := rand.Intn(max) + 1
 
 	scenarios := []struct {
@@ -90,8 +90,8 @@ func (g *countObjectsGen) Generate(difficulty float64) generator.Problem {
 
 type countCardinalityGen struct{}
 
-func (g *countCardinalityGen) Generate(difficulty float64) generator.Problem {
-	max := int(3 + difficulty*7)
+func (g *countCardinalityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	max := int(3 + ctx.Difficulty*7)
 	n := rand.Intn(max) + 1
 
 	scenarios := []struct {
@@ -121,8 +121,8 @@ func (g *countCardinalityGen) Generate(difficulty float64) generator.Problem {
 
 type countNumberLineGen struct{}
 
-func (g *countNumberLineGen) Generate(difficulty float64) generator.Problem {
-	max := int(5 + difficulty*15)
+func (g *countNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	max := int(5 + ctx.Difficulty*15)
 	n := rand.Intn(max-1) + 2
 	prev := n - 1
 	next := n + 1
@@ -135,11 +135,11 @@ func (g *countNumberLineGen) Generate(difficulty float64) generator.Problem {
 
 	hidden := prev
 	display := fmt.Sprintf("... %d, __, %d ...", hidden, next)
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		hidden = next
 		display = fmt.Sprintf("... %d, __, %d ...", prev, next)
 	}
-	if difficulty > 0.75 {
+	if ctx.Difficulty > 0.75 {
 		hidden = n
 		display = fmt.Sprintf("... %d, %d, __ ...", prev, next)
 	}
@@ -154,8 +154,8 @@ func (g *countNumberLineGen) Generate(difficulty float64) generator.Problem {
 
 type countCompareGen struct{}
 
-func (g *countCompareGen) Generate(difficulty float64) generator.Problem {
-	max := int(5 + difficulty*15)
+func (g *countCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	max := int(5 + ctx.Difficulty*15)
 	a := rand.Intn(max) + 1
 	b := rand.Intn(max) + 1
 	if a == b {
@@ -188,7 +188,7 @@ type skipCountGen struct {
 	max  int
 }
 
-func (g *skipCountGen) Generate(difficulty float64) generator.Problem {
+func (g *skipCountGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if g.step <= 0 {
 		g.step = 1
 	}
@@ -211,10 +211,10 @@ func (g *skipCountGen) Generate(difficulty float64) generator.Problem {
 		"Complete the pattern:",
 	}
 
-	if difficulty < 0.3 {
+	if ctx.Difficulty < 0.3 {
 		hidden = current
 		display = fmt.Sprintf("%d, _, %d", before, next)
-	} else if difficulty < 0.6 {
+	} else if ctx.Difficulty < 0.6 {
 		hidden = next
 		display = fmt.Sprintf("%d, %d, _, %d", before, current, next+g.step)
 	} else {
@@ -238,7 +238,7 @@ func (g *skipCountGen) Generate(difficulty float64) generator.Problem {
 
 type countObjects20Gen struct{}
 
-func (g *countObjects20Gen) Generate(difficulty float64) generator.Problem {
+func (g *countObjects20Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	n := rand.Intn(10) + 11
 
 	scenarios := []struct {
@@ -280,7 +280,7 @@ func (g *countObjects20Gen) Generate(difficulty float64) generator.Problem {
 
 type countOrdinalGen struct{}
 
-func (g *countOrdinalGen) Generate(difficulty float64) generator.Problem {
+func (g *countOrdinalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	n := rand.Intn(10)
 	ord := ordinals[n]
 
@@ -318,8 +318,8 @@ func (g *countOrdinalGen) Generate(difficulty float64) generator.Problem {
 
 type countBackwardsGen struct{}
 
-func (g *countBackwardsGen) Generate(difficulty float64) generator.Problem {
-	start := 5 + int(difficulty*15)
+func (g *countBackwardsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	start := 5 + int(ctx.Difficulty*15)
 	n := rand.Intn(start-3) + 3
 	missing := n - 1
 
@@ -330,7 +330,7 @@ func (g *countBackwardsGen) Generate(difficulty float64) generator.Problem {
 	}
 
 	display := fmt.Sprintf("%d, _, %d", n, missing-1)
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		display = fmt.Sprintf("%d, %d, _, %d", n, missing, missing-2)
 		missing = missing - 1
 	}

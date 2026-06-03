@@ -8,8 +8,8 @@ type stubGen struct {
 	fn func(difficulty float64) Problem
 }
 
-func (s *stubGen) Generate(difficulty float64) Problem {
-	return s.fn(difficulty)
+func (s *stubGen) Generate(ctx GeneratorContext) Problem {
+	return s.fn(ctx.Difficulty)
 }
 
 func TestRegistry_RegisterAndGenerate(t *testing.T) {

@@ -304,8 +304,8 @@ import (
 
 type AddSingleGen struct{}
 
-func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
-    max := int(5 + difficulty*4)
+func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+    max := int(5 + ctx.Difficulty*4)
     a, _ := rand.Int(rand.Reader, big.NewInt(int64(max)))
     b, _ := rand.Int(rand.Reader, big.NewInt(int64(max)))
     ai, bi := int(a.Int64())+2, int(b.Int64())+2
@@ -604,6 +604,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
           'Concept IDs follow domain.subdomain.descriptor: lower case, no spaces.',
           'Mastery thresholds are pragmatic. Single-digit addition should require faster response (6–8 s) than multi-digit multiplication (15–20 s).',
           'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
+          'Generators accept a generator.GeneratorContext with Difficulty (0.0–1.0) and Seed (int64). Use ctx.Seed for deterministic generation — this enables question replay, regression suites, and A/B testing.',
           'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
           'Grading types: use numeric for arithmetic, polynomial/expression for algebra (routes through SymPy), and comparison/ordering/multiple_choice for structured answers.',
         ].map((rule) => (

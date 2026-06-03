@@ -17,7 +17,7 @@ func Register(reg *generator.Registry) {
 
 type metricGen struct{}
 
-func (g *metricGen) Generate(difficulty float64) generator.Problem {
+func (g *metricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -77,7 +77,7 @@ func (g *metricGen) Generate(difficulty float64) generator.Problem {
 
 type openClosedGen struct{}
 
-func (g *openClosedGen) Generate(difficulty float64) generator.Problem {
+func (g *openClosedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set      string
 		isOpen   string
@@ -114,7 +114,7 @@ func (g *openClosedGen) Generate(difficulty float64) generator.Problem {
 
 type continuousGen struct{}
 
-func (g *continuousGen) Generate(difficulty float64) generator.Problem {
+func (g *continuousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		f          string
 		domain     string

@@ -20,7 +20,7 @@ func Register(reg *generator.Registry) {
 
 type conceptGen struct{}
 
-func (g *conceptGen) Generate(difficulty float64) generator.Problem {
+func (g *conceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -46,7 +46,7 @@ func (g *conceptGen) Generate(difficulty float64) generator.Problem {
 
 type separableGen struct{}
 
-func (g *separableGen) Generate(difficulty float64) generator.Problem {
+func (g *separableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -94,7 +94,7 @@ func (g *separableGen) Generate(difficulty float64) generator.Problem {
 
 type linearFirstGen struct{}
 
-func (g *linearFirstGen) Generate(difficulty float64) generator.Problem {
+func (g *linearFirstGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -142,7 +142,7 @@ func (g *linearFirstGen) Generate(difficulty float64) generator.Problem {
 
 type exactGen struct{}
 
-func (g *exactGen) Generate(difficulty float64) generator.Problem {
+func (g *exactGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -200,7 +200,7 @@ func (g *exactGen) Generate(difficulty float64) generator.Problem {
 
 type homogeneousGen struct{}
 
-func (g *homogeneousGen) Generate(difficulty float64) generator.Problem {
+func (g *homogeneousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		r1, r2 int
 	}
@@ -255,7 +255,7 @@ func (g *homogeneousGen) Generate(difficulty float64) generator.Problem {
 
 type nonhomogeneousGen struct{}
 
-func (g *nonhomogeneousGen) Generate(difficulty float64) generator.Problem {
+func (g *nonhomogeneousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -303,7 +303,7 @@ func (g *nonhomogeneousGen) Generate(difficulty float64) generator.Problem {
 
 type laplaceGen struct{}
 
-func (g *laplaceGen) Generate(difficulty float64) generator.Problem {
+func (g *laplaceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string
@@ -356,7 +356,7 @@ func (g *laplaceGen) Generate(difficulty float64) generator.Problem {
 
 type systemsGen struct{}
 
-func (g *systemsGen) Generate(difficulty float64) generator.Problem {
+func (g *systemsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qa struct {
 		q string
 		a string

@@ -30,7 +30,7 @@ func (r *Registry) Register(conceptID string, gen Generator) error {
 	}
 	// Self-check: if this is a GradedGenerator, make sure it can grade its own output.
 	if gg, ok := gen.(GradedGenerator); ok {
-		p := gg.Generate(0.5)
+		p := gg.Generate(GeneratorContext{Difficulty: 0.5})
 		result := gg.Grade(p.Answer, p.Answer)
 		if !result.Correct {
 			return fmt.Errorf("generator for %q cannot grade its own answer (expected=%q): %s",
@@ -64,16 +64,24 @@ func (r *Registry) Generate(conceptID string, difficulty float64) (Problem, erro
 	if difficulty > 1 {
 		difficulty = 1
 	}
+	return r.GenerateContext(conceptID, GeneratorContext{Difficulty: difficulty})
+}
+
+func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Problem, error) {
 	r.mu.RLock()
 	gen, exists := r.gens[conceptID]
 	r.mu.RUnlock()
 	if !exists {
 		return Problem{}, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
-	return gen.Generate(difficulty), nil
+	return gen.Generate(ctx), nil
 }
 
 func (r *Registry) BatchGenerate(conceptID string, count int, difficulty float64) ([]Problem, error) {
+	return r.BatchGenerateContext(conceptID, count, GeneratorContext{Difficulty: difficulty})
+}
+
+func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx GeneratorContext) ([]Problem, error) {
 	if count < 1 {
 		count = 1
 	}
@@ -89,7 +97,7 @@ func (r *Registry) BatchGenerate(conceptID string, count int, difficulty float64
 	problems := make([]Problem, 0, count)
 	seen := make(map[string]bool)
 	for i := 0; i < count*3 && len(problems) < count; i++ {
-		p := gen.Generate(difficulty)
+		p := gen.Generate(ctx)
 		if !seen[p.Question] {
 			seen[p.Question] = true
 			problems = append(problems, p)

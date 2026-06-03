@@ -9,7 +9,7 @@ import (
 
 type fakeGen struct{}
 
-func (f *fakeGen) Generate(difficulty float64) generator.Problem {
+func (f *fakeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{
 		Question:    "test?",
 		Answer:      "test",

@@ -13,7 +13,7 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	gr := grader.NewRouter()
 	for i := 0; i < 100; i++ {
 		d := rand.Float64()
-		p := gen.Generate(d)
+		p := gen.Generate(generator.GeneratorContext{Difficulty: d})
 		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
 			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
 		}
@@ -32,12 +32,12 @@ func TestUnitCircleDifficulty(t *testing.T) {
 	// Low difficulty should prefer quadrant I angles
 	lowAngles := make(map[string]int)
 	for i := 0; i < 50; i++ {
-		p := gen.Generate(0.1)
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.1})
 		lowAngles[p.Question]++
 	}
 	highAngles := make(map[string]int)
 	for i := 0; i < 50; i++ {
-		p := gen.Generate(1.0)
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 1.0})
 		highAngles[p.Question]++
 	}
 	t.Logf("low difficulty produced %d distinct questions", len(lowAngles))
@@ -47,13 +47,13 @@ func TestUnitCircleDifficulty(t *testing.T) {
 func TestSinCosDefDifficulty(t *testing.T) {
 	gen := &sinCosDefGen{}
 	for i := 0; i < 20; i++ {
-		p := gen.Generate(0.1)
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.1})
 		if p.Question == "" {
 			t.Fatal("empty question at low difficulty")
 		}
 	}
 	for i := 0; i < 20; i++ {
-		p := gen.Generate(0.9)
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.9})
 		if p.Question == "" {
 			t.Fatal("empty question at high difficulty")
 		}
