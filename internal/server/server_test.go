@@ -16,7 +16,7 @@ import (
 
 type testGen struct{}
 
-func (g *testGen) Generate(difficulty float64) generator.Problem {
+func (g *testGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{Question: "2+2=?", Answer: "4", Explanation: "2+2=4"}
 }
 
@@ -139,7 +139,7 @@ func TestLeaderboard(t *testing.T) {
 
 type expressionTestGen struct{}
 
-func (g *expressionTestGen) Generate(difficulty float64) generator.Problem {
+func (g *expressionTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{
 		Question:    "Expand (x+1)^2",
 		Answer:      "x^2+2x+1",

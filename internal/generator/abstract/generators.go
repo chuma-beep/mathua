@@ -21,7 +21,7 @@ func Register(reg *generator.Registry) {
 
 type groupDefGen struct{}
 
-func (g *groupDefGen) Generate(difficulty float64) generator.Problem {
+func (g *groupDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set       string
 		operation string
@@ -50,7 +50,7 @@ func (g *groupDefGen) Generate(difficulty float64) generator.Problem {
 
 type groupExamplesGen struct{}
 
-func (g *groupExamplesGen) Generate(difficulty float64) generator.Problem {
+func (g *groupExamplesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set       string
 		operation string
@@ -79,7 +79,7 @@ func (g *groupExamplesGen) Generate(difficulty float64) generator.Problem {
 
 type subgroupGen struct{}
 
-func (g *subgroupGen) Generate(difficulty float64) generator.Problem {
+func (g *subgroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if rand.Intn(3) == 0 {
 		type orderEntry struct {
 			subgroup string
@@ -132,7 +132,7 @@ func (g *subgroupGen) Generate(difficulty float64) generator.Problem {
 
 type ringGen struct{}
 
-func (g *ringGen) Generate(difficulty float64) generator.Problem {
+func (g *ringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set     string
 		isRing  string
@@ -168,7 +168,7 @@ func (g *ringGen) Generate(difficulty float64) generator.Problem {
 
 type homomorphismGen struct{}
 
-func (g *homomorphismGen) Generate(difficulty float64) generator.Problem {
+func (g *homomorphismGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		f        string
 		domain   string
@@ -200,7 +200,7 @@ func (g *homomorphismGen) Generate(difficulty float64) generator.Problem {
 
 type fieldGen struct{}
 
-func (g *fieldGen) Generate(difficulty float64) generator.Problem {
+func (g *fieldGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set     string
 		isField string
@@ -252,7 +252,7 @@ func (g *fieldGen) Generate(difficulty float64) generator.Problem {
 
 type moduleGen struct{}
 
-func (g *moduleGen) Generate(difficulty float64) generator.Problem {
+func (g *moduleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		set     string
 		ring    string

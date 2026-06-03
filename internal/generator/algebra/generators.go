@@ -112,14 +112,14 @@ func Register(reg *generator.Registry) {
 
 type slopeGen struct{}
 
-func (g *slopeGen) Generate(difficulty float64) generator.Problem {
-	// Higher difficulty → wider range, negative slopes more likely
-	lim := int(3 + difficulty*12)
+func (g *slopeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	// Higher ctx.Difficulty → wider range, negative slopes more likely
+	lim := int(3 + ctx.Difficulty*12)
 	x1 := rand.Intn(lim)
 	y1 := rand.Intn(lim)
-	x2 := x1 + rand.Intn(int(difficulty*7)+2) + 1
+	x2 := x1 + rand.Intn(int(ctx.Difficulty*7)+2) + 1
 	y2 := y1 + rand.Intn(lim) + 1
-	if rand.Intn(2) == 0 || difficulty > 0.6 {
+	if rand.Intn(2) == 0 || ctx.Difficulty > 0.6 {
 		y2 = y1 - rand.Intn(max(y1, 1)+1)
 	}
 	dy := y2 - y1
@@ -135,24 +135,24 @@ func (g *slopeGen) Generate(difficulty float64) generator.Problem {
 
 type slopeInterceptGen struct{}
 
-func (g *slopeInterceptGen) Generate(difficulty float64) generator.Problem {
-	// Higher difficulty → fractional slopes and larger intercepts
-	if difficulty > 0.6 && rand.Intn(2) == 0 {
+func (g *slopeInterceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	// Higher ctx.Difficulty → fractional slopes and larger intercepts
+	if ctx.Difficulty > 0.6 && rand.Intn(2) == 0 {
 		m := rand.Intn(3) + 1
 		n := rand.Intn(3) + 2
 		if rand.Intn(2) == 0 { m = -m }
-		b := rand.Intn(int(5+difficulty*10)) - int(3+difficulty*5)
+		b := rand.Intn(int(5+ctx.Difficulty*10)) - int(3+ctx.Difficulty*5)
 		return generator.Problem{
 			Question:    fmt.Sprintf("Write the equation of a line with slope \\(%d/%d\\) and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, n, b),
 			Answer:      fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
 			Explanation: fmt.Sprintf("\\(y = \\frac{%d}{%d}x + %d\\)", m, n, b),
 		}
 	}
-	m := rand.Intn(int(1+difficulty*5)) + 1
+	m := rand.Intn(int(1+ctx.Difficulty*5)) + 1
 	if rand.Intn(2) == 0 {
 		m = -m
 	}
-	b := rand.Intn(int(5+difficulty*8)) - int(3+difficulty*4)
+	b := rand.Intn(int(5+ctx.Difficulty*8)) - int(3+ctx.Difficulty*4)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write the equation of a line with slope %d and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, b),
 		Answer:      formatLinear(m, b),
@@ -162,7 +162,7 @@ func (g *slopeInterceptGen) Generate(difficulty float64) generator.Problem {
 
 type linearGraphGen struct{}
 
-func (g *linearGraphGen) Generate(difficulty float64) generator.Problem {
+func (g *linearGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	m := rand.Intn(5) + 1
 	if rand.Intn(2) == 0 {
 		m = -m
@@ -179,7 +179,7 @@ func (g *linearGraphGen) Generate(difficulty float64) generator.Problem {
 
 type stdFormGen struct{}
 
-func (g *stdFormGen) Generate(difficulty float64) generator.Problem {
+func (g *stdFormGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(5) + 1
 	x := rand.Intn(5) + 1
@@ -201,7 +201,7 @@ func (g *stdFormGen) Generate(difficulty float64) generator.Problem {
 
 type parallelPerpGen struct{}
 
-func (g *parallelPerpGen) Generate(difficulty float64) generator.Problem {
+func (g *parallelPerpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	m := rand.Intn(5) + 1
 	if rand.Intn(2) == 0 {
 		m = -m
@@ -228,8 +228,8 @@ func (g *parallelPerpGen) Generate(difficulty float64) generator.Problem {
 
 type multiStepEqGen struct{}
 
-func (g *multiStepEqGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*8)
+func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*8)
 	x := rand.Intn(scale*2) + 2
 	a := rand.Intn(scale) + 2
 	b := rand.Intn(scale*2) + 2
@@ -243,8 +243,8 @@ func (g *multiStepEqGen) Generate(difficulty float64) generator.Problem {
 
 type varsBothSidesGen struct{}
 
-func (g *varsBothSidesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*7)
+func (g *varsBothSidesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*7)
 	x := rand.Intn(scale*2) + 2
 	a := rand.Intn(scale) + 2
 	c := rand.Intn(scale) + 1
@@ -262,7 +262,7 @@ func (g *varsBothSidesGen) Generate(difficulty float64) generator.Problem {
 
 type literalEqGen struct{}
 
-func (g *literalEqGen) Generate(difficulty float64) generator.Problem {
+func (g *literalEqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(6) + 2
 	b := rand.Intn(5) + 1
 	return generator.Problem{
@@ -274,7 +274,7 @@ func (g *literalEqGen) Generate(difficulty float64) generator.Problem {
 
 type multiStepIneqGen struct{}
 
-func (g *multiStepIneqGen) Generate(difficulty float64) generator.Problem {
+func (g *multiStepIneqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(6) + 2
 	b := rand.Intn(10) + 1
@@ -288,7 +288,7 @@ func (g *multiStepIneqGen) Generate(difficulty float64) generator.Problem {
 
 type compoundIneqGen struct{}
 
-func (g *compoundIneqGen) Generate(difficulty float64) generator.Problem {
+func (g *compoundIneqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	b := rand.Intn(3) + 2
 	c := rand.Intn(5) - 2
@@ -312,7 +312,7 @@ func (g *compoundIneqGen) Generate(difficulty float64) generator.Problem {
 
 type sysSubstitutionGen struct{}
 
-func (g *sysSubstitutionGen) Generate(difficulty float64) generator.Problem {
+func (g *sysSubstitutionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	y := rand.Intn(8) + 2
 	return generator.Problem{
@@ -324,7 +324,7 @@ func (g *sysSubstitutionGen) Generate(difficulty float64) generator.Problem {
 
 type sysEliminationGen struct{}
 
-func (g *sysEliminationGen) Generate(difficulty float64) generator.Problem {
+func (g *sysEliminationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	y := rand.Intn(8) + 2
 	a := rand.Intn(5) + 2
@@ -341,7 +341,7 @@ func (g *sysEliminationGen) Generate(difficulty float64) generator.Problem {
 
 type sysWordGen struct{}
 
-func (g *sysWordGen) Generate(difficulty float64) generator.Problem {
+func (g *sysWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(8) + 3
 	b := rand.Intn(8) + 3
 	sum := a + b
@@ -359,7 +359,7 @@ func (g *sysWordGen) Generate(difficulty float64) generator.Problem {
 
 type polyConceptGen struct{}
 
-func (g *polyConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *polyConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	coeff := rand.Intn(6) + 2
 	exp := rand.Intn(3) + 2
 	return generator.Problem{
@@ -371,7 +371,7 @@ func (g *polyConceptGen) Generate(difficulty float64) generator.Problem {
 
 type polyAddSubGen struct{}
 
-func (g *polyAddSubGen) Generate(difficulty float64) generator.Problem {
+func (g *polyAddSubGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(5) + 2
 	c := rand.Intn(5) + 1
@@ -384,7 +384,7 @@ func (g *polyAddSubGen) Generate(difficulty float64) generator.Problem {
 
 type polyMultMonoGen struct{}
 
-func (g *polyMultMonoGen) Generate(difficulty float64) generator.Problem {
+func (g *polyMultMonoGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(5) + 2
 	c := rand.Intn(5) + 1
@@ -397,7 +397,7 @@ func (g *polyMultMonoGen) Generate(difficulty float64) generator.Problem {
 
 type polyFoilGen struct{}
 
-func (g *polyFoilGen) Generate(difficulty float64) generator.Problem {
+func (g *polyFoilGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(6) + 1
 	b := rand.Intn(6) + 1
 	c := rand.Intn(6) + 1
@@ -412,7 +412,7 @@ func (g *polyFoilGen) Generate(difficulty float64) generator.Problem {
 
 type polySpecialGen struct{}
 
-func (g *polySpecialGen) Generate(difficulty float64) generator.Problem {
+func (g *polySpecialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(6) + 1
 	b := rand.Intn(5) + 1
 	return generator.Problem{
@@ -429,7 +429,7 @@ func (g *polySpecialGen) Generate(difficulty float64) generator.Problem {
 
 type factorGCFGen struct{}
 
-func (g *factorGCFGen) Generate(difficulty float64) generator.Problem {
+func (g *factorGCFGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	f := rand.Intn(5) + 2
 	a := f * (rand.Intn(5) + 2)
 	b := f * (rand.Intn(5) + 1)
@@ -442,7 +442,7 @@ func (g *factorGCFGen) Generate(difficulty float64) generator.Problem {
 
 type factorTrinomialGen struct{}
 
-func (g *factorTrinomialGen) Generate(difficulty float64) generator.Problem {
+func (g *factorTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(6) + 1
 	r2 := rand.Intn(6) + 1
 	b := r1 + r2
@@ -456,7 +456,7 @@ func (g *factorTrinomialGen) Generate(difficulty float64) generator.Problem {
 
 type factorDiffSquaresGen struct{}
 
-func (g *factorDiffSquaresGen) Generate(difficulty float64) generator.Problem {
+func (g *factorDiffSquaresGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(8) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Factor: \\(x^{2} - %d\\)", a*a),
@@ -467,7 +467,7 @@ func (g *factorDiffSquaresGen) Generate(difficulty float64) generator.Problem {
 
 type factorACMethodGen struct{}
 
-func (g *factorACMethodGen) Generate(difficulty float64) generator.Problem {
+func (g *factorACMethodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(4) + 2
 	r1 := rand.Intn(4) + 1
 	r2 := rand.Intn(4) + 1
@@ -486,7 +486,7 @@ func (g *factorACMethodGen) Generate(difficulty float64) generator.Problem {
 
 type quadSolveFactorGen struct{}
 
-func (g *quadSolveFactorGen) Generate(difficulty float64) generator.Problem {
+func (g *quadSolveFactorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(8) - 4
 	r2 := rand.Intn(8) - 4
 	b := -(r1 + r2)
@@ -501,7 +501,7 @@ func (g *quadSolveFactorGen) Generate(difficulty float64) generator.Problem {
 
 type quadCompleteSquareGen struct{}
 
-func (g *quadCompleteSquareGen) Generate(difficulty float64) generator.Problem {
+func (g *quadCompleteSquareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(6) + 1
 	b := -2 * r
 	return generator.Problem{
@@ -513,7 +513,7 @@ func (g *quadCompleteSquareGen) Generate(difficulty float64) generator.Problem {
 
 type quadFormulaGen struct{}
 
-func (g *quadFormulaGen) Generate(difficulty float64) generator.Problem {
+func (g *quadFormulaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(8) + 1
 	r2 := rand.Intn(8) + 1
 	b := -(r1 + r2)
@@ -528,7 +528,7 @@ func (g *quadFormulaGen) Generate(difficulty float64) generator.Problem {
 
 type quadDiscriminantGen struct{}
 
-func (g *quadDiscriminantGen) Generate(difficulty float64) generator.Problem {
+func (g *quadDiscriminantGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	b := rand.Intn(10) - 5
 	c := rand.Intn(20) - 10
 	disc := b*b - 4*c
@@ -551,7 +551,7 @@ func (g *quadDiscriminantGen) Generate(difficulty float64) generator.Problem {
 
 type funcConceptGen struct{}
 
-func (g *funcConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *funcConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(5) + 1
 	x := rand.Intn(5) + 1
@@ -564,7 +564,7 @@ func (g *funcConceptGen) Generate(difficulty float64) generator.Problem {
 
 type funcNotationGen struct{}
 
-func (g *funcNotationGen) Generate(difficulty float64) generator.Problem {
+func (g *funcNotationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	x := rand.Intn(5) + 1
 	b := rand.Intn(5) + 1
@@ -578,7 +578,7 @@ func (g *funcNotationGen) Generate(difficulty float64) generator.Problem {
 
 type funcEvaluateGen struct{}
 
-func (g *funcEvaluateGen) Generate(difficulty float64) generator.Problem {
+func (g *funcEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	x := rand.Intn(5) + 2
 	b := rand.Intn(5) + 1
@@ -592,7 +592,7 @@ func (g *funcEvaluateGen) Generate(difficulty float64) generator.Problem {
 
 type funcLinearGen struct{}
 
-func (g *funcLinearGen) Generate(difficulty float64) generator.Problem {
+func (g *funcLinearGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if rand.Intn(2) == 0 {
 		m := rand.Intn(6) - 3
 		if m == 0 {
@@ -615,7 +615,7 @@ func (g *funcLinearGen) Generate(difficulty float64) generator.Problem {
 
 type funcQuadGen struct{}
 
-func (g *funcQuadGen) Generate(difficulty float64) generator.Problem {
+func (g *funcQuadGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(4) + 1
 	b := rand.Intn(5) + 1
 	return generator.Problem{
@@ -631,7 +631,7 @@ func (g *funcQuadGen) Generate(difficulty float64) generator.Problem {
 
 type algExpConceptGen struct{}
 
-func (g *algExpConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(3) + 2
 	x := rand.Intn(4) + 1
 	return generator.Problem{
@@ -643,7 +643,7 @@ func (g *algExpConceptGen) Generate(difficulty float64) generator.Problem {
 
 type algExpEvaluateGen struct{}
 
-func (g *algExpEvaluateGen) Generate(difficulty float64) generator.Problem {
+func (g *algExpEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(3) + 2
 	x := rand.Intn(4) + 2
 	return generator.Problem{
@@ -655,7 +655,7 @@ func (g *algExpEvaluateGen) Generate(difficulty float64) generator.Problem {
 
 type logConceptGen struct{}
 
-func (g *logConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	base := rand.Intn(3) + 2
 	exp := rand.Intn(4) + 1
 	val := mathutil.IntPow(base, exp)
@@ -668,7 +668,7 @@ func (g *logConceptGen) Generate(difficulty float64) generator.Problem {
 
 type logEvaluateGen struct{}
 
-func (g *logEvaluateGen) Generate(difficulty float64) generator.Problem {
+func (g *logEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	base := rand.Intn(3) + 2
 	exp := rand.Intn(4) + 1
 	val := mathutil.IntPow(base, exp)
@@ -681,7 +681,7 @@ func (g *logEvaluateGen) Generate(difficulty float64) generator.Problem {
 
 type logPropertiesGen struct{}
 
-func (g *logPropertiesGen) Generate(difficulty float64) generator.Problem {
+func (g *logPropertiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	base := rand.Intn(3) + 2
 	a := mathutil.IntPow(base, rand.Intn(3)+1)
 	b := mathutil.IntPow(base, rand.Intn(3)+2)
@@ -698,7 +698,7 @@ func (g *logPropertiesGen) Generate(difficulty float64) generator.Problem {
 
 type seqArithGen struct{}
 
-func (g *seqArithGen) Generate(difficulty float64) generator.Problem {
+func (g *seqArithGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a1 := rand.Intn(10) + 1
 	d := rand.Intn(5) + 2
 	n := rand.Intn(5) + 3
@@ -712,7 +712,7 @@ func (g *seqArithGen) Generate(difficulty float64) generator.Problem {
 
 type seqGeomGen struct{}
 
-func (g *seqGeomGen) Generate(difficulty float64) generator.Problem {
+func (g *seqGeomGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a1 := rand.Intn(5) + 2
 	r := rand.Intn(3) + 2
 	n := rand.Intn(4) + 2
@@ -726,7 +726,7 @@ func (g *seqGeomGen) Generate(difficulty float64) generator.Problem {
 
 type seqSumArithGen struct{}
 
-func (g *seqSumArithGen) Generate(difficulty float64) generator.Problem {
+func (g *seqSumArithGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a1 := rand.Intn(10) + 1
 	d := rand.Intn(5) + 2
 	n := rand.Intn(6) + 2
@@ -741,7 +741,7 @@ func (g *seqSumArithGen) Generate(difficulty float64) generator.Problem {
 
 type seqSumGeoGen struct{}
 
-func (g *seqSumGeoGen) Generate(difficulty float64) generator.Problem {
+func (g *seqSumGeoGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a1 := rand.Intn(5) + 2
 	r := rand.Intn(3) + 2
 	// Sum of first n terms: a1(1-r^n)/(1-r)
@@ -830,7 +830,7 @@ func formatQuadratic(b, c int) string {
 
 type ineqTwoVarGen struct{}
 
-func (g *ineqTwoVarGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqTwoVarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	m := rand.Intn(4) + 1
 	b := rand.Intn(6) - 3
 	op := ">"
@@ -857,7 +857,7 @@ func (g *ineqTwoVarGen) Generate(difficulty float64) generator.Problem {
 
 type conicCircleGen struct{}
 
-func (g *conicCircleGen) Generate(difficulty float64) generator.Problem {
+func (g *conicCircleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	h := rand.Intn(5) - 2
 	k := rand.Intn(5) - 2
 	r := rand.Intn(4) + 2
@@ -871,7 +871,7 @@ func (g *conicCircleGen) Generate(difficulty float64) generator.Problem {
 
 type conicEllipseGen struct{}
 
-func (g *conicEllipseGen) Generate(difficulty float64) generator.Problem {
+func (g *conicEllipseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	h := rand.Intn(5) - 2
 	k := rand.Intn(5) - 2
 	a := rand.Intn(3) + 2
@@ -899,7 +899,7 @@ func (g *conicEllipseGen) Generate(difficulty float64) generator.Problem {
 
 type conicParabolaGen struct{}
 
-func (g *conicParabolaGen) Generate(difficulty float64) generator.Problem {
+func (g *conicParabolaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	h := rand.Intn(5) - 2
 	k := rand.Intn(5) - 2
 	p := rand.Intn(3) + 1
@@ -920,7 +920,7 @@ func (g *conicParabolaGen) Generate(difficulty float64) generator.Problem {
 
 type conicHyperbolaGen struct{}
 
-func (g *conicHyperbolaGen) Generate(difficulty float64) generator.Problem {
+func (g *conicHyperbolaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(3) + 2
 	b := rand.Intn(2) + 1
 	h := rand.Intn(3) - 1
@@ -943,7 +943,7 @@ func (g *conicHyperbolaGen) Generate(difficulty float64) generator.Problem {
 
 type eqAbsValGen struct{}
 
-func (g *eqAbsValGen) Generate(difficulty float64) generator.Problem {
+func (g *eqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(8) + 1
 	b := rand.Intn(10) - 5
 	return generator.Problem{
@@ -955,7 +955,7 @@ func (g *eqAbsValGen) Generate(difficulty float64) generator.Problem {
 
 type eqBinomialGen struct{}
 
-func (g *eqBinomialGen) Generate(difficulty float64) generator.Problem {
+func (g *eqBinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(6) + 1
 	k := rand.Intn(4) + 2
 	rhs := mathutil.IntPow(k, r)
@@ -968,7 +968,7 @@ func (g *eqBinomialGen) Generate(difficulty float64) generator.Problem {
 
 type eqExpGen struct{}
 
-func (g *eqExpGen) Generate(difficulty float64) generator.Problem {
+func (g *eqExpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	b := rand.Intn(4) + 2
 	e := rand.Intn(4) + 1
 	p := rand.Intn(3) + 1
@@ -982,7 +982,7 @@ func (g *eqExpGen) Generate(difficulty float64) generator.Problem {
 
 type extraneousRootsGen struct{}
 
-func (g *extraneousRootsGen) Generate(difficulty float64) generator.Problem {
+func (g *extraneousRootsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1002,7 +1002,7 @@ func (g *extraneousRootsGen) Generate(difficulty float64) generator.Problem {
 
 type eqIrrationalGen struct{}
 
-func (g *eqIrrationalGen) Generate(difficulty float64) generator.Problem {
+func (g *eqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	k := x * x
 	return generator.Problem{
@@ -1014,7 +1014,7 @@ func (g *eqIrrationalGen) Generate(difficulty float64) generator.Problem {
 
 type eqLogGen struct{}
 
-func (g *eqLogGen) Generate(difficulty float64) generator.Problem {
+func (g *eqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	b := rand.Intn(3) + 2
 	e := rand.Intn(3) + 1
 	v := mathutil.IntPow(b, e)
@@ -1027,7 +1027,7 @@ func (g *eqLogGen) Generate(difficulty float64) generator.Problem {
 
 type eqPolyGen struct{}
 
-func (g *eqPolyGen) Generate(difficulty float64) generator.Problem {
+func (g *eqPolyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(6) - 3
 	r2 := rand.Intn(6) - 3
 	// (x - r1)(x - r2) = 0
@@ -1043,7 +1043,7 @@ func (g *eqPolyGen) Generate(difficulty float64) generator.Problem {
 
 type eqRationalGen struct{}
 
-func (g *eqRationalGen) Generate(difficulty float64) generator.Problem {
+func (g *eqRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	a := rand.Intn(5) + 1
 	b := rand.Intn(5) + 1
@@ -1057,7 +1057,7 @@ func (g *eqRationalGen) Generate(difficulty float64) generator.Problem {
 
 type eqTrinomialGen struct{}
 
-func (g *eqTrinomialGen) Generate(difficulty float64) generator.Problem {
+func (g *eqTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(6) + 2
 	// x^2 + 2r x + r^2 = 0
 	return generator.Problem{
@@ -1071,7 +1071,7 @@ func (g *eqTrinomialGen) Generate(difficulty float64) generator.Problem {
 
 type funcAbsValGen struct{}
 
-func (g *funcAbsValGen) Generate(difficulty float64) generator.Problem {
+func (g *funcAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(10) - 5
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(f(x) = |x|\\), what is \\(f(%d)\\)?", x),
@@ -1082,7 +1082,7 @@ func (g *funcAbsValGen) Generate(difficulty float64) generator.Problem {
 
 type funcCompositeGen struct{}
 
-func (g *funcCompositeGen) Generate(difficulty float64) generator.Problem {
+func (g *funcCompositeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(5) + 1
 	a := rand.Intn(4) + 1
 	b := rand.Intn(4) + 1
@@ -1095,7 +1095,7 @@ func (g *funcCompositeGen) Generate(difficulty float64) generator.Problem {
 
 type funcDirichletGen struct{}
 
-func (g *funcDirichletGen) Generate(difficulty float64) generator.Problem {
+func (g *funcDirichletGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1115,7 +1115,7 @@ func (g *funcDirichletGen) Generate(difficulty float64) generator.Problem {
 
 type funcDomainGen struct{}
 
-func (g *funcDomainGen) Generate(difficulty float64) generator.Problem {
+func (g *funcDomainGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1135,7 +1135,7 @@ func (g *funcDomainGen) Generate(difficulty float64) generator.Problem {
 
 type funcEvenOddGen struct{}
 
-func (g *funcEvenOddGen) Generate(difficulty float64) generator.Problem {
+func (g *funcEvenOddGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1157,7 +1157,7 @@ func (g *funcEvenOddGen) Generate(difficulty float64) generator.Problem {
 
 type graphAnalysisGen struct{}
 
-func (g *graphAnalysisGen) Generate(difficulty float64) generator.Problem {
+func (g *graphAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1177,7 +1177,7 @@ func (g *graphAnalysisGen) Generate(difficulty float64) generator.Problem {
 
 type funcInverseGen struct{}
 
-func (g *funcInverseGen) Generate(difficulty float64) generator.Problem {
+func (g *funcInverseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(10) - 5
 	return generator.Problem{
@@ -1189,7 +1189,7 @@ func (g *funcInverseGen) Generate(difficulty float64) generator.Problem {
 
 type monotonicityGen struct{}
 
-func (g *monotonicityGen) Generate(difficulty float64) generator.Problem {
+func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	if rand.Intn(2) == 0 { a = -a }
 	return generator.Problem{
@@ -1201,7 +1201,7 @@ func (g *monotonicityGen) Generate(difficulty float64) generator.Problem {
 
 type funcRationalGen struct{}
 
-func (g *funcRationalGen) Generate(difficulty float64) generator.Problem {
+func (g *funcRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(4) + 1
 	b := rand.Intn(4) + 1
 	return generator.Problem{
@@ -1213,7 +1213,7 @@ func (g *funcRationalGen) Generate(difficulty float64) generator.Problem {
 
 type funcSigmoidGen struct{}
 
-func (g *funcSigmoidGen) Generate(difficulty float64) generator.Problem {
+func (g *funcSigmoidGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1233,7 +1233,7 @@ func (g *funcSigmoidGen) Generate(difficulty float64) generator.Problem {
 
 type funcSignGen struct{}
 
-func (g *funcSignGen) Generate(difficulty float64) generator.Problem {
+func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(10) - 5
 	if x == 0 { x = 3 }
 	ans := "positive"
@@ -1249,7 +1249,7 @@ func (g *funcSignGen) Generate(difficulty float64) generator.Problem {
 
 type ineqAbsValGen struct{}
 
-func (g *ineqAbsValGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(|x| < %d\\)", a),
@@ -1260,7 +1260,7 @@ func (g *ineqAbsValGen) Generate(difficulty float64) generator.Problem {
 
 type ineqIntervalGen struct{}
 
-func (g *ineqIntervalGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqIntervalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) - 3
 	b := a + rand.Intn(5) + 2
 	types := []struct {
@@ -1281,7 +1281,7 @@ func (g *ineqIntervalGen) Generate(difficulty float64) generator.Problem {
 
 type ineqIrrationalGen struct{}
 
-func (g *ineqIrrationalGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} > %d\\)", x),
@@ -1292,7 +1292,7 @@ func (g *ineqIrrationalGen) Generate(difficulty float64) generator.Problem {
 
 type ineqLogGen struct{}
 
-func (g *ineqLogGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	b := rand.Intn(3) + 2
 	e := rand.Intn(3) + 1
 	v := mathutil.IntPow(b, e)
@@ -1305,7 +1305,7 @@ func (g *ineqLogGen) Generate(difficulty float64) generator.Problem {
 
 type ineqQuadraticGen struct{}
 
-func (g *ineqQuadraticGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d < 0\\)", r*r),
@@ -1316,7 +1316,7 @@ func (g *ineqQuadraticGen) Generate(difficulty float64) generator.Problem {
 
 type ineqRationalGen struct{}
 
-func (g *ineqRationalGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(\\frac{1}{x-%d} > 0\\)", a),
@@ -1327,7 +1327,7 @@ func (g *ineqRationalGen) Generate(difficulty float64) generator.Problem {
 
 type signAnalysisGen struct{}
 
-func (g *signAnalysisGen) Generate(difficulty float64) generator.Problem {
+func (g *signAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x < -%d\\).", r, r, r),
@@ -1338,7 +1338,7 @@ func (g *signAnalysisGen) Generate(difficulty float64) generator.Problem {
 
 type ineqSystemsGen struct{}
 
-func (g *ineqSystemsGen) Generate(difficulty float64) generator.Problem {
+func (g *ineqSystemsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(4) + 2
 	b := rand.Intn(5) - 2
 	x := rand.Intn(4) + 1
@@ -1356,7 +1356,7 @@ func (g *ineqSystemsGen) Generate(difficulty float64) generator.Problem {
 
 type polyDivisionGen struct{}
 
-func (g *polyDivisionGen) Generate(difficulty float64) generator.Problem {
+func (g *polyDivisionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(6) + 1
 	a := rand.Intn(4) + 1
 	// (ax^2 + r*x) / x = ax + r
@@ -1369,7 +1369,7 @@ func (g *polyDivisionGen) Generate(difficulty float64) generator.Problem {
 
 type polyMonomialGen struct{}
 
-func (g *polyMonomialGen) Generate(difficulty float64) generator.Problem {
+func (g *polyMonomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	n := rand.Intn(4) + 2
 	return generator.Problem{
@@ -1381,7 +1381,7 @@ func (g *polyMonomialGen) Generate(difficulty float64) generator.Problem {
 
 type polyRootsGen struct{}
 
-func (g *polyRootsGen) Generate(difficulty float64) generator.Problem {
+func (g *polyRootsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(6) - 3
 	r2 := rand.Intn(6) - 3
 	b := -(r1 + r2)
@@ -1395,7 +1395,7 @@ func (g *polyRootsGen) Generate(difficulty float64) generator.Problem {
 
 type synthDivGen struct{}
 
-func (g *synthDivGen) Generate(difficulty float64) generator.Problem {
+func (g *synthDivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(6) - 3
 	a := rand.Intn(4) + 1
 	b := rand.Intn(5) - 2
@@ -1409,7 +1409,7 @@ func (g *synthDivGen) Generate(difficulty float64) generator.Problem {
 
 type vietaGen struct{}
 
-func (g *vietaGen) Generate(difficulty float64) generator.Problem {
+func (g *vietaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r1 := rand.Intn(6) + 1
 	r2 := rand.Intn(6) + 1
 	b := -(r1 + r2)
@@ -1425,7 +1425,7 @@ func (g *vietaGen) Generate(difficulty float64) generator.Problem {
 
 type quadComplexGen struct{}
 
-func (g *quadComplexGen) Generate(difficulty float64) generator.Problem {
+func (g *quadComplexGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	b := rand.Intn(6) + 2
 	c := (b*b)/4 + 1
 	return generator.Problem{
@@ -1437,7 +1437,7 @@ func (g *quadComplexGen) Generate(difficulty float64) generator.Problem {
 
 type quadIncompleteGen struct{}
 
-func (g *quadIncompleteGen) Generate(difficulty float64) generator.Problem {
+func (g *quadIncompleteGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	k := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d = 0\\)", k*k),
@@ -1448,7 +1448,7 @@ func (g *quadIncompleteGen) Generate(difficulty float64) generator.Problem {
 
 type quadParametricGen struct{}
 
-func (g *quadParametricGen) Generate(difficulty float64) generator.Problem {
+func (g *quadParametricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	p := rand.Intn(5) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("For what value(s) of \\(k\\) does \\(x^{2} + %dx + %d = 0\\) have exactly one solution?", 2*p, p*p),
@@ -1459,7 +1459,7 @@ func (g *quadParametricGen) Generate(difficulty float64) generator.Problem {
 
 type quadQuadraticGen struct{}
 
-func (g *quadQuadraticGen) Generate(difficulty float64) generator.Problem {
+func (g *quadQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1481,7 +1481,7 @@ func (g *quadQuadraticGen) Generate(difficulty float64) generator.Problem {
 
 type systemsConceptGen struct{}
 
-func (g *systemsConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *systemsConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1501,7 +1501,7 @@ func (g *systemsConceptGen) Generate(difficulty float64) generator.Problem {
 
 type gaussianElimGen struct{}
 
-func (g *gaussianElimGen) Generate(difficulty float64) generator.Problem {
+func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	// 2x2 system with integer solution
 	x := rand.Intn(5) - 2
 	y := rand.Intn(5) - 2

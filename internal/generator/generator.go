@@ -2,6 +2,11 @@ package generator
 
 import "github.com/chuma-beep/mathua/internal/grader"
 
+type GeneratorContext struct {
+	Difficulty float64
+	Seed       int64
+}
+
 type Problem struct {
 	Question    string
 	Answer      string
@@ -9,7 +14,7 @@ type Problem struct {
 }
 
 type Generator interface {
-	Generate(difficulty float64) Problem
+	Generate(ctx GeneratorContext) Problem
 }
 
 // GradedGenerator is a Generator that can grade its own answers.

@@ -54,8 +54,8 @@ func Register(reg *generator.Registry) {
 
 type readTableGen struct{}
 
-func (g *readTableGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *readTableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	numRows := rand.Intn(max(1, scale/2)) + 3
 	numCols := rand.Intn(max(1, scale/2)) + 2
 	rowLabels := make([]string, numRows)
@@ -108,8 +108,8 @@ func (g *readTableGen) Generate(difficulty float64) generator.Problem {
 
 type barGraphGen struct{}
 
-func (g *barGraphGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *barGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(3) + 3
 	labels := make([]string, n)
 	values := make([]int, n)
@@ -146,8 +146,8 @@ func (g *barGraphGen) Generate(difficulty float64) generator.Problem {
 
 type linePlotGen struct{}
 
-func (g *linePlotGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *linePlotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(3) + 4
 	xs := make([]int, n)
 	ys := make([]int, n)
@@ -179,8 +179,8 @@ func (g *linePlotGen) Generate(difficulty float64) generator.Problem {
 
 type meanGen struct{}
 
-func (g *meanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *meanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(4) + 4
 	vals := make([]int, n)
 	sum := 0
@@ -202,8 +202,8 @@ func (g *meanGen) Generate(difficulty float64) generator.Problem {
 
 type medianGen struct{}
 
-func (g *medianGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *medianGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(5) + 5
 	vals := make([]int, n)
 	for i := 0; i < n; i++ {
@@ -243,8 +243,8 @@ func (g *medianGen) Generate(difficulty float64) generator.Problem {
 
 type modeGen struct{}
 
-func (g *modeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *modeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(5) + 5
 	base := rand.Intn(max(1, scale*4)) + 1
 	modeVal := base + rand.Intn(10)
@@ -275,8 +275,8 @@ func (g *modeGen) Generate(difficulty float64) generator.Problem {
 
 type rangeGen struct{}
 
-func (g *rangeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *rangeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(5) + 5
 	vals := make([]int, n)
 	minVal := rand.Intn(max(1, scale*4)) + 1
@@ -307,7 +307,7 @@ func (g *rangeGen) Generate(difficulty float64) generator.Problem {
 
 type sampleSpaceGen struct{}
 
-func (g *sampleSpaceGen) Generate(difficulty float64) generator.Problem {
+func (g *sampleSpaceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scenarios := []struct {
 		question string
 		count    int
@@ -329,8 +329,8 @@ func (g *sampleSpaceGen) Generate(difficulty float64) generator.Problem {
 
 type basicProbGen struct{}
 
-func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *basicProbGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow", "orange", "purple"}
 	counts := make([]int, 3)
 	total := 0
@@ -356,8 +356,8 @@ func (g *basicProbGen) Generate(difficulty float64) generator.Problem {
 
 type complementProbGen struct{}
 
-func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *complementProbGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow", "orange", "purple"}
 	counts := make([]int, 3)
 	total := 0
@@ -383,8 +383,8 @@ func (g *complementProbGen) Generate(difficulty float64) generator.Problem {
 
 type compoundProbGen struct{}
 
-func (g *compoundProbGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *compoundProbGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	colors := []string{"red", "blue", "green", "yellow"}
 	counts := make([]int, 3)
 	total := 0
@@ -414,7 +414,7 @@ func (g *compoundProbGen) Generate(difficulty float64) generator.Problem {
 
 type countingGen struct{}
 
-func (g *countingGen) Generate(difficulty float64) generator.Problem {
+func (g *countingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	categories := []struct {
 		name    string
 		options []string
@@ -461,7 +461,7 @@ func (g *countingGen) Generate(difficulty float64) generator.Problem {
 
 type covarianceGen struct{}
 
-func (g *covarianceGen) Generate(difficulty float64) generator.Problem {
+func (g *covarianceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -485,8 +485,8 @@ func (g *covarianceGen) Generate(difficulty float64) generator.Problem {
 
 type geometricMeanGen struct{}
 
-func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *geometricMeanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	p := float64(a * b)
@@ -506,8 +506,8 @@ func (g *geometricMeanGen) Generate(difficulty float64) generator.Problem {
 
 type harmonicMeanGen struct{}
 
-func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *harmonicMeanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := (rand.Intn(max(1, scale)) + 2) * 2
 	b := (rand.Intn(max(1, scale)) + 2) * 2
 	numer := 2 * a * b
@@ -522,8 +522,8 @@ func (g *harmonicMeanGen) Generate(difficulty float64) generator.Problem {
 
 type rmsGen struct{}
 
-func (g *rmsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *rmsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	sq := float64(a*a + b*b)
@@ -545,8 +545,8 @@ func (g *rmsGen) Generate(difficulty float64) generator.Problem {
 
 type varianceGen struct{}
 
-func (g *varianceGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	vals := make([]int, 5)
 	sum := 0
 	for i := range vals {
@@ -575,7 +575,7 @@ func (g *varianceGen) Generate(difficulty float64) generator.Problem {
 
 type bernoulliGen struct{}
 
-func (g *bernoulliGen) Generate(difficulty float64) generator.Problem {
+func (g *bernoulliGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -599,7 +599,7 @@ func (g *bernoulliGen) Generate(difficulty float64) generator.Problem {
 
 type betaGen struct{}
 
-func (g *betaGen) Generate(difficulty float64) generator.Problem {
+func (g *betaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -623,7 +623,7 @@ func (g *betaGen) Generate(difficulty float64) generator.Problem {
 
 type binomialDistGen struct{}
 
-func (g *binomialDistGen) Generate(difficulty float64) generator.Problem {
+func (g *binomialDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -647,7 +647,7 @@ func (g *binomialDistGen) Generate(difficulty float64) generator.Problem {
 
 type chiSquareGen struct{}
 
-func (g *chiSquareGen) Generate(difficulty float64) generator.Problem {
+func (g *chiSquareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -671,7 +671,7 @@ func (g *chiSquareGen) Generate(difficulty float64) generator.Problem {
 
 type exponentialDistGen struct{}
 
-func (g *exponentialDistGen) Generate(difficulty float64) generator.Problem {
+func (g *exponentialDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -695,7 +695,7 @@ func (g *exponentialDistGen) Generate(difficulty float64) generator.Problem {
 
 type gammaDistGen struct{}
 
-func (g *gammaDistGen) Generate(difficulty float64) generator.Problem {
+func (g *gammaDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -719,7 +719,7 @@ func (g *gammaDistGen) Generate(difficulty float64) generator.Problem {
 
 type geometricDistGen struct{}
 
-func (g *geometricDistGen) Generate(difficulty float64) generator.Problem {
+func (g *geometricDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -743,7 +743,7 @@ func (g *geometricDistGen) Generate(difficulty float64) generator.Problem {
 
 type hypergeometricGen struct{}
 
-func (g *hypergeometricGen) Generate(difficulty float64) generator.Problem {
+func (g *hypergeometricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -767,7 +767,7 @@ func (g *hypergeometricGen) Generate(difficulty float64) generator.Problem {
 
 type normalDistGen struct{}
 
-func (g *normalDistGen) Generate(difficulty float64) generator.Problem {
+func (g *normalDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -793,7 +793,7 @@ func (g *normalDistGen) Generate(difficulty float64) generator.Problem {
 
 type poissonGen struct{}
 
-func (g *poissonGen) Generate(difficulty float64) generator.Problem {
+func (g *poissonGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -817,7 +817,7 @@ func (g *poissonGen) Generate(difficulty float64) generator.Problem {
 
 type studentTGen struct{}
 
-func (g *studentTGen) Generate(difficulty float64) generator.Problem {
+func (g *studentTGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -841,7 +841,7 @@ func (g *studentTGen) Generate(difficulty float64) generator.Problem {
 
 type uniformDistGen struct{}
 
-func (g *uniformDistGen) Generate(difficulty float64) generator.Problem {
+func (g *uniformDistGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -865,7 +865,7 @@ func (g *uniformDistGen) Generate(difficulty float64) generator.Problem {
 
 type zTableGen struct{}
 
-func (g *zTableGen) Generate(difficulty float64) generator.Problem {
+func (g *zTableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -893,7 +893,7 @@ func (g *zTableGen) Generate(difficulty float64) generator.Problem {
 
 type confidenceGen struct{}
 
-func (g *confidenceGen) Generate(difficulty float64) generator.Problem {
+func (g *confidenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -917,7 +917,7 @@ func (g *confidenceGen) Generate(difficulty float64) generator.Problem {
 
 type samplingGen struct{}
 
-func (g *samplingGen) Generate(difficulty float64) generator.Problem {
+func (g *samplingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -943,7 +943,7 @@ func (g *samplingGen) Generate(difficulty float64) generator.Problem {
 
 type bayesGen struct{}
 
-func (g *bayesGen) Generate(difficulty float64) generator.Problem {
+func (g *bayesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -967,7 +967,7 @@ func (g *bayesGen) Generate(difficulty float64) generator.Problem {
 
 type continuousRVGen struct{}
 
-func (g *continuousRVGen) Generate(difficulty float64) generator.Problem {
+func (g *continuousRVGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -991,7 +991,7 @@ func (g *continuousRVGen) Generate(difficulty float64) generator.Problem {
 
 type discreteRVGen struct{}
 
-func (g *discreteRVGen) Generate(difficulty float64) generator.Problem {
+func (g *discreteRVGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string
@@ -1015,7 +1015,7 @@ func (g *discreteRVGen) Generate(difficulty float64) generator.Problem {
 
 type expectedValueGen struct{}
 
-func (g *expectedValueGen) Generate(difficulty float64) generator.Problem {
+func (g *expectedValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string

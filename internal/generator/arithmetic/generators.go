@@ -79,7 +79,7 @@ type addGen struct {
 	ensureCarry bool
 }
 
-func (g *addGen) Generate(difficulty float64) generator.Problem {
+func (g *addGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	diffA := g.maxA - g.minA
 	if diffA <= 0 {
 		diffA = 1
@@ -88,7 +88,7 @@ func (g *addGen) Generate(difficulty float64) generator.Problem {
 	if diffB <= 0 {
 		diffB = 1
 	}
-	scale := int(1 + difficulty*float64(diffA)/10)
+	scale := int(1 + ctx.Difficulty*float64(diffA)/10)
 	scale = max(scale, 1)
 	a := rand.Intn(min(diffA, scale*10)) + g.minA
 	b := rand.Intn(min(diffB, scale*10)) + g.minB
@@ -109,7 +109,7 @@ func (g *addGen) Generate(difficulty float64) generator.Problem {
 
 type addWordGen struct{}
 
-func (g *addWordGen) Generate(difficulty float64) generator.Problem {
+func (g *addWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(50) + 1
 	b := rand.Intn(50) + 1
 	items := []string{"apples", "marbles", "stickers", "crayons", "pencils"}
@@ -126,7 +126,7 @@ type subGen struct {
 	minB, maxB int
 }
 
-func (g *subGen) Generate(difficulty float64) generator.Problem {
+func (g *subGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(g.maxA-g.minA+1) + g.minA
 	bMax := a - g.minB
 	if bMax < g.minB {
@@ -142,8 +142,8 @@ func (g *subGen) Generate(difficulty float64) generator.Problem {
 
 type subBorrowGen struct{}
 
-func (g *subBorrowGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *subBorrowGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	tensA := rand.Intn(max(1, scale*2)) + 1
 	onesA := rand.Intn(max(1, scale*2))
 	onesB := onesA + rand.Intn(10-onesA) + 1
@@ -162,8 +162,8 @@ func (g *subBorrowGen) Generate(difficulty float64) generator.Problem {
 
 type subWordGen struct{}
 
-func (g *subWordGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *subWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*16)) + 20
 	b := rand.Intn(a-1) + 1
 	items := []string{"candies", "pencils", "cards", "coins", "beads"}
@@ -180,7 +180,7 @@ type placeValueGen struct {
 	label string
 }
 
-func (g *placeValueGen) Generate(difficulty float64) generator.Problem {
+func (g *placeValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	max := g.max
 	if max <= 1 {
 		max = 2
@@ -218,7 +218,7 @@ type roundGen struct {
 	to int
 }
 
-func (g *roundGen) Generate(difficulty float64) generator.Problem {
+func (g *roundGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	to := g.to
 	if to <= 0 {
 		to = 1
@@ -236,8 +236,8 @@ func (g *roundGen) Generate(difficulty float64) generator.Problem {
 
 type multConceptGen struct{}
 
-func (g *multConceptGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *multConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale)) + 2
 	b := rand.Intn(max(1, scale)) + 2
 	return generator.Problem{
@@ -251,11 +251,11 @@ type multByGen struct {
 	factor int
 }
 
-func (g *multByGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *multByGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	f := []int{2, 5, 10}[rand.Intn(3)]
 	n := rand.Intn(max(1, scale*2)) + 1
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		n = rand.Intn(20) + 1
 	}
 	return generator.Problem{
@@ -267,8 +267,8 @@ func (g *multByGen) Generate(difficulty float64) generator.Problem {
 
 type multTablesGen struct{}
 
-func (g *multTablesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *multTablesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	return generator.Problem{
@@ -283,7 +283,7 @@ type multGen struct {
 	minB, maxB int
 }
 
-func (g *multGen) Generate(difficulty float64) generator.Problem {
+func (g *multGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(g.maxA-g.minA+1) + g.minA
 	b := rand.Intn(g.maxB-g.minB+1) + g.minB
 	return generator.Problem{
@@ -295,8 +295,8 @@ func (g *multGen) Generate(difficulty float64) generator.Problem {
 
 type multWordGen struct{}
 
-func (g *multWordGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *multWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	items := []string{"stickers", "cards", "beads", "coins", "marbles"}
@@ -310,7 +310,7 @@ func (g *multWordGen) Generate(difficulty float64) generator.Problem {
 
 type divConceptGen struct{}
 
-func (g *divConceptGen) Generate(difficulty float64) generator.Problem {
+func (g *divConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 2
 	b := rand.Intn(5) + 2
 	total := a * b
@@ -323,8 +323,8 @@ func (g *divConceptGen) Generate(difficulty float64) generator.Problem {
 
 type divBasicGen struct{}
 
-func (g *divBasicGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divBasicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	b := rand.Intn(max(1, scale*2)) + 1
 	a := b * (rand.Intn(max(1, scale*2)) + 1)
 	return generator.Problem{
@@ -338,8 +338,8 @@ type divRemainderGen struct{}
 
 var remainderRe = regexp.MustCompile(`^(-?\d+)\s*R\s*(\d+)$`)
 
-func (g *divRemainderGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divRemainderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	b := rand.Intn(max(1, scale*2)) + 2
 	r := rand.Intn(b-1) + 1
 	a := b*(rand.Intn(max(1, scale*2))+1) + r
@@ -364,8 +364,8 @@ func (g *divRemainderGen) Grade(expected, answer string) grader.Result {
 
 type divLongGen struct{}
 
-func (g *divLongGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divLongGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	b := rand.Intn(max(1, scale*2)) + 2
 	q := rand.Intn(50) + 10
 	a := b * q
@@ -378,8 +378,8 @@ func (g *divLongGen) Generate(difficulty float64) generator.Problem {
 
 type divWordGen struct{}
 
-func (g *divWordGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	b := rand.Intn(max(1, scale*2)) + 2
 	q := rand.Intn(12) + 1
 	a := b * q
@@ -413,8 +413,8 @@ func parseFactorSet(s string) map[int]bool {
 	return out
 }
 
-func (g *factorFindGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *factorFindGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(max(10, scale*10)) + 10
 	var factors []int
 	for i := 1; i <= n; i++ {
@@ -452,8 +452,8 @@ func (g *factorFindGen) Grade(expected, answer string) grader.Result {
 
 type primeGen struct{}
 
-func (g *primeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *primeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47}
 	composites := []int{4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25}
 	if rand.Intn(2) == 0 {
@@ -474,8 +474,8 @@ func (g *primeGen) Generate(difficulty float64) generator.Problem {
 
 type primeFactGen struct{}
 
-func (g *primeFactGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *primeFactGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(scale*20) + 2
 	factors := primeFactors(n)
 	fStr := make([]string, len(factors))
@@ -505,8 +505,8 @@ func primeFactors(n int) []int {
 
 type gcfGen struct{}
 
-func (g *gcfGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *gcfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(10, scale*10)) + 10
 	b := rand.Intn(max(10, scale*10)) + 10
 	result := mathutil.GCD(a, b)
@@ -519,8 +519,8 @@ func (g *gcfGen) Generate(difficulty float64) generator.Problem {
 
 type lcmGen struct{}
 
-func (g *lcmGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *lcmGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(4, scale*4)) + 2
 	b := rand.Intn(max(4, scale*4)) + 2
 	l := a * b / mathutil.GCD(a, b)
@@ -533,8 +533,8 @@ func (g *lcmGen) Generate(difficulty float64) generator.Problem {
 
 type compositeGen struct{}
 
-func (g *compositeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *compositeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(scale*20) + 4
 	isComposite := false
 	for i := 2; i*i <= n; i++ {
@@ -558,8 +558,8 @@ func (g *compositeGen) Generate(difficulty float64) generator.Problem {
 
 type expConceptGen struct{}
 
-func (g *expConceptGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *expConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale)) + 2
 	exp := rand.Intn(3) + 2
 	return generator.Problem{
@@ -571,11 +571,11 @@ func (g *expConceptGen) Generate(difficulty float64) generator.Problem {
 
 type expEvalGen struct{}
 
-func (g *expEvalGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *expEvalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale*2)) + 2
 	exp := rand.Intn(max(1, scale)) + 1
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		exp = rand.Intn(max(1, scale)) + 3
 	}
 	return generator.Problem{
@@ -587,8 +587,8 @@ func (g *expEvalGen) Generate(difficulty float64) generator.Problem {
 
 type expProductRuleGen struct{}
 
-func (g *expProductRuleGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *expProductRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale)) + 2
 	e1 := rand.Intn(max(1, scale)) + 1
 	e2 := rand.Intn(max(1, scale)) + 1
@@ -601,8 +601,8 @@ func (g *expProductRuleGen) Generate(difficulty float64) generator.Problem {
 
 type expQuotientRuleGen struct{}
 
-func (g *expQuotientRuleGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *expQuotientRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale)) + 2
 	e1 := rand.Intn(max(1, scale)) + 3
 	e2 := rand.Intn(max(1, scale/2+1)) + 1
@@ -615,8 +615,8 @@ func (g *expQuotientRuleGen) Generate(difficulty float64) generator.Problem {
 
 type expPowerRuleGen struct{}
 
-func (g *expPowerRuleGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *expPowerRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale)) + 2
 	e1 := rand.Intn(max(1, scale)) + 1
 	e2 := rand.Intn(max(1, scale)) + 1
@@ -629,10 +629,10 @@ func (g *expPowerRuleGen) Generate(difficulty float64) generator.Problem {
 
 type sqrtPerfectGen struct{}
 
-func (g *sqrtPerfectGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *sqrtPerfectGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	r := rand.Intn(max(1, scale*2)) + 1
-	if difficulty > 0.5 {
+	if ctx.Difficulty > 0.5 {
 		r = rand.Intn(20) + 1
 	}
 	return generator.Problem{
@@ -646,8 +646,8 @@ type sqrtSimplifyGen struct{}
 
 var sqrtRe = regexp.MustCompile(`^(-?\d+)\s*sqrt\(\s*(\d+)\s*\)$`)
 
-func (g *sqrtSimplifyGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *sqrtSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	perfects := []int{2, 3, 4, 5, 6}
 	square := perfects[rand.Intn(len(perfects))]
 	b := rand.Intn(max(1, scale*2)) + 2
@@ -673,8 +673,8 @@ func (g *sqrtSimplifyGen) Grade(expected, answer string) grader.Result {
 
 type negNumberLineGen struct{}
 
-func (g *negNumberLineGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *negNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(scale*2) - scale
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the opposite of %d?", a),
@@ -685,8 +685,8 @@ func (g *negNumberLineGen) Generate(difficulty float64) generator.Problem {
 
 type negAddSubGen struct{}
 
-func (g *negAddSubGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *negAddSubGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(scale*4) - scale*2
 	b := rand.Intn(scale*2) - scale
 	return generator.Problem{
@@ -698,8 +698,8 @@ func (g *negAddSubGen) Generate(difficulty float64) generator.Problem {
 
 type negMultDivGen struct{}
 
-func (g *negMultDivGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *negMultDivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(scale*2) - scale
 	if a == 0 {
 		a = 1
@@ -720,8 +720,8 @@ type orderOpsGen struct {
 	exponents bool
 }
 
-func (g *orderOpsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(scale*2) + 1
 	b := rand.Intn(scale*2) + 1
 	c := rand.Intn(max(1, scale)) + 1
@@ -748,8 +748,8 @@ func (g *orderOpsGen) Generate(difficulty float64) generator.Problem {
 
 type decIntroGen struct{}
 
-func (g *decIntroGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *decIntroGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	ones := rand.Intn(max(1, scale)) + 1
 	tenths := rand.Intn(max(1, scale))
 	return generator.Problem{

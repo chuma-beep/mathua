@@ -37,7 +37,7 @@ func Register(reg *generator.Registry) {
 
 type pointsLinesGen struct{}
 
-func (g *pointsLinesGen) Generate(difficulty float64) generator.Problem {
+func (g *pointsLinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	items := []string{"point", "line", "ray", "line segment"}
 	descs := []string{"an exact location with no size", "goes forever in two directions", "has one endpoint and goes forever", "has two endpoints"}
 	i := rand.Intn(4)
@@ -50,8 +50,8 @@ func (g *pointsLinesGen) Generate(difficulty float64) generator.Problem {
 
 type angleTypesGen struct{}
 
-func (g *angleTypesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *angleTypesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	deg := rand.Intn(max(1, scale*30))
 	ans := "straight"
 	if deg < 90 {
@@ -70,8 +70,8 @@ func (g *angleTypesGen) Generate(difficulty float64) generator.Problem {
 
 type angleMeasureGen struct{}
 
-func (g *angleMeasureGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *angleMeasureGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*30)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("An angle of %d degrees is a:", a),
@@ -95,8 +95,8 @@ func classAngle(d int) string {
 
 type complementaryGen struct{}
 
-func (g *complementaryGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *complementaryGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*15)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Two angles are complementary. One is %d degrees. What is the other?", a),
@@ -107,8 +107,8 @@ func (g *complementaryGen) Generate(difficulty float64) generator.Problem {
 
 type verticalAnglesGen struct{}
 
-func (g *verticalAnglesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *verticalAnglesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*30)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Two lines intersect. One angle is %d degrees. What is the vertical angle?", a),
@@ -119,8 +119,8 @@ func (g *verticalAnglesGen) Generate(difficulty float64) generator.Problem {
 
 type triangleTypesGen struct{}
 
-func (g *triangleTypesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *triangleTypesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	sides := []int{rand.Intn(max(1, scale*2)) + 2, rand.Intn(max(1, scale*2)) + 2, rand.Intn(max(1, scale*2)) + 2}
 	ans := "scalene"
 	if sides[0] == sides[1] && sides[1] == sides[2] {
@@ -137,8 +137,8 @@ func (g *triangleTypesGen) Generate(difficulty float64) generator.Problem {
 
 type triangleAnglesGen struct{}
 
-func (g *triangleAnglesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *triangleAnglesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*15)) + 30
 	b := rand.Intn(max(1, scale*15)) + 20
 	c := 180 - a - b
@@ -151,8 +151,8 @@ func (g *triangleAnglesGen) Generate(difficulty float64) generator.Problem {
 
 type triangleAreaGen struct{}
 
-func (g *triangleAreaGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *triangleAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := (rand.Intn(max(1, scale*4)) + 1) * 2
 	height := rand.Intn(max(1, scale*4)) + 1
 	area := base * height / 2
@@ -165,8 +165,8 @@ func (g *triangleAreaGen) Generate(difficulty float64) generator.Problem {
 
 type pythagoreanGen struct{}
 
-func (g *pythagoreanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *pythagoreanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*3)) + 3
 	b := rand.Intn(max(1, scale*3)) + 3
 	cSq := a*a + b*b
@@ -186,7 +186,7 @@ func (g *pythagoreanGen) Generate(difficulty float64) generator.Problem {
 
 type quadTypesGen struct{}
 
-func (g *quadTypesGen) Generate(difficulty float64) generator.Problem {
+func (g *quadTypesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	types := []struct{ name, desc string }{
 		{"square", "all sides equal and all angles 90 degrees"},
 		{"rectangle", "opposite sides equal and all angles 90 degrees"},
@@ -204,8 +204,8 @@ func (g *quadTypesGen) Generate(difficulty float64) generator.Problem {
 
 type quadAreaGen struct{}
 
-func (g *quadAreaGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *quadAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	base := rand.Intn(max(1, scale*4)) + 5
 	height := rand.Intn(max(1, scale*4)) + 5
 	shape := []string{"rectangle", "parallelogram"}[rand.Intn(2)]
@@ -218,8 +218,8 @@ func (g *quadAreaGen) Generate(difficulty float64) generator.Problem {
 
 type quadPerimGen struct{}
 
-func (g *quadPerimGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *quadPerimGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	w := rand.Intn(max(1, scale*5)) + 5
 	h := rand.Intn(max(1, scale*5)) + 5
 	return generator.Problem{
@@ -231,7 +231,7 @@ func (g *quadPerimGen) Generate(difficulty float64) generator.Problem {
 
 type circlePartsGen struct{}
 
-func (g *circlePartsGen) Generate(difficulty float64) generator.Problem {
+func (g *circlePartsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	parts := []string{"radius", "diameter", "circumference", "chord"}
 	descs := []string{"distance from center to edge", "distance across the circle through center", "distance around the circle", "a line from one edge to another (not through center)"}
 	i := rand.Intn(4)
@@ -244,8 +244,8 @@ func (g *circlePartsGen) Generate(difficulty float64) generator.Problem {
 
 type circumferenceGen struct{}
 
-func (g *circumferenceGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *circumferenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	r := rand.Intn(max(1, scale*4)) + 5
 	pi := 3.14
 	circ := math.Round(2 * pi * float64(r))
@@ -258,8 +258,8 @@ func (g *circumferenceGen) Generate(difficulty float64) generator.Problem {
 
 type circleAreaGen struct{}
 
-func (g *circleAreaGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *circleAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	r := rand.Intn(max(1, scale*2)) + 3
 	area := math.Round(3.14 * float64(r*r))
 	return generator.Problem{
@@ -271,8 +271,8 @@ func (g *circleAreaGen) Generate(difficulty float64) generator.Problem {
 
 type coordPlotGen struct{}
 
-func (g *coordPlotGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *coordPlotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x := rand.Intn(max(1, scale*2)) - 5
 	y := rand.Intn(max(1, scale*2)) - 5
 	return generator.Problem{
@@ -299,8 +299,8 @@ func quad(x, y int) string {
 
 type coordDistanceGen struct{}
 
-func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *coordDistanceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	dx := rand.Intn(max(1, scale*4)) + 1
 	dy := rand.Intn(max(1, scale*4)) + 1
 	dist := int(math.Round(math.Sqrt(float64(dx*dx + dy*dy))))
@@ -320,8 +320,8 @@ func (g *coordDistanceGen) Generate(difficulty float64) generator.Problem {
 
 type coordMidpointGen struct{}
 
-func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *coordMidpointGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x1 := (rand.Intn(max(1, scale*2)) + 1) * 2
 	y1 := (rand.Intn(max(1, scale*2)) + 1) * 2
 	x2 := x1 + (rand.Intn(5)+1)*2
@@ -335,8 +335,8 @@ func (g *coordMidpointGen) Generate(difficulty float64) generator.Problem {
 
 type volumeGen struct{}
 
-func (g *volumeGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *volumeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	l := rand.Intn(max(1, scale*2)) + 2
 	w := rand.Intn(max(1, scale*2)) + 2
 	h := rand.Intn(max(1, scale*2)) + 2
@@ -349,8 +349,8 @@ func (g *volumeGen) Generate(difficulty float64) generator.Problem {
 
 type surfaceAreaGen struct{}
 
-func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *surfaceAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	l := rand.Intn(max(1, scale*2)) + 2
 	w := rand.Intn(max(1, scale*2)) + 2
 	h := rand.Intn(max(1, scale*2)) + 2
@@ -364,8 +364,8 @@ func (g *surfaceAreaGen) Generate(difficulty float64) generator.Problem {
 
 type coordLinesGen struct{}
 
-func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *coordLinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x1 := rand.Intn(max(1, scale)) - 2
 	y1 := rand.Intn(max(1, scale)) - 2
 	x2 := x1 + rand.Intn(max(1, scale)) + 1
@@ -416,7 +416,7 @@ func (g *coordLinesGen) Generate(difficulty float64) generator.Problem {
 
 type coordPolarGen struct{}
 
-func (g *coordPolarGen) Generate(difficulty float64) generator.Problem {
+func (g *coordPolarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		r, theta int
 		x, y     int

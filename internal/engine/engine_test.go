@@ -12,7 +12,7 @@ type testGen struct {
 	answer string
 }
 
-func (g *testGen) Generate(difficulty float64) generator.Problem {
+func (g *testGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{
 		Question:    "What is the answer?",
 		Answer:      g.answer,

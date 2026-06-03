@@ -21,8 +21,8 @@ func Register(reg *generator.Registry) {
 
 type divisibilityGen struct{}
 
-func (g *divisibilityGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *divisibilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*45)) + 6
 	d := rand.Intn(max(1, scale*10)) + 2
 	divisible := a%d == 0
@@ -52,8 +52,8 @@ func (g *divisibilityGen) Generate(difficulty float64) generator.Problem {
 
 type gcdEuclideanGen struct{}
 
-func (g *gcdEuclideanGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *gcdEuclideanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*37)) + 12
 	b := rand.Intn(max(1, scale*37)) + 12
 	gcd := mathutil.GCD(a, b)
@@ -66,8 +66,8 @@ func (g *gcdEuclideanGen) Generate(difficulty float64) generator.Problem {
 
 type modularGen struct{}
 
-func (g *modularGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *modularGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	a := rand.Intn(max(1, scale*30)) + 5
 	m := rand.Intn(max(1, scale*16)) + 2
 	ans := a % m
@@ -80,8 +80,8 @@ func (g *modularGen) Generate(difficulty float64) generator.Problem {
 
 type congruenceGen struct{}
 
-func (g *congruenceGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *congruenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	m := rand.Intn(max(1, scale*10)) + 2
 	a := rand.Intn(max(1, scale*30)) + 1
 	b := a + m*rand.Intn(max(1, scale*5))
@@ -105,7 +105,7 @@ func (g *congruenceGen) Generate(difficulty float64) generator.Problem {
 
 type fermatLittleGen struct{}
 
-func (g *fermatLittleGen) Generate(difficulty float64) generator.Problem {
+func (g *fermatLittleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	primes := []int{3, 5, 7, 11, 13}
 	p := primes[rand.Intn(len(primes))]
 	a := rand.Intn(p-2) + 2
@@ -119,8 +119,8 @@ func (g *fermatLittleGen) Generate(difficulty float64) generator.Problem {
 
 type eulerPhiGen struct{}
 
-func (g *eulerPhiGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *eulerPhiGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(max(1, scale*23)) + 8
 	phi := 0
 	for k := 1; k <= n; k++ {
@@ -137,8 +137,8 @@ func (g *eulerPhiGen) Generate(difficulty float64) generator.Problem {
 
 type diophantineGen struct{}
 
-func (g *diophantineGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *diophantineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	x := rand.Intn(max(1, scale*10)) + 1
 	y := rand.Intn(max(1, scale*10)) + 1
 	c := 3*x + 5*y
@@ -151,7 +151,7 @@ func (g *diophantineGen) Generate(difficulty float64) generator.Problem {
 
 type cryptoGen struct{}
 
-func (g *cryptoGen) Generate(difficulty float64) generator.Problem {
+func (g *cryptoGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	primes := []int{3, 5, 7, 11, 13}
 	p := primes[rand.Intn(len(primes))]
 	q := primes[rand.Intn(len(primes))]

@@ -32,7 +32,7 @@ func Register(reg *generator.Registry) {
 
 type propositionsGen struct{}
 
-func (g *propositionsGen) Generate(difficulty float64) generator.Problem {
+func (g *propositionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		statement string
 		isProp    string
@@ -60,7 +60,7 @@ func (g *propositionsGen) Generate(difficulty float64) generator.Problem {
 
 type connectivesGen struct{}
 
-func (g *connectivesGen) Generate(difficulty float64) generator.Problem {
+func (g *connectivesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type assignment struct {
 		p, q  bool
 		label string
@@ -119,7 +119,7 @@ func boolStr(b bool) string {
 
 type truthTablesGen struct{}
 
-func (g *truthTablesGen) Generate(difficulty float64) generator.Problem {
+func (g *truthTablesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type expr struct {
 		name        string
 		description string
@@ -178,7 +178,7 @@ func (g *truthTablesGen) Generate(difficulty float64) generator.Problem {
 
 type quantifiersGen struct{}
 
-func (g *quantifiersGen) Generate(difficulty float64) generator.Problem {
+func (g *quantifiersGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	sets := [][]int{
 		{1, 2, 3},
 		{2, 4, 6},
@@ -311,7 +311,7 @@ func (g *quantifiersGen) Generate(difficulty float64) generator.Problem {
 
 type setOpsGen struct{}
 
-func (g *setOpsGen) Generate(difficulty float64) generator.Problem {
+func (g *setOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	allElements := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 
 	type pair struct {
@@ -452,7 +452,7 @@ func formatSet(s []int) string {
 
 type vennGen struct{}
 
-func (g *vennGen) Generate(difficulty float64) generator.Problem {
+func (g *vennGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type scenario struct {
 		a, b, both, universe int
 	}
@@ -510,7 +510,7 @@ func (g *vennGen) Generate(difficulty float64) generator.Problem {
 
 type permutationsGen struct{}
 
-func (g *permutationsGen) Generate(difficulty float64) generator.Problem {
+func (g *permutationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qType struct {
 		question string
 		answer   int
@@ -572,7 +572,7 @@ func (g *permutationsGen) Generate(difficulty float64) generator.Problem {
 
 type combinationsGen struct{}
 
-func (g *combinationsGen) Generate(difficulty float64) generator.Problem {
+func (g *combinationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type combo struct {
 		n, k, result int
 	}
@@ -616,8 +616,8 @@ func (g *combinationsGen) Generate(difficulty float64) generator.Problem {
 
 type pascalGen struct{}
 
-func (g *pascalGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *pascalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	n := rand.Intn(max(1, scale)) + 2
 	row := pascalRow(n)
 	parts := make([]string, len(row))
@@ -649,8 +649,8 @@ func pascalRow(n int) []int {
 
 type graphBasicsGen struct{}
 
-func (g *graphBasicsGen) Generate(difficulty float64) generator.Problem {
-	scale := int(1 + difficulty*5)
+func (g *graphBasicsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
 	vertices := []string{"A", "B", "C", "D", "E"}
 	n := len(vertices)
 
@@ -723,7 +723,7 @@ func (g *graphBasicsGen) Generate(difficulty float64) generator.Problem {
 
 type graphPathsGen struct{}
 
-func (g *graphPathsGen) Generate(difficulty float64) generator.Problem {
+func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	connected := rand.Intn(2) == 0
 
 	var edges []string
@@ -784,7 +784,7 @@ func (g *graphPathsGen) Generate(difficulty float64) generator.Problem {
 
 type treesGen struct{}
 
-func (g *treesGen) Generate(difficulty float64) generator.Problem {
+func (g *treesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qType struct {
 		question string
 		answer   string
@@ -835,7 +835,7 @@ func (g *treesGen) Generate(difficulty float64) generator.Problem {
 
 type recurrenceGen struct{}
 
-func (g *recurrenceGen) Generate(difficulty float64) generator.Problem {
+func (g *recurrenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qType struct {
 		question string
 		answer   string
@@ -896,7 +896,7 @@ func (g *recurrenceGen) Generate(difficulty float64) generator.Problem {
 
 type binomialTheoremGen struct{}
 
-func (g *binomialTheoremGen) Generate(difficulty float64) generator.Problem {
+func (g *binomialTheoremGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		n, k   int
 		coeff  int
@@ -936,7 +936,7 @@ func (g *binomialTheoremGen) Generate(difficulty float64) generator.Problem {
 
 type inductionGen struct{}
 
-func (g *inductionGen) Generate(difficulty float64) generator.Problem {
+func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type qType struct {
 		question string
 		answer   string

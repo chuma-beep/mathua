@@ -12,7 +12,7 @@ func Register(reg *generator.Registry) {
 
 type backpropGen struct{}
 
-func (g *backpropGen) Generate(difficulty float64) generator.Problem {
+func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		question string
 		answer   string

@@ -4,7 +4,7 @@ type Stub struct {
 	ConceptID string
 }
 
-func (s *Stub) Generate(difficulty float64) Problem {
+func (s *Stub) Generate(ctx GeneratorContext) Problem {
 	return Problem{
 		Question:    "This concept is not yet available for practice. Please check back later.",
 		Answer:      "unavailable",

@@ -140,10 +140,13 @@
   --normal-text: var(--text-primary);
   --success-bg: var(--surface);
   --success-border: var(--accent-green);
+  --success-text: var(--accent-green);
   --error-bg: var(--surface);
   --error-border: var(--accent-red);
+  --error-text: var(--accent-red);
   --info-bg: var(--surface);
   --info-border: var(--accent-blue);
+  --info-text: var(--accent-blue);
 }
 
 [data-sonner-toaster][data-theme="dark"] {
@@ -154,10 +157,10 @@
 
 [data-sonner-toast] {
   border-radius: 0 !important;
-  font-family: var(--font-ibm-plex-mono) !important;
-}
-
-[data-sonner-toast][data-styled="true"] {
-  border-radius: 0 !important;
   border-width: 0.5px !important;
+  font-family: var(--font-ibm-plex-mono) !important;
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+  background: var(--surface) !important;
+  box-shadow: none !important;
 }
