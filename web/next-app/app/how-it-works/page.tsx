@@ -322,7 +322,7 @@ minimum value: 1.3`}
                 'The concept graph is sorted topologically. The diagnostic starts at the concept at the midpoint of the sorted order.',
                 'If the student answers correctly within the time limit, the algorithm moves forward: it next tests a concept further along the prerequisite chain.',
                 'If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward: it tests a concept earlier in the chain.',
-                'This binary search continues until three consecutive correct answers are recorded in a region, or three consecutive failures.',
+                'This binary search continues with multiple probes per concept until the student\'s knowledge frontier is clearly established.',
                 'The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.',
               ].map((step, i) => (
                 <li

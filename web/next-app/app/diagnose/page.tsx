@@ -57,13 +57,13 @@ export default function DiagnosePage() {
         </div>
 
         <ul className="max-w-[600px] mx-auto mt-8 space-y-3 list-none">
-          {[
-            'The concept graph is sorted topologically: the diagnostic starts at the midpoint.',
-            'Correct answers within the time limit move the probe forward toward harder concepts.',
-            'Incorrect or slow answers move backward toward foundational material.',
-            'After 3 consecutive correct answers in a region, the frontier is considered located.',
-            'The diagnostic records a mastery estimate for every concept passed through.',
-          ].map((step) => (
+           {[
+             'The concept graph is sorted topologically: the diagnostic starts at the midpoint.',
+             'Each concept is probed with multiple questions at varying difficulty to get a reliable estimate.',
+             'Correct answers within the time limit move the probe forward toward harder concepts.',
+             'Incorrect or slow answers move backward toward foundational material.',
+             'The diagnostic records a mastery estimate for every concept passed through.',
+           ].map((step) => (
             <li
               key={step}
               className="text-mathua-secondary text-[0.95rem] leading-[1.7] pl-9 relative before:content-[counter(step)] before:absolute before:left-0 before:text-mathua-blue before:font-mono before:text-[13px]"

@@ -47,18 +47,36 @@ type Server struct {
 	repo         storage.Repository
 	auth         *auth.AuthService
 	diagSessions map[string]*diagnostic.Session
+	diagCreated  map[string]time.Time
 	mu           sync.Mutex
 	authLimiter  *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
-	return &Server{
+	s := &Server{
 		eng:          eng,
 		repo:         repo,
 		auth:         auth,
 		diagSessions: make(map[string]*diagnostic.Session),
+		diagCreated:  make(map[string]time.Time),
 		authLimiter:  newRateLimiter(5, 10, time.Minute),
 	}
+	// Clean up abandoned diagnostic sessions older than 1 hour
+	go func() {
+		for {
+			time.Sleep(10 * time.Minute)
+			s.mu.Lock()
+			cutoff := time.Now().Add(-1 * time.Hour)
+			for id, created := range s.diagCreated {
+				if created.Before(cutoff) {
+					delete(s.diagSessions, id)
+					delete(s.diagCreated, id)
+				}
+			}
+			s.mu.Unlock()
+		}
+	}()
+	return s
 }
 
 func (s *Server) Register(mux *http.ServeMux) {
@@ -344,6 +362,7 @@ func (s *Server) handleDiagnosticStart(w http.ResponseWriter, r *http.Request) {
 	}
 	s.mu.Lock()
 	s.diagSessions[sess.ID] = sess
+	s.diagCreated[sess.ID] = time.Now()
 	s.mu.Unlock()
 	writeJSON(w, map[string]interface{}{
 		"session_id": sess.ID,
@@ -518,6 +537,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	session.StudentID = studentID
 	s.mu.Lock()
 	s.diagSessions[session.ID] = session
+	s.diagCreated[session.ID] = time.Now()
 	s.mu.Unlock()
 	if question == nil {
 		writeJSON(w, map[string]interface{}{"session_id": session.ID, "done": true})
@@ -562,6 +582,19 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 
 	// Grade against the stored problem (the one the user actually saw)
+	if session.LastProblem == nil {
+		// Session is already done — reject the answer
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  false,
+			"feedback": "diagnostic session already complete",
+		})
+		return
+	}
+	if session.LastConceptID != "" && session.LastConceptID != req.ConceptID {
+		writeError(w, "concept_id does not match the current question", 400)
+		return
+	}
 	concept := s.eng.GetDAG().Concept(req.ConceptID)
 	timeThresh := 10.0
 	if concept != nil {
@@ -570,25 +603,21 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	correct := false
 	explanation := ""
 		session.Lock()
-	if session.LastProblem != nil {
-		gt := "numeric"
-		if concept != nil {
-			gt = concept.GradingType
-		}
-		expected := session.LastProblem.Answer
-		expExplanation := session.LastProblem.Explanation
-		session.Unlock()
-		graderRouter := s.eng.GetGrader()
-		if graderRouter != nil {
-			grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
-			correct = grResult.Correct
-		} else {
-			correct = expected == req.Answer
-		}
-		explanation = expExplanation
-	} else {
-		session.Unlock()
+	gt := "numeric"
+	if concept != nil {
+		gt = concept.GradingType
 	}
+	expected := session.LastProblem.Answer
+	expExplanation := session.LastProblem.Explanation
+	session.Unlock()
+	graderRouter := s.eng.GetGrader()
+	if graderRouter != nil {
+		grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
+		correct = grResult.Correct
+	} else {
+		correct = expected == req.Answer
+	}
+	explanation = expExplanation
 	fast := req.Elapsed < timeThresh
 
 	s.eng.SubmitDiagnosticAnswer(session, req.ConceptID, correct, fast)
@@ -660,6 +689,7 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	// Clean up session
 	s.mu.Lock()
 	delete(s.diagSessions, req.SessionID)
+	delete(s.diagCreated, req.SessionID)
 	s.mu.Unlock()
 
 	// Compute readiness and weak areas (use copied attempts for thread safety)

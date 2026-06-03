@@ -79,51 +79,52 @@ func TestEngine_NextQuestion(t *testing.T) {
 	if p.Question == "" || cid == "" {
 		t.Error("expected non-empty question and concept ID")
 	}
+	if s.LastConceptID != cid {
+		t.Errorf("expected LastConceptID=%q, got %q", cid, s.LastConceptID)
+	}
 }
 
-func TestEngine_RecordAnswer_Advances(t *testing.T) {
+func TestEngine_RecordAnswer_AdvancesAfterTwoCorrect(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
 	initialPos := s.Position
-	e.RecordAnswer(s, idFor(initialPos), true, true)
-	if s.Position <= initialPos {
-		t.Errorf("expected position > %d after correct+fast, got %d", initialPos, s.Position)
+	cid := idFor(initialPos)
+	// First correct+fast — not enough to evaluate
+	e.RecordAnswer(s, cid, true, true)
+	if s.totalCount[cid] != 1 {
+		t.Errorf("expected 1 probe, got %d", s.totalCount[cid])
 	}
-	if s.Low != initialPos+1 {
-		t.Errorf("expected low=%d, got %d", initialPos+1, s.Low)
+	// Second correct+fast — should advance
+	e.RecordAnswer(s, cid, true, true)
+	if s.Low <= initialPos {
+		t.Errorf("expected low > %d after two correct, got %d", initialPos, s.Low)
 	}
 }
 
-func TestEngine_RecordAnswer_Retreats(t *testing.T) {
+func TestEngine_RecordAnswer_RetreatsAfterTwoWrong(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
 	initialPos := s.Position
-	e.RecordAnswer(s, idFor(initialPos), false, false)
-	if s.Position >= initialPos {
-		t.Errorf("expected position < %d after incorrect, got %d", initialPos, s.Position)
+	cid := idFor(initialPos)
+	e.RecordAnswer(s, cid, false, false)
+	e.RecordAnswer(s, cid, false, false)
+	if s.High >= initialPos {
+		t.Errorf("expected high < %d after two wrong, got %d", initialPos, s.High)
 	}
 }
 
-func TestEngine_CompletesAfter3Consecutive(t *testing.T) {
+func TestEngine_CompletesWhenLowCrossesHigh(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	for _, cid := range []string{idFor(s.Position)} {
-		e.RecordAnswer(s, cid, true, true)
-		if e.IsComplete(s) {
-			t.Logf("completed early at attempt %d: consecutive=%d low=%d high=%d pos=%d",
-				len(s.Attempts), s.ConsecutiveOK, s.Low, s.High, s.Position)
-			break
-		}
-	}
-	// Keep answering correctly
-	for i := 0; i < 10 && !e.IsComplete(s); i++ {
-		if s.Position >= s.Low && s.Position <= s.High {
-			cid := idFor(s.Position)
-			e.RecordAnswer(s, cid, true, true)
-		}
+	// Simulate all concepts wrong to collapse the range quickly
+	for i := 0; i < len(s.order) && !e.IsComplete(s); i++ {
+		cid := idFor(i)
+		e.RecordAnswer(s, cid, false, false)
+		e.RecordAnswer(s, cid, false, false)
 	}
 	if !e.IsComplete(s) {
-		t.Error("expected session to complete")
+		t.Errorf("expected complete after all wrong, got state=%s low=%d high=%d asked=%d",
+			s.State, s.Low, s.High, s.totalAsked)
 	}
 }
 
@@ -133,21 +134,32 @@ func TestEngine_FrontierEstimate(t *testing.T) {
 	if e.FrontierEstimate(s) != 9 {
 		t.Errorf("expected frontier 9 (high), got %d", e.FrontierEstimate(s))
 	}
-	e.RecordAnswer(s, idFor(s.Position), false, false)
+	// Two wrong answers at each position collapses the frontier
+	for i := 0; i < 5; i++ {
+		if s.Position < 0 || s.Position >= len(s.order) {
+			break
+		}
+		cid := idFor(s.Position)
+		e.RecordAnswer(s, cid, false, false)
+		e.RecordAnswer(s, cid, false, false)
+	}
 	if e.FrontierEstimate(s) > 4 {
-		t.Errorf("expected frontier <= 4 after wrong at midpoint, got %d", e.FrontierEstimate(s))
+		t.Errorf("expected frontier <= 4 after wrongs at midpoint, got %d", e.FrontierEstimate(s))
 	}
 }
 
-func TestEngine_CrossesBounds(t *testing.T) {
+func TestEngine_AllProbedCompletes(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	s.Position = 0
-	s.Low = 0
-	s.High = 0
-	s.ConsecutiveOK = 3
-	e.RecordAnswer(s, idFor(0), true, true)
+	// Probe every concept at least once
+	for i := 0; i < len(s.order) && !e.IsComplete(s); i++ {
+		cid := idFor(i)
+		if s.totalCount[cid] < probesPerConcept {
+			e.RecordAnswer(s, cid, true, true)
+			e.RecordAnswer(s, cid, true, true)
+		}
+	}
 	if !e.IsComplete(s) {
-		t.Error("expected complete when consecutive OK >= 3")
+		t.Errorf("expected complete after all probed, state=%s asked=%d", s.State, s.totalAsked)
 	}
 }
