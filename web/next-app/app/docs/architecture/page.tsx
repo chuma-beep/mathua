@@ -147,7 +147,7 @@ export default function ArchitecturePage() {
             'The concept graph is sorted topologically. The diagnostic starts at the midpoint.',
             'Correct answers within the time limit move the probe forward toward harder concepts.',
             'Incorrect or slow answers move backward toward foundational material.',
-            'After 3 consecutive correct answers in a region, the frontier is considered located.',
+            'After probing the region from multiple angles, the frontier is considered located.',
             'The diagnostic records a mastery estimate for every concept passed through.',
           ].map((step, i) => (
             <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>

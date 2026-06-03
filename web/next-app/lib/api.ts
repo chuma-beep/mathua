@@ -267,6 +267,8 @@ export interface GoalDiagStartRes {
 
 export interface GoalDiagAnswerRes {
 	done: boolean
+	correct?: boolean
+	feedback?: string
 	concept_id?: string
 	concept_name?: string
 	question?: string
