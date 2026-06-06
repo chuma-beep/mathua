@@ -1,0 +1,94 @@
+# Mathua Grading Pipeline  --  Strategy Dispatch
+
+direction: right
+
+Generator: Problem Generator\nproduces expected + type
+
+Router: Grading Router\nswitch grading_type
+
+Numeric: Numeric Grader\nint | float | fraction | mixed
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Choice: Choice Grader\ncase-insensitive | letter
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Comp: Comparison Grader\n> < = >= <= !=
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Order: Ordering Grader\nwhitespace | comma split
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Tuple: Tuple Grader\nparentheses comma-separated
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Complex: Complex Grader\npolar + I → SymPy
+  style.fill: "#FAF9F5"
+  style.stroke: "#10B981"
+
+Symbolic: Symbolic (fallback)\nnormalize → string equals
+  style.fill: "#FAF9F5"
+  style.stroke: "#EF4444"
+
+SymPyService: SymPy Python Subprocess
+  style.fill: "#EEF2F7"
+  style.stroke: "#3B82F6"
+
+Result: Grade Result\ncorrect + score + feedback
+
+# Dispatch flow
+Generator -> Router: grading_type determines path
+
+Router -> Numeric: numeric
+Router -> Choice: multiple_choice
+Router -> Comp: comparison
+Router -> Order: ordering
+Router -> Tuple: tuple
+Router -> Complex: complex
+Router -> SymPyService: polynomial / expression
+
+# Fallback paths
+Complex -> Symbolic: SymPy unavailable
+SymPyService -> Symbolic: fallback
+
+# All converge
+Numeric -> Result
+Choice -> Result
+Comp -> Result
+Order -> Result
+Tuple -> Result
+Complex -> Result
+SymPyService -> Result
+Symbolic -> Result
+
+# Styling
+nodes: {
+  style: {
+    font-size: 11
+    font-color: "#141413"
+    border-radius: 4
+  }
+  Generator: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#C8A96E"
+  }
+  Router: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#8B5CF6"
+  }
+  Result: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#6b6a64"
+    font-size: 9
+  }
+}

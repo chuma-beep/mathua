@@ -1,0 +1,102 @@
+# Mathua Request Flow  --  Answer Submission
+
+direction: right
+
+Client: Client\nWeb Browser
+
+Server: HTTP Server\nnet/http Mux
+
+Auth: Auth Middleware\nJWT Validation
+
+Handler: handleAnswer\n/api/answer POST
+
+Engine: Engine.SubmitAnswer\n(sessionID, studentID, answer, elapsed)
+
+Grade: gradeAnswer\nGenerator.Grade || Router.Grade
+
+Grader: Grader Router → Numeric/SymPy/etc
+
+Mastery: mastery.Machine.Next()\nStatus Transition
+
+SM2: scheduler.ComputeSM2()\nSpaced Repetition
+
+Upsert: repo.UpsertProgress()\nON CONFLICT UPSERT
+
+Weakness: PropagateWeakness()\nTo Dependents
+
+Attempt: RecordAttempt()\nINSERT INTO attempts
+
+XP: computeXP() + repo.AddXP()
+
+Next: Engine.NextQuestion()\nLoad next problem
+
+Response: JSON Response\nresult + next question
+
+# Flow
+Client -> Server: POST /api/answer
+Server -> Auth: Validate Token
+Auth -> Handler: studentID in context
+Handler -> Engine: SubmitAnswer()
+Engine -> Grade: Route to grader
+Grade -> Grader: Grade expected vs answer
+Grader -> Mastery: result + metrics
+Mastery -> SM2: Quality score (0-5)
+SM2 -> Upsert: Save progress + SM-2 state
+Upsert -> Weakness: If >0.3 propagate
+Weakness -> Attempt: Record attempt
+Attempt -> XP: Compute and add XP
+XP -> Next: Get next question
+Next -> Response: JSON to client
+Response -> Client
+
+# Styling
+nodes: {
+  style: {
+    font-size: 11
+    font-color: "#141413"
+    border-radius: 4
+  }
+  Client: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+  }
+  Server: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#3B82F6"
+  }
+  Auth: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#3B82F6"
+  }
+  Handler: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#3B82F6"
+  }
+  Engine: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+  }
+  Grade: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#10B981"
+  }
+  Grader: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#10B981"
+  }
+  Mastery: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+  }
+  SM2: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#6b6a64"
+    font-size: 9
+  }
+}
