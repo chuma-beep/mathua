@@ -19,6 +19,30 @@ const diagramMap: Record<string, { light: string; dark: string }> = {
     light: '/diagrams/platforms-light.svg',
     dark: '/diagrams/platforms-dark.svg',
   },
+  'system-design-architecture': {
+    light: '/diagrams/system-design-architecture-light.svg',
+    dark: '/diagrams/system-design-architecture-dark.svg',
+  },
+  'system-design-data-model': {
+    light: '/diagrams/system-design-data-model-light.svg',
+    dark: '/diagrams/system-design-data-model-dark.svg',
+  },
+  'system-design-request-flow': {
+    light: '/diagrams/system-design-request-flow-light.svg',
+    dark: '/diagrams/system-design-request-flow-dark.svg',
+  },
+  'system-design-sm2-mastery': {
+    light: '/diagrams/system-design-sm2-mastery-light.svg',
+    dark: '/diagrams/system-design-sm2-mastery-dark.svg',
+  },
+  'system-design-grading-pipeline': {
+    light: '/diagrams/system-design-grading-pipeline-light.svg',
+    dark: '/diagrams/system-design-grading-pipeline-dark.svg',
+  },
+  'system-design-cat-diagnostic': {
+    light: '/diagrams/system-design-cat-diagnostic-light.svg',
+    dark: '/diagrams/system-design-cat-diagnostic-dark.svg',
+  },
 }
 
 interface D2DiagramProps {

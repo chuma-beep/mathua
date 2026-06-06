@@ -1,0 +1,87 @@
+# Mathua CAT Diagnostic  --  Binary Search on Concept Graph
+
+direction: down
+
+Start: Start Diagnostic\nGet all concepts (topo-sorted)\nSet Low=0, High=N-1
+
+Loop: Binary Search Loop {
+  Mid: Compute Midpoint\nPos = Low + (High-Low)/2
+  
+  Question: Generate Question\nfor concept at Pos
+  
+  Answer: Student Answers\nwithin time limit
+  
+  Decision: Evaluate\ncorrect + fast enough?
+  
+  style.fill: "#FAF9F5"
+  style.stroke: "#C8A96E"
+}
+
+Correct: Correct\nMove forward\nLow = Pos + 1
+
+Incorrect: Incorrect/Slow\nMove backward\nHigh = Pos - 1
+
+Check: Streak Check\n3 correct in a row?
+
+Result: Frontier Located\nEstimate ≈ position\nRecord mastery for all passed
+
+Done: Diagnostic Complete\nMerge with existing progress\nOptimistic merge
+
+# Flow
+Start -> Loop
+Loop -> Mid
+Mid -> Question
+Question -> Answer
+Answer -> Decision
+Decision -> Correct: Yes
+Decision -> Incorrect: No
+Correct -> Check
+Incorrect -> Loop: reset streak
+Check -> Loop: No, continue
+Check -> Result: Yes, 3 in a row
+Check -> Result: Hit boundaries
+Result -> Done
+
+# Side note
+Note: "Key Parameters: midpoint topo-DAG → binary search, ~20-35 questions"
+
+# Styling
+nodes: {
+  style: {
+    font-size: 11
+    font-color: "#141413"
+    border-radius: 6
+  }
+  Start: {
+    style.fill: "#EEF2F7"
+    style.stroke: "#3B82F6"
+  }
+  Result: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#10B981"
+  }
+  Done: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#10B981"
+  }
+  Correct: {
+    style.fill: "#F0F9F0"
+    style.stroke: "#10B981"
+  }
+  Incorrect: {
+    style.fill: "#FEF2F2"
+    style.stroke: "#EF4444"
+  }
+  Note: {
+    style.fill: "#FAF9F5"
+    style.stroke: "#C8A96E"
+    style.stroke-dash: 3
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#6b6a64"
+    font-size: 9
+  }
+}

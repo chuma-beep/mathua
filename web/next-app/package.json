@@ -7,18 +7,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "diagrams": "d2 -t 0 diagrams/architecture.d2 diagrams/generated/architecture-light.svg && d2 -t 200 diagrams/architecture.d2 diagrams/generated/architecture-dark.svg && d2 -t 0 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-light.svg && d2 -t 200 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-dark.svg && d2 -t 0 diagrams/contributing.d2 diagrams/generated/contributing-light.svg && d2 -t 200 diagrams/contributing.d2 diagrams/generated/contributing-dark.svg && d2 -t 0 diagrams/student-model.d2 diagrams/generated/student-model-light.svg && d2 -t 200 diagrams/student-model.d2 diagrams/generated/student-model-dark.svg && cp diagrams/generated/*.svg public/diagrams/"
+    "diagrams": "d2 -t 0 diagrams/architecture.d2 diagrams/generated/architecture-light.svg && d2 -t 200 diagrams/architecture.d2 diagrams/generated/architecture-dark.svg && d2 -t 0 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-light.svg && d2 -t 200 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-dark.svg && d2 -t 0 diagrams/contributing.d2 diagrams/generated/contributing-light.svg && d2 -t 200 diagrams/contributing.d2 diagrams/generated/contributing-dark.svg && d2 -t 0 diagrams/student-model.d2 diagrams/generated/student-model-light.svg && d2 -t 200 diagrams/student-model.d2 diagrams/generated/student-model-dark.svg && d2 -t 0 diagrams/system-design-architecture.d2 diagrams/generated/system-design-architecture-light.svg && d2 -t 200 diagrams/system-design-architecture.d2 diagrams/generated/system-design-architecture-dark.svg && d2 -t 0 diagrams/system-design-data-model.d2 diagrams/generated/system-design-data-model-light.svg && d2 -t 200 diagrams/system-design-data-model.d2 diagrams/generated/system-design-data-model-dark.svg && d2 -t 0 diagrams/system-design-request-flow.d2 diagrams/generated/system-design-request-flow-light.svg && d2 -t 200 diagrams/system-design-request-flow.d2 diagrams/generated/system-design-request-flow-dark.svg && d2 -t 0 diagrams/system-design-sm2-mastery.d2 diagrams/generated/system-design-sm2-mastery-light.svg && d2 -t 200 diagrams/system-design-sm2-mastery.d2 diagrams/generated/system-design-sm2-mastery-dark.svg && d2 -t 0 diagrams/system-design-grading-pipeline.d2 diagrams/generated/system-design-grading-pipeline-light.svg && d2 -t 200 diagrams/system-design-grading-pipeline.d2 diagrams/generated/system-design-grading-pipeline-dark.svg && d2 -t 0 diagrams/system-design-cat-diagnostic.d2 diagrams/generated/system-design-cat-diagnostic-light.svg && d2 -t 200 diagrams/system-design-cat-diagnostic.d2 diagrams/generated/system-design-cat-diagnostic-dark.svg && cp diagrams/generated/*.svg public/diagrams/"
   },
   "dependencies": {
     "@react-three/drei": "^9.99.0",
     "@react-three/fiber": "^8.15.19",
-    "@types/dagre": "^0.7.54",
     "@types/three": "^0.184.0",
-    "@xyflow/react": "^12.10.2",
+    "@xyflow/react": "^12.11.0",
     "axios": "^1.6.0",
+    "beautiful-mermaid": "^1.1.3",
     "clsx": "^2.1.1",
-    "dagre": "^0.8.5",
+    "cytoscape": "^3.28.0",
+    "cytoscape-dagre": "^2.5.0",
     "fuse.js": "^7.3.0",
+    "isomorphic-dompurify": "^3.14.0",
     "katex": "^0.16.9",
     "next": "^14.0.0",
     "react": "^18.2.0",
@@ -29,7 +31,7 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "sonner": "^2.0.7",
+    "sonner": "1.7.1",
     "tailwind-merge": "^3.6.0",
     "three": "^0.160.0",
     "zod": "^4.4.3"

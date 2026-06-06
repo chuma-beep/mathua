@@ -1,0 +1,112 @@
+# Mathua SM-2 Algorithm & Mastery State Machine
+
+direction: right
+
+# Mastery States
+States: Mastery States {
+  UNSEEN: UNSEEN\nInitial State
+  
+  LEARNING: LEARNING\nstreak >= R\nAND avgTime <= threshold
+  
+  PRACTICING: PRACTICING\nstreak >= R\nAND avgTime <= threshold
+  
+  MASTERED: MASTERED\nstreak >= R\nAND avgTime <= threshold
+  
+  DECAYING: DECAYING\n14+ days no review
+    style.stroke-dash: 3
+
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#C8A96E"
+    font-color: "#141413"
+    border-radius: 8
+  }
+  DECAYING: {
+    style.fill: "#F0E6D8"
+    style.stroke: "#B8933E"
+  }
+}
+
+Transitions: Transitions {
+  T1: qualify → move up
+  T2: 14+ days idle → decay from MASTERED
+  T3: review correct → restore to MASTERED
+  T4: fail → stay / regress
+  
+  style: {
+    font-size: 10
+    font-color: "#504e49"
+  }
+}
+
+UNSEEN -> LEARNING: T1
+LEARNING -> PRACTICING: T1
+PRACTICING -> MASTERED: T1
+MASTERED -> DECAYING: T2
+DECAYING -> MASTERED: T3
+UNSEEN -> UNSEEN: T4
+LEARNING -> LEARNING: T4
+PRACTICING -> PRACTICING: T4
+
+# SM-2 Algorithm
+SM2: SM-2 Spaced Repetition {
+  Input: "Quality score (0-5)"
+  
+  "quality >= 3": "rep++, ef adjust, interval grows"
+  "quality  < 3": "rep=0, interval=1, ef unchanged"
+  
+  Schedule: "next_review = now + interval days"
+  
+  style: {
+    fill: "#EEF2F7"
+    stroke: "#3B82F6"
+    font-color: "#141413"
+  }
+}
+
+# Quality mapping
+Quality: Quality Mapping {
+  "Q5": "streakMet AND fast → 5"
+  "Q4": "streakMet AND normal → 4"
+  "Q3": "streakMet AND slow → 3"
+  "Q0": "streak NOT met → 0"
+  
+  style: {
+    fill: "#EEF2F7"
+    stroke: "#10B981"
+    font-color: "#141413"
+  }
+}
+
+# Scoring formula
+Scoring: Scoring {
+  "Base XP": "New=10, Review=5"
+  "Time Mult": "clamp(2.0 - elapsed/threshold, 0.5, 1.5)"
+  "Streak Mult": "1.0 + min(streak, 10) * 0.1"
+  "XP": "int(base * timeMult * streakMult)"
+  
+  style: {
+    fill: "#FAF9F5"
+    stroke: "#C8A96E"
+    font-color: "#141413"
+  }
+}
+
+# Links
+Quality -> SM2: quality → SM2
+SM2 -> States: schedule → mastery
+Quality -> Scoring: metrics → XP
+
+nodes: {
+  style: {
+    border-radius: 4
+    font-size: 11
+  }
+}
+
+edges: {
+  style: {
+    stroke: "#6b6a64"
+    font-size: 9
+  }
+}
