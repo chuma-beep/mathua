@@ -21,7 +21,7 @@ Correct: Correct\nMove forward\nLow = Pos + 1
 
 Incorrect: Incorrect/Slow\nMove backward\nHigh = Pos - 1
 
-Check: Streak Check\n3 correct in a row?
+Check: Streak Check\nX correct in a row?
 
 Result: Frontier Located\nEstimate ≈ position\nRecord mastery for all passed
 
@@ -38,7 +38,7 @@ Decision -> Incorrect: No
 Correct -> Check
 Incorrect -> Loop: reset streak
 Check -> Loop: No, continue
-Check -> Result: Yes, 3 in a row
+Check -> Result: Yes, X in a row
 Check -> Result: Hit boundaries
 Result -> Done
 

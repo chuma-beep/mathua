@@ -115,7 +115,7 @@ export default function DiagnosticFlow() {
     { id: 'midpoint', type: 'decisionNode', position: { x: midX, y: yMid }, data: { label: 'Test midpoint\nconcept?' } },
     { id: 'forward', type: 'processNode', position: { x: CX - NODE_W - 30, y: yBranch }, data: { label: 'Move forward:\nharder concepts' } },
     { id: 'backward', type: 'processNode', position: { x: CX + 30, y: yBranch }, data: { label: 'Move backward:\nfoundational' } },
-    { id: 'check', type: 'decisionNode', position: { x: CX - NODE_W / 2, y: yCheck }, data: { label: '3 correct\nin a row?' } },
+    { id: 'check', type: 'decisionNode', position: { x: CX - NODE_W / 2, y: yCheck }, data: { label: 'X correct\nin a row?' } },
     { id: 'locked', type: 'terminalNode', position: { x: CX - NODE_W / 2, y: yLocked }, data: { label: 'FRONTIER\nLOCKED' } },
   ]
 
