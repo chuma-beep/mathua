@@ -69,44 +69,7 @@ export default function DocsIndexPage() {
               Architecture
             </div>
             <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              How the engine, scheduler, generators, graders, and storage layers compose into a single Go binary.
-            </p>
-          </div>
-        </Link>
-
-        <Link
-          href="/docs/system-design"
-          className="link-underline"
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            padding: '0.75rem 0',
-            borderBottom: '0.5px solid var(--border)',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-        >
-          <span style={{
-            fontFamily: monoFont,
-            fontSize: '13px',
-            color: 'var(--accent-blue)',
-            minWidth: '1.5rem',
-            paddingTop: '1px',
-          }}>
-            2.
-          </span>
-          <div>
-            <div style={{
-              fontFamily: "'IBM Plex Serif', serif",
-              fontWeight: 400,
-              fontSize: '1.1rem',
-              color: 'var(--text-primary)',
-              marginBottom: '2px',
-            }}>
-              System Design
-            </div>
-            <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Interactive diagrams for the full architecture, data model, and request flow.
+              Full system design: 5-layer architecture, data model, request flow, grading, CAT diagnostic, and trade-offs.
             </p>
           </div>
         </Link>
@@ -130,7 +93,7 @@ export default function DocsIndexPage() {
             minWidth: '1.5rem',
             paddingTop: '1px',
           }}>
-            3.
+            2.
           </span>
           <div>
             <div style={{

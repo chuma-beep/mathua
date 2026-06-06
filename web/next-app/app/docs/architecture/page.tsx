@@ -30,6 +30,32 @@ const DiagnosticFlow = dynamic(() => import('../../../components/DiagnosticFlow'
   ),
 })
 
+const DataModelFlow = dynamic(() => import('../../../components/SystemDesignFlow/DataModelFlow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 320, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading data model diagram&hellip;
+    </div>
+  ),
+})
+
+const RequestFlow = dynamic(() => import('../../../components/SystemDesignFlow/RequestFlow'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      height: 600, border: '0.5px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+    }}>
+      Loading request flow diagram&hellip;
+    </div>
+  ),
+})
+
 const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
 const monoFont = "'IBM Plex Mono', monospace"
@@ -63,81 +89,188 @@ const calloutStyle: React.CSSProperties = {
   marginTop: '1.5rem',
 }
 
+const monoLabel: React.CSSProperties = {
+  fontFamily: monoFont,
+  fontSize: '12px',
+  color: 'var(--text-muted)',
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+  marginTop: '4px',
+}
+
+const monoNum: React.CSSProperties = {
+  fontFamily: monoFont,
+  fontSize: '2rem',
+  fontWeight: 400,
+  color: 'var(--accent-blue)',
+  lineHeight: 1,
+}
+
+const cardStyle: React.CSSProperties = {
+  background: 'var(--surface)',
+  border: '0.5px solid var(--border)',
+  padding: '20px',
+  textAlign: 'center',
+}
+
 export default function ArchitecturePage() {
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
-        <SectionHeader label="Documentation" title="Architecture" />
+        <SectionHeader label="Documentation" title="Architecture & System Design" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
-          Mathua is a single Go binary with two delivery modes. The engine core is identical:
-          only the presentation layer differs.
+          Mathua is a single Go binary with two delivery modes. The engine core is identical --
+          only the presentation layer differs. Click nodes in the diagrams below for details.
         </p>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <a
-            href="https://github.com/chuma-beep/mathua/blob/main/docs/architecture.md"
+            href="https://github.com/chuma-beep/mathua/blob/main/docs/system-design.md"
             className="link-underline"
-            style={{
-              fontFamily: monoFont,
-              fontSize: '12px',
-              color: 'var(--text-muted)',
-            }}
+            style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)' }}
           >
-            View source on GitHub
+            View full system design doc on GitHub
           </a>
         </div>
       </section>
 
-      {/* High-level diagram */}
-      <ArchitectureFlow />
+      {/* I. Five-Layer Architecture */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>I. Five-Layer Architecture</h2>
+        <p style={bodyStyle}>
+          The system is organized into five layers. The UI has two implementations -- a web frontend
+          (React/Next.js) and a desktop TUI (Bubble Tea) -- both calling into the same Go engine.
+          The API exposes 25+ REST endpoints through net/http. The Core Engine handles DAG loading,
+          SM-2 scheduling, problem generation, mastery tracking, scoring, and the CAT diagnostic.
+          The Grading layer dispatches to 6+ grader strategies with a SymPy subprocess for symbolic
+          math. Storage is abstracted behind a Repository interface.
+        </p>
 
+        <ArchitectureFlow />
 
-      {/* Metric cards */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-        gap: '16px',
-        marginBottom: '48px',
-        marginTop: '24px',
-      }}>
-        {[
-          { num: '1', label: 'Binary' },
-          { num: '2', label: 'UI Modes' },
-          { num: '5', label: 'Engine Modules' },
-          { num: '6', label: 'Graders' },
-        ].map(({ num, label }) => (
-          <div
-            key={label}
-            style={{
-              background: 'var(--surface)',
-              border: '0.5px solid var(--border)',
-              padding: '20px',
-              textAlign: 'center',
-            }}
-          >
-            <div style={{ fontFamily: monoFont, fontSize: '2rem', fontWeight: 400, color: 'var(--accent-blue)', lineHeight: 1 }}>
-              {num}
+        {/* Metric cards */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          gap: '16px',
+          marginBottom: '48px',
+          marginTop: '24px',
+        }}>
+          {[
+            { num: '1', label: 'Binary' },
+            { num: '2', label: 'UI Modes' },
+            { num: '5', label: 'Engine Modules' },
+            { num: '6', label: 'Graders' },
+          ].map(({ num, label }) => (
+            <div key={label} style={cardStyle}>
+              <div style={monoNum}>{num}</div>
+              <div style={monoLabel}>{label}</div>
             </div>
-            <div style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginTop: '4px' }}>
-              {label}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
       <AsciiDivider pattern="wave" />
 
-      {/* Layer 1: UI */}
+      {/* II. Data Model */}
       <section className="py-20 max-sm:py-12">
-        <h2 style={h2Style}>I. UI: Two presentations, one engine</h2>
-        <h2 style={h2Style}>II. API: Four services, one router</h2>
-        <h2 style={h2Style}>III. Core Engine: Five modules</h2>
-        <h2 style={h2Style}>IV. Grading: Numeric and symbolic</h2>
-        <h2 style={h2Style}>V. Storage: SQLite and Postgres</h2>
-        <h2 style={h2Style}>Diagnostic: Computerised Adaptive Testing</h2>
+        <h2 style={h2Style}>II. Data Model</h2>
+        <p style={bodyStyle}>
+          Five core tables store all application state. The `concept_progress` table embeds SM-2
+          spaced repetition fields (repetitions, interval, efactor) alongside mastery state and
+          weakness scores. All DDL uses CREATE TABLE IF NOT EXISTS for idempotent bootstrapping.
+          Incremental migrations add columns with ALTER TABLE guarded by error-checking.
+        </p>
+
+        <DataModelFlow />
+
+        <p style={bodyStyle}>
+          The SM-2 upsert uses SQLite's ON CONFLICT ... DO UPDATE to atomically save all progress
+          fields in one statement. XP tracking is date-aware: xp_today resets when xp_date differs
+          from the current date, preserving xp_total as a lifetime accumulator.
+        </p>
+
+        <div style={calloutStyle}>
+          The PostgresStore exists as a stub with all methods returning "not implemented."
+          The same Repository interface works for both databases -- the schema is identical.
+        </div>
+      </section>
+
+      <AsciiDivider pattern="wave" />
+
+      {/* III. Request Flow */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>III. End-to-End Request Flow</h2>
+        <p style={bodyStyle}>
+          When a student submits an answer, the request passes through 12 distinct stages before
+          the next question is served. The entire pipeline runs synchronously in a single Go
+          goroutine, completing in under 100ms for numeric grading and under 500ms for SymPy-based
+          grading (including subprocess round-trip).
+        </p>
+
+        <RequestFlow />
+
+        <div style={{ marginTop: '2rem' }}>
+          {[
+            'Client sends POST /api/answer with {session_id, answer, elapsed}.',
+            'Auth middleware validates JWT and injects student ID into request context.',
+            'Engine.SubmitAnswer routes to the correct grader by grading_type.',
+            'The Mastery Machine evaluates whether a state transition is earned.',
+            'SM-2 Compute recalculates repetition count, interval, and easiness factor.',
+            'repo.UpsertProgress atomically saves all fields via ON CONFLICT DO UPDATE.',
+            'If weakness > 0.3, it propagates to dependent concepts at w * 0.3.',
+            'repo.RecordAttempt stores the raw answer for analytics.',
+            'XP is computed (base * timeMult * streakMult) and added to the student.',
+            'Engine.NextQuestion asks the scheduler for the next concept and generates a problem.',
+          ].map((step, i) => (
+            <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
+              <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px', fontWeight: 500 }}>
+                {i + 1}.
+              </span>
+              {' '}{step}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <AsciiDivider pattern="wave" />
+
+      {/* IV. Grading System */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>IV. Grading System</h2>
+        <p style={bodyStyle}>
+          The grading system uses a strategy pattern dispatched by grading_type. Numeric grading
+          (int, float, fraction, mixed, scientific notation) is pure Go with big.Rat for exact
+          rational arithmetic and 1e-9 float tolerance. Multiple choice is case-insensitive with
+          single-letter matching.           Comparison handles operators: {'>'} {'<'} {'='} {'>='} {'<='} {'!='}. Ordering and
+          tuple graders do positional exact matching.
+        </p>
+        <p style={bodyStyle}>
+          For symbolic math -- polynomial and expression grading -- Mathua spawns a long-lived
+          Python subprocess running SymPy. The Go client sends a JSON pair over stdin; SymPy parses
+          both into expression trees and checks equivalence via simplify(expected - answer) == 0.
+          If Python/SymPy are not installed, grading falls back gracefully to a pure-Go symbolic
+          string normalizer. The subprocess has a 10-second timeout and 500-character input limit.
+        </p>
+        <p style={bodyStyle}>
+          The complex grader preprocesses polar form, handles plus-minus notation, and delegates to
+          SymPy. In total there are 8 grading strategies: numeric, multiple choice, comparison,
+          ordering, tuple, complex, symbolic (fallback), and SymPy (polynomial/expression).
+        </p>
+
+        <div style={calloutStyle}>
+          The D2 diagram for the grading pipeline is available in the <a href="/docs" className="link-underline" style={{ color: 'var(--accent-blue)' }}>system design documentation</a>.
+        </div>
+      </section>
+
+      <AsciiDivider pattern="wave" />
+
+      {/* V. CAT Diagnostic */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>V. Computerised Adaptive Testing</h2>
         <p style={bodyStyle}>
           The diagnostic engine locates a student's knowledge frontier using binary search on
           the topologically sorted concept graph. This reduces the assessment from 284 questions
-          (one per concept) to approximately 20–35.
+          (one per concept) to approximately 20-35.
         </p>
 
         <DiagnosticFlow />
@@ -147,7 +280,7 @@ export default function ArchitecturePage() {
             'The concept graph is sorted topologically. The diagnostic starts at the midpoint.',
             'Correct answers within the time limit move the probe forward toward harder concepts.',
             'Incorrect or slow answers move backward toward foundational material.',
-            'After probing the region from multiple angles, the frontier is considered located.',
+            'After 3 consecutive correct answers in a region, the frontier is considered located.',
             'The diagnostic records a mastery estimate for every concept passed through.',
           ].map((step, i) => (
             <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
@@ -162,6 +295,62 @@ export default function ArchitecturePage() {
           The diagnostic can be retaken at any time. Retaking does not delete progress: it creates
           a new estimate that is merged with existing data, always preferring the more optimistic
           estimate.
+        </div>
+      </section>
+
+      <AsciiDivider pattern="wave" />
+
+      {/* VI. Key Trade-offs */}
+      <section className="py-20 max-sm:py-12">
+        <h2 style={h2Style}>VI. Key Design Decisions</h2>
+
+        <div style={{ ...bodyStyle, marginBottom: '1.5rem' }}>
+          <strong style={{ color: 'var(--text-primary)', fontFamily: monoFont, fontSize: '13px' }}>
+            Go over Python or Node.js?
+          </strong>
+          <p style={{ margin: '4px 0 0' }}>
+            Single ~15MB binary that is both API server and static file server. No runtime dependencies.
+            ~5ms startup vs ~500ms for Python. Goroutines for concurrency. SymPy bridge via os/exec.
+          </p>
+        </div>
+
+        <div style={{ ...bodyStyle, marginBottom: '1.5rem' }}>
+          <strong style={{ color: 'var(--text-primary)', fontFamily: monoFont, fontSize: '13px' }}>
+            Generated questions over static bank?
+          </strong>
+          <p style={{ margin: '4px 0 0' }}>
+            Every problem is procedurally generated by a parameterized Go function. Infinite variety,
+            no memorization, adaptive difficulty. Trade-off: generation latency (ns for numeric, ~200ms
+            for SymPy). Worth it.
+          </p>
+        </div>
+
+        <div style={{ ...bodyStyle, marginBottom: '1.5rem' }}>
+          <strong style={{ color: 'var(--text-primary)', fontFamily: monoFont, fontSize: '13px' }}>
+            SQLite + PostgreSQL instead of one database?
+          </strong>
+          <p style={{ margin: '4px 0 0' }}>
+            SQLite for zero-config offline desktop use, PostgreSQL for production web. Same schema,
+            same Repository interface. Transparent via DATABASE_URL. The PostgresStore is currently
+            a stub awaiting implementation.
+          </p>
+        </div>
+
+        <div style={{ ...bodyStyle, marginBottom: '1.5rem' }}>
+          <strong style={{ color: 'var(--text-primary)', fontFamily: monoFont, fontSize: '13px' }}>
+            Raw SQL over an ORM?
+          </strong>
+          <p style={{ margin: '4px 0 0' }}>
+            Five tables, straightforward relationships. Raw SQL gives full control over the SM-2
+            upsert query and leaderboard computation. Transparent debugging. Easy to port between
+            SQLite and PostgreSQL.
+          </p>
+        </div>
+
+        <div style={calloutStyle}>
+          For the full system design document covering all 11 sections in detail (including SM-2
+          algorithm internals, scoring formulas, level system, and complete API reference),
+          see the <a href="https://github.com/chuma-beep/mathua/blob/main/docs/system-design.md" className="link-underline" style={{ color: 'var(--accent-blue)' }}>system design markdown document</a>.
         </div>
       </section>
     </div>
