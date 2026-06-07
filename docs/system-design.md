@@ -24,7 +24,7 @@ Mathua is an open-source adaptive mathematics learning platform. A single Go bin
 
 Mathua follows a five-layer architecture. All layers are compiled into a single Go binary. The UI layer has two implementations  --  the web frontend (React/Next.js served as a static export) and a desktop TUI (Bubble Tea)  --  both calling into the same engine through different entry points.
 
-![System Architecture](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-architecture-dark.svg)
+![System Architecture](diagrams/system-design-architecture-dark.svg)
 
 ### Layer Breakdown
 
@@ -61,7 +61,7 @@ A notable design choice: the API layer is bypassed entirely in TUI mode  --  the
 
 Five core tables: `students`, `concept_progress`, `sessions`, `attempts`, `questions`.
 
-![Data Model](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-data-model-dark.svg)
+![Data Model](diagrams/system-design-data-model-dark.svg)
 
 ### Table Details
 
@@ -212,7 +212,7 @@ Decaying concepts (≥14 days since last review) get `+5` priority bonus. The sc
 
 ## 5. SM-2 Algorithm & Mastery
 
-![SM-2 & Mastery](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-sm2-mastery-dark.svg)
+![SM-2 & Mastery](diagrams/system-design-sm2-mastery-dark.svg)
 
 ### Mastery State Machine
 
@@ -283,7 +283,7 @@ XP = int(base × timeMultiplier × streakMultiplier)
 
 The grading system uses a strategy pattern with a central Router that dispatches to the correct grader based on `grading_type`.
 
-![Grading Pipeline](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-grading-pipeline-dark.svg)
+![Grading Pipeline](diagrams/system-design-grading-pipeline-dark.svg)
 
 ### Grader Strategies
 
@@ -423,7 +423,7 @@ The TUI is a full terminal application built with `charmbracelet/bubbletea`. It 
 
 Here's the complete flow when a student submits an answer:
 
-![Request Flow](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-request-flow-dark.svg)
+![Request Flow](diagrams/system-design-request-flow-dark.svg)
 
 ### Step-by-Step
 
@@ -448,7 +448,7 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 Mathua implements a binary-search CAT to locate a student's knowledge frontier quickly. Instead of testing all ~284 concepts, the diagnostic requires approximately 20–35 questions.
 
-![CAT Diagnostic](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-cat-diagnostic-dark.svg)
+![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
 ### Algorithm
 
