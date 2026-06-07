@@ -42,14 +42,14 @@ function FlowNode({ data }: { data: { label: string; stepId: string } }) {
       border: '0.5px solid ' + c.border,
       borderLeft: '2px solid ' + c.accentBlue,
       fontFamily: monoFont,
-      fontSize: '10px',
+      fontSize: '11px',
       color: c.textSecondary,
       padding: '8px 12px',
       textAlign: 'center',
       lineHeight: 1.3,
       borderRadius: 0,
       whiteSpace: 'pre-wrap',
-      minWidth: 130,
+      minWidth: 160,
     }}>
       <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
       <span style={{ color: c.accentBlue, fontWeight: 500 }}>{data.label}</span>
@@ -107,7 +107,7 @@ export default function RequestFlow() {
   const initialNodes: Node[] = steps.map((id, i) => ({
     id,
     type: 'flowNode',
-    position: { x: 50, y: i * 48 },
+    position: { x: 50, y: i * 52 },
     data: { label: stepData[id].label, stepId: id },
     style: { width: 150 },
   }))
@@ -138,10 +138,10 @@ export default function RequestFlow() {
 
   const onPaneClick = useCallback(() => { setSelectedStep(null) }, [])
 
-  if (!mounted) return <div style={{ height: 600, width: '100%' }} />
+  if (!mounted) return <div style={{ height: 720, width: '100%' }} />
 
   return (
-    <div style={{ height: 600, width: '100%', border: '0.5px solid ' + c.border, background: 'transparent', position: 'relative' }}>
+    <div style={{ height: 720, width: '100%', border: '0.5px solid ' + c.border, background: 'transparent', position: 'relative' }}>
       <div style={{
         position: 'absolute', top: 8, left: 8, zIndex: 10,
         fontFamily: monoFont, fontSize: 10, color: c.textMuted,
@@ -159,7 +159,7 @@ export default function RequestFlow() {
         onNodeClick={onNodeClick}
         onPaneClick={onPaneClick}
         fitView
-        fitViewOptions={{ padding: 0.3 }}
+        fitViewOptions={{ padding: 0.15 }}
         nodesConnectable={false}
         preventScrolling={false}
         proOptions={{ hideAttribution: true }}

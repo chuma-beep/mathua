@@ -4,12 +4,6 @@ direction: right
 
 UI: UI Layer {
   Web: Web App\nNext.js + React + KaTeX
-  
-  style: {
-    fill: "#FAF9F5"
-    stroke: "#E8E6DC"
-    font-color: "#141413"
-  }
 }
 
 API: API Layer {
@@ -19,28 +13,16 @@ API: API Layer {
   Diag: Diagnostic\nAdaptive Testing
   Lboard: Leaderboard\nWeekly Scores
   Reviews: Reviews\nSpaced Repetition
-  
-  style: {
-    fill: "#EEF2F7"
-    stroke: "#E8E6DC"
-    font-color: "#141413"
-  }
 }
 
 Engine: Core Engine {
-  DAG: DAG Loader\nJSON → Topo-Sorted Graph
+  DAG: DAG Loader\nJSON to Topo-Sorted Graph
   Sched: Scheduler\nSM-2 Priority Queue
   Gen: Generators\n18 Domain Registries
-  Master: Mastery\nUNSEEN→LEARNING→PRACTICING→MASTERED
+  Master: Mastery\nUNSEEN -> LEARNING -> PRACTICING -> MASTERED
   Score: Scoring\nXP + Speed + Streak
   Weak: Weakness\nPropagation Engine
   DiagEng: Diagnostic\nBinary Search CAT
-  
-  style: {
-    fill: "#FAF9F5"
-    stroke: "#E8E6DC"
-    font-color: "#141413"
-  }
 }
 
 Grading: Grading Layer {
@@ -51,25 +33,13 @@ Grading: Grading Layer {
   Choice: Multiple Choice\nCase-Insensitive
   Comp: Comparison\n>/</=/>=/<=
   Order: Ordering\nPositional Match
-  Complex: Complex\nPolar → SymPy
-  
-  style: {
-    fill: "#EEF2F7"
-    stroke: "#E8E6DC"
-    font-color: "#141413"
-  }
+  Complex: Complex\nPolar to SymPy
 }
 
 Storage: Storage Layer {
   Repo: Repository\nInterface
   SQLite: SQLite\nDesktop / Dev
   PG: PostgreSQL\nProduction Web
-  
-  style: {
-    fill: "#FAF9F5"
-    stroke: "#E8E6DC"
-    font-color: "#141413"
-  }
 }
 
 # Connections
@@ -80,7 +50,7 @@ Web -> Diag
 Web -> Lboard
 Web -> Reviews
 
-# API → Engine
+# API to Engine
 Auth -> DAG
 Session -> DAG
 Session -> Sched
@@ -97,7 +67,7 @@ Gen -> Master
 Master -> Weak
 Master -> Score
 
-# Engine → Grading
+# Engine to Grading
 Gen -> Router
 Router -> Numeric
 Router -> Polys
@@ -107,7 +77,7 @@ Router -> Comp
 Router -> Order
 Router -> Complex
 
-# Grading → Storage
+# Grading to Storage
 Score -> Repo
 Master -> Repo
 DiagEng -> Repo
@@ -117,9 +87,8 @@ Repo -> PG
 # Styling
 nodes: {
   style: {
-    font-size: 12
-    font-color: "#141413"
-    border-radius: 4
+    font-size: 13
+    border-radius: 6
   }
 }
 
@@ -127,6 +96,5 @@ edges: {
   style: {
     stroke: "#6b6a64"
     font-size: 10
-    font-color: "#504e49"
   }
 }

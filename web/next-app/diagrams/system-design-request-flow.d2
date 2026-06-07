@@ -1,6 +1,6 @@
 # Mathua Request Flow  --  Answer Submission
 
-direction: right
+direction: down
 
 Client: Client\nWeb Browser
 
@@ -14,7 +14,7 @@ Engine: Engine.SubmitAnswer\n(sessionID, studentID, answer, elapsed)
 
 Grade: gradeAnswer\nGenerator.Grade || Router.Grade
 
-Grader: Grader Router → Numeric/SymPy/etc
+Grader: Grader Router\nNumeric / SymPy / Choice / etc
 
 Mastery: mastery.Machine.Next()\nStatus Transition
 
@@ -52,51 +52,14 @@ Response -> Client
 # Styling
 nodes: {
   style: {
-    font-size: 11
-    font-color: "#141413"
-    border-radius: 4
-  }
-  Client: {
-    style.fill: "#FAF9F5"
-    style.stroke: "#C8A96E"
-  }
-  Server: {
-    style.fill: "#EEF2F7"
-    style.stroke: "#3B82F6"
-  }
-  Auth: {
-    style.fill: "#EEF2F7"
-    style.stroke: "#3B82F6"
-  }
-  Handler: {
-    style.fill: "#EEF2F7"
-    style.stroke: "#3B82F6"
-  }
-  Engine: {
-    style.fill: "#FAF9F5"
-    style.stroke: "#C8A96E"
-  }
-  Grade: {
-    style.fill: "#EEF2F7"
-    style.stroke: "#10B981"
-  }
-  Grader: {
-    style.fill: "#EEF2F7"
-    style.stroke: "#10B981"
-  }
-  Mastery: {
-    style.fill: "#FAF9F5"
-    style.stroke: "#C8A96E"
-  }
-  SM2: {
-    style.fill: "#FAF9F5"
-    style.stroke: "#C8A96E"
+    font-size: 13
+    border-radius: 6
   }
 }
 
 edges: {
   style: {
     stroke: "#6b6a64"
-    font-size: 9
+    font-size: 10
   }
 }
