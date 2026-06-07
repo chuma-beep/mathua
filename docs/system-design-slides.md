@@ -15,7 +15,7 @@ A single Go binary, two delivery modes, one engine core.
 
 ## 1. Five-Layer Architecture
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-architecture-dark.svg)
+![width:1000](diagrams/system-design-architecture-dark.svg)
 
 **UI** (React/Next.js + Bubble Tea) **API** (net/http) **Engine** (Go) **Grading** (Go + SymPy) **Storage** (SQLite/PostgreSQL)
 
@@ -36,7 +36,7 @@ A single Go binary, two delivery modes, one engine core.
 
 ## 3. Database Schema
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-data-model-dark.svg)
+![width:1000](diagrams/system-design-data-model-dark.svg)
 
 5 tables: `students`, `concept_progress`, `sessions`, `attempts`, `questions`
 
@@ -44,7 +44,7 @@ A single Go binary, two delivery modes, one engine core.
 
 ## 4. SM-2 Spaced Repetition
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-sm2-mastery-dark.svg)
+![width:1000](diagrams/system-design-sm2-mastery-dark.svg)
 
 Mastery states: UNSEEN -> LEARNING -> PRACTICING -> MASTERED -> DECAYING
 
@@ -69,7 +69,7 @@ Quality from: correctness + response time ratio.
 
 ## 6. Grading Pipeline
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-grading-pipeline-dark.svg)
+![width:1000](diagrams/system-design-grading-pipeline-dark.svg)
 
 6+ grading strategies dispatched by grading type. SymPy for symbolic math.
 
@@ -126,7 +126,7 @@ Middleware: CORS, logging, JWT auth, rate limiting (5/min on auth).
 
 ## 10. End-to-End Request Flow
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-request-flow-dark.svg)
+![width:1000](diagrams/system-design-request-flow-dark.svg)
 
 12 steps from client submit to response. Target: <100ms numeric, <500ms SymPy.
 
@@ -134,7 +134,7 @@ Middleware: CORS, logging, JWT auth, rate limiting (5/min on auth).
 
 ## 11. Computerized Adaptive Testing
 
-![width:1000](https://raw.githubusercontent.com/chuma-beep/mathua/main/web/next-app/public/diagrams/system-design-cat-diagnostic-dark.svg)
+![width:1000](diagrams/system-design-cat-diagnostic-dark.svg)
 
 Binary search on topologically sorted DAG. ~20-35 questions vs 284.
 
