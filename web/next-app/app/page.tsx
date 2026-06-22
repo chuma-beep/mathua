@@ -10,7 +10,6 @@ import Pipeline from '../components/Pipeline'
 import FormulaBlock from '../components/FormulaBlock'
 import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
-import PlatformsFlow from '../components/PlatformsFlow'
 import Footer from '../components/Footer'
 import conceptsData from '../data/concepts.json'
 
@@ -243,7 +242,7 @@ export default function HomePage() {
           <span style={{ color: 'var(--border-strong)' }}>·</span>
           <span>{domainCount} domains</span>
           <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span>web + desktop</span>
+          <span>web</span>
           <span style={{ color: 'var(--border-strong)' }}>·</span>
           <span>open source</span>
         </div>
@@ -369,7 +368,7 @@ export default function HomePage() {
 
       {/* ── Progression ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader title="Rank by mastery. Level by depth." />
+        <SectionHeader title="Ranking system" />
         <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col max-sm:gap-4">
           <div className="flex-1 min-w-[280px] max-sm:min-w-0">
             <p
@@ -399,58 +398,6 @@ export default function HomePage() {
       </section>
 
       <AsciiDivider pattern="dash" />
-
-      {/* ── Platforms ── */}
-      <section className="py-20 max-sm:py-12">
-        <SectionHeader title="One engine. Two ways to run it." />
-
-        <div className="flex flex-wrap gap-0 items-start mt-7 max-sm:flex-col" style={{ fontFamily: bodyFont }}>
-          {/* Web column */}
-          <div className="flex-1 min-w-[280px] max-sm:pr-0" style={{ paddingRight: '2rem' }}>
-            <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-              Web (browser)
-            </h3>
-            <div style={{ borderBottom: '0.5px solid var(--border)', width: '100%', marginBottom: '0.75rem' }} />
-            {[
-              'React + KaTeX',
-              'Account required',
-              'Global leaderboard',
-              'Graph view',
-            ].map((feature) => (
-              <div key={feature} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-                <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
-                {feature}
-              </div>
-            ))}
-          </div>
-
-          {/* Divider */}
-          <div className="max-sm:hidden" style={{ borderLeft: '0.5px solid var(--border)', alignSelf: 'stretch', minHeight: '160px' }} />
-
-          {/* Desktop column */}
-          <div className="flex-1 min-w-[280px] max-sm:pl-0" style={{ paddingLeft: '2rem' }}>
-            <h3 style={{ fontFamily: headingFont, fontSize: '1.1rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: '0.75rem' }}>
-              Desktop (terminal)
-            </h3>
-            <div style={{ borderBottom: '0.5px solid var(--border)', width: '100%', marginBottom: '0.75rem' }} />
-            {[
-              'Bubble Tea TUI',
-              'No account needed',
-              'Fully offline',
-              'SQLite storage',
-            ].map((feature) => (
-              <div key={feature} style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-                <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem' }}>·</span>
-                {feature}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-center mt-8">
-          <PlatformsFlow />
-        </div>
-      </section>
 
       <AsciiDivider pattern="wave" />
 

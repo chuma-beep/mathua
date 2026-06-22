@@ -9,7 +9,7 @@ paginate: true
 
 # Mathua System Design
 
-A single Go binary, two delivery modes, one engine core.
+A single Go binary, a web delivery mode, one engine core.
 
 ---
 
@@ -17,7 +17,7 @@ A single Go binary, two delivery modes, one engine core.
 
 ![width:1000](diagrams/system-design-architecture-dark.svg)
 
-**UI** (React/Next.js + Bubble Tea) **API** (net/http) **Engine** (Go) **Grading** (Go + SymPy) **Storage** (SQLite/PostgreSQL)
+**UI** (React/Next.js) **API** (net/http) **Engine** (Go) **Grading** (Go + SymPy) **Storage** (SQLite/PostgreSQL)
 
 ---
 
@@ -220,7 +220,7 @@ Secret from `JWT_SECRET` env, or random per run.
 
 ```
 Repository interface
-  ├── SQLiteStore  (desktop/dev)
+  ├── SQLiteStore  (local/dev)
   │     PRAGMA journal_mode=WAL
   │     PRAGMA foreign_keys=ON
   │     PRAGMA busy_timeout=5000
@@ -284,7 +284,7 @@ Same schema, same interface. Transparent swap via `DATABASE_URL`.
                     +------------------+
 ```
 
-One language, two databases, two UIs, one engine.
+One language, two databases, one UI, one engine.
 
 ---
 

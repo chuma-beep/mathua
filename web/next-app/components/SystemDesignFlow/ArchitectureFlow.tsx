@@ -33,7 +33,7 @@ const detailInfo: Record<string, string> = {
   'numeric-grader': 'Go native. Handles integers, decimals, fractions (big.Rat), mixed numbers, scientific notation.',
   'sympy-grader': 'Long-lived Python subprocess. JSON over stdin/stdout. 10s timeout. Fallback to Go symbolic grader.',
   'multiple-choice': 'Case-insensitive. Single-letter matching (B matches Option B).',
-  'sqlite': 'Desktop/dev. WAL mode, foreign_keys ON, busy_timeout 5000. File-based, zero config.',
+  'sqlite': 'Local/dev. WAL mode, foreign_keys ON, busy_timeout 5000. File-based, zero config.',
   'postgresql': 'Production web. Shared state, concurrent connections. Via Repository interface.',
 }
 

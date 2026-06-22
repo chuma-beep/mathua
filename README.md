@@ -23,7 +23,7 @@
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from counting through calculus through a dependency graph of 291 atomic concepts — never advancing until speed and accuracy thresholds are both met. It runs as a single Go binary: desktop TUI for solo practice, or a web server with React + Next.js for global leaderboards and graph visualisation.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from counting through calculus through a dependency graph of 291 atomic concepts — never advancing until speed and accuracy thresholds are both met. It runs as a single Go binary with a web server delivery mode and React + Next.js for global leaderboards and graph visualisation.
 
 ---
 
@@ -44,9 +44,6 @@ Mathua is a local-first adaptive math learning engine inspired by the mastery-ga
 git clone https://github.com/chuma-beep/mathua.git
 cd mathua
 go build ./cmd/mathua
-
-# Run the desktop TUI
-./mathua
 
 # Run the web server (requires Postgres)
 DATABASE_URL=postgres://... ./mathua --serve --port 8080
@@ -96,7 +93,7 @@ When a concept reaches MASTERED, Mathua schedules its next review using a simpli
 ## Content
 
 | Domain | Concepts |
-|---|---|---|
+|--------|----------|
 | Counting | 10 |
 | Arithmetic | 46 |
 | Fractions | 21 |
@@ -120,12 +117,10 @@ When a concept reaches MASTERED, Mathua schedules its next review using a simpli
 
 ## Architecture
 
-Mathua is a single Go binary with two modes. The engine core is identical — only the delivery layer differs.
+Mathua is a single Go binary with one delivery method. The engine core is identical — only the UI delivery layer differs.
 
 ```
-Web (React + Next.js) ═══ REST API ═══┐
-                                       ├── Core Engine ── Grading ── Storage
-Desktop TUI (Bubble Tea) ═══ direct ───┘    (Scheduler · Generators · SM-2   Numeric · Choice · Comparison · Ordering · Symbolic · SymPy   SQLite · Postgres)
+Web (React + Next.js) ═══ REST API ═══ Core Engine ── Grading ── Storage
 ```
 
 The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fully documented at **[`docs/architecture.md`](docs/architecture.md)** and in the interactive **[web docs](/docs/architecture)** with Mermaid diagrams.
