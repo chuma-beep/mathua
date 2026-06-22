@@ -89,38 +89,13 @@ const calloutStyle: React.CSSProperties = {
   marginTop: '1.5rem',
 }
 
-const monoLabel: React.CSSProperties = {
-  fontFamily: monoFont,
-  fontSize: '12px',
-  color: 'var(--text-muted)',
-  textTransform: 'uppercase',
-  letterSpacing: '0.05em',
-  marginTop: '4px',
-}
-
-const monoNum: React.CSSProperties = {
-  fontFamily: monoFont,
-  fontSize: '2rem',
-  fontWeight: 400,
-  color: 'var(--accent-blue)',
-  lineHeight: 1,
-}
-
-const cardStyle: React.CSSProperties = {
-  background: 'var(--surface)',
-  border: '0.5px solid var(--border)',
-  padding: '20px',
-  textAlign: 'center',
-}
-
 export default function ArchitecturePage() {
   return (
     <div className="max-w-container mx-auto px-6 max-sm:px-4">
       <section className="pt-8">
         <SectionHeader label="Documentation" title="Architecture & System Design" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
-          Mathua is a single Go binary with two delivery modes. The engine core is identical --
-          only the presentation layer differs. Click nodes in the diagrams below for details.
+          Mathua is a single Go binary with a web delivery mode. Click nodes in the diagrams below for details.
         </p>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <a
@@ -137,8 +112,8 @@ export default function ArchitecturePage() {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>I. Five-Layer Architecture</h2>
         <p style={bodyStyle}>
-          The system is organized into five layers. The UI has two implementations -- a web frontend
-          (React/Next.js) and a desktop TUI (Bubble Tea) -- both calling into the same Go engine.
+          The system is organized into five layers. The UI has a single implementation -- the web frontend
+          (React/Next.js) -- calling into the Go engine through the REST API.
           The API exposes 25+ REST endpoints through net/http. The Core Engine handles DAG loading,
           SM-2 scheduling, problem generation, mastery tracking, scoring, and the CAT diagnostic.
           The Grading layer dispatches to 6+ grader strategies with a SymPy subprocess for symbolic
@@ -146,27 +121,6 @@ export default function ArchitecturePage() {
         </p>
 
         <ArchitectureFlow />
-
-        {/* Metric cards */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: '16px',
-          marginBottom: '48px',
-          marginTop: '24px',
-        }}>
-          {[
-            { num: '1', label: 'Binary' },
-            { num: '2', label: 'UI Modes' },
-            { num: '5', label: 'Engine Modules' },
-            { num: '6', label: 'Graders' },
-          ].map(({ num, label }) => (
-            <div key={label} style={cardStyle}>
-              <div style={monoNum}>{num}</div>
-              <div style={monoLabel}>{label}</div>
-            </div>
-          ))}
-        </div>
       </section>
 
       <AsciiDivider pattern="wave" />
@@ -330,7 +284,7 @@ export default function ArchitecturePage() {
             SQLite + PostgreSQL instead of one database?
           </strong>
           <p style={{ margin: '4px 0 0' }}>
-            SQLite for zero-config offline desktop use, PostgreSQL for production web. Same schema,
+            SQLite for zero-config local development, PostgreSQL for production web. Same schema,
             same Repository interface. Transparent via DATABASE_URL. The PostgresStore is currently
             a stub awaiting implementation.
           </p>

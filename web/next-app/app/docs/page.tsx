@@ -139,9 +139,6 @@ export default function DocsIndexPage() {
 cd mathua
 go build ./cmd/mathua
 
-# Run the desktop TUI
-./mathua
-
 # Run the web server (requires Postgres)
 DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
         </pre>

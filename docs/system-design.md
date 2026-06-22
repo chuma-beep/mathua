@@ -1,6 +1,6 @@
 # Mathua System Design
 
-Mathua is an open-source adaptive mathematics learning platform. A single Go binary with two delivery modes  --  web (Next.js/React) and desktop (Bubble Tea TUI)  --  sharing one engine core.
+Mathua is an open-source adaptive mathematics learning platform. A single Go binary with web delivery mode  --  Next.js/React static export  --  sharing one engine core.
 
 ---
 
@@ -22,7 +22,7 @@ Mathua is an open-source adaptive mathematics learning platform. A single Go bin
 
 ## 1. High-Level Architecture
 
-Mathua follows a five-layer architecture. All layers are compiled into a single Go binary. The UI layer has two implementations  --  the web frontend (React/Next.js served as a static export) and a desktop TUI (Bubble Tea)  --  both calling into the same engine through different entry points.
+Mathua follows a five-layer architecture. All layers are compiled into a single Go binary. The UI layer has a single implementation  --  the web frontend (React/Next.js served as a static export)  --  calling into the same engine through the REST API.
 
 ![System Architecture](diagrams/system-design-architecture-dark.svg)
 
@@ -30,13 +30,13 @@ Mathua follows a five-layer architecture. All layers are compiled into a single 
 
 | Layer | Technology | Responsibility |
 |-------|-----------|----------------|
-| **UI** | React/Next.js (web), Bubble Tea (desktop) | Rendering, user interaction, client state |
+| **UI** | React/Next.js (static export) | Rendering, user interaction, client state |
 | **API** | `net/http` (Go stdlib) | REST endpoints, JWT auth, rate limiting, CORS |
 | **Core Engine** | Go | DAG loading, SM-2 scheduling, problem generation, mastery tracking, scoring, weakness propagation, CAT diagnostic |
 | **Grading** | Go + SymPy (Python subprocess) | 6+ grading strategies dispatched by grading type |
-| **Storage** | SQLite (desktop/dev), PostgreSQL (production) | Persistence via `Repository` interface |
+| **Storage** | SQLite (local/dev), PostgreSQL (production) | Persistence via `Repository` interface |
 
-A notable design choice: the API layer is bypassed entirely in TUI mode  --  the desktop app calls the engine directly through Go function interfaces, while the web app routes through the REST API.
+The architecture is streamlined with a single UI delivery method through the REST API.
 
 ---
 
@@ -149,7 +149,7 @@ Migrations are embedded directly in the application binary  --  no external migr
 
 The `Repository` interface abstracts the storage layer:
 
-- **SQLiteStore**  --  Fully implemented, used for desktop and development
+- **SQLiteStore**  --  Fully implemented, used for local development
 - **PostgresStore**  --  Stub (not yet implemented; every method returns "not implemented")
 
 The codebase checks `DATABASE_URL` at startup and falls back to `mathua.db` with a warning if PostgreSQL is specified.
@@ -413,10 +413,6 @@ web/next-app/
 
 **Theming:** CSS custom properties for dark/light mode. Uses a warm palette: dark backgrounds are `#0b0f1a` (not pure black), light surfaces are `#fefcf4` (warm parchment). Gold accent (`#c8a96e`) marks mastery and structure.
 
-### Desktop TUI (Bubble Tea)
-
-The TUI is a full terminal application built with `charmbracelet/bubbletea`. It calls the engine directly (bypassing the API layer) through Go function interfaces. Models: welcome, practice, progress, study, browse, concept detail, diagnostic.
-
 ---
 
 ## 9. End-to-End Data Flow
@@ -506,7 +502,7 @@ The `Repository` interface makes this transparent. The schema is identical acros
 - **Infinite variety**: Every session is unique
 - **No cheating**: A static bank can be memorized and shared
 - **Adaptive difficulty**: Parameters can be tuned in real-time based on student performance
-- **No storage**: Questions are generated on-the-fly and never persisted
+- **No storage**: Questions are generated on-demand and never persisted
 
 Trade-off: generation latency. Complex polynomial questions require a SymPy subprocess round-trip (typically 50–200ms). Simple numeric questions are pure Go and take <1ms.
 
@@ -540,4 +536,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite/PostgreSQL abstracted by an interface), one engine core with two UI modes. The complexity is in the algorithms  --  SM-2 spaced repetition, CAT binary-search diagnostics, 18 problem generators, 6+ grading strategies  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite/PostgreSQL abstracted by an interface), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition, CAT binary-search diagnostics, 18 problem generators, 6+ grading strategies  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+

@@ -4,13 +4,16 @@ Mathua is community-built. Every concept, every generator, every line of the con
 
 ## Quick start
 
-Clone the repo and make sure the TUI runs:
+Clone the repo and make sure the web server works:
 
 ```bash
 git clone https://github.com/chuma-beep/mathua.git
 cd mathua
+
 go build ./cmd/mathua
-./mathua
+
+# Run the web server (requires Postgres)
+DATABASE_URL=postgres://... ./mathua --serve --port 8080
 ```
 
 The concept graph lives in per-domain files under `data/concepts/`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
@@ -124,8 +127,8 @@ A validator runs on every pull request. It checks two invariants before any merg
 3. Write the fuzz test with 1 000 samples.
 4. (Optional) Write a lesson and register it in `data/lessons/lessons.json`.
 5. Run `go test ./...` and `go run scripts/validate_graph.go` locally.
-5. Open a PR. The CI pipeline runs the validator and all tests automatically.
-6. A maintainer reviews the concept ordering, thresholds, and generator quality.
+6. Open a PR. The CI pipeline runs the validator and all tests automatically.
+7. A maintainer reviews the concept ordering, thresholds, and generator quality.
 
 Reviews usually happen within a few days. If a week passes with no response, ping the thread. We read every PR.
 

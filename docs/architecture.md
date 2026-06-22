@@ -1,6 +1,6 @@
 # Mathua Architecture
 
-Mathua is a single Go binary with two delivery modes. The engine core is identical — only the presentation layer differs.
+Mathua is a single Go binary with a web delivery mode. The engine core serves a single presentation layer.
 
 ## Five-layer architecture
 
@@ -8,7 +8,6 @@ Mathua is a single Go binary with two delivery modes. The engine core is identic
 ┌──────────────────────────────────────────────┐
 │  UI Layer                                     │
 │  Web browser (React + Next.js)                │
-│  Desktop TUI (Bubble Tea)                     │
 ├──────────────────────────────────────────────┤
 │  API Layer                                     │
 │  REST API — net/http                          │
@@ -24,18 +23,18 @@ Mathua is a single Go binary with two delivery modes. The engine core is identic
 │  Polynomial & Expression → SymPy (Python)       │
 ├──────────────────────────────────────────────┤
 │  Storage                                       │
-│  SQLite (desktop) · PostgreSQL (web)           │
+│  SQLite (local) · PostgreSQL (web)            │
 │  data/concepts/ — per-domain DAG files          │
 └──────────────────────────────────────────────┘
 ```
 
-### UI Layer — Two presentations, one engine
+### UI Layer — Web frontend, one engine
 
-Mathua ships with two user interfaces that share the same engine core. The desktop interface requires no account, no network, and stores everything in SQLite. The web interface uses React with Next.js and connects to a shared Postgres database.
+Mathua ships with a web frontend using React with Next.js, connecting to a shared Postgres database.
 
 ### API Layer — Four services, one router
 
-The web server exposes a REST API through Go's standard `net/http` package. No external HTTP framework. Four services: Session (practice management), Graph (concept DAG visualisation), Leaderboard (weekly scoring), Diagnostic (adaptive testing). The TUI bypasses the API layer entirely — it calls the engine modules directly through Go function interfaces.
+The web server exposes a REST API through Go's standard `net/http` package. No external HTTP framework. Four services: Session (practice management), Graph (concept DAG visualisation), Leaderboard (weekly scoring), Diagnostic (adaptive testing).
 
 ### Core Engine — Five modules
 
@@ -59,7 +58,7 @@ Six grader types handled by a single `Router`:
 
 ### Storage — SQLite and Postgres
 
-SQLite for fully offline desktop operation. PostgreSQL for concurrent web access and global state. The data schema is identical across both databases, abstracted behind a repository interface.
+SQLite for local development. PostgreSQL for production web access and global state. The data schema is identical across both databases, abstracted behind a repository interface.
 
 ## Diagnostic — Computerised Adaptive Testing
 

@@ -541,17 +541,7 @@ for line in sys.stdin:
                 2e^(2x) == 2exp(2x)
               </span>
             </p>
-            <p style={bodyStyle}>
-              For display, the TUI renders exponents using{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>^</code> notation{' '}
-              (<code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x^2 + 5x + 6</code>)
-              while the web frontend uses KaTeX with{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>{'{'}^{'}'}{'{'}^{'}'}</code>{' '}
-              for proper superscripts. Every generator receives a render mode flag
-              (<code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>RenderTUI</code> or{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>RenderWeb</code>) so
-              output is always correct for the target display.
-            </p>
+
           </section>
         </main>
       </div>

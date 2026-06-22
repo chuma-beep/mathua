@@ -4,7 +4,6 @@ UI: UI Layer {
   style.fill: "#EEF2F7"
   
   Web: Web Browser\nReact + KaTeX
-  TUI: Desktop\nBubble Tea
   
   style: {
     fill: "#FAF9F5"
@@ -60,7 +59,7 @@ Grading: Grading Layer {
 Storage: Storage {
   style.fill: "#EEF2F7"
   
-  SQLite: SQLite\ndesktop
+  SQLite: SQLite
   PG: PostgreSQL\nweb
   
   style: {
@@ -76,11 +75,6 @@ Web -> Session
 Web -> Graph
 Web -> Leaderboard
 Web -> Diagnostic
-
-# TUI → engine modules (direct calls, bypass API)
-TUI -> Dag
-TUI -> Sched
-TUI -> Gen
 
 # API services → engine
 Session -> Dag

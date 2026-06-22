@@ -1,6 +1,6 @@
 # Mathua Design System
 
-A mathematics learning platform design system built on a single serif family (IBM Plex Serif) paired with its companion monospace (IBM Plex Mono). Dark-first, warm-neutral, gold-accented. Terminal toolkit for the desktop TUI; warm parchment for the web. Precision above decoration.
+A mathematics learning platform design system built on a single serif family (IBM Plex Serif) paired with its companion monospace (IBM Plex Mono). Dark-first, warm-neutral, gold-accented. Warm parchment for the web. Precision above decoration.
 
 ---
 
@@ -203,7 +203,6 @@ All architecture and workflow diagrams are pre-rendered D2 SVGs. No browser-side
 | CAT diagnostic (binary search) | `cat-diagnostic.d2` | `/docs/architecture`, `/diagnose` |
 | Contributing (PR workflow) | `contributing.d2` | Pre-rendered but not displayed (numbered list is clearer) |
 | Student model (state pipeline) | `student-model.d2` | Available for future use |
-| Platforms (Web vs Desktop) | `platforms.d2` | Home page "One engine. Two ways to run it." |
 
 Generate with `npm run diagrams`.
 

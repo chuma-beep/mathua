@@ -94,7 +94,6 @@ const layers: LayerDef[] = [
     id: 'ui', label: 'UI Layer',
     items: [
       { id: 'web', label: 'Web Browser\nReact + KaTeX' },
-      { id: 'tui', label: 'Desktop\nBubble Tea' },
     ],
   },
   {
@@ -130,7 +129,7 @@ const layers: LayerDef[] = [
   {
     id: 'storage', label: 'Storage',
     items: [
-      { id: 'sqlite', label: 'SQLite\ndesktop' },
+      { id: 'sqlite', label: 'SQLite' },
       { id: 'pg', label: 'PostgreSQL\nweb' },
     ],
   },
@@ -141,9 +140,6 @@ const archEdges: ArchEdge[] = [
   { source: 'web', target: 'graph' },
   { source: 'web', target: 'leaderboard' },
   { source: 'web', target: 'diag' },
-  { source: 'tui', target: 'dag' },
-  { source: 'tui', target: 'sched' },
-  { source: 'tui', target: 'gen' },
   { source: 'session', target: 'dag' },
   { source: 'session', target: 'sched' },
   { source: 'graph', target: 'dag' },
