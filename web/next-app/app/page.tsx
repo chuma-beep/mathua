@@ -208,9 +208,7 @@ export default function HomePage() {
             letterSpacing: '-0.01em',
           }}
         >
-          Master the foundation.
-          <br />
-          Earn the abstraction.
+          Adaptive math learning platform
         </h1>
         <p
           style={{
