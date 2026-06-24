@@ -271,7 +271,7 @@ export default function HomePage() {
 
       {/* ── How It Works ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader title="A different kind of math system" />
+        <SectionHeader title="3 main features" />
 
         <div style={{ marginTop: '2rem' }}>
           <div style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
@@ -311,7 +311,7 @@ export default function HomePage() {
 
       {/* ── Mastery Pipeline ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader title="Five states. One direction." />
+        <SectionHeader title="The states" />
         <Pipeline states={PIPELINE_STATES} className="my-7" />
         <div className="flex justify-center">
           <FormulaBlock
@@ -401,7 +401,7 @@ export default function HomePage() {
 
       {/* ── Contributing ── */}
       <section className="py-20 max-sm:py-12">
-        <SectionHeader title="Built to be extended." />
+        <SectionHeader title="How it is extended." />
         <p
           style={{
             fontFamily: bodyFont,
