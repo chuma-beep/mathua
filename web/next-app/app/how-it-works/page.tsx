@@ -236,17 +236,7 @@ export default function HowItWorksPage() {
             <p style={bodyStyle}>
               Every concept in the graph has a state for each student:
             </p>
-            <div className="flex items-center gap-1.5 flex-wrap my-4">
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>UNSEEN</span>
-              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>LEARNING</span>
-              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>PRACTICING</span>
-              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-blue)' }}>MASTERED</span>
-              <span style={{ color: 'var(--border-strong)', fontFamily: monoFont, fontSize: '13px' }}>→</span>
-              <span style={{ fontFamily: monoFont, fontSize: '13px', letterSpacing: '0.05em', color: 'var(--accent-teal)' }}>DECAYING</span>
-            </div>
+
             <StudentModelFlow />
             <div className="overflow-x-auto my-4">
               <table
@@ -259,18 +249,18 @@ export default function HowItWorksPage() {
               >
                 <thead>
                   <tr style={{ background: 'transparent' }}>
-                    <th style={tableHeaderStyle}>Concept</th>
-                    <th style={tableHeaderStyle}>Streak required</th>
-                    <th style={tableHeaderStyle}>Time limit</th>
+                    <th style={tableHeaderStyle}>Skill</th>
+                    <th style={tableHeaderStyle}>Correct answers in a row needed</th>
+                    <th style={tableHeaderStyle}>Time per question</th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    ['arith.add.single', '5', '8s'],
-                    ['arith.mult.tables', '7', '6s'],
-                    ['frac.add.diff', '5', '18s'],
-                    ['prealg.eq.one_step_add', '5', '12s'],
-                    ['arith.div.long', '5', '20s'],
+                    ['Single-digit addition', '5', '8 seconds'],
+                    ['Multiplication tables', '7', '6 seconds'],
+                    ['Add fractions with different denominators', '5', '18 seconds'],
+                    ['Solve one-step addition equations', '5', '12 seconds'],
+                    ['Long division', '5', '20 seconds'],
                   ].map(([concept, streak, time]) => (
                     <tr key={`concept-${concept}`} style={{ background: 'transparent' }}>
                       <td style={tableCellStyle}>{concept}</td>
