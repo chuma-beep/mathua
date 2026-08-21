@@ -24,21 +24,21 @@ type Student struct {
 }
 
 type ConceptProgress struct {
-	StudentID       string
-	ConceptID       string
-	Status          string // UNSEEN | LEARNING | PRACTICING | MASTERED
-	Streak          int
-	BestStreak      int
-	AvgResponseTime float64
-	Attempts        int
-	LastAttempted   *time.Time
-	LastReviewed    *time.Time
-	NextReviewDue   *time.Time
-	SM2Repetitions  int
-	SM2Interval     int
-	SM2EFactor      float64
-	MasteredAt      *time.Time
-	WeaknessScore   float64
+	StudentID       string     `json:"student_id,omitempty"`
+	ConceptID       string     `json:"concept_id,omitempty"`
+	Status          string     `json:"status"` // UNSEEN | LEARNING | PRACTICING | MASTERED
+	Streak          int        `json:"streak"`
+	BestStreak      int        `json:"best_streak"`
+	AvgResponseTime float64    `json:"avg_response_time"`
+	Attempts        int        `json:"attempts"`
+	LastAttempted   *time.Time `json:"last_attempted,omitempty"`
+	LastReviewed    *time.Time `json:"last_reviewed,omitempty"`
+	NextReviewDue   *time.Time `json:"next_review_due,omitempty"`
+	SM2Repetitions  int        `json:"sm2_repetitions,omitempty"`
+	SM2Interval     int        `json:"sm2_interval,omitempty"`
+	SM2EFactor      float64    `json:"sm2_efactor,omitempty"`
+	MasteredAt      *time.Time `json:"mastered_at,omitempty"`
+	WeaknessScore   float64    `json:"weakness_score,omitempty"`
 }
 
 type Session struct {
