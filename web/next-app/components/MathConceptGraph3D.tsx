@@ -7,6 +7,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 export interface ConceptDef {
   id: string
@@ -153,6 +154,7 @@ const NodeMesh = React.memo(function NodeMesh({
   onHover,
   onSelect,
   theme,
+  isMobile,
 }: {
   node: RenderNode
   isActive: boolean
@@ -160,31 +162,28 @@ const NodeMesh = React.memo(function NodeMesh({
   onHover: (id: string | null) => void
   onSelect: (id: string) => void
   theme: 'dark' | 'light'
+  isMobile: boolean
 }) {
   const meshRef = useRef<THREE.Mesh>(null)
   const ringRef = useRef<THREE.Mesh>(null)
   const color = nodeDisplayColor(node, theme)
   const showStatus = node.status !== null && node.status !== 'locked' && node.status !== 'unseen'
   const statusLabel = showStatus ? node.status : node.domain
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
 
   useFrame(() => {
     if (meshRef.current) {
       const mat = meshRef.current.material as THREE.MeshStandardMaterial
       const targetIntensity = isActive ? 2.0 : isHovered ? 1.2 : node.onPath ? 0.8 : node.status === 'locked' ? 0.1 : 0.3
-      mat.emissiveIntensity = THREE.MathUtils.lerp(mat.emissiveIntensity, targetIntensity, 0.25)
+      if (Math.abs(mat.emissiveIntensity - targetIntensity) > 0.01) {
+        mat.emissiveIntensity = THREE.MathUtils.lerp(mat.emissiveIntensity, targetIntensity, 0.25)
+      }
     }
     if (ringRef.current) {
       const mat = ringRef.current.material as THREE.MeshBasicMaterial
       const targetOpacity = node.onPath ? 0.18 : 0.04
-      mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.2)
+      if (Math.abs(mat.opacity - targetOpacity) > 0.005) {
+        mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.2)
+      }
     }
   })
 
@@ -196,11 +195,11 @@ const NodeMesh = React.memo(function NodeMesh({
         onPointerOut={() => onHover(null)}
         onClick={() => onSelect(node.id)}
       >
-        <sphereGeometry args={[NODE_RADIUS * 2.2, 12, 12]} />
+        <sphereGeometry args={[NODE_RADIUS * 2.2, 8, 8]} />
         <meshBasicMaterial color={node.onPath ? '#c8a96e' : color} transparent opacity={0.04} depthWrite={false} />
       </mesh>
       <mesh ref={meshRef}>
-        <sphereGeometry args={[NODE_RADIUS, 16, 16]} />
+        <sphereGeometry args={[NODE_RADIUS, 12, 12]} />
         <meshStandardMaterial
           color={color}
           emissive={color}
@@ -257,7 +256,7 @@ function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], pos
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [activeLinks, edgeColor])
+  }, [activeLinks, edgeColor, positionMap])
 
   const lineRef = useRef<THREE.LineSegments>(null)
   const clockRef = useRef(0)
@@ -304,7 +303,7 @@ function AllEdges({ links, positionMap, theme }: { links: Link[], positionMap: M
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [links, edgeColor])
+  }, [links, edgeColor, positionMap])
 
   return (
     <lineSegments geometry={geometry}>
@@ -313,10 +312,10 @@ function AllEdges({ links, positionMap, theme }: { links: Link[], positionMap: M
   )
 }
 
-function Particles({ theme }: { theme: 'dark' | 'light' }) {
+function Particles({ theme, count = 800 }: { theme: 'dark' | 'light'; count?: number }) {
   const positions = useMemo(() => {
-    const pos = new Float32Array(800 * 3)
-    for (let i = 0; i < 800; i++) {
+    const pos = new Float32Array(count * 3)
+    for (let i = 0; i < count; i++) {
       const theta = Math.random() * Math.PI * 2
       const phi = Math.acos(2 * Math.random() - 1)
       const r = 60 * Math.cbrt(Math.random())
@@ -325,21 +324,21 @@ function Particles({ theme }: { theme: 'dark' | 'light' }) {
       pos[i*3+2] = r * Math.cos(phi)
     }
     return pos
-  }, [])
+  }, [count])
 
   const color = theme === 'dark' ? '#4a5568' : '#aaa'
 
   return (
     <points>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={800} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial size={0.06} color={color} transparent opacity={0.8} sizeAttenuation />
     </points>
   )
 }
 
-function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme }: GraphSceneProps & { positionMap: Map<string, [number, number, number]> }) {
+function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null)
   const controlsRef = useRef<any>(null)
 
@@ -367,10 +366,11 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme }: Gr
           onHover={setHovered}
           onSelect={onSelect}
           theme={theme}
+          isMobile={isMobile}
         />
       ))}
 
-      <Particles theme={theme} />
+      <Particles theme={theme} count={isMobile ? 300 : 800} />
 
       <OrbitControls
         ref={controlsRef}
@@ -387,21 +387,14 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme }: Gr
   )
 }
 
-function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: {
+function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme, isMobile }: {
   activeId: string
   concepts: ConceptDef[]
   conceptStatuses?: Record<string, MasteryStatus>
   onPathNodes?: string[]
   theme: 'dark' | 'light'
+  isMobile: boolean
 }) {
-  const [isMobile, setIsMobile] = useState(false)
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
-
   const concept = useMemo(() => concepts.find(c => c.id === activeId), [concepts, activeId])
   if (!concept) return null
 
@@ -491,14 +484,7 @@ export default function MathConceptGraph3D({
   onPathNodes,
   onNodeSelect,
 }: MathConceptGraph3DProps) {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const isMobile = useIsMobile()
 
   const { nodes, links, positionMap } = useMemo(() => {
     const input: ConceptLayoutInput[] = concepts.map(c => ({ id: c.id, prerequisites: c.prerequisites }))
@@ -536,6 +522,16 @@ export default function MathConceptGraph3D({
     }
   }, [nodes, activeId])
 
+  const handleSelect = useCallback((id: string) => {
+    setActiveId(id)
+    onNodeSelectRef.current?.(id)
+  }, [])
+
+  const onNodeSelectRef = useRef(onNodeSelect)
+  useEffect(() => {
+    onNodeSelectRef.current = onNodeSelect
+  }, [onNodeSelect])
+
   return (
     <div>
       <div style={{
@@ -549,18 +545,16 @@ export default function MathConceptGraph3D({
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
           gl={{ alpha: true, premultipliedAlpha: true }}
-          dpr={[1, 2]}
+          dpr={[1, 1.5]}
         >
           <GraphScene
             nodes={nodes}
             links={links}
             activeId={activeId}
             positionMap={positionMap}
-            onSelect={(id) => {
-              setActiveId(id)
-              onNodeSelect?.(id)
-            }}
+            onSelect={handleSelect}
             theme={theme}
+            isMobile={isMobile}
           />
         </Canvas>
       </div>
@@ -570,6 +564,7 @@ export default function MathConceptGraph3D({
         conceptStatuses={conceptStatuses}
         onPathNodes={onPathNodes}
         theme={theme}
+        isMobile={isMobile}
       />
     </div>
   )

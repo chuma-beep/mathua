@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useTheme } from '../hooks/useTheme'
+import { useAuthState } from '../hooks/useAuthState'
 
 interface HeaderLink {
   label: string
@@ -16,13 +17,7 @@ interface HeaderProps {
 export default function Header({ links }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setLoggedIn(!!localStorage.getItem('mathua_token'))
-    }
-  }, [mounted])
+  const { loggedIn } = useAuthState()
 
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 

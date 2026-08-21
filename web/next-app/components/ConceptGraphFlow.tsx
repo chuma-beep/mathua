@@ -1,8 +1,9 @@
 'use client'
 
-import { useMemo, useState, useEffect, useCallback } from 'react'
+import { useMemo, useState, useEffect, useCallback, useRef } from 'react'
 import {
   ReactFlow,
+  ReactFlowProvider,
   Background,
   BackgroundVariant,
   Controls,
@@ -10,14 +11,20 @@ import {
   Handle,
   Position,
   MarkerType,
+  BaseEdge,
+  getSmoothStepPath,
+  useReactFlow,
   type Node,
   type Edge,
   type NodeProps,
+  type EdgeProps,
 } from '@xyflow/react'
 import '@xyflow/react/dist/base.css'
+import Fuse from 'fuse.js'
 import dagre from 'dagre'
+import type { MasteryStatus } from '../lib/graphStatus'
 
-export type MasteryStatus = 'mastered' | 'practicing' | 'learning' | 'unseen' | 'locked'
+export type { MasteryStatus }
 
 export interface GraphConcept {
   id: string
@@ -32,6 +39,8 @@ interface ConceptGraphFlowProps {
   theme?: 'dark' | 'light'
   onPathNodes?: string[]
   onNodeSelect?: (id: string) => void
+  selectedId?: string | null
+  onSelectionChange?: (id: string | null) => void
 }
 
 const STATUS_COLORS: Record<MasteryStatus, string> = {
@@ -49,6 +58,8 @@ const STATUS_LABELS: Record<MasteryStatus, string> = {
   unseen: 'Unseen',
   locked: 'Locked',
 }
+
+const AMBIENT_KEY = 'mathua_graph_flow'
 
 function domainColor(domain: string): string {
   let hash = 0
@@ -70,8 +81,15 @@ type ConceptFlowNode = Node<ConceptNodeData, 'concept'>
 
 function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
   const statusColor = STATUS_COLORS[data.status] ?? STATUS_COLORS.unseen
+  const pulseClass =
+    data.status === 'mastered'
+      ? ' node-pulse-mastered'
+      : data.status === 'learning'
+        ? ' node-breathe-learning'
+        : ''
   return (
     <div
+      className={`concept-node${pulseClass}`}
       style={{
         width: 180,
         height: 40,
@@ -92,30 +110,13 @@ function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
         fontSize: 11,
         color: 'var(--text-primary)',
         overflow: 'hidden',
+        position: 'relative' as const,
       }}
     >
       <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
-      <span
-        style={{
-          width: 3,
-          height: 22,
-          borderRadius: 2,
-          flexShrink: 0,
-          background: domainColor(data.domain),
-        }}
-      />
-      <span
-        style={{
-          width: 8,
-          height: 8,
-          borderRadius: '50%',
-          flexShrink: 0,
-          background: statusColor,
-        }}
-      />
-      <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-        {data.label}
-      </span>
+      <span style={{ width: 3, height: 22, borderRadius: 2, flexShrink: 0, background: domainColor(data.domain) }} />
+      <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
+      <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
       <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
     </div>
   )
@@ -123,34 +124,282 @@ function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
 
 const nodeTypes = { concept: ConceptNode }
 
+type FlowEdgeData = {
+  variant: 'plain' | 'flow' | 'ambient'
+  highlighted: boolean
+}
+
+type ConceptFlowEdge = Edge<FlowEdgeData, 'flowedge'>
+
+function FlowEdge({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, markerEnd }: EdgeProps<ConceptFlowEdge>) {
+  const [path] = getSmoothStepPath({
+    sourceX,
+    sourceY,
+    targetX,
+    targetY,
+    sourcePosition,
+    targetPosition,
+    borderRadius: 12,
+  })
+  const variantClass = data?.variant === 'flow' ? ' edge-flow' : data?.variant === 'ambient' ? ' edge-ambient' : ''
+  return (
+    <BaseEdge
+      path={path}
+      markerEnd={markerEnd}
+      className={variantClass}
+      style={{
+        stroke: data?.highlighted ? 'var(--accent-blue)' : 'var(--border)',
+        strokeWidth: data?.highlighted ? 1.6 : 1,
+        opacity: data?.variant === 'ambient' && !data?.highlighted ? 0.5 : 1,
+      }}
+    />
+  )
+}
+
+const edgeTypes = { flowedge: FlowEdge }
+
 function layoutWithDagre(concepts: GraphConcept[]): Map<string, { x: number; y: number }> {
   const g = new dagre.graphlib.Graph()
   g.setGraph({ rankdir: 'LR', nodesep: 16, ranksep: 70, marginx: 20, marginy: 20 })
   g.setDefaultEdgeLabel(() => ({}))
   for (const c of concepts) g.setNode(c.id, { width: 180, height: 40 })
+  const known = new Set(concepts.map(c => c.id))
   for (const c of concepts) {
     for (const p of c.prerequisites) {
-      if (concepts.some(x => x.id === p)) g.setEdge(p, c.id)
+      if (known.has(p)) g.setEdge(p, c.id)
     }
   }
   dagre.layout(g)
-  const positions = new Map<string, { x: number; y: number }>()
+
+  const domainOrder: string[] = []
+  const seenDomains = new Set<string>()
+  for (const c of concepts) {
+    if (!seenDomains.has(c.domain)) {
+      seenDomains.add(c.domain)
+      domainOrder.push(c.domain)
+    }
+  }
+
+  const byRank = new Map<number, string[]>()
   for (const c of concepts) {
     const n = g.node(c.id)
-    if (n) positions.set(c.id, { x: n.x - 90, y: n.y - 20 })
+    if (!n) continue
+    const rank = Math.round(n.x)
+    if (!byRank.has(rank)) byRank.set(rank, [])
+    byRank.get(rank)!.push(c.id)
   }
+
+  const positions = new Map<string, { x: number; y: number }>()
+  byRank.forEach((ids) => {
+    ids.sort((a, b) => {
+      const ca = concepts.find(x => x.id === a)!
+      const cb = concepts.find(x => x.id === b)!
+      const d = domainOrder.indexOf(ca.domain) - domainOrder.indexOf(cb.domain)
+      return d !== 0 ? d : ca.label.localeCompare(cb.label)
+    })
+    let prevDomain: string | null = null
+    let y = 0
+    for (const id of ids) {
+      const c = concepts.find(x => x.id === id)!
+      if (prevDomain !== null && c.domain !== prevDomain) y += 28
+      positions.set(id, { x: g.node(id).x - 90, y })
+      prevDomain = c.domain
+      y += 40 + 16
+    }
+  })
   return positions
 }
 
-export default function ConceptGraphFlow({
+interface SearchResult {
+  id: string
+  label: string
+  domain: string
+}
+
+function SearchOverlay({
+  concepts,
+  onSelect,
+}: {
+  concepts: GraphConcept[]
+  onSelect: (id: string) => void
+}) {
+  const [query, setQuery] = useState('')
+  const [open, setOpen] = useState(false)
+  const boxRef = useRef<HTMLDivElement>(null)
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(concepts, {
+        keys: [
+          { name: 'label', weight: 2 },
+          { name: 'domain', weight: 1 },
+        ],
+        threshold: 0.4,
+        minMatchCharLength: 2,
+      }),
+    [concepts]
+  )
+
+  const results = useMemo<SearchResult[]>(() => {
+    if (!query.trim()) return []
+    return fuse
+      .search(query.trim())
+      .slice(0, 8)
+      .map(r => ({ id: r.item.id, label: r.item.label, domain: r.item.domain }))
+  }, [query, fuse])
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (boxRef.current && !boxRef.current.contains(e.target as globalThis.Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
+
+  return (
+    <div
+      ref={boxRef}
+      style={{
+        position: 'absolute',
+        top: 10,
+        left: 48,
+        zIndex: 5,
+        width: 240,
+        fontFamily: "'IBM Plex Mono', monospace",
+      }}
+    >
+      <input
+        value={query}
+        onChange={e => {
+          setQuery(e.target.value)
+          setOpen(true)
+        }}
+        onFocus={() => setOpen(true)}
+        onKeyDown={e => {
+          if (e.key === 'Enter' && results.length > 0) {
+            onSelect(results[0].id)
+            setOpen(false)
+          }
+          if (e.key === 'Escape') setOpen(false)
+        }}
+        placeholder="Search concepts…"
+        style={{
+          width: '100%',
+          height: 30,
+          padding: '0 10px',
+          fontSize: 11,
+          fontFamily: 'inherit',
+          color: 'var(--text-primary)',
+          background: 'var(--surface-elevated)',
+          border: '0.5px solid var(--border-strong)',
+          borderRadius: 4,
+          outline: 'none',
+        }}
+      />
+      {open && results.length > 0 && (
+        <div
+          style={{
+            marginTop: 4,
+            background: 'var(--surface-elevated)',
+            border: '0.5px solid var(--border)',
+            borderRadius: 4,
+            overflow: 'hidden',
+            maxHeight: 240,
+            overflowY: 'auto',
+          }}
+        >
+          {results.map(r => (
+            <button
+              key={r.id}
+              onClick={() => {
+                onSelect(r.id)
+                setOpen(false)
+                setQuery('')
+              }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                width: '100%',
+                textAlign: 'left',
+                padding: '6px 10px',
+                fontSize: 11,
+                fontFamily: 'inherit',
+                color: 'var(--text-secondary)',
+                background: 'none',
+                border: 'none',
+                borderBottom: '0.5px solid var(--border)',
+                cursor: 'pointer',
+              }}
+            >
+              <span style={{ width: 3, height: 14, borderRadius: 2, flexShrink: 0, background: domainColor(r.domain) }} />
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function AmbientToggle({
+  enabled,
+  onToggle,
+}: {
+  enabled: boolean
+  onToggle: () => void
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      title="Toggle edge flow animation"
+      style={{
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        zIndex: 5,
+        height: 30,
+        padding: '0 12px',
+        fontSize: 10,
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        fontFamily: "'IBM Plex Mono', monospace",
+        color: enabled ? '#fff' : 'var(--text-muted)',
+        background: enabled ? 'var(--accent-blue)' : 'var(--surface-elevated)',
+        border: '0.5px solid var(--border-strong)',
+        borderRadius: 4,
+        cursor: 'pointer',
+      }}
+    >
+      ⏵ Flow
+    </button>
+  )
+}
+
+function GraphInner({
   concepts,
   conceptStatuses,
   theme = 'dark',
   onPathNodes,
   onNodeSelect,
+  selectedId,
+  onSelectionChange,
 }: ConceptGraphFlowProps) {
   const [isMobile, setIsMobile] = useState(false)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [internalSelected, setInternalSelected] = useState<string | null>(selectedId ?? null)
+  const [ambientOn, setAmbientOn] = useState(false)
+  const [inView, setInView] = useState(true)
+  const [tabVisible, setTabVisible] = useState(true)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const { setCenter } = useReactFlow()
+
+  const effectiveSelected = selectedId !== undefined ? selectedId : internalSelected
+
+  useEffect(() => {
+    try {
+      setAmbientOn(window.localStorage.getItem(AMBIENT_KEY) === '1')
+    } catch {}
+  }, [])
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640)
@@ -158,6 +407,32 @@ export default function ConceptGraphFlow({
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+
+  useEffect(() => {
+    const el = wrapperRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const obs = new IntersectionObserver(entries => setInView(entries[0]?.isIntersecting ?? true), {
+      threshold: 0.02,
+    })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const onVis = () => setTabVisible(document.visibilityState === 'visible')
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
+
+  const ambientActive = ambientOn && !isMobile && inView && tabVisible
+
+  const select = useCallback(
+    (id: string | null) => {
+      setInternalSelected(id)
+      onSelectionChange?.(id)
+    },
+    [onSelectionChange]
+  )
 
   const conceptById = useMemo(() => new Map(concepts.map(c => [c.id, c])), [concepts])
 
@@ -173,7 +448,7 @@ export default function ConceptGraphFlow({
   }, [concepts])
 
   const neighborhood = useMemo(() => {
-    if (!selectedId) return null
+    if (!effectiveSelected) return null
     const upstream = new Set<string>()
     const downstream = new Set<string>()
     const walkUp = (id: string) => {
@@ -192,79 +467,98 @@ export default function ConceptGraphFlow({
         }
       }
     }
-    walkUp(selectedId)
-    walkDown(selectedId)
+    walkUp(effectiveSelected)
+    walkDown(effectiveSelected)
     return { upstream, downstream }
-  }, [selectedId, conceptById, dependentsMap])
+  }, [effectiveSelected, conceptById, dependentsMap])
+
+  const layout = useMemo(() => layoutWithDagre(concepts), [concepts])
 
   const flowNodes = useMemo<ConceptFlowNode[]>(() => {
-    const positions = layoutWithDagre(concepts)
     return concepts.map(c => {
       const inNeighborhood =
         !neighborhood ||
-        c.id === selectedId ||
+        c.id === effectiveSelected ||
         neighborhood.upstream.has(c.id) ||
         neighborhood.downstream.has(c.id)
       return {
         id: c.id,
         type: 'concept' as const,
-        position: positions.get(c.id) ?? { x: 0, y: 0 },
+        position: layout.get(c.id) ?? { x: 0, y: 0 },
         data: {
           label: c.label,
           domain: c.domain,
           status: conceptStatuses?.[c.id] ?? 'unseen',
           onPath: onPathNodes?.includes(c.id) ?? false,
           dimmed: !inNeighborhood,
-          selected: c.id === selectedId,
+          selected: c.id === effectiveSelected,
         },
       }
     })
-  }, [concepts, conceptStatuses, onPathNodes, neighborhood, selectedId])
+  }, [concepts, conceptStatuses, onPathNodes, neighborhood, effectiveSelected, layout])
 
-  const flowEdges = useMemo<Edge[]>(() => {
-    const known = new Set(concepts.map(c => c.id))
-    const edges: Edge[] = []
+  const knownIds = useMemo(() => new Set(concepts.map(c => c.id)), [concepts])
+
+  const allEdgesList = useMemo(() => {
+    const list: { source: string; target: string }[] = []
     for (const c of concepts) {
       for (const p of c.prerequisites) {
-        if (!known.has(p)) continue
-        const highlighted =
-          !!selectedId && (p === selectedId || c.id === selectedId)
-        const inNeighborhood =
-          !neighborhood ||
-          (neighborhood.upstream.has(p) &&
-            (neighborhood.upstream.has(c.id) || c.id === selectedId)) ||
-          (p === selectedId && neighborhood.downstream.has(c.id)) ||
-          (neighborhood.downstream.has(c.id) &&
-            (neighborhood.downstream.has(p) || p === selectedId))
-        edges.push({
-          id: `${p}->${c.id}`,
-          source: p,
-          target: c.id,
-          style: {
-            stroke: highlighted
-              ? 'var(--accent-blue)'
-              : inNeighborhood
-                ? 'var(--border-strong)'
-                : 'var(--border)',
-            opacity: neighborhood && !inNeighborhood ? 0.15 : 1,
-            strokeWidth: highlighted ? 1.5 : 1,
-          },
-          markerEnd: { type: MarkerType.ArrowClosed, width: 12, height: 12 },
-        })
+        if (knownIds.has(p)) list.push({ source: p, target: c.id })
       }
     }
-    return edges
-  }, [concepts, selectedId, neighborhood])
+    return list
+  }, [concepts, knownIds])
 
-  const handleNodeClick = useCallback(
-    (_: React.MouseEvent, node: Node) => {
-      setSelectedId(node.id)
-    },
-    []
-  )
+  const flowEdges = useMemo<ConceptFlowEdge[]>(() => {
+    return allEdgesList.map(({ source, target }) => {
+      const highlighted = !!effectiveSelected && (source === effectiveSelected || target === effectiveSelected)
+      const inNeighborhood =
+        !neighborhood ||
+        (neighborhood.upstream.has(source) &&
+          (neighborhood.upstream.has(target) || target === effectiveSelected)) ||
+        (source === effectiveSelected && neighborhood.downstream.has(target)) ||
+        (neighborhood.downstream.has(target) &&
+          (neighborhood.downstream.has(source) || source === effectiveSelected))
+      const variant: FlowEdgeData['variant'] = highlighted
+        ? 'flow'
+        : ambientActive
+          ? 'ambient'
+          : 'plain'
+      return {
+        id: `${source}->${target}`,
+        source,
+        target,
+        type: 'flowedge' as const,
+        data: { variant, highlighted },
+        zIndex: highlighted ? 1 : 0,
+        markerEnd: highlighted ? { type: MarkerType.ArrowClosed, width: 12, height: 12 } : undefined,
+      }
+    })
+  }, [allEdgesList, effectiveSelected, neighborhood, ambientActive])
 
-  const selected = selectedId ? conceptById.get(selectedId) : null
-  const selectedStatus = selectedId ? conceptStatuses?.[selectedId] ?? 'unseen' : null
+  useEffect(() => {
+    if (!effectiveSelected || isMobile) return
+    const pos = layout.get(effectiveSelected)
+    if (!pos) return
+    setCenter(pos.x + 90, pos.y + 20, { zoom: 0.85, duration: 500 })
+  }, [effectiveSelected, layout, setCenter, isMobile])
+
+  const handlePaneClick = useCallback(() => {
+    select(null)
+  }, [select])
+
+  const toggleAmbient = useCallback(() => {
+    setAmbientOn(prev => {
+      const next = !prev
+      try {
+        window.localStorage.setItem(AMBIENT_KEY, next ? '1' : '0')
+      } catch {}
+      return next
+    })
+  }, [])
+
+  const selected = effectiveSelected ? conceptById.get(effectiveSelected) ?? null : null
+  const selectedStatus = effectiveSelected ? conceptStatuses?.[effectiveSelected] ?? 'unseen' : null
 
   const prereqList = useMemo(() => {
     if (!selected) return []
@@ -304,7 +598,10 @@ export default function ConceptGraphFlow({
   return (
     <div>
       <div
+        ref={wrapperRef}
+        className={!ambientActive && ambientOn && !isMobile ? 'graph-flow-paused' : undefined}
         style={{
+          position: 'relative',
           height: isMobile ? 320 : 520,
           width: '100%',
           overflow: 'hidden',
@@ -316,8 +613,10 @@ export default function ConceptGraphFlow({
           nodes={flowNodes}
           edges={flowEdges}
           nodeTypes={nodeTypes}
-          onNodeClick={handleNodeClick}
-          onPaneClick={() => setSelectedId(null)}
+          edgeTypes={edgeTypes}
+          onNodeClick={(_, node) => select(node.id)}
+          onPaneClick={handlePaneClick}
+          defaultEdgeOptions={{ type: 'flowedge' }}
           fitView
           fitViewOptions={{ padding: 0.15, maxZoom: 1 }}
           minZoom={0.03}
@@ -336,11 +635,7 @@ export default function ConceptGraphFlow({
           />
           <Controls
             showInteractive={false}
-            style={{
-              background: 'var(--surface-elevated)',
-              borderColor: 'var(--border)',
-              color: 'var(--text-primary)',
-            }}
+            style={{ background: 'var(--surface-elevated)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
           />
           <MiniMap
             pannable
@@ -353,6 +648,13 @@ export default function ConceptGraphFlow({
             }}
           />
         </ReactFlow>
+        <SearchOverlay
+          concepts={concepts}
+          onSelect={id => {
+            select(id)
+          }}
+        />
+        {!isMobile && <AmbientToggle enabled={ambientOn} onToggle={toggleAmbient} />}
       </div>
 
       {selected && (
@@ -366,9 +668,7 @@ export default function ConceptGraphFlow({
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>
-              {selected.label}
-            </span>
+            <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>{selected.label}</span>
             <span
               style={{
                 fontSize: 10,
@@ -383,9 +683,7 @@ export default function ConceptGraphFlow({
               {selected.domain.replace(/_/g, ' ')}
             </span>
             {selectedStatus && (
-              <span style={{ fontSize: 11, color: STATUS_COLORS[selectedStatus] }}>
-                ● {STATUS_LABELS[selectedStatus]}
-              </span>
+              <span style={{ fontSize: 11, color: STATUS_COLORS[selectedStatus] }}>● {STATUS_LABELS[selectedStatus]}</span>
             )}
             <button
               onClick={() => onNodeSelect?.(selected.id)}
@@ -406,21 +704,14 @@ export default function ConceptGraphFlow({
             <div style={{ display: 'flex', gap: 24, marginTop: 10, flexWrap: 'wrap' }}>
               {prereqList.length > 0 && (
                 <div>
-                  <div
-                    style={{
-                      color: 'var(--text-muted)',
-                      fontSize: 11,
-                      textTransform: 'uppercase',
-                      marginBottom: 4,
-                    }}
-                  >
+                  <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase', marginBottom: 4 }}>
                     requires
                   </div>
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {prereqList.map(p => (
                       <button
                         key={p.id}
-                        onClick={() => setSelectedId(p.id)}
+                        onClick={() => select(p.id)}
                         style={{
                           fontSize: 11,
                           fontFamily: 'inherit',
@@ -440,21 +731,14 @@ export default function ConceptGraphFlow({
               )}
               {unlocksList.length > 0 && (
                 <div>
-                  <div
-                    style={{
-                      color: 'var(--text-muted)',
-                      fontSize: 11,
-                      textTransform: 'uppercase',
-                      marginBottom: 4,
-                    }}
-                  >
+                  <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase', marginBottom: 4 }}>
                     unlocks
                   </div>
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                     {unlocksList.map(u => (
                       <button
                         key={u.id}
-                        onClick={() => setSelectedId(u.id)}
+                        onClick={() => select(u.id)}
                         style={{
                           fontSize: 11,
                           fontFamily: 'inherit',
@@ -477,5 +761,13 @@ export default function ConceptGraphFlow({
         </div>
       )}
     </div>
+  )
+}
+
+export default function ConceptGraphFlow(props: ConceptGraphFlowProps) {
+  return (
+    <ReactFlowProvider>
+      <GraphInner {...props} />
+    </ReactFlowProvider>
   )
 }

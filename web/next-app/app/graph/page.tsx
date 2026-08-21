@@ -1,9 +1,9 @@
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '../../components/Header'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
@@ -13,7 +13,8 @@ import AsciiDivider from '../../components/AsciiDivider'
 import conceptsData from '../../data/concepts.json'
 import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
-import type { MasteryStatus } from '../../components/ConceptGraphFlow'
+import { useAuthState } from '../../hooks/useAuthState'
+import { deriveStatuses, type MasteryStatus } from '../../lib/graphStatus'
 
 const graphLoadingStyle: React.CSSProperties = {
   height: 'clamp(320px, 50vh, 520px)',
@@ -43,15 +44,6 @@ const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
   id: c.id, label: c.label, domain: c.domain, prerequisites: c.prerequisites,
 }))
 
-function statusToMastery(status: string): MasteryStatus {
-  switch (status) {
-    case 'MASTERED': return 'mastered'
-    case 'PRACTICING': return 'practicing'
-    case 'LEARNING': return 'learning'
-    default: return 'unseen'
-  }
-}
-
 const domainLabels: Record<string, string> = {
   counting: 'Counting',
   arithmetic: 'Arithmetic',
@@ -79,47 +71,47 @@ const domainOrder = [
   'abstract_algebra', 'topology',
 ]
 
-export default function GraphPage() {
+function GraphContent() {
   const { theme, mounted } = useTheme()
-  const { push } = useRouter()
+  const { push, replace } = useRouter()
+  const searchParams = useSearchParams()
+  const conceptParam = searchParams.get('concept')
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [conceptStatuses, setConceptStatuses] = useState<Record<string, MasteryStatus>>({})
+  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string }>>({})
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
   const [activeDomain, setActiveDomain] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(conceptParam)
+  const { loggedIn } = useAuthState()
 
   useEffect(() => {
-    const loggedInVal = isLoggedIn()
-    setLoggedIn(loggedInVal)
     healthCheck().then((ok) => {
       setConnected(ok)
       if (ok) {
         getGraph().then(setGraphData)
       }
-      if (ok && loggedInVal) {
-        const user = getUserInfo()
-        if (user) {
-          getScores(user.student_id).then(setScores).catch(() => console.error('getScores failed'))
-          getProgress(user.student_id).then(progress => {
-            const st: Record<string, MasteryStatus> = {}
-            for (const [cid, cp] of Object.entries(progress)) {
-              st[cid] = statusToMastery(cp.status)
-            }
-            setConceptStatuses(st)
-          }).catch(() => console.error('getProgress failed'))
-          getWeaknesses().then(w => {
-            const byDomain: Record<string, { id: string; label: string }[]> = {}
-            for (const [domain, entries] of Object.entries(w.by_domain)) {
-              byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))
-            }
-            setWeakByDomain(byDomain)
-          }).catch(() => console.error('getWeaknesses failed'))
-        }
-      }
     })
   }, [])
+
+  useEffect(() => {
+    if (!connected || !loggedIn) return
+    const user = getUserInfo()
+    if (!user) return
+    getScores(user.student_id).then(setScores).catch(() => console.error('getScores failed'))
+    getProgress(user.student_id).then(setRawProgress).catch(() => console.error('getProgress failed'))
+    getWeaknesses().then(w => {
+      const byDomain: Record<string, { id: string; label: string }[]> = {}
+      for (const [domain, entries] of Object.entries(w.by_domain)) {
+        byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))
+      }
+      setWeakByDomain(byDomain)
+    }).catch(() => console.error('getWeaknesses failed'))
+  }, [connected, loggedIn])
+
+  useEffect(() => {
+    setSelectedId(conceptParam)
+  }, [conceptParam])
 
   const concepts = useMemo(() => graphData
     ? graphData.nodes.map((n) => ({
@@ -129,6 +121,24 @@ export default function GraphPage() {
         prerequisites: n.prerequisites,
       }))
     : [], [graphData])
+
+  const statusSource = useMemo(() => (
+    concepts.length > 0 ? concepts : fallbackConcepts
+  ), [concepts])
+
+  const conceptStatuses = useMemo(
+    () => deriveStatuses(statusSource, rawProgress),
+    [statusSource, rawProgress]
+  )
+
+  const handleSelectionChange = useCallback((id: string | null) => {
+    setSelectedId(id)
+    if (id) {
+      replace(`/graph?concept=${encodeURIComponent(id)}`, { scroll: false })
+    } else {
+      replace('/graph', { scroll: false })
+    }
+  }, [replace])
 
   const domains = useMemo(() => {
     const set = new Set<string>()
@@ -204,8 +214,10 @@ export default function GraphPage() {
           conceptStatuses={conceptStatuses}
           theme={theme}
           onPathNodes={onPathNodes}
+          selectedId={selectedId}
+          onSelectionChange={handleSelectionChange}
           onNodeSelect={(nodeId) => {
-            const c = concepts.find(n => n.id === nodeId)
+            const c = (concepts.length > 0 ? concepts : fallbackConcepts).find(n => n.id === nodeId)
             if (c) push(`/concept?id=${encodeURIComponent(c.id)}`)
           }}
         />
@@ -215,5 +227,13 @@ export default function GraphPage() {
       <Footer />
     </div>
     </>
+  )
+}
+
+export default function GraphPage() {
+  return (
+    <Suspense fallback={<div style={{ background: 'var(--bg)', minHeight: '100vh' }} />}>
+      <GraphContent />
+    </Suspense>
   )
 }

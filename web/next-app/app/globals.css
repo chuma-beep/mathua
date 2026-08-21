@@ -164,3 +164,78 @@
   background: var(--surface) !important;
   box-shadow: none !important;
 }
+
+/* Concept graph edge flow animations */
+.react-flow__edge-path.edge-flow {
+  stroke-dasharray: 6 8;
+  animation: dashflow 0.9s linear infinite;
+}
+
+@keyframes dashflow {
+  to {
+    stroke-dashoffset: -56;
+  }
+}
+
+.react-flow__edge-path.edge-ambient {
+  stroke-dasharray: 2 10;
+  animation: dashcrawl 7s linear infinite;
+}
+
+@keyframes dashcrawl {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.graph-flow-paused .react-flow__edge-path,
+.graph-flow-paused .concept-node::after {
+  animation-play-state: paused !important;
+}
+
+.concept-node.node-pulse-mastered::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 5px;
+  pointer-events: none;
+  animation: nodeglow 2.4s ease-in-out infinite;
+}
+
+@keyframes nodeglow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+  50% {
+    box-shadow: 0 0 10px 1px rgba(16, 185, 129, 0.45);
+  }
+}
+
+.concept-node.node-breathe-learning::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 5px;
+  pointer-events: none;
+  animation: nodebreathe 3.6s ease-in-out infinite;
+}
+
+@keyframes nodebreathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+  50% {
+    box-shadow: 0 0 8px 1px rgba(245, 158, 11, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-flow__edge-path.edge-flow,
+  .react-flow__edge-path.edge-ambient,
+  .concept-node.node-pulse-mastered::after,
+  .concept-node.node-breathe-learning::after {
+    animation: none !important;
+  }
+}
