@@ -55,3 +55,6 @@ testlog.txt
 tmp/
 temp/mathua.db*
 mathua.db*
+
+# Local analysis artifacts
+.understand-anything/
