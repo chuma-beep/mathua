@@ -236,13 +236,13 @@ function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], pos
   const edgeColor = theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT
 
   const geometry = useMemo(() => {
-    const positions = new Float32Array(activeLinks.length * 6)
-    const colors = new Float32Array(activeLinks.length * 6)
+    const validLinks = activeLinks.filter(l => positionMap.has(l.source) && positionMap.has(l.target))
+    const positions = new Float32Array(validLinks.length * 6)
+    const colors = new Float32Array(validLinks.length * 6)
 
-    activeLinks.forEach((link, i) => {
-      const sp = positionMap.get(link.source)
-      const tp = positionMap.get(link.target)
-      if (!sp || !tp) return
+    validLinks.forEach((link, i) => {
+      const sp = positionMap.get(link.source)!
+      const tp = positionMap.get(link.target)!
 
       const idx = i * 6
       positions[idx]   = sp[0]; positions[idx+1] = sp[1]; positions[idx+2] = sp[2]
@@ -283,13 +283,13 @@ function AllEdges({ links, positionMap, theme }: { links: Link[], positionMap: M
   const edgeColor = theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT
 
   const geometry = useMemo(() => {
-    const positions = new Float32Array(links.length * 6)
-    const colors = new Float32Array(links.length * 6)
+    const validLinks = links.filter(l => positionMap.has(l.source) && positionMap.has(l.target))
+    const positions = new Float32Array(validLinks.length * 6)
+    const colors = new Float32Array(validLinks.length * 6)
 
-    links.forEach((link, i) => {
-      const sp = positionMap.get(link.source)
-      const tp = positionMap.get(link.target)
-      if (!sp || !tp) return
+    validLinks.forEach((link, i) => {
+      const sp = positionMap.get(link.source)!
+      const tp = positionMap.get(link.target)!
 
       const idx = i * 6
       positions[idx]   = sp[0]; positions[idx+1] = sp[1]; positions[idx+2] = sp[2]
@@ -468,7 +468,7 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme }: 
       )}
       <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
         <a
-          href={`/study?concept=${encodeURIComponent(concept.id)}`}
+          href={`/concept?id=${encodeURIComponent(concept.id)}`}
           style={{ color: '#60a5fa', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
         >
           Study →

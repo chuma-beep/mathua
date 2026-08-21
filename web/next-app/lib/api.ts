@@ -130,12 +130,12 @@ export interface Scores {
 }
 
 export interface ConceptProgress {
-  concept_id: string
+  concept_id?: string
   status: string
   streak: number
-  best_streak: number
-  avg_response_time: number
-  attempts: number
+  best_streak?: number
+  avg_response_time?: number
+  attempts?: number
 }
 
 export async function startSession(): Promise<StartSessionRes> {
@@ -379,12 +379,6 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 	if (!res.ok) throw new Error(`Update settings failed: ${res.status}`)
 }
 
-export interface ConceptProgress {
-    status: string
-    mastery: number
-    streak: number
-}
-
 export interface PrereqInfo {
     id: string
     label: string
@@ -528,5 +522,11 @@ export async function validateToken(): Promise<{ valid: boolean; student_id: str
 	const headers = getAuthHeaders()
 	if (!headers.Authorization) return { valid: false, student_id: '' }
 	const res = await fetch(`${API_BASE}/api/me`, { headers })
-	return res.ok ? { valid: true, student_id: '' } : { valid: false, student_id: '' }
+	if (!res.ok) return { valid: false, student_id: '' }
+	try {
+		const me = await res.json()
+		return { valid: true, student_id: typeof me?.student_id === 'string' ? me.student_id : '' }
+	} catch {
+		return { valid: true, student_id: '' }
+	}
 }

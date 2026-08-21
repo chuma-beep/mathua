@@ -13,7 +13,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 import conceptsData from '../../data/concepts.json'
 import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
-import type { MasteryStatus } from '../../components/MathConceptGraph3D'
+import type { MasteryStatus } from '../../components/ConceptGraphFlow'
 
 const graphLoadingStyle: React.CSSProperties = {
   height: 'clamp(320px, 50vh, 520px)',
@@ -27,8 +27,8 @@ const graphLoadingStyle: React.CSSProperties = {
   fontSize: '14px',
 }
 
-const MathConceptGraph3D = dynamic(
-  () => import('../../components/MathConceptGraph3D'),
+const ConceptGraphFlow = dynamic(
+  () => import('../../components/ConceptGraphFlow'),
   {
     ssr: false,
     loading: () => (
@@ -199,14 +199,14 @@ export default function GraphPage() {
       )}
 
       <div className="my-8">
-        <MathConceptGraph3D
+        <ConceptGraphFlow
           concepts={concepts.length > 0 ? concepts : fallbackConcepts}
           conceptStatuses={conceptStatuses}
           theme={theme}
           onPathNodes={onPathNodes}
           onNodeSelect={(nodeId) => {
             const c = concepts.find(n => n.id === nodeId)
-            if (c) push(`/study?concept=${encodeURIComponent(c.id)}`)
+            if (c) push(`/concept?id=${encodeURIComponent(c.id)}`)
           }}
         />
       </div>
