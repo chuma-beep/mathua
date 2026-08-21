@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import Header from '../components/Header'
 import AsciiDivider from '../components/AsciiDivider'
@@ -43,6 +44,39 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
     </div>
   ),
 })
+
+const heroConcepts = (conceptsData as any[]).map((c: any) => ({
+  id: c.id,
+  label: c.label,
+  domain: c.domain,
+  prerequisites: c.prerequisites,
+}))
+
+function LazyGraphMount({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setVisible(true)
+      return
+    }
+    const obs = new IntersectionObserver(
+      entries => {
+        if (entries[0]?.isIntersecting) {
+          setVisible(true)
+          obs.disconnect()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return <div ref={ref}>{visible ? children : <div style={loadingGraphStyle}>Scroll to load graph…</div>}</div>
+}
 
 const PIPELINE_STATES = [
   { label: 'UNSEEN', status: 'unseen' as const },
@@ -255,15 +289,9 @@ export default function HomePage() {
             background: 'var(--graph-surface)',
           }}
         >
-          <MathConceptGraph3D
-            theme={theme}
-            concepts={conceptsData.map((c: any) => ({
-              id: c.id,
-              label: c.label,
-              domain: c.domain,
-              prerequisites: c.prerequisites,
-            }))}
-          />
+          <LazyGraphMount>
+            <MathConceptGraph3D theme={theme} concepts={heroConcepts} />
+          </LazyGraphMount>
         </div>
       </section>
 

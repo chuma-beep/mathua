@@ -656,6 +656,7 @@ function StudyContent() {
   const router = useRouter()
   const lessonParam = searchParams.get('lesson')
   const domainParam = searchParams.get('domain')
+  const conceptParam = searchParams.get('concept')
 
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
@@ -681,6 +682,12 @@ function StudyContent() {
       setSelectedLesson(null)
       return
     }
+    if (conceptParam && Object.keys(lessonsByDomain).length > 0) {
+      for (const lessons of Object.values(lessonsByDomain)) {
+        const found = lessons.find(l => l.concepts.includes(conceptParam))
+        if (found) { setSelectedLesson(found); return }
+      }
+    }
     setSelectedLesson(null)
 
     if (domainParam && lessonsByDomain[domainParam]) {
@@ -688,13 +695,14 @@ function StudyContent() {
     } else if (!domainParam) {
       setSelectedDomain(null)
     }
-  }, [lessonParam, domainParam, lessonsByDomain])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lessonParam, domainParam, conceptParam, lessonsByDomain])
 
   // Popstate: browser back/forward
   useEffect(() => {
     const onPop = () => {
       const params = window.location.search
-      if (!params.includes('lesson=') && !params.includes('domain=')) {
+      if (!params.includes('lesson=') && !params.includes('domain=') && !params.includes('concept=')) {
         setSelectedLesson(null)
         setSelectedDomain(null)
       }

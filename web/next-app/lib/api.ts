@@ -62,6 +62,79 @@ function validateResponse<T>(schema: z.ZodType<T>, data: unknown, name: string):
   return result.data as T
 }
 
+const GraphNodeSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  domain: z.string(),
+  prerequisites: z.array(z.string()),
+  grading_type: z.string().optional(),
+})
+
+const GraphResSchema = z.object({
+  nodes: z.array(GraphNodeSchema),
+  count: z.number().optional(),
+})
+
+export const ConceptProgressSchema = z.object({
+  concept_id: z.string().optional(),
+  status: z.string(),
+  streak: z.number(),
+  best_streak: z.number().optional(),
+  avg_response_time: z.number().optional(),
+  attempts: z.number().optional(),
+})
+
+const ProgressMapSchema = z.record(z.string(), ConceptProgressSchema)
+
+const WeaknessEntrySchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  weakness: z.number().optional(),
+})
+
+const WeaknessResSchema = z.object({
+  by_domain: z.record(z.string(), z.array(WeaknessEntrySchema)),
+})
+
+const PrereqInfoSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  status: z.string(),
+  mastery_pct: z.number(),
+})
+
+const LessonInfoSchema = z.object({
+  title: z.string(),
+  body: z.string(),
+  concepts: z.array(z.string()),
+  progress: z.record(z.string(), ConceptProgressSchema).optional(),
+  prerequisites: z.array(PrereqInfoSchema).optional(),
+  dependents: z.array(PrereqInfoSchema).optional(),
+})
+
+const LessonsResSchema = z.object({
+  lessons: z.record(z.string(), z.array(LessonInfoSchema)),
+})
+
+const ConceptDetailResSchema = z.object({
+  concept: z.object({
+    id: z.string(),
+    label: z.string(),
+    domain: z.string(),
+    subdomain: z.string().optional(),
+  }),
+  lesson: z.object({ title: z.string(), body: z.string(), concepts: z.array(z.string()) }).optional(),
+  prerequisites: z.array(PrereqInfoSchema),
+  dependents: z.array(PrereqInfoSchema).optional(),
+  unlocked: z.boolean(),
+  progress: z.object({
+    status: z.string(),
+    streak: z.number(),
+    required_streak: z.number(),
+    mastery_pct: z.number(),
+  }).optional(),
+})
+
 export interface StartSessionRes {
   student_id: string
   session_id: string
@@ -182,7 +255,7 @@ export async function submitAnswer(
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
   const res = await fetch(`${API_BASE}/api/progress/${studentID}`)
   if (!res.ok) return {}
-  return res.json()
+  return validateResponse(ProgressMapSchema, await res.json(), 'getProgress') as Record<string, ConceptProgress>
 }
 
 export async function getScores(studentID: string): Promise<Scores> {
@@ -194,7 +267,7 @@ export async function getScores(studentID: string): Promise<Scores> {
 export async function getGraph(): Promise<GraphRes> {
   const res = await fetch(`${API_BASE}/api/graph`)
   if (!res.ok) throw new Error(`Graph fetch failed: ${res.status}`)
-  return res.json()
+  return validateResponse(GraphResSchema, await res.json(), 'getGraph') as GraphRes
 }
 
 export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
@@ -351,11 +424,11 @@ export async function setDailyXPGoal(goal: number): Promise<void> {
 }
 
 export async function getWeaknesses(): Promise<WeaknessRes> {
-	const res = await fetch(`${API_BASE}/api/weaknesses`, {
-		headers: { ...getAuthHeaders() },
-	})
-	if (!res.ok) return { by_domain: {} }
-	return res.json()
+  const res = await fetch(`${API_BASE}/api/weaknesses`, {
+    headers: { ...getAuthHeaders() },
+  })
+  if (!res.ok) return { by_domain: {} }
+  return validateResponse(WeaknessResSchema, await res.json(), 'getWeaknesses') as WeaknessRes
 }
 
 export interface UserSettings {
@@ -403,7 +476,7 @@ export async function getLessons(studentId?: string): Promise<LessonsRes> {
 	const url = studentId ? `${API_BASE}/api/lessons?student_id=${encodeURIComponent(studentId)}` : `${API_BASE}/api/lessons`
 	const res = await fetch(url)
 	if (!res.ok) return { lessons: {} }
-	return res.json()
+	return validateResponse(LessonsResSchema, await res.json(), 'getLessons') as LessonsRes
 }
 
 export interface ConceptDetailRes {
@@ -442,7 +515,7 @@ export interface ConceptDetailRes {
 export async function getConceptDetail(conceptId: string): Promise<ConceptDetailRes> {
 	const res = await fetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`)
 	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
-	return res.json()
+	return validateResponse(ConceptDetailResSchema, await res.json(), 'getConceptDetail') as ConceptDetailRes
 }
 
 export interface PracticeQuestion {

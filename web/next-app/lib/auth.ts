@@ -8,6 +8,7 @@ export function getToken(): string | null {
 
 export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token)
+  window.dispatchEvent(new Event('auth-changed'))
 }
 
 export function clearToken() {
