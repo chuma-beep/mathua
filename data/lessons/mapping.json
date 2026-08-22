@@ -898,5 +898,9 @@
  "ratio.ops.scale": {
   "source": "openstax",
   "slug": "6-5-solve-proportions-and-their-applications"
+ },
+ "arith.exp.sci_notation": {
+  "source": "openstax",
+  "slug": "10-5-integer-exponents-and-scientific-notation"
  }
 }
