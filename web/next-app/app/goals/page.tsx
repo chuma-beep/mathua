@@ -1,5 +1,6 @@
 'use client'
 
+import Loading from '../../components/Loading'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -274,7 +275,7 @@ export default function GoalsPage() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
-                  {loading ? 'Loading…' : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
+                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
                 </button>
               </div>
             </>
@@ -354,7 +355,7 @@ export default function GoalsPage() {
                         {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
                       </p>
                       <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
-                      {loading && <p className="text-mathua-muted text-xs mt-2">Loading next question…</p>}
+                      {loading && <p className="text-mathua-muted text-xs mt-2"><Loading inline size={11} /> Loading next question…</p>}
                     </div>
                   )}
                 </div>

@@ -465,7 +465,7 @@ export default function SessionPage() {
                 Back
               </button>
               <button onClick={beginGuestDiagnostic} disabled={loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50">
-                {loading ? 'Loading…' : 'Start diagnostic'}
+                {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Start diagnostic'}
               </button>
             </div>
           </div>
