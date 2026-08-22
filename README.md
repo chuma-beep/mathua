@@ -16,14 +16,14 @@
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go&logoColor=white)](https://golang.org)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![License](https://img.shields.io/badge/license-MIT-c8a96e?style=flat-square)](LICENSE)
-[![Concepts](https://img.shields.io/badge/concepts-291-a8a0f0?style=flat-square)](#content)
-[![Domains](https://img.shields.io/badge/domains-16-c8a96e?style=flat-square)](#content)
+[![Concepts](https://img.shields.io/badge/concepts-447-a8a0f0?style=flat-square)](#content)
+[![Domains](https://img.shields.io/badge/domains-18-c8a96e?style=flat-square)](#content)
 
 </div>
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from counting through calculus through a dependency graph of 291 atomic concepts — never advancing until speed and accuracy thresholds are both met. It runs as a single Go binary with a web server delivery mode and React + Next.js for global leaderboards and graph visualisation.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from counting through calculus through a dependency graph of 447 atomic concepts — never advancing until speed and accuracy thresholds are both met. It runs as a single Go binary with a web server delivery mode and React + Next.js for global leaderboards and graph visualisation.
 
 ---
 
@@ -59,7 +59,7 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080
 
 All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic concept — something small enough to fail independently. Each edge is a prerequisite relationship.
 
-The graph contains **291 concepts** across **17 domains**. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
+The graph contains **447 concepts** across **18 domains**. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -97,21 +97,22 @@ When a concept reaches MASTERED, Mathua schedules its next review using a simpli
 | Counting | 10 |
 | Arithmetic | 46 |
 | Fractions | 21 |
-| Pre-Algebra | 37 |
-| Algebra | 43 |
-| Geometry | 20 |
-| Trigonometry | 14 |
-| Precalculus | 0 |
-| Calculus | 26 |
-| Statistics | 12 |
-| Linear Algebra | 16 |
-| Discrete Math | 14 |
-| Complex Numbers | 8 |
+| Pre-Algebra | 40 |
+| Algebra | 84 |
+| Geometry | 22 |
+| Trigonometry | 22 |
+| Precalculus | 23 |
+| Calculus | 71 |
+| Statistics | 36 |
+| Linear Algebra | 20 |
+| Discrete Math | 15 |
+| Complex Numbers | 10 |
 | Number Theory | 8 |
 | Differential Equations | 8 |
-| Abstract Algebra | 5 |
+| Abstract Algebra | 7 |
+| Machine Learning | 1 |
 | Topology | 3 |
-| **Total** | **291** |
+| **Total** | **447** |
 
 ---
 
