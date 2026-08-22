@@ -111,7 +111,7 @@ func prereqsMet(dag *concepts.DAG, c *concepts.Concept, snapshots map[string]*Co
 			return false
 		}
 		status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), 14)
-		if status != mastery.StatusMastered {
+		if status != mastery.StatusMastered && status != "DECAYING" {
 			return false
 		}
 	}
