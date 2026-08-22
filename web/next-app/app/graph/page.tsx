@@ -85,16 +85,12 @@ function GraphContent() {
   const { loggedIn } = useAuthState()
 
   useEffect(() => {
-    healthCheck().then((ok) => {
-      setConnected(ok)
-      if (ok) {
-        getGraph().then(setGraphData)
-      }
-    })
+    healthCheck().then(setConnected).catch(() => setConnected(false))
+    getGraph().then(setGraphData).catch(() => console.error('getGraph failed'))
   }, [])
 
   useEffect(() => {
-    if (!connected || !loggedIn) return
+    if (!loggedIn) return
     const user = getUserInfo()
     if (!user) return
     getScores(user.student_id).then(setScores).catch(() => console.error('getScores failed'))
@@ -106,7 +102,7 @@ function GraphContent() {
       }
       setWeakByDomain(byDomain)
     }).catch(() => console.error('getWeaknesses failed'))
-  }, [connected, loggedIn])
+  }, [loggedIn])
 
   useEffect(() => {
     setSelectedId(conceptParam)
