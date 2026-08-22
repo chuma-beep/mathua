@@ -118,7 +118,7 @@ export default function ContributingPage() {
           Mathua is a full-stack project — a Go backend with a Next.js frontend,
           a scheduling engine, and a concept graph. Every generator, every diagram,
           every API route was built by someone who wanted to help others learn math.
-          Here's how to join them.
+          Here&apos;s how to join them.
         </p>
         <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
           <a
@@ -141,7 +141,7 @@ export default function ContributingPage() {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Getting started</h2>
         <p style={bodyStyle}>
-          You'll need Go 1.25+ and Node.js 18+. Clone the repo:
+          You&apos;ll need Go 1.25+ and Node.js 18+. Clone the repo:
         </p>
         <pre style={codeBlockStyle}>
 {`git clone https://github.com/chuma-beep/mathua.git
@@ -173,7 +173,7 @@ npm run dev`}
 
         <h3 style={h3Style}>Project layout</h3>
         <p style={bodyStyle}>
-          Key directories you'll work in:
+          Key directories you&apos;ll work in:
         </p>
         {[
           ['data/concepts/', 'Per-domain JSON files defining the concept graph.'],
@@ -285,7 +285,7 @@ npm run dev`}
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Step 2: Teach Mathua to ask questions</h2>
         <p style={bodyStyle}>
-          A generator is a Go function that produces a unique problem every time it's
+          A generator is a Go function that produces a unique problem every time it&apos;s
           called. There is no static question bank: every problem is built on demand.
           Generators live in{' '}
           <code style={inlineCodeStyle}>internal/generator/[domain]/</code> and
@@ -400,7 +400,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         <p style={bodyStyle}>
           The frontend is a Next.js App Router application under{' '}
           <code style={inlineCodeStyle}>web/next-app/</code>.
-          It's designed with a brutalist aesthetic: monospace typography, minimal
+          It&apos;s designed with a brutalist aesthetic: monospace typography, minimal
           chrome, no rounded corners, and a terminal-calibrated color palette.
         </p>
 
@@ -446,8 +446,8 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           <code style={inlineCodeStyle}>components/</code>. Pages live in{' '}
           <code style={inlineCodeStyle}>app/</code> under their route segment
           (e.g., <code style={inlineCodeStyle}>app/profile/page.tsx</code>).
-          The project uses static export (<code style={inlineCodeStyle}>output: 'export'</code>)
-          — all pages are client-rendered with <code style={inlineCodeStyle}>'use client'</code>.
+          The project uses static export (<code style={inlineCodeStyle}>output: &apos;export&apos;</code>)
+          — all pages are client-rendered with <code style={inlineCodeStyle}>&apos;use client&apos;</code>.
         </p>
         {[
           'API calls go through lib/api.ts. Auth headers come from lib/auth.ts (JWT in localStorage).',
@@ -470,7 +470,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         <p style={bodyStyle}>
           The HTTP server is in{' '}
           <code style={inlineCodeStyle}>internal/server/server.go</code>.
-          It's a standard library <code style={inlineCodeStyle}>net/http</code> server
+          It&apos;s a standard library <code style={inlineCodeStyle}>net/http</code> server
           with a custom <code style={inlineCodeStyle}>ServeMux</code>.
           All routes are registered in{' '}
           <code style={inlineCodeStyle}>Register()</code>.
@@ -566,7 +566,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>Submitting a pull request</h2>
         <p style={bodyStyle}>
-          Once everything passes locally, here's the full checklist:
+          Once everything passes locally, here&apos;s the full checklist:
         </p>
         {[
           'Add the concept to the appropriate domain file in data/concepts/ with correct prerequisites.',

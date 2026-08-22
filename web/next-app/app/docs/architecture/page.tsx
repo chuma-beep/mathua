@@ -138,13 +138,13 @@ export default function ArchitecturePage() {
         <DataModelFlow />
 
         <p style={bodyStyle}>
-          The SM-2 upsert uses SQLite's ON CONFLICT ... DO UPDATE to atomically save all progress
+          The SM-2 upsert uses SQLite&apos;s ON CONFLICT ... DO UPDATE to atomically save all progress
           fields in one statement. XP tracking is date-aware: xp_today resets when xp_date differs
           from the current date, preserving xp_total as a lifetime accumulator.
         </p>
 
         <div style={calloutStyle}>
-          The PostgresStore exists as a stub with all methods returning "not implemented."
+          The PostgresStore exists as a stub with all methods returning &quot;not implemented.&quot;
           The same Repository interface works for both databases -- the schema is identical.
         </div>
       </section>
@@ -222,7 +222,7 @@ export default function ArchitecturePage() {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>V. Computerised Adaptive Testing</h2>
         <p style={bodyStyle}>
-          The diagnostic engine locates a student's knowledge frontier using binary search on
+          The diagnostic engine locates a student&apos;s knowledge frontier using binary search on
           the topologically sorted concept graph. This reduces the assessment from 284 questions
           (one per concept) to approximately 20-35.
         </p>

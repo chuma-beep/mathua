@@ -291,7 +291,7 @@ decreases by 0.2 on each failed review
 minimum value: 1.3`}
             </pre>
             <p style={bodyStyle}>
-              Reviews are never presented as a separate "review mode." They are woven into every
+              Reviews are never presented as a separate &quot;review mode.&quot; They are woven into every
               session by the scheduler, which manages the 70/30 balance between new material and
               review automatically.
             </p>
@@ -304,7 +304,7 @@ minimum value: 1.3`}
             <h2 style={h2Style}>The Diagnostic Algorithm</h2>
             <p style={bodyStyle}>
               When a student first opens Mathua, they enter a Computerised Adaptive Testing (CAT)
-              session. The goal is to locate the student's knowledge frontier using as few questions
+              session. The goal is to locate the student&apos;s knowledge frontier using as few questions
               as possible.
             </p>
             <ol className="list-none my-4">
@@ -442,7 +442,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             </pre>
             <p style={bodyStyle}>
               The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
-              The scheduler passes a difficulty value based on the student's current mastery score.
+              The scheduler passes a difficulty value based on the student&apos;s current mastery score.
             </p>
           </section>
 
