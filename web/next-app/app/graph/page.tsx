@@ -27,8 +27,10 @@ const graphLoadingStyle: React.CSSProperties = {
   justifyContent: 'center',
 }
 
+const conceptGraphFlowChunk = import('../../components/ConceptGraphFlow')
+
 const ConceptGraphFlow = dynamic(
-  () => import('../../components/ConceptGraphFlow'),
+  () => conceptGraphFlowChunk,
   {
     ssr: false,
     loading: () => (
@@ -70,6 +72,22 @@ const domainOrder = [
   'abstract_algebra', 'topology',
 ]
 
+// StrictMode double-invokes effects in dev; share one in-flight request per key
+// so mounting twice never doubles network traffic.
+const inflight = new Map<string, Promise<unknown>>()
+function once<T>(key: string, run: () => Promise<T>): Promise<T> {
+  if (!inflight.has(key)) {
+    inflight.set(
+      key,
+      run().catch(err => {
+        inflight.delete(key)
+        throw err
+      })
+    )
+  }
+  return inflight.get(key) as Promise<T>
+}
+
 function GraphContent() {
   const { theme, mounted } = useTheme()
   const { push, replace } = useRouter()
@@ -85,17 +103,18 @@ function GraphContent() {
   const { loggedIn } = useAuthState()
 
   useEffect(() => {
-    healthCheck().then(setConnected).catch(() => setConnected(false))
-    getGraph().then(setGraphData).catch(() => console.error('getGraph failed'))
+    once('health', healthCheck).then(setConnected).catch(() => setConnected(false))
+    once('graph', getGraph).then(setGraphData).catch(() => console.error('getGraph failed'))
   }, [])
 
   useEffect(() => {
     if (!loggedIn) return
     const user = getUserInfo()
     if (!user) return
-    getScores(user.student_id).then(setScores).catch(() => console.error('getScores failed'))
-    getProgress(user.student_id).then(setRawProgress).catch(() => console.error('getProgress failed'))
-    getWeaknesses().then(w => {
+    const id = user.student_id
+    once(`scores:${id}`, () => getScores(id)).then(setScores).catch(() => console.error('getScores failed'))
+    once(`progress:${id}`, () => getProgress(id)).then(setRawProgress).catch(() => console.error('getProgress failed'))
+    once('weaknesses', getWeaknesses).then(w => {
       const byDomain: Record<string, { id: string; label: string }[]> = {}
       for (const [domain, entries] of Object.entries(w.by_domain)) {
         byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))
