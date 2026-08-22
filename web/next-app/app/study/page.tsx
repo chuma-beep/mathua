@@ -14,6 +14,7 @@ import MasteryBadge from '../../components/MasteryBadge'
 import { getLessons, type LessonInfo } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
+import Loading from '../../components/Loading'
 
 type ConceptEntry = { id: string; label: string; domain: string }
 const conceptLabels = new Map<string, string>((conceptsData as ConceptEntry[]).map(c => [c.id, c.label]))
@@ -755,7 +756,7 @@ function StudyContent() {
       <>
         <Header />
         <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
-          <p className="text-mathua-muted text-sm">Loading lessons…</p>
+          <Loading label="LOADING LESSONS" />
         </div>
         <Footer />
       </>
@@ -838,7 +839,7 @@ function StudyContent() {
 export default function StudyPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><p className="text-mathua-muted text-sm">Loading lessons…</p></div><Footer /></>
+      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><Loading label="LOADING LESSONS" /></div><Footer /></>
     }>
       <StudyContent />
     </Suspense>

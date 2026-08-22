@@ -9,6 +9,7 @@ import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import { getSettings, updateSettings, type UserSettings } from '../../lib/api'
 import { isLoggedIn } from '../../lib/auth'
+import Loading from '../../components/Loading'
 
 export default function SettingsPage() {
   const { push } = useRouter()
@@ -49,7 +50,7 @@ export default function SettingsPage() {
       <>
         <Header />
         <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
-          <p className="text-mathua-muted text-sm">Loading…</p>
+          <Loading label="LOADING SETTINGS" />
         </div>
         <Footer />
       </>

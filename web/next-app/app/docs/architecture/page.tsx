@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
+import Loading from '../../../components/Loading'
 
 const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureFlow'), {
   ssr: false,
@@ -12,7 +13,7 @@ const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureF
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading architecture diagram&hellip;
+      <Loading label="LOADING ARCHITECTURE DIAGRAM" />
     </div>
   ),
 })
@@ -25,7 +26,7 @@ const DiagnosticFlow = dynamic(() => import('../../../components/DiagnosticFlow'
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading diagnostic diagram&hellip;
+      <Loading label="LOADING DIAGNOSTIC DIAGRAM" />
     </div>
   ),
 })
@@ -38,7 +39,7 @@ const DataModelFlow = dynamic(() => import('../../../components/SystemDesignFlow
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading data model diagram&hellip;
+      <Loading label="LOADING DATA MODEL DIAGRAM" />
     </div>
   ),
 })
@@ -51,7 +52,7 @@ const RequestFlow = dynamic(() => import('../../../components/SystemDesignFlow/R
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading request flow diagram&hellip;
+      <Loading label="LOADING REQUEST FLOW DIAGRAM" />
     </div>
   ),
 })

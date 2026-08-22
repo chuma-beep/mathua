@@ -15,6 +15,7 @@ import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type Grap
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
 import { deriveStatuses, type MasteryStatus } from '../../lib/graphStatus'
+import Loading from '../../components/Loading'
 
 const graphLoadingStyle: React.CSSProperties = {
   height: 'clamp(320px, 50vh, 520px)',
@@ -24,8 +25,6 @@ const graphLoadingStyle: React.CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'var(--text-muted)',
-  fontSize: '14px',
 }
 
 const ConceptGraphFlow = dynamic(
@@ -34,7 +33,7 @@ const ConceptGraphFlow = dynamic(
     ssr: false,
     loading: () => (
       <div style={graphLoadingStyle}>
-        Loading graph&hellip;
+        <Loading label="LOADING GRAPH" />
       </div>
     ),
   }

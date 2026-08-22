@@ -7,6 +7,7 @@ import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
+import Loading from '../../components/Loading'
 
 const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), {
   ssr: false,
@@ -16,7 +17,7 @@ const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), 
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading diagnostic&hellip;
+      <Loading label="LOADING DIAGNOSTIC" />
     </div>
   ),
 })

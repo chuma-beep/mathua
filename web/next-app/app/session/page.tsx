@@ -33,6 +33,7 @@ import {
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
+import Loading from '../../components/Loading'
 
 type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'review'
 
@@ -508,7 +509,7 @@ export default function SessionPage() {
 
         {loading && (
           <div className="max-w-md mx-auto mt-20 text-center">
-            <p className="text-mathua-muted text-sm">Loading…</p>
+            <Loading label="LOADING" />
           </div>
         )}
         {error && (

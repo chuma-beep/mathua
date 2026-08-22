@@ -9,6 +9,7 @@ import Footer from '../../components/Footer'
 import FormulaBlock from '../../components/FormulaBlock'
 import ProgressionLevels from '../../components/ProgressionLevels'
 import { getLeaderboard, type LeaderboardEntry } from '../../lib/api'
+import Loading from '../../components/Loading'
 
 const LEVELS = [
   { num: '01', name: 'Novice', range: '0–31' },
@@ -106,7 +107,7 @@ export default function LeaderboardPage() {
             {loading && (
               <tr>
                 <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                  Loading leaderboard&hellip;
+                  <Loading label="LOADING LEADERBOARD" />
                 </td>
               </tr>
             )}
