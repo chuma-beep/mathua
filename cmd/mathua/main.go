@@ -31,6 +31,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/numtheory"
 	"github.com/chuma-beep/mathua/internal/generator/odes"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
+	"github.com/chuma-beep/mathua/internal/generator/precalculus"
 	"github.com/chuma-beep/mathua/internal/generator/statistics"
 	"github.com/chuma-beep/mathua/internal/generator/topology"
 	"github.com/chuma-beep/mathua/internal/generator/trigonometry"
@@ -79,6 +80,7 @@ func main() {
 	prealgebra.Register(reg)
 	algebra.Register(reg)
 	trigonometry.Register(reg)
+	precalculus.Register(reg)
 	statistics.Register(reg)
 	numtheory.Register(reg)
 	complex.Register(reg)
