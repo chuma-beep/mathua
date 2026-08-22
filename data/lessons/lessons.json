@@ -1950,5 +1950,209 @@
  {
   "concept_id": "precalc.series.geom_infinite",
   "source": "algebrica/series/geometric-series.md"
+ },
+ {
+  "concept_id": "ode.adv.systems",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.first_order.exact",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.first_order.linear",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.first_order.separable",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.second_order.homogeneous",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.second_order.nonhomogeneous",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "ode.transforms.laplace",
+  "source": "algebrica/differential-equations/differential-equations.md"
+ },
+ {
+  "concept_id": "trig.basics.radians",
+  "source": "algebrica/trigonometry/unit-circle.md"
+ },
+ {
+  "concept_id": "trig.graph.period",
+  "source": "algebrica/functions/sine-function.md"
+ },
+ {
+  "concept_id": "nt.basics.gcd_euclidean",
+  "source": "algebrica/sets-and-numbers/modulo-operator.md"
+ },
+ {
+  "concept_id": "count.basics.backwards",
+  "source": "teaching/count.basics.backwards.md"
+ },
+ {
+  "concept_id": "count.basics.cardinality",
+  "source": "teaching/count.basics.cardinality.md"
+ },
+ {
+  "concept_id": "count.basics.compare",
+  "source": "teaching/count.basics.compare.md"
+ },
+ {
+  "concept_id": "count.basics.number_line",
+  "source": "teaching/count.basics.number_line.md"
+ },
+ {
+  "concept_id": "count.basics.objects",
+  "source": "teaching/count.basics.objects.md"
+ },
+ {
+  "concept_id": "count.basics.objects_20",
+  "source": "teaching/count.basics.objects_20.md"
+ },
+ {
+  "concept_id": "count.basics.ordinal",
+  "source": "teaching/count.basics.ordinal.md"
+ },
+ {
+  "concept_id": "count.skip.by_10",
+  "source": "teaching/count.skip.by_10.md"
+ },
+ {
+  "concept_id": "count.skip.by_2",
+  "source": "teaching/count.skip.by_2.md"
+ },
+ {
+  "concept_id": "count.skip.by_5",
+  "source": "teaching/count.skip.by_5.md"
+ },
+ {
+  "concept_id": "dec.basics.compare",
+  "source": "teaching/dec.basics.compare.md"
+ },
+ {
+  "concept_id": "dec.convert.from_frac",
+  "source": "teaching/dec.convert.from_frac.md"
+ },
+ {
+  "concept_id": "dec.convert.to_frac",
+  "source": "teaching/dec.convert.to_frac.md"
+ },
+ {
+  "concept_id": "dec.ops.add",
+  "source": "teaching/dec.ops.add.md"
+ },
+ {
+  "concept_id": "dec.ops.div",
+  "source": "teaching/dec.ops.div.md"
+ },
+ {
+  "concept_id": "dec.ops.mult",
+  "source": "teaching/dec.ops.mult.md"
+ },
+ {
+  "concept_id": "dec.ops.round",
+  "source": "teaching/dec.ops.round.md"
+ },
+ {
+  "concept_id": "dec.ops.sub",
+  "source": "teaching/dec.ops.sub.md"
+ },
+ {
+  "concept_id": "frac.basics.concept",
+  "source": "teaching/frac.basics.concept.md"
+ },
+ {
+  "concept_id": "frac.basics.equivalent",
+  "source": "teaching/frac.basics.equivalent.md"
+ },
+ {
+  "concept_id": "frac.basics.number_line",
+  "source": "teaching/frac.basics.number_line.md"
+ },
+ {
+  "concept_id": "frac.basics.parts",
+  "source": "teaching/frac.basics.parts.md"
+ },
+ {
+  "concept_id": "frac.ops.benchmark",
+  "source": "teaching/frac.ops.benchmark.md"
+ },
+ {
+  "concept_id": "frac.ops.compare",
+  "source": "teaching/frac.ops.compare.md"
+ },
+ {
+  "concept_id": "frac.ops.div",
+  "source": "teaching/frac.ops.div.md"
+ },
+ {
+  "concept_id": "frac.ops.mult",
+  "source": "teaching/frac.ops.mult.md"
+ },
+ {
+  "concept_id": "frac.ops.simplify",
+  "source": "teaching/frac.ops.simplify.md"
+ },
+ {
+  "concept_id": "frac.ops.to_decimal",
+  "source": "teaching/frac.ops.to_decimal.md"
+ },
+ {
+  "concept_id": "pct.basics.concept",
+  "source": "teaching/pct.basics.concept.md"
+ },
+ {
+  "concept_id": "pct.convert.from_dec",
+  "source": "teaching/pct.convert.from_dec.md"
+ },
+ {
+  "concept_id": "pct.convert.to_dec",
+  "source": "teaching/pct.convert.to_dec.md"
+ },
+ {
+  "concept_id": "pct.ops.discount",
+  "source": "teaching/pct.ops.discount.md"
+ },
+ {
+  "concept_id": "pct.ops.find_rate",
+  "source": "teaching/pct.ops.find_rate.md"
+ },
+ {
+  "concept_id": "pct.ops.increase",
+  "source": "teaching/pct.ops.increase.md"
+ },
+ {
+  "concept_id": "pct.ops.of_number",
+  "source": "teaching/pct.ops.of_number.md"
+ },
+ {
+  "concept_id": "pct.ops.tax_tip",
+  "source": "teaching/pct.ops.tax_tip.md"
+ },
+ {
+  "concept_id": "ratio.basics.concept",
+  "source": "teaching/ratio.basics.concept.md"
+ },
+ {
+  "concept_id": "ratio.ops.proportion",
+  "source": "teaching/ratio.ops.proportion.md"
+ },
+ {
+  "concept_id": "ratio.ops.rate",
+  "source": "teaching/ratio.ops.rate.md"
+ },
+ {
+  "concept_id": "ratio.ops.scale",
+  "source": "teaching/ratio.ops.scale.md"
+ },
+ {
+  "concept_id": "ratio.ops.simplify",
+  "source": "teaching/ratio.ops.simplify.md"
  }
 ]
