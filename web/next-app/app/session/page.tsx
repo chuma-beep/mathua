@@ -82,47 +82,6 @@ export default function SessionPage() {
   const diagPlan = useRef<GoalPlanRes | null>(null)
   const guestStudentID = useRef('')
 
-  useEffect(() => {
-    getConfig()
-      .then(config => {
-        if (!config.auth_enabled) {
-          setScreen('name')
-          setLoading(false)
-          return
-        }
-        const u = getUserInfo()
-        if (u) {
-          setUser(u)
-          setScreen('practice')
-          getSettings().then(s => setShowTimer(s.show_timer ?? false)).catch(() => console.error('getSettings failed'))
-          beginSessionAuth()
-        } else {
-          setScreen('name')
-          setLoading(false)
-        }
-      })
-      .catch(() => {
-        setScreen('name')
-        setLoading(false)
-      })
-  }, [])
-
-  useEffect(() => {
-    if (screen === 'practice' && !submitted) {
-      startRef.current = Date.now()
-      inputRef.current?.focus()
-    }
-  }, [screen, question, submitted])
-
-  useEffect(() => {
-    if (screen === 'practice' && !submitted && showTimer) {
-      timerRef.current = setInterval(() => {
-        setElapsed((Date.now() - startRef.current) / 1000)
-      }, 100)
-    }
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
-  }, [screen, submitted, showTimer])
-
   const beginSessionAuth = useCallback(async () => {
     setError('')
     setLoading(true)
@@ -146,6 +105,47 @@ export default function SessionPage() {
       setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    getConfig()
+      .then(config => {
+        if (!config.auth_enabled) {
+          setScreen('name')
+          setLoading(false)
+          return
+        }
+        const u = getUserInfo()
+        if (u) {
+          setUser(u)
+          setScreen('practice')
+          getSettings().then(s => setShowTimer(s.show_timer ?? false)).catch(() => console.error('getSettings failed'))
+          beginSessionAuth()
+        } else {
+          setScreen('name')
+          setLoading(false)
+        }
+      })
+      .catch(() => {
+        setScreen('name')
+        setLoading(false)
+      })
+  }, [beginSessionAuth])
+
+  useEffect(() => {
+    if (screen === 'practice' && !submitted) {
+      startRef.current = Date.now()
+      inputRef.current?.focus()
+    }
+  }, [screen, question, submitted])
+
+  useEffect(() => {
+    if (screen === 'practice' && !submitted && showTimer) {
+      timerRef.current = setInterval(() => {
+        setElapsed((Date.now() - startRef.current) / 1000)
+      }, 100)
+    }
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+  }, [screen, submitted, showTimer])
 
   const beginSessionName = useCallback(async () => {
     if (!name.trim()) { setError('Enter your name'); return }

@@ -127,7 +127,7 @@ export default function DataModelFlow() {
       ...e,
       style: { ...e.style, stroke: c.borderStrong },
     }))
-  }, [theme])
+  }, [c])
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
