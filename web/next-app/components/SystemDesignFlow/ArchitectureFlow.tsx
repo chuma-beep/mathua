@@ -198,6 +198,8 @@ function DetailPanel({ nodeId, onClose }: { nodeId: string | null; onClose: () =
   )
 }
 
+const animatedEdges = new Set(['dag-loader-sm2-scheduler', 'sm2-scheduler-generators', 'generators-mastery', 'mastery-scoring', 'scoring-sqlite', 'mastery-sqlite'])
+
 export default function ArchitectureFlow() {
   const { theme, mounted } = useTheme()
   const c = themeColors[theme === 'dark' ? 'dark' : 'light']
@@ -215,8 +217,6 @@ export default function ArchitectureFlow() {
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
 
-  const animatedEdges = new Set(['dag-loader-sm2-scheduler', 'sm2-scheduler-generators', 'generators-mastery', 'mastery-scoring', 'scoring-sqlite', 'mastery-sqlite'])
-
   const styledEdges = useMemo(() => {
     return archEdges.map((e) => {
       const key = `${e.source}-${e.target}`
@@ -228,7 +228,7 @@ export default function ArchitectureFlow() {
         style: { stroke: animatedEdges.has(key) ? c.accentBlue : c.borderStrong, strokeWidth: 1.5 },
       }
     })
-  }, [theme])
+  }, [c])
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
   const [selectedNode, setSelectedNode] = useState<string | null>(null)

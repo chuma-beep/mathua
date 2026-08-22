@@ -242,7 +242,7 @@ export default function ArchitectureFlow() {
       })
     })
     return resultEdges
-  }, [theme])
+  }, [c])
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
 

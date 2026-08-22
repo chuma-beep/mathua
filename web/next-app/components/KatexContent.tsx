@@ -221,6 +221,9 @@ export default function KatexContent({ children, className = '' }: { children: s
             if (url && !url.startsWith('http') && !url.startsWith('/')) {
               url = '/diagrams/algebrica/' + url.split('/').pop()
             }
+            // Lesson-sourced images come from arbitrary remote/relative URLs without
+            // intrinsic dimensions, so next/image optimization does not apply here.
+            // eslint-disable-next-line @next/next/no-img-element
             return <img src={url} alt={alt || ''} className="max-w-full h-auto my-4 mx-auto" />
           },
           h1: ({ children, ...props }) => {

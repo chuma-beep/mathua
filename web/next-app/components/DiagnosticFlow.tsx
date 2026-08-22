@@ -165,7 +165,7 @@ export default function DiagnosticFlow() {
         type: 'smoothstep',
       },
     ]
-  }, [theme])
+  }, [c])
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
 

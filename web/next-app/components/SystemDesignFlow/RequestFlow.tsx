@@ -112,19 +112,19 @@ export default function RequestFlow() {
     style: { width: 150 },
   }))
 
-  const edgeDefs: Edge[] = steps.slice(0, -1).map((id, i) => ({
+  const edgeDefs: Edge[] = useMemo(() => steps.slice(0, -1).map((id, i) => ({
     id: `e-${id}-${steps[i + 1]}`,
     source: id,
     target: steps[i + 1],
     animated: true,
-  }))
+  })), [])
 
   const styledEdges = useMemo(() => {
     return edgeDefs.map(e => ({
       ...e,
       style: { stroke: c.borderStrong, strokeWidth: 1.5 },
     }))
-  }, [theme])
+  }, [c, edgeDefs])
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(styledEdges)
