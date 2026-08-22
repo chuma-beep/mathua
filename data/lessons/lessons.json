@@ -2154,5 +2154,37 @@
  {
   "concept_id": "ratio.ops.simplify",
   "source": "teaching/ratio.ops.simplify.md"
+ },
+ {
+  "concept_id": "arith.exp.sci_notation",
+  "source": "teaching/arith.exp.sci_notation.md"
+ },
+ {
+  "concept_id": "discrete.sequences.recurrence",
+  "source": "teaching/discrete.sequences.recurrence.md"
+ },
+ {
+  "concept_id": "nt.adv.diophantine",
+  "source": "teaching/nt.adv.diophantine.md"
+ },
+ {
+  "concept_id": "nt.adv.fermat_little",
+  "source": "authored/nt.adv.fermat_little.md"
+ },
+ {
+  "concept_id": "nt.app.crypto",
+  "source": "authored/nt.app.crypto.md"
+ },
+ {
+  "concept_id": "topo.basics.metric",
+  "source": "authored/topo.basics.metric.md"
+ },
+ {
+  "concept_id": "topo.basics.open_closed",
+  "source": "authored/topo.basics.open_closed.md"
+ },
+ {
+  "concept_id": "topo.basics.continuous",
+  "source": "authored/topo.basics.continuous.md"
  }
 ]

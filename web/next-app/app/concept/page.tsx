@@ -223,6 +223,18 @@ function ConceptContent() {
               </div>
             )}
 
+            {!detail.lesson && (
+              <div className="mb-8">
+                <div className="border border-mathua-border bg-mathua-surface rounded-none px-4 py-3 flex items-center gap-3 flex-wrap">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-green-400">● Practice ready</span>
+                  <span className="font-mono text-xs text-mathua-muted">
+                    A written lesson for this concept is coming soon — you can practice it right now in a{' '}
+                    <Link href="/session" className="text-mathua-blue hover:underline">session</Link>.
+                  </span>
+                </div>
+              </div>
+            )}
+
             {detail.lesson && (
               <div className="mb-8">
                 <div className="flex gap-6">
