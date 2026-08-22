@@ -1,6 +1,7 @@
 package scheduler
 
 import (
+	"math"
 	"testing"
 	"time"
 
@@ -223,5 +224,163 @@ func TestNext_AllowsDecayingConcept(t *testing.T) {
 	}
 	if !next.IsReview {
 		t.Error("decaying should be review")
+	}
+}
+
+func TestNext_PrereqGating(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	now := time.Now().UTC()
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusLearning, Streak: 1, LastAttempted: now, RequiredStreak: 3},
+	}
+	for i := 0; i < 20; i++ {
+		next := s.Next(snap, "", 0, 0)
+		if next == nil {
+			t.Fatal("expected root concept while prereqs unmastered")
+		}
+		if next.Concept.ID != "a" {
+			t.Fatalf("prereq gating violated: returned %s though a is unmastered", next.Concept.ID)
+		}
+	}
+}
+
+func TestComputePriority_UnseenBaseline(t *testing.T) {
+	if got := computePriority(nil, time.Now().UTC(), false); math.Abs(got-0.2) > 1e-9 {
+		t.Errorf("expected 0.2 baseline for unseen, got %f", got)
+	}
+}
+
+func TestComputePriority_Weights(t *testing.T) {
+	now := time.Now().UTC()
+	snap := &ConceptSnapshot{
+		LastAttempted:  now.Add(-48 * time.Hour),
+		Streak:         1,
+		RequiredStreak: 4,
+		WeaknessScore:  0.5,
+	}
+	want := 0.5*2.0 + 0.2*(1.0-0.25) + 0.3*0.5
+	if got := computePriority(snap, now, false); math.Abs(got-want) > 1e-9 {
+		t.Errorf("expected %f, got %f", want, got)
+	}
+}
+
+func TestComputePriority_DecayingBoost(t *testing.T) {
+	now := time.Now().UTC()
+	snap := &ConceptSnapshot{LastAttempted: now.Add(-24 * time.Hour), Streak: 2, RequiredStreak: 4}
+	plain := computePriority(snap, now, false)
+	decay := computePriority(snap, now, true)
+	if decay-plain != 5.0 {
+		t.Errorf("expected +5.0 decay boost, got %f", decay-plain)
+	}
+}
+
+func TestEffectiveState_NextReviewDuePassed(t *testing.T) {
+	now := time.Now().UTC()
+	past := now.Add(-time.Hour)
+	future := now.Add(24 * time.Hour)
+
+	status, isReview := effectiveState(&ConceptSnapshot{
+		Status:        mastery.StatusMastered,
+		LastReviewed:  now.Add(-24 * time.Hour),
+		NextReviewDue: &past,
+	}, now)
+	if status != mastery.StatusMastered {
+		t.Errorf("freshly-mastered should not be DECAYING, got %s", status)
+	}
+	if !isReview {
+		t.Error("due review date in the past should mark IsReview")
+	}
+
+	_, isReview = effectiveState(&ConceptSnapshot{
+		Status:        mastery.StatusMastered,
+		LastReviewed:  now,
+		NextReviewDue: &future,
+	}, now)
+	if isReview {
+		t.Error("future review due date must not mark IsReview")
+	}
+}
+
+func TestSelectWithBalance_ForcesReviewWhenUnderRatio(t *testing.T) {
+	newTop := Candidate{Concept: &concepts.Concept{ID: "n"}, Priority: 10}
+	reviewLow := Candidate{Concept: &concepts.Concept{ID: "r"}, IsReview: true, Priority: 1}
+
+	got := selectWithBalance([]Candidate{newTop, reviewLow}, 0, 9)
+	if !got.IsReview {
+		t.Error("under 30%% review ratio, a review candidate must be preferred over higher-priority new")
+	}
+}
+
+func TestSelectWithBalance_AtRatioPicksTopPriority(t *testing.T) {
+	newTop := Candidate{Concept: &concepts.Concept{ID: "n"}, Priority: 10}
+	reviewLow := Candidate{Concept: &concepts.Concept{ID: "r"}, IsReview: true, Priority: 1}
+
+	got := selectWithBalance([]Candidate{newTop, reviewLow}, 3, 6)
+	if got.IsReview || got.Concept.ID != "n" {
+		t.Errorf("at target ratio the top-priority candidate should win, got %+v", got.Concept.ID)
+	}
+}
+
+func TestSelectWithBalance_NoReviewsFallsBackToTop(t *testing.T) {
+	a := Candidate{Concept: &concepts.Concept{ID: "a"}, Priority: 10}
+	b := Candidate{Concept: &concepts.Concept{ID: "b"}, Priority: 5}
+	got := selectWithBalance([]Candidate{a, b}, 0, 99)
+	if got.Concept.ID != "a" {
+		t.Errorf("without review candidates the top candidate should win, got %s", got.Concept.ID)
+	}
+}
+
+func TestNextReview_ReturnsOnlyReviewCandidates(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	old := time.Now().UTC().AddDate(0, 0, -20)
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusMastered, LastReviewed: old, RequiredStreak: 3},
+		"b": {Status: mastery.StatusMastered, LastReviewed: old, RequiredStreak: 3},
+	}
+	for i := 0; i < 10; i++ {
+		nx := s.NextReview(snap, "")
+		if nx == nil {
+			t.Fatal("expected a review candidate")
+		}
+		if !nx.IsReview {
+			t.Fatalf("NextReview returned non-review %s", nx.Concept.ID)
+		}
+		if nx.Concept.ID != "a" && nx.Concept.ID != "b" {
+			t.Fatalf("unexpected review pick %s; only a/b are decaying", nx.Concept.ID)
+		}
+	}
+}
+
+func TestNextReview_SkipsPrev(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	old := time.Now().UTC().AddDate(0, 0, -20)
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusMastered, LastReviewed: old, RequiredStreak: 3},
+		"b": {Status: mastery.StatusMastered, LastReviewed: old, RequiredStreak: 3},
+	}
+	nx := s.NextReview(snap, "a")
+	if nx == nil {
+		t.Fatal("expected a review candidate")
+	}
+	if nx.Concept.ID == "a" {
+		t.Error("NextReview must skip prevConceptID")
+	}
+}
+
+func TestNextReview_NilWhenNothingDecayed(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	nx := s.NextReview(map[string]*ConceptSnapshot{}, "")
+	if nx != nil {
+		t.Errorf("expected nil with no decayed concepts, got %s", nx.Concept.ID)
+	}
+}
+
+func TestDaysSince_ZeroTimeSentinel(t *testing.T) {
+	if got := daysSince(time.Time{}); got != 999 {
+		t.Errorf("expected 999 sentinel for zero time, got %f", got)
 	}
 }
