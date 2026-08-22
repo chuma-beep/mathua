@@ -12,6 +12,7 @@ import FormulaBlock from '../components/FormulaBlock'
 import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
 import Footer from '../components/Footer'
+import Loading from '../components/Loading'
 import conceptsData from '../data/concepts.json'
 
 const loadingGraphStyle: React.CSSProperties = {
@@ -40,7 +41,7 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
   ssr: false,
   loading: () => (
     <div style={loadingGraphStyle}>
-      Loading graph…
+      <Loading label="LOADING GRAPH" />
     </div>
   ),
 })
@@ -75,7 +76,7 @@ function LazyGraphMount({ children }: { children: React.ReactNode }) {
     return () => obs.disconnect()
   }, [])
 
-  return <div ref={ref}>{visible ? children : <div style={loadingGraphStyle}>Scroll to load graph…</div>}</div>
+  return <div ref={ref}>{visible ? children : <div style={loadingGraphStyle}><Loading label="PREPARING GRAPH" /></div>}</div>
 }
 
 const PIPELINE_STATES = [

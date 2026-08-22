@@ -10,6 +10,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 import LessonQuiz from '../../components/LessonQuiz'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
+import Loading from '../../components/Loading'
 
 function slugify(text: string): string {
   return text
@@ -57,7 +58,7 @@ function ConceptContent() {
       <>
         <Header />
         <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
-          <p className="text-mathua-muted text-sm">Loading…</p>
+          <Loading label="LOADING CONCEPT" />
         </div>
         <Footer />
       </>
@@ -288,7 +289,7 @@ function ConceptContent() {
 export default function ConceptPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><p className="text-mathua-muted text-sm">Loading…</p></div><Footer /></>
+      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><Loading label="LOADING CONCEPT" /></div><Footer /></>
     }>
       <ConceptContent />
     </Suspense>

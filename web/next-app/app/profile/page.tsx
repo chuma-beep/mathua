@@ -11,6 +11,7 @@ import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
+import Loading from '../../components/Loading'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 
@@ -91,7 +92,7 @@ export default function ProfilePage() {
               textAlign: 'center',
             }}
           >
-            Loading profile…
+            <Loading label="LOADING PROFILE" />
           </div>
         </div>
       </>

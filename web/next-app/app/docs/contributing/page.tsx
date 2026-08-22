@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
 import AsciiDivider from '../../../components/AsciiDivider'
+import Loading from '../../../components/Loading'
 
 export const metadata: Metadata = {
   title: 'Contributing \u2014 Mathua',
@@ -16,7 +17,7 @@ const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
-      Loading workflow&hellip;
+      <Loading label="LOADING WORKFLOW" />
     </div>
   ),
 })
