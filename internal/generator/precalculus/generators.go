@@ -36,6 +36,15 @@ var all = []struct {
 	{"precalc.induction", &inductionGen{}},
 	{"precalc.systems.nonlinear", &nonlinearSystemsGen{}},
 	{"precalc.partial_fractions", &partialFractionsGen{}},
+	{"precalc.conic.parabola", &conicParabolaGen{}},
+	{"precalc.conic.ellipse", &conicEllipseGen{}},
+	{"precalc.conic.hyperbola", &conicHyperbolaGen{}},
+	{"precalc.seq.arithmetic", &arithSeqGen{}},
+	{"precalc.seq.geometric", &geoSeqGen{}},
+	{"precalc.seq.summation", &summationGen{}},
+	{"precalc.series.arithmetic", &arithSeriesGen{}},
+	{"precalc.series.geometric", &geoSeriesGen{}},
+	{"precalc.series.geom_infinite", &geomInfiniteGen{}},
 }
 
 func canonPoly(coeffs map[int]int) string {
@@ -643,4 +652,260 @@ func (g *partialFractionsGen) Generate(ctx generator.GeneratorContext) generator
 	ex := fmt.Sprintf("Cover-up method: setting \\(x=%d\\) kills the \\(%s\\) factor and yields \\(A=%d\\); setting \\(x=%d\\) yields \\(B=%d\\). So the decomposition is \\(%s\\).",
 		r1, factor(r2), A, r2, B, ans)
 	return generator.Problem{Question: q, Answer: ans, Explanation: ex}
+}
+
+var conicPairs = [][3]int{{3, 4, 5}, {6, 8, 10}, {5, 12, 13}, {9, 12, 15}, {8, 15, 17}, {12, 16, 20}, {7, 24, 25}}
+
+type conicParabolaGen struct{}
+
+func (g *conicParabolaGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *conicParabolaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	p := 1 + rand.Intn(2+int(ctx.Difficulty*4))
+	neg := rand.Intn(2) == 0
+	if neg {
+		p = -p
+	}
+	fourP := 4 * p
+	if rand.Intn(2) == 0 {
+		ans := strconv.Itoa(p)
+		q := fmt.Sprintf("The parabola \\(y^2 = %sx^\\) has its focus on the x-axis at \\((p, 0)\\). Find \\(p\\).", coefStr(fourP))
+		ex := fmt.Sprintf("Comparing with \\(y^2 = 4px\\): \\(4p = %+d\\), so \\(p = %d\\).", fourP, p)
+		return generator.Problem{Question: q, Answer: ans, Explanation: ex}
+	}
+	ans := strconv.Itoa(p)
+	q := fmt.Sprintf("The parabola \\(x^2 = %sy\\) has its focus on the y-axis at \\((0, p)\\). Find \\(p\\).", coefStr(fourP))
+	ex := fmt.Sprintf("Comparing with \\(x^2 = 4py\\): \\(4p = %+d\\), so \\(p = %d\\).", fourP, p)
+	return generator.Problem{Question: q, Answer: ans, Explanation: ex}
+}
+
+func coefStr(c int) string {
+	switch c {
+	case 1:
+		return ""
+	case -1:
+		return "-"
+	default:
+		return strconv.Itoa(c)
+	}
+}
+
+type conicEllipseGen struct{}
+
+func (g *conicEllipseGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *conicEllipseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	t := conicPairs[rand.Intn(len(conicPairs))]
+	a := t[0]
+	b := t[1]
+	c := t[2]
+	if rand.Intn(2) == 0 {
+		a, b = b, a
+	}
+	if ctx.Difficulty > 0.5 && rand.Intn(2) == 0 {
+		q := fmt.Sprintf("An ellipse is given by \\(\\frac{x^2}{%d} + \\frac{y^2}{%d} = 1\\). Find the distance from the center to each focus \\(c\\).", a*a, b*b)
+		ex := fmt.Sprintf("\\(c^2 = a^2-b^2 = %d-%d = %d\\), so \\(c = %d\\).", maxInt(a*a, b*b), minInt(a*a, b*b), c*c, c)
+		return generator.Problem{Question: q, Answer: strconv.Itoa(c), Explanation: ex}
+	}
+	q := fmt.Sprintf("An ellipse has semi-axes \\(a=%d\\) and \\(b=%d\\) (with \\(a>b\\)). Find \\(c\\), the distance from center to focus, where \\(c^2=a^2-b^2\\).", a, b)
+	ex := fmt.Sprintf("\\(c=\\sqrt{%d-%d}=\\sqrt{%d}=%d\\).", a*a, b*b, c*c, c)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(c), Explanation: ex}
+}
+
+type conicHyperbolaGen struct{}
+
+func (g *conicHyperbolaGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 0.02)
+}
+
+func (g *conicHyperbolaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	t := conicPairs[rand.Intn(len(conicPairs))]
+	switch rand.Intn(3) {
+	case 0:
+		q := fmt.Sprintf("For the hyperbola \\(\\frac{x^2}{%d} - \\frac{y^2}{%d} = 1\\), find \\(c\\), the distance from center to focus \\(c^2=a^2+b^2\\).", t[0]*t[0], t[1]*t[1])
+		ex := fmt.Sprintf("\\(c=\\sqrt{%d+%d}=\\sqrt{%d}=%d\\).", t[0]*t[0], t[1]*t[1], t[2]*t[2], t[2])
+		return generator.Problem{Question: q, Answer: strconv.Itoa(t[2]), Explanation: ex}
+	case 1:
+		mult := 1 + rand.Intn(3+int(ctx.Difficulty*3))
+		b := t[1] * mult
+		a := t[0] * mult
+		val := float64(b) / float64(a)
+		q := fmt.Sprintf("For \\(\\frac{x^2}{%d} - \\frac{y^2}{%d} = 1\\), find the positive slope of the asymptotes \\(y=\\pm mx\\), rounded to 2 decimals.", a*a, b*b)
+		ex := fmt.Sprintf("Asymptotes have \\(m=b/a=%d/%d=%.2f\\).", b, a, val)
+		return generator.Problem{Question: q, Answer: fmt.Sprintf("%.2f", val), Explanation: ex}
+	default:
+		q := fmt.Sprintf("For \\(\\frac{x^2}{%d} - \\frac{y^2}{%d} = 1\\), find \\(a\\), the length of the semi-transverse axis.", t[0]*t[0], t[1]*t[1])
+		ex := fmt.Sprintf("The \\(x^2\\) term is positive, so the transverse axis is horizontal with \\(a^2=%d\\): \\(a=%d\\).", t[0]*t[0], t[0])
+		return generator.Problem{Question: q, Answer: strconv.Itoa(t[0]), Explanation: ex}
+	}
+}
+
+type arithSeqGen struct{}
+
+func (g *arithSeqGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *arithSeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	a1 := rand.Intn(2*(1+int(ctx.Difficulty*5))+1) - (1 + int(ctx.Difficulty*5))
+	d := 0
+	for d == 0 {
+		d = rand.Intn(2*(1+int(ctx.Difficulty*4))+1) - (1 + int(ctx.Difficulty*4))
+	}
+	n := 5 + rand.Intn(10+int(ctx.Difficulty*15))
+	an := a1 + (n-1)*d
+	q := fmt.Sprintf("An arithmetic sequence starts at \\(%d\\) with common difference \\(%+d\\). Find term \\(a_{%d}\\).", a1, d, n)
+	ex := fmt.Sprintf("\\(a_n=a_1+(n-1)d=%d+%d\\cdot%d=%d\\).", a1, n-1, d, an)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(an), Explanation: ex}
+}
+
+type geoSeqGen struct{}
+
+func (g *geoSeqGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *geoSeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	r := []int{2, 3, -2}[rand.Intn(3)]
+	maxN := map[int]int{2: 10, 3: 6, -2: 8}[r]
+	n := 2 + rand.Intn(maxN-1)
+	a1 := 1 + rand.Intn(3+int(ctx.Difficulty*4))
+	an := a1
+	for i := 1; i < n; i++ {
+		an *= r
+	}
+	q := fmt.Sprintf("A geometric sequence starts at \\(%d\\) with common ratio \\(%d\\). Find term \\(a_{%d}\\).", a1, r, n)
+	ex := fmt.Sprintf("\\(a_n=a_1 r^{n-1}=%d\\cdot(%d)^{%d}=%d\\).", a1, r, n-1, an)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(an), Explanation: ex}
+}
+
+type summationGen struct{}
+
+func (g *summationGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *summationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	n := 4 + rand.Intn(3+int(ctx.Difficulty*8))
+	a := 1 + rand.Intn(3)
+	b := rand.Intn(2*3+1) - 3
+	total := 0
+	for i := 1; i <= n; i++ {
+		total += a*i + b
+	}
+	q := fmt.Sprintf("Evaluate \\(\\sum_{i=1}^{%d} (%si %+d)\\).", n, coefStr(a), b)
+	ex := fmt.Sprintf("\\(\\sum (ai+b)=a\\cdot\\frac{n(n+1)}{2}+bn=%d\\cdot\\frac{%d\\cdot%d}{2}+(%+d)\\cdot%d=%d\\).", a, n, n+1, b, n, total)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(total), Explanation: ex}
+}
+
+type arithSeriesGen struct{}
+
+func (g *arithSeriesGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *arithSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	a1 := rand.Intn(11) - 5
+	d := 0
+	for d == 0 {
+		d = rand.Intn(9) - 4
+	}
+	n := 4 + rand.Intn(8)
+	an := a1 + (n-1)*d
+	sum := n * (a1 + an) / 2
+	q := fmt.Sprintf("Find the sum of the first \\(%d\\) terms of the arithmetic sequence \\(a_1=%d\\), \\(d=%+d\\).", n, a1, d)
+	ex := fmt.Sprintf("\\(S_n=\\frac{n(a_1+a_n)}{2}=\\frac{%d(%d %+d)}{2}=%d\\).", n, a1, (n-1)*d, sum)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(sum), Explanation: ex}
+}
+
+type geoSeriesGen struct{}
+
+func (g *geoSeriesGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *geoSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	r := []int{2, 3, -2}[rand.Intn(3)]
+	n := 3 + rand.Intn(5)
+	a1 := 1 + rand.Intn(4)
+	sum := a1
+	term := a1
+	for i := 1; i < n; i++ {
+		term *= r
+		sum += term
+	}
+	q := fmt.Sprintf("Find the sum of the first \\(%d\\) terms of the geometric sequence \\(a_1=%d\\), \\(r=%d\\).", n, a1, r)
+	ex := fmt.Sprintf("\\(S_n=a_1\\frac{r^{n}-1}{r-1}=%d\\cdot\\frac{(%d)^{%d}-1}{%d}=%d\\).", a1, r, n, r-1, sum)
+	return generator.Problem{Question: q, Answer: strconv.Itoa(sum), Explanation: ex}
+}
+
+type geomInfiniteGen struct{}
+
+func (g *geomInfiniteGen) Grade(expected, userAnswer string) grader.Result {
+	return gradeNum(expected, userAnswer, 1e-6)
+}
+
+func (g *geomInfiniteGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type frac struct{ p, q int }
+	options := []frac{{1, 2}, {-1, 2}, {1, 3}, {1, 4}, {-1, 4}, {2, 3}}
+	f := options[rand.Intn(len(options))]
+	gap := f.q - f.p
+	a1 := gap * (1 + rand.Intn(2+int(ctx.Difficulty*4)))
+	sum := a1 * f.q / gap
+	qText := fmt.Sprintf("An infinite geometric series has first term \\(%d\\) and common ratio \\(%s\\). Give its sum.", a1, fracStr(a1, f))
+	ex := fmt.Sprintf("Since \\(|r|<1\\), the series converges: \\(S=\\frac{a_1}{1-r}=\\frac{%d}{1-%s}=%d\\).", a1, fracStr(0, f), sum)
+	return generator.Problem{Question: qText, Answer: strconv.Itoa(sum), Explanation: ex}
+}
+
+func coefStrSigned(n int, denom int) string {
+	v := float64(n) / float64(denom)
+	if v == float64(int(v)) {
+		return strconv.Itoa(int(v))
+	}
+	return strings.TrimRight(strings.TrimRight(fmt.Sprintf("%.4f", v), "0"), ".")
+}
+
+func coefFrac(n int) string {
+	return coefStrSigned(n, 1)
+}
+
+func coefFracRat(n int, f struct{ p, q int }) string {
+	num := n * f.p
+	return coefStrSigned(num, f.q)
+}
+
+func fracStr(_ int, f struct{ p, q int }) string {
+	sign := ""
+	if f.p < 0 {
+		sign = "-"
+	}
+	if f.q == 1 {
+		return sign + strconv.Itoa(abs(f.p))
+	}
+	return fmt.Sprintf("%s\\frac{%d}{%d}", sign, abs(f.p), abs(f.q))
+}
+
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func minInt(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+func abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
 }
