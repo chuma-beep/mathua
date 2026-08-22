@@ -1,5 +1,7 @@
 'use client'
 
+import Loading from '../../components/Loading'
+
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -246,7 +248,7 @@ export default function OnboardPage() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50"
                 >
-                  {loading ? 'Loading…' : `Start diagnostic (${selectedConceptIds().length} concepts)`}
+                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic (${selectedConceptIds().length} concepts)`}
                 </button>
               </div>
             </div>

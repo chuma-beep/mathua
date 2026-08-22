@@ -1,5 +1,7 @@
 'use client'
 
+import Loading from '../../components/Loading'
+
 import { useReducer } from 'react'
 import { useTheme } from '../../hooks/useTheme'
 import { useRouter } from 'next/navigation'
@@ -114,7 +116,7 @@ export default function LoginPage() {
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
             <button onClick={handleSubmit} disabled={state.loading} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
-              {state.loading ? 'Loading\u2026' : state.tab === 'signup' ? 'Create Account' : 'Login'}
+              {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="mt-3 text-center">
               <Link href="/session" className="text-mathua-muted text-xs hover:text-mathua-secondary">

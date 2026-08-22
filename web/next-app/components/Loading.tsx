@@ -8,9 +8,10 @@ interface LoadingProps {
   label?: string
   full?: boolean
   size?: number
+  inline?: boolean
 }
 
-export default function Loading({ label, full = false, size = 18 }: LoadingProps) {
+export default function Loading({ label, full = false, size = 18, inline = false }: LoadingProps) {
   const [frame, setFrame] = useState(0)
   const [reduced, setReduced] = useState(true)
 
@@ -21,6 +22,25 @@ export default function Loading({ label, full = false, size = 18 }: LoadingProps
     const id = setInterval(() => setFrame(f => (f + 1) % FRAMES.length), 80)
     return () => clearInterval(id)
   }, [])
+
+  if (inline) {
+    return (
+      <span
+        aria-hidden
+        style={{
+          display: 'inline-block',
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: size,
+          lineHeight: 1,
+          width: size,
+          textAlign: 'center',
+          verticalAlign: '-0.125em',
+        }}
+      >
+        {FRAMES[reduced ? 0 : frame]}
+      </span>
+    )
+  }
 
   return (
     <div
