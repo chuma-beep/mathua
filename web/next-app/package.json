@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
     "diagrams": "d2 -t 0 diagrams/architecture.d2 diagrams/generated/architecture-light.svg && d2 -t 200 diagrams/architecture.d2 diagrams/generated/architecture-dark.svg && d2 -t 0 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-light.svg && d2 -t 200 diagrams/cat-diagnostic.d2 diagrams/generated/cat-diagnostic-dark.svg && d2 -t 0 diagrams/contributing.d2 diagrams/generated/contributing-light.svg && d2 -t 200 diagrams/contributing.d2 diagrams/generated/contributing-dark.svg && d2 -t 0 diagrams/student-model.d2 diagrams/generated/student-model-light.svg && d2 -t 200 diagrams/student-model.d2 diagrams/generated/student-model-dark.svg && d2 -t 0 diagrams/system-design-architecture.d2 diagrams/generated/system-design-architecture-light.svg && d2 -t 200 diagrams/system-design-architecture.d2 diagrams/generated/system-design-architecture-dark.svg && d2 -t 0 diagrams/system-design-data-model.d2 diagrams/generated/system-design-data-model-light.svg && d2 -t 200 diagrams/system-design-data-model.d2 diagrams/generated/system-design-data-model-dark.svg && d2 -t 0 diagrams/system-design-request-flow.d2 diagrams/generated/system-design-request-flow-light.svg && d2 -t 200 diagrams/system-design-request-flow.d2 diagrams/generated/system-design-request-flow-dark.svg && d2 -t 0 diagrams/system-design-sm2-mastery.d2 diagrams/generated/system-design-sm2-mastery-light.svg && d2 -t 200 diagrams/system-design-sm2-mastery.d2 diagrams/generated/system-design-sm2-mastery-dark.svg && d2 -t 0 diagrams/system-design-grading-pipeline.d2 diagrams/generated/system-design-grading-pipeline-light.svg && d2 -t 200 diagrams/system-design-grading-pipeline.d2 diagrams/generated/system-design-grading-pipeline-dark.svg && d2 -t 0 diagrams/system-design-cat-diagnostic.d2 diagrams/generated/system-design-cat-diagnostic-light.svg && d2 -t 200 diagrams/system-design-cat-diagnostic.d2 diagrams/generated/system-design-cat-diagnostic-dark.svg && cp diagrams/generated/*.svg public/diagrams/ && cp diagrams/generated/*.svg ../../docs/diagrams/"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "node": ">=18.17.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
     "@types/dagre": "^0.7.52",
@@ -52,6 +54,7 @@
     "eslint-config-next": "^14.2.35",
     "jsdom": "^30.0.1",
     "postcss": "^8.4.32",
+    "serve": "^14.2.6",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.0",
     "vitest": "^4.1.11"
