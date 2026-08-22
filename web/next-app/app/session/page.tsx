@@ -436,7 +436,7 @@ export default function SessionPage() {
           <div className="max-w-4xl mx-auto mt-8">
             <SectionHeader label="Diagnostic" title="What do you want to learn?" />
             <p className="text-mathua-secondary text-sm text-center max-w-[500px] mx-auto mt-2 mb-6">
-              We'll test your current knowledge and find the right starting point.
+              We&apos;ll test your current knowledge and find the right starting point.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
               {domains.map(d => {
