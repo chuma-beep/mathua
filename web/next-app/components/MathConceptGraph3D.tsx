@@ -27,7 +27,6 @@ interface MathConceptGraph3DProps {
 }
 
 const DOMAIN_COLORS: Record<string, string> = {
-  counting:             '#c8a96e',
   arithmetic:           '#4db8a0',
   fractions:            '#a8a0f0',
   prealgebra:           '#7dd3fc',
@@ -47,7 +46,6 @@ const DOMAIN_COLORS: Record<string, string> = {
 }
 
 const DOMAIN_COLORS_LIGHT: Record<string, string> = {
-  counting:             '#a0814a',
   arithmetic:           '#3a9a8a',
   fractions:            '#8a80d8',
   prealgebra:           '#5ab8dc',

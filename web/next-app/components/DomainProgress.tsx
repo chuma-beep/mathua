@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import conceptsData from '../data/concepts.json'
 
 const DOMAIN_ORDER = [
-  'counting', 'arithmetic', 'fractions', 'prealgebra',
+'arithmetic', 'fractions', 'prealgebra',
   'algebra', 'geometry', 'trigonometry', 'calculus',
   'statistics', 'linear_algebra', 'discrete_math',
   'complex_numbers', 'number_theory', 'differential_equations',
@@ -12,7 +12,6 @@ const DOMAIN_ORDER = [
 ]
 
 const DOMAIN_LABELS: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',

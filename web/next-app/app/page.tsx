@@ -98,7 +98,6 @@ export default function HomePage() {
   const domainCount = new Set(conceptsData.map((c: any) => c.domain)).size
 
   const domainOrder = [
-    'counting',
     'arithmetic',
     'fractions',
     'prealgebra',
@@ -116,7 +115,6 @@ export default function HomePage() {
     'topology',
   ]
   const domainLabels: Record<string, string> = {
-    counting: 'Counting',
     arithmetic: 'Arithmetic',
     fractions: 'Fractions',
     prealgebra: 'Pre-Algebra',

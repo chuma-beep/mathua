@@ -6,7 +6,6 @@ interface ProgressSummaryProps {
 }
 
 const domainLabels: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',

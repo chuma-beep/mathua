@@ -12,12 +12,12 @@ func TestLoad_Valid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected load error: %v", err)
 	}
-	if d.Count() != 447 {
-		t.Errorf("expected 447 concepts, got %d", d.Count())
+	if d.Count() != 437 {
+		t.Errorf("expected 437 concepts, got %d", d.Count())
 	}
 
-	if len(d.Order()) != 447 {
-		t.Errorf("expected 447 in topo order, got %d", len(d.Order()))
+	if len(d.Order()) != 437 {
+		t.Errorf("expected 437 in topo order, got %d", len(d.Order()))
 	}
 }
 
@@ -80,16 +80,16 @@ func TestLoad_Cycle(t *testing.T) {
 func TestDAG_Concepts(t *testing.T) {
 	d := buildTestDAG(t)
 	cs := d.Concepts()
-	if len(cs) != 4 {
-		t.Errorf("expected 4 concepts, got %d", len(cs))
+	if len(cs) != 3 {
+		t.Errorf("expected 3 concepts, got %d", len(cs))
 	}
 }
 
 func TestDAG_Order(t *testing.T) {
 	d := buildTestDAG(t)
 	order := d.Order()
-	if len(order) != 4 {
-		t.Errorf("expected 4 in order, got %d", len(order))
+	if len(order) != 3 {
+		t.Errorf("expected 3 in order, got %d", len(order))
 	}
 	for _, c := range order {
 		for _, pid := range c.Prerequisites {
@@ -117,11 +117,11 @@ func TestDAG_Domains(t *testing.T) {
 
 func TestDAG_PrereqsOf(t *testing.T) {
 	d := buildTestDAG(t)
-	ps := d.PrereqsOf("arith.add.single")
-	if len(ps) != 1 || ps[0].ID != "count.basics.objects" {
-		t.Errorf("expected 1 prereq count.objects, got %v", ps)
+	ps := d.PrereqsOf("frac.basics.concept")
+	if len(ps) != 1 || ps[0].ID != "arith.add.single" {
+		t.Errorf("expected 1 prereq arith.add.single, got %v", ps)
 	}
-	ps = d.PrereqsOf("count.basics.objects")
+	ps = d.PrereqsOf("arith.add.single")
 	if len(ps) != 0 {
 		t.Errorf("expected 0 prereqs for root, got %d", len(ps))
 	}
@@ -129,15 +129,15 @@ func TestDAG_PrereqsOf(t *testing.T) {
 
 func TestDAG_DependentsOf(t *testing.T) {
 	d := buildTestDAG(t)
-	deps := d.DependentsOf("count.basics.objects")
+	deps := d.DependentsOf("arith.add.single")
 	if len(deps) != 2 {
-		t.Errorf("expected 2 dependents of count.objects, got %d", len(deps))
+		t.Errorf("expected 2 dependents of arith.add.single, got %d", len(deps))
 	}
 	ids := make(map[string]bool)
 	for _, dep := range deps {
 		ids[dep.ID] = true
 	}
-	if !ids["count.basics.cardinality"] || !ids["arith.add.single"] {
+	if !ids["arith.sub.single"] || !ids["frac.basics.concept"] {
 		t.Errorf("unexpected dependents: %v", deps)
 	}
 }
@@ -147,22 +147,21 @@ func TestDAG_Available(t *testing.T) {
 
 	// Nothing mastered — only concepts with no prereqs should be available.
 	avail := d.Available(map[string]bool{})
-	if len(avail) != 1 || avail[0].ID != "count.basics.objects" {
-		t.Errorf("expected only count.objects available, got %v", avail)
+	if len(avail) != 1 || avail[0].ID != "arith.add.single" {
+		t.Errorf("expected only arith.add.single available, got %v", avail)
 	}
 
-	// count.objects mastered — its dependents become available.
-	avail = d.Available(map[string]bool{"count.basics.objects": true})
+	// Root mastered — its dependents become available.
+	avail = d.Available(map[string]bool{"arith.add.single": true})
 	if len(avail) != 2 {
-		t.Errorf("expected 2 available after count.objects mastered, got %d", len(avail))
+		t.Errorf("expected 2 available after root mastered, got %d", len(avail))
 	}
 
 	// Everything mastered — nothing available.
 	all := map[string]bool{
-		"count.basics.objects":     true,
-		"count.basics.cardinality": true,
-		"arith.add.single":         true,
-		"arith.sub.single":         true,
+		"arith.add.single":     true,
+		"arith.sub.single":     true,
+		"frac.basics.concept":  true,
 	}
 	avail = d.Available(all)
 	if len(avail) != 0 {
@@ -198,24 +197,19 @@ func buildTestDAG(t *testing.T) *DAG {
 	t.Helper()
 	raw := []Concept{
 		{
-			ID: "count.basics.objects", Label: "Count objects 1-10",
-			Domain: "counting", Prerequisites: []string{},
-			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 10},
-		},
-		{
-			ID: "count.basics.cardinality", Label: "Cardinality",
-			Domain: "counting", Prerequisites: []string{"count.basics.objects"},
-			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 10},
-		},
-		{
 			ID: "arith.add.single", Label: "Single-digit addition",
-			Domain: "arithmetic", Prerequisites: []string{"count.basics.objects"},
+			Domain: "arithmetic", Prerequisites: []string{},
 			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 6},
 		},
 		{
 			ID: "arith.sub.single", Label: "Single-digit subtraction",
 			Domain: "arithmetic", Prerequisites: []string{"arith.add.single"},
 			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 6},
+		},
+		{
+			ID: "frac.basics.concept", Label: "Fraction basics",
+			Domain: "fractions", Prerequisites: []string{"arith.add.single"},
+			MasteryThreshold: MasteryThreshold{Streak: 5, AvgTimeSeconds: 10},
 		},
 	}
 	// Validate and build

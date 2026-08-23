@@ -255,9 +255,9 @@ export default function SessionPage() {
   }, [reviewDone])
 
   // Guest diagnostic logic
-  const domainOrder = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+  const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
   const domainLabels: Record<string, string> = {
-    counting: 'Counting', arithmetic: 'Arithmetic', fractions: 'Fractions', prealgebra: 'Pre-Algebra',
+    arithmetic: 'Arithmetic', fractions: 'Fractions', prealgebra: 'Pre-Algebra',
     algebra: 'Algebra', geometry: 'Geometry', trigonometry: 'Trigonometry',
     complex_numbers: 'Complex Numbers', precalculus: 'Precalculus', calculus: 'Calculus',
     linear_algebra: 'Linear Algebra', statistics: 'Statistics', discrete_math: 'Discrete Math',

@@ -15,7 +15,6 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
 	"github.com/chuma-beep/mathua/internal/generator/calculus"
 	"github.com/chuma-beep/mathua/internal/generator/complex"
-	"github.com/chuma-beep/mathua/internal/generator/counting"
 	"github.com/chuma-beep/mathua/internal/generator/discrete"
 	"github.com/chuma-beep/mathua/internal/generator/fractions"
 	"github.com/chuma-beep/mathua/internal/generator/geometry"
@@ -85,7 +84,6 @@ func main() {
 	}
 
 	reg := generator.NewRegistry()
-	counting.Register(reg)
 	arithmetic.Register(reg)
 	fractions.Register(reg)
 	geometry.Register(reg)

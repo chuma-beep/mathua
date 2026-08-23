@@ -29,7 +29,6 @@ interface DomainInfo {
 }
 
 const domainLabels: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -48,7 +47,7 @@ const domainLabels: Record<string, string> = {
   topology: 'Topology',
 }
 
-const domainOrder = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
 
 export default function OnboardPage() {
   const { mounted } = useTheme()
