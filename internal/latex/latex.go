@@ -167,10 +167,48 @@ func Canonicalize(s string, a Adapter) string {
 	return restoreRowbreaks(s)
 }
 
+// escToken stands in for an escaped literal '\$' during validation so the
+// delimiter-pairing and -counting passes never mistake it for a real inline
+// math boundary. Chosen to be invisible to every structural check below.
+const escToken = "@@MU-ESC-DOLLAR@@"
+
+// neutralizeEscapedDelims rewrites '\$' (an escaped literal dollar sign) to
+// escToken, honoring backslash parity: an odd run of backslashes before '$'
+// means the dollar is escaped, while an even run means those are '\\' row
+// breaks followed by a real delimiter.
+func neutralizeEscapedDelims(s string) string {
+	var b strings.Builder
+	b.Grow(len(s))
+	run := 0
+	for i := 0; i < len(s); i++ {
+		c := s[i]
+		if c == '\\' {
+			run++
+			continue
+		}
+		if c == '$' && run%2 == 1 {
+			b.WriteString(escToken)
+		} else {
+			for j := 0; j < run; j++ {
+				b.WriteByte('\\')
+			}
+			b.WriteByte(c)
+		}
+		run = 0
+	}
+	for j := 0; j < run; j++ {
+		b.WriteByte('\\')
+	}
+	return b.String()
+}
+
 // Validate checks canonicalized content for structural problems: unbalanced
 // braces inside math regions and stray/unpaired delimiters. It returns
-// human-readable warnings; empty slice means clean.
+// human-readable warnings; empty slice means clean. Escaped dollars (\$) are
+// honored: they are neither delimiters nor pairing hazards.
 func Validate(canonical string) []string {
+	canonical = neutralizeEscapedDelims(canonical)
+
 	var warnings []string
 
 	for _, m := range regexp.MustCompile(`(?s)\$\$(.*?)\$\$`).FindAllStringSubmatch(canonical, -1) {

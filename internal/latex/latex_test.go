@@ -70,6 +70,31 @@ func TestValidateUnpairedDollar(t *testing.T) {
 	}
 }
 
+func TestValidateEscapedDollarClean(t *testing.T) {
+	// The real arith.factor.find.md case: '\$' inside inline math is an
+	// escaped literal dollar, not a delimiter.
+	w := Validate("such as $\\$631{,}897.15$ , which is a terminating decimal")
+	if len(w) != 0 {
+		t.Errorf("escaped '\\$' should not warn, got %v", w)
+	}
+}
+
+func TestValidateEscapedDollarInDisplay(t *testing.T) {
+	w := Validate("$$a \\text{ costs } \\$5$$ tail")
+	if len(w) != 0 {
+		t.Errorf("escaped '\\$' inside display math should not warn, got %v", w)
+	}
+}
+
+func TestValidateRowBreakThenRealDelimiter(t *testing.T) {
+	// Even backslash run: '\\' row break followed by a REAL unpaired delimiter.
+	// Must still warn — guards against a naive ReplaceAll("\\$", ...) fix.
+	w := Validate("row one \\\\ $x tail")
+	if len(w) == 0 {
+		t.Error("real '$' after \\\\ row break must still be counted")
+	}
+}
+
 func TestForSourceRouting(t *testing.T) {
 	header := "> Content sourced from [OpenStax Prealgebra 1e](x) — CC BY 4.0\nbody"
 	if a := ForSource("teaching/x.md", header); a.Name != "openstax" {
