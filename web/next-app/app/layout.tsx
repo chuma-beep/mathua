@@ -1,7 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
+import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import './globals.css'
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -23,6 +24,19 @@ const ibmPlexSerif = IBM_Plex_Serif({
 export const metadata: Metadata = {
   title: 'Mathua',
   description: 'An open-source adaptive math learning platform.',
+  manifest: '/manifest.webmanifest',
+  icons: {
+    icon: [
+      { url: '/icons/icon.svg', type: 'image/svg+xml' },
+      { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [{ url: '/icons/icon-192.png', sizes: '192x192' }],
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0c0d0f',
 }
 
 export default function RootLayout({
@@ -52,6 +66,7 @@ export default function RootLayout({
         />
         <div className="relative z-10">{children}</div>
         <Toaster />
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   )
