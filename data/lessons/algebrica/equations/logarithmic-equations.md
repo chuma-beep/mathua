@@ -6,7 +6,7 @@ Logarithmic equations are [equations](<../equations>) in which the unknown appea
 
 \\[\log_af(x) = g(x) \\]
 
-  * \\( a \\) is the base of the logarithm and and it must meet the condition \\( a \gt 0, a\neq 1 \\)
+  * \\( a \\) is the base of the logarithm and it must meet the condition \\( a \gt 0, a\neq 1 \\)
 
   * \\(f(x)\\), the argument of the logarithm must be greater than zero. This is because the [logarithmic function](<../logarithmic-function/>) is only defined for positive [numbers](<../types-of-numbers>).
 
