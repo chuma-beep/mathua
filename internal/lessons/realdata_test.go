@@ -16,26 +16,37 @@ func TestRealDataCanonicalized(t *testing.T) {
 		t.Skip("empty library")
 	}
 
-	probes := map[string]bool{ // concept -> expects display math
-		"discrete.sequences.recurrence": true,
-		"nt.adv.diophantine":            true,
+	badArtifacts := []string{"\\begin{align}\\n", "sqrt}{", "\\amp", "<span class=\"math-", "\\begin{equation"}
+	expectDisplay := map[string]string{
+		"discrete.sequences.recurrence": "",
+		"nt.adv.diophantine":            "",
+		"calc.integral.indefinite":      "",
+		"complex.ops.add_sub":           "\\begin{aligned}",
 	}
+	seen := map[string]bool{}
 	for _, l := range lib.All() {
 		for _, c := range l.Concepts {
-			wantDisplay, probed := probes[c]
+			for _, bad := range badArtifacts {
+				if strings.Contains(l.Body, bad) {
+					t.Errorf("%s: stale artifact %q survived ingestion", c, bad)
+				}
+			}
+			want, probed := expectDisplay[c]
 			if !probed {
 				continue
 			}
-			if strings.Contains(l.Body, "\\begin{equation") {
-				t.Errorf("%s: raw equation environment survived ingestion", c)
-			}
-			if wantDisplay && !strings.Contains(l.Body, "$$") {
+			if !strings.Contains(l.Body, "$$") {
 				t.Errorf("%s: expected $$ display math after canonicalization", c)
 			}
-			delete(probes, c)
+			if want != "" && !strings.Contains(l.Body, want) {
+				t.Errorf("%s: expected aligned body %q", c, want)
+			}
+			seen[c] = true
 		}
 	}
-	for c := range probes {
-		t.Errorf("expected lesson for %s was not loaded", c)
+	for c := range expectDisplay {
+		if !seen[c] {
+			t.Errorf("expected lesson for %s was not loaded", c)
+		}
 	}
 }

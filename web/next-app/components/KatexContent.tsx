@@ -185,7 +185,7 @@ export default function KatexContent({ children, className = '' }: { children: s
   }
 
   return (
-    <div className={`katex-content text-sm leading-relaxed ${className}`}>
+    <div className={`mathua-lesson katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, [rehypeKatex, {

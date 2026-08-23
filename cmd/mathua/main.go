@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 	"syscall"
 	"time"
@@ -120,7 +121,19 @@ func main() {
 	if ll != nil {
 		fmt.Printf("%d lessons loaded\n", ll.Count())
 	}
-	fmt.Printf("engine ready — %d generators registered\n", reg.Count())
+	rev := "dev"
+	if bi, ok := debug.ReadBuildInfo(); ok {
+		for _, s := range bi.Settings {
+			if s.Key == "vcs.revision" && len(s.Value) >= 7 {
+				rev = s.Value[:7]
+			}
+		}
+	}
+	lessonCount := 0
+	if ll != nil {
+		lessonCount = ll.Count()
+	}
+	fmt.Printf("mathua build %s — %d generators, %d lessons ingested\n", rev, reg.Count(), lessonCount)
 
 	fmt.Printf("starting web server on :%d", *port)
 	var authSvc *auth.AuthService
