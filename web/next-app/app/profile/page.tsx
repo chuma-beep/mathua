@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getAuthHeaders, getUserInfo } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
 import Header from '../../components/Header'
 import ProfileStats from '../../components/ProfileStats'
@@ -34,6 +35,7 @@ export default function ProfilePage() {
   const [activity, setActivity] = useState<DailyActivity[]>([])
   const [progress, setProgress] = useState<Record<string, ConceptProgress>>({})
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
+  const [dueReviews, setDueReviews] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -62,6 +64,7 @@ export default function ProfilePage() {
         setActivity(activityRes)
         setProgress(progressRes)
         setWeaknesses(weaknessesRes)
+        getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
       } catch (err) {
         setError('Failed to load profile data')
       } finally {
@@ -132,6 +135,20 @@ export default function ProfilePage() {
       <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12">
         {/* Profile stats */}
         <ProfileStats name={user.name} scores={scores} />
+
+        {dueReviews > 0 && (
+          <Link
+            href="/session"
+            className="block mt-6 bg-mathua-surface border border-yellow-500/40 rounded-none px-4 py-3 flex items-center justify-between hover:border-yellow-500 transition-colors"
+          >
+            <span className="font-mono text-xs text-yellow-400">
+              ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
+            </span>
+            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 rounded-none px-3 py-1.5">
+              Review Now →
+            </span>
+          </Link>
+        )}
 
         {/* Activity heatmap */}
         <section style={{ marginTop: 32 }}>
