@@ -18,7 +18,7 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestCountObjectsGen(t *testing.T)    { fuzzGen(t, &countObjectsGen{}) }
+func TestCountObjectsGen(t *testing.T)     { fuzzGen(t, &countObjectsGen{}) }
 func TestCountCardinalityGen(t *testing.T) { fuzzGen(t, &countCardinalityGen{}) }
 func TestCountNumberLineGen(t *testing.T)  { fuzzGen(t, &countNumberLineGen{}) }
 func TestCountCompareGen(t *testing.T)     { fuzzGen(t, &countCompareGen{}) }

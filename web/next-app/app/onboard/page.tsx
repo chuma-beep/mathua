@@ -62,6 +62,7 @@ export default function OnboardPage() {
   const sessionId = useRef('')
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
+  const questionShownAt = useRef<number | null>(null)
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
   const [answerInput, setAnswerInput] = useState('')
@@ -110,13 +111,14 @@ export default function OnboardPage() {
     try {
       const res = await startGoalDiagnostic(ids)
       if (res.done) {
-        setPlan({ readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} })
-        setStep('results')
+        toast.error('No diagnostic questions are available for the selected areas. Try selecting more domains.')
+        setLoading(false)
         return
       }
       sessionId.current = res.session_id
       setQuestion(res.question || '')
       conceptId.current = res.concept_id || ''
+      questionShownAt.current = Date.now()
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
       setAccuracy({ correct: 0, total: 0 })
@@ -135,7 +137,7 @@ export default function OnboardPage() {
     setLoading(true)
     try {
       const answer = answerInput.trim()
-      const elapsed = 5.0
+      const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
       const token = getToken()
       const res = await fetch(`/api/goal/diagnostic/answer`, {
         method: 'POST',
@@ -165,6 +167,7 @@ export default function OnboardPage() {
       setTimeout(() => {
         setQuestion(data.question || '')
         conceptId.current = data.concept_id || ''
+        questionShownAt.current = Date.now()
         setConceptName(data.concept_name || '')
         setQuestionCount(prev => prev + 1)
         setLastResult(null)

@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"sort"
 	"sync"
 )
 
@@ -117,4 +118,15 @@ func (r *Registry) Count() int {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	return len(r.gens)
+}
+
+func (r *Registry) Concepts() []string {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+	ids := make([]string, 0, len(r.gens))
+	for id := range r.gens {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	return ids
 }

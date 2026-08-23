@@ -83,3 +83,19 @@ func (s *PostgresStore) Migrate() error {
 func (s *PostgresStore) Close() error {
 	return fmt.Errorf("not implemented")
 }
+
+func (s *PostgresStore) GetQuestions(conceptID string, count int) ([]Question, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetQuestionCount(conceptID string) (int, error) {
+	return 0, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) ImportQuestions(qs []Question) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {
+	return 0, fmt.Errorf("not implemented")
+}

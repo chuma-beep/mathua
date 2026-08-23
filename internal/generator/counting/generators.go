@@ -26,7 +26,7 @@ var ordinals = []string{
 	"sixth", "seventh", "eighth", "ninth", "tenth",
 }
 
-var countSymbols = []string{"#", "@", "%", "&", "+", "=", "~", "$", "!", "?"}
+var countSymbols = []string{"@", "&", "+", "=", "~", "!", "?"}
 
 type countObjectsGen struct{}
 
@@ -34,27 +34,20 @@ func (g *countObjectsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	max := int(3 + ctx.Difficulty*7)
 	n := rand.Intn(max) + 1
 
-	scenarios := []struct {
-		q   string
-		fmt string
-	}{
-		{"How many %s are there in this row?", "%s"},
-		{"A ladybug has %s spots on its back. How many spots?", "%s"},
-		{"Count the flowers in the garden:\n\n%s", "%s"},
-		{"How many stars are in the sky?\n\n%s", "%s"},
-		{"Arrange %s marbles in a line. How many marbles?", "%s"},
+	scenarios := []struct{ q string }{
+		{"How many symbols are there in this row?\n\n{{row}}"},
+		{"A ladybug has some spots on its back:\n\n{{row}}\n\nHow many spots?"},
+		{"Count the symbols in the garden:\n\n{{row}}"},
+		{"How many marks are in the sky?\n\n{{row}}"},
+		{"A line of marbles:\n\n{{row}}\n\nHow many marbles are in the line?"},
 	}
 
 	s := scenarios[rand.Intn(len(scenarios))]
 	sym := countSymbols[rand.Intn(len(countSymbols))]
 	item := "stars"
 	switch sym {
-	case "#":
-		item = "hash marks"
 	case "@":
 		item = "at symbols"
-	case "%":
-		item = "percent signs"
 	case "&":
 		item = "ampersands"
 	case "+":
@@ -63,8 +56,6 @@ func (g *countObjectsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		item = "equals signs"
 	case "~":
 		item = "tildes"
-	case "$":
-		item = "dollar signs"
 	case "!":
 		item = "exclamation marks"
 	case "?":
@@ -75,11 +66,8 @@ func (g *countObjectsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	for i := range display {
 		display[i] = sym
 	}
-	line := strings.Join(display, " ")
-	q := fmt.Sprintf(s.q, item)
-	if strings.Contains(s.fmt, "%s") {
-		q = strings.Replace(q, "%s", line, 1)
-	}
+	line := "`" + strings.Join(display, " ") + "`"
+	q := strings.NewReplacer("{{item}}", item, "{{row}}", line).Replace(s.q)
 
 	return generator.Problem{
 		Question:    q,
@@ -112,10 +100,10 @@ func (g *countCardinalityGen) Generate(ctx generator.GeneratorContext) generator
 	shown := s.items[:n]
 
 	return generator.Problem{
-		Question:    fmt.Sprintf("%s %s:\n\n%s\n\nThe last one I count is %d. How many %s are there?",
-			s.scene, s.unit, strings.Join(shown, ", "), n, s.unit),
+		Question: fmt.Sprintf("Here are the %s %s:\n\n%s\n\nHow many %s are there in total?",
+			s.unit, s.scene, strings.Join(shown, ", "), s.unit),
 		Answer:      fmt.Sprintf("%d", n),
-		Explanation: fmt.Sprintf("The last number you count (%d) tells the total number of %s.", n, s.unit),
+		Explanation: fmt.Sprintf("Counting them one by one: 1, 2, ..., %d. There are %d %s.", n, n, s.unit),
 	}
 }
 
@@ -135,20 +123,18 @@ func (g *countNumberLineGen) Generate(ctx generator.GeneratorContext) generator.
 
 	hidden := prev
 	display := fmt.Sprintf("... %d, __, %d ...", hidden, next)
-	if ctx.Difficulty > 0.5 {
+	if ctx.Difficulty > 0.75 {
+		display = fmt.Sprintf("... __, %d, %d ...", n, next)
+	} else if ctx.Difficulty > 0.5 {
 		hidden = next
 		display = fmt.Sprintf("... %d, __, %d ...", prev, next)
-	}
-	if ctx.Difficulty > 0.75 {
-		hidden = n
-		display = fmt.Sprintf("... %d, %d, __ ...", prev, next)
 	}
 
 	q := fmt.Sprintf("%s\n\n%s", scenarios[rand.Intn(len(scenarios))], display)
 	return generator.Problem{
 		Question:    q,
-		Answer:      fmt.Sprintf("%d", n),
-		Explanation: fmt.Sprintf("The number %d comes between %d and %d on the number line.", n, prev, next),
+		Answer:      fmt.Sprintf("%d", hidden),
+		Explanation: fmt.Sprintf("The number %d comes between %d and %d on the number line.", hidden, prev, next),
 	}
 }
 
@@ -290,7 +276,7 @@ func (g *countOrdinalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	}{
 		{"cars in a race: 🏎️", []string{"🏎️", "🚗", "🚙", "🚕", "🚓", "🚑", "🚒", "🚐", "🚜", "🏍️"}},
 		{"runners in a race", []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"}},
-		{"positions on a ladder", []string{"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"}},
+		{"positions on a ladder", []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}},
 	}
 
 	s := scenarios[rand.Intn(len(scenarios))]
@@ -329,16 +315,17 @@ func (g *countBackwardsGen) Generate(ctx generator.GeneratorContext) generator.P
 		"Counting down:",
 	}
 
+	ans := missing
 	display := fmt.Sprintf("%d, _, %d", n, missing-1)
 	if ctx.Difficulty > 0.5 {
-		display = fmt.Sprintf("%d, %d, _, %d", n, missing, missing-2)
-		missing = missing - 1
+		ans = missing - 1
+		display = fmt.Sprintf("%d, %d, _, %d", n, missing, ans-1)
 	}
 
 	return generator.Problem{
 		Question:    fmt.Sprintf("%s\n\n%s", scenarios[rand.Intn(len(scenarios))], display),
-		Answer:      fmt.Sprintf("%d", missing),
-		Explanation: fmt.Sprintf("Backwards from %d: %d, %d, %d ...", n, n, missing, missing-1),
+		Answer:      fmt.Sprintf("%d", ans),
+		Explanation: fmt.Sprintf("Backwards from %d: %s. The missing number is %d.", n, strings.Replace(display, "_", fmt.Sprintf("%d", ans), 1), ans),
 	}
 }
 

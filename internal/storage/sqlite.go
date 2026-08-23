@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"sort"
 	"strings"
 	"time"
 
@@ -585,4 +586,38 @@ func weekStart(t time.Time) time.Time {
 	offset := int(weekday) - int(time.Monday)
 	start := t.AddDate(0, 0, -offset)
 	return time.Date(start.Year(), start.Month(), start.Day(), 0, 0, 0, 0, time.UTC)
+}
+
+func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {
+	if len(conceptIDs) == 0 {
+		return 0, nil
+	}
+	ids := make([]string, 0, len(conceptIDs))
+	for id := range conceptIDs {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+
+	var deleted int64
+	batch := 400
+	for start := 0; start < len(ids); start += batch {
+		end := start + batch
+		if end > len(ids) {
+			end = len(ids)
+		}
+		chunk := ids[start:end]
+		placeholders := strings.Repeat("?,", len(chunk))
+		placeholders = placeholders[:len(placeholders)-1]
+		args := make([]interface{}, len(chunk))
+		for i, id := range chunk {
+			args[i] = id
+		}
+		res, err := s.db.Exec("DELETE FROM questions WHERE concept_id IN ("+placeholders+")", args...)
+		if err != nil {
+			return deleted, fmt.Errorf("purge questions: %w", err)
+		}
+		n, _ := res.RowsAffected()
+		deleted += n
+	}
+	return deleted, nil
 }
