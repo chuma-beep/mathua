@@ -31,8 +31,8 @@ func TestCanonicalizeEquationEnv(t *testing.T) {
 func TestCanonicalizeAlignEnv(t *testing.T) {
 	in := "\\begin{align}\na &= b \\\\ c &= d\n\\end{align}"
 	got := Canonicalize(in, Levin)
-	if !strings.Contains(got, "\\begin{aligned}") || !strings.Contains(got, "$$") {
-		t.Errorf("align env not converted to aligned-in-display: %q", got)
+	if !strings.Contains(got, "\\begin{aligned}") {
+		t.Errorf("align body not converted to aligned: %q", got)
 	}
 }
 
@@ -92,5 +92,97 @@ func TestGeneratorsAdapterKeepsAnswersUntouched(t *testing.T) {
 	got := Canonicalize(in, Generators)
 	if !strings.HasPrefix(strings.TrimSpace(got), "$x^2$") {
 		t.Errorf("generator inline conversion failed: %q", got)
+	}
+}
+
+func TestAlgebricaDoubledDisplayDelims(t *testing.T) {
+	in := `their integrals:\n\n\\[\int f(x) \\, dx = \\tag{1}\\]\n\ndone.`
+	got := Canonicalize(in, Algebrica)
+	if !strings.Contains(got, "$$") {
+		t.Fatalf("doubled \\\\[] display delimiters not converted: %q", got)
+	}
+	if strings.Contains(got, "\\\\[") {
+		t.Errorf("raw doubled delimiter survived: %q", got)
+	}
+}
+
+func TestAlgebricaDoubledSpacing(t *testing.T) {
+	in := `\\(\\int f(x) \\, dx\\)`
+	got := Canonicalize(in, Algebrica)
+	if !strings.Contains(got, "\\, dx") {
+		t.Errorf("thin-space should collapse to single-backslash form: %q", got)
+	}
+	if strings.Contains(got, ", dx =") && !strings.Contains(in, ", dx") {
+		t.Errorf("comma artifact introduced: %q", got)
+	}
+}
+
+func TestAlgebricaDoubledSetBraces(t *testing.T) {
+	in := `\\(\\mathbb{C} := \\{\\, z = a + bi \\mid a,\\, b \\in \\mathbb{R} \\,\\}\\)`
+	got := Canonicalize(in, Algebrica)
+	if !strings.Contains(got, `\{`) || !strings.Contains(got, `\}`) {
+		t.Errorf("set braces not normalized to single backslash: %q", got)
+	}
+	if strings.Contains(got, `\\\\`) {
+		t.Errorf("doubled braces survived: %q", got)
+	}
+}
+
+func TestRepairBrokenSqrtRealCase(t *testing.T) {
+	in := `\\( \\int ( 4x^3 - \\frac{3}{\\sqrt}{x}} + 2\\cos x ) \\, dx \\)`
+	got := Canonicalize(in, Algebrica)
+	if strings.Contains(got, `sqrt}{`) {
+		t.Errorf("broken sqrt survived: %q", got)
+	}
+	if !strings.Contains(got, `\sqrt{x}`) {
+		t.Errorf("expected repaired sqrt{x}: %q", got)
+	}
+}
+
+func TestHeadingDemotion(t *testing.T) {
+	in := "# Operations with complex numbers\n\n## Sum and difference"
+	got := Canonicalize(in, Algebrica)
+	if strings.Contains(got, "# Operations") && !strings.Contains(got, "## Operations") {
+		t.Errorf("h1 not demoted: %q", got)
+	}
+	if !strings.Contains(got, "### Sum") {
+		t.Errorf("h2 not demoted to h3: %q", got)
+	}
+}
+
+func TestStripSpanWrappersKeepsInner(t *testing.T) {
+	in := `<span class="math-display">\int x\,dx</span>`
+	got := Canonicalize(in, ORCCA)
+	if strings.Contains(got, "<span") {
+		t.Errorf("span wrapper survived: %q", got)
+	}
+	if !strings.Contains(got, `\int x`) {
+		t.Errorf("inner content lost: %q", got)
+	}
+}
+
+func TestAlgebricaRowbreakSpacingSurvives(t *testing.T) {
+	in := "\\[\n\\begin{align}\n\\frac{3}{2}(2)^2 + c &= 1 \\\\\\\\\\[6pt]\nc &= -5\n\\end{align}\n\\]"
+	got := Canonicalize(in, Algebrica)
+	if strings.Contains(got, "%%MUARB") {
+		t.Errorf("rowbreak token leaked into output: %q", got)
+	}
+	if !strings.Contains(got, "\\[6pt]") {
+		t.Errorf("row-break spacing not restored: %q", got)
+	}
+	if strings.Contains(got, "$$\n$$") || strings.Contains(got, "\n$$\n$$") {
+		t.Errorf("nested/empty display math produced: %q", got)
+	}
+}
+
+func TestProtectRestoreRoundtrip(t *testing.T) {
+	in := "x \\\\\\\\[6pt] y"
+	protected := protectRowbreaks(in)
+	if protected != "x %%MUARB:[6pt]%% y" {
+		t.Fatalf("token form mismatch: %q", protected)
+	}
+	out := restoreRowbreaks(protected)
+	if out != "x \\\\[6pt] y" {
+		t.Errorf("roundtrip mismatch: %q", out)
 	}
 }

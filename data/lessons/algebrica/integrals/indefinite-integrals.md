@@ -1,5 +1,5 @@
 
-# Intefinite integrals
+# Indefinite integrals
 
 
 ## Primitives

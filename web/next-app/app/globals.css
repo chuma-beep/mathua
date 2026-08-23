@@ -239,3 +239,20 @@
     animation: none !important;
   }
 }
+
+/* Lesson body typography: scraped extracts emit their own headings;
+   clamp them so section titles never compete with page titles. */
+.mathua-lesson h1 {
+  font-size: 1.25rem !important;
+  line-height: 1.35;
+}
+.mathua-lesson h2 {
+  font-size: 1.05rem !important;
+  line-height: 1.4;
+}
+.mathua-lesson h3,
+.mathua-lesson h4,
+.mathua-lesson h5,
+.mathua-lesson h6 {
+  font-size: 0.95rem !important;
+}
