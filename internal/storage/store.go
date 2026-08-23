@@ -103,6 +103,7 @@ type Repository interface {
 	GetQuestions(conceptID string, count int) ([]Question, error)
 	GetQuestionCount(conceptID string) (int, error)
 	ImportQuestions(qs []Question) error
+	PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error)
 
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
 	GetDailyActivity(studentID string, days int) ([]DailyActivity, error)

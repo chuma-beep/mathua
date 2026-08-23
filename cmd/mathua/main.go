@@ -97,6 +97,24 @@ func main() {
 		fmt.Printf("lessons not loaded: %v (continuing without lessons)\n", err)
 	}
 
+	// Purge stored questions for concepts that have live generators: rows
+	// seeded by older generator versions would otherwise be served forever
+	// (INSERT OR IGNORE makes them immortal). Live generation is cheap and
+	// always current, so reproducible content never needs a DB copy.
+	if purger, ok := repo.(interface {
+		PurgeGeneratedQuestions(map[string]bool) (int64, error)
+	}); ok {
+		idSet := make(map[string]bool)
+		for _, id := range reg.Concepts() {
+			idSet[id] = true
+		}
+		if n, err := purger.PurgeGeneratedQuestions(idSet); err != nil {
+			log.Printf("warning: question purge failed: %v", err)
+		} else if n > 0 {
+			fmt.Printf("purged %d stale generated questions\n", n)
+		}
+	}
+
 	planner, _ := planning.Load("data/courses.json", dag)
 	eng := engine.New(repo, dag, reg, ll, planner)
 	if ll != nil {

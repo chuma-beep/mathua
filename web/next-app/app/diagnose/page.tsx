@@ -89,12 +89,18 @@ export default function DiagnosePage() {
         </p>
 
         <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center">
-          <button className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-10 px-6 text-[13px] font-medium transition-colors">
+          <Link
+            href="/onboard"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-10 px-6 text-[13px] font-medium transition-colors flex items-center"
+          >
             Start Diagnostic
-          </button>
-          <button className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-md h-10 px-6 text-[13px] font-medium transition-colors">
+          </Link>
+          <Link
+            href="/docs/system-design#cat-diagnostic"
+            className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-md h-10 px-6 text-[13px] font-medium transition-colors flex items-center"
+          >
             Read the full algorithm
-          </button>
+          </Link>
         </div>
       </section>
 
