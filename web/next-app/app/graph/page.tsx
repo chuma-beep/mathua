@@ -46,7 +46,6 @@ const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
 }))
 
 const domainLabels: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -66,7 +65,7 @@ const domainLabels: Record<string, string> = {
 }
 
 const domainOrder = [
-  'counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry',
+  'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry',
   'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra',
   'statistics', 'discrete_math', 'number_theory', 'differential_equations',
   'abstract_algebra', 'topology',

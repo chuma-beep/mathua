@@ -603,15 +603,8 @@ func (e *Engine) StartGoalDiagnostic(studentID string, conceptIDs []string) (*di
 	if err != nil {
 		return nil, nil, fmt.Errorf("goal path: %w", err)
 	}
-	// Filter out counting concepts (pre-K to 2nd grade)
-	concepts := make([]*concepts.Concept, 0, len(path.Concepts))
-	for _, c := range path.Concepts {
-		if c.Domain != "counting" {
-			concepts = append(concepts, c)
-		}
-	}
-	session := e.diag.StartWithPath(concepts)
-	if session.State == diagnostic.StateDone || len(concepts) == 0 {
+	session := e.diag.StartWithPath(path.Concepts)
+	if session.State == diagnostic.StateDone || len(path.Concepts) == 0 {
 		return session, nil, nil
 	}
 	prob, cid, err := e.diag.NextQuestion(session)

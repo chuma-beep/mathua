@@ -1204,26 +1204,6 @@
   "source": "algebrica/complex-numbers/roots-of-unity.md"
  },
  {
-  "concept_id": "count.compare",
-  "source": "teaching/count.compare.md"
- },
- {
-  "concept_id": "count.ordinal",
-  "source": "teaching/count.ordinal.md"
- },
- {
-  "concept_id": "count.skip_10",
-  "source": "teaching/count.skip_10.md"
- },
- {
-  "concept_id": "count.skip_2",
-  "source": "teaching/count.skip_2.md"
- },
- {
-  "concept_id": "count.skip_5",
-  "source": "teaching/count.skip_5.md"
- },
- {
   "concept_id": "dec.add",
   "source": "teaching/dec.add.md"
  },
@@ -1752,26 +1732,6 @@
   "source": "algebrica/complex-numbers/de-moivre-theorem.md"
  },
  {
-  "concept_id": "count.backwards",
-  "source": "teaching/count.backwards.md"
- },
- {
-  "concept_id": "count.cardinality",
-  "source": "teaching/count.cardinality.md"
- },
- {
-  "concept_id": "count.number_line",
-  "source": "teaching/count.number_line.md"
- },
- {
-  "concept_id": "count.objects",
-  "source": "teaching/count.objects.md"
- },
- {
-  "concept_id": "count.objects_20",
-  "source": "teaching/count.objects_20.md"
- },
- {
   "concept_id": "geo.triangle.area",
   "source": "teaching/geo.triangle.area.md"
  },
@@ -1990,46 +1950,6 @@
  {
   "concept_id": "nt.basics.gcd_euclidean",
   "source": "algebrica/sets-and-numbers/modulo-operator.md"
- },
- {
-  "concept_id": "count.basics.backwards",
-  "source": "teaching/count.basics.backwards.md"
- },
- {
-  "concept_id": "count.basics.cardinality",
-  "source": "teaching/count.basics.cardinality.md"
- },
- {
-  "concept_id": "count.basics.compare",
-  "source": "teaching/count.basics.compare.md"
- },
- {
-  "concept_id": "count.basics.number_line",
-  "source": "teaching/count.basics.number_line.md"
- },
- {
-  "concept_id": "count.basics.objects",
-  "source": "teaching/count.basics.objects.md"
- },
- {
-  "concept_id": "count.basics.objects_20",
-  "source": "teaching/count.basics.objects_20.md"
- },
- {
-  "concept_id": "count.basics.ordinal",
-  "source": "teaching/count.basics.ordinal.md"
- },
- {
-  "concept_id": "count.skip.by_10",
-  "source": "teaching/count.skip.by_10.md"
- },
- {
-  "concept_id": "count.skip.by_2",
-  "source": "teaching/count.skip.by_2.md"
- },
- {
-  "concept_id": "count.skip.by_5",
-  "source": "teaching/count.skip.by_5.md"
  },
  {
   "concept_id": "dec.basics.compare",

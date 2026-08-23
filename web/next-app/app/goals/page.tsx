@@ -31,7 +31,6 @@ interface DomainInfo {
 }
 
 const domainLabels: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -116,7 +115,7 @@ export default function GoalsPage() {
       })
     })
     result.sort((a, b) => {
-      const order = ['counting', 'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+      const order = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
       return order.indexOf(a.name) - order.indexOf(b.name)
     })
     setDomains(result)

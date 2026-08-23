@@ -7,7 +7,6 @@ interface Props {
 }
 
 const DOMAIN_LABELS: Record<string, string> = {
-  counting: 'Counting',
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',

@@ -22,7 +22,7 @@ const conceptLabels = new Map<string, string>((conceptsData as ConceptEntry[]).m
 // ── Domain metadata ──────────────────────────────────────
 
 const domainOrder = [
-  'counting', 'arith', 'fractions', 'prealgebra',
+  'arith', 'fractions', 'prealgebra',
   'alg', 'trig', 'calc', 'calc.integral', 'calc.deriv', 'calc.limit',
   'linalg', 'linalg.vector', 'linalg.matrix', 'linalg.eigen', 'linalg.det',
   'linalg.transformations', 'linalg.span', 'linalg.basis',
@@ -45,14 +45,12 @@ const domainOrder = [
   'arith.abs_value', 'arith.add', 'arith.dec', 'arith.div', 'arith.factor', 'arith.mult', 'arith.neg', 'arith.order_ops', 'arith.place', 'arith.round', 'arith.sci_notation', 'arith.sub',
   'calc.seq', 'calc.series',
   'complex.add_sub', 'complex.adv', 'complex.basics', 'complex.conjugate', 'complex.de_moivre', 'complex.divide', 'complex.mult', 'complex.ops', 'complex.polar', 'complex.roots',
-  'count.backwards', 'count.cardinality', 'count.compare', 'count.number_line', 'count.objects', 'count.objects_20', 'count.ordinal', 'count.skip_10', 'count.skip_2', 'count.skip_5',
   'linalg.cramer', 'linalg.lintrans', 'linalg.sys', 'linalg.systems', 'linalg.vec',
   'prealg.eq', 'prealg.expr', 'prealg.ineq', 'prealg.real', 'prealg.types', 'prealg.var',
   'trig.adv', 'trig.basics', 'trig.eq', 'trig.graph', 'trig.graph_cos', 'trig.graph_sin', 'trig.hyperbolic', 'trig.ident', 'trig.ineq', 'trig.inverse', 'trig.law_cosines', 'trig.law_sines', 'trig.period', 'trig.pythagorean_id', 'trig.radians', 'trig.reciprocal', 'trig.reference_angle', 'trig.sin_cos_def', 'trig.special_angles', 'trig.tan_def', 'trig.unit_circle',
 ]
 
 const domainLabels: Record<string, string> = {
-  'counting': 'Counting',
   'arith': 'Arithmetic',
   'fractions': 'Fractions',
   'prealgebra': 'Pre-Algebra',
@@ -202,16 +200,6 @@ const domainLabels: Record<string, string> = {
   'complex.ops': 'Complex — Operations',
   'complex.polar': 'Complex — Polar Form',
   'complex.roots': 'Complex — Roots',
-  'count.backwards': 'Counting — Backwards',
-  'count.cardinality': 'Counting — Cardinality',
-  'count.compare': 'Counting — Comparing',
-  'count.number_line': 'Counting — Number Line',
-  'count.objects': 'Counting — Objects',
-  'count.objects_20': 'Counting — Objects to 20',
-  'count.ordinal': 'Counting — Ordinal Numbers',
-  'count.skip_10': 'Counting — Skip by 10',
-  'count.skip_2': 'Counting — Skip by 2',
-  'count.skip_5': 'Counting — Skip by 5',
   'linalg.cramer': 'Linear Algebra — Cramer\'s Rule',
   'linalg.vec': 'Linear Algebra — Vectors',
   'linalg.lintrans': 'Linear Algebra — Transformations',
@@ -247,7 +235,6 @@ const domainLabels: Record<string, string> = {
 }
 
 const domainIcons: Record<string, string> = {
-  counting: '#',
   arith: '+',
   fractions: '½',
   frac: '½',
