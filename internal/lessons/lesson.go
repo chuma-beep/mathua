@@ -76,6 +76,18 @@ func (l *Loader) Lesson(conceptID string) *Lesson {
 	return l.concepts[conceptID]
 }
 
+// LessonByTitle returns the first lesson whose Title matches exactly.
+// Titles are unique per lessons.json registration in practice; if
+// duplicates exist, the domain-grouped order determines the winner.
+func (l *Loader) LessonByTitle(title string) *Lesson {
+	for _, lesson := range l.concepts {
+		if lesson.Title == title {
+			return lesson
+		}
+	}
+	return nil
+}
+
 func (l *Loader) All() map[string]*Lesson {
 	return l.concepts
 }

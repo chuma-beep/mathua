@@ -153,8 +153,8 @@ func TestAnswer_ExpressionGrading_Equivalent(t *testing.T) {
 	}
 	d, _ := concepts.Build([]concepts.Concept{
 		{ID: "expr_test", Label: "Expr Test", Domain: "d",
-			GradingType: "expression",
-			Prerequisites: []string{},
+			GradingType:      "expression",
+			Prerequisites:    []string{},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
 	})
 	store, _ := storage.NewSQLiteStore(":memory:")
@@ -196,8 +196,8 @@ func TestAnswer_ExpressionGrading_Nonequivalent(t *testing.T) {
 	}
 	d, _ := concepts.Build([]concepts.Concept{
 		{ID: "expr_test", Label: "Expr Test", Domain: "d",
-			GradingType: "expression",
-			Prerequisites: []string{},
+			GradingType:      "expression",
+			Prerequisites:    []string{},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
 	})
 	store, _ := storage.NewSQLiteStore(":memory:")

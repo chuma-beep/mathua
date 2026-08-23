@@ -105,7 +105,7 @@ const PrereqInfoSchema = z.object({
 
 const LessonInfoSchema = z.object({
   title: z.string(),
-  body: z.string(),
+  body: z.string().optional(),
   concepts: z.array(z.string()),
   progress: z.record(z.string(), ConceptProgressSchema).optional(),
   prerequisites: z.array(PrereqInfoSchema).optional(),
@@ -461,11 +461,25 @@ export interface PrereqInfo {
 
 export interface LessonInfo {
     title: string
-    body: string
+    body?: string
     concepts: string[]
     progress?: Record<string, ConceptProgress>
     prerequisites?: PrereqInfo[]
     dependents?: PrereqInfo[]
+}
+
+// Lesson bodies ship separately (the list payload is metadata-only);
+// fetched on selection and memoized for the session.
+const lessonBodyCache = new Map<string, string>()
+
+export async function getLessonBody(title: string): Promise<string> {
+	const cached = lessonBodyCache.get(title)
+	if (cached !== undefined) return cached
+	const res = await fetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`)
+	if (!res.ok) throw new Error(`Lesson body fetch failed: ${res.status}`)
+	const data = (await res.json()) as { title: string; body: string }
+	lessonBodyCache.set(data.title, data.body)
+	return data.body
 }
 
 export interface LessonsRes {

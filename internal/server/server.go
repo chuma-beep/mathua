@@ -1,6 +1,7 @@
 package server
 
 import (
+	"compress/gzip"
 	"context"
 	"crypto/rand"
 	"encoding/json"
@@ -106,6 +107,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.authMiddleware(s.handleReviewsSession))))
 	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.authMiddleware(s.handleReviewsAnswer))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
+	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.handleLessonBody)))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
@@ -602,7 +604,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 	correct := false
 	explanation := ""
-		session.Lock()
+	session.Lock()
 	gt := "numeric"
 	if concept != nil {
 		gt = concept.GradingType
@@ -824,7 +826,7 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 
 	type lessonInfo struct {
 		Title         string                            `json:"title"`
-		Body          string                            `json:"body"`
+		Body          string                            `json:"body,omitempty"`
 		Concepts      []string                          `json:"concepts"`
 		Progress      map[string]map[string]interface{} `json:"progress,omitempty"`
 		Prerequisites []prereqInfo                      `json:"prerequisites,omitempty"`
@@ -835,7 +837,6 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		for _, l := range lessons {
 			info := lessonInfo{
 				Title:    l.Title,
-				Body:     l.Body,
 				Concepts: l.Concepts,
 			}
 			if progressMap != nil {
@@ -897,6 +898,33 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET /api/lessons/{conceptId}/practice
+
+// GET /api/lessons/body?title=... returns a single lesson's markdown body.
+// The list endpoint intentionally omits bodies (multi-MB payload); clients
+// fetch the selected lesson's content here on demand.
+func (s *Server) handleLessonBody(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	ll := s.eng.GetLessonLoader()
+	if ll == nil {
+		http.Error(w, `{"error":"lessons unavailable"}`, 503)
+		return
+	}
+	title := strings.TrimSpace(r.URL.Query().Get("title"))
+	if title == "" {
+		http.Error(w, `{"error":"title required"}`, 400)
+		return
+	}
+	l := ll.LessonByTitle(title)
+	if l == nil {
+		http.Error(w, `{"error":"lesson not found"}`, 404)
+		return
+	}
+	writeJSON(w, map[string]string{"title": l.Title, "body": l.Body})
+}
+
 func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -1298,4 +1326,37 @@ func newUUID() string {
 	b[6] = (b[6] & 0x0f) | 0x40
 	b[8] = (b[8] & 0x3f) | 0x80
 	return fmt.Sprintf("%08x-%04x-%04x-%04x-%012x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+}
+
+// gzipResponseWriter transparently gzips responses for clients that send
+// Accept-Encoding: gzip. JSON lesson/graph payloads compress ~8-10x.
+type gzipResponseWriter struct {
+	http.ResponseWriter
+	gz *gzip.Writer
+}
+
+func (g *gzipResponseWriter) Write(b []byte) (int, error) {
+	if g.Header().Get("Content-Type") == "" {
+		g.Header().Set("Content-Type", "application/json")
+	}
+	return g.gz.Write(b)
+}
+
+// GzipMiddleware compresses responses for gzip-capable clients.
+func GzipMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+			next.ServeHTTP(w, r)
+			return
+		}
+		w.Header().Set("Content-Encoding", "gzip")
+		w.Header().Del("Content-Length")
+		gz := gzip.NewWriter(w)
+		defer func() {
+			if err := gz.Close(); err != nil {
+				log.Printf("warning: gzip close: %v", err)
+			}
+		}()
+		next.ServeHTTP(&gzipResponseWriter{ResponseWriter: w, gz: gz}, r)
+	})
 }

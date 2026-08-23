@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
@@ -11,7 +11,7 @@ import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessons, type LessonInfo } from '../../lib/api'
+import { getLessons, getLessonBody, type LessonInfo, type LessonsRes } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 import Loading from '../../components/Loading'
@@ -639,6 +639,16 @@ function LessonDetail({
   )
 }
 
+let lessonsCache: { key: string; res: LessonsRes } | null = null
+function getLessonsCached(studentId?: string): Promise<LessonsRes> {
+  const key = studentId ?? ''
+  if (lessonsCache && lessonsCache.key === key) return Promise.resolve(lessonsCache.res)
+  return getLessons(studentId).then(res => {
+    lessonsCache = { key, res }
+    return res
+  })
+}
+
 function StudyContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -647,6 +657,7 @@ function StudyContent() {
   const conceptParam = searchParams.get('concept')
 
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
+  const [selectedBody, setSelectedBody] = useState<string | null>(null)
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -654,7 +665,7 @@ function StudyContent() {
   useEffect(() => {
     const user = getUserInfo()
     const studentId = user?.student_id
-    getLessons(studentId).then(res => {
+    getLessonsCached(studentId).then(res => {
       setLessonsByDomain(res.lessons)
       setLoading(false)
     }).catch((e) => { console.error('getLessons failed:', e); setLoading(false) })
@@ -676,7 +687,6 @@ function StudyContent() {
         if (found) { setSelectedLesson(found); return }
       }
     }
-    setSelectedLesson(null)
 
     if (domainParam && lessonsByDomain[domainParam]) {
       setSelectedDomain(domainParam)
@@ -686,7 +696,26 @@ function StudyContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lessonParam, domainParam, conceptParam, lessonsByDomain])
 
-  // Popstate: browser back/forward
+  // Lazily fetch the selected lesson's markdown body.
+  useEffect(() => {
+    if (!selectedLesson || selectedLesson.body) {
+      setSelectedBody(selectedLesson?.body ?? null)
+      return
+    }
+    let cancelled = false
+    setSelectedBody(null)
+    getLessonBody(selectedLesson.title)
+      .then(body => { if (!cancelled) setSelectedBody(body) })
+      .catch((e) => { console.error('lesson body failed:', e) })
+    return () => { cancelled = true }
+  }, [selectedLesson])
+
+  const hydratedLesson = useMemo(
+    () => (selectedLesson ? { ...selectedLesson, body: selectedBody ?? '' } : null),
+    [selectedLesson, selectedBody]
+  )
+
+  // Popstate: browser back/forward  // Popstate: browser back/forward
   useEffect(() => {
     const onPop = () => {
       const params = window.location.search
@@ -728,7 +757,7 @@ function StudyContent() {
       for (const l of lessons) {
         items.push({
           title: l.title,
-          body: l.body,
+          body: l.body ?? '',
           domain,
           concepts: l.concepts,
           conceptLabels: l.concepts.map(cid => conceptLabels.get(cid) || cid),
@@ -772,7 +801,7 @@ function StudyContent() {
           {selectedLesson ? (
             // ── Lesson Detail ──
             <LessonDetail
-              lesson={selectedLesson}
+              lesson={hydratedLesson ?? selectedLesson}
               domain={selectedDomain}
               onBack={() => {
                 setSelectedLesson(null)
