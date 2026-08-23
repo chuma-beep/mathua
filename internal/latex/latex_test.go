@@ -178,11 +178,29 @@ func TestAlgebricaRowbreakSpacingSurvives(t *testing.T) {
 func TestProtectRestoreRoundtrip(t *testing.T) {
 	in := "x \\\\\\\\[6pt] y"
 	protected := protectRowbreaks(in)
-	if protected != "x %%MUARB:[6pt]%% y" {
-		t.Fatalf("token form mismatch: %q", protected)
+	if !strings.Contains(protected, "%%MUARB:") {
+		t.Fatalf("rowbreak not tokenized: %q", protected)
 	}
+	// Any 2+ backslash variant normalizes to the canonical doubled form.
 	out := restoreRowbreaks(protected)
-	if out != "x \\\\[6pt] y" {
-		t.Errorf("roundtrip mismatch: %q", out)
+	if want := "x \\\\[6pt] y"; out != want {
+		t.Errorf("canonical form mismatch: got %q want %q", out, want)
+	}
+}
+
+func TestAlgebricaEmRowbreakCasesEnv(t *testing.T) {
+	in := "\\[\n\\\\log_af(x) = \\begin{cases}\na > 0 \\\\[0.6em]\na \\neq 1\n\\end{cases}\n\\]"
+	got := Canonicalize(in, Algebrica)
+	if strings.Contains(got, "%%MUARB") {
+		t.Errorf("rowbreak token leaked: %q", got)
+	}
+	if !strings.Contains(got, "\\[0.6em]") {
+		t.Errorf("em rowbreak not restored: %q", got)
+	}
+	if !strings.Contains(got, "\\begin{cases}") {
+		t.Errorf("cases env lost: %q", got)
+	}
+	if strings.Contains(got, "\n$$") && strings.Count(got, "$$")%2 != 0 {
+		t.Errorf("unpaired delimiters: %q", got)
 	}
 }

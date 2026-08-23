@@ -73,8 +73,8 @@ func repairBrokenSqrt(s string) string {
 	return brokenSqrtRe.ReplaceAllString(s, `\sqrt{`)
 }
 
-var rbProtectRe = regexp.MustCompile(`\\{2,}(\[[0-9]+(?:\.[0-9]+)?pt\])`)
-var rbRestoreRe = regexp.MustCompile(`%%MUARB:(\[[0-9]+(?:\.[0-9]+)?pt\])%%`)
+var rbProtectRe = regexp.MustCompile(`\\{2,}(\[[0-9]+(?:\.[0-9]+)?(?:pt|em|ex|mm|cm)\])`)
+var rbRestoreRe = regexp.MustCompile(`%%MUARB:(\[[0-9]+(?:\.[0-9]+)?(?:pt|em|ex|mm|cm)\])%%`)
 
 const rbToken = "%%MUARB:%s%%"
 

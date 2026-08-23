@@ -105,13 +105,33 @@ func (l *Loader) Count() int {
 }
 
 func extractTitle(md string) string {
+	var first string
 	for _, line := range strings.Split(md, "\n") {
 		trimmed := strings.TrimLeft(line, "#")
 		if len(trimmed) < len(line) && strings.HasPrefix(trimmed, " ") {
-			return strings.TrimSpace(trimmed)
+			title := strings.TrimSpace(trimmed)
+			if first == "" {
+				first = title
+			}
+			if !isGenericTitle(title) {
+				return title
+			}
 		}
 	}
+	if first != "" {
+		return first
+	}
 	return ""
+}
+
+// Generic opening headings ("Introduction") describe position, not content;
+// prefer the first substantive heading for the lesson title.
+func isGenericTitle(t string) bool {
+	switch strings.ToLower(strings.Trim(t, " :")) {
+	case "introduction", "intro", "overview", "contents", "summary", "prerequisites":
+		return true
+	}
+	return false
 }
 
 func titleFromFilename(path string) string {
