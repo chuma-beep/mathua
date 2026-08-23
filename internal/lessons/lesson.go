@@ -3,6 +3,7 @@ package lessons
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/chuma-beep/mathua/internal/latex"
 	"log"
 	"os"
 	"path/filepath"
@@ -50,13 +51,17 @@ func Load(lessonsDir string) (*Loader, error) {
 			log.Printf("warning: lesson file not found, skipping %q: %v", source, err)
 			continue
 		}
-		title := extractTitle(string(body))
+		content := latex.Canonicalize(string(body), latex.ForSource(source, string(body)))
+		for _, w := range latex.Validate(content) {
+			log.Printf("latex warning in %q: %s", source, w)
+		}
+		title := extractTitle(content)
 		if title == "" {
 			title = titleFromFilename(source)
 		}
 		lesson := &Lesson{
 			Title:    title,
-			Body:     string(body),
+			Body:     content,
 			Concepts: ids,
 		}
 		for _, id := range ids {

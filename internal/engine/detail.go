@@ -8,12 +8,12 @@ import (
 )
 
 type ConceptDetail struct {
-	Concept       ConceptInfo      `json:"concept"`
-	Lesson        *LessonInfo      `json:"lesson,omitempty"`
-	Prerequisites []PrereqInfo     `json:"prerequisites"`
-	Dependents    []PrereqInfo     `json:"dependents,omitempty"`
-	Unlocked      bool             `json:"unlocked"`
-	Progress      *ProgressInfo    `json:"progress,omitempty"`
+	Concept       ConceptInfo   `json:"concept"`
+	Lesson        *LessonInfo   `json:"lesson,omitempty"`
+	Prerequisites []PrereqInfo  `json:"prerequisites"`
+	Dependents    []PrereqInfo  `json:"dependents,omitempty"`
+	Unlocked      bool          `json:"unlocked"`
+	Progress      *ProgressInfo `json:"progress,omitempty"`
 }
 
 type ConceptInfo struct {
