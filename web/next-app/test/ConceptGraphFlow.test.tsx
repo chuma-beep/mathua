@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, within } from '@testing-library/react'
 import ConceptGraphFlow from '../components/ConceptGraphFlow'
 import { deriveStatuses } from '../lib/graphStatus'
 
@@ -55,5 +55,30 @@ describe('ConceptGraphFlow', () => {
     expect(statuses['count']).toBe('unseen')
     expect(statuses['add']).toBe('locked')
     expect(statuses['mul']).toBe('locked')
+  })
+
+  it('opens the list view and selects a concept via its buttons', () => {
+    const onSelectionChange = vi.fn()
+    render(<ConceptGraphFlow concepts={concepts} onSelectionChange={onSelectionChange} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open concept list' }))
+    const dialog = screen.getByRole('dialog', { name: 'Concept list' })
+    expect(dialog).toBeInTheDocument()
+    fireEvent.click(within(dialog).getByRole('button', { name: /Addition/ }))
+    expect(onSelectionChange).toHaveBeenCalledWith('add')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('filters the list view and reports no matches for junk queries', () => {
+    render(<ConceptGraphFlow concepts={concepts} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open concept list' }))
+    const dialog = screen.getByRole('dialog', { name: 'Concept list' })
+    fireEvent.change(within(dialog).getByLabelText('Filter concepts'), {
+      target: { value: 'zzzz' },
+    })
+    expect(within(dialog).getByText('No matching concepts')).toBeInTheDocument()
+    fireEvent.keyDown(within(dialog).getByLabelText('Filter concepts'), {
+      key: 'Escape',
+    })
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 })

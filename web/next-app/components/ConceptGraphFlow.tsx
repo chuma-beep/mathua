@@ -75,11 +75,12 @@ type ConceptNodeData = {
   onPath: boolean
   dimmed: boolean
   selected: boolean
+  onSelect?: (id: string) => void
 }
 
 type ConceptFlowNode = Node<ConceptNodeData, 'concept'>
 
-function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
+function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
   const statusColor = STATUS_COLORS[data.status] ?? STATUS_COLORS.unseen
   const pulseClass =
     data.status === 'mastered'
@@ -90,6 +91,17 @@ function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
   return (
     <div
       className={`concept-node${pulseClass}`}
+      role="button"
+      tabIndex={0}
+      aria-label={`${data.label}, ${data.domain.replace(/_/g, ' ')} domain, ${STATUS_LABELS[data.status] ?? data.status}`}
+      aria-pressed={data.selected}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          e.stopPropagation()
+          data.onSelect?.(id)
+        }
+      }}
       style={{
         width: 180,
         height: 40,
@@ -111,6 +123,7 @@ function ConceptNode({ data }: NodeProps<ConceptFlowNode>) {
         color: 'var(--text-primary)',
         overflow: 'hidden',
         position: 'relative' as const,
+        cursor: 'pointer',
       }}
     >
       <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
@@ -262,7 +275,7 @@ function SearchOverlay({
       style={{
         position: 'absolute',
         top: 10,
-        left: 48,
+        left: 62,
         zIndex: 5,
         width: 240,
         fontFamily: "'IBM Plex Mono', monospace",
@@ -376,6 +389,227 @@ function AmbientToggle({
   )
 }
 
+const LIST_TOGGLE_LABEL = 'List'
+
+function ListToggleButton({
+  open,
+  onToggle,
+}: {
+  open: boolean
+  onToggle: () => void
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      title="Browse concepts as a keyboard-accessible list"
+      aria-expanded={open}
+      aria-label={open ? 'Close concept list' : 'Open concept list'}
+      style={{
+        position: 'absolute',
+        top: 10,
+        left: 10,
+        zIndex: 6,
+        height: 30,
+        padding: '0 10px',
+        fontSize: 10,
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        fontFamily: "'IBM Plex Mono', monospace",
+        color: open ? '#fff' : 'var(--text-muted)',
+        background: open ? 'var(--accent-teal)' : 'var(--surface-elevated)',
+        border: '0.5px solid var(--border-strong)',
+        borderRadius: 4,
+        cursor: 'pointer',
+      }}
+    >
+      {LIST_TOGGLE_LABEL}
+    </button>
+  )
+}
+
+function ListView({
+  concepts,
+  conceptStatuses,
+  selectedId,
+  onSelect,
+  onClose,
+}: {
+  concepts: GraphConcept[]
+  conceptStatuses?: Record<string, MasteryStatus>
+  selectedId: string | null
+  onSelect: (id: string) => void
+  onClose: () => void
+}) {
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [])
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    if (!q) return concepts
+    return concepts.filter(
+      c =>
+        c.label.toLowerCase().includes(q) ||
+        c.id.toLowerCase().includes(q) ||
+        c.domain.toLowerCase().includes(q)
+    )
+  }, [concepts, query])
+
+  const groups = useMemo(() => {
+    const order: string[] = []
+    const byDomain = new Map<string, GraphConcept[]>()
+    for (const c of filtered) {
+      if (!byDomain.has(c.domain)) {
+        byDomain.set(c.domain, [])
+        order.push(c.domain)
+      }
+      byDomain.get(c.domain)!.push(c)
+    }
+    return order.map(d => ({ domain: d, items: byDomain.get(d)! }))
+  }, [filtered])
+
+  return (
+    <div
+      role="dialog"
+      aria-label="Concept list"
+      style={{
+        position: 'absolute',
+        inset: '48px 8px 8px 8px',
+        zIndex: 6,
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'var(--graph-surface)',
+        border: '0.5px solid var(--border)',
+        borderRadius: 4,
+        overflow: 'hidden',
+      }}
+    >
+      <div style={{ padding: 8 }}>
+        <input
+          ref={inputRef}
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Escape') {
+              e.preventDefault()
+              onClose()
+            }
+          }}
+          placeholder="Filter concepts…"
+          aria-label="Filter concepts"
+          style={{
+            width: '100%',
+            height: 28,
+            padding: '0 8px',
+            fontSize: 11,
+            fontFamily: 'inherit',
+            color: 'var(--text-primary)',
+            background: 'var(--surface-elevated)',
+            border: '0.5px solid var(--border-strong)',
+            borderRadius: 3,
+            outline: 'none',
+          }}
+        />
+      </div>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '0 8px 8px' }}>
+        {groups.map(g => (
+          <div key={g.domain}>
+            <div
+              style={{
+                margin: '8px 0 4px',
+                fontSize: 9,
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+                color: 'var(--text-muted)',
+                fontFamily: "'IBM Plex Mono', monospace",
+              }}
+            >
+              {g.domain.replace(/_/g, ' ')} · {g.items.length}
+            </div>
+            {g.items.map(c => {
+              const status = conceptStatuses?.[c.id]
+              return (
+                <button
+                  key={c.id}
+                  onClick={() => {
+                    onSelect(c.id)
+                    onClose()
+                  }}
+                  aria-current={c.id === selectedId ? 'true' : undefined}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: '5px 8px',
+                    fontSize: 11,
+                    fontFamily: 'inherit',
+                    color:
+                      c.id === selectedId
+                        ? 'var(--text-primary)'
+                        : 'var(--text-secondary)',
+                    background:
+                      c.id === selectedId
+                        ? 'var(--surface-elevated)'
+                        : 'transparent',
+                    border: 'none',
+                    borderBottom: '0.5px solid var(--border)',
+                    borderRadius: 3,
+                    cursor: 'pointer',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: '50%',
+                      flexShrink: 0,
+                      background:
+                        status != null ? STATUS_COLORS[status] : STATUS_COLORS.unseen,
+                    }}
+                    aria-hidden
+                  />
+                  <span
+                    style={{
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      flex: 1,
+                    }}
+                  >
+                    {c.label}
+                  </span>
+                  {status && (
+                    <span style={{ color: 'var(--text-muted)', fontSize: 9 }}>
+                      {STATUS_LABELS[status]}
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
+        ))}
+        {groups.length === 0 && (
+          <div
+            style={{
+              padding: 12,
+              fontSize: 11,
+              color: 'var(--text-muted)',
+              fontFamily: "'IBM Plex Mono', monospace",
+            }}
+          >
+            No matching concepts
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 function GraphInner({
   concepts,
   conceptStatuses,
@@ -388,6 +622,7 @@ function GraphInner({
   const [isMobile, setIsMobile] = useState(false)
   const [internalSelected, setInternalSelected] = useState<string | null>(selectedId ?? null)
   const [ambientOn, setAmbientOn] = useState(false)
+  const [listOpen, setListOpen] = useState(false)
   const [inView, setInView] = useState(true)
   const [tabVisible, setTabVisible] = useState(true)
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -492,10 +727,11 @@ function GraphInner({
           onPath: onPathNodes?.includes(c.id) ?? false,
           dimmed: !inNeighborhood,
           selected: c.id === effectiveSelected,
+          onSelect: select,
         },
       }
     })
-  }, [concepts, conceptStatuses, onPathNodes, neighborhood, effectiveSelected, layout])
+  }, [concepts, conceptStatuses, onPathNodes, neighborhood, effectiveSelected, layout, select])
 
   const knownIds = useMemo(() => new Set(concepts.map(c => c.id)), [concepts])
 
@@ -616,6 +852,7 @@ function GraphInner({
           edgeTypes={edgeTypes}
           onNodeClick={(_, node) => select(node.id)}
           onPaneClick={handlePaneClick}
+          onSelectionChange={({ nodes }) => select(nodes[0]?.id ?? null)}
           defaultEdgeOptions={{ type: 'flowedge' }}
           fitView
           fitViewOptions={{ padding: 0.15, maxZoom: 1 }}
@@ -654,6 +891,16 @@ function GraphInner({
             select(id)
           }}
         />
+        <ListToggleButton open={listOpen} onToggle={() => setListOpen(o => !o)} />
+        {listOpen && (
+          <ListView
+            concepts={concepts}
+            conceptStatuses={conceptStatuses}
+            selectedId={effectiveSelected}
+            onSelect={select}
+            onClose={() => setListOpen(false)}
+          />
+        )}
         {!isMobile && <AmbientToggle enabled={ambientOn} onToggle={toggleAmbient} />}
       </div>
 
