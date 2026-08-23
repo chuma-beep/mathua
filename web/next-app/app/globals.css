@@ -240,6 +240,22 @@
   }
 }
 
+/* Keyboard access: visible ring when a concept node receives focus */
+.concept-node:focus-visible,
+.react-flow__node:focus-visible .concept-node {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+.react-flow__node:focus-visible {
+  outline: none;
+}
+
+/* Keyboard access: 3D hero concept map container */
+.concept-graph-3d:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: -2px;
+}
+
 /* Lesson body typography: scraped extracts emit their own headings;
    clamp them so section titles never compete with page titles. */
 .mathua-lesson h1 {

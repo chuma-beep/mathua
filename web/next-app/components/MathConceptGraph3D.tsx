@@ -336,15 +336,15 @@ function Particles({ theme, count = 800 }: { theme: 'dark' | 'light'; count?: nu
   )
 }
 
-function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean }) {
+function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null)
   const controlsRef = useRef<any>(null)
 
   useEffect(() => {
     if (controlsRef.current) {
-      controlsRef.current.autoRotate = hovered === null
+      controlsRef.current.autoRotate = hovered === null && !rotatePaused
     }
-  }, [hovered])
+  }, [hovered, rotatePaused])
 
   return (
     <>
@@ -513,6 +513,7 @@ export default function MathConceptGraph3D({
   }, [concepts, conceptStatuses, onPathNodes])
 
   const [activeId, setActiveId] = useState(() => nodes[0]?.id ?? '')
+  const [rotatePaused, setRotatePaused] = useState(false)
 
   useEffect(() => {
     if (nodes.length > 0 && !nodes.find(n => n.id === activeId)) {
@@ -530,16 +531,63 @@ export default function MathConceptGraph3D({
     onNodeSelectRef.current = onNodeSelect
   }, [onNodeSelect])
 
+  // Stable traversal order for keyboard browsing: domain, then label.
+  const orderedIds = useMemo(
+    () =>
+      [...concepts]
+        .sort(
+          (a, b) =>
+            a.domain.localeCompare(b.domain) || a.label.localeCompare(b.label)
+        )
+        .map(c => c.id),
+    [concepts]
+  )
+
+  const handleGraphKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (orderedIds.length === 0) return
+      const idx = Math.max(0, orderedIds.indexOf(activeId))
+      let next: number | null = null
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        next = Math.min(idx + 1, orderedIds.length - 1)
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        next = Math.max(idx - 1, 0)
+      } else if (e.key === 'Home') {
+        next = 0
+      } else if (e.key === 'End') {
+        next = orderedIds.length - 1
+      }
+      if (next !== null && orderedIds[next] !== activeId) {
+        e.preventDefault()
+        handleSelect(orderedIds[next])
+      }
+    },
+    [orderedIds, activeId, handleSelect]
+  )
+
   return (
     <div>
-      <div style={{
-        height: isMobile ? '320px' : '520px',
-        width: '100%',
-        borderRadius: 0,
-        overflow: 'hidden',
-        border: '0.5px solid var(--border)',
-        background: 'var(--graph-surface)',
-      }}>
+      <div
+        className="concept-graph-3d"
+        tabIndex={0}
+        role="application"
+        aria-label="Concept map. Use the left and right arrow keys to browse concepts; press Home or End to jump to the first or last concept."
+        onKeyDown={handleGraphKeyDown}
+        onFocus={() => setRotatePaused(true)}
+        onBlur={() => setRotatePaused(false)}
+        style={{
+          height: isMobile ? '320px' : '520px',
+          width: '100%',
+          borderRadius: 0,
+          overflow: 'hidden',
+          border: '0.5px solid var(--border)',
+          background: 'var(--graph-surface)',
+        }}
+      >
+        <span className="sr-only">
+          Interactive three-dimensional concept map. Arrow keys move between
+          concepts; details of the selected concept appear below the map.
+        </span>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
           gl={{ alpha: true, premultipliedAlpha: true }}
@@ -553,6 +601,7 @@ export default function MathConceptGraph3D({
             onSelect={handleSelect}
             theme={theme}
             isMobile={isMobile}
+            rotatePaused={rotatePaused}
           />
         </Canvas>
       </div>
