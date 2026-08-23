@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"sort"
 	"sync"
+
+	"github.com/chuma-beep/mathua/internal/latex"
 )
 
 type Registry struct {
@@ -47,7 +49,6 @@ func (r *Registry) Register(conceptID string, gen Generator) error {
 	return nil
 }
 
-
 func (r *Registry) Get(conceptID string) (Generator, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -75,7 +76,13 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 	if !exists {
 		return Problem{}, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
-	return gen.Generate(ctx), nil
+	p := gen.Generate(ctx)
+	p.Question = latex.Canonicalize(p.Question, latex.Generators)
+	p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
+	for _, w := range latex.Validate(p.Question + "\n" + p.Explanation) {
+		fmt.Printf("latex warning in generator %q: %s\n", conceptID, w)
+	}
+	return p, nil
 }
 
 func (r *Registry) BatchGenerate(conceptID string, count int, difficulty float64) ([]Problem, error) {

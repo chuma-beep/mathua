@@ -161,8 +161,8 @@ func TestDAG_Available(t *testing.T) {
 	all := map[string]bool{
 		"count.basics.objects":     true,
 		"count.basics.cardinality": true,
-		"arith.add.single":  true,
-		"arith.sub.single":  true,
+		"arith.add.single":         true,
+		"arith.sub.single":         true,
 	}
 	avail = d.Available(all)
 	if len(avail) != 0 {
