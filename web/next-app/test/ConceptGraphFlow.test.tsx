@@ -68,6 +68,18 @@ describe('ConceptGraphFlow', () => {
     expect(onSelectionChange).toHaveBeenCalledWith('mul')
   })
 
+  it('shows a progress bar and mastery percentage on nodes with progress', () => {
+    const { container } = render(
+      <ConceptGraphFlow concepts={concepts} conceptProgress={{ count: 0.4 }} />
+    )
+    expect(container.querySelector('[data-progress="40"]')).toBeInTheDocument()
+    // getByRole would compute an empty accessible name here: jsdom gives the
+    // React Flow node wrapper no dimensions, so RF hides it with display:none.
+    // Match the aria-label directly instead.
+    const node = container.querySelector('.concept-node[aria-label*="40% toward mastery"]')
+    expect(node).not.toBeNull()
+  })
+
   it('derives locked statuses that flow into node colors', () => {
     const statuses = deriveStatuses(concepts)
     expect(statuses['count']).toBe('unseen')

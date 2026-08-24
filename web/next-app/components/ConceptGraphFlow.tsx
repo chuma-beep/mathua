@@ -36,6 +36,7 @@ export interface GraphConcept {
 interface ConceptGraphFlowProps {
   concepts: GraphConcept[]
   conceptStatuses?: Record<string, MasteryStatus>
+  conceptProgress?: Record<string, number>
   theme?: 'dark' | 'light'
   onPathNodes?: string[]
   onNodeSelect?: (id: string) => void
@@ -72,6 +73,7 @@ type ConceptNodeData = {
   label: string
   domain: string
   status: MasteryStatus
+  progress?: number
   onPath: boolean
   dimmed: boolean
   selected: boolean
@@ -88,12 +90,15 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
       : data.status === 'learning'
         ? ' node-breathe-learning'
         : ''
+  const progressPct =
+    typeof data.progress === 'number' ? Math.round(data.progress * 100) : null
+  const ariaLabel = `${data.label}, ${data.domain.replace(/_/g, ' ')} domain, ${STATUS_LABELS[data.status] ?? data.status}${progressPct !== null ? `, ${progressPct}% toward mastery` : ''}`
   return (
     <div
       className={`concept-node${pulseClass}`}
       role="button"
       tabIndex={0}
-      aria-label={`${data.label}, ${data.domain.replace(/_/g, ' ')} domain, ${STATUS_LABELS[data.status] ?? data.status}`}
+      aria-label={ariaLabel}
       aria-pressed={data.selected}
       onKeyDown={e => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -131,6 +136,29 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
       <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
       <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
       <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
+      {progressPct !== null && (
+        <div
+          data-progress={progressPct}
+          aria-hidden
+          style={{
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            height: 3,
+            width: '100%',
+            background: 'var(--border)',
+          }}
+        >
+          <div
+            style={{
+              height: '100%',
+              width: `${progressPct}%`,
+              background: statusColor,
+              transition: 'width 300ms ease',
+            }}
+          />
+        </div>
+      )}
     </div>
   )
 }
@@ -613,6 +641,7 @@ function ListView({
 function GraphInner({
   concepts,
   conceptStatuses,
+  conceptProgress,
   theme = 'dark',
   onPathNodes,
   onNodeSelect,
@@ -809,6 +838,7 @@ function GraphInner({
           label: c.label,
           domain: c.domain,
           status: conceptStatuses?.[c.id] ?? 'unseen',
+          progress: conceptProgress?.[c.id],
           onPath: onPathNodes?.includes(c.id) ?? false,
           dimmed: !inNeighborhood,
           selected: c.id === effectiveSelected,
@@ -816,7 +846,7 @@ function GraphInner({
         },
       }
     })
-  }, [concepts, conceptStatuses, onPathNodes, neighborhood, effectiveSelected, layout, select])
+  }, [concepts, conceptStatuses, conceptProgress, onPathNodes, neighborhood, effectiveSelected, layout, select])
 
   const knownIds = useMemo(() => new Set(concepts.map(c => c.id)), [concepts])
 
