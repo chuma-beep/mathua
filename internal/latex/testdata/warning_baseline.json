@@ -1,0 +1,348 @@
+{
+  "algebrica/algebraic-structures/modules.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/algebraic-structures/rings.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/algebraic-structures/vector-spaces.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/complex-numbers/complex-numbers-in-exponential-form.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/complex-numbers/complex-numbers.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/complex-numbers/euler-formula.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/differential-calculus-theorems/fermat-theorem.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/differential-calculus-theorems/hopital-rule.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/equations/exponential-equations.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/equations/irrational-equations.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/equations/linear-equations-with-parameters.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/equations/linear-equations.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/equations/polynomial-equations.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/functions/discontinuities-of-real-functions.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/functions/functions.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/functions/logarithmic-function.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/functions/secant-function.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/functions/sine-function.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/inequalities/inequalities-with-absolute-value.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/inequalities/irrational-inequalities.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/inequalities/logarithmic-inequalities.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/integrals/indefinite-integrals.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/integrals/integral-of-rational-functions.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/integrals/integral-of-trigonometric-functions.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/integrals/numerical-integration.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/limits/limits.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/limits/little-o-notation.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/limits/remarkable-limits.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/linear-systems/rouche-capelli-theorem.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/binomial-theorem.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/binomials.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/monomials.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/notable-products.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/polynomial-division.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/polynomials.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/synthetic-division-method.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/polynomials/vieta-formulas.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/powers-radicals-logarithms/powers.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/chi-square-distribution.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/confidence-intervals.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/discrete-random-variables.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/median.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/poisson-distribution.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/student-t-distribution.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/probability-and-statistics/uniform-distribution.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/series/taylor-series.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/sets-and-numbers/factorial.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/sets-and-numbers/integers.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/sets-and-numbers/real-numbers.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/trigonometry/pythagorean-theorem.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/trigonometry/sine-and-cosine.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/trigonometry/the-law-of-cosines.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "algebrica/trigonometry/the-law-of-sines.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.eq.vars_both_sides.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.factor.diff_squares.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.ineq.compound.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.ineq.two_var.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.poly.mult_mono.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.quad.discriminant.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/alg.systems.word.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.abs_value.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.factor.composite.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.factor.find.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.factor.prime.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.factor.prime_fact.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.neg.add_sub.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.neg.mult_div.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.neg.number_line.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.neg.order_ops.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.sci_notation.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.sci_notation.ops.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/arith.sqrt.perfect.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.add.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.div.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.from_frac.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.mult.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.sub.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/dec.to_frac.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/discrete.sets.venn.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.add.same.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.benchmark.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.compare.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.concept.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.div.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.div.whole.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.equivalent.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mixed.add.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mixed.convert.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mixed.mult.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mixed.sub.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mult.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.mult.whole.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.on_number_line.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.parts.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.simplify.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.sub.same.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/frac.to_decimal.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/nt.fermat_little.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/prealg.eq.two_step.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/prealg.eq.word.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/prealg.expr.like_terms.md": [
+    "inline math: unbalanced '}' (extra closing brace)",
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/prealg.ineq.one_step.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/ratio.concept.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/ratio.rate.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/ratio.simplify.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.data.line_plot.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.data.mode.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.data.range.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.data.read_table.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.prob.basic.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.prob.complement.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.prob.compound.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.prob.counting.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ],
+  "teaching/stat.prob.sample_space.md": [
+    "odd number of inline delimiters (N) — possible unpaired '$'"
+  ]
+}

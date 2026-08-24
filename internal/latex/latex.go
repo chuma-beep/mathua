@@ -33,18 +33,84 @@ func stripSpanWrappers(s string) string {
 	return leakedSpanRe.ReplaceAllString(s, "$2")
 }
 
+var (
+	displayMathBlockRe = regexp.MustCompile(`(?s)\$\$.+?\$\$`)
+	proseDollarPairRe  = regexp.MustCompile(`\$([^$\n]+)\$`)
+	// Markers that only appear inside real math: commands, grouping,
+	// sub/superscripts, operators, intervals. Their presence in a $...$ pair
+	// means math; their absence with a digit means currency or prose amounts.
+	proseMathMarkerRe = regexp.MustCompile(`[\\^_{}\[\]+\-=*/<>()]`)
+	pureCurrencyRe    = regexp.MustCompile(`^[\d.,]+([ \t]?[÷×][ \t]?\d[\d.,]*)*[.,;:!?]?$`)
+	hasDigitRe        = regexp.MustCompile(`\d`)
+	// A raw dollar followed by a digit, not already escaped: a leftover
+	// currency dollar on a line the pair pass gave an odd dollar count.
+	leftoverDollarRe = regexp.MustCompile(`(^|[^\\])\$(\d)`)
+)
+
+const displayTokenPrefix = "%%MUDISP"
+
+// escapeProseDollars rewrites dollar signs that are currency or prose amounts
+// — not math delimiters — into escaped \$. A $...$ pair counts as prose when
+// its content contains a digit but none of the structural markers that real
+// math almost always has; display math $$...$$ is protected behind tokens
+// during the pass. This keeps word-problem prices ($3.99 each) from being
+// parsed (and mis-rendered) as math downstream.
+func escapeProseDollars(s string) string {
+	var tokens []string
+	s = displayMathBlockRe.ReplaceAllStringFunc(s, func(m string) string {
+		tokens = append(tokens, m)
+		return fmt.Sprintf("%s%d%%", displayTokenPrefix, len(tokens)-1)
+	})
+	s = proseDollarPairRe.ReplaceAllStringFunc(s, func(m string) string {
+		inner := m[1 : len(m)-1]
+		if !hasDigitRe.MatchString(inner) || proseMathMarkerRe.MatchString(inner) {
+			return m
+		}
+		// Pure numeric shapes ($20, $3.99., $3.99÷24) are currency; anything
+		// else with digits and spaces ($3.99 each and $14.65) is prose. Math
+		// without markers or spaces ($2x$) stays math.
+		if !pureCurrencyRe.MatchString(inner) && !strings.Contains(inner, " ") {
+			return m
+		}
+		return strings.ReplaceAll(m, "$", `\$`)
+	})
+	// Odd dollar counts leave a raw dollar behind; on lines that already carry
+	// escaped currency, a leftover $ followed by a digit is prose too. Without
+	// this, the stray dollar re-pairs with a distant one downstream.
+	if strings.Contains(s, `\$`) {
+		lines := strings.Split(s, "\n")
+		for i, line := range lines {
+			if leftoverDollarRe.MatchString(line) {
+				lines[i] = leftoverDollarRe.ReplaceAllStringFunc(line, func(m string) string {
+					// m = prefix + "$" + digit → prefix + "\$" + digit
+					return m[:len(m)-2] + `\$` + m[len(m)-1:]
+				})
+			}
+		}
+		s = strings.Join(lines, "\n")
+	}
+	for i, tok := range tokens {
+		s = strings.Replace(s, fmt.Sprintf("%s%d%%", displayTokenPrefix, i), tok, 1)
+	}
+	return s
+}
+
 func preprocessGeneric(s string) string {
 	s = entityReplacer.Replace(s)
 	s = strings.ReplaceAll(s, `\amp`, "&")
 	// Leaked wrapper spans from scrapers: keep inner content, drop the tags.
 	s = stripSpanWrappers(s)
+	// The doubled-backslash dialect is not Algebrica-exclusive — authored
+	// lessons use it too — so the collapse passes run for every source.
+	s = collapseDoubled(s)
+	s = normalizeDoubledDelims(s)
+	s = escapeProseDollars(s)
 	return s
 }
 
 var doubledPunctRe = regexp.MustCompile(`\\\\([{},;|])`)
 var doubledBeginEndRe = regexp.MustCompile(`\\\\(begin|end)\{`)
 var brokenSqrtRe = regexp.MustCompile(`\\sqrt\}\{`)
-var headingRe = regexp.MustCompile(`(?m)^(#{1,5})( )`)
 
 // collapseDoubled normalizes the Algebrica scraping dialect where command
 // backslashes were themselves escaped: \\{ -> \{, \\, -> \,, \\begin -> \begin.
@@ -73,8 +139,8 @@ func repairBrokenSqrt(s string) string {
 	return brokenSqrtRe.ReplaceAllString(s, `\sqrt{`)
 }
 
-var rbProtectRe = regexp.MustCompile(`\\{2,}(\[[0-9]+(?:\.[0-9]+)?(?:pt|em|ex|mm|cm)\])`)
-var rbRestoreRe = regexp.MustCompile(`%%MUARB:(\[[0-9]+(?:\.[0-9]+)?(?:pt|em|ex|mm|cm)\])%%`)
+var rbProtectRe = regexp.MustCompile(`\\{2,}(\[[0-9]+(?:\.[0-9]+)?\s?(?:pt|em|ex|mm|cm)\])`)
+var rbRestoreRe = regexp.MustCompile(`%%MUARB:(\[[0-9]+(?:\.[0-9]+)?\s?(?:pt|em|ex|mm|cm)\])%%`)
 
 const rbToken = "%%MUARB:%s%%"
 
@@ -96,12 +162,6 @@ func restoreRowbreaks(s string) string {
 	return rbRestoreRe.ReplaceAllString(s, "\\\\$1")
 }
 
-// demoteHeadings shifts every ATX heading one level deeper so scraped section
-// titles stop competing with the page's own title typography.
-func demoteHeadings(s string) string {
-	return headingRe.ReplaceAllString(s, "#$1$2")
-}
-
 var (
 	equationEnvRe  = regexp.MustCompile(`(?s)\\begin\{(equation\*?)\}(.*?)\\end\{equation\*?\}`)
 	alignEnvRe     = regexp.MustCompile(`(?s)\\begin\{(align\*?)\}(.*?)\\end\{align\*?\}`)
@@ -114,13 +174,31 @@ var (
 	// \\[ ... \\] display pairs and \\( ... \\) inline pairs.
 	doubledDisplayDelimOpen  = regexp.MustCompile(`\\\\\[`)
 	doubledDisplayDelimClose = regexp.MustCompile(`\\\\\]`)
-	doubledInlineDelim       = regexp.MustCompile(`\\\\[()]`)
+	doubledInlineDelim       = regexp.MustCompile(`\\\\([()])`)
 )
 
 // Canonicalize rewrites every recognized math construct to exactly two
 // delimiters: inline $...$ and display $$...$$ (KaTeX-native, remark-math
 // friendly). Source-specific quirks are absorbed first via the adapter.
+//
+// Deeply-escaped scrape artifacts (\\\\[0.5 em], \\\\\,) shed one backslash
+// level per pass, so the pipeline runs to a fixed point: the returned string
+// is stable under Canonicalize (C(C(x)) == C(x)), capped at maxCanonPasses.
 func Canonicalize(s string, a Adapter) string {
+	prev := s
+	for i := 0; i < maxCanonPasses; i++ {
+		next := canonicalizeOnce(prev, a)
+		if next == prev {
+			return next
+		}
+		prev = next
+	}
+	return prev
+}
+
+const maxCanonPasses = 8
+
+func canonicalizeOnce(s string, a Adapter) string {
 	if a.Preprocess != nil {
 		s = a.Preprocess(s)
 	}
@@ -296,16 +374,13 @@ func onTableRowLine(s string, pos int) bool {
 
 // Adapters for the known content sources.
 var (
-	// Algebrica: doubled-backslash scrape dialect (\\{, \\,, \\[, \\begin),
-	// broken \sqrt}{ artifacts, and oversized section headings.
+	// Algebrica: rowbreak protection and broken \sqrt}{ artifacts; the
+	// doubled-backslash collapse now runs for every source (preprocessGeneric).
 	Algebrica = Adapter{Name: "algebrica", Preprocess: func(s string) string {
 		s = protectRowbreaks(s)
 		s = preprocessGeneric(s)
 		s = stripSpanWrappers(s)
-		s = collapseDoubled(s)
-		s = normalizeDoubledDelims(s)
-		s = repairBrokenSqrt(s)
-		return demoteHeadings(s)
+		return repairBrokenSqrt(s)
 	}}
 
 	// Authored: hand-written lessons already use $ / $$ conventions.
@@ -318,22 +393,16 @@ var (
 	// \amp alignment markers, and full exercise sections.
 	Levin = Adapter{Name: "levin", Preprocess: func(s string) string {
 		s = preprocessGeneric(s)
-		s = stripSections(s, "Exercises")
-		return demoteHeadings(s)
+		return stripSections(s, "Exercises")
 	}}
 
-	// OpenStax extracts: html2text flattens tables; demote headings so chapter
-	// titles don't render at page-title scale.
-	OpenStax = Adapter{Name: "openstax", Preprocess: func(s string) string {
-		s = preprocessGeneric(s)
-		return demoteHeadings(s)
-	}}
+	// OpenStax extracts: html2text flattens tables.
+	OpenStax = Adapter{Name: "openstax", Preprocess: preprocessGeneric}
 
 	// ORCCA-derived teaching extracts (same family as Algebrica styling).
 	ORCCA = Adapter{Name: "orcca", Preprocess: func(s string) string {
 		s = preprocessGeneric(s)
-		s = repairBrokenSqrt(s)
-		return demoteHeadings(s)
+		return repairBrokenSqrt(s)
 	}}
 )
 
