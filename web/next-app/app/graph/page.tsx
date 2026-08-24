@@ -93,7 +93,7 @@ function GraphContent() {
   const searchParams = useSearchParams()
   const conceptParam = searchParams.get('concept')
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string }>>({})
+  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string; streak?: number }>>({})
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
@@ -143,6 +143,27 @@ function GraphContent() {
     () => deriveStatuses(statusSource, rawProgress),
     [statusSource, rawProgress]
   )
+
+  // Progress toward mastery per concept, mirroring the engine's rule:
+  // streak / mastery_threshold.streak, capped at 1. Mastered is full;
+  // locked/unseen get no bar.
+  const conceptProgress = useMemo(() => {
+    const thresholds = new Map<string, number>()
+    for (const c of conceptsData as any[]) {
+      thresholds.set(c.id, c.mastery_threshold?.streak ?? 10)
+    }
+    const out: Record<string, number> = {}
+    for (const [id, p] of Object.entries(rawProgress)) {
+      const status = conceptStatuses[id]
+      if (status === 'mastered') {
+        out[id] = 1
+        continue
+      }
+      if (status === 'unseen' || status === 'locked') continue
+      out[id] = Math.min(1, (p.streak ?? 0) / (thresholds.get(id) ?? 10))
+    }
+    return out
+  }, [rawProgress, conceptStatuses])
 
   const handleSelectionChange = useCallback((id: string | null) => {
     setSelectedId(id)
@@ -225,6 +246,7 @@ function GraphContent() {
         <ConceptGraphFlow
           concepts={concepts.length > 0 ? concepts : fallbackConcepts}
           conceptStatuses={conceptStatuses}
+          conceptProgress={conceptProgress}
           theme={theme}
           onPathNodes={onPathNodes}
           selectedId={selectedId}
