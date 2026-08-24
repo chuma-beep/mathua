@@ -1,7 +1,25 @@
-import { describe, it, expect, beforeAll, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest'
 import { render, screen, fireEvent, within } from '@testing-library/react'
-import ConceptGraphFlow from '../components/ConceptGraphFlow'
 import { deriveStatuses } from '../lib/graphStatus'
+
+const reactFlowMocks = vi.hoisted(() => ({
+  zoomIn: vi.fn(),
+  zoomOut: vi.fn(),
+  fitView: vi.fn(),
+  getViewport: vi.fn(() => ({ x: 0, y: 0, zoom: 1 })),
+  setViewport: vi.fn(),
+  setCenter: vi.fn(),
+}))
+
+vi.mock('@xyflow/react', async importOriginal => {
+  const actual = await importOriginal<typeof import('@xyflow/react')>()
+  return {
+    ...actual,
+    useReactFlow: () => reactFlowMocks,
+  }
+})
+
+import ConceptGraphFlow from '../components/ConceptGraphFlow'
 
 class ResizeObserverMock {
   observe() {}
@@ -80,5 +98,83 @@ describe('ConceptGraphFlow', () => {
       key: 'Escape',
     })
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+})
+
+describe('ConceptGraphFlow keyboard controls', () => {
+  beforeEach(() => {
+    reactFlowMocks.zoomIn.mockClear()
+    reactFlowMocks.zoomOut.mockClear()
+    reactFlowMocks.fitView.mockClear()
+    reactFlowMocks.setViewport.mockClear()
+    reactFlowMocks.getViewport.mockClear()
+    reactFlowMocks.getViewport.mockImplementation(() => ({ x: 0, y: 0, zoom: 1 }))
+  })
+
+  function renderEngaged(props = {}) {
+    const utils = render(<ConceptGraphFlow concepts={concepts} {...props} />)
+    fireEvent.mouseEnter(screen.getByTestId('graph-wrapper'))
+    return utils
+  }
+
+  it('zooms with plus and minus and fits with 0 when the graph is engaged', () => {
+    renderEngaged()
+    const wrapper = screen.getByTestId('graph-wrapper')
+    fireEvent.keyDown(wrapper, { key: '+' })
+    expect(reactFlowMocks.zoomIn).toHaveBeenCalledWith({ duration: 200 })
+    fireEvent.keyDown(wrapper, { key: '-' })
+    expect(reactFlowMocks.zoomOut).toHaveBeenCalledWith({ duration: 200 })
+    fireEvent.keyDown(wrapper, { key: '0' })
+    expect(reactFlowMocks.fitView).toHaveBeenCalledWith({
+      padding: 0.15,
+      maxZoom: 1,
+      duration: 300,
+    })
+  })
+
+  it('pans with arrow keys using the map camera convention', () => {
+    renderEngaged()
+    const wrapper = screen.getByTestId('graph-wrapper')
+    fireEvent.keyDown(wrapper, { key: 'ArrowLeft' })
+    expect(reactFlowMocks.setViewport).toHaveBeenCalledWith(
+      { x: 90, y: 0, zoom: 1 },
+      { duration: 200 }
+    )
+    fireEvent.keyDown(wrapper, { key: 'ArrowRight' })
+    expect(reactFlowMocks.setViewport).toHaveBeenCalledWith(
+      { x: -90, y: 0, zoom: 1 },
+      { duration: 200 }
+    )
+  })
+
+  it('ignores shortcuts while typing in the search input', () => {
+    renderEngaged()
+    fireEvent.keyDown(screen.getByPlaceholderText('Search concepts…'), { key: '+' })
+    expect(reactFlowMocks.zoomIn).not.toHaveBeenCalled()
+  })
+
+  it('ignores shortcuts when the graph is neither focused nor hovered', () => {
+    render(<ConceptGraphFlow concepts={concepts} />)
+    fireEvent.keyDown(window, { key: '+' })
+    expect(reactFlowMocks.zoomIn).not.toHaveBeenCalled()
+  })
+
+  it('Escape clears the selection when the list view is closed', () => {
+    const onSelectionChange = vi.fn()
+    renderEngaged({ selectedId: 'mul', onSelectionChange })
+    fireEvent.keyDown(screen.getByTestId('graph-wrapper'), { key: 'Escape' })
+    expect(onSelectionChange).toHaveBeenCalledWith(null)
+  })
+
+  it('Escape closes the list view before clearing the selection', () => {
+    const onSelectionChange = vi.fn()
+    renderEngaged({ selectedId: 'mul', onSelectionChange })
+    fireEvent.click(screen.getByRole('button', { name: 'Open concept list' }))
+    expect(screen.getByRole('dialog', { name: 'Concept list' })).toBeInTheDocument()
+    // isolate from React Flow's mount-time empty-selection callback
+    onSelectionChange.mockClear()
+    fireEvent.keyDown(window, { key: 'Escape' })
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(onSelectionChange).not.toHaveBeenCalledWith(null)
   })
 })
