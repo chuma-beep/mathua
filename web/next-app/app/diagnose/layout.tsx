@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Diagnostic Test \u2014 Mathua',
+  title: 'Diagnostic Test \u00b7 Mathua',
   description: 'A Computerised Adaptive Testing session that locates your position in the concept graph.',
 }
 

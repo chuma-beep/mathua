@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading'
 
 export const metadata: Metadata = {
   title: 'Contributing \u2014 Mathua',
-  description: 'How to contribute to Mathua — concepts, generators, frontend components, and more.',
+  description: 'How to contribute to Mathua: concepts, generators, frontend components, and more.',
 }
 
 const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
@@ -116,7 +116,7 @@ export default function ContributingPage() {
       <section className="pt-8">
         <SectionHeader label="Community" title="Contributing to Mathua" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
-          Mathua is a full-stack project — a Go backend with a Next.js frontend,
+          Mathua is a full-stack project: a Go backend with a Next.js frontend,
           a scheduling engine, and a concept graph. Every generator, every diagram,
           every API route was built by someone who wanted to help others learn math.
           Here&apos;s how to join them.
@@ -156,11 +156,11 @@ cd mathua`}
           <code style={inlineCodeStyle}>NEXT_PUBLIC_API_URL</code> env var:
         </p>
         <pre style={codeBlockStyle}>
-{`# Terminal 1 — Go backend
+{`# Terminal 1 · Go backend
 go build ./cmd/mathua
 ./mathua --serve --port 8080
 
-# Terminal 2 — Next.js frontend
+# Terminal 2 · Next.js frontend
 cd web/next-app
 npm install
 npm run dev`}
@@ -340,8 +340,8 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         <h2 style={h2Style}>Step 3: Prove it works</h2>
         <p style={bodyStyle}>
           Every generator needs a fuzz test that asserts 1&thinsp;000 valid samples.
-          This catches edge cases — division by zero, negative operand ranges,
-          malformed output — before a student ever sees them.
+          This catches edge cases (division by zero, negative operand ranges,
+          malformed output) before a student ever sees them.
         </p>
         <pre style={codeBlockStyle}>
 {`func TestAddSingleGen(t *testing.T) {
@@ -370,7 +370,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         <h2 style={h2Style}>Step 4: Write a lesson (optional)</h2>
         <p style={bodyStyle}>
           Mathua includes a built-in lesson system. Each concept can have an
-          associated lesson — a markdown file that teaches the material, rendered
+          associated lesson: a markdown file that teaches the material, rendered
           inside the app as a sidebar panel alongside practice problems.
         </p>
         <p style={bodyStyle}>
@@ -431,9 +431,9 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         {[
           'Use useNodesState + useEdgesState + onNodesChange + onEdgesChange for every diagram. Without these handlers, node dragging is silently ignored.',
           'When adding custom node types, define them outside the component body (otherwise nodes remount on every render).',
-          'For diagrams that need pan/zoom, set allowZoom=true and do not pass restrictive interaction props — the Controls lock button toggles the React Flow store directly.',
+          'For diagrams that need pan/zoom, set allowZoom=true and do not pass restrictive interaction props; the Controls lock button toggles the React Flow store directly.',
           'Background dots use var(--border-strong) at size=1 for visibility without distraction.',
-          'Node colors come from the shared themeColors object in FlowDiagram.tsx — use those instead of hardcoding.',
+          'Node colors come from the shared themeColors object in FlowDiagram.tsx; use those instead of hardcoding.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -447,8 +447,8 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           <code style={inlineCodeStyle}>components/</code>. Pages live in{' '}
           <code style={inlineCodeStyle}>app/</code> under their route segment
           (e.g., <code style={inlineCodeStyle}>app/profile/page.tsx</code>).
-          The project uses static export (<code style={inlineCodeStyle}>output: &apos;export&apos;</code>)
-          — all pages are client-rendered with <code style={inlineCodeStyle}>&apos;use client&apos;</code>.
+          The project uses static export (<code style={inlineCodeStyle}>output: &apos;export&apos;</code>),
+          so all pages are client-rendered with <code style={inlineCodeStyle}>&apos;use client&apos;</code>.
         </p>
         {[
           'API calls go through lib/api.ts. Auth headers come from lib/auth.ts (JWT in localStorage).',
@@ -485,7 +485,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'If the endpoint should work without auth, check s.auth == nil and handle both paths.',
           'All endpoints set Content-Type: application/json via writeJSON(). Use decodeJSON() and writeError() for request/error handling.',
           'POST endpoints check r.Method != http.MethodPost and return 405.',
-          'CORS is handled automatically by the cors middleware wrapper — no extra config needed.',
+          'CORS is handled automatically by the cors middleware wrapper; no extra config needed.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -605,7 +605,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'Concept IDs follow domain.subdomain.descriptor: lower case, no spaces.',
           'Mastery thresholds are pragmatic. Single-digit addition should require faster response (6–8 s) than multi-digit multiplication (15–20 s).',
           'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
-          'Generators accept a generator.GeneratorContext with Difficulty (0.0–1.0) and Seed (int64). Use ctx.Seed for deterministic generation — this enables question replay, regression suites, and A/B testing.',
+          'Generators accept a generator.GeneratorContext with Difficulty (0.0–1.0) and Seed (int64). Use ctx.Seed for deterministic generation; this enables question replay, regression suites, and A/B testing.',
           'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
           'Grading types: use numeric for arithmetic, polynomial/expression for algebra (routes through SymPy), and comparison/ordering/multiple_choice for structured answers.',
         ].map((rule) => (
