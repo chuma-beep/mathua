@@ -1,15 +1,7 @@
+<!-- Lambda icon from Tabler Icons (MIT) - https://github.com/tabler/tabler-icons - recolored for Mathua -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" fill="#0c0d0f"/>
-  <g transform="translate(138.7,77.0) scale(0.5367) translate(-218.5,-333.5)">
-    <g transform="translate(0,667) scale(0.1,-0.1)" fill="#00b4ed" stroke="none">
-      <path d="M210 6226 l0 -446 285 0 c221 0 303 -4 362 -16 245 -50 353 -155 471
--455 131 -336 254 -691 248 -718 -3 -14 -356 -1034 -784 -2266 l-778 -2240
-550 -3 c302 -1 551 0 553 2 5 4 1013 3384 1013 3394 0 41 58 -155 280 -953
-299 -1073 292 -1048 319 -1215 30 -184 54 -260 131 -415 172 -347 487 -656
-800 -785 158 -66 307 -92 588 -104 l122 -6 0 449 0 449 -22 6 c-13 3 -39 6
--59 6 -55 0 -187 37 -236 66 -67 39 -108 79 -158 155 -63 94 -100 201 -135
-392 -16 89 -41 203 -54 253 -26 96 -1319 3701 -1413 3939 -95 241 -184 388
--327 542 -134 144 -354 285 -541 348 -164 55 -183 57 -717 62 l-498 5 0 -446z"/>
-    </g>
+  <g transform="translate(76.80,76.80) scale(14.9333)" fill="none" stroke="#00b4ed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m6 20l6.5-9m6.5 9C13 20 13 4 7 4"/>
   </g>
 </svg>
