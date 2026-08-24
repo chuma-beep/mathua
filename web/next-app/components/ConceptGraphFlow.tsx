@@ -136,29 +136,27 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
       <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
       <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
       <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
-      {progressPct !== null && (
+      <div
+        data-progress={progressPct ?? 0}
+        aria-hidden
+        style={{
+          position: 'absolute',
+          left: 0,
+          bottom: 0,
+          height: 4,
+          width: '100%',
+          background: 'var(--border)',
+        }}
+      >
         <div
-          data-progress={progressPct}
-          aria-hidden
           style={{
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-            height: 3,
-            width: '100%',
-            background: 'var(--border)',
+            height: '100%',
+            width: `${progressPct ?? 0}%`,
+            background: statusColor,
+            transition: 'width 300ms ease',
           }}
-        >
-          <div
-            style={{
-              height: '100%',
-              width: `${progressPct}%`,
-              background: statusColor,
-              transition: 'width 300ms ease',
-            }}
-          />
-        </div>
-      )}
+        />
+      </div>
     </div>
   )
 }
@@ -968,6 +966,8 @@ function GraphInner({
           background: 'var(--graph-surface)',
         }}
       >
+        {/* MIT-licensed library; hiding the attribution badge is permitted.
+            The LICENSE copyright notice remains in node_modules untouched. */}
         <ReactFlow
           nodes={flowNodes}
           edges={flowEdges}
@@ -985,7 +985,7 @@ function GraphInner({
           nodesDraggable={false}
           nodesConnectable={false}
           elementsSelectable
-          proOptions={{ hideAttribution: false }}
+          proOptions={{ hideAttribution: true }}
         >
           <Background
             variant={BackgroundVariant.Dots}
