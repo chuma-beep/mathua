@@ -27,7 +27,7 @@ export default function ProfileStats({ name, scores }: Props) {
   const xpPct = scores.daily_xp_goal > 0
     ? Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100))
     : 0
-  const levelNum = LEVEL_NAMES[scores.level] ?? '—'
+  const levelNum = LEVEL_NAMES[scores.level] ?? '·'
 
   return (
     <div

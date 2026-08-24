@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Goals \u2014 Mathua',
+  title: 'Goals \u00b7 Mathua',
   description: 'Set learning goals and run a diagnostic to build a personalized study plan.',
 }
 

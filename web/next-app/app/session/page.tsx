@@ -580,7 +580,7 @@ export default function SessionPage() {
                       </div>
                       {showTimer && (
                         <div className="font-mono text-2xl text-mathua-primary mt-2">
-                          {!submitted ? `${elapsed.toFixed(1)}s` : `—`}
+                          {!submitted ? `${elapsed.toFixed(1)}s` : '·'}
                         </div>
                       )}
                     </div>
@@ -801,7 +801,7 @@ export default function SessionPage() {
                   <p className="font-mono text-sm text-mathua-secondary mb-4">
                     You reviewed {reviewStats.total} concept{reviewStats.total !== 1 ? 's' : ''}
                     {reviewStats.total > 0 && (
-                      <> — {reviewStats.correct}/{reviewStats.total} correct</>
+                      <> · {reviewStats.correct}/{reviewStats.total} correct</>
                     )}
                   </p>
                   <button
