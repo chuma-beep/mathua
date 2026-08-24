@@ -59,6 +59,9 @@ func New(repo storage.Repository) *AuthService {
 func SecretMinLength() int { return 32 }
 
 func (a *AuthService) Signup(name, username, password string) (string, *storage.Student, error) {
+	if err := ValidatePassword(password); err != nil {
+		return "", nil, err
+	}
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return "", nil, err
