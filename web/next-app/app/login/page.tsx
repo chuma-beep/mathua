@@ -19,6 +19,9 @@ type LoginState = {
   password: string
   error: string
   loading: boolean
+  showPassword: boolean
+  attempted: boolean
+  fieldErrors: { name?: string; username?: string; password?: string }
 }
 
 type LoginAction =
@@ -28,6 +31,9 @@ type LoginAction =
   | { type: 'SET_PASSWORD'; password: string }
   | { type: 'SET_ERROR'; error: string }
   | { type: 'SET_LOADING'; loading: boolean }
+  | { type: 'TOGGLE_SHOW_PASSWORD' }
+  | { type: 'SET_ATTEMPTED'; attempted: boolean }
+  | { type: 'SET_FIELD_ERRORS'; fieldErrors: LoginState['fieldErrors'] }
 
 const initialState: LoginState = {
   tab: 'login',
@@ -36,12 +42,15 @@ const initialState: LoginState = {
   password: '',
   error: '',
   loading: false,
+  showPassword: false,
+  attempted: false,
+  fieldErrors: {},
 }
 
 function loginReducer(state: LoginState, action: LoginAction): LoginState {
   switch (action.type) {
     case 'SET_TAB':
-      return { ...state, tab: action.tab, error: '' }
+      return { ...state, tab: action.tab, error: '', fieldErrors: {} }
     case 'SET_NAME':
       return { ...state, name: action.name }
     case 'SET_USERNAME':
@@ -52,7 +61,63 @@ function loginReducer(state: LoginState, action: LoginAction): LoginState {
       return { ...state, error: action.error }
     case 'SET_LOADING':
       return { ...state, loading: action.loading }
+    case 'TOGGLE_SHOW_PASSWORD':
+      return { ...state, showPassword: !state.showPassword }
+    case 'SET_ATTEMPTED':
+      return { ...state, attempted: action.attempted }
+    case 'SET_FIELD_ERRORS':
+      return { ...state, fieldErrors: action.fieldErrors }
   }
+}
+
+// Mirrors internal/auth.ValidatePassword — keep both in sync.
+function passwordIssues(pw: string): string[] {
+  const issues: string[] = []
+  if (pw.length < 8) issues.push('at least 8 characters')
+  if (!/\d/.test(pw)) issues.push('a number')
+  if (!/[^A-Za-z0-9]/.test(pw)) issues.push('a special character')
+  return issues
+}
+
+function validateFields(
+  tab: 'login' | 'signup',
+  values: { name: string; username: string; password: string }
+): LoginState['fieldErrors'] {
+  const errors: LoginState['fieldErrors'] = {}
+  if (tab === 'signup' && !values.name.trim()) errors.name = 'Name is required'
+  if (!values.username.trim()) errors.username = 'Username is required'
+  if (!values.password) {
+    errors.password = 'Password is required'
+  } else if (tab === 'signup') {
+    const issues = passwordIssues(values.password)
+    if (issues.length > 0) errors.password = 'Password needs ' + issues.join(', ')
+  }
+  return errors
+}
+
+const inputClassName = (hasError: boolean) =>
+  `w-full mt-1 bg-mathua-code border rounded-none h-12 px-4 pr-12 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none ${
+    hasError ? 'border-mathua-red' : 'border-mathua-border focus:border-mathua-blue'
+  }`
+
+function EyeIcon({ off }: { off?: boolean }) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+      {off && <path d="m4 4 16 16" />}
+    </svg>
+  )
 }
 
 export default function LoginPage() {
@@ -62,9 +127,25 @@ export default function LoginPage() {
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
+  const updateField = (action: LoginAction) => {
+    dispatch(action)
+    if (state.attempted) {
+      const next = {
+        name: action.type === 'SET_NAME' ? (action as { name: string }).name : state.name,
+        username:
+          action.type === 'SET_USERNAME' ? (action as { username: string }).username : state.username,
+        password:
+          action.type === 'SET_PASSWORD' ? (action as { password: string }).password : state.password,
+      }
+      dispatch({ type: 'SET_FIELD_ERRORS', fieldErrors: validateFields(state.tab, next) })
+    }
+  }
+
   const handleSubmit = async () => {
-    if (state.tab === 'signup' && !state.name.trim()) { dispatch({ type: 'SET_ERROR', error: 'Name is required' }); return }
-    if (!state.username.trim() || !state.password) { dispatch({ type: 'SET_ERROR', error: 'Username and password are required' }); return }
+    dispatch({ type: 'SET_ATTEMPTED', attempted: true })
+    const fieldErrors = validateFields(state.tab, state)
+    dispatch({ type: 'SET_FIELD_ERRORS', fieldErrors })
+    if (Object.keys(fieldErrors).length > 0) return
     dispatch({ type: 'SET_ERROR', error: '' })
     dispatch({ type: 'SET_LOADING', loading: true })
     try {
@@ -103,19 +184,67 @@ export default function LoginPage() {
             {state.tab === 'signup' && (
               <div>
                 <label htmlFor="name" className="font-mono text-[10px] uppercase text-mathua-muted">Name</label>
-                <input id="name" type="text" value={state.name} onChange={(e) => dispatch({ type: 'SET_NAME', name: e.target.value })} onKeyDown={(e) => e.key === 'Enter' && handleSubmit()} placeholder="Your name" className="w-full mt-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+                <input
+                  id="name"
+                  type="text"
+                  value={state.name}
+                  onChange={(e) => updateField({ type: 'SET_NAME', name: e.target.value })}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="Your name"
+                  autoComplete="name"
+                  aria-invalid={!!state.fieldErrors.name}
+                  aria-describedby={state.fieldErrors.name ? 'name-error' : undefined}
+                  className={inputClassName(!!state.fieldErrors.name)}
+                />
+                {state.fieldErrors.name && <p id="name-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.name}</p>}
               </div>
             )}
             <div>
               <label htmlFor="username" className="font-mono text-[10px] uppercase text-mathua-muted">Username</label>
-              <input id="username" type="text" value={state.username} onChange={(e) => dispatch({ type: 'SET_USERNAME', username: e.target.value })} onKeyDown={(e) => e.key === 'Enter' && handleSubmit()} placeholder="username" className="w-full mt-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+              <input
+                id="username"
+                type="text"
+                value={state.username}
+                onChange={(e) => updateField({ type: 'SET_USERNAME', username: e.target.value })}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                placeholder="username"
+                autoComplete="username"
+                aria-invalid={!!state.fieldErrors.username}
+                aria-describedby={state.fieldErrors.username ? 'username-error' : undefined}
+                className={inputClassName(!!state.fieldErrors.username)}
+              />
+              {state.fieldErrors.username && <p id="username-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.username}</p>}
             </div>
             <div>
               <label htmlFor="password" className="font-mono text-[10px] uppercase text-mathua-muted">Password</label>
-              <input id="password" type="password" value={state.password} onChange={(e) => dispatch({ type: 'SET_PASSWORD', password: e.target.value })} onKeyDown={(e) => e.key === 'Enter' && handleSubmit()} placeholder="password" className="w-full mt-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={state.showPassword ? 'text' : 'password'}
+                  value={state.password}
+                  onChange={(e) => updateField({ type: 'SET_PASSWORD', password: e.target.value })}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="password"
+                  autoComplete={state.tab === 'signup' ? 'new-password' : 'current-password'}
+                  aria-invalid={!!state.fieldErrors.password}
+                  aria-describedby={state.fieldErrors.password ? 'password-error' : undefined}
+                  className={inputClassName(!!state.fieldErrors.password)}
+                />
+                <button
+                  type="button"
+                  onClick={() => dispatch({ type: 'TOGGLE_SHOW_PASSWORD' })}
+                  aria-label={state.showPassword ? 'Hide password' : 'Show password'}
+                  aria-pressed={state.showPassword}
+                  title={state.showPassword ? 'Hide password' : 'Show password'}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 mt-0.5 text-mathua-muted hover:text-mathua-primary"
+                >
+                  <EyeIcon off={state.showPassword} />
+                </button>
+              </div>
+              {state.fieldErrors.password && <p id="password-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.password}</p>}
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
-            <button onClick={handleSubmit} disabled={state.loading} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
+            <button onClick={handleSubmit} disabled={state.loading} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="mt-3 text-center">
