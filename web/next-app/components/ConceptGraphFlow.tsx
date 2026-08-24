@@ -110,52 +110,83 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
       style={{
         width: 180,
         height: 40,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 8,
-        padding: '0 10px',
-        background: 'var(--surface-elevated)',
-        border: data.selected
-          ? `1.5px solid ${statusColor}`
-          : data.onPath
-            ? '1px solid var(--accent-teal)'
-            : '1px solid var(--border)',
-        borderRadius: 4,
+        position: 'relative' as const,
         opacity: data.dimmed ? 0.22 : 1,
         transition: 'opacity 150ms ease',
         fontFamily: "'IBM Plex Mono', monospace",
         fontSize: 11,
         color: 'var(--text-primary)',
-        overflow: 'hidden',
-        position: 'relative' as const,
         cursor: 'pointer',
       }}
     >
-      <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
-      <span style={{ width: 3, height: 22, borderRadius: 2, flexShrink: 0, background: domainColor(data.domain) }} />
-      <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
-      <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
-      <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
       <div
-        data-progress={progressPct ?? 0}
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'relative' as const,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '0 10px',
+          background: 'var(--surface-elevated)',
+          border: data.selected
+            ? `1.5px solid ${statusColor}`
+            : data.onPath
+              ? '1px solid var(--accent-teal)'
+              : '1px solid var(--border)',
+          borderRadius: 4,
+          overflow: 'hidden',
+        }}
+      >
+        <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
+        <span style={{ width: 3, height: 22, borderRadius: 2, flexShrink: 0, background: domainColor(data.domain) }} />
+        <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
+        <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
+        <div
+          data-progress={progressPct ?? 0}
+          aria-hidden
+          style={{
+            position: 'absolute',
+            left: 8,
+            right: 8,
+            bottom: 3,
+            height: 4,
+            borderRadius: 2,
+            background: 'var(--border)',
+          }}
+        >
+          <div
+            style={{
+              height: '100%',
+              width: `${progressPct ?? 0}%`,
+              background: statusColor,
+              borderRadius: 2,
+              transition: 'width 300ms ease',
+            }}
+          />
+        </div>
+      </div>
+      <div
+        className="node-progress-tip"
         aria-hidden
         style={{
           position: 'absolute',
-          left: 0,
-          bottom: 0,
-          height: 4,
-          width: '100%',
-          background: 'var(--border)',
+          top: '100%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          marginTop: 4,
+          zIndex: 10,
+          whiteSpace: 'nowrap' as const,
+          pointerEvents: 'none' as const,
+          color: 'var(--text-secondary)',
+          background: 'var(--surface-elevated)',
+          border: '0.5px solid var(--border-strong)',
+          borderRadius: 3,
+          padding: '3px 8px',
         }}
       >
-        <div
-          style={{
-            height: '100%',
-            width: `${progressPct ?? 0}%`,
-            background: statusColor,
-            transition: 'width 300ms ease',
-          }}
-        />
+        {progressPct !== null ? `${progressPct}% toward mastery` : 'Not started'}
       </div>
     </div>
   )

@@ -250,6 +250,15 @@
   outline: none;
 }
 
+/* Progress tooltip below a concept node; revealed on hover or keyboard focus */
+.concept-node .node-progress-tip {
+  display: none;
+}
+.concept-node:hover .node-progress-tip,
+.concept-node:focus-visible .node-progress-tip {
+  display: block;
+}
+
 /* Keyboard access: 3D hero concept map container */
 .concept-graph-3d:focus-visible {
   outline: 2px solid var(--accent-blue);

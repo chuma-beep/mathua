@@ -78,6 +78,16 @@ describe('ConceptGraphFlow', () => {
     // Match the aria-label directly instead.
     const node = container.querySelector('.concept-node[aria-label*="40% toward mastery"]')
     expect(node).not.toBeNull()
+    expect(node!.querySelector('.node-progress-tip')!.textContent).toBe('40% toward mastery')
+  })
+
+  it('shows a not-started tooltip on nodes without progress', () => {
+    const { container } = render(
+      <ConceptGraphFlow concepts={concepts} conceptProgress={{ count: 0.4 }} />
+    )
+    const node = container.querySelector('.concept-node[aria-label*="Addition"]')
+    expect(node).not.toBeNull()
+    expect(node!.querySelector('.node-progress-tip')!.textContent).toBe('Not started')
   })
 
   it('derives locked statuses that flow into node colors', () => {
