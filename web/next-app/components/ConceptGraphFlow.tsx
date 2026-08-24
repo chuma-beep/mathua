@@ -626,7 +626,8 @@ function GraphInner({
   const [inView, setInView] = useState(true)
   const [tabVisible, setTabVisible] = useState(true)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const { setCenter } = useReactFlow()
+  const hoverRef = useRef(false)
+  const { setCenter, zoomIn, zoomOut, fitView, getViewport, setViewport } = useReactFlow()
 
   const effectiveSelected = selectedId !== undefined ? selectedId : internalSelected
 
@@ -667,6 +668,90 @@ function GraphInner({
       onSelectionChange?.(id)
     },
     [onSelectionChange]
+  )
+
+  const listOpenRef = useRef(listOpen)
+  useEffect(() => {
+    listOpenRef.current = listOpen
+  }, [listOpen])
+
+  // Keyboard viewport controls. Active while focus is inside the graph or the
+  // pointer hovers it, and never while typing in an input.
+  useEffect(() => {
+    function isEditable(t: EventTarget | null): boolean {
+      if (!(t instanceof HTMLElement)) return false
+      return (
+        t.isContentEditable ||
+        t.tagName === 'INPUT' ||
+        t.tagName === 'TEXTAREA' ||
+        t.tagName === 'SELECT'
+      )
+    }
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      if (isEditable(e.target)) return
+      const wrapper = wrapperRef.current
+      const engaged =
+        (wrapper !== null && wrapper.contains(document.activeElement)) || hoverRef.current
+      if (!engaged) return
+
+      switch (e.key) {
+        case '+':
+        case '=':
+          e.preventDefault()
+          zoomIn({ duration: 200 })
+          break
+        case '-':
+        case '_':
+          e.preventDefault()
+          zoomOut({ duration: 200 })
+          break
+        case '0':
+          e.preventDefault()
+          fitView({ padding: 0.15, maxZoom: 1, duration: 300 })
+          break
+        case 'ArrowLeft':
+        case 'ArrowRight':
+        case 'ArrowUp':
+        case 'ArrowDown': {
+          e.preventDefault()
+          const vp = getViewport()
+          const step = 90
+          const next = { ...vp }
+          if (e.key === 'ArrowLeft') next.x += step
+          if (e.key === 'ArrowRight') next.x -= step
+          if (e.key === 'ArrowUp') next.y += step
+          if (e.key === 'ArrowDown') next.y -= step
+          setViewport(next, { duration: 200 })
+          break
+        }
+        case 'Escape':
+          e.preventDefault()
+          if (listOpenRef.current) {
+            setListOpen(false)
+          } else {
+            select(null)
+          }
+          break
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [zoomIn, zoomOut, fitView, getViewport, setViewport, select])
+
+  // React Flow re-emits selection changes whenever this callback's identity
+  // changes (every render, if inline) and once on mount with an empty list —
+  // both would clear the selection and wipe a ?concept= deep link. Keep the
+  // identity stable and treat this stream as select-only: deselection goes
+  // through onPaneClick and the Escape handler instead.
+  const handleRFSelectionChange = useCallback(
+    ({ nodes }: { nodes: ConceptFlowNode[] }) => {
+      const first = nodes[0]?.id
+      if (first) select(first)
+    },
+    [select]
   )
 
   const conceptById = useMemo(() => new Map(concepts.map(c => [c.id, c])), [concepts])
@@ -835,7 +920,15 @@ function GraphInner({
     <div>
       <div
         ref={wrapperRef}
+        data-testid="graph-wrapper"
         className={!ambientActive && ambientOn && !isMobile ? 'graph-flow-paused' : undefined}
+        onMouseEnter={() => {
+          hoverRef.current = true
+        }}
+        onMouseLeave={() => {
+          hoverRef.current = false
+        }}
+        aria-keyshortcuts="plus minus 0 ArrowLeft ArrowRight ArrowUp ArrowDown Escape"
         style={{
           position: 'relative',
           height: isMobile ? 320 : 520,
@@ -852,7 +945,7 @@ function GraphInner({
           edgeTypes={edgeTypes}
           onNodeClick={(_, node) => select(node.id)}
           onPaneClick={handlePaneClick}
-          onSelectionChange={({ nodes }) => select(nodes[0]?.id ?? null)}
+          onSelectionChange={handleRFSelectionChange}
           defaultEdgeOptions={{ type: 'flowedge' }}
           fitView
           fitViewOptions={{ padding: 0.15, maxZoom: 1 }}
@@ -903,6 +996,22 @@ function GraphInner({
         )}
         {!isMobile && <AmbientToggle enabled={ambientOn} onToggle={toggleAmbient} />}
       </div>
+
+      {!isMobile && (
+        <div
+          style={{
+            marginTop: 4,
+            textAlign: 'right',
+            fontSize: 10,
+            letterSpacing: '0.05em',
+            color: 'var(--text-muted)',
+            fontFamily: "'IBM Plex Mono', monospace",
+            userSelect: 'none' as const,
+          }}
+        >
+          + − zoom · 0 fit · ← → ↑ ↓ pan · Esc clear
+        </div>
+      )}
 
       {selected && (
         <div

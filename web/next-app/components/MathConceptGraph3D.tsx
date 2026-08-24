@@ -100,6 +100,7 @@ interface GraphSceneProps {
   activeId: string
   onSelect: (id: string) => void
   theme: 'dark' | 'light'
+  controlsRef: React.MutableRefObject<any>
 }
 
 const STATUS_COLORS_DARK: Record<string, string> = {
@@ -336,15 +337,14 @@ function Particles({ theme, count = 800 }: { theme: 'dark' | 'light'; count?: nu
   )
 }
 
-function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean }) {
+function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused, controlsRef }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null)
-  const controlsRef = useRef<any>(null)
 
   useEffect(() => {
     if (controlsRef.current) {
       controlsRef.current.autoRotate = hovered === null && !rotatePaused
     }
-  }, [hovered, rotatePaused])
+  }, [hovered, rotatePaused, controlsRef])
 
   return (
     <>
@@ -514,6 +514,7 @@ export default function MathConceptGraph3D({
 
   const [activeId, setActiveId] = useState(() => nodes[0]?.id ?? '')
   const [rotatePaused, setRotatePaused] = useState(false)
+  const controlsRef = useRef<any>(null)
 
   useEffect(() => {
     if (nodes.length > 0 && !nodes.find(n => n.id === activeId)) {
@@ -556,13 +557,27 @@ export default function MathConceptGraph3D({
         next = 0
       } else if (e.key === 'End') {
         next = orderedIds.length - 1
+      } else if (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '_') {
+        e.preventDefault()
+        const controls = controlsRef.current
+        const camera = controls?.object as THREE.PerspectiveCamera | undefined
+        if (!camera) return
+        const dist = camera.position.length()
+        const zoomInKey = e.key === '+' || e.key === '='
+        const clamped = THREE.MathUtils.clamp(
+          zoomInKey ? dist * 0.85 : dist * 1.18,
+          controls.minDistance ?? 12,
+          controls.maxDistance ?? 45
+        )
+        camera.position.multiplyScalar(clamped / dist)
+        controls.update?.()
       }
       if (next !== null && orderedIds[next] !== activeId) {
         e.preventDefault()
         handleSelect(orderedIds[next])
       }
     },
-    [orderedIds, activeId, handleSelect]
+    [orderedIds, activeId, handleSelect, controlsRef]
   )
 
   return (
@@ -571,7 +586,7 @@ export default function MathConceptGraph3D({
         className="concept-graph-3d"
         tabIndex={0}
         role="application"
-        aria-label="Concept map. Use the left and right arrow keys to browse concepts; press Home or End to jump to the first or last concept."
+        aria-label="Concept map. Use the left and right arrow keys to browse concepts, plus and minus to zoom, and Home or End to jump to the first or last concept."
         onKeyDown={handleGraphKeyDown}
         onFocus={() => setRotatePaused(true)}
         onBlur={() => setRotatePaused(false)}
@@ -586,7 +601,8 @@ export default function MathConceptGraph3D({
       >
         <span className="sr-only">
           Interactive three-dimensional concept map. Arrow keys move between
-          concepts; details of the selected concept appear below the map.
+          concepts, plus and minus zoom, and details of the selected concept
+          appear below the map.
         </span>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
@@ -602,6 +618,7 @@ export default function MathConceptGraph3D({
             theme={theme}
             isMobile={isMobile}
             rotatePaused={rotatePaused}
+            controlsRef={controlsRef}
           />
         </Canvas>
       </div>
