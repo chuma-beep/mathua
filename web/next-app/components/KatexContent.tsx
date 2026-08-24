@@ -6,7 +6,7 @@ import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import 'katex/dist/katex.min.css'
-import remarkMath from 'remark-math'
+import { lessonMacros, prepareLessonMath } from '../lib/lessonMath'
 
 function headingId(text: string): string {
   return text
@@ -28,161 +28,7 @@ function extractText(children: ReactNode): string {
 }
 
 export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
-  let content = children
-
-  if (typeof window !== 'undefined') {
-    console.debug('[KC] raw:', JSON.stringify(children.slice(0, 200)))
-  }
-
-  // Decode common HTML entities before any LaTeX processing
-  content = content
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-
-  // Convert ORCCA-style \amp alignment markers to proper & for LaTeX.
-  // The content uses \amp=, \amp+, \amp& etc. (from PreTeXt XML conversion) which
-  // KaTeX doesn't recognize — it needs &=, +, & etc. inside aligned/array environments.
-  content = content.replace(/\\amp/g, '&')
-
-  // Repair common LaTeX brace issues in Wikipedia-sourced content.
-  // Patterns like \frac{...{ or \sqrt{...{ are missing a closing } before {.
-  // This runs before delimiter conversion so it catches all LaTeX blocks.
-  function fixLatexBraces(s: string): string {
-    // Iterate until stable (each pass may fix one level of nesting)
-    let prev = ''
-    while (prev !== s) {
-      prev = s
-      // \frac{numerator}{denominator{  →  insert } before {
-      s = s.replace(
-        /(\\frac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
-        '$1{$2}{'
-      )
-      // \tfrac{numerator}{denominator{
-      s = s.replace(
-        /(\\tfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
-        '$1{$2}{'
-      )
-      // \cfrac{numerator}{denominator{
-      s = s.replace(
-        /(\\cfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g,
-        '$1{$2}{'
-      )
-      // \sqrt{...{
-      s = s.replace(
-        /(\\sqrt\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-      // \text{...{
-      s = s.replace(
-        /(\\text\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-      // \mathrm{...{
-      s = s.replace(
-        /(\\mathrm\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-      // \operatorname{...{
-      s = s.replace(
-        /(\\operatorname\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-      // \mathbf{...{
-      s = s.replace(
-        /(\\mathbf\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-      // \mbox{...{
-      s = s.replace(
-        /(\\mbox\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g,
-        '$1}{'
-      )
-    }
-    return s
-  }
-  content = fixLatexBraces(content)
-
-  // Convert lesson LaTeX delimiters to $...$ / $$...$$
-  // remark-math expects $...$ for inline and $$...$$ on their own lines for display.
-  // Two styles: Algebrica (double backslash: \\(...\\) / \\[...\\]) and Wikipedia (single backslash: \(...\) / \[...\]).
-
-  // --- Inline math ---
-  // Algebrica style: \\(...\\) — unescape \\ back to \ inside
-  content = content.replace(/\\\\\(([\s\S]*?)\\\\\)/g, (_, inner) => {
-    const clean = inner.replace(/\\\\/g, '\\')
-    if (clean.includes('\n')) return '\n$$\n' + clean.trim() + '\n$$\n'
-    return '$' + clean + '$'
-  })
-  // Wikipedia style: \(...\) — backslashes inside are already single
-  content = content.replace(/\\\(([\s\S]*?)\\\)/g, (_, inner) => {
-    if (inner.includes('\n')) return '\n$$\n' + inner.trim() + '\n$$\n'
-    return '$' + inner + '$'
-  })
-
-  // --- Display math ---
-  // Use block $$...$$ (own lines) when multi-line,
-  // and inline $\displaystyle ...$ when single-line (e.g. inside table cells).
-  // Algebrica style: \\[...\\]
-  content = content.replace(/\\\\\[([\s\S]*?)\\\\\]/g, (_, inner) => {
-    const clean = inner.replace(/\\\\/g, '\\')
-    if (inner.includes('\n')) {
-      return '\n$$\n' + clean.trim() + '\n$$\n'
-    }
-    return '$\\displaystyle ' + clean.trim() + '$'
-  })
-  // Wikipedia style: \[...\]
-  content = content.replace(/\\\[([\s\S]*?)\\\]/g, (_, inner) => {
-    if (inner.includes('\n')) {
-      return '\n$$\n' + inner.trim() + '\n$$\n'
-    }
-    return '$\\displaystyle ' + inner.trim() + '$'
-  })
-
-  // ORCCA content wraps multi-line display math (aligned, array) in single $...$.
-  // remark-math only allows single-line math inside $...$ (inline),
-  // so convert multi-line $...$ to $$...$$ (display math) before passing to ReactMarkdown.
-  content = content.replace(/^\s*\$([\s\S]*?\n[\s\S]*?)\$\s*$/gm, '$$\n$1\n$$')
-
-  // --- Convert $...$ and $$...$$ to HTML spans with math-* CSS classes ---
-  // This bypasses the remark-math parser entirely, avoiding a stateful
-  // tokenizer bug that drops subsequent $...$ expressions in long content.
-  // rehype-katex inherently handles elements with math-inline / math-display classes.
-
-  function escapeHtml(s: string): string {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  }
-
-  // Display math: $$...$$
-  content = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
-    return '<span class="math-display">' + escapeHtml(inner.trim()) + '</span>'
-  })
-
-  // Inline math: $...$
-  content = content.replace(/\$([^$]+?)\$/g, (_, inner: string) => {
-    const trimmed = inner.trim()
-    if (trimmed.includes('\n')) {
-      return '<span class="math-display">' + escapeHtml(trimmed) + '</span>'
-    }
-    return '<span class="math-inline">' + escapeHtml(trimmed) + '</span>'
-  })
-
-  if (typeof window !== 'undefined') {
-    const hasDollar = content.includes('$')
-    const hasDisplay = content.includes('$$')
-    const rT = typeof remarkMath
-    const gT = typeof remarkGfm
-    const cT = typeof rehypeKatex
-    let remarkTest = 'N/A'
-    try {
-      remarkTest = remarkMath.name || 'no-name'
-    } catch (e: any) {
-      remarkTest = 'ERR:' + e.message
-    }
-    console.debug('[KC] after:', JSON.stringify(content.slice(0, 300)), { hasDollar, hasDisplay, typeofRemark: rT, typeofGfm: gT, typeofRehype: cT, remarkName: remarkTest })
-  }
+  const content = prepareLessonMath(children)
 
   return (
     <div className={`mathua-lesson katex-content text-sm leading-relaxed ${className}`}>
@@ -192,22 +38,7 @@ export default function KatexContent({ children, className = '' }: { children: s
           throwOnError: false,
           trust: false,
           errorColor: '#cc0000',
-          macros: {
-            // xfrac-style \sfrac → \frac
-            "\\sfrac": "\\frac{#1}{#2}",
-            // PreTeXt/ORCCA custom commands used throughout lesson content
-            "\\substitute": "{#1}",
-            "\\highlight": "\\text{#1}",
-            "\\secondhighlight": "\\text{#1}",
-            "\\addright": "{#1}",
-            "\\subtractright": "{#1}",
-            "\\divideunder": "\\frac{#1}{#2}",
-            "\\negate": "{#1}",
-            "\\multiplyleft": "{#1}",
-            "\\wonder": "\\stackrel{?}{#1}",
-            "\\confirm": "\\stackrel{\\checkmark}{#1}",
-            "\\reject": "\\stackrel{\\times}{#1}",
-          },
+          macros: lessonMacros,
         }]]}
         components={{
           a: ({ children }) => <>{children}</>,
