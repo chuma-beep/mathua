@@ -481,7 +481,7 @@ function ListView({
         zIndex: 6,
         display: 'flex',
         flexDirection: 'column',
-        background: 'var(--graph-surface)',
+        background: 'var(--surface-elevated)',
         border: '0.5px solid var(--border)',
         borderRadius: 4,
         overflow: 'hidden',
