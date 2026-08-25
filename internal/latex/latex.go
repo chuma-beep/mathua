@@ -185,6 +185,10 @@ func mathNorm(s string) string {
 	s = protectRowbreaks(s)
 	s = collapseDoubled(s)
 	s = repairBraces(s)
+	// Scrape artifact: \( and \) inside math content are literal parentheses
+	// (KaTeX rejects them as delimiters-in-math).
+	s = strings.ReplaceAll(s, `\(`, "(")
+	s = strings.ReplaceAll(s, `\)`, ")")
 	// Mangled set-builder highlights: \highlight{{}\mid{}} is a corrupted
 	// \highlight{\{} x \mid ... \highlight{\}} — render the divider.
 	s = strings.ReplaceAll(s, `\highlight{{}\mid{}}`, `\mid`)
@@ -240,6 +244,10 @@ func canonicalizeOnce(s string, a Adapter) string {
 	}
 
 	var b strings.Builder
+	// lastRawDollar tracks whether the emitted output ends with an unescaped
+	// $ (a math region's closer). Two adjacent math regions then fuse their
+	// delimiters into $$ — a display opener — so a separator is inserted.
+	lastRawDollar := false
 	for _, r := range latexnorm.Scan(s) {
 		// Mismatched-delimiter defense: a math region whose content contains
 		// an unescaped $ has a broken closer (e.g. $$... opened, $ closed),
@@ -248,12 +256,25 @@ func canonicalizeOnce(s string, a Adapter) string {
 		// literal dollars beat swallowed headings and red render errors.
 		if r.Kind != latexnorm.Prose && rawDollarRe.MatchString(r.Content) {
 			b.WriteString(escapeDollars(r.Opener + r.Content + r.Closer))
+			lastRawDollar = false
 			continue
+		}
+		// Every non-Prose, non-Env math region is emitted with a leading and
+		// trailing $; two adjacent ones would fuse their delimiters into $$.
+		startsWithDollar := r.Kind != latexnorm.Env && r.Kind != latexnorm.Prose
+		if lastRawDollar && startsWithDollar {
+			b.WriteByte(' ')
 		}
 		switch r.Kind {
 		case latexnorm.Prose:
 			// Dollars in prose are prices or punctuation, never delimiters.
-			b.WriteString(escapeDollars(r.Content))
+			// Escaped dollars end in $ but are inert (the frontend honors
+			// the escape), so they do not set lastRawDollar. Stray \( and \)
+			// here are unmatched scrape leftovers — literal parens.
+			prose := escapeDollars(r.Content)
+			prose = strings.ReplaceAll(prose, `\(`, "(")
+			prose = strings.ReplaceAll(prose, `\)`, ")")
+			b.WriteString(prose)
 		case latexnorm.Inline:
 			// A scanner-validated pair can still be prose: word-problem
 			// prices ($5, saves $10) pair on one line but carry no math
@@ -286,6 +307,7 @@ func canonicalizeOnce(s string, a Adapter) string {
 		case latexnorm.Env:
 			b.WriteString(envOutput(r))
 		}
+		lastRawDollar = r.Kind != latexnorm.Env && r.Kind != latexnorm.Prose
 	}
 	return restoreRowbreaks(b.String())
 }
