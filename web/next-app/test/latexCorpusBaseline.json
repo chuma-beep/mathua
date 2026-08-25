@@ -5,148 +5,23 @@
   "algebrica/complex-numbers/complex-numbers.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/derivatives/derivatives.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/derivatives/difference-quotient.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/derivatives/differential-of-a-function.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
   "algebrica/derivatives/maximum-minimum-and-inflection-points.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/derivatives/the-derivative-of-a-composite-function.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/differential-calculus-theorems/hopital-rule.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/differential-calculus-theorems/lagrange-theorem.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/differential-calculus-theorems/rolles-theorem.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/equations/binomial-equations.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/equations/exponential-equations.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/equations/incomplete-quadratic-equations.md": [
-    "KaTeX parse error: Extra }"
-  ],
   "algebrica/equations/irrational-equations.md": [
-    "KaTeX parse error: Expected 'EOF', got '#'",
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
+    "KaTeX parse error: Expected 'EOF', got '#'"
   ],
   "algebrica/equations/quadratic-equations.md": [
-    "KaTeX parse error: Expected 'EOF', got '#'",
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/equations/trigonometric-equations.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/equations/trinomial-equations.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/functions/absolute-value-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\.' at end of input: …ow -1 < x < 1\\."
-  ],
-  "algebrica/functions/analyzing-the-graphs-of-functions.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/functions/cosecant-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\.'"
-  ],
-  "algebrica/functions/cotangent-function.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/functions/determining-the-domain-of-a-function.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Extra }"
+    "KaTeX parse error: Expected 'EOF', got '#'"
   ],
   "algebrica/functions/functions.md": [
     "KaTeX parse error: Unexpected character: '\\'"
   ],
-  "algebrica/functions/inverse-function.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/functions/logarithmic-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\.'"
-  ],
-  "algebrica/functions/rational-functions.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/functions/secant-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\.'"
-  ],
-  "algebrica/functions/sigmoid-function.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
   "algebrica/functions/sign-function.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/functions/sine-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\.'"
-  ],
-  "algebrica/functions/tangent-function.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/inequalities/irrational-inequalities.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/inequalities/logarithmic-inequalities.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/integrals/arc-length-of-a-curve.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/integrals/improper-integrals.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Undefined control sequence: \\+",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/integrals/indefinite-integrals.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/integrals/integral-of-rational-functions.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Undefined control sequence: \\-"
-  ],
-  "algebrica/integrals/integral-of-the-exponential-function.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/integrals/integration-by-substitution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/integrals/the-weierstrass-substitution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/integrals/trigonometric-substitution-for-integrals.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
   "algebrica/kinematics/velocity.md": [
     "KaTeX parse error: \\hline valid only within array environment"
-  ],
-  "algebrica/limits/algebra-of-limits.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/limits/indeterminate-forms.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/limits/limits.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/linear-systems/solving-linear-systems-using-gaussian-elimination.md": [
-    "KaTeX parse error: Expected group after '^'"
   ],
   "algebrica/lines-planes-conic-sections/ellipse.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
@@ -160,16 +35,8 @@
   "algebrica/lines-planes-conic-sections/parabola.md": [
     "KaTeX parse error: Unexpected character: '\\'"
   ],
-  "algebrica/lines-planes-conic-sections/polar-coordinates.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/polynomials/partial-fraction-decomposition.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Undefined control sequence: \\+"
-  ],
   "algebrica/polynomials/polynomial-division.md": [
-    "KaTeX parse error: Expected 'EOF', got '#'",
-    "KaTeX parse error: Undefined control sequence: \\+"
+    "KaTeX parse error: Expected 'EOF', got '#'"
   ],
   "algebrica/polynomials/polynomials.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
@@ -177,365 +44,58 @@
   "algebrica/polynomials/trinomials.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/powers-radicals-logarithms/logarithms.md": [
-    "KaTeX parse error: Expected 'EOF', got '}'"
-  ],
-  "algebrica/powers-radicals-logarithms/powers.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/powers-radicals-logarithms/radicals.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
   "algebrica/probability-and-statistics/arithmetic-mean.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/probability-and-statistics/beta-distribution.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/probability-and-statistics/binomial-distribution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/probability-and-statistics/chi-square-distribution.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/probability-and-statistics/confidence-intervals.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
   "algebrica/probability-and-statistics/exponential-distribution.md": [
-    "KaTeX parse error: Expected group after '^'",
     "KaTeX parse error: Undefined control sequence: \\["
-  ],
-  "algebrica/probability-and-statistics/gamma-distribution.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/probability-and-statistics/geometric-distribution.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Extra }"
   ],
   "algebrica/probability-and-statistics/geometric-mean.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/probability-and-statistics/harmonic-mean.md": [
-    "KaTeX parse error: Expected group after '_'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/probability-and-statistics/hypergeometric-distribution.md": [
-    "KaTeX parse error: Extra }",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/probability-and-statistics/introduction-to-the-mean.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
   "algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
-  ],
-  "algebrica/probability-and-statistics/normal-distribution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/probability-and-statistics/poisson-distribution.md": [
-    "KaTeX parse error: Undefined control sequence: \\+"
-  ],
-  "algebrica/probability-and-statistics/root-mean-square.md": [
-    "KaTeX parse error: Extra }"
   ],
   "algebrica/probability-and-statistics/sampling-distributions.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/probability-and-statistics/student-t-distribution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/probability-and-statistics/uniform-distribution.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Undefined control sequence: \\-"
-  ],
-  "algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/probability-and-statistics/variance.md": [
-    "KaTeX parse error: Extra }"
-  ],
   "algebrica/sequences/cauchy-sequence.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
-  ],
-  "algebrica/sequences/geometric-sequence.md": [
-    "KaTeX parse error: Expected group after '_'"
-  ],
-  "algebrica/series/fourier-series.md": [
-    "KaTeX parse error: Undefined control sequence: \\+"
   ],
   "algebrica/series/geometric-series.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
   ],
-  "algebrica/series/harmonic-series.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/series/root-test-for-series-convergence.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/sets-and-numbers/factorial.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
   "algebrica/sets-and-numbers/real-numbers.md": [
     "KaTeX parse error: Expected 'EOF', got '#'"
-  ],
-  "algebrica/trigonometry/arctangent-and-arccotangent.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'"
-  ],
-  "algebrica/trigonometry/hyperbolic-sine-and-cosine.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/trigonometry/pythagorean-theorem.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/trigonometry/secant-and-cosecant.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "algebrica/trigonometry/sine-and-cosine.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/trigonometry/tangent-and-cotangent.md": [
-    "KaTeX parse error: Expected group after '^'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/trigonometry/trigonometric-identities.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "algebrica/various/cosine-similarity.md": [
-    "KaTeX parse error: Expected group after '_'",
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "algebrica/vectors-and-matrices/linear-combinations.md": [
-    "KaTeX parse error: Undefined control sequence: \\+"
-  ],
-  "algebrica/vectors-and-matrices/vectors.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/alg.func.evaluate.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "teaching/alg.func.notation.md": [
-    "KaTeX parse error: Extra }"
   ],
   "teaching/alg.ineq.compound.md": [
     "KaTeX parse error: Expected 'EOF', got '#'",
     "KaTeX parse error: Expected 'EOF', got '&'"
   ],
-  "teaching/alg.ineq.two_var.md": [
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
-  "teaching/alg.linear.slope.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/alg.linear.standard_form.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/alg.seq.sum_arith.md": [
-    "KaTeX parse error: Extra }"
-  ],
-  "teaching/alg.systems.word.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/arith.abs_value.md": [
-    "KaTeX parse error: Extra }",
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
   "teaching/arith.factor.lcm.md": [
     "KaTeX parse error: Expected 'EOF', got '#'",
     "KaTeX parse error: Expected 'EOF', got '&'",
-    "KaTeX parse error: No such environment: tikzpicture",
     "KaTeX parse error: Undefined control sequence: \\geq",
     "KaTeX parse error: Undefined control sequence: \\mid"
-  ],
-  "teaching/arith.order_ops.basic.md": [
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
-  "teaching/arith.order_ops.full.md": [
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
-  "teaching/arith.order_ops.nested.md": [
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
-  "teaching/arith.sqrt.perfect.md": [
-    "KaTeX parse error: Extra }",
-    "KaTeX parse error: Undefined control sequence: \\abs"
-  ],
-  "teaching/dec.add.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
   ],
   "teaching/dec.compare.md": [
     "KaTeX parse error: Expected 'EOF', got '#'",
     "KaTeX parse error: Expected 'EOF', got '&'",
-    "KaTeX parse error: No such environment: tikzpicture",
     "KaTeX parse error: Undefined control sequence: \\geq",
     "KaTeX parse error: Undefined control sequence: \\mid"
-  ],
-  "teaching/dec.div.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/dec.from_frac.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/dec.mult.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
   ],
   "teaching/dec.round.md": [
     "KaTeX parse error: Expected 'EOF', got '#'",
     "KaTeX parse error: Expected 'EOF', got '&'",
-    "KaTeX parse error: No such environment: tikzpicture",
     "KaTeX parse error: Undefined control sequence: \\geq",
     "KaTeX parse error: Undefined control sequence: \\mid"
   ],
-  "teaching/dec.sub.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/dec.to_frac.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/discrete.logic.connectives.md": [
-    "KaTeX parse error: Undefined control sequence: \\imp"
-  ],
-  "teaching/discrete.logic.quantifiers.md": [
-    "KaTeX parse error: Undefined control sequence: \\imp"
-  ],
-  "teaching/discrete.logic.truth_tables.md": [
-    "KaTeX parse error: Undefined control sequence: \\imp"
-  ],
   "teaching/discrete.sets.venn.md": [
     "KaTeX parse error: Undefined control sequence: \\card",
-    "KaTeX parse error: Undefined control sequence: \\pow",
-    "KaTeX parse error: Undefined control sequence: \\st"
-  ],
-  "teaching/frac.add.diff.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.add.same.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.add.word.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.benchmark.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.compare.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.concept.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.div.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.div.whole.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.equivalent.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mixed.add.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mixed.convert.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mixed.mult.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mixed.sub.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mult.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.mult.whole.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.on_number_line.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.parts.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.simplify.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.sub.diff.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.sub.same.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/frac.to_decimal.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.circle.area.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.circle.circumference.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.circle.parts.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.quad.area.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.quad.perimeter.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.quad.types.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.solid.surface_area.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.solid.volume_rect.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/geo.triangle.area.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
+    "KaTeX parse error: Undefined control sequence: \\pow"
   ],
   "teaching/nt.adv.diophantine.md": [
     "KaTeX parse error: Undefined control sequence: \\mbox"
-  ],
-  "teaching/ode.homogeneous.md": [
-    "KaTeX parse error: Expected group as argument to '\\sqrt'",
-    "KaTeX parse error: Extra }"
-  ],
-  "teaching/ode.laplace.md": [
-    "KaTeX parse error: Expected group after '^'"
-  ],
-  "teaching/pct.concept.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.discount.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.find_rate.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.from_dec.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.increase.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.of_number.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.tax_tip.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
-  ],
-  "teaching/pct.to_dec.md": [
-    "KaTeX parse error: Undefined control sequence: \\pinover"
   ],
   "teaching/prealg.eq.one_step_add.md": [
     "KaTeX parse error: Undefined control sequence: \\multiplyright"
@@ -543,50 +103,27 @@
   "teaching/prealg.eq.one_step_mult.md": [
     "KaTeX parse error: Undefined control sequence: \\multiplyright"
   ],
-  "teaching/prealg.eq.word.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
   "teaching/prealg.expr.like_terms.md": [
     "KaTeX parse error: Can't use function '\\frac' in text mode",
     "KaTeX parse error: Undefined control sequence: \\apple",
     "KaTeX parse error: Undefined control sequence: \\dog"
   ],
-  "teaching/ratio.concept.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/ratio.proportion.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
   "teaching/ratio.rate.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'",
     "KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: …\"math-inline\">y"
-  ],
-  "teaching/ratio.scale.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
-  ],
-  "teaching/ratio.simplify.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'"
   ],
   "teaching/stat.data.bar_graph.md": [
     "KaTeX parse error: Undefined control sequence: \\strut"
   ],
   "teaching/stat.data.line_plot.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'",
     "KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: …\"math-inline\">y"
   ],
   "teaching/stat.data.mode.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'",
     "KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: …\"math-inline\">y"
   ],
   "teaching/stat.data.range.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'",
     "KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: …\"math-inline\">y"
   ],
   "teaching/stat.data.read_table.md": [
-    "KaTeX parse error: Unexpected end of input in a macro argument, expected '}'",
     "KaTeX parse error: Unexpected end of input in a macro argument, expected '}' at end of input: …\"math-inline\">y"
-  ],
-  "teaching/topo.metric.md": [
-    "KaTeX parse error: Expected group after '_'"
   ]
 }

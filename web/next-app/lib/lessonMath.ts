@@ -2,7 +2,8 @@
 // before handing content to ReactMarkdown/rehype-katex. Extracted so the
 // corpus gate (test/latexCorpus.test.ts) exercises the identical code path.
 
-// rehype-katex macros for ORCCA/PreTeXt custom commands used in lesson content.
+// rehype-katex macros for ORCCA/PreTeXt custom commands used in lesson content,
+// plus authoring shortcuts and blackboard letters KaTeX does not define.
 export const lessonMacros: Record<string, string> = {
   // xfrac-style \sfrac → \frac
   '\\sfrac': '\\frac{#1}{#2}',
@@ -17,42 +18,29 @@ export const lessonMacros: Record<string, string> = {
   '\\wonder': '\\stackrel{?}{#1}',
   '\\confirm': '\\stackrel{\\checkmark}{#1}',
   '\\reject': '\\stackrel{\\times}{#1}',
+  // authoring shortcuts
+  '\\imp': '\\implies',
+  '\\st': '\\;\\vert\\;',
+  '\\abs': '\\left|#1\\right|',
+  '\\pinover': '\\overset{#2}{#1}',
+  // blackboard letters
+  '\\N': '\\mathbb{N}',
+  '\\Z': '\\mathbb{Z}',
+  '\\Q': '\\mathbb{Q}',
+  '\\R': '\\mathbb{R}',
+  '\\C': '\\mathbb{C}',
+  // discretionary hyphen (scrape artifact)
+  '\\-': '\\text{-}',
 }
 
 // Placeholder standing in for an escaped literal \$ so the delimiter regexes
 // below never mistake it for a math boundary. Restored at the end.
 const ESC_DOLLAR = '\u0000MU-ESC-DOLLAR\u0000'
 
-function fixLatexBraces(s: string): string {
-  // Iterate until stable (each pass may fix one level of nesting)
-  let prev = ''
-  while (prev !== s) {
-    prev = s
-    const patterns: [RegExp, string][] = [
-      // \frac{numerator}{denominator{  →  insert } before {
-      [/(\\frac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g, '$1{$2}{'],
-      [/(\\tfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g, '$1{$2}{'],
-      [/(\\cfrac\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\})\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\{)/g, '$1{$2}{'],
-      [/(\\sqrt\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-      [/(\\text\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-      [/(\\mathrm\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-      [/(\\operatorname\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-      [/(\\mathbf\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-      [/(\\mbox\{[^{}]*(?:\{[^{}]*\}[^{}]*)*)\{(?!\})/g, '$1}{'],
-    ]
-    for (const [re, replacement] of patterns) {
-      s = s.replace(re, replacement)
-    }
-  }
-  return s
-}
-
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
-// prepareLessonMath converts lesson markdown into HTML with math spans
-// (<span class="math-inline|math-display">…</span>) that rehype-katex renders.
 export function prepareLessonMath(input: string): string {
   let content = input
 
@@ -66,8 +54,6 @@ export function prepareLessonMath(input: string): string {
 
   // Convert ORCCA-style \amp alignment markers to proper & for LaTeX.
   content = content.replace(/\\amp/g, '&')
-
-  content = fixLatexBraces(content)
 
   // Escaped literal dollars must never act as math delimiters.
   content = content.replace(/\\\$/g, ESC_DOLLAR)

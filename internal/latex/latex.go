@@ -105,6 +105,32 @@ func restoreRowbreaks(s string) string {
 // separators, optional ÷/× chains, trailing punctuation — and nothing else.
 var pureCurrencyRe = regexp.MustCompile(`^[\d.,]+([ \t]?[÷×][ \t]?\d[\d.,]*)*[.,;:!?]?$`)
 
+// Brace-corruption repairs for scrape artifacts where an argument's opening
+// brace was written as a closing one: \frac}{a}}{b}}, \sqrt{}{x}},
+// e^}{x^2}, \mathrm}{d}. Each pass handles one shape; run via
+// repairBraces until stable.
+var (
+	fracCorruptRe   = regexp.MustCompile(`\\([dt]?frac)\}\{([^{}]*)\}\{([^{}]*)\}\}`)
+	sqrtCorruptRe   = regexp.MustCompile(`\\sqrt\{\}\{([^{}]*)\}\}`)
+	scriptCorruptRe = regexp.MustCompile(`([_^])\}\{`)
+	argCorruptRe    = regexp.MustCompile(`\\(mathrm|text|mbox|mathbf|mathit|mathsf|mathtt|textrm|textbf|textit|textup|textnormal|operatorname)\}\{`)
+	punctEscapeRe   = regexp.MustCompile(`\\([+.=])`)
+)
+
+func repairBraces(s string) string {
+	for i := 0; i < 5; i++ {
+		prev := s
+		s = fracCorruptRe.ReplaceAllString(s, `\$1{$2}{$3}`)
+		s = sqrtCorruptRe.ReplaceAllString(s, `\sqrt{$1}`)
+		s = scriptCorruptRe.ReplaceAllString(s, `$1{`)
+		s = argCorruptRe.ReplaceAllString(s, `\$1{`)
+		if s == prev {
+			break
+		}
+	}
+	return s
+}
+
 // rawDollarRe finds a dollar not already escaped (no backslash before it).
 var rawDollarRe = regexp.MustCompile(`(^|[^\\])\$`)
 
@@ -136,15 +162,21 @@ func preprocessGeneric(s string) string {
 	return s
 }
 
+var tikzRe = regexp.MustCompile(`(?s)\\begin\{tikzpicture\}.*?\\end\{tikzpicture\}`)
+
 // mathNorm normalizes the content of a math region. Prose rules never apply
 // here; this is the only place dialect rewrites are valid. align is
 // rewritten to aligned because KaTeX renders align only at the top of a
-// display block, while the corpus nests it inside $$...$$.
+// display block, while the corpus nests it inside $$...$$. TikZ diagrams
+// cannot render in KaTeX and are stripped.
 func mathNorm(s string) string {
 	s = protectRowbreaks(s)
 	s = collapseDoubled(s)
+	s = repairBraces(s)
 	s = strings.ReplaceAll(s, `\begin{align}`, `\begin{aligned}`)
 	s = strings.ReplaceAll(s, `\end{align}`, `\end{aligned}`)
+	s = tikzRe.ReplaceAllString(s, "")
+	s = punctEscapeRe.ReplaceAllString(s, "$1")
 	return restoreRowbreaks(s)
 }
 
@@ -230,13 +262,16 @@ func canonicalizeOnce(s string, a Adapter) string {
 // envOutput rewrites environment regions. Equation environments become
 // display math; align environments become aligned blocks (the corpus's align
 // envs conventionally sit inside display delimiters, so no $$ is added);
-// everything else passes through with normalized content.
+// tikzpicture diagrams cannot render in KaTeX and are stripped; everything
+// else passes through with normalized content.
 func envOutput(r latexnorm.Region) string {
 	name := r.Opener
 	name = strings.TrimPrefix(name, `\begin{`)
 	name = strings.TrimSuffix(name, `}`)
 	inner := strings.TrimSpace(r.Content)
 	switch name {
+	case "tikzpicture":
+		return ""
 	case "equation", "equation*":
 		return "$$" + mathNorm(inner) + "$$"
 	case "align", "align*":
