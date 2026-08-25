@@ -17,7 +17,6 @@ import { lessonMacros, prepareLessonMath } from '../lib/lessonMath'
 //
 // Sibling gates: internal/latex/corpus_test.go (canonicalization idempotence
 // + validator warnings) runs on the Go side.
-
 const CORPUS_ROOT = path.join(__dirname, '../../../data/lessons')
 const REPO_ROOT = path.join(CORPUS_ROOT, '../..')
 const BASELINE_PATH = path.join(__dirname, 'latexCorpusBaseline.json')
@@ -104,10 +103,16 @@ describe('lesson corpus renders through KaTeX', () => {
       } else {
         throw new Error('latexCorpusBaseline.json missing; run with UPDATE_BASELINE=1 first')
       }
+      // Structural-gate entries share this file; they are not KaTeX errors.
+      const katexBaseline: Record<string, string[]> = {}
+      for (const [rel, errs] of Object.entries(baseline)) {
+        const kept = errs.filter((e) => !e.startsWith('struct: '))
+        if (kept.length > 0) katexBaseline[rel] = kept
+      }
 
       const newErrors: string[] = []
       for (const rel of Object.keys(fresh).sort()) {
-        const allowed = new Set(baseline[rel] ?? [])
+        const allowed = new Set(katexBaseline[rel] ?? [])
         if (allowed.size === 0) {
           for (const k of Array.from(fresh[rel])) newErrors.push(`${rel}: ${k} (file was clean)`)
         } else {
@@ -116,7 +121,7 @@ describe('lesson corpus renders through KaTeX', () => {
           }
         }
       }
-      for (const rel of Object.keys(baseline).sort()) {
+      for (const rel of Object.keys(katexBaseline).sort()) {
         if (!fresh[rel]) {
           throw new Error(
             `${rel} no longer has KaTeX errors — remove it from latexCorpusBaseline.json (UPDATE_BASELINE=1)`
@@ -128,6 +133,73 @@ describe('lesson corpus renders through KaTeX', () => {
         throw new Error(
           `${errorCount} broken spans; ${newErrors.length} NEW error kinds:\n` + newErrors.slice(0, 20).join('\n')
         )
+      }
+    }
+  )
+
+  it(
+    'keeps raw LaTeX out of prose regions (structural gate)',
+    { timeout: 300_000 },
+    () => {
+      const bodies = canonicalBodies()
+
+      // LaTeX commands that should never survive into rendered prose. Inside
+      // math spans they are fine; between spans they are scrape leaks.
+      const LEAK_RE =
+        /\\amp\b|\\substitute\b|\\divideunder\b|\\begin\s*\{|\\end\s*\{|\\frac\s*\{|\\text\s*\{|\\cdot\b|\\pi\b/
+
+      const violations: Record<string, Set<string>> = {}
+      const add = (rel: string, kind: string) => {
+        let set = violations[rel]
+        if (!set) {
+          set = new Set()
+          violations[rel] = set
+        }
+        set.add(`struct: ${kind}`)
+      }
+
+      for (const rel of Object.keys(bodies)) {
+        const prepared = prepareLessonMath(bodies[rel])
+        const prose = prepared.replace(/<span class="math-(display|inline)">[\s\S]*?<\/span>/g, ' ')
+
+        if (LEAK_RE.test(prose)) add(rel, 'raw latex in prose')
+
+        // An Example heading immediately followed by its Solution marker means
+        // the statement text was lost in ingestion.
+        const lines = bodies[rel].split('\n')
+        for (let i = 0; i < lines.length - 1; i++) {
+          if (/^\*\*Example\*\*\s*$/.test(lines[i]) && /^\*Solution\*\s*$/.test(lines[i + 2] ?? '')) {
+            add(rel, 'empty example statement')
+            break
+          }
+        }
+      }
+
+      if (UPDATE_BASELINE) {
+        const baseline: Record<string, string[]> = JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8'))
+        for (const rel of Object.keys(violations).sort()) {
+          const merged = new Set([...(baseline[rel] ?? []), ...Array.from(violations[rel])])
+          baseline[rel] = Array.from(merged).sort()
+        }
+        fs.writeFileSync(BASELINE_PATH, JSON.stringify(baseline, null, 2) + '\n')
+        console.log(`structural baseline rewritten: ${Object.keys(violations).length} files with violations`)
+        return
+      }
+
+      let baseline: Record<string, string[]> = {}
+      if (fs.existsSync(BASELINE_PATH)) {
+        baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8'))
+      }
+
+      const fresh: string[] = []
+      for (const rel of Object.keys(violations).sort()) {
+        const allowed = new Set(baseline[rel] ?? [])
+        for (const k of Array.from(violations[rel])) {
+          if (!allowed.has(k)) fresh.push(`${rel}: ${k}`)
+        }
+      }
+      if (fresh.length > 0) {
+        throw new Error(`${fresh.length} structural violations:\n` + fresh.slice(0, 20).join('\n'))
       }
     }
   )

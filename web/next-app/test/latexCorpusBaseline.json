@@ -1,1 +1,47 @@
-{}
+{
+  "algebrica/complex-numbers/roots-of-unity.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/equations/binomial-equations.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/equations/logarithmic-equations.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/equations/loss-of-roots.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/equations/rational-equations.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/equations/trinomial-equations.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/functions/analyzing-the-graphs-of-functions.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/linear-systems/cramers-rule.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/probability-and-statistics/bayes-theorem.md": [
+    "struct: raw latex in prose"
+  ],
+  "algebrica/series/root-test-for-series-convergence.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/alg.linear.slope.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/alg.systems.word.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/discrete.logic.quantifiers.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/frac.add.word.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/prealg.eq.word.md": [
+    "struct: raw latex in prose"
+  ]
+}
