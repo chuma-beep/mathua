@@ -115,6 +115,10 @@ var (
 	scriptCorruptRe = regexp.MustCompile(`([_^])\}\{`)
 	argCorruptRe    = regexp.MustCompile(`\\(mathrm|text|mbox|mathbf|mathit|mathsf|mathtt|textrm|textbf|textit|textup|textnormal|operatorname)\}\{`)
 	punctEscapeRe   = regexp.MustCompile(`\\([+.=])`)
+	// Scrape artifacts: a dangling backslash at the end of math content, and
+	// row-break spacing in px (KaTeX only knows pt/em/ex/mm/cm).
+	danglingBackslashRe = regexp.MustCompile(`\\+$`)
+	pxRowbreakRe        = regexp.MustCompile(`(\\{1,2}\[[0-9]+(?:\.[0-9]+)?)px(\])`)
 )
 
 func repairBraces(s string) string {
@@ -128,7 +132,15 @@ func repairBraces(s string) string {
 			break
 		}
 	}
-	return s
+	s = pxRowbreakRe.ReplaceAllString(s, "${1}pt${2}")
+	// Triple-plus backslash runs before a space are over-escaped row breaks:
+	// \\\ → \\ (KaTeX array rows). Loop handles longer runs.
+	for i := 0; i < 3; i++ {
+		s = strings.ReplaceAll(s, `\\\ `, `\\ `)
+	}
+	// A dangling backslash before the region end (optionally with trailing
+	// whitespace) is a scrape artifact; KaTeX rejects a lone '\'.
+	return strings.TrimRight(s, " \\")
 }
 
 // rawDollarRe finds a dollar not already escaped (no backslash before it).
@@ -173,6 +185,9 @@ func mathNorm(s string) string {
 	s = protectRowbreaks(s)
 	s = collapseDoubled(s)
 	s = repairBraces(s)
+	// Mangled set-builder highlights: \highlight{{}\mid{}} is a corrupted
+	// \highlight{\{} x \mid ... \highlight{\}} — render the divider.
+	s = strings.ReplaceAll(s, `\highlight{{}\mid{}}`, `\mid`)
 	s = strings.ReplaceAll(s, `\begin{align}`, `\begin{aligned}`)
 	s = strings.ReplaceAll(s, `\end{align}`, `\end{aligned}`)
 	s = tikzRe.ReplaceAllString(s, "")
@@ -226,6 +241,15 @@ func canonicalizeOnce(s string, a Adapter) string {
 
 	var b strings.Builder
 	for _, r := range latexnorm.Scan(s) {
+		// Mismatched-delimiter defense: a math region whose content contains
+		// an unescaped $ has a broken closer (e.g. $$... opened, $ closed),
+		// so the scanner paired it with a distant delimiter and the region
+		// swallows prose. Degrade the whole region to escaped text — honest
+		// literal dollars beat swallowed headings and red render errors.
+		if r.Kind != latexnorm.Prose && rawDollarRe.MatchString(r.Content) {
+			b.WriteString(escapeDollars(r.Opener + r.Content + r.Closer))
+			continue
+		}
 		switch r.Kind {
 		case latexnorm.Prose:
 			// Dollars in prose are prices or punctuation, never delimiters.
@@ -244,7 +268,14 @@ func canonicalizeOnce(s string, a Adapter) string {
 			}
 			b.WriteString("$" + mathNorm(content) + "$")
 		case latexnorm.InlineBlock:
-			// Single-$ display dialect (line-anchored): promote to $$.
+			// Single-$ display dialect (line-anchored). ORCCA also wraps
+			// entire worked solutions — prose paragraphs with alignment
+			// markers — in this form. Blank lines inside mean prose: degrade
+			// to escaped text rather than rendering mush.
+			if strings.Contains(r.Content, "\n\n") {
+				b.WriteString(escapeDollars(r.Opener + r.Content + r.Closer))
+				continue
+			}
 			b.WriteString("$$\n" + strings.TrimSpace(mathNorm(r.Content)) + "\n$$")
 		case latexnorm.Display:
 			b.WriteString("$$" + mathNorm(r.Content) + "$$")

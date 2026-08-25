@@ -4,25 +4,35 @@
 
 // rehype-katex macros for ORCCA/PreTeXt custom commands used in lesson content,
 // plus authoring shortcuts and blackboard letters KaTeX does not define.
+// \highlight preserves math mode: its arguments are sometimes math
+// (\highlight{\leq}) which \text{} would reject.
 export const lessonMacros: Record<string, string> = {
   // xfrac-style \sfrac → \frac
   '\\sfrac': '\\frac{#1}{#2}',
   '\\substitute': '{#1}',
-  '\\highlight': '\\text{#1}',
+  '\\highlight': '{#1}',
+  '\\lowlight': '{#1}',
   '\\secondhighlight': '\\text{#1}',
   '\\addright': '{#1}',
   '\\subtractright': '{#1}',
   '\\divideunder': '\\frac{#1}{#2}',
   '\\negate': '{#1}',
   '\\multiplyleft': '{#1}',
+  '\\multiplyright': '{#1}',
+  '\\card': '\\left|#1\\right|',
+  '\\pow': '\\mathcal{P}\\left(#1\\right)',
   '\\wonder': '\\stackrel{?}{#1}',
   '\\confirm': '\\stackrel{\\checkmark}{#1}',
   '\\reject': '\\stackrel{\\times}{#1}',
+  '\\mbox': '\\text{#1}',
+  '\\strut': '\\vphantom{()}',
   // authoring shortcuts
   '\\imp': '\\implies',
   '\\st': '\\;\\vert\\;',
   '\\abs': '\\left|#1\\right|',
   '\\pinover': '\\overset{#2}{#1}',
+  '\\lt': '<',
+  '\\gt': '>',
   // blackboard letters
   '\\N': '\\mathbb{N}',
   '\\Z': '\\mathbb{Z}',
@@ -31,6 +41,10 @@ export const lessonMacros: Record<string, string> = {
   '\\C': '\\mathbb{C}',
   // discretionary hyphen (scrape artifact)
   '\\-': '\\text{-}',
+  // like-terms lessons count objects, not letters
+  '\\apple': '\\text{🍎}',
+  '\\dog': '\\text{🐶}',
+  '\\cat': '\\text{🐱}',
 }
 
 // Placeholder standing in for an escaped literal \$ so the delimiter regexes
@@ -98,11 +112,12 @@ export function prepareLessonMath(input: string): string {
     return '$\\displaystyle ' + inlineSafe(inner.trim()) + '$'
   })
 
-  // ORCCA content wraps multi-line display math (aligned, array) in single $...$.
-  // The (?!\$) guards keep this from eating real $$...$$ blocks: without them,
-  // the opener matched the first $ of a $$ line and the closer split the
-  // closing $$ into $\n$, cascading mispaired spans across the whole file.
-  content = content.replace(/^\s*\$(?!\$)([\s\S]*?\n[\s\S]*?)\$(?!\$)\s*$/gm, '$$\n$1\n$$')
+  // ORCCA content wraps multi-line display math (aligned, array) in single
+  // $...$ where the $ sits ALONE on its opening and closing lines. The line
+  // anchoring must be strict: a loose ^\s*\$ opener also matches inline
+  // $...$ pairs that merely start a line, pairing them with a far-away $
+  // and cascading mispaired spans across the file.
+  content = content.replace(/^[ \t]*\$(?!\$)\n([\s\S]*?)\n[ \t]*\$(?!\$)[ \t]*$/gm, '$$\n$1\n$$')
 
   // --- Convert $...$ and $$...$$ to HTML spans with math-* CSS classes ---
   // This bypasses the remark-math parser entirely, avoiding a stateful
