@@ -1,142 +1,743 @@
-> Content sourced from [ORCCA](https://pcc.edu/orcca) (Open Resources for Community College Algebra) — CC BY 4.0
-# Set Notation and Types of Numbers
+> Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
+## 2.4 Find Multiples and Factors
 
-When we talk about *how many* or *how much* of something we have, it often makes
-      sense to use different types of numbers. For example, if we are counting dogs in a shelter,
-      the possibilities are only $0,1,2,\ldots$ . (It would be difficult to have $\frac{1}{2}$ of a dog.) On the other hand if you were weighing a dog in pounds, it
-      doesn't make sense to only allow yourself to work with whole numbers. The dog might weigh
-      something like $28.35$ pounds. These examples highlight how certain kinds of numbers are
-      appropriate for certain situations. We'll classify various types of numbers in this section.
+### Learning Objectives
 
-## Set Notation
+By the end of this section, you will be able to: 
 
-What is the mathematical difference between these three "lists" ? \[
-        28, 31, 30\qquad\{28, 31, 30\}\qquad(28, 31, 30)
-      \] To a mathematician, the last one, $(28, 31, 30)$ is an *ordered* triple. What
-      matters is not merely the three numbers, but *also* the order in which they come. The
-      ordered triple $(28, 31, 30)$ is not the same as $(30, 31, 28)$ ; they have the same
-      numbers in them, but the order has changed. For some context, February has $28$ days; *then* March has $31$ days; *then* April has $30$ days. The order of
-      the three numbers is meaningful in that context.
+  * Identify multiples of numbers
+  * Use common divisibility tests
+  * Find all the factors of a number
+  * Identify prime and composite numbers
 
-With curly braces and $\{28, 31, 30\}$ , a mathematician sees a collection of numbers and
-      does not particularly care in which order they are written. Such a collection is called a *set* . All that matters is that these numbers are part of a collection. They've been *written* in some particular order because that's necessary to write them down.
-      But you might as well have put the three numbers in a bag and shaken up the bag. For some
-      context, maybe your favorite three NBA players have jersey numbers $30$ , $31$ , and $28$ , and you like them all equally well. It doesn't really matter what order you use to
-      list them.
+###  Be Prepared  2.4
 
-So we can say: \{28, 31, 30\}\amp=\{30, 31, 28\}\amp(28, 31, 30)\amp\neq(30, 31, 28)
+Before you get started, take this readiness quiz.
 
-What about just writing $28, 31, 30$ ? This list of three numbers is ambiguous. Without
-      the curly braces or parentheses, it's unclear to a reader if the order is important. *Set notation* is the use of curly braces to surround a list/collection of numbers, and we will use set notation frequently in this section.
+  1. Which of the following numbers are counting numbers (natural numbers)?  
+$0,4,215$  
+If you missed this problem, review Example 1.1.
+  2. Find the sum of $3,5,$ and $7.$  
+If you missed the problem, review Example 2.1.
 
-**Set Notation**
-Practice using (and not using) set notation.
-- Without knowing which error code is most common, express this set mathematically.
-  *Solution*: Since we only have to describe a collection of three numbers and their order doesn't
-              matter, we can write .
-- Error code `500` is the most common. Error code `403` is the least common of
-              these three. And that leaves `404` in the middle. Express the error codes in a
-              mathematical way that appreciates how frequently they happen, from most often to least
-              often.
-  *Solution*: Now we must describe the same three numbers and we want readers to know that the order
-              we are writing the numbers matters. We can write .
+### Identify Multiples of Numbers
 
-## Different Number Sets
+Annie is counting the shoes in her closet. The shoes are matched in pairs, so she doesn’t have to count each one. She counts by twos: $2,4,6,8,10,12.$ She has $12$ shoes in her closet.
 
-In the introduction, we mentioned how different sets of numbers are appropriate for different
-      situations. Here are the basic sets of numbers that are used in basic algebra.
+The numbers $2,4,6,8,10,12$ are called multiples of $2.$ Multiples of $2$ can be written as the product of a counting number and $2.$ The first six multiples of $2$ are given below.
 
-Natural Numbers When we count, we begin: $1, 2, 3, \dots$ and continue on in that pattern. These
-            numbers are known as *natural numbers* . $\mathbb{N}=\{1,2,3,\dots \}$ Whole Numbers If we include zero, then we have the set of *whole numbers* . $\{0,1,2,3,\dots \}$ has no standard symbol, but some options are $\mathbb{N}_0$ , $\mathbb{N}\cup\{0\}$ , and $\mathbb{Z}_{\geq0}$ . Integers If we include the negatives of whole numbers, then we have the set of *integers* . $\mathbb{Z}=\{\dots,-3,-2,-1,0,1,2,3,\dots \}$ . A $\mathbb{Z}$ is used because one word in German for "numbers" is "Zahlen" . Rational Numbers A *rational number* is any number that *can* be written as a fraction
-            of integers, where the denominator is nonzero. Alternatively, a *rational number* is any number that *can* be written with a decimal that terminates or that repeats. $\mathbb{Q}=\left\{0,1,-1,2,\frac{1}{2},-\frac{1}{2},-2,3,\frac{1}{3},-\frac{1}{3},-3,\frac{3}{2},\frac{2}{3}\ldots\right\}$ $\mathbb{Q}=\left\{0,1,-1,2,0.5,-0.5,-2,3,0.\overline{3},-0.\overline{3},-3,1.5,0.\overline{6}\ldots\right\}$ A $\mathbb{Q}$ is used because fractions are *q* uotients of integers. Irrational Numbers Any number that *cannot* be written as a fraction of integers belongs to the set
-            of *irrational numbers* . Another way to say this is that any number whose
-            decimal places goes on forever without repeating is an *irrational number* .
-            Some examples include $\pi\approx3.1415926\ldots$ , $\sqrt{15}\approx3.87298\ldots$ , $e\approx2.71828\ldots$ There is no standard symbol for the set of irrational numbers. Real Numbers Any number that can be marked somewhere on a number line is a *real number* .
-            Real numbers might be the only numbers you are familiar with. For a number to *not* be real, you have to start considering things called *complex numbers* , which are not our concern right now. The set of real numbers can be denoted with $\mathbb{R}$ for short.
+$\begin{array}{c}1⋅2=2 \\ 2⋅2=4 \\ 3⋅2=6 \\ 4⋅2=8 \\ 5⋅2=10 \\ 6⋅2=12\end{array}$
 
-> **Rational Numbers in Other Forms**
-> Any number that *can* be written as a ratio of integers is rational, even if it's not
-        written that way at first. For example, these numbers might not look rational to you at
-        first glance: $-4$ , $\sqrt{9}$ , $0\pi$ , and $\sqrt[3]{\sqrt{5}+2}-\sqrt[3]{\sqrt{5}-2}$ . But they are all rational, because they
-        can respectively be written as $\frac{-4}{1}$ , $\frac{3}{1}$ , $\frac{0}{1}$ ,
-        and $\frac{1}{1}$ .
+A multiple of a number is the product of the number and a counting number. So a multiple of $3$ would be the product of a counting number and $3.$ Below are the first six multiples of $3.$
 
-**Determine If Numbers Are This Type or That Type**
-Determine which numbers from the set $\left\{-102, -7.25, 0, \frac{\pi}{4}, 2, \frac{10}{3}, \sqrt{19}, \sqrt{25}, 10.\overline{7} \right\}$ are natural numbers, whole numbers, integers, rational numbers, irrational numbers, and
-          real numbers.
+$\begin{array}{c}1⋅3=3 \\ 2⋅3=6 \\ 3⋅3=9 \\ 4⋅3=12 \\ 5⋅3=15 \\ 6⋅3=18\end{array}$
 
-*Solution*
-All of these numbers are real numbers, because all of these numbers can be positioned on
-          the real number line.
-Each real number is either rational or irrational, and not both. $-102$ , $-7.25$ , $0$ , and $2$ are rational because we can see directly that their
-          decimal expressions terminate. $10.\overline{7}$ is also rational, because its
-          decimal expression repeats. $\frac{10}{3}$ is rational because it is a ratio of
-          integers. And last but not least, $\sqrt{25}$ is rational, because that's the same
-          thing as $5$ .
-This leaves only $\frac{\pi}{4}$ and $\sqrt{19}$ as irrational numbers. Their
-          decimal expressions go on forever without entering a repetitive cycle.
-Only $-102$ , $0$ , $2$ , and $\sqrt{25}$ (which is really $5$ ) are
-          integers.
-Of these, only $0$ , $2$ , and $\sqrt{25}$ are whole numbers, because whole
-          numbers exclude the negative integers.
-Of these, only $2$ and $\sqrt{25}$ are natural numbers, because the natural
-          numbers exclude $0$ .
+We can find the multiples of any number by continuing this process. Table 2.8 shows the multiples of $2$ through $9$ for the first twelve counting numbers.
 
+**Counting Number** | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$  
+---|---|---|---|---|---|---|---|---|---|---|---|---  
+$\text{Multiples of}\ 2$ | $2$ | $4$ | $6$ | $8$ | $10$ | $12$ | $14$ | $16$ | $18$ | $20$ | $22$ | $24$  
+$\text{Multiples of}\ 3$ | $3$ | $6$ | $9$ | $12$ | $15$ | $18$ | $21$ | $24$ | $27$ | $30$ | $33$ | $36$  
+$\text{Multiples of}\ 4$ | $4$ | $8$ | $12$ | $16$ | $20$ | $24$ | $28$ | $32$ | $36$ | $40$ | $44$ | $48$  
+$\text{Multiples of}\ 5$ | $5$ | $10$ | $15$ | $20$ | $25$ | $30$ | $35$ | $40$ | $45$ | $50$ | $55$ | $60$  
+$\text{Multiples of}\ 6$ | $6$ | $12$ | $18$ | $24$ | $30$ | $36$ | $42$ | $48$ | $54$ | $60$ | $66$ | $72$  
+$\text{Multiples of}\ 7$ | $7$ | $14$ | $21$ | $28$ | $35$ | $42$ | $49$ | $56$ | $63$ | $70$ | $77$ | $84$  
+$\text{Multiples of}\ 8$ | $8$ | $16$ | $24$ | $32$ | $40$ | $48$ | $56$ | $64$ | $72$ | $80$ | $88$ | $96$  
+$\text{Multiples of}\ 9$ | $9$ | $18$ | $27$ | $36$ | $45$ | $54$ | $63$ | $72$ | $81$ | $90$ | $99$ | $108$  
 
-In the introduction, we mentioned that the different types of numbers are appropriate in
-          different situation. Which number set do you think is most appropriate in each of the
-          following situations?
-- The number of people in a math class that play the ukulele. This number is best considered as a .
-  *Solution*: The number of people who play the ukulele could be $0,1,2,\dots$ , so the whole
-              numbers are the appropriate set.
-- The hypotenuse's length in a given right triangle. This number is best considered as a .
-  *Solution*: A hypotenuse's length could be $1$ , $1.2$ , $\sqrt{2}$ (which is
-              irrational), or any other positive number. So the real numbers are the appropriate
-              set.
-- The proportion of people in a math class that have a cat. This number is best considered as a .
-  *Solution*: This proportion will be a ratio of integers, as both the total number of people in the
-              class and the number of people who have a cat are integers. So the rational numbers
-              are the appropriate set.
-- The number of people in the room with you who have the same birthday as you. This number is best considered as a .
-  *Solution*: We know that the number of people must be a counting number, and since *you* are in the room with yourself, there is at least one person in that room with your
-              birthday. So the natural numbers are the appropriate set.
-- The total revenue (in dollars) generated for ticket sales at a Timbers soccer game. This number is best considered as a .
-  *Solution*: The total revenue will be some number of dollars and cents, such as $\$631{,}897.15$ , which is a terminating decimal and thus a rational number. So
-              the rational numbers are the appropriate set.
+Table  2.8
 
-## Converting Repeating Decimals to Fractions
+###  Multiple of a Number
 
-We have learned that a terminating decimal number is a rational number. It's easy to convert a
-      terminating decimal number into a fraction of integers: you just need to multiply and divide
-      by one of the numbers in the set $\{10,100,1000,\ldots\}$ . For example, when we say the
-      number $0.123$ out loud, we say "one hundred and twenty-three thousandths" . While
-      that's a lot to say, it makes it obvious that this number can be written as a ratio: \[
-        0.123=\frac{123}{1000}
-      \] .
-      Similarly, \[
-        21.28=\frac{2128}{100}=\frac{532\cdot4}{25\cdot4}=\frac{532}{25}
-      \] ,
-      demonstrating how *any* terminating decimal can be written as a fraction.
+A number is a multiple of $n$ if it is the product of a counting number and $n.$
 
-Repeating decimals can also be written as a fraction. To understand how, use a calculator to
-      find the decimal for, say, $\frac{73}{99}$ and $\frac{189}{999}$ You will find that \[
-        \frac{73}{99}=0.73737373\ldots=0.\overline{73}\qquad\frac{189}{999}=0.189189189\ldots=0.\overline{189}
-      \] .
-      The pattern is that dividing a number by a number from $\{9,99,999,\ldots\}$ with the
-      same number of digits will create a repeating decimal that starts as "0." and then
-      repeats the numerator. We can use this observation to reverse engineer some fractions from
-      repeating decimals.
+Recognizing the patterns for multiples of $2,5,10,\text{and}\ 3$ will be helpful to you as you continue in this course.
 
-- Write the rational number $0.772772772\ldots$ as a fraction.
-  *Solution*: The *three* -digit number $772$ repeats after the decimal. So we will make
-              use of the *three* -digit denominator $999$ . And we have $\frac{772}{999}$ .
-- Write the rational number $0.69696969\ldots$ as a fraction.
-  *Solution*: The *two* -digit number $69$ repeats after the decimal. So we will make use
-              of the *two* -digit denominator $99$ . And we have $\frac{69}{99}$ .
-              But this fraction can be reduced to $\frac{23}{33}$ .
+###  Manipulative Mathematics
 
-Converting a repeating decimal to a fraction is not always quite this straightforward. There
-      are complications if the number takes a few digits before it begins repeating. For your
-      interest, here is one example on how to do that.
+Doing the Manipulative Mathematics activity “Multiples” will help you develop a better understanding of multiples.
 
-**Example**
+Figure 2.6 shows the counting numbers from $1$ to $50.$ Multiples of $2$ are highlighted. Do you notice a pattern?
+
+Figure  2.6 Multiples of $2$ between $1$ and $50$
+
+The last digit of each highlighted number in Figure 2.6 is either $0,2,4,6,\text{or}\ 8.$ This is true for the product of $2$ and any counting number. So, to tell if any number is a multiple of $2$ look at the last digit. If it is $0,2,4,6,\ \text{or}\ 8,$ then the number is a multiple of $2.$
+
+###  Example  2.40
+
+Determine whether each of the following is a multiple of $2\text{:}$
+
+  1. ⓐ$489$ 
+  2. ⓑ $3,714$ 
+
+####  Solution
+
+ⓐ |   
+---|---  
+Is 489 a multiple of 2? |   
+Is the last digit 0, 2, 4, 6, or 8? | No.  
+| 489 is not a multiple of 2.  
+
+ⓑ |   
+---|---  
+Is 3,714 a multiple of 2? |   
+Is the last digit 0, 2, 4, 6, or 8? | Yes.  
+| 3,714 is a multiple of 2.  
+
+###  Try It  2.79
+
+Determine whether each number is a multiple of $2\text{:}$
+
+  1. ⓐ $678$
+  2. ⓑ $21,493$
+
+###  Try It  2.80
+
+Determine whether each number is a multiple of $2\text{:}$
+
+  1. ⓐ $979$
+  2. ⓑ $17,780$
+
+Now let’s look at multiples of $5.$ Figure 2.7 highlights all of the multiples of $5$ between $1$ and $50.$ What do you notice about the multiples of $5?$
+
+Figure  2.7 Multiples of $5$ between $1$ and $50$
+
+All multiples of $5$ end with either $5$ or $0.$ Just like we identify multiples of $2$ by looking at the last digit, we can identify multiples of $5$ by looking at the last digit.
+
+###  Example  2.41
+
+Determine whether each of the following is a multiple of $5\text{:}$
+
+  1. ⓐ $579$
+  2. ⓑ $880$
+
+####  Solution
+
+ⓐ |   
+---|---  
+Is 579 a multiple of 5? |   
+Is the last digit 5 or 0? | No.  
+| 579 is not a multiple of 5.  
+
+ⓑ |   
+---|---  
+Is 880 a multiple of 5? |   
+Is the last digit 5 or 0? | Yes.  
+| 880 is a multiple of 5.  
+
+###  Try It  2.81
+
+Determine whether each number is a multiple of $5.$
+
+  1. ⓐ $675$
+  2. ⓑ $1,578$
+
+###  Try It  2.82
+
+Determine whether each number is a multiple of $5.$
+
+  1. ⓐ $421$
+  2. ⓑ $2,690$
+
+Figure 2.8 highlights the multiples of $10$ between $1$ and $50.$ All multiples of $10$ all end with a zero.
+
+Figure  2.8 Multiples of $10$ between $1$ and $50$
+
+###  Example  2.42
+
+Determine whether each of the following is a multiple of $10\text{:}$
+
+  1. ⓐ $425$
+  2. ⓑ $350$
+
+####  Solution
+
+ⓐ |   
+---|---  
+Is 425 a multiple of 10? |   
+Is the last digit zero? | No.  
+| 425 is not a multiple of 10.  
+
+ⓑ |   
+---|---  
+Is 350 a multiple of 10? |   
+Is the last digit zero? | Yes.  
+| 350 is a multiple of 10.  
+
+###  Try It  2.83
+
+Determine whether each number is a multiple of $10\text{:}$
+
+  1. ⓐ $179$
+  2. ⓑ $3,540$
+
+###  Try It  2.84
+
+Determine whether each number is a multiple of $10\text{:}$
+
+  1. ⓐ $110$
+  2. ⓑ $7,595$
+
+Figure 2.9 highlights multiples of $3.$ The pattern for multiples of $3$ is not as obvious as the patterns for multiples of $2,5,\text{and}\ 10.$
+
+Figure  2.9 Multiples of $3$ between $1$ and $50$
+
+Unlike the other patterns we’ve examined so far, this pattern does not involve the last digit. The pattern for multiples of $3$ is based on the sum of the digits. If the sum of the digits of a number is a multiple of $3,$ then the number itself is a multiple of $3.$ See Table 2.9.
+
+$\text{Multiple of 3}$ | $3$ | $6$ | $9$ | $12$ | $15$ | $18$ | $21$ | $24$  
+---|---|---|---|---|---|---|---|---  
+$\text{Sum of digits}$ | $3$ | $6$ | $9$ | $\begin{array}{c}1+2 \\ 3\end{array}$ | $\begin{array}{c}1+5 \\ 6\end{array}$ | $\begin{array}{c}1+8 \\ 9\end{array}$ | $\begin{array}{c}2+1 \\ 3\end{array}$ | $\begin{array}{c}2+4 \\ 6\end{array}$  
+
+Table  2.9
+
+Consider the number $42.$ The digits are $4$ and $2,$ and their sum is $4+2=6.$ Since $6$ is a multiple of $3,$ we know that $42$ is also a multiple of $3.$
+
+###  Example  2.43
+
+Determine whether each of the given numbers is a multiple of $3\text{:}$
+
+  1. ⓐ $645$
+  2. ⓑ $10,519$
+
+####  Solution
+
+ⓐ Is $645$ a multiple of $3?$
+
+Find the sum of the digits. | $6+4+5=15$  
+---|---  
+Is 15 a multiple of 3? | Yes.  
+If we're not sure, we could add its digits to find out. We can check it by dividing 645 by 3. | $645\div 3$  
+The quotient is 215. | $3⋅215=645$  
+
+ⓑ Is $10,519$ a multiple of $3?$
+
+Find the sum of the digits. | $1+0+5+1+9=16$  
+---|---  
+Is 16 a multiple of 3? | No.  
+So 10,519 is not a multiple of 3 either.. | $645\div 3$  
+We can check this by dividing by 10,519 by 3. | $\begin{array}{c}3,506\text{R}1 \\ 310,519\ \end{array}$  
+
+When we divide $10,519$ by $3,$ we do not get a counting number, so $10,519$ is not the product of a counting number and $3.$ It is not a multiple of $3.$
+
+###  Try It  2.85
+
+Determine whether each number is a multiple of $3\text{:}$
+
+  1. ⓐ $954$
+  2. ⓑ $3,742$ 
+
+###  Try It  2.86
+
+Determine whether each number is a multiple of $3\text{:}$
+
+  1. ⓐ $643$ 
+  2. ⓑ $8,379$
+
+Look back at the charts where you highlighted the multiples of $2,$ of $5,$ and of $10.$ Notice that the multiples of $10$ are the numbers that are multiples of both $2$ and $5.$ That is because $10=2⋅5.$ Likewise, since $6=2⋅3,$ the multiples of $6$ are the numbers that are multiples of both $2$ and $3.$
+
+### Use Common Divisibility Tests
+
+Another way to say that $375$ is a multiple of $5$ is to say that $375$ is divisible by $5.$ In fact, $375\div 5$ is $75,$ so $375$ is $5⋅75.$ Notice in Example 2.43 that $10,519$ is not a multiple $3.$ When we divided $10,519$ by $3$ we did not get a counting number, so $10,519$ is not divisible by $3.$
+
+###  Divisibility
+
+If a number $m$ is a multiple of $n,$ then we say that $m$ is divisible by $n.$
+
+Since multiplication and division are inverse operations, the patterns of multiples that we found can be used as divisibility tests. Table 2.10 summarizes divisibility tests for some of the counting numbers between one and ten.
+
+**Divisibility Tests**  
+---  
+**A number is divisible by** |   
+$2$ | if the last digit is $0,\ 2,\ 4,\ 6,\ \text{or}\ 8$  
+$3$ | if the sum of the digits is divisible by $3$  
+$5$ | if the last digit is $5$ or $0$  
+$6$ | if divisible by both $2$ and $3$  
+$10$ | if the last digit is $0$  
+
+Table  2.10
+
+###  Example  2.44
+
+Determine whether $1,290$ is divisible by $2,3,5,\text{and}\ 10.$
+
+####  Solution
+
+Table 2.11 applies the divisibility tests to $1,290.$ In the far right column, we check the results of the divisibility tests by seeing if the quotient is a whole number.
+
+**Divisible by…?** | **Test** | **Divisible?** | **Check**  
+---|---|---|---  
+$2$ | Is last digit $0,\ 2,\ 4,\ 6,\ \text{or}\ 8?$ _Yes._ | yes | $1290\div 2=645$  
+$3$ | $\text{Is sum of digits divisible by}\ 3?$  
+$1+2+9+0=12$ _Yes._ | yes | $1290\div 3=430$  
+$5$ | Is last digit $5$ or $0?$ _Yes._ | yes | $1290\div 5=258$  
+$10$ | Is last digit $0?$ _Yes._ | yes | $1290\div 10=129$  
+
+Table  2.11
+
+Thus, $1,290$ is divisible by $2,3,5,\text{and}\ 10.$
+
+###  Try It  2.87
+
+Determine whether the given number is divisible by $2,3,5,\text{and}\ 10.$
+
+$6240$
+
+###  Try It  2.88
+
+Determine whether the given number is divisible by $2,3,5,\text{and}\ 10.$
+
+$7248$
+
+###  Example  2.45
+
+Determine whether $5,625$ is divisible by $2,3,5,\text{and}\ 10.$
+
+####  Solution
+
+Table 2.12 applies the divisibility tests to $5,625$ and tests the results by finding the quotients.
+
+**Divisible by…?** | **Test** | **Divisible?** | **Check**  
+---|---|---|---  
+$2$ | Is last digit $0,\ 2,\ 4,\ 6,\ \text{or}\ 8?$ _No._ | no | $5625\div 2=2812.5$  
+$3$ | $\text{Is sum of digits divisible by}\ 3?$  
+$5+6+2+5=18$ _Yes._ | yes | $5625\div 3=1875$  
+$5$ | Is last digit is $5$ or $0?$ _Yes._ | yes | $5625\div 5=1125$  
+$10$ | Is last digit $0?$ _No._ | no | $5625\div 10=562.5$  
+
+Table  2.12
+
+Thus, $5,625$ is divisible by $3$ and $5,$ but not $2,$ or $10.$
+
+###  Try It  2.89
+
+Determine whether the given number is divisible $\text{by}\ 2,3,5,\text{and}\ 10.$
+
+$4962$
+
+###  Try It  2.90
+
+Determine whether the given number is divisible $\text{by}\ 2,3,5,\text{and}\ 10.$
+
+$3765$
+
+### Find All the Factors of a Number
+
+There are often several ways to talk about the same idea. So far, we’ve seen that if $m$ is a multiple of $n,$ we can say that $m$ is divisible by $n.$ We know that $72$ is the product of $8$ and $9,$ so we can say $72$ is a multiple of $8$ and $72$ is a multiple of $9.$ We can also say $72$ is divisible by $8$ and by $9.$ Another way to talk about this is to say that $8$ and $9$ are factors of $72.$ When we write $72=8⋅9$ we can say that we have factored $72.$
+
+###  Factors
+
+If $a⋅b=m,$ then $a\ \text{and}\ b$ are factors of $m,$ and $m$ is the product of $a\ \text{and}\ b.$
+
+In algebra, it can be useful to determine all of the factors of a number. This is called factoring a number, and it can help us solve many kinds of problems.
+
+###  Manipulative Mathematics
+
+Doing the Manipulative Mathematics activity “Model Multiplication and Factoring” will help you develop a better understanding of multiplication and factoring.
+
+For example, suppose a choreographer is planning a dance for a ballet recital. There are $24$ dancers, and for a certain scene, the choreographer wants to arrange the dancers in groups of equal sizes on stage. 
+
+In how many ways can the dancers be put into groups of equal size? Answering this question is the same as identifying the factors of $24.$ Table 2.13 summarizes the different ways that the choreographer can arrange the dancers.
+
+**Number of Groups** | **Dancers per Group** | **Total Dancers**  
+---|---|---  
+$1$ | $24$ | $1⋅24=24$  
+$2$ | $12$ | $2⋅12=24$  
+$3$ | $8$ | $3⋅8=24$  
+$4$ | $6$ | $4⋅6=24$  
+$6$ | $4$ | $6⋅4=24$  
+$8$ | $3$ | $8⋅3=24$  
+$12$ | $2$ | $12⋅2=24$  
+$24$ | $1$ | $24⋅1=24$  
+
+Table  2.13
+
+What patterns do you see in Table 2.13? Did you notice that the number of groups times the number of dancers per group is always $24?$ This makes sense, since there are always $24$ dancers.
+
+You may notice another pattern if you look carefully at the first two columns. These two columns contain the exact same set of numbers—but in reverse order. They are mirrors of one another, and in fact, both columns list all of the factors of $24,$ which are:
+
+$1,2,3,4,6,8,12,24$
+
+We can find all the factors of any counting number by systematically dividing the number by each counting number, starting with $1.$ If the quotient is also a counting number, then the divisor and the quotient are factors of the number. We can stop when the quotient becomes smaller than the divisor.
+
+###  How To
+
+####  Find all the factors of a counting number.
+
+  1. Step 1. 
+
+Divide the number by each of the counting numbers, in order, until the quotient is smaller than the divisor. 
+     * If the quotient is a counting number, the divisor and quotient are a pair of factors.
+     * If the quotient is not a counting number, the divisor is not a factor.
+
+  2. Step 2.  List all the factor pairs.
+  3. Step 3.  Write all the factors in order from smallest to largest.
+
+###  Example  2.46
+
+Find all the factors of $72.$
+
+####  Solution
+
+Divide $72$ by each of the counting numbers starting with $1.$ If the quotient is a whole number, the divisor and quotient are a pair of factors.  
+
+The next line would have a divisor of $9$ and a quotient of $8.$ The quotient would be smaller than the divisor, so we stop. If we continued, we would end up only listing the same factors again in reverse order. Listing all the factors from smallest to greatest, we have
+
+$1 , 2 , 3 , 4 , 6 , 8 , 9 , 12 , 18 , 24 , 36 , \text{and} \ 72$
+
+###  Try It  2.91
+
+Find all the factors of the given number:
+
+$96$
+
+###  Try It  2.92
+
+Find all the factors of the given number:
+
+$80$
+
+### Identify Prime and Composite Numbers
+
+Some numbers, like $72,$ have many factors. Other numbers, such as $7,$ have only two factors: $1$ and the number. A number with only two factors is called a prime number. A number with more than two factors is called a composite number. The number $1$ is neither prime nor composite. It has only one factor, itself.
+
+###  Prime Numbers and Composite Numbers
+
+A prime number is a counting number greater than $1$ whose only factors are $1$ and itself.
+
+A composite number is a counting number that is not prime.
+
+Figure 2.10 lists the counting numbers from $2$ through $20$ along with their factors. The highlighted numbers are prime, since each has only two factors.
+
+Figure  2.10 Factors of the counting numbers from $2$ through $20,$ with prime numbers highlighted
+
+The prime numbers less than $20$ are $2,3,5,7,11,13,17,\text{and}\ 19.$ There are many larger prime numbers too. In order to determine whether a number is prime or composite, we need to see if the number has any factors other than $1$ and itself. To do this, we can test each of the smaller prime numbers in order to see if it is a factor of the number. If none of the prime numbers are factors, then that number is also prime.
+
+###  How To
+
+####  Determine if a number is prime.
+
+  1. Step 1.  Test each of the primes, in order, to see if it is a factor of the number.
+  2. Step 2.  Start with $2$ and stop when the quotient is smaller than the divisor or when a prime factor is found.
+  3. Step 3.  If the number has a prime factor, then it is a composite number. If it has no prime factors, then the number is prime.
+
+###  Example  2.47
+
+Identify each number as prime or composite: 
+
+  1. ⓐ $83$ 
+  2. ⓑ $77$
+
+####  Solution
+
+ⓐ Test each prime, in order, to see if it is a factor of $83$, starting with $2,$ as shown. We will stop when the quotient is smaller than the divisor.
+
+**Prime** | **Test** | **Factor of** $83?$  
+---|---|---  
+$2$ | Last digit of $83$ is not $0,2,4,6,\text{or}\ 8.$ | No.  
+$3$ | $8+3=11,$ and $11$ is not divisible by $3.$ | No.  
+$5$ | The last digit of $83$ is not $5$ or $0.$ | No.  
+$7$ | $83\div 7=11.857\text{….}$ | No.  
+$11$ | $83\div 11=7.545\text{…}$ | No.  
+
+We can stop when we get to $11$ because the quotient $\text{(7.545…)}$ is less than the divisor.
+
+We did not find any prime numbers that are factors of $83,$ so we know $83$ is prime.
+
+ⓑ Test each prime, in order, to see if it is a factor of $77.$
+
+**Prime** | **Test** | **Factor of $77?$**  
+---|---|---  
+$2$ | Last digit is not $0,2,4,6,\text{or}\ 8.$ | No.  
+$3$ | $7+7=14,$ and $14$ is not divisible by $3.$ | No.  
+$5$ | the last digit is not $5$ or $0.$ | No.  
+$7$ | $77\div 7=11$ | Yes.  
+
+Since $77$ is divisible by $7,$ we know it is not a prime number. It is composite.
+
+###  Try It  2.93
+
+Identify the number as prime or composite:
+
+$91$
+
+###  Try It  2.94
+
+Identify the number as prime or composite:
+
+$137$
+
+###  Links To Literacy
+
+The Links to Literacy activities _One Hundred Hungry Ants_ , _Spunky Monkeys on Parade_ and _A Remainder of One_ will provide you with another view of the topics covered in this section.
+
+###  Media
+
+####  ACCESS ADDITIONAL ONLINE RESOURCES
+
+  * Divisibility Rules
+  * Factors
+  * Ex 1: Determine Factors of a Number
+  * Ex 2: Determine Factors of a Number
+  * Ex 3: Determine Factors of a Number
+
+###  Section 2.4 Exercises
+
+#### Practice Makes Perfect
+
+**Identify Multiples of Numbers**
+
+In the following exercises, list all the multiples less than $50$ for the given number.
+
+215. 
+
+$2$
+
+216. 
+
+$3$
+
+217. 
+
+$4$
+
+218. 
+
+$5$
+
+219. 
+
+$6$
+
+220. 
+
+$7$
+
+221. 
+
+$8$
+
+222. 
+
+$9$
+
+223. 
+
+$10$
+
+224. 
+
+$12$
+
+**Use Common Divisibility Tests**
+
+In the following exercises, use the divisibility tests to determine whether each number is divisible by $2,3,4,5,6,\text{and}\ 10.$
+
+225. 
+
+$84$
+
+226. 
+
+$96$
+
+227. 
+
+$75$
+
+228. 
+
+$78$
+
+229. 
+
+$168$
+
+230. 
+
+$264$
+
+231. 
+
+$900$
+
+232. 
+
+$800$
+
+233. 
+
+$896$
+
+234. 
+
+$942$
+
+235. 
+
+$375$
+
+236. 
+
+$750$
+
+237. 
+
+$350$
+
+238. 
+
+$550$
+
+239. 
+
+$1430$
+
+240. 
+
+$1080$
+
+241. 
+
+$22,335$
+
+242. 
+
+$39,075$
+
+**Find All the Factors of a Number**
+
+In the following exercises, find all the factors of the given number.
+
+243. 
+
+$36$
+
+244. 
+
+$42$
+
+245. 
+
+$60$
+
+246. 
+
+$48$
+
+247. 
+
+$144$
+
+248. 
+
+$200$
+
+249. 
+
+$588$
+
+250. 
+
+$576$
+
+**Identify Prime and Composite Numbers**
+
+In the following exercises, determine if the given number is prime or composite.
+
+251. 
+
+$43$
+
+252. 
+
+$67$
+
+253. 
+
+$39$
+
+254. 
+
+$53$
+
+255. 
+
+$71$
+
+256. 
+
+$119$
+
+257. 
+
+$481$
+
+258. 
+
+$221$
+
+259. 
+
+$209$
+
+260. 
+
+$359$
+
+261. 
+
+$667$
+
+262. 
+
+$1771$
+
+#### Everyday Math
+
+263. 
+
+**Banking** Frank’s grandmother gave him $\text{\text{\$}100}$ at his high school graduation. Instead of spending it, Frank opened a bank account. Every week, he added $\text{\text{\$}15}$ to the account. The table shows how much money Frank had put in the account by the end of each week. Complete the table by filling in the blanks.
+
+**Weeks after graduation** | **Total number of dollars Frank put in the account** | **Simplified Total**  
+---|---|---  
+$0$ | $100$ | $100$  
+$1$ | $100+15$ | $115$  
+$2$ | $100+15⋅2$ | $130$  
+$3$ | $100+15⋅3$ |   
+$4$ | $100+15⋅[\ ]$ |   
+$5$ | $100+[\ ]$ |   
+$6$ |  |   
+$20$ |  |   
+$x$ |  |   
+
+264. 
+
+**Banking** In March, Gina opened a Christmas club savings account at her bank. She deposited $\text{\text{\$}75}$ to open the account. Every week, she added $\text{\text{\$}20}$ to the account. The table shows how much money Gina had put in the account by the end of each week. Complete the table by filling in the blanks.
+
+**Weeks after opening the account** | **Total number of dollars Gina put in the account** | **Simplified Total**  
+---|---|---  
+$0$ | $75$ | $75$  
+$1$ | $75+20$ | $95$  
+$2$ | $75+20⋅2$ | $115$  
+$3$ | $75+20⋅3$ |   
+$4$ | $75+20⋅[\ ]$ |   
+$5$ | $75+[\ ]$ |   
+$6$ |  |   
+$20$ |  |   
+$x$ |  |   
+
+#### Writing Exercises
+
+265. 
+
+If a number is divisible by $2$ and by $3,$ why is it also divisible by $6?$
+
+266. 
+
+What is the difference between prime numbers and composite numbers?
+
+#### Self Check
+
+ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section. 
+
+ⓑ On a scale of 1–10, how would you rate your mastery of this section in light of your responses on the checklist? How can you improve this?
