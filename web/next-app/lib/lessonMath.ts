@@ -113,7 +113,10 @@ export function prepareLessonMath(input: string): string {
   })
 
   // ORCCA content wraps multi-line display math (aligned, array) in single $...$.
-  content = content.replace(/^\s*\$([\s\S]*?\n[\s\S]*?)\$\s*$/gm, '$$\n$1\n$$')
+  // The (?!\$) guards keep this from eating real $$...$$ blocks: without them,
+  // the opener matched the first $ of a $$ line and the closer split the
+  // closing $$ into $\n$, cascading mispaired spans across the whole file.
+  content = content.replace(/^\s*\$(?!\$)([\s\S]*?\n[\s\S]*?)\$(?!\$)\s*$/gm, '$$\n$1\n$$')
 
   // --- Convert $...$ and $$...$$ to HTML spans with math-* CSS classes ---
   // This bypasses the remark-math parser entirely, avoiding a stateful

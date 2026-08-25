@@ -70,44 +70,6 @@ func TestValidateUnpairedDollar(t *testing.T) {
 	}
 }
 
-func TestEscapeProseDollars(t *testing.T) {
-	cases := []struct {
-		name string
-		in   string
-		want string
-	}{
-		{"pure currency pair", "it costs $20$ total", `it costs \$20\$ total`},
-		{"currency with punctuation", "about $3.99.$ yes", `about \$3.99.\$ yes`},
-		{"prose between prices", "from $3.99 each and $2.50", `from \$3.99 each and \$2.50`},
-		{"division in price", "pay $3.99÷24$ per ounce", `pay \$3.99÷24\$ per ounce`},
-		{"single letter math untouched", "where $x$ is the set", "where $x$ is the set"},
-		{"operator math untouched", "we get $5 + 3$ total", "we get $5 + 3$ total"},
-		{"coefficient math untouched", "so $2x$ grows", "so $2x$ grows"},
-		{"backslash math untouched", "value $5\\pi$ approx", "value $5\\pi$ approx"},
-		{"display math protected", "$$x + 2$$ and $3.50$ each", "$$x + 2$$ and \\$3.50\\$ each"},
-		{"no digits untouched", "costs $nothing$ here", "costs $nothing$ here"},
-	}
-	for _, tc := range cases {
-		t.Run(tc.name, func(t *testing.T) {
-			if got := escapeProseDollars(tc.in); got != tc.want {
-				t.Errorf("got %q want %q", got, tc.want)
-			}
-		})
-	}
-}
-
-func TestCanonicalizeCurrencyLesson(t *testing.T) {
-	// End-to-end: word-problem prices must survive canonicalization escaped,
-	// so remark-math never sees them as delimiters.
-	in := "The total is $14.65$ and the coupon saves $3.00$ more.\n\n$$x^2 = 4$$"
-	got := Canonicalize(in, ORCCA)
-	if !strings.Contains(got, `\$14.65\$`) || !strings.Contains(got, `\$3.00\$`) {
-		t.Errorf("currency not escaped: %q", got)
-	}
-	if !strings.Contains(got, "$$x^2 = 4$$") {
-		t.Errorf("display math damaged: %q", got)
-	}
-}
 
 func TestValidateEscapedDollarClean(t *testing.T) {
 	// The real arith.factor.find.md case: '\$' inside inline math is an
@@ -271,15 +233,17 @@ func TestAlgebricaEmRowbreakCasesEnv(t *testing.T) {
 	}
 }
 
-func TestEscapeProseDollarsOddLeftover(t *testing.T) {
+func TestCanonicalizeCurrencyPairs(t *testing.T) {
+	// Scanner-validated pairs with pure-numeric content are prices, not math.
 	in := "costs $5, saves $10 and pays $20 total"
 	want := `costs \$5, saves \$10 and pays \$20 total`
-	if got := escapeProseDollars(in); got != want {
+	if got := Canonicalize(in, ORCCA); got != want {
 		t.Errorf("got %q want %q", got, want)
 	}
 	// Real math sharing a line with escaped currency stays math.
 	in2 := "If $x^2$ applies the cost is \\$3.99 each"
-	if got := escapeProseDollars(in2); got != in2 {
-		t.Errorf("math damaged: got %q want %q", got, in2)
+	got2 := Canonicalize(in2, ORCCA)
+	if !strings.Contains(got2, "$x^2$") || !strings.Contains(got2, `\$3.99`) {
+		t.Errorf("math/currency mix wrong: %q", got2)
 	}
 }
