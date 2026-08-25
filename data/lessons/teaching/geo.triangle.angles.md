@@ -1,35 +1,47 @@
-> Content sourced from [ORCCA](https://pcc.edu/orcca) (Open Resources for Community College Algebra) — CC BY 4.0
-# Geometry Formulas
+# Triangle Angle Sum Is 180 Degrees
 
-In this section we will evaluate some formulas related to the geometry of two- and three-dimensional shapes.
+Every triangle, no matter its shape or size, obeys one simple rule:
 
-## Evaluating Perimeter and Area Formulas
+\[m\angle A + m\angle B + m\angle C = 180^\circ\]
 
+The three interior angles of any triangle always add up to exactly $180^\circ$.
+
+## Why It Works
+
+Draw a triangle on a sheet of paper, then draw a straight line through one vertex parallel to the opposite side. The three angles of the triangle reappear at that vertex as three angles forming a straight line — and a straight line measures $180^\circ$. This is why the sum never changes: it is forced by the parallel lines.
+
+## Using the Rule
+
+If you know two angles of a triangle, the third is automatic — subtract the two known angles from $180^\circ$:
+
+\[m\angle C = 180^\circ - m\angle A - m\angle B\]
+
+## Example
 
 **Example**
-Imagine a rectangle with width 7.5 and height 11.43 as in Figure . Find the perimeter (in inches) of the rectangle. Find the area (in square centimeters) of the rectangle.
+
+Two angles of a triangle measure $62^\circ$ and $71^\circ$. Find the third angle.
 
 *Solution*
-To find the perimeter (in inches) of the rectangle, we should first convert all lengths into inches. By Appendix , we know that $1\,\text{in}=2.54\,\text{cm}$ . So, we have 11.43\,\text{cm}\amp=\frac{11.43\,\text{cm}}{1}\cdot\frac{1\,\text{in}}{2.54\,\text{cm}} \amp=\frac{11.43}{2.54}\,\text{in} \amp=4.5\,\text{in} So, the total perimeter is $2\cdot4.5\,\text{in}+2\cdot7.5\,\text{in}=24\,\text{in}$ . To find the area (in square centimeters) of the rectangle, we should first convert all lengths into centimeters. So, we have 7.5\,\text{in}\amp=\frac{7.5\,\text{in}}{1}\cdot\frac{2.54\,\text{cm}}{1\,\text{in}} \amp=\frac{7.5}{2.54}\,\text{cm} \amp=19.05\,\text{cm} So, the total area is $19.05\,\text{cm}\cdot11.43\,\text{cm}=217.7415\,\text{cm}^2$ .
 
+$62^\circ + 71^\circ = 133^\circ$
 
+$180^\circ - 133^\circ = 47^\circ$
 
-## Volume
+The third angle measures $47^\circ$. All three are under $90^\circ$, so this is an acute triangle.
 
-The *volume* of a three-dimensional object is the number of $1\times1\times1$ cubes that fit inside the object
-      (possibly after morphing them into non-cube shapes).
-      If the edges of the cubes are, say, 1 long, then the volume is measured in "cubic centimeters
-      ," written .
+**Example**
 
-Note that the volume formulas for a rectangular prism and a cylinder have something in common:
-      both formulas first find the area of the base
-      (which is a rectangle for a prism and a circle for a cylinder)
-      and then multiply by the height.
-      So there is another formula \[
-        V=Bh
-      \] that works for both shapes.
-      Here, $B$ stands for the base area (which is $wd$ for a prism and $\pi r^2$ for a cylinder.)
+A right triangle has one angle measuring $90^\circ$ and another measuring $38^\circ$. Find the third angle.
+
+*Solution*
+
+$180^\circ - 90^\circ - 38^\circ = 52^\circ$
+
+The unknown acute angle measures $52^\circ$. The two acute angles of a right triangle always sum to $90^\circ$.
 
 ## Summary
 
-Here is a list of all the formulas we've learned in this section.
+- The angles of every triangle total exactly $180^\circ$.
+- Knowing any two angles determines the third: subtract their sum from $180^\circ$.
+- In a right triangle, the two acute angles together make $90^\circ$.

@@ -1,35 +1,45 @@
-> Content sourced from [ORCCA](https://pcc.edu/orcca) (Open Resources for Community College Algebra) — CC BY 4.0
-# Geometry Formulas
+# Types of Angles: Acute, Right, Obtuse
 
-In this section we will evaluate some formulas related to the geometry of two- and three-dimensional shapes.
+An **angle** is formed by two rays that share a common endpoint, called the **vertex**. The two rays are the **sides** of the angle. We name angles with three letters — a point on one side, the vertex, and a point on the other side — such as $\angle ABC$, or simply by the vertex, $\angle B$.
 
-## Evaluating Perimeter and Area Formulas
+## Measuring the "Opening" of an Angle
 
+What makes one angle different from another is how wide it opens. The most important benchmark is the angle formed by a square corner:
+
+A **right angle** measures exactly $90^\circ$. It is marked with a small square at the vertex.
+
+Comparing against this benchmark gives the three basic angle types:
+
+| Type | Measure | Picture clue |
+| --- | --- | --- |
+| Acute | less than $90^\circ$ | narrower than a corner |
+| Right | exactly $90^\circ$ | square corner |
+| Obtuse | more than $90^\circ$ but less than $180^\circ$ | wider than a corner |
+
+An angle that opens all the way to a straight line measures exactly $180^\circ$ and is called a **straight angle**.
+
+## Example
 
 **Example**
-Imagine a rectangle with width 7.5 and height 11.43 as in Figure . Find the perimeter (in inches) of the rectangle. Find the area (in square centimeters) of the rectangle.
+
+Classify each angle: $\angle P$ measures $35^\circ$, $\angle Q$ measures $90^\circ$, and $\angle R$ measures $125^\circ$.
 
 *Solution*
-To find the perimeter (in inches) of the rectangle, we should first convert all lengths into inches. By Appendix , we know that $1\,\text{in}=2.54\,\text{cm}$ . So, we have 11.43\,\text{cm}\amp=\frac{11.43\,\text{cm}}{1}\cdot\frac{1\,\text{in}}{2.54\,\text{cm}} \amp=\frac{11.43}{2.54}\,\text{in} \amp=4.5\,\text{in} So, the total perimeter is $2\cdot4.5\,\text{in}+2\cdot7.5\,\text{in}=24\,\text{in}$ . To find the area (in square centimeters) of the rectangle, we should first convert all lengths into centimeters. So, we have 7.5\,\text{in}\amp=\frac{7.5\,\text{in}}{1}\cdot\frac{2.54\,\text{cm}}{1\,\text{in}} \amp=\frac{7.5}{2.54}\,\text{cm} \amp=19.05\,\text{cm} So, the total area is $19.05\,\text{cm}\cdot11.43\,\text{cm}=217.7415\,\text{cm}^2$ .
 
+- $\angle P$ is acute because $35^\circ < 90^\circ$.
+- $\angle Q$ is right because it measures exactly $90^\circ$.
+- $\angle R$ is obtuse because $90^\circ < 125^\circ < 180^\circ$.
 
+**Example**
 
-## Volume
+Can an angle measuring $200^\circ$ be classified as obtuse?
 
-The *volume* of a three-dimensional object is the number of $1\times1\times1$ cubes that fit inside the object
-      (possibly after morphing them into non-cube shapes).
-      If the edges of the cubes are, say, 1 long, then the volume is measured in "cubic centimeters
-      ," written .
+*Solution*
 
-Note that the volume formulas for a rectangular prism and a cylinder have something in common:
-      both formulas first find the area of the base
-      (which is a rectangle for a prism and a circle for a cylinder)
-      and then multiply by the height.
-      So there is another formula \[
-        V=Bh
-      \] that works for both shapes.
-      Here, $B$ stands for the base area (which is $wd$ for a prism and $\pi r^2$ for a cylinder.)
+No. An obtuse angle must measure less than $180^\circ$. An angle of $200^\circ$ is a reflex angle, which is larger than a straight angle.
 
 ## Summary
 
-Here is a list of all the formulas we've learned in this section.
+- An angle has two sides and a vertex; its size is its opening.
+- Acute: less than $90^\circ$. Right: exactly $90^\circ$. Obtuse: between $90^\circ$ and $180^\circ$.
+- A straight angle measures exactly $180^\circ$.

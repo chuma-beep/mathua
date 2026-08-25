@@ -1,35 +1,58 @@
-> Content sourced from [ORCCA](https://pcc.edu/orcca) (Open Resources for Community College Algebra) — CC BY 4.0
-# Geometry Formulas
+# Vertical Angles and Parallel Lines
 
-In this section we will evaluate some formulas related to the geometry of two- and three-dimensional shapes.
+When lines cross, the angles they form come in equal pairs. When lines never cross, a third line crossing both creates yet more predictable angle pairs. These patterns let you find every angle at an intersection once you know just one.
 
-## Evaluating Perimeter and Area Formulas
+## Vertical Angles
 
+When two lines intersect, four angles are formed. Angles opposite each other at the intersection — sharing only the vertex — are called **vertical angles**.
+
+**Vertical angles are always congruent (equal in measure).**
+
+Angles next to each other in the picture share a side and form a straight line, so they are a linear pair: they are supplementary and their measures add to $180^\circ$.
+
+## Example
 
 **Example**
-Imagine a rectangle with width 7.5 and height 11.43 as in Figure . Find the perimeter (in inches) of the rectangle. Find the area (in square centimeters) of the rectangle.
+
+Two lines intersect. One of the four angles measures $60^\circ$. Find the other three.
 
 *Solution*
-To find the perimeter (in inches) of the rectangle, we should first convert all lengths into inches. By Appendix , we know that $1\,\text{in}=2.54\,\text{cm}$ . So, we have 11.43\,\text{cm}\amp=\frac{11.43\,\text{cm}}{1}\cdot\frac{1\,\text{in}}{2.54\,\text{cm}} \amp=\frac{11.43}{2.54}\,\text{in} \amp=4.5\,\text{in} So, the total perimeter is $2\cdot4.5\,\text{in}+2\cdot7.5\,\text{in}=24\,\text{in}$ . To find the area (in square centimeters) of the rectangle, we should first convert all lengths into centimeters. So, we have 7.5\,\text{in}\amp=\frac{7.5\,\text{in}}{1}\cdot\frac{2.54\,\text{cm}}{1\,\text{in}} \amp=\frac{7.5}{2.54}\,\text{cm} \amp=19.05\,\text{cm} So, the total area is $19.05\,\text{cm}\cdot11.43\,\text{cm}=217.7415\,\text{cm}^2$ .
 
+The angle vertical to the given one also measures $60^\circ$.
 
+Each of the remaining two angles forms a linear pair with a $60^\circ$ angle:
 
-## Volume
+$180^\circ - 60^\circ = 120^\circ$
 
-The *volume* of a three-dimensional object is the number of $1\times1\times1$ cubes that fit inside the object
-      (possibly after morphing them into non-cube shapes).
-      If the edges of the cubes are, say, 1 long, then the volume is measured in "cubic centimeters
-      ," written .
+So the four angles measure $60^\circ$, $120^\circ$, $60^\circ$, $120^\circ$.
 
-Note that the volume formulas for a rectangular prism and a cylinder have something in common:
-      both formulas first find the area of the base
-      (which is a rectangle for a prism and a circle for a cylinder)
-      and then multiply by the height.
-      So there is another formula \[
-        V=Bh
-      \] that works for both shapes.
-      Here, $B$ stands for the base area (which is $wd$ for a prism and $\pi r^2$ for a cylinder.)
+## Parallel Lines Cut by a Transversal
+
+Two **parallel lines** run in the same direction and never meet. When a third line, the **transversal**, crosses both, eight angles appear.
+
+With parallel lines:
+
+- **Corresponding angles** (same position at each crossing) are equal.
+- **Alternate interior angles** (inside the parallel lines, on opposite sides of the transversal) are equal.
+- **Alternate exterior angles** are equal.
+- Same-side interior angles are supplementary.
+
+All of these follow from two facts: vertical angles are equal, and corresponding angles are equal when the lines are parallel.
+
+## Example
+
+**Example**
+
+Parallel lines are cut by a transversal. One angle measures $110^\circ$. What does its same-side interior partner measure?
+
+*Solution*
+
+Same-side interior angles are supplementary:
+
+$180^\circ - 110^\circ = 70^\circ$
 
 ## Summary
 
-Here is a list of all the formulas we've learned in this section.
+- Vertical angles: opposite angles at an intersection; always equal.
+- Linear pairs are supplementary (add to $180^\circ$).
+- For parallel lines cut by a transversal: corresponding, alternate interior, and alternate exterior angles are equal; same-side interior angles add to $180^\circ$.

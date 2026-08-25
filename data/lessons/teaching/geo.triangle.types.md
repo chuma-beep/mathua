@@ -1,35 +1,53 @@
-> Content sourced from [ORCCA](https://pcc.edu/orcca) (Open Resources for Community College Algebra) — CC BY 4.0
-# Geometry Formulas
+# Types of Triangles
 
-In this section we will evaluate some formulas related to the geometry of two- and three-dimensional shapes.
+A **triangle** is a closed figure with three straight sides and three angles. Triangles can be sorted two independent ways: by their sides and by their angles.
 
-## Evaluating Perimeter and Area Formulas
+## Classifying by Sides
 
+| Name | Sides |
+| --- | --- |
+| Scalene | all three sides different lengths |
+| Isosceles | exactly two sides equal |
+| Equilateral | all three sides equal |
+
+Tick marks on a drawing indicate which sides are equal.
+
+## Classifying by Angles
+
+| Name | Angles |
+| --- | --- |
+| Acute triangle | all three angles less than $90^\circ$ |
+| Right triangle | exactly one angle equal to $90^\circ$ |
+| Obtuse triangle | exactly one angle greater than $90^\circ$ |
+
+A triangle can never contain two right angles or two obtuse angles, because the three angles always total $180^\circ$. Every triangle gets exactly one name from each table, so "isosceles right triangle" describes both a side property and an angle property.
+
+In a right triangle, the side opposite the right angle — the longest side — is called the **hypotenuse**, and the other two sides are the **legs**.
+
+## Example
 
 **Example**
-Imagine a rectangle with width 7.5 and height 11.43 as in Figure . Find the perimeter (in inches) of the rectangle. Find the area (in square centimeters) of the rectangle.
+
+A triangle has sides of length $5$, $5$, and $8$, with the angle between the two equal sides measuring $40^\circ$. Classify it.
 
 *Solution*
-To find the perimeter (in inches) of the rectangle, we should first convert all lengths into inches. By Appendix , we know that $1\,\text{in}=2.54\,\text{cm}$ . So, we have 11.43\,\text{cm}\amp=\frac{11.43\,\text{cm}}{1}\cdot\frac{1\,\text{in}}{2.54\,\text{cm}} \amp=\frac{11.43}{2.54}\,\text{in} \amp=4.5\,\text{in} So, the total perimeter is $2\cdot4.5\,\text{in}+2\cdot7.5\,\text{in}=24\,\text{in}$ . To find the area (in square centimeters) of the rectangle, we should first convert all lengths into centimeters. So, we have 7.5\,\text{in}\amp=\frac{7.5\,\text{in}}{1}\cdot\frac{2.54\,\text{cm}}{1\,\text{in}} \amp=\frac{7.5}{2.54}\,\text{cm} \amp=19.05\,\text{cm} So, the total area is $19.05\,\text{cm}\cdot11.43\,\text{cm}=217.7415\,\text{cm}^2$ .
 
+By sides: two sides equal, so it is isosceles.
 
+By angles: $40^\circ < 90^\circ$, and since the angles total $180^\circ$, neither of the others can reach $90^\circ$. All three angles are acute, so it is acute.
 
-## Volume
+Classification: acute isosceles triangle.
 
-The *volume* of a three-dimensional object is the number of $1\times1\times1$ cubes that fit inside the object
-      (possibly after morphing them into non-cube shapes).
-      If the edges of the cubes are, say, 1 long, then the volume is measured in "cubic centimeters
-      ," written .
+**Example**
 
-Note that the volume formulas for a rectangular prism and a cylinder have something in common:
-      both formulas first find the area of the base
-      (which is a rectangle for a prism and a circle for a cylinder)
-      and then multiply by the height.
-      So there is another formula \[
-        V=Bh
-      \] that works for both shapes.
-      Here, $B$ stands for the base area (which is $wd$ for a prism and $\pi r^2$ for a cylinder.)
+Can a triangle have sides $2$, $2$, $2$ and be a right triangle?
+
+*Solution*
+
+No. Sides $2$, $2$, $2$ make it equilateral, so all three angles are equal. If one angle were $90^\circ$, all three would be $90^\circ$, totaling $270^\circ$ — impossible. An equilateral triangle is always acute.
 
 ## Summary
 
-Here is a list of all the formulas we've learned in this section.
+- By sides: scalene (no equal), isosceles (two equal), equilateral (all equal).
+- By angles: acute (all under $90^\circ$), right (one $90^\circ$), obtuse (one over $90^\circ$).
+- Each triangle takes one name from each classification.
