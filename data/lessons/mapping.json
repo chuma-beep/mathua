@@ -1,836 +1,718 @@
 {
- "arith.abs_value": {
-  "source": "orcca",
-  "slug": "section-absolute-value-and-square-root"
- },
- "arith.sqrt.perfect": {
-  "source": "orcca",
-  "slug": "section-absolute-value-and-square-root"
- },
- "arith.neg.number_line": {
-  "source": "orcca",
-  "slug": "section-arithmetic-with-negative-numbers"
- },
- "arith.neg.add_sub": {
-  "source": "orcca",
-  "slug": "section-arithmetic-with-negative-numbers"
- },
- "arith.neg.mult_div": {
-  "source": "orcca",
-  "slug": "section-arithmetic-with-negative-numbers"
- },
- "arith.neg.order_ops": {
-  "source": "orcca",
-  "slug": "section-arithmetic-with-negative-numbers"
- },
- "arith.order_ops.basic": {
-  "source": "orcca",
-  "slug": "section-order-of-operations"
- },
- "arith.order_ops.full": {
-  "source": "orcca",
-  "slug": "section-order-of-operations"
- },
- "arith.order_ops.nested": {
-  "source": "orcca",
-  "slug": "section-order-of-operations"
- },
- "arith.sci_notation": {
-  "source": "orcca",
-  "slug": "section-scientific-notation"
- },
- "arith.sci_notation.ops": {
-  "source": "orcca",
-  "slug": "section-scientific-notation"
- },
- "arith.exp.neg": {
-  "source": "orcca",
-  "slug": "section-introduction-to-exponent-properties"
- },
- "arith.exp.zero": {
-  "source": "orcca",
-  "slug": "section-introduction-to-exponent-properties"
- },
- "arith.factor.gcf": {
-  "source": "orcca",
-  "slug": "section-factoring-out-the-common-factor"
- },
- "arith.factor.lcm": {
-  "source": "orcca",
-  "slug": "section-comparison-symbols-and-notation-for-intervals"
- },
- "arith.factor.prime": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "arith.factor.prime_fact": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "arith.factor.find": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "arith.factor.composite": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "frac.concept": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.parts": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.on_number_line": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.equivalent": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.simplify": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.compare": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.benchmark": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.add.same": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.sub.same": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.add.diff": {
-  "source": "orcca",
-  "slug": "section-equations-and-inequalities-with-fractions"
- },
- "frac.sub.diff": {
-  "source": "orcca",
-  "slug": "section-equations-and-inequalities-with-fractions"
- },
- "frac.mult": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.mult.whole": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.div": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.div.whole": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.mixed.convert": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.mixed.add": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.mixed.sub": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.mixed.mult": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "frac.add.word": {
-  "source": "orcca",
-  "slug": "section-equations-and-inequalities-with-fractions"
- },
- "frac.to_decimal": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.add": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.sub": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.mult": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.div": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.from_frac": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.to_frac": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "dec.compare": {
-  "source": "orcca",
-  "slug": "section-comparison-symbols-and-notation-for-intervals"
- },
- "dec.round": {
-  "source": "orcca",
-  "slug": "section-comparison-symbols-and-notation-for-intervals"
- },
- "pct.concept": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.of_number": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.find_rate": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.increase": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.discount": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.tax_tip": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.from_dec": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "pct.to_dec": {
-  "source": "orcca",
-  "slug": "section-percentages"
- },
- "ratio.concept": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "ratio.simplify": {
-  "source": "orcca",
-  "slug": "section-fractions-and-fraction-arithmetic"
- },
- "ratio.proportion": {
-  "source": "orcca",
-  "slug": "section-equations-and-inequalities-with-fractions"
- },
- "ratio.rate": {
-  "source": "orcca",
-  "slug": "section-exploring-two-variable-data-and-rate-of-change"
- },
- "ratio.scale": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "prealg.var.concept": {
-  "source": "orcca",
-  "slug": "section-variables-and-evaluating-expressions"
- },
- "prealg.expr.evaluate": {
-  "source": "orcca",
-  "slug": "section-variables-and-evaluating-expressions"
- },
- "prealg.expr.distribute": {
-  "source": "orcca",
-  "slug": "section-algebraic-properties-and-simplifying-expressions"
- },
- "prealg.expr.like_terms": {
-  "source": "orcca",
-  "slug": "section-combining-like-terms"
- },
- "prealg.eq.one_step_add": {
-  "source": "orcca",
-  "slug": "section-solving-one-step-equations"
- },
- "prealg.eq.one_step_mult": {
-  "source": "orcca",
-  "slug": "section-solving-one-step-equations"
- },
- "prealg.eq.two_step": {
-  "source": "orcca",
-  "slug": "section-solving-multistep-linear-equations"
- },
- "prealg.eq.word": {
-  "source": "orcca",
-  "slug": "section-modeling-with-equations-and-inequalities"
- },
- "prealg.ineq.one_step": {
-  "source": "orcca",
-  "slug": "section-solving-one-step-inequalities"
- },
- "prealg.ineq.two_step": {
-  "source": "orcca",
-  "slug": "section-solving-multistep-linear-inequalities"
- },
- "alg.linear.slope": {
-  "source": "orcca",
-  "slug": "section-slope"
- },
- "alg.linear.graph": {
-  "source": "orcca",
-  "slug": "section-slope-intercept-form"
- },
- "alg.linear.standard_form": {
-  "source": "orcca",
-  "slug": "section-standard-form"
- },
- "alg.linear.parallel_perp": {
-  "source": "orcca",
-  "slug": "section-geometry-of-lines"
- },
- "alg.func.notation": {
-  "source": "orcca",
-  "slug": "section-function-basics"
- },
- "alg.func.evaluate": {
-  "source": "orcca",
-  "slug": "section-function-basics"
- },
- "alg.func.linear": {
-  "source": "orcca",
-  "slug": "section-technical-definition-of-a-function"
- },
- "alg.exp.evaluate": {
-  "source": "orcca",
-  "slug": "section-introduction-to-exponent-properties"
- },
- "alg.eq.vars_both_sides": {
-  "source": "orcca",
-  "slug": "section-solving-multistep-linear-equations"
- },
- "alg.factor.gcf": {
-  "source": "orcca",
-  "slug": "section-factoring-out-the-common-factor"
- },
- "alg.factor.diff_squares": {
-  "source": "orcca",
-  "slug": "section-factoring-special-polynomials"
- },
- "alg.poly.mult_mono": {
-  "source": "orcca",
-  "slug": "section-multiplying-polynomials"
- },
- "alg.ineq.compound": {
-  "source": "orcca",
-  "slug": "section-compound-inequalities"
- },
- "alg.ineq.two_var": {
-  "source": "orcca",
-  "slug": "section-solving-inequalities-graphically"
- },
- "alg.quad.discriminant": {
-  "source": "orcca",
-  "slug": "section-the-quadratic-formula"
- },
- "alg.systems.word": {
-  "source": "orcca",
-  "slug": "section-modeling-with-equations-and-inequalities"
- },
- "alg.seq.sum_arith": {
-  "source": "orcca",
-  "slug": "section-function-basics"
- },
- "geo.basic.points_lines": {
-  "source": "openstax",
-  "slug": "9-1-points-lines-and-angles"
- },
- "geo.basic.angles": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.basic.angle_measure": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.basic.complementary": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.basic.vertical": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.coord.plot": {
-  "source": "orcca",
-  "slug": "section-cartesian-coordinates"
- },
- "geo.coord.distance": {
-  "source": "orcca",
-  "slug": "section-cartesian-coordinates"
- },
- "geo.coord.midpoint": {
-  "source": "orcca",
-  "slug": "section-cartesian-coordinates"
- },
- "geo.quad.types": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.quad.perimeter": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.quad.area": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.triangle.types": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.triangle.angles": {
-  "source": "orcca",
-  "slug": "section-geometry-formulas"
- },
- "geo.triangle.area": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.circle.parts": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.circle.circumference": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.circle.area": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.solid.surface_area": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "geo.solid.volume_rect": {
-  "source": "orcca",
-  "slug": "section-geometry-applications"
- },
- "stat.data.bar_graph": {
-  "source": "orcca",
-  "slug": "section-overview-of-graphing"
- },
- "stat.data.line_plot": {
-  "source": "orcca",
-  "slug": "section-exploring-two-variable-data-and-rate-of-change"
- },
- "stat.data.read_table": {
-  "source": "orcca",
-  "slug": "section-exploring-two-variable-data-and-rate-of-change"
- },
- "stat.data.mode": {
-  "source": "orcca",
-  "slug": "section-exploring-two-variable-data-and-rate-of-change"
- },
- "stat.data.range": {
-  "source": "orcca",
-  "slug": "section-exploring-two-variable-data-and-rate-of-change"
- },
- "stat.prob.basic": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "stat.prob.complement": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "stat.prob.compound": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "stat.prob.sample_space": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "stat.prob.counting": {
-  "source": "orcca",
-  "slug": "section-set-notation-and-types-of-numbers"
- },
- "arith.add.single": {
-  "source": "openstax",
-  "slug": "1-2-add-whole-numbers"
- },
- "arith.add.double": {
-  "source": "openstax",
-  "slug": "1-2-add-whole-numbers"
- },
- "arith.add.carry": {
-  "source": "openstax",
-  "slug": "1-2-add-whole-numbers"
- },
- "arith.add.triple": {
-  "source": "openstax",
-  "slug": "1-2-add-whole-numbers"
- },
- "arith.add.word": {
-  "source": "openstax",
-  "slug": "1-2-add-whole-numbers"
- },
- "arith.sub.single": {
-  "source": "openstax",
-  "slug": "1-3-subtract-whole-numbers"
- },
- "arith.sub.double": {
-  "source": "openstax",
-  "slug": "1-3-subtract-whole-numbers"
- },
- "arith.sub.borrow": {
-  "source": "openstax",
-  "slug": "1-3-subtract-whole-numbers"
- },
- "arith.sub.word": {
-  "source": "openstax",
-  "slug": "1-3-subtract-whole-numbers"
- },
- "arith.mult.concept": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.mult.tables": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.mult.double": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.mult.triple": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.mult.word": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.mult.2_5_10": {
-  "source": "openstax",
-  "slug": "1-4-multiply-whole-numbers"
- },
- "arith.div.concept": {
-  "source": "openstax",
-  "slug": "1-5-divide-whole-numbers"
- },
- "arith.div.basic": {
-  "source": "openstax",
-  "slug": "1-5-divide-whole-numbers"
- },
- "arith.div.long": {
-  "source": "openstax",
-  "slug": "1-5-divide-whole-numbers"
- },
- "arith.div.remainder": {
-  "source": "openstax",
-  "slug": "1-5-divide-whole-numbers"
- },
- "arith.div.word": {
-  "source": "openstax",
-  "slug": "1-5-divide-whole-numbers"
- },
- "arith.place.tens": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.place.hundreds": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.place.thousands": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.round.tens": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.round.hundreds": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.round.thousands": {
-  "source": "openstax",
-  "slug": "1-1-introduction-to-whole-numbers"
- },
- "arith.dec.intro": {
-  "source": "openstax",
-  "slug": "5-1-decimals"
- },
- "calc.limit.numeric": {
-  "source": "applied_calc",
-  "slug": "limits"
- },
- "calc.limit.infinity": {
-  "source": "applied_calc",
-  "slug": "limits"
- },
- "calc.deriv.sum_rule": {
-  "source": "applied_calc",
-  "slug": "derivative-rules"
- },
- "calc.deriv.product_rule": {
-  "source": "applied_calc",
-  "slug": "derivative-rules"
- },
- "calc.deriv.quotient_rule": {
-  "source": "applied_calc",
-  "slug": "derivative-rules"
- },
- "calc.deriv.exp_log": {
-  "source": "applied_calc",
-  "slug": "derivative-rules"
- },
- "calc.deriv.trig": {
-  "source": "applied_calc",
-  "slug": "derivative-rules"
- },
- "calc.deriv.implicit": {
-  "source": "applied_calc",
-  "slug": "implicit-related-rates"
- },
- "calc.deriv.related_rates": {
-  "source": "applied_calc",
-  "slug": "implicit-related-rates"
- },
- "calc.integral.power_rule": {
-  "source": "applied_calc",
-  "slug": "integrals"
- },
- "calc.integral.volume": {
-  "source": "applied_calc",
-  "slug": "integrals"
- },
- "discrete.logic.connectives": {
-  "source": "discrete_math",
-  "slug": "prop-logic"
- },
- "discrete.logic.truth_tables": {
-  "source": "discrete_math",
-  "slug": "prop-logic"
- },
- "discrete.logic.quantifiers": {
-  "source": "discrete_math",
-  "slug": "prop-logic"
- },
- "discrete.sets.venn": {
-  "source": "discrete_math",
-  "slug": "sets"
- },
- "discrete.graphs.basics": {
-  "source": "discrete_math",
-  "slug": "graph-theory"
- },
- "discrete.graphs.paths": {
-  "source": "discrete_math",
-  "slug": "graph-theory"
- },
- "discrete.graphs.trees": {
-  "source": "discrete_math",
-  "slug": "graph-theory"
- },
- "discrete.recurrence": {
-  "source": "discrete_math",
-  "slug": "sequences"
- },
- "trig.radians": {
-  "source": "openstax_precalc",
-  "slug": "5-1-angles"
- },
- "trig.period": {
-  "source": "openstax_precalc",
-  "slug": "5-4-right-triangle-trigonometry"
- },
- "linalg.systems.matrix": {
-  "source": "hefferon_linalg",
-  "slug": "linear-systems"
- },
- "ode.separable": {
-  "source": "manual"
- },
- "ode.linear_first": {
-  "source": "manual"
- },
- "ode.homogeneous": {
-  "source": "manual"
- },
- "ode.nonhomogeneous": {
-  "source": "manual"
- },
- "ode.exact": {
-  "source": "manual"
- },
- "ode.laplace": {
-  "source": "manual"
- },
- "ode.systems": {
-  "source": "manual"
- },
- "nt.gcd_euclidean": {
-  "source": "manual"
- },
- "nt.diophantine": {
-  "source": "manual"
- },
- "nt.fermat_little": {
-  "source": "manual"
- },
- "nt.crypto": {
-  "source": "manual"
- },
- "topo.continuous": {
-  "source": "manual"
- },
- "topo.metric": {
-  "source": "manual"
- },
- "topo.open_closed": {
-  "source": "manual"
- },
- "frac.basics.concept": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.basics.parts": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.basics.number_line": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.basics.equivalent": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.ops.simplify": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.ops.compare": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.ops.benchmark": {
-  "source": "openstax",
-  "slug": "4-1-visualize-fractions"
- },
- "frac.ops.mult": {
-  "source": "openstax",
-  "slug": "4-2-multiply-and-divide-fractions"
- },
- "frac.ops.div": {
-  "source": "openstax",
-  "slug": "4-2-multiply-and-divide-fractions"
- },
- "frac.ops.to_decimal": {
-  "source": "openstax",
-  "slug": "5-3-decimals-and-fractions"
- },
- "dec.basics.compare": {
-  "source": "openstax",
-  "slug": "5-1-decimals"
- },
- "dec.ops.round": {
-  "source": "openstax",
-  "slug": "5-1-decimals"
- },
- "dec.ops.add": {
-  "source": "openstax",
-  "slug": "5-2-decimal-operations"
- },
- "dec.ops.sub": {
-  "source": "openstax",
-  "slug": "5-2-decimal-operations"
- },
- "dec.ops.mult": {
-  "source": "openstax",
-  "slug": "5-2-decimal-operations"
- },
- "dec.ops.div": {
-  "source": "openstax",
-  "slug": "5-2-decimal-operations"
- },
- "dec.convert.to_frac": {
-  "source": "openstax",
-  "slug": "5-3-decimals-and-fractions"
- },
- "dec.convert.from_frac": {
-  "source": "openstax",
-  "slug": "5-3-decimals-and-fractions"
- },
- "pct.basics.concept": {
-  "source": "openstax",
-  "slug": "6-1-understand-percent"
- },
- "pct.convert.to_dec": {
-  "source": "openstax",
-  "slug": "6-1-understand-percent"
- },
- "pct.convert.from_dec": {
-  "source": "openstax",
-  "slug": "6-1-understand-percent"
- },
- "pct.ops.find_rate": {
-  "source": "openstax",
-  "slug": "6-2-solve-general-applications-of-percent"
- },
- "pct.ops.of_number": {
-  "source": "openstax",
-  "slug": "6-2-solve-general-applications-of-percent"
- },
- "pct.ops.increase": {
-  "source": "openstax",
-  "slug": "6-2-solve-general-applications-of-percent"
- },
- "pct.ops.discount": {
-  "source": "openstax",
-  "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
- },
- "pct.ops.tax_tip": {
-  "source": "openstax",
-  "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
- },
- "ratio.basics.concept": {
-  "source": "openstax",
-  "slug": "5-6-ratios-and-rate"
- },
- "ratio.ops.simplify": {
-  "source": "openstax",
-  "slug": "5-6-ratios-and-rate"
- },
- "ratio.ops.rate": {
-  "source": "openstax",
-  "slug": "5-6-ratios-and-rate"
- },
- "ratio.ops.proportion": {
-  "source": "openstax",
-  "slug": "6-5-solve-proportions-and-their-applications"
- },
- "ratio.ops.scale": {
-  "source": "openstax",
-  "slug": "6-5-solve-proportions-and-their-applications"
- },
- "arith.exp.sci_notation": {
-  "source": "openstax",
-  "slug": "10-5-integer-exponents-and-scientific-notation"
- }
+  "arith.abs_value": {
+    "source": "orcca",
+    "slug": "section-absolute-value-and-square-root"
+  },
+  "arith.sqrt.perfect": {
+    "source": "orcca",
+    "slug": "section-absolute-value-and-square-root"
+  },
+  "arith.neg.number_line": {
+    "source": "orcca",
+    "slug": "section-arithmetic-with-negative-numbers"
+  },
+  "arith.neg.add_sub": {
+    "source": "orcca",
+    "slug": "section-arithmetic-with-negative-numbers"
+  },
+  "arith.neg.mult_div": {
+    "source": "orcca",
+    "slug": "section-arithmetic-with-negative-numbers"
+  },
+  "arith.neg.order_ops": {
+    "source": "orcca",
+    "slug": "section-arithmetic-with-negative-numbers"
+  },
+  "arith.order_ops.basic": {
+    "source": "orcca",
+    "slug": "section-order-of-operations"
+  },
+  "arith.order_ops.full": {
+    "source": "orcca",
+    "slug": "section-order-of-operations"
+  },
+  "arith.order_ops.nested": {
+    "source": "orcca",
+    "slug": "section-order-of-operations"
+  },
+  "arith.sci_notation": {
+    "source": "orcca",
+    "slug": "section-scientific-notation"
+  },
+  "arith.sci_notation.ops": {
+    "source": "orcca",
+    "slug": "section-scientific-notation"
+  },
+  "arith.exp.neg": {
+    "source": "orcca",
+    "slug": "section-introduction-to-exponent-properties"
+  },
+  "arith.exp.zero": {
+    "source": "orcca",
+    "slug": "section-introduction-to-exponent-properties"
+  },
+  "arith.factor.gcf": {
+    "source": "orcca",
+    "slug": "section-factoring-out-the-common-factor"
+  },
+  "prealg.var.concept": {
+    "source": "orcca",
+    "slug": "section-variables-and-evaluating-expressions"
+  },
+  "prealg.expr.evaluate": {
+    "source": "orcca",
+    "slug": "section-variables-and-evaluating-expressions"
+  },
+  "prealg.expr.distribute": {
+    "source": "orcca",
+    "slug": "section-algebraic-properties-and-simplifying-expressions"
+  },
+  "prealg.expr.like_terms": {
+    "source": "orcca",
+    "slug": "section-combining-like-terms"
+  },
+  "prealg.eq.one_step_add": {
+    "source": "orcca",
+    "slug": "section-solving-one-step-equations"
+  },
+  "prealg.eq.one_step_mult": {
+    "source": "orcca",
+    "slug": "section-solving-one-step-equations"
+  },
+  "prealg.eq.two_step": {
+    "source": "orcca",
+    "slug": "section-solving-multistep-linear-equations"
+  },
+  "prealg.eq.word": {
+    "source": "orcca",
+    "slug": "section-modeling-with-equations-and-inequalities"
+  },
+  "prealg.ineq.one_step": {
+    "source": "orcca",
+    "slug": "section-solving-one-step-inequalities"
+  },
+  "prealg.ineq.two_step": {
+    "source": "orcca",
+    "slug": "section-solving-multistep-linear-inequalities"
+  },
+  "alg.linear.slope": {
+    "source": "orcca",
+    "slug": "section-slope"
+  },
+  "alg.linear.graph": {
+    "source": "orcca",
+    "slug": "section-slope-intercept-form"
+  },
+  "alg.linear.standard_form": {
+    "source": "orcca",
+    "slug": "section-standard-form"
+  },
+  "alg.linear.parallel_perp": {
+    "source": "orcca",
+    "slug": "section-geometry-of-lines"
+  },
+  "alg.func.notation": {
+    "source": "orcca",
+    "slug": "section-function-basics"
+  },
+  "alg.func.evaluate": {
+    "source": "orcca",
+    "slug": "section-function-basics"
+  },
+  "alg.func.linear": {
+    "source": "orcca",
+    "slug": "section-technical-definition-of-a-function"
+  },
+  "alg.exp.evaluate": {
+    "source": "orcca",
+    "slug": "section-introduction-to-exponent-properties"
+  },
+  "alg.eq.vars_both_sides": {
+    "source": "orcca",
+    "slug": "section-solving-multistep-linear-equations"
+  },
+  "alg.factor.gcf": {
+    "source": "orcca",
+    "slug": "section-factoring-out-the-common-factor"
+  },
+  "alg.factor.diff_squares": {
+    "source": "orcca",
+    "slug": "section-factoring-special-polynomials"
+  },
+  "alg.poly.mult_mono": {
+    "source": "orcca",
+    "slug": "section-multiplying-polynomials"
+  },
+  "alg.ineq.compound": {
+    "source": "orcca",
+    "slug": "section-compound-inequalities"
+  },
+  "alg.ineq.two_var": {
+    "source": "orcca",
+    "slug": "section-solving-inequalities-graphically"
+  },
+  "alg.quad.discriminant": {
+    "source": "orcca",
+    "slug": "section-the-quadratic-formula"
+  },
+  "alg.systems.word": {
+    "source": "orcca",
+    "slug": "section-modeling-with-equations-and-inequalities"
+  },
+  "alg.seq.sum_arith": {
+    "source": "orcca",
+    "slug": "section-function-basics"
+  },
+  "geo.coord.plot": {
+    "source": "orcca",
+    "slug": "section-cartesian-coordinates"
+  },
+  "geo.coord.distance": {
+    "source": "orcca",
+    "slug": "section-cartesian-coordinates"
+  },
+  "geo.coord.midpoint": {
+    "source": "orcca",
+    "slug": "section-cartesian-coordinates"
+  },
+  "stat.data.bar_graph": {
+    "source": "orcca",
+    "slug": "section-overview-of-graphing"
+  },
+  "stat.data.line_plot": {
+    "source": "orcca",
+    "slug": "section-exploring-two-variable-data-and-rate-of-change"
+  },
+  "stat.data.read_table": {
+    "source": "orcca",
+    "slug": "section-exploring-two-variable-data-and-rate-of-change"
+  },
+  "stat.data.mode": {
+    "source": "orcca",
+    "slug": "section-exploring-two-variable-data-and-rate-of-change"
+  },
+  "stat.data.range": {
+    "source": "orcca",
+    "slug": "section-exploring-two-variable-data-and-rate-of-change"
+  },
+  "arith.add.single": {
+    "source": "openstax",
+    "slug": "1-2-add-whole-numbers"
+  },
+  "arith.add.double": {
+    "source": "openstax",
+    "slug": "1-2-add-whole-numbers"
+  },
+  "arith.add.carry": {
+    "source": "openstax",
+    "slug": "1-2-add-whole-numbers"
+  },
+  "arith.add.triple": {
+    "source": "openstax",
+    "slug": "1-2-add-whole-numbers"
+  },
+  "arith.add.word": {
+    "source": "openstax",
+    "slug": "1-2-add-whole-numbers"
+  },
+  "arith.sub.single": {
+    "source": "openstax",
+    "slug": "1-3-subtract-whole-numbers"
+  },
+  "arith.sub.double": {
+    "source": "openstax",
+    "slug": "1-3-subtract-whole-numbers"
+  },
+  "arith.sub.borrow": {
+    "source": "openstax",
+    "slug": "1-3-subtract-whole-numbers"
+  },
+  "arith.sub.word": {
+    "source": "openstax",
+    "slug": "1-3-subtract-whole-numbers"
+  },
+  "arith.mult.concept": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.mult.tables": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.mult.double": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.mult.triple": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.mult.word": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.mult.2_5_10": {
+    "source": "openstax",
+    "slug": "1-4-multiply-whole-numbers"
+  },
+  "arith.div.concept": {
+    "source": "openstax",
+    "slug": "1-5-divide-whole-numbers"
+  },
+  "arith.div.basic": {
+    "source": "openstax",
+    "slug": "1-5-divide-whole-numbers"
+  },
+  "arith.div.long": {
+    "source": "openstax",
+    "slug": "1-5-divide-whole-numbers"
+  },
+  "arith.div.remainder": {
+    "source": "openstax",
+    "slug": "1-5-divide-whole-numbers"
+  },
+  "arith.div.word": {
+    "source": "openstax",
+    "slug": "1-5-divide-whole-numbers"
+  },
+  "arith.place.tens": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.place.hundreds": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.place.thousands": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.round.tens": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.round.hundreds": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.round.thousands": {
+    "source": "openstax",
+    "slug": "1-1-introduction-to-whole-numbers"
+  },
+  "arith.dec.intro": {
+    "source": "openstax",
+    "slug": "5-1-decimals"
+  },
+  "frac.concept": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.parts": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.on_number_line": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.equivalent": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.simplify": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.compare": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.benchmark": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.mult": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.mult.whole": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.div": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.div.whole": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.mixed.convert": {
+    "source": "openstax",
+    "slug": "4-3-multiply-and-divide-mixed-numbers-and-complex-fractions"
+  },
+  "frac.mixed.mult": {
+    "source": "openstax",
+    "slug": "4-3-multiply-and-divide-mixed-numbers-and-complex-fractions"
+  },
+  "frac.add.same": {
+    "source": "openstax",
+    "slug": "4-4-add-and-subtract-fractions-with-common-denominators"
+  },
+  "frac.sub.same": {
+    "source": "openstax",
+    "slug": "4-4-add-and-subtract-fractions-with-common-denominators"
+  },
+  "frac.add.diff": {
+    "source": "openstax",
+    "slug": "4-5-add-and-subtract-fractions-with-different-denominators"
+  },
+  "frac.sub.diff": {
+    "source": "openstax",
+    "slug": "4-5-add-and-subtract-fractions-with-different-denominators"
+  },
+  "frac.mixed.add": {
+    "source": "openstax",
+    "slug": "4-6-add-and-subtract-mixed-numbers"
+  },
+  "frac.mixed.sub": {
+    "source": "openstax",
+    "slug": "4-6-add-and-subtract-mixed-numbers"
+  },
+  "frac.to_decimal": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.add": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.sub": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.mult": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.div": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.from_frac": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.to_frac": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.compare": {
+    "source": "openstax",
+    "slug": "5-1-decimals"
+  },
+  "dec.round": {
+    "source": "openstax",
+    "slug": "5-1-decimals"
+  },
+  "pct.concept": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.from_dec": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.to_dec": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.of_number": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.find_rate": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.increase": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.discount": {
+    "source": "openstax",
+    "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
+  },
+  "pct.tax_tip": {
+    "source": "openstax",
+    "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
+  },
+  "ratio.concept": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.simplify": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.rate": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.scale": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.proportion": {
+    "source": "openstax",
+    "slug": "6-5-solve-proportions-and-their-applications"
+  },
+  "arith.factor.prime": {
+    "source": "openstax",
+    "slug": "2-4-find-multiples-and-factors"
+  },
+  "arith.factor.prime_fact": {
+    "source": "openstax",
+    "slug": "2-4-find-multiples-and-factors"
+  },
+  "arith.factor.find": {
+    "source": "openstax",
+    "slug": "2-4-find-multiples-and-factors"
+  },
+  "arith.factor.composite": {
+    "source": "openstax",
+    "slug": "2-4-find-multiples-and-factors"
+  },
+  "arith.factor.lcm": {
+    "source": "openstax",
+    "slug": "2-5-prime-factorization-and-the-least-common-multiple"
+  },
+  "stat.prob.basic": {
+    "source": "openstax",
+    "slug": "5-5-averages-and-probability"
+  },
+  "stat.prob.complement": {
+    "source": "openstax",
+    "slug": "5-5-averages-and-probability"
+  },
+  "stat.prob.compound": {
+    "source": "openstax",
+    "slug": "5-5-averages-and-probability"
+  },
+  "stat.prob.sample_space": {
+    "source": "openstax",
+    "slug": "5-5-averages-and-probability"
+  },
+  "stat.prob.counting": {
+    "source": "openstax",
+    "slug": "5-5-averages-and-probability"
+  },
+  "calc.limit.numeric": {
+    "source": "applied_calc",
+    "slug": "limits"
+  },
+  "calc.limit.infinity": {
+    "source": "applied_calc",
+    "slug": "limits"
+  },
+  "calc.deriv.sum_rule": {
+    "source": "applied_calc",
+    "slug": "derivative-rules"
+  },
+  "calc.deriv.product_rule": {
+    "source": "applied_calc",
+    "slug": "derivative-rules"
+  },
+  "calc.deriv.quotient_rule": {
+    "source": "applied_calc",
+    "slug": "derivative-rules"
+  },
+  "calc.deriv.exp_log": {
+    "source": "applied_calc",
+    "slug": "derivative-rules"
+  },
+  "calc.deriv.trig": {
+    "source": "applied_calc",
+    "slug": "derivative-rules"
+  },
+  "calc.deriv.implicit": {
+    "source": "applied_calc",
+    "slug": "implicit-related-rates"
+  },
+  "calc.deriv.related_rates": {
+    "source": "applied_calc",
+    "slug": "implicit-related-rates"
+  },
+  "calc.integral.power_rule": {
+    "source": "applied_calc",
+    "slug": "integrals"
+  },
+  "calc.integral.volume": {
+    "source": "applied_calc",
+    "slug": "integrals"
+  },
+  "discrete.logic.connectives": {
+    "source": "discrete_math",
+    "slug": "prop-logic"
+  },
+  "discrete.logic.truth_tables": {
+    "source": "discrete_math",
+    "slug": "prop-logic"
+  },
+  "discrete.logic.quantifiers": {
+    "source": "discrete_math",
+    "slug": "prop-logic"
+  },
+  "discrete.sets.venn": {
+    "source": "discrete_math",
+    "slug": "sets"
+  },
+  "discrete.graphs.basics": {
+    "source": "discrete_math",
+    "slug": "graph-theory"
+  },
+  "discrete.graphs.paths": {
+    "source": "discrete_math",
+    "slug": "graph-theory"
+  },
+  "discrete.graphs.trees": {
+    "source": "discrete_math",
+    "slug": "graph-theory"
+  },
+  "discrete.recurrence": {
+    "source": "discrete_math",
+    "slug": "sequences"
+  },
+  "trig.radians": {
+    "source": "openstax_precalc",
+    "slug": "5-1-angles"
+  },
+  "trig.period": {
+    "source": "openstax_precalc",
+    "slug": "5-4-right-triangle-trigonometry"
+  },
+  "linalg.systems.matrix": {
+    "source": "hefferon_linalg",
+    "slug": "linear-systems"
+  },
+  "count.backwards": {
+    "source": "manual"
+  },
+  "count.cardinality": {
+    "source": "manual"
+  },
+  "count.compare": {
+    "source": "manual"
+  },
+  "count.number_line": {
+    "source": "manual"
+  },
+  "count.objects": {
+    "source": "manual"
+  },
+  "count.objects_20": {
+    "source": "manual"
+  },
+  "count.ordinal": {
+    "source": "manual"
+  },
+  "count.skip_2": {
+    "source": "manual"
+  },
+  "count.skip_5": {
+    "source": "manual"
+  },
+  "count.skip_10": {
+    "source": "manual"
+  },
+  "ode.separable": {
+    "source": "manual"
+  },
+  "ode.linear_first": {
+    "source": "manual"
+  },
+  "ode.homogeneous": {
+    "source": "manual"
+  },
+  "ode.nonhomogeneous": {
+    "source": "manual"
+  },
+  "ode.exact": {
+    "source": "manual"
+  },
+  "ode.laplace": {
+    "source": "manual"
+  },
+  "ode.systems": {
+    "source": "manual"
+  },
+  "nt.gcd_euclidean": {
+    "source": "manual"
+  },
+  "nt.diophantine": {
+    "source": "manual"
+  },
+  "nt.fermat_little": {
+    "source": "manual"
+  },
+  "nt.crypto": {
+    "source": "manual"
+  },
+  "topo.continuous": {
+    "source": "manual"
+  },
+  "topo.metric": {
+    "source": "manual"
+  },
+  "topo.open_closed": {
+    "source": "manual"
+  },
+  "geo.basic.angle_measure": {
+    "source": "authored"
+  },
+  "geo.basic.angles": {
+    "source": "authored"
+  },
+  "geo.triangle.angles": {
+    "source": "authored"
+  },
+  "geo.basic.vertical": {
+    "source": "authored"
+  },
+  "geo.circle.area": {
+    "source": "authored"
+  },
+  "geo.circle.parts": {
+    "source": "authored"
+  },
+  "geo.triangle.types": {
+    "source": "authored"
+  },
+  "geo.triangle.area": {
+    "source": "authored"
+  },
+  "geo.solid.volume_rect": {
+    "source": "authored"
+  },
+  "geo.basic.points_lines": {
+    "source": "authored"
+  },
+  "geo.quad.perimeter": {
+    "source": "authored"
+  },
+  "geo.quad.types": {
+    "source": "authored"
+  },
+  "geo.quad.area": {
+    "source": "authored"
+  },
+  "geo.basic.complementary": {
+    "source": "authored"
+  },
+  "geo.circle.circumference": {
+    "source": "authored"
+  },
+  "geo.solid.surface_area": {
+    "source": "authored"
+  }
 }
