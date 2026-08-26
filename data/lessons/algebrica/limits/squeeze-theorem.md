@@ -14,9 +14,9 @@ Let \\( x_0 \in \mathbb{R} \cup { \pm\infty } \\) be a limit point, meaning that
 
 \\[g(x) \leq f(x) \leq h(x) \\]
 
-Also assume that the limits of \\( f(x) \\) and \\( h(x) \\) as \\( x \to x_0 \\) exist and are equal to some real number \\( \ell \\): \\[\lim_{x \to x_0} g(x) = \lim_{x \to x_0} h(x) = \ell \\]
+Also assume that the limits of \\( g(x) \\) and \\( h(x) \\) as \\( x \to x_0 \\) exist and are equal to some real number \\( \ell \\): \\[\lim_{x \to x_0} g(x) = \lim_{x \to x_0} h(x) = \ell \\]
 
-Then, under these hypotheses, the function \\( g(x) \\) also admits a limit as \\( x \to x_0 \\), and that limit is: \\[\lim_{x \to x_0} f(x) = \ell \\]
+Then, under these hypotheses, the function \\( f(x) \\) also admits a limit as \\( x \to x_0 \\), and that limit is: \\[\lim_{x \to x_0} f(x) = \ell \\]
 
 
 In the graph, the black curve representing \\( f(x) \\) lies entirely between the lower bound \\( g(x) \\) and the upper bound \\( h(x) \\). As both bounding functions tend to \\( \ell \\), the function \\( f(x) \\) is forced to approach the same limit.
@@ -98,11 +98,11 @@ From the previous inequality, we can write:
 
 Now, since the [logarithmic function](<../logarithmic-function/>) is strictly [increasing](<../increasing-and-decreasing-functions/>), we have:
 
-\\[\log 2 \leq \log(3 + \sin x) \leq \log 4 \\]
+\\[\ln 2 \leq \ln(3 + \sin x) \leq \ln 4 \\]
 
 We now divide all parts of the inequality by \\( x^3 \\) obtaining:
 
-\\[\frac{\log 2}{x^3} \leq \frac{\ln(3 + \sin x)}{x^3} \leq \frac{\log 4}{x^3} \quad \forall \, x > 0 \\]
+\\[\frac{\ln 2}{x^3} \leq \frac{\ln(3 + \sin x)}{x^3} \leq \frac{\ln 4}{x^3} \quad \forall \, x > 0 \\]
 
 Since both bounding functions tend to zero as \\( x \to +\infty \\), we apply the Squeeze Theorem and obtain:
 
@@ -147,3 +147,4 @@ we obtain
 
   * **MIT OpenCourseWare, C. Rodriguez**. [The Squeeze Theorem](https://ocw.mit.edu/courses/18-100a-real-analysis-fall-2020/mit18_100af20_lec8.pdf)
   * **University of California, Berkeley, A. Vizeff**. [Limit Laws and the Squeeze Theorem](https://math.berkeley.edu/~avizeff/calculus-I-F22/lecture-4.pdf)
+  * **OpenStax, Calculus Volume 1, §2.3**. [The Squeeze Theorem](https://openstax.org/books/calculus-volume-1/pages/2-3-the-limit-laws)
