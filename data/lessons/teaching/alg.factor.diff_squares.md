@@ -22,7 +22,7 @@ $$
 
 To use this formula, it's important to recognize which numbers are perfect squares, as in  Figure .
 
-\*\*Example\*\*
+**Example**
 
 Factor $x^2-16$.
 
@@ -32,13 +32,13 @@ $$
 \begin{aligned}x^2-16&=(x-b)(x+b) \\ &=(x-4)(x+4)\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Try to factor one yourself:
 
 We can do a little better. There is nothing special about starting with "$x^2$" in these examples. In full generality:
 
-\*\*Fact\*\*
+**Fact**
 
 The Difference of Squares Formula
 
@@ -50,7 +50,7 @@ $$
 
 .
 
-\*\*Example\*\*
+**Example**
 
 Factor $1-p^2$.
 
@@ -60,7 +60,7 @@ $$
 \begin{aligned}1-p^2&=(A-B)(A+B) \\ &=(1-p)(1+p)\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $m^2n^2-4$.
 
@@ -70,11 +70,11 @@ $$
 \begin{aligned}m^2n^2-4&=(A-B)(A+B) \\ &=(mn-2)(mn+2)\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Try to factor one yourself:
 
-\*\*Example\*\*
+**Example**
 
 Factor $x^6-9$.
 
@@ -84,7 +84,7 @@ $$
 \begin{aligned}x^6-9&=(A-B)(A+B) \\ &=(x^3-3)(x^3+3)\end{aligned}
 $$
 
-\*\*Warning\*\*
+**Warning**
 
 It's a common mistake to write something like $x^2+16=(x+4)(x-4)$. This is not what    allows you to do, and this is in fact incorrect. The issue is that $x^2+16$ is a *sum* of squares, not a *difference*. And it happens that $x^2+16$ is actually prime. In fact, any sum of squares without a common factor will always be prime.
 
@@ -109,7 +109,7 @@ The tricky part is recognizing when a trinomial you have encountered is in this 
 1. Are the first and last terms perfect square? If so, jot down what $A$ and $B$ would be.
 2. When you multiply $2$ with what you wrote down for $A$ and $B$, i.e. $2AB$, do you have the middle term? If you have this middle term exactly, then your polynomial factors as $(A+B)^2$. If the middle term is the negative of $2AB$, then the sign on your $B$ can be reversed, and your polynomial factors as $(A-B)^2$.
 
-\*\*Fact\*\*
+**Fact**
 
 The Perfect Square Trinomial Formula
 
@@ -119,7 +119,7 @@ $$
 \begin{aligned}A^2+2AB+B^2 &= (A+B)^2&&\text{and}& A^2-2AB+B^2 &= (A-B)^2\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $x^2+6x+9$.
 
@@ -131,7 +131,7 @@ $$
 \begin{aligned}x^2+6x+9&=(A+B)^2 \\ &=(x+3)^2\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $4x^2-20xy+25y^2$.
 
@@ -143,15 +143,15 @@ $$
 \begin{aligned}4x^2-20xy+25y^2&=(A-B)^2 \\ &=(2x-5y)^2\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Try to factor one yourself:
 
-\*\*Warning\*\*
+**Warning**
 
 It is not enough to just see that the first and last terms are perfect squares. For example, $9x^2+10x+25$ has its first term equal to $(3x)^2$ and its last term equal to $5^2$. But when you examine $2\cdot(3x)\cdot5$ the result is $30x$, *not* equal to the middle term. So    doesn't apply here. In fact, this polynomial doesn't factor at all.
 
-\*\*Remark\*\*
+**Remark**
 
 To factor these perfect square trinomials, we *could* use methods from  Section  and  Section . As an exercise for yourself, try to factor each of the three previous examples using those methods. The advantage to using    is that it is much faster. With some practice, all of the work for using it can be done mentally.
 
@@ -159,7 +159,7 @@ To factor these perfect square trinomials, we *could* use methods from  Section 
 
 Sometimes factoring a polynomial will take two or more "stages." You might use one of the special patters to factor something into two factors, and then those factors might factor even more. When the task is to *factor* a polynomial, the intention is that you *fully* factor it, breaking down the pieces into even smaller pieces when that is possible.
 
-\*\*Example\*\*
+**Example**
 
 Factor out any greatest common factor
 
@@ -177,7 +177,7 @@ $$
 \begin{aligned}12z^3-27z&=3z\left(4z^2-9\right) \\ &=3z(2z-3)(2z+3)\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Recognize a *second* special pattern
 
@@ -189,7 +189,7 @@ $$
 \begin{aligned}p^4-1&=\left(p^2-1\right)\left(p^2+1\right) \\ \phantom{p^4-1}&=(p-1)(p+1)\left(p^2+1\right)\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $32x^6y^2-48x^5y+18x^4$.
 
@@ -209,7 +209,7 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Describe two special patterns where it is possible to memorize a quick factoring shortcut as discussed in this section.
 

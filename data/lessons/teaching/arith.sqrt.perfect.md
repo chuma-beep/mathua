@@ -6,7 +6,7 @@ In this section, we will learn the basics of *absolute value* and *square root*.
 
 ## Introduction to Absolute Value
 
-\*\*Definition\*\*
+**Definition**
 
 The *absolute value* of a number is the distance between that number and $0$ on a number line. For the absolute value of $x$, we write $\abs{x}$.
 
@@ -18,13 +18,13 @@ Since the distance between $2$ and $0$ on the number line is $2$ units, the abso
 
 Since the distance between $-2$ and $0$ on the number line is also $2$ units, the absolute value of $-2$ is also $2$. We write $\abs{-2}=2$.
 
-\*\*Fact\*\*
+**Fact**
 
 Absolute Value
 
 Taking the absolute value of a number results in whatever the "positive version" of that number is. This is because the real meaning of absolute value is its *distance* from zero.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Calculating Absolute Value
 
@@ -48,7 +48,7 @@ Solution
 
 $\frac{2}{-5}$ is $\frac{2}{5}$ units away from $0$ on a number line, so $\abs{\frac{2}{-5}}=\frac{2}{5}$. Another way to think about this is that the "positive version" of $\frac{2}{-5}$ is $\frac{2}{5}$.
 
-\*\*Warning\*\*
+**Warning**
 
 Absolute Value Does Not Exactly "Make Everything Positive"
 
@@ -88,7 +88,7 @@ Actually the decimal will not terminate, and that is why we used the $\approx$ s
 
 We can calculate the square root of some fractions by hand, such as $\sqrt{\frac{1}{4}}$. The idea is the same: can you think of a number that you would square to get $\frac{1}{4}$? Being familiar with fraction multiplication, we know that $\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{4}$ and so $\sqrt{\frac{1}{4}}=\frac{1}{2}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Square Roots of Fractions
 

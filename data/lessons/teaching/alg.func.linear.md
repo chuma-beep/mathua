@@ -6,7 +6,7 @@ In  Section , we discussed a conceptual understanding of functions and  Definiti
 
 ## Formally Defining a Function
 
-\*\*Definition\*\*
+**Definition**
 
 Function (Technical Definition)
 
@@ -14,7 +14,7 @@ A *function* is a collection of ordered pairs $(x,y)$ such that any particular v
 
 How is this definition consistent with the informal  Definition , which describes a function as a *process*? Well, if you have a collection of ordered pairs $(x,y)$, you can choose to view the left number as an input, and the right value as the output. If the function's name is $f$ and you want to find $f(x)$ for a particular number $x$, look in the collection of ordered pairs to see if $x$ appears among the first coordinates. If it does, then $f(x)$ is the (unique) $y$-value it was paired with. If it does not, then that $x$ is just not in the domain of $f$, because you have no way to determine what $f(x)$ would be.
 
-\*\*Example\*\*
+**Example**
 
 Using  Definition , a function $f$ could be given by $\{(1,4), (2,3), (5,3), (6,1)\}$.
 
@@ -22,7 +22,7 @@ Using  Definition , a function $f$ could be given by $\{(1,4), (2,3), (5,3), (6,
 2. What is $f(2)?$ Since the ordered pair $(2,3)$ appears in the collection of ordered pairs, $f(2)=3$.
 3. What is $f(3)?$ None of the ordered pairs in the collection start with $3$, so $f(3)$ is undefined, and we would say that $3$ is not in the domain of $f$.
 
-\*\*Example\*\*
+**Example**
 
 A Function Given as a Table
 
@@ -36,7 +36,7 @@ $$
 
 .
 
-\*\*Example\*\*
+**Example**
 
 A Function Given as a Formula
 
@@ -48,7 +48,7 @@ You could move on to *any*$x$-value, like say $x=2.1$. We can calculate that $f(
 
 The collection is so large that we cannot literally list all the ordered pairs as was done in  Example  and  Example . We just have to imagine this giant collection of ordered pairs. And if it helps to conceptualize it, we know that the ordered pairs $(2,4)$ and $(2.1,4.41)$ are included.
 
-\*\*Example\*\*
+**Example**
 
 A Function Given as a Graph
 
@@ -64,13 +64,13 @@ $$
 
 In  Figure , we can see a few whole number function values, like $q(0)=0$ and $q(1)=2$. But the entire curve has infinitely many points on it and we'd never be able to list them all. We just have to imagine the giant collection of ordered pairs. And if it helps to conceptualize it, we know that the ordered pairs $(0,0)$ and $(1,2)$ are included.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Identifying What is *Not* a Function
 
 Just because you have a set of order pairs, a table, a graph, or an equation, it does not necessarily mean that you have a function. Conceptually, whatever you have needs to give consistent outputs if you feed it the same input. More technically, the set of ordered pairs is not allowed to have two ordered pairs that have the same $x$-value but different $y$-values.
 
-\*\*Example\*\*
+**Example**
 
 Consider each set of ordered pairs. Does it make a function?
 
@@ -86,11 +86,11 @@ Consider each set of ordered pairs. Does it make a function?
 
 Now that we understand how some sets of ordered pairs might not be functions, what about tables, graphs, and equations? If we are handed one of these things, can we tell whether or not it is giving us a function?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Does This Table Make a Function?
 
-\*\*Example\*\*
+**Example**
 
 Does This Graph Make a Function?
 
@@ -110,13 +110,13 @@ The graph in  Figure  does *not* make $y$ a function of $x$. There are many orde
 
 This last set of examples might reveal something to you. For instance in  Figure , the issue is that there are places on the graph with the same $x$-value, but different $y$-values. Visually, what that means is there are places on the graph that are directly above/below each other. Thinking about this leads to a quick visual "test" to determine if a graph gives $y$ as a function of $x$.
 
-\*\*Fact\*\*
+**Fact**
 
 Vertical Line Test
 
 Given a graph in the $xy$-plane, if a vertical line ever touches it in more than one place, the graph does *not* give $y$ as a function of $x$. If vertical lines only ever touch the graph once or never at all, then the graph *does* give $y$ as a function of $x$.
 
-\*\*Example\*\*
+**Example**
 
 In each graph from  Example , we can apply the   .
 
@@ -136,7 +136,7 @@ Lastly, we come to equations. Certain equations with variables $x$ and $y$ clear
 
 With other equations, it may not be immediately clear whether or not they make $y$ a function of $x$.
 
-\*\*Example\*\*
+**Example**
 
 Do each of these equations make $y$ a function of $x$?
 
@@ -154,15 +154,15 @@ Do each of these equations make $y$ a function of $x$?
    2. Can you just isolate $y$ in terms of $x$? You might get started and use algebra to convert $x^2+y^2=9$ into $y^2=9-x^2$. But what now? The best you can do is acknowledge that $y$ is either the positive or the negative square root of $9 - x^2$. You might write $y=\pm\sqrt{9-x^2}$. But now for almost any valid $x$-value, there are *two* associated $y$-values.
    3. You recognize that the graph of this equation would be a circle with radius $3$, and so it would not pass the   .
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Suppose you have a "relation". That is, a set of order pairs, a table of $x$- and $y$-values, a graph, or an equation in $x$ and $y$. What is the one thing that could happen that would make the relation *not* be a function?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain how to use the vertical line test.
 

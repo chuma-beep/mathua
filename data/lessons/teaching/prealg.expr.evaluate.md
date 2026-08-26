@@ -16,7 +16,7 @@ It is important to be clear about what unit of measure goes with a variable. Wit
 
 Sometimes the units we should use for a variable are suggested indirectly. For example if we're told that a car has used so many *gallons* of gas after traveling so many *miles*, then we should measure gas mileage in $\text{milepergallon}$, not $\text{kilometerpergallon}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Naming Variables
 
@@ -48,7 +48,7 @@ $$
 
 Note that this definition of "algebraic expression" does *not* include anything with an equal sign ($=$) in it. The idea of an *equation* (which has an equals sign) is discussed in  the section .
 
-\*\*Example\*\*
+**Example**
 
 The expression:
 
@@ -66,13 +66,13 @@ $$
 
 This shows us that $89^{\circ}F$ is approximately the same as $31.67^{\circ}C$.
 
-\*\*Warning\*\*
+**Warning**
 
 Vocabulary
 
 The steps in  the example  are not "solving", as far as algebra vocabulary is concerned. "Solving" is a word you might want to use because in everyday English you are "finding an answer". However in algebra, there is a special meaning for the term "solving" that is discussed in  the section . Here, when we substitute in values for variables and then compute the result, we are "evaluating an expression", not solving anything.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Convert Temperature
 
@@ -98,7 +98,7 @@ $$
 
 So $-20^{\circ}F$ is equivalent to about $-28.89^{\circ}C$.
 
-\*\*Example\*\*
+**Example**
 
 Stair Rise and Run
 
@@ -126,11 +126,11 @@ $$
 
 . So each step would have a run of $8.5\,\text{in}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Stair Rise and Run
 
-\*\*Exercise\*\*
+**Exercise**
 
 Rising Rents
 
@@ -150,7 +150,7 @@ Solution
 
 Algebraic expressions might have exponents, absolute value bars, and radicals. This does not change the basic approach to evaluating them.
 
-\*\*Example\*\*
+**Example**
 
 Tsunami Speed
 
@@ -166,7 +166,7 @@ The speed of tsunami with a depth of $30\,\text{m}$ is about $17.15\,\text{m}/$.
 
 We have been evaluating expressions, but we can evaluate formulas in the same way. A *formula* has an equal sign with an expression to the right. On the left of the  equal sign, there is a variable that represents the result. For example, we could write the formula $s=\sqrt{9.8d}$ for the speed of a tsunami from  the example .
 
-\*\*Exercise\*\*
+**Exercise**
 
 Tent Height
 
@@ -178,11 +178,11 @@ When you are $2.5$ $\text{ft}$ from the west side, the height is .
 
 Solution
 
-\*\*Exercise\*\*
+**Exercise**
 
 Mortgage Payments
 
-\*\*Warning\*\*
+**Warning**
 
 Rounding Too Much
 
@@ -192,7 +192,7 @@ You might have noticed in the explanation to  the exercise  that during the comp
 
 When we substitute negative numbers into an expression, it's important to use parentheses  around them or else it's easy to forget that a *negative* number is being raised to a power.
 
-\*\*Example\*\*
+**Example**
 
 Evaluate $x^2$ for $x=-2$.
 
@@ -206,7 +206,7 @@ The original expression $x^2$ takes $x$ and squares it, so we want to do the sam
 
 So it's wise to always use parentheses when substituting in a negative number.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Multivariable Expressions
 
@@ -236,15 +236,15 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is a reason for wanting to use a letter other than $x$, $y$, or $z$ as a variable?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is the difference between an "algebraic expression" and a "formula", as these things were described in this section? (Other math resources may define these terms differently.)
 
-\*\*Exercise\*\*
+**Exercise**
 
 What should you watch out for when substituting in a negative number for a variable?
 

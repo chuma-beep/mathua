@@ -1,8 +1,4 @@
 {
-  "teaching/alg.linear.slope.md": [
-    "KaTeX parse error: Undefined control sequence: \\*",
-    "struct: raw latex in prose"
-  ],
   "algebrica/complex-numbers/roots-of-unity.md": [
     "struct: raw latex in prose"
   ],
@@ -31,6 +27,9 @@
     "struct: raw latex in prose"
   ],
   "algebrica/series/root-test-for-series-convergence.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/alg.linear.slope.md": [
     "struct: raw latex in prose"
   ],
   "teaching/arith.add.carry.md": [

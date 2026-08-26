@@ -48,13 +48,13 @@ $$
 
 Notice what happens with the numerator and denominator swapping places. The multiplicative inverse of a number is also called its *reciprocal*.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Matching Vocabulary
 
 Match each concept with the corresponding vocabulary term.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Matching Identities and Inverses
 
@@ -116,19 +116,19 @@ $$
 
 Practice these properties in the following exercises.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Matching Vocabulary
 
 Match each concept with the corresponding vocabulary term.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Matching Properties to Examples
 
 Match each algebra property with an example.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Use the commutative property of multiplication to write an equivalent expression to .
 
@@ -164,7 +164,7 @@ $$
 
 So combining like terms is actually making use of the distributive property. In practice, it's better for you to do this the fast way. But you can grow you understanding and appreciation for algebra if you see how the above steps break things down with one official algebra property at a time.
 
-\*\*Exercise\*\*
+**Exercise**
 
 $6c+12c-5c$
 
@@ -208,7 +208,7 @@ $$
 
 That was a lot to do! So it's worth repeating that it is good if you can more quickly simplify $(4x+5)+(3x+7)$ to $7x+12$. The above demonstrates how the algebra properties, one at a time, truly justify and validate that simplification.
 
-\*\*Exercise\*\*
+**Exercise**
 
 $(2x+3)+(4x+5)$
 
@@ -228,13 +228,13 @@ $$
 \begin{aligned}3+4(5x+7)&=3+\Big(4(5x)+4(7)\Big) \\ &=3+(20x+28) \\ &=3+(28+20x) \\ &=(3+28)+20x \\ &=31+20x\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Algebra Steps to Simplify an Expression
 
 Put the steps to simplify $5+9(2-3x)$ in the correct order. Use only one algebra property or arithmetic operation in each step. It's possible you should not use all of the steps provided here as options.
 
-\*\*Exercise\*\*
+**Exercise**
 
 $4-(3x-9)$
 
@@ -250,17 +250,17 @@ Solution
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Why is the number $1$ called the "multiplicative identity"?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Consider the expression $138+25+5$. According to the order of operations, you should add this from left to right, and start out by adding $(138+25)+5$.
 
 Which property of algebra allows you to view this as equal to $138+(25+5)$? (Adding them that way is probably easier to do in your head.)
 
-\*\*Exercise\*\*
+**Exercise**
 
 Whenever you combine like terms, which algebraic property of numbers are you using?
 

@@ -14,17 +14,17 @@ Before continuing, a review on how notation for intervals works may be useful, a
 
 ## Unions of Intervals
 
-\*\*Definition\*\*
+**Definition**
 
 The *union* of two sets, $A$ and $B$, is the set of all elements contained in either $A$ or $B$ (or both). We write $A\cup B$ to indicate the union of the two sets.
 
 In other words, the union of two sets is what you get if you toss every number in both sets into a bigger set.
 
-\*\*Example\*\*
+**Example**
 
 The union of sets $\{1,2,3,4\}$ and $\{3,4,5,6\}$ is the set of all elements from either set. So $\{\highlight{1,2,3,4}\}\cup\{3,4,\highlight{5,6}\}=\{\highlight{1,2,3,4,5,6}\}$. Note that we don't write duplicates.
 
-\*\*Example\*\*
+**Example**
 
 Visualize the union of the sets $(-\infty,4)$ and $[7,\infty)$.
 
@@ -36,17 +36,17 @@ The two intervals should be viewed as a single object when stating the union, so
 
 *A number line sketch of $(-\infty,4)\cup[7,\infty)$*
 
-\*\*Definition\*\*
+**Definition**
 
 The *intersection* of two sets, $A$ and $B$, is the set of all elements that are in $A$*and*$B$. We write $A\cap B$ to indicate the intersection of the two sets.
 
 In other words, the intersection of two sets is where the two sets overlap.
 
-\*\*Example\*\*
+**Example**
 
 The intersection of sets $\{1,2,3,4\}$ and $\{3,4,5,6\}$ is the set of all elements that are in common to both sets. So $\{1,2,\highlight{3,4}\}\cap\{\highlight{3,4},5,6\}=\{\highlight{3,4}\}$.
 
-\*\*Example\*\*
+**Example**
 
 Find the intersection of the sets $(-\infty,5)$ and $[3,\infty)$.
 
@@ -66,11 +66,11 @@ $$
 
 .
 
-\*\*Remark\*\*
+**Remark**
 
 Note that every intersection of two intervals can and should be simplified in some way.  On the other hand, there *are* unions which cannot be algebraically simplified. For example, if the two sets have nothing in common, as in $(-\infty,4)$ and $[7,\infty)$ again, then the union is simply $(-\infty,4)\cup[7,\infty)$ which is our final simplification.
 
-\*\*Example\*\*
+**Example**
 
 Simplify the intersections and unions.
 
@@ -88,13 +88,13 @@ Simplify the intersections and unions.
 
    Since the two sets have nothing in common, their intersection is empty.
 
-\*\*Remark\*\*
+**Remark**
 
 In this section, we mostly use  interval notation  to answer questions. Recall that we can also use  set builder notation . For example, the set $[3,\infty)$ can also be written as $\{x\mid x\ge 3\}$.
 
 ## "Or" Compound Inequalities
 
-\*\*Definition\*\*
+**Definition**
 
 A *compound inequality* is a grouping of two or more inequalities into a larger inequality statement. These usually come in two flavors: "or" and "and" inequalities. For an example of an "or" compound inequality, you might get a discount at the movie theater if your age is less than $13$*or* greater than $64$. For an example of an "and" compound inequality, to purchase a drink at a bar in Oregon, you need to be over $21$ years old *and* be have money for your drink. You need to fulfill *both* requirements.
 
@@ -102,11 +102,11 @@ In math, the technical term *or* means "either or both." So, mathematically, if 
 
 "Or" shows up in math between equations (as in when solving a quadratic equation, you might end up with "$x=2$ or $x=-3$") or between inequalities (which is what we're about to discuss).
 
-\*\*Remark\*\*
+**Remark**
 
 The definition of "or" is very close to the definition of a union where you combine elements from either or both sets together. In fact, when you have an "or" between inequalities in a compound inequality, to find the solution set of the compound inequality, you find the union of the the solutions sets of each of the pieces.
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -126,7 +126,7 @@ $$
 
 .
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -170,7 +170,7 @@ We have finished the problem, but for the sake of completeness, let's try to ver
 
 This completes the check. Numbers from within the solution region make the compound inequality true and numbers outside the solution region make the compound inequality false.
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -194,7 +194,7 @@ $$
  \left(-\infty,\frac{2}{3}\right]\cup(7,\infty) 
 $$
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -236,7 +236,7 @@ $$
 
 One of these inequalities is false: $-1\ngeq2$. This implies that the entire original inequality, $-1\lt3\geq2$, is nonsense.
 
-\*\*Example\*\*
+**Example**
 
 Decide whether or not the following inequalities are true or false.
 
@@ -262,7 +262,7 @@ We need to go through all four single inequalities for each. If the inequality i
 
 As a general hint, no (nontrivial) three-part inequality can ever be true if the inequality signs are not pointing in the same direction. So no matter what numbers $a$, $b$, and $c$ are, both $a\lt b\geq c$ and $a\geq b \lt c$ cannot be true! Soon you will be writing inequalities like $2\lt x \le 4$ and you need to be sure to check that your answer is feasible. You will know that if you get $2\gt x \le 4$ or $2\lt x \geq 4$ that something went wrong in the solving process. The only exception is that something like $1\le1\geq1$ is true because $1=1=1$, although this shouldn't come up very often!
 
-\*\*Example\*\*
+**Example**
 
 Write the solution set to the compound inequality.
 
@@ -272,7 +272,7 @@ $$
 
 The solutions to the three-part inequality $-7\lt x\le 5$ are those numbers that are trapped between $-7$ and $5$, including $5$ but not $-7$. Keep in mind that there are infinitely many decimal numbers and irrational numbers that satisfy this inequality like $-2.781828$ and $\pi$. We will write these numbers in interval notation as $(-7,5]$ or in set builder notation as $\{x\mid -7\lt x\le 5\}$.
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -284,7 +284,7 @@ $$
 \begin{aligned}4&\le 9x+13\lt 20 \\ 4\subtractright{13}&\le 9x+13\subtractright{13}\lt 20\subtractright{13} \\ -9&\le 9x\lt 7 \\ \divideunder{-9}{9}&\le \divideunder{9x}{9}\lt \divideunder{7}{9} \\ -1&\le x\lt \frac{7}{9}\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -300,11 +300,11 @@ $$
 
 Here we will deal with the other kind of compound inequality: the "and" variety.
 
-\*\*Remark\*\*
+**Remark**
 
 An "and" statement means that you need both inequalities to be true simultaneously. In English, if you say, "I need Khaleem *and* Freja to paint the fence," then the only way you will be happy is if *both* people are working simultaneously on the fence. This statement that both things happen at the same time should be very reminiscent of our discussion of intersections earlier in this section. In fact, every "and" statement will result in the intersection of the solution sets of the pieces.
 
-\*\*Example\*\*
+**Example**
 
 Solve the compound inequality.
 
@@ -347,7 +347,7 @@ We have finished the problem, but for the sake of completeness, let's try to "ve
 
 So, numbers outside the proposed solution region make the compound inequality false, and numbers inside the region make the compound inequality true. We have verified our solution set.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Solve the compound inequality.
 
@@ -373,7 +373,7 @@ $$
 
 ## Applications of Compound inequalities
 
-\*\*Example\*\*
+**Example**
 
 Raphael's friend is getting married and he's decided to give them some dishes from their registry. Raphael doesn't want to seem cheap but isn't a wealthy man either, so he wants to buy "enough" but not "too many." He's decided that he definitely wants to spend at least $$\$150$$ on his friend, but less than $$\$250$$. Each dish is $$\$21.70$$ and shipping on an order of any size is going to be $$\$19.99$$. Given his budget, set up and algebraically solve a compound inequality to find out what his different options are for the number of dishes that he can buy.
 
@@ -393,7 +393,7 @@ The interpretation of this inequality is a little tricky. Remember that $x$ repr
 
 In conclusion, Raphael should buy somewhere between 6 and 10 dishes for his friend to stay within his budget.
 
-\*\*Example\*\*
+**Example**
 
 Oak Ridge National Laboratory, a renowned scientific research facility, compiled some  on fuel efficiency of a mid-size hybrid car versus the speed that the car was driven. A model for the fuel efficiency $e(x)$ (in miles per gallon, $\text{milepergallon}$) at a speed $x$ (in miles per hour, $\text{mileperhour}$) is $e(x)=88-0.7x$.
 
@@ -414,19 +414,19 @@ This inequality says that our model is applicable when the car's speed is betwee
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is the difference between an "inequality" and a "compound inequality"?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is the difference between a union and an intersection?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain why $-3\lt5\ge2$ doesn't make mathematical sense.
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you solve a compound inequality and your final simplification is "$x\gt7\text{ and }x\lt12$", how many solutions are in your solution set? How would you write those solutions?
 

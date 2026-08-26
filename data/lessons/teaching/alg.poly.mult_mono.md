@@ -4,7 +4,7 @@
 
 Previously in  the section , we learned how to multiply two monomials together (such as $4xy\cdot3x^2$). And in  the section , we learned how to add and subtract polynomials even when there is more than one term (such as $(4x^2-3x)+(5x^2+x-2)$). In this section, we will learn how to *multiply* polynomials with *more than one* term.
 
-\*\*Example\*\*
+**Example**
 
 Revenue
 
@@ -30,7 +30,7 @@ $$
 \begin{aligned}\highlight{-4x}(3x^2+5) &= \multiplyleft{(-4x)}\left(3x^2\right)+\multiplyleft{(-4x)}(5) \\ &=-12x^3-20x\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 A rectangle's length is $4$ meters longer than its width. Assume its width is $w$ meters. Use a simplified polynomial to model the rectangle's area in terms of $w$ as the only variable.
 
@@ -46,7 +46,7 @@ The rectangle's area can be modeled by $w^2+4w$ square meters.
 
 In the second line of work above, we recognize that $(w+4)w$ is the same as $w(w+4)$. Whether the $w$ is written before or after the binomial, we are still able to distribute the $w$ to simplify the product.
 
-\*\*Exercise\*\*
+**Exercise**
 
 The distributive property can be understood visually with a *generic rectangle*.
 
@@ -118,7 +118,7 @@ $$
 
 Notice that the areas of the four smaller rectangles are exactly the same as the four terms we obtained using distribution, which are also the same four terms that came from the  method. The  method and generic rectangles approach are just different ways to represent the distributing.
 
-\*\*Example\*\*
+**Example**
 
 Multiply $(2x-3y)(4x-5y)$ using distribution.
 
@@ -128,7 +128,7 @@ $$
 \begin{aligned}(2x-3y)\highlight{(4x-5y)}&=2x\highlight{(4x-5y)}-3y\highlight{(4x-5y)} \\ &=8x^2-10xy-12xy+15y^2 \\ &=8x^2-22xy+15y^2\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Multiply $(2x-3y)(4x-5y)$ using .
 
@@ -138,7 +138,7 @@ $$
 \begin{aligned}(2x-3y)(4x-5y)&= (\overbrace{{\stackrel{}{2x}}\cdot{4x}}^{\large\text{F}})+ (\overbrace{{\stackrel{}{2x}}\cdot{(-5y)}}^{\large\text{O}})+ (\overbrace{{\stackrel{}{-3y}}\cdot{4x}}^{\large\text{I}})+ (\overbrace{{\stackrel{}{-3y}}\cdot{(-5y}}^{\large\text{L}}) \\ &=8x^2-10xy-12xy+15y^2 \\ &=8x^2-22xy+15y^2\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Multiply $(2x-3y)(4x-5y)$ using generic rectangles.
 
@@ -156,7 +156,7 @@ $$
 \begin{aligned}(2x-3y)(4x-5y)&=8x^2-10xy-12xy+15y^2 \\ &=8x^2-22xy+15y^2\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Multiply and simplify the formula for Avery's organic jam revenue, $R$ (in dollars), from  the example . In that example $R=(13+0.25x)(1500-50x)$ and $x$ represents the number of times they raised the price by 25 cents.
 
@@ -168,7 +168,7 @@ $$
 
 Now we have a formula for Avery's revenue based on how many times they raise the price. If we wanted to, we could study this formula more to find ways to maximize that revenue.
 
-\*\*Example\*\*
+**Example**
 
 Tyrone is an artist and he sells each of his paintings for $$\$200$$. Currently, he can sell $100$ paintings per year. So his annual revenue from selling paintings is $$\$200\cdot100=\$20000$$. He plans to raise the price. However, for each \$20 price increase, his customers will buy $5$ fewer paintings each year.
 
@@ -186,7 +186,7 @@ $$
 
 After raising the price $x$ times, each time by \$20, Tyrone's annual revenue from paintings would be $-100x^2+1000x+20000$ dollars.
 
-\*\*Example\*\*
+**Example**
 
 What would happen if we needed to multiply two binomials, but also there is a monomial out front? What is the result for $3(x + 2)(2x + 5)$?
 
@@ -206,7 +206,7 @@ $$
 
 To multiply polynomials that have more than two terms, we can use repeated distribution and monomial multiplication. Whether we are working with binomials, trinomials, or even larger polynomials, the process is fundamentally the same.
 
-\*\*Example\*\*
+**Example**
 
 Multiply $\left( x+5 \right)\left( x^2-4x+6 \right)$.
 
@@ -220,15 +220,15 @@ $$
 \begin{aligned}\left(x+5\right)\highlight{\left( x^2-4x+6 \right)}&= x\highlight{\left( x^2-4x+6 \right)}+5\highlight{\left( x^2-4x+6 \right)} \\ &= x\cdot \highlight{x^2} - x\cdot \highlight{4x} +x\cdot \highlight{6}+5\cdot \highlight{x^2} - 5\cdot \highlight{4x} +5\cdot \highlight{6} \\ &= x^3 -4x^2 +6x +5x^2 -20x +30 \\ &= x^3+x^2-14x+30\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Describe three ways you could go about multiplying $(x+3)(2x+5)$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you multiplied out $(a+b+c)(d+e+f+g)$, how many terms would there be? (Try to answer without actually writing them all down.)
 

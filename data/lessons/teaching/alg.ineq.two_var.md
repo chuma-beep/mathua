@@ -6,7 +6,7 @@ In this text, we have mostly focused on  solving inequalities algebraically . Wh
 
 ## Solving Inequalities Graphically
 
-\*\*Example\*\*
+**Example**
 
 Business leaders and professionals around the world concern themselves with money and how to grow their wealth. While a vast majority of people who live in the United States own few or no stocks, the stock market is important to learn about for anyone interested in earning a retirement. Stock owners need to know when to buy or sell their stocks to make a profit and the most essential tool to do so is the ability to read a graph. Let's examine a graph of the actual closing value of Apple (AAPL) stock from June 3, 2019 to August 6, 2019.
 
@@ -24,7 +24,7 @@ With a zoomed-in and rescaled graph, we can clearly see the dates that would hav
 
 Let's turn to an example involving a linear equation.
 
-\*\*Example\*\*
+**Example**
 
 Solve the inequality $3x-2\lt7$ graphically.
 
@@ -40,13 +40,13 @@ Since we are trying to solve the inequality $3x-2\lt7$, we need to examine the g
 
 Recall in  Section  that we learned that graphs of absolute value function are in general shaped like "V"s. We can now solve some absolute value inequalities graphically.
 
-\*\*Example\*\*
+**Example**
 
 Graphically solving the inequality $\abs{2x-1} \le 5$ means looking for the $x$-values where the graph of $y=\abs{2x-1}$ is below (or touching) the line $y=5$. On the graph the highlighted region of $y=\abs{2x-1}$ is the portion that is below the line $y=5$, and the $x$-values in that region are $[-2,3]$.
 
 *$y=\abs{2x-1}$ and $y=5$*
 
-\*\*Example\*\*
+**Example**
 
 Solve the inequality $\abs{\frac{2}{3}x+1} \lt 3$ graphically.
 
@@ -58,7 +58,7 @@ The portion of the graph of $y=\abs{\frac{2}{3}x+1}$ that is below $y=3$ is high
 
 The last examples had absolute value expressions being *less than* some value. We now need to investigate what happens when we have an absolute value expression that is *greater than* a value.
 
-\*\*Example\*\*
+**Example**
 
 To graphically solve the inequality $\abs{x-1} \gt 3$ would mean looking for the $x$-values where the graph of $y=\abs{x-1}$ is *above* the line $y=3$.
 
@@ -66,7 +66,7 @@ On the graph the highlighted region of $y=\abs{x-1}$ is the portion that is abov
 
 *$y=\abs{x-1}$ and $y=3$*
 
-\*\*Example\*\*
+**Example**
 
 Solve the inequality $\abs{\frac{1}{3}x+2} \ge 6$ graphically.
 
@@ -78,7 +78,7 @@ The portion of the graph of $y=\abs{\frac{1}{3}x+2}$ that is above $y=6$ is high
 
 Solving inequalities with quadratic expressions graphically is very similar to solving absolute value inequalities graphically.
 
-\*\*Example\*\*
+**Example**
 
 Graphically solve the following quadratic inequalities.
 
@@ -102,7 +102,7 @@ For both parts of this example, we start by graphing the equations $y=42(x-2)^2-
 
 ## Solving Compound Inequalities Graphically
 
-\*\*Example\*\*
+**Example**
 
 Figure  shows a graph of $y=f(x)$. Use the graph to solve the inequality $2\le f(x) \lt 6$.
 
@@ -112,7 +112,7 @@ To solve the inequality $2\le f(x) \lt 6$ means to find the $x$-values that give
 
 *Graph of $y=f(x)$ and the solution set to $2\le f(x) \lt 6$*
 
-\*\*Example\*\*
+**Example**
 
 Figure  shows a graph of $y=g(x)$. Use the graph to solve the inequality $-4\lt g(x) \le 3$.
 
@@ -124,7 +124,7 @@ The solution set is the compound inequality $(-2.1,0.7)\cup(2.4,3.2]$.
 
 *Graph of $y=g(x)$ and solution set to $-4\lt g(x) \le 3$*
 
-\*\*Example\*\*
+**Example**
 
 Phuong is taking the standard climbing route on Mount Hood from Timberline Lodge up the Southside Hogsback to the summit and back down the same way. Her altitude can be very closely modeled by an absolute value function since the angle of ascent is nearly constant. Let $x$ represent the number of miles walked from Timberline Lodge, and let $f(x)$ represent the altitude, in miles, after walking for a distance $x$. The altitude can be modeled by $f\left(x\right)=2.1-0.3077\cdot\abs{x-3.25}$. Note that below Timberline Lodge this model fails to be accurate.
 
@@ -152,15 +152,15 @@ Phuong is taking the standard climbing route on Mount Hood from Timberline Lodge
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 The graph of the function $f$ is above the graph of the function $g$ between $x=6$ and $x=9$. How many solutions does the inequality $f(x)\gt g(x)$ have?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Can the solution set to the inequality $h(x)\gt k(x)$ be the set of all real numbers? Why or why not?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Can the solution set to the inequality $h(x)\gt k(x)$ be the empty set (, the inequality has no solutions)? Why or why not?
 

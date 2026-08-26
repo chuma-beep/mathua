@@ -26,13 +26,13 @@ At the end we just renamed the constant numbers $\frac{C}{B}$ and $\frac{C}{A}$ 
 
 Think about one of these equations: $y=k$. It says that the $y$-value is the same no matter where you are on the line. If you wanted to plot points on this line, you are free to move to the left or to the right on the $x$-axis, but then you always move up (or down) by the same amount to make the $y$-value reach $k$. What does such a line look like?
 
-\*\*Example\*\*
+**Example**
 
 Let's plot the line with equation $y=3$. To plot some points, it doesn't matter what $x$-values we use. All that matters is that $y$ is always $3$.
 
 A line like the one in  the figure  is *horizontal*. It is  parallel to the horizontal axis. All the $y$-values of points on a horizontal line are the same. All lines with an equation in the form $y=k$ are horizontal lines.
 
-\*\*Example\*\*
+**Example**
 
 Let's plot the line with equation $x=5$. Points on the line always have $x=5$, so to make a graph, we must move right to $5$ on the $x$-axis. From there, it does not matter if we move up or down, we would still be at a place where $x=5$.
 
@@ -40,7 +40,7 @@ A line like this is *vertical*, parallel to the vertical axis. All lines with an
 
 A line like the one in  the figure  is *vertical*. It is parallel to the vertical axis. All the $y$-values of points on a vertical line are the same. All lines with an equation in the form $x=h$ are vertical lines.
 
-\*\*Example\*\*
+**Example**
 
 Zero Slope
 
@@ -54,11 +54,11 @@ This gives us an alternative way to think about equations of horizontal lines. T
 
 We use horizontal lines to model scenarios where there is no change in $y$-values, like when Kato stopped for $12$ hours (he deserved a rest)!
 
-\*\*Exercise\*\*
+**Exercise**
 
 Plotting Points
 
-\*\*Example\*\*
+**Example**
 
 Slope of a Vertical Line
 
@@ -66,21 +66,21 @@ What is the slope of a vertical line?  the figure  shows three lines passing thr
 
 If we continued making the line steeper and steeper until it was vertical, the slope triangle would still have a "run" of $1$, but the "rise" would become larger and larger with no upper limit. The slope would be $m=\frac{\text{very large}}{1}$. Actually if the line is vertical, the "rise" segment we've drawn will never make contact with the line. So there won't be any "rise" to correspond with that "run". We usually say that the slope of a vertical line is *undefined*. You can also say that a vertical line "has no slope".
 
-\*\*Fact\*\*
+**Fact**
 
 The slope of a vertical line is undefined.
 
-\*\*Remark\*\*
+**Remark**
 
 Be careful not to mix up "no slope" (which means "its slope is undefined") with "has slope $0$". If a line has slope $0$, it *does* have a slope.
 
 In sports, some players wear number $0$. That's not the same thing as not having a number. This is similar to the situation where having slope $0$ means you do have a slope, and is different from not having a slope.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Plotting Points
 
-\*\*Example\*\*
+**Example**
 
 Let $x$ represent the price of a new $60$-inch television at Target on Black Friday (which was $$\$650$$), and let $y$ be the number of hours you will watch something on this TV over its lifetime. What is the relationship between $x$ and $y$?
 
@@ -96,7 +96,7 @@ Well, there is no getting around the fact that $x=650$. As for $y$, without any 
 
 What makes two lines parallel?
 
-\*\*Example\*\*
+**Example**
 
 Two trees were planted in the same year, and their growth over time is modeled by the two lines in  the figure . Use linear equations to model each tree's growth, and interpret their meanings in this context.
 
@@ -104,13 +104,13 @@ Two trees were planted in the same year, and their growth over time is modeled b
 
 We can see Tree 1's equation is $y=\frac{2}{3}x+2$, and Tree 2's equation is $y=\frac{2}{3}x+5$. Both trees have been growing at the same rate, $\frac{2}{3}$ feet per year, or $2$ feet every $3$ years. The two lines have the same slope $\frac{2}{3}$. No matter which line we look at, moving rightward $3$ units causes us to move upward $2$ units, and so the two lines will never meet. They are parallel.
 
-\*\*Fact\*\*
+**Fact**
 
 For any two non-vertical lines, they are parallel if and only if they have the same slope. (And any two vertical lines are parallel to each other.)
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Perpendicular Lines
 
@@ -126,7 +126,7 @@ $$
 
 .
 
-\*\*Fact\*\*
+**Fact**
 
 For two lines that are neither vertical nor horizontal, they are perpendicular to each  other if and only if the slope of one is the *negative reciprocal* of the slope of  the other. That is, if one has slope $m$, the other has slope $-\frac{1}{m}$.  (And a vertical line and a horizontal line are always perpendicular to each other.)
 
@@ -146,7 +146,7 @@ Here are three pairs of perpendicular lines where we can see if the pattern hold
 &#x20;         $1\cdot-1=-1$
 &#x20;      &#x20;*
 
-\*\*Example\*\*
+**Example**
 
 Line $A$ passes through $(-2,10)$ and $(3,-10)$. Line $B$ passes through $(-4,-4)$ and $(8,-1)$. Determine whether these two lines are parallel, perpendicular or neither.
 
@@ -160,19 +160,19 @@ Their slopes are not the same, so those two lines are not parallel.
 
 The product of their slopes is $(-4)\cdot\frac{1}{4}=-1$, which means the two lines are perpendicular.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain the difference between a line that has no slope and a line that has slope $0$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you make a table of $x$- and $y$-values for a horizontal line what special thing will happen in one of the two columns?
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you know two points on one line, and you know two points on a second line, what could you do to determine whether or not the two lines are perpendicular?
 

@@ -354,6 +354,8 @@ function sectionMarkdown(tree) {
     extensions: [mathToMarkdown(), gfmTableToMarkdown(), directiveToMarkdown()],
     bullet: '-',
   })
+  // Pandoc-escaped emphasis markers leak as \* inside math; KaTeX has no \*.
+  md = md.replace(/\\\*/g, '*')
   // Aligned content that ended up in an inline span (list items, cells) is
   // invalid KaTeX; promote any $...$ carrying alignment to display.
   md = md.replace(/\$([^$\n]*&[^$\n]*)\$/g, (_m, inner) => `$$\n${inner.trim()}\n$$`)

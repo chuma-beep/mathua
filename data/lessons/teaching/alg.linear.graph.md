@@ -22,7 +22,7 @@ The graph of Yara's savings has some things in common with almost every straight
 
 We already have a symbol, $m$, for the slope of a line. That other feature, where the line crosses the $y$-intercept is of interest to us now. The *$y$-intercept* of a line is a *point* where the line crosses the $y$-axis. Since it's on the $y$-axis, the $x$-coordinate of this point is $0$. It is standard to call the point $(0,b)$ the $y$-intercept, and call the number $b$ the "$y$-coordinate of the $y$-intercept". It is almost inevitable that people will find this too wordy, and will call $b$ the $y$-intercept. But technically, the $y$-intercept is $(0,b)$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Use  the figure  to answer this question.
 
@@ -34,7 +34,7 @@ $$
 
 where $m=20$ and $b=50$ are immediately visible in the equation. Now we generalize this.
 
-\*\*Definition\*\*
+**Definition**
 
 Slope-Intercept Form
 
@@ -46,19 +46,19 @@ $$
 
 and this equation is called the *slope-intercept form* of the line. It is called this because the slope and $y$-intercept are immediately discernible from the numbers in the equation.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Remark\*\*
+**Remark**
 
 The number $b$ is the $y$-value when $x=0$. Therefore it is common to refer to $b$ as the *initial value* or *starting value* of a linear relationship.
 
 ## Graphing Slope-Intercept Equations
 
-\*\*Example\*\*
+**Example**
 
 With a simple equation like $y=2x+3$, we can see that this is a line whose slope is $2$ and which has initial value $3$. So starting at $y=3$ on the $y$-axis, each time we increase the $x$-value by $1$, the $y$-value increases by $2$. With these basic observations, we can quickly produce a table and/or a graph.
 
-\*\*Example\*\*
+**Example**
 
 The conversion formula for a Celsius temperature into Fahrenheit is $F=\frac{9}{5}C+32$. This appears to be in slope-intercept form, except that $x$ and $y$ are replaced with $C$ and $F$. Suppose you are asked to graph this equation. How will you proceed? You *could* make a table of values as we did in  the example  but that takes time and effort. Since the equation is in slope-intercept form, there is a *better* way.
 
@@ -71,27 +71,27 @@ Since this equation is for converting a Celsius temperature to a Fahrenheit temp
 
 *Graphing $F=\frac{9}{5}C+32$*
 
-\*\*Example\*\*
+**Example**
 
 Graph $y=-\frac{2}{3}x+10$.
 
 *Graphing $y=-\frac{2}{3}x+10$*
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Writing a Slope-Intercept Equation Given a Graph
 
 We can write a linear equation in slope-intercept form based on its graph. We need to be able to calculate the line's slope and see its $y$-intercept.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Writing a Slope-Intercept Equation Given Two Points
 
 Any two points uniquely determine a line. Once you identify two points, there is a process to find the slope-intercept form of the equation of the line that connects them.
 
-\*\*Example\*\*
+**Example**
 
 Find the slope-intercept form of an equation for the line that passes through the points $(0,5)$ and $(8,-5)$.
 
@@ -103,7 +103,7 @@ $$
 
 We are trying to write $y=mx+b$. Since we already found the slope, we know that we want to write $y=-\frac{5}{4}x+b$ but we need a specific number for $b$. We *happen* to know that one point on this line is $(0,5)$, which is on the $y$-axis because its $x$-value is $0$. So $(0,5)$ is this line's $y$-intercept, and therefore $b=5$. So our equation is $y=-\frac{5}{4}x+5$.
 
-\*\*Example\*\*
+**Example**
 
 Find the slope-intercept form of an equation for the line that passes through the points $(3,-8)$ and $(-6,1)$.
 
@@ -121,15 +121,15 @@ $$
 
 We conclude that the slope-intercept line equation is $y=-x-5$.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Modeling with Slope-Intercept Form
 
 We can model many relationships using slope-intercept form, and then solve related questions using algebra. Here are a few examples.
 
-\*\*Example\*\*
+**Example**
 
 Uber is a ride-sharing company. Its pricing in Portland factors in how much time and how many miles a trip takes. But if you assume that rides average out at a speed of $30\,\text{mileperhour}$, then their pricing scheme boils down to a base of $$\$7.35$$ for the trip, plus $$\$3.85$$ per mile. Use a slope-intercept equation and algebra to answer these questions.
 
@@ -160,19 +160,19 @@ $$
 
 So with $$\$100$$ you could afford a little more than a $24$-mile trip.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 How does "slope-intercept form" get its name?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What are two phrases you can use for "$b$" in a slope-intercept form line equation?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain the two basic steps to graphing a line when you have the equation in slope-intercept form. (Not counting the step where you draw and label the axes and ticks.)
 

@@ -8,7 +8,7 @@ In  the section  we learned how to check whether or not a give number is a solut
 
 Let's start with a simple situation---so simple that you might not need algebra, but the example serves as a warm-up.
 
-\*\*Example\*\*
+**Example**
 
 A number plus $2$ is $6$. What is that number?
 
@@ -34,7 +34,7 @@ This approach ("imagining" what number works in the equation) might work for you
 
 Let's revisit  the example , but think it through differently.
 
-\*\*Example\*\*
+**Example**
 
 If a number plus $2$ is $6$, what is the number?
 
@@ -46,13 +46,13 @@ Doing that subtraction: $6-2=4$.
 
 Let's try this strategy with another example.
 
-\*\*Example\*\*
+**Example**
 
 If a number *minus*$2$ equals $6$, what is that number? The mystery number must be a little larger than $6$. The opposite of subtraction is addition, so if we *add*$2$ to $6$ we will find the unknown number. So the unknown number is $6+2=8$.
 
 Does this strategy work with multiplication and division?
 
-\*\*Example\*\*
+**Example**
 
 If a number multiplied by $2$ makes $6$, what is that number? The mystery number is small, since it gets multiplied by $2$ to make $6$. If we *divide*$6$ by $2$, we will find the unknown number. Note that division is the opposite action of multiplication.
 
@@ -60,7 +60,7 @@ If a number multiplied by $2$ makes $6$, what is that number? The mystery number
 
 So the unknown number is $\frac{6}{2}=3$.
 
-\*\*Example\*\*
+**Example**
 
 If a number divided by $2$ equals $6$, what is the number? We must be starting with a larger number, since cutting it in half makes $6$. If we *multiply*$6$ by $2$ (because multiplying is the opposite of dividing) then we find the unknown number is $6\cdot2=12$.
 
@@ -100,13 +100,13 @@ $$
 
 The equivalent equation in this example is $x=3$, which tells us that the solution to the equation is $3$ and the solution set is $\{3\}$.
 
-\*\*Remark\*\*
+**Remark**
 
 Note that when we divide each side of an equation by a number, we use a fraction bar, not a division symbol. The equation $\divideunder{2x}{2}=\divideunder{6}{2}$ could be written as $2x\divideright{2}=6\divideright{2}$, but algebra tends to avoid using the $\div$ symbol. In part, this is because when writing by hand, it might be confused with a subtraction sign.
 
 Similarly, we can multiply each side of an equation by $2$ if that is helpful, and it will keep a scale in balance. We can summarize these properties.
 
-\*\*Fact\*\*
+**Fact**
 
 Properties of Equivalent Equations
 
@@ -148,7 +148,7 @@ Steps to Solving Simple (One-Step) Linear Equations
 
 Let's look at a few examples.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $y$ in the equation $7+y=3$.
 
@@ -166,13 +166,13 @@ $$
 
 The solution $-4$ is checked, and the solution set is $\{-4\}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 Note that when solving the equation in  the exercise  we found $-3=a$, and did not bother to write it the other way round as $a=-3$. All that really matters is that we ended with a clear statement of the solution set, which was $\{-3\}$.
 
-\*\*Example\*\*
+**Example**
 
 The formula for a circle's circumference is $c=\pi d$, where $c$ represents circumference, $d$ represents diameter, and $\pi$ is a constant with the value of $3.1415926\ldots$.
 
@@ -192,11 +192,11 @@ $$
 
 This checks out, so the circle's diameter is $12\,\text{ft}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Examples so far have solved an equation by undoing addition, subtraction, multiplication, or division. There is one last arithmetic action that we will look into undoing: *negation*. Negation is when you apply the negative sign to a number.  Undoing negation is simple though: just negate again. For example, $-(-42)=42$.
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $-b=2$ for $b$.
 
@@ -234,7 +234,7 @@ The solution $-2$ is checked, and the solution set is $\{-2\}$.
 
 When an equation has fractions, solving it uses the same principles. Of course you may need to use fraction arithmetic. Also, you might make good use of the reciprocal of a fraction as described in  the example .
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $\frac{2}{3}+g=\frac{1}{2}$ for $g$.
 
@@ -252,13 +252,13 @@ $$
 
 The solution $-\frac{1}{6}$ is checked, and the solution set is $\left\{-\frac{1}{6}\right\}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 When the variable in an equation is multiplied by a fraction, you can use the reciprocal of that fraction to help solve the equation. The *reciprocal* of a fraction is the fraction you get  from swapping the numerator and denominator. For example, the reciprocal of $\frac{2}{3}$ is $\frac{3}{2}$.
 
 A reciprocal is useful because when a fraction is multiplied by its reciprocal, the result is $1$. For example, $\frac{2}{3}\cdot\frac{3}{2}=1$. This helps us remove a fraction when it is multiplied by the variable.
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $\frac{5}{8}d=7$ for $d$.
 
@@ -276,11 +276,11 @@ $$
 
 The solution $\frac{56}{5}$ is checked, and the solution set is $\left\{\frac{56}{5}\right\}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Sometimes the variable is in the numerator of a fraction, like in $\frac{3x}{4}$. This is actually the same as $\frac{3}{4}x$. Either way, $x$ is multiplied by $3$ and divided by $4$. So this is another situation where the reciprocal of a fraction can help.
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $\frac{3x}{4}=10$ for $x$.
 
@@ -298,19 +298,19 @@ $$
 
 The solution $\frac{40}{3}$ is checked, and the solution set is $\left\{\frac{40}{3}\right\}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you imagine the equation $2x+3=11$ as a balance scale with bricks on each side, how many bricks do you imagine are on the left side? How many *types* of brick do you imagine being on the left side?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is the opposite operation of multiplying by a negative number?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Each time you solve an algebra equation, there is something you should be in the habit of doing at the end. Describe that thing you should do.
 

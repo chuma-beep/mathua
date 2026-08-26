@@ -20,7 +20,7 @@ The most basic technique for factoring involves recognizing the *greatest common
 
 Similarly, the greatest common factor between $4x$ and $3x^2$ is $x$. If you write $4x$ as a product of its factors, you have $2\cdot 2 \cdot x$. And if you fully factor $3x^2$, you have $3\cdot x\cdot x$. The only factor they have in common is $x$, so that is the greatest common factor. No larger expression goes in nicely to both expressions.
 
-\*\*Example\*\*
+**Example**
 
 Finding the Greatest Common Factor
 
@@ -32,7 +32,7 @@ $$
 
 With $2$ and $x$ in common, the greatest common factor is $2x$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Factoring Out the Greatest Common Factor
 
@@ -46,7 +46,7 @@ Factoring Out the Greatest Common Factor
 2. Write the greatest common factor outside a pair of parentheses with the appropriate addition or subtraction signs inside.
 3. For each term from the original expression, what would you multiply the greatest common factor by to result in that term? Write your answer in the parentheses.
 
-\*\*Example\*\*
+**Example**
 
 To factor $12x^2+15x$:
 
@@ -54,7 +54,7 @@ To factor $12x^2+15x$:
 2. $3x(\phantom{4x}+\phantom{5})$
 3. $3x(4x+5)$
 
-\*\*Example\*\*
+**Example**
 
 Factor the polynomial $3x^3+3x^2-9$.
 
@@ -84,7 +84,7 @@ Factor the polynomial $3x^3+3x^2-9$.
 
 To check that this is correct, multiplying through $3(x^3+x^2-3)$ should give the original expression $3x^3+3x^2-9$. We check this, and it does.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Visualizing With Rectangles
 
@@ -97,7 +97,7 @@ Factoring Out the Greatest Common Factor Using Rectangles
 3. Mark the width of each rectangle based on each rectangle's area and height.
 4. Since the overall rectangle's area equals its width times its height, the height is one factor, and the sum of the widths is another factor.
 
-\*\*Example\*\*
+**Example**
 
 We will factor $12x^2+15x$, the same polynomial from the example in  Algorithm , so that you may compare the two styles.
 
@@ -107,7 +107,7 @@ So $12x^2+15x$ factors as $3x(4x+5)$.
 
 Previous examples did not cover every nuance with factoring out the greatest common factor. Here are a few more factoring examples that attempt to do so.
 
-\*\*Example\*\*
+**Example**
 
 Factor $-35m^5+5m^4-10m^3$.
 
@@ -119,7 +119,7 @@ $$
 \begin{aligned}-35m^5\highlight{{}+{}}5m^4\highlight{{}-{}}10m^3&=-5m^3(\phantom{7m^2}\highlight{{}-{}}\phantom{m}\highlight{{}+{}}\phantom{2}) \\ &=-5m^3(7m^2-\phantom{m}+\phantom{2}) \\ &=-5m^3(7m^2-m+\phantom{2}) \\ &=-5m^3(7m^2-m+2)\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $14-7n^2+28n^4-21n$.
 
@@ -137,7 +137,7 @@ $$
 \begin{aligned}14-7n^2+28n^4-21n&=28n^4-7n^2-21n+14 \\ &=7\mathopen{}\left(4n^4-n^2-3n+2\right)\mathclose{}\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $24ab^2+16a^2b^3-12a^3b^2$.
 
@@ -147,13 +147,13 @@ $$
 \begin{aligned}24ab^2+16a^2b^3-12a^3b^2 &=4ab^2\mathopen{}\left(\phantom{6}+\phantom{4ab}-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow>&=4ab^2\mathopen{}\left(6+\phantom{4ab}-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow>&=4ab^2\mathopen{}\left(6+4ab-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow> &=4ab^2\mathopen{}\left(6+4ab-3a^2\right)\mathclose{}\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Factor $4m^2n-3xy$.
 
 There are no common factors in those two terms (unless you want to count $1$ or $-1$, but we do not count these for the purposes of identifying a greatest common factor). In this situation we can say the polynomial is *prime* or *irreducible*, and leave it as it is.
 
-\*\*Example\*\*
+**Example**
 
 Factor $-x^3+2x+18$.
 
@@ -161,11 +161,11 @@ There are no common factors in those three terms, and it would be correct to sta
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Given two terms, how would you describe their "greatest common factor?"
 
-\*\*Exercise\*\*
+**Exercise**
 
 If a simplified polynomial has four terms, and you factor out its greatest common factor, how many terms will remain inside a set of parentheses?
 

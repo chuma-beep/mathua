@@ -12,7 +12,7 @@ We are familiar with the $\sqrt{\phantom{x}}$ symbol. This symbol is used to tur
 
 The $\sqrt{\phantom{x}}$ symbol represents a *process*; it's a way for us to turn numbers into other numbers. This idea of having a process for turning numbers into other numbers is the fundamental topic of this chapter.
 
-\*\*Definition\*\*
+**Definition**
 
 Function (Informal Definition)
 
@@ -20,7 +20,7 @@ A *function* is a process for turning numbers into (potentially) different numbe
 
 Section  covers a more technical definition for functions, and covers topics that are more appropriate when using that definition.  Definition  is so broad that you probably use functions all the time.
 
-\*\*Example\*\*
+**Example**
 
 In each of these examples, some process is used for turning one number into another.
 
@@ -36,7 +36,7 @@ The parentheses in $\operatorname{sqrt}\highlight{(\phantom{x})}$ are very impor
 
 Functions have their own names. We've seen a function named $\operatorname{sqrt}$, but any name you can imagine is allowable. In the sciences, it is common to name functions with whole words, like $\operatorname{weight}$ or $\operatorname{health\_index}$. In math, we often abbreviate such function names to $w$ or $h$. And of course, since the word "function" itself starts with "f," we will often name a function $f$.
 
-\*\*Warning\*\*
+**Warning**
 
 Notation Ambiguity
 
@@ -44,7 +44,7 @@ In some contexts, the symbol $t$ might represent a variable (a number that is re
 
 Next we need to discuss how we go about using a function's name.
 
-\*\*Definition\*\*
+**Definition**
 
 Function Notation
 
@@ -54,7 +54,7 @@ $$
  \begin{matrix} \text{name}\\ \text{of}\\ \text{function} \end{matrix} \left( \begin{matrix} \\ \text{input}\\ \\ \end{matrix} \right) 
 $$
 
-\*\*Example\*\*
+**Example**
 
 $f(13)$ is pronounced "f of 13." The word "of" is very important, because it reminds us that $f$ is a process and we are about to apply that process to the input value $13$. So $f$ is the function, $13$ is the input, and $f(13)$ is the output we'd get from using $13$ as input.
 
@@ -62,15 +62,15 @@ $f(x)$ is pronounced "f of x." This is just like the previous example, except th
 
 $\operatorname{BudgetDeficit}(2017)$ is pronounced "BudgetDeficit of 2017." This is probably about a function that takes a year as input, and gives that year's federal budget deficit as output. The process here of changing a year into a dollar amount might not involve any mathematical formula, but rather looking up information from the Congressional Budget Office's website.
 
-\*\*Note\*\*
+**Note**
 
 While a function has a name like $f$, and the input to that function often has a variable name like $x$, the expression $f(x)$ represents the output of the function. To be clear, $f(x)$ is *not* a function. Rather, $f$ is a function, and $f(x)$ its output when the number $x$ was used as input.
 
-\*\*Exercise\*\*
+**Exercise**
 
 In the following examples, a function is given using a formula, and we will evaluate the function at specific values. See  Section  for a review on evaluating expressions.
 
-\*\*Example\*\*
+**Example**
 
 Let $V$ be the function defined by $V(t)=-5t+1$.
 
@@ -82,7 +82,7 @@ Let $V$ be the function defined by $V(t)=-5t+1$.
 2)
 3)
 
-\*\*Example\*\*
+**Example**
 
 Let $L$ be the function defined by $L(z)=2z^2-z+3$.
 
@@ -94,11 +94,11 @@ Let $L$ be the function defined by $L(z)=2z^2-z+3$.
 2)
 3)
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Warning\*\*
+**Warning**
 
 More Notation Ambiguity
 
@@ -112,7 +112,7 @@ Sometimes it's helpful to think of a function as a machine, as in  Figure .  A *
 
 Since functions are potentially complicated, we want ways to understand them more easily. Two basic tools for understanding a function better are tables and graphs.
 
-\*\*Example\*\*
+**Example**
 
 A Table for the Budget Deficit Function
 
@@ -126,9 +126,9 @@ How is this table helpful? There are things about the function that we can see n
 
 These observations help us understand the function $\operatorname{BudgetDeficit}$ a little better.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Example\*\*
+**Example**
 
 A Table for the Square Root Function
 
@@ -141,11 +141,11 @@ How is this table helpful? Here are some observations that we can make now.
 
 These observations help us understand $\operatorname{sqrt}$ a little better. For instance, based on these observations which do you think is larger: the difference between $\operatorname{sqrt}(23)$ and $\operatorname{sqrt}(24)$, or the difference between $\operatorname{sqrt}(85)$ and $\operatorname{sqrt}(86)$?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Another powerful tool for understanding a function better is a graph. Given a function $f$, one way to make its graph is to take a table of input and output values, and read each row as the coordinates of a point in the $xy$-plane.
 
-\*\*Example\*\*
+**Example**
 
 A Graph for the Budget Deficit Function
 
@@ -153,7 +153,7 @@ Returning to the function $\operatorname{BudgetDeficit}$ that we studied in  Exa
 
 How has this graph helped us to understand the function better? All of the observations that we made in  Example  are perhaps even more clear now. For instance, the spike in the deficit between 2008 and 2009 is now visually apparent. Seeking an explanation for this spike, we recall that there was a financial crisis in late 2008. Revenue from income taxes dropped at the same time that federal money was spent to prevent further losses.
 
-\*\*Example\*\*
+**Example**
 
 A Graph for the Square Root Function
 
@@ -163,13 +163,13 @@ Just as in the previous example, we've plotted points where we have concrete coo
 
 What has this graph done to improve our understanding of $\operatorname{sqrt}$? As inputs ($x$-values) increase, the outputs ($y$-values) increase too, although not at the same rate. In fact we can see that our graph is steep on its left, and less steep as we move to the right. This confirms our earlier observation in  Example  that outputs increase by smaller and smaller amounts as the input increases.
 
-\*\*Remark\*\*
+**Remark**
 
 Graph of a Function
 
 Given a function $f$, when we refer to a *graph of $f$* we are *not* referring to an entire picture, like  Figure . A graph of $f$ is only *part* of that picture---the curve and the points that it connects. Everything else (axes, tick marks, the grid, labels, and the surrounding white space) is just useful decoration so that we can read the graph more easily.
 
-\*\*Remark\*\*
+**Remark**
 
 A Common Wording Misunderstanding
 
@@ -183,13 +183,13 @@ $$
 
 Now given a graph of $f$, we interpret coordinates in the same way.
 
-\*\*Example\*\*
+**Example**
 
 In  Figure  we have a graph of a function $f$. If we wish to find $f(1)$, we recognize that $1$ is being used as an input. So we would want to find a point of the form $(1,\phantom{y})$. Seeking out $x$-coordinate $1$ in  Figure , we find that the only such point is $(1,2)$. Therefore the output for $1$ is $2$; in other words $f(1)=2$.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Example\*\*
+**Example**
 
 Unemployment Rates
 
@@ -217,7 +217,7 @@ And our answer to this question is:
 
 "$t\approx2007.5$ or $t\approx2016$."
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Translating Between Four Descriptions of the Same Function
 
@@ -234,7 +234,7 @@ This has been visualized in  Figure .
 
 *Function Perspectives*
 
-\*\*Example\*\*
+**Example**
 
 Consider a function $f$ that squares its input and then adds $1$. Translate this verbal description of $f$ into a table, a graph, and a formula.
 
@@ -250,7 +250,7 @@ $$
 
 .
 
-\*\*Example\*\*
+**Example**
 
 Let $F$ be the function that takes a Celsius temperature as input and outputs the corresponding Fahrenheit temperature. Translate this verbal description of $F$ into a table, a graph, and a formula.
 
@@ -268,25 +268,25 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 When $g$ is a function, how should you say out loud "$g(x)$?"
 
-\*\*Exercise\*\*
+**Exercise**
 
 There are four main ways to communicate how a function turns its inputs into its outputs. What are they?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is usually an acceptable way to type "the square root of $x$" if you have to type it using a regular keyboard?
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 

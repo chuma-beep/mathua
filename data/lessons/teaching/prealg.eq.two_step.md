@@ -8,7 +8,7 @@ We solved equations in  the section  where only one step was needed to isolate t
 
 ## Solving Two-Step Equations
 
-\*\*Example\*\*
+**Example**
 
 A water tank can hold up to $140$ gallons of water, but it starts with only $5$ gallons. A tap is turned on, pouring $15$ gallons of water into the tank every minute. After how many minutes will the tank be full?
 
@@ -42,11 +42,11 @@ This problem had *context*. It was not simply solving an equation. It came with 
 
 In solving the two-step equation in  the example , we first isolated the variable expression $15t$ and then eliminated the coefficient $15$ by dividing each side of the equation by $15$. These two steps are the heart of our approach to solving linear equations. Try these two steps in the following exercise.
 
-\*\*Exercise\*\*
+**Exercise**
 
 In  the section , there was  the example . In that example, some background information let us set up an equation, but we didn't try to solve it. Now we can try solving it.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Solving Multistep Linear Equations
 
@@ -56,7 +56,7 @@ Steps to Solve Linear Equations
 
 
 
-\*\*Example\*\*
+**Example**
 
 Ahmed has $$\$2500$$ in his savings account and is going to start saving $$\$550$$ per month. Julia has $$\$4600$$ in her savings account and is going to start saving $$\$250$$ per month. If this situation continues, how long will it take for Ahmed to catch up with Julia in savings?
 
@@ -80,7 +80,7 @@ $$
 
 Ahmed will catch up to Julia after $7$ months.
 
-\*\*Exercise\*\*
+**Exercise**
 
 In  the exercise , we could have moved variable terms to the *right* side of the equal sign and number terms to the *left* side. We chose not to, but there's no reason why we couldn't have done that. Let's explore:
 
@@ -100,7 +100,7 @@ For the sake of a slow and careful explanation, the examples in this chapter wil
 
 The next example requires combining like terms.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $n$ in $n-9+3n=n-3n$.
 
@@ -118,7 +118,7 @@ $$
 
 The solution to the equation $n-9+3n=n-3n$ is $\frac{3}{2}$ and the solution set is $\left\{\frac{3}{2}\right\}$.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $a$ in $4 - (3 - a)=-2 - 2(2a + 1)$.
 
@@ -136,7 +136,7 @@ $$
 
 Therefore the solution to the equation is $-1$ and the solution set is $\{-1\}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Revisiting Applications
 
@@ -144,7 +144,7 @@ In  the section , we explored several "word problem" scenarios that led to equat
 
 Here we revisit  the example .
 
-\*\*Example\*\*
+**Example**
 
 A bathtub contains $2.5\,\text{ft}^{3}$ of water. More water is being poured in at a rate of $1.75\,\text{ft}^{3}$ per minute. How long will it be until the amount of water in the bathtub reaches $6.25\,\text{ft}^{3}$?
 
@@ -166,7 +166,7 @@ So it will take about $2.14$ minutes for the tub to have $6.25\,\text{ft}^{3}$ o
 
 Here we revisit  the example .
 
-\*\*Example\*\*
+**Example**
 
 Jakobi's annual salary as a nurse this year is $$\$73{,}290$$. That's following a $4\%$ raise over last year's salary. What was his salary the previous year?
 
@@ -194,13 +194,13 @@ So last year, Jakobi's salary was about $$\$70{,}471$$.
 
 Here we revisit  the exercise .
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Differentiating between Simplifying Expressions, Evaluating Expressions and Solving Equations
 
 Consider the following three examples, which have similarities on the surface, but are fundamentally different from each other.
 
-\*\*Example\*\*
+**Example**
 
 Simplify the expression $10-3(x+2)$.
 
@@ -212,7 +212,7 @@ $$
 
 Note that our final result is an *expression*.
 
-\*\*Example\*\*
+**Example**
 
 Evaluate the expression $10-3(x+2)$ when $x=2$.
 
@@ -224,7 +224,7 @@ $$
 
 Note that our final result here is a *number*.
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $10-3(x+2)=x-16$.
 
@@ -240,7 +240,7 @@ Note that our final result here is a *solution set*.
 
 *Simplifying*, *evaluating*, and *solving* are three different algebra tasks. Students often use these vocabulary terms incorrectly, using one when they meant another. Here is a summary collection of the differences that you should understand between these algebra tasks.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Matching Vocabulary
 
@@ -248,15 +248,15 @@ Match each piece of mathematics with the task that is most likely to be somethin
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Describe the five steps you might need to take when solving a linear equation.
 
-\*\*Exercise\*\*
+**Exercise**
 
 In this section there is a reminder to take care with negative numbers when doing what?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain what is wrong with saying "I need to solve $3x+x-8$."
 

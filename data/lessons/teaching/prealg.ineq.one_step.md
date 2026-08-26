@@ -16,7 +16,7 @@ Multiply on both sides by a *positive* number: if $2\lt4$, then $\multiplyleft{3
 
 Divide on both sides by a *positive* number: if $2\lt4$, then $\divideunder{2}{2}\confirm{\lt}\divideunder{4}{2}$.
 
-\*\*Example\*\*
+**Example**
 
 Solve the inequality $t+7\lt5$.
 
@@ -46,9 +46,9 @@ $$
 
 It worked! The number $-3$ is a solution, and both $-2$ and $0$ are *not*. This is what we expected. This is evidence that our solution set is correct, and we can feel more secure that we did not make a human mistake when we were solving. While it takes time and space to make three checks, it's worth it.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Negation
 
@@ -58,7 +58,7 @@ Something interesting happens when we multiply or divide by a *negative* number 
 
 Starting with $2\lt4$, if we multipled each sides by $-1$ and left the inequality sign alone, we would get the *false* inequality $-2\reject{\lt}-4$. We should change the direction so we have the *true* inequality $-2\gt-4$.
 
-\*\*Fact\*\*
+**Fact**
 
 Changing the Direction of the Inequality Sign
 
@@ -66,7 +66,7 @@ When multiplying or dividing each side of an inequality by a *negative* number, 
 
 Do not change the inequality direction when multiplying/dividing by a *positive* number, or when *adding/subtracting* by any number.
 
-\*\*Example\*\*
+**Example**
 
 Solve the inequality $-2x\geq12$. State the solution set graphically, using interval notation, and using set-builder notation.
 
@@ -88,19 +88,19 @@ $$
 
 Everything came out as expected, so our solution is reasonably checked.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What are three ways to express the solution set to a linear inequality?
 
-\*\*Exercise\*\*
+**Exercise**
 
 When you go through the motions of solving a simple linear inequality, what step(s) might make the process different from when you solve a similar simple linear equation?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Why does checking the solution set to an inequality take more effort than checking the solution set to an equation?
 

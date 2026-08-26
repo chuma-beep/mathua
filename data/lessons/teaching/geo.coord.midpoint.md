@@ -18,11 +18,11 @@ Two numbers are used to locate the restaurant. In the Cartesian coordinate syste
 
 *Path to the pet shop*
 
-\*\*Remark\*\*
+**Remark**
 
 It's important to know that the order of Cartesian coordinates is (horizontal, vertical). The custom to communicate horizontal information *before* vertical information is fairly consistent even in math beyond this level.
 
-\*\*Exercise\*\*
+**Exercise**
 
 What are the coordinates of the bar?
 
@@ -42,7 +42,7 @@ Solution
 
 We don't move at all to get to Carl's house. That is, we move $0$ units to the left/right, and then $0$ units up/down. So the coordinates are $(0,0)$.
 
-\*\*Warning\*\*
+**Warning**
 
 Notation Issue: Coordinates or Interval?
 
@@ -52,7 +52,7 @@ In a Cartesian coordinate system, the map of Carl's neighborhood would look like
 
 *Carl's Neighborhood in a Cartesian Coordinate System*
 
-\*\*Definition\*\*
+**Definition**
 
 Cartesian Coordinate System
 
@@ -64,37 +64,37 @@ A Cartesian coordinate system is divided into four *quadrants*, as shown in  the
 
 *A Cartesian grid with four quadrants marked*
 
-\*\*Example\*\*
+**Example**
 
 On paper, sketch a Cartesian coordinate system with units, and then plot the following points: $(3,2),(-5,-1),(0,-3),(4,0)$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 When you read English, you primarily read left to right. Then every once in a while your eyes drop down vertically to the next line. How is this similar to the way that we treat coordinates in the Cartesian coordinate system?
 
-\*\*Exercise\*\*
+**Exercise**
 
 A Cartesian coordinate system has seven places/regions that have special names. What are these seven places?
 
-\*\*Exercise\*\*
+**Exercise**
 
 How does math notation like $(-1,4)$ potentially mean two very different things, and how will you decide which meaning to use?
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
