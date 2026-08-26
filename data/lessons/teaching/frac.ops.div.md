@@ -1,648 +1,728 @@
-> Content sourced from [OpenStax Prealgebra 1e](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
+> Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
+
+<div id="page_b3b92ee9-65f9-481a-9c54-81a50fd5c901" class="chapter-content-module" book-content="true" data-type="page">
+
 ## 4.2 Multiply and Divide Fractions
 
 ### Learning Objectives
 
-By the end of this section, you will be able to: 
+By the end of this section, you will be able to:
 
-  * Simplify fractions
-  * Multiply fractions
-  * Find reciprocals
-  * Divide fractions
+- Simplify fractions
+- Multiply fractions
+- Find reciprocals
+- Divide fractions
 
-###  Be Prepared  4.2
+### Be Prepared 4.2
 
 Before you get started, take this readiness quiz.
 
-  1. Find the prime factorization of 48.48.  
-If you missed this problem, review Example 2.48.
-  2. Draw a model of the fraction 34.34.  
-If you missed this problem, review Example 4.2.
-  3. Find two fractions equivalent to 56.56.  
-Answers may vary. Acceptable answers include 1012,1518,5060,1012,1518,5060, etc.  
-If you missed this problem, review Example 4.14.
+1.  Find the prime factorization of $48.$  
+    If you missed this problem, review Example 2.48.
+2.  Draw a model of the fraction $\frac{3}{4}.$  
+    If you missed this problem, review Example 4.2.
+3.  Find two fractions equivalent to $\frac{5}{6}.$  
+    Answers may vary. Acceptable answers include $\frac{10}{12},\frac{15}{18},\frac{50}{60},$ etc.  
+    If you missed this problem, review Example 4.14.
 
 ### Simplify Fractions
 
-In working with equivalent fractions, you saw that there are many ways to write fractions that have the same value, or represent the same part of the whole. How do you know which one to use? Often, we’ll use the fraction that is in _simplified_ form.
+In working with equivalent fractions, you saw that there are many ways to write fractions that have the same value, or represent the same part of the whole. How do you know which one to use? Often, we’ll use the fraction that is in *simplified* form.
 
-A fraction is considered simplified if there are no common factors, other than 1,1, in the numerator and denominator. If a fraction does have common factors in the numerator and denominator, we can reduce the fraction to its simplified form by removing the common factors.
+A fraction is considered simplified if there are no common factors, other than $1,$ in the numerator and denominator. If a fraction does have common factors in the numerator and denominator, we can reduce the fraction to its simplified form by removing the common factors.
 
-###  Simplified Fraction
+### Simplified Fraction
 
 A fraction is considered simplified if there are no common factors in the numerator and denominator.
 
 For example,
 
-  * 2323 is simplified because there are no common factors of 22 and 3.3.
-  * 10151015 is not simplified because 55 is a common factor of 1010 and 15.15.
+- $\frac{2}{3}$ is simplified because there are no common factors of $2$ and $3.$
+- $\frac{10}{15}$ is not simplified because $5$ is a common factor of $10$ and $15.$
 
-The process of simplifying a fraction is often called _reducing the fraction_. In the previous section, we used the Equivalent Fractions Property to find equivalent fractions. We can also use the Equivalent Fractions Property in reverse to simplify fractions. We rewrite the property to show both forms together.
+The process of simplifying a fraction is often called *reducing the fraction*. In the previous section, we used the Equivalent Fractions Property to find equivalent fractions. We can also use the Equivalent Fractions Property in reverse to simplify fractions. We rewrite the property to show both forms together.
 
-###  Equivalent Fractions Property
+### Equivalent Fractions Property
 
-If a,b,ca,b,c are numbers where b≠0,c≠0,b≠0,c≠0, then
+If $a,b,c$ are numbers where $b \neq 0,c \neq 0,$ then
 
-ab=a·cb·canda·cb·c=ab.ab=a·cb·canda·cb·c=ab.
+$$
+\frac{a}{b} = \frac{a \cdot c}{b \cdot c}\quad\text{and}\quad\frac{a \cdot c}{b \cdot c} = \frac{a}{b}.
+$$
 
-Notice that cc is a common factor in the numerator and denominator. Anytime we have a common factor in the numerator and denominator, it can be removed.
+Notice that $c$ is a common factor in the numerator and denominator. Anytime we have a common factor in the numerator and denominator, it can be removed.
 
-###  How To
+### How To
 
-####  Simplify a fraction.
+#### Simplify a fraction.
 
-  1. Step 1.  Rewrite the numerator and denominator to show the common factors. If needed, factor the numerator and denominator into prime numbers.
-  2. Step 2.  Simplify, using the equivalent fractions property, by removing common factors.
-  3. Step 3.  Multiply any remaining factors.
+1.  Step 1. Rewrite the numerator and denominator to show the common factors. If needed, factor the numerator and denominator into prime numbers.
+2.  Step 2. Simplify, using the equivalent fractions property, by removing common factors.
+3.  Step 3. Multiply any remaining factors.
 
-###  Example  4.19
+### Example 4.19
 
-Simplify: 1015.1015.
+Simplify: $\frac{10}{15}.$
 
-####  Solution
+#### Solution
 
 To simplify the fraction, we look for any common factors in the numerator and the denominator.
 
-Notice that 5 is a factor of both 10 and 15. | 10151015  
----|---  
-Factor the numerator and denominator. |   
-Remove the common factors. |   
-Simplify. | 2323  
+|                                              |                   |
+|----------------------------------------------|-------------------|
+| Notice that 5 is a factor of both 10 and 15. | $\frac{10}{15}$ |
+| Factor the numerator and denominator.        |                   |
+| Remove the common factors.                   |                   |
+| Simplify.                                    | $\frac{2}{3}$   |
 
-###  Try It  4.37
+### Try It 4.37
 
-Simplify: 812812.
+Simplify: $\frac{8}{12}$.
 
-###  Try It  4.38
+### Try It 4.38
 
-Simplify: 12161216.
+Simplify: $\frac{12}{16}$.
 
 To simplify a negative fraction, we use the same process as in Example 4.19. Remember to keep the negative sign.
 
-###  Example  4.20
+### Example 4.20
 
-Simplify: −1824.−1824.
+Simplify: $- \frac{18}{24}.$
 
-####  Solution
+#### Solution
 
-We notice that 18 and 24 both have factors of 6. | −1824−1824  
----|---  
-Rewrite the numerator and denominator showing the common factor. |   
-Remove common factors. |   
-Simplify. | −34−34  
+|  |  |
+|----|----|
+| We notice that 18 and 24 both have factors of 6. | $- \frac{18}{24}$ |
+| Rewrite the numerator and denominator showing the common factor. |  |
+| Remove common factors. |  |
+| Simplify. | $- \frac{3}{4}$ |
 
-###  Try It  4.39
+### Try It 4.39
 
-Simplify: −2128.−2128.
+Simplify: $- \frac{21}{28}.$
 
-###  Try It  4.40
+### Try It 4.40
 
-Simplify: −1624.−1624.
+Simplify: $- \frac{16}{24}.$
 
-After simplifying a fraction, it is always important to check the result to make sure that the numerator and denominator do not have any more factors in common. Remember, the definition of a simplified fraction: _a fraction is considered simplified if there are no common factors in the numerator and denominator_. 
+After simplifying a fraction, it is always important to check the result to make sure that the numerator and denominator do not have any more factors in common. Remember, the definition of a simplified fraction: *a fraction is considered simplified if there are no common factors in the numerator and denominator*.
 
 When we simplify an improper fraction, there is no need to change it to a mixed number.
 
-###  Example  4.21
+### Example 4.21
 
-Simplify: −5632.−5632.
+Simplify: $- \frac{56}{32}.$
 
-####  Solution
+#### Solution
 
-| −5632−5632  
----|---  
-Rewrite the numerator and denominator, showing the common factors, 8. |   
-Remove common factors. |   
-Simplify. | −74−74  
+|  |  |
+|----|----|
+|  | $- \frac{56}{32}$ |
+| Rewrite the numerator and denominator, showing the common factors, 8. |  |
+| Remove common factors. |  |
+| Simplify. | $- \frac{7}{4}$ |
 
-###  Try It  4.41
+### Try It 4.41
 
-Simplify: −5442.−5442.
+Simplify: $- \frac{54}{42}.$
 
-###  Try It  4.42
+### Try It 4.42
 
-Simplify: −8145.−8145.
+Simplify: $- \frac{81}{45}.$
 
-###  How To
+### How To
 
-####  Simplify a fraction.
+#### Simplify a fraction.
 
-  1. Step 1.  Rewrite the numerator and denominator to show the common factors. If needed, factor the numerator and denominator into prime numbers.
-  2. Step 2.  Simplify, using the equivalent fractions property, by removing common factors.
-  3. Step 3.  Multiply any remaining factors
+1.  Step 1. Rewrite the numerator and denominator to show the common factors. If needed, factor the numerator and denominator into prime numbers.
+2.  Step 2. Simplify, using the equivalent fractions property, by removing common factors.
+3.  Step 3. Multiply any remaining factors
 
 Sometimes it may not be easy to find common factors of the numerator and denominator. A good idea, then, is to factor the numerator and the denominator into prime numbers. (You may want to use the factor tree method to identify the prime factors.) Then divide out the common factors using the Equivalent Fractions Property.
 
-###  Example  4.22
+### Example 4.22
 
-Simplify: 210385.210385.
+Simplify: $\frac{210}{385}.$
 
-####  Solution
+#### Solution
 
-Use factor trees to factor the numerator and denominator. | 210385210385  
+<table class="unnumbered unstyled" data-id="eip-id1168467251049" data-label="" data-summary="The fraction 210 over 385 is shown. The next line says, “Use factor trees to factor the numerator and denominator.” 210 is shown with two lines coming out of it. These lines go to 21 and 10. 21 has two lines coming out of it. These lines go to 3 and 7. 10 has two lines coming out of it. These lines go to 2 and 5. Beside 210, 385 is shown with two lines coming out of it. These lines go to 5 and 77. 77 has two lines coming out of it. These lines go to 7 and 11. Below this, the next line says, “Rewrite the numerator and denominator as the product of the primes,” and shows 210 over 385 equal to 2 times 3 times 5 times 7 over 5 times 7 times 11. The next line says, “Remove the common factors,” and shows the 5s and 7s being crossed out. The next line says “Simplify,” and shows 2 times 3 over 11. The last line says, “Multiply any remaining factors,” and shows 6 over 11." role="presentation">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Use factor trees to factor the numerator and denominator.</td>
+<td data-align="center">$$\frac{210}{385}$$<br />
+</td>
+</tr>
+<tr>
+<td>Rewrite the numerator and denominator as the product of the primes.</td>
+<td data-align="center">$$\frac{210}{385} = \frac{2 \cdot 3 \cdot 5 \cdot 7}{5 \cdot 7 \cdot 11}$$</td>
+</tr>
+<tr>
+<td>Remove the common factors.</td>
+<td data-align="center"></td>
+</tr>
+<tr>
+<td>Simplify.</td>
+<td data-align="center">$$\frac{2 \cdot 3}{11}$$</td>
+</tr>
+<tr>
+<td>Multiply any remaining factors.</td>
+<td data-align="center">$$\frac{6}{11}$$</td>
+</tr>
+</tbody>
+</table>
 
----|---  
-Rewrite the numerator and denominator as the product of the primes. | 210385=2⋅3⋅5⋅75⋅7⋅11210385=2⋅3⋅5⋅75⋅7⋅11  
-Remove the common factors. |   
-Simplify. | 2⋅3112⋅311  
-Multiply any remaining factors. | 611611  
+### Try It 4.43
 
-###  Try It  4.43
+Simplify: $\frac{69}{120}.$
 
-Simplify: 69120.69120.
+### Try It 4.44
 
-###  Try It  4.44
-
-Simplify: 120192.120192.
+Simplify: $\frac{120}{192}.$
 
 We can also simplify fractions containing variables. If a variable is a common factor in the numerator and denominator, we remove it just as we do with an integer factor.
 
-###  Example  4.23
+### Example 4.23
 
-Simplify: 5xy15x.5xy15x.
+Simplify: $\frac{5xy}{15x}.$
 
-####  Solution
+#### Solution
 
-| 5xy15x5xy15x  
----|---  
-Rewrite numerator and denominator showing common factors. | 5·x·y3·5·x5·x·y3·5·x  
-Remove common factors. | 5·x·y3·5·x5·x·y3·5·x  
-Simplify. | y3y3  
+|  |  |
+|----|----|
+|  | $\frac{5xy}{15x}$ |
+| Rewrite numerator and denominator showing common factors. | $\frac{5 \cdot x \cdot y}{3 \cdot 5 \cdot x}$ |
+| Remove common factors. | $\frac{5 \cdot x \cdot y}{3 \cdot 5 \cdot x}$ |
+| Simplify. | $\frac{y}{3}$ |
 
-###  Try It  4.45
+### Try It 4.45
 
-Simplify: 7x7y.7x7y.
+Simplify: $\frac{7x}{7y}.$
 
-###  Try It  4.46
+### Try It 4.46
 
-Simplify: 9a9b.9a9b.
+Simplify: $\frac{9a}{9b}.$
 
 ### Multiply Fractions
 
-A model may help you understand multiplication of fractions. We will use fraction tiles to model 12·34.12·34. To multiply 1212 and 34,34, think 1212 of 34.34.
+A model may help you understand multiplication of fractions. We will use fraction tiles to model $\frac{1}{2} \cdot \frac{3}{4}.$ To multiply $\frac{1}{2}$ and $\frac{3}{4},$ think $\frac{1}{2}$ of $\frac{3}{4}.$
 
-Start with fraction tiles for three-fourths. To find one-half of three-fourths, we need to divide them into two equal groups. Since we cannot divide the three 1414 tiles evenly into two parts, we exchange them for smaller tiles.
+Start with fraction tiles for three-fourths. To find one-half of three-fourths, we need to divide them into two equal groups. Since we cannot divide the three $\frac{1}{4}$ tiles evenly into two parts, we exchange them for smaller tiles.
 
-We see 6868 is equivalent to 34.34. Taking half of the six 1818 tiles gives us three 1818 tiles, which is 38.38.
+We see $\frac{6}{8}$ is equivalent to $\frac{3}{4}.$ Taking half of the six $\frac{1}{8}$ tiles gives us three $\frac{1}{8}$ tiles, which is $\frac{3}{8}.$
 
 Therefore,
 
-12·34=3812·34=38
+$$
+\frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8}
+$$
 
-###  Manipulative Mathematics
+### Manipulative Mathematics
 
 Doing the Manipulative Mathematics activity "Model Fraction Multiplication" will help you develop a better understanding of how to multiply fractions.
 
-###  Example  4.24
+### Example 4.24
 
-Use a diagram to model 12·34.12·34.
+Use a diagram to model $\frac{1}{2} \cdot \frac{3}{4}.$
 
-####  Solution
+#### Solution
 
-First shade in 3434 of the rectangle.
+First shade in $\frac{3}{4}$ of the rectangle.
 
-We will take 1212 of this 34,34, so we heavily shade 1212 of the shaded region.
+We will take $\frac{1}{2}$ of this $\frac{3}{4},$ so we heavily shade $\frac{1}{2}$ of the shaded region.
 
-Notice that 33 out of the 88 pieces are heavily shaded. This means that 3838 of the rectangle is heavily shaded.
+Notice that $3$ out of the $8$ pieces are heavily shaded. This means that $\frac{3}{8}$ of the rectangle is heavily shaded.
 
-Therefore, 1212 of 3434 is 38,38, or 12·34=38.12·34=38.
+Therefore, $\frac{1}{2}$ of $\frac{3}{4}$ is $\frac{3}{8},$ or $\frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8}.$
 
-###  Try It  4.47
+### Try It 4.47
 
-Use a diagram to model: 12·35.12·35.
+Use a diagram to model: $\frac{1}{2} \cdot \frac{3}{5}.$
 
-###  Try It  4.48
+### Try It 4.48
 
-Use a diagram to model: 12·56.12·56.
+Use a diagram to model: $\frac{1}{2} \cdot \frac{5}{6}.$
 
-Look at the result we got from the model in Example 4.24. We found that 12·34=38.12·34=38. Do you notice that we could have gotten the same answer by multiplying the numerators and multiplying the denominators?
+Look at the result we got from the model in Example 4.24. We found that $\frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8}.$ Do you notice that we could have gotten the same answer by multiplying the numerators and multiplying the denominators?
 
-| 12·3412·34  
----|---  
-Multiply the numerators, and multiply the denominators. | 12·3412·34  
-Simplify. | 3838  
+|  |  |
+|----|----|
+|  | $\frac{1}{2} \cdot \frac{3}{4}$ |
+| Multiply the numerators, and multiply the denominators. | $\frac{1}{2} \cdot \frac{3}{4}$ |
+| Simplify. | $\frac{3}{8}$ |
 
 This leads to the definition of fraction multiplication. To multiply fractions, we multiply the numerators and multiply the denominators. Then we write the fraction in simplified form.
 
-###  Fraction Multiplication
+### Fraction Multiplication
 
-If a,b,c,andda,b,c,andd are numbers where b≠0andd≠0,b≠0andd≠0, then
+If $a,b,c,\text{and}\ d$ are numbers where $b \neq 0\ \text{and}\ d \neq 0,$ then
 
-ab·cd=acbdab·cd=acbd
+$$
+\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}
+$$
 
-###  Example  4.25
+### Example 4.25
 
-Multiply, and write the answer in simplified form: 34·15.34·15.
+Multiply, and write the answer in simplified form: $\frac{3}{4} \cdot \frac{1}{5}.$
 
-####  Solution
+#### Solution
 
-| 34·1534·15  
----|---  
-Multiply the numerators; multiply the denominators. | 3·14·53·14·5  
-Simplify. | 320320  
+|  |  |
+|----|----|
+|  | $\frac{3}{4} \cdot \frac{1}{5}$ |
+| Multiply the numerators; multiply the denominators. | $\frac{3 \cdot 1}{4 \cdot 5}$ |
+| Simplify. | $\frac{3}{20}$ |
 
 There are no common factors, so the fraction is simplified.
 
-###  Try It  4.49
+### Try It 4.49
 
-Multiply, and write the answer in simplified form: 13·25.13·25.
+Multiply, and write the answer in simplified form: $\frac{1}{3} \cdot \frac{2}{5}.$
 
-###  Try It  4.50
+### Try It 4.50
 
-Multiply, and write the answer in simplified form: 35·78.35·78.
+Multiply, and write the answer in simplified form: $\frac{3}{5} \cdot \frac{7}{8}.$
 
 When multiplying fractions, the properties of positive and negative numbers still apply. It is a good idea to determine the sign of the product as the first step. In Example 4.26 we will multiply two negatives, so the product will be positive.
 
-###  Example  4.26
+### Example 4.26
 
-Multiply, and write the answer in simplified form: −58(−23).−58(−23).
+Multiply, and write the answer in simplified form: $- \frac{5}{8}\left( {- \frac{2}{3}} \right).$
 
-####  Solution
+#### Solution
 
-| −58(−23)−58(−23)  
----|---  
-The signs are the same, so the product is positive. Multiply the numerators, multiply the denominators. | 5⋅28⋅35⋅28⋅3  
-Simplify. | 10241024  
-Look for common factors in the numerator and denominator. Rewrite showing common factors. |   
-Remove common factors. | 512512  
+|  |  |
+|----|----|
+|  | $- \frac{5}{8}\left( {- \frac{2}{3}} \right)$ |
+| The signs are the same, so the product is positive. Multiply the numerators, multiply the denominators. | $\frac{5 \cdot 2}{8 \cdot 3}$ |
+| Simplify. | $\frac{10}{24}$ |
+| Look for common factors in the numerator and denominator. Rewrite showing common factors. |  |
+| Remove common factors. | $\frac{5}{12}$ |
 
 Another way to find this product involves removing common factors earlier.
 
-| −58(−23)−58(−23)  
----|---  
-Determine the sign of the product. Multiply. | 5⋅28⋅35⋅28⋅3  
-Show common factors and then remove them. |   
-Multiply remaining factors. | 512512  
+|  |  |
+|----|----|
+|  | $- \frac{5}{8}\left( {- \frac{2}{3}} \right)$ |
+| Determine the sign of the product. Multiply. | $\frac{5 \cdot 2}{8 \cdot 3}$ |
+| Show common factors and then remove them. |  |
+| Multiply remaining factors. | $\frac{5}{12}$ |
 
 We get the same result.
 
-###  Try It  4.51
+### Try It 4.51
 
-Multiply, and write the answer in simplified form: −47(−58).−47(−58).
+Multiply, and write the answer in simplified form: $- \frac{4}{7}\left( {- \frac{5}{8}} \right).$
 
-###  Try It  4.52
+### Try It 4.52
 
-Multiply, and write the answer in simplified form: −712(−89).−712(−89).
+Multiply, and write the answer in simplified form: $- \frac{7}{12}\left( {- \frac{8}{9}} \right).$
 
-###  Example  4.27
+### Example 4.27
 
-Multiply, and write the answer in simplified form: −1415·2021.−1415·2021.
+Multiply, and write the answer in simplified form: $- \frac{14}{15} \cdot \frac{20}{21}.$
 
-####  Solution
+#### Solution
 
-| −1415·2021−1415·2021  
----|---  
-Determine the sign of the product; multiply. | −1415·2021−1415·2021  
-Are there any common factors in the numerator and the denominator?  
-We know that 7 is a factor of 14 and 21, and 5 is a factor of 20 and 15. |   
-Rewrite showing common factors. |   
-Remove the common factors. | −2·43·3−2·43·3  
-Multiply the remaining factors. | −89−89  
+<table class="unnumbered unstyled" data-id="eip-id1168466394330" data-label="" data-summary="The first line says, “Rewrite showing common factors,” and shows negative 2 times 7 times 4 times 5 over 3 times 5 times 3 times 7. The 5s and 7s are in red and crossed out. The next line says, “Remove the common factors,” and shows negative 2 times 4 over 3 times 3. The last step says to “Multiply the remaining factors,” and shows negative 8 ninths." role="presentation">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td></td>
+<td>$$- \frac{14}{15} \cdot \frac{20}{21}$$</td>
+</tr>
+<tr>
+<td>Determine the sign of the product; multiply.</td>
+<td>$$- \frac{14}{15} \cdot \frac{20}{21}$$</td>
+</tr>
+<tr>
+<td>Are there any common factors in the numerator and the denominator?<br />
+$ $We know that 7 is a factor of 14 and 21, and 5 is a factor of 20 and 15.</td>
+<td></td>
+</tr>
+<tr>
+<td>Rewrite showing common factors.</td>
+<td></td>
+</tr>
+<tr>
+<td>Remove the common factors.</td>
+<td>$$- \frac{2 \cdot 4}{3 \cdot 3}$$</td>
+</tr>
+<tr>
+<td>Multiply the remaining factors.</td>
+<td>$$- \frac{8}{9}$$</td>
+</tr>
+</tbody>
+</table>
 
-###  Try It  4.53
+### Try It 4.53
 
-Multiply, and write the answer in simplified form: −1028·815.−1028·815.
+Multiply, and write the answer in simplified form: $- \frac{10}{28} \cdot \frac{8}{15}.$
 
-###  Try It  4.54
+### Try It 4.54
 
-Multiply, and write the answer in simplified form: −920·512.−920·512.
+Multiply, and write the answer in simplified form: $- \frac{9}{20} \cdot \frac{5}{12}.$
 
-When multiplying a fraction by an integer, it may be helpful to write the integer as a fraction. Any integer, a,a, can be written as a1.a1. So, 3=31,3=31, for example.
+When multiplying a fraction by an integer, it may be helpful to write the integer as a fraction. Any integer, $a,$ can be written as $\frac{a}{1}.$ So, $3 = \frac{3}{1},$ for example.
 
-###  Example  4.28
-
-Multiply, and write the answer in simplified form:
-
-ⓐ17·5617·56
-
-ⓑ125(−20x)125(−20x)
-
-####  Solution
-
-ⓐ |   
----|---  
-| 17·5617·56  
-Write 56 as a fraction. | 17·56117·561  
-Determine the sign of the product; multiply. | 567567  
-Simplify. | 88  
-
-ⓑ |   
----|---  
-| 125(−20x)125(−20x)  
-Write −20x as a fraction. | 125(−20x1)125(−20x1)  
-Determine the sign of the product; multiply. | −12·20·x5·1−12·20·x5·1  
-Show common factors and then remove them. |   
-Multiply remaining factors; simplify. | −48x  
-
-###  Try It  4.55
-
-Multiply, and write the answer in simplified form:
-
-  1. ⓐ18·7218·72
-  2. ⓑ113(−9a)113(−9a)
-
-###  Try It  4.56
+### Example 4.28
 
 Multiply, and write the answer in simplified form:
 
-  1. ⓐ38·6438·64
-  2. ⓑ16x·111216x·1112
+ⓐ$\frac{1}{7} \cdot 56$
+
+ⓑ$\frac{12}{5}\left( {-20x} \right)$
+
+#### Solution
+
+|  |  |
+|----|----|
+| ⓐ |  |
+|  | $\frac{1}{7} \cdot 56$ |
+| Write 56 as a fraction. | $\frac{1}{7} \cdot \frac{56}{1}$ |
+| Determine the sign of the product; multiply. | $\frac{56}{7}$ |
+| Simplify. | $8$ |
+
+|  |  |
+|----|----|
+| ⓑ |  |
+|  | $\frac{12}{5}\left( {-20x} \right)$ |
+| Write −20x as a fraction. | $\frac{12}{5}\left( \frac{-20x}{1} \right)$ |
+| Determine the sign of the product; multiply. | $- \frac{12 \cdot 20 \cdot x}{5 \cdot 1}$ |
+| Show common factors and then remove them. |  |
+| Multiply remaining factors; simplify. | −48x |
+
+### Try It 4.55
+
+Multiply, and write the answer in simplified form:
+
+1.  ⓐ$\frac{1}{8} \cdot 72\quad$
+2.  ⓑ$\frac{11}{3}\left( {-9a} \right)$
+
+### Try It 4.56
+
+Multiply, and write the answer in simplified form:
+
+1.  ⓐ$\frac{3}{8} \cdot 64$
+2.  ⓑ$16x \cdot \frac{11}{12}$
 
 ### Find Reciprocals
 
-The fractions 2323 and 3232 are related to each other in a special way. So are −107−107 and −710.−710. Do you see how? Besides looking like upside-down versions of one another, if we were to multiply these pairs of fractions, the product would be 1.1.
+The fractions $\frac{2}{3}$ and $\frac{3}{2}$ are related to each other in a special way. So are $- \frac{10}{7}$ and $- \frac{7}{10}.$ Do you see how? Besides looking like upside-down versions of one another, if we were to multiply these pairs of fractions, the product would be $1.$
 
-23·32=1and−107(−710)=123·32=1and−107(−710)=1
+$$
+\frac{2}{3} \cdot \frac{3}{2} = 1\quad\text{and}\quad - \frac{10}{7}\left( {- \frac{7}{10}} \right) = 1
+$$
 
 Such pairs of numbers are called reciprocals.
 
-###  Reciprocal
+### Reciprocal
 
-The reciprocal of the fraction abab is ba,ba, where a≠0a≠0 and b≠0,b≠0,
+The reciprocal of the fraction $\frac{a}{b}$ is $\frac{b}{a},$ where $a \neq 0$ and $b \neq 0,$
 
-A number and its reciprocal have a product of 1.1.
+A number and its reciprocal have a product of $1.$
 
-ab·ba=1ab·ba=1
+$$
+\frac{a}{b} \cdot \frac{b}{a} = 1
+$$
 
 To find the reciprocal of a fraction, we invert the fraction. This means that we place the numerator in the denominator and the denominator in the numerator.
 
-To get a positive result when multiplying two numbers, the numbers must have the same sign. So reciprocals must have the same sign. 
+To get a positive result when multiplying two numbers, the numbers must have the same sign. So reciprocals must have the same sign.
 
-To find the reciprocal, keep the same sign and invert the fraction. The number zero does not have a reciprocal. Why? A number and its reciprocal multiply to 1.1. Is there any number rr so that 0·r=1?0·r=1? No. So, the number 00 does not have a reciprocal.
+To find the reciprocal, keep the same sign and invert the fraction. The number zero does not have a reciprocal. Why? A number and its reciprocal multiply to $1.$ Is there any number $r$ so that ${0 \cdot r = 1}?$ No. So, the number $0$ does not have a reciprocal.
 
-###  Example  4.29
+### Example 4.29
 
-Find the reciprocal of each number. Then check that the product of each number and its reciprocal is 1.1.
+Find the reciprocal of each number. Then check that the product of each number and its reciprocal is $1.$
 
-  1. ⓐ4949
-  2. ⓑ−16−16
-  3. ⓒ−145−145
-  4. ⓓ77
+1.  ⓐ$\frac{4}{9}$
+2.  ⓑ$- \frac{1}{6}$
+3.  ⓒ$- \frac{14}{5}$
+4.  ⓓ$7$
 
-####  Solution
+#### Solution
 
 To find the reciprocals, we keep the sign and invert the fractions.
 
-ⓐ |   
----|---  
-Find the reciprocal of 4949. | The reciprocal of 4949 is 9494.  
-Check: |   
-Multiply the number and its reciprocal. | 49⋅9449⋅94  
-Multiply numerators and denominators. | 36363636  
-Simplify. | 1✓1✓  
+|  |  |
+|----|----|
+| ⓐ |  |
+| Find the reciprocal of $\frac{4}{9}$. | The reciprocal of $\frac{4}{9}$ is $\frac{9}{4}$. |
+| Check: |  |
+| Multiply the number and its reciprocal. | $\frac{4}{9} \cdot \frac{9}{4}$ |
+| Multiply numerators and denominators. | $\frac{36}{36}$ |
+| Simplify. | $1✓$ |
 
-ⓑ |   
----|---  
-Find the reciprocal of -16-16. | -61-61  
-Simplify. | -6-6  
-Check: | -16⋅(-6)-16⋅(-6)  
-| 1✓1✓  
+|                                           |                                |
+|-------------------------------------------|--------------------------------|
+| ⓑ                                         |                                |
+| Find the reciprocal of $- \frac{1}{6}$. | $- \frac{6}{1}$              |
+| Simplify.                                 | $- 6$                        |
+| Check:                                    | $- \frac{1}{6} \cdot ( - 6)$ |
+|                                           | $1✓$                         |
 
-ⓒ |   
----|---  
-Find the reciprocal of -145-145. | -514-514  
-Check: | -145⋅(-514)-145⋅(-514)  
-| 70707070  
-| 1✓1✓  
+|  |  |
+|----|----|
+| ⓒ |  |
+| Find the reciprocal of $- \frac{14}{5}$. | $- \frac{5}{14}$ |
+| Check: | $- \frac{14}{5} \cdot \left( - \frac{5}{14} \right)$ |
+|  | $\frac{70}{70}$ |
+|  | $1✓$ |
 
-ⓓ |   
----|---  
-Find the reciprocal of 77. |   
-Write 77 as a fraction. | 7171  
-Write the reciprocal of 7171. | 1717  
-Check: | 7⋅(17)7⋅(17)  
-| 1✓1✓  
+|  |  |
+|----|----|
+| ⓓ |  |
+| Find the reciprocal of $7$. |  |
+| Write $7$ as a fraction. | $\frac{7}{1}$ |
+| Write the reciprocal of $\frac{7}{1}$. | $\frac{1}{7}$ |
+| Check: | $7 \cdot \left( \frac{1}{7} \right)$ |
+|  | $1✓$ |
 
-###  Try It  4.57
-
-Find the reciprocal:
-
-  1. ⓐ5757
-  2. ⓑ−18−18
-  3. ⓒ−114−114
-  4. ⓓ1414
-
-###  Try It  4.58
+### Try It 4.57
 
 Find the reciprocal:
 
-  1. ⓐ3737
-  2. ⓑ−112−112
-  3. ⓒ−149−149
-  4. ⓓ2121
+1.  ⓐ$\frac{5}{7}$
+2.  ⓑ$- \frac{1}{8}$
+3.  ⓒ$- \frac{11}{4}$
+4.  ⓓ$14$
+
+### Try It 4.58
+
+Find the reciprocal:
+
+1.  ⓐ$\frac{3}{7}$
+2.  ⓑ$- \frac{1}{12}$
+3.  ⓒ$- \frac{14}{9}$
+4.  ⓓ$21$
 
 In a previous chapter, we worked with opposites and absolute values. Table 4.1 compares opposites, absolute values, and reciprocals.
 
-Opposite | Absolute Value | Reciprocal  
----|---|---  
-has opposite sign | is never negative | has same sign, fraction inverts  
+| Opposite          | Absolute Value    | Reciprocal                      |
+|-------------------|-------------------|---------------------------------|
+| has opposite sign | is never negative | has same sign, fraction inverts |
 
-Table  4.1
+Table 4.1
 
-###  Example  4.30
+### Example 4.30
 
 Fill in the chart for each fraction in the left column:
 
-Number | Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−38−38 |  |  |   
-1212 |  |  |   
-9595 |  |  |   
-−5−5 |  |  |   
+| Number            | Opposite | Absolute Value | Reciprocal |
+|-------------------|----------|----------------|------------|
+| $- \frac{3}{8}$ |          |                |            |
+| $\frac{1}{2}$   |          |                |            |
+| $\frac{9}{5}$   |          |                |            |
+| $-5$            |          |                |            |
 
-####  Solution
+#### Solution
 
 To find the opposite, change the sign. To find the absolute value, leave the positive numbers the same, but take the opposite of the negative numbers. To find the reciprocal, keep the sign the same and invert the fraction.
 
-Number | Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−38−38 | 3838 | 3838 | −83−83  
-1212 | −12−12 | 1212 | 22  
-9595 | −95−95 | 9595 | 5959  
-−5−5 | 55 | 55 | −15−15  
+| Number            | Opposite          | Absolute Value  | Reciprocal        |
+|-------------------|-------------------|-----------------|-------------------|
+| $- \frac{3}{8}$ | $\frac{3}{8}$   | $\frac{3}{8}$ | $- \frac{8}{3}$ |
+| $\frac{1}{2}$   | $- \frac{1}{2}$ | $\frac{1}{2}$ | $2$             |
+| $\frac{9}{5}$   | $- \frac{9}{5}$ | $\frac{9}{5}$ | $\frac{5}{9}$   |
+| $-5$            | $5$             | $5$           | $- \frac{1}{5}$ |
 
-###  Try It  4.59
-
-Fill in the chart for each number given:
-
-Number | Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−58−58 |  |  |   
-1414 |  |  |   
-8383 |  |  |   
-−8−8 |  |  |   
-
-###  Try It  4.60
+### Try It 4.59
 
 Fill in the chart for each number given:
 
-Number | Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−47−47 |  |  |   
-1818 |  |  |   
-9494 |  |  |   
-−1−1 |  |  |   
+| Number            | Opposite | Absolute Value | Reciprocal |
+|-------------------|----------|----------------|------------|
+| $- \frac{5}{8}$ |          |                |            |
+| $\frac{1}{4}$   |          |                |            |
+| $\frac{8}{3}$   |          |                |            |
+| $-8$            |          |                |            |
+
+### Try It 4.60
+
+Fill in the chart for each number given:
+
+| Number            | Opposite | Absolute Value | Reciprocal |
+|-------------------|----------|----------------|------------|
+| $- \frac{4}{7}$ |          |                |            |
+| $\frac{1}{8}$   |          |                |            |
+| $\frac{9}{4}$   |          |                |            |
+| $-1$            |          |                |            |
 
 ### Divide Fractions
 
-Why is 12÷3=4?12÷3=4? We previously modeled this with counters. How many groups of 33 counters can be made from a group of 1212 counters?
+Why is ${12 \div 3 = 4}?$ We previously modeled this with counters. How many groups of $3$ counters can be made from a group of $12$ counters?
 
-There are 44 groups of 33 counters. In other words, there are four 3s3s in 12.12. So, 12÷3=4.12÷3=4.
+There are $4$ groups of $3$ counters. In other words, there are four $3\text{s}$ in $12.$ So, $12 \div 3 = 4.$
 
-What about dividing fractions? Suppose we want to find the quotient: 12÷16.12÷16. We need to figure out how many 16s16s there are in 12.12. We can use fraction tiles to model this division. We start by lining up the half and sixth fraction tiles as shown in Figure 4.5. Notice, there are three 1616 tiles in 12,12, so 12÷16=3.12÷16=3.
+What about dividing fractions? Suppose we want to find the quotient: $\frac{1}{2} \div \frac{1}{6}.$ We need to figure out how many $\frac{1}{6}\text{s}$ there are in $\frac{1}{2}.$ We can use fraction tiles to model this division. We start by lining up the half and sixth fraction tiles as shown in Figure 4.5. Notice, there are three $\frac{1}{6}$ tiles in $\frac{1}{2},$ so $\frac{1}{2} \div \frac{1}{6} = 3.$
 
-Figure  4.5
+*Figure 4.5*
 
-###  Manipulative Mathematics
+### Manipulative Mathematics
 
 Doing the Manipulative Mathematics activity "Model Fraction Division" will help you develop a better understanding of dividing fractions.
 
-###  Example  4.31
+### Example 4.31
 
-Model: 14÷18.14÷18.
+Model: $\frac{1}{4} \div \frac{1}{8}.$
 
-####  Solution
+#### Solution
 
-We want to determine how many 18s18s are in 14.14. Start with one 1414 tile. Line up 1818 tiles underneath the 1414 tile.
+We want to determine how many $\frac{1}{8}\text{s}$ are in $\frac{1}{4}.$ Start with one $\frac{1}{4}$ tile. Line up $\frac{1}{8}$ tiles underneath the $\frac{1}{4}$ tile.
 
-There are two 18s18s in 14.14.
+There are two $\frac{1}{8}\text{s}$ in $\frac{1}{4}.$
 
-So, 14÷18=2.14÷18=2.
+So, $\frac{1}{4} \div \frac{1}{8} = 2.$
 
-###  Try It  4.61
+### Try It 4.61
 
-Model: 13÷16.13÷16.
+Model: $\frac{1}{3} \div \frac{1}{6}.$
 
-###  Try It  4.62
+### Try It 4.62
 
-Model: 12÷14.12÷14.
+Model: $\frac{1}{2} \div \frac{1}{4}.$
 
-###  Example  4.32
+### Example 4.32
 
-Model: 2÷14.2÷14.
+Model: $2 \div \frac{1}{4}.$
 
-####  Solution
+#### Solution
 
-We are trying to determine how many 14s14s there are in 2.2. We can model this as shown.
+We are trying to determine how many $\frac{1}{4}\text{s}$ there are in $2.$ We can model this as shown.
 
-Because there are eight 14s14s in 2,2÷14=8.2,2÷14=8.
+Because there are eight $\frac{1}{4}\text{s}$ in $2,{2 \div \frac{1}{4} = 8.}$
 
-###  Try It  4.63
+### Try It 4.63
 
-Model: 2÷132÷13
+Model: $2 \div \frac{1}{3}$
 
-###  Try It  4.64
+### Try It 4.64
 
-Model: 3÷123÷12
+Model: $3 \div \frac{1}{2}$
 
-Let’s use money to model 2÷142÷14 in another way. We often read 1414 as a ‘quarter’, and we know that a quarter is one-fourth of a dollar as shown in Figure 4.6. So we can think of 2÷142÷14 as, “How many quarters are there in two dollars?” One dollar is 44 quarters, so 22 dollars would be 88 quarters. So again, 2÷14=8.2÷14=8.
+Let’s use money to model $2 \div \frac{1}{4}$ in another way. We often read $\frac{1}{4}$ as a ‘quarter’, and we know that a quarter is one-fourth of a dollar as shown in Figure 4.6. So we can think of $2 \div \frac{1}{4}$ as, “How many quarters are there in two dollars?” One dollar is $4$ quarters, so $2$ dollars would be $8$ quarters. So again, $2 \div \frac{1}{4} = 8.$
 
-Figure  4.6 The U.S. coin called a quarter is worth one-fourth of a dollar.
+*Figure 4.6 The U.S. coin called a quarter is worth one-fourth of a dollar.*
 
-Using fraction tiles, we showed that 12÷16=3.12÷16=3. Notice that 12·61=312·61=3 also. How are 1616 and 6161 related? They are reciprocals. This leads us to the procedure for fraction division.
+Using fraction tiles, we showed that $\frac{1}{2} \div \frac{1}{6} = 3.$ Notice that $\frac{1}{2} \cdot \frac{6}{1} = 3$ also. How are $\frac{1}{6}$ and $\frac{6}{1}$ related? They are reciprocals. This leads us to the procedure for fraction division.
 
-###  Fraction Division
+### Fraction Division
 
-If a,b,c,andda,b,c,andd are numbers where b≠0,c≠0,andd≠0,b≠0,c≠0,andd≠0, then
+If $a,b,c,\text{and}\ d$ are numbers where $b \neq 0,c \neq 0,\ \text{and}\ d \neq 0,$ then
 
-ab÷cd=ab·dcab÷cd=ab·dc
+$$
+\frac{a}{b} \div \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}
+$$
 
 To divide fractions, multiply the first fraction by the reciprocal of the second.
 
-We need to say b≠0,c≠0andd≠0b≠0,c≠0andd≠0 to be sure we don’t divide by zero.
+We need to say $b \neq 0,c \neq 0\ \text{and}\ d \neq 0$ to be sure we don’t divide by zero.
 
-###  Example  4.33
+### Example 4.33
 
-Divide, and write the answer in simplified form: 25÷(−37).25÷(−37).
+Divide, and write the answer in simplified form: $\frac{2}{5} \div \left( {- \frac{3}{7}} \right).$
 
-####  Solution
+#### Solution
 
-| 25÷(−37)25÷(−37)  
----|---  
-Multiply the first fraction by the reciprocal of the second. | 25(−73)25(−73)  
-Multiply. The product is negative. | −1415−1415  
+|  |  |
+|----|----|
+|  | $\frac{2}{5} \div \left( {- \frac{3}{7}} \right)$ |
+| Multiply the first fraction by the reciprocal of the second. | $\frac{2}{5}\left( - \frac{7}{3} \right)$ |
+| Multiply. The product is negative. | $- \frac{14}{15}$ |
 
-###  Try It  4.65
+### Try It 4.65
 
-Divide, and write the answer in simplified form: 37÷(−23).37÷(−23).
+Divide, and write the answer in simplified form: $\frac{3}{7} \div \left( {- \frac{2}{3}} \right).$
 
-###  Try It  4.66
+### Try It 4.66
 
-Divide, and write the answer in simplified form: 23÷(−75).23÷(−75).
+Divide, and write the answer in simplified form: $\frac{2}{3} \div \left( {- \frac{7}{5}} \right).$
 
-###  Example  4.34
+### Example 4.34
 
-Divide, and write the answer in simplified form: 23÷n5.23÷n5.
+Divide, and write the answer in simplified form: $\frac{2}{3} \div \frac{n}{5}.$
 
-####  Solution
+#### Solution
 
-| 23÷n523÷n5  
----|---  
-Multiply the first fraction by the reciprocal of the second. | 23·5n23·5n  
-Multiply. | 103n103n  
+|  |  |
+|----|----|
+|  | $\frac{2}{3} \div \frac{n}{5}$ |
+| Multiply the first fraction by the reciprocal of the second. | $\frac{2}{3} \cdot \frac{5}{n}$ |
+| Multiply. | $\frac{10}{3n}$ |
 
-###  Try It  4.67
+### Try It 4.67
 
-Divide, and write the answer in simplified form: 35÷p7.35÷p7.
+Divide, and write the answer in simplified form: $\frac{3}{5} \div \frac{p}{7}.$
 
-###  Try It  4.68
+### Try It 4.68
 
-Divide, and write the answer in simplified form: 58÷q3.58÷q3.
+Divide, and write the answer in simplified form: $\frac{5}{8} \div \frac{q}{3}.$
 
-###  Example  4.35
+### Example 4.35
 
-Divide, and write the answer in simplified form: −34÷(−78).−34÷(−78).
+Divide, and write the answer in simplified form: $- \frac{3}{4} \div \left( {- \frac{7}{8}} \right).$
 
-####  Solution
+#### Solution
 
-| −34÷(−78)−34÷(−78)  
----|---  
-Multiply the first fraction by the reciprocal of the second. | −34·(−87)−34·(−87)  
-Multiply. Remember to determine the sign first. | 3·84·73·84·7  
-Rewrite to show common factors. | 3·4·24·73·4·24·7  
-Remove common factors and simplify. | 6767  
+|  |  |
+|----|----|
+|  | $- \frac{3}{4} \div \left( - \frac{7}{8} \right)$ |
+| Multiply the first fraction by the reciprocal of the second. | $- \frac{3}{4} \cdot \left( - \frac{8}{7} \right)$ |
+| Multiply. Remember to determine the sign first. | $\frac{3 \cdot 8}{4 \cdot 7}$ |
+| Rewrite to show common factors. | $\frac{3 \cdot 4 \cdot 2}{4 \cdot 7}$ |
+| Remove common factors and simplify. | $\frac{6}{7}$ |
 
-###  Try It  4.69
+### Try It 4.69
 
-Divide, and write the answer in simplified form: −23÷(−56).−23÷(−56).
+Divide, and write the answer in simplified form: $- \frac{2}{3} \div \left( {- \frac{5}{6}} \right).$
 
-###  Try It  4.70
+### Try It 4.70
 
-Divide, and write the answer in simplified form: −56÷(−23).−56÷(−23).
+Divide, and write the answer in simplified form: $- \frac{5}{6} \div \left( {- \frac{2}{3}} \right).$
 
-###  Example  4.36
+### Example 4.36
 
-Divide, and write the answer in simplified form: 718÷1427.718÷1427.
+Divide, and write the answer in simplified form: $\frac{7}{18} \div \frac{14}{27}.$
 
-####  Solution
+#### Solution
 
-| 718÷1427718÷1427  
----|---  
-Multiply the first fraction by the reciprocal of the second. | 718·2714718·2714  
-Multiply. | 7·2718·147·2718·14  
-Rewrite showing common factors. |   
-Remove common factors. | 32·232·2  
-Simplify. | 3434  
+|  |  |
+|----|----|
+|  | $\frac{7}{18} \div \frac{14}{27}$ |
+| Multiply the first fraction by the reciprocal of the second. | $\frac{7}{18} \cdot \frac{27}{14}$ |
+| Multiply. | $\frac{7 \cdot 27}{18 \cdot 14}$ |
+| Rewrite showing common factors. |  |
+| Remove common factors. | $\frac{3}{2 \cdot 2}$ |
+| Simplify. | $\frac{3}{4}$ |
 
-###  Try It  4.71
+### Try It 4.71
 
-Divide, and write the answer in simplified form: 727÷3536.727÷3536.
+Divide, and write the answer in simplified form: $\frac{7}{27} \div \frac{35}{36}.$
 
-###  Try It  4.72
+### Try It 4.72
 
-Divide, and write the answer in simplified form: 514÷1528.514÷1528.
+Divide, and write the answer in simplified form: $\frac{5}{14} \div \frac{15}{28}.$
 
-###  Media
+### Media
 
-####  ACCESS ADDITIONAL ONLINE RESOURCES
+#### ACCESS ADDITIONAL ONLINE RESOURCES
 
-  * Simplifying Fractions
-  * Multiplying Fractions (Positive Only)
-  * Multiplying Signed Fractions
-  * Dividing Fractions (Positive Only)
-  * Dividing Signed Fractions
+- Simplifying Fractions
+- Multiplying Fractions (Positive Only)
+- Multiplying Signed Fractions
+- Dividing Fractions (Positive Only)
+- Dividing Signed Fractions
 
-###  Section 4.2 Exercises
+### Section 4.2 Exercises
 
 #### Practice Makes Perfect
 
@@ -650,445 +730,447 @@ Divide, and write the answer in simplified form: 514÷1528.514÷1528.
 
 In the following exercises, simplify each fraction. Do not convert any improper fractions to mixed numbers.
 
-77. 
+77\.
 
-7 21 7 21
+$\frac{7}{21}$
 
-78. 
+78\.
 
-8 24 8 24
+$\frac{8}{24}$
 
-79. 
+79\.
 
-15 20 15 20
+$\frac{15}{20}$
 
-80. 
+80\.
 
-12 18 12 18
+$\frac{12}{18}$
 
-81. 
+81\.
 
-− 40 88 − 40 88
+$- \frac{40}{88}$
 
-82. 
+82\.
 
-− 63 99 − 63 99
+$- \frac{63}{99}$
 
-83. 
+83\.
 
-− 108 63 − 108 63
+$- \frac{108}{63}$
 
-84. 
+84\.
 
-− 104 48 − 104 48
+$- \frac{104}{48}$
 
-85. 
+85\.
 
-120 252 120 252
+$\frac{120}{252}$
 
-86. 
+86\.
 
-182 294 182 294
+$\frac{182}{294}$
 
-87. 
+87\.
 
-− 168 192 − 168 192
+$- \frac{168}{192}$
 
-88. 
+88\.
 
-− 140 224 − 140 224
+$- \frac{140}{224}$
 
-89. 
+89\.
 
-11 x 11 y 11 x 11 y
+$\frac{11x}{11y}$
 
-90. 
+90\.
 
-15 a 15 b 15 a 15 b
+$\frac{15a}{15b}$
 
-91. 
+91\.
 
-− 3 x 12 y − 3 x 12 y
+$- \frac{3x}{12y}$
 
-92. 
+92\.
 
-− 4 x 32 y − 4 x 32 y
+$- \frac{4x}{32y}$
 
-93. 
+93\.
 
-14 x 2 21 y 14 x 2 21 y
+$\frac{14x^{2}}{21y}$
 
-94. 
+94\.
 
-24 a 32 b 2 24 a 32 b 2
+$\frac{24a}{32b^{2}}$
 
 **Multiply Fractions**
 
 In the following exercises, use a diagram to model.
 
-95. 
+95\.
 
-1 2 · 2 3 1 2 · 2 3
+$\frac{1}{2} \cdot \frac{2}{3}$
 
-96. 
+96\.
 
-1 2 · 5 8 1 2 · 5 8
+$\frac{1}{2} \cdot \frac{5}{8}$
 
-97. 
+97\.
 
-1 3 · 5 6 1 3 · 5 6
+$\frac{1}{3} \cdot \frac{5}{6}$
 
-98. 
+98\.
 
-1 3 · 2 5 1 3 · 2 5
+$\frac{1}{3} \cdot \frac{2}{5}$
 
 In the following exercises, multiply, and write the answer in simplified form.
 
-99. 
+99\.
 
-2 5 · 1 3 2 5 · 1 3
+$\frac{2}{5} \cdot \frac{1}{3}$
 
-100. 
+100\.
 
-1 2 · 3 8 1 2 · 3 8
+$\frac{1}{2} \cdot \frac{3}{8}$
 
-101. 
+101\.
 
-3 4 · 9 10 3 4 · 9 10
+$\frac{3}{4} \cdot \frac{9}{10}$
 
-102. 
+102\.
 
-4 5 · 2 7 4 5 · 2 7
+$\frac{4}{5} \cdot \frac{2}{7}$
 
-103. 
+103\.
 
-− 2 3 ( − 3 8 ) − 2 3 ( − 3 8 )
+$- \frac{2}{3}\left( {- \frac{3}{8}} \right)$
 
-104. 
+104\.
 
-− 3 4 ( − 4 9 ) − 3 4 ( − 4 9 )
+$- \frac{3}{4}\left( {- \frac{4}{9}} \right)$
 
-105. 
+105\.
 
-− 5 9 · 3 10 − 5 9 · 3 10
+$- \frac{5}{9} \cdot \frac{3}{10}$
 
-106. 
+106\.
 
-− 3 8 · 4 15 − 3 8 · 4 15
+$- \frac{3}{8} \cdot \frac{4}{15}$
 
-107. 
+107\.
 
-7 12 ( − 8 21 ) 7 12 ( − 8 21 )
+$\frac{7}{12}\left( {- \frac{8}{21}} \right)$
 
-108. 
+108\.
 
-5 12 ( − 8 15 ) 5 12 ( − 8 15 )
+$\frac{5}{12}\left( {- \frac{8}{15}} \right)$
 
-109. 
+109\.
 
-( − 14 15 ) ( 9 20 ) ( − 14 15 ) ( 9 20 )
+$\left( {- \frac{14}{15}} \right)\left( \frac{9}{20} \right)$
 
-110. 
+110\.
 
-( − 9 10 ) ( 25 33 ) ( − 9 10 ) ( 25 33 )
+$\left( {- \frac{9}{10}} \right)\left( \frac{25}{33} \right)$
 
-111. 
+111\.
 
-( − 63 84 ) ( − 44 90 ) ( − 63 84 ) ( − 44 90 )
+$\left( {- \frac{63}{84}} \right)\left( {- \frac{44}{90}} \right)$
 
-112. 
+112\.
 
-( − 33 60 ) ( − 40 88 ) ( − 33 60 ) ( − 40 88 )
+$\left( {- \frac{33}{60}} \right)\left( {- \frac{40}{88}} \right)$
 
-113. 
+113\.
 
-4 · 5 11 4 · 5 11
+$4 \cdot \frac{5}{11}$
 
-114. 
+114\.
 
-5 · 8 3 5 · 8 3
+$5 \cdot \frac{8}{3}$
 
-115. 
+115\.
 
-3 7 · 21 n 3 7 · 21 n
+$\frac{3}{7} \cdot 21n$
 
-116. 
+116\.
 
-5 6 · 30 m 5 6 · 30 m
+$\frac{5}{6} \cdot 30m$
 
-117. 
+117\.
 
-−28 p ( − 1 4 ) −28 p ( − 1 4 )
+$-28p\left( {- \frac{1}{4}} \right)$
 
-118. 
+118\.
 
-−51 q ( − 1 3 ) −51 q ( − 1 3 )
+$-51q\left( {- \frac{1}{3}} \right)$
 
-119. 
+119\.
 
-−8 ( 17 4 ) −8 ( 17 4 )
+$-8\left( \frac{17}{4} \right)$
 
-120. 
+120\.
 
-14 5 ( −15 ) 14 5 ( −15 )
+$\frac{14}{5}(-15)$
 
-121. 
+121\.
 
-−1 ( − 3 8 ) −1 ( − 3 8 )
+$-1\left( {- \frac{3}{8}} \right)$
 
-122. 
+122\.
 
-( −1 ) ( − 6 7 ) ( −1 ) ( − 6 7 )
+$(-1)\left( {- \frac{6}{7}} \right)$
 
-123. 
+123\.
 
-( 2 3 ) 3 ( 2 3 ) 3
+$\left( \frac{2}{3} \right)^{3}$
 
-124. 
+124\.
 
-( 4 5 ) 2 ( 4 5 ) 2
+$\left( \frac{4}{5} \right)^{2}$
 
-125. 
+125\.
 
-( 6 5 ) 4 ( 6 5 ) 4
+$\left( \frac{6}{5} \right)^{4}$
 
-126. 
+126\.
 
-( 4 7 ) 4 ( 4 7 ) 4
+$\left( \frac{4}{7} \right)^{4}$
 
 **Find Reciprocals**
 
 In the following exercises, find the reciprocal.
 
-127. 
+127\.
 
-3 4 3 4
+$\frac{3}{4}$
 
-128. 
+128\.
 
-2 3 2 3
+$\frac{2}{3}$
 
-129. 
+129\.
 
-− 5 17 − 5 17
+$- \frac{5}{17}$
 
-130. 
+130\.
 
-− 6 19 − 6 19
+$- \frac{6}{19}$
 
-131. 
+131\.
 
-11 8 11 8
+$\frac{11}{8}$
 
-132. 
+132\.
 
-−13 −13
+$-13$
 
-133. 
+133\.
 
-−19 −19
+$-19$
 
-134. 
+134\.
 
-−1 −1
+$-1$
 
-135. 
+135\.
 
-1 1
+$1$
 
-136. 
-
-Fill in the chart.
-
-| Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−711−711 |  |  |   
-4545 |  |  |   
-107107 |  |  |   
-−8−8 |  |  |   
-
-137. 
+136\.
 
 Fill in the chart.
 
-| Opposite | Absolute Value | Reciprocal  
----|---|---|---  
-−313−313 |  |  |   
-914914 |  |  |   
-157157 |  |  |   
-−9−9 |  |  |   
+|                    | Opposite | Absolute Value | Reciprocal |
+|--------------------|----------|----------------|------------|
+| $- \frac{7}{11}$ |          |                |            |
+| $\frac{4}{5}$    |          |                |            |
+| $\frac{10}{7}$   |          |                |            |
+| $-8$             |          |                |            |
+
+137\.
+
+Fill in the chart.
+
+|                    | Opposite | Absolute Value | Reciprocal |
+|--------------------|----------|----------------|------------|
+| $- \frac{3}{13}$ |          |                |            |
+| $\frac{9}{14}$   |          |                |            |
+| $\frac{15}{7}$   |          |                |            |
+| $-9$             |          |                |            |
 
 **Divide Fractions**
 
 In the following exercises, model each fraction division.
 
-138. 
+138\.
 
-1 2 ÷ 1 4 1 2 ÷ 1 4
+$\frac{1}{2} \div \frac{1}{4}$
 
-139. 
+139\.
 
-1 2 ÷ 1 8 1 2 ÷ 1 8
+$\frac{1}{2} \div \frac{1}{8}$
 
-140. 
+140\.
 
-2 ÷ 1 5 2 ÷ 1 5
+$2 \div \frac{1}{5}$
 
-141. 
+141\.
 
-3 ÷ 1 4 3 ÷ 1 4
+$3 \div \frac{1}{4}$
 
 In the following exercises, divide, and write the answer in simplified form.
 
-142. 
+142\.
 
-1 2 ÷ 1 4 1 2 ÷ 1 4
+$\frac{1}{2} \div \frac{1}{4}$
 
-143. 
+143\.
 
-1 2 ÷ 1 8 1 2 ÷ 1 8
+$\frac{1}{2} \div \frac{1}{8}$
 
-144. 
+144\.
 
-3 4 ÷ 2 3 3 4 ÷ 2 3
+$\frac{3}{4} \div \frac{2}{3}$
 
-145. 
+145\.
 
-4 5 ÷ 3 4 4 5 ÷ 3 4
+$\frac{4}{5} \div \frac{3}{4}$
 
-146. 
+146\.
 
-− 4 5 ÷ 4 7 − 4 5 ÷ 4 7
+$- \frac{4}{5} \div \frac{4}{7}$
 
-147. 
+147\.
 
-− 3 4 ÷ 3 5 − 3 4 ÷ 3 5
+$- \frac{3}{4} \div \frac{3}{5}$
 
-148. 
+148\.
 
-− 7 9 ÷ ( − 7 9 ) − 7 9 ÷ ( − 7 9 )
+$- \frac{7}{9} \div \left( {- \frac{7}{9}} \right)$
 
-149. 
+149\.
 
-− 5 6 ÷ ( − 5 6 ) − 5 6 ÷ ( − 5 6 )
+$- \frac{5}{6} \div \left( {- \frac{5}{6}} \right)$
 
-150. 
+150\.
 
-3 4 ÷ x 11 3 4 ÷ x 11
+$\frac{3}{4} \div \frac{x}{11}$
 
-151. 
+151\.
 
-2 5 ÷ y 9 2 5 ÷ y 9
+$\frac{2}{5} \div \frac{y}{9}$
 
-152. 
+152\.
 
-5 8 ÷ a 10 5 8 ÷ a 10
+$\frac{5}{8} \div \frac{a}{10}$
 
-153. 
+153\.
 
-5 6 ÷ c 15 5 6 ÷ c 15
+$\frac{5}{6} \div \frac{c}{15}$
 
-154. 
+154\.
 
-5 18 ÷ ( − 15 24 ) 5 18 ÷ ( − 15 24 )
+$\frac{5}{18} \div \left( {- \frac{15}{24}} \right)$
 
-155. 
+155\.
 
-7 18 ÷ ( − 14 27 ) 7 18 ÷ ( − 14 27 )
+$\frac{7}{18} \div \left( {- \frac{14}{27}} \right)$
 
-156. 
+156\.
 
-7 p 12 ÷ 21 p 8 7 p 12 ÷ 21 p 8
+$\frac{7p}{12} \div \frac{21p}{8}$
 
-157. 
+157\.
 
-5 q 12 ÷ 15 q 8 5 q 12 ÷ 15 q 8
+$\frac{5q}{12} \div \frac{15q}{8}$
 
-158. 
+158\.
 
-8 u 15 ÷ 12 v 25 8 u 15 ÷ 12 v 25
+$\frac{8u}{15} \div \frac{12v}{25}$
 
-159. 
+159\.
 
-12 r 25 ÷ 18 s 35 12 r 25 ÷ 18 s 35
+$\frac{12r}{25} \div \frac{18s}{35}$
 
-160. 
+160\.
 
-−5 ÷ 1 2 −5 ÷ 1 2
+$-5 \div \frac{1}{2}$
 
-161. 
+161\.
 
-−3 ÷ 1 4 −3 ÷ 1 4
+$-3 \div \frac{1}{4}$
 
-162. 
+162\.
 
-3 4 ÷ ( −12 ) 3 4 ÷ ( −12 )
+$\frac{3}{4} \div (-12)$
 
-163. 
+163\.
 
-2 5 ÷ ( −10 ) 2 5 ÷ ( −10 )
+$\frac{2}{5} \div (-10)$
 
-164. 
+164\.
 
-−18 ÷ ( − 9 2 ) −18 ÷ ( − 9 2 )
+$-18 \div \left( {- \frac{9}{2}} \right)$
 
-165. 
+165\.
 
-−15 ÷ ( − 5 3 ) −15 ÷ ( − 5 3 )
+$-15 \div \left( {- \frac{5}{3}} \right)$
 
-166. 
+166\.
 
-1 2 ÷ ( − 3 4 ) ÷ 7 8 1 2 ÷ ( − 3 4 ) ÷ 7 8
+$\frac{1}{2} \div \left( {- \frac{3}{4}} \right) \div \frac{7}{8}$
 
-167. 
+167\.
 
-11 2 ÷ 7 8 · 2 11 11 2 ÷ 7 8 · 2 11
+$\frac{11}{2} \div \frac{7}{8} \cdot \frac{2}{11}$
 
 #### Everyday Math
 
-168. 
+168\.
 
-**Baking** A recipe for chocolate chip cookies calls for 3434 cup brown sugar. Imelda wants to double the recipe.
+**Baking** A recipe for chocolate chip cookies calls for $\frac{3}{4}$ cup brown sugar. Imelda wants to double the recipe.
 
 ⓐ How much brown sugar will Imelda need? Show your calculation. Write your result as an improper fraction and as a mixed number.
 
-ⓑ Measuring cups usually come in sets of 18,14,13,12,and118,14,13,12,and1 cup. Draw a diagram to show two different ways that Imelda could measure the brown sugar needed to double the recipe.
+ⓑ Measuring cups usually come in sets of $\frac{1}{8},\frac{1}{4},\frac{1}{3},\frac{1}{2},\text{and}\ 1$ cup. Draw a diagram to show two different ways that Imelda could measure the brown sugar needed to double the recipe.
 
-169. 
+169\.
 
-**Baking** Nina is making 44 pans of fudge to serve after a music recital. For each pan, she needs 2323 cup of condensed milk.
+**Baking** Nina is making $4$ pans of fudge to serve after a music recital. For each pan, she needs $\frac{2}{3}$ cup of condensed milk.
 
-  1. ⓐ How much condensed milk will Nina need? Show your calculation. Write your result as an improper fraction and as a mixed number.
-  2. ⓑ Measuring cups usually come in sets of 18,14,13,12,and118,14,13,12,and1 cup. Draw a diagram to show two different ways that Nina could measure the condensed milk she needs.
+1.  ⓐ How much condensed milk will Nina need? Show your calculation. Write your result as an improper fraction and as a mixed number.
+2.  ⓑ Measuring cups usually come in sets of $\frac{1}{8},\frac{1}{4},\frac{1}{3},\frac{1}{2},\text{and}\ 1$ cup. Draw a diagram to show two different ways that Nina could measure the condensed milk she needs.
 
-170. 
+170\.
 
-**Portions** Don purchased a bulk package of candy that weighs 55 pounds. He wants to sell the candy in little bags that hold 1414 pound. How many little bags of candy can he fill from the bulk package?
+**Portions** Don purchased a bulk package of candy that weighs $5$ pounds. He wants to sell the candy in little bags that hold $\frac{1}{4}$ pound. How many little bags of candy can he fill from the bulk package?
 
-171. 
+171\.
 
-**Portions** Kristen has 3434 yards of ribbon. She wants to cut it into equal parts to make hair ribbons for her daughter’s 66 dolls. How long will each doll’s hair ribbon be?
+**Portions** Kristen has $\frac{3}{4}$ yards of ribbon. She wants to cut it into equal parts to make hair ribbons for her daughter’s $6$ dolls. How long will each doll’s hair ribbon be?
 
 #### Writing Exercises
 
-172. 
+172\.
 
 Explain how you find the reciprocal of a fraction.
 
-173. 
+173\.
 
 Explain how you find the reciprocal of a negative fraction.
 
-174. 
+174\.
 
-Rafael wanted to order half a medium pizza at a restaurant. The waiter told him that a medium pizza could be cut into 66 or 88 slices. Would he prefer 33 out of 66 slices or 44 out of 88 slices? Rafael replied that since he wasn’t very hungry, he would prefer 33 out of 66 slices. Explain what is wrong with Rafael’s reasoning.
+Rafael wanted to order half a medium pizza at a restaurant. The waiter told him that a medium pizza could be cut into $6$ or $8$ slices. Would he prefer $3$ out of $6$ slices or $4$ out of $8$ slices? Rafael replied that since he wasn’t very hungry, he would prefer $3$ out of $6$ slices. Explain what is wrong with Rafael’s reasoning.
 
-175. 
+175\.
 
-Give an example from everyday life that demonstrates how 12·23is13.12·23is13.
+Give an example from everyday life that demonstrates how $\frac{1}{2} \cdot \frac{2}{3}\text{is}\frac{1}{3}.$
 
 #### Self Check
 
-ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section. 
+ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
-ⓑ After reviewing this checklist, what will you do to become confident for all objectives? 
+ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
+
+</div>

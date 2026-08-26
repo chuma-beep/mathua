@@ -101,6 +101,7 @@ OPENSTAX_SECTIONS = {
     "frac.sub.same": "4-4-add-and-subtract-fractions-with-common-denominators",
     "frac.add.diff": "4-5-add-and-subtract-fractions-with-different-denominators",
     "frac.sub.diff": "4-5-add-and-subtract-fractions-with-different-denominators",
+    "frac.add.word": "4-5-add-and-subtract-fractions-with-different-denominators",
     "frac.mixed.add": "4-6-add-and-subtract-mixed-numbers",
     "frac.mixed.sub": "4-6-add-and-subtract-mixed-numbers",
     "frac.to_decimal": "5-3-decimals-and-fractions",
@@ -139,6 +140,39 @@ OPENSTAX_SECTIONS = {
     "stat.prob.compound": "5-5-averages-and-probability",
     "stat.prob.sample_space": "5-5-averages-and-probability",
     "stat.prob.counting": "5-5-averages-and-probability",
+    # Early-math alias concepts (graph uses both id styles).
+    "frac.basics.concept": "4-1-visualize-fractions",
+    "frac.basics.equivalent": "4-1-visualize-fractions",
+    "frac.basics.number_line": "4-1-visualize-fractions",
+    "frac.basics.parts": "4-1-visualize-fractions",
+    "frac.ops.benchmark": "4-1-visualize-fractions",
+    "frac.ops.compare": "4-1-visualize-fractions",
+    "frac.ops.div": "4-2-multiply-and-divide-fractions",
+    "frac.ops.mult": "4-2-multiply-and-divide-fractions",
+    "frac.ops.simplify": "4-1-visualize-fractions",
+    "frac.ops.to_decimal": "5-3-decimals-and-fractions",
+    "dec.basics.compare": "5-1-decimals",
+    "dec.convert.from_frac": "5-3-decimals-and-fractions",
+    "dec.convert.to_frac": "5-3-decimals-and-fractions",
+    "dec.ops.add": "5-2-decimal-operations",
+    "dec.ops.div": "5-2-decimal-operations",
+    "dec.ops.mult": "5-2-decimal-operations",
+    "dec.ops.round": "5-1-decimals",
+    "dec.ops.sub": "5-2-decimal-operations",
+    "pct.basics.concept": "6-1-understand-percent",
+    "pct.convert.from_dec": "6-1-understand-percent",
+    "pct.convert.to_dec": "6-1-understand-percent",
+    "pct.ops.discount": "6-3-solve-sales-tax-commission-and-discount-applications",
+    "pct.ops.find_rate": "6-2-solve-general-applications-of-percent",
+    "pct.ops.increase": "6-2-solve-general-applications-of-percent",
+    "pct.ops.of_number": "6-2-solve-general-applications-of-percent",
+    "pct.ops.tax_tip": "6-3-solve-sales-tax-commission-and-discount-applications",
+    "ratio.basics.concept": "5-6-ratios-and-rate",
+    "ratio.ops.proportion": "6-5-solve-proportions-and-their-applications",
+    "ratio.ops.rate": "5-6-ratios-and-rate",
+    "ratio.ops.scale": "6-5-solve-proportions-and-their-applications",
+    "ratio.ops.simplify": "5-6-ratios-and-rate",
+    "arith.exp.sci_notation": "10-5-integer-exponents-and-scientific-notation",
 }
 
 # Geometry lessons are hand-authored (ORCCA has no dedicated geometry
@@ -215,6 +249,7 @@ UNCOVERED = {
     "ode.laplace": "manual",
     "ode.systems": "manual",
     "nt.gcd_euclidean": "manual",
+    "nt.adv.diophantine": "manual",
     "nt.diophantine": "manual",
     "nt.fermat_little": "manual",
     "nt.crypto": "manual",
@@ -238,6 +273,7 @@ def main():
         for cid, slug in d.items():
             all_concepts[cid] = (name, slug)
     all_concepts.update({k: ("manual", None) for k in UNCOVERED})
+    all_concepts["discrete.sequences.recurrence"] = ("manual", None)
     all_concepts.update({k: ("authored", None) for k in AUTHORED_SECTIONS})
 
     print(f"Total concepts: {len(all_concepts)}")

@@ -468,17 +468,16 @@ export interface LessonInfo {
     dependents?: PrereqInfo[]
 }
 
-// Lesson bodies ship separately (the list payload is metadata-only);
-// fetched on selection and memoized for the session.
-const lessonBodyCache = new Map<string, string>()
-
+// Lesson bodies ship separately (the list payload is metadata-only) and are
+// fetched on selection. No client-side memoization: a stale body surviving a
+// backend restart is worse than an extra request. no-store also bypasses the
+// Next.js data cache in dev.
 export async function getLessonBody(title: string): Promise<string> {
-	const cached = lessonBodyCache.get(title)
-	if (cached !== undefined) return cached
-	const res = await fetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`)
+	const res = await fetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`, {
+		cache: 'no-store',
+	})
 	if (!res.ok) throw new Error(`Lesson body fetch failed: ${res.status}`)
 	const data = (await res.json()) as { title: string; body: string }
-	lessonBodyCache.set(data.title, data.body)
 	return data.body
 }
 
@@ -527,7 +526,9 @@ export interface ConceptDetailRes {
 }
 
 export async function getConceptDetail(conceptId: string): Promise<ConceptDetailRes> {
-	const res = await fetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`)
+	const res = await fetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`, {
+		cache: 'no-store',
+	})
 	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
 	return validateResponse(ConceptDetailResSchema, await res.json(), 'getConceptDetail') as ConceptDetailRes
 }

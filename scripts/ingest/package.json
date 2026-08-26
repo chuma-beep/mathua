@@ -1,0 +1,23 @@
+{
+  "name": "ingest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@pretextbook/ptxast": "^0.2.0",
+    "@pretextbook/ptxast-util-to-mdast": "^0.0.10",
+    "mdast-util-directive": "^3.1.0",
+    "mdast-util-gfm-table": "^2.0.0",
+    "mdast-util-math": "^3.0.0",
+    "mdast-util-to-markdown": "^2.1.2",
+    "unist-util-visit": "^5.1.0",
+    "xast-util-from-xml": "^4.0.0"
+  }
+}
