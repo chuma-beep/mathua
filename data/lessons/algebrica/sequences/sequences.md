@@ -74,7 +74,7 @@ A sequence can be classified based on how its terms evolve. In general, a sequen
   * Non-increasing: \\(a_n \geq a_{n+1} \quad \forall n \in \mathbb{N}\\).
 
 
-If a sequence \\( (a_n)_{n \in \mathbb{N}} \\) is monotonic, then it admits a limit and this limit is finite. Moreover, the following holds:
+If a sequence \\( (a_n)_{n \in \mathbb{N}} \\) is monotonic and bounded, then it admits a (finite) limit. Moreover, the following holds:
 
 \\[\lim_{n \to +\infty} a_n = \begin{cases} \sup { a_n : n \in \mathbb{N} } & \text{if } (a_n)_{n \in \mathbb{N}} \text{ is increasing} \\\\[0.5em] \inf { a_n : n \in \mathbb{N} } & \text{if } (a_n)_{n \in \mathbb{N}} \text{ is decreasing} \end{cases} \\]
 

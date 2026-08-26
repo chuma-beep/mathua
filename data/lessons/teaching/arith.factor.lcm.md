@@ -343,7 +343,10 @@ Another way to find the least common multiple of two numbers is to use their pri
 We start by finding the prime factorization of each number.
 
 $$
-12 = 2 \cdot 2 \cdot 3 18 = 2 \cdot 3 \cdot 3
+\begin{aligned}
+12 &= 2 \cdot 2 \cdot 3 \\
+18 &= 2 \cdot 3 \cdot 3
+\end{aligned}
 $$
 
 Then we write each number as a product of primes, matching primes vertically when possible.
