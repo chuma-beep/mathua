@@ -45,13 +45,13 @@ func TestPreprocessAmpAndEntities(t *testing.T) {
 }
 
 func TestValidateClean(t *testing.T) {
-	if w := Validate("$\\frac{1}{2}$ and $$\\sqrt{3}$$"); len(w) != 0 {
+	if w := Validate("$\\frac{1}{2}$ and $$\\sqrt{3}$$", Structured); len(w) != 0 {
 		t.Errorf("expected no warnings, got %v", w)
 	}
 }
 
 func TestValidateUnbalancedBrace(t *testing.T) {
-	w := Validate("$\\frac{1}{2$")
+	w := Validate("$\\frac{1}{2$", Structured)
 	found := false
 	for _, m := range w {
 		if strings.Contains(m, "unclosed '{'") {
@@ -64,7 +64,7 @@ func TestValidateUnbalancedBrace(t *testing.T) {
 }
 
 func TestValidateUnpairedDollar(t *testing.T) {
-	w := Validate("costs $5 and up")
+	w := Validate("costs $5 and up", ORCCA)
 	if len(w) == 0 {
 		t.Error("expected odd-dollar warning for stray '$'")
 	}
@@ -74,14 +74,14 @@ func TestValidateUnpairedDollar(t *testing.T) {
 func TestValidateEscapedDollarClean(t *testing.T) {
 	// The real arith.factor.find.md case: '\$' inside inline math is an
 	// escaped literal dollar, not a delimiter.
-	w := Validate("such as $\\$631{,}897.15$ , which is a terminating decimal")
+	w := Validate("such as $\\$631{,}897.15$ , which is a terminating decimal", ORCCA)
 	if len(w) != 0 {
 		t.Errorf("escaped '\\$' should not warn, got %v", w)
 	}
 }
 
 func TestValidateEscapedDollarInDisplay(t *testing.T) {
-	w := Validate("$$a \\text{ costs } \\$5$$ tail")
+	w := Validate("$$a \\text{ costs } \\$5$$ tail", ORCCA)
 	if len(w) != 0 {
 		t.Errorf("escaped '\\$' inside display math should not warn, got %v", w)
 	}
@@ -90,7 +90,7 @@ func TestValidateEscapedDollarInDisplay(t *testing.T) {
 func TestValidateRowBreakThenRealDelimiter(t *testing.T) {
 	// Even backslash run: '\\' row break followed by a REAL unpaired delimiter.
 	// Must still warn — guards against a naive ReplaceAll("\\$", ...) fix.
-	w := Validate("row one \\\\ $x tail")
+	w := Validate("row one \\\\ $x tail", ORCCA)
 	if len(w) == 0 {
 		t.Error("real '$' after \\\\ row break must still be counted")
 	}
@@ -98,8 +98,11 @@ func TestValidateRowBreakThenRealDelimiter(t *testing.T) {
 
 func TestForSourceRouting(t *testing.T) {
 	header := "> Content sourced from [OpenStax Prealgebra 1e](x) — CC BY 4.0\nbody"
-	if a := ForSource("teaching/x.md", header); a.Name != "openstax" {
+	if a := ForSource("teaching/x.md", header); a.Name != "structured" {
 		t.Errorf("openstax sniff failed: %s", a.Name)
+	}
+	if a := ForSource("teaching/geo.triangle.types.md", "# Types of Triangles\nhand-authored geometry lesson"); a.Name != "structured" {
+		t.Errorf("authored-geometry sniff failed: %s", a.Name)
 	}
 	levinHeader := "> Content sourced from [Discrete Mathematics: An Open Introduction, 3e](y) by Oscar Levin"
 	if a := ForSource("teaching/y.md", levinHeader); a.Name != "levin" {

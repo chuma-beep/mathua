@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Perimeter of Polygons
 
 The **perimeter** of a polygon is the distance around its outside edge. "Perimeter" literally means "measure around." To find it, add the lengths of all the sides.

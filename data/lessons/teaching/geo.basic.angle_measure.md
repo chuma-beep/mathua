@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Measuring Angles in Degrees
 
 Angles are measured with a unit called the **degree**, written $^\circ$. One degree is $\frac{1}{360}$ of a full circle, so a complete turn is $360^\circ$, a straight line is $180^\circ$, and a square corner (a right angle) is $90^\circ$.

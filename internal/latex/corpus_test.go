@@ -126,7 +126,7 @@ func TestCorpusGate(t *testing.T) {
 
 		var kinds []string
 		seen := map[string]bool{}
-		for _, w := range Validate(c2) {
+		for _, w := range Validate(c2, ForSource(rel, c2)) {
 			k := warningKind(w)
 			if !seen[k] {
 				seen[k] = true

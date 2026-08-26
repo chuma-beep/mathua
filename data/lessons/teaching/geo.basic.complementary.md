@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Complementary and Supplementary Angles
 
 Pairs of angles often work together to fill out a right angle or a straight line. Two special relationships come up so often that they have names.

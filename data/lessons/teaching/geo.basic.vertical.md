@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Vertical Angles and Parallel Lines
 
 When lines cross, the angles they form come in equal pairs. When lines never cross, a third line crossing both creates yet more predictable angle pairs. These patterns let you find every angle at an intersection once you know just one.

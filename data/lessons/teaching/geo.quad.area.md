@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Area of Rectangles and Parallelograms
 
 Both the rectangle and the parallelogram measure area as "base times height" — a fact that comes from counting unit squares.

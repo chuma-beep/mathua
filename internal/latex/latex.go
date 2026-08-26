@@ -201,19 +201,20 @@ func mathNorm(s string) string {
 
 var mathTagRe = regexp.MustCompile(`(?s)<math[^>]*>(.*?)</math>`)
 
-// Canonicalize rewrites every recognized math construct to exactly two
-// delimiters: inline $...$ and display $$...$$ (KaTeX-native). Source
-// quirks are absorbed first via the adapter, then the text is segmented
-// into regions and each region is normalized by its own rules:
+// Canonicalize normalizes LEGACY corpora only. Sources produced by the
+// structured-ingestion pipelines (ORCCA via pretext-tools, OpenStax via
+// pandoc, and the authored geometry lessons) already carry unambiguous
+// $...$/$$...$$ math with escaped currency; rewriting them here corrupted
+// valid input (brace "repairs" ate real closers). Those pass through
+// untouched — validation still runs via Validate.
 //
-//	Prose            every raw $ is escaped — prices stay text
-//	math regions     dialect collapse only; delimiters are re-emitted
-//	Inline (paired)  pure-numeric content is treated as currency and escaped
-//
-// Deeply-escaped scrape artifacts shed one backslash level per pass, so the
-// pipeline runs to a fixed point: the returned string is stable under
-// Canonicalize (C(C(x)) == C(x)), capped at maxCanonPasses.
+// The Algebrica scraper dialect (doubled backslashes, broken \sqrt}{, raw
+// <math> wrappers) predates the structured pipeline and still needs its
+// region-based cleanup; it keeps the historical behavior, warts included.
 func Canonicalize(s string, a Adapter) string {
+	if a.Name == "structured" {
+		return s
+	}
 	prev := s
 	for i := 0; i < maxCanonPasses; i++ {
 		next := canonicalizeOnce(prev, a)
@@ -337,10 +338,44 @@ func envOutput(r latexnorm.Region) string {
 	}
 }
 
-// Validate checks canonicalized content for structural problems: unbalanced
-// braces inside math regions and stray unescaped dollars in prose. It
-// returns human-readable warnings; empty slice means clean.
-func Validate(canonical string) []string {
+// structuredArtifactRe flags dialect leftovers that must never survive the
+// structured ingestion pipelines.
+var structuredArtifactRe = regexp.MustCompile(`\\amp\b|<span class="math-|\\begin\{align\}|\\begin\{equation`)
+
+// displayBlockRe matches $$...$$ display spans.
+var displayBlockRe = regexp.MustCompile(`(?s)\$\$(..[^$]*?)\$\$`)
+
+// inlineSpanRe matches single-line $...$ spans (escapes honored loosely).
+var inlineSpanRe = regexp.MustCompile(`(?:^|[^\\$])\$((?:[^$\n\\]|\\.)*)\$`)
+
+// validateStructured checks pipeline-produced bodies with dialect-appropriate
+// rules: balanced braces per math span and stale-artifact scan. The legacy
+// line-scanner misreads multi-span lines in clean markdown.
+func validateStructured(s string) []string {
+	var warnings []string
+	if loc := structuredArtifactRe.FindString(s); loc != "" {
+		warnings = append(warnings, "stale artifact survived ingestion: "+loc)
+	}
+	for _, m := range displayBlockRe.FindAllStringSubmatch(s, -1) {
+		if msg := checkBraces(m[1]); msg != "" {
+			warnings = append(warnings, "display math: "+msg)
+		}
+	}
+	stripped := displayBlockRe.ReplaceAllString(s, " ")
+	for _, m := range inlineSpanRe.FindAllStringSubmatch(stripped, -1) {
+		if msg := checkBraces(m[1]); msg != "" {
+			warnings = append(warnings, "inline math: "+msg)
+		}
+	}
+	return warnings
+}
+
+// Validate checks lesson content for structural problems. It returns
+// human-readable warnings; empty slice means clean.
+func Validate(canonical string, a Adapter) []string {
+	if a.Name == "structured" {
+		return validateStructured(canonical)
+	}
 	var warnings []string
 	for _, r := range latexnorm.Scan(canonical) {
 		switch r.Kind {
@@ -436,11 +471,27 @@ func ForSource(sourcePath, content string) Adapter {
 		return Algebrica
 	case strings.HasPrefix(sourcePath, "authored/"):
 		return Authored
-	case strings.Contains(content, "OpenStax"):
-		return OpenStax
+	case strings.HasPrefix(sourcePath, "teaching/"):
+		// Structured pipeline output carries its attribution header.
+		lower := strings.ToLower(content)
+		if strings.Contains(lower, "orcca") ||
+			strings.Contains(lower, "openstax") ||
+			strings.Contains(lower, "hand-authored") {
+			return Structured
+		}
+		// Legacy extracts living in teaching/ (Levin, Hefferon, ...) keep
+		// their dialect handling.
+		if strings.Contains(content, "Oscar Levin") || strings.Contains(content, "Open Introduction") {
+			return Levin
+		}
+		return ORCCA
 	case strings.Contains(content, "Oscar Levin") || strings.Contains(content, "Open Introduction"):
 		return Levin
 	default:
 		return ORCCA
 	}
 }
+
+// Structured marks corpus produced by the official converters; it must not
+// be rewritten.
+var Structured = Adapter{Name: "structured"}
