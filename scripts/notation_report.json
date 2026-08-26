@@ -1,0 +1,26 @@
+[
+  {
+    "type": "log_ln_mix",
+    "detail": "both \\log and \\ln in math",
+    "line": 1,
+    "file": "data/lessons/algebrica/derivatives/derivatives.md"
+  },
+  {
+    "type": "log_ln_mix",
+    "detail": "both \\log and \\ln in math",
+    "line": 1,
+    "file": "data/lessons/algebrica/functions/logarithmic-function.md"
+  },
+  {
+    "type": "log_ln_mix",
+    "detail": "both \\log and \\ln in math",
+    "line": 1,
+    "file": "data/lessons/algebrica/limits/little-o-notation.md"
+  },
+  {
+    "type": "log_ln_mix",
+    "detail": "both \\log and \\ln in math",
+    "line": 1,
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/logarithms.md"
+  }
+]
