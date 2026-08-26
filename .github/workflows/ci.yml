@@ -20,10 +20,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install sympy
+      - run: pip install sympy latex2sympy2 antlr4-python3-runtime==4.7.2
       - run: go mod tidy
       - run: go build ./...
       - run: go test ./...
+      - run: python scripts/verify_examples.py
+      - run: python scripts/lint_prose_display.py
+      - run: python scripts/lint_hypothesis.py
+      - run: python scripts/lint_notation.py
+      - name: Fail on verifier FAILs
+        run: |
+          python -c "
+          import json
+          r=json.load(open('scripts/verify_report.json'))
+          fails=[e for e in r if e['verdict']=='FAIL']
+          assert not fails, f'{len(fails)} verifier FAILs:\n' + '\n'.join(f\"{e['file']}:{e['line']} {e['latex'][:80]}\" for e in fails[:5])
+          "
+          python -c "
+          import json
+          r=json.load(open('scripts/prose_display_report.json'))
+          assert not r, f'{len(r)} prose-display mismatches'
+          r=json.load(open('scripts/hypothesis_report.json'))
+          assert not r, f'{len(r)} hypothesis issues'
+          # notation report is informational (log/ln intentional)
+          "
 
   web:
     runs-on: ubuntu-latest
