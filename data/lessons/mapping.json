@@ -371,6 +371,10 @@
     "source": "openstax",
     "slug": "4-5-add-and-subtract-fractions-with-different-denominators"
   },
+  "frac.add.word": {
+    "source": "openstax",
+    "slug": "4-5-add-and-subtract-fractions-with-different-denominators"
+  },
   "frac.mixed.add": {
     "source": "openstax",
     "slug": "4-6-add-and-subtract-mixed-numbers"
@@ -506,6 +510,134 @@
   "stat.prob.counting": {
     "source": "openstax",
     "slug": "5-5-averages-and-probability"
+  },
+  "frac.basics.concept": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.basics.equivalent": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.basics.number_line": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.basics.parts": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.ops.benchmark": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.ops.compare": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.ops.div": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.ops.mult": {
+    "source": "openstax",
+    "slug": "4-2-multiply-and-divide-fractions"
+  },
+  "frac.ops.simplify": {
+    "source": "openstax",
+    "slug": "4-1-visualize-fractions"
+  },
+  "frac.ops.to_decimal": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.basics.compare": {
+    "source": "openstax",
+    "slug": "5-1-decimals"
+  },
+  "dec.convert.from_frac": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.convert.to_frac": {
+    "source": "openstax",
+    "slug": "5-3-decimals-and-fractions"
+  },
+  "dec.ops.add": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.ops.div": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.ops.mult": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "dec.ops.round": {
+    "source": "openstax",
+    "slug": "5-1-decimals"
+  },
+  "dec.ops.sub": {
+    "source": "openstax",
+    "slug": "5-2-decimal-operations"
+  },
+  "pct.basics.concept": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.convert.from_dec": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.convert.to_dec": {
+    "source": "openstax",
+    "slug": "6-1-understand-percent"
+  },
+  "pct.ops.discount": {
+    "source": "openstax",
+    "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
+  },
+  "pct.ops.find_rate": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.ops.increase": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.ops.of_number": {
+    "source": "openstax",
+    "slug": "6-2-solve-general-applications-of-percent"
+  },
+  "pct.ops.tax_tip": {
+    "source": "openstax",
+    "slug": "6-3-solve-sales-tax-commission-and-discount-applications"
+  },
+  "ratio.basics.concept": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.ops.proportion": {
+    "source": "openstax",
+    "slug": "6-5-solve-proportions-and-their-applications"
+  },
+  "ratio.ops.rate": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "ratio.ops.scale": {
+    "source": "openstax",
+    "slug": "6-5-solve-proportions-and-their-applications"
+  },
+  "ratio.ops.simplify": {
+    "source": "openstax",
+    "slug": "5-6-ratios-and-rate"
+  },
+  "arith.exp.sci_notation": {
+    "source": "openstax",
+    "slug": "10-5-integer-exponents-and-scientific-notation"
   },
   "calc.limit.numeric": {
     "source": "applied_calc",
@@ -649,6 +781,9 @@
   "nt.gcd_euclidean": {
     "source": "manual"
   },
+  "nt.adv.diophantine": {
+    "source": "manual"
+  },
   "nt.diophantine": {
     "source": "manual"
   },
@@ -667,34 +802,40 @@
   "topo.open_closed": {
     "source": "manual"
   },
-  "geo.basic.angle_measure": {
-    "source": "authored"
+  "discrete.sequences.recurrence": {
+    "source": "manual"
   },
-  "geo.basic.angles": {
+  "geo.basic.vertical": {
     "source": "authored"
   },
   "geo.triangle.angles": {
     "source": "authored"
   },
-  "geo.basic.vertical": {
+  "geo.solid.surface_area": {
     "source": "authored"
   },
-  "geo.circle.area": {
+  "geo.basic.angles": {
     "source": "authored"
   },
-  "geo.circle.parts": {
+  "geo.basic.complementary": {
     "source": "authored"
   },
-  "geo.triangle.types": {
+  "geo.quad.area": {
     "source": "authored"
   },
-  "geo.triangle.area": {
+  "geo.basic.points_lines": {
+    "source": "authored"
+  },
+  "geo.circle.circumference": {
     "source": "authored"
   },
   "geo.solid.volume_rect": {
     "source": "authored"
   },
-  "geo.basic.points_lines": {
+  "geo.basic.angle_measure": {
+    "source": "authored"
+  },
+  "geo.circle.parts": {
     "source": "authored"
   },
   "geo.quad.perimeter": {
@@ -703,16 +844,13 @@
   "geo.quad.types": {
     "source": "authored"
   },
-  "geo.quad.area": {
+  "geo.triangle.area": {
     "source": "authored"
   },
-  "geo.basic.complementary": {
+  "geo.circle.area": {
     "source": "authored"
   },
-  "geo.circle.circumference": {
-    "source": "authored"
-  },
-  "geo.solid.surface_area": {
+  "geo.triangle.types": {
     "source": "authored"
   }
 }
