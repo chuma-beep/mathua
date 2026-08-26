@@ -36,7 +36,7 @@ $$
 \begin{aligned}3^5\cdot 3^2 &= 3^{5+2} \\ &= 3^7\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Simplify $x^2\cdot x^3$.
 
@@ -54,11 +54,11 @@ $$
  x^m \cdot x^n = x^{m+n} 
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Recall that $x=x^1$. It helps to remember this when multiplying certain expressions together.
 
-\*\*Example\*\*
+**Example**
 
 Multiply $x(x^3+2)$ by using the distributive property.
 
@@ -88,7 +88,7 @@ $$
 \begin{aligned}\left(3^5\right)^2 &= 3^{2\cdot 5} \\ &= 3^{10}\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Simplify $\left(x^2\right)^3$.
 
@@ -106,7 +106,7 @@ $$
  \left(x^m\right)^n = x^{m \cdot n} 
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 ### Product to a Power Rule
 
@@ -126,7 +126,7 @@ We could leave it written this way if $3^5$ feels especially large. But if you a
 
 We essentially applied the outer exponent to each factor inside the parentheses. It is important to see how the exponent $5$ applied to *both* the $3$*and* the $t$, not just to the $t$.
 
-\*\*Example\*\*
+**Example**
 
 Simplify $(xy)^5$.
 
@@ -144,7 +144,7 @@ $$
  \left(x\cdot y\right)^n = x^{n}\cdot y^{n} 
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Summary of the Rules of Exponents for Multiplication
 
@@ -154,7 +154,7 @@ Summary of the Rules of Exponents for Multiplication
 
 Many examples will make use of more than one exponent rule. In deciding which exponent rule to work with first, it's important to remember that the order of operations still applies.
 
-\*\*Example\*\*
+**Example**
 
 Simplify the following expressions.
 
@@ -171,17 +171,17 @@ Simplify the following expressions.
    \begin{aligned}\left(t^3\right)^2\cdot \left(t^4\right)^5 &= t^{3\cdot2}\cdot t^{4\cdot5} \\ &= t^6 \cdot t^{20} \\ &= t^{6+20} \\ &= t^{26}\end{aligned}
    $$
 
-\*\*Remark\*\*
+**Remark**
 
 We cannot simplify an expression like $x^2y^3$ using the   , as the factors $x^2$ and $y^3$ do not have the same base.
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 How many exponent rules are discussed in this section? Write an example of each rule in action.
 
-\*\*Exercise\*\*
+**Exercise**
 
 The order of operations say that operations inside parentheses should get the highest priority. But with $(5x)^3$, you cannot actually do anything with the $5$ and the $x$. Which exponent rule allows you to sidestep the order of operations and still simplify this expression a little?
 

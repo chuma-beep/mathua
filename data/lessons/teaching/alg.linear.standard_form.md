@@ -16,7 +16,7 @@ $$
 
 This is an example of a line equation in *standard form*.
 
-\*\*Definition\*\*
+**Definition**
 
 Standard Form
 
@@ -28,7 +28,7 @@ $$
 
 where $A$, $B$, and $C$ are three numbers (each of which might be $0$, although at least one of $A$ and $B$ must be nonzero). This form of a line equation is called *standard form*. In the context of an application, the meaning of $A$, $B$, and $C$ depends on that context. This equation is called "standard" form perhaps because *any* line can be written this way, even vertical lines, which do not have slope and therefore cannot be written using slope-intercept or point-slope form.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Returning to the example with donations for the medical procedure, let's examine the equation
 
@@ -68,7 +68,7 @@ So we have a $y$-intercept at $(0,100)$ and an $x$-intercept at $(500,0)$. If we
 
 With a linear relationship (and other types of equations too), we are often interested in the $x$-intercept and $y$-intercept because they have special meaning in context. For example, in  the figure , the $x$-intercept implies that if *no one* donates $$\$100$$, you need $500$ people to donate $$\$20$$ to get us to $$\$10{,}000$$. And the $y$-intercept implies if *no one* donates $$\$20$$, you need $100$ people to donate $$\$100$$. Let's look at another example.
 
-\*\*Example\*\*
+**Example**
 
 James owns a restaurant that uses about $32$ lb of flour every day. He just purchased $1200$ lb of flour. Model the amount of flour that remains $x$ days later with a linear equation, and interpret the meaning of its $x$-intercept and $y$-intercept.
 
@@ -100,7 +100,7 @@ The important thing is that both intercepts have relevant meaning in the context
 
 If a line is in standard form, it may be easiest to graph it using its two intercepts.
 
-\*\*Example\*\*
+**Example**
 
 Graph $2x-3y=-6$ using its intercepts. And then use the intercepts to calculate the line's slope.
 
@@ -142,11 +142,11 @@ $$
 
 This last example generalizes to a fact worth noting.
 
-\*\*Fact\*\*
+**Fact**
 
 If a line's $x$-intercept is at $(r,0)$ and its $y$-intercept is at $(0,b)$, then the slope of the line is $-\frac{b}{r}$. (Unless the line passes through the origin, in which case both $r$ and $b$ equal $0$, and then this fraction is undefined. And the slope of the line could be anything.)
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is its $x$-intercept?
 
@@ -160,13 +160,13 @@ What is its slope?
 
 Solution
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Transforming between Standard Form and Slope-Intercept Form
 
 Sometimes a linear equation arises in  standard form , but it would be useful to see that equation in  slope-intercept form . Or perhaps, vice versa.
 
-\*\*Example\*\*
+**Example**
 
 Change $2x-3y=-6$ to slope-intercept form, and then graph it. (This is the same equation from  the example ).
 
@@ -184,7 +184,7 @@ Compare this graphing method with the Graphing by Intercepts method in  the exam
 
 *Graphing $2x-3y=-6 $ with Slope Triangles*
 
-\*\*Example\*\*
+**Example**
 
 Graph $2x-3y=0$.
 
@@ -212,7 +212,7 @@ So the line's slope is $\frac{2}{3}$, and we can graph the line using slope tria
 
 If $C=0$ in a  standard form equation , it's convenient to graph it by first converting the equation to  slope-intercept form .
 
-\*\*Example\*\*
+**Example**
 
 Write the equation $y=\frac{2}{3}x+2$ in standard form.
 
@@ -230,15 +230,15 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What kind of line has an equation in standard form, but cannot be written in slope-intercept form or point-slope form?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What are some reasons why you might want to find the $x$- and $y$-intercepts of a line?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is not immediately apparent from standard form, that *is* immediately apparent from slope-intercept form and point-slope form?
 

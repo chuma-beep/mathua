@@ -14,7 +14,7 @@ Steps to Solve Linear Inequalities
 
 
 
-\*\*Example\*\*
+**Example**
 
 Solve for $t$ in the inequality $-3t+5\geq11$. Write the solution set in both set-builder notation and interval notation.
 
@@ -34,7 +34,7 @@ $$
 
 So both $-10$ and $-2$ are solutions as expected, while $0$ is not. This is evidence that our solution set is correct. Making these checks would help us catch an error if we had made one. While it certainly does take time and space to make three checks like this, it has its value.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $z$ in the inequality $(6z+5)-(2z-3)\gt-12$. Write the solution set in both set-builder notation and interval notation.
 
@@ -62,11 +62,11 @@ $$
 
 So both $-10$ and $-5$ are not solutions as expected, while $0$ is a solution. This is evidence that our solution set is correct. The solution set in set-builder notation is $\{z\mid z\gt-5\}$. The solution set in interval notation is $(-5,\infty)$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Applications
 
-\*\*Example\*\*
+**Example**
 
 Rate Problem
 
@@ -80,7 +80,7 @@ $$
 
 In summary, the container was safe as long as $t\leq25$. Assuming that the time $t$ also must be greater than or equal to zero, this means $0\leq t\leq 25$. We can write this as the time interval as $[0,25]$. Thus the container was safe between $0$ minutes and $25$ minutes.
 
-\*\*Example\*\*
+**Example**
 
 Percent Problem
 
@@ -96,15 +96,15 @@ So the town's population from ten years ago was at least $20880$.
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 When solving an inequality, what are the conditions when you have to reverse the direction of the inequality symbol?
 
-\*\*Exercise\*\*
+**Exercise**
 
 How is the solution set to a linear inequality different from the solution set to a linear equation?
 
-\*\*Exercise\*\*
+**Exercise**
 
 If you want to check your solution set to a linear inequality, what exactly are you going to do?
 

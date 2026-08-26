@@ -8,7 +8,7 @@ In this section, we will review how to graph lines and general functions which w
 
 Sometimes, the easiest way to make a graph of an equation is by making a table and plotting points. (This was the approach in  Section .) Let's refresh ourselves on how this works.
 
-\*\*Example\*\*
+**Example**
 
 A bathtub is holding $12$ gallons of water. The drain starts to leak water at a constant rate of $0.6$ gallons per second. A linear function with formula $W(x)=-0.6x+12$ can be used to model the amount of water, in gallons, in the tub $x$ seconds after it started draining. Let's make a graph of this function. The most straightforward method to graph any function is to build a table of $x$- and $y$-values, and then plot the points.
 
@@ -16,13 +16,13 @@ A bathtub is holding $12$ gallons of water. The drain starts to leak water at a 
 
 *A graph of $W(x)=-0.6x+12$*
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Graphing Lines in Slope-Intercept Form
 
 Recall that the  slope-intercept form  of a line equation is $y=mx+b$ where $m$ is the slope and $(0,b)$ is the vertical intercept.
 
-\*\*Example\*\*
+**Example**
 
 An efficient method to graph $y=-0.6x+12$ is to use the fact that it is in slope-intercept form. To quickly make a graph, examine the equation and pick out the slope (in this case $-0.6$) and vertical intercept (in this case $(0,12)$), and then plot slope-triangles from the intercept to locate more points on the line. One key point here is that it helps to have the  slope  written as a fraction. In this case,
 
@@ -36,7 +36,7 @@ Since we know that we will go forward $5$ units and then down $3$ units, and tha
 
 *A graph of $W(x)=-0.6x+12$*
 
-\*\*Example\*\*
+**Example**
 
 Find the slope and vertical intercept of $y=h(x)$, where $h(x)=\frac{5}{3}x-4$. Then use slope triangles to find two more points on the line and sketch it.
 
@@ -52,7 +52,7 @@ $$
  \underset{\overset{\downarrow}{y_0}}{\strut y \strut}=m(\overset{\overset{x_0}{\downarrow}}{\strut x \strut}-x_0)+y_0 
 $$
 
-\*\*Example\*\*
+**Example**
 
 The population of Monarch butterflies has been on  since the 1980s, as have populations of many migratory animals. Efforts to restore the population haven't had great success yet. There are several distinct populations of Monarchs that probably never meet each other: the Hawaii population, the Florida Keys population, the Western population, and the Eastern population. Of these, the Eastern population is by far the largest and we can model this population of Monarch butterflies with a simple linear function.
 
@@ -66,7 +66,7 @@ Let's make graph of this equation given the information provided, but only betwe
 
 *A graph of $M(x)=-(x-2006)+15$*
 
-\*\*Example\*\*
+**Example**
 
 Find the slope and a point on the graph of $y=m(x)$, where $m(x)=-\frac{9}{5}(x+1)-3$. Then use slope triangles to find two more points on the line and sketch it.
 
@@ -78,7 +78,7 @@ The slope of the line is $-\frac{9}{5}$, and the point given by the equation is 
 
 Recall that the  standard form  of a line equation is $Ax+By=C$ where where $A$, $B$, and $C$ are three numbers (each of which might be $0$, although at least one of $A$ and $B$ must be nonzero).
 
-\*\*Example\*\*
+**Example**
 
 Recall our bathtub draining problem from  Example , where $W(x)=-0.6x+12$ modeled the amount of water, in gallons, in the tub $x$ seconds after it started draining. Let's write the line equation $y=-0.6x+12$ in standard form.
 
@@ -92,7 +92,7 @@ The equation is in standard form written as $0.6x+y=12$.
 
 If a linear function is given in standard form, we can relative easily find the equation's $x$- and $y$-intercepts by substituting in $y=0$ and $x=0$, respectively.
 
-\*\*Example\*\*
+**Example**
 
 Let's find the intercepts of $0.6x+y=12$, still relating back to  Example . Then we may graph the equation using those intercepts.
 
@@ -124,13 +124,13 @@ Now with the $x$- and $y$-intercepts known along with an additional point, we ma
 
 *A graph of $3x+5y=60$*
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Graphing Functions by Plotting Points
 
 Any function, linear or not, can be graphed by building a table of $x$- and $y$-values and plotting points. Let's look at a few more examples.
 
-\*\*Example\*\*
+**Example**
 
 Imagine a company called Corduroy's-Я-Us that makes pants. Their profit from their Royal Blue Corduroys, in thousands of dollars, can be modeled by the function $P(x)=-0.5x^2+33x-200$ where $x$ is the price of each pair of Royal Blue pants that they sell. Let's build a table of values and plot the function's graph.
 
@@ -140,9 +140,9 @@ In this context, the value of $x$ must be positive. Furthermore, we shouldn't re
 
 With the values in  Table , we can sketch the graph. Note that we have to estimate the how the graph curves which is a limitation of graphing a function by plotting points compared with using algebraic techniques.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Example\*\*
+**Example**
 
 Human-initiated global warming has been the subject of some debate. However, one aspect of the debate is undeniable fact: the amount of atmospheric carbon dioxide ($\mathrm{CO}_2$: ) is being  and is increasing faster and faster. The measured yearly average atmospheric carbon dioxide levels in parts per million (ppm) since 1958 can be very closely approximated by the function $C(x)=244+29\cdot1.0148^x$ where $x$ represents the number of years since the year 1900. Before 1958, the greenhouse gases weren't regularly measured. Create a table of values rounded to the nearest whole number for the carbon dioxide levels since 1958.
 
@@ -158,19 +158,19 @@ Since 1958 is $58$ years since 1900, we will start our table at $x=58$ and go by
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What are the four methods we recalled to graph lines in this section?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Why might it be better to represent a line in point-slope form than slope intercept form?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Explain how an equation for a line given in slope-intercept or point-slope form can be graphed without creating a table of values.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Describe one or more possible issues you might encounter after creating a table of points for a function and trying to use those points to make a graph.
 

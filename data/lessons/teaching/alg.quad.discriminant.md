@@ -16,7 +16,7 @@ where $a$ is some nonzero number.
 
 When $b=0$ and the equation's form is $ax^2+c=0$, then we can simply use the square root property to solve it as we did with equations like this in  the section . But can we solve equations where $b\neq0$? A general method for doing this is to use the *quadratic formula*.
 
-\*\*Fact\*\*
+**Fact**
 
 The Quadratic Formula
 
@@ -34,7 +34,7 @@ $$
 
 This method for solving quadratic equations will work to solve *every* quadratic equation. It is most helpful when $b\ne0$.
 
-\*\*Example\*\*
+**Example**
 
 Linh is in a physics class that launches a tennis ball from a rooftop that is $90.2$ feet above the ground. They fire it directly upward at a speed of $14.4$ feet per second and measure the time it takes for the ball to hit the ground below. We can model the height of the tennis ball, $h$, in feet, with the quadratic equation $h=-16t^2+14.4t+90.2$, where $x$ represents the time in seconds after the launch. According to the model, when should the ball hit the ground?
 
@@ -60,7 +60,7 @@ We don't use the negative solution because a negative time does not make sense i
 
 The quadratic formula can be used to solve any quadratic equation, but it requires that you remembering the formula correctly and that you correctly identify $a$, $b$, and $c$. Also, that you don't make any arithmetic mistakes when you simplify. We recommend that you always check if you could use the square root property before using the quadratic formula.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $x$ in $2x^2-9x+5=0$.
 
@@ -74,7 +74,7 @@ This is fully simplified because we cannot simplify $\sqrt{41}$ or reduce the fr
 
 When a quadratic equation does not start out in standard form we must convert it to standard form before we can clearly identify the values of $a$, $b$, and $c$.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $x$ in $x^2=-10x-3$.
 
@@ -98,7 +98,7 @@ $$
 
 The solution set is $\{-5-\sqrt{22}, -5+\sqrt{22}\}$.
 
-\*\*Remark\*\*
+**Remark**
 
 The irrational solutions to quadratic equations can be checked, but doing this sometimes takes a lot of simplification and is not shown throughout this section. As an example of how much effort goes into a direct check, we will check the solution of $-5+\sqrt{22}$ from  the example . We need to replace $x$ with $-5+\sqrt{22}$ and check that the two sides of the equation are equal. This check is shown here:
 
@@ -116,7 +116,7 @@ These are close. So with the help of a calculator, checking like this can give r
 
 The radicand from the quadratic formula, $b^2-4ac$, is called the *discriminant*. When it is a negative number, the quadratic equation has no real  solution.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $y$ in $y^2-4y+8=0$.
 
@@ -132,7 +132,7 @@ The discriminant worked out to be $-16$, which is negative. The square root of a
 
 Certain "word problems" lead to a quadratic equation where the quadratic formula may be useful.
 
-\*\*Example\*\*
+**Example**
 
 A rectangle is $5$ inches longer than it is wide. The total area of the rectangle is 60 square inches. How wide is the rectangle? (This is asking for the shorter dimension.)
 
@@ -146,9 +146,9 @@ $$
 
 Only the solution $w\approx5.64$ makes sense as the width of a rectangle. So the rectangle is about $5.64$ inches wide.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Example\*\*
+**Example**
 
 Amita has a food stand where she sells momo (Nepali dumplings). If she charges $p$ dollars for each momo, she estimates that she'd sell $80{,}000-20{,}000p$ over the course of a year. (This reflects how raising the price can lead to fewer people making purchases.) What is the largest price that Amita could set to end up with a revenue of $$\$70{,}000$$ for the year? (Note that revenue is not the same as profit, and we will not be accounting for Amita's expenses.)
 
@@ -168,7 +168,7 @@ The possible solutions are about $2.71$ and $1.29$. They are both valid solution
 
 Sometimes a radical equation gives rise to a quadratic equation, and the quadratic formula can then be useful.
 
-\*\*Example\*\*
+**Example**
 
 Solve for $z$ in $\sqrt{z}+2=z$.
 
@@ -190,7 +190,7 @@ $$
 
 It turned out that $1$ is an *extraneous solution*, but $4$ is a valid solution. So the equation has one solution, $4$, and the solution set is $\{4\}$.
 
-\*\*Example\*\*
+**Example**
 
 Solve the equation $\sqrt{2n-6}=1+\sqrt{n-2}$ for $n$.
 
@@ -218,15 +218,15 @@ So, $11$ is the only solution. The solution set is $\{11\}$.
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is the formula for the discriminant?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Are there any kinds of quadratic equations where the quadratic formula is not the best tool to use?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Given a quadratic equation, will the quadratic formula always lead you to two solutions?
 

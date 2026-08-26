@@ -20,7 +20,7 @@ A *rate* is a measurement that tells us how much one quantity is changing with  
 
 One common class of modeling applications involve rates like these. Let's examine a first example.
 
-\*\*Example\*\*
+**Example**
 
 Your savings account starts with $$\$500$$. Then each month, there is an automatic deposit of $$\$150$$. You need $$\$1700$$ to afford a deposit on a new apartment. Write an equation where the solution represents how much time this will take.
 
@@ -60,7 +60,7 @@ $$
 
 and the variable represented how much the other quantity (time in this case, not the account balance) has changed. The $\pm$ is a $+$ if the quantity is growing, and is a $-$ if the quantity is reducing. This is a common setup for modeling with rates.
 
-\*\*Example\*\*
+**Example**
 
 A bathtub contains $2.5\,\text{ft}^{3}$ of water. More water is being poured in at a rate of $1.75\,\text{ft}^{3}$ per minute. Write an equation where the solution represents when the amount of water in the bathtub will reach $6.25\,\text{ft}^{3}$.
 
@@ -74,15 +74,15 @@ $$
 
 (We are not concerned with solving this equation at this time.)
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Percent Applications
 
 the section  reviews the fundamentals of working with percentages. Here we look at some scenarios where there is an equation to set up based on percentages. One important consideration is that when doing math with percentages, it's almost always best to rewrite each percentage as a decimal. For example, $18\%$ should be written as $0.18$ if you are going to use it to do algebra or arithmetic.
 
-\*\*Example\*\*
+**Example**
 
 Jakobi's annual salary as a nurse this year is $$\$73{,}290$$. That's following a $4\%$ raise over last year's salary. Write a linear equation modeling this scenario, where the solution represents Jakobi's salary from the previous year.
 
@@ -112,9 +112,9 @@ In Jakobi's situation, his salary rose, so the $\pm$ symbols would be a $+$. We 
 
 Note the variable in Jakobi's situation is an initial value and it appears twice in the equation. This is common with percent application modeling.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Example\*\*
+**Example**
 
 The cost of a refrigerator after a $15\%$ discount is $$\$612$$. Write a linear equation modeling this scenario where the original price of the refrigerator (before the discount was applied) is the solution.
 
@@ -132,13 +132,13 @@ $$
 
 We are happy to write this equation down and do not need to solve it for now.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Inequalities in Modeling
 
 Occasionally an equation is not the most appropriate tool for a model, and an inequality is better. To identify when an inequality is more appropriate, look for words/phrases like "at least", "at most", "minimum", "maximum", "no more than", "no less than", and more.
 
-\*\*Example\*\*
+**Example**
 
 The car share company Zipcar has a one-time registration fee of $$\$35$$ and charges $$\$9.50$$ per hour for use of their vehicles. Hana wants to use Zipcar this semester and has a maximum budget of $$\$300$$. Write a linear inequality representing this scenario, where the solution set represents how many hours total this semester that she could use a Zipcar vehicle.
 
@@ -152,19 +152,19 @@ $$
 
 For now it is enough to write down this inequality, and we will solve it later.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 In a word problem where there is some kind of rate, it can help you to understand the pattern if you make a .
 
-\*\*Exercise\*\*
+**Exercise**
 
 It is common to come across a word problem where some percent is either added or subtracted from an unknown original value. With the approach described in this section for setting up an equation, how many times will you use the variable in such an equation?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Is there any difference between these three phrases, or do they all mean the same thing?
 

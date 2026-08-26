@@ -29,7 +29,7 @@ But if we find $(2\cdot3)^2$, then first we are doubling $3$. So we are getting 
 
 The point is that these amounts are different.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Order of Operations
 
@@ -48,7 +48,7 @@ To help remember the order of operations, consider the acronym . You might use m
 
 We'll start with a few examples that only invoke a few operations each.
 
-\*\*Example\*\*
+**Example**
 
 Use the order of operations to simplify the following expressions.
 
@@ -77,13 +77,13 @@ Use the order of operations to simplify the following expressions.
    \begin{aligned}4(2)^3 &= 4(2)^3 \\ &= 4(\highlight{8}) \\ &= \highlight{32}\end{aligned}
    $$
 
-\*\*Remark\*\*
+**Remark**
 
 There are several different ways to write multiplication. We can use the symbols $\cdot$, $\times$, and $*$ to mean multiplication. We can also write two things right next to each other with no symbol in between them to mean multiplication. That is what is happening in  Item , where the $4$ is written right next to the $(2)^3$ with no symbol in between.
 
 Using a symbol for multiplication is called "explicit multiplication" and not writing  any symbol at all is called "implicit multiplication". For this textbook, explicit and  implicit multiplication have the same priority in the order of operations. However there are some conventions out in the real world where implicit multiplication has a higher priority in the order of operations than explicit multiplication. You may have seen memes with expressions like $6\div2(3)$ that play on how the real world has more than one convention for the order of operations.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Practice with order of operations
 
@@ -103,9 +103,9 @@ $\phantom{5-3(7-4)^2}={}$
 
 Solution
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Absolute Value and Implied Grouping
 
@@ -115,7 +115,7 @@ Grouping symbols are more than just parentheses and brackets. Each of the follow
 
 Each of these implied groupings also ask you to do something once the arithmetic on the inside is completed. Actually taking the absolute value or the square root, perhaps. Doing the division in the case of a fraction. Raising something to a power. But *before* doing those things, all of the arithmetic *inside* the groups should be take care of.
 
-\*\*Example\*\*
+**Example**
 
 Use the order of operations to simplify the following expressions.
 
@@ -133,11 +133,11 @@ Use the order of operations to simplify the following expressions.
    \begin{aligned}\frac{2^4+3\cdot 6}{5-18\div 2} &= \frac{2^4+3\cdot 6}{5-18\div 2} \\ &=\frac{\highlight{16}+3\cdot 6}{5-\highlight{9}} \\ &=\frac{16+\highlight{18}}{\highlight{-4}} \\ &=\frac{\highlight{34}}{-4} \\ &=-\frac{17}{2}\end{aligned}
    $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Implied Grouping
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Understanding $(-a)^m$ versus $-a^m$
 
@@ -155,7 +155,7 @@ $$
 
 and this is not the same as $(-4)^2$, which is *positive*$16$.
 
-\*\*Warning\*\*
+**Warning**
 
 Negative Numbers Raised to Powers
 
@@ -166,7 +166,7 @@ You may find yourself needing to raise a negative number to a power, and using a
 
 Try entering these into your own calculator.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Negating and Raising to Powers
 

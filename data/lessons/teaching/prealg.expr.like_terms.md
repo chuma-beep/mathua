@@ -6,13 +6,13 @@ Algebraic expressions can be large and complicated, so anything we can do to rew
 
 ## Identifying Terms
 
-\*\*Definition\*\*
+**Definition**
 
 In an algebraic expression, the *terms* are quantities being added together.
 
 Note that terms are not the same thing as *factors*, which are quantities being  multiplied together. Factors are studied more later in this book.
 
-\*\*Example\*\*
+**Example**
 
 List the terms in the expression $2\ell+2w$.
 
@@ -20,19 +20,19 @@ The expression has two terms that are being added, $2\ell$ and $2w$.
 
 When an expression has subtraction, we can rewrite the it using addition of a negative to make it easier to see exactly what the terms are.
 
-\*\*Example\*\*
+**Example**
 
 List the terms in the expression $-3x^2+5x-4$.
 
 We can rewrite this expression as $-3x^2+5x+(-4)$ to see that the terms are $-3x^2$, $5x$, and $-4$. Note that the third term is $-4$, not just $4$.
 
-\*\*Example\*\*
+**Example**
 
 List the terms in the expression $3\,\text{cm}+2\,\text{cm}-3\,\text{cm}+2\,\text{cm}$.
 
 This expression has four terms: $3\,\text{cm}$, $2\,\text{cm}$, $-3\,\text{cm}$, and $2\,\text{cm}$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Combining Like Terms
 
@@ -44,7 +44,7 @@ Terms in an algebraic expression that can be combined by adding them together in
 - Sometimes like terms use the same units, like how $3\,\text{cm}+2\,\text{cm}$ has terms that each use $\text{cm}$. This simplifies to $5\,\text{cm}$.
 - Sometimes like terms have something else in common, like how $3\sqrt{7}+2\sqrt{7}$ has terms that each use $\sqrt{7}$. This simplifies to $5\sqrt{7}$.
 
-\*\*Example\*\*
+**Example**
 
 In the expressions below, look for like terms and then simplify where possible  by adding or subtracting.
 
@@ -69,7 +69,7 @@ One of the examples from  the example  was $16\,\text{ft}^2+4\,\text{ft}$. The u
 *There is no way to add&#x20;
 &#x20;     to .*
 
-\*\*Example\*\*
+**Example**
 
 Simplify each expression by combining like terms (if possible).
 
@@ -99,7 +99,7 @@ Simplify each expression by combining like terms (if possible).
    Our two terms combine to make $\frac{7}{3}t$. There was another term when this started and the final simplified expression is $\frac{7}{3}t-\frac{1}{2}x$.
 6) This expression can be thought of as $1.00x-0.15x$. Subtracting decimals $1.00-0.15$, the result is $0.85$. So we have $0.85x$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 $x+0.25x$
 
@@ -125,17 +125,17 @@ This expression cannot be simplified further because there are not any like term
 
 The *perimeter* of a shape is the length of a strip of tape that could be taped tightly around the shape. When a shape has straight side edges, the perimeter comes from adding all of the side lengths together. This can lead to like terms that can be combined.
 
-\*\*Example\*\*
+**Example**
 
 Find the perimeter of this shape, which is not drawn to scale. Simplify the perimeter expression as much as possible.
 
 The perimeter is the result from adding the five sides together: $2x+3y+1.5x+5y+x$. There are three $x$-terms that sum to $4.5x$, and two $y$-terms that sum to $8y$. So the perimeter is $4.5x+8y$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Sometimes it makes sense to add two algebra expressions together, and that may give an opportunity to combine like terms.
 
-\*\*Example\*\*
+**Example**
 
 A chemist has a bottle with $1.2\,\text{L}$ of water mixed with $0.3\,\text{L}$ of gasoline. At this time, they have forgotten the density of water (in $\text{g}/$) and the density of gasoline (also in $\text{g}/$) so they use $w$ and $g$ as variables for these densities. This means $1.2w+0.3g$ is the total mass of this mixture, in grams.
 
@@ -149,15 +149,15 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 What should you be aware of when there is subtraction in an algebraic expression and you are identifying its terms?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Describe at least two different ways in which a pair of terms would be considered to be "like terms".
 
-\*\*Exercise\*\*
+**Exercise**
 
 What might help when you are combining like terms, and one of the terms is a lonely variable like $x$ or $y$?
 

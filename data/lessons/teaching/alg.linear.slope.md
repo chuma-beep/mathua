@@ -8,7 +8,7 @@ In  Section , we saw that a steady, constant rate of change between points means
 
 *Between successive points, the rate of change is always $1/2$.*
 
-\*\*Definition\*\*
+**Definition**
 
 Slope
 
@@ -30,11 +30,11 @@ Here are some scenarios with different slopes. As you read each scenario, note h
 - If a company loses $2$ million dollars every year, its rate of change in reserve funds is the same from year to year. So the company's reserve funds and time have a linear relationship where the slope is $-2$ million dollars per year.
 - If Sakura is an adult who has stopped growing, her rate of change in height is the same from year to year---it's zero. So the slope is $0\,\text{in}/$. Sakura's height is constant with respect to time. Since the slope is zero, we don't say that Sakura's height and time have a linear relationship.
 
-\*\*Remark\*\*
+**Remark**
 
 A useful phrase for remembering the definition of slope is "rise over run". Here, "rise" refers to "change in $y$", and "run" refers to "change in $x$". Be careful. As mentioned earlier, in mathematics the horizontal direction comes *first*. The phrase "rise over run" might make it sound like the vertical direction comes first, but that is misleading. (It's a bit awkward to say, but the phrase "run under rise" puts the horizontal change first.)
 
-\*\*Example\*\*
+**Example**
 
 Yara's Savings
 
@@ -62,7 +62,7 @@ On a graph of Yara's savings, we can "see" the rates of change between consecuti
 
 Every slope triangle on the graph of Yara's savings has the same angles even though some are larger than others. Since the ratio of vertical change to horizontal change is always $20\, \frac{\text{dollars}}{\text{wk}}$. On any graph of any sloped line, we can draw a slope triangle and compute slope as "rise over run".
 
-\*\*Note\*\*
+**Note**
 
 Slope Triangles Above
 
@@ -70,7 +70,7 @@ Of course, we could draw a slope triangle on the top side of a line. This slope 
 
 *Yara's savings*
 
-\*\*Example\*\*
+**Example**
 
 The following graph of a line models the amount of gas, in gallons, in Kiran's gas tank as they drive their car. Find the line's slope, and interpret its meaning in this context.
 
@@ -88,15 +88,15 @@ $$
 
 . In the given context, this slope implies gas in the tank is *decreasing* at the rate of $\frac{2}{3}$$\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using $2$ gallons of gas every $3$ hours.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Comparing Slopes
 
 It's useful to understand when more than one line having different slopes appear on the same coordinate system.
 
-\*\*Example\*\*
+**Example**
 
 Effie, Ivan and Cleo are in a foot race.  the figure  models the distance each has traveled in the first few seconds. Each runner takes a second to accelerate up to their running speed, but then runs at a constant speed. So they are then traveling with a constant rate of change, and the straight line portions of their graphs have a slope. Find each line's slope, and interpret its meaning in this context. What comparisons can you make with these runners?
 
@@ -114,7 +114,7 @@ Using  the slope equation , we have:
 
 In a distance-over-time graph, the slope of a line represents speed. The slopes in these examples and the running speeds of these runners are measured in $\text{m}/$. A relationship we can see is that the more steeply a line is slanted, the larger the slope is. This should make sense because for each passing second, the faster runner travels farther, making a slope triangle's height taller. This means that we can tell that Cleo is the fastest runner (and Effie is the slowest) just by comparing the slopes $4>3.5>2.666$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Jogging on Mt. Hood
 
@@ -132,7 +132,7 @@ Solution
 
 Some important properties are demonstrated in  the exercise .
 
-\*\*Fact\*\*
+**Fact**
 
 The Relationship Between Slope and Increase/Decrease
 
@@ -148,7 +148,7 @@ These properties are summarized graphically in   .
 
 Several times in this section we computed a slope by drawing a slope triangle. That's not necessary if you already have coordinates for two points on a line. In fact, sometimes it's not practical to draw a slope triangle. (For instance if you only have specific information about two points that are too close together to draw a triangle, or if you cannot clearly see precise coordinates where you might start and stop your slope triangle.) Here we will show how to find a line's slope without drawing a slope triangle.
 
-\*\*Example\*\*
+**Example**
 
 Your neighbor planted a sapling from a local nursery in his front yard several years ago. Ever since then, it has been growing at a constant rate. By the end of the third year, the tree was $15\,\text{ft}$ tall. By the end of the sixth year, the tree was $27\,\text{ft}$ tall. What's the tree's rate of growth ( the slope)?
 
@@ -178,13 +178,13 @@ This is known as the *slope formula*. The following graphs help to understand wh
 
 *Understanding the slope formula*
 
-\*\*Warning\*\*
+**Warning**
 
 It's important to use subscript instead of superscript in the slope equation, because $y^2$ means to take the number $y$ and square it. When we use $y_2$, we are saying there are at least two $y$-values in the conversation, and $y_2$ is the second of them.
 
 The beauty of the  slope formula  is that to find a line's slope, we don't need to draw a slope triangle. Let's look at an example.
 
-\*\*Example\*\*
+**Example**
 
 A line passes the points $(-5,25)$ and $(4,-2)$. Find this line's slope.
 
@@ -202,19 +202,19 @@ $$
 
 Note that we used parentheses when substituting negative numbers in $x_1$ and $y_1$. This is a good habit to protect yourself from making errors with subtraction and double negatives.
 
-\*\*Exercise\*\*
+**Exercise**
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Have you memorized a formula for finding the slope between two points using their coordinates?
 
-\*\*Exercise\*\*
+**Exercise**
 
 What is an important thing to do with slope to make it more meaningful in an application problem?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Drawing a slope triangle can be helpful to think about slope. But what might happen that could make it impractical to draw a slope triangle?
 

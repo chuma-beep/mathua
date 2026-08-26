@@ -14,7 +14,7 @@ You've probably seen signed numbers used to describe the temperature of very col
 
 the figure  uses a *number line* to illustrate these  positive and negative numbers. A number line is a useful device for visualizing how numbers relate to each other and combine with each other. Values to the right of $0$ are called *positive* numbers and values to the left of $0$ are called *negative numbers*.
 
-\*\*Warning\*\*
+**Warning**
 
 Subtraction Sign versus Negative Sign
 
@@ -25,7 +25,7 @@ Unfortunately, the symbol we use for subtraction looks just like the symbol we u
 - $-20-13$ has a negative sign and then a subtraction sign.
 - $(-20)(-13)$ has two negative signs and no subtraction sign.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Identify "Minus" Signs
 
@@ -51,7 +51,7 @@ $\dfrac{-13-(-15)-17}{23-4}$ has two negative signs and three subtraction signs.
 
 To adding two numbers with the *same sign* you can (at first) ignore their signs, and add the two numbers as if they were positive. Then make sure your result is either positive or negative, depending on what the sign was.
 
-\*\*Example\*\*
+**Example**
 
 Add Two Negative Numbers
 
@@ -81,7 +81,7 @@ If we are adding two numbers that have *opposite* signs, then the two people are
 
 *Working in opposition*
 
-\*\*Example\*\*
+**Example**
 
 Adding One Number of Each Sign
 
@@ -100,7 +100,7 @@ Here are four examples of addition where one number is positive and the other is
 
    We have one number of each sign, both with size $87.3$. The opposing forces cancel each other, leaving a result of $0$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Addition with Negative Numbers
 
@@ -152,7 +152,7 @@ $$
 \begin{aligned}42-(-23)&=42+23 \\ &=65\end{aligned}
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Subtraction with Negative Numbers
 
@@ -202,13 +202,13 @@ This illustrates that $-3\cdot(-7)=21$, and it seems that a negative number time
 
 Positive and negative numbers are not the whole story. The number $0$ is neither positive nor negative. What happens with multiplication by $0$? You can choose to view $7\cdot0$ as adding the number $0$ seven times. And you can choose to view $0\cdot7$ as adding the number $7$ zero times. Either way, the result is $0$.
 
-\*\*Fact\*\*
+**Fact**
 
 Multiplication by $0$
 
 Multiplying any number by $0$ results in $0$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Multiplication with Negative Numbers
 
@@ -260,13 +260,13 @@ $$
  (-2)^5=-32 
 $$
 
-\*\*Warning\*\*
+**Warning**
 
 Negative Signs and Exponents
 
 Expressions like $-3^4$ may not mean what you think they mean. What base do you see here? The correct answer is $3$. The exponent $4$ only applies to the $3$, not to $-3$. So this expression, $-3^4$, is actually the same as $-\mathopen{}\left(3^4\right)\mathclose{}$, which is $-81$. Be careful not to treat $-3^4$ as having base $-3$. That would make it equivalent to $(-3)^4$, which is *positive*$81$.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Exponents with Negative Bases
 

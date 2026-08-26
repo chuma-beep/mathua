@@ -31,7 +31,7 @@ Through centuries of scientific progress, humanity became increasingly aware of 
 
 To make computations involving such numbers more manageable, a standardized notation called "scientific notation" was established. The foundation of scientific notation is the fact that multiplying or dividing by a power of $10$ will move the decimal point of a number so many places to the right or left, respectively. So first, let's take a moment to review that level of basic arithmetic.
 
-\*\*Exercise\*\*
+**Exercise**
 
 Multiplying a number by $10^n$ where $n$ is a positive integer had the effect of moving the decimal point $n$ places to the right.
 
@@ -43,7 +43,7 @@ $$
 
 and this is our first example of writing a number in scientific notation.
 
-\*\*Definition\*\*
+**Definition**
 
 A positive number is written in *scientific notation* when it has the form $a \times 10^n$ where $n$ is an integer and $1 \le a \lt 10 $. In other words, $a$ has precisely one nonzero digit to the left of the decimal place. The exponent $n$ used here is called the number's *order of magnitude*. The number $a$ is sometimes called the *significand* or the *mantissa*.
 
@@ -67,15 +67,15 @@ $$
 
 Scientific notation communicates the "essence" of the number ($8.9412$) and then its size, or order of magnitude ($10^4$).
 
-\*\*Example\*\*
+**Example**
 
 To get a sense of how scientific notation works, let's consider familiar lengths of time converted to seconds.
 
 Note that roughly $2.6$*million* seconds is one month, while roughly $2.5$*billion* seconds is an entire lifetime.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Scientific Notation for Small Numbers
 
@@ -91,7 +91,7 @@ $$
  0\overbrace{.\highlight{005}}^{3}=5\times 10^{-3} 
 $$
 
-\*\*Example\*\*
+**Example**
 
 In quantum mechanics, there is an important value called . Written as a decimal, the value of Planck's constant (rounded to six significant digits) is
 
@@ -109,17 +109,17 @@ $$
 
 So in scientific notation, Planck's Constant is $6.62607 \times 10^{-34}$. It will be much easier to use $6.62607 \times 10^{-34}$ in a calculation, and an added benefit is that scientific notation quickly communicates both the value and the order of magnitude of Planck's Constant.
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
-\*\*Exercise\*\*
+**Exercise**
 
 ## Multiplying and Dividing Using Scientific Notation
 
 One main reason for having scientific notation is to make calculations involving immensely large or small numbers easier to perform. By having the order of magnitude separated out in scientific notation, we can separate any calculation into two components.
 
-\*\*Example\*\*
+**Example**
 
 On Sept. 30th, 2016, the  was about $$\$19{,}600{,}000{,}000{,}000$$ and the US population was about $323{,}000{,}000$. What was the average debt per person that day?
 
@@ -141,7 +141,7 @@ The federal debt per capita in the US on September 30th, 2016 was about $$\$60{,
 
 Whenever we multiply or divide numbers that are written in scientific notation, we must separate the calculation for the coefficients from the calculation for the powers of ten, just as we simplified earlier expressions using variables and the exponent properties.
 
-\*\*Example\*\*
+**Example**
 
 1. Multiply $\left( 2\times 10^5 \right)\left( 3\times10^4 \right)$.
 2. Divide $\dfrac{8\times 10^{17}}{4\times 10^2}$.
@@ -173,7 +173,7 @@ $$
 \begin{aligned}&=7.626 \times \highlight{10^1 \times 10^{11}} \\ &= 7.626 \times 10^{12}\end{aligned}
 $$
 
-\*\*Example\*\*
+**Example**
 
 Multiply or divide as indicated. Write your answer using scientific notation.
 
@@ -199,7 +199,7 @@ $$
 
 ##
 
-\*\*Exercise\*\*
+**Exercise**
 
 Which number is very large and which number is very small?
 
@@ -207,11 +207,11 @@ $$
  9.99\times10^{-47}\qquad1.01\times10^{23} 
 $$
 
-\*\*Exercise\*\*
+**Exercise**
 
 Since some computer/calculator screens can't display an exponent, how might a computer/calculator display the number $2.318\times10^{13}$?
 
-\*\*Exercise\*\*
+**Exercise**
 
 Why do we bother having scientific notation for numbers?
 
