@@ -52,7 +52,7 @@ func Load(lessonsDir string) (*Loader, error) {
 			continue
 		}
 		content := latex.Canonicalize(string(body), latex.ForSource(source, string(body)))
-		for _, w := range latex.Validate(content) {
+		for _, w := range latex.Validate(content, latex.ForSource(source, string(body))) {
 			log.Printf("latex warning in %q: %s", source, w)
 		}
 		title := extractTitle(content)

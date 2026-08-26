@@ -79,7 +79,7 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 	p := gen.Generate(ctx)
 	p.Question = latex.Canonicalize(p.Question, latex.Generators)
 	p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
-	for _, w := range latex.Validate(p.Question + "\n" + p.Explanation) {
+	for _, w := range latex.Validate(p.Question+"\n"+p.Explanation, latex.Generators) {
 		fmt.Printf("latex warning in generator %q: %s\n", conceptID, w)
 	}
 	return p, nil

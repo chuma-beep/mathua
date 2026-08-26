@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Points, Lines, and Planes
 
 Geometry begins with three undefined building blocks: the **point**, the **line**, and the **plane**. Every other geometric object is described in terms of these.

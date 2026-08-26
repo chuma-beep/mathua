@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Circumference of a Circle
 
 The **circumference** is the perimeter of a circle — the distance around it. What makes circles special is that the distance around is always the same multiple of the distance across, for every circle, no matter its size.

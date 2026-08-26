@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Parts of a Circle: Radius, Diameter, Chord
 
 A **circle** is the set of all points exactly the same distance from a fixed point called the **center**. That fixed distance gives the circle its size.

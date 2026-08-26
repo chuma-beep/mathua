@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Types of Triangles
 
 A **triangle** is a closed figure with three straight sides and three angles. Triangles can be sorted two independent ways: by their sides and by their angles.

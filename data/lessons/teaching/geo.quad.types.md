@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Types of Quadrilaterals
 
 A **quadrilateral** is a closed figure with four straight sides. The angles of any quadrilateral total $360^\circ$. Special quadrilaterals are named by their parallel sides, equal sides, and right angles.

@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Area of a Triangle
 
 The **area** of a triangle is the number of unit squares needed to cover it. Any triangle is half of a rectangle, which gives the formula:

@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Triangle Angle Sum Is 180 Degrees
 
 Every triangle, no matter its shape or size, obeys one simple rule:

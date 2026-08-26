@@ -1,3 +1,4 @@
+> Hand-authored lesson for the Mathua project.
 # Surface Area of a Rectangular Prism
 
 The **surface area** of a solid is the total area of all its faces — the amount of wrapping paper needed to cover it exactly. For a rectangular prism, add the areas of the six rectangles.
