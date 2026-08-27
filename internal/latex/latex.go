@@ -181,6 +181,9 @@ var tikzRe = regexp.MustCompile(`(?s)\\begin\{tikzpicture\}.*?\\end\{tikzpicture
 // rewritten to aligned because KaTeX renders align only at the top of a
 // display block, while the corpus nests it inside $$...$$. TikZ diagrams
 // cannot render in KaTeX and are stripped.
+var textCmdRe = regexp.MustCompile(`\\text\{\\([a-zA-Z]+)\}`)
+var textPunctRe = regexp.MustCompile(`\\text\{([/\\-])\}`)
+
 func mathNorm(s string) string {
 	s = protectRowbreaks(s)
 	s = collapseDoubled(s)
@@ -189,6 +192,11 @@ func mathNorm(s string) string {
 	// (KaTeX rejects them as delimiters-in-math).
 	s = strings.ReplaceAll(s, `\(`, "(")
 	s = strings.ReplaceAll(s, `\)`, ")")
+	// Scrape artifact: \text{\pm}, \text{\sin} etc. inside math — unwrap the
+	// command (KaTeX rejects \pm inside \text).
+	s = textCmdRe.ReplaceAllString(s, `\$1`)
+	s = textCmdRe.ReplaceAllString(s, `\$1`)
+	s = textPunctRe.ReplaceAllString(s, `$1`)
 	// Mangled set-builder highlights: \highlight{{}\mid{}} is a corrupted
 	// \highlight{\{} x \mid ... \highlight{\}} — render the divider.
 	s = strings.ReplaceAll(s, `\highlight{{}\mid{}}`, `\mid`)

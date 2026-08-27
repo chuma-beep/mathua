@@ -106,6 +106,11 @@ func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx Generat
 	seen := make(map[string]bool)
 	for i := 0; i < count*3 && len(problems) < count; i++ {
 		p := gen.Generate(ctx)
+		p.Question = latex.Canonicalize(p.Question, latex.Generators)
+		p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
+		for _, w := range latex.Validate(p.Question+"\n"+p.Explanation, latex.Generators) {
+			fmt.Printf("latex warning in generator %q (batch): %s\n", conceptID, w)
+		}
 		if !seen[p.Question] {
 			seen[p.Question] = true
 			problems = append(problems, p)

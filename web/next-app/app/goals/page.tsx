@@ -321,7 +321,7 @@ export default function GoalsPage() {
                     : 'border-mathua-border'
                 }`}>
                   <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
-                    <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                    <div className="">
                        <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">
                          {question}
                        </KatexContent>
@@ -334,7 +334,7 @@ export default function GoalsPage() {
                          type="text"
                          value={answerInput}
                          onChange={(e) => setAnswerInput(e.target.value)}
-                         onPaste={(e) => e.preventDefault()}
+                        
                          onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                          placeholder="Your answer..."
                         disabled={loading}
