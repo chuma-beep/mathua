@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_3c61c759-aa7b-4fc0-9f45-f45c25b5b9fb" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 5.5 Averages and Probability
 
 ### Learning Objectives
@@ -621,5 +619,3 @@ Make an example of probability that relates to your life. Write your answer as a
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After looking at the checklist, do you think you are well prepared for the next section? Why or why not?
-
-</div>

@@ -1,3210 +1,954 @@
-> Content sourced from [Applied Calculus](https://www.opentextbookstore.com/appcalc/) by Calaway, Hoffman & Lippman — CC BY 3.0
-
-# Derivative Rules
-
-
-Chapter 2    The Derivative
-Applied Calculus
-
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 3: Power and Sum Rules for Derivatives
-
-In the next few sections, we’ll get the derivative rules that will let us find formulas for derivatives
-when our function comes to us as a formula.  These are very algebraic section, and you should get
-lots of practice.  As we learn new rules, we will look at some basic applications.
-
-Building Blocks
-These are the simplest rules – rules for the basic functions.  We won’t prove these rules; we’ll just
-use them.  But first, let’s look at a few so that we can see they make sense.
-
-Example 1
-Find the derivative of
-( )
-b
-mx
-x
-f
-y
-+
-=
-=
-
-
-This is a linear function, so its graph is its own tangent line!  The slope of the tangent line, the
-derivative, is the slope of the line:
-( )
-m
-x
-f
-=
-'
-
-
-Rule:  The derivative of a linear function is its slope
-
-Example 2
-Find the derivative of ( )
-.
-=
-x
-f
-
-
-Think about this one graphically, too.  The graph of f(x) is a horizontal line.  So its slope is zero.
-( )
-'
-=
-x
-f
-
-
-Rule: The derivative of a constant is zero
-
-Example 3
-Find the derivative of ( )
-2x
-x
-f
-=
-
-
-This question is challenging using limits, as you saw in the previous section.  We will show you
-the long way to do it, then give you a shorthand rule to bypass all this.
-Recall the formal definition of the derivative:
-(
-)
-( )
-h
-x
-f
-h
-x
-f
-x
-f
-h
-−
-+
-=
-→0
-lim
-)
-('
-.
-Using our function ( )
-2x
-x
-f
-=
-, (
-) (
-)
-h
-xh
-x
-h
-x
-h
-x
-f
-+
-+
-=
-+
-=
-+
-.  Then
-
-(
-)
-( )
-(
-)
-(
-)
-x
-h
-x
-h
-h
-x
-h
-h
-h
-xh
-h
-x
-h
-xh
-x
-h
-x
-f
-h
-x
-f
-x
-f
-h
-h
-h
-h
-h
-lim
-lim
-lim
-lim
-lim
-)
-('
-=
-+
-=
-+
-=
-+
-=
-−
-+
-+
-=
-−
-+
-=
-→
-→
-→
-→
-→
-
-
-From all that, we find that
-( )
-f
-x
-x
-
-=
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Luckily, there is a handy rule we use to skip using the limit:
-
-Power Rule: The derivative ( )
-nx
-x
-f
-=
-is
-( )
-−
-=
-
-n
-nx
-x
-f
-
-
-Example 4
-Find the derivative of ( )
-4x
-x
-g
-=
-.
-
-Using the power rule, we know that if ( )
-3x
-x
-f
-=
-, then
-( )
-3x
-x
-f
-=
-
-.  Notice that g is 4 times the
-function f.  Think about what this change means to the graph of g – it’s now 4 times as tall as
-the graph of f.  If we find the slope of a secant line, it will be
-x
-f
-x
-f
-x
-g
-
-
-=
-
-
-=
-
-
-; each slope will
-be 4 times the slope of the secant line on the f graph.  This property will hold for the slopes of
-tangent lines, too:
-(
-)
-( )
-x
-x
-x
-dx
-d
-x
-dx
-d
-=
-
-=
-=
-
-
-Rule:  Constants come along for the ride;
-(
-)
-'
-kf
-kf
-dx
-d
-=
-
-
-Here are all the basic rules in one place.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-Derivative Rules:  Building Blocks
-
-
-In what follows, f and g are differentiable functions of x.
-
-
-
-
-(a) Constant Multiple Rule:
-(
-)
-'
-kf
-kf
-dx
-d
-=
-
-
-
-
-(b) Sum (or Difference) Rule:
-(
-)
-'
-' g
-f
-g
-f
-dx
-d
-+
-=
-+
-(or
-(
-)
-'
-' g
-f
-g
-f
-dx
-d
-−
-=
-−
-)
-
-
-
-(c)  Power Rule:
-(
-)
-−
-=
-n
-n
-nx
-x
-dx
-d
-
-
-
-
-Special cases:
-( )
-=
-k
-dx
-d
-(because
-kx
-k =
-)
-
-
-
-
-( )
-=
-x
-dx
-d
-(because
-1x
-x =
-)
-
-
-
-(d)  Exponential Functions:
-( )
-x
-x
-e
-e
-dx
-d
-=
-
-
-
-
-
-(
-)
-x
-x
-a
-a
-a
-dx
-d
-
-= ln
-
-
-
-
-
-(e) Natural Logarithm:
-(
-)
-x
-x
-dx
-d
-ln
-=
-
-
-
-
-
-The sum, difference, and constant multiple rule combined with the power rule allow us to easily
-find the derivative of any polynomial.
-
-Example 5
-Find the derivative of ( )
-1003
-8.1
-+
-−
-+
-=
-x
-x
-x
-x
-p
-
-
-(
-)
-(
-)
-(
-)
-(
-)
-(
-)
-(
-)
-( )
-( )
-(
-)
-(
-)
-(
-)
-( )
-8.1
-8.1
-1003
-8.1
-1003
-8.1
-1003
-8.1
-−
-+
-=
-+
-−
-+
-=
-+
-−
-+
-=
-+
-−
-+
-=
-+
-−
-+
-x
-x
-x
-x
-dx
-d
-x
-dx
-d
-x
-dx
-d
-x
-dx
-d
-dx
-d
-x
-dx
-d
-x
-dx
-d
-x
-dx
-d
-x
-x
-x
-dx
-d
-
-Chapter 2    The Derivative
-Applied Calculus
-
-You don’t have to show every single step.  Do be careful when you’re first working with the rules,
-but pretty soon you’ll be able to just write down the derivative directly:
-
-Example 6
-Find
-(
-)
-+
-−
-x
-x
-dx
-d
-
-
-Writing out the rules, we'd write
-(
-)
-)1(
-)
-(
-−
-=
-+
-−
-=
-+
-−
-x
-x
-x
-x
-dx
-d
-
-
-Once you're familiar with the rules, you can, in your head, multiply the 2 times the 17 and the
-33 times 1, and just write
-(
-)
-−
-=
-+
-−
-x
-x
-x
-dx
-d
-
-
-The power rule works even if the power is negative or a fraction.  In order to apply it, first translate
-all roots and basic rational expressions into exponents:
-
-Example 7
-Find the derivative of
-te
-t
-t
-y
-4 +
-−
-=
-
-
-First step – translate into exponents:
-t
-t
-e
-t
-t
-e
-t
-t
-y
-/
-+
-−
-=
-+
-−
-=
-−
-
-
-Now you can take the derivative:
-(
-)
-(
-)
-( )
-.
-/
-/
-/
-t
-t
-t
-t
-e
-t
-t
-e
-t
-t
-e
-t
-t
-dt
-d
-e
-t
-t
-dt
-d
-+
-+
-=
-+
-−
-−
-
-
-
-
-
-
-=
-+
-−
-=
-
-
-
-
-
-
-+
-−
-−
-−
-−
-−
-−
-
-
-If there is a reason to, you can rewrite the answer with radicals and positive exponents:
-t
-t
-e
-t
-t
-e
-t
-t
-/
-+
-+
-=
-+
-+
-−
-−
-
-
-Be careful when finding the derivatives with negative exponents.
-
-
-We can immediately apply these rules to solve the problem we started the chapter with - finding a
-tangent line.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Example 8
-Find the equation of the line tangent to
-)
-(
-t
-t
-g
-−
-=
-when t = 2.
-
-The slope of the tangent line is the value of the derivative.  We can compute
-t
-t
-g
-)
-(
-−
-=
-
-.  To
-find the slope of the tangent line when t = 3, evaluate the derivative at that point.
-)
-(
-)
-(
-−
-=
-−
-=
-
-g
-.  The slope of the tangent line is -4.
-
-To find the equation of the tangent line, we also need a point on the tangent line.  Since the
-tangent line touches the original function at t = 2, we can find the point by evaluating the
-original function:
-(2)
-g
-=
-−
-=
-.  The tangent line must pass through the point (2, 6).
-
-Using the point-slope equation of a line, the tangent line will
-have equation
-)
-(
-−
-−
-=
-−
-t
-y
-.
-Simplifying to slope-intercept form, the equation is
-4 +
-−
-=
-t
-y
-.
-
-Graphing, we can verify this line is indeed tangent to the
-curve.
-
-
-
-
-
-We can also use these rules to help us find the derivatives we need to interpret the behavior of a
-function.
-
-Example 9
-In a memory experiment, a researcher asks the subject to memorize as many words from a list
-as possible in 10 seconds.  Recall is tested, then the subject is given 10 more seconds to study,
-and so on.  Suppose the number of words remembered after t seconds of studying could be
-modeled by
-2/5
-( )
-W t
-t
-=
-.  Find and interpret
-(20)
-W
-.
-
-3/5
-3/5
-( )
-4 5
-W t
-t
-t
-−
-−
-
-=
-
-=
-, so
-(
-)
-3/5
-(20)
-0.2652
-W
-−
-
-=
-
-
-
-Since W is measured in words, and t is in seconds, W' has units words per second.
-(20)
-0.2652
-W
-
-means that after 20 seconds of studying, the subject is learning about 0.27
-more words for each additional second of studying.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Business and Economics
-Next we will delve more deeply into some business applications.  To do that, we first need to
-review some terminology.
-
-Suppose you are producing and selling some item.  The profit you make is the amount of money
-you take in minus what you have to pay to produce the items.  Both of these quantities depend on
-how many you make and sell.  (So we have functions here.)  Here is a list of definitions for some
-of the terminology, together with their meaning in algebraic terms and in graphical terms.
-
-Your cost is the money you have to spend to produce your items.
-
-The Fixed Cost (FC) is the amount of money you have to spend regardless of how many items
-you produce.  FC can include things like rent, purchase costs of machinery, and salaries for office
-staff.  You have to pay the fixed costs even if you don’t produce anything.
-
-The Total Variable Cost (TVC) for q items is the amount of money you spend to actually
-produce them.  TVC includes things like the materials you use, the electricity to run the machinery,
-gasoline for your delivery vans, maybe the wages of your production workers.  These costs will
-vary according to how many items you produce.
-
-The Total Cost (TC, or sometimes just C) for q items is the total cost of producing them.  It’s the
-sum of the fixed cost and the total variable cost for producing q items.
-
-Why is it OK that are there two definitions for Marginal Cost (and Marginal Revenue, and
-Marginal Profit)?
-
-We have been using slopes of secant lines over tiny intervals to approximate derivatives.  In this
-example, we’ll turn that around – we’ll use the derivative to approximate the slope of the secant
-line.
-Notice that the “cost of the next item” definition is actually the slope of a secant line, over an
-interval of 1 unit:
-( )
-(
-)
-(
-)
-−
-+
-=
-−
-+
-=
-q
-C
-q
-C
-q
-MC
-
-So this is approximately the same as the derivative of the cost function at q:
-( )
-( )
-q
-C
-q
-MC
-'
-=
-
-In practice, these two numbers are so close that there’s no practical reason to make a distinction.
-For our purposes, the marginal cost is the derivative is the cost of the next item.
-The Marginal Cost (MC) at q items is the cost of producing the next item.  Really, it’s
-
-MC(q) = TC(q + 1) – TC(q).
-In many cases, though, it’s easier to approximate this difference using calculus (see Example
-below).  And some sources define the marginal cost directly as the derivative,
-
-MC(q) = TC'(q).
-In this course, we will use both of these definitions as if they were interchangeable.
-
-The units on marginal cost is cost per item.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Example 10
-The table shows the total cost (TC) of producing q items.
-a) What is the fixed cost?
-b) When 200 items are made, what is the total variable cost?
-The average variable cost?
-c) When 200 items are made, estimate the marginal cost.
-
-a) The fixed cost is $20,000, the cost even when no items are made.
-
-b) When 200 items are made, the total cost is $45,000.  Subtracting the fixed cost, the total
-variable cost is $45,000 - $20,000 = $25,000.
-
-The average variable cost is the total variable cost divided by the number of items, so we would
-divide the $25,000 total variable cost by the 200 items made.  $25,000 ÷ 200= $125.  On
-average, each item had a variable cost of $125.
-
-c) We need to estimate the value of the derivative, or the slope of the tangent line at q = 200.
-Finding the secant line from q=100 to q=200 gives a slope of
-,
-,
-=
-−
-−
-.  Finding
-the secant line from q=200 to q=300 gives a slope of
-,
-,
-=
-−
-−
-.   We could estimate
-the tangent slope by averaging these secant slopes, giving us an estimate of $90/item.
-
-This tells us that after 200 items have been made, it will cost about $90 to make one more item.
-
-
-Example 11
-The cost to produce x items is
-x  hundred dollars.
-
-(a)  What is the cost for producing 100 items?  101 items?   What is cost of the 101st item?
-
-(b)  For   C(x) = x   , calculate  C'(x)  and evaluate  C'  at  x = 100.  How does C '(100)
-compare with the last answer in part (a)?
-
-(a) Put  C(x) = x   = x1/2 hundred dollars,  the cost for  x  items.  Then C (100) = $1000 and
-C(101) = $1004.99, so it costs  $4.99  for that 101st item.  Using this definition, the marginal
-cost is $4.99.
-
-(b)
-1/2
-( )
-C x
-x
-x
-−
-
-=
-=
-so
-(100)
-2 100
-C
-=
-=
-hundred dollars  =  $5.00.
-
-Note how close these answers are!  This shows (again) why it’s OK that we use both definitions
-for marginal cost.
-
-Items, q
-Total Cost, TC
-$20,000
-$35,000
-$45,000
-$53,000
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Demand is the functional relationship between the price p and the quantity q that can be sold (that
-is demanded).  Depending on your situation, you might think of p as a function of q, or of q as a
-function of p.
-
-Your revenue is the amount of money you actually take in from selling your products.  Revenue is
-price × quantity.
-
-The Total Revenue (TR, or just R) for q items is the total amount of money you take in for selling
-q items.
-
-
-
-
-
-
-
-
-
-The Profit (P) for q items is TR(q) – TC(q), the difference between total revenue and total costs
-
-The average profit for q items is P/q.  The marginal profit at q items is P(q + 1) – P(q), or
-( )
-q
-P
-
-
-Graphical Interpretations of the Basic Business Math Terms
-
-Illustration/Example:
-Here are the graphs of TR and TC for producing and selling a certain item.  The horizontal axis is
-the number of items, in thousands.  The vertical axis is the number of dollars, also in thousands.
-
-
-
-First, notice how to find the fixed cost and variable cost from the graph here.  FC is the y-
-intercept of the TC graph.  (FC = TC(0).)  The graph of TVC would have the same shape as the
-graph of TC, shifted down.  (TVC = TC – FC.)
-The Marginal Revenue (MR) at q items is the cost of producing the next item,
-
-MR(q) = TR(q + 1) – TR(q).
-Just as with marginal cost, we will use both this definition and the derivative definition
-
-MR(q) = TR’(q).
-
-Your profit is what’s left over from total revenue after costs have been subtracted.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-MC(q) = TC(q + 1) – TC(q), but that’s impossible to read on this graph.  How could you
-distinguish between TC(4022) and TC(4023)?  On this graph, that interval is too small to see, and
-our best guess at the secant line is actually the tangent line to the TC curve at that point.  (This is
-the reason we want to have the derivative definition handy.)
-
-MC(q) is the slope of the tangent line to the TC curve at (q, TC(q)).
-MR(q) is the slope of the tangent line to the TR curve at (q, TR(q)).
-
-Profit is the distance between the TR and TC curve.  If you experiment with your clear plastic
-ruler, you’ll see that the biggest profit occurs exactly when the tangent lines to the TR and TC
-curves are parallel.  This is the rule “profit is maximized when MR = MC.” which we'll explore
-later in the chapter.
-
-Example 12
-The demand, D, for a product at a price of p dollars is given by
-( )
-0.2
-D p
-p
-=
-−
-.  Find the
-marginal revenue when the price is $10.
-
-First we need to form a revenue equation.  Since Revenue = Price×Quantity, and the demand
-equation shows the quantity of product that can be sold, we have
-(
-)
-( )
-( )
-0.2
-0.2
-R p
-D p
-p
-p
-p
-p
-p
-=
-
-=
-−
-=
-−
-
-
-Now we can find marginal revenue by finding the derivative
-( )
-(
-)
-( )
-200 1
-
-## 0.2 3
-0.6
-R p
-p
-p
-
-=
-−
-=
-−
-
-
-At a price of $10,
-(
-)
-(10)
-
-## 0.6 10
-R
-=
-−
-=
-.
-
-Notice the units for R' are dollars of Revenue
-dollar of price
-, so
-(10)
-R
-=
-means that when the price is
-$10, the revenue will increase by $140 for each dollar the price was increased.
-
-
-
-## 2.3 Exercises
-
-1. Fill in the values in the table for
-( )
-(
-)
-x
-f
-dx
-d 3
-,
-( )
-( )
-(
-)
-x
-g
-x
-f
-dx
-d
-+
-, and
-( )
-( )
-(
-)
-x
-f
-x
-g
-dx
-d
-−
-.
-
-x
-f(x) f '(x) g(x) g '(x)
-( )
-(
-)
-x
-f
-dx
-d 3
-
-( )
-( )
-(
-)
-x
-g
-x
-f
-dx
-d
-+
-
-( )
-( )
-(
-)
-x
-f
-x
-g
-dx
-d
-−
-
-
-
-
-
-
-
-
-
-
-
-–2
-–4
-
-–1
-
-Chapter 2    The Derivative
-Applied Calculus
-
-2. Find  (a)  D( x12 )      (b)  d
-dx ( 7 x  )
-(c)  D( 1
-x3  )
-(d)  d xe
-dx
-
-3. Find  (a)  D( x9  )
-(b)  d x2/3
-dx
-(c)  D( 1
-x4  )    (d)  D( xπ  )
-
-In problems  4 – 8,  (a) calculate  f '(1)  and  (b) determine when  f '(x) = 0.
-
-4. f(x) =  x2  – 5x + 13
-
-5. f(x) = 5x2  – 40x + 73
-6. f(x) =  x3  + 9x2  + 6
-
-7. f(x) =  x3 + 3x2 + 3x  – 1
-8. f(x) =  x3  + 2x2  + 2x  – 1
-
-
-9. Where do f(x) = x2 – 10x + 3  and  g(x) = x3 – 12x have horizontal tangent lines ?
-
-10. It takes  T(x) = x2  hours to weave  x  small rugs.  What is the marginal production time to
-weave a rug?  (Be sure to include the units with your answer.)
-
-11. It costs  C(x) = x   dollars to produce  x  golf balls.  What is the marginal production cost to
-make a golf ball?  What is the marginal production cost when  x = 25?  when x= 100?  (Include
-units.)
-
-12. An arrow shot straight up from ground level with an initial velocity of  128 feet per second will
-be at height  h(x) = –16x2 + 128x  feet at  x  seconds.
-
-(a) Determine the velocity of the arrow when  x = 0, 1 and 2
-seconds.
-
-(b) What is the velocity of the arrow, v(x), at any time  x?
-
-(c) At what time  x  will the velocity of the arrow be  0?
-
-(d) What is the greatest height the arrow reaches?
-
-(e) How long will the arrow be aloft?
-
-(f) Use the answer for the velocity in part (b) to determine the
-
-
-acceleration, a(x) = v '(x), at any time  x.
-
-13. If an arrow is shot straight up from ground level on the moon with an initial velocity of 128
-feet per second, its height will be  h(x) = –2.65x2 + 128x  feet at  x  seconds.  Do parts (a) – (e)
-of problem 40 using this new equation for  h.
-
-14. f(x) = x3  +  A x2  + B x  + C  with constants  A, B  and  C.  Can you find conditions on the
-
-constants  A, B  and  C which will guarantee that the graph of  y = f(x)  has two distinct
-"vertices"? (Here a "vertex" means a place where the curve changes from increasing to
-decreasing or from decreasing to increasing.)
-
-Chapter 2    The Derivative
-Applied Calculus
-
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 4: Product and Quotient Rules
-
-The basic rules will let us tackle simple functions.  But what happens if we need the derivative of a
-combination of these functions?
-
-Example 1
-Find the derivative of ( ) (
-)(
-)
-h x
-x
-x
-=
-−
-+
-
-
-This function is not a simple sum or difference of polynomials.  It’s a product of polynomials.
-We can simply multiply it out to find its derivative:
-( ) (
-)(
-)
-( )
-'
-11 36
-h x
-x
-x
-x
-x
-x
-h
-x
-x
-x
-=
-−
-+
-=
-−
-+
-−
-=
-−
-+
-
-
-
-Now suppose we wanted to find the derivative of
-( ) (
-)(
-)3
-.7
-5.1
-+
-+
-−
-−
-−
-+
-=
-x
-x
-x
-x
-x
-x
-x
-f
-
-
-This function is not a simple sum or difference of polynomials.  It’s a product of polynomials.  We
-could simply multiply it out to find its derivative as before – who wants to volunteer?  Nobody?
-
-We’ll need a rule for finding the derivative of a product so we don’t have to multiply everything
-out.
-
-It would be great if we can just take the derivatives of the factors and multiply them, but
-unfortunately that won’t give the right answer.  to see that, consider finding derivative of
-( ) (
-)(
-)3
-+
-−
-=
-x
-x
-x
-g
-.  We already worked out the derivative.  It’s
-( )
-'
-x
-x
-x
-g
-+
-−
-=
-.
-What if we try differentiating the factors and multiplying them?  We’d get (
-)( )
-x
-x
-=
-, which
-is totally different from the correct answer.
-
-The rules for finding derivatives of products and quotients are a little complicated, but they save us
-the much more complicated algebra we might face if we were to try to multiply things out.  They
-also let us deal with products where the factors are not polynomials.  We can use these rules,
-together with the basic rules, to find derivatives of many complicated looking functions.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-Derivative Rules:  Product and Quotient Rules
-
-
-In what follows, f and g are differentiable functions of x.
-
-
-
-
-(a) Product Rule:
-
-
-
-
-(
-)
-'
-'
-fg
-g
-f
-fg
-dx
-d
-+
-=
-
-
-
-
-
-
-The derivative of the first factor times the second left alone, plus the first left alone times
-the derivative of the second.
-
-
-
-
-
-
-
-The product rule can extend to a product of several functions; the pattern continues – take
-the derivative of each factor in turn, multiplied by all the other factors left alone, and add
-them up.
-
-
-
-(b) Quotient Rule:
-
-
-
-'
-'
-g
-fg
-g
-f
-g
-f
-dx
-d
-−
-=
-
-
-
-
-
-
-
-
-
-
-
-
-The numerator of the result resembles the product rule, but there is a minus instead of a
-plus; the minus sign goes with the g’.  The denominator is simply the square of the original
-denominator – no derivatives there.
-
-
-
-Example 2
-Find the derivative of ( ) (
-)(
-)
-h x
-x
-x
-=
-−
-+
-
-
-This is the same function we found the derivative of in Example 1, but let's use the product rule
-and check to see if we get the same answer.  For this first example, we will provide a lot more
-detail and steps than one usually actually shows when working a problem like this.
-
-Notice we can think of h(x) as the product of two functions
-( )
-f x
-x
-=
-−
-and ( )
-g x
-x
-=
-+ .
-Finding the derivative of each of these,
-( )
-f
-x
-x
-
-=
-
-( )
-g x
-
-=
-
-Using the product rule,
-( )
-(
-)( ) ( )(
-) (
-)(
-) (
-)( )
-11 1
-h x
-f
-g
-f
-g
-x
-x
-x
-
-
-
-=
-+
-=
-+
-+
-−
-
-
-To check if this is equivalent to the answer we found in Example 1 we could simplify:
-( ) (
-)(
-) (
-)( )
-11 1
-11 16
-h x
-x
-x
-x
-x
-x
-x
-x
-x
-
-=
-+
-+
-−
-=
-+
-+
-−
-=
-+
-−
-
-
-From this, we can see the answers are equivalent.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-Example 3
-Find the derivative of ( )
-t
-e
-t
-F
-t ln
-=
-
-
-This is a product, so we need to use the product rule.  I like to put down empty parentheses to
-remind myself of the pattern; that way I don’t forget anything.
-
-( ) ( )( )
-( )( )
-+
-=
-t
-F '
-
-Then I fill in the parentheses – the first set gets the derivative of
-te , the second gets
-t
-ln left
-alone, the third gets
-te left alone, and the fourth gets the derivative of
-t
-ln .
-( ) ( )(
-) ( )
-t
-e
-t
-e
-t
-e
-t
-e
-t
-F
-t
-t
-t
-t
-+
-=
-
-
-
-
-
-
-+
-=
-ln
-ln
-'
-
-
-
-
-Notice that this was one we couldn’t have done by “multiplying out” before taking the derivative.
-
-
-Example 4
-Find the derivative of
-x
-x
-y
-x
-+
-+
-=
-
-
-This is a quotient, so we need to use the quotient rule.  Again, you find it helpful to put down
-the empty parentheses as a template:
-( )( ) ( )( )
-( )
-'
-−
-=
-y
-
-
-Then fill in all the pieces:
-(
-)(
-) (
-)(
-)
-(
-)
-ln 4
-3 16
-'
-3 16
-x
-x
-x
-x
-x
-x
-y
-x
-+
-
-+
-−
-+
-=
-+
-
-
-Now for goodness’ sakes don’t try to simplify that!  Remember that “simple” depends on what you
-will do next; in this case, we were asked to find the derivative, and we’ve done that.  Please STOP,
-unless there is a reason to simplify further.
-
-
-Example 5
-Suppose a large tank contains 8 kg of a chemical dissolved in 50 liters of water.  If a tap is
-opened and water is added to the tank at a rate of 5 liters per minute, at what rate is the
-concentration of chemical in the tank changing after 4 minutes?
-
-Chapter 2    The Derivative
-Applied Calculus
-
-First we need to set up a model for the concentration of chemical.  The concentration would be
-measured as kg of chemical per liter of water, kg
-L .  The number of kg of chemical stays
-constant at 8 kg, but the quantity of water in the tank is increasing by 5 L/min.  The total
-volume of water in the tank after t minutes is 50 + 5t, so the concentration after t minutes is
-( )
-c t
-t
-=
-+
-
-
-To find the rate at which the concentration is changing, we need the derivative:
-( ) (
-) ( )
-(
-)
-(
-)
-( )
-d
-d
-t
-t
-dt
-dt
-c t
-t
-
-+
-−
-+
-
-=
-+
-
-
-( ) (
-) ( )( )
-(
-)
-(
-)
-t
-t
-t
-
-+
-−
-−
-=
-=
-+
-+
-
-
-At t = 4,
-(
-)
-(4)
-0.00816
-5 4
-c
-−
-
-=
-−
-+ 
-
-
-Note that the units here are kg per liter, per minute, or
-/
-min
-kg L .  In other words, this tells us that
-after 4 minutes, the concentration of chemical is decreasing by 0.00816 kg/L each minute.
-
-
-Returning to our discussion of business and economics topics, in addition to total cost and
-marginal cost, we often also want to talk about average cost or average revenue.
-
-The Average Cost (AC) for q items is the total cost divided by q, or
-( )
-( )
-TC q
-AC q
-q
-=
-.  You can
-also talk about the average fixed cost, FC/q, or the average variable cost, TVC/q.
-
-The Average Revenue (AR) for q items is the total revenue divided by q, or TR/q.
-We already know that we can find average rates of change by finding slopes of secant lines. AC,
-AR, MC, and MR are all rates of change, and we can find them with slopes, too.
-
-AC(q) is the slope of a diagonal line, from (0, 0) to (q, TC(q)).
-AR(q) is the slope of the line from (0, 0) to (q, TR(q)).
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-
-Just as we found marginal Total Cost, we can also find marginal Average Cost.
-
-Example 6
-The cost, in thousands of dollars, for producing x thousand cellphone cases is given by
-( )
-0.004
-C x
-x
-x
-=
-+
-−
-.  Find
-a) The Fixed costs
-b) The Average Cost when 5 thousand, 10 thousand, or 20 thousand cases are produced
-c) The Marginal Average Cost when 5 thousand cases are produced
-
-a) The fixed costs are the costs when no items are produced:
-(0)
-C
-=
-thousand dollars
-
-b) The average cost function is total cost divided by number of items, so
-( )
-0.004
-( )
-C x
-x
-x
-AC x
-x
-x
-+
-−
-=
-=
-
-
-Note the units are thousands of dollars per thousands of items, which simplifies to just dollars
-per item.
-At a production of 5 thousand items:
-0.004(5)
-(5)
-5.38
-AC
-+ −
-=
-=
-dollars per item
-At a production of 10 thousand items:
-22 10
-0.004(10)
-(10)
-3.16
-AC
-+
-−
-=
-=
-dollars per item
-At a production of 20 thousand items:
-0.004(20)
-(20)
-2.02
-AC
-+
-−
-=
-=
-dollars per item
-Notice that while the total cost increases with production, the average cost per item decreases,
-because the initial fixed costs are being distributed across more items.
-
-slope = AR
-slope = AC
-
-Chapter 2    The Derivative
-Applied Calculus
-
-c) For the marginal average cost, we need to find the derivative of the average cost function.
-We can either calculate this using the quotient rule, or we could use algebra to simplify the
-equation first:
-0.004
-0.004
-( )
-1 0.004
-1 0.004
-x
-x
-x
-x
-AC x
-x
-x
-x
-x
-x
-x
-x
-x
-−
-+
-−
-=
-=
-+
-−
-=
-+ −
-=
-+ −
-.
-
-Taking the derivative,
-( )
-0.004
-0.004
-AC x
-x
-x
-−
-
-= −
-−
-= −
-−
-
-
-When 5 thousand items are produced,
-(5)
-0.004
-0.884
-AC
-= −
-−
-= −
-
-
-Since the units on AC are dollars per item, and the units on x are thousands of items, the units
-on AC' dollars per item per thousands of items.  This tells us that when 5 thousand items are
-produced, the average cost per item is decreasing by $0.884 for each additional thousand items
-produced.
-
-
-## 2.4 Exercises
-
-1. Use the values in the table to fill in the rest of the table.
-
-x
-f(x) f '(x)
-g(x) g '(x)
-( )
-( )
-(
-)
-x
-g
-x
-f
-dx
-d
-
-
-( )
-( )
-
-
-
-
-
-x
-g
-x
-f
-dx
-d
-
-( )
-( )
-
-
-
-
-
-x
-f
-x
-g
-dx
-d
-
-
-
-
-
-
-
-
-
-
-
-–2
-–4
-
-–1
-
-2.   Use the information in the graph  to plot the
-values of the functions  f + g, f.g and  f/g  and
-their derivatives  at  x = 1, 2  and  3 .
-
-3. Use the information in the graph  to plot the
-values of the functions  2f, f – g  and  g/f  and
-their derivatives at  x = 1, 2  and  3 .
-
-4. Calculate
-(
-)(
-)
-(
-)
-+
-−
-x
-x
-dx
-d
-by  (a)  using the product rule  and  (b)  expanding the product
-and then differentiating.  Verify that both methods give the same result.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-5. If the product of f and  g  is a constant  (  f(x) ∙ g(x) = k  for all  x), then how are
-( )
-(
-)
-( )
-x
-f
-x
-f
-dx
-d
-
-
-and
-( )
-(
-)
-( )
-x
-g
-x
-g
-dx
-d
-related?
-
-6. If the quotient of f  and  g  is a constant  (
-( )
-( )
-k
-x
-g
-x
-f
-=
-for all x), then how are  g . f '  and  f . g '
-related?
-
-In problems  7 – 8,  (a) calculate  f '(1)  and  (b) determine when  f '(x) = 0.
-7. f(x) =
-7x
-x2  + 4
-8.
-f(x) =
-x
-x −
-
-
-9. Determine
-(
-)(
-)
-−
-+
-x
-x
-dx
-d
-and   d
-dt (  3t – 2
-5t + 1  )    .
-10. Find  (a)
-(
-)
-xe
-x
-dx
-d
-and  (b)
-( )
-x
-e
-dx
-d
-.
-11. Find (a)
-(
-)
-t
-te
-dt
-d
-, (b) ( )
-xe
-d
-
-
-12. A manufacturer has determined that an employee with d days of production experience will
-be able to
-
-produce approximately   P(d) = 3 + 15( 1 – e–0.2d )  items per day.  Graph  P(d).
-
-(a) Approximately how many items will a beginning employee be able to produce each day?
-
-(b) How many items will an experienced employee be able to produce each day?
-(c) What is the marginal production rate of an employee with 5 days of experience?  (What
-are the units of your answer, and what does this answer mean?)
-
-Chapter 2    The Derivative
-Applied Calculus
-
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 5: Chain Rule
-
-There is one more type of complicated function that we will want to know how to differentiate:
-composition.  The Chain Rule will let us find the derivative of a composition.  (This is the last
-derivative rule we will learn!)
-
-Example 1
-Find the derivative of
-(
-)
-x
-x
-y
-+
-=
-.
-
-This is not a simple polynomial, so we can’t use the basic building block rules yet.  It is a
-product, so we could write it as
-(
-)
-(
-)(
-)x
-x
-x
-x
-x
-x
-y
-+
-+
-=
-+
-=
-and use the product
-rule.  Or we could multiply it out and simply differentiate the resulting polynomial.  I’ll do it the
-second way:
-(
-)
-x
-x
-x
-y
-x
-x
-x
-x
-x
-y
-'
-+
-+
-=
-+
-+
-=
-+
-=
-
-
-
-Now suppose we want to find the derivative of
-(
-)
-x
-x
-y
-+
-=
-.  We could write it as a product with
-20 factors and use the product rule, or we could multiply it out.  But I don’t want to do that, do you?
-
-We need an easier way, a rule that will handle a composition like this.  The Chain Rule is a little
-complicated, but it saves us the much more complicated algebra of multiplying something like this out.
-It will also handle compositions where it wouldn’t be possible to “multiply it out.”
-
-The Chain Rule is the most common place for students to make mistakes.  Part of the reason is that the
-notation takes a little getting used to.  And part of the reason is that students often forget to use it when
-they should.  When should you use the Chain Rule?  Almost every time you take a derivative.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-Derivative Rules:  Chain Rule
-
-
-In what follows, f and g are differentiable functions with
-( )
-u
-f
-y =
-and
-( )
-x
-g
-u =
-
-
-
-
-(h) Chain Rule (Leibniz notation):
-
-
-
-dx
-du
-du
-dy
-dx
-dy
-
-=
-
-
-
-Notice that the du’s seem to cancel.  This is one advantage of the Leibniz notation; it can
-remind you of how the chain rule chains together.
-
-
-
-(h)  Chain Rule (using prime notation):
-
-
-
-( )
-( )
-( )
-( )
-(
-)
-( )
-x
-g
-x
-g
-f
-x
-g
-u
-f
-x
-f
-'
-'
-'
-'
-'
-
-=
-
-=
-
-
-
-
-(h) Chain Rule (in words):
-
-
-The derivative of a composition is the derivative of the outside, with the inside staying the
-same, TIMES the derivative of what’s inside.
-
-
-
-I recite the version in words each time I take a derivative, especially if the function is complicated.
-
-
-
-
-Example 2
-Find the derivative of
-(
-)
-x
-x
-y
-+
-=
-.
-
-This is the same one we did before by multiplying out.  This time, let’s use the Chain Rule:  The
-inside function is what appears inside the parentheses:
-x
-x
-3 +
-.  The outside function is the
-first thing we find as we come in from the outside – it’s the square function, (inside)2.
-
-The derivative of this outside function is (2*inside).  Now using the chain rule, the derivative of
-our original function is:
-(2*inside) TIMES the derivative of what’s inside (which is
-2 +
-x
-):
-(
-)
-(
-) (
-)
-'
-+
-
-+
-=
-+
-=
-x
-x
-x
-y
-x
-x
-y
-
-
-
-If you multiply this out, you get the same answer we got before.  Hurray!  Algebra works!
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Example 3
-Find the derivative of
-(
-)
-x
-x
-y
-+
-=
-
-
-Now we have a way to handle this one.  It’s the derivative of the outside TIMES the derivative
-of what’s inside.
-
-The outside function is (inside)20, which has the derivative 20(inside)19.
-(
-)
-(
-)
-(
-)
-'
-+
-
-+
-=
-+
-=
-x
-x
-x
-y
-x
-x
-y
-
-
-
-Example 4
-Differentiate
-2 +
-xe
-.
-
-This isn’t a simple exponential function; it’s a composition.  Typical calculator or computer
-syntax can help you see what the “inside” function is here.  On a TI calculator, for example,
-when you push the
-x
-e key, it opens up parentheses:
-(
-^
-e
-This tells you that the “inside” of the
-exponential function is the exponent.  Here, the inside is the exponent
-2 +
-x
-.  Now we can use
-the Chain Rule:  We want the derivative of the outside TIMES the derivative of what’s inside.
-The outside is the “e to the something” function, so its derivative is the same thing.  The
-derivative of what’s inside is 2x.  So
-(
-) (
-) (
-)
-x
-e
-e
-dx
-d
-x
-x
-
-=
-+
-+
-
-
-
-Example 5
-The table gives values for  f , f ' , g  and g '  at a number of points.  Use these values to
-determine   ( fg )(x)  and  ( fg ) '(x)   at  x = –1  and  0.
-
-
-
-( fg )(–1)  =  f( g(–1) )  =  f( 3 )  =  0
-( fg )(0)  =  f( g(0) )  =  f( 1 )  =  1.
-( fg ) '(–1)  =  f '( g(–1) ).g '( –1 )  =  f '( 3 ).(0)  =  (2)(0)  = 0   and
-( fg ) '( 0 )  =  f '( g( 0 ) ).g '( 0 )  =  f '( 1 ).( 2 )  =  (–1)(2)  = –2 .
-
-x
-f(x)
-g(x)
-f'(x)
-g'(x)
-( fg )(x)
-( gf )(x)
--1
-
-
--1
-
-
--1
-
-
--1
-
-
--1
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Example 6
-If 2400 people now have a disease, and the number of people with the disease appears to double
-every 3 years, then the number of people expected to have the disease in t years is
-/3
-2400 2
-t
-y =
-
-
-(a)  How many people are expected to have the disease in 2 years?
-(b)  When are  50,000 people expected to have the disease?
-(c)  How fast is the number of people with the disease expected to grow now and 2 years from
-now?
-
-(a)  In 2 years,  y = 2400 . 22/3 ≈ 3,810 people.
-
-(b) We know  y = 50,000 , and we need to solve  50,000 = 2400 . 2t/3  for  t.  We could start by
-isolating the exponential by dividing both sides by 2400,
-/3
-50000
-2400
-t
-=
-
-
-Taking the logarithm of both sides,
-(
-)
-/3
-50000
-ln
-ln 2
-2400
-t
-
-=
-
-
-
-
-
-Using the exponent property for logs,
-( )
-50000
-ln
-ln 2
-2400
-t
-
-=
-
-
-
-
-
-Solving for t,
-50000
-3ln
-2400
-13.14
-ln(2)
-t
-
-
-
-
-
-
-=
-
-years
-We expect 50,000 people to have the disease about 13.14  years from now.
-
-(c) This is asking for  dy/dt  when  t = 0 and 2 years.  Using the chain rule,
-(
-)
-/3
-/3
-/3
-2400 2
-2400 2
-ln(2)
-
-## 554.5 2
-t
-t
-t
-dy
-d
-dt
-dt
-=
-
-=
-
-
-
-
-
-
-Now, at t = 0, the rate of growth of the disease is approximately  554.5.20 ≈ 554.5 people/year.
-In 2 years the rate of growth will be approximately  554.5 . 22/3 ≈ 880  people/year.
-
-
-Derivatives of Complicated Functions
-
-You’re now ready to take the derivative of some mighty complicated functions.  But how do you
-tell what rule applies first?  Come in from the outside – what do you encounter first?  That’s the
-first rule you need.  Use the Product, Quotient, and Chain Rules to peel off the layers, one at a
-time, until you’re all the way inside.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Example 7
-Find
-(
-)
-(
-)
-ln
-+
-
-x
-e
-dx
-d
-x
-
-
-Coming in from the outside, I see that this is a product of two (complicated) functions.  So I’ll
-need the Product Rule first.  I’ll fill in the pieces I know, and then I can figure the rest as
-separate steps and substitute in at the end:
-
-(
-)
-(
-)
-(
-)
-(
-)
-(
-) (
-)
-(
-)
-(
-)
-
-
-
-
-
-+
-+
-+
-
-
-
-
-
-
-=
-+
-
-ln
-ln
-ln
-x
-dx
-d
-e
-x
-e
-dx
-d
-x
-e
-dx
-d
-x
-x
-x
-
-
-Now as separate steps, I’ll find
-(
-)
-x
-x
-e
-e
-dx
-d
-=
-(using the Chain Rule) and
-
-(
-)
-(
-)
-ln
-
-+
-=
-+
-x
-x
-dx
-d
-(also using the Chain Rule).
-
-Finally, to substitute these in their places:
-(
-)
-(
-) (
-)
-(
-)
-(
-) (
-)
-
-
-
-
-
-
-
-+
-+
-+
-=
-+
-
-ln
-ln
-x
-e
-x
-e
-x
-e
-dx
-d
-x
-x
-x
-
-
-(And please don’t try to simplify that!)
-
-
-Example 8
-Differentiate
-(
-)
-
-
-
-
-
-
-−
-=
-t
-e
-t
-z
-t
-
-
-Don’t panic!  As you come in from the outside, what’s the first thing you encounter?  It’s that
-4th power.  That tells you that this is a composition, a (complicated) function raised to the 4th
-power.
-
-Step One:  Use the Chain Rule.  The derivative of the outside TIMES the derivative of what’s
-inside.
-
-(
-)
-(
-)
-(
-)
-
-
-
-
-
-−
-
-
-
-
-
-
-
-−
-=
-
-
-
-
-
-
-−
-=
-t
-e
-t
-dt
-d
-t
-e
-t
-t
-e
-t
-dt
-d
-dt
-dz
-t
-t
-t
-
-Chapter 2    The Derivative
-Applied Calculus
-
-Now we’re one step inside, and we can concentrate on just the
-(
-)
-
-
-
-
-
-−1
-3 3
-t
-e
-t
-dt
-d
-t
-part.  Now, as you
-come in from the outside, the first thing you encounter is a quotient – this is the quotient of two
-(complicated) functions.
-
-Step Two: Use the Quotient Rule.  The derivative of the numerator is straightforward, so we
-can just calculate it. The derivative of the denominator is a bit trickier, so we'll leave it for now.
-(
-)
-(
-)
-(
-)
-(
-) (
-)
-(
-)
-(
-)
-(
-)
-(
-)
-−
-
-
-
-
-
-
-−
-−
-−
-=
-
-
-
-
-
-
-−
-t
-e
-t
-e
-dt
-d
-t
-t
-e
-t
-t
-e
-t
-dt
-d
-t
-t
-t
-t
-
-
-Now we’ve gone one more step inside, and we can concentrate on just the
-(
-)
-(
-)
-−
-t
-e
-dt
-d
-t
-part.
-Now we have a product.
-
-Step Three: Use the Product Rule:
-
-(
-)
-(
-) ( )(
-) ( )( )1
-t
-t
-t
-e
-t
-e
-t
-e
-dt
-d
-+
-−
-=
-−
-
-
-And now we’re all the way in – no more derivatives to take.
-
-Step Four:  Now it’s just a question of substituting back – be careful now!
-(
-)
-(
-) ( )(
-) ( )( )1
-t
-t
-t
-e
-t
-e
-t
-e
-dt
-d
-+
-−
-=
-−
-, so
-
-(
-)
-(
-)
-(
-)
-(
-) (
-)( )(
-) ( )( )
-(
-)
-(
-)
-(
-)
-−
-+
-−
-−
-−
-=
-
-
-
-
-
-
-−
-t
-e
-e
-t
-e
-t
-t
-e
-t
-t
-e
-t
-dt
-d
-t
-t
-t
-t
-t
-, so
-
-
-(
-)
-(
-)
-(
-)
-(
-)
-(
-) (
-)( )(
-) ( )( )
-(
-)
-(
-)
-(
-)
-
-
-
-
-
-
-
-
-−
-+
-−
-−
-−
-
-
-
-
-
-
-
-−
-=
-
-
-
-
-
-
-−
-=
-t
-e
-e
-t
-e
-t
-t
-e
-t
-t
-e
-t
-t
-e
-t
-dt
-d
-dt
-dz
-t
-t
-t
-t
-t
-t
-.
-
-Phew!
-
-Chapter 2    The Derivative
-Applied Calculus
-
-What if the Derivative Doesn’t Exist?
-A function is called differentiable at a point if its derivative exists at that point.
-
-We’ve been acting as if derivatives exist everywhere for every function.  This is true for most of
-the functions that you will run into in this class.  But there are some common places where the
-derivative doesn’t exist.
-
-Remember that the derivative is the slope of the tangent line to the curve.  That’s what to think
-about.
-
-Where can a slope not exist?  If the tangent line is vertical, the derivative will not exist.
-
-Example 9
-Show that
-/
-)
-(
-x
-x
-x
-f
-=
-=
-is not differentiable at x = 0.
-
-Finding the derivative,
-/
-/
-)
-(
-x
-x
-x
-f
-=
-=
-−
-.  At x = 0, this function is undefined.  From the
-graph, we can see that the tangent line to this curve at x = 0 is vertical with undefined slope,
-which is why the derivative does not exist at x = 0.
-
-
-
-Where can a tangent line not exist?  If there is a sharp corner (cusp) in the graph, the derivative
-will not exist at that point because there is no well-defined tangent line (a teetering tangent, if you
-will).  If there is a jump in the graph, the tangent line will be different on either side and the
-derivative can’t exist.
-
-Example 10
-Show that
-x
-x
-f
-=
-)
-(
-is not differentiable at x = 0.
-
-On the left side of the graph, the slope of the line is -1.  On the
-right side of the graph, the slope is +1.  There is no well-
-defined tangent line at the sharp corner at x = 0, so the function
-is not differentiable at that point.
-
-Chapter 2    The Derivative
-Applied Calculus
-
-
-## 2.5 Exercises
-
-1. The graph of  y = f(x)  is shown.
-
-(a)  At which integers is  f  continuous?
-
-(b)  At which integers is  f  differentiable?
-
-2. The graph of  y = g(x)  is shown.
-
-(a)  At which integers is  g  continuous?
-
-(b)  At which integers is  g  differentiable?
-
-
-Problems 3 and 4 refer to the values given in this table:
-
-x
-f(x)
-g(x)
-f '(x)
-g '(x)
-( fg )(x)
-( fg )' (x)
-
-
-
-
-
-
-–2
-–1
-
-–1
-
-–2
-–1
-
-–2
-–1
-
-–1
-
-3. Use the table of values to determine  ( fg )(x)  and  ( fg )' (x)  at  x = 1  and  2.
-
-4. Use the table of values to determine  ( fg )(x)  and  ( fg )' (x)  at  x = –2, –1  and  0.
-
-5. Use the graphs  to estimate the values of  g(x),
-g '(x), (fg)(x), f '( g(x) ), and ( fg ) '( x )  at
-x = 1.
-
-6. Use the graphs  to estimate the values of  g(x),
-g '(x), (fg)(x), f '( g(x) ), and ( fg ) '( x )  for
-x = 2.
-
-In problems  7 –  12 , find the derivative of each function.
-
-7. f(x) = (2x – 8)5
-8. f(x) = (6x – x2)10
-9. f(x) = x .(3x + 7)5
-
-
-10. f(x) = (2x + 3)6.(x – 2)4
-11. f(x) =
-x2 + 6x – 1
-12. f(x)  =   x – 5
-(x + 3)4
-
-13. If  f  is a differentiable function,
-
-(a)  how are the graphs of  y = f(x)  and   y = f(x) + k  related?
-
-(b)  how are the derivatives of  f(x)  and  f(x) + k  related?
+> Content sourced from [OpenStax Calculus Volume 1](https://openstax.org/books/calculus-volume-1/pages/1-introduction) by Gilbert Strang & Edwin "Jed" Herman — CC BY-NC-SA 4.0
+
+## 3.3 Differentiation Rules
+
+### Learning Objectives
+
+- 3.3.1 State the constant, constant multiple, and power rules.
+- 3.3.2 Apply the sum and difference rules to combine derivatives.
+- 3.3.3 Use the product rule for finding the derivative of a product of functions.
+- 3.3.4 Use the quotient rule for finding the derivative of a quotient of functions.
+- 3.3.5 Extend the power rule to functions with negative exponents.
+- 3.3.6 Combine the differentiation rules to find the derivative of a polynomial or rational function.
+
+Finding derivatives of functions by using the definition of the derivative can be a lengthy and, for certain functions, a rather challenging process. For example, previously we found that $\frac{d}{dx}\left( \sqrt{x} \right) = \frac{1}{2\sqrt{x}}$ by using a process that involved multiplying an expression by a conjugate prior to evaluating a limit. The process that we could use to evaluate $\frac{d}{dx}\left( \sqrt[3]{x} \right)$ using the definition, while similar, is more complicated. In this section, we develop rules for finding derivatives that allow us to bypass this process. We begin with the basics.
+
+### The Basic Rules
+
+The functions $f(x) = c$ and $g(x) = x^{n}$ where $n$ is a positive integer are the building blocks from which all polynomials and rational functions are constructed. To find derivatives of polynomials and rational functions efficiently without resorting to the limit definition of the derivative, we must first develop formulas for differentiating these basic functions.
+
+#### The Constant Rule
+
+We first apply the limit definition of the derivative to find the derivative of the constant function, $f(x) = c.$ For this function, both $f(x) = c$ and $f\left( {x + h} \right) = c,$ so we obtain the following result:
+
+$$
+\begin{array}{cl}
+{f'(x)} & {= \underset{h\rightarrow 0}{\text{lim}}\frac{f\left( {x + h} \right) - f(x)}{h}} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}\frac{c - c}{h}} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}\frac{0}{h}} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}0 = 0.}
+\end{array}
+$$
+
+The rule for differentiating constant functions is called the constant rule. It states that the derivative of a constant function is zero; that is, since a constant function is a horizontal line, the slope, or the rate of change, of a constant function is $0.$ We restate this rule in the following theorem.
+
+### Theorem 3.2
+
+#### The Constant Rule
+
+Let $c$ be a constant.
+
+If $f(x) = c,$ then $f'(x) = 0.$
+
+Alternatively, we may express this rule as
+
+$$
+\frac{d}{dx}(c) = 0.
+$$
+
+### Example 3.17
+
+#### Applying the Constant Rule
+
+Find the derivative of $f(x) = 8.$
+
+#### Solution
+
+This is just a one-step application of the rule:
+
+$$
+f'(x) = 0.
+$$
+
+### Checkpoint 3.11
+
+Find the derivative of $g(x) = -3.$
+
+### The Power Rule
+
+We have shown that
+
+$$
+\frac{d}{dx}\left( x^{2} \right) = 2x\ \text{and}\ \frac{d}{dx}\left( x^{1\text{/}2} \right) = \frac{1}{2}x^{\text{−}{1\text{/}2}}.
+$$
+
+At this point, you might see a pattern beginning to develop for derivatives of the form $\frac{d}{dx}\left( x^{n} \right).$ We continue our examination of derivative formulas by differentiating power functions of the form $f(x) = x^{n}$ where $n$ is a positive integer. We develop formulas for derivatives of this type of function in stages, beginning with positive integer powers. Before stating and proving the general rule for derivatives of functions of this form, we take a look at a specific case, $\frac{d}{dx}(x^{3}).$ As we go through this derivation, note that the technique used in this case is essentially the same as the technique used to prove the general case.
+
+### Example 3.18
+
+#### Differentiating $x^{3}$
+
+Find $\frac{d}{dx}\left( x^{3} \right).$
+
+#### Solution
+
+$$
+\begin{array}{clccc}
+{\frac{d}{dx}\left( x^{3} \right)} & {= \underset{h\rightarrow 0}{\text{lim}}\frac{{(x + h)}^{3} - x^{3}}{h}} & & & \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}\frac{x^{3} + 3x^{2}h + 3xh^{2} + h^{3} - x^{3}}{h}} & & & \begin{array}{l}
+\text{Notice that the first term in the expansion of} \\
+{{(x + h)}^{3}\ \text{is}\ x^{3}\ \text{and the second term is}\ 3x^{2}h.\ \text{All}} \\
+{\text{other terms contain powers of}\ h\ \text{that are two or}} \\
+\text{greater.}
+\end{array} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}\frac{3x^{2}h + 3xh^{2} + h^{3}}{h}} & & & \begin{array}{l}
+{\text{In this step the}\ x^{3}\ \text{terms have been cancelled,}} \\
+{\text{leaving only terms containing}\ h.}
+\end{array} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}\frac{h(3x^{2} + 3xh + h^{2})}{h}} & & & {\text{Factor out the common factor of}\ h.} \\
+ & {= \underset{h\rightarrow 0}{\text{lim}}(3x^{2} + 3xh + h^{2})} & & & \begin{array}{l}
+{\text{After cancelling the common factor of}\ h,\text{the}} \\
+{\text{only term not containing}\ h\ \text{is}\ 3x^{2}.}
+\end{array} \\
+ & {= 3x^{2}} & & & {\text{Let}\ h\ \text{go to 0.}}
+\end{array}
+$$
+
+### Checkpoint 3.12
+
+Find $\frac{d}{dx}\left( x^{4} \right).$
+
+As we shall see, the procedure for finding the derivative of the general form $f(x) = x^{n}$ is very similar. Although it is often unwise to draw general conclusions from specific examples, we note that when we differentiate $f(x) = x^{3},$ the power on $x$ becomes the coefficient of $x^{2}$ in the derivative and the power on $x$ in the derivative decreases by 1. The following theorem states that the power rule holds for all positive integer powers of $x.$ We will eventually extend this result to negative integer powers. Later, we will see that this rule may also be extended first to rational powers of $x$ and then to arbitrary powers of $x.$ Be aware, however, that this rule does not apply to functions in which a constant is raised to a variable power, such as $f(x) = 3^{x}.$
+
+### Theorem 3.3
+
+#### The Power Rule
+
+Let $n$ be a positive integer. If $f(x) = x^{n},$ then
+
+$$
+f'(x) = nx^{n - 1}.
+$$
+
+Alternatively, we may express this rule as
+
+$$
+\frac{d}{dx}x^{n} = nx^{n - 1}.
+$$
+
+#### Proof
+
+For $f(x) = x^{n}$ where $n$ is a positive integer, we have
+
+$$
+f'(x) = \underset{h\rightarrow 0}{\text{lim}}\frac{{(x + h)}^{n} - x^{n}}{h}.
+$$
+
+$$
+\text{Since}\ {(x + h)}^{n} = x^{n} + nx^{n - 1}h + \begin{pmatrix}
+n \\
+2
+\end{pmatrix}\ x^{n - 2}h^{2} + \begin{pmatrix}
+n \\
+3
+\end{pmatrix}\ x^{n - 3}h^{3} + \text{…} + nxh^{n - 1} + h^{n},
+$$
+
+we see that
+
+$$
+{(x + h)}^{n} - x^{n} = nx^{n - 1}h + \begin{pmatrix}
+n \\
+2
+\end{pmatrix}\ x^{n - 2}h^{2} + \begin{pmatrix}
+n \\
+3
+\end{pmatrix}\ x^{n - 3}h^{3} + \text{…} + nxh^{n - 1} + h^{n}.
+$$
+
+Next, divide both sides by *h*:
+
+$$
+\frac{\left( {x + h} \right)^{n} - x^{n}}{h} = \frac{nx^{n - 1}h + \begin{pmatrix}
+n \\
+2
+\end{pmatrix}\ x^{n - 2}h^{2} + \begin{pmatrix}
+n \\
+3
+\end{pmatrix}\ x^{n - 3}h^{3} + \text{…} + nxh^{n - 1} + h^{n}}{h}.
+$$
+
+Thus,
+
+$$
+\frac{\left( {x + h} \right)^{n} - x^{n}}{h} = nx^{n - 1} + \begin{pmatrix}
+n \\
+2
+\end{pmatrix}\ x^{n - 2}h + \begin{pmatrix}
+n \\
+3
+\end{pmatrix}\ x^{n - 3}h^{2} + \text{…} + nxh^{n - 2} + h^{n - 1}.
+$$
+
+Finally,
+
+$$
+\begin{array}{cl}
+{f'(x)} & {= \underset{h\rightarrow 0}{\text{lim}}\left( {nx^{n - 1} + \begin{pmatrix}
+n \\
+2
+\end{pmatrix}\ x^{n - 2}h + \begin{pmatrix}
+n \\
+3
+\end{pmatrix}\ x^{n - 3}h^{2} + \text{…} + nxh^{n - 2} + h^{n - 1}} \right)} \\
+ & {= nx^{n - 1}.}
+\end{array}
+$$
+
+□
+
+### Example 3.19
+
+#### Applying the Power Rule
+
+Find the derivative of the function $f(x) = x^{10}$ by applying the power rule.
+
+#### Solution
+
+Using the power rule with $n = 10,$ we obtain
+
+$$
+f'(x) = 10x^{10 - 1} = 10x^{9}.
+$$
+
+### Checkpoint 3.13
+
+Find the derivative of $f(x) = x^{7}.$
+
+### The Sum, Difference, and Constant Multiple Rules
+
+We find our next differentiation rules by looking at derivatives of sums, differences, and constant multiples of functions. Just as when we work with functions, there are rules that make it easier to find derivatives of functions that we add, subtract, or multiply by a constant. These rules are summarized in the following theorem.
+
+### Theorem 3.4
+
+#### Sum, Difference, and Constant Multiple Rules
+
+Let $f(x)$ and $g(x)$ be differentiable functions and $k$ be a constant. Then each of the following equations holds.
+
+Sum Rule. The derivative of the sum of a function $f$ and a function $g$ is the same as the sum of the derivative of $f$ and the derivative of $g.$
+
+$$
+\frac{d}{dx}\left( {f(x) + g(x)} \right) = \frac{d}{dx}\left( {f(x)} \right) + \frac{d}{dx}\left( {g(x)} \right);
+$$
+
+that is,
+
+$$
+\text{for}\ j(x) = f(x) + g(x),j'(x) = f'(x) + g'(x).
+$$
+
+Difference Rule. The derivative of the difference of a function *f* and a function *g* is the same as the difference of the derivative of *f* and the derivative of $g\text{:}$
+
+$$
+\frac{d}{dx}\left( {f(x) - g(x)} \right) = \frac{d}{dx}\left( {f(x)} \right) - \frac{d}{dx}\left( {g(x)} \right);
+$$
+
+that is,
+
+$$
+\text{for}\ j(x) = f(x) - g(x),j'(x) = f'(x) - g'(x).
+$$
+
+Constant Multiple Rule. The derivative of a constant *k* multiplied by a function *f* is the same as the constant multiplied by the derivative:
+
+$$
+\frac{d}{dx}\left( {kf(x)} \right) = k\frac{d}{dx}\left( {f(x)} \right);
+$$
+
+that is,
+
+$$
+\text{for}\ j(x) = kf(x),j'(x) = kf'(x).
+$$
+
+#### Proof
+
+We provide only the proof of the sum rule here. The rest follow in a similar manner.
+
+For differentiable functions $f(x)$ and $g(x),$ we set $j(x) = f(x) + g(x).$ Using the limit definition of the derivative we have
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\frac{j\left( {x + h} \right) - j(x)}{h}.
+$$
+
+By substituting $j\left( {x + h} \right) = f\left( {x + h} \right) + g\left( {x + h} \right)$ and $j(x) = f(x) + g(x),$ we obtain
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\frac{\left( {f\left( {x + h} \right) + g\left( {x + h} \right)} \right) - \left( {f(x) + g(x)} \right)}{h}.
+$$
+
+Rearranging and regrouping the terms, we have
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\left( {\frac{f\left( {x + h} \right) - f(x)}{h} + \frac{g\left( {x + h} \right) - g(x)}{h}} \right).
+$$
+
+We now apply the sum law for limits and the definition of the derivative to obtain
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\left( \frac{f\left( {x + h} \right) - f(x)}{h} \right) + \underset{h\rightarrow 0}{\text{lim}}\left( \frac{g\left( {x + h} \right) - g(x)}{h} \right) = f'(x) + g'(x).
+$$
+
+□
+
+### Example 3.20
+
+#### Applying the Constant Multiple Rule
+
+Find the derivative of $g(x) = 3x^{2}$ and compare it to the derivative of $f(x) = x^{2}.$
+
+#### Solution
+
+We use the power rule directly:
+
+$$
+g'(x) = \frac{d}{dx}\left( {3x^{2}} \right) = 3\frac{d}{dx}\left( x^{2} \right) = 3\left( {2x} \right) = 6x.
+$$
+
+Since $f(x) = x^{2}$ has derivative $f'(x) = 2x,$ we see that the derivative of $g(x)$ is 3 times the derivative of $f(x).$ This relationship is illustrated in Figure 3.18.
+
+*Figure 3.18 The derivative of g ( x ) g ( x ) is 3 times the derivative of f ( x ) . f ( x ) .*
+
+### Example 3.21
+
+#### Applying Basic Derivative Rules
+
+Find the derivative of $f(x) = 2x^{5} + 7.$
+
+#### Solution
+
+We begin by applying the rule for differentiating the sum of two functions, followed by the rules for differentiating constant multiples of functions and the rule for differentiating powers. To better understand the sequence in which the differentiation rules are applied, we use Leibniz notation throughout the solution:
+
+$$
+\begin{array}{clccc}
+{f'(x)} & {= \frac{d}{dx}\left( {2x^{5} + 7} \right)} & & & \\
+ & {= \frac{d}{dx}\left( {2x^{5}} \right) + \frac{d}{dx}(7)} & & & \text{Apply the sum rule.} \\
+ & {= 2\frac{d}{dx}\left( x^{5} \right) + \frac{d}{dx}(7)} & & & \text{Apply the constant multiple rule.} \\
+ & {= 2\left( {5x^{4}} \right) + 0} & & & \text{Apply the power rule and the constant rule.} \\
+ & {= 10x^{4}.} & & & \text{Simplify.}
+\end{array}
+$$
+
+### Checkpoint 3.14
+
+Find the derivative of $f(x) = 2x^{3} - 6x^{2} + 3.$
+
+### Example 3.22
+
+#### Finding the Equation of a Tangent Line
+
+Find an equation of the line tangent to the graph of $f(x) = x^{2} - 4x + 6$ at $x = 1.$
+
+#### Solution
+
+To find an equation of the tangent line, we need a point and a slope. To find the point, compute
+
+$$
+f(1) = 1^{2} - 4(1) + 6 = 3.
+$$
+
+This gives us the point $\left( {1,3} \right).$ Since the slope of the tangent line at 1 is $f'(1),$ we must first find $f'(x).$ Using the definition of a derivative, we have
+
+$$
+f'(x) = 2x - 4
+$$
+
+so the slope of the tangent line is $f'(1) = -2.$ Using the point-slope formula, we see that the equation of the tangent line is
+
+$$
+y - 3 = -2\left( {x - 1} \right).
+$$
+
+Putting the equation of the line in slope-intercept form, we obtain
+
+$$
+y = -2x + 5.
+$$
+
+### Checkpoint 3.15
+
+Find an equation of the line tangent to the graph of $f(x) = 3x^{2} - 11$ at $x = 2.$ Use the point-slope form.
+
+### The Product Rule
+
+Now that we have examined the basic rules, we can begin looking at some of the more advanced rules. The first one examines the derivative of the product of two functions. Although it might be tempting to assume that the derivative of the product is the product of the derivatives, similar to the sum and difference rules, the product rule does not follow this pattern. To see why we cannot use this pattern, consider the function $f(x) = x^{2},$ whose derivative is $f'(x) = 2x$ and not $\frac{d}{dx}(x) \cdot \frac{d}{dx}(x) = 1 \cdot 1 = 1.$
+
+### Theorem 3.5
+
+#### Product Rule
+
+Let $f(x)$ and $g(x)$ be differentiable functions. Then
+
+$$
+\frac{d}{dx}\left( {f(x)g(x)} \right) = \frac{d}{dx}\left( {f(x)} \right) \cdot g(x) + \frac{d}{dx}\left( {g(x)} \right) \cdot f(x).
+$$
+
+That is,
+
+$$
+\text{if}\ j(x) = f(x)g(x),\text{then}\ j'(x) = f'(x)g(x) + g'(x)f(x).
+$$
+
+This means that the derivative of a product of two functions is the derivative of the first function times the second function plus the derivative of the second function times the first function.
+
+#### Proof
+
+We begin by assuming that $f(x)$ and $g(x)$ are differentiable functions. At a key point in this proof we need to use the fact that, since $g(x)$ is differentiable, it is also continuous. In particular, we use the fact that since $g(x)$ is continuous, $\underset{h\rightarrow 0}{\text{lim}}g\left( {x + h} \right) = g(x).$
+
+By applying the limit definition of the derivative to $j(x) = f(x)g(x),$ we obtain
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\frac{f\left( {x + h} \right)g\left( {x + h} \right) - f(x)g(x)}{h}.
+$$
+
+By adding and subtracting $f(x)g(x + h)$ in the numerator, we have
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\frac{f\left( {x + h} \right)g\left( {x + h} \right) - f(x)g\left( {x + h} \right) + f(x)g\left( {x + h} \right) - f(x)g(x)}{h}.
+$$
+
+After breaking apart this quotient and applying the sum law for limits, the derivative becomes
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\left( \frac{f\left( {x + h} \right)g\left( {x + h} \right) - f(x)g\left( {x + h} \right)}{h} \right) + \underset{h\rightarrow 0}{\text{lim}}\left( \frac{f(x)g\left( {x + h} \right) - f(x)g(x)}{h} \right).
+$$
+
+Rearranging, we obtain
+
+$$
+j'(x) = \underset{h\rightarrow 0}{\text{lim}}\left( {\frac{f\left( {x + h} \right) - f(x)}{h} \cdot g(x + h)} \right) + \underset{h\rightarrow 0}{\text{lim}}\left( {\frac{g\left( {x + h} \right) - g(x)}{h} \cdot f(x)} \right).
+$$
+
+By using the continuity of $g(x),$ the definition of the derivatives of $f(x)$ and $g(x),$ and applying the limit laws, we arrive at the product rule,
+
+$$
+j'(x) = f'(x)g(x) + g'(x)f(x).
+$$
+
+□
+
+### Example 3.23
+
+#### Applying the Product Rule to Functions at a Point
+
+For $j(x) = f(x)g(x),$ use the product rule to find $j'(2)$ if $f(2) = 3,f'(2) = -4,g(2) = 1,$ and $g'(2) = 6.$
+
+#### Solution
+
+Since $j(x) = f(x)g(x),j'(x) = f'(x)g(x) + g'(x)f(x),$ and hence
+
+$$
+j'(2) = f'(2)g(2) + g'(2)f(2) = (-4)(1) + (6)(3) = 14.
+$$
+
+### Example 3.24
+
+#### Applying the Product Rule to Binomials
+
+For $j(x) = (x^{2} + 2)(3x^{3} - 5x),$ find $j'(x)$ by applying the product rule. Check the result by first finding the product and then differentiating.
+
+#### Solution
+
+If we set $f(x) = x^{2} + 2$ and $g(x) = 3x^{3} - 5x,$ then $f'(x) = 2x$ and $g'(x) = 9x^{2} - 5.$ Thus,
+
+$$
+j'(x) = f'(x)g(x) + g'(x)f(x) = \left( {2x} \right)\left( {3x^{3} - 5x} \right) + (9x^{2} - 5)(x^{2} + 2).
+$$
+
+Simplifying, we have
+
+$$
+j'(x) = 15x^{4} + 3x^{2} - 10.
+$$
+
+To check, we see that $j(x) = 3x^{5} + x^{3} - 10x$ and, consequently, $j'(x) = 15x^{4} + 3x^{2} - 10.$
+
+### Checkpoint 3.16
+
+Use the product rule to obtain the derivative of $j(x) = 2x^{5}\left( {4x^{2} + x} \right).$
+
+### The Quotient Rule
+
+Having developed and practiced the product rule, we now consider differentiating quotients of functions. As we see in the following theorem, the derivative of the quotient is not the quotient of the derivatives; rather, it is the derivative of the function in the numerator times the function in the denominator minus the derivative of the function in the denominator times the function in the numerator, all divided by the square of the function in the denominator. In order to better grasp why we cannot simply take the quotient of the derivatives, keep in mind that
+
+$$
+\frac{d}{dx}\left( x^{2} \right) = 2x,\text{not}\ \frac{\frac{d}{dx}\left( x^{3} \right)}{\frac{d}{dx}(x)} = \frac{3x^{2}}{1} = 3x^{2}.
+$$
+
+### Theorem 3.6
+
+#### The Quotient Rule
+
+Let $f(x)$ and $g(x)$ be differentiable functions. Then
+
+$$
+\frac{d}{dx}\left( \frac{f(x)}{g(x)} \right) = \frac{\frac{d}{dx}(f(x)) \cdot g(x) - \frac{d}{dx}(g(x)) \cdot f(x)}{{(g(x))}^{2}}.
+$$
+
+That is,
+
+$$
+\text{if}\ j(x) = \frac{f(x)}{g(x)},\text{then}\ j'(x) = \frac{f'(x)g(x) - g'(x)f(x)}{{(g(x))}^{2}}.
+$$
+
+The proof of the quotient rule is very similar to the proof of the product rule, so it is omitted here. Instead, we apply this new rule for finding derivatives in the next example.
+
+### Example 3.25
+
+#### Applying the Quotient Rule
+
+Use the quotient rule to find the derivative of $k(x) = \frac{5x^{2}}{4x + 3}.$
+
+#### Solution
+
+Let $f(x) = 5x^{2}$ and $g(x) = 4x + 3.$ Thus, $f'(x) = 10x$ and $g'(x) = 4.$ Substituting into the quotient rule, we have
+
+$$
+k'(x) = \frac{f'(x)g(x) - g'(x)f(x)}{{(g(x))}^{2}} = \frac{10x\left( {4x + 3} \right) - 4(5x^{2})}{{(4x + 3)}^{2}}.
+$$
+
+Simplifying, we obtain
+
+$$
+k'(x) = \frac{20x^{2} + 30x}{{(4x + 3)}^{2}}.
+$$
+
+### Checkpoint 3.17
+
+Find the derivative of $h(x) = \frac{3x + 1}{4x - 3}.$
+
+It is now possible to use the quotient rule to extend the power rule to find derivatives of functions of the form $x^{k}$ where $k$ is a negative integer.
+
+### Theorem 3.7
+
+#### Extended Power Rule
+
+If $k$ is a negative integer, then
+
+$$
+\frac{d}{dx}\left( x^{k} \right) = kx^{k - 1}.
+$$
+
+#### Proof
+
+If $k$ is a negative integer, we may set $n = \text{-}k,$ so that *n* is a positive integer with $k = \text{-}n.$ Since for each positive integer $n,x^{\text{-}n} = \frac{1}{x^{n}},$ we may now apply the quotient rule by setting $f(x) = 1$ and $g(x) = x^{n}.$ In this case, $f'(x) = 0$ and $g'(x) = nx^{n - 1}.$ Thus,
+
+$$
+\frac{d}{dx}\left( x^{\text{−}n} \right) = \frac{0\left( x^{n} \right) - 1\left( {nx^{n - 1}} \right)}{\left( x^{n} \right)^{2}}.
+$$
+
+Simplifying, we see that
+
+$$
+\frac{d}{dx}\left( x^{\text{−}n} \right) = \frac{\text{−}nx^{n - 1}}{x^{2n}} = \text{−}nx^{{({n - 1})} - 2n} = \text{−}nx^{\text{−}n - 1}.
+$$
+
+Finally, observe that since $k = \text{-}n,$ by substituting we have
+
+$$
+\frac{d}{dx}\left( x^{k} \right) = kx^{k - 1}.
+$$
+
+□
+
+### Example 3.26
+
+#### Using the Extended Power Rule
+
+Find $\frac{d}{dx}\left( x^{-4} \right).$
+
+#### Solution
+
+By applying the extended power rule with $k = -4,$ we obtain
+
+$$
+\frac{d}{dx}\left( x^{-4} \right) = -4x^{-4 - 1} = -4x^{-5}.
+$$
+
+### Example 3.27
+
+#### Using the Extended Power Rule and the Constant Multiple Rule
+
+Use the extended power rule and the constant multiple rule to find the derivative of $f(x) = \frac{6}{x^{2}}.$
+
+#### Solution
+
+It may seem tempting to use the quotient rule to find this derivative, and it would certainly not be incorrect to do so. However, it is far easier to differentiate this function by first rewriting it as $f(x) = 6x^{-2}.$
+
+$$
+\begin{array}{clccl}
+{f'(x)} & {= \frac{d}{dx}\left( \frac{6}{x^{2}} \right) = \frac{d}{dx}\left( {6x^{-2}} \right)} & & & {\text{Rewrite}\ \frac{6}{x^{2}}\ \text{as}\ 6x^{-2}.} \\
+ & {= 6\frac{d}{dx}(x^{-2})} & & & \text{Apply the constant multiple rule.} \\
+ & {= 6(-2x^{-3})} & & & {\text{Use the extended power rule to differentiate}\ x^{-2}.} \\
+ & {= -12x^{-3}} & & & \text{Simplify.}
+\end{array}
+$$
+
+### Checkpoint 3.18
+
+Find the derivative of $g(x) = \frac{1}{x^{7}}$ using the extended power rule.
+
+### Combining Differentiation Rules
+
+As we have seen throughout the examples in this section, it seldom happens that we are called on to apply just one differentiation rule to find the derivative of a given function. At this point, by combining the differentiation rules, we may find the derivatives of any polynomial or rational function. Later on we will encounter more complex combinations of differentiation rules. A good rule of thumb to use when applying several rules is to apply the rules in reverse of the order in which we would evaluate the function.
+
+### Example 3.28
+
+#### Combining Differentiation Rules
+
+For $k(x) = 3h(x) + x^{2}g(x),$ find $k'(x).$
+
+#### Solution
+
+Finding this derivative requires the sum rule, the constant multiple rule, and the product rule.
+
+$$
+\begin{array}{clccc}
+{k'(x)} & {= \frac{d}{dx}\left( {3h(x) + x^{2}g(x)} \right) = \frac{d}{dx}\left( {3h(x)} \right) + \frac{d}{dx}\left( {x^{2}g(x)} \right)} & & & \text{Apply the sum rule.} \\
+ & {= 3\frac{d}{dx}\left( {h(x)} \right) + \left( {\frac{d}{dx}\left( x^{2} \right)g(x) + \frac{d}{dx}\left( {g(x)} \right)x^{2}} \right)} & & & \begin{array}{l}
+\text{Apply the constant multiple rule to} \\
+{\text{differentiate}\ 3h(x)\ \text{and the product}} \\
+{\text{rule to differentiate}\ x^{2}g(x).}
+\end{array} \\
+ & {= 3h^{'}(x) + 2xg(x) + x^{2}g^{'}(x)} & & & 
+\end{array}
+$$
+
+### Example 3.29
+
+#### Extending the Product Rule
+
+For $k(x) = f(x)g(x)h(x),$ express $k'(x)$ in terms of $f(x),g(x),h(x),$ and their derivatives.
+
+#### Solution
+
+We can think of the function $k(x)$ as the product of the function $f(x)g(x)$ and the function $h(x).$ That is, $k(x) = \left( {f(x)g(x)} \right) \cdot h(x).$ Thus,
+
+$$
+\begin{array}{clccl}
+{k'(x)} & {= \frac{d}{dx}\left( {f(x)g(x)} \right) \cdot h(x) + \frac{d}{dx}\left( {h(x)} \right) \cdot \left( {f(x)g(x)} \right)} & & & \begin{array}{l}
+\text{Apply the product rule to the product} \\
+{\text{of}\ f(x)g(x)\ \text{and}\ h(x).}
+\end{array} \\
+ & {= \left( {f'(x)g(x) + g'(x)f{(x))}h} \right.(x) + h'(x)f(x)g(x)} & & & {\text{Apply the product rule to}\ f(x)g(x).} \\
+ & {= f'(x)g(x)h(x) + f(x)g'(x)h(x) + f(x)g(x)h'\left( x\text{).} \right.} & & & \text{Simplify.}
+\end{array}
+$$
+
+### Example 3.30
+
+#### Combining the Quotient Rule and the Product Rule
+
+For $h(x) = \frac{2x^{3}k(x)}{3x + 2},$ find $h'(x).$
+
+#### Solution
+
+This procedure is typical for finding the derivative of a rational function.
+
+$$
+\begin{matrix}
+{h^{'}(x)} & {= \frac{\frac{d}{dx}\left( 2x^{3}k(x) \right) \cdot (3x + 2) - \frac{d}{dx}(3x + 2) \cdot \left( 2x^{3}k(x) \right)}{(3x + 2)^{2}}} & & & \text{Apply the quotient rule.} & \\
+ & {= \frac{\left( 6x^{2}k(x) + k^{'}(x) \cdot 2x^{3} \right)(3x + 2) - 3\left( 2x^{3}k(x) \right)}{(3x + 2)^{2}}} & & & \begin{array}{l}
+\text{Apply the product rule to find} \\
+{\frac{d}{dx}\left( 2x^{3}k(x) \right).\ \text{Use}\ \frac{d}{dx}(3x + 2) = 3.}
+\end{array} & \\
+ & {= \frac{-6x^{3}k(x) + 18x^{3}k(x) + 12x^{2}k(x) + 6x^{4}k^{'}(x) + 4x^{3}k^{'}(x)}{(3x + 2)^{2}}} & & & \text{Simplify.} & \\
+ & {= \frac{12k(x)\left( {x^{3} + x^{2}} \right) + 2k'(x)\left( {3x^{4} + 2x^{3}} \right)}{\left( {3x + 2} \right)^{2}}} & & & & 
+\end{matrix}
+$$
+
+### Checkpoint 3.19
+
+Find $\frac{d}{dx}\left( {3f(x) - 2g(x)} \right).$
+
+### Example 3.31
+
+#### Determining Where a Function Has a Horizontal Tangent
+
+Determine the values of $x$ for which $f(x) = x^{3} - 7x^{2} + 8x + 1$ has a horizontal tangent line.
+
+#### Solution
+
+To find the values of $x$ for which $f(x)$ has a horizontal tangent line, we must solve $f'(x) = 0.$ Since
+
+$$
+f'(x) = 3x^{2} - 14x + 8 = \left( {3x - 2} \right)\left( {x - 4} \right),
+$$
+
+we must solve $\left( {3x - 2} \right)\left( {x - 4} \right) = 0.$ Thus we see that the function has horizontal tangent lines at $x = \frac{2}{3}$ and $x = 4$ as shown in the following graph.
+
+*Figure 3.19 This function has horizontal tangent lines at x = 2/3 and x = 4.*
+
+### Example 3.32
+
+#### Finding a Velocity
+
+The position of an object on a coordinate axis at time $t$ is given by $s(t) = \frac{t}{t^{2} + 1}.$ What is the initial velocity of the object?
+
+#### Solution
+
+Since the initial velocity is $v(0) = s'(0),$ begin by finding $s'(t)$ by applying the quotient rule:
+
+$$
+s'(t) = \frac{1\left( {t^{2} + 1} \right) - 2t(t)}{\left( {t^{2} + 1} \right)^{2}} = \frac{1 - t^{2}}{\left( {t^{2} + 1} \right)^{2}}.
+$$
+
+After evaluating, we see that $v(0) = 1.$
+
+### Checkpoint 3.20
+
+Find the values of $x$ for which the graph of $f(x) = 4x^{2} - 3x + 2$ has a tangent line parallel to the line $y = 2x + 3.$
+
+### Student Project
+
+#### Formula One Grandstands
+
+Formula One car races can be very exciting to watch and attract a lot of spectators. Formula One track designers have to ensure sufficient grandstand space is available around the track to accommodate these viewers. However, car racing can be dangerous, and safety considerations are paramount. The grandstands must be placed where spectators will not be in danger should a driver lose control of a car (Figure 3.20).
+
+*Figure 3.20 The grandstand next to a straightaway of the Circuit de Barcelona-Catalunya race track, located where the spectators are not in danger.*
+
+**********
+
+Safety is especially a concern on turns. If a driver does not slow down enough before entering the turn, the car may slide off the racetrack. Normally, this just results in a wider turn, which slows the driver down. But if the driver loses control completely, the car may fly off the track entirely, on a path tangent to the curve of the racetrack.
+
+Suppose you are designing a new Formula One track. One section of the track can be modeled by the function $f(x) = x^{3} + 3x^{2} + x$ (Figure 3.21). The current plan calls for grandstands to be built along the first straightaway and around a portion of the first curve. The plans call for the front corner of the grandstand to be located at the point $\left( {-1.9,2.8} \right).$ We want to determine whether this location puts the spectators in danger if a driver loses control of the car.
+
+*Figure 3.21 (a) One section of the racetrack can be modeled by the function f ( x ) = x 3 + 3 x 2 + x . f ( x ) = x 3 + 3 x 2 + x . (b) The front corner of the grandstand is located at ( −1.9 , 2.8 ) . ( −1.9 , 2.8 ) .*
+
+1.  Physicists have determined that drivers are most likely to lose control of their cars as they are coming into a turn, at the point where the slope of the tangent line is 1. Find the $\left( {x,y} \right)$ coordinates of this point near the turn.
+2.  Find an equation of the tangent line to the curve at this point.
+3.  To determine whether the spectators are in danger in this scenario, find the *x*-coordinate of the point where the tangent line crosses the line $y = 2.8.$ Is this point safely to the right of the grandstand? Or are the spectators in danger?
+4.  What if a driver loses control earlier than the physicists project? Suppose a driver loses control at the point $\left( {-2.5,0.625} \right).$ What is the slope of the tangent line at this point?
+5.  If a driver loses control as described in part 4, are the spectators safe?
+6.  Should you proceed with the current design for the grandstand, or should the grandstands be moved?
+
+### Section 3.3 Exercises
+
+For the following exercises, find $f'(x)$ for each function.
+
+106\.
+
+$f(x) = x^{7} + 10$
+
+107\.
+
+$f(x) = 5x^{3} - x + 1$
+
+108\.
+
+$f(x) = 4x^{2} - 7x$
+
+109\.
+
+$f(x) = 8x^{4} + 9x^{2} - 1$
+
+110\.
+
+$f(x) = x^{4} + \frac{2}{x}$
+
+111\.
+
+$f(x) = 3x\left( {18x^{4} + \frac{13}{x + 1}} \right)$
+
+112\.
+
+$f(x) = \left( {x + 2} \right)\left( {2x^{2} - 3} \right)$
+
+113\.
+
+$f(x) = x^{2}\left( {\frac{2}{x^{2}} + \frac{5}{x^{3}}} \right)$
+
+114\.
+
+$f(x) = \frac{x^{3} + 2x^{2} - 4}{3}$
+
+115\.
+
+$f(x) = \frac{4x^{3} - 2x + 1}{x^{2}}$
+
+116\.
+
+$f(x) = \frac{x^{2} + 4}{x^{2} - 4}$
+
+117\.
+
+$f(x) = \frac{x + 9}{x^{2} - 7x + 1}$
+
+For the following exercises, find an equation of the tangent line $T(x)$ to the graph of the given function at the indicated point. Use a graphing calculator to graph the function and the tangent line.
+
+118\.
+
+**\[T\]** $y = 3x^{2} + 4x + 1$ at $\left( {0,1} \right)$
+
+119\.
+
+**\[T\]** $y = \frac{2}{x^{2}} + 1$ at $\left( {1,3} \right)$
+
+120\.
+
+**\[T\]** $y = \frac{2x}{x - 1}$ at $\left( {-1,1} \right)$
+
+121\.
+
+**\[T\]** $y = \frac{2}{x} - \frac{3}{x^{2}}$ at $\left( {1,-1} \right)$
+
+For the following exercises, assume that $f(x)$ and $g(x)$ are both differentiable functions for all $x.$ Find the derivative of each of the functions $h(x).$
+
+122\.
+
+$h(x) = 4f(x) + \frac{g(x)}{7}$
+
+123\.
+
+$h(x) = x^{3}f(x)$
+
+124\.
+
+$h(x) = \frac{f(x)g(x)}{2}$
+
+125\.
+
+$h(x) = \frac{3f(x)}{g(x) + 2}$
+
+For the following exercises, assume that $f(x)$ and $g(x)$ are both differentiable functions with values as given in the following table. Use the following table to calculate the following derivatives.
+
+|               |        |       |        |        |
+|---------------|--------|-------|--------|--------|
+| **$x$**     | $1$  | $2$ | $3$  | $4$  |
+| **$f(x)$**  | $3$  | $5$ | $-2$ | $0$  |
+| **$g(x)$**  | $2$  | $3$ | $-4$ | $6$  |
+| **$f'(x)$** | $-1$ | $7$ | $8$  | $-3$ |
+| **$g'(x)$** | $4$  | $1$ | $2$  | $9$  |
+
+126\.
+
+Find $h'(1)$ if $h(x) = xf(x) + 4g(x).$
+
+127\.
+
+Find $h'(2)$ if $h(x) = \frac{f(x)}{g(x)}.$
+
+128\.
+
+Find $h'(3)$ if $h(x) = 2x + f(x)g(x).$
+
+129\.
+
+Find $h'(4)$ if $h(x) = \frac{1}{x} + \frac{g(x)}{f(x)}.$
+
+For the following exercises, use the following figure to find the indicated derivatives, if they exist.
+
+130\.
+
+Let $h(x) = f(x) + g(x).$ Find
+
+1.  $h'(1),$
+2.  $h'(3),$ and
+3.  $h'(4).$
+
+131\.
+
+Let $h(x) = f(x)g(x).$ Find
+
+1.  $h'(1),$
+2.  $h'(3),$ and
+3.  $h'(4).$
+
+132\.
+
+Let $h(x) = \frac{f(x)}{g(x)}.$ Find
+
+1.  $h'(1),$
+2.  $h'(3),$ and
+3.  $h'(4).$
+
+For the following exercises,
+
+1.  evaluate $f'(a),$ and
+2.  graph the function $f(x)$ and the tangent line at $x = a.$
+
+133\.
+
+**\[T\]** $f(x) = 2x^{3} + 3x - x^{2},a = 2$
+
+134\.
+
+**\[T\]** $f(x) = \frac{1}{x} - x^{2},a = 1$
+
+135\.
+
+**\[T\]** $f(x) = x^{2} - x^{12} + 3x + 2,a = 0$
+
+136\.
+
+**\[T\]** $f(x) = \frac{1}{x} - x^{2},a = -1$
+
+137\.
+
+Find an equation of the tangent line to the graph of $f(x) = 2x^{3} + 4x^{2} - 5x - 3$ at $x = -1.$
+
+138\.
+
+Find an equation of the tangent line to the graph of $f(x) = x^{2} + \frac{4}{x} - 10$ at $x = 8.$
+
+139\.
+
+Find an equation of the tangent line to the graph of $f(x) = (3x - x^{2})(3 - x - x^{2})$ at $x = 1.$
+
+140\.
+
+Find the point on the graph of $f(x) = x^{3}$ such that the tangent line at that point has an $x$ intercept of 6.
+
+141\.
+
+Find an equation of the line passing through the point $P(3,3)$ and tangent to the graph of $f(x) = \frac{6}{x - 1}.$
+
+142\.
+
+Determine all points on the graph of $f(x) = x^{3} + x^{2} - x - 1$ for which
+
+1.  the tangent line is horizontal
+2.  the tangent line has a slope of $-1.$
+
+143\.
+
+Find a quadratic polynomial such that $f(1) = 5,f'(1) = 3$ and $f^{''}(1) = -6.$
+
+144\.
+
+A car driving along a freeway with traffic has traveled $s(t) = t^{3} - 6t^{2} + 9t$ meters in $t$ seconds.
+
+1.  Determine the time in seconds when the velocity of the car is 0.
+2.  Determine the acceleration of the car when the velocity is 0.
+
+145\.
+
+**\[T\]** A herring swimming along a straight line has traveled $s(t) = \frac{t^{2}}{t^{2} + 2}$ feet in $t$ seconds.
+
+Determine the velocity of the herring when it has traveled 3 seconds.
+
+146\.
+
+The population in millions of arctic flounder in the Atlantic Ocean is modeled by the function $P(t) = \frac{8t + 3}{0.2t^{2} + 1},$ where $t$ is measured in years.
+
+1.  Determine the initial flounder population.
+2.  Determine $P'(10)$ and briefly interpret the result.
+
+147\.
+
+**\[T\]** The concentration of antibiotic in the bloodstream $t$ hours after being injected is given by the function $C(t) = \frac{2t^{2} + t}{t^{3} + 50},$ where $C$ is measured in milligrams per liter of blood.
+
+1.  Find the rate of change of $C(t).$
+2.  Determine the rate of change for $t = 8,12,24,$ and $36.$
+3.  Briefly describe what seems to be occurring as the number of hours increases.
+
+148\.
+
+A book publisher has a cost function given by $C(x) = \frac{x^{3} + 2x + 3}{x^{2}},$ where *x* is the number of copies of a book in thousands and *C* is the cost, per book, measured in dollars. Evaluate $C'(2)$ and explain its meaning.
+
+149\.
+
+**\[T\]** According to Newton’s law of universal gravitation, the force $F$ between two bodies of constant mass $m_{1}$ and $m_{2}$ is given by the formula $F = \frac{Gm_{1}m_{2}}{d^{2}},$ where $G$ is the gravitational constant and $d$ is the distance between the bodies.
+
+1.  Suppose that $G,m_{1},\text{and}\ m_{2}$ are constants. Find the rate of change of force $F$ with respect to distance $d.$
+2.  Find the rate of change of force $F$ with gravitational constant $G = 6.67\  \times \ 10^{-11}$ $\text{Nm}^{2}\text{/}\text{kg}^{2},$ on two bodies 10 meters apart, each with a mass of 1000 kilograms.

@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_5353f649-58aa-4f94-a93a-1e3b109780fa" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 10.5 Integer Exponents and Scientific Notation
 
 ### Learning Objectives
@@ -1279,5 +1277,3 @@ When you convert a number from decimal notation to scientific notation, how do y
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After looking at the checklist, do you think you are well prepared for the next section? Why or why not?
-
-</div>

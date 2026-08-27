@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_b3b92ee9-65f9-481a-9c54-81a50fd5c901" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 4.2 Multiply and Divide Fractions
 
 ### Learning Objectives
@@ -1172,5 +1170,3 @@ Give an example from everyday life that demonstrates how $\frac{1}{2} \cdot \fra
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

@@ -640,48 +640,48 @@
     "slug": "10-5-integer-exponents-and-scientific-notation"
   },
   "calc.limit.numeric": {
-    "source": "applied_calc",
-    "slug": "limits"
+    "source": "openstax_calc",
+    "slug": "2-2-the-limit-of-a-function"
   },
   "calc.limit.infinity": {
-    "source": "applied_calc",
-    "slug": "limits"
+    "source": "openstax_calc",
+    "slug": "4-6-limits-at-infinity-and-asymptotes"
   },
   "calc.deriv.sum_rule": {
-    "source": "applied_calc",
-    "slug": "derivative-rules"
+    "source": "openstax_calc",
+    "slug": "3-3-differentiation-rules"
   },
   "calc.deriv.product_rule": {
-    "source": "applied_calc",
-    "slug": "derivative-rules"
+    "source": "openstax_calc",
+    "slug": "3-3-differentiation-rules"
   },
   "calc.deriv.quotient_rule": {
-    "source": "applied_calc",
-    "slug": "derivative-rules"
+    "source": "openstax_calc",
+    "slug": "3-3-differentiation-rules"
   },
   "calc.deriv.exp_log": {
-    "source": "applied_calc",
-    "slug": "derivative-rules"
+    "source": "openstax_calc",
+    "slug": "3-9-derivatives-of-exponential-and-logarithmic-functions"
   },
   "calc.deriv.trig": {
-    "source": "applied_calc",
-    "slug": "derivative-rules"
+    "source": "openstax_calc",
+    "slug": "3-5-derivatives-of-trigonometric-functions"
   },
   "calc.deriv.implicit": {
-    "source": "applied_calc",
-    "slug": "implicit-related-rates"
+    "source": "openstax_calc",
+    "slug": "3-8-implicit-differentiation"
   },
   "calc.deriv.related_rates": {
-    "source": "applied_calc",
-    "slug": "implicit-related-rates"
+    "source": "openstax_calc",
+    "slug": "4-1-related-rates"
   },
   "calc.integral.power_rule": {
-    "source": "applied_calc",
-    "slug": "integrals"
+    "source": "openstax_calc",
+    "slug": "5-4-integration-formulas-and-the-net-change-theorem"
   },
   "calc.integral.volume": {
-    "source": "applied_calc",
-    "slug": "integrals"
+    "source": "openstax_calc",
+    "slug": "6-3-volumes-of-revolution-cylindrical-shells"
   },
   "discrete.logic.connectives": {
     "source": "discrete_math",
@@ -805,52 +805,52 @@
   "discrete.sequences.recurrence": {
     "source": "manual"
   },
-  "geo.basic.vertical": {
-    "source": "authored"
-  },
-  "geo.triangle.angles": {
-    "source": "authored"
-  },
-  "geo.solid.surface_area": {
-    "source": "authored"
-  },
-  "geo.basic.angles": {
-    "source": "authored"
-  },
-  "geo.basic.complementary": {
-    "source": "authored"
-  },
-  "geo.quad.area": {
-    "source": "authored"
-  },
-  "geo.basic.points_lines": {
-    "source": "authored"
-  },
-  "geo.circle.circumference": {
-    "source": "authored"
-  },
-  "geo.solid.volume_rect": {
-    "source": "authored"
-  },
   "geo.basic.angle_measure": {
-    "source": "authored"
-  },
-  "geo.circle.parts": {
-    "source": "authored"
-  },
-  "geo.quad.perimeter": {
-    "source": "authored"
-  },
-  "geo.quad.types": {
-    "source": "authored"
-  },
-  "geo.triangle.area": {
     "source": "authored"
   },
   "geo.circle.area": {
     "source": "authored"
   },
+  "geo.quad.types": {
+    "source": "authored"
+  },
+  "geo.triangle.angles": {
+    "source": "authored"
+  },
+  "geo.quad.perimeter": {
+    "source": "authored"
+  },
+  "geo.solid.surface_area": {
+    "source": "authored"
+  },
+  "geo.solid.volume_rect": {
+    "source": "authored"
+  },
+  "geo.basic.complementary": {
+    "source": "authored"
+  },
+  "geo.basic.angles": {
+    "source": "authored"
+  },
+  "geo.circle.circumference": {
+    "source": "authored"
+  },
+  "geo.triangle.area": {
+    "source": "authored"
+  },
   "geo.triangle.types": {
+    "source": "authored"
+  },
+  "geo.basic.points_lines": {
+    "source": "authored"
+  },
+  "geo.circle.parts": {
+    "source": "authored"
+  },
+  "geo.basic.vertical": {
+    "source": "authored"
+  },
+  "geo.quad.area": {
     "source": "authored"
   }
 }

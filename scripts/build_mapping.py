@@ -196,18 +196,20 @@ AUTHORED_SECTIONS = {
     "geo.solid.volume_rect",
 }
 
-APPLIED_CALC_SECTIONS = {
-    "calc.limit.numeric": "limits",
-    "calc.limit.infinity": "limits",
-    "calc.deriv.sum_rule": "derivative-rules",
-    "calc.deriv.product_rule": "derivative-rules",
-    "calc.deriv.quotient_rule": "derivative-rules",
-    "calc.deriv.exp_log": "derivative-rules",
-    "calc.deriv.trig": "derivative-rules",
-    "calc.deriv.implicit": "implicit-related-rates",
-    "calc.deriv.related_rates": "implicit-related-rates",
-    "calc.integral.power_rule": "integrals",
-    "calc.integral.volume": "integrals",
+# OpenStax Calculus Volume 1 (CC BY-NC-SA 4.0) replaces the broken
+# Applied Calculus PDF extraction (which scrambled all math via raw text).
+OPENSTAX_CALC_SECTIONS = {
+    "calc.limit.numeric": "2-2-the-limit-of-a-function",
+    "calc.limit.infinity": "4-6-limits-at-infinity-and-asymptotes",
+    "calc.deriv.sum_rule": "3-3-differentiation-rules",
+    "calc.deriv.product_rule": "3-3-differentiation-rules",
+    "calc.deriv.quotient_rule": "3-3-differentiation-rules",
+    "calc.deriv.exp_log": "3-9-derivatives-of-exponential-and-logarithmic-functions",
+    "calc.deriv.trig": "3-5-derivatives-of-trigonometric-functions",
+    "calc.deriv.implicit": "3-8-implicit-differentiation",
+    "calc.deriv.related_rates": "4-1-related-rates",
+    "calc.integral.power_rule": "5-4-integration-formulas-and-the-net-change-theorem",
+    "calc.integral.volume": "6-3-volumes-of-revolution-cylindrical-shells",
 }
 
 DISCRETE_MATH_SECTIONS = {
@@ -262,7 +264,7 @@ def main():
     section_dicts = [
         ("orcca", ORCCA_SECTIONS),
         ("openstax", OPENSTAX_SECTIONS),
-        ("applied_calc", APPLIED_CALC_SECTIONS),
+        ("openstax_calc", OPENSTAX_CALC_SECTIONS),
         ("discrete_math", DISCRETE_MATH_SECTIONS),
         ("openstax_precalc", OPENSTAX_PRECALC_SECTIONS),
         ("hefferon_linalg", HEFFERON_LINALG_SECTIONS),

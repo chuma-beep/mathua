@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_3cc25981-8e85-4195-b438-8332e5376edf" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 4.4 Add and Subtract Fractions with Common Denominators
 
 ### Learning Objectives
@@ -635,5 +633,3 @@ After a party, Lupe has $\frac{5}{12}$ of a cheese pizza, $\frac{4}{12}$ of a pe
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ On a scale of 1–10, how would you rate your mastery of this section in light of your responses on the checklist? How can you improve this?
-
-</div>

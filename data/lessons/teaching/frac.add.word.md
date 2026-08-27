@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_ea386be2-42c0-4669-8f70-bce48dba9d43" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 4.5 Add and Subtract Fractions with Different Denominators
 
 ### Learning Objectives
@@ -1401,5 +1399,3 @@ Explain how to find the LCD of two fractions.
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After looking at the checklist, do you think you are well prepared for the next section? Why or why not?
-
-</div>

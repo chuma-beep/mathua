@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_06295da2-6c94-4e51-933f-e38a33b7098d" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 1.4 Multiply Whole Numbers
 
 ### Learning Objectives
@@ -1276,5 +1274,3 @@ How have you used models to help you learn the multiplication facts?
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ On a scale of 1–10, how would you rate your mastery of this section in light of your responses on the checklist? How can you improve this?
-
-</div>

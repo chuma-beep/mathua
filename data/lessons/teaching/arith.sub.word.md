@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_4a52088b-8ce2-44aa-99a4-63b1c2805db4" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 1.3 Subtract Whole Numbers
 
 ### Learning Objectives
@@ -1018,5 +1016,3 @@ How does knowing addition facts help you to subtract numbers?
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ What does this checklist tell you about your mastery of this section? What steps will you take to improve?
-
-</div>

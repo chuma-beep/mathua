@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_050e33e4-8b38-4321-bf2d-3f34bd5f90ff" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 2.5 Prime Factorization and the Least Common Multiple
 
 ### Learning Objectives
@@ -343,10 +341,7 @@ Another way to find the least common multiple of two numbers is to use their pri
 We start by finding the prime factorization of each number.
 
 $$
-\begin{aligned}
-12 &= 2 \cdot 2 \cdot 3 \\
-18 &= 2 \cdot 3 \cdot 3
-\end{aligned}
+12 = 2 \cdot 2 \cdot 3 18 = 2 \cdot 3 \cdot 3
 $$
 
 Then we write each number as a product of primes, matching primes vertically when possible.
@@ -693,5 +688,3 @@ Do you prefer to find the LCM by listing multiples or by using the prime factors
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ Overall, after looking at the checklist, do you think you are well-prepared for the next Chapter? Why or why not?
-
-</div>

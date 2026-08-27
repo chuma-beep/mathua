@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_c6ee405c-d1b5-4aec-bb6f-ba8e5103bf62" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 4.3 Multiply and Divide Mixed Numbers and Complex Fractions
 
 ### Learning Objectives
@@ -796,5 +794,3 @@ Explain why $- \frac{1}{2},\frac{-1}{2},$ and $\frac{1}{-2}$ are equivalent.
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ What does this checklist tell you about your mastery of this section? What steps will you take to improve?
-
-</div>

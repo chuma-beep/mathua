@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_d0bee1a7-254a-4f06-83ce-949c9ea905dc" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 5.2 Decimal Operations
 
 ### Learning Objectives
@@ -1207,5 +1205,3 @@ Find the quotient of $0.12 \div 0.04$ and explain in words all the steps taken.
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

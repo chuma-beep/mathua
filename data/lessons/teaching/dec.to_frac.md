@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_880c2243-cdea-4d51-a52d-7192a2d536d0" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 5.3 Decimals and Fractions
 
 ### Learning Objectives
@@ -825,5 +823,3 @@ Describe a situation in your life in which you might need to find the area or ci
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ What does this checklist tell you about your mastery of this section? What steps will you take to improve?
-
-</div>
