@@ -13,10 +13,11 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import {
   startGoalDiagnostic,
+  submitGoalAnswer,
   getGoalPlan,
   type GoalPlanRes,
 } from '../../lib/api'
-import { setUserInfo, getUserInfo, getToken } from '../../lib/auth'
+import { setUserInfo, getUserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 
 type Step = 'welcome' | 'diagnostic' | 'results'
@@ -137,13 +138,7 @@ export default function OnboardPage() {
     try {
       const answer = answerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
-      const token = getToken()
-      const res = await fetch(`/api/goal/diagnostic/answer`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}) },
-        body: JSON.stringify({ session_id: sessionId.current, concept_id: conceptId.current, answer, elapsed }),
-      })
-      const data = await res.json()
+      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
