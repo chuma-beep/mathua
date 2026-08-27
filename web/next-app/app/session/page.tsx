@@ -12,6 +12,7 @@ import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 
+import SymbolPalette from '../../components/SymbolPalette'
 import {
   API_BASE,
   getConfig,
@@ -37,7 +38,9 @@ import { isLoggedIn, getUserInfo, clearToken, type UserInfo } from '../../lib/au
 import conceptsData from '../../data/concepts.json'
 import Loading from '../../components/Loading'
 
-type Screen = 'name' | 'diag_select' | 'diagnostic' | 'practice' | 'review'
+import DiagnosticResults from '../../components/DiagnosticResults'
+
+type Screen = 'name' | 'diag_select' | 'diagnostic' | 'diagnostic_results' | 'practice' | 'review'
 
 export default function SessionPage() {
   const { mounted } = useTheme()
@@ -71,7 +74,7 @@ export default function SessionPage() {
   const [reviewDone, setReviewDone] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Diagnostic state (guest mode)
+   // Diagnostic state (guest mode)
   const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
   const diagSessionId = useRef('')
   const [diagQuestion, setDiagQuestion] = useState('')
@@ -81,8 +84,9 @@ export default function SessionPage() {
   const [diagAnswer, setDiagAnswer] = useState('')
   const [diagLastResult, setDiagLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [diagAccuracy, setDiagAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
-  const diagPlan = useRef<GoalPlanRes | null>(null)
+  const [diagPlan, setDiagPlan] = useState<GoalPlanRes | null>(null)
   const guestStudentID = useRef('')
+  const diagInputRef = useRef<HTMLInputElement>(null)
 
   const beginSessionAuth = useCallback(async () => {
     setError('')
@@ -282,8 +286,8 @@ export default function SessionPage() {
       const res = await startGoalDiagnosticName(name.trim(), ids)
       if (res.student_id) guestStudentID.current = res.student_id
       if (res.done) {
-        diagPlan.current = { readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} }
-        setScreen('practice')
+        setDiagPlan({ readiness: 1, total_tested: 0, correct_count: 0, weak_areas: {}, strong_areas: {} })
+        setScreen('diagnostic_results')
         return
       }
       diagSessionId.current = res.session_id
@@ -317,20 +321,8 @@ export default function SessionPage() {
         setTimeout(async () => {
           try {
             const planRes = await getGoalPlan(diagSessionId.current)
-            diagPlan.current = planRes
-            if (guestStudentID.current) {
-              const sessRes = await fetch(`${API_BASE}/api/session`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ student_id: guestStudentID.current }),
-              })
-              const sessData = await sessRes.json()
-              setStudentID(sessData.student_id)
-              setSessionID(sessData.session_id)
-              setQuestion(sessData.question)
-              setScreen('practice')
-              getScores(guestStudentID.current).then(setScores).catch(() => console.error('getScores failed'))
-            }
+            setDiagPlan(planRes)
+            setScreen('diagnostic_results')
           } catch {
             setError('Could not generate plan.')
           }
@@ -478,20 +470,22 @@ export default function SessionPage() {
                 </div>
                </div>
                <div className="flex gap-3">
-                 <input
-                   type="text"
-                   value={diagAnswer}
-                   onChange={(e) => setDiagAnswer(e.target.value)}
-                  
-                   onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
-                   placeholder="Your answer..."
-                   disabled={loading || diagLastResult !== null}
-                   className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  <input
+                    ref={diagInputRef}
+                    type="text"
+                    value={diagAnswer}
+                    onChange={(e) => setDiagAnswer(e.target.value)}
+                   
+                    onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
+                    placeholder="Your answer..."
+                    disabled={loading || diagLastResult !== null}
+                    className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
-                <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
-                  Check Answer
-                </button>
-              </div>
+                 <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
+                   Check Answer
+                 </button>
+               </div>
+               <SymbolPalette targetRef={diagInputRef} onInsert={setDiagAnswer} />
             </div>
             {diagLastResult && (
               <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${diagLastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
@@ -500,6 +494,39 @@ export default function SessionPage() {
             )}
             <div className="text-center text-mathua-muted text-xs font-mono">
               {diagAccuracy.total > 0 && `${diagAccuracy.correct}/${diagAccuracy.total} correct`}
+            </div>
+          </div>
+        )}
+
+        {screen === 'diagnostic_results' && diagPlan && (
+          <div className="mt-8">
+            <SectionHeader label="Diagnostic complete" title="Your results" />
+            <div className="mt-6">
+              <DiagnosticResults
+                plan={diagPlan}
+                onStartPractice={async () => {
+                  if (guestStudentID.current) {
+                    try {
+                      const sessRes = await fetch(`${API_BASE}/api/session`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ student_id: guestStudentID.current }),
+                      })
+                      const sessData = await sessRes.json()
+                      setStudentID(sessData.student_id)
+                      setSessionID(sessData.session_id)
+                      setQuestion(sessData.question)
+                      setScreen('practice')
+                      getScores(guestStudentID.current).then(setScores).catch(() => {})
+                    } catch { setError('Could not start practice') }
+                  } else {
+                    setScreen('practice')
+                  }
+                }}
+              />
+              <div className="mt-4 text-center">
+                <Link href="/profile" className="font-mono text-xs text-mathua-muted hover:text-mathua-blue">View profile →</Link>
+              </div>
             </div>
           </div>
         )}
@@ -707,14 +734,15 @@ export default function SessionPage() {
                              placeholder="Your answer"
                              className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                           />
-                          <button
-                            onClick={handleSubmit}
-                            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap"
-                          >
-                            Check Answer
-                          </button>
-                        </div>
-                        {question.lesson && (
+                           <button
+                             onClick={handleSubmit}
+                             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap"
+                           >
+                             Check Answer
+                           </button>
+                         </div>
+                         <SymbolPalette targetRef={inputRef} onInsert={setAnswer} />
+                         {question.lesson && (
                           <details className="mt-2">
                             <summary className="text-mathua-secondary text-sm cursor-pointer hover:text-mathua-blue">
                               Show lesson: {question.lesson.Title}
@@ -908,27 +936,28 @@ export default function SessionPage() {
                            </div>
                           )}
                        </div>
-                       {!submitted ? (
-                         <>
-                           <div className="flex gap-3 mb-4">
-                             <input
-                               ref={inputRef}
-                              type="text"
-                              value={answer}
-                              onChange={(e) => setAnswer(e.target.value)}
-                             
-                              onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
-                             placeholder="Your answer"
-                             className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
-                          />
-                          <button
-                            onClick={handleReviewSubmit}
-                            className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors"
-                          >
-                            Check Answer
-                          </button>
-                        </div>
-                      </>
+                        {!submitted ? (
+                          <>
+                            <div className="flex gap-3 mb-4">
+                              <input
+                                ref={inputRef}
+                               type="text"
+                               value={answer}
+                               onChange={(e) => setAnswer(e.target.value)}
+                              
+                               onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
+                              placeholder="Your answer"
+                              className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
+                           />
+                           <button
+                             onClick={handleReviewSubmit}
+                             className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors"
+                           >
+                             Check Answer
+                           </button>
+                         </div>
+                         <SymbolPalette targetRef={inputRef} onInsert={setAnswer} />
+                       </>
                     ) : (
                       <div className="space-y-4 animate-fadeIn">
                         <div className={`border-t pt-4 ${lastResult?.correct ? 'border-green-500/20' : 'border-red-500/20'}`}>

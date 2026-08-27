@@ -12,12 +12,17 @@ interface HeaderLink {
 
 interface HeaderProps {
   links?: HeaderLink[]
+  drawerOpen?: boolean
+  onToggleDrawer?: () => void
+  onOpenMobileDrawer?: () => void
+  hideNavWhenOpen?: boolean
 }
 
-export default function Header({ links }: HeaderProps) {
+export default function Header({ links, drawerOpen, onToggleDrawer, onOpenMobileDrawer, hideNavWhenOpen }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const { loggedIn } = useAuthState()
+  const showNav = !(hideNavWhenOpen && drawerOpen)
 
   const closeMenu = useCallback(() => setMenuOpen(false), [])
 
@@ -44,6 +49,15 @@ export default function Header({ links }: HeaderProps) {
     <header className="sticky top-0 z-50 backdrop-blur border-b border-mathua-border bg-mathua-bg transition-colors">
       <div className="flex items-center justify-between px-4 md:px-6 py-3 max-w-container mx-auto">
         <div className="flex items-center gap-4 md:gap-6 min-w-0">
+          {onToggleDrawer && (
+            <button
+              onClick={onToggleDrawer}
+              aria-label="Toggle drawer"
+              className="hidden lg:flex items-center justify-center size-6 text-mathua-muted hover:text-mathua-blue border border-mathua-border-strong px-1"
+            >
+              <span className="font-mono text-xs">{drawerOpen ? '←' : '→'}</span>
+            </button>
+          )}
           <Link
             href="/"
             className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
@@ -51,21 +65,23 @@ export default function Header({ links }: HeaderProps) {
             λ Mathua
           </Link>
 
-          <nav className="hidden md:flex items-center gap-2">
-            {displayLinks.map((link, i) => (
-              <span key={link.href} className="flex items-center gap-2">
-                {i > 0 && (
-                  <span className="font-mono text-xs text-mathua-blue select-none">|</span>
-                )}
-                <Link
-                  href={link.href}
-                  className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-blue whitespace-nowrap transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </span>
-            ))}
-          </nav>
+          {showNav && (
+            <nav className="hidden md:flex items-center gap-2">
+              {displayLinks.map((link, i) => (
+                <span key={link.href} className="flex items-center gap-2">
+                  {i > 0 && (
+                    <span className="font-mono text-xs text-mathua-blue select-none">|</span>
+                  )}
+                  <Link
+                    href={link.href}
+                    className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-blue whitespace-nowrap transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </span>
+              ))}
+            </nav>
+          )}
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
@@ -80,7 +96,7 @@ export default function Header({ links }: HeaderProps) {
           )}
 
           <button
-            onClick={() => setMenuOpen((p) => !p)}
+            onClick={() => (onOpenMobileDrawer ? onOpenMobileDrawer() : setMenuOpen((p) => !p))}
             className="md:hidden flex items-center justify-center size-6 text-mathua-muted hover:text-mathua-blue transition-colors"
             aria-label="Toggle navigation menu"
           >
