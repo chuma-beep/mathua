@@ -18,7 +18,7 @@ export default function BottomTabs() {
 
   return (
     <nav
-      className={`lg:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[min(420px,calc(100%-16px))] h-[56px] rounded-[12px] border-[0.5px] border-mathua-border bg-mathua-bg/90 backdrop-blur shadow-lg flex transition-transform duration-300 ease-out will-change-transform ${
+      className={`lg:hidden fixed bottom-3 inset-x-3 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 sm:w-[420px] max-w-[calc(100%-16px)] z-40 h-[56px] rounded-none border-[0.5px] border-mathua-border bg-mathua-surface shadow-none flex transition-transform duration-300 ease-out will-change-transform ${
         hidden ? 'translate-y-[calc(100%+20px)] opacity-0' : 'translate-y-0 opacity-100'
       }`}
     >
