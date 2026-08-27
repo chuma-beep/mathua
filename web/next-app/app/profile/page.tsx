@@ -40,13 +40,7 @@ export default function ProfilePage() {
   const [dueReviews, setDueReviews] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [drawerOpen, setDrawerOpen] = useState(true)
   const [mobileDrawer, setMobileDrawer] = useState(false)
-
-  useEffect(() => {
-    const stored = localStorage.getItem('mathua-drawer-open')
-    if (stored === 'false') setDrawerOpen(false)
-  }, [])
 
   useEffect(() => {
     if (!mounted) return
@@ -138,14 +132,7 @@ export default function ProfilePage() {
     return (
       <>
         <Header
-          drawerOpen={drawerOpen}
-          onToggleDrawer={() => {
-            const next = !drawerOpen
-            setDrawerOpen(next)
-            localStorage.setItem('mathua-drawer-open', String(next))
-          }}
           onOpenMobileDrawer={() => setMobileDrawer(true)}
-          hideNavWhenOpen
           links={[
             { label: 'Study', href: '/study' },
             { label: 'Practice', href: '/session' },
@@ -153,15 +140,7 @@ export default function ProfilePage() {
             { label: 'Graph', href: '/graph' },
           ]}
         />
-        <div className="flex max-w-container mx-auto">
-          <aside className={`${drawerOpen ? 'w-[240px]' : 'w-[48px]'} hidden lg:block shrink-0 sticky top-[52px] h-[calc(100vh-52px)] border-r-[0.5px] border-mathua-border bg-mathua-bg overflow-y-auto transition-all`}>
-            <Drawer collapsed={!drawerOpen} onToggle={() => {
-              const next = !drawerOpen
-              setDrawerOpen(next)
-              localStorage.setItem('mathua-drawer-open', String(next))
-            }} />
-          </aside>
-          <div className="flex-1 min-w-0 px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
+        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface">
             <h2 style={{ fontFamily: headingFont, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 8 }}>Welcome to your profile</h2>
             <p style={{ fontFamily: monoFont, fontSize: 12, color: 'var(--text-secondary)', marginBottom: 16 }}>Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -185,7 +164,6 @@ export default function ProfilePage() {
               </div>
             </div>
           </section>
-          </div>
         </div>
         <BottomTabs onMore={() => setMobileDrawer(true)} />
         {mobileDrawer && (
@@ -216,14 +194,7 @@ export default function ProfilePage() {
   return (
     <>
       <Header
-        drawerOpen={drawerOpen}
-        onToggleDrawer={() => {
-          const next = !drawerOpen
-          setDrawerOpen(next)
-          localStorage.setItem('mathua-drawer-open', String(next))
-        }}
         onOpenMobileDrawer={() => setMobileDrawer(true)}
-        hideNavWhenOpen
         links={[
           { label: 'Study', href: '/study' },
           { label: 'Practice', href: '/session' },
@@ -233,15 +204,7 @@ export default function ProfilePage() {
         ]}
       />
 
-      <div className="flex max-w-container mx-auto">
-        <aside className={`${drawerOpen ? 'w-[240px]' : 'w-[48px]'} hidden lg:block shrink-0 sticky top-[52px] h-[calc(100vh-52px)] border-r-[0.5px] border-mathua-border bg-mathua-bg overflow-y-auto transition-all`}>
-          <Drawer collapsed={!drawerOpen} onToggle={() => {
-            const next = !drawerOpen
-            setDrawerOpen(next)
-            localStorage.setItem('mathua-drawer-open', String(next))
-          }} />
-        </aside>
-        <div className="flex-1 min-w-0 px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
+      <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
         {/* Profile stats */}
         <ProfileStats name={user.name} scores={scores} />
 
@@ -294,7 +257,6 @@ export default function ProfilePage() {
             <StrugglesSection weaknesses={weaknesses} />
           </div>
         </section>
-        </div>
       </div>
       <BottomTabs onMore={() => setMobileDrawer(true)} />
       {mobileDrawer && (
