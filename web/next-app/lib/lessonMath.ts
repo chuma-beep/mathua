@@ -19,6 +19,12 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }
 
+function escapeHtmlMath(s: string): string {
+  // Inside math, & is the aligned/array column separator — must NOT be
+  // escaped to &amp; (breaks \begin{aligned} &=). Only escape < > for HTML.
+  return s.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
 export function prepareLessonMath(input: string): string {
   let content = input
 
@@ -95,16 +101,16 @@ export function prepareLessonMath(input: string): string {
 
   // Display math: $$...$$
   content = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
-    return '<span class="math-display">' + escapeHtml(unwrapTextCommand(inner.trim())) + '</span>'
+    return '<span class="math-display">' + escapeHtmlMath(unwrapTextCommand(inner.trim())) + '</span>'
   })
 
   // Inline math: $...$
   content = content.replace(/\$([^$]+?)\$/g, (_, inner: string) => {
     const trimmed = unwrapTextCommand(inner.trim())
     if (trimmed.includes('\n')) {
-      return '<span class="math-display">' + escapeHtml(trimmed) + '</span>'
+      return '<span class="math-display">' + escapeHtmlMath(trimmed) + '</span>'
     }
-    return '<span class="math-inline">' + escapeHtml(trimmed) + '</span>'
+    return '<span class="math-inline">' + escapeHtmlMath(trimmed) + '</span>'
   })
 
   // Restore escaped literal dollars.
