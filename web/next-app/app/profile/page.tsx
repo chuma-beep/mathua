@@ -138,7 +138,7 @@ export default function ProfilePage() {
             { label: 'Graph', href: '/graph' },
           ]}
         />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
+        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[80px] lg:pb-12">
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface">
             <h2 style={{ fontFamily: headingFont, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 8 }}>Welcome to your profile</h2>
             <p style={{ fontFamily: monoFont, fontSize: 12, color: 'var(--text-secondary)', marginBottom: 16 }}>Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -193,7 +193,7 @@ export default function ProfilePage() {
         ]}
       />
 
-      <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
+      <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[80px] lg:pb-12">
         {/* Profile stats */}
         <ProfileStats name={user.name} scores={scores} />
 

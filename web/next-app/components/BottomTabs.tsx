@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useAuthState } from '../hooks/useAuthState'
+import { useScrollDirection } from '../hooks/useScrollDirection'
 
 const TABS = [
   { label: 'Home', href: '/', icon: '○' },
@@ -14,9 +14,14 @@ const TABS = [
 
 export default function BottomTabs() {
   const pathname = usePathname()
+  const hidden = useScrollDirection({ hideThreshold: 12, topOffset: 40, idleMs: 300, bottomOffset: 24 })
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 h-[56px] border-t-[0.5px] border-mathua-border bg-mathua-bg/95 backdrop-blur flex">
+    <nav
+      className={`lg:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[min(420px,calc(100%-16px))] h-[56px] rounded-[12px] border-[0.5px] border-mathua-border bg-mathua-bg/90 backdrop-blur shadow-lg flex transition-transform duration-300 ease-out will-change-transform ${
+        hidden ? 'translate-y-[calc(100%+20px)] opacity-0' : 'translate-y-0 opacity-100'
+      }`}
+    >
       {TABS.map((t) => {
         const active = pathname === t.href || pathname.startsWith(t.href + '/')
         return (
