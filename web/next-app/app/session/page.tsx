@@ -476,7 +476,7 @@ export default function SessionPage() {
             <SectionHeader label={`Question ${diagCount}`} title={diagConceptName} />
             <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-6">
               <div className="bg-mathua-code border border-mathua-border rounded-none p-6 text-center mb-4">
-                <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                <div className="">
                   <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</KatexContent>
                 </div>
                </div>
@@ -485,7 +485,7 @@ export default function SessionPage() {
                    type="text"
                    value={diagAnswer}
                    onChange={(e) => setDiagAnswer(e.target.value)}
-                   onPaste={(e) => e.preventDefault()}
+                  
                    onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
                    placeholder="Your answer..."
                    disabled={loading || diagLastResult !== null}
@@ -682,14 +682,14 @@ export default function SessionPage() {
                            <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
                              <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                            </div>
-                          <div className="md:w-2/3 p-8 flex items-center justify-center select-none" onCopy={(e) => e.preventDefault()}>
+                          <div className="md:w-2/3 p-8 flex items-center justify-center">
                                <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
                                  {question.question}
                                </KatexContent>
                              </div>
                            </div>
                           ) : (
-                           <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                           <div className="">
                              <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
                                {question.question}
                              </KatexContent>
@@ -705,7 +705,7 @@ export default function SessionPage() {
                               type="text"
                               value={answer}
                               onChange={(e) => setAnswer(e.target.value)}
-                              onPaste={(e) => e.preventDefault()}
+                             
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                              placeholder="Your answer"
                              className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
@@ -897,14 +897,14 @@ export default function SessionPage() {
                            <div className="md:w-1/3 p-4 flex items-center justify-center bg-mathua-surface border-r border-mathua-border">
                              <Image src={question.diagram} alt="Diagram" width={200} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                            </div>
-                             <div className="md:w-2/3 p-8 flex items-center justify-center select-none" onCopy={(e) => e.preventDefault()}>
+                             <div className="md:w-2/3 p-8 flex items-center justify-center">
                                <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap text-center">
                                  {question.question}
                                </KatexContent>
                              </div>
                            </div>
                           ) : (
-                           <div className="select-none" onCopy={(e) => e.preventDefault()}>
+                           <div className="">
                              <KatexContent className="text-mathua-primary text-2xl font-mono font-light whitespace-pre-wrap p-8">
                                {question.question}
                              </KatexContent>
@@ -919,7 +919,7 @@ export default function SessionPage() {
                               type="text"
                               value={answer}
                               onChange={(e) => setAnswer(e.target.value)}
-                              onPaste={(e) => e.preventDefault()}
+                             
                               onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
                              placeholder="Your answer"
                              className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"

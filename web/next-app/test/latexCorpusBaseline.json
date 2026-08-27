@@ -95,6 +95,21 @@
   "teaching/arith.mult.word.md": [
     "struct: raw latex in prose"
   ],
+  "teaching/calc.deriv.exp_log.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/calc.deriv.implicit.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/calc.integral.volume.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/calc.limit.infinity.md": [
+    "struct: raw latex in prose"
+  ],
+  "teaching/calc.limit.numeric.md": [
+    "struct: raw latex in prose"
+  ],
   "teaching/dec.add.md": [
     "struct: raw latex in prose"
   ],

@@ -2,7 +2,6 @@ package grader
 
 type Router struct {
 	numeric    *numericGrader
-	symbolic   *symbolicGrader
 	choice     *choiceGrader
 	comparison *comparisonGrader
 	ordering   *orderingGrader
@@ -13,7 +12,6 @@ type Router struct {
 func NewRouter() *Router {
 	return &Router{
 		numeric:    &numericGrader{},
-		symbolic:   &symbolicGrader{},
 		choice:     &choiceGrader{},
 		comparison: &comparisonGrader{},
 		ordering:   &orderingGrader{},
@@ -26,7 +24,7 @@ func (r *Router) Grade(gradingType GradingType, expected, answer string) Result 
 	switch gradingType {
 	case GradingNumeric:
 		return r.numeric.grade(expected, answer)
-	case GradingPolynomial, GradingExpression:
+	case GradingPolynomial, GradingExpression, GradingSymbolic:
 		return gradeSymPy(expected, answer)
 	case GradingMultipleChoice:
 		return r.choice.grade(expected, answer)
