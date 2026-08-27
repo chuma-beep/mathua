@@ -233,16 +233,6 @@ HEFFERON_LINALG_SECTIONS = {
 }
 
 UNCOVERED = {
-    "count.backwards": "manual",
-    "count.cardinality": "manual",
-    "count.compare": "manual",
-    "count.number_line": "manual",
-    "count.objects": "manual",
-    "count.objects_20": "manual",
-    "count.ordinal": "manual",
-    "count.skip_2": "manual",
-    "count.skip_5": "manual",
-    "count.skip_10": "manual",
     "ode.separable": "manual",
     "ode.linear_first": "manual",
     "ode.homogeneous": "manual",

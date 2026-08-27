@@ -727,36 +727,6 @@
     "source": "hefferon_linalg",
     "slug": "linear-systems"
   },
-  "count.backwards": {
-    "source": "manual"
-  },
-  "count.cardinality": {
-    "source": "manual"
-  },
-  "count.compare": {
-    "source": "manual"
-  },
-  "count.number_line": {
-    "source": "manual"
-  },
-  "count.objects": {
-    "source": "manual"
-  },
-  "count.objects_20": {
-    "source": "manual"
-  },
-  "count.ordinal": {
-    "source": "manual"
-  },
-  "count.skip_2": {
-    "source": "manual"
-  },
-  "count.skip_5": {
-    "source": "manual"
-  },
-  "count.skip_10": {
-    "source": "manual"
-  },
   "ode.separable": {
     "source": "manual"
   },
