@@ -58,6 +58,7 @@ export default function KatexContent({ children, className = '' }: { children: s
           throwOnError: false,
           trust: false,
           strict: 'warn',
+          output: 'html',
           errorColor: '#cc0000',
           macros: lessonMacros,
         }]]}
