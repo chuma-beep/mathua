@@ -13,6 +13,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 
 import {
+  API_BASE,
   getConfig,
   startSession,
   startSessionName,
@@ -21,6 +22,7 @@ import {
   getSettings,
   updateSettings,
   startGoalDiagnosticName,
+  submitGoalAnswer,
   getGoalPlan,
   setDailyXPGoal,
   getDueReviews,
@@ -305,12 +307,7 @@ export default function SessionPage() {
     setLoading(true)
     try {
       const elapsed = 5.0
-      const res = await fetch(`/api/goal/diagnostic/answer`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ session_id: diagSessionId.current, concept_id: diagConceptId.current, answer: diagAnswer.trim(), elapsed }),
-      })
-      const data = await res.json()
+      const data = await submitGoalAnswer(diagSessionId.current, diagConceptId.current, diagAnswer.trim(), elapsed)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setDiagAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
@@ -322,7 +319,7 @@ export default function SessionPage() {
             const planRes = await getGoalPlan(diagSessionId.current)
             diagPlan.current = planRes
             if (guestStudentID.current) {
-              const sessRes = await fetch('/api/session', {
+              const sessRes = await fetch(`${API_BASE}/api/session`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ student_id: guestStudentID.current }),

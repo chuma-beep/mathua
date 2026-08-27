@@ -85,10 +85,10 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 
-	mux.HandleFunc("/api/session", logRequest(cors(s.authMiddleware(s.handleSession))))
-	mux.HandleFunc("/api/answer", logRequest(cors(s.authMiddleware(s.handleAnswer))))
-	mux.HandleFunc("/api/progress/", logRequest(cors(s.authMiddleware(s.handleProgress))))
-	mux.HandleFunc("/api/scores/", logRequest(cors(s.authMiddleware(s.handleScores))))
+	mux.HandleFunc("/api/session", logRequest(cors(s.optionalAuthMiddleware(s.handleSession))))
+	mux.HandleFunc("/api/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleAnswer))))
+	mux.HandleFunc("/api/progress/", logRequest(cors(s.optionalAuthMiddleware(s.handleProgress))))
+	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
 	mux.HandleFunc("/api/config", logRequest(cors(s.handleConfig)))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
@@ -97,9 +97,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
 	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.handleDiagnosticAnswer)))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
-	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.authMiddleware(s.handleGoalDiagnosticStart))))
-	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.authMiddleware(s.handleGoalDiagnosticAnswer))))
-	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.authMiddleware(s.handleGoalPlan))))
+	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart))))
+	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer))))
+	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalPlan))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
@@ -148,34 +148,39 @@ func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func (s *Server) optionalAuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if s.auth == nil {
+			next(w, r)
+			return
+		}
+		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
+		if token == "" {
+			next(w, r)
+			return
+		}
+		studentID, err := s.auth.ValidateToken(token)
+		if err != nil {
+			// Invalid token treated as unauthenticated — allow guest flow to proceed
+			log.Printf("optionalAuth: invalid token: %v", err)
+			next(w, r)
+			return
+		}
+		ctx := r.Context()
+		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
+		next(w, r)
+	}
+}
+
 func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
-	// If no auth, accept name from body (testing / legacy)
-	if s.auth == nil {
-		var req struct {
-			Name      string `json:"name"`
-			StudentID string `json:"student_id"`
-		}
-		if err := decodeJSON(w, r, &req); err != nil {
-			http.Error(w, `{"error":"invalid request"}`, 400)
-			return
-		}
-		studentID := req.StudentID
-		if studentID == "" {
-			if req.Name == "" {
-				http.Error(w, `{"error":"name or student_id is required"}`, 400)
-				return
-			}
-			st, err := s.eng.CreateStudent(req.Name)
-			if err != nil {
-				writeError(w, "failed to create student", 500)
-				return
-			}
-			studentID = st.ID
-		}
+	// If authenticated, prefer the authenticated identity; otherwise fall back to body-provided
+	// name/student_id so visitors can take diagnostics and practice without an account.
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID != "" {
 		sess, err := s.repo.CreateSession(studentID)
 		if err != nil {
 			writeError(w, "failed to create session", 500)
@@ -189,22 +194,39 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
 		return
 	}
-	studentID, ok := r.Context().Value(authStudentKey{}).(string)
-	if !ok || studentID == "" {
-		writeError(w, "not authenticated", 401)
+	// Unauthenticated / guest path
+	var req struct {
+		Name      string `json:"name"`
+		StudentID string `json:"student_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		http.Error(w, `{"error":"invalid request"}`, 400)
 		return
 	}
-	sess, err := s.repo.CreateSession(studentID)
+	sid := req.StudentID
+	if sid == "" {
+		if req.Name == "" {
+			http.Error(w, `{"error":"name or student_id is required"}`, 400)
+			return
+		}
+		st, err := s.eng.CreateStudent(req.Name)
+		if err != nil {
+			writeError(w, "failed to create student", 500)
+			return
+		}
+		sid = st.ID
+	}
+	sess, err := s.repo.CreateSession(sid)
 	if err != nil {
 		writeError(w, "failed to create session", 500)
 		return
 	}
-	q, err := s.eng.NextQuestion(sess.ID, studentID)
+	q, err := s.eng.NextQuestion(sess.ID, sid)
 	if err != nil {
 		writeError(w, "failed to get question", 500)
 		return
 	}
-	writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
+	writeJSON(w, startSessionRes{StudentID: sid, SessionID: sess.ID, Question: q})
 }
 
 // POST /api/answer
@@ -230,7 +252,7 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID == "" && s.auth == nil {
+	if studentID == "" {
 		ses, _ := s.repo.GetSession(req.SessionID)
 		if ses != nil {
 			studentID = ses.StudentID
@@ -264,7 +286,7 @@ func (s *Server) handleProgress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID == "" && s.auth == nil {
+	if studentID == "" {
 		studentID = strings.TrimPrefix(r.URL.Path, "/api/progress/")
 		if studentID == "" {
 			writeError(w, "student_id required", 400)
@@ -286,7 +308,7 @@ func (s *Server) handleScores(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID == "" && s.auth == nil {
+	if studentID == "" {
 		studentID = strings.TrimPrefix(r.URL.Path, "/api/scores/")
 		if studentID == "" {
 			writeError(w, "student_id required", 400)
@@ -522,13 +544,22 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		writeError(w, "concept_ids required", 400)
 		return
 	}
-	if studentID == "" && req.Name != "" && s.auth == nil {
-		st, err := s.eng.CreateStudent(req.Name)
+	if studentID == "" && req.Name != "" {
+		trimmed := strings.TrimSpace(req.Name)
+		if trimmed == "" {
+			writeError(w, "name is required for guest diagnostic", 400)
+			return
+		}
+		st, err := s.eng.CreateStudent(trimmed)
 		if err != nil {
 			writeError(w, "failed to create student", 500)
 			return
 		}
 		studentID = st.ID
+	}
+	if studentID == "" {
+		writeError(w, "not authenticated: provide Authorization Bearer token or name", 401)
+		return
 	}
 	session, question, err := s.eng.StartGoalDiagnostic(studentID, req.ConceptIDs)
 	if err != nil {
@@ -581,6 +612,16 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	if session == nil {
 		writeError(w, "diagnostic session not found", 404)
 		return
+	}
+	// If caller is authenticated, verify session ownership
+	if authStudentID, _ := r.Context().Value(authStudentKey{}).(string); authStudentID != "" {
+		session.Lock()
+		owner := session.StudentID
+		session.Unlock()
+		if owner != "" && owner != authStudentID {
+			writeError(w, "diagnostic session does not belong to authenticated user", 403)
+			return
+		}
 	}
 
 	// Grade against the stored problem (the one the user actually saw)
@@ -672,6 +713,16 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	if session == nil {
 		writeError(w, "diagnostic session not found", 404)
 		return
+	}
+	// If caller is authenticated, verify session ownership
+	if authStudentID, _ := r.Context().Value(authStudentKey{}).(string); authStudentID != "" {
+		session.Lock()
+		owner := session.StudentID
+		session.Unlock()
+		if owner != "" && owner != authStudentID {
+			writeError(w, "diagnostic session does not belong to authenticated user", 403)
+			return
+		}
 	}
 	session.Lock()
 	studentID := session.StudentID

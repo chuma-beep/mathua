@@ -13,6 +13,7 @@ import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import {
   startGoalDiagnostic,
+  submitGoalAnswer,
   getGoalPlan,
   getScores,
   type GoalPlanRes,
@@ -178,13 +179,7 @@ export default function GoalsPage() {
     try {
       const answer = answerInput.trim()
       const elapsed = 5.0
-      const token = tokenRef.current
-      const res = await fetch(`/api/goal/diagnostic/answer`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token || ''}` },
-        body: JSON.stringify({ session_id: sessionId.current, concept_id: conceptId.current, answer, elapsed }),
-      })
-      const data = await res.json()
+      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({
