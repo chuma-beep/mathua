@@ -402,13 +402,13 @@ func (g *fracMixedOpGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	w, r, d := toMixed(result, den)
 	if r == 0 {
 		return generator.Problem{
-			Question:    fmt.Sprintf("%d %d/%d %s %d %d/%d = ?", w1, n1, den, g.op, w2, n2, den),
+			Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} %s %d \\frac{%d}{%d} = ?\\)", w1, n1, den, g.op, w2, n2, den),
 			Answer:      strconv.Itoa(w),
 			Explanation: fmt.Sprintf("%d %d/%d %s %d %d/%d = %d", w1, n1, den, g.op, w2, n2, den, w),
 		}
 	}
 	return generator.Problem{
-		Question: fmt.Sprintf("%d %d/%d %s %d %d/%d = ?", w1, n1, den, g.op, w2, n2, den),
+		Question: fmt.Sprintf("\\(%d \\frac{%d}{%d} %s %d \\frac{%d}{%d} = ?\\)", w1, n1, den, g.op, w2, n2, den),
 		Answer:   fmt.Sprintf("%d %d/%d", w, r, d),
 		Explanation: fmt.Sprintf("Convert to improper: %d/%d %s %d/%d = %d/%d = %d %d/%d",
 			aImproper, den, g.op, bImproper, den, result, den, w, r, d),
@@ -431,7 +431,7 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	rn, rd := reduce(num, denSq)
 	w, r, d := toMixed(rn, rd)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d %d/%d x %d %d/%d = ?", w1, n1, den, w2, n2, den),
+		Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} \\times %d \\frac{%d}{%d} = ?\\)", w1, n1, den, w2, n2, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d/%d) x (%d/%d) = %d/%d = %s", aImp, den, bImp, den, rn, rd, mixStr(w, r, d)),
 	}

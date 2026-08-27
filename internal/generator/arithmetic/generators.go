@@ -101,7 +101,7 @@ func (g *addGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d + %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d + %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a+b),
 		Explanation: fmt.Sprintf("%d + %d = %d", a, b, a+b),
 	}
@@ -134,7 +134,7 @@ func (g *subGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	}
 	b := rand.Intn(bMax-g.minB+1) + g.minB
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d - %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d - %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a-b),
 		Explanation: fmt.Sprintf("%d - %d = %d", a, b, a-b),
 	}
@@ -154,7 +154,7 @@ func (g *subBorrowGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	a := tensA*10 + onesA
 	b := tensB*10 + onesB
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d - %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d - %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a-b),
 		Explanation: fmt.Sprintf("%d - %d = %d (borrowing required)", a, b, a-b),
 	}
@@ -259,7 +259,7 @@ func (g *multByGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		n = rand.Intn(20) + 1
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d x %d = ?", f, n),
+		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", f, n),
 		Answer:      fmt.Sprintf("%d", f*n),
 		Explanation: fmt.Sprintf("%d x %d = %d", f, n, f*n),
 	}
@@ -272,7 +272,7 @@ func (g *multTablesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	a := rand.Intn(max(1, scale*2)) + 1
 	b := rand.Intn(max(1, scale*2)) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d x %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d x %d = %d", a, b, a*b),
 	}
@@ -287,7 +287,7 @@ func (g *multGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(g.maxA-g.minA+1) + g.minA
 	b := rand.Intn(g.maxB-g.minB+1) + g.minB
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d x %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d x %d = %d", a, b, a*b),
 	}
@@ -328,7 +328,7 @@ func (g *divBasicGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	b := rand.Intn(max(1, scale*2)) + 1
 	a := b * (rand.Intn(max(1, scale*2)) + 1)
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d / %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a/b),
 		Explanation: fmt.Sprintf("%d / %d = %d", a, b, a/b),
 	}
@@ -344,7 +344,7 @@ func (g *divRemainderGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	r := rand.Intn(b-1) + 1
 	a := b*(rand.Intn(max(1, scale*2))+1) + r
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d / %d = ? (give answer with remainder: Q R)", a, b),
+		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\) (give answer with remainder: Q R)", a, b),
 		Answer:      fmt.Sprintf("%d R %d", a/b, r),
 		Explanation: fmt.Sprintf("%d / %d = %d remainder %d", a, b, a/b, r),
 	}
@@ -370,7 +370,7 @@ func (g *divLongGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 	q := rand.Intn(50) + 10
 	a := b * q
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d / %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", q),
 		Explanation: fmt.Sprintf("%d / %d = %d", a, b, q),
 	}
@@ -690,7 +690,7 @@ func (g *negAddSubGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	a := rand.Intn(scale*4) - scale*2
 	b := rand.Intn(scale*2) - scale
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d + (%d) = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d + (%d) = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a+b),
 		Explanation: fmt.Sprintf("%d + (%d) = %d", a, b, a+b),
 	}
@@ -709,7 +709,7 @@ func (g *negMultDivGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		b = -1
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("%d x %d = ?", a, b),
+		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("(%d) x (%d) = %d", a, b, a*b),
 	}
@@ -729,18 +729,18 @@ func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	var result int
 	if !g.parens && !g.exponents {
 		// 3 + 4 x 2
-		q = fmt.Sprintf("%d + %d x %d", a, b, c)
+		q = fmt.Sprintf("%d + %d \\times %d", a, b, c)
 		result = a + b*c
 	} else if g.parens && !g.exponents {
-		q = fmt.Sprintf("(%d + %d) x %d", a, b, c)
+		q = fmt.Sprintf("(%d + %d) \\times %d", a, b, c)
 		result = (a + b) * c
 	} else {
 		e := rand.Intn(3) + 2
-		q = fmt.Sprintf("%d + (%d)^%d x %d", a, b, e, c)
+		q = fmt.Sprintf("%d + (%d)^%d \\times %d", a, b, e, c)
 		result = a + mathutil.IntPow(b, e)*c
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Evaluate: %s", q),
+		Question:    fmt.Sprintf("Evaluate: \\(%s\\)", q),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("%s = %d (PEMDAS)", q, result),
 	}
