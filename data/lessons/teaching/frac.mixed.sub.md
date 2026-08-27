@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_6149a49f-3a7d-4fc2-a940-9b303cb3f4c9" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 4.6 Add and Subtract Mixed Numbers
 
 ### Learning Objectives
@@ -854,5 +852,3 @@ Subtract $3\frac{7}{8} - 4\frac{5}{12}$ twice, first by leaving them as mixed nu
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

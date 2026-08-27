@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_50a6a030-22a0-4ed3-8928-b31d7a3b541c" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 5.6 Ratios and Rate
 
 ### Learning Objectives
@@ -839,5 +837,3 @@ Mollie had a $16-ounce$ cappuccino at her neighborhood coffee shop. The cappucci
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

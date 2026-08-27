@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_7f5c4e64-6bd2-4215-9d77-21578d65b83a" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 6.2 Solve General Applications of Percent
 
 ### Learning Objectives
@@ -619,5 +617,3 @@ Because of road construction in one city, commuters were advised to plan their M
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

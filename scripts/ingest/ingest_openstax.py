@@ -1,5 +1,5 @@
 """
-Ingest OpenStax Prealgebra pages into CommonMark.
+Ingest OpenStax pages into CommonMark.
 
 Fetches the page, isolates the content module, unwraps presentation-only
 div/span wrappers, then delegates conversion to pandoc (whose AST carries
@@ -14,15 +14,29 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-OPENSTAX_BASE = "https://openstax.org/books/prealgebra/pages"
 OUTPUT_DIR = Path("data/lessons/teaching")
 ROOT = Path(__file__).resolve().parents[2]
 MAPPING_PATH = ROOT / "data/lessons/mapping.json"
-ATTRIBUTION = (
-    "> Content sourced from [OpenStax Prealgebra]"
-    "(https://openstax.org/books/prealgebra/pages/1-introduction) "
-    "by Marecek & Anthony-Smith — CC BY 4.0\n"
-)
+
+# source -> (book slug, base URL, attribution header)
+BOOKS = {
+    "openstax": {
+        "base": "https://openstax.org/books/prealgebra/pages",
+        "attribution": (
+            "> Content sourced from [OpenStax Prealgebra]"
+            "(https://openstax.org/books/prealgebra/pages/1-introduction) "
+            "by Marecek & Anthony-Smith — CC BY 4.0\n"
+        ),
+    },
+    "openstax_calc": {
+        "base": "https://openstax.org/books/calculus-volume-1/pages",
+        "attribution": (
+            "> Content sourced from [OpenStax Calculus Volume 1]"
+            "(https://openstax.org/books/calculus-volume-1/pages/1-introduction) "
+            "by Gilbert Strang & Edwin \"Jed\" Herman — CC BY-NC-SA 4.0\n"
+        ),
+    },
+}
 
 
 def flatten_html(html: str) -> str:
@@ -47,7 +61,9 @@ def flatten_html(html: str) -> str:
             t.replace_with(p)
         else:
             t.unwrap()
-    return str(content)
+    # Emit only the wrapper's children: the wrapper div itself carries
+    # id/class/data-type attributes that pandoc would keep as raw HTML.
+    return "".join(str(c) for c in content.contents)
 
 
 UNICODE_OPS = {
@@ -177,28 +193,31 @@ def main() -> int:
         return 1
 
     mapping = json.loads(MAPPING_PATH.read_text())
-    slugs: dict[str, list[str]] = {}
+    # Group by (source, slug) so each book's pages and attribution are used.
+    sections: dict[tuple[str, str], list[str]] = {}
     for cid, info in mapping.items():
-        if info.get("source") == "openstax":
-            slugs.setdefault(info["slug"], []).append(cid)
+        src = info.get("source")
+        if src in BOOKS:
+            sections.setdefault((src, info["slug"]), []).append(cid)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     failures = 0
-    print(f"OpenStax sections to extract: {len(slugs)}")
-    for slug, concept_ids in sorted(slugs.items()):
+    print(f"OpenStax sections to extract: {len(sections)}")
+    for (src, slug), concept_ids in sorted(sections.items()):
+        book = BOOKS[src]
         try:
-            resp = requests.get(f"{OPENSTAX_BASE}/{slug}", timeout=30)
+            resp = requests.get(f"{book['base']}/{slug}", timeout=30)
             resp.raise_for_status()
             flat = flatten_html(resp.content.decode("utf-8"))
             md = to_markdown(flat)
             md = re.sub(r"\n{3,}", "\n\n", md).strip() + "\n"
-            body = ATTRIBUTION + "\n" + md
+            body = book["attribution"] + "\n" + md
             for cid in concept_ids:
                 (OUTPUT_DIR / f"{cid}.md").write_text(body)
-            print(f"ok {slug} ({len(concept_ids)})")
+            print(f"ok {src}:{slug} ({len(concept_ids)})")
         except Exception as exc:  # noqa: BLE001 - report and continue
             failures += 1
-            print(f"X {slug}: {exc}")
+            print(f"X {src}:{slug}: {exc}")
     return 1 if failures else 0
 
 

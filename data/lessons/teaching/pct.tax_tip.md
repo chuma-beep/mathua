@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_151b5c8e-3eb8-46fd-84c5-5318081bdc48" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 6.3 Solve Sales Tax, Commission, and Discount Applications
 
 ### Learning Objectives
@@ -705,5 +703,3 @@ Roxy bought a scarf on sale for $\text{50\%}$ off. The original price of the sca
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ What does this checklist tell you about your mastery of this section? What steps will you take to improve?
-
-</div>

@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_5adf7575-3192-4e18-9e0d-297a60911d05" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 1.5 Divide Whole Numbers
 
 ### Learning Objectives
@@ -1451,5 +1449,3 @@ Oswaldo divided $300$ by $8$ and said his answer was $37$ with a remainder of $4
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ Overall, after looking at the checklist, do you think you are well-prepared for the next Chapter? Why or why not?
-
-</div>

@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_8eaf60c1-b5a8-40cd-b2b1-4eff95ff3ebe" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 1.2 Add Whole Numbers
 
 ### Learning Objectives
@@ -1143,5 +1141,3 @@ How have you used models to help you learn the addition facts?
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ After reviewing this checklist, what will you do to become confident for all objectives?
-
-</div>

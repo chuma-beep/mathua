@@ -1,3365 +1,695 @@
-> Content sourced from [Applied Calculus](https://www.opentextbookstore.com/appcalc/) by Calaway, Hoffman & Lippman — CC BY 3.0
-
-# Integrals
-
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Example 4
-Find ∫
-dx
-e x
-.
-
-This is likely one you remember --
-x
-e is its own derivative, so it is also its own antiderivative.
-The integral sign tells me that I need to include the entire family of functions, so I need that + C
-on the end:
-C
-e
-dx
-e
-x
-x
-+
-=
-∫
-
-
-Antiderivatives Graphically or Numerically
-Another way to think about the Fundamental Theorem of Calculus is to solve the expression for
-F(b):
-
-The Fundamental Theorem of Calculus (restated)
-
-
-
-( )
-( )
-( )
-a
-F
-b
-F
-dx
-x
-F
-b
-a
-−
-=
-∫
-'
-
-The definite integral of a derivative from a to b gives the net change in the original function.
-
-
-
-( )
-( )
-( )
-∫
-+
-=
-b
-a
-dx
-x
-F
-a
-F
-b
-F
-'
-
-The amount we end up is the amount we start with plus the net change in the function.
-
-
-This lets us get values for the antiderivative – as long as we have a starting point, and we know
-something about the area.
-
-Example 5
-Suppose F(t) has the derivative f(t) shown below, and suppose that we know F(0) = 5.  Find
-values for F(1), F(2), F(3), and F(4).
-
-
-Using the second way to think about the Fundamental Theorem of Calculus,
-( )
-( )
-( )
-∫
-+
-=
-b
-a
-dx
-x
-F
-a
-F
-b
-F
-'
--- we can see that
-( )
-( )
-( )
-∫
-+
-=
-dx
-x
-f
-F
-F
-.  We know the value of F(0), and we can easily find
-( )
-∫
-dx
-x
-f
-from the
-graph – it’s just the area of a triangle.
-So
-( )
-( )
-( )
-5.5
-5.
-=
-+
-=
-+
-=
-∫
-dx
-x
-f
-F
-F
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-( )
-( )
-( )
-=
-+
-=
-+
-=
-∫
-dx
-x
-f
-F
-F
-
-Note that we can start from any place we know the value of – now that we know F(2), we can
-use that:
-( )
-( )
-( )
-5.5
-5.
-=
-−
-=
-+
-=
-∫
-dx
-x
-f
-F
-F
-
-( )
-( )
-( )
-5.4
-5.5
-=
-−
-=
-+
-=
-∫
-dx
-x
-f
-F
-F
-
-
-
-Example 6
-F ‘(t) = f(t) is shown below.  Where does F(t) have maximum and minimum values on the
-interval [0, 4]?
-
-
-Since ( )
-( )
-( )
-∫
-+
-=
-b
-a
-dt
-t
-f
-a
-F
-b
-F
-, we know that F is increasing as long as the area accumulating
-under F ’ = f is positive (until t = 3), and then decreases when the curve dips below the x-axis so
-that negative area starts accumulating.  The area between t = 3 and t = 4 is much smaller than
-the positive area that accumulates between 0 and 3, so we know that F(4) must be larger than
-F(0).  The maximum value is when t = 3; the minimum value is when t = 0.
-
-Note that this is a different way to look at a problem we already knew how to solve – in Chapter
-2, we would have found critical points of F, where f = 0 – there’s only one, when t = 3.  f = F’
-goes from positive to negative there, so F has a local max at that point.  It’s the only critical
-point, so it must be a global max.  Then we would look at the values of F at the endpoints to find
-which was the global min.
-
-We can also attempt to sketch a function based on the graph of the derivative.
-
-Example 7
-The graph to the right shows f'(x) - the rate of change of f(x).
-Use it sketch a graph of f(x) that satisfies f(0) = 0
-
-Recall from the last chapter the relationships between the
-function graph and the derivative graph:
-
-
-In the graph shown, we can see the derivative is positive on the interval (0, 1) and (3, ∞), so the
-graph of f should be increasing on those intervals.  Likewise, f should be decreasing on the
-interval (1,3).
-f(x)
-increasing Decreasing Concave up
-Concave down
-f '(x)
-+
--
-Increasing
-decreasing
-f ''(x)
-
-
-+
--
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-In the graph, f' is decreasing on the interval (0, 2), so f should be concave down on that interval.
-Likewise, f should be concave up on the interval (2, ∞).
-
-The derivative itself is not enough information to know where the function f starts, since there
-are a family of antiderivatives, but in this case we are given a specific point to start at.
-
-To start the sketch, we might note first the shapes we need
-
-
-then sketch the basic shapes.
-
-
-Now we can attempt to sketch the graph, starting at the point (0, 0).  Notice we are very roughly
-sketching this, as we don't have much information to work with.  We can tell, though, from the
-graph that the area from x = 0 to x = 1 is about the same as the area from x = 1 to x = 3, so we
-would expect the net area from x = 0 to x = 3 to be close to 0.
-
-
-It turns out this graph isn't horribly bad.  Smoothing it out would give a graph closer to the
-actual antiderivative graph, shown below.
-
-
-
-increasing
-conc down
-decreasing
-conc down
-decreasing
-conc up
-increasing
-conc up
-increasing
-conc up
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Derivative of the Integral
-There is another important connection between the integral and derivative.
-
-
-The Fundamental Theorem of Calculus (part 2):
-
-
-If
-∫
-=
-x
-a
-dt
-t
-f
-x
-A
-)
-(
-)
-(
-, then
-)
-(
-)
-(
-)
-(
-x
-f
-dt
-t
-f
-dx
-d
-x
-A
-x
-a
-=
-=
-′
-∫
-
-
-
-The derivative of the accumulation function is the original function.
-
-
-
-Example 8
-Let
-∫
-=
-x
-dt
-t
-f
-x
-F
-)
-(
-)
-(
-, where f is graphed below.  Estimate
-)3
-(
-F′
-.
-
-
-The function F measures the area from t = 0 to some t = x.  To estimate
-)3
-(
-F′
-, we want to
-estimate how much the area is increasing when t = 3.  Since the value of the function f  is 0 at t
-= 3, the area will not be increasing or decreasing, so we can estimate
-)3
-(
-=
-′
-F
-
-
-Directly using the fundamental theorem of calculus part 2,
-
-)
-(
-)
-(
-)
-(
-x
-f
-dt
-t
-f
-dx
-d
-x
-F
-x
-=
-=
-′
-∫
-, so
-)3
-(
-)3
-(
-=
-=
-′
-f
-F
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-## 3.2 Exercises
-
-In problems 1 – 5, verify that  F(x)  is an antiderivative of the integrand  f(x)  and use Part 2 of the
-Fundamental Theorem to evaluate the definite integrals.
-
-1. ⌡⌠
-2x dx  ,  F(x) =  x2 + 5
-2.
-
-⌡⌠
-3x2 dx ,  F(x) =  x3 + 2
-3. ⌡⌠
-x2 dx  ,  F(x) =
-3 x3
-4. ⌡⌠
-(x2 + 4x – 3 )  dx ,  F(x) =
-3 x3 + 2x2 – 3x
-5. ⌡⌠
-x dx  ,  F(x) = ln( x  )
-
-6.  Given A(x) = ⌡⌠
-x
-2t  dt,  find A'(x)
-7.  Given A(x) = ⌡⌠
-x
-( 3 – t 2)  dt, find A'(x)
-
-8.  Let A(x) = ⌡⌠
-x
-f(t)  dt  for the function graphed here.  Evaluate
-A'(1), A'(2), A'(3).
-
-
-
-For problems 9-10, the graph provided shows g'(x).  Use it sketch a graph of g(x) that satisfies
-g(0) = 0.
-
-9.
-
-10.
-
-Chapter 3    The Integral
-Applied Calculus
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 3: Antiderivatives of Formulas
-
-Now we can put the ideas of areas and antiderivatives together to get a way of evaluating definite
-integrals that is exact and often easy.   To evaluate a definite integral  ⌡⌠
-a
-b
-f(t) dt  , we can find any
-antiderivative  F of  f and evaluate F(b) – F(a).  The problem of finding the exact value of a
-definite integral reduces to finding some (any) antiderivative  F  of the integrand and then
-evaluating  F(b) – F(a).  Even finding one antiderivative can be difficult, and  we will stick to
-functions that have easy antiderivatives.
-Building Blocks
-
-Antidifferentiation is going backwards through the derivative process.  So the easiest
-antiderivative rules are simply backwards versions of the easiest derivative rules.  Recall from
-Chapter 2:
-
-Derivative Rules:  Building Blocks
-
-
-In what follows, f and g are differentiable functions of x and k and n are constants.
-
-
-
-(a) Constant Multiple Rule:
-(
-)
-'
-kf
-kf
-dx
-d
-=
-
-
-
-
-(b) Sum (or Difference) Rule:
-(
-)
-'
-' g
-f
-g
-f
-dx
-d
-+
-=
-+
-(or
-(
-)
-'
-' g
-f
-g
-f
-dx
-d
-−
-=
-−
-)
-
-
-
-(c)  Power Rule:
-(
-)
-−
-=
-n
-n
-nx
-x
-dx
-d
-
-
-
-
-Special cases:
-( )
-=
-k
-dx
-d
-(because
-kx
-k =
-)
-
-
-
-
-( )
-=
-x
-dx
-d
-(because
-1x
-x =
-)
-
-
-
-(d)  Exponential Functions:
-( )
-x
-x
-e
-e
-dx
-d
-=
-
-
-
-
-
-(
-)
-x
-x
-a
-a
-a
-dx
-d
-⋅
-= ln
-
-
-
-
-
-(e) Natural Logarithm:
-(
-)
-x
-x
-dx
-d
-ln
-=
-
-
-
-Thinking about these basic rules was how we came up with the antiderivatives of 2x and
-x
-e
-before.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-The corresponding rules for antiderivatives are next – each of the antiderivative rules is simply
-rewriting the derivative rule.  All of these antiderivatives can be verified by differentiating.
-
-There is one surprise – the antiderivative of 1/x is actually not simply ln(x), it’s ln|x|.  This is a
-good thing – the antiderivative has a domain that matches the domain of 1/x, which is bigger
-than the domain of ln(x), so we don’t have to worry about whether our x’s are positive or
-negative.  But you must be careful to include those absolute values – otherwise, you could end
-up with domain problems.
-
-
-Antiderivative Rules:  Building Blocks
-
-
-In what follows, f and g are differentiable functions of x and k, n, and C are constants.
-
-
-
-
-(a) Constant Multiple Rule:
-( )
-∫
-∫
-=
-dx
-x
-f
-k
-dx
-x
-kf
-)
-(
-
-
-
-
-(b) Sum (or Difference) Rule:
-( )
-( )
-( )
-∫
-∫
-∫
-±
-=
-±
-dx
-x
-f
-dx
-x
-f
-dx
-x
-g
-x
-f
-)
-(
-
-
-
-
-(c)  Power Rule:
-C
-n
-x
-dx
-x
-n
-n
-+
-+
-=
-+
-∫
-, provided that n = −1
-
-
-
-Special case:
-∫
-+
-=
-C
-kx
-dx
-k
-(because
-kx
-k =
-)
-
-
-
-
-
-
-
-
-(d)  Exponential Functions:
-∫
-+
-=
-C
-e
-dx
-e
-x
-x
-
-
-
-
-
-C
-a
-a
-dx
-a
-x
-x
-+
-=
-∫
-ln
-
-
-
-
-
-(e) Natural Logarithm:
-∫
-∫
-+
-=
-=
-−
-C
-x
-dx
-x
-dx
-x
-ln
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Example 1
-Find the antiderivative of
-x
-x
-x
-+
-−
-
-
-(
-)
-C
-x
-x
-x
-dx
-x
-x
-x
-dx
-x
-x
-x
-+
-−
-+
-−
-=
-+
-−
-=
-
-
-
-
-
-
-+
-−
-−
-−
-∫
-∫
-/
-/
-/
-
-
-That’s a little hard to look at, so you might want to simplify a little:
-.
-/
-C
-x
-x
-x
-dx
-x
-x
-x
-+
-−
-−
-=
-
-
-
-
-
-
-+
-−
-−
-∫
-
-
-
-Example 2
-Find
-dx
-x
-ex
-∫
-
-
-
-
-
-
-−
-+
-
-
-C
-x
-x
-e
-dx
-x
-e
-x
-x
-+
-−
-+
-=
-
-
-
-
-
-
-−
-+
-∫
-ln
-
-
-
-
-Example 3
-Find F(x) so that
-( )
-xe
-x
-F
-=
-'
-and ( )
-0 =
-F
-.
-
-This time we are looking for a particular antiderivative; we need to find exactly the right
-constant.  Let’s start by finding the antiderivative:
-∫
-+
-=
-C
-e
-dx
-e
-x
-x
-
-So we know that ( )
-+
-=
-xe
-x
-F
-some constant; we just need to find which one.  For that, we’ll use
-the other piece of information (the initial condition):
-( )
-( )
-=
-=
-+
-=
-+
-=
-+
-=
-C
-C
-C
-e
-F
-C
-e
-x
-F
-x
-
-The particular constant we need is 9; ( )
-.9
-+
-=
-xe
-x
-F
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-The reason we are looking at antiderivatives right now is so we can evaluate definite integrals
-exactly.  Recall the Fundamental Theorem of Calculus:
-
-
-
-( )
-( )
-( )
-a
-F
-b
-F
-dx
-x
-F
-b
-a
-−
-=
-∫
-'
-
-
-If we can find an antiderivative for the integrand, we can use that to evaluate the definite integral.
-The evaluation  F(b) – F(a)  is represented by the symbol  ( )]
-b
-a
-x
-F
-or ( )|
-b
-a
-x
-F
-.
-
-
-Example 4
-Evaluate  ∫
-dx
-x
-in two ways:
-
-(i)
-By sketching the graph of  y = x  and geometrically finding the area.
-
-(ii)
-By finding an antiderivative of  F(x)  of  the integrand  and  evaluating  F(3)–F(1).
-
-
-
-
-(i)  The graph of  y = x is shown to the right, and the shaded region
-corresponding to the integral has area  4.
-
-
-
-
-
-(ii)  One antiderivative of  x  is
-)
-(
-x
-x
-F
-=
-, and
-
-( )
-( )
-.4
-]
-=
-−
-=
-
-
-
-
-−
-
-
-
-
-=
-=
-∫
-x
-dx
-x
-
-
-Note that this answer agrees with the answer we got geometrically.
-
-If we had used another antiderivative of  x,  say
-)
-(
-2 +
-=
-x
-x
-F
-,
-then
-( )
-( )
-.4
-]
-=
-−
-−
-+
-=
-
-
-
-
-+
-−
-
-
-
-
-+
-=
-
-
-
-
-
-
-+
-=
-∫
-x
-dx
-x
-
-Whatever constant you choose, it gets subtracted away during the evaluation; we might as well
-always choose the easiest one, where the constant = 0.
-
-
-Example 5
-Find the area between the graph of  y = 3x2  and the horizontal axis for  x  between  1  and  2.
-
-This is
-( ) ( )
-.7
-]
-=
-−
-=
-=
-∫
-x
-dx
-x
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-Example 6
-A robot has been programmed so that when it starts to move, its velocity after  t  seconds will be
-3t feet/second.
-
-(a)  How far will the robot travel during its first 4 seconds of movement?
-
-(b)  How far will the robot travel during its next  4  seconds of movement?
-
-(a) The distance during the first 4 seconds will be the area under
-the graph of velocity, from t = 0  to  t = 4.
-
-
-
-
-That area is the definite integral ∫
-dt
-t
-.  An antiderivative of
-3t   is
-3t  , so
-]
-=
-−
-=
-=
-∫
-t
-dt
-t
-feet.
-
-(b)
-]
-=
-−
-=
-−
-=
-=
-∫
-t
-dt
-t
-feet.
-
-
-Example 7
-Suppose that  t  minutes after putting 1000 bacteria on a Petri plate the rate of growth of the
-population is  6t  bacteria per minute.
-(a)  How many new bacteria are added to the population during the first 7 minutes?
-(b)  What is the total population after  7  minutes?
-
-(a)  The number of new bacteria is the area under the rate of
-growth graph, and one antiderivative of  6t  is  3t2 .
-
-
-
-So new bacteria = ⌡⌠
-6t dt    =  3t2 |
-= 3(7)2 – 3(0)2  = 147
-(b) The new population = (old population) + (new bacteria)
-= 1000 + 147 = 1147 bacteria.
-
-
-
-Example 8
-A company determines their marginal cost for production, in dollars per item, is
-)
-(
-+
-=
-x
-x
-MC
-when producing x thousand items.  Find the cost of increasing production
-from 4 thousand items to 5 thousand items.
-
-Remember that marginal cost is the rate of change of cost, and so the fundamental theorem tells
-us that
-)
-(
-)
-(
-)
-(
-)
-(
-a
-C
-b
-C
-dx
-x
-C
-dx
-x
-MC
-b
-a
-b
-a
-−
-=
-′
-= ∫
-∫
-.  In other words, the integral of marginal cost will
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-give us a net change in cost.  To find the cost of increasing production from 4 thousand items to
-5 thousand items, we need to integrate ∫
-)
-(
-dx
-x
-MC
-.
-
-We can write the marginal cost as
-)
-(
-/
-+
-=
-−
-x
-x
-MC
-.  We can then use the basic rules to find
-an antiderivative:
-x
-x
-x
-x
-x
-C
-/
-)
-(
-/
-+
-=
-+
-=
-.  Using this,
-Net change in cost =
-(
-)]
-(
-) (
-)
-.3
-≈
-⋅
-+
-−
-⋅
-+
-=
-+
-=
-
-
-
-
-
-
-+
-∫
-x
-x
-dx
-x
-
-It will cost 3.889 thousand dollars to increase production from 4 thousand items to 5 thousand
-items.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-## 3.3 Exercises
-
-For problems  1-10, find the indicated antiderivative.
-
-1. (
-)
-∫
-+
-−
-dx
-x
-x
-
-2. (
-)dx
-x
-x
-∫
-−
-−
-.1
-5.2
-
-3. ∫
-dy
-3.
-
-4. ∫
-dw
-π
-
-5.∫
-dP
-e P
-
-6.
-dx
-x
-e
-x
-x
-∫
-
-
-
-
-
-
-−
-+
-
-7. ∫
-dx
-x
-
-8.∫
-dx
-x 2
-
-9. (
-)(
-)
-∫
-+
-−
-dx
-x
-x
-
-10. ∫
-−
-dt
-t
-t
-t
-
-
-For problems 11-18, find an antiderivative of the integrand and use the Fundamental Theorem to
-evaluate the definite integral.
-11. ⌡⌠
-3x2 dx
-12.
-
-⌡⌠
-–1
-x2 dx
-13. ⌡⌠
-(x2 + 4x – 3 )  dx
-14.
-
-⌡⌠
-e
-x dx
-
-15. ∫
-dx
-x
-
-16. ∫
-dx
-x
-
-17. ∫
-1 dx
-x
-
-18. ∫
-1000
-1 dx
-x
-
-
-
-
-For problems 19 - 21 find the area shown in the figure.
-
-19.
-20.
-21.
-
-Chapter 3    The Integral
-Applied Calculus
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 4: Substitution
-
-We don’t have many integration rules.  For quite a few of the problems we see, the rules won’t
-directly apply; we’ll have to do some algebraic manipulation first.  In practice, it is much harder
-to write down the antiderivative of a function than it is to find a derivative.  (In fact, it’s really
-easy to write a function that doesn’t have any antiderivative you can find with algebra.)
-
-The Substitution Method is one way of algebraically manipulating an integrand so that the rules
-apply.  This is a way to unwind the Chain Rule for derivatives.  When you find the derivative of
-a function using the Chain Rule, you end up with a product of something like the original
-function TIMES a derivative.  We can reverse this to write an integral:
-
-(
-)
-(
-)
-dx
-x
-g
-x
-g
-f
-x
-g
-f
-dx
-d
-)
-(
-)
-(
-)
-(
-′
-′
-=
-,      so    (
-)
-(
-)
-∫
-′
-′
-=
-dx
-x
-g
-x
-g
-f
-x
-g
-f
-)
-(
-)
-(
-)
-(
-
-
-With substitution, we will substitute
-)
-(x
-g
-u =
-.   This means
-)
-(x
-g
-dx
-du
-′
-=
-, so
-dx
-x
-g
-du
-)
-(′
-=
-.
-Making this substitutions,
-(
-)
-∫
-′
-′
-dx
-x
-g
-x
-g
-f
-)
-(
-)
-(
-becomes
-( )
-∫
-′
-du
-u
-f
-, which will probably be easier
-to ingegrate.
-
-Try Substitution when you see a product in your integral, especially if you recognize one factor
-as the derivative of some part of the other factor.
-
-The Substitution Method for Antiderivatives:
-
-The goal is to turn
-(
-)
-∫
-dx
-x
-g
-f
-)
-(
-into
-( )
-∫
-du
-u
-f
-, where f(u) is much less messy than f(g(x)).
-
-1. Let u be some part of the integrand.  A good first choice is “one step inside the messiest
-bit.”
-
-2.  Compute
-dx
-dx
-du
-du =
-
-
-3. Translate all your x’s into u’s everywhere in the integral, including the dx.  When you’re
-done, you should have a new integral that is entirely in u.  If you have any x’s left, then
-that’s an indication that the substitution didn’t work or isn't complete; you may need to
-go back to step 1 and try a different choice for u.
-
-4. Integrate the new u-integral, if possible.  If you still can’t integrate it, go back to step 1
-and try a different choice for u.
-
-5. Finally, substitute back x’s for u’s everywhere in your answer.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-Example 1
-Evaluate ∫
-−
-dx
-x
-x
-.
-
-This integrand is more complicated than anything in our list of basic integral formulas, so we’ll
-have to try something else.  The only tool we have is substitution, so let’s try that!
-
-1. Let u be some part of the integrand.  A good first choice is “one step inside the messiest bit.”
-In this case, the square root in the denominator is the messiest part, so let’s let u be one step
-inside:
-Let
-x
-u
-−
-=
-
-2.  Compute
-dx
-dx
-du
-du =
-
-xdx
-du
-−
-=
-
-There is x dx in the integrand, so that’s a good sign; that will be −½du.
-
-3. Translate all your x’s into u’s everywhere in the integral, including the dx.
-
-(
-)
-∫
-∫
-∫
-∫
-∫
-−
-−
-=
-−
-=
-
-
-
-
-
-−
-=
-−
-=
-−
-du
-u
-du
-u
-du
-u
-xdx
-x
-dx
-x
-x
-/
-
-
-Alternatively, we could have solved
-xdx
-du
-−
-=
-for dx and substituted that and simplified:
-x
-du
-dx
-−
-=
-, so
-
-∫
-∫
-∫
-∫
-∫
-−
-−
-=
-−
-=
-
-
-
-
-
-−
-=
-
-
-
-
-
-
-−
-−
-=
-−
-du
-u
-du
-u
-du
-u
-x
-du
-x
-x
-dx
-x
-x
-/
-
-
-4. Integrate the new u-integral, if possible.
-C
-u
-C
-u
-du
-u
-+
-−
-=
-+
-−
-=
-−∫
-−
-/
-/
-/
-/
-
-
-5. Finally, undo our
-x
-u
-−
-=
-substitution, putting back x’s for u’s everywhere in your answer.
-C
-x
-C
-u
-+
-−
-−
-=
-+
-−
-/
-.  So we have found
-
-C
-x
-dx
-x
-x
-+
-−
-−
-=
-−
-∫
-.
-
-How would we check this?  By differentiating:
-(
-)
-(
-)
-(
-)
-(
-)
-(
-)
-(
-)
-/
-/
-/
-x
-x
-x
-x
-x
-x
-C
-x
-dx
-d
-C
-x
-dx
-d
-−
-=
-−
-=
-−
-−
-−
-=
-+
-−
-−
-=
-+
-−
-−
-−
-−
-.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-Example 2
-Evaluate (
-)
-∫
-+
-x
-x
-e
-dx
-e
-
-
-This integral is not in our list of building blocks.  But notice that the derivative of
-+
-x
-e
-(that
-we see in the denominator) is just
-x
-e (which I see in the numerator), so substitution will be a
-good choice for this.
-
-Let
-+
-=
-xe
-u
-.  Then
-dx
-e
-du
-x
-=
-, and this integral becomes ∫
-∫
-−
-=
-du
-u
-u
-du
-.
-Luckily, that is on our list of building block formulas:  ∫
-+
-−
-=
-+
-−
-=
-−
-−
-.
-C
-u
-C
-u
-du
-u
-
-Finally, translating back:
-(
-)
-(
-)
-C
-e
-e
-dx
-e
-x
-x
-x
-+
-+
-−
-=
-+
-∫
-
-
-
-Example 3
-Evaluate  a) ∫
-+
-dx
-x
-x
-
-b) ∫
-+
-dx
-x
-x
-
-
-a) This is not a basic integral, but the composition is less obvious.  Here, we can treat the
-denominator as the inside of the 1/x function.
-
-Let
-3 +
-= x
-u
-.  Then
-dx
-x
-du
-=
-.  Solving for dx,
-3x
-du
-dx =
-.   Substituting,
-∫
-∫
-∫
-∫
-=
-=
-=
-+
-du
-u
-du
-u
-x
-du
-u
-x
-dx
-x
-x
-.
-
-Using our basic formulas,
-∫
-=
-u
-du
-u
-ln
-
-
-Undoing the substitution,
-C
-x
-dx
-x
-x
-+
-+
-=
-+
-∫
-ln
-
-
-b)  It is tempting to start this problem the same way we did the last, but if we try it will not
-work, since the numerator of this fraction is not the derivative of the denominator.  Instead, we
-need to try a different approach.  For this problem, we can use some basic algebra.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-(
-)
-∫
-∫
-∫
-−
-+
-=
-
-
-
-
-
-
-+
-=
-+
-dx
-x
-x
-dx
-x
-x
-x
-dx
-x
-x
-
-
-We can integrate this using our basic rules, without needing substitution.
-(
-)
-C
-x
-x
-x
-x
-dx
-x
-x
-+
-−
-=
-−
-+
-=
-+
-−
-−
-∫
-
-
-Substitution and Definite Integrals
-
-When you use substitution to help evaluate a definite integrals, you have a choice for how to
-handle the limits of integration.  You can do either of these, whichever seems better to you.  The
-important thing to remember is – the original limits of integration were values of the original
-variable (say, x), not values of the new variable (say, u).
-(a)
-You can solve the antiderivative as a side problem, translating back to x’s, and then use
-the antiderivative with the original limits of integration.  Or
-(b)
-You can substitute for the limits of integration at the same time as you’re substituting for
-everything inside the integral, and then skip the “translate back into x” step.  If the
-original integral had endpoints  x =a  and
-x =b,  and we make the substitution  u = g(x ) and  du = g'(x )dx,  then the new integral
-will have endpoints
-u= g(a) and  u=g(b)  and
-
-
-⌡⌠
-x=a
-x=b
-(original integrand) dx     becomes
-u=g(b)
-(new integrand) du
-⌡⌠
-u=g(a)
-.
-
-Method (a) seems more straightforward for most students.  But it can involve some messy
-algebra.  Method (b) is often neater and usually involves fewer steps.
-
-
-Example 4
-Evaluate ⌡⌠
-(3x –1)4 dx
-
-We’ll need substitution to find an antiderivative, so we’ll need to handle the limits of
-integration carefully.  Let's solve this example both ways.
-
-(a) Doing the antiderivative as a side problem:
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Step One – find the antiderivative, using substitution:
-
-(
-)
-∫
-−
-dx
-x
-
-
-Let
-3 −
-= x
-u
-.  Then
-dx
-du
-=
-and (
-)
-C
-u
-du
-u
-dx
-x
-+
-=
-
-
-
-
-
-
-=
-−
-∫
-∫
-
-
-Translating back to x: (
-)
-(
-)
-C
-x
-dx
-x
-+
-−
-=
-−
-∫
-
-Step Two – evaluate the definite integral:
-
-(
-)
-(
-)
-( )
-(
-)
-( )
-(
-)
-=
-−
-−
-=
-−
-−
-−
-=
-
-
-
-−
-=
-−
-∫
-x
-dx
-x
-.
-
-(b)  Substituting for the limits of integration:
-(
-)
-∫
-−
-dx
-x
-
-Let
-3 −
-= x
-u
-.  Then
-dx
-du
-=
-, and (substituting for the limits of integration) when x = 0,
-u = -1, when x = 1, u = 2.
-(
-)
-( )
-(
-)
-]
-=
-−
-−
-=
-−
-−
-=
-=
-
-
-
-
-
-
-=
-−
-=
-−
-=
-=
-−
-=
-=
-=
-∫
-∫
-u
-u
-u
-u
-x
-x
-u
-du
-u
-dx
-x
-.
-
-
-Example 5
-Evaluate (
-)
-∫
-ln
-dx
-x
-x
-
-
-I can see the derivative of
-x
-ln
-in the integrand, so I can tell that substitution is a good choice.
-Let
-x
-u
-ln
-=
-.  Then
-dx
-x
-du
-=
-.  When
-=
-x
-,
-ln
-=
-u
-.  When
-=
-x
-,
-ln
-=
-u
-.  So the new
-definite integral is
-(
-)
-(
-)
-(
-)
-(
-)
-.
-.
-ln
-ln
-ln
-ln
-ln
-ln
-ln
-≅
-−
-=
-
-
-=
-=
-=
-=
-=
-=
-=
-=
-∫
-∫
-u
-u
-u
-u
-x
-x
-u
-du
-u
-dx
-x
-x
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-## 3.4 Exercises
-
-For problems  1-8, find the indicated antiderivative.
-
-1. (
-)
-∫
-+
-dx
-x
-
-2. ∫
-dx
-e
-x
-
-3. (
-)
-∫
-dt
-t
-0003
-.1
-
-4. ∫
-dx
-x
-e
-x
-/
-
-5. ∫
-+
-dw
-w
-
-6.
-dx
-x
-x
-∫
-−1
-
-7. ∫
-x
-x
-dx
-ln
-
-8. ∫
-+
-−
-−
-dx
-x
-x
-x
-
-
-
-For problems 9-12, find an antiderivative of the integrand and use the Fundamental Theorem to
-evaluate the definite integral.
-
-9. ∫
-−
-+
-dx
-x
-x
-
-10. ∫
-2 dx
-e x
-
-11. ⌡⌠
-(x – 2)3 dx
-12.
-
-⌡⌠
-x
-1 – x2  dx
-
-Chapter 3    The Integral
-Applied Calculus
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 5: Additional Integration Techniques
-Integration By Parts
-Integration by parts is an integration method which enables us to find antiderivatives of some
-new functions such as
-)
-ln(x  as well as antiderivatives of products of functions such as
-)
-ln(
-x
-x
-and
-x
-xe .
-
-If the function we're trying to integrate can be written as a product of two functions, u, and dv,
-then integration by parts lets us trade out a complicated integral for hopefully simpler one.
-
-
-
-
-INTEGRATION BY PARTS FORMULA
-
-
-∫
-∫
-−
-=
-vdu
-uv
-udv
-
-
-
-For definite integrals,
-
-] ∫
-∫
-−
-=
-b
-a
-b
-a
-b
-a
-vdu
-uv
-udv
-
-
-
-Example 1
-Integrate ∫
-dx
-xex
-
-
-To use the By Parts method, we break apart the product into two parts:
-x
-u =
-and
-dx
-e
-dv
-x
-=
-
-
-We now calculate du, the derivative of u, and v, the integral of dv.
-dx
-dx
-x
-dx
-d
-du
-=
-
-
-
-
-
-
-=
-and
-x
-x
-e
-dx
-e
-v
-=
-= ∫
-.
-
-Using the By Parts formula,
-∫
-∫
-∫
-−
-=
-−
-=
-dx
-e
-xe
-vdu
-uv
-dx
-xe
-x
-x
-x
-
-
-Notice the remaining integral is simpler that the original, and one we can easily evaluate.
-C
-e
-xe
-dx
-e
-xe
-dx
-xe
-x
-x
-x
-x
-x
-+
-−
-=
-−
-=
-∫
-∫
-
-
-We could have chosen either x or
-xe  as our u in the last example, but had we chosen
-xe , the
-second integral would have become messier, rather than simpler.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-
-
-
-
-RULE OF THUMB
-
-
-When selecting the u for By Parts, select a logarithmic expression if one
-is present.  If not, select an algebraic expression (like x or dx).
-
-
-Example 2
-Integrate ∫
-2 ln
-dx
-x
-x
-
-
-Since this contains a logarithmic expression, we'll use it for our u.
-x
-u
-ln
-=
-and
-dx
-x
-dv
-=
-
-
-We now calculate du and v.
-dx
-x
-du
-=
-and
-x
-x
-dx
-x
-v
-=
-=
-= ∫
-.
-
-Using the By Parts formula,
-]
-∫
-∫
-−
-=
-ln
-ln
-dx
-x
-x
-x
-x
-dx
-x
-x
-
-
-We can simplify the expression in the integral on the right:
-]
-∫
-∫
-−
-=
-ln
-ln
-xdx
-x
-x
-dx
-x
-x
-
-
-The remaining integral is a basic one we can now evaluate.
-]
-]
-ln
-ln
-x
-x
-x
-dx
-x
-x
-−
-=
-∫
-
-
-Finally, we can evaluate the expressions
-(
-) (
-)
-[
-] [
-]
-( )
-.
-ln
-)
-(
-)
-(
-ln
-ln
-ln
-≈
-−
-=
-⋅
-−
-⋅
-−
-⋅
-−
-⋅
-=
-∫
-dx
-x
-x
-
-
-Integration Using Tables of Integrals
-There are many techniques of integration we will not be studying.  Many of them lead to general
-formulas which can be compiled into a Table of Integrals - a type of cheat-sheet for integration.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-For example, here are two entries you might find in a table of integrals:
-
-
-
-
-TABLE OF INTEGRAL EXAMPLES
-
-
-∫
-+
-+
-−
-=
-−
-C
-a
-x
-a
-x
-a
-a
-x
-ln
-
-
-
-∫
-+
-+
-+
-=
-+
-C
-a
-x
-x
-a
-x
-ln
-
-
-
-
-
-Example 3
-Integrate
-dx
-x∫
-−9
-
-
-This integral looks very similar to the form of the first integral in the examples table.  By
-employing the rule that allows us to pull out constants, and by rewriting 9 as 32, we can better
-see the match.
-∫
-∫
-−
-=
-−
-dx
-x
-dx
-x
-
-
-Now we simply use the formula from the table, with a = 3.
-
-C
-x
-x
-x
-x
-dx
-x
-dx
-x
-+
-+
-−
-=
-
-
-
-
-
-
-+
-−
-⋅
-=
-−
-=
-−
-∫
-∫
-ln
-ln
-
-
-Sometimes we have to combine the table with other techniques we've learned, like substitution.
-Example 4
-Integrate
-dx
-x
-x
-∫
-+16
-
-
-This integral looks somewhat like the second integral in the example table, but the power of x is
-incorrect, and there is an x2 in the numerator which does not match.  Trying to utilize this rule,
-we can try to rewrite the denominator to look like (something)2.  Luckily,
-( )
-x
-x =
-
-dx
-x
-x
-∫
-+16
-=
-( )
-dx
-x
-x
-∫
-+16
-
-
-Now we can use substitution, letting
-3x
-u =
-, so
-dx
-x
-du
-=
-.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-
-
-Making the subsitution,
-( )
-du
-u
-du
-u
-dx
-x
-x
-∫
-∫
-∫
-+
-=
-+
-=
-+
-
-
-Now we can use the table entry.
-C
-u
-u
-du
-u
-+
-+
-+
-=
-+
-∫
-ln
-
-
-Undoing the substitution,
-C
-x
-x
-dx
-x
-x
-+
-+
-+
-=
-+
-∫
-ln
-
-
-
-## 3.5 Exericses
-
-In problems  1–4,  a function  u  or  dv  is given.  Find the piece  u  or  dv  which is not given,
-calculate  du  and  v, and apply the Integration by Parts Formula.
-
-1. ⌡⌠   12x.ln(x) dx
-u = ln(x)
-2.
-
-⌡⌠  x.e–x  dx
-u = x
-
-3. ⌡⌠   x4 ln(x) dx
-dv = x4 dx
-4.
-
-⌡⌠  x.(5x + 1)19 dx
-u = x
-
-In problems 5 - 10 evaluate the integrals
-
-5. ⌡⌠
-x
-e3x    dx
-
-6. ⌡⌠
-10x.e3x dx
-
-7.
-
-⌡⌠
-ln(2x + 5)  dx
-
-
-8. ⌡⌠   x3 ln(5x) dx
-
-9.
-
-⌡⌠  x ln(x + 1) dx
-
-10. ⌡⌠
-ln(x)
-x2    dx
-
-For problems 11 - 14 integrate each function.
-
-11. ⌡⌠
-4 – x2
-12. ⌡⌠
-9 – x2
-13. ⌡⌠
-4 + x2
-14.
-
-⌡⌠
-9 + x2
-
-Chapter 3    The Integral
-Applied Calculus
-This chapter is (c) 2013.  It was remixed by David Lippman from Shana Calaway's remix of Contemporary Calculus
-by Dale Hoffman.  It is licensed under the Creative Commons Attribution license.
-Section 6: Area, Volume, and Average Value
-Area
-
-We have already used integrals to find the area between the graph of a function and the
-horizontal axis.  Integrals can also be used to find the area between two graphs.
-
-If  f(x) ≥ g(x) for all  x  in  [a,b], then we can approximate the area between  f  and  g  by partitioning
-the interval  [a,b]  and forming a Riemann sum, as shown in the picture.  The height of each
-rectangle is  top – bottom,  f(ci) – g(ci)  so the area of the ith rectangle is
-(height).(base) = (f(ci) – g(ci)).∆x .  Adding up this rectangles gives an approximation of the total
-area as
-( )
-( )
-(
-)
-∑
-=
-∆
-−
-n
-i
-i
-i
-x
-c
-g
-c
-f
-, a Riemann sum.
-
-
-
-The limit of this Riemann sum, as the number of rectangles gets larger and their width gets
-smaller, is the definite integral
-( )
-( )
-(
-)
-∫
-−
-b
-a
-dx
-x
-g
-x
-f
-.
-
-
-The area between two curves f(x) and g(x), where f(x) ≥ g(x), between x = a and x = b
-is
-
-
-( )
-( )
-(
-)
-∫
-−
-b
-a
-dx
-x
-g
-x
-f
-
-
-The integrand is “top – bottom.”  Make a graph to be sure which curve is which.
-
-
-Example 1
-Find the area bounded between the graphs of  f(x) = x  and  g(x) = 3  for  1 ≤ x ≤ 4.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Always start with a graph so you can see which graph is the top and which is the bottom.  In
-this example, the two curves cross, and they change positions; we’ll need to split the area into
-two pieces.  Geometrically, we can see that the area is 2 + ½ = 2.5.
-
-Writing the area as a sum of definite integrals, we get:
-Area =
-(
-)
-(
-)
-∫
-∫
-−
-+
-−
-dx
-x
-dx
-x
-
-These integrals are easy to evaluate using antiderivatives:
-(
-)
-.2
-=
-
-
-
-
-
-
-
-
-
-
-
-
-−
-−
-
-
-
-
-
-
-−
-=
-
-
-
-
-
-
-−
-=
-−
-∫
-x
-x
-dx
-x
-
-
-
-(
-)
-.
-=
-
-
-
-
-
-
-
-
-
-
-
-
-−
-−
-
-
-
-
-
-
-−
-=
-
-
-
-
-
-
-−
-=
-−
-∫
-x
-x
-dx
-x
-
-
-
-
-The two integrals also tell us that the total area between  f  and  g  is  2.5  square units, which
-we already knew.
-
-Note that the single integral
-(
-)
-5.1
-=
-−
-∫
-dx
-x
-is not the area we want in the last example.  The
-value of the integral is 1.5, and the value of the area is 2.5.  That’s because for the triangle on
-the right, the graph of y = x is above the graph of y = 3, so the integrand 3 – x is negative; in the
-definite integral, the area of that triangle comes in with a negative sign.
-
-In this example, it was easy to see exactly where the two curves crossed so we could break the
-region into the two pieces to figure separately.  In other examples, you might need to solve an
-equation to find where the curves cross.
-
-Example 2
-Two objects start from the same location and travel along the
-same path with velocities
-( )
-+
-= t
-t
-v A
-and
-( )
-+
-−
-=
-t
-t
-t
-vB
-
-meters per second.  How far ahead is  A  after 3 seconds?
-
-Since
-( )
-( )t
-v
-t
-v
-B
-A
-≥
-, the "area" between the graphs of
-( )t
-vA
-
-and
-( )t
-vB
-represents the distance between the objects.
-
-After 3 seconds, the distance apart
-( )
-( )
-(
-)
-(
-) (
-)
-(
-)
-(
-)
-∫
-∫
-∫
-−
-=
-+
-−
-−
-+
-=
-−
-=
-dt
-t
-t
-dt
-t
-t
-t
-dt
-t
-v
-t
-v
-B
-A
-
-( )
-5.
-=
-−
-
-
-
-
-
-
-−
-⋅
-=
-
-
-
-
-
-
-−
-=
-t
-t
-meters.
-
-Chapter 3    The Integral
-Applied Calculus
-
-
-Volume
-Just as we can partition an interval and imagine approximating an area with rectangles to find a
-formula for the area between curves, we can partition an interval and imagine approximating a
-volume with simple shapes to find a formula for the volume of a solid.  While this approach
-works for a variety of shapes, our focus will be on shapes formed by revolving a curve around
-the horizontal axis.
-
-We start with an area, the region below a function on the interval a ≤ x ≤ b.  We are going to take
-that region, and rotate it around the x axis, creating the solid shape shown.
-
-
-To find the volume of this solid, we can start by partitioning the
-interval [0,1] and approximating the area with rectangles.  As before,
-the width of each rectangle would be ∆x and the height f(ci).
-
-If we took just one of these rectangles and rotated it about the
-horizontal axis, it would form a cylindrical shape.  The radius of that
-cylinder would be f(ci), so the volume would be
-(
-)
-x
-c
-f
-h
-r
-V
-i
-∆
-=
-=
-)
-(
-π
-π
-
-
-The volume of the whole solid could be approximated by rotating each
-of the rectangles about the x axis.  Adding up the volume of each of the
-little cylindrical discs gives an approximation of the total volume as
-( )
-(
-)
-∑
-=
-∆
-n
-i
-i
-x
-c
-f
-π
-, a Riemann sum.
-
-The limit of this sum as the width of the rectanges becomes small is the
-definite integral
-( )
-(
-) dx
-x
-f
-b
-a∫
-π
-.
-
-
-The volume of the solid obtained by rotating about the x-axis the area bounded by the
-curve f(x), the x-axis, x = a, and x = b is
-
-
-( )
-(
-)
-∫
-b
-a
-dx
-x
-f
-π
-
-
-
-
-
-a
-b
-Rotate about
-the axis
-a
-b
-a
-b
+> Content sourced from [OpenStax Calculus Volume 1](https://openstax.org/books/calculus-volume-1/pages/1-introduction) by Gilbert Strang & Edwin "Jed" Herman — CC BY-NC-SA 4.0
+
+## 5.4 Integration Formulas and the Net Change Theorem
+
+### Learning Objectives
+
+- 5.4.1 Apply the basic integration formulas.
+- 5.4.2 Explain the significance of the net change theorem.
+- 5.4.3 Use the net change theorem to solve applied problems.
+- 5.4.4 Apply the integrals of odd and even functions.
+
+In this section, we use some basic integration formulas studied previously to solve some key applied problems. It is important to note that these formulas are presented in terms of *indefinite* integrals. Although definite and indefinite integrals are closely related, there are some key differences to keep in mind. A definite integral is either a number (when the limits of integration are constants) or a single function (when one or both of the limits of integration are variables). An indefinite integral represents a family of functions, all of which differ by a constant. As you become more familiar with integration, you will get a feel for when to use definite integrals and when to use indefinite integrals. You will naturally select the correct approach for a given problem without thinking too much about it. However, until these concepts are cemented in your mind, think carefully about whether you need a definite integral or an indefinite integral and make sure you are using the proper notation based on your choice.
+
+### Basic Integration Formulas
+
+Recall the integration formulas given in the table in Antiderivatives and the rule on properties of definite integrals. Let’s look at a few examples of how to apply these rules.
+
+### Example 5.23
+
+#### Integrating a Function Using the Power Rule
+
+Use the power rule to integrate the function ${\int_{1}^{4}{\sqrt{t}\left( {1 + t} \right)dt}}.$
+
+#### Solution
+
+The first step is to rewrite the function and simplify it so we can apply the power rule:
+
+$$
+\begin{array}{cl}
+{\int_{1}^{4}{\sqrt{t}(1 + t)dt}} & {= {\int_{1}^{4}{t^{1\text{/}2}(1 + t)dt}}} \\
+ & \\
+ & {= {\int_{1}^{4}{\left( {t^{1\text{/}2} + t^{3\text{/}2}} \right)dt}}.}
+\end{array}
+$$
+
+Now apply the power rule:
+
+$$
+\begin{array}{cl}
+{\int_{1}^{4}{\left( {t^{1\text{/}2} + t^{3\text{/}2}} \right)dt}} & {= \left. \left( {\frac{2}{3}t^{3\text{/}2} + \frac{2}{5}t^{5\text{/}2}} \right) \right|_{1}^{4}} \\
+ & {= \left\lbrack {\frac{2}{3}{(4)}^{3\text{/}2} + \frac{2}{5}{(4)}^{5\text{/}2}} \right\rbrack - \left\lbrack {\frac{2}{3}{(1)}^{3\text{/}2} + \frac{2}{5}{(1)}^{5\text{/}2}} \right\rbrack} \\
+ & {= \frac{256}{15}.}
+\end{array}
+$$
+
+### Checkpoint 5.21
+
+Find the definite integral of $f(x) = x^{2} - 3x$ over the interval $\left\lbrack {1,3} \right\rbrack.$
+
+### The Net Change Theorem
+
+The net change theorem considers the integral of a *rate of change*. It says that when a quantity changes, the new value equals the initial value plus the integral of the rate of change of that quantity. The formula can be expressed in two ways. The second is more familiar; it is simply the definite integral.
+
+### Theorem 5.6
+
+#### Net Change Theorem
+
+The new value of a changing quantity equals the initial value plus the integral of the rate of change:
+
+$$
+\begin{matrix}
+ \\
+ \\
+{F(b) = F(a) + {\int_{a}^{b}{F'(x)dx}}} \\
+\text{or} \\
+{{\int_{a}^{b}{F'(x)dx = F(b) - F(a)}}.}
+\end{matrix}
+$$
+
+(5.18)
+
+Subtracting $F(a)$ from both sides of the first equation yields the second equation. Since they are equivalent formulas, which one we use depends on the application.
+
+The significance of the net change theorem lies in the results. Net change can be applied to area, distance, and volume, to name only a few applications. Net change accounts for negative quantities automatically without having to write more than one integral. To illustrate, let’s apply the net change theorem to a velocity function in which the result is displacement.
+
+We looked at a simple example of this in The Definite Integral. Suppose a car is moving due north (the positive direction) at 40 mph between 2 p.m. and 4 p.m., then the car moves south at 30 mph between 4 p.m. and 5 p.m. We can graph this motion as shown in Figure 5.32.
+
+*Figure 5.32 The graph shows speed versus time for the given motion of a car.*
+
+Just as we did before, we can use definite integrals to calculate the net displacement as well as the total distance traveled. The net displacement is given by
+
+$$
+\begin{array}{cl}
+{{\int_{2}^{5}v}(t)dt} & {= {\int_{2}^{4}4}0dt + \int_{4}^{5}-30dt} \\
+ & {= 80 - 30} \\
+ & {= 50.}
+\end{array}
+$$
+
+Thus, at 5 p.m. the car is 50 mi north of its starting position. The total distance traveled is given by
+
+$$
+\begin{array}{cl}
+ & \\
+ & \\
+{\int_{2}^{5}\left| {v(t)} \right|dt} & {= {\int_{2}^{4}4}0dt + \int_{4}^{5}30dt} \\
+ & {= 80 + 30} \\
+ & {= 110.}
+\end{array}
+$$
+
+Therefore, between 2 p.m. and 5 p.m., the car traveled a total of 110 mi.
+
+To summarize, net displacement may include both positive and negative values. In other words, the velocity function accounts for both forward distance and backward distance. To find net displacement, integrate the velocity function over the interval. Total distance traveled, on the other hand, is always positive. To find the total distance traveled by an object, regardless of direction, we need to integrate the absolute value of the velocity function.
+
+### Example 5.24
+
+#### Finding Net Displacement
+
+Given a velocity function $v(t) = 3t - 5$ (in meters per second) for a particle in motion from time $t = 0$ to time $t = 3,$ find the net displacement of the particle.
+
+#### Solution
+
+Applying the net change theorem, we have
+
+$$
+\begin{array}{ll}
+{\int_{0}^{3}{\left( {3t - 5} \right)dt}} & {= \frac{3t^{2}}{2} - 5t|_{0}^{3}} \\
+ & \\
+ & {= \left\lbrack {\frac{3(3)^{2}}{2} - 5(3)} \right\rbrack - 0} \\
+ & {= \frac{27}{2} - 15} \\
+ & {= \frac{27}{2} - \frac{30}{2}} \\
+ & {= - \frac{3}{2}.}
+\end{array}
+$$
+
+The net displacement is $- \frac{3}{2}$ m (Figure 5.33).
+
+*Figure 5.33 The graph shows velocity versus time for a particle moving with a linear velocity function.*
+
+### Example 5.25
+
+#### Finding the Total Distance Traveled
+
+Use Example 5.24 to find the total distance traveled by a particle according to the velocity function $v(t) = 3t - 5$ m/sec over a time interval $\left\lbrack {0,3} \right\rbrack.$
+
+#### Solution
+
+The total distance traveled includes both the positive and the negative values. Therefore, we must integrate the absolute value of the velocity function to find the total distance traveled.
+
+To continue with the example, use two integrals to find the total distance. First, find the *t*-intercept of the function, since that is where the division of the interval occurs. Set the equation equal to zero and solve for *t*. Thus,
+
+$$
+\begin{array}{cll}
+{3t - 5} & = & 0 \\
+{3t} & = & 5 \\
+t & = & {\frac{5}{3}.}
+\end{array}
+$$
+
+The two subintervals are $\left\lbrack {0,\frac{5}{3}} \right\rbrack$ and $\left\lbrack {\frac{5}{3},3} \right\rbrack.$ To find the total distance traveled, integrate the absolute value of the function. Since the function is negative over the interval $\left\lbrack {0,\frac{5}{3}} \right\rbrack,$ we have $\left| {v(t)} \right| = \text{-}v(t)$ over that interval. Over $\left\lbrack {\frac{5}{3},3} \right\rbrack,$ the function is positive, so $\left| {v(t)} \right| = v(t).$ Thus, we have
+
+$$
+\begin{array}{cl}
+ & \\
+ & \\
+{\int_{0}^{3}{\left| {v(t)} \right|dt}} & {= {\int_{0}^{5\text{/}3}{\text{−}v(t)dt + {\int_{5\text{/}3}^{3}v}(t)dt}}} \\
+ & \\
+ & {= {\int_{0}^{5\text{/}3}5} - 3tdt + {\int_{5\text{/}3}^{3}3}t - 5dt} \\
+ & {= \left. \left( {5t - \frac{3t^{2}}{2}} \right) \right|_{0}^{5\text{/}3} + \left. \left( {\frac{3t^{2}}{2} - 5t} \right) \right|_{5\text{/}3}^{3}} \\
+ & {= \left\lbrack {5\left( \frac{5}{3} \right) - \frac{3\left( {5\text{/}3} \right)^{2}}{2}} \right\rbrack - 0 + \left\lbrack {\frac{27}{2} - 15} \right\rbrack - \left\lbrack {\frac{3\left( {5\text{/}3} \right)^{2}}{2} - \frac{25}{3}} \right\rbrack} \\
+ & {= \frac{25}{3} - \frac{25}{6} + \frac{27}{2} - 15 - \frac{25}{6} + \frac{25}{3}} \\
+ & {= \frac{41}{6}.}
+\end{array}
+$$
+
+So, the total distance traveled is $\frac{41}{6}$ m.
+
+### Checkpoint 5.22
+
+Find the net displacement and total distance traveled in meters given the velocity function $f(t) = \frac{1}{2}e^{t} - 2$ over the interval $\left\lbrack {0,2} \right\rbrack.$
+
+### Applying the Net Change Theorem
+
+The net change theorem can be applied to the flow and consumption of fluids, as shown in Example 5.26.
+
+### Example 5.26
+
+#### How Many Gallons of Gasoline Are Consumed?
+
+If the motor on a motorboat is started at $t = 0$ and the boat consumes gasoline at the rate of $5 - 0.1t^{3}$ gal/hr, how much gasoline is used in the first 2 hours?
+
+#### Solution
+
+Express the problem as a definite integral, integrate, and evaluate using the Fundamental Theorem of Calculus. The limits of integration are the endpoints of the interval $\left\lbrack {0,2} \right\rbrack.$ We have
+
+$$
+\int_{0}^{2}\left( 5 - 0.1t^{3} \right)dt = \left( 5t–0.1\frac{t^{4}}{4} \right)\left. \middle| {}_{2} \right._{0} = \left\lbrack 5(2)–0.1\frac{(2)^{4}}{4} \right\rbrack –0 = 10–0.4 = 9.6
+$$
+
+Thus, the motorboat uses 9.6 gal of gas in 2 hours.
+
+### Example 5.27
+
+#### Chapter Opener: Iceboats
+
+*Figure 5.34 (credit: modification of work by Carter Brown, Flickr)*
+
+As we saw at the beginning of the chapter, top iceboat racers (Figure 5.1) can attain speeds of up to five times the wind speed. Andrew is an intermediate iceboater, though, so he attains speeds equal to only twice the wind speed. Suppose Andrew takes his iceboat out one morning when a light 5-mph breeze has been blowing all morning. As Andrew gets his iceboat set up, though, the wind begins to pick up. During his first half hour of iceboating, the wind speed increases according to the function $v(t) = 20t + 5.$ For the second half hour of Andrew’s outing, the wind remains steady at 15 mph. In other words, the wind speed is given by
+
+$$
+v(t) = \left\{ \begin{array}{lll}
+{20t + 5} & \text{for} & {0 \leq t \leq \frac{1}{2}} \\
+15 & \text{for} & {\frac{1}{2} \leq t \leq 1.}
+\end{array} \right.
+$$
+
+Recalling that Andrew’s iceboat travels at twice the wind speed, and assuming he moves in a straight line away from his starting point, how far is Andrew from his starting point after 1 hour?
+
+#### Solution
+
+To figure out how far Andrew has traveled, we need to integrate his velocity, which is twice the wind speed. Then
+
+Distance $= {\int_{0}^{1}{2v(t)dt}}.$
+
+Substituting the expressions we were given for $v(t),$ we get
+
+$$
+\begin{array}{cl}
+{\int_{0}^{1}{2v(t)dt}} & {= {\int_{0}^{1\text{/}2}{2v(t)dt + {\int_{1\text{/}2}^{1}{2v(t)dt}}}}} \\
+ & {= {\int_{0}^{1\text{/}2}{2\left( {20t + 5} \right)dt + {\int_{1\text{/}2}^{1}{2(15)dt}}}}} \\
+ & {= {\int_{0}^{1\text{/}2}{\left( {40t + 10} \right)dt + {\int_{1\text{/}2}^{1}{30dt}}}}} \\
+ & {= \left\lbrack {20t^{2} + 10t} \right\rbrack{|_{0}^{1\text{/}2} + \left\lbrack {30t} \right\rbrack|_{1\text{/}2}^{1}}} \\
+ & {= \left( {\frac{20}{4} + 5} \right) - 0 + \left( {30 - 15} \right)} \\
+ & {= 25.}
+\end{array}
+$$
+
+Andrew is 25 mi from his starting point after 1 hour.
+
+### Checkpoint 5.23
+
+Suppose that, instead of remaining steady during the second half hour of Andrew’s outing, the wind starts to die down according to the function $v(t) = -10t + 20.$ In other words, the wind speed is given by
+
+$$
+v(t) = \left\{ \begin{array}{lll}
+{20t + 5} & \text{for} & {0 \leq t \leq \frac{1}{2}} \\
+{- 10t + 15} & \text{for} & {\frac{1}{2} \leq t \leq 1.}
+\end{array} \right.
+$$
+
+Under these conditions, how far from his starting point is Andrew after 1 hour?
+
+### Integrating Even and Odd Functions
+
+We saw in Functions and Graphs that an even function is a function in which $f\left( {\text{-}x} \right) = f(x)$ for all *x* in the domain—that is, the graph of the curve is unchanged when *x* is replaced with −*x*. The graphs of even functions are symmetric about the *y*-axis. An odd function is one in which $f\left( {\text{-}x} \right) = \text{-}f(x)$ for all *x* in the domain, and the graph of the function is symmetric about the origin.
+
+Integrals of even functions, when the limits of integration are from −*a* to *a*, involve two equal areas, because they are symmetric about the *y*-axis. Integrals of odd functions, when the limits of integration are similarly $\left\lbrack {\text{-}a,a} \right\rbrack,$ evaluate to zero because the areas above and below the *x*-axis are equal.
+
+### Rule: Integrals of Even and Odd Functions
+
+For continuous even functions such that $f\left( {\text{-}x} \right) = f(x),$
+
+$$
+{\int_{\text{−}a}^{a}{f(x)dx = 2{\int_{0}^{a}{f(x)dx}}}}.
+$$
+
+For continuous odd functions such that $f\left( {\text{-}x} \right) = \text{-}f(x),$
+
+$$
+{\int_{\text{−}a}^{a}{f(x)dx = 0}}.
+$$
+
+### Example 5.28
+
+#### Integrating an Even Function
+
+Integrate the even function $\int_{-2}^{2}{\left( {3x^{8} - 2} \right)dx}$ and verify that the integration formula for even functions holds.
+
+#### Solution
+
+The symmetry appears in the graphs in Figure 5.35. Graph (a) shows the region below the curve and above the *x*-axis. We have to zoom in to this graph by a huge amount to see the region. Graph (b) shows the region above the curve and below the *x*-axis. The signed area of this region is negative. Both views illustrate the symmetry about the *y*-axis of an even function. We have
+
+$$
+\begin{array}{ll}
+{\int_{-2}^{2}{\left( {3x^{8} - 2} \right)dx}} & {= \left( {\frac{x^{9}}{3} - 2x} \right)|_{-2}^{2}} \\
+ & \\
+ & \\
+ & {= \left\lbrack {\frac{(2)^{9}}{3} - 2(2)} \right\rbrack - \left\lbrack {\frac{(-2)^{9}}{3} - 2(-2)} \right\rbrack} \\
+ & {= \left( {\frac{512}{3} - 4} \right) - \left( {- \frac{512}{3} + 4} \right)} \\
+ & {= \frac{1000}{3}.}
+\end{array}
+$$
+
+To verify the integration formula for even functions, we can calculate the integral from 0 to 2 and double it, then check to make sure we get the same answer.
+
+$$
+\begin{array}{ll}
+{\int_{0}^{2}{\left( {3x^{8} - 2} \right)dx}} & {= \left( {\frac{x^{9}}{3} - 2x} \right)|_{0}^{2}} \\
+ & \\
+ & {= \frac{512}{3} - 4} \\
+ & {= \frac{500}{3}}
+\end{array}
+$$
+
+Since $2 \cdot \frac{500}{3} = \frac{1000}{3},$ we have verified the formula for even functions in this particular example.
+
+*Figure 5.35 Graph (a) shows the positive area between the curve and the x -axis, whereas graph (b) shows the negative area between the curve and the x -axis. Both views show the symmetry about the y -axis.*
+
+### Example 5.29
+
+#### Integrating an Odd Function
+
+Evaluate the definite integral of the odd function $-5\text{sin} x$ over the interval $\left\lbrack {\text{-}\pi,\pi} \right\rbrack.$
+
+#### Solution
+
+The graph is shown in Figure 5.36. We can see the symmetry about the origin by the positive area above the *x*-axis over $\left\lbrack {\text{-}\pi,0} \right\rbrack,$ and the negative area below the *x*-axis over $\left\lbrack {0,\pi} \right\rbrack.$ We have
+
+$$
+\begin{array}{ll}
+{\int_{\text{−}\pi}^{\pi}{-5\text{sin} xdx}} & {= -5\left( {\text{−}\text{cos} x} \right)|_{\text{−}\pi}^{\pi}} \\
+ & \\
+ & \\
+ & {= 5\text{cos} x|_{\text{−}\pi}^{\pi}} \\
+ & {= \left\lbrack {5\text{cos}\pi} \right\rbrack - \left\lbrack {5\text{cos}\left( {\text{−}\pi} \right)} \right\rbrack} \\
+ & {= -5 - (-5)} \\
+ & {= 0.}
+\end{array}
+$$
+
+*Figure 5.36 The graph shows areas between a curve and the x -axis for an odd function.*
+
+### Checkpoint 5.24
+
+Integrate the function ${\int_{-2}^{2}{x^{4}dx}}.$
+
+### Section 5.4 Exercises
+
+Use basic integration formulas to compute the following antiderivatives or definite integrals.
+
+207\.
+
+$\left. \int{\left( {\sqrt{x} - \frac{1}{\sqrt{x}}} \right)dx} \right.$
+
+208\.
+
+$\left. \int{\left( {e^{2x} - \frac{1}{2}e^{x\text{/}2}} \right)dx} \right.$
+
+209\.
+
+$\left. \int\frac{dx}{2x} \right.$
+
+210\.
+
+$\left. \int{\frac{x - 1}{x^{2}}dx} \right.$
+
+211\.
+
+$\int_{0}^{\pi}{\left( {\text{sin} x - \text{cos} x} \right)dx}$
+
+212\.
+
+$\int_{0}^{\pi\text{/}2}{\left( {x - \text{sin} x} \right)dx}$
+
+213\.
+
+Write an integral that expresses the increase in the perimeter $P(s)$ of a square when its side length *s* increases from 2 units to 4 units and evaluate the integral.
+
+214\.
+
+Write an integral that quantifies the change in the area $A(s) = s^{2}$ of a square when the side length doubles from *S* units to 2*S* units and evaluate the integral.
+
+215\.
+
+A regular *N*-gon (an *N*-sided polygon with sides that have equal length *s*, such as a pentagon or hexagon) has perimeter *Ns*. Write an integral that expresses the increase in perimeter of a regular *N*-gon when the length of each side increases from 1 unit to 2 units and evaluate the integral.
+
+216\.
+
+The area of a regular pentagon with side length $a > 0$ is *pa*<sup>2</sup> with $p = \frac{1}{4}\sqrt{5\left( {5 + 2\sqrt{5}} \right)}.$ The Pentagon in Washington, DC, has inner sides of length 360 ft and outer sides of length 920 ft. Write an integral to express the area of the roof of the Pentagon according to these dimensions and evaluate this area.
+
+217\.
+
+A dodecahedron is a Platonic solid with a surface that consists of 12 pentagons, each of equal area. By how much does the surface area of a dodecahedron increase as the side length of each pentagon doubles from 1 unit to 2 units?
+
+218\.
+
+An icosahedron is a Platonic solid with a surface that consists of 20 equilateral triangles. By how much does the surface area of an icosahedron increase as the side length of each triangle doubles from *a* unit to 2*a* units?
+
+219\.
+
+Write an integral that quantifies the change in the area of the surface of a cube when its side length doubles from *s* unit to 2*s* units and evaluate the integral.
+
+220\.
+
+Write an integral that quantifies the increase in the volume of a cube when the side length doubles from *s* unit to 2*s* units and evaluate the integral.
+
+221\.
+
+Write an integral that quantifies the increase in the surface area of a sphere as its radius doubles from *R* unit to 2*R* units and evaluate the integral.
+
+222\.
+
+Write an integral that quantifies the increase in the volume of a sphere as its radius doubles from *R* unit to 2*R* units and evaluate the integral.
+
+223\.
+
+Suppose that a particle moves along a straight line with velocity $v(t) = 4 - 2t,$ where $0 \leq t \leq 2$ (in meters per second). Find the displacement at time *t* and the total distance traveled up to $t = 2.$
+
+224\.
+
+Suppose that a particle moves along a straight line with velocity defined by $v(t) = t^{2} - 3t - 18,$ where $0 \leq t \leq 6$ (in meters per second). Find the displacement at time *t* and the total distance traveled up to $t = 6.$
+
+225\.
+
+Suppose that a particle moves along a straight line with velocity defined by $v(t) = \left| {2t - 6} \right|,$ where $0 \leq t \leq 6$ (in meters per second). Find the displacement at time *t* and the total distance traveled up to $t = 6.$
+
+226\.
+
+Suppose that a particle moves along a straight line with acceleration defined by $a(t) = t - 3,$ where $0 \leq t \leq 6$ (in meters per second). Find the velocity and displacement at time *t* and the total distance traveled up to $t = 6$ if $v(0) = 3$ and $d(0) = 0.$
+
+227\.
+
+A ball is thrown upward from a height of 1.5 m at an initial speed of 40 m/sec. Acceleration resulting from gravity is −9.8 m/sec<sup>2</sup>. Neglecting air resistance, solve for the velocity $v(t)$ and the height $h(t)$ of the ball *t* seconds after it is thrown and before it returns to the ground.
+
+228\.
+
+A ball is thrown upward from a height of 3 m at an initial speed of 60 m/sec. Acceleration resulting from gravity is −9.8 m/sec<sup>2</sup>. Neglecting air resistance, solve for the velocity $v(t)$ and the height $h(t)$ of the ball *t* seconds after it is thrown and before it returns to the ground.
+
+229\.
+
+The area $A(t)$ of a circular shape is growing at a constant rate. If the area increases from 4*π* units to 9*π* units between times $t = 2$ and $t = 3,$ find the net change in the radius during that time.
+
+230\.
+
+A spherical balloon is being inflated at a constant rate. If the volume of the balloon changes from 36*π* in.<sup>3</sup> to 288*π* in.<sup>3</sup> between time $t = 30$ and $t = 60$ seconds, find the net change in the radius of the balloon during that time.
+
+231\.
+
+Water flows into a conical tank with cross-sectional area *πx*<sup>2</sup> at height *x* and volume $\frac{\pi x^{3}}{3}$ up to height *x*. If water flows into the tank at a rate of 1 m<sup>3</sup>/min, find the height of water in the tank after 5 min. Find the change in height between 5 min and 10 min.
+
+232\.
+
+A horizontal cylindrical tank has cross-sectional area $A(x) = 4\left( {6x - x^{2}} \right)m^{2}$ at height *x* meters above the bottom when $x \leq 3.$
+
+1.  The volume *V* between heights *a* and *b* is ${\int_{a}^{b}{A(x)dx}}.$ Find the volume at heights between 2 m and 3 m.
+2.  Suppose that oil is being pumped into the tank at a rate of 50 L/min. Using the chain rule, $\frac{dx}{dt} = \frac{dx}{dV}\ \frac{dV}{dt},$ at how many meters per minute is the height of oil in the tank changing, expressed in terms of *x*, when the height is at *x* meters?
+3.  How long does it take to fill the tank to 3 m starting from a fill level of 2 m?
+
+233\.
+
+The following table lists the electrical power in gigawatts—the rate at which energy is consumed—used in a certain city for different hours of the day, in a typical 24-hour period, with hour 1 corresponding to midnight to 1 a.m.
+
+| Hour | Power | Hour | Power |
+|------|-------|------|-------|
+| 1    | 28    | 13   | 48    |
+| 2    | 25    | 14   | 49    |
+| 3    | 24    | 15   | 49    |
+| 4    | 23    | 16   | 50    |
+| 5    | 24    | 17   | 50    |
+| 6    | 27    | 18   | 50    |
+| 7    | 29    | 19   | 46    |
+| 8    | 32    | 20   | 43    |
+| 9    | 34    | 21   | 42    |
+| 10   | 39    | 22   | 40    |
+| 11   | 42    | 23   | 37    |
+| 12   | 46    | 24   | 34    |
+
+Find the total amount of energy in gigawatt-hours (gW-h) consumed by the city in a typical 24-hour period.
+
+234\.
+
+The average residential electrical power use (in hundreds of watts) per hour is given in the following table.
+
+| Hour | Power | Hour | Power |
+|------|-------|------|-------|
+| 1    | 8     | 13   | 12    |
+| 2    | 6     | 14   | 13    |
+| 3    | 5     | 15   | 14    |
+| 4    | 4     | 16   | 15    |
+| 5    | 5     | 17   | 17    |
+| 6    | 6     | 18   | 19    |
+| 7    | 7     | 19   | 18    |
+| 8    | 8     | 20   | 17    |
+| 9    | 9     | 21   | 16    |
+| 10   | 10    | 22   | 16    |
+| 11   | 10    | 23   | 13    |
+| 12   | 11    | 24   | 11    |
+
+1.  Compute the average total energy used in a day in kilowatt-hours (kWh).
+2.  If a ton of coal generates 1842 kWh, how long does it take for an average residence to burn a ton of coal?
+3.  Explain why the data might fit a plot of the form $p(t) = 11.5 - 7.5\text{sin}\left( \frac{\pi t}{12} \right).$
+
+235\.
+
+The data in the following table are used to estimate the average power output produced by Peter Sagan for each of the last 18 sec of Stage 1 of the 2012 Tour de France.
+
+| Second | Watts | Second | Watts |
+|--------|-------|--------|-------|
+| 1      | 600   | 10     | 1200  |
+| 2      | 500   | 11     | 1170  |
+| 3      | 575   | 12     | 1125  |
+| 4      | 1050  | 13     | 1100  |
+| 5      | 925   | 14     | 1075  |
+| 6      | 950   | 15     | 1000  |
+| 7      | 1050  | 16     | 950   |
+| 8      | 950   | 17     | 900   |
+| 9      | 1100  | 18     | 780   |
+
+Table 5.6 Average Power Output *Source*: sportsexercisengineering.com
+
+Estimate the net energy used in kilojoules (kJ), noting that 1W = 1 J/s, and the average power output by Sagan during this time interval.
+
+236\.
+
+The data in the following table are used to estimate the average power output produced by Peter Sagan for each 15-min interval of Stage 1 of the 2012 Tour de France.
+
+| Minutes | Watts | Minutes | Watts |
+|---------|-------|---------|-------|
+| 15      | 200   | 165     | 170   |
+| 30      | 180   | 180     | 220   |
+| 45      | 190   | 195     | 140   |
+| 60      | 230   | 210     | 225   |
+| 75      | 240   | 225     | 170   |
+| 90      | 210   | 240     | 210   |
+| 105     | 210   | 255     | 200   |
+| 120     | 220   | 270     | 220   |
+| 135     | 210   | 285     | 250   |
+| 150     | 150   | 300     | 400   |
+
+Table 5.7 Average Power Output *Source*: sportsexercisengineering.com
+
+Estimate the net energy used in kilojoules, noting that 1W = 1 J/s.
+
+237\.
+
+The distribution of incomes as of 2012 in the United States in \$5000 increments is given in the following table. The *k*th row denotes the percentage of households with incomes between $\$ 5000xk$ and $5000xk + 4999.$ The row $k = 40$ contains all households with income between \$200,000 and \$250,000.
+
+|     |     |     |     |     |      |     |     |
+|-----|-----|-----|-----|-----|------|-----|-----|
+| 0   | 3.5 | 11  | 3.5 | 21  | 1.5  | 31  | 0.6 |
+| 1   | 4.1 | 12  | 3.7 | 22  | 1.4  | 32  | 0.5 |
+| 2   | 5.9 | 13  | 3.2 | 23  | 1.3  | 33  | 0.5 |
+| 3   | 5.7 | 14  | 3.0 | 24  | 1.3  | 34  | 0.4 |
+| 4   | 5.9 | 15  | 2.8 | 25  | 1.1  | 35  | 0.3 |
+| 5   | 5.4 | 16  | 2.5 | 26  | 1.0  | 36  | 0.3 |
+| 6   | 5.5 | 17  | 2.2 | 27  | 0.75 | 37  | 0.3 |
+| 7   | 5.1 | 18  | 2.2 | 28  | 0.8  | 38  | 0.2 |
+| 8   | 4.8 | 19  | 1.8 | 29  | 1.0  | 39  | 1.8 |
+| 9   | 4.1 | 20  | 2.1 | 30  | 0.6  | 40  | 2.3 |
+| 10  | 4.3 |     |     |     |      |     |     |
+
+Table 5.8 Income Distributions *Source*: http://www.census.gov/prod/2013pubs/p60-245.pdf
+
+1.  Estimate the percentage of U.S. households in 2012 with incomes less than \$55,000.
+2.  What percentage of households had incomes exceeding \$85,000?
+3.  Plot the data and try to fit its shape to that of a graph of the form $a\left( {x + c} \right)e^{\text{-}b{({x + e})}}$ for suitable $a,b,c.$
+
+238\.
+
+Newton’s law of gravity states that the gravitational force exerted by an object of mass *M* and one of mass *m* with centers that are separated by a distance *r* is $F = G\frac{mM}{r^{2}},$ with *G* an empirical constant $G = 6.67x10^{-11}\ m^{3}\text{/}\left( {kg \cdot s^{2}} \right).$ The work done by a variable force over an interval $\left\lbrack {a,b} \right\rbrack$ is defined as $W = {\int_{a}^{b}{F(x)dx}}.$ If Earth has mass $5.97219\  \times \ 10^{24}$ and radius 6371 km, compute the amount of work to elevate a polar weather satellite of mass 1400 kg to its orbiting altitude of 850 km above Earth.
+
+239\.
+
+For a given motor vehicle, the maximum achievable deceleration from braking is approximately 7 m/sec<sup>2</sup> on dry concrete. On wet asphalt, it is approximately 2.5 m/sec<sup>2</sup>. Given that 1 mph corresponds to 0.447 m/sec, find the total distance that a car travels in meters on dry concrete after the brakes are applied until it comes to a complete stop if the initial velocity is 67 mph (30 m/sec) or if the initial braking velocity is 56 mph (25 m/sec). Find the corresponding distances if the surface is slippery wet asphalt.
+
+240\.
+
+John is a 25-year old man who weighs 160 lb. He burns $500 - 50t$ calories/hr while riding his bike for *t* hours. If an oatmeal cookie has 55 cal and John eats cookies at a rate of 4*t* calories during the *t*th hour, how many net calories has he lost after 3 hours riding his bike?
+
+241\.
+
+Sandra is a 25-year old woman who weighs 120 lb. She burns $300 - 50t$ cal/hr while walking on her treadmill. Her caloric intake from drinking Gatorade is 100*t* calories/hour during the *t*th hour. What is her net decrease in calories after walking for 3 hours?
+
+242\.
+
+A motor vehicle has a maximum efficiency of 33 mpg at a cruising speed of 40 mph. The efficiency drops at a rate of 0.1 mpg/mph between 40 mph and 50 mph, and at a rate of 0.4 mpg/mph between 50 mph and 80 mph. What is the efficiency in miles per gallon if the car is cruising at 50 mph? What is the efficiency in miles per gallon if the car is cruising at 80 mph? If gasoline costs \$3.50/gal, what is the cost of fuel to drive 50 mi at 40 mph, at 50 mph, and at 80 mph?
+
+243\.
+
+Although some engines are more efficient at given a horsepower than others, on average, fuel efficiency decreases with horsepower at a rate of $1\text{/}25$ mpg/horsepower. If a typical 50-horsepower engine has an average fuel efficiency of 32 mpg, what is the average fuel efficiency of an engine with the following horsepower: 150, 300, 450?
+
+244\.
+
+**\[T\]** The following table lists the 2013 schedule of federal income tax versus taxable income.
+
+| Taxable Income Range | The Tax Is …         | … Of the Amount Over |
+|----------------------|----------------------|----------------------|
+| \$0-\$8925           | 10%                  | \$0                  |
+| \$8925-\$36,250      | \$892.50 + 15%       | \$8925               |
+| \$36,250-\$87,850    | \$4,991.25 + 25%     | \$36,250             |
+| \$87,850-\$183,250   | \$17,891.25 + 28%    | \$87,850             |
+| \$183,250-\$398,350  | \$44,603.25 + 33%    | \$183,250            |
+| \$398,350-\$400,000  | \$115,586.25 + 35%   | \$398,350            |
+| \> \$400,000         | \$116,163.75 + 39.6% | \$400,000            |
+
+Table 5.9 Federal Income Tax Versus Taxable Income *Source*: http://www.irs.gov/pub/irs-prior/i1040tt--2013.pdf.
+
+Suppose that Steve just received a \$10,000 raise. How much of this raise is left after federal taxes if Steve’s salary before receiving the raise was \$40,000? If it was \$90,000? If it was \$385,000?
+
+245\.
+
+**\[T\]** The following table provides hypothetical data regarding the level of service for a certain highway.
+
+| Highway Speed Range (mph) | Vehicles per Hour per Lane | Density Range (vehicles/mi) |
+|----|----|----|
+| \> 60 | \< 600 | \< 10 |
+| 60–57 | 600–1000 | 10–20 |
+| 57–54 | 1000–1500 | 20–30 |
+| 54–46 | 1500–1900 | 30–45 |
+| 46–30 | 1900**–**2100 | 45–70 |
+| \<30 | Unstable | 70–200 |
+
+Table 5.10
+
+1.  Plot vehicles per hour per lane on the *x*-axis and highway speed on the *y*-axis.
+2.  Compute the average decrease in speed (in miles per hour) per unit increase in congestion (vehicles per hour per lane) as the latter increases from 600 to 1000, from 1000 to 1500, and from 1500 to 2100. Does the decrease in miles per hour depend linearly on the increase in vehicles per hour per lane?
+3.  Plot minutes per mile (60 times the reciprocal of miles per hour) as a function of vehicles per hour per lane. Is this function linear?
+
+For the next two exercises use the data in the following table, which displays bald eagle populations from 1963 to 2000 in the continental United States.
+
+| Year | Population of Breeding Pairs of Bald Eagles |
+|------|---------------------------------------------|
+| 1963 | 487                                         |
+| 1974 | 791                                         |
+| 1981 | 1188                                        |
+| 1986 | 1875                                        |
+| 1992 | 3749                                        |
+| 1996 | 5094                                        |
+| 2000 | 6471                                        |
+
+Table 5.11 Population of Breeding Bald Eagle Pairs *Source*: http://www.fws.gov/Midwest/eagle/population/chtofprs.html. 246.
+
+**\[T\]** The graph below plots the quadratic ${p(t) = 6.48t^{2} - 80.3}\ {1t + 585.69}$ against the data in preceding table, normalized so that $t = 0$ corresponds to 1963. Estimate the average number of bald eagles per year present for the 37 years by computing the average value of *p* over $\left\lbrack {0,37} \right\rbrack.$
+
+247\.
+
+**\[T\]** The graph below plots the cubic $p(t) = 0.07t^{3} + 2.42t^{2} - 25.63t + 521.23$ against the data in the preceding table, normalized so that $t = 0$ corresponds to 1963. Estimate the average number of bald eagles per year present for the 37 years by computing the average value of *p* over $\left\lbrack {0,37} \right\rbrack.$
+
+248\.
+
+**\[T\]** Suppose you go on a road trip and record your speed at every half hour, as compiled in the following table. The best quadratic fit to the data is $q(t) = 5x^{2} - 11x + 49\text{,}$ shown in the accompanying graph. Integrate *q* to estimate the total distance driven over the 3 hours.
+
+| Time (hr) | Speed (mph) |
+|-----------|-------------|
+| 0 (start) | 50          |
+| 1         | 40          |
+| 2         | 50          |
+| 3         | 60          |
+
+As a car accelerates, it does not accelerate at a constant rate; rather, the acceleration is variable. For the following exercises, use the following table, which contains the acceleration measured at every second as a driver merges onto a freeway.
+
+| Time (sec) | Acceleration (mph/sec) |
+|------------|------------------------|
+| 1          | 11.2                   |
+| 2          | 10.6                   |
+| 3          | 8.1                    |
+| 4          | 5.4                    |
+| 5          | 0                      |
+
+As a car accelerates, it does not accelerate at a constant rate; rather, the acceleration is variable. For the next three exercises use the following table, which contains the acceleration measured at every second as a driver merges onto a freeway.
+
+| Time (sec) | Acceleration (mph/sec) |
+|------------|------------------------|
+| 1          | 11.2                   |
+| 2          | 10.6                   |
+| 3          | 8.1                    |
+| 4          | 5.4                    |
+| 5          | 0                      |
+
+Table 5.12 249.
+
+**\[T\]** The accompanying graph plots the best quadratic fit, $a(t) = -0.70t^{2} + 1.44t + 10.44,$ to the data from the preceding table. Compute the average value of $a(t)$ to estimate the average acceleration between $t = 0$ and $t = 5.$
+
+250\.
+
+**\[T\]** Using your acceleration equation from the previous exercise, find the corresponding velocity equation. Assuming the initial velocity is 65 mph, find the velocity at time $t = 0.$
+
+251\.
+
+**\[T\]** Using your velocity equation from the previous exercise, find the corresponding distance equation, assuming your initial distance is 0 mi. How far did you travel while you accelerated your car? (*Hint:* You will need to convert time units.)
+
+252\.
+
+**\[T\]** The number of hamburgers sold at a restaurant throughout the day is given in the following table, with the accompanying graph plotting the best cubic fit to the data, $b(t) = 0.12t^{3} - 2.13t^{2} + 12.13t + 3.91,$ with $t = 0$ corresponding to 9 a.m. and $t = 12$ corresponding to 9 p.m. Compute the average value of $b(t)$ to estimate the average number of hamburgers sold per hour.
+
+| Hours Past Midnight | No. of Burgers Sold |
+|---------------------|---------------------|
+| 9                   | 3                   |
+| 12                  | 28                  |
+| 15                  | 20                  |
+| 18                  | 30                  |
+| 21                  | 45                  |
+
+253\.
+
+**\[T\]** An athlete runs by a motion detector, which records her speed, as displayed in the following table. The best linear fit to this data, $\ell(t) = -0.068t + 5.14\text{,}$ is shown in the accompanying graph. Use the average value of $\ell(t)$ between $t = 0$ and $t = 40$ to estimate the runner’s average speed.
+
+| Minutes | Speed (m/sec) |
+|---------|---------------|
+| 0       | 5             |
+| 10      | 4.8           |
+| 20      | 3.6           |
+| 30      | 3.0           |
+| 40      | 2.5           |

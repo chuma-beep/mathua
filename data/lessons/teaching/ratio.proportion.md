@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_335afa4e-ae11-43f6-aaf7-46880b0acd80" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 6.5 Solve Proportions and their Applications
 
 ### Learning Objectives
@@ -949,5 +947,3 @@ To solve “what percent of $125$ is $25\text{”}$ do you prefer to use an equa
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ Overall, after looking at the checklist, do you think you are well-prepared for the next Chapter? Why or why not?
-
-</div>

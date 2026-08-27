@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_98fa704c-a8b3-46a9-82a1-70a6c9ba284b" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 5.1 Decimals
 
 ### Learning Objectives
@@ -1200,5 +1198,3 @@ Gerry saw a sign advertising postcards marked for sale at $``10\ \text{for}\ 0.9
 …with some help. This must be addressed quickly because topics you do not master become potholes in your road to success. In math, every topic builds upon previous work. It is important to make sure you have a strong foundation before you move on. Who can you ask for help? Your fellow classmates and instructor are good resources. Is there a place on campus where math tutors are available? Can your study skills be improved?
 
 …no—I don’t get it! This is a warning sign and you must not ignore it. You should get help right away or you will quickly be overwhelmed. See your instructor as soon as you can to discuss your situation. Together you can come up with a plan to get you the help you need.
-
-</div>

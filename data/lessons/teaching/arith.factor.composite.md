@@ -1,7 +1,5 @@
 > Content sourced from [OpenStax Prealgebra](https://openstax.org/books/prealgebra/pages/1-introduction) by Marecek & Anthony-Smith — CC BY 4.0
 
-<div id="page_3632bfb6-e470-4a0c-934e-5f0c5c76931b" class="chapter-content-module" book-content="true" data-type="page">
-
 ## 2.4 Find Multiples and Factors
 
 ### Learning Objectives
@@ -860,5 +858,3 @@ What is the difference between prime numbers and composite numbers?
 ⓐ After completing the exercises, use this checklist to evaluate your mastery of the objectives of this section.
 
 ⓑ On a scale of 1–10, how would you rate your mastery of this section in light of your responses on the checklist? How can you improve this?
-
-</div>
