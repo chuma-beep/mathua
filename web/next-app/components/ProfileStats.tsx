@@ -124,7 +124,9 @@ export default function ProfileStats({ name, scores }: Props) {
           </div>
 
           <div>
-            <div style={muted}>WEEKLY</div>
+            <a href="/leaderboard" style={{ ...muted, textDecoration: 'none' }} className="hover:text-mathua-blue">
+              WEEKLY →
+            </a>
             <div style={{ ...mono, fontSize: 16, color: 'var(--text-primary)' }}>
               {scores.weekly_score.toLocaleString()}
             </div>

@@ -8,7 +8,6 @@ import { getAuthHeaders, getUserInfo } from '../../lib/auth'
 import { getActivity, getProgress, getWeaknesses, getDueReviews } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
 import Header from '../../components/Header'
-import Drawer from '../../components/Drawer'
 import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
@@ -40,7 +39,7 @@ export default function ProfilePage() {
   const [dueReviews, setDueReviews] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [mobileDrawer, setMobileDrawer] = useState(false)
+
 
   useEffect(() => {
     if (!mounted) return
@@ -132,7 +131,6 @@ export default function ProfilePage() {
     return (
       <>
         <Header
-          onOpenMobileDrawer={() => setMobileDrawer(true)}
           links={[
             { label: 'Study', href: '/study' },
             { label: 'Practice', href: '/session' },
@@ -165,15 +163,7 @@ export default function ProfilePage() {
             </div>
           </section>
         </div>
-        <BottomTabs onMore={() => setMobileDrawer(true)} />
-        {mobileDrawer && (
-          <>
-            <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileDrawer(false)} />
-            <div className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] z-50 bg-mathua-bg border-r border-mathua-border overflow-y-auto">
-              <Drawer collapsed={false} onToggle={() => setMobileDrawer(false)} />
-            </div>
-          </>
-        )}
+        <BottomTabs />
       </>
     )
   }
@@ -194,7 +184,6 @@ export default function ProfilePage() {
   return (
     <>
       <Header
-        onOpenMobileDrawer={() => setMobileDrawer(true)}
         links={[
           { label: 'Study', href: '/study' },
           { label: 'Practice', href: '/session' },
@@ -258,15 +247,7 @@ export default function ProfilePage() {
           </div>
         </section>
       </div>
-      <BottomTabs onMore={() => setMobileDrawer(true)} />
-      {mobileDrawer && (
-        <>
-          <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileDrawer(false)} />
-          <div className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] z-50 bg-mathua-bg border-r border-mathua-border overflow-y-auto">
-            <Drawer collapsed={false} onToggle={() => setMobileDrawer(false)} />
-          </div>
-        </>
-      )}
+      <BottomTabs />
     </>
   )
 }

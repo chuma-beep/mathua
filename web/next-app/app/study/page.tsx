@@ -387,6 +387,10 @@ function DomainOverview({
           )
         })}
       </div>
+      <Link href="/leaderboard" className="mt-4 flex items-center justify-between border border-mathua-border bg-mathua-surface p-3 hover:border-mathua-blue transition-colors">
+        <span className="font-mono text-xs text-mathua-primary">Leaderboard</span>
+        <span className="font-mono text-[11px] text-mathua-blue">See weekly ranking →</span>
+      </Link>
     </div>
   )
 }
