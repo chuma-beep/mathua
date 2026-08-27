@@ -151,8 +151,9 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
             <span style={{ color: 'var(--text-muted)' }}>{stats.concepts} topics</span>
           </div>
 
-          {/* Mini calendar */}
-          <div style={{ display: 'inline-block' }}>
+          {/* Mini calendar — centered */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'inline-block' }}>
             {/* Day headers */}
             <div style={{ display: 'flex', gap: GAP, marginBottom: 2 }}>
               {DAY_HEADERS.map((dh) => (
@@ -203,6 +204,7 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
                 ))}
               </div>
             ))}
+            </div>
           </div>
         </div>
       )}

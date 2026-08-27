@@ -25,7 +25,7 @@ export default function MonthlyCards({ data }: Props) {
   }, [])
 
   return (
-    <div>
+    <div style={{ maxWidth: 820, margin: '0 auto', width: '100%' }}>
       {months.map((m) => (
         <MonthCard
           key={`${m.year}-${m.month}`}

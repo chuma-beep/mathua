@@ -100,11 +100,11 @@ export default function YearlyGrid({ data }: Props) {
   const svgH = 16 + (7 * (CELL_H + GAP)) + GAP + 24
 
   return (
-    <div style={{ overflowX: 'auto', position: 'relative' }}>
+    <div style={{ overflowX: 'auto', position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
       <svg
         width={svgW}
         height={svgH}
-        style={{ fontFamily: "'IBM Plex Mono', monospace", display: 'block', minWidth: svgW }}
+        style={{ fontFamily: "'IBM Plex Mono', monospace", display: 'block', minWidth: svgW, margin: '0 auto' }}
       >
         {/* Month labels */}
         {monthLabels.map((m) => (

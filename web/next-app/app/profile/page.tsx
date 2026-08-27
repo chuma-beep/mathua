@@ -8,6 +8,8 @@ import { getAuthHeaders, getUserInfo } from '../../lib/auth'
 import { getActivity, getProgress, getWeaknesses, getDueReviews } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
 import Header from '../../components/Header'
+import Drawer from '../../components/Drawer'
+import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
@@ -38,35 +40,45 @@ export default function ProfilePage() {
   const [dueReviews, setDueReviews] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [drawerOpen, setDrawerOpen] = useState(true)
+  const [mobileDrawer, setMobileDrawer] = useState(false)
+
+  useEffect(() => {
+    const stored = localStorage.getItem('mathua-drawer-open')
+    if (stored === 'false') setDrawerOpen(false)
+  }, [])
 
   useEffect(() => {
     if (!mounted) return
 
     const info = getUserInfo()
-    if (!info) {
-      router.push('/login')
-      return
-    }
     setUser(info)
 
     async function fetchData() {
       try {
-        const headers = { ...getAuthHeaders() }
-
-        const [scoresRes, activityRes, progressRes, weaknessesRes] = await Promise.all([
-          fetch(`${API_BASE}/api/scores/`, { headers }).then((r) => r.ok ? r.json() : null),
-          getActivity(),
-          getProgress(info!.student_id),
-          getWeaknesses(),
-        ])
-
-        setScores(scoresRes as Scores | null)
-        setActivity(activityRes)
-        setProgress(progressRes)
-        setWeaknesses(weaknessesRes)
-        getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
+        if (info) {
+          const headers = { ...getAuthHeaders() }
+          const [scoresRes, activityRes, progressRes, weaknessesRes] = await Promise.all([
+            fetch(`${API_BASE}/api/scores/`, { headers }).then((r) => r.ok ? r.json() : null),
+            getActivity(),
+            getProgress(info!.student_id),
+            getWeaknesses(),
+          ])
+          setScores(scoresRes as Scores | null)
+          setActivity(activityRes)
+          setProgress(progressRes)
+          setWeaknesses(weaknessesRes)
+          getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
+        } else {
+          // Guest: no scores, but still try activity/progress as guest (will be empty)
+          const activityRes = await getActivity().catch(() => [])
+          setActivity(activityRes as DailyActivity[])
+          setScores(null)
+          setProgress({})
+          setWeaknesses(null)
+        }
       } catch (err) {
-        setError('Failed to load profile data')
+        if (info) setError('Failed to load profile data')
       } finally {
         setLoading(false)
       }
@@ -102,7 +114,7 @@ export default function ProfilePage() {
     )
   }
 
-  if (error || !user || !scores) {
+  if (error) {
     return (
       <>
         <Header />
@@ -115,7 +127,86 @@ export default function ProfilePage() {
               textAlign: 'center',
             }}
           >
-            {error || 'Unable to load profile. Are you logged in?'}
+            {error}
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  if (!user) {
+    return (
+      <>
+        <Header
+          drawerOpen={drawerOpen}
+          onToggleDrawer={() => {
+            const next = !drawerOpen
+            setDrawerOpen(next)
+            localStorage.setItem('mathua-drawer-open', String(next))
+          }}
+          onOpenMobileDrawer={() => setMobileDrawer(true)}
+          hideNavWhenOpen
+          links={[
+            { label: 'Study', href: '/study' },
+            { label: 'Practice', href: '/session' },
+            { label: 'Leaderboard', href: '/leaderboard' },
+            { label: 'Graph', href: '/graph' },
+          ]}
+        />
+        <div className="flex max-w-container mx-auto">
+          <aside className={`${drawerOpen ? 'w-[240px]' : 'w-[48px]'} hidden lg:block shrink-0 sticky top-[52px] h-[calc(100vh-52px)] border-r-[0.5px] border-mathua-border bg-mathua-bg overflow-y-auto transition-all`}>
+            <Drawer collapsed={!drawerOpen} onToggle={() => {
+              const next = !drawerOpen
+              setDrawerOpen(next)
+              localStorage.setItem('mathua-drawer-open', String(next))
+            }} />
+          </aside>
+          <div className="flex-1 min-w-0 px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
+          <div className="border border-mathua-border p-6 text-center bg-mathua-surface">
+            <h2 style={{ fontFamily: headingFont, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 8 }}>Welcome to your profile</h2>
+            <p style={{ fontFamily: monoFont, fontSize: 12, color: 'var(--text-secondary)', marginBottom: 16 }}>Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
+            <div className="flex gap-3 justify-center">
+              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs">Sign in</Link>
+              <Link href="/session" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs">Try as guest →</Link>
+            </div>
+          </div>
+          <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <h2 style={{ fontFamily: headingFont, fontSize: '1.05rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 16, width: '100%', maxWidth: 820 }}>Activity</h2>
+            <div style={{ width: '100%', maxWidth: 820, display: 'flex', justifyContent: 'center' }}>
+              <ActivityHeatmap data={activity} />
+            </div>
+          </section>
+          <section style={{ marginTop: 40 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 3fr) minmax(0, 2fr)', gap: 24, alignItems: 'start' }} className="max-sm:block max-sm:[&>*+*]:mt-6">
+              <DomainProgress progress={progress} />
+              <div className="border border-mathua-border p-4 bg-mathua-surface text-center">
+                <p className="font-mono text-xs text-mathua-secondary mb-3">Take a diagnostic to find your weak spots</p>
+                <Link href="/onboard" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">Start diagnostic →</Link>
+              </div>
+            </div>
+          </section>
+          </div>
+        </div>
+        <BottomTabs onMore={() => setMobileDrawer(true)} />
+        {mobileDrawer && (
+          <>
+            <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileDrawer(false)} />
+            <div className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] z-50 bg-mathua-bg border-r border-mathua-border overflow-y-auto">
+              <Drawer collapsed={false} onToggle={() => setMobileDrawer(false)} />
+            </div>
+          </>
+        )}
+      </>
+    )
+  }
+
+  if (!scores) {
+    return (
+      <>
+        <Header />
+        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-20">
+          <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+            Loading scores…
           </div>
         </div>
       </>
@@ -124,15 +215,33 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Header links={[
-        { label: 'Study', href: '/study' },
-        { label: 'Practice', href: '/session' },
-        { label: 'Leaderboard', href: '/leaderboard' },
-        { label: 'Graph', href: '/graph' },
-        { label: 'Settings', href: '/settings' },
-      ]} />
+      <Header
+        drawerOpen={drawerOpen}
+        onToggleDrawer={() => {
+          const next = !drawerOpen
+          setDrawerOpen(next)
+          localStorage.setItem('mathua-drawer-open', String(next))
+        }}
+        onOpenMobileDrawer={() => setMobileDrawer(true)}
+        hideNavWhenOpen
+        links={[
+          { label: 'Study', href: '/study' },
+          { label: 'Practice', href: '/session' },
+          { label: 'Leaderboard', href: '/leaderboard' },
+          { label: 'Graph', href: '/graph' },
+          { label: 'Settings', href: '/settings' },
+        ]}
+      />
 
-      <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12">
+      <div className="flex max-w-container mx-auto">
+        <aside className={`${drawerOpen ? 'w-[240px]' : 'w-[48px]'} hidden lg:block shrink-0 sticky top-[52px] h-[calc(100vh-52px)] border-r-[0.5px] border-mathua-border bg-mathua-bg overflow-y-auto transition-all`}>
+          <Drawer collapsed={!drawerOpen} onToggle={() => {
+            const next = !drawerOpen
+            setDrawerOpen(next)
+            localStorage.setItem('mathua-drawer-open', String(next))
+          }} />
+        </aside>
+        <div className="flex-1 min-w-0 px-6 max-sm:px-4 py-12 pb-[56px] lg:pb-12">
         {/* Profile stats */}
         <ProfileStats name={user.name} scores={scores} />
 
@@ -150,8 +259,8 @@ export default function ProfilePage() {
           </Link>
         )}
 
-        {/* Activity heatmap */}
-        <section style={{ marginTop: 32 }}>
+        {/* Activity heatmap — centered, GitHub-style */}
+        <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h2
             style={{
               fontFamily: headingFont,
@@ -159,11 +268,15 @@ export default function ProfilePage() {
               fontWeight: 400,
               color: 'var(--text-primary)',
               marginBottom: 16,
+              width: '100%',
+              maxWidth: 820,
             }}
           >
             Activity
           </h2>
-          <ActivityHeatmap data={activity} />
+          <div style={{ width: '100%', maxWidth: 820, display: 'flex', justifyContent: 'center' }}>
+            <ActivityHeatmap data={activity} />
+          </div>
         </section>
 
         {/* Domain progress + Struggles */}
@@ -181,7 +294,17 @@ export default function ProfilePage() {
             <StrugglesSection weaknesses={weaknesses} />
           </div>
         </section>
+        </div>
       </div>
+      <BottomTabs onMore={() => setMobileDrawer(true)} />
+      {mobileDrawer && (
+        <>
+          <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileDrawer(false)} />
+          <div className="lg:hidden fixed left-0 top-0 bottom-0 w-[260px] z-50 bg-mathua-bg border-r border-mathua-border overflow-y-auto">
+            <Drawer collapsed={false} onToggle={() => setMobileDrawer(false)} />
+          </div>
+        </>
+      )}
     </>
   )
 }

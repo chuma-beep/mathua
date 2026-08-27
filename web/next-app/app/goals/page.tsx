@@ -11,6 +11,8 @@ import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
+import SymbolPalette from '../../components/SymbolPalette'
+import DiagnosticResults from '../../components/DiagnosticResults'
 import {
   startGoalDiagnostic,
   submitGoalAnswer,
@@ -65,6 +67,7 @@ export default function GoalsPage() {
   // Step 2: diagnostic
   const sessionId = useRef('')
   const tokenRef = useRef('')
+  const goalsInputRef = useRef<HTMLInputElement>(null)
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
   const [conceptName, setConceptName] = useState('')
@@ -323,27 +326,31 @@ export default function GoalsPage() {
                      </div>
                    </div>
 
-                   {!lastResult ? (
-                     <div className="flex gap-3">
-                       <input
-                         type="text"
-                         value={answerInput}
-                         onChange={(e) => setAnswerInput(e.target.value)}
-                        
-                         onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
-                         placeholder="Your answer..."
-                        disabled={loading}
-                        className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                    {!lastResult ? (
+                      <>
+                      <div className="flex gap-3">
+                        <input
+                          ref={goalsInputRef}
+                          type="text"
+                          value={answerInput}
+                          onChange={(e) => setAnswerInput(e.target.value)}
+                         
+                          onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
+                          placeholder="Your answer..."
+                         disabled={loading}
+                         className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                       />
-                      <button
-                        onClick={submitAnswer}
-                        disabled={!answerInput.trim() || loading}
-                        className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap"
-                      >
-                        Check Answer
-                      </button>
-                    </div>
-                  ) : (
+                       <button
+                         onClick={submitAnswer}
+                         disabled={!answerInput.trim() || loading}
+                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap"
+                       >
+                         Check Answer
+                       </button>
+                     </div>
+                      <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
+                      </>
+                    ) : (
                     <div className="animate-fadeIn text-center">
                       <p className={`text-base font-medium mb-2 ${lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>
                         {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
@@ -361,89 +368,8 @@ export default function GoalsPage() {
           {step === 'results' && plan && (
             <>
               <SectionHeader label="Your results" title="Here's what we found" />
-
-              <div className="max-w-2xl mx-auto">
-                {/* Readiness meter */}
-                <div className="text-center mb-10">
-                  <div className="relative inline-flex items-center justify-center">
-                    <svg width="140" height="140" className="-rotate-90">
-                      <circle cx="70" cy="70" r="60" fill="none" stroke="var(--code-bg)" strokeWidth="10" />
-                      <circle
-                        cx="70" cy="70" r="60" fill="none" stroke="var(--accent-blue)"
-                        strokeWidth="10" strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 60}`}
-                        strokeDashoffset={`${2 * Math.PI * 60 * (1 - plan.readiness)}`}
-                        className="transition-all duration-1000"
-                      />
-                    </svg>
-                    <span className="absolute text-3xl font-mono font-light text-mathua-primary">
-                      {Math.round(plan.readiness * 100)}%
-                    </span>
-                  </div>
-                  <p className="text-mathua-secondary text-sm mt-2">
-                    readiness for your selected topics
-                  </p>
-                  {plan.total_tested > 0 && (
-                    <p className="text-mathua-muted text-xs font-mono mt-1">
-                      {plan.correct_count}/{plan.total_tested} correct
-                    </p>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                  {/* Weak areas */}
-                  {Object.keys(plan.weak_areas).length > 0 && (
-                    <div>
-                      <h3 className="font-serif text-sm text-mathua-red mb-3 font-mono border-b border-mathua-border pb-2">
-                        Needs attention ({Object.values(plan.weak_areas).flat().length})
-                      </h3>
-                      <div className="space-y-2">
-                        {Object.entries(plan.weak_areas).map(([domain, concepts]) => {
-                          const label = domainLabels[domain] || domain
-                          return (
-                            <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-3">
-                              <div className="flex items-center justify-between">
-                                <span className="font-mono text-xs text-mathua-primary">{label}</span>
-                                <span className="font-mono text-xs text-mathua-red">{concepts.length}</span>
-                              </div>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Strong areas */}
-                  {Object.keys(plan.strong_areas).length > 0 && (
-                    <div>
-                      <h3 className="font-serif text-sm text-mathua-green mb-3 font-mono border-b border-mathua-border pb-2">
-                        Strong areas ({Object.values(plan.strong_areas).flat().length})
-                      </h3>
-                      <div className="space-y-2">
-                        {Object.entries(plan.strong_areas).map(([domain, concepts]) => {
-                          const label = domainLabels[domain] || domain
-                          return (
-                            <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-3">
-                              <div className="flex items-center justify-between">
-                                <span className="font-mono text-xs text-mathua-primary">{label}</span>
-                                <span className="font-mono text-xs text-mathua-green">{concepts.length}</span>
-                              </div>
-                            </div>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                <div className="text-center">
-                  <button
-                    onClick={startPractice}
-                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm"
-                  >
-                    Start practicing →
-                  </button>
-                </div>
+              <div className="mt-6">
+                <DiagnosticResults plan={plan} onStartPractice={startPractice} />
               </div>
             </>
           )}

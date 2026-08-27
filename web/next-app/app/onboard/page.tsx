@@ -11,6 +11,8 @@ import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
+import SymbolPalette from '../../components/SymbolPalette'
+import DiagnosticResults from '../../components/DiagnosticResults'
 import {
   startGoalDiagnostic,
   submitGoalAnswer,
@@ -60,6 +62,7 @@ export default function OnboardPage() {
   const [domains, setDomains] = useState<DomainInfo[]>([])
 
   const sessionId = useRef('')
+  const onboardInputRef = useRef<HTMLInputElement>(null)
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
   const questionShownAt = useRef<number | null>(null)
@@ -263,24 +266,26 @@ export default function OnboardPage() {
                      </div>
                    </div>
                    <div className="flex gap-3">
-                     <input
-                       type="text"
-                       value={answerInput}
-                       onChange={(e) => setAnswerInput(e.target.value)}
-                      
-                       onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
-                       placeholder="Your answer..."
-                      disabled={loading || lastResult !== null}
-                      className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                      <input
+                        ref={onboardInputRef}
+                        type="text"
+                        value={answerInput}
+                        onChange={(e) => setAnswerInput(e.target.value)}
+                       
+                        onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
+                        placeholder="Your answer..."
+                       disabled={loading || lastResult !== null}
+                       className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
-                    <button
-                      onClick={submitAnswer}
-                      disabled={!answerInput.trim() || loading || lastResult !== null}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
-                    >
-                      Check Answer
-                    </button>
-                  </div>
+                     <button
+                       onClick={submitAnswer}
+                       disabled={!answerInput.trim() || loading || lastResult !== null}
+                       className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
+                     >
+                       Check Answer
+                     </button>
+                   </div>
+                   <SymbolPalette targetRef={onboardInputRef} onInsert={setAnswerInput} />
                 </div>
 
                 {lastResult && (
@@ -298,56 +303,11 @@ export default function OnboardPage() {
 
           {/* === RESULTS === */}
           {step === 'results' && plan && (
-            <div className="max-w-2xl mx-auto text-center">
+            <div className="max-w-3xl mx-auto">
               <SectionHeader label="Your results" title="Here's what we found" />
-
-              <div className="text-5xl font-light font-mono text-mathua-blue mb-2">
-                {Math.round(plan.readiness * 100)}%
+              <div className="mt-6">
+                <DiagnosticResults plan={plan} onStartPractice={finishOnboarding} />
               </div>
-              <p className="text-mathua-secondary text-sm mb-8">
-                readiness{plan.total_tested > 0 && ` (${plan.correct_count}/${plan.total_tested} correct)`}
-              </p>
-
-              {Object.keys(plan.weak_areas).length > 0 && (
-                <div className="mb-8">
-                  <h3 className="font-serif text-lg text-mathua-primary mb-4">Areas needing attention</h3>
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    {Object.entries(plan.weak_areas).map(([domain, concepts]) => {
-                      const label = domainLabels[domain] || domain
-                      return (
-                        <div key={domain} className="bg-mathua-surface border border-mathua-border rounded-none p-4 min-w-[160px]">
-                          <div className="font-mono text-[10px] uppercase text-mathua-muted mb-1">{label}</div>
-                          <div className="font-mono text-xl text-mathua-red">{concepts.length}</div>
-                          <div className="text-mathua-secondary text-xs mt-1">to review</div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {Object.keys(plan.strong_areas).length > 0 && (
-                <div className="mb-8">
-                  <h3 className="font-serif text-lg text-mathua-primary mb-4">Strong areas</h3>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    {Object.entries(plan.strong_areas).map(([domain, concepts]) => {
-                      const label = domainLabels[domain] || domain
-                      return (
-                        <span key={domain} className="bg-mathua-surface border border-mathua-border rounded-none px-3 py-1.5 text-mathua-secondary text-sm">
-                          {label} <span className="text-mathua-green">({concepts.length})</span>
-                        </span>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-
-              <button
-                onClick={finishOnboarding}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm"
-              >
-                Start learning
-              </button>
             </div>
           )}
         </section>
