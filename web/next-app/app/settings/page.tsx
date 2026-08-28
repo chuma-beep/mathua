@@ -20,17 +20,15 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Auth bypass for mobile preview — always show settings
-    // if (!isLoggedIn()) {
-    //   push('/login')
-    //   return
-    // }
+    if (!isLoggedIn()) {
+      push('/login')
+      return
+    }
     getSettings().then(s => {
       setSettings(s)
       setLoading(false)
     }).catch((e) => {
       console.error('getSettings failed:', e)
-      // show empty settings even without backend for preview
       setLoading(false)
     })
   }, [push])
