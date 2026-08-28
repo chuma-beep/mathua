@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import Header from '../components/Header'
+import BottomTabs from '../components/BottomTabs'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
 import Pipeline from '../components/Pipeline'
@@ -16,7 +17,7 @@ import Loading from '../components/Loading'
 import conceptsData from '../data/concepts.json'
 
 const loadingGraphStyle: React.CSSProperties = {
-  height: 'clamp(320px, 50vh, 520px)',
+  height: 'clamp(320px, 60dvh, 520px)',
   background: 'transparent',
   borderRadius: 0,
   border: '0.5px solid var(--border)',
@@ -26,6 +27,8 @@ const loadingGraphStyle: React.CSSProperties = {
   color: 'var(--text-muted)',
   fontFamily: "'IBM Plex Mono', monospace",
   fontSize: '13px',
+  width: '100%',
+  maxWidth: '100%',
 }
 
 const statCountStyle: React.CSSProperties = {
@@ -224,7 +227,7 @@ export default function HomePage() {
   return (
     <>
       <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       {/* ── Hero ── */}
       <section
         className="py-20 max-sm:py-12 text-center"
@@ -257,16 +260,16 @@ export default function HomePage() {
           you have truly mastered the prerequisite, both speed and accuracy must be proven.
         </p>
 
-        <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px]">
-          <Link href="/login" style={ctaPrimaryStyle}>
+        <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
+          <Link href="/login" style={ctaPrimaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
             Open the web app
           </Link>
-          <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle}>
+          <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
             View on GitHub
           </a>
         </div>
 
-        <div style={statsRowStyle}>
+        <div style={statsRowStyle} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center">
           <span>{conceptCount} topics</span>
           <span style={{ color: 'var(--border-strong)' }}>·</span>
           <span>{connectionCount} connections</span>
@@ -280,17 +283,18 @@ export default function HomePage() {
 
         {/* 3D Concept Graph */}
           <div
-          className="max-sm:p-4"
+          className="p-3 sm:p-6 w-full max-w-full min-w-0 overflow-hidden"
           style={{
             border: '0.5px solid var(--border)',
             borderRadius: 0,
-            padding: '1.5rem',
             background: 'var(--graph-surface)',
           }}
         >
-          <LazyGraphMount>
-            <MathConceptGraph3D theme={theme} concepts={heroConcepts} />
-          </LazyGraphMount>
+          <div className="w-full max-w-full min-w-0 overflow-hidden">
+            <LazyGraphMount>
+              <MathConceptGraph3D theme={theme} concepts={heroConcepts} />
+            </LazyGraphMount>
+          </div>
         </div>
       </section>
 
@@ -475,6 +479,7 @@ export default function HomePage() {
 
       <Footer />
     </div>
+      <BottomTabs />
     </>
   )
 }
