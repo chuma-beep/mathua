@@ -138,7 +138,7 @@ export default function ProfilePage() {
             { label: 'Graph', href: '/graph' },
           ]}
         />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[80px] lg:pb-12">
+        <div className="mx-auto w-full max-w-[820px] px-4 sm:px-6 py-8 sm:py-12 pb-[80px] lg:pb-12">
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface">
             <h2 style={{ fontFamily: headingFont, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 8 }}>Welcome to your profile</h2>
             <p style={{ fontFamily: monoFont, fontSize: 12, color: 'var(--text-secondary)', marginBottom: 16 }}>Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -148,18 +148,18 @@ export default function ProfilePage() {
             </div>
           </div>
           <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{ fontFamily: headingFont, fontSize: '1.05rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 16, width: '100%', maxWidth: 820 }}>Activity</h2>
-            <div style={{ width: '100%', maxWidth: 820, display: 'flex', justifyContent: 'center' }}>
+            <h2 style={{ fontFamily: headingFont, fontSize: '1.05rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 16, width: '100%' }}>Activity</h2>
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
               <ActivityHeatmap data={activity} />
             </div>
           </section>
           <section style={{ marginTop: 40 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 3fr) minmax(0, 2fr)', gap: 24, alignItems: 'start' }} className="max-sm:block max-sm:[&>*+*]:mt-6">
-              <DomainProgress progress={progress} />
+            <div className="grid grid-cols-1 gap-4 lg:gap-6">
               <div className="border border-mathua-border p-4 bg-mathua-surface text-center">
                 <p className="font-mono text-xs text-mathua-secondary mb-3">Take a diagnostic to find your weak spots</p>
                 <Link href="/onboard" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">Start diagnostic →</Link>
               </div>
+              <DomainProgress progress={progress} />
             </div>
           </section>
         </div>
@@ -193,8 +193,8 @@ export default function ProfilePage() {
         ]}
       />
 
-      <div className="max-w-container mx-auto px-6 max-sm:px-4 py-12 pb-[80px] lg:pb-12">
-        {/* Profile stats */}
+      <div className="mx-auto w-full max-w-[820px] px-4 sm:px-6 py-8 sm:py-12 pb-[80px] lg:pb-12">
+        {/* Profile stats — mobile-first */}
         <ProfileStats name={user.name} scores={scores} />
 
         {dueReviews > 0 && (
@@ -211,7 +211,7 @@ export default function ProfilePage() {
           </Link>
         )}
 
-        {/* Activity heatmap — centered, GitHub-style */}
+        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
         <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <h2
             style={{
@@ -221,27 +221,18 @@ export default function ProfilePage() {
               color: 'var(--text-primary)',
               marginBottom: 16,
               width: '100%',
-              maxWidth: 820,
             }}
           >
             Activity
           </h2>
-          <div style={{ width: '100%', maxWidth: 820, display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <ActivityHeatmap data={activity} />
           </div>
         </section>
 
-        {/* Domain progress + Struggles */}
-        <section style={{ marginTop: 40 }}>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(0, 3fr) minmax(0, 2fr)',
-              gap: 24,
-              alignItems: 'start',
-            }}
-            className="max-sm:block max-sm:[&>*+*]:mt-6"
-          >
+        {/* Domain progress + Struggles — mobile-first: CTA on top, stacked */}
+        <section style={{ marginTop: 32 }}>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr] lg:gap-6">
             <DomainProgress progress={progress} />
             <StrugglesSection weaknesses={weaknesses} />
           </div>
