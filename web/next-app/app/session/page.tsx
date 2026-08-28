@@ -74,6 +74,7 @@ export default function SessionPage() {
   const [reviewStats, setReviewStats] = useState({ correct: 0, total: 0 })
   const [reviewDone, setReviewDone] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const submittingRef = useRef(false)
 
    // Diagnostic state (guest mode)
   const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
@@ -174,7 +175,9 @@ export default function SessionPage() {
   }, [name])
 
   const handleSubmit = useCallback(async () => {
-    if (!answer.trim() || !question) return
+    if (!answer.trim() || !question || submittingRef.current) return
+    submittingRef.current = true
+    setError('')
     const e = (Date.now() - startRef.current) / 1000
     try {
       const res = await submitAnswer(sessionID, answer.trim(), e)
@@ -195,6 +198,8 @@ export default function SessionPage() {
       if (s) setScores(s)
     } catch {
       setError('Failed to submit answer')
+    } finally {
+      submittingRef.current = false
     }
   }, [answer, question, sessionID, studentID])
 
@@ -224,7 +229,9 @@ export default function SessionPage() {
   }, [])
 
   const handleReviewSubmit = useCallback(async () => {
-    if (!answer.trim() || !question) return
+    if (!answer.trim() || !question || submittingRef.current) return
+    submittingRef.current = true
+    setError('')
     const e = (Date.now() - startRef.current) / 1000
     try {
       const res = await submitReviewAnswer(reviewSessionID, answer.trim(), e)
@@ -246,6 +253,8 @@ export default function SessionPage() {
       if (s) setScores(s)
     } catch {
       setError('Failed to submit review answer')
+    } finally {
+      submittingRef.current = false
     }
   }, [answer, question, reviewSessionID, studentID])
 
@@ -735,7 +744,8 @@ export default function SessionPage() {
                           />
                            <button
                              onClick={handleSubmit}
-                             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[36px]"
+                             disabled={!answer.trim() || loading || submitted || submittingRef.current}
+                             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[36px] disabled:opacity-50"
                            >
                              Check Answer
                            </button>
@@ -949,7 +959,8 @@ export default function SessionPage() {
                            />
                            <button
                              onClick={handleReviewSubmit}
-                             className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors shrink-0 w-full sm:w-auto min-h-[36px]"
+                             disabled={!answer.trim() || loading || submitted || submittingRef.current}
+                             className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors shrink-0 w-full sm:w-auto min-h-[36px] disabled:opacity-50"
                            >
                              Check Answer
                            </button>

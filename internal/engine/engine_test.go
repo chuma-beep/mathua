@@ -1,6 +1,8 @@
 package engine
 
 import (
+	"errors"
+	"sync"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -160,6 +162,48 @@ func TestEngine_GetScores(t *testing.T) {
 	}
 	if scores.Level != "Novice" {
 		t.Errorf("expected Novice, got %s", scores.Level)
+	}
+}
+
+// A duplicate/stale submission racing the real one must be rejected, never
+// graded against a question the client was not shown (cross-question grading).
+func TestEngine_SubmitAnswer_ConcurrentDuplicates(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("grace")
+	sess, _ := e.repo.CreateSession(st.ID)
+	_, _ = e.NextQuestion(sess.ID, st.ID)
+
+	const workers = 8
+	var wg sync.WaitGroup
+	results := make([]error, workers)
+	for i := 0; i < workers; i++ {
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			_, results[i] = e.SubmitAnswer(sess.ID, st.ID, "42", 3.0)
+		}(i)
+	}
+	wg.Wait()
+
+	var ok, rejected int
+	for _, err := range results {
+		switch {
+		case err == nil:
+			ok++
+		case errors.Is(err, ErrNoActiveQuestion):
+			rejected++
+		default:
+			t.Fatalf("unexpected error: %v", err)
+		}
+	}
+	if ok != 1 {
+		t.Errorf("expected exactly 1 successful submission, got %d (rejected %d)", ok, rejected)
+	}
+
+	// The winning grade must match the question that was displayed (concept "a", answer "42").
+	progress, _ := e.GetProgress(st.ID)
+	if p, ok := progress["a"]; !ok || p.Streak != 1 {
+		t.Errorf("expected concept a to be graded once with streak 1, got %+v", progress["a"])
 	}
 }
 
