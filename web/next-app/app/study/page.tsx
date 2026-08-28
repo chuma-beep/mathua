@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -775,9 +776,10 @@ function StudyContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <Loading label="LOADING LESSONS" />
         </div>
+        <BottomTabs />
         <Footer />
       </>
     )
@@ -792,8 +794,8 @@ function StudyContent() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-        <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+        <section className="pt-8 min-w-0 overflow-hidden">
           {!selectedLesson && (
             <span className="flex justify-between items-center mb-4">
               <Link href={backHref} className="text-mathua-secondary text-sm hover:text-mathua-primary">
@@ -852,6 +854,7 @@ function StudyContent() {
         <AsciiDivider pattern="wave" />
         <Footer />
       </div>
+      <BottomTabs />
     </>
   )
 }
@@ -859,7 +862,7 @@ function StudyContent() {
 export default function StudyPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><Loading label="LOADING LESSONS" /></div><Footer /></>
+      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING LESSONS" /></div><Footer /></>
     }>
       <StudyContent />
     </Suspense>

@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -367,8 +368,8 @@ export default function SessionPage() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex justify-between items-center mb-4">
           <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
@@ -1010,6 +1011,7 @@ export default function SessionPage() {
       <AsciiDivider pattern="wave" />
       <Footer />
     </div>
+      <BottomTabs />
     </>
   )
 }
