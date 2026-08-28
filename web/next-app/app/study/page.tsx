@@ -341,15 +341,15 @@ function DomainOverview({
                   }`}
                 />
 
-                <div className="flex-1 p-4">
-                  <div className="flex items-center gap-3">
+                <div className="flex-1 min-w-0 p-3 sm:p-4 overflow-hidden">
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                     <span className="font-mono text-lg text-mathua-blue shrink-0 w-6 text-center select-none">
                       {icon}
                     </span>
-                    <span className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors">
+                    <span className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors min-w-0 flex-1 truncate">
                       {label}
                     </span>
-                    <span className="font-mono text-[11px] text-mathua-muted ml-auto">
+                    <span className="font-mono text-[11px] text-mathua-muted shrink-0 ml-1">
                       {lessons.length} lesson{lessons.length !== 1 ? 's' : ''}
                     </span>
                   </div>
@@ -378,7 +378,7 @@ function DomainOverview({
                   )}
                 </div>
 
-                <div className="flex items-center pr-4">
+                <div className="hidden sm:flex items-center pr-4 shrink-0">
                   <span className="font-mono text-[11px] text-mathua-blue opacity-0 group-hover:opacity-100 transition-opacity">
                     →
                   </span>
@@ -467,12 +467,12 @@ function DomainDrillDown({
               }`}
               style={{ animationDelay: `${i * 30}ms` }}
             >
-              <div className="border border-mathua-border hover:shadow-card-hover transition-shadow bg-mathua-surface-elevated p-4">
-                <div className="flex items-center justify-between">
-                  <div className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors">
+              <div className="border border-mathua-border hover:shadow-card-hover transition-shadow bg-mathua-surface-elevated p-3 sm:p-4 min-w-0 overflow-hidden">
+                <div className="flex items-center justify-between gap-2 min-w-0">
+                  <div className="font-mono text-sm text-mathua-primary group-hover:text-mathua-blue transition-colors min-w-0 flex-1 line-clamp-2 break-words">
                     {lesson.title}
                   </div>
-                  <span className="font-mono text-[11px] text-mathua-blue opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-3">
+                  <span className="hidden sm:inline font-mono text-[11px] text-mathua-blue opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2">
                     View →
                   </span>
                 </div>
@@ -535,19 +535,19 @@ function LessonDetail({
       </button>
       <SectionHeader label="Lesson" title={lesson.title} />
 
-      <div className="bg-mathua-surface border border-mathua-border p-6 mt-6 mb-6">
-        <div className="flex items-center gap-4 flex-wrap">
-          <span className="text-mathua-muted text-xs font-mono">Concepts:</span>
+      <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 mt-6 mb-6 min-w-0 overflow-hidden">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
+          <span className="text-mathua-muted text-xs font-mono shrink-0">Concepts:</span>
           {lesson.concepts.map((cid) => {
             const p = lesson.progress?.[cid]
             return (
               <Link
                 key={cid}
                 href={`/concept?id=${encodeURIComponent(cid)}`}
-                className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1 text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors"
+                className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1.5 min-h-[36px] text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors max-w-full"
               >
                 <MasteryBadge status={p?.status} size="sm" />
-                <span>{cid}</span>
+                <span className="truncate">{cid}</span>
               </Link>
             )
           })}
@@ -587,8 +587,10 @@ function LessonDetail({
         </div>
       )}
 
-      <div className="bg-mathua-surface border border-mathua-border p-6 md:p-8 lg:p-10">
-        <KatexContent>{lesson.body}</KatexContent>
+      <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
+        <div className="w-full max-w-full min-w-0 overflow-hidden">
+          <KatexContent>{lesson.body}</KatexContent>
+        </div>
       </div>
 
       {lesson.concepts.slice(0, 3).map(cid => (
