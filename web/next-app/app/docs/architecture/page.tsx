@@ -92,8 +92,8 @@ const calloutStyle: React.CSSProperties = {
 
 export default function ArchitecturePage() {
   return (
-    <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="pt-8">
+    <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <section className="pt-8 min-w-0 overflow-hidden">
         <SectionHeader label="Documentation" title="Architecture & System Design" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
           Mathua is a single Go binary with a web delivery mode. Click nodes in the diagrams below for details.

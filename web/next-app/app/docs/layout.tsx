@@ -1,6 +1,7 @@
 'use client'
 
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -22,6 +23,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
       }}>
         Mathua · MIT License
       </footer>
+      <BottomTabs />
     </>
   )
 }

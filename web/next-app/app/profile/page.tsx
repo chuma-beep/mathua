@@ -91,7 +91,7 @@ export default function ProfilePage() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-20">
+        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
           <div
             style={{
               fontFamily: monoFont,
@@ -103,6 +103,7 @@ export default function ProfilePage() {
             <Loading label="LOADING PROFILE" />
           </div>
         </div>
+        <BottomTabs />
       </>
     )
   }
@@ -111,7 +112,7 @@ export default function ProfilePage() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-20">
+        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
           <div
             style={{
               fontFamily: monoFont,
@@ -123,6 +124,7 @@ export default function ProfilePage() {
             {error}
           </div>
         </div>
+        <BottomTabs />
       </>
     )
   }
@@ -174,11 +176,12 @@ export default function ProfilePage() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 py-20">
+        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
           <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
             Loading scores…
           </div>
         </div>
+        <BottomTabs />
       </>
     )
   }

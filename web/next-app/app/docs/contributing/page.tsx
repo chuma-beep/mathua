@@ -64,6 +64,9 @@ const codeBlockStyle: React.CSSProperties = {
   overflowX: 'auto',
   lineHeight: 1.6,
   margin: '1rem 0',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
 }
 
 const inlineCodeStyle: React.CSSProperties = {
@@ -112,8 +115,8 @@ const calloutStyle: React.CSSProperties = {
 
 export default function ContributingPage() {
   return (
-    <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="pt-8">
+    <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <section className="pt-8 min-w-0 overflow-hidden">
         <SectionHeader label="Community" title="Contributing to Mathua" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
           Mathua is a full-stack project: a Go backend with a Next.js frontend,
