@@ -66,6 +66,22 @@ const headingFont = "'IBM Plex Serif', serif"
 const bodyFont = "'IBM Plex Serif', serif"
 const monoFont = "'IBM Plex Mono', monospace"
 
+const inlineCodeStyle: React.CSSProperties = {
+  fontFamily: monoFont,
+  fontSize: '0.9em',
+  color: 'var(--accent-blue)',
+  overflowWrap: 'anywhere',
+  wordBreak: 'break-all',
+}
+
+const mutedCodeStyle: React.CSSProperties = {
+  fontFamily: monoFont,
+  fontSize: '0.9em',
+  color: 'var(--text-secondary)',
+  overflowWrap: 'anywhere',
+  wordBreak: 'break-all',
+}
+
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
@@ -79,7 +95,7 @@ const h2Style: React.CSSProperties = {
 
 const bodyStyle: React.CSSProperties = {
   fontFamily: bodyFont,
-  fontSize: '1rem',
+  fontSize: 'clamp(0.9rem, 0.85rem + 0.5vw, 1rem)',
   color: 'var(--text-secondary)',
   lineHeight: 1.85,
   marginBottom: '1rem',
@@ -106,7 +122,7 @@ const codeBlockStyle: React.CSSProperties = {
 const tableHeaderStyle: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
-  fontSize: '0.9rem',
+  fontSize: 'clamp(0.8rem, 0.75rem + 0.3vw, 0.9rem)',
   textTransform: 'uppercase' as const,
   letterSpacing: '0.1em',
   color: 'var(--accent-blue)',
@@ -118,7 +134,7 @@ const tableHeaderStyle: React.CSSProperties = {
 
 const tableCellStyle: React.CSSProperties = {
   fontFamily: bodyFont,
-  fontSize: '1rem',
+  fontSize: 'clamp(0.85rem, 0.8rem + 0.4vw, 1rem)',
   color: 'var(--text-secondary)',
   padding: '10px 14px 10px 0',
   borderBottom: '0.5px solid var(--border)',
@@ -216,7 +232,7 @@ export default function HowItWorksPage() {
             </pre>
             <p style={bodyStyle}>
               The graph is stored as a flat JSON file:{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>data/concepts.json</code>, and{' '}
+              <code style={inlineCodeStyle}>data/concepts.json</code>, and{' '}
               is community-editable. A graph validator runs on every pull request and rejects the
               change if it introduces a cycle.
             </p>
@@ -444,7 +460,7 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 }`}
             </pre>
             <p style={bodyStyle}>
-              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
+              The <code style={inlineCodeStyle}>difficulty</code> parameter scales operand size from 0.0 to 1.0.
               The scheduler passes a difficulty value based on the student&apos;s current mastery score.
             </p>
           </section>
@@ -456,21 +472,21 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
             <h2 style={h2Style}>Expression Grading with SymPy</h2>
             <p style={bodyStyle}>
               From algebra onward, answers are expressions:{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>x = 4</code>,{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>(x+2)(x+3)</code>,{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>2x&#178; + 3x - 5</code>{' '}
+              <code style={mutedCodeStyle}>x = 4</code>,{' '}
+              <code style={mutedCodeStyle}>(x+2)(x+3)</code>,{' '}
+              <code style={mutedCodeStyle}>2x&#178; + 3x - 5</code>{' '}
               where numeric comparison is no longer sufficient. Mathua uses a mixed Go/Python
               grading system: a Go router dispatches to six grader types, and mathematical
               equivalence for algebra, calculus, differential equations, and trigonometry is
               handled by a Python subprocess running{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>sympy</code>.
+              <code style={inlineCodeStyle}>sympy</code>.
             </p>
             <p style={bodyStyle}>
-              The <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>Router</code> selects the
-              grader by <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>grading_type</code>.
-              Concepts with type <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>polynomial</code> or{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--text-secondary)' }}>expression</code> route to{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>sympyGrade()</code>, which
+              The <code style={inlineCodeStyle}>Router</code> selects the
+              grader by <code style={mutedCodeStyle}>grading_type</code>.
+              Concepts with type <code style={mutedCodeStyle}>polynomial</code> or{' '}
+              <code style={mutedCodeStyle}>expression</code> route to{' '}
+              <code style={inlineCodeStyle}>sympyGrade()</code>, which
               spawns a long-lived Python 3 subprocess. If Python or SymPy are not installed, it
               falls back to a pure-Go string normaliser (symbolic grader).
             </p>
@@ -510,7 +526,7 @@ func (r *Router) sympyGrade(expected, answer string) Result {
             <p style={bodyStyle}>
               The Go client sends JSON requests to the Python subprocess via stdin. SymPy parses
               both expressions into trees and checks equivalence with{' '}
-              <code style={{ fontFamily: monoFont, fontSize: '0.9em', color: 'var(--accent-blue)' }}>simplify(expected - answer) == 0</code>.
+              <code style={inlineCodeStyle}>simplify(expected - answer) == 0</code>.
               This catches identities that string or coefficient comparison never could:
             </p>
             <pre style={codeBlockStyle}>
