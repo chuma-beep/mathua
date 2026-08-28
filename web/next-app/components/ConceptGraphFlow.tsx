@@ -928,7 +928,7 @@ function GraphInner({
           paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
-        <style>{`.react-flow__controls-button{width:44px!important;height:44px!important;min-height:44px!important;min-width:44px!important} .react-flow__minimap{width:80px!important;height:50px!important} @media(min-width:640px){.react-flow__minimap{width:120px!important;height:80px!important}}`}</style>
+        <style>{`.react-flow__controls-button{width:44px!important;height:44px!important;min-height:44px!important;min-width:44px!important} .react-flow__minimap{width:80px!important;height:50px!important} @media(min-width:640px){.react-flow__controls-button{width:28px!important;height:28px!important;min-height:28px!important;min-width:28px!important} .react-flow__minimap{width:160px!important;height:100px!important}}`}</style>
         {/* MIT-licensed library; hiding the attribution badge is permitted.
             The LICENSE copyright notice remains in node_modules untouched. */}
         <ReactFlow
