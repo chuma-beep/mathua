@@ -39,7 +39,7 @@ interface Props {
 export default function YearlyGrid({ data }: Props) {
   const [tooltip, setTooltip] = useState<{ date: string; questions: number; correct: number; x: number; y: number } | null>(null)
 
-  const { grid, monthLabels, maxQuestions } = useMemo(() => {
+  const { grid, monthLabels } = useMemo(() => {
     const activityMap = new Map<string, { questions: number; correct: number }>()
     let maxQ = 0
     for (const d of data) {
@@ -52,7 +52,6 @@ export default function YearlyGrid({ data }: Props) {
     const todayStr = today.toISOString().slice(0, 10)
     const todayDate = new Date(todayStr + 'T00:00:00')
 
-    // Start 364 days back, aligned to Sunday
     const startDate = new Date(todayDate)
     startDate.setDate(startDate.getDate() - 364)
     while (startDate.getDay() !== 0) {
@@ -88,7 +87,6 @@ export default function YearlyGrid({ data }: Props) {
       }
     }
 
-    // Assign intensity levels based on max
     for (const cell of cells) {
       cell.level = intensityLevel(cell.questions, maxQ)
     }
@@ -99,14 +97,34 @@ export default function YearlyGrid({ data }: Props) {
   const svgW = LABEL_W + COLS * (CELL_W + GAP)
   const svgH = 16 + (7 * (CELL_H + GAP)) + GAP + 24
 
+  function handleCellHover(e: React.MouseEvent<SVGRectElement>, cell: { date: string; questions: number; correct: number }) {
+    const rect = (e.target as SVGRectElement).getBoundingClientRect()
+    const vw = window.innerWidth
+    let x = rect.left + rect.width / 2
+    x = Math.max(80, Math.min(vw - 80, x))
+    setTooltip({
+      date: cell.date,
+      questions: cell.questions,
+      correct: cell.correct,
+      x,
+      y: rect.top - 8,
+    })
+  }
+
+  function handleCellClick(e: React.MouseEvent<SVGRectElement>, cell: { date: string; questions: number; correct: number }) {
+    if (window.matchMedia('(hover: none)').matches) {
+      handleCellHover(e, cell)
+    }
+  }
+
   return (
-    <div style={{ overflowX: 'auto', position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+    <div className="relative w-full max-w-full min-w-0 overflow-x-auto overscroll-x-contain -mx-4 px-4 sm:mx-0 sm:px-0 flex justify-start sm:justify-center">
       <svg
         width={svgW}
         height={svgH}
-        style={{ fontFamily: "'IBM Plex Mono', monospace", display: 'block', minWidth: svgW, margin: '0 auto' }}
+        className="block shrink-0 font-mono"
+        style={{ fontFamily: "'IBM Plex Mono', monospace", minWidth: svgW, margin: '0 auto' }}
       >
-        {/* Month labels */}
         {monthLabels.map((m) => (
           <text
             key={m.col}
@@ -118,7 +136,6 @@ export default function YearlyGrid({ data }: Props) {
           </text>
         ))}
 
-        {/* Day-of-week labels */}
         {[1, 3, 5].map((r) => (
           <text
             key={r}
@@ -130,7 +147,6 @@ export default function YearlyGrid({ data }: Props) {
           </text>
         ))}
 
-        {/* Cells */}
         {grid.map((cell) => (
           <rect
             key={`${cell.col}-${cell.row}`}
@@ -145,21 +161,25 @@ export default function YearlyGrid({ data }: Props) {
               cursor: 'pointer',
               shapeRendering: 'crispEdges',
             }}
-            onMouseEnter={(e) => {
+            onMouseEnter={(e) => handleCellHover(e, cell)}
+            onMouseLeave={() => setTooltip(null)}
+            onClick={(e) => handleCellClick(e, cell)}
+            onTouchStart={(e) => {
               const rect = (e.target as SVGRectElement).getBoundingClientRect()
+              const vw = window.innerWidth
+              let x = rect.left + rect.width / 2
+              x = Math.max(80, Math.min(vw - 80, x))
               setTooltip({
                 date: cell.date,
                 questions: cell.questions,
                 correct: cell.correct,
-                x: rect.left + rect.width / 2,
+                x,
                 y: rect.top - 8,
               })
             }}
-            onMouseLeave={() => setTooltip(null)}
           />
         ))}
 
-        {/* Legend */}
         <text x={svgW - 180} y={svgH - 6} style={{ fontSize: 9, fill: 'var(--text-muted)' }}>
           Less
         </text>
@@ -183,26 +203,17 @@ export default function YearlyGrid({ data }: Props) {
         </text>
       </svg>
 
-      {/* Tooltip */}
       {tooltip && (
         <div
+          className="fixed z-[100] border-[0.5px] border-mathua-border-strong bg-mathua-bg px-2 py-1 font-mono text-[11px] text-mathua-primary pointer-events-none whitespace-nowrap max-w-[min(280px,calc(100vw-16px))]"
           style={{
-            position: 'fixed',
             left: tooltip.x,
             top: tooltip.y,
             transform: 'translate(-50%, -100%)',
-            background: 'var(--bg)',
-            border: '0.5px solid var(--border-strong)',
-            padding: '4px 8px',
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 11,
-            color: 'var(--text-primary)',
-            whiteSpace: 'nowrap',
-            zIndex: 100,
-            pointerEvents: 'none',
           }}
+          onClick={() => setTooltip(null)}
         >
-          <div>{formatDate(tooltip.date)}</div>
+          <div className="truncate">{formatDate(tooltip.date)}</div>
           <div>
             {tooltip.questions} questions ·{' '}
             {tooltip.questions > 0
