@@ -229,8 +229,8 @@ export default function GoalsPage() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-        <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+        <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex mb-4">
             <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
           </span>
@@ -238,27 +238,27 @@ export default function GoalsPage() {
           {/* === STEP 1: Goal Selection === */}
           {step === 'select' && (
             <>
-              {scores && <ProgressSummary scores={scores} weakByDomain={weakByDomain || undefined} />}
+              {scores && <div className="min-w-0 overflow-hidden"><ProgressSummary scores={scores} weakByDomain={weakByDomain || undefined} /></div>}
               <SectionHeader label="Step 1" title="What do you want to learn?" />
-              <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-2 mb-8">
+              <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-2 mb-8 px-2">
                 Pick one or more topics. The system will test your prerequisite knowledge and build a personalized study plan.
               </p>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-w-4xl mx-auto mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto mb-8 min-w-0">
                 {domains.map(d => {
                   const label = domainLabels[d.name] || d.name
                   return (
                     <button
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
-                    className={`rounded-lg p-4 text-left transition-all text-sm ${
+                    className={`rounded-none p-3 sm:p-4 text-left transition-all text-sm min-h-[60px] min-w-0 overflow-hidden ${
                       d.selected
                         ? 'bg-mathua-blue text-white'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
                     }`}
                     >
-                      <div className="font-medium">{label}</div>
-                      <div className={`font-mono text-[10px] mt-1 ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
+                      <div className="font-medium truncate sm:whitespace-normal sm:line-clamp-2 break-words text-[13px] sm:text-sm">{label}</div>
+                      <div className={`font-mono text-[10px] mt-1 truncate ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
                         {d.count} concepts
                       </div>
                     </button>
@@ -266,11 +266,11 @@ export default function GoalsPage() {
                 })}
               </div>
 
-              <div className="text-center">
+              <div className="text-center px-4">
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-10 font-medium text-sm disabled:opacity-50"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
                   {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
                 </button>
@@ -282,7 +282,7 @@ export default function GoalsPage() {
           {step === 'diagnostic' && (
             <>
               <SectionHeader label={`Question ${questionCount} of ~${estimatedTotal}`} title={conceptName} />
-              <div className="max-w-2xl mx-auto">
+              <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
                 {/* Progress bar */}
                 <div className="mb-4">
                   <div className="flex justify-between text-[10px] font-mono text-mathua-muted mb-1">
@@ -313,14 +313,14 @@ export default function GoalsPage() {
                   </div>
                 )}
 
-                <div className={`bg-mathua-surface border rounded-lg p-6 mb-6 transition-colors duration-200 ${
+                <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors duration-200 w-full max-w-full min-w-0 overflow-hidden ${
                   lastResult
                     ? lastResult.correct ? 'border-green-500/40' : 'border-red-500/40'
                     : 'border-mathua-border'
                 }`}>
-                  <div className="bg-mathua-code border border-mathua-border rounded-md p-6 text-center mb-4">
-                    <div className="">
-                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">
+                  <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">
+                    <div className="w-full max-w-full min-w-0 overflow-hidden">
+                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">
                          {question}
                        </KatexContent>
                      </div>
@@ -328,22 +328,21 @@ export default function GoalsPage() {
 
                     {!lastResult ? (
                       <>
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-3 min-w-0">
                         <input
                           ref={goalsInputRef}
                           type="text"
                           value={answerInput}
                           onChange={(e) => setAnswerInput(e.target.value)}
-                         
                           onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                           placeholder="Your answer..."
                          disabled={loading}
-                         className="flex-1 bg-mathua-code border border-mathua-border rounded-md h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                         className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                       />
                        <button
                          onClick={submitAnswer}
                          disabled={!answerInput.trim() || loading}
-                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-12 px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap"
+                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap shrink-0 w-full sm:w-auto"
                        >
                          Check Answer
                        </button>
@@ -368,7 +367,7 @@ export default function GoalsPage() {
           {step === 'results' && plan && (
             <>
               <SectionHeader label="Your results" title="Here's what we found" />
-              <div className="mt-6">
+              <div className="mt-6 min-w-0 overflow-hidden">
                 <DiagnosticResults plan={plan} onStartPractice={startPractice} />
               </div>
             </>

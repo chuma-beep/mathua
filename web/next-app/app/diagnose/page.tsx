@@ -30,8 +30,8 @@ export default function DiagnosePage() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex mb-4">
           <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
@@ -88,16 +88,16 @@ export default function DiagnosePage() {
           deletes progress, and Mathua always keeps the most optimistic estimate.
         </p>
 
-        <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center">
+        <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center min-w-0">
           <Link
             href="/onboard"
-            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-md h-10 px-6 text-[13px] font-medium transition-colors flex items-center"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
           >
             Start Diagnostic
           </Link>
           <Link
             href="/docs/system-design#cat-diagnostic"
-            className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-md h-10 px-6 text-[13px] font-medium transition-colors flex items-center"
+            className="border border-mathua-border-strong text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
           >
             Read the full algorithm
           </Link>

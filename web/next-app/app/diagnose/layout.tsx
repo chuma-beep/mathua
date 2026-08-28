@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import BottomTabs from '../../components/BottomTabs'
 
 export const metadata: Metadata = {
   title: 'Diagnostic Test \u00b7 Mathua',
@@ -6,5 +7,10 @@ export const metadata: Metadata = {
 }
 
 export default function DiagnoseLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <>
+      {children}
+      <BottomTabs />
+    </>
+  )
 }

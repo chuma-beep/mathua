@@ -18,7 +18,7 @@ export default function DocsIndexPage() {
   }
 
   return (
-    <div className="max-w-[720px] mx-auto px-6 max-sm:px-4 py-20 max-sm:py-12">
+    <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-12 sm:py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 overflow-x-hidden min-w-0">
       <h1 style={{
         fontFamily: "'IBM Plex Serif', serif",
         fontWeight: 400,
@@ -134,6 +134,9 @@ export default function DocsIndexPage() {
           overflowX: 'auto',
           lineHeight: 1.6,
           margin: 0,
+          width: '100%',
+          maxWidth: '100%',
+          minWidth: 0,
         }}>
 {`git clone https://github.com/chuma-beep/mathua.git
 cd mathua

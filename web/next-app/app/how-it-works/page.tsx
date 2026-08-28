@@ -45,7 +45,7 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
         <a
           key={section.id}
           href={`#${section.id}`}
-          className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap"
+          className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap max-md:min-h-[36px] max-md:flex max-md:items-center max-md:shrink-0"
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
             color: activeSection === section.id ? 'var(--accent-blue)' : 'var(--text-muted)',
@@ -98,6 +98,9 @@ const codeBlockStyle: React.CSSProperties = {
   overflowX: 'auto',
   lineHeight: 1.6,
   margin: '1rem 0',
+  width: '100%',
+  maxWidth: '100%',
+  minWidth: 0,
 }
 
 const tableHeaderStyle: React.CSSProperties = {
@@ -172,11 +175,11 @@ export default function HowItWorksPage() {
   return (
     <>
       <Header links={[{ label: 'Docs', href: '/docs' }]} />
-      <div className="min-h-screen">
-      <div className="flex max-w-[960px] mx-auto p-[32px_24px] gap-10 max-md:flex-col max-md:p-4">
+      <div className="min-h-screen w-full max-w-full min-w-0 overflow-x-hidden">
+      <div className="flex max-w-[960px] mx-auto p-4 sm:p-[32px_24px] gap-4 sm:gap-10 max-md:flex-col max-md:pb-[calc(80px+env(safe-area-inset-bottom))] min-w-0">
         <NavSidebar activeSection={activeSection} />
 
-        <main className="max-w-[720px] flex-1 max-md:mt-20">
+        <main className="max-w-[720px] flex-1 min-w-0 overflow-hidden max-md:mt-20">
           <section id="intro" className="mb-12 pb-8" style={{ borderBottom: '0.5px solid var(--border)' }}>
             <h1 style={h1Style}>
               How Mathua Works
