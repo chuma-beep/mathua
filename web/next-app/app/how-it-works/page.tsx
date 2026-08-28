@@ -126,7 +126,7 @@ const tableHeaderStyle: React.CSSProperties = {
   textTransform: 'uppercase' as const,
   letterSpacing: '0.1em',
   color: 'var(--accent-blue)',
-  padding: '10px 14px 10px 0',
+  padding: '10px 14px 10px 12px',
   borderBottom: '1px solid var(--accent-blue)',
   textAlign: 'left' as const,
   background: 'transparent',
@@ -136,7 +136,7 @@ const tableCellStyle: React.CSSProperties = {
   fontFamily: bodyFont,
   fontSize: 'clamp(0.85rem, 0.8rem + 0.4vw, 1rem)',
   color: 'var(--text-secondary)',
-  padding: '10px 14px 10px 0',
+  padding: '10px 14px 10px 12px',
   borderBottom: '0.5px solid var(--border)',
   background: 'transparent',
 }
@@ -257,8 +257,29 @@ export default function HowItWorksPage() {
             </p>
 
             <StudentModelFlow />
-            <div className="overflow-x-auto my-4">
-              <table
+
+            {/* Mobile: stacked labeled cards */}
+            <div className="sm:hidden space-y-2 w-full max-w-[720px] mx-auto min-w-0 my-6">
+              {[
+                ['Single-digit addition', '5', '8 seconds'],
+                ['Multiplication tables', '7', '6 seconds'],
+                ['Add fractions with different denominators', '5', '18 seconds'],
+                ['Solve one-step addition equations', '5', '12 seconds'],
+                ['Long division', '5', '20 seconds'],
+              ].map(([concept, streak, time]) => (
+                <div key={`card-${concept}`} className="border-[0.5px] border-mathua-border p-3 min-w-0 overflow-hidden text-center">
+                  <div className="font-mono text-[12px] text-mathua-primary mb-1 break-words">{concept}</div>
+                  <div className="flex flex-wrap justify-center gap-x-4 gap-y-0.5 font-mono text-[11px] text-mathua-muted">
+                    <span>{streak} correct in a row</span>
+                    <span>{time}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Desktop: real table */}
+            <div className="hidden sm:block overflow-x-auto overscroll-x-contain w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 my-6">
+              <table className="w-full"
                 style={{
                   width: '100%',
                   borderCollapse: 'collapse',
@@ -281,7 +302,7 @@ export default function HowItWorksPage() {
                     ['Solve one-step addition equations', '5', '12 seconds'],
                     ['Long division', '5', '20 seconds'],
                   ].map(([concept, streak, time]) => (
-                    <tr key={`concept-${concept}`} style={{ background: 'transparent' }}>
+                    <tr key={`row-${concept}`} style={{ background: 'transparent' }}>
                       <td style={tableCellStyle}>{concept}</td>
                       <td style={tableCellStyle}>{streak}</td>
                       <td style={tableCellStyle}>{time}</td>

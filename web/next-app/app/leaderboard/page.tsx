@@ -96,7 +96,7 @@ export default function LeaderboardPage() {
       </section>
 
       <div className="mb-12 w-full max-w-full min-w-0 overflow-hidden">
-        <div className="w-full max-w-full overflow-x-auto overscroll-x-contain -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto overscroll-x-contain">
           <table className="w-full min-w-[320px] border-collapse bg-mathua-surface rounded-none overflow-hidden border border-mathua-border">
             <thead>
               <tr>

@@ -118,7 +118,7 @@ export default function YearlyGrid({ data }: Props) {
   }
 
   return (
-    <div className="relative w-full max-w-full min-w-0 overflow-x-auto overscroll-x-contain -mx-4 px-4 sm:mx-0 sm:px-0 flex justify-start sm:justify-center">
+    <div className="relative w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 min-w-0 overflow-x-auto overscroll-x-contain flex justify-start sm:justify-center">
       <svg
         width={svgW}
         height={svgH}
