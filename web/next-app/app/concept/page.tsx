@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -57,9 +58,10 @@ function ConceptContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <Loading label="LOADING CONCEPT" />
         </div>
+        <BottomTabs />
         <Footer />
       </>
     )
@@ -69,12 +71,13 @@ function ConceptContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <p className="text-mathua-muted text-sm">{error || 'Concept not found'}</p>
           <Link href="/" className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
             ← Back home
           </Link>
         </div>
+        <BottomTabs />
         <Footer />
       </>
     )
@@ -92,9 +95,9 @@ function ConceptContent() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-        <section className="pt-8">
-          <span className="flex items-center gap-2 mb-4 text-xs font-mono">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+        <section className="pt-8 min-w-0 overflow-hidden">
+          <span className="flex flex-wrap items-center gap-2 mb-4 text-xs font-mono min-w-0">
             <Link href="/" className="text-mathua-secondary hover:text-mathua-primary">
               Home
             </Link>
@@ -283,7 +286,7 @@ function ConceptContent() {
             <div className="text-center">
               <Link
                 href={`/session?concept=${encodeURIComponent(conceptId)}`}
-                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px]"
+                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
               >
                 Practice {detail.concept.label}
               </Link>
@@ -294,6 +297,7 @@ function ConceptContent() {
         <AsciiDivider pattern="wave" />
         <Footer />
       </div>
+      <BottomTabs />
     </>
   )
 }
@@ -301,7 +305,7 @@ function ConceptContent() {
 export default function ConceptPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-6 max-sm:px-4 pt-20 text-center"><Loading label="LOADING CONCEPT" /></div><Footer /></>
+      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING CONCEPT" /></div><Footer /></>
     }>
       <ConceptContent />
     </Suspense>
