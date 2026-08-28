@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -268,6 +269,10 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
 	if err != nil {
+		if errors.Is(err, engine.ErrNoActiveQuestion) {
+			writeError(w, "no active question", 409)
+			return
+		}
 		writeError(w, "failed to submit answer", 500)
 		return
 	}
@@ -1174,6 +1179,10 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
 	if err != nil {
+		if errors.Is(err, engine.ErrNoActiveQuestion) {
+			writeError(w, "no active question", 409)
+			return
+		}
 		writeError(w, "failed to submit answer", 500)
 		return
 	}

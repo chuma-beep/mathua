@@ -28,10 +28,15 @@ type activeSession struct {
 	requiredStreak int
 	timeThreshold  float64
 	isReview       bool
+	answered       bool
 	sessionReview  int
 	sessionNew     int
 	lastConceptID  string
 }
+
+// ErrNoActiveQuestion is returned when a session has no unanswered question
+// ready for grading — e.g. a duplicate/stale submission racing the current one.
+var ErrNoActiveQuestion = fmt.Errorf("no active question")
 
 type Question struct {
 	ConceptID   string          `json:"concept_id"`
@@ -229,6 +234,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.requiredStreak = next.Concept.MasteryThreshold.Streak
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = next.IsReview
+	as.answered = false
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
@@ -298,6 +304,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.requiredStreak = next.Concept.MasteryThreshold.Streak
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = true
+	as.answered = false
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
@@ -354,13 +361,17 @@ func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string
 }
 
 func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapsedSeconds float64) (*AnswerResult, error) {
+	// Hold e.mu for the whole grade + advance cycle so a concurrent
+	// SubmitAnswer/NextQuestion pair can never grade against a question the
+	// client was not shown. The `answered` flag rejects duplicate/stale
+	// submissions for the same question.
 	e.mu.Lock()
+	defer e.mu.Unlock()
+
 	as := e.sessions[sessionID]
-	if as == nil {
-		e.mu.Unlock()
-		return nil, fmt.Errorf("no active question for session %q", sessionID)
+	if as == nil || as.conceptID == "" || as.answered {
+		return nil, fmt.Errorf("%w for session %q", ErrNoActiveQuestion, sessionID)
 	}
-	// Copy session fields under lock to avoid races with NextQuestion/NextReviewQuestion
 	sessionFields := struct {
 		conceptID      string
 		expectedAnswer string
@@ -376,7 +387,6 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		timeThreshold:  as.timeThreshold,
 		isReview:       as.isReview,
 	}
-	e.mu.Unlock()
 
 	gr := e.gradeAnswer(sessionFields.conceptID, sessionFields.expectedAnswer, answer)
 
@@ -500,15 +510,14 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		}
 	}
 
-	e.mu.Lock()
 	as.lastConceptID = as.conceptID
 	if as.isReview {
 		as.sessionReview++
 	} else {
 		as.sessionNew++
 	}
+	as.answered = true
 	as.conceptID = ""
-	e.mu.Unlock()
 
 	return &AnswerResult{
 		Correct:        gr.Correct,
@@ -722,6 +731,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.explanation = prob.Explanation
 	as.requiredStreak = c.MasteryThreshold.Streak
 	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
+	as.answered = false
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
