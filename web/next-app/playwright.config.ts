@@ -26,6 +26,11 @@ export default defineConfig({
       use: { ...devices['Pixel 7'] },
       testMatch: /mobile\.spec\.ts/,
     },
+    {
+      name: 'mobile-320',
+      use: { ...devices['Pixel 7'], viewport: { width: 320, height: 568 } },
+      testMatch: /mobile\.spec\.ts/,
+    },
   ],
   webServer: {
     command: `npx serve out -l ${PORT} --no-clipboard`,
