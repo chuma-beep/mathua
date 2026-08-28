@@ -29,7 +29,7 @@ const monoFont = "'IBM Plex Mono', monospace"
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
-  fontSize: '1.3rem',
+  fontSize: 'clamp(1.15rem, 1rem + 0.8vw, 1.3rem)',
   color: 'var(--text-primary)',
   borderBottom: '0.5px solid var(--border)',
   paddingBottom: '0.5rem',
@@ -39,7 +39,7 @@ const h2Style: React.CSSProperties = {
 const h3Style: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
-  fontSize: '1rem',
+  fontSize: 'clamp(0.95rem, 0.9rem + 0.4vw, 1rem)',
   color: 'var(--text-primary)',
   marginTop: '1.5rem',
   marginBottom: '0.5rem',
@@ -47,7 +47,7 @@ const h3Style: React.CSSProperties = {
 
 const bodyStyle: React.CSSProperties = {
   fontFamily: bodyFont,
-  fontSize: '0.95rem',
+  fontSize: 'clamp(0.9rem, 0.85rem + 0.5vw, 1rem)',
   color: 'var(--text-secondary)',
   lineHeight: 1.85,
   marginBottom: '1rem',
@@ -73,18 +73,22 @@ const inlineCodeStyle: React.CSSProperties = {
   fontFamily: monoFont,
   fontSize: '0.9em',
   color: 'var(--accent-blue)',
+  overflowWrap: 'anywhere',
+  wordBreak: 'break-all',
 }
 
 const mutedCodeStyle: React.CSSProperties = {
   fontFamily: monoFont,
   fontSize: '0.9em',
   color: 'var(--text-secondary)',
+  overflowWrap: 'anywhere',
+  wordBreak: 'break-all',
 }
 
 const tableHeaderStyle: React.CSSProperties = {
   fontFamily: monoFont,
   fontWeight: 400,
-  fontSize: '0.85rem',
+  fontSize: 'clamp(0.75rem, 0.7rem + 0.3vw, 0.85rem)',
   textTransform: 'uppercase',
   letterSpacing: '0.08em',
   color: 'var(--accent-blue)',
@@ -96,7 +100,7 @@ const tableHeaderStyle: React.CSSProperties = {
 
 const tableCellStyle: React.CSSProperties = {
   fontFamily: bodyFont,
-  fontSize: '0.9rem',
+  fontSize: 'clamp(0.8rem, 0.75rem + 0.4vw, 0.9rem)',
   color: 'var(--text-secondary)',
   padding: '10px 14px 10px 0',
   borderBottom: '0.5px solid var(--border)',
@@ -108,7 +112,7 @@ const calloutStyle: React.CSSProperties = {
   paddingLeft: '1.5rem',
   fontFamily: bodyFont,
   fontStyle: 'italic',
-  fontSize: '0.9rem',
+  fontSize: 'clamp(0.85rem, 0.8rem + 0.4vw, 0.9rem)',
   color: 'var(--text-muted)',
   lineHeight: 1.7,
 }
@@ -190,9 +194,9 @@ npm run dev`}
           ['web/next-app/components/', 'React components (diagrams, heatmaps, etc).'],
           ['web/next-app/lib/', 'API client, auth helpers, shared utilities.'],
         ].map(([dir, desc]) => (
-          <div key={dir} style={{ ...bodyStyle, display: 'flex', gap: '0.75rem', marginBottom: '0.3rem' }}>
-            <code style={{ ...inlineCodeStyle, minWidth: '240px', fontSize: '0.8rem' }}>{dir}</code>
-            <span style={{ color: 'var(--text-muted)' }}>{desc}</span>
+          <div key={dir} className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-1.5 min-w-0">
+            <code className="font-mono text-[12px] sm:text-[13px] text-mathua-blue break-all sm:min-w-[240px] sm:shrink-0">{dir}</code>
+            <span className="text-mathua-muted" style={{ fontSize: 'clamp(0.85rem, 0.8rem + 0.4vw, 0.9rem)' }}>{desc}</span>
           </div>
         ))}
       </section>

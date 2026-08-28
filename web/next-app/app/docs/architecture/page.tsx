@@ -64,7 +64,7 @@ const monoFont = "'IBM Plex Mono', monospace"
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
   fontWeight: 400,
-  fontSize: '1.3rem',
+  fontSize: 'clamp(1.15rem, 1rem + 0.8vw, 1.3rem)',
   color: 'var(--text-primary)',
   borderBottom: '0.5px solid var(--border)',
   paddingBottom: '0.5rem',
@@ -73,7 +73,7 @@ const h2Style: React.CSSProperties = {
 
 const bodyStyle: React.CSSProperties = {
   fontFamily: bodyFont,
-  fontSize: '0.95rem',
+  fontSize: 'clamp(0.9rem, 0.85rem + 0.5vw, 1rem)',
   color: 'var(--text-secondary)',
   lineHeight: 1.85,
   marginBottom: '1rem',
@@ -84,7 +84,7 @@ const calloutStyle: React.CSSProperties = {
   paddingLeft: '1.5rem',
   fontFamily: bodyFont,
   fontStyle: 'italic',
-  fontSize: '0.9rem',
+  fontSize: 'clamp(0.85rem, 0.8rem + 0.4vw, 0.9rem)',
   color: 'var(--text-muted)',
   lineHeight: 1.7,
   marginTop: '1.5rem',
