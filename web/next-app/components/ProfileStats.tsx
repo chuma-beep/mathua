@@ -31,14 +31,8 @@ export default function ProfileStats({ name, scores }: Props) {
 
   return (
     <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: 20,
-        alignItems: 'flex-start',
-        border: '0.5px solid var(--border)',
-        padding: '20px 24px',
-      }}
+      className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6"
+      style={{ border: '0.5px solid var(--border)' }}
     >
       {/* Level badge */}
       <div
@@ -48,6 +42,7 @@ export default function ProfileStats({ name, scores }: Props) {
           textAlign: 'center',
           minWidth: 80,
         }}
+        className="self-start"
       >
         <div style={{ ...mono, fontSize: 9, color: 'var(--text-muted)', marginBottom: 4 }}>
           LV
@@ -69,7 +64,7 @@ export default function ProfileStats({ name, scores }: Props) {
       </div>
 
       {/* Stats */}
-      <div style={{ flex: 1, minWidth: 240 }}>
+      <div className="flex-1 min-w-0 w-full sm:min-w-[240px]">
         <h2 style={{ ...serif, fontSize: '1.2rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 2 }}>
           {name}
         </h2>

@@ -89,8 +89,8 @@ export default function DomainProgress({ progress }: Props) {
                 gap: 10,
               }}
             >
-              <div style={{ width: 130, color: 'var(--text-primary)' }}>{d.label}</div>
-              <div style={{ flex: 1, height: 8, background: 'var(--border)', position: 'relative' }}>
+              <div className="w-full sm:w-[110px] lg:w-[130px] shrink-0" style={{ color: 'var(--text-primary)' }}>{d.label}</div>
+              <div style={{ flex: 1, height: 8, background: 'var(--border)', position: 'relative', minWidth: 60 }}>
                 <div
                   style={{
                     position: 'absolute',
@@ -103,7 +103,7 @@ export default function DomainProgress({ progress }: Props) {
                   }}
                 />
               </div>
-              <div style={{ color: 'var(--text-muted)', width: 70, textAlign: 'right' }}>
+              <div style={{ color: 'var(--text-muted)', width: 70, textAlign: 'right' }} className="hidden sm:block">
                 {d.mastered}/{d.total} · {pct}%
               </div>
             </div>
