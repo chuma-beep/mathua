@@ -470,19 +470,18 @@ export default function SessionPage() {
                   <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{diagQuestion}</KatexContent>
                 </div>
                </div>
-               <div className="flex gap-3">
+               <div className="flex flex-col sm:flex-row gap-3 min-w-0">
                   <input
                     ref={diagInputRef}
                     type="text"
                     value={diagAnswer}
                     onChange={(e) => setDiagAnswer(e.target.value)}
-                   
                     onKeyDown={(e) => e.key === 'Enter' && submitGuestDiagnostic()}
                     placeholder="Your answer..."
                     disabled={loading || diagLastResult !== null}
-                    className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                    className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
-                 <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">
+                 <button onClick={submitGuestDiagnostic} disabled={!diagAnswer.trim() || loading || diagLastResult !== null} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50 shrink-0 w-full sm:w-auto min-h-[36px]">
                    Check Answer
                  </button>
                </div>
@@ -664,27 +663,27 @@ export default function SessionPage() {
                     </div>
                   </div>
                   {/* Mobile stats bar */}
-                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-2">
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Streak</span>
-                      <span className="font-mono text-sm text-mathua-green">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
+                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-1 sm:gap-2 min-w-0 overflow-hidden">
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Streak</span>
+                      <span className="font-mono text-sm text-mathua-green truncate block">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
                     </div>
-                    <div className="w-px h-8 bg-mathua-border" />
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Session</span>
-                      <span className={`font-mono text-sm ${sessionStats.total > 0 && sessionStats.correct / sessionStats.total >= 0.8 ? 'text-mathua-green' : sessionStats.total > 0 && sessionStats.correct / sessionStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
+                    <div className="w-px h-8 bg-mathua-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Session</span>
+                      <span className={`font-mono text-sm truncate block ${sessionStats.total > 0 && sessionStats.correct / sessionStats.total >= 0.8 ? 'text-mathua-green' : sessionStats.total > 0 && sessionStats.correct / sessionStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
                         {sessionStats.correct}/{sessionStats.total}
                       </span>
                     </div>
-                    <div className="w-px h-8 bg-mathua-border" />
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Mastered</span>
-                      <span className="font-mono text-sm text-mathua-blue">{scores.concepts_mastered}</span>
+                    <div className="w-px h-8 bg-mathua-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Mastered</span>
+                      <span className="font-mono text-sm text-mathua-blue truncate block">{scores.concepts_mastered}</span>
                     </div>
-                    <div className="w-px h-8 bg-mathua-border" />
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">XP today</span>
-                      <span className="font-mono text-sm text-mathua-blue">{scores.xp_today ?? 0}</span>
+                    <div className="w-px h-8 bg-mathua-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">XP today</span>
+                      <span className="font-mono text-sm text-mathua-blue truncate block">{scores.xp_today ?? 0}</span>
                     </div>
                   </div>
                 </div>
@@ -724,20 +723,19 @@ export default function SessionPage() {
 
                        {!submitted ? (
                          <>
-                           <div className="flex gap-3 mb-4">
+                           <div className="flex flex-col sm:flex-row gap-3 mb-4 min-w-0">
                              <input
                                ref={inputRef}
                               type="text"
                               value={answer}
                               onChange={(e) => setAnswer(e.target.value)}
-                             
                               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                              placeholder="Your answer"
-                             className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                             className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                           />
                            <button
                              onClick={handleSubmit}
-                             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap"
+                             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap shrink-0 w-full sm:w-auto min-h-[36px]"
                            >
                              Check Answer
                            </button>
@@ -884,22 +882,22 @@ export default function SessionPage() {
                       <div className="font-mono text-2xl text-mathua-blue mt-1">{scores.xp_today ?? 0}</div>
                     </div>
                   </div>
-                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-2">
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Review</span>
-                      <span className={`font-mono text-sm ${reviewStats.total > 0 && reviewStats.correct / reviewStats.total >= 0.8 ? 'text-mathua-green' : reviewStats.total > 0 && reviewStats.correct / reviewStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
+                  <div className="hidden max-md:flex bg-mathua-surface border border-mathua-border rounded-none p-3 mb-4 items-center justify-around text-center gap-1 sm:gap-2 min-w-0 overflow-hidden">
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Review</span>
+                      <span className={`font-mono text-sm truncate block ${reviewStats.total > 0 && reviewStats.correct / reviewStats.total >= 0.8 ? 'text-mathua-green' : reviewStats.total > 0 && reviewStats.correct / reviewStats.total < 0.5 ? 'text-mathua-red' : 'text-mathua-primary'}`}>
                         {reviewStats.correct}/{reviewStats.total}
                       </span>
                     </div>
-                    <div className="w-px h-8 bg-mathua-border" />
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Streak</span>
-                      <span className="font-mono text-sm text-mathua-green">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
+                    <div className="w-px h-8 bg-mathua-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Streak</span>
+                      <span className="font-mono text-sm text-mathua-green truncate block">{submitted && lastResult ? lastResult.streak : lastResult ? lastResult.streak : '--'}</span>
                     </div>
-                    <div className="w-px h-8 bg-mathua-border" />
-                    <div>
-                      <span className="font-mono text-[8px] uppercase text-mathua-muted block">Mastered</span>
-                      <span className="font-mono text-sm text-mathua-blue">{scores.concepts_mastered}</span>
+                    <div className="w-px h-8 bg-mathua-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <span className="font-mono text-[8px] uppercase text-mathua-muted block truncate">Mastered</span>
+                      <span className="font-mono text-sm text-mathua-blue truncate block">{scores.concepts_mastered}</span>
                     </div>
                   </div>
                 </div>
@@ -939,20 +937,19 @@ export default function SessionPage() {
                        </div>
                         {!submitted ? (
                           <>
-                            <div className="flex gap-3 mb-4">
+                            <div className="flex flex-col sm:flex-row gap-3 mb-4 min-w-0">
                               <input
                                 ref={inputRef}
                                type="text"
                                value={answer}
                                onChange={(e) => setAnswer(e.target.value)}
-                              
                                onKeyDown={(e) => e.key === 'Enter' && handleReviewSubmit()}
                               placeholder="Your answer"
-                              className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
+                              className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-yellow-500"
                            />
                            <button
                              onClick={handleReviewSubmit}
-                             className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors"
+                             className="border border-yellow-500/60 text-yellow-400 hover:bg-yellow-500 hover:text-black rounded-none h-12 px-8 font-medium text-sm whitespace-nowrap transition-colors shrink-0 w-full sm:w-auto min-h-[36px]"
                            >
                              Check Answer
                            </button>

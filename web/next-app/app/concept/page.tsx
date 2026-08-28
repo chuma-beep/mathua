@@ -121,33 +121,33 @@ function ConceptContent() {
               {detail.concept.domain}.{detail.concept.subdomain} &middot; {detail.concept.id}
             </p>
 
-            <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-8">
-              <div className="flex items-center justify-between flex-wrap gap-4">
-                <div>
+            <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-8 min-w-0 overflow-hidden">
+              <div className="grid grid-cols-2 sm:flex sm:items-center sm:justify-between gap-4">
+                <div className="min-w-0">
                   <span className="text-mathua-muted text-xs font-mono">status</span>
-                  <p className={`font-mono text-sm mt-0.5 ${statusColor}`}>
+                  <p className={`font-mono text-sm mt-0.5 truncate ${statusColor}`}>
                     {detail.progress?.status || 'unseen'}
                   </p>
                 </div>
                 {detail.progress && (
                   <>
-                    <div className="text-right">
+                    <div className="min-w-0 sm:text-right">
                       <span className="text-mathua-muted text-xs font-mono">mastery</span>
-                      <p className="font-mono text-sm text-mathua-primary mt-0.5">
+                      <p className="font-mono text-sm text-mathua-primary mt-0.5 truncate">
                         {Math.round(masteryPct * 100)}%
                       </p>
                     </div>
-                    <div className="text-right">
+                    <div className="min-w-0 sm:text-right">
                       <span className="text-mathua-muted text-xs font-mono">streak</span>
-                      <p className="font-mono text-sm text-mathua-primary mt-0.5">
+                      <p className="font-mono text-sm text-mathua-primary mt-0.5 truncate">
                         {detail.progress.streak} / {detail.progress.required_streak}
                       </p>
                     </div>
                   </>
                 )}
-                <div>
+                <div className="min-w-0">
                   <span className="text-mathua-muted text-xs font-mono">unlocked</span>
-                  <p className={`font-mono text-sm mt-0.5 ${detail.unlocked ? 'text-green-400' : 'text-red-400'}`}>
+                  <p className={`font-mono text-sm mt-0.5 truncate ${detail.unlocked ? 'text-green-400' : 'text-red-400'}`}>
                     {detail.unlocked ? 'yes' : 'no'}
                   </p>
                 </div>
@@ -263,17 +263,17 @@ function ConceptContent() {
                       </div>
                     </aside>
                   )}
-                  <div className="flex-1 min-w-0">
-                    <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 md:p-8 lg:p-10">
-                      <div className="text-mathua-secondary text-xs font-mono mb-4">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
+                      <div className="text-mathua-secondary text-xs font-mono mb-4 break-words">
                         {detail.lesson.title}
                       </div>
                       {detail.lesson.concepts && detail.lesson.concepts.length > 0 && (
-                        <div className="text-mathua-muted text-[10px] font-mono mb-4">
+                        <div className="text-mathua-muted text-[10px] font-mono mb-4 break-all">
                           concepts: {detail.lesson.concepts.join(', ')}
                         </div>
                       )}
-                      <div id="lesson-body">
+                      <div id="lesson-body" className="w-full max-w-full min-w-0 overflow-hidden">
                         <KatexContent>{detail.lesson.body}</KatexContent>
                       </div>
                     </div>

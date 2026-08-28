@@ -34,13 +34,13 @@ export default function SymbolPalette({ targetRef, onInsert, compact }: Props) {
   }
 
   return (
-    <div className={`flex flex-wrap gap-1.5 p-2 bg-mathua-surface border border-mathua-border ${compact ? 'mt-1' : 'mt-2'}`}>
+    <div className={`flex flex-wrap gap-1.5 p-2 bg-mathua-surface border border-mathua-border w-full max-w-full overflow-hidden ${compact ? 'mt-1' : 'mt-2'}`}>
       {SYMBOLS.map((s) => (
         <button
           key={s}
           type="button"
           onClick={() => insert(s)}
-          className="w-7 h-7 font-mono text-xs border border-mathua-border-strong bg-mathua-code text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue"
+          className="w-9 h-9 min-w-[36px] min-h-[36px] font-mono text-xs border border-mathua-border-strong bg-mathua-code text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue shrink-0 inline-flex items-center justify-center"
           aria-label={`Insert ${s}`}
         >
           {s}
