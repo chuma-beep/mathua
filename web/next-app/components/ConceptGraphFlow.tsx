@@ -329,14 +329,7 @@ function SearchOverlay({
   return (
     <div
       ref={boxRef}
-      style={{
-        position: 'absolute',
-        top: 10,
-        left: 62,
-        zIndex: 5,
-        width: 240,
-        fontFamily: "'IBM Plex Mono', monospace",
-      }}
+      className="absolute top-2.5 left-[62px] sm:left-16 z-[5] w-[min(calc(100%-76px),240px)] sm:w-[240px] font-mono"
     >
       <input
         value={query}
@@ -353,31 +346,10 @@ function SearchOverlay({
           if (e.key === 'Escape') setOpen(false)
         }}
         placeholder="Search concepts…"
-        style={{
-          width: '100%',
-          height: 30,
-          padding: '0 10px',
-          fontSize: 11,
-          fontFamily: 'inherit',
-          color: 'var(--text-primary)',
-          background: 'var(--surface-elevated)',
-          border: '0.5px solid var(--border-strong)',
-          borderRadius: 4,
-          outline: 'none',
-        }}
+        className="w-full min-h-[36px] h-9 px-2.5 text-[11px] font-mono text-mathua-primary bg-mathua-surface-elevated border-[0.5px] border-mathua-border-strong rounded-[4px] outline-none"
       />
       {open && results.length > 0 && (
-        <div
-          style={{
-            marginTop: 4,
-            background: 'var(--surface-elevated)',
-            border: '0.5px solid var(--border)',
-            borderRadius: 4,
-            overflow: 'hidden',
-            maxHeight: 240,
-            overflowY: 'auto',
-          }}
-        >
+        <div className="mt-1 bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[4px] overflow-hidden max-h-[min(50dvh,240px)] overflow-y-auto">
           {results.map(r => (
             <button
               key={r.id}
@@ -386,24 +358,10 @@ function SearchOverlay({
                 setOpen(false)
                 setQuery('')
               }}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                width: '100%',
-                textAlign: 'left',
-                padding: '6px 10px',
-                fontSize: 11,
-                fontFamily: 'inherit',
-                color: 'var(--text-secondary)',
-                background: 'none',
-                border: 'none',
-                borderBottom: '0.5px solid var(--border)',
-                cursor: 'pointer',
-              }}
+              className="flex items-center gap-1.5 w-full text-left px-2.5 py-2 min-h-[36px] text-[11px] font-mono text-mathua-secondary bg-transparent border-none border-b-[0.5px] border-mathua-border last:border-b-0 cursor-pointer hover:bg-mathua-code"
             >
-              <span style={{ width: 3, height: 14, borderRadius: 2, flexShrink: 0, background: domainColor(r.domain) }} />
-              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{r.label}</span>
+              <span className="w-[3px] h-3.5 rounded-[2px] shrink-0" style={{ background: domainColor(r.domain) }} />
+              <span className="truncate flex-1 min-w-0">{r.label}</span>
             </button>
           ))}
         </div>
@@ -461,23 +419,7 @@ function ListToggleButton({
       title="Browse concepts as a keyboard-accessible list"
       aria-expanded={open}
       aria-label={open ? 'Close concept list' : 'Open concept list'}
-      style={{
-        position: 'absolute',
-        top: 10,
-        left: 10,
-        zIndex: 6,
-        height: 30,
-        padding: '0 10px',
-        fontSize: 10,
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em',
-        fontFamily: "'IBM Plex Mono', monospace",
-        color: open ? '#fff' : 'var(--text-muted)',
-        background: open ? 'var(--accent-teal)' : 'var(--surface-elevated)',
-        border: '0.5px solid var(--border-strong)',
-        borderRadius: 4,
-        cursor: 'pointer',
-      }}
+      className={`absolute top-2.5 left-2.5 z-[6] min-h-[36px] h-9 px-2.5 text-[10px] uppercase tracking-[0.05em] font-mono border-[0.5px] border-mathua-border-strong rounded-[4px] cursor-pointer transition-colors ${open ? 'bg-mathua-teal text-white' : 'bg-mathua-surface-elevated text-mathua-muted hover:text-mathua-primary'}`}
     >
       {LIST_TOGGLE_LABEL}
     </button>
@@ -958,16 +900,9 @@ function GraphInner({
   if (concepts.length === 0) {
     return (
       <div
+        className="flex items-center justify-center border-[0.5px] border-mathua-border bg-mathua-graph-surface text-mathua-muted font-mono text-sm w-full max-w-full"
         style={{
-          height: isMobile ? 320 : 520,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '0.5px solid var(--border)',
-          background: 'var(--graph-surface)',
-          color: 'var(--text-muted)',
-          fontSize: 14,
-          fontFamily: "'IBM Plex Mono', monospace",
+          height: isMobile ? 'clamp(320px,60dvh,520px)' : 'clamp(320px,50dvh,520px)',
         }}
       >
         No concepts to display
@@ -976,11 +911,11 @@ function GraphInner({
   }
 
   return (
-    <div>
+    <div className="w-full max-w-full min-w-0 overflow-hidden">
       <div
         ref={wrapperRef}
         data-testid="graph-wrapper"
-        className={!ambientActive && ambientOn && !isMobile ? 'graph-flow-paused' : undefined}
+        className={`${!ambientActive && ambientOn && !isMobile ? 'graph-flow-paused' : ''} relative w-full max-w-full min-w-0 overflow-hidden border-[0.5px] border-mathua-border bg-mathua-graph-surface`.trim()}
         onMouseEnter={() => {
           hoverRef.current = true
         }}
@@ -989,14 +924,11 @@ function GraphInner({
         }}
         aria-keyshortcuts="plus minus 0 ArrowLeft ArrowRight ArrowUp ArrowDown Escape"
         style={{
-          position: 'relative',
-          height: isMobile ? 320 : 520,
-          width: '100%',
-          overflow: 'hidden',
-          border: '0.5px solid var(--border)',
-          background: 'var(--graph-surface)',
+          height: isMobile ? 'clamp(320px,60dvh,520px)' : 'clamp(320px,50dvh,520px)',
+          paddingBottom: 'env(safe-area-inset-bottom)',
         }}
       >
+        <style>{`.react-flow__controls-button{width:44px!important;height:44px!important;min-height:44px!important;min-width:44px!important} .react-flow__minimap{width:80px!important;height:50px!important} @media(min-width:640px){.react-flow__minimap{width:120px!important;height:80px!important}}`}</style>
         {/* MIT-licensed library; hiding the attribution badge is permitted.
             The LICENSE copyright notice remains in node_modules untouched. */}
         <ReactFlow
@@ -1075,70 +1007,38 @@ function GraphInner({
       )}
 
       {selected && (
-        <div
-          style={{
-            marginTop: 10,
-            padding: '12px 14px',
-            border: '0.5px solid var(--border)',
-            background: 'var(--surface)',
-            fontFamily: "'IBM Plex Mono', monospace",
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)' }}>{selected.label}</span>
+        <div className="mt-2.5 p-3 sm:p-3.5 border-[0.5px] border-mathua-border bg-mathua-surface font-mono w-full max-w-full min-w-0 overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 flex-wrap min-w-0">
+            <span className="text-[14px] font-semibold text-mathua-primary truncate min-w-0">{selected.label}</span>
             <span
-              style={{
-                fontSize: 10,
-                textTransform: 'uppercase',
-                letterSpacing: '0.05em',
-                padding: '2px 8px',
-                borderRadius: 3,
-                background: domainColor(selected.domain),
-                color: '#fff',
-              }}
+              className="text-[10px] uppercase tracking-[0.05em] px-2 py-0.5 rounded-[3px] text-white shrink-0"
+              style={{ background: domainColor(selected.domain) }}
             >
               {selected.domain.replace(/_/g, ' ')}
             </span>
             {selectedStatus && (
-              <span style={{ fontSize: 11, color: STATUS_COLORS[selectedStatus] }}>● {STATUS_LABELS[selectedStatus]}</span>
+              <span className="text-[11px] shrink-0" style={{ color: STATUS_COLORS[selectedStatus] }}>● {STATUS_LABELS[selectedStatus]}</span>
             )}
             <button
               onClick={() => onNodeSelect?.(selected.id)}
-              style={{
-                marginLeft: 'auto',
-                fontSize: 12,
-                fontFamily: 'inherit',
-                color: '#60a5fa',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-              }}
+              className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue/30 rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue hover:text-white transition-colors"
             >
               Open concept →
             </button>
           </div>
           {(prereqList.length > 0 || unlocksList.length > 0) && (
-            <div style={{ display: 'flex', gap: 24, marginTop: 10, flexWrap: 'wrap' }}>
+            <div className="flex gap-4 sm:gap-6 mt-2.5 flex-wrap min-w-0">
               {prereqList.length > 0 && (
-                <div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase', marginBottom: 4 }}>
+                <div className="min-w-0 flex-1 sm:flex-none">
+                  <div className="text-mathua-muted text-[11px] uppercase mb-1">
                     requires
                   </div>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  <div className="flex gap-1.5 flex-wrap">
                     {prereqList.map(p => (
                       <button
                         key={p.id}
                         onClick={() => select(p.id)}
-                        style={{
-                          fontSize: 11,
-                          fontFamily: 'inherit',
-                          color: 'var(--text-secondary)',
-                          background: 'var(--surface-elevated)',
-                          border: '0.5px solid var(--border)',
-                          borderRadius: 3,
-                          padding: '2px 8px',
-                          cursor: 'pointer',
-                        }}
+                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >
                         {p.label}
                       </button>
@@ -1147,25 +1047,16 @@ function GraphInner({
                 </div>
               )}
               {unlocksList.length > 0 && (
-                <div>
-                  <div style={{ color: 'var(--text-muted)', fontSize: 11, textTransform: 'uppercase', marginBottom: 4 }}>
+                <div className="min-w-0 flex-1 sm:flex-none">
+                  <div className="text-mathua-muted text-[11px] uppercase mb-1">
                     unlocks
                   </div>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  <div className="flex gap-1.5 flex-wrap">
                     {unlocksList.map(u => (
                       <button
                         key={u.id}
                         onClick={() => select(u.id)}
-                        style={{
-                          fontSize: 11,
-                          fontFamily: 'inherit',
-                          color: 'var(--text-secondary)',
-                          background: 'var(--surface-elevated)',
-                          border: '0.5px solid var(--border)',
-                          borderRadius: 3,
-                          padding: '2px 8px',
-                          cursor: 'pointer',
-                        }}
+                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >
                         {u.label}
                       </button>

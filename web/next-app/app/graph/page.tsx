@@ -5,6 +5,7 @@ import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
@@ -18,13 +19,15 @@ import { deriveStatuses, type MasteryStatus } from '../../lib/graphStatus'
 import Loading from '../../components/Loading'
 
 const graphLoadingStyle: React.CSSProperties = {
-  height: 'clamp(320px, 50vh, 520px)',
+  height: 'clamp(320px, 60dvh, 520px)',
   background: 'var(--surface)',
-  borderRadius: '8px',
+  borderRadius: '0',
   border: '0.5px solid var(--border)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  width: '100%',
+  maxWidth: '100%',
 }
 
 const conceptGraphFlowChunk = import('../../components/ConceptGraphFlow')
@@ -190,8 +193,8 @@ function GraphContent() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-      <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex justify-between mb-4">
           <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
@@ -215,10 +218,10 @@ function GraphContent() {
       </section>
 
       {domains.length > 0 && (
-        <div className="flex flex-wrap gap-2 justify-center mb-6">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
             onClick={() => setActiveDomain(null)}
-            className={`font-mono text-[10px] uppercase px-3 h-7 border transition-colors ${
+            className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
               activeDomain === null
                 ? 'bg-mathua-blue text-white border-mathua-blue'
                 : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
@@ -230,7 +233,7 @@ function GraphContent() {
             <button
               key={d}
               onClick={() => setActiveDomain(activeDomain === d ? null : d)}
-              className={`font-mono text-[10px] uppercase px-3 h-7 border transition-colors ${
+              className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
                 activeDomain === d
                   ? 'bg-mathua-blue text-white border-mathua-blue'
                   : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
@@ -242,7 +245,7 @@ function GraphContent() {
         </div>
       )}
 
-      <div className="my-8">
+      <div className="my-6 sm:my-8 w-full max-w-full min-w-0 overflow-hidden">
         <ConceptGraphFlow
           concepts={concepts.length > 0 ? concepts : fallbackConcepts}
           conceptStatuses={conceptStatuses}
@@ -261,6 +264,7 @@ function GraphContent() {
       <AsciiDivider pattern="wave" />
       <Footer />
     </div>
+      <BottomTabs />
     </>
   )
 }
