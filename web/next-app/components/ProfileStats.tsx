@@ -19,10 +19,6 @@ const LEVEL_NAMES: Record<string, string> = {
   'Math Architect': '09',
 }
 
-const mono: React.CSSProperties = { fontFamily: "'IBM Plex Mono', monospace" }
-const serif: React.CSSProperties = { fontFamily: "'IBM Plex Serif', serif" }
-const muted: React.CSSProperties = { ...mono, fontSize: 11, color: 'var(--text-muted)' }
-
 export default function ProfileStats({ name, scores }: Props) {
   const xpPct = scores.daily_xp_goal > 0
     ? Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100))
@@ -30,99 +26,65 @@ export default function ProfileStats({ name, scores }: Props) {
   const levelNum = LEVEL_NAMES[scores.level] ?? '·'
 
   return (
-    <div
-      className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6"
-      style={{ border: '0.5px solid var(--border)' }}
-    >
-      {/* Level badge */}
-      <div
-        style={{
-          border: '0.5px solid var(--border-strong)',
-          padding: '14px 16px',
-          textAlign: 'center',
-          minWidth: 80,
-        }}
-        className="self-start"
-      >
-        <div style={{ ...mono, fontSize: 9, color: 'var(--text-muted)', marginBottom: 4 }}>
+    <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6 w-full max-w-full min-w-0 overflow-hidden">
+      <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start">
+        <div className="font-mono text-[9px] text-mathua-muted mb-1">
           LV
         </div>
-        <div
-          style={{
-            ...mono,
-            fontSize: 36,
-            fontWeight: 400,
-            color: 'var(--accent-blue)',
-            lineHeight: 1,
-          }}
-        >
+        <div className="font-mono text-[36px] font-normal text-mathua-blue leading-none">
           {levelNum}
         </div>
-        <div style={{ ...mono, fontSize: 10, color: 'var(--text-primary)', marginTop: 4 }}>
+        <div className="font-mono text-[10px] text-mathua-primary mt-1">
           {scores.level}
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="flex-1 min-w-0 w-full sm:min-w-[240px]">
-        <h2 style={{ ...serif, fontSize: '1.2rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 2 }}>
+      <div className="flex-1 min-w-0 w-full sm:min-w-0">
+        <h2 className="font-serif text-[1.2rem] font-normal text-mathua-primary mb-0.5 truncate">
           {name}
         </h2>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 24px', marginTop: 10 }}>
-          <div>
-            <div style={muted}>XP TODAY</div>
-            <div style={{ ...mono, fontSize: 16, color: 'var(--text-primary)' }}>
+        <div className="flex flex-wrap gap-x-6 gap-y-3 mt-2.5">
+          <div className="min-w-0">
+            <div className="font-mono text-[11px] text-mathua-muted">XP TODAY</div>
+            <div className="font-mono text-[16px] text-mathua-primary">
               {scores.xp_today}
-              <span style={{ ...muted, fontSize: 11 }}> / {scores.daily_xp_goal}</span>
+              <span className="font-mono text-[11px] text-mathua-muted"> / {scores.daily_xp_goal}</span>
             </div>
-            {/* XP bar */}
-            <div
-              style={{
-                marginTop: 4,
-                height: 4,
-                width: '100%',
-                maxWidth: 200,
-                background: 'var(--border)',
-              }}
-            >
+            <div className="mt-1 h-1 w-full max-w-[200px] bg-mathua-border">
               <div
-                style={{
-                  height: '100%',
-                  width: `${xpPct}%`,
-                  background: 'var(--accent-blue)',
-                  transition: 'width 0.3s',
-                }}
+                className="h-full bg-mathua-blue transition-all duration-300"
+                style={{ width: `${xpPct}%` }}
               />
             </div>
           </div>
 
-          <div>
-            <div style={muted}>TOTAL XP</div>
-            <div style={{ ...mono, fontSize: 16, color: 'var(--text-primary)' }}>
+          <div className="min-w-0">
+            <div className="font-mono text-[11px] text-mathua-muted">TOTAL XP</div>
+            <div className="font-mono text-[16px] text-mathua-primary">
               {scores.lifetime_points.toLocaleString()}
             </div>
           </div>
 
-          <div>
-            <div style={muted}>STREAK</div>
-            <div style={{ ...mono, fontSize: 16, color: scores.current_streak > 0 ? 'var(--accent-blue)' : 'var(--text-muted)' }}>
+          <div className="min-w-0">
+            <div className="font-mono text-[11px] text-mathua-muted">STREAK</div>
+            <div className={`font-mono text-[16px] ${scores.current_streak > 0 ? 'text-mathua-blue' : 'text-mathua-muted'}`}>
               {scores.current_streak} day{scores.current_streak !== 1 ? 's' : ''}
             </div>
           </div>
 
-          <div>
-            <div style={muted}>MASTERED</div>
-            <div style={{ ...mono, fontSize: 16, color: 'var(--text-primary)' }}>
+          <div className="min-w-0">
+            <div className="font-mono text-[11px] text-mathua-muted">MASTERED</div>
+            <div className="font-mono text-[16px] text-mathua-primary">
               {scores.concepts_mastered}
             </div>
           </div>
 
-          <div>
-            <a href="/leaderboard" style={{ ...muted, textDecoration: 'none' }} className="hover:text-mathua-blue">
+          <div className="min-w-0">
+            <a href="/leaderboard" className="font-mono text-[11px] text-mathua-muted hover:text-mathua-blue no-underline inline-flex items-center min-h-[20px]">
               WEEKLY →
             </a>
-            <div style={{ ...mono, fontSize: 16, color: 'var(--text-primary)' }}>
+            <div className="font-mono text-[16px] text-mathua-primary">
               {scores.weekly_score.toLocaleString()}
             </div>
           </div>

@@ -138,24 +138,26 @@ export default function ProfilePage() {
             { label: 'Graph', href: '/graph' },
           ]}
         />
-        <div className="mx-auto w-full max-w-[820px] px-4 sm:px-6 py-8 sm:py-12 pb-[80px] lg:pb-12">
-          <div className="border border-mathua-border p-6 text-center bg-mathua-surface">
-            <h2 style={{ fontFamily: headingFont, fontSize: '1.2rem', color: 'var(--text-primary)', marginBottom: 8 }}>Welcome to your profile</h2>
-            <p style={{ fontFamily: monoFont, fontSize: 12, color: 'var(--text-secondary)', marginBottom: 16 }}>Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
-            <div className="flex gap-3 justify-center">
-              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs">Sign in</Link>
-              <Link href="/session" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs">Try as guest →</Link>
+        <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
+          <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
+            <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
+            <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+              <Link href="/session" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Try as guest →</Link>
             </div>
           </div>
-          <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2 style={{ fontFamily: headingFont, fontSize: '1.05rem', fontWeight: 400, color: 'var(--text-primary)', marginBottom: 16, width: '100%' }}>Activity</h2>
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-              <ActivityHeatmap data={activity} />
+          <section className="mt-8 flex min-w-0 flex-col items-stretch">
+            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">Activity</h2>
+            <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
+              <div className="w-full max-w-full min-w-0">
+                <ActivityHeatmap data={activity} />
+              </div>
             </div>
           </section>
-          <section style={{ marginTop: 40 }}>
-            <div className="grid grid-cols-1 gap-4 lg:gap-6">
-              <div className="border border-mathua-border p-4 bg-mathua-surface text-center">
+          <section className="mt-10">
+            <div className="grid grid-cols-1 gap-4 lg:gap-6 min-w-0">
+              <div className="border border-mathua-border p-4 bg-mathua-surface text-center min-w-0">
                 <p className="font-mono text-xs text-mathua-secondary mb-3">Take a diagnostic to find your weak spots</p>
                 <Link href="/onboard" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">Start diagnostic →</Link>
               </div>
@@ -193,46 +195,39 @@ export default function ProfilePage() {
         ]}
       />
 
-      <div className="mx-auto w-full max-w-[820px] px-4 sm:px-6 py-8 sm:py-12 pb-[80px] lg:pb-12">
+      <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
         {/* Profile stats — mobile-first */}
         <ProfileStats name={user.name} scores={scores} />
 
         {dueReviews > 0 && (
           <Link
             href="/session"
-            className="block mt-6 bg-mathua-surface border border-yellow-500/40 rounded-none px-4 py-3 flex items-center justify-between hover:border-yellow-500 transition-colors"
+            className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
           >
-            <span className="font-mono text-xs text-yellow-400">
+            <span className="font-mono text-xs text-yellow-400 min-w-0 truncate">
               ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
             </span>
-            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 rounded-none px-3 py-1.5">
+            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto">
               Review Now →
             </span>
           </Link>
         )}
 
         {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
-        <section style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h2
-            style={{
-              fontFamily: headingFont,
-              fontSize: '1.05rem',
-              fontWeight: 400,
-              color: 'var(--text-primary)',
-              marginBottom: 16,
-              width: '100%',
-            }}
-          >
+        <section className="mt-8 flex min-w-0 flex-col items-stretch">
+          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
             Activity
           </h2>
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <ActivityHeatmap data={activity} />
+          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
+            <div className="w-full max-w-full min-w-0">
+              <ActivityHeatmap data={activity} />
+            </div>
           </div>
         </section>
 
         {/* Domain progress + Struggles — mobile-first: CTA on top, stacked */}
-        <section style={{ marginTop: 32 }}>
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr] lg:gap-6">
+        <section className="mt-8 min-w-0">
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr] lg:gap-6 min-w-0">
             <DomainProgress progress={progress} />
             <StrugglesSection weaknesses={weaknesses} />
           </div>

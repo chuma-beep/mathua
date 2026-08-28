@@ -31,75 +31,36 @@ export default function StrugglesSection({ weaknesses }: Props) {
   if (domains.length === 0) return null
 
   return (
-    <div>
-      <h3
-        style={{
-          fontFamily: "'IBM Plex Serif', serif",
-          fontSize: '1.05rem',
-          fontWeight: 400,
-          color: 'var(--text-primary)',
-          marginBottom: 12,
-        }}
-      >
+    <div className="w-full max-w-full min-w-0 overflow-hidden">
+      <h3 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-3">
         Struggles
       </h3>
-      <div
-        style={{
-          border: '0.5px solid var(--border)',
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: 11,
-        }}
-      >
+      <div className="border-[0.5px] border-mathua-border font-mono text-[11px] w-full max-w-full min-w-0 overflow-hidden">
         {domains.map((domain) => {
           const items = entries[domain]
           return (
             <div
               key={domain}
-              style={{
-                padding: '8px 10px',
-                borderBottom: '0.5px solid var(--border)',
-              }}
+              className="px-3 py-2 border-b-[0.5px] border-mathua-border last:border-b-0 w-full max-w-full min-w-0 overflow-hidden"
             >
-              <div
-                style={{
-                  color: 'var(--text-muted)',
-                  fontSize: 10,
-                  marginBottom: 4,
-                }}
-              >
+              <div className="text-mathua-muted text-[10px] mb-1 truncate">
                 {DOMAIN_LABELS[domain] ?? domain}
               </div>
               {items.map((item) => (
                 <div
                   key={item.id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '2px 0',
-                  }}
+                  className="flex min-w-0 items-center gap-2 py-0.5"
                 >
-                  <div
-                    style={{
-                      width: 40,
-                      height: 4,
-                      background: 'var(--border)',
-                      flexShrink: 0,
-                    }}
-                  >
+                  <div className="w-10 h-1 bg-mathua-border shrink-0">
                     <div
-                      style={{
-                        height: '100%',
-                        width: `${Math.round(item.weakness * 100)}%`,
-                        background: 'var(--accent-blue)',
-                        transition: 'width 0.3s',
-                      }}
+                      className="h-full bg-mathua-blue transition-all duration-300"
+                      style={{ width: `${Math.round(item.weakness * 100)}%` }}
                     />
                   </div>
-                  <span style={{ color: 'var(--text-primary)', fontSize: 11 }}>
+                  <span className="min-w-0 flex-1 truncate text-mathua-primary text-[11px]">
                     {item.label}
                   </span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: 10, marginLeft: 'auto' }}>
+                  <span className="shrink-0 text-mathua-muted text-[10px]">
                     {Math.round(item.weakness * 100)}%
                   </span>
                 </div>

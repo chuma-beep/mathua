@@ -10,11 +10,9 @@ interface Props {
 
 export default function MonthlyCards({ data }: Props) {
   const currentMonth = new Date().getMonth()
-  const currentYear = new Date().getFullYear()
   const [expanded, setExpanded] = useState<number>(currentMonth)
 
   const months = useMemo(() => {
-    // Generate last 12 months from today
     const result: { year: number; month: number }[] = []
     const now = new Date()
     for (let i = 11; i >= 0; i--) {
@@ -25,7 +23,7 @@ export default function MonthlyCards({ data }: Props) {
   }, [])
 
   return (
-    <div style={{ maxWidth: 820, margin: '0 auto', width: '100%' }}>
+    <div className="w-full max-w-full min-w-0 mx-auto">
       {months.map((m) => (
         <MonthCard
           key={`${m.year}-${m.month}`}

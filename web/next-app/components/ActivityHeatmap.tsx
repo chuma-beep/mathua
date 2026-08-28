@@ -31,69 +31,42 @@ export default function ActivityHeatmap({ data }: Props) {
   const totalDays = data.filter((d) => d.questions > 0).length
 
   return (
-    <div>
-      {/* Summary + toggle row */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: 12,
-          marginBottom: 16,
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 11,
-            color: 'var(--text-muted)',
-          }}
-        >
+    <div className="w-full max-w-full min-w-0 overflow-hidden">
+      <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+        <div className="font-mono text-[11px] text-mathua-muted min-w-0 truncate">
           {totalDays} active days · {totalQuestions} questions ·{' '}
           {totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0}% correct
         </div>
 
-        <div style={{ display: 'flex', border: '0.5px solid var(--border-strong)' }}>
+        <div className="inline-flex shrink-0 self-start sm:self-auto border-[0.5px] border-mathua-border-strong rounded-none overflow-hidden">
           <button
             onClick={() => switchView('monthly')}
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: 11,
-              padding: '4px 12px',
-              background: view === 'monthly' ? 'var(--accent-blue)' : 'transparent',
-              color: view === 'monthly' ? 'var(--bg)' : 'var(--text-muted)',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'background 0.15s',
-            }}
+            aria-pressed={view === 'monthly'}
+            className={`font-mono text-[11px] px-3 min-h-[36px] inline-flex items-center justify-center border-none cursor-pointer transition-colors ${
+              view === 'monthly' ? 'bg-mathua-blue text-white' : 'bg-transparent text-mathua-muted hover:text-mathua-primary'
+            }`}
           >
             Monthly
           </button>
           <button
             onClick={() => switchView('yearly')}
-            style={{
-              fontFamily: "'IBM Plex Mono', monospace",
-              fontSize: 11,
-              padding: '4px 12px',
-              background: view === 'yearly' ? 'var(--accent-blue)' : 'transparent',
-              color: view === 'yearly' ? 'var(--bg)' : 'var(--text-muted)',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'background 0.15s',
-            }}
+            aria-pressed={view === 'yearly'}
+            className={`font-mono text-[11px] px-3 min-h-[36px] inline-flex items-center justify-center border-none cursor-pointer transition-colors ${
+              view === 'yearly' ? 'bg-mathua-blue text-white' : 'bg-transparent text-mathua-muted hover:text-mathua-primary'
+            }`}
           >
             Yearly
           </button>
         </div>
       </div>
 
-      {/* Active view */}
-      {view === 'yearly' ? (
-        <YearlyGrid data={data} />
-      ) : (
-        <MonthlyCards data={data} />
-      )}
+      <div className="w-full max-w-full min-w-0 overflow-hidden">
+        {view === 'yearly' ? (
+          <YearlyGrid data={data} />
+        ) : (
+          <MonthlyCards data={data} />
+        )}
+      </div>
     </div>
   )
 }
