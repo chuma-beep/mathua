@@ -24,6 +24,7 @@ const validateTokenMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
+  usePathname: () => '/login',
 }))
 
 vi.mock('../lib/api', () => ({
