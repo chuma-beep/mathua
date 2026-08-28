@@ -9,6 +9,7 @@ import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import SymbolPalette from '../../components/SymbolPalette'
@@ -190,8 +191,8 @@ export default function OnboardPage() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-        <section className="pt-8">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+        <section className="pt-8 min-w-0 overflow-hidden">
           {step !== 'welcome' && (
             <span className="flex mb-4">
               <Link href="/onboard" className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</Link>
@@ -201,40 +202,40 @@ export default function OnboardPage() {
           {/* === WELCOME === */}
           {step === 'welcome' && (
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-4 mt-8">
+              <div className="text-center mb-4 mt-6 sm:mt-8 px-2 min-w-0">
                 <div className="font-mono text-[11px] uppercase text-mathua-muted mb-3">Welcome to Mathua</div>
-                <h1 className="font-serif text-4xl max-sm:text-2xl font-medium text-mathua-primary">
+                <h1 className="font-serif text-2xl sm:text-4xl font-medium text-mathua-primary px-2">
                   Let&apos;s find your starting point
                 </h1>
-                <p className="text-mathua-secondary text-sm mt-3 max-w-[500px] mx-auto">
+                <p className="text-mathua-secondary text-sm mt-3 max-w-[500px] mx-auto px-2">
                   Select what you want to learn. We&apos;ll test your current knowledge and build a personalized plan.
                 </p>
               </div>
 
-              <div className="flex gap-3 justify-center mb-6">
+              <div className="flex gap-3 justify-center mb-6 px-2">
                 <button
                   onClick={selectAll}
-                  className="bg-mathua-surface border border-mathua-border rounded-none h-10 px-6 text-sm text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                  className="bg-mathua-surface border border-mathua-border rounded-none h-10 min-h-[36px] px-6 text-sm text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
                 >
                   Select everything
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mb-8 min-w-0">
                 {domains.map(d => {
                   const label = domainLabels[d.name] || d.name
                   return (
                     <button
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
-                    className={`rounded-none p-4 text-left transition-all text-sm ${
+                    className={`rounded-none p-3 sm:p-4 text-left transition-all text-sm min-h-[60px] min-w-0 overflow-hidden ${
                       d.selected
                         ? 'bg-mathua-blue text-white'
                         : 'bg-mathua-surface border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
                     }`}
                     >
-                      <div className="font-medium">{label}</div>
-                      <div className={`font-mono text-[10px] mt-1 ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
+                      <div className="font-medium truncate sm:whitespace-normal sm:line-clamp-2 break-words text-[13px] sm:text-sm">{label}</div>
+                      <div className={`font-mono text-[10px] mt-1 truncate ${d.selected ? 'text-white/70' : 'text-mathua-muted'}`}>
                         {d.count} concepts
                       </div>
                     </button>
@@ -242,11 +243,11 @@ export default function OnboardPage() {
                 })}
               </div>
 
-              <div className="text-center">
+              <div className="text-center px-4">
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-10 font-medium text-sm disabled:opacity-50"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
                   {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic (${selectedConceptIds().length} concepts)`}
                 </button>
@@ -258,29 +259,28 @@ export default function OnboardPage() {
           {step === 'diagnostic' && (
             <>
               <SectionHeader label={`Question ${questionCount}`} title={conceptName} />
-              <div className="max-w-2xl mx-auto">
-                <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 mb-6">
-                  <div className="bg-mathua-code border border-mathua-border rounded-none p-6 text-center mb-4">
-                    <div className="">
-                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap">{question}</KatexContent>
+              <div className="max-w-2xl mx-auto px-2 sm:px-0 min-w-0 overflow-hidden">
+                <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-6 w-full max-w-full min-w-0 overflow-hidden">
+                  <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">
+                    <div className="w-full max-w-full min-w-0 overflow-hidden">
+                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{question}</KatexContent>
                      </div>
                    </div>
-                   <div className="flex gap-3">
+                   <div className="flex flex-col sm:flex-row gap-3 min-w-0">
                       <input
                         ref={onboardInputRef}
                         type="text"
                         value={answerInput}
                         onChange={(e) => setAnswerInput(e.target.value)}
-                       
                         onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                         placeholder="Your answer..."
                        disabled={loading || lastResult !== null}
-                       className="flex-1 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                       className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
                      <button
                        onClick={submitAnswer}
                        disabled={!answerInput.trim() || loading || lastResult !== null}
-                       className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
+                       className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 shrink-0 w-full sm:w-auto"
                      >
                        Check Answer
                      </button>
@@ -303,9 +303,9 @@ export default function OnboardPage() {
 
           {/* === RESULTS === */}
           {step === 'results' && plan && (
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
               <SectionHeader label="Your results" title="Here's what we found" />
-              <div className="mt-6">
+              <div className="mt-6 min-w-0 overflow-hidden">
                 <DiagnosticResults plan={plan} onStartPractice={finishOnboarding} />
               </div>
             </div>
@@ -313,6 +313,7 @@ export default function OnboardPage() {
         </section>
       </div>
       <Footer />
+      <BottomTabs />
     </>
   )
 }

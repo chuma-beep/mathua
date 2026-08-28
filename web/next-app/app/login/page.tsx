@@ -7,6 +7,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
 import { signup, login, validateToken } from '../../lib/api'
@@ -170,17 +171,17 @@ export default function LoginPage() {
   return (
     <>
       <Header />
-      <div className="max-w-container mx-auto px-6 max-sm:px-4">
-        <section className="pt-8 max-w-md mx-auto mt-12">
+      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+        <section className="pt-8 max-w-md mx-auto mt-8 sm:mt-12 min-w-0 overflow-hidden">
           <span className="flex mb-4">
             <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
           </span>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
-          <div className="flex gap-2 mt-6 mb-4">
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 rounded-none h-12 text-sm font-medium ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
+          <div className="flex gap-2 mt-6 mb-4 min-w-0">
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
+            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
           </div>
-          <div className="bg-mathua-surface border border-mathua-border rounded-none p-6 space-y-4">
+          <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 space-y-4 w-full max-w-full min-w-0 overflow-hidden">
             {state.tab === 'signup' && (
               <div>
                 <label htmlFor="name" className="font-mono text-[10px] uppercase text-mathua-muted">Name</label>
@@ -256,6 +257,7 @@ export default function LoginPage() {
         </section>
       </div>
       <Footer />
+      <BottomTabs />
     </>
   )
 }
