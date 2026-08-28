@@ -16,7 +16,7 @@ export default function ProgressionLevels({ levels, className = '' }: Progressio
       <h3 className="font-serif text-[1.1rem] font-normal text-mathua-primary mb-3 tracking-tight">
         Levels of mastery
       </h3>
-      <div className="w-full max-w-full overflow-x-auto overscroll-x-contain -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto overscroll-x-contain">
         <table className="w-full min-w-[280px] border-collapse border-none bg-transparent">
           <tbody>
             {levels.map((level) => (

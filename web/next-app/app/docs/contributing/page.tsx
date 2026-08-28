@@ -92,7 +92,7 @@ const tableHeaderStyle: React.CSSProperties = {
   textTransform: 'uppercase',
   letterSpacing: '0.08em',
   color: 'var(--accent-blue)',
-  padding: '10px 14px 10px 0',
+  padding: '10px 14px 10px 12px',
   borderBottom: '1px solid var(--accent-blue)',
   textAlign: 'left',
   background: 'transparent',
@@ -102,7 +102,7 @@ const tableCellStyle: React.CSSProperties = {
   fontFamily: bodyFont,
   fontSize: 'clamp(0.8rem, 0.75rem + 0.4vw, 0.9rem)',
   color: 'var(--text-secondary)',
-  padding: '10px 14px 10px 0',
+  padding: '10px 14px 10px 12px',
   borderBottom: '0.5px solid var(--border)',
   background: 'transparent',
 }
@@ -231,8 +231,41 @@ npm run dev`}
 ]`}
         </pre>
 
-        <div style={{ overflowX: 'auto', margin: '1.5rem 0' }}>
-          <table style={{
+        {/* Mobile: stacked labeled cards (table rows don't compress below ~640px) */}
+        <div className="sm:hidden space-y-2 w-full max-w-[720px] mx-auto min-w-0 my-6">
+          {[
+            ['id', 'string', 'Yes', 'Unique dot-separated identifier (e.g., arith.add.single)'],
+            ['label', 'string', 'Yes', 'Human-readable name displayed in the UI'],
+            ['domain', 'string', 'Yes', 'One of the 16 domain categories'],
+            ['subdomain', 'string', 'Optional', 'Nested grouping within a domain'],
+            ['grading_type', 'enum', 'Yes', 'numeric for arithmetic, polynomial/expression for algebra (uses SymPy), multiple_choice, comparison, ordering'],
+            ['prerequisites', 'string[]', 'Yes', 'Concept IDs that must be mastered first'],
+            ['mastery_threshold', 'object', 'Yes', 'Object with streak (int) and avg_time_seconds (float) fields'],
+            ['mastery_threshold.streak', 'number', 'Yes', 'Consecutive correct answers required for mastery'],
+            ['mastery_threshold.avg_time_seconds', 'number', 'Yes', 'Maximum acceptable average response time in seconds'],
+          ].map(([field, type, req, desc]) => (
+              <div key={field} className="border-[0.5px] border-mathua-border p-3 min-w-0 overflow-hidden text-center">
+                <div className="flex items-center justify-center gap-2 mb-1 flex-wrap">
+                  <code className="font-mono text-[12px] text-mathua-blue break-all">{field}</code>
+                  <span
+                    className={`shrink-0 font-mono text-[10px] border px-1.5 py-0.5 ${
+                      req === 'Yes'
+                        ? 'text-mathua-green border-mathua-green/50'
+                        : 'text-mathua-muted border-mathua-border'
+                    }`}
+                  >
+                    {req}
+                  </span>
+                </div>
+                <div className="font-mono text-[11px] text-mathua-muted mb-1">{type}</div>
+                <div className="text-mathua-secondary text-[0.85rem] leading-relaxed break-words">{desc}</div>
+              </div>
+            ))}
+        </div>
+
+        {/* Desktop: real table */}
+        <div className="hidden sm:block overflow-x-auto overscroll-x-contain w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 my-6">
+          <table className="w-full" style={{
             width: '100%',
             borderCollapse: 'collapse',
             border: 'none',
@@ -259,7 +292,7 @@ npm run dev`}
                 ['mastery_threshold.avg_time_seconds', 'number', 'Yes', 'Maximum acceptable average response time in seconds'],
               ].map(([field, type, req, desc]) => (
                 <tr key={field} style={{ background: 'transparent' }}>
-                  <td style={{ ...tableCellStyle, fontFamily: monoFont, fontSize: '0.8rem' }}>{field}</td>
+                  <td style={{ ...tableCellStyle, fontFamily: monoFont, fontSize: '0.8rem', whiteSpace: 'nowrap' }}>{field}</td>
                   <td style={tableCellStyle}>{type}</td>
                   <td style={tableCellStyle}>
                     <span style={{
