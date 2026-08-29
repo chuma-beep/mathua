@@ -64,9 +64,6 @@ func TestEngine_Start(t *testing.T) {
 	if s.State != StateProbing {
 		t.Errorf("expected probing, got %q", s.State)
 	}
-	if s.Position != 5 {
-		t.Errorf("expected position 5 (midpoint of 10), got %d", s.Position)
-	}
 }
 
 func TestEngine_NextQuestion(t *testing.T) {
@@ -84,77 +81,157 @@ func TestEngine_NextQuestion(t *testing.T) {
 	}
 }
 
-func TestEngine_RecordAnswer_AdvancesAfterTwoCorrect(t *testing.T) {
+func TestEngine_CompressedCover(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	initialPos := s.Position
-	cid := idFor(initialPos)
-	// First correct+fast — not enough to evaluate
-	e.RecordAnswer(s, cid, true, true)
-	if s.totalCount[cid] != 1 {
-		t.Errorf("expected 1 probe, got %d", s.totalCount[cid])
+	cover := e.compressedCover(s)
+	if len(cover) == 0 {
+		t.Fatal("expected non-empty covering set")
 	}
-	// Second correct+fast — should advance
-	e.RecordAnswer(s, cid, true, true)
-	if s.Low <= initialPos {
-		t.Errorf("expected low > %d after two correct, got %d", initialPos, s.Low)
+	if cover[0].ID != "a" {
+		t.Errorf("expected root a first in cover, got %s", cover[0].ID)
 	}
 }
 
-func TestEngine_RecordAnswer_RetreatsAfterTwoWrong(t *testing.T) {
+func TestEngine_InfoGain_UncertaintyFirst(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	initialPos := s.Position
-	cid := idFor(initialPos)
-	e.RecordAnswer(s, cid, false, false)
-	e.RecordAnswer(s, cid, false, false)
-	if s.High >= initialPos {
-		t.Errorf("expected high < %d after two wrong, got %d", initialPos, s.High)
+	// Settle concept "f" with a high belief (2 correct probes).
+	s.beliefs["f"] = 0.9
+	s.probeCounts["f"] = 2
+	s.confidence["f"] = 1.0
+	s.doneSet["f"] = true
+	cid := e.pickByInfoGain(s)
+	if cid == "" {
+		t.Fatal("expected a candidate after settling f")
+	}
+	if cid == "f" {
+		t.Error("settled concept f should not be re-picked")
+	}
+	if s.beliefs[cid] == 0.9 {
+		t.Errorf("expected an unsettled (0.5-belief) concept to win info gain, got %s", cid)
 	}
 }
 
-func TestEngine_CompletesWhenLowCrossesHigh(t *testing.T) {
+func TestEngine_EvidencePropagation_CorrectBoostsPrereqs(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	// Simulate all concepts wrong to collapse the range quickly
-	for i := 0; i < len(s.order) && !e.IsComplete(s); i++ {
-		cid := idFor(i)
-		e.RecordAnswer(s, cid, false, false)
-		e.RecordAnswer(s, cid, false, false)
+	// "e" depends on "d" (prereq chain a<-b<-c<-d<-e). Correct on e should
+	// raise belief on its prerequisite d.
+	e.RecordAnswer(s, "e", true, false)
+	if s.beliefs["e"] < 0.6 {
+		t.Errorf("expected e belief up after correct, got %f", s.beliefs["e"])
 	}
-	if !e.IsComplete(s) {
-		t.Errorf("expected complete after all wrong, got state=%s low=%d high=%d asked=%d",
-			s.State, s.Low, s.High, s.totalAsked)
+	if s.beliefs["d"] <= 0.5 {
+		t.Errorf("expected prereq d belief boosted above 0.5, got %f", s.beliefs["d"])
 	}
 }
 
-func TestEngine_FrontierEstimate(t *testing.T) {
+func TestEngine_EvidencePropagation_WrongLowersDependents(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	if e.FrontierEstimate(s) != 9 {
-		t.Errorf("expected frontier 9 (high), got %d", e.FrontierEstimate(s))
+	// Wrong on "d" should lower belief on dependent "e".
+	e.RecordAnswer(s, "d", false, false)
+	if s.beliefs["d"] >= 0.5 {
+		t.Errorf("expected d belief below 0.5 after wrong, got %f", s.beliefs["d"])
 	}
-	// Two wrong answers at each position collapses the frontier
-	for i := 0; i < 5; i++ {
-		if s.Position < 0 || s.Position >= len(s.order) {
+	if s.beliefs["e"] >= 0.5 {
+		t.Errorf("expected dependent e belief lowered, got %f", s.beliefs["e"])
+	}
+}
+
+// answer answers the session's current question via the real Next→Record flow.
+func answer(t *testing.T, e *Engine, s *Session, correct, fast bool) string {
+	t.Helper()
+	_, cid, err := e.NextQuestion(s)
+	if err != nil {
+		t.Fatalf("next: %v", err)
+	}
+	if cid == "" {
+		return ""
+	}
+	e.RecordAnswer(s, cid, correct, fast)
+	return cid
+}
+
+func TestEngine_Frontier_StrongStudent(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	// Strong student: everything correct+fast through the real flow.
+	for i := 0; i < 60 && !e.IsComplete(s); i++ {
+		if answer(t, e, s, true, true) == "" {
 			break
 		}
-		cid := idFor(s.Position)
-		e.RecordAnswer(s, cid, false, false)
-		e.RecordAnswer(s, cid, false, false)
 	}
-	if e.FrontierEstimate(s) > 4 {
-		t.Errorf("expected frontier <= 4 after wrongs at midpoint, got %d", e.FrontierEstimate(s))
+	rep := e.Report(s)
+	if rep.FrontierIdx < 8 {
+		t.Errorf("expected strong student frontier near top (>=8), got %d", rep.FrontierIdx)
+	}
+}
+
+func TestEngine_Frontier_WeakStudent(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	for i := 0; i < 60 && !e.IsComplete(s); i++ {
+		if answer(t, e, s, false, false) == "" {
+			break
+		}
+	}
+	rep := e.Report(s)
+	if rep.FrontierIdx > 3 {
+		t.Errorf("expected weak student frontier low (<=3), got %d", rep.FrontierIdx)
+	}
+	if len(rep.GapsByDomain["d"]) == 0 {
+		t.Error("expected gaps recorded for weak student")
+	}
+}
+
+func TestEngine_Report_Fields(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	answer(t, e, s, true, true)
+	answer(t, e, s, true, true)
+	rep := e.Report(s)
+	if rep.TotalQuestions != 2 {
+		t.Errorf("expected total_questions 2, got %d", rep.TotalQuestions)
+	}
+	if rep.MasteryLevels[s.LastConceptID] < 0.6 {
+		t.Errorf("expected mastery of answered concept high, got %f", rep.MasteryLevels[s.LastConceptID])
+	}
+	if rep.Confidence[s.LastConceptID] < 0.5 {
+		t.Errorf("expected confidence >= 0.5 after probing, got %f", rep.Confidence[s.LastConceptID])
+	}
+	if rep.CompletionEstimates[150] == "" {
+		t.Error("expected completion estimate for 150 XP")
+	}
+}
+
+func TestEngine_Supplemental_LowConfidenceExtends(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	// Answer only 1 probe per concept -> confidence 0.5 (< 0.7) -> not done
+	// until min questions met and all settled.
+	for i := 0; i < 10; i++ {
+		e.RecordAnswer(s, idFor(i), true, true)
+	}
+	if e.IsComplete(s) {
+		t.Error("expected not complete with only 1 probe per concept (low confidence)")
+	}
+	// Second probe per concept settles them.
+	for i := 0; i < 10; i++ {
+		e.RecordAnswer(s, idFor(i), true, true)
+	}
+	if !e.IsComplete(s) {
+		t.Error("expected complete after 2 probes per concept")
 	}
 }
 
 func TestEngine_AllProbedCompletes(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	// Probe every concept at least once
 	for i := 0; i < len(s.order) && !e.IsComplete(s); i++ {
 		cid := idFor(i)
-		if s.totalCount[cid] < probesPerConcept {
+		if s.totalCount[cid] < 2 {
 			e.RecordAnswer(s, cid, true, true)
 			e.RecordAnswer(s, cid, true, true)
 		}

@@ -489,10 +489,11 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 	s.eng.SubmitDiagnosticAnswer(sess, req.ConceptID, req.Correct, req.Fast)
 	if s.eng.IsDiagnosticComplete(sess) {
 		frontier := s.eng.DiagnosticFrontier(sess)
+		report := s.eng.DiagnosticReport(sess)
 		s.mu.Lock()
 		delete(s.diagSessions, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "frontier": frontier})
+		writeJSON(w, map[string]interface{}{"done": true, "frontier": frontier, "report": report})
 		return
 	}
 	_, cid, err := s.eng.NextDiagnosticQuestion(sess)
@@ -732,10 +733,12 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 
 	s.eng.SubmitDiagnosticAnswer(session, req.ConceptID, correct, fast)
 	if s.eng.IsDiagnosticComplete(session) {
+		report := s.eng.DiagnosticReport(session)
 		writeJSON(w, map[string]interface{}{
 			"done":     true,
 			"correct":  correct,
 			"feedback": explanation,
+			"report":   report,
 		})
 		return
 	}

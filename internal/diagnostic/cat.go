@@ -1,6 +1,8 @@
 package diagnostic
 
 import (
+	"math"
+	"sort"
 	"sync"
 	"time"
 
@@ -16,11 +18,14 @@ const (
 )
 
 const (
-	// probesPerConcept is how many questions to ask for each concept.
-	probesPerConcept = 2
-	// minTotalQuestions is the minimum number of questions before
-	// the diagnostic will consider itself converged.
-	minTotalQuestions = 12
+	// minTotalQuestions is the floor before the diagnostic considers convergence.
+	minTotalQuestions = 15
+	// maxTotalQuestions hard caps an adaptive session (supplemental included).
+	maxTotalQuestions = 45
+	// coverSize is the target size of the compressed covering set.
+	coverSize = 30
+	// beliefThreshold is the frontier cutoff: belief >= threshold is "known".
+	beliefThreshold = 0.6
 )
 
 type Session struct {
@@ -28,9 +33,6 @@ type Session struct {
 
 	ID        string
 	StudentID string
-	Position  int
-	Low       int
-	High      int
 	State     State
 	Attempts  []Attempt
 	order     []*concepts.Concept
@@ -40,8 +42,10 @@ type Session struct {
 	LastConceptID   string
 	LastConceptName string
 
-	// Per-concept tracking
-	probeCounts  map[string]int
+	// Per-concept student model (belief 0-1 + confidence 0-1).
+	beliefs     map[string]float64
+	confidence  map[string]float64
+	probeCounts map[string]int
 	correctCount map[string]int
 	totalCount   map[string]int
 	totalAsked   int
@@ -70,22 +74,115 @@ func (e *Engine) Start() *Session {
 	return e.StartWithPath(order)
 }
 
+// StartWithPath begins an adaptive session over the given path (topo order).
+// It compresses the path into a minimal covering set and picks the first
+// question by info gain.
 func (e *Engine) StartWithPath(path []*concepts.Concept) *Session {
 	if len(path) == 0 {
 		return &Session{State: StateDone, order: path}
 	}
-	mid := len(path) / 2
-	return &Session{
-		Position:     mid,
-		Low:          0,
-		High:         len(path) - 1,
+	s := &Session{
 		State:        StateProbing,
 		order:        path,
-		probeCounts:  make(map[string]int),
-		correctCount: make(map[string]int),
-		totalCount:   make(map[string]int),
-		doneSet:      make(map[string]bool),
+		beliefs:      make(map[string]float64, len(path)),
+		confidence:   make(map[string]float64, len(path)),
+		probeCounts:  make(map[string]int, len(path)),
+		correctCount: make(map[string]int, len(path)),
+		totalCount:   make(map[string]int, len(path)),
+		doneSet:      make(map[string]bool, len(path)),
 	}
+	for _, c := range path {
+		s.beliefs[c.ID] = 0.5
+	}
+	return s
+}
+
+// compressedCover returns the smallest covering set: roots + evenly spaced
+// concepts across the topo order at coverSize granularity.
+func (e *Engine) compressedCover(s *Session) []*concepts.Concept {
+	if len(s.order) <= coverSize {
+		return s.order
+	}
+	step := int(math.Ceil(float64(len(s.order)) / float64(coverSize)))
+	// Root concepts (no prerequisites within the path) are always covered.
+	isRoot := func(c *concepts.Concept) bool {
+		return len(c.Prerequisites) == 0
+	}
+	var out []*concepts.Concept
+	seen := make(map[string]bool)
+	add := func(c *concepts.Concept) {
+		if !seen[c.ID] {
+			seen[c.ID] = true
+			out = append(out, c)
+		}
+	}
+	for i := 0; i < len(s.order); i += step {
+		add(s.order[i])
+	}
+	for _, c := range s.order {
+		if isRoot(c) {
+			add(c)
+		}
+	}
+	sort.Slice(out, func(i, j int) bool { return s.index(out[i].ID) < s.index(out[j].ID) })
+	return out
+}
+
+func (s *Session) index(id string) int {
+	for i, c := range s.order {
+		if c.ID == id {
+			return i
+		}
+	}
+	return len(s.order)
+}
+
+// entropy is the binary entropy of a belief p (uncertainty).
+func entropy(p float64) float64 {
+	if p <= 0 || p >= 1 {
+		return 0
+	}
+	return -(p*math.Log2(p) + (1-p)*math.Log2(1-p))
+}
+
+// infoGain scores a candidate concept: uncertainty times coverage influence.
+// Coverage = how many other cover concepts it reaches through prereqs/dependents.
+func (e *Engine) infoGain(s *Session, c *concepts.Concept, coverSet map[string]bool) float64 {
+	unc := entropy(s.beliefs[c.ID])
+	influence := 1.0
+	for _, dep := range e.dag.DependentsOf(c.ID) {
+		if coverSet[dep.ID] {
+			influence += 0.25
+		}
+	}
+	for _, pr := range e.dag.PrereqsOf(c.ID) {
+		if coverSet[pr.ID] {
+			influence += 0.25
+		}
+	}
+	return unc * influence
+}
+
+// pickByInfoGain selects the highest-gain cover concept not yet settled.
+func (e *Engine) pickByInfoGain(s *Session) string {
+	cover := e.compressedCover(s)
+	coverSet := make(map[string]bool, len(cover))
+	for _, c := range cover {
+		coverSet[c.ID] = true
+	}
+	best := ""
+	bestScore := -1.0
+	for _, c := range cover {
+		if s.doneSet[c.ID] {
+			continue
+		}
+		score := e.infoGain(s, c, coverSet)
+		if score > bestScore {
+			bestScore = score
+			best = c.ID
+		}
+	}
+	return best
 }
 
 func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
@@ -95,24 +192,22 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 		s.LastProblem = nil
 		return nil, "", nil
 	}
-
-	// Find the next concept that needs probing, working outward
-	// from Position through the binary search range.
-	cid := s.nextConceptToProbe()
+	cid := e.pickByInfoGain(s)
 	if cid == "" {
 		s.State = StateDone
 		s.LastProblem = nil
 		return nil, "", nil
 	}
-	concept := s.order[s.Position]
+	concept := s.order[s.index(cid)]
 	s.probeCounts[cid]++
-
-	// Vary difficulty: start low, increase on later probes
+	// Vary difficulty: start low, increase on later probes.
 	difficulty := 0.3
 	if s.probeCounts[cid] >= 2 {
 		difficulty = 0.6
 	}
-
+	if s.probeCounts[cid] >= 3 {
+		difficulty = 0.8
+	}
 	p, err := e.registry.Generate(cid, difficulty)
 	if err != nil {
 		return nil, "", err
@@ -123,35 +218,8 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	return s.LastProblem, cid, nil
 }
 
-// nextConceptToProbe finds a concept within the binary search range [Low, High]
-// that hasn't been probed enough yet, starting from Position.
-func (s *Session) nextConceptToProbe() string {
-	if s.Position < 0 || s.Position >= len(s.order) {
-		return ""
-	}
-	cid := s.order[s.Position].ID
-	if s.probeCounts[cid] < probesPerConcept && s.Position >= s.Low && s.Position <= s.High && !s.doneSet[cid] {
-		return cid
-	}
-	// Try concepts within the range [Low, High]
-	for i := s.Position; i <= s.High; i++ {
-		cid2 := s.order[i].ID
-		if s.probeCounts[cid2] < probesPerConcept && i >= s.Low && !s.doneSet[cid2] {
-			s.Position = i
-			return cid2
-		}
-	}
-	for i := s.Position; i >= s.Low; i-- {
-		cid2 := s.order[i].ID
-		if s.probeCounts[cid2] < probesPerConcept && i <= s.High && !s.doneSet[cid2] {
-			s.Position = i
-			return cid2
-		}
-	}
-	return ""
-}
-
-// RecordAnswer processes a diagnostic answer and updates the session state.
+// RecordAnswer processes an answer: belief update + evidence propagation +
+// confidence update + supplemental + stop conditions.
 func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) {
 	s.Lock()
 	defer s.Unlock()
@@ -167,80 +235,95 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 		s.correctCount[conceptID]++
 	}
 
-	needed := probesPerConcept
-	// If a concept is clearly right or clearly wrong after fewer probes,
-	// decide early. But respect minimum probes.
-	if s.totalCount[conceptID] >= needed {
-		s.evaluateConcept(conceptID)
+	// Belief update for the concept itself.
+	b := s.beliefs[conceptID]
+	if correct {
+		b += 0.35 * (1 - b)
+		if fast {
+			b += 0.1 * (1 - b)
+		}
+	} else {
+		b *= 0.55
+	}
+	if b < 0.05 {
+		b = 0.05
+	}
+	if b > 0.95 {
+		b = 0.95
+	}
+	s.beliefs[conceptID] = b
+
+	// Evidence propagation: correct -> prerequisites more likely known;
+	// incorrect -> dependents more likely unknown.
+	if correct {
+		for _, pr := range e.dag.PrereqsOf(conceptID) {
+			if pr.ID == conceptID {
+				continue
+			}
+			s.beliefs[pr.ID] += 0.3 * (1 - s.beliefs[pr.ID]) * 0.5
+		}
+	} else {
+		for _, dep := range e.dag.DependentsOf(conceptID) {
+			if dep.ID == conceptID {
+				continue
+			}
+			s.beliefs[dep.ID] *= (1 - 0.3*0.5)
+		}
 	}
 
-	// Check stopping conditions
+	// Confidence: 2 probes settle a concept.
+	s.confidence[conceptID] = math.Min(1.0, float64(s.probeCounts[conceptID])*0.5)
+
+	// Supplemental: re-probe low-confidence cover concepts until 45 Q cap.
+	s.doneSet[conceptID] = s.totalCount[conceptID] >= 2
+
 	if s.shouldStop() {
 		s.State = StateDone
 	}
 }
 
-// evaluateConcept decides whether a concept is "known" or "not known"
-// and adjusts the binary search bounds accordingly.
-func (s *Session) evaluateConcept(conceptID string) {
-	total := s.totalCount[conceptID]
-	correct := s.correctCount[conceptID]
-	if total == 0 || s.doneSet[conceptID] {
-		return
-	}
-	s.doneSet[conceptID] = true
-	ratio := float64(correct) / float64(total)
-
-	if ratio >= 0.75 {
-		// Student knows this and everything below it.
-		s.Low = s.Position + 1
-	} else if ratio <= 0.25 {
-		// Student doesn't know this — everything above it is
-		// also likely unknown.
-		s.High = s.Position - 1
-	}
-	// For 0.5 (1/2), don't move bounds aggressively — let more
-	// probing inform the decision.
-
-	// Recompute binary search position
-	if s.Low <= s.High {
-		s.Position = (s.Low + s.High) / 2
-	}
-}
-
-// shouldStop returns true when the diagnostic has converged.
 func (s *Session) shouldStop() bool {
-	if s.Low > s.High {
-		return s.totalAsked >= minTotalQuestions || s.allProbed()
+	if s.totalAsked >= maxTotalQuestions {
+		return true
 	}
-	// Also stop if all concepts in range are done and minimum met
-	if s.totalAsked >= minTotalQuestions && s.allInRangeDone() {
+	cover := s.compressedCoverSafe()
+	coverDone := true
+	for _, c := range cover {
+		if !s.doneSet[c.ID] {
+			coverDone = false
+			break
+		}
+	}
+	if coverDone && s.totalAsked >= minTotalQuestions {
 		return true
 	}
 	return false
 }
 
-// allProbed returns true when every concept in the order has been probed
-// at least once.
-func (s *Session) allProbed() bool {
+// compressedCoverSafe mirrors compressedCover without an Engine receiver
+// (session-only helper for stop conditions).
+func (s *Session) compressedCoverSafe() []*concepts.Concept {
+	if len(s.order) <= coverSize {
+		return s.order
+	}
+	step := int(math.Ceil(float64(len(s.order)) / float64(coverSize)))
+	var out []*concepts.Concept
+	seen := make(map[string]bool)
+	add := func(c *concepts.Concept) {
+		if !seen[c.ID] {
+			seen[c.ID] = true
+			out = append(out, c)
+		}
+	}
+	for i := 0; i < len(s.order); i += step {
+		add(s.order[i])
+	}
 	for _, c := range s.order {
-		if s.totalCount[c.ID] == 0 {
-			return false
+		if len(c.Prerequisites) == 0 {
+			add(c)
 		}
 	}
-	return true
-}
-
-// allInRangeDone returns true when every concept in [Low, High] has been
-// fully evaluated.
-func (s *Session) allInRangeDone() bool {
-	for i := s.Low; i <= s.High && i < len(s.order); i++ {
-		cid := s.order[i].ID
-		if !s.doneSet[cid] && s.totalCount[cid] < probesPerConcept {
-			return false
-		}
-	}
-	return true
+	return out
 }
 
 func (e *Engine) IsComplete(s *Session) bool {
@@ -249,10 +332,26 @@ func (e *Engine) IsComplete(s *Session) bool {
 	return s.State == StateDone
 }
 
-// FrontierEstimate returns the estimated concept index where the student's
-// knowledge frontier lies (the highest concept index they can answer).
+// FrontierEstimate returns the highest order index whose belief is known.
 func (e *Engine) FrontierEstimate(s *Session) int {
 	s.Lock()
 	defer s.Unlock()
-	return s.High
+	idx := -1
+	for i, c := range s.order {
+		if s.beliefs[c.ID] >= beliefThreshold {
+			idx = i
+		}
+	}
+	return idx
+}
+
+// KnowledgeConfidence returns per-concept confidence 0-1 (copy, lock-safe).
+func (e *Engine) KnowledgeConfidence(s *Session) map[string]float64 {
+	s.Lock()
+	defer s.Unlock()
+	out := make(map[string]float64, len(s.confidence))
+	for k, v := range s.confidence {
+		out[k] = v
+	}
+	return out
 }
