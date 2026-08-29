@@ -1445,7 +1445,8 @@ func (s *Server) handleCourseDetail(w http.ResponseWriter, r *http.Request) {
 	writeError(w, "course not found", 404)
 }
 
-// GET /api/transcript — accreditation-track completion overview.
+// GET /api/transcript — accreditation-track completion overview
+// (?format=csv returns a downloadable transcript).
 func (s *Server) handleTranscript(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -1461,7 +1462,41 @@ func (s *Server) handleTranscript(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "failed to load transcript", 500)
 		return
 	}
+	if r.URL.Query().Get("format") == "csv" {
+		writeTranscriptCSV(w, catalog)
+		return
+	}
 	writeJSON(w, map[string]interface{}{"courses": catalog})
+}
+
+func writeTranscriptCSV(w http.ResponseWriter, catalog []engine.CourseStatus) {
+	var b strings.Builder
+	b.WriteString("course,grade,total,mastered,pct,days_remaining,status\n")
+	for _, cs := range catalog {
+		p := cs.Progress
+		if p == nil {
+			b.WriteString(fmt.Sprintf("%s,%s,0,0,0,0,not_started\n", csvCell(cs.Name), csvCell(cs.Grade)))
+			continue
+		}
+		status := "not_started"
+		if p.Mastered > 0 && p.Mastered < p.Total {
+			status = "in_progress"
+		} else if p.Total > 0 && p.Mastered == p.Total {
+			status = "complete"
+		}
+		b.WriteString(fmt.Sprintf("%s,%s,%d,%d,%.0f,%d,%s\n",
+			csvCell(cs.Name), csvCell(cs.Grade), p.Total, p.Mastered, p.Pct*100, p.DaysRemaining, status))
+	}
+	w.Header().Set("Content-Type", "text/csv; charset=utf-8")
+	w.Header().Set("Content-Disposition", `attachment; filename="mathua-transcript.csv"`)
+	w.Write([]byte(b.String()))
+}
+
+func csvCell(s string) string {
+	if strings.ContainsAny(s, ",\"\n") {
+		return `"` + strings.ReplaceAll(s, `"`, `""`) + `"`
+	}
+	return s
 }
 
 // POST /api/courses/{id}/diagnostic
