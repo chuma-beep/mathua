@@ -104,6 +104,14 @@ func (s *PostgresStore) SetLeague(studentID, tier, week string, moved int) error
 	return fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) SetShareToken(studentID, token string) error {
+	return fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetStudentByShareToken(token string) (*Student, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) GetDailyActivity(studentID string, days int) ([]DailyActivity, error) {
 	return nil, fmt.Errorf("not implemented")
 }

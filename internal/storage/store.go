@@ -24,6 +24,7 @@ type Student struct {
 	League              string
 	LeagueWeek          string
 	LeagueMoved         int
+	ShareToken          string
 }
 
 type ConceptProgress struct {
@@ -151,6 +152,8 @@ type Repository interface {
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
 	GetLeagueStandings() ([]LeagueMember, error)
 	SetLeague(studentID, tier, week string, moved int) error
+	SetShareToken(studentID, token string) error
+	GetStudentByShareToken(token string) (*Student, error)
 	GetDailyActivity(studentID string, days int) ([]DailyActivity, error)
 
 	AddXP(studentID string, amount int) error

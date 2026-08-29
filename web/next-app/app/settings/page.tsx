@@ -8,7 +8,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
-import { getSettings, updateSettings, type UserSettings } from '../../lib/api'
+import { getSettings, updateSettings, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn } from '../../lib/auth'
 import { Switch } from '../../components/ui/switch'
 import Loading from '../../components/Loading'
@@ -18,6 +18,9 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings>({})
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [shareToken, setShareToken] = useState('')
+  const [shareUrl, setShareUrl] = useState('')
+  const [shareBusy, setShareBusy] = useState(false)
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -69,6 +72,25 @@ export default function SettingsPage() {
   }
 
   const paused = !!settings.pause_until
+
+  const handleShare = async (enable: boolean) => {
+    setShareBusy(true)
+    try {
+      if (enable) {
+        const res = await enableShare()
+        setShareToken(res.token)
+        setShareUrl(`${window.location.origin}/share?token=${res.token}`)
+      } else {
+        await disableShare()
+        setShareToken('')
+        setShareUrl('')
+      }
+    } catch {
+      console.error('share toggle failed')
+    } finally {
+      setShareBusy(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -142,6 +164,46 @@ export default function SettingsPage() {
                     </button>
                   )}
                 </div>
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Share with parent / teacher</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Generate a read-only link to this student&apos;s progress, activity, and weak spots.
+                </p>
+                {shareUrl ? (
+                  <div className="mt-3 min-w-0">
+                    <input
+                      readOnly
+                      value={shareUrl}
+                      onFocus={e => e.currentTarget.select()}
+                      className="w-full bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-xs text-mathua-primary focus:outline-none focus:border-mathua-blue min-w-0"
+                    />
+                    <div className="flex gap-2 mt-2">
+                      <button
+                        onClick={() => { navigator.clipboard?.writeText(shareUrl) }}
+                        className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono"
+                      >
+                        Copy link
+                      </button>
+                      <button
+                        onClick={() => handleShare(false)}
+                        disabled={shareBusy}
+                        className="border border-mathua-red text-mathua-red hover:bg-mathua-red hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
+                      >
+                        Disable share
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleShare(true)}
+                    disabled={shareBusy}
+                    className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
+                  >
+                    {shareBusy ? 'Generating…' : 'Enable share link'}
+                  </button>
+                )}
               </div>
             </div>
 
