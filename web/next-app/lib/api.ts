@@ -384,6 +384,29 @@ export async function getShareReport(token: string): Promise<ShareReport | null>
   return res.json()
 }
 
+export interface CourseProgress {
+  total: number
+  mastered: number
+  pct: number
+  days_remaining: number
+}
+
+export interface CourseStatus {
+  id: string
+  name: string
+  grade: string
+  description: string
+  targets: string[]
+  progress?: CourseProgress
+}
+
+export async function getTranscript(): Promise<CourseStatus[]> {
+  const res = await fetch(`${API_BASE}/api/transcript`, { headers: { ...getAuthHeaders() }, cache: 'no-store' })
+  if (!res.ok) return []
+  const data = await res.json()
+  return data.courses ?? []
+}
+
 export interface ConfigRes {
 	auth_enabled: boolean
 }

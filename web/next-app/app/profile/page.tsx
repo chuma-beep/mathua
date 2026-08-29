@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews } from '../../lib/api'
-import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript } from '../../lib/api'
+import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
@@ -37,6 +37,7 @@ export default function ProfilePage() {
   const [progress, setProgress] = useState<Record<string, ConceptProgress>>({})
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
+  const [courses, setCourses] = useState<CourseStatus[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -66,6 +67,7 @@ export default function ProfilePage() {
           setProgress(progressRes)
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
+          getTranscript().then(setCourses).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
           const { getGuestId } = await import('../../lib/auth')
@@ -304,6 +306,60 @@ export default function ProfilePage() {
             <StrugglesSection weaknesses={weaknesses} />
           </div>
         </section>
+
+        {/* Transcript — accreditation-track course completion */}
+        {courses.length > 0 && (
+          <section className="mt-10 min-w-0">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary">
+                Transcript
+              </h2>
+              <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">
+                completion estimate
+              </span>
+            </div>
+            <div className="space-y-2">
+              {courses.map(c => {
+                const p = c.progress
+                const done = !!p && p.total > 0 && p.mastered === p.total
+                const pct = p && p.total > 0 ? Math.round(p.pct * 100) : 0
+                return (
+                  <div key={c.id} className="border border-mathua-border bg-mathua-surface p-3 min-w-0">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span className={`font-mono text-[10px] uppercase shrink-0 ${done ? 'text-mathua-green' : 'text-mathua-blue'}`}>
+                        {c.grade}
+                      </span>
+                      <span className="font-mono text-xs text-mathua-primary truncate flex-1 min-w-0">
+                        {c.name}
+                      </span>
+                      {p && (
+                        <span className="font-mono text-[10px] text-mathua-muted shrink-0">
+                          {p.mastered}/{p.total} · {pct}%
+                        </span>
+                      )}
+                      {p && !done && p.days_remaining > 0 && (
+                        <span className="font-mono text-[10px] text-mathua-secondary shrink-0 hidden sm:inline">
+                          ~{p.days_remaining}d
+                        </span>
+                      )}
+                      {done && (
+                        <span className="font-mono text-[10px] text-mathua-green shrink-0">✓ complete</span>
+                      )}
+                    </div>
+                    {p && (
+                      <div className="mt-1.5 h-1 bg-mathua-code overflow-hidden">
+                        <div
+                          className={`h-full transition-all ${done ? 'bg-mathua-green' : 'bg-mathua-blue'}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
       </div>
       <BottomTabs />
     </>
