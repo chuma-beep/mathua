@@ -134,6 +134,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
+	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.handleEfficacyAll)))
 }
 
 // POST /api/session
@@ -1825,6 +1826,20 @@ func (s *Server) handleEfficacy(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	report, err := s.eng.Efficacy(studentID)
+	if err != nil {
+		writeError(w, "failed to compute efficacy", 500)
+		return
+	}
+	writeJSON(w, report)
+}
+
+// GET /api/efficacy/all — public product-wide first-pass / second-pass rates.
+func (s *Server) handleEfficacyAll(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	report, err := s.eng.AggregateEfficacy()
 	if err != nil {
 		writeError(w, "failed to compute efficacy", 500)
 		return
