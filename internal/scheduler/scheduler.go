@@ -72,6 +72,101 @@ func (s *Scheduler) Next(
 	return &NextConcept{Concept: pick.Concept, IsReview: pick.IsReview}
 }
 
+// NextSmart returns up to 3 dissimilar candidates (distinct subdomain),
+// PR 1.4: layering bonus (+2 when this concept encompasses a weak prereq),
+// non-interference penalty (-3 when sharing an InterferenceGroup with a
+// recently practiced concept), interleaving window (exclude same Subdomain
+// as the last 2 practiced). The 70/30 balance still governs the top pick.
+func (s *Scheduler) NextSmart(
+	snapshots map[string]*ConceptSnapshot,
+	prevConceptIDs []string,
+	reviewCount, newCount int,
+	weakness map[string]float64,
+) []NextConcept {
+	now := time.Now().UTC()
+	candidates := buildCandidatesAdvanced(s.dag, snapshots, now, prevConceptIDs, weakness)
+	if len(candidates) == 0 {
+		return nil
+	}
+	sort.Slice(candidates, func(i, j int) bool {
+		if candidates[i].Priority != candidates[j].Priority {
+			return candidates[i].Priority > candidates[j].Priority
+		}
+		return candidates[i].Concept.ID < candidates[j].Concept.ID
+	})
+	pref := selectWithBalance(candidates, reviewCount, newCount)
+
+	out := []NextConcept{{Concept: pref.Concept, IsReview: pref.IsReview}}
+	added := map[string]bool{pref.Concept.ID: true}
+	seenSub := map[string]bool{pref.Concept.Subdomain: true}
+	for _, c := range candidates {
+		if added[c.Concept.ID] || seenSub[c.Concept.Subdomain] {
+			continue
+		}
+		out = append(out, NextConcept{Concept: c.Concept, IsReview: c.IsReview})
+		added[c.Concept.ID] = true
+		seenSub[c.Concept.Subdomain] = true
+		if len(out) >= 3 {
+			break
+		}
+	}
+	return out
+}
+
+// buildCandidatesAdvanced adds PR 1.4 edges to candidate construction:
+// interleaving exclusion (same Subdomain as last 2), layering +2, non-interference -3.
+func buildCandidatesAdvanced(dag *concepts.DAG, snapshots map[string]*ConceptSnapshot, now time.Time, prevIDs []string, weakness map[string]float64) []Candidate {
+	prevSet := make(map[string]bool, len(prevIDs))
+	prevSubs := make(map[string]bool)
+	prevGroups := make(map[string]bool)
+	for _, id := range prevIDs {
+		prevSet[id] = true
+		if c := dag.Concept(id); c != nil {
+			if c.Subdomain != "" {
+				prevSubs[c.Subdomain] = true
+			}
+			if c.InterferenceGroup != "" {
+				prevGroups[c.InterferenceGroup] = true
+			}
+		}
+	}
+	base := buildCandidates(dag, snapshots, now, "")
+	var out []Candidate
+	for _, cand := range base {
+		c := cand.Concept
+		if prevSet[c.ID] {
+			continue
+		}
+		// Interleaving window: skip same subdomain as recent practice, but never
+		// starve the session (fall back if the filter empties the set).
+		if len(prevSubs) > 0 && prevSubs[c.Subdomain] {
+			continue
+		}
+		priority := cand.Priority
+		priority += layeringBonus(c, weakness)
+		if prevGroups[c.InterferenceGroup] {
+			priority -= 3.0
+		}
+		out = append(out, Candidate{Concept: c, IsReview: cand.IsReview, Priority: priority})
+	}
+	if len(out) == 0 {
+		// Interleaving would starve the session — degrade to no-window candidates.
+		out = base
+	}
+	return out
+}
+
+// layeringBonus: +2 when this concept encompasses a weak prerequisite
+// (retroactive facilitation, improve.md:34).
+func layeringBonus(c *concepts.Concept, weakness map[string]float64) float64 {
+	for _, eid := range c.Encompasses {
+		if weakness[eid] >= 0.6 {
+			return 2.0
+		}
+	}
+	return 0
+}
+
 func buildCandidates(dag *concepts.DAG, snapshots map[string]*ConceptSnapshot, now time.Time, skipID string) []Candidate {
 	var out []Candidate
 	for _, c := range dag.Order() {

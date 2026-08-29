@@ -1408,6 +1408,12 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 	}
 	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
 	sess := qEng.Start(quizConcepts)
+	// PR 1.4: per-concept 80% difficulty target from weakness map.
+	if studentID != "" {
+		for _, c := range quizConcepts {
+			sess.Difficulties[c.ID] = s.eng.DifficultyFor(studentID, c.ID)
+		}
+	}
 	sess.ID = newUUID()
 	sess.StudentID = studentID
 	s.mu.Lock()

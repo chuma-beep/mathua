@@ -19,6 +19,8 @@ type Session struct {
 	Attempts  []Attempt
 	LastProblem   *generator.Problem
 	LastConceptID string
+	// Difficulties holds weakness→difficulty per concept (80% target, 0.3-1.0).
+	Difficulties map[string]float64
 }
 
 type Attempt struct {
@@ -48,7 +50,8 @@ func (e *Engine) Start(concepts []*concepts.Concept) *Session {
 		concepts = concepts[:5]
 	}
 	return &Session{
-		Order: concepts,
+		Order:        concepts,
+		Difficulties: make(map[string]float64, len(concepts)),
 	}
 }
 
@@ -60,8 +63,12 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 		return nil, "", nil
 	}
 	c := s.Order[s.Index]
-	// 80% difficulty target via weakness — stub uses 0.7 constant (close to 0.8)
-	p, err := e.registry.Generate(c.ID, 0.7)
+	// 80% difficulty target via weakness map (engine.DifficultyFor); fallback 0.8.
+	difficulty := 0.8
+	if d, ok := s.Difficulties[c.ID]; ok && d > 0 {
+		difficulty = d
+	}
+	p, err := e.registry.Generate(c.ID, difficulty)
 	if err != nil {
 		return nil, "", err
 	}

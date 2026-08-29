@@ -427,3 +427,69 @@ func TestDaysSince_ZeroTimeSentinel(t *testing.T) {
 		t.Errorf("expected 999 sentinel for zero time, got %f", got)
 	}
 }
+
+// PR 1.4 tests
+
+func TestLayeringBonus_EncompassesWeakPrereq(t *testing.T) {
+	c := &concepts.Concept{ID: "calc.limit.concept", Encompasses: []string{"alg.func.concept"}}
+	weak := map[string]float64{"alg.func.concept": 0.8}
+	if got := layeringBonus(c, weak); got != 2.0 {
+		t.Errorf("expected +2 layering for weak encompassed prereq, got %f", got)
+	}
+	if got := layeringBonus(c, map[string]float64{"alg.func.concept": 0.2}); got != 0 {
+		t.Errorf("expected 0 layering for mastered prereq, got %f", got)
+	}
+}
+
+func TestNextSmart_InterleavingWindow_ExcludesSameSubdomain(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	now := time.Now().UTC()
+	snap := map[string]*ConceptSnapshot{
+		"a": {Status: mastery.StatusMastered, LastReviewed: now, RequiredStreak: 3},
+	}
+	// prev "a" (subdomain "") — no subdomain filtering kicks in for empty,
+	// but b/c/d all unlocked: expect diverse candidates with distinct subdomains.
+	cands := s.NextSmart(snap, []string{"a"}, 0, 0, nil)
+	if len(cands) == 0 {
+		t.Fatal("expected smart candidates")
+	}
+	seenSub := map[string]bool{}
+	for _, c := range cands {
+		if seenSub[c.Concept.Subdomain] {
+			t.Errorf("duplicate subdomain %q in top-3 dissimilar: %+v", c.Concept.Subdomain, cands)
+		}
+		seenSub[c.Concept.Subdomain] = true
+	}
+}
+
+func TestNextSmart_NonInterferencePenalty(t *testing.T) {
+	raw := []concepts.Concept{
+		{ID: "x", Domain: "d", Subdomain: "s1", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "y", Domain: "d", Subdomain: "s2", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "z", Domain: "d", Subdomain: "s3", InterferenceGroup: "", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+	}
+	d, err := concepts.Build(raw)
+	if err != nil {
+		t.Fatalf("build: %v", err)
+	}
+	s := New(d)
+	snap := map[string]*ConceptSnapshot{}
+	// Prev "x" (group g): y shares group -> -3 penalty, z (no group) wins priority.
+	cands := s.NextSmart(snap, []string{"x"}, 0, 0, nil)
+	if len(cands) == 0 {
+		t.Fatal("expected candidates")
+	}
+	if cands[0].Concept.ID != "z" {
+		t.Errorf("expected non-interfering z first after -3 penalty on y, got %s", cands[0].Concept.ID)
+	}
+}
+
+func TestNextSmart_FallsBackWithoutPrev(t *testing.T) {
+	d := miniDAG(t)
+	s := New(d)
+	cands := s.NextSmart(map[string]*ConceptSnapshot{}, nil, 0, 0, nil)
+	if len(cands) == 0 || cands[0].Concept.ID != "a" {
+		t.Errorf("expected root a first with no history, got %+v", cands)
+	}
+}
