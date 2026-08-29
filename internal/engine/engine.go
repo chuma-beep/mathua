@@ -545,7 +545,11 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		explanation = sessionFields.explanation
 	}
 
-	xp := computeXP(gr.Correct, elapsedSeconds, sessionFields.timeThreshold, progress.Streak, sessionFields.isReview)
+	taskType := TaskLesson
+	if sessionFields.isReview {
+		taskType = TaskReview
+	}
+	xp := computeXPForTask(gr.Correct, elapsedSeconds, sessionFields.timeThreshold, progress.Streak, taskType)
 	if xp > 0 {
 		if err := e.repo.AddXP(studentID, xp); err != nil {
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
@@ -577,14 +581,35 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	}, nil
 }
 
-func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isReview bool) int {
+const (
+	TaskLesson    = "lesson"
+	TaskReview    = "review"
+	TaskMultistep = "multistep"
+	TaskQuiz      = "quiz"
+)
+
+// taskBaseXP maps MA task types to base XP (10/5/15/20).
+func taskBaseXP(taskType string) int {
+	switch taskType {
+	case TaskReview:
+		return 5
+	case TaskMultistep:
+		return 15
+	case TaskQuiz:
+		return 20
+	case TaskLesson:
+		fallthrough
+	default:
+		return 10
+	}
+}
+
+// computeXPForTask is the MA-differed XP calculator (10/5/15/20).
+func computeXPForTask(correct bool, elapsed, timeThreshold float64, streak int, taskType string) int {
 	if !correct {
 		return 0
 	}
-	base := 10
-	if isReview {
-		base = 5
-	}
+	base := taskBaseXP(taskType)
 	ratio := elapsed / timeThreshold
 	if ratio <= 0 {
 		ratio = 0.01
@@ -598,6 +623,15 @@ func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isRevie
 	}
 	streakMultiplier := 1.0 + float64(min(streak, 10))*0.1
 	return int(float64(base) * timeMultiplier * streakMultiplier)
+}
+
+// computeXP retains bool-based API for backward compatibility (isReview=true→review 5, false→lesson 10).
+func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isReview bool) int {
+	taskType := TaskLesson
+	if isReview {
+		taskType = TaskReview
+	}
+	return computeXPForTask(correct, elapsed, timeThreshold, streak, taskType)
 }
 
 func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgress, error) {
