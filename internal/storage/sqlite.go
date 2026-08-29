@@ -343,6 +343,66 @@ func (s *SQLiteStore) GetSession(id string) (*Session, error) {
 	return &ses, nil
 }
 
+func (s *SQLiteStore) GetActiveSession(sessionID string) (*ActiveSession, error) {
+	row := s.db.QueryRow(`
+		SELECT session_id, student_id, concept_id, concept_name, expected_answer,
+		       attempt_id, question, explanation, diagram, is_review, answered, updated_at
+		FROM active_sessions WHERE session_id = ?
+	`, sessionID)
+	var a ActiveSession
+	var isReview, answered int
+	var updatedAt string
+	if err := row.Scan(&a.SessionID, &a.StudentID, &a.ConceptID, &a.ConceptName, &a.ExpectedAnswer,
+		&a.AttemptID, &a.Question, &a.Explanation, &a.Diagram, &isReview, &answered, &updatedAt); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("get active session: %w", err)
+	}
+	a.IsReview = isReview != 0
+	a.Answered = answered != 0
+	if updatedAt != "" {
+		if t, err := time.Parse(time.RFC3339, updatedAt); err == nil {
+			a.UpdatedAt = t
+		}
+	}
+	return &a, nil
+}
+
+func (s *SQLiteStore) UpsertActiveSession(a *ActiveSession) error {
+	now := time.Now().UTC().Format(time.RFC3339)
+	_, err := s.db.Exec(`
+		INSERT INTO active_sessions
+			(session_id, student_id, concept_id, concept_name, expected_answer,
+			 attempt_id, question, explanation, diagram, is_review, answered, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(session_id) DO UPDATE SET
+			student_id      = excluded.student_id,
+			concept_id      = excluded.concept_id,
+			concept_name    = excluded.concept_name,
+			expected_answer = excluded.expected_answer,
+			attempt_id      = excluded.attempt_id,
+			question        = excluded.question,
+			explanation     = excluded.explanation,
+			diagram         = excluded.diagram,
+			is_review       = excluded.is_review,
+			answered        = excluded.answered,
+			updated_at      = excluded.updated_at
+	`, a.SessionID, a.StudentID, a.ConceptID, a.ConceptName, a.ExpectedAnswer,
+		a.AttemptID, a.Question, a.Explanation, a.Diagram, boolToInt(a.IsReview), boolToInt(a.Answered), now)
+	if err != nil {
+		return fmt.Errorf("upsert active session: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) DeleteActiveSession(sessionID string) error {
+	if _, err := s.db.Exec("DELETE FROM active_sessions WHERE session_id = ?", sessionID); err != nil {
+		return fmt.Errorf("delete active session: %w", err)
+	}
+	return nil
+}
+
 // Attempts
 
 func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {

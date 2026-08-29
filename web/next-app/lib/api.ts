@@ -236,6 +236,37 @@ export async function startSessionName(name: string): Promise<StartSessionRes> {
   return res.json()
 }
 
+export function isConflictError(err: unknown): boolean {
+  return err instanceof Error && (err as unknown as Record<string, unknown>).status === 409
+}
+
+export function isTooQuickError(err: unknown): boolean {
+  return err instanceof Error && (err as unknown as Record<string, unknown>).status === 400
+}
+
+export function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    const e = err as unknown as Record<string, unknown>
+    if (typeof e.serverMessage === 'string' && e.serverMessage) return e.serverMessage as string
+    return err.message
+  }
+  return String(err)
+}
+
+function throwWithStatus(msg: string, status: number): never {
+  throw Object.assign(new Error(msg), { status })
+}
+
+async function throwWithResponse(res: Response, fallbackMsg: string): Promise<never> {
+  let serverMessage = ''
+  try {
+    const data = await res.json() as { error?: string }
+    if (data && typeof data.error === 'string') serverMessage = data.error
+  } catch { /* ignore json parse */ }
+  const msg = serverMessage ? `${fallbackMsg}: ${serverMessage}` : fallbackMsg
+  throw Object.assign(new Error(msg), { status: res.status, serverMessage })
+}
+
 export async function submitAnswer(
   sessionID: string,
   answer: string,
@@ -251,8 +282,17 @@ export async function submitAnswer(
     headers,
     body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
   })
-  if (!res.ok) throw new Error(`Answer submit failed: ${res.status}`)
+  if (!res.ok) await throwWithResponse(res, `Answer submit failed: ${res.status}`)
   return validateResponse(AnswerResSchema, await res.json(), 'submitAnswer') as AnswerRes
+}
+
+export async function getCurrentQuestion(sessionID: string): Promise<Question | null> {
+  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const res = await fetch(`${API_BASE}/api/session/current?session_id=${encodeURIComponent(sessionID)}`, { headers })
+  if (!res.ok) return null
+  const data = await res.json()
+  if (!data.question) return null
+  return validateResponse(QuestionSchema, data.question, 'getCurrentQuestion') as Question
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
@@ -606,7 +646,7 @@ export async function submitReviewAnswer(
 		headers,
 		body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
 	})
-	if (!res.ok) throw new Error(`Review answer submit failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Review answer submit failed: ${res.status}`)
 	return res.json()
 }
 
