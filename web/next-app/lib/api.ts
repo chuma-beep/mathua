@@ -593,9 +593,27 @@ export interface LessonPracticeRes {
 	concept_id: string
 }
 
+export interface KpInfo {
+	label: string
+	section?: string
+	subgoals: string[]
+	worked_example: string
+}
+
+export interface LessonKpsRes {
+	concept_id: string
+	kps: KpInfo[]
+}
+
 export async function getLessonPractice(conceptId: string, count = 5): Promise<LessonPracticeRes> {
 	const res = await fetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?count=${count}`)
 	if (!res.ok) throw new Error(`Lesson practice fetch failed: ${res.status}`)
+	return res.json()
+}
+
+export async function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
+	const res = await fetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
+	if (!res.ok) return { concept_id: conceptId, kps: [] }
 	return res.json()
 }
 
