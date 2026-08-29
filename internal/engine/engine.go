@@ -38,6 +38,7 @@ type activeSession struct {
 	sessionReview  int
 	sessionNew     int
 	lastConceptID  string
+	recentConcepts []string
 }
 
 // ErrNoActiveQuestion is returned when a session has no unanswered question
@@ -225,10 +226,19 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	if as == nil {
 		as = &activeSession{}
 	}
-	next := e.sched.Next(snapshots, as.lastConceptID, as.sessionReview, as.sessionNew)
-	if next == nil {
+	// PR 1.4: recent-window (last 2) for interleaving + non-interference.
+	recent := as.recentConcepts
+	if as.lastConceptID != "" {
+		recent = append([]string{as.lastConceptID}, recent...)
+		if len(recent) > 2 {
+			recent = recent[:2]
+		}
+	}
+	cands := e.sched.NextSmart(snapshots, recent, as.sessionReview, as.sessionNew, e.WeaknessMap(studentID))
+	if len(cands) == 0 {
 		return nil, nil
 	}
+	next := cands[0]
 	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
 	prevQuestion := as.questionText
 	attemptID := newAttemptID()
@@ -255,6 +265,10 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.answered = false
 	as.attemptID = attemptID
 	as.questionText = prob.Question
+	as.recentConcepts = append(as.recentConcepts, next.Concept.ID)
+	if len(as.recentConcepts) > 3 {
+		as.recentConcepts = as.recentConcepts[len(as.recentConcepts)-3:]
+	}
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
@@ -800,6 +814,11 @@ func computeXPForTask(correct bool, elapsed, timeThreshold float64, streak int, 
 // QuizXP awards TaskQuiz 20 for actionable quiz path (own grading path per Q3).
 func (e *Engine) QuizXP(correct bool, elapsed, timeThreshold float64, streak int) int {
 	return computeXPForTask(correct, elapsed, timeThreshold, streak, TaskQuiz)
+}
+
+// DifficultyFor exposes weakness→difficulty (0.3-1.0) for quiz 80% targeting.
+func (e *Engine) DifficultyFor(studentID, conceptID string) float64 {
+	return e.computeDifficulty(studentID, conceptID)
 }
 
 // computeXP retains bool-based API for backward compatibility (isReview=true→review 5, false→lesson 10).
