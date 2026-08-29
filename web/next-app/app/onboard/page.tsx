@@ -183,7 +183,7 @@ export default function OnboardPage() {
     if (user) {
       setUserInfo({ ...user, diagnostic_completed: true })
     }
-    push('/session')
+    push('/profile')
   }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getAuthHeaders, getUserInfo } from '../../lib/auth'
+import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
 import { getActivity, getProgress, getWeaknesses, getDueReviews } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
 import Header from '../../components/Header'
@@ -46,6 +46,10 @@ export default function ProfilePage() {
 
     const info = getUserInfo()
     setUser(info)
+    // Ensure guest has an ephemeral id so profile/diagnostic works without account
+    if (!info) {
+      ensureGuestId()
+    }
 
     async function fetchData() {
       try {
@@ -63,7 +67,7 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
         } else {
-          // Guest: no scores, but still try activity/progress as guest (will be empty)
+          // Guest: ephemeral profile — activity/progress will be empty until first diagnostic/study
           const activityRes = await getActivity().catch(() => [])
           setActivity(activityRes as DailyActivity[])
           setScores(null)
@@ -157,12 +161,20 @@ export default function ProfilePage() {
               </div>
             </div>
           </section>
+          {/* Diagnostic CTA — guest */}
+          <section className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Recommended</span>
+                <span className="font-mono text-xs text-mathua-primary truncate">Take a diagnostic to get a recommendation on where to start</span>
+              </div>
+              <p className="font-mono text-xs text-mathua-secondary mt-1">20–35 adaptive questions · finds your knowledge frontier</p>
+            </div>
+            <Link href="/onboard" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Start diagnostic →</Link>
+          </section>
+
           <section className="mt-10">
             <div className="grid grid-cols-1 gap-4 lg:gap-6 min-w-0">
-              <div className="border border-mathua-border p-4 bg-mathua-surface text-center min-w-0">
-                <p className="font-mono text-xs text-mathua-secondary mb-3">Take a diagnostic to find your weak spots</p>
-                <Link href="/onboard" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">Start diagnostic →</Link>
-              </div>
               <DomainProgress progress={progress} />
             </div>
           </section>
@@ -201,6 +213,29 @@ export default function ProfilePage() {
       <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
         {/* Profile stats — mobile-first */}
         <ProfileStats name={user.name} scores={scores} />
+
+        {/* Diagnostic CTA — both authed and guest via profile */}
+        <section className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+                {user.diagnostic_completed ? 'Retake' : 'Recommended'}
+              </span>
+              <span className="font-mono text-xs text-mathua-primary truncate">
+                {user.diagnostic_completed ? 'Retake diagnostic to refresh recommendation' : 'Take a diagnostic to get a recommendation on where to start'}
+              </span>
+            </div>
+            <p className="font-mono text-xs text-mathua-secondary mt-1">
+              20–35 adaptive questions · finds your knowledge frontier
+            </p>
+          </div>
+          <Link
+            href="/onboard"
+            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
+          >
+            {user.diagnostic_completed ? 'Retake diagnostic →' : 'Start diagnostic →'}
+          </Link>
+        </section>
 
         {dueReviews > 0 && (
           <Link
