@@ -106,6 +106,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/config", logRequest(cors(s.handleConfig)))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
+	mux.HandleFunc("/api/leagues", logRequest(cors(s.authMiddleware(s.handleLeagues))))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseDiagnostic))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
@@ -436,6 +437,20 @@ func (s *Server) handleLeaderboard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, entries)
+}
+
+// GET /api/leagues — weekly league standings with promotion/demotion.
+func (s *Server) handleLeagues(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	board, err := s.eng.GetLeagues()
+	if err != nil {
+		writeError(w, "failed to get leagues", 500)
+		return
+	}
+	writeJSON(w, board)
 }
 
 // POST /api/diagnostic

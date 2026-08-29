@@ -21,6 +21,9 @@ type Student struct {
 	DailyXPGoal         int
 	Settings            string
 	CreatedAt           time.Time
+	League              string
+	LeagueWeek          string
+	LeagueMoved         int
 }
 
 type ConceptProgress struct {
@@ -93,6 +96,16 @@ type LeaderboardRow struct {
 	WeeklyMastered int
 }
 
+// LeagueMember is a student's row inside a weekly league tier.
+type LeagueMember struct {
+	StudentID      string
+	Name           string
+	Tier           string
+	TotalMastered  int
+	WeeklyMastered int
+	Moved          int // +1 promoted, -1 demoted, 0 stayed (last reset)
+}
+
 type DailyActivity struct {
 	Date      string   `json:"date"`
 	Questions int      `json:"questions"`
@@ -136,6 +149,8 @@ type Repository interface {
 	PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error)
 
 	GetWeeklyLeaderboard() ([]LeaderboardRow, error)
+	GetLeagueStandings() ([]LeagueMember, error)
+	SetLeague(studentID, tier, week string, moved int) error
 	GetDailyActivity(studentID string, days int) ([]DailyActivity, error)
 
 	AddXP(studentID string, amount int) error
