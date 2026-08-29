@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS students (
     settings             TEXT NOT NULL DEFAULT '{}',
     league               TEXT NOT NULL DEFAULT 'bronze',
     league_week          TEXT NOT NULL DEFAULT '',
-    league_moved         INTEGER NOT NULL DEFAULT 0
+    league_moved         INTEGER NOT NULL DEFAULT 0,
+    share_token          TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (

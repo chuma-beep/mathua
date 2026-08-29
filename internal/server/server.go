@@ -107,6 +107,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
 	mux.HandleFunc("/api/leagues", logRequest(cors(s.authMiddleware(s.handleLeagues))))
+	mux.HandleFunc("/api/share", logRequest(cors(s.authMiddleware(s.handleShareToggle))))
+	mux.HandleFunc("/api/share/", logRequest(cors(s.handleShareReport)))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseDiagnostic))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
@@ -1253,6 +1255,60 @@ func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {	if r
 		}
 	}
 	writeJSON(w, map[string]interface{}{"count": count})
+}
+
+// POST /api/share — enable (body {enabled:true|false}) the read-only share link.
+func (s *Server) handleShareToggle(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	var req struct {
+		Enabled bool `json:"enabled"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if !req.Enabled {
+		if err := s.eng.DisableShare(studentID); err != nil {
+			writeError(w, "failed to disable share", 500)
+			return
+		}
+		writeJSON(w, map[string]interface{}{"enabled": false, "token": ""})
+		return
+	}
+	token, err := s.eng.EnableShare(studentID)
+	if err != nil {
+		writeError(w, "failed to enable share", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"enabled": true, "token": token})
+}
+
+// GET /api/share/{token} — public read-only oversight view (parent/teacher).
+func (s *Server) handleShareReport(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	token := strings.TrimPrefix(r.URL.Path, "/api/share/")
+	token = strings.TrimSuffix(token, "/")
+	if token == "" {
+		writeError(w, "token required", 400)
+		return
+	}
+	report, err := s.eng.GetShareReport(token)
+	if err != nil {
+		writeError(w, "invalid or disabled share link", 404)
+		return
+	}
+	writeJSON(w, report)
 }
 
 // paused reports whether settings.pause_until is set to a future date.

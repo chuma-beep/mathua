@@ -351,6 +351,39 @@ export async function getLeagues(): Promise<LeagueBoard> {
   return res.json()
 }
 
+export interface ShareReport {
+  student_id: string
+  name: string
+  scores: Scores
+  activity: DailyActivity[]
+  progress: Record<string, ConceptProgress>
+  weakness: Record<string, number>
+}
+
+export async function enableShare(): Promise<{ enabled: boolean; token: string }> {
+  const res = await fetch(`${API_BASE}/api/share`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+    body: JSON.stringify({ enabled: true }),
+  })
+  if (!res.ok) throw new Error(`Enable share failed: ${res.status}`)
+  return res.json()
+}
+
+export async function disableShare(): Promise<void> {
+  await fetch(`${API_BASE}/api/share`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+    body: JSON.stringify({ enabled: false }),
+  })
+}
+
+export async function getShareReport(token: string): Promise<ShareReport | null> {
+  const res = await fetch(`${API_BASE}/api/share/${encodeURIComponent(token)}`, { cache: 'no-store' })
+  if (!res.ok) return null
+  return res.json()
+}
+
 export interface ConfigRes {
 	auth_enabled: boolean
 }

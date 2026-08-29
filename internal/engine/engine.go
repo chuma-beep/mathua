@@ -1145,6 +1145,62 @@ func (e *Engine) GetLeagues() (*leaderboard.LeagueBoard, error) {
 	return leaderboard.Standings(e.repo, nowUTC())
 }
 
+// ShareReport is the read-only parent/teacher view of a student.
+type ShareReport struct {
+	StudentID string                          `json:"student_id"`
+	Name      string                          `json:"name"`
+	Scores    *scoring.Scores                 `json:"scores"`
+	Activity  []storage.DailyActivity         `json:"activity"`
+	Progress  map[string]*storage.ConceptProgress `json:"progress"`
+	Weakness  map[string]float64              `json:"weakness"`
+}
+
+// EnableShare mints a read-only share token for the student.
+func (e *Engine) EnableShare(studentID string) (string, error) {
+	b := make([]byte, 12)
+	if _, err := rand.Read(b); err != nil {
+		return "", fmt.Errorf("generate share token: %w", err)
+	}
+	token := "s_" + hex.EncodeToString(b)
+	if err := e.repo.SetShareToken(studentID, token); err != nil {
+		return "", err
+	}
+	return token, nil
+}
+
+// DisableShare clears the student's share token.
+func (e *Engine) DisableShare(studentID string) error {
+	return e.repo.SetShareToken(studentID, "")
+}
+
+// GetShareReport builds the read-only oversight view for a share token.
+func (e *Engine) GetShareReport(token string) (*ShareReport, error) {
+	st, err := e.repo.GetStudentByShareToken(token)
+	if err != nil || st == nil {
+		return nil, fmt.Errorf("invalid share token")
+	}
+	scores, err := e.scorer.Compute(st.ID)
+	if err != nil {
+		return nil, err
+	}
+	activity, err := e.repo.GetDailyActivity(st.ID, 365)
+	if err != nil {
+		activity = []storage.DailyActivity{}
+	}
+	progress, err := e.repo.GetAllProgress(st.ID)
+	if err != nil {
+		progress = map[string]*storage.ConceptProgress{}
+	}
+	return &ShareReport{
+		StudentID: st.ID,
+		Name:      st.Name,
+		Scores:    scores,
+		Activity:  activity,
+		Progress:  progress,
+		Weakness:  e.WeaknessMap(st.ID),
+	}, nil
+}
+
 func (e *Engine) StartDiagnostic() *diagnostic.Session {
 	return e.diag.Start()
 }
