@@ -465,6 +465,42 @@ func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 	return nil
 }
 
+// GetAllAttempts returns every attempt ordered by student, concept, time
+// (aggregate efficacy instrumentation).
+func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
+	rows, err := s.db.Query(`
+		SELECT session_id, student_id, concept_id, answer, expected,
+		       correct, elapsed_seconds, timestamp
+		FROM attempts
+		ORDER BY student_id, concept_id, timestamp ASC
+	`)
+	if err != nil {
+		return nil, fmt.Errorf("get all attempts: %w", err)
+	}
+	defer rows.Close()
+
+	var out []AttemptEntry
+	for rows.Next() {
+		var e AttemptEntry
+		var correct int
+		var ts string
+		if err := rows.Scan(
+			&e.SessionID, &e.StudentID, &e.ConceptID,
+			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
+		); err != nil {
+			return nil, fmt.Errorf("scan attempt: %w", err)
+		}
+		e.Correct = correct != 0
+		if ts != "" {
+			if t, err := time.Parse(time.RFC3339, ts); err == nil {
+				e.Timestamp = t
+			}
+		}
+		out = append(out, e)
+	}
+	return out, rows.Err()
+}
+
 // GetAttemptsForStudent returns all attempts ordered by concept then time
 // (efficacy instrumentation: first-pass / second-pass rates).
 func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {

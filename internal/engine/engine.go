@@ -1175,13 +1175,14 @@ func (e *Engine) GetLeagues() (*leaderboard.LeagueBoard, error) {
 	return leaderboard.Standings(e.repo, nowUTC())
 }
 
-// EfficacyReport is the per-student instrumentation summary (improve.md:82).
+// EfficacyReport is the instrumentation summary (improve.md:82).
 type EfficacyReport struct {
-	ConceptsTouched      int     `json:"concepts_touched"`
-	FirstPassRate        float64 `json:"first_pass_rate"`   // correct on attempt 1
-	SecondPassRate       float64 `json:"second_pass_rate"`  // correct within first 2 attempts
+	ConceptsTouched       int     `json:"concepts_touched"`
+	FirstPassRate         float64 `json:"first_pass_rate"`    // correct on attempt 1
+	SecondPassRate        float64 `json:"second_pass_rate"`   // correct within first 2 attempts
 	AvgAttemptsPerConcept float64 `json:"avg_attempts_per_concept"`
-	TotalAttempts        int     `json:"total_attempts"`
+	TotalAttempts         int     `json:"total_attempts"`
+	StudentsTracked       int     `json:"students_tracked,omitempty"`
 }
 
 // Efficacy computes first-pass / second-pass rates from the attempt log.
@@ -1190,31 +1191,54 @@ func (e *Engine) Efficacy(studentID string) (*EfficacyReport, error) {
 	if err != nil {
 		return nil, err
 	}
+	return computeEfficacy(attempts), nil
+}
+
+// AggregateEfficacy computes product-wide first-pass / second-pass rates
+// across all students (the MA parity metric: 93% / 98%).
+func (e *Engine) AggregateEfficacy() (*EfficacyReport, error) {
+	attempts, err := e.repo.GetAllAttempts()
+	if err != nil {
+		return nil, err
+	}
+	rep := computeEfficacy(attempts)
+	students := make(map[string]bool)
+	for _, a := range attempts {
+		students[a.StudentID] = true
+	}
+	rep.StudentsTracked = len(students)
+	return rep, nil
+}
+
+// computeEfficacy groups attempts by (student, concept) in timestamp order
+// and derives the pass-rate metrics.
+func computeEfficacy(attempts []storage.AttemptEntry) *EfficacyReport {
 	rep := &EfficacyReport{TotalAttempts: len(attempts)}
 	if len(attempts) == 0 {
-		return rep, nil
+		return rep
 	}
 	type seq struct{ correct []bool }
-	byConcept := make(map[string]*seq)
+	byKey := make(map[string]*seq)
 	var order []string
 	for _, a := range attempts {
-		s, ok := byConcept[a.ConceptID]
+		key := a.StudentID + "|" + a.ConceptID
+		s, ok := byKey[key]
 		if !ok {
 			s = &seq{}
-			byConcept[a.ConceptID] = s
-			order = append(order, a.ConceptID)
+			byKey[key] = s
+			order = append(order, key)
 		}
 		s.correct = append(s.correct, a.Correct)
 	}
 	firstPass, secondPass := 0, 0
 	totalAttempts := 0
-	for _, cid := range order {
-		s := byConcept[cid]
+	for _, key := range order {
+		s := byKey[key]
 		rep.ConceptsTouched++
 		if len(s.correct) > 0 && s.correct[0] {
 			firstPass++
 		}
-		if len(s.correct) >= 1 && s.correct[0] || (len(s.correct) >= 2 && s.correct[1]) {
+		if (len(s.correct) >= 1 && s.correct[0]) || (len(s.correct) >= 2 && s.correct[1]) {
 			secondPass++
 		}
 		totalAttempts += len(s.correct)
@@ -1224,7 +1248,7 @@ func (e *Engine) Efficacy(studentID string) (*EfficacyReport, error) {
 		rep.FirstPassRate = float64(firstPass) / float64(rep.ConceptsTouched)
 		rep.SecondPassRate = float64(secondPass) / float64(rep.ConceptsTouched)
 	}
-	return rep, nil
+	return rep
 }
 
 // ShareReport is the read-only parent/teacher view of a student.

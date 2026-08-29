@@ -545,3 +545,35 @@ func TestEngine_Efficacy(t *testing.T) {
 		t.Errorf("expected empty report, got %+v err=%v", empty, err)
 	}
 }
+
+func TestEngine_AggregateEfficacy(t *testing.T) {
+	e := testEngine(t)
+	st1, _ := e.CreateStudent("agg1")
+	st2, _ := e.CreateStudent("agg2")
+	// agg1: a correct first try; b wrong then right.
+	_, _ = e.SubmitStudyAnswer(st1.ID, "a", "42", "42", 5.0)
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "1", "99", 5.0)
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "99", "99", 5.0)
+	// agg2: a wrong then right; b wrong then right.
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "1", "42", 5.0)
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "42", "42", 5.0)
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "1", "99", 5.0)
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "99", "99", 5.0)
+
+	rep, err := e.AggregateEfficacy()
+	if err != nil {
+		t.Fatalf("aggregate: %v", err)
+	}
+	if rep.StudentsTracked != 2 {
+		t.Errorf("expected 2 students tracked, got %d", rep.StudentsTracked)
+	}
+	if rep.ConceptsTouched != 4 {
+		t.Errorf("expected 4 student-concept pairs, got %d", rep.ConceptsTouched)
+	}
+	if rep.FirstPassRate != 0.25 {
+		t.Errorf("expected first-pass 0.25 (1/4), got %f", rep.FirstPassRate)
+	}
+	if rep.SecondPassRate != 1.0 {
+		t.Errorf("expected second-pass 1.0, got %f", rep.SecondPassRate)
+	}
+}

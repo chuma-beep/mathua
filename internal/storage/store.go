@@ -144,6 +144,7 @@ type Repository interface {
 	RecordAttempt(entry AttemptEntry) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 	GetAttemptsForStudent(studentID string) ([]AttemptEntry, error)
+	GetAllAttempts() ([]AttemptEntry, error)
 
 	GetQuestions(conceptID string, count int) ([]Question, error)
 	GetQuestionCount(conceptID string) (int, error)
