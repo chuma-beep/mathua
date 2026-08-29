@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Recognize a fraction in higher terms",
+      "Find the common factor",
+      "Reduce to lowest terms"
+    ]
+  },
+  {
+    "label": "Find equivalent fractions",
+    "section": "Find Equivalent Fractions",
+    "subgoals": [
+      "Divide numerator and denominator by a common factor",
+      "Keep the value unchanged",
+      "Repeat until lowest terms"
+    ]
+  },
+  {
+    "label": "Equivalent fractions property",
+    "section": "Equivalent Fractions Property",
+    "subgoals": [
+      "State the property in words",
+      "Apply it in reverse to simplify",
+      "Verify the simplified value"
+    ]
+  }
+]

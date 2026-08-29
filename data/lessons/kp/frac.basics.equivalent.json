@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Model two fractions that name the same amount",
+      "Split parts into smaller equal parts",
+      "See the equivalence visually"
+    ]
+  },
+  {
+    "label": "Find equivalent fractions",
+    "section": "Find Equivalent Fractions",
+    "subgoals": [
+      "Multiply numerator and denominator by the same number",
+      "Keep the value unchanged",
+      "Generate a chain of equivalents"
+    ]
+  },
+  {
+    "label": "Equivalent fractions property",
+    "section": "Equivalent Fractions Property",
+    "subgoals": [
+      "State the property in words",
+      "Apply it to build equivalents",
+      "Use it to compare fractions"
+    ]
+  }
+]

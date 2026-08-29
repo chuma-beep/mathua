@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the least common denominator",
+    "section": "Find the Least Common Denominator",
+    "subgoals": [
+      "Spot the different denominators in the story",
+      "Find their common multiple",
+      "Prepare to add"
+    ]
+  },
+  {
+    "label": "Convert to equivalent fractions with the LCD",
+    "section": "Convert Fractions to Equivalent Fractions with the LCD",
+    "subgoals": [
+      "Rewrite each amount with the LCD",
+      "Add the fractions",
+      "Interpret the total in context"
+    ]
+  },
+  {
+    "label": "Equivalent fractions property",
+    "section": "Equivalent Fractions Property",
+    "subgoals": [
+      "Scale fractions without changing value",
+      "Combine the story amounts",
+      "Simplify the answer"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Model the two fractions",
+      "Compare the shaded amounts",
+      "Decide which is larger"
+    ]
+  },
+  {
+    "label": "Find equivalent fractions",
+    "section": "Find Equivalent Fractions",
+    "subgoals": [
+      "Rewrite with a common denominator",
+      "Compare the numerators",
+      "Use the comparison symbols"
+    ]
+  },
+  {
+    "label": "Order fractions",
+    "section": "Order Fractions and Mixed Numbers",
+    "subgoals": [
+      "Line the fractions up on a number line",
+      "Order from least to greatest",
+      "Verify with equivalent forms"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model fraction addition",
+    "section": "Model Fraction Addition",
+    "subgoals": [
+      "Model the first addend",
+      "Model the second addend",
+      "Count the shaded parts"
+    ]
+  },
+  {
+    "label": "Add fractions with a common denominator",
+    "section": "Add Fractions with a Common Denominator",
+    "subgoals": [
+      "Keep the denominator",
+      "Add the numerators",
+      "Simplify the result"
+    ]
+  },
+  {
+    "label": "Fraction addition rule",
+    "section": "Fraction Addition",
+    "subgoals": [
+      "State the rule for same denominators",
+      "Apply it step by step",
+      "Check with a model"
+    ]
+  }
+]

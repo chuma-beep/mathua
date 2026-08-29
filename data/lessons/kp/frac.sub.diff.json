@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the least common denominator",
+    "section": "Find the Least Common Denominator",
+    "subgoals": [
+      "List the multiples of each denominator",
+      "Pick the smallest common multiple",
+      "Use it as the LCD"
+    ]
+  },
+  {
+    "label": "Find the LCD of two fractions",
+    "section": "Find the least common denominator (LCD) of two fractions.",
+    "subgoals": [
+      "Factor each denominator",
+      "Combine the common factors",
+      "Compute the LCD"
+    ]
+  },
+  {
+    "label": "Convert to equivalent fractions with the LCD",
+    "section": "Convert Fractions to Equivalent Fractions with the LCD",
+    "subgoals": [
+      "Scale each fraction to the LCD",
+      "Subtract the numerators",
+      "Simplify the result"
+    ]
+  }
+]

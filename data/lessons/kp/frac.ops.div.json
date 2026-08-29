@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find reciprocals",
+    "section": "Find Reciprocals",
+    "subgoals": [
+      "Flip the numerator and denominator",
+      "Identify the reciprocal",
+      "Verify the product is 1"
+    ]
+  },
+  {
+    "label": "Reciprocal definition",
+    "section": "Reciprocal",
+    "subgoals": [
+      "State the definition",
+      "Find reciprocals of fractions and wholes",
+      "Use the reciprocal to divide"
+    ]
+  },
+  {
+    "label": "Divide fractions",
+    "section": "Divide Fractions",
+    "subgoals": [
+      "Keep the first fraction",
+      "Multiply by the reciprocal",
+      "Simplify the result"
+    ]
+  }
+]
