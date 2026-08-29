@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of proportion",
+    "section": "Use the Definition of Proportion",
+    "subgoals": [
+      "Set two ratios equal",
+      "Identify the four terms",
+      "State the proportion"
+    ]
+  },
+  {
+    "label": "Proportion",
+    "section": "Proportion",
+    "subgoals": [
+      "Recognize a proportion in a problem",
+      "Write the two equal ratios",
+      "Prepare to solve"
+    ]
+  },
+  {
+    "label": "Cross products",
+    "section": "Cross Products of a Proportion",
+    "subgoals": [
+      "Multiply across the equals sign",
+      "Set the products equal",
+      "Solve for the unknown"
+    ]
+  }
+]

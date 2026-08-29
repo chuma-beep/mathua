@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identifying terms",
+    "section": "Identifying Terms",
+    "subgoals": [
+      "Separate an expression into terms",
+      "Recognize the variable parts",
+      "Classify like terms"
+    ]
+  },
+  {
+    "label": "Combining like terms",
+    "section": "Combining Like Terms",
+    "subgoals": [
+      "Add the coefficients of like terms",
+      "Keep the variable part unchanged",
+      "Simplify the expression"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Apply combining to word contexts",
+      "Simplify the model",
+      "Evaluate when needed"
+    ]
+  }
+]

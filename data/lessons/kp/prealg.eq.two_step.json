@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve two-step equations",
+    "section": "Solving Two-Step Equations",
+    "subgoals": [
+      "Undo addition or subtraction first",
+      "Then undo multiplication or division",
+      "Check the solution"
+    ]
+  },
+  {
+    "label": "Solve multistep equations",
+    "section": "Solving Multistep Linear Equations",
+    "subgoals": [
+      "Distribute when needed",
+      "Combine like terms",
+      "Isolate the variable"
+    ]
+  },
+  {
+    "label": "Revisiting applications",
+    "section": "Revisiting Applications",
+    "subgoals": [
+      "Translate the story into an equation",
+      "Solve step by step",
+      "Answer with units"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closure property",
+    "section": "Closure property",
+    "subgoals": [
+      "Add two reals and stay in the reals",
+      "Multiply two reals and stay in the reals",
+      "Test closure on examples"
+    ]
+  },
+  {
+    "label": "Commutative property",
+    "section": "Commutative property",
+    "subgoals": [
+      "Swap the order of addition",
+      "Swap the order of multiplication",
+      "Verify the results match"
+    ]
+  },
+  {
+    "label": "Distributive property",
+    "section": "Distributive property",
+    "subgoals": [
+      "Expand a(b + c)",
+      "Factor the expanded form",
+      "Use it to simplify"
+    ]
+  }
+]

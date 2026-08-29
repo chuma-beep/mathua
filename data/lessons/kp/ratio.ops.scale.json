@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Applications of ratios",
+    "section": "Applications of Ratios",
+    "subgoals": [
+      "Read the scale ratio",
+      "Set up the proportion",
+      "Solve for the real size"
+    ]
+  },
+  {
+    "label": "Ratios of measurements",
+    "section": "Ratios of Two Measurements in Different Units",
+    "subgoals": [
+      "Convert the units first",
+      "Write the ratio",
+      "Simplify"
+    ]
+  },
+  {
+    "label": "Write a rate as a fraction",
+    "section": "Write a Rate as a Fraction",
+    "subgoals": [
+      "Write map distance over real distance",
+      "Keep units consistent",
+      "Interpret the scale"
+    ]
+  }
+]

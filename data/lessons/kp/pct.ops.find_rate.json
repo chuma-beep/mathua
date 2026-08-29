@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basic percent equations",
+    "section": "Translate and Solve Basic Percent Equations",
+    "subgoals": [
+      "Identify the part and the base",
+      "Write the ratio part over base",
+      "Convert to a percent"
+    ]
+  },
+  {
+    "label": "Applications of percent",
+    "section": "Solve Applications of Percent",
+    "subgoals": [
+      "Ask what percent A is of B",
+      "Divide A by B",
+      "Convert the quotient to a percent"
+    ]
+  },
+  {
+    "label": "Solve an application",
+    "section": "Solve an application",
+    "subgoals": [
+      "Extract the numbers from the story",
+      "Set up the rate",
+      "State the percentage"
+    ]
+  }
+]

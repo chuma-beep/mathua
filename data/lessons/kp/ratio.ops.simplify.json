@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Write a ratio as a fraction",
+    "section": "Write a Ratio as a Fraction",
+    "subgoals": [
+      "Write the comparison as a fraction",
+      "Cancel common units",
+      "Reduce the numbers"
+    ]
+  },
+  {
+    "label": "Ratios",
+    "section": "Ratios",
+    "subgoals": [
+      "Express the ratio in lowest terms",
+      "Use equivalent forms",
+      "Keep the order of quantities"
+    ]
+  },
+  {
+    "label": "Applications of ratios",
+    "section": "Applications of Ratios",
+    "subgoals": [
+      "Simplify ratios in context",
+      "Scale quantities by the same factor",
+      "Verify the comparison"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Translate phrases",
+    "section": "Translating Phrases into Algebraic Expressions and Equations/Inequalities",
+    "subgoals": [
+      "Map words to operations",
+      "Define the variable",
+      "Write the equation"
+    ]
+  },
+  {
+    "label": "Rate models",
+    "section": "Rate Models",
+    "subgoals": [
+      "Identify the rate in the story",
+      "Write rate × time = amount",
+      "Solve for the unknown"
+    ]
+  },
+  {
+    "label": "Percent applications",
+    "section": "Percent Applications",
+    "subgoals": [
+      "Convert the percent",
+      "Write the percent equation",
+      "Solve and interpret"
+    ]
+  }
+]

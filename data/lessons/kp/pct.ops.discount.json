@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve discount applications",
+    "section": "Solve Discount Applications",
+    "subgoals": [
+      "Find the discount amount",
+      "Subtract it from the original price",
+      "State the sale price"
+    ]
+  },
+  {
+    "label": "Discount",
+    "section": "Discount",
+    "subgoals": [
+      "Write the discount as a percent equation",
+      "Solve for the amount off",
+      "Verify the sale price"
+    ]
+  },
+  {
+    "label": "Solve mark-up applications",
+    "section": "Solve Mark-up Applications",
+    "subgoals": [
+      "Find the mark-up amount",
+      "Add it to the cost",
+      "State the selling price"
+    ]
+  }
+]

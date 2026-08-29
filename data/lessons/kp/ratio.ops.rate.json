@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Write a rate as a fraction",
+    "section": "Write a Rate as a Fraction",
+    "subgoals": [
+      "Put the two units in ratio form",
+      "Keep the units in order",
+      "Simplify the fraction"
+    ]
+  },
+  {
+    "label": "Rate",
+    "section": "Rate",
+    "subgoals": [
+      "Define a rate with two different units",
+      "Recognize rates in problems",
+      "Compare rates"
+    ]
+  },
+  {
+    "label": "Find unit rates",
+    "section": "Find Unit Rates",
+    "subgoals": [
+      "Divide to get a denominator of 1",
+      "State the per-unit value",
+      "Use the unit rate to compare"
+    ]
+  }
+]

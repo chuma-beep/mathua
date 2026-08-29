@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Field and order structure",
+    "section": "Field and order structure",
+    "subgoals": [
+      "Recognize the arithmetic operations on reals",
+      "Apply the ordering of reals",
+      "Combine structure with intuition"
+    ]
+  },
+  {
+    "label": "The real line",
+    "section": "The real line",
+    "subgoals": [
+      "Place every real number on a line",
+      "Locate negatives and fractions",
+      "Compare positions"
+    ]
+  },
+  {
+    "label": "The completeness axiom",
+    "section": "The completeness axiom",
+    "subgoals": [
+      "State the axiom in words",
+      "See why fractions have limits",
+      "Use it to place irrationals"
+    ]
+  }
+]

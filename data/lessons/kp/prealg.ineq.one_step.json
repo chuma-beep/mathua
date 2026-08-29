@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve linear inequalities",
+    "section": "Solving Linear Inequalities",
+    "subgoals": [
+      "Isolate the variable",
+      "Keep the inequality direction",
+      "Graph the solution set"
+    ]
+  },
+  {
+    "label": "Negation",
+    "section": "Negation",
+    "subgoals": [
+      "Negate both sides carefully",
+      "Reverse the inequality sign",
+      "Check the direction"
+    ]
+  },
+  {
+    "label": "Check the solution",
+    "section": "",
+    "subgoals": [
+      "Pick a value from the solution set",
+      "Verify it satisfies the inequality",
+      "Pick one outside to confirm"
+    ]
+  }
+]

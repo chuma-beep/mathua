@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basic percent equations",
+    "section": "Translate and Solve Basic Percent Equations",
+    "subgoals": [
+      "Find the amount of change",
+      "Divide the change by the original",
+      "Convert to a percent"
+    ]
+  },
+  {
+    "label": "Applications of percent",
+    "section": "Solve Applications of Percent",
+    "subgoals": [
+      "Distinguish increase from decrease",
+      "Apply the change to the base",
+      "Interpret the result"
+    ]
+  },
+  {
+    "label": "Solve an application",
+    "section": "Solve an application",
+    "subgoals": [
+      "Compute the new value",
+      "Report the percent change",
+      "Check the direction of change"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve multistep inequalities",
+    "section": "Solving Multistep Inequalities",
+    "subgoals": [
+      "Undo addition or subtraction first",
+      "Then undo multiplication or division",
+      "Reverse the sign when dividing by a negative"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Translate the constraint into an inequality",
+      "Solve for the variable",
+      "Interpret the range of answers"
+    ]
+  },
+  {
+    "label": "Graph the solution set",
+    "section": "",
+    "subgoals": [
+      "Mark the boundary on a number line",
+      "Shade the valid side",
+      "Use an open or closed circle"
+    ]
+  }
+]

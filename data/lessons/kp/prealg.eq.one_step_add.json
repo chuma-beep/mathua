@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basic principle of algebra",
+    "section": "The Basic Principle of Algebra",
+    "subgoals": [
+      "Do the same to both sides",
+      "Keep the equation balanced",
+      "Undo addition with subtraction"
+    ]
+  },
+  {
+    "label": "Solve one-step equations",
+    "section": "Solving One-Step Equations and Stating Solution Sets",
+    "subgoals": [
+      "Identify the operation on the variable",
+      "Apply the inverse operation",
+      "State the solution set"
+    ]
+  },
+  {
+    "label": "Equations with fractions",
+    "section": "Equations with Fractions",
+    "subgoals": [
+      "Undo a fraction with multiplication",
+      "Clear the denominator",
+      "Solve the resulting equation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Write a ratio as a fraction",
+    "section": "Write a Ratio as a Fraction",
+    "subgoals": [
+      "Write the comparison as a fraction",
+      "Order the quantities correctly",
+      "Simplify when possible"
+    ]
+  },
+  {
+    "label": "Ratios",
+    "section": "Ratios",
+    "subgoals": [
+      "Define a ratio as a comparison",
+      "Use colon and fraction forms",
+      "Read ratios in context"
+    ]
+  },
+  {
+    "label": "Ratios involving decimals",
+    "section": "Ratios Involving Decimals",
+    "subgoals": [
+      "Clear the decimals",
+      "Scale to whole numbers",
+      "Simplify the ratio"
+    ]
+  }
+]

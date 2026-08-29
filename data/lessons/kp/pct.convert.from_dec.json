@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert decimals and fractions to percents",
+    "section": "Convert Decimals and Fractions to Percents",
+    "subgoals": [
+      "Multiply a decimal by 100",
+      "Attach the percent sign",
+      "Convert a fraction through the decimal"
+    ]
+  },
+  {
+    "label": "Convert a decimal to a percent",
+    "section": "Convert a decimal to a percent.",
+    "subgoals": [
+      "Shift the decimal point two places",
+      "Add the percent sign",
+      "Verify against the fraction"
+    ]
+  },
+  {
+    "label": "Convert a fraction to a percent",
+    "section": "Convert a fraction to a percent.",
+    "subgoals": [
+      "Divide to get a decimal",
+      "Convert the decimal to a percent",
+      "Round when needed"
+    ]
+  }
+]

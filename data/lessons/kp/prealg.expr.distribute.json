@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distributive property",
+    "section": "Distributive Property",
+    "subgoals": [
+      "Multiply the term by each term inside",
+      "Keep the signs",
+      "Combine the products"
+    ]
+  },
+  {
+    "label": "Applying the properties",
+    "section": "Applying the Commutative, Associative, and Distributive Properties",
+    "subgoals": [
+      "Reorder terms with commutativity",
+      "Regroup with associativity",
+      "Distribute to simplify"
+    ]
+  },
+  {
+    "label": "Role of order of operations",
+    "section": "The Role of the Order of Operations",
+    "subgoals": [
+      "Simplify inside grouping first",
+      "Multiply and divide before adding",
+      "Compare with and without distribution"
+    ]
+  }
+]
