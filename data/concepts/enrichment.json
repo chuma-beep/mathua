@@ -1,0 +1,24 @@
+[
+  {
+    "id": "calc.limit.concept",
+    "heuristic": "calc.encompasses.alg",
+    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
+    "encompasses": ["alg.func.concept"],
+    "key_prerequisites": ["alg.func.concept"],
+    "variants": [
+      {"difficulty": 0.3, "time_thresh": 12.0, "label": "easy"},
+      {"difficulty": 0.7, "time_thresh": 15.0, "label": "hard"}
+    ]
+  },
+  {
+    "id": "calc.deriv.trig",
+    "heuristic": "calc.encompasses.trig + interference",
+    "encompasses": ["trig.basics.sin_cos_def"],
+    "interference_group": "calc.deriv"
+  },
+  {
+    "heuristic": "trig siblings interfere — non-trivial group 5 members",
+    "interference_group": "trig.basic",
+    "members": ["trig.basics.radians", "trig.basics.unit_circle", "trig.basics.sin_cos_def", "trig.basics.tan_def", "trig.basics.reciprocal"]
+  }
+]
