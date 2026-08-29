@@ -113,6 +113,29 @@ Mathua includes a built-in lesson system. Each concept can have an associated le
 
 Multiple concepts can share a single lesson file. Lesson content is written in Markdown with LaTeX via `\( ... \)` or `\[ ... \]` delimiters and rendered inside the app as a sidebar panel alongside practice problems.
 
+### 5. (Recommended) Add knowledge-point shards
+
+Every lesson should be broken into 1-3 **knowledge points** (KPs), each a subgoal-labeled worked example — the Math Academy scaffolding pattern. A KP shard for a concept is a JSON file at `data/lessons/kp/<concept_id>.json`:
+
+```json
+[
+  {
+    "label": "Use addition notation",
+    "section": "Use Addition Notation",
+    "subgoals": [
+      "Identify the addends and the sum",
+      "Read 3 + 4 as three plus four",
+      "Translate word phrases into math notation"
+    ]
+  }
+]
+```
+
+- `section` names a heading **inside the lesson body** that serves as the worked example. It must match a heading exactly; leave it empty to fall back to the full lesson body.
+- `subgoals` are short labels shown before practice (subgoal-labeling effect). Keep 3 per KP.
+- Prefer **3 KPs per concept**; 1-2 are acceptable for very small topics.
+- `scripts/gen_kp_shards.py` generates shard files from an inline spec and validates every section reference against the corpus — add your spec entries there and run `python3 scripts/gen_kp_shards.py <domain-prefix>`.
+
 ## The graph validator
 
 A validator runs on every pull request. It checks two invariants before any merge can happen:
@@ -120,15 +143,18 @@ A validator runs on every pull request. It checks two invariants before any merg
 1. **No cycles** — concept A cannot require B while B requires A.
 2. **No orphans** — every prerequisite must exist in the graph.
 
+A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve, and diagram mappings that point at missing assets or non-existent concepts.
+
 ## Submitting a pull request
 
 1. Add the concept to the appropriate domain file in `data/concepts/` with correct prerequisites.
 2. Write the generator in the appropriate domain subdirectory.
 3. Write the fuzz test with 1 000 samples.
 4. (Optional) Write a lesson and register it in `data/lessons/lessons.json`.
-5. Run `go test ./...` and `go run scripts/validate_graph.go` locally.
-6. Open a PR. The CI pipeline runs the validator and all tests automatically.
-7. A maintainer reviews the concept ordering, thresholds, and generator quality.
+5. (Recommended) Add KP shards under `data/lessons/kp/`.
+6. Run `go test ./...`, `go run scripts/validate_graph.go`, and `python3 scripts/audit_lessons.py` locally.
+7. Open a PR. The CI pipeline runs the validator and all tests automatically.
+8. A maintainer reviews the concept ordering, thresholds, and generator quality.
 
 Reviews usually happen within a few days. If a week passes with no response, ping the thread. We read every PR.
 
