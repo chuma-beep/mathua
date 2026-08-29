@@ -58,3 +58,6 @@ mathua.db*
 
 # Local analysis artifacts
 .understand-anything/
+
+# local research — do not commit
+improve.md

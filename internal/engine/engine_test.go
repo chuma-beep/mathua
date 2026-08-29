@@ -87,8 +87,8 @@ func TestEngine_SubmitAnswer_Correct(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("carol")
 	sess, _ := e.repo.CreateSession(st.ID)
-	_, _ = e.NextQuestion(sess.ID, st.ID)
-	result, err := e.SubmitAnswer(sess.ID, st.ID, "42", 3.0)
+	q, _ := e.NextQuestion(sess.ID, st.ID)
+	result, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 3.0)
 	if err != nil {
 		t.Fatalf("submit answer: %v", err)
 	}
@@ -108,8 +108,8 @@ func TestEngine_SubmitAnswer_Wrong(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("dave")
 	sess, _ := e.repo.CreateSession(st.ID)
-	_, _ = e.NextQuestion(sess.ID, st.ID)
-	result, err := e.SubmitAnswer(sess.ID, st.ID, "99", 5.0)
+	q, _ := e.NextQuestion(sess.ID, st.ID)
+	result, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "99", 5.0)
 	if err != nil {
 		t.Fatalf("submit answer: %v", err)
 	}
@@ -134,8 +134,8 @@ func TestEngine_MasteryProgression(t *testing.T) {
 		e.mu.Lock()
 		e.sessions[sess.ID] = &activeSession{}
 		e.mu.Unlock()
-		_, _ = e.NextQuestion(sess.ID, st.ID)
-		result, err := e.SubmitAnswer(sess.ID, st.ID, "42", 1.0)
+		q, _ := e.NextQuestion(sess.ID, st.ID)
+		result, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 1.0)
 		if err != nil {
 			t.Fatalf("submit %d: %v", i+1, err)
 		}
@@ -171,7 +171,7 @@ func TestEngine_SubmitAnswer_ConcurrentDuplicates(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("grace")
 	sess, _ := e.repo.CreateSession(st.ID)
-	_, _ = e.NextQuestion(sess.ID, st.ID)
+	q, _ := e.NextQuestion(sess.ID, st.ID)
 
 	const workers = 8
 	var wg sync.WaitGroup
@@ -180,7 +180,7 @@ func TestEngine_SubmitAnswer_ConcurrentDuplicates(t *testing.T) {
 		wg.Add(1)
 		go func(i int) {
 			defer wg.Done()
-			_, results[i] = e.SubmitAnswer(sess.ID, st.ID, "42", 3.0)
+			_, results[i] = e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 3.0)
 		}(i)
 	}
 	wg.Wait()
@@ -204,6 +204,48 @@ func TestEngine_SubmitAnswer_ConcurrentDuplicates(t *testing.T) {
 	progress, _ := e.GetProgress(st.ID)
 	if p, ok := progress["a"]; !ok || p.Streak != 1 {
 		t.Errorf("expected concept a to be graded once with streak 1, got %+v", progress["a"])
+	}
+}
+
+// A submission carrying the token of a previous question must be rejected, never
+// graded against the session's current question (stale/cross-question grading).
+func TestEngine_SubmitAnswer_StaleAttemptIDRejected(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("stale")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	q1, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question: %v", err)
+	}
+	if q1.AttemptID == "" {
+		t.Fatal("expected attempt id on question")
+	}
+	if _, err := e.SubmitAnswer(sess.ID, st.ID, q1.AttemptID, "42", 3.0); err != nil {
+		t.Fatalf("submit first answer: %v", err)
+	}
+
+	// Session advanced; the next question carries a fresh token.
+	q2, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question after first submit: %v", err)
+	}
+	if q2.AttemptID == "" || q2.AttemptID == q1.AttemptID {
+		t.Fatalf("expected a fresh attempt id for the next question, got %q", q2.AttemptID)
+	}
+
+	// A stale submission for Q1 must be rejected — never graded against Q2.
+	if _, err := e.SubmitAnswer(sess.ID, st.ID, q1.AttemptID, "99", 3.0); !errors.Is(err, ErrNoActiveQuestion) {
+		t.Fatalf("expected stale submission rejected, got %v", err)
+	}
+	progress, _ := e.GetProgress(st.ID)
+	if p := progress["a"]; p == nil || p.Attempts != 1 || p.Streak != 1 {
+		t.Fatalf("stale submission must not be graded: got %+v", progress["a"])
+	}
+
+	// The current question's token is still accepted.
+	if _, err := e.SubmitAnswer(sess.ID, st.ID, q2.AttemptID, "42", 3.0); err != nil {
+		t.Fatalf("submit with current token: %v", err)
 	}
 }
 
@@ -264,7 +306,7 @@ func TestEngine_FullMasteryCycle(t *testing.T) {
 		if q.ConceptID != "a" {
 			t.Fatalf("expected concept a on attempt %d, got %s", i+1, q.ConceptID)
 		}
-		res, err := e.SubmitAnswer(sess.ID, st.ID, "42", 1.0)
+		res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 1.0)
 		if err != nil {
 			t.Fatalf("submit answer %d: %v", i+1, err)
 		}
@@ -294,7 +336,7 @@ func TestEngine_FullMasteryCycle(t *testing.T) {
 
 	// Answer "a" correctly 9 more times... no wait, now concept "b" is selected.
 	// Answer "b" correctly (it expects "99").
-	res, err := e.SubmitAnswer(sess.ID, st.ID, "99", 1.0)
+	res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "99", 1.0)
 	if err != nil {
 		t.Fatalf("submit answer for b: %v", err)
 	}
