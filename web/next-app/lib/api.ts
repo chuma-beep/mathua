@@ -680,6 +680,55 @@ export async function submitReviewAnswer(
 	return res.json()
 }
 
+// Quiz (actionable every 150 XP, 80% difficulty, guest unlimited retake, own grading path)
+export interface QuizStartRes {
+	session_id: string
+	student_id?: string
+	concept_id?: string
+	concept_name?: string
+	question?: string
+	done?: boolean
+}
+export interface QuizAnswerRes {
+	done: boolean
+	correct?: boolean
+	feedback?: string
+	xp?: number
+	new_status?: string
+	concept_id?: string
+	concept_name?: string
+	question?: string
+}
+
+export async function startQuizSession(): Promise<QuizStartRes> {
+	const { getGuestId } = await import('./auth')
+	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
+	const body: Record<string, unknown> = {}
+	const guestId = getGuestId()
+	if (guestId && !headers.Authorization) body.student_id = guestId
+	const res = await fetch(`${API_BASE}/api/quiz/session`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) throw new Error(`Quiz session start failed: ${res.status}`)
+	return res.json()
+}
+export async function submitQuizAnswer(sessionId: string, conceptId: string, answer: string, elapsed: number): Promise<QuizAnswerRes> {
+	const { getGuestId } = await import('./auth')
+	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
+	const body: Record<string, unknown> = { session_id: sessionId, concept_id: conceptId, answer, elapsed }
+	const guestId = getGuestId()
+	if (guestId && !headers.Authorization) body.student_id = guestId
+	const res = await fetch(`${API_BASE}/api/quiz/answer`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) await throwWithResponse(res, `Quiz answer failed: ${res.status}`)
+	return res.json()
+}
+
 export async function validateToken(): Promise<{ valid: boolean; student_id: string }> {
 	const headers = getAuthHeaders()
 	if (!headers.Authorization) return { valid: false, student_id: '' }
