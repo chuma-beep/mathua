@@ -9,7 +9,7 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import FormulaBlock from '../../components/FormulaBlock'
 import ProgressionLevels from '../../components/ProgressionLevels'
-import { getLeaderboard, type LeaderboardEntry } from '../../lib/api'
+import { getLeaderboard, getLeagues, type LeaderboardEntry, type LeagueBoard } from '../../lib/api'
 import Loading from '../../components/Loading'
 
 const LEVELS = [
@@ -28,6 +28,7 @@ export default function LeaderboardPage() {
   const { mounted } = useTheme()
   const [countdown, setCountdown] = useState('')
   const [entries, setEntries] = useState<LeaderboardEntry[]>([])
+  const [leagues, setLeagues] = useState<LeagueBoard | null>(null)
   const [loading, setLoading] = useState(true)
 
   const finishLoading = useCallback((data: LeaderboardEntry[]) => {
@@ -56,6 +57,9 @@ export default function LeaderboardPage() {
     getLeaderboard()
       .then((data) => finishLoading(data))
       .catch((e) => { console.error('leaderboard fetch failed:', e); setLoading(false) })
+    getLeagues()
+      .then(setLeagues)
+      .catch((e) => { console.error('leagues fetch failed:', e) })
   }, [finishLoading])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -154,6 +158,54 @@ export default function LeaderboardPage() {
           </table>
         </div>
       </div>
+
+      <section className="mt-12 mb-12 min-w-0 overflow-hidden">
+        <SectionHeader label="Leagues" title="Weekly promotion & demotion" />
+        <p className="text-mathua-secondary text-sm text-center mb-6 px-2">
+          Top 2 in each league promote each Monday; the bottom 2 demote. Bronze to Diamond.
+        </p>
+        {!leagues ? (
+          <div className="text-center py-8">
+            <Loading label="LOADING LEAGUES" />
+          </div>
+        ) : leagues.leagues.length === 0 ? (
+          <p className="text-center text-mathua-muted text-sm">Sign in to join a league.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0 overflow-hidden">
+            {leagues.leagues.map((lg) => (
+              <div key={lg.tier} className="border border-mathua-border bg-mathua-surface w-full max-w-full min-w-0 overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-3 bg-mathua-surface-elevated border-b border-mathua-border">
+                  <span className="font-mono text-xs uppercase tracking-wider text-mathua-primary">
+                    {lg.tier}
+                  </span>
+                  <span className="font-mono text-[10px] text-mathua-muted">
+                    {lg.members.length} members
+                  </span>
+                </div>
+                <div className="divide-y divide-mathua-border">
+                  {lg.members.map((m, i) => (
+                    <div key={m.student_id} className="flex items-center gap-3 px-4 py-2 min-w-0">
+                      <span className="font-mono text-xs text-mathua-muted w-6 shrink-0">{i + 1}</span>
+                      <span className="font-mono text-xs text-mathua-primary truncate flex-1 min-w-0" title={m.name}>
+                        {m.name}
+                      </span>
+                      {m.moved === 1 && (
+                        <span className="font-mono text-[10px] text-mathua-green shrink-0">▲ promoted</span>
+                      )}
+                      {m.moved === -1 && (
+                        <span className="font-mono text-[10px] text-mathua-red shrink-0">▼ demoted</span>
+                      )}
+                      <span className="font-mono text-[10px] text-mathua-muted shrink-0">
+                        {m.weekly_mastered} this week
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
       <section className="py-12 sm:py-20 min-w-0 overflow-hidden">
         <SectionHeader label="Progression" title="Your permanent rank" />
