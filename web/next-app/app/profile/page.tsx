@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript } from '../../lib/api'
-import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy } from '../../lib/api'
+import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
@@ -38,6 +38,7 @@ export default function ProfilePage() {
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
   const [courses, setCourses] = useState<CourseStatus[]>([])
+  const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -68,6 +69,7 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
           getTranscript().then(setCourses).catch(() => {})
+          getEfficacy().then(setEfficacy).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
           const { getGuestId } = await import('../../lib/auth')
@@ -306,6 +308,29 @@ export default function ProfilePage() {
             <StrugglesSection weaknesses={weaknesses} />
           </div>
         </section>
+
+        {/* Efficacy — first-pass / second-pass instrumentation */}
+        {efficacy && efficacy.concepts_touched > 0 && (
+          <section className="mt-10 min-w-0">
+            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4">
+              Efficacy
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 min-w-0">
+              {[
+                { label: 'First-pass', value: `${Math.round(efficacy.first_pass_rate * 100)}%`, hint: 'correct on attempt 1' },
+                { label: 'Second-pass', value: `${Math.round(efficacy.second_pass_rate * 100)}%`, hint: 'correct within 2 tries' },
+                { label: 'Avg attempts', value: efficacy.avg_attempts_per_concept.toFixed(2), hint: 'per concept' },
+                { label: 'Concepts', value: String(efficacy.concepts_touched), hint: `${efficacy.total_attempts} attempts` },
+              ].map(m => (
+                <div key={m.label} className="border border-mathua-border bg-mathua-surface p-3 min-w-0">
+                  <div className="font-mono text-[10px] uppercase text-mathua-muted">{m.label}</div>
+                  <div className="font-mono text-xl text-mathua-blue mt-1 truncate">{m.value}</div>
+                  <div className="font-mono text-[10px] text-mathua-secondary mt-0.5 truncate">{m.hint}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Transcript — accreditation-track course completion */}
         {courses.length > 0 && (

@@ -1175,6 +1175,58 @@ func (e *Engine) GetLeagues() (*leaderboard.LeagueBoard, error) {
 	return leaderboard.Standings(e.repo, nowUTC())
 }
 
+// EfficacyReport is the per-student instrumentation summary (improve.md:82).
+type EfficacyReport struct {
+	ConceptsTouched      int     `json:"concepts_touched"`
+	FirstPassRate        float64 `json:"first_pass_rate"`   // correct on attempt 1
+	SecondPassRate       float64 `json:"second_pass_rate"`  // correct within first 2 attempts
+	AvgAttemptsPerConcept float64 `json:"avg_attempts_per_concept"`
+	TotalAttempts        int     `json:"total_attempts"`
+}
+
+// Efficacy computes first-pass / second-pass rates from the attempt log.
+func (e *Engine) Efficacy(studentID string) (*EfficacyReport, error) {
+	attempts, err := e.repo.GetAttemptsForStudent(studentID)
+	if err != nil {
+		return nil, err
+	}
+	rep := &EfficacyReport{TotalAttempts: len(attempts)}
+	if len(attempts) == 0 {
+		return rep, nil
+	}
+	type seq struct{ correct []bool }
+	byConcept := make(map[string]*seq)
+	var order []string
+	for _, a := range attempts {
+		s, ok := byConcept[a.ConceptID]
+		if !ok {
+			s = &seq{}
+			byConcept[a.ConceptID] = s
+			order = append(order, a.ConceptID)
+		}
+		s.correct = append(s.correct, a.Correct)
+	}
+	firstPass, secondPass := 0, 0
+	totalAttempts := 0
+	for _, cid := range order {
+		s := byConcept[cid]
+		rep.ConceptsTouched++
+		if len(s.correct) > 0 && s.correct[0] {
+			firstPass++
+		}
+		if len(s.correct) >= 1 && s.correct[0] || (len(s.correct) >= 2 && s.correct[1]) {
+			secondPass++
+		}
+		totalAttempts += len(s.correct)
+	}
+	rep.AvgAttemptsPerConcept = float64(totalAttempts) / float64(rep.ConceptsTouched)
+	if rep.ConceptsTouched > 0 {
+		rep.FirstPassRate = float64(firstPass) / float64(rep.ConceptsTouched)
+		rep.SecondPassRate = float64(secondPass) / float64(rep.ConceptsTouched)
+	}
+	return rep, nil
+}
+
 // ShareReport is the read-only parent/teacher view of a student.
 type ShareReport struct {
 	StudentID string                          `json:"student_id"`
