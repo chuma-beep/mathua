@@ -16,6 +16,15 @@ type Lesson struct {
 	Concepts []string
 }
 
+// KP is a knowledge-point shard: a subgoal-labeled worked example for one
+// concept (MA: 3 KPs per topic, improve.md:39). Section names a heading
+// within the lesson body used as the worked example.
+type KP struct {
+	Label    string   `json:"label"`
+	Section  string   `json:"section"`
+	Subgoals []string `json:"subgoals"`
+}
+
 type mapping struct {
 	ConceptID string `json:"concept_id"`
 	Source    string `json:"source"`
@@ -23,6 +32,7 @@ type mapping struct {
 
 type Loader struct {
 	concepts map[string]*Lesson
+	kps      map[string][]KP
 }
 
 func Load(lessonsDir string) (*Loader, error) {
@@ -69,7 +79,95 @@ func Load(lessonsDir string) (*Loader, error) {
 		}
 	}
 
-	return &Loader{concepts: concepts}, nil
+	return &Loader{concepts: concepts, kps: loadKPs(lessonsDir)}, nil
+}
+
+// loadKPs reads <dir>/kp/<concept_id>.json shard files (a JSON array of KP).
+// A missing kp directory is not an error — shards are optional enrichment.
+func loadKPs(dir string) map[string][]KP {
+	kpDir := filepath.Join(dir, "kp")
+	entries, err := os.ReadDir(kpDir)
+	if err != nil {
+		return nil
+	}
+	out := make(map[string][]KP)
+	for _, e := range entries {
+		if e.IsDir() || !strings.HasSuffix(e.Name(), ".json") {
+			continue
+		}
+		cid := strings.TrimSuffix(e.Name(), ".json")
+		data, err := os.ReadFile(filepath.Join(kpDir, e.Name()))
+		if err != nil {
+			log.Printf("warning: read kp shard %q: %v", e.Name(), err)
+			continue
+		}
+		var kps []KP
+		if err := json.Unmarshal(data, &kps); err != nil {
+			log.Printf("warning: parse kp shard %q: %v", e.Name(), err)
+			continue
+		}
+		if len(kps) > 0 {
+			out[cid] = kps
+		}
+	}
+	return out
+}
+
+// KPs returns the concept's knowledge-point shards. When no shard file
+// exists, it falls back to a single KP labeled with the lesson title so
+// callers always get a workable worked-example entry.
+func (l *Loader) KPs(conceptID string) []KP {
+	if kps, ok := l.kps[conceptID]; ok && len(kps) > 0 {
+		return kps
+	}
+	lesson := l.concepts[conceptID]
+	if lesson == nil {
+		return nil
+	}
+	return []KP{{Label: lesson.Title}}
+}
+
+// KPSectionBody extracts the worked-example section (heading → next heading)
+// from the concept's lesson body.
+func (l *Loader) KPSectionBody(conceptID, section string) (string, bool) {
+	lesson := l.concepts[conceptID]
+	if lesson == nil || section == "" {
+		return "", false
+	}
+	return extractSection(lesson.Body, section)
+}
+
+// extractSection returns the markdown from the given heading up to the next
+// heading at the same or higher level.
+func extractSection(body, heading string) (string, bool) {
+	lines := strings.Split(body, "\n")
+	start := -1
+	startLevel := 0
+	for i, ln := range lines {
+		t := strings.TrimSpace(ln)
+		if t == "" || t[0] != '#' {
+			continue
+		}
+		level := 0
+		for level < len(t) && t[level] == '#' {
+			level++
+		}
+		name := strings.TrimSpace(t[level:])
+		if start < 0 {
+			if name == heading {
+				start = i
+				startLevel = level
+			}
+			continue
+		}
+		if level <= startLevel && name != heading {
+			return strings.Join(lines[start:i], "\n"), true
+		}
+	}
+	if start < 0 {
+		return "", false
+	}
+	return strings.Join(lines[start:], "\n"), true
 }
 
 func (l *Loader) Lesson(conceptID string) *Lesson {

@@ -1,0 +1,21 @@
+[
+  {
+    "label": "Use addition notation",
+    "section": "Use Addition Notation",
+    "subgoals": [
+      "Identify the addends and the sum",
+      "Read 3 + 4 as three plus four",
+      "Translate a word phrase like \"the sum of 3 and 4\" into math notation"
+    ]
+  },
+  {
+    "label": "Model addition with blocks",
+    "section": "Model Addition of Whole Numbers",
+    "subgoals": [
+      "Model the first addend with ones blocks",
+      "Model the second addend",
+      "Count the total number of blocks",
+      "Exchange 10 ones for 1 ten when the result is 10 or more"
+    ]
+  }
+]
