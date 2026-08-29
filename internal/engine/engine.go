@@ -857,6 +857,10 @@ func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 	return e.diag.IsComplete(s)
 }
 
+func (e *Engine) DiagnosticReport(s *diagnostic.Session) *diagnostic.DiagnosticReport {
+	return e.diag.Report(s)
+}
+
 func (e *Engine) DiagnosticFrontier(s *diagnostic.Session) int {
 	return e.diag.FrontierEstimate(s)
 }
