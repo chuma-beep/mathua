@@ -59,6 +59,9 @@ type ActiveSession struct {
 	Diagram        string
 	IsReview       bool
 	Answered       bool
+	LastConceptID  string
+	SessionReview  int
+	SessionNew     int
 	UpdatedAt      time.Time
 }
 

@@ -57,6 +57,9 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
+		"ALTER TABLE active_sessions ADD COLUMN last_concept_id TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE active_sessions ADD COLUMN session_review INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE active_sessions ADD COLUMN session_new INTEGER NOT NULL DEFAULT 0",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -346,14 +349,16 @@ func (s *SQLiteStore) GetSession(id string) (*Session, error) {
 func (s *SQLiteStore) GetActiveSession(sessionID string) (*ActiveSession, error) {
 	row := s.db.QueryRow(`
 		SELECT session_id, student_id, concept_id, concept_name, expected_answer,
-		       attempt_id, question, explanation, diagram, is_review, answered, updated_at
+		       attempt_id, question, explanation, diagram, is_review, answered,
+		       last_concept_id, session_review, session_new, updated_at
 		FROM active_sessions WHERE session_id = ?
 	`, sessionID)
 	var a ActiveSession
 	var isReview, answered int
 	var updatedAt string
 	if err := row.Scan(&a.SessionID, &a.StudentID, &a.ConceptID, &a.ConceptName, &a.ExpectedAnswer,
-		&a.AttemptID, &a.Question, &a.Explanation, &a.Diagram, &isReview, &answered, &updatedAt); err != nil {
+		&a.AttemptID, &a.Question, &a.Explanation, &a.Diagram, &isReview, &answered,
+		&a.LastConceptID, &a.SessionReview, &a.SessionNew, &updatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -374,8 +379,9 @@ func (s *SQLiteStore) UpsertActiveSession(a *ActiveSession) error {
 	_, err := s.db.Exec(`
 		INSERT INTO active_sessions
 			(session_id, student_id, concept_id, concept_name, expected_answer,
-			 attempt_id, question, explanation, diagram, is_review, answered, updated_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 attempt_id, question, explanation, diagram, is_review, answered,
+			 last_concept_id, session_review, session_new, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(session_id) DO UPDATE SET
 			student_id      = excluded.student_id,
 			concept_id      = excluded.concept_id,
@@ -387,9 +393,13 @@ func (s *SQLiteStore) UpsertActiveSession(a *ActiveSession) error {
 			diagram         = excluded.diagram,
 			is_review       = excluded.is_review,
 			answered        = excluded.answered,
+			last_concept_id = excluded.last_concept_id,
+			session_review  = excluded.session_review,
+			session_new     = excluded.session_new,
 			updated_at      = excluded.updated_at
 	`, a.SessionID, a.StudentID, a.ConceptID, a.ConceptName, a.ExpectedAnswer,
-		a.AttemptID, a.Question, a.Explanation, a.Diagram, boolToInt(a.IsReview), boolToInt(a.Answered), now)
+		a.AttemptID, a.Question, a.Explanation, a.Diagram, boolToInt(a.IsReview), boolToInt(a.Answered),
+		a.LastConceptID, a.SessionReview, a.SessionNew, now)
 	if err != nil {
 		return fmt.Errorf("upsert active session: %w", err)
 	}
