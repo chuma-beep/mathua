@@ -1088,7 +1088,11 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 				WorkedExample: we,
 			})
 		}
-		writeJSON(w, map[string]interface{}{"concept_id": conceptID, "kps": out})
+		writeJSON(w, map[string]interface{}{
+			"concept_id": conceptID,
+			"kps":        out,
+			"diagram":    s.eng.DiagramFor(conceptID),
+		})
 		return
 	}
 

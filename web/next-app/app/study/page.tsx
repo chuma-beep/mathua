@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
@@ -636,6 +637,7 @@ function LessonDetail({
         <div className="space-y-5">
           {kpConcepts.map(cid => {
             const kps = kpMap[cid]?.kps ?? []
+            const diagram = kpMap[cid]?.diagram
             return (
               <div key={cid} className="w-full max-w-full min-w-0 overflow-hidden">
                 <div className="flex items-center gap-2 mb-3">
@@ -665,8 +667,15 @@ function LessonDetail({
                       <summary className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider cursor-pointer">
                         Worked example
                       </summary>
-                      <div className="mt-2 bg-mathua-code border border-mathua-border p-3 text-sm w-full max-w-full min-w-0 overflow-hidden">
-                        <KatexContent>{kp.worked_example}</KatexContent>
+                      <div className="mt-2 flex flex-col md:flex-row gap-4 items-start">
+                        {diagram && (
+                          <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
+                            <Image src={diagram} alt={`${cid} diagram`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                          </div>
+                        )}
+                        <div className="bg-mathua-code border border-mathua-border p-3 text-sm flex-1 min-w-0 overflow-hidden">
+                          <KatexContent>{kp.worked_example}</KatexContent>
+                        </div>
                       </div>
                     </details>
                   </div>

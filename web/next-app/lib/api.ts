@@ -603,6 +603,7 @@ export interface KpInfo {
 export interface LessonKpsRes {
 	concept_id: string
 	kps: KpInfo[]
+	diagram?: string
 }
 
 export async function getLessonPractice(conceptId: string, count = 5): Promise<LessonPracticeRes> {
