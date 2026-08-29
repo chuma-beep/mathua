@@ -7,6 +7,7 @@ import (
 	"hash/fnv"
 	"log"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 
@@ -578,6 +579,146 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		RequiredStreak: sessionFields.requiredStreak,
 		XP:             xp,
 		ExpectedAnswer: sessionFields.expectedAnswer,
+	}, nil
+}
+
+// SubmitStudyAnswer records a Study-library answer (LessonQuiz seam per CONTEXT.md: Seam).
+// It grades via the concept's grading_type, updates mastery/SM-2/weakness/XP, and
+// awards TaskMultistep 15 for *.word else TaskLesson 10 (Q2 lock).
+func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
+	c := e.dag.Concept(conceptID)
+	requiredStreak := 3
+	timeThreshold := 10.0
+	if c != nil {
+		requiredStreak = c.MasteryThreshold.Streak
+		timeThreshold = c.MasteryThreshold.AvgTimeSeconds
+	}
+	if timeThreshold == 0 {
+		timeThreshold = 10.0
+	}
+	// Grade using concept's grading type via registry/router.
+	gr := e.gradeAnswer(conceptID, expected, answer)
+
+	progress, err := e.repo.GetProgress(studentID, conceptID)
+	if err != nil {
+		return nil, fmt.Errorf("get progress: %w", err)
+	}
+	if progress == nil {
+		progress = &storage.ConceptProgress{
+			StudentID:  studentID,
+			ConceptID:  conceptID,
+			Status:     string(mastery.StatusUnseen),
+			SM2EFactor: 2.5,
+		}
+	}
+	progress.Attempts++
+	progress.LastAttempted = ptrTime(nowUTC())
+	if gr.Correct {
+		progress.Streak++
+		if progress.Streak > progress.BestStreak {
+			progress.BestStreak = progress.Streak
+		}
+		totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
+		progress.AvgResponseTime = totalTime / float64(progress.Attempts)
+	} else {
+		progress.Streak = 0
+	}
+	conceptThreshold := timeThreshold
+	if gr.Correct {
+		progress.WeaknessScore *= 0.5
+		if elapsedSeconds <= conceptThreshold {
+			progress.WeaknessScore *= 0.3
+		}
+	} else {
+		progress.WeaknessScore += 0.2
+		if progress.WeaknessScore > 1.0 {
+			progress.WeaknessScore = 1.0
+		}
+	}
+	ctx := mastery.TransitionCtx{
+		Streak:            progress.Streak,
+		RequiredStreak:    requiredStreak,
+		AvgResponseTime:   progress.AvgResponseTime,
+		ResponseThreshold: timeThreshold,
+	}
+	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
+	oldStatus := progress.Status
+	progress.Status = string(newStatus)
+	if newStatus != mastery.Status(oldStatus) && gr.Correct {
+		progress.Streak = 1
+	}
+	quality := mastery.SM2Quality(
+		gr.Correct && progress.Streak >= requiredStreak,
+		progress.AvgResponseTime/timeThreshold,
+	)
+	prevSM2 := scheduler.SM2{
+		Repetitions: progress.SM2Repetitions,
+		EFactor:     progress.SM2EFactor,
+		Interval:    progress.SM2Interval,
+	}
+	nextSM2 := scheduler.ComputeSM2(prevSM2, quality)
+	progress.SM2Repetitions = nextSM2.Repetitions
+	progress.SM2EFactor = nextSM2.EFactor
+	progress.SM2Interval = nextSM2.Interval
+	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
+		now := nowUTC()
+		progress.MasteredAt = &now
+	}
+	if newStatus == mastery.StatusMastered {
+		progress.WeaknessScore = 0.0
+	}
+	if progress.Streak >= requiredStreak && progress.AvgResponseTime <= timeThreshold {
+		now := nowUTC()
+		progress.LastReviewed = &now
+		nextReview := now.AddDate(0, 0, nextSM2.Interval)
+		progress.NextReviewDue = &nextReview
+	}
+	if err := e.repo.UpsertProgress(progress); err != nil {
+		return nil, fmt.Errorf("save progress: %w", err)
+	}
+	e.PropagateWeakness(studentID)
+	if err := e.repo.RecordAttempt(storage.AttemptEntry{
+		SessionID:      "study",
+		StudentID:      studentID,
+		ConceptID:      conceptID,
+		Answer:         answer,
+		Expected:       expected,
+		Correct:        gr.Correct,
+		ElapsedSeconds: elapsedSeconds,
+		Timestamp:      nowUTC(),
+	}); err != nil {
+		return nil, fmt.Errorf("record attempt: %w", err)
+	}
+	explanation := ""
+	if !gr.Correct {
+		// Prefer generator explanation; fallback to grader feedback.
+		if c != nil {
+			// Try to fetch explanation via expected (already passed) — keep grader feedback as explanation.
+			explanation = gr.Feedback
+		}
+	}
+	taskType := TaskLesson
+	if strings.HasSuffix(conceptID, ".word") {
+		taskType = TaskMultistep
+	}
+	xp := computeXPForTask(gr.Correct, elapsedSeconds, timeThreshold, progress.Streak, taskType)
+	if xp > 0 {
+		if err := e.repo.AddXP(studentID, xp); err != nil {
+			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
+		}
+	}
+	return &AnswerResult{
+		Correct:        gr.Correct,
+		Feedback:       gr.Feedback,
+		NewStatus:      newStatus,
+		Explanation:    explanation,
+		Streak:         progress.Streak,
+		RequiredStreak: requiredStreak,
+		XP:             xp,
+		ExpectedAnswer: expected,
 	}, nil
 }
 

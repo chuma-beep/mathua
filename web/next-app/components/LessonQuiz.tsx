@@ -1,52 +1,40 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import KatexContent from './KatexContent'
-import { getLessonPractice, type PracticeQuestion } from '../lib/api'
+import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../lib/api'
 
 interface LessonQuizProps {
   conceptId: string
   limit?: number
 }
 
-function normalize(s: string): string {
-  return s.replace(/\s+/g, ' ').trim().toLowerCase()
-}
-
-function stripOuterParens(s: string): string {
-  s = s.trim()
-  if (s.startsWith('(') && s.endsWith(')')) return s.slice(1, -1).trim()
-  return s
-}
-
-function answersMatch(userAnswer: string, expected: string): boolean {
-  const a = normalize(userAnswer)
-  const b = normalize(expected)
-  if (a === b) return true
-  if (stripOuterParens(a) === b) return true
-  if (a === stripOuterParens(b)) return true
-  const aSet = new Set(a.split(',').map(s => s.trim()))
-  const bSet = new Set(b.split(',').map(s => s.trim()))
-  if (aSet.size === bSet.size && Array.from(aSet).every(v => bSet.has(v))) return true
-  return false
-}
-
 export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   const [questions, setQuestions] = useState<PracticeQuestion[]>([])
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [results, setResults] = useState<Record<number, 'correct' | 'incorrect'>>({})
+  const [xpMap, setXpMap] = useState<Record<number, number>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [score, setScore] = useState({ correct: 0, total: 0 })
+  const loadTimes = useRef<Record<number, number>>({})
 
   const loadQuestions = useCallback(() => {
     setLoading(true)
     setError('')
     setAnswers({})
     setResults({})
+    setXpMap({})
     setScore({ correct: 0, total: 0 })
+    loadTimes.current = {}
     getLessonPractice(conceptId, limit)
-      .then(res => setQuestions(res.questions))
+      .then(res => {
+        setQuestions(res.questions)
+        const now = Date.now()
+        const map: Record<number, number> = {}
+        res.questions.forEach((_, i) => { map[i] = now })
+        loadTimes.current = map
+      })
       .catch(e => setError(e.message))
       .finally(() => setLoading(false))
   }, [conceptId, limit])
@@ -55,17 +43,22 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     loadQuestions()
   }, [loadQuestions])
 
-  function handleCheck(i: number) {
+  async function handleCheck(i: number) {
     const userAnswer = (answers[i] || '').trim()
-    if (!userAnswer) return
+    if (!userAnswer || results[i] !== undefined) return
     const q = questions[i]
-    const match = answersMatch(userAnswer, q.answer)
-    if (match) {
-      setResults(prev => ({ ...prev, [i]: 'correct' }))
-      setScore(prev => ({ ...prev, correct: prev.correct + 1, total: prev.total + 1 }))
-    } else {
-      setResults(prev => ({ ...prev, [i]: 'incorrect' }))
-      setScore(prev => ({ ...prev, total: prev.total + 1 }))
+    const elapsed = Math.max(0.5, (Date.now() - (loadTimes.current[i] ?? Date.now())) / 1000)
+    try {
+      const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed)
+      const key: 'correct' | 'incorrect' = res.correct ? 'correct' : 'incorrect'
+      setResults(prev => ({ ...prev, [i]: key }))
+      setXpMap(prev => ({ ...prev, [i]: res.xp ?? 0 }))
+      setScore(prev => ({ correct: prev.correct + (res.correct ? 1 : 0), total: prev.total + 1 }))
+    } catch {
+      // Fallback to local grading if server unreachable
+      const isCorrect = userAnswer.trim().toLowerCase() === q.answer.trim().toLowerCase()
+      setResults(prev => ({ ...prev, [i]: isCorrect ? 'correct' : 'incorrect' }))
+      setScore(prev => ({ correct: prev.correct + (isCorrect ? 1 : 0), total: prev.total + 1 }))
     }
   }
 
@@ -165,7 +158,9 @@ Submit
                     </div>
 
                     {result === 'correct' && (
-                      <p className="mt-2 text-xs font-mono text-green-400">✓ Correct!</p>
+                      <p className="mt-2 text-xs font-mono text-green-400">
+                        ✓ Correct!{xpMap[i] ? <span className="text-yellow-400"> +{xpMap[i]} XP</span> : null}
+                      </p>
                     )}
                     {result === 'incorrect' && (
                       <p className="mt-2 text-xs font-mono text-red-400">

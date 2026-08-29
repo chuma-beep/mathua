@@ -112,6 +112,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.handleLessonBody)))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
+	mux.HandleFunc("/api/study/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleStudyAnswer))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 }
@@ -1295,6 +1296,74 @@ func (s *Server) handleConceptDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, detail)
+}
+
+// POST /api/study/answer — Study seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam)
+// Body: { concept_id, answer, expected, elapsed, student_id? } student_id used for guest (mathua_guest_id)
+func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		ConceptID string  `json:"concept_id"`
+		Answer    string  `json:"answer"`
+		Expected  string  `json:"expected"`
+		Elapsed   float64 `json:"elapsed"`
+		StudentID string  `json:"student_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.ConceptID == "" {
+		writeError(w, "concept_id required", 400)
+		return
+	}
+	if req.Expected == "" {
+		writeError(w, "expected required", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		studentID = req.StudentID
+	}
+	// Allow unauthenticated without student_id: grade only, no persistence.
+	if studentID == "" {
+		concept := s.eng.GetDAG().Concept(req.ConceptID)
+		gt := "numeric"
+		if concept != nil {
+			gt = concept.GradingType
+		}
+		gr := s.eng.GetGrader().Grade(grader.GradingType(gt), req.Expected, req.Answer)
+		writeJSON(w, map[string]interface{}{
+			"correct":  gr.Correct,
+			"feedback": gr.Feedback,
+			"xp":       0,
+		})
+		return
+	}
+	if req.Elapsed < 0 {
+		req.Elapsed = 0
+	}
+	if req.Elapsed > 600 {
+		req.Elapsed = 600
+	}
+	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed)
+	if err != nil {
+		writeError(w, "failed to submit study answer", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{
+		"correct":         res.Correct,
+		"feedback":        res.Feedback,
+		"explanation":     res.Explanation,
+		"new_status":      res.NewStatus,
+		"streak":          res.Streak,
+		"required_streak": res.RequiredStreak,
+		"xp":              res.XP,
+		"expected_answer": res.ExpectedAnswer,
+	})
 }
 
 const maxBodySize int64 = 1 << 20 // 1 MB
