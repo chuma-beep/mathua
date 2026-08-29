@@ -114,6 +114,19 @@ def main():
         if diag:
             errors.append(f"diagram problems ({len(diag)}):\n  " + "\n  ".join(diag))
 
+    # 7. Course catalog: every target must exist in the DAG.
+    courses_path = os.path.join(ROOT, "data", "courses.json")
+    if os.path.exists(courses_path):
+        with open(courses_path) as f:
+            courses = json.load(f)
+        bad = []
+        for c in courses:
+            for t in c.get("targets", []):
+                if t not in dag_ids:
+                    bad.append(f"course {c.get('id')}: target {t} not in DAG")
+        if bad:
+            errors.append(f"course problems ({len(bad)}):\n  " + "\n  ".join(bad))
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")

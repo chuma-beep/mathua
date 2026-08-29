@@ -4,35 +4,35 @@
     "name": "4th Grade Math",
     "grade": "4th",
     "description": "Multi-digit arithmetic, negative numbers, fractions, decimals, lines and angles in geometry.",
-    "targets": ["arith.div.basic", "arith.dec.intro", "frac.parts", "geo.basic.angle_measure"]
+    "targets": ["arith.div.basic", "arith.dec.intro", "frac.basics.parts", "geo.basic.angle_measure"]
   },
   {
     "id": "5",
     "name": "5th Grade Math",
     "grade": "5th",
     "description": "Arithmetic with fractions and decimals. Solve real-world problems involving measurement, data, and geometry.",
-    "targets": ["arith.neg.mult_div", "dec.div", "frac.mult", "geo.quad.area"]
+    "targets": ["arith.neg.mult_div", "dec.ops.div", "frac.ops.mult", "geo.quad.area"]
   },
   {
     "id": "6",
     "name": "6th Grade Math",
     "grade": "6th",
     "description": "Ratios, percentages, fraction division, expressions, equations, geometry, and statistics.",
-    "targets": ["pct.of_number", "frac.div", "ratio.proportion", "prealg.expr.evaluate"]
+    "targets": ["pct.ops.of_number", "frac.ops.div", "ratio.ops.proportion", "prealg.expr.evaluate"]
   },
   {
     "id": "7",
     "name": "7th Grade Math",
     "grade": "7th",
     "description": "Proportional relationships, multi-step equations, geometry, statistics, and probability.",
-    "targets": ["pct.discount", "prealg.eq.one_step_mult", "geo.triangle.pythagorean", "ratio.rate"]
+    "targets": ["pct.ops.discount", "prealg.eq.one_step_mult", "geo.triangle.pythagorean", "ratio.ops.rate"]
   },
   {
     "id": "8",
     "name": "8th Grade Math",
     "grade": "8th",
     "description": "Exponents, scientific notation, equations, graphs, functions, geometry, and transformations.",
-    "targets": ["arith.sci_notation", "prealg.eq.two_step", "geo.coord.distance", "arith.exp.evaluate"]
+    "targets": ["arith.exp.sci_notation", "prealg.eq.two_step", "geo.coord.distance", "arith.exp.evaluate"]
   },
   {
     "id": "pa",
@@ -60,13 +60,76 @@
     "name": "Algebra II",
     "grade": "10th-11th",
     "description": "Advanced functions: quadratics, logarithms, trigonometry, and polynomials. Complex numbers and sequences.",
-    "targets": ["alg.log.properties", "trig.sin_cos_def", "alg.poly.special", "alg.seq.geometric"]
+    "targets": ["alg.log.properties", "trig.basics.sin_cos_def", "alg.poly.special", "alg.seq.geometric"]
   },
   {
     "id": "pc",
     "name": "Precalculus",
     "grade": "11th-12th",
     "description": "Advanced trigonometry, complex numbers, vectors, matrices, limits, and sequences.",
-    "targets": ["trig.law_cosines", "complex.polar", "linalg.vector.concept", "calc.limit.concept"]
+    "targets": ["trig.adv.law_cosines", "complex.adv.polar", "linalg.vector.concept", "calc.limit.concept"]
+  },
+  {
+    "id": "calc1",
+    "name": "Calculus I",
+    "grade": "12th-college",
+    "description": "Limits, continuity, derivatives, differentiation rules and applications, and definite integrals.",
+    "targets": ["calc.limit.properties", "calc.deriv.chain_rule", "calc.deriv.optimization", "calc.integral.definite", "calc.integral.ftc"]
+  },
+  {
+    "id": "calc2",
+    "name": "Calculus II",
+    "grade": "college",
+    "description": "Integration techniques, improper integrals, sequences and series, power and Taylor series.",
+    "targets": ["calc.integral.parts", "calc.integral.trig_substitution", "calc.integral.partial_fractions", "calc.series.concept", "calc.series.taylor"]
+  },
+  {
+    "id": "linalg",
+    "name": "Linear Algebra",
+    "grade": "college",
+    "description": "Vectors, matrices, determinants, systems, eigenvalues, spans and bases, and linear transformations.",
+    "targets": ["linalg.matrix.mult", "linalg.det.3x3", "linalg.eigen.compute", "linalg.vec.span", "linalg.vec.basis", "linalg.lintrans.concept"]
+  },
+  {
+    "id": "discrete",
+    "name": "Discrete Math",
+    "grade": "college",
+    "description": "Logic, sets, combinatorics, graphs, recurrence, and induction.",
+    "targets": ["discrete.logic.quantifiers", "discrete.sets.operations", "discrete.combinatorics.combinations", "discrete.graphs.trees", "discrete.proof.induction"]
+  },
+  {
+    "id": "probstat",
+    "name": "Probability & Statistics",
+    "grade": "college",
+    "description": "Descriptive statistics, probability, distributions, and inference.",
+    "targets": ["stat.data.mean", "stat.prob.compound", "stat.dist.binomial", "stat.dist.normal", "stat.infer.confidence"]
+  },
+  {
+    "id": "diffeq",
+    "name": "Differential Equations",
+    "grade": "college",
+    "description": "First and second order ODEs, systems, and the Laplace transform.",
+    "targets": ["ode.first_order.separable", "ode.first_order.linear", "ode.second_order.homogeneous", "ode.transforms.laplace"]
+  },
+  {
+    "id": "abstract",
+    "name": "Abstract Algebra",
+    "grade": "college",
+    "description": "Groups, subgroups, homomorphisms, rings, and fields.",
+    "targets": ["abstract.group.def", "abstract.group.subgroup", "abstract.group.homomorphism", "abstract.rings.def", "abstract.structures.field"]
+  },
+  {
+    "id": "topo",
+    "name": "Topology",
+    "grade": "college",
+    "description": "Metric spaces, open and closed sets, and continuity.",
+    "targets": ["topo.basics.metric", "topo.basics.open_closed", "topo.basics.continuous"]
+  },
+  {
+    "id": "ml",
+    "name": "Machine Learning",
+    "grade": "college",
+    "description": "Vector foundations and backpropagation through neural networks.",
+    "targets": ["linalg.vector.dot", "linalg.matrix.mult", "stat.dist.normal", "ml.backpropagation"]
   }
 ]

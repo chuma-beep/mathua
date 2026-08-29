@@ -110,7 +110,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/share", logRequest(cors(s.authMiddleware(s.handleShareToggle))))
 	mux.HandleFunc("/api/share/", logRequest(cors(s.handleShareReport)))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
-	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseDiagnostic))))
+	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseRoute))))
+	mux.HandleFunc("/api/transcript", logRequest(cors(s.authMiddleware(s.handleTranscript))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
 	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.handleDiagnosticAnswer)))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
@@ -1405,6 +1406,62 @@ func (s *Server) handleCourses(w http.ResponseWriter, r *http.Request) {
 	}
 	courses := s.eng.PlannerCourses()
 	writeJSON(w, map[string]interface{}{"courses": courses})
+}
+
+// GET /api/courses/{id} | POST /api/courses/{id}/diagnostic
+func (s *Server) handleCourseRoute(w http.ResponseWriter, r *http.Request) {
+	path := strings.TrimPrefix(r.URL.Path, "/api/courses/")
+	if strings.HasSuffix(path, "/diagnostic") {
+		s.handleCourseDiagnostic(w, r)
+		return
+	}
+	s.handleCourseDetail(w, r)
+}
+
+// GET /api/courses/{id} — one course with the student's progress.
+func (s *Server) handleCourseDetail(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	courseID := strings.TrimPrefix(r.URL.Path, "/api/courses/")
+	courseID = strings.TrimSuffix(courseID, "/")
+	if courseID == "" {
+		writeError(w, "missing course id", 400)
+		return
+	}
+	catalog, err := s.eng.CourseCatalog(studentID)
+	if err != nil {
+		writeError(w, "failed to load courses", 500)
+		return
+	}
+	for _, cs := range catalog {
+		if cs.ID == courseID {
+			writeJSON(w, cs)
+			return
+		}
+	}
+	writeError(w, "course not found", 404)
+}
+
+// GET /api/transcript — accreditation-track completion overview.
+func (s *Server) handleTranscript(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	catalog, err := s.eng.CourseCatalog(studentID)
+	if err != nil {
+		writeError(w, "failed to load transcript", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"courses": catalog})
 }
 
 // POST /api/courses/{id}/diagnostic

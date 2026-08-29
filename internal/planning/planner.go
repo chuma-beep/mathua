@@ -140,6 +140,53 @@ func (p *Planner) Readiness(path *Path, progress map[string]*storage.ConceptProg
 	return float64(mastered) / float64(len(path.Concepts))
 }
 
+// CourseProgress is the accreditation-track view of one course.
+type CourseProgress struct {
+	Total       int      `json:"total"`
+	Mastered    int      `json:"mastered"`
+	Pct         float64  `json:"pct"`
+	Remaining   []string `json:"remaining,omitempty"`
+	DaysRemaining int    `json:"days_remaining"` // estimate at daily_xp_goal
+}
+
+// ProgressForCourse computes mastery over the course's transitive path.
+func (p *Planner) ProgressForCourse(course *Course, progress map[string]*storage.ConceptProgress, dailyXPGoal int) (*CourseProgress, error) {
+	path, err := p.PathForCourse(course.ID)
+	if err != nil {
+		return nil, err
+	}
+	total := len(path.Concepts)
+	mastered := 0
+	var remaining []string
+	for _, c := range path.Concepts {
+		if prog, ok := progress[c.ID]; ok && prog.Status == string(mastery.StatusMastered) {
+			mastered++
+		} else {
+			remaining = append(remaining, c.ID)
+		}
+	}
+	days := 0
+	if goal := dailyXPGoal; goal > 0 && len(remaining) > 0 {
+		// Estimate: ~5 concepts per 30 XP of focused work (MA ~1 min/XP).
+		perDay := goal / 6
+		if perDay < 1 {
+			perDay = 1
+		}
+		days = (len(remaining) + perDay - 1) / perDay
+	}
+	pct := 0.0
+	if total > 0 {
+		pct = float64(mastered) / float64(total)
+	}
+	return &CourseProgress{
+		Total:         total,
+		Mastered:      mastered,
+		Pct:           pct,
+		Remaining:     remaining,
+		DaysRemaining: days,
+	}, nil
+}
+
 func (p *Planner) SortCourses(courses []*Course) {
 	sort.Slice(courses, func(i, j int) bool {
 		return courses[i].ID < courses[j].ID

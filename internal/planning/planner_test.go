@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/storage"
 )
 
 func testPlanner(t *testing.T) *Planner {
@@ -102,16 +103,16 @@ func TestPathForCourse_NotFound(t *testing.T) {
 }
 
 func TestLoad_RealData(t *testing.T) {
-	d, err := concepts.Load("../../data/concepts.json")
+	d, err := concepts.LoadDir("../../data/concepts")
 	if err != nil {
-		t.Skip("concepts not available")
+		t.Fatalf("load concepts: %v", err)
 	}
 	p, err := Load("../../data/courses.json", d)
 	if err != nil {
 		t.Fatalf("load real data: %v", err)
 	}
-	if len(p.Courses()) != 10 {
-		t.Errorf("expected 10 courses, got %d", len(p.Courses()))
+	if len(p.Courses()) != 19 {
+		t.Errorf("expected 19 courses, got %d", len(p.Courses()))
 	}
 	// Check that 4th grade chain has reasonable size
 	path, err := p.PathForCourse("4")
@@ -122,4 +123,60 @@ func TestLoad_RealData(t *testing.T) {
 		t.Errorf("expected 10-60 concepts in 4th grade chain, got %d", len(path.Concepts))
 	}
 	t.Logf("4th grade chain: %d concepts", len(path.Concepts))
+}
+
+// Every catalog course must resolve against the real DAG (stale targets
+// would break PathForCourse).
+func TestAllCoursesResolve(t *testing.T) {
+	d, err := concepts.LoadDir("../../data/concepts")
+	if err != nil {
+		t.Fatalf("load concepts: %v", err)
+	}
+	p, err := Load("../../data/courses.json", d)
+	if err != nil {
+		t.Fatalf("load courses: %v", err)
+	}
+	for _, c := range p.Courses() {
+		if _, err := p.PathForCourse(c.ID); err != nil {
+			t.Errorf("course %s failed to resolve: %v", c.ID, err)
+		}
+	}
+}
+
+func TestProgressForCourse(t *testing.T) {
+	d, err := concepts.LoadDir("../../data/concepts")
+	if err != nil {
+		t.Fatalf("load concepts: %v", err)
+	}
+	p, err := Load("../../data/courses.json", d)
+	if err != nil {
+		t.Fatalf("load courses: %v", err)
+	}
+	course := p.Course("topo")
+	if course == nil {
+		t.Fatal("expected topo course")
+	}
+	// Nothing mastered.
+	cp, err := p.ProgressForCourse(course, map[string]*storage.ConceptProgress{}, 30)
+	if err != nil {
+		t.Fatalf("progress: %v", err)
+	}
+	if cp.Total == 0 || cp.Mastered != 0 || cp.Pct != 0 {
+		t.Errorf("unexpected empty progress: %+v", cp)
+	}
+	if cp.DaysRemaining == 0 {
+		t.Error("expected a positive days_remaining estimate")
+	}
+	// All mastered → 100%.
+	all := make(map[string]*storage.ConceptProgress)
+	for _, c := range d.Order() {
+		all[c.ID] = &storage.ConceptProgress{StudentID: "x", ConceptID: c.ID, Status: "MASTERED"}
+	}
+	cp2, err := p.ProgressForCourse(course, all, 30)
+	if err != nil {
+		t.Fatalf("progress full: %v", err)
+	}
+	if cp2.Pct != 1.0 || cp2.DaysRemaining != 0 {
+		t.Errorf("expected full progress, got %+v", cp2)
+	}
 }
