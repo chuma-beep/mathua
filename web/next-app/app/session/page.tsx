@@ -53,6 +53,7 @@ export default function SessionPage() {
   const [studentID, setStudentID] = useState('')
   const [sessionID, setSessionID] = useState('')
   const [question, setQuestion] = useState<Question | null>(null)
+  const [attemptId, setAttemptId] = useState('')
   const [lastResult, setLastResult] = useState<AnswerResult | null>(null)
   const [submitted, setSubmitted] = useState(false)
   const [answer, setAnswer] = useState('')
@@ -98,6 +99,7 @@ export default function SessionPage() {
       setStudentID(res.student_id)
       setSessionID(res.session_id)
       setQuestion(res.question)
+      setAttemptId(res.question?.attempt_id ?? '')
       setScreen('practice')
       setSubmitted(false)
       setSessionStats({ correct: 0, total: 0 })
@@ -163,6 +165,7 @@ export default function SessionPage() {
       setStudentID(res.student_id)
       setSessionID(res.session_id)
       setQuestion(res.question)
+      setAttemptId(res.question?.attempt_id ?? '')
       setScreen('practice')
       setSubmitted(false)
       setSessionStats({ correct: 0, total: 0 })
@@ -175,12 +178,12 @@ export default function SessionPage() {
   }, [name])
 
   const handleSubmit = useCallback(async () => {
-    if (!answer.trim() || !question || submittingRef.current) return
+    if (!answer.trim() || !question || !attemptId || submittingRef.current) return
     submittingRef.current = true
     setError('')
     const e = (Date.now() - startRef.current) / 1000
     try {
-      const res = await submitAnswer(sessionID, answer.trim(), e)
+      const res = await submitAnswer(sessionID, answer.trim(), e, attemptId)
       setLastResult(res.result)
       setSubmitted(true)
       if (res.result) {
@@ -191,17 +194,19 @@ export default function SessionPage() {
       }
       if (res.next_question) {
         setQuestion(res.next_question)
+        setAttemptId(res.next_question.attempt_id ?? '')
       } else {
         setQuestion(null)
+        setAttemptId('')
       }
       const s = await getScores(studentID).catch(() => null)
       if (s) setScores(s)
     } catch {
-      setError('Failed to submit answer')
+      setError('Failed to submit answer. If you answered in another tab, refresh to continue.')
     } finally {
       submittingRef.current = false
     }
-  }, [answer, question, sessionID, studentID])
+  }, [answer, question, attemptId, sessionID, studentID])
 
   const nextQuestion = useCallback(() => {
     setLastResult(null)
@@ -216,6 +221,7 @@ export default function SessionPage() {
       const res = await startReviewSession()
       setReviewSessionID(res.session_id)
       setQuestion(res.question)
+      setAttemptId(res.question?.attempt_id ?? '')
       setScreen('review')
       setSubmitted(false)
       setReviewStats({ correct: 0, total: 0 })
@@ -229,12 +235,12 @@ export default function SessionPage() {
   }, [])
 
   const handleReviewSubmit = useCallback(async () => {
-    if (!answer.trim() || !question || submittingRef.current) return
+    if (!answer.trim() || !question || !attemptId || submittingRef.current) return
     submittingRef.current = true
     setError('')
     const e = (Date.now() - startRef.current) / 1000
     try {
-      const res = await submitReviewAnswer(reviewSessionID, answer.trim(), e)
+      const res = await submitReviewAnswer(reviewSessionID, answer.trim(), e, attemptId)
       setLastResult(res.result)
       setSubmitted(true)
       if (res.result) {
@@ -245,18 +251,20 @@ export default function SessionPage() {
       }
       if (res.next_question) {
         setQuestion(res.next_question)
+        setAttemptId(res.next_question.attempt_id ?? '')
       } else {
         setQuestion(null)
+        setAttemptId('')
         setReviewDone(true)
       }
       const s = await getScores(studentID).catch(() => null)
       if (s) setScores(s)
     } catch {
-      setError('Failed to submit review answer')
+      setError('Failed to submit review answer. If you answered in another tab, refresh to continue.')
     } finally {
       submittingRef.current = false
     }
-  }, [answer, question, reviewSessionID, studentID])
+  }, [answer, question, attemptId, reviewSessionID, studentID])
 
   const nextReviewQuestion = useCallback(() => {
     if (reviewDone) {

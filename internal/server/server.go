@@ -233,6 +233,7 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 // POST /api/answer
 type answerReq struct {
 	SessionID string  `json:"session_id"`
+	AttemptID string  `json:"attempt_id"`
 	Answer    string  `json:"answer"`
 	Elapsed   float64 `json:"elapsed"`
 }
@@ -267,7 +268,7 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
-	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
+	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.AttemptID, req.Answer, req.Elapsed)
 	if err != nil {
 		if errors.Is(err, engine.ErrNoActiveQuestion) {
 			writeError(w, "no active question", 409)
@@ -1177,7 +1178,7 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
-	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.Answer, req.Elapsed)
+	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.AttemptID, req.Answer, req.Elapsed)
 	if err != nil {
 		if errors.Is(err, engine.ErrNoActiveQuestion) {
 			writeError(w, "no active question", 409)

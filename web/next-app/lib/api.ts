@@ -8,6 +8,7 @@ const QuestionSchema = z.object({
   concept_name: z.string(),
   question: z.string(),
   is_review: z.boolean(),
+  attempt_id: z.string().optional(),
   lesson: z.object({ Title: z.string(), Body: z.string(), Concepts: z.array(z.string()) }).optional(),
   diagram: z.string().optional(),
 })
@@ -146,6 +147,7 @@ export interface Question {
   concept_name: string
   question: string
   is_review: boolean
+  attempt_id?: string
   lesson?: {
     Title: string
     Body: string
@@ -238,6 +240,7 @@ export async function submitAnswer(
   sessionID: string,
   answer: string,
   elapsed: number,
+  attemptID: string,
 ): Promise<AnswerRes> {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -246,7 +249,7 @@ export async function submitAnswer(
   const res = await fetch(`${API_BASE}/api/answer`, {
     method: 'POST',
     headers,
-    body: JSON.stringify({ session_id: sessionID, answer, elapsed }),
+    body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
   })
   if (!res.ok) throw new Error(`Answer submit failed: ${res.status}`)
   return validateResponse(AnswerResSchema, await res.json(), 'submitAnswer') as AnswerRes
@@ -592,6 +595,7 @@ export async function submitReviewAnswer(
 	sessionID: string,
 	answer: string,
 	elapsed: number,
+	attemptID: string,
 ): Promise<AnswerRes> {
 	const headers: Record<string, string> = {
 		'Content-Type': 'application/json',
@@ -600,7 +604,7 @@ export async function submitReviewAnswer(
 	const res = await fetch(`${API_BASE}/api/reviews/answer`, {
 		method: 'POST',
 		headers,
-		body: JSON.stringify({ session_id: sessionID, answer, elapsed }),
+		body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
 	})
 	if (!res.ok) throw new Error(`Review answer submit failed: ${res.status}`)
 	return res.json()

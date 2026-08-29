@@ -1,6 +1,8 @@
 package engine
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
 	"log"
 	"sort"
@@ -29,6 +31,7 @@ type activeSession struct {
 	timeThreshold  float64
 	isReview       bool
 	answered       bool
+	attemptID      string
 	sessionReview  int
 	sessionNew     int
 	lastConceptID  string
@@ -43,6 +46,7 @@ type Question struct {
 	ConceptName string          `json:"concept_name"`
 	Question    string          `json:"question"`
 	IsReview    bool            `json:"is_review"`
+	AttemptID   string          `json:"attempt_id,omitempty"`
 	Lesson      *lessons.Lesson `json:"lesson,omitempty"`
 	Diagram     string          `json:"diagram,omitempty"`
 }
@@ -235,6 +239,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = next.IsReview
 	as.answered = false
+	as.attemptID = newAttemptID()
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
@@ -249,6 +254,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
 		IsReview:    next.IsReview,
+		AttemptID:   as.attemptID,
 		Lesson:      lesson,
 		Diagram:     diagram,
 	}, nil
@@ -305,6 +311,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = true
 	as.answered = false
+	as.attemptID = newAttemptID()
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
@@ -318,6 +325,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
 		IsReview:    true,
+		AttemptID:   as.attemptID,
 		Lesson:      lesson,
 		Diagram:     diagram,
 	}, nil
@@ -360,16 +368,17 @@ func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string
 	return e.gr.Grade(gradingType, expectedAnswer, userAnswer)
 }
 
-func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapsedSeconds float64) (*AnswerResult, error) {
+func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, elapsedSeconds float64) (*AnswerResult, error) {
 	// Hold e.mu for the whole grade + advance cycle so a concurrent
 	// SubmitAnswer/NextQuestion pair can never grade against a question the
 	// client was not shown. The `answered` flag rejects duplicate/stale
-	// submissions for the same question.
+	// submissions for the same question, and the per-question attemptID
+	// rejects submissions for questions the session has already moved past.
 	e.mu.Lock()
 	defer e.mu.Unlock()
 
 	as := e.sessions[sessionID]
-	if as == nil || as.conceptID == "" || as.answered {
+	if as == nil || as.conceptID == "" || as.answered || as.attemptID != attemptID {
 		return nil, fmt.Errorf("%w for session %q", ErrNoActiveQuestion, sessionID)
 	}
 	sessionFields := struct {
@@ -517,6 +526,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID string, answer string, elapse
 		as.sessionNew++
 	}
 	as.answered = true
+	as.attemptID = ""
 	as.conceptID = ""
 
 	return &AnswerResult{
@@ -732,6 +742,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.requiredStreak = c.MasteryThreshold.Streak
 	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
 	as.answered = false
+	as.attemptID = newAttemptID()
 	e.sessions[sessionID] = as
 
 	var lesson *lessons.Lesson
@@ -743,6 +754,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 		ConceptID:   conceptID,
 		ConceptName: c.Label,
 		Question:    prob.Question,
+		AttemptID:   as.attemptID,
 		Lesson:      lesson,
 	}, nil
 }
@@ -901,6 +913,17 @@ func timeOrZero(t *time.Time) time.Time {
 
 func ptrTime(t time.Time) *time.Time {
 	return &t
+}
+
+// newAttemptID returns a random token binding a submitted answer to the exact
+// question the client was shown. A stale submission carrying an older token is
+// rejected instead of being graded against the session's current question.
+func newAttemptID() string {
+	b := make([]byte, 16)
+	if _, err := rand.Read(b); err != nil {
+		return fmt.Sprintf("%d", time.Now().UnixNano())
+	}
+	return hex.EncodeToString(b)
 }
 
 func nowUTC() time.Time {

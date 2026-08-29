@@ -79,6 +79,7 @@ func TestAnswer(t *testing.T) {
 
 	ansBody, _ := json.Marshal(answerReq{
 		SessionID: startRes.SessionID,
+		AttemptID: startRes.Question.AttemptID,
 		Answer:    "4",
 		Elapsed:   2.0,
 	})
@@ -174,6 +175,7 @@ func TestAnswer_ExpressionGrading_Equivalent(t *testing.T) {
 	// Submit an equivalent expression
 	ansBody, _ := json.Marshal(answerReq{
 		SessionID: startRes.SessionID,
+		AttemptID: startRes.Question.AttemptID,
 		Answer:    "(x+1)^2",
 		Elapsed:   5.0,
 	})
@@ -217,6 +219,7 @@ func TestAnswer_ExpressionGrading_Nonequivalent(t *testing.T) {
 	// Submit a non-equivalent expression
 	ansBody, _ := json.Marshal(answerReq{
 		SessionID: startRes.SessionID,
+		AttemptID: startRes.Question.AttemptID,
 		Answer:    "x^2+3x+1",
 		Elapsed:   5.0,
 	})
