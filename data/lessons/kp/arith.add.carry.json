@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Add columns and carry",
+    "section": "Add whole numbers",
+    "subgoals": [
+      "Line up digits by place value (ones under ones)",
+      "Add the ones column first",
+      "Carry to the next column when a sum is 10 or more",
+      "Continue right to left, carrying as needed"
+    ]
+  }
+]
