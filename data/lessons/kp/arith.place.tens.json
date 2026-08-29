@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting and whole numbers",
+    "section": "Identify Counting Numbers and Whole Numbers",
+    "subgoals": [
+      "Distinguish counting numbers from whole numbers",
+      "Recognize zero as a whole number",
+      "Order numbers by size"
+    ]
+  },
+  {
+    "label": "Model whole numbers",
+    "section": "Model Whole Numbers",
+    "subgoals": [
+      "Model numbers with base-10 blocks",
+      "Group 10 ones into 1 ten",
+      "Read the model"
+    ]
+  },
+  {
+    "label": "Place value of a digit",
+    "section": "Identify the Place Value of a Digit",
+    "subgoals": [
+      "Label the ones and tens places",
+      "Name the value of each digit",
+      "Write in expanded form"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify multiples",
+    "section": "Identify Multiples of Numbers",
+    "subgoals": [
+      "Define prime by exactly two factors",
+      "Check 1 and the number itself",
+      "List the small primes"
+    ]
+  },
+  {
+    "label": "Divisibility tests",
+    "section": "Use Common Divisibility Tests",
+    "subgoals": [
+      "Test divisibility by small primes",
+      "Rule out composite candidates",
+      "Classify each number"
+    ]
+  },
+  {
+    "label": "Find all factors",
+    "section": "Find All the Factors of a Number",
+    "subgoals": [
+      "List the factor pairs",
+      "Confirm exactly two factors",
+      "Conclude prime"
+    ]
+  }
+]

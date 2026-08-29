@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to powers",
+    "section": "Introduction to powers",
+    "subgoals": [
+      "Recognize a quotient of powers",
+      "Identify the common base",
+      "Cancel common factors"
+    ]
+  },
+  {
+    "label": "Fundamental rules of powers",
+    "section": "Fundamental rules of powers",
+    "subgoals": [
+      "Subtract the exponents of the same base",
+      "Keep the base unchanged",
+      "Handle a zero exponent"
+    ]
+  },
+  {
+    "label": "Powers with real exponents",
+    "section": "Powers with real exponents",
+    "subgoals": [
+      "Extend the rule",
+      "Verify by expanding",
+      "Apply the rule in expressions"
+    ]
+  }
+]

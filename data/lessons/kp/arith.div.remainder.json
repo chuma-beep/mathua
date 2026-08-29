@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use division notation",
+    "section": "Use Division Notation",
+    "subgoals": [
+      "Recognize when division is not exact",
+      "Read the remainder",
+      "Relate to the fact family"
+    ]
+  },
+  {
+    "label": "Model division",
+    "section": "Model Division of Whole Numbers",
+    "subgoals": [
+      "Share the dividend into equal groups",
+      "Count the leftover",
+      "Write quotient with remainder"
+    ]
+  },
+  {
+    "label": "Divide whole numbers",
+    "section": "Divide Whole Numbers",
+    "subgoals": [
+      "Divide as usual",
+      "Record the remainder",
+      "Check: divisor × quotient + remainder"
+    ]
+  }
+]

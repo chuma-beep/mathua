@@ -1,11 +1,29 @@
 [
   {
-    "label": "Add two-digit numbers vertically",
-    "section": "Add whole numbers",
+    "label": "Use addition notation",
+    "section": "Use Addition Notation",
     "subgoals": [
-      "Write both addends so place values line up",
-      "Add the ones column, then the tens column",
-      "Carry when a column sums to 10 or more"
+      "Recognize the addends and the sum",
+      "Read multi-digit expressions",
+      "Estimate before adding"
+    ]
+  },
+  {
+    "label": "Model addition with blocks",
+    "section": "Model Addition of Whole Numbers",
+    "subgoals": [
+      "Model 17 + 26 with tens rods and ones",
+      "Exchange 10 ones for 1 ten",
+      "Read the final model"
+    ]
+  },
+  {
+    "label": "Add whole numbers",
+    "section": "Add Whole Numbers Without Models",
+    "subgoals": [
+      "Write addends with aligned place values",
+      "Add each column right to left",
+      "Carry when needed"
     ]
   }
 ]

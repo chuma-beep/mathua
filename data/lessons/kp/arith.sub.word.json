@@ -3,27 +3,27 @@
     "label": "Use subtraction notation",
     "section": "Use Subtraction Notation",
     "subgoals": [
-      "Identify the minuend and the subtrahend",
-      "Read 7 - 2 as seven minus two",
-      "Relate subtraction to the missing addend"
+      "Find the action words that mean subtract",
+      "Translate the phrase into math",
+      "Identify the larger number first"
     ]
   },
   {
     "label": "Model subtraction",
     "section": "Model Subtraction of Whole Numbers",
     "subgoals": [
-      "Model the minuend",
-      "Take away the subtrahend",
-      "Count what remains"
+      "Model the starting amount",
+      "Remove the amount taken away",
+      "Count what is left"
     ]
   },
   {
     "label": "Subtract whole numbers",
     "section": "Subtract Whole Numbers",
     "subgoals": [
-      "Line up digits by place value",
-      "Subtract right to left",
-      "Borrow when needed"
+      "Set up the vertical subtraction",
+      "Subtract and simplify",
+      "Check with addition"
     ]
   }
 ]

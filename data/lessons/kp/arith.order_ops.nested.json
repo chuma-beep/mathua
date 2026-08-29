@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Grouping symbols",
+    "section": "Grouping Symbols",
+    "subgoals": [
+      "Spot nested parentheses",
+      "Start with the innermost group",
+      "Work outward"
+    ]
+  },
+  {
+    "label": "Order of operations",
+    "section": "Order of Operations",
+    "subgoals": [
+      "Apply the full order inside each group",
+      "Track operations carefully",
+      "Simplify step by step"
+    ]
+  },
+  {
+    "label": "Absolute value and grouping",
+    "section": "Absolute Value and Implied Grouping",
+    "subgoals": [
+      "Recognize absolute value inside brackets",
+      "Evaluate the innermost part first",
+      "Simplify the expression"
+    ]
+  }
+]

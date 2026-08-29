@@ -35,9 +35,11 @@ def main():
 
     mapped = set()
     sources = {}
+    concept_sources = {}
     for m in entries:
         mapped.add(m["concept_id"])
         sources.setdefault(m["source"], []).append(m["concept_id"])
+        concept_sources.setdefault(m["concept_id"], []).append(m["source"])
 
     # 1. DAG concepts with no lesson mapping.
     orphans = sorted(dag_ids - mapped)
@@ -59,13 +61,47 @@ def main():
     if dead:
         errors.append(f"orphaned sources (only stale ids reference them): {len(dead)}\n  " + "\n  ".join(dead))
 
+    # 5. KP shards: every section must resolve in the concept's lesson body.
+    import re as _re
+    kp_dir = os.path.join(LESSONS, "kp")
+    if os.path.isdir(kp_dir):
+        kp_orphans = []
+        for name in sorted(os.listdir(kp_dir)):
+            if not name.endswith(".json"):
+                continue
+            cid = name[:-5]
+            if cid not in dag_ids:
+                kp_orphans.append(f"{name} (concept not in DAG)")
+                continue
+            with open(os.path.join(kp_dir, name)) as f:
+                kps = json.load(f)
+            srcs = concept_sources.get(cid, [])
+            body = ""
+            # teaching/* wins per loader (reverse-lexicographic pick)
+            for src in sorted(srcs)[::-1]:
+                p = os.path.join(LESSONS, src)
+                if os.path.exists(p):
+                    body = open(p, encoding="utf-8").read()
+                    break
+            heads = set()
+            for line in body.split("\n"):
+                t = line.strip()
+                m = _re.match(r"^(#{2,4})\s+(.+)$", t)
+                if m:
+                    heads.add(m.group(2).strip())
+            for kp in kps:
+                if kp.get("section") and kp["section"] not in heads:
+                    kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
+        if kp_orphans:
+            errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")
         sys.exit(1)
 
     print(f"OK: {len(dag_ids)} concepts mapped, {len(entries)} entries, "
-          f"{len(sources)} sources, 0 issues")
+          f"{len(sources)} sources, kp shards resolved, 0 issues")
 
 
 if __name__ == "__main__":

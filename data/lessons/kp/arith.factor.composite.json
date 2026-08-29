@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify multiples",
+    "section": "Identify Multiples of Numbers",
+    "subgoals": [
+      "Define composite by its factors",
+      "Recognize more than two factors",
+      "Contrast with primes"
+    ]
+  },
+  {
+    "label": "Divisibility tests",
+    "section": "Use Common Divisibility Tests",
+    "subgoals": [
+      "Test divisibility to find factors",
+      "Verify the factor count",
+      "Use the tests to classify"
+    ]
+  },
+  {
+    "label": "Find all factors",
+    "section": "Find All the Factors of a Number",
+    "subgoals": [
+      "List all factors of the number",
+      "Count the factors",
+      "Decide composite or prime"
+    ]
+  }
+]

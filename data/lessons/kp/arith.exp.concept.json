@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to powers",
+    "section": "Introduction to powers",
+    "subgoals": [
+      "Identify the base and the exponent",
+      "Read a power aloud",
+      "Expand as repeated multiplication"
+    ]
+  },
+  {
+    "label": "Powers with real exponents",
+    "section": "Powers with real exponents",
+    "subgoals": [
+      "Evaluate powers with integer exponents",
+      "Apply signs to the base",
+      "Interpret the value"
+    ]
+  },
+  {
+    "label": "Fundamental rules of powers",
+    "section": "Fundamental rules of powers",
+    "subgoals": [
+      "Multiply powers with the same base",
+      "Divide powers with the same base",
+      "Raise a power to a power"
+    ]
+  }
+]

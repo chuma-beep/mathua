@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signed numbers",
+    "section": "Signed Numbers",
+    "subgoals": [
+      "Place negative numbers left of zero",
+      "Read positions on the number line",
+      "Compare negative values"
+    ]
+  },
+  {
+    "label": "Adding signed numbers",
+    "section": "Adding",
+    "subgoals": [
+      "Add by moving on the number line",
+      "Move left for negatives",
+      "Find the sum"
+    ]
+  },
+  {
+    "label": "Subtracting signed numbers",
+    "section": "Subtracting",
+    "subgoals": [
+      "Subtract by moving right",
+      "Rewrite subtraction as addition of the opposite",
+      "Find the difference"
+    ]
+  }
+]

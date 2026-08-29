@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Motivation for factoring",
+    "section": "Motivation for Factoring",
+    "subgoals": [
+      "List the factors of each number",
+      "Find the common factors",
+      "Explain why factoring matters"
+    ]
+  },
+  {
+    "label": "Identifying the GCF",
+    "section": "Identifying the Greatest Common Factor",
+    "subgoals": [
+      "Compare the factor lists",
+      "Pick the largest common factor",
+      "Verify it divides both numbers"
+    ]
+  },
+  {
+    "label": "Factoring out the GCF",
+    "section": "Factoring Out the Greatest Common Factor",
+    "subgoals": [
+      "Identify the GCF",
+      "Divide each term by the GCF",
+      "Rewrite as a product"
+    ]
+  }
+]

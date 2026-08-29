@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Grouping symbols",
+    "section": "Grouping Symbols",
+    "subgoals": [
+      "Recognize parentheses and brackets",
+      "Evaluate inside grouping first",
+      "Handle nested groups"
+    ]
+  },
+  {
+    "label": "Order of operations",
+    "section": "Order of Operations",
+    "subgoals": [
+      "Multiply before adding",
+      "Divide before subtracting",
+      "Work left to right on ties"
+    ]
+  },
+  {
+    "label": "Absolute value and grouping",
+    "section": "Absolute Value and Implied Grouping",
+    "subgoals": [
+      "Treat absolute value as a grouping symbol",
+      "Evaluate the inside first",
+      "Simplify the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of radicals",
+    "section": "Definition of radicals",
+    "subgoals": [
+      "Identify the radicand and the index",
+      "Rewrite square roots as powers",
+      "Relate roots to squaring"
+    ]
+  },
+  {
+    "label": "Properties of radicals",
+    "section": "Properties",
+    "subgoals": [
+      "Apply the product rule for radicals",
+      "Extract perfect-square factors",
+      "Simplify the radical"
+    ]
+  },
+  {
+    "label": "Rationalizing the denominator",
+    "section": "Rationalizing the denominator",
+    "subgoals": [
+      "Remove a radical from the denominator",
+      "Multiply the numerator and denominator",
+      "Simplify the result"
+    ]
+  }
+]
