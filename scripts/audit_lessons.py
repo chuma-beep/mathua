@@ -7,6 +7,7 @@ Exit 0 = healthy, exit 1 = issues found.
 """
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,7 +63,6 @@ def main():
         errors.append(f"orphaned sources (only stale ids reference them): {len(dead)}\n  " + "\n  ".join(dead))
 
     # 5. KP shards: every section must resolve in the concept's lesson body.
-    import re as _re
     kp_dir = os.path.join(LESSONS, "kp")
     if os.path.isdir(kp_dir):
         kp_orphans = []
@@ -86,7 +86,7 @@ def main():
             heads = set()
             for line in body.split("\n"):
                 t = line.strip()
-                m = _re.match(r"^(#{2,4})\s+(.+)$", t)
+                m = re.match(r"^(#{2,4})\s+(.+)$", t)
                 if m:
                     heads.add(m.group(2).strip())
             for kp in kps:
@@ -94,6 +94,25 @@ def main():
                     kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
         if kp_orphans:
             errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))
+
+    # 6. Diagram mappings (engine.conceptDiagrams): concept in DAG, asset on disk.
+    engine_src = os.path.join(ROOT, "internal", "engine", "engine.go")
+    if os.path.exists(engine_src):
+        diag = []
+        with open(engine_src) as f:
+            eng = f.read()
+        start = eng.find("var conceptDiagrams = map[string]string{")
+        if start >= 0:
+            end = eng.find("\n}", start)
+            block = eng[start:end]
+            for m in re.finditer(r'"([^"]+)":\s*"((?:/diagrams/algebrica/)[^"]+)"', block):
+                cid, asset = m.group(1), m.group(2)
+                if cid not in dag_ids:
+                    diag.append(f"diagram {asset}: concept {cid} not in DAG")
+                if not os.path.exists(os.path.join(ROOT, "web", "next-app", "public") + asset):
+                    diag.append(f"diagram asset missing: {asset}")
+        if diag:
+            errors.append(f"diagram problems ({len(diag)}):\n  " + "\n  ".join(diag))
 
     if errors:
         print("\n\n".join(errors))
