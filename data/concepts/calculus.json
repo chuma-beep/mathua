@@ -1,19 +1,37 @@
 [
- {
-  "id": "calc.limit.concept",
-  "label": "Concept of a limit",
-  "domain": "calculus",
-  "subdomain": "calculus.limits",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "alg.func.concept",
-   "alg.seq.geometric"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
+  {
+    "id": "calc.limit.concept",
+    "label": "Concept of a limit",
+    "domain": "calculus",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.seq.geometric"
+    ],
+    "encompasses": [
+      "alg.func.concept"
+    ],
+    "key_prerequisites": [
+      "alg.func.concept"
+    ],
+    "variants": [
+      {
+        "difficulty": 0.3,
+        "time_thresh": 12.0,
+        "label": "easy"
+      },
+      {
+        "difficulty": 0.7,
+        "time_thresh": 15.0,
+        "label": "hard"
+      }
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
  {
   "id": "calc.limit.numeric",
   "label": "Estimate limits numerically",
@@ -156,36 +174,41 @@
    "avg_time_seconds": 22.0
   }
  },
- {
-  "id": "calc.deriv.trig",
-  "label": "Derivatives of sine and cosine",
-  "domain": "calculus",
-  "subdomain": "calculus.derivatives",
-  "grading_type": "expression",
-  "prerequisites": [
-   "calc.deriv.chain_rule",
-   "trig.graph.sin"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "calc.deriv.exp_log",
-  "label": "Derivatives of e^x and ln(x)",
-  "domain": "calculus",
-  "subdomain": "calculus.derivatives",
-  "grading_type": "expression",
-  "prerequisites": [
-   "calc.deriv.chain_rule",
-   "alg.log.properties"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
+  {
+    "id": "calc.deriv.trig",
+    "label": "Derivatives of sine and cosine",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "trig.graph.sin"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def"
+    ],
+    "interference_group": "calc.deriv",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.exp_log",
+    "label": "Derivatives of e^x and ln(x)",
+    "domain": "calculus",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "alg.log.properties"
+    ],
+    "interference_group": "calc.deriv",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
  {
   "id": "calc.deriv.applications",
   "label": "Applications: velocity and acceleration",

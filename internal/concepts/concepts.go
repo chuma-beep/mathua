@@ -5,6 +5,12 @@ type MasteryThreshold struct {
 	AvgTimeSeconds float64 `json:"avg_time_seconds"`
 }
 
+type Variant struct {
+	Difficulty float64 `json:"difficulty"`
+	TimeThresh float64 `json:"time_thresh"`
+	Label      string  `json:"label"`
+}
+
 type Concept struct {
 	ID               string           `json:"id"`
 	Label            string           `json:"label"`
@@ -12,15 +18,22 @@ type Concept struct {
 	Subdomain        string           `json:"subdomain"`
 	GradingType      string           `json:"grading_type"`
 	Prerequisites    []string         `json:"prerequisites"`
+	Encompasses      []string         `json:"encompasses,omitempty"`
+	KeyPrerequisites []string         `json:"key_prerequisites,omitempty"`
+	InterferenceGroup string          `json:"interference_group,omitempty"`
+	Variants         []Variant        `json:"variants,omitempty"`
 	MasteryThreshold MasteryThreshold `json:"mastery_threshold"`
 }
 
 type DAG struct {
-	concepts     map[string]*Concept
-	order        []*Concept
-	domains      []string
-	prereqsOf    map[string][]*Concept
-	dependentsOf map[string][]*Concept
+	concepts       map[string]*Concept
+	order          []*Concept
+	domains        []string
+	prereqsOf      map[string][]*Concept
+	dependentsOf   map[string][]*Concept
+	encompassedBy  map[string][]*Concept
+	encompassesOf  map[string][]*Concept
+	interferersOf  map[string][]*Concept
 }
 
 func (d *DAG) Concepts() map[string]*Concept {
@@ -64,6 +77,33 @@ func (d *DAG) DependentsOf(id string) []*Concept {
 	if deps, ok := d.dependentsOf[id]; ok {
 		out := make([]*Concept, len(deps))
 		copy(out, deps)
+		return out
+	}
+	return nil
+}
+
+func (d *DAG) EncompassedBy(id string) []*Concept {
+	if v, ok := d.encompassedBy[id]; ok {
+		out := make([]*Concept, len(v))
+		copy(out, v)
+		return out
+	}
+	return nil
+}
+
+func (d *DAG) EncompassesOf(id string) []*Concept {
+	if v, ok := d.encompassesOf[id]; ok {
+		out := make([]*Concept, len(v))
+		copy(out, v)
+		return out
+	}
+	return nil
+}
+
+func (d *DAG) InterferersOf(id string) []*Concept {
+	if v, ok := d.interferersOf[id]; ok {
+		out := make([]*Concept, len(v))
+		copy(out, v)
 		return out
 	}
 	return nil

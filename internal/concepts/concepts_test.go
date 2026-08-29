@@ -243,3 +243,85 @@ func Test_MasteryThresholdUnmarshal(t *testing.T) {
 		t.Errorf("unexpected: %+v", mt)
 	}
 }
+
+func TestEncompasses_Valid(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", Prerequisites: []string{}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+		{ID: "b", Label: "B", Domain: "d", Prerequisites: []string{}, Encompasses: []string{"a"}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err != nil {
+		t.Fatalf("expected valid encompasses, got %v", err)
+	}
+	dag := build(raw)
+	if len(dag.EncompassesOf("b")) != 1 || dag.EncompassesOf("b")[0].ID != "a" {
+		t.Errorf("expected b encompasses a")
+	}
+	if len(dag.EncompassedBy("a")) != 1 || dag.EncompassedBy("a")[0].ID != "b" {
+		t.Errorf("expected a encompassed by b")
+	}
+}
+
+func TestEncompasses_Orphan(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", Prerequisites: []string{}, Encompasses: []string{"missing"}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err == nil {
+		t.Fatal("expected error for orphan encompasses")
+	}
+}
+
+func TestEncompasses_Cycle(t *testing.T) {
+	path := writeTemp(t, `[
+		{"id":"a","label":"A","domain":"d","prerequisites":[],"encompasses":["b"],"mastery_threshold":{"streak":1,"avg_time_seconds":1}},
+		{"id":"b","label":"B","domain":"d","prerequisites":[],"encompasses":["a"],"mastery_threshold":{"streak":1,"avg_time_seconds":1}}
+	]`)
+	_, err := Load(path)
+	if err == nil {
+		t.Fatal("expected error for encompasses cycle")
+	}
+}
+
+func TestInterferenceGroups_Valid(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", InterferenceGroup: "g1", Prerequisites: []string{}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+		{ID: "b", Label: "B", Domain: "d", InterferenceGroup: "g1", Prerequisites: []string{}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+		{ID: "c", Label: "C", Domain: "d", Prerequisites: []string{}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err != nil {
+		t.Fatalf("expected valid interference groups, got %v", err)
+	}
+	dag := build(raw)
+	if len(dag.InterferersOf("a")) != 1 || dag.InterferersOf("a")[0].ID != "b" {
+		t.Errorf("expected a interferes with b")
+	}
+	if len(dag.InterferersOf("c")) != 0 {
+		t.Errorf("expected c has no interferers")
+	}
+}
+
+func TestInterferenceGroups_NonTrivial(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", InterferenceGroup: "lonely", Prerequisites: []string{}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err == nil {
+		t.Fatal("expected error for non-trivial interference group singleton")
+	}
+}
+
+func TestVariants_Valid(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", Prerequisites: []string{}, Variants: []Variant{{Difficulty: 0.3, TimeThresh: 10, Label: "easy"}, {Difficulty: 0.8, TimeThresh: 5, Label: "hard"}}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err != nil {
+		t.Fatalf("expected valid variants, got %v", err)
+	}
+}
+
+func TestVariants_InvalidDifficulty(t *testing.T) {
+	raw := []Concept{
+		{ID: "a", Label: "A", Domain: "d", Prerequisites: []string{}, Variants: []Variant{{Difficulty: 2.0, TimeThresh: 10, Label: "bad"}}, MasteryThreshold: MasteryThreshold{Streak: 1, AvgTimeSeconds: 1}},
+	}
+	if err := validate(raw); err == nil {
+		t.Fatal("expected error for invalid variant difficulty")
+	}
+}
