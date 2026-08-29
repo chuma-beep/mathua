@@ -27,6 +27,7 @@ const AnswerResultSchema = z.object({
   streak: z.number(),
   required_streak: z.number(),
   xp: z.number(),
+  expected_answer: z.string(),
 })
 
 const AnswerResSchema = z.object({
@@ -170,6 +171,7 @@ export interface AnswerResult {
   streak: number
   required_streak: number
   xp: number
+  expected_answer: string
 }
 
 export interface GraphRes {

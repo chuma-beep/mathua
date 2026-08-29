@@ -56,11 +56,11 @@ type AnswerResult struct {
 	Correct        bool           `json:"correct"`
 	Feedback       string         `json:"feedback"`
 	NewStatus      mastery.Status `json:"new_status"`
-	Explanation    string         `json:"explanation,omitempty"`
+	Explanation    string         `json:"explanation"`
 	Streak         int            `json:"streak"`
 	RequiredStreak int            `json:"required_streak"`
 	XP             int            `json:"xp"`
-	ExpectedAnswer string         `json:"expected_answer,omitempty"`
+	ExpectedAnswer string         `json:"expected_answer"`
 }
 
 type Engine struct {
