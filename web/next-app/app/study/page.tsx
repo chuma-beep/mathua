@@ -301,7 +301,7 @@ function QuizGateBanner({ scores }: { scores: Scores | null }) {
         </div>
       </div>
       {done ? (
-        <Link href="/profile" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+        <Link href="/goals?quiz=1" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
           Take Test →
         </Link>
       ) : null}

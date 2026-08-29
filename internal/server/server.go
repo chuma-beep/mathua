@@ -14,10 +14,12 @@ import (
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/auth"
+	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/quiz"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
@@ -50,6 +52,8 @@ type Server struct {
 	auth         *auth.AuthService
 	diagSessions map[string]*diagnostic.Session
 	diagCreated  map[string]time.Time
+	quizSessions map[string]*quiz.Session
+	quizCreated  map[string]time.Time
 	mu           sync.Mutex
 	authLimiter  *rateLimiter
 }
@@ -61,9 +65,11 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 		auth:         auth,
 		diagSessions: make(map[string]*diagnostic.Session),
 		diagCreated:  make(map[string]time.Time),
+		quizSessions: make(map[string]*quiz.Session),
+		quizCreated:  make(map[string]time.Time),
 		authLimiter:  newRateLimiter(5, 10, time.Minute),
 	}
-	// Clean up abandoned diagnostic sessions older than 1 hour
+	// Clean up abandoned diagnostic/quiz sessions older than 1 hour
 	go func() {
 		for {
 			time.Sleep(10 * time.Minute)
@@ -73,6 +79,12 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 				if created.Before(cutoff) {
 					delete(s.diagSessions, id)
 					delete(s.diagCreated, id)
+				}
+			}
+			for id, created := range s.quizCreated {
+				if created.Before(cutoff) {
+					delete(s.quizSessions, id)
+					delete(s.quizCreated, id)
 				}
 			}
 			s.mu.Unlock()
@@ -113,6 +125,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/study/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleStudyAnswer))))
+	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.optionalAuthMiddleware(s.handleQuizSession))))
+	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleQuizAnswer))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 }
@@ -1363,6 +1377,184 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		"required_streak": res.RequiredStreak,
 		"xp":              res.XP,
 		"expected_answer": res.ExpectedAnswer,
+	})
+}
+
+// POST /api/quiz/session — actionable quiz every 150 XP, own grading path, guest unlimited retake
+// Body: { student_id? } optional for guest
+func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		StudentID string `json:"student_id"`
+	}
+	_ = decodeJSON(w, r, &req)
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		studentID = req.StudentID
+	}
+	// Build quiz picking diverse recent weak concepts; fallback to DAG order
+	var quizConcepts []*concepts.Concept
+	if studentID != "" {
+		weak := s.eng.WeaknessMap(studentID)
+		if weak != nil {
+			quizConcepts = quiz.PickQuizConcepts(s.eng.GetDAG(), weak)
+		}
+	}
+	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
+	sess := qEng.Start(quizConcepts)
+	sess.ID = newUUID()
+	sess.StudentID = studentID
+	s.mu.Lock()
+	s.quizSessions[sess.ID] = sess
+	s.quizCreated[sess.ID] = time.Now()
+	s.mu.Unlock()
+	prob, cid, err := qEng.NextQuestion(sess)
+	if err != nil {
+		writeError(w, "failed to get quiz question", 500)
+		return
+	}
+	if prob == nil || cid == "" {
+		writeJSON(w, map[string]interface{}{"session_id": sess.ID, "done": true})
+		return
+	}
+	c := s.eng.GetDAG().Concept(cid)
+	name := cid
+	if c != nil {
+		name = c.Label
+	}
+	writeJSON(w, map[string]interface{}{
+		"session_id":   sess.ID,
+		"student_id":   studentID,
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     prob.Question,
+		"done":         false,
+	})
+}
+
+// POST /api/quiz/answer — own grading path via SubmitStudyAnswer with TaskQuiz 20
+// Body: { session_id, concept_id, answer, elapsed, student_id? }
+func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string  `json:"session_id"`
+		ConceptID string  `json:"concept_id"`
+		Answer    string  `json:"answer"`
+		Elapsed   float64 `json:"elapsed"`
+		StudentID string  `json:"student_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.SessionID == "" || req.ConceptID == "" {
+		writeError(w, "session_id and concept_id required", 400)
+		return
+	}
+	if req.Elapsed < MinAnswerSeconds {
+		writeError(w, "answer submitted too quickly", 400)
+		return
+	}
+	s.mu.Lock()
+	sess := s.quizSessions[req.SessionID]
+	s.mu.Unlock()
+	if sess == nil {
+		writeError(w, "quiz session not found", 404)
+		return
+	}
+	if sess.LastProblem == nil {
+		writeJSON(w, map[string]interface{}{"done": true, "correct": false, "feedback": "quiz session already complete"})
+		return
+	}
+	if sess.LastConceptID != "" && sess.LastConceptID != req.ConceptID {
+		writeError(w, "concept_id does not match current question", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		studentID = req.StudentID
+		if studentID == "" {
+			studentID = sess.StudentID
+		}
+	}
+	// Grade via DAG grading_type
+	concept := s.eng.GetDAG().Concept(req.ConceptID)
+	gt := "numeric"
+	if concept != nil {
+		gt = concept.GradingType
+	}
+	expected := sess.LastProblem.Answer
+	gr := s.eng.GetGrader().Grade(grader.GradingType(gt), expected, req.Answer)
+	// Record via quiz engine (advance index)
+	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
+	qEng.RecordAnswer(sess, req.ConceptID, gr.Correct)
+	// Also persist XP/progress via SubmitStudyAnswer with TaskQuiz override if student known
+	xp := 0
+	var newStatus string
+	if studentID != "" {
+		// Use dedicated quiz XP: TaskQuiz 20
+		// Temporarily call SubmitStudyAnswer then override base via re-grade? Instead directly compute TaskQuiz XP here
+		// We call SubmitStudyAnswer for progress but it would award TaskLesson/Multistep; we want TaskQuiz.
+		// So we call engine helper for quiz XP: use SubmitStudyAnswer then patch XP to TaskQuiz 20 equivalent
+		// Simpler: call SubmitStudyAnswer then recompute XP as TaskQuiz
+		res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
+		if err == nil && res != nil {
+			// Override XP to TaskQuiz 20 (recompute)
+			conceptThresh := 10.0
+			if concept != nil {
+				conceptThresh = concept.MasteryThreshold.AvgTimeSeconds
+			}
+			// recompute with TaskQuiz base
+			// We already have res.XP as lesson/multistep; recompute correctly
+			// Use same streak from res
+			xp = res.XP
+			// If TaskQuiz differs, scale: TaskQuiz 20 vs TaskLesson 10 => double
+			if res.Correct {
+				// recompute TaskQuiz XP properly
+				// Inline compute to avoid re-calling private: approximate via engine's exported helper? Use simple ratio
+				// We know base 20 vs base from concept suffix; but just call with TaskQuiz via reflection: we can ask engine to compute
+				// For MVP, double XP if not word else 20/15
+				// Instead call engine's public TaskQuiz compute via new helper
+				xp = s.eng.QuizXP(res.Correct, req.Elapsed, conceptThresh, res.Streak)
+			}
+			newStatus = string(res.NewStatus)
+		} else {
+			xp = 0
+		}
+	}
+	if qEng.IsComplete(sess) {
+		s.mu.Lock()
+		delete(s.quizSessions, req.SessionID)
+		delete(s.quizCreated, req.SessionID)
+		s.mu.Unlock()
+		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": gr.Feedback, "xp": xp, "new_status": newStatus})
+		return
+	}
+	prob, cid, err := qEng.NextQuestion(sess)
+	if err != nil {
+		writeError(w, "failed to get next quiz question", 500)
+		return
+	}
+	c2 := s.eng.GetDAG().Concept(cid)
+	name2 := cid
+	if c2 != nil {
+		name2 = c2.Label
+	}
+	writeJSON(w, map[string]interface{}{
+		"done":         false,
+		"correct":      gr.Correct,
+		"feedback":     gr.Feedback,
+		"xp":           xp,
+		"new_status":   newStatus,
+		"concept_id":   cid,
+		"concept_name": name2,
+		"question":     prob.Question,
 	})
 }
 

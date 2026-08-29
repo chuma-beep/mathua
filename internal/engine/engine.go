@@ -766,6 +766,11 @@ func computeXPForTask(correct bool, elapsed, timeThreshold float64, streak int, 
 	return int(float64(base) * timeMultiplier * streakMultiplier)
 }
 
+// QuizXP awards TaskQuiz 20 for actionable quiz path (own grading path per Q3).
+func (e *Engine) QuizXP(correct bool, elapsed, timeThreshold float64, streak int) int {
+	return computeXPForTask(correct, elapsed, timeThreshold, streak, TaskQuiz)
+}
+
 // computeXP retains bool-based API for backward compatibility (isReview=true→review 5, false→lesson 10).
 func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isReview bool) int {
 	taskType := TaskLesson

@@ -1,7 +1,7 @@
 'use client'
 
 import Loading from '../../components/Loading'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { toast } from 'sonner'
@@ -18,13 +18,16 @@ import {
   submitGoalAnswer,
   getGoalPlan,
   getScores,
+  startQuizSession,
+  submitQuizAnswer,
   type GoalPlanRes,
   type Scores,
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
+import { useSearchParams } from 'next/navigation'
 import conceptsData from '../../data/concepts.json'
 
-type Step = 'select' | 'diagnostic' | 'results'
+type Step = 'select' | 'diagnostic' | 'results' | 'quiz' | 'quiz_done'
 
 interface DomainInfo {
   name: string
@@ -52,9 +55,10 @@ const domainLabels: Record<string, string> = {
   topology: 'Topology',
 }
 
-export default function GoalsPage() {
+function GoalsContent() {
   const { mounted } = useTheme()
   const { push } = useRouter()
+  const searchParams = useSearchParams()
 
   const [step, setStep] = useState<Step>('select')
   const [scores, setScores] = useState<Scores | null>(null)
@@ -81,7 +85,20 @@ export default function GoalsPage() {
   const [plan, setPlan] = useState<GoalPlanRes | null>(null)
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | null>(null)
 
-  // Load scores and domains on mount
+  // Quiz (actionable, 150 XP gate, guest unlimited, own grading path)
+  const quizSessionId = useRef('')
+  const quizInputRef = useRef<HTMLInputElement>(null)
+  const quizShownAt = useRef<number | null>(null)
+  const [quizQuestion, setQuizQuestion] = useState('')
+  const quizConceptId = useRef('')
+  const [quizConceptName, setQuizConceptName] = useState('')
+  const [quizCount, setQuizCount] = useState(0)
+  const [quizAnswerInput, setQuizAnswerInput] = useState('')
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; xp?: number } | null>(null)
+  const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
+  const [quizDone, setQuizDone] = useState(false)
+
+  // Load scores and domains on mount — auto-start quiz if ?quiz=1
   useEffect(() => {
     if (!mounted) return
     const token = localStorage.getItem('mathua_token')
@@ -99,7 +116,11 @@ export default function GoalsPage() {
       }).catch(e => console.error('weaknesses fetch failed:', e))
     }
     buildDomains()
-  }, [mounted])
+    if (searchParams.get('quiz') === '1') {
+      // Reuse: quiz host — auto-start actionable quiz (150 XP, 80% own grading, guest allowed)
+      setTimeout(() => { startQuiz() }, 300)
+    }
+  }, [mounted, searchParams])
 
   function buildDomains() {
     const raw = conceptsData as any[]
@@ -216,6 +237,69 @@ export default function GoalsPage() {
       }, 1200)
     } catch {
       alert('Failed to submit answer.')
+      setLoading(false)
+    }
+  }
+
+  async function startQuiz() {
+    setLoading(true)
+    try {
+      const res = await startQuizSession()
+      if (res.done) {
+        setQuizDone(true)
+        setStep('quiz_done')
+        return
+      }
+      quizSessionId.current = res.session_id
+      setQuizQuestion(res.question || '')
+      quizConceptId.current = res.concept_id || ''
+      setQuizConceptName(res.concept_name || '')
+      quizShownAt.current = Date.now()
+      setQuizCount(1)
+      setQuizAccuracy({ correct: 0, total: 0 })
+      setQuizLastResult(null)
+      setQuizAnswerInput('')
+      setQuizDone(false)
+      setStep('quiz')
+    } catch {
+      toast.error("Quiz failed to start — try again.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function submitQuizAnswerFn() {
+    if (!quizAnswerInput.trim()) return
+    setLoading(true)
+    try {
+      const answer = quizAnswerInput.trim()
+      const elapsed = Math.max(0.5, (Date.now() - (quizShownAt.current ?? Date.now())) / 1000)
+      const data = await submitQuizAnswer(quizSessionId.current, quizConceptId.current, answer, elapsed)
+      const correct = data.correct || false
+      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
+      setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
+      setQuizLastResult({ correct, feedback, xp: data.xp })
+
+      if (data.done) {
+        setTimeout(() => {
+          setQuizDone(true)
+          setStep('quiz_done')
+          setLoading(false)
+        }, 800)
+        return
+      }
+      setTimeout(() => {
+        setQuizQuestion(data.question || '')
+        quizConceptId.current = data.concept_id || ''
+        quizShownAt.current = Date.now()
+        setQuizConceptName(data.concept_name || '')
+        setQuizCount(prev => prev + 1)
+        setQuizLastResult(null)
+        setQuizAnswerInput('')
+        setLoading(false)
+      }, 1200)
+    } catch {
+      toast.error("Failed to submit quiz answer.")
       setLoading(false)
     }
   }
@@ -370,11 +454,67 @@ export default function GoalsPage() {
               <div className="mt-6 min-w-0 overflow-hidden">
                 <DiagnosticResults plan={plan} onStartPractice={startPractice} />
               </div>
+              {/* Quiz CTA — actionable after diagnostic, also reachable via ?quiz=1 */}
+              <div className="mt-6 text-center">
+                <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (150 XP gate) →</button>
+                <p className="font-mono text-xs text-mathua-muted mt-2">Guest allowed — unlimited retake</p>
+              </div>
             </>
+          )}
+
+          {/* === QUIZ (reuse) — actionable every 150 XP, own grading path, guest unlimited === */}
+          {step === 'quiz' && (
+            <>
+              <SectionHeader label={`Quiz ${quizCount} of 5`} title={quizConceptName} />
+              <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
+                <div className="mb-4 flex items-center gap-2 text-xs font-mono text-mathua-muted justify-center">
+                  <span className={quizAccuracy.correct / Math.max(quizAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{quizAccuracy.correct}/{quizAccuracy.total} correct</span>
+                  {quizLastResult?.xp ? <span className="text-yellow-400">+{quizLastResult.xp} XP (TaskQuiz 20)</span> : null}
+                </div>
+                <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors w-full max-w-full min-w-0 overflow-hidden ${quizLastResult ? (quizLastResult.correct ? 'border-green-500/40' : 'border-red-500/40') : 'border-mathua-border'}`}>
+                  <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
+                    <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{quizQuestion}</KatexContent>
+                  </div>
+                  {!quizLastResult ? (
+                    <>
+                      <div className="flex flex-col sm:flex-row gap-3 min-w-0">
+                        <input ref={quizInputRef} type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && submitQuizAnswerFn()} placeholder="Your answer..." disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+                        <button onClick={submitQuizAnswerFn} disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
+                      </div>
+                      <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
+                    </>
+                  ) : (
+                    <div className="animate-fadeIn text-center">
+                      <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
+                      <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
+                      {loading && <p className="text-mathua-muted text-xs mt-2"><Loading inline size={11} /> Loading next…</p>}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+          {step === 'quiz_done' && (
+            <div className="max-w-2xl mx-auto text-center">
+              <SectionHeader label="Quiz complete" title={`${quizAccuracy.correct}/${quizAccuracy.total} correct`} />
+              <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct — retake anytime.</p>
+              <div className="mt-6 flex gap-3 justify-center">
+                <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
+                <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
+              </div>
+            </div>
           )}
         </section>
       </div>
       <Footer />
     </>
+  )
+}
+
+export default function GoalsPage() {
+  return (
+    <Suspense fallback={<><div style={{ background: 'var(--bg)', minHeight: '100vh' }}><Loading label="LOADING" /></div></>}>
+      <GoalsContent />
+    </Suspense>
   )
 }
