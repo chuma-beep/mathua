@@ -53,7 +53,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN xp_today INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN diagnostic_completed INTEGER NOT NULL DEFAULT 0",
-		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 150",
+		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
@@ -68,6 +68,8 @@ func authMigrate(db *sql.DB) error {
 			}
 		}
 	}
+	// Drift fix queued: daily goal 150 → 30 MA 20-40 (CONTEXT.md Quiz) — migrate existing defaults
+	_, _ = db.Exec("UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150")
 	return nil
 }
 
