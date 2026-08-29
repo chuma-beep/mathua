@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
+	"hash/fnv"
 	"log"
 	"sort"
 	"sync"
@@ -228,9 +229,20 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 		return nil, nil
 	}
 	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
-	prob, err := e.registry.Generate(next.Concept.ID, difficulty)
+	prevQuestion := as.questionText
+	attemptID := newAttemptID()
+	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
+	prob, err := e.registry.GenerateContext(next.Concept.ID, ctx)
 	if err != nil {
 		return nil, fmt.Errorf("generate problem: %w", err)
+	}
+	// Dedup verbatim: if same concept and question text collides with previous, re-roll with incremented seed.
+	for i := 0; i < 3 && prevQuestion != "" && prob.Question == prevQuestion; i++ {
+		ctx.Seed = seedBase + int64(i+1)
+		if p2, err2 := e.registry.GenerateContext(next.Concept.ID, ctx); err2 == nil {
+			prob = p2
+		}
 	}
 	as.conceptID = next.Concept.ID
 	as.conceptName = next.Concept.Label
@@ -240,7 +252,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = next.IsReview
 	as.answered = false
-	as.attemptID = newAttemptID()
+	as.attemptID = attemptID
 	as.questionText = prob.Question
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
@@ -302,9 +314,19 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 		return nil, nil
 	}
 	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
-	prob, err := e.registry.Generate(next.Concept.ID, difficulty)
+	prevQuestion := as.questionText
+	attemptID := newAttemptID()
+	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
+	prob, err := e.registry.GenerateContext(next.Concept.ID, ctx)
 	if err != nil {
 		return nil, fmt.Errorf("generate problem: %w", err)
+	}
+	for i := 0; i < 3 && prevQuestion != "" && prob.Question == prevQuestion; i++ {
+		ctx.Seed = seedBase + int64(i+1)
+		if p2, err2 := e.registry.GenerateContext(next.Concept.ID, ctx); err2 == nil {
+			prob = p2
+		}
 	}
 	as.conceptID = next.Concept.ID
 	as.conceptName = next.Concept.Label
@@ -314,7 +336,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
 	as.isReview = true
 	as.answered = false
-	as.attemptID = newAttemptID()
+	as.attemptID = attemptID
 	as.questionText = prob.Question
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
@@ -537,7 +559,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		as.sessionNew++
 	}
 	as.answered = true
-	as.attemptID = ""
+	// Keep attemptID unique to avoid UNIQUE constraint collision on tombstone.
+	// as.attemptID remains the last question's ID (unique per session).
 	as.conceptID = ""
 	as.questionText = ""
 	e.persistActiveSession(sessionID, studentID, as, "")
@@ -736,7 +759,10 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	}
 
 	difficulty := e.computeDifficulty(studentID, conceptID)
-	prob, err := e.registry.Generate(conceptID, difficulty)
+	attemptID := newAttemptID()
+	seedBase := hashSeed(studentID + "|" + conceptID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
+	prob, err := e.registry.GenerateContext(conceptID, ctx)
 	if err != nil {
 		return nil, fmt.Errorf("generate problem: %w", err)
 	}
@@ -748,6 +774,13 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	if as == nil {
 		as = &activeSession{}
 	}
+	prevQuestion := as.questionText
+	for i := 0; i < 3 && prevQuestion != "" && prob.Question == prevQuestion; i++ {
+		ctx.Seed = seedBase + int64(i+1)
+		if p2, err2 := e.registry.GenerateContext(conceptID, ctx); err2 == nil {
+			prob = p2
+		}
+	}
 	as.conceptID = conceptID
 	as.conceptName = c.Label
 	as.expectedAnswer = prob.Answer
@@ -755,7 +788,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.requiredStreak = c.MasteryThreshold.Streak
 	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
 	as.answered = false
-	as.attemptID = newAttemptID()
+	as.attemptID = attemptID
 	as.questionText = prob.Question
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
@@ -941,6 +974,12 @@ func newAttemptID() string {
 	return hex.EncodeToString(b)
 }
 
+func hashSeed(s string) int64 {
+	h := fnv.New64a()
+	_, _ = h.Write([]byte(s))
+	return int64(h.Sum64())
+}
+
 func (e *Engine) persistActiveSession(sessionID, studentID string, as *activeSession, questionText string) {
 	if e.repo == nil {
 		return
@@ -957,6 +996,9 @@ func (e *Engine) persistActiveSession(sessionID, studentID string, as *activeSes
 		Diagram:        diagramForConcept(as.conceptID),
 		IsReview:       as.isReview,
 		Answered:       as.answered,
+		LastConceptID:  as.lastConceptID,
+		SessionReview:  as.sessionReview,
+		SessionNew:     as.sessionNew,
 	}
 	if err := e.repo.UpsertActiveSession(rec); err != nil {
 		log.Printf("warning: persist active session %s: %v", sessionID, err)
@@ -972,11 +1014,24 @@ func (e *Engine) rehydrateActiveSession(sessionID, studentID string) *activeSess
 		log.Printf("warning: rehydrate session %s: %v", sessionID, err)
 		return nil
 	}
-	if rec == nil || rec.ConceptID == "" || rec.AttemptID == "" || rec.Answered {
+	if rec == nil {
 		return nil
 	}
 	if rec.StudentID != "" && rec.StudentID != studentID {
 		return nil
+	}
+	// If no active question (tombstone after SubmitAnswer), return session with
+	// carry-over lastConceptID/session counters so NextQuestion can honor skip.
+	if rec.ConceptID == "" || rec.AttemptID == "" || rec.Answered {
+		if rec.LastConceptID == "" && rec.SessionReview == 0 && rec.SessionNew == 0 {
+			return nil
+		}
+		return &activeSession{
+			lastConceptID: rec.LastConceptID,
+			sessionReview: rec.SessionReview,
+			sessionNew:    rec.SessionNew,
+			answered:      true,
+		}
 	}
 	c := e.dag.Concept(rec.ConceptID)
 	timeThresh := 10.0
@@ -996,6 +1051,9 @@ func (e *Engine) rehydrateActiveSession(sessionID, studentID string) *activeSess
 		answered:       rec.Answered,
 		attemptID:      rec.AttemptID,
 		questionText:   rec.Question,
+		lastConceptID:  rec.LastConceptID,
+		sessionReview:  rec.SessionReview,
+		sessionNew:     rec.SessionNew,
 	}
 }
 

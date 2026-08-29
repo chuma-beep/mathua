@@ -85,6 +85,9 @@ CREATE TABLE IF NOT EXISTS active_sessions (
     diagram         TEXT NOT NULL DEFAULT '',
     is_review       INTEGER NOT NULL DEFAULT 0,
     answered        INTEGER NOT NULL DEFAULT 0,
+    last_concept_id TEXT NOT NULL DEFAULT '',
+    session_review  INTEGER NOT NULL DEFAULT 0,
+    session_new     INTEGER NOT NULL DEFAULT 0,
     updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
 );
 

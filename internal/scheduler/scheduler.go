@@ -169,7 +169,9 @@ func (s *Scheduler) NextReview(
 	for same < len(reviews) && reviews[same].Priority == topPriority {
 		same++
 	}
-	return &NextConcept{Concept: reviews[rand.Intn(same)].Concept, IsReview: true}
+	// Shuffle among equal-priority candidates with per-call seeded rand.
+	r := rand.New(rand.NewSource(time.Now().UnixNano() ^ int64(same)))
+	return &NextConcept{Concept: reviews[r.Intn(same)].Concept, IsReview: true}
 }
 
 func selectWithBalance(candidates []Candidate, reviewCount, newCount int) Candidate {
@@ -185,13 +187,14 @@ func selectWithBalance(candidates []Candidate, reviewCount, newCount int) Candid
 			}
 		}
 	}
-	// Shuffle among equal-priority candidates.
+	// Shuffle among equal-priority candidates with per-call seeded rand.
 	topPriority := candidates[0].Priority
 	same := 1
 	for same < len(candidates) && candidates[same].Priority == topPriority {
 		same++
 	}
-	return candidates[rand.Intn(same)]
+	r := rand.New(rand.NewSource(time.Now().UnixNano() ^ int64(len(candidates)) ^ int64(reviewCount+newCount)))
+	return candidates[r.Intn(same)]
 }
 
 func daysSince(t time.Time) float64 {

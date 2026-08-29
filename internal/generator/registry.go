@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"math/rand"
 	"sort"
 	"sync"
 
@@ -76,6 +77,12 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 	if !exists {
 		return Problem{}, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
+	// Seed global rand from ctx.Seed if provided (per-question seeded via hash of
+	// StudentID+ConceptID+AttemptID). This gives per-call variation without
+	// editing every generator to thread a *rand.Rand.
+	if ctx.Seed != 0 {
+		rand.Seed(ctx.Seed)
+	}
 	p := gen.Generate(ctx)
 	p.Question = latex.Canonicalize(p.Question, latex.Generators)
 	p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
@@ -101,6 +108,9 @@ func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx Generat
 	r.mu.RUnlock()
 	if !exists {
 		return nil, fmt.Errorf("no generator registered for concept %q", conceptID)
+	}
+	if ctx.Seed != 0 {
+		rand.Seed(ctx.Seed)
 	}
 	problems := make([]Problem, 0, count)
 	seen := make(map[string]bool)
