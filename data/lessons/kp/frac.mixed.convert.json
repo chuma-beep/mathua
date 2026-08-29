@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply and divide mixed numbers",
+    "section": "Multiply and Divide Mixed Numbers",
+    "subgoals": [
+      "Convert a mixed number to an improper fraction",
+      "Multiply the whole by the denominator and add",
+      "Convert back when done"
+    ]
+  },
+  {
+    "label": "Mixed-number operations",
+    "section": "Multiply or divide mixed numbers.",
+    "subgoals": [
+      "Convert both mixed numbers first",
+      "Perform the operation",
+      "Simplify the result"
+    ]
+  },
+  {
+    "label": "Translate phrases to expressions",
+    "section": "Translate Phrases to Expressions with Fractions",
+    "subgoals": [
+      "Read the mixed-number phrase",
+      "Write it as an expression",
+      "Convert to improper form"
+    ]
+  }
+]

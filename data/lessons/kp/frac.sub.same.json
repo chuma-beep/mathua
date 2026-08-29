@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model fraction subtraction",
+    "section": "Model Fraction Subtraction",
+    "subgoals": [
+      "Model the first fraction",
+      "Remove the second amount",
+      "Count what remains"
+    ]
+  },
+  {
+    "label": "Subtract fractions with a common denominator",
+    "section": "Subtract Fractions with a Common Denominator",
+    "subgoals": [
+      "Keep the denominator",
+      "Subtract the numerators",
+      "Simplify the result"
+    ]
+  },
+  {
+    "label": "Fraction subtraction rule",
+    "section": "Fraction Subtraction",
+    "subgoals": [
+      "State the rule for same denominators",
+      "Apply it step by step",
+      "Check with a model"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Meaning of fractions",
+    "section": "Understand the Meaning of Fractions",
+    "subgoals": [
+      "Identify the numerator and the denominator",
+      "Describe what each part names",
+      "Relate the denominator to equal parts"
+    ]
+  },
+  {
+    "label": "Improper fractions and mixed numbers",
+    "section": "Model Improper Fractions and Mixed Numbers",
+    "subgoals": [
+      "Recognize an improper fraction",
+      "Model parts beyond a whole",
+      "Name the parts correctly"
+    ]
+  },
+  {
+    "label": "Property of one",
+    "section": "Property of One",
+    "subgoals": [
+      "Recognize a fraction equal to one",
+      "Explain why the parts equal the whole",
+      "Use the property to simplify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Locate fractions on the number line",
+    "section": "Locate Fractions and Mixed Numbers on the Number Line",
+    "subgoals": [
+      "Divide the interval into equal parts",
+      "Count the parts from zero",
+      "Place the fraction correctly"
+    ]
+  },
+  {
+    "label": "Order fractions",
+    "section": "Order Fractions and Mixed Numbers",
+    "subgoals": [
+      "Compare positions on the number line",
+      "Order a set of fractions",
+      "Use the number line to verify"
+    ]
+  },
+  {
+    "label": "Equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Model two names for the same point",
+      "Recognize equal spacing",
+      "Link equivalence to the number line"
+    ]
+  }
+]

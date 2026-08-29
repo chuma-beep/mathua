@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Meaning of fractions",
+    "section": "Understand the Meaning of Fractions",
+    "subgoals": [
+      "Identify the numerator and the denominator",
+      "Interpret a fraction as parts of a whole",
+      "Relate fractions to division"
+    ]
+  },
+  {
+    "label": "Improper fractions and mixed numbers",
+    "section": "Model Improper Fractions and Mixed Numbers",
+    "subgoals": [
+      "Recognize an improper fraction",
+      "Model a mixed number",
+      "Distinguish proper from improper"
+    ]
+  },
+  {
+    "label": "Equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Model two fractions that name the same amount",
+      "Multiply numerator and denominator together",
+      "Recognize equivalence visually"
+    ]
+  }
+]

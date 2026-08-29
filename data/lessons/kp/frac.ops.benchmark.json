@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model equivalent fractions",
+    "section": "Model Equivalent Fractions",
+    "subgoals": [
+      "Model a fraction close to 0, 1/2, or 1",
+      "Compare shaded parts to half",
+      "Classify the benchmark"
+    ]
+  },
+  {
+    "label": "Locate fractions on the number line",
+    "section": "Locate Fractions and Mixed Numbers on the Number Line",
+    "subgoals": [
+      "Place the fraction between 0 and 1",
+      "Mark the halfway point",
+      "Decide the closer benchmark"
+    ]
+  },
+  {
+    "label": "Order fractions",
+    "section": "Order Fractions and Mixed Numbers",
+    "subgoals": [
+      "Rank fractions by benchmark",
+      "Order mixed numbers too",
+      "Verify on the number line"
+    ]
+  }
+]

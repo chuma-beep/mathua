@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model addition of mixed numbers",
+    "section": "Model Addition of Mixed Numbers with a Common Denominator",
+    "subgoals": [
+      "Model the whole parts",
+      "Model the fraction parts",
+      "Combine the total"
+    ]
+  },
+  {
+    "label": "Add mixed numbers",
+    "section": "Add Mixed Numbers",
+    "subgoals": [
+      "Add the whole parts",
+      "Add the fraction parts",
+      "Carry a whole when the fraction is improper"
+    ]
+  },
+  {
+    "label": "Add mixed numbers with a common denominator",
+    "section": "Add mixed numbers with a common denominator.",
+    "subgoals": [
+      "Add the fractions first",
+      "Add the whole numbers",
+      "Simplify and regroup"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply fractions",
+    "section": "Multiply Fractions",
+    "subgoals": [
+      "Rewrite the whole number as a fraction",
+      "Multiply the numerators",
+      "Multiply the denominators"
+    ]
+  },
+  {
+    "label": "Fraction multiplication rule",
+    "section": "Fraction Multiplication",
+    "subgoals": [
+      "Apply the product rule",
+      "Simplify the result",
+      "Interpret the product"
+    ]
+  },
+  {
+    "label": "Simplify a fraction",
+    "section": "Simplify a fraction.",
+    "subgoals": [
+      "Divide by a common factor",
+      "Reduce to lowest terms",
+      "Verify with a model"
+    ]
+  }
+]

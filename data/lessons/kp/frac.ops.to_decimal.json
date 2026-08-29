@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert fractions to decimals",
+    "section": "Convert Fractions to Decimals",
+    "subgoals": [
+      "Divide the numerator by the denominator",
+      "Write the quotient as a decimal",
+      "Handle terminating results"
+    ]
+  },
+  {
+    "label": "Convert a fraction to a decimal",
+    "section": "Convert a Fraction to a Decimal",
+    "subgoals": [
+      "Set up the long division",
+      "Place the decimal point",
+      "State the decimal value"
+    ]
+  },
+  {
+    "label": "Repeating decimals",
+    "section": "Repeating Decimals",
+    "subgoals": [
+      "Recognize a repeating quotient",
+      "Use the bar notation",
+      "Round when needed"
+    ]
+  }
+]
