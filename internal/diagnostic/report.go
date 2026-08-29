@@ -65,26 +65,27 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 	return rep
 }
 
-// domainToCourse maps the frontier concept's domain to a placement course id.
+// domainToCourse maps the frontier concept's domain to a placement course id
+// (ids match data/courses.json catalog).
 func domainToCourse(c *concepts.Concept) string {
 	d := c.Domain
 	switch {
 	case strings.HasPrefix(d, "arithmetic"):
-		return "arith"
+		return "4"
 	case strings.HasPrefix(d, "fractions"):
-		return "frac"
+		return "5"
 	case strings.HasPrefix(d, "prealgebra"):
-		return "prealg"
+		return "pa"
 	case strings.HasPrefix(d, "algebra"):
-		return "alg"
+		return "a1"
 	case strings.HasPrefix(d, "trigonometry"):
-		return "trig"
+		return "a2"
 	case strings.HasPrefix(d, "precalculus"):
 		return "pc"
 	case strings.HasPrefix(d, "calculus"):
-		return "calc"
+		return "calc1"
 	case strings.HasPrefix(d, "statistics"):
-		return "stat"
+		return "probstat"
 	case strings.HasPrefix(d, "linear_algebra"):
 		return "linalg"
 	case strings.HasPrefix(d, "geometry"):
@@ -94,9 +95,9 @@ func domainToCourse(c *concepts.Concept) string {
 	case strings.HasPrefix(d, "number_theory"):
 		return "nt"
 	case strings.HasPrefix(d, "complex"):
-		return "complex"
+		return "a2"
 	case strings.HasPrefix(d, "differential_equations"):
-		return "ode"
+		return "diffeq"
 	case strings.HasPrefix(d, "abstract"):
 		return "abstract"
 	case strings.HasPrefix(d, "topology"):
