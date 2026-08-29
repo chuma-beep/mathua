@@ -1226,13 +1226,17 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET /api/reviews/due — returns count of concepts due for review
-func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
+func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
 	if studentID == "" {
+		writeJSON(w, map[string]interface{}{"count": 0})
+		return
+	}
+	// S3-3: paused students see no due reviews.
+	if paused(studentID, s.repo) {
 		writeJSON(w, map[string]interface{}{"count": 0})
 		return
 	}
@@ -1249,6 +1253,25 @@ func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	writeJSON(w, map[string]interface{}{"count": count})
+}
+
+// paused reports whether settings.pause_until is set to a future date.
+func paused(studentID string, repo storage.Repository) bool {
+	raw, err := repo.GetSettings(studentID)
+	if err != nil || raw == "" || raw == "{}" {
+		return false
+	}
+	var cfg struct {
+		PauseUntil string `json:"pause_until"`
+	}
+	if json.Unmarshal([]byte(raw), &cfg) != nil || cfg.PauseUntil == "" {
+		return false
+	}
+	t, err := time.Parse("2006-01-02", cfg.PauseUntil)
+	if err != nil {
+		return false
+	}
+	return t.After(time.Now().UTC())
 }
 
 // POST /api/reviews/session — creates a review-only session
