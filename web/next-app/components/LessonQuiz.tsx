@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import KatexContent from './KatexContent'
 import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../lib/api'
+import { applyResult, initialState, type StreakState } from '../lib/progression'
 
 interface LessonQuizProps {
   conceptId: string
@@ -17,6 +18,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [score, setScore] = useState({ correct: 0, total: 0 })
+  const [streak, setStreak] = useState<StreakState>(initialState())
   const loadTimes = useRef<Record<number, number>>({})
 
   const loadQuestions = useCallback(() => {
@@ -26,6 +28,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     setResults({})
     setXpMap({})
     setScore({ correct: 0, total: 0 })
+    setStreak(initialState())
     loadTimes.current = {}
     getLessonPractice(conceptId, limit)
       .then(res => {
@@ -48,18 +51,21 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     if (!userAnswer || results[i] !== undefined) return
     const q = questions[i]
     const elapsed = Math.max(0.5, (Date.now() - (loadTimes.current[i] ?? Date.now())) / 1000)
+    let correct = false
     try {
       const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed)
+      correct = res.correct
       const key: 'correct' | 'incorrect' = res.correct ? 'correct' : 'incorrect'
       setResults(prev => ({ ...prev, [i]: key }))
       setXpMap(prev => ({ ...prev, [i]: res.xp ?? 0 }))
       setScore(prev => ({ correct: prev.correct + (res.correct ? 1 : 0), total: prev.total + 1 }))
     } catch {
       // Fallback to local grading if server unreachable
-      const isCorrect = userAnswer.trim().toLowerCase() === q.answer.trim().toLowerCase()
-      setResults(prev => ({ ...prev, [i]: isCorrect ? 'correct' : 'incorrect' }))
-      setScore(prev => ({ correct: prev.correct + (isCorrect ? 1 : 0), total: prev.total + 1 }))
+      correct = userAnswer.trim().toLowerCase() === q.answer.trim().toLowerCase()
+      setResults(prev => ({ ...prev, [i]: correct ? 'correct' : 'incorrect' }))
+      setScore(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
     }
+    setStreak(prev => applyResult(prev, correct))
   }
 
   function handleKeyDown(e: React.KeyboardEvent, i: number) {
@@ -91,6 +97,11 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
           Practice Questions ({questions.length})
         </h3>
         <div className="flex items-center gap-3">
+          {!streak.advanced && streak.consecutive > 0 && (
+            <span className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider">
+              streak {streak.consecutive}/2
+            </span>
+          )}
           {score.total > 0 && (
             <span className="font-mono text-xs text-mathua-muted">
               {score.correct}/{score.total} correct
@@ -104,10 +115,25 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
           </button>
         </div>
       </div>
+
+      {streak.advanced && (
+        <div className="mb-4 border border-mathua-green bg-mathua-surface p-4 flex items-center gap-3">
+          <span className="text-green-400 text-lg">✓</span>
+          <div>
+            <p className="font-mono text-xs text-mathua-green">2 in a row — concept advanced</p>
+            <p className="font-mono text-[10px] text-mathua-secondary mt-0.5">
+              {score.correct}/{score.total} correct · next concept unlocked
+            </p>
+          </div>
+        </div>
+      )}
+
       <div className="space-y-3">
         {questions.map((q, i) => {
           const result = results[i]
           const showAnswer = result !== undefined
+          const hidden = streak.advanced && result === undefined
+          if (hidden) return null
           return (
             <div
               key={i}

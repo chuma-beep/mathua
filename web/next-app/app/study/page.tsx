@@ -617,11 +617,27 @@ function LessonDetail({
       )}
 
       <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
+        <div className="flex items-center gap-2 mb-4 border-b border-mathua-border pb-3">
+          <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+            Worked example
+          </span>
+          <span className="font-mono text-[10px] text-mathua-muted">
+            study this first, then practice below
+          </span>
+        </div>
         <div className="w-full max-w-full min-w-0 overflow-hidden">
           <KatexContent>{lesson.body}</KatexContent>
         </div>
       </div>
 
+      <div className="mt-2 flex items-center gap-2">
+        <span className="bg-mathua-border text-mathua-primary px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+          Practice
+        </span>
+        <span className="font-mono text-[10px] text-mathua-muted">
+          2 in a row to advance
+        </span>
+      </div>
       {lesson.concepts.slice(0, 3).map(cid => (
         <LessonQuiz key={cid} conceptId={cid} limit={4} />
       ))}
