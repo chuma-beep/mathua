@@ -1380,6 +1380,7 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		"required_streak": res.RequiredStreak,
 		"xp":              res.XP,
 		"expected_answer": res.ExpectedAnswer,
+		"halted":          res.Halted,
 	})
 }
 
