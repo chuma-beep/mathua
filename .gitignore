@@ -59,5 +59,8 @@ mathua.db*
 # Local analysis artifacts
 .understand-anything/
 
+# Local skills marketplace (vendored, has own .git)
+skills/
+
 # local research — do not commit
 improve.md
