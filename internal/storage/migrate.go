@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS students (
     xp_today             INTEGER NOT NULL DEFAULT 0,
     xp_date              TEXT,
     diagnostic_completed INTEGER NOT NULL DEFAULT 0,
-    daily_xp_goal        INTEGER NOT NULL DEFAULT 150,
+    daily_xp_goal        INTEGER NOT NULL DEFAULT 30,
     settings             TEXT NOT NULL DEFAULT '{}'
 );
 
