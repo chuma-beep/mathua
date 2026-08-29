@@ -1053,11 +1053,45 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	}
 	path := strings.TrimPrefix(r.URL.Path, "/api/lessons/")
 	parts := strings.SplitN(path, "/", 2)
-	if len(parts) < 2 || parts[1] != "practice" {
+	if len(parts) < 2 || (parts[1] != "practice" && parts[1] != "kp") {
 		http.Error(w, `{"error":"not found"}`, 404)
 		return
 	}
 	conceptID := parts[0]
+
+	// GET /api/lessons/{id}/kp — knowledge-point shards with worked examples.
+	if parts[1] == "kp" {
+		ll := s.eng.GetLessonLoader()
+		if ll == nil {
+			http.Error(w, `{"error":"lessons unavailable"}`, 503)
+			return
+		}
+		kps := ll.KPs(conceptID)
+		type kpInfo struct {
+			Label         string   `json:"label"`
+			Section       string   `json:"section"`
+			Subgoals      []string `json:"subgoals"`
+			WorkedExample string   `json:"worked_example"`
+		}
+		out := make([]kpInfo, 0, len(kps))
+		for _, kp := range kps {
+			we, ok := ll.KPSectionBody(conceptID, kp.Section)
+			if !ok {
+				if l := ll.Lesson(conceptID); l != nil {
+					we = l.Body
+				}
+			}
+			out = append(out, kpInfo{
+				Label:         kp.Label,
+				Section:       kp.Section,
+				Subgoals:      kp.Subgoals,
+				WorkedExample: we,
+			})
+		}
+		writeJSON(w, map[string]interface{}{"concept_id": conceptID, "kps": out})
+		return
+	}
+
 	count := 5
 	if c := r.URL.Query().Get("count"); c != "" {
 		var n int

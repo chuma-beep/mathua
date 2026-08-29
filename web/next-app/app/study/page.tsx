@@ -12,7 +12,7 @@ import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessons, getLessonBody, getScores, type LessonInfo, type LessonsRes, type Scores } from '../../lib/api'
+import { getLessons, getLessonBody, getLessonKPs, getScores, type LessonInfo, type LessonsRes, type Scores, type LessonKpsRes } from '../../lib/api'
 import { getUserInfo, getGuestId } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 import Loading from '../../components/Loading'
@@ -554,6 +554,22 @@ function LessonDetail({
   domain: string | null
   onBack: () => void
 }) {
+  // KP-aware: fetch knowledge-point shards for the lesson's concepts.
+  const [kpMap, setKpMap] = useState<Record<string, LessonKpsRes>>({})
+  useEffect(() => {
+    if (!lesson.concepts?.length) return
+    let cancelled = false
+    lesson.concepts.slice(0, 3).forEach(cid => {
+      getLessonKPs(cid).then(res => {
+        if (!cancelled && res.kps?.length) setKpMap(prev => ({ ...prev, [cid]: res }))
+      }).catch(() => {})
+    })
+    return () => { cancelled = true }
+  }, [lesson])
+
+  const kpConcepts = lesson.concepts.slice(0, 3).filter(cid => (kpMap[cid]?.kps?.length ?? 0) > 0)
+  const hasKps = kpConcepts.length > 0
+
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
@@ -616,19 +632,64 @@ function LessonDetail({
         </div>
       )}
 
-      <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
-        <div className="flex items-center gap-2 mb-4 border-b border-mathua-border pb-3">
-          <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-            Worked example
-          </span>
-          <span className="font-mono text-[10px] text-mathua-muted">
-            study this first, then practice below
-          </span>
+      {hasKps ? (
+        <div className="space-y-5">
+          {kpConcepts.map(cid => {
+            const kps = kpMap[cid]?.kps ?? []
+            return (
+              <div key={cid} className="w-full max-w-full min-w-0 overflow-hidden">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+                    Worked example
+                  </span>
+                  <span className="font-mono text-[10px] text-mathua-muted">{cid}</span>
+                </div>
+                {kps.map((kp, k) => (
+                  <div key={`${cid}-${k}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
+                    <p className="font-mono text-xs text-mathua-primary">
+                      {k + 1}. {kp.label}
+                    </p>
+                    {kp.subgoals.length > 0 && (
+                      <ul className="mt-2 space-y-1">
+                        {kp.subgoals.map((sg, j) => (
+                          <li
+                            key={j}
+                            className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
+                          >
+                            {sg}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    <details className="mt-2">
+                      <summary className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider cursor-pointer">
+                        Worked example
+                      </summary>
+                      <div className="mt-2 bg-mathua-code border border-mathua-border p-3 text-sm w-full max-w-full min-w-0 overflow-hidden">
+                        <KatexContent>{kp.worked_example}</KatexContent>
+                      </div>
+                    </details>
+                  </div>
+                ))}
+              </div>
+            )
+          })}
         </div>
-        <div className="w-full max-w-full min-w-0 overflow-hidden">
-          <KatexContent>{lesson.body}</KatexContent>
+      ) : (
+        <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
+          <div className="flex items-center gap-2 mb-4 border-b border-mathua-border pb-3">
+            <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+              Worked example
+            </span>
+            <span className="font-mono text-[10px] text-mathua-muted">
+              study this first, then practice below
+            </span>
+          </div>
+          <div className="w-full max-w-full min-w-0 overflow-hidden">
+            <KatexContent>{lesson.body}</KatexContent>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="mt-2 flex items-center gap-2">
         <span className="bg-mathua-border text-mathua-primary px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
