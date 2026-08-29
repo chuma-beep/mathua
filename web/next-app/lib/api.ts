@@ -53,6 +53,8 @@ const ScoresSchema = z.object({
   xp_total: z.number(),
   xp_today: z.number(),
   daily_xp_goal: z.number(),
+  spaced_reps: z.record(z.string(), z.number()).optional(),
+  avg_learning_speed: z.number().optional(),
 })
 
 function validateResponse<T>(schema: z.ZodType<T>, data: unknown, name: string): T {
@@ -204,6 +206,8 @@ export interface Scores {
   xp_total: number
   xp_today: number
   daily_xp_goal: number
+  spaced_reps?: Record<string, number>
+  avg_learning_speed?: number
 }
 
 export interface ConceptProgress {

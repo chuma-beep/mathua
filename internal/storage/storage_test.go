@@ -291,6 +291,62 @@ func TestMigrate_Idempotent(t *testing.T) {
 	}
 }
 
+// PR 1.2 student model: topic speed round-trip + clamps
+
+func TestTopicSpeed_RoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("speed")
+	ts := &TopicSpeed{StudentID: st.ID, ConceptID: "frac.add.diff", EFactor: 2.5, Interval: 6, Repetitions: 2, LearningSpeed: 1.4}
+	if err := store.UpsertTopicSpeed(ts); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+	got, err := store.GetTopicSpeed(st.ID, "frac.add.diff")
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got == nil {
+		t.Fatal("expected topic speed row")
+	}
+	if got.LearningSpeed != 1.4 || got.Interval != 6 || got.Repetitions != 2 {
+		t.Errorf("unexpected round-trip: %+v", got)
+	}
+}
+
+func TestTopicSpeed_Clamps(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("clamp")
+	ts := &TopicSpeed{StudentID: st.ID, ConceptID: "c1", EFactor: 2.5, Interval: 1, Repetitions: 0, LearningSpeed: 9.0}
+	if err := store.UpsertTopicSpeed(ts); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+	got, _ := store.GetTopicSpeed(st.ID, "c1")
+	if got.LearningSpeed != 2.0 {
+		t.Errorf("expected clamp to 2.0, got %f", got.LearningSpeed)
+	}
+	ts.LearningSpeed = 0.1
+	if err := store.UpsertTopicSpeed(ts); err != nil {
+		t.Fatalf("upsert low: %v", err)
+	}
+	got, _ = store.GetTopicSpeed(st.ID, "c1")
+	if got.LearningSpeed != 0.5 {
+		t.Errorf("expected clamp to 0.5, got %f", got.LearningSpeed)
+	}
+}
+
+func TestGetAllTopicSpeeds(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("all")
+	_ = store.UpsertTopicSpeed(&TopicSpeed{StudentID: st.ID, ConceptID: "a", EFactor: 2.5, Interval: 1, Repetitions: 0, LearningSpeed: 1.0})
+	_ = store.UpsertTopicSpeed(&TopicSpeed{StudentID: st.ID, ConceptID: "b", EFactor: 2.5, Interval: 2, Repetitions: 1, LearningSpeed: 1.5})
+	all, err := store.GetAllTopicSpeeds(st.ID)
+	if err != nil {
+		t.Fatalf("get all: %v", err)
+	}
+	if len(all) != 2 {
+		t.Errorf("expected 2 speeds, got %d", len(all))
+	}
+}
+
 // SQLite pragma errors (invalid path)
 
 func TestNewSQLiteStore_InvalidPath(t *testing.T) {

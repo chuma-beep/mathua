@@ -1,6 +1,7 @@
 package scoring
 
 import (
+	"math"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -10,15 +11,17 @@ import (
 )
 
 type Scores struct {
-	LifetimePoints   int     `json:"lifetime_points"`
-	WeeklyScore      int     `json:"weekly_score"`
-	SpeedBonus       float64 `json:"speed_bonus"`
-	ConceptsMastered int     `json:"concepts_mastered"`
-	CurrentStreak    int     `json:"current_streak"`
-	Level            string  `json:"level"`
-	XPTotal          int     `json:"xp_total"`
-	XPToday          int     `json:"xp_today"`
-	DailyXPGoal      int     `json:"daily_xp_goal"`
+	LifetimePoints    int                 `json:"lifetime_points"`
+	WeeklyScore       int                 `json:"weekly_score"`
+	SpeedBonus        float64             `json:"speed_bonus"`
+	ConceptsMastered  int                 `json:"concepts_mastered"`
+	CurrentStreak     int                 `json:"current_streak"`
+	Level             string              `json:"level"`
+	XPTotal           int                 `json:"xp_total"`
+	XPToday           int                 `json:"xp_today"`
+	DailyXPGoal       int                 `json:"daily_xp_goal"`
+	SpacedReps        map[string]float64  `json:"spaced_reps,omitempty"`
+	AvgLearningSpeed  float64             `json:"avg_learning_speed"`
 }
 
 type Updater struct {
@@ -61,16 +64,39 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		dailyGoal = st.DailyXPGoal
 	}
 
+	// PR 1.2: per-topic spaced-reps profile (blue-oval darkness) + avg learning speed
+	spacedReps := make(map[string]float64)
+	var speedSum float64
+	var speedCount int
+	if speeds, err := u.repo.GetAllTopicSpeeds(studentID); err == nil {
+		for cid, ts := range speeds {
+			// darkness = stability = repetitions * learning_speed clamped to [0,1] feel
+			dark := ts.LearningSpeed * (0.3 + float64(ts.Repetitions)*0.15)
+			if dark > 1 {
+				dark = 1
+			}
+			spacedReps[cid] = math.Round(dark*100) / 100
+			speedSum += ts.LearningSpeed
+			speedCount++
+		}
+	}
+	avgSpeed := 1.0
+	if speedCount > 0 {
+		avgSpeed = speedSum / float64(speedCount)
+	}
+
 	return &Scores{
-		LifetimePoints:   lifetimePoints,
-		WeeklyScore:      weeklyScore,
-		SpeedBonus:       speedBonus,
-		ConceptsMastered: mastered,
-		CurrentStreak:    streak,
-		Level:            level,
-		XPTotal:          xpTotal,
-		XPToday:          xpToday,
-		DailyXPGoal:      dailyGoal,
+		LifetimePoints:    lifetimePoints,
+		WeeklyScore:       weeklyScore,
+		SpeedBonus:        speedBonus,
+		ConceptsMastered:  mastered,
+		CurrentStreak:     streak,
+		Level:             level,
+		XPTotal:           xpTotal,
+		XPToday:           xpToday,
+		DailyXPGoal:       dailyGoal,
+		SpacedReps:        spacedReps,
+		AvgLearningSpeed:  math.Round(avgSpeed*100) / 100,
 	}, nil
 }
 

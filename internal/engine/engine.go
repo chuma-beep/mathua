@@ -492,7 +492,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		progress.Streak = 1
 	}
 
-	// SM-2 update
+	// SM-2 update — PR 1.2 student model: scale interval by per-topic learningSpeed
 	quality := mastery.SM2Quality(
 		gr.Correct && progress.Streak >= sessionFields.requiredStreak,
 		progress.AvgResponseTime/sessionFields.timeThreshold,
@@ -502,10 +502,26 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		EFactor:     progress.SM2EFactor,
 		Interval:    progress.SM2Interval,
 	}
-	nextSM2 := scheduler.ComputeSM2(prevSM2, quality)
+	learningSpeed := 1.0
+	if ts, err := e.repo.GetTopicSpeed(studentID, sessionFields.conceptID); err == nil && ts != nil {
+		learningSpeed = ts.LearningSpeed
+	}
+	nextSM2 := scheduler.ComputeSM2WithSpeed(prevSM2, quality, learningSpeed)
 	progress.SM2Repetitions = nextSM2.Repetitions
 	progress.SM2EFactor = nextSM2.EFactor
 	progress.SM2Interval = nextSM2.Interval
+	// Persist updated per-topic speed from timeRatio + streak
+	newSpeed := scheduler.UpdateLearningSpeed(learningSpeed, gr.Correct, progress.AvgResponseTime/sessionFields.timeThreshold, progress.Streak)
+	if err := e.repo.UpsertTopicSpeed(&storage.TopicSpeed{
+		StudentID:     studentID,
+		ConceptID:     sessionFields.conceptID,
+		EFactor:       nextSM2.EFactor,
+		Interval:      nextSM2.Interval,
+		Repetitions:   nextSM2.Repetitions,
+		LearningSpeed: newSpeed,
+	}); err != nil {
+		log.Printf("warning: upsert topic speed %s/%s: %v", studentID, sessionFields.conceptID, err)
+	}
 
 	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
 		now := nowUTC()
@@ -659,10 +675,25 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 		EFactor:     progress.SM2EFactor,
 		Interval:    progress.SM2Interval,
 	}
-	nextSM2 := scheduler.ComputeSM2(prevSM2, quality)
+	learningSpeed := 1.0
+	if ts, err := e.repo.GetTopicSpeed(studentID, conceptID); err == nil && ts != nil {
+		learningSpeed = ts.LearningSpeed
+	}
+	nextSM2 := scheduler.ComputeSM2WithSpeed(prevSM2, quality, learningSpeed)
 	progress.SM2Repetitions = nextSM2.Repetitions
 	progress.SM2EFactor = nextSM2.EFactor
 	progress.SM2Interval = nextSM2.Interval
+	newSpeed := scheduler.UpdateLearningSpeed(learningSpeed, gr.Correct, progress.AvgResponseTime/timeThreshold, progress.Streak)
+	if err := e.repo.UpsertTopicSpeed(&storage.TopicSpeed{
+		StudentID:     studentID,
+		ConceptID:     conceptID,
+		EFactor:       nextSM2.EFactor,
+		Interval:      nextSM2.Interval,
+		Repetitions:   nextSM2.Repetitions,
+		LearningSpeed: newSpeed,
+	}); err != nil {
+		log.Printf("warning: upsert topic speed %s/%s: %v", studentID, conceptID, err)
+	}
 	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
 		now := nowUTC()
 		progress.MasteredAt = &now

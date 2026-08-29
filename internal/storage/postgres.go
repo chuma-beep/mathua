@@ -123,3 +123,15 @@ func (s *PostgresStore) ImportQuestions(qs []Question) error {
 func (s *PostgresStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {
 	return 0, fmt.Errorf("not implemented")
 }
+
+func (s *PostgresStore) GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) UpsertTopicSpeed(ts *TopicSpeed) error {
+	return fmt.Errorf("not implemented")
+}

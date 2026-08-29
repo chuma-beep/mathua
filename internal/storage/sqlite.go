@@ -606,6 +606,61 @@ func (s *SQLiteStore) GetDailyActivity(studentID string, days int) ([]DailyActiv
 
 // Helpers
 
+func (s *SQLiteStore) GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error) {
+	row := s.db.QueryRow(`SELECT student_id, concept_id, efactor, interval, repetitions, learning_speed FROM student_topic_speed WHERE student_id = ? AND concept_id = ?`, studentID, conceptID)
+	var ts TopicSpeed
+	if err := row.Scan(&ts.StudentID, &ts.ConceptID, &ts.EFactor, &ts.Interval, &ts.Repetitions, &ts.LearningSpeed); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("get topic speed: %w", err)
+	}
+	return &ts, nil
+}
+
+func (s *SQLiteStore) GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error) {
+	rows, err := s.db.Query(`SELECT student_id, concept_id, efactor, interval, repetitions, learning_speed FROM student_topic_speed WHERE student_id = ?`, studentID)
+	if err != nil {
+		return nil, fmt.Errorf("get all topic speeds: %w", err)
+	}
+	defer rows.Close()
+	out := make(map[string]*TopicSpeed)
+	for rows.Next() {
+		var ts TopicSpeed
+		if err := rows.Scan(&ts.StudentID, &ts.ConceptID, &ts.EFactor, &ts.Interval, &ts.Repetitions, &ts.LearningSpeed); err != nil {
+			return nil, err
+		}
+		out[ts.ConceptID] = &ts
+	}
+	return out, rows.Err()
+}
+
+func (s *SQLiteStore) UpsertTopicSpeed(ts *TopicSpeed) error {
+	if ts.LearningSpeed < 0.5 {
+		ts.LearningSpeed = 0.5
+	}
+	if ts.LearningSpeed > 2.0 {
+		ts.LearningSpeed = 2.0
+	}
+	if ts.EFactor == 0 {
+		ts.EFactor = 2.5
+	}
+	_, err := s.db.Exec(`
+		INSERT INTO student_topic_speed (student_id, concept_id, efactor, interval, repetitions, learning_speed, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+		ON CONFLICT(student_id, concept_id) DO UPDATE SET
+			efactor = excluded.efactor,
+			interval = excluded.interval,
+			repetitions = excluded.repetitions,
+			learning_speed = excluded.learning_speed,
+			updated_at = datetime('now')
+	`, ts.StudentID, ts.ConceptID, ts.EFactor, ts.Interval, ts.Repetitions, ts.LearningSpeed)
+	if err != nil {
+		return fmt.Errorf("upsert topic speed: %w", err)
+	}
+	return nil
+}
+
 func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProgress, error) {
 	p := &ConceptProgress{}
 	var lastAtt, lastRev, nextRev, masterAt sql.NullString
