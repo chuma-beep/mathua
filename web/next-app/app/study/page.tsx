@@ -12,8 +12,8 @@ import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessons, getLessonBody, type LessonInfo, type LessonsRes } from '../../lib/api'
-import { getUserInfo } from '../../lib/auth'
+import { getLessons, getLessonBody, getScores, type LessonInfo, type LessonsRes, type Scores } from '../../lib/api'
+import { getUserInfo, getGuestId } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
 import Loading from '../../components/Loading'
 
@@ -278,6 +278,35 @@ function lessonProgress(lesson: LessonInfo): { mastered: number; total: number }
     if (p && p.status === 'MASTERED') mastered++
   }
   return { mastered, total: lesson.concepts.length }
+}
+
+function QuizGateBanner({ scores }: { scores: Scores | null }) {
+  const xp = scores?.xp_total ?? 0
+  const goal = 150 // CONTEXT.md Quiz 150 XP gate MA verbatim
+  const done = xp >= goal
+  const pct = Math.min((xp / goal) * 100, 100)
+  return (
+    <div className={`mt-6 border p-4 flex flex-col sm:flex-row items-center justify-between gap-3 ${done ? 'border-mathua-blue bg-mathua-surface' : 'border-mathua-border bg-mathua-surface'}`}>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-2">
+          <span className={`px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${done ? 'bg-mathua-blue text-white' : 'bg-mathua-border text-mathua-muted'}`}>
+            {done ? 'Quiz due' : '150 XP gate'}
+          </span>
+          <span className="font-mono text-xs text-mathua-primary truncate">
+            {done ? '150 XP reached — take your mastery check' : `${xp} / ${goal} XP toward next quiz`}
+          </span>
+        </div>
+        <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
+          <div className={`h-full transition-all ${done ? 'bg-mathua-blue' : 'bg-mathua-blue/60'}`} style={{ width: `${pct}%` }} />
+        </div>
+      </div>
+      {done ? (
+        <Link href="/profile" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+          Take Test →
+        </Link>
+      ) : null}
+    </div>
+  )
 }
 
 // ── Domain Overview ─────────────────────────────────────
@@ -668,6 +697,7 @@ function StudyContent() {
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
+  const [scores, setScores] = useState<Scores | null>(null)
 
   useEffect(() => {
     const user = getUserInfo()
@@ -676,6 +706,10 @@ function StudyContent() {
       setLessonsByDomain(res.lessons)
       setLoading(false)
     }).catch((e) => { console.error('getLessons failed:', e); setLoading(false) })
+    const sid = studentId || getGuestId() || ''
+    if (sid) {
+      getScores(sid).then(setScores).catch(() => {})
+    }
   }, [])
 
   // URL → state sync
@@ -805,6 +839,8 @@ function StudyContent() {
               </Link>
             </span>
           )}
+
+          <QuizGateBanner scores={scores} />
 
           {selectedLesson ? (
             // ── Lesson Detail ──

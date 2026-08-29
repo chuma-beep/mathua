@@ -242,6 +242,24 @@ export default function ProfilePage() {
           </Link>
         </section>
 
+        {/* 150 XP Quiz gate (CONTEXT.md Quiz) */}
+        {scores && scores.xp_total >= 150 && (
+          <div className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
+                <span className="font-mono text-xs text-mathua-primary truncate">150 XP reached — mastery check recommended</span>
+              </div>
+              <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
+                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min((scores.xp_total / 150) * 100, 100)}%` }} />
+              </div>
+            </div>
+            <Link href="/study" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+              Take Test →
+            </Link>
+          </div>
+        )}
+
         {dueReviews > 0 && (
           <Link
             href="/session"
