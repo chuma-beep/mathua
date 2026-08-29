@@ -155,6 +155,36 @@ func (e *Engine) PlannerCourses() []*planning.Course {
 	return e.planner.Courses()
 }
 
+// CourseStatus is one course with the student's accreditation-track progress.
+type CourseStatus struct {
+	*planning.Course
+	Progress *planning.CourseProgress `json:"progress"`
+}
+
+// CourseCatalog returns all courses with per-student progress + estimates.
+func (e *Engine) CourseCatalog(studentID string) ([]CourseStatus, error) {
+	if e.planner == nil {
+		return nil, nil
+	}
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return nil, err
+	}
+	goal := 30
+	if st, err := e.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
+		goal = st.DailyXPGoal
+	}
+	out := make([]CourseStatus, 0, len(e.planner.Courses()))
+	for _, c := range e.planner.Courses() {
+		cp, err := e.planner.ProgressForCourse(c, progress, goal)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, CourseStatus{Course: c, Progress: cp})
+	}
+	return out, nil
+}
+
 func (e *Engine) ActivePath(studentID string) map[string]bool {
 	e.mu.Lock()
 	defer e.mu.Unlock()
