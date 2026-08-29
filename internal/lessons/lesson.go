@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -48,12 +49,13 @@ func Load(lessonsDir string) (*Loader, error) {
 
 	// Group concept IDs by source file
 	sourceConcepts := make(map[string][]string)
+	conceptSources := make(map[string][]string)
 	for _, m := range mappings {
 		sourceConcepts[m.Source] = append(sourceConcepts[m.Source], m.ConceptID)
+		conceptSources[m.ConceptID] = append(conceptSources[m.ConceptID], m.Source)
 	}
 
-	concepts := make(map[string]*Lesson, len(mappings))
-
+	lessonsBySource := make(map[string]*Lesson, len(sourceConcepts))
 	for source, ids := range sourceConcepts {
 		mdPath := filepath.Join(lessonsDir, source)
 		body, err := os.ReadFile(mdPath)
@@ -69,13 +71,24 @@ func Load(lessonsDir string) (*Loader, error) {
 		if title == "" {
 			title = titleFromFilename(source)
 		}
-		lesson := &Lesson{
+		lessonsBySource[source] = &Lesson{
 			Title:    title,
 			Body:     content,
 			Concepts: ids,
 		}
-		for _, id := range ids {
-			concepts[id] = lesson
+	}
+
+	// Deterministic per-concept pick: when a concept maps to several sources,
+	// the last in reverse-lexicographic order wins — authored teaching/*
+	// beats vendored algebrica/* (alphabetically 't' > 'a').
+	concepts := make(map[string]*Lesson, len(conceptSources))
+	for id, srcs := range conceptSources {
+		sort.Strings(srcs)
+		for i := len(srcs) - 1; i >= 0; i-- {
+			if lesson, ok := lessonsBySource[srcs[i]]; ok {
+				concepts[id] = lesson
+				break
+			}
 		}
 	}
 

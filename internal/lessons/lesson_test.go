@@ -78,6 +78,46 @@ func TestLoad_SharedSource(t *testing.T) {
 	}
 }
 
+// Deterministic multi-source pick: teaching/* beats algebrica/* per concept.
+func TestLoad_MultiSource_TeachingWins(t *testing.T) {
+	dir := t.TempDir()
+	writeFile(t, filepath.Join(dir, "lessons.json"), `[
+		{"concept_id": "c", "source": "algebrica/functions/x.md"},
+		{"concept_id": "c", "source": "teaching/c.md"}
+	]`)
+	writeFile(t, filepath.Join(dir, "algebrica/functions/x.md"), "# Algebrica X\n\nCorpus.")
+	writeFile(t, filepath.Join(dir, "teaching/c.md"), "# Teaching C\n\nAuthored.")
+	loader, err := Load(dir)
+	if err != nil {
+		t.Fatalf("load: %v", err)
+	}
+	l := loader.Lesson("c")
+	if l == nil {
+		t.Fatal("expected lesson")
+	}
+	if l.Title != "Teaching C" {
+		t.Errorf("expected authored teaching lesson to win, got %q", l.Title)
+	}
+}
+
+func TestLoad_MultiSource_Deterministic(t *testing.T) {
+	dir := t.TempDir()
+	writeFile(t, filepath.Join(dir, "lessons.json"), `[
+		{"concept_id": "c", "source": "a.md"},
+		{"concept_id": "c", "source": "b.md"}
+	]`)
+	writeFile(t, filepath.Join(dir, "a.md"), "# A\n\nA.")
+	writeFile(t, filepath.Join(dir, "b.md"), "# B\n\nB.")
+	l1, _ := Load(dir)
+	l2, _ := Load(dir)
+	if l1.Lesson("c").Title != l2.Lesson("c").Title {
+		t.Error("expected deterministic pick across loads")
+	}
+	if l1.Lesson("c").Title != "B" {
+		t.Errorf("expected reverse-lexicographic winner B, got %q", l1.Lesson("c").Title)
+	}
+}
+
 func TestLoad_NoTitle(t *testing.T) {
 	dir := t.TempDir()
 	writeFile(t, filepath.Join(dir, "lessons.json"), `[
