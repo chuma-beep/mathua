@@ -325,6 +325,31 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   return res.json()
 }
 
+export interface LeagueMember {
+  student_id: string
+  name: string
+  tier: string
+  total_mastered: number
+  weekly_mastered: number
+  moved: number
+}
+
+export interface League {
+  tier: string
+  members: LeagueMember[]
+}
+
+export interface LeagueBoard {
+  week: string
+  leagues: League[]
+}
+
+export async function getLeagues(): Promise<LeagueBoard> {
+  const res = await fetch(`${API_BASE}/api/leagues`, { headers: { ...getAuthHeaders() } })
+  if (!res.ok) return { week: '', leagues: [] }
+  return res.json()
+}
+
 export interface ConfigRes {
 	auth_enabled: boolean
 }
