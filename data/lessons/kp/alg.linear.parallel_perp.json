@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Horizontal and vertical",
+    "section": "Horizontal Lines and Vertical Lines",
+    "subgoals": [
+      "Recognize zero slope",
+      "Recognize undefined slope",
+      "Write their equations"
+    ]
+  },
+  {
+    "label": "Parallel lines",
+    "section": "Parallel Lines",
+    "subgoals": [
+      "Match equal slopes",
+      "Use the given intercept",
+      "Write the parallel line"
+    ]
+  },
+  {
+    "label": "Perpendicular lines",
+    "section": "Perpendicular Lines",
+    "subgoals": [
+      "Take the negative reciprocal",
+      "Verify the product is -1",
+      "Write the perpendicular line"
+    ]
+  }
+]

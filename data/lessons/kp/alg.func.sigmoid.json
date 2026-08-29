@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the sigmoid formula",
+      "Identify its range",
+      "Read the S shape"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties of the sigmoid function",
+    "subgoals": [
+      "Bound the output between 0 and 1",
+      "Find the midpoint",
+      "Use it as an activation"
+    ]
+  },
+  {
+    "label": "Derivative",
+    "section": "Derivative of the sigmoid function",
+    "subgoals": [
+      "Compute the derivative",
+      "Express it via the function itself",
+      "Apply in backpropagation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify a logarithmic inequality",
+      "Keep arguments positive",
+      "Compare to the base"
+    ]
+  },
+  {
+    "label": "Solve with the base in mind",
+    "section": "",
+    "subgoals": [
+      "Handle base greater than one",
+      "Handle base between zero and one",
+      "Flip when needed"
+    ]
+  },
+  {
+    "label": "Check the domain",
+    "section": "",
+    "subgoals": [
+      "Verify argument positivity",
+      "Intersect with the domain",
+      "State the interval"
+    ]
+  }
+]

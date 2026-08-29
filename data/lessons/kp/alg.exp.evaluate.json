@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exponent basics",
+    "section": "Exponent Basics",
+    "subgoals": [
+      "Identify the base and the exponent",
+      "Expand the power",
+      "Simplify the product"
+    ]
+  },
+  {
+    "label": "Exponent rules",
+    "section": "Exponent Rules",
+    "subgoals": [
+      "Apply the product rule",
+      "Apply the quotient rule",
+      "Apply the power rule"
+    ]
+  },
+  {
+    "label": "Evaluate powers",
+    "section": "",
+    "subgoals": [
+      "Rewrite with a positive exponent",
+      "Compute the value",
+      "Handle negative bases"
+    ]
+  }
+]

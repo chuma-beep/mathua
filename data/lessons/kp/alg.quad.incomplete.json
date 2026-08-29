@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a missing term",
+      "Classify the incomplete form",
+      "Prepare the shortcut"
+    ]
+  },
+  {
+    "label": "Case b = 0",
+    "section": "The case b = 0",
+    "subgoals": [
+      "Isolate x^2",
+      "Take the square root",
+      "Include both signs"
+    ]
+  },
+  {
+    "label": "Case c = 0",
+    "section": "The case c = 0",
+    "subgoals": [
+      "Factor out x",
+      "Set each factor to zero",
+      "State both solutions"
+    ]
+  }
+]

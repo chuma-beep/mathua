@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Recognize an absolute value inequality",
+      "Set up the two cases",
+      "Solve each interval"
+    ]
+  },
+  {
+    "label": "Triangle inequality",
+    "section": "The triangle inequality",
+    "subgoals": [
+      "State the inequality",
+      "Apply it to bounds",
+      "Use it in proofs"
+    ]
+  },
+  {
+    "label": "Non-constant right side",
+    "section": "Inequalities with a non-constant right-hand side",
+    "subgoals": [
+      "Split by the sign of the right side",
+      "Solve the resulting cases",
+      "Unite the solutions"
+    ]
+  }
+]

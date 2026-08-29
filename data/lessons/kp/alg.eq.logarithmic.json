@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify a logarithmic equation",
+      "Combine logarithms",
+      "Exponentiate to solve"
+    ]
+  },
+  {
+    "label": "Simplified forms",
+    "section": "Simplified forms of logarithmic equations",
+    "subgoals": [
+      "Apply the product and quotient properties",
+      "Rewrite in exponential form",
+      "Solve the result"
+    ]
+  },
+  {
+    "label": "Check the domain",
+    "section": "",
+    "subgoals": [
+      "Verify arguments stay positive",
+      "Reject out-of-domain solutions",
+      "State the answer"
+    ]
+  }
+]

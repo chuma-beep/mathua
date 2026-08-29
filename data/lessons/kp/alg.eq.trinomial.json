@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are trinomial equations",
+    "section": "What are trinomial equations",
+    "subgoals": [
+      "Identify a trinomial equation",
+      "Recognize the three terms",
+      "Prepare to factor"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked example",
+      "Factor or use the formula",
+      "State the solutions"
+    ]
+  },
+  {
+    "label": "Practice the method",
+    "section": "",
+    "subgoals": [
+      "Set the trinomial to zero",
+      "Factor completely",
+      "Solve each factor"
+    ]
+  }
+]

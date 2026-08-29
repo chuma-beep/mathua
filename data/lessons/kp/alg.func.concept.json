@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a function",
+    "section": "What is a function",
+    "subgoals": [
+      "Match each input to one output",
+      "Recognize function notation",
+      "Identify the domain and codomain"
+    ]
+  },
+  {
+    "label": "What is not a function",
+    "section": "What is not a function",
+    "subgoals": [
+      "Detect multiple outputs for one input",
+      "Apply the vertical line test",
+      "Correct the relation"
+    ]
+  },
+  {
+    "label": "Codomain vs range",
+    "section": "Difference between codomain and range",
+    "subgoals": [
+      "Define the codomain",
+      "Find the range of outputs",
+      "Distinguish the two sets"
+    ]
+  }
+]

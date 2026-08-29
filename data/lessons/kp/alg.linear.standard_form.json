@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Standard form definition",
+    "section": "Standard Form Definition",
+    "subgoals": [
+      "Identify Ax + By = C",
+      "Keep A, B, C integers",
+      "Read the structure"
+    ]
+  },
+  {
+    "label": "Intercepts",
+    "section": "The Importance of $x$- and $y$-Intercepts",
+    "subgoals": [
+      "Find the x-intercept",
+      "Find the y-intercept",
+      "Graph from the intercepts"
+    ]
+  },
+  {
+    "label": "Transform forms",
+    "section": "Transforming between Standard Form and Slope-Intercept Form",
+    "subgoals": [
+      "Solve for y",
+      "Write slope-intercept form",
+      "Convert back"
+    ]
+  }
+]

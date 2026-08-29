@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the quadratic formula",
+      "Identify a, b, c",
+      "Substitute carefully"
+    ]
+  },
+  {
+    "label": "Discriminant",
+    "section": "Discriminant",
+    "subgoals": [
+      "Compute b^2 - 4ac",
+      "Classify the roots",
+      "Predict real or complex"
+    ]
+  },
+  {
+    "label": "Vieta's formulas",
+    "section": "Vieta's formulas",
+    "subgoals": [
+      "Relate roots to coefficients",
+      "Check a solution pair",
+      "Use roots to factor"
+    ]
+  }
+]

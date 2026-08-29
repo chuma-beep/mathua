@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define increasing and decreasing",
+      "Read monotonicity from a graph",
+      "State intervals"
+    ]
+  },
+  {
+    "label": "Derivatives and monotonicity",
+    "section": "Derivatives and monotonic behavior",
+    "subgoals": [
+      "Relate the sign of the derivative",
+      "Find critical points",
+      "Determine the intervals"
+    ]
+  },
+  {
+    "label": "Verify with values",
+    "section": "",
+    "subgoals": [
+      "Sample points in each interval",
+      "Compare function values",
+      "Confirm the classification"
+    ]
+  }
+]

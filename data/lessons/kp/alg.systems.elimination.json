@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Consistency criterion",
+    "section": "Statement of the theorem",
+    "subgoals": [
+      "Compute the rank",
+      "Compare with the augmented rank",
+      "Decide consistency"
+    ]
+  },
+  {
+    "label": "Geometric interpretation",
+    "section": "Geometric interpretation",
+    "subgoals": [
+      "Interpret rows as lines",
+      "See intersections",
+      "Classify the solutions"
+    ]
+  },
+  {
+    "label": "Parametric systems",
+    "section": "Discussion of a parametric system",
+    "subgoals": [
+      "Eliminate one variable",
+      "Solve for the other",
+      "State the parameter range"
+    ]
+  }
+]

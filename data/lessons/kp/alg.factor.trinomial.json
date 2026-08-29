@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a quadratic trinomial",
+      "Recognize the coefficients",
+      "Prepare to factor"
+    ]
+  },
+  {
+    "label": "Classification",
+    "section": "Classification of trinomials",
+    "subgoals": [
+      "Classify by leading coefficient",
+      "Choose the factoring method",
+      "Handle special cases"
+    ]
+  },
+  {
+    "label": "The discriminant",
+    "section": "The discriminant",
+    "subgoals": [
+      "Compute b^2 - 4ac",
+      "Read the root structure",
+      "Decide real vs complex"
+    ]
+  }
+]

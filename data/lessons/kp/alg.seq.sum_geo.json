@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a geometric series",
+    "section": "What is a geometric series",
+    "subgoals": [
+      "Identify the series terms",
+      "Find the common ratio",
+      "Prepare to sum"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked series",
+      "Apply the sum formula",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Determine the nature",
+    "section": "Determine the nature of the following series and compute their sum.",
+    "subgoals": [
+      "Test convergence by the ratio",
+      "Apply the infinite sum formula",
+      "State the limit"
+    ]
+  }
+]

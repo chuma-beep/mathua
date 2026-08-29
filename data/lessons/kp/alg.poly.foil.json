@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a binomial product",
+      "Prepare the four products",
+      "Write the sum"
+    ]
+  },
+  {
+    "label": "FOIL method",
+    "section": "Multiplying two binomials: The FOIL Method",
+    "subgoals": [
+      "Multiply the first terms",
+      "Multiply outer and inner",
+      "Add the last terms"
+    ]
+  },
+  {
+    "label": "Notable products",
+    "section": "Special cases: notable products",
+    "subgoals": [
+      "Recognize difference of squares",
+      "Recognize perfect squares",
+      "Expand quickly"
+    ]
+  }
+]

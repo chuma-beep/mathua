@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solving graphically",
+    "section": "Solving Inequalities Graphically",
+    "subgoals": [
+      "Graph the boundary line",
+      "Choose the half-plane",
+      "Shade the solution region"
+    ]
+  },
+  {
+    "label": "Absolute value and quadratic",
+    "section": "Solving Absolute Value and Quadratic Inequalities Graphically",
+    "subgoals": [
+      "Sketch the V or parabola",
+      "Identify the region",
+      "Shade correctly"
+    ]
+  },
+  {
+    "label": "Compound graphically",
+    "section": "Solving Compound Inequalities Graphically",
+    "subgoals": [
+      "Graph both parts",
+      "Intersect or union the regions",
+      "State the result"
+    ]
+  }
+]

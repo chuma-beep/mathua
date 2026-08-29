@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Behavior of a function",
+    "section": "Behavior of a function",
+    "subgoals": [
+      "Describe symmetry by eye",
+      "Test f(-x) versus f(x)",
+      "Classify the function"
+    ]
+  },
+  {
+    "label": "Even function",
+    "section": "Even function",
+    "subgoals": [
+      "State the even condition",
+      "Verify symmetry about the y-axis",
+      "Test with examples"
+    ]
+  },
+  {
+    "label": "Odd function",
+    "section": "Odd function",
+    "subgoals": [
+      "State the odd condition",
+      "Verify symmetry about the origin",
+      "Test with examples"
+    ]
+  }
+]

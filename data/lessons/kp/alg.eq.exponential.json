@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify an exponential equation",
+      "Match bases when possible",
+      "Solve by equal exponents"
+    ]
+  },
+  {
+    "label": "When bases differ",
+    "section": "When bases differ: solving with logarithms",
+    "subgoals": [
+      "Take logarithms of both sides",
+      "Apply the power property",
+      "Solve for the variable"
+    ]
+  },
+  {
+    "label": "Verify the solution",
+    "section": "",
+    "subgoals": [
+      "Substitute the solution back",
+      "Check both sides match",
+      "Reject extraneous values"
+    ]
+  }
+]

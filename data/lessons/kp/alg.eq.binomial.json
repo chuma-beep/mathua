@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are binomial equations",
+    "section": "What are binomial equations",
+    "subgoals": [
+      "Identify a binomial equation",
+      "Recognize the two-term form",
+      "Choose the degree-based strategy"
+    ]
+  },
+  {
+    "label": "Degree less than two",
+    "section": "Equations with a degree less than two",
+    "subgoals": [
+      "Solve the linear case",
+      "Solve the quadratic case",
+      "State the solutions"
+    ]
+  },
+  {
+    "label": "Degree greater than two",
+    "section": "Equations with a degree greater the than two",
+    "subgoals": [
+      "Factor the binomial",
+      "Use roots of unity",
+      "Collect all solutions"
+    ]
+  }
+]

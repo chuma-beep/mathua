@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a polynomial",
+      "Recognize the terms",
+      "Use standard notation"
+    ]
+  },
+  {
+    "label": "Degree",
+    "section": "Degree of a polynomial",
+    "subgoals": [
+      "Find the leading term",
+      "Read its exponent",
+      "State the degree"
+    ]
+  },
+  {
+    "label": "Interpolation and degree",
+    "section": "Interpolation and degree of a polynomial",
+    "subgoals": [
+      "Connect points to a polynomial",
+      "Expect degree-related freedom",
+      "Interpret the fit"
+    ]
+  }
+]

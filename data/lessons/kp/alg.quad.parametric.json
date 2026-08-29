@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify the parameter",
+      "Express the family",
+      "Prepare to analyze"
+    ]
+  },
+  {
+    "label": "Role of the discriminant",
+    "section": "The role of the discriminant",
+    "subgoals": [
+      "Compute the discriminant in terms of the parameter",
+      "Classify by parameter values",
+      "Find the boundary cases"
+    ]
+  },
+  {
+    "label": "Geometric interpretation",
+    "section": "Geometric interpretation of parameter changes",
+    "subgoals": [
+      "Shift the graph with the parameter",
+      "Stretch or flip",
+      "Describe the family"
+    ]
+  }
+]

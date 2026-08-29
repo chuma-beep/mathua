@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define the sign function",
+      "Classify inputs by sign",
+      "Read the piecewise form"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Apply the sign of a product",
+      "Apply the sign of a quotient",
+      "Simplify expressions"
+    ]
+  },
+  {
+    "label": "Limits at infinity",
+    "section": "Limits at infinity",
+    "subgoals": [
+      "Evaluate the sign at extremes",
+      "State the one-sided limits",
+      "Note the jump at zero"
+    ]
+  }
+]

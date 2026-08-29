@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Informal definition",
+    "section": "Informal Definition of a Function",
+    "subgoals": [
+      "Recognize the sequence terms",
+      "Identify the pattern",
+      "Prepare to sum"
+    ]
+  },
+  {
+    "label": "Tables and graphs",
+    "section": "Tables and Graphs",
+    "subgoals": [
+      "List the terms in a table",
+      "Read the pattern",
+      "Extend the sequence"
+    ]
+  },
+  {
+    "label": "Sum the arithmetic series",
+    "section": "",
+    "subgoals": [
+      "Pair first and last",
+      "Multiply by the term count",
+      "Divide by two"
+    ]
+  }
+]

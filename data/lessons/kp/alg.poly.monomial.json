@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a monomial",
+      "Recognize its coefficient",
+      "Recognize its variables"
+    ]
+  },
+  {
+    "label": "Non-negative exponents",
+    "section": "Why exponents in a monomial must be non-negative integers",
+    "subgoals": [
+      "Explain the exponent restriction",
+      "Spot invalid monomials",
+      "Keep the definition clean"
+    ]
+  },
+  {
+    "label": "Degree of a monomial",
+    "section": "Degree of a monomial",
+    "subgoals": [
+      "Sum the exponents",
+      "State the degree",
+      "Classify monomials"
+    ]
+  }
+]

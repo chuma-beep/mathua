@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is an inverse function",
+    "section": "What is an inverse function",
+    "subgoals": [
+      "Swap inputs and outputs",
+      "Solve for the new variable",
+      "Write f^-1"
+    ]
+  },
+  {
+    "label": "Restricting the domain",
+    "section": "Making a function invertible by restricting its domain",
+    "subgoals": [
+      "Find where the function is one-to-one",
+      "Restrict the domain",
+      "Define the inverse on it"
+    ]
+  },
+  {
+    "label": "Inverse function theorem",
+    "section": "Inverse function theorem",
+    "subgoals": [
+      "State the differentiability condition",
+      "Compute the inverse derivative",
+      "Apply to examples"
+    ]
+  }
+]

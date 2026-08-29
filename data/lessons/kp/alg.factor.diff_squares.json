@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Difference of squares",
+    "section": "Difference of Squares",
+    "subgoals": [
+      "Recognize a difference of squares",
+      "Write both square roots",
+      "Factor into the two binomials"
+    ]
+  },
+  {
+    "label": "Perfect square trinomials",
+    "section": "Perfect Square Trinomials",
+    "subgoals": [
+      "Recognize the pattern",
+      "Write the squared binomial",
+      "Verify the middle term"
+    ]
+  },
+  {
+    "label": "Factoring in stages",
+    "section": "Factoring in Stages",
+    "subgoals": [
+      "Factor out the GCF first",
+      "Apply difference of squares",
+      "Factor completely"
+    ]
+  }
+]

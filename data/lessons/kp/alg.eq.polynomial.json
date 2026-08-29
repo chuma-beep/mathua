@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a polynomial equation",
+      "Recognize the degree",
+      "Prepare to factor"
+    ]
+  },
+  {
+    "label": "Degree and classification",
+    "section": "Degree and classification",
+    "subgoals": [
+      "Classify by degree",
+      "Choose the solving strategy",
+      "Expect the degree's number of roots"
+    ]
+  },
+  {
+    "label": "Fundamental theorem",
+    "section": "The fundamental theorem of algebra",
+    "subgoals": [
+      "State the theorem",
+      "Count complex roots with multiplicity",
+      "Use it to guide solving"
+    ]
+  }
+]

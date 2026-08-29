@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify the linear form",
+      "Read slope and intercept",
+      "Prepare to analyze"
+    ]
+  },
+  {
+    "label": "One-variable linear equations",
+    "section": "Linear equations in one variable",
+    "subgoals": [
+      "Isolate the variable",
+      "Apply inverse operations",
+      "State the solution"
+    ]
+  },
+  {
+    "label": "Two-variable linear equations",
+    "section": "Linear equations in two variables",
+    "subgoals": [
+      "Identify solutions as points",
+      "Graph the line",
+      "Find intercepts"
+    ]
+  }
+]

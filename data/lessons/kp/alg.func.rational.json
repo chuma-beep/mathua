@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are rational functions",
+    "section": "What are rational functions",
+    "subgoals": [
+      "Identify a ratio of polynomials",
+      "Find the domain",
+      "Exclude zero denominators"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Locate vertical asymptotes",
+      "Find intercepts",
+      "Identify holes"
+    ]
+  },
+  {
+    "label": "Limits at infinity",
+    "section": "Limits at infinity for rational functions",
+    "subgoals": [
+      "Compare degrees",
+      "Find the horizontal asymptote",
+      "Describe end behavior"
+    ]
+  }
+]

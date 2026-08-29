@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Rewrite as an exponent",
+      "Match the base",
+      "Evaluate the log"
+    ]
+  },
+  {
+    "label": "Basic identities",
+    "section": "Basic identities",
+    "subgoals": [
+      "Evaluate log of 1",
+      "Evaluate log of the base",
+      "Evaluate powers"
+    ]
+  },
+  {
+    "label": "Properties of logarithms",
+    "section": "Properties of logarithms",
+    "subgoals": [
+      "Apply the product property",
+      "Apply the power property",
+      "Simplify evaluations"
+    ]
+  }
+]
