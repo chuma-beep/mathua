@@ -67,11 +67,16 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
         } else {
-          // Guest: ephemeral profile — activity/progress will be empty until first diagnostic/study
-          const activityRes = await getActivity().catch(() => [])
+          // Guest: fetch progress via ephemeral guest_id so Study answers are visible
+          const { getGuestId } = await import('../../lib/auth')
+          const guestId = getGuestId() || ''
+          const [activityRes, progressRes] = await Promise.all([
+            getActivity().catch(() => [] as DailyActivity[]),
+            guestId ? getProgress(guestId).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
+          ])
           setActivity(activityRes as DailyActivity[])
           setScores(null)
-          setProgress({})
+          setProgress(progressRes as Record<string, ConceptProgress>)
           setWeaknesses(null)
         }
       } catch (err) {

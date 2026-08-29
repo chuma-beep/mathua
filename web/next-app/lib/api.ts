@@ -595,6 +595,34 @@ export async function getLessonPractice(conceptId: string, count = 5): Promise<L
 	return res.json()
 }
 
+export interface StudyAnswerRes {
+	correct: boolean
+	feedback: string
+	explanation?: string
+	new_status?: string
+	streak?: number
+	required_streak?: number
+	xp: number
+	expected_answer?: string
+}
+
+export async function submitStudyAnswer(conceptId: string, answer: string, expected: string, elapsed: number): Promise<StudyAnswerRes> {
+	const { getGuestId } = await import('./auth')
+	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
+	const body: Record<string, unknown> = { concept_id: conceptId, answer, expected, elapsed }
+	const guestId = getGuestId()
+	if (guestId && !headers.Authorization) {
+		body.student_id = guestId
+	}
+	const res = await fetch(`${API_BASE}/api/study/answer`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) throw new Error(`Study answer failed: ${res.status}`)
+	return res.json() as Promise<StudyAnswerRes>
+}
+
 export interface DueReviewsRes {
 	count: number
 }
