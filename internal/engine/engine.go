@@ -32,6 +32,7 @@ type activeSession struct {
 	isReview       bool
 	answered       bool
 	attemptID      string
+	questionText   string
 	sessionReview  int
 	sessionNew     int
 	lastConceptID  string
@@ -240,7 +241,9 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.isReview = next.IsReview
 	as.answered = false
 	as.attemptID = newAttemptID()
+	as.questionText = prob.Question
 	e.sessions[sessionID] = as
+	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
 	var lesson *lessons.Lesson
 	if e.ll != nil {
@@ -312,7 +315,9 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.isReview = true
 	as.answered = false
 	as.attemptID = newAttemptID()
+	as.questionText = prob.Question
 	e.sessions[sessionID] = as
+	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
 	var lesson *lessons.Lesson
 	if e.ll != nil {
@@ -378,6 +383,12 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	defer e.mu.Unlock()
 
 	as := e.sessions[sessionID]
+	if as == nil {
+		if persisted := e.rehydrateActiveSession(sessionID, studentID); persisted != nil {
+			as = persisted
+			e.sessions[sessionID] = as
+		}
+	}
 	if as == nil || as.conceptID == "" || as.answered || as.attemptID != attemptID {
 		return nil, fmt.Errorf("%w for session %q", ErrNoActiveQuestion, sessionID)
 	}
@@ -528,6 +539,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	as.answered = true
 	as.attemptID = ""
 	as.conceptID = ""
+	as.questionText = ""
+	e.persistActiveSession(sessionID, studentID, as, "")
 
 	return &AnswerResult{
 		Correct:        gr.Correct,
@@ -743,7 +756,9 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
 	as.answered = false
 	as.attemptID = newAttemptID()
+	as.questionText = prob.Question
 	e.sessions[sessionID] = as
+	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
 	var lesson *lessons.Lesson
 	if e.ll != nil {
@@ -924,6 +939,94 @@ func newAttemptID() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
 	return hex.EncodeToString(b)
+}
+
+func (e *Engine) persistActiveSession(sessionID, studentID string, as *activeSession, questionText string) {
+	if e.repo == nil {
+		return
+	}
+	rec := &storage.ActiveSession{
+		SessionID:      sessionID,
+		StudentID:      studentID,
+		ConceptID:      as.conceptID,
+		ConceptName:    as.conceptName,
+		ExpectedAnswer: as.expectedAnswer,
+		AttemptID:      as.attemptID,
+		Question:       questionText,
+		Explanation:    as.explanation,
+		Diagram:        diagramForConcept(as.conceptID),
+		IsReview:       as.isReview,
+		Answered:       as.answered,
+	}
+	if err := e.repo.UpsertActiveSession(rec); err != nil {
+		log.Printf("warning: persist active session %s: %v", sessionID, err)
+	}
+}
+
+func (e *Engine) rehydrateActiveSession(sessionID, studentID string) *activeSession {
+	if e.repo == nil {
+		return nil
+	}
+	rec, err := e.repo.GetActiveSession(sessionID)
+	if err != nil {
+		log.Printf("warning: rehydrate session %s: %v", sessionID, err)
+		return nil
+	}
+	if rec == nil || rec.ConceptID == "" || rec.AttemptID == "" || rec.Answered {
+		return nil
+	}
+	if rec.StudentID != "" && rec.StudentID != studentID {
+		return nil
+	}
+	c := e.dag.Concept(rec.ConceptID)
+	timeThresh := 10.0
+	reqStreak := 0
+	if c != nil {
+		timeThresh = c.MasteryThreshold.AvgTimeSeconds
+		reqStreak = c.MasteryThreshold.Streak
+	}
+	return &activeSession{
+		conceptID:      rec.ConceptID,
+		conceptName:    rec.ConceptName,
+		expectedAnswer: rec.ExpectedAnswer,
+		explanation:    rec.Explanation,
+		requiredStreak: reqStreak,
+		timeThreshold:  timeThresh,
+		isReview:       rec.IsReview,
+		answered:       rec.Answered,
+		attemptID:      rec.AttemptID,
+		questionText:   rec.Question,
+	}
+}
+
+// GetCurrentQuestion returns the verbatim active question for the session
+// without advancing. Used for same-session auto-recovery on 409.
+func (e *Engine) GetCurrentQuestion(sessionID, studentID string) (*Question, error) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	as := e.sessions[sessionID]
+	if as == nil {
+		if persisted := e.rehydrateActiveSession(sessionID, studentID); persisted != nil {
+			as = persisted
+			e.sessions[sessionID] = as
+		}
+	}
+	if as == nil || as.conceptID == "" || as.answered || as.attemptID == "" || as.questionText == "" {
+		return nil, nil
+	}
+	var lesson *lessons.Lesson
+	if e.ll != nil {
+		lesson = e.ll.Lesson(as.conceptID)
+	}
+	return &Question{
+		ConceptID:   as.conceptID,
+		ConceptName: as.conceptName,
+		Question:    as.questionText,
+		IsReview:    as.isReview,
+		AttemptID:   as.attemptID,
+		Lesson:      lesson,
+		Diagram:     diagramForConcept(as.conceptID),
+	}, nil
 }
 
 func nowUTC() time.Time {

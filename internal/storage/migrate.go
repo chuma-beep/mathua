@@ -72,4 +72,22 @@ CREATE TABLE IF NOT EXISTS questions (
 );
 
 CREATE INDEX IF NOT EXISTS idx_questions_concept ON questions(concept_id);
+
+CREATE TABLE IF NOT EXISTS active_sessions (
+    session_id      TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
+    student_id      TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    concept_id      TEXT NOT NULL,
+    concept_name    TEXT NOT NULL DEFAULT '',
+    expected_answer TEXT NOT NULL,
+    attempt_id      TEXT NOT NULL UNIQUE,
+    question        TEXT NOT NULL,
+    explanation     TEXT NOT NULL DEFAULT '',
+    diagram         TEXT NOT NULL DEFAULT '',
+    is_review       INTEGER NOT NULL DEFAULT 0,
+    answered        INTEGER NOT NULL DEFAULT 0,
+    updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_active_sessions_student ON active_sessions(student_id);
+CREATE INDEX IF NOT EXISTS idx_active_sessions_attempt ON active_sessions(attempt_id);
 `

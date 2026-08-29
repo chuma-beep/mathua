@@ -87,6 +87,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 
 	mux.HandleFunc("/api/session", logRequest(cors(s.optionalAuthMiddleware(s.handleSession))))
+	mux.HandleFunc("/api/session/current", logRequest(cors(s.optionalAuthMiddleware(s.handleSessionCurrent))))
 	mux.HandleFunc("/api/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleAnswer))))
 	mux.HandleFunc("/api/progress/", logRequest(cors(s.optionalAuthMiddleware(s.handleProgress))))
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
@@ -230,6 +231,45 @@ func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, startSessionRes{StudentID: sid, SessionID: sess.ID, Question: q})
 }
 
+// GET /api/session/current?session_id=xxx — verbatim peek of the active question
+func (s *Server) handleSessionCurrent(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	sessionID := r.URL.Query().Get("session_id")
+	if sessionID == "" {
+		writeError(w, "session_id required", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		ses, _ := s.repo.GetSession(sessionID)
+		if ses != nil {
+			studentID = ses.StudentID
+		}
+	}
+	if studentID == "" {
+		writeError(w, "missing student id", 400)
+		return
+	}
+	ses, _ := s.repo.GetSession(sessionID)
+	if ses == nil {
+		writeError(w, "session not found", 404)
+		return
+	}
+	if ses.StudentID != studentID {
+		writeError(w, "session does not belong to student", 403)
+		return
+	}
+	q, err := s.eng.GetCurrentQuestion(sessionID, studentID)
+	if err != nil {
+		writeError(w, "failed to get current question", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"question": q})
+}
+
 // POST /api/answer
 type answerReq struct {
 	SessionID string  `json:"session_id"`
@@ -264,6 +304,11 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "missing student id", 400)
 		return
 	}
+	sesCheck, _ := s.repo.GetSession(req.SessionID)
+	if sesCheck != nil && sesCheck.StudentID != studentID {
+		writeError(w, "session does not belong to student", 403)
+		return
+	}
 	if req.Elapsed < MinAnswerSeconds {
 		writeError(w, "answer submitted too quickly", 400)
 		return
@@ -279,7 +324,8 @@ func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	next, err := s.eng.NextQuestion(req.SessionID, studentID)
 	if err != nil {
-		writeError(w, "failed to get next question", 500)
+		log.Printf("handleAnswer: NextQuestion failed for session %s: %v (returning result without next question)", req.SessionID, err)
+		writeJSON(w, answerRes{Result: result, NextQuestion: nil, Done: true})
 		return
 	}
 	writeJSON(w, answerRes{Result: result, NextQuestion: next, Done: next == nil})
@@ -1174,6 +1220,11 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "missing student id", 400)
 		return
 	}
+	sesCheck, _ := s.repo.GetSession(req.SessionID)
+	if sesCheck != nil && sesCheck.StudentID != studentID {
+		writeError(w, "session does not belong to student", 403)
+		return
+	}
 	if req.Elapsed < MinAnswerSeconds {
 		writeError(w, "answer submitted too quickly", 400)
 		return
@@ -1189,7 +1240,8 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	next, err := s.eng.NextReviewQuestion(req.SessionID, studentID)
 	if err != nil {
-		writeError(w, "failed to get next review question", 500)
+		log.Printf("handleReviewsAnswer: NextReviewQuestion failed for session %s: %v (returning result without next question)", req.SessionID, err)
+		writeJSON(w, answerRes{Result: result, NextQuestion: nil, Done: true})
 		return
 	}
 	writeJSON(w, answerRes{Result: result, NextQuestion: next, Done: next == nil})

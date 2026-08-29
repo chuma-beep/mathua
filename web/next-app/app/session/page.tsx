@@ -30,6 +30,10 @@ import {
   getDueReviews,
   startReviewSession,
   submitReviewAnswer,
+  getCurrentQuestion,
+  isConflictError,
+  isTooQuickError,
+  getErrorMessage,
   type Question,
   type AnswerResult,
   type Scores,
@@ -76,6 +80,8 @@ export default function SessionPage() {
   const [reviewDone, setReviewDone] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const submittingRef = useRef(false)
+  const [pendingNext, setPendingNext] = useState<Question | null>(null)
+  const sessionInflight = useRef<Promise<unknown> | null>(null)
 
    // Diagnostic state (guest mode)
   const [domains, setDomains] = useState<{ name: string; concepts: string[]; selected: boolean }[]>([])
@@ -92,28 +98,35 @@ export default function SessionPage() {
   const diagInputRef = useRef<HTMLInputElement>(null)
 
   const beginSessionAuth = useCallback(async () => {
-    setError('')
-    setLoading(true)
-    try {
-      const res = await startSession()
-      setStudentID(res.student_id)
-      setSessionID(res.session_id)
-      setQuestion(res.question)
-      setAttemptId(res.question?.attempt_id ?? '')
-      setScreen('practice')
-      setSubmitted(false)
-      setSessionStats({ correct: 0, total: 0 })
-      const s = await getScores(res.student_id).catch(() => null)
-      if (!s) console.error('getScores failed')
-      if (s) setScores(s)
-      getDueReviews().then(r => setDueReviews(r.count)).catch(() => console.error('getDueReviews failed'))
-    } catch {
-      clearToken()
-      setScreen('name')
-      setError('Session expired. Please log in again.')
-    } finally {
-      setLoading(false)
-    }
+    if (sessionInflight.current) { await sessionInflight.current; return }
+    const p: Promise<void> = (async () => {
+      setError('')
+      setLoading(true)
+      try {
+        const res = await startSession()
+        setStudentID(res.student_id)
+        setSessionID(res.session_id)
+        setQuestion(res.question)
+        setAttemptId(res.question?.attempt_id ?? '')
+        setPendingNext(null)
+        setScreen('practice')
+        setSubmitted(false)
+        setSessionStats({ correct: 0, total: 0 })
+        const s = await getScores(res.student_id).catch(() => null)
+        if (!s) console.error('getScores failed')
+        if (s) setScores(s)
+        getDueReviews().then(r => setDueReviews(r.count)).catch(() => console.error('getDueReviews failed'))
+      } catch {
+        clearToken()
+        setScreen('name')
+        setError('Session expired. Please log in again.')
+      } finally {
+        setLoading(false)
+        sessionInflight.current = null
+      }
+    })()
+    sessionInflight.current = p
+    await p
   }, [])
 
   useEffect(() => {
@@ -166,6 +179,7 @@ export default function SessionPage() {
       setSessionID(res.session_id)
       setQuestion(res.question)
       setAttemptId(res.question?.attempt_id ?? '')
+      setPendingNext(null)
       setScreen('practice')
       setSubmitted(false)
       setSessionStats({ correct: 0, total: 0 })
@@ -193,26 +207,63 @@ export default function SessionPage() {
         }))
       }
       if (res.next_question) {
-        setQuestion(res.next_question)
-        setAttemptId(res.next_question.attempt_id ?? '')
+        setPendingNext(res.next_question)
       } else {
-        setQuestion(null)
-        setAttemptId('')
+        setPendingNext(null)
+        // keep current question visible until user acknowledges completion
       }
       const s = await getScores(studentID).catch(() => null)
       if (s) setScores(s)
-    } catch {
-      setError('Failed to submit answer. If you answered in another tab, refresh to continue.')
+    } catch (err: unknown) {
+      if (isConflictError(err)) {
+        // Same session_id but token stale (server restart, other tab advanced) —
+        // recover the current question without minting a new session.
+        try {
+          const cur = await getCurrentQuestion(sessionID)
+          if (cur) {
+            setQuestion(cur)
+            setAttemptId(cur.attempt_id ?? '')
+            setPendingNext(null)
+            setError('Session was refreshed — please try again.')
+            return
+          }
+        } catch { /* fall through */ }
+      }
+      if (isTooQuickError(err)) {
+        setError('You answered too quickly — please wait a moment and try again.')
+        return
+      }
+      const msg = getErrorMessage(err)
+      if (msg.includes('session does not belong') || msg.includes('missing student')) {
+        setError('Session expired — please refresh to start a new session.')
+      } else if (msg.includes('failed to submit')) {
+        setError('Server error while submitting — please try again.')
+      } else {
+        setError('Failed to submit answer. If you answered in another tab, refresh to continue.')
+      }
     } finally {
       submittingRef.current = false
     }
   }, [answer, question, attemptId, sessionID, studentID])
 
   const nextQuestion = useCallback(() => {
+    if (pendingNext) {
+      setQuestion(pendingNext)
+      setAttemptId(pendingNext.attempt_id ?? '')
+      setPendingNext(null)
+      startRef.current = Date.now()
+    } else if (submitted && question) {
+      // done: no next_question (completion) — clear to show "all mastered"
+      setQuestion(null)
+      setAttemptId('')
+      setPendingNext(null)
+    } else if (!question) {
+      setAttemptId('')
+    }
     setLastResult(null)
     setSubmitted(false)
     setAnswer('')
-  }, [])
+  }, [pendingNext, question, submitted])
 
   const beginReviewSession = useCallback(async () => {
     setError('')
@@ -222,6 +273,7 @@ export default function SessionPage() {
       setReviewSessionID(res.session_id)
       setQuestion(res.question)
       setAttemptId(res.question?.attempt_id ?? '')
+      setPendingNext(null)
       setScreen('review')
       setSubmitted(false)
       setReviewStats({ correct: 0, total: 0 })
@@ -250,17 +302,37 @@ export default function SessionPage() {
         }))
       }
       if (res.next_question) {
-        setQuestion(res.next_question)
-        setAttemptId(res.next_question.attempt_id ?? '')
+        setPendingNext(res.next_question)
       } else {
-        setQuestion(null)
-        setAttemptId('')
-        setReviewDone(true)
+        setPendingNext(null)
       }
       const s = await getScores(studentID).catch(() => null)
       if (s) setScores(s)
-    } catch {
-      setError('Failed to submit review answer. If you answered in another tab, refresh to continue.')
+    } catch (err: unknown) {
+      if (isConflictError(err)) {
+        try {
+          const cur = await getCurrentQuestion(reviewSessionID)
+          if (cur) {
+            setQuestion(cur)
+            setAttemptId(cur.attempt_id ?? '')
+            setPendingNext(null)
+            setError('Session was refreshed — please try again.')
+            return
+          }
+        } catch { /* fall through */ }
+      }
+      if (isTooQuickError(err)) {
+        setError('You answered too quickly — please wait a moment and try again.')
+        return
+      }
+      const msg = getErrorMessage(err)
+      if (msg.includes('session does not belong') || msg.includes('missing student')) {
+        setError('Session expired — please refresh to start a new session.')
+      } else if (msg.includes('failed to submit')) {
+        setError('Server error while submitting review — please try again.')
+      } else {
+        setError('Failed to submit review answer. If you answered in another tab, refresh to continue.')
+      }
     } finally {
       submittingRef.current = false
     }
@@ -272,11 +344,31 @@ export default function SessionPage() {
       setReviewDone(false)
       return
     }
+    if (pendingNext) {
+      setQuestion(pendingNext)
+      setAttemptId(pendingNext.attempt_id ?? '')
+      setPendingNext(null)
+      startRef.current = Date.now()
+      setLastResult(null)
+      setSubmitted(false)
+      setAnswer('')
+      return
+    }
+    if (submitted && question && !pendingNext) {
+      // review done: staged completion
+      setQuestion(null)
+      setAttemptId('')
+      setReviewDone(true)
+      setLastResult(null)
+      setSubmitted(false)
+      setAnswer('')
+      return
+    }
     setLastResult(null)
     setSubmitted(false)
     setAnswer('')
     startRef.current = Date.now()
-  }, [reviewDone])
+  }, [pendingNext, reviewDone, submitted, question])
 
   // Guest diagnostic logic
   const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
@@ -533,6 +625,8 @@ export default function SessionPage() {
                       setStudentID(sessData.student_id)
                       setSessionID(sessData.session_id)
                       setQuestion(sessData.question)
+                      setAttemptId(sessData.question?.attempt_id ?? '')
+                      setPendingNext(null)
                       setScreen('practice')
                       getScores(guestStudentID.current).then(setScores).catch(() => {})
                     } catch { setError('Could not start practice') }

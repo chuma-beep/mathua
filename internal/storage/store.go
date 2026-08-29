@@ -47,6 +47,21 @@ type Session struct {
 	StartedAt time.Time
 }
 
+type ActiveSession struct {
+	SessionID      string
+	StudentID      string
+	ConceptID      string
+	ConceptName    string
+	ExpectedAnswer string
+	AttemptID      string
+	Question       string
+	Explanation    string
+	Diagram        string
+	IsReview       bool
+	Answered       bool
+	UpdatedAt      time.Time
+}
+
 type AttemptEntry struct {
 	SessionID      string
 	StudentID      string
@@ -97,6 +112,9 @@ type Repository interface {
 
 	CreateSession(studentID string) (*Session, error)
 	GetSession(id string) (*Session, error)
+	GetActiveSession(sessionID string) (*ActiveSession, error)
+	UpsertActiveSession(a *ActiveSession) error
+	DeleteActiveSession(sessionID string) error
 	RecordAttempt(entry AttemptEntry) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 
