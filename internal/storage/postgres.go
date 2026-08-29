@@ -96,6 +96,14 @@ func (s *PostgresStore) UpdateSettings(studentID string, settings string) error 
 	return fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) GetLeagueStandings() ([]LeagueMember, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
+func (s *PostgresStore) SetLeague(studentID, tier, week string, moved int) error {
+	return fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) GetDailyActivity(studentID string, days int) ([]DailyActivity, error) {
 	return nil, fmt.Errorf("not implemented")
 }

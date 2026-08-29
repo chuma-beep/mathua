@@ -1141,6 +1141,10 @@ func (e *Engine) GetLeaderboard() ([]leaderboard.Entry, error) {
 	return e.lboard.Weekly()
 }
 
+func (e *Engine) GetLeagues() (*leaderboard.LeagueBoard, error) {
+	return leaderboard.Standings(e.repo, nowUTC())
+}
+
 func (e *Engine) StartDiagnostic() *diagnostic.Session {
 	return e.diag.Start()
 }

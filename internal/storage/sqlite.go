@@ -55,6 +55,9 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN diagnostic_completed INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
+		"ALTER TABLE students ADD COLUMN league TEXT NOT NULL DEFAULT 'bronze'",
+		"ALTER TABLE students ADD COLUMN league_week TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN league_moved INTEGER NOT NULL DEFAULT 0",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN last_concept_id TEXT NOT NULL DEFAULT ''",
@@ -112,9 +115,10 @@ func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student,
 func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) {
 	var st Student
 	var username, passwordHash, courseID, xpDate, settings sql.NullString
-	var xpTotal, xpToday, diagCompleted, dailyGoal sql.NullInt64
+	var xpTotal, xpToday, diagCompleted, dailyGoal, leagueMoved sql.NullInt64
+	var league, leagueWeek sql.NullString
 	var createdAt string
-	err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &settings, &createdAt)
+	err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &settings, &createdAt, &league, &leagueWeek, &leagueMoved)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -139,6 +143,14 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 	if st.Settings == "" {
 		st.Settings = "{}"
 	}
+	st.League = league.String
+	if st.League == "" {
+		st.League = "bronze"
+	}
+	st.LeagueWeek = leagueWeek.String
+	if leagueMoved.Valid {
+		st.LeagueMoved = int(leagueMoved.Int64)
+	}
 	if createdAt != "" {
 		st.CreatedAt, err = time.Parse(time.RFC3339, createdAt)
 		if err != nil {
@@ -149,12 +161,12 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 }
 
 func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at FROM students WHERE id = ?", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved FROM students WHERE id = ?", id)
 	return scanStudent(row)
 }
 
 func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at FROM students WHERE username = ?", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved FROM students WHERE username = ?", username)
 	return scanStudent(row)
 }
 
@@ -561,6 +573,51 @@ func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 		out = append(out, r)
 	}
 	return out, rows.Err()
+}
+
+// GetLeagueStandings returns every student's league tier + weekly mastered
+// (partitioned into tiers by the caller).
+func (s *SQLiteStore) GetLeagueStandings() ([]LeagueMember, error) {
+	monday := weekStart(time.Now().UTC())
+	rows, err := s.db.Query(`
+		SELECT s.id, s.name, COALESCE(s.league, 'bronze'), s.league_moved,
+			COALESCE((SELECT COUNT(*) FROM concept_progress
+			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
+			COALESCE((SELECT COUNT(*) FROM concept_progress
+			          WHERE student_id = s.id AND status = 'MASTERED'
+			          AND mastered_at >= ?), 0)
+		FROM students s
+	`, monday.Format(time.RFC3339))
+	if err != nil {
+		return nil, fmt.Errorf("get league standings: %w", err)
+	}
+	defer rows.Close()
+
+	var out []LeagueMember
+	for rows.Next() {
+		var m LeagueMember
+		var moved int
+		if err := rows.Scan(&m.StudentID, &m.Name, &m.Tier, &moved, &m.TotalMastered, &m.WeeklyMastered); err != nil {
+			return nil, fmt.Errorf("scan league member: %w", err)
+		}
+		m.Moved = moved
+		if m.Tier == "" {
+			m.Tier = "bronze"
+		}
+		out = append(out, m)
+	}
+	return out, rows.Err()
+}
+
+func (s *SQLiteStore) SetLeague(studentID, tier, week string, moved int) error {
+	_, err := s.db.Exec(
+		"UPDATE students SET league = ?, league_week = ?, league_moved = ? WHERE id = ?",
+		tier, week, moved, studentID,
+	)
+	if err != nil {
+		return fmt.Errorf("set league: %w", err)
+	}
+	return nil
 }
 
 // DailyActivity
