@@ -465,18 +465,89 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 }
 
 var conceptDiagrams = map[string]string{
-	// Integrals
-	"calc.integral.definite":          "/diagrams/algebrica/definite-integrals-1.svg",
-	"calc.integral.ftc":               "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
-	"calc.integral.area_between":      "/diagrams/algebrica/finding-areas-by-integration-1.svg",
-	"calc.integral.volume":            "/diagrams/algebrica/finding-areas-by-integration-2.svg",
+	// Integrals (dual-coding worked examples, improve.md:39)
+	"calc.integral.definite":           "/diagrams/algebrica/definite-integrals-1.svg",
+	"calc.integral.ftc":                "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
+	"calc.integral.area_between":       "/diagrams/algebrica/finding-areas-by-integration-1.svg",
+	"calc.integral.volume":             "/diagrams/algebrica/finding-areas-by-integration-2.svg",
+	"calc.integral.improper":           "/diagrams/algebrica/improper-integrals-1.svg",
+	"calc.integral.numerical":          "/diagrams/algebrica/improper-integrals-2.svg",
+	"calc.integral.riemann_criteria":   "/diagrams/algebrica/riemann-integrability-criteria-2.svg",
+	"calc.integral.arc_length":         "/diagrams/algebrica/arc-length-of-a-curve-1.svg",
+	"calc.integral.trig_substitution":  "/diagrams/algebrica/trigonometric-substitution-for-integrals-1.svg",
 
-	// Equations
-	"alg.quad.solve_factor": "/diagrams/algebrica/quadratic-equations.svg",
-	"alg.quad.formula":      "/diagrams/algebrica/quadratic-equations.svg",
-	// Calculus limits
-	"calc.limit.continuity":  "/diagrams/algebrica/riemann-integrability-criteria-1.svg",
-	"calc.integral.improper": "/diagrams/algebrica/improper-integrals-1.svg",
+	// Limits
+	"calc.limit.continuity": "/diagrams/algebrica/riemann-integrability-criteria-1.svg",
+	"calc.limit.supremum":   "/diagrams/algebrica/supremum-and-infimum-1.svg",
+
+	// Equations / quadratics
+	"alg.quad.solve_factor":   "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.formula":        "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.quadratic":      "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.incomplete":     "/diagrams/algebrica/incomplete-quadratic-equations.svg",
+	"alg.quad.complete_square": "/diagrams/algebrica/completing-square.svg",
+
+	// Linear / polynomials
+	"alg.linear.graph":            "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.linear.slope":            "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.linear.slope_intercept":  "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.poly.roots":              "/diagrams/algebrica/polynomial-roots-graph.svg",
+
+	// Number lines / sets
+	"arith.neg.abs_value":     "/diagrams/algebrica/number-line-absolute-value.svg",
+	"alg.ineq.absolute_value": "/diagrams/algebrica/number-line-absolute-value.svg",
+	"alg.ineq.interval":       "/diagrams/algebrica/number-line-intervals.svg",
+	"prealg.real.concept":     "/diagrams/algebrica/number-line-real.svg",
+	"prealg.types":            "/diagrams/algebrica/number-types-venn.svg",
+
+	// Complex
+	"complex.basics.concept": "/diagrams/algebrica/complex-plane.svg",
+	"complex.adv.polar":      "/diagrams/algebrica/complex-plane.svg",
+
+	// Trigonometry
+	"trig.hyperbolic.sinh_cosh": "/diagrams/algebrica/hyperbolic-functions.svg",
+	"trig.hyperbolic.tanh_coth": "/diagrams/algebrica/hyperbolic-functions.svg",
+	"trig.adv.inverse":          "/diagrams/algebrica/inverse-trig-graphs.svg",
+	"trig.adv.arctan":           "/diagrams/algebrica/inverse-trig-graphs.svg",
+	"trig.adv.law_cosines":      "/diagrams/algebrica/law-of-cosines.svg",
+	"trig.adv.law_sines":        "/diagrams/algebrica/law-of-sines.svg",
+	"geo.triangle.pythagorean":     "/diagrams/algebrica/pythagorean-theorem.svg",
+	"trig.ident.pythagorean":       "/diagrams/algebrica/pythagorean-theorem.svg",
+	"trig.basics.reference_angle": "/diagrams/algebrica/reference-angles.svg",
+	"trig.basics.right_triangle":  "/diagrams/algebrica/right-triangle-trig.svg",
+	"trig.basics.sin_cos_def":     "/diagrams/algebrica/right-triangle-unit-circle.svg",
+	"trig.basics.radians":         "/diagrams/algebrica/unit-circle-sine-cosine.svg",
+	"trig.basics.tan_def":         "/diagrams/algebrica/unit-circle-tangent.svg",
+	"trig.basics.reciprocal":      "/diagrams/algebrica/sec-csc-cot-graphs.svg",
+	"trig.basics.unit_circle":     "/diagrams/algebrica/unit-circle-labeled.svg",
+	"trig.basics.special_angles":  "/diagrams/algebrica/unit-circle-labeled.svg",
+	"trig.graph.sin":              "/diagrams/algebrica/sine-cosine-graph.svg",
+	"trig.graph.cos":              "/diagrams/algebrica/sine-cosine-graph.svg",
+	"trig.graph.period":           "/diagrams/algebrica/sine-cosine-graph.svg",
+
+	// Combinatorics
+	"discrete.combinatorics.pascal":          "/diagrams/algebrica/pascals-triangle.svg",
+	"discrete.combinatorics.binomial_theorem": "/diagrams/algebrica/pascals-triangle.svg",
+	"precalc.binomial_theorem":                "/diagrams/algebrica/pascals-triangle.svg",
+
+	// Vectors
+	"linalg.vector.add":     "/diagrams/algebrica/vector-addition.svg",
+	"linalg.vector.dot":     "/diagrams/algebrica/vector-addition.svg",
+	"linalg.vector.concept": "/diagrams/algebrica/vector-arrow.svg",
+
+	// Conics / sequences / stats (PNG assets)
+	"alg.conic.circle":    "/diagrams/algebrica/conic-circle-1.png",
+	"alg.conic.ellipse":   "/diagrams/algebrica/ellipse-1.png",
+	"alg.conic.hyperbola": "/diagrams/algebrica/hyperbola-1.png",
+	"alg.conic.parabola":  "/diagrams/algebrica/parabola-1.png",
+	"alg.seq.arithmetic":  "/diagrams/algebrica/arithmetic-sequence.png",
+	"alg.seq.geometric":   "/diagrams/algebrica/geometri-sequence-1.png",
+	"stat.dist.normal":    "/diagrams/algebrica/normal-distribution-1.png",
+}
+
+// DiagramFor exposes the dual-coding diagram for a concept (exported for API).
+func (e *Engine) DiagramFor(conceptID string) string {
+	return diagramForConcept(conceptID)
 }
 
 func diagramForConcept(id string) string {
