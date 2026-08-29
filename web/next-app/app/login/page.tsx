@@ -162,7 +162,7 @@ export default function LoginPage() {
         dispatch({ type: 'SET_LOADING', loading: false })
         return
       }
-      push(res.diagnostic_completed ? '/session' : '/onboard')
+      push('/profile')
     } catch (e: any) {
       dispatch({ type: 'SET_ERROR', error: e.message || 'Authentication failed' })
     } finally { dispatch({ type: 'SET_LOADING', loading: false }) }
@@ -249,7 +249,7 @@ export default function LoginPage() {
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="mt-3 text-center">
-              <Link href="/session" className="text-mathua-muted text-xs hover:text-mathua-secondary">
+              <Link href="/profile" className="text-mathua-muted text-xs hover:text-mathua-secondary">
                 Skip for now: try without account
               </Link>
             </div>

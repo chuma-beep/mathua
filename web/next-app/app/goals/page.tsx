@@ -221,7 +221,7 @@ export default function GoalsPage() {
   }
 
   function startPractice() {
-    push('/session')
+    push('/profile')
   }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
