@@ -100,6 +100,15 @@ type DailyActivity struct {
 	Concepts  []string `json:"concepts"`
 }
 
+type TopicSpeed struct {
+	StudentID     string  `json:"student_id"`
+	ConceptID     string  `json:"concept_id"`
+	EFactor       float64 `json:"efactor"`
+	Interval      int     `json:"interval"`
+	Repetitions   int     `json:"repetitions"`
+	LearningSpeed float64 `json:"learning_speed"`
+}
+
 // Repository interface
 
 type Repository interface {
@@ -135,6 +144,10 @@ type Repository interface {
 	SetDailyXPGoal(studentID string, goal int) error
 	GetSettings(studentID string) (string, error)
 	UpdateSettings(studentID string, settings string) error
+
+	GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error)
+	GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error)
+	UpsertTopicSpeed(ts *TopicSpeed) error
 
 	Migrate() error
 	Close() error

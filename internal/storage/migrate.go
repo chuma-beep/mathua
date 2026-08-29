@@ -93,4 +93,17 @@ CREATE TABLE IF NOT EXISTS active_sessions (
 
 CREATE INDEX IF NOT EXISTS idx_active_sessions_student ON active_sessions(student_id);
 CREATE INDEX IF NOT EXISTS idx_active_sessions_attempt ON active_sessions(attempt_id);
+
+CREATE TABLE IF NOT EXISTS student_topic_speed (
+    student_id    TEXT NOT NULL,
+    concept_id    TEXT NOT NULL,
+    efactor       REAL NOT NULL DEFAULT 2.5,
+    interval      INTEGER NOT NULL DEFAULT 0,
+    repetitions   INTEGER NOT NULL DEFAULT 0,
+    learning_speed REAL NOT NULL DEFAULT 1.0,
+    updated_at    TEXT NOT NULL DEFAULT (datetime('now')),
+    PRIMARY KEY (student_id, concept_id),
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
 `

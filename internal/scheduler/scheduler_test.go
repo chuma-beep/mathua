@@ -59,6 +59,49 @@ func TestSM2_EFactorFloor(t *testing.T) {
 	}
 }
 
+// PR 1.2 student model: learningSpeed scales intervals (0.7 slow vs 1.5 fast)
+func TestSM2WithSpeed_SlowShrinksInterval(t *testing.T) {
+	prev := SM2{Repetitions: 1, EFactor: 2.5, Interval: 1}
+	slow := ComputeSM2WithSpeed(prev, 5, 0.7)
+	if slow.Interval != 4 {
+		t.Errorf("expected slow interval 4 (6*0.7=4.2 rounded), got %d", slow.Interval)
+	}
+}
+
+func TestSM2WithSpeed_FastGrowsInterval(t *testing.T) {
+	prev := SM2{Repetitions: 1, EFactor: 2.5, Interval: 1}
+	fast := ComputeSM2WithSpeed(prev, 5, 1.5)
+	if fast.Interval != 9 {
+		t.Errorf("expected fast interval 9 (6*1.5), got %d", fast.Interval)
+	}
+}
+
+func TestSM2WithSpeed_Clamps(t *testing.T) {
+	prev := SM2{Repetitions: 1, EFactor: 2.5, Interval: 1}
+	if got := ComputeSM2WithSpeed(prev, 5, 0.1).Interval; got < 1 {
+		t.Errorf("expected min interval >= 1, got %d", got)
+	}
+	// speed clamped to 2.0 → 6*2.0 = 12
+	if got := ComputeSM2WithSpeed(prev, 5, 9.9).Interval; got != 12 {
+		t.Errorf("expected speed clamp to 2.0 → interval 12, got %d", got)
+	}
+}
+
+func TestUpdateLearningSpeed_ReactsToPerformance(t *testing.T) {
+	// fast + streak grows
+	if got := UpdateLearningSpeed(1.0, true, 0.5, 3); got <= 1.0 {
+		t.Errorf("expected speed to grow for fast streak, got %f", got)
+	}
+	// slow but correct drifts slightly up
+	if got := UpdateLearningSpeed(1.0, true, 1.2, 1); got >= 1.0 {
+		t.Errorf("expected speed to fall for slow correct, got %f", got)
+	}
+	// wrong drops
+	if got := UpdateLearningSpeed(1.0, false, 0.5, 0); got >= 1.0 {
+		t.Errorf("expected speed to drop on incorrect, got %f", got)
+	}
+}
+
 // Scheduler tests
 
 func miniDAG(t *testing.T) *concepts.DAG {
