@@ -219,6 +219,17 @@ export default function ProfilePage() {
         {/* Profile stats — mobile-first */}
         <ProfileStats name={user.name} scores={scores} />
 
+        {scores.paused_until && (
+          <div className="mt-6 border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="font-mono text-xs text-mathua-primary min-w-0 truncate">
+              ⏸ Paused until {scores.paused_until} — due reviews are hidden
+            </p>
+            <Link href="/settings" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+              Resume
+            </Link>
+          </div>
+        )}
+
         {/* Diagnostic CTA — both authed and guest via profile */}
         <section className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="min-w-0">

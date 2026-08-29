@@ -208,6 +208,7 @@ export interface Scores {
   daily_xp_goal: number
   spaced_reps?: Record<string, number>
   avg_learning_speed?: number
+  paused_until?: string
 }
 
 export interface ConceptProgress {
@@ -507,6 +508,7 @@ export async function getWeaknesses(): Promise<WeaknessRes> {
 
 export interface UserSettings {
 	show_timer?: boolean
+	pause_until?: string | null
 }
 
 export async function getSettings(): Promise<UserSettings> {

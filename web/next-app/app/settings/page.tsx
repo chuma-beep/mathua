@@ -48,6 +48,28 @@ export default function SettingsPage() {
     }
   }
 
+  const handlePause = async (days: number | null) => {
+    const next: UserSettings = { ...settings }
+    if (days === null) {
+      next.pause_until = null
+    } else {
+      const d = new Date()
+      d.setUTCDate(d.getUTCDate() + days)
+      next.pause_until = d.toISOString().slice(0, 10)
+    }
+    setSettings(next)
+    setSaved(false)
+    try {
+      await updateSettings(next)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 2000)
+    } catch {
+      console.error('updateSettings failed')
+    }
+  }
+
+  const paused = !!settings.pause_until
+
   if (loading) {
     return (
       <>
@@ -91,6 +113,35 @@ export default function SettingsPage() {
                   onCheckedChange={handleCheckedChange}
                   aria-label="Toggle answer timer"
                 />
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Pause learning</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  {paused
+                    ? `Paused until ${settings.pause_until}. Due reviews are hidden while paused.`
+                    : 'Take a break for 30, 60, or 90 days. Due reviews are hidden while paused.'}
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {[30, 60, 90].map(d => (
+                    <button
+                      key={d}
+                      onClick={() => handlePause(d)}
+                      disabled={paused && settings.pause_until !== null}
+                      className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono disabled:opacity-40"
+                    >
+                      Pause {d} days
+                    </button>
+                  ))}
+                  {paused && (
+                    <button
+                      onClick={() => handlePause(null)}
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono"
+                    >
+                      Resume now
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 

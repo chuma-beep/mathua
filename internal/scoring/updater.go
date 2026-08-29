@@ -1,6 +1,7 @@
 package scoring
 
 import (
+	"encoding/json"
 	"math"
 	"time"
 
@@ -22,6 +23,7 @@ type Scores struct {
 	DailyXPGoal       int                 `json:"daily_xp_goal"`
 	SpacedReps        map[string]float64  `json:"spaced_reps,omitempty"`
 	AvgLearningSpeed  float64             `json:"avg_learning_speed"`
+	PausedUntil       string              `json:"paused_until,omitempty"`
 }
 
 type Updater struct {
@@ -97,7 +99,27 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		DailyXPGoal:       dailyGoal,
 		SpacedReps:        spacedReps,
 		AvgLearningSpeed:  math.Round(avgSpeed*100) / 100,
+		PausedUntil:       pausedUntil(u, studentID),
 	}, nil
+}
+
+// pausedUntil reads settings.pause_until (ISO date) if still in the future.
+func pausedUntil(u *Updater, studentID string) string {
+	raw, err := u.repo.GetSettings(studentID)
+	if err != nil || raw == "" || raw == "{}" {
+		return ""
+	}
+	var cfg struct {
+		PauseUntil string `json:"pause_until"`
+	}
+	if json.Unmarshal([]byte(raw), &cfg) != nil || cfg.PauseUntil == "" {
+		return ""
+	}
+	t, err := time.Parse("2006-01-02", cfg.PauseUntil)
+	if err != nil || t.Before(time.Now().UTC()) {
+		return ""
+	}
+	return cfg.PauseUntil
 }
 
 func computeSpeedBonus(p *storage.ConceptProgress) float64 {
