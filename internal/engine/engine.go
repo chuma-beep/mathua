@@ -3,6 +3,7 @@ package engine
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"hash/fnv"
 	"log"
@@ -39,6 +40,12 @@ type activeSession struct {
 	sessionNew     int
 	lastConceptID  string
 	recentConcepts []string
+	// PR 1.5 halt/re-attempt + negative XP
+	consecutiveMisses int
+	halted            bool
+	remedialQueue     []string
+	remedialDifficulty float64
+	rushCount         int
 }
 
 // ErrNoActiveQuestion is returned when a session has no unanswered question
@@ -64,6 +71,8 @@ type AnswerResult struct {
 	RequiredStreak int            `json:"required_streak"`
 	XP             int            `json:"xp"`
 	ExpectedAnswer string         `json:"expected_answer"`
+	Halted         bool           `json:"halted,omitempty"`
+	Remedial       []string       `json:"remedial,omitempty"`
 }
 
 type Engine struct {
@@ -82,6 +91,10 @@ type Engine struct {
 	mu         sync.Mutex
 	sessions   map[string]*activeSession
 	activePath map[string]map[string]bool
+	// PR 1.5: study-path consecutive-miss tracker (studentID|conceptID → count)
+	studyMisses map[string]int
+	// PR 1.5: stable per-student session id for study/quiz attempt FK.
+	studySessions map[string]string
 }
 
 func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner) *Engine {
@@ -97,8 +110,10 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		diag:       diagnostic.NewEngine(dag, reg),
 		ll:         ll,
 		planner:    planner,
-		sessions:   make(map[string]*activeSession),
-		activePath: make(map[string]map[string]bool),
+		sessions:      make(map[string]*activeSession),
+		activePath:    make(map[string]map[string]bool),
+		studyMisses:   make(map[string]int),
+		studySessions: make(map[string]string),
 	}
 }
 
@@ -174,6 +189,34 @@ func (e *Engine) computeDifficulty(studentID, conceptID string) float64 {
 	return d
 }
 
+// accommodatedThreshold applies the student's accommodations
+// (settings.accommodations.extra_time 0-2.0 → 1.0-2.5x) to a time threshold.
+func (e *Engine) accommodatedThreshold(studentID string, base float64) float64 {
+	if base <= 0 {
+		return base
+	}
+	if e.repo == nil {
+		return base
+	}
+	raw, err := e.repo.GetSettings(studentID)
+	if err != nil || raw == "" || raw == "{}" {
+		return base
+	}
+	var cfg struct {
+		Accommodations struct {
+			ExtraTime float64 `json:"extra_time"`
+		} `json:"accommodations"`
+	}
+	if json.Unmarshal([]byte(raw), &cfg) != nil || cfg.Accommodations.ExtraTime <= 0 {
+		return base
+	}
+	m := 1.0 + cfg.Accommodations.ExtraTime
+	if m > 2.5 {
+		m = 2.5
+	}
+	return base * m
+}
+
 func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	progress, err := e.repo.GetAllProgress(studentID)
 	if err != nil {
@@ -226,6 +269,54 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	if as == nil {
 		as = &activeSession{}
 	}
+
+	// PR 1.5 halt: after 2 consecutive misses, serve the remedial queue first
+	// (KeyPrerequisites then the concept at an easier variant) before resuming.
+	if as.halted && len(as.remedialQueue) > 0 {
+		cid := as.remedialQueue[0]
+		as.remedialQueue = as.remedialQueue[1:]
+		if len(as.remedialQueue) == 0 {
+			as.halted = false
+		}
+		as.answered = false
+		as.attemptID = newAttemptID()
+		as.conceptID = cid
+		c := e.dag.Concept(cid)
+		if c == nil {
+			return nil, nil
+		}
+		as.conceptName = c.Label
+		as.requiredStreak = c.MasteryThreshold.Streak
+		as.timeThreshold = e.accommodatedThreshold(studentID, c.MasteryThreshold.AvgTimeSeconds)
+		diff := 0.3
+		if as.remedialDifficulty > 0 {
+			diff = as.remedialDifficulty
+		}
+		ctx := generator.GeneratorContext{Difficulty: diff, Seed: hashSeed(studentID + "|" + cid + "|" + as.attemptID)}
+		prob, err := e.registry.GenerateContext(cid, ctx)
+		if err != nil {
+			return nil, fmt.Errorf("generate remedial problem: %w", err)
+		}
+		as.expectedAnswer = prob.Answer
+		as.explanation = prob.Explanation
+		as.isReview = false
+		as.questionText = prob.Question
+		e.sessions[sessionID] = as
+		e.persistActiveSession(sessionID, studentID, as, as.questionText)
+		var lesson *lessons.Lesson
+		if e.ll != nil {
+			lesson = e.ll.Lesson(cid)
+		}
+		return &Question{
+			ConceptID:   cid,
+			ConceptName: c.Label,
+			Question:    prob.Question,
+			IsReview:    false,
+			AttemptID:   as.attemptID,
+			Lesson:      lesson,
+		}, nil
+	}
+
 	// PR 1.4: recent-window (last 2) for interleaving + non-interference.
 	recent := as.recentConcepts
 	if as.lastConceptID != "" {
@@ -260,7 +351,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.expectedAnswer = prob.Answer
 	as.explanation = prob.Explanation
 	as.requiredStreak = next.Concept.MasteryThreshold.Streak
-	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
+	as.timeThreshold = e.accommodatedThreshold(studentID, next.Concept.MasteryThreshold.AvgTimeSeconds)
 	as.isReview = next.IsReview
 	as.answered = false
 	as.attemptID = attemptID
@@ -348,7 +439,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.expectedAnswer = prob.Answer
 	as.explanation = prob.Explanation
 	as.requiredStreak = next.Concept.MasteryThreshold.Streak
-	as.timeThreshold = next.Concept.MasteryThreshold.AvgTimeSeconds
+	as.timeThreshold = e.accommodatedThreshold(studentID, next.Concept.MasteryThreshold.AvgTimeSeconds)
 	as.isReview = true
 	as.answered = false
 	as.attemptID = attemptID
@@ -581,7 +672,47 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		taskType = TaskReview
 	}
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, sessionFields.timeThreshold, progress.Streak, taskType)
-	if xp > 0 {
+
+	// PR 1.5: consecutive-miss tracking — halt after 2 (XP=0) + remedial queue.
+	halted := false
+	var remedial []string
+	if !gr.Correct {
+		as.consecutiveMisses++
+		if as.consecutiveMisses >= 2 && !as.halted {
+			halted = true
+			xp = 0
+			as.halted = true
+			as.remedialDifficulty = 0.3
+			if c := e.dag.Concept(sessionFields.conceptID); c != nil {
+				if len(c.Variants) > 0 {
+					as.remedialDifficulty = c.Variants[0].Difficulty
+				}
+				for _, kp := range c.KeyPrerequisites {
+					if e.dag.Concept(kp) != nil {
+						as.remedialQueue = append(as.remedialQueue, kp)
+						remedial = append(remedial, kp)
+					}
+				}
+			}
+			as.remedialQueue = append(as.remedialQueue, sessionFields.conceptID)
+			remedial = append(remedial, sessionFields.conceptID)
+		}
+	} else {
+		as.consecutiveMisses = 0
+		// Remedial recovery: clear the halt once the queue is drained.
+		if as.halted && len(as.remedialQueue) == 0 {
+			as.halted = false
+		}
+	}
+
+	// PR 1.5: negative XP for rushing/guessing — elapsed <2s incorrect twice.
+	if !gr.Correct && elapsedSeconds < 2.0 {
+		as.rushCount++
+		if as.rushCount >= 2 {
+			xp = -5
+		}
+	}
+	if xp != 0 {
 		if err := e.repo.AddXP(studentID, xp); err != nil {
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
 		}
@@ -609,6 +740,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		RequiredStreak: sessionFields.requiredStreak,
 		XP:             xp,
 		ExpectedAnswer: sessionFields.expectedAnswer,
+		Halted:         halted,
+		Remedial:       remedial,
 	}, nil
 }
 
@@ -619,6 +752,17 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 	e.mu.Lock()
 	defer e.mu.Unlock()
 
+	// PR 1.5: ensure a real session row exists so attempts.session_id FK holds.
+	sessionID := e.studySessions[studentID]
+	if sessionID == "" {
+		s, err := e.repo.CreateSession(studentID)
+		if err != nil {
+			return nil, fmt.Errorf("create study session: %w", err)
+		}
+		sessionID = s.ID
+		e.studySessions[studentID] = sessionID
+	}
+
 	c := e.dag.Concept(conceptID)
 	requiredStreak := 3
 	timeThreshold := 10.0
@@ -626,6 +770,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 		requiredStreak = c.MasteryThreshold.Streak
 		timeThreshold = c.MasteryThreshold.AvgTimeSeconds
 	}
+	timeThreshold = e.accommodatedThreshold(studentID, timeThreshold)
 	if timeThreshold == 0 {
 		timeThreshold = 10.0
 	}
@@ -726,7 +871,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 	}
 	e.PropagateWeakness(studentID)
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
-		SessionID:      "study",
+		SessionID:      sessionID,
 		StudentID:      studentID,
 		ConceptID:      conceptID,
 		Answer:         answer,
@@ -750,7 +895,22 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 		taskType = TaskMultistep
 	}
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, timeThreshold, progress.Streak, taskType)
-	if xp > 0 {
+
+	// PR 1.5: negative XP for rushing/guessing + halt flag at 2 consecutive misses.
+	missKey := studentID + "|" + conceptID
+	halted := false
+	if !gr.Correct {
+		e.studyMisses[missKey]++
+		if e.studyMisses[missKey] >= 2 {
+			halted = true
+		}
+		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 {
+			xp = -5
+		}
+	} else {
+		delete(e.studyMisses, missKey)
+	}
+	if xp != 0 {
 		if err := e.repo.AddXP(studentID, xp); err != nil {
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
 		}
@@ -764,6 +924,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 		RequiredStreak: requiredStreak,
 		XP:             xp,
 		ExpectedAnswer: expected,
+		Halted:         halted,
 	}, nil
 }
 
@@ -1020,7 +1181,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.expectedAnswer = prob.Answer
 	as.explanation = prob.Explanation
 	as.requiredStreak = c.MasteryThreshold.Streak
-	as.timeThreshold = c.MasteryThreshold.AvgTimeSeconds
+	as.timeThreshold = e.accommodatedThreshold(studentID, c.MasteryThreshold.AvgTimeSeconds)
 	as.answered = false
 	as.attemptID = attemptID
 	as.questionText = prob.Question

@@ -370,3 +370,141 @@ func TestEngine_LessonAttachedToQuestion(t *testing.T) {
 		t.Error("expected nil lesson (no loader configured)")
 	}
 }
+
+// PR 1.5 tests
+
+func TestEngine_Halt_AfterTwoConsecutiveMisses(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("halt")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	q1, _ := e.NextQuestion(sess.ID, st.ID)
+	if q1 == nil {
+		t.Fatal("expected first question")
+	}
+	res, err := e.SubmitAnswer(sess.ID, st.ID, q1.AttemptID, "wrong", 5.0)
+	if err != nil {
+		t.Fatalf("submit miss 1: %v", err)
+	}
+	if res.Halted {
+		t.Error("expected no halt after first miss")
+	}
+	if res.XP != 0 {
+		t.Errorf("expected 0 XP on miss, got %d", res.XP)
+	}
+
+	q2, _ := e.NextQuestion(sess.ID, st.ID)
+	if q2 == nil {
+		t.Fatal("expected second question")
+	}
+	res2, err := e.SubmitAnswer(sess.ID, st.ID, q2.AttemptID, "wrong", 5.0)
+	if err != nil {
+		t.Fatalf("submit miss 2: %v", err)
+	}
+	if !res2.Halted {
+		t.Error("expected halt after two consecutive misses")
+	}
+	if res2.XP != 0 {
+		t.Errorf("expected XP cut short (0) on halt, got %d", res2.XP)
+	}
+
+	// Next question must come from the remedial queue (concept a re-queued
+	// since it has no KeyPrerequisites in the test DAG).
+	q3, _ := e.NextQuestion(sess.ID, st.ID)
+	if q3 == nil {
+		t.Fatal("expected remedial question after halt")
+	}
+	if q3.ConceptID != "a" {
+		t.Errorf("expected remedial re-queue of a, got %s", q3.ConceptID)
+	}
+	// Correct answer clears the halt.
+	res3, err := e.SubmitAnswer(sess.ID, st.ID, q3.AttemptID, "42", 5.0)
+	if err != nil {
+		t.Fatalf("submit remedial correct: %v", err)
+	}
+	if !res3.Correct {
+		t.Fatalf("expected correct on remedial, got %s", res3.Feedback)
+	}
+	e.mu.Lock()
+	haltedAfter := e.sessions[sess.ID].halted
+	e.mu.Unlock()
+	if haltedAfter {
+		t.Error("expected halt cleared after remedial success")
+	}
+	// Scheduling resumes — a remains the only unlocked concept in this DAG,
+	// so it must be served again (b still gated on a's mastery).
+	q4, _ := e.NextQuestion(sess.ID, st.ID)
+	if q4 == nil {
+		t.Fatal("expected scheduling to resume")
+	}
+}
+
+func TestEngine_NegativeXP_AfterSecondRush(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("rusher")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	q1, _ := e.NextQuestion(sess.ID, st.ID)
+	res1, _ := e.SubmitAnswer(sess.ID, st.ID, q1.AttemptID, "wrong", 1.0)
+	if res1.XP != 0 {
+		t.Errorf("expected 0 XP first rush, got %d", res1.XP)
+	}
+	q2, _ := e.NextQuestion(sess.ID, st.ID)
+	res2, _ := e.SubmitAnswer(sess.ID, st.ID, q2.AttemptID, "wrong", 1.0)
+	if res2.XP != -5 {
+		t.Errorf("expected -5 XP second rush, got %d", res2.XP)
+	}
+}
+
+func TestEngine_Accommodation_ExtraTimeScalesThreshold(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("accom")
+	sess, _ := e.repo.CreateSession(st.ID)
+	// extra_time 1.25 → 2.25x threshold (a: 60s → 135s)
+	_ = e.repo.UpdateSettings(st.ID, `{"accommodations":{"extra_time":1.25}}`)
+
+	q, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil || q == nil {
+		t.Fatalf("next question: %v", err)
+	}
+	e.mu.Lock()
+	as := e.sessions[sess.ID]
+	e.mu.Unlock()
+	if as == nil {
+		t.Fatal("expected active session")
+	}
+	if as.timeThreshold < 120 {
+		t.Errorf("expected accommodated threshold >= 120 (60*2.25=135), got %f", as.timeThreshold)
+	}
+	// Slow-but-correct within the accommodated window must still be graded correct.
+	res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 100.0)
+	if err != nil {
+		t.Fatalf("submit slow correct: %v", err)
+	}
+	if !res.Correct {
+		t.Error("expected correct with extra time accommodation")
+	}
+}
+
+func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_rush")
+	// First incorrect rush → 0; second incorrect rush → -5
+	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0)
+	if err != nil {
+		t.Fatalf("study submit 1: %v", err)
+	}
+	if r1.XP != 0 {
+		t.Errorf("expected 0 XP first study rush, got %d", r1.XP)
+	}
+	r2, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0)
+	if err != nil {
+		t.Fatalf("study submit 2: %v", err)
+	}
+	if r2.XP != -5 {
+		t.Errorf("expected -5 XP second study rush, got %d", r2.XP)
+	}
+	if !r2.Halted {
+		t.Error("expected halted flag after 2 consecutive study misses")
+	}
+}
