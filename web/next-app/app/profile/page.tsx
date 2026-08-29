@@ -314,9 +314,24 @@ export default function ProfilePage() {
               <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary">
                 Transcript
               </h2>
-              <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">
-                completion estimate
-              </span>
+              <button
+                onClick={async () => {
+                  try {
+                    const res = await fetch(`${API_BASE}/api/transcript?format=csv`, { headers: { ...getAuthHeaders() } })
+                    if (!res.ok) return
+                    const blob = await res.blob()
+                    const url = URL.createObjectURL(blob)
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.download = 'mathua-transcript.csv'
+                    a.click()
+                    URL.revokeObjectURL(url)
+                  } catch { /* ignore */ }
+                }}
+                className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
+              >
+                Download CSV ↓
+              </button>
             </div>
             <div className="space-y-2">
               {courses.map(c => {
