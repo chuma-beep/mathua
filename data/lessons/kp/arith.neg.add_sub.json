@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signed numbers",
+    "section": "Signed Numbers",
+    "subgoals": [
+      "Identify the signs of the addends",
+      "Apply the sign rules",
+      "Predict the sign of the result"
+    ]
+  },
+  {
+    "label": "Adding signed numbers",
+    "section": "Adding",
+    "subgoals": [
+      "Add numbers with the same sign",
+      "Add numbers with opposite signs",
+      "Combine absolute values"
+    ]
+  },
+  {
+    "label": "Subtracting signed numbers",
+    "section": "Subtracting",
+    "subgoals": [
+      "Keep the first number",
+      "Change subtraction to addition of the opposite",
+      "Apply the addition rules"
+    ]
+  }
+]

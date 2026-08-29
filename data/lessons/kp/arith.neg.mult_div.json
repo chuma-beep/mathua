@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signed numbers",
+    "section": "Signed Numbers",
+    "subgoals": [
+      "Identify the signs of the factors",
+      "Apply the sign rule for products",
+      "Predict the result sign"
+    ]
+  },
+  {
+    "label": "Multiplying signed numbers",
+    "section": "Multiplying",
+    "subgoals": [
+      "Multiply the absolute values",
+      "Determine the sign",
+      "State the product"
+    ]
+  },
+  {
+    "label": "Powers of signed numbers",
+    "section": "Powers",
+    "subgoals": [
+      "Multiply powers of negative bases",
+      "Apply the sign rules to exponents",
+      "Handle even and odd powers"
+    ]
+  }
+]

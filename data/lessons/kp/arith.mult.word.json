@@ -3,27 +3,27 @@
     "label": "Use multiplication notation",
     "section": "Use Multiplication Notation",
     "subgoals": [
-      "Recognize the factors and the product",
-      "Read 2 × 6 as two times six",
-      "Rewrite repeated addition as multiplication"
+      "Find the action words that mean multiply",
+      "Translate the phrase into an expression",
+      "Choose the factors"
     ]
   },
   {
     "label": "Model multiplication",
     "section": "Model Multiplication of Whole Numbers",
     "subgoals": [
-      "Model rows and columns",
-      "Count the total objects",
-      "Relate the array to the product"
+      "Draw the equal groups",
+      "Count the total",
+      "Write the multiplication"
     ]
   },
   {
     "label": "Multiply whole numbers",
     "section": "Multiply Whole Numbers",
     "subgoals": [
-      "Use known times facts",
-      "Line up by place value",
-      "Multiply and add partial products"
+      "Compute the product",
+      "Answer with the correct units",
+      "Check the reasonableness"
     ]
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find all factors",
+    "section": "Find All the Factors of a Number",
+    "subgoals": [
+      "Find the factors of the number",
+      "Check which factors are prime",
+      "Separate the prime factors"
+    ]
+  },
+  {
+    "label": "Divisibility tests",
+    "section": "Use Common Divisibility Tests",
+    "subgoals": [
+      "Divide by small primes",
+      "Rewrite as a product of primes",
+      "Continue until all factors are prime"
+    ]
+  },
+  {
+    "label": "Identify multiples",
+    "section": "Identify Multiples of Numbers",
+    "subgoals": [
+      "Express the number as a product",
+      "Verify by multiplication",
+      "Write the prime factorization"
+    ]
+  }
+]

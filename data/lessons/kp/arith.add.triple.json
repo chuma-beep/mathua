@@ -4,26 +4,26 @@
     "section": "Use Addition Notation",
     "subgoals": [
       "Identify the addends and the sum",
-      "Read 3 + 4 as three plus four",
-      "Translate word phrases into addition notation"
+      "Read three-digit expressions",
+      "Relate vertical form to notation"
     ]
   },
   {
     "label": "Model addition with blocks",
     "section": "Model Addition of Whole Numbers",
     "subgoals": [
-      "Model the first addend with ones blocks",
-      "Model the second addend",
-      "Count the total"
+      "Model three-digit addends with blocks",
+      "Combine hundreds, tens, and ones",
+      "Exchange across columns"
     ]
   },
   {
     "label": "Add whole numbers",
     "section": "Add Whole Numbers Without Models",
     "subgoals": [
-      "Line up digits by place value",
-      "Add ones, then tens, then hundreds",
-      "Carry when a column sums to 10 or more"
+      "Align hundreds, tens, and ones",
+      "Add right to left, carrying as needed",
+      "Check with estimation"
     ]
   }
 ]

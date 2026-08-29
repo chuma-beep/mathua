@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting and whole numbers",
+    "section": "Identify Counting Numbers and Whole Numbers",
+    "subgoals": [
+      "Recognize whole numbers up to hundreds",
+      "Count by hundreds",
+      "Compare sizes"
+    ]
+  },
+  {
+    "label": "Model whole numbers",
+    "section": "Model Whole Numbers",
+    "subgoals": [
+      "Model with ones, tens, and hundreds blocks",
+      "Regroup across columns",
+      "Read the model"
+    ]
+  },
+  {
+    "label": "Place value of a digit",
+    "section": "Identify the Place Value of a Digit",
+    "subgoals": [
+      "Label the ones, tens, and hundreds places",
+      "Name each digit's value",
+      "Write in expanded form"
+    ]
+  }
+]

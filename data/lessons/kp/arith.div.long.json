@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use division notation",
+    "section": "Use Division Notation",
+    "subgoals": [
+      "Set up the long-division bracket",
+      "Divide the leading digit",
+      "Bring down the next digit"
+    ]
+  },
+  {
+    "label": "Model division",
+    "section": "Model Division of Whole Numbers",
+    "subgoals": [
+      "Model with base-10 blocks",
+      "Share the tens first",
+      "Share the remainder as ones"
+    ]
+  },
+  {
+    "label": "Divide whole numbers",
+    "section": "Divide Whole Numbers",
+    "subgoals": [
+      "Divide, multiply, subtract, bring down",
+      "Repeat for each digit",
+      "Check by multiplying back"
+    ]
+  }
+]

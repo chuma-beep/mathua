@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use addition notation",
+    "section": "Use Addition Notation",
+    "subgoals": [
+      "Find the action words that mean add",
+      "Translate a word phrase into math",
+      "Choose the addends"
+    ]
+  },
+  {
+    "label": "Translate word phrases",
+    "section": "Translate Word Phrases to Math Notation",
+    "subgoals": [
+      "Spot keywords like sum and total",
+      "Write the expression",
+      "Add to simplify"
+    ]
+  },
+  {
+    "label": "Add in applications",
+    "section": "Add Whole Numbers in Applications",
+    "subgoals": [
+      "Read the problem and underline the question",
+      "Write a word phrase for what to find",
+      "Answer with the correct units"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use division notation",
+    "section": "Use Division Notation",
+    "subgoals": [
+      "Find the action words that mean divide",
+      "Translate the phrase into math",
+      "Choose the dividend and divisor"
+    ]
+  },
+  {
+    "label": "Model division",
+    "section": "Model Division of Whole Numbers",
+    "subgoals": [
+      "Share the items into equal groups",
+      "Count per group",
+      "Handle leftovers"
+    ]
+  },
+  {
+    "label": "Divide whole numbers",
+    "section": "Divide Whole Numbers",
+    "subgoals": [
+      "Compute the quotient",
+      "Answer with the correct units",
+      "Check the reasonableness"
+    ]
+  }
+]

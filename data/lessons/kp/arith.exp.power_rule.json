@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to powers",
+    "section": "Introduction to powers",
+    "subgoals": [
+      "Recognize a power raised to a power",
+      "Identify the base and both exponents",
+      "Count nested factors"
+    ]
+  },
+  {
+    "label": "Fundamental rules of powers",
+    "section": "Fundamental rules of powers",
+    "subgoals": [
+      "Multiply the exponents",
+      "Keep the base unchanged",
+      "Apply the rule in steps"
+    ]
+  },
+  {
+    "label": "Powers with real exponents",
+    "section": "Powers with real exponents",
+    "subgoals": [
+      "Extend the rule to three exponents",
+      "Verify by expanding",
+      "Apply the rule in expressions"
+    ]
+  }
+]

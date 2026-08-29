@@ -1,0 +1,28 @@
+[
+  {
+    "label": "Grouping symbols",
+    "section": "Grouping Symbols",
+    "subgoals": [
+      "Recognize all grouping symbols",
+      "Evaluate the inner groups first"
+    ]
+  },
+  {
+    "label": "Order of operations",
+    "section": "Order of Operations",
+    "subgoals": [
+      "Apply BODMAS in full",
+      "Handle exponents before multiplying",
+      "Work left to right"
+    ]
+  },
+  {
+    "label": "Absolute value and grouping",
+    "section": "Absolute Value and Implied Grouping",
+    "subgoals": [
+      "Evaluate absolute values first",
+      "Apply implied grouping",
+      "Simplify fully"
+    ]
+  }
+]

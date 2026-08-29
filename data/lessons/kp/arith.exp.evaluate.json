@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to powers",
+    "section": "Introduction to powers",
+    "subgoals": [
+      "Identify the base and the exponent",
+      "Expand the power",
+      "Simplify the product"
+    ]
+  },
+  {
+    "label": "Powers with real exponents",
+    "section": "Powers with real exponents",
+    "subgoals": [
+      "Evaluate positive exponents",
+      "Evaluate with a negative base",
+      "Estimate by comparison"
+    ]
+  },
+  {
+    "label": "Fundamental rules of powers",
+    "section": "Fundamental rules of powers",
+    "subgoals": [
+      "Apply the product rule",
+      "Apply the quotient rule",
+      "Combine the rules"
+    ]
+  }
+]

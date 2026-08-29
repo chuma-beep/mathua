@@ -1,12 +1,29 @@
 [
   {
-    "label": "Add columns and carry",
-    "section": "Add whole numbers",
+    "label": "Use addition notation",
+    "section": "Use Addition Notation",
     "subgoals": [
-      "Line up digits by place value (ones under ones)",
-      "Add the ones column first",
-      "Carry to the next column when a sum is 10 or more",
-      "Continue right to left, carrying as needed"
+      "Identify when a column sum exceeds 9",
+      "Prepare to regroup 10 ones into 1 ten",
+      "Recognize carrying notation"
+    ]
+  },
+  {
+    "label": "Model addition with blocks",
+    "section": "Model Addition of Whole Numbers",
+    "subgoals": [
+      "Model the addends with base-10 blocks",
+      "Exchange 10 ones for 1 ten",
+      "Count the result"
+    ]
+  },
+  {
+    "label": "Add whole numbers",
+    "section": "Add Whole Numbers Without Models",
+    "subgoals": [
+      "Write the small 1 above the next column",
+      "Add each place value right to left",
+      "Carry repeatedly when needed"
     ]
   }
 ]

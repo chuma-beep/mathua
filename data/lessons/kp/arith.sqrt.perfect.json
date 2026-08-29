@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Square root facts",
+    "section": "Square Root Facts",
+    "subgoals": [
+      "Recognize the perfect squares",
+      "Recall common square roots",
+      "Relate squaring and taking roots"
+    ]
+  },
+  {
+    "label": "Calculating square roots",
+    "section": "Calculating Square Roots with a Calculator",
+    "subgoals": [
+      "Enter the radical",
+      "Read the calculator result",
+      "Identify exact versus rounded values"
+    ]
+  },
+  {
+    "label": "Square roots of fractions",
+    "section": "Square Roots of Fractions",
+    "subgoals": [
+      "Take the root of the numerator",
+      "Take the root of the denominator",
+      "Simplify the fraction"
+    ]
+  }
+]

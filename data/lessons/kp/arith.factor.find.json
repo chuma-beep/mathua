@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify multiples",
+    "section": "Identify Multiples of Numbers",
+    "subgoals": [
+      "Recognize a multiple of a number",
+      "List multiples by skip counting",
+      "Identify multiples in a list"
+    ]
+  },
+  {
+    "label": "Divisibility tests",
+    "section": "Use Common Divisibility Tests",
+    "subgoals": [
+      "Apply the 2, 3, 5, 9, and 10 tests",
+      "Check divisibility quickly",
+      "Use the tests to narrow factors"
+    ]
+  },
+  {
+    "label": "Find all factors",
+    "section": "Find All the Factors of a Number",
+    "subgoals": [
+      "Start with 1 and the number itself",
+      "Test each integer in order",
+      "List the factor pairs"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Prime factorization",
+    "section": "Find the Prime Factorization of a Composite Number",
+    "subgoals": [
+      "Break the number into any factor pair",
+      "Factor each branch",
+      "Collect the prime factors"
+    ]
+  },
+  {
+    "label": "Factor-tree method",
+    "section": "Prime Factorization Using the Factor Tree Method",
+    "subgoals": [
+      "Draw the factor tree",
+      "Factor until every leaf is prime",
+      "Write the product of primes"
+    ]
+  },
+  {
+    "label": "Using prime factorization",
+    "section": "Prime Factorization",
+    "subgoals": [
+      "Verify the prime product",
+      "Compare with the ladder method",
+      "Apply prime factorization to the LCM"
+    ]
+  }
+]
