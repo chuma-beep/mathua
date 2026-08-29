@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to variables",
+    "section": "Introduction to Variables",
+    "subgoals": [
+      "Recognize a variable as a placeholder",
+      "Substitute the given value",
+      "Prepare to evaluate"
+    ]
+  },
+  {
+    "label": "Algebraic expressions",
+    "section": "Algebraic Expressions",
+    "subgoals": [
+      "Replace each variable with its value",
+      "Apply the order of operations",
+      "Simplify to a number"
+    ]
+  },
+  {
+    "label": "Evaluating with negative numbers",
+    "section": "Evaluating Expressions with Negative Numbers",
+    "subgoals": [
+      "Substitute negative values carefully",
+      "Track signs in multiplication",
+      "Simplify the result"
+    ]
+  }
+]

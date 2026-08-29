@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Locate decimals on the number line",
+    "section": "Locate Decimals on the Number Line",
+    "subgoals": [
+      "Place the decimal between two marks",
+      "Identify the nearest place",
+      "Decide up or down"
+    ]
+  },
+  {
+    "label": "Order decimals",
+    "section": "Order Decimals",
+    "subgoals": [
+      "Compare the digits in order",
+      "Find the rounding place",
+      "Look at the digit to the right"
+    ]
+  },
+  {
+    "label": "Round decimals",
+    "section": "Round Decimals",
+    "subgoals": [
+      "Apply the rounding rule",
+      "Drop the trailing digits",
+      "Write the rounded value"
+    ]
+  }
+]

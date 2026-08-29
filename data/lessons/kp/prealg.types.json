@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Natural numbers",
+    "section": "Natural numbers",
+    "subgoals": [
+      "Identify the counting numbers",
+      "Recognize where they sit in the hierarchy",
+      "Contrast with other types"
+    ]
+  },
+  {
+    "label": "Integer numbers",
+    "section": "Integer numbers",
+    "subgoals": [
+      "Include zero and the negatives",
+      "Locate integers on the number line",
+      "Classify examples"
+    ]
+  },
+  {
+    "label": "Rational numbers",
+    "section": "Rational numbers",
+    "subgoals": [
+      "Write a rational as a ratio of integers",
+      "Recognize repeating decimals as rational",
+      "Distinguish from irrationals"
+    ]
+  }
+]

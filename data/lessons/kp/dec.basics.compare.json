@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Locate decimals on the number line",
+    "section": "Locate Decimals on the Number Line",
+    "subgoals": [
+      "Divide the interval into tenths and hundredths",
+      "Place the decimal exactly",
+      "Read its position"
+    ]
+  },
+  {
+    "label": "Order decimals",
+    "section": "Order Decimals",
+    "subgoals": [
+      "Compare digit by digit from left to right",
+      "Align the decimal points",
+      "Order the set"
+    ]
+  },
+  {
+    "label": "Equivalent decimals",
+    "section": "Equivalent Decimals",
+    "subgoals": [
+      "Recognize trailing zeros as equal",
+      "Use equivalent forms to compare",
+      "Write the comparison"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define the absolute value as distance from zero",
+      "Evaluate absolute values of negatives",
+      "Recognize that the result is never negative"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Apply the product property",
+      "Use the triangle-inequality intuition",
+      "Simplify expressions with absolute value"
+    ]
+  },
+  {
+    "label": "Triangle inequality",
+    "section": "Triangle inequality",
+    "subgoals": [
+      "State the inequality in words",
+      "Verify it on examples",
+      "Use it to bound sums"
+    ]
+  }
+]

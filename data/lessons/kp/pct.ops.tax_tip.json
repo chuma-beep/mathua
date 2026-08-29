@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve sales tax applications",
+    "section": "Solve Sales Tax Applications",
+    "subgoals": [
+      "Find the tax amount",
+      "Add it to the price",
+      "State the total cost"
+    ]
+  },
+  {
+    "label": "Sales tax",
+    "section": "Sales Tax",
+    "subgoals": [
+      "Write the tax as a percent equation",
+      "Compute the tax",
+      "Round to cents"
+    ]
+  },
+  {
+    "label": "Solve commission applications",
+    "section": "Solve Commission Applications",
+    "subgoals": [
+      "Find the commission amount",
+      "Add it to any base pay",
+      "State the total"
+    ]
+  }
+]

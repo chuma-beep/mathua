@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Imagine filling in the blanks",
+    "section": "Imagine Filling in the Blanks",
+    "subgoals": [
+      "Guess a candidate value",
+      "Check it in the equation",
+      "Adjust until it works"
+    ]
+  },
+  {
+    "label": "Basic principle of algebra",
+    "section": "The Basic Principle of Algebra",
+    "subgoals": [
+      "Do the same to both sides",
+      "Undo multiplication with division",
+      "Keep the equation balanced"
+    ]
+  },
+  {
+    "label": "Solve one-step equations",
+    "section": "Solving One-Step Equations and Stating Solution Sets",
+    "subgoals": [
+      "Identify the coefficient",
+      "Divide both sides by it",
+      "State the solution set"
+    ]
+  }
+]

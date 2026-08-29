@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of percent",
+    "section": "Use the Definition of Percent",
+    "subgoals": [
+      "Read percent as parts per hundred",
+      "Write a percent as a fraction over 100",
+      "Interpret a percent visually"
+    ]
+  },
+  {
+    "label": "Percent",
+    "section": "Percent",
+    "subgoals": [
+      "State the meaning of the word percent",
+      "Relate percents to decimals and fractions",
+      "Compare percents"
+    ]
+  },
+  {
+    "label": "Convert percents",
+    "section": "Convert Percents to Fractions and Decimals",
+    "subgoals": [
+      "Write a percent as a fraction",
+      "Write a percent as a decimal",
+      "Convert in both directions"
+    ]
+  }
+]

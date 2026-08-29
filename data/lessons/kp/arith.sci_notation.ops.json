@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basics of scientific notation",
+    "section": "The Basics of Scientific Notation",
+    "subgoals": [
+      "Write a number in scientific notation",
+      "Identify the mantissa and the exponent",
+      "Convert both directions"
+    ]
+  },
+  {
+    "label": "Large and small numbers",
+    "section": "Scientific Notation for Large Numbers",
+    "subgoals": [
+      "Use positive exponents for large numbers",
+      "Use negative exponents for small numbers",
+      "Write the results compactly"
+    ]
+  },
+  {
+    "label": "Operations in scientific notation",
+    "section": "Multiplying and Dividing Using Scientific Notation",
+    "subgoals": [
+      "Multiply the mantissas and add exponents",
+      "Divide mantissas and subtract exponents",
+      "Normalize the result"
+    ]
+  }
+]

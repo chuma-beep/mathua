@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Negative exponents",
+    "section": "Use the Definition of a Negative Exponent",
+    "subgoals": [
+      "Rewrite a negative exponent as a reciprocal",
+      "Convert between forms",
+      "Prepare for scientific notation"
+    ]
+  },
+  {
+    "label": "Convert to scientific notation",
+    "section": "Convert from Decimal Notation to Scientific Notation",
+    "subgoals": [
+      "Move the decimal point after the first digit",
+      "Count the places moved",
+      "Choose a positive or negative power of 10"
+    ]
+  },
+  {
+    "label": "Convert to decimal form",
+    "section": "Convert Scientific Notation to Decimal Form",
+    "subgoals": [
+      "Move the decimal point by the exponent",
+      "Fill zeros as needed",
+      "State the decimal value"
+    ]
+  }
+]

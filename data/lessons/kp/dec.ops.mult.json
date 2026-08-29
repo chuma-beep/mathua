@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply decimals",
+    "section": "Multiply Decimals",
+    "subgoals": [
+      "Ignore the decimal points and multiply",
+      "Count the total decimal places",
+      "Place the point in the product"
+    ]
+  },
+  {
+    "label": "Multiply decimal numbers",
+    "section": "Multiply decimal numbers.",
+    "subgoals": [
+      "Multiply digit by digit",
+      "Count places in both factors",
+      "Write the product correctly"
+    ]
+  },
+  {
+    "label": "Multiply by powers of 10",
+    "section": "Multiply by Powers of $10$",
+    "subgoals": [
+      "Move the decimal point right",
+      "Shift once per power of 10",
+      "Fill zeros when needed"
+    ]
+  }
+]

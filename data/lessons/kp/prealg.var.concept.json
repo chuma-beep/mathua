@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to variables",
+    "section": "Introduction to Variables",
+    "subgoals": [
+      "Recognize a variable as a placeholder",
+      "Read expressions with variables",
+      "Choose a letter for an unknown"
+    ]
+  },
+  {
+    "label": "Algebraic expressions",
+    "section": "Algebraic Expressions",
+    "subgoals": [
+      "Build an expression from a phrase",
+      "Identify terms and coefficients",
+      "Evaluate when values are given"
+    ]
+  },
+  {
+    "label": "Evaluating with exponents and radicals",
+    "section": "Evaluating Expressions with Exponents, Absolute Value, and Radicals",
+    "subgoals": [
+      "Apply exponents to the variable",
+      "Handle absolute values",
+      "Evaluate radicals"
+    ]
+  }
+]

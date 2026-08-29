@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divide decimals",
+    "section": "Divide Decimals",
+    "subgoals": [
+      "Make the divisor a whole number",
+      "Move the decimal point in both",
+      "Divide as with whole numbers"
+    ]
+  },
+  {
+    "label": "Divide by a whole number",
+    "section": "Divide a decimal by a whole number.",
+    "subgoals": [
+      "Place the decimal point in the quotient",
+      "Divide digit by digit",
+      "Bring down digits"
+    ]
+  },
+  {
+    "label": "Divide by another decimal",
+    "section": "Divide a Decimal by Another Decimal",
+    "subgoals": [
+      "Shift both decimal points",
+      "Divide normally",
+      "Check by multiplying back"
+    ]
+  }
+]

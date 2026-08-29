@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basic percent equations",
+    "section": "Translate and Solve Basic Percent Equations",
+    "subgoals": [
+      "Write percent as a decimal",
+      "Set up amount = percent × base",
+      "Solve for the amount"
+    ]
+  },
+  {
+    "label": "Applications of percent",
+    "section": "Solve Applications of Percent",
+    "subgoals": [
+      "Identify the percent and the base",
+      "Translate the application",
+      "Compute the part"
+    ]
+  },
+  {
+    "label": "Solve an application",
+    "section": "Solve an application",
+    "subgoals": [
+      "Read the problem carefully",
+      "Write the percent equation",
+      "Answer with units"
+    ]
+  }
+]

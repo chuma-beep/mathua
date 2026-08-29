@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exponent basics",
+    "section": "Exponent Basics",
+    "subgoals": [
+      "Identify the base and the exponent",
+      "Expand the power",
+      "Consider the case of a zero exponent"
+    ]
+  },
+  {
+    "label": "Exponent rules",
+    "section": "Exponent Rules",
+    "subgoals": [
+      "Apply the zero-exponent rule",
+      "Explain why any nonzero base gives 1",
+      "Evaluate expressions with zero exponents"
+    ]
+  },
+  {
+    "label": "Product to a power rule",
+    "section": "Product to a Power Rule",
+    "subgoals": [
+      "Distribute the exponent over a product",
+      "Keep the base rules consistent",
+      "Simplify the expression"
+    ]
+  }
+]

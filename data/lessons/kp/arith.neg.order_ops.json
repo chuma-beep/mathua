@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signed numbers",
+    "section": "Signed Numbers",
+    "subgoals": [
+      "Identify the signs of each term",
+      "Apply the sign rules",
+      "Predict the sign of the result"
+    ]
+  },
+  {
+    "label": "Adding signed numbers",
+    "section": "Adding",
+    "subgoals": [
+      "Add the absolute values for like signs",
+      "Subtract for opposite signs",
+      "Write the result with the right sign"
+    ]
+  },
+  {
+    "label": "Multiplying signed numbers",
+    "section": "Multiplying",
+    "subgoals": [
+      "Multiply the absolute values",
+      "Determine the sign from the count of negatives",
+      "Apply the order of operations"
+    ]
+  }
+]
