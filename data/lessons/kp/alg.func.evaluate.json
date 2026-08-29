@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Informal definition",
+    "section": "Informal Definition of a Function",
+    "subgoals": [
+      "Recognize function notation f(x)",
+      "Identify the input",
+      "Prepare to substitute"
+    ]
+  },
+  {
+    "label": "Tables and graphs",
+    "section": "Tables and Graphs",
+    "subgoals": [
+      "Read values from a table",
+      "Read values from a graph",
+      "Evaluate at given inputs"
+    ]
+  },
+  {
+    "label": "Four descriptions",
+    "section": "Translating Between Four Descriptions of the Same Function",
+    "subgoals": [
+      "Move between formula, table, graph, words",
+      "Keep the values consistent",
+      "Evaluate in any form"
+    ]
+  }
+]

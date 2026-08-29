@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Set the equation to zero",
+      "Identify the factoring pattern",
+      "Prepare to factor"
+    ]
+  },
+  {
+    "label": "Derivation",
+    "section": "Derivation",
+    "subgoals": [
+      "Split the middle term",
+      "Group and factor",
+      "Verify the product"
+    ]
+  },
+  {
+    "label": "Solve the factors",
+    "section": "",
+    "subgoals": [
+      "Set each factor to zero",
+      "Solve each linear equation",
+      "State the roots"
+    ]
+  }
+]

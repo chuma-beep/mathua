@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Consistency criterion",
+    "section": "Statement of the theorem",
+    "subgoals": [
+      "Check system consistency",
+      "Decide the solution type",
+      "Prepare the method"
+    ]
+  },
+  {
+    "label": "Geometric interpretation",
+    "section": "Geometric interpretation",
+    "subgoals": [
+      "Read rows as lines",
+      "Find the intersection",
+      "Verify the point"
+    ]
+  },
+  {
+    "label": "Solve by substitution",
+    "section": "",
+    "subgoals": [
+      "Solve one equation for a variable",
+      "Substitute into the other",
+      "Back-substitute"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is an arithmetic sequence",
+    "section": "What is an arithmetic sequence",
+    "subgoals": [
+      "Identify the common difference",
+      "Write the general term",
+      "Generate terms"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked sequence",
+      "Find specific terms",
+      "Verify the difference"
+    ]
+  },
+  {
+    "label": "Sum of n terms",
+    "section": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
+    "subgoals": [
+      "Apply the sum formula",
+      "Use the first and last terms",
+      "Compute the total"
+    ]
+  }
+]

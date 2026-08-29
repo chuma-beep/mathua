@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Division algorithm",
+    "section": "The division algorithm",
+    "subgoals": [
+      "Set up the division",
+      "Identify dividend and divisor",
+      "Prepare the quotient"
+    ]
+  },
+  {
+    "label": "Polynomial long division",
+    "section": "Polynomial long division",
+    "subgoals": [
+      "Divide leading terms",
+      "Multiply and subtract",
+      "Repeat until done"
+    ]
+  },
+  {
+    "label": "Remainder and factor theorems",
+    "section": "The remainder theorem and the factor theorem",
+    "subgoals": [
+      "Evaluate at a root to get the remainder",
+      "Test factors",
+      "Use synthetic division shortcuts"
+    ]
+  }
+]

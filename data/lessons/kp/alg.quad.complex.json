@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Real and complex solutions",
+    "section": "Real and complex solutions",
+    "subgoals": [
+      "Detect a negative discriminant",
+      "Introduce the imaginary unit",
+      "Write complex solutions"
+    ]
+  },
+  {
+    "label": "Complex conjugate roots",
+    "section": "Complex conjugate roots",
+    "subgoals": [
+      "Pair the conjugate roots",
+      "Verify by substitution",
+      "Factor over the complex numbers"
+    ]
+  },
+  {
+    "label": "Verify the pair",
+    "section": "",
+    "subgoals": [
+      "Substitute each root",
+      "Check the sum and product",
+      "Confirm both satisfy"
+    ]
+  }
+]

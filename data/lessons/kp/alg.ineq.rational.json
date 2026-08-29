@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify a rational inequality",
+      "Move terms to one side",
+      "Prepare the sign table"
+    ]
+  },
+  {
+    "label": "Multiplicity and signs",
+    "section": "Multiplicity and sign changes",
+    "subgoals": [
+      "Account for factor multiplicity",
+      "Track sign changes",
+      "Handle repeated roots"
+    ]
+  },
+  {
+    "label": "Solution set",
+    "section": "Structure of the solution set",
+    "subgoals": [
+      "Mark excluded points",
+      "Test each interval",
+      "Write the final set"
+    ]
+  }
+]

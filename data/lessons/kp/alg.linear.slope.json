@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is slope",
+    "section": "What is slope?",
+    "subgoals": [
+      "Define slope as rise over run",
+      "Identify its sign",
+      "Read it from a graph"
+    ]
+  },
+  {
+    "label": "Comparing slopes",
+    "section": "Comparing Slopes",
+    "subgoals": [
+      "Rank steepness",
+      "Compare signs",
+      "Predict line behavior"
+    ]
+  },
+  {
+    "label": "Slope from two points",
+    "section": "Finding Slope by Two Given Points",
+    "subgoals": [
+      "Apply the slope formula",
+      "Keep the order consistent",
+      "Simplify the ratio"
+    ]
+  }
+]

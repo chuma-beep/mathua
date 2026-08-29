@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distributive property",
+    "section": "Review of the Distributive Property",
+    "subgoals": [
+      "Distribute the monomial",
+      "Multiply each term",
+      "Combine the products"
+    ]
+  },
+  {
+    "label": "Multiplying binomials",
+    "section": "Multiplying Binomials",
+    "subgoals": [
+      "Apply distribution twice",
+      "Collect like terms",
+      "Simplify"
+    ]
+  },
+  {
+    "label": "Binomials using distribution",
+    "section": "Multiplying Binomials Using Distribution",
+    "subgoals": [
+      "Distribute term by term",
+      "Use FOIL as a shortcut",
+      "Verify the product"
+    ]
+  }
+]

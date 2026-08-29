@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a linear system",
+    "section": "What is a linear system?",
+    "subgoals": [
+      "Identify the equations",
+      "Recognize the variables",
+      "Prepare to solve jointly"
+    ]
+  },
+  {
+    "label": "Matrix form",
+    "section": "Why is the matrix form important?",
+    "subgoals": [
+      "Write the coefficient matrix",
+      "Write the constants vector",
+      "Use compact notation"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked system",
+      "Verify a candidate solution",
+      "Check all equations"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From equation to parabola",
+    "section": "From Equation to Parabola",
+    "subgoals": [
+      "Identify the quadratic form",
+      "Find the vertex",
+      "Sketch the parabola"
+    ]
+  },
+  {
+    "label": "Vertex and symmetry",
+    "section": "Vertex and symmetry in special cases",
+    "subgoals": [
+      "Compute the axis of symmetry",
+      "Locate the vertex",
+      "Use symmetry to plot points"
+    ]
+  },
+  {
+    "label": "Read the graph",
+    "section": "",
+    "subgoals": [
+      "Find intercepts from the graph",
+      "Identify the opening direction",
+      "State the range"
+    ]
+  }
+]

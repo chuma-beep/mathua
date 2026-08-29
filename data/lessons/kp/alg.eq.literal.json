@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify the parameters",
+      "Choose the variable to solve for",
+      "Treat others as constants"
+    ]
+  },
+  {
+    "label": "Classification of cases",
+    "section": "Classification of cases",
+    "subgoals": [
+      "Classify by parameter values",
+      "Handle special cases",
+      "State the solution family"
+    ]
+  },
+  {
+    "label": "Verify against a numeric case",
+    "section": "",
+    "subgoals": [
+      "Substitute parameter values",
+      "Compare with direct solving",
+      "Confirm the formula"
+    ]
+  }
+]

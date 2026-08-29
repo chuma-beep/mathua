@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are composite functions",
+    "section": "What are composite functions",
+    "subgoals": [
+      "Identify the inner and outer functions",
+      "Substitute the inner output",
+      "Simplify the composition"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked example",
+      "Evaluate at a given input",
+      "State the composed rule"
+    ]
+  },
+  {
+    "label": "Composition with the inverse",
+    "section": "Composition with the inverse function",
+    "subgoals": [
+      "Compose f with its inverse",
+      "Observe the identity result",
+      "Use it to verify inverses"
+    ]
+  }
+]

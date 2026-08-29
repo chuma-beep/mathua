@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Sketch the graph",
+      "Identify key features",
+      "Prepare to analyze"
+    ]
+  },
+  {
+    "label": "Domain",
+    "section": "Domain",
+    "subgoals": [
+      "Read the x-extent from the graph",
+      "State the domain",
+      "Note discontinuities"
+    ]
+  },
+  {
+    "label": "Symmetry and intercepts",
+    "section": "Symmetry",
+    "subgoals": [
+      "Check for symmetry",
+      "Find x-intercepts",
+      "Find the y-intercept"
+    ]
+  }
+]

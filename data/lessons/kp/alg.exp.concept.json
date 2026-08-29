@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The exponential function",
+    "section": "",
+    "subgoals": [
+      "Identify the base and exponent",
+      "Recognize exponential growth",
+      "Read values from the function"
+    ]
+  },
+  {
+    "label": "Exponential behavior",
+    "section": "",
+    "subgoals": [
+      "Compare growth rates",
+      "Interpret the base",
+      "Sketch the shape"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "",
+    "subgoals": [
+      "Recognize exponential models",
+      "Evaluate at given inputs",
+      "Interpret the output"
+    ]
+  }
+]

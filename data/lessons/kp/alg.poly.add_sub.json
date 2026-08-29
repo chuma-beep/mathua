@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition and properties",
+    "section": "Definition and basic properties",
+    "subgoals": [
+      "Identify like terms",
+      "Match degree and variables",
+      "Prepare to combine"
+    ]
+  },
+  {
+    "label": "Term by term",
+    "section": "Addition and subtraction term by term",
+    "subgoals": [
+      "Align like terms",
+      "Add or subtract coefficients",
+      "Keep the variables"
+    ]
+  },
+  {
+    "label": "Several indeterminates",
+    "section": "Polynomials in several indeterminates",
+    "subgoals": [
+      "Recognize multivariable terms",
+      "Combine matching terms",
+      "Simplify the result"
+    ]
+  }
+]

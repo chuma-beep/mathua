@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define absolute value as distance",
+      "Recognize the V shape",
+      "Read the vertex"
+    ]
+  },
+  {
+    "label": "Graph and symmetry",
+    "section": "Graph and symmetry of the absolute value function",
+    "subgoals": [
+      "Plot the V shape",
+      "Identify the axis of symmetry",
+      "Transform the graph"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Apply the nonnegativity property",
+      "Use the product property",
+      "Simplify expressions"
+    ]
+  }
+]

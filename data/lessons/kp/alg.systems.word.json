@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Translate phrases",
+    "section": "Translating Phrases into Algebraic Expressions and Equations/Inequalities",
+    "subgoals": [
+      "Define the variables",
+      "Map words to equations",
+      "Write the system"
+    ]
+  },
+  {
+    "label": "Rate models",
+    "section": "Rate Models",
+    "subgoals": [
+      "Identify the rates",
+      "Set up rate equations",
+      "Solve the system"
+    ]
+  },
+  {
+    "label": "Percent applications",
+    "section": "Percent Applications",
+    "subgoals": [
+      "Convert the percents",
+      "Write the mixture equations",
+      "Solve and interpret"
+    ]
+  }
+]

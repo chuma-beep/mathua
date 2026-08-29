@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define an interval",
+      "Use endpoint notation",
+      "Distinguish open and closed"
+    ]
+  },
+  {
+    "label": "Bounded intervals",
+    "section": "Bounded intervals",
+    "subgoals": [
+      "Write bounded intervals",
+      "Read endpoint inclusion",
+      "Graph them"
+    ]
+  },
+  {
+    "label": "Unbounded intervals",
+    "section": "Unbounded intervals",
+    "subgoals": [
+      "Use infinity notation",
+      "Graph unbounded intervals",
+      "Combine with unions"
+    ]
+  }
+]

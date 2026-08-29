@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a geometric sequence",
+    "section": "What is a geometric sequence",
+    "subgoals": [
+      "Identify the common ratio",
+      "Write the general term",
+      "Generate terms"
+    ]
+  },
+  {
+    "label": "Sum of n terms",
+    "section": "Sum of \\\\( n \\\\) terms of a geometric progression",
+    "subgoals": [
+      "Apply the sum formula",
+      "Handle ratios not equal to one",
+      "Compute the total"
+    ]
+  },
+  {
+    "label": "Limit behavior",
+    "section": "Limit behavior of a geometric sequence",
+    "subgoals": [
+      "Classify by the ratio",
+      "Describe growth or decay",
+      "State convergence"
+    ]
+  }
+]

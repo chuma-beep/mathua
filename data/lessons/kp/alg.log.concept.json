@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Relate logarithms to exponents",
+      "Identify base and argument",
+      "Read log notation"
+    ]
+  },
+  {
+    "label": "Basic identities",
+    "section": "Basic identities",
+    "subgoals": [
+      "Apply log_b(1) = 0",
+      "Apply log_b(b) = 1",
+      "Use the inverse property"
+    ]
+  },
+  {
+    "label": "Logarithmic function",
+    "section": "Logarithmic function",
+    "subgoals": [
+      "Recognize the log function",
+      "State its domain",
+      "Sketch its shape"
+    ]
+  }
+]

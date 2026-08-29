@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Systematic method",
+    "section": "A systematic method for determining the domain of a function",
+    "subgoals": [
+      "Exclude division by zero",
+      "Exclude negative radicands of even roots",
+      "Exclude invalid logarithms"
+    ]
+  },
+  {
+    "label": "Types of intervals",
+    "section": "Types of intervals",
+    "subgoals": [
+      "Use open and closed intervals",
+      "Write union notation",
+      "Express the domain"
+    ]
+  },
+  {
+    "label": "Elementary functions",
+    "section": "Domain of elementary functions",
+    "subgoals": [
+      "State standard domains",
+      "Compose the constraints",
+      "Write the final domain"
+    ]
+  }
+]

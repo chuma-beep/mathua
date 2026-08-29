@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linear systems in one variable",
+    "section": "Linear systems of inequalities in one variable",
+    "subgoals": [
+      "Solve each inequality",
+      "Intersect the solutions",
+      "Write the interval"
+    ]
+  },
+  {
+    "label": "General strategy",
+    "section": "General strategy for solving systems of inequalities",
+    "subgoals": [
+      "Solve each part separately",
+      "Combine with and or or",
+      "Graph the result"
+    ]
+  },
+  {
+    "label": "Multivariable systems",
+    "section": "Multivariable systems of inequalities",
+    "subgoals": [
+      "Graph each boundary",
+      "Shade each half-plane",
+      "Find the overlap"
+    ]
+  }
+]

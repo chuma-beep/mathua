@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slope-intercept definition",
+    "section": "Slope-Intercept Definition",
+    "subgoals": [
+      "Identify m and b",
+      "Locate the y-intercept",
+      "Prepare to graph"
+    ]
+  },
+  {
+    "label": "Graphing slope-intercept",
+    "section": "Graphing Slope-Intercept Equations",
+    "subgoals": [
+      "Plot the intercept",
+      "Use the slope for the next point",
+      "Draw the line"
+    ]
+  },
+  {
+    "label": "From two points",
+    "section": "Writing a Slope-Intercept Equation Given Two Points",
+    "subgoals": [
+      "Compute the slope",
+      "Find the intercept",
+      "Write y = mx + b"
+    ]
+  }
+]

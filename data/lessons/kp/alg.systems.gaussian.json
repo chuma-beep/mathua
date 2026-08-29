@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is Gaussian elimination",
+    "section": "What is Gaussian elimination",
+    "subgoals": [
+      "Set up the augmented matrix",
+      "Identify the pivot columns",
+      "Prepare row operations"
+    ]
+  },
+  {
+    "label": "The process",
+    "section": "The process involves the following steps:",
+    "subgoals": [
+      "Eliminate below each pivot",
+      "Scale pivots to one",
+      "Back-substitute"
+    ]
+  },
+  {
+    "label": "Connection with matrices",
+    "section": "Connection with Matrices",
+    "subgoals": [
+      "Read the row-echelon form",
+      "Interpret each row",
+      "Extract the solution"
+    ]
+  }
+]

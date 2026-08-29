@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formal definition",
+    "section": "Formally Defining a Function",
+    "subgoals": [
+      "Define the linear form f(x) = mx + b",
+      "Identify the slope and intercept",
+      "Check one input maps to one output"
+    ]
+  },
+  {
+    "label": "What is not a function",
+    "section": "Identifying What is *Not* a Function",
+    "subgoals": [
+      "Detect multi-valued relations",
+      "Apply the vertical line test",
+      "Reject non-function graphs"
+    ]
+  },
+  {
+    "label": "Evaluate and graph",
+    "section": "",
+    "subgoals": [
+      "Evaluate at given inputs",
+      "Plot the line from slope and intercept",
+      "Read features from the graph"
+    ]
+  }
+]

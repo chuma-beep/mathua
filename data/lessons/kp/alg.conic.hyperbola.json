@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conic sections intro",
+    "section": "Introduction to conic sections",
+    "subgoals": [
+      "Recognize the hyperbola as a conic section",
+      "Identify its two branches",
+      "Locate the center"
+    ]
+  },
+  {
+    "label": "What is a hyperbola",
+    "section": "What is a hyperbola",
+    "subgoals": [
+      "State the two-focus definition",
+      "Identify vertices and asymptotes",
+      "Use the standard equation"
+    ]
+  },
+  {
+    "label": "Difference of distances",
+    "section": "Why is the difference of distances to the foci always constant in a hyperbola?",
+    "subgoals": [
+      "Explain the constant-difference property",
+      "Verify it on the branches",
+      "Connect to the equation"
+    ]
+  }
+]

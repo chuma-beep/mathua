@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic formula",
+    "section": "Solving Quadratic Equations with the Quadratic Formula",
+    "subgoals": [
+      "Identify a, b, c",
+      "Substitute into the formula",
+      "Simplify the result"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Translate the problem",
+      "Set up the quadratic",
+      "Interpret the solutions"
+    ]
+  },
+  {
+    "label": "Radical equations",
+    "section": "Radical Equations",
+    "subgoals": [
+      "Isolate the radical",
+      "Square both sides",
+      "Check for extraneous roots"
+    ]
+  }
+]

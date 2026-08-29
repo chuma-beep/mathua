@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to inequalities",
+    "section": "Introduction to inequalities",
+    "subgoals": [
+      "Define inequalities",
+      "Read the symbols",
+      "Prepare to solve"
+    ]
+  },
+  {
+    "label": "Geometric interpretation",
+    "section": "Geometric interpretation",
+    "subgoals": [
+      "Place solutions on the number line",
+      "Shade the valid region",
+      "Use open and closed dots"
+    ]
+  },
+  {
+    "label": "Absolute value inequalities",
+    "section": "Absolute value inequalities",
+    "subgoals": [
+      "Set up the two cases",
+      "Solve each interval",
+      "Combine the result"
+    ]
+  }
+]

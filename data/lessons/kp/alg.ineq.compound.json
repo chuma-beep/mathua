@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Unions of intervals",
+    "section": "Unions of Intervals",
+    "subgoals": [
+      "Recognize an or-inequality",
+      "Solve each part",
+      "Union the solutions"
+    ]
+  },
+  {
+    "label": "Three-part inequalities",
+    "section": "Three-Part Inequalities",
+    "subgoals": [
+      "Isolate the middle variable",
+      "Apply operations to all three sides",
+      "Write the interval"
+    ]
+  },
+  {
+    "label": "And inequalities",
+    "section": "Solving \"And\" Inequalities",
+    "subgoals": [
+      "Solve each part",
+      "Intersect the solutions",
+      "Write the interval"
+    ]
+  }
+]

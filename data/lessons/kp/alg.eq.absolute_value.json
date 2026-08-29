@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Recognize an absolute value equation",
+      "Set up the two cases",
+      "Solve each case"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Apply the nonnegativity property",
+      "Handle equal absolute values",
+      "Check for extraneous solutions"
+    ]
+  },
+  {
+    "label": "Solving absolute value equations",
+    "section": "Solving absolute value equations",
+    "subgoals": [
+      "Isolate the absolute value",
+      "Write both sign cases",
+      "Verify each solution"
+    ]
+  }
+]

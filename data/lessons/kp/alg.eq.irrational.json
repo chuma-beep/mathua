@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition of irrational equations",
+    "subgoals": [
+      "Recognize a radical equation",
+      "Identify the radical terms",
+      "Prepare to isolate them"
+    ]
+  },
+  {
+    "label": "General forms",
+    "section": "General forms of irrational equations",
+    "subgoals": [
+      "Isolate a radical",
+      "Raise both sides to the index",
+      "Repeat if needed"
+    ]
+  },
+  {
+    "label": "Rational vs irrational equations",
+    "section": "Distinction between irrational and rational equations",
+    "subgoals": [
+      "Classify the equation type",
+      "Choose the solving method",
+      "Check for extraneous solutions"
+    ]
+  }
+]

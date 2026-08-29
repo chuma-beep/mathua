@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Identify a radical inequality",
+      "Recognize the index",
+      "Prepare to isolate"
+    ]
+  },
+  {
+    "label": "Even vs odd radicals",
+    "section": "Even-index radicals versus odd-index radicals",
+    "subgoals": [
+      "Handle domain for even roots",
+      "Allow negatives for odd roots",
+      "Adjust the method"
+    ]
+  },
+  {
+    "label": "Solution steps",
+    "section": "Typical solution steps",
+    "subgoals": [
+      "Isolate the radical",
+      "Raise both sides",
+      "Check the domain and solutions"
+    ]
+  }
+]

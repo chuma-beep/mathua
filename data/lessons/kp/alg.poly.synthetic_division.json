@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Recognize when synthetic division applies",
+      "Identify the root c",
+      "Prepare the coefficients"
+    ]
+  },
+  {
+    "label": "Rational root theorem",
+    "section": "Rational root theorem",
+    "subgoals": [
+      "List candidate roots",
+      "Test them with synthetic division",
+      "Find the first root"
+    ]
+  },
+  {
+    "label": "The method",
+    "section": "Statement of the method",
+    "subgoals": [
+      "Bring down the leading coefficient",
+      "Multiply and add across",
+      "Read the quotient and remainder"
+    ]
+  }
+]

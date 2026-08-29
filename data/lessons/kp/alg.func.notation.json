@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Informal definition",
+    "section": "Informal Definition of a Function",
+    "subgoals": [
+      "Read f(x) aloud",
+      "Identify input and output",
+      "Use notation in expressions"
+    ]
+  },
+  {
+    "label": "Tables and graphs",
+    "section": "Tables and Graphs",
+    "subgoals": [
+      "Read ordered pairs",
+      "Map graph points to notation",
+      "Evaluate from either form"
+    ]
+  },
+  {
+    "label": "Four descriptions",
+    "section": "Translating Between Four Descriptions of the Same Function",
+    "subgoals": [
+      "Move between formula, table, graph, words",
+      "Keep notation consistent",
+      "Translate each direction"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify a quadratic equation",
+      "Recognize the standard form",
+      "Choose a solving method"
+    ]
+  },
+  {
+    "label": "Resolution methods",
+    "section": "Resolution methods",
+    "subgoals": [
+      "Factor when possible",
+      "Complete the square",
+      "Apply the quadratic formula"
+    ]
+  },
+  {
+    "label": "Quadratic formula",
+    "section": "Quadratic formula",
+    "subgoals": [
+      "Substitute into the formula",
+      "Simplify the radical",
+      "State both solutions"
+    ]
+  }
+]

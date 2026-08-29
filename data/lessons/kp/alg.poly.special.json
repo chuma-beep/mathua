@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Identify a notable product pattern",
+      "Recall the standard forms",
+      "Prepare to expand"
+    ]
+  },
+  {
+    "label": "Square of a binomial",
+    "section": "Square of a binomial",
+    "subgoals": [
+      "Apply (a+b)^2",
+      "Apply (a-b)^2",
+      "Verify the middle term"
+    ]
+  },
+  {
+    "label": "Difference of two squares",
+    "section": "Difference of two squares",
+    "subgoals": [
+      "Apply (a+b)(a-b)",
+      "Recognize the pattern",
+      "Factor quickly"
+    ]
+  }
+]

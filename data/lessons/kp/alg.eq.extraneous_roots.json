@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Loss of roots",
+    "section": "Loss of Roots",
+    "subgoals": [
+      "Recognize when operations lose roots",
+      "Avoid dividing by a variable",
+      "Preserve all solutions"
+    ]
+  },
+  {
+    "label": "Correct method",
+    "section": "Correct method",
+    "subgoals": [
+      "Factor instead of canceling",
+      "Keep every factor",
+      "List all solutions"
+    ]
+  },
+  {
+    "label": "Loss of roots by squaring",
+    "section": "Loss of roots by squaring",
+    "subgoals": [
+      "Square carefully",
+      "Check for extraneous roots",
+      "Reject values that fail"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Motivation",
+    "section": "Motivation for Factoring",
+    "subgoals": [
+      "List the factors of each term",
+      "Find the common factors",
+      "Explain why factoring matters"
+    ]
+  },
+  {
+    "label": "Identify the GCF",
+    "section": "Identifying the Greatest Common Factor",
+    "subgoals": [
+      "Compare term factors",
+      "Pick the largest common factor",
+      "Verify it divides every term"
+    ]
+  },
+  {
+    "label": "Factor out the GCF",
+    "section": "Factoring Out the Greatest Common Factor",
+    "subgoals": [
+      "Divide each term by the GCF",
+      "Rewrite as a product",
+      "Check by distributing"
+    ]
+  }
+]
