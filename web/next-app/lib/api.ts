@@ -407,6 +407,20 @@ export async function getTranscript(): Promise<CourseStatus[]> {
   return data.courses ?? []
 }
 
+export interface EfficacyReport {
+  concepts_touched: number
+  first_pass_rate: number
+  second_pass_rate: number
+  avg_attempts_per_concept: number
+  total_attempts: number
+}
+
+export async function getEfficacy(): Promise<EfficacyReport | null> {
+  const res = await fetch(`${API_BASE}/api/efficacy`, { headers: { ...getAuthHeaders() } })
+  if (!res.ok) return null
+  return res.json()
+}
+
 export interface ConfigRes {
 	auth_enabled: boolean
 }

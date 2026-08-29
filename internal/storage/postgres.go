@@ -68,6 +68,10 @@ func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]Attem
 	return nil, fmt.Errorf("not implemented")
 }
 
+func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {
+	return nil, fmt.Errorf("not implemented")
+}
+
 func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	return nil, fmt.Errorf("not implemented")
 }

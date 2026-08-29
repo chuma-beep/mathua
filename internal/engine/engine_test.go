@@ -508,3 +508,40 @@ func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 		t.Error("expected halted flag after 2 consecutive study misses")
 	}
 }
+
+// Session 5: efficacy instrumentation — first-pass / second-pass rates.
+func TestEngine_Efficacy(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("efficacy")
+	// Concept a: first attempt correct (first-pass hit), concept b: wrong then right.
+	if _, err := e.SubmitStudyAnswer(st.ID, "a", "42", "42", 5.0); err != nil {
+		t.Fatalf("submit a: %v", err)
+	}
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "1", "99", 5.0); err != nil {
+		t.Fatalf("submit b wrong: %v", err)
+	}
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "99", "99", 5.0); err != nil {
+		t.Fatalf("submit b right: %v", err)
+	}
+	rep, err := e.Efficacy(st.ID)
+	if err != nil {
+		t.Fatalf("efficacy: %v", err)
+	}
+	if rep.ConceptsTouched != 2 {
+		t.Errorf("expected 2 concepts touched, got %d", rep.ConceptsTouched)
+	}
+	if rep.FirstPassRate != 0.5 {
+		t.Errorf("expected first-pass 0.5 (1/2), got %f", rep.FirstPassRate)
+	}
+	if rep.SecondPassRate != 1.0 {
+		t.Errorf("expected second-pass 1.0, got %f", rep.SecondPassRate)
+	}
+	if rep.AvgAttemptsPerConcept != 1.5 {
+		t.Errorf("expected avg 1.5 attempts/concept, got %f", rep.AvgAttemptsPerConcept)
+	}
+	// Empty student → zeros, no error.
+	empty, err := e.Efficacy("nobody")
+	if err != nil || empty.ConceptsTouched != 0 {
+		t.Errorf("expected empty report, got %+v err=%v", empty, err)
+	}
+}

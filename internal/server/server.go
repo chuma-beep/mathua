@@ -133,6 +133,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleQuizAnswer))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
+	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
 }
 
 // POST /api/session
@@ -1810,6 +1811,25 @@ func writeError(w http.ResponseWriter, msg string, code int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
 	json.NewEncoder(w).Encode(map[string]string{"error": msg})
+}
+
+// GET /api/efficacy — first-pass / second-pass instrumentation.
+func (s *Server) handleEfficacy(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	report, err := s.eng.Efficacy(studentID)
+	if err != nil {
+		writeError(w, "failed to compute efficacy", 500)
+		return
+	}
+	writeJSON(w, report)
 }
 
 func logRequest(next http.HandlerFunc) http.HandlerFunc {
