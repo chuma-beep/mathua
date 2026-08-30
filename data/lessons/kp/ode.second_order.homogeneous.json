@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Substitution Method",
+    "section": "Substitution Method",
+    "subgoals": [
+      "Define homogeneous second-order odes",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Homogeneous second-order ODEs — practice 2",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  },
+  {
+    "label": "Homogeneous second-order ODEs — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

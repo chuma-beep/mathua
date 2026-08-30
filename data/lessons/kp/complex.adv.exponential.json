@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define exponential form of complex numbers (euler's formula)",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Properties of the exponential form",
+    "section": "Properties of the exponential form",
+    "subgoals": [
+      "Understand properties of the exponential form",
+      "Apply properties of the exponential form",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Roots in exponential form",
+    "section": "Roots in exponential form",
+    "subgoals": [
+      "Understand roots in exponential form",
+      "Apply roots in exponential form",
+      "Check the result"
+    ]
+  }
+]

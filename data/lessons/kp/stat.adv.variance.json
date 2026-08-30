@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to mean deviations",
+    "section": "Introduction to mean deviations",
+    "subgoals": [
+      "Define variance",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Understand variance",
+      "Apply variance",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Variance of discrete and continuous random variables",
+    "section": "Variance of discrete and continuous random variables",
+    "subgoals": [
+      "Understand variance of discrete and continuous random variables",
+      "Apply variance of discrete and continuous random variables",
+      "Check the result"
+    ]
+  }
+]

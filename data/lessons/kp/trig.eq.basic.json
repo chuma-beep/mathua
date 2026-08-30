@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Simple Trigonometric Equations",
+    "section": "Simple Trigonometric Equations",
+    "subgoals": [
+      "Understand simple trigonometric equations",
+      "Solve a simple trigonometric equations example",
+      "Check solutions in [0, 2π)"
+    ]
+  },
+  {
+    "label": "Trigonometric Equations Solvable by Substitution",
+    "section": "Trigonometric Equations Solvable by Substitution",
+    "subgoals": [
+      "Understand trigonometric equations solvable by substitution",
+      "Solve a trigonometric equations solvable by substitution example",
+      "Check solutions in [0, 2π)"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Method of Undetermined Coefficients",
+    "section": "Method of Undetermined Coefficients",
+    "subgoals": [
+      "Define non-homogeneous second-order odes",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Variation of Parameters",
+    "section": "Variation of Parameters",
+    "subgoals": [
+      "Understand variation of parameters",
+      "Apply variation of parameters",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Non-homogeneous second-order ODEs — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

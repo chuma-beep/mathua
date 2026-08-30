@@ -1,0 +1,29 @@
+[
+  {
+    "label": "3.5 Derivatives of Trigonometric Functions",
+    "section": "3.5 Derivatives of Trigonometric Functions",
+    "subgoals": [
+      "Define derivatives of sine and cosine",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Derivatives of the Sine and Cosine Functions",
+    "section": "Derivatives of the Sine and Cosine Functions",
+    "subgoals": [
+      "Understand derivatives of the sine and cosine functions",
+      "Apply derivatives of the sine and cosine functions",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Theorem 3.8",
+    "section": "Theorem 3.8",
+    "subgoals": [
+      "Understand theorem 3.8",
+      "Apply theorem 3.8",
+      "Check the result"
+    ]
+  }
+]

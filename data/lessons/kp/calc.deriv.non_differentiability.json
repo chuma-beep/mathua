@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are non differentiable points",
+    "section": "What are non differentiable points",
+    "subgoals": [
+      "Define points of non-differentiability",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Inflection point with vertical tangent",
+    "section": "Inflection point with vertical tangent",
+    "subgoals": [
+      "Understand inflection point with vertical tangent",
+      "Apply inflection point with vertical tangent",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Cusps",
+    "section": "Cusps",
+    "subgoals": [
+      "Understand cusps",
+      "Apply cusps",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From Cartesian to vector form",
+    "section": "From Cartesian to vector form",
+    "subgoals": [
+      "Define graphing parametric equations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Parametric form",
+    "section": "Parametric form",
+    "subgoals": [
+      "Understand parametric form",
+      "Apply parametric form",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the student’s \\\\(t\\\\) distribution",
+    "section": "Introduction to the student’s \\\\(t\\\\) distribution",
+    "subgoals": [
+      "Define student's t-distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Symmetry of the student’s \\\\(t\\\\) distribution",
+    "section": "Symmetry of the student’s \\\\(t\\\\) distribution",
+    "subgoals": [
+      "Understand symmetry of the student’s \\\\(t\\\\) distribution",
+      "Apply symmetry of the student’s \\\\(t\\\\) distribution",
+      "Check the result"
+    ]
+  }
+]

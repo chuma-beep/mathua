@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of the normal distribution",
+    "section": "Definition of the normal distribution",
+    "subgoals": [
+      "Define normal (gaussian) distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Probability density function of the normal distribution",
+    "section": "Probability density function of the normal distribution",
+    "subgoals": [
+      "Understand probability density function of the normal distribution",
+      "Apply probability density function of the normal distribution",
+      "Check the result"
+    ]
+  }
+]

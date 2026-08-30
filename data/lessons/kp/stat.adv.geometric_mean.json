@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the geometric mean?",
+    "section": "What is the geometric mean?",
+    "subgoals": [
+      "Define geometric mean",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Geometric mean logarithmic form",
+    "section": "Geometric mean logarithmic form",
+    "subgoals": [
+      "Understand geometric mean logarithmic form",
+      "Apply geometric mean logarithmic form",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Weighted geometric mean",
+    "section": "Weighted geometric mean",
+    "subgoals": [
+      "Understand weighted geometric mean",
+      "Apply weighted geometric mean",
+      "Check the result"
+    ]
+  }
+]

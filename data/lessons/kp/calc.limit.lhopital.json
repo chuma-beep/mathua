@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Indeterminate forms",
+    "section": "Indeterminate forms",
+    "subgoals": [
+      "Define l'hopital's rule",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Understand statement",
+      "Apply statement",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Proof",
+    "section": "Proof",
+    "subgoals": [
+      "Understand proof",
+      "Apply proof",
+      "Check the result"
+    ]
+  }
+]

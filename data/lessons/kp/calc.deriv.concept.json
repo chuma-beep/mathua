@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to derivatives",
+    "section": "Introduction to derivatives",
+    "subgoals": [
+      "Define derivative as slope of tangent line",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Right-hand and left-hand derivatives",
+    "section": "Right-hand and left-hand derivatives",
+    "subgoals": [
+      "Understand right-hand and left-hand derivatives",
+      "Apply right-hand and left-hand derivatives",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Fundamental derivatives",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Understand fundamental derivatives",
+      "Apply fundamental derivatives",
+      "Check the result"
+    ]
+  }
+]

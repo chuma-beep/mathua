@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Secant",
+    "section": "Secant",
+    "subgoals": [
+      "Understand secant",
+      "Evaluate secant",
+      "Check the identity"
+    ]
+  },
+  {
+    "label": "Common values of the secant",
+    "section": "Common values of the secant",
+    "subgoals": [
+      "Understand common values of the secant",
+      "Evaluate common values of the secant",
+      "Check the identity"
+    ]
+  },
+  {
+    "label": "Trigonometric identities for the secant",
+    "section": "Trigonometric identities for the secant",
+    "subgoals": [
+      "Understand trigonometric identities for the secant",
+      "Apply trigonometric identities for the secant to simplify",
+      "Check by substitution"
+    ]
+  }
+]

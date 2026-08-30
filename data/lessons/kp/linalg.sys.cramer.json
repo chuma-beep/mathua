@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is Cramer’s rule?",
+    "section": "What is Cramer’s rule?",
+    "subgoals": [
+      "Define cramer's rule",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Applying Cramer’s Rule",
+    "section": "Applying Cramer’s Rule",
+    "subgoals": [
+      "Understand applying cramer’s rule",
+      "Apply applying cramer’s rule",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Cramer's rule — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

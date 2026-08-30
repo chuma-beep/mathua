@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the gamma distribution",
+    "section": "Introduction to the gamma distribution",
+    "subgoals": [
+      "Define gamma distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Expected value of the gamma distribution",
+    "section": "Expected value of the gamma distribution",
+    "subgoals": [
+      "Understand expected value of the gamma distribution",
+      "Apply expected value of the gamma distribution",
+      "Check the result"
+    ]
+  }
+]

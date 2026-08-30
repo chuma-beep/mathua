@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Radial–angular description of a point",
+    "section": "Radial–angular description of a point",
+    "subgoals": [
+      "Define graphing polar equations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Determining the angle \\\\(\\theta\\\\)",
+    "section": "Determining the angle \\\\(\\theta\\\\)",
+    "subgoals": [
+      "Understand determining the angle \\\\(\\theta\\\\)",
+      "Apply determining the angle \\\\(\\theta\\\\)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Non-uniqueness of polar representation",
+    "section": "Non-uniqueness of polar representation",
+    "subgoals": [
+      "Understand non-uniqueness of polar representation",
+      "Apply non-uniqueness of polar representation",
+      "Check the result"
+    ]
+  }
+]

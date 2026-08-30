@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is Leibniz’s criterion used for",
+    "section": "What is Leibniz’s criterion used for",
+    "subgoals": [
+      "Define alternating series and leibniz criterion",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Proof",
+    "section": "Proof",
+    "subgoals": [
+      "Understand proof",
+      "Apply proof",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]

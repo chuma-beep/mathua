@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define euler's totient function",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Peano axioms",
+    "section": "The Peano axioms",
+    "subgoals": [
+      "Understand the peano axioms",
+      "Apply the peano axioms",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Set-theoretic construction",
+    "section": "Set-theoretic construction",
+    "subgoals": [
+      "Understand set-theoretic construction",
+      "Apply set-theoretic construction",
+      "Check the result"
+    ]
+  }
+]

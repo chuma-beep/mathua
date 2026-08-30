@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Understanding the sides of a right triangle",
+    "section": "Understanding the sides of a right triangle",
+    "subgoals": [
+      "Understand understanding the sides of a right triangle",
+      "Apply understanding the sides of a right triangle to find sides/angles",
+      "Check with Pythagorean theorem"
+    ]
+  },
+  {
+    "label": "SOH-CAH-TOA method",
+    "section": "SOH-CAH-TOA method",
+    "subgoals": [
+      "Understand soh-cah-toa method",
+      "Apply soh-cah-toa method to find sides/angles",
+      "Check with Pythagorean theorem"
+    ]
+  },
+  {
+    "label": "The Pythagorean identity",
+    "section": "The Pythagorean identity",
+    "subgoals": [
+      "Understand the pythagorean identity",
+      "Apply the pythagorean identity to simplify",
+      "Check by substitution"
+    ]
+  }
+]

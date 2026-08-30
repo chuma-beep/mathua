@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Define mean value theorem (lagrange)",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "A geometric view of Lagrange’s theorem",
+    "section": "A geometric view of Lagrange’s theorem",
+    "subgoals": [
+      "Understand a geometric view of lagrange’s theorem",
+      "Apply a geometric view of lagrange’s theorem",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Proof",
+    "section": "Proof",
+    "subgoals": [
+      "Understand proof",
+      "Apply proof",
+      "Check the result"
+    ]
+  }
+]

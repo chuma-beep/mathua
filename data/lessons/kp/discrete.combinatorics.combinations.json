@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define combinations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Pascal's triangle",
+    "section": "Pascal's triangle",
+    "subgoals": [
+      "Understand pascal's triangle",
+      "Apply pascal's triangle",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Fundamental properties of the binomial coefficient",
+    "section": "Fundamental properties of the binomial coefficient",
+    "subgoals": [
+      "Understand fundamental properties of the binomial coefficient",
+      "Apply fundamental properties of the binomial coefficient",
+      "Check the result"
+    ]
+  }
+]

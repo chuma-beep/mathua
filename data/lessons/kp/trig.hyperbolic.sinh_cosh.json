@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to hyperbolic sine and cosine",
+    "section": "Introduction to hyperbolic sine and cosine",
+    "subgoals": [
+      "Understand introduction to hyperbolic sine and cosine",
+      "Apply introduction to hyperbolic sine and cosine",
+      "Check via exponential form"
+    ]
+  },
+  {
+    "label": "Fundamental hyperbolic identity",
+    "section": "Fundamental hyperbolic identity",
+    "subgoals": [
+      "Understand fundamental hyperbolic identity",
+      "Apply fundamental hyperbolic identity to simplify",
+      "Check by substitution"
+    ]
+  },
+  {
+    "label": "Hyperbolic identities",
+    "section": "Hyperbolic identities",
+    "subgoals": [
+      "Understand hyperbolic identities",
+      "Apply hyperbolic identities to simplify",
+      "Check by substitution"
+    ]
+  }
+]

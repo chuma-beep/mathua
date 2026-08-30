@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define imaginary unit i and complex numbers",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Construction of the complex numbers",
+    "section": "Construction of the complex numbers",
+    "subgoals": [
+      "Understand construction of the complex numbers",
+      "Apply construction of the complex numbers",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Understand definition",
+      "Apply definition",
+      "Check the result"
+    ]
+  }
+]

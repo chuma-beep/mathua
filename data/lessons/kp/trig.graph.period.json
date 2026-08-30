@@ -1,0 +1,29 @@
+[
+  {
+    "label": "5.4 Right Triangle Trigonometry",
+    "section": "5.4 Right Triangle Trigonometry",
+    "subgoals": [
+      "Understand 5.4 right triangle trigonometry",
+      "Apply 5.4 right triangle trigonometry to find sides/angles",
+      "Check with Pythagorean theorem"
+    ]
+  },
+  {
+    "label": "Using Right Triangles to Evaluate Trigonometric Functions",
+    "section": "Using Right Triangles to Evaluate Trigonometric Functions",
+    "subgoals": [
+      "Understand using right triangles to evaluate trigonometric functions",
+      "Apply using right triangles to evaluate trigonometric functions to find sides/angles",
+      "Check with Pythagorean theorem"
+    ]
+  },
+  {
+    "label": "Understanding Right Triangle Relationships",
+    "section": "Understanding Right Triangle Relationships",
+    "subgoals": [
+      "Understand understanding right triangle relationships",
+      "Apply understanding right triangle relationships to find sides/angles",
+      "Check with Pythagorean theorem"
+    ]
+  }
+]

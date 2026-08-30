@@ -1,0 +1,29 @@
+[
+  {
+    "label": "$\\epsilon$-$\\delta$ Definition",
+    "section": "$\\epsilon$-$\\delta$ Definition",
+    "subgoals": [
+      "Define continuity in topological spaces",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Open Set Definition",
+    "section": "Open Set Definition",
+    "subgoals": [
+      "Understand open set definition",
+      "Apply open set definition",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Equivalent Conditions",
+    "section": "Equivalent Conditions",
+    "subgoals": [
+      "Understand equivalent conditions",
+      "Apply equivalent conditions",
+      "Check the result"
+    ]
+  }
+]

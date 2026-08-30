@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Binomial Theorem",
+    "section": "Binomial Theorem",
+    "subgoals": [
+      "Define binomial theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Understand statement",
+      "Apply statement",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Binomial coefficient",
+    "section": "Binomial coefficient",
+    "subgoals": [
+      "Understand binomial coefficient",
+      "Apply binomial coefficient",
+      "Check the result"
+    ]
+  }
+]

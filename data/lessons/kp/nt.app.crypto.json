@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Key Generation",
+    "section": "Key Generation",
+    "subgoals": [
+      "Define introduction to rsa cryptography",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Encryption",
+    "section": "Encryption",
+    "subgoals": [
+      "Understand encryption",
+      "Apply encryption",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Decryption",
+    "section": "Decryption",
+    "subgoals": [
+      "Understand decryption",
+      "Apply decryption",
+      "Check the result"
+    ]
+  }
+]

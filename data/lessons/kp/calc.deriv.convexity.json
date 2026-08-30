@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define convexity and concavity of functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Convexity",
+    "section": "Convexity",
+    "subgoals": [
+      "Understand convexity",
+      "Apply convexity",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Concavity",
+    "section": "Concavity",
+    "subgoals": [
+      "Understand concavity",
+      "Apply concavity",
+      "Check the result"
+    ]
+  }
+]

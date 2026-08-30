@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euclidean algorithm for GCD",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  },
+  {
+    "label": "Euclidean algorithm for GCD — practice 2",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  },
+  {
+    "label": "Euclidean algorithm for GCD — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

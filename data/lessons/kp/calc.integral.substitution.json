@@ -1,0 +1,29 @@
+[
+  {
+    "label": "How substitution simplifies integration",
+    "section": "How substitution simplifies integration",
+    "subgoals": [
+      "Define u-substitution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Recognizing when to use substitution",
+    "section": "Recognizing when to use substitution",
+    "subgoals": [
+      "Understand recognizing when to use substitution",
+      "Apply recognizing when to use substitution",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Substitution patterns",
+    "section": "Substitution patterns",
+    "subgoals": [
+      "Understand substitution patterns",
+      "Apply substitution patterns",
+      "Check the result"
+    ]
+  }
+]

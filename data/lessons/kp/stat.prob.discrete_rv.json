@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of a discrete random variable",
+    "section": "Definition of a discrete random variable",
+    "subgoals": [
+      "Define discrete random variables",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Discrete probability distribution",
+    "section": "Discrete probability distribution",
+    "subgoals": [
+      "Understand discrete probability distribution",
+      "Apply discrete probability distribution",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Joint probability distributions",
+    "section": "Joint probability distributions",
+    "subgoals": [
+      "Understand joint probability distributions",
+      "Apply joint probability distributions",
+      "Check the result"
+    ]
+  }
+]

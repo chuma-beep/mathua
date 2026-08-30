@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define eigenvalues and eigenvectors concept",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The characteristic equation",
+    "section": "The characteristic equation",
+    "subgoals": [
+      "Understand the characteristic equation",
+      "Apply the characteristic equation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Eigenspaces",
+    "section": "Eigenspaces",
+    "subgoals": [
+      "Understand eigenspaces",
+      "Apply eigenspaces",
+      "Check the result"
+    ]
+  }
+]

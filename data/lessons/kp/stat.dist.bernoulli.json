@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the Bernoulli distribution",
+    "section": "Introduction to the Bernoulli distribution",
+    "subgoals": [
+      "Define bernoulli distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Mean of the Bernoulli distribution",
+    "section": "Mean of the Bernoulli distribution",
+    "subgoals": [
+      "Understand mean of the bernoulli distribution",
+      "Apply mean of the bernoulli distribution",
+      "Check the result"
+    ]
+  }
+]

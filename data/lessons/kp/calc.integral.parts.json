@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The method of integration by parts",
+    "section": "The method of integration by parts",
+    "subgoals": [
+      "Define integration by parts",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Derivation of the formula",
+    "section": "Derivation of the formula",
+    "subgoals": [
+      "Understand derivation of the formula",
+      "Apply derivation of the formula",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Most common mistakes",
+    "section": "Most common mistakes",
+    "subgoals": [
+      "Understand most common mistakes",
+      "Apply most common mistakes",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the Squeeze Theorem",
+    "section": "What is the Squeeze Theorem",
+    "subgoals": [
+      "Define squeeze theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Understand statement",
+      "Apply statement",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Proof of the Squeeze Theorem",
+    "section": "Proof of the Squeeze Theorem",
+    "subgoals": [
+      "Understand proof of the squeeze theorem",
+      "Apply proof of the squeeze theorem",
+      "Check the result"
+    ]
+  }
+]

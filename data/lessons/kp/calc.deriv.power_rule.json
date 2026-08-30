@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define power rule for differentiation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Degree of a polynomial",
+    "section": "Degree of a polynomial",
+    "subgoals": [
+      "Understand degree of a polynomial",
+      "Apply degree of a polynomial",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Interpolation and degree of a polynomial",
+    "section": "Interpolation and degree of a polynomial",
+    "subgoals": [
+      "Understand interpolation and degree of a polynomial",
+      "Apply interpolation and degree of a polynomial",
+      "Check the result"
+    ]
+  }
+]

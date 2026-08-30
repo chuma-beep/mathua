@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define riemann integrability criteria",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Partitions, upper sums, lower sums",
+    "section": "Partitions, upper sums, lower sums",
+    "subgoals": [
+      "Understand partitions, upper sums, lower sums",
+      "Apply partitions, upper sums, lower sums",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The Darboux criterion",
+    "section": "The Darboux criterion",
+    "subgoals": [
+      "Understand the darboux criterion",
+      "Apply the darboux criterion",
+      "Check the result"
+    ]
+  }
+]

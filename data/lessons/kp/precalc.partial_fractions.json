@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define partial fraction decomposition",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Application to the computation of integrals",
+    "section": "Application to the computation of integrals",
+    "subgoals": [
+      "Understand application to the computation of integrals",
+      "Apply application to the computation of integrals",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "General structure of partial fraction decomposition",
+    "section": "General structure of partial fraction decomposition",
+    "subgoals": [
+      "Understand general structure of partial fraction decomposition",
+      "Apply general structure of partial fraction decomposition",
+      "Check the result"
+    ]
+  }
+]

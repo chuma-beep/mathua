@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define add and subtract complex numbers",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Sum and difference of complex numbers",
+    "section": "Sum and difference of complex numbers",
+    "subgoals": [
+      "Understand sum and difference of complex numbers",
+      "Apply sum and difference of complex numbers",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Product of complex numbers",
+    "section": "Product of complex numbers",
+    "subgoals": [
+      "Understand product of complex numbers",
+      "Apply product of complex numbers",
+      "Check the result"
+    ]
+  }
+]

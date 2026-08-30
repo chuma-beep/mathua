@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the difference quotient",
+    "section": "What is the difference quotient",
+    "subgoals": [
+      "Define difference quotient",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Alternative forms",
+    "section": "Alternative forms",
+    "subgoals": [
+      "Understand alternative forms",
+      "Apply alternative forms",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Selected references",
+    "section": "Selected references",
+    "subgoals": [
+      "Understand selected references",
+      "Apply selected references",
+      "Check the result"
+    ]
+  }
+]

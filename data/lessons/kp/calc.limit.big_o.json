@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is Big O notation",
+    "section": "What is Big O notation",
+    "subgoals": [
+      "Define big o notation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The meaning of \\\\( O(1) \\\\)",
+    "section": "The meaning of \\\\( O(1) \\\\)",
+    "subgoals": [
+      "Understand the meaning of \\\\( o(1) \\\\)",
+      "Apply the meaning of \\\\( o(1) \\\\)",
+      "Check the result"
+    ]
+  }
+]

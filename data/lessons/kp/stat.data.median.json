@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The central position in a data distribution",
+    "section": "The central position in a data distribution",
+    "subgoals": [
+      "Define find the median",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "A distance-based definition of the median",
+    "section": "A distance-based definition of the median",
+    "subgoals": [
+      "Understand a distance-based definition of the median",
+      "Apply a distance-based definition of the median",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Find the median — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

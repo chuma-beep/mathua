@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define uniform continuity",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Understand definition",
+      "Apply definition",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Heine–Cantor Theorem",
+    "section": "Heine–Cantor Theorem",
+    "subgoals": [
+      "Understand heine–cantor theorem",
+      "Apply heine–cantor theorem",
+      "Check the result"
+    ]
+  }
+]

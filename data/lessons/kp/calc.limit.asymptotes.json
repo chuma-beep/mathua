@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Horizontal asymptotes",
+    "section": "Horizontal asymptotes",
+    "subgoals": [
+      "Define asymptotes of functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Vertical asymptotes",
+    "section": "Vertical asymptotes",
+    "subgoals": [
+      "Understand vertical asymptotes",
+      "Apply vertical asymptotes",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Oblique asymptotes",
+    "section": "Oblique asymptotes",
+    "subgoals": [
+      "Understand oblique asymptotes",
+      "Apply oblique asymptotes",
+      "Check the result"
+    ]
+  }
+]

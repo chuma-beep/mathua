@@ -1,0 +1,29 @@
+[
+  {
+    "label": "1.1 Deﬁnition A linear combination of x1, . . . , xn has the form",
+    "section": "1.1 Deﬁnition A linear combination of x1, . . . , xn has the form",
+    "subgoals": [
+      "Define solving systems with matrices",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "1.2 Example The combination 3x1 + 2x2 of x1 and x2 is linear. The combination",
+    "section": "1.2 Example The combination 3x1 + 2x2 of x1 and x2 is linear. The combination",
+    "subgoals": [
+      "Understand 1.2 example the combination 3x1 + 2x2 of x1 and x2 is linear. the combination",
+      "Apply 1.2 example the combination 3x1 + 2x2 of x1 and x2 is linear. the combination",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "1.3 Example The ordered pair (−1, 5) is a solution of this system.",
+    "section": "1.3 Example The ordered pair (−1, 5) is a solution of this system.",
+    "subgoals": [
+      "Understand 1.3 example the ordered pair (−1, 5) is a solution of this system.",
+      "Apply 1.3 example the ordered pair (−1, 5) is a solution of this system.",
+      "Check the result"
+    ]
+  }
+]

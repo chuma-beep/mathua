@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define modules: definition, examples, and properties",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Understand properties",
+      "Apply properties",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Algebraic hierarchy",
+    "section": "Algebraic hierarchy",
+    "subgoals": [
+      "Understand algebraic hierarchy",
+      "Apply algebraic hierarchy",
+      "Check the result"
+    ]
+  }
+]

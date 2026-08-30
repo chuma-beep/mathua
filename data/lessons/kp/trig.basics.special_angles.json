@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Using reference angles to rewrite angles",
+    "section": "Using reference angles to rewrite angles",
+    "subgoals": [
+      "Understand using reference angles to rewrite angles",
+      "Use using reference angles to rewrite angles to rewrite an angle",
+      "Check the quadrant sign"
+    ]
+  },
+  {
+    "label": "Reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
+    "section": "Reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
+    "subgoals": [
+      "Understand reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
+      "Apply reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
+    "section": "Reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
+    "subgoals": [
+      "Understand reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
+      "Apply reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
+      "Check the result"
+    ]
+  }
+]

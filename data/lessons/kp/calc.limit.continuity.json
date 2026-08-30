@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Continuous function at a point",
+    "section": "Continuous function at a point",
+    "subgoals": [
+      "Define continuity and types of discontinuity",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Continuous function on an interval",
+    "section": "Continuous function on an interval",
+    "subgoals": [
+      "Understand continuous function on an interval",
+      "Apply continuous function on an interval",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Functions continuous on their domain",
+    "section": "Functions continuous on their domain",
+    "subgoals": [
+      "Understand functions continuous on their domain",
+      "Apply functions continuous on their domain",
+      "Check the result"
+    ]
+  }
+]

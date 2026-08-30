@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a harmonic series",
+    "section": "What is a harmonic series",
+    "subgoals": [
+      "Define harmonic series",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Generalized harmonic series (p-series)",
+    "section": "Generalized harmonic series (p-series)",
+    "subgoals": [
+      "Understand generalized harmonic series (p-series)",
+      "Apply generalized harmonic series (p-series)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Logarithmically modified harmonic series",
+    "section": "Logarithmically modified harmonic series",
+    "subgoals": [
+      "Understand logarithmically modified harmonic series",
+      "Apply logarithmically modified harmonic series",
+      "Check the result"
+    ]
+  }
+]

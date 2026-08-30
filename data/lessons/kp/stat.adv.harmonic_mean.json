@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the harmonic mean?",
+    "section": "What is the harmonic mean?",
+    "subgoals": [
+      "Define harmonic mean",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Harmonic mean — practice 2",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  },
+  {
+    "label": "Harmonic mean — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

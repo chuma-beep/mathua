@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The central behavior of a data distribution",
+    "section": "The central behavior of a data distribution",
+    "subgoals": [
+      "Define calculate the mean",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The mean as the minimum substitution error",
+    "section": "The mean as the minimum substitution error",
+    "subgoals": [
+      "Understand the mean as the minimum substitution error",
+      "Apply the mean as the minimum substitution error",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Hölder Mean",
+    "section": "Hölder Mean",
+    "subgoals": [
+      "Understand hölder mean",
+      "Apply hölder mean",
+      "Check the result"
+    ]
+  }
+]

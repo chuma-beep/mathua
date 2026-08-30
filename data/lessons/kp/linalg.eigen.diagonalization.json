@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The diagonalization condition",
+    "section": "The diagonalization condition",
+    "subgoals": [
+      "Define matrix diagonalization",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Eigenvalues and eigenvectors",
+    "section": "Eigenvalues and eigenvectors",
+    "subgoals": [
+      "Understand eigenvalues and eigenvectors",
+      "Apply eigenvalues and eigenvectors",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Algebraic and geometric multiplicity",
+    "section": "Algebraic and geometric multiplicity",
+    "subgoals": [
+      "Understand algebraic and geometric multiplicity",
+      "Apply algebraic and geometric multiplicity",
+      "Check the result"
+    ]
+  }
+]

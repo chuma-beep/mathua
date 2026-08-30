@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Arctangent definition",
+    "section": "Arctangent definition",
+    "subgoals": [
+      "State the arctangent definition",
+      "Apply arctangent definition in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "Reference values of arctangent",
+    "section": "Reference values of arctangent",
+    "subgoals": [
+      "Understand reference values of arctangent",
+      "Use reference values of arctangent to rewrite an angle",
+      "Check the quadrant sign"
+    ]
+  },
+  {
+    "label": "Arctangent function",
+    "section": "Arctangent function",
+    "subgoals": [
+      "Understand arctangent function",
+      "Evaluate arctangent function",
+      "Check the identity"
+    ]
+  }
+]

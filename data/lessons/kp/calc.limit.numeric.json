@@ -1,0 +1,29 @@
+[
+  {
+    "label": "2.2 The Limit of a Function",
+    "section": "2.2 The Limit of a Function",
+    "subgoals": [
+      "Define estimate limits numerically",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Intuitive Definition of a Limit",
+    "section": "Intuitive Definition of a Limit",
+    "subgoals": [
+      "Understand intuitive definition of a limit",
+      "Apply intuitive definition of a limit",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Understand definition",
+      "Apply definition",
+      "Check the result"
+    ]
+  }
+]

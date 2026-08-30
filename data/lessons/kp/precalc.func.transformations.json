@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define function transformations: shifts, reflections, stretches",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Domain",
+    "section": "Domain",
+    "subgoals": [
+      "Understand domain",
+      "Apply domain",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Understand symmetry",
+      "Apply symmetry",
+      "Check the result"
+    ]
+  }
+]

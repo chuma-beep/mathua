@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Understanding limits in calculus",
+    "section": "Understanding limits in calculus",
+    "subgoals": [
+      "Define limit laws and properties",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Understand definition",
+      "Apply definition",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Asymptotes and infinite limits",
+    "section": "Asymptotes and infinite limits",
+    "subgoals": [
+      "Understand asymptotes and infinite limits",
+      "Apply asymptotes and infinite limits",
+      "Check the result"
+    ]
+  }
+]

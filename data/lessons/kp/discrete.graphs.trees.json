@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 4.2 Trees",
+    "section": "Section 4.2 Trees",
+    "subgoals": [
+      "Define trees and spanning trees",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Definition of a Tree.",
+    "section": "Definition of a Tree.",
+    "subgoals": [
+      "Understand definition of a tree.",
+      "Apply definition of a tree.",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Subsection  Properties of Trees",
+    "section": "Subsection  Properties of Trees",
+    "subgoals": [
+      "Understand subsection  properties of trees",
+      "Apply subsection  properties of trees",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is cosine similarity",
+    "section": "What is cosine similarity",
+    "subgoals": [
+      "Define cosine similarity between vectors",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Distance between vectors and its limitations",
+    "section": "Distance between vectors and its limitations",
+    "subgoals": [
+      "Understand distance between vectors and its limitations",
+      "Apply distance between vectors and its limitations",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The angle between vectors",
+    "section": "The angle between vectors",
+    "subgoals": [
+      "Understand the angle between vectors",
+      "Apply the angle between vectors",
+      "Check the result"
+    ]
+  }
+]

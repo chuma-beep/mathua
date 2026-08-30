@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define set operations: union, intersection, complement",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The universal set",
+    "section": "The universal set",
+    "subgoals": [
+      "Understand the universal set",
+      "Apply the universal set",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Cardinality of finite sets",
+    "section": "Cardinality of finite sets",
+    "subgoals": [
+      "Understand cardinality of finite sets",
+      "Apply cardinality of finite sets",
+      "Check the result"
+    ]
+  }
+]

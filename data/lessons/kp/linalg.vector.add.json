@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Geometric representation",
+    "section": "Geometric representation",
+    "subgoals": [
+      "Define vector addition and scalar multiplication",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Components and coordinate representation",
+    "section": "Components and coordinate representation",
+    "subgoals": [
+      "Understand components and coordinate representation",
+      "Apply components and coordinate representation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Vector operations",
+    "section": "Vector operations",
+    "subgoals": [
+      "Understand vector operations",
+      "Apply vector operations",
+      "Check the result"
+    ]
+  }
+]

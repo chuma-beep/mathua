@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Define metric spaces",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Open Balls",
+    "section": "Open Balls",
+    "subgoals": [
+      "Understand open balls",
+      "Apply open balls",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Metric spaces — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

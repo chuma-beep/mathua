@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define algebra of limits",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Limit of a sum",
+    "section": "Limit of a sum",
+    "subgoals": [
+      "Understand limit of a sum",
+      "Apply limit of a sum",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Limit of a difference",
+    "section": "Limit of a difference",
+    "subgoals": [
+      "Understand limit of a difference",
+      "Apply limit of a difference",
+      "Check the result"
+    ]
+  }
+]

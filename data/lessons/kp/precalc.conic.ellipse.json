@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to conic sections",
+    "section": "Introduction to conic sections",
+    "subgoals": [
+      "Define ellipses: standard form, vertices, and foci",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "What is an ellipse",
+    "section": "What is an ellipse",
+    "subgoals": [
+      "Understand what is an ellipse",
+      "Apply what is an ellipse",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Why is the sum of distances to the foci always constant in an ellipse?",
+    "section": "Why is the sum of distances to the foci always constant in an ellipse?",
+    "subgoals": [
+      "Understand why is the sum of distances to the foci always constant in an ellipse?",
+      "Apply why is the sum of distances to the foci always constant in an ellipse?",
+      "Check the result"
+    ]
+  }
+]

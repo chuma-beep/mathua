@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the definition",
+      "Apply definition in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "Fundamental trigonometric identity",
+    "section": "Fundamental trigonometric identity",
+    "subgoals": [
+      "Understand fundamental trigonometric identity",
+      "Apply fundamental trigonometric identity to simplify",
+      "Check by substitution"
+    ]
+  },
+  {
+    "label": "Angles on the unit circle",
+    "section": "Angles on the unit circle",
+    "subgoals": [
+      "Understand angles on the unit circle",
+      "Apply angles on the unit circle",
+      "Check the result"
+    ]
+  }
+]

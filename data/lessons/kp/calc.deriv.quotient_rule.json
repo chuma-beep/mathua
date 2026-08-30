@@ -1,0 +1,29 @@
+[
+  {
+    "label": "3.3 Differentiation Rules",
+    "section": "3.3 Differentiation Rules",
+    "subgoals": [
+      "Define quotient rule",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Basic Rules",
+    "section": "The Basic Rules",
+    "subgoals": [
+      "Understand the basic rules",
+      "Apply the basic rules",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The Constant Rule",
+    "section": "The Constant Rule",
+    "subgoals": [
+      "Understand the constant rule",
+      "Apply the constant rule",
+      "Check the result"
+    ]
+  }
+]

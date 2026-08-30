@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the definition",
+      "Apply definition in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "Vector interpretation",
+    "section": "Vector interpretation",
+    "subgoals": [
+      "Understand vector interpretation",
+      "Apply vector interpretation to solve a triangle",
+      "Check for ambiguous or special cases"
+    ]
+  },
+  {
+    "label": "Law of cosines",
+    "section": "",
+    "subgoals": [
+      "Understand law of cosines",
+      "Apply law of cosines to solve problems",
+      "Check the result and refine"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Primitives",
+    "section": "Primitives",
+    "subgoals": [
+      "Define indefinite integrals and antiderivatives",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "What is the indefinite integral",
+    "section": "What is the indefinite integral",
+    "subgoals": [
+      "Understand what is the indefinite integral",
+      "Apply what is the indefinite integral",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Linearity properties",
+    "section": "Linearity properties",
+    "subgoals": [
+      "Understand linearity properties",
+      "Apply linearity properties",
+      "Check the result"
+    ]
+  }
+]

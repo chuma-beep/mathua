@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to Conic Sections",
+    "section": "Introduction to Conic Sections",
+    "subgoals": [
+      "Define parabolas as conic sections: focus and directrix",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Each coefficient carries specific geometric information about the conic.",
+    "section": "Each coefficient carries specific geometric information about the conic.",
+    "subgoals": [
+      "Understand each coefficient carries specific geometric information about the conic.",
+      "Apply each coefficient carries specific geometric information about the conic.",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Degenerate conic",
+    "section": "Degenerate conic",
+    "subgoals": [
+      "Understand degenerate conic",
+      "Apply degenerate conic",
+      "Check the result"
+    ]
+  }
+]

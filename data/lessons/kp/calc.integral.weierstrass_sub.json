@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The class of integrals we want to handle",
+    "section": "The class of integrals we want to handle",
+    "subgoals": [
+      "Define weierstrass substitution (tangent half-angle)",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The substitution \\\\( t = \\tan(x/2) \\\\)",
+    "section": "The substitution \\\\( t = \\tan(x/2) \\\\)",
+    "subgoals": [
+      "Understand the substitution \\\\( t = \\tan(x/2) \\\\)",
+      "Apply the substitution \\\\( t = \\tan(x/2) \\\\)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Translating sine, cosine, and the differential",
+    "section": "Translating sine, cosine, and the differential",
+    "subgoals": [
+      "Understand translating sine, cosine, and the differential",
+      "Apply translating sine, cosine, and the differential",
+      "Check the result"
+    ]
+  }
+]

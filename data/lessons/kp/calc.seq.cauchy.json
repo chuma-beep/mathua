@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a Cauchy sequence",
+    "section": "What is a Cauchy sequence",
+    "subgoals": [
+      "Define cauchy sequences",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Theorem",
+    "section": "Theorem",
+    "subgoals": [
+      "Understand theorem",
+      "Apply theorem",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Cauchy sequences — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

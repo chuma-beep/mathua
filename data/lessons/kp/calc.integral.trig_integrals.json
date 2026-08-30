@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define integrals of trigonometric functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Integrals of trigonometric powers with \\\\(n\\\\) even",
+    "section": "Integrals of trigonometric powers with \\\\(n\\\\) even",
+    "subgoals": [
+      "Understand integrals of trigonometric powers with \\\\(n\\\\) even",
+      "Apply integrals of trigonometric powers with \\\\(n\\\\) even",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Integrals of trigonometric powers with \\\\(n\\\\) odd",
+    "section": "Integrals of trigonometric powers with \\\\(n\\\\) odd",
+    "subgoals": [
+      "Understand integrals of trigonometric powers with \\\\(n\\\\) odd",
+      "Apply integrals of trigonometric powers with \\\\(n\\\\) odd",
+      "Check the result"
+    ]
+  }
+]

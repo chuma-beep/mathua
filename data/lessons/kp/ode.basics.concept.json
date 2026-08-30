@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What Are Differential Equations?",
+    "section": "What Are Differential Equations?",
+    "subgoals": [
+      "Define what is a differential equation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Order of a differential equation",
+    "section": "Order of a differential equation",
+    "subgoals": [
+      "Understand order of a differential equation",
+      "Apply order of a differential equation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Forms and Types of Differential Equations",
+    "section": "Forms and Types of Differential Equations",
+    "subgoals": [
+      "Understand forms and types of differential equations",
+      "Apply forms and types of differential equations",
+      "Check the result"
+    ]
+  }
+]

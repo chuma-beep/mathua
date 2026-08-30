@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define cauchy's convergence criterion for series",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Cauchy’s convergence criterion",
+    "section": "Cauchy’s convergence criterion",
+    "subgoals": [
+      "Understand cauchy’s convergence criterion",
+      "Apply cauchy’s convergence criterion",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Glossary",
+    "section": "Glossary",
+    "subgoals": [
+      "Understand glossary",
+      "Apply glossary",
+      "Check the result"
+    ]
+  }
+]

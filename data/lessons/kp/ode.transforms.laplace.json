@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define laplace transforms",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key Transforms",
+    "section": "Key Transforms",
+    "subgoals": [
+      "Understand key transforms",
+      "Apply key transforms",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Transform of Derivatives",
+    "section": "Transform of Derivatives",
+    "subgoals": [
+      "Understand transform of derivatives",
+      "Apply transform of derivatives",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the beta distribution",
+    "section": "Introduction to the beta distribution",
+    "subgoals": [
+      "Define beta distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The shape of the beta distribution",
+    "section": "The shape of the beta distribution",
+    "subgoals": [
+      "Understand the shape of the beta distribution",
+      "Apply the shape of the beta distribution",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  }
+]

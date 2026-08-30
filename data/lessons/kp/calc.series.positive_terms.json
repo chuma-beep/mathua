@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a series with positive terms?",
+    "section": "What is a series with positive terms?",
+    "subgoals": [
+      "Define series with positive terms",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Comparison test",
+    "section": "Comparison test",
+    "subgoals": [
+      "Understand comparison test",
+      "Apply comparison test",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]
