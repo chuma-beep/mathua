@@ -1858,5 +1858,21 @@
  {
   "concept_id": "topo.hausdorff",
   "source": "teaching/topo.hausdorff.md"
+ },
+ {
+  "concept_id": "abstract.group.cyclic",
+  "source": "teaching/abstract.group.cyclic.md"
+ },
+ {
+  "concept_id": "abstract.group.order",
+  "source": "teaching/abstract.group.order.md"
+ },
+ {
+  "concept_id": "abstract.rings.ideal",
+  "source": "teaching/abstract.rings.ideal.md"
+ },
+ {
+  "concept_id": "abstract.rings.quotient",
+  "source": "teaching/abstract.rings.quotient.md"
  }
 ]

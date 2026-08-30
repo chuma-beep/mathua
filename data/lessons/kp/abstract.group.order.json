@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of order",
+    "section": "Definition of order",
+    "subgoals": ["Define order as smallest n with g^n=e", "Handle infinite order", "Compute by repeated operation"]
+  },
+  {
+    "label": "Order of a group",
+    "section": "Order of a group",
+    "subgoals": ["Count elements of G", "Relate generator order to |G|", "Use cyclic generators"]
+  },
+  {
+    "label": "Computing orders",
+    "section": "Computing orders",
+    "subgoals": ["Add multiples mod n", "Test successive powers", "State the order"]
+  }
+]

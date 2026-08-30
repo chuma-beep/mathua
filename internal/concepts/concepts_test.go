@@ -12,13 +12,14 @@ func TestLoad_Valid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected load error: %v", err)
 	}
-	if d.Count() != 440 {
-		t.Errorf("expected 440 concepts, got %d", d.Count())
+	if d.Count() != 444 {
+		t.Errorf("expected 444 concepts, got %d", d.Count())
 	}
 
-	if len(d.Order()) != 440 {
-		t.Errorf("expected 440 in topo order, got %d", len(d.Order()))
+	if len(d.Order()) != 444 {
+		t.Errorf("expected 444 in topo order, got %d", len(d.Order()))
 	}
+}
 }
 
 func TestLoad_Empty(t *testing.T) {

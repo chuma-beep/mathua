@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of ideals",
+    "section": "Definition of ideals",
+    "subgoals": ["Check closure under addition", "Check absorption by ring elements", "Verify the ideal axioms"]
+  },
+  {
+    "label": "Examples and non-examples",
+    "section": "Examples and non-examples",
+    "subgoals": ["See multiples nZ as ideals", "Spot odd integers failure", "Test closure"]
+  },
+  {
+    "label": "Principal ideals",
+    "section": "Principal ideals",
+    "subgoals": ["Form (a) = {ra}", "Recognize principal generation", "Use in quotient construction"]
+  }
+]

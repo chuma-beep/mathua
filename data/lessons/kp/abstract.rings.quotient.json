@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Quotient rings",
+    "section": "Quotient rings",
+    "subgoals": ["Form cosets r+I", "Define addition and multiplication", "Check well-definedness"]
+  },
+  {
+    "label": "Isomorphisms",
+    "section": "Isomorphisms",
+    "subgoals": ["Recognize Z/nZ as quotient", "Map R[x]/(x) to R", "Identify the isomorphism"]
+  },
+  {
+    "label": "Universal property",
+    "section": "Universal property",
+    "subgoals": ["Collapse the ideal to zero", "State universal mapping", "Apply to examples"]
+  }
+]
