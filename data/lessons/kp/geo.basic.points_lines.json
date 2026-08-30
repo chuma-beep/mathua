@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Basic Objects",
+    "section": "The Basic Objects",
+    "subgoals": [
+      "Define points, lines, and planes",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "How Points and Lines Interact",
+    "section": "How Points and Lines Interact",
+    "subgoals": [
+      "Understand how points and lines interact",
+      "Apply how points and lines interact",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Points, lines, and planes — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

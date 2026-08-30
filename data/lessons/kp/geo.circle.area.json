@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where the Formula Comes From",
+    "section": "Where the Formula Comes From",
+    "subgoals": [
+      "Define area of a circle",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Area vs. Circumference",
+    "section": "Area vs. Circumference",
+    "subgoals": [
+      "Understand area vs. circumference",
+      "Apply area vs. circumference",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Area of a circle — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why Half?",
+    "section": "Why Half?",
+    "subgoals": [
+      "Define area of a triangle",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Units",
+    "section": "Units",
+    "subgoals": [
+      "Understand units",
+      "Apply units",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Area of a triangle — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

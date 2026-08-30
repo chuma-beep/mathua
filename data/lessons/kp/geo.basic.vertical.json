@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Vertical Angles",
+    "section": "Vertical Angles",
+    "subgoals": [
+      "Define vertical angles and parallel lines",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Parallel Lines Cut by a Transversal",
+    "section": "Parallel Lines Cut by a Transversal",
+    "subgoals": [
+      "Understand parallel lines cut by a transversal",
+      "Apply parallel lines cut by a transversal",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Vertical angles and parallel lines — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

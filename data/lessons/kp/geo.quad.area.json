@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rectangle",
+    "section": "Rectangle",
+    "subgoals": [
+      "Define area of rectangles and parallelograms",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Parallelogram",
+    "section": "Parallelogram",
+    "subgoals": [
+      "Understand parallelogram",
+      "Apply parallelogram",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Units",
+    "section": "Units",
+    "subgoals": [
+      "Understand units",
+      "Apply units",
+      "Check the result"
+    ]
+  }
+]

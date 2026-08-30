@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why Multiply?",
+    "section": "Why Multiply?",
+    "subgoals": [
+      "Define volume of rectangular prism",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Base-Times-Height View",
+    "section": "The Base-Times-Height View",
+    "subgoals": [
+      "Understand the base-times-height view",
+      "Apply the base-times-height view",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Volume of rectangular prism — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]
