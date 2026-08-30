@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Using a Protractor",
+    "section": "Using a Protractor",
+    "subgoals": [
+      "Define measuring angles in degrees",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Comparing Angle Measures",
+    "section": "Comparing Angle Measures",
+    "subgoals": [
+      "Understand comparing angle measures",
+      "Apply comparing angle measures",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Measuring angles in degrees — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

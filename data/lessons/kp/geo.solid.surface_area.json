@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Formula",
+    "section": "The Formula",
+    "subgoals": [
+      "Define surface area of rectangular prism",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Volume vs. Surface Area",
+    "section": "Volume vs. Surface Area",
+    "subgoals": [
+      "Understand volume vs. surface area",
+      "Apply volume vs. surface area",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Surface area of rectangular prism — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

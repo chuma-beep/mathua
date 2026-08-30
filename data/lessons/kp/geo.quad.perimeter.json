@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Perimeter Formulas",
+    "section": "Perimeter Formulas",
+    "subgoals": [
+      "Define perimeter of polygons",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Units",
+    "section": "Units",
+    "subgoals": [
+      "Understand units",
+      "Apply units",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Perimeter of polygons — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Define pythagorean theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Understand applications",
+      "Apply applications",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Pythagorean triples",
+    "section": "Pythagorean triples",
+    "subgoals": [
+      "Understand pythagorean triples",
+      "Apply pythagorean triples",
+      "Check the result"
+    ]
+  }
+]

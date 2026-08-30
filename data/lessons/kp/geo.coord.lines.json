@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are lines",
+    "section": "What are lines",
+    "subgoals": [
+      "Define lines in the coordinate plane",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Parallel and perpendicular lines",
+    "section": "Parallel and perpendicular lines",
+    "subgoals": [
+      "Understand parallel and perpendicular lines",
+      "Apply parallel and perpendicular lines",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "General equation of a line",
+    "section": "General equation of a line",
+    "subgoals": [
+      "Understand general equation of a line",
+      "Apply general equation of a line",
+      "Check the result"
+    ]
+  }
+]

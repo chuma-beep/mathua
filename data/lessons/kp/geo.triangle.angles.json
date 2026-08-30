@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why It Works",
+    "section": "Why It Works",
+    "subgoals": [
+      "Define triangle angle sum is 180 degrees",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Using the Rule",
+    "section": "Using the Rule",
+    "subgoals": [
+      "Understand using the rule",
+      "Apply using the rule",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Triangle angle sum is 180 degrees — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

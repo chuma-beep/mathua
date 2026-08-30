@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Number Pi",
+    "section": "The Number Pi",
+    "subgoals": [
+      "Define circumference of a circle",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Unrolling a Circle",
+    "section": "Unrolling a Circle",
+    "subgoals": [
+      "Understand unrolling a circle",
+      "Apply unrolling a circle",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Circumference of a circle — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

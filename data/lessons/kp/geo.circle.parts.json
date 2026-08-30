@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Vocabulary",
+    "section": "The Vocabulary",
+    "subgoals": [
+      "Define parts of a circle: radius, diameter, chord",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Naming Arcs",
+    "section": "Naming Arcs",
+    "subgoals": [
+      "Understand naming arcs",
+      "Apply naming arcs",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Parts of a circle: radius, diameter, chord — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]
