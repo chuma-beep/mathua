@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": ["State the disjoint open sets criterion", "Identify clopen subsets", "Apply to intervals"]
+  },
+  {
+    "label": "Examples and characterizations",
+    "section": "Examples and characterizations",
+    "subgoals": ["Recognize intervals as connected", "See Q as totally disconnected", "Use separation by rationals"]
+  },
+  {
+    "label": "Separation by open sets",
+    "section": "Separation by open sets",
+    "subgoals": ["Find separating opens", "Write the space as a union", "Conclude disconnectedness"]
+  }
+]

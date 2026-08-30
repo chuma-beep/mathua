@@ -42,5 +42,49 @@
       "streak": 10,
       "avg_time_seconds": 25.0
     }
+  },
+  {
+    "id": "topo.compact",
+    "label": "Compact sets",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.basics.open_closed",
+      "topo.basics.continuous"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "topo.connected",
+    "label": "Connected spaces",
+    "domain": "topology",
+    "subdomain": "topology.connected",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.basics.open_closed"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "topo.hausdorff",
+    "label": "Hausdorff spaces",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.continuous"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

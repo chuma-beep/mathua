@@ -1846,5 +1846,17 @@
  {
   "concept_id": "trig.ineq.basic",
   "source": "algebrica/inequalities/trigonometric-inequalities.md"
+ },
+ {
+  "concept_id": "topo.compact",
+  "source": "teaching/topo.compact.md"
+ },
+ {
+  "concept_id": "topo.connected",
+  "source": "teaching/topo.connected.md"
+ },
+ {
+  "concept_id": "topo.hausdorff",
+  "source": "teaching/topo.hausdorff.md"
  }
 ]

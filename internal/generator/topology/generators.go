@@ -11,6 +11,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("topo.basics.metric", &metricGen{})
 	reg.Register("topo.basics.open_closed", &openClosedGen{})
 	reg.Register("topo.basics.continuous", &continuousGen{})
+	reg.Register("topo.compact", &compactGen{})
+	reg.Register("topo.connected", &connectedGen{})
+	reg.Register("topo.hausdorff", &hausdorffGen{})
 }
 
 // ----- 1. metric -----
@@ -137,6 +140,86 @@ func (g *continuousGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is \\(%s\\) continuous on \\(%s\\)? (yes/no)", e.f, e.domain),
 		Answer:      e.continuous,
+		Explanation: e.reason,
+	}
+}
+
+// ----- 4. compact -----
+
+type compactGen struct{}
+
+func (g *compactGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		set     string
+		compact string
+		reason  string
+	}
+	table := []entry{
+		{"\\([0,1]\\)", "yes", "Heine-Borel: [0,1] is closed and bounded in R, hence compact."},
+		{"\\((0,1)\\)", "no", "(0,1) is not closed (0 and 1 are limit points outside), so not compact."},
+		{"\\(\\mathbb{R}\\)", "no", "R is not bounded, so not compact (Heine-Borel)."},
+		{"\\(\\{0\\} \\cup \\{1/n : n\\in\\mathbb{N}\\}\\)", "yes", "This set is closed and bounded, and every open cover has a finite subcover."},
+		{"\\((0,1]\\)", "no", "(0,1] is not closed (0 missing), so not compact."},
+		{"\\([0,1] \\cup [2,3]\\)", "yes", "Finite union of compact sets is compact; both intervals are compact."},
+		{"\\(\\{x : x\\geq 0\\}\\)", "no", "Unbounded above, so not compact."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is the set %s compact in \\(\\mathbb{R}\\)? (yes/no)", e.set),
+		Answer:      e.compact,
+		Explanation: e.reason,
+	}
+}
+
+// ----- 5. connected -----
+
+type connectedGen struct{}
+
+func (g *connectedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		set       string
+		connected string
+		reason    string
+	}
+	table := []entry{
+		{"\\((0,1)\\)", "yes", "(0,1) is an interval, hence connected in R."},
+		{"\\((0,1) \\cup (2,3)\\)", "no", "Two disjoint open intervals can be separated by open sets, so not connected."},
+		{"\\(\\mathbb{R}\\)", "yes", "R is connected (intervals are connected)."},
+		{"\\(\\mathbb{Q}\\)", "no", "Q is totally disconnected: between any two rationals there is an irrational separating them."},
+		{"\\([0,1]\\)", "yes", "Closed intervals are connected."},
+		{"\\(\\{0,1\\}\\)", "no", "Two isolated points can be separated by disjoint opens, so not connected."},
+		{"\\((0,1] \\)", "yes", "(0,1] is an interval, hence connected."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is the set %s connected in \\(\\mathbb{R}\\)? (yes/no)", e.set),
+		Answer:      e.connected,
+		Explanation: e.reason,
+	}
+}
+
+// ----- 6. hausdorff -----
+
+type hausdorffGen struct{}
+
+func (g *hausdorffGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		space     string
+		hausdorff string
+		reason    string
+	}
+	table := []entry{
+		{"\\(\\mathbb{R}\\) with the usual metric", "yes", "Every metric space is Hausdorff: distinct points have disjoint epsilon-balls."},
+		{"the discrete topology on any set", "yes", "Discrete spaces are metric (discrete metric), hence Hausdorff."},
+		{"the indiscrete topology on \\(\\{a,b\\}\\)", "no", "In indiscrete topology only {} and the whole set are open, so distinct points cannot be separated."},
+		{"the cofinite topology on \\(\\mathbb{R}\\)", "no", "Any two nonempty opens intersect (their complements are finite), so separation fails."},
+		{"\\(\\mathbb{R}^2\\) with the Euclidean metric", "yes", "Metric spaces are Hausdorff."},
+		{"the Sierpinski space", "no", "Points cannot be separated by disjoint opens in the Sierpinski topology."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("Is %s Hausdorff? (yes/no)", e.space),
+		Answer:      e.hausdorff,
 		Explanation: e.reason,
 	}
 }

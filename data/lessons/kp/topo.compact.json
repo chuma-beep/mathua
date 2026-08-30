@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of compact sets",
+    "section": "Definition of compact sets",
+    "subgoals": ["State the open-cover definition", "Interpret finite subcovers", "Contrast with finite sets"]
+  },
+  {
+    "label": "Heine-Borel theorem",
+    "section": "Heine-Borel theorem",
+    "subgoals": ["State the theorem for R^n", "Check closedness", "Check boundedness"]
+  },
+  {
+    "label": "Examples and non-examples",
+    "section": "Examples and non-examples",
+    "subgoals": ["Recognize compact intervals", "Spot non-compact opens", "Use finite unions"]
+  }
+]
