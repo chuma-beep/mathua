@@ -23,7 +23,7 @@
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through calculus through a dependency graph of 437 atomic concepts — never advancing until speed and accuracy thresholds are both met. It runs as a single Go binary with a web server delivery mode and React + Next.js for global leaderboards and graph visualisation.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 437 atomic concepts and 19 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1311 worked examples (3 per concept) with subgoal labels and 102 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, transcripts, and graph visualisation.
 
 ---
 
@@ -31,8 +31,9 @@ Mathua is a local-first adaptive math learning engine inspired by the mastery-ga
 
 - **You cannot advance until you have mastered the prerequisite.** The concept graph enforces this — if you cannot reliably add fractions with different denominators, the system will not show you mixed number addition.
 - **Speed matters, not just accuracy.** A correct answer that took 45 seconds on a concept with a 12-second threshold counts as weak mastery. You need to be both right and fast.
-- **Nothing is forgotten.** Concepts resurface automatically through spaced repetition. A concept mastered three weeks ago will reappear before it decays.
+- **Nothing is forgotten.** Concepts resurface automatically through per-topic spaced repetition (SM-2 scaled by your learning speed). A concept mastered three weeks ago will reappear before it decays.
 - **Problems are generated, not stored.** Every problem is produced on demand by a parameterised generator. The same concept gives you a different problem every time. There is nothing to memorise.
+- **Weekly leagues and shareable progress.** Bronze → Diamond leagues promote the top 2 each Monday, and any student can generate a read-only share link for a parent or teacher. Pauses, accommodated timing, and a 150 XP mastery-check quiz are built in.
 
 ---
 
@@ -76,17 +77,19 @@ UNSEEN → LEARNING → PRACTICING → MASTERED → DECAYING
 ### The scheduler
 
 ```
-priority = (0.7 × days_since_last_seen)
-         + (0.3 × (1.0 - mastery_score))
-         + 5.0  if status == DECAYING
-         + 2.0  if newly unlocked
+priority = 0.5×days_since_last_seen + 0.2×(1-mastery) + 0.3×weakness
+         + 5  if DECAYING
+         + 2  if encompasses a weak prerequisite (layering)
+         − 3  if sharing an InterferenceGroup with recent practice
+interleaving: no two consecutive questions share a subdomain
+top-3 dissimilar candidates → 70/30 new/review balance
 ```
 
 Three hard rules apply: never surface a concept whose prerequisites are not mastered, never show the same concept twice in a row, maintain roughly 70% new/practicing and 30% review.
 
 ### Spaced repetition
 
-When a concept reaches MASTERED, Mathua schedules its next review using a simplified SM-2 algorithm. The interval grows with each successful review (1 day → 3 days → 1 week → ...) and resets on failure. Reviews are woven into normal sessions — there is no separate review mode.
+When a concept reaches MASTERED, Mathua schedules its next review using SM-2 scaled by your per-topic learning speed (0.5 slow → 2.0 fast). The interval grows with each successful review (1 day → 3 days → 1 week → ...) and resets on failure. Reviews are woven into normal sessions; every 150 XP a mastery-check quiz surfaces at 80% difficulty. Diagnostic reports include a frontier placement, gaps by domain, and completion estimates for accreditation.
 
 ---
 
@@ -127,9 +130,13 @@ The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fu
 
 ---
 
+## Courses and transcripts
+
+19 courses from 4th grade to university are wired through the DAG — including Calculus I/II, Linear Algebra, Discrete Math, Probability & Statistics, Differential Equations, Abstract Algebra, Topology, and Machine Learning. Each course shows mastered/total, percent, and an estimate of days remaining at your daily XP goal. Transcripts export as CSV and the read-only share link lets a parent or teacher follow along.
+
 ## Contributing
 
-The most impactful contributions are new concepts and improved generators. Adding a concept requires exactly three things: a JSON entry in the concept graph, a Go generator function, and a fuzz test. See **[`CONTRIBUTING.md`](CONTRIBUTING.md)** for the quick-start guide and the full **[contributing docs](/docs/contributing)** for the detailed walkthrough with code examples and field schemas.
+The most impactful contributions are new concepts and improved generators. Adding a concept requires exactly three things: a JSON entry in the concept graph, a Go generator function, and a fuzz test. Adding a lesson shard requires 3 KPs per concept (`data/lessons/kp/<id>.json`) with verified section refs. See **[`CONTRIBUTING.md`](CONTRIBUTING.md)** for the quick-start guide and the full **[contributing docs](/docs/contributing)** for the detailed walkthrough with code examples and field schemas.
 
 ---
 
@@ -141,6 +148,7 @@ go test ./...
 
 # Validate the concept graph (no cycles, no orphans)
 go run scripts/validate_graph.go
+python3 scripts/audit_lessons.py  # lessons + KP shards + diagrams + course targets
 
 # Generator fuzz — 1000 samples per generator
 go test ./internal/generator/... -run TestFuzz -count 1000
