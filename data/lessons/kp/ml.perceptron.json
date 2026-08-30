@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of a perceptron",
+    "section": "Definition of a perceptron",
+    "subgoals": ["Compute weighted sum plus bias", "Apply the activation", "State the output"]
+  },
+  {
+    "label": "The weighted sum",
+    "section": "The weighted sum",
+    "subgoals": ["Form the dot product", "Add the bias term", "Interpret the result"]
+  },
+  {
+    "label": "Activation functions",
+    "section": "Activation functions",
+    "subgoals": ["Choose step vs sigmoid vs ReLU", "Apply the threshold", "Decide the class"]
+  }
+]

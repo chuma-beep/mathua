@@ -7,6 +7,10 @@ import (
 )
 
 func Register(reg *generator.Registry) {
+	reg.Register("ml.perceptron", &perceptronGen{})
+	reg.Register("ml.loss.mse", &mseGen{})
+	reg.Register("ml.forward_pass", &forwardPassGen{})
+	reg.Register("ml.gradient_descent", &gradientDescentGen{})
 	reg.Register("ml.backpropagation", &backpropGen{})
 }
 
@@ -77,4 +81,76 @@ func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Answer:      e.answer,
 		Explanation: e.exp,
 	}
+}
+
+type perceptronGen struct{}
+
+func (g *perceptronGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"What does a perceptron compute? (weighted sum + activation / convolution)", "weighted sum + activation", "A perceptron computes a weighted sum of inputs plus bias, then applies an activation function."},
+		{"A perceptron with weights [0.5, -0.5] and bias 0, inputs [1,1] gives weighted sum?", "0", "0.5*1 + (-0.5)*1 + 0 = 0."},
+		{"Perceptron activation is typically a ____ function.", "step (or sign)", "Original perceptron uses a step function to output 0 or 1."},
+		{"Is a single perceptron able to solve XOR? (yes/no)", "no", "XOR is not linearly separable, so a single perceptron cannot solve it; needs a multilayer network."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
+}
+
+type mseGen struct{}
+
+func (g *mseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Mean squared error between prediction 2 and target 3 is?", "1", "MSE = (2-3)^2 = 1. Mean over one sample is 1."},
+		{"MSE between predictions [0,1] and targets [1,1] is?", "0.5", "((0-1)^2 + (1-1)^2)/2 = (1+0)/2 = 0.5."},
+		{"MSE is appropriate for ____ tasks.", "regression", "Mean squared error measures distance for continuous regression targets."},
+		{"Derivative of MSE (1/2)(y-t)^2 w.r.t y is?", "y - t", "d/dy 1/2(y-t)^2 = y-t."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
+}
+
+type forwardPassGen struct{}
+
+func (g *forwardPassGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"In a forward pass, what is computed layer by layer?", "activations (or outputs)", "Forward pass propagates input through each layer's weights and activation to compute the output."},
+		{"Forward pass of a linear layer with W=[[1,0],[0,1]] and x=[2,3] gives?", "[2,3]", "Identity matrix leaves the input unchanged: Wx = x."},
+		{"What operation follows the weighted sum in each neuron?", "activation", "After computing the weighted sum plus bias, an activation function is applied."},
+		{"Is forward pass done before or after backpropagation? (before/after)", "before", "Forward pass computes predictions; backpropagation then computes gradients."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
+}
+
+type gradientDescentGen struct{}
+
+func (g *gradientDescentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		exp      string
+	}
+	entries := []entry{
+		{"Gradient descent updates weights in the direction of the ____ gradient.", "negative (or opposite)", "Weights are moved opposite to the gradient to minimize loss."},
+		{"What does learning rate control in gradient descent?", "step size", "Learning rate scales the gradient step; too large diverges, too small is slow."},
+		{"With gradient 2 and learning rate 0.1, what is the weight update magnitude?", "0.2", "Update = learning_rate * gradient = 0.1*2 = 0.2."},
+		{"What variant of gradient descent uses a single sample per update?", "stochastic (or SGD)", "Stochastic gradient descent updates after each sample, while batch uses the whole dataset."},
+	}
+	e := entries[rand.Intn(len(entries))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
 }

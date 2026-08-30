@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of the forward pass",
+    "section": "Definition of the forward pass",
+    "subgoals": ["Propagate input layer by layer", "Compute weighted sums", "Apply activations"]
+  },
+  {
+    "label": "Layer by layer computation",
+    "section": "Layer by layer computation",
+    "subgoals": ["Compute z = W a + b", "Apply sigma", "Pass to the next layer"]
+  },
+  {
+    "label": "Before backpropagation",
+    "section": "Before backpropagation",
+    "subgoals": ["Finish forward to get loss", "Prepare for backward", "Order the passes"]
+  }
+]

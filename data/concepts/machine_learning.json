@@ -1,5 +1,65 @@
 [
   {
+    "id": "ml.perceptron",
+    "label": "Perceptron",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.vector.dot",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "ml.loss.mse",
+    "label": "Mean squared error loss",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.vector.dot",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.forward_pass",
+    "label": "Forward pass",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.perceptron",
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "ml.gradient_descent",
+    "label": "Gradient descent",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
     "id": "ml.backpropagation",
     "label": "Backpropagation in neural networks",
     "domain": "machine_learning",
@@ -7,7 +67,9 @@
     "grading_type": "symbolic",
     "prerequisites": [
       "calc.deriv.chain_rule",
-      "linalg.matrix.mult"
+      "linalg.matrix.mult",
+      "ml.gradient_descent",
+      "ml.forward_pass"
     ],
     "mastery_threshold": {
       "streak": 3,
