@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define polar form of complex numbers",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Operations",
+    "section": "Operations",
+    "subgoals": [
+      "Understand operations",
+      "Apply operations",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Modulus and argument",
+    "section": "Modulus and argument",
+    "subgoals": [
+      "Understand modulus and argument",
+      "Apply modulus and argument",
+      "Check the result"
+    ]
+  }
+]

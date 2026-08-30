@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Understand introduction",
+      "Apply introduction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Fundamental hyperbolic identity for tangent and cotangent",
+    "section": "Fundamental hyperbolic identity for tangent and cotangent",
+    "subgoals": [
+      "Understand fundamental hyperbolic identity for tangent and cotangent",
+      "Apply fundamental hyperbolic identity for tangent and cotangent to simplify",
+      "Check by substitution"
+    ]
+  },
+  {
+    "label": "Hyperbolic identities",
+    "section": "Hyperbolic identities",
+    "subgoals": [
+      "Understand hyperbolic identities",
+      "Apply hyperbolic identities to simplify",
+      "Check by substitution"
+    ]
+  }
+]

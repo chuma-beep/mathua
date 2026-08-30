@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define matrix addition and scalar multiplication",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Vectors and the zero matrix",
+    "section": "Vectors and the zero matrix",
+    "subgoals": [
+      "Understand vectors and the zero matrix",
+      "Apply vectors and the zero matrix",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Square matrices and special types",
+    "section": "Square matrices and special types",
+    "subgoals": [
+      "Understand square matrices and special types",
+      "Apply square matrices and special types",
+      "Check the result"
+    ]
+  }
+]

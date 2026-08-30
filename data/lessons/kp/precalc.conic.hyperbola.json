@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to conic sections",
+    "section": "Introduction to conic sections",
+    "subgoals": [
+      "Define hyperbolas: standard form and foci",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "What is a hyperbola",
+    "section": "What is a hyperbola",
+    "subgoals": [
+      "Understand what is a hyperbola",
+      "Apply what is a hyperbola",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Why is the difference of distances to the foci always constant in a hyperbola?",
+    "section": "Why is the difference of distances to the foci always constant in a hyperbola?",
+    "subgoals": [
+      "Understand why is the difference of distances to the foci always constant in a hyperbola?",
+      "Apply why is the difference of distances to the foci always constant in a hyperbola?",
+      "Check the result"
+    ]
+  }
+]

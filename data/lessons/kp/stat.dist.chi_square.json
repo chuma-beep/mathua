@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From squared normals to the chi-square distribution",
+    "section": "From squared normals to the chi-square distribution",
+    "subgoals": [
+      "Define chi-square distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "From the gamma to the chi-square distribution",
+    "section": "From the gamma to the chi-square distribution",
+    "subgoals": [
+      "Understand from the gamma to the chi-square distribution",
+      "Apply from the gamma to the chi-square distribution",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  }
+]

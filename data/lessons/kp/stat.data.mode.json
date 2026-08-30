@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Modeling data with two variables",
+    "section": "Modeling data with two variables",
+    "subgoals": [
+      "Define find the mode",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Patterns in Tables",
+    "section": "Patterns in Tables",
+    "subgoals": [
+      "Understand patterns in tables",
+      "Apply patterns in tables",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Rate of Change",
+    "section": "Rate of Change",
+    "subgoals": [
+      "Understand rate of change",
+      "Apply rate of change",
+      "Check the result"
+    ]
+  }
+]

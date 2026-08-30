@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the variance of a random variable?",
+    "section": "What is the variance of a random variable?",
+    "subgoals": [
+      "Define variance and covariance of random variables",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Deviation and Standard Deviation",
+    "section": "Deviation and Standard Deviation",
+    "subgoals": [
+      "Understand deviation and standard deviation",
+      "Apply deviation and standard deviation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Covariance of a random variable",
+    "section": "Covariance of a random variable",
+    "subgoals": [
+      "Understand covariance of a random variable",
+      "Apply covariance of a random variable",
+      "Check the result"
+    ]
+  }
+]

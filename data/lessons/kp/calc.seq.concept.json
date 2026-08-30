@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a sequence",
+    "section": "What is a sequence",
+    "subgoals": [
+      "Define sequences: definition and notation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Recursively defined sequences",
+    "section": "Recursively defined sequences",
+    "subgoals": [
+      "Understand recursively defined sequences",
+      "Apply recursively defined sequences",
+      "Check the result"
+    ]
+  }
+]

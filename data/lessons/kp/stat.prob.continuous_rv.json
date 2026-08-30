@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of a continuous random variable",
+    "section": "Definition of a continuous random variable",
+    "subgoals": [
+      "Define continuous random variables",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Probability from the density function",
+    "section": "Probability from the density function",
+    "subgoals": [
+      "Understand probability from the density function",
+      "Apply probability from the density function",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Cumulative distribution function",
+    "section": "Cumulative distribution function",
+    "subgoals": [
+      "Understand cumulative distribution function",
+      "Apply cumulative distribution function",
+      "Check the result"
+    ]
+  }
+]

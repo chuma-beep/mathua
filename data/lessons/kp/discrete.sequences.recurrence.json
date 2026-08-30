@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 2.4 Solving Recurrence Relations",
+    "section": "Section 2.4 Solving Recurrence Relations",
+    "subgoals": [
+      "Define recurrence relations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Subsection The Characteristic Root Technique",
+    "section": "Subsection The Characteristic Root Technique",
+    "subgoals": [
+      "Understand subsection the characteristic root technique",
+      "Apply subsection the characteristic root technique",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Characteristic Roots.",
+    "section": "Characteristic Roots.",
+    "subgoals": [
+      "Understand characteristic roots.",
+      "Apply characteristic roots.",
+      "Check the result"
+    ]
+  }
+]

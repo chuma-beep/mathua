@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define fundamental theorem of calculus",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The First Fundamental Theorem of Calculus",
+    "section": "The First Fundamental Theorem of Calculus",
+    "subgoals": [
+      "Understand the first fundamental theorem of calculus",
+      "Apply the first fundamental theorem of calculus",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Extension to variable limits of integration",
+    "section": "Extension to variable limits of integration",
+    "subgoals": [
+      "Understand extension to variable limits of integration",
+      "Apply extension to variable limits of integration",
+      "Check the result"
+    ]
+  }
+]

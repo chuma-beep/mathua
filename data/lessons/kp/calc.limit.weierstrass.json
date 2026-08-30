@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Define weierstrass extreme value theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Why closed and bounded matters",
+    "section": "Why closed and bounded matters",
+    "subgoals": [
+      "Understand why closed and bounded matters",
+      "Apply why closed and bounded matters",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The range of a continuous function",
+    "section": "The range of a continuous function",
+    "subgoals": [
+      "Understand the range of a continuous function",
+      "Apply the range of a continuous function",
+      "Check the result"
+    ]
+  }
+]

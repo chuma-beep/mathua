@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From the normal to the standard normal distribution",
+    "section": "From the normal to the standard normal distribution",
+    "subgoals": [
+      "Define standard normal distribution and z-table",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Standard Z Table",
+    "section": "Standard Z Table",
+    "subgoals": [
+      "Understand standard z table",
+      "Apply standard z table",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Standard normal distribution and Z-table — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

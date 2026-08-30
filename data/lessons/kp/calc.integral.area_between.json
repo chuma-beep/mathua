@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Area between two curves using definite integrals",
+    "section": "Area between two curves using definite integrals",
+    "subgoals": [
+      "Define area between two curves",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Areas between intersecting curves",
+    "section": "Areas between intersecting curves",
+    "subgoals": [
+      "Understand areas between intersecting curves",
+      "Apply areas between intersecting curves",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Flowchart",
+    "section": "Flowchart",
+    "subgoals": [
+      "Understand flowchart",
+      "Apply flowchart",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the Poisson distribution",
+    "section": "Introduction to the Poisson distribution",
+    "subgoals": [
+      "Define poisson distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Poisson process",
+    "section": "The Poisson process",
+    "subgoals": [
+      "Understand the poisson process",
+      "Apply the poisson process",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  }
+]

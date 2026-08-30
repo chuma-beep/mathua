@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The chain rule",
+    "section": "The chain rule",
+    "subgoals": [
+      "Define chain rule",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Proof",
+    "section": "Proof",
+    "subgoals": [
+      "Understand proof",
+      "Apply proof",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Extension to multiple compositions",
+    "section": "Extension to multiple compositions",
+    "subgoals": [
+      "Understand extension to multiple compositions",
+      "Apply extension to multiple compositions",
+      "Check the result"
+    ]
+  }
+]

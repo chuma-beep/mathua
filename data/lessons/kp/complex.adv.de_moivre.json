@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Motivation for De Moivre’s Theorem",
+    "section": "Motivation for De Moivre’s Theorem",
+    "subgoals": [
+      "Define de moivre's theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "De Moivre's theorem and exponential notation for complex numbers",
+    "section": "De Moivre's theorem and exponential notation for complex numbers",
+    "subgoals": [
+      "Understand de moivre's theorem and exponential notation for complex numbers",
+      "Apply de moivre's theorem and exponential notation for complex numbers",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "A proof by induction",
+    "section": "A proof by induction",
+    "subgoals": [
+      "Understand a proof by induction",
+      "Apply a proof by induction",
+      "Check the result"
+    ]
+  }
+]

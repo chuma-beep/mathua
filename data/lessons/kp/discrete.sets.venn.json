@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 0.3 Sets",
+    "section": "Section 0.3 Sets",
+    "subgoals": [
+      "Define venn diagrams",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Subsection  Notation",
+    "section": "Subsection  Notation",
+    "subgoals": [
+      "Understand subsection  notation",
+      "Apply subsection  notation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Special sets.",
+    "section": "Special sets.",
+    "subgoals": [
+      "Understand special sets.",
+      "Apply special sets.",
+      "Check the result"
+    ]
+  }
+]

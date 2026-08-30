@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define piecewise-defined functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Understand properties",
+      "Apply properties",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Limits at infinity",
+    "section": "Limits at infinity",
+    "subgoals": [
+      "Understand limits at infinity",
+      "Apply limits at infinity",
+      "Check the result"
+    ]
+  }
+]

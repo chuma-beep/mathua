@@ -1,0 +1,29 @@
+[
+  {
+    "label": "4.6 Limits at Infinity and Asymptotes",
+    "section": "4.6 Limits at Infinity and Asymptotes",
+    "subgoals": [
+      "Define limits at infinity",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Limits at Infinity",
+    "section": "Limits at Infinity",
+    "subgoals": [
+      "Understand limits at infinity",
+      "Apply limits at infinity",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Limits at Infinity and Horizontal Asymptotes",
+    "section": "Limits at Infinity and Horizontal Asymptotes",
+    "subgoals": [
+      "Understand limits at infinity and horizontal asymptotes",
+      "Apply limits at infinity and horizontal asymptotes",
+      "Check the result"
+    ]
+  }
+]

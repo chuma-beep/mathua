@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define modular arithmetic",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Modulo of a negative integer",
+    "section": "Modulo of a negative integer",
+    "subgoals": [
+      "Understand modulo of a negative integer",
+      "Apply modulo of a negative integer",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Congruence modulo n",
+    "section": "Congruence modulo n",
+    "subgoals": [
+      "Understand congruence modulo n",
+      "Apply congruence modulo n",
+      "Check the result"
+    ]
+  }
+]

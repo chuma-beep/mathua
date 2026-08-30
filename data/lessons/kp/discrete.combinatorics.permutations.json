@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define permutations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Simplifying factorial ratios",
+    "section": "Simplifying factorial ratios",
+    "subgoals": [
+      "Understand simplifying factorial ratios",
+      "Apply simplifying factorial ratios",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Factorial in combinatorics",
+    "section": "Factorial in combinatorics",
+    "subgoals": [
+      "Understand factorial in combinatorics",
+      "Apply factorial in combinatorics",
+      "Check the result"
+    ]
+  }
+]

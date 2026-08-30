@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the exponential probability distribution",
+    "section": "What is the exponential probability distribution",
+    "subgoals": [
+      "Define exponential distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Expected value and variance of the exponential distribution",
+    "section": "Expected value and variance of the exponential distribution",
+    "subgoals": [
+      "Understand expected value and variance of the exponential distribution",
+      "Apply expected value and variance of the exponential distribution",
+      "Check the result"
+    ]
+  }
+]

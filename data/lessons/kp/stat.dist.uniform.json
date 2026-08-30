@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition of the uniform distribution",
+    "section": "Definition of the uniform distribution",
+    "subgoals": [
+      "Define uniform distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Mean of the uniform distribution",
+    "section": "Mean of the uniform distribution",
+    "subgoals": [
+      "Understand mean of the uniform distribution",
+      "Apply mean of the uniform distribution",
+      "Check the result"
+    ]
+  }
+]

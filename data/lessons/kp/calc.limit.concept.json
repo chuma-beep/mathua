@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define concept of a limit",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The trigonometric fundamental limit",
+    "section": "The trigonometric fundamental limit",
+    "subgoals": [
+      "Understand the trigonometric fundamental limit",
+      "Apply the trigonometric fundamental limit",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The tangent limit",
+    "section": "The tangent limit",
+    "subgoals": [
+      "Understand the tangent limit",
+      "Apply the tangent limit",
+      "Check the result"
+    ]
+  }
+]

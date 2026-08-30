@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From Populations to samples",
+    "section": "From Populations to samples",
+    "subgoals": [
+      "Define sampling distributions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Mean, mode, and median of a sampling distribution",
+    "section": "Mean, mode, and median of a sampling distribution",
+    "subgoals": [
+      "Understand mean, mode, and median of a sampling distribution",
+      "Apply mean, mode, and median of a sampling distribution",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Sample variance and sample standard deviation",
+    "section": "Sample variance and sample standard deviation",
+    "subgoals": [
+      "Understand sample variance and sample standard deviation",
+      "Apply sample variance and sample standard deviation",
+      "Check the result"
+    ]
+  }
+]

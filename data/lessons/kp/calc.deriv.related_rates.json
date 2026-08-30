@@ -1,0 +1,29 @@
+[
+  {
+    "label": "4.1 Related Rates",
+    "section": "4.1 Related Rates",
+    "subgoals": [
+      "Define related rates",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Setting up Related-Rates Problems",
+    "section": "Setting up Related-Rates Problems",
+    "subgoals": [
+      "Understand setting up related-rates problems",
+      "Apply setting up related-rates problems",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Inflating a Balloon",
+    "section": "Inflating a Balloon",
+    "subgoals": [
+      "Understand inflating a balloon",
+      "Apply inflating a balloon",
+      "Check the result"
+    ]
+  }
+]

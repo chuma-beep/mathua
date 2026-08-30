@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define determinant of a 3x3 matrix",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Diagonal and triangular matrices",
+    "section": "Diagonal and triangular matrices",
+    "subgoals": [
+      "Understand diagonal and triangular matrices",
+      "Apply diagonal and triangular matrices",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Laplace expansion",
+    "section": "Laplace expansion",
+    "subgoals": [
+      "Understand laplace expansion",
+      "Apply laplace expansion",
+      "Check the result"
+    ]
+  }
+]

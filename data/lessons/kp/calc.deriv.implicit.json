@@ -1,0 +1,29 @@
+[
+  {
+    "label": "3.8 Implicit Differentiation",
+    "section": "3.8 Implicit Differentiation",
+    "subgoals": [
+      "Define implicit differentiation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Implicit Differentiation",
+    "section": "Implicit Differentiation",
+    "subgoals": [
+      "Understand implicit differentiation",
+      "Apply implicit differentiation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Problem-Solving Strategy",
+    "section": "Problem-Solving Strategy",
+    "subgoals": [
+      "Understand problem-solving strategy",
+      "Apply problem-solving strategy",
+      "Check the result"
+    ]
+  }
+]

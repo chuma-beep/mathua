@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 0.2 Mathematical Statements",
+    "section": "Section 0.2 Mathematical Statements",
+    "subgoals": [
+      "Define quantifiers: universal and existential",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Subsection  Atomic and Molecular Statements",
+    "section": "Subsection  Atomic and Molecular Statements",
+    "subgoals": [
+      "Understand subsection  atomic and molecular statements",
+      "Apply subsection  atomic and molecular statements",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Logical Connectives.",
+    "section": "Logical Connectives.",
+    "subgoals": [
+      "Understand logical connectives.",
+      "Apply logical connectives.",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "5.4 Integration Formulas and the Net Change Theorem",
+    "section": "5.4 Integration Formulas and the Net Change Theorem",
+    "subgoals": [
+      "Define power rule for integration",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Basic Integration Formulas",
+    "section": "Basic Integration Formulas",
+    "subgoals": [
+      "Understand basic integration formulas",
+      "Apply basic integration formulas",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Integrating a Function Using the Power Rule",
+    "section": "Integrating a Function Using the Power Rule",
+    "subgoals": [
+      "Understand integrating a function using the power rule",
+      "Apply integrating a function using the power rule",
+      "Check the result"
+    ]
+  }
+]

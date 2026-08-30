@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define sequences of functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Pointwise convergence",
+    "section": "Pointwise convergence",
+    "subgoals": [
+      "Understand pointwise convergence",
+      "Apply pointwise convergence",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]

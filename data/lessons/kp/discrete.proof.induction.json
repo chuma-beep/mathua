@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inductive set",
+    "section": "Inductive set",
+    "subgoals": [
+      "Define mathematical induction",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Mathematical induction",
+    "section": "Mathematical induction",
+    "subgoals": [
+      "Understand mathematical induction",
+      "Apply mathematical induction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Applications: divisibility",
+    "section": "Applications: divisibility",
+    "subgoals": [
+      "Understand applications: divisibility",
+      "Apply applications: divisibility",
+      "Check the result"
+    ]
+  }
+]

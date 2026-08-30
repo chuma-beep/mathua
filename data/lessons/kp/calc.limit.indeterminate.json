@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What are indeterminate forms?",
+    "section": "What are indeterminate forms?",
+    "subgoals": [
+      "Define indeterminate forms of limits",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The form \\\\( \\frac{0}{0} \\\\)",
+    "section": "The form \\\\( \\frac{0}{0} \\\\)",
+    "subgoals": [
+      "Understand the form \\\\( \\frac{0}{0} \\\\)",
+      "Apply the form \\\\( \\frac{0}{0} \\\\)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
+    "section": "The form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
+    "subgoals": [
+      "Understand the form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
+      "Apply the form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
+      "Check the result"
+    ]
+  }
+]

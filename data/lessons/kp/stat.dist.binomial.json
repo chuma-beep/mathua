@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the binomial distribution",
+    "section": "Introduction to the binomial distribution",
+    "subgoals": [
+      "Define binomial distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Mean of the binomial distribution",
+    "section": "Mean of the binomial distribution",
+    "subgoals": [
+      "Understand mean of the binomial distribution",
+      "Apply mean of the binomial distribution",
+      "Check the result"
+    ]
+  }
+]

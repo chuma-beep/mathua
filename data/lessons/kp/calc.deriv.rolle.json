@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Define rolle's theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "A geometric view of Rolle’s theorem",
+    "section": "A geometric view of Rolle’s theorem",
+    "subgoals": [
+      "Understand a geometric view of rolle’s theorem",
+      "Apply a geometric view of rolle’s theorem",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Proof",
+    "section": "Proof",
+    "subgoals": [
+      "Understand proof",
+      "Apply proof",
+      "Check the result"
+    ]
+  }
+]

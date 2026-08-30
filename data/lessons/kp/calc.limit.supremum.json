@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The completeness axiom",
+    "section": "The completeness axiom",
+    "subgoals": [
+      "Define supremum and infimum",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Upper and lower bounds",
+    "section": "Upper and lower bounds",
+    "subgoals": [
+      "Understand upper and lower bounds",
+      "Apply upper and lower bounds",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Supremum",
+    "section": "Supremum",
+    "subgoals": [
+      "Understand supremum",
+      "Apply supremum",
+      "Check the result"
+    ]
+  }
+]

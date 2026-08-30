@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Understand introduction",
+      "Apply introduction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Tangent",
+    "section": "Tangent",
+    "subgoals": [
+      "Understand tangent",
+      "Evaluate tangent",
+      "Check the identity"
+    ]
+  },
+  {
+    "label": "Common values of the tangent",
+    "section": "Common values of the tangent",
+    "subgoals": [
+      "Understand common values of the tangent",
+      "Evaluate common values of the tangent",
+      "Check the identity"
+    ]
+  }
+]

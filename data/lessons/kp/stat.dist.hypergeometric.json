@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the hypergeometric distribution",
+    "section": "Introduction to the hypergeometric distribution",
+    "subgoals": [
+      "Define hypergeometric distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Mean of the hypergeometric distribution",
+    "section": "Mean of the hypergeometric distribution",
+    "subgoals": [
+      "Understand mean of the hypergeometric distribution",
+      "Apply mean of the hypergeometric distribution",
+      "Check the result"
+    ]
+  }
+]

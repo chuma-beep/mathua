@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a geometric sequence",
+    "section": "What is a geometric sequence",
+    "subgoals": [
+      "Define geometric sequences: common ratio and nth term",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Sum of \\\\( n \\\\) terms of a geometric progression",
+    "section": "Sum of \\\\( n \\\\) terms of a geometric progression",
+    "subgoals": [
+      "Understand sum of \\\\( n \\\\) terms of a geometric progression",
+      "Apply sum of \\\\( n \\\\) terms of a geometric progression",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Limit behavior of a geometric sequence",
+    "section": "Limit behavior of a geometric sequence",
+    "subgoals": [
+      "Understand limit behavior of a geometric sequence",
+      "Apply limit behavior of a geometric sequence",
+      "Check the result"
+    ]
+  }
+]

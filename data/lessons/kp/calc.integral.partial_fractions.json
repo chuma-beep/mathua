@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Integration of rational functions with polynomial division",
+    "section": "Integration of rational functions with polynomial division",
+    "subgoals": [
+      "Define integration by partial fractions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Integrals with linear denominators",
+    "section": "Integrals with linear denominators",
+    "subgoals": [
+      "Understand integrals with linear denominators",
+      "Apply integrals with linear denominators",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Partial fraction decomposition",
+    "section": "Partial fraction decomposition",
+    "subgoals": [
+      "Understand partial fraction decomposition",
+      "Apply partial fraction decomposition",
+      "Check the result"
+    ]
+  }
+]

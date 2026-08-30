@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From straight segments to curved arcs",
+    "section": "From straight segments to curved arcs",
+    "subgoals": [
+      "Define arc length of a curve",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Polygonal approximation and the differential element",
+    "section": "Polygonal approximation and the differential element",
+    "subgoals": [
+      "Understand polygonal approximation and the differential element",
+      "Apply polygonal approximation and the differential element",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Arc length in Cartesian form",
+    "section": "Arc length in Cartesian form",
+    "subgoals": [
+      "Understand arc length in cartesian form",
+      "Apply arc length in cartesian form",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the definition",
+      "Apply definition in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "The ambiguous case",
+    "section": "The ambiguous case",
+    "subgoals": [
+      "Understand the ambiguous case",
+      "Apply the ambiguous case to solve a triangle",
+      "Check for ambiguous or special cases"
+    ]
+  },
+  {
+    "label": "A geometric criterion for the ambiguous case",
+    "section": "A geometric criterion for the ambiguous case",
+    "subgoals": [
+      "Understand a geometric criterion for the ambiguous case",
+      "Apply a geometric criterion for the ambiguous case to solve a triangle",
+      "Check for ambiguous or special cases"
+    ]
+  }
+]

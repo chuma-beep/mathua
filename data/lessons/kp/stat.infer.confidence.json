@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Point estimation",
+    "section": "Point estimation",
+    "subgoals": [
+      "Define confidence intervals",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Interval estimation",
+    "section": "Interval estimation",
+    "subgoals": [
+      "Understand interval estimation",
+      "Apply interval estimation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Interval estimation of the mean with known \\\\(\\sigma\\\\)",
+    "section": "Interval estimation of the mean with known \\\\(\\sigma\\\\)",
+    "subgoals": [
+      "Understand interval estimation of the mean with known \\\\(\\sigma\\\\)",
+      "Apply interval estimation of the mean with known \\\\(\\sigma\\\\)",
+      "Check the result"
+    ]
+  }
+]

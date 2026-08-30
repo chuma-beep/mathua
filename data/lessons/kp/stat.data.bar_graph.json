@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Graphing Lines by Plotting Points",
+    "section": "Graphing Lines by Plotting Points",
+    "subgoals": [
+      "Define read and create bar graphs",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Graphing Lines in Slope-Intercept Form",
+    "section": "Graphing Lines in Slope-Intercept Form",
+    "subgoals": [
+      "Understand graphing lines in slope-intercept form",
+      "Apply graphing lines in slope-intercept form",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Graphing Lines in Point-Slope Form",
+    "section": "Graphing Lines in Point-Slope Form",
+    "subgoals": [
+      "Understand graphing lines in point-slope form",
+      "Apply graphing lines in point-slope form",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is an arithmetic sequence",
+    "section": "What is an arithmetic sequence",
+    "subgoals": [
+      "Define arithmetic sequences: common difference and nth term",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
+    "section": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
+    "subgoals": [
+      "Understand sum of \\\\(n\\\\) terms of an arithmetic progression",
+      "Apply sum of \\\\(n\\\\) terms of an arithmetic progression",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a linear system?",
+    "section": "What is a linear system?",
+    "subgoals": [
+      "Define nonlinear systems of equations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Omogeneous systems",
+    "section": "Omogeneous systems",
+    "subgoals": [
+      "Understand omogeneous systems",
+      "Apply omogeneous systems",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Why is the matrix form important?",
+    "section": "Why is the matrix form important?",
+    "subgoals": [
+      "Understand why is the matrix form important?",
+      "Apply why is the matrix form important?",
+      "Check the result"
+    ]
+  }
+]

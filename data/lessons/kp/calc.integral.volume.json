@@ -1,0 +1,29 @@
+[
+  {
+    "label": "6.3 Volumes of Revolution: Cylindrical Shells",
+    "section": "6.3 Volumes of Revolution: Cylindrical Shells",
+    "subgoals": [
+      "Define volume of solids of revolution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Method of Cylindrical Shells",
+    "section": "The Method of Cylindrical Shells",
+    "subgoals": [
+      "Understand the method of cylindrical shells",
+      "Apply the method of cylindrical shells",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Rule: The Method of Cylindrical Shells",
+    "section": "Rule: The Method of Cylindrical Shells",
+    "subgoals": [
+      "Understand rule: the method of cylindrical shells",
+      "Apply rule: the method of cylindrical shells",
+      "Check the result"
+    ]
+  }
+]

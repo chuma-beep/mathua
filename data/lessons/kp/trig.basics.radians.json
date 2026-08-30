@@ -1,0 +1,29 @@
+[
+  {
+    "label": "5.1 Angles",
+    "section": "5.1 Angles",
+    "subgoals": [
+      "Understand 5.1 angles",
+      "Apply 5.1 angles",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Drawing Angles in Standard Position",
+    "section": "Drawing Angles in Standard Position",
+    "subgoals": [
+      "Understand drawing angles in standard position",
+      "Apply drawing angles in standard position",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Quadrantal Angles",
+    "section": "Quadrantal Angles",
+    "subgoals": [
+      "Understand quadrantal angles",
+      "Apply quadrantal angles",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Behavior of a sequence",
+    "section": "Behavior of a sequence",
+    "subgoals": [
+      "Define convergent and divergent sequences",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Convergent sequence",
+    "section": "Convergent sequence",
+    "subgoals": [
+      "Understand convergent sequence",
+      "Apply convergent sequence",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  }
+]

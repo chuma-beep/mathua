@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 4.5 Euler Paths and Circuits",
+    "section": "Section 4.5 Euler Paths and Circuits",
+    "subgoals": [
+      "Define paths, cycles, and connectivity",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Euler Paths and Circuits.",
+    "section": "Euler Paths and Circuits.",
+    "subgoals": [
+      "Understand euler paths and circuits.",
+      "Apply euler paths and circuits.",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Subsection  Hamilton Paths",
+    "section": "Subsection  Hamilton Paths",
+    "subgoals": [
+      "Understand subsection  hamilton paths",
+      "Apply subsection  hamilton paths",
+      "Check the result"
+    ]
+  }
+]

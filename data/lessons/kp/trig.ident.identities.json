@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Understand introduction",
+      "Apply introduction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Fundamental identities",
+    "section": "Fundamental identities",
+    "subgoals": [
+      "Understand fundamental identities",
+      "Apply fundamental identities to simplify",
+      "Check by substitution"
+    ]
+  },
+  {
+    "label": "Reference angles and reflections",
+    "section": "Reference angles and reflections",
+    "subgoals": [
+      "Understand reference angles and reflections",
+      "Use reference angles and reflections to rewrite an angle",
+      "Check the quadrant sign"
+    ]
+  }
+]

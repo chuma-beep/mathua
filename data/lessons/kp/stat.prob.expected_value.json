@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is the expected value of a random variable?",
+    "section": "What is the expected value of a random variable?",
+    "subgoals": [
+      "Define expected value of a random variable",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Properties of the expected value of a random variable",
+    "section": "Properties of the expected value of a random variable",
+    "subgoals": [
+      "Understand properties of the expected value of a random variable",
+      "Apply properties of the expected value of a random variable",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Expectation for jointly distributed variables",
+    "section": "Expectation for jointly distributed variables",
+    "subgoals": [
+      "Understand expectation for jointly distributed variables",
+      "Apply expectation for jointly distributed variables",
+      "Check the result"
+    ]
+  }
+]

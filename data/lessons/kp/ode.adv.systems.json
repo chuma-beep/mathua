@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Homogeneous Systems ($\\mathbf{f} = 0$)",
+    "section": "Homogeneous Systems ($\\mathbf{f} = 0$)",
+    "subgoals": [
+      "Define systems of differential equations",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Nonhomogeneous Systems",
+    "section": "Nonhomogeneous Systems",
+    "subgoals": [
+      "Understand nonhomogeneous systems",
+      "Apply nonhomogeneous systems",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Systems of differential equations — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

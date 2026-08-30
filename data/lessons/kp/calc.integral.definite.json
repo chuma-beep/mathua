@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Area under a function: from curve to integral",
+    "section": "Area under a function: from curve to integral",
+    "subgoals": [
+      "Define definite integrals and area",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Approximating area with rectangular sums",
+    "section": "Approximating area with rectangular sums",
+    "subgoals": [
+      "Understand approximating area with rectangular sums",
+      "Apply approximating area with rectangular sums",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Computing definite integrals",
+    "section": "Computing definite integrals",
+    "subgoals": [
+      "Understand computing definite integrals",
+      "Apply computing definite integrals",
+      "Check the result"
+    ]
+  }
+]

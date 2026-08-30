@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 3.1 Propositional Logic",
+    "section": "Section 3.1 Propositional Logic",
+    "subgoals": [
+      "Define truth tables",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Subsection  Truth Tables",
+    "section": "Subsection  Truth Tables",
+    "subgoals": [
+      "Understand subsection  truth tables",
+      "Apply subsection  truth tables",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Subsection  Logical Equivalence",
+    "section": "Subsection  Logical Equivalence",
+    "subgoals": [
+      "Understand subsection  logical equivalence",
+      "Apply subsection  logical equivalence",
+      "Check the result"
+    ]
+  }
+]

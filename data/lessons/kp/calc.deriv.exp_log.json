@@ -1,0 +1,29 @@
+[
+  {
+    "label": "3.9 Derivatives of Exponential and Logarithmic Functions",
+    "section": "3.9 Derivatives of Exponential and Logarithmic Functions",
+    "subgoals": [
+      "Define derivatives of e^x and ln(x)",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Derivative of the Exponential Function",
+    "section": "Derivative of the Exponential Function",
+    "subgoals": [
+      "Understand derivative of the exponential function",
+      "Apply derivative of the exponential function",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Theorem 3.14",
+    "section": "Theorem 3.14",
+    "subgoals": [
+      "Understand theorem 3.14",
+      "Apply theorem 3.14",
+      "Check the result"
+    ]
+  }
+]

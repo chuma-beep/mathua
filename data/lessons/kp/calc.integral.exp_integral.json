@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define integral of exponential functions",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Canonical forms of exponential integrals",
+    "section": "Canonical forms of exponential integrals",
+    "subgoals": [
+      "Understand canonical forms of exponential integrals",
+      "Apply canonical forms of exponential integrals",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Exponential with a linear argument",
+    "section": "Exponential with a linear argument",
+    "subgoals": [
+      "Understand exponential with a linear argument",
+      "Apply exponential with a linear argument",
+      "Check the result"
+    ]
+  }
+]

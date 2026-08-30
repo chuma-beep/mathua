@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is little-o notation",
+    "section": "What is little-o notation",
+    "subgoals": [
+      "Define little-o notation",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The meaning of \\\\( o(1) \\\\)",
+    "section": "The meaning of \\\\( o(1) \\\\)",
+    "subgoals": [
+      "Understand the meaning of \\\\( o(1) \\\\)",
+      "Apply the meaning of \\\\( o(1) \\\\)",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Understand properties",
+      "Apply properties",
+      "Check the result"
+    ]
+  }
+]

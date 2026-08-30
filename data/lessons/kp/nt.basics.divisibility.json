@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define divisibility rules",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "The Integers as an algebraic ring",
+    "section": "The Integers as an algebraic ring",
+    "subgoals": [
+      "Understand the integers as an algebraic ring",
+      "Apply the integers as an algebraic ring",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Fundamental properties of the integers",
+    "section": "Fundamental properties of the integers",
+    "subgoals": [
+      "Understand fundamental properties of the integers",
+      "Apply fundamental properties of the integers",
+      "Check the result"
+    ]
+  }
+]

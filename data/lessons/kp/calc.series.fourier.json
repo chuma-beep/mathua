@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define fourier series",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Fourier Coefficients",
+    "section": "Fourier Coefficients",
+    "subgoals": [
+      "Understand fourier coefficients",
+      "Apply fourier coefficients",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Convergence of Fourier series",
+    "section": "Convergence of Fourier series",
+    "subgoals": [
+      "Understand convergence of fourier series",
+      "Apply convergence of fourier series",
+      "Check the result"
+    ]
+  }
+]

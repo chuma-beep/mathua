@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What is a geometric series",
+    "section": "What is a geometric series",
+    "subgoals": [
+      "Define finite geometric series sum",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Determine the nature of the following series and compute their sum.",
+    "section": "Determine the nature of the following series and compute their sum.",
+    "subgoals": [
+      "Understand determine the nature of the following series and compute their sum.",
+      "Apply determine the nature of the following series and compute their sum.",
+      "Check the result"
+    ]
+  }
+]

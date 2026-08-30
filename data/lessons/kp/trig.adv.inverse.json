@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Arcsine",
+    "section": "Arcsine",
+    "subgoals": [
+      "Understand arcsine",
+      "Evaluate arcsine for principal values",
+      "Check domain and range"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Common values of the arcsine",
+    "section": "Common values of the arcsine",
+    "subgoals": [
+      "Understand common values of the arcsine",
+      "Evaluate common values of the arcsine for principal values",
+      "Check domain and range"
+    ]
+  }
+]

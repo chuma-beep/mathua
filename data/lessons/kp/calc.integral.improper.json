@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define improper integrals",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Improper integrals over unbounded intervals",
+    "section": "Improper integrals over unbounded intervals",
+    "subgoals": [
+      "Understand improper integrals over unbounded intervals",
+      "Apply improper integrals over unbounded intervals",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Improper integrals with infinite discontinuities",
+    "section": "Improper integrals with infinite discontinuities",
+    "subgoals": [
+      "Understand improper integrals with infinite discontinuities",
+      "Apply improper integrals with infinite discontinuities",
+      "Check the result"
+    ]
+  }
+]

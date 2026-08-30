@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define fundamental inequalities for complex numbers",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Inequalities involving real and imaginary parts",
+    "section": "Inequalities involving real and imaginary parts",
+    "subgoals": [
+      "Understand inequalities involving real and imaginary parts",
+      "Apply inequalities involving real and imaginary parts",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Triangle inequality",
+    "section": "Triangle inequality",
+    "subgoals": [
+      "Understand triangle inequality",
+      "Apply triangle inequality",
+      "Check the result"
+    ]
+  }
+]

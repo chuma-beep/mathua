@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Understand introduction",
+      "Apply introduction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Definition of sine and cosine",
+    "section": "Definition of sine and cosine",
+    "subgoals": [
+      "State the definition of sine and cosine",
+      "Apply definition of sine and cosine in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "Fundamental trigonometric identity",
+    "section": "Fundamental trigonometric identity",
+    "subgoals": [
+      "Understand fundamental trigonometric identity",
+      "Apply fundamental trigonometric identity to simplify",
+      "Check by substitution"
+    ]
+  }
+]

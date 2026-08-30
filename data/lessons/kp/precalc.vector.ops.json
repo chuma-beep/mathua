@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define vector operations: addition, subtraction, scalar multiplication",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Coordinate representation",
+    "section": "Coordinate representation",
+    "subgoals": [
+      "Understand coordinate representation",
+      "Apply coordinate representation",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Matrix–Vector interpretation",
+    "section": "Matrix–Vector interpretation",
+    "subgoals": [
+      "Understand matrix–vector interpretation",
+      "Apply matrix–vector interpretation",
+      "Check the result"
+    ]
+  }
+]

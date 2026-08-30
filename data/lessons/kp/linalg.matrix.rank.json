@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define rank of a matrix",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Submatrices and minors",
+    "section": "Submatrices and minors",
+    "subgoals": [
+      "Understand submatrices and minors",
+      "Apply submatrices and minors",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Definition via minors",
+    "section": "Definition via minors",
+    "subgoals": [
+      "Understand definition via minors",
+      "Apply definition via minors",
+      "Check the result"
+    ]
+  }
+]

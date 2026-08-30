@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the definition",
+      "Apply definition in a worked example",
+      "Verify with an identity or example"
+    ]
+  },
+  {
+    "label": "Domain restrictions",
+    "section": "Domain restrictions",
+    "subgoals": [
+      "Understand domain restrictions",
+      "Apply domain restrictions",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Validity for arbitrary angles",
+    "section": "Validity for arbitrary angles",
+    "subgoals": [
+      "Understand validity for arbitrary angles",
+      "Apply validity for arbitrary angles",
+      "Check the result"
+    ]
+  }
+]

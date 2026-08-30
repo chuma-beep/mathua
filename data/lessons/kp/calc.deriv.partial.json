@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define partial derivatives",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Higher-order partial derivatives",
+    "section": "Higher-order partial derivatives",
+    "subgoals": [
+      "Understand higher-order partial derivatives",
+      "Apply higher-order partial derivatives",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Schwarz’s theorem",
+    "section": "Schwarz’s theorem",
+    "subgoals": [
+      "Understand schwarz’s theorem",
+      "Apply schwarz’s theorem",
+      "Check the result"
+    ]
+  }
+]

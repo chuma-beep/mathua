@@ -1,0 +1,29 @@
+[
+  {
+    "label": "How trigonometric substitution works",
+    "section": "How trigonometric substitution works",
+    "subgoals": [
+      "Define trigonometric substitution for integrals",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "From substitutions to geometry",
+    "section": "From substitutions to geometry",
+    "subgoals": [
+      "Understand from substitutions to geometry",
+      "Apply from substitutions to geometry",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The form \\\\(\\sqrt{a^2-x^2}\\\\)",
+    "section": "The form \\\\(\\sqrt{a^2-x^2}\\\\)",
+    "subgoals": [
+      "Understand the form \\\\(\\sqrt{a^2-x^2}\\\\)",
+      "Apply the form \\\\(\\sqrt{a^2-x^2}\\\\)",
+      "Check the result"
+    ]
+  }
+]

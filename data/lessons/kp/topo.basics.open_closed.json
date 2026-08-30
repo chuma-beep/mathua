@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Open Sets",
+    "section": "Open Sets",
+    "subgoals": [
+      "Define open and closed sets",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Closed Sets",
+    "section": "Closed Sets",
+    "subgoals": [
+      "Understand closed sets",
+      "Apply closed sets",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Understand properties",
+      "Apply properties",
+      "Check the result"
+    ]
+  }
+]

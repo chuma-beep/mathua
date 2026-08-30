@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define types of discontinuities",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Recall of continuity",
+    "section": "Recall of continuity",
+    "subgoals": [
+      "Understand recall of continuity",
+      "Apply recall of continuity",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Removable discontinuity",
+    "section": "Removable discontinuity",
+    "subgoals": [
+      "Understand removable discontinuity",
+      "Apply removable discontinuity",
+      "Check the result"
+    ]
+  }
+]

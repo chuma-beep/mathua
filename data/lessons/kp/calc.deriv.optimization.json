@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Global maximum and minimum points",
+    "section": "Global maximum and minimum points",
+    "subgoals": [
+      "Define optimization problems",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Local maximum and minimum points",
+    "section": "Local maximum and minimum points",
+    "subgoals": [
+      "Understand local maximum and minimum points",
+      "Apply local maximum and minimum points",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Upward and downward concavity",
+    "section": "Upward and downward concavity",
+    "subgoals": [
+      "Understand upward and downward concavity",
+      "Apply upward and downward concavity",
+      "Check the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction to the geometric distribution",
+    "section": "Introduction to the geometric distribution",
+    "subgoals": [
+      "Define geometric distribution",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Key features",
+    "section": "Key features",
+    "subgoals": [
+      "Understand key features",
+      "Apply key features",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Deriving the geometric distribution",
+    "section": "Deriving the geometric distribution",
+    "subgoals": [
+      "Understand deriving the geometric distribution",
+      "Apply deriving the geometric distribution",
+      "Check the result"
+    ]
+  }
+]

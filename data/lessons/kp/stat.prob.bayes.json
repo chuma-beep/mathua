@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What it is and what Bayes’ Theorem is used for",
+    "section": "What it is and what Bayes’ Theorem is used for",
+    "subgoals": [
+      "Define bayes' theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Understand example",
+      "Apply example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Glossary",
+    "section": "Glossary",
+    "subgoals": [
+      "Understand glossary",
+      "Apply glossary",
+      "Check the result"
+    ]
+  }
+]

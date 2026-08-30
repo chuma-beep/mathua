@@ -1,0 +1,29 @@
+[
+  {
+    "label": "5.5 Averages and Probability",
+    "section": "5.5 Averages and Probability",
+    "subgoals": [
+      "Define complement of an event",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Calculate the Mean of a Set of Numbers",
+    "section": "Calculate the Mean of a Set of Numbers",
+    "subgoals": [
+      "Understand calculate the mean of a set of numbers",
+      "Apply calculate the mean of a set of numbers",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "The Mean",
+    "section": "The Mean",
+    "subgoals": [
+      "Understand the mean",
+      "Apply the mean",
+      "Check the result"
+    ]
+  }
+]

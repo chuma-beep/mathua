@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define roots of complex numbers",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Group structure",
+    "section": "Group structure",
+    "subgoals": [
+      "Understand group structure",
+      "Apply group structure",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Geometric interpretation",
+    "section": "Geometric interpretation",
+    "subgoals": [
+      "Understand geometric interpretation",
+      "Apply geometric interpretation",
+      "Check the result"
+    ]
+  }
+]

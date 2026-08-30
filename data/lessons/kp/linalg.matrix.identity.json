@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define identity matrix and matrix inverses",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Properties of the inverse",
+    "section": "Properties of the inverse",
+    "subgoals": [
+      "Understand properties of the inverse",
+      "Apply properties of the inverse",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Computing the inverse: the cofactor method",
+    "section": "Computing the inverse: the cofactor method",
+    "subgoals": [
+      "Understand computing the inverse: the cofactor method",
+      "Apply computing the inverse: the cofactor method",
+      "Check the result"
+    ]
+  }
+]

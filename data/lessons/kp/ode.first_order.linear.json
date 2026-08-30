@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Integrating Factor Method",
+    "section": "Integrating Factor Method",
+    "subgoals": [
+      "Define first-order linear odes",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "First-order linear ODEs — practice 2",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  },
+  {
+    "label": "First-order linear ODEs — practice 3",
+    "section": "",
+    "subgoals": [
+      "Review the definition",
+      "Work through the example",
+      "Verify the result"
+    ]
+  }
+]

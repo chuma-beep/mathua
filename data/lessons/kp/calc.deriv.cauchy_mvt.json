@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define cauchy's mean value theorem",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Understand statement",
+      "Apply statement",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Proof of Cauchy’s theorem",
+    "section": "Proof of Cauchy’s theorem",
+    "subgoals": [
+      "Understand proof of cauchy’s theorem",
+      "Apply proof of cauchy’s theorem",
+      "Check the result"
+    ]
+  }
+]

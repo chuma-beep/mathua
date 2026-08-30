@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Define taylor series",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Analytic functions and the motivating problem",
+    "section": "Analytic functions and the motivating problem",
+    "subgoals": [
+      "Understand analytic functions and the motivating problem",
+      "Apply analytic functions and the motivating problem",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Determination of the coefficients",
+    "section": "Determination of the coefficients",
+    "subgoals": [
+      "Understand determination of the coefficients",
+      "Apply determination of the coefficients",
+      "Check the result"
+    ]
+  }
+]

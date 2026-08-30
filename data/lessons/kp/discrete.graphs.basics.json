@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Section 4.1 Definitions",
+    "section": "Section 4.1 Definitions",
+    "subgoals": [
+      "Define graphs: vertices, edges, and degrees",
+      "Follow the worked example",
+      "Apply the rule"
+    ]
+  },
+  {
+    "label": "Graph Definition.",
+    "section": "Graph Definition.",
+    "subgoals": [
+      "Understand graph definition.",
+      "Apply graph definition.",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Isomorphic Graphs.",
+    "section": "Isomorphic Graphs.",
+    "subgoals": [
+      "Understand isomorphic graphs.",
+      "Apply isomorphic graphs.",
+      "Check the result"
+    ]
+  }
+]
