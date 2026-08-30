@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": ["State the Hausdorff separation axiom", "Find disjoint neighborhoods", "Apply to distinct points"]
+  },
+  {
+    "label": "Examples and non-examples",
+    "section": "Examples and non-examples",
+    "subgoals": ["See metric spaces are Hausdorff", "Spot indiscrete failure", "Contrast discrete vs indiscrete"]
+  },
+  {
+    "label": "Metric spaces are Hausdorff",
+    "section": "Metric spaces are Hausdorff",
+    "subgoals": ["Use epsilon = d(x,y)/2", "Build the separating balls", "Conclude the proof"]
+  }
+]
