@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of mean squared error",
+    "section": "Definition of mean squared error",
+    "subgoals": ["Compute (y-t)^2", "Average over samples", "Interpret the value"]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": ["Recognize non-negativity", "Spot zero only at perfect prediction", "See large-error penalty"]
+  },
+  {
+    "label": "Derivative and use in regression",
+    "section": "Derivative and use in regression",
+    "subgoals": ["Differentiate 1/2(y-t)^2", "Get gradient y-t", "Apply in regression"]
+  }
+]

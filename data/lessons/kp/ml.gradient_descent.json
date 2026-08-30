@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of gradient descent",
+    "section": "Definition of gradient descent",
+    "subgoals": ["Follow the negative gradient", "Update the parameters", "Reduce the loss"]
+  },
+  {
+    "label": "The learning rate",
+    "section": "The learning rate",
+    "subgoals": ["Scale the gradient step", "Avoid divergence", "Tune for speed"]
+  },
+  {
+    "label": "Stochastic and batch variants",
+    "section": "Stochastic and batch variants",
+    "subgoals": ["Distinguish SGD from batch", "Trade noise for speed", "Choose the variant"]
+  }
+]

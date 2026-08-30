@@ -1874,5 +1874,21 @@
  {
   "concept_id": "abstract.rings.quotient",
   "source": "teaching/abstract.rings.quotient.md"
+ },
+ {
+  "concept_id": "ml.perceptron",
+  "source": "teaching/ml.perceptron.md"
+ },
+ {
+  "concept_id": "ml.loss.mse",
+  "source": "teaching/ml.loss.mse.md"
+ },
+ {
+  "concept_id": "ml.forward_pass",
+  "source": "teaching/ml.forward_pass.md"
+ },
+ {
+  "concept_id": "ml.gradient_descent",
+  "source": "teaching/ml.gradient_descent.md"
  }
 ]
