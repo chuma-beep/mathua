@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Definition of cyclic groups",
+    "section": "Definition of cyclic groups",
+    "subgoals": ["Define a generator", "Express every element as a power", "Identify the generator"]
+  },
+  {
+    "label": "Generators and order",
+    "section": "Generators and order",
+    "subgoals": ["Relate generator order to group order", "Find the order of a generator", "Conclude cyclic order"]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples of cyclic and non-cyclic groups",
+    "subgoals": ["Recognize Z_n as cyclic", "Spot V_4 as non-cyclic", "Contrast the structures"]
+  }
+]
