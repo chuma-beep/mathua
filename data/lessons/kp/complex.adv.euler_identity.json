@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler's Identity",
+    "section": "Five Constants in One Equation",
+    "subgoals": [
+      "Review Five Constants in One Equation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Euler's Identity — practice 2",
+    "section": "Five Constants in One Equation",
+    "subgoals": [
+      "Review Five Constants in One Equation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Euler's Identity — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

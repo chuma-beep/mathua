@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Power Series and Radius of Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Review Convergence",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Power Series and Radius of Convergence — practice 2",
+    "section": "Convergence",
+    "subgoals": [
+      "Review Convergence",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Power Series and Radius of Convergence — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

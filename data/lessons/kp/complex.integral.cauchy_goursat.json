@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cauchy-Goursat Theorem",
+    "section": "Consequences",
+    "subgoals": [
+      "Review Consequences",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cauchy-Goursat Theorem — practice 2",
+    "section": "Consequences",
+    "subgoals": [
+      "Review Consequences",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cauchy-Goursat Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "QR Decomposition",
+    "section": "Least Squares",
+    "subgoals": [
+      "Review Least Squares",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "QR Decomposition — practice 2",
+    "section": "Least Squares",
+    "subgoals": [
+      "Review Least Squares",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "QR Decomposition — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

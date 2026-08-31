@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convolutional Neural Networks",
+    "section": "Local Structure",
+    "subgoals": [
+      "Review Local Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Convolutional Neural Networks — practice 2",
+    "section": "Local Structure",
+    "subgoals": [
+      "Review Local Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Convolutional Neural Networks — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

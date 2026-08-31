@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bifurcations in Nonlinear ODEs",
+    "section": "Types",
+    "subgoals": [
+      "Review Types",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Bifurcations in Nonlinear ODEs — practice 2",
+    "section": "Types",
+    "subgoals": [
+      "Review Types",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Bifurcations in Nonlinear ODEs — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

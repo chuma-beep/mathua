@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Laurent Series",
+    "section": "Annuli and Singularities",
+    "subgoals": [
+      "Review Annuli and Singularities",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Laurent Series — practice 2",
+    "section": "Annuli and Singularities",
+    "subgoals": [
+      "Review Annuli and Singularities",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Laurent Series — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

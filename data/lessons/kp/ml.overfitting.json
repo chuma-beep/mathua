@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Overfitting and Generalization",
+    "section": "Diagnosing Overfitting",
+    "subgoals": [
+      "Review Diagnosing Overfitting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Overfitting and Generalization — practice 2",
+    "section": "Diagnosing Overfitting",
+    "subgoals": [
+      "Review Diagnosing Overfitting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Overfitting and Generalization — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -86,5 +86,204 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "topo.quotient",
+    "label": "Quotient topology",
+    "domain": "topology",
+    "subdomain": "topology.constructions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.basics.continuous"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.product",
+    "label": "Product topology",
+    "domain": "topology",
+    "subdomain": "topology.constructions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.basics.open_closed"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.urysohn",
+    "label": "Urysohn's lemma",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.hausdorff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "topo.metrization",
+    "label": "Urysohn metrization theorem",
+    "domain": "topology",
+    "subdomain": "topology.metrization",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.urysohn",
+      "topo.basics.metric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "topo.connected.path",
+    "label": "Path-connected spaces",
+    "domain": "topology",
+    "subdomain": "topology.connected",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.connected"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "topo.compact.local",
+    "label": "Local compactness",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.compact"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "topo.separation.tietze",
+    "label": "Tietze extension theorem",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.urysohn"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "topo.homotopy",
+    "label": "Homotopy and fundamental group",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.connected.path",
+      "abstract.group.def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.manifold",
+    "label": "Topological manifolds",
+    "domain": "topology",
+    "subdomain": "topology.manifolds",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy",
+      "topo.product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.connected.local_path",
+    "label": "Locally path-connected spaces",
+    "domain": "topology",
+    "subdomain": "topology.connected",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.connected.path"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "topo.compact.one_point",
+    "label": "One-point compactification",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.compact.local"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.separation.completely_regular",
+    "label": "Completely regular spaces",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.separation.tietze"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.homotopy.fundamental",
+    "label": "Fundamental group calculations",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "topo.manifold.orientability",
+    "label": "Orientability of manifolds",
+    "domain": "topology",
+    "subdomain": "topology.manifolds",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.manifold"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

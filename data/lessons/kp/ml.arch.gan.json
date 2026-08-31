@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Generative Adversarial Networks",
+    "section": "Adversarial Training",
+    "subgoals": [
+      "Review Adversarial Training",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Generative Adversarial Networks — practice 2",
+    "section": "Adversarial Training",
+    "subgoals": [
+      "Review Adversarial Training",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Generative Adversarial Networks — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

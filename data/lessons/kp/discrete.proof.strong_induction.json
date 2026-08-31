@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Strong Induction and Well-Ordering",
+    "section": "Stronger Hypotheses",
+    "subgoals": [
+      "Review Stronger Hypotheses",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Strong Induction and Well-Ordering — practice 2",
+    "section": "Stronger Hypotheses",
+    "subgoals": [
+      "Review Stronger Hypotheses",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Strong Induction and Well-Ordering — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

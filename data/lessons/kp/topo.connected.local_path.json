@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Locally Path-Connected Spaces",
+    "section": "Local vs Global Path-Connectedness",
+    "subgoals": [
+      "Review Local vs Global Path-Connectedness",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Locally Path-Connected Spaces — practice 2",
+    "section": "Local vs Global Path-Connectedness",
+    "subgoals": [
+      "Review Local vs Global Path-Connectedness",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Locally Path-Connected Spaces — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

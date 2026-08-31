@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fundamental Group Calculations",
+    "section": "Computing $\\pi_1$",
+    "subgoals": [
+      "Review Computing $\\pi_1$",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Fundamental Group Calculations — practice 2",
+    "section": "Computing $\\pi_1$",
+    "subgoals": [
+      "Review Computing $\\pi_1$",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Fundamental Group Calculations — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

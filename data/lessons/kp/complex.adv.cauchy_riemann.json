@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cauchy-Riemann Equations",
+    "section": "Analyticity Criterion",
+    "subgoals": [
+      "Review Analyticity Criterion",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cauchy-Riemann Equations — practice 2",
+    "section": "Analyticity Criterion",
+    "subgoals": [
+      "Review Analyticity Criterion",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cauchy-Riemann Equations — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

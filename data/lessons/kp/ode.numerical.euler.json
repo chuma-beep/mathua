@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler's method",
+    "section": "One Step of Euler",
+    "subgoals": [
+      "Review One Step of Euler",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Euler's method — practice 2",
+    "section": "One Step of Euler",
+    "subgoals": [
+      "Review One Step of Euler",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Euler's method — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

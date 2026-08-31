@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polynomial Rings and Field Extensions",
+    "section": "From Polynomials to Fields",
+    "subgoals": [
+      "Review From Polynomials to Fields",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Polynomial Rings and Field Extensions — practice 2",
+    "section": "From Polynomials to Fields",
+    "subgoals": [
+      "Review From Polynomials to Fields",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Polynomial Rings and Field Extensions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -98,6 +98,13 @@
     "targets": ["discrete.logic.quantifiers", "discrete.sets.operations", "discrete.combinatorics.combinations", "discrete.graphs.trees", "discrete.proof.induction"]
   },
   {
+    "id": "discrete2",
+    "name": "Discrete Math II",
+    "grade": "college",
+    "description": "De Morgan, relations, pigeonhole, Eulerian, and strong induction.",
+    "targets": ["discrete.logic.equivalence", "discrete.sets.relations", "discrete.combinatorics.pigeonhole", "discrete.graphs.eulerian", "discrete.proof.strong_induction"]
+  },
+  {
     "id": "probstat",
     "name": "Probability & Statistics",
     "grade": "college",
@@ -117,6 +124,13 @@
     "grade": "college",
     "description": "Groups, subgroups, homomorphisms, rings, and fields.",
     "targets": ["abstract.group.def", "abstract.group.subgroup", "abstract.group.homomorphism", "abstract.rings.def", "abstract.structures.field"]
+  },
+  {
+    "id": "abstract2",
+    "name": "Abstract Algebra II",
+    "grade": "college",
+    "description": "Normal subgroups, Lagrange, quotient groups, polynomial rings, and field extensions.",
+    "targets": ["abstract.group.normal", "abstract.group.lagrange", "abstract.group.quotient_group", "abstract.rings.polynomial", "abstract.group.action", "abstract.group.sylow", "abstract.rings.ufd", "abstract.field.extension", "abstract.structures.galois"]
   },
   {
     "id": "topo",

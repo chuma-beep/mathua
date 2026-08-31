@@ -127,6 +127,60 @@ def main():
         if bad:
             errors.append(f"course problems ({len(bad)}):\n  " + "\n  ".join(bad))
 
+    # 8. Grading type enum + threshold sanity + enrichment wiring
+    try:
+        allowed_grading = {"multiple_choice", "numeric", "symbolic", "complex", "expression", "ordering", "tuple", "polynomial", "comparison"}
+        thresh_warn = []
+        grading_bad = []
+        for name in os.listdir(CONCEPTS_DIR):
+            if not name.endswith(".json") or name == "enrichment.json":
+                continue
+            with open(os.path.join(CONCEPTS_DIR, name)) as f:
+                for c in json.load(f):
+                    gt = c.get("grading_type", "")
+                    if gt not in allowed_grading:
+                        grading_bad.append(f"{c['id']}: grading_type {gt!r}")
+                    mt = c.get("mastery_threshold", {})
+                    st = mt.get("streak", 0)
+                    avg = mt.get("avg_time_seconds", 0)
+                    if not isinstance(st, int) or st <= 0:
+                        thresh_warn.append(f"{c['id']}: streak {st}")
+                    if not isinstance(avg, (int, float)) or avg <= 0:
+                        thresh_warn.append(f"{c['id']}: avg_time_seconds {avg}")
+                    elif avg > 120:
+                        thresh_warn.append(f"{c['id']}: avg_time_seconds {avg} >120 (outlier)")
+        if grading_bad:
+            errors.append(f"grading_type problems ({len(grading_bad)}):\n  " + "\n  ".join(grading_bad))
+        if thresh_warn:
+            # treat >120 as warn but report; fail only if >300 or invalid
+            hard = [x for x in thresh_warn if "avg_time_seconds 0" in x or "streak" in x or ">300" in x]
+            if hard:
+                errors.append(f"threshold problems ({len(hard)}):\n  " + "\n  ".join(hard))
+            else:
+                # log outlier but not fail — print to stderr for visibility
+                print(f"note: threshold outliers ({len(thresh_warn)}): " + "; ".join(thresh_warn[:5]), file=sys.stderr)
+    except Exception as e:
+        errors.append(f"grading/threshold audit failed: {e}")
+
+    # 9. Enrichment wiring check: members and ids must resolve in DAG
+    enrich_path = os.path.join(CONCEPTS_DIR, "enrichment.json")
+    if os.path.exists(enrich_path):
+        try:
+            with open(enrich_path) as f:
+                enrich = json.load(f)
+            enrich_bad = []
+            for ent in enrich:
+                if "id" in ent and ent["id"]:
+                    if ent["id"] not in dag_ids:
+                        enrich_bad.append(f"enrichment id {ent['id']} not in DAG")
+                for mid in ent.get("members", []):
+                    if mid not in dag_ids:
+                        enrich_bad.append(f"enrichment member {mid} not in DAG")
+            if enrich_bad:
+                errors.append(f"enrichment problems ({len(enrich_bad)}):\n  " + "\n  ".join(enrich_bad))
+        except Exception as e:
+            errors.append(f"enrichment audit failed: {e}")
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")

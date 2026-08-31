@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Urysohn's Lemma",
+    "section": "Separating Closed Sets",
+    "subgoals": [
+      "Review Separating Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Urysohn's Lemma — practice 2",
+    "section": "Separating Closed Sets",
+    "subgoals": [
+      "Review Separating Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Urysohn's Lemma — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

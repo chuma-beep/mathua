@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -14,6 +15,15 @@ import (
 
 var sympyServicePath string
 var findOnce sync.Once
+
+// Pool for persistent sympy service to avoid per-request fork + DoS.
+var (
+	sympyMu     sync.Mutex
+	sympyCmd    *exec.Cmd
+	sympyStdin  io.WriteCloser
+	sympyStdout *bufio.Scanner
+	sympySem    = make(chan struct{}, 4) // limit concurrent grading to 4
+)
 
 func findSymPyService() string {
 	findOnce.Do(func() {
@@ -61,28 +71,69 @@ type sympyResponse struct {
 	Feedback string `json:"feedback"`
 }
 
-func gradeSymPy(expected, answer string) Result {
+func ensureSympyLocked() error {
+	if sympyCmd != nil && sympyCmd.Process != nil {
+		// Check if process is still alive (naive: ProcessState == nil means running)
+		if sympyCmd.ProcessState == nil {
+			return nil
+		}
+		// Previous process died — clean up
+		sympyCmd = nil
+		sympyStdin = nil
+		sympyStdout = nil
+	}
 	path := findSymPyService()
 	if path == "" {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service not found"}
+		return fmt.Errorf("grading service not found")
+	}
+	cmd := exec.Command("python3", path)
+	stdin, err := cmd.StdinPipe()
+	if err != nil {
+		return fmt.Errorf("pipe error: %w", err)
+	}
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		return fmt.Errorf("pipe error: %w", err)
+	}
+	cmd.Stderr = os.Stderr
+	if err := cmd.Start(); err != nil {
+		return fmt.Errorf("start error: %w", err)
+	}
+	scanner := bufio.NewScanner(stdout)
+	// Bump buffer for 500-char input + JSON overhead; service var limit is 1MB
+	scanner.Buffer(make([]byte, 0, 64*1024), 1<<20)
+	sympyCmd = cmd
+	sympyStdin = stdin
+	sympyStdout = scanner
+	return nil
+}
+
+func gradeSymPy(expected, answer string) Result {
+	// Semaphore to bound concurrent grading (avoid fork bomb if pool restarts)
+	select {
+	case sympySem <- struct{}{}:
+		defer func() { <-sympySem }()
+	default:
+		// If semaphore full, try to acquire with timeout
+		ctxSem, cancelSem := context.WithTimeout(context.Background(), 2*time.Second)
+		defer cancelSem()
+		select {
+		case sympySem <- struct{}{}:
+			defer func() { <-sympySem }()
+		case <-ctxSem.Done():
+			return Result{Correct: false, Score: 0, Feedback: "Grading service busy"}
+		}
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 12*time.Second)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, "python3", path)
-	stdin, err := cmd.StdinPipe()
-	if err != nil {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service pipe error"}
-	}
-	stdout, err := cmd.StdoutPipe()
-	if err != nil {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service pipe error"}
-	}
-	cmd.Stderr = os.Stderr
+	// Ensure pooled process is alive, guarded by mutex
+	sympyMu.Lock()
+	defer sympyMu.Unlock()
 
-	if err := cmd.Start(); err != nil {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service start error"}
+	if err := ensureSympyLocked(); err != nil {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service not found"}
 	}
 
 	req := sympyRequest{
@@ -92,41 +143,74 @@ func gradeSymPy(expected, answer string) Result {
 	}
 	data, err := json.Marshal(req)
 	if err != nil {
-		cmd.Process.Kill()
-		cmd.Wait()
 		return Result{Correct: false, Score: 0, Feedback: "Internal error"}
 	}
 
-	if _, err := stdin.Write(append(data, '\n')); err != nil {
-		cmd.Process.Kill()
-		cmd.Wait()
-		return Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
-	}
-	stdin.Close()
-
-	scanner := bufio.NewScanner(stdout)
-	if scanner.Scan() {
-		line := scanner.Text()
-		var resp sympyResponse
-		if err := json.Unmarshal([]byte(line), &resp); err != nil {
-			cmd.Process.Kill()
-			cmd.Wait()
-			return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
+	// Write with context awareness
+	writeDone := make(chan error, 1)
+	go func() {
+		_, err := sympyStdin.Write(append(data, '\n'))
+		writeDone <- err
+	}()
+	select {
+	case err := <-writeDone:
+		if err != nil {
+			// Process likely died — kill and reset for next call
+			if sympyCmd != nil && sympyCmd.Process != nil {
+				sympyCmd.Process.Kill()
+				sympyCmd.Wait()
+			}
+			sympyCmd = nil
+			return Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
 		}
-		cmd.Wait()
-		if resp.Correct {
-			return Result{Correct: true, Score: 1}
-		}
-		feedback := resp.Feedback
-		if feedback == "" {
-			feedback = "Incorrect"
-		}
-		return Result{Correct: false, Score: 0, Feedback: feedback}
-	}
-
-	err = cmd.Wait()
-	if ctx.Err() != nil {
+	case <-ctx.Done():
 		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
 	}
-	return Result{Correct: false, Score: 0, Feedback: fmt.Sprintf("Grading service error: %v", err)}
+
+	// Read response with timeout
+	scanDone := make(chan bool, 1)
+	var line string
+	var scanErr bool
+	go func() {
+		if sympyStdout.Scan() {
+			line = sympyStdout.Text()
+			scanDone <- true
+		} else {
+			scanErr = true
+			scanDone <- false
+		}
+	}()
+	select {
+	case ok := <-scanDone:
+		if !ok {
+			// Scanner failed — process died
+			if sympyCmd != nil && sympyCmd.Process != nil {
+				sympyCmd.Process.Kill()
+				sympyCmd.Wait()
+			}
+			sympyCmd = nil
+			if scanErr && ctx.Err() == nil {
+				return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
+			}
+			if ctx.Err() != nil {
+				return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
+			}
+			return Result{Correct: false, Score: 0, Feedback: "Grading service error"}
+		}
+	case <-ctx.Done():
+		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
+	}
+
+	var resp sympyResponse
+	if err := json.Unmarshal([]byte(line), &resp); err != nil {
+		return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
+	}
+	if resp.Correct {
+		return Result{Correct: true, Score: 1}
+	}
+	feedback := resp.Feedback
+	if feedback == "" {
+		feedback = "Incorrect"
+	}
+	return Result{Correct: false, Score: 0, Feedback: feedback}
 }

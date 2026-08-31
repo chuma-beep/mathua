@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic Reciprocity",
+    "section": "Using Reciprocity",
+    "subgoals": [
+      "Review Using Reciprocity",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quadratic Reciprocity — practice 2",
+    "section": "Using Reciprocity",
+    "subgoals": [
+      "Review Using Reciprocity",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quadratic Reciprocity — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

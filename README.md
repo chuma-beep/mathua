@@ -16,14 +16,14 @@
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go&logoColor=white)](https://golang.org)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![License](https://img.shields.io/badge/license-MIT-c8a96e?style=flat-square)](LICENSE)
-[![Concepts](https://img.shields.io/badge/concepts-437-a8a0f0?style=flat-square)](#content)
+[![Concepts](https://img.shields.io/badge/concepts-540-a8a0f0?style=flat-square)](#content)
 [![Domains](https://img.shields.io/badge/domains-17-c8a96e?style=flat-square)](#content)
 
 </div>
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 437 atomic concepts and 19 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1311 worked examples (3 per concept) with subgoal labels and 102 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, transcripts, and graph visualisation.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 540 atomic concepts and 21 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1620 worked examples (3 per concept) with subgoal labels and 102 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, transcripts, and graph visualisation.
 
 ---
 
@@ -60,7 +60,7 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080
 
 All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic concept — something small enough to fail independently. Each edge is a prerequisite relationship.
 
-The graph contains **437 concepts** across **17 domains**. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
+The graph contains **540 concepts** across **17 domains**. The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -106,15 +106,15 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 | Precalculus | 23 |
 | Calculus | 71 |
 | Statistics | 36 |
-| Linear Algebra | 20 |
-| Discrete Math | 15 |
-| Complex Numbers | 10 |
-| Number Theory | 8 |
-| Differential Equations | 8 |
-| Abstract Algebra | 7 |
-| Machine Learning | 1 |
-| Topology | 3 |
-| **Total** | **437** |
+| Linear Algebra | 25 |
+| Discrete Math | 25 |
+| Complex Numbers | 25 |
+| Number Theory | 20 |
+| Differential Equations | 20 |
+| Abstract Algebra | 20 |
+| Machine Learning | 20 |
+| Topology | 20 |
+| **Total** | **540** |
 
 ---
 
@@ -132,7 +132,7 @@ The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fu
 
 ## Courses and transcripts
 
-19 courses from 4th grade to university are wired through the DAG — including Calculus I/II, Linear Algebra, Discrete Math, Probability & Statistics, Differential Equations, Abstract Algebra, Topology, and Machine Learning. Each course shows mastered/total, percent, and an estimate of days remaining at your daily XP goal. Transcripts export as CSV and the read-only share link lets a parent or teacher follow along.
+21 courses from 4th grade to university are wired through the DAG — including Calculus I/II, Linear Algebra, Discrete Math I/II, Probability & Statistics, Differential Equations, Abstract Algebra I/II, Topology, and Machine Learning. Each course shows mastered/total, percent, and an estimate of days remaining at your daily XP goal. Transcripts export as CSV and the read-only share link lets a parent or teacher follow along.
 
 ## Contributing
 

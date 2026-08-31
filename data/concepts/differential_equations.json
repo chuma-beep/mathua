@@ -118,5 +118,174 @@
       "streak": 10,
       "avg_time_seconds": 35.0
     }
+  },
+  {
+    "id": "ode.second_order.variation_params",
+    "label": "Variation of parameters",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.second_order.nonhomogeneous"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.transforms.convolution",
+    "label": "Convolution and Laplace transforms",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.systems.linear_phase",
+    "label": "Linear systems and phase portraits",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.systems",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.adv.systems"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.numerical.euler",
+    "label": "Euler's method",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.first_order.separable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ode.numerical.rk4",
+    "label": "Runge-Kutta 4th order method",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.numerical",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.numerical.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ode.stability",
+    "label": "Stability of equilibria",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.stability",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.systems.linear_phase"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ode.pde.characteristics",
+    "label": "First-order PDEs and characteristics",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.transforms.fourier",
+    "label": "Fourier transforms and ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.transforms.convolution"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.nonlinear.bifurcation",
+    "label": "Bifurcations in nonlinear ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.nonlinear",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.stability"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.pde.wave",
+    "label": "Wave equation and d'Alembert solution",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.pde.characteristics"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.pde.heat",
+    "label": "Heat equation and separation of variables",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.pde.wave"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.green.function",
+    "label": "Green's functions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.transforms.fourier"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

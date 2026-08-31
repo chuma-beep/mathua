@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sylow Theorems",
+    "section": "Counting Sylow Subgroups",
+    "subgoals": [
+      "Review Counting Sylow Subgroups",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sylow Theorems — practice 2",
+    "section": "Counting Sylow Subgroups",
+    "subgoals": [
+      "Review Counting Sylow Subgroups",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sylow Theorems — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

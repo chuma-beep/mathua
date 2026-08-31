@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fourier Transforms and ODEs",
+    "section": "Solving ODEs in Frequency Domain",
+    "subgoals": [
+      "Review Solving ODEs in Frequency Domain",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Fourier Transforms and ODEs — practice 2",
+    "section": "Solving ODEs in Frequency Domain",
+    "subgoals": [
+      "Review Solving ODEs in Frequency Domain",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Fourier Transforms and ODEs — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

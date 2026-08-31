@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Unique Factorization Domains",
+    "section": "Factorization Hierarchy",
+    "subgoals": [
+      "Review Factorization Hierarchy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Unique Factorization Domains — practice 2",
+    "section": "Factorization Hierarchy",
+    "subgoals": [
+      "Review Factorization Hierarchy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Unique Factorization Domains — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -115,5 +115,177 @@
       "streak": 10,
       "avg_time_seconds": 35.0
     }
+  },
+  {
+    "id": "nt.basics.bezout",
+    "label": "B\u00e9zout's identity",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.gcd_euclidean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "nt.basics.crt",
+    "label": "Chinese remainder theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.congruence",
+      "nt.basics.bezout"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "nt.adv.wilson",
+    "label": "Wilson's theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.fermat_little"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.basics.prime_inf",
+    "label": "Infinitude of primes",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "nt.adv.legendre",
+    "label": "Legendre symbol",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.wilson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.quadratic_reciprocity",
+    "label": "Quadratic reciprocity",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.legendre"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "nt.basics.order_mod",
+    "label": "Order modulo n",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.crt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "nt.adv.primitive_root",
+    "label": "Primitive roots",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.basics.order_mod",
+      "nt.adv.euler_phi"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "nt.adv.mobius",
+    "label": "M\u00f6bius function and inversion",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.euler_phi"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "nt.analytic.prime_number_theorem",
+    "label": "Prime number theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.mobius",
+      "nt.basics.prime_inf"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.dirichlet",
+    "label": "Dirichlet's theorem on arithmetic progressions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.primitive_root",
+      "nt.adv.legendre"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.sieve",
+    "label": "Sieve of Eratosthenes and Brun's sieve",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.analytic.prime_number_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

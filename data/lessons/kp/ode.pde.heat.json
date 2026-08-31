@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Heat Equation and Separation of Variables",
+    "section": "Fourier Series Solution",
+    "subgoals": [
+      "Review Fourier Series Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Heat Equation and Separation of Variables — practice 2",
+    "section": "Fourier Series Solution",
+    "subgoals": [
+      "Review Fourier Series Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Heat Equation and Separation of Variables — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

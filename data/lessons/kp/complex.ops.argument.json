@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Argument of a Complex Number",
+    "section": "Angle in the Plane",
+    "subgoals": [
+      "Review Angle in the Plane",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Argument of a Complex Number — practice 2",
+    "section": "Angle in the Plane",
+    "subgoals": [
+      "Review Angle in the Plane",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Argument of a Complex Number — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

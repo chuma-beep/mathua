@@ -156,5 +156,138 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "abstract.group.normal",
+    "label": "Normal subgroups and conjugacy",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.subgroup"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "abstract.group.lagrange",
+    "label": "Lagrange's theorem",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.order",
+      "abstract.group.subgroup"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "abstract.group.quotient_group",
+    "label": "Quotient groups and isomorphism theorems",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.normal",
+      "abstract.group.homomorphism",
+      "abstract.rings.quotient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.rings.polynomial",
+    "label": "Polynomial rings and field extensions",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.ideal",
+      "abstract.structures.field"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.group.action",
+    "label": "Group actions and orbit-stabilizer",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.quotient_group"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.group.sylow",
+    "label": "Sylow theorems",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.lagrange"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.rings.ufd",
+    "label": "Unique factorization domains",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.field.extension",
+    "label": "Field extensions and splitting fields",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.ufd",
+      "abstract.rings.quotient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.structures.galois",
+    "label": "Galois correspondence",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.group.sylow"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
   }
 ]

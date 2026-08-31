@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Path-Connected Spaces",
+    "section": "Paths vs Connectedness",
+    "subgoals": [
+      "Review Paths vs Connectedness",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Path-Connected Spaces — practice 2",
+    "section": "Paths vs Connectedness",
+    "subgoals": [
+      "Review Paths vs Connectedness",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Path-Connected Spaces — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

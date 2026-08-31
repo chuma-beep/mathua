@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dropout Regularization",
+    "section": "Why It Helps",
+    "subgoals": [
+      "Review Why It Helps",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Dropout Regularization — practice 2",
+    "section": "Why It Helps",
+    "subgoals": [
+      "Review Why It Helps",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Dropout Regularization — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

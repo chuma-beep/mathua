@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Riemann Sphere and Stereographic Projection",
+    "section": "Sphere as Compact Complex Plane",
+    "subgoals": [
+      "Review Sphere as Compact Complex Plane",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Riemann Sphere and Stereographic Projection — practice 2",
+    "section": "Sphere as Compact Complex Plane",
+    "subgoals": [
+      "Review Sphere as Compact Complex Plane",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Riemann Sphere and Stereographic Projection — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

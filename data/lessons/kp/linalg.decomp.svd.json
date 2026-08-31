@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Singular Value Decomposition",
+    "section": "Geometry and Rank",
+    "subgoals": [
+      "Review Geometry and Rank",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Singular Value Decomposition — practice 2",
+    "section": "Geometry and Rank",
+    "subgoals": [
+      "Review Geometry and Rank",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Singular Value Decomposition — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

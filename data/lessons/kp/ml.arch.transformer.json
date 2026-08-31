@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transformers and Attention",
+    "section": "Architecture",
+    "subgoals": [
+      "Review Architecture",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Transformers and Attention — practice 2",
+    "section": "Architecture",
+    "subgoals": [
+      "Review Architecture",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Transformers and Attention — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

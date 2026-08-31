@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Field Extensions and Splitting Fields",
+    "section": "Building Extensions",
+    "subgoals": [
+      "Review Building Extensions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Field Extensions and Splitting Fields — practice 2",
+    "section": "Building Extensions",
+    "subgoals": [
+      "Review Building Extensions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Field Extensions and Splitting Fields — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -287,5 +287,80 @@
       "streak": 3,
       "avg_time_seconds": 120
     }
+  },
+  {
+    "id": "linalg.inner_product",
+    "label": "Inner products and orthogonality",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.inner_product",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vec.span"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.decomp.lu",
+    "label": "LU decomposition",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.matrix.mult",
+      "linalg.matrix.identity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "linalg.decomp.qr",
+    "label": "QR decomposition",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.decomp.lu",
+      "linalg.inner_product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "linalg.decomp.svd",
+    "label": "Singular value decomposition",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.diagonalization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.decomp.jordan",
+    "label": "Jordan normal form",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.decomp.svd",
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

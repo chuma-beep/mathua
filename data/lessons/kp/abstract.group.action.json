@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Group Actions and Orbit-Stabilizer",
+    "section": "Structure of Actions",
+    "subgoals": [
+      "Review Structure of Actions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Group Actions and Orbit-Stabilizer — practice 2",
+    "section": "Structure of Actions",
+    "subgoals": [
+      "Review Structure of Actions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Group Actions and Orbit-Stabilizer — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Regularization (L2 Weight Decay)",
+    "section": "Why Regularize",
+    "subgoals": [
+      "Review Why Regularize",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Regularization (L2 Weight Decay) — practice 2",
+    "section": "Why Regularize",
+    "subgoals": [
+      "Review Why Regularize",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Regularization (L2 Weight Decay) — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

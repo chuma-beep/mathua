@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Completely Regular Spaces",
+    "section": "Functions Separating Points and Closed Sets",
+    "subgoals": [
+      "Review Functions Separating Points and Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Completely Regular Spaces — practice 2",
+    "section": "Functions Separating Points and Closed Sets",
+    "subgoals": [
+      "Review Functions Separating Points and Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Completely Regular Spaces — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Logical Equivalence, De Morgan and Normal Forms",
+    "section": "Transforming Formulas",
+    "subgoals": [
+      "Review Transforming Formulas",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Logical Equivalence, De Morgan and Normal Forms — practice 2",
+    "section": "Transforming Formulas",
+    "subgoals": [
+      "Review Transforming Formulas",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Logical Equivalence, De Morgan and Normal Forms — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

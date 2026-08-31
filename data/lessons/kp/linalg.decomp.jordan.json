@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Jordan Normal Form",
+    "section": "Structure",
+    "subgoals": [
+      "Review Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Jordan Normal Form — practice 2",
+    "section": "Structure",
+    "subgoals": [
+      "Review Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Jordan Normal Form — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

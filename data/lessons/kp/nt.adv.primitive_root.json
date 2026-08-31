@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Primitive Roots",
+    "section": "Existence and Counting",
+    "subgoals": [
+      "Review Existence and Counting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Primitive Roots — practice 2",
+    "section": "Existence and Counting",
+    "subgoals": [
+      "Review Existence and Counting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Primitive Roots — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

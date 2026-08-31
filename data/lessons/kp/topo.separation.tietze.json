@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tietze Extension Theorem",
+    "section": "Extending from Closed Sets",
+    "subgoals": [
+      "Review Extending from Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Tietze Extension Theorem — practice 2",
+    "section": "Extending from Closed Sets",
+    "subgoals": [
+      "Review Extending from Closed Sets",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Tietze Extension Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linear systems and phase portraits",
+    "section": "Classification by Eigenvalues",
+    "subgoals": [
+      "Review Classification by Eigenvalues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Linear systems and phase portraits — practice 2",
+    "section": "Classification by Eigenvalues",
+    "subgoals": [
+      "Review Classification by Eigenvalues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Linear systems and phase portraits — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

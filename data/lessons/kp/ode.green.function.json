@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Green's Functions",
+    "section": "Impulse Response",
+    "subgoals": [
+      "Review Impulse Response",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Green's Functions — practice 2",
+    "section": "Impulse Response",
+    "subgoals": [
+      "Review Impulse Response",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Green's Functions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

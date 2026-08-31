@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quotient Topology",
+    "section": "Glueing Spaces",
+    "subgoals": [
+      "Review Glueing Spaces",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quotient Topology — practice 2",
+    "section": "Glueing Spaces",
+    "subgoals": [
+      "Review Glueing Spaces",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quotient Topology — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

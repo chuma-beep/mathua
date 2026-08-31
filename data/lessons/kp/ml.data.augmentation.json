@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Data Augmentation",
+    "section": "Regularization via Augmentation",
+    "subgoals": [
+      "Review Regularization via Augmentation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Data Augmentation — practice 2",
+    "section": "Regularization via Augmentation",
+    "subgoals": [
+      "Review Regularization via Augmentation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Data Augmentation — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

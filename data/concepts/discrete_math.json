@@ -212,5 +212,150 @@
       "streak": 3,
       "avg_time_seconds": 120
     }
+  },
+  {
+    "id": "discrete.logic.equivalence",
+    "label": "Logical equivalence, De Morgan and normal forms",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.logic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.quantifiers"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.sets.relations",
+    "label": "Relations, functions and partitions",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.sets.venn",
+      "discrete.logic.quantifiers"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.pigeonhole",
+    "label": "Pigeonhole principle",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.combinatorics.combinations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "discrete.graphs.eulerian",
+    "label": "Eulerian trails, Hamiltonian and coloring",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.graphs.trees"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.proof.strong_induction",
+    "label": "Strong induction and well-ordering",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.proof",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.proof.induction",
+      "discrete.sequences.recurrence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.stars_bars",
+    "label": "Stars and bars",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.pigeonhole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.graphs.coloring",
+    "label": "Graph coloring and chromatic number",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.graph_theory",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.graphs.eulerian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.proof.contradiction",
+    "label": "Proof by contradiction",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.proof",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.logic.equivalence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "discrete.sets.inclusion_exclusion",
+    "label": "Inclusion-exclusion principle",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.sets",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.relations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "discrete.sequences.generating_functions",
+    "label": "Generating functions",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.recurrence",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.proof.strong_induction"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

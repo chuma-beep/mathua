@@ -20,5 +20,42 @@
     "heuristic": "trig siblings interfere — non-trivial group 5 members",
     "interference_group": "trig.basic",
     "members": ["trig.basics.radians", "trig.basics.unit_circle", "trig.basics.sin_cos_def", "trig.basics.tan_def", "trig.basics.reciprocal"]
+  },
+  {
+    "heuristic": "nt modular siblings interfere",
+    "interference_group": "nt.modular",
+    "members": ["nt.basics.modular", "nt.basics.congruence", "nt.basics.bezout", "nt.basics.crt"]
+  },
+  {
+    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
+    "interference_group": "abstract.group",
+    "members": ["abstract.group.normal", "abstract.group.lagrange", "abstract.group.quotient_group", "abstract.group.action", "abstract.group.sylow"]
+  },
+  {
+    "heuristic": "discrete logic siblings interfere",
+    "interference_group": "discrete.logic",
+    "members": ["discrete.logic.propositions", "discrete.logic.connectives", "discrete.logic.truth_tables", "discrete.logic.quantifiers", "discrete.logic.equivalence"]
+  },
+  {
+    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
+    "interference_group": "ml.arch",
+    "members": ["ml.arch.cnn", "ml.arch.rnn", "ml.arch.transformer", "ml.arch.gan"]
+  },
+  {
+    "heuristic": "topo homotopy siblings interfere",
+    "interference_group": "topo.homotopy",
+    "members": ["topo.homotopy", "topo.homotopy.fundamental", "topo.manifold", "topo.manifold.orientability"]
+  },
+  {
+    "id": "ml.regularization.dropout",
+    "heuristic": "ml dropout variants — easy/hard",
+    "variants": [
+      {"difficulty": 0.3, "time_thresh": 12.0, "label": "easy"},
+      {"difficulty": 0.7, "time_thresh": 18.0, "label": "hard"}
+    ]
+  },
+  {
+    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
+    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "ROC Curves and Evaluation Metrics",
+    "section": "Threshold Trade-Offs",
+    "subgoals": [
+      "Review Threshold Trade-Offs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "ROC Curves and Evaluation Metrics — practice 2",
+    "section": "Threshold Trade-Offs",
+    "subgoals": [
+      "Review Threshold Trade-Offs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "ROC Curves and Evaluation Metrics — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
