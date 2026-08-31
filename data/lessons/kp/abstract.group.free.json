@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Free Groups and Presentations",
+    "section": "Universal Property",
+    "subgoals": [
+      "Review Universal Property",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Free Groups and Presentations — practice 2",
+    "section": "Universal Property",
+    "subgoals": [
+      "Review Universal Property",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Free Groups and Presentations — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

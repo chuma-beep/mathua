@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Galois Groups of Polynomials",
+    "section": "Polynomials",
+    "subgoals": [
+      "Review Polynomials",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Galois Groups of Polynomials — practice 2",
+    "section": "Polynomials",
+    "subgoals": [
+      "Review Polynomials",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Galois Groups of Polynomials — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

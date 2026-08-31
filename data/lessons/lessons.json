@@ -2358,5 +2358,25 @@
   {
     "concept_id": "ml.reinforcement.actor_critic",
     "source": "teaching/ml.actor_critic.md"
+  },
+  {
+    "concept_id": "abstract.group.free",
+    "source": "teaching/abstract.group.free.md"
+  },
+  {
+    "concept_id": "abstract.rings.noetherian",
+    "source": "teaching/abstract.rings.noetherian.md"
+  },
+  {
+    "concept_id": "abstract.field.galois_group",
+    "source": "teaching/abstract.field.galois_group.md"
+  },
+  {
+    "concept_id": "abstract.structures.exact_sequence",
+    "source": "teaching/abstract.structures.exact_sequence.md"
+  },
+  {
+    "concept_id": "abstract.group.commutator",
+    "source": "teaching/abstract.group.commutator.md"
   }
 ]

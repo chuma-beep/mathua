@@ -360,5 +360,75 @@
       "streak": 10,
       "avg_time_seconds": 30.0
     }
+  },
+  {
+    "id": "abstract.group.free",
+    "label": "Free groups and presentations",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.solvable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.rings.noetherian",
+    "label": "Noetherian rings and Hilbert basis theorem",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.localization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.field.galois_group",
+    "label": "Galois groups of polynomials",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.field.finite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.structures.exact_sequence",
+    "label": "Exact sequences",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.group.commutator",
+    "label": "Commutator subgroup and abelianization",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.free"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]
