@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cohomology",
+    "section": "Structure",
+    "subgoals": [
+      "Review Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cohomology — practice 2",
+    "section": "Structure",
+    "subgoals": [
+      "Review Structure",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cohomology — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

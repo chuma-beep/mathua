@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stone-Čech Compactification",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stone-Čech Compactification — practice 2",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stone-Čech Compactification — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

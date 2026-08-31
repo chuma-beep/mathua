@@ -2298,5 +2298,65 @@
   {
     "concept_id": "nt.adv.class_number",
     "source": "teaching/nt.class_number.md"
+  },
+  {
+    "concept_id": "ode.sturm_liouville",
+    "source": "teaching/ode.sturm_liouville.md"
+  },
+  {
+    "concept_id": "ode.boundary_value",
+    "source": "teaching/ode.boundary.md"
+  },
+  {
+    "concept_id": "ode.nonlinear.lyapunov",
+    "source": "teaching/ode.lyapunov.md"
+  },
+  {
+    "concept_id": "ode.pde.laplace_eq",
+    "source": "teaching/ode.laplace_eq.md"
+  },
+  {
+    "concept_id": "ode.integral.volterra",
+    "source": "teaching/ode.volterra.md"
+  },
+  {
+    "concept_id": "topo.embedding",
+    "source": "teaching/topo.embedding.md"
+  },
+  {
+    "concept_id": "topo.knot",
+    "source": "teaching/topo.knot.md"
+  },
+  {
+    "concept_id": "topo.cohomology",
+    "source": "teaching/topo.cohomology.md"
+  },
+  {
+    "concept_id": "topo.compactification.stone_cech",
+    "source": "teaching/topo.stone_cech.md"
+  },
+  {
+    "concept_id": "topo.dimension",
+    "source": "teaching/topo.dimension.md"
+  },
+  {
+    "concept_id": "ml.nlp.transformer",
+    "source": "teaching/ml.nlp_transformer.md"
+  },
+  {
+    "concept_id": "ml.reinforcement.qlearning",
+    "source": "teaching/ml.qlearning.md"
+  },
+  {
+    "concept_id": "ml.reinforcement.policy_gradient",
+    "source": "teaching/ml.policy.md"
+  },
+  {
+    "concept_id": "ml.nlp.bert",
+    "source": "teaching/ml.bert.md"
+  },
+  {
+    "concept_id": "ml.reinforcement.actor_critic",
+    "source": "teaching/ml.actor_critic.md"
   }
 ]

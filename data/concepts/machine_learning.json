@@ -287,5 +287,75 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "ml.nlp.transformer",
+    "label": "Transformers for NLP",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.nlp",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.arch.transformer"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.reinforcement.qlearning",
+    "label": "Q-learning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.reinforcement",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.arch.transformer"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.reinforcement.policy_gradient",
+    "label": "Policy gradients",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.reinforcement",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.reinforcement.qlearning"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.nlp.bert",
+    "label": "BERT and pretraining",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.nlp",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.nlp.transformer"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.reinforcement.actor_critic",
+    "label": "Actor-critic methods",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.reinforcement",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ml.reinforcement.policy_gradient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

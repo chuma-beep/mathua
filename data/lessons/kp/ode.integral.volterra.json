@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Volterra Integral Equations",
+    "section": "Solving",
+    "subgoals": [
+      "Review Solving",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Volterra Integral Equations — practice 2",
+    "section": "Solving",
+    "subgoals": [
+      "Review Solving",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Volterra Integral Equations — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

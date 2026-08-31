@@ -287,5 +287,75 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "ode.sturm_liouville",
+    "label": "Sturm-Liouville theory",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.stability",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.boundary_value",
+    "label": "Boundary value problems",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.boundary",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.sturm_liouville"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ode.nonlinear.lyapunov",
+    "label": "Lyapunov functions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.nonlinear",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.pde.laplace_eq",
+    "label": "Laplace equation",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.pde.heat"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ode.integral.volterra",
+    "label": "Volterra integral equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.integral",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "ode.green.function"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

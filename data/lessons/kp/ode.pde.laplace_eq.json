@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Laplace Equation",
+    "section": "Harmonic Functions",
+    "subgoals": [
+      "Review Harmonic Functions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Laplace Equation — practice 2",
+    "section": "Harmonic Functions",
+    "subgoals": [
+      "Review Harmonic Functions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Laplace Equation — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
