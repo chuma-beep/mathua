@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bézout's identity",
+    "section": "The GCD as a Linear Combination",
+    "subgoals": [
+      "Review The GCD as a Linear Combination",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Bézout's identity — practice 2",
+    "section": "The GCD as a Linear Combination",
+    "subgoals": [
+      "Review The GCD as a Linear Combination",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Bézout's identity — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

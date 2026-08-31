@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Orientability of Manifolds",
+    "section": "Detecting Orientability",
+    "subgoals": [
+      "Review Detecting Orientability",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Orientability of Manifolds — practice 2",
+    "section": "Detecting Orientability",
+    "subgoals": [
+      "Review Detecting Orientability",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Orientability of Manifolds — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

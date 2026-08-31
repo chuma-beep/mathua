@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inclusion-Exclusion Principle",
+    "section": "Counting via Overlaps",
+    "subgoals": [
+      "Review Counting via Overlaps",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Inclusion-Exclusion Principle — practice 2",
+    "section": "Counting via Overlaps",
+    "subgoals": [
+      "Review Counting via Overlaps",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Inclusion-Exclusion Principle — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

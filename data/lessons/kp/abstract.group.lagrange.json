@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lagrange's Theorem",
+    "section": "Divisibility Constraint",
+    "subgoals": [
+      "Review Divisibility Constraint",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Lagrange's Theorem — practice 2",
+    "section": "Divisibility Constraint",
+    "subgoals": [
+      "Review Divisibility Constraint",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Lagrange's Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

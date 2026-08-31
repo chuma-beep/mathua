@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Variation of parameters",
+    "section": "Building the Particular Solution",
+    "subgoals": [
+      "Review Building the Particular Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Variation of parameters — practice 2",
+    "section": "Building the Particular Solution",
+    "subgoals": [
+      "Review Building the Particular Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Variation of parameters — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

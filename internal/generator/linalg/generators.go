@@ -36,6 +36,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.matrix.rank", &rankGen{})
 	reg.Register("linalg.vector.cosine_similarity", &cosineSimilarityGen{})
 	reg.Register("linalg.vector.parametric", &parametricGen{})
+	reg.Register("linalg.inner_product", &innerProductGen{})
+	reg.Register("linalg.decomp.lu", &luGen{})
+	reg.Register("linalg.decomp.qr", &qrGen{})
+	reg.Register("linalg.decomp.svd", &svdGen{})
+	reg.Register("linalg.decomp.jordan", &jordanGen{})
 }
 
 type vectorConceptGen struct{}
@@ -729,4 +734,139 @@ func (g *parametricGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Answer:      fmt.Sprintf("x=%d+%dt,y=%d+%dt", e.x0, e.dx, e.y0, e.dy),
 		Explanation: fmt.Sprintf("The parametric form is (x,y) = (%d,%d) + t(%d,%d), so x=%d+%dt, y=%d+%dt.", e.x0, e.y0, e.dx, e.dy, e.x0, e.dx, e.y0, e.dy),
 	}
+}
+
+type innerProductGen struct{}
+
+func (g *innerProductGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is inner product 〈u,v〉=u·v positive definite? (yes/no)", "yes", "u·u=|u|²≥0 and =0 iff u=0."},
+		{"Are orthogonal vectors u·v=0? (yes/no)", "yes", "Definition of orthogonality."},
+		{"Does Cauchy-Schwarz state |〈u,v〉|≤||u||·||v||? (yes/no)", "yes", "Cauchy-Schwarz inequality."},
+	}
+	hard := []entry{
+		{"Is 〈u,v〉=2u₁v₁+u₂v₂ an inner product on R²? (yes/no)", "yes", "Weighted dot with positive weights is inner product."},
+		{"Does Gram-Schmidt use projections via inner products? (yes/no)", "yes", "Orthogonalization via subtract projections."},
+		{"Is every inner product induced by a positive-definite matrix? (yes/no)", "yes", "〈u,v〉=uᵀAv with A SPD."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type luGen struct{}
+
+func (g *luGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does LU decomposition write A=LU with L lower unit and U upper? (yes/no)", "yes", "LU factors invertible; solve via forward/back substitution."},
+		{"Is LU without pivoting possible only if leading principals nonzero? (yes/no)", "yes", "Need nonzero pivots."},
+		{"Does LU solve Ax=b via Ly=b then Ux=y? (yes/no)", "yes", "Two triangular solves."},
+	}
+	hard := []entry{
+		{"For A=[[2,1],[4,3]], is L=[[1,0],[2,1]] and U=[[2,1],[0,1]]? (yes/no)", "yes", "Multiply L×U = A."},
+		{"Does PA=LU with permutation P handle zero pivots? (yes/no)", "yes", "Partial pivoting."},
+		{"Is determinant det(A)=det(U) for LU with unit L? (yes/no)", "yes", "det(L)=1, so det(A)=product of U diagonal."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type qrGen struct{}
+
+func (g *qrGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does QR write A=QR with Q orthogonal and R upper triangular? (yes/no)", "yes", "QR via Gram-Schmidt."},
+		{"Is Q's columns orthonormal? (yes/no)", "yes", "QᵀQ=I."},
+		{"Does QR solve least squares via R x = Qᵀb? (yes/no)", "yes", "Normal equations stability."},
+	}
+	hard := []entry{
+		{"For A=[[1,1],[1,0]], is Q's first column normalized (1,1)/√2? (yes/no)", "yes", "Gram-Schmidt on columns."},
+		{"Does Householder reflection give stable QR? (yes/no)", "yes", "Householder is stable."},
+		{"Is R's diagonal positive if using standard Gram-Schmidt? (yes/no)", "yes", "By convention."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type svdGen struct{}
+
+func (g *svdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does SVD write A=UΣVᵀ with U,V orthogonal and Σ diagonal? (yes/no)", "yes", "SVD exists for any real matrix."},
+		{"Are singular values σ_i ≥0? (yes/no)", "yes", "By definition."},
+		{"Does rank(A) equal number of nonzero singular values? (yes/no)", "yes", "Counting."},
+	}
+	hard := []entry{
+		{"Is σ_i = sqrt(eig(AᵀA))? (yes/no)", "yes", "Singular values via AᵀA."},
+		{"Does truncated SVD give best low-rank approximation? (yes/no)", "yes", "Eckart-Young theorem."},
+		{"Is U's columns left singular vectors, V's right? (yes/no)", "yes", "By construction."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type jordanGen struct{}
+
+func (g *jordanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does Jordan form exist for every complex matrix? (yes/no)", "yes", "Jordan canonical form over C."},
+		{"Is diagonalizable matrices' Jordan blocks all 1×1? (yes/no)", "yes", "No nontrivial blocks."},
+		{"Does Jordan block J_2(λ) have λ on diagonal and 1 above? (yes/no)", "yes", "[[λ,1],[0,λ]]."},
+	}
+	hard := []entry{
+		{"Is matrix [[2,1],[0,2]] already in Jordan form? (yes/no)", "yes", "Single Jordan block for eigenvalue 2."},
+		{"Does minimal polynomial exponent equal largest Jordan block size? (yes/no)", "yes", "Block size gives exponent."},
+		{"Is number of Jordan blocks for λ equal to geometric multiplicity? (yes/no)", "yes", "Counting blocks."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

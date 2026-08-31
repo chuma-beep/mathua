@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Wilson's theorem",
+    "section": "Factorial Modulo a Prime",
+    "subgoals": [
+      "Review Factorial Modulo a Prime",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Wilson's theorem — practice 2",
+    "section": "Factorial Modulo a Prime",
+    "subgoals": [
+      "Review Factorial Modulo a Prime",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Wilson's theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

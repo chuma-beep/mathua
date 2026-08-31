@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Urysohn Metrization Theorem",
+    "section": "When Topology Comes from a Metric",
+    "subgoals": [
+      "Review When Topology Comes from a Metric",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Urysohn Metrization Theorem — practice 2",
+    "section": "When Topology Comes from a Metric",
+    "subgoals": [
+      "Review When Topology Comes from a Metric",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Urysohn Metrization Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

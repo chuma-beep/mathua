@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Topological Manifolds",
+    "section": "Locally Euclidean",
+    "subgoals": [
+      "Review Locally Euclidean",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Topological Manifolds — practice 2",
+    "section": "Locally Euclidean",
+    "subgoals": [
+      "Review Locally Euclidean",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Topological Manifolds — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

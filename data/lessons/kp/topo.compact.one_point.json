@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One-Point Compactification",
+    "section": "Compactifying Locally Compact Spaces",
+    "subgoals": [
+      "Review Compactifying Locally Compact Spaces",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "One-Point Compactification — practice 2",
+    "section": "Compactifying Locally Compact Spaces",
+    "subgoals": [
+      "Review Compactifying Locally Compact Spaces",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "One-Point Compactification — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

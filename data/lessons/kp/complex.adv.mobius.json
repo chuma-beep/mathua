@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Möbius Transformations",
+    "section": "Sphere Automorphisms",
+    "subgoals": [
+      "Review Sphere Automorphisms",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Möbius Transformations — practice 2",
+    "section": "Sphere Automorphisms",
+    "subgoals": [
+      "Review Sphere Automorphisms",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Möbius Transformations — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

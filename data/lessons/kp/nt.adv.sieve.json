@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sieve of Eratosthenes and Brun's Sieve",
+    "section": "Sieving Primes",
+    "subgoals": [
+      "Review Sieving Primes",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sieve of Eratosthenes and Brun's Sieve — practice 2",
+    "section": "Sieving Primes",
+    "subgoals": [
+      "Review Sieving Primes",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sieve of Eratosthenes and Brun's Sieve — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

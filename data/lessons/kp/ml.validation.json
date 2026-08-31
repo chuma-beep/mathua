@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Train/Validation Split and Cross-Validation",
+    "section": "Reliable Estimates",
+    "subgoals": [
+      "Review Reliable Estimates",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Train/Validation Split and Cross-Validation — practice 2",
+    "section": "Reliable Estimates",
+    "subgoals": [
+      "Review Reliable Estimates",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Train/Validation Split and Cross-Validation — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

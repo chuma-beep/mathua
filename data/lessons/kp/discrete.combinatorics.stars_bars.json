@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stars and Bars",
+    "section": "Counting Distributions",
+    "subgoals": [
+      "Review Counting Distributions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stars and Bars — practice 2",
+    "section": "Counting Distributions",
+    "subgoals": [
+      "Review Counting Distributions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stars and Bars — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

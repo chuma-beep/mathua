@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Eulerian Trails, Hamiltonian and Coloring",
+    "section": "Traversing Graphs",
+    "subgoals": [
+      "Review Traversing Graphs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Eulerian Trails, Hamiltonian and Coloring — practice 2",
+    "section": "Traversing Graphs",
+    "subgoals": [
+      "Review Traversing Graphs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Eulerian Trails, Hamiltonian and Coloring — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

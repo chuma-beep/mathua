@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Generating Functions",
+    "section": "Solving Recurrences",
+    "subgoals": [
+      "Review Solving Recurrences",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Generating Functions — practice 2",
+    "section": "Solving Recurrences",
+    "subgoals": [
+      "Review Solving Recurrences",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Generating Functions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

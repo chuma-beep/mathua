@@ -10,8 +10,9 @@ import (
 )
 
 type Registry struct {
-	mu   sync.RWMutex
-	gens map[string]Generator
+	mu     sync.RWMutex
+	gens   map[string]Generator
+	randMu sync.Mutex
 }
 
 func NewRegistry() *Registry {
@@ -78,10 +79,11 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 		return Problem{}, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
 	// Seed global rand from ctx.Seed if provided (per-question seeded via hash of
-	// StudentID+ConceptID+AttemptID). This gives per-call variation without
-	// editing every generator to thread a *rand.Rand.
+	// StudentID+ConceptID+AttemptID). Use mutex to avoid racing on global source.
 	if ctx.Seed != 0 {
+		r.randMu.Lock()
 		rand.Seed(ctx.Seed)
+		defer r.randMu.Unlock()
 	}
 	p := gen.Generate(ctx)
 	p.Question = latex.Canonicalize(p.Question, latex.Generators)
@@ -110,11 +112,18 @@ func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx Generat
 		return nil, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
 	if ctx.Seed != 0 {
+		r.randMu.Lock()
 		rand.Seed(ctx.Seed)
+		defer r.randMu.Unlock()
 	}
 	problems := make([]Problem, 0, count)
 	seen := make(map[string]bool)
-	for i := 0; i < count*3 && len(problems) < count; i++ {
+	// Use higher multiplier to avoid starvation for low-entropy generators (e.g. small table-driven ML gens)
+	maxAttempts := count * 10
+	if maxAttempts < 30 {
+		maxAttempts = 30
+	}
+	for i := 0; i < maxAttempts && len(problems) < count; i++ {
 		p := gen.Generate(ctx)
 		p.Question = latex.Canonicalize(p.Question, latex.Generators)
 		p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)

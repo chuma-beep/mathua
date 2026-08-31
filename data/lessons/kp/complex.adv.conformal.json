@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conformal Mappings",
+    "section": "Angle Preservation",
+    "subgoals": [
+      "Review Angle Preservation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Conformal Mappings — practice 2",
+    "section": "Angle Preservation",
+    "subgoals": [
+      "Review Angle Preservation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Conformal Mappings — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Chinese remainder theorem",
+    "section": "Constructing the Solution",
+    "subgoals": [
+      "Review Constructing the Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Chinese remainder theorem — practice 2",
+    "section": "Constructing the Solution",
+    "subgoals": [
+      "Review Constructing the Solution",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Chinese remainder theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

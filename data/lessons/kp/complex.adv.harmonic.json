@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Harmonic Functions and Mean Value",
+    "section": "Mean Value and Maximum",
+    "subgoals": [
+      "Review Mean Value and Maximum",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Harmonic Functions and Mean Value — practice 2",
+    "section": "Mean Value and Maximum",
+    "subgoals": [
+      "Review Mean Value and Maximum",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Harmonic Functions and Mean Value — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

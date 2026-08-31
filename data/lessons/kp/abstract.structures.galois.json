@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Galois Correspondence",
+    "section": "The Correspondence",
+    "subgoals": [
+      "Review The Correspondence",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Galois Correspondence — practice 2",
+    "section": "The Correspondence",
+    "subgoals": [
+      "Review The Correspondence",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Galois Correspondence — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

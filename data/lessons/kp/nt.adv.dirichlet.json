@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dirichlet's Theorem on Arithmetic Progressions",
+    "section": "Primes in Progressions",
+    "subgoals": [
+      "Review Primes in Progressions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Dirichlet's Theorem on Arithmetic Progressions — practice 2",
+    "section": "Primes in Progressions",
+    "subgoals": [
+      "Review Primes in Progressions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Dirichlet's Theorem on Arithmetic Progressions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

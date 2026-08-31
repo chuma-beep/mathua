@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order Modulo n",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Order Modulo n — practice 2",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Order Modulo n — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

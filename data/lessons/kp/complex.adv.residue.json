@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Residues and the Residue Theorem",
+    "section": "Computing and Using Residues",
+    "subgoals": [
+      "Review Computing and Using Residues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Residues and the Residue Theorem — practice 2",
+    "section": "Computing and Using Residues",
+    "subgoals": [
+      "Review Computing and Using Residues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Residues and the Residue Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

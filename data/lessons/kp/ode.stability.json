@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stability of Equilibria",
+    "section": "Linearization",
+    "subgoals": [
+      "Review Linearization",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stability of Equilibria — practice 2",
+    "section": "Linearization",
+    "subgoals": [
+      "Review Linearization",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Stability of Equilibria — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

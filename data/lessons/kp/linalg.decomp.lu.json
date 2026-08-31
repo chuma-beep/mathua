@@ -1,0 +1,29 @@
+[
+  {
+    "label": "LU Decomposition",
+    "section": "Factoring Matrices",
+    "subgoals": [
+      "Review Factoring Matrices",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "LU Decomposition — practice 2",
+    "section": "Factoring Matrices",
+    "subgoals": [
+      "Review Factoring Matrices",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "LU Decomposition — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

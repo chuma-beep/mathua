@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Analytic Functions",
+    "section": "Holomorphic vs Continuous",
+    "subgoals": [
+      "Review Holomorphic vs Continuous",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Analytic Functions — practice 2",
+    "section": "Holomorphic vs Continuous",
+    "subgoals": [
+      "Review Holomorphic vs Continuous",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Analytic Functions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

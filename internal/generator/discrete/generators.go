@@ -26,6 +26,16 @@ func Register(reg *generator.Registry) {
 	reg.Register("discrete.proof.induction", &inductionGen{})
 
 	reg.Register("discrete.combinatorics.binomial_theorem", &binomialTheoremGen{})
+	reg.Register("discrete.logic.equivalence", &equivalenceGen{})
+	reg.Register("discrete.sets.relations", &relationsGen{})
+	reg.Register("discrete.combinatorics.pigeonhole", &pigeonholeGen{})
+	reg.Register("discrete.graphs.eulerian", &eulerianGen{})
+	reg.Register("discrete.proof.strong_induction", &strongInductionGen{})
+	reg.Register("discrete.combinatorics.stars_bars", &starsBarsGen{})
+	reg.Register("discrete.graphs.coloring", &coloringGen{})
+	reg.Register("discrete.proof.contradiction", &contradictionGen{})
+	reg.Register("discrete.sets.inclusion_exclusion", &inclusionExclusionGen{})
+	reg.Register("discrete.sequences.generating_functions", &generatingFunctionsGen{})
 }
 
 // ----- 1. propositions -----
@@ -986,4 +996,287 @@ func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Answer:      q.answer,
 		Explanation: q.exp,
 	}
+}
+
+// ----- equivalence -----
+
+type equivalenceGen struct{}
+
+func (g *equivalenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is ¬(p ∧ q) equivalent to ¬p ∨ ¬q? (yes/no)", "yes", "De Morgan: ¬(p∧q) ≡ ¬p∨¬q."},
+		{"Is ¬(p ∨ q) equivalent to ¬p ∧ ¬q? (yes/no)", "yes", "De Morgan: ¬(p∨q) ≡ ¬p∧¬q."},
+		{"Is p → q equivalent to ¬p ∨ q? (yes/no)", "yes", "Implication ≡ disjunction with negation."},
+		{"Is p ↔ q equivalent to (p→q)∧(q→p)? (yes/no)", "yes", "Biconditional is two implications."},
+	}
+	hard := []entry{
+		{"Is (p∧q)∨(¬p∧¬q) equivalent to p↔q? (yes/no)", "yes", "Both express biconditional."},
+		{"Does p∧(q∨r) ≡ (p∧q)∨(p∧r) hold? (yes/no)", "yes", "Distributive law."},
+		{"Is CNF of p→q equal to ¬p∨q? (yes/no)", "yes", "Implication normal form."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- relations -----
+
+type relationsGen struct{}
+
+func (g *relationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is relation {(1,1),(2,2)} on {1,2} reflexive? (yes/no)", "yes", "Every element relates to itself."},
+		{"Is {(1,2)} on {1,2} symmetric? (yes/no)", "no", "Contains (1,2) but not (2,1)."},
+		{"Does {(1,1),(2,2),(1,2)} represent a partition of {1,2} into {{1},{2}}? (no)", "no", "Partition needs disjoint blocks covering set; this is a relation, not partition."},
+		{"Is the relation 'divides' on N reflexive? (yes/no)", "yes", "Every n divides itself."},
+	}
+	hard := []entry{
+		{"Is relation {(a,b): a≡b mod 3} on Z an equivalence relation? (yes/no)", "yes", "Modulo is reflexive, symmetric, transitive."},
+		{"Does equivalence relation partition the set into disjoint classes? (yes/no)", "yes", "Classes are [a] = {b: a~b} forming a partition."},
+		{"Is the number of equivalence relations on {1,2,3} equal to the Bell number B_3=5? (yes/no)", "yes", "B_3=5 partitions of a 3-element set."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- pigeonhole -----
+
+type pigeonholeGen struct{}
+
+func (g *pigeonholeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Among 13 people, must two share a birth month? (yes/no)", "yes", "13 pigeons, 12 holes → one hole has ≥2 (⌈13/12⌉=2)."},
+		{"Among 5 points in a unit square, must two be within √2/2? (yes/no)", "yes", "Partition square into 4 quarters (side 0.5); 5 pigeons → one quarter has 2 points, diagonal √2/2."},
+		{"If 10 socks are either black or white, must 6 be same color? (yes/no)", "no", "Worst case 5-5 split, so 10 does not guarantee 6 of one color (need 11)."},
+	}
+	hard := []entry{
+		{"What is ⌈100/12⌉? (enter a number)", "9", "Ceiling of 100/12 ≈8.33 →9 pigeons in one hole."},
+		{"Among n+1 integers, must two have same remainder mod n? (yes/no)", "yes", "n possible remainders, n+1 numbers → pigeonhole."},
+		{"If 30 students have 4 possible grades, must ≥8 share a grade? (yes/no)", "yes", "⌈30/4⌉=8."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- eulerian -----
+
+type eulerianGen struct{}
+
+func (g *eulerianGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does a connected graph where all vertices have even degree have an Eulerian circuit? (yes/no)", "yes", "Euler's theorem: even degree everywhere → Eulerian circuit."},
+		{"Is K_3 (triangle) Eulerian? (yes/no)", "yes", "K_3 has all degrees 2 (even) and is connected."},
+		{"Does K_3 have a Hamiltonian cycle? (yes/no)", "yes", "Triangle itself is a cycle visiting each vertex once."},
+		{"Is every tree 2-colorable? (yes/no)", "yes", "Trees are bipartite, chromatic number 2."},
+	}
+	hard := []entry{
+		{"Does a graph with exactly two vertices of odd degree have an Eulerian trail? (yes/no)", "yes", "Two odds → trail between them; zero odds → circuit."},
+		{"Is Petersen graph Hamiltonian? (yes/no)", "no", "Petersen is famously non-Hamiltonian."},
+		{"What is χ(K_{3,3})? (enter a number)", "2", "Bipartite graphs are 2-colorable."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- strong induction -----
+
+type strongInductionGen struct{}
+
+func (g *strongInductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does strong induction assume P(k) for all k < n to prove P(n)? (yes/no)", "yes", "Strong induction uses all previous cases, not just P(n-1)."},
+		{"Is well-ordering equivalent to induction on N? (yes/no)", "yes", "Well-ordering, induction, and strong induction are equivalent on N."},
+		{"In proving Fibonacci identities, is strong induction often needed? (yes/no)", "yes", "Recurrence a_n = a_{n-1}+a_{n-2} needs two prior cases."},
+	}
+	hard := []entry{
+		{"To prove every integer >1 is product of primes, which proof method fits best? (strong induction)", "strong induction", "Factorization uses all smaller numbers, so strong induction."},
+		{"Does a proof that assumes P(0)..P(k) to prove P(k+1) use strong induction? (yes/no)", "yes", "That's the strong form."},
+		{"Is the set {n: P(n) fails} having a least element the well-ordering step for strong induction? (yes/no)", "yes", "Minimal counterexample method relies on well-ordering."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type starsBarsGen struct{}
+
+func (g *starsBarsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"How many nonnegative solutions to x1+x2=3? (enter a number)", "4", "C(3+2-1,2-1)=C(4,1)=4."},
+		{"How many solutions to x1+x2+x3=2 with xi≥0? (enter a number)", "6", "C(2+3-1,3-1)=C(4,2)=6."},
+		{"Does stars and bars count distributions of n identical objects into k boxes? (yes/no)", "yes", "C(n+k-1,k-1)."},
+	}
+	hard := []entry{
+		{"How many solutions to x1+x2+x3=5 with xi≥1? (enter a number)", "6", "Set yi=xi-1: y1+y2+y3=2 → C(4,2)=6."},
+		{"How many ways to put 4 identical balls into 3 boxes? (enter a number)", "15", "C(4+3-1,3-1)=C(6,2)=15."},
+		{"Does stars and bars use C(n+k-1,k-1)? (yes/no)", "yes", "Formula."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type coloringGen struct{}
+
+func (g *coloringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"What is χ(K_n)? (enter a number for K_3)", "3", "Complete graph needs n colors."},
+		{"Is bipartite χ=2? (yes/no)", "yes", "Bipartite needs 2."},
+		{"Does greedy coloring use at most Δ+1 colors? (yes/no)", "yes", "Δ is max degree."},
+	}
+	hard := []entry{
+		{"What is χ(C_5)? (enter a number)", "3", "Odd cycle needs 3."},
+		{"Is χ(Petersen)=3? (yes/no)", "yes", "Petersen needs 3."},
+		{"Does Four Color Theorem state χ(planar) ≤4? (yes/no)", "yes", "Planar graphs 4-colorable."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type contradictionGen struct{}
+
+func (g *contradictionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is proof that √2 is irrational by contradiction? (yes/no)", "yes", "Assume rational, derive contradiction."},
+		{"Does contradiction assume ¬P and derive false? (yes/no)", "yes", "If ¬P→false, then P."},
+		{"Is proof that primes infinite via contradiction? (yes/no)", "yes", "Assume finitely many, construct new prime."},
+	}
+	hard := []entry{
+		{"Does contradiction prove P by showing ¬P→(Q∧¬Q)? (yes/no)", "yes", "Contradiction."},
+		{"Is Euclid's prime proof actually by contradiction? (yes/no)", "yes", "Assume finite list, get contradiction."},
+		{"Does proof by contrapositive differ from contradiction? (yes/no)", "yes", "Contrapositive proves ¬Q→¬P directly."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type inclusionExclusionGen struct{}
+
+func (g *inclusionExclusionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"For |A|=3,|B|=4,|A∩B|=1, what is |A∪B|? (enter a number)", "6", "|A∪B|=|A|+|B|-|A∩B|=6."},
+		{"Does |A∪B|=|A|+|B|-|A∩B|? (yes/no)", "yes", "Two sets."},
+		{"For 3 sets, does inclusion-exclusion have 7 terms? (yes/no)", "yes", "Sum singles - pairs + triple."},
+	}
+	hard := []entry{
+		{"How many integers ≤10 not divisible by 2 or 3? (enter a number)", "3", "10 - floor(10/2)-floor(10/3)+floor(10/6)=3 (1,5,7)."},
+		{"Does derangement count use inclusion-exclusion? (yes/no)", "yes", "Count permutations with no fixed point."},
+		{"Is principle: |∪ Ai| = Σ|Ai| - Σ|Ai∩Aj| + ...? (yes/no)", "yes", "General formula."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type generatingFunctionsGen struct{}
+
+func (g *generatingFunctionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does ordinary generating function for (a_n) equal A(x)=∑ a_n x^n? (yes/no)", "yes", "Definition."},
+		{"Is generating function for Fibonacci F(x)=x/(1-x-x^2)? (yes/no)", "yes", "Closed form."},
+		{"Does convolution correspond to product of generating functions? (yes/no)", "yes", "A(x)B(x) ↔ convolution."},
+	}
+	hard := []entry{
+		{"Does a_n = a_{n-1}+a_{n-2} give A(x)=x/(1-x-x^2)? (yes/no)", "yes", "Derivation."},
+		{"Is exponential generating function E(x)=∑ a_n x^n/n! ? (yes/no)", "yes", "EGF."},
+		{"Does generating function solve recurrence via algebra? (yes/no)", "yes", "Solve for A(x) then expand."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }

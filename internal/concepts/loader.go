@@ -23,7 +23,7 @@ func Load(path string) (*DAG, error) {
 }
 
 // LoadDir reads all .json files from a directory, merges, validates, topo-sorts, and returns a DAG.
-// enrichment.json is a migration/heuristic file, not a concept list — skip it.
+// enrichment.json is merged as heuristics (Variants/Encompasses/InterferenceGroup/KeyPrerequisites) on top of base concepts.
 func LoadDir(dir string) (*DAG, error) {
 	entries, err := os.ReadDir(dir)
 	if err != nil {
@@ -47,7 +47,78 @@ func LoadDir(dir string) (*DAG, error) {
 		}
 		raw = append(raw, batch...)
 	}
+	// Merge enrichment heuristics (Variants, Encompasses, InterferenceGroup, KeyPrerequisites)
+	if err := mergeEnrichment(dir, raw); err != nil {
+		return nil, err
+	}
 	return Build(raw)
+}
+
+// enrichmentEntry mirrors the loose schema in data/concepts/enrichment.json.
+type enrichmentEntry struct {
+	ID               string    `json:"id"`
+	Heuristic        string    `json:"heuristic"`
+	Note             string    `json:"note"`
+	Encompasses      []string  `json:"encompasses"`
+	KeyPrerequisites []string  `json:"key_prerequisites"`
+	InterferenceGroup string   `json:"interference_group"`
+	Members          []string  `json:"members"`
+	Variants         []Variant `json:"variants"`
+}
+
+func mergeEnrichment(dir string, raw []Concept) error {
+	path := filepath.Join(dir, "enrichment.json")
+	data, err := os.ReadFile(path)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return fmt.Errorf("read enrichment.json: %w", err)
+	}
+	var entries []enrichmentEntry
+	if err := json.Unmarshal(data, &entries); err != nil {
+		return fmt.Errorf("parse enrichment.json: %w", err)
+	}
+	// Index concepts by ID for patching
+	idx := make(map[string]*Concept, len(raw))
+	for i := range raw {
+		idx[raw[i].ID] = &raw[i]
+	}
+	for _, e := range entries {
+		if e.ID != "" {
+			c, ok := idx[e.ID]
+			if !ok {
+				return fmt.Errorf("enrichment id %q not found in DAG", e.ID)
+			}
+			if len(e.Encompasses) > 0 {
+				c.Encompasses = append(c.Encompasses, e.Encompasses...)
+			}
+			if len(e.KeyPrerequisites) > 0 {
+				c.KeyPrerequisites = append(c.KeyPrerequisites, e.KeyPrerequisites...)
+			}
+			if e.InterferenceGroup != "" {
+				if c.InterferenceGroup != "" && c.InterferenceGroup != e.InterferenceGroup {
+					return fmt.Errorf("concept %q interference_group conflict: %q vs %q", e.ID, c.InterferenceGroup, e.InterferenceGroup)
+				}
+				c.InterferenceGroup = e.InterferenceGroup
+			}
+			if len(e.Variants) > 0 {
+				c.Variants = append(c.Variants, e.Variants...)
+			}
+		} else if e.InterferenceGroup != "" && len(e.Members) > 0 {
+			for _, mid := range e.Members {
+				c, ok := idx[mid]
+				if !ok {
+					return fmt.Errorf("enrichment member %q (group %q) not found", mid, e.InterferenceGroup)
+				}
+				if c.InterferenceGroup != "" && c.InterferenceGroup != e.InterferenceGroup {
+					return fmt.Errorf("concept %q interference_group conflict: %q vs %q", mid, c.InterferenceGroup, e.InterferenceGroup)
+				}
+				c.InterferenceGroup = e.InterferenceGroup
+			}
+		}
+	}
+	return nil
 }
 
 // Build validates a concept slice (no cycles, orphan prereqs, empty/duplicate IDs), topo-sorts, and returns a DAG.
@@ -221,6 +292,29 @@ func validate(raw []Concept) error {
 			if v.Label == "" {
 				return fmt.Errorf("concept %q variant missing label", c.ID)
 			}
+		}
+		// Grading type enum check (allow empty for test fixtures)
+		allowedGrading := map[string]bool{
+			"multiple_choice": true, "numeric": true, "symbolic": true, "complex": true,
+			"expression": true, "ordering": true, "tuple": true, "polynomial": true, "comparison": true,
+		}
+		if c.GradingType != "" && !allowedGrading[c.GradingType] {
+			return fmt.Errorf("concept %q has invalid grading_type %q", c.ID, c.GradingType)
+		}
+		if c.Domain == "" {
+			return fmt.Errorf("concept %q has empty domain", c.ID)
+		}
+		if c.Label == "" {
+			return fmt.Errorf("concept %q has empty label", c.ID)
+		}
+		if c.MasteryThreshold.Streak <= 0 {
+			return fmt.Errorf("concept %q has invalid streak %d", c.ID, c.MasteryThreshold.Streak)
+		}
+		if c.MasteryThreshold.AvgTimeSeconds <= 0 {
+			return fmt.Errorf("concept %q has invalid avg_time_seconds %v", c.ID, c.MasteryThreshold.AvgTimeSeconds)
+		}
+		if c.MasteryThreshold.AvgTimeSeconds > 300 {
+			return fmt.Errorf("concept %q avg_time_seconds %v exceeds sanity cap 300s", c.ID, c.MasteryThreshold.AvgTimeSeconds)
 		}
 	}
 

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Graph Coloring and Chromatic Number",
+    "section": "Coloring Graphs",
+    "subgoals": [
+      "Review Coloring Graphs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Graph Coloring and Chromatic Number — practice 2",
+    "section": "Coloring Graphs",
+    "subgoals": [
+      "Review Coloring Graphs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Graph Coloring and Chromatic Number — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -14,6 +14,20 @@ func Register(reg *generator.Registry) {
 	reg.Register("topo.compact", &compactGen{})
 	reg.Register("topo.connected", &connectedGen{})
 	reg.Register("topo.hausdorff", &hausdorffGen{})
+	reg.Register("topo.quotient", &quotientGen{})
+	reg.Register("topo.product", &productGen{})
+	reg.Register("topo.urysohn", &urysohnGen{})
+	reg.Register("topo.metrization", &metrizationGen{})
+	reg.Register("topo.connected.path", &pathConnectedGen{})
+	reg.Register("topo.compact.local", &localCompactGen{})
+	reg.Register("topo.separation.tietze", &tietzeGen{})
+	reg.Register("topo.homotopy", &homotopyGen{})
+	reg.Register("topo.manifold", &manifoldGen{})
+	reg.Register("topo.connected.local_path", &localPathGen{})
+	reg.Register("topo.compact.one_point", &onePointGen{})
+	reg.Register("topo.separation.completely_regular", &completelyRegularGen{})
+	reg.Register("topo.homotopy.fundamental", &fundamentalGen{})
+	reg.Register("topo.manifold.orientability", &orientabilityGen{})
 }
 
 // ----- 1. metric -----
@@ -222,4 +236,378 @@ func (g *hausdorffGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Answer:      e.hausdorff,
 		Explanation: e.reason,
 	}
+}
+
+// ----- 7. quotient -----
+
+type quotientGen struct{}
+
+func (g *quotientGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	table := []entry{
+		{"Is the quotient map \\(q: X \\to X/\\sim\\) always continuous by definition? (yes/no)", "yes", "The quotient topology is the finest topology making q continuous."},
+		{"If \\(X=[0,1]\\) and \\(0\\sim1\\), is \\(X/\\sim\\) homeomorphic to \\(S^{1}\\)? (yes/no)", "yes", "Glueing the endpoints of an interval yields a circle."},
+		{"Is the quotient of a compact space by any equivalence relation always Hausdorff? (yes/no)", "no", "The quotient of compact need not be Hausdorff; e.g. collapsing a non-closed set."},
+		{"Does the quotient topology make the projection an open map? (yes/no)", "no", "Quotient maps need not be open; they are continuous and closed under compact-Hausdorff hypotheses."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 8. product -----
+
+type productGen struct{}
+
+func (g *productGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	table := []entry{
+		{"Is the product of two compact spaces compact (Tychonoff for finite products)? (yes/no)", "yes", "Finite products of compact spaces are compact."},
+		{"Is \\(\\mathbb{R}^{\\mathbb{N}}\\) with product topology metrizable? (yes/no)", "yes", "Countable product of metrizable spaces is metrizable."},
+		{"Are projections \\(\\pi_i: \\prod X_i \\to X_i\\) continuous in the product topology? (yes/no)", "yes", "Product topology is coarsest making all projections continuous."},
+		{"Is the box topology finer than the product topology on infinite products? (yes/no)", "yes", "Box topology has more opens than product topology when infinitely many factors."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 9. urysohn -----
+
+type urysohnGen struct{}
+
+func (g *urysohnGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	table := []entry{
+		{"Does Urysohn's lemma guarantee a continuous \\(f: X \\to [0,1]\\) separating disjoint closed sets in a normal space? (yes/no)", "yes", "In normal spaces, disjoint closed sets can be separated by a continuous function."},
+		{"Is every metric space normal (hence Urysohn's lemma applies)? (yes/no)", "yes", "Metric spaces are normal, so the lemma holds."},
+		{"Does Urysohn's lemma require the space to be Hausdorff? (yes/no)", "no", "It requires normality, which implies Hausdorff only in some formulations; normality is the key."},
+		{"Can Urysohn's function be chosen with \\(f(A)=0\\) and \\(f(B)=1\\) for disjoint closed \\(A,B\\)? (yes/no)", "yes", "The lemma constructs f with exactly those values."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 10. metrization -----
+
+type metrizationGen struct{}
+
+func (g *metrizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	table := []entry{
+		{"Does Urysohn metrization state that a second-countable regular Hausdorff space is metrizable? (yes/no)", "yes", "Regular + second-countable + Hausdorff implies metrizable."},
+		{"Is every compact Hausdorff second-countable space metrizable? (yes/no)", "yes", "Compact Hausdorff + second-countable → metrizable by Urysohn."},
+		{"Does metrizability imply the space is Hausdorff? (yes/no)", "yes", "Every metric space is Hausdorff, so metrizable spaces are Hausdorff."},
+		{"Is the Sorgenfrey line metrizable? (yes/no)", "no", "The Sorgenfrey line is regular and Hausdorff but not second-countable in the metrizable sense; it is not metrizable."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 11. path-connected -----
+
+type pathConnectedGen struct{}
+
+func (g *pathConnectedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is [0,1] path-connected? (yes/no)", "yes", "[0,1] is an interval, hence path-connected via linear paths."},
+		{"Is (0,1) ∪ (2,3) path-connected? (yes/no)", "no", "No path can jump between the two disjoint intervals."},
+		{"Does path-connected imply connected? (yes/no)", "yes", "Path-connected spaces are always connected."},
+		{"Is Q path-connected? (yes/no)", "no", "Q is totally disconnected, hence not path-connected."},
+	}
+	hard := []entry{
+		{"Is the topologist's sine curve connected but not path-connected? (yes/no)", "yes", "Classic example: connected but no path between the curve and the limit segment."},
+		{"Does path-connectedness imply local path-connectedness? (yes/no)", "no", "Comb space is path-connected but not locally path-connected."},
+		{"Is R^2 minus a point path-connected? (yes/no)", "yes", "Punctured plane remains path-connected (go around the hole)."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 12. local compact -----
+
+type localCompactGen struct{}
+
+func (g *localCompactGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is R locally compact? (yes/no)", "yes", "Every point has a compact neighbourhood [x-ε,x+ε]."},
+		{"Is [0,1] locally compact? (yes/no)", "yes", "Compact spaces are locally compact."},
+		{"Is Q locally compact? (yes/no)", "no", "Q has no compact neighbourhood of any point in the subspace topology."},
+		{"Does locally compact Hausdorff imply Tychonoff? (yes/no)", "yes", "Locally compact Hausdorff spaces are completely regular."},
+	}
+	hard := []entry{
+		{"Is R^n locally compact? (yes/no)", "yes", "Euclidean spaces are locally compact."},
+		{"Is an infinite-dimensional Hilbert space locally compact? (yes/no)", "no", "Unit ball is not compact in infinite dimensions, so not locally compact."},
+		{"Does one-point compactification apply to locally compact Hausdorff spaces? (yes/no)", "yes", "One-point compactification gives a compact Hausdorff space."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 13. Tietze -----
+
+type tietzeGen struct{}
+
+func (g *tietzeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does Tietze extension extend continuous f: A→[0,1] from closed A⊂X normal to all X? (yes/no)", "yes", "Tietze: closed subset of normal space, bounded continuous function extends."},
+		{"Is every normal space one where Tietze holds for [0,1]-valued functions? (yes/no)", "yes", "Characterization of normality via Tietze for [0,1]."},
+		{"Does Tietze imply Urysohn's lemma? (yes/no)", "yes", "Urysohn is special case of Tietze with two closed sets."},
+	}
+	hard := []entry{
+		{"Can any continuous f: A→R from closed A in normal X be extended to X? (yes/no)", "yes", "Full Tietze for real-valued (possibly unbounded) functions on normal spaces."},
+		{"Does Tietze fail if A is not closed? (yes/no)", "yes", "Closedness is essential; e.g. Q ⊂ R not closed cannot extend all functions."},
+		{"Is Tietze equivalent to normality? (yes/no)", "yes", "Normal iff every bounded continuous function from a closed subset extends."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 14. homotopy -----
+
+type homotopyGen struct{}
+
+func (g *homotopyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is fundamental group π_1(S^1) ≅ Z? (yes/no)", "yes", "Loops around circle classified by winding number."},
+		{"Is simply connected equivalent to π_1 trivial? (yes/no)", "yes", "Every loop contracts to a point iff fundamental group is trivial."},
+		{"Are homotopic maps into R^n always homotopic? (yes/no)", "yes", "R^n is contractible, so any two maps are homotopic."},
+		{"Does homotopy define an equivalence relation? (yes/no)", "yes", "Reflexive, symmetric, transitive via glueing homotopies."},
+	}
+	hard := []entry{
+		{"Is π_1(S^2) trivial? (yes/no)", "yes", "2-sphere is simply connected."},
+		{"Is π_1(T^2) ≅ Z×Z? (yes/no)", "yes", "Torus fundamental group is product of two circle factors."},
+		{"Does covering space p: R→S^1 give universal cover of circle? (yes/no)", "yes", "R is simply connected cover of S^1."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 15. manifold -----
+
+type manifoldGen struct{}
+
+func (g *manifoldGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is S^1 a 1-manifold? (yes/no)", "yes", "Circle locally looks like an interval (R)."},
+		{"Is S^2 a 2-manifold? (yes/no)", "yes", "Sphere locally looks like R^2 via stereographic charts."},
+		{"Is R^n a manifold of dimension n? (yes/no)", "yes", "Euclidean space is the model manifold."},
+		{"Is a manifold required to be Hausdorff and second-countable? (yes/no)", "yes", "Standard definition includes Hausdorff and second-countable plus locally Euclidean."},
+	}
+	hard := []entry{
+		{"Is torus T^2 = S^1×S^1 a compact 2-manifold? (yes/no)", "yes", "Product of compact manifolds is compact manifold."},
+		{"Is every manifold metrizable? (yes/no)", "yes", "Urysohn plus manifold hypotheses imply metrizable."},
+		{"Is R with discrete topology a 0-manifold? (yes/no)", "yes", "Discrete spaces are 0-dimensional manifolds."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 16. locally path-connected -----
+
+type localPathGen struct{}
+
+func (g *localPathGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is R locally path-connected? (yes/no)", "yes", "Intervals are path-connected neighbourhoods."},
+		{"Is Q locally path-connected? (yes/no)", "no", "No neighbourhood in Q contains a path-connected open set."},
+		{"Does locally path-connected + connected imply path-connected? (yes/no)", "yes", "Classic theorem for locally path-connected spaces."},
+	}
+	hard := []entry{
+		{"Is comb space locally path-connected at the base? (yes/no)", "no", "The baseline has no path-connected neighbourhood."},
+		{"Is topologist's sine curve locally connected? (yes/no)", "no", "No small connected neighbourhood of points on the limit segment."},
+		{"Does manifold ⇒ locally path-connected? (yes/no)", "yes", "Manifolds are locally Euclidean, hence locally path-connected."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 17. one-point compactification -----
+
+type onePointGen struct{}
+
+func (g *onePointGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is one-point compactification of R homeomorphic to S^1? (yes/no)", "yes", "R ∪ {∞} ≅ S^1."},
+		{"Is one-point compactification of R^2 homeomorphic to S^2? (yes/no)", "yes", "R^2 ∪ {∞} ≅ S^2 via stereographic."},
+		{"Is locally compact Hausdorff required for one-point compactification? (yes/no)", "yes", "Alexandroff compactification needs locally compact Hausdorff."},
+	}
+	hard := []entry{
+		{"Is one-point compactification of Q compact? (yes/no)", "no", "Q is not locally compact, so Alexandroff does not give Hausdorff compact."},
+		{"Does one-point compactification add exactly one point? (yes/no)", "yes", "By definition."},
+		{"Is compact Hausdorff space its own one-point compactification? (yes/no)", "no", "Already compact, no point added."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 18. completely regular -----
+
+type completelyRegularGen struct{}
+
+func (g *completelyRegularGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Does Tietze imply completely regular for normal spaces? (yes/no)", "yes", "Normal ⇒ completely regular (Tychonoff)."},
+		{"Is every metric space completely regular? (yes/no)", "yes", "Metric ⇒ normal ⇒ completely regular."},
+		{"Does completely regular mean points and closed sets separated by functions? (yes/no)", "yes", "For each closed A and x∉A, ∃f:X→[0,1] with f(x)=1, f|_A=0."},
+	}
+	hard := []entry{
+		{"Is Tychonoff = completely regular + T1? (yes/no)", "yes", "Tychonoff spaces are T1 and completely regular."},
+		{"Does product of completely regular spaces remain completely regular? (yes/no)", "yes", "Product preserves complete regularity."},
+		{"Is Niemytzki plane completely regular? (yes/no)", "yes", "It is Tychonoff."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 19. fundamental group calculations -----
+
+type fundamentalGen struct{}
+
+func (g *fundamentalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is π_1(S^1) ≅ Z? (yes/no)", "yes", "Winding number."},
+		{"Is π_1(S^2) trivial? (yes/no)", "yes", "S^2 simply connected."},
+		{"Is π_1(T^2) ≅ Z×Z? (yes/no)", "yes", "Torus product of circles."},
+	}
+	hard := []entry{
+		{"Is π_1(R^2 minus n points) free group on n generators? (yes/no)", "yes", "Punctured plane."},
+		{"Is π_1(Klein bottle) non-abelian? (yes/no)", "yes", "Presentation ⟨a,b|aba^{-1}=b^{-1}⟩."},
+		{"Does Van Kampen compute π_1 of wedge of circles? (yes/no)", "yes", "Free group."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- 20. orientability -----
+
+type orientabilityGen struct{}
+
+func (g *orientabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	easy := []entry{
+		{"Is S^2 orientable? (yes/no)", "yes", "Sphere is orientable."},
+		{"Is Möbius band orientable? (yes/no)", "no", "Möbius has one side, non-orientable."},
+		{"Is torus T^2 orientable? (yes/no)", "yes", "Torus is orientable."},
+	}
+	hard := []entry{
+		{"Is Klein bottle non-orientable? (yes/no)", "yes", "Contains Möbius band."},
+		{"Does orientability mean consistent choice of local orientation? (yes/no)", "yes", "Atlas with positive Jacobian transitions."},
+		{"Is R^n orientable? (yes/no)", "yes", "Euclidean space orientable."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

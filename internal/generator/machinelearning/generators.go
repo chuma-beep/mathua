@@ -12,6 +12,21 @@ func Register(reg *generator.Registry) {
 	reg.Register("ml.forward_pass", &forwardPassGen{})
 	reg.Register("ml.gradient_descent", &gradientDescentGen{})
 	reg.Register("ml.backpropagation", &backpropGen{})
+	reg.Register("ml.loss.cross_entropy", &crossEntropyGen{})
+	reg.Register("ml.regularization", &regularizationGen{})
+	reg.Register("ml.overfitting", &overfittingGen{})
+	reg.Register("ml.validation", &validationGen{})
+	reg.Register("ml.optim.momentum", &momentumGen{})
+	reg.Register("ml.regularization.dropout", &dropoutGen{})
+	reg.Register("ml.arch.cnn", &cnnGen{})
+	reg.Register("ml.arch.rnn", &rnnGen{})
+	reg.Register("ml.optim.batchnorm", &batchNormGen{})
+	reg.Register("ml.eval.roc", &rocGen{})
+	reg.Register("ml.arch.transformer", &transformerGen{})
+	reg.Register("ml.arch.gan", &ganGen{})
+	reg.Register("ml.optim.adam", &adamDetailsGen{})
+	reg.Register("ml.eval.calibration", &calibrationGen{})
+	reg.Register("ml.data.augmentation", &augmentationGen{})
 }
 
 type backpropGen struct{}
@@ -153,4 +168,150 @@ func (g *gradientDescentGen) Generate(ctx generator.GeneratorContext) generator.
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
+}
+
+type crossEntropyGen struct{}
+func (g *crossEntropyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct{question, answer, exp string}
+	entries:=[]entry{{"Cross-entropy loss between true label 1 and prediction 0.8 is (-log(0.8)≈?) (0.22/1.20)","0.22","CE = -log(0.8) ≈ 0.22."},{"Cross-entropy is appropriate for ____ tasks.","classification","Cross-entropy for classification."},{"Binary cross-entropy for target 0 and prediction 0.1 is (-log(0.9)≈?) (0.10/2.30)","0.10","CE = -log(0.9) ≈ 0.10."},{"Does cross-entropy penalize confident wrong predictions more than MSE? (yes/no)","yes","CE grows ∞ as p→0."}}
+	e:=entries[rand.Intn(len(entries))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type regularizationGen struct{}
+func (g *regularizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct{question, answer, exp string}
+	entries:=[]entry{{"L2 regularization adds λ||w||² to the loss. What does λ control? (regularization strength)","regularization strength","λ trades off."},{"Does L2 regularization shrink weights toward zero? (yes/no)","yes","Gradient 2λw pulls."},{"What is the gradient of λ||w||² w.r.t w? (2λw)","2λw","d/dw λw² = 2λw."},{"Is regularization used to reduce overfitting? (yes/no)","yes","Penalizing large weights."}}
+	e:=entries[rand.Intn(len(entries))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type overfittingGen struct{}
+func (g *overfittingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct{question, answer, exp string}
+	entries:=[]entry{{"Overfitting is when training error is ____ than test error. (lower/higher)","lower","Training lower."},{"What curve shape indicates overfitting when plotting error vs model capacity?","U-shaped test error","Test drops then rises."},{"Does more training data generally reduce overfitting? (yes/no)","yes","More samples."},{"Which error measures generalization: training or test error?","test","Test error."}}
+	e:=entries[rand.Intn(len(entries))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type validationGen struct{}
+func (g *validationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct{question, answer, exp string}
+	entries:=[]entry{{"What is the purpose of a validation set?","tune hyperparameters (or model selection)","Validation for hyperparams."},{"k-fold cross-validation with k=5 splits data into how many folds?","5","k folds."},{"Should the test set be used for hyperparameter tuning? (yes/no)","no","Leakage."},{"Does cross-validation give a more reliable estimate than a single split? (yes/no)","yes","Averaging."}}
+	e:=entries[rand.Intn(len(entries))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type momentumGen struct{}
+func (g *momentumGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct{question, answer, exp string}
+	entries:=[]entry{{"Momentum update: v_{t+1}=β v_t + g_t. What does β control? (momentum / decay)","momentum","β controls persistence."},{"Adam combines momentum and ____ scaling.","adaptive (or RMSProp)","Adaptive."},{"Does momentum help escape shallow local minima? (yes/no)","yes","Velocity carries."},{"With β=0.9, the effective memory horizon is roughly how many steps? (10)","10","Horizon ≈1/(1-β)."}}
+	e:=entries[rand.Intn(len(entries))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type dropoutGen struct{}
+func (g *dropoutGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Dropout randomly zeroes activations with probability p during training. At test time, are activations scaled by (1-p) or kept as-is? (1-p)","1-p","Inverted dropout."},{"Does dropout reduce co-adaptation of neurons? (yes/no)","yes","Robustness."},{"Is dropout only applied during training? (yes/no)","yes","Disabled at inference."}}
+	hard:=[]entry{{"With p=0.5, what is the expected number of active neurons out of 100? (50)","50","Expected (1-p)*100."},{"Does dropout approximate an ensemble of 2^n subnetworks? (yes/no)","yes","Each mask subnetwork."},{"Is dropout a form of regularization? (yes/no)","yes","Generalization."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type cnnGen struct{}
+func (g *cnnGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"CNNs use ____ layers to detect local patterns.","convolutional","Convolutions."},{"Does weight sharing in CNNs reduce parameters vs fully connected? (yes/no)","yes","Same filter reused."},{"What operation follows convolution in a CNN block? (activation + pooling)","activation","After convolution activation."}}
+	hard:=[]entry{{"For a 5x5 input, 3x3 filter, stride 1, no padding, what is output size? (3x3)","3x3","(5-3)/1+1=3."},{"Does max-pooling provide translation invariance? (yes/no)","yes","Robust to shifts."},{"Are CNNs especially suited for image data? (yes/no)","yes","Local connectivity."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type rnnGen struct{}
+func (g *rnnGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"RNNs maintain a ____ state across time steps.","hidden","Hidden state."},{"Does an RNN share weights across time steps? (yes/no)","yes","Same recurrent weights."},{"What problem plagues vanilla RNNs on long sequences? (vanishing gradient)","vanishing gradient","Backprop multiplies small gradients."}}
+	hard:=[]entry{{"Do LSTMs use gates (input, forget, output) to combat vanishing gradients? (yes/no)","yes","Gating."},{"Is an RNN with hidden size 0 able to model sequences? (yes/no)","no","No capacity."},{"Does unfolding an RNN yield a deep feedforward network? (yes/no)","yes","Unrolling creates depth."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type batchNormGen struct{}
+func (g *batchNormGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Batch norm normalizes activations to have mean 0 and variance ____ (1)","1","Normalized."},{"Does batch norm have learnable scale γ and shift β? (yes/no)","yes","γ·x̂+β."},{"Is batch norm applied before or after activation? (before)","before","Typically before."}}
+	hard:=[]entry{{"Does batch norm allow higher learning rates? (yes/no)","yes","Stabilized."},{"At test time, does batch norm use batch statistics or running averages? (running)","running","Population stats."},{"Does batch norm reduce internal covariate shift? (yes/no)","yes","Stated goal."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type rocGen struct{}
+func (g *rocGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"ROC plots TPR vs ____ (FPR)","FPR","ROC."},{"Does AUC = 1 mean perfect classifier? (yes/no)","yes","Area 1."},{"Is AUC = 0.5 equivalent to random guessing? (yes/no)","yes","Diagonal."}}
+	hard:=[]entry{{"For imbalanced data, is precision-recall often more informative than ROC? (yes/no)","yes","PR emphasizes."},{"Does higher AUC mean better ranking of positives above negatives? (yes/no)","yes","AUC = P(score(pos)>score(neg))."},{"If classifier thresholds from 0 to 1, does ROC go from (1,1) to (0,0) or opposite? (0,0→1,1)","0,0 to 1,1","Same curve."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type transformerGen struct{}
+func (g *transformerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Does attention compute weighted sum of values by query-key similarity? (yes/no)","yes","Attention = softmax(QK^T/√d)V."},{"Is self-attention permutation equivariant without positional encoding? (yes/no)","yes","Positional encoding adds order."},{"Does transformer use multi-head attention? (yes/no)","yes","Multiple heads."}}
+	hard:=[]entry{{"Is scaled dot-product attention O(n²) in sequence length? (yes/no)","yes","n×n matrix."},{"Does positional encoding use sin/cos of different frequencies? (yes/no)","yes","Sinusoidal."},{"Is transformer decoder autoregressive with causal mask? (yes/no)","yes","Mask prevents future."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type ganGen struct{}
+func (g *ganGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"GAN has generator and discriminator playing minimax game? (yes/no)","yes","G vs D."},{"Does GAN training aim for Nash equilibrium? (yes/no)","yes","Equilibrium."},{"Is GAN generator trained to minimize log(1-D(G(z)))? (yes/no)","yes","Original loss."}}
+	hard:=[]entry{{"Does mode collapse mean G outputs limited diversity? (yes/no)","yes","Few modes."},{"Is Wasserstein GAN using Earth mover distance? (yes/no)","yes","WGAN."},{"Does D provide gradient for G? (yes/no)","yes","Via backprop."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type adamDetailsGen struct{}
+func (g *adamDetailsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Does Adam maintain first and second moment estimates? (yes/no)","yes","m and v."},{"Is bias correction important early in Adam? (yes/no)","yes","m̂=m/(1-β1^t)."},{"Does Adam default β1=0.9, β2=0.999? (yes/no)","yes","Defaults."}}
+	hard:=[]entry{{"Does Adam update = -η m̂/(√v̂+ε)? (yes/no)","yes","Rule."},{"Is Adam adaptive per-parameter? (yes/no)","yes","Per-weight."},{"Does Adam combine momentum and RMSProp? (yes/no)","yes","Hybrid."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type calibrationGen struct{}
+func (g *calibrationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Is calibrated classifier's confidence ≈ true accuracy? (yes/no)","yes","Reliability."},{"Does reliability diagram plot accuracy vs confidence? (yes/no)","yes","Binned."},{"Is ECE expected calibration error? (yes/no)","yes","Weighted avg."}}
+	hard:=[]entry{{"Does overconfidence mean ECE high? (yes/no)","yes","Gap."},{"Is temperature scaling a calibration method? (yes/no)","yes","Softmax temp."},{"Does well-calibrated with 80% conf mean 80% correct? (yes/no)","yes","Definition."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+type augmentationGen struct{}
+func (g *augmentationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{question, answer, exp string}
+	easy:=[]entry{{"Is data augmentation used to increase training data artificially? (yes/no)","yes","Transforms."},{"Does augmentation reduce overfitting? (yes/no)","yes","More variety."},{"Is augmentation applied at test time? (no)","no","Test clean."}}
+	hard:=[]entry{{"Is cutout/mixup a form of augmentation? (yes/no)","yes","Masks."},{"Does augmentation approximate invariance? (yes/no)","yes","Ignore transforms."},{"Is augmentation a form of regularization? (yes/no)","yes","Effective data."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
 }

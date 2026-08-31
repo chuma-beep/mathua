@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Adam Optimizer Details",
+    "section": "Adaptive Per-Parameter",
+    "subgoals": [
+      "Review Adaptive Per-Parameter",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Adam Optimizer Details — practice 2",
+    "section": "Adaptive Per-Parameter",
+    "subgoals": [
+      "Review Adaptive Per-Parameter",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Adam Optimizer Details — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

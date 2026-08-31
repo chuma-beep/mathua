@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Infinitude of primes",
+    "section": "Euclid's Construction",
+    "subgoals": [
+      "Review Euclid's Construction",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Infinitude of primes — practice 2",
+    "section": "Euclid's Construction",
+    "subgoals": [
+      "Review Euclid's Construction",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Infinitude of primes — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

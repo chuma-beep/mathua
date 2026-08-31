@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Prime Number Theorem",
+    "section": "Counting Primes",
+    "subgoals": [
+      "Review Counting Primes",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Prime Number Theorem — practice 2",
+    "section": "Counting Primes",
+    "subgoals": [
+      "Review Counting Primes",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Prime Number Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

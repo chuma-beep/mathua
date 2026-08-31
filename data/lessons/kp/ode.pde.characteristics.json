@@ -1,0 +1,29 @@
+[
+  {
+    "label": "First-Order PDEs and Characteristics",
+    "section": "Transport Along Curves",
+    "subgoals": [
+      "Review Transport Along Curves",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "First-Order PDEs and Characteristics — practice 2",
+    "section": "Transport Along Curves",
+    "subgoals": [
+      "Review Transport Along Curves",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "First-Order PDEs and Characteristics — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

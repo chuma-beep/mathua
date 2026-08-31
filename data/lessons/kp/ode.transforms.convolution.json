@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convolution and Laplace transforms",
+    "section": "The Convolution Theorem",
+    "subgoals": [
+      "Review The Convolution Theorem",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Convolution and Laplace transforms — practice 2",
+    "section": "The Convolution Theorem",
+    "subgoals": [
+      "Review The Convolution Theorem",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Convolution and Laplace transforms — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

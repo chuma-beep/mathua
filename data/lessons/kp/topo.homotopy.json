@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Homotopy and Fundamental Group",
+    "section": "Loops and Groups",
+    "subgoals": [
+      "Review Loops and Groups",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Homotopy and Fundamental Group — practice 2",
+    "section": "Loops and Groups",
+    "subgoals": [
+      "Review Loops and Groups",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Homotopy and Fundamental Group — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

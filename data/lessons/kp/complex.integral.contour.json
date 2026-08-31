@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Contour Integration",
+    "section": "Evaluating Integrals",
+    "subgoals": [
+      "Review Evaluating Integrals",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Contour Integration — practice 2",
+    "section": "Evaluating Integrals",
+    "subgoals": [
+      "Review Evaluating Integrals",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Contour Integration — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

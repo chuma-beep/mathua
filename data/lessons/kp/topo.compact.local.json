@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local Compactness",
+    "section": "Local vs Global",
+    "subgoals": [
+      "Review Local vs Global",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Local Compactness — practice 2",
+    "section": "Local vs Global",
+    "subgoals": [
+      "Review Local vs Global",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Local Compactness — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

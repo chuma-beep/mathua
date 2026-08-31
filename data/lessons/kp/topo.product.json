@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Product Topology",
+    "section": "Infinite vs Finite Products",
+    "subgoals": [
+      "Review Infinite vs Finite Products",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Product Topology — practice 2",
+    "section": "Infinite vs Finite Products",
+    "subgoals": [
+      "Review Infinite vs Finite Products",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Product Topology — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

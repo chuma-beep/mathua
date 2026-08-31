@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quotient Groups and Isomorphism Theorems",
+    "section": "Building Quotients",
+    "subgoals": [
+      "Review Building Quotients",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quotient Groups and Isomorphism Theorems — practice 2",
+    "section": "Building Quotients",
+    "subgoals": [
+      "Review Building Quotients",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Quotient Groups and Isomorphism Theorems — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

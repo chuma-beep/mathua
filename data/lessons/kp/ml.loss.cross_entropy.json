@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cross-Entropy Loss",
+    "section": "When to Use Cross-Entropy",
+    "subgoals": [
+      "Review When to Use Cross-Entropy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cross-Entropy Loss — practice 2",
+    "section": "When to Use Cross-Entropy",
+    "subgoals": [
+      "Review When to Use Cross-Entropy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Cross-Entropy Loss — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

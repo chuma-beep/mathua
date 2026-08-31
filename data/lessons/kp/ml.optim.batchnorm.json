@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Batch Normalization",
+    "section": "Stabilizing Training",
+    "subgoals": [
+      "Review Stabilizing Training",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Batch Normalization — practice 2",
+    "section": "Stabilizing Training",
+    "subgoals": [
+      "Review Stabilizing Training",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Batch Normalization — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

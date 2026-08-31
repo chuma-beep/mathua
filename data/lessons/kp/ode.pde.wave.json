@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Wave Equation and d'Alembert Solution",
+    "section": "Characteristics and Energy",
+    "subgoals": [
+      "Review Characteristics and Energy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Wave Equation and d'Alembert Solution — practice 2",
+    "section": "Characteristics and Energy",
+    "subgoals": [
+      "Review Characteristics and Energy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Wave Equation and d'Alembert Solution — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

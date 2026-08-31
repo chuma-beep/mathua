@@ -16,6 +16,18 @@ func Register(reg *generator.Registry) {
 	reg.Register("ode.second_order.nonhomogeneous", &nonhomogeneousGen{})
 	reg.Register("ode.transforms.laplace", &laplaceGen{})
 	reg.Register("ode.adv.systems", &systemsGen{})
+	reg.Register("ode.second_order.variation_params", &variationParamsGen{})
+	reg.Register("ode.transforms.convolution", &convolutionGen{})
+	reg.Register("ode.systems.linear_phase", &linearPhaseGen{})
+	reg.Register("ode.numerical.euler", &eulerGen{})
+	reg.Register("ode.numerical.rk4", &rk4Gen{})
+	reg.Register("ode.stability", &stabilityGen{})
+	reg.Register("ode.pde.characteristics", &characteristicsGen{})
+	reg.Register("ode.transforms.fourier", &fourierGen{})
+	reg.Register("ode.nonlinear.bifurcation", &bifurcationGen{})
+	reg.Register("ode.pde.wave", &waveGen{})
+	reg.Register("ode.pde.heat", &heatGen{})
+	reg.Register("ode.green.function", &greenFunctionGen{})
 }
 
 type conceptGen struct{}
@@ -400,4 +412,292 @@ func (g *systemsGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Answer:      t.a,
 		Explanation: t.e,
 	}
+}
+
+type variationParamsGen struct{}
+
+func (g *variationParamsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type qa struct {
+		q string
+		a string
+		e string
+	}
+	templates := []qa{
+		{q: "For \\(y'' + y = \\sec(x)\\), the homogeneous solutions are \\(y_1=\\cos x\\), \\(y_2=\\sin x\\). What is the Wronskian \\(W\\)? (enter a number)", a: "1", e: "\\(W = y_1y_2' - y_1'y_2 = \\cos x \\cdot \\cos x - (-\\sin x)\\sin x = 1\\)."},
+		{q: "In variation of parameters, \\(y_p = u_1 y_1 + u_2 y_2\\) where \\(u_1' = -y_2 g/W\\). For \\(y''+y=1\\) with \\(W=1\\), \\(y_2=\\sin x\\), what is \\(u_1'\\)?", a: "-sin(x)", e: "\\(u_1' = -y_2 g/W = -\\sin x \\cdot 1/1 = -\\sin x\\)."},
+		{q: "Does variation of parameters require knowing the homogeneous solution? (yes/no)", a: "yes", e: "Yes, the method builds the particular solution from the homogeneous basis \\(y_1, y_2\\) and the Wronskian."},
+		{q: "For constant-coefficient ODEs, variation of parameters and undetermined coefficients give the same particular solution when both apply. Is this true? (yes/no)", a: "yes", e: "Both methods recover a particular solution; variation of parameters is more general and works even when undetermined coefficients does not."},
+	}
+	t := templates[rand.Intn(len(templates))]
+	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
+}
+
+type convolutionGen struct{}
+
+func (g *convolutionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type qa struct {
+		q string
+		a string
+		e string
+	}
+	templates := []qa{
+		{q: "The convolution \\((f*g)(t) = \\int_0^t f(\\tau)g(t-\\tau)d\\tau\\). What is \\((1*1)(t)\\)?", a: "t", e: "\\((1*1)(t)=\\int_0^t 1\\cdot1 d\\tau = t\\)."},
+		{q: "\\(L\\{f*g\\} = L\\{f\\} \\cdot L\\{g\\}\\). If \\(L\\{f\\}=1/s\\) and \\(L\\{g\\}=1/s\\), what is \\(L\\{f*g\\}\\)?", a: "1/s^2", e: "By the convolution theorem, \\(L\\{f*g\\}= (1/s)(1/s)=1/s^2\\)."},
+		{q: "Is convolution commutative: \\(f*g = g*f\\)? (yes/no)", a: "yes", e: "Yes, by substitution \\(\\tau \\to t-\\tau\\) the integral is symmetric."},
+		{q: "If \\(f(t)=e^{t}\\) and \\(g(t)=1\\), \\((f*g)(t)=e^{t}-1\\). Does \\(L\\{f*g\\}=1/(s(s-1))\\) hold? (yes/no)", a: "yes", e: "\\(L\\{e^t\\}=1/(s-1)\\), \\(L\\{1\\}=1/s\\), product is \\(1/(s(s-1))=L\\{e^t-1\\}\\)."},
+	}
+	t := templates[rand.Intn(len(templates))]
+	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
+}
+
+type linearPhaseGen struct{}
+
+func (g *linearPhaseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type qa struct {
+		q string
+		a string
+		e string
+	}
+	templates := []qa{
+		{q: "For \\(x' = Ax\\) with \\(A=[[2,0],[0,-3]]\\), the eigenvalues are \\(2\\) and \\(-3\\). What type is the origin? (saddle/node/spiral)", a: "saddle", e: "One positive, one negative eigenvalue gives a saddle."},
+		{q: "For \\(x' = Ax\\) with eigenvalues \\(-1, -2\\), what type is the origin? (saddle/node/spiral)", a: "node", e: "Both eigenvalues negative and real gives a stable node."},
+		{q: "If eigenvalues are \\(0.5 \\pm 2i\\), what type is the origin? (saddle/node/spiral)", a: "spiral", e: "Complex pair with positive real part gives an unstable spiral."},
+		{q: "Does the phase portrait of a linear system depend on eigenvalues of \\(A\\)? (yes/no)", a: "yes", e: "The eigenvalues classify the equilibrium: node, saddle, spiral, or centre."},
+	}
+	t := templates[rand.Intn(len(templates))]
+	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
+}
+
+type eulerGen struct{}
+
+func (g *eulerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*3)
+	hChoices := []float64{0.1, 0.2, 0.5}
+	h := hChoices[rand.Intn(len(hChoices))]
+	x0 := 0.0
+	y0 := float64(rand.Intn(max(1, scale*2)) + 1)
+	// simple ODE y' = y, exact y = y0*e^x, Euler: y1 = y0 + h*y0
+	y1 := y0 + h*y0
+	_ = x0
+	return generator.Problem{
+		Question:    fmt.Sprintf("Use one step of Euler's method with \\(h=%.1f\\) for \\(y'=y\\), \\(y(0)=%.0f\\). Estimate \\(y(%.1f)\\).", h, y0, h),
+		Answer:      fmt.Sprintf("%.4f", y1),
+		Explanation: fmt.Sprintf("Euler: \\(y_1 = y_0 + h f(x_0,y_0) = %.0f + %.1f\\cdot%.0f = %.4f\\).", y0, h, y0, y1),
+	}
+}
+
+type rk4Gen struct{}
+
+func (g *rk4Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does RK4 have local truncation error O(h^5) and global O(h^4)? (yes/no)", "yes", "RK4: local O(h^5), global O(h^4), vs Euler local O(h^2) global O(h)."},
+		{"How many function evaluations per step does RK4 need? (4)", "4", "k1,k2,k3,k4 per step."},
+		{"Is RK4 more accurate than Euler with same h? (yes/no)", "yes", "Higher order gives smaller error for same step size."},
+	}
+	hard := []entry{
+		{"With h=0.1, does halving h reduce RK4 global error by ~16×? (yes/no)", "yes", "Error ∝ h^4, so (1/2)^4=1/16."},
+		{"Does RK4's increment use weighted average (k1+2k2+2k3+k4)/6? (yes/no)", "yes", "Classic RK4 formula."},
+		{"Is RK4 explicit (no solve) for y'=f(x,y)? (yes/no)", "yes", "Explicit; all k_i use known values."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type stabilityGen struct{}
+
+func (g *stabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"For x'=-x, is equilibrium 0 stable? (yes/no)", "yes", "Solution e^{-t}x0 →0, asymptotically stable."},
+		{"For x'=x, is 0 unstable? (yes/no)", "yes", "Solutions e^{t}x0 diverge from 0."},
+		{"Does negative eigenvalue give stable node in linear system? (yes/no)", "yes", "Both eigenvalues negative → stable node."},
+	}
+	hard := []entry{
+		{"Does Lyapunov's indirect method use Jacobian eigenvalues at equilibrium? (yes/no)", "yes", "Linearization stability via eigenvalues."},
+		{"Is centre (pure imaginary eigenvalues) stable but not asymptotically? (yes/no)", "yes", "Orbits are closed, not approaching nor diverging."},
+		{"Does asymptotically stable imply stable? (yes/no)", "yes", "Asymptotic is stronger."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type characteristicsGen struct{}
+
+func (g *characteristicsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does method of characteristics reduce first-order PDE a*u_x+b*u_y=0 to ODEs along curves? (yes/no)", "yes", "Characteristics satisfy dx/a=dy/b."},
+		{"For u_t + c u_x=0, are characteristics lines x-ct=const? (yes/no)", "yes", "Solution u(x,t)=f(x-ct) constant along x-ct."},
+		{"Is transport PDE solved by shifting initial data along characteristics? (yes/no)", "yes", "Value propagates along char lines."},
+	}
+	hard := []entry{
+		{"Does quasi-linear PDE become ODE system for (x(t),u(t)) via characteristics? (yes/no)", "yes", "dx/dt=a, dy/dt=b, du/dt=c."},
+		{"Are characteristics curves where PDE becomes interior ODE? (yes/no)", "yes", "PDE restricts to ODE along them."},
+		{"Does shock form when characteristics intersect? (yes/no)", "yes", "Intersection gives multi-valued solution → shock."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type fourierGen struct{}
+
+func (g *fourierGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does Fourier transform convert differentiation to multiplication by iω? (yes/no)", "yes", "F{d/dx}=iω."},
+		{"Does Fourier solve ODEs with constant coefficients by algebra in frequency domain? (yes/no)", "yes", "Transform, solve algebraic equation, invert."},
+		{"Is Fourier transform of convolution a product? (yes/no)", "yes", "Like Laplace, F{f*g}=F{f}·F{g}."},
+	}
+	hard := []entry{
+		{"Does Fourier method require solving ( -ω^2 + ...)U = F? (yes/no)", "yes", "E.g. y''+y=f → (-ω^2+1)Y=F."},
+		{"Are Fourier and Laplace both integral transforms for ODEs? (yes/no)", "yes", "Both convert differential to algebraic."},
+		{"Does inverse Fourier require contour integration? (yes/no)", "yes", "Inversion integral over real line."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type bifurcationGen struct{}
+
+func (g *bifurcationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"For x'= μx - x^3, does bifurcation at μ=0 change stability? (yes/no)", "yes", "Pitchfork: 0 stable for μ<0, unstable for μ>0 with two new stable branches."},
+		{"Does saddle-node bifurcation create/destroy equilibria as parameter varies? (yes/no)", "yes", "x'= μ - x^2 has 0,1,2 equilibria depending on μ."},
+		{"Is bifurcation a qualitative change in phase portrait as parameter crosses threshold? (yes/no)", "yes", "Definition of bifurcation."},
+	}
+	hard := []entry{
+		{"For x'= μx - x^2, is it transcritical? (yes/no)", "yes", "Two equilibria exchange stability at μ=0."},
+		{"Does Hopf bifurcation create a limit cycle? (yes/no)", "yes", "Pair of complex eigenvalues cross imaginary axis, periodic orbit appears."},
+		{"Is pitchfork normal form x'= μx - x^3 supercritical when cubic term negative? (yes/no)", "yes", "Stable branches emerge for μ>0."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type waveGen struct{}
+
+func (g *waveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does wave equation u_tt = c^2 u_xx have d'Alembert solution u(x,t)=f(x-ct)+g(x+ct)? (yes/no)", "yes", "Superposition of right and left travelling waves."},
+		{"Is wave equation hyperbolic? (yes/no)", "yes", "Classification via discriminant."},
+		{"Do characteristics for wave equation have slopes ±c? (yes/no)", "yes", "Lines x±ct=const."},
+	}
+	hard := []entry{
+		{"Does d'Alembert with initial u(x,0)=f(x), u_t(x,0)=0 give u(x,t)=[f(x-ct)+f(x+ct)]/2? (yes/no)", "yes", "Even reflection of initial displacement."},
+		{"Is domain of dependence for wave equation an interval [x-ct,x+ct]? (yes/no)", "yes", "Value at (x,t) depends on initial data there."},
+		{"Does wave equation conserve energy ∫(u_t^2+c^2 u_x^2)dx? (yes/no)", "yes", "Energy conservation."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type heatGen struct{}
+
+func (g *heatGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does heat equation u_t = k u_xx have solution via separation u=X(x)T(t)? (yes/no)", "yes", "Yields X''/X = T'/(kT) = -λ."},
+		{"Is heat equation parabolic? (yes/no)", "yes", "Classification."},
+		{"Does separation give T(t)=C e^{-kλt}? (yes/no)", "yes", "ODE T'=-kλT."},
+	}
+	hard := []entry{
+		{"Does Fourier series solve heat equation on [0,L] with Dirichlet? (yes/no)", "yes", "Eigenfunctions sin(nπx/L)."},
+		{"Is maximum principle: max of u on space-time boundary? (yes/no)", "yes", "Heat cannot have interior max exceeding boundary."},
+		{"Does heat smoothing make incompatible initial data become smooth for t>0? (yes/no)", "yes", "Instant smoothing."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type greenFunctionGen struct{}
+
+func (g *greenFunctionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does Green's function solve L G = δ with boundary conditions? (yes/no)", "yes", "Impulse response; y(x)=∫G(x,ξ)f(ξ)dξ."},
+		{"Is Green's function the inverse of differential operator? (yes/no)", "yes", "Integral operator inverts L."},
+		{"Does Green's function for y''=f with y(0)=y(1)=0 equal piecewise linear? (yes/no)", "yes", "G(x,ξ)=x(1-ξ) for x<ξ, ξ(1-x) for x>ξ."},
+	}
+	hard := []entry{
+		{"Does jump condition give G' discontinuity of 1 at x=ξ? (yes/no)", "yes", "Integrating across δ jump."},
+		{"Is Green's function symmetric for self-adjoint L? (yes/no)", "yes", "Reciprocity G(x,ξ)=G(ξ,x)."},
+		{"Does eigenfunction expansion give G(x,ξ)=∑ φ_n(x)φ_n(ξ)/λ_n? (yes/no)", "yes", "Spectral representation."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Proof by Contradiction",
+    "section": "Classic Proofs",
+    "subgoals": [
+      "Review Classic Proofs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Proof by Contradiction — practice 2",
+    "section": "Classic Proofs",
+    "subgoals": [
+      "Review Classic Proofs",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Proof by Contradiction — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

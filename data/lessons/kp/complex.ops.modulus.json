@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Modulus of a Complex Number",
+    "section": "Geometric Meaning",
+    "subgoals": [
+      "Review Geometric Meaning",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Modulus of a Complex Number — practice 2",
+    "section": "Geometric Meaning",
+    "subgoals": [
+      "Review Geometric Meaning",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Modulus of a Complex Number — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

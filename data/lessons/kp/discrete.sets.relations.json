@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Relations, Functions and Partitions",
+    "section": "Properties and Partitions",
+    "subgoals": [
+      "Review Properties and Partitions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Relations, Functions and Partitions — practice 2",
+    "section": "Properties and Partitions",
+    "subgoals": [
+      "Review Properties and Partitions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Relations, Functions and Partitions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Momentum and Adam Optimization",
+    "section": "Accelerating Through Terrain",
+    "subgoals": [
+      "Review Accelerating Through Terrain",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Momentum and Adam Optimization — practice 2",
+    "section": "Accelerating Through Terrain",
+    "subgoals": [
+      "Review Accelerating Through Terrain",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Momentum and Adam Optimization — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

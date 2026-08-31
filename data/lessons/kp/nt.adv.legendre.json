@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Legendre Symbol",
+    "section": "Quadratic Residues",
+    "subgoals": [
+      "Review Quadratic Residues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Legendre Symbol — practice 2",
+    "section": "Quadratic Residues",
+    "subgoals": [
+      "Review Quadratic Residues",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Legendre Symbol — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

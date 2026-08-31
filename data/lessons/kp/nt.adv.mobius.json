@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Möbius Function and Inversion",
+    "section": "Values and Inversion",
+    "subgoals": [
+      "Review Values and Inversion",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Möbius Function and Inversion — practice 2",
+    "section": "Values and Inversion",
+    "subgoals": [
+      "Review Values and Inversion",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Möbius Function and Inversion — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

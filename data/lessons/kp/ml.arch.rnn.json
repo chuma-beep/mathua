@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Recurrent Neural Networks",
+    "section": "Memory Over Time",
+    "subgoals": [
+      "Review Memory Over Time",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Recurrent Neural Networks — practice 2",
+    "section": "Memory Over Time",
+    "subgoals": [
+      "Review Memory Over Time",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Recurrent Neural Networks — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
