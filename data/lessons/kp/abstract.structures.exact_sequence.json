@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exact Sequences",
+    "section": "Homological Use",
+    "subgoals": [
+      "Review Homological Use",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Exact Sequences — practice 2",
+    "section": "Homological Use",
+    "subgoals": [
+      "Review Homological Use",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Exact Sequences — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

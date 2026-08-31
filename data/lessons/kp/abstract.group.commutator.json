@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Commutator Subgroup and Abelianization",
+    "section": "Abelianization",
+    "subgoals": [
+      "Review Abelianization",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Commutator Subgroup and Abelianization — practice 2",
+    "section": "Abelianization",
+    "subgoals": [
+      "Review Abelianization",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Commutator Subgroup and Abelianization — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Noetherian Rings and Hilbert Basis Theorem",
+    "section": "Chain Conditions",
+    "subgoals": [
+      "Review Chain Conditions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Noetherian Rings and Hilbert Basis Theorem — practice 2",
+    "section": "Chain Conditions",
+    "subgoals": [
+      "Review Chain Conditions",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Noetherian Rings and Hilbert Basis Theorem — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
