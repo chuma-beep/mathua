@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transformers for NLP",
+    "section": "NLP Use",
+    "subgoals": [
+      "Review NLP Use",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Transformers for NLP \u2014 practice 2",
+    "section": "NLP Use",
+    "subgoals": [
+      "Review NLP Use",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Transformers for NLP \u2014 practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Q-Learning",
+    "section": "Optimality",
+    "subgoals": [
+      "Review Optimality",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Q-Learning — practice 2",
+    "section": "Optimality",
+    "subgoals": [
+      "Review Optimality",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Q-Learning — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

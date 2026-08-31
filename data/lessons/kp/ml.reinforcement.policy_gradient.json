@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Policy Gradients",
+    "section": "Actor-Critic",
+    "subgoals": [
+      "Review Actor-Critic",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Policy Gradients — practice 2",
+    "section": "Actor-Critic",
+    "subgoals": [
+      "Review Actor-Critic",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Policy Gradients — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "BERT and Pretraining",
+    "section": "Pretraining",
+    "subgoals": [
+      "Review Pretraining",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "BERT and Pretraining — practice 2",
+    "section": "Pretraining",
+    "subgoals": [
+      "Review Pretraining",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "BERT and Pretraining — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -28,6 +28,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("topo.separation.completely_regular", &completelyRegularGen{})
 	reg.Register("topo.homotopy.fundamental", &fundamentalGen{})
 	reg.Register("topo.manifold.orientability", &orientabilityGen{})
+	reg.Register("topo.embedding", &embeddingGen{})
+	reg.Register("topo.knot", &knotGen{})
+	reg.Register("topo.cohomology", &cohomologyGen{})
+	reg.Register("topo.compactification.stone_cech", &stoneCechGen{})
+	reg.Register("topo.dimension", &dimensionGen{})
 }
 
 // ----- 1. metric -----
@@ -610,4 +615,60 @@ func (g *orientabilityGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type embeddingGen struct{}
+func (g *embeddingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Does Whitney embedding embed n-manifold in R^{2n}? (yes/no)","yes","Whitney."},{"Is embedding injective immersion homeomorphic onto image? (yes/no)","yes","Embedding."},{"Does Urysohn embedding use countable product of [0,1]? (yes/no)","yes","Metrization proof."}}
+	hard:=[]entry{{"Does Nash embed Riemannian manifold isometrically in R^n? (yes/no)","yes","Nash embedding."},{"Is Alexander horned sphere embedding wild? (yes/no)","yes","Wild embedding."},{"Does Schoenflies generalize Jordan curve? (yes/no)","yes","Sphere."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type knotGen struct{}
+func (g *knotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Is unknot trivial? (yes/no)","yes","Unknotted circle."},{"Does trefoil have crossing number 3? (yes/no)","yes","Simplest nontrivial."},{"Is knot complement fundamental group knot invariant? (yes/no)","yes","Knot group."}}
+	hard:=[]entry{{"Is Jones polynomial knot invariant? (yes/no)","yes","Jones."},{"Does Gordon-Luecke show knot determined by complement? (yes/no)","yes","Knot complement."},{"Is figure-eight knot 4_1? (yes/no)","yes","Four crossings."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type cohomologyGen struct{}
+func (g *cohomologyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Is cohomology dual to homology? (yes/no)","yes","Universal coefficients."},{"Does de Rham cohomology use differential forms? (yes/no)","yes","Smooth manifolds."},{"Is H^0 connected components? (yes/no)","yes","H^0."}}
+	hard:=[]entry{{"Does cohomology ring have cup product? (yes/no)","yes","Ring structure."},{"Is singular cohomology homotopy invariant? (yes/no)","yes","Homotopy."},{"Does Poincaré duality hold for compact orientable manifold? (yes/no)","yes","Duality."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type stoneCechGen struct{}
+func (g *stoneCechGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Is Stone-Čech compactification largest compactification? (yes/no)","yes","Universal."},{"Does βN contain remainder N*? (yes/no)","yes","Growth."},{"Is Tychonoff exactly embeddable in compact Hausdorff? (yes/no)","yes","Characterization."}}
+	hard:=[]entry{{"Is βR not metrizable? (yes/no)","yes","Huge."},{"Does Stone-Čech of discrete is ultrafilters? (yes/no)","yes","βD."},{"Is completely regular iff subspace of compact Hausdorff? (yes/no)","yes","Tychonoff."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type dimensionGen struct{}
+func (g *dimensionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Is covering dimension of R^n equal n? (yes/no)","yes","Lebesgue dimension."},{"Is dimension of Cantor set 0? (yes/no)","yes","Totally disconnected."},{"Does dimension not increase under subspace? (yes/no)","yes","Subspace."}}
+	hard:=[]entry{{"Is inductive dimension equal covering for separable metric? (yes/no)","yes","Coincidence."},{"Does Brouwer show dimension is topological invariant? (yes/no)","yes","Invariance of domain."},{"Is Menger-Nöbeling embed n-dim compact in R^{2n+1}? (yes/no)","yes","Embedding."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
 }

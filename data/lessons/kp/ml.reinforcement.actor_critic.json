@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Actor-Critic Methods",
+    "section": "Advantage",
+    "subgoals": [
+      "Review Advantage",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Actor-Critic Methods — practice 2",
+    "section": "Advantage",
+    "subgoals": [
+      "Review Advantage",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Actor-Critic Methods — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

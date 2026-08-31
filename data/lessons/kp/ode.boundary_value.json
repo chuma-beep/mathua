@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Boundary Value Problems",
+    "section": "Versus IVP",
+    "subgoals": [
+      "Review Versus IVP",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Boundary Value Problems — practice 2",
+    "section": "Versus IVP",
+    "subgoals": [
+      "Review Versus IVP",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Boundary Value Problems — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

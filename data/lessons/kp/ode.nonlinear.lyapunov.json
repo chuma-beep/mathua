@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lyapunov Functions",
+    "section": "Direct Method",
+    "subgoals": [
+      "Review Direct Method",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Lyapunov Functions — practice 2",
+    "section": "Direct Method",
+    "subgoals": [
+      "Review Direct Method",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Lyapunov Functions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

@@ -285,5 +285,76 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "topo.embedding",
+    "label": "Embedding theorems",
+    "domain": "topology",
+    "subdomain": "topology.manifolds",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.manifold.orientability"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.knot",
+    "label": "Knot theory basics",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy.fundamental"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "topo.cohomology",
+    "label": "Cohomology",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy.fundamental"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.compactification.stone_cech",
+    "label": "Stone-\u010cech compactification",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.compact.one_point",
+      "topo.separation.completely_regular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.dimension",
+    "label": "Lebesgue covering dimension",
+    "domain": "topology",
+    "subdomain": "topology.dimension",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.compactification.stone_cech"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

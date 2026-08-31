@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sturm-Liouville Theory",
+    "section": "Spectral Properties",
+    "subgoals": [
+      "Review Spectral Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sturm-Liouville Theory — practice 2",
+    "section": "Spectral Properties",
+    "subgoals": [
+      "Review Spectral Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Sturm-Liouville Theory — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

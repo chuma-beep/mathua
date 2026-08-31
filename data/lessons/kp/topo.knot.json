@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Knot Theory Basics",
+    "section": "Invariants",
+    "subgoals": [
+      "Review Invariants",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Knot Theory Basics — practice 2",
+    "section": "Invariants",
+    "subgoals": [
+      "Review Invariants",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Knot Theory Basics — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

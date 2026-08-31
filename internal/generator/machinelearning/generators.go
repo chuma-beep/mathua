@@ -27,6 +27,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("ml.optim.adam", &adamDetailsGen{})
 	reg.Register("ml.eval.calibration", &calibrationGen{})
 	reg.Register("ml.data.augmentation", &augmentationGen{})
+	reg.Register("ml.nlp.transformer", &nlpTransformerGen{})
+	reg.Register("ml.reinforcement.qlearning", &qlearningGen{})
+	reg.Register("ml.reinforcement.policy_gradient", &policyGradientGen{})
+	reg.Register("ml.nlp.bert", &bertGen{})
+	reg.Register("ml.reinforcement.actor_critic", &actorCriticGen{})
 }
 
 type backpropGen struct{}
@@ -314,4 +319,60 @@ func (g *augmentationGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	if scale>3{pool=append(easy,hard...)}
 	e:=pool[rand.Intn(len(pool))]
 	return generator.Problem{Question:e.question,Answer:e.answer,Explanation:e.exp}
+}
+
+type nlpTransformerGen struct{}
+func (g *nlpTransformerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Does transformer use self-attention for NLP? (yes/no)","yes","Attention."},{"Is BERT bidirectional transformer? (no)","no","BERT is, but this asks transformer generally."},{"Does positional encoding add order to transformer? (yes/no)","yes","Sinusoidal."}}
+	hard:=[]entry{{"Is attention O(n²) in sequence length? (yes/no)","yes","Quadratic."},{"Does transformer decoder use causal mask? (yes/no)","yes","Autoregressive."},{"Is multi-head attention multiple subspaces? (yes/no)","yes","Heads."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type qlearningGen struct{}
+func (g *qlearningGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Does Q-learning learn Q(s,a) via Bellman update? (yes/no)","yes","Q-learning."},{"Is Q-learning off-policy? (yes/no)","yes","Learn from any policy."},{"Does Q* satisfy Bellman optimality? (yes/no)","yes","Optimal."}}
+	hard:=[]entry{{"Does Q-learning converge with infinite exploration? (yes/no)","yes","Convergence."},{"Is Q-learning model-free? (yes/no)","yes","No model."},{"Does overestimation bias exist in Q-learning? (yes/no)","yes","Max bias."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type policyGradientGen struct{}
+func (g *policyGradientGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Does REINFORCE use Monte Carlo returns? (yes/no)","yes","Policy gradient."},{"Is policy gradient on-policy? (yes/no)","yes","Samples from current policy."},{"Does baseline reduce variance? (yes/no)","yes","Advantage."}}
+	hard:=[]entry{{"Is actor-critic both value and policy? (yes/no)","yes","Actor-critic."},{"Does entropy regularization encourage exploration? (yes/no)","yes","Entropy bonus."},{"Is PPO clipped surrogate objective? (yes/no)","yes","PPO."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type bertGen struct{}
+func (g *bertGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Is BERT bidirectional encoder? (yes/no)","yes","BERT."},{"Does BERT use masked language modeling? (yes/no)","yes","MLM."},{"Is BERT pretrained then fine-tuned? (yes/no)","yes","Pretrain."}}
+	hard:=[]entry{{"Does BERT base have 12 layers? (yes/no)","yes","Base 12, large 24."},{"Is next sentence prediction part of BERT pretraining? (yes/no)","yes","NSP."},{"Does RoBERTa remove NSP? (yes/no)","yes","RoBERTa."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+}
+type actorCriticGen struct{}
+func (g *actorCriticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale:=int(1+ctx.Difficulty*4)
+	type entry struct{q,a,e string}
+	easy:=[]entry{{"Does actor-critic combine policy and value? (yes/no)","yes","Actor and critic."},{"Is A2C synchronous actor-critic? (yes/no)","yes","A2C."},{"Does critic estimate value baseline? (yes/no)","yes","Baseline."}}
+	hard:=[]entry{{"Is advantage = Q - V? (yes/no)","yes","Advantage."},{"Does GAE generalize advantage? (yes/no)","yes","Generalized."},{"Is DDPG actor-critic for continuous actions? (yes/no)","yes","DDPG."}}
+	pool:=easy
+	if scale>3{pool=append(easy,hard...)}
+	e:=pool[rand.Intn(len(pool))]
+	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
 }
