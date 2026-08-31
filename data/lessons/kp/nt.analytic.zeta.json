@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Riemann Zeta Function",
+    "section": "Analytic Continuation",
+    "subgoals": [
+      "Review Analytic Continuation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Riemann Zeta Function — practice 2",
+    "section": "Analytic Continuation",
+    "subgoals": [
+      "Review Analytic Continuation",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Riemann Zeta Function — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

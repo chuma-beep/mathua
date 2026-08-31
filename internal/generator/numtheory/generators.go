@@ -29,6 +29,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("nt.analytic.prime_number_theorem", &pntGen{})
 	reg.Register("nt.adv.dirichlet", &dirichletGen{})
 	reg.Register("nt.adv.sieve", &sieveGen{})
+	reg.Register("nt.analytic.zeta", &zetaGen{})
+	reg.Register("nt.adv.chebyshev", &chebyshevGen{})
+	reg.Register("nt.adv.elliptic_curve", &ellipticCurveGen{})
+	reg.Register("nt.adv.continued_fractions", &continuedFractionsGen{})
+	reg.Register("nt.adv.class_number", &classNumberGen{})
 }
 
 type divisibilityGen struct{}
@@ -471,6 +476,141 @@ func (g *sieveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does sieve principle use inclusion-exclusion with Möbius? (yes/no)", "yes", "Count via μ."},
 		{"Is Brun's theorem that twin primes are finite? (no)", "no", "Brun shows sum converges, not finiteness."},
 		{"Does segmented sieve handle large n with limited memory? (yes/no)", "yes", "Process intervals."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type zetaGen struct{}
+
+func (g *zetaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Does ζ(s)=∑_{n≥1}1/n^s converge for Re(s)>1? (yes/no)", "yes", "Zeta converges for Re(s)>1."},
+		{"Is ζ(2)=π^2/6? (yes/no)", "yes", "Basel problem."},
+		{"Does Euler product ζ(s)=∏_p(1-p^{-s})^{-1} hold? (yes/no)", "yes", "Euler product over primes."},
+	}
+	hard := []entry{
+		{"Are nontrivial zeros of ζ conjectured to lie on Re(s)=1/2? (yes/no)", "yes", "Riemann hypothesis."},
+		{"Does ζ(s) have pole at s=1? (yes/no)", "yes", "Simple pole with residue 1."},
+		{"Is ζ(-1)=-1/12 via analytic continuation? (yes/no)", "yes", "Regularized sum."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type chebyshevGen struct{}
+
+func (g *chebyshevGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is ψ(x)=∑_{n≤x}Λ(n) Chebyshev function? (yes/no)", "yes", "Von Mangoldt weight."},
+		{"Does θ(x)=∑_{p≤x}log p count primes with log weight? (yes/no)", "yes", "Chebyshev θ."},
+		{"Is PNT equivalent to ψ(x)∼x? (yes/no)", "yes", "Chebyshev form."},
+	}
+	hard := []entry{
+		{"Does explicit formula ψ(x)=x-∑_ρ x^ρ/ρ - log(2π) hold? (yes/no)", "yes", "Over zeros of ζ."},
+		{"Is θ(x)∼x equivalent to PNT? (yes/no)", "yes", "Chebyshev equivalence."},
+		{"Does Chebyshev show π(x)≍x/log x with constants? (yes/no)", "yes", "Chebyshev bounds."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type ellipticCurveGen struct{}
+
+func (g *ellipticCurveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is elliptic curve E: y^2=x^3+ax+b with discriminant Δ≠0? (yes/no)", "yes", "Nonsingular cubic."},
+		{"Does E have group law via chord-tangent? (yes/no)", "yes", "Points form abelian group."},
+		{"Is BSD conjecture about rank of E(Q) and L(E,1)? (yes/no)", "yes", "Birch and Swinnerton-Dyer."},
+	}
+	hard := []entry{
+		{"Does Hasse bound |#E(F_p)-(p+1)|≤2√p hold? (yes/no)", "yes", "Hasse-Weil."},
+		{"Is elliptic curve used in factorization (ECM) and cryptography? (yes/no)", "yes", "ECM and ECC."},
+		{"Does Mordell-Weil state E(Q) finitely generated? (yes/no)", "yes", "E(Q)≅Z^r×torsion."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type continuedFractionsGen struct{}
+
+func (g *continuedFractionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is continued fraction [a0;a1,a2,...] = a0+1/(a1+1/(a2+...))? (yes/no)", "yes", "Definition."},
+		{"Do convergents p_k/q_k give best rational approximations? (yes/no)", "yes", "Best approximations."},
+		{"Is √2 = [1;2,2,2,...]? (yes/no)", "yes", "Periodic for quadratic irrationals."},
+	}
+	hard := []entry{
+		{"Does Lagrange show periodic CF ⇔ quadratic irrational? (yes/no)", "yes", "Lagrange's theorem."},
+		{"Is e = [2;1,2,1,1,4,1,1,6,...] pattern? (yes/no)", "yes", "Continued fraction for e."},
+		{"Does CF of π start [3;7,15,1,292,...]? (yes/no)", "yes", "Approximation 22/7 from first term."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type classNumberGen struct{}
+
+func (g *classNumberGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is class number h(D) count of ideal classes in quadratic order? (yes/no)", "yes", "Class group size."},
+		{"Does h(-3)=1 mean Z[ω] is UFD? (yes/no)", "yes", "Class number 1 ⇔ PID ⇔ UFD for rings of integers."},
+		{"Is Gauss class number problem about h(D)=1? (yes/no)", "yes", "Heegner completed."},
+	}
+	hard := []entry{
+		{"Does class number formula relate h(D) to L(1,χ_D)? (yes/no)", "yes", "Dirichlet class number formula."},
+		{"Is h(-163)=1 the largest Heegner number? (yes/no)", "yes", "Heegner numbers -1,-2,-3,-7,-11,-19,-43,-67,-163."},
+		{"Does Stark-Heegner show h(-163)=1? (yes/no)", "yes", "Stark-Heegner theorem."},
 	}
 	pool := easy
 	if scale > 3 {

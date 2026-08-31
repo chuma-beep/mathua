@@ -2278,5 +2278,25 @@
   {
     "concept_id": "abstract.group.solvable",
     "source": "teaching/abstract.group.solvable.md"
+  },
+  {
+    "concept_id": "nt.analytic.zeta",
+    "source": "teaching/nt.zeta.md"
+  },
+  {
+    "concept_id": "nt.adv.chebyshev",
+    "source": "teaching/nt.chebyshev.md"
+  },
+  {
+    "concept_id": "nt.adv.elliptic_curve",
+    "source": "teaching/nt.elliptic.md"
+  },
+  {
+    "concept_id": "nt.adv.continued_fractions",
+    "source": "teaching/nt.continued.md"
+  },
+  {
+    "concept_id": "nt.adv.class_number",
+    "source": "teaching/nt.class_number.md"
   }
 ]
