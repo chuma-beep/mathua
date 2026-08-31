@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Elliptic Curves and BSD",
+    "section": "Arithmetic of Curves",
+    "subgoals": [
+      "Review Arithmetic of Curves",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Elliptic Curves and BSD — practice 2",
+    "section": "Arithmetic of Curves",
+    "subgoals": [
+      "Review Arithmetic of Curves",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Elliptic Curves and BSD — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

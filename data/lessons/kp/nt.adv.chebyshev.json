@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Chebyshev Functions",
+    "section": "Prime Counting",
+    "subgoals": [
+      "Review Prime Counting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Chebyshev Functions — practice 2",
+    "section": "Prime Counting",
+    "subgoals": [
+      "Review Prime Counting",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Chebyshev Functions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

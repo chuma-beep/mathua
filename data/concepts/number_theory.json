@@ -287,5 +287,75 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "nt.analytic.zeta",
+    "label": "Riemann zeta function",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.analytic.prime_number_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.chebyshev",
+    "label": "Chebyshev functions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.analytic.zeta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "nt.adv.elliptic_curve",
+    "label": "Elliptic curves and BSD",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.dirichlet"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "nt.adv.continued_fractions",
+    "label": "Continued fractions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.basics.order_mod"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.class_number",
+    "label": "Class numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "nt.adv.chebyshev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

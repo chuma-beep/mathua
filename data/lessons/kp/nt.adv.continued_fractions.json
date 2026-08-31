@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Continued Fractions",
+    "section": "Approximations",
+    "subgoals": [
+      "Review Approximations",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Continued Fractions — practice 2",
+    "section": "Approximations",
+    "subgoals": [
+      "Review Approximations",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Continued Fractions — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
