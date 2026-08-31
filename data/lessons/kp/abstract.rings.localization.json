@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Localization of Rings",
+    "section": "Inverting Elements",
+    "subgoals": [
+      "Review Inverting Elements",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Localization of Rings — practice 2",
+    "section": "Inverting Elements",
+    "subgoals": [
+      "Review Inverting Elements",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Localization of Rings — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

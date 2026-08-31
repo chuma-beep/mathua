@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finite Fields",
+    "section": "Prime Power Fields",
+    "subgoals": [
+      "Review Prime Power Fields",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Finite Fields — practice 2",
+    "section": "Prime Power Fields",
+    "subgoals": [
+      "Review Prime Power Fields",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Finite Fields — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

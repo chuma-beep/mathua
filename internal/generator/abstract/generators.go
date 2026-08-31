@@ -28,6 +28,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("abstract.rings.ufd", &ufdGen{})
 	reg.Register("abstract.field.extension", &fieldExtensionGen{})
 	reg.Register("abstract.structures.galois", &galoisGen{})
+	reg.Register("abstract.rings.localization", &localizationGen{})
+	reg.Register("abstract.field.finite", &finiteFieldGen{})
+	reg.Register("abstract.group.nilpotent", &nilpotentGen{})
+	reg.Register("abstract.structures.tensor", &tensorGen{})
+	reg.Register("abstract.group.solvable", &solvableGen{})
 }
 
 // ----- 1. group.def -----
@@ -669,6 +674,141 @@ func (g *galoisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does solvable Galois group correspond to radical solvability? (yes/no)", "yes", "Galois: polynomial solvable by radicals iff Galois group is solvable."},
 		{"Is Gal(splitting field of x^3-2) ≅ S_3? (yes/no)", "yes", "Degree 6, non-abelian, is S_3."},
 		{"Does fixed field of subgroup H have degree [G:H]? (yes/no)", "yes", "Fundamental theorem: [K^H : k] = |G|/|H|."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type localizationGen struct{}
+
+func (g *localizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is localization S^{-1}R inverting elements of S? (yes/no)", "yes", "Fractions r/s with s∈S."},
+		{"Is R localized at prime ideal a local ring? (yes/no)", "yes", "R_p has unique maximal ideal."},
+		{"Does localization at S={1,2,4,8,...} give Z[1/2]? (yes/no)", "yes", "Invert powers of 2."},
+	}
+	hard := []entry{
+		{"Is field of fractions of integral domain localization at nonzero elements? (yes/no)", "yes", "S=R\\{0}."},
+		{"Does localization preserve exactness? (yes/no)", "yes", "Localization is exact functor."},
+		{"Is Z_{(p)} localization at complement of (p) local? (yes/no)", "yes", "Local ring at p."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type finiteFieldGen struct{}
+
+func (g *finiteFieldGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is F_p field with p prime? (yes/no)", "yes", "Z/pZ is field iff p prime."},
+		{"Does finite field F_{p^n} have p^n elements? (yes/no)", "yes", "Extension of degree n over F_p."},
+		{"Is multiplicative group of finite field cyclic? (yes/no)", "yes", "F_{p^n}^× cyclic."},
+	}
+	hard := []entry{
+		{"Is there a field with 4 elements? (yes/no)", "yes", "F_4 = F_2[x]/(x^2+x+1)."},
+		{"Is there a field with 6 elements? (yes/no)", "no", "Order must be prime power."},
+		{"Does Frobenius x→x^p give automorphism of F_{p^n}? (yes/no)", "yes", "Frobenius."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type nilpotentGen struct{}
+
+func (g *nilpotentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is p-group nilpotent? (yes/no)", "yes", "Finite p-groups are nilpotent."},
+		{"Is nilpotent ⇒ solvable? (yes/no)", "yes", "Nilpotent groups are solvable."},
+		{"Does direct product of p-groups give nilpotent? (yes/no)", "yes", "Product of its Sylow subgroups."},
+	}
+	hard := []entry{
+		{"Is upper unitriangular group nilpotent? (yes/no)", "yes", "Heisenberg group nilpotent."},
+		{"Is S_3 nilpotent? (yes/no)", "no", "S_3 not nilpotent (nor its Sylow structure)."},
+		{"Does nilpotent have central series reaching G? (yes/no)", "yes", "Upper central series."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type tensorGen struct{}
+
+func (g *tensorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is tensor product M⊗_R N bilinear? (yes/no)", "yes", "Universal bilinear property."},
+		{"Does Z/mZ ⊗ Z/nZ ≅ Z/gcd(m,n)Z? (yes/no)", "yes", "Tensor of cyclic groups."},
+		{"Is M⊗_R R ≅ M? (yes/no)", "yes", "R is identity for ⊗."},
+	}
+	hard := []entry{
+		{"Does tensor product preserve exactness on the right? (yes/no)", "yes", "Right exact."},
+		{"Is Q⊗_Z Z/nZ =0? (yes/no)", "yes", "Q divisible, tensor kills torsion."},
+		{"Does localization satisfy S^{-1}R⊗_R M ≅ S^{-1}M? (yes/no)", "yes", "Base change."},
+	}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type solvableGen struct{}
+
+func (g *solvableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q string
+		a string
+		e string
+	}
+	easy := []entry{
+		{"Is solvable group one with subnormal series with abelian quotients? (yes/no)", "yes", "Derived series reaches 1."},
+		{"Is S_3 solvable? (yes/no)", "yes", "S_3 has series 1◃A_3◃S_3 with abelian quotients."},
+		{"Is S_5 solvable? (yes/no)", "no", "S_n for n≥5 non-solvable."},
+	}
+	hard := []entry{
+		{"Does Galois solvability correspond to group solvability? (yes/no)", "yes", "Polynomial solvable by radicals iff Galois group solvable."},
+		{"Is every p-group solvable? (yes/no)", "yes", "p-groups nilpotent ⇒ solvable."},
+		{"Does composition series refine solvable series? (yes/no)", "yes", "Jordan-Hölder."},
 	}
 	pool := easy
 	if scale > 3 {
