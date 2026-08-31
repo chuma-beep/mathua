@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Nilpotent and Solvable Groups",
+    "section": "Hierarchy",
+    "subgoals": [
+      "Review Hierarchy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Nilpotent and Solvable Groups — practice 2",
+    "section": "Hierarchy",
+    "subgoals": [
+      "Review Hierarchy",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Nilpotent and Solvable Groups — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

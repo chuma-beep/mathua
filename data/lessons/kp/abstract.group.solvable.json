@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solvable Groups and Composition Series",
+    "section": "Solvability",
+    "subgoals": [
+      "Review Solvability",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Solvable Groups and Composition Series — practice 2",
+    "section": "Solvability",
+    "subgoals": [
+      "Review Solvability",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Solvable Groups and Composition Series — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]

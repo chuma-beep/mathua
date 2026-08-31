@@ -289,5 +289,76 @@
       "streak": 10,
       "avg_time_seconds": 32.0
     }
+  },
+  {
+    "id": "abstract.rings.localization",
+    "label": "Localization of rings",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.rings.ufd"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.field.finite",
+    "label": "Finite fields",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.field.extension"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.group.nilpotent",
+    "label": "Nilpotent and solvable groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.sylow"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.structures.tensor",
+    "label": "Tensor products of modules",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.structures.module",
+      "abstract.rings.localization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.group.solvable",
+    "label": "Solvable groups and composition series",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.nilpotent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

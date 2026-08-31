@@ -2258,5 +2258,25 @@
   {
     "concept_id": "complex.adv.schwarz_lemma",
     "source": "teaching/complex.schwarz.md"
+  },
+  {
+    "concept_id": "abstract.rings.localization",
+    "source": "teaching/abstract.rings.localization.md"
+  },
+  {
+    "concept_id": "abstract.field.finite",
+    "source": "teaching/abstract.field.finite.md"
+  },
+  {
+    "concept_id": "abstract.group.nilpotent",
+    "source": "teaching/abstract.group.nilpotent.md"
+  },
+  {
+    "concept_id": "abstract.structures.tensor",
+    "source": "teaching/abstract.structures.tensor.md"
+  },
+  {
+    "concept_id": "abstract.group.solvable",
+    "source": "teaching/abstract.group.solvable.md"
   }
 ]

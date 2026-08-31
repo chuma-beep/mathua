@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tensor Products of Modules",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Tensor Products of Modules — practice 2",
+    "section": "Properties",
+    "subgoals": [
+      "Review Properties",
+      "Work the example",
+      "Verify"
+    ]
+  },
+  {
+    "label": "Tensor Products of Modules — practice 3",
+    "section": "Example",
+    "subgoals": [
+      "Review Example",
+      "Work the example",
+      "Verify"
+    ]
+  }
+]
