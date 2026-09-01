@@ -97,11 +97,23 @@ func (a *AuthService) Login(username, password string) (string, *storage.Student
 
 func (a *AuthService) ValidateToken(tokenStr string) (string, error) {
 	claims := &Claims{}
-	_, err := jwt.ParseWithClaims(tokenStr, claims, func(t *jwt.Token) (interface{}, error) {
+	tok, err := jwt.ParseWithClaims(tokenStr, claims, func(t *jwt.Token) (interface{}, error) {
+		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, jwt.ErrSignatureInvalid
+		}
+		if t.Method.Alg() != jwt.SigningMethodHS256.Alg() {
+			return nil, jwt.ErrSignatureInvalid
+		}
 		return getJWTSecret(), nil
 	})
 	if err != nil {
 		return "", err
+	}
+	if !tok.Valid {
+		return "", jwt.ErrSignatureInvalid
+	}
+	if claims.StudentID == "" {
+		return "", jwt.ErrTokenRequiredClaimMissing
 	}
 	return claims.StudentID, nil
 }
