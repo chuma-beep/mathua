@@ -1,10 +1,13 @@
+# Postgres backend is a stub internal/storage/postgres.go:7 — SQLite is the default until implemented
 services:
   mathua:
     build: .
     ports:
-      - "8080:8080"
+      - "${PORT:-8080}:8080"
     environment:
-      - DATABASE_URL=mathua.db
+      - DATABASE_URL=${DATABASE_URL:-sqlite:mathua.db}
       - JWT_SECRET=${JWT_SECRET:-}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-}
+      - PORT=8080
     volumes:
       - mathua_data:/app
