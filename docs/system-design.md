@@ -74,10 +74,17 @@ Five core tables: `students`, `concept_progress`, `sessions`, `attempts`, `quest
 | `username` | TEXT | Unique login identifier |
 | `password_hash` | TEXT | bcrypt hash |
 | `course_id` | TEXT | Active course filter |
-| `xp_total` | INTEGER | Lifetime XP |
-| `xp_today` | INTEGER | Resets via `xp_date` check |
-| `settings` | TEXT (JSON) | Arbitrary key-value settings |
+| `xp_total` | INTEGER | Lifetime XP (`MAX(0, xp_total+?)` floor `sqlite.go:199`) |
+| `xp_today` | INTEGER | Resets via `xp_date` check (`MAX(0, …)`) |
+| `xp_date` | TEXT | Date of `xp_today` bucket (`YYYY-MM-DD`) |
+| `daily_xp_goal` | INTEGER | Daily goal (default 30, `migrate.go:76` drift fix) |
+| `settings` | TEXT (JSON) | Arbitrary key-value settings (`pause_until`, `accommodations.extra_time`) |
 | `diagnostic_completed` | INTEGER | Boolean flag |
+| `share_token` | TEXT | `s_` + 12 random bytes (`engine.go:1270`) |
+| `league` | TEXT | `bronze`→`diamond` (`leaderboard`) |
+| `league_week` | TEXT | ISO week |
+| `league_moved` | INTEGER | Promotion/demotion flag |
+| `created_at` | TEXT | ISO 8601 |
 
 **`concept_progress`**  --  Per-concept student state with SM-2 spaced repetition
 
@@ -128,10 +135,15 @@ Five core tables: `students`, `concept_progress`, `sessions`, `attempts`, `quest
 ### Indexes
 
 - `concept_progress(student_id)`  --  Fast progress lookups
+- `concept_progress(student_id, status, mastered_at)`  --  Weekly leaderboard (`sqlite.go:640` `GetWeeklyLeaderboard`)
 - `sessions(student_id)`  --  Session history
 - `attempts(session_id)`  --  Attempts per session
 - `attempts(student_id, timestamp)`  --  Time-series queries
+- `attempts(student_id, concept_id, timestamp)`  --  Aggregate efficacy `GetAllAttempts` (`sqlite.go:470`)
 - `questions(concept_id)`  --  Question lookup
+- `students(share_token)`  --  Share link lookup (`migrate.go:69`)
+- `active_sessions(student_id)`, `active_sessions(attempt_id)`  --  Session recovery
+- `student_topic_speed(student_id)`  --  Per-topic learning speed
 
 ### SQLite Configuration
 
@@ -164,15 +176,15 @@ The engine is the central orchestrator. It holds references to every subsystem a
 
 | Module | File | Responsibility |
 |--------|------|----------------|
-| **DAG Loader** | `internal/dag/` | Loads `data/concepts/*.json`, validates no cycles or orphaned prerequisites, produces topological sort via Kahn's algorithm |
-| **Scheduler** | `internal/scheduler/` | Selects next concept using priority scoring (recency, mastery, weakness). Maintains 70/30 new/review balance |
-| **Generators** | 18 domain registries | Every problem is generated on demand by a parameterized Go function  --  no static question bank |
-| **Mastery Machine** | `internal/mastery/` | State machine: UNSEEN → LEARNING → PRACTICING → MASTERED (with DECAYING at read time) |
-| **Scoring** | `internal/scoring/` | Two scores: lifetime topic score (permanent) and weekly score (resets Monday) |
-| **Weakness Propagation** | In engine | If a concept's weakness > 0.3, propagates `w * 0.3` to dependents |
-| **Diagnostic** | `internal/diagnostic/` | Binary search CAT on topologically sorted concept graph |
-| **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` |
-| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` |
+| **DAG Loader** | `internal/concepts/` (`loader.go:13`, `dag.go`) | Loads `data/concepts/*.json` + `enrichment.json` heuristics (`Encompasses`, `InterferenceGroup`, `Variants`), validates no cycles/orphans/dup IDs, no singletons, encompass cycles, produces topological sort via Kahn's algorithm |
+| **Scheduler** | `internal/scheduler/` (`scheduler.go:229`, `scheduler.go:87`) | Selects next concept using priority `0.5×days +0.2×(1-mastery)+0.3×weakness +5 if DECAYING +2 layering −3 interference`, interleaving window (no same subdomain in last 2), top-3 dissimilar + 70/30 new/review balance |
+| **Generators** | 17 domain registries (`internal/generator/*`) | Every problem is generated on demand by a parameterized Go function via `Registry.GenerateContext(ctx{Seed,Difficulty})` `generator/registry.go:74` — no static question bank |
+| **Mastery Machine** | `internal/mastery/` (`mastery/machine.go:22`, `sm2.go:15`) | State machine: UNSEEN → LEARNING → PRACTICING → MASTERED (with DECAYING at read time `14d` `scheduler.go:194`), SM-2 scaled by per-topic `learningSpeed 0.5–2.0` `sm2.go:15` |
+| **Scoring** | `internal/scoring/` | Two scores: lifetime topic score (permanent) and weekly score (resets Monday) + `30` daily XP goal `scoring/updater.go:59` |
+| **Weakness Propagation** | In engine `engine.go:1575` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
+| **Diagnostic** | `internal/diagnostic/` (`cat.go:1`, `report.go:11`) | Compressed covering set + info-gain CAT with `±0.3` evidence propagation, per-concept `KnowledgeConfidence 0–1`, frontier at max belief drop, supplemental when `<0.7` |
+| **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (21 courses) |
+| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 570 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
 
 ### DAG (Concept Graph)
 
@@ -322,36 +334,58 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 
 | Middleware | Purpose |
 |-----------|---------|
-| `cors` | Sets `Access-Control-Allow-Origin`, handles OPTIONS (204) |
+| `cors` | Sets `Access-Control-Allow-Origin` from `CORS_ALLOWED_ORIGINS` allowlist (`server.go:32`), handles OPTIONS (204), `Vary: Origin` |
 | `logRequest` | Logs method and path |
-| `authMiddleware` | Reads `Authorization: Bearer <token>`, validates JWT, injects `studentID` into context |
-| `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints |
+| `authMiddleware` | Reads `Authorization: Bearer <token>`, validates `HS256` JWT (`auth.go:98`), injects `studentID` into context |
+| `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints `server.go:70` |
+| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/session`, `/api/answer`, `/api/study/answer`, `/api/quiz/*`, `/api/diagnostic`, `/api/goal/*`, `/api/reviews/*`) `server.go:69` |
+| `shareLimiter` | 10 burst, 6s window on `GET /api/share/*` `server.go:69` |
 
 ### All Routes
 
 | Method | Path | Auth | Purpose |
 |--------|------|------|---------|
-| POST | `/api/auth/signup` | rate-limited | Create account → JWT |
-| POST | `/api/auth/login` | rate-limited | Login → JWT |
+| POST | `/api/auth/signup` | write: authLimiter | Create account → JWT |
+| POST | `/api/auth/login` | write: authLimiter | Login → JWT |
 | GET | `/api/auth/me` | Bearer | Current user + scores |
-| POST | `/api/session` | optional | Start practice session |
-| POST | `/api/answer` | optional | Submit answer → result + next |
-| GET | `/api/progress/` | optional | All concept progress |
-| GET | `/api/scores/` | optional | Aggregated scores |
+| POST | `/api/session` | write: writeLimiter, optional | Start practice session |
+| GET | `/api/session/current` | optional | Peek active question (409 recovery) |
+| POST | `/api/answer` | write: writeLimiter, optional | Submit answer → result + next (`MinAnswerSeconds 0.3` `server.go:30`) |
+| GET | `/api/progress/{student_id}` | optional | All concept progress |
+| GET | `/api/scores/{student_id}` | optional | Aggregated scores |
 | GET | `/api/config` | no | `{auth_enabled: bool}` |
 | GET | `/api/graph` | no | Full DAG node list |
 | GET | `/api/leaderboard` | no | Weekly leaderboard |
-| GET | `/api/courses` | auth | Available courses |
+| GET | `/api/leagues` | auth | Weekly leagues with promotion/demotion |
+| POST | `/api/share` | auth | Enable/disable share link (`s_` token `engine.go:1270`) |
+| GET | `/api/share/{token}` | shareLimiter, public | Read-only parent/teacher report |
+| GET | `/api/courses` | auth | Available courses (21) |
+| GET | `/api/courses/{id}` | auth | Course detail + progress |
 | POST | `/api/courses/{id}/diagnostic` | auth | Set course + activate path |
-| POST | `/api/diagnostic` | no | Start CAT diagnostic |
-| POST | `/api/diagnostic/answer` | no | Submit diagnostic answer |
-| GET | `/api/weaknesses` | auth | Weakness scores by domain |
-| POST | `/api/goals/xp` | auth | Set daily XP goal |
-| GET/PUT | `/api/settings` | auth | Student settings JSON |
-| GET | `/api/reviews/due` | auth | Count due reviews |
-| POST | `/api/reviews/session` | auth | Create review-only session |
-| GET | `/api/lessons` | no | All lessons with progress |
-| GET | `/api/concepts/{id}` | optional | Concept detail |
+| GET | `/api/transcript` | auth | Transcript JSON or `?format=csv` |
+| POST | `/api/diagnostic` | write: writeLimiter | Start CAT diagnostic |
+| POST | `/api/diagnostic/answer` | write: writeLimiter | Submit diagnostic answer (correct+fast) |
+| POST | `/api/goal` | auth | Prerequisite chain for concept_ids |
+| POST | `/api/goal/diagnostic` | write: writeLimiter, optional | Start goal diagnostic |
+| POST | `/api/goal/diagnostic/answer` | write: writeLimiter, optional | Submit goal diagnostic answer (graded via stored problem) |
+| POST | `/api/goal/plan` | write: writeLimiter, optional | Persist diagnostic + readiness report |
+| GET | `/api/weaknesses` | auth | Weakness scores by domain (`weakness >0.2`) |
+| POST | `/api/goals/xp` | auth | Set daily XP goal (1–10000) |
+| GET/PUT | `/api/settings` | auth | Student settings JSON (`pause_until`, `accommodations.extra_time`) |
+| GET | `/api/reviews/due` | auth | Count due reviews (paused → 0) |
+| POST | `/api/reviews/session` | write: writeLimiter, auth | Create review-only session |
+| POST | `/api/reviews/answer` | write: writeLimiter, auth | Submit review answer |
+| GET | `/api/lessons` | no | All lessons with progress (`?student_id=`) |
+| GET | `/api/lessons/body` | no | Single lesson markdown body |
+| GET | `/api/lessons/{id}/practice` | no | Generated/curated practice questions (`?count=5`) — also stores `studyExpected` for cheat prevention `server.go:1150` |
+| GET | `/api/lessons/{id}/kp` | no | KP shards (3 per concept) with worked example |
+| GET | `/api/concepts/{id}` | optional | Concept detail + prereqs/dependents/unlocked |
+| POST | `/api/study/answer` | write: writeLimiter, optional | Study seam `LessonQuiz→SubmitAnswer` (`CONTEXT.md` Seam) — server-stored expected `engine.go:931`, `student_id` impersonation guard `server.go:1594` |
+| POST | `/api/quiz/session` | write: writeLimiter, optional | Quiz every 150 XP at 80% difficulty (`quiz.go:1`) |
+| POST | `/api/quiz/answer` | write: writeLimiter, optional | Submit quiz answer (`TaskQuiz 20` `engine.go:1126`) |
+| GET | `/api/activity` | auth | Daily activity heatmap (`?days=365`) |
+| GET | `/api/efficacy` | auth | First-pass/second-pass efficacy |
+| GET | `/api/efficacy/all` | no | Aggregate efficacy across students |
 | GET | `/api/health` | no | `{"status":"ok"}` |
 
 ### Auth Flow
@@ -442,26 +476,28 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 ## 10. Computerized Adaptive Testing (CAT)
 
-Mathua implements a binary-search CAT to locate a student's knowledge frontier quickly. Instead of testing all ~284 concepts, the diagnostic requires approximately 20–35 questions.
+Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 570 concepts, the diagnostic requires approximately 25–45 adaptive questions.
 
 ![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
-### Algorithm
+### Algorithm (`internal/diagnostic/cat.go:1`, `report.go:11`)
 
 1. Load all concepts in topological order (from the DAG)
-2. Set `Low = 0`, `High = N - 1`
-3. `Position = Low + (High - Low) / 2`
-4. Generate a question for the concept at `Position`
-5. If the student answers **correctly within the time limit**: `Low = Position + 1` (move forward toward harder concepts)
-6. If **incorrect or slow**: `High = Position - 1` (move backward toward foundational concepts)
-7. After 3 consecutive correct answers at the boundary: **frontier is located**
-8. Record a mastery estimate for every concept passed through
+2. Build a minimal covering set via `compressedCover()` over the DAG’s prerequisite closure
+3. Repeatedly pick the concept with maximal `infoGain()` (max entropy reduction at `~0.5` belief)
+4. Generate a question; grade `correct+fast` vs `correct` vs `wrong`
+5. Propagate evidence: **correct** → `+0.3` belief to all prerequisites; **wrong** → `-0.3` to all dependents + related (Bayes conflict weighting)
+6. Track per-concept `KnowledgeConfidence 0–1`; `Frontier` is the highest belief drop between sorted beliefs
+7. Stop when every concept has `≥2` probes and `confidence ≥0.7`; otherwise run `supplementalDiagnostic()` to probe low-confidence concepts
+8. Report `DiagnosticReport{PlacementCourseID, FrontierIdx, GapsByDomain, MasteryLevels, CompletionEstimates}` (`report.go:11`) with `150 XP` completion estimates
 
 ### Key Properties
 
-- **Binary search efficiency**: O(log n) probes, ~20–35 questions vs 284 exhaustive
-- **Optimistic merge**: Retaking the diagnostic does not delete existing progress. New estimates are merged with existing data, always preferring the more optimistic estimate.
-- **Time-bounded**: Each question has a configurable time limit (typically 60s). Slow answers are treated as incorrect for diagnostic purposes.
+- **Covering-set + info-gain efficiency**: `25–45` probes vs `570` exhaustive; `80%` difficulty targeting via `engine.computeDifficulty` `engine.go:157`
+- **Evidence propagation**: correct boosts prereqs, wrong penalizes postrequisites — finds frontier even with conflicting evidence
+- **Mastery + automaticity**: `fast` (`elapsed < timeThreshold`) distinguishes `PRACTICING` vs `LEARNING` placement
+- **Optimistic merge**: Retaking does not delete progress; `ApplyGoalResults` `engine.go:1364` merges with `Practicing/Learning` vs `Unseen`
+- **Time-bounded**: Per-concept `AvgTimeSeconds` threshold; slow answers are `!fast` for diagnostic purposes
 
 ### Goal-Oriented Diagnostic
 
@@ -536,5 +572,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite/PostgreSQL abstracted by an interface), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition, CAT binary-search diagnostics, 18 problem generators, 6+ grading strategies  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite/PostgreSQL abstracted by an interface — `PostgresStore` is a stub `storage/postgres.go:7` `not implemented`; production uses SQLite/Postgres via `DATABASE_URL` with same `Repository`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 17 domain registries (570 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
 

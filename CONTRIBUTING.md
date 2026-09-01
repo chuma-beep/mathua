@@ -48,7 +48,7 @@ Concepts live in per-domain files under `data/concepts/`. Each file is a JSON ar
 ]
 ```
 
-Valid `grading_type` values: `numeric`, `polynomial`, `expression`, `multiple_choice`, `comparison`, `ordering`.
+Valid `grading_type` values: `numeric`, `polynomial`, `expression`, `multiple_choice`, `comparison`, `ordering`, `tuple`, `complex`, `symbolic` (9 total, `internal/concepts/loader.go:297`).
 
 > The prerequisites list is the most important field. What must a student absolutely know before attempting this? If in doubt, add the prerequisite — the graph validator will catch cycles.
 
@@ -63,8 +63,10 @@ import "mathua/internal/generator"
 
 type AddSingleGen struct{}
 
-func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
-    max := int(5 + difficulty*4)
+func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+    // ctx.Seed is hashSeed(studentID|cid|attemptID) set by engine.go:389 via
+    // Registry.GenerateContext(ctx{Seed,Difficulty}) generator/registry.go:74
+    max := int(5 + ctx.Difficulty*4)
     a   := rand.Intn(max) + 2
     b   := rand.Intn(max) + 2
     return generator.Problem{
@@ -75,9 +77,9 @@ func (g *AddSingleGen) Generate(difficulty float64) generator.Problem {
 }
 ```
 
-- Use the `difficulty` parameter to scale operand sizes. At 0.0, trivial. At 1.0, challenging.
+- Use `ctx.Difficulty` (0.0 trivial → 1.0 challenging) to scale operand sizes.
 - Always return an `Explanation` — shown when a student asks to see the solution.
-- Use `math/rand` with a seeded source. No hardcoded problems.
+- Use the global `math/rand` (seeded per-request via `registry.go:84`); no hardcoded problems. `ctx.Seed` is deterministic `hashSeed(student|cid|attemptID)` (`engine.go:389`), no `UnixNano`.
 
 ### 3. Prove it works
 
@@ -87,7 +89,7 @@ Write a fuzz test that asserts 1 000 valid samples:
 func TestAddSingleGen(t *testing.T) {
     g := &AddSingleGen{}
     for i := 0; i < 1000; i++ {
-        p := g.Generate(rand.Float64())
+        p := g.Generate(generator.GeneratorContext{Difficulty: rand.Float64()})
         assert.NotEmpty(t, p.Question)
         assert.NotEmpty(t, p.Answer)
         assert.NotEmpty(t, p.Explanation)
@@ -96,11 +98,13 @@ func TestAddSingleGen(t *testing.T) {
 }
 ```
 
-Run your tests before opening a PR:
+Run your tests before opening a PR (1000 local, 100 lightweight in CI `ci.yml:27` for speed — `make fuzz` is 1000):
 
 ```bash
-go test ./... -count 1000
+go test ./... -count 1
 go run scripts/validate_graph.go
+python3 scripts/audit_lessons.py
+go test ./internal/generator/... -run TestFuzz -count 1000  # local full; CI runs -count 100
 ```
 
 ### 4. (Optional) Write a lesson
@@ -138,12 +142,14 @@ Every lesson should be broken into 1-3 **knowledge points** (KPs), each a subgoa
 
 ## The graph validator
 
-A validator runs on every pull request. It checks two invariants before any merge can happen:
+A validator runs on every pull request. It checks invariants before any merge can happen:
 
-1. **No cycles** — concept A cannot require B while B requires A.
-2. **No orphans** — every prerequisite must exist in the graph.
+1. **No cycles** — including `prerequisites` + `encompasses` edges (`loader.go:334` Kahn’s)
+2. **No orphans** — every `prerequisites`/`encompasses`/`key_prerequisites` must exist (`loader.go:253`)
+3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`loader.go:303`)
+4. **No singleton `interference_group`** (`loader.go:321`), valid `grading_type` enum (9 values `loader.go:297`), `variants` `0.1–1.0` difficulty
 
-A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve, and diagram mappings that point at missing assets or non-existent concepts.
+A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (570 files ×3 =1710 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 102 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
 
 ## Submitting a pull request
 

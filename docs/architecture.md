@@ -58,11 +58,11 @@ Six grader types handled by a single `Router`:
 
 ### Storage — SQLite and Postgres
 
-SQLite for local development. PostgreSQL for production web access and global state. The data schema is identical across both databases, abstracted behind a repository interface.
+SQLite for local development. PostgreSQL production path exists as a stub (`internal/storage/postgres.go:7` `PostgresStore` returns `not implemented`); `cmd/mathua` checks `DATABASE_URL` and falls back to `mathua.db` with a warning when Postgres is requested. The data schema is identical across both databases, abstracted behind a `Repository` interface.
 
 ## Diagnostic — Computerised Adaptive Testing
 
-Locates a student's knowledge frontier using binary search on the topologically sorted concept graph. Reduces the assessment from 291 questions to approximately 20–35.
+Locates a student's knowledge frontier using a compressed covering set + info-gain CAT (`internal/diagnostic/cat.go:1`, `internal/diagnostic/report.go:11`). The engine builds a minimal covering set of the DAG, repeatedly picks the concept with maximal entropy reduction, propagates `+0.3` evidence to prerequisites on correct and `-0.3` to dependents on incorrect, and tracks per-concept `KnowledgeConfidence 0–1`. The frontier is the highest belief drop; a supplemental diagnostic runs when confidence `<0.7`. Assessment is 25–45 adaptive questions (vs 570 exhaustive) with `80%` difficulty targeting via `engine.computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty` 0.3–1.0).
 
 ## Full documentation
 
