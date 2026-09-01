@@ -12,13 +12,13 @@ import (
 func testPlanner(t *testing.T) *Planner {
 	t.Helper()
 	d, err := concepts.Build([]concepts.Concept{
-		{ID: "a", Domain: "d", Prerequisites: []string{},
+		{ID: "a", Label: "Concept A", Domain: "d", Subdomain: "s-a", Prerequisites: []string{},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "b", Domain: "d", Prerequisites: []string{"a"},
+		{ID: "b", Label: "Concept B", Domain: "d", Subdomain: "s-b", Prerequisites: []string{"a"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "c", Domain: "d", Prerequisites: []string{"a"},
+		{ID: "c", Label: "Concept C", Domain: "d", Subdomain: "s-c", Prerequisites: []string{"a"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "d", Domain: "d", Prerequisites: []string{"b", "c"},
+		{ID: "d", Label: "Concept D", Domain: "d", Subdomain: "s-d", Prerequisites: []string{"b", "c"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
 	})
 	if err != nil {
@@ -111,8 +111,8 @@ func TestLoad_RealData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load real data: %v", err)
 	}
-	if len(p.Courses()) != 19 {
-		t.Errorf("expected 19 courses, got %d", len(p.Courses()))
+	if len(p.Courses()) != 21 {
+		t.Errorf("expected 21 courses, got %d", len(p.Courses()))
 	}
 	// Check that 4th grade chain has reasonable size
 	path, err := p.PathForCourse("4")

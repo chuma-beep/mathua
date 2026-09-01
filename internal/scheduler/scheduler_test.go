@@ -107,13 +107,13 @@ func TestUpdateLearningSpeed_ReactsToPerformance(t *testing.T) {
 func miniDAG(t *testing.T) *concepts.DAG {
 	t.Helper()
 	d, err := concepts.Build([]concepts.Concept{
-		{ID: "a", Domain: "d", Prerequisites: []string{},
+		{ID: "a", Label: "Concept A", Domain: "d", Subdomain: "s-a", Prerequisites: []string{},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "b", Domain: "d", Prerequisites: []string{"a"},
+		{ID: "b", Label: "Concept B", Domain: "d", Subdomain: "s-b", Prerequisites: []string{"a"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "c", Domain: "d", Prerequisites: []string{"a"},
+		{ID: "c", Label: "Concept C", Domain: "d", Subdomain: "s-c", Prerequisites: []string{"a"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "d", Domain: "d", Prerequisites: []string{"b", "c"},
+		{ID: "d", Label: "Concept D", Domain: "d", Subdomain: "s-d", Prerequisites: []string{"b", "c"},
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
 	})
 	if err != nil {
@@ -465,9 +465,9 @@ func TestNextSmart_InterleavingWindow_ExcludesSameSubdomain(t *testing.T) {
 
 func TestNextSmart_NonInterferencePenalty(t *testing.T) {
 	raw := []concepts.Concept{
-		{ID: "x", Domain: "d", Subdomain: "s1", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "y", Domain: "d", Subdomain: "s2", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "z", Domain: "d", Subdomain: "s3", InterferenceGroup: "", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "x", Label: "Concept X", Domain: "d", Subdomain: "s1", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "y", Label: "Concept Y", Domain: "d", Subdomain: "s2", InterferenceGroup: "g", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "z", Label: "Concept Z", Domain: "d", Subdomain: "s3", InterferenceGroup: "", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
 	}
 	d, err := concepts.Build(raw)
 	if err != nil {
