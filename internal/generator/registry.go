@@ -79,11 +79,12 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 		return Problem{}, fmt.Errorf("no generator registered for concept %q", conceptID)
 	}
 	// Seed global rand from ctx.Seed if provided (per-question seeded via hash of
-	// StudentID+ConceptID+AttemptID). Use mutex to avoid racing on global source.
+	// StudentID+ConceptID+AttemptID). Use mutex only for the Seed call so
+	// generation itself is not serialized.
 	if ctx.Seed != 0 {
 		r.randMu.Lock()
 		rand.Seed(ctx.Seed)
-		defer r.randMu.Unlock()
+		r.randMu.Unlock()
 	}
 	p := gen.Generate(ctx)
 	p.Question = latex.Canonicalize(p.Question, latex.Generators)
@@ -114,7 +115,7 @@ func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx Generat
 	if ctx.Seed != 0 {
 		r.randMu.Lock()
 		rand.Seed(ctx.Seed)
-		defer r.randMu.Unlock()
+		r.randMu.Unlock()
 	}
 	problems := make([]Problem, 0, count)
 	seen := make(map[string]bool)
