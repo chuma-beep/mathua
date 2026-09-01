@@ -40,17 +40,25 @@ Mathua is a local-first adaptive math learning engine inspired by the mastery-ga
 ## Getting started
 
 ### Build from source
-
 ```bash
 git clone https://github.com/chuma-beep/mathua.git
 cd mathua
-go build ./cmd/mathua
 
-# Run the web server (requires Postgres)
-DATABASE_URL=postgres://... ./mathua --serve --port 8080
+go build -o bin/mathua ./cmd/mathua
+
+# SQLite (zero-config, recommended — Postgres is a stub internal/storage/postgres.go:7)
+./bin/mathua --serve --port 8080
+# Or with DATABASE_URL explicitly
+DATABASE_URL=sqlite:mathua.db ./bin/mathua --serve --port 8080
+# Postgres path exists but falls back to SQLite with a warning (cmd/mathua/main.go:57):
+DATABASE_URL=postgres://user:pass@host/mathua ./bin/mathua --serve --port 8080
+# Or copy env file first
+cp .env.example .env  # edit JWT_SECRET / CORS_ALLOWED_ORIGINS if needed
 ```
 
 > **Requirements:** Go 1.21+. Python 3.8+ with `sympy` (optional — enables mathematical expression equivalence grading for algebra and beyond).
+>
+> **Env:** `DATABASE_URL` (default `sqlite:mathua.db`), `PORT` (default `8080`), `JWT_SECRET` (hex 32 bytes or raw ≥32 chars, else random per run `internal/auth/auth.go:22`), `CORS_ALLOWED_ORIGINS` (comma-separated allowlist, empty = allow all dev `internal/server/server.go:32`). See `.env.example`.
 
 ---
 
@@ -148,10 +156,10 @@ go test ./...
 
 # Validate the concept graph (no cycles, no orphans)
 go run scripts/validate_graph.go
-python3 scripts/audit_lessons.py  # lessons + KP shards + diagrams + course targets
+python3 scripts/audit_lessons.py  # lessons + KP shards + diagrams + course targets (570 files ×3 =1710 KPs)
 
-# Generator fuzz — 1000 samples per generator
-go test ./internal/generator/... -run TestFuzz -count 1000
+# Generator fuzz — 1000 local (make fuzz), 100 lightweight in CI (.github/workflows/ci.yml:27)
+go test ./internal/generator/... -run TestFuzz -count 1000  # local full; CI runs -count 100 for speed
 ```
 
 ---
@@ -162,13 +170,15 @@ go test ./internal/generator/... -run TestFuzz -count 1000
 # Build for Linux
 GOOS=linux GOARCH=amd64 go build -o mathua ./cmd/mathua
 
-# Run
-DATABASE_URL=postgres://user:pass@host/mathua \
-PORT=8080 \
-./mathua --serve
+# Run (SQLite — recommended, zero-config)
+./mathua --serve --port 8080
+# Or with Postgres env (stub internal/storage/postgres.go:7 — warns and falls back to SQLite)
+DATABASE_URL=postgres://user:pass@host/mathua PORT=8080 ./mathua --serve
 
-# Or with Docker Compose
+# Or with Docker Compose (SQLite volume by default docker-compose.yml:1)
 docker compose up
+# Or with env file
+cp .env.example .env && docker compose up
 ```
 
 The server is available at `http://localhost:8080`. A `Dockerfile` and `docker-compose.yml` are included in the repo.
