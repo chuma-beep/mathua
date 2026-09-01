@@ -95,6 +95,8 @@ type Engine struct {
 	studyMisses map[string]int
 	// PR 1.5: stable per-student session id for study/quiz attempt FK.
 	studySessions map[string]string
+	// H1b: server-side expected answers for study seam to prevent client cheat
+	studyExpected map[string]string
 }
 
 func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner) *Engine {
@@ -114,7 +116,28 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		activePath:    make(map[string]map[string]bool),
 		studyMisses:   make(map[string]int),
 		studySessions: make(map[string]string),
+		studyExpected: make(map[string]string),
 	}
+}
+
+func (e *Engine) SetStudyExpected(studentID, conceptID, expected string) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	if e.studyExpected == nil {
+		e.studyExpected = make(map[string]string)
+	}
+	e.studyExpected[studentID+"|"+conceptID] = expected
+}
+
+func (e *Engine) popStudyExpected(studentID, conceptID string) (string, bool) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	key := studentID + "|" + conceptID
+	val, ok := e.studyExpected[key]
+	if ok {
+		delete(e.studyExpected, key)
+	}
+	return val, ok
 }
 
 func (e *Engine) CreateStudent(name string) (*storage.Student, error) {
@@ -363,7 +386,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
 	prevQuestion := as.questionText
 	attemptID := newAttemptID()
-	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID)
 	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
 	prob, err := e.registry.GenerateContext(next.Concept.ID, ctx)
 	if err != nil {
@@ -452,7 +475,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
 	prevQuestion := as.questionText
 	attemptID := newAttemptID()
-	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID)
 	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
 	prob, err := e.registry.GenerateContext(next.Concept.ID, ctx)
 	if err != nil {
@@ -652,14 +675,11 @@ func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string
 }
 
 func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, elapsedSeconds float64) (*AnswerResult, error) {
-	// Hold e.mu for the whole grade + advance cycle so a concurrent
-	// SubmitAnswer/NextQuestion pair can never grade against a question the
-	// client was not shown. The `answered` flag rejects duplicate/stale
-	// submissions for the same question, and the per-question attemptID
-	// rejects submissions for questions the session has already moved past.
+	// Narrow critical section: snapshot the active question under lock, mark
+	// answered to reject concurrent duplicates, then release before blocking
+	// I/O (grading + DB). This prevents a 12s SymPy grading call from
+	// serializing NextQuestion for all users.
 	e.mu.Lock()
-	defer e.mu.Unlock()
-
 	as := e.sessions[sessionID]
 	if as == nil {
 		if persisted := e.rehydrateActiveSession(sessionID, studentID); persisted != nil {
@@ -668,6 +688,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		}
 	}
 	if as == nil || as.conceptID == "" || as.answered || as.attemptID != attemptID {
+		e.mu.Unlock()
 		return nil, fmt.Errorf("%w for session %q", ErrNoActiveQuestion, sessionID)
 	}
 	sessionFields := struct {
@@ -685,6 +706,10 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		timeThreshold:  as.timeThreshold,
 		isReview:       as.isReview,
 	}
+	// Mark answered while still holding the lock so a concurrent
+	// SubmitAnswer for the same attemptID is rejected as ErrNoActiveQuestion.
+	as.answered = true
+	e.mu.Unlock()
 
 	gr := e.gradeAnswer(sessionFields.conceptID, sessionFields.expectedAnswer, answer)
 
@@ -868,18 +893,20 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		}
 	}
 
+	e.mu.Lock()
+	// Re-acquire to update session counters and clear the answered question.
+	// as is still the same pointer we marked answered=true above.
 	as.lastConceptID = as.conceptID
 	if as.isReview {
 		as.sessionReview++
 	} else {
 		as.sessionNew++
 	}
-	as.answered = true
-	// Keep attemptID unique to avoid UNIQUE constraint collision on tombstone.
-	// as.attemptID remains the last question's ID (unique per session).
+	// answered already true from the early mark; keep it true.
 	as.conceptID = ""
 	as.questionText = ""
 	e.persistActiveSession(sessionID, studentID, as, "")
+	e.mu.Unlock()
 
 	return &AnswerResult{
 		Correct:        gr.Correct,
@@ -898,19 +925,31 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 // SubmitStudyAnswer records a Study-library answer (LessonQuiz seam per CONTEXT.md: Seam).
 // It grades via the concept's grading_type, updates mastery/SM-2/weakness/XP, and
 // awards TaskMultistep 15 for *.word else TaskLesson 10 (Q2 lock).
+// H1b: if a server-side expected was stored via SetStudyExpected (practice
+// generation), it is used instead of the client-supplied expected to prevent
+// trivial cheat (client sending expected==answer).
 func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
+	if stored, ok := e.popStudyExpected(studentID, conceptID); ok && stored != "" {
+		expected = stored
+	}
+	// Narrow lock: only protect studySessions lookup/creation and studyMisses update.
 	e.mu.Lock()
-	defer e.mu.Unlock()
-
-	// PR 1.5: ensure a real session row exists so attempts.session_id FK holds.
 	sessionID := e.studySessions[studentID]
+	e.mu.Unlock()
 	if sessionID == "" {
 		s, err := e.repo.CreateSession(studentID)
 		if err != nil {
 			return nil, fmt.Errorf("create study session: %w", err)
 		}
 		sessionID = s.ID
-		e.studySessions[studentID] = sessionID
+		e.mu.Lock()
+		// Double-check after re-acquiring to avoid race creating duplicate sessions
+		if existing := e.studySessions[studentID]; existing != "" {
+			sessionID = existing
+		} else {
+			e.studySessions[studentID] = sessionID
+		}
+		e.mu.Unlock()
 	}
 
 	c := e.dag.Concept(conceptID)
@@ -1049,6 +1088,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 	// PR 1.5: negative XP for rushing/guessing + halt flag at 2 consecutive misses.
 	missKey := studentID + "|" + conceptID
 	halted := false
+	e.mu.Lock()
 	if !gr.Correct {
 		e.studyMisses[missKey]++
 		if e.studyMisses[missKey] >= 2 {
@@ -1060,6 +1100,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 	} else {
 		delete(e.studyMisses, missKey)
 	}
+	e.mu.Unlock()
 	if xp != 0 {
 		if err := e.repo.AddXP(studentID, xp); err != nil {
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
@@ -1441,7 +1482,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 
 	difficulty := e.computeDifficulty(studentID, conceptID)
 	attemptID := newAttemptID()
-	seedBase := hashSeed(studentID + "|" + conceptID + "|" + attemptID + fmt.Sprintf("|%d", time.Now().UnixNano()))
+	seedBase := hashSeed(studentID + "|" + conceptID + "|" + attemptID)
 	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
 	prob, err := e.registry.GenerateContext(conceptID, ctx)
 	if err != nil {

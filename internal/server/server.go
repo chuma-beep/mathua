@@ -1142,6 +1142,11 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			}
 			questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
 		}
+		if studentID, _ := r.Context().Value(authStudentKey{}).(string); studentID != "" && len(dbQs) > 0 {
+			s.eng.SetStudyExpected(studentID, conceptID, dbQs[0].Answer)
+		} else if sid := r.URL.Query().Get("student_id"); sid != "" && len(dbQs) > 0 {
+			s.eng.SetStudyExpected(sid, conceptID, dbQs[0].Answer)
+		}
 		writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
 		return
 	}
@@ -1156,6 +1161,12 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		writeError(w, err.Error(), 404)
 		return
+	}
+	// H1b: store server-side expected for study cheat prevention when student is known
+	if studentID, _ := r.Context().Value(authStudentKey{}).(string); studentID != "" && len(problems) > 0 {
+		s.eng.SetStudyExpected(studentID, conceptID, problems[0].Answer)
+	} else if sid := r.URL.Query().Get("student_id"); sid != "" && len(problems) > 0 {
+		s.eng.SetStudyExpected(sid, conceptID, problems[0].Answer)
 	}
 	questions := make([]qInfo, len(problems))
 	for i, p := range problems {
