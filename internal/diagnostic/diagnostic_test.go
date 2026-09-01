@@ -23,7 +23,9 @@ func testDAG(t *testing.T) *concepts.DAG {
 	for i := range raw {
 		raw[i] = concepts.Concept{
 			ID:               idFor(i),
+			Label:            "Concept " + idFor(i),
 			Domain:           "d",
+			Subdomain:        "s-" + idFor(i),
 			Prerequisites:    prereqsFor(i),
 			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10},
 		}

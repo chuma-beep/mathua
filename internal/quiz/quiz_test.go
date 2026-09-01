@@ -19,9 +19,9 @@ func (f *fakeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 func miniDAG(t *testing.T) *concepts.DAG {
 	t.Helper()
 	d, err := concepts.Build([]concepts.Concept{
-		{ID: "a", Domain: "d", Subdomain: "s1", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "b", Domain: "d", Subdomain: "s2", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
-		{ID: "c", Domain: "d", Subdomain: "s3", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "a", Label: "Concept A", Domain: "d", Subdomain: "s1", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "b", Label: "Concept B", Domain: "d", Subdomain: "s2", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c", Label: "Concept C", Domain: "d", Subdomain: "s3", Prerequisites: []string{}, MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
 	})
 	if err != nil {
 		t.Fatalf("build: %v", err)
