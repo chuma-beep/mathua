@@ -200,8 +200,8 @@ func (s *SQLiteStore) AddXP(studentID string, amount int) error {
 	today := time.Now().UTC().Format("2006-01-02")
 	_, err := s.db.Exec(`
 		UPDATE students
-		SET xp_total = xp_total + ?,
-		    xp_today = CASE WHEN xp_date = ? THEN xp_today + ? ELSE ? END,
+		SET xp_total = MAX(0, xp_total + ?),
+		    xp_today = CASE WHEN xp_date = ? THEN MAX(0, xp_today + ?) ELSE MAX(0, ?) END,
 		    xp_date  = ?
 		WHERE id = ?
 	`, amount, today, amount, amount, today, studentID)

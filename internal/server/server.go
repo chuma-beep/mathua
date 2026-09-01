@@ -1605,7 +1605,12 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "expected required", 400)
 		return
 	}
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if authStudentID != "" && req.StudentID != "" && req.StudentID != authStudentID {
+		writeError(w, "student_id does not match authenticated user", 403)
+		return
+	}
+	studentID := authStudentID
 	if studentID == "" {
 		studentID = req.StudentID
 	}
@@ -1659,7 +1664,12 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 		StudentID string `json:"student_id"`
 	}
 	_ = decodeJSON(w, r, &req)
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if authStudentID != "" && req.StudentID != "" && req.StudentID != authStudentID {
+		writeError(w, "student_id does not match authenticated user", 403)
+		return
+	}
+	studentID := authStudentID
 	if studentID == "" {
 		studentID = req.StudentID
 	}
@@ -1750,12 +1760,21 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "concept_id does not match current question", 400)
 		return
 	}
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if authStudentID != "" && req.StudentID != "" && req.StudentID != authStudentID {
+		writeError(w, "student_id does not match authenticated user", 403)
+		return
+	}
+	studentID := authStudentID
 	if studentID == "" {
 		studentID = req.StudentID
 		if studentID == "" {
 			studentID = sess.StudentID
 		}
+	}
+	if authStudentID != "" && sess.StudentID != "" && sess.StudentID != authStudentID {
+		writeError(w, "quiz session does not belong to authenticated user", 403)
+		return
 	}
 	// Grade via DAG grading_type
 	concept := s.eng.GetDAG().Concept(req.ConceptID)
