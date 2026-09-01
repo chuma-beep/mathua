@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, enableShare, disableShare } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
@@ -39,6 +39,8 @@ export default function ProfilePage() {
   const [dueReviews, setDueReviews] = useState(0)
   const [courses, setCourses] = useState<CourseStatus[]>([])
   const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
+  const [shareUrl, setShareUrl] = useState('')
+  const [shareBusy, setShareBusy] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -372,6 +374,27 @@ export default function ProfilePage() {
             </div>
           </section>
         )}
+
+        {/* Share with parent/teacher — read-only oversight */}
+        <section className="mt-10 min-w-0 border border-mathua-border bg-mathua-surface p-4">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary">Share with parent / teacher</h2>
+            <Link href="/settings" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider">Settings →</Link>
+          </div>
+          <p className="font-mono text-xs text-mathua-secondary mb-3">Generate a read-only link to this student’s progress, activity, and weak spots. Share token is <span className="text-mathua-muted">s_ + 12 random bytes</span> (<span className="font-mono text-[10px]">engine.go:1270</span>) and is rate-limited (<span className="font-mono text-[10px]">server.go:69</span>).</p>
+          {shareUrl ? (
+            <div className="min-w-0">
+              <input readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} className="w-full bg-mathua-code border border-mathua-border h-10 px-3 font-mono text-xs text-mathua-primary focus:outline-none focus:border-mathua-blue min-w-0" />
+              <div className="flex gap-2 mt-2">
+                <button onClick={() => { navigator.clipboard?.writeText(shareUrl) }} className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-4 h-9 font-mono text-xs">Copy link</button>
+                <button onClick={async () => { setShareBusy(true); try { await disableShare(); setShareUrl('') } finally { setShareBusy(false) } }} disabled={shareBusy} className="border border-mathua-red text-mathua-red hover:bg-mathua-red hover:text-white px-4 h-9 font-mono text-xs disabled:opacity-50">Disable share</button>
+                <a href={shareUrl} target="_blank" rel="noopener" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-9 font-mono text-xs inline-flex items-center justify-center">Open →</a>
+              </div>
+            </div>
+          ) : (
+            <button onClick={async () => { setShareBusy(true); try { const res = await enableShare(); setShareUrl(`${window.location.origin}/share?token=${res.token}`) } catch { } finally { setShareBusy(false) } }} disabled={shareBusy} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center disabled:opacity-50">{shareBusy ? 'Generating…' : 'Enable share link'}</button>
+          )}
+        </section>
 
         {/* Transcript — accreditation-track course completion */}
         {courses.length > 0 && (
