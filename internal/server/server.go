@@ -1635,6 +1635,9 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	if req.Elapsed > 600 {
 		req.Elapsed = 600
 	}
+	if req.Elapsed > 0 && req.Elapsed < MinAnswerSeconds {
+		req.Elapsed = MinAnswerSeconds
+	}
 	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed)
 	if err != nil {
 		writeError(w, "failed to submit study answer", 500)

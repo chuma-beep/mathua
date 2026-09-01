@@ -125,10 +125,10 @@ func gradeSymPy(expected, answer string) Result {
 		}
 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 12*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	// Ensure pooled process is alive, guarded by mutex
+	// Ensure pooled process is alive, guarded by mutex (held across I/O — pool is single stdin/stdout)
 	sympyMu.Lock()
 	defer sympyMu.Unlock()
 
