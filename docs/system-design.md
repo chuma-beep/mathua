@@ -159,12 +159,12 @@ Migrations are embedded directly in the application binary  --  no external migr
 
 ### Dual-Database Strategy
 
-The `Repository` interface abstracts the storage layer:
+The `Repository` interface abstracts the storage layer (`store.go:127`):
 
-- **SQLiteStore**  --  Fully implemented, used for local development
-- **PostgresStore**  --  Stub (not yet implemented; every method returns "not implemented")
+- **SQLiteStore**  --  Fully implemented (`sqlite.go:1`, `WAL` `migrate.go:23`), used for local dev and `DATABASE_URL=sqlite:mathua.db` / `:memory:` tests
+- **PostgresStore**  --  Fully implemented via `pgx/v5/stdlib` (`postgres.go:7` `pgSchema`, `$1` placeholders, `GREATEST` for XP floor, `STRING_AGG` for activity, `RANDOM()` for questions) — used when `DATABASE_URL=postgres://` `main.go:57`
 
-The codebase checks `DATABASE_URL` at startup and falls back to `mathua.db` with a warning if PostgreSQL is specified.
+The codebase checks `DATABASE_URL` at startup and opens `pgx` for `postgres://` else `SQLite` (`mathua.db`).
 
 ---
 
@@ -572,5 +572,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite/PostgreSQL abstracted by an interface — `PostgresStore` is a stub `storage/postgres.go:7` `not implemented`; production uses SQLite/Postgres via `DATABASE_URL` with same `Repository`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 17 domain registries (570 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:7` / `storage/sqlite.go:1`, same `Repository` `store.go:127`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 17 domain registries (570 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
 

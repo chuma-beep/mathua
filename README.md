@@ -46,11 +46,11 @@ cd mathua
 
 go build -o bin/mathua ./cmd/mathua
 
-# SQLite (zero-config, recommended — Postgres is a stub internal/storage/postgres.go:7)
+# SQLite (zero-config, local)
 ./bin/mathua --serve --port 8080
 # Or with DATABASE_URL explicitly
 DATABASE_URL=sqlite:mathua.db ./bin/mathua --serve --port 8080
-# Postgres path exists but falls back to SQLite with a warning (cmd/mathua/main.go:57):
+# Postgres for multi-user (via pgx/v5, implemented internal/storage/postgres.go:7)
 DATABASE_URL=postgres://user:pass@host/mathua ./bin/mathua --serve --port 8080
 # Or copy env file first
 cp .env.example .env  # edit JWT_SECRET / CORS_ALLOWED_ORIGINS if needed
@@ -58,7 +58,7 @@ cp .env.example .env  # edit JWT_SECRET / CORS_ALLOWED_ORIGINS if needed
 
 > **Requirements:** Go 1.21+. Python 3.8+ with `sympy` (optional — enables mathematical expression equivalence grading for algebra and beyond).
 >
-> **Env:** `DATABASE_URL` (default `sqlite:mathua.db`), `PORT` (default `8080`), `JWT_SECRET` (hex 32 bytes or raw ≥32 chars, else random per run `internal/auth/auth.go:22`), `CORS_ALLOWED_ORIGINS` (comma-separated allowlist, empty = allow all dev `internal/server/server.go:32`). See `.env.example`.
+> **Env:** `DATABASE_URL` (`sqlite:mathua.db` default, or `postgres://` for production via `pgx` `postgres.go:7` / `main.go:57`), `PORT` (default `8080`), `JWT_SECRET` (hex 32 bytes or raw ≥32 chars, else random per run `internal/auth/auth.go:22`), `CORS_ALLOWED_ORIGINS` (comma-separated allowlist, empty = allow all dev `internal/server/server.go:32`). See `.env.example`.
 
 ---
 
@@ -170,12 +170,12 @@ go test ./internal/generator/... -run TestFuzz -count 1000  # local full; CI run
 # Build for Linux
 GOOS=linux GOARCH=amd64 go build -o mathua ./cmd/mathua
 
-# Run (SQLite — recommended, zero-config)
+# Run (SQLite — local)
 ./mathua --serve --port 8080
-# Or with Postgres env (stub internal/storage/postgres.go:7 — warns and falls back to SQLite)
+# Or Postgres for production (implemented via pgx internal/storage/postgres.go:7)
 DATABASE_URL=postgres://user:pass@host/mathua PORT=8080 ./mathua --serve
 
-# Or with Docker Compose (SQLite volume by default docker-compose.yml:1)
+# Or with Docker Compose (SQLite default, Postgres supported via DATABASE_URL)
 docker compose up
 # Or with env file
 cp .env.example .env && docker compose up

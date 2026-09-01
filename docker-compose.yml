@@ -1,4 +1,4 @@
-# Postgres backend is a stub internal/storage/postgres.go:7 — SQLite is the default until implemented
+# Postgres via pgx (postgres.go:7) and SQLite both supported; SQLite is default for local
 services:
   mathua:
     build: .
