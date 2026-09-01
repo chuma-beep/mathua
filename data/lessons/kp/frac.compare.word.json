@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Word Problems",
+    "section": "Word Problems",
+    "subgoals": [
+      "Read problem",
+      "Identify fractions",
+      "Set up operation"
+    ]
+  },
+  {
+    "label": "Strategy",
+    "section": "Strategy",
+    "subgoals": [
+      "Choose strategy",
+      "Execute steps",
+      "Check answer"
+    ]
+  },
+  {
+    "label": "Practice",
+    "section": "Practice",
+    "subgoals": [
+      "Solve accurately",
+      "Solve quickly",
+      "Explain solution"
+    ]
+  }
+]

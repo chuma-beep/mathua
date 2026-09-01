@@ -16,14 +16,14 @@
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat-square&logo=go&logoColor=white)](https://golang.org)
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![License](https://img.shields.io/badge/license-MIT-c8a96e?style=flat-square)](LICENSE)
-[![Concepts](https://img.shields.io/badge/concepts-570-a8a0f0?style=flat-square)](#content)
+[![Concepts](https://img.shields.io/badge/concepts-580-a8a0f0?style=flat-square)](#content)
 [![Domains](https://img.shields.io/badge/domains-17-c8a96e?style=flat-square)](#content)
 
 </div>
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 570 atomic concepts and 21 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1710 worked examples (570 KP shard files × 3 subgoals each) with subgoal labels and 102 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, transcripts, and graph visualisation.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 580 atomic concepts and 21 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1740 worked examples (580 KP shard files × 3 subgoals each) with subgoal labels and 102 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, transcripts, and graph visualisation.
 
 ---
 
@@ -68,7 +68,7 @@ cp .env.example .env  # edit JWT_SECRET / CORS_ALLOWED_ORIGINS if needed
 
 All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic concept — something small enough to fail independently. Each edge is a prerequisite relationship.
 
-The graph contains **570 concepts** across **17 domains** (570 KP shard files × 3 = 1710 KPs). The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
+The graph contains **580 concepts** across **17 domains** (580 KP shard files × 3 = 1740 KPs). The scheduler reads your progress and the graph structure to decide what to show next — it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -106,7 +106,7 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 | Domain | Concepts |
 |--------|----------|
 | Arithmetic | 46 |
-| Fractions | 21 |
+| Fractions | 26 |
 | Pre-Algebra | 40 |
 | Algebra | 84 |
 | Geometry | 22 |
@@ -121,8 +121,8 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 | Differential Equations | 25 |
 | Abstract Algebra | 30 |
 | Machine Learning | 25 |
-| Topology | 25 |
-| **Total** | **570** |
+| Topology | 30 |
+| **Total** | **580** |
 
 ---
 
@@ -156,7 +156,7 @@ go test ./...
 
 # Validate the concept graph (no cycles, no orphans)
 go run scripts/validate_graph.go
-python3 scripts/audit_lessons.py  # lessons + KP shards + diagrams + course targets (570 files ×3 =1710 KPs)
+python3 scripts/audit_lessons.py  # lessons + KP shards + diagrams + course targets (580 files ×3 =1740 KPs)
 
 # Generator fuzz — 1000 local (make fuzz), 100 lightweight in CI (.github/workflows/ci.yml:27)
 go test ./internal/generator/... -run TestFuzz -count 1000  # local full; CI runs -count 100 for speed

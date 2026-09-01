@@ -356,5 +356,80 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "topo.covering",
+    "label": "Covering spaces",
+    "domain": "topology",
+    "subdomain": "topology.covering",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.connected.path",
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.fundamental.van_kampen",
+    "label": "Van Kampen theorem",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "topo.fiber_bundle",
+    "label": "Fiber bundles",
+    "domain": "topology",
+    "subdomain": "topology.manifolds",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.manifold",
+      "topo.covering"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.homology.cellular",
+    "label": "Cellular homology",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.compact"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.cohomology.de_rham",
+    "label": "De Rham cohomology",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "topo.cohomology",
+      "topo.manifold.orientability"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

@@ -2378,5 +2378,45 @@
   {
     "concept_id": "abstract.group.commutator",
     "source": "teaching/abstract.group.commutator.md"
+  },
+  {
+    "concept_id": "topo.covering",
+    "source": "teaching/topology/covering-spaces.md"
+  },
+  {
+    "concept_id": "topo.fundamental.van_kampen",
+    "source": "teaching/topology/van-kampen.md"
+  },
+  {
+    "concept_id": "topo.fiber_bundle",
+    "source": "teaching/topology/fiber-bundles.md"
+  },
+  {
+    "concept_id": "topo.homology.cellular",
+    "source": "teaching/topology/cellular-homology.md"
+  },
+  {
+    "concept_id": "topo.cohomology.de_rham",
+    "source": "teaching/topology/de-rham-cohomology.md"
+  },
+  {
+    "concept_id": "frac.sub.word",
+    "source": "teaching/fractions/subtraction-word.md"
+  },
+  {
+    "concept_id": "frac.mult.word",
+    "source": "teaching/fractions/multiplication-word.md"
+  },
+  {
+    "concept_id": "frac.div.word",
+    "source": "teaching/fractions/division-word.md"
+  },
+  {
+    "concept_id": "frac.mixed.word",
+    "source": "teaching/fractions/mixed-word.md"
+  },
+  {
+    "concept_id": "frac.compare.word",
+    "source": "teaching/fractions/comparison-word.md"
   }
 ]

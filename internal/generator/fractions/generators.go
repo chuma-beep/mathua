@@ -32,6 +32,11 @@ func Register(reg *generator.Registry) {
 	reg.Register("frac.mixed.add", &fracMixedOpGen{op: "+"})
 	reg.Register("frac.mixed.sub", &fracMixedOpGen{op: "-"})
 	reg.Register("frac.mixed.mult", &fracMixedMultGen{})
+	reg.Register("frac.sub.word", &fracSubWordGen{})
+	reg.Register("frac.mult.word", &fracMultWordGen{})
+	reg.Register("frac.div.word", &fracDivWordGen{})
+	reg.Register("frac.mixed.word", &fracMixedWordGen{})
+	reg.Register("frac.compare.word", &fracCompareWordGen{})
 }
 
 func fracStr(num, den int) string { return fmt.Sprintf("%d/%d", num, den) }
@@ -434,5 +439,107 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} \\times %d \\frac{%d}{%d} = ?\\)", w1, n1, den, w2, n2, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d/%d) x (%d/%d) = %d/%d = %s", aImp, den, bImp, den, rn, rd, mixStr(w, r, d)),
+	}
+}
+type fracSubWordGen struct{}
+func (g *fracSubWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
+	aDen := rand.Intn(max(1, scale*2)) + 3
+	bDen := rand.Intn(max(1, scale*2)) + 2
+	for aDen == bDen {
+		bDen = rand.Intn(max(1, scale*2)) + 2
+	}
+	cm := lcm(aDen, bDen)
+	aNum := rand.Intn(aDen-1) + 1
+	bNum := rand.Intn(bDen-1) + 1
+	aS := aNum * (cm / aDen)
+	bS := bNum * (cm / bDen)
+	if aS < bS {
+		aNum, bNum = bNum, aNum
+		aDen, bDen = bDen, aDen
+		aS, bS = bS, aS
+	}
+	result := aS - bS
+	rn, rd := reduce(result, cm)
+	return generator.Problem{
+		Question:    fmt.Sprintf("You had \\(\\frac{%d}{%d}\\) of a cake and gave away \\(\\frac{%d}{%d}\\). How much is left?", aNum, aDen, bNum, bDen),
+		Answer:      fmt.Sprintf("%d/%d", rn, rd),
+		Explanation: fmt.Sprintf("%d/%d - %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
+	}
+}
+type fracMultWordGen struct{}
+func (g *fracMultWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
+	aNum := rand.Intn(max(1, scale)) + 1
+	aDen := rand.Intn(max(1, scale)) + 3
+	bNum := rand.Intn(max(1, scale)) + 1
+	bDen := rand.Intn(max(1, scale)) + 3
+	rn, rd := reduce(aNum*bNum, aDen*bDen)
+	return generator.Problem{
+		Question:    fmt.Sprintf("A recipe needs \\(\\frac{%d}{%d}\\) cup of sugar per serving. You make \\(\\frac{%d}{%d}\\) servings. How much sugar total?", aNum, aDen, bNum, bDen),
+		Answer:      fmt.Sprintf("%d/%d", rn, rd),
+		Explanation: fmt.Sprintf("%d/%d x %d/%d = %d/%d cups", aNum, aDen, bNum, bDen, rn, rd),
+	}
+}
+type fracDivWordGen struct{}
+func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
+	aNum := rand.Intn(max(1, scale)) + 1
+	aDen := rand.Intn(max(1, scale)) + 2
+	bNum := rand.Intn(max(1, scale)) + 1
+	bDen := rand.Intn(max(1, scale)) + 2
+	rn, rd := reduce(aNum*bDen, aDen*bNum)
+	return generator.Problem{
+		Question:    fmt.Sprintf("You have \\(\\frac{%d}{%d}\\) liters of juice. Each glass holds \\(\\frac{%d}{%d}\\) liters. How many glasses can you fill?", aNum, aDen, bNum, bDen),
+		Answer:      fmt.Sprintf("%d/%d", rn, rd),
+		Explanation: fmt.Sprintf("%d/%d ÷ %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
+	}
+}
+type fracMixedWordGen struct{}
+func (g *fracMixedWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
+	w1 := rand.Intn(max(1, scale)) + 1
+	den := rand.Intn(max(1, scale*2)) + 3
+	n1 := rand.Intn(den-1) + 1
+	w2 := rand.Intn(max(1, scale)) + 1
+	n2 := rand.Intn(den-1) + 1
+	aImp := w1*den + n1
+	bImp := w2*den + n2
+	result := aImp + bImp
+	w, r, d := toMixed(result, den)
+	if r == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("You have \\(%d \\frac{%d}{%d}\\) meters of ribbon and buy \\(%d \\frac{%d}{%d}\\) more. Total?", w1, n1, den, w2, n2, den),
+			Answer:      strconv.Itoa(w),
+			Explanation: fmt.Sprintf("%d %d/%d + %d %d/%d = %d meters", w1, n1, den, w2, n2, den, w),
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("You have \\(%d \\frac{%d}{%d}\\) meters of ribbon and buy \\(%d \\frac{%d}{%d}\\) more. Total?", w1, n1, den, w2, n2, den),
+		Answer:      fmt.Sprintf("%d %d/%d", w, r, d),
+		Explanation: fmt.Sprintf("%d %d/%d + %d %d/%d = %d %d/%d", w1, n1, den, w2, n2, den, w, r, d),
+	}
+}
+type fracCompareWordGen struct{}
+func (g *fracCompareWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*5)
+	aNum := rand.Intn(max(1, scale*2)) + 1
+	aDen := rand.Intn(max(1, scale*2)) + 2
+	bNum := rand.Intn(max(1, scale*2)) + 1
+	bDen := rand.Intn(max(1, scale*2)) + 2
+	for aNum*bDen == bNum*aDen {
+		bNum = rand.Intn(max(1, scale*2)) + 1
+	}
+	// Word comparison: who has more?
+	av2 := float64(aNum)/float64(aDen)
+	bv2 := float64(bNum)/float64(bDen)
+	ans := "first"
+	if bv2 > av2 {
+		ans = "second"
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("Alice ate \\(\\frac{%d}{%d}\\) of a pizza, Bob ate \\(\\frac{%d}{%d}\\). Who ate more? (first/second)", aNum, aDen, bNum, bDen),
+		Answer:      ans,
+		Explanation: fmt.Sprintf("%d/%d = %.3f, %d/%d = %.3f, so %s ate more", aNum, aDen, av2, bNum, bDen, bv2, ans),
 	}
 }
