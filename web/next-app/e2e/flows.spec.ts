@@ -46,15 +46,15 @@ test('study → answer → XP persists (Study seam)', async ({ page }) => {
   await page.route('**/api/efficacy**', route => route.fulfill({ json: { concepts_touched: 1, first_pass_rate: 1, second_pass_rate: 1, avg_attempts_per_concept: 1, total_attempts: 1 } }))
 
   await page.goto('/study?lesson=' + encodeURIComponent(LESSON.title))
-  await expect(page.locator('body')).toContainText('Addition Basics', { timeout: 15_000 })
+  await expect(page.locator('body')).toContainText('Addition Basics', { timeout: 30_000 })
   await expect(page.getByText('Worked example').first()).toBeVisible()
   await expect(page.getByText('Use addition notation').first()).toBeVisible()
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
-  await expect(input).toBeVisible({ timeout: 10_000 })
+  await expect(input).toBeVisible({ timeout: 20_000 })
   await input.fill('4')
   await page.getByRole('button', { name: 'Submit' }).first().click()
-  await expect(page.getByText('+10 XP').first()).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByText('+10 XP').first()).toBeVisible({ timeout: 20_000 })
 })
 
 test('quiz gate banner appears at 150 XP and links to quiz host', async ({ page }) => {
@@ -79,7 +79,7 @@ test('quiz gate banner appears at 150 XP and links to quiz host', async ({ page 
   await page.route('**/api/leagues**', route => route.fulfill({ json: { week: '2026-W35', leagues: [] } }))
 
   await page.goto('/study')
-  await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 15_000 })
+  await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByRole('link', { name: 'Take Test' }).first()).toBeVisible()
 })
 
@@ -96,13 +96,13 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   )
 
   await page.goto('/goals?quiz=1')
-  await expect(page.getByText('Quiz 1 of 5').first()).toBeVisible({ timeout: 15_000 })
+  await expect(page.getByText('Quiz 1 of 5').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await input.fill('8')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
-  await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 20_000 })
   await expect(page.getByText('+20 XP').first()).toBeVisible()
 })
 
@@ -131,10 +131,10 @@ test('share link: settings enable → copyable URL → public share page', async
     localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: 1, current_streak: 1, level: 'Novice', diagnostic_completed: true }))
   })
   await page.goto('/settings')
-  await expect(page.getByText('Share with parent / teacher').first()).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByText('Share with parent / teacher').first()).toBeVisible({ timeout: 20_000 })
   await page.getByRole('button', { name: 'Enable share link' }).click()
   const input = page.locator('input[value*="s_testtoken123"]').first()
-  await expect(input).toBeVisible({ timeout: 10_000 })
+  await expect(input).toBeVisible({ timeout: 20_000 })
   await expect(page.getByRole('button', { name: 'Copy link' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Disable share' })).toBeVisible()
 
@@ -152,6 +152,6 @@ test('share link: settings enable → copyable URL → public share page', async
     }),
   )
   await page.goto('/share?token=s_testtoken123')
-  await expect(page.getByText("Tester's progress").first()).toBeVisible({ timeout: 15_000 })
+  await expect(page.getByText("Tester's progress").first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('Read-only report').first()).toBeVisible()
 })

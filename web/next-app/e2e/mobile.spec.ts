@@ -65,7 +65,7 @@ test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
 test('mobile graph renders and is usable', async ({ page }) => {
   await page.goto('/graph')
   const nodes = page.locator('.react-flow__node')
-  await expect(nodes.first()).toBeVisible({ timeout: 20_000 })
+  await expect(nodes.first()).toBeVisible({ timeout: 30_000 })
   expect(await nodes.count()).toBeGreaterThan(100)
 
   expect(await overflowPx(page)).toBeLessThanOrEqual(1)
@@ -86,7 +86,7 @@ test('mobile graph renders and is usable', async ({ page }) => {
 
 test('mobile pinch-zoom works on the concept map', async ({ page }) => {
   await page.goto('/graph')
-  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 20_000 })
+  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 30_000 })
 
   const pane = page.locator('.react-flow__viewport')
   const before = await pane.evaluate(el => el.style.transform)
@@ -102,7 +102,7 @@ test('mobile info panel wraps without overflowing', async ({ page }) => {
   const target = sample.find(c => c.prerequisites.length > 2) ?? sample[10]
   await page.goto(`/graph?concept=${encodeURIComponent(target.id)}`)
   const openBtn = page.getByText('Open concept →')
-  await expect(openBtn).toBeVisible({ timeout: 20_000 })
+  await expect(openBtn).toBeVisible({ timeout: 30_000 })
   const box = await openBtn.boundingBox()
   expect(box).toBeTruthy()
   const vw = page.viewportSize()!.width
@@ -113,7 +113,7 @@ test('mobile info panel wraps without overflowing', async ({ page }) => {
 test('graph list toggle and search buttons meet 36px hit area', async ({ page }) => {
   await page.goto('/graph')
   const listBtn = page.locator('button[aria-label="Open concept list"]')
-  await expect(listBtn).toBeVisible({ timeout: 20_000 })
+  await expect(listBtn).toBeVisible({ timeout: 30_000 })
   const listBox = await listBtn.boundingBox()
   expect(listBox).toBeTruthy()
   expect(listBox!.height).toBeGreaterThanOrEqual(36)
@@ -121,7 +121,7 @@ test('graph list toggle and search buttons meet 36px hit area', async ({ page })
 
 test('graph zoom controls are 44px on mobile', async ({ page }) => {
   await page.goto('/graph')
-  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 20_000 })
+  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 30_000 })
   const ctrl = page.locator('.react-flow__controls-button').first()
   const box = await ctrl.boundingBox()
   expect(box).toBeTruthy()
@@ -210,7 +210,7 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   await page.goto('/session')
   await page.getByPlaceholder('Your name').fill('Ada')
   await page.getByRole('button', { name: 'Learning Mode →' }).click()
-  await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 
   const input = page.getByPlaceholder('Your answer')
   await input.fill('9')

@@ -231,7 +231,7 @@ def main():
         try:
             req = json.loads(line)
             signal.signal(signal.SIGALRM, _timeout_handler)
-            signal.alarm(10)
+            signal.alarm(3)
             try:
                 correct, feedback = grade(req["expected"], req["answer"])
             finally:

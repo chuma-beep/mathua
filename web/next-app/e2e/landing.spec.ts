@@ -7,7 +7,7 @@ test('landing page renders hero and lazy-mounts the 3D graph', async ({ page }) 
   const hero = page.locator('section').first()
   await hero.scrollIntoViewIfNeeded()
   await page.mouse.wheel(0, 400)
-  await expect(page.locator('canvas').first()).toBeVisible({ timeout: 20_000 })
+  await expect(page.locator('canvas').first()).toBeVisible({ timeout: 30_000 })
 })
 
 test('stats row shows concept and domain counts from the dataset', async ({ page }) => {

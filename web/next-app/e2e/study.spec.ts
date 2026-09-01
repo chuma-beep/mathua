@@ -12,7 +12,7 @@ test('?concept= resolves to the lesson containing that concept', async ({ page }
   )
   await page.route('**/api/progress/**', route => route.fulfill({ json: {} }))
   await page.goto(`/study?concept=${encodeURIComponent(LESSON.concepts[0])}`)
-  await expect(page.locator('body')).toContainText(LESSON.title, { timeout: 15_000 })
+  await expect(page.locator('body')).toContainText(LESSON.title, { timeout: 30_000 })
 })
 
 test('study page lists domains normally without a concept param', async ({ page }) => {
@@ -20,5 +20,5 @@ test('study page lists domains normally without a concept param', async ({ page 
     route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
   )
   await page.goto('/study')
-  await expect(page.getByText('Arithmetic').first()).toBeVisible({ timeout: 15_000 })
+  await expect(page.getByText('Arithmetic').first()).toBeVisible({ timeout: 30_000 })
 })

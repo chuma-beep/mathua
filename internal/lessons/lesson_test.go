@@ -145,6 +145,9 @@ func TestLoad_NotFound(t *testing.T) {
 
 func TestLoad_RealData(t *testing.T) {
 	if _, err := os.Stat("../../data/lessons/algebrica/trigonometry/sine-and-cosine.md"); err != nil {
+		if os.Getenv("CI") != "" {
+			t.Fatalf("Algebrica corpus missing in CI: run git submodule update --init (%v)", err)
+		}
 		t.Skip("Algebrica submodule not checked out: run git submodule update --init")
 	}
 	loader, err := Load("../../data/lessons")
