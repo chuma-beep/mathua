@@ -16,6 +16,7 @@ test:
 
 validate:
 	go run scripts/validate_graph.go
+	python3 scripts/audit_lessons.py
 
 fuzz:
 	go test ./internal/generator/... -run TestFuzz -count 1000

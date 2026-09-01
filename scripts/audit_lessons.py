@@ -64,17 +64,24 @@ def main():
 
     # 5. KP shards: every section must resolve in the concept's lesson body.
     kp_dir = os.path.join(LESSONS, "kp")
+    kp_files = 0
+    kp_total = 0
     if os.path.isdir(kp_dir):
         kp_orphans = []
         for name in sorted(os.listdir(kp_dir)):
             if not name.endswith(".json"):
                 continue
+            kp_files += 1
             cid = name[:-5]
             if cid not in dag_ids:
                 kp_orphans.append(f"{name} (concept not in DAG)")
                 continue
             with open(os.path.join(kp_dir, name)) as f:
                 kps = json.load(f)
+            if not isinstance(kps, list) or len(kps) != 3:
+                kp_orphans.append(f"{name}: expected 3 KPs, got {len(kps) if isinstance(kps, list) else type(kps).__name__}")
+            else:
+                kp_total += len(kps)
             srcs = concept_sources.get(cid, [])
             body = ""
             # teaching/* wins per loader (reverse-lexicographic pick)
@@ -94,6 +101,11 @@ def main():
                     kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
         if kp_orphans:
             errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))
+        # Validate shard file count and total KPs (570 files ×3 =1710)
+        if kp_files != len(dag_ids):
+            errors.append(f"kp shard count mismatch: {kp_files} files vs {len(dag_ids)} concepts")
+        if kp_total != len(dag_ids) * 3:
+            errors.append(f"kp total mismatch: {kp_total} KPs vs {len(dag_ids)*3} expected (3 per concept)")
 
     # 6. Diagram mappings (engine.conceptDiagrams): concept in DAG, asset on disk.
     engine_src = os.path.join(ROOT, "internal", "engine", "engine.go")
@@ -186,8 +198,9 @@ def main():
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")
         sys.exit(1)
 
+    kp_summary = f", {kp_files} kp files, {kp_total} KPs" if 'kp_files' in locals() else ""
     print(f"OK: {len(dag_ids)} concepts mapped, {len(entries)} entries, "
-          f"{len(sources)} sources, kp shards resolved, 0 issues")
+          f"{len(sources)} sources{kp_summary}, kp shards resolved, 0 issues")
 
 
 if __name__ == "__main__":
