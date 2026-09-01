@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -29,11 +30,33 @@ import (
 // automated or copy-pasted submissions.
 const MinAnswerSeconds = 0.3
 
+var allowedOrigins = func() map[string]bool {
+	m := make(map[string]bool)
+	if v := os.Getenv("CORS_ALLOWED_ORIGINS"); v != "" {
+		for _, o := range strings.Split(v, ",") {
+			o = strings.TrimSpace(o)
+			if o != "" {
+				m[o] = true
+			}
+		}
+	}
+	return m
+}()
+
+func isAllowedOrigin(origin string) bool {
+	if len(allowedOrigins) == 0 {
+		return true // no allowlist configured: allow all (dev)
+	}
+	return allowedOrigins[origin]
+}
+
 func cors(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if origin != "" {
+		if origin != "" && isAllowedOrigin(origin) {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
+			w.Header().Set("Vary", "Origin")
+		} else if origin != "" {
 			w.Header().Set("Vary", "Origin")
 		}
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
@@ -56,6 +79,8 @@ type Server struct {
 	quizCreated  map[string]time.Time
 	mu           sync.Mutex
 	authLimiter  *rateLimiter
+	writeLimiter *rateLimiter
+	shareLimiter *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
@@ -68,6 +93,8 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 		quizSessions: make(map[string]*quiz.Session),
 		quizCreated:  make(map[string]time.Time),
 		authLimiter:  newRateLimiter(5, 10, time.Minute),
+		writeLimiter: newRateLimiter(20, 20, 3*time.Second),
+		shareLimiter: newRateLimiter(10, 10, 6*time.Second),
 	}
 	// Clean up abandoned diagnostic/quiz sessions older than 1 hour
 	go func() {
@@ -98,9 +125,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 
-	mux.HandleFunc("/api/session", logRequest(cors(s.optionalAuthMiddleware(s.handleSession))))
+	mux.HandleFunc("/api/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleSession)))))
 	mux.HandleFunc("/api/session/current", logRequest(cors(s.optionalAuthMiddleware(s.handleSessionCurrent))))
-	mux.HandleFunc("/api/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleAnswer))))
+	mux.HandleFunc("/api/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleAnswer)))))
 	mux.HandleFunc("/api/progress/", logRequest(cors(s.optionalAuthMiddleware(s.handleProgress))))
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
 	mux.HandleFunc("/api/config", logRequest(cors(s.handleConfig)))
@@ -108,29 +135,29 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
 	mux.HandleFunc("/api/leagues", logRequest(cors(s.authMiddleware(s.handleLeagues))))
 	mux.HandleFunc("/api/share", logRequest(cors(s.authMiddleware(s.handleShareToggle))))
-	mux.HandleFunc("/api/share/", logRequest(cors(s.handleShareReport)))
+	mux.HandleFunc("/api/share/", logRequest(cors(s.shareLimiter.middleware(s.handleShareReport))))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseRoute))))
 	mux.HandleFunc("/api/transcript", logRequest(cors(s.authMiddleware(s.handleTranscript))))
-	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.handleDiagnosticStart)))
-	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.handleDiagnosticAnswer)))
+	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticStart))))
+	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticAnswer))))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
-	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart))))
-	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer))))
-	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalPlan))))
+	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart)))))
+	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer)))))
+	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalPlan)))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
-	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.authMiddleware(s.handleReviewsSession))))
-	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.authMiddleware(s.handleReviewsAnswer))))
+	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsSession)))))
+	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsAnswer)))))
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
 	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.handleLessonBody)))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
-	mux.HandleFunc("/api/study/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleStudyAnswer))))
-	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.optionalAuthMiddleware(s.handleQuizSession))))
-	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.optionalAuthMiddleware(s.handleQuizAnswer))))
+	mux.HandleFunc("/api/study/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleStudyAnswer)))))
+	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
+	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
