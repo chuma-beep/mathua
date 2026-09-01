@@ -645,6 +645,19 @@ var conceptDiagrams = map[string]string{
 	"precalc.polar.coordinates":       "/diagrams/algebrica/polar-coordinates-1-1.png",
 	"precalc.polar.graph":             "/diagrams/algebrica/polar-coordinates-2-1.png",
 	"ode.basics.concept":              "/diagrams/algebrica/differential-equations-1-1.png",
+	"topo.covering":                   "/diagrams/algebrica/absolute-value-3.png",
+	"topo.fundamental.van_kampen":     "/diagrams/algebrica/absolute-value-4.png",
+	"topo.fiber_bundle":               "/diagrams/algebrica/absolute-value-6.png",
+	"topo.homology.cellular":          "/diagrams/algebrica/acceleration-1.png",
+	"topo.cohomology.de_rham":         "/diagrams/algebrica/arithmetic-sequence-2.png",
+	"frac.sub.word":                   "/diagrams/algebrica/asymptotes-2.png",
+	"frac.mult.word":                  "/diagrams/algebrica/asymptotes-3-1.png",
+	"frac.div.word":                   "/diagrams/algebrica/beta-distribution-2.png",
+	"frac.mixed.word":                 "/diagrams/algebrica/chi-squared-distribution-2.png",
+	"frac.compare.word":               "/diagrams/algebrica/circumference-10.png",
+	"abstract.field.extension":        "/diagrams/algebrica/circumference-2.png",
+	"abstract.field.finite":           "/diagrams/algebrica/circumference-3-1.png",
+	"abstract.field.galois_group":     "/diagrams/algebrica/circumference-4.png",
 }
 
 // DiagramFor exposes the dual-coding diagram for a concept (exported for API).
