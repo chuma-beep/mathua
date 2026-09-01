@@ -1,4 +1,7 @@
 {
+  "teaching/nt.elliptic.md": [
+    "KaTeX parse error: Expected 'EOF', got '#'"
+  ],
   "algebrica/complex-numbers/roots-of-unity.md": [
     "struct: raw latex in prose"
   ],
@@ -110,15 +113,6 @@
   "teaching/calc.limit.numeric.md": [
     "struct: raw latex in prose"
   ],
-  "teaching/dec.add.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/dec.div.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/dec.mult.md": [
-    "struct: raw latex in prose"
-  ],
   "teaching/dec.ops.add.md": [
     "struct: raw latex in prose"
   ],
@@ -129,9 +123,6 @@
     "struct: raw latex in prose"
   ],
   "teaching/dec.ops.sub.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/dec.sub.md": [
     "struct: raw latex in prose"
   ],
   "teaching/discrete.logic.quantifiers.md": [
@@ -149,25 +140,10 @@
   "teaching/frac.basics.parts.md": [
     "struct: raw latex in prose"
   ],
-  "teaching/frac.benchmark.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/frac.compare.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/frac.concept.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/frac.equivalent.md": [
-    "struct: raw latex in prose"
-  ],
   "teaching/frac.mixed.add.md": [
     "struct: raw latex in prose"
   ],
   "teaching/frac.mixed.sub.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/frac.on_number_line.md": [
     "struct: raw latex in prose"
   ],
   "teaching/frac.ops.benchmark.md": [
@@ -179,25 +155,13 @@
   "teaching/frac.ops.simplify.md": [
     "struct: raw latex in prose"
   ],
-  "teaching/frac.parts.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/frac.simplify.md": [
-    "struct: raw latex in prose"
-  ],
   "teaching/ratio.basics.concept.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/ratio.concept.md": [
     "struct: raw latex in prose"
   ],
   "teaching/ratio.ops.rate.md": [
     "struct: raw latex in prose"
   ],
   "teaching/ratio.ops.simplify.md": [
-    "struct: raw latex in prose"
-  ],
-  "teaching/ratio.rate.md": [
     "struct: raw latex in prose"
   ],
   "teaching/ratio.scale.md": [
