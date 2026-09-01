@@ -58,7 +58,7 @@ Six grader types handled by a single `Router`:
 
 ### Storage — SQLite and Postgres
 
-SQLite for local development. PostgreSQL production path exists as a stub (`internal/storage/postgres.go:7` `PostgresStore` returns `not implemented`); `cmd/mathua` checks `DATABASE_URL` and falls back to `mathua.db` with a warning when Postgres is requested. The data schema is identical across both databases, abstracted behind a `Repository` interface.
+SQLite for local development (`mathua.db`, `WAL` `storage/migrate.go:23`). PostgreSQL for production web access via `DATABASE_URL=postgres://` (`internal/storage/postgres.go:7` `PostgresStore` via `pgx/v5/stdlib`, `pgSchema` `postgres.go:7`, `GREATEST` for XP floor, `STRING_AGG` for activity). `cmd/mathua` checks `DATABASE_URL` and opens `pgx` when `postgres://` is set, otherwise SQLite. The data schema is identical across both databases, abstracted behind a `Repository` interface (`storage/store.go:127`).
 
 ## Diagnostic — Computerised Adaptive Testing
 

@@ -54,18 +54,19 @@ func main() {
 	fmt.Printf("loaded %d concepts across %d domains\n", dag.Count(), len(dag.Domains()))
 
 	dsn := os.Getenv("DATABASE_URL")
-	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
-		fmt.Println("warning: PostgreSQL backend not yet implemented, falling back to SQLite")
-		dsn = "mathua.db"
-	}
 	var repo storage.Repository
-	if dsn != "" || *serve {
-		if dsn == "" {
-			dsn = "mathua.db"
-		}
-		repo, err = storage.NewSQLiteStore(dsn)
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		fmt.Println("connecting to PostgreSQL...")
+		repo, err = storage.NewPostgresStore(dsn)
 	} else {
-		repo, err = storage.NewSQLiteStore("mathua.db")
+		if dsn != "" || *serve {
+			if dsn == "" {
+				dsn = "mathua.db"
+			}
+			repo, err = storage.NewSQLiteStore(dsn)
+		} else {
+			repo, err = storage.NewSQLiteStore("mathua.db")
+		}
 	}
 	if err != nil {
 		log.Fatalf("storage: %v", err)
