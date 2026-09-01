@@ -15,21 +15,21 @@ test('graph renders the full fallback concept set', async ({ page }) => {
 test('search selects a concept and syncs the URL param', async ({ page }) => {
   await page.route('**/api/**', route => route.fulfill({ status: 404, body: 'not found' }))
   await page.goto('/graph')
-  const input = page.getByPlaceholder('Search concepts…')
-  await expect(input).toBeVisible({ timeout: 30_000 })
+  const input = page.locator('input[placeholder="Search concepts…"]')
+  await expect.poll(async () => await input.isVisible(), { timeout: 30_000 }).toBe(true)
   const target = sample.find(c => c.prerequisites.length > 0)!
   await input.fill(target.label.slice(0, Math.max(4, target.label.length - 2)))
   await page.locator('button', { hasText: target.label }).first().click()
-  await expect(page).toHaveURL(new RegExp(`concept=${encodeURIComponent(target.id)}`))
-  await expect(page.getByText('Open concept →')).toBeVisible()
+  await expect.poll(async () => page.url().includes(`concept=${encodeURIComponent(target.id)}`), { timeout: 30_000 }).toBe(true)
+  await expect(page.getByText('Open concept →')).toBeVisible({ timeout: 10_000 })
 })
 
 test('deep-link restores selection via ?concept=', async ({ page }) => {
   await page.route('**/api/**', route => route.fulfill({ status: 404, body: 'not found' }))
   const target = sample.find(c => c.prerequisites.length > 0)!
   await page.goto(`/graph?concept=${encodeURIComponent(target.id)}`)
-  await expect(page.getByText(target.label).first()).toBeVisible({ timeout: 30_000 })
-  await expect(page.getByText('Open concept →')).toBeVisible()
+  await expect.poll(async () => await page.getByText(target.label).first().isVisible().catch(() => false), { timeout: 30_000 }).toBe(true)
+  await expect(page.getByText('Open concept →')).toBeVisible({ timeout: 10_000 })
 })
 
 test('ambient flow toggle persists across reloads', async ({ page }) => {

@@ -19,6 +19,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   const [error, setError] = useState('')
   const [score, setScore] = useState({ correct: 0, total: 0 })
   const [streak, setStreak] = useState<StreakState>(initialState())
+  const [checking, setChecking] = useState<Record<number, boolean>>({})
   const loadTimes = useRef<Record<number, number>>({})
 
   const loadQuestions = useCallback(() => {
@@ -48,9 +49,10 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
 
   async function handleCheck(i: number) {
     const userAnswer = (answers[i] || '').trim()
-    if (!userAnswer || results[i] !== undefined) return
+    if (!userAnswer || results[i] !== undefined || checking[i]) return
     const q = questions[i]
     const elapsed = Math.max(0.5, (Date.now() - (loadTimes.current[i] ?? Date.now())) / 1000)
+    setChecking(prev => ({ ...prev, [i]: true }))
     let correct = false
     try {
       const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed)
@@ -64,6 +66,8 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
       correct = userAnswer.trim().toLowerCase() === q.answer.trim().toLowerCase()
       setResults(prev => ({ ...prev, [i]: correct ? 'correct' : 'incorrect' }))
       setScore(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
+    } finally {
+      setChecking(prev => ({ ...prev, [i]: false }))
     }
     setStreak(prev => applyResult(prev, correct))
   }
@@ -176,9 +180,10 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                       {result === undefined && (
                         <button
                           onClick={() => handleCheck(i)}
-                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 py-1.5 text-xs font-mono rounded-none"
+                          disabled={!!checking[i]}
+                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 py-1.5 text-xs font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-Submit
+                        {checking[i] ? 'Checking…' : 'Submit'}
                         </button>
                       )}
                     </div>
