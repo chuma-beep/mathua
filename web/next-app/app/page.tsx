@@ -2,8 +2,10 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
+import { ensureGuestId } from '../lib/auth'
 import Header from '../components/Header'
 import BottomTabs from '../components/BottomTabs'
 import AsciiDivider from '../components/AsciiDivider'
@@ -92,6 +94,7 @@ const PIPELINE_STATES = [
 
 export default function HomePage() {
   const { theme, mounted } = useTheme()
+  const router = useRouter()
 
   const conceptCount = conceptsData.length
   const connectionCount = conceptsData.reduce(
@@ -264,6 +267,16 @@ export default function HomePage() {
           <Link href="/login" style={ctaPrimaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
             Open the web app
           </Link>
+          <button
+            onClick={() => {
+              ensureGuestId()
+              router.push('/profile')
+            }}
+            style={ctaSecondaryStyle}
+            className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]"
+          >
+            Continue as guest →
+          </button>
           <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
             View on GitHub
           </a>

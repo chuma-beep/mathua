@@ -162,6 +162,26 @@ export default function ProfilePage() {
               <Link href="/session" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Try as guest →</Link>
             </div>
           </div>
+          {(Object.keys(progress).length === 0 && activity.length === 0) && (
+            <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
+              <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                  <div className="font-mono text-xs text-mathua-blue mb-1">1. Take Diagnostic</div>
+                  <p className="font-mono text-[11px] text-mathua-secondary">30–45 min · finds your knowledge frontier</p>
+                </div>
+                <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                  <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
+                  <p className="font-mono text-[11px] text-mathua-secondary">Start with Arithmetic → Fractions → Pre-Algebra</p>
+                  <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Browse Study →</Link>
+                </div>
+                <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                  <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
+                  <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows on Profile</p>
+                </div>
+              </div>
+            </section>
+          )}
           <section className="mt-8 flex min-w-0 flex-col items-stretch">
             <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">Activity</h2>
             <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
@@ -222,6 +242,27 @@ export default function ProfilePage() {
       <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
         {/* Profile stats — mobile-first */}
         <ProfileStats name={user.name} scores={scores} />
+
+        {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
+          <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
+            <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                <div className="font-mono text-xs text-mathua-blue mb-1">1. Take Diagnostic</div>
+                <p className="font-mono text-[11px] text-mathua-secondary">30–45 min · finds your knowledge frontier</p>
+              </div>
+              <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
+                <p className="font-mono text-[11px] text-mathua-secondary">Start with Arithmetic → Fractions → Pre-Algebra</p>
+                <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Browse Study →</Link>
+              </div>
+              <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
+                <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
+                <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows below</p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {scores.paused_until && (
           <div className="mt-6 border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">

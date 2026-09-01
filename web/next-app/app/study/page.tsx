@@ -958,20 +958,47 @@ function StudyContent() {
             />
           ) : (
             // ── Domain Overview ──
-            <DomainOverview
-              domains={sortedDomains}
-              lessonsByDomain={lessonsByDomain}
-              domainAgg={domainAgg}
-              allLessons={allLessons}
-              onSelectDomain={(d) => {
-                setSelectedDomain(d)
-                router.push('/study?domain=' + encodeURIComponent(d))
-              }}
-              onSelectLesson={(lesson) => {
-                setSelectedLesson(lesson)
-                router.push('/study?lesson=' + encodeURIComponent(lesson.title))
-              }}
-            />
+            <>
+              {Object.values(domainAgg).every(a => a.mastered === 0) && (
+                <div className="max-w-4xl mx-auto mt-2 mb-4 border border-mathua-border bg-mathua-surface p-4">
+                  <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-2">Start here</h3>
+                  <p className="font-mono text-xs text-mathua-secondary mb-3">New here? Follow the order — it respects prerequisites.</p>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      { id: 'arithmetic', label: 'Arithmetic' },
+                      { id: 'fractions', label: 'Fractions' },
+                      { id: 'prealgebra', label: 'Pre-Algebra' },
+                    ].map(d => (
+                      <button
+                        key={d.id}
+                        onClick={() => {
+                          setSelectedDomain(d.id)
+                          router.push('/study?domain=' + encodeURIComponent(d.id))
+                        }}
+                        className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
+                      >
+                        {d.label} →
+                      </button>
+                    ))}
+                  </div>
+                  <p className="font-mono text-[10px] text-mathua-muted mt-3">Study is a library (Lesson = corpus) — browse any lesson, but practice respects the DAG. Each lesson shows 2 in a row to advance before you practice.</p>
+                </div>
+              )}
+              <DomainOverview
+                domains={sortedDomains}
+                lessonsByDomain={lessonsByDomain}
+                domainAgg={domainAgg}
+                allLessons={allLessons}
+                onSelectDomain={(d) => {
+                  setSelectedDomain(d)
+                  router.push('/study?domain=' + encodeURIComponent(d))
+                }}
+                onSelectLesson={(lesson) => {
+                  setSelectedLesson(lesson)
+                  router.push('/study?lesson=' + encodeURIComponent(lesson.title))
+                }}
+              />
+            </>
           )}
         </section>
 
