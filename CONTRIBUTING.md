@@ -149,7 +149,7 @@ A validator runs on every pull request. It checks invariants before any merge ca
 3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`loader.go:303`)
 4. **No singleton `interference_group`** (`loader.go:321`), valid `grading_type` enum (9 values `loader.go:297`), `variants` `0.1–1.0` difficulty
 
-A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (570 files ×3 =1710 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 102 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
+A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (580 files ×3 =1740 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 102 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
 
 ## Submitting a pull request
 

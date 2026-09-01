@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Define concept",
+      "Recall definition",
+      "Apply definition"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Study example",
+      "Follow steps",
+      "Check result"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "List properties",
+      "Verify property",
+      "Use property"
+    ]
+  }
+]

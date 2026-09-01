@@ -184,7 +184,7 @@ The engine is the central orchestrator. It holds references to every subsystem a
 | **Weakness Propagation** | In engine `engine.go:1575` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
 | **Diagnostic** | `internal/diagnostic/` (`cat.go:1`, `report.go:11`) | Compressed covering set + info-gain CAT with `±0.3` evidence propagation, per-concept `KnowledgeConfidence 0–1`, frontier at max belief drop, supplemental when `<0.7` |
 | **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (21 courses) |
-| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 570 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
+| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 580 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
 
 ### DAG (Concept Graph)
 
@@ -476,7 +476,7 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 ## 10. Computerized Adaptive Testing (CAT)
 
-Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 570 concepts, the diagnostic requires approximately 25–45 adaptive questions.
+Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 580 concepts, the diagnostic requires approximately 25–45 adaptive questions.
 
 ![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
@@ -493,7 +493,7 @@ Mathua implements a compressed-covering + info-gain CAT to locate a student's kn
 
 ### Key Properties
 
-- **Covering-set + info-gain efficiency**: `25–45` probes vs `570` exhaustive; `80%` difficulty targeting via `engine.computeDifficulty` `engine.go:157`
+- **Covering-set + info-gain efficiency**: `25–45` probes vs `580` exhaustive; `80%` difficulty targeting via `engine.computeDifficulty` `engine.go:157`
 - **Evidence propagation**: correct boosts prereqs, wrong penalizes postrequisites — finds frontier even with conflicting evidence
 - **Mastery + automaticity**: `fast` (`elapsed < timeThreshold`) distinguishes `PRACTICING` vs `LEARNING` placement
 - **Optimistic merge**: Retaking does not delete progress; `ApplyGoalResults` `engine.go:1364` merges with `Practicing/Learning` vs `Unseen`
@@ -572,5 +572,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:7` / `storage/sqlite.go:1`, same `Repository` `store.go:127`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 17 domain registries (570 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:7` / `storage/sqlite.go:1`, same `Repository` `store.go:127`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 17 domain registries (580 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
 

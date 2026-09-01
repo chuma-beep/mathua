@@ -62,7 +62,7 @@ SQLite for local development (`mathua.db`, `WAL` `storage/migrate.go:23`). Postg
 
 ## Diagnostic — Computerised Adaptive Testing
 
-Locates a student's knowledge frontier using a compressed covering set + info-gain CAT (`internal/diagnostic/cat.go:1`, `internal/diagnostic/report.go:11`). The engine builds a minimal covering set of the DAG, repeatedly picks the concept with maximal entropy reduction, propagates `+0.3` evidence to prerequisites on correct and `-0.3` to dependents on incorrect, and tracks per-concept `KnowledgeConfidence 0–1`. The frontier is the highest belief drop; a supplemental diagnostic runs when confidence `<0.7`. Assessment is 25–45 adaptive questions (vs 570 exhaustive) with `80%` difficulty targeting via `engine.computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty` 0.3–1.0).
+Locates a student's knowledge frontier using a compressed covering set + info-gain CAT (`internal/diagnostic/cat.go:1`, `internal/diagnostic/report.go:11`). The engine builds a minimal covering set of the DAG, repeatedly picks the concept with maximal entropy reduction, propagates `+0.3` evidence to prerequisites on correct and `-0.3` to dependents on incorrect, and tracks per-concept `KnowledgeConfidence 0–1`. The frontier is the highest belief drop; a supplemental diagnostic runs when confidence `<0.7`. Assessment is 25–45 adaptive questions (vs 580 exhaustive) with `80%` difficulty targeting via `engine.computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty` 0.3–1.0).
 
 ## Full documentation
 
