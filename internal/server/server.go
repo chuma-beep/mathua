@@ -161,7 +161,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
-	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.handleEfficacyAll)))
+	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyAll))))
 }
 
 // POST /api/session
