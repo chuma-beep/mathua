@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, enableShare, disableShare } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, getScores, enableShare, disableShare } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
@@ -58,13 +58,17 @@ export default function ProfilePage() {
     async function fetchData() {
       try {
         if (info) {
-          const headers = { ...getAuthHeaders() }
           const [scoresRes, activityRes, progressRes, weaknessesRes] = await Promise.all([
-            fetch(`${API_BASE}/api/scores/`, { headers }).then((r) => r.ok ? r.json() : null),
-            getActivity(),
-            getProgress(info!.student_id),
-            getWeaknesses(),
+            getScores(info!.student_id).catch(() => null as Scores | null),
+            getActivity().catch(() => [] as DailyActivity[]),
+            getProgress(info!.student_id).catch(() => ({} as Record<string, ConceptProgress>)),
+            getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
           ])
+          if (!scoresRes) {
+            // 401 or fetch failure — token likely expired (JWT_SECRET rotated) or network.
+            // Keep guest-like state so page doesn't hang on "Loading scores…"
+            setError('Session expired or scores unavailable — please sign in again')
+          }
           setScores(scoresRes as Scores | null)
           setActivity(activityRes)
           setProgress(progressRes)
@@ -215,7 +219,26 @@ export default function ProfilePage() {
     )
   }
 
-  if (!scores) {
+  if (user && !scores) {
+    // Avoid infinite "Loading scores…" when token is expired or backend returns 401.
+    // Show actionable error with sign-in CTA instead of hanging.
+    if (error) {
+      return (
+        <>
+          <Header />
+          <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+            <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+              {error}
+              <div className="mt-4 flex gap-3 justify-center">
+                <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+                <button onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
+              </div>
+            </div>
+          </div>
+          <BottomTabs />
+        </>
+      )
+    }
     return (
       <>
         <Header />

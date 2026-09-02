@@ -1,26 +1,15 @@
-# fly.toml app configuration file generated for mathua-28gijw on 2026-09-02T13:01:06Z
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'mathua-28gijw'
-primary_region = 'ams'
+app = "mathua-28gijw"
+primary_region = "ams"
 
 [build]
-  dockerfile = 'Dockerfile'
-
-[[mounts]]
-  source = 'mathua_data'
-  destination = '/data'
+  dockerfile = "Dockerfile"
 
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = 'off'
+  auto_stop_machines = false
   auto_start_machines = true
 
-[[vm]]
-  memory = '1gb'
-  cpu_kind = 'shared'
-  cpus = 1
-  memory_mb = 256
+[[mounts]]
+  source = "mathua_data"
+  destination = "/data"

@@ -303,13 +303,15 @@ export async function getCurrentQuestion(sessionID: string): Promise<Question | 
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
-  const res = await fetch(`${API_BASE}/api/progress/${studentID}`)
+  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const res = await fetch(`${API_BASE}/api/progress/${studentID}`, { headers })
   if (!res.ok) return {}
   return validateResponse(ProgressMapSchema, await res.json(), 'getProgress') as Record<string, ConceptProgress>
 }
 
 export async function getScores(studentID: string): Promise<Scores> {
-  const res = await fetch(`${API_BASE}/api/scores/${studentID}`)
+  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const res = await fetch(`${API_BASE}/api/scores/${studentID}`, { headers })
   if (!res.ok) throw new Error(`Scores fetch failed: ${res.status}`)
   return validateResponse(ScoresSchema, await res.json(), 'getScores') as Scores
 }
