@@ -20,6 +20,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   const [score, setScore] = useState({ correct: 0, total: 0 })
   const [streak, setStreak] = useState<StreakState>(initialState())
   const [checking, setChecking] = useState<Record<number, boolean>>({})
+  const checkingRef = useRef<Record<number, boolean>>({})
   const loadTimes = useRef<Record<number, number>>({})
 
   const loadQuestions = useCallback(() => {
@@ -30,6 +31,8 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     setXpMap({})
     setScore({ correct: 0, total: 0 })
     setStreak(initialState())
+    setChecking({})
+    checkingRef.current = {}
     loadTimes.current = {}
     getLessonPractice(conceptId, limit)
       .then(res => {
@@ -49,7 +52,8 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
 
   async function handleCheck(i: number) {
     const userAnswer = (answers[i] || '').trim()
-    if (!userAnswer || results[i] !== undefined || checking[i]) return
+    if (!userAnswer || results[i] !== undefined || checkingRef.current[i]) return
+    checkingRef.current[i] = true
     const q = questions[i]
     const elapsed = Math.max(0.5, (Date.now() - (loadTimes.current[i] ?? Date.now())) / 1000)
     setChecking(prev => ({ ...prev, [i]: true }))
@@ -67,6 +71,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
       setResults(prev => ({ ...prev, [i]: correct ? 'correct' : 'incorrect' }))
       setScore(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
     } finally {
+      checkingRef.current[i] = false
       setChecking(prev => ({ ...prev, [i]: false }))
     }
     setStreak(prev => applyResult(prev, correct))
