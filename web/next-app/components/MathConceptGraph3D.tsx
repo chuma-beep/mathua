@@ -606,8 +606,18 @@ export default function MathConceptGraph3D({
         </span>
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
-          gl={{ alpha: true, premultipliedAlpha: true }}
+          gl={{ alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' }}
           dpr={[1, 1.5]}
+          onCreated={({ gl }) => {
+            const canvas = gl.domElement as HTMLCanvasElement
+            const onLost = (e: Event) => {
+              e.preventDefault()
+              console.warn('WebGL context lost — will attempt restore')
+            }
+            const onRestored = () => console.warn('WebGL context restored')
+            canvas.addEventListener('webglcontextlost', onLost, false)
+            canvas.addEventListener('webglcontextrestored', onRestored, false)
+          }}
         >
           <GraphScene
             nodes={nodes}

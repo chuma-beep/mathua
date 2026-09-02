@@ -30,39 +30,95 @@ import (
 // automated or copy-pasted submissions.
 const MinAnswerSeconds = 0.3
 
-var allowedOrigins = func() map[string]bool {
-	m := make(map[string]bool)
-	if v := os.Getenv("CORS_ALLOWED_ORIGINS"); v != "" {
-		for _, o := range strings.Split(v, ",") {
-			o = strings.TrimSpace(o)
-			if o != "" {
-				m[o] = true
-			}
+var (
+	allowedOriginsOnce     sync.Once
+	allowedOriginsExact    map[string]bool
+	allowedOriginPatterns  []string
+	allowedOriginsAllowAll bool
+)
+
+func parseAllowedOrigins() {
+	raw := os.Getenv("CORS_ALLOWED_ORIGINS")
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		allowedOriginsAllowAll = true
+		allowedOriginsExact = nil
+		allowedOriginPatterns = nil
+		return
+	}
+	allowedOriginsAllowAll = false
+	allowedOriginsExact = make(map[string]bool)
+	for _, o := range strings.Split(raw, ",") {
+		o = strings.TrimSpace(o)
+		if o == "" {
+			continue
+		}
+		if o == "*" {
+			allowedOriginsAllowAll = true
+			continue
+		}
+		if strings.Contains(o, "*") {
+			allowedOriginPatterns = append(allowedOriginPatterns, o)
+		} else {
+			allowedOriginsExact[o] = true
 		}
 	}
-	return m
-}()
+	if len(allowedOriginsExact) == 0 && len(allowedOriginPatterns) == 0 && !allowedOriginsAllowAll {
+		allowedOriginsAllowAll = true
+	}
+}
 
 func isAllowedOrigin(origin string) bool {
-	if len(allowedOrigins) == 0 {
-		return true // no allowlist configured: allow all (dev)
+	allowedOriginsOnce.Do(parseAllowedOrigins)
+	if allowedOriginsAllowAll {
+		return true
 	}
-	return allowedOrigins[origin]
+	if allowedOriginsExact != nil && allowedOriginsExact[origin] {
+		return true
+	}
+	for _, pat := range allowedOriginPatterns {
+		if matchOriginPattern(origin, pat) {
+			return true
+		}
+	}
+	return false
+}
+
+// matchOriginPattern supports "*" wildcards via prefix/suffix split.
+// e.g. "*.vercel.app" matches "https://foo.vercel.app"
+//      "https://*.vercel.app" matches "https://mathua.vercel.app" but not "http://..."
+func matchOriginPattern(origin, pattern string) bool {
+	if !strings.Contains(pattern, "*") {
+		return origin == pattern
+	}
+	if pattern == "*" {
+		return true
+	}
+	prefix, suffix, _ := strings.Cut(pattern, "*")
+	// Only single wildcard is supported; treat multiple "*" as requiring both affixes.
+	if strings.Contains(suffix, "*") {
+		// fallback: require prefix and suffix of first wildcard plus that suffix contains "*"
+		// simple check: origin must have prefix and suffix around the first "*"
+		return strings.HasPrefix(origin, prefix) && strings.HasSuffix(origin, suffix)
+	}
+	return strings.HasPrefix(origin, prefix) && strings.HasSuffix(origin, suffix)
 }
 
 func cors(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if origin != "" && isAllowedOrigin(origin) {
-			w.Header().Set("Access-Control-Allow-Origin", origin)
+		if origin != "" {
 			w.Header().Set("Vary", "Origin")
-		} else if origin != "" {
-			w.Header().Set("Vary", "Origin")
+			if isAllowedOrigin(origin) {
+				w.Header().Set("Access-Control-Allow-Origin", origin)
+			}
 		}
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		w.Header().Set("Access-Control-Max-Age", "86400")
 		if r.Method == http.MethodOptions {
-			w.WriteHeader(204)
+			// Preflight: 204 with CORS headers already set
+			w.WriteHeader(http.StatusNoContent)
 			return
 		}
 		next(w, r)
