@@ -25,6 +25,9 @@ type Student struct {
 	LeagueWeek          string
 	LeagueMoved         int
 	ShareToken          string
+	Email               string
+	GoogleID            string
+	AvatarURL           string
 }
 
 type ConceptProgress struct {
@@ -129,7 +132,11 @@ type Repository interface {
 	CreateStudent(name string) (*Student, error)
 	GetStudent(id string) (*Student, error)
 	FindByUsername(username string) (*Student, error)
+	FindByGoogleID(googleID string) (*Student, error)
+	FindByEmail(email string) (*Student, error)
 	CreateUser(name, username, passwordHash string) (*Student, error)
+	CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error)
+	LinkGoogleID(studentID, googleID, avatarURL string) error
 	SetCourseID(studentID, courseID string) error
 
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)

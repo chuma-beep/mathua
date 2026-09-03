@@ -60,6 +60,11 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN league_moved INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN share_token TEXT NOT NULL DEFAULT ''",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
+		"ALTER TABLE students ADD COLUMN email TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN google_id TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN avatar_url TEXT NOT NULL DEFAULT ''",
+		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
+		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN session_review INTEGER NOT NULL DEFAULT 0",
@@ -117,9 +122,9 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 	var st Student
 	var username, passwordHash, courseID, xpDate, settings sql.NullString
 	var xpTotal, xpToday, diagCompleted, dailyGoal, leagueMoved sql.NullInt64
-	var league, leagueWeek, shareToken sql.NullString
+	var league, leagueWeek, shareToken, email, googleID, avatarURL sql.NullString
 	var createdAt string
-	err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &settings, &createdAt, &league, &leagueWeek, &leagueMoved, &shareToken)
+	err := row.Scan(&st.ID, &st.Name, &username, &passwordHash, &courseID, &xpTotal, &xpToday, &xpDate, &diagCompleted, &dailyGoal, &settings, &createdAt, &league, &leagueWeek, &leagueMoved, &shareToken, &email, &googleID, &avatarURL)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -153,6 +158,9 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 		st.LeagueMoved = int(leagueMoved.Int64)
 	}
 	st.ShareToken = shareToken.String
+	st.Email = email.String
+	st.GoogleID = googleID.String
+	st.AvatarURL = avatarURL.String
 	if createdAt != "" {
 		st.CreatedAt, err = time.Parse(time.RFC3339, createdAt)
 		if err != nil {
@@ -163,13 +171,50 @@ func scanStudent(row interface{ Scan(...interface{}) error }) (*Student, error) 
 }
 
 func (s *SQLiteStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE id = ?", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE id = ?", id)
 	return scanStudent(row)
 }
 
 func (s *SQLiteStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE username = ?", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE username = ?", username)
 	return scanStudent(row)
+}
+
+func (s *SQLiteStore) FindByGoogleID(googleID string) (*Student, error) {
+	if googleID == "" {
+		return nil, nil
+	}
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE google_id = ?", googleID)
+	return scanStudent(row)
+}
+
+func (s *SQLiteStore) FindByEmail(email string) (*Student, error) {
+	if email == "" {
+		return nil, nil
+	}
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE email = ? LIMIT 1", email)
+	return scanStudent(row)
+}
+
+func (s *SQLiteStore) CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error) {
+	id := newUUID()
+	now := time.Now().UTC()
+	_, err := s.db.Exec(
+		"INSERT INTO students (id, name, email, google_id, avatar_url, settings, created_at) VALUES (?, ?, ?, ?, ?, '{}', ?)",
+		id, name, email, googleID, avatarURL, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	return &Student{ID: id, Name: name, Email: email, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
+}
+
+func (s *SQLiteStore) LinkGoogleID(studentID, googleID, avatarURL string) error {
+	_, err := s.db.Exec("UPDATE students SET google_id = ?, avatar_url = ? WHERE id = ?", googleID, avatarURL, studentID)
+	if err != nil {
+		return fmt.Errorf("link google id: %w", err)
+	}
+	return nil
 }
 
 func (s *SQLiteStore) SetShareToken(studentID, token string) error {
@@ -184,7 +229,7 @@ func (s *SQLiteStore) GetStudentByShareToken(token string) (*Student, error) {
 	if token == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE share_token = ?", token)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE share_token = ?", token)
 	return scanStudent(row)
 }
 

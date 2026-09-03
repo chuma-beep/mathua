@@ -32,7 +32,10 @@ CREATE TABLE IF NOT EXISTS students (
     league_week          TEXT NOT NULL DEFAULT '',
     league_moved         INTEGER NOT NULL DEFAULT 0,
     share_token          TEXT NOT NULL DEFAULT '',
-    course_id            TEXT
+    course_id            TEXT,
+    email                TEXT NOT NULL DEFAULT '',
+    google_id            TEXT NOT NULL DEFAULT '',
+    avatar_url           TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
@@ -80,6 +83,8 @@ CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timesta
 CREATE INDEX IF NOT EXISTS idx_attempts_cover    ON attempts(student_id, concept_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_students_share    ON students(share_token);
 CREATE INDEX IF NOT EXISTS idx_students_username ON students(username);
+CREATE INDEX IF NOT EXISTS idx_students_email     ON students(email);
+CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id);
 
 CREATE TABLE IF NOT EXISTS questions (
     id         SERIAL PRIMARY KEY,
@@ -166,6 +171,11 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_moved INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS share_token TEXT NOT NULL DEFAULT ''",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS google_id TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''",
+		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
+		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS weakness_score DOUBLE PRECISION NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS session_review INTEGER NOT NULL DEFAULT 0",
@@ -224,13 +234,50 @@ func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Studen
 }
 
 func (s *PostgresStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE id = $1", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE id = $1", id)
 	return scanStudent(row)
 }
 
 func (s *PostgresStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE username = $1", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE username = $1", username)
 	return scanStudent(row)
+}
+
+func (s *PostgresStore) FindByGoogleID(googleID string) (*Student, error) {
+	if googleID == "" {
+		return nil, nil
+	}
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE google_id = $1", googleID)
+	return scanStudent(row)
+}
+
+func (s *PostgresStore) FindByEmail(email string) (*Student, error) {
+	if email == "" {
+		return nil, nil
+	}
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE email = $1 LIMIT 1", email)
+	return scanStudent(row)
+}
+
+func (s *PostgresStore) CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error) {
+	id := newUUID()
+	now := time.Now().UTC()
+	_, err := s.db.Exec(
+		"INSERT INTO students (id, name, email, google_id, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, '{}', $6)",
+		id, name, email, googleID, avatarURL, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	return &Student{ID: id, Name: name, Email: email, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
+}
+
+func (s *PostgresStore) LinkGoogleID(studentID, googleID, avatarURL string) error {
+	_, err := s.db.Exec("UPDATE students SET google_id = $1, avatar_url = $2 WHERE id = $3", googleID, avatarURL, studentID)
+	if err != nil {
+		return fmt.Errorf("link google id: %w", err)
+	}
+	return nil
 }
 
 func (s *PostgresStore) SetShareToken(studentID, token string) error {
@@ -245,7 +292,7 @@ func (s *PostgresStore) GetStudentByShareToken(token string) (*Student, error) {
 	if token == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token FROM students WHERE share_token = $1", token)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE share_token = $1", token)
 	return scanStudent(row)
 }
 
