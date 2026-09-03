@@ -25,12 +25,15 @@ const validateTokenMock = vi.fn()
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
   usePathname: () => '/login',
+  useSearchParams: () => new URLSearchParams(),
 }))
 
 vi.mock('../lib/api', () => ({
   signup: (...a: unknown[]) => signupMock(...a),
   login: (...a: unknown[]) => loginMock(...a),
   validateToken: (...a: unknown[]) => validateTokenMock(...a),
+  getConfig: () => Promise.resolve({ auth_enabled: true }),
+  API_BASE: '',
 }))
 
 vi.mock('../components/Header', () => ({ default: () => <div data-testid="header-stub" /> }))
