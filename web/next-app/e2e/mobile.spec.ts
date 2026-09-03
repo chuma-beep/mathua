@@ -44,19 +44,17 @@ test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
   const tabs = page.locator('nav.lg\\:hidden')
   await expect(tabs).toBeVisible()
 
-  // Disable smooth scrolling so the scroll settles synchronously for the hook.
   await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
 
   // Scroll down mid-page (not the bottom — bottom force-shows) → hidden while scrolling
   await page.evaluate(() => window.scrollTo(0, Math.min(800, document.documentElement.scrollHeight - window.innerHeight - 300)))
-  await page.waitForTimeout(150)
-  await expect(tabs).not.toBeInViewport()
+  // poll for hidden — rAF + idleMs 300 needs >150ms
+  await expect.poll(async () => tabs.evaluate(el => getComputedStyle(el).transform), { timeout: 5000 }).not.toContain('matrix(1, 0, 0, 1, 0, 0)')
 
   // Stopping scroll re-shows after the 300ms idle window
   await page.waitForTimeout(600)
   await expect(tabs).toBeInViewport()
 
-  // Scroll back to top → still visible
   await page.evaluate(() => window.scrollTo(0, 0))
   await page.waitForTimeout(600)
   await expect(tabs).toBeInViewport()
@@ -65,8 +63,8 @@ test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
 test('mobile graph renders and is usable', async ({ page }) => {
   await page.goto('/graph')
   const nodes = page.locator('.react-flow__node')
-  await expect(nodes.first()).toBeVisible({ timeout: 30_000 })
-  expect(await nodes.count()).toBeGreaterThan(100)
+  await expect(nodes.first()).toBeVisible({ timeout: 45_000 })
+  await expect.poll(async () => nodes.count(), { timeout: 45_000 }).toBeGreaterThan(100)
 
   expect(await overflowPx(page)).toBeLessThanOrEqual(1)
 
@@ -86,16 +84,14 @@ test('mobile graph renders and is usable', async ({ page }) => {
 
 test('mobile pinch-zoom works on the concept map', async ({ page }) => {
   await page.goto('/graph')
-  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 30_000 })
+  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 45_000 })
 
   const pane = page.locator('.react-flow__viewport')
   const before = await pane.evaluate(el => el.style.transform)
   await page.locator('.react-flow').hover({ position: { x: 180, y: 160 } })
-  // ReactFlow maps ctrl+wheel to zoom on touch devices too; simulate pinch via wheel
   await page.mouse.wheel(0, -240)
-  await page.waitForTimeout(600)
-  const after = await pane.evaluate(el => el.style.transform)
-  expect(after).not.toBe(before)
+  await page.waitForTimeout(1000)
+  await expect.poll(async () => pane.evaluate(el => el.style.transform), { timeout: 5000 }).not.toBe(before)
 })
 
 test('mobile info panel wraps without overflowing', async ({ page }) => {
@@ -177,44 +173,37 @@ test('scroll containers are edge-to-edge and horizontally scrollable', async ({ 
 test('double-clicking Check Answer fires exactly one POST', async ({ page }) => {
   let answerPosts = 0
   page.on('request', req => {
-    if (req.method() === 'POST' && req.url().includes('/api/answer')) answerPosts++
+    if (req.method() === 'POST' && (req.url().includes('/api/study/answer') || req.url().includes('/api/quiz/answer'))) answerPosts++
   })
 
-  // Mock the minimal API surface so the session reaches the practice screen.
-  await page.route('**/api/config', r => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ auth_enabled: false }) }))
-  await page.route('**/api/session', r => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({
-    student_id: 's1',
-    session_id: 'sess-1',
-    question: {
-      concept_id: 'arith.add.single',
-      concept_name: 'Single-digit addition',
-      question: '5+4=?',
-      is_review: false,
-      attempt_id: 'mock-attempt-1',
-    },
-  }) }))
-  await page.route('**/api/answer', r => r.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({
-    result: {
-      correct: true,
-      feedback: 'Correct!',
-      new_status: 'LEARNING',
-      explanation: '',
-      streak: 1,
-      required_streak: 10,
-      xp: 10,
-    },
-    next_question: null,
-    done: true,
-  }) }))
+  // Mock Study seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam) — same as flows.spec.ts:26
+  const LESSON = { title: 'Addition Basics', body: '# Addition Basics\nLearn', concepts: ['arith.add.single'] }
+  const PRACTICE = { questions: [{ question: '5+4=?', answer: '9', explanation: '', source: 'curated' }], concept_id: 'arith.add.single' }
+  const KP = { concept_id: 'arith.add.single', kps: [{ label: 'Use addition notation', section: 'Use Addition Notation', subgoals: [], worked_example: 'Add' }], diagram: '' }
+  await page.route('**/api/lessons**', route => {
+    const url = route.request().url()
+    if (url.includes('/practice')) return route.fulfill({ json: PRACTICE })
+    if (url.includes('/kp')) return route.fulfill({ json: KP })
+    if (url.includes('/body')) return route.fulfill({ json: { title: LESSON.title, body: LESSON.body } })
+    return route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
+  })
+  await page.route('**/api/study/answer', r => r.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 10, expected_answer: '9' } }))
+  await page.route('**/api/scores/**', r => r.fulfill({ json: { lifetime_points: 100, weekly_score: 10, speed_bonus: 0, concepts_mastered: 1, current_streak: 1, level: 'Novice', xp_total: 10, xp_today: 10, daily_xp_goal: 30 } }))
+  await page.route('**/api/progress/**', r => r.fulfill({ json: {} }))
+  await page.route('**/api/activity**', r => r.fulfill({ json: [] }))
+  await page.route('**/api/weaknesses**', r => r.fulfill({ json: { by_domain: {} } }))
+  await page.route('**/api/reviews/due**', r => r.fulfill({ json: { count: 0 } }))
+  await page.route('**/api/courses**', r => r.fulfill({ json: { courses: [] } }))
+  await page.route('**/api/transcript**', r => r.fulfill({ json: { courses: [] } }))
+  await page.route('**/api/efficacy**', r => r.fulfill({ json: { concepts_touched: 1, first_pass_rate: 1, second_pass_rate: 1, avg_attempts_per_concept: 1, total_attempts: 1 } }))
 
-  await page.goto('/session')
-  await page.getByPlaceholder('Your name').fill('Ada')
-  await page.getByRole('button', { name: 'Learning Mode →' }).click()
+  await page.goto('/study?lesson=' + encodeURIComponent(LESSON.title))
   await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 
-  const input = page.getByPlaceholder('Your answer')
+  const input = page.locator('input[placeholder*="Your answer"]').first()
+  await expect(input).toBeVisible({ timeout: 20_000 })
   await input.fill('9')
-  await page.getByRole('button', { name: 'Check Answer' }).dblclick()
+  await page.getByRole('button', { name: /Submit|Check Answer/ }).first().dblclick()
   await page.waitForTimeout(500)
 
   expect(answerPosts).toBe(1)

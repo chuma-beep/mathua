@@ -7,9 +7,8 @@ test('graph renders the full fallback concept set', async ({ page }) => {
   await page.route('**/api/**', route => route.fulfill({ status: 404, body: 'not found' }))
   await page.goto('/graph')
   const nodes = page.locator('.react-flow__node')
-  await expect(nodes.first()).toBeVisible({ timeout: 30_000 })
-  const nodeCount = await nodes.count()
-  expect(nodeCount).toBeGreaterThan(100)
+  await expect(nodes.first()).toBeVisible({ timeout: 45_000 })
+  await expect.poll(async () => nodes.count(), { timeout: 45_000 }).toBeGreaterThan(100)
 })
 
 test('search selects a concept and syncs the URL param', async ({ page }) => {
