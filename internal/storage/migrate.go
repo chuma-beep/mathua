@@ -16,7 +16,10 @@ CREATE TABLE IF NOT EXISTS students (
     league               TEXT NOT NULL DEFAULT 'bronze',
     league_week          TEXT NOT NULL DEFAULT '',
     league_moved         INTEGER NOT NULL DEFAULT 0,
-    share_token          TEXT NOT NULL DEFAULT ''
+    share_token          TEXT NOT NULL DEFAULT '',
+    email                TEXT NOT NULL DEFAULT '',
+    google_id            TEXT NOT NULL DEFAULT '',
+    avatar_url           TEXT NOT NULL DEFAULT ''
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
@@ -67,6 +70,8 @@ CREATE INDEX IF NOT EXISTS idx_attempts_session  ON attempts(session_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_attempts_cover    ON attempts(student_id, concept_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_students_share    ON students(share_token);
+CREATE INDEX IF NOT EXISTS idx_students_email     ON students(email);
+CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id);
 
 CREATE TABLE IF NOT EXISTS questions (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,

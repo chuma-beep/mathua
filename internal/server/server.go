@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"strings"
 	"sync"
@@ -179,6 +180,9 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.authLimiter.middleware(s.handleSignup))))
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
+	mux.HandleFunc("/api/auth/google", logRequest(cors(s.authLimiter.middleware(s.handleGoogleOneTap))))
+	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.handleGoogleLogin)))
+	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.handleGoogleCallback)))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 
 	mux.HandleFunc("/api/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleSession)))))
@@ -481,9 +485,15 @@ func (s *Server) handleScores(w http.ResponseWriter, r *http.Request) {
 
 // GET /api/config
 func (s *Server) handleConfig(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, map[string]interface{}{
+	cfg := map[string]interface{}{
 		"auth_enabled": s.auth != nil,
-	})
+	}
+	if v := os.Getenv("GOOGLE_CLIENT_ID"); v != "" {
+		cfg["google_client_id"] = v
+	} else if v := os.Getenv("GOOGLE_OAUTH_CLIENT_ID"); v != "" {
+		cfg["google_client_id"] = v
+	}
+	writeJSON(w, cfg)
 }
 
 // GET /api/graph
@@ -2074,6 +2084,130 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"level":                scores.Level,
 		"diagnostic_completed": st.DiagnosticCompleted,
 	})
+}
+
+// POST /api/auth/google — One-Tap id_token
+func (s *Server) handleGoogleOneTap(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	var req struct {
+		IDToken string `json:"id_token"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if strings.TrimSpace(req.IDToken) == "" {
+		writeError(w, "id_token required", 400)
+		return
+	}
+	profile, err := s.auth.VerifyGoogleIDToken(r.Context(), req.IDToken)
+	if err != nil {
+		writeError(w, "invalid google token: "+err.Error(), 401)
+		return
+	}
+	token, st, err := s.auth.LoginOrCreateGoogle(profile.Name, profile.Email, profile.GoogleID, profile.Picture)
+	if err != nil {
+		writeError(w, "google login failed: "+err.Error(), 500)
+		return
+	}
+	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
+}
+
+// GET /api/auth/google/login — redirect to Google OAuth consent
+func (s *Server) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	clientID := os.Getenv("GOOGLE_CLIENT_ID")
+	if clientID == "" {
+		clientID = os.Getenv("GOOGLE_OAUTH_CLIENT_ID")
+	}
+	if strings.TrimSpace(clientID) == "" {
+		writeError(w, "google auth not configured", 500)
+		return
+	}
+	redirectURL := os.Getenv("GOOGLE_REDIRECT_URL")
+	if strings.TrimSpace(redirectURL) == "" {
+		scheme := "https"
+		if r.Header.Get("X-Forwarded-Proto") != "" {
+			scheme = r.Header.Get("X-Forwarded-Proto")
+		} else if strings.HasPrefix(r.Host, "localhost") {
+			scheme = "http"
+		}
+		redirectURL = fmt.Sprintf("%s://%s/api/auth/google/callback", scheme, r.Host)
+	}
+	// CSRF state
+	state := newUUID()
+	http.SetCookie(w, &http.Cookie{Name: "oauth_state", Value: state, Path: "/", HttpOnly: true, Secure: r.Header.Get("X-Forwarded-Proto") == "https" || r.TLS != nil, SameSite: http.SameSiteLaxMode, MaxAge: 600})
+	// Preserve frontend return path
+	ret := r.URL.Query().Get("return")
+	if ret == "" {
+		ret = "/profile"
+	}
+	http.SetCookie(w, &http.Cookie{Name: "oauth_return", Value: ret, Path: "/", HttpOnly: false, SameSite: http.SameSiteLaxMode, MaxAge: 600})
+	q := url.Values{}
+	q.Set("client_id", clientID)
+	q.Set("redirect_uri", redirectURL)
+	q.Set("response_type", "code")
+	q.Set("scope", "openid email profile")
+	q.Set("state", state)
+	q.Set("access_type", "offline")
+	q.Set("prompt", "select_account")
+	http.Redirect(w, r, "https://accounts.google.com/o/oauth2/v2/auth?"+q.Encode(), http.StatusFound)
+}
+
+// GET /api/auth/google/callback?code=...&state=...
+func (s *Server) handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	if r.URL.Query().Get("error") != "" {
+		http.Redirect(w, r, "/login?error=google_denied", http.StatusFound)
+		return
+	}
+	state := r.URL.Query().Get("state")
+	cookie, _ := r.Cookie("oauth_state")
+	if state == "" || cookie == nil || cookie.Value != state {
+		writeError(w, "invalid oauth state", 400)
+		return
+	}
+	code := r.URL.Query().Get("code")
+	if strings.TrimSpace(code) == "" {
+		writeError(w, "missing code", 400)
+		return
+	}
+	profile, err := s.auth.ExchangeGoogleCode(r.Context(), code, r)
+	if err != nil {
+		log.Printf("google code exchange: %v", err)
+		http.Redirect(w, r, "/login?error=google_failed", http.StatusFound)
+		return
+	}
+	token, st, err := s.auth.LoginOrCreateGoogle(profile.Name, profile.Email, profile.GoogleID, profile.Picture)
+	if err != nil {
+		log.Printf("google login create: %v", err)
+		http.Redirect(w, r, "/login?error=google_failed", http.StatusFound)
+		return
+	}
+	// Clear state cookies
+	http.SetCookie(w, &http.Cookie{Name: "oauth_state", Value: "", Path: "/", MaxAge: -1})
+	ret := "/profile"
+	if c, err := r.Cookie("oauth_return"); err == nil && c.Value != "" {
+		ret = c.Value
+		http.SetCookie(w, &http.Cookie{Name: "oauth_return", Value: "", Path: "/", MaxAge: -1})
+	}
+	// Redirect to frontend with token fragment (frontend will capture and store)
+	// Use query ?token=... so static export can read; token is short-lived HS256.
+	u := fmt.Sprintf("%s?token=%s&name=%s&id=%s", ret, url.QueryEscape(token), url.QueryEscape(st.Name), url.QueryEscape(st.ID))
+	http.Redirect(w, r, u, http.StatusFound)
 }
 
 func newUUID() string {

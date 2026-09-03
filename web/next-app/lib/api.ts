@@ -425,12 +425,19 @@ export async function getEfficacy(): Promise<EfficacyReport | null> {
 
 export interface ConfigRes {
 	auth_enabled: boolean
+	google_client_id?: string
 }
 
 export async function getConfig(): Promise<ConfigRes> {
 	const res = await fetch(`${API_BASE}/api/config`)
 	if (!res.ok) return { auth_enabled: false }
 	return res.json()
+}
+
+export async function googleOneTap(idToken: string): Promise<AuthRes> {
+	const res = await fetch(`${API_BASE}/api/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id_token: idToken }) })
+	if (!res.ok) throw new Error('Google sign-in failed')
+	return validateResponse(AuthResSchema, await res.json(), 'googleOneTap') as AuthRes
 }
 
 export async function healthCheck(): Promise<boolean> {

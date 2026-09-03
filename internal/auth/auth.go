@@ -1,9 +1,11 @@
 package auth
 
 import (
+	"context"
 	"crypto/rand"
 	"encoding/hex"
 	"log"
+	"net/http"
 	"os"
 	"sync"
 	"time"
@@ -95,6 +97,59 @@ func (a *AuthService) Login(username, password string) (string, *storage.Student
 	return token, st, nil
 }
 
+// LoginOrCreateGoogle links a Google identity by email (existing username/password users keep their username) and issues a JWT.
+// One-tap (id_token) and OAuth code flow both resolve to (name, email, googleID, avatar) and converge here.
+func (a *AuthService) LoginOrCreateGoogle(name, email, googleID, avatarURL string) (string, *storage.Student, error) {
+	if googleID == "" {
+		return "", nil, jwt.ErrTokenRequiredClaimMissing
+	}
+	// 1. Existing Google-linked account
+	if st, err := a.repo.FindByGoogleID(googleID); err != nil {
+		return "", nil, err
+	} else if st != nil {
+		// refresh avatar
+		if avatarURL != "" && st.AvatarURL != avatarURL {
+			_ = a.repo.LinkGoogleID(st.ID, googleID, avatarURL)
+			st.AvatarURL = avatarURL
+		}
+		tok, err := generateToken(st.ID)
+		if err != nil {
+			return "", nil, err
+		}
+		return tok, st, nil
+	}
+	// 2. Link existing email/username account (keep username unique)
+	if email != "" {
+		if st, err := a.repo.FindByEmail(email); err != nil {
+			return "", nil, err
+		} else if st != nil {
+			if err := a.repo.LinkGoogleID(st.ID, googleID, avatarURL); err != nil {
+				return "", nil, err
+			}
+			tok, err := generateToken(st.ID)
+			if err != nil {
+				return "", nil, err
+			}
+			st.GoogleID = googleID
+			st.AvatarURL = avatarURL
+			if st.Email == "" {
+				st.Email = email
+			}
+			return tok, st, nil
+		}
+	}
+	// 3. Fresh Google user
+	st, err := a.repo.CreateGoogleUser(name, email, googleID, avatarURL)
+	if err != nil {
+		return "", nil, err
+	}
+	tok, err := generateToken(st.ID)
+	if err != nil {
+		return "", nil, err
+	}
+	return tok, st, nil
+}
+
 func (a *AuthService) ValidateToken(tokenStr string) (string, error) {
 	claims := &Claims{}
 	tok, err := jwt.ParseWithClaims(tokenStr, claims, func(t *jwt.Token) (interface{}, error) {
@@ -140,4 +195,12 @@ func generateSecret() []byte {
 
 func GenerateSecretHex() string {
 	return hex.EncodeToString(generateSecret())
+}
+
+func (a *AuthService) VerifyGoogleIDToken(ctx context.Context, idToken string) (*GoogleProfile, error) {
+	return VerifyGoogleIDToken(ctx, idToken)
+}
+
+func (a *AuthService) ExchangeGoogleCode(ctx context.Context, code string, r *http.Request) (*GoogleProfile, error) {
+	return ExchangeGoogleCode(ctx, code, r)
 }
