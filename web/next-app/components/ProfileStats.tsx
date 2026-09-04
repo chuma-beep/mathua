@@ -9,7 +9,6 @@ interface Props {
   avatarSeed?: string
   avatarUrl?: string
   avatarPreset?: number | null
-  onSignOut?: () => void
 }
 
 const LEVEL_NAMES: Record<string, string> = {
@@ -24,7 +23,7 @@ const LEVEL_NAMES: Record<string, string> = {
   'Math Architect': '09',
 }
 
-export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avatarPreset, onSignOut }: Props) {
+export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avatarPreset }: Props) {
   const xpPct = scores.daily_xp_goal > 0
     ? Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100))
     : 0
@@ -32,42 +31,19 @@ export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avat
 
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6 w-full max-w-full min-w-0 overflow-hidden">
-      {/* Avatar — top on mobile, left on desktop */}
-      <div className="flex sm:flex-col items-center gap-3 sm:gap-2 shrink-0 self-start w-full sm:w-auto justify-start">
+      <div className="shrink-0 self-start">
         <Avatar seed={avatarSeed ?? name} name={name} size={72} url={avatarUrl} preset={avatarPreset ?? undefined} />
-        {/* Sign out under avatar — desktop only; mobile version lives beside level */}
-        {onSignOut && (
-          <button
-            onClick={onSignOut}
-            aria-label="Sign out"
-            className="hidden sm:inline-flex border border-mathua-border text-mathua-muted hover:border-mathua-red hover:text-mathua-red rounded-none px-3 h-7 font-mono text-[10px] uppercase tracking-wider transition-colors"
-          >
-            Sign out
-          </button>
-        )}
       </div>
-      {/* Level + Sign out row — on mobile, Sign out appears beside level for better UX */}
-      <div className="flex flex-row sm:flex-col gap-3 sm:gap-0 w-full sm:w-auto items-stretch sm:items-start">
-        <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start flex-1 sm:flex-none">
-          <div className="font-mono text-[9px] text-mathua-muted mb-1">
-            LV
-          </div>
-          <div className="font-mono text-[36px] font-normal text-mathua-blue leading-none">
-            {levelNum}
-          </div>
-          <div className="font-mono text-[10px] text-mathua-primary mt-1">
-            {scores.level}
-          </div>
+      <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start">
+        <div className="font-mono text-[9px] text-mathua-muted mb-1">
+          LV
         </div>
-        {onSignOut && (
-          <button
-            onClick={onSignOut}
-            aria-label="Sign out"
-            className="sm:hidden flex-1 border border-mathua-border text-mathua-muted hover:border-mathua-red hover:text-mathua-red rounded-none px-3 font-mono text-[10px] uppercase tracking-wider transition-colors min-h-[44px] inline-flex items-center justify-center self-stretch"
-          >
-            Sign out
-          </button>
-        )}
+        <div className="font-mono text-[36px] font-normal text-mathua-blue leading-none">
+          {levelNum}
+        </div>
+        <div className="font-mono text-[10px] text-mathua-primary mt-1">
+          {scores.level}
+        </div>
       </div>
 
       <div className="flex-1 min-w-0 w-full sm:min-w-0">

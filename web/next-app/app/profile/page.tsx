@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId, signOut } from '../../lib/auth'
+import { getUserInfo, ensureGuestId } from '../../lib/auth'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
@@ -280,10 +280,6 @@ export default function ProfilePage() {
           avatarSeed={user.student_id}
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
-          onSignOut={() => {
-            signOut()
-            router.push('/login')
-          }}
         />
 
         {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
