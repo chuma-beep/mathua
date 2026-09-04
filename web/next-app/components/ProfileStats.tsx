@@ -31,18 +31,20 @@ export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avat
 
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6 w-full max-w-full min-w-0 overflow-hidden">
-      <div className="shrink-0 self-start">
-        <Avatar seed={avatarSeed ?? name} name={name} size={72} url={avatarUrl} preset={avatarPreset ?? undefined} />
-      </div>
-      <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start">
-        <div className="font-mono text-[9px] text-mathua-muted mb-1">
-          LV
+      <div className="flex flex-row gap-4 sm:contents w-full sm:w-auto">
+        <div className="shrink-0 self-start">
+          <Avatar seed={avatarSeed ?? name} name={name} size={72} url={avatarUrl} preset={avatarPreset ?? undefined} />
         </div>
-        <div className="font-mono text-[36px] font-normal text-mathua-blue leading-none">
-          {levelNum}
-        </div>
-        <div className="font-mono text-[10px] text-mathua-primary mt-1">
-          {scores.level}
+        <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start">
+          <div className="font-mono text-[9px] text-mathua-muted mb-1">
+            LV
+          </div>
+          <div className="font-mono text-[36px] font-normal text-mathua-blue leading-none">
+            {levelNum}
+          </div>
+          <div className="font-mono text-[10px] text-mathua-primary mt-1">
+            {scores.level}
+          </div>
         </div>
       </div>
 
