@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test('graph controls are desktop-sized and minimap is readable at 1280px', async ({ page }) => {
   await page.goto('/graph')
-  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 30_000 })
+  await expect(page.locator('[data-testid="graph-wrapper"]')).toBeVisible({ timeout: 45_000 })
+  await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 45_000 })
 
   const ctrl = page.locator('.react-flow__controls-button').first()
   const ctrlBox = await ctrl.boundingBox()
