@@ -588,6 +588,7 @@ export async function getWeaknesses(): Promise<WeaknessRes> {
 export interface UserSettings {
 	show_timer?: boolean
 	pause_until?: string | null
+	avatar_preset?: number | null
 }
 
 export async function getSettings(): Promise<UserSettings> {

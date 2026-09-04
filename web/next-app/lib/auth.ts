@@ -39,10 +39,23 @@ export interface UserInfo {
   current_streak: number
   level: string
   diagnostic_completed: boolean
+  avatar_url?: string
 }
 
 export function setUserInfo(info: UserInfo) {
   localStorage.setItem(USER_KEY, JSON.stringify(info))
+  window.dispatchEvent(new Event('auth-changed'))
+}
+
+export function signOut() {
+  localStorage.removeItem(TOKEN_KEY)
+  localStorage.removeItem(USER_KEY)
+  // preserve guest progress
+  try {
+    const g = (window as unknown as { google?: { accounts?: { id?: { disableAutoSelect?: () => void } } } }).google
+    g?.accounts?.id?.disableAutoSelect?.()
+  } catch { /* ignore */ }
+  window.dispatchEvent(new Event('auth-changed'))
 }
 
 export function getUserInfo(): UserInfo | null {

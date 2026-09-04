@@ -9,9 +9,10 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import { getSettings, updateSettings, enableShare, disableShare, type UserSettings } from '../../lib/api'
-import { isLoggedIn } from '../../lib/auth'
+import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import { Switch } from '../../components/ui/switch'
 import Loading from '../../components/Loading'
+import Avatar from '../../components/Avatar'
 
 export default function SettingsPage() {
   const { push } = useRouter()
@@ -164,6 +165,58 @@ export default function SettingsPage() {
                     </button>
                   )}
                 </div>
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Avatar</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Choose a Discord-style avatar. Stored per account and used on your profile.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {Array.from({ length: 8 }, (_, i) => {
+                    const user = getUserInfo()
+                    const name = user?.name ?? 'You'
+                    const seed = user?.student_id ?? 'guest'
+                    const selected = settings.avatar_preset === i
+                    return (
+                      <button
+                        key={i}
+                        onClick={async () => {
+                          const next = { ...settings, avatar_preset: i }
+                          setSettings(next)
+                          setSaved(false)
+                          try {
+                            await updateSettings(next)
+                            setSaved(true)
+                            setTimeout(() => setSaved(false), 2000)
+                          } catch { console.error('updateSettings failed') }
+                        }}
+                        aria-label={`Select avatar preset ${i + 1}`}
+                        className={`p-1 border rounded-full transition-colors ${selected ? 'border-mathua-blue' : 'border-transparent hover:border-mathua-border'}`}
+                      >
+                        <Avatar seed={seed} name={name} size={40} preset={i} />
+                      </button>
+                    )
+                  })}
+                </div>
+                <button
+                  onClick={async () => {
+                    const next = { ...settings, avatar_preset: null } as UserSettings
+                    delete (next as unknown as Record<string, unknown>).avatar_preset
+                    // explicit null to clear preset and fall back to deterministic / photo
+                    const cleared: UserSettings = { ...settings }
+                    delete (cleared as unknown as Record<string, unknown>).avatar_preset
+                    setSettings(cleared)
+                    try {
+                      await updateSettings(cleared)
+                      setSaved(true)
+                      setTimeout(() => setSaved(false), 2000)
+                    } catch { console.error('updateSettings failed') }
+                  }}
+                  className="mt-3 border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-8 text-xs font-mono"
+                >
+                  Use default
+                </button>
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
