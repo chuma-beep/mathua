@@ -1,8 +1,13 @@
 'use client'
 
 import Link from 'next/link'
+import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
+import { signOut } from '../lib/auth'
+import Avatar from './Avatar'
+import { getSettings } from '../lib/api'
 
 interface HeaderLink {
   label: string
@@ -15,7 +20,38 @@ interface HeaderProps {
 
 export default function Header({ links }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
-  const { loggedIn } = useAuthState()
+  const { loggedIn, user } = useAuthState()
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
+  const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!loggedIn || !user) {
+      setAvatarUrl(undefined)
+      setAvatarPreset(null)
+      return
+    }
+    if (user.avatar_url) setAvatarUrl(user.avatar_url)
+    getSettings().then(s => {
+      if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {
+        setAvatarPreset((s as unknown as { avatar_preset: number }).avatar_preset)
+        setAvatarUrl(undefined)
+      } else if (user.avatar_url) {
+        setAvatarUrl(user.avatar_url)
+        setAvatarPreset(null)
+      }
+    }).catch(() => {})
+  }, [loggedIn, user])
+
+  useEffect(() => {
+    function onClick(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [])
 
   const displayLinks = links || [
     { label: 'Study', href: '/study' },
@@ -55,7 +91,7 @@ export default function Header({ links }: HeaderProps) {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {mounted && (
             <button
               onClick={toggleTheme}
@@ -65,6 +101,42 @@ export default function Header({ links }: HeaderProps) {
               {theme === 'dark' ? '\u2600' : '\u263E'}
             </button>
           )}
+          {loggedIn && user ? (
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={() => setOpen(o => !o)}
+                aria-label="Open profile menu"
+                aria-expanded={open}
+                className="rounded-full p-0.5 border border-transparent hover:border-mathua-border focus:outline-none focus:border-mathua-blue transition-colors"
+              >
+                <Avatar
+                  seed={user.student_id}
+                  name={user.name}
+                  size={32}
+                  url={avatarPreset !== null ? undefined : avatarUrl}
+                  preset={avatarPreset ?? undefined}
+                />
+              </button>
+              {open && (
+                <div className="absolute right-0 top-[calc(100%+8px)] min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50">
+                  <div className="px-3 py-2 border-b border-mathua-border">
+                    <div className="font-mono text-xs text-mathua-primary truncate">{user.name}</div>
+                    {user.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setOpen(false)
+                      signOut()
+                      router.push('/login')
+                    }}
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </header>
