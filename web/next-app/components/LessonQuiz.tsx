@@ -92,12 +92,21 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
   if (error) {
     return (
       <div className="mt-8 p-6 border border-mathua-border bg-mathua-surface">
-        <p className="text-mathua-muted text-xs font-mono">No practice questions available for this concept.</p>
+        <p className="text-mathua-muted text-xs font-mono">Couldn&apos;t load practice questions — check your connection.</p>
+        <button onClick={loadQuestions} className="mt-3 font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider">
+          Retry →
+        </button>
       </div>
     )
   }
 
-  if (questions.length === 0) return null
+  if (questions.length === 0) {
+    return (
+      <div className="mt-8 p-6 border border-mathua-border bg-mathua-surface">
+        <p className="text-mathua-muted text-xs font-mono">No practice questions available for this concept yet.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="mt-8">
@@ -107,7 +116,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
         </h3>
         <div className="flex items-center gap-3">
           {!streak.advanced && streak.consecutive > 0 && (
-            <span className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider">
+            <span title="Answer 2 in a row to advance to the next concept" className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider">
               streak {streak.consecutive}/2
             </span>
           )}
@@ -118,9 +127,11 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
           )}
           <button
             onClick={loadQuestions}
+            aria-label="Load new questions"
+            title="Load new questions"
             className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover transition-colors uppercase tracking-wider"
           >
-            ↻ New
+            New questions
           </button>
         </div>
       </div>
@@ -141,8 +152,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
         {questions.map((q, i) => {
           const result = results[i]
           const showAnswer = result !== undefined
-          const hidden = streak.advanced && result === undefined
-          if (hidden) return null
+          const locked = streak.advanced
           return (
             <div
               key={i}
@@ -173,7 +183,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           onChange={e => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
                          onKeyDown={e => handleKeyDown(e, i)}
                          placeholder="Your answer…"
-                        disabled={result !== undefined}
+                        disabled={result !== undefined || locked}
                         className={`flex-1 bg-mathua-bg border px-2.5 py-1.5 text-xs font-mono text-mathua-primary outline-none transition-colors rounded-none ${
                           result === 'correct'
                             ? 'border-green-500/60'
@@ -182,7 +192,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                             : 'border-mathua-border focus:border-mathua-blue'
                         }`}
                       />
-                      {result === undefined && (
+                      {result === undefined && !locked && (
                         <button
                           onClick={() => handleCheck(i)}
                           disabled={!!checking[i]}
@@ -195,7 +205,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
 
                     {result === 'correct' && (
                       <p className="mt-2 text-xs font-mono text-green-400">
-                        ✓ Correct!{xpMap[i] ? <span className="text-yellow-400"> +{xpMap[i]} XP</span> : null}
+                        ✓ Correct!{xpMap[i] ? <span title="Experience points — progress toward your daily goal" className="text-yellow-400"> +{xpMap[i]} XP</span> : null}
                       </p>
                     )}
                     {result === 'incorrect' && (

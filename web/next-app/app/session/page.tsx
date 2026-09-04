@@ -1,13 +1,17 @@
 'use client'
 
 import Link from 'next/link'
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 
-export default function SessionPage() {
+function SessionContent() {
+  const searchParams = useSearchParams()
+  const concept = searchParams.get('concept')
   return (
     <>
       <Header />
@@ -19,10 +23,23 @@ export default function SessionPage() {
             </Link>
           </span>
 
-          <SectionHeader label="Study" title="Where would you like to start?" />
+          <SectionHeader label="Start" title="Where would you like to start?" />
           <p className="text-mathua-secondary text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-4">
-            Take a quick diagnostic to get a recommendation on where to start, or jump straight into Study.
+            Take a diagnostic test to get a recommendation on where to start, or jump straight into Study.
           </p>
+          {concept && (
+            <div className="max-w-2xl mx-auto mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <span className="font-mono text-xs text-mathua-primary min-w-0 truncate">
+                Continue with {concept}
+              </span>
+              <Link
+                href={`/concept?id=${encodeURIComponent(concept)}`}
+                className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
+              >
+                Open concept →
+              </Link>
+            </div>
+          )}
 
           <div className="max-w-2xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Option 1 — Diagnostic (Recommended) */}
@@ -37,13 +54,13 @@ export default function SessionPage() {
                 Option 1
               </span>
               <h3 className="font-serif text-xl font-medium text-mathua-primary group-hover:text-white mt-1">
-                Take a Diagnostic
+                Take a diagnostic test
               </h3>
               <p className="font-mono text-xs text-mathua-secondary group-hover:text-white/80 mt-2 leading-relaxed">
-                20–35 adaptive questions to find your knowledge frontier and get a personalized starting recommendation.
+                A diagnostic test to find your knowledge frontier and get a personalized starting recommendation.
               </p>
               <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue group-hover:text-white">
-                Start Diagnostic →
+                Start diagnostic test →
               </span>
             </Link>
 
@@ -68,7 +85,7 @@ export default function SessionPage() {
           </div>
 
           <p className="text-mathua-muted text-xs font-mono text-center mt-6">
-            You can switch anytime. Diagnostic never deletes progress.
+            You can switch anytime. The diagnostic test never deletes progress.
           </p>
         </section>
 
@@ -77,5 +94,13 @@ export default function SessionPage() {
       </div>
       <BottomTabs />
     </>
+  )
+}
+
+export default function SessionPage() {
+  return (
+    <Suspense>
+      <SessionContent />
+    </Suspense>
   )
 }

@@ -196,9 +196,9 @@ function GraphContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex justify-between mb-4">
-          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
-          </Link>
+          </button>
         </span>
         <SectionHeader label="Your knowledge graph" title="Explore the concept map" />
         {connected && loggedIn && scores ? (
@@ -206,12 +206,12 @@ function GraphContent() {
         ) : connected && !loggedIn ? (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
             Sign in or{' '}
-            <Link href="/session" className="text-mathua-blue hover:underline">start a practice session</Link>
+            <Link href="/session" className="text-mathua-blue hover:underline">start learning</Link>
             {' '}to track your progress across the concept map.
           </p>
         ) : (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
-            <Link href="/session" className="text-mathua-blue hover:underline">Start practicing</Link>
+            <Link href="/session" className="text-mathua-blue hover:underline">Start learning</Link>
             {' '}to track your progress across the concept map.
           </p>
         )}

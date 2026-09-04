@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
@@ -62,6 +63,10 @@ function GoalsContent() {
   const searchParams = useSearchParams()
 
   const [step, setStep] = useState<Step>('select')
+  const [quizPending, setQuizPending] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('quiz') === '1'
+  })
   const [scores, setScores] = useState<Scores | null>(null)
   const [loading, setLoading] = useState(false)
 
@@ -241,6 +246,7 @@ function GoalsContent() {
   }
 
   async function startQuiz() {
+    setQuizPending(false)
     setLoading(true)
     try {
       const res = await startQuizSession()
@@ -315,11 +321,15 @@ function GoalsContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
+            <button onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
           </span>
 
           {/* === STEP 1: Goal Selection === */}
-          {step === 'select' && (
+          {quizPending && step === 'select' ? (
+            <div className="py-20 text-center">
+              <Loading label="LOADING QUIZ" />
+            </div>
+          ) : step === 'select' && (
             <>
               {scores && <div className="min-w-0 overflow-hidden"><ProgressSummary scores={scores} weakByDomain={weakByDomain || undefined} /></div>}
               <SectionHeader label="Step 1" title="What do you want to learn?" />
@@ -355,7 +365,7 @@ function GoalsContent() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
-                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start Diagnostic (${selectedConceptIds().length} concepts selected)`}
+                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedConceptIds().length} concepts selected)`}
                 </button>
               </div>
             </>
@@ -464,7 +474,7 @@ function GoalsContent() {
           {/* === QUIZ (reuse) — actionable every 150 XP, own grading path, guest unlimited === */}
           {step === 'quiz' && (
             <>
-              <SectionHeader label={`Quiz ${quizCount} of 5`} title={quizConceptName} />
+              <SectionHeader label={`Quiz question ${quizCount}`} title={quizConceptName} />
               <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
                 <div className="mb-4 flex items-center gap-2 text-xs font-mono text-mathua-muted justify-center">
                   <span className={quizAccuracy.correct / Math.max(quizAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{quizAccuracy.correct}/{quizAccuracy.total} correct</span>
@@ -495,17 +505,31 @@ function GoalsContent() {
           )}
           {step === 'quiz_done' && (
             <div className="max-w-2xl mx-auto text-center">
-              <SectionHeader label="Quiz complete" title={`${quizAccuracy.correct}/${quizAccuracy.total} correct`} />
-              <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct — retake anytime.</p>
-              <div className="mt-6 flex gap-3 justify-center">
-                <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
-                <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
-              </div>
+              {quizAccuracy.total === 0 ? (
+                <>
+                  <SectionHeader label="Quiz" title="No questions available" />
+                  <p className="font-mono text-sm text-mathua-secondary mt-4">There are no quiz questions available right now — try again later.</p>
+                  <div className="mt-6 flex gap-3 justify-center">
+                    <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Try again →</button>
+                    <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <SectionHeader label="Quiz complete" title={`${quizAccuracy.correct}/${quizAccuracy.total} correct`} />
+                  <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct — retake anytime.</p>
+                  <div className="mt-6 flex gap-3 justify-center">
+                    <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
+                    <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </section>
       </div>
       <Footer />
+      <BottomTabs />
     </>
   )
 }

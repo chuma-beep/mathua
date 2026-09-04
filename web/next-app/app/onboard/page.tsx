@@ -4,7 +4,6 @@ import Loading from '../../components/Loading'
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
@@ -195,7 +194,7 @@ export default function OnboardPage() {
         <section className="pt-8 min-w-0 overflow-hidden">
           {step !== 'welcome' && (
             <span className="flex mb-4">
-              <Link href="/onboard" className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</Link>
+              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
             </span>
           )}
 
@@ -249,7 +248,7 @@ export default function OnboardPage() {
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
-                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic (${selectedConceptIds().length} concepts)`}
+                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedConceptIds().length} concepts)`}
                 </button>
               </div>
             </div>

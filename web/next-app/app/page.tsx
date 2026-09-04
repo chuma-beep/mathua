@@ -1,13 +1,11 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { ensureGuestId } from '../lib/auth'
 import Header from '../components/Header'
-import BottomTabs from '../components/BottomTabs'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
 import Pipeline from '../components/Pipeline'
@@ -229,7 +227,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header links={[{ label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
+      <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       {/* ── Hero ── */}
       <section
@@ -264,18 +262,15 @@ export default function HomePage() {
         </p>
 
         <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
-          <Link href="/login" style={ctaPrimaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
-            Open the web app
-          </Link>
           <button
             onClick={() => {
               ensureGuestId()
               router.push('/profile')
             }}
-            style={ctaSecondaryStyle}
+            style={ctaPrimaryStyle}
             className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]"
           >
-            Continue as guest →
+            Get started
           </button>
           <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
             View on GitHub
@@ -288,10 +283,6 @@ export default function HomePage() {
           <span>{connectionCount} connections</span>
           <span style={{ color: 'var(--border-strong)' }}>·</span>
           <span>{domainCount} domains</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span>web</span>
-          <span style={{ color: 'var(--border-strong)' }}>·</span>
-          <span>open source</span>
         </div>
 
         {/* 3D Concept Graph */}
@@ -439,8 +430,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="dash" />
-
       <AsciiDivider pattern="wave" />
 
       {/* ── Contributing ── */}
@@ -492,7 +481,6 @@ export default function HomePage() {
 
       <Footer />
     </div>
-      <BottomTabs />
     </>
   )
 }

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useTheme } from '../../hooks/useTheme'
 import Link from 'next/link'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
@@ -41,9 +42,8 @@ export default function DiagnosePage() {
         <SectionHeader label="Diagnostic Test" title="Find your knowledge frontier" />
 
         <p className="text-mathua-secondary text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-4">
-          A Computerised Adaptive Testing session that locates your position in the concept graph
-           using as few questions as possible: typically 20–35 questions across the 284-concept
-          space.
+          A diagnostic test that locates your position in the concept graph
+          using as few questions as possible.
         </p>
       </section>
 
@@ -84,7 +84,7 @@ export default function DiagnosePage() {
         <SectionHeader label="Ready" title="Begin your diagnostic" />
 
         <p className="text-mathua-secondary text-sm leading-relaxed max-w-[500px] mx-auto mt-4 mb-8">
-          The diagnostic takes 20–35 questions. You can retake it at any time: retaking never
+          You can retake the diagnostic test at any time: retaking never
           deletes progress, and Mathua always keeps the most optimistic estimate.
         </p>
 
@@ -93,7 +93,7 @@ export default function DiagnosePage() {
             href="/onboard"
             className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
           >
-            Start Diagnostic
+            Start diagnostic test
           </Link>
           <Link
             href="/docs/system-design#cat-diagnostic"
@@ -106,6 +106,7 @@ export default function DiagnosePage() {
 
       <Footer />
     </div>
+      <BottomTabs />
     </>
   )
 }

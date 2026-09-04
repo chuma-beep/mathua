@@ -73,9 +73,9 @@ function ConceptContent() {
         <Header />
         <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <p className="text-mathua-muted text-sm">{error || 'Concept not found'}</p>
-          <Link href="/" className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
-            ← Back home
-          </Link>
+          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
+            ← Back
+          </button>
         </div>
         <BottomTabs />
         <Footer />
@@ -211,21 +211,6 @@ function ConceptContent() {
               </div>
             )}
 
-            {detail.prerequisites.length > 0 && (
-              <div className="mb-8">
-                <p className="font-mono text-xs text-mathua-muted border-b border-mathua-border pb-2 mb-3">
-                  Requires: {detail.prerequisites.map((p, i) => (
-                    <span key={p.id}>
-                      {i > 0 && <span className="mx-1 text-mathua-border">·</span>}
-                      <Link href={`/concept?id=${encodeURIComponent(p.id)}`} className="text-mathua-blue hover:text-mathua-blue-hover transition-colors">
-                        {p.label}
-                      </Link>
-                    </span>
-                  ))}
-                </p>
-              </div>
-            )}
-
             {!detail.lesson && (
               <div className="mb-8">
                 <div className="border border-mathua-border bg-mathua-surface rounded-none px-4 py-3 flex items-center gap-3 flex-wrap">
@@ -288,7 +273,7 @@ function ConceptContent() {
                 href={`/session?concept=${encodeURIComponent(conceptId)}`}
                 className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
               >
-                Practice {detail.concept.label}
+                Start practicing {detail.concept.label}
               </Link>
             </div>
           </div>

@@ -22,10 +22,14 @@ export default function SettingsPage() {
   const [shareToken, setShareToken] = useState('')
   const [shareUrl, setShareUrl] = useState('')
   const [shareBusy, setShareBusy] = useState(false)
+  const [restricted, setRestricted] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [saveError, setSaveError] = useState('')
 
   useEffect(() => {
     if (!isLoggedIn()) {
-      push('/login')
+      setRestricted(true)
+      setLoading(false)
       return
     }
     getSettings().then(s => {
@@ -35,6 +39,10 @@ export default function SettingsPage() {
       console.error('getSettings failed:', e)
       setLoading(false)
     })
+    try {
+      const savedShare = localStorage.getItem('mathua_share_url')
+      if (savedShare) setShareUrl(savedShare)
+    } catch { /* private mode — share link just won't persist */ }
   }, [push])
 
   const handleCheckedChange = async (checked: boolean) => {
@@ -49,6 +57,8 @@ export default function SettingsPage() {
       // Keep optimistic state so the toggle still works when the API is
       // unreachable (e.g. static preview). Persist will apply on next save.
       console.error('updateSettings failed')
+      setSaveError('Couldn\u2019t save — check your connection and try again.')
+      setTimeout(() => setSaveError(''), 3000)
     }
   }
 
@@ -73,6 +83,11 @@ export default function SettingsPage() {
   }
 
   const paused = !!settings.pause_until
+  const pausedLabel = (() => {
+    if (!settings.pause_until) return ''
+    const d = new Date(settings.pause_until + 'T00:00:00Z')
+    return isNaN(d.getTime()) ? settings.pause_until : d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+  })()
 
   const handleShare = async (enable: boolean) => {
     setShareBusy(true)
@@ -80,17 +95,34 @@ export default function SettingsPage() {
       if (enable) {
         const res = await enableShare()
         setShareToken(res.token)
-        setShareUrl(`${window.location.origin}/share?token=${res.token}`)
+        const url = `${window.location.origin}/share?token=${res.token}`
+        setShareUrl(url)
+        try { localStorage.setItem('mathua_share_url', url) } catch { /* ignore */ }
       } else {
         await disableShare()
         setShareToken('')
         setShareUrl('')
+        try { localStorage.removeItem('mathua_share_url') } catch { /* ignore */ }
       }
     } catch {
       console.error('share toggle failed')
     } finally {
       setShareBusy(false)
     }
+  }
+
+  if (restricted) {
+    return (
+      <>
+        <Header />
+        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 text-center overflow-x-hidden min-w-0">
+          <p className="font-mono text-xs text-mathua-secondary mb-4">Settings needs an account — your preferences are stored per account.</p>
+          <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+        </div>
+        <BottomTabs />
+        <Footer />
+      </>
+    )
   }
 
   if (loading) {
@@ -112,9 +144,9 @@ export default function SettingsPage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex justify-between items-center mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+            <button onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
               ← Back
-            </Link>
+            </button>
           </span>
 
           <div className="max-w-lg mx-auto mt-8 sm:mt-12 w-full max-w-full min-w-0 px-2 sm:px-0">
@@ -142,7 +174,7 @@ export default function SettingsPage() {
                 <span className="font-mono text-sm text-mathua-primary">Pause learning</span>
                 <p className="text-mathua-muted text-xs mt-1">
                   {paused
-                    ? `Paused until ${settings.pause_until}. Due reviews are hidden while paused.`
+                    ? `Paused until ${pausedLabel}. Due reviews are hidden while paused. Pick another duration to change it, or resume.`
                     : 'Take a break for 30, 60, or 90 days. Due reviews are hidden while paused.'}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -150,7 +182,6 @@ export default function SettingsPage() {
                     <button
                       key={d}
                       onClick={() => handlePause(d)}
-                      disabled={paused && settings.pause_until !== null}
                       className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono disabled:opacity-40"
                     >
                       Pause {d} days
@@ -170,7 +201,7 @@ export default function SettingsPage() {
               <div className="border-t border-mathua-border pt-6 min-w-0">
                 <span className="font-mono text-sm text-mathua-primary">Avatar</span>
                 <p className="text-mathua-muted text-xs mt-1">
-                  Choose a Discord-style avatar. Stored per account and used on your profile.
+                  Pick an avatar style. Stored per account and used on your profile.
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {Array.from({ length: 8 }, (_, i) => {
@@ -215,7 +246,7 @@ export default function SettingsPage() {
                   }}
                   className="mt-3 border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-8 text-xs font-mono"
                 >
-                  Use default
+                  Use default avatar
                 </button>
               </div>
 
@@ -234,10 +265,15 @@ export default function SettingsPage() {
                     />
                     <div className="flex gap-2 mt-2">
                       <button
-                        onClick={() => { navigator.clipboard?.writeText(shareUrl) }}
+                        onClick={() => {
+                          const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000) }
+                          if (navigator.clipboard?.writeText) {
+                            navigator.clipboard.writeText(shareUrl).then(done).catch(() => done())
+                          } else { done() }
+                        }}
                         className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono"
                       >
-                        Copy link
+                        {copied ? 'Copied!' : 'Copy link'}
                       </button>
                       <button
                         onClick={() => handleShare(false)}
@@ -263,6 +299,11 @@ export default function SettingsPage() {
             {saved && (
               <p className="text-mathua-green text-xs text-center mt-4 font-mono">
                 Settings saved.
+              </p>
+            )}
+            {saveError && (
+              <p className="text-mathua-red text-xs text-center mt-4 font-mono">
+                {saveError}
               </p>
             )}
           </div>
