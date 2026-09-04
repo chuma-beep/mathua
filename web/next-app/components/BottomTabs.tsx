@@ -7,7 +7,7 @@ import { useScrollDirection } from '../hooks/useScrollDirection'
 const TABS = [
   { label: 'Home', href: '/', icon: '○' },
   { label: 'Study', href: '/study', icon: '◐' },
-  { label: 'Practice', href: '/session', icon: 'π' },
+  { label: 'Start', href: '/session', icon: 'π' },
   { label: 'Profile', href: '/profile', icon: '◑' },
   { label: 'Graph', href: '/graph', icon: '⬡' },
 ]

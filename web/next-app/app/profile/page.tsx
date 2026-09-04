@@ -162,7 +162,7 @@ export default function ProfilePage() {
         <Header
           links={[
             { label: 'Study', href: '/study' },
-            { label: 'Practice', href: '/session' },
+            { label: 'Start', href: '/session' },
             { label: 'Leaderboard', href: '/leaderboard' },
             { label: 'Graph', href: '/graph' },
           ]}
@@ -181,8 +181,9 @@ export default function ProfilePage() {
               <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                  <div className="font-mono text-xs text-mathua-blue mb-1">1. Take Diagnostic</div>
-                  <p className="font-mono text-[11px] text-mathua-secondary">30–45 min · finds your knowledge frontier</p>
+                  <div className="font-mono text-xs text-mathua-blue mb-1">1. Take diagnostic test</div>
+                  <p className="font-mono text-[11px] text-mathua-secondary">Finds your knowledge frontier</p>
+                  <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
                 </div>
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                   <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
@@ -211,9 +212,9 @@ export default function ProfilePage() {
                 <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Recommended</span>
                 <span className="font-mono text-xs text-mathua-primary truncate">Take a diagnostic to get a recommendation on where to start</span>
               </div>
-              <p className="font-mono text-xs text-mathua-secondary mt-1">20–35 adaptive questions · finds your knowledge frontier</p>
+              <p className="font-mono text-xs text-mathua-secondary mt-1">Diagnostic test · finds your knowledge frontier</p>
             </div>
-            <Link href="/onboard" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Start diagnostic →</Link>
+            <Link href="/onboard" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Start diagnostic test →</Link>
           </section>
 
           <section className="mt-10">
@@ -265,7 +266,7 @@ export default function ProfilePage() {
       <Header
         links={[
           { label: 'Study', href: '/study' },
-          { label: 'Practice', href: '/session' },
+          { label: 'Start', href: '/session' },
           { label: 'Leaderboard', href: '/leaderboard' },
           { label: 'Graph', href: '/graph' },
           { label: 'Settings', href: '/settings' },
@@ -287,8 +288,9 @@ export default function ProfilePage() {
             <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                <div className="font-mono text-xs text-mathua-blue mb-1">1. Take Diagnostic</div>
-                <p className="font-mono text-[11px] text-mathua-secondary">30–45 min · finds your knowledge frontier</p>
+                <div className="font-mono text-xs text-mathua-blue mb-1">1. Take diagnostic test</div>
+                <p className="font-mono text-[11px] text-mathua-secondary">Finds your knowledge frontier</p>
+                <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
               </div>
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                 <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
@@ -326,14 +328,14 @@ export default function ProfilePage() {
               </span>
             </div>
             <p className="font-mono text-xs text-mathua-secondary mt-1">
-              20–35 adaptive questions · finds your knowledge frontier
+              Diagnostic test · finds your knowledge frontier
             </p>
           </div>
           <Link
             href="/onboard"
             className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
           >
-            {user.diagnostic_completed ? 'Retake diagnostic →' : 'Start diagnostic →'}
+            {user.diagnostic_completed ? 'Retake diagnostic test →' : 'Start diagnostic test →'}
           </Link>
         </section>
 

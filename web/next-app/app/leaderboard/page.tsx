@@ -29,6 +29,8 @@ export default function LeaderboardPage() {
   const [countdown, setCountdown] = useState('')
   const [entries, setEntries] = useState<LeaderboardEntry[]>([])
   const [leagues, setLeagues] = useState<LeagueBoard | null>(null)
+  const [leaguesFailed, setLeaguesFailed] = useState(false)
+  const [loadError, setLoadError] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const finishLoading = useCallback((data: LeaderboardEntry[]) => {
@@ -55,11 +57,11 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     getLeaderboard()
-      .then((data) => finishLoading(data))
-      .catch((e) => { console.error('leaderboard fetch failed:', e); setLoading(false) })
+      .then((data) => { setLoadError(false); finishLoading(data) })
+      .catch((e) => { console.error('leaderboard fetch failed:', e); setLoadError(true); setLoading(false) })
     getLeagues()
       .then(setLeagues)
-      .catch((e) => { console.error('leagues fetch failed:', e) })
+      .catch((e) => { console.error('leagues fetch failed:', e); setLeaguesFailed(true) })
   }, [finishLoading])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -70,9 +72,9 @@ export default function LeaderboardPage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex mb-4">
-          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
-          </Link>
+          </button>
         </span>
 
         <SectionHeader label="Weekly Leaderboard" title="Compete. Improve. Rise." />
@@ -87,7 +89,7 @@ export default function LeaderboardPage() {
         </div>
 
         <p className="text-mathua-secondary text-sm text-center mb-6 px-2">
-          Start a practice session to appear on the leaderboard. Scores reset every Monday.
+          <Link href="/session" className="text-mathua-blue hover:text-mathua-blue-hover">Start a session</Link> to appear on the leaderboard. Scores reset every Monday at 00:00 UTC.
         </p>
 
         <div className="flex justify-center mb-6 sm:mb-10 w-full max-w-full min-w-0 overflow-hidden px-2">
@@ -119,10 +121,17 @@ export default function LeaderboardPage() {
                   </td>
                 </tr>
               )}
-              {!loading && entries.length === 0 && (
+              {!loading && loadError && (
                 <tr>
                   <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                    No data yet. Start a practice session to appear here!
+                    Couldn&apos;t load the leaderboard. <button onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button>
+                  </td>
+                </tr>
+              )}
+              {!loading && !loadError && entries.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
+                    No data yet. <Link href="/session" className="text-mathua-blue hover:text-mathua-blue-hover">Start a session</Link> to appear here!
                   </td>
                 </tr>
               )}
@@ -164,15 +173,17 @@ export default function LeaderboardPage() {
         <p className="text-mathua-secondary text-sm text-center mb-6 px-2">
           Top 2 in each league promote each Monday; the bottom 2 demote. Bronze to Diamond.
         </p>
-        {!leagues ? (
+        {!leagues && !leaguesFailed ? (
           <div className="text-center py-8">
             <Loading label="LOADING LEAGUES" />
           </div>
-        ) : leagues.leagues.length === 0 ? (
-          <p className="text-center text-mathua-muted text-sm">Sign in to join a league.</p>
+        ) : leaguesFailed ? (
+          <p className="text-center text-mathua-muted text-sm">Couldn&apos;t load leagues. <button onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button></p>
+        ) : leagues!.leagues.length === 0 ? (
+          <p className="text-center text-mathua-muted text-sm"><Link href="/login" className="text-mathua-blue hover:text-mathua-blue-hover">Sign in</Link> to join a league.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-full min-w-0 overflow-hidden">
-            {leagues.leagues.map((lg) => (
+            {leagues!.leagues.map((lg) => (
               <div key={lg.tier} className="border border-mathua-border bg-mathua-surface w-full max-w-full min-w-0 overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3 bg-mathua-surface-elevated border-b border-mathua-border">
                   <span className="font-mono text-xs uppercase tracking-wider text-mathua-primary">

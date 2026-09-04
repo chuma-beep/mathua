@@ -4,6 +4,7 @@ import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import Loading from '../../components/Loading'
@@ -34,10 +35,15 @@ function ShareContent() {
         <Header />
         <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <p className="text-mathua-muted text-sm">{error}</p>
+          {!token && (
+            <p className="text-mathua-muted text-xs font-mono mt-2">Ask the student to enable sharing in Settings → Share with parent / teacher.</p>
+          )}
           <Link href="/" className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
             ← Back home
           </Link>
         </div>
+        <Footer />
+        <BottomTabs />
       </>
     )
   }
@@ -49,6 +55,8 @@ function ShareContent() {
         <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <Loading label="LOADING REPORT" />
         </div>
+        <Footer />
+        <BottomTabs />
       </>
     )
   }
@@ -80,14 +88,11 @@ function ShareContent() {
             <section className="mt-8 min-w-0">
               <DomainProgress progress={report.progress} />
             </section>
-
-            <p className="text-mathua-muted text-xs font-mono text-center mt-8">
-              Concepts mastered: {report.scores.concepts_mastered} · XP today: {report.scores.xp_today}
-            </p>
           </div>
         </section>
         <Footer />
       </div>
+      <BottomTabs />
     </>
   )
 }

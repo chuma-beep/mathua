@@ -22,11 +22,12 @@ interface Props {
 
 export default function DiagnosticResults({ plan, onStartPractice }: Props) {
   const [recommended, setRecommended] = useState<Record<string, { title: string; concepts: string[] }[]>>({})
+  const [recLoading, setRecLoading] = useState(true)
   const allWeakIds = Object.values(plan.weak_areas).flat().map((c) => c.id)
   const [expanded, setExpanded] = useState<string | null>(null)
 
   useEffect(() => {
-    if (allWeakIds.length === 0) return
+    if (allWeakIds.length === 0) { setRecLoading(false); return }
     const user = getUserInfo()
     getLessons(user?.student_id).then((res) => {
       const rec: Record<string, { title: string; concepts: string[] }[]> = {}
@@ -35,7 +36,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
         if (filtered.length) rec[domain] = filtered
       }
       setRecommended(rec)
-    }).catch(() => {})
+    }).catch(() => {}).finally(() => setRecLoading(false))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const domains = new Set([...Object.keys(plan.weak_areas), ...Object.keys(plan.strong_areas)])
@@ -51,7 +52,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
           </svg>
           <span className="absolute text-3xl font-mono font-light text-mathua-primary">{readinessPct}%</span>
         </div>
-        <p className="text-mathua-secondary text-sm mt-2">readiness {plan.total_tested > 0 && `(${plan.correct_count}/${plan.total_tested} correct)`}</p>
+        <p className="text-mathua-secondary text-sm mt-2">diagnostic test score {plan.total_tested > 0 && `(${plan.correct_count}/${plan.total_tested} correct)`}</p>
       </div>
 
       <div className="space-y-3 mb-8">
@@ -70,7 +71,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
               </button>
               <div className="px-3 pb-2">
                 <div className="h-1.5 bg-mathua-code overflow-hidden">
-                  <div className="h-full bg-mathua-red transition-all" style={{ width: `${weakPct}%` }} />
+                  <div className="h-full bg-mathua-blue transition-all" style={{ width: `${weakPct}%` }} />
                 </div>
               </div>
               {isExpanded && (
@@ -100,6 +101,14 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
         })}
       </div>
 
+      {recLoading && allWeakIds.length > 0 && (
+        <p className="font-mono text-xs text-mathua-muted text-center mb-8">Finding matching lessons…</p>
+      )}
+      {!recLoading && allWeakIds.length > 0 && Object.keys(recommended).length === 0 && (
+        <p className="font-mono text-xs text-mathua-muted text-center mb-8">
+          No matching lessons found — <Link href="/study" className="text-mathua-blue hover:text-mathua-blue-hover">browse Study →</Link>
+        </p>
+      )}
       {Object.keys(recommended).length > 0 && (
         <div className="mb-8">
           <h3 className="font-serif text-lg text-mathua-primary mb-3">Recommended lessons</h3>

@@ -331,7 +331,7 @@ function LoginInner() {
             </div>
             <div className="mt-3 text-center">
               <Link href="/profile" className="text-mathua-muted text-xs hover:text-mathua-secondary">
-                Skip for now: try without account
+                Skip for now: try without account (progress stays on this device)
               </Link>
             </div>
           </div>

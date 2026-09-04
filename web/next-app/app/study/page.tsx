@@ -593,7 +593,7 @@ function LessonDetail({
                 className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1.5 min-h-[36px] text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors max-w-full"
               >
                 <MasteryBadge status={p?.status} size="sm" />
-                <span className="truncate">{cid}</span>
+                <span className="truncate">{conceptLabels.get(cid) || cid}</span>
               </Link>
             )
           })}
@@ -712,21 +712,6 @@ function LessonDetail({
         <LessonQuiz key={cid} conceptId={cid} limit={4} />
       ))}
 
-      {lesson.prerequisites && lesson.prerequisites.length > 0 && (
-        <div className="mt-8">
-          <p className="font-mono text-xs text-mathua-muted border-b border-mathua-border pb-2 mb-3">
-            Requires: {lesson.prerequisites.map((p, i) => (
-              <span key={p.id}>
-                {i > 0 && <span className="mx-1 text-mathua-border">·</span>}
-                <Link href={`/concept?id=${encodeURIComponent(p.id)}`} className="text-mathua-blue hover:text-mathua-blue-hover transition-colors">
-                  {p.label}
-                </Link>
-              </span>
-            ))}
-          </p>
-        </div>
-      )}
-
       {lesson.dependents && lesson.dependents.length > 0 && (
         <div className="mt-6 mb-8">
           <h3 className="font-mono text-[11px] text-mathua-muted mb-3 border-b border-mathua-border pb-2 uppercase tracking-wider">
@@ -754,7 +739,7 @@ function LessonDetail({
           href={`/session`}
           className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white h-12 px-8 font-medium text-sm leading-[48px]"
         >
-          Practice these concepts
+          Start practicing these concepts
         </Link>
       </div>
     </div>
@@ -817,7 +802,7 @@ function StudyContent() {
 
     if (domainParam && lessonsByDomain[domainParam]) {
       setSelectedDomain(domainParam)
-    } else if (!domainParam) {
+    } else {
       setSelectedDomain(null)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -938,7 +923,7 @@ function StudyContent() {
                 const url = selectedDomain
                   ? '/study?domain=' + encodeURIComponent(selectedDomain)
                   : '/study'
-                window.history.replaceState(null, '', url)
+                router.push(url)
               }}
             />
           ) : selectedDomain ? (
@@ -949,7 +934,7 @@ function StudyContent() {
               agg={domainAgg[selectedDomain]}
               onBack={() => {
                 setSelectedDomain(null)
-                window.history.replaceState(null, '', '/study')
+                router.push('/study')
               }}
               onSelectLesson={(lesson) => {
                 setSelectedLesson(lesson)
@@ -965,15 +950,17 @@ function StudyContent() {
                   <p className="font-mono text-xs text-mathua-secondary mb-3">New here? Follow the order — it respects prerequisites.</p>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      { id: 'arithmetic', label: 'Arithmetic' },
-                      { id: 'fractions', label: 'Fractions' },
-                      { id: 'prealgebra', label: 'Pre-Algebra' },
+                      { prefix: 'arith', label: 'Arithmetic' },
+                      { prefix: 'frac', label: 'Fractions' },
+                      { prefix: 'prealg', label: 'Pre-Algebra' },
                     ].map(d => (
                       <button
-                        key={d.id}
+                        key={d.prefix}
                         onClick={() => {
-                          setSelectedDomain(d.id)
-                          router.push('/study?domain=' + encodeURIComponent(d.id))
+                          const match = sortedDomains.find(s => s === d.prefix || s.startsWith(d.prefix + '.') || s.startsWith(d.prefix))
+                          const target = match ?? sortedDomains.find(s => s.startsWith(d.prefix.slice(0, 4))) ?? d.prefix
+                          setSelectedDomain(target)
+                          router.push('/study?domain=' + encodeURIComponent(target))
                         }}
                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
                       >

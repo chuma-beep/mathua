@@ -376,12 +376,12 @@ minimum value: 1.3`}
             </ol>
             <DiagnosticFlow />
             <p style={bodyStyle}>
-              The diagnostic takes 20–35 questions for most students. Without this algorithm, a
+              The diagnostic test asks as few questions as possible. Without this algorithm, a
               naive assessment of 284 concepts would require up to 284 questions. The CAT approach,
               combining binary search with the topological ordering, reduces this by roughly 90%.
             </p>
             <p style={bodyStyle}>
-              The diagnostic can be retaken at any time from the settings menu. Retaking does not
+              The diagnostic test can be retaken at any time from your profile. Retaking does not
               delete progress: it creates a new knowledge estimate that is merged with existing
               data, always preferring the more optimistic estimate so students are never penalised
               for reassessing.
@@ -572,6 +572,20 @@ for line in sys.stdin:
               </span>
             </p>
 
+          </section>
+
+          <section className="mt-12 pt-6 text-center" style={{ borderTop: '0.5px solid var(--border)' }}>
+            <p style={{ ...bodyStyle, textAlign: 'center' }}>
+              Ready to find your starting point?
+            </p>
+            <div className="flex gap-3 justify-center mt-4 max-sm:flex-col max-sm:items-center">
+              <a href="/onboard" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
+                Start diagnostic test →
+              </a>
+              <a href="/study" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
+                Open Study →
+              </a>
+            </div>
           </section>
         </main>
       </div>

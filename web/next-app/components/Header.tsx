@@ -58,7 +58,7 @@ export default function Header({ links }: HeaderProps) {
     { label: 'Leaderboard', href: '/leaderboard' },
     { label: 'Graph', href: '/graph' },
     ...(loggedIn
-      ? [{ label: 'Profile', href: '/profile' }, { label: 'Practice', href: '/session' }, { label: 'Settings', href: '/settings' }]
+      ? [{ label: 'Profile', href: '/profile' }, { label: 'Start', href: '/session' }, { label: 'Settings', href: '/settings' }]
       : [{ label: 'Login', href: '/login' }]
     ),
   ]

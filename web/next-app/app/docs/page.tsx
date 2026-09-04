@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
+import Footer from '../../components/Footer'
 
 export const metadata: Metadata = {
   title: 'Documentation \u2014 Mathua',
@@ -18,7 +21,12 @@ export default function DocsIndexPage() {
   }
 
   return (
+    <>
+    <Header />
     <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-12 sm:py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 overflow-x-hidden min-w-0">
+      <Link href="/" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-muted)' }}>
+        ← Back
+      </Link>
       <h1 style={{
         fontFamily: "'IBM Plex Serif', serif",
         fontWeight: 400,
@@ -123,7 +131,7 @@ export default function DocsIndexPage() {
           color: 'var(--text-primary)',
           marginBottom: '1rem',
         }}>
-          Quickstart
+          Quickstart <span style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)' }}>(for contributors)</span>
         </h2>
 
         <pre style={{
@@ -154,9 +162,12 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
           marginTop: '1rem',
           lineHeight: 1.7,
         }}>
-          Requirements: Go 1.21+
+          Requirements: Go 1.21+ · New to Mathua? Start with <Link href="/how-it-works" className="link-underline" style={{ color: 'var(--accent-blue)' }}>How it works</Link>.
         </p>
       </div>
     </div>
+    <Footer />
+    <BottomTabs />
+    </>
   )
 }
