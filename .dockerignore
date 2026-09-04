@@ -3,8 +3,11 @@
 node_modules
 web/node_modules
 web/.next
-web/out
-*.md
+web/next-app/.next
+web/next-app/out
+# Keep lesson markdown (data/lessons/**/*.md) — don't use wild *.md
+README.md
+CONTRIBUTING.md
 LICENSE
 Dockerfile
 fly.toml

@@ -81,10 +81,6 @@ CREATE INDEX IF NOT EXISTS idx_sessions_student  ON sessions(student_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_session  ON attempts(session_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_attempts_cover    ON attempts(student_id, concept_id, timestamp);
-CREATE INDEX IF NOT EXISTS idx_students_share    ON students(share_token);
-CREATE INDEX IF NOT EXISTS idx_students_username ON students(username);
-CREATE INDEX IF NOT EXISTS idx_students_email     ON students(email);
-CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id);
 
 CREATE TABLE IF NOT EXISTS questions (
     id         SERIAL PRIMARY KEY,
@@ -171,6 +167,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_moved INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS share_token TEXT NOT NULL DEFAULT ''",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
+		"CREATE INDEX IF NOT EXISTS idx_students_share ON students(share_token)",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''",

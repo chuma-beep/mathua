@@ -18,6 +18,7 @@ import {
   submitGoalAnswer,
   getGoalPlan,
   getScores,
+  getWeaknesses,
   startQuizSession,
   submitQuizAnswer,
   type GoalPlanRes,
@@ -109,9 +110,7 @@ function GoalsContent() {
       if (user) {
         getScores(user.student_id).then(setScores).catch(e => console.error('scores fetch failed:', e))
       }
-      fetch('/api/weaknesses', {
-        headers: { Authorization: `Bearer ${token || ''}` },
-      }).then(r => r.json()).then(d => {
+      getWeaknesses().then(d => {
         if (d.by_domain) setWeakByDomain(d.by_domain)
       }).catch(e => console.error('weaknesses fetch failed:', e))
     }
