@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getAuthHeaders, getUserInfo, ensureGuestId, signOut } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, getScores, enableShare, disableShare, getSettings } from '../../lib/api'
-import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus, EfficacyReport } from '../../lib/api'
+import { getUserInfo, ensureGuestId, signOut } from '../../lib/auth'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
+import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
@@ -14,8 +14,6 @@ import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
 import Loading from '../../components/Loading'
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 
 interface UserInfo {
   student_id: string
@@ -37,10 +35,7 @@ export default function ProfilePage() {
   const [progress, setProgress] = useState<Record<string, ConceptProgress>>({})
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
-  const [courses, setCourses] = useState<CourseStatus[]>([])
   const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
-  const [shareUrl, setShareUrl] = useState('')
-  const [shareBusy, setShareBusy] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
@@ -88,7 +83,6 @@ export default function ProfilePage() {
           setProgress(progressRes)
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
-          getTranscript().then(setCourses).catch(() => {})
           getEfficacy().then(setEfficacy).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
@@ -422,95 +416,7 @@ export default function ProfilePage() {
           </section>
         )}
 
-        {/* Share with parent/teacher — read-only oversight */}
-        <section className="mt-10 min-w-0 border border-mathua-border bg-mathua-surface p-4">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary">Share with parent / teacher</h2>
-            <Link href="/settings" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider">Settings →</Link>
-          </div>
-          <p className="font-mono text-xs text-mathua-secondary mb-3">Generate a read-only link to this student’s progress, activity, and weak spots. Share token is <span className="text-mathua-muted">s_ + 12 random bytes</span> (<span className="font-mono text-[10px]">engine.go:1270</span>) and is rate-limited (<span className="font-mono text-[10px]">server.go:69</span>).</p>
-          {shareUrl ? (
-            <div className="min-w-0">
-              <input readOnly value={shareUrl} onFocus={e => e.currentTarget.select()} className="w-full bg-mathua-code border border-mathua-border h-10 px-3 font-mono text-xs text-mathua-primary focus:outline-none focus:border-mathua-blue min-w-0" />
-              <div className="flex gap-2 mt-2">
-                <button onClick={() => { navigator.clipboard?.writeText(shareUrl) }} className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-4 h-9 font-mono text-xs">Copy link</button>
-                <button onClick={async () => { setShareBusy(true); try { await disableShare(); setShareUrl('') } finally { setShareBusy(false) } }} disabled={shareBusy} className="border border-mathua-red text-mathua-red hover:bg-mathua-red hover:text-white px-4 h-9 font-mono text-xs disabled:opacity-50">Disable share</button>
-                <a href={shareUrl} target="_blank" rel="noopener" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-9 font-mono text-xs inline-flex items-center justify-center">Open →</a>
-              </div>
-            </div>
-          ) : (
-            <button onClick={async () => { setShareBusy(true); try { const res = await enableShare(); setShareUrl(`${window.location.origin}/share?token=${res.token}`) } catch { } finally { setShareBusy(false) } }} disabled={shareBusy} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center disabled:opacity-50">{shareBusy ? 'Generating…' : 'Enable share link'}</button>
-          )}
-        </section>
 
-        {/* Transcript — accreditation-track course completion */}
-        {courses.length > 0 && (
-          <section className="mt-10 min-w-0">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary">
-                Transcript
-              </h2>
-              <button
-                onClick={async () => {
-                  try {
-                    const res = await fetch(`${API_BASE}/api/transcript?format=csv`, { headers: { ...getAuthHeaders() } })
-                    if (!res.ok) return
-                    const blob = await res.blob()
-                    const url = URL.createObjectURL(blob)
-                    const a = document.createElement('a')
-                    a.href = url
-                    a.download = 'mathua-transcript.csv'
-                    a.click()
-                    URL.revokeObjectURL(url)
-                  } catch { /* ignore */ }
-                }}
-                className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
-              >
-                Download CSV ↓
-              </button>
-            </div>
-            <div className="space-y-2">
-              {courses.map(c => {
-                const p = c.progress
-                const done = !!p && p.total > 0 && p.mastered === p.total
-                const pct = p && p.total > 0 ? Math.round(p.pct * 100) : 0
-                return (
-                  <div key={c.id} className="border border-mathua-border bg-mathua-surface p-3 min-w-0">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className={`font-mono text-[10px] uppercase shrink-0 ${done ? 'text-mathua-green' : 'text-mathua-blue'}`}>
-                        {c.grade}
-                      </span>
-                      <span className="font-mono text-xs text-mathua-primary truncate flex-1 min-w-0">
-                        {c.name}
-                      </span>
-                      {p && (
-                        <span className="font-mono text-[10px] text-mathua-muted shrink-0">
-                          {p.mastered}/{p.total} · {pct}%
-                        </span>
-                      )}
-                      {p && !done && p.days_remaining > 0 && (
-                        <span className="font-mono text-[10px] text-mathua-secondary shrink-0 hidden sm:inline">
-                          ~{p.days_remaining}d
-                        </span>
-                      )}
-                      {done && (
-                        <span className="font-mono text-[10px] text-mathua-green shrink-0">✓ complete</span>
-                      )}
-                    </div>
-                    {p && (
-                      <div className="mt-1.5 h-1 bg-mathua-code overflow-hidden">
-                        <div
-                          className={`h-full transition-all ${done ? 'bg-mathua-green' : 'bg-mathua-blue'}`}
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          </section>
-        )}
       </div>
       <BottomTabs />
     </>
