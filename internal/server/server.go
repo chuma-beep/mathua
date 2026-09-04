@@ -989,8 +989,15 @@ func (s *Server) handleWeaknesses(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, map[string]interface{}{"by_domain": map[string]interface{}{}})
 		return
 	}
+	// Only report concepts the student has actually attempted (has a progress row).
+	// The 0.5 default for unseen concepts is for scheduling/difficulty only and
+	// must not surface as a "struggle" for fresh accounts.
+	progress, _ := s.repo.GetAllProgress(studentID)
 	byDomain := make(map[string][]map[string]interface{})
 	for _, c := range s.eng.GetDAG().Order() {
+		if _, ok := progress[c.ID]; !ok {
+			continue
+		}
 		w := weakMap[c.ID]
 		if w > 0.2 {
 			byDomain[c.Domain] = append(byDomain[c.Domain], map[string]interface{}{

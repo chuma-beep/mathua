@@ -1351,13 +1351,21 @@ func (e *Engine) GetShareReport(token string) (*ShareReport, error) {
 	if err != nil {
 		progress = map[string]*storage.ConceptProgress{}
 	}
+	weakAll := e.WeaknessMap(st.ID)
+	filteredWeak := make(map[string]float64)
+	for id, w := range weakAll {
+		if _, ok := progress[id]; !ok {
+			continue
+		}
+		filteredWeak[id] = w
+	}
 	return &ShareReport{
 		StudentID: st.ID,
 		Name:      st.Name,
 		Scores:    scores,
 		Activity:  activity,
 		Progress:  progress,
-		Weakness:  e.WeaknessMap(st.ID),
+		Weakness:  filteredWeak,
 	}, nil
 }
 
