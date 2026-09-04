@@ -328,7 +328,6 @@ function LoginInner() {
                 </button>
               )}
               {googleError && <p className="text-mathua-red text-xs text-center">{googleError}</p>}
-              <p className="font-mono text-[10px] text-mathua-muted text-center">Google will link to existing account by email if username exists (username stays unique)</p>
             </div>
             <div className="mt-3 text-center">
               <Link href="/profile" className="text-mathua-muted text-xs hover:text-mathua-secondary">
