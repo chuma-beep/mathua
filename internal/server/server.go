@@ -2083,6 +2083,7 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"current_streak":       scores.CurrentStreak,
 		"level":                scores.Level,
 		"diagnostic_completed": st.DiagnosticCompleted,
+		"avatar_url":           st.AvatarURL,
 	})
 }
 

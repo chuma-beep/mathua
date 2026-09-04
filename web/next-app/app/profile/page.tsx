@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getAuthHeaders, getUserInfo, ensureGuestId } from '../../lib/auth'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, getScores, enableShare, disableShare } from '../../lib/api'
+import { getAuthHeaders, getUserInfo, ensureGuestId, signOut } from '../../lib/auth'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getTranscript, getEfficacy, getScores, enableShare, disableShare, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, CourseStatus, EfficacyReport } from '../../lib/api'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
@@ -43,6 +43,8 @@ export default function ProfilePage() {
   const [shareBusy, setShareBusy] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
+  const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
 
 
   useEffect(() => {
@@ -55,7 +57,19 @@ export default function ProfilePage() {
       ensureGuestId()
     }
 
-    async function fetchData() {
+     // hydrate avatar from /api/me and settings preset
+     if (info?.avatar_url) setAvatarUrl(info.avatar_url)
+     getSettings().then(s => {
+       if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {
+         const p = (s as unknown as { avatar_preset?: number }).avatar_preset!
+         setAvatarPreset(p)
+         setAvatarUrl(undefined)
+       } else if (info?.avatar_url) {
+         setAvatarUrl(info.avatar_url)
+       }
+     }).catch(() => {})
+
+     async function fetchData() {
       try {
         if (info) {
           const [scoresRes, activityRes, progressRes, weaknessesRes] = await Promise.all([
@@ -266,7 +280,17 @@ export default function ProfilePage() {
 
       <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
         {/* Profile stats — mobile-first */}
-        <ProfileStats name={user.name} scores={scores} />
+        <ProfileStats
+          name={user.name}
+          scores={scores}
+          avatarSeed={user.student_id}
+          avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
+          avatarPreset={avatarPreset}
+          onSignOut={() => {
+            signOut()
+            router.push('/login')
+          }}
+        />
 
         {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">

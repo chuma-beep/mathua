@@ -1,10 +1,15 @@
 'use client'
 
 import type { Scores } from '../lib/api'
+import Avatar from './Avatar'
 
 interface Props {
   name: string
   scores: Scores
+  avatarSeed?: string
+  avatarUrl?: string
+  avatarPreset?: number | null
+  onSignOut?: () => void
 }
 
 const LEVEL_NAMES: Record<string, string> = {
@@ -19,7 +24,7 @@ const LEVEL_NAMES: Record<string, string> = {
   'Math Architect': '09',
 }
 
-export default function ProfileStats({ name, scores }: Props) {
+export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avatarPreset, onSignOut }: Props) {
   const xpPct = scores.daily_xp_goal > 0
     ? Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100))
     : 0
@@ -27,6 +32,18 @@ export default function ProfileStats({ name, scores }: Props) {
 
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-5 items-start border-[0.5px] border-mathua-border p-4 sm:p-5 sm:px-6 w-full max-w-full min-w-0 overflow-hidden">
+      <div className="flex flex-col items-center gap-2 shrink-0 self-start">
+        <Avatar seed={avatarSeed ?? name} name={name} size={72} url={avatarUrl} preset={avatarPreset ?? undefined} />
+        {onSignOut && (
+          <button
+            onClick={onSignOut}
+            aria-label="Sign out"
+            className="border border-mathua-border text-mathua-muted hover:border-mathua-red hover:text-mathua-red rounded-none px-3 h-7 font-mono text-[10px] uppercase tracking-wider transition-colors"
+          >
+            Sign out
+          </button>
+        )}
+      </div>
       <div className="border-[0.5px] border-mathua-border-strong px-4 py-3.5 text-center min-w-[72px] sm:min-w-[80px] shrink-0 self-start">
         <div className="font-mono text-[9px] text-mathua-muted mb-1">
           LV
