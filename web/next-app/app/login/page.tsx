@@ -327,11 +327,6 @@ function LoginInner() {
                   {googleLoading ? 'Connecting…' : 'Continue with Google'}
                 </button>
               )}
-              {googleReady && (
-                <button onClick={handleGoogleRedirect} disabled={googleLoading} className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-11 font-mono text-xs">
-                  {googleLoading ? 'Connecting…' : 'Continue with Google (redirect)'}
-                </button>
-              )}
               {googleError && <p className="text-mathua-red text-xs text-center">{googleError}</p>}
               <p className="font-mono text-[10px] text-mathua-muted text-center">Google will link to existing account by email if username exists (username stays unique)</p>
             </div>
