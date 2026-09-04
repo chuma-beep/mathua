@@ -7,7 +7,7 @@
  *     non-GET requests are never intercepted so answer submissions fail
  *     loudly instead of silently succeeding from a stale cache)
  */
-const VERSION = 'v1'
+const VERSION = 'v2'
 const SHELL_CACHE = `mathua-shell-${VERSION}`
 const ASSET_CACHE = `mathua-assets-${VERSION}`
 const DATA_CACHE = `mathua-data-${VERSION}`
