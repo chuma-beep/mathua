@@ -329,7 +329,8 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Diagnostic CTA — both authed and guest via profile */}
+        {/* Diagnostic CTA — suppressed when NextUp hero already covers diagnostic */}
+        {nextUp.kind !== 'diagnostic' && (
         <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
             <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
@@ -351,6 +352,7 @@ export default function ProfilePage() {
             {user.diagnostic_completed ? 'Retake diagnostic test →' : 'Start diagnostic test →'}
           </Link>
         </section>
+        )}
 
         {/* 150 XP Quiz gate (CONTEXT.md Quiz) */}
         {scores && scores.xp_total >= 150 && (
