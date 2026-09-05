@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { signOut, flagHomeView } from '../lib/auth'
+import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import { getSettings } from '../lib/api'
 
@@ -39,16 +40,17 @@ export default function Header({ links }: HeaderProps) {
     // revalidation here — the e2e auth spec renders the header with a
     // stored token while all /api/** routes are mocked, and must keep
     // showing the authenticated links.
-    if (user.avatar_url) setAvatarUrl(user.avatar_url)
     getSettings().then(s => {
-      if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {
-        setAvatarPreset((s as unknown as { avatar_preset: number }).avatar_preset)
-        setAvatarUrl(undefined)
-      } else if (user.avatar_url) {
-        setAvatarUrl(user.avatar_url)
-        setAvatarPreset(null)
-      }
-    }).catch(() => {})
+      // Runs on every [loggedIn, user] change — including the auth-changed
+      // broadcast that Settings fires after avatar saves — so the header
+      // picture tracks the shared resolver with no extra event type.
+      const resolved = resolveAvatar(user, s)
+      setAvatarPreset(resolved.preset ?? null)
+      setAvatarUrl(resolved.url)
+    }).catch(() => {
+      setAvatarPreset(null)
+      setAvatarUrl(user.avatar_url)
+    })
   }, [loggedIn, user])
 
   useEffect(() => {

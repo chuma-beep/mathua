@@ -185,6 +185,10 @@ export default function SettingsPage() {
       setPhotoVersion(null)
       setPendingDice(null)
       setImageMsg('Image saved.')
+      // Broadcast so the Header picture refreshes in-tab (same object —
+      // setUserInfo always dispatches auth-changed).
+      const savedInfo = getUserInfo()
+      if (savedInfo) setUserInfo({ ...savedInfo })
     } catch {
       setImageMsg('Couldn’t save — check your connection and try again.')
     } finally {
@@ -202,11 +206,13 @@ export default function SettingsPage() {
     setPhotoMsg('')
     try {
       await uploadAvatar(file)
-      const next = stripPreset({ ...settings, avatar_custom: true })
+      const next = stripPreset({ ...settings, avatar_custom: true, avatar_version: Date.now() })
       setSettings(next)
       setPendingDice(null)
       setPhotoVersion(Date.now())
       setPhotoMsg('Photo updated.')
+      const uploadedInfo = getUserInfo()
+      if (uploadedInfo) setUserInfo({ ...uploadedInfo })
     } catch {
       setPhotoMsg('Upload failed — use PNG, JPEG, GIF, or WebP up to 512KB.')
     } finally {
@@ -218,10 +224,12 @@ export default function SettingsPage() {
     setPhotoBusy(true)
     try {
       await deleteAvatar()
-      const next = stripPreset({ ...settings, avatar_custom: false })
+      const next = stripPreset({ ...settings, avatar_custom: false, avatar_version: Date.now() })
       setSettings(next)
       setPendingDice(null)
       setPhotoVersion(null)
+      const removedInfo = getUserInfo()
+      if (removedInfo) setUserInfo({ ...removedInfo })
     } catch { console.error('deleteAvatar failed') }
     finally { setPhotoBusy(false) }
   }
@@ -348,7 +356,7 @@ export default function SettingsPage() {
                     seed={gallerySeed}
                     name={displayName || 'You'}
                     size={56}
-                    url={currentPhotoUrl ?? (pendingDice ? dicebearUrl(pendingDice.style, pendingDice.seed) : currentDice ? dicebearUrl(currentDice.style as DicebearPick['style'], currentDice.seed) : undefined)}
+                    url={pendingDice ? dicebearUrl(pendingDice.style, pendingDice.seed) : currentPhotoUrl ?? (currentDice ? dicebearUrl(currentDice.style as DicebearPick['style'], currentDice.seed) : undefined)}
                   />
                   <div className="min-w-0">
                     <p className="font-mono text-[11px] uppercase text-mathua-muted">Current picture</p>

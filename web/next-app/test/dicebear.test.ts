@@ -5,6 +5,7 @@ import {
   isDicebearStyle,
   randomDicebear,
   ensureDicebearAvatar,
+  resolveAvatar,
 } from '../lib/dicebear'
 
 describe('dicebear', () => {
@@ -58,5 +59,37 @@ describe('dicebear', () => {
       updateSettings: vi.fn(),
     }
     expect(await ensureDicebearAvatar(deps)).toBeNull()
+  })
+})
+
+describe('resolveAvatar', () => {
+  const user = { avatar_url: 'https://google/photo.jpg' }
+
+  it('prefers custom upload with roaming version', () => {
+    const r = resolveAvatar(user, { avatar_custom: true, avatar_version: 123 })
+    expect(r.url).toContain('/api/avatar/me?v=123')
+    expect(r.preset).toBeNull()
+  })
+
+  it('prefers Google photo over dicebear pick', () => {
+    const r = resolveAvatar(user, { avatar_dicebear: { style: 'bottts', seed: 's' } })
+    expect(r.url).toBe('https://google/photo.jpg')
+  })
+
+  it('uses the dicebear pick without a photo', () => {
+    const r = resolveAvatar(null, { avatar_dicebear: { style: 'bottts', seed: 's' } })
+    expect(r.url).toBe('https://api.dicebear.com/10.x/bottts/svg?seed=s')
+  })
+
+  it('grandfathers legacy presets, ignores invalid styles', () => {
+    expect(resolveAvatar(null, { avatar_preset: 3 }).preset).toBe(3)
+    expect(resolveAvatar(null, { avatar_dicebear: { style: 'nope', seed: 's' } })).toEqual({
+      url: undefined,
+      preset: null,
+    })
+  })
+
+  it('falls back to automatic initial with nothing set', () => {
+    expect(resolveAvatar(null, {})).toEqual({ url: undefined, preset: null })
   })
 })
