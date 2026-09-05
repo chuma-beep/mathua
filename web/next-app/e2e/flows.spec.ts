@@ -96,7 +96,7 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   )
 
   await page.goto('/goals?quiz=1')
-  await expect(page.getByText('Quiz 1 of 5').first()).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByText('Quiz question 1').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
