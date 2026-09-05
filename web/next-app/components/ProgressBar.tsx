@@ -9,21 +9,22 @@ interface ProgressBarProps {
 
 // Shared progress bar for the Diagnostic (MA parity: adaptive, no exact
 // total is promised). The bar is driven by the monotonic cover fraction
-// (coverDone/coverSize, never decreases); the copy states time expectation
-// and pause-ability instead of a moving N/M denominator.
+// (coverDone/coverSize, never decreases); visible copy is just the
+// "Progress bar" label and the question number.
 export default function ProgressBar({ answered, coverDone, coverSize, className = '' }: ProgressBarProps) {
   const safeAnswered = Math.max(0, answered)
   const size = Math.max(0, coverSize)
   const done = Math.min(Math.max(0, coverDone), Math.max(size, 1))
   const pct = size > 0 ? Math.min((done / size) * 100, 100) : 0
   const indeterminate = size <= 0
+  const questionLabel = `Question ${Math.max(safeAnswered, 1)}`
 
   return (
     <div className={`mb-4 ${className}`}>
       <div className="flex justify-between text-[10px] font-mono text-mathua-muted mb-1">
         <span>Progress bar</span>
         <span aria-live="polite">
-          {`Question ${Math.max(safeAnswered, 1)} · ~30–45 min · can pause · finding your frontier…`}
+          {questionLabel}
         </span>
       </div>
       {indeterminate ? (
@@ -43,7 +44,7 @@ export default function ProgressBar({ answered, coverDone, coverSize, className 
           aria-valuemin={0}
           aria-valuemax={size}
           aria-valuenow={done}
-          aria-valuetext={`Question ${Math.max(safeAnswered, 1)}, coverage ${done} of ${size}, about 30 to 45 minutes, can pause`}
+          aria-valuetext={questionLabel}
           className="h-1.5 bg-mathua-code rounded-full overflow-hidden"
         >
           <div
