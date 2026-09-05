@@ -170,11 +170,12 @@ export default function ProfilePage() {
           studentId={getGuestId() || 'guest'}
         />
         <SidebarInset>
-          <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
-            <SidebarTrigger />
-            <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Profile</span>
-          </div>
           <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+          {/* Mobile only: sidebar is an overlay sheet, so content needs an opener.
+              Desktop toggles from the sidebar header + edge rail. */}
+          <div className="mb-2 flex justify-start md:hidden">
+            <SidebarTrigger variant="ghost" />
+          </div>
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
             <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -274,15 +275,15 @@ export default function ProfilePage() {
         dueReviews={dueReviews}
       />
       <SidebarInset>
-        <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
-          <SidebarTrigger />
-          <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Profile</span>
-        </div>
-
         <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
           Skip to profile content
         </a>
         <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+          {/* Mobile only: sidebar is an overlay sheet, so content needs an opener.
+              Desktop toggles from the sidebar header + edge rail. */}
+          <div className="mb-2 flex justify-start md:hidden">
+            <SidebarTrigger variant="ghost" />
+          </div>
           <div className="min-w-0">
         {/* Profile stats — mobile-first */}
         <ProfileStats

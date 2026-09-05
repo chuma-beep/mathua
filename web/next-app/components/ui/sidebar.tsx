@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { PanelLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -253,7 +252,7 @@ Sidebar.displayName = 'Sidebar'
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
->(({ className, onClick, ...props }, ref) => {
+>(({ className, onClick, children, ...props }, ref) => {
   const { toggleSidebar } = useSidebar()
   return (
     <Button
@@ -269,7 +268,9 @@ const SidebarTrigger = React.forwardRef<
       aria-label="Toggle sidebar"
       {...props}
     >
-      <PanelLeft />
+      {children ?? (
+        <span aria-hidden="true" className="flex size-4 shrink-0 items-center justify-center font-mono text-sm text-mathua-blue">λ</span>
+      )}
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
