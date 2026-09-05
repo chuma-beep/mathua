@@ -75,6 +75,37 @@ describe('Settings Profile section', () => {
     }
   })
 
+  it('Surprise me re-seeds the whole grid to the new character', async () => {
+    render(<SettingsPage />)
+    await screen.findByText('Pick a character')
+    const before = screen.getByRole('button', { name: 'Pick bottts character' }).querySelector('img')!.getAttribute('src')!
+    expect(before).toContain('seed=s1')
+    fireEvent.click(screen.getByRole('button', { name: /surprise me/i }))
+    await screen.findByText(/not saved yet/)
+    const after = screen.getByRole('button', { name: 'Pick bottts character' }).querySelector('img')!.getAttribute('src')!
+    expect(after).not.toBe(before)
+    // Every tile shows the same new character in a different outfit.
+    const seed = new URL(after).searchParams.get('seed')!
+    expect(seed.length).toBeGreaterThan(0)
+    for (const style of ['pixel-art', 'lorelei', 'micah']) {
+      const src = screen.getByRole('button', { name: `Pick ${style} character` }).querySelector('img')!.getAttribute('src')!
+      expect(new URL(src).searchParams.get('seed')).toBe(seed)
+    }
+  })
+
+  it('picking an outfit after Surprise keeps the new character', async () => {
+    render(<SettingsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: /surprise me/i }))
+    await screen.findByText(/not saved yet/)
+    const surpriseSeed = new URL(
+      screen.getByRole('button', { name: 'Pick bottts character' }).querySelector('img')!.getAttribute('src')!,
+    ).searchParams.get('seed')!
+    fireEvent.click(screen.getByRole('button', { name: 'Pick pixel-art character' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Save image' }))
+    await waitFor(() => expect(updateSettingsMock).toHaveBeenCalled())
+    expect(updateSettingsMock.mock.calls[0][0].avatar_dicebear).toEqual({ style: 'pixel-art', seed: surpriseSeed })
+  })
+
   it('Surprise me stages a preview without saving, Save image persists it', async () => {
     getSettingsMock.mockResolvedValue({ avatar_preset: 3 })
     render(<SettingsPage />)
