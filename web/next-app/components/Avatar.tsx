@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface AvatarProps {
   seed: string
@@ -48,6 +48,12 @@ export default function Avatar({ seed, name, size = 64, url, preset, className }
   const initial = initialFor(name)
   const fontSize = Math.round(size * 0.42)
   const [imgFailed, setImgFailed] = useState(false)
+
+  // A failed URL must not latch forever: each new url gets a fresh attempt,
+  // otherwise switching pictures after one failure keeps showing the initial.
+  useEffect(() => {
+    setImgFailed(false)
+  }, [url])
 
   if (url && !imgFailed) {
     return (

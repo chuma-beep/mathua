@@ -617,6 +617,7 @@ export interface UserSettings {
 	avatar_preset?: number | null
 	avatar_dicebear?: { style: string; seed: string } | null
 	avatar_custom?: boolean
+	avatar_version?: number | null
 }
 
 export async function getSettings(): Promise<UserSettings> {

@@ -5,8 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, getGuestId } from '../../lib/auth'
-import { ensureDicebearAvatar, pickUrl, isDicebearStyle } from '../../lib/dicebear'
-import { avatarImageUrl } from '../../lib/api'
+import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
@@ -69,31 +68,17 @@ export default function ProfilePage() {
       ensureGuestId()
     }
 
-      // Avatar precedence (Discord-style): custom upload > Google photo >
-      // DiceBear pick (auto-assigned surprise or gallery choice) > legacy
-      // preset (grandfathered, no longer offered) > automatic initial.
+      // Avatar precedence lives in resolveAvatar (shared with Header):
+      // custom upload > Google photo > DiceBear pick > legacy preset >
+      // automatic initial.
       const hydrateAvatar = (s: {
         avatar_custom?: boolean
         avatar_dicebear?: { style: string; seed: string } | null
         avatar_preset?: number | null
       }) => {
-        if (s.avatar_custom) {
-          setAvatarPreset(null)
-          setAvatarUrl(avatarImageUrl(Date.now()))
-          return
-        }
-        if (s.avatar_dicebear && isDicebearStyle(s.avatar_dicebear.style)) {
-          setAvatarPreset(null)
-          setAvatarUrl(pickUrl({ style: s.avatar_dicebear.style, seed: s.avatar_dicebear.seed }))
-          return
-        }
-        if (typeof s.avatar_preset === 'number') {
-          setAvatarPreset(s.avatar_preset)
-          setAvatarUrl(undefined)
-          return
-        }
-        setAvatarPreset(null)
-        setAvatarUrl(info?.avatar_url)
+        const resolved = resolveAvatar(info, s)
+        setAvatarPreset(resolved.preset ?? null)
+        setAvatarUrl(resolved.url)
       }
       getSettings().then(hydrateAvatar).catch(() => {
         if (info?.avatar_url) setAvatarUrl(info.avatar_url)

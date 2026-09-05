@@ -53,7 +53,45 @@ export function pickUrl(pick: DicebearPick): string {
   return dicebearUrl(pick.style, pick.seed)
 }
 
-import { getSettings, updateSettings, type UserSettings } from './api'
+export interface AvatarResolution {
+  url?: string
+  preset?: number | null
+}
+
+// resolveAvatar is the single precedence implementation used by every avatar
+// render site (Header, sidebar, profile, settings preview):
+// custom upload > Google photo > DiceBear pick > legacy preset
+// (grandfathered, no longer offered) > automatic initial (no url/preset).
+export function resolveAvatar(
+  user: { avatar_url?: string } | null,
+  settings: {
+    avatar_custom?: boolean
+    avatar_dicebear?: { style: string; seed: string } | null
+    avatar_preset?: number | null
+    avatar_version?: number | null
+  },
+  photoVersion?: string | number,
+): AvatarResolution {
+  if (settings.avatar_custom) {
+    // Roaming version stamp busts the cache exactly when the photo changes.
+    return { url: avatarImageUrl(photoVersion ?? settings.avatar_version ?? undefined), preset: null }
+  }
+  if (user?.avatar_url) {
+    return { url: user.avatar_url, preset: null }
+  }
+  if (settings.avatar_dicebear && isDicebearStyle(settings.avatar_dicebear.style)) {
+    return {
+      url: pickUrl({ style: settings.avatar_dicebear.style, seed: settings.avatar_dicebear.seed }),
+      preset: null,
+    }
+  }
+  if (typeof settings.avatar_preset === 'number') {
+    return { url: undefined, preset: settings.avatar_preset }
+  }
+  return { url: undefined, preset: null }
+}
+
+import { getSettings, updateSettings, avatarImageUrl, type UserSettings } from './api'
 import { getUserInfo } from './auth'
 
 export interface EnsureDeps {
