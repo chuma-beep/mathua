@@ -1,9 +1,16 @@
 'use client'
 
-import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { LogOut } from 'lucide-react'
+import {
+  BookOpen,
+  Network,
+  Play,
+  Settings,
+  Trophy,
+  type LucideIcon,
+} from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -21,19 +28,15 @@ import {
 import Avatar from './Avatar'
 import { signOut } from '../lib/auth'
 
-export interface ProfileTocItem {
-  id: string
-  label: string
-}
-
 // Navigate group: destinations only. Never Diagnostic / Quiz / Review —
 // those have dedicated cards in main content (no CTA duplication).
-const NAV_ITEMS = [
-  { label: 'Study', href: '/study', icon: '◐' },
-  { label: 'Start', href: '/session', icon: 'π' },
-  { label: 'Graph', href: '/graph', icon: '⬡' },
-  { label: 'Leaderboard', href: '/leaderboard', icon: '◎' },
-  { label: 'Settings', href: '/settings', icon: '⚙' },
+// Lucide icons (fixed size-4 box) so the collapsed 44px icon rail stays even.
+const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
+  { label: 'Study', href: '/study', icon: BookOpen },
+  { label: 'Start', href: '/session', icon: Play },
+  { label: 'Graph', href: '/graph', icon: Network },
+  { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
+  { label: 'Settings', href: '/settings', icon: Settings },
 ]
 
 interface AppSidebarProps {
@@ -44,12 +47,7 @@ interface AppSidebarProps {
   streak?: number
   avatarUrl?: string
   avatarPreset?: number | null
-  toc: ProfileTocItem[]
-  activeId: string
   dueReviews?: number
-  nextSlot?: ReactNode
-  goalsSlot?: ReactNode
-  onNavigate?: (id: string) => void
 }
 
 export function AppSidebar({
@@ -60,20 +58,10 @@ export function AppSidebar({
   streak,
   avatarUrl,
   avatarPreset,
-  toc,
-  activeId,
   dueReviews = 0,
-  nextSlot,
-  goalsSlot,
-  onNavigate,
 }: AppSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
-
-  const scrollTo = (id: string) => {
-    onNavigate?.(id)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
 
   return (
     <Sidebar collapsible="icon" data-testid="profile-sidebar">
@@ -82,8 +70,8 @@ export function AppSidebar({
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild tooltip="Mathua hub">
               <Link href="/profile">
-                <span className="font-mono text-sm text-mathua-blue">λ</span>
-                <span className="font-mono text-sm text-mathua-blue">Mathua</span>
+                <span className="flex size-6 shrink-0 items-center justify-center font-mono text-sm text-mathua-blue" aria-hidden="true">λ</span>
+                <span className="font-mono text-sm text-mathua-blue group-data-[collapsible=icon]:hidden">Mathua</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -97,12 +85,13 @@ export function AppSidebar({
             <SidebarMenu>
               {NAV_ITEMS.map((item) => {
                 const active = pathname === item.href || pathname.startsWith(item.href + '/')
+                const Icon = item.icon
                 return (
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
                       <Link href={item.href}>
-                        <span aria-hidden="true">{item.icon}</span>
-                        <span>{item.label}</span>
+                        <Icon aria-hidden="true" className="size-4 shrink-0" />
+                        <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
                     {item.href === '/session' && dueReviews > 0 && (
@@ -111,44 +100,6 @@ export function AppSidebar({
                   </SidebarMenuItem>
                 )
               })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {nextSlot && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Next up</SidebarGroupLabel>
-            <SidebarGroupContent className="px-2 group-data-[collapsible=icon]:hidden">
-              {nextSlot}
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
-
-        {goalsSlot && (
-          <SidebarGroup>
-            <SidebarGroupLabel>Goals</SidebarGroupLabel>
-            <SidebarGroupContent className="px-2 group-data-[collapsible=icon]:hidden">
-              {goalsSlot}
-            </SidebarGroupContent>
-          </SidebarGroup>
-        )}
-
-        <SidebarGroup>
-          <SidebarGroupLabel>On this page</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {toc.map((t) => (
-                <SidebarMenuItem key={t.id}>
-                  <SidebarMenuButton
-                    isActive={t.id === activeId}
-                    tooltip={t.label}
-                    onClick={() => scrollTo(t.id)}
-                  >
-                    <span aria-hidden="true">§</span>
-                    <span>{t.label}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -166,7 +117,7 @@ export function AppSidebar({
                   url={avatarPreset !== null && avatarPreset !== undefined ? undefined : avatarUrl}
                   preset={avatarPreset ?? undefined}
                 />
-                <span className="min-w-0 flex-1">
+                <span className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
                   <span className="block truncate font-mono text-xs text-mathua-primary">{name}</span>
                   <span className="block truncate font-mono text-[10px] text-mathua-muted">
                     {[username ? `@${username}` : null, level, typeof streak === 'number' ? `${streak}d` : null]
@@ -186,7 +137,7 @@ export function AppSidebar({
               }}
             >
               <LogOut aria-hidden="true" />
-              <span>Sign out</span>
+              <span className="group-data-[collapsible=icon]:hidden">Sign out</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

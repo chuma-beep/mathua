@@ -1,12 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { AppSidebar } from '../components/app-sidebar'
 import { SidebarProvider } from '../components/ui/sidebar'
-
-const TOC = [
-  { id: 'next', label: 'Next up' },
-  { id: 'activity', label: 'Activity' },
-]
 
 function renderSidebar(extra = {}) {
   return render(
@@ -17,8 +12,6 @@ function renderSidebar(extra = {}) {
         username="ada"
         level="Scholar"
         streak={5}
-        toc={TOC}
-        activeId="activity"
         {...extra}
       />
     </SidebarProvider>
@@ -44,34 +37,52 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Review Now')).toBeNull()
   })
 
-  it('renders Next up / Goals slots and TOC with active state', () => {
-    renderSidebar({ nextSlot: <div>next-up</div>, goalsSlot: <div>goals</div>, dueReviews: 2 })
-    expect(screen.getByText('next-up')).toBeInTheDocument()
-    expect(screen.getByText('goals')).toBeInTheDocument()
+  it('renders slim sidebar without Next up / Goals / On-this-page duplication', () => {
+    renderSidebar({ dueReviews: 2 })
     expect(screen.getByText('2')).toBeInTheDocument() // due-review badge
-    const tocButtons = screen.getAllByRole('button')
-    const activity = tocButtons.find((b) => b.textContent?.includes('Activity'))
-    expect(activity).toHaveAttribute('data-active', 'true')
+    // Removed groups never render
+    expect(screen.queryByText('Goals')).toBeNull()
+    expect(screen.queryByText('Daily goal')).toBeNull()
+    expect(screen.queryByText('This week')).toBeNull()
+    expect(screen.queryByText('On this page')).toBeNull()
+    expect(screen.queryByText('Next up')).toBeNull()
+    expect(screen.queryByText('Activity')).toBeNull()
   })
 
-  it('TOC buttons scroll to sections via onNavigate', () => {
-    const onNavigate = vi.fn()
-    const section = document.createElement('section')
-    section.id = 'next'
-    section.scrollIntoView = vi.fn()
-    document.body.appendChild(section)
-    renderSidebar({ onNavigate })
-    const tocButtons = screen.getAllByRole('button')
-    const next = tocButtons.find((b) => b.textContent?.includes('Next up'))
-    fireEvent.click(next!)
-    expect(onNavigate).toHaveBeenCalledWith('next')
-    expect(section.scrollIntoView).toHaveBeenCalled()
-    document.body.removeChild(section)
+  it('nav buttons render fixed-size Lucide icons (even collapsed rail)', () => {
+    renderSidebar()
+    const sidebar = screen.getByTestId('profile-sidebar')
+    const hrefs = ['/study', '/session', '/graph', '/leaderboard', '/settings']
+    expect(hrefs).toHaveLength(5)
+    for (const href of hrefs) {
+      const link = sidebar.querySelector(`a[href="${href}"]`)!
+      expect(link).not.toBeNull()
+      const svg = link.querySelector('svg')
+      expect(svg).not.toBeNull()
+      expect(svg?.getAttribute('class') ?? '').toMatch(/size-4/)
+    }
   })
 
-  it('footer shows identity and sign-out', () => {
+  it('menu labels hide in icon-collapse mode (icons only, no text peek)', () => {
+    renderSidebar()
+    const sidebar = screen.getByTestId('profile-sidebar')
+    // Every text label next to an icon carries the collapse-hide class;
+    // tooltips (not visible text) carry the label when collapsed.
+    const labels = ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']
+    for (const label of labels) {
+      const el = screen.getByText(label, { exact: true })
+      expect(sidebar.contains(el)).toBe(true)
+      expect(el.getAttribute('class') ?? '').toContain('group-data-[collapsible=icon]:hidden')
+    }
+  })
+
+  it('footer shows identity and sign-out, identity text hides when collapsed', () => {
     renderSidebar()
     expect(screen.getByText('Ada')).toBeInTheDocument()
     expect(screen.getByText('Sign out')).toBeInTheDocument()
+    // Collapsed rail shows avatar only — text wrapper carries the icon-mode hide class
+    const ada = screen.getByText('Ada')
+    const textWrapper = ada.closest('span[class*="flex-1"]')
+    expect(textWrapper?.getAttribute('class') ?? '').toContain('group-data-[collapsible=icon]:hidden')
   })
 })

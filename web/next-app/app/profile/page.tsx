@@ -15,18 +15,7 @@ import Loading from '../../components/Loading'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpCard from '../../components/NextUpCard'
-import GoalStepper from '../../components/GoalStepper'
-import WeeklyChart from '../../components/WeeklyChart'
 import { selectNextUp } from '../../lib/nextUp'
-import { useActiveSection } from '../../hooks/useActiveSection'
-
-const PROFILE_TOC = [
-  { id: 'next', label: 'Next up' },
-  { id: 'activity', label: 'Activity' },
-  { id: 'domains', label: 'Domains' },
-  { id: 'struggles', label: 'Struggles' },
-  { id: 'efficacy', label: 'Efficacy' },
-]
 
 interface UserInfo {
   student_id: string
@@ -53,24 +42,6 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
-  const activeId = useActiveSection(PROFILE_TOC.map((t) => t.id))
-
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
-  const handleGoalChange = (goal: number) => {
-    setScores((s) => (s ? { ...s, daily_xp_goal: goal } : s))
-  }
-
-  const goalsSlot = (
-    <>
-      {scores && <GoalStepper goal={scores.daily_xp_goal} onGoalChange={handleGoalChange} />}
-      <div className="mt-4">
-        <WeeklyChart data={activity} />
-      </div>
-    </>
-  )
 
   const nextUp = useMemo(
     () =>
@@ -197,9 +168,6 @@ export default function ProfilePage() {
         <AppSidebar
           name="Guest"
           studentId={getGuestId() || 'guest'}
-          toc={PROFILE_TOC}
-          activeId={activeId}
-          onNavigate={scrollToSection}
         />
         <SidebarInset>
           <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
@@ -303,12 +271,7 @@ export default function ProfilePage() {
         streak={scores?.current_streak}
         avatarUrl={avatarUrl}
         avatarPreset={avatarPreset}
-        toc={PROFILE_TOC}
-        activeId={activeId}
         dueReviews={dueReviews}
-        nextSlot={<NextUpCard next={nextUp} compact />}
-        goalsSlot={goalsSlot}
-        onNavigate={scrollToSection}
       />
       <SidebarInset>
         <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
