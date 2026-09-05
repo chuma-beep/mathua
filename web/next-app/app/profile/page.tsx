@@ -171,9 +171,9 @@ export default function ProfilePage() {
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
             <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
-              <Link href="/session" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Try as guest →</Link>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
+              <Link href="/login" className="w-full sm:w-auto border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Sign in</Link>
+              <Link href="/session" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
             </div>
           </div>
           {(Object.keys(progress).length === 0 && activity.length === 0) && (
@@ -206,15 +206,15 @@ export default function ProfilePage() {
             </div>
           </section>
           {/* Diagnostic CTA — guest */}
-          <section className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Recommended</span>
-                <span className="font-mono text-xs text-mathua-primary truncate">Take a diagnostic to get a recommendation on where to start</span>
+          <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
+              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
+                <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Recommended</span>
+                <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">Take a diagnostic to get a recommendation on where to start</span>
               </div>
-              <p className="font-mono text-xs text-mathua-secondary mt-1">Diagnostic test · finds your knowledge frontier</p>
+              <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">Diagnostic test · finds your knowledge frontier</p>
             </div>
-            <Link href="/onboard" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Start diagnostic test →</Link>
+            <Link href="/onboard" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Start diagnostic test →</Link>
           </section>
 
           <section className="mt-10">
@@ -306,34 +306,34 @@ export default function ProfilePage() {
         )}
 
         {scores.paused_until && (
-          <div className="mt-6 border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="font-mono text-xs text-mathua-primary min-w-0 truncate">
+          <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <p className="font-mono text-xs text-mathua-primary min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
               ⏸ Paused until {scores.paused_until} — due reviews are hidden
             </p>
-            <Link href="/settings" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+            <Link href="/settings" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
               Resume
             </Link>
           </div>
         )}
 
         {/* Diagnostic CTA — both authed and guest via profile */}
-        <section className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+        <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
+            <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
+              <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
                 {user.diagnostic_completed ? 'Retake' : 'Recommended'}
               </span>
-              <span className="font-mono text-xs text-mathua-primary truncate">
+              <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">
                 {user.diagnostic_completed ? 'Retake diagnostic to refresh recommendation' : 'Take a diagnostic to get a recommendation on where to start'}
               </span>
             </div>
-            <p className="font-mono text-xs text-mathua-secondary mt-1">
+            <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">
               Diagnostic test · finds your knowledge frontier
             </p>
           </div>
           <Link
             href="/onboard"
-            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
+            className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap"
           >
             {user.diagnostic_completed ? 'Retake diagnostic test →' : 'Start diagnostic test →'}
           </Link>
@@ -341,17 +341,17 @@ export default function ProfilePage() {
 
         {/* 150 XP Quiz gate (CONTEXT.md Quiz) */}
         {scores && scores.xp_total >= 150 && (
-          <div className="mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="font-mono text-xs text-mathua-primary truncate">150 XP reached — mastery check recommended</span>
+          <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
+              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
+                <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
+                <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">150 XP reached — mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
                 <div className="h-full bg-mathua-blue" style={{ width: `${Math.min((scores.xp_total / 150) * 100, 100)}%` }} />
               </div>
             </div>
-            <Link href="/goals?quiz=1" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+            <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
               Take Test →
             </Link>
           </div>
@@ -362,10 +362,10 @@ export default function ProfilePage() {
             href="/session"
             className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
           >
-            <span className="font-mono text-xs text-yellow-400 min-w-0 truncate">
+            <span className="font-mono text-xs text-yellow-400 min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
               ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
             </span>
-            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto">
+            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
               Review Now →
             </span>
           </Link>
