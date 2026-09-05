@@ -4,24 +4,21 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId } from '../../lib/auth'
+import { getUserInfo, ensureGuestId, getGuestId } from '../../lib/auth'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
-import Header from '../../components/Header'
-import BottomTabs from '../../components/BottomTabs'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
 import Loading from '../../components/Loading'
-import ProfileSidebar from '../../components/ProfileSidebar'
-import ProfileMenuSheet, { ProfileMobileBar } from '../../components/ProfileMenuSheet'
+import { AppSidebar } from '../../components/app-sidebar'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpCard from '../../components/NextUpCard'
 import GoalStepper from '../../components/GoalStepper'
 import WeeklyChart from '../../components/WeeklyChart'
 import { selectNextUp } from '../../lib/nextUp'
 import { useActiveSection } from '../../hooks/useActiveSection'
-import { useScrollDirection } from '../../hooks/useScrollDirection'
 
 const PROFILE_TOC = [
   { id: 'next', label: 'Next up' },
@@ -56,9 +53,7 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
-  const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useActiveSection(PROFILE_TOC.map((t) => t.id))
-  const chipsHidden = useScrollDirection({ hideThreshold: 12, topOffset: 120, idleMs: 400, bottomOffset: 24 })
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -135,7 +130,6 @@ export default function ProfilePage() {
           getEfficacy().then(setEfficacy).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
-          const { getGuestId } = await import('../../lib/auth')
           const guestId = getGuestId() || ''
           const [activityRes, progressRes] = await Promise.all([
             getActivity().catch(() => [] as DailyActivity[]),
@@ -165,58 +159,54 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <>
-        <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-          <div
-            style={{
-              fontFamily: monoFont,
-              fontSize: 13,
-              color: 'var(--text-muted)',
-              textAlign: 'center',
-            }}
-          >
-            <Loading label="LOADING PROFILE" />
-          </div>
+      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+        <div
+          style={{
+            fontFamily: monoFont,
+            fontSize: 13,
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+          }}
+        >
+          <Loading label="LOADING PROFILE" />
         </div>
-        <BottomTabs />
-      </>
+      </div>
     )
   }
 
   if (error) {
     return (
-      <>
-        <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-          <div
-            style={{
-              fontFamily: monoFont,
-              fontSize: 13,
-              color: 'var(--text-muted)',
-              textAlign: 'center',
-            }}
-          >
-            {error}
-          </div>
+      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+        <div
+          style={{
+            fontFamily: monoFont,
+            fontSize: 13,
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+          }}
+        >
+          {error}
         </div>
-        <BottomTabs />
-      </>
+      </div>
     )
   }
 
   if (!user) {
     return (
-      <>
-        <Header
-          links={[
-            { label: 'Study', href: '/study' },
-            { label: 'Start', href: '/session' },
-            { label: 'Leaderboard', href: '/leaderboard' },
-            { label: 'Graph', href: '/graph' },
-          ]}
+      <SidebarProvider>
+        <AppSidebar
+          name="Guest"
+          studentId={getGuestId() || 'guest'}
+          toc={PROFILE_TOC}
+          activeId={activeId}
+          onNavigate={scrollToSection}
         />
-        <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
+        <SidebarInset>
+          <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
+            <SidebarTrigger />
+            <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Profile</span>
+          </div>
+          <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
             <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -272,9 +262,9 @@ export default function ProfilePage() {
               <DomainProgress progress={progress} />
             </div>
           </section>
-        </div>
-        <BottomTabs />
-      </>
+          </div>
+        </SidebarInset>
+      </SidebarProvider>
     )
   }
 
@@ -283,93 +273,54 @@ export default function ProfilePage() {
     // Show actionable error with sign-in CTA instead of hanging.
     if (error) {
       return (
-        <>
-          <Header />
-          <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-            <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
-              {error}
-              <div className="mt-4 flex gap-3 justify-center">
-                <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
-                <button onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
-              </div>
+        <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+          <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+            {error}
+            <div className="mt-4 flex gap-3 justify-center">
+              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+              <button onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
             </div>
           </div>
-          <BottomTabs />
-        </>
+        </div>
       )
     }
     return (
-      <>
-        <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-          <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
-            Loading scores…
-          </div>
+      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+        <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+          Loading scores…
         </div>
-        <BottomTabs />
-      </>
+      </div>
     )
   }
 
   return (
-    <>
-      <Header
-        links={[
-          { label: 'Study', href: '/study' },
-          { label: 'Start', href: '/session' },
-          { label: 'Leaderboard', href: '/leaderboard' },
-          { label: 'Graph', href: '/graph' },
-          { label: 'Settings', href: '/settings' },
-        ]}
-      />
-      <ProfileMobileBar
-        chips={PROFILE_TOC}
+    <SidebarProvider>
+      <AppSidebar
+        name={user.name}
+        studentId={user.student_id}
+        username={user.username}
+        level={scores?.level}
+        streak={scores?.current_streak}
+        avatarUrl={avatarUrl}
+        avatarPreset={avatarPreset}
+        toc={PROFILE_TOC}
         activeId={activeId}
-        hidden={chipsHidden}
-        onChipNavigate={scrollToSection}
-        onOpenMenu={() => setMenuOpen(true)}
+        dueReviews={dueReviews}
+        nextSlot={<NextUpCard next={nextUp} compact />}
+        goalsSlot={goalsSlot}
+        onNavigate={scrollToSection}
       />
-      <ProfileMenuSheet
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        chips={PROFILE_TOC}
-        activeId={activeId}
-        chipsHidden={chipsHidden}
-        onChipNavigate={scrollToSection}
-        onOpenMenu={() => setMenuOpen(true)}
-        sidebarProps={{
-          name: user.name,
-          studentId: user.student_id,
-          level: scores?.level,
-          streak: scores?.current_streak,
-          avatarUrl,
-          avatarPreset,
-          toc: PROFILE_TOC,
-          activeId,
-          nextSlot: <NextUpCard next={nextUp} compact />,
-          goalsSlot,
-          onNavigate: scrollToSection,
-        }}
-      />
+      <SidebarInset>
+        <div className="flex h-[53px] shrink-0 items-center gap-2 border-b border-mathua-border px-4">
+          <SidebarTrigger />
+          <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Profile</span>
+        </div>
 
-      <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
-        Skip to profile content
-      </a>
-      <div id="profile-main" className="mx-auto w-full max-w-[1024px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-6 lg:items-start">
-        <ProfileSidebar
-          name={user.name}
-          studentId={user.student_id}
-          level={scores?.level}
-          streak={scores?.current_streak}
-          avatarUrl={avatarUrl}
-          avatarPreset={avatarPreset}
-          toc={PROFILE_TOC}
-          activeId={activeId}
-          nextSlot={<NextUpCard next={nextUp} compact />}
-          goalsSlot={goalsSlot}
-          onNavigate={scrollToSection}
-        />
-        <div className="min-w-0">
+        <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
+          Skip to profile content
+        </a>
+        <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+          <div className="min-w-0">
         {/* Profile stats — mobile-first */}
         <ProfileStats
           name={user.name}
@@ -517,9 +468,9 @@ export default function ProfilePage() {
         )}
 
 
+          </div>
         </div>
-      </div>
-      <BottomTabs />
-    </>
+      </SidebarInset>
+    </SidebarProvider>
   )
 }

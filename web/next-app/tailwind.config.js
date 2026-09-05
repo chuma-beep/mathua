@@ -27,6 +27,16 @@ module.exports = {
           code: 'var(--code-bg)',
           division: 'var(--division)',
         },
+        sidebar: {
+          DEFAULT: 'var(--sidebar-background)',
+          foreground: 'var(--sidebar-foreground)',
+          primary: 'var(--sidebar-primary)',
+          'primary-foreground': 'var(--sidebar-primary-foreground)',
+          accent: 'var(--sidebar-accent)',
+          'accent-foreground': 'var(--sidebar-accent-foreground)',
+          border: 'var(--sidebar-border)',
+          ring: 'var(--sidebar-ring)',
+        },
       },
       fontFamily: {
         serif: ['IBM Plex Serif', 'serif'],

@@ -30,6 +30,23 @@ if (typeof globalThis.localStorage === 'undefined') {
   Object.defineProperty(globalThis, 'sessionStorage', { value: new MemoryStorage(), configurable: true })
 }
 
+// jsdom has no matchMedia — stub for components using media queries (sidebar, etc.)
+if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
+  Object.defineProperty(window, 'matchMedia', {
+    value: (query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    }),
+    configurable: true,
+  })
+}
+
 afterEach(() => {
   cleanup()
 })
