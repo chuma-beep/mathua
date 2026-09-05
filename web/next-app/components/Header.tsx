@@ -148,7 +148,7 @@ export default function Header({ links }: HeaderProps) {
                       signOut()
                       router.push('/profile')
                     }}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
                   >
                     Profile
                   </button>
