@@ -14,6 +14,7 @@ import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import SymbolPalette from '../../components/SymbolPalette'
 import DiagnosticResults from '../../components/DiagnosticResults'
+import ProgressBar from '../../components/ProgressBar'
 import {
   startGoalDiagnostic,
   submitGoalAnswer,
@@ -24,6 +25,7 @@ import {
   submitQuizAnswer,
   type GoalPlanRes,
   type Scores,
+  type DiagnosticProgress,
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import { useSearchParams } from 'next/navigation'
@@ -83,6 +85,7 @@ function GoalsContent() {
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
   const [estimatedTotal, setEstimatedTotal] = useState(0)
+  const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
@@ -187,9 +190,16 @@ function GoalsContent() {
       conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
-      // Estimate total: ~10 + log2(selected concepts)
-      const est = Math.min(10 + Math.ceil(Math.log2(ids.length) * 5), 50)
-      setEstimatedTotal(est)
+      // Backend truth first; frontend estimate as fallback for older servers.
+      if (res.progress && res.progress.estimated_total > 0) {
+        setProgress(res.progress)
+        setEstimatedTotal(res.progress.estimated_total)
+      } else {
+        // Estimate total: ~10 + log2(selected concepts)
+        const est = Math.min(10 + Math.ceil(Math.log2(ids.length) * 5), 50)
+        setEstimatedTotal(est)
+        setProgress(null)
+      }
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
@@ -215,6 +225,10 @@ function GoalsContent() {
         total: prev.total + 1,
       }))
       setLastResult({ correct, feedback })
+      if (data.progress && data.progress.estimated_total > 0) {
+        setProgress(data.progress)
+        setEstimatedTotal(data.progress.estimated_total)
+      }
 
       if (data.done) {
         setTimeout(async () => {
@@ -374,21 +388,12 @@ function GoalsContent() {
           {/* === STEP 2: Diagnostic === */}
           {step === 'diagnostic' && (
             <>
-              <SectionHeader label={`Question ${questionCount} of ~${estimatedTotal}`} title={conceptName} />
+              <SectionHeader label={progress && progress.estimated_total > 0 ? `Question ${Math.min(progress.answered + 1, progress.estimated_total)} of ~${progress.estimated_total}` : `Question ${questionCount} of ~${estimatedTotal}`} title={conceptName} />
               <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
-                {/* Progress bar */}
-                <div className="mb-4">
-                  <div className="flex justify-between text-[10px] font-mono text-mathua-muted mb-1">
-                    <span>Progress</span>
-                    <span>{questionCount > estimatedTotal ? estimatedTotal : questionCount} / {estimatedTotal}</span>
-                  </div>
-                  <div className="h-1.5 bg-mathua-code rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-mathua-blue rounded-full transition-all duration-500"
-                      style={{ width: `${Math.min((questionCount / estimatedTotal) * 100, 100)}%` }}
-                    />
-                  </div>
-                </div>
+                <ProgressBar
+                  answered={progress ? progress.answered + 1 : questionCount}
+                  estimatedTotal={progress ? progress.estimated_total : estimatedTotal}
+                />
 
                 {/* Accuracy display */}
                 {accuracy.total > 0 && (

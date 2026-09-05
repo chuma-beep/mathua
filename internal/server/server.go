@@ -753,8 +753,9 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	s.diagSessions[session.ID] = session
 	s.diagCreated[session.ID] = time.Now()
 	s.mu.Unlock()
+	prog := s.eng.DiagnosticProgress(session)
 	if question == nil {
-		writeJSON(w, map[string]interface{}{"session_id": session.ID, "done": true})
+		writeJSON(w, map[string]interface{}{"session_id": session.ID, "done": true, "progress": prog})
 		return
 	}
 	writeJSON(w, map[string]interface{}{
@@ -763,6 +764,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		"concept_id":   question.ConceptID,
 		"concept_name": question.ConceptName,
 		"question":     question.Question,
+		"progress":     prog,
 	})
 }
 
@@ -847,11 +849,13 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	s.eng.SubmitDiagnosticAnswer(session, req.ConceptID, correct, fast)
 	if s.eng.IsDiagnosticComplete(session) {
 		report := s.eng.DiagnosticReport(session)
+		prog := s.eng.DiagnosticProgress(session)
 		writeJSON(w, map[string]interface{}{
 			"done":     true,
 			"correct":  correct,
 			"feedback": explanation,
 			"report":   report,
+			"progress": prog,
 		})
 		return
 	}
@@ -865,6 +869,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	if c != nil {
 		name = c.Label
 	}
+	prog := s.eng.DiagnosticProgress(session)
 	writeJSON(w, map[string]interface{}{
 		"done":         false,
 		"correct":      correct,
@@ -872,6 +877,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		"concept_id":   cid,
 		"concept_name": name,
 		"question":     nextProb.Question,
+		"progress":     prog,
 	})
 }
 

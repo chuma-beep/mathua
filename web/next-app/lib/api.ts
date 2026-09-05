@@ -483,22 +483,32 @@ export interface GoalPathRes {
 	count: number
 }
 
+export interface DiagnosticProgress {
+  answered: number
+  estimated_total: number
+  min_total: number
+  max_total: number
+  done: boolean
+}
+
 export interface GoalDiagStartRes {
-	session_id: string
-	student_id?: string
-	concept_id?: string
-	concept_name?: string
-	question?: string
-	done?: boolean
+  session_id: string
+  student_id?: string
+  concept_id?: string
+  concept_name?: string
+  question?: string
+  done?: boolean
+  progress?: DiagnosticProgress
 }
 
 export interface GoalDiagAnswerRes {
-	done: boolean
-	correct?: boolean
-	feedback?: string
-	concept_id?: string
-	concept_name?: string
-	question?: string
+  done: boolean
+  correct?: boolean
+  feedback?: string
+  concept_id?: string
+  concept_name?: string
+  question?: string
+  progress?: DiagnosticProgress
 }
 
 export interface GoalPlanRes {
