@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
@@ -19,7 +21,24 @@ import (
 var (
 	jwtSecretOnce sync.Once
 	jwtSecret     []byte
+	// secretFile, when set via SetSecretFile before first use, persists a
+	// generated secret across restarts (zero-config logins survive redeploys
+	// on single-machine volumes). Explicit JWT_SECRET env always wins.
+	secretFile string
 )
+
+// SetSecretFile configures the path used to persist an auto-generated JWT
+// secret. Must be called before first token operation; later calls are ignored.
+func SetSecretFile(path string) {
+	if path == "" {
+		return
+	}
+	// Only honored before the secret is loaded once.
+	if jwtSecret != nil {
+		return
+	}
+	secretFile = path
+}
 
 func loadSecret() []byte {
 	if s := os.Getenv("JWT_SECRET"); s != "" {
@@ -33,9 +52,71 @@ func loadSecret() []byte {
 		log.Println("auth: using JWT_SECRET from environment")
 		return []byte(s)
 	}
+	if p := os.Getenv("JWT_SECRET_FILE"); p != "" {
+		if b, ok := loadSecretFile(p); ok {
+			return b
+		}
+	}
+	if secretFile != "" {
+		if b, ok := loadSecretFile(secretFile); ok {
+			return b
+		}
+	}
 	secret := generateSecret()
 	log.Println("auth: generated random JWT secret (set JWT_SECRET for persistence)")
 	return secret
+}
+
+// loadSecretFile loads a persisted hex secret, generating and storing one on
+// first boot. File holds 32 bytes hex-encoded with 0600 permissions.
+func loadSecretFile(path string) ([]byte, bool) {
+	if b, err := os.ReadFile(path); err == nil {
+		raw := strings.TrimSpace(string(b))
+		if decoded, derr := hex.DecodeString(raw); derr == nil && len(decoded) == 32 {
+			log.Printf("auth: using persisted JWT secret from %s", path)
+			return decoded, true
+		}
+		// Corrupt: quarantine aside and fall through to fresh generation.
+		backup := path + ".bad." + time.Now().UTC().Format("20060102T150405Z")
+		if rerr := os.Rename(path, backup); rerr != nil {
+			log.Printf("auth: persisted JWT secret at %s is corrupt and cannot be quarantined: %v", path, rerr)
+			return nil, false
+		}
+		log.Printf("auth: persisted JWT secret at %s was corrupt (quarantined to %s); generating fresh", path, backup)
+	}
+	if dir := filepath.Dir(path); dir != "" {
+		if err := os.MkdirAll(dir, 0o755); err != nil {
+			log.Printf("auth: cannot create secret dir %s: %v", dir, err)
+			return nil, false
+		}
+	}
+	fresh := GenerateSecretHex()
+	// O_EXCL: a concurrent first boot may win; adopt the winner's secret.
+	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0o600)
+	if err != nil {
+		if os.IsExist(err) {
+			if b, rerr := os.ReadFile(path); rerr == nil {
+				if decoded, derr := hex.DecodeString(strings.TrimSpace(string(b))); derr == nil && len(decoded) == 32 {
+					log.Printf("auth: using persisted JWT secret from %s (concurrent boot)", path)
+					return decoded, true
+				}
+			}
+		}
+		log.Printf("auth: cannot persist JWT secret to %s: %v", path, err)
+		return nil, false
+	}
+	if _, werr := f.WriteString(fresh + "\n"); werr != nil {
+		log.Printf("auth: cannot write JWT secret to %s: %v", path, werr)
+		f.Close()
+		return nil, false
+	}
+	if cerr := f.Close(); cerr != nil {
+		log.Printf("auth: cannot close JWT secret file %s: %v", path, cerr)
+		return nil, false
+	}
+	log.Printf("auth: generated and persisted JWT secret to %s", path)
+	decoded, _ := hex.DecodeString(fresh)
+	return decoded, true
 }
 
 func getJWTSecret() []byte {

@@ -102,3 +102,27 @@ export function ensureGuestId(): string | null {
   }
   return id
 }
+
+const HOME_VIEW_KEY = 'mathua_home_view'
+
+// flagHomeView marks an explicit Home click (logo / Home tab) so the
+// landing page stays put. sessionStorage is tab-scoped: fresh tabs, typed
+// URLs, and reopens carry no flag and bounce logged-in users to /profile.
+export function flagHomeView() {
+  if (typeof window === 'undefined') return
+  try {
+    sessionStorage.setItem(HOME_VIEW_KEY, '1')
+  } catch { /* storage unavailable — landing may bounce instead */ }
+}
+
+// consumeHomeView reads and clears the one-shot Home flag.
+export function consumeHomeView(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    if (sessionStorage.getItem(HOME_VIEW_KEY)) {
+      sessionStorage.removeItem(HOME_VIEW_KEY)
+      return true
+    }
+  } catch { /* ignore */ }
+  return false
+}

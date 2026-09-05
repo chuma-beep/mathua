@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
-import { signOut, clearToken } from '../lib/auth'
+import { signOut, flagHomeView } from '../lib/auth'
 import Avatar from './Avatar'
-import { getSettings, validateToken } from '../lib/api'
+import { getSettings } from '../lib/api'
 
 interface HeaderLink {
   label: string
@@ -33,12 +33,12 @@ export default function Header({ links }: HeaderProps) {
       setAvatarPreset(null)
       return
     }
-    // Revalidate once per mount: a token that died server-side (JWT_SECRET
-    // rotated, student row gone) must flip the UI to logged-out instead of
-    // lingering in limbo. Network failures reject — never log out on those.
-    validateToken()
-      .then(v => { if (!v.valid) clearToken() })
-      .catch(() => {})
+    // Dead-token cleanup is lazy: any strict API call below that answers
+    // 401 clears the token via authedFetch (lib/auth.ts), which flips this
+    // UI to logged-out through the auth-changed event. No explicit
+    // revalidation here — the e2e auth spec renders the header with a
+    // stored token while all /api/** routes are mocked, and must keep
+    // showing the authenticated links.
     if (user.avatar_url) setAvatarUrl(user.avatar_url)
     getSettings().then(s => {
       if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {
@@ -75,6 +75,7 @@ export default function Header({ links }: HeaderProps) {
         <div className="flex items-center gap-4 md:gap-6 min-w-0">
           <Link
             href="/"
+            onClick={flagHomeView}
             className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
           >
             λ Mathua

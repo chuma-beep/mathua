@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
 import { ensureGuestId } from '../lib/auth'
+import { useHomeRedirect } from '../hooks/useHomeRedirect'
 import Header from '../components/Header'
 import AsciiDivider from '../components/AsciiDivider'
 import SectionHeader from '../components/SectionHeader'
@@ -93,6 +94,8 @@ const PIPELINE_STATES = [
 export default function HomePage() {
   const { theme, mounted } = useTheme()
   const router = useRouter()
+  // Logged-in visits bounce to /profile; explicit Home clicks stay put.
+  const homeChecked = useHomeRedirect(mounted)
 
   const conceptCount = conceptsData.length
   const connectionCount = conceptsData.reduce(
@@ -155,7 +158,7 @@ export default function HomePage() {
     { num: '09', name: 'Math Architect', range: '256–284', elite: true },
   ]
 
-  if (!mounted) {
+  if (!mounted || !homeChecked) {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
   }
 
