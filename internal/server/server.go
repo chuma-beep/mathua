@@ -1058,17 +1058,17 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, map[string]interface{}{
-		"readiness":                readiness,
-		"total_tested":             total,
-		"correct_count":            correct,
-		"weak_areas":               weakByDomain,
-		"strong_areas":             strongByDomain,
-		"frontier_label":           report.FrontierLabel,
-		"frontier_idx":             report.FrontierIdx,
-		"frontier_conditional":     report.FrontierConditional,
-		"conditionally_completed":  report.ConditionallyCompleted,
-		"placement_course_id":      report.PlacementCourseID,
-		"completion_estimates":     report.CompletionEstimates,
+		"readiness":               readiness,
+		"total_tested":            total,
+		"correct_count":           correct,
+		"weak_areas":              weakByDomain,
+		"strong_areas":            strongByDomain,
+		"frontier_label":          report.FrontierLabel,
+		"frontier_idx":            report.FrontierIdx,
+		"frontier_conditional":    report.FrontierConditional,
+		"conditionally_completed": report.ConditionallyCompleted,
+		"placement_course_id":     report.PlacementCourseID,
+		"completion_estimates":    report.CompletionEstimates,
 	})
 }
 
