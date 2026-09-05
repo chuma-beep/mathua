@@ -140,7 +140,7 @@ function LoginInner() {
     if (token && id) {
       setToken(token)
       setUserInfo({ student_id: id, name: name || 'Google user', username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: false })
-      validateToken().then(v => { if (!v.valid) clearToken() })
+      validateToken().then(v => { if (!v.valid) clearToken() }).catch(() => {})
       push('/profile')
     }
   }, [searchParams, push])

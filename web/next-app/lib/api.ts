@@ -1,6 +1,6 @@
 export const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 
-import { getAuthHeaders } from './auth'
+import { getAuthHeaders, authedFetch } from './auth'
 import { z } from 'zod'
 
 const QuestionSchema = z.object({
@@ -225,7 +225,7 @@ export async function startSession(): Promise<StartSessionRes> {
     'Content-Type': 'application/json',
     ...getAuthHeaders(),
   }
-  const res = await fetch(`${API_BASE}/api/session`, {
+  const res = await authedFetch(`${API_BASE}/api/session`, {
     method: 'POST',
     headers,
   })
@@ -234,7 +234,7 @@ export async function startSession(): Promise<StartSessionRes> {
 }
 
 export async function startSessionName(name: string): Promise<StartSessionRes> {
-  const res = await fetch(`${API_BASE}/api/session`, {
+  const res = await authedFetch(`${API_BASE}/api/session`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name }),
@@ -284,7 +284,7 @@ export async function submitAnswer(
     'Content-Type': 'application/json',
     ...getAuthHeaders(),
   }
-  const res = await fetch(`${API_BASE}/api/answer`, {
+  const res = await authedFetch(`${API_BASE}/api/answer`, {
     method: 'POST',
     headers,
     body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
@@ -295,7 +295,7 @@ export async function submitAnswer(
 
 export async function getCurrentQuestion(sessionID: string): Promise<Question | null> {
   const headers: Record<string, string> = { ...getAuthHeaders() }
-  const res = await fetch(`${API_BASE}/api/session/current?session_id=${encodeURIComponent(sessionID)}`, { headers })
+  const res = await authedFetch(`${API_BASE}/api/session/current?session_id=${encodeURIComponent(sessionID)}`, { headers })
   if (!res.ok) return null
   const data = await res.json()
   if (!data.question) return null
@@ -304,26 +304,26 @@ export async function getCurrentQuestion(sessionID: string): Promise<Question | 
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
   const headers: Record<string, string> = { ...getAuthHeaders() }
-  const res = await fetch(`${API_BASE}/api/progress/${studentID}`, { headers })
+  const res = await authedFetch(`${API_BASE}/api/progress/${studentID}`, { headers })
   if (!res.ok) return {}
   return validateResponse(ProgressMapSchema, await res.json(), 'getProgress') as Record<string, ConceptProgress>
 }
 
 export async function getScores(studentID: string): Promise<Scores> {
   const headers: Record<string, string> = { ...getAuthHeaders() }
-  const res = await fetch(`${API_BASE}/api/scores/${studentID}`, { headers })
+  const res = await authedFetch(`${API_BASE}/api/scores/${studentID}`, { headers })
   if (!res.ok) throw new Error(`Scores fetch failed: ${res.status}`)
   return validateResponse(ScoresSchema, await res.json(), 'getScores') as Scores
 }
 
 export async function getGraph(): Promise<GraphRes> {
-  const res = await fetch(`${API_BASE}/api/graph`)
+  const res = await authedFetch(`${API_BASE}/api/graph`)
   if (!res.ok) throw new Error(`Graph fetch failed: ${res.status}`)
   return validateResponse(GraphResSchema, await res.json(), 'getGraph') as GraphRes
 }
 
 export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
-  const res = await fetch(`${API_BASE}/api/leaderboard`)
+  const res = await authedFetch(`${API_BASE}/api/leaderboard`)
   if (!res.ok) return []
   return res.json()
 }
@@ -348,7 +348,7 @@ export interface LeagueBoard {
 }
 
 export async function getLeagues(): Promise<LeagueBoard> {
-  const res = await fetch(`${API_BASE}/api/leagues`, { headers: { ...getAuthHeaders() } })
+  const res = await authedFetch(`${API_BASE}/api/leagues`, { headers: { ...getAuthHeaders() } })
   if (!res.ok) return { week: '', leagues: [] }
   return res.json()
 }
@@ -363,7 +363,7 @@ export interface ShareReport {
 }
 
 export async function enableShare(): Promise<{ enabled: boolean; token: string }> {
-  const res = await fetch(`${API_BASE}/api/share`, {
+  const res = await authedFetch(`${API_BASE}/api/share`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
     body: JSON.stringify({ enabled: true }),
@@ -373,7 +373,7 @@ export async function enableShare(): Promise<{ enabled: boolean; token: string }
 }
 
 export async function disableShare(): Promise<void> {
-  await fetch(`${API_BASE}/api/share`, {
+  await authedFetch(`${API_BASE}/api/share`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
     body: JSON.stringify({ enabled: false }),
@@ -381,7 +381,7 @@ export async function disableShare(): Promise<void> {
 }
 
 export async function getShareReport(token: string): Promise<ShareReport | null> {
-  const res = await fetch(`${API_BASE}/api/share/${encodeURIComponent(token)}`, { cache: 'no-store' })
+  const res = await authedFetch(`${API_BASE}/api/share/${encodeURIComponent(token)}`, { cache: 'no-store' })
   if (!res.ok) return null
   return res.json()
 }
@@ -403,7 +403,7 @@ export interface CourseStatus {
 }
 
 export async function getTranscript(): Promise<CourseStatus[]> {
-  const res = await fetch(`${API_BASE}/api/transcript`, { headers: { ...getAuthHeaders() }, cache: 'no-store' })
+  const res = await authedFetch(`${API_BASE}/api/transcript`, { headers: { ...getAuthHeaders() }, cache: 'no-store' })
   if (!res.ok) return []
   const data = await res.json()
   return data.courses ?? []
@@ -418,7 +418,7 @@ export interface EfficacyReport {
 }
 
 export async function getEfficacy(): Promise<EfficacyReport | null> {
-  const res = await fetch(`${API_BASE}/api/efficacy`, { headers: { ...getAuthHeaders() } })
+  const res = await authedFetch(`${API_BASE}/api/efficacy`, { headers: { ...getAuthHeaders() } })
   if (!res.ok) return null
   return res.json()
 }
@@ -429,20 +429,20 @@ export interface ConfigRes {
 }
 
 export async function getConfig(): Promise<ConfigRes> {
-	const res = await fetch(`${API_BASE}/api/config`)
+	const res = await authedFetch(`${API_BASE}/api/config`)
 	if (!res.ok) return { auth_enabled: false }
 	return res.json()
 }
 
 export async function googleOneTap(idToken: string): Promise<AuthRes> {
-	const res = await fetch(`${API_BASE}/api/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id_token: idToken }) })
+	const res = await authedFetch(`${API_BASE}/api/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id_token: idToken }) })
 	if (!res.ok) throw new Error('Google sign-in failed')
 	return validateResponse(AuthResSchema, await res.json(), 'googleOneTap') as AuthRes
 }
 
 export async function healthCheck(): Promise<boolean> {
   try {
-    const res = await fetch(`${API_BASE}/api/health`)
+    const res = await authedFetch(`${API_BASE}/api/health`)
     return res.ok
   } catch {
     return false
@@ -457,7 +457,7 @@ export interface AuthRes {
 }
 
 export async function signup(name: string, username: string, password: string): Promise<AuthRes> {
-  const res = await fetch(`${API_BASE}/api/auth/signup`, {
+  const res = await authedFetch(`${API_BASE}/api/auth/signup`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, username, password }),
@@ -467,7 +467,7 @@ export async function signup(name: string, username: string, password: string): 
 }
 
 export async function login(username: string, password: string): Promise<AuthRes> {
-	const res = await fetch(`${API_BASE}/api/auth/login`, {
+	const res = await authedFetch(`${API_BASE}/api/auth/login`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, password }),
@@ -532,7 +532,7 @@ export interface WeaknessRes {
 }
 
 export async function getGoalPath(conceptIds: string[]): Promise<GoalPathRes> {
-	const res = await fetch(`${API_BASE}/api/goal`, {
+	const res = await authedFetch(`${API_BASE}/api/goal`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ concept_ids: conceptIds }),
@@ -542,7 +542,7 @@ export async function getGoalPath(conceptIds: string[]): Promise<GoalPathRes> {
 }
 
 export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDiagStartRes> {
-	const res = await fetch(`${API_BASE}/api/goal/diagnostic`, {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ concept_ids: conceptIds }),
@@ -552,7 +552,7 @@ export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDia
 }
 
 export async function startGoalDiagnosticName(name: string, conceptIds: string[]): Promise<GoalDiagStartRes> {
-	const res = await fetch(`${API_BASE}/api/goal/diagnostic`, {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ name, concept_ids: conceptIds }),
@@ -567,7 +567,7 @@ export async function submitGoalAnswer(
 	answer: string,
 	elapsed: number,
 ): Promise<GoalDiagAnswerRes> {
-	const res = await fetch(`${API_BASE}/api/goal/diagnostic/answer`, {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/answer`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
@@ -577,7 +577,7 @@ export async function submitGoalAnswer(
 }
 
 export async function resumeGoalDiagnostic(sessionId: string): Promise<GoalDiagAnswerRes & { session_id: string }> {
-	const res = await fetch(`${API_BASE}/api/goal/diagnostic/resume?session_id=${encodeURIComponent(sessionId)}`, {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/resume?session_id=${encodeURIComponent(sessionId)}`, {
 		headers: { ...getAuthHeaders() },
 	})
 	if (!res.ok) throw new Error(`Goal resume failed: ${res.status}`)
@@ -585,7 +585,7 @@ export async function resumeGoalDiagnostic(sessionId: string): Promise<GoalDiagA
 }
 
 export async function getGoalPlan(sessionId: string): Promise<GoalPlanRes> {
-	const res = await fetch(`${API_BASE}/api/goal/plan`, {
+	const res = await authedFetch(`${API_BASE}/api/goal/plan`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ session_id: sessionId }),
@@ -595,7 +595,7 @@ export async function getGoalPlan(sessionId: string): Promise<GoalPlanRes> {
 }
 
 export async function setDailyXPGoal(goal: number): Promise<void> {
-	const res = await fetch(`${API_BASE}/api/goals/xp`, {
+	const res = await authedFetch(`${API_BASE}/api/goals/xp`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ goal }),
@@ -604,7 +604,7 @@ export async function setDailyXPGoal(goal: number): Promise<void> {
 }
 
 export async function getWeaknesses(): Promise<WeaknessRes> {
-  const res = await fetch(`${API_BASE}/api/weaknesses`, {
+  const res = await authedFetch(`${API_BASE}/api/weaknesses`, {
     headers: { ...getAuthHeaders() },
   })
   if (!res.ok) return { by_domain: {} }
@@ -618,7 +618,7 @@ export interface UserSettings {
 }
 
 export async function getSettings(): Promise<UserSettings> {
-	const res = await fetch(`${API_BASE}/api/settings`, {
+	const res = await authedFetch(`${API_BASE}/api/settings`, {
 		headers: { ...getAuthHeaders() },
 	})
 	if (!res.ok) return {}
@@ -626,7 +626,7 @@ export async function getSettings(): Promise<UserSettings> {
 }
 
 export async function updateSettings(settings: UserSettings): Promise<void> {
-	const res = await fetch(`${API_BASE}/api/settings`, {
+	const res = await authedFetch(`${API_BASE}/api/settings`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify(settings),
@@ -655,7 +655,7 @@ export interface LessonInfo {
 // backend restart is worse than an extra request. no-store also bypasses the
 // Next.js data cache in dev.
 export async function getLessonBody(title: string): Promise<string> {
-	const res = await fetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`, {
+	const res = await authedFetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`, {
 		cache: 'no-store',
 	})
 	if (!res.ok) throw new Error(`Lesson body fetch failed: ${res.status}`)
@@ -708,7 +708,7 @@ export interface ConceptDetailRes {
 }
 
 export async function getConceptDetail(conceptId: string): Promise<ConceptDetailRes> {
-	const res = await fetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`, {
+	const res = await authedFetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`, {
 		cache: 'no-store',
 	})
 	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
@@ -740,13 +740,13 @@ export interface LessonKpsRes {
 }
 
 export async function getLessonPractice(conceptId: string, count = 5): Promise<LessonPracticeRes> {
-	const res = await fetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?count=${count}`)
+	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?count=${count}`)
 	if (!res.ok) throw new Error(`Lesson practice fetch failed: ${res.status}`)
 	return res.json()
 }
 
 export async function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
-	const res = await fetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
+	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
 	if (!res.ok) return { concept_id: conceptId, kps: [] }
 	return res.json()
 }
@@ -770,7 +770,7 @@ export async function submitStudyAnswer(conceptId: string, answer: string, expec
 	if (guestId && !headers.Authorization) {
 		body.student_id = guestId
 	}
-	const res = await fetch(`${API_BASE}/api/study/answer`, {
+	const res = await authedFetch(`${API_BASE}/api/study/answer`, {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(body),
@@ -792,14 +792,14 @@ export interface DailyActivity {
 
 export async function getActivity(days: number = 365): Promise<DailyActivity[]> {
 	const headers: Record<string, string> = { ...getAuthHeaders() }
-	const res = await fetch(`${API_BASE}/api/activity?days=${days}`, { headers })
+	const res = await authedFetch(`${API_BASE}/api/activity?days=${days}`, { headers })
 	if (!res.ok) return []
 	return res.json()
 }
 
 export async function getDueReviews(): Promise<DueReviewsRes> {
 	const headers: Record<string, string> = { ...getAuthHeaders() }
-	const res = await fetch(`${API_BASE}/api/reviews/due`, { headers })
+	const res = await authedFetch(`${API_BASE}/api/reviews/due`, { headers })
 	if (!res.ok) return { count: 0 }
 	return res.json()
 }
@@ -809,7 +809,7 @@ export async function startReviewSession(): Promise<StartSessionRes> {
 		'Content-Type': 'application/json',
 		...getAuthHeaders(),
 	}
-	const res = await fetch(`${API_BASE}/api/reviews/session`, {
+	const res = await authedFetch(`${API_BASE}/api/reviews/session`, {
 		method: 'POST',
 		headers,
 	})
@@ -827,7 +827,7 @@ export async function submitReviewAnswer(
 		'Content-Type': 'application/json',
 		...getAuthHeaders(),
 	}
-	const res = await fetch(`${API_BASE}/api/reviews/answer`, {
+	const res = await authedFetch(`${API_BASE}/api/reviews/answer`, {
 		method: 'POST',
 		headers,
 		body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
@@ -862,7 +862,7 @@ export async function startQuizSession(): Promise<QuizStartRes> {
 	const body: Record<string, unknown> = {}
 	const guestId = getGuestId()
 	if (guestId && !headers.Authorization) body.student_id = guestId
-	const res = await fetch(`${API_BASE}/api/quiz/session`, {
+	const res = await authedFetch(`${API_BASE}/api/quiz/session`, {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(body),
@@ -876,7 +876,7 @@ export async function submitQuizAnswer(sessionId: string, conceptId: string, ans
 	const body: Record<string, unknown> = { session_id: sessionId, concept_id: conceptId, answer, elapsed }
 	const guestId = getGuestId()
 	if (guestId && !headers.Authorization) body.student_id = guestId
-	const res = await fetch(`${API_BASE}/api/quiz/answer`, {
+	const res = await authedFetch(`${API_BASE}/api/quiz/answer`, {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(body),
@@ -888,7 +888,9 @@ export async function submitQuizAnswer(sessionId: string, conceptId: string, ans
 export async function validateToken(): Promise<{ valid: boolean; student_id: string }> {
 	const headers = getAuthHeaders()
 	if (!headers.Authorization) return { valid: false, student_id: '' }
-	const res = await fetch(`${API_BASE}/api/me`, { headers })
+	// Canonical route is /api/auth/me (the server has no /api/me).
+	// Network failures reject so callers never mistake "offline" for "logged out".
+	const res = await authedFetch(`${API_BASE}/api/auth/me`, { headers })
 	if (!res.ok) return { valid: false, student_id: '' }
 	try {
 		const me = await res.json()

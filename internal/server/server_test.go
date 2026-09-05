@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"testing"
 
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -322,5 +323,49 @@ func TestGoalDiagnosticResume(t *testing.T) {
 	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/goal/diagnostic/resume?session_id=nope", nil))
 	if rec.Code != 404 {
 		t.Errorf("expected 404 for unknown session, got %d", rec.Code)
+	}
+}
+
+func TestMeRoutes(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	token, st, err := authSvc.Signup("Ada", "ada", "Engine!n1")
+	if err != nil || token == "" || st == nil {
+		t.Fatalf("signup: %v", err)
+	}
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	for _, path := range []string{"/api/auth/me", "/api/me"} {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("GET", path, nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		mux.ServeHTTP(rec, req)
+		if rec.Code != 200 {
+			t.Errorf("%s: expected 200, got %d: %s", path, rec.Code, rec.Body.String())
+			continue
+		}
+		var me map[string]interface{}
+		json.Unmarshal(rec.Body.Bytes(), &me)
+		if me["student_id"] != st.ID {
+			t.Errorf("%s: expected student_id %q, got %v", path, st.ID, me["student_id"])
+		}
+	}
+
+	// Dead token (rotated secret / garbage) → 401 so the client logs out.
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/auth/me", nil)
+	req.Header.Set("Authorization", "Bearer dead.token.here")
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 401 {
+		t.Errorf("expected 401 for dead token, got %d", rec.Code)
 	}
 }
