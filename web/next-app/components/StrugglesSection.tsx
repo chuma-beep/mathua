@@ -165,7 +165,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
                         })}
                         {items.length > 8 && (
                           <div className="pt-1">
-                            <Link href={`/study?weak=${encodeURIComponent(domain)}`} className="font-mono text-[10px] text-mathua-blue hover:underline">
+                            <Link href={`/study?domain=${encodeURIComponent(domain)}`} className="font-mono text-[10px] text-mathua-blue hover:underline">
                               +{items.length - 8} more — practice in Study →
                             </Link>
                           </div>

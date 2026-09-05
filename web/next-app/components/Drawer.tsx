@@ -1,3 +1,9 @@
+/**
+ * @deprecated Global drawer nav is superseded.
+ * Use Header (desktop top nav) + BottomTabs (mobile) for global nav,
+ * and ProfileSidebar / ProfileMenuSheet for the Profile-local rail + sheet.
+ * Kept for reference until all imports are migrated; has zero imports as of T1.
+ */
 'use client'
 
 import Link from 'next/link'
