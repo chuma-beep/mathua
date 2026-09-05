@@ -2314,8 +2314,40 @@ func (s *Server) handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	}
 	// Redirect to frontend with token fragment (frontend will capture and store)
 	// Use query ?token=... so static export can read; token is short-lived HS256.
-	u := fmt.Sprintf("%s?token=%s&name=%s&id=%s", ret, url.QueryEscape(token), url.QueryEscape(st.Name), url.QueryEscape(st.ID))
+	// FRONTEND_URL (e.g. http://localhost:3000 in split dev) makes the redirect
+	// absolute so the token lands on the frontend origin; unset keeps the
+	// relative redirect for single-binary deployments.
+	u := frontendRedirect(os.Getenv("FRONTEND_URL"), ret, token, st.Name, st.ID)
 	http.Redirect(w, r, u, http.StatusFound)
+}
+
+// frontendRedirect builds the post-OAuth landing URL. With an http(s) base it
+// returns an absolute URL on the frontend origin; otherwise (empty or invalid
+// base) it falls back to the relative path so single-binary mode is unchanged.
+func frontendRedirect(base, ret, token, name, id string) string {
+	q := url.Values{}
+	q.Set("token", token)
+	q.Set("name", name)
+	q.Set("id", id)
+	if ret == "" {
+		ret = "/profile"
+	}
+	if !strings.HasPrefix(ret, "/") {
+		ret = "/" + ret
+	}
+	suffix := ret + "?" + q.Encode()
+	if strings.TrimSpace(base) == "" {
+		return suffix
+	}
+	parsed, err := url.Parse(strings.TrimSpace(base))
+	if err != nil || (parsed.Scheme != "http" && parsed.Scheme != "https") || parsed.Host == "" {
+		log.Printf("warning: ignoring invalid FRONTEND_URL %q (want http(s)://host)", base)
+		return suffix
+	}
+	parsed.Path = strings.TrimSuffix(parsed.Path, "/") + ret
+	parsed.RawQuery = q.Encode()
+	parsed.Fragment = ""
+	return parsed.String()
 }
 
 func newUUID() string {

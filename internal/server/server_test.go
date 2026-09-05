@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os/exec"
+	"strings"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/auth"
@@ -367,5 +368,33 @@ func TestMeRoutes(t *testing.T) {
 	mux.ServeHTTP(rec, req)
 	if rec.Code != 401 {
 		t.Errorf("expected 401 for dead token, got %d", rec.Code)
+	}
+}
+
+func TestFrontendRedirect(t *testing.T) {
+	// Unset/empty base → relative redirect (single-binary unchanged).
+	rel := frontendRedirect("", "/profile", "tok", "Ada", "s1")
+	if !strings.HasPrefix(rel, "/profile?") {
+		t.Errorf("expected relative /profile redirect, got %q", rel)
+	}
+	if !strings.Contains(rel, "token=tok") || !strings.Contains(rel, "id=s1") {
+		t.Errorf("expected token+id query, got %q", rel)
+	}
+	// Split dev → absolute URL on the frontend origin.
+	abs := frontendRedirect("http://localhost:3000", "/profile", "tok", "Ada", "s1")
+	if !strings.HasPrefix(abs, "http://localhost:3000/profile?") {
+		t.Errorf("expected absolute frontend redirect, got %q", abs)
+	}
+	// Trailing slash and sub-path bases join cleanly.
+	sub := frontendRedirect("https://mathua.com/app/", "profile", "tok", "Ada", "s1")
+	if !strings.HasPrefix(sub, "https://mathua.com/app/profile?") {
+		t.Errorf("expected sub-path join, got %q", sub)
+	}
+	// Invalid base → safe relative fallback, never an open redirect.
+	for _, bad := range []string{"javascript:alert(1)", "notaurl://", "://missing-scheme"} {
+		got := frontendRedirect(bad, "/profile", "tok", "Ada", "s1")
+		if !strings.HasPrefix(got, "/profile?") {
+			t.Errorf("base %q: expected relative fallback, got %q", bad, got)
+		}
 	}
 }
