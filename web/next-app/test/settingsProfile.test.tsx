@@ -75,15 +75,49 @@ describe('Settings Profile section', () => {
     }
   })
 
-  it('Surprise me persists a valid dicebear pick and drops the legacy preset', async () => {
+  it('Surprise me stages a preview without saving, Save image persists it', async () => {
     getSettingsMock.mockResolvedValue({ avatar_preset: 3 })
     render(<SettingsPage />)
-    fireEvent.click(await screen.findByText(/Surprise me/))
+    const surprise = await screen.findByRole('button', { name: /surprise me/i })
+    expect(surprise.textContent).not.toMatch(/🎲/)
+    expect(surprise.querySelector('svg')).not.toBeNull()
+    fireEvent.click(surprise)
+    expect(await screen.findByText(/not saved yet/)).toBeInTheDocument()
+    expect(updateSettingsMock).not.toHaveBeenCalled()
+    const save = screen.getByRole('button', { name: 'Save image' })
+    expect(save).toBeEnabled()
+    fireEvent.click(save)
     await waitFor(() => expect(updateSettingsMock).toHaveBeenCalled())
     const saved = updateSettingsMock.mock.calls[0][0]
     expect(saved.avatar_dicebear.style).toMatch(/^[a-z0-9-]+$/)
     expect(saved.avatar_dicebear.seed.length).toBeGreaterThan(0)
     expect(saved).not.toHaveProperty('avatar_preset')
+    expect(await screen.findByText('Image saved.')).toBeInTheDocument()
+  })
+
+  it('gallery pick stages without saving until Save image', async () => {
+    render(<SettingsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Pick bottts character' }))
+    expect(await screen.findByText(/not saved yet/)).toBeInTheDocument()
+    expect(updateSettingsMock).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByRole('button', { name: 'Save image' }))
+    await waitFor(() => expect(updateSettingsMock).toHaveBeenCalled())
+    expect(updateSettingsMock.mock.calls[0][0].avatar_dicebear.style).toBe('bottts')
+  })
+
+  it('Save image is disabled with nothing staged', async () => {
+    render(<SettingsPage />)
+    await screen.findByText('Pick a character')
+    expect(screen.getByRole('button', { name: 'Save image' })).toBeDisabled()
+  })
+
+  it('failed save keeps the staged pick and shows an error', async () => {
+    updateSettingsMock.mockRejectedValue(new Error('offline'))
+    render(<SettingsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Pick bottts character' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Save image' }))
+    expect(await screen.findByText(/check your connection/)).toBeInTheDocument()
+    expect(screen.getByText(/not saved yet/)).toBeInTheDocument()
   })
 
   it('rejects oversize uploads client-side without calling the API', async () => {
