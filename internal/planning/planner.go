@@ -46,6 +46,12 @@ func Load(coursesPath string, dag *concepts.DAG) (*Planner, error) {
 	return &Planner{dag: dag, courses: courses, byID: byID}, nil
 }
 
+// New returns a Planner over the DAG without a course catalog.
+// PrerequisitesOf works catalog-free; course lookups stay empty.
+func New(dag *concepts.DAG) *Planner {
+	return &Planner{dag: dag, byID: map[string]*Course{}}
+}
+
 func (p *Planner) Courses() []*Course {
 	return p.courses
 }

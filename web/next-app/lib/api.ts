@@ -488,6 +488,8 @@ export interface DiagnosticProgress {
   estimated_total: number
   min_total: number
   max_total: number
+  cover_done: number
+  cover_size: number
   done: boolean
 }
 
@@ -512,11 +514,17 @@ export interface GoalDiagAnswerRes {
 }
 
 export interface GoalPlanRes {
-	readiness: number
-	total_tested: number
-	correct_count: number
-	weak_areas: Record<string, { id: string; label: string }[]>
-	strong_areas: Record<string, string[]>
+  readiness: number
+  total_tested: number
+  correct_count: number
+  weak_areas: Record<string, { id: string; label: string }[]>
+  strong_areas: Record<string, string[]>
+  frontier_label?: string
+  frontier_idx?: number
+  frontier_conditional?: boolean
+  conditionally_completed?: string[]
+  placement_course_id?: string
+  completion_estimates?: Record<string, string>
 }
 
 export interface WeaknessRes {
@@ -565,6 +573,14 @@ export async function submitGoalAnswer(
 		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
 	})
 	if (!res.ok) throw new Error(`Goal answer failed: ${res.status}`)
+	return res.json()
+}
+
+export async function resumeGoalDiagnostic(sessionId: string): Promise<GoalDiagAnswerRes & { session_id: string }> {
+	const res = await fetch(`${API_BASE}/api/goal/diagnostic/resume?session_id=${encodeURIComponent(sessionId)}`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) throw new Error(`Goal resume failed: ${res.status}`)
 	return res.json()
 }
 

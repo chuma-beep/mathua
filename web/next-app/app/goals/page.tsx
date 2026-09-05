@@ -19,6 +19,7 @@ import {
   startGoalDiagnostic,
   submitGoalAnswer,
   getGoalPlan,
+  resumeGoalDiagnostic,
   getScores,
   getWeaknesses,
   startQuizSession,
@@ -60,6 +61,7 @@ const domainLabels: Record<string, string> = {
 }
 
 function GoalsContent() {
+  const GOALS_DIAG_KEY = 'mathua_diag_session_goals'
   const { mounted } = useTheme()
   const { push } = useRouter()
   const searchParams = useSearchParams()
@@ -86,6 +88,7 @@ function GoalsContent() {
   const [questionCount, setQuestionCount] = useState(0)
   const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
+  const [hasPaused, setHasPaused] = useState(false)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
@@ -123,6 +126,11 @@ function GoalsContent() {
       }).catch(e => console.error('weaknesses fetch failed:', e))
     }
     buildDomains()
+    try {
+      setHasPaused(!!sessionStorage.getItem(GOALS_DIAG_KEY))
+    } catch {
+      setHasPaused(false)
+    }
     if (searchParams.get('quiz') === '1') {
       // Reuse: quiz host — auto-start actionable quiz (150 XP, 80% own grading, guest allowed)
       setTimeout(() => { startQuiz() }, 300)
@@ -186,16 +194,20 @@ function GoalsContent() {
         return
       }
       sessionId.current = res.session_id
+      try {
+        sessionStorage.setItem(GOALS_DIAG_KEY, res.session_id)
+        setHasPaused(true)
+      } catch { /* storage unavailable — session simply won't resume */ }
       setQuestion(res.question || '')
       conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
       // Backend truth first; frontend estimate as fallback for older servers.
-      if (res.progress && res.progress.estimated_total > 0) {
+      if (res.progress && res.progress.cover_size > 0) {
         setProgress(res.progress)
-        setEstimatedTotal(res.progress.estimated_total)
+        setEstimatedTotal(res.progress.cover_size)
       } else {
-        // Estimate total: ~10 + log2(selected concepts)
+        // Fallback cover size: ~10 + log2(selected concepts)
         const est = Math.min(10 + Math.ceil(Math.log2(ids.length) * 5), 50)
         setEstimatedTotal(est)
         setProgress(null)
@@ -206,6 +218,49 @@ function GoalsContent() {
       setStep('diagnostic')
     } catch {
       toast.error("Something went wrong, but we're working on it.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function resumeDiagnostic() {
+    let sid = ''
+    try {
+      sid = sessionStorage.getItem(GOALS_DIAG_KEY) || ''
+    } catch {
+      sid = ''
+    }
+    if (!sid) return
+    setLoading(true)
+    try {
+      const data = await resumeGoalDiagnostic(sid)
+      if (data.done) {
+        try {
+          sessionStorage.removeItem(GOALS_DIAG_KEY)
+        } catch { /* ignore */ }
+        setHasPaused(false)
+        toast.error('That diagnostic already finished — start a fresh one below.')
+        setLoading(false)
+        return
+      }
+      sessionId.current = sid
+      setQuestion(data.question || '')
+      conceptId.current = data.concept_id || ''
+      setConceptName(data.concept_name || '')
+      if (data.progress) {
+        setProgress(data.progress)
+        setEstimatedTotal(data.progress.cover_size)
+        setQuestionCount(data.progress.answered + 1)
+      }
+      setLastResult(null)
+      setAnswerInput('')
+      setStep('diagnostic')
+    } catch {
+      try {
+        sessionStorage.removeItem(GOALS_DIAG_KEY)
+      } catch { /* ignore */ }
+      setHasPaused(false)
+      toast.error('Could not resume — that session expired. Start a fresh diagnostic.')
     } finally {
       setLoading(false)
     }
@@ -225,9 +280,9 @@ function GoalsContent() {
         total: prev.total + 1,
       }))
       setLastResult({ correct, feedback })
-      if (data.progress && data.progress.estimated_total > 0) {
+      if (data.progress && data.progress.cover_size > 0) {
         setProgress(data.progress)
-        setEstimatedTotal(data.progress.estimated_total)
+        setEstimatedTotal(data.progress.cover_size)
       }
 
       if (data.done) {
@@ -236,6 +291,10 @@ function GoalsContent() {
             const planRes = await getGoalPlan(sessionId.current)
             setPlan(planRes)
             setStep('results')
+            try {
+              sessionStorage.removeItem(GOALS_DIAG_KEY)
+            } catch { /* ignore */ }
+            setHasPaused(false)
           } catch {
             alert('Could not generate plan.')
           }
@@ -374,6 +433,15 @@ function GoalsContent() {
               </div>
 
               <div className="text-center px-4">
+                {hasPaused && step === 'select' && (
+                  <button
+                    onClick={resumeDiagnostic}
+                    disabled={loading}
+                    className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
+                  >
+                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic — picks up where you paused →'}
+                  </button>
+                )}
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
@@ -388,11 +456,12 @@ function GoalsContent() {
           {/* === STEP 2: Diagnostic === */}
           {step === 'diagnostic' && (
             <>
-              <SectionHeader label={progress && progress.estimated_total > 0 ? `Question ${Math.min(progress.answered + 1, progress.estimated_total)} of ~${progress.estimated_total}` : `Question ${questionCount} of ~${estimatedTotal}`} title={conceptName} />
+              <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
               <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
                 <ProgressBar
                   answered={progress ? progress.answered + 1 : questionCount}
-                  estimatedTotal={progress ? progress.estimated_total : estimatedTotal}
+                  coverDone={progress ? progress.cover_done : 0}
+                  coverSize={progress ? progress.cover_size : estimatedTotal}
                 />
 
                 {/* Accuracy display */}

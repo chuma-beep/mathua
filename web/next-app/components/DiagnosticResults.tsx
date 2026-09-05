@@ -41,9 +41,36 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
 
   const domains = new Set([...Object.keys(plan.weak_areas), ...Object.keys(plan.strong_areas)])
   const readinessPct = Math.round(plan.readiness * 100)
+  const estimates = plan.completion_estimates ? Object.entries(plan.completion_estimates).sort((a, b) => Number(a[0]) - Number(b[0])) : []
 
   return (
     <div className="max-w-3xl mx-auto">
+      {(plan.frontier_label || plan.placement_course_id) && (
+        <div className="border border-mathua-blue bg-mathua-surface p-4 mb-6 text-center">
+          {plan.frontier_label && (
+            <p className="font-serif text-lg text-mathua-primary">
+              Start here: {plan.frontier_label}
+              {plan.frontier_conditional && <span className="font-mono text-xs text-mathua-muted"> (provisional)</span>}
+            </p>
+          )}
+          {plan.placement_course_id && (
+            <p className="font-mono text-xs text-mathua-secondary mt-1">Suggested course: {plan.placement_course_id}</p>
+          )}
+          {estimates.length > 0 && (
+            <p className="font-mono text-[11px] text-mathua-muted mt-2">
+              Estimated completion: {estimates.map(([xp, when]) => `${xp} XP → ${when}`).join(' · ')}
+            </p>
+          )}
+          <p className="font-mono text-[10px] text-mathua-muted mt-2">
+            Measured for automaticity — no timeout. Slow answers count as gaps to refresh, not failures.
+          </p>
+          {plan.conditionally_completed && plan.conditionally_completed.length > 0 && (
+            <p className="font-mono text-[10px] text-mathua-muted mt-1">
+              Provisional: {plan.conditionally_completed.length} topic{plan.conditionally_completed.length === 1 ? '' : 's'} assumed known — we fall back on struggle.
+            </p>
+          )}
+        </div>
+      )}
       <div className="text-center mb-8">
         <div className="relative inline-flex items-center justify-center">
           <svg width="140" height="140" className="-rotate-90">

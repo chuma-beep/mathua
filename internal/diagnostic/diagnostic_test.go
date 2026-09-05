@@ -243,10 +243,55 @@ func TestEngine_AllProbedCompletes(t *testing.T) {
 	}
 }
 
+func TestEngine_Timed_SlowCorrectDiminished(t *testing.T) {
+	fastEng := NewEngine(testDAG(t), mustRegistry(t))
+	slowEng := NewEngine(testDAG(t), mustRegistry(t))
+	fastS := fastEng.Start()
+	slowS := slowEng.Start()
+	// Same correct answers; fast is well under thresh, slow is >2x thresh.
+	for i := 0; i < 6; i++ {
+		_, cid, err := fastEng.NextQuestion(fastS)
+		if err != nil || cid == "" {
+			break
+		}
+		fastEng.RecordAnswerTimed(fastS, cid, true, 2.0, 10.0)
+		_, scid, err := slowEng.NextQuestion(slowS)
+		if err != nil || scid == "" {
+			break
+		}
+		slowEng.RecordAnswerTimed(slowS, scid, true, 30.0, 10.0)
+	}
+	fastRep := fastEng.Report(fastS)
+	slowRep := slowEng.Report(slowS)
+	if slowRep.FrontierIdx >= fastRep.FrontierIdx && fastRep.FrontierIdx >= 0 {
+		t.Errorf("expected slow-correct frontier below fast-correct: slow=%d fast=%d",
+			slowRep.FrontierIdx, fastRep.FrontierIdx)
+	}
+	// Legacy fast-bool path still works (no elapsed).
+	legacy := NewEngine(testDAG(t), mustRegistry(t))
+	ls := legacy.Start()
+	legacy.RecordAnswer(ls, "a", true, true)
+	if ls.beliefs["a"] <= 0.5 {
+		t.Errorf("expected legacy fast-correct belief boost, got %f", ls.beliefs["a"])
+	}
+}
+
+func TestEngine_Report_CompletionEstimates(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	answer(t, e, s, true, true)
+	rep := e.Report(s)
+	for _, xp := range []int{150, 300, 900} {
+		if rep.CompletionEstimates[xp] == "" {
+			t.Errorf("expected completion estimate for %d XP", xp)
+		}
+	}
+}
+
 func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	prev := -1
+	prevCover := -1
 	for i := 0; i < 60 && !e.IsComplete(s); i++ {
 		p := e.Progress(s)
 		if p.EstimatedTotal < 15 || p.EstimatedTotal > 45 {
@@ -255,13 +300,13 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 		if p.Answered != s.totalAsked {
 			t.Fatalf("answered mismatch: progress=%d asked=%d", p.Answered, s.totalAsked)
 		}
-		if p.EstimatedTotal < p.Answered {
-			t.Fatalf("estimate below answered: %+v", p)
+		if p.CoverSize <= 0 {
+			t.Fatalf("expected positive cover size: %+v", p)
 		}
-		if p.EstimatedTotal < prev {
-			t.Fatalf("estimate decreased: prev=%d cur=%+v", prev, p)
+		if p.CoverDone < prevCover {
+			t.Fatalf("cover done decreased (bar would regress): prev=%d cur=%+v", prevCover, p)
 		}
-		prev = p.EstimatedTotal
+		prevCover = p.CoverDone
 		if answer(t, e, s, true, true) == "" {
 			break
 		}
@@ -269,5 +314,34 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	final := e.Progress(s)
 	if !final.Done {
 		t.Error("expected done progress after completion")
+	}
+	if final.CoverDone != final.CoverSize {
+		t.Errorf("expected full cover at done: %+v", final)
+	}
+}
+
+func TestEngine_Report_ConditionallyCompleted(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	// Real flow: one correct (not fast) probe → belief ~0.675 lands in the
+	// conditional band [0.6, 0.75) with confidence > 0.
+	_, cid, err := e.NextQuestion(s)
+	if err != nil || cid == "" {
+		t.Fatalf("next: %v %q", err, cid)
+	}
+	e.RecordAnswer(s, cid, true, false)
+	rep := e.Report(s)
+	if len(rep.ConditionallyCompleted) == 0 {
+		t.Fatal("expected barely-passed concept flagged conditionally completed")
+	}
+	// Fall-back: missing its dependent strips the conditional credit.
+	deps := e.dag.DependentsOf(cid)
+	if len(deps) == 0 {
+		t.Fatalf("expected dependent of %q in chain DAG", cid)
+	}
+	before := s.beliefs[cid]
+	e.RecordAnswer(s, deps[0].ID, false, false)
+	if s.beliefs[cid] >= before {
+		t.Errorf("expected fall-back decay on conditional prereq: before=%f after=%f", before, s.beliefs[cid])
 	}
 }

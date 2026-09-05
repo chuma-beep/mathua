@@ -1381,6 +1381,17 @@ func (e *Engine) SubmitDiagnosticAnswer(s *diagnostic.Session, conceptID string,
 	e.diag.RecordAnswer(s, conceptID, correct, fast)
 }
 
+// SubmitDiagnosticAnswerTimed is the MA-parity path: elapsed seconds + the
+// per-concept threshold drive automaticity weighting, with the student's
+// accommodations (extra_time) applied to the threshold.
+func (e *Engine) SubmitDiagnosticAnswerTimed(s *diagnostic.Session, conceptID string, correct bool, elapsed, timeThresh float64) {
+	studentID := ""
+	s.Lock()
+	studentID = s.StudentID
+	s.Unlock()
+	e.diag.RecordAnswerTimed(s, conceptID, correct, elapsed, e.accommodatedThreshold(studentID, timeThresh))
+}
+
 func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 	return e.diag.IsComplete(s)
 }
