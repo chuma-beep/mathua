@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useScrollDirection } from '../hooks/useScrollDirection'
+import { flagHomeView } from '../lib/auth'
 
 const TABS = [
   { label: 'Home', href: '/', icon: '○' },
@@ -37,6 +38,7 @@ export default function BottomTabs() {
           <Link
             key={t.href}
             href={t.href}
+            onClick={t.href === '/' ? flagHomeView : undefined}
             className={`flex-1 flex flex-col items-center justify-center gap-0.5 font-mono border-t-[2px] min-h-[44px] transition-colors ${
               active ? 'border-mathua-blue text-mathua-blue' : 'border-transparent text-mathua-muted hover:text-mathua-primary'
             }`}

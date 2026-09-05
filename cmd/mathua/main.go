@@ -73,6 +73,17 @@ func main() {
 	}
 	defer repo.Close()
 
+	// Persist an auto-generated JWT secret next to the SQLite file so logins
+	// survive restarts without a JWT_SECRET env (single-machine volumes).
+	// Postgres deployments must set JWT_SECRET (no shared file to use).
+	dbPath := strings.TrimPrefix(dsn, "sqlite:")
+	if dbPath == "" {
+		dbPath = "mathua.db"
+	}
+	if dbPath != ":memory:" && !strings.HasPrefix(dbPath, "postgres") {
+		auth.SetSecretFile(filepath.Join(filepath.Dir(dbPath), ".jwt_secret"))
+	}
+
 	reg := generator.NewRegistry()
 	arithmetic.Register(reg)
 	fractions.Register(reg)
