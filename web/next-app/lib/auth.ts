@@ -31,6 +31,25 @@ export function getAuthHeaders(): Record<string, string> {
   return {}
 }
 
+// authedFetch is the single choke point for API calls: it attaches the
+// stored token (unless the caller set its own Authorization header) and,
+// when the server answers 401 to a request that carried a token, clears the
+// dead token (rotated JWT_SECRET, unknown student) so isLoggedIn() flips and
+// the whole UI settles into a consistent logged-out state instead of limbo.
+// Network failures reject — callers must not treat them as "invalid".
+export async function authedFetch(input: RequestInfo | URL, init: RequestInit = {}): Promise<Response> {
+  const token = getToken()
+  const headers = new Headers(init.headers)
+  if (token && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${token}`)
+  }
+  const res = await fetch(input, { ...init, headers })
+  if (res.status === 401 && token) {
+    clearToken()
+  }
+  return res
+}
+
 export interface UserInfo {
   student_id: string
   name: string

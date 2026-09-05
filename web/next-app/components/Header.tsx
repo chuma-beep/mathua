@@ -5,9 +5,9 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
-import { signOut } from '../lib/auth'
+import { signOut, clearToken } from '../lib/auth'
 import Avatar from './Avatar'
-import { getSettings } from '../lib/api'
+import { getSettings, validateToken } from '../lib/api'
 
 interface HeaderLink {
   label: string
@@ -33,6 +33,12 @@ export default function Header({ links }: HeaderProps) {
       setAvatarPreset(null)
       return
     }
+    // Revalidate once per mount: a token that died server-side (JWT_SECRET
+    // rotated, student row gone) must flip the UI to logged-out instead of
+    // lingering in limbo. Network failures reject — never log out on those.
+    validateToken()
+      .then(v => { if (!v.valid) clearToken() })
+      .catch(() => {})
     if (user.avatar_url) setAvatarUrl(user.avatar_url)
     getSettings().then(s => {
       if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {

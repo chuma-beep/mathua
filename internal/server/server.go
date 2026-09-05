@@ -184,6 +184,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.handleGoogleLogin)))
 	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.handleGoogleCallback)))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
+	// Alias: older frontend bundles validate against /api/me (same handler).
+	mux.HandleFunc("/api/me", logRequest(cors(s.handleMe)))
 
 	mux.HandleFunc("/api/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleSession)))))
 	mux.HandleFunc("/api/session/current", logRequest(cors(s.optionalAuthMiddleware(s.handleSessionCurrent))))
