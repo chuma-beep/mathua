@@ -133,6 +133,12 @@ export default function SettingsPage() {
 
   const gallerySeed = (typeof window !== 'undefined' ? getUserInfo()?.student_id : undefined) ?? 'guest'
 
+  // One effective seed everywhere: a staged surprise re-seeds the whole
+  // grid (new character, different outfits); otherwise the saved pick's
+  // seed; otherwise the stable per-user seed. After Save, pending clears
+  // and the grid falls back to the just-saved seed — no visual jump.
+  const gridSeed = pendingDice?.seed ?? settings.avatar_dicebear?.seed ?? gallerySeed
+
   const handleSaveName = async () => {
     const name = displayName.trim()
     if (!name) {
@@ -156,7 +162,7 @@ export default function SettingsPage() {
 
   // Gallery picks and Surprise only stage a preview — Save image persists.
   const handlePickStyle = (style: DicebearPick['style']) => {
-    const seed = settings.avatar_dicebear?.seed || pendingDice?.seed || gallerySeed
+    const seed = pendingDice?.seed ?? settings.avatar_dicebear?.seed ?? gallerySeed
     setPendingDice({ style, seed })
     setImageMsg('')
   }
@@ -353,7 +359,7 @@ export default function SettingsPage() {
 
                 <div className="flex items-center gap-4 mt-6">
                   <Avatar
-                    seed={gallerySeed}
+                    seed={gridSeed}
                     name={displayName || 'You'}
                     size={56}
                     url={pendingDice ? dicebearUrl(pendingDice.style, pendingDice.seed) : currentPhotoUrl ?? (currentDice ? dicebearUrl(currentDice.style as DicebearPick['style'], currentDice.seed) : undefined)}
@@ -382,7 +388,7 @@ export default function SettingsPage() {
                         className={`p-1 border rounded-none transition-colors bg-mathua-code ${selected ? 'border-mathua-blue' : 'border-transparent hover:border-mathua-border'}`}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={dicebearUrl(style, settings.avatar_dicebear?.seed || gallerySeed)} alt={style} width={64} height={64} loading="lazy" className="w-full h-auto" />
+                        <img src={dicebearUrl(style, gridSeed)} alt={style} width={64} height={64} loading="lazy" className="w-full h-auto" />
                       </button>
                     )
                   })}
