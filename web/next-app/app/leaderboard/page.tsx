@@ -77,7 +77,7 @@ export default function LeaderboardPage() {
           </button>
         </span>
 
-        <SectionHeader label="Weekly Leaderboard" title="Compete. Improve. Rise." />
+        <SectionHeader label="Weekly Leaderboard" title="Weekly rankings" />
 
         <div className="flex justify-center mt-4 mb-6 sm:mb-10 px-2">
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 text-center w-full max-w-[260px] sm:min-w-[200px] sm:w-auto">
@@ -89,7 +89,7 @@ export default function LeaderboardPage() {
         </div>
 
         <p className="text-mathua-secondary text-sm text-center mb-6 px-2">
-          <Link href="/session" className="text-mathua-blue hover:text-mathua-blue-hover">Start a session</Link> to appear on the leaderboard. Scores reset every Monday at 00:00 UTC.
+          Scores reset every Monday at 00:00 UTC.
         </p>
 
         <div className="flex justify-center mb-6 sm:mb-10 w-full max-w-full min-w-0 overflow-hidden px-2">
@@ -131,7 +131,7 @@ export default function LeaderboardPage() {
               {!loading && !loadError && entries.length === 0 && (
                 <tr>
                   <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                    No data yet. <Link href="/session" className="text-mathua-blue hover:text-mathua-blue-hover">Start a session</Link> to appear here!
+                    No data yet.
                   </td>
                 </tr>
               )}
@@ -171,7 +171,7 @@ export default function LeaderboardPage() {
       <section className="mt-12 mb-12 min-w-0 overflow-hidden">
         <SectionHeader label="Leagues" title="Weekly promotion & demotion" />
         <p className="text-mathua-secondary text-sm text-center mb-6 px-2">
-          Top 2 in each league promote each Monday; the bottom 2 demote. Bronze to Diamond.
+          Top 2 in each league promote each Monday; the bottom 2 demote.
         </p>
         {!leagues && !leaguesFailed ? (
           <div className="text-center py-8">
@@ -219,7 +219,7 @@ export default function LeaderboardPage() {
       </section>
 
       <section className="py-12 sm:py-20 min-w-0 overflow-hidden">
-        <SectionHeader label="Progression" title="Your permanent rank" />
+        <SectionHeader label="Progression" title="Lifetime rank" />
         <div className="flex justify-center mt-6 w-full max-w-full min-w-0 overflow-hidden px-2">
           <div className="w-full max-w-[400px] min-w-0">
             <ProgressionLevels levels={LEVELS} />
