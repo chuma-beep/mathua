@@ -30,6 +30,9 @@ test('profile sidebar renders nav without duplicating main CTAs', async ({ page 
   // No CTA duplication: Diagnostic / Quiz / Review live in main-column cards only
   await expect(sidebar.getByText('Diagnostic', { exact: true })).toHaveCount(0)
   await expect(sidebar.getByText('Take Test')).toHaveCount(0)
+  // Removed groups never render in sidebar: Goals, On this page
+  await expect(sidebar.getByText('Goals', { exact: true })).toHaveCount(0)
+  await expect(sidebar.getByText('On this page', { exact: true })).toHaveCount(0)
   // Due-review count surfaces as a badge, not a second CTA
   await expect(sidebar.locator('[data-sidebar="menu-badge"]')).toHaveText('3')
   // Main column keeps its own cards (test user already completed Diagnostic → Retake)
@@ -59,7 +62,39 @@ test('profile sidebar collapses to icons via trigger', async ({ page }) => {
       { timeout: 10_000 }
     )
     .toBe('0')
+  // Collapsed rail: nav links each show a centered Lucide icon (no text overflow)
+  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/settings']) {
+    const link = sidebar.locator(`a[href="${href}"]`).first()
+    await expect(link.locator('svg').first()).toBeVisible()
+  }
+  // Collapsed rail shows icons only — label spans are display:none in icon mode
+  for (const label of ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']) {
+    await expect(sidebar.locator(`span:text-is("${label}")`).first()).toBeHidden()
+  }
   await trigger.click()
   await expect(rail).toHaveAttribute('data-state', 'expanded', { timeout: 10_000 })
   await expect(sidebar.getByText('Leaderboard', { exact: true }).first()).toBeVisible()
+})
+
+test('profile sidebar collapses to icons only at large viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 })
+  await loginAs(page)
+  await page.goto('/profile')
+  const sidebar = page.getByTestId('profile-sidebar')
+  await expect(sidebar).toBeVisible({ timeout: 30_000 })
+  const rail = sidebar.locator('xpath=ancestor::div[@data-state][1]')
+  await expect(rail).toHaveAttribute('data-state', 'expanded')
+  const expandedWidth = await sidebar.boundingBox().then((b) => b!.width)
+  const trigger = page.getByRole('button', { name: 'Toggle sidebar' }).first()
+  await trigger.click()
+  await expect(rail).toHaveAttribute('data-state', 'collapsed', { timeout: 10_000 })
+  await expect.poll(async () => sidebar.boundingBox().then((b) => b!.width), { timeout: 10_000 }).toBeLessThan(expandedWidth)
+  // Icons only: every nav link shows its svg, every label is hidden
+  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/settings']) {
+    const link = sidebar.locator(`a[href="${href}"]`).first()
+    await expect(link.locator('svg').first()).toBeVisible()
+  }
+  for (const label of ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']) {
+    await expect(sidebar.locator(`span:text-is("${label}")`).first()).toBeHidden()
+  }
 })
