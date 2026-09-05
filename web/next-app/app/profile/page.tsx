@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
@@ -14,6 +14,22 @@ import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
 import Loading from '../../components/Loading'
+import ProfileSidebar from '../../components/ProfileSidebar'
+import ProfileMenuSheet, { ProfileMobileBar } from '../../components/ProfileMenuSheet'
+import NextUpCard from '../../components/NextUpCard'
+import GoalStepper from '../../components/GoalStepper'
+import WeeklyChart from '../../components/WeeklyChart'
+import { selectNextUp } from '../../lib/nextUp'
+import { useActiveSection } from '../../hooks/useActiveSection'
+import { useScrollDirection } from '../../hooks/useScrollDirection'
+
+const PROFILE_TOC = [
+  { id: 'next', label: 'Next up' },
+  { id: 'activity', label: 'Activity' },
+  { id: 'domains', label: 'Domains' },
+  { id: 'struggles', label: 'Struggles' },
+  { id: 'efficacy', label: 'Efficacy' },
+]
 
 interface UserInfo {
   student_id: string
@@ -40,6 +56,39 @@ export default function ProfilePage() {
   const [error, setError] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const activeId = useActiveSection(PROFILE_TOC.map((t) => t.id))
+  const chipsHidden = useScrollDirection({ hideThreshold: 12, topOffset: 120, idleMs: 400, bottomOffset: 24 })
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  const handleGoalChange = (goal: number) => {
+    setScores((s) => (s ? { ...s, daily_xp_goal: goal } : s))
+  }
+
+  const goalsSlot = (
+    <>
+      {scores && <GoalStepper goal={scores.daily_xp_goal} onGoalChange={handleGoalChange} />}
+      <div className="mt-4">
+        <WeeklyChart data={activity} />
+      </div>
+    </>
+  )
+
+  const nextUp = useMemo(
+    () =>
+      selectNextUp({
+        dueReviews,
+        weaknesses,
+        progress,
+        activity,
+        diagnosticCompleted: user?.diagnostic_completed ?? false,
+        conceptsMastered: scores?.concepts_mastered ?? 0,
+      }),
+    [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
+  )
 
 
   useEffect(() => {
@@ -193,6 +242,7 @@ export default function ProfilePage() {
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                   <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
                   <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows on Profile</p>
+                  <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start Study →</Link>
                 </div>
               </div>
             </section>
@@ -272,8 +322,54 @@ export default function ProfilePage() {
           { label: 'Settings', href: '/settings' },
         ]}
       />
+      <ProfileMobileBar
+        chips={PROFILE_TOC}
+        activeId={activeId}
+        hidden={chipsHidden}
+        onChipNavigate={scrollToSection}
+        onOpenMenu={() => setMenuOpen(true)}
+      />
+      <ProfileMenuSheet
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        chips={PROFILE_TOC}
+        activeId={activeId}
+        chipsHidden={chipsHidden}
+        onChipNavigate={scrollToSection}
+        onOpenMenu={() => setMenuOpen(true)}
+        sidebarProps={{
+          name: user.name,
+          studentId: user.student_id,
+          level: scores?.level,
+          streak: scores?.current_streak,
+          avatarUrl,
+          avatarPreset,
+          toc: PROFILE_TOC,
+          activeId,
+          nextSlot: <NextUpCard next={nextUp} compact />,
+          goalsSlot,
+          onNavigate: scrollToSection,
+        }}
+      />
 
-      <div className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden">
+      <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
+        Skip to profile content
+      </a>
+      <div id="profile-main" className="mx-auto w-full max-w-[1024px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-12 overflow-x-hidden lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-6 lg:items-start">
+        <ProfileSidebar
+          name={user.name}
+          studentId={user.student_id}
+          level={scores?.level}
+          streak={scores?.current_streak}
+          avatarUrl={avatarUrl}
+          avatarPreset={avatarPreset}
+          toc={PROFILE_TOC}
+          activeId={activeId}
+          nextSlot={<NextUpCard next={nextUp} compact />}
+          goalsSlot={goalsSlot}
+          onNavigate={scrollToSection}
+        />
+        <div className="min-w-0">
         {/* Profile stats — mobile-first */}
         <ProfileStats
           name={user.name}
@@ -282,6 +378,8 @@ export default function ProfilePage() {
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
         />
+
+        <NextUpCard next={nextUp} />
 
         {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
@@ -300,6 +398,7 @@ export default function ProfilePage() {
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                 <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
                 <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows below</p>
+                <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start Study →</Link>
               </div>
             </div>
           </section>
@@ -372,7 +471,7 @@ export default function ProfilePage() {
         )}
 
         {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
-        <section className="mt-8 flex min-w-0 flex-col items-stretch">
+        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
           <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
             Activity
           </h2>
@@ -384,16 +483,19 @@ export default function ProfilePage() {
         </section>
 
         {/* Domain progress + Struggles — mobile-first: CTA on top, stacked */}
-        <section className="mt-8 min-w-0">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr] lg:gap-6 min-w-0">
+        <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
+          <div className="grid grid-cols-1 gap-4 min-w-0">
             <DomainProgress progress={progress} />
-            <StrugglesSection weaknesses={weaknesses} />
           </div>
+        </section>
+
+        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
+          <StrugglesSection weaknesses={weaknesses} />
         </section>
 
         {/* Efficacy — first-pass / second-pass instrumentation */}
         {efficacy && efficacy.concepts_touched > 0 && (
-          <section className="mt-10 min-w-0">
+          <section id="efficacy" className="mt-10 min-w-0 scroll-mt-28">
             <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4">
               Efficacy
             </h2>
@@ -415,6 +517,7 @@ export default function ProfilePage() {
         )}
 
 
+        </div>
       </div>
       <BottomTabs />
     </>
