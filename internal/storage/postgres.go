@@ -177,6 +177,12 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS session_review INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS session_new INTEGER NOT NULL DEFAULT 0",
+		`CREATE TABLE IF NOT EXISTS avatar_images (
+			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+			content_type TEXT NOT NULL,
+			bytes BYTEA NOT NULL,
+			updated_at TEXT NOT NULL DEFAULT (now()::text)
+		)`,
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -367,6 +373,46 @@ func (s *PostgresStore) UpdateSettings(studentID string, settings string) error 
 	_, err := s.db.Exec("UPDATE students SET settings = $1 WHERE id = $2", settings, studentID)
 	if err != nil {
 		return fmt.Errorf("update settings: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) SetAvatarImage(studentID string, contentType string, data []byte) error {
+	_, err := s.db.Exec(`INSERT INTO avatar_images (student_id, content_type, bytes, updated_at)
+		VALUES ($1, $2, $3, now()::text)
+		ON CONFLICT(student_id) DO UPDATE SET content_type = excluded.content_type, bytes = excluded.bytes, updated_at = now()::text`,
+		studentID, contentType, data)
+	if err != nil {
+		return fmt.Errorf("set avatar image: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) GetAvatarImage(studentID string) (string, []byte, bool, error) {
+	var contentType string
+	var data []byte
+	err := s.db.QueryRow("SELECT content_type, bytes FROM avatar_images WHERE student_id = $1", studentID).Scan(&contentType, &data)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", nil, false, nil
+		}
+		return "", nil, false, fmt.Errorf("get avatar image: %w", err)
+	}
+	return contentType, data, true, nil
+}
+
+func (s *PostgresStore) ClearAvatarImage(studentID string) error {
+	_, err := s.db.Exec("DELETE FROM avatar_images WHERE student_id = $1", studentID)
+	if err != nil {
+		return fmt.Errorf("clear avatar image: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) UpdateStudentName(studentID string, name string) error {
+	_, err := s.db.Exec("UPDATE students SET name = $1 WHERE id = $2", name, studentID)
+	if err != nil {
+		return fmt.Errorf("update student name: %w", err)
 	}
 	return nil
 }

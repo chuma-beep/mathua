@@ -193,6 +193,8 @@ Content design references: [OpenStax](https://openstax.org) (open textbooks), [M
 
 Lesson content and diagrams sourced from [Algebrica](https://algebrica.org) by Antonio Lupetti — used under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Algebrica provides a free, ad-free university-level mathematics knowledge base.
 
+Profile characters served by [DiceBear](https://www.dicebear.com) (individual avatar styles carry their own licenses, see their [license overview](https://www.dicebear.com/licenses/)).
+
 ---
 
 <div align="center">

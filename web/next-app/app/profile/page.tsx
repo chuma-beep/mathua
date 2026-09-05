@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, getGuestId } from '../../lib/auth'
+import { ensureDicebearAvatar, pickUrl, isDicebearStyle } from '../../lib/dicebear'
+import { avatarImageUrl } from '../../lib/api'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
@@ -67,17 +69,39 @@ export default function ProfilePage() {
       ensureGuestId()
     }
 
-     // hydrate avatar from /api/me and settings preset
-     if (info?.avatar_url) setAvatarUrl(info.avatar_url)
-     getSettings().then(s => {
-       if (typeof (s as unknown as { avatar_preset?: number }).avatar_preset === 'number') {
-         const p = (s as unknown as { avatar_preset?: number }).avatar_preset!
-         setAvatarPreset(p)
-         setAvatarUrl(undefined)
-       } else if (info?.avatar_url) {
-         setAvatarUrl(info.avatar_url)
-       }
-     }).catch(() => {})
+      // Avatar precedence (Discord-style): custom upload > Google photo >
+      // DiceBear pick (auto-assigned surprise or gallery choice) > legacy
+      // preset (grandfathered, no longer offered) > automatic initial.
+      const hydrateAvatar = (s: {
+        avatar_custom?: boolean
+        avatar_dicebear?: { style: string; seed: string } | null
+        avatar_preset?: number | null
+      }) => {
+        if (s.avatar_custom) {
+          setAvatarPreset(null)
+          setAvatarUrl(avatarImageUrl(Date.now()))
+          return
+        }
+        if (s.avatar_dicebear && isDicebearStyle(s.avatar_dicebear.style)) {
+          setAvatarPreset(null)
+          setAvatarUrl(pickUrl({ style: s.avatar_dicebear.style, seed: s.avatar_dicebear.seed }))
+          return
+        }
+        if (typeof s.avatar_preset === 'number') {
+          setAvatarPreset(s.avatar_preset)
+          setAvatarUrl(undefined)
+          return
+        }
+        setAvatarPreset(null)
+        setAvatarUrl(info?.avatar_url)
+      }
+      getSettings().then(hydrateAvatar).catch(() => {
+        if (info?.avatar_url) setAvatarUrl(info.avatar_url)
+      })
+      // Surprise DiceBear combo for photo-less users (all auth flows land here).
+      ensureDicebearAvatar().then(pick => {
+        if (pick) hydrateAvatar({ avatar_dicebear: { style: pick.style, seed: pick.seed } })
+      }).catch(() => {})
 
      async function fetchData() {
       try {

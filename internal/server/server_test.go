@@ -3,6 +3,7 @@ package server
 import (
 	"bytes"
 	"encoding/json"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"os/exec"
@@ -396,5 +397,189 @@ func TestFrontendRedirect(t *testing.T) {
 		if !strings.HasPrefix(got, "/profile?") {
 			t.Errorf("base %q: expected relative fallback, got %q", bad, got)
 		}
+	}
+}
+
+func TestProfileUpdate(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	token, st, err := authSvc.Signup("Ada", "ada", "Engine!n1")
+	if err != nil || token == "" || st == nil {
+		t.Fatalf("signup: %v", err)
+	}
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	put := func(token, body string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("PUT", "/api/profile", bytes.NewReader([]byte(body)))
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	rec := put(token, `{"name":"  Ada Lovelace  "}`)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var updated map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &updated)
+	if updated["name"] != "Ada Lovelace" {
+		t.Errorf("expected trimmed name, got %v", updated)
+	}
+	got, _ := store.GetStudent(st.ID)
+	if got.Name != "Ada Lovelace" {
+		t.Errorf("expected persisted name, got %q", got.Name)
+	}
+
+	for _, tc := range []struct{ name, body string }{
+		{"empty", `{"name":"   "}`},
+		{"missing", `{}`},
+		{"too long", `{"name":"` + strings.Repeat("x", 51) + `"}`},
+		{"bad json", `{"name":`},
+	} {
+		if rec := put(token, tc.body); rec.Code != 400 {
+			t.Errorf("%s: expected 400, got %d", tc.name, rec.Code)
+		}
+	}
+	if rec := put("", `{"name":"Bob"}`); rec.Code != 401 {
+		t.Errorf("anonymous: expected 401, got %d", rec.Code)
+	}
+}
+
+func avatarTestServer(t *testing.T) (*Server, *http.ServeMux, string) {
+	t.Helper()
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	token, _, err := authSvc.Signup("Ada", "ada", "Engine!n1")
+	if err != nil || token == "" {
+		t.Fatalf("signup: %v", err)
+	}
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	return s, mux, token
+}
+
+func multipartAvatar(t *testing.T, field, filename string, data []byte) (*bytes.Buffer, string) {
+	t.Helper()
+	var buf bytes.Buffer
+	w := multipart.NewWriter(&buf)
+	fw, err := w.CreateFormFile(field, filename)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fw.Write(data)
+	w.Close()
+	return &buf, w.FormDataContentType()
+}
+
+// tiny valid 1x1 PNG
+var tinyPNG = []byte{
+	0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a,
+	0x00, 0x00, 0x00, 0x0d, 0x49, 0x48, 0x44, 0x52,
+	0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01,
+	0x08, 0x02, 0x00, 0x00, 0x00, 0x90, 0x77, 0x53,
+	0xde, 0x00, 0x00, 0x00, 0x0c, 0x49, 0x44, 0x41,
+	0x54, 0x08, 0xd7, 0x63, 0xf8, 0xff, 0xff, 0x3f,
+	0x00, 0x05, 0xfe, 0x02, 0xfe, 0xdc, 0xcc, 0x59,
+	0xe7, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4e,
+	0x44, 0xae, 0x42, 0x60, 0x82,
+}
+
+func TestAvatarUploadRoundTrip(t *testing.T) {
+	_, mux, token := avatarTestServer(t)
+	post := func(token string, body *bytes.Buffer, ctype string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("POST", "/api/avatar", body)
+		req.Header.Set("Content-Type", ctype)
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	// Anonymous → 401.
+	body, ctype := multipartAvatar(t, "avatar", "a.png", tinyPNG)
+	if rec := post("", body, ctype); rec.Code != 401 {
+		t.Errorf("anonymous: expected 401, got %d", rec.Code)
+	}
+	// Wrong field/missing file → 400.
+	body, ctype = multipartAvatar(t, "notavatar", "a.png", tinyPNG)
+	if rec := post(token, body, ctype); rec.Code != 400 {
+		t.Errorf("missing file: expected 400, got %d", rec.Code)
+	}
+	// Wrong content type → 400.
+	body, ctype = multipartAvatar(t, "avatar", "a.txt", []byte("hello world, this is text"))
+	if rec := post(token, body, ctype); rec.Code != 400 {
+		t.Errorf("text file: expected 400, got %d", rec.Code)
+	}
+	// Happy path.
+	body, ctype = multipartAvatar(t, "avatar", "a.png", tinyPNG)
+	rec := post(token, body, ctype)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Serve back with content type.
+	getReq := httptest.NewRequest("GET", "/api/avatar/me", nil)
+	getReq.Header.Set("Authorization", "Bearer "+token)
+	getRec := httptest.NewRecorder()
+	mux.ServeHTTP(getRec, getReq)
+	if getRec.Code != 200 {
+		t.Fatalf("expected 200 serving avatar, got %d", getRec.Code)
+	}
+	if getRec.Header().Get("Content-Type") != "image/png" {
+		t.Errorf("expected image/png, got %q", getRec.Header().Get("Content-Type"))
+	}
+	if !bytes.Equal(getRec.Body.Bytes(), tinyPNG) {
+		t.Error("expected identical bytes back")
+	}
+	// Delete → 404 on serve.
+	delReq := httptest.NewRequest("DELETE", "/api/avatar", nil)
+	delReq.Header.Set("Authorization", "Bearer "+token)
+	delRec := httptest.NewRecorder()
+	mux.ServeHTTP(delRec, delReq)
+	if delRec.Code != 200 {
+		t.Fatalf("expected 200 on delete, got %d", delRec.Code)
+	}
+	getRec2 := httptest.NewRecorder()
+	mux.ServeHTTP(getRec2, getReq)
+	if getRec2.Code != 404 {
+		t.Errorf("expected 404 after delete, got %d", getRec2.Code)
+	}
+}
+
+func TestAvatarOversize(t *testing.T) {
+	_, mux, token := avatarTestServer(t)
+	big := bytes.Repeat([]byte{0x89, 0x50}, 300*1024) // 600KB, PNG magic
+	var buf bytes.Buffer
+	w := multipart.NewWriter(&buf)
+	fw, _ := w.CreateFormFile("avatar", "big.png")
+	fw.Write(big)
+	w.Close()
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/avatar", &buf)
+	req.Header.Set("Content-Type", w.FormDataContentType())
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for oversize, got %d", rec.Code)
 	}
 }

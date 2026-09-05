@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
@@ -186,6 +187,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 	// Alias: older frontend bundles validate against /api/me (same handler).
 	mux.HandleFunc("/api/me", logRequest(cors(s.handleMe)))
+	mux.HandleFunc("/api/profile", logRequest(cors(s.authMiddleware(s.handleProfileUpdate))))
 
 	mux.HandleFunc("/api/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleSession)))))
 	mux.HandleFunc("/api/session/current", logRequest(cors(s.optionalAuthMiddleware(s.handleSessionCurrent))))
@@ -211,6 +213,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
+	mux.HandleFunc("/api/avatar", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAvatar)))))
+	mux.HandleFunc("/api/avatar/me", logRequest(cors(s.authMiddleware(s.handleAvatarMe))))
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
 	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsSession)))))
 	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsAnswer)))))
@@ -1441,6 +1445,115 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// POST /api/avatar (multipart "avatar") uploads a custom profile photo;
+// DELETE /api/avatar removes it. Photos are magic-byte sniffed (PNG/JPEG/GIF
+// /WebP only) and capped at 512KB. A settings flag (avatar_custom) records
+// the explicit choice so "remove" falls back to the DiceBear pick.
+func (s *Server) handleAvatar(w http.ResponseWriter, r *http.Request) {
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	switch r.Method {
+	case http.MethodPost:
+		r.Body = http.MaxBytesReader(w, r.Body, 600*1024)
+		if err := r.ParseMultipartForm(600 * 1024); err != nil {
+			writeError(w, "avatar too large (512KB max)", 400)
+			return
+		}
+		f, _, err := r.FormFile("avatar")
+		if err != nil {
+			writeError(w, "missing avatar file", 400)
+			return
+		}
+		defer f.Close()
+		data, err := io.ReadAll(io.LimitReader(f, 512*1024+1))
+		if err != nil {
+			writeError(w, "failed to read avatar", 400)
+			return
+		}
+		if len(data) == 0 || len(data) > 512*1024 {
+			writeError(w, "avatar too large (512KB max)", 400)
+			return
+		}
+		ct := http.DetectContentType(data)
+		switch ct {
+		case "image/png", "image/jpeg", "image/gif", "image/webp":
+		default:
+			writeError(w, "avatar must be PNG, JPEG, GIF, or WebP", 400)
+			return
+		}
+		if err := s.repo.SetAvatarImage(studentID, ct, data); err != nil {
+			writeError(w, "failed to save avatar", 500)
+			return
+		}
+		if err := s.setSettingsFlag(studentID, "avatar_custom", true); err != nil {
+			writeError(w, "failed to save avatar", 500)
+			return
+		}
+		writeJSON(w, map[string]interface{}{"ok": true, "content_type": ct, "bytes": len(data)})
+	case http.MethodDelete:
+		if err := s.repo.ClearAvatarImage(studentID); err != nil {
+			writeError(w, "failed to remove avatar", 500)
+			return
+		}
+		if err := s.setSettingsFlag(studentID, "avatar_custom", false); err != nil {
+			writeError(w, "failed to remove avatar", 500)
+			return
+		}
+		writeJSON(w, map[string]interface{}{"ok": true})
+	default:
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+	}
+}
+
+// GET /api/avatar/me serves the student's custom photo (404 when none).
+func (s *Server) handleAvatarMe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	ct, data, found, err := s.repo.GetAvatarImage(studentID)
+	if err != nil {
+		writeError(w, "failed to load avatar", 500)
+		return
+	}
+	if !found {
+		writeError(w, "no custom avatar", 404)
+		return
+	}
+	w.Header().Set("Content-Type", ct)
+	w.Header().Set("Cache-Control", "private, max-age=86400")
+	w.Write(data)
+}
+
+// setSettingsFlag merges one key into the student's opaque settings JSON.
+func (s *Server) setSettingsFlag(studentID, key string, value bool) error {
+	raw, err := s.repo.GetSettings(studentID)
+	if err != nil {
+		return err
+	}
+	m := map[string]interface{}{}
+	if strings.TrimSpace(raw) != "" {
+		_ = json.Unmarshal([]byte(raw), &m)
+		if m == nil {
+			m = map[string]interface{}{}
+		}
+	}
+	m[key] = value
+	out, err := json.Marshal(m)
+	if err != nil {
+		return err
+	}
+	return s.repo.UpdateSettings(studentID, string(out))
+}
+
 // GET /api/reviews/due — returns count of concepts due for review
 func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -2151,6 +2264,36 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
+}
+
+// PUT /api/profile — update the student's display name (username is immutable).
+func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	var req struct {
+		Name string `json:"name"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	name := strings.TrimSpace(req.Name)
+	if name == "" || len([]rune(name)) > 50 {
+		writeError(w, "name must be 1-50 characters", 400)
+		return
+	}
+	if err := s.repo.UpdateStudentName(studentID, name); err != nil {
+		writeError(w, "failed to update profile", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"student_id": studentID, "name": name})
 }
 
 func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {

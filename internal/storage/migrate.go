@@ -115,4 +115,11 @@ CREATE TABLE IF NOT EXISTS student_topic_speed (
     FOREIGN KEY (student_id) REFERENCES students(id)
 );
 CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
+
+CREATE TABLE IF NOT EXISTS avatar_images (
+    student_id   TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+    content_type TEXT NOT NULL,
+    bytes        BLOB NOT NULL,
+    updated_at   TEXT NOT NULL DEFAULT (datetime('now'))
+);
 `
