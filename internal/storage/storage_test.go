@@ -362,3 +362,24 @@ func TestNewSQLiteStore_InvalidPath(t *testing.T) {
 // helpers
 
 func ptrTime(t time.Time) *time.Time { return &t }
+
+func TestUpdateStudentName(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.CreateUser("Ada", "ada", "hash")
+	if err != nil {
+		t.Fatalf("create user: %v", err)
+	}
+	if err := store.UpdateStudentName(st.ID, "Ada Lovelace"); err != nil {
+		t.Fatalf("update name: %v", err)
+	}
+	got, err := store.GetStudent(st.ID)
+	if err != nil {
+		t.Fatalf("get student: %v", err)
+	}
+	if got.Name != "Ada Lovelace" {
+		t.Errorf("expected renamed student, got %q", got.Name)
+	}
+	if got.Username != "ada" {
+		t.Errorf("username must be immutable, got %q", got.Username)
+	}
+}

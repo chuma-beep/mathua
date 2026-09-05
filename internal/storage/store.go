@@ -138,6 +138,7 @@ type Repository interface {
 	CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error)
 	LinkGoogleID(studentID, googleID, avatarURL string) error
 	SetCourseID(studentID, courseID string) error
+	UpdateStudentName(studentID, name string) error
 
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)
 	GetAllProgress(studentID string) (map[string]*ConceptProgress, error)
@@ -171,6 +172,9 @@ type Repository interface {
 	SetDailyXPGoal(studentID string, goal int) error
 	GetSettings(studentID string) (string, error)
 	UpdateSettings(studentID string, settings string) error
+	SetAvatarImage(studentID, contentType string, data []byte) error
+	GetAvatarImage(studentID string) (contentType string, data []byte, found bool, err error)
+	ClearAvatarImage(studentID string) error
 
 	GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error)
 	GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error)

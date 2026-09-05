@@ -289,6 +289,14 @@ func (s *SQLiteStore) SetDailyXPGoal(studentID string, goal int) error {
 	return nil
 }
 
+func (s *SQLiteStore) UpdateStudentName(studentID string, name string) error {
+	_, err := s.db.Exec("UPDATE students SET name = ? WHERE id = ?", name, studentID)
+	if err != nil {
+		return fmt.Errorf("update student name: %w", err)
+	}
+	return nil
+}
+
 func (s *SQLiteStore) GetSettings(studentID string) (string, error) {
 	row := s.db.QueryRow("SELECT settings FROM students WHERE id = ?", studentID)
 	var settings string
@@ -308,6 +316,38 @@ func (s *SQLiteStore) UpdateSettings(studentID string, settings string) error {
 	_, err := s.db.Exec("UPDATE students SET settings = ? WHERE id = ?", settings, studentID)
 	if err != nil {
 		return fmt.Errorf("update settings: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) SetAvatarImage(studentID string, contentType string, data []byte) error {
+	_, err := s.db.Exec(`INSERT INTO avatar_images (student_id, content_type, bytes, updated_at)
+		VALUES (?, ?, ?, datetime('now'))
+		ON CONFLICT(student_id) DO UPDATE SET content_type = excluded.content_type, bytes = excluded.bytes, updated_at = datetime('now')`,
+		studentID, contentType, data)
+	if err != nil {
+		return fmt.Errorf("set avatar image: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) GetAvatarImage(studentID string) (string, []byte, bool, error) {
+	var contentType string
+	var data []byte
+	err := s.db.QueryRow("SELECT content_type, bytes FROM avatar_images WHERE student_id = ?", studentID).Scan(&contentType, &data)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", nil, false, nil
+		}
+		return "", nil, false, fmt.Errorf("get avatar image: %w", err)
+	}
+	return contentType, data, true, nil
+}
+
+func (s *SQLiteStore) ClearAvatarImage(studentID string) error {
+	_, err := s.db.Exec("DELETE FROM avatar_images WHERE student_id = ?", studentID)
+	if err != nil {
+		return fmt.Errorf("clear avatar image: %w", err)
 	}
 	return nil
 }

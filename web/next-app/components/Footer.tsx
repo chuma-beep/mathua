@@ -49,6 +49,7 @@ export default function Footer({ className = '' }: FooterProps) {
         <Link href="/docs" className="link-underline" style={linkStyle}>Docs</Link>
         <Link href="/docs/contributing" className="link-underline" style={linkStyle}>Contributing</Link>
         <span className="link-underline" style={linkItemStyle}>Roadmap</span>
+        <a href="https://www.dicebear.com" target="_blank" rel="noreferrer" className="link-underline" style={linkStyle}>Avatars by DiceBear</a>
       </div>
 
       <div style={licenseStyle}>

@@ -8,8 +8,9 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
-import { getSettings, updateSettings, enableShare, disableShare, type UserSettings } from '../../lib/api'
-import { isLoggedIn, getUserInfo } from '../../lib/auth'
+import { getSettings, updateSettings, updateProfileName, uploadAvatar, deleteAvatar, avatarImageUrl, enableShare, disableShare, type UserSettings } from '../../lib/api'
+import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
+import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
 import Loading from '../../components/Loading'
 import Avatar from '../../components/Avatar'
@@ -25,6 +26,12 @@ export default function SettingsPage() {
   const [restricted, setRestricted] = useState(false)
   const [copied, setCopied] = useState(false)
   const [saveError, setSaveError] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [nameBusy, setNameBusy] = useState(false)
+  const [nameMsg, setNameMsg] = useState('')
+  const [photoBusy, setPhotoBusy] = useState(false)
+  const [photoMsg, setPhotoMsg] = useState('')
+  const [photoVersion, setPhotoVersion] = useState<number | null>(null)
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -39,6 +46,7 @@ export default function SettingsPage() {
       console.error('getSettings failed:', e)
       setLoading(false)
     })
+    setDisplayName(getUserInfo()?.name ?? '')
     try {
       const savedShare = localStorage.getItem('mathua_share_url')
       if (savedShare) setShareUrl(savedShare)
@@ -110,6 +118,98 @@ export default function SettingsPage() {
       setShareBusy(false)
     }
   }
+
+  // Profile helpers: every save strips the legacy avatar_preset key (quiet
+  // migration to the DiceBear model — presets are no longer offered).
+  const stripPreset = (s: UserSettings): UserSettings => {
+    const next = { ...s }
+    delete (next as unknown as Record<string, unknown>).avatar_preset
+    return next
+  }
+
+  const gallerySeed = (typeof window !== 'undefined' ? getUserInfo()?.student_id : undefined) ?? 'guest'
+
+  const handleSaveName = async () => {
+    const name = displayName.trim()
+    if (!name) {
+      setNameMsg('Name can’t be empty.')
+      return
+    }
+    setNameBusy(true)
+    setNameMsg('')
+    try {
+      const res = await updateProfileName(name)
+      const info = getUserInfo()
+      if (info) setUserInfo({ ...info, name: res.name })
+      setDisplayName(res.name)
+      setNameMsg('Name saved.')
+    } catch {
+      setNameMsg('Couldn’t save — check your connection and try again.')
+    } finally {
+      setNameBusy(false)
+    }
+  }
+
+  const handlePickStyle = async (style: DicebearPick['style']) => {
+    const seed = settings.avatar_dicebear?.seed || gallerySeed
+    const next = stripPreset({ ...settings, avatar_custom: false, avatar_dicebear: { style, seed } })
+    setSettings(next)
+    try {
+      await updateSettings(next)
+      if (settings.avatar_custom) await deleteAvatar().catch(() => {})
+      setPhotoVersion(null)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 2000)
+    } catch { console.error('updateSettings failed') }
+  }
+
+  const handleSurprise = async () => {
+    const pick = randomDicebear()
+    const next = stripPreset({ ...settings, avatar_custom: false, avatar_dicebear: { style: pick.style, seed: pick.seed } })
+    setSettings(next)
+    try {
+      await updateSettings(next)
+      if (settings.avatar_custom) await deleteAvatar().catch(() => {})
+      setPhotoVersion(null)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 2000)
+    } catch { console.error('updateSettings failed') }
+  }
+
+  const handleUpload = async (file: File | undefined) => {
+    if (!file) return
+    if (file.size > 512 * 1024) {
+      setPhotoMsg('Photo must be 512KB or smaller.')
+      return
+    }
+    setPhotoBusy(true)
+    setPhotoMsg('')
+    try {
+      await uploadAvatar(file)
+      const next = stripPreset({ ...settings, avatar_custom: true })
+      setSettings(next)
+      setPhotoVersion(Date.now())
+      setPhotoMsg('Photo updated.')
+    } catch {
+      setPhotoMsg('Upload failed — use PNG, JPEG, GIF, or WebP up to 512KB.')
+    } finally {
+      setPhotoBusy(false)
+    }
+  }
+
+  const handleRemovePhoto = async () => {
+    setPhotoBusy(true)
+    try {
+      await deleteAvatar()
+      const next = stripPreset({ ...settings, avatar_custom: false })
+      setSettings(next)
+      setPhotoVersion(null)
+    } catch { console.error('deleteAvatar failed') }
+    finally { setPhotoBusy(false) }
+  }
+
+  const currentPhotoUrl = settings.avatar_custom ? avatarImageUrl(photoVersion ?? undefined) : undefined
+  const currentDice = settings.avatar_dicebear
 
   if (restricted) {
     return (
@@ -199,55 +299,96 @@ export default function SettingsPage() {
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
-                <span className="font-mono text-sm text-mathua-primary">Avatar</span>
+                <span className="font-mono text-sm text-mathua-primary">Profile</span>
                 <p className="text-mathua-muted text-xs mt-1">
-                  Pick an avatar style. Stored per account and used on your profile.
+                  Your display name and profile picture. Username stays the same.
                 </p>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {Array.from({ length: 8 }, (_, i) => {
-                    const user = getUserInfo()
-                    const name = user?.name ?? 'You'
-                    const seed = user?.student_id ?? 'guest'
-                    const selected = settings.avatar_preset === i
+                <label htmlFor="display-name" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Display name</label>
+                <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                  <input
+                    id="display-name"
+                    type="text"
+                    value={displayName}
+                    maxLength={50}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSaveName()}
+                    placeholder="Your name"
+                    className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  />
+                  <button
+                    onClick={handleSaveName}
+                    disabled={nameBusy}
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 shrink-0"
+                  >
+                    {nameBusy ? 'Saving…' : 'Save name'}
+                  </button>
+                </div>
+                {nameMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{nameMsg}</p>}
+
+                <div className="flex items-center gap-4 mt-6">
+                  <Avatar
+                    seed={gallerySeed}
+                    name={displayName || 'You'}
+                    size={56}
+                    url={currentPhotoUrl ?? (currentDice ? dicebearUrl(currentDice.style as DicebearPick['style'], currentDice.seed) : undefined)}
+                  />
+                  <div className="min-w-0">
+                    <p className="font-mono text-[11px] uppercase text-mathua-muted">Current picture</p>
+                    <p className="text-mathua-muted text-xs mt-1 break-words">
+                      {settings.avatar_custom ? 'Your uploaded photo.' : currentDice ? 'Your DiceBear character.' : 'Automatic — pick a character or upload a photo.'}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="font-mono text-[11px] uppercase text-mathua-muted mt-6 mb-2">Pick a character</p>
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                  {DICEBEAR_STYLES.map((style) => {
+                    const selected = !settings.avatar_custom && currentDice?.style === style
                     return (
                       <button
-                        key={i}
-                        onClick={async () => {
-                          const next = { ...settings, avatar_preset: i }
-                          setSettings(next)
-                          setSaved(false)
-                          try {
-                            await updateSettings(next)
-                            setSaved(true)
-                            setTimeout(() => setSaved(false), 2000)
-                          } catch { console.error('updateSettings failed') }
-                        }}
-                        aria-label={`Select avatar preset ${i + 1}`}
-                        className={`p-1 border rounded-full transition-colors ${selected ? 'border-mathua-blue' : 'border-transparent hover:border-mathua-border'}`}
+                        key={style}
+                        onClick={() => handlePickStyle(style)}
+                        title={style}
+                        aria-label={`Pick ${style} character`}
+                        className={`p-1 border rounded-none transition-colors bg-mathua-code ${selected ? 'border-mathua-blue' : 'border-transparent hover:border-mathua-border'}`}
                       >
-                        <Avatar seed={seed} name={name} size={40} preset={i} />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={dicebearUrl(style, settings.avatar_dicebear?.seed || gallerySeed)} alt={style} width={64} height={64} loading="lazy" className="w-full h-auto" />
                       </button>
                     )
                   })}
                 </div>
-                <button
-                  onClick={async () => {
-                    const next = { ...settings, avatar_preset: null } as UserSettings
-                    delete (next as unknown as Record<string, unknown>).avatar_preset
-                    // explicit null to clear preset and fall back to deterministic / photo
-                    const cleared: UserSettings = { ...settings }
-                    delete (cleared as unknown as Record<string, unknown>).avatar_preset
-                    setSettings(cleared)
-                    try {
-                      await updateSettings(cleared)
-                      setSaved(true)
-                      setTimeout(() => setSaved(false), 2000)
-                    } catch { console.error('updateSettings failed') }
-                  }}
-                  className="mt-3 border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-8 text-xs font-mono"
-                >
-                  Use default avatar
-                </button>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  <button
+                    onClick={handleSurprise}
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono"
+                  >
+                    🎲 Surprise me
+                  </button>
+                  <label className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono inline-flex items-center cursor-pointer">
+                    {photoBusy ? 'Uploading…' : 'Upload photo'}
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/gif,image/webp"
+                      className="hidden"
+                      disabled={photoBusy}
+                      onChange={(e) => { handleUpload(e.target.files?.[0]); e.target.value = '' }}
+                    />
+                  </label>
+                  {settings.avatar_custom && (
+                    <button
+                      onClick={handleRemovePhoto}
+                      disabled={photoBusy}
+                      className="border border-mathua-border text-mathua-secondary hover:border-mathua-red hover:text-mathua-red rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
+                    >
+                      Remove photo
+                    </button>
+                  )}
+                </div>
+                {photoMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{photoMsg}</p>}
+                <p className="text-mathua-muted text-[11px] mt-3">
+                  Characters by <a href="https://www.dicebear.com" target="_blank" rel="noreferrer" className="text-mathua-blue hover:text-mathua-blue-hover">DiceBear</a>. Photos up to 512KB.
+                </p>
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">

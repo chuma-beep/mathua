@@ -615,6 +615,8 @@ export interface UserSettings {
 	show_timer?: boolean
 	pause_until?: string | null
 	avatar_preset?: number | null
+	avatar_dicebear?: { style: string; seed: string } | null
+	avatar_custom?: boolean
 }
 
 export async function getSettings(): Promise<UserSettings> {
@@ -632,6 +634,45 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 		body: JSON.stringify(settings),
 	})
 	if (!res.ok) throw new Error(`Update settings failed: ${res.status}`)
+}
+
+export interface ProfileUpdateRes {
+	student_id: string
+	name: string
+}
+
+export async function updateProfileName(name: string): Promise<ProfileUpdateRes> {
+	const res = await authedFetch(`${API_BASE}/api/profile`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ name }),
+	})
+	if (!res.ok) throw new Error(`Update profile failed: ${res.status}`)
+	return res.json()
+}
+
+export async function uploadAvatar(file: File): Promise<void> {
+	const form = new FormData()
+	form.append('avatar', file)
+	const res = await authedFetch(`${API_BASE}/api/avatar`, {
+		method: 'POST',
+		headers: { ...getAuthHeaders() },
+		body: form,
+	})
+	if (!res.ok) throw new Error(`Avatar upload failed: ${res.status}`)
+}
+
+export async function deleteAvatar(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/avatar`, {
+		method: 'DELETE',
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) throw new Error(`Avatar delete failed: ${res.status}`)
+}
+
+export function avatarImageUrl(v?: string | number): string {
+	const suffix = v !== undefined ? `?v=${encodeURIComponent(String(v))}` : ''
+	return `${API_BASE}/api/avatar/me${suffix}`
 }
 
 export interface PrereqInfo {

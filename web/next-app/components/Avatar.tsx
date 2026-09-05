@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 interface AvatarProps {
   seed: string
   name: string
@@ -45,8 +47,9 @@ export default function Avatar({ seed, name, size = 64, url, preset, className }
   const palette = preset != null ? PALETTES[preset % PALETTES.length] : avatarPalette(seed)
   const initial = initialFor(name)
   const fontSize = Math.round(size * 0.42)
+  const [imgFailed, setImgFailed] = useState(false)
 
-  if (url) {
+  if (url && !imgFailed) {
     return (
       <img
         src={url}
@@ -57,6 +60,7 @@ export default function Avatar({ seed, name, size = 64, url, preset, className }
         style={{ width: size, height: size }}
         loading="lazy"
         referrerPolicy="no-referrer"
+        onError={() => setImgFailed(true)}
       />
     )
   }
