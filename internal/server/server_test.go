@@ -11,6 +11,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -244,5 +245,82 @@ func TestCORS(t *testing.T) {
 	mux.ServeHTTP(rec, httptest.NewRequest("OPTIONS", "/api/health", nil))
 	if rec.Code != 204 {
 		t.Errorf("expected 204 for OPTIONS, got %d", rec.Code)
+	}
+}
+
+func TestGoalDiagnosticResume(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	s := New(engine.New(store, d, reg, nil, planning.New(d)), store, nil)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	startBody, _ := json.Marshal(map[string]interface{}{
+		"name": "tester", "concept_ids": []string{"a"},
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/goal/diagnostic", bytes.NewReader(startBody)))
+	if rec.Code != 200 {
+		t.Fatalf("start: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var start map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &start)
+	sid, _ := start["session_id"].(string)
+	q0, _ := start["question"].(string)
+	if sid == "" || q0 == "" {
+		t.Fatalf("expected session_id + question, got %v", start)
+	}
+
+	// Pause, then resume: same live question, progress intact.
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/goal/diagnostic/resume?session_id="+sid, nil))
+	if rec.Code != 200 {
+		t.Fatalf("resume: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var resumed map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &resumed)
+	if resumed["question"] != q0 {
+		t.Errorf("expected resumed question %q, got %q", q0, resumed["question"])
+	}
+	if _, ok := resumed["progress"]; !ok {
+		t.Error("expected progress in resume response")
+	}
+
+	// Answer, then resume again: advances to the next question, no loss.
+	ansBody, _ := json.Marshal(map[string]interface{}{
+		"session_id": sid, "concept_id": "a", "answer": "4", "elapsed": 5.0,
+	})
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/goal/diagnostic/answer", bytes.NewReader(ansBody)))
+	if rec.Code != 200 {
+		t.Fatalf("answer: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var ans map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &ans)
+	if done, _ := ans["done"].(bool); done {
+		t.Skip("single-concept diagnostic completed after 1 answer; resume trivially done")
+	}
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/goal/diagnostic/resume?session_id="+sid, nil))
+	if rec.Code != 200 {
+		t.Fatalf("resume2: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var resumed2 map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &resumed2)
+	if resumed2["question"] != ans["question"] {
+		t.Errorf("expected resumed question to match latest answer question")
+	}
+
+	// Unknown session → 404.
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/goal/diagnostic/resume?session_id=nope", nil))
+	if rec.Code != 404 {
+		t.Errorf("expected 404 for unknown session, got %d", rec.Code)
 	}
 }

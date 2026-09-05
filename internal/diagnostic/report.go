@@ -12,10 +12,18 @@ type DiagnosticReport struct {
 	PlacementCourseID string              `json:"placement_course_id"`
 	FrontierIdx       int                 `json:"frontier_idx"`
 	FrontierLabel     string              `json:"frontier_label"`
-	GapsByDomain      map[string][]string `json:"gaps_by_domain"`
-	MasteryLevels     map[string]float64  `json:"mastery_levels"`
-	Confidence        map[string]float64  `json:"confidence"`
-	AvgConfidence     float64             `json:"avg_confidence"`
+	// FrontierConditional marks a provisional frontier: the frontier concept
+	// was barely passed (MA "conditionally completed") — tasks assume it
+	// known but must fall back along its prerequisites on struggle.
+	FrontierConditional bool                `json:"frontier_conditional"`
+	GapsByDomain        map[string][]string `json:"gaps_by_domain"`
+	// ConditionallyCompleted lists probed concepts with belief just above
+	// the known cutoff (MA: "barely place out"). Assumed known initially;
+	// struggle on dependents falls back to these first.
+	ConditionallyCompleted []string           `json:"conditionally_completed"`
+	MasteryLevels          map[string]float64 `json:"mastery_levels"`
+	Confidence             map[string]float64 `json:"confidence"`
+	AvgConfidence          float64            `json:"avg_confidence"`
 	CompletionEstimates map[int]string    `json:"completion_estimates"`
 	TotalQuestions    int                 `json:"total_questions"`
 }
@@ -36,6 +44,7 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 
 	var confSum float64
 	var confCount int
+	conditional := map[string]bool{}
 	for _, c := range s.order {
 		b := s.beliefs[c.ID]
 		if b >= 0.05 && b <= 0.95 {
@@ -47,6 +56,12 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 		if b < beliefThreshold {
 			rep.GapsByDomain[c.Domain] = append(rep.GapsByDomain[c.Domain], c.Label)
 		}
+		// MA "conditionally completed": probed, barely above the known
+		// cutoff — assumed known, but first in line for fall-back.
+		if s.confidence[c.ID] > 0 && b >= beliefThreshold && b < beliefThreshold+0.15 {
+			conditional[c.ID] = true
+			rep.ConditionallyCompleted = append(rep.ConditionallyCompleted, c.Label)
+		}
 		if b >= beliefThreshold && s.index(c.ID) > rep.FrontierIdx {
 			rep.FrontierIdx = s.index(c.ID)
 			rep.FrontierLabel = c.Label
@@ -57,6 +72,7 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 	}
 	if rep.FrontierIdx >= 0 && rep.FrontierIdx < len(s.order) {
 		rep.PlacementCourseID = domainToCourse(s.order[rep.FrontierIdx])
+		rep.FrontierConditional = conditional[s.order[rep.FrontierIdx].ID]
 	}
 	// Deterministic gap order.
 	for d := range rep.GapsByDomain {

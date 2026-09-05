@@ -60,15 +60,18 @@ type Attempt struct {
 	Timestamp      time.Time
 }
 
-// Progress is the backend truth for the progress bar: how many Diagnostic
-// questions have been answered vs the adaptive estimate of the total.
-// EstimatedTotal is monotonic-ish (never decreases as answered grows) and
-// clamped to [minTotalQuestions, maxTotalQuestions].
+// Progress is the backend truth for the progress bar (MA parity: no exact
+// total is promised — the Diagnostic is adaptive). CoverDone/CoverSize is
+// the monotonic coverage fraction (never decreases); Answered counts
+// questions answered; EstimatedTotal is a legacy hint kept for compat and
+// must NOT be displayed as a promise.
 type Progress struct {
 	Answered       int  `json:"answered"`
 	EstimatedTotal int  `json:"estimated_total"`
 	MinTotal       int  `json:"min_total"`
 	MaxTotal       int  `json:"max_total"`
+	CoverDone      int  `json:"cover_done"`
+	CoverSize      int  `json:"cover_size"`
 	Done           bool `json:"done"`
 }
 
@@ -233,13 +236,41 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 // RecordAnswer processes an answer: belief update + evidence propagation +
 // confidence update + supplemental + stop conditions.
 func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) {
+	elapsed := 0.0
+	if fast {
+		elapsed = -1 // marker: fast without measured elapsed (legacy callers/tests)
+	} else {
+		elapsed = -2 // marker: not-fast without measured elapsed
+	}
+	e.RecordAnswerTimed(s, conceptID, correct, elapsed, 0)
+}
+
+// RecordAnswerTimed is the MA-parity path: elapsed seconds and the
+// per-concept time threshold drive automaticity weighting. Correct but
+// excessively slow answers get diminished weight (MA: "higher likelihood
+// the student has not yet learned the topic well enough"), while fast
+// correct answers keep the +0.1 automaticity bonus. Incorrect answers are
+// unaffected by timing. elapsed < 0 preserves legacy fast/not-fast-only
+// behavior (tests, /api/diagnostic/answer).
+func (e *Engine) RecordAnswerTimed(s *Session, conceptID string, correct bool, elapsed, timeThresh float64) {
 	s.Lock()
 	defer s.Unlock()
+	fast := false
+	if elapsed < 0 {
+		fast = elapsed == -1
+	} else {
+		thresh := timeThresh
+		if thresh <= 0 {
+			thresh = 10.0
+		}
+		fast = elapsed < thresh
+	}
 	s.Attempts = append(s.Attempts, Attempt{
-		ConceptID: conceptID,
-		Correct:   correct,
-		Fast:      fast,
-		Timestamp: time.Now().UTC(),
+		ConceptID:      conceptID,
+		Correct:        correct,
+		Fast:           fast,
+		ElapsedSeconds: elapsed,
+		Timestamp:      time.Now().UTC(),
 	})
 	s.totalCount[conceptID]++
 	s.totalAsked++
@@ -247,10 +278,25 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 		s.correctCount[conceptID]++
 	}
 
-	// Belief update for the concept itself.
+	// Belief update for the concept itself (MA parity: slow correct answers
+	// get diminished weight — "higher likelihood the student has not yet
+	// learned the topic well enough to build on it").
+	slowFactor := 1.0
+	if correct && elapsed >= 0 {
+		thresh := timeThresh
+		if thresh <= 0 {
+			thresh = 10.0
+		}
+		switch {
+		case elapsed > 4*thresh:
+			slowFactor = 0.25
+		case elapsed > 2*thresh:
+			slowFactor = 0.5
+		}
+	}
 	b := s.beliefs[conceptID]
 	if correct {
-		b += 0.35 * (1 - b)
+		b += 0.35 * slowFactor * (1 - b)
 		if fast {
 			b += 0.1 * (1 - b)
 		}
@@ -265,14 +311,14 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 	}
 	s.beliefs[conceptID] = b
 
-	// Evidence propagation: correct -> prerequisites more likely known;
-	// incorrect -> dependents more likely unknown.
+	// Evidence propagation: correct -> prerequisites more likely known
+	// (diminished when slow); incorrect -> dependents more likely unknown.
 	if correct {
 		for _, pr := range e.dag.PrereqsOf(conceptID) {
 			if pr.ID == conceptID {
 				continue
 			}
-			s.beliefs[pr.ID] += 0.3 * (1 - s.beliefs[pr.ID]) * 0.5
+			s.beliefs[pr.ID] += 0.3 * slowFactor * (1 - s.beliefs[pr.ID]) * 0.5
 		}
 	} else {
 		for _, dep := range e.dag.DependentsOf(conceptID) {
@@ -280,6 +326,17 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 				continue
 			}
 			s.beliefs[dep.ID] *= (1 - 0.3*0.5)
+		}
+		// MA fall-back: a miss also strips "conditionally completed" credit
+		// from barely-passed prerequisites — the frontier falls backwards
+		// along the learning path immediately on struggle.
+		for _, pr := range e.dag.PrereqsOf(conceptID) {
+			if pr.ID == conceptID {
+				continue
+			}
+			if b := s.beliefs[pr.ID]; b >= beliefThreshold && b < beliefThreshold+0.15 {
+				s.beliefs[pr.ID] = b * 0.8
+			}
 		}
 	}
 
@@ -344,19 +401,21 @@ func (e *Engine) IsComplete(s *Session) bool {
 	return s.State == StateDone
 }
 
-// Progress returns the backend truth for the progress bar.
-// answered = questions answered so far; estimated = answered + cover
-// remaining, clamped to [minTotalQuestions, maxTotalQuestions].
+// Progress returns the backend truth for the progress bar (MA parity).
+// CoverDone/CoverSize is monotonic (doneSet only grows); display the bar
+// from cover fraction, never from the moving estimated_total denominator.
 func (e *Engine) Progress(s *Session) Progress {
 	s.Lock()
 	defer s.Unlock()
 	answered := s.totalAsked
-	remaining := 0
-	for _, c := range s.compressedCoverSafeLocked() {
-		if !s.doneSet[c.ID] {
-			remaining++
+	cover := s.compressedCoverSafeLocked()
+	coverDone := 0
+	for _, c := range cover {
+		if s.doneSet[c.ID] {
+			coverDone++
 		}
 	}
+	remaining := len(cover) - coverDone
 	est := answered + remaining
 	if est < minTotalQuestions {
 		est = minTotalQuestions
@@ -372,6 +431,8 @@ func (e *Engine) Progress(s *Session) Progress {
 		EstimatedTotal: est,
 		MinTotal:       minTotalQuestions,
 		MaxTotal:       maxTotalQuestions,
+		CoverDone:      coverDone,
+		CoverSize:      len(cover),
 		Done:           s.State == StateDone,
 	}
 }

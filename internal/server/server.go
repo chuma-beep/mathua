@@ -204,6 +204,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
 	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart)))))
 	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer)))))
+	mux.HandleFunc("/api/goal/diagnostic/resume", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticResume))))
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalPlan)))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
@@ -806,6 +807,10 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 			return
 		}
 	}
+	// Sliding expiry: answering keeps a long diagnostic alive.
+	s.mu.Lock()
+	s.diagCreated[req.SessionID] = time.Now()
+	s.mu.Unlock()
 
 	// Grade against the stored problem (the one the user actually saw)
 	if session.LastProblem == nil {
@@ -844,9 +849,8 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		correct = expected == req.Answer
 	}
 	explanation = expExplanation
-	fast := req.Elapsed < timeThresh
 
-	s.eng.SubmitDiagnosticAnswer(session, req.ConceptID, correct, fast)
+	s.eng.SubmitDiagnosticAnswerTimed(session, req.ConceptID, correct, req.Elapsed, timeThresh)
 	if s.eng.IsDiagnosticComplete(session) {
 		report := s.eng.DiagnosticReport(session)
 		prog := s.eng.DiagnosticProgress(session)
@@ -878,6 +882,84 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		"concept_name": name,
 		"question":     nextProb.Question,
 		"progress":     prog,
+	})
+}
+
+// GET /api/goal/diagnostic/resume?session_id=...
+// MA parity: the Diagnostic doesn't have to be completed at once — a paused
+// session resumes on its current question with coverage progress intact.
+func (s *Server) handleGoalDiagnosticResume(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	sid := r.URL.Query().Get("session_id")
+	if sid == "" {
+		writeError(w, "session_id required", 400)
+		return
+	}
+	s.mu.Lock()
+	session := s.diagSessions[sid]
+	s.mu.Unlock()
+	if session == nil {
+		writeError(w, "diagnostic session not found", 404)
+		return
+	}
+	if authStudentID, _ := r.Context().Value(authStudentKey{}).(string); authStudentID != "" {
+		session.Lock()
+		owner := session.StudentID
+		session.Unlock()
+		if owner != "" && owner != authStudentID {
+			writeError(w, "diagnostic session does not belong to authenticated user", 403)
+			return
+		}
+	}
+	if s.eng.IsDiagnosticComplete(session) {
+		writeJSON(w, map[string]interface{}{
+			"session_id": sid,
+			"done":       true,
+			"progress":   s.eng.DiagnosticProgress(session),
+		})
+		return
+	}
+	session.Lock()
+	prob := session.LastProblem
+	cid := session.LastConceptID
+	name := session.LastConceptName
+	session.Unlock()
+	if prob == nil {
+		nextProb, nc, err := s.eng.NextDiagnosticQuestion(session)
+		if err != nil {
+			writeError(w, "failed to get next question", 500)
+			return
+		}
+		if nextProb == nil {
+			writeJSON(w, map[string]interface{}{
+				"session_id": sid,
+				"done":       true,
+				"progress":   s.eng.DiagnosticProgress(session),
+			})
+			return
+		}
+		prob = nextProb
+		cid = nc
+		if c := s.eng.GetDAG().Concept(nc); c != nil {
+			name = c.Label
+		} else {
+			name = nc
+		}
+	}
+	// Sliding expiry: an actively resumed session doesn't age out mid-test.
+	s.mu.Lock()
+	s.diagCreated[sid] = time.Now()
+	s.mu.Unlock()
+	writeJSON(w, map[string]interface{}{
+		"session_id":   sid,
+		"done":         false,
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     prob.Question,
+		"progress":     s.eng.DiagnosticProgress(session),
 	})
 }
 
@@ -918,6 +1000,10 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	attempts := make([]diagnostic.Attempt, len(session.Attempts))
 	copy(attempts, session.Attempts)
 	session.Unlock()
+
+	// MA-parity report fields: placement + completion estimates from the
+	// adaptive session (frontier, course recommendation, dates).
+	report := s.eng.DiagnosticReport(session)
 
 	// Persist diagnostic results
 	if err := s.eng.ApplyGoalResults(studentID, session); err != nil {
@@ -970,11 +1056,17 @@ func (s *Server) handleGoalPlan(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, map[string]interface{}{
-		"readiness":     readiness,
-		"total_tested":  total,
-		"correct_count": correct,
-		"weak_areas":    weakByDomain,
-		"strong_areas":  strongByDomain,
+		"readiness":                readiness,
+		"total_tested":             total,
+		"correct_count":            correct,
+		"weak_areas":               weakByDomain,
+		"strong_areas":             strongByDomain,
+		"frontier_label":           report.FrontierLabel,
+		"frontier_idx":             report.FrontierIdx,
+		"frontier_conditional":     report.FrontierConditional,
+		"conditionally_completed":  report.ConditionallyCompleted,
+		"placement_course_id":      report.PlacementCourseID,
+		"completion_estimates":     report.CompletionEstimates,
 	})
 }
 

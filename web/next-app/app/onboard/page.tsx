@@ -18,6 +18,7 @@ import {
   startGoalDiagnostic,
   submitGoalAnswer,
   getGoalPlan,
+  resumeGoalDiagnostic,
   type GoalPlanRes,
   type DiagnosticProgress,
 } from '../../lib/api'
@@ -54,6 +55,10 @@ const domainLabels: Record<string, string> = {
 
 const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
 
+// MA parity: the Diagnostic doesn't have to be completed at once — the
+// session id persists in sessionStorage so Back/refresh resumes it.
+const DIAG_KEY = 'mathua_diag_session_onboard'
+
 export default function OnboardPage() {
   const { mounted } = useTheme()
   const { push } = useRouter()
@@ -74,6 +79,7 @@ export default function OnboardPage() {
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
+  const [hasPaused, setHasPaused] = useState(false)
 
   const [plan, setPlan] = useState<GoalPlanRes | null>(null)
 
@@ -92,6 +98,11 @@ export default function OnboardPage() {
     })
     result.sort((a, b) => domainOrder.indexOf(a.name) - domainOrder.indexOf(b.name))
     setDomains(result)
+    try {
+      setHasPaused(!!sessionStorage.getItem(DIAG_KEY))
+    } catch {
+      setHasPaused(false)
+    }
   }, [mounted])
 
   function toggleDomain(name: string) {
@@ -122,6 +133,10 @@ export default function OnboardPage() {
         return
       }
       sessionId.current = res.session_id
+      try {
+        sessionStorage.setItem(DIAG_KEY, res.session_id)
+        setHasPaused(true)
+      } catch { /* storage unavailable — session simply won't resume */ }
       setQuestion(res.question || '')
       conceptId.current = res.concept_id || ''
       questionShownAt.current = Date.now()
@@ -134,6 +149,49 @@ export default function OnboardPage() {
       setStep('diagnostic')
     } catch {
       toast.error("Something went wrong, but we're working on it.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function resumeDiagnostic() {
+    let sid = ''
+    try {
+      sid = sessionStorage.getItem(DIAG_KEY) || ''
+    } catch {
+      sid = ''
+    }
+    if (!sid) return
+    setLoading(true)
+    try {
+      const data = await resumeGoalDiagnostic(sid)
+      if (data.done) {
+        try {
+          sessionStorage.removeItem(DIAG_KEY)
+        } catch { /* ignore */ }
+        setHasPaused(false)
+        toast.error('That diagnostic already finished — start a fresh one below.')
+        setLoading(false)
+        return
+      }
+      sessionId.current = sid
+      setQuestion(data.question || '')
+      conceptId.current = data.concept_id || ''
+      questionShownAt.current = Date.now()
+      setConceptName(data.concept_name || '')
+      if (data.progress) {
+        setProgress(data.progress)
+        setQuestionCount(data.progress.answered + 1)
+      }
+      setLastResult(null)
+      setAnswerInput('')
+      setStep('diagnostic')
+    } catch {
+      try {
+        sessionStorage.removeItem(DIAG_KEY)
+      } catch { /* ignore */ }
+      setHasPaused(false)
+      toast.error('Could not resume — that session expired. Start a fresh diagnostic.')
     } finally {
       setLoading(false)
     }
@@ -158,6 +216,10 @@ export default function OnboardPage() {
             const planRes = await getGoalPlan(sessionId.current)
             setPlan(planRes)
             setStep('results')
+            try {
+              sessionStorage.removeItem(DIAG_KEY)
+            } catch { /* ignore */ }
+            setHasPaused(false)
           } catch {
             alert('Could not generate plan.')
           }
@@ -199,7 +261,7 @@ export default function OnboardPage() {
         <section className="pt-8 min-w-0 overflow-hidden">
           {step !== 'welcome' && (
             <span className="flex mb-4">
-              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
+              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">{step === 'diagnostic' ? '← Pause (resume anytime)' : '← Back'}</button>
             </span>
           )}
 
@@ -248,6 +310,15 @@ export default function OnboardPage() {
               </div>
 
               <div className="text-center px-4">
+                {hasPaused && (
+                  <button
+                    onClick={resumeDiagnostic}
+                    disabled={loading}
+                    className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
+                  >
+                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic — picks up where you paused →'}
+                  </button>
+                )}
                 <button
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
@@ -262,11 +333,12 @@ export default function OnboardPage() {
           {/* === DIAGNOSTIC === */}
           {step === 'diagnostic' && (
             <>
-              <SectionHeader label={progress && progress.estimated_total > 0 ? `Question ${Math.min(progress.answered + 1, progress.estimated_total)} of ~${progress.estimated_total}` : `Question ${questionCount}`} title={conceptName} />
+              <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
               <div className="max-w-2xl mx-auto px-2 sm:px-0 min-w-0 overflow-hidden">
                 <ProgressBar
                   answered={progress ? progress.answered + 1 : questionCount}
-                  estimatedTotal={progress ? progress.estimated_total : 0}
+                  coverDone={progress ? progress.cover_done : 0}
+                  coverSize={progress ? progress.cover_size : 0}
                 />
                 <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-6 w-full max-w-full min-w-0 overflow-hidden">
                   <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">
