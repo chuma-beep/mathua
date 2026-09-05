@@ -47,8 +47,8 @@ test('profile sidebar collapses to icons via trigger', async ({ page }) => {
   const rail = sidebar.locator('xpath=ancestor::div[@data-state][1]')
   await expect(rail).toHaveAttribute('data-state', 'expanded')
   const expandedWidth = await sidebar.boundingBox().then((b) => b!.width)
-  const trigger = page.getByRole('button', { name: 'Toggle sidebar' }).first()
-  await trigger.click()
+  const collapseToggle = page.getByRole('button', { name: 'Collapse sidebar', exact: true })
+  await collapseToggle.click()
   // Collapsed: state flips, rail narrows to icon width, group labels hide
   await expect(rail).toHaveAttribute('data-state', 'collapsed', { timeout: 10_000 })
   await expect.poll(async () => sidebar.boundingBox().then((b) => b!.width), { timeout: 10_000 }).toBeLessThan(expandedWidth)
@@ -71,7 +71,7 @@ test('profile sidebar collapses to icons via trigger', async ({ page }) => {
   for (const label of ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']) {
     await expect(sidebar.locator(`span:text-is("${label}")`).first()).toBeHidden()
   }
-  await trigger.click()
+  await page.getByRole('button', { name: 'Expand sidebar', exact: true }).click()
   await expect(rail).toHaveAttribute('data-state', 'expanded', { timeout: 10_000 })
   await expect(sidebar.getByText('Leaderboard', { exact: true }).first()).toBeVisible()
 })
@@ -85,8 +85,7 @@ test('profile sidebar collapses to icons only at large viewport', async ({ page 
   const rail = sidebar.locator('xpath=ancestor::div[@data-state][1]')
   await expect(rail).toHaveAttribute('data-state', 'expanded')
   const expandedWidth = await sidebar.boundingBox().then((b) => b!.width)
-  const trigger = page.getByRole('button', { name: 'Toggle sidebar' }).first()
-  await trigger.click()
+  await page.getByRole('button', { name: 'Collapse sidebar', exact: true }).click()
   await expect(rail).toHaveAttribute('data-state', 'collapsed', { timeout: 10_000 })
   await expect.poll(async () => sidebar.boundingBox().then((b) => b!.width), { timeout: 10_000 }).toBeLessThan(expandedWidth)
   // Icons only: every nav link shows its svg, every label is hidden
