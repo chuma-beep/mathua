@@ -27,6 +27,6 @@ test('header shows authenticated links when a token exists', async ({ page }) =>
   await page.goto('/graph')
   const header = page.locator('header')
   await expect(header.getByText('Profile').first()).toBeVisible()
-  await expect(header.getByText('Practice').first()).toBeVisible()
+  await expect(header.getByText('Start').first()).toBeVisible()
   await expect(header.getByText('Login')).toHaveCount(0)
 })
