@@ -133,6 +133,16 @@ export default function Header({ links }: HeaderProps) {
                   >
                     Sign out
                   </button>
+                  <button
+                    onClick={() => {
+                      setOpen(false)
+                      signOut()
+                      router.push('/profile')
+                    }}
+                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
+                  >
+                    Sign out
+                  </button>
                 </div>
               )}
             </div>
