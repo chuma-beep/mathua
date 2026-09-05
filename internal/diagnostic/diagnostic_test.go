@@ -242,3 +242,32 @@ func TestEngine_AllProbedCompletes(t *testing.T) {
 		t.Errorf("expected complete after all probed, state=%s asked=%d", s.State, s.totalAsked)
 	}
 }
+
+func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	prev := -1
+	for i := 0; i < 60 && !e.IsComplete(s); i++ {
+		p := e.Progress(s)
+		if p.EstimatedTotal < 15 || p.EstimatedTotal > 45 {
+			t.Fatalf("estimated_total out of [15,45]: %+v", p)
+		}
+		if p.Answered != s.totalAsked {
+			t.Fatalf("answered mismatch: progress=%d asked=%d", p.Answered, s.totalAsked)
+		}
+		if p.EstimatedTotal < p.Answered {
+			t.Fatalf("estimate below answered: %+v", p)
+		}
+		if p.EstimatedTotal < prev {
+			t.Fatalf("estimate decreased: prev=%d cur=%+v", prev, p)
+		}
+		prev = p.EstimatedTotal
+		if answer(t, e, s, true, true) == "" {
+			break
+		}
+	}
+	final := e.Progress(s)
+	if !final.Done {
+		t.Error("expected done progress after completion")
+	}
+}

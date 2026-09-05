@@ -60,6 +60,18 @@ type Attempt struct {
 	Timestamp      time.Time
 }
 
+// Progress is the backend truth for the progress bar: how many Diagnostic
+// questions have been answered vs the adaptive estimate of the total.
+// EstimatedTotal is monotonic-ish (never decreases as answered grows) and
+// clamped to [minTotalQuestions, maxTotalQuestions].
+type Progress struct {
+	Answered       int  `json:"answered"`
+	EstimatedTotal int  `json:"estimated_total"`
+	MinTotal       int  `json:"min_total"`
+	MaxTotal       int  `json:"max_total"`
+	Done           bool `json:"done"`
+}
+
 type Engine struct {
 	dag      *concepts.DAG
 	registry *generator.Registry
@@ -330,6 +342,44 @@ func (e *Engine) IsComplete(s *Session) bool {
 	s.Lock()
 	defer s.Unlock()
 	return s.State == StateDone
+}
+
+// Progress returns the backend truth for the progress bar.
+// answered = questions answered so far; estimated = answered + cover
+// remaining, clamped to [minTotalQuestions, maxTotalQuestions].
+func (e *Engine) Progress(s *Session) Progress {
+	s.Lock()
+	defer s.Unlock()
+	answered := s.totalAsked
+	remaining := 0
+	for _, c := range s.compressedCoverSafeLocked() {
+		if !s.doneSet[c.ID] {
+			remaining++
+		}
+	}
+	est := answered + remaining
+	if est < minTotalQuestions {
+		est = minTotalQuestions
+	}
+	if est > maxTotalQuestions {
+		est = maxTotalQuestions
+	}
+	if est < answered {
+		est = answered
+	}
+	return Progress{
+		Answered:       answered,
+		EstimatedTotal: est,
+		MinTotal:       minTotalQuestions,
+		MaxTotal:       maxTotalQuestions,
+		Done:           s.State == StateDone,
+	}
+}
+
+// compressedCoverSafeLocked is compressedCoverSafe without locking
+// (caller must hold s.Lock).
+func (s *Session) compressedCoverSafeLocked() []*concepts.Concept {
+	return s.compressedCoverSafe()
 }
 
 // FrontierEstimate returns the highest order index whose belief is known.

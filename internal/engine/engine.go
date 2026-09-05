@@ -1385,6 +1385,10 @@ func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 	return e.diag.IsComplete(s)
 }
 
+func (e *Engine) DiagnosticProgress(s *diagnostic.Session) diagnostic.Progress {
+	return e.diag.Progress(s)
+}
+
 func (e *Engine) DiagnosticReport(s *diagnostic.Session) *diagnostic.DiagnosticReport {
 	return e.diag.Report(s)
 }

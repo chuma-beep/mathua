@@ -13,11 +13,13 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import SymbolPalette from '../../components/SymbolPalette'
 import DiagnosticResults from '../../components/DiagnosticResults'
+import ProgressBar from '../../components/ProgressBar'
 import {
   startGoalDiagnostic,
   submitGoalAnswer,
   getGoalPlan,
   type GoalPlanRes,
+  type DiagnosticProgress,
 } from '../../lib/api'
 import { setUserInfo, getUserInfo } from '../../lib/auth'
 import conceptsData from '../../data/concepts.json'
@@ -68,6 +70,7 @@ export default function OnboardPage() {
   const questionShownAt = useRef<number | null>(null)
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
+  const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
@@ -124,6 +127,7 @@ export default function OnboardPage() {
       questionShownAt.current = Date.now()
       setConceptName(res.concept_name || '')
       setQuestionCount(1)
+      setProgress(res.progress ?? null)
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
@@ -146,6 +150,7 @@ export default function OnboardPage() {
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
       setLastResult({ correct, feedback })
+      if (data.progress) setProgress(data.progress)
 
       if (data.done) {
         setTimeout(async () => {
@@ -257,8 +262,12 @@ export default function OnboardPage() {
           {/* === DIAGNOSTIC === */}
           {step === 'diagnostic' && (
             <>
-              <SectionHeader label={`Question ${questionCount}`} title={conceptName} />
+              <SectionHeader label={progress && progress.estimated_total > 0 ? `Question ${Math.min(progress.answered + 1, progress.estimated_total)} of ~${progress.estimated_total}` : `Question ${questionCount}`} title={conceptName} />
               <div className="max-w-2xl mx-auto px-2 sm:px-0 min-w-0 overflow-hidden">
+                <ProgressBar
+                  answered={progress ? progress.answered + 1 : questionCount}
+                  estimatedTotal={progress ? progress.estimated_total : 0}
+                />
                 <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-6 w-full max-w-full min-w-0 overflow-hidden">
                   <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">
                     <div className="w-full max-w-full min-w-0 overflow-hidden">
