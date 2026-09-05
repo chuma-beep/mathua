@@ -261,7 +261,7 @@ export default function OnboardPage() {
         <section className="pt-8 min-w-0 overflow-hidden">
           {step !== 'welcome' && (
             <span className="flex mb-4">
-              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">{step === 'diagnostic' ? '← Pause (resume anytime)' : '← Back'}</button>
+              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
             </span>
           )}
 
@@ -316,7 +316,7 @@ export default function OnboardPage() {
                     disabled={loading}
                     className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
                   >
-                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic — picks up where you paused →'}
+                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic →'}
                   </button>
                 )}
                 <button

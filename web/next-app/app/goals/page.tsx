@@ -439,7 +439,7 @@ function GoalsContent() {
                     disabled={loading}
                     className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
                   >
-                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic — picks up where you paused →'}
+                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic →'}
                   </button>
                 )}
                 <button
