@@ -176,15 +176,15 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         </KatexContent>
                       </div>
 
-                      <div className="mt-2 flex items-center gap-2">
+                      <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2">
                         <input
                           type="text"
                           value={answers[i] || ''}
                           onChange={e => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
                          onKeyDown={e => handleKeyDown(e, i)}
-                         placeholder="Your answer…"
+                          placeholder="Your answer…"
                         disabled={result !== undefined || locked}
-                        className={`flex-1 bg-mathua-bg border px-2.5 py-1.5 text-xs font-mono text-mathua-primary outline-none transition-colors rounded-none ${
+                        className={`flex-1 min-w-0 bg-mathua-bg border px-4 h-12 text-base font-mono text-mathua-primary placeholder:text-mathua-muted outline-none transition-colors rounded-none ${
                           result === 'correct'
                             ? 'border-green-500/60'
                             : result === 'incorrect'
@@ -196,7 +196,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         <button
                           onClick={() => handleCheck(i)}
                           disabled={!!checking[i]}
-                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 py-1.5 text-xs font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 h-12 text-sm font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto shrink-0"
                         >
                         {checking[i] ? 'Checking…' : 'Submit'}
                         </button>
