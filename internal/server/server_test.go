@@ -443,7 +443,7 @@ func TestAuthLoginSignup(t *testing.T) {
 }
 
 // Separate server (fresh rate-limiter bucket) for the signup email rules:
-// required, valid, lowercased at rest, unverified dupes allowed.
+// required, valid, lowercased at rest, strict one-email-one-account.
 func TestAuthSignupEmail(t *testing.T) {
 	d, _ := concepts.Build([]concepts.Concept{
 		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
@@ -479,8 +479,10 @@ func TestAuthSignupEmail(t *testing.T) {
 	if rec := post("/api/auth/signup", `{"name":"Dupe One","username":"dupeone","password":"Engine!n1","email":"dupe@example.com"}`); rec.Code != 200 {
 		t.Fatalf("dupe one: expected 200, got %d: %s", rec.Code, rec.Body.String())
 	}
-	if rec := post("/api/auth/signup", `{"name":"Dupe Two","username":"dupetwo","password":"Engine!n1","email":"dupe@example.com"}`); rec.Code != 200 {
-		t.Errorf("unverified dupe: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	if rec := post("/api/auth/signup", `{"name":"Dupe Two","username":"dupetwo","password":"Engine!n1","email":"dupe@example.com"}`); rec.Code != 409 {
+		t.Errorf("unverified dupe: expected 409, got %d: %s", rec.Code, rec.Body.String())
+	} else if !strings.Contains(rec.Body.String(), "email already in use") {
+		t.Errorf("expected email-taken message, got %s", rec.Body.String())
 	}
 }
 
@@ -539,9 +541,24 @@ func TestProfileUpdate(t *testing.T) {
 		return rec
 	}
 
-	rec := put(token, `{"name":"  Ada Lovelace  "}`)
+	if rec := put(token, `{"name":"  Ada Lovelace  ", "email":"Ada@Example.COM"}`); rec.Code != 200 {
+		t.Fatalf("email set: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	} else if got, _ := store.GetStudent(st.ID); got.Email != "ada@example.com" {
+		t.Errorf("expected lowercased email stored, got %q", got.Email)
+	}
+	token2, _, err := authSvc.Signup("Bob", "bob", "Engine!n1")
+	if err != nil || token2 == "" {
+		t.Fatalf("second signup: %v", err)
+	}
+	if rec := put(token2, `{"name":"Bob", "email":"ada@example.com"}`); rec.Code != 409 {
+		t.Errorf("taken email: expected 409, got %d: %s", rec.Code, rec.Body.String())
+	} else if !strings.Contains(rec.Body.String(), "email already in use") {
+		t.Errorf("expected email-taken message, got %s", rec.Body.String())
+	}
+	// Re-saving your own address stays a no-op success.
+	rec := put(token, `{"name":"Ada Lovelace", "email":"ada@example.com"}`)
 	if rec.Code != 200 {
-		t.Fatalf("expected 200, got %d: %s", rec.Code, rec.Body.String())
+		t.Errorf("own email: expected 200, got %d: %s", rec.Code, rec.Body.String())
 	}
 	var updated map[string]interface{}
 	json.Unmarshal(rec.Body.Bytes(), &updated)

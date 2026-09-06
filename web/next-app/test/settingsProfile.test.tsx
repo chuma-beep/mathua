@@ -95,6 +95,15 @@ describe('Settings Profile section', () => {
     await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada', 'ada@example.com'))
   })
 
+  it('surfaces a taken-email rejection instead of the generic error', async () => {
+    updateProfileNameMock.mockRejectedValue(Object.assign(new Error('Update profile failed: 409: email already in use'), { status: 409, serverMessage: 'email already in use' }))
+    render(<SettingsPage />)
+    fireEvent.change(await screen.findByLabelText('Display name'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText(/Recovery email/, { exact: false }), { target: { value: 'taken@example.com' } })
+    fireEvent.click(screen.getByText('Save profile'))
+    expect(await screen.findByText('email already in use')).toBeInTheDocument()
+  })
+
   it('changes the password with current verification', async () => {
     changePasswordMock.mockReset().mockResolvedValue(undefined)
     render(<SettingsPage />)

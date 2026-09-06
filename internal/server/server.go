@@ -2260,14 +2260,13 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), 400)
 		return
 	}
-	// Verified-taken check runs before user creation: a verified address
-	// belongs to a live account (password or OAuth) — point the caller at
-	// login/reset instead of forking a duplicate. Unverified duplicates are
-	// allowed; first-to-verify wins (see LoginOrCreateOAuth dual-verified rule).
+	// Strict one-email-one-account: any existing row with this address —
+	// verified or not — is a 409. Point the caller at login/reset instead
+	// of forking a duplicate (same enumeration class as "username is taken").
 	if existing, err := s.repo.FindByEmail(email); err != nil {
 		writeError(w, "signup failed: "+err.Error(), 500)
 		return
-	} else if existing != nil && existing.EmailVerified {
+	} else if existing != nil {
 		writeError(w, "email already in use", 409)
 		return
 	}
@@ -2450,6 +2449,18 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 		if err := auth.ValidateEmail(email); err != nil {
 			writeError(w, err.Error(), 400)
 			return
+		}
+		// Strict one-email-one-account (mirrors signup): another account
+		// holding this address — verified or not — is a 409. Re-saving
+		// your own address stays a no-op success.
+		if email != "" {
+			if existing, err := s.repo.FindByEmail(email); err != nil {
+				writeError(w, "failed to update profile", 500)
+				return
+			} else if existing != nil && existing.ID != studentID {
+				writeError(w, "email already in use", 409)
+				return
+			}
 		}
 		if err := s.repo.SetEmail(studentID, email); err != nil {
 			writeError(w, "failed to update profile", 500)
