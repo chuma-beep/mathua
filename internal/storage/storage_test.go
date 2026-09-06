@@ -282,6 +282,50 @@ func TestGetWeeklyLeaderboard(t *testing.T) {
 	}
 }
 
+func TestLeaderboardCarriesUsernameAndAvatar(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.CreateUser("Ada", "ada", "hash")
+	if err != nil {
+		t.Fatalf("create user: %v", err)
+	}
+	if err := store.SetAvatarURL(st.ID, "https://photo/x.jpg"); err != nil {
+		t.Fatalf("set avatar url: %v", err)
+	}
+	if err := store.UpdateSettings(st.ID, `{"avatar_dicebear":{"style":"bottts","seed":"s1"},"avatar_custom":false,"avatar_version":3}`); err != nil {
+		t.Fatalf("settings: %v", err)
+	}
+	rows, err := store.GetWeeklyLeaderboard()
+	if err != nil {
+		t.Fatalf("weekly: %v", err)
+	}
+	if len(rows) != 1 || rows[0].Username != "ada" {
+		t.Fatalf("expected username carried, got %+v", rows)
+	}
+	if rows[0].AvatarURL != "https://photo/x.jpg" {
+		t.Errorf("expected avatar url carried, got %q", rows[0].AvatarURL)
+	}
+	custom, pick, version := AvatarBits(rows[0].AvatarSettings)
+	if custom || version != 3 || pick == nil || pick.Style != "bottts" || pick.Seed != "s1" {
+		t.Errorf("bad avatar bits: custom=%v pick=%+v version=%d", custom, pick, version)
+	}
+	members, err := store.GetLeagueStandings()
+	if err != nil {
+		t.Fatalf("standings: %v", err)
+	}
+	if len(members) != 1 || members[0].Username != "ada" {
+		t.Fatalf("expected username on member, got %+v", members)
+	}
+	if members[0].AvatarURL != "https://photo/x.jpg" || members[0].AvatarDicebear == nil {
+		t.Errorf("expected avatar fields on member, got %+v", members[0])
+	}
+	if c, p, v := AvatarBits("not-json"); c || p != nil || v != 0 {
+		t.Errorf("corrupt settings should yield zero bits")
+	}
+	if c, p, v := AvatarBits(""); c || p != nil || v != 0 {
+		t.Errorf("empty settings should yield zero bits")
+	}
+}
+
 // Migrate (idempotent)
 
 func TestMigrate_Idempotent(t *testing.T) {

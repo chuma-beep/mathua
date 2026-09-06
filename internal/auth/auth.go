@@ -154,6 +154,16 @@ func NormalizeUsername(u string) string { return strings.ToLower(strings.TrimSpa
 var ErrUsernameTaken = errors.New("username is taken")
 
 func (a *AuthService) Signup(name, username, password string) (string, *storage.Student, error) {
+	// Defense in depth: the handler and form already require a name, but
+	// raw API/service callers bypass them — trim and enforce here so no
+	// blank or oversized name ever reaches the leaderboard.
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return "", nil, errors.New("name is required")
+	}
+	if len([]rune(name)) > 50 {
+		return "", nil, errors.New("name must be 1-50 characters")
+	}
 	username = NormalizeUsername(username)
 	if username == "" {
 		return "", nil, errors.New("username is required")
@@ -272,6 +282,12 @@ func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Stude
 	st, err := a.repo.CreateOAuthUser(p.Provider, p.ProviderID, p.Name, p.Email, p.EmailVerified, p.AvatarURL)
 	if err != nil {
 		return "", nil, err
+	}
+	// OAuth accounts have no user-chosen username — assign a random handle
+	// so every account carries one (leaderboard fallback, future @mentions).
+	// Best-effort: a failure leaves the account exactly as before.
+	if u := a.EnsureUsername(st.ID); u != "" {
+		st.Username = u
 	}
 	tok, err := generateToken(st.ID)
 	if err != nil {

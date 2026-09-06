@@ -602,6 +602,31 @@ func (s *PostgresStore) UpdateStudentName(studentID string, name string) error {
 	return nil
 }
 
+func (s *PostgresStore) SetUsername(studentID string, username string) error {
+	_, err := s.db.Exec("UPDATE students SET username = $1 WHERE id = $2", username, studentID)
+	if err != nil {
+		return fmt.Errorf("set username: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) ListStudentsMissingUsernames() ([]string, error) {
+	rows, err := s.db.Query("SELECT id FROM students WHERE username IS NULL OR TRIM(username) = ''")
+	if err != nil {
+		return nil, fmt.Errorf("list missing usernames: %w", err)
+	}
+	defer rows.Close()
+	var ids []string
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("scan missing username: %w", err)
+		}
+		ids = append(ids, id)
+	}
+	return ids, rows.Err()
+}
+
 func (s *PostgresStore) SetEmail(studentID string, email string) error {
 	_, err := s.db.Exec("UPDATE students SET email = $1 WHERE id = $2", email, studentID)
 	if err != nil {
@@ -1065,7 +1090,7 @@ func (s *PostgresStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int
 func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	monday := weekStart(time.Now().UTC())
 	rows, err := s.db.Query(`
-		SELECT s.id, s.name,
+		SELECT s.id, s.name, s.username, s.avatar_url, s.settings,
 			COALESCE((SELECT COUNT(*) FROM concept_progress
 			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
 			COALESCE((SELECT COUNT(*) FROM concept_progress
@@ -1082,9 +1107,13 @@ func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	var out []LeaderboardRow
 	for rows.Next() {
 		var r LeaderboardRow
-		if err := rows.Scan(&r.StudentID, &r.Name, &r.TotalMastered, &r.WeeklyMastered); err != nil {
+		var username, avatarURL, settings sql.NullString
+		if err := rows.Scan(&r.StudentID, &r.Name, &username, &avatarURL, &settings, &r.TotalMastered, &r.WeeklyMastered); err != nil {
 			return nil, fmt.Errorf("scan leaderboard: %w", err)
 		}
+		r.Username = username.String
+		r.AvatarURL = avatarURL.String
+		r.AvatarSettings = settings.String
 		out = append(out, r)
 	}
 	return out, rows.Err()
@@ -1093,7 +1122,7 @@ func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 func (s *PostgresStore) GetLeagueStandings() ([]LeagueMember, error) {
 	monday := weekStart(time.Now().UTC())
 	rows, err := s.db.Query(`
-		SELECT s.id, s.name, COALESCE(s.league, 'bronze'), s.league_moved,
+		SELECT s.id, s.name, s.username, s.avatar_url, s.settings, COALESCE(s.league, 'bronze'), s.league_moved,
 			COALESCE((SELECT COUNT(*) FROM concept_progress
 			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
 			COALESCE((SELECT COUNT(*) FROM concept_progress
@@ -1110,9 +1139,14 @@ func (s *PostgresStore) GetLeagueStandings() ([]LeagueMember, error) {
 	for rows.Next() {
 		var m LeagueMember
 		var moved int
-		if err := rows.Scan(&m.StudentID, &m.Name, &m.Tier, &moved, &m.TotalMastered, &m.WeeklyMastered); err != nil {
+		var username, avatarURL, settings sql.NullString
+		if err := rows.Scan(&m.StudentID, &m.Name, &username, &avatarURL, &settings, &m.Tier, &moved, &m.TotalMastered, &m.WeeklyMastered); err != nil {
 			return nil, fmt.Errorf("scan league member: %w", err)
 		}
+		m.Username = username.String
+		m.AvatarURL = avatarURL.String
+		m.AvatarSettings = settings.String
+		m.AvatarCustom, m.AvatarDicebear, m.AvatarVersion = AvatarBits(settings.String)
 		m.Moved = moved
 		if m.Tier == "" {
 			m.Tier = "bronze"

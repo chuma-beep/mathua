@@ -150,6 +150,11 @@ func main() {
 	if !*noAuth {
 		authSvc = auth.New(repo)
 		fmt.Print(" (auth enabled)")
+		if n, err := authSvc.BackfillUsernames(); err != nil {
+			log.Printf("username backfill failed: %v", err)
+		} else if n > 0 {
+			fmt.Printf(" (assigned %d usernames)", n)
+		}
 	} else {
 		fmt.Print(" (no auth)")
 	}
