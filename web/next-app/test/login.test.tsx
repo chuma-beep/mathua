@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, beforeAll, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 
 beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
@@ -21,6 +21,9 @@ const pushMock = vi.fn()
 const signupMock = vi.fn()
 const loginMock = vi.fn()
 const validateTokenMock = vi.fn()
+const getConfigMock = vi.fn()
+const requestResetMock = vi.fn()
+const completeResetMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
@@ -32,7 +35,9 @@ vi.mock('../lib/api', () => ({
   signup: (...a: unknown[]) => signupMock(...a),
   login: (...a: unknown[]) => loginMock(...a),
   validateToken: (...a: unknown[]) => validateTokenMock(...a),
-  getConfig: () => Promise.resolve({ auth_enabled: true }),
+  requestPasswordReset: (...a: unknown[]) => requestResetMock(...a),
+  completePasswordReset: (...a: unknown[]) => completeResetMock(...a),
+  getConfig: (...a: unknown[]) => getConfigMock(...a),
   API_BASE: '',
 }))
 
@@ -47,6 +52,9 @@ describe('LoginPage', () => {
     signupMock.mockClear()
     loginMock.mockClear()
     validateTokenMock.mockClear()
+    requestResetMock.mockReset().mockResolvedValue(undefined)
+    completeResetMock.mockReset()
+    getConfigMock.mockReset().mockResolvedValue({ auth_enabled: true })
   })
 
   it('requires username and password on login and does not call the API', () => {
@@ -102,5 +110,68 @@ describe('LoginPage', () => {
     expect(pw.type).toBe('text')
     fireEvent.click(screen.getByRole('button', { name: 'Hide password' }))
     expect(pw.type).toBe('password')
+  })
+
+  it('rejects passwords whose only special is a non-ASCII letter (server parity)', () => {
+    render(<LoginPage />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }))
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'ada' } })
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'abcdé123' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Create Account' }))
+    expect(screen.getByText(/a special character/)).toBeInTheDocument()
+    expect(signupMock).not.toHaveBeenCalled()
+  })
+
+  it('rejects overlong passwords at the bcrypt boundary', () => {
+    render(<LoginPage />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }))
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'ada' } })
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: `${'a1!'.repeat(25)}` } })
+    fireEvent.click(screen.getByRole('button', { name: 'Create Account' }))
+    expect(screen.getByText(/at most 72 characters/)).toBeInTheDocument()
+    expect(signupMock).not.toHaveBeenCalled()
+  })
+
+  it('rejects invalid usernames on signup', () => {
+    render(<LoginPage />)
+    fireEvent.click(screen.getByRole('button', { name: 'Sign Up' }))
+    fireEvent.change(screen.getByLabelText('Name'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'ab' } })
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Engine!n1' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Create Account' }))
+    expect(screen.getByText('Username must be 3-20 characters')).toBeInTheDocument()
+    expect(signupMock).not.toHaveBeenCalled()
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'bad name!' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Create Account' }))
+    expect(screen.getByText(/may only contain letters/)).toBeInTheDocument()
+    expect(signupMock).not.toHaveBeenCalled()
+  })
+
+  it('routes to profile after a valid login', async () => {
+    loginMock.mockResolvedValue({ token: 't', student_id: 's1', name: 'Ada', diagnostic_completed: true })
+    validateTokenMock.mockResolvedValue({ valid: true })
+    render(<LoginPage />)
+    fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'ada' } })
+    fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Engine!n1' } })
+    fireEvent.click(screen.getByTestId('auth-submit'))
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/profile'))
+  })
+
+  it('shows a disabled notice when the server has auth disabled', async () => {
+    getConfigMock.mockResolvedValue({ auth_enabled: false })
+    render(<LoginPage />)
+    expect(await screen.findByText(/Accounts are disabled on this server/)).toBeInTheDocument()
+    expect(screen.getByTestId('auth-submit')).toBeDisabled()
+  })
+
+  it('forgot flow sends a reset request with anti-enumeration copy', async () => {
+    render(<LoginPage />)
+    fireEvent.click(await screen.findByText('Forgot password?'))
+    fireEvent.change(screen.getByLabelText('Username or email'), { target: { value: 'ada' } })
+    fireEvent.click(screen.getByText('Send reset link'))
+    await waitFor(() => expect(requestResetMock).toHaveBeenCalledWith('ada'))
+    expect(await screen.findByText(/reset link is on its way/)).toBeInTheDocument()
   })
 })

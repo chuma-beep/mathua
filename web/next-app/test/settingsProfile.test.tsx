@@ -5,6 +5,7 @@ const pushMock = vi.fn()
 const getSettingsMock = vi.fn()
 const updateSettingsMock = vi.fn()
 const updateProfileNameMock = vi.fn()
+const changePasswordMock = vi.fn()
 const uploadAvatarMock = vi.fn()
 const deleteAvatarMock = vi.fn()
 
@@ -25,6 +26,7 @@ vi.mock('../lib/api', () => ({
   getSettings: (...a: unknown[]) => getSettingsMock(...a),
   updateSettings: (...a: unknown[]) => updateSettingsMock(...a),
   updateProfileName: (...a: unknown[]) => updateProfileNameMock(...a),
+  changePassword: (...a: unknown[]) => changePasswordMock(...a),
   uploadAvatar: (...a: unknown[]) => uploadAvatarMock(...a),
   deleteAvatar: (...a: unknown[]) => deleteAvatarMock(...a),
   avatarImageUrl: () => 'https://x/avatar',
@@ -51,6 +53,7 @@ describe('Settings Profile section', () => {
     getSettingsMock.mockReset().mockResolvedValue({})
     updateSettingsMock.mockReset().mockResolvedValue(undefined)
     updateProfileNameMock.mockReset().mockImplementation(async (name: string) => ({ student_id: 's1', name }))
+    changePasswordMock.mockReset().mockResolvedValue(undefined)
     uploadAvatarMock.mockReset().mockResolvedValue(undefined)
     deleteAvatarMock.mockReset().mockResolvedValue(undefined)
     setUserInfoMock.mockClear()
@@ -61,10 +64,28 @@ describe('Settings Profile section', () => {
     const input = await screen.findByLabelText('Display name')
     expect((input as HTMLInputElement).value).toBe('Ada')
     fireEvent.change(input, { target: { value: '  Ada Lovelace  ' } })
-    fireEvent.click(screen.getByText('Save name'))
-    await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada Lovelace'))
+    fireEvent.click(screen.getByText('Save profile'))
+    await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada Lovelace', ''))
     expect(setUserInfoMock).toHaveBeenCalledWith(expect.objectContaining({ name: 'Ada Lovelace', username: 'ada' }))
-    expect(await screen.findByText('Name saved.')).toBeInTheDocument()
+    expect(await screen.findByText('Profile saved.')).toBeInTheDocument()
+  })
+
+  it('saves recovery email alongside the name', async () => {
+    render(<SettingsPage />)
+    fireEvent.change(await screen.findByLabelText('Display name'), { target: { value: 'Ada' } })
+    fireEvent.change(screen.getByLabelText(/Recovery email/, { exact: false }), { target: { value: 'ada@example.com' } })
+    fireEvent.click(screen.getByText('Save profile'))
+    await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada', 'ada@example.com'))
+  })
+
+  it('changes the password with current verification', async () => {
+    changePasswordMock.mockReset().mockResolvedValue(undefined)
+    render(<SettingsPage />)
+    fireEvent.change(await screen.findByLabelText('Current password'), { target: { value: 'Engine!n1' } })
+    fireEvent.change(screen.getByLabelText('New password'), { target: { value: 'N3w!passw' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Change password' }))
+    await waitFor(() => expect(changePasswordMock).toHaveBeenCalledWith('Engine!n1', 'N3w!passw'))
+    expect(await screen.findByText('Password changed.')).toBeInTheDocument()
   })
 
   it('renders one gallery button per curated style', async () => {

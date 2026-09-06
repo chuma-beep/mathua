@@ -372,6 +372,65 @@ func TestMeRoutes(t *testing.T) {
 	}
 }
 
+func TestAuthLoginSignup(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	post := func(path, body, token string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("POST", path, bytes.NewReader([]byte(body)))
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	// Signup normalizes case; duplicate (any case) → friendly 409.
+	if rec := post("/api/auth/signup", `{"name":"Ada","username":"Ada","password":"Engine!n1"}`, ""); rec.Code != 200 {
+		t.Fatalf("signup: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	rec := post("/api/auth/signup", `{"name":"Other","username":"ADA","password":"Engine!n2"}`, "")
+	if rec.Code != 409 {
+		t.Errorf("duplicate: expected 409, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if !strings.Contains(rec.Body.String(), "username is taken") {
+		t.Errorf("expected friendly taken message, got %s", rec.Body.String())
+	}
+	// Bad username / weak password → 400, never a raw dump.
+	if rec := post("/api/auth/signup", `{"name":"X","username":"ab","password":"Engine!n1"}`, ""); rec.Code != 400 {
+		t.Errorf("short username: expected 400, got %d", rec.Code)
+	}
+	// Login works case-insensitively.
+	if rec := post("/api/auth/login", `{"username":"ADA","password":"Engine!n1"}`, ""); rec.Code != 200 {
+		t.Errorf("login: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Wrong password → generic 401 (no enumeration).
+	if rec := post("/api/auth/login", `{"username":"ada","password":"Wrong!n9"}`, ""); rec.Code != 401 {
+		t.Errorf("wrong password: expected 401, got %d", rec.Code)
+	}
+	// Google-only account → directed message, not generic invalid.
+	if _, err := store.CreateGoogleUser("Gigi", "gigi@example.com", "gid-auth-test", ""); err != nil {
+		t.Fatalf("create google user: %v", err)
+	}
+	rec = post("/api/auth/login", `{"username":"gigi@example.com","password":"Whatever!n1"}`, "")
+	if rec.Code != 401 {
+		t.Fatalf("google-only: expected 401, got %d", rec.Code)
+	}
+	if !strings.Contains(rec.Body.String(), "Google sign-in") {
+		t.Errorf("expected Google sign-in direction, got %s", rec.Body.String())
+	}
+}
+
 func TestFrontendRedirect(t *testing.T) {
 	// Unset/empty base → relative redirect (single-binary unchanged).
 	rel := frontendRedirect("", "/profile", "tok", "Ada", "s1")
@@ -581,5 +640,78 @@ func TestAvatarOversize(t *testing.T) {
 	mux.ServeHTTP(rec, req)
 	if rec.Code != 400 {
 		t.Errorf("expected 400 for oversize, got %d", rec.Code)
+	}
+}
+
+func TestPasswordResetHandlers(t *testing.T) {
+	t.Setenv("SMTP_HOST", "")
+	t.Setenv("FRONTEND_URL", "")
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	// No SMTP → honest 503, not silent confusion.
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/auth/reset/request", bytes.NewReader([]byte(`{"identifier":"ada"}`))))
+	if rec.Code != 503 {
+		t.Errorf("expected 503 without SMTP, got %d", rec.Code)
+	}
+
+	// Unknown identifier with mail configured-thin path: use SMTP set to
+	// unreachable would try to send; instead assert silent-200 shape via
+	// empty identifier validation.
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/auth/reset/request", bytes.NewReader([]byte(`{}`))))
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for missing identifier, got %d", rec.Code)
+	}
+
+	// Complete with garbage token → 400 invalid/expired.
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/auth/reset/complete", bytes.NewReader([]byte(`{"token":"nope","password":"N3w!passw"}`))))
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for bad token, got %d", rec.Code)
+	}
+
+	// Change password requires auth.
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("PUT", "/api/auth/password", bytes.NewReader([]byte(`{"current_password":"x","new_password":"N3w!passw"}`))))
+	if rec.Code != 401 {
+		t.Errorf("expected 401 anonymous, got %d", rec.Code)
+	}
+
+	// Authed change-password round trip.
+	token, _, err := authSvc.Signup("Pam", "pam", "Engine!n1")
+	if err != nil {
+		t.Fatalf("signup: %v", err)
+	}
+	put := func(body, tok string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("PUT", "/api/auth/password", bytes.NewReader([]byte(body)))
+		if tok != "" {
+			req.Header.Set("Authorization", "Bearer "+tok)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+	if rec := put(`{"current_password":"Wrong!n9","new_password":"N3w!passw"}`, token); rec.Code != 400 {
+		t.Errorf("wrong current: expected 400, got %d", rec.Code)
+	}
+	if rec := put(`{"current_password":"Engine!n1","new_password":"N3w!passw"}`, token); rec.Code != 200 {
+		t.Fatalf("change: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	loginRec := httptest.NewRecorder()
+	mux.ServeHTTP(loginRec, httptest.NewRequest("POST", "/api/auth/login", bytes.NewReader([]byte(`{"username":"pam","password":"N3w!passw"}`))))
+	if loginRec.Code != 200 {
+		t.Errorf("login with new password: expected 200, got %d", loginRec.Code)
 	}
 }

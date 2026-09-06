@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 )
@@ -72,11 +73,16 @@ func (rl *rateLimiter) allow(ip string) bool {
 func (rl *rateLimiter) middleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ip := r.RemoteAddr
+		// X-Forwarded-For is "client, proxy1, proxy2" — the client is first.
+		// Using the full string as key would shard one client across buckets
+		// (and a spoofed header bypasses limiting); take the first entry.
 		if forwarded := r.Header.Get("X-Forwarded-For"); forwarded != "" {
-			ip = forwarded
+			if first, _, _ := strings.Cut(forwarded, ","); strings.TrimSpace(first) != "" {
+				ip = strings.TrimSpace(first)
+			}
 		}
 		if !rl.allow(ip) {
-			http.Error(w, `{"error":"rate limit exceeded"}`, 429)
+			http.Error(w, `{"error":"too many attempts — try again in a minute"}`, 429)
 			return
 		}
 		next(w, r)

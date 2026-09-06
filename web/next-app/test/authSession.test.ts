@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setToken, clearToken, getToken, authedFetch } from '../lib/auth'
-import { validateToken } from '../lib/api'
+import { validateToken, login } from '../lib/api'
 
 function mockFetchOnce(res: Partial<Response> & { json?: () => Promise<unknown> }) {
   const fn = vi.fn().mockResolvedValue({
@@ -72,5 +72,10 @@ describe('login persistence', () => {
     mockFetchOnce({ ok: false, status: 401 })
     await authedFetch('https://x/api/public')
     expect(getToken()).toBeNull()
+  })
+
+  it('login maps 429 to a friendly retry message', async () => {
+    mockFetchOnce({ ok: false, status: 429 })
+    await expect(login('ada', 'Engine!n1')).rejects.toThrow('Too many attempts')
   })
 })

@@ -183,6 +183,12 @@ func pgAuthMigrate(db *sql.DB) error {
 			bytes BYTEA NOT NULL,
 			updated_at TEXT NOT NULL DEFAULT (now()::text)
 		)`,
+		`CREATE TABLE IF NOT EXISTS password_resets (
+			token_hash TEXT PRIMARY KEY,
+			student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+			expires_at TEXT NOT NULL,
+			used INTEGER NOT NULL DEFAULT 0
+		)`,
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -193,6 +199,11 @@ func pgAuthMigrate(db *sql.DB) error {
 		}
 	}
 	_, _ = db.Exec("UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150")
+	_, _ = db.Exec(`UPDATE students SET username = lower(username)
+		WHERE lower(username) NOT IN (
+			SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
+			GROUP BY lower(username) HAVING COUNT(*) > 1
+		)`)
 	return nil
 }
 
@@ -415,6 +426,62 @@ func (s *PostgresStore) UpdateStudentName(studentID string, name string) error {
 		return fmt.Errorf("update student name: %w", err)
 	}
 	return nil
+}
+
+func (s *PostgresStore) SetEmail(studentID string, email string) error {
+	_, err := s.db.Exec("UPDATE students SET email = $1 WHERE id = $2", email, studentID)
+	if err != nil {
+		return fmt.Errorf("set email: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) SetPasswordHash(studentID string, hash string) error {
+	_, err := s.db.Exec("UPDATE students SET password_hash = $1 WHERE id = $2", hash, studentID)
+	if err != nil {
+		return fmt.Errorf("set password hash: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) CreatePasswordReset(tokenHash string, studentID string, expiresAt time.Time) error {
+	_, err := s.db.Exec("INSERT INTO password_resets (token_hash, student_id, expires_at, used) VALUES ($1, $2, $3, 0)",
+		tokenHash, studentID, expiresAt.UTC().Format(time.RFC3339))
+	if err != nil {
+		return fmt.Errorf("create password reset: %w", err)
+	}
+	return nil
+}
+
+// ConsumePasswordReset atomically validates (exists, unused, unexpired) and
+// burns a reset token, returning the student it belongs to.
+func (s *PostgresStore) ConsumePasswordReset(tokenHash string) (string, bool, error) {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return "", false, fmt.Errorf("reset tx: %w", err)
+	}
+	defer tx.Rollback()
+	var studentID, expiresAt string
+	var used int
+	err = tx.QueryRow("SELECT student_id, expires_at, used FROM password_resets WHERE token_hash = $1", tokenHash).
+		Scan(&studentID, &expiresAt, &used)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", false, nil
+		}
+		return "", false, fmt.Errorf("lookup reset: %w", err)
+	}
+	exp, err := time.Parse(time.RFC3339, expiresAt)
+	if err != nil || used != 0 || time.Now().UTC().After(exp) {
+		return "", false, nil
+	}
+	if _, err := tx.Exec("UPDATE password_resets SET used = 1 WHERE token_hash = $1", tokenHash); err != nil {
+		return "", false, fmt.Errorf("burn reset: %w", err)
+	}
+	if err := tx.Commit(); err != nil {
+		return "", false, fmt.Errorf("commit reset: %w", err)
+	}
+	return studentID, true, nil
 }
 
 // Progress

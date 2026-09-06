@@ -80,6 +80,14 @@ func authMigrate(db *sql.DB) error {
 	}
 	// Drift fix queued: daily goal 150 → 30 MA 20-40 (CONTEXT.md Quiz) — migrate existing defaults
 	_, _ = db.Exec("UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150")
+	// Username normalization: login looks up lower(trim(name)). Lowercase
+	// existing rows except colliding groups (same lower form twice), which
+	// are logged for manual rename instead of merged.
+	_, _ = db.Exec(`UPDATE students SET username = lower(username)
+		WHERE lower(username) NOT IN (
+			SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
+			GROUP BY lower(username) HAVING COUNT(*) > 1
+		)`)
 	return nil
 }
 
@@ -295,6 +303,62 @@ func (s *SQLiteStore) UpdateStudentName(studentID string, name string) error {
 		return fmt.Errorf("update student name: %w", err)
 	}
 	return nil
+}
+
+func (s *SQLiteStore) SetEmail(studentID string, email string) error {
+	_, err := s.db.Exec("UPDATE students SET email = ? WHERE id = ?", email, studentID)
+	if err != nil {
+		return fmt.Errorf("set email: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) SetPasswordHash(studentID string, hash string) error {
+	_, err := s.db.Exec("UPDATE students SET password_hash = ? WHERE id = ?", hash, studentID)
+	if err != nil {
+		return fmt.Errorf("set password hash: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) CreatePasswordReset(tokenHash string, studentID string, expiresAt time.Time) error {
+	_, err := s.db.Exec("INSERT INTO password_resets (token_hash, student_id, expires_at, used) VALUES (?, ?, ?, 0)",
+		tokenHash, studentID, expiresAt.UTC().Format(time.RFC3339))
+	if err != nil {
+		return fmt.Errorf("create password reset: %w", err)
+	}
+	return nil
+}
+
+// ConsumePasswordReset atomically validates (exists, unused, unexpired) and
+// burns a reset token, returning the student it belongs to.
+func (s *SQLiteStore) ConsumePasswordReset(tokenHash string) (string, bool, error) {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return "", false, fmt.Errorf("reset tx: %w", err)
+	}
+	defer tx.Rollback()
+	var studentID, expiresAt string
+	var used int
+	err = tx.QueryRow("SELECT student_id, expires_at, used FROM password_resets WHERE token_hash = ?", tokenHash).
+		Scan(&studentID, &expiresAt, &used)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", false, nil
+		}
+		return "", false, fmt.Errorf("lookup reset: %w", err)
+	}
+	exp, err := time.Parse(time.RFC3339, expiresAt)
+	if err != nil || used != 0 || time.Now().UTC().After(exp) {
+		return "", false, nil
+	}
+	if _, err := tx.Exec("UPDATE password_resets SET used = 1 WHERE token_hash = ?", tokenHash); err != nil {
+		return "", false, fmt.Errorf("burn reset: %w", err)
+	}
+	if err := tx.Commit(); err != nil {
+		return "", false, fmt.Errorf("commit reset: %w", err)
+	}
+	return studentID, true, nil
 }
 
 func (s *SQLiteStore) GetSettings(studentID string) (string, error) {

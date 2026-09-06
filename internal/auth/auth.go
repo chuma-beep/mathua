@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/hex"
+	"errors"
 	"log"
 	"net/http"
 	"os"
@@ -141,9 +142,33 @@ func New(repo storage.Repository) *AuthService {
 
 func SecretMinLength() int { return 32 }
 
+// ErrGoogleOnly marks accounts created via Google Sign-In, which have no
+// password — password login must point them at Google, not a generic error.
+var ErrGoogleOnly = errors.New("this account uses Google sign-in")
+
+// NormalizeUsername trims and lowercases: "Ada" and "ada" are one account.
+func NormalizeUsername(u string) string { return strings.ToLower(strings.TrimSpace(u)) }
+
+// ErrUsernameTaken marks a taken username (409, not a 400/500).
+var ErrUsernameTaken = errors.New("username is taken")
+
 func (a *AuthService) Signup(name, username, password string) (string, *storage.Student, error) {
+	username = NormalizeUsername(username)
+	if username == "" {
+		return "", nil, errors.New("username is required")
+	}
+	if err := ValidateUsername(username); err != nil {
+		return "", nil, err
+	}
 	if err := ValidatePassword(password); err != nil {
 		return "", nil, err
+	}
+	// Usernames have no UNIQUE constraint historically — check first so
+	// duplicates (including case variants) get a clean 409, not a DB error.
+	if existing, err := a.repo.FindByUsername(username); err != nil {
+		return "", nil, err
+	} else if existing != nil {
+		return "", nil, ErrUsernameTaken
 	}
 	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
@@ -161,12 +186,24 @@ func (a *AuthService) Signup(name, username, password string) (string, *storage.
 }
 
 func (a *AuthService) Login(username, password string) (string, *storage.Student, error) {
+	username = NormalizeUsername(username)
 	st, err := a.repo.FindByUsername(username)
-	if err != nil || st == nil {
+	if err != nil {
 		return "", nil, err
 	}
-	if st.PasswordHash == "" {
+	if st == nil && strings.Contains(username, "@") {
+		// Email login attempt: route Google-only accounts to the
+		// Google-sign-in message instead of a generic failure.
+		st, err = a.repo.FindByEmail(username)
+		if err != nil {
+			return "", nil, err
+		}
+	}
+	if st == nil {
 		return "", nil, nil
+	}
+	if st.PasswordHash == "" {
+		return "", nil, ErrGoogleOnly
 	}
 	if err := bcrypt.CompareHashAndPassword([]byte(st.PasswordHash), []byte(password)); err != nil {
 		return "", nil, nil

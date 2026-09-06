@@ -10,8 +10,8 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login, validateToken, API_BASE, getConfig } from '../../lib/api'
-import { setToken, setUserInfo, clearToken } from '../../lib/auth'
+import { signup, login, validateToken, requestPasswordReset, completePasswordReset, API_BASE, getConfig } from '../../lib/api'
+import { setToken, setUserInfo, clearToken, isLoggedIn } from '../../lib/auth'
 
 type LoginState = {
   tab: 'login' | 'signup'
@@ -71,13 +71,25 @@ function loginReducer(state: LoginState, action: LoginAction): LoginState {
   }
 }
 
-// Mirrors internal/auth.ValidatePassword — keep both in sync.
+// Mirrors internal/auth password policy — keep both in sync:
+// min 8 chars (Go: len bytes), max 72 bytes (bcrypt limit), a Unicode digit,
+// and a special = neither Unicode letter nor digit (Go: unicode.IsLetter).
 function passwordIssues(pw: string): string[] {
   const issues: string[] = []
   if (pw.length < 8) issues.push('at least 8 characters')
-  if (!/\d/.test(pw)) issues.push('a number')
-  if (!/[^A-Za-z0-9]/.test(pw)) issues.push('a special character')
+  if (new TextEncoder().encode(pw).length > 72) issues.push('at most 72 characters')
+  if (!/\p{Nd}/u.test(pw)) issues.push('a number')
+  if (!/[^\p{L}\p{Nd}]/u.test(pw)) issues.push('a special character')
   return issues
+}
+
+// Mirrors internal/auth ValidateUsername on the normalized (lowercased,
+// trimmed) form — keep both in sync.
+function usernameIssues(username: string): string | null {
+  const u = username.trim().toLowerCase()
+  if (u.length < 3 || [...u].length > 20) return 'Username must be 3-20 characters'
+  if (!/^[a-z0-9_.]+$/.test(u)) return 'Username may only contain letters, numbers, underscore, and dot'
+  return null
 }
 
 function validateFields(
@@ -86,7 +98,12 @@ function validateFields(
 ): LoginState['fieldErrors'] {
   const errors: LoginState['fieldErrors'] = {}
   if (tab === 'signup' && !values.name.trim()) errors.name = 'Name is required'
-  if (!values.username.trim()) errors.username = 'Username is required'
+  if (!values.username.trim()) {
+    errors.username = 'Username is required'
+  } else if (tab === 'signup') {
+    const issue = usernameIssues(values.username)
+    if (issue) errors.username = issue
+  }
   if (!values.password) {
     errors.password = 'Password is required'
   } else if (tab === 'signup') {
@@ -129,6 +146,23 @@ function LoginInner() {
   const [googleReady, setGoogleReady] = useState(false)
   const [googleError, setGoogleError] = useState('')
   const [googleLoading, setGoogleLoading] = useState(false)
+  const [authDisabled, setAuthDisabled] = useState(false)
+
+  // Safe post-login target: same-origin paths only (never protocol-relative).
+  const ret = (() => {
+    const r = searchParams.get('return')
+    return r && r.startsWith('/') && !r.startsWith('//') ? r : '/profile'
+  })()
+
+  // Already logged in → don't show the form.
+  useEffect(() => {
+    if (!isLoggedIn()) return
+    let cancelled = false
+    validateToken()
+      .then(v => { if (!cancelled && v.valid) push(ret) })
+      .catch(() => {})
+    return () => { cancelled = true }
+  }, [push, ret])
 
   // Google redirect callback: ?token=...&id=...&name=...
   useEffect(() => {
@@ -141,14 +175,19 @@ function LoginInner() {
       setToken(token)
       setUserInfo({ student_id: id, name: name || 'Google user', username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: false })
       validateToken().then(v => { if (!v.valid) clearToken() }).catch(() => {})
-      push('/profile')
+      push(ret)
     }
-  }, [searchParams, push])
+  }, [searchParams, push, ret])
 
-  // GIS One-Tap init
+  // GIS One-Tap init (+ auth availability probe)
   useEffect(() => {
     let cancelled = false
     getConfig().then(cfg => {
+      if (cancelled || !cfg) return
+      if (cfg.auth_enabled === false) {
+        setAuthDisabled(true)
+        return
+      }
       const cid = (cfg as unknown as { google_client_id?: string }).google_client_id
       if (!cid || cancelled) return
       const src = 'https://accounts.google.com/gsi/client'
@@ -169,7 +208,7 @@ function LoginInner() {
                 const data = await r.json() as { token: string; student_id: string; name: string; diagnostic_completed: boolean }
                 setToken(data.token)
                 setUserInfo({ student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
-                push('/profile')
+                push(ret)
               } catch (e) { setGoogleError((e as Error).message || 'Google sign-in failed') } finally { setGoogleLoading(false) }
             },
             auto_select: false,
@@ -185,11 +224,59 @@ function LoginInner() {
       const s = document.createElement('script'); s.src = src; s.async = true; s.defer = true; s.onload = init; document.head.appendChild(s)
     }).catch(()=>{})
     return () => { cancelled = true }
-  }, [push])
+  }, [push, ret])
 
   const handleGoogleRedirect = () => {
     setGoogleError('')
     window.location.href = `${API_BASE}/api/auth/google/login?return=${encodeURIComponent('/profile')}`
+  }
+
+  // Forgot-password + reset-token modes (separate from the tab reducer).
+  const [forgotMode, setForgotMode] = useState(false)
+  const [forgotId, setForgotId] = useState('')
+  const [forgotBusy, setForgotBusy] = useState(false)
+  const [forgotMsg, setForgotMsg] = useState('')
+  const resetToken = searchParams.get('reset')
+  const [resetPw, setResetPw] = useState('')
+  const [resetBusy, setResetBusy] = useState(false)
+  const [resetMsg, setResetMsg] = useState('')
+
+  const handleForgot = async () => {
+    if (!forgotId.trim()) {
+      setForgotMsg('Enter your username or email.')
+      return
+    }
+    setForgotBusy(true)
+    setForgotMsg('')
+    try {
+      await requestPasswordReset(forgotId.trim())
+      setForgotMsg('If an account with a recovery email exists, a reset link is on its way.')
+    } catch (e: unknown) {
+      setForgotMsg(e instanceof Error ? e.message : 'Request failed — try again.')
+    } finally {
+      setForgotBusy(false)
+    }
+  }
+
+  const handleReset = async () => {
+    const issues = passwordIssues(resetPw)
+    if (issues.length > 0) {
+      setResetMsg('Password needs ' + issues.join(', '))
+      return
+    }
+    if (!resetToken) return
+    setResetBusy(true)
+    setResetMsg('')
+    try {
+      const res = await completePasswordReset(resetToken, resetPw)
+      setToken(res.token)
+      setUserInfo({ student_id: res.student_id, name: res.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
+      push(ret)
+    } catch (e: unknown) {
+      setResetMsg(e instanceof Error ? e.message : 'Reset failed — the link may have expired.')
+    } finally {
+      setResetBusy(false)
+    }
   }
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -228,7 +315,7 @@ function LoginInner() {
         dispatch({ type: 'SET_LOADING', loading: false })
         return
       }
-      push('/profile')
+      push(ret)
     } catch (e: any) {
       dispatch({ type: 'SET_ERROR', error: e.message || 'Authentication failed' })
     } finally { dispatch({ type: 'SET_LOADING', loading: false }) }
@@ -243,11 +330,63 @@ function LoginInner() {
             <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
           </span>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
+          {authDisabled && (
+            <p className="font-mono text-xs text-mathua-secondary text-center mt-4 mb-4">
+              Accounts are disabled on this server — continue as guest from the Study page.
+            </p>
+          )}
           <div className="flex gap-2 mt-6 mb-4 min-w-0">
             <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
             <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
           </div>
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 space-y-4 w-full max-w-full min-w-0 overflow-hidden">
+            {resetToken ? (
+              <div className="space-y-4">
+                <p className="font-mono text-xs text-mathua-secondary">Choose a new password.</p>
+                <div>
+                  <label htmlFor="reset-password" className="font-mono text-[10px] uppercase text-mathua-muted">New password</label>
+                  <input
+                    id="reset-password"
+                    type="password"
+                    value={resetPw}
+                    onChange={(e) => setResetPw(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleReset()}
+                    placeholder="new password"
+                    autoComplete="new-password"
+                    className={inputClassName(false)}
+                  />
+                </div>
+                {resetMsg && <p className="text-mathua-red text-xs">{resetMsg}</p>}
+                <button onClick={handleReset} disabled={resetBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                  {resetBusy ? (<><Loading inline size={13} /> Saving…</>) : 'Set new password'}
+                </button>
+              </div>
+            ) : forgotMode ? (
+              <div className="space-y-4">
+                <p className="font-mono text-xs text-mathua-secondary">Enter your username or email — if a recovery email is on file, we’ll send a reset link.</p>
+                <div>
+                  <label htmlFor="forgot-id" className="font-mono text-[10px] uppercase text-mathua-muted">Username or email</label>
+                  <input
+                    id="forgot-id"
+                    type="text"
+                    value={forgotId}
+                    onChange={(e) => setForgotId(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleForgot()}
+                    placeholder="username or email"
+                    autoComplete="username"
+                    className={inputClassName(false)}
+                  />
+                </div>
+                {forgotMsg && <p className="font-mono text-xs text-mathua-secondary">{forgotMsg}</p>}
+                <button onClick={handleForgot} disabled={forgotBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                  {forgotBusy ? (<><Loading inline size={13} /> Sending…</>) : 'Send reset link'}
+                </button>
+                <button onClick={() => { setForgotMode(false); setForgotMsg('') }} className="w-full text-mathua-muted text-xs hover:text-mathua-secondary">
+                  ← Back to login
+                </button>
+              </div>
+            ) : (
+            <>
             {state.tab === 'signup' && (
               <div>
                 <label htmlFor="name" className="font-mono text-[10px] uppercase text-mathua-muted">Name</label>
@@ -311,7 +450,7 @@ function LoginInner() {
               {state.fieldErrors.password && <p id="password-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.password}</p>}
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
-            <button onClick={handleSubmit} disabled={state.loading} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
+            <button onClick={handleSubmit} disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="flex items-center gap-3 my-2">
@@ -330,10 +469,17 @@ function LoginInner() {
               {googleError && <p className="text-mathua-red text-xs text-center">{googleError}</p>}
             </div>
             <div className="mt-3 text-center">
+              {state.tab === 'login' && !forgotMode && !resetToken && (
+                <button onClick={() => setForgotMode(true)} className="block mx-auto text-mathua-muted text-xs hover:text-mathua-secondary mb-2">
+                  Forgot password?
+                </button>
+              )}
               <Link href="/profile" className="text-mathua-muted text-xs hover:text-mathua-secondary">
                 Skip for now: try without account (progress stays on this device)
               </Link>
             </div>
+            </>
+            )}
           </div>
         </section>
       </div>
