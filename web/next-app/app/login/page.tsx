@@ -17,18 +17,20 @@ type LoginState = {
   tab: 'login' | 'signup'
   name: string
   username: string
+  email: string
   password: string
   error: string
   loading: boolean
   showPassword: boolean
   attempted: boolean
-  fieldErrors: { name?: string; username?: string; password?: string }
+  fieldErrors: { name?: string; username?: string; email?: string; password?: string }
 }
 
 type LoginAction =
   | { type: 'SET_TAB'; tab: 'login' | 'signup' }
   | { type: 'SET_NAME'; name: string }
   | { type: 'SET_USERNAME'; username: string }
+  | { type: 'SET_EMAIL'; email: string }
   | { type: 'SET_PASSWORD'; password: string }
   | { type: 'SET_ERROR'; error: string }
   | { type: 'SET_LOADING'; loading: boolean }
@@ -40,6 +42,7 @@ const initialState: LoginState = {
   tab: 'login',
   name: '',
   username: '',
+  email: '',
   password: '',
   error: '',
   loading: false,
@@ -56,6 +59,8 @@ function loginReducer(state: LoginState, action: LoginAction): LoginState {
       return { ...state, name: action.name }
     case 'SET_USERNAME':
       return { ...state, username: action.username }
+    case 'SET_EMAIL':
+      return { ...state, email: action.email }
     case 'SET_PASSWORD':
       return { ...state, password: action.password }
     case 'SET_ERROR':
@@ -92,9 +97,17 @@ function usernameIssues(username: string): string | null {
   return null
 }
 
+// Mirrors internal/auth ValidateEmail on the trimmed form — keep both in
+// sync. Empty is handled by validateFields (required on signup).
+function emailIssues(email: string): string | null {
+  const e = email.trim()
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return 'Enter a valid email address'
+  return null
+}
+
 function validateFields(
   tab: 'login' | 'signup',
-  values: { name: string; username: string; password: string }
+  values: { name: string; username: string; email: string; password: string }
 ): LoginState['fieldErrors'] {
   const errors: LoginState['fieldErrors'] = {}
   if (tab === 'signup' && !values.name.trim()) errors.name = 'Name is required'
@@ -103,6 +116,14 @@ function validateFields(
   } else if (tab === 'signup') {
     const issue = usernameIssues(values.username)
     if (issue) errors.username = issue
+  }
+  if (tab === 'signup') {
+    if (!values.email.trim()) {
+      errors.email = 'Email is required'
+    } else {
+      const issue = emailIssues(values.email)
+      if (issue) errors.email = issue
+    }
   }
   if (!values.password) {
     errors.password = 'Password is required'
@@ -298,6 +319,8 @@ function LoginInner() {
         name: action.type === 'SET_NAME' ? (action as { name: string }).name : state.name,
         username:
           action.type === 'SET_USERNAME' ? (action as { username: string }).username : state.username,
+        email:
+          action.type === 'SET_EMAIL' ? (action as { email: string }).email : state.email,
         password:
           action.type === 'SET_PASSWORD' ? (action as { password: string }).password : state.password,
       }
@@ -314,7 +337,7 @@ function LoginInner() {
     dispatch({ type: 'SET_LOADING', loading: true })
     try {
       const res = state.tab === 'signup'
-        ? await signup(state.name.trim(), state.username.trim(), state.password)
+        ? await signup(state.name.trim(), state.username.trim(), state.password, state.email.trim())
         : await login(state.username.trim(), state.password)
       setToken(res.token)
       setUserInfo({ student_id: res.student_id, name: res.name, username: state.username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
@@ -431,6 +454,25 @@ function LoginInner() {
               />
               {state.fieldErrors.username && <p id="username-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.username}</p>}
             </div>
+            {state.tab === 'signup' && (
+              <div>
+                <label htmlFor="email" className="font-mono text-[10px] uppercase text-mathua-muted">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  value={state.email}
+                  onChange={(e) => updateField({ type: 'SET_EMAIL', email: e.target.value })}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder="you@example.com"
+                  autoComplete="email"
+                  aria-invalid={!!state.fieldErrors.email}
+                  aria-describedby={state.fieldErrors.email ? 'email-error' : undefined}
+                  className={inputClassName(!!state.fieldErrors.email)}
+                />
+                <p className="font-mono text-[11px] text-mathua-muted mt-1">Required for password reset and matching your Google login.</p>
+                {state.fieldErrors.email && <p id="email-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.email}</p>}
+              </div>
+            )}
             <div>
               <label htmlFor="password" className="font-mono text-[10px] uppercase text-mathua-muted">Password</label>
               <div className="relative">
