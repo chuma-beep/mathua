@@ -184,7 +184,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                          onKeyDown={e => handleKeyDown(e, i)}
                           placeholder="Your answer…"
                         disabled={result !== undefined || locked}
-                        className={`flex-1 min-w-0 bg-mathua-bg border px-4 h-12 text-base font-mono text-mathua-primary placeholder:text-mathua-muted outline-none transition-colors rounded-none ${
+                        className={`flex-1 min-w-0 bg-mathua-bg border px-4 h-24 sm:h-12 text-base font-mono text-mathua-primary placeholder:text-mathua-muted outline-none transition-colors rounded-none ${
                           result === 'correct'
                             ? 'border-green-500/60'
                             : result === 'incorrect'
