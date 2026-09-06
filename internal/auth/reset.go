@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"net/smtp"
 	"os"
 	"strings"
 	"time"
@@ -40,30 +39,6 @@ func smtpConfigured() bool {
 
 // SMTPConfigured is the exported gate for the reset-request handler.
 func SMTPConfigured() bool { return smtpConfigured() }
-
-func sendResetEmail(to, link string) error {
-	host := strings.TrimSpace(os.Getenv("SMTP_HOST"))
-	port := strings.TrimSpace(os.Getenv("SMTP_PORT"))
-	if port == "" {
-		port = "587"
-	}
-	user := os.Getenv("SMTP_USER")
-	pass := os.Getenv("SMTP_PASS")
-	from := os.Getenv("SMTP_FROM")
-	if from == "" {
-		from = user
-	}
-	var auth smtp.Auth
-	if user != "" {
-		auth = smtp.PlainAuth("", user, pass, host)
-	}
-	subject := "Subject: Mathua password reset\r\n"
-	body := "Someone requested a password reset for your Mathua account.\r\n\r\n" +
-		"Reset here (valid 1 hour, single use):\r\n" + link + "\r\n\r\n" +
-		"If this wasn't you, ignore this email.\r\n"
-	msg := []byte("From: " + from + "\r\nTo: " + to + "\r\n" + subject + "\r\n" + body)
-	return smtp.SendMail(host+":"+port, auth, from, []string{to}, msg)
-}
 
 // frontendBase returns the absolute base for emailed links.
 func frontendBase() string {
@@ -106,7 +81,9 @@ func (a *AuthService) RequestPasswordReset(identifier string) (bool, error) {
 		return false, err
 	}
 	link := strings.TrimSuffix(base, "/") + "/login?reset=" + token
-	if err := sendResetEmail(st.Email, link); err != nil {
+	if err := sendMail(st.Email, "Mathua password reset", "Someone requested a password reset for your Mathua account.\r\n\r\n"+
+		"Reset here (valid 1 hour, single use):\r\n"+link+"\r\n\r\n"+
+		"If this wasn't you, ignore this email.\r\n"); err != nil {
 		log.Printf("auth: reset email failed: %v", err)
 		return false, nil
 	}

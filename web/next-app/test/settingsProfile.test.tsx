@@ -8,6 +8,11 @@ const updateProfileNameMock = vi.fn()
 const changePasswordMock = vi.fn()
 const uploadAvatarMock = vi.fn()
 const deleteAvatarMock = vi.fn()
+const getIdentitiesMock = vi.fn()
+const deleteIdentityMock = vi.fn()
+const createLinkTokenMock = vi.fn()
+const requestEmailVerificationMock = vi.fn()
+const startOAuthLoginMock = vi.fn()
 
 let mockUser: { student_id: string; name: string; username: string } | null = {
   student_id: 's1',
@@ -27,8 +32,15 @@ vi.mock('../lib/api', () => ({
   updateSettings: (...a: unknown[]) => updateSettingsMock(...a),
   updateProfileName: (...a: unknown[]) => updateProfileNameMock(...a),
   changePassword: (...a: unknown[]) => changePasswordMock(...a),
+  getIdentities: (...a: unknown[]) => getIdentitiesMock(...a),
+  deleteIdentity: (...a: unknown[]) => deleteIdentityMock(...a),
+  createLinkToken: (...a: unknown[]) => createLinkTokenMock(...a),
+  requestEmailVerification: (...a: unknown[]) => requestEmailVerificationMock(...a),
   uploadAvatar: (...a: unknown[]) => uploadAvatarMock(...a),
   deleteAvatar: (...a: unknown[]) => deleteAvatarMock(...a),
+  getConfig: () => Promise.resolve({ providers: ['google', 'github'] }),
+  startOAuthLogin: (...a: unknown[]) => startOAuthLoginMock(...a),
+  OAUTH_LABELS: { google: 'Google', github: 'GitHub', facebook: 'Facebook', microsoft: 'Microsoft', apple: 'Apple' },
   avatarImageUrl: () => 'https://x/avatar',
   enableShare: vi.fn(),
   disableShare: vi.fn(),
@@ -51,6 +63,11 @@ describe('Settings Profile section', () => {
   beforeEach(() => {
     mockUser = { student_id: 's1', name: 'Ada', username: 'ada' }
     getSettingsMock.mockReset().mockResolvedValue({})
+    getIdentitiesMock.mockReset().mockResolvedValue([])
+    deleteIdentityMock.mockReset().mockResolvedValue(undefined)
+    createLinkTokenMock.mockReset().mockResolvedValue('linktok')
+    requestEmailVerificationMock.mockReset().mockResolvedValue(undefined)
+    startOAuthLoginMock.mockClear()
     updateSettingsMock.mockReset().mockResolvedValue(undefined)
     updateProfileNameMock.mockReset().mockImplementation(async (name: string) => ({ student_id: 's1', name }))
     changePasswordMock.mockReset().mockResolvedValue(undefined)
@@ -186,5 +203,28 @@ describe('Settings Profile section', () => {
     getSettingsMock.mockResolvedValue({ avatar_custom: true })
     render(<SettingsPage />)
     expect(await screen.findByText('Remove photo')).toBeInTheDocument()
+  })
+
+  it('lists connected accounts and disconnects', async () => {
+    getIdentitiesMock.mockResolvedValue([{ provider: 'github', email: 'ada@example.com' }])
+    render(<SettingsPage />)
+    expect(await screen.findByText(/GitHub/)).toBeInTheDocument()
+    fireEvent.click(screen.getByText('Disconnect'))
+    await waitFor(() => expect(deleteIdentityMock).toHaveBeenCalledWith('github'))
+  })
+
+  it('connect starts a link-token OAuth dance', async () => {
+    render(<SettingsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Connect GitHub' }))
+    await waitFor(() => expect(createLinkTokenMock).toHaveBeenCalled())
+    expect(startOAuthLoginMock).toHaveBeenCalledWith('github', { intent: 'link', linkToken: 'linktok' })
+  })
+
+  it('prompts email verification for unverified addresses', async () => {
+    mockUser = { student_id: 's1', name: 'Ada', username: 'ada', email: 'ada@example.com', email_verified: false } as never
+    render(<SettingsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Verify email' }))
+    await waitFor(() => expect(requestEmailVerificationMock).toHaveBeenCalled())
+    expect(await screen.findByText(/check your inbox/)).toBeInTheDocument()
   })
 })

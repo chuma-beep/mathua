@@ -2,6 +2,8 @@ package server
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"mime/multipart"
 	"net/http"
@@ -9,6 +11,7 @@ import (
 	"os/exec"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -713,5 +716,107 @@ func TestPasswordResetHandlers(t *testing.T) {
 	mux.ServeHTTP(loginRec, httptest.NewRequest("POST", "/api/auth/login", bytes.NewReader([]byte(`{"username":"pam","password":"N3w!passw"}`))))
 	if loginRec.Code != 200 {
 		t.Errorf("login with new password: expected 200, got %d", loginRec.Code)
+	}
+}
+
+func TestIdentitiesEndpoints(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	token, st, err := authSvc.Signup("Ida", "ida", "Engine!n1")
+	if err != nil {
+		t.Fatalf("signup: %v", err)
+	}
+	authed := func(method, path, body string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		var rdr *bytes.Reader
+		if body != "" {
+			rdr = bytes.NewReader([]byte(body))
+		} else {
+			rdr = bytes.NewReader(nil)
+		}
+		req := httptest.NewRequest(method, path, rdr)
+		req.Header.Set("Authorization", "Bearer "+token)
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	// Link token mints for authed users, rejects anonymous.
+	rec := authed("POST", "/api/auth/link-token", "")
+	if rec.Code != 200 {
+		t.Fatalf("link-token: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var lt map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &lt)
+	if lt["link_token"] == "" {
+		t.Fatal("expected link_token")
+	}
+	anon := httptest.NewRecorder()
+	mux.ServeHTTP(anon, httptest.NewRequest("POST", "/api/auth/link-token", nil))
+	if anon.Code != 401 {
+		t.Errorf("anonymous link-token: expected 401, got %d", anon.Code)
+	}
+
+	// Empty identities list.
+	rec = authed("GET", "/api/auth/identities", "")
+	if rec.Code != 200 {
+		t.Fatalf("identities: expected 200, got %d", rec.Code)
+	}
+	// Connect a fake provider directly, then list shows it.
+	if err := store.CreateIdentity("github", "42", st.ID, "ida@example.com", true); err != nil {
+		t.Fatal(err)
+	}
+	rec = authed("GET", "/api/auth/identities", "")
+	var ids []map[string]interface{}
+	json.Unmarshal(rec.Body.Bytes(), &ids)
+	if len(ids) != 1 || ids[0]["provider"] != "github" {
+		t.Errorf("expected one github identity, got %v", ids)
+	}
+	// Unknown provider delete → 404.
+	rec = authed("DELETE", "/api/auth/identities/myspace", "")
+	if rec.Code != 404 {
+		t.Errorf("expected 404, got %d", rec.Code)
+	}
+	// Disconnect allowed (password remains).
+	rec = authed("DELETE", "/api/auth/identities/github", "")
+	if rec.Code != 200 {
+		t.Errorf("expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Unknown OAuth provider paths → 404, unconfigured → 500.
+	grec := httptest.NewRecorder()
+	mux.ServeHTTP(grec, httptest.NewRequest("GET", "/api/auth/myspace/login", nil))
+	if grec.Code != 404 {
+		t.Errorf("expected 404 unknown provider, got %d", grec.Code)
+	}
+	grec = httptest.NewRecorder()
+	mux.ServeHTTP(grec, httptest.NewRequest("GET", "/api/auth/github/login", nil))
+	if grec.Code != 500 {
+		t.Errorf("expected 500 unconfigured github, got %d", grec.Code)
+	}
+	// Email verify round trip via seeded token.
+	if err := store.SetEmail(st.ID, "ida@example.com"); err != nil {
+		t.Fatal(err)
+	}
+	raw := "verify-me-123"
+	h := sha256.Sum256([]byte(raw))
+	if err := store.CreateEmailVerification(hex.EncodeToString(h[:]), st.ID, time.Now().UTC().Add(time.Hour)); err != nil {
+		t.Fatal(err)
+	}
+	rec = authed("POST", "/api/auth/email/verify", `{"token":"`+raw+`"}`)
+	if rec.Code != 200 {
+		t.Fatalf("verify: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	got, _ := store.GetStudent(st.ID)
+	if !got.EmailVerified {
+		t.Error("expected email_verified set")
 	}
 }

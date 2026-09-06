@@ -37,6 +37,8 @@ vi.mock('../lib/api', () => ({
   validateToken: (...a: unknown[]) => validateTokenMock(...a),
   requestPasswordReset: (...a: unknown[]) => requestResetMock(...a),
   completePasswordReset: (...a: unknown[]) => completeResetMock(...a),
+  startOAuthLogin: vi.fn(),
+  OAUTH_LABELS: { google: 'Google', github: 'GitHub', facebook: 'Facebook', microsoft: 'Microsoft', apple: 'Apple' },
   getConfig: (...a: unknown[]) => getConfigMock(...a),
   API_BASE: '',
 }))
@@ -173,5 +175,13 @@ describe('LoginPage', () => {
     fireEvent.click(screen.getByText('Send reset link'))
     await waitFor(() => expect(requestResetMock).toHaveBeenCalledWith('ada'))
     expect(await screen.findByText(/reset link is on its way/)).toBeInTheDocument()
+  })
+
+  it('renders one button per configured non-google provider', async () => {
+    getConfigMock.mockResolvedValue({ auth_enabled: true, providers: ['google', 'github', 'apple'] })
+    render(<LoginPage />)
+    expect(await screen.findByRole('button', { name: 'Continue with GitHub' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Continue with Apple' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Continue with Facebook' })).toBeNull()
   })
 })

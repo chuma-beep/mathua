@@ -426,6 +426,7 @@ export async function getEfficacy(): Promise<EfficacyReport | null> {
 export interface ConfigRes {
 	auth_enabled: boolean
 	google_client_id?: string
+	providers?: string[]
 }
 
 export async function getConfig(): Promise<ConfigRes | null> {
@@ -680,6 +681,75 @@ export async function changePassword(currentPassword: string, newPassword: strin
 		body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
 	})
 	if (!res.ok) await throwWithResponse(res, `Change password failed: ${res.status}`)
+}
+
+export const OAUTH_PROVIDERS = ['google', 'github', 'facebook', 'microsoft', 'apple'] as const
+export type OAuthProvider = (typeof OAUTH_PROVIDERS)[number]
+
+export const OAUTH_LABELS: Record<OAuthProvider, string> = {
+	google: 'Google',
+	github: 'GitHub',
+	facebook: 'Facebook',
+	microsoft: 'Microsoft',
+	apple: 'Apple',
+}
+
+// startOAuthLogin begins a redirect OAuth flow. intent=link binds the dance
+// to the current account (needs a link token); otherwise it's a login.
+export function startOAuthLogin(provider: string, opts: { intent?: 'login' | 'link'; linkToken?: string; ret?: string } = {}) {
+	const q = new URLSearchParams()
+	if (opts.intent === 'link') q.set('intent', 'link')
+	if (opts.linkToken) q.set('link_token', opts.linkToken)
+	q.set('return', opts.ret || '/profile')
+	window.location.href = `${API_BASE}/api/auth/${provider}/login?${q.toString()}`
+}
+
+export interface IdentityInfo {
+	provider: string
+	email: string
+}
+
+export async function getIdentities(): Promise<IdentityInfo[]> {
+	const res = await authedFetch(`${API_BASE}/api/auth/identities`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) return []
+	return res.json()
+}
+
+export async function deleteIdentity(provider: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/auth/identities/${encodeURIComponent(provider)}`, {
+		method: 'DELETE',
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) await throwWithResponse(res, `Disconnect failed: ${res.status}`)
+}
+
+export async function createLinkToken(): Promise<string> {
+	const res = await authedFetch(`${API_BASE}/api/auth/link-token`, {
+		method: 'POST',
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) await throwWithResponse(res, `Link failed: ${res.status}`)
+	const data = await res.json()
+	return data.link_token as string
+}
+
+export async function requestEmailVerification(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/auth/email/request`, {
+		method: 'POST',
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) await throwWithResponse(res, `Verification request failed: ${res.status}`)
+}
+
+export async function verifyEmail(token: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/auth/email/verify`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ token }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Verification failed: ${res.status}`)
 }
 
 export async function uploadAvatar(file: File): Promise<void> {
