@@ -9,11 +9,42 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import FormulaBlock from '../../components/FormulaBlock'
 import ProgressionLevels from '../../components/ProgressionLevels'
-import { getLeaderboard, getLeagues, type LeaderboardEntry, type LeagueBoard } from '../../lib/api'
+import { getLeaderboard, getLeagues, API_BASE, type LeaderboardEntry, type LeagueBoard } from '../../lib/api'
+import { resolveAvatar } from '../../lib/dicebear'
+import Avatar from '../../components/Avatar'
 import Loading from '../../components/Loading'
 
-const LEVELS = [
-  { num: '01', name: 'Novice', range: '0–31' },
+// Display chain: registered name → random/claimed username → Anonymous.
+// Enforcement (required + trimmed at signup, service-level cap) should make
+// the last link dead code, but the board must never render a blank cell.
+function displayName(row: { name: string; username?: string }): string {
+  if (row.name && row.name.trim()) return row.name
+  if (row.username && row.username.trim()) return row.username
+  return 'Anonymous'
+}
+
+interface BoardAvatar {
+  student_id: string
+  avatar_url?: string
+  avatar_dicebear?: { style: string; seed: string } | null
+  avatar_custom?: boolean
+  avatar_version?: number
+}
+
+// Avatar precedence mirrors resolveAvatar, except a custom upload resolves
+// to the public per-student photo endpoint (board-visible by design).
+function boardAvatarUrl(row: BoardAvatar): string | undefined {
+  if (row.avatar_custom && row.student_id) {
+    const v = row.avatar_version ? `?v=${row.avatar_version}` : ''
+    return `${API_BASE}/api/avatar/${row.student_id}${v}`
+  }
+  return resolveAvatar(
+    { avatar_url: row.avatar_url },
+    { avatar_dicebear: row.avatar_dicebear ?? null },
+  ).url
+}
+
+const LEVELS = [  { num: '01', name: 'Novice', range: '0–31' },
   { num: '02', name: 'Apprentice', range: '32–63' },
   { num: '03', name: 'Student', range: '64–95' },
   { num: '04', name: 'Scholar', range: '96–127' },
@@ -149,8 +180,11 @@ export default function LeaderboardPage() {
                       </span>
                     ) : row.rank}
                   </td>
-                  <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[110px] sm:max-w-none truncate">
-                    <span className="block truncate" title={row.name}>{row.name}</span>
+                  <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[110px] sm:max-w-none">
+                    <span className="flex items-center gap-2 min-w-0">
+                      <Avatar seed={row.student_id || displayName(row)} name={displayName(row)} size={28} url={boardAvatarUrl(row)} className="shrink-0" />
+                      <span className="block truncate" title={displayName(row)}>{displayName(row)}</span>
+                    </span>
                   </td>
                   <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted text-right whitespace-nowrap">
                     {row.mastered}
@@ -197,8 +231,9 @@ export default function LeaderboardPage() {
                   {lg.members.map((m, i) => (
                     <div key={m.student_id} className="flex items-center gap-3 px-4 py-2 min-w-0">
                       <span className="font-mono text-xs text-mathua-muted w-6 shrink-0">{i + 1}</span>
-                      <span className="font-mono text-xs text-mathua-primary truncate flex-1 min-w-0" title={m.name}>
-                        {m.name}
+                      <Avatar seed={m.student_id || displayName(m)} name={displayName(m)} size={24} url={boardAvatarUrl(m)} className="shrink-0" />
+                      <span className="font-mono text-xs text-mathua-primary truncate flex-1 min-w-0" title={displayName(m)}>
+                        {displayName(m)}
                       </span>
                       {m.moved === 1 && (
                         <span className="font-mono text-[10px] text-mathua-green shrink-0">▲ promoted</span>

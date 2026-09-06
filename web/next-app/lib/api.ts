@@ -189,7 +189,13 @@ export interface GraphRes {
 
 export interface LeaderboardEntry {
   rank: number
+  student_id: string
   name: string
+  username?: string
+  avatar_url?: string
+  avatar_dicebear?: { style: string; seed: string } | null
+  avatar_custom?: boolean
+  avatar_version?: number
   mastered: number
   streak: number
   level: string
@@ -331,6 +337,11 @@ export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
 export interface LeagueMember {
   student_id: string
   name: string
+  username?: string
+  avatar_url?: string
+  avatar_dicebear?: { style: string; seed: string } | null
+  avatar_custom?: boolean
+  avatar_version?: number
   tier: string
   total_mastered: number
   weekly_mastered: number

@@ -695,6 +695,113 @@ func TestAvatarUploadRoundTrip(t *testing.T) {
 	}
 }
 
+func TestAvatarPublicAndLeaguesSnakeCase(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	token, st, err := authSvc.Signup("Ada", "ada", "Engine!n1")
+	if err != nil || token == "" {
+		t.Fatalf("signup: %v", err)
+	}
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	get := func(path, token string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("GET", path, nil)
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	// No photo yet → public 404 (no auth required).
+	if rec := get("/api/avatar/"+st.ID, ""); rec.Code != 404 {
+		t.Errorf("no photo: expected public 404, got %d", rec.Code)
+	}
+	// Upload, then the public endpoint serves identical bytes.
+	body, ctype := multipartAvatar(t, "avatar", "a.png", tinyPNG)
+	upRec := httptest.NewRecorder()
+	upReq := httptest.NewRequest("POST", "/api/avatar", body)
+	upReq.Header.Set("Content-Type", ctype)
+	upReq.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(upRec, upReq)
+	if upRec.Code != 200 {
+		t.Fatalf("upload: expected 200, got %d: %s", upRec.Code, upRec.Body.String())
+	}
+	pub := get("/api/avatar/"+st.ID, "")
+	if pub.Code != 200 {
+		t.Fatalf("public photo: expected 200, got %d", pub.Code)
+	}
+	if pub.Header().Get("Content-Type") != "image/png" {
+		t.Errorf("expected image/png, got %q", pub.Header().Get("Content-Type"))
+	}
+	if !bytes.Equal(pub.Body.Bytes(), tinyPNG) {
+		t.Error("expected identical bytes back")
+	}
+	if cc := pub.Header().Get("Cache-Control"); !strings.Contains(cc, "public") {
+		t.Errorf("expected public cache header, got %q", cc)
+	}
+	// Exact /api/avatar/me route still requires auth (subtree must not leak).
+	if rec := get("/api/avatar/me", ""); rec.Code != 401 {
+		t.Errorf("own photo anonymous: expected 401, got %d", rec.Code)
+	}
+	// Leagues serialize snake_case (regression: untagged struct emitted
+	// PascalCase keys the frontend could not read).
+	rec := get("/api/leagues", token)
+	if rec.Code != 200 {
+		t.Fatalf("leagues: expected 200, got %d", rec.Code)
+	}
+	var board map[string]interface{}
+	if err := json.Unmarshal(rec.Body.Bytes(), &board); err != nil {
+		t.Fatalf("decode leagues: %v", err)
+	}
+	leagues, _ := board["leagues"].([]interface{})
+	if len(leagues) == 0 {
+		t.Fatal("expected at least one league tier")
+	}
+	members, _ := leagues[0].(map[string]interface{})["members"].([]interface{})
+	if len(members) == 0 {
+		t.Fatal("expected at least one league member")
+	}
+	m := members[0].(map[string]interface{})
+	for _, k := range []string{"student_id", "name", "username", "tier", "total_mastered", "weekly_mastered", "moved"} {
+		if _, ok := m[k]; !ok {
+			t.Errorf("expected league member key %q, got keys %v", k, keysOf(m))
+		}
+	}
+	if m["name"] != "Ada" || m["username"] != "ada" {
+		t.Errorf("expected Ada/ada on board, got %v", m)
+	}
+	// Weekly board carries the username for the display fallback chain.
+	wrec := get("/api/leaderboard", "")
+	if wrec.Code != 200 {
+		t.Fatalf("leaderboard: expected 200, got %d", wrec.Code)
+	}
+	var entries []map[string]interface{}
+	if err := json.Unmarshal(wrec.Body.Bytes(), &entries); err != nil {
+		t.Fatalf("decode leaderboard: %v", err)
+	}
+	if len(entries) == 0 || entries[0]["username"] != "ada" {
+		t.Errorf("expected username on weekly entry, got %v", entries)
+	}
+}
+
+func keysOf(m map[string]interface{}) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
 func TestAvatarOversize(t *testing.T) {
 	_, mux, token := avatarTestServer(t)
 	big := bytes.Repeat([]byte{0x89, 0x50}, 300*1024) // 600KB, PNG magic

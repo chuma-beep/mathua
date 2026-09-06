@@ -233,6 +233,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/avatar", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAvatar)))))
 	mux.HandleFunc("/api/avatar/me", logRequest(cors(s.authMiddleware(s.handleAvatarMe))))
+	// Public per-student photo for leaderboard avatars (custom uploads are
+	// board-visible by design; 404 when the student has none).
+	mux.HandleFunc("/api/avatar/", logRequest(cors(s.handleAvatarPublic)))
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
 	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsSession)))))
 	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsAnswer)))))
@@ -1549,6 +1552,33 @@ func (s *Server) handleAvatarMe(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", ct)
 	w.Header().Set("Cache-Control", "private, max-age=86400")
+	w.Write(data)
+}
+
+// GET /api/avatar/{student_id} serves another student's custom photo for
+// leaderboard avatars. Public (the board is visible logged-out); 404 unless
+// the student uploaded a photo. Version-busting is client-side (?v=).
+func (s *Server) handleAvatarPublic(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID := strings.TrimPrefix(r.URL.Path, "/api/avatar/")
+	if studentID == "" || strings.Contains(studentID, "/") {
+		writeError(w, "student id is required", 400)
+		return
+	}
+	ct, data, found, err := s.repo.GetAvatarImage(studentID)
+	if err != nil {
+		writeError(w, "failed to load avatar", 500)
+		return
+	}
+	if !found {
+		writeError(w, "no custom avatar", 404)
+		return
+	}
+	w.Header().Set("Content-Type", ct)
+	w.Header().Set("Cache-Control", "public, max-age=86400")
 	w.Write(data)
 }
 

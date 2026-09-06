@@ -2,6 +2,7 @@ package storage
 
 import (
 	"crypto/rand"
+	"encoding/json"
 	"fmt"
 	"strings"
 	"time"
@@ -109,18 +110,58 @@ type Question struct {
 type LeaderboardRow struct {
 	StudentID      string
 	Name           string
+	Username       string
+	AvatarURL      string
+	AvatarSettings string
 	TotalMastered  int
 	WeeklyMastered int
 }
 
 // LeagueMember is a student's row inside a weekly league tier.
+// The snake_case tags matter: this struct is serialized straight into
+// GET /api/leagues, and without them the keys came out PascalCase, which
+// the frontend could not read — league names never rendered.
 type LeagueMember struct {
-	StudentID      string
-	Name           string
-	Tier           string
-	TotalMastered  int
-	WeeklyMastered int
-	Moved          int // +1 promoted, -1 demoted, 0 stayed (last reset)
+	StudentID      string     `json:"student_id"`
+	Name           string     `json:"name"`
+	Username       string     `json:"username,omitempty"`
+	AvatarURL      string     `json:"avatar_url,omitempty"`
+	AvatarDicebear *AvatarRef `json:"avatar_dicebear,omitempty"`
+	AvatarCustom   bool       `json:"avatar_custom,omitempty"`
+	AvatarVersion  int        `json:"avatar_version,omitempty"`
+	AvatarSettings string     `json:"-"`
+	Tier           string     `json:"tier"`
+	TotalMastered  int        `json:"total_mastered"`
+	WeeklyMastered int        `json:"weekly_mastered"`
+	Moved          int        `json:"moved"` // +1 promoted, -1 demoted, 0 stayed (last reset)
+}
+
+// AvatarRef is the public dicebear pick surfaced on leaderboard entries.
+type AvatarRef struct {
+	Style string `json:"style"`
+	Seed  string `json:"seed"`
+}
+
+// avatarSettingsJSON mirrors the opaque settings keys the frontend owns
+// (web/next-app UserSettings); only leaderboard-relevant bits are decoded.
+type avatarSettingsJSON struct {
+	AvatarCustom   bool       `json:"avatar_custom"`
+	AvatarDicebear *AvatarRef `json:"avatar_dicebear"`
+	AvatarVersion  int        `json:"avatar_version"`
+}
+
+// AvatarBits extracts leaderboard-relevant avatar data from a student's
+// opaque settings blob: custom-upload flag, dicebear pick, photo version.
+// Corrupt/empty blobs yield zero values (initial-avatar fallback downstream).
+func AvatarBits(raw string) (custom bool, pick *AvatarRef, version int) {
+	if strings.TrimSpace(raw) == "" {
+		return false, nil, 0
+	}
+	var s avatarSettingsJSON
+	if err := json.Unmarshal([]byte(raw), &s); err != nil {
+		return false, nil, 0
+	}
+	return s.AvatarCustom, s.AvatarDicebear, s.AvatarVersion
 }
 
 type DailyActivity struct {
@@ -147,6 +188,8 @@ type Repository interface {
 	FindByUsername(username string) (*Student, error)
 	FindByEmail(email string) (*Student, error)
 	CreateUser(name, username, passwordHash string) (*Student, error)
+	SetUsername(studentID, username string) error
+	ListStudentsMissingUsernames() ([]string, error)
 	CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error)
 	CreateOAuthUser(provider, providerID, name, email string, emailVerified bool, avatarURL string) (*Student, error)
 	SetAvatarURL(studentID, avatarURL string) error

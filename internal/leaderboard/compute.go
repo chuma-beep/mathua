@@ -8,12 +8,18 @@ import (
 )
 
 type Entry struct {
-	Rank     int    `json:"rank"`
-	Name     string `json:"name"`
-	Mastered int    `json:"mastered"`
-	Streak   int    `json:"streak"`
-	Level    string `json:"level"`
-	Score    int    `json:"score"`
+	Rank           int                `json:"rank"`
+	StudentID      string             `json:"student_id"`
+	Name           string             `json:"name"`
+	Username       string             `json:"username,omitempty"`
+	AvatarURL      string             `json:"avatar_url,omitempty"`
+	AvatarDicebear *storage.AvatarRef `json:"avatar_dicebear,omitempty"`
+	AvatarCustom   bool               `json:"avatar_custom,omitempty"`
+	AvatarVersion  int                `json:"avatar_version,omitempty"`
+	Mastered       int                `json:"mastered"`
+	Streak         int                `json:"streak"`
+	Level          string             `json:"level"`
+	Score          int                `json:"score"`
 }
 
 type Computer struct {
@@ -32,9 +38,16 @@ func (c *Computer) Weekly() ([]Entry, error) {
 	entries := make([]Entry, 0, len(rows))
 	for _, r := range rows {
 		score := r.WeeklyMastered * 100
+		custom, pick, version := storage.AvatarBits(r.AvatarSettings)
 		entries = append(entries, Entry{
-			Name:     r.Name,
-			Mastered: r.TotalMastered,
+			StudentID:      r.StudentID,
+			Name:           r.Name,
+			Username:       r.Username,
+			AvatarURL:      r.AvatarURL,
+			AvatarDicebear: pick,
+			AvatarCustom:   custom,
+			AvatarVersion:  version,
+			Mastered:       r.TotalMastered,
 			Level:    levels.Compute(r.TotalMastered),
 			Streak:   0,
 			Score:    score,
