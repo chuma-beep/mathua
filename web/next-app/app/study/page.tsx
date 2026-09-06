@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -327,8 +327,19 @@ function DomainOverview({
   onSelectDomain: (d: string) => void
   onSelectLesson: (lesson: LessonInfo) => void
 }) {
+  const DOMAINS_PER_PAGE = 20
+  const [domainPage, setDomainPage] = useState(1)
+  const listTopRef = useRef<HTMLDivElement>(null)
+  const pageCount = Math.max(1, Math.ceil(domains.length / DOMAINS_PER_PAGE))
+  const safePage = Math.min(domainPage, pageCount)
+  const visibleDomains = domains.slice((safePage - 1) * DOMAINS_PER_PAGE, safePage * DOMAINS_PER_PAGE)
+  const goToPage = (p: number) => {
+    setDomainPage(Math.min(Math.max(1, p), pageCount))
+    listTopRef.current?.scrollIntoView({ block: 'start' })
+  }
   return (
     <div className="max-w-4xl mx-auto mt-8">
+      <div ref={listTopRef} className="scroll-mt-20" />
       <SectionHeader label="Study" title="Browse Lessons" />
 
       <SearchBar
@@ -344,7 +355,7 @@ function DomainOverview({
       )}
 
       <div className="space-y-2">
-        {domains.map((domain, idx) => {
+        {visibleDomains.map((domain, idx) => {
           const lessons = lessonsByDomain[domain]
           const agg = domainAgg[domain]
           const label = domainLabels[domain] || domain
@@ -418,6 +429,29 @@ function DomainOverview({
           )
         })}
       </div>
+      {pageCount > 1 && (
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <button
+            onClick={() => goToPage(safePage - 1)}
+            disabled={safePage <= 1}
+            aria-label="Previous page"
+            className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-11 px-5 font-mono text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            ← Prev
+          </button>
+          <span className="font-mono text-xs text-mathua-muted" aria-live="polite">
+            Page {safePage} of {pageCount}
+          </span>
+          <button
+            onClick={() => goToPage(safePage + 1)}
+            disabled={safePage >= pageCount}
+            aria-label="Next page"
+            className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-11 px-5 font-mono text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Next →
+          </button>
+        </div>
+      )}
       <Link href="/leaderboard" className="mt-4 flex items-center justify-between border border-mathua-border bg-mathua-surface p-3 hover:border-mathua-blue transition-colors">
         <span className="font-mono text-xs text-mathua-primary">Leaderboard</span>
         <span className="font-mono text-[11px] text-mathua-blue">See weekly ranking →</span>
