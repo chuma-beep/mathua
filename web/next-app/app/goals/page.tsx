@@ -503,8 +503,8 @@ function GoalsContent() {
                           onChange={(e) => setAnswerInput(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                           placeholder="Your answer..."
-                         disabled={loading}
-                         className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                          disabled={loading}
+                          className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                       />
                        <button
                          onClick={submitAnswer}
@@ -561,7 +561,7 @@ function GoalsContent() {
                   {!quizLastResult ? (
                     <>
                       <div className="flex flex-col sm:flex-row gap-3 min-w-0">
-                        <input ref={quizInputRef} type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && submitQuizAnswerFn()} placeholder="Your answer..." disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+                        <input ref={quizInputRef} type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && submitQuizAnswerFn()} placeholder="Your answer..." disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
                         <button onClick={submitQuizAnswerFn} disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
                       </div>
                       <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
