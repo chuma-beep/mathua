@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS students (
     course_id            TEXT,
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
-    avatar_url           TEXT NOT NULL DEFAULT ''
+    avatar_url           TEXT NOT NULL DEFAULT '',
+    email_verified       INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
@@ -171,6 +172,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email_verified INTEGER NOT NULL DEFAULT 0",
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS weakness_score DOUBLE PRECISION NOT NULL DEFAULT 0",
@@ -183,6 +185,32 @@ func pgAuthMigrate(db *sql.DB) error {
 			bytes BYTEA NOT NULL,
 			updated_at TEXT NOT NULL DEFAULT (now()::text)
 		)`,
+		`CREATE TABLE IF NOT EXISTS identities (
+			provider TEXT NOT NULL,
+			provider_id TEXT NOT NULL,
+			student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+			email TEXT NOT NULL DEFAULT '',
+			email_verified INTEGER NOT NULL DEFAULT 0,
+			linked_at TEXT NOT NULL DEFAULT (now()::text),
+			PRIMARY KEY (provider, provider_id)
+		)`,
+		`CREATE INDEX IF NOT EXISTS idx_identities_student ON identities(student_id)`,
+		`CREATE TABLE IF NOT EXISTS email_verifications (
+			token_hash TEXT PRIMARY KEY,
+			student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+			expires_at TEXT NOT NULL,
+			used INTEGER NOT NULL DEFAULT 0
+		)`,
+		`CREATE TABLE IF NOT EXISTS link_tokens (
+			token_hash TEXT PRIMARY KEY,
+			student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+			expires_at TEXT NOT NULL,
+			used INTEGER NOT NULL DEFAULT 0
+		)`,
+		`INSERT INTO identities (provider, provider_id, student_id, email, email_verified)
+			SELECT 'google', google_id, id, email, 1 FROM students
+			WHERE google_id IS NOT NULL AND google_id != ''
+			ON CONFLICT DO NOTHING`,
 		`CREATE TABLE IF NOT EXISTS password_resets (
 			token_hash TEXT PRIMARY KEY,
 			student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
@@ -248,20 +276,22 @@ func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Studen
 }
 
 func (s *PostgresStore) GetStudent(id string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE id = $1", id)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE id = $1", id)
 	return scanStudent(row)
 }
 
 func (s *PostgresStore) FindByUsername(username string) (*Student, error) {
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE username = $1", username)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE username = $1", username)
 	return scanStudent(row)
 }
 
-func (s *PostgresStore) FindByGoogleID(googleID string) (*Student, error) {
-	if googleID == "" {
+func (s *PostgresStore) FindStudentByIdentity(provider, providerID string) (*Student, error) {
+	if provider == "" || providerID == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE google_id = $1", googleID)
+	row := s.db.QueryRow(`SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE id = (
+		SELECT student_id FROM identities WHERE provider = $1 AND provider_id = $2
+	)`, provider, providerID)
 	return scanStudent(row)
 }
 
@@ -269,7 +299,7 @@ func (s *PostgresStore) FindByEmail(email string) (*Student, error) {
 	if email == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE email = $1 LIMIT 1", email)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE email = $1 LIMIT 1", email)
 	return scanStudent(row)
 }
 
@@ -277,21 +307,134 @@ func (s *PostgresStore) CreateGoogleUser(name, email, googleID, avatarURL string
 	id := newUUID()
 	now := time.Now().UTC()
 	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, email, google_id, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, '{}', $6)",
+		"INSERT INTO students (id, name, email, email_verified, google_id, avatar_url, settings, created_at) VALUES ($1, $2, $3, 1, $4, $5, '{}', $6)",
 		id, name, email, googleID, avatarURL, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create google user: %w", err)
 	}
-	return &Student{ID: id, Name: name, Email: email, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
+	if googleID != "" {
+		if err := s.CreateIdentity("google", googleID, id, email, true); err != nil {
+			return nil, err
+		}
+	}
+	return &Student{ID: id, Name: name, Email: email, EmailVerified: true, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
 }
 
-func (s *PostgresStore) LinkGoogleID(studentID, googleID, avatarURL string) error {
-	_, err := s.db.Exec("UPDATE students SET google_id = $1, avatar_url = $2 WHERE id = $3", googleID, avatarURL, studentID)
+func (s *PostgresStore) SetEmailVerified(studentID string, verified bool) error {
+	v := 0
+	if verified {
+		v = 1
+	}
+	_, err := s.db.Exec("UPDATE students SET email_verified = $1 WHERE id = $2", v, studentID)
 	if err != nil {
-		return fmt.Errorf("link google id: %w", err)
+		return fmt.Errorf("set email verified: %w", err)
 	}
 	return nil
+}
+
+func (s *PostgresStore) CreateIdentity(provider, providerID, studentID, email string, emailVerified bool) error {
+	v := 0
+	if emailVerified {
+		v = 1
+	}
+	_, err := s.db.Exec(`INSERT INTO identities (provider, provider_id, student_id, email, email_verified, linked_at)
+		VALUES ($1, $2, $3, $4, $5, now()::text)`, provider, providerID, studentID, email, v)
+	if err != nil {
+		return fmt.Errorf("create identity: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) ListIdentities(studentID string) ([]Identity, error) {
+	rows, err := s.db.Query("SELECT provider, provider_id, student_id, email, email_verified, linked_at FROM identities WHERE student_id = $1 ORDER BY provider", studentID)
+	if err != nil {
+		return nil, fmt.Errorf("list identities: %w", err)
+	}
+	defer rows.Close()
+	var out []Identity
+	for rows.Next() {
+		var id Identity
+		var verified int
+		var linkedAt string
+		if err := rows.Scan(&id.Provider, &id.ProviderID, &id.StudentID, &id.Email, &verified, &linkedAt); err != nil {
+			return nil, fmt.Errorf("scan identity: %w", err)
+		}
+		id.EmailVerified = verified == 1
+		if t, err := time.Parse(time.RFC3339, linkedAt); err == nil {
+			id.LinkedAt = t
+		}
+		out = append(out, id)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("list identities: %w", err)
+	}
+	return out, nil
+}
+
+func (s *PostgresStore) DeleteIdentity(provider, studentID string) error {
+	_, err := s.db.Exec("DELETE FROM identities WHERE provider = $1 AND student_id = $2", provider, studentID)
+	if err != nil {
+		return fmt.Errorf("delete identity: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) CreateEmailVerification(tokenHash string, studentID string, expiresAt time.Time) error {
+	_, err := s.db.Exec("INSERT INTO email_verifications (token_hash, student_id, expires_at, used) VALUES ($1, $2, $3, 0)",
+		tokenHash, studentID, expiresAt.UTC().Format(time.RFC3339))
+	if err != nil {
+		return fmt.Errorf("create email verification: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) ConsumeEmailVerification(tokenHash string) (string, bool, error) {
+	return consumeSingleUseTokenPG(s.db, "email_verifications", tokenHash)
+}
+
+func (s *PostgresStore) CreateLinkToken(tokenHash string, studentID string, expiresAt time.Time) error {
+	_, err := s.db.Exec("INSERT INTO link_tokens (token_hash, student_id, expires_at, used) VALUES ($1, $2, $3, 0)",
+		tokenHash, studentID, expiresAt.UTC().Format(time.RFC3339))
+	if err != nil {
+		return fmt.Errorf("create link token: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) ConsumeLinkToken(tokenHash string) (string, bool, error) {
+	return consumeSingleUseTokenPG(s.db, "link_tokens", tokenHash)
+}
+
+// consumeSingleUseTokenPG atomically validates (exists, unused, unexpired) and
+// burns a token row, returning the student it belongs to.
+func consumeSingleUseTokenPG(db *sql.DB, table, tokenHash string) (string, bool, error) {
+	tx, err := db.Begin()
+	if err != nil {
+		return "", false, fmt.Errorf("token tx: %w", err)
+	}
+	defer tx.Rollback()
+	var studentID, expiresAt string
+	var used int
+	err = tx.QueryRow("SELECT student_id, expires_at, used FROM "+table+" WHERE token_hash = $1", tokenHash).
+		Scan(&studentID, &expiresAt, &used)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", false, nil
+		}
+		return "", false, fmt.Errorf("lookup token: %w", err)
+	}
+	exp, err := time.Parse(time.RFC3339, expiresAt)
+	if err != nil || used != 0 || time.Now().UTC().After(exp) {
+		return "", false, nil
+	}
+	if _, err := tx.Exec("UPDATE "+table+" SET used = 1 WHERE token_hash = $1", tokenHash); err != nil {
+		return "", false, fmt.Errorf("burn token: %w", err)
+	}
+	if err := tx.Commit(); err != nil {
+		return "", false, fmt.Errorf("commit token: %w", err)
+	}
+	return studentID, true, nil
 }
 
 func (s *PostgresStore) SetShareToken(studentID, token string) error {
@@ -302,11 +445,42 @@ func (s *PostgresStore) SetShareToken(studentID, token string) error {
 	return nil
 }
 
+func (s *PostgresStore) SetAvatarURL(studentID, avatarURL string) error {
+	_, err := s.db.Exec("UPDATE students SET avatar_url = $1 WHERE id = $2", avatarURL, studentID)
+	if err != nil {
+		return fmt.Errorf("set avatar url: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) CreateOAuthUser(provider, providerID, name, email string, emailVerified bool, avatarURL string) (*Student, error) {
+	id := newUUID()
+	now := time.Now().UTC()
+	ev := 0
+	if emailVerified {
+		ev = 1
+	}
+	if name == "" {
+		name = email
+	}
+	_, err := s.db.Exec(
+		"INSERT INTO students (id, name, email, email_verified, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, '{}', $6)",
+		id, name, email, ev, avatarURL, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("create oauth user: %w", err)
+	}
+	if err := s.CreateIdentity(provider, providerID, id, email, emailVerified); err != nil {
+		return nil, err
+	}
+	return &Student{ID: id, Name: name, Email: email, EmailVerified: emailVerified, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
+}
+
 func (s *PostgresStore) GetStudentByShareToken(token string) (*Student, error) {
 	if token == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url FROM students WHERE share_token = $1", token)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE share_token = $1", token)
 	return scanStudent(row)
 }
 

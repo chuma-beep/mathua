@@ -187,6 +187,21 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/google", logRequest(cors(s.authLimiter.middleware(s.handleGoogleOneTap))))
 	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.handleGoogleLogin)))
 	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.handleGoogleCallback)))
+	mux.HandleFunc("/api/auth/google/connect", logRequest(cors(s.authMiddleware(s.handleGoogleConnect))))
+	// Generic OAuth providers (github/facebook/microsoft/apple).
+	mux.HandleFunc("/api/auth/github/login", logRequest(cors(s.handleOAuthLogin)))
+	mux.HandleFunc("/api/auth/github/callback", logRequest(cors(s.handleOAuthCallback)))
+	mux.HandleFunc("/api/auth/facebook/login", logRequest(cors(s.handleOAuthLogin)))
+	mux.HandleFunc("/api/auth/facebook/callback", logRequest(cors(s.handleOAuthCallback)))
+	mux.HandleFunc("/api/auth/microsoft/login", logRequest(cors(s.handleOAuthLogin)))
+	mux.HandleFunc("/api/auth/microsoft/callback", logRequest(cors(s.handleOAuthCallback)))
+	mux.HandleFunc("/api/auth/apple/login", logRequest(cors(s.handleOAuthLogin)))
+	mux.HandleFunc("/api/auth/apple/callback", logRequest(cors(s.handleOAuthCallback)))
+	mux.HandleFunc("/api/auth/link-token", logRequest(cors(s.authMiddleware(s.handleLinkToken))))
+	mux.HandleFunc("/api/auth/identities", logRequest(cors(s.authMiddleware(s.handleIdentities))))
+	mux.HandleFunc("/api/auth/identities/", logRequest(cors(s.authMiddleware(s.handleIdentityDelete))))
+	mux.HandleFunc("/api/auth/email/request", logRequest(cors(s.authMiddleware(s.handleEmailRequest))))
+	mux.HandleFunc("/api/auth/email/verify", logRequest(cors(s.handleEmailVerify)))
 	mux.HandleFunc("/api/auth/me", logRequest(cors(s.handleMe)))
 	// Alias: older frontend bundles validate against /api/me (same handler).
 	mux.HandleFunc("/api/me", logRequest(cors(s.handleMe)))
@@ -497,6 +512,7 @@ func (s *Server) handleScores(w http.ResponseWriter, r *http.Request) {
 func (s *Server) handleConfig(w http.ResponseWriter, r *http.Request) {
 	cfg := map[string]interface{}{
 		"auth_enabled": s.auth != nil,
+		"providers":    auth.ConfiguredProviders(),
 	}
 	if v := os.Getenv("GOOGLE_CLIENT_ID"); v != "" {
 		cfg["google_client_id"] = v
@@ -2465,6 +2481,7 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"diagnostic_completed": st.DiagnosticCompleted,
 		"avatar_url":           st.AvatarURL,
 		"email":                st.Email,
+		"email_verified":       st.EmailVerified,
 	})
 }
 

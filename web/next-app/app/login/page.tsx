@@ -10,7 +10,7 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login, validateToken, requestPasswordReset, completePasswordReset, API_BASE, getConfig } from '../../lib/api'
+import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { setToken, setUserInfo, clearToken, isLoggedIn } from '../../lib/auth'
 
 type LoginState = {
@@ -147,6 +147,7 @@ function LoginInner() {
   const [googleError, setGoogleError] = useState('')
   const [googleLoading, setGoogleLoading] = useState(false)
   const [authDisabled, setAuthDisabled] = useState(false)
+  const [providers, setProviders] = useState<OAuthProvider[]>([])
 
   // Safe post-login target: same-origin paths only (never protocol-relative).
   const ret = (() => {
@@ -170,7 +171,13 @@ function LoginInner() {
     const id = searchParams.get('id')
     const name = searchParams.get('name')
     const err = searchParams.get('error')
-    if (err) setGoogleError(err === 'google_denied' ? 'Google sign-in was cancelled' : 'Google sign-in failed — try again')
+    if (err) {
+      const label = err.replace(/_(denied|failed|taken|expired)$/, '')
+      const pretty = label.charAt(0).toUpperCase() + label.slice(1)
+      if (err === 'google_denied') setGoogleError('Google sign-in was cancelled')
+      else if (err.endsWith('_denied')) setGoogleError(`${pretty} sign-in was cancelled`)
+      else setGoogleError(`${pretty} sign-in failed — try again`)
+    }
     if (token && id) {
       setToken(token)
       setUserInfo({ student_id: id, name: name || 'Google user', username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: false })
@@ -187,6 +194,9 @@ function LoginInner() {
       if (cfg.auth_enabled === false) {
         setAuthDisabled(true)
         return
+      }
+      if (Array.isArray(cfg.providers)) {
+        setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p in OAUTH_LABELS))
       }
       const cid = (cfg as unknown as { google_client_id?: string }).google_client_id
       if (!cid || cancelled) return
@@ -459,6 +469,8 @@ function LoginInner() {
               <div className="h-px flex-1 bg-mathua-border" />
             </div>
             <div className="space-y-2">
+              {(providers.length === 0 || providers.includes('google')) && (
+              <>
               <div id="g_id_onload" className="flex justify-center min-h-[44px] items-center" />
               {!googleReady && (
                 <button onClick={handleGoogleRedirect} disabled={googleLoading} className="w-full border border-mathua-border bg-white text-[#3c4043] hover:bg-gray-50 rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50">
@@ -466,6 +478,17 @@ function LoginInner() {
                   {googleLoading ? 'Connecting…' : 'Continue with Google'}
                 </button>
               )}
+              </>
+              )}
+              {providers.map(p => (
+                <button
+                  key={p}
+                  onClick={() => startOAuthLogin(p)}
+                  className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2"
+                >
+                  Continue with {OAUTH_LABELS[p]}
+                </button>
+              ))}
               {googleError && <p className="text-mathua-red text-xs text-center">{googleError}</p>}
             </div>
             <div className="mt-3 text-center">

@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS students (
     share_token          TEXT NOT NULL DEFAULT '',
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
-    avatar_url           TEXT NOT NULL DEFAULT ''
+    avatar_url           TEXT NOT NULL DEFAULT '',
+    email_verified       INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
@@ -124,6 +125,31 @@ CREATE TABLE IF NOT EXISTS avatar_images (
 );
 
 CREATE TABLE IF NOT EXISTS password_resets (
+    token_hash TEXT PRIMARY KEY,
+    student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    expires_at TEXT NOT NULL,
+    used       INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS identities (
+    provider       TEXT NOT NULL,
+    provider_id    TEXT NOT NULL,
+    student_id     TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    email          TEXT NOT NULL DEFAULT '',
+    email_verified INTEGER NOT NULL DEFAULT 0,
+    linked_at      TEXT NOT NULL DEFAULT (datetime('now')),
+    PRIMARY KEY (provider, provider_id)
+);
+CREATE INDEX IF NOT EXISTS idx_identities_student ON identities(student_id);
+
+CREATE TABLE IF NOT EXISTS email_verifications (
+    token_hash TEXT PRIMARY KEY,
+    student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    expires_at TEXT NOT NULL,
+    used       INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS link_tokens (
     token_hash TEXT PRIMARY KEY,
     student_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
     expires_at TEXT NOT NULL,

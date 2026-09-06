@@ -27,8 +27,20 @@ type Student struct {
 	LeagueMoved         int
 	ShareToken          string
 	Email               string
+	EmailVerified       bool
 	GoogleID            string
 	AvatarURL           string
+}
+
+// Identity links an external OAuth provider account to a student.
+// (provider, provider_id) is globally unique across all providers.
+type Identity struct {
+	Provider      string
+	ProviderID    string
+	StudentID     string
+	Email         string
+	EmailVerified bool
+	LinkedAt      time.Time
 }
 
 type ConceptProgress struct {
@@ -133,14 +145,15 @@ type Repository interface {
 	CreateStudent(name string) (*Student, error)
 	GetStudent(id string) (*Student, error)
 	FindByUsername(username string) (*Student, error)
-	FindByGoogleID(googleID string) (*Student, error)
 	FindByEmail(email string) (*Student, error)
 	CreateUser(name, username, passwordHash string) (*Student, error)
 	CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error)
-	LinkGoogleID(studentID, googleID, avatarURL string) error
+	CreateOAuthUser(provider, providerID, name, email string, emailVerified bool, avatarURL string) (*Student, error)
+	SetAvatarURL(studentID, avatarURL string) error
 	SetCourseID(studentID, courseID string) error
 	UpdateStudentName(studentID, name string) error
 	SetEmail(studentID, email string) error
+	SetEmailVerified(studentID string, verified bool) error
 	SetPasswordHash(studentID, hash string) error
 	CreatePasswordReset(tokenHash, studentID string, expiresAt time.Time) error
 	ConsumePasswordReset(tokenHash string) (studentID string, ok bool, err error)
@@ -184,6 +197,15 @@ type Repository interface {
 	GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error)
 	GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error)
 	UpsertTopicSpeed(ts *TopicSpeed) error
+
+	CreateIdentity(provider, providerID, studentID, email string, emailVerified bool) error
+	FindStudentByIdentity(provider, providerID string) (*Student, error)
+	ListIdentities(studentID string) ([]Identity, error)
+	DeleteIdentity(provider, studentID string) error
+	CreateEmailVerification(tokenHash, studentID string, expiresAt time.Time) error
+	ConsumeEmailVerification(tokenHash string) (studentID string, ok bool, err error)
+	CreateLinkToken(tokenHash, studentID string, expiresAt time.Time) error
+	ConsumeLinkToken(tokenHash string) (studentID string, ok bool, err error)
 
 	Migrate() error
 	Close() error

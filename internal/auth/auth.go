@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -215,20 +216,34 @@ func (a *AuthService) Login(username, password string) (string, *storage.Student
 	return token, st, nil
 }
 
-// LoginOrCreateGoogle links a Google identity by email (existing username/password users keep their username) and issues a JWT.
-// One-tap (id_token) and OAuth code flow both resolve to (name, email, googleID, avatar) and converge here.
-func (a *AuthService) LoginOrCreateGoogle(name, email, googleID, avatarURL string) (string, *storage.Student, error) {
-	if googleID == "" {
+// OAuthProfile is the normalized identity from any OAuth provider
+// (Google, GitHub, Facebook, Microsoft, Apple) after its own verification.
+type OAuthProfile struct {
+	Provider      string // google | github | facebook | microsoft | apple
+	ProviderID    string // provider-side stable user id
+	Email         string
+	EmailVerified bool // provider-attested (e.g. GitHub verified flag, Google)
+	Name          string
+	AvatarURL     string
+}
+
+// LoginOrCreateOAuth is the provider-agnostic login core:
+//  1. known (provider, id) identity → log in (refresh avatar);
+//  2. dual-verified email (provider-attested AND ours) → link + log in;
+//  3. otherwise → fresh account. Unverified emails NEVER merge — this is
+//     what stops account takeover via claimed emails.
+func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Student, error) {
+	if p.Provider == "" || p.ProviderID == "" {
 		return "", nil, jwt.ErrTokenRequiredClaimMissing
 	}
-	// 1. Existing Google-linked account
-	if st, err := a.repo.FindByGoogleID(googleID); err != nil {
+	if st, err := a.repo.FindStudentByIdentity(p.Provider, p.ProviderID); err != nil {
 		return "", nil, err
 	} else if st != nil {
-		// refresh avatar
-		if avatarURL != "" && st.AvatarURL != avatarURL {
-			_ = a.repo.LinkGoogleID(st.ID, googleID, avatarURL)
-			st.AvatarURL = avatarURL
+		if p.AvatarURL != "" && st.AvatarURL != p.AvatarURL {
+			if err := a.repo.SetAvatarURL(st.ID, p.AvatarURL); err != nil {
+				return "", nil, err
+			}
+			st.AvatarURL = p.AvatarURL
 		}
 		tok, err := generateToken(st.ID)
 		if err != nil {
@@ -236,28 +251,25 @@ func (a *AuthService) LoginOrCreateGoogle(name, email, googleID, avatarURL strin
 		}
 		return tok, st, nil
 	}
-	// 2. Link existing email/username account (keep username unique)
-	if email != "" {
-		if st, err := a.repo.FindByEmail(email); err != nil {
+	if p.Email != "" && p.EmailVerified {
+		if st, err := a.repo.FindByEmail(p.Email); err != nil {
 			return "", nil, err
-		} else if st != nil {
-			if err := a.repo.LinkGoogleID(st.ID, googleID, avatarURL); err != nil {
+		} else if st != nil && st.EmailVerified {
+			if err := a.repo.CreateIdentity(p.Provider, p.ProviderID, st.ID, p.Email, true); err != nil {
 				return "", nil, err
+			}
+			if p.AvatarURL != "" && st.AvatarURL == "" {
+				_ = a.repo.SetAvatarURL(st.ID, p.AvatarURL)
+				st.AvatarURL = p.AvatarURL
 			}
 			tok, err := generateToken(st.ID)
 			if err != nil {
 				return "", nil, err
 			}
-			st.GoogleID = googleID
-			st.AvatarURL = avatarURL
-			if st.Email == "" {
-				st.Email = email
-			}
 			return tok, st, nil
 		}
 	}
-	// 3. Fresh Google user
-	st, err := a.repo.CreateGoogleUser(name, email, googleID, avatarURL)
+	st, err := a.repo.CreateOAuthUser(p.Provider, p.ProviderID, p.Name, p.Email, p.EmailVerified, p.AvatarURL)
 	if err != nil {
 		return "", nil, err
 	}
@@ -266,6 +278,57 @@ func (a *AuthService) LoginOrCreateGoogle(name, email, googleID, avatarURL strin
 		return "", nil, err
 	}
 	return tok, st, nil
+}
+
+// LoginOrCreateGoogle keeps the Google call sites stable — both One-Tap and
+// the redirect flow converge here. Google emails are provider-verified.
+func (a *AuthService) LoginOrCreateGoogle(name, email, googleID, avatarURL string) (string, *storage.Student, error) {
+	return a.LoginOrCreateOAuth(OAuthProfile{
+		Provider: "google", ProviderID: googleID, Email: email, EmailVerified: email != "",
+		Name: name, AvatarURL: avatarURL,
+	})
+}
+
+// ConnectProvider links a provider identity to an already-logged-in student
+// (explicit user intent — safe without email verification). Fails when the
+// provider account already belongs to someone else.
+func (a *AuthService) ConnectProvider(studentID string, p OAuthProfile) error {
+	if p.Provider == "" || p.ProviderID == "" {
+		return jwt.ErrTokenRequiredClaimMissing
+	}
+	if st, err := a.repo.FindStudentByIdentity(p.Provider, p.ProviderID); err != nil {
+		return err
+	} else if st != nil {
+		if st.ID == studentID {
+			return nil // idempotent
+		}
+		return errors.New("that account is already connected elsewhere")
+	}
+	return a.repo.CreateIdentity(p.Provider, p.ProviderID, studentID, p.Email, p.EmailVerified)
+}
+
+// DisconnectProvider removes a link, refusing to strand an account with no
+// remaining credential (no password and a single identity).
+func (a *AuthService) DisconnectProvider(studentID, provider string) error {
+	st, err := a.repo.GetStudent(studentID)
+	if err != nil || st == nil {
+		return fmt.Errorf("load student: %w", err)
+	}
+	ids, err := a.repo.ListIdentities(studentID)
+	if err != nil {
+		return err
+	}
+	keep := false
+	for _, id := range ids {
+		if id.Provider != provider {
+			keep = true
+			break
+		}
+	}
+	if !keep && st.PasswordHash == "" {
+		return errors.New("cannot disconnect the last sign-in method")
+	}
+	return a.repo.DeleteIdentity(provider, studentID)
 }
 
 func (a *AuthService) ValidateToken(tokenStr string) (string, error) {

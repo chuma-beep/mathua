@@ -8,7 +8,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
-import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, enableShare, disableShare, type UserSettings } from '../../lib/api'
+import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
@@ -41,6 +41,12 @@ export default function SettingsPage() {
   const [cpNew, setCpNew] = useState('')
   const [cpBusy, setCpBusy] = useState(false)
   const [cpMsg, setCpMsg] = useState('')
+  const [identities, setIdentities] = useState<{ provider: string; email: string }[]>([])
+  const [idBusy, setIdBusy] = useState(false)
+  const [idMsg, setIdMsg] = useState('')
+  const [providers, setProviders] = useState<OAuthProvider[]>([])
+  const [verifyMsg, setVerifyMsg] = useState('')
+  const [verifyBusy, setVerifyBusy] = useState(false)
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -55,6 +61,12 @@ export default function SettingsPage() {
       console.error('getSettings failed:', e)
       setLoading(false)
     })
+    getIdentities().then(setIdentities).catch(() => {})
+    getConfig().then(cfg => {
+      if (cfg && Array.isArray(cfg.providers)) {
+        setProviders(cfg.providers.filter((p): p is OAuthProvider => p in OAUTH_LABELS))
+      }
+    }).catch(() => {})
     setDisplayName(getUserInfo()?.name ?? '')
     setRecoveryEmail(getUserInfo()?.email ?? '')
     try {
@@ -268,6 +280,53 @@ export default function SettingsPage() {
   const currentPhotoUrl = settings.avatar_custom ? avatarImageUrl(photoVersion ?? undefined) : undefined
   const currentDice = settings.avatar_dicebear
 
+  const refreshIdentities = () => {
+    getIdentities().then(setIdentities).catch(() => {})
+  }
+
+  const handleVerifyEmail = async () => {
+    setVerifyBusy(true)
+    setVerifyMsg('')
+    try {
+      await requestEmailVerification()
+      setVerifyMsg('Verification link sent — check your inbox.')
+      const info = getUserInfo()
+      if (info) setUserInfo({ ...info })
+    } catch (e: unknown) {
+      setVerifyMsg(e instanceof Error ? e.message : 'Request failed — try again.')
+    } finally {
+      setVerifyBusy(false)
+    }
+  }
+
+  const handleConnect = async (provider: string) => {
+    setIdBusy(true)
+    setIdMsg('')
+    try {
+      const linkToken = await createLinkToken()
+      startOAuthLogin(provider, { intent: 'link', linkToken })
+    } catch {
+      setIdMsg('Couldn’t start connecting — try again.')
+      setIdBusy(false)
+    }
+  }
+
+  const handleDisconnect = async (provider: string) => {
+    setIdBusy(true)
+    setIdMsg('')
+    try {
+      await deleteIdentity(provider)
+      refreshIdentities()
+    } catch (e: unknown) {
+      setIdMsg(e instanceof Error ? e.message : 'Disconnect failed — try again.')
+    } finally {
+      setIdBusy(false)
+    }
+  }
+
+  const userEmail = typeof window !== 'undefined' ? getUserInfo()?.email ?? '' : ''
+  const userEmailVerified = typeof window !== 'undefined' ? getUserInfo()?.email_verified ?? false : false
+
   if (restricted) {
     return (
       <>
@@ -395,6 +454,19 @@ export default function SettingsPage() {
                     className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                   />
                 </div>
+                {userEmail !== '' && !userEmailVerified && (
+                  <div className="mt-2 flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-[11px] text-mathua-muted">Email unverified — logins won’t merge until you verify.</span>
+                    <button
+                      onClick={handleVerifyEmail}
+                      disabled={verifyBusy}
+                      className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-3 h-8 text-[11px] font-mono disabled:opacity-50"
+                    >
+                      {verifyBusy ? 'Sending…' : 'Verify email'}
+                    </button>
+                  </div>
+                )}
+                {verifyMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{verifyMsg}</p>}
 
                 <div className="flex items-center gap-4 mt-6">
                   <Avatar
@@ -507,6 +579,44 @@ export default function SettingsPage() {
                   {cpBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Change password'}
                 </button>
                 {cpMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{cpMsg}</p>}
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Connected accounts</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Sign in with any of these — verified emails merge into this account, never a new one.
+                </p>
+                <div className="mt-3 space-y-2">
+                  {identities.map(id => (
+                    <div key={id.provider} className="flex items-center justify-between gap-3 border border-mathua-border px-3 h-10 min-w-0">
+                      <span className="font-mono text-xs text-mathua-primary truncate">
+                        {OAUTH_LABELS[id.provider as OAuthProvider] ?? id.provider}
+                        {id.email && <span className="text-mathua-muted"> · {id.email}</span>}
+                      </span>
+                      <button
+                        onClick={() => handleDisconnect(id.provider)}
+                        disabled={idBusy}
+                        className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-red disabled:opacity-50"
+                      >
+                        Disconnect
+                      </button>
+                    </div>
+                  ))}
+                  {providers.filter(p => !identities.some(id => id.provider === p)).map(p => (
+                    <button
+                      key={p}
+                      onClick={() => handleConnect(p)}
+                      disabled={idBusy}
+                      className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50"
+                    >
+                      Connect {OAUTH_LABELS[p]}
+                    </button>
+                  ))}
+                  {providers.length === 0 && (
+                    <p className="font-mono text-[11px] text-mathua-muted">No external login services configured on this server.</p>
+                  )}
+                </div>
+                {idMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{idMsg}</p>}
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
