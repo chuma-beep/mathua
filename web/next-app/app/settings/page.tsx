@@ -171,8 +171,11 @@ export default function SettingsPage() {
       if (info) setUserInfo({ ...info, name: res.name, email: res.email || info.email })
       setDisplayName(res.name)
       setNameMsg('Profile saved.')
-    } catch {
-      setNameMsg('Couldn’t save — check your connection and try again.')
+    } catch (e) {
+      // Surface friendly server messages (e.g. "email already in use");
+      // fall back to the generic notice for network failures.
+      const serverMessage = (e as { serverMessage?: string })?.serverMessage
+      setNameMsg(serverMessage || 'Couldn’t save — check your connection and try again.')
     } finally {
       setNameBusy(false)
     }
