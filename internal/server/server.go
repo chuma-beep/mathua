@@ -2251,9 +2251,24 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "name, username, and password are required", 400)
 		return
 	}
-	email := strings.TrimSpace(req.Email)
+	email := strings.ToLower(strings.TrimSpace(req.Email))
+	if email == "" {
+		writeError(w, "email is required", 400)
+		return
+	}
 	if err := auth.ValidateEmail(email); err != nil {
 		writeError(w, err.Error(), 400)
+		return
+	}
+	// Verified-taken check runs before user creation: a verified address
+	// belongs to a live account (password or OAuth) — point the caller at
+	// login/reset instead of forking a duplicate. Unverified duplicates are
+	// allowed; first-to-verify wins (see LoginOrCreateOAuth dual-verified rule).
+	if existing, err := s.repo.FindByEmail(email); err != nil {
+		writeError(w, "signup failed: "+err.Error(), 500)
+		return
+	} else if existing != nil && existing.EmailVerified {
+		writeError(w, "email already in use", 409)
 		return
 	}
 	token, st, err := s.auth.Signup(req.Name, req.Username, req.Password)
@@ -2265,11 +2280,14 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "signup failed: "+err.Error(), 400)
 		return
 	}
-	if email != "" {
-		if err := s.repo.SetEmail(st.ID, email); err != nil {
-			writeError(w, "signup failed: "+err.Error(), 500)
-			return
-		}
+	if err := s.repo.SetEmail(st.ID, email); err != nil {
+		writeError(w, "signup failed: "+err.Error(), 500)
+		return
+	}
+	// Best-effort verification dispatch — never fails signup when mail is
+	// unconfigured or the send fails (Settings → Verify email stays available).
+	if err := s.auth.RequestEmailVerification(st.ID); err != nil {
+		log.Printf("auth: signup verification dispatch skipped: %v", err)
 	}
 	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
@@ -2427,7 +2445,8 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 	}
 	email := ""
 	if req.Email != nil {
-		email = strings.TrimSpace(*req.Email)
+		// Lowercased so FindByEmail (exact match) meets the signup form.
+		email = strings.ToLower(strings.TrimSpace(*req.Email))
 		if err := auth.ValidateEmail(email); err != nil {
 			writeError(w, err.Error(), 400)
 			return

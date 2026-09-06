@@ -399,10 +399,10 @@ func TestAuthLoginSignup(t *testing.T) {
 	}
 
 	// Signup normalizes case; duplicate (any case) → friendly 409.
-	if rec := post("/api/auth/signup", `{"name":"Ada","username":"Ada","password":"Engine!n1"}`, ""); rec.Code != 200 {
+	if rec := post("/api/auth/signup", `{"name":"Ada","username":"Ada","password":"Engine!n1","email":"ada@example.com"}`, ""); rec.Code != 200 {
 		t.Fatalf("signup: expected 200, got %d: %s", rec.Code, rec.Body.String())
 	}
-	rec := post("/api/auth/signup", `{"name":"Other","username":"ADA","password":"Engine!n2"}`, "")
+	rec := post("/api/auth/signup", `{"name":"Other","username":"ADA","password":"Engine!n2","email":"other@example.com"}`, "")
 	if rec.Code != 409 {
 		t.Errorf("duplicate: expected 409, got %d: %s", rec.Code, rec.Body.String())
 	}
@@ -410,7 +410,7 @@ func TestAuthLoginSignup(t *testing.T) {
 		t.Errorf("expected friendly taken message, got %s", rec.Body.String())
 	}
 	// Bad username / weak password → 400, never a raw dump.
-	if rec := post("/api/auth/signup", `{"name":"X","username":"ab","password":"Engine!n1"}`, ""); rec.Code != 400 {
+	if rec := post("/api/auth/signup", `{"name":"X","username":"ab","password":"Engine!n1","email":"x@example.com"}`, ""); rec.Code != 400 {
 		t.Errorf("short username: expected 400, got %d", rec.Code)
 	}
 	// Login works case-insensitively.
@@ -431,6 +431,56 @@ func TestAuthLoginSignup(t *testing.T) {
 	}
 	if !strings.Contains(rec.Body.String(), "Google sign-in") {
 		t.Errorf("expected Google sign-in direction, got %s", rec.Body.String())
+	}
+	// Verified email already on a live account → friendly 409, no fork.
+	rec = post("/api/auth/signup", `{"name":"Copy Cat","username":"copycat","password":"Engine!n1","email":"gigi@example.com"}`, "")
+	if rec.Code != 409 {
+		t.Errorf("verified email taken: expected 409, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if !strings.Contains(rec.Body.String(), "email already in use") {
+		t.Errorf("expected email-taken message, got %s", rec.Body.String())
+	}
+}
+
+// Separate server (fresh rate-limiter bucket) for the signup email rules:
+// required, valid, lowercased at rest, unverified dupes allowed.
+func TestAuthSignupEmail(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	post := func(path, body string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		mux.ServeHTTP(rec, httptest.NewRequest("POST", path, bytes.NewReader([]byte(body))))
+		return rec
+	}
+
+	if rec := post("/api/auth/signup", `{"name":"No Mail","username":"nomail","password":"Engine!n1"}`); rec.Code != 400 {
+		t.Errorf("missing email: expected 400, got %d: %s", rec.Code, rec.Body.String())
+	} else if !strings.Contains(rec.Body.String(), "email is required") {
+		t.Errorf("expected email-required message, got %s", rec.Body.String())
+	}
+	if rec := post("/api/auth/signup", `{"name":"Bad Mail","username":"badmail","password":"Engine!n1","email":"not-an-email"}`); rec.Code != 400 {
+		t.Errorf("invalid email: expected 400, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if rec := post("/api/auth/signup", `{"name":"Case Mail","username":"casemail","password":"Engine!n1","email":"Case@Example.COM"}`); rec.Code != 200 {
+		t.Fatalf("case email signup: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	} else if st, err := store.FindByEmail("case@example.com"); err != nil || st == nil {
+		t.Errorf("expected lowercased email stored, err=%v", err)
+	}
+	if rec := post("/api/auth/signup", `{"name":"Dupe One","username":"dupeone","password":"Engine!n1","email":"dupe@example.com"}`); rec.Code != 200 {
+		t.Fatalf("dupe one: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if rec := post("/api/auth/signup", `{"name":"Dupe Two","username":"dupetwo","password":"Engine!n1","email":"dupe@example.com"}`); rec.Code != 200 {
+		t.Errorf("unverified dupe: expected 200, got %d: %s", rec.Code, rec.Body.String())
 	}
 }
 
