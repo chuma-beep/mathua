@@ -3,6 +3,7 @@ package storage
 import (
 	"crypto/rand"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -139,6 +140,10 @@ type Repository interface {
 	LinkGoogleID(studentID, googleID, avatarURL string) error
 	SetCourseID(studentID, courseID string) error
 	UpdateStudentName(studentID, name string) error
+	SetEmail(studentID, email string) error
+	SetPasswordHash(studentID, hash string) error
+	CreatePasswordReset(tokenHash, studentID string, expiresAt time.Time) error
+	ConsumePasswordReset(tokenHash string) (studentID string, ok bool, err error)
 
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)
 	GetAllProgress(studentID string) (map[string]*ConceptProgress, error)
@@ -194,4 +199,15 @@ func newUUID() string {
 	b[6] = (b[6] & 0x0f) | 0x40
 	b[8] = (b[8] & 0x3f) | 0x80
 	return fmt.Sprintf("%08x-%04x-%04x-%04x-%012x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+}
+
+// IsUniqueViolation reports UNIQUE-constraint failures across stores
+// (SQLite "UNIQUE constraint failed", Postgres "duplicate key").
+func IsUniqueViolation(err error) bool {
+	if err == nil {
+		return false
+	}
+	msg := err.Error()
+	return strings.Contains(msg, "UNIQUE constraint failed") ||
+		strings.Contains(msg, "duplicate key")
 }

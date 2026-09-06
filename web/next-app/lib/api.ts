@@ -428,9 +428,9 @@ export interface ConfigRes {
 	google_client_id?: string
 }
 
-export async function getConfig(): Promise<ConfigRes> {
+export async function getConfig(): Promise<ConfigRes | null> {
 	const res = await authedFetch(`${API_BASE}/api/config`)
-	if (!res.ok) return { auth_enabled: false }
+	if (!res.ok) return null
 	return res.json()
 }
 
@@ -457,13 +457,13 @@ export interface AuthRes {
 }
 
 export async function signup(name: string, username: string, password: string): Promise<AuthRes> {
-  const res = await authedFetch(`${API_BASE}/api/auth/signup`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, username, password }),
-  })
-  if (!res.ok) throw new Error('Signup failed')
-  return validateResponse(AuthResSchema, await res.json(), 'signup') as AuthRes
+	const res = await authedFetch(`${API_BASE}/api/auth/signup`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ name, username, password }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Signup failed`)
+	return validateResponse(AuthResSchema, await res.json(), 'signup') as AuthRes
 }
 
 export async function login(username: string, password: string): Promise<AuthRes> {
@@ -472,6 +472,7 @@ export async function login(username: string, password: string): Promise<AuthRes
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ username, password }),
 	})
+	if (res.status === 429) throw new Error('Too many attempts — try again shortly')
 	if (!res.ok) throw new Error('Invalid credentials')
 	return validateResponse(AuthResSchema, await res.json(), 'login') as AuthRes
 }
@@ -640,16 +641,45 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 export interface ProfileUpdateRes {
 	student_id: string
 	name: string
+	email?: string
 }
 
-export async function updateProfileName(name: string): Promise<ProfileUpdateRes> {
+export async function updateProfileName(name: string, email?: string): Promise<ProfileUpdateRes> {
 	const res = await authedFetch(`${API_BASE}/api/profile`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-		body: JSON.stringify({ name }),
+		body: JSON.stringify(email === undefined ? { name } : { name, email }),
 	})
-	if (!res.ok) throw new Error(`Update profile failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Update profile failed: ${res.status}`)
 	return res.json()
+}
+
+export async function requestPasswordReset(identifier: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/auth/reset/request`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ identifier }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Reset request failed: ${res.status}`)
+}
+
+export async function completePasswordReset(token: string, password: string): Promise<AuthRes> {
+	const res = await authedFetch(`${API_BASE}/api/auth/reset/complete`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ token, password }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Reset failed: ${res.status}`)
+	return validateResponse(AuthResSchema, await res.json(), 'resetComplete') as AuthRes
+}
+
+export async function changePassword(currentPassword: string, newPassword: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/auth/password`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Change password failed: ${res.status}`)
 }
 
 export async function uploadAvatar(file: File): Promise<void> {

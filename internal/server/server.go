@@ -181,6 +181,9 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.authLimiter.middleware(s.handleSignup))))
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
+	mux.HandleFunc("/api/auth/password", logRequest(cors(s.authLimiter.middleware(s.authMiddleware(s.handleChangePassword)))))
+	mux.HandleFunc("/api/auth/reset/request", logRequest(cors(s.authLimiter.middleware(s.handleResetRequest))))
+	mux.HandleFunc("/api/auth/reset/complete", logRequest(cors(s.authLimiter.middleware(s.handleResetComplete))))
 	mux.HandleFunc("/api/auth/google", logRequest(cors(s.authLimiter.middleware(s.handleGoogleOneTap))))
 	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.handleGoogleLogin)))
 	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.handleGoogleCallback)))
@@ -2204,6 +2207,7 @@ type signupReq struct {
 	Name     string `json:"name"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Email    string `json:"email"`
 }
 
 type authRes struct {
@@ -2231,10 +2235,25 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "name, username, and password are required", 400)
 		return
 	}
+	email := strings.TrimSpace(req.Email)
+	if err := auth.ValidateEmail(email); err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
 	token, st, err := s.auth.Signup(req.Name, req.Username, req.Password)
 	if err != nil {
+		if errors.Is(err, auth.ErrUsernameTaken) || storage.IsUniqueViolation(err) {
+			writeError(w, "username is taken", 409)
+			return
+		}
 		writeError(w, "signup failed: "+err.Error(), 400)
 		return
+	}
+	if email != "" {
+		if err := s.repo.SetEmail(st.ID, email); err != nil {
+			writeError(w, "signup failed: "+err.Error(), 500)
+			return
+		}
 	}
 	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
@@ -2260,13 +2279,109 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 	}
 	token, st, err := s.auth.Login(req.Username, req.Password)
 	if err != nil || token == "" {
+		if errors.Is(err, auth.ErrGoogleOnly) {
+			writeError(w, "this account uses Google sign-in — continue with Google", 401)
+			return
+		}
 		writeError(w, "invalid username or password", 401)
 		return
 	}
 	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
 
-// PUT /api/profile — update the student's display name (username is immutable).
+// POST /api/auth/reset/request {identifier} — always 200 (no enumeration),
+// 503 when outbound mail is unconfigured.
+func (s *Server) handleResetRequest(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	var req struct {
+		Identifier string `json:"identifier"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if strings.TrimSpace(req.Identifier) == "" {
+		writeError(w, "identifier is required", 400)
+		return
+	}
+	if !auth.SMTPConfigured() {
+		writeError(w, "password reset not configured", 503)
+		return
+	}
+	if _, err := s.auth.RequestPasswordReset(req.Identifier); err != nil {
+		writeError(w, "reset request failed", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true})
+}
+
+// POST /api/auth/reset/complete {token, password} — burns the token,
+// sets the password, and logs the user in.
+func (s *Server) handleResetComplete(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	var req struct {
+		Token    string `json:"token"`
+		Password string `json:"password"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	token, st, err := s.auth.CompletePasswordReset(req.Token, req.Password)
+	if err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
+	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
+}
+
+// PUT /api/auth/password {current_password, new_password} — logged-in
+// password change (no email involved).
+func (s *Server) handleChangePassword(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPut {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	if s.auth == nil {
+		writeError(w, "authentication is disabled", 400)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	var req struct {
+		CurrentPassword string `json:"current_password"`
+		NewPassword     string `json:"new_password"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if err := s.auth.ChangePassword(studentID, req.CurrentPassword, req.NewPassword); err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true})
+}
+
+// PUT /api/profile — update display name and/or recovery email.
+// Username is immutable. Email must be valid when given; empty clears it.
 func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPut {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -2278,7 +2393,8 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req struct {
-		Name string `json:"name"`
+		Name  string `json:"name"`
+		Email *string `json:"email,omitempty"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -2293,7 +2409,21 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "failed to update profile", 500)
 		return
 	}
-	writeJSON(w, map[string]interface{}{"student_id": studentID, "name": name})
+	email := ""
+	if req.Email != nil {
+		email = strings.TrimSpace(*req.Email)
+		if err := auth.ValidateEmail(email); err != nil {
+			writeError(w, err.Error(), 400)
+			return
+		}
+		if err := s.repo.SetEmail(studentID, email); err != nil {
+			writeError(w, "failed to update profile", 500)
+			return
+		}
+	} else if st, err := s.repo.GetStudent(studentID); err == nil && st != nil {
+		email = st.Email
+	}
+	writeJSON(w, map[string]interface{}{"student_id": studentID, "name": name, "email": email})
 }
 
 func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
@@ -2334,6 +2464,7 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"level":                scores.Level,
 		"diagnostic_completed": st.DiagnosticCompleted,
 		"avatar_url":           st.AvatarURL,
+		"email":                st.Email,
 	})
 }
 

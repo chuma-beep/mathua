@@ -59,6 +59,7 @@ export interface UserInfo {
   level: string
   diagnostic_completed: boolean
   avatar_url?: string
+  email?: string
 }
 
 export function setUserInfo(info: UserInfo) {

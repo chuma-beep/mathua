@@ -8,7 +8,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
-import { getSettings, updateSettings, updateProfileName, uploadAvatar, deleteAvatar, avatarImageUrl, enableShare, disableShare, type UserSettings } from '../../lib/api'
+import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
@@ -36,6 +36,11 @@ export default function SettingsPage() {
   const [pendingDice, setPendingDice] = useState<{ style: DicebearPick['style']; seed: string } | null>(null)
   const [imageBusy, setImageBusy] = useState(false)
   const [imageMsg, setImageMsg] = useState('')
+  const [recoveryEmail, setRecoveryEmail] = useState('')
+  const [cpCurrent, setCpCurrent] = useState('')
+  const [cpNew, setCpNew] = useState('')
+  const [cpBusy, setCpBusy] = useState(false)
+  const [cpMsg, setCpMsg] = useState('')
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -51,6 +56,7 @@ export default function SettingsPage() {
       setLoading(false)
     })
     setDisplayName(getUserInfo()?.name ?? '')
+    setRecoveryEmail(getUserInfo()?.email ?? '')
     try {
       const savedShare = localStorage.getItem('mathua_share_url')
       if (savedShare) setShareUrl(savedShare)
@@ -148,11 +154,11 @@ export default function SettingsPage() {
     setNameBusy(true)
     setNameMsg('')
     try {
-      const res = await updateProfileName(name)
+      const res = await updateProfileName(name, recoveryEmail.trim())
       const info = getUserInfo()
-      if (info) setUserInfo({ ...info, name: res.name })
+      if (info) setUserInfo({ ...info, name: res.name, email: res.email || info.email })
       setDisplayName(res.name)
-      setNameMsg('Name saved.')
+      setNameMsg('Profile saved.')
     } catch {
       setNameMsg('Couldn’t save — check your connection and try again.')
     } finally {
@@ -238,6 +244,25 @@ export default function SettingsPage() {
       if (removedInfo) setUserInfo({ ...removedInfo })
     } catch { console.error('deleteAvatar failed') }
     finally { setPhotoBusy(false) }
+  }
+
+  const handleChangePassword = async () => {
+    if (!cpCurrent || !cpNew) {
+      setCpMsg('Enter your current and a new password.')
+      return
+    }
+    setCpBusy(true)
+    setCpMsg('')
+    try {
+      await changePassword(cpCurrent, cpNew)
+      setCpCurrent('')
+      setCpNew('')
+      setCpMsg('Password changed.')
+    } catch (e: unknown) {
+      setCpMsg(e instanceof Error ? e.message : 'Change failed — try again.')
+    } finally {
+      setCpBusy(false)
+    }
   }
 
   const currentPhotoUrl = settings.avatar_custom ? avatarImageUrl(photoVersion ?? undefined) : undefined
@@ -352,10 +377,24 @@ export default function SettingsPage() {
                     disabled={nameBusy}
                     className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 shrink-0 inline-flex items-center gap-2"
                   >
-                    {nameBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save name'}
+                    {nameBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save profile'}
                   </button>
                 </div>
                 {nameMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{nameMsg}</p>}
+
+                <label htmlFor="recovery-email" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Recovery email (optional)</label>
+                <p className="text-mathua-muted text-xs mt-1">Used only for password reset. Empty clears it.</p>
+                <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                  <input
+                    id="recovery-email"
+                    type="email"
+                    value={recoveryEmail}
+                    onChange={(e) => setRecoveryEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                    className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  />
+                </div>
 
                 <div className="flex items-center gap-4 mt-6">
                   <Avatar
@@ -433,6 +472,41 @@ export default function SettingsPage() {
                 <p className="text-mathua-muted text-[11px] mt-3">
                   Characters by <a href="https://www.dicebear.com" target="_blank" rel="noreferrer" className="text-mathua-blue hover:text-mathua-blue-hover">DiceBear</a>. Photos up to 512KB.
                 </p>
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Change password</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Needs your current password. Forgot it? Sign out and use “Forgot password?” on the login page.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+                  <input
+                    type="password"
+                    value={cpCurrent}
+                    onChange={(e) => setCpCurrent(e.target.value)}
+                    placeholder="Current password"
+                    autoComplete="current-password"
+                    aria-label="Current password"
+                    className="min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  />
+                  <input
+                    type="password"
+                    value={cpNew}
+                    onChange={(e) => setCpNew(e.target.value)}
+                    placeholder="New password"
+                    autoComplete="new-password"
+                    aria-label="New password"
+                    className="min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  />
+                </div>
+                <button
+                  onClick={handleChangePassword}
+                  disabled={cpBusy}
+                  className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
+                >
+                  {cpBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Change password'}
+                </button>
+                {cpMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{cpMsg}</p>}
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
