@@ -494,7 +494,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'API calls go through lib/api.ts. Auth headers come from lib/auth.ts (JWT in localStorage).',
           'Use the motion-safe animation classes for transitions (fadeIn, ascii-reveal). Avoid heavy animation libraries.',
           'Profile pages, heatmaps, and stats components consume data from GET /api/activity, /api/scores, and /api/weaknesses.',
-          'No third-party UI libraries except React Flow and sonner (toasts). Build everything else from scratch.',
+          'UI primitives live in components/ui/ (Radix/shadcn: sidebar, sheet, button, switch, tooltip — used by AppSidebar on Profile), plus React Flow for diagrams, sonner for toasts, lucide-react for icons. Reuse these — do not add new UI kits.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
