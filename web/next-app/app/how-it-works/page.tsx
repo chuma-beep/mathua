@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
+import BottomTabs from '../../components/BottomTabs'
 import AsciiDivider from '../../components/AsciiDivider'
 
 const StudentModelFlow = dynamic(() => import('../../components/StudentModelFlow'), {
@@ -590,6 +591,7 @@ for line in sys.stdin:
         </main>
       </div>
     </div>
+      <BottomTabs />
     </>
   )
 }

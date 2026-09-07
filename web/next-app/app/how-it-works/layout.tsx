@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import BottomTabs from '../../components/BottomTabs'
 
 export const metadata: Metadata = {
   title: 'How Mathua Works \u00b7 Concept graph, scheduler, scoring',
@@ -7,10 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function HowItWorksLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <BottomTabs />
-    </>
-  )
+  return children
 }

@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Header from '../../components/Header'
-import BottomTabs from '../../components/BottomTabs'
-import Footer from '../../components/Footer'
 
 export const metadata: Metadata = {
   title: 'Documentation \u2014 Mathua',
@@ -22,7 +19,6 @@ export default function DocsIndexPage() {
 
   return (
     <>
-    <Header />
     <div className="max-w-[720px] mx-auto px-4 sm:px-6 py-12 sm:py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 overflow-x-hidden min-w-0">
       <Link href="/" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-muted)' }}>
         ← Back
@@ -166,8 +162,6 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080`}
         </p>
       </div>
     </div>
-    <Footer />
-    <BottomTabs />
     </>
   )
 }
