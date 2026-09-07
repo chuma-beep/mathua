@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
-import { signOut, flagHomeView } from '../lib/auth'
+import { signOut } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import { getSettings } from '../lib/api'
@@ -76,8 +76,7 @@ export default function Header({ links }: HeaderProps) {
       <div className="flex items-center justify-between px-4 md:px-6 py-3 max-w-container mx-auto">
         <div className="flex items-center gap-4 md:gap-6 min-w-0">
           <Link
-            href="/"
-            onClick={flagHomeView}
+            href={loggedIn ? '/profile' : '/'}
             className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
           >
             λ Mathua

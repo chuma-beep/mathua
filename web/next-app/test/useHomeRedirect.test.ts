@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook, waitFor } from '@testing-library/react'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
-import { flagHomeView } from '../lib/auth'
 
 const replaceMock = vi.fn()
 
@@ -21,14 +20,6 @@ describe('useHomeRedirect', () => {
     const { result } = renderHook(() => useHomeRedirect(true))
     await waitFor(() => expect(replaceMock).toHaveBeenCalledWith('/profile'))
     expect(result.current).toBe(false)
-  })
-
-  it('stays on landing after an explicit Home click (one-shot flag)', async () => {
-    localStorage.setItem('mathua_token', 't')
-    flagHomeView()
-    const { result } = renderHook(() => useHomeRedirect(true))
-    await waitFor(() => expect(result.current).toBe(true))
-    expect(replaceMock).not.toHaveBeenCalled()
   })
 
   it('leaves guests on the landing page', async () => {

@@ -13,7 +13,6 @@ import {
 } from 'lucide-react'
 import { useScrollDirection } from '../hooks/useScrollDirection'
 import { useAuthState } from '../hooks/useAuthState'
-import { flagHomeView } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import { getSettings } from '../lib/api'
 import Avatar from './Avatar'
@@ -75,7 +74,6 @@ export default function BottomTabs() {
           <Link
             key={t.href}
             href={t.href}
-            onClick={t.href === '/' ? flagHomeView : undefined}
             aria-label={t.label}
             className={`flex-1 flex flex-col items-center justify-center gap-0.5 font-mono border-t-[2px] min-h-[44px] transition-colors ${
               active ? 'border-mathua-blue text-mathua-blue' : 'border-transparent text-mathua-muted hover:text-mathua-primary'
