@@ -5,15 +5,9 @@ interface FooterProps {
 }
 
 const linkStyle: React.CSSProperties = {
-  color: 'inherit',
   textDecoration: 'none',
   fontFamily: "'IBM Plex Mono', monospace",
   fontSize: '12px',
-}
-
-const linkItemStyle: React.CSSProperties = {
-  ...linkStyle,
-  color: 'var(--text-muted)',
 }
 
 const linkContainerStyle: React.CSSProperties = {
@@ -44,11 +38,10 @@ export default function Footer({ className = '' }: FooterProps) {
       }}
     >
       <div style={linkContainerStyle}>
-        <span className="link-underline" style={linkItemStyle}>Web App</span>
         <a href="https://github.com/chuma-beep/mathua" className="link-underline" style={linkStyle}>GitHub</a>
         <Link href="/docs" className="link-underline" style={linkStyle}>Docs</Link>
         <Link href="/docs/contributing" className="link-underline" style={linkStyle}>Contributing</Link>
-        <span className="link-underline" style={linkItemStyle}>Roadmap</span>
+        <Link href="/note" className="link-underline" style={linkStyle}>Creator&apos;s Note</Link>
         <a href="https://www.dicebear.com" target="_blank" rel="noreferrer" className="link-underline" style={linkStyle}>Avatars by DiceBear</a>
       </div>
 
