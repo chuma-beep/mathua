@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 import BottomTabs from '../../components/BottomTabs'
 import AsciiDivider from '../../components/AsciiDivider'
 
@@ -191,7 +192,7 @@ export default function HowItWorksPage() {
 
   return (
     <>
-      <Header links={[{ label: 'Docs', href: '/docs' }]} />
+      <Header links={[{ label: 'Study', href: '/study' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }]} />
       <div className="min-h-screen w-full max-w-full min-w-0 overflow-x-hidden">
       <div className="flex max-w-[960px] mx-auto p-4 sm:p-[32px_24px] gap-4 sm:gap-10 max-md:flex-col max-md:pb-[calc(80px+env(safe-area-inset-bottom))] min-w-0">
         <NavSidebar activeSection={activeSection} />
@@ -591,6 +592,7 @@ for line in sys.stdin:
         </main>
       </div>
     </div>
+      <Footer />
       <BottomTabs />
     </>
   )

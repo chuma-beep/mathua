@@ -230,7 +230,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
+      <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       {/* ── Hero ── */}
       <section
@@ -468,7 +468,7 @@ export default function HomePage() {
         </div>
         <div className="flex justify-center mt-6">
           <a
-            href="https://github.com/chuma-beep/mathua/blob/main/CONTRIBUTING.md"
+            href="/docs/contributing"
             className="link-underline"
             style={{
               fontFamily: headingFont,
@@ -477,7 +477,7 @@ export default function HomePage() {
               color: 'var(--accent-blue)',
             }}
           >
-            Read CONTRIBUTING.md →
+            Read the contributing guide →
           </a>
         </div>
       </section>

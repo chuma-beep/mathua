@@ -154,6 +154,14 @@
   transform: scaleX(1);
 }
 
+footer .link-underline {
+  transition: color 0.2s ease;
+}
+
+footer .link-underline:hover {
+  color: var(--accent-blue);
+}
+
 .react-flow svg {
   display: unset;
 }
