@@ -40,6 +40,10 @@ vi.mock('../lib/api', () => ({
   startOAuthLogin: vi.fn(),
   OAUTH_LABELS: { google: 'Google', github: 'GitHub', facebook: 'Facebook', microsoft: 'Microsoft', apple: 'Apple' },
   getConfig: (...a: unknown[]) => getConfigMock(...a),
+  // BottomTabs (rendered by the page) pulls these via lib/dicebear.
+  getSettings: vi.fn(() => Promise.resolve({})),
+  updateSettings: vi.fn(() => Promise.resolve(undefined)),
+  avatarImageUrl: vi.fn(() => ''),
   API_BASE: '',
 }))
 
