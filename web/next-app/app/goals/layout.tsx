@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import BottomTabs from '../../components/BottomTabs'
 
 export const metadata: Metadata = {
   title: 'Goals \u00b7 Mathua',
@@ -7,10 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function GoalsLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <BottomTabs />
-    </>
-  )
+  return children
 }
