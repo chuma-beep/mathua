@@ -14,12 +14,12 @@ func TestCreateReport_Guest(t *testing.T) {
 	s.Register(mux)
 
 	body, _ := json.Marshal(map[string]string{
-		"concept_id": "a",
-		"kind":       "question",
-		"question":   "2+2=?",
-		"expected":   "4",
-		"reason":     "wrong_answer",
-		"detail":     "looks off",
+		"concept_id":  "a",
+		"kind":        "question",
+		"question":    "2+2=?",
+		"expected":    "4",
+		"reason":      "wrong_answer",
+		"detail":      "looks off",
 		"reporter_id": "guest_123",
 	})
 	rec := httptest.NewRecorder()

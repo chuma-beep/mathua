@@ -176,4 +176,28 @@ CREATE TABLE IF NOT EXISTS question_reports (
 
 CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
+
+-- Fix 6: durable server-side sessions (study anti-cheat expected answers,
+-- admin triage logins). Short-lived diag/quiz sessions stay in memory by
+-- design (capability UUIDs, 1h janitor; a restart just means a retake).
+CREATE TABLE IF NOT EXISTS server_sessions (
+    kind       TEXT NOT NULL,
+    key        TEXT NOT NULL,
+    value      TEXT NOT NULL DEFAULT '',
+    expires_at TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+    PRIMARY KEY (kind, key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_server_sessions_expiry ON server_sessions(expires_at);
+
+-- Fix 7: version tracking for one-time data backfills. DDL stays
+-- idempotent (IF NOT EXISTS); data fixes below run exactly once.
+-- NOTE: no UNIQUE constraints are added here on purpose — legacy username
+-- colliding groups (same lower form twice) still exist and are renamed
+-- manually; a UNIQUE would fail migration on real databases.
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    version    INTEGER PRIMARY KEY,
+    applied_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
 `

@@ -29,6 +29,10 @@ func NewSQLiteStore(path string) (*SQLiteStore, error) {
 	if _, err := db.Exec("PRAGMA busy_timeout=5000"); err != nil {
 		return nil, fmt.Errorf("set busy timeout: %w", err)
 	}
+	// Fix 7: single connection for SQLite. database/sql opens pools by
+	// default; concurrent writers then hit SQLITE_BUSY despite WAL. One
+	// conn serializes access — reads stay fast, writes never lock out.
+	db.SetMaxOpenConns(1)
 	store := &SQLiteStore{db: db}
 	if err := store.Migrate(); err != nil {
 		db.Close()
@@ -82,16 +86,43 @@ func authMigrate(db *sql.DB) error {
 			}
 		}
 	}
-	// Drift fix queued: daily goal 150 → 30 MA 20-40 (CONTEXT.md Quiz) — migrate existing defaults
-	_, _ = db.Exec("UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150")
-	// Username normalization: login looks up lower(trim(name)). Lowercase
-	// existing rows except colliding groups (same lower form twice), which
-	// are logged for manual rename instead of merged.
-	_, _ = db.Exec(`UPDATE students SET username = lower(username)
-		WHERE lower(username) NOT IN (
-			SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
-			GROUP BY lower(username) HAVING COUNT(*) > 1
-		)`)
+	// One-time data backfills (drift fixes), version-guarded:
+	// v1 daily goal 150 → 30 (MA 20-40); v2 username lowercasing except
+	// colliding groups (same lower form twice — manual rename, never merge).
+	// Fix 7: both run exactly once via schema_migrations, not every boot.
+	dataMigrations := map[int][]string{
+		1: {"UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150"},
+		2: {`UPDATE students SET username = lower(username)
+			WHERE lower(username) NOT IN (
+				SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
+				GROUP BY lower(username) HAVING COUNT(*) > 1
+			)`},
+	}
+	for v := 1; v <= len(dataMigrations); v++ {
+		if err := runOnceSQLite(db, v, dataMigrations[v]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// runOnceSQLite applies versioned data backfills exactly once. INSERT OR
+// IGNORE keeps concurrent first boots from failing on the version row.
+func runOnceSQLite(db *sql.DB, version int, stmts []string) error {
+	var one int
+	if err := db.QueryRow("SELECT 1 FROM schema_migrations WHERE version = ?", version).Scan(&one); err == nil {
+		return nil
+	} else if err != sql.ErrNoRows {
+		return fmt.Errorf("check schema migration %d: %w", version, err)
+	}
+	for _, stmt := range stmts {
+		if _, err := db.Exec(stmt); err != nil {
+			return fmt.Errorf("apply schema migration %d: %w", version, err)
+		}
+	}
+	if _, err := db.Exec("INSERT OR IGNORE INTO schema_migrations (version) VALUES (?)", version); err != nil {
+		return fmt.Errorf("record schema migration %d: %w", version, err)
+	}
 	return nil
 }
 
@@ -703,6 +734,59 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 	return nil
 }
 
+func (s *SQLiteStore) UpsertProgressBatch(ps []*ConceptProgress) error {
+	if len(ps) == 0 {
+		return nil
+	}
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin progress batch: %w", err)
+	}
+	stmt, err := tx.Prepare(`
+		INSERT INTO concept_progress
+			(student_id, concept_id, status, streak, best_streak,
+			 avg_response_time, attempts, last_attempted, last_reviewed,
+			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
+			 mastered_at, weakness_score)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		ON CONFLICT(student_id, concept_id) DO UPDATE SET
+			status            = excluded.status,
+			streak            = excluded.streak,
+			best_streak       = excluded.best_streak,
+			avg_response_time = excluded.avg_response_time,
+			attempts          = excluded.attempts,
+			last_attempted    = excluded.last_attempted,
+			last_reviewed     = excluded.last_reviewed,
+			next_review_due   = excluded.next_review_due,
+			sm2_repetitions   = excluded.sm2_repetitions,
+			sm2_interval      = excluded.sm2_interval,
+			sm2_efactor       = excluded.sm2_efactor,
+			mastered_at       = excluded.mastered_at,
+			weakness_score    = excluded.weakness_score
+	`)
+	if err != nil {
+		tx.Rollback()
+		return fmt.Errorf("prepare progress batch: %w", err)
+	}
+	defer stmt.Close()
+	for _, p := range ps {
+		if _, err := stmt.Exec(
+			p.StudentID, p.ConceptID, p.Status, p.Streak, p.BestStreak,
+			p.AvgResponseTime, p.Attempts,
+			nullTime(p.LastAttempted), nullTime(p.LastReviewed),
+			nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
+			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+		); err != nil {
+			tx.Rollback()
+			return fmt.Errorf("exec progress batch: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit progress batch: %w", err)
+	}
+	return nil
+}
+
 // Sessions
 
 func (s *SQLiteStore) CreateSession(studentID string) (*Session, error) {
@@ -734,6 +818,74 @@ func (s *SQLiteStore) GetSession(id string) (*Session, error) {
 		}
 	}
 	return &ses, nil
+}
+
+// ServerSessions is a durable KV for restart-proof server state.
+
+func (s *SQLiteStore) UpsertServerSession(kind, key, value, expiresAt string) error {
+	_, err := s.db.Exec(`
+		INSERT INTO server_sessions (kind, key, value, expires_at, updated_at)
+		VALUES (?, ?, ?, ?, datetime('now'))
+		ON CONFLICT(kind, key) DO UPDATE SET
+			value = excluded.value,
+			expires_at = excluded.expires_at,
+			updated_at = datetime('now')
+	`, kind, key, value, expiresAt)
+	if err != nil {
+		return fmt.Errorf("upsert server session: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) GetServerSession(kind, key string) (string, string, bool, error) {
+	row := s.db.QueryRow("SELECT value, expires_at FROM server_sessions WHERE kind = ? AND key = ?", kind, key)
+	var value, expiresAt string
+	if err := row.Scan(&value, &expiresAt); err != nil {
+		if err == sql.ErrNoRows {
+			return "", "", false, nil
+		}
+		return "", "", false, fmt.Errorf("get server session: %w", err)
+	}
+	return value, expiresAt, true, nil
+}
+
+func (s *SQLiteStore) DeleteServerSession(kind, key string) error {
+	if _, err := s.db.Exec("DELETE FROM server_sessions WHERE kind = ? AND key = ?", kind, key); err != nil {
+		return fmt.Errorf("delete server session: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) SweepServerSessions() error {
+	// expires_at is RFC3339 UTC written by callers — compare in Go, not SQL,
+	// so both dialects share one correct clock. Table stays tiny.
+	rows, err := s.db.Query("SELECT kind, key, expires_at FROM server_sessions WHERE expires_at != ''")
+	if err != nil {
+		return fmt.Errorf("sweep server sessions: %w", err)
+	}
+	defer rows.Close()
+	type entry struct{ kind, key string }
+	var expired []entry
+	now := time.Now().UTC()
+	for rows.Next() {
+		var k, key, exp string
+		if err := rows.Scan(&k, &key, &exp); err != nil {
+			return fmt.Errorf("scan server sessions: %w", err)
+		}
+		if t, err := time.Parse(time.RFC3339, exp); err == nil && !t.After(now) {
+			expired = append(expired, entry{k, key})
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return fmt.Errorf("sweep server sessions: %w", err)
+	}
+	rows.Close()
+	for _, e := range expired {
+		if _, err := s.db.Exec("DELETE FROM server_sessions WHERE kind = ? AND key = ?", e.kind, e.key); err != nil {
+			return fmt.Errorf("sweep server sessions: %w", err)
+		}
+	}
+	return nil
 }
 
 func (s *SQLiteStore) GetActiveSession(sessionID string) (*ActiveSession, error) {
@@ -998,14 +1150,15 @@ func (s *SQLiteStore) ImportQuestions(qs []Question) error {
 
 func (s *SQLiteStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	monday := weekStart(time.Now().UTC())
+	// Single scan: aggregate per student in one GROUP BY instead of two
+	// correlated COUNT subqueries per row.
 	rows, err := s.db.Query(`
 		SELECT s.id, s.name, s.username, s.avatar_url, s.settings,
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'
-			          AND mastered_at >= ?), 0)
+			COUNT(CASE WHEN cp.status = 'MASTERED' THEN 1 END),
+			COUNT(CASE WHEN cp.status = 'MASTERED' AND cp.mastered_at >= ? THEN 1 END)
 		FROM students s
+		LEFT JOIN concept_progress cp ON cp.student_id = s.id
+		GROUP BY s.id, s.name, s.username, s.avatar_url, s.settings
 		ORDER BY 7 DESC, 6 DESC
 	`, monday.Format(time.RFC3339))
 	if err != nil {
@@ -1034,12 +1187,11 @@ func (s *SQLiteStore) GetLeagueStandings() ([]LeagueMember, error) {
 	monday := weekStart(time.Now().UTC())
 	rows, err := s.db.Query(`
 		SELECT s.id, s.name, s.username, s.avatar_url, s.settings, COALESCE(s.league, 'bronze'), s.league_moved,
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'
-			          AND mastered_at >= ?), 0)
+			COUNT(CASE WHEN cp.status = 'MASTERED' THEN 1 END),
+			COUNT(CASE WHEN cp.status = 'MASTERED' AND cp.mastered_at >= ? THEN 1 END)
 		FROM students s
+		LEFT JOIN concept_progress cp ON cp.student_id = s.id
+		GROUP BY s.id, s.name, s.username, s.avatar_url, s.settings, s.league, s.league_moved
 	`, monday.Format(time.RFC3339))
 	if err != nil {
 		return nil, fmt.Errorf("get league standings: %w", err)

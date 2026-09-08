@@ -129,36 +129,39 @@ func cors(next http.HandlerFunc) http.HandlerFunc {
 }
 
 type Server struct {
-	eng           *engine.Engine
-	repo          storage.Repository
-	auth          *auth.AuthService
-	diagSessions  map[string]*diagnostic.Session
-	diagCreated   map[string]time.Time
-	quizSessions  map[string]*quiz.Session
-	quizCreated   map[string]time.Time
-	adminSessions map[string]time.Time // admin session token → expiry
-	mu            sync.Mutex
-	authLimiter   *rateLimiter
-	writeLimiter  *rateLimiter
-	shareLimiter  *rateLimiter
+	eng          *engine.Engine
+	repo         storage.Repository
+	auth         *auth.AuthService
+	diagSessions map[string]*diagnostic.Session
+	diagCreated  map[string]time.Time
+	quizSessions map[string]*quiz.Session
+	quizCreated  map[string]time.Time
+	// Admin triage sessions live in server_sessions (kind "admin"), not in
+	// memory: logins survive restarts and work behind a second replica.
+	// Diag/quiz sessions stay in memory by design (Fix 6): short-lived
+	// capability UUIDs swept hourly; a restart just means a retake.
+	mu           sync.Mutex
+	authLimiter  *rateLimiter
+	writeLimiter *rateLimiter
+	shareLimiter *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
 	checkAdminPasswordConfig()
 	s := &Server{
-		eng:           eng,
-		repo:          repo,
-		auth:          auth,
-		diagSessions:  make(map[string]*diagnostic.Session),
-		diagCreated:   make(map[string]time.Time),
-		quizSessions:  make(map[string]*quiz.Session),
-		quizCreated:   make(map[string]time.Time),
-		adminSessions: make(map[string]time.Time),
-		authLimiter:   newRateLimiter(5, 10, time.Minute),
-		writeLimiter:  newRateLimiter(20, 20, 3*time.Second),
-		shareLimiter:  newRateLimiter(10, 10, 6*time.Second),
+		eng:          eng,
+		repo:         repo,
+		auth:         auth,
+		diagSessions: make(map[string]*diagnostic.Session),
+		diagCreated:  make(map[string]time.Time),
+		quizSessions: make(map[string]*quiz.Session),
+		quizCreated:  make(map[string]time.Time),
+		authLimiter:  newRateLimiter(5, 10, time.Minute),
+		writeLimiter: newRateLimiter(20, 20, 3*time.Second),
+		shareLimiter: newRateLimiter(10, 10, 6*time.Second),
 	}
-	// Clean up abandoned diagnostic/quiz sessions older than 1 hour
+	// Clean up abandoned diagnostic/quiz sessions older than 1 hour, plus
+	// expired durable server_sessions rows (admin logins, study anchors).
 	go func() {
 		for {
 			time.Sleep(10 * time.Minute)
@@ -176,12 +179,10 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 					delete(s.quizCreated, id)
 				}
 			}
-			for token, exp := range s.adminSessions {
-				if exp.Before(time.Now()) {
-					delete(s.adminSessions, token)
-				}
-			}
 			s.mu.Unlock()
+			if err := s.repo.SweepServerSessions(); err != nil {
+				log.Printf("warning: sweep server sessions: %v", err)
+			}
 		}
 	}()
 	return s

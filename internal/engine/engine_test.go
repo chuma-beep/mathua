@@ -578,7 +578,8 @@ func TestEngine_AggregateEfficacy(t *testing.T) {
 	}
 }
 
-func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {	e := testEngine(t)
+func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
+	e := testEngine(t)
 	st, _ := e.CreateStudent("quizzer")
 	before, _, err := e.repo.GetXP(st.ID)
 	if err != nil {
@@ -622,5 +623,20 @@ func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
 	// No garbage progress row persisted.
 	if p, _ := e.GetProgress(st.ID); len(p) != 0 {
 		t.Errorf("expected no progress rows for unknown concept, got %v", p)
+	}
+}
+
+func TestEngine_StudyExpected_SurvivesRestart(t *testing.T) {
+	e1 := testEngine(t)
+	// Reach into the shared :memory: store via a second engine instance.
+	e1.SetStudyExpected("stu1", "a", "42")
+	// Simulated restart: fresh engine, empty memory map, same store.
+	e2 := New(e1.repo, e1.dag, e1.registry, nil, nil)
+	if v, ok := e2.popStudyExpected("stu1", "a"); !ok || v != "42" {
+		t.Fatalf("expected durable expected=42, got %q ok=%v", v, ok)
+	}
+	// Single-use: second pop misses everywhere.
+	if _, ok := e2.popStudyExpected("stu1", "a"); ok {
+		t.Error("expected consumed anchor to miss on second pop")
 	}
 }

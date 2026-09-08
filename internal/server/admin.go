@@ -15,12 +15,14 @@ import (
 // ADMIN_PASSWORD env var (same trust model as JWT_SECRET — whoever controls
 // the deployment environment sets it; there is no in-app bootstrap and no
 // super-admin role). Successful login mints a random 24h session token kept
-// in memory (same tradeoff as diagnostic/quiz sessions).
+// in server_sessions (durable across restarts/replicas).
 // Legacy ADMIN_TOKEN is still accepted by adminAuthorized as a fallback.
 
 const (
 	adminSessionTTL        = 24 * time.Hour
 	adminPasswordMinLength = 12
+	// serverSessionAdmin is the server_sessions kind for triage logins.
+	serverSessionAdmin = "admin"
 )
 
 func adminPassword() string {
@@ -44,19 +46,22 @@ func newAdminSessionToken() (string, error) {
 }
 
 // validAdminSession reports whether token is a live admin session.
-// Expired entries are lazily evicted (the New() janitor also sweeps them).
+// Sessions are durable (server_sessions kind "admin"): they survive
+// restarts and work across replicas. Expired rows read as missing and are
+// deleted opportunistically; the New() janitor sweeps the rest.
 func (s *Server) validAdminSession(token string) bool {
 	if token == "" {
 		return false
 	}
-	s.mu.Lock()
-	defer s.mu.Unlock()
-	exp, ok := s.adminSessions[token]
-	if !ok {
+	_, exp, found, err := s.repo.GetServerSession(serverSessionAdmin, token)
+	if err != nil || !found {
 		return false
 	}
-	if time.Now().After(exp) {
-		delete(s.adminSessions, token)
+	if exp == "" {
+		return true
+	}
+	if t, err := time.Parse(time.RFC3339, exp); err != nil || !t.After(time.Now().UTC()) {
+		_ = s.repo.DeleteServerSession(serverSessionAdmin, token)
 		return false
 	}
 	return true
@@ -91,9 +96,10 @@ func (s *Server) handleAdminLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	exp := time.Now().Add(adminSessionTTL)
-	s.mu.Lock()
-	s.adminSessions[token] = exp
-	s.mu.Unlock()
+	if err := s.repo.UpsertServerSession(serverSessionAdmin, token, "", exp.UTC().Format(time.RFC3339)); err != nil {
+		writeError(w, "failed to create session", 500)
+		return
+	}
 	writeJSON(w, map[string]interface{}{
 		"token":      token,
 		"expires_at": exp.UTC().Format(time.RFC3339),
@@ -109,9 +115,7 @@ func (s *Server) handleAdminLogout(w http.ResponseWriter, r *http.Request) {
 	}
 	token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
 	if token != "" {
-		s.mu.Lock()
-		delete(s.adminSessions, token)
-		s.mu.Unlock()
+		_ = s.repo.DeleteServerSession(serverSessionAdmin, token)
 	}
 	writeJSON(w, map[string]bool{"ok": true})
 }

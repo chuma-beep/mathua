@@ -228,9 +228,19 @@ type Repository interface {
 	GetProgress(studentID, conceptID string) (*ConceptProgress, error)
 	GetAllProgress(studentID string) (map[string]*ConceptProgress, error)
 	UpsertProgress(p *ConceptProgress) error
+	// UpsertProgressBatch persists many rows in one transaction — the
+	// N+1 antidote for PropagateWeakness and ApplyGoalResults.
+	UpsertProgressBatch(ps []*ConceptProgress) error
 
 	CreateSession(studentID string) (*Session, error)
 	GetSession(id string) (*Session, error)
+	// ServerSessions is a durable KV for restart-proof server state
+	// (study anti-cheat expected answers, admin logins). Values carry an
+	// RFC3339 expires_at; readers treat expired rows as missing.
+	UpsertServerSession(kind, key, value, expiresAt string) error
+	GetServerSession(kind, key string) (value, expiresAt string, found bool, err error)
+	DeleteServerSession(kind, key string) error
+	SweepServerSessions() error
 	GetActiveSession(sessionID string) (*ActiveSession, error)
 	UpsertActiveSession(a *ActiveSession) error
 	DeleteActiveSession(sessionID string) error

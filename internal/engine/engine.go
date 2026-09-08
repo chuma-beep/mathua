@@ -17,12 +17,12 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/leaderboard"
+	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/scheduler"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
-	"github.com/chuma-beep/mathua/internal/lessons"
-	"github.com/chuma-beep/mathua/internal/planning"
 )
 
 type activeSession struct {
@@ -41,11 +41,11 @@ type activeSession struct {
 	lastConceptID  string
 	recentConcepts []string
 	// PR 1.5 halt/re-attempt + negative XP
-	consecutiveMisses int
-	halted            bool
-	remedialQueue     []string
+	consecutiveMisses  int
+	halted             bool
+	remedialQueue      []string
 	remedialDifficulty float64
-	rushCount         int
+	rushCount          int
 }
 
 // ErrNoActiveQuestion is returned when a session has no unanswered question
@@ -56,6 +56,25 @@ var ErrNoActiveQuestion = fmt.Errorf("no active question")
 // from the DAG. Rejecting (instead of persisting a fallback progress row)
 // keeps garbage IDs from farming XP and polluting progress/attempt tables.
 var ErrUnknownConcept = fmt.Errorf("unknown concept")
+
+const (
+	// serverSessionStudyExpected is the server_sessions kind for H1b
+	// anti-cheat anchors. studyExpectedTTL bounds the durable row: a
+	// practice question answered within a day is normal; older rows are
+	// stale and treated as missing.
+	serverSessionStudyExpected = "study_expected"
+	studyExpectedTTL           = 24 * time.Hour
+)
+
+// isFutureRFC3339 reports whether exp (RFC3339 UTC) is still in the future.
+// Unparseable timestamps are treated as expired (fail closed).
+func isFutureRFC3339(exp string) bool {
+	t, err := time.Parse(time.RFC3339, exp)
+	if err != nil {
+		return false
+	}
+	return t.After(time.Now().UTC())
+}
 
 type Question struct {
 	ConceptID   string          `json:"concept_id"`
@@ -106,17 +125,17 @@ type Engine struct {
 
 func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner) *Engine {
 	return &Engine{
-		dag:        dag,
-		repo:       repo,
-		sched:      scheduler.New(dag),
-		registry:   reg,
-		gr:         grader.NewRouter(),
-		machine:    &mastery.Machine{},
-		scorer:     scoring.NewUpdater(dag, repo),
-		lboard:     leaderboard.NewComputer(repo),
-		diag:       diagnostic.NewEngine(dag, reg),
-		ll:         ll,
-		planner:    planner,
+		dag:           dag,
+		repo:          repo,
+		sched:         scheduler.New(dag),
+		registry:      reg,
+		gr:            grader.NewRouter(),
+		machine:       &mastery.Machine{},
+		scorer:        scoring.NewUpdater(dag, repo),
+		lboard:        leaderboard.NewComputer(repo),
+		diag:          diagnostic.NewEngine(dag, reg),
+		ll:            ll,
+		planner:       planner,
 		sessions:      make(map[string]*activeSession),
 		activePath:    make(map[string]map[string]bool),
 		studyMisses:   make(map[string]int),
@@ -126,23 +145,51 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 }
 
 func (e *Engine) SetStudyExpected(studentID, conceptID, expected string) {
+	key := studentID + "|" + conceptID
 	e.mu.Lock()
-	defer e.mu.Unlock()
 	if e.studyExpected == nil {
 		e.studyExpected = make(map[string]string)
 	}
-	e.studyExpected[studentID+"|"+conceptID] = expected
+	e.studyExpected[key] = expected
+	e.mu.Unlock()
+	// Write-through to durable storage so a restart doesn't silently drop
+	// the H1b anti-cheat anchor (Fix 6). Best-effort: memory is the fast
+	// path, the row is the fallback.
+	if e.repo != nil {
+		exp := time.Now().UTC().Add(studyExpectedTTL).Format(time.RFC3339)
+		if err := e.repo.UpsertServerSession(serverSessionStudyExpected, key, expected, exp); err != nil {
+			log.Printf("warning: persist study expected %s: %v", key, err)
+		}
+	}
 }
 
 func (e *Engine) popStudyExpected(studentID, conceptID string) (string, bool) {
-	e.mu.Lock()
-	defer e.mu.Unlock()
 	key := studentID + "|" + conceptID
+	e.mu.Lock()
 	val, ok := e.studyExpected[key]
 	if ok {
 		delete(e.studyExpected, key)
 	}
-	return val, ok
+	e.mu.Unlock()
+	if ok {
+		if e.repo != nil {
+			_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
+		}
+		return val, true
+	}
+	// Restart fallback: answer against the durable row, then consume it.
+	if e.repo != nil {
+		if v, exp, found, err := e.repo.GetServerSession(serverSessionStudyExpected, key); err == nil && found {
+			if exp == "" || isFutureRFC3339(exp) {
+				_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
+				return v, true
+			}
+			_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
+		} else if err != nil {
+			log.Printf("warning: read study expected %s: %v", key, err)
+		}
+	}
+	return "", false
 }
 
 func (e *Engine) CreateStudent(name string) (*storage.Student, error) {
@@ -230,8 +277,15 @@ func (e *Engine) ActivePath(studentID string) map[string]bool {
 // computeDifficulty returns a difficulty score (0.3–1.0) based on the student's
 // performance for the given concept. Weak/struggling students get easier questions.
 func (e *Engine) computeDifficulty(studentID, conceptID string) float64 {
+	return difficultyFromWeakness(e.WeaknessMap(studentID), conceptID)
+}
+
+// difficultyFromWeakness is the scan-free core of computeDifficulty: callers
+// that already hold a weakness map (built from a single progress fetch) use
+// this instead of triggering another DB round trip.
+func difficultyFromWeakness(m map[string]float64, conceptID string) float64 {
 	weakness := 0.5
-	if m := e.WeaknessMap(studentID); m != nil {
+	if m != nil {
 		if w, ok := m[conceptID]; ok {
 			weakness = w
 		}
@@ -383,12 +437,15 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 			recent = recent[:2]
 		}
 	}
-	cands := e.sched.NextSmart(snapshots, recent, as.sessionReview, as.sessionNew, e.WeaknessMap(studentID))
+	// Single progress fetch threads through scheduler + difficulty: no
+	// extra DB scans on the hot path.
+	weakness := e.weaknessMapFromProgress(progress)
+	cands := e.sched.NextSmart(snapshots, recent, as.sessionReview, as.sessionNew, weakness)
 	if len(cands) == 0 {
 		return nil, nil
 	}
 	next := cands[0]
-	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
+	difficulty := difficultyFromWeakness(weakness, next.Concept.ID)
 	prevQuestion := as.questionText
 	attemptID := newAttemptID()
 	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID)
@@ -477,7 +534,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	if next == nil {
 		return nil, nil
 	}
-	difficulty := e.computeDifficulty(studentID, next.Concept.ID)
+	difficulty := difficultyFromWeakness(e.weaknessMapFromProgress(progress), next.Concept.ID)
 	prevQuestion := as.questionText
 	attemptID := newAttemptID()
 	seedBase := hashSeed(studentID + "|" + next.Concept.ID + "|" + attemptID)
@@ -524,32 +581,32 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 
 var conceptDiagrams = map[string]string{
 	// Integrals (dual-coding worked examples, improve.md:39)
-	"calc.integral.definite":           "/diagrams/algebrica/definite-integrals-1.svg",
-	"calc.integral.ftc":                "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
-	"calc.integral.area_between":       "/diagrams/algebrica/finding-areas-by-integration-1.svg",
-	"calc.integral.volume":             "/diagrams/algebrica/finding-areas-by-integration-2.svg",
-	"calc.integral.improper":           "/diagrams/algebrica/improper-integrals-1.svg",
-	"calc.integral.numerical":          "/diagrams/algebrica/improper-integrals-2.svg",
-	"calc.integral.riemann_criteria":   "/diagrams/algebrica/riemann-integrability-criteria-2.svg",
-	"calc.integral.arc_length":         "/diagrams/algebrica/arc-length-of-a-curve-1.svg",
-	"calc.integral.trig_substitution":  "/diagrams/algebrica/trigonometric-substitution-for-integrals-1.svg",
+	"calc.integral.definite":          "/diagrams/algebrica/definite-integrals-1.svg",
+	"calc.integral.ftc":               "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg",
+	"calc.integral.area_between":      "/diagrams/algebrica/finding-areas-by-integration-1.svg",
+	"calc.integral.volume":            "/diagrams/algebrica/finding-areas-by-integration-2.svg",
+	"calc.integral.improper":          "/diagrams/algebrica/improper-integrals-1.svg",
+	"calc.integral.numerical":         "/diagrams/algebrica/improper-integrals-2.svg",
+	"calc.integral.riemann_criteria":  "/diagrams/algebrica/riemann-integrability-criteria-2.svg",
+	"calc.integral.arc_length":        "/diagrams/algebrica/arc-length-of-a-curve-1.svg",
+	"calc.integral.trig_substitution": "/diagrams/algebrica/trigonometric-substitution-for-integrals-1.svg",
 
 	// Limits
 	"calc.limit.continuity": "/diagrams/algebrica/riemann-integrability-criteria-1.svg",
 	"calc.limit.supremum":   "/diagrams/algebrica/supremum-and-infimum-1.svg",
 
 	// Equations / quadratics
-	"alg.quad.solve_factor":   "/diagrams/algebrica/quadratic-equations.svg",
-	"alg.quad.formula":        "/diagrams/algebrica/quadratic-equations.svg",
-	"alg.quad.quadratic":      "/diagrams/algebrica/quadratic-equations.svg",
-	"alg.quad.incomplete":     "/diagrams/algebrica/incomplete-quadratic-equations.svg",
+	"alg.quad.solve_factor":    "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.formula":         "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.quadratic":       "/diagrams/algebrica/quadratic-equations.svg",
+	"alg.quad.incomplete":      "/diagrams/algebrica/incomplete-quadratic-equations.svg",
 	"alg.quad.complete_square": "/diagrams/algebrica/completing-square.svg",
 
 	// Linear / polynomials
-	"alg.linear.graph":            "/diagrams/algebrica/linear-equation-graph.svg",
-	"alg.linear.slope":            "/diagrams/algebrica/linear-equation-graph.svg",
-	"alg.linear.slope_intercept":  "/diagrams/algebrica/linear-equation-graph.svg",
-	"alg.poly.roots":              "/diagrams/algebrica/polynomial-roots-graph.svg",
+	"alg.linear.graph":           "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.linear.slope":           "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.linear.slope_intercept": "/diagrams/algebrica/linear-equation-graph.svg",
+	"alg.poly.roots":             "/diagrams/algebrica/polynomial-roots-graph.svg",
 
 	// Number lines / sets
 	"arith.neg.abs_value":     "/diagrams/algebrica/number-line-absolute-value.svg",
@@ -563,14 +620,14 @@ var conceptDiagrams = map[string]string{
 	"complex.adv.polar":      "/diagrams/algebrica/complex-plane.svg",
 
 	// Trigonometry
-	"trig.hyperbolic.sinh_cosh": "/diagrams/algebrica/hyperbolic-functions.svg",
-	"trig.hyperbolic.tanh_coth": "/diagrams/algebrica/hyperbolic-functions.svg",
-	"trig.adv.inverse":          "/diagrams/algebrica/inverse-trig-graphs.svg",
-	"trig.adv.arctan":           "/diagrams/algebrica/inverse-trig-graphs.svg",
-	"trig.adv.law_cosines":      "/diagrams/algebrica/law-of-cosines.svg",
-	"trig.adv.law_sines":        "/diagrams/algebrica/law-of-sines.svg",
-	"geo.triangle.pythagorean":     "/diagrams/algebrica/pythagorean-theorem.svg",
-	"trig.ident.pythagorean":       "/diagrams/algebrica/pythagorean-theorem.svg",
+	"trig.hyperbolic.sinh_cosh":   "/diagrams/algebrica/hyperbolic-functions.svg",
+	"trig.hyperbolic.tanh_coth":   "/diagrams/algebrica/hyperbolic-functions.svg",
+	"trig.adv.inverse":            "/diagrams/algebrica/inverse-trig-graphs.svg",
+	"trig.adv.arctan":             "/diagrams/algebrica/inverse-trig-graphs.svg",
+	"trig.adv.law_cosines":        "/diagrams/algebrica/law-of-cosines.svg",
+	"trig.adv.law_sines":          "/diagrams/algebrica/law-of-sines.svg",
+	"geo.triangle.pythagorean":    "/diagrams/algebrica/pythagorean-theorem.svg",
+	"trig.ident.pythagorean":      "/diagrams/algebrica/pythagorean-theorem.svg",
 	"trig.basics.reference_angle": "/diagrams/algebrica/reference-angles.svg",
 	"trig.basics.right_triangle":  "/diagrams/algebrica/right-triangle-trig.svg",
 	"trig.basics.sin_cos_def":     "/diagrams/algebrica/right-triangle-unit-circle.svg",
@@ -584,7 +641,7 @@ var conceptDiagrams = map[string]string{
 	"trig.graph.period":           "/diagrams/algebrica/sine-cosine-graph.svg",
 
 	// Combinatorics
-	"discrete.combinatorics.pascal":          "/diagrams/algebrica/pascals-triangle.svg",
+	"discrete.combinatorics.pascal":           "/diagrams/algebrica/pascals-triangle.svg",
 	"discrete.combinatorics.binomial_theorem": "/diagrams/algebrica/pascals-triangle.svg",
 	"precalc.binomial_theorem":                "/diagrams/algebrica/pascals-triangle.svg",
 
@@ -617,32 +674,32 @@ var conceptDiagrams = map[string]string{
 	"trig.eq.basic":           "/diagrams/algebrica/trigonometric-equations-1.png",
 
 	// Calculus (G3)
-	"calc.limit.asymptotes":          "/diagrams/algebrica/asymptotes-1.png",
-	"calc.limit.squeeze":             "/diagrams/algebrica/squeeze-theorem.png",
-	"calc.limit.uniform_continuity":  "/diagrams/algebrica/uniform-continuity-1.png",
-	"calc.limit.big_o":               "/diagrams/algebrica/big-o-notation-1.png",
-	"calc.limit.weierstrass":         "/diagrams/algebrica/weierstrass-theorem-1.png",
-	"calc.deriv.difference_quotient": "/diagrams/algebrica/difference-quotient-2.png",
-	"calc.deriv.partial":             "/diagrams/algebrica/partial-derivatives-1.png",
+	"calc.limit.asymptotes":            "/diagrams/algebrica/asymptotes-1.png",
+	"calc.limit.squeeze":               "/diagrams/algebrica/squeeze-theorem.png",
+	"calc.limit.uniform_continuity":    "/diagrams/algebrica/uniform-continuity-1.png",
+	"calc.limit.big_o":                 "/diagrams/algebrica/big-o-notation-1.png",
+	"calc.limit.weierstrass":           "/diagrams/algebrica/weierstrass-theorem-1.png",
+	"calc.deriv.difference_quotient":   "/diagrams/algebrica/difference-quotient-2.png",
+	"calc.deriv.partial":               "/diagrams/algebrica/partial-derivatives-1.png",
 	"calc.deriv.non_differentiability": "/diagrams/algebrica/non-differentiable-points-1.png",
-	"calc.deriv.convexity":           "/diagrams/algebrica/convexity-1-1.png",
-	"calc.deriv.rolle":               "/diagrams/algebrica/rolle-theorem-1-1.png",
-	"calc.deriv.applications":        "/diagrams/algebrica/velocity-1-1.png",
-	"calc.seq.convergence":           "/diagrams/algebrica/sequences-conv-1.png",
-	"calc.seq.cauchy":                "/diagrams/algebrica/cauchy-sequence-1.png",
-	"calc.series.harmonic":           "/diagrams/algebrica/harmonic-series-1-2.png",
-	"calc.series.function_series":    "/diagrams/algebrica/sequence-functions-1.png",
-	"calc.series.cauchy_criterion":   "/diagrams/algebrica/series-cauchy-1.png",
+	"calc.deriv.convexity":             "/diagrams/algebrica/convexity-1-1.png",
+	"calc.deriv.rolle":                 "/diagrams/algebrica/rolle-theorem-1-1.png",
+	"calc.deriv.applications":          "/diagrams/algebrica/velocity-1-1.png",
+	"calc.seq.convergence":             "/diagrams/algebrica/sequences-conv-1.png",
+	"calc.seq.cauchy":                  "/diagrams/algebrica/cauchy-sequence-1.png",
+	"calc.series.harmonic":             "/diagrams/algebrica/harmonic-series-1-2.png",
+	"calc.series.function_series":      "/diagrams/algebrica/sequence-functions-1.png",
+	"calc.series.cauchy_criterion":     "/diagrams/algebrica/series-cauchy-1.png",
 
 	// Stats / vectors / misc (G3)
-	"stat.dist.student_t":     "/diagrams/algebrica/student-t-distribution.png",
-	"stat.dist.uniform":       "/diagrams/algebrica/uniform-distribution.png",
-	"stat.dist.beta":          "/diagrams/algebrica/beta-distribution-1.png",
-	"stat.dist.gamma":         "/diagrams/algebrica/gamma-distribution.png",
-	"stat.dist.exponential":   "/diagrams/algebrica/exponential-distribution-1.png",
-	"stat.dist.chi_square":    "/diagrams/algebrica/chi-squared-distribution.png",
-	"stat.infer.confidence":   "/diagrams/algebrica/confidence-intervals.png",
-	"stat.prob.continuous_rv": "/diagrams/algebrica/continuous-random-vars-1.png",
+	"stat.dist.student_t":             "/diagrams/algebrica/student-t-distribution.png",
+	"stat.dist.uniform":               "/diagrams/algebrica/uniform-distribution.png",
+	"stat.dist.beta":                  "/diagrams/algebrica/beta-distribution-1.png",
+	"stat.dist.gamma":                 "/diagrams/algebrica/gamma-distribution.png",
+	"stat.dist.exponential":           "/diagrams/algebrica/exponential-distribution-1.png",
+	"stat.dist.chi_square":            "/diagrams/algebrica/chi-squared-distribution.png",
+	"stat.infer.confidence":           "/diagrams/algebrica/confidence-intervals.png",
+	"stat.prob.continuous_rv":         "/diagrams/algebrica/continuous-random-vars-1.png",
 	"linalg.vector.cosine_similarity": "/diagrams/algebrica/cosine-similarity.png",
 	"linalg.vector.parametric":        "/diagrams/algebrica/vector-equation-line-1.png",
 	"ml.backpropagation":              "/diagrams/algebrica/neural-network.png",
@@ -1254,8 +1311,8 @@ func (e *Engine) GetLeagues() (*leaderboard.LeagueBoard, error) {
 // EfficacyReport is the instrumentation summary (improve.md:82).
 type EfficacyReport struct {
 	ConceptsTouched       int     `json:"concepts_touched"`
-	FirstPassRate         float64 `json:"first_pass_rate"`    // correct on attempt 1
-	SecondPassRate        float64 `json:"second_pass_rate"`   // correct within first 2 attempts
+	FirstPassRate         float64 `json:"first_pass_rate"`  // correct on attempt 1
+	SecondPassRate        float64 `json:"second_pass_rate"` // correct within first 2 attempts
 	AvgAttemptsPerConcept float64 `json:"avg_attempts_per_concept"`
 	TotalAttempts         int     `json:"total_attempts"`
 	StudentsTracked       int     `json:"students_tracked,omitempty"`
@@ -1329,12 +1386,12 @@ func computeEfficacy(attempts []storage.AttemptEntry) *EfficacyReport {
 
 // ShareReport is the read-only parent/teacher view of a student.
 type ShareReport struct {
-	StudentID string                          `json:"student_id"`
-	Name      string                          `json:"name"`
-	Scores    *scoring.Scores                 `json:"scores"`
-	Activity  []storage.DailyActivity         `json:"activity"`
+	StudentID string                              `json:"student_id"`
+	Name      string                              `json:"name"`
+	Scores    *scoring.Scores                     `json:"scores"`
+	Activity  []storage.DailyActivity             `json:"activity"`
 	Progress  map[string]*storage.ConceptProgress `json:"progress"`
-	Weakness  map[string]float64              `json:"weakness"`
+	Weakness  map[string]float64                  `json:"weakness"`
 }
 
 // EnableShare mints a read-only share token for the student.
@@ -1373,7 +1430,7 @@ func (e *Engine) GetShareReport(token string) (*ShareReport, error) {
 	if err != nil {
 		progress = map[string]*storage.ConceptProgress{}
 	}
-	weakAll := e.WeaknessMap(st.ID)
+	weakAll := e.weaknessMapFromProgress(progress)
 	filteredWeak := make(map[string]float64)
 	for id, w := range weakAll {
 		if _, ok := progress[id]; !ok {
@@ -1463,6 +1520,7 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 	attempts := make([]diagnostic.Attempt, len(session.Attempts))
 	copy(attempts, session.Attempts)
 	session.Unlock()
+	batch := make([]*storage.ConceptProgress, 0, len(attempts))
 	for _, att := range attempts {
 		status := string(mastery.StatusUnseen)
 		weakness := 1.0
@@ -1475,15 +1533,15 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 		} else {
 			weakness = 0.8
 		}
-		prog := &storage.ConceptProgress{
+		batch = append(batch, &storage.ConceptProgress{
 			StudentID:     studentID,
 			ConceptID:     att.ConceptID,
 			Status:        status,
 			WeaknessScore: weakness,
-		}
-		if err := e.repo.UpsertProgress(prog); err != nil {
-			return fmt.Errorf("save diagnostic progress: %w", err)
-		}
+		})
+	}
+	if err := e.repo.UpsertProgressBatch(batch); err != nil {
+		return fmt.Errorf("save diagnostic progress: %w", err)
 	}
 	// Set active path to the diagnostic's concept set for focused practice
 	if len(session.Attempts) > 0 {
@@ -1503,6 +1561,14 @@ func (e *Engine) WeaknessMap(studentID string) map[string]float64 {
 	if err != nil {
 		return nil
 	}
+	return e.weaknessMapFromProgress(progress)
+}
+
+// weaknessMapFromProgress builds the weakness map from an already-fetched
+// progress snapshot. Hot paths (NextQuestion, reviews, practice, share
+// reports) fetch progress once and thread it through here instead of
+// re-scanning the table per derivation.
+func (e *Engine) weaknessMapFromProgress(progress map[string]*storage.ConceptProgress) map[string]float64 {
 	result := make(map[string]float64)
 	for _, c := range e.dag.Order() {
 		p, ok := progress[c.ID]
@@ -1538,7 +1604,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 		}
 	}
 
-	difficulty := e.computeDifficulty(studentID, conceptID)
+	difficulty := difficultyFromWeakness(e.weaknessMapFromProgress(progress), conceptID)
 	attemptID := newAttemptID()
 	seedBase := hashSeed(studentID + "|" + conceptID + "|" + attemptID)
 	ctx := generator.GeneratorContext{Difficulty: difficulty, Seed: seedBase}
@@ -1588,12 +1654,12 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 }
 
 type ConceptTreeNode struct {
-	ID           string  `json:"id"`
-	Label        string  `json:"label"`
-	Unlocked     bool    `json:"unlocked"`
-	MasteryPct   float64 `json:"mastery_pct"`
-	Streak       int     `json:"streak"`
-	Status       string  `json:"status"`
+	ID         string  `json:"id"`
+	Label      string  `json:"label"`
+	Unlocked   bool    `json:"unlocked"`
+	MasteryPct float64 `json:"mastery_pct"`
+	Streak     int     `json:"streak"`
+	Status     string  `json:"status"`
 }
 
 type SubdomainNode struct {
@@ -1672,7 +1738,11 @@ func (e *Engine) ConceptTree(studentID string) []DomainNode {
 }
 
 func (e *Engine) PropagateWeakness(studentID string) {
-	weakness := e.WeaknessMap(studentID)
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return
+	}
+	weakness := e.weaknessMapFromProgress(progress)
 	type update struct {
 		cid string
 		w   float64
@@ -1687,19 +1757,29 @@ func (e *Engine) PropagateWeakness(studentID string) {
 			}
 		}
 	}
+	if len(updates) == 0 {
+		return
+	}
+	// One batched write from the single fetched snapshot — no per-dependent
+	// Get/Upsert round trips.
+	batch := make([]*storage.ConceptProgress, 0, len(updates))
 	for _, u := range updates {
-		prog, err := e.repo.GetProgress(studentID, u.cid)
-		if err != nil || prog == nil {
+		prog := progress[u.cid]
+		if prog == nil {
 			prog = &storage.ConceptProgress{
 				StudentID: studentID,
 				ConceptID: u.cid,
 				Status:    string(mastery.StatusUnseen),
 			}
+		} else {
+			cp := *prog
+			prog = &cp
 		}
 		prog.WeaknessScore = u.w
-		if err := e.repo.UpsertProgress(prog); err != nil {
-			log.Printf("warning: failed to propagate weakness for %s/%s: %v", studentID, u.cid, err)
-		}
+		batch = append(batch, prog)
+	}
+	if err := e.repo.UpsertProgressBatch(batch); err != nil {
+		log.Printf("warning: failed to propagate weakness batch for %s: %v", studentID, err)
 	}
 }
 
