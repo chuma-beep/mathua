@@ -180,6 +180,26 @@ type TopicSpeed struct {
 	LearningSpeed float64 `json:"learning_speed"`
 }
 
+// QuestionReport is a user complaint about a question, explanation,
+// lesson body, worked example, or diagram.
+type QuestionReport struct {
+	ID          int64     `json:"id"`
+	ReporterID  string    `json:"reporter_id"`
+	ConceptID   string    `json:"concept_id"`
+	Kind        string    `json:"kind"` // question | explanation | lesson_body | worked_example | diagram
+	Question    string    `json:"question"`
+	Expected    string    `json:"expected"`
+	Explanation string    `json:"explanation"`
+	LessonID    string    `json:"lesson_id"`
+	Source      string    `json:"source"`
+	SessionID   string    `json:"session_id"`
+	AttemptID   string    `json:"attempt_id"`
+	Reason      string    `json:"reason"` // wrong_answer | bad_explanation | unclear | formatting | other
+	Detail      string    `json:"detail"`
+	Status      string    `json:"status"` // open | confirmed | fixed | dismissed
+	CreatedAt   time.Time `json:"created_at"`
+}
+
 // Repository interface
 
 type Repository interface {
@@ -240,6 +260,10 @@ type Repository interface {
 	GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error)
 	GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error)
 	UpsertTopicSpeed(ts *TopicSpeed) error
+
+	CreateReport(r QuestionReport) (int64, error)
+	ListReports(status string, limit, offset int) ([]QuestionReport, error)
+	UpdateReportStatus(id int64, status string) error
 
 	CreateIdentity(provider, providerID, studentID, email string, emailVerified bool) error
 	FindStudentByIdentity(provider, providerID string) (*Student, error)

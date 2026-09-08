@@ -115,7 +115,7 @@ func cors(next http.HandlerFunc) http.HandlerFunc {
 				w.Header().Set("Access-Control-Allow-Origin", origin)
 			}
 		}
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		w.Header().Set("Access-Control-Max-Age", "86400")
 		if r.Method == http.MethodOptions {
@@ -128,28 +128,31 @@ func cors(next http.HandlerFunc) http.HandlerFunc {
 }
 
 type Server struct {
-	eng          *engine.Engine
-	repo         storage.Repository
-	auth         *auth.AuthService
-	diagSessions map[string]*diagnostic.Session
-	diagCreated  map[string]time.Time
-	quizSessions map[string]*quiz.Session
-	quizCreated  map[string]time.Time
-	mu           sync.Mutex
-	authLimiter  *rateLimiter
-	writeLimiter *rateLimiter
-	shareLimiter *rateLimiter
+	eng            *engine.Engine
+	repo           storage.Repository
+	auth           *auth.AuthService
+	diagSessions   map[string]*diagnostic.Session
+	diagCreated    map[string]time.Time
+	quizSessions   map[string]*quiz.Session
+	quizCreated    map[string]time.Time
+	adminSessions  map[string]time.Time // admin session token → expiry
+	mu             sync.Mutex
+	authLimiter    *rateLimiter
+	writeLimiter   *rateLimiter
+	shareLimiter   *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
+	checkAdminPasswordConfig()
 	s := &Server{
-		eng:          eng,
-		repo:         repo,
-		auth:         auth,
-		diagSessions: make(map[string]*diagnostic.Session),
-		diagCreated:  make(map[string]time.Time),
-		quizSessions: make(map[string]*quiz.Session),
-		quizCreated:  make(map[string]time.Time),
+		eng:           eng,
+		repo:          repo,
+		auth:          auth,
+		diagSessions:  make(map[string]*diagnostic.Session),
+		diagCreated:   make(map[string]time.Time),
+		quizSessions:  make(map[string]*quiz.Session),
+		quizCreated:   make(map[string]time.Time),
+		adminSessions: make(map[string]time.Time),
 		authLimiter:  newRateLimiter(5, 10, time.Minute),
 		writeLimiter: newRateLimiter(20, 20, 3*time.Second),
 		shareLimiter: newRateLimiter(10, 10, 6*time.Second),
@@ -170,6 +173,11 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 				if created.Before(cutoff) {
 					delete(s.quizSessions, id)
 					delete(s.quizCreated, id)
+				}
+			}
+			for token, exp := range s.adminSessions {
+				if exp.Before(time.Now()) {
+					delete(s.adminSessions, token)
 				}
 			}
 			s.mu.Unlock()
@@ -244,6 +252,16 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/study/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleStudyAnswer)))))
+	mux.HandleFunc("/api/reports", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			s.handleListReports(w, r)
+			return
+		}
+		s.handleCreateReport(w, r)
+	})))))
+	mux.HandleFunc("/api/reports/", logRequest(cors(s.optionalAuthMiddleware(s.handleUpdateReport))))
+	mux.HandleFunc("/api/admin/login", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogin))))
+	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.handleAdminLogout)))
 	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))

@@ -127,6 +127,27 @@ CREATE TABLE IF NOT EXISTS student_topic_speed (
     PRIMARY KEY (student_id, concept_id)
 );
 CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
+
+CREATE TABLE IF NOT EXISTS question_reports (
+    id          SERIAL PRIMARY KEY,
+    reporter_id TEXT NOT NULL DEFAULT '',
+    concept_id  TEXT NOT NULL DEFAULT '',
+    kind        TEXT NOT NULL DEFAULT 'question',
+    question    TEXT NOT NULL DEFAULT '',
+    expected    TEXT NOT NULL DEFAULT '',
+    explanation TEXT NOT NULL DEFAULT '',
+    lesson_id   TEXT NOT NULL DEFAULT '',
+    source      TEXT NOT NULL DEFAULT '',
+    session_id  TEXT NOT NULL DEFAULT '',
+    attempt_id  TEXT NOT NULL DEFAULT '',
+    reason      TEXT NOT NULL DEFAULT 'other',
+    detail      TEXT NOT NULL DEFAULT '',
+    status      TEXT NOT NULL DEFAULT 'open',
+    created_at  TEXT NOT NULL DEFAULT (now()::text)
+);
+
+CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
+CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
 `
 
 func NewPostgresStore(dsn string) (*PostgresStore, error) {
@@ -1261,6 +1282,96 @@ func (s *PostgresStore) UpsertTopicSpeed(ts *TopicSpeed) error {
 	`, ts.StudentID, ts.ConceptID, ts.EFactor, ts.Interval, ts.Repetitions, ts.LearningSpeed)
 	if err != nil {
 		return fmt.Errorf("upsert topic speed: %w", err)
+	}
+	return nil
+}
+
+// Question reports (user complaints about questions/explanations/lessons).
+
+func (s *PostgresStore) CreateReport(r QuestionReport) (int64, error) {
+	if r.Status == "" {
+		r.Status = "open"
+	}
+	created := r.CreatedAt.UTC().Format(time.RFC3339)
+	if r.CreatedAt.IsZero() {
+		created = time.Now().UTC().Format(time.RFC3339)
+	}
+	var id int64
+	err := s.db.QueryRow(`
+		INSERT INTO question_reports
+			(reporter_id, concept_id, kind, question, expected, explanation,
+			 lesson_id, source, session_id, attempt_id, reason, detail, status, created_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+		RETURNING id
+	`,
+		r.ReporterID, r.ConceptID, r.Kind, r.Question, r.Expected, r.Explanation,
+		r.LessonID, r.Source, r.SessionID, r.AttemptID, r.Reason, r.Detail, r.Status,
+		created,
+	).Scan(&id)
+	if err != nil {
+		return 0, fmt.Errorf("create report: %w", err)
+	}
+	return id, nil
+}
+
+func (s *PostgresStore) ListReports(status string, limit, offset int) ([]QuestionReport, error) {
+	if limit <= 0 || limit > 200 {
+		limit = 50
+	}
+	if offset < 0 {
+		offset = 0
+	}
+	var rows *sql.Rows
+	var err error
+	if status == "" || status == "all" {
+		rows, err = s.db.Query(`
+			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
+			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			FROM question_reports
+			ORDER BY created_at DESC
+			LIMIT $1 OFFSET $2
+		`, limit, offset)
+	} else {
+		rows, err = s.db.Query(`
+			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
+			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			FROM question_reports
+			WHERE status = $1
+			ORDER BY created_at DESC
+			LIMIT $2 OFFSET $3
+		`, status, limit, offset)
+	}
+	if err != nil {
+		return nil, fmt.Errorf("list reports: %w", err)
+	}
+	defer rows.Close()
+	var out []QuestionReport
+	for rows.Next() {
+		var r QuestionReport
+		var created string
+		if err := rows.Scan(
+			&r.ID, &r.ReporterID, &r.ConceptID, &r.Kind, &r.Question, &r.Expected,
+			&r.Explanation, &r.LessonID, &r.Source, &r.SessionID, &r.AttemptID,
+			&r.Reason, &r.Detail, &r.Status, &created,
+		); err != nil {
+			return nil, fmt.Errorf("scan report: %w", err)
+		}
+		if t, err := time.Parse(time.RFC3339, created); err == nil {
+			r.CreatedAt = t
+		}
+		out = append(out, r)
+	}
+	return out, rows.Err()
+}
+
+func (s *PostgresStore) UpdateReportStatus(id int64, status string) error {
+	res, err := s.db.Exec(`UPDATE question_reports SET status = $1 WHERE id = $2`, status, id)
+	if err != nil {
+		return fmt.Errorf("update report: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n == 0 {
+		return fmt.Errorf("report not found")
 	}
 	return nil
 }

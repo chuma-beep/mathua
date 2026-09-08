@@ -155,4 +155,25 @@ CREATE TABLE IF NOT EXISTS link_tokens (
     expires_at TEXT NOT NULL,
     used       INTEGER NOT NULL DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS question_reports (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    reporter_id TEXT NOT NULL DEFAULT '',
+    concept_id  TEXT NOT NULL DEFAULT '',
+    kind        TEXT NOT NULL DEFAULT 'question',
+    question    TEXT NOT NULL DEFAULT '',
+    expected    TEXT NOT NULL DEFAULT '',
+    explanation TEXT NOT NULL DEFAULT '',
+    lesson_id   TEXT NOT NULL DEFAULT '',
+    source      TEXT NOT NULL DEFAULT '',
+    session_id  TEXT NOT NULL DEFAULT '',
+    attempt_id  TEXT NOT NULL DEFAULT '',
+    reason      TEXT NOT NULL DEFAULT 'other',
+    detail      TEXT NOT NULL DEFAULT '',
+    status      TEXT NOT NULL DEFAULT 'open',
+    created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
+CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
 `

@@ -10,6 +10,7 @@ import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 import LessonQuiz from '../../components/LessonQuiz'
+import ReportButton from '../../components/ReportButton'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
 import Loading from '../../components/Loading'
 
@@ -260,6 +261,14 @@ function ConceptContent() {
                       )}
                       <div id="lesson-body" className="w-full max-w-full min-w-0 overflow-hidden">
                         <KatexContent>{detail.lesson.body}</KatexContent>
+                      </div>
+                      <div className="mt-3 flex justify-end">
+                        <ReportButton
+                          conceptId={conceptId}
+                          lessonId={detail.lesson.title}
+                          kind="lesson_body"
+                          question={detail.lesson.body?.slice(0, 2000)}
+                        />
                       </div>
                     </div>
                     <LessonQuiz conceptId={conceptId} />
