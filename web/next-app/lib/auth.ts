@@ -40,20 +40,41 @@ export function getAuthHeaders(): Record<string, string> {
 // nukes a real login and vice versa. Callers that set their own header
 // (e.g. admin login) never trigger a clear.
 // Network failures reject — callers must not treat them as "invalid".
-export async function authedFetch(input: RequestInfo | URL, init: RequestInit = {}): Promise<Response> {
+// Per-request timeout override: authedFetch(input, { timeoutMs: 5000 }).
+// Stripped before reaching fetch.
+export type FetchInit = RequestInit & { timeoutMs?: number }
+
+const DEFAULT_TIMEOUT_MS = 30000
+
+export async function authedFetch(input: RequestInfo | URL, init: FetchInit = {}): Promise<Response> {
   const registered = getToken()
   const guest = !registered ? getGuestToken() : null
   const sent = init.headers instanceof Headers
     ? init.headers.get('Authorization')
     : new Headers(init.headers).get('Authorization')
-  const headers = new Headers(init.headers)
+  const { timeoutMs, ...fetchInit } = init
+  const headers = new Headers(fetchInit.headers)
   if (!sent) {
     const token = registered || guest
     if (token) {
       headers.set('Authorization', `Bearer ${token}`)
     }
   }
-  const res = await fetch(input, { ...init, headers })
+  const ms = timeoutMs ?? DEFAULT_TIMEOUT_MS
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), ms)
+  // A caller-provided signal still wins: aborting it aborts ours.
+  if (fetchInit.signal) {
+    const caller = fetchInit.signal
+    if (caller.aborted) ctrl.abort()
+    else caller.addEventListener('abort', () => ctrl.abort(), { once: true })
+  }
+  let res: Response
+  try {
+    res = await fetch(input, { ...fetchInit, headers, signal: ctrl.signal })
+  } finally {
+    clearTimeout(timer)
+  }
   if (res.status === 401) {
     // Clear the stored credential behind the 401 — but only when the failed
     // request actually carried it. A caller-set header that merely forwards
@@ -117,8 +138,13 @@ export function ensureGuestId(): string | null {
   if (typeof window === 'undefined') return null
   let id = localStorage.getItem(GUEST_KEY)
   if (!id) {
-    // ephemeral guest id — persisted locally so /profile works for guests
-    id = `guest_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`
+    // Ephemeral guest id — persisted locally so /profile works for guests.
+    // crypto.randomUUID when available (unguessable capability, doubling as
+    // the claim key for POST /api/auth/guest); legacy Math.random fallback.
+    const rand = typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+      ? crypto.randomUUID()
+      : `${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`
+    id = `guest_${rand}`
     localStorage.setItem(GUEST_KEY, id)
   }
   return id
@@ -146,11 +172,14 @@ export async function ensureGuestToken(): Promise<string | null> {
   const existing = getGuestToken()
   if (existing) return existing
   const guestId = ensureGuestId()
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), 10000)
   try {
     const res = await fetch(`${API_BASE}/api/auth/guest`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ student_id: guestId }),
+      signal: ctrl.signal,
     })
     if (!res.ok) return null
     const data = (await res.json()) as { token?: string; student_id?: string }
@@ -161,5 +190,7 @@ export async function ensureGuestToken(): Promise<string | null> {
     return data.token
   } catch {
     return null
+  } finally {
+    clearTimeout(timer)
   }
 }

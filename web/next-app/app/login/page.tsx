@@ -10,7 +10,7 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
+import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { setToken, setUserInfo, clearToken, isLoggedIn } from '../../lib/auth'
 
 type LoginState = {
@@ -234,9 +234,7 @@ function LoginInner() {
               setGoogleLoading(true)
               setGoogleError('')
               try {
-                const r = await fetch(`${API_BASE}/api/auth/google`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id_token: resp.credential }) })
-                if (!r.ok) throw new Error(await r.text())
-                const data = await r.json() as { token: string; student_id: string; name: string; diagnostic_completed: boolean }
+                const data = await googleOneTap(resp.credential)
                 setToken(data.token)
                 setUserInfo({ student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
                 push(ret)
@@ -253,7 +251,7 @@ function LoginInner() {
       }
       if (existing) { init(); return }
       const s = document.createElement('script'); s.src = src; s.async = true; s.defer = true; s.onload = init; document.head.appendChild(s)
-    }).catch(()=>{})
+    }).catch(() => { if (!cancelled) setGoogleError('Could not reach the server — check your connection and reload') })
     return () => { cancelled = true }
   }, [push, ret])
 

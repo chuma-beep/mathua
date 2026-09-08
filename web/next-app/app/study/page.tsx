@@ -824,6 +824,8 @@ function StudyContent() {
 
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
   const [selectedBody, setSelectedBody] = useState<string | null>(null)
+  const [bodyError, setBodyError] = useState(false)
+  const [bodyRetry, setBodyRetry] = useState(0)
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
@@ -875,11 +877,12 @@ function StudyContent() {
     }
     let cancelled = false
     setSelectedBody(null)
+    setBodyError(false)
     getLessonBody(selectedLesson.title)
       .then(body => { if (!cancelled) setSelectedBody(body) })
-      .catch((e) => { console.error('lesson body failed:', e) })
+      .catch((e) => { console.error('lesson body failed:', e); if (!cancelled) setBodyError(true) })
     return () => { cancelled = true }
-  }, [selectedLesson])
+  }, [selectedLesson, bodyRetry])
 
   const hydratedLesson = useMemo(
     () => (selectedLesson ? { ...selectedLesson, body: selectedBody ?? '' } : null),
@@ -974,7 +977,19 @@ function StudyContent() {
 
           {selectedLesson ? (
             // ── Lesson Detail ──
-            <LessonDetail
+            <>
+              {bodyError && (
+                <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
+                  <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the lesson text — practice below still works.</span>
+                  <button
+                    onClick={() => setBodyRetry(n => n + 1)}
+                    className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
+                  >
+                    Retry →
+                  </button>
+                </div>
+              )}
+              <LessonDetail
               lesson={hydratedLesson ?? selectedLesson}
               domain={selectedDomain}
               onBack={() => {
@@ -985,6 +1000,7 @@ function StudyContent() {
                 router.push(url)
               }}
             />
+            </>
           ) : selectedDomain ? (
             // ── Domain Drill-Down ──
             <DomainDrillDown

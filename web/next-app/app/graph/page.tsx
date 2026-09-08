@@ -100,14 +100,20 @@ function GraphContent() {
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
+  const [graphError, setGraphError] = useState(false)
   const [activeDomain, setActiveDomain] = useState<string | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(conceptParam)
   const { loggedIn } = useAuthState()
 
-  useEffect(() => {
+  const loadGraph = useCallback(() => {
+    setGraphError(false)
     once('health', healthCheck).then(setConnected).catch(() => setConnected(false))
-    once('graph', getGraph).then(setGraphData).catch(() => console.error('getGraph failed'))
+    once('graph', getGraph).then(data => { setGraphData(data); setGraphError(false) }).catch(() => setGraphError(true))
   }, [])
+
+  useEffect(() => {
+    loadGraph()
+  }, [loadGraph])
 
   useEffect(() => {
     if (!loggedIn) return
@@ -246,6 +252,17 @@ function GraphContent() {
       )}
 
       <div className="my-6 sm:my-8 w-full max-w-full min-w-0 overflow-hidden">
+        {graphError && (
+          <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
+            <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the live graph — showing the bundled fallback.</span>
+            <button
+              onClick={loadGraph}
+              className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
+            >
+              Retry →
+            </button>
+          </div>
+        )}
         <ConceptGraphFlow
           concepts={concepts.length > 0 ? concepts : fallbackConcepts}
           conceptStatuses={conceptStatuses}

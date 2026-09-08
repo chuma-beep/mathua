@@ -3,6 +3,14 @@ export const API_BASE = process.env.NEXT_PUBLIC_API_URL || ''
 import { getAuthHeaders, authedFetch } from './auth'
 import { z } from 'zod'
 
+// Dev-only heads-up: an unset NEXT_PUBLIC_API_URL falls back to relative
+// /api/*, which breaks under static hosting (output: export). Production
+// stays silent — the deployment is assumed intentional.
+if (typeof window !== 'undefined' && !process.env.NEXT_PUBLIC_API_URL && process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line no-console
+  console.warn('[mathua] NEXT_PUBLIC_API_URL is unset — API calls use relative /api/*, which breaks static hosting. Set it to your API origin.')
+}
+
 const QuestionSchema = z.object({
   concept_id: z.string(),
   concept_name: z.string(),
@@ -822,7 +830,7 @@ export interface LessonsRes {
 
 export async function getLessons(studentId?: string): Promise<LessonsRes> {
 	const url = studentId ? `${API_BASE}/api/lessons?student_id=${encodeURIComponent(studentId)}` : `${API_BASE}/api/lessons`
-	const res = await fetch(url)
+	const res = await authedFetch(url, { cache: 'no-store' })
 	if (!res.ok) return { lessons: {} }
 	return validateResponse(LessonsResSchema, await res.json(), 'getLessons') as LessonsRes
 }
@@ -1049,7 +1057,8 @@ export async function validateToken(): Promise<{ valid: boolean; student_id: str
 		const me = await res.json()
 		return { valid: true, student_id: typeof me?.student_id === 'string' ? me.student_id : '' }
 	} catch {
-		return { valid: true, student_id: '' }
+		// Unparseable body is NOT a valid session — never report valid:true.
+		return { valid: false, student_id: '' }
 	}
 }
 
