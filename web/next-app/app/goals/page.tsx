@@ -13,6 +13,7 @@ import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import SymbolPalette from '../../components/SymbolPalette'
+import ReportButton from '../../components/ReportButton'
 import DiagnosticResults from '../../components/DiagnosticResults'
 import ProgressBar from '../../components/ProgressBar'
 import {
@@ -515,6 +516,16 @@ function GoalsContent() {
                        </button>
                      </div>
                       <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
+                      <div className="mt-2 flex justify-end">
+                        <ReportButton
+                          key={question}
+                          conceptId={conceptId.current}
+                          kind="question"
+                          question={question}
+                          source="diagnostic"
+                          sessionId={sessionId.current}
+                        />
+                      </div>
                       </>
                     ) : (
                     <div className="animate-fadeIn text-center">
@@ -565,6 +576,16 @@ function GoalsContent() {
                         <button onClick={submitQuizAnswerFn} disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
                       </div>
                       <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
+                      <div className="mt-2 flex justify-end">
+                        <ReportButton
+                          key={quizQuestion}
+                          conceptId={quizConceptId.current}
+                          kind="question"
+                          question={quizQuestion}
+                          source="quiz"
+                          sessionId={quizSessionId.current}
+                        />
+                      </div>
                     </>
                   ) : (
                     <div className="animate-fadeIn text-center">

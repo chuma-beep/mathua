@@ -53,6 +53,45 @@ func TestCreateReport_InvalidReason(t *testing.T) {
 	}
 }
 
+func TestCreateReport_DiagnosticSource(t *testing.T) {
+	s := testServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	body, _ := json.Marshal(map[string]string{
+		"concept_id": "arith.add.basic",
+		"kind":       "question",
+		"question":   "1+1=?",
+		"reason":     "wrong_answer",
+		"source":     "diagnostic",
+		"session_id": "diag_123",
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/reports", bytes.NewReader(body)))
+	if rec.Code != 200 {
+		t.Fatalf("expected 200 for diagnostic source, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+func TestCreateReport_InvalidSource(t *testing.T) {
+	s := testServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	body, _ := json.Marshal(map[string]string{
+		"concept_id": "a",
+		"kind":       "question",
+		"question":   "2+2=?",
+		"reason":     "wrong_answer",
+		"source":     "bogus",
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/reports", bytes.NewReader(body)))
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for invalid source, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
 func TestListReports_RequiresAdmin(t *testing.T) {
 	s := testServer(t)
 	mux := http.NewServeMux()
