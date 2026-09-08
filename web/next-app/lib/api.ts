@@ -1052,3 +1052,113 @@ export async function validateToken(): Promise<{ valid: boolean; student_id: str
 		return { valid: true, student_id: '' }
 	}
 }
+
+// Content reports — users complain about questions, explanations,
+// lesson bodies, worked examples, or diagrams.
+export type ReportKind = 'question' | 'explanation' | 'lesson_body' | 'worked_example' | 'diagram'
+export type ReportReason = 'wrong_answer' | 'bad_explanation' | 'unclear' | 'formatting' | 'other'
+export type ReportStatus = 'open' | 'confirmed' | 'fixed' | 'dismissed'
+
+export interface SubmitReportInput {
+	concept_id?: string
+	kind: ReportKind
+	question?: string
+	expected?: string
+	explanation?: string
+	lesson_id?: string
+	source?: string
+	session_id?: string
+	attempt_id?: string
+	reason: ReportReason
+	detail?: string
+}
+
+export interface SubmitReportRes {
+	id: number
+	status: ReportStatus
+}
+
+export async function submitReport(input: SubmitReportInput): Promise<SubmitReportRes> {
+	const { getGuestId } = await import('./auth')
+	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
+	const body: Record<string, unknown> = { ...input }
+	const guestId = getGuestId()
+	if (guestId && !headers.Authorization) {
+		body.reporter_id = guestId
+	}
+	const res = await authedFetch(`${API_BASE}/api/reports`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) throw new Error(`Report submit failed: ${res.status}`)
+	return res.json() as Promise<SubmitReportRes>
+}
+
+export interface QuestionReport {
+	id: number
+	reporter_id: string
+	concept_id: string
+	kind: string
+	question: string
+	expected: string
+	explanation: string
+	lesson_id: string
+	source: string
+	session_id: string
+	attempt_id: string
+	reason: string
+	detail: string
+	status: string
+	created_at: string
+}
+
+export async function listReports(token: string, status = 'open', limit = 50, offset = 0): Promise<QuestionReport[]> {
+	const res = await authedFetch(
+		`${API_BASE}/api/reports?status=${encodeURIComponent(status)}&limit=${limit}&offset=${offset}`,
+		{ headers: { Authorization: `Bearer ${token}` } },
+	)
+	if (!res.ok) throw new Error(`Reports fetch failed: ${res.status}`)
+	const data = (await res.json()) as { reports: QuestionReport[] }
+	return data.reports ?? []
+}
+
+export async function updateReportStatus(token: string, id: number, status: ReportStatus): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/reports/${id}`, {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+		body: JSON.stringify({ status }),
+	})
+	if (!res.ok) throw new Error(`Report update failed: ${res.status}`)
+}
+
+// Admin triage auth: shared ADMIN_PASSWORD → 24h session token.
+// Login uses plain fetch (not authedFetch): a 401 here means "wrong admin
+// password" and must NOT clear the user's own login token.
+export interface AdminLoginRes {
+	token: string
+	expires_at: string
+}
+
+export async function adminLogin(password: string): Promise<AdminLoginRes> {
+	const res = await fetch(`${API_BASE}/api/admin/login`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ password }),
+	})
+	if (res.status === 401) throw new Error('Wrong password')
+	if (res.status === 404) throw new Error('Admin login is not configured on this server')
+	if (!res.ok) throw new Error(`Admin login failed: ${res.status}`)
+	return res.json() as Promise<AdminLoginRes>
+}
+
+export async function adminLogout(token: string): Promise<void> {
+	try {
+		await fetch(`${API_BASE}/api/admin/logout`, {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${token}` },
+		})
+	} catch {
+		// Best-effort: the session expires server-side within 24h regardless.
+	}
+}

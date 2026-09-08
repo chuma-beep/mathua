@@ -1203,8 +1203,7 @@ func weekStart(t time.Time) time.Time {
 	return time.Date(start.Year(), start.Month(), start.Day(), 0, 0, 0, 0, time.UTC)
 }
 
-func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {
-	if len(conceptIDs) == 0 {
+func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {	if len(conceptIDs) == 0 {
 		return 0, nil
 	}
 	ids := make([]string, 0, len(conceptIDs))
@@ -1235,4 +1234,108 @@ func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64
 		deleted += n
 	}
 	return deleted, nil
+}
+
+// Question reports (user complaints about questions/explanations/lessons).
+
+func (s *SQLiteStore) CreateReport(r QuestionReport) (int64, error) {
+	if r.Status == "" {
+		r.Status = "open"
+	}
+	res, err := s.db.Exec(`
+		INSERT INTO question_reports
+			(reporter_id, concept_id, kind, question, expected, explanation,
+			 lesson_id, source, session_id, attempt_id, reason, detail, status, created_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`,
+		r.ReporterID, r.ConceptID, r.Kind, r.Question, r.Expected, r.Explanation,
+		r.LessonID, r.Source, r.SessionID, r.AttemptID, r.Reason, r.Detail, r.Status,
+		formatReportTime(r.CreatedAt),
+	)
+	if err != nil {
+		return 0, fmt.Errorf("create report: %w", err)
+	}
+	id, err := res.LastInsertId()
+	if err != nil {
+		return 0, fmt.Errorf("report id: %w", err)
+	}
+	return id, nil
+}
+
+func (s *SQLiteStore) ListReports(status string, limit, offset int) ([]QuestionReport, error) {
+	if limit <= 0 || limit > 200 {
+		limit = 50
+	}
+	if offset < 0 {
+		offset = 0
+	}
+	var rows *sql.Rows
+	var err error
+	if status == "" || status == "all" {
+		rows, err = s.db.Query(`
+			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
+			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			FROM question_reports
+			ORDER BY created_at DESC
+			LIMIT ? OFFSET ?
+		`, limit, offset)
+	} else {
+		rows, err = s.db.Query(`
+			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
+			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			FROM question_reports
+			WHERE status = ?
+			ORDER BY created_at DESC
+			LIMIT ? OFFSET ?
+		`, status, limit, offset)
+	}
+	if err != nil {
+		return nil, fmt.Errorf("list reports: %w", err)
+	}
+	defer rows.Close()
+	var out []QuestionReport
+	for rows.Next() {
+		var r QuestionReport
+		var created string
+		if err := rows.Scan(
+			&r.ID, &r.ReporterID, &r.ConceptID, &r.Kind, &r.Question, &r.Expected,
+			&r.Explanation, &r.LessonID, &r.Source, &r.SessionID, &r.AttemptID,
+			&r.Reason, &r.Detail, &r.Status, &created,
+		); err != nil {
+			return nil, fmt.Errorf("scan report: %w", err)
+		}
+		r.CreatedAt = parseReportTime(created)
+		out = append(out, r)
+	}
+	return out, rows.Err()
+}
+
+func (s *SQLiteStore) UpdateReportStatus(id int64, status string) error {
+	res, err := s.db.Exec(`UPDATE question_reports SET status = ? WHERE id = ?`, status, id)
+	if err != nil {
+		return fmt.Errorf("update report: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n == 0 {
+		return fmt.Errorf("report not found")
+	}
+	return nil
+}
+
+func formatReportTime(t time.Time) string {
+	if t.IsZero() {
+		return time.Now().UTC().Format(time.RFC3339)
+	}
+	return t.UTC().Format(time.RFC3339)
+}
+
+func parseReportTime(s string) time.Time {
+	if t, err := time.Parse(time.RFC3339, s); err == nil {
+		return t
+	}
+	// SQLite datetime('now') yields "YYYY-MM-DD HH:MM:SS"
+	if t, err := time.Parse("2006-01-02 15:04:05", s); err == nil {
+		return t.UTC()
+	}
+	return time.Time{}
 }

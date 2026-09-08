@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import KatexContent from './KatexContent'
+import ReportButton from './ReportButton'
 import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../lib/api'
 import { applyResult, initialState, type StreakState } from '../lib/progression'
 
@@ -219,6 +220,16 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         {q.explanation}
                       </KatexContent>
                     )}
+
+                    <div className="mt-2 flex justify-end">
+                      <ReportButton
+                        conceptId={conceptId}
+                        kind={showAnswer && q.explanation ? 'explanation' : 'question'}
+                        question={q.question}
+                        expected={q.answer}
+                        explanation={q.explanation}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

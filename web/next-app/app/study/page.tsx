@@ -12,6 +12,7 @@ import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
+import ReportButton from '../../components/ReportButton'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessons, getLessonBody, getLessonKPs, getScores, type LessonInfo, type LessonsRes, type Scores, type LessonKpsRes } from '../../lib/api'
 import { getUserInfo, getGuestId } from '../../lib/auth'
@@ -712,6 +713,22 @@ function LessonDetail({
                         </div>
                       </div>
                     </details>
+                    <div className="mt-2 flex justify-end gap-3">
+                      <ReportButton
+                        conceptId={cid}
+                        lessonId={lesson.title}
+                        kind="worked_example"
+                        question={`${kp.label}: ${kp.worked_example}`}
+                      />
+                      {diagram && (
+                        <ReportButton
+                          conceptId={cid}
+                          lessonId={lesson.title}
+                          kind="diagram"
+                          question={diagram}
+                        />
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -730,6 +747,14 @@ function LessonDetail({
           </div>
           <div className="w-full max-w-full min-w-0 overflow-hidden">
             <KatexContent>{lesson.body}</KatexContent>
+          </div>
+          <div className="mt-3 flex justify-end">
+            <ReportButton
+              conceptId={lesson.concepts[0]}
+              lessonId={lesson.title}
+              kind="lesson_body"
+              question={lesson.body?.slice(0, 2000)}
+            />
           </div>
         </div>
       )}
