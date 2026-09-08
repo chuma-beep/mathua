@@ -122,4 +122,32 @@ describe('login persistence', () => {
     await expect(ensureGuestToken()).resolves.toBeNull()
     expect(fetchMock).not.toHaveBeenCalled()
   })
+
+  it('ensureGuestId mints a prefixed unguessable id', async () => {
+    const { ensureGuestId } = await import('../lib/auth')
+    localStorage.removeItem('mathua_guest_id')
+    const id = ensureGuestId()
+    expect(id).toMatch(/^guest_/)
+    expect(id!.length).toBeGreaterThan(20)
+    expect(ensureGuestId()).toBe(id)
+  })
+
+  it('authedFetch aborts after timeoutMs', async () => {
+    clearToken()
+    localStorage.removeItem('mathua_guest_token')
+    vi.stubGlobal('fetch', vi.fn((_url: unknown, init?: RequestInit) => new Promise((_res, rej) => {
+      init?.signal?.addEventListener('abort', () => rej(new DOMException('aborted', 'AbortError')))
+    })))
+    await expect(authedFetch('https://x/api/slow', { timeoutMs: 30 })).rejects.toThrow()
+  })
+
+  it('getLessons goes through authedFetch with credentials', async () => {
+    const { getLessons } = await import('../lib/api')
+    clearToken()
+    localStorage.setItem('mathua_guest_token', 'guest-tok')
+    const fetchMock = mockFetchOnce({ json: async () => ({ lessons: {} }) })
+    await getLessons('guest_1')
+    const [, init] = fetchMock.mock.calls[0] as [string, RequestInit]
+    expect(new Headers(init.headers).get('Authorization')).toBe('Bearer guest-tok')
+  })
 })
