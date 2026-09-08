@@ -283,6 +283,32 @@ func (s *PostgresStore) CreateStudent(name string) (*Student, error) {
 	return &Student{ID: id, Name: name, Settings: "{}", CreatedAt: now}, nil
 }
 
+func (s *PostgresStore) ClaimGuestStudent(id, name string) (*Student, error) {
+	if strings.TrimSpace(id) == "" {
+		return nil, fmt.Errorf("guest id is required")
+	}
+	name = strings.TrimSpace(name)
+	if name == "" {
+		name = "Guest"
+	}
+	now := time.Now().UTC()
+	_, err := s.db.Exec(
+		"INSERT INTO students (id, name, settings, created_at) VALUES ($1, $2, '{}', $3) ON CONFLICT (id) DO NOTHING",
+		id, name, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	st, err := s.GetStudent(id)
+	if err != nil {
+		return nil, err
+	}
+	if st == nil {
+		return nil, fmt.Errorf("claim guest student: row missing after upsert")
+	}
+	return st, nil
+}
+
 func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()

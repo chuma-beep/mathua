@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { useTheme } from '../hooks/useTheme'
-import { ensureGuestId } from '../lib/auth'
+import { ensureGuestId, ensureGuestToken } from '../lib/auth'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
 import Header from '../components/Header'
 import AsciiDivider from '../components/AsciiDivider'
@@ -268,7 +268,9 @@ export default function HomePage() {
           <button
             onClick={() => {
               ensureGuestId()
-              router.push('/profile')
+              // Mint the guest token before landing on /profile so the first
+              // scores fetch already carries a credential. Best-effort.
+              ensureGuestToken().finally(() => router.push('/profile'))
             }}
             style={ctaPrimaryStyle}
             className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]"

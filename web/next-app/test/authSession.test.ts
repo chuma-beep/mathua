@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { setToken, clearToken, getToken, authedFetch } from '../lib/auth'
+import { setToken, clearToken, getToken, authedFetch, getGuestToken, ensureGuestToken, getAuthHeaders } from '../lib/auth'
 import { validateToken, login } from '../lib/api'
 
 function mockFetchOnce(res: Partial<Response> & { json?: () => Promise<unknown> }) {
@@ -77,5 +77,49 @@ describe('login persistence', () => {
   it('login maps 429 to a friendly retry message', async () => {
     mockFetchOnce({ ok: false, status: 429 })
     await expect(login('ada', 'Engine!n1')).rejects.toThrow('Too many attempts')
+  })
+
+  it('authedFetch falls back to the guest token and clears only it on 401', async () => {
+    clearToken()
+    localStorage.setItem('mathua_guest_token', 'guest-tok')
+    const fetchMock = mockFetchOnce({})
+    await authedFetch('https://x/api/scores/guest_1')
+    expect(new Headers((fetchMock.mock.calls[0] as [string, RequestInit])[1].headers).get('Authorization')).toBe('Bearer guest-tok')
+
+    mockFetchOnce({ ok: false, status: 401 })
+    await authedFetch('https://x/api/scores/guest_1')
+    expect(getGuestToken()).toBeNull()
+    expect(getToken()).toBeNull()
+  })
+
+  it('registered token wins over guest token and 401 clears only the registered one', async () => {
+    setToken('reg-tok')
+    localStorage.setItem('mathua_guest_token', 'guest-tok')
+    expect(getAuthHeaders()).toEqual({ Authorization: 'Bearer reg-tok' })
+    mockFetchOnce({ ok: false, status: 401 })
+    await authedFetch('https://x/api/y')
+    expect(getToken()).toBeNull()
+    expect(getGuestToken()).toBe('guest-tok')
+  })
+
+  it('ensureGuestToken mints via /api/auth/guest and stores token + id', async () => {
+    clearToken()
+    localStorage.removeItem('mathua_guest_token')
+    localStorage.setItem('mathua_guest_id', 'guest_local99')
+    const fetchMock = mockFetchOnce({ json: async () => ({ token: 'gt-1', student_id: 'guest_local99' }) })
+    const tok = await ensureGuestToken()
+    expect(tok).toBe('gt-1')
+    expect(getGuestToken()).toBe('gt-1')
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit]
+    expect(url).toContain('/api/auth/guest')
+    expect(JSON.parse(init.body as string)).toEqual({ student_id: 'guest_local99' })
+  })
+
+  it('ensureGuestToken is a no-op for registered users', async () => {
+    setToken('reg-tok')
+    const fetchMock = vi.fn()
+    vi.stubGlobal('fetch', fetchMock)
+    await expect(ensureGuestToken()).resolves.toBeNull()
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 })

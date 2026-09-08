@@ -1090,3 +1090,115 @@ func TestProgressScores_Ownership(t *testing.T) {
 		t.Errorf("progress: expected guest_ IDs readable without token, got 401")
 	}
 }
+
+func guestServer(t *testing.T) (*Server, *http.ServeMux, storage.Repository) {
+	t.Helper()
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	s := New(engine.New(store, d, reg, nil, nil), store, auth.New(store))
+	mux := http.NewServeMux()
+	s.Register(mux)
+	return s, mux, store
+}
+
+func postGuest(t *testing.T, mux *http.ServeMux, body, token string) *httptest.ResponseRecorder {
+	t.Helper()
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/auth/guest", bytes.NewReader([]byte(body)))
+	if token != "" {
+		req.Header.Set("Authorization", "Bearer "+token)
+	}
+	mux.ServeHTTP(rec, req)
+	return rec
+}
+
+func TestGuestToken_CreateAndReadOwn(t *testing.T) {
+	_, mux, _ := guestServer(t)
+
+	rec := postGuest(t, mux, `{}`, "")
+	if rec.Code != 200 {
+		t.Fatalf("create guest: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var res map[string]interface{}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	token, _ := res["token"].(string)
+	sid, _ := res["student_id"].(string)
+	if token == "" || sid == "" {
+		t.Fatalf("expected token+student_id, got %v", res)
+	}
+	// Guest reads own progress/scores with the token.
+	for _, path := range []string{"/api/progress/" + sid, "/api/scores/" + sid} {
+		r := httptest.NewRecorder()
+		req := httptest.NewRequest("GET", path, nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		mux.ServeHTTP(r, req)
+		if r.Code != 200 {
+			t.Errorf("%s: expected 200 with guest token, got %d", path, r.Code)
+		}
+	}
+}
+
+func TestGuestToken_ClaimAdoptsProgress(t *testing.T) {
+	_, mux, store := guestServer(t)
+
+	// Existing guest row with practice history (FKs enforced: progress rows
+	// always have a students row; claim re-mints a token for it).
+	ghost := "guest_claim_abc123"
+	if _, err := store.ClaimGuestStudent(ghost, "Guest"); err != nil {
+		t.Fatalf("seed guest row: %v", err)
+	}
+	_ = store.UpsertProgress(&storage.ConceptProgress{StudentID: ghost, ConceptID: "a", Status: "LEARNING"})
+	rec := postGuest(t, mux, `{"student_id":"`+ghost+`"}`, "")
+	if rec.Code != 200 {
+		t.Fatalf("claim: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var res map[string]interface{}
+	_ = json.Unmarshal(rec.Body.Bytes(), &res)
+	token, _ := res["token"].(string)
+	if res["student_id"] != ghost {
+		t.Fatalf("expected claimed id %q, got %v", ghost, res)
+	}
+	// Adopted progress is visible to the token holder.
+	r := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/progress/"+ghost, nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(r, req)
+	if r.Code != 200 {
+		t.Fatalf("progress: expected 200, got %d", r.Code)
+	}
+	var progress map[string]interface{}
+	_ = json.Unmarshal(r.Body.Bytes(), &progress)
+	if _, ok := progress["a"]; !ok {
+		t.Error("expected adopted concept progress after claim")
+	}
+}
+
+func TestGuestToken_RefusesRegistered(t *testing.T) {
+	_, mux, _ := guestServer(t)
+
+	// Build a registered user via signup, then try to claim their ID as guest.
+	srec := httptest.NewRecorder()
+	sreq := httptest.NewRequest("POST", "/api/auth/signup", bytes.NewReader([]byte(`{"name":"Reg","username":"reguser","password":"Engine!n1","email":"reg@example.com"}`)))
+	mux.ServeHTTP(srec, sreq)
+	if srec.Code != 200 {
+		t.Fatalf("signup: expected 200, got %d: %s", srec.Code, srec.Body.String())
+	}
+	var sres map[string]interface{}
+	_ = json.Unmarshal(srec.Body.Bytes(), &sres)
+	sid, _ := sres["student_id"].(string)
+	if rec := postGuest(t, mux, `{"student_id":"`+sid+`"}`, ""); rec.Code != 403 {
+		t.Errorf("claim registered: expected 403, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Unknown non-guest ID → 404, not a fresh account.
+	if rec := postGuest(t, mux, `{"student_id":"01234567-89ab-cdef-0123-456789abcdef"}`, ""); rec.Code != 404 {
+		t.Errorf("claim unknown uuid: expected 404, got %d: %s", rec.Code, rec.Body.String())
+	}
+}

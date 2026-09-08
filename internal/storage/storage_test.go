@@ -451,3 +451,24 @@ func TestUpdateStudentName(t *testing.T) {
 		t.Errorf("username must be immutable, got %q", got.Username)
 	}
 }
+
+func TestClaimGuestStudent_Idempotent(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.ClaimGuestStudent("guest_adopt_me", "Guest")
+	if err != nil {
+		t.Fatalf("claim: %v", err)
+	}
+	if st.ID != "guest_adopt_me" {
+		t.Errorf("expected adopted id, got %q", st.ID)
+	}
+	again, err := store.ClaimGuestStudent("guest_adopt_me", "Other")
+	if err != nil {
+		t.Fatalf("reclaim: %v", err)
+	}
+	if again.ID != st.ID || again.Name != "Guest" {
+		t.Errorf("reclaim must return existing row untouched, got %+v", again)
+	}
+	if _, err := store.ClaimGuestStudent("  ", "Guest"); err == nil {
+		t.Error("expected error for blank id")
+	}
+}

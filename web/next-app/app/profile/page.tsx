@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId, getGuestId } from '../../lib/auth'
+import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
@@ -66,6 +66,9 @@ export default function ProfilePage() {
     // Ensure guest has an ephemeral id so profile/diagnostic works without account
     if (!info) {
       ensureGuestId()
+      // Best-effort: mint a guest bearer token so the guest reads their own
+      // progress/scores as themselves (no credential = 401 for UUID rows).
+      ensureGuestToken()
     }
 
       // Avatar precedence lives in resolveAvatar (shared with Header):
