@@ -505,7 +505,8 @@ func TestUpsertProgressBatch_RoundTrip(t *testing.T) {
 	}
 }
 
-func TestServerSessions_RoundTrip(t *testing.T) {	store := newTestStore(t)
+func TestServerSessions_RoundTrip(t *testing.T) {
+	store := newTestStore(t)
 	future := time.Now().UTC().Add(time.Hour).Format(time.RFC3339)
 	past := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
 	if err := store.UpsertServerSession("study_expected", "s|c", "42", future); err != nil {
