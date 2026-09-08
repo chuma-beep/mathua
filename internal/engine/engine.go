@@ -52,6 +52,11 @@ type activeSession struct {
 // ready for grading — e.g. a duplicate/stale submission racing the current one.
 var ErrNoActiveQuestion = fmt.Errorf("no active question")
 
+// ErrUnknownConcept is returned when an answer references a concept_id absent
+// from the DAG. Rejecting (instead of persisting a fallback progress row)
+// keeps garbage IDs from farming XP and polluting progress/attempt tables.
+var ErrUnknownConcept = fmt.Errorf("unknown concept")
+
 type Question struct {
 	ConceptID   string          `json:"concept_id"`
 	ConceptName string          `json:"concept_name"`
@@ -942,8 +947,29 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 // generation), it is used instead of the client-supplied expected to prevent
 // trivial cheat (client sending expected==answer).
 func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
-	if stored, ok := e.popStudyExpected(studentID, conceptID); ok && stored != "" {
-		expected = stored
+	taskType := TaskLesson
+	if strings.HasSuffix(conceptID, ".word") {
+		taskType = TaskMultistep
+	}
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true)
+}
+
+// SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
+// progress update, and exactly one AddXP — DB and response agree by
+// construction. Unlike SubmitStudyAnswer it never consults studyExpected:
+// the quiz expected answer comes from the quiz session.
+func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false)
+}
+
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool) (*AnswerResult, error) {
+	if e.dag.Concept(conceptID) == nil {
+		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
+	}
+	if useStudyExpected {
+		if stored, ok := e.popStudyExpected(studentID, conceptID); ok && stored != "" {
+			expected = stored
+		}
 	}
 	// Narrow lock: only protect studySessions lookup/creation and studyMisses update.
 	e.mu.Lock()
@@ -1091,10 +1117,6 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 			// Try to fetch explanation via expected (already passed) — keep grader feedback as explanation.
 			explanation = gr.Feedback
 		}
-	}
-	taskType := TaskLesson
-	if strings.HasSuffix(conceptID, ".word") {
-		taskType = TaskMultistep
 	}
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, timeThreshold, progress.Streak, taskType)
 

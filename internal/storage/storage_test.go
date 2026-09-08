@@ -282,6 +282,30 @@ func TestGetWeeklyLeaderboard(t *testing.T) {
 	}
 }
 
+func TestGetWeeklyLeaderboard_WeeklyBeatsTotal(t *testing.T) {
+	store := newTestStore(t)
+	alice, _ := store.CreateStudent("alice")
+	bob, _ := store.CreateStudent("bob")
+
+	// Alice: high total, stale week (5 mastered, 0 this week).
+	for _, cid := range []string{"a", "b", "c", "d", "e"} {
+		_ = store.UpsertProgress(&ConceptProgress{StudentID: alice.ID, ConceptID: cid, Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC().AddDate(0, 0, -30))})
+	}
+	// Bob: low total, hot week (1 mastered this week).
+	_ = store.UpsertProgress(&ConceptProgress{StudentID: bob.ID, ConceptID: "a", Status: "MASTERED", MasteredAt: ptrTime(time.Now().UTC())})
+
+	rows, err := store.GetWeeklyLeaderboard()
+	if err != nil {
+		t.Fatalf("get weekly leaderboard: %v", err)
+	}
+	if len(rows) != 2 {
+		t.Fatalf("expected 2 rows, got %d", len(rows))
+	}
+	if rows[0].Name != "bob" {
+		t.Errorf("expected bob first (weekly=1 beats total=5), got %s", rows[0].Name)
+	}
+}
+
 func TestLeaderboardCarriesUsernameAndAvatar(t *testing.T) {
 	store := newTestStore(t)
 	st, err := store.CreateUser("Ada", "ada", "hash")

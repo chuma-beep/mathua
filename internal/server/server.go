@@ -282,6 +282,24 @@ type startSessionRes struct {
 
 type authStudentKey struct{}
 
+// ownsStudentID reports whether the caller may act as sid. The validated
+// Bearer identity always wins; unauthenticated callers may only act as
+// client-generated guest IDs (unguessable `guest_` tokens kept in
+// localStorage — knowledge of the token IS the credential). Auth-disabled
+// deployments (dev/test) allow all, preserving legacy behavior.
+func (s *Server) ownsStudentID(r *http.Request, sid string) bool {
+	if sid == "" {
+		return false
+	}
+	if authID, _ := r.Context().Value(authStudentKey{}).(string); authID != "" {
+		return authID == sid
+	}
+	if s.auth != nil {
+		return strings.HasPrefix(sid, "guest_")
+	}
+	return true
+}
+
 func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if s.auth == nil {
@@ -493,12 +511,25 @@ func (s *Server) handleProgress(w http.ResponseWriter, r *http.Request) {
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
 	if studentID == "" {
-		studentID = strings.TrimPrefix(r.URL.Path, "/api/progress/")
+		// No ID enumeration: unauthenticated callers cannot read
+		// arbitrary students. Guest IDs are the exception — the
+		// unguessable `guest_` token in localStorage IS the credential
+		// (same capability model as quiz/diag session UUIDs).
+		// (Auth-disabled dev/test deployments keep the legacy fallback.)
+		pathID := strings.TrimPrefix(r.URL.Path, "/api/progress/")
+		if s.auth != nil && !strings.HasPrefix(pathID, "guest_") {
+			writeError(w, "missing authorization", 401)
+			return
+		}
+		studentID = pathID
 		if studentID == "" {
 			writeError(w, "student_id required", 400)
 			return
 		}
 	}
+	// Authed: always serve the caller's own progress — the path ID is
+	// ignored so one student can never pull another's via enumeration
+	// (e.g. IDs harvested from the public leaderboard).
 	progress, err := s.eng.GetProgress(studentID)
 	if err != nil {
 		writeError(w, "failed to get progress", 500)
@@ -515,12 +546,23 @@ func (s *Server) handleScores(w http.ResponseWriter, r *http.Request) {
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
 	if studentID == "" {
-		studentID = strings.TrimPrefix(r.URL.Path, "/api/scores/")
+		// No ID enumeration: unauthenticated callers cannot read
+		// arbitrary students. Guest IDs are the exception — the
+		// unguessable `guest_` token in localStorage IS the credential
+		// (same capability model as quiz/diag session UUIDs).
+		// (Auth-disabled dev/test deployments keep the legacy fallback.)
+		pathID := strings.TrimPrefix(r.URL.Path, "/api/scores/")
+		if s.auth != nil && !strings.HasPrefix(pathID, "guest_") {
+			writeError(w, "missing authorization", 401)
+			return
+		}
+		studentID = pathID
 		if studentID == "" {
 			writeError(w, "student_id required", 400)
 			return
 		}
 	}
+	// Authed: always serve the caller's own scores — the path ID is ignored.
 	scores, err := s.eng.GetScores(studentID)
 	if err != nil {
 		writeError(w, "failed to get scores", 500)
@@ -1177,9 +1219,12 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Try to load progress if student_id is provided
+	// Try to load progress if student_id is provided — only when the caller
+	// owns that ID (own Bearer identity or guest_ token). Foreign IDs are
+	// ignored: the catalog stays public, but no one's progress leaks and no
+	// victim's studyExpected can be poisoned through this param.
 	var progressMap map[string]map[string]interface{}
-	if sid := r.URL.Query().Get("student_id"); sid != "" {
+	if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
 		if p, err := s.eng.GetProgress(sid); err == nil && p != nil {
 			progressMap = make(map[string]map[string]interface{})
 			for cid, cp := range p {
@@ -1386,9 +1431,9 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			}
 			questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
 		}
-		if studentID, _ := r.Context().Value(authStudentKey{}).(string); studentID != "" && len(dbQs) > 0 {
+		if studentID, _ := r.Context().Value(authStudentKey{}).(string); len(dbQs) > 0 && s.ownsStudentID(r, studentID) {
 			s.eng.SetStudyExpected(studentID, conceptID, dbQs[0].Answer)
-		} else if sid := r.URL.Query().Get("student_id"); sid != "" && len(dbQs) > 0 {
+		} else if sid := r.URL.Query().Get("student_id"); len(dbQs) > 0 && s.ownsStudentID(r, sid) {
 			s.eng.SetStudyExpected(sid, conceptID, dbQs[0].Answer)
 		}
 		writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
@@ -1407,9 +1452,9 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// H1b: store server-side expected for study cheat prevention when student is known
-	if studentID, _ := r.Context().Value(authStudentKey{}).(string); studentID != "" && len(problems) > 0 {
+	if studentID, _ := r.Context().Value(authStudentKey{}).(string); len(problems) > 0 && s.ownsStudentID(r, studentID) {
 		s.eng.SetStudyExpected(studentID, conceptID, problems[0].Answer)
-	} else if sid := r.URL.Query().Get("student_id"); sid != "" && len(problems) > 0 {
+	} else if sid := r.URL.Query().Get("student_id"); len(problems) > 0 && s.ownsStudentID(r, sid) {
 		s.eng.SetStudyExpected(sid, conceptID, problems[0].Answer)
 	}
 	questions := make([]qInfo, len(problems))
@@ -1958,6 +2003,10 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "expected required", 400)
 		return
 	}
+	if len(req.Answer) > 4096 || len(req.Expected) > 4096 {
+		writeError(w, "answer or expected too long", 400)
+		return
+	}
 	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
 	if authStudentID != "" && req.StudentID != "" && req.StudentID != authStudentID {
 		writeError(w, "student_id does not match authenticated user", 403)
@@ -1988,11 +2037,16 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	if req.Elapsed > 600 {
 		req.Elapsed = 600
 	}
-	if req.Elapsed > 0 && req.Elapsed < MinAnswerSeconds {
-		req.Elapsed = MinAnswerSeconds
+	if req.Elapsed < MinAnswerSeconds {
+		writeError(w, "answer submitted too quickly", 400)
+		return
 	}
 	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed)
 	if err != nil {
+		if errors.Is(err, engine.ErrUnknownConcept) {
+			writeError(w, "unknown concept", 404)
+			return
+		}
 		writeError(w, "failed to submit study answer", 500)
 		return
 	}
@@ -2097,6 +2151,10 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "session_id and concept_id required", 400)
 		return
 	}
+	if len(req.Answer) > 4096 {
+		writeError(w, "answer too long", 400)
+		return
+	}
 	if req.Elapsed < MinAnswerSeconds {
 		writeError(w, "answer submitted too quickly", 400)
 		return
@@ -2143,38 +2201,24 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// Record via quiz engine (advance index)
 	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
 	qEng.RecordAnswer(sess, req.ConceptID, gr.Correct)
-	// Also persist XP/progress via SubmitStudyAnswer with TaskQuiz override if student known
+	// Single-path quiz grading: the engine owns TaskQuiz XP atomically —
+	// one progress update, one AddXP, DB and response agree by construction.
 	xp := 0
 	var newStatus string
 	if studentID != "" {
-		// Use dedicated quiz XP: TaskQuiz 20
-		// Temporarily call SubmitStudyAnswer then override base via re-grade? Instead directly compute TaskQuiz XP here
-		// We call SubmitStudyAnswer for progress but it would award TaskLesson/Multistep; we want TaskQuiz.
-		// So we call engine helper for quiz XP: use SubmitStudyAnswer then patch XP to TaskQuiz 20 equivalent
-		// Simpler: call SubmitStudyAnswer then recompute XP as TaskQuiz
-		res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
-		if err == nil && res != nil {
-			// Override XP to TaskQuiz 20 (recompute)
-			conceptThresh := 10.0
-			if concept != nil {
-				conceptThresh = concept.MasteryThreshold.AvgTimeSeconds
+		res, err := s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
+		if err != nil {
+			if errors.Is(err, engine.ErrUnknownConcept) {
+				writeError(w, "unknown concept", 404)
+				return
 			}
-			// recompute with TaskQuiz base
-			// We already have res.XP as lesson/multistep; recompute correctly
-			// Use same streak from res
-			xp = res.XP
-			// If TaskQuiz differs, scale: TaskQuiz 20 vs TaskLesson 10 => double
-			if res.Correct {
-				// recompute TaskQuiz XP properly
-				// Inline compute to avoid re-calling private: approximate via engine's exported helper? Use simple ratio
-				// We know base 20 vs base from concept suffix; but just call with TaskQuiz via reflection: we can ask engine to compute
-				// For MVP, double XP if not word else 20/15
-				// Instead call engine's public TaskQuiz compute via new helper
-				xp = s.eng.QuizXP(res.Correct, req.Elapsed, conceptThresh, res.Streak)
-			}
-			newStatus = string(res.NewStatus)
-		} else {
+			// Persistence failure must not kill quiz progression: the
+			// grade above stands, XP just isn't awarded.
+			log.Printf("handleQuizAnswer: SubmitQuizAnswer failed for %s/%s: %v", studentID, req.ConceptID, err)
 			xp = 0
+		} else if res != nil {
+			xp = res.XP
+			newStatus = string(res.NewStatus)
 		}
 	}
 	if qEng.IsComplete(sess) {
