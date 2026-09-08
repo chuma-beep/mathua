@@ -7,6 +7,11 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/engine"
+	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/storage"
 )
 
 func adminMux(t *testing.T) (*Server, *http.ServeMux) {
@@ -108,9 +113,11 @@ func TestAdminSession_ExpiredRejected(t *testing.T) {
 	s, mux := adminMux(t)
 
 	_, token := loginAdmin(t, mux, "correct-horse-secret")
-	s.mu.Lock()
-	s.adminSessions[token] = time.Now().Add(-time.Minute)
-	s.mu.Unlock()
+	// Backdate the durable row past expiry (restart-proof path, not memory).
+	exp := time.Now().Add(-time.Minute).UTC().Format(time.RFC3339)
+	if err := s.repo.UpsertServerSession(serverSessionAdmin, token, "", exp); err != nil {
+		t.Fatalf("backdate session: %v", err)
+	}
 
 	req := httptest.NewRequest("GET", "/api/reports?status=open", nil)
 	req.Header.Set("Authorization", "Bearer "+token)
@@ -118,6 +125,38 @@ func TestAdminSession_ExpiredRejected(t *testing.T) {
 	mux.ServeHTTP(rec, req)
 	if rec.Code != 404 {
 		t.Errorf("expected 404 for expired session, got %d", rec.Code)
+	}
+}
+
+func TestAdminSession_SurvivesRestart(t *testing.T) {
+	t.Setenv("ADMIN_PASSWORD", "correct-horse-secret")
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	// Two Server instances over one store = simulated restart. No
+	// process-local session state may remain for this to pass.
+	s1 := New(engine.New(store, d, reg, nil, nil), store, nil)
+	mux1 := http.NewServeMux()
+	s1.Register(mux1)
+	s2 := New(engine.New(store, d, reg, nil, nil), store, nil)
+	mux2 := http.NewServeMux()
+	s2.Register(mux2)
+
+	_, token := loginAdmin(t, mux1, "correct-horse-secret")
+	if token == "" {
+		t.Fatal("expected login token")
+	}
+	req := httptest.NewRequest("GET", "/api/reports?status=open", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec := httptest.NewRecorder()
+	mux2.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Errorf("expected 200 on fresh instance, got %d: %s", rec.Code, rec.Body.String())
 	}
 }
 

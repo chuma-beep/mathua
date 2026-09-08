@@ -58,6 +58,23 @@ func reportAllowed(reporter string) bool {
 		return false
 	}
 	reportLimiter.hits[reporter] = append(kept, now)
+	// Opportunistic sweep: reporter keys never seen again would otherwise
+	// accumulate forever (no janitor for this map). Bound the scan.
+	if len(reportLimiter.hits) > 5000 {
+		for k, times := range reportLimiter.hits {
+			still := times[:0]
+			for _, t := range times {
+				if t.After(cutoff) {
+					still = append(still, t)
+				}
+			}
+			if len(still) == 0 {
+				delete(reportLimiter.hits, k)
+			} else {
+				reportLimiter.hits[k] = still
+			}
+		}
+	}
 	return true
 }
 

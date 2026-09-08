@@ -148,6 +148,22 @@ CREATE TABLE IF NOT EXISTS question_reports (
 
 CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
+
+CREATE TABLE IF NOT EXISTS server_sessions (
+    kind       TEXT NOT NULL,
+    key        TEXT NOT NULL,
+    value      TEXT NOT NULL DEFAULT '',
+    expires_at TEXT NOT NULL DEFAULT '',
+    updated_at TEXT NOT NULL DEFAULT (now()::text),
+    PRIMARY KEY (kind, key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_server_sessions_expiry ON server_sessions(expires_at);
+
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    version    INTEGER PRIMARY KEY,
+    applied_at TEXT NOT NULL DEFAULT (now()::text)
+);
 `
 
 func NewPostgresStore(dsn string) (*PostgresStore, error) {
@@ -155,6 +171,10 @@ func NewPostgresStore(dsn string) (*PostgresStore, error) {
 	if err != nil {
 		return nil, fmt.Errorf("open postgres: %w", err)
 	}
+	// Fix 7: bounded pool — previously unlimited (database/sql default).
+	db.SetMaxOpenConns(25)
+	db.SetMaxIdleConns(5)
+	db.SetConnMaxLifetime(5 * time.Minute)
 	if err := db.Ping(); err != nil {
 		return nil, fmt.Errorf("ping postgres: %w", err)
 	}
@@ -247,12 +267,40 @@ func pgAuthMigrate(db *sql.DB) error {
 			}
 		}
 	}
-	_, _ = db.Exec("UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150")
-	_, _ = db.Exec(`UPDATE students SET username = lower(username)
-		WHERE lower(username) NOT IN (
-			SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
-			GROUP BY lower(username) HAVING COUNT(*) > 1
-		)`)
+	// One-time data backfills, version-guarded (Fix 7) — see sqlite twin.
+	dataMigrations := map[int][]string{
+		1: {"UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 150"},
+		2: {`UPDATE students SET username = lower(username)
+			WHERE lower(username) NOT IN (
+				SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
+				GROUP BY lower(username) HAVING COUNT(*) > 1
+			)`},
+	}
+	for v := 1; v <= len(dataMigrations); v++ {
+		if err := runOncePostgres(db, v, dataMigrations[v]); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// runOncePostgres applies versioned data backfills exactly once.
+// ON CONFLICT DO NOTHING keeps concurrent first boots safe.
+func runOncePostgres(db *sql.DB, version int, stmts []string) error {
+	var one int
+	if err := db.QueryRow("SELECT 1 FROM schema_migrations WHERE version = $1", version).Scan(&one); err == nil {
+		return nil
+	} else if err != sql.ErrNoRows {
+		return fmt.Errorf("check schema migration %d: %w", version, err)
+	}
+	for _, stmt := range stmts {
+		if _, err := db.Exec(stmt); err != nil {
+			return fmt.Errorf("apply schema migration %d: %w", version, err)
+		}
+	}
+	if _, err := db.Exec("INSERT INTO schema_migrations (version) VALUES ($1) ON CONFLICT DO NOTHING", version); err != nil {
+		return fmt.Errorf("record schema migration %d: %w", version, err)
+	}
 	return nil
 }
 
@@ -809,6 +857,59 @@ func (s *PostgresStore) UpsertProgress(p *ConceptProgress) error {
 	return nil
 }
 
+func (s *PostgresStore) UpsertProgressBatch(ps []*ConceptProgress) error {
+	if len(ps) == 0 {
+		return nil
+	}
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin progress batch: %w", err)
+	}
+	stmt, err := tx.Prepare(`
+		INSERT INTO concept_progress
+			(student_id, concept_id, status, streak, best_streak,
+			 avg_response_time, attempts, last_attempted, last_reviewed,
+			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
+			 mastered_at, weakness_score)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+		ON CONFLICT(student_id, concept_id) DO UPDATE SET
+			status            = EXCLUDED.status,
+			streak            = EXCLUDED.streak,
+			best_streak       = EXCLUDED.best_streak,
+			avg_response_time = EXCLUDED.avg_response_time,
+			attempts          = EXCLUDED.attempts,
+			last_attempted    = EXCLUDED.last_attempted,
+			last_reviewed     = EXCLUDED.last_reviewed,
+			next_review_due   = EXCLUDED.next_review_due,
+			sm2_repetitions   = EXCLUDED.sm2_repetitions,
+			sm2_interval      = EXCLUDED.sm2_interval,
+			sm2_efactor       = EXCLUDED.sm2_efactor,
+			mastered_at       = EXCLUDED.mastered_at,
+			weakness_score    = EXCLUDED.weakness_score
+	`)
+	if err != nil {
+		tx.Rollback()
+		return fmt.Errorf("prepare progress batch: %w", err)
+	}
+	defer stmt.Close()
+	for _, p := range ps {
+		if _, err := stmt.Exec(
+			p.StudentID, p.ConceptID, p.Status, p.Streak, p.BestStreak,
+			p.AvgResponseTime, p.Attempts,
+			nullTime(p.LastAttempted), nullTime(p.LastReviewed),
+			nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
+			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+		); err != nil {
+			tx.Rollback()
+			return fmt.Errorf("exec progress batch: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit progress batch: %w", err)
+	}
+	return nil
+}
+
 // Sessions
 
 func (s *PostgresStore) CreateSession(studentID string) (*Session, error) {
@@ -840,6 +941,73 @@ func (s *PostgresStore) GetSession(id string) (*Session, error) {
 		}
 	}
 	return &ses, nil
+}
+
+// ServerSessions is a durable KV for restart-proof server state.
+
+func (s *PostgresStore) UpsertServerSession(kind, key, value, expiresAt string) error {
+	_, err := s.db.Exec(`
+		INSERT INTO server_sessions (kind, key, value, expires_at, updated_at)
+		VALUES ($1, $2, $3, $4, now()::text)
+		ON CONFLICT(kind, key) DO UPDATE SET
+			value = EXCLUDED.value,
+			expires_at = EXCLUDED.expires_at,
+			updated_at = now()::text
+	`, kind, key, value, expiresAt)
+	if err != nil {
+		return fmt.Errorf("upsert server session: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) GetServerSession(kind, key string) (string, string, bool, error) {
+	row := s.db.QueryRow("SELECT value, expires_at FROM server_sessions WHERE kind = $1 AND key = $2", kind, key)
+	var value, expiresAt string
+	if err := row.Scan(&value, &expiresAt); err != nil {
+		if err == sql.ErrNoRows {
+			return "", "", false, nil
+		}
+		return "", "", false, fmt.Errorf("get server session: %w", err)
+	}
+	return value, expiresAt, true, nil
+}
+
+func (s *PostgresStore) DeleteServerSession(kind, key string) error {
+	if _, err := s.db.Exec("DELETE FROM server_sessions WHERE kind = $1 AND key = $2", kind, key); err != nil {
+		return fmt.Errorf("delete server session: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) SweepServerSessions() error {
+	// expires_at is RFC3339 UTC — compare in Go (see sqlite twin).
+	rows, err := s.db.Query("SELECT kind, key, expires_at FROM server_sessions WHERE expires_at != ''")
+	if err != nil {
+		return fmt.Errorf("sweep server sessions: %w", err)
+	}
+	defer rows.Close()
+	type entry struct{ kind, key string }
+	var expired []entry
+	now := time.Now().UTC()
+	for rows.Next() {
+		var k, key, exp string
+		if err := rows.Scan(&k, &key, &exp); err != nil {
+			return fmt.Errorf("scan server sessions: %w", err)
+		}
+		if t, err := time.Parse(time.RFC3339, exp); err == nil && !t.After(now) {
+			expired = append(expired, entry{k, key})
+		}
+	}
+	if err := rows.Err(); err != nil {
+		return fmt.Errorf("sweep server sessions: %w", err)
+	}
+	rows.Close()
+	for _, e := range expired {
+		if _, err := s.db.Exec("DELETE FROM server_sessions WHERE kind = $1 AND key = $2", e.kind, e.key); err != nil {
+			return fmt.Errorf("sweep server sessions: %w", err)
+		}
+	}
+	return nil
 }
 
 func (s *PostgresStore) GetActiveSession(sessionID string) (*ActiveSession, error) {
@@ -1138,12 +1306,11 @@ func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 	monday := weekStart(time.Now().UTC())
 	rows, err := s.db.Query(`
 		SELECT s.id, s.name, s.username, s.avatar_url, s.settings,
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'
-			          AND mastered_at >= $1), 0)
+			COUNT(CASE WHEN cp.status = 'MASTERED' THEN 1 END),
+			COUNT(CASE WHEN cp.status = 'MASTERED' AND cp.mastered_at >= $1 THEN 1 END)
 		FROM students s
+		LEFT JOIN concept_progress cp ON cp.student_id = s.id
+		GROUP BY s.id, s.name, s.username, s.avatar_url, s.settings
 		ORDER BY 7 DESC, 6 DESC
 	`, monday.Format(time.RFC3339))
 	if err != nil {
@@ -1170,12 +1337,11 @@ func (s *PostgresStore) GetLeagueStandings() ([]LeagueMember, error) {
 	monday := weekStart(time.Now().UTC())
 	rows, err := s.db.Query(`
 		SELECT s.id, s.name, s.username, s.avatar_url, s.settings, COALESCE(s.league, 'bronze'), s.league_moved,
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'), 0),
-			COALESCE((SELECT COUNT(*) FROM concept_progress
-			          WHERE student_id = s.id AND status = 'MASTERED'
-			          AND mastered_at >= $1), 0)
+			COUNT(CASE WHEN cp.status = 'MASTERED' THEN 1 END),
+			COUNT(CASE WHEN cp.status = 'MASTERED' AND cp.mastered_at >= $1 THEN 1 END)
 		FROM students s
+		LEFT JOIN concept_progress cp ON cp.student_id = s.id
+		GROUP BY s.id, s.name, s.username, s.avatar_url, s.settings, s.league, s.league_moved
 	`, monday.Format(time.RFC3339))
 	if err != nil {
 		return nil, fmt.Errorf("get league standings: %w", err)

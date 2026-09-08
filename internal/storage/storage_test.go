@@ -472,3 +472,121 @@ func TestClaimGuestStudent_Idempotent(t *testing.T) {
 		t.Error("expected error for blank id")
 	}
 }
+
+func TestUpsertProgressBatch_RoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("batch")
+	if err := store.UpsertProgressBatch(nil); err != nil {
+		t.Fatalf("empty batch should be a no-op: %v", err)
+	}
+	batch := []*ConceptProgress{
+		{StudentID: st.ID, ConceptID: "a", Status: "LEARNING", WeaknessScore: 0.4},
+		{StudentID: st.ID, ConceptID: "b", Status: "MASTERED", WeaknessScore: 0.0},
+		{StudentID: st.ID, ConceptID: "c", Status: "UNSEEN", WeaknessScore: 0.9},
+	}
+	if err := store.UpsertProgressBatch(batch); err != nil {
+		t.Fatalf("batch: %v", err)
+	}
+	all, err := store.GetAllProgress(st.ID)
+	if err != nil {
+		t.Fatalf("read back: %v", err)
+	}
+	if len(all) != 3 || all["b"].Status != "MASTERED" || all["c"].WeaknessScore != 0.9 {
+		t.Errorf("batch round-trip mismatch: %+v", all)
+	}
+	// Overwrite via batch (conflict path).
+	batch[0].Status = "MASTERED"
+	if err := store.UpsertProgressBatch(batch[:1]); err != nil {
+		t.Fatalf("overwrite: %v", err)
+	}
+	all, _ = store.GetAllProgress(st.ID)
+	if all["a"].Status != "MASTERED" || len(all) != 3 {
+		t.Errorf("batch overwrite mismatch: %+v", all)
+	}
+}
+
+func TestServerSessions_RoundTrip(t *testing.T) {	store := newTestStore(t)
+	future := time.Now().UTC().Add(time.Hour).Format(time.RFC3339)
+	past := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	if err := store.UpsertServerSession("study_expected", "s|c", "42", future); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+	v, exp, found, err := store.GetServerSession("study_expected", "s|c")
+	if err != nil || !found || v != "42" || exp != future {
+		t.Errorf("round-trip mismatch: %q %q %v %v", v, exp, found, err)
+	}
+	if _, _, found, _ := store.GetServerSession("study_expected", "nope"); found {
+		t.Error("expected miss for unknown key")
+	}
+	// Overwrite.
+	if err := store.UpsertServerSession("study_expected", "s|c", "43", future); err != nil {
+		t.Fatalf("overwrite: %v", err)
+	}
+	if v, _, _, _ := store.GetServerSession("study_expected", "s|c"); v != "43" {
+		t.Errorf("expected overwritten value 43, got %q", v)
+	}
+	// Sweep removes only expired rows.
+	if err := store.UpsertServerSession("admin", "tok-old", "", past); err != nil {
+		t.Fatalf("upsert expired: %v", err)
+	}
+	if err := store.SweepServerSessions(); err != nil {
+		t.Fatalf("sweep: %v", err)
+	}
+	if _, _, found, _ := store.GetServerSession("admin", "tok-old"); found {
+		t.Error("expected expired row swept")
+	}
+	if _, _, found, _ := store.GetServerSession("study_expected", "s|c"); !found {
+		t.Error("live row must survive sweep")
+	}
+	if err := store.DeleteServerSession("study_expected", "s|c"); err != nil {
+		t.Fatalf("delete: %v", err)
+	}
+	if _, _, found, _ := store.GetServerSession("study_expected", "s|c"); found {
+		t.Error("expected deleted row gone")
+	}
+}
+
+func TestDataMigrations_RunOnce(t *testing.T) {
+	store := newTestStore(t)
+	versions := func() map[int]bool {
+		out := map[int]bool{}
+		rows, err := store.db.Query("SELECT version FROM schema_migrations")
+		if err != nil {
+			t.Fatalf("read versions: %v", err)
+		}
+		defer rows.Close()
+		for rows.Next() {
+			var v int
+			if err := rows.Scan(&v); err != nil {
+				t.Fatalf("scan version: %v", err)
+			}
+			out[v] = true
+		}
+		return out
+	}
+	if v := versions(); !v[1] || !v[2] {
+		t.Fatalf("expected versions 1,2 recorded, got %v", v)
+	}
+	// Legacy row simulation: reset v1 and plant a 150 goal, re-migrate.
+	st, _ := store.CreateStudent("legacy")
+	if _, err := store.db.Exec("UPDATE students SET daily_xp_goal = 150 WHERE id = ?", st.ID); err != nil {
+		t.Fatalf("plant legacy goal: %v", err)
+	}
+	if _, err := store.db.Exec("DELETE FROM schema_migrations WHERE version = 1"); err != nil {
+		t.Fatalf("reset version: %v", err)
+	}
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("re-migrate: %v", err)
+	}
+	got, err := store.GetStudent(st.ID)
+	if err != nil || got == nil || got.DailyXPGoal != 30 {
+		t.Errorf("expected one-time backfill to 30, got %+v err=%v", got, err)
+	}
+	if v := versions(); !v[1] {
+		t.Error("expected version 1 re-recorded")
+	}
+	// Second Migrate is a no-op for data (idempotent, no every-boot writes).
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("second migrate: %v", err)
+	}
+}
