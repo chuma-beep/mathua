@@ -994,3 +994,99 @@ func TestIdentitiesEndpoints(t *testing.T) {
 		t.Error("expected email_verified set")
 	}
 }
+
+func TestStudyAnswer_UnknownConcept(t *testing.T) {
+	s := testServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "nope.not.real",
+		"answer":     "1",
+		"expected":   "1",
+		"elapsed":    5.0,
+		"student_id": "ghost",
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body)))
+	if rec.Code != 404 {
+		t.Errorf("expected 404 for unknown concept, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+func TestStudyAnswer_TooFast(t *testing.T) {
+	s := testServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     "4",
+		"expected":   "4",
+		"elapsed":    0.1,
+		"student_id": "ghost",
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body)))
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for rushed answer, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+func TestProgressScores_Ownership(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	victimToken, victim, err := authSvc.Signup("Victim", "victim", "Engine!n1")
+	if err != nil || victimToken == "" {
+		t.Fatalf("victim signup: %v", err)
+	}
+	attackerToken, _, err := authSvc.Signup("Attacker", "attacker", "Engine!n1")
+	if err != nil || attackerToken == "" {
+		t.Fatalf("attacker signup: %v", err)
+	}
+	// Victim has real progress.
+	_ = store.UpsertProgress(&storage.ConceptProgress{StudentID: victim.ID, ConceptID: "a", Status: "LEARNING"})
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	get := func(path, token string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("GET", path, nil)
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	// No token → 401 even with a valid victim ID (no enumeration).
+	if rec := get("/api/progress/"+victim.ID, ""); rec.Code != 401 {
+		t.Errorf("progress: expected 401 without token, got %d", rec.Code)
+	}
+	if rec := get("/api/scores/"+victim.ID, ""); rec.Code != 401 {
+		t.Errorf("scores: expected 401 without token, got %d", rec.Code)
+	}
+	// Attacker asking for the victim's ID gets their OWN (empty) progress.
+	rec := get("/api/progress/"+victim.ID, attackerToken)
+	if rec.Code != 200 {
+		t.Fatalf("progress: expected 200 for authed caller, got %d", rec.Code)
+	}
+	var progress map[string]interface{}
+	if err := json.Unmarshal(rec.Body.Bytes(), &progress); err != nil {
+		t.Fatalf("decode progress: %v", err)
+	}
+	if _, ok := progress["a"]; ok {
+		t.Error("progress: victim concept leaked to attacker")
+	}
+	// Guest exception: guest_ IDs remain readable without a token.
+	if rec := get("/api/progress/guest_local123", ""); rec.Code == 401 {
+		t.Errorf("progress: expected guest_ IDs readable without token, got 401")
+	}
+}

@@ -1118,7 +1118,7 @@ func (s *PostgresStore) GetWeeklyLeaderboard() ([]LeaderboardRow, error) {
 			          WHERE student_id = s.id AND status = 'MASTERED'
 			          AND mastered_at >= $1), 0)
 		FROM students s
-		ORDER BY 4 DESC, 3 DESC
+		ORDER BY 7 DESC, 6 DESC
 	`, monday.Format(time.RFC3339))
 	if err != nil {
 		return nil, fmt.Errorf("get weekly leaderboard: %w", err)

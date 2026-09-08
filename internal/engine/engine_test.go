@@ -577,3 +577,50 @@ func TestEngine_AggregateEfficacy(t *testing.T) {
 		t.Errorf("expected second-pass 1.0, got %f", rep.SecondPassRate)
 	}
 }
+
+func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {	e := testEngine(t)
+	st, _ := e.CreateStudent("quizzer")
+	before, _, err := e.repo.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp: %v", err)
+	}
+	res, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 3.0)
+	if err != nil {
+		t.Fatalf("submit quiz answer: %v", err)
+	}
+	if !res.Correct {
+		t.Fatal("expected correct quiz answer")
+	}
+	after, _, err := e.repo.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp: %v", err)
+	}
+	// Single-path invariant: exactly what the response reports is what the
+	// DB received — no lesson-rate write + quiz-rate display divergence.
+	if after-before != res.XP {
+		t.Errorf("DB delta %d != response XP %d", after-before, res.XP)
+	}
+	want := computeXPForTask(true, 3.0, 60, res.Streak, TaskQuiz)
+	if res.XP != want {
+		t.Errorf("expected TaskQuiz XP %d, got %d", want, res.XP)
+	}
+	lesson := computeXPForTask(true, 3.0, 60, res.Streak, TaskLesson)
+	if res.XP <= lesson {
+		t.Errorf("expected quiz XP %d to exceed lesson XP %d", res.XP, lesson)
+	}
+}
+
+func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("lost")
+	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", "1", 5.0); !errors.Is(err, ErrUnknownConcept) {
+		t.Errorf("expected ErrUnknownConcept, got %v", err)
+	}
+	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0); !errors.Is(err, ErrUnknownConcept) {
+		t.Errorf("expected ErrUnknownConcept (quiz), got %v", err)
+	}
+	// No garbage progress row persisted.
+	if p, _ := e.GetProgress(st.ID); len(p) != 0 {
+		t.Errorf("expected no progress rows for unknown concept, got %v", p)
+	}
+}
