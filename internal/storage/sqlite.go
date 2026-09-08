@@ -118,6 +118,32 @@ func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	return &Student{ID: id, Name: name, Settings: "{}", CreatedAt: now}, nil
 }
 
+func (s *SQLiteStore) ClaimGuestStudent(id, name string) (*Student, error) {
+	if strings.TrimSpace(id) == "" {
+		return nil, fmt.Errorf("guest id is required")
+	}
+	name = strings.TrimSpace(name)
+	if name == "" {
+		name = "Guest"
+	}
+	now := time.Now().UTC()
+	_, err := s.db.Exec(
+		"INSERT OR IGNORE INTO students (id, name, settings, created_at) VALUES (?, ?, '{}', ?)",
+		id, name, now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	st, err := s.GetStudent(id)
+	if err != nil {
+		return nil, err
+	}
+	if st == nil {
+		return nil, fmt.Errorf("claim guest student: row missing after upsert")
+	}
+	return st, nil
+}
+
 func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
@@ -870,7 +896,8 @@ func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, e
 	return out, rows.Err()
 }
 
-func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {	rows, err := s.db.Query(`
+func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
+	rows, err := s.db.Query(`
 		SELECT session_id, student_id, concept_id, answer, expected,
 		       correct, elapsed_seconds, timestamp
 		FROM attempts
@@ -1203,7 +1230,8 @@ func weekStart(t time.Time) time.Time {
 	return time.Date(start.Year(), start.Month(), start.Day(), 0, 0, 0, 0, time.UTC)
 }
 
-func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {	if len(conceptIDs) == 0 {
+func (s *SQLiteStore) PurgeGeneratedQuestions(conceptIDs map[string]bool) (int64, error) {
+	if len(conceptIDs) == 0 {
 		return 0, nil
 	}
 	ids := make([]string, 0, len(conceptIDs))

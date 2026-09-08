@@ -204,6 +204,10 @@ type QuestionReport struct {
 
 type Repository interface {
 	CreateStudent(name string) (*Student, error)
+	// ClaimGuestStudent adopts a client-generated guest ID into a real
+	// students row (progress/attempt rows keyed by that ID predate the row —
+	// there are no FKs). Idempotent: existing rows are returned as-is.
+	ClaimGuestStudent(id, name string) (*Student, error)
 	GetStudent(id string) (*Student, error)
 	FindByUsername(username string) (*Student, error)
 	FindByEmail(email string) (*Student, error)

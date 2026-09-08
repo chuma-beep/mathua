@@ -88,7 +88,8 @@ func isAllowedOrigin(origin string) bool {
 
 // matchOriginPattern supports "*" wildcards via prefix/suffix split.
 // e.g. "*.vercel.app" matches "https://foo.vercel.app"
-//      "https://*.vercel.app" matches "https://mathua.vercel.app" but not "http://..."
+//
+//	"https://*.vercel.app" matches "https://mathua.vercel.app" but not "http://..."
 func matchOriginPattern(origin, pattern string) bool {
 	if !strings.Contains(pattern, "*") {
 		return origin == pattern
@@ -128,18 +129,18 @@ func cors(next http.HandlerFunc) http.HandlerFunc {
 }
 
 type Server struct {
-	eng            *engine.Engine
-	repo           storage.Repository
-	auth           *auth.AuthService
-	diagSessions   map[string]*diagnostic.Session
-	diagCreated    map[string]time.Time
-	quizSessions   map[string]*quiz.Session
-	quizCreated    map[string]time.Time
-	adminSessions  map[string]time.Time // admin session token → expiry
-	mu             sync.Mutex
-	authLimiter    *rateLimiter
-	writeLimiter   *rateLimiter
-	shareLimiter   *rateLimiter
+	eng           *engine.Engine
+	repo          storage.Repository
+	auth          *auth.AuthService
+	diagSessions  map[string]*diagnostic.Session
+	diagCreated   map[string]time.Time
+	quizSessions  map[string]*quiz.Session
+	quizCreated   map[string]time.Time
+	adminSessions map[string]time.Time // admin session token → expiry
+	mu            sync.Mutex
+	authLimiter   *rateLimiter
+	writeLimiter  *rateLimiter
+	shareLimiter  *rateLimiter
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
@@ -153,9 +154,9 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 		quizSessions:  make(map[string]*quiz.Session),
 		quizCreated:   make(map[string]time.Time),
 		adminSessions: make(map[string]time.Time),
-		authLimiter:  newRateLimiter(5, 10, time.Minute),
-		writeLimiter: newRateLimiter(20, 20, 3*time.Second),
-		shareLimiter: newRateLimiter(10, 10, 6*time.Second),
+		authLimiter:   newRateLimiter(5, 10, time.Minute),
+		writeLimiter:  newRateLimiter(20, 20, 3*time.Second),
+		shareLimiter:  newRateLimiter(10, 10, 6*time.Second),
 	}
 	// Clean up abandoned diagnostic/quiz sessions older than 1 hour
 	go func() {
@@ -189,6 +190,7 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.authLimiter.middleware(s.handleSignup))))
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
+	mux.HandleFunc("/api/auth/guest", logRequest(cors(s.authLimiter.middleware(s.handleGuestToken))))
 	mux.HandleFunc("/api/auth/password", logRequest(cors(s.authLimiter.middleware(s.authMiddleware(s.handleChangePassword)))))
 	mux.HandleFunc("/api/auth/reset/request", logRequest(cors(s.authLimiter.middleware(s.handleResetRequest))))
 	mux.HandleFunc("/api/auth/reset/complete", logRequest(cors(s.authLimiter.middleware(s.handleResetComplete))))
@@ -1667,7 +1669,8 @@ func (s *Server) setSettingsFlag(studentID, key string, value bool) error {
 }
 
 // GET /api/reviews/due — returns count of concepts due for review
-func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {	if r.Method != http.MethodGet {
+func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
@@ -2325,6 +2328,82 @@ type authRes struct {
 	DiagnosticCompleted bool   `json:"diagnostic_completed"`
 }
 
+// POST /api/auth/guest — mint (or reclaim) a bearer token for a guest.
+// Body: { student_id? (existing guest ID to claim), name? }.
+// Claimable rows are credential-less by construction: no password hash, no
+// email, no linked OAuth identity. Anything with a credential → 403 (use
+// signup/login — this is what stops guest-claim account takeover).
+// Unknown IDs are adopted only under the `guest_` prefix (progress rows
+// keyed by that ID predate any students row); anything else → 404.
+// Rate-limited with the other auth endpoints.
+func (s *Server) handleGuestToken(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		StudentID string `json:"student_id"`
+		Name      string `json:"name"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	sid := strings.TrimSpace(req.StudentID)
+	name := strings.TrimSpace(req.Name)
+	if len([]rune(name)) > 50 {
+		writeError(w, "name must be 1-50 characters", 400)
+		return
+	}
+	if sid == "" {
+		if name == "" {
+			name = "Guest"
+		}
+		st, err := s.repo.CreateStudent(name)
+		if err != nil {
+			writeError(w, "failed to create guest", 500)
+			return
+		}
+		sid = st.ID
+	} else {
+		st, err := s.repo.GetStudent(sid)
+		if err != nil {
+			writeError(w, "failed to look up student", 500)
+			return
+		}
+		if st == nil {
+			// Adopt pre-existing progress keyed by a client guest ID.
+			if !strings.HasPrefix(sid, "guest_") {
+				writeError(w, "unknown student — sign up for a new account", 404)
+				return
+			}
+			if _, err := s.repo.ClaimGuestStudent(sid, name); err != nil {
+				writeError(w, "failed to claim guest", 500)
+				return
+			}
+		} else {
+			// A row with any credential is a real account — not claimable.
+			if st.PasswordHash != "" || strings.TrimSpace(st.Email) != "" {
+				writeError(w, "account already registered — log in instead", 403)
+				return
+			}
+			if ids, err := s.repo.ListIdentities(sid); err != nil {
+				writeError(w, "failed to look up student", 500)
+				return
+			} else if len(ids) > 0 {
+				writeError(w, "account already registered — log in instead", 403)
+				return
+			}
+		}
+	}
+	token, err := auth.IssueGuestToken(sid)
+	if err != nil {
+		writeError(w, "failed to issue token", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"token": token, "student_id": sid})
+}
+
 func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -2518,7 +2597,7 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var req struct {
-		Name  string `json:"name"`
+		Name  string  `json:"name"`
 		Email *string `json:"email,omitempty"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {

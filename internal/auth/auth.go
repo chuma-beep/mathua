@@ -382,6 +382,18 @@ func generateToken(studentID string) (string, error) {
 	return token.SignedString(getJWTSecret())
 }
 
+// IssueGuestToken mints a bearer token for a guest student row. It carries
+// no guest marker — ownership is uniform: the token proves the caller owns
+// the student ID, registered or not. Package-level (not a method) so the
+// guest handler works even when the AuthService is unwired (dev/test);
+// the secret machinery is process-global either way.
+func IssueGuestToken(studentID string) (string, error) {
+	if strings.TrimSpace(studentID) == "" {
+		return "", errors.New("student_id is required")
+	}
+	return generateToken(studentID)
+}
+
 func generateSecret() []byte {
 	b := make([]byte, 32)
 	if _, err := rand.Read(b); err != nil {
