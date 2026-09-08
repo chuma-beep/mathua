@@ -27,6 +27,10 @@ var (
 	validReportStatuses = map[string]bool{
 		"open": true, "confirmed": true, "fixed": true, "dismissed": true,
 	}
+	validReportSources = map[string]bool{
+		"study": true, "diagnostic": true, "quiz": true, "lesson": true,
+		"concept": true, "review": true,
+	}
 )
 
 // Per-reporter spam guard: 10 reports/hour (writeLimiter covers per-IP burst).
@@ -106,6 +110,14 @@ func (s *Server) handleCreateReport(w http.ResponseWriter, r *http.Request) {
 	conceptID := strings.TrimSpace(req.ConceptID)
 	lessonID := truncate(req.LessonID, 256)
 	question := truncate(req.Question, 4000)
+	source := strings.TrimSpace(req.Source)
+	if source == "" {
+		source = "study"
+	}
+	if !validReportSources[source] {
+		writeError(w, "invalid source", 400)
+		return
+	}
 	if conceptID == "" && lessonID == "" && question == "" {
 		writeError(w, "concept_id, lesson_id, or question required", 400)
 		return
@@ -128,7 +140,7 @@ func (s *Server) handleCreateReport(w http.ResponseWriter, r *http.Request) {
 		Expected:    truncate(req.Expected, 2000),
 		Explanation: truncate(req.Explanation, 4000),
 		LessonID:    lessonID,
-		Source:      truncate(req.Source, 256),
+		Source:      truncate(source, 64),
 		SessionID:   truncate(req.SessionID, 128),
 		AttemptID:   truncate(req.AttemptID, 128),
 		Reason:      reason,

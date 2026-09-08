@@ -12,6 +12,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import SymbolPalette from '../../components/SymbolPalette'
+import ReportButton from '../../components/ReportButton'
 import DiagnosticResults from '../../components/DiagnosticResults'
 import ProgressBar from '../../components/ProgressBar'
 import {
@@ -365,7 +366,17 @@ export default function OnboardPage() {
                        Check Answer
                      </button>
                    </div>
-                   <SymbolPalette targetRef={onboardInputRef} onInsert={setAnswerInput} />
+                    <SymbolPalette targetRef={onboardInputRef} onInsert={setAnswerInput} />
+                    <div className="mt-2 flex justify-end">
+                      <ReportButton
+                        key={question}
+                        conceptId={conceptId.current}
+                        kind="question"
+                        question={question}
+                        source="diagnostic"
+                        sessionId={sessionId.current}
+                      />
+                    </div>
                 </div>
 
                 {lastResult && (

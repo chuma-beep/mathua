@@ -14,6 +14,7 @@ import {
 } from '../../../lib/api'
 
 const STATUSES = ['open', 'confirmed', 'fixed', 'dismissed', 'all']
+const SOURCES = ['all', 'study', 'diagnostic', 'quiz', 'lesson', 'concept', 'review']
 const SESSION_KEY = 'mathua_admin_session'
 
 interface AdminSession {
@@ -43,6 +44,7 @@ export default function AdminReportsPage() {
   const [password, setPassword] = useState('')
   const [loggingIn, setLoggingIn] = useState(false)
   const [status, setStatus] = useState('open')
+  const [source, setSource] = useState('all')
   const [reports, setReports] = useState<QuestionReport[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -181,11 +183,28 @@ export default function AdminReportsPage() {
               ))}
             </div>
 
+            <div className="mt-2 flex gap-2 flex-wrap items-center">
+              <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">Source:</span>
+              {SOURCES.map(s => (
+                <button
+                  key={s}
+                  onClick={() => setSource(s)}
+                  className={`px-3 h-8 font-mono text-[11px] uppercase tracking-wider border transition-colors ${
+                    source === s
+                      ? 'border-mathua-blue text-mathua-blue'
+                      : 'border-mathua-border text-mathua-muted hover:text-mathua-primary'
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+
             {error && <p className="mt-4 font-mono text-xs text-red-400">{error}</p>}
             {loading && <p className="mt-4 font-mono text-xs text-mathua-muted">Loading…</p>}
 
             <div className="mt-6 space-y-3">
-              {reports.map(r => (
+              {reports.filter(r => source === 'all' || (r.source || 'study') === source).map(r => (
                 <div key={r.id} className="border border-mathua-border bg-mathua-surface p-4">
                   <div className="flex items-center gap-2 flex-wrap font-mono text-[10px] uppercase tracking-wider">
                     <span className="text-mathua-blue">#{r.id}</span>
