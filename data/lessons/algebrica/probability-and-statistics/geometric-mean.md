@@ -107,8 +107,8 @@ May| +4.5%| 3
 
 We now calculate the weighted geometric mean, taking into account the growth factors \\((1 + x_i)\\) and the corresponding weights \\(w_i\\) assigned to each observation. We obtain:
 
-\\[\begin{align} M_{gw} &= \left[(1.124)^3 \times (0.962)^1 \times (1.076)^2 \times (1.021)^1 \times (1.045)^3\right]^{\tfrac{1}{10}} - 1 \\\\[3pt] &= (1.5566)^{0.1} - 1 \\\\[3pt] &= 1.0455 - 1 \\\\[3pt] &= 0.0455 \\\\[3pt] &= 4.55\% \end{align} \\]
+\\[\begin{align} M_{gw} &= \left[(1.124)^3 \times (0.962)^1 \times (1.076)^2 \times (1.021)^1 \times (1.045)^3\right]^{\tfrac{1}{10}} - 1 \\\\[3pt] &= (1.8428)^{0.1} - 1 \\\\[3pt] &= 1.0630 - 1 \\\\[3pt] &= 0.0630 \\\\[3pt] &= 6.30\% \end{align} \\]
 
 ##### In this case, the exponent \\( \tfrac{1}{10} \\) is obtained as the reciprocal of the sum of all weights.Since the weights assigned to each month are \\( w_i = {3, 1, 2, 1, 3} \\), their total is \\( \sum w_i = 10 \\).
 
-Therefore, after applying the chosen weights, Tesla’s weighted average monthly return for the first five months of 2025 was approximately \\(4.55\%\\) slightly higher than the unweighted value due to the greater influence of months with positive performance.
+Therefore, after applying the chosen weights, Tesla’s weighted average monthly return for the first five months of 2025 was approximately \\(6.30\%\\) slightly higher than the unweighted value due to the greater influence of months with positive performance.
