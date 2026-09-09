@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multivariable chain rule",
+    "section": "The chain rule in multivariable calculus",
+    "subgoals": [
+      "State dz/dt = fx dx/dt + fy dy/dt",
+      "Trace every path from t to z",
+      "Check z = x^2 y with x = t, y = t^2"
+    ]
+  },
+  {
+    "label": "Worked chain examples",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked chain example",
+      "Substitute before or after differentiating",
+      "Verify z = x+y gives 2t+3"
+    ]
+  },
+  {
+    "label": "Partial derivatives refresher",
+    "section": "Definition",
+    "subgoals": [
+      "Recall fx holds y constant",
+      "Compute first-order partials",
+      "Feed them into the chain formula"
+    ]
+  }
+]

@@ -85,6 +85,31 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.series.power", &powerSeriesGen{})
 	reg.Register("calc.series.root_test", &rootTestGen{})
 	reg.Register("calc.series.taylor", &taylorSeriesGen{})
+	reg.Register("calc.deriv.trig_other", &derivTrigOtherGen{})
+	reg.Register("calc.deriv.inverse_trig", &derivInverseTrigGen{})
+	reg.Register("calc.deriv.general_exp", &derivGeneralExpGen{})
+	reg.Register("calc.deriv.log_diff", &derivLogDiffGen{})
+	reg.Register("calc.deriv.higher_order", &derivHigherOrderGen{})
+	reg.Register("calc.deriv.inverse_func", &derivInverseFuncGen{})
+	reg.Register("calc.deriv.critical_points", &derivCriticalPointsGen{})
+	reg.Register("calc.deriv.second_test", &derivSecondTestGen{})
+	reg.Register("calc.deriv.inflection", &derivInflectionGen{})
+	reg.Register("calc.deriv.global_extrema", &derivGlobalExtremaGen{})
+	reg.Register("calc.deriv.curve_sketch", &derivCurveSketchGen{})
+	reg.Register("calc.deriv.tangent_line", &derivTangentLineGen{})
+	reg.Register("calc.deriv.linear_approx", &derivLinearApproxGen{})
+	reg.Register("calc.deriv.newton", &derivNewtonGen{})
+	reg.Register("calc.deriv.error_prop", &derivErrorPropGen{})
+	reg.Register("calc.deriv.implicit_second", &derivImplicitSecondGen{})
+	reg.Register("calc.deriv.chain_power", &derivChainPowerGen{})
+	reg.Register("calc.deriv.chain_multi", &derivChainMultiGen{})
+	reg.Register("calc.deriv.gradient", &derivGradientGen{})
+	reg.Register("calc.deriv.directional", &derivDirectionalGen{})
+	reg.Register("calc.deriv.partial_higher", &derivPartialHigherGen{})
+	reg.Register("calc.deriv.clairaut", &derivClairautGen{})
+	reg.Register("calc.deriv.total_diff", &derivTotalDiffGen{})
+	reg.Register("calc.deriv.diff_continuity", &derivDiffContinuityGen{})
+	reg.Register("calc.deriv.jacobian", &derivJacobianGen{})
 }
 
 type limitConceptGen struct{}
@@ -1374,6 +1399,407 @@ func (g *functionSeriesGen) Generate(ctx generator.GeneratorContext) generator.P
 		{"What does pointwise convergence of a function series mean?", "∑ fₙ(x) converges for each fixed x", "The series converges pointwise if for each x in the domain, the numerical series converges."},
 		{"What does uniform convergence of a function series mean?", "partial sums converge uniformly", "The series converges uniformly if the sequence of partial sums converges uniformly."},
 		{"What is the Weierstrass M-test for?", "testing uniform convergence", "If |fₙ(x)| ≤ Mₙ and ∑ Mₙ converges, then ∑ fₙ(x) converges uniformly and absolutely."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivTrigOtherGen struct{}
+
+func (g *derivTrigOtherGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(f'(x)\\) if \\(f(x)=\\tan(x)\\).", "sec(x)^2", "\\(\\frac{d}{dx} \\tan(x) = \\sec^{2}(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\sec(x)\\).", "sec(x)tan(x)", "\\(\\frac{d}{dx} \\sec(x) = \\sec(x)\\tan(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\csc(x)\\).", "-csc(x)cot(x)", "\\(\\frac{d}{dx} \\csc(x) = -\\csc(x)\\cot(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\cot(x)\\).", "-csc(x)^2", "\\(\\frac{d}{dx} \\cot(x) = -\\csc^{2}(x)\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\tan(2x)\\).", "2sec(2x)^2", "Chain rule: \\(\\frac{d}{dx} \\tan(2x) = \\sec^{2}(2x) \\cdot 2\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\sec(3x)\\).", "3sec(3x)tan(3x)", "Chain rule: \\(\\frac{d}{dx} \\sec(3x) = \\sec(3x)\\tan(3x) \\cdot 3\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivInverseTrigGen struct{}
+
+func (g *derivInverseTrigGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(f'(x)\\) if \\(f(x)=\\arcsin(x)\\).", "1/sqrt(1-x^2)", "\\(\\frac{d}{dx} \\arcsin(x) = \\frac{1}{\\sqrt{1-x^{2}}}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\arccos(x)\\).", "-1/sqrt(1-x^2)", "\\(\\frac{d}{dx} \\arccos(x) = -\\frac{1}{\\sqrt{1-x^{2}}}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\arctan(x)\\).", "1/(1+x^2)", "\\(\\frac{d}{dx} \\arctan(x) = \\frac{1}{1+x^{2}}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\arctan(2x)\\).", "2/(1+4x^2)", "Chain rule: \\(\\frac{d}{dx} \\arctan(2x) = \\frac{1}{1+(2x)^{2}} \\cdot 2\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\arcsin(3x)\\).", "3/sqrt(1-9x^2)", "Chain rule: \\(\\frac{d}{dx} \\arcsin(3x) = \\frac{1}{\\sqrt{1-(3x)^{2}}} \\cdot 3\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivGeneralExpGen struct{}
+
+func (g *derivGeneralExpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(f'(x)\\) if \\(f(x)=2^{x}\\).", "2^x*ln(2)", "\\(\\frac{d}{dx} 2^{x} = 2^{x}\\ln 2\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=10^{x}\\).", "10^x*ln(10)", "\\(\\frac{d}{dx} 10^{x} = 10^{x}\\ln 10\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=3^{x}\\).", "3^x*ln(3)", "\\(\\frac{d}{dx} 3^{x} = 3^{x}\\ln 3\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=2^{3x}\\).", "3*2^(3x)*ln(2)", "Chain rule: \\(\\frac{d}{dx} 2^{3x} = 2^{3x}\\ln 2 \\cdot 3\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=5^{2x}\\).", "2*5^(2x)*ln(5)", "Chain rule: \\(\\frac{d}{dx} 5^{2x} = 5^{2x}\\ln 5 \\cdot 2\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivLogDiffGen struct{}
+
+func (g *derivLogDiffGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Use logarithmic differentiation: find \\(f'(x)\\) if \\(f(x)=x^{x}\\).", "x^x*(ln(x)+1)", "Take logs: \\(\\ln f = x\\ln x\\), so \\(f'/f = \\ln x + 1\\)."},
+		{"Use logarithmic differentiation: find \\(f'(x)\\) if \\(f(x)=x^{2x}\\).", "x^(2x)*(2ln(x)+2)", "Take logs: \\(\\ln f = 2x\\ln x\\), so \\(f'/f = 2\\ln x + 2\\)."},
+		{"What is the first step of logarithmic differentiation?", "take the natural log of both sides", "Logarithmic differentiation starts by taking \\(\\ln\\) of both sides, then differentiating implicitly."},
+		{"Use logarithmic differentiation: find \\(f'(x)\\) if \\(f(x)=(2x)^{x}\\).", "(2x)^x*(ln(2x)+1)", "Take logs: \\(\\ln f = x\\ln(2x)\\), so \\(f'/f = \\ln(2x) + 1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivHigherOrderGen struct{}
+
+func (g *derivHigherOrderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(f''(x)\\) if \\(f(x)=x^{4}\\).", "12x^2", "\\(f'(x) = 4x^{3}\\), so \\(f''(x) = 12x^{2}\\)."},
+		{"Find \\(f''(x)\\) if \\(f(x)=\\sin(x)\\).", "-sin(x)", "\\(f'(x) = \\cos(x)\\), so \\(f''(x) = -\\sin(x)\\)."},
+		{"Find \\(f''(x)\\) if \\(f(x)=e^{2x}\\).", "4e^(2x)", "\\(f'(x) = 2e^{2x}\\), so \\(f''(x) = 4e^{2x}\\)."},
+		{"Find the third derivative of \\(f(x)=x^{5}\\).", "60x^2", "\\(f' = 5x^{4}\\), \\(f'' = 20x^{3}\\), \\(f''' = 60x^{2}\\)."},
+		{"Find \\(f''(x)\\) if \\(f(x)=\\ln(x)\\).", "-1/x^2", "\\(f'(x) = 1/x\\), so \\(f''(x) = -1/x^{2}\\)."},
+		{"Find \\(f''(x)\\) if \\(f(x)=x^{3}+2x\\).", "6x", "\\(f'(x) = 3x^{2}+2\\), so \\(f''(x) = 6x\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivInverseFuncGen struct{}
+
+func (g *derivInverseFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"If \\(f\\) is invertible and \\(f'(2)=5\\), what is \\((f^{-1})'(f(2))\\)?", "1/5", "Inverse function rule: \\((f^{-1})'(y) = 1/f'(x)\\) where \\(y=f(x)\\)."},
+		{"If \\(f\\) is invertible and \\(f'(1)=4\\), what is \\((f^{-1})'(f(1))\\)?", "1/4", "By the inverse function rule, \\((f^{-1})'(f(1)) = 1/f'(1) = 1/4\\)."},
+		{"State the inverse function rule.", "(f^-1)'(y) = 1/f'(x) where y = f(x)", "If \\(f\\) is differentiable with \\(f'(x) \\neq 0\\), then \\((f^{-1})'(f(x)) = 1/f'(x)\\)."},
+		{"If \\(f(x)=x^{3}\\) and \\(g\\) is its inverse, what is \\(g'(8)\\)?", "1/12", "\\(f'(x) = 3x^{2}\\); at \\(x=2\\), \\(f(2)=8\\) and \\(f'(2)=12\\), so \\(g'(8)=1/12\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivCriticalPointsGen struct{}
+
+func (g *derivCriticalPointsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find the critical points of \\(f(x)=x^{2}-4x\\).", "x=2", "\\(f'(x) = 2x-4 = 0\\) gives \\(x=2\\)."},
+		{"Find the critical points of \\(f(x)=x^{3}-3x\\).", "x=-1 and x=1", "\\(f'(x) = 3x^{2}-3 = 0\\) gives \\(x=\\pm 1\\)."},
+		{"What is a critical point of \\(f\\)?", "a point where f'(x)=0 or f' is undefined", "Critical points are interior points where the derivative is zero or undefined."},
+		{"Find the critical points of \\(f(x)=x^{3}\\).", "x=0", "\\(f'(x) = 3x^{2} = 0\\) gives \\(x=0\\) (a stationary point that is not an extremum)."},
+		{"Find the critical points of \\(f(x)=2x^{3}-6x^{2}\\).", "x=0 and x=2", "\\(f'(x) = 6x^{2}-12x = 6x(x-2) = 0\\) gives \\(x=0, 2\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivSecondTestGen struct{}
+
+func (g *derivSecondTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Classify \\(x=0\\) for \\(f(x)=x^{2}\\) using the second derivative test.", "local minimum", "\\(f''(0) = 2 > 0\\), so \\(x=0\\) is a local minimum."},
+		{"Classify \\(x=0\\) for \\(f(x)=-x^{2}\\) using the second derivative test.", "local maximum", "\\(f''(0) = -2 < 0\\), so \\(x=0\\) is a local maximum."},
+		{"State the second derivative test.", "f''(c)>0 minimum, f''(c)<0 maximum, f''(c)=0 inconclusive", "If \\(f'(c)=0\\): \\(f''(c)>0\\) gives a local minimum, \\(f''(c)<0\\) a local maximum, \\(f''(c)=0\\) is inconclusive."},
+		{"Classify \\(x=0\\) for \\(f(x)=x^{3}-3x^{2}\\) using the second derivative test.", "local maximum", "\\(f''(x) = 6x-6\\); \\(f''(0) = -6 < 0\\), so \\(x=0\\) is a local maximum."},
+		{"Classify \\(x=2\\) for \\(f(x)=x^{3}-3x^{2}\\) using the second derivative test.", "local minimum", "\\(f''(x) = 6x-6\\); \\(f''(2) = 6 > 0\\), so \\(x=2\\) is a local minimum."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivInflectionGen struct{}
+
+func (g *derivInflectionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find the inflection points of \\(f(x)=x^{3}\\).", "x=0", "\\(f''(x) = 6x = 0\\) at \\(x=0\\), and concavity changes there."},
+		{"Find the inflection points of \\(f(x)=x^{4}-6x^{2}\\).", "x=-1 and x=1", "\\(f''(x) = 12x^{2}-12 = 0\\) at \\(x=\\pm 1\\), with concavity change on both sides."},
+		{"What defines an inflection point?", "concavity changes sign there", "An inflection point is where \\(f''\\) changes sign, i.e. concavity flips."},
+		{"Does \\(f(x)=x^{4}\\) have an inflection point at \\(x=0\\)?", "no", "\\(f''(0)=0\\) but \\(f''(x) = 12x^{2} \\geq 0\\) everywhere, so no sign change."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivGlobalExtremaGen struct{}
+
+func (g *derivGlobalExtremaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find the global maximum of \\(f(x)=x^{2}-4x\\) on \\([0,3]\\).", "0 at x=3", "Critical point \\(x=2\\): \\(f(2)=-4\\). Endpoints: \\(f(0)=0\\), \\(f(3)=-3\\). Global max is \\(0\\) at \\(x=3\\)."},
+		{"Find the global minimum of \\(f(x)=x^{2}-4x\\) on \\([0,3]\\).", "-4 at x=2", "Critical point \\(x=2\\): \\(f(2)=-4\\). Endpoints give \\(0\\) and \\(-3\\). Global min is \\(-4\\)."},
+		{"State the closed-interval method.", "evaluate f at critical points and endpoints, take largest/smallest", "On \\([a,b]\\): find critical points inside, evaluate \\(f\\) there and at \\(a,b\\); extremes are the max/min values."},
+		{"Find the global maximum of \\(f(x)=-x^{2}+4x\\) on \\([0,3]\\).", "4 at x=2", "Critical point \\(x=2\\): \\(f(2)=4\\). Endpoints: \\(f(0)=0\\), \\(f(3)=3\\). Global max is \\(4\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivCurveSketchGen struct{}
+
+func (g *derivCurveSketchGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"For \\(f(x)=x^{3}-3x\\), list critical points and inflection point for sketching.", "critical x=-1,1; inflection x=0", "\\(f' = 3x^{2}-3\\): critical \\(\\pm 1\\). \\(f'' = 6x\\): inflection at \\(0\\)."},
+		{"What three ingredients does curve sketching combine?", "intercepts, asymptotes, first/second derivative analysis", "Sketching combines intercepts, asymptotes (limits at infinity), critical points, and concavity/inflection."},
+		{"For \\(f(x)=x^{2}\\), where is it increasing?", "increasing on (0, infinity)", "\\(f'(x) = 2x > 0\\) for \\(x>0\\), so increasing on \\((0,\\infty)\\)."},
+		{"For \\(f(x)=1/x\\), what are the asymptotes?", "vertical x=0, horizontal y=0", "\\(\\lim_{x\\to 0} 1/x = \\pm\\infty\\) (vertical \\(x=0\\)); \\(\\lim_{x\\to\\pm\\infty} 1/x = 0\\) (horizontal \\(y=0\\))."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivTangentLineGen struct{}
+
+func (g *derivTangentLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find the tangent line to \\(f(x)=x^{2}\\) at \\(x=1\\).", "y=2x-1", "Slope \\(f'(1)=2\\); point \\((1,1)\\): \\(y-1=2(x-1)\\), i.e. \\(y=2x-1\\)."},
+		{"Find the tangent line to \\(f(x)=x^{3}\\) at \\(x=2\\).", "y=12x-16", "Slope \\(f'(2)=12\\); point \\((2,8)\\): \\(y-8=12(x-2)\\), i.e. \\(y=12x-16\\)."},
+		{"Find the tangent line to \\(f(x)=\\sin(x)\\) at \\(x=0\\).", "y=x", "Slope \\(\\cos(0)=1\\); point \\((0,0)\\): \\(y=x\\)."},
+		{"Find the tangent line to \\(f(x)=e^{x}\\) at \\(x=0\\).", "y=x+1", "Slope \\(e^{0}=1\\); point \\((0,1)\\): \\(y-1=x\\), i.e. \\(y=x+1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivLinearApproxGen struct{}
+
+func (g *derivLinearApproxGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Write the linearization of \\(f(x)=\\sqrt{x}\\) at \\(x=4\\).", "L(x)=2+(x-4)/4", "\\(f(4)=2\\), \\(f'(x)=1/(2\\sqrt{x})\\), \\(f'(4)=1/4\\): \\(L(x)=2+(x-4)/4\\)."},
+		{"Use \\(L(x)=1+(x-1)/2\\) to approximate \\(\\sqrt{1.1}\\).", "1.05", "\\(L(1.1) = 1 + 0.1/2 = 1.05\\)."},
+		{"Write the linearization of \\(f(x)=e^{x}\\) at \\(x=0\\).", "L(x)=1+x", "\\(f(0)=1\\), \\(f'(0)=1\\): \\(L(x) = 1+x\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivNewtonGen struct{}
+
+func (g *derivNewtonGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State Newton's iteration formula.", "x_{n+1} = x_n - f(x_n)/f'(x_n)", "Newton's method iterates \\(x_{n+1} = x_{n} - f(x_{n})/f'(x_{n})\\) from an initial guess."},
+		{"One Newton step for \\(f(x)=x^{2}-2\\) from \\(x_{0}=1\\).", "1.5", "\\(x_{1} = 1 - (1-2)/2 = 1.5\\)."},
+		{"One Newton step for \\(f(x)=x^{2}-2\\) from \\(x_{0}=1.5\\).", "1.4167", "\\(x_{1} = 1.5 - (2.25-2)/3 = 1.5 - 0.0833 = 1.4167\\)."},
+		{"When does Newton's method fail?", "when f'(x_n)=0 or the guess is far from the root", "A zero derivative at an iterate (or bad starting guess / cycling) breaks the iteration."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivErrorPropGen struct{}
+
+func (g *derivErrorPropGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"If \\(y=x^{2}\\) and \\(x=3\\pm 0.1\\), estimate \\(\\Delta y\\).", "0.6", "\\(dy = 2x\\,dx = 6 \\cdot 0.1 = 0.6\\)."},
+		{"If \\(y=\\sqrt{x}\\) and \\(x=100\\pm 1\\), estimate \\(\\Delta y\\).", "0.05", "\\(dy = dx/(2\\sqrt{x}) = 1/20 = 0.05\\)."},
+		{"State the differential error estimate.", "Δy ≈ f'(x)Δx", "A measurement error \\(\\Delta x\\) propagates as \\(\\Delta y \\approx f'(x)\\Delta x\\)."},
+		{"If \\(y=1/x\\) and \\(x=2\\pm 0.1\\), estimate \\(\\Delta y\\).", "-0.025", "\\(dy = -dx/x^{2} = -0.1/4 = -0.025\\) (magnitude 0.025)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivImplicitSecondGen struct{}
+
+func (g *derivImplicitSecondGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"For \\(x^{2}+y^{2}=25\\), what is \\(dy/dx\\)?", "-x/y", "Implicit: \\(2x+2y\\,y'=0\\), so \\(y'=-x/y\\)."},
+		{"For \\(x^{2}+y^{2}=25\\), what is \\(d^{2}y/dx^{2}\\) in terms of \\(x,y\\)?", "-25/y^3", "Differentiate \\(y'=-x/y\\): \\(y'' = -(y-xy')/y^{2} = -(y+x^{2}/y)/y^{2} = -25/y^{3}\\)."},
+		{"What is the first step in finding a second implicit derivative?", "find dy/dx by implicit differentiation", "Compute \\(dy/dx\\) first, then differentiate that relation implicitly again."},
+		{"For \\(y=x^{3}\\) (explicit check), what is \\(y''\\)?", "6x", "\\(y'=3x^{2}\\), \\(y''=6x\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivChainPowerGen struct{}
+
+func (g *derivChainPowerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(f'(x)\\) if \\(f(x)=(3x+1)^{4}\\).", "12(3x+1)^3", "Chain rule: \\(4(3x+1)^{3} \\cdot 3 = 12(3x+1)^{3}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=\\sqrt{x^{2}+1}\\).", "x/sqrt(x^2+1)", "Chain rule: \\(\\frac{1}{2}(x^{2}+1)^{-1/2} \\cdot 2x = x/\\sqrt{x^{2}+1}\\)."},
+		{"Find \\(f'(x)\\) if \\(f(x)=(x^{2})^{3}\\) simplified first.", "6x^5", "Simplify: \\((x^{2})^{3}=x^{6}\\), so \\(f'=6x^{5}\\)."},
+		{"Which technique handles \\(f(x)=x^{x}\\)?", "logarithmic differentiation after taking logs", "\\(x^{x}\\) is a composite power: take \\(\\ln\\) both sides, then differentiate implicitly."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivChainMultiGen struct{}
+
+func (g *derivChainMultiGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"For \\(z=f(x,y)\\), \\(x=g(t)\\), \\(y=h(t)\\), state \\(dz/dt\\).", "∂z/∂x·dx/dt + ∂z/∂y·dy/dt", "Multivariable chain rule: \\(dz/dt = f_{x}x' + f_{y}y'\\)."},
+		{"For \\(z=x^{2}y\\), \\(x=t\\), \\(y=t^{2}\\), find \\(dz/dt\\).", "4t^3", "\\(z=t^{4}\\), so \\(dz/dt=4t^{3}\\) (check: \\(2xy\\cdot 1 + x^{2}\\cdot 2t = 2t^{3}+2t^{3}\\))."},
+		{"For \\(z=x+y\\), \\(x=t^{2}\\), \\(y=3t\\), find \\(dz/dt\\).", "2t+3", "\\(dz/dt = 1\\cdot 2t + 1\\cdot 3 = 2t+3\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivGradientGen struct{}
+
+func (g *derivGradientGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\nabla f\\) for \\(f(x,y)=x^{2}+y^{2}\\).", "(2x, 2y)", "\\(\\nabla f = (f_{x}, f_{y}) = (2x, 2y)\\)."},
+		{"Find \\(\\nabla f\\) for \\(f(x,y)=xy\\).", "(y, x)", "\\(\\nabla f = (y, x)\\)."},
+		{"What direction does the gradient point?", "steepest ascent", "The gradient points in the direction of steepest increase of \\(f\\)."},
+		{"Find \\(\\nabla f\\) at \\((1,2)\\) for \\(f(x,y)=x^{2}y\\).", "(4, 1)", "\\(\\nabla f = (2xy, x^{2})\\); at \\((1,2)\\): \\((4,1)\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivDirectionalGen struct{}
+
+func (g *derivDirectionalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the directional derivative formula.", "D_u f = ∇f · u", "The derivative in unit direction \\(u\\) is \\(D_{u}f = \\nabla f \\cdot u\\)."},
+		{"For \\(f(x,y)=x^{2}+y^{2}\\) at \\((1,0)\\) in direction \\((1,0)\\), find \\(D_{u}f\\).", "2", "\\(\\nabla f(1,0) = (2,0)\\); dotted with \\((1,0)\\): \\(2\\)."},
+		{"For \\(f(x,y)=xy\\) at \\((1,1)\\) in direction \\((1,0)\\), find \\(D_{u}f\\).", "1", "\\(\\nabla f(1,1) = (1,1)\\); dotted with \\((1,0)\\): \\(1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivPartialHigherGen struct{}
+
+func (g *derivPartialHigherGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"For \\(f(x,y)=x^{3}y^{2}\\), find \\(f_{xx}\\).", "6xy^2", "\\(f_{x} = 3x^{2}y^{2}\\), so \\(f_{xx} = 6xy^{2}\\)."},
+		{"For \\(f(x,y)=x^{3}y^{2}\\), find \\(f_{yy}\\).", "2x^3", "\\(f_{y} = 2x^{3}y\\), so \\(f_{yy} = 2x^{3}\\)."},
+		{"For \\(f(x,y)=x^{2}y\\), find \\(f_{xy}\\).", "2x", "\\(f_{x} = 2xy\\), so \\(f_{xy} = 2x\\)."},
+		{"For \\(f(x,y)=\\sin(x)\\cos(y)\\), find \\(f_{xx}\\).", "-sin(x)cos(y)", "\\(f_{x} = \\cos(x)\\cos(y)\\), so \\(f_{xx} = -\\sin(x)\\cos(y)\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivClairautGen struct{}
+
+func (g *derivClairautGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State Clairaut's theorem.", "f_xy = f_yx when mixed partials are continuous", "If \\(f_{xy}\\) and \\(f_{yx}\\) are continuous near a point, they are equal there."},
+		{"For \\(f(x,y)=x^{2}y^{3}\\), verify \\(f_{xy}\\) equals \\(f_{yx}\\).", "6xy^2", "\\(f_{xy} = 6xy^{2} = f_{yx}\\), as Clairaut guarantees for polynomials."},
+		{"What hypothesis does Schwarz's theorem need?", "continuity of the mixed partials", "Schwarz/Clairaut needs \\(f_{xy}\\) and \\(f_{yx}\\) continuous at the point."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivTotalDiffGen struct{}
+
+func (g *derivTotalDiffGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Write the total differential of \\(z=f(x,y)\\).", "dz = f_x dx + f_y dy", "The total differential is \\(dz = f_{x}\\,dx + f_{y}\\,dy\\)."},
+		{"For \\(z=x^{2}y\\), write \\(dz\\).", "dz = 2xy dx + x^2 dy", "\\(z_{x} = 2xy\\), \\(z_{y} = x^{2}\\), so \\(dz = 2xy\\,dx + x^{2}\\,dy\\)."},
+		{"For \\(z=xy\\), write \\(dz\\).", "dz = y dx + x dy", "\\(z_{x} = y\\), \\(z_{y} = x\\), so \\(dz = y\\,dx + x\\,dy\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivDiffContinuityGen struct{}
+
+func (g *derivDiffContinuityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"If \\(f\\) is differentiable at \\(a\\), what follows?", "f is continuous at a", "Differentiability at \\(a\\) implies continuity at \\(a\\)."},
+		{"Does continuity imply differentiability?", "no", "Continuity does not imply differentiability (e.g. \\(|x|\\) at \\(0\\))."},
+		{"Give a function continuous but not differentiable at \\(0\\).", "|x|", "\\(f(x)=|x|\\) is continuous at \\(0\\) but has no derivative there (corner)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type derivJacobianGen struct{}
+
+func (g *derivJacobianGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Write the Jacobian of \\(T(x,y)=(x^{2},y^{2})\\).", "[[2x,0],[0,2y]]", "Partial derivatives row by row: \\(\\begin{pmatrix}2x&0\\\\0&2y\\end{pmatrix}\\)."},
+		{"What are the entries of a Jacobian matrix?", "all first-order partials ∂T_i/∂x_j", "Row \\(i\\), column \\(j\\) holds \\(\\partial T_{i}/\\partial x_{j}\\)."},
+		{"Write the Jacobian of \\(T(x,y)=(x+y,x-y)\\).", "[[1,1],[1,-1]]", "Row 1: \\((1,1)\\); row 2: \\((1,-1)\\)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}

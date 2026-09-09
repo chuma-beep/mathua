@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differentiability implies continuity",
+    "section": "",
+    "subgoals": [
+      "State the theorem precisely",
+      "Follow the limit-factor proof idea",
+      "Apply: differentiable at a, continuous at a"
+    ]
+  },
+  {
+    "label": "Counterexamples: corners and cusps",
+    "section": "",
+    "subgoals": [
+      "Show |x| is continuous at 0",
+      "Show |x| has no derivative at 0",
+      "Conclude the converse is false"
+    ]
+  },
+  {
+    "label": "Checking differentiability",
+    "section": "",
+    "subgoals": [
+      "Test corners, cusps, vertical tangents",
+      "Distinguish undefined from discontinuous",
+      "Confirm differentiability is strictly stronger"
+    ]
+  }
+]

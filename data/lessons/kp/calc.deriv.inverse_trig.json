@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Arcsine and arccosine derivatives",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Recall arcsin and arccos as inverse trig",
+      "Apply d/dx arcsin(x) = 1/sqrt(1-x^2)",
+      "Apply d/dx arccos(x) = -1/sqrt(1-x^2)"
+    ]
+  },
+  {
+    "label": "Arctangent derivative",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Recall arctan as the inverse of tan",
+      "Apply d/dx arctan(x) = 1/(1+x^2)",
+      "Note the domain is all real x"
+    ]
+  },
+  {
+    "label": "Inverse trig with chain rule",
+    "section": "Operations with derivatives",
+    "subgoals": [
+      "Identify the outer inverse-trig function",
+      "Multiply by the inner derivative",
+      "Check with arctan(2x) and arcsin(3x)"
+    ]
+  }
+]

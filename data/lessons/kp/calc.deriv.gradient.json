@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Gradient definition",
+    "section": "Gradient",
+    "subgoals": [
+      "Assemble grad f = (fx, fy)",
+      "Read it as the steepest-ascent direction",
+      "Check x^2+y^2 gives (2x, 2y)"
+    ]
+  },
+  {
+    "label": "Computing gradients",
+    "section": "Definition",
+    "subgoals": [
+      "Differentiate once per variable",
+      "Evaluate at points like (1,2)",
+      "Check x^2 y gives (4,1) there"
+    ]
+  },
+  {
+    "label": "Worked gradient examples",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked gradient example",
+      "Verify each partial separately",
+      "Confirm xy gives (y,x)"
+    ]
+  }
+]

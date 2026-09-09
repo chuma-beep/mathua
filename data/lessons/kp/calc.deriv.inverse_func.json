@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inverse function rule",
+    "section": "Operations with derivatives",
+    "subgoals": [
+      "State (f^-1)'(y) = 1/f'(x)",
+      "Require f'(x) nonzero",
+      "Match y = f(x) pairs"
+    ]
+  },
+  {
+    "label": "Worked inverse examples",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked inverse example",
+      "Evaluate f' at the preimage point",
+      "Take the reciprocal"
+    ]
+  },
+  {
+    "label": "Fundamental derivative table",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Review the base derivative rules",
+      "Identify which rule the outer function needs",
+      "Combine rules for composites"
+    ]
+  }
+]

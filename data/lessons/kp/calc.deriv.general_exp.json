@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Natural exponential derivative",
+    "section": "Derivative of the Exponential Function",
+    "subgoals": [
+      "Recall d/dx e^x = e^x",
+      "Extend with the chain rule to e^u",
+      "Check with e^(3x)"
+    ]
+  },
+  {
+    "label": "General base power rule",
+    "section": "Extending the Power Rule",
+    "subgoals": [
+      "Write a^x as e^(x ln a)",
+      "Apply d/dx a^x = a^x ln(a)",
+      "Check with 2^x and 10^x"
+    ]
+  },
+  {
+    "label": "Worked general-base examples",
+    "section": "Example 3.83",
+    "subgoals": [
+      "Follow the worked power-rule extension",
+      "Add chain-rule factors for a^(kx)",
+      "Verify 2^(3x) and 5^(2x)"
+    ]
+  }
+]

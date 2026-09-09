@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Total differential formula",
+    "section": "Differentiability and the total differential",
+    "subgoals": [
+      "Write dz = fx dx + fy dy",
+      "Link each term to a partial",
+      "Check z = x^2 y term by term"
+    ]
+  },
+  {
+    "label": "Worked total differentials",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked differential example",
+      "Verify xy gives y dx + x dy",
+      "Confirm the assembly pattern"
+    ]
+  },
+  {
+    "label": "Partial derivatives refresher",
+    "section": "Definition",
+    "subgoals": [
+      "Recall fx holds y constant",
+      "Compute first-order partials",
+      "Feed them into dz"
+    ]
+  }
+]

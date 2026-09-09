@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Directional derivative formula",
+    "section": "Directional derivatives",
+    "subgoals": [
+      "State D_u f = grad f dot u",
+      "Require u to be a unit vector",
+      "D_u f projects the gradient"
+    ]
+  },
+  {
+    "label": "Unit directions",
+    "section": "Gradient",
+    "subgoals": [
+      "Normalize direction vectors first",
+      "Reuse the gradient computation",
+      "Check (1,0) needs no scaling"
+    ]
+  },
+  {
+    "label": "Worked directional examples",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked directional example",
+      "Dot gradient with direction",
+      "Verify the two numeric checks"
+    ]
+  }
+]

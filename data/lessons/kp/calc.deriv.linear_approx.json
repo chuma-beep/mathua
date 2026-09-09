@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linearization idea",
+    "section": "",
+    "subgoals": [
+      "Replace f near a by its tangent line",
+      "Write L(x) = f(a) + f'(a)(x-a)",
+      "Check sqrt(x) at 4 gives 2 + (x-4)/4"
+    ]
+  },
+  {
+    "label": "Worked linear approximations",
+    "section": "",
+    "subgoals": [
+      "Follow the tangent-line geometry",
+      "Evaluate L at nearby points",
+      "Check sqrt(1.1) approx 1.05"
+    ]
+  },
+  {
+    "label": "Linearization of exponentials",
+    "section": "",
+    "subgoals": [
+      "Linearize e^x at x = 0",
+      "Read off L(x) = 1 + x",
+      "Note accuracy fades far from a"
+    ]
+  }
+]

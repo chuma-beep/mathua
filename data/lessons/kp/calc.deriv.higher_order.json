@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Second derivatives",
+    "section": "Higher-order derivatives",
+    "subgoals": [
+      "Differentiate f'(x) once more",
+      "Compute f'' for polynomials",
+      "Check x^4 gives 12x^2"
+    ]
+  },
+  {
+    "label": "Third and higher orders",
+    "section": "Higher-order derivatives",
+    "subgoals": [
+      "Iterate differentiation stepwise",
+      "Track each intermediate derivative",
+      "Check x^5 third derivative is 60x^2"
+    ]
+  },
+  {
+    "label": "Higher-order worked examples",
+    "section": "Example 2",
+    "subgoals": [
+      "Follow the worked higher-order example",
+      "Differentiate sin and ln twice",
+      "Verify signs at each step"
+    ]
+  }
+]

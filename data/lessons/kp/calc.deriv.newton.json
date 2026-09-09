@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Newton iteration formula",
+    "section": "Newton's method",
+    "subgoals": [
+      "State x(n+1) = x(n) - f/f'",
+      "See each step as a tangent-line root",
+      "Require f'(x(n)) nonzero"
+    ]
+  },
+  {
+    "label": "Worked Newton steps",
+    "section": "Newton's method",
+    "subgoals": [
+      "Step x^2-2 from x(0) = 1 to 1.5",
+      "Step again to approx 1.4167",
+      "Watch digits double per step"
+    ]
+  },
+  {
+    "label": "Newton failure modes",
+    "section": "Newton's method",
+    "subgoals": [
+      "Spot zero-derivative iterates",
+      "Avoid guesses far from roots",
+      "Detect cycling behavior"
+    ]
+  }
+]
