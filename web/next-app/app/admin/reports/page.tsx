@@ -131,22 +131,28 @@ export default function AdminReportsPage() {
               Admin login
             </p>
             <div className="flex flex-col sm:flex-row gap-2">
-              <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') handleLogin() }}
-                placeholder="Admin password"
-                autoComplete="current-password"
-                className="flex-1 bg-mathua-surface border border-mathua-border px-3 h-11 text-sm font-mono text-mathua-primary placeholder:text-mathua-muted outline-none"
-              />
-              <button
-                onClick={handleLogin}
-                disabled={loggingIn || !password}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-4 h-11 text-sm font-mono disabled:opacity-50"
+              <form
+                onSubmit={e => { e.preventDefault(); handleLogin() }}
+                className="flex flex-col sm:flex-row gap-2 flex-1"
               >
-                {loggingIn ? 'Checking…' : 'Log in'}
-              </button>
+                <label htmlFor="admin-password" className="sr-only">Admin password</label>
+                <input
+                  id="admin-password"
+                  type="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="Admin password"
+                  autoComplete="current-password"
+                  className="flex-1 bg-mathua-surface border border-mathua-border px-3 h-11 text-sm font-mono text-mathua-primary placeholder:text-mathua-muted outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={loggingIn || !password}
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-4 h-11 text-sm font-mono disabled:opacity-50"
+                >
+                  {loggingIn ? 'Checking…' : 'Log in'}
+                </button>
+              </form>
             </div>
             {error && <p className="mt-3 font-mono text-xs text-red-400">{error}</p>}
           </div>

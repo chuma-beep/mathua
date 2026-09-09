@@ -76,12 +76,20 @@ describe('Settings Profile section', () => {
     setUserInfoMock.mockClear()
   })
 
+  // jsdom lacks implicit form submission: clicking a submit button does not
+  // fire submit. Submit the enclosing form directly instead.
+  const submitForm = (el: HTMLElement) => {
+    const form = el.closest('form')
+    if (!form) throw new Error('expected a form ancestor')
+    fireEvent.submit(form)
+  }
+
   it('prefills the display name and saves it', async () => {
     render(<SettingsPage />)
     const input = await screen.findByLabelText('Display name')
     expect((input as HTMLInputElement).value).toBe('Ada')
     fireEvent.change(input, { target: { value: '  Ada Lovelace  ' } })
-    fireEvent.click(screen.getByText('Save profile'))
+    submitForm(screen.getByText('Save profile'))
     await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada Lovelace', ''))
     expect(setUserInfoMock).toHaveBeenCalledWith(expect.objectContaining({ name: 'Ada Lovelace', username: 'ada' }))
     expect(await screen.findByText('Profile saved.')).toBeInTheDocument()
@@ -91,7 +99,7 @@ describe('Settings Profile section', () => {
     render(<SettingsPage />)
     fireEvent.change(await screen.findByLabelText('Display name'), { target: { value: 'Ada' } })
     fireEvent.change(screen.getByLabelText(/Recovery email/, { exact: false }), { target: { value: 'ada@example.com' } })
-    fireEvent.click(screen.getByText('Save profile'))
+    submitForm(screen.getByText('Save profile'))
     await waitFor(() => expect(updateProfileNameMock).toHaveBeenCalledWith('Ada', 'ada@example.com'))
   })
 
@@ -100,7 +108,7 @@ describe('Settings Profile section', () => {
     render(<SettingsPage />)
     fireEvent.change(await screen.findByLabelText('Display name'), { target: { value: 'Ada' } })
     fireEvent.change(screen.getByLabelText(/Recovery email/, { exact: false }), { target: { value: 'taken@example.com' } })
-    fireEvent.click(screen.getByText('Save profile'))
+    submitForm(screen.getByText('Save profile'))
     expect(await screen.findByText('email already in use')).toBeInTheDocument()
   })
 

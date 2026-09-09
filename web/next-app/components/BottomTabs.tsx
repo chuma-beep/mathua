@@ -53,6 +53,7 @@ export default function BottomTabs() {
 
   return (
     <nav
+      aria-label="Primary"
       className={`lg:hidden fixed inset-x-3 z-40 flex h-[56px] border-[0.5px] border-mathua-border bg-mathua-surface shadow-none transition-transform duration-300 ease-out will-change-transform ${
         hidden ? 'translate-y-[calc(100%+20px)] opacity-0' : 'translate-y-0 opacity-100'
       }`}
@@ -75,6 +76,7 @@ export default function BottomTabs() {
             key={t.href}
             href={t.href}
             aria-label={t.label}
+            aria-current={active ? 'page' : undefined}
             className={`flex-1 flex flex-col items-center justify-center gap-0.5 font-mono border-t-[2px] min-h-[44px] transition-colors ${
               active ? 'border-mathua-blue text-mathua-blue' : 'border-transparent text-mathua-muted hover:text-mathua-primary'
             }`}
