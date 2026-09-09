@@ -45,9 +45,10 @@ export default function Header({ links }: HeaderProps) {
   function toggleNav(): void {
     const next = !navOpen
     setNavOpen(next)
-    // Animate on action: hover rarely fires on touch screens, so the needle
-    // spins deterministically when the menu opens (skipped for reduced motion).
-    if (next && !prefersReducedMotion()) compassRef.current?.startAnimation()
+    // Animate on every click (open and close): hover rarely fires on touch
+    // screens, so the needle spins deterministically per tap (skipped for
+    // reduced motion).
+    if (!prefersReducedMotion()) compassRef.current?.startAnimation()
   }
 
   function handleThemeToggle(): void {
@@ -142,7 +143,7 @@ export default function Header({ links }: HeaderProps) {
             <button
               onClick={handleThemeToggle}
               aria-label="Toggle theme"
-              className="flex items-center justify-center font-mono text-xs text-mathua-muted bg-transparent border border-mathua-border-strong min-h-[32px] min-w-[40px] px-2.5 py-1 cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
             >
               <SunMoonIcon ref={sunMoonRef} size={15} aria-hidden="true" />
             </button>
