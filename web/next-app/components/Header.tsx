@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { Compass } from 'lucide-react'
+import { CompassIcon, type CompassIconHandle } from './icons/compass'
+import { SunMoonIcon, type SunMoonIconHandle } from './icons/sun-moon'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { signOut } from '../lib/auth'
@@ -21,7 +22,7 @@ interface HeaderProps {
 }
 
 export default function Header({ links }: HeaderProps) {
-  const { theme, mounted, toggleTheme } = useTheme()
+  const { mounted, toggleTheme } = useTheme()
   const { loggedIn, user } = useAuthState()
   const router = useRouter()
   const pathname = usePathname()
@@ -31,6 +32,28 @@ export default function Header({ links }: HeaderProps) {
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const navMenuRef = useRef<HTMLDivElement>(null)
+  const compassRef = useRef<CompassIconHandle>(null)
+  const sunMoonRef = useRef<SunMoonIconHandle>(null)
+
+  function prefersReducedMotion(): boolean {
+    return (
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+  }
+
+  function toggleNav(): void {
+    const next = !navOpen
+    setNavOpen(next)
+    // Animate on action: hover rarely fires on touch screens, so the needle
+    // spins deterministically when the menu opens (skipped for reduced motion).
+    if (next && !prefersReducedMotion()) compassRef.current?.startAnimation()
+  }
+
+  function handleThemeToggle(): void {
+    if (!prefersReducedMotion()) sunMoonRef.current?.startAnimation()
+    toggleTheme()
+  }
 
   useEffect(() => {
     if (!loggedIn || !user) {
@@ -117,11 +140,11 @@ export default function Header({ links }: HeaderProps) {
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {mounted && (
             <button
-              onClick={toggleTheme}
+              onClick={handleThemeToggle}
               aria-label="Toggle theme"
-              className="font-mono text-xs text-mathua-muted bg-transparent border border-mathua-border-strong px-2.5 py-1 cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
+              className="flex items-center justify-center font-mono text-xs text-mathua-muted bg-transparent border border-mathua-border-strong min-h-[32px] min-w-[40px] px-2.5 py-1 cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
             >
-              {theme === 'dark' ? '\u2600' : '\u263E'}
+              <SunMoonIcon ref={sunMoonRef} size={15} aria-hidden="true" />
             </button>
           )}
           {loggedIn && user ? (
@@ -174,14 +197,14 @@ export default function Header({ links }: HeaderProps) {
           {/* Mobile nav: bare compass mark at the far right, mirroring
               the desktop link row (hidden below md) on every page. */}
           <div className="relative md:hidden" ref={navMenuRef}>
-            <button
-                onClick={() => setNavOpen(o => !o)}
+              <button
+                onClick={toggleNav}
                 aria-label="Open navigation menu"
                 aria-expanded={navOpen}
                 aria-haspopup="menu"
                 className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
               >
-                <Compass size={15} strokeWidth={2} aria-hidden="true" />
+                <CompassIcon ref={compassRef} size={15} aria-hidden="true" />
               </button>
               {navOpen && (
                 <div
