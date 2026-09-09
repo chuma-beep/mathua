@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { Compass } from 'lucide-react'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { signOut } from '../lib/auth'
@@ -23,10 +24,13 @@ export default function Header({ links }: HeaderProps) {
   const { theme, mounted, toggleTheme } = useTheme()
   const { loggedIn, user } = useAuthState()
   const router = useRouter()
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
+  const navMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!loggedIn || !user) {
@@ -56,9 +60,13 @@ export default function Header({ links }: HeaderProps) {
   useEffect(() => {
     function onClick(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false)
+      if (navMenuRef.current && !navMenuRef.current.contains(e.target as Node)) setNavOpen(false)
     }
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+        setNavOpen(false)
+      }
     }
     document.addEventListener('mousedown', onClick)
     document.addEventListener('keydown', onKey)
@@ -107,6 +115,45 @@ export default function Header({ links }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Mobile nav menu: mirrors the desktop link row, which is
+              hidden below md. One source of truth (displayLinks), so the
+              homepage and docs-section menus both surface on phones. */}
+          <div className="relative md:hidden" ref={navMenuRef}>
+            <button
+              onClick={() => setNavOpen(o => !o)}
+              aria-label="Open navigation menu"
+              aria-expanded={navOpen}
+              aria-haspopup="menu"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] font-mono text-mathua-muted bg-transparent border border-mathua-border-strong cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
+            >
+              <Compass size={18} strokeWidth={2} aria-hidden="true" />
+            </button>
+            {navOpen && (
+              <div
+                role="menu"
+                aria-label="Site navigation"
+                className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
+              >
+                {displayLinks.map(link => {
+                  const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      role="menuitem"
+                      aria-current={active ? 'page' : undefined}
+                      onClick={() => setNavOpen(false)}
+                      className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
+                        active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+          </div>
           {mounted && (
             <button
               onClick={toggleTheme}
