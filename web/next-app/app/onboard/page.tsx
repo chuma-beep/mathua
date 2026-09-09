@@ -347,25 +347,30 @@ export default function OnboardPage() {
                        <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{question}</KatexContent>
                      </div>
                    </div>
-                   <div className="flex flex-col sm:flex-row gap-3 min-w-0">
+                    <form
+                      onSubmit={e => { e.preventDefault(); submitAnswer() }}
+                      className="flex flex-col sm:flex-row gap-3 min-w-0"
+                    >
+                      <label htmlFor="onboard-answer" className="sr-only">Your answer</label>
                       <input
                         ref={onboardInputRef}
+                        id="onboard-answer"
                         type="text"
                         value={answerInput}
                         onChange={(e) => setAnswerInput(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                         placeholder="Your answer..."
-                       disabled={loading || lastResult !== null}
+                        enterKeyHint="go"
+                        disabled={loading || lastResult !== null}
                         className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                     />
-                     <button
-                       onClick={submitAnswer}
-                       disabled={!answerInput.trim() || loading || lastResult !== null}
-                       className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 shrink-0 w-full sm:w-auto"
-                     >
-                       Check Answer
-                     </button>
-                   </div>
+                      <button
+                        type="submit"
+                        disabled={!answerInput.trim() || loading || lastResult !== null}
+                        className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 shrink-0 w-full sm:w-auto"
+                      >
+                        Check Answer
+                      </button>
+                    </form>
                     <SymbolPalette targetRef={onboardInputRef} onInsert={setAnswerInput} />
                     <div className="mt-2 flex justify-end">
                       <ReportButton

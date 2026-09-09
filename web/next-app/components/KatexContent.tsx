@@ -76,8 +76,11 @@ export default function KatexContent({ children, className = '' }: { children: s
             }
             // Lesson-sourced images come from arbitrary remote/relative URLs without
             // intrinsic dimensions, so next/image optimization does not apply here.
+            // A missing alt falls back to the file name (never empty on content
+            // images); loading is lazy to avoid layout/first-paint cost.
+            const file = (url || '').split('/').pop()?.split('?')[0] || 'diagram'
             // eslint-disable-next-line @next/next/no-img-element
-            return <img src={url} alt={alt || ''} className="max-w-full h-auto my-4 mx-auto" />
+            return <img src={url} alt={alt || file} loading="lazy" className="max-w-full h-auto my-4 mx-auto" />
           },
           h1: ({ children, ...props }) => {
             const text = extractText(children)

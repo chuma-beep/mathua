@@ -53,32 +53,42 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
 
   return (
     <div ref={ref} className="relative w-full max-w-xl mx-auto mb-6">
-      <div className="relative">
+      <form
+        role="search"
+        onSubmit={e => { e.preventDefault(); setShowResults(true) }}
+        className="relative"
+      >
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-mathua-muted"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
+        <label htmlFor="site-search" className="sr-only">{placeholder}</label>
         <input
-          type="text"
+          id="site-search"
+          type="search"
           value={query}
           onChange={e => { setQuery(e.target.value); setShowResults(true) }}
           onFocus={() => setShowResults(true)}
           placeholder={placeholder}
+          enterKeyHint="search"
           className="w-full h-11 pl-10 pr-4 border border-mathua-border bg-mathua-surface text-sm font-mono text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue rounded-none"
         />
         {query && (
           <button
+            type="button"
             onClick={() => { setQuery(''); setShowResults(false) }}
+            aria-label="Clear search"
             className="absolute right-3 top-1/2 -translate-y-1/2 text-mathua-muted hover:text-mathua-primary text-xs"
           >
             ✕
           </button>
         )}
-      </div>
+      </form>
       {showResults && query.trim() && (
         <div className="absolute top-full left-0 right-0 mt-1 border border-mathua-border bg-mathua-surface z-50 max-h-80 overflow-y-auto">
           {results.length === 0 ? (

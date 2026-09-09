@@ -496,26 +496,31 @@ function GoalsContent() {
 
                     {!lastResult ? (
                       <>
-                      <div className="flex flex-col sm:flex-row gap-3 min-w-0">
+                      <form
+                        onSubmit={e => { e.preventDefault(); submitAnswer() }}
+                        className="flex flex-col sm:flex-row gap-3 min-w-0"
+                      >
+                        <label htmlFor="goals-answer" className="sr-only">Your answer</label>
                         <input
                           ref={goalsInputRef}
+                          id="goals-answer"
                           type="text"
                           value={answerInput}
                           onChange={(e) => setAnswerInput(e.target.value)}
-                          onKeyDown={(e) => e.key === 'Enter' && submitAnswer()}
                           placeholder="Your answer..."
+                          enterKeyHint="go"
                           disabled={loading}
                           className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                       />
-                       <button
-                         onClick={submitAnswer}
-                         disabled={!answerInput.trim() || loading}
-                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap shrink-0 w-full sm:w-auto"
-                       >
-                         Check Answer
-                       </button>
-                     </div>
-                      <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
+                        <button
+                          type="submit"
+                          disabled={!answerInput.trim() || loading}
+                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap shrink-0 w-full sm:w-auto"
+                        >
+                          Check Answer
+                        </button>
+                      </form>
+                       <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
                       <div className="mt-2 flex justify-end">
                         <ReportButton
                           key={question}
@@ -571,10 +576,11 @@ function GoalsContent() {
                   </div>
                   {!quizLastResult ? (
                     <>
-                      <div className="flex flex-col sm:flex-row gap-3 min-w-0">
-                        <input ref={quizInputRef} type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && submitQuizAnswerFn()} placeholder="Your answer..." disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
-                        <button onClick={submitQuizAnswerFn} disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
-                      </div>
+                      <form onSubmit={e => { e.preventDefault(); submitQuizAnswerFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
+                        <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
+                        <input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+                        <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
+                      </form>
                       <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
                       <div className="mt-2 flex justify-end">
                         <ReportButton

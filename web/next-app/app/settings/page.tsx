@@ -423,25 +423,25 @@ export default function SettingsPage() {
                   Your display name and profile picture. Username stays the same.
                 </p>
                 <label htmlFor="display-name" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Display name</label>
-                <div className="flex flex-col sm:flex-row gap-2 mt-2">
+                <form onSubmit={e => { e.preventDefault(); handleSaveName() }} className="flex flex-col sm:flex-row gap-2 mt-2">
                   <input
                     id="display-name"
                     type="text"
                     value={displayName}
                     maxLength={50}
                     onChange={(e) => setDisplayName(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSaveName()}
                     placeholder="Your name"
+                    enterKeyHint="done"
                     className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                   />
                   <button
-                    onClick={handleSaveName}
+                    type="submit"
                     disabled={nameBusy}
                     className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 shrink-0 inline-flex items-center gap-2"
                   >
                     {nameBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save profile'}
                   </button>
-                </div>
+                </form>
                 {nameMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{nameMsg}</p>}
 
                 <label htmlFor="recovery-email" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Recovery email (optional)</label>
@@ -502,7 +502,7 @@ export default function SettingsPage() {
                         className={`p-1 border rounded-none transition-colors bg-mathua-code ${selected ? 'border-mathua-blue' : 'border-transparent hover:border-mathua-border'}`}
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={dicebearUrl(style, gridSeed)} alt={style} width={64} height={64} loading="lazy" className="w-full h-auto" />
+                        <img src={dicebearUrl(style, gridSeed)} alt={`${style} avatar character`} width={64} height={64} loading="lazy" className="w-full h-auto" />
                       </button>
                     )
                   })}
@@ -522,11 +522,13 @@ export default function SettingsPage() {
                   >
                     {imageBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save image'}
                   </button>
-                  <label className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono inline-flex items-center gap-2 cursor-pointer">
+                  <label className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono inline-flex items-center gap-2 cursor-pointer focus-within:border-mathua-blue focus-within:text-mathua-blue">
                     {photoBusy ? (<><Loading inline size={11} /> Uploading…</>) : 'Upload photo'}
                     <input
                       type="file"
                       accept="image/png,image/jpeg,image/gif,image/webp"
+                      aria-label="Upload profile photo"
+                      aria-describedby="photo-limits"
                       className="hidden"
                       disabled={photoBusy}
                       onChange={(e) => { handleUpload(e.target.files?.[0]); e.target.value = '' }}
@@ -544,7 +546,7 @@ export default function SettingsPage() {
                 </div>
                 {photoMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{photoMsg}</p>}
                 {imageMsg && <p className="font-mono text-[11px] text-mathua-secondary mt-2">{imageMsg}</p>}
-                <p className="text-mathua-muted text-[11px] mt-3">
+                <p id="photo-limits" className="text-mathua-muted text-[11px] mt-3">
                   Characters by <a href="https://www.dicebear.com" target="_blank" rel="noreferrer" className="text-mathua-blue hover:text-mathua-blue-hover">DiceBear</a>. Photos up to 512KB.
                 </p>
               </div>

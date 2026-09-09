@@ -78,10 +78,6 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     setStreak(prev => applyResult(prev, correct))
   }
 
-  function handleKeyDown(e: React.KeyboardEvent, i: number) {
-    if (e.key === 'Enter') handleCheck(i)
-  }
-
   if (loading) {
     return (
       <div className="mt-8 p-6 border border-mathua-border bg-mathua-surface">
@@ -177,13 +173,18 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         </KatexContent>
                       </div>
 
-                      <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2">
+                      <form
+                        onSubmit={e => { e.preventDefault(); handleCheck(i) }}
+                        className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2"
+                      >
+                        <label htmlFor={`lesson-quiz-${conceptId}-${i}`} className="sr-only">Your answer</label>
                         <input
+                          id={`lesson-quiz-${conceptId}-${i}`}
                           type="text"
                           value={answers[i] || ''}
                           onChange={e => setAnswers(prev => ({ ...prev, [i]: e.target.value }))}
-                         onKeyDown={e => handleKeyDown(e, i)}
                           placeholder="Your answer…"
+                          enterKeyHint="go"
                         disabled={result !== undefined || locked}
                         className={`flex-1 min-w-0 bg-mathua-bg border px-4 h-24 sm:h-12 text-base font-mono text-mathua-primary placeholder:text-mathua-muted outline-none transition-colors rounded-none ${
                           result === 'correct'
@@ -195,14 +196,14 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                       />
                       {result === undefined && !locked && (
                         <button
-                          onClick={() => handleCheck(i)}
+                          type="submit"
                           disabled={!!checking[i]}
                           className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 h-12 text-sm font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto shrink-0"
                         >
                         {checking[i] ? 'Checking…' : 'Submit'}
                         </button>
                       )}
-                    </div>
+                      </form>
 
                     {result === 'correct' && (
                       <p className="mt-2 text-xs font-mono text-green-400">

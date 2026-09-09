@@ -57,8 +57,15 @@ export default function Header({ links }: HeaderProps) {
     function onClick(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false)
     }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setOpen(false)
+    }
     document.addEventListener('mousedown', onClick)
-    return () => document.removeEventListener('mousedown', onClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onClick)
+      document.removeEventListener('keydown', onKey)
+    }
   }, [])
 
   const displayLinks = links || [
@@ -115,6 +122,7 @@ export default function Header({ links }: HeaderProps) {
                 onClick={() => setOpen(o => !o)}
                 aria-label="Open profile menu"
                 aria-expanded={open}
+                aria-haspopup="menu"
                 className="rounded-full p-0.5 border border-transparent hover:border-mathua-border focus:outline-none focus:border-mathua-blue transition-colors"
               >
                 <Avatar

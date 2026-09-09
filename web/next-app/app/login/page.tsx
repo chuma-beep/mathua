@@ -372,7 +372,7 @@ function LoginInner() {
           </div>
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 space-y-4 w-full max-w-full min-w-0 overflow-hidden">
             {resetToken ? (
-              <div className="space-y-4">
+              <form onSubmit={e => { e.preventDefault(); handleReset() }} className="space-y-4">
                 <p className="font-mono text-xs text-mathua-secondary">Choose a new password.</p>
                 <div>
                   <label htmlFor="reset-password" className="font-mono text-[10px] uppercase text-mathua-muted">New password</label>
@@ -381,19 +381,18 @@ function LoginInner() {
                     type="password"
                     value={resetPw}
                     onChange={(e) => setResetPw(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleReset()}
                     placeholder="new password"
                     autoComplete="new-password"
                     className={inputClassName(false)}
                   />
                 </div>
                 {resetMsg && <p className="text-mathua-red text-xs">{resetMsg}</p>}
-                <button onClick={handleReset} disabled={resetBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                <button type="submit" disabled={resetBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
                   {resetBusy ? (<><Loading inline size={13} /> Saving…</>) : 'Set new password'}
                 </button>
-              </div>
+              </form>
             ) : forgotMode ? (
-              <div className="space-y-4">
+              <form onSubmit={e => { e.preventDefault(); handleForgot() }} className="space-y-4">
                 <p className="font-mono text-xs text-mathua-secondary">Enter your username or email — if a recovery email is on file, we’ll send a reset link.</p>
                 <div>
                   <label htmlFor="forgot-id" className="font-mono text-[10px] uppercase text-mathua-muted">Username or email</label>
@@ -402,22 +401,21 @@ function LoginInner() {
                     type="text"
                     value={forgotId}
                     onChange={(e) => setForgotId(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleForgot()}
                     placeholder="username or email"
                     autoComplete="username"
                     className={inputClassName(false)}
                   />
                 </div>
                 {forgotMsg && <p className="font-mono text-xs text-mathua-secondary">{forgotMsg}</p>}
-                <button onClick={handleForgot} disabled={forgotBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                <button type="submit" disabled={forgotBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
                   {forgotBusy ? (<><Loading inline size={13} /> Sending…</>) : 'Send reset link'}
                 </button>
-                <button onClick={() => { setForgotMode(false); setForgotMsg('') }} className="w-full text-mathua-muted text-xs hover:text-mathua-secondary">
+                <button type="button" onClick={() => { setForgotMode(false); setForgotMsg('') }} className="w-full text-mathua-muted text-xs hover:text-mathua-secondary">
                   ← Back to login
                 </button>
-              </div>
+              </form>
             ) : (
-            <>
+            <form onSubmit={e => { e.preventDefault(); handleSubmit() }}>
             {state.tab === 'signup' && (
               <div>
                 <label htmlFor="name" className="font-mono text-[10px] uppercase text-mathua-muted">Name</label>
@@ -426,7 +424,6 @@ function LoginInner() {
                   type="text"
                   value={state.name}
                   onChange={(e) => updateField({ type: 'SET_NAME', name: e.target.value })}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                   placeholder="Your name"
                   autoComplete="name"
                   aria-invalid={!!state.fieldErrors.name}
@@ -443,7 +440,6 @@ function LoginInner() {
                 type="text"
                 value={state.username}
                 onChange={(e) => updateField({ type: 'SET_USERNAME', username: e.target.value })}
-                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 placeholder="username"
                 autoComplete="username"
                 aria-invalid={!!state.fieldErrors.username}
@@ -460,7 +456,6 @@ function LoginInner() {
                   type="email"
                   value={state.email}
                   onChange={(e) => updateField({ type: 'SET_EMAIL', email: e.target.value })}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                   placeholder="you@example.com"
                   autoComplete="email"
                   aria-invalid={!!state.fieldErrors.email}
@@ -479,7 +474,6 @@ function LoginInner() {
                   type={state.showPassword ? 'text' : 'password'}
                   value={state.password}
                   onChange={(e) => updateField({ type: 'SET_PASSWORD', password: e.target.value })}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                   placeholder="password"
                   autoComplete={state.tab === 'signup' ? 'new-password' : 'current-password'}
                   aria-invalid={!!state.fieldErrors.password}
@@ -500,7 +494,7 @@ function LoginInner() {
               {state.fieldErrors.password && <p id="password-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.password}</p>}
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
-            <button onClick={handleSubmit} disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
+            <button type="submit" disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="flex items-center gap-3 my-2">
@@ -513,7 +507,7 @@ function LoginInner() {
               <>
               <div id="g_id_onload" className="flex justify-center min-h-[44px] items-center" />
               {!googleReady && (
-                <button onClick={handleGoogleRedirect} disabled={googleLoading} className="w-full border border-mathua-border bg-white text-[#3c4043] hover:bg-gray-50 rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50">
+                <button type="button" onClick={handleGoogleRedirect} disabled={googleLoading} className="w-full border border-mathua-border bg-white text-[#3c4043] hover:bg-gray-50 rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50">
                   <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-5.09s.27-3.64.76-5.09l-7.98-6.19C.92 15.77 0 19.69 0 24s.92 8.23 2.56 11.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
                   {googleLoading ? 'Connecting…' : 'Continue with Google'}
                 </button>
@@ -523,6 +517,7 @@ function LoginInner() {
               {providers.map(p => (
                 <button
                   key={p}
+                  type="button"
                   onClick={() => startOAuthLogin(p)}
                   className="w-full border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2"
                 >
@@ -533,7 +528,7 @@ function LoginInner() {
             </div>
             <div className="mt-3 text-center">
               {state.tab === 'login' && !forgotMode && !resetToken && (
-                <button onClick={() => setForgotMode(true)} className="block mx-auto text-mathua-muted text-xs hover:text-mathua-secondary mb-2">
+                <button type="button" onClick={() => setForgotMode(true)} className="block mx-auto text-mathua-muted text-xs hover:text-mathua-secondary mb-2">
                   Forgot password?
                 </button>
               )}
@@ -541,7 +536,7 @@ function LoginInner() {
                 Skip for now: try without account (progress stays on this device)
               </Link>
             </div>
-            </>
+            </form>
             )}
           </div>
         </section>

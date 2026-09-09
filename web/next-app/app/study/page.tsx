@@ -705,7 +705,7 @@ function LessonDetail({
                       <div className="mt-2 flex flex-col md:flex-row gap-4 items-start">
                         {diagram && (
                           <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
-                            <Image src={diagram} alt={`${cid} diagram`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                            <Image src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                           </div>
                         )}
                         <div className="bg-mathua-code border border-mathua-border p-3 text-sm flex-1 min-w-0 overflow-hidden">
