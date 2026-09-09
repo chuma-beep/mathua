@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Mean value theorem for integrals",
+    "section": "Mean Value Theorem for Integrals",
+    "subgoals": [
+      "State f(c) equals the average value",
+      "Solve f(c) = average for c",
+      "Check f(x) = x on [0,4] gives c = 2"
+    ]
+  },
+  {
+    "label": "Computing the average value",
+    "section": "Computing definite integrals",
+    "subgoals": [
+      "Divide the integral by (b - a)",
+      "Evaluate x^2 on [0,2] to 4/3",
+      "Evaluate 3x on [1,3] to 6"
+    ]
+  },
+  {
+    "label": "Integral properties",
+    "section": "Properties",
+    "subgoals": [
+      "Review integral linearity",
+      "Split intervals additively",
+      "Use properties before averaging"
+    ]
+  }
+]

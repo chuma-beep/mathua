@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bounded sequences",
+    "section": "Bounded sequence",
+    "subgoals": [
+      "Bound (-1)^n by 1",
+      "Reject n² as unbounded",
+      "Separate bounded from convergent"
+    ]
+  },
+  {
+    "label": "Convergence forces boundedness",
+    "section": "Convergent sequence",
+    "subgoals": [
+      "Trap tails near the limit",
+      "Cover finitely many early terms",
+      "Conclude all convergent are bounded"
+    ]
+  },
+  {
+    "label": "Bounded but divergent",
+    "section": "Oscillating sequence",
+    "subgoals": [
+      "Show (-1)^n oscillates",
+      "Confirm boundedness holds",
+      "File necessity vs sufficiency"
+    ]
+  }
+]

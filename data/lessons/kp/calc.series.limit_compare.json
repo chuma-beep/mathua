@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Worked limit comparison",
+    "section": "Example",
+    "subgoals": [
+      "Form the ratio a(n)/b(n)",
+      "Take the limit against 1/n²",
+      "Conclude same behavior"
+    ]
+  },
+  {
+    "label": "Comparison test refresher",
+    "section": "Comparison test",
+    "subgoals": [
+      "Recall direct domination",
+      "See limits as asymptotic domination",
+      "Require finite positive limit"
+    ]
+  },
+  {
+    "label": "Benchmark choice",
+    "section": "What is a series with positive terms?",
+    "subgoals": [
+      "Match leading behavior to p-series",
+      "Check 1/(n²-n) against 1/n²",
+      "Confirm limit 1 forces convergence"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Work by a variable force",
+    "section": "Work by a variable force",
+    "subgoals": [
+      "Write W as ∫F(x)dx",
+      "Integrate 2x over [0,3] to 9",
+      "Reduce to F·d for constant force"
+    ]
+  },
+  {
+    "label": "Power-law forces",
+    "section": "Work by a variable force",
+    "subgoals": [
+      "Integrate x^2 over [1,2] to 7/3",
+      "Track units in joules",
+      "Check endpoints carefully"
+    ]
+  },
+  {
+    "label": "Spring work",
+    "section": "Work by a variable force",
+    "subgoals": [
+      "Apply Hooke's law F = kx",
+      "Integrate 4x over [0,2] to 8",
+      "Confirm W = kL^2/2 pattern"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sine fundamental limit",
+    "section": "The trigonometric fundamental limit",
+    "subgoals": [
+      "State sin(x)/x → 1",
+      "Scale to sin(3x)/x → 3",
+      "Convert tan(x)/x via cos"
+    ]
+  },
+  {
+    "label": "Cosine companion",
+    "section": "The cosine limit",
+    "subgoals": [
+      "State (1-cos x)/x → 0",
+      "Pair with the sine limit",
+      "Use both in trig limits"
+    ]
+  },
+  {
+    "label": "Remarkable limits summary",
+    "section": "Summary of the main remarkable limits",
+    "subgoals": [
+      "File sin, tan, cosine limits",
+      "Match form before applying",
+      "Rescale arguments to x → 0"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One-sided existence",
+    "section": "Conditions for limit existence and continuity",
+    "subgoals": [
+      "Compute left and right limits",
+      "Require agreement for two-sided",
+      "Check |x-1|/(x-1) splits ±1"
+    ]
+  },
+  {
+    "label": "Infinite one-sided behavior",
+    "section": "Definition",
+    "subgoals": [
+      "Track 1/x from right to +∞",
+      "Track 1/x from left to -∞",
+      "Conclude no two-sided limit at 0"
+    ]
+  },
+  {
+    "label": "Limit intuition",
+    "section": "Understanding limits in calculus",
+    "subgoals": [
+      "Approach from each side numerically",
+      "Graph the split behavior",
+      "Confirm agreement rule"
+    ]
+  }
+]

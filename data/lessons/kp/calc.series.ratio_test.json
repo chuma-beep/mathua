@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Ratio test statement",
+    "section": "Ratio test",
+    "subgoals": [
+      "Compute L = lim |a(n+1)/a(n)|",
+      "Read L < 1 as convergence",
+      "Read L > 1 as divergence"
+    ]
+  },
+  {
+    "label": "Factorial showcase",
+    "section": "Ratio test",
+    "subgoals": [
+      "Simplify 1/(n+1) ratio to 0",
+      "Conclude ∑1/n! converges",
+      "Check n!/n^n gives 1/e"
+    ]
+  },
+  {
+    "label": "Inconclusive case",
+    "section": "Ratio test",
+    "subgoals": [
+      "Recognize L = 1 dead end",
+      "Switch to comparison or integral",
+      "Note p-series always give L = 1"
+    ]
+  }
+]

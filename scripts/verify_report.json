@@ -32032,6 +32032,34 @@
   "latex": "\\Delta y \\approx f'(x)\\,\\Delta x"
  },
  {
+  "file": "data/lessons/authored/calc.integral.applied.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "W = \\int_{a}^{b} F(x)\\,dx"
+ },
+ {
+  "file": "data/lessons/authored/calc.integral.applied.md",
+  "line": 19,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\bar{x} = \\frac{1}{M}\\int_{a}^{b} x\\,\\rho(x)\\,dx"
+ },
+ {
+  "file": "data/lessons/authored/calc.integral.applied.md",
+  "line": 27,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "S = 2\\pi\\int_{a}^{b} f(x)\\sqrt{1+(f'(x))^{2}}\\,dx"
+ },
+ {
+  "file": "data/lessons/authored/calc.series.ratio.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "parse: TypeError",
+  "latex": "L = \\lim_{n\\to\\infty}\\left|\\frac{a_{n+1}}{a_{n}}\\right|"
+ },
+ {
   "file": "data/lessons/teaching/alg.eq.vars_both_sides.md",
   "line": 19,
   "verdict": "SKIP",

@@ -1388,5 +1388,355 @@
    "streak": 3,
    "avg_time_seconds": 150
   }
+ },
+ {
+  "id": "calc.integral.net_change",
+  "label": "Net change theorem",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.ftc"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.integral.variable_limits",
+  "label": "Differentiation of integrals with variable limits",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.ftc"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.integral.mvt",
+  "label": "Mean value theorem for integrals",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.definite"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.integral.work",
+  "label": "Work computed by integration",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.integral.definite"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.center_mass",
+  "label": "Center of mass by integration",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.integral.definite"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.surface_area",
+  "label": "Surface area of solids of revolution",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.arc_length"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.trapezoid",
+  "label": "Trapezoidal rule for numerical integration",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.integral.numerical"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.simpson",
+  "label": "Simpson's rule for numerical integration",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.integral.trapezoid"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.improper_compare",
+  "label": "Comparison test for improper integrals",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.improper"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.integral.p_test",
+  "label": "p-integral test for improper integrals",
+  "domain": "calculus",
+  "subdomain": "calculus.integrals",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.integral.improper_compare"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.ratio_test",
+  "label": "Ratio test for series convergence",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.positive_terms"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.geometric",
+  "label": "Geometric series and its sum",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.series.nth_term",
+  "label": "nth-term divergence test",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.series.telescoping",
+  "label": "Telescoping series",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.direct_compare",
+  "label": "Direct comparison test for series",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.positive_terms"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.limit_compare",
+  "label": "Limit comparison test for series",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.direct_compare"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.series.absolute",
+  "label": "Absolute and conditional convergence",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.alternating"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.remainder",
+  "label": "Alternating series remainder estimate",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.series.alternating"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 90
+  }
+ },
+ {
+  "id": "calc.series.radius",
+  "label": "Radius and interval of convergence",
+  "domain": "calculus",
+  "subdomain": "calculus.series",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.series.power"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.limit.epsilon_delta",
+  "label": "Epsilon-delta definition of a limit",
+  "domain": "calculus",
+  "subdomain": "calculus.limits",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.limit.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 120
+  }
+ },
+ {
+  "id": "calc.limit.one_sided",
+  "label": "One-sided limits",
+  "domain": "calculus",
+  "subdomain": "calculus.limits",
+  "grading_type": "numeric",
+  "prerequisites": [
+   "calc.limit.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 45
+  }
+ },
+ {
+  "id": "calc.limit.infinite",
+  "label": "Infinite limits and vertical asymptotes",
+  "domain": "calculus",
+  "subdomain": "calculus.limits",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.limit.asymptotes"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.limit.sine_limit",
+  "label": "Fundamental trigonometric limit sin(x)/x",
+  "domain": "calculus",
+  "subdomain": "calculus.limits",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.limit.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.limit.exp_limit",
+  "label": "Fundamental exponential limit",
+  "domain": "calculus",
+  "subdomain": "calculus.limits",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.limit.concept"
+  ],
+  "mastery_threshold": {
+   "streak": 5,
+   "avg_time_seconds": 60
+  }
+ },
+ {
+  "id": "calc.seq.bounded",
+  "label": "Bounded sequences",
+  "domain": "calculus",
+  "subdomain": "calculus.sequences",
+  "grading_type": "symbolic",
+  "prerequisites": [
+   "calc.seq.convergence"
+  ],
+  "mastery_threshold": {
+   "streak": 3,
+   "avg_time_seconds": 60
+  }
  }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Epsilon-delta definition",
+    "section": "Definition",
+    "subgoals": [
+      "State ∀ε>0 ∃δ>0 implication",
+      "Bind δ to input distance",
+      "Bind ε to output tolerance"
+    ]
+  },
+  {
+    "label": "Linear proof pattern",
+    "section": "Understanding limits in calculus",
+    "subgoals": [
+      "Isolate |x - x_0| from |f - ℓ|",
+      "Read off δ = ε/3 for 3x",
+      "Generalize to linear functions"
+    ]
+  },
+  {
+    "label": "Limit properties",
+    "section": "Properties",
+    "subgoals": [
+      "Review algebraic limit laws",
+      "Apply laws before epsilon work",
+      "Reserve ε-δ for definitions"
+    ]
+  }
+]

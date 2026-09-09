@@ -110,6 +110,31 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.deriv.total_diff", &derivTotalDiffGen{})
 	reg.Register("calc.deriv.diff_continuity", &derivDiffContinuityGen{})
 	reg.Register("calc.deriv.jacobian", &derivJacobianGen{})
+	reg.Register("calc.integral.net_change", &integralNetChangeGen{})
+	reg.Register("calc.integral.variable_limits", &integralVariableLimitsGen{})
+	reg.Register("calc.integral.mvt", &integralMVTGen{})
+	reg.Register("calc.integral.work", &integralWorkGen{})
+	reg.Register("calc.integral.center_mass", &integralCenterMassGen{})
+	reg.Register("calc.integral.surface_area", &integralSurfaceAreaGen{})
+	reg.Register("calc.integral.trapezoid", &integralTrapezoidGen{})
+	reg.Register("calc.integral.simpson", &integralSimpsonGen{})
+	reg.Register("calc.integral.improper_compare", &integralImproperCompareGen{})
+	reg.Register("calc.integral.p_test", &integralPTestGen{})
+	reg.Register("calc.series.ratio_test", &ratioTestGen{})
+	reg.Register("calc.series.geometric", &geometricSeriesGen{})
+	reg.Register("calc.series.nth_term", &nthTermGen{})
+	reg.Register("calc.series.telescoping", &telescopingSeriesGen{})
+	reg.Register("calc.series.direct_compare", &directCompareGen{})
+	reg.Register("calc.series.limit_compare", &limitCompareGen{})
+	reg.Register("calc.series.absolute", &absoluteConvergenceGen{})
+	reg.Register("calc.series.remainder", &alternatingRemainderGen{})
+	reg.Register("calc.series.radius", &convergenceRadiusGen{})
+	reg.Register("calc.limit.epsilon_delta", &epsilonDeltaGen{})
+	reg.Register("calc.limit.one_sided", &oneSidedLimitGen{})
+	reg.Register("calc.limit.infinite", &infiniteLimitGen{})
+	reg.Register("calc.limit.sine_limit", &sineLimitGen{})
+	reg.Register("calc.limit.exp_limit", &expLimitGen{})
+	reg.Register("calc.seq.bounded", &boundedSeqGen{})
 }
 
 type limitConceptGen struct{}
@@ -1800,6 +1825,396 @@ func (g *derivJacobianGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{"Write the Jacobian of \\(T(x,y)=(x^{2},y^{2})\\).", "[[2x,0],[0,2y]]", "Partial derivatives row by row: \\(\\begin{pmatrix}2x&0\\\\0&2y\\end{pmatrix}\\)."},
 		{"What are the entries of a Jacobian matrix?", "all first-order partials ∂T_i/∂x_j", "Row \\(i\\), column \\(j\\) holds \\(\\partial T_{i}/\\partial x_{j}\\)."},
 		{"Write the Jacobian of \\(T(x,y)=(x+y,x-y)\\).", "[[1,1],[1,-1]]", "Row 1: \\((1,1)\\); row 2: \\((1,-1)\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralNetChangeGen struct{}
+
+func (g *integralNetChangeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"If \\(v(t)=3t^{2}\\) is velocity, find displacement from \\(t=0\\) to \\(t=2\\).", "8", "Net change: \\(\\int_{0}^{2} 3t^{2}\\,dt = [t^{3}]_{0}^{2} = 8\\)."},
+		{"State the net change theorem.", "∫_a^b f'(x)dx = f(b)-f(a)", "The integral of a rate of change gives net change: \\(\\int_{a}^{b} f'(x)\\,dx = f(b)-f(a)\\)."},
+		{"If \\(f'(x)=2x\\) and \\(f(1)=5\\), find \\(f(3)\\).", "13", "\\(f(3)-f(1) = \\int_{1}^{3} 2x\\,dx = 8\\), so \\(f(3) = 13\\)."},
+		{"Water flows at \\(r(t)=4t\\) L/min; how much flows in from \\(t=0\\) to \\(t=3\\)?", "18", "\\(\\int_{0}^{3} 4t\\,dt = [2t^{2}]_{0}^{3} = 18\\) liters."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralVariableLimitsGen struct{}
+
+func (g *integralVariableLimitsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\frac{d}{dx}\\int_{0}^{x} t^{2}\\,dt\\).", "x^2", "FTC part 1: derivative of the accumulation is the integrand at \\(x\\)."},
+		{"Find \\(\\frac{d}{dx}\\int_{1}^{x} \\sin(t)\\,dt\\).", "sin(x)", "By FTC1, \\(\\frac{d}{dx}\\int_{1}^{x}\\sin t\\,dt = \\sin x\\)."},
+		{"Find \\(\\frac{d}{dx}\\int_{0}^{x^{2}} t\\,dt\\).", "2x^3", "Chain rule + FTC1: \\(x^{2} \\cdot 2x = 2x^{3}\\)."},
+		{"Find \\(\\frac{d}{dx}\\int_{x}^{2} e^{t}\\,dt\\).", "-e^x", "Flipped limit: \\(-\\frac{d}{dx}\\int_{2}^{x}e^{t}\\,dt = -e^{x}\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralMVTGen struct{}
+
+func (g *integralMVTGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the mean value theorem for integrals.", "there exists c with f(c) = average of f on [a,b]", "Some \\(c \\in [a,b]\\) attains the average value: \\(f(c) = \\frac{1}{b-a}\\int_{a}^{b}f\\)."},
+		{"Find the average value of \\(f(x)=x^{2}\\) on \\([0,2]\\).", "4/3", "Average \\(= \\frac{1}{2}\\int_{0}^{2}x^{2}\\,dx = \\frac{1}{2}\\cdot\\frac{8}{3} = 4/3\\)."},
+		{"Find \\(c\\) guaranteed by the integral MVT for \\(f(x)=x\\) on \\([0,4]\\).", "2", "Average is \\(2\\); \\(f(c)=c=2\\) gives \\(c=2\\)."},
+		{"Find the average value of \\(f(x)=3x\\) on \\([1,3]\\).", "6", "Average \\(= \\frac{1}{2}\\int_{1}^{3}3x\\,dx = \\frac{1}{2}(12) = 6\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralWorkGen struct{}
+
+func (g *integralWorkGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"A force \\(F(x)=2x\\) moves an object from \\(x=0\\) to \\(x=3\\). Find the work.", "9", "Work \\(= \\int_{0}^{3}2x\\,dx = 9\\) J."},
+		{"A force \\(F(x)=x^{2}\\) moves an object from \\(x=1\\) to \\(x=2\\). Find the work.", "7/3", "Work \\(= \\int_{1}^{2}x^{2}\\,dx = (8-1)/3 = 7/3\\) J."},
+		{"State the work integral.", "W = ∫_a^b F(x)dx", "Work by a variable force is \\(W = \\int_{a}^{b}F(x)\\,dx\\)."},
+		{"A spring with \\(F(x)=4x\\) is stretched from \\(0\\) to \\(2\\). Find the work.", "8", "Work \\(= \\int_{0}^{2}4x\\,dx = 8\\) J."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralCenterMassGen struct{}
+
+func (g *integralCenterMassGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"A rod on \\([0,2]\\) has density \\(\\rho=1\\). Where is its center of mass?", "1", "Uniform rod: midpoint \\(\\bar{x} = 1\\)."},
+		{"State the center-of-mass formula for a rod.", "x̄ = (1/M)∫x·ρ(x)dx", "Total moment divided by total mass: \\(\\bar{x} = \\frac{1}{M}\\int x\\rho(x)\\,dx\\)."},
+		{"A rod on \\([0,4]\\) has density \\(\\rho=2\\). Where is its center of mass?", "2", "Uniform density: midpoint \\(\\bar{x} = 2\\)."},
+		{"A rod on \\([0,1]\\) has density \\(\\rho(x)=x\\). Find its total mass.", "1/2", "Mass \\(= \\int_{0}^{1}x\\,dx = 1/2\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralSurfaceAreaGen struct{}
+
+func (g *integralSurfaceAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the surface area formula for \\(y=f(x)\\) revolved about the x-axis.", "S = 2π∫f(x)√(1+(f')²)dx", "Bands of radius \\(f(x)\\): \\(S = 2\\pi\\int_{a}^{b}f(x)\\sqrt{1+(f')^{2}}\\,dx\\)."},
+		{"What is the surface area of a sphere of radius \\(r\\)?", "4πr^2", "Revolving a semicircle gives \\(S = 4\\pi r^{2}\\)."},
+		{"Which factor accounts for slant in the surface formula?", "√(1+(f')²)", "The arc-length element \\(\\sqrt{1+(f')^{2}}\\,dx\\) measures slant length."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralTrapezoidGen struct{}
+
+func (g *integralTrapezoidGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the trapezoidal rule with \\(n\\) subintervals.", "T_n = (Δx/2)(f(x_0)+2f(x_1)+...+f(x_n))", "Endpoints count once, interior points twice, scaled by \\(\\Delta x/2\\)."},
+		{"Approximate \\(\\int_{0}^{2}x\\,dx\\) with one trapezoid.", "2", "Average height \\((0+2)/2=1\\) times width \\(2\\): \\(2\\)."},
+		{"Approximate \\(\\int_{0}^{1}x^{2}\\,dx\\) with one trapezoid.", "1/2", "Average height \\((0+1)/2\\) times width \\(1\\): \\(1/2\\) (true value \\(1/3\\))."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralSimpsonGen struct{}
+
+func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State Simpson's rule with \\(n\\) (even) subintervals.", "S_n = (Δx/3)(f_0+4f_1+2f_2+...+f_n)", "Coefficients alternate 4,2,4,...,2,4 with endpoints once, scaled by \\(\\Delta x/3\\)."},
+		{"Why must \\(n\\) be even for Simpson's rule?", "parabolas are fit over pairs of subintervals", "Each parabola spans two subintervals, so \\(n\\) must be even."},
+		{"Approximate \\(\\int_{0}^{2}x\\,dx\\) with Simpson's rule, \\(n=2\\).", "2", "Linear functions are integrated exactly: \\((1/3)(0+4\\cdot 1+2) = 2\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralImproperCompareGen struct{}
+
+func (g *integralImproperCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the comparison test for improper integrals.", "0≤f≤g and ∫g converges ⟹ ∫f converges", "Domination preserves convergence; divergence of the smaller forces divergence of the larger."},
+		{"Does \\(\\int_{1}^{\\infty} dx/(x^{2}+1)\\) converge? Why?", "yes, by comparison with 1/x^2", "\\(1/(x^{2}+1) \\leq 1/x^{2}\\) and \\(\\int_{1}^{\\infty}dx/x^{2}\\) converges."},
+		{"Does \\(\\int_{1}^{\\infty} dx/\\sqrt{x}\\) converge? Why?", "no, compare (diverges like p=1/2)", "Use \\(p\\)-comparison: \\(p=1/2 \\leq 1\\), so it diverges."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type integralPTestGen struct{}
+
+func (g *integralPTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"For which \\(p\\) does \\(\\int_{1}^{\\infty}dx/x^{p}\\) converge?", "p>1", "The \\(p\\)-integral converges iff \\(p>1\\)."},
+		{"Does \\(\\int_{1}^{\\infty}dx/x^{3}\\) converge?", "yes (p=3>1)", "Since \\(p=3>1\\), the integral converges."},
+		{"Does \\(\\int_{1}^{\\infty}dx/x\\) converge?", "no (p=1)", "The harmonic case \\(p=1\\) diverges (logarithmic growth)."},
+		{"Does \\(\\int_{0}^{1}dx/x^{p}\\) converge for \\(p<1\\)?", "yes", "At \\(0\\), \\(\\int_{0}^{1}dx/x^{p}\\) converges iff \\(p<1\\) (flipped condition)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type ratioTestGen struct{}
+
+func (g *ratioTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the ratio test.", "L<1 converges, L>1 diverges, L=1 inconclusive", "With \\(L=\\lim|a_{n+1}/a_{n}|\\): \\(L<1\\) converges, \\(L>1\\) diverges, \\(L=1\\) says nothing."},
+		{"Apply the ratio test to \\(\\sum 1/n!\\).", "converges (L=0)", "\\(|a_{n+1}/a_{n}| = 1/(n+1) \\to 0 < 1\\), so it converges."},
+		{"Apply the ratio test to \\(\\sum n!/n^{n}\\).", "converges (L=1/e)", "The ratio tends to \\(1/e < 1\\), so it converges."},
+		{"What does the ratio test say when \\(L=1\\)?", "nothing (inconclusive)", "\\(L=1\\) is inconclusive: try comparison, integral, or root tests."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type geometricSeriesGen struct{}
+
+func (g *geometricSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find the sum of \\(\\sum_{n=0}^{\\infty}(1/2)^{n}\\).", "2", "Geometric with \\(a=1\\), \\(r=1/2\\): \\(1/(1-1/2) = 2\\)."},
+		{"For which \\(|r|\\) does \\(\\sum ar^{n}\\) converge?", "|r|<1", "Geometric series converge iff \\(|r|<1\\), summing to \\(a/(1-r)\\)."},
+		{"Find the sum of \\(\\sum_{n=0}^{\\infty}(1/3)^{n}\\).", "3/2", "\\(a=1\\), \\(r=1/3\\): \\(1/(1-1/3) = 3/2\\)."},
+		{"Does \\(\\sum_{n=0}^{\\infty}2^{n}\\) converge?", "no (|r|=2≥1)", "Ratio \\(|r|=2\\geq 1\\): terms do not even tend to zero."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type nthTermGen struct{}
+
+func (g *nthTermGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the nth-term divergence test.", "if a_n does not tend to 0, the series diverges", "Convergence of \\(\\sum a_{n}\\) requires \\(a_{n}\\to 0\\); otherwise it diverges."},
+		{"Does \\(\\sum n/(n+1)\\) converge?", "no (terms tend to 1)", "Terms tend to \\(1\\neq 0\\), so the series diverges."},
+		{"If \\(\\sum a_{n}\\) converges, what is \\(\\lim a_{n}\\)?", "0", "Convergence forces \\(a_{n}\\to 0\\) (necessary, not sufficient)."},
+		{"Does \\(a_{n}\\to 0\\) guarantee convergence?", "no (harmonic series)", "The harmonic series has \\(1/n\\to 0\\) yet diverges."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type telescopingSeriesGen struct{}
+
+func (g *telescopingSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\sum_{n=1}^{\\infty}(1/n-1/(n+1))\\).", "1", "Partial sums telescope: \\(1-1/(N+1)\\to 1\\)."},
+		{"What makes a series telescoping?", "interior terms cancel in partial sums", "Write terms as differences so consecutive terms cancel."},
+		{"Find \\(\\sum_{n=1}^{\\infty}(1/(n(n+1)))\\) via partial fractions.", "1", "\\(1/(n(n+1)) = 1/n-1/(n+1)\\), telescoping to \\(1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type directCompareGen struct{}
+
+func (g *directCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the direct comparison test.", "0≤a_n≤b_n and ∑b_n converges ⟹ ∑a_n converges", "Domination by a convergent series forces convergence (and divergence below forces divergence above)."},
+		{"Does \\(\\sum 1/(n^{2}+1)\\) converge? Why?", "yes, compare with 1/n^2", "\\(1/(n^{2}+1) \\leq 1/n^{2}\\) and \\(\\sum 1/n^{2}\\) converges."},
+		{"Does \\(\\sum 1/\\sqrt{n^{2}+n}\\) converge? Why?", "no, compare below with a divergent series", "Terms behave like \\(1/n\\); \\(\\sum\\) diverges by comparison with harmonic."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type limitCompareGen struct{}
+
+func (g *limitCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the limit comparison test.", "finite positive limit ⟹ same behavior", "If \\(\\lim a_{n}/b_{n} = L \\in (0,\\infty)\\), both series converge or both diverge."},
+		{"Use limit comparison on \\(\\sum 1/(n^{2}-n)\\).", "converges (compare 1/n^2)", "Ratio with \\(1/n^{2}\\) tends to \\(1\\); \\(\\sum 1/n^{2}\\) converges."},
+		{"Use limit comparison on \\(\\sum n/(n^{3}+1)\\).", "converges (compare 1/n^2)", "Ratio with \\(1/n^{2}\\) tends to \\(1\\); converges."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type absoluteConvergenceGen struct{}
+
+func (g *absoluteConvergenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"What is absolute convergence?", "∑|a_n| converges", "A series converges absolutely if the series of absolute values converges."},
+		{"Does absolute convergence imply convergence?", "yes", "Absolute convergence is stronger: \\(\\sum|a_{n}|\\) convergent forces \\(\\sum a_{n}\\) convergent."},
+		{"Is \\(\\sum (-1)^{n}/n^{2}\\) absolutely convergent?", "yes", "\\(\\sum 1/n^{2}\\) converges, so the alternating version converges absolutely."},
+		{"Is \\(\\sum (-1)^{n}/n\\) absolutely or conditionally convergent?", "conditionally", "It converges (Leibniz) but \\(\\sum 1/n\\) diverges: conditional."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type alternatingRemainderGen struct{}
+
+func (g *alternatingRemainderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Bound the error stopping \\(\\sum (-1)^{n}/n\\) at \\(n=10\\).", "1/11", "Remainder \\(\\leq\\) first omitted term: \\(a_{11} = 1/11\\)."},
+		{"State the alternating series remainder bound.", "|R_n| ≤ a_{n+1}", "Truncation error is at most the first dropped term."},
+		{"Bound the error stopping \\(\\sum (-1)^{n}/n^{2}\\) at \\(n=5\\).", "1/36", "First omitted term: \\(1/6^{2} = 1/36\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type convergenceRadiusGen struct{}
+
+func (g *convergenceRadiusGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"What is the radius of convergence of \\(\\sum x^{n}/n!\\)?", "infinity", "Ratio test gives \\(L=0\\) for all \\(x\\): \\(R=\\infty\\)."},
+		{"What is the radius of convergence of \\(\\sum x^{n}\\)?", "1", "Geometric in \\(x\\): converges for \\(|x|<1\\), so \\(R=1\\)."},
+		{"What does the interval of convergence add to the radius?", "endpoint checks", "Radius gives the open interval; each endpoint must be tested separately."},
+		{"What is the radius of convergence of \\(\\sum n!x^{n}\\)?", "0", "Ratio test diverges for all \\(x\\neq 0\\): \\(R=0\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type epsilonDeltaGen struct{}
+
+func (g *epsilonDeltaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"State the epsilon-delta definition of a limit.", "∀ε>0 ∃δ>0: 0<|x-x_0|<δ ⟹ |f(x)-ℓ|<ε", "For every tolerance \\(\\varepsilon\\), some distance \\(\\delta\\) keeps \\(f\\) within \\(\\varepsilon\\) of \\(\\ell\\)."},
+		{"In epsilon-delta, what does δ control?", "how close x must be to x_0", "\\(\\delta\\) bounds the input distance; \\(\\varepsilon\\) bounds the output error."},
+		{"Prove \\(\\lim_{x\\to 2}3x = 6\\) with delta in terms of epsilon.", "δ=ε/3", "\\(|3x-6| = 3|x-2| < \\varepsilon\\) when \\(|x-2|<\\varepsilon/3\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type oneSidedLimitGen struct{}
+
+func (g *oneSidedLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\lim_{x\\to 0^{+}}1/x\\).", "infinity", "From the right, \\(1/x\\) grows without bound: \\(+\\infty\\)."},
+		{"Find \\(\\lim_{x\\to 0^{-}}1/x\\).", "-infinity", "From the left, \\(1/x\\) dives to \\(-\\infty\\)."},
+		{"When does a two-sided limit exist?", "left and right limits agree", "\\(\\lim_{x\\to a}f\\) exists iff both one-sided limits exist and are equal."},
+		{"Find \\(\\lim_{x\\to 1^{+}}|x-1|/(x-1)\\).", "1", "For \\(x>1\\), the quotient is \\(1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type infiniteLimitGen struct{}
+
+func (g *infiniteLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\lim_{x\\to 0}1/x^{2}\\).", "infinity", "\\(1/x^{2} \\to +\\infty\\) from both sides."},
+		{"What asymptote does an infinite limit signal?", "vertical", "\\(\\lim_{x\\to a}f = \\pm\\infty\\) means \\(x=a\\) is a vertical asymptote."},
+		{"Find \\(\\lim_{x\\to 2^{+}}1/(x-2)\\).", "infinity", "Denominator positive and tiny: \\(+\\infty\\)."},
+		{"Find \\(\\lim_{x\\to 2^{-}}1/(x-2)\\).", "-infinity", "Denominator negative and tiny: \\(-\\infty\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type sineLimitGen struct{}
+
+func (g *sineLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\lim_{x\\to 0}\\sin(x)/x\\).", "1", "The fundamental trigonometric limit equals \\(1\\)."},
+		{"Find \\(\\lim_{x\\to 0}\\sin(3x)/x\\).", "3", "\\(\\sin(3x)/x = 3\\cdot\\sin(3x)/(3x) \\to 3\\)."},
+		{"Find \\(\\lim_{x\\to 0}(1-\\cos(x))/x\\).", "0", "Standard companion limit: \\((1-\\cos x)/x \\to 0\\)."},
+		{"Find \\(\\lim_{x\\to 0}\\tan(x)/x\\).", "1", "\\(\\tan x/x = (\\sin x/x)\\cdot(1/\\cos x) \\to 1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type expLimitGen struct{}
+
+func (g *expLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Find \\(\\lim_{x\\to 0}(e^{x}-1)/x\\).", "1", "The fundamental exponential limit equals \\(1\\)."},
+		{"Find \\(\\lim_{n\\to\\infty}(1+1/n)^{n}\\).", "e", "This limit defines \\(e\\)."},
+		{"Find \\(\\lim_{x\\to 0}\\ln(1+x)/x\\).", "1", "The logarithmic companion limit equals \\(1\\)."},
+	}
+	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type boundedSeqGen struct{}
+
+func (g *boundedSeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	type entry struct {
+		q, a, e string
+	}
+	table := []entry{
+		{"Is \\(a_{n}=(-1)^{n}\\) bounded?", "yes (|a_n|≤1)", "It oscillates between \\(-1\\) and \\(1\\): bounded but divergent."},
+		{"Does every convergent sequence have to be bounded?", "yes", "Convergence forces boundedness (terms eventually stay near the limit)."},
+		{"Is \\(a_{n}=n^{2}\\) bounded?", "no", "It grows without bound."},
+		{"Is a bounded sequence always convergent?", "no", "\\((-1)^{n}\\) is bounded yet oscillates: boundedness is necessary, not sufficient."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Comparison test",
+    "section": "Convergence and comparison",
+    "subgoals": [
+      "Dominate f by a known g",
+      "Inherit convergence downward",
+      "Push divergence upward"
+    ]
+  },
+  {
+    "label": "Improper integral setup",
+    "section": "Definition",
+    "subgoals": [
+      "Rewrite as a limit of proper integrals",
+      "Identify unbounded vs singular type",
+      "Check 1/(x²+1) against 1/x²"
+    ]
+  },
+  {
+    "label": "Worked comparison",
+    "section": "Example 4",
+    "subgoals": [
+      "Follow the worked comparison",
+      "Verify divergence via 1/√x",
+      "Confirm the domination direction"
+    ]
+  }
+]
