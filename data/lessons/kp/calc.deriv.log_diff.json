@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Logarithmic differentiation strategy",
+    "section": "Logarithmic Differentiation",
+    "subgoals": [
+      "Take ln of both sides first",
+      "Differentiate implicitly",
+      "Solve for f'(x)"
+    ]
+  },
+  {
+    "label": "Worked log-diff examples",
+    "section": "Using Logarithmic Differentiation",
+    "subgoals": [
+      "Follow the x^x worked example",
+      "Track the ln(x)+1 factor",
+      "Apply to (2x)^x"
+    ]
+  },
+  {
+    "label": "When to use logarithmic differentiation",
+    "section": "Problem-Solving Strategy",
+    "subgoals": [
+      "Recognize variable bases and exponents",
+      "Prefer logs for products and quotients",
+      "Fall back to chain rule otherwise"
+    ]
+  }
+]

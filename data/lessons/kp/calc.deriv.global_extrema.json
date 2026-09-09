@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Global extrema on intervals",
+    "section": "Global maximum and minimum points",
+    "subgoals": [
+      "Define global vs local extrema",
+      "List interior critical points",
+      "Add the interval endpoints"
+    ]
+  },
+  {
+    "label": "Local vs global comparison",
+    "section": "Local maximum and minimum points",
+    "subgoals": [
+      "Evaluate f at every candidate",
+      "Take largest and smallest values",
+      "Check x^2-4x on [0,3]"
+    ]
+  },
+  {
+    "label": "Worked global extrema",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked global-extremum example",
+      "Compare critical values with endpoints",
+      "Confirm -x^2+4x peaks at x = 2 on [0,3]"
+    ]
+  }
+]

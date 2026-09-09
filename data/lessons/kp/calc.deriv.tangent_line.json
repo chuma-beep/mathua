@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tangent line equation",
+    "section": "Equation of the tangent line",
+    "subgoals": [
+      "Evaluate slope f'(a) at the point",
+      "Use point-slope form y-f(a) = f'(a)(x-a)",
+      "Check x^2 at x = 1 gives y = 2x-1"
+    ]
+  },
+  {
+    "label": "Worked tangent examples",
+    "section": "Example 2",
+    "subgoals": [
+      "Follow the worked tangent example",
+      "Simplify to slope-intercept form",
+      "Check x^3 at x = 2 gives y = 12x-16"
+    ]
+  },
+  {
+    "label": "Slope from derivative rules",
+    "section": "Operations with derivatives",
+    "subgoals": [
+      "Pick the right rule for the slope",
+      "Evaluate trig and exponential slopes",
+      "Check sin at 0 and e^x at 0"
+    ]
+  }
+]

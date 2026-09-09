@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tangent and cotangent derivatives",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Recall tan and cot as sin/cos ratios",
+      "Apply d/dx tan(x) = sec^2(x)",
+      "Apply d/dx cot(x) = -csc^2(x)"
+    ]
+  },
+  {
+    "label": "Secant and cosecant derivatives",
+    "section": "Fundamental derivatives",
+    "subgoals": [
+      "Recall sec and csc as reciprocal trig",
+      "Apply d/dx sec(x) = sec(x)tan(x)",
+      "Apply d/dx csc(x) = -csc(x)cot(x)"
+    ]
+  },
+  {
+    "label": "Chain-rule trig composites",
+    "section": "Operations with derivatives",
+    "subgoals": [
+      "Identify the outer trig function",
+      "Multiply by the inner derivative",
+      "Check with tan(2x) and sec(3x)"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Second partials",
+    "section": "Higher-order partial derivatives",
+    "subgoals": [
+      "Differentiate fx again for fxx",
+      "Differentiate fy again for fyy",
+      "Check x^3 y^2 both ways"
+    ]
+  },
+  {
+    "label": "Mixed partials",
+    "section": "Higher-order partial derivatives",
+    "subgoals": [
+      "Cross-differentiate for fxy",
+      "Mind the order of variables",
+      "Check x^2 y gives 2x"
+    ]
+  },
+  {
+    "label": "Worked higher partials",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked partial example",
+      "Verify each second partial",
+      "Check sin(x)cos(y) signs"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Concavity test",
+    "section": "How to determine the concavity of a function",
+    "subgoals": [
+      "Compute f'' at the critical point",
+      "Read f'' > 0 as minimum, f'' < 0 as maximum",
+      "Treat f'' = 0 as inconclusive"
+    ]
+  },
+  {
+    "label": "Upward and downward concavity",
+    "section": "Upward and downward concavity",
+    "subgoals": [
+      "Link f'' sign to concavity direction",
+      "Sketch cup-up vs cup-down shapes",
+      "Check x^2 vs -x^2"
+    ]
+  },
+  {
+    "label": "Worked second-derivative test",
+    "section": "Example 2",
+    "subgoals": [
+      "Follow the worked test example",
+      "Evaluate f'' at each critical point",
+      "Classify x^3-3x^2 at x = 0 and x = 2"
+    ]
+  }
+]

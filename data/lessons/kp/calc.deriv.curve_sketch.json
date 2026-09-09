@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sketching strategy",
+    "section": "Exercises to find maxima, minima, and inflection points of functions",
+    "subgoals": [
+      "Combine intercepts and asymptotes",
+      "Add critical points and concavity",
+      "Assemble the full sketch for x^3-3x"
+    ]
+  },
+  {
+    "label": "Critical points in sketches",
+    "section": "How to calculate the points of local maximum and minimum",
+    "subgoals": [
+      "Mark critical points first",
+      "Note increasing vs decreasing intervals",
+      "Check x^2 increases on (0, infinity)"
+    ]
+  },
+  {
+    "label": "Inflection in sketches",
+    "section": "Identifying inflection points",
+    "subgoals": [
+      "Mark inflection points on the sketch",
+      "Show concavity flips visually",
+      "Confirm 1/x asymptotes x = 0, y = 0"
+    ]
+  }
+]

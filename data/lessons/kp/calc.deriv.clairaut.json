@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Clairaut-Schwarz statement",
+    "section": "Schwarz’s theorem",
+    "subgoals": [
+      "State fxy = fyx under continuity",
+      "Name the mixed-partial hypothesis",
+      "Apply to x^2 y^3 to get 6xy^2"
+    ]
+  },
+  {
+    "label": "Mixed partials equality",
+    "section": "Higher-order partial derivatives",
+    "subgoals": [
+      "Compute fxy directly",
+      "Compute fyx directly",
+      "Confirm both orders agree"
+    ]
+  },
+  {
+    "label": "Worked Clairaut check",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked mixed-partial example",
+      "Check continuity justifies equality",
+      "Note polynomials always qualify"
+    ]
+  }
+]

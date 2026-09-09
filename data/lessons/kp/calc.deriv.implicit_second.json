@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Implicit differentiation",
+    "section": "Implicit Differentiation",
+    "subgoals": [
+      "Differentiate both sides term by term",
+      "Attach y' to every y-term",
+      "Check x^2+y^2 = 25 gives -x/y"
+    ]
+  },
+  {
+    "label": "Implicit strategy",
+    "section": "Problem-Solving Strategy",
+    "subgoals": [
+      "Find dy/dx before touching second order",
+      "Plan the second differentiation",
+      "Collect y'' terms last"
+    ]
+  },
+  {
+    "label": "Second implicit derivative",
+    "section": "Using Implicit Differentiation and the Product Rule",
+    "subgoals": [
+      "Differentiate y' = -x/y implicitly",
+      "Substitute y' back in",
+      "Check the circle gives -25/y^3"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local maxima and minima",
+    "section": "Local maximum and minimum points",
+    "subgoals": [
+      "Define local extrema via neighborhoods",
+      "Connect extrema to flat tangents",
+      "Preview the critical-point hunt"
+    ]
+  },
+  {
+    "label": "Finding critical points",
+    "section": "How to calculate the points of local maximum and minimum",
+    "subgoals": [
+      "Solve f'(x) = 0",
+      "Include points where f' is undefined",
+      "Check x^3-3x gives x = -1, 1"
+    ]
+  },
+  {
+    "label": "Worked classification",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked critical-point example",
+      "List all candidates before classifying",
+      "Confirm none are missed"
+    ]
+  }
+]

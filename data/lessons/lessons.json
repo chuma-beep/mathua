@@ -2418,5 +2418,105 @@
   {
     "concept_id": "frac.compare.word",
     "source": "teaching/fractions/comparison-word.md"
+  },
+  {
+    "concept_id": "calc.deriv.trig_other",
+    "source": "algebrica/derivatives/derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.inverse_trig",
+    "source": "algebrica/derivatives/derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.general_exp",
+    "source": "teaching/calc.deriv.exp_log.md"
+  },
+  {
+    "concept_id": "calc.deriv.log_diff",
+    "source": "teaching/calc.deriv.exp_log.md"
+  },
+  {
+    "concept_id": "calc.deriv.higher_order",
+    "source": "algebrica/derivatives/derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.inverse_func",
+    "source": "algebrica/derivatives/derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.critical_points",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.second_test",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.inflection",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.global_extrema",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.curve_sketch",
+    "source": "algebrica/derivatives/maximum-minimum-and-inflection-points.md"
+  },
+  {
+    "concept_id": "calc.deriv.tangent_line",
+    "source": "algebrica/derivatives/derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.linear_approx",
+    "source": "algebrica/derivatives/differential-of-a-function.md"
+  },
+  {
+    "concept_id": "calc.deriv.newton",
+    "source": "authored/calc.deriv.newton.md"
+  },
+  {
+    "concept_id": "calc.deriv.error_prop",
+    "source": "authored/calc.deriv.newton.md"
+  },
+  {
+    "concept_id": "calc.deriv.implicit_second",
+    "source": "teaching/calc.deriv.implicit.md"
+  },
+  {
+    "concept_id": "calc.deriv.chain_power",
+    "source": "algebrica/derivatives/derivative-of-composite-power-functions.md"
+  },
+  {
+    "concept_id": "calc.deriv.chain_multi",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.gradient",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.directional",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.partial_higher",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.clairaut",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.total_diff",
+    "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.deriv.diff_continuity",
+    "source": "algebrica/derivatives/differential-of-a-function.md"
+  },
+  {
+    "concept_id": "calc.deriv.jacobian",
+    "source": "algebrica/derivatives/partial-derivatives.md"
   }
 ]

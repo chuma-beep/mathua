@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differential error formula",
+    "section": "Error propagation with differentials",
+    "subgoals": [
+      "State Dy approx f'(x) Dx",
+      "Read f'(x) as amplification",
+      "Check x^2 at 3 +- 0.1 gives 0.6"
+    ]
+  },
+  {
+    "label": "Root-function errors",
+    "section": "Error propagation with differentials",
+    "subgoals": [
+      "Differentiate sqrt(x)",
+      "Evaluate at x = 100 +- 1",
+      "Check the propagated error is 0.05"
+    ]
+  },
+  {
+    "label": "Reciprocal errors",
+    "section": "Error propagation with differentials",
+    "subgoals": [
+      "Differentiate 1/x",
+      "Evaluate at x = 2 +- 0.1",
+      "Report magnitude 0.025"
+    ]
+  }
+]
