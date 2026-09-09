@@ -11,6 +11,10 @@ Verdicts per claim block:
 
 Advisory only: always exits 0. Report goes to scripts/verify_report.json.
 """
+from __future__ import annotations  # lazy annotations: Block is used in
+# signatures (e.g. _has_contradiction_marker) before its class definition.
+# Required on Python <3.14 (CI pins 3.11), where annotations evaluate eagerly.
+
 import json
 import re
 import signal
