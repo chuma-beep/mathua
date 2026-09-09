@@ -45,10 +45,12 @@ export default function Header({ links }: HeaderProps) {
   function toggleNav(): void {
     const next = !navOpen
     setNavOpen(next)
-    // Animate on every click (open and close): hover rarely fires on touch
-    // screens, so the needle spins deterministically per tap (skipped for
-    // reduced motion).
-    if (!prefersReducedMotion()) compassRef.current?.startAnimation()
+    // Alternate drive direction so the needle moves on every click: forward
+    // spin on open, reverse spin on close (hover rarely fires on touch
+    // screens; skipped entirely for reduced motion).
+    if (prefersReducedMotion()) return
+    if (next) compassRef.current?.startAnimation()
+    else compassRef.current?.stopAnimation()
   }
 
   function handleThemeToggle(): void {
