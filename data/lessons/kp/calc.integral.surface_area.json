@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Surface of revolution formula",
+    "section": "Surface of revolution",
+    "subgoals": [
+      "Write S = 2π∫f√(1+(f')²)dx",
+      "Identify radius and slant factors",
+      "Recover 4πr² for the sphere"
+    ]
+  },
+  {
+    "label": "Slant correction",
+    "section": "Surface of revolution",
+    "subgoals": [
+      "Explain the √(1+(f')²) factor",
+      "Link it to arc length",
+      "Contrast with flat bands"
+    ]
+  },
+  {
+    "label": "Sphere check",
+    "section": "Surface of revolution",
+    "subgoals": [
+      "Revolve a semicircle radius r",
+      "Simplify to 4πr²",
+      "Confirm circumference times slant"
+    ]
+  }
+]

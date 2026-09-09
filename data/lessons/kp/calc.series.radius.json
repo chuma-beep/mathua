@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Radius of convergence",
+    "section": "",
+    "subgoals": [
+      "Apply ratio test in x",
+      "Read R = ∞, 1, or 0 cases",
+      "Check x^n/n! vs x^n vs n!x^n"
+    ]
+  },
+  {
+    "label": "Interval vs radius",
+    "section": "",
+    "subgoals": [
+      "Open the interval from R",
+      "Test each endpoint separately",
+      "Report interval plus endpoints"
+    ]
+  },
+  {
+    "label": "Power series refresher",
+    "section": "",
+    "subgoals": [
+      "Recall ∑c(n)(x-a)^n form",
+      "Center determines symmetry",
+      "Feed coefficients to ratio test"
+    ]
+  }
+]

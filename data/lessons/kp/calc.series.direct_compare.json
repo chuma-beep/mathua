@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Direct comparison test",
+    "section": "Comparison test",
+    "subgoals": [
+      "Bound 0 ≤ a(n) ≤ b(n)",
+      "Inherit convergence from above",
+      "Push divergence from below"
+    ]
+  },
+  {
+    "label": "Positive-term setup",
+    "section": "What is a series with positive terms?",
+    "subgoals": [
+      "Confirm all terms positive",
+      "Pick a benchmark p-series",
+      "Check 1/(n²+1) against 1/n²"
+    ]
+  },
+  {
+    "label": "Worked comparison",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked comparison",
+      "Verify the domination inequality",
+      "Conclude convergence or divergence"
+    ]
+  }
+]

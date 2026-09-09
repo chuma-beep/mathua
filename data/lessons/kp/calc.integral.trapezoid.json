@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trapezoidal rule",
+    "section": "The trapezoidal rules17635cbc",
+    "subgoals": [
+      "Weight endpoints once, interior twice",
+      "Scale by Δx/2",
+      "Check ∫_0^2 x dx ≈ 2"
+    ]
+  },
+  {
+    "label": "Quadrature principle",
+    "section": "General principle of a quadrature formulas345e11a4",
+    "subgoals": [
+      "Replace f by local approximants",
+      "Sum weighted samples",
+      "Refine as subintervals shrink"
+    ]
+  },
+  {
+    "label": "Trapezoid error sense",
+    "section": "Comparison and order of convergences3d833505",
+    "subgoals": [
+      "Compare against true 1/3 for x²",
+      "Note overestimation on convex f",
+      "Refine n to shrink error"
+    ]
+  }
+]

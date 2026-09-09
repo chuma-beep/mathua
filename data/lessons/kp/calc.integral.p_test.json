@@ -1,0 +1,29 @@
+[
+  {
+    "label": "p-integral test",
+    "section": "The \\\\(p\\\\)-Integral Test",
+    "subgoals": [
+      "State ∫_1^∞ dx/x^p converges iff p > 1",
+      "Check 1/x³ converges",
+      "Reject 1/x (p = 1)"
+    ]
+  },
+  {
+    "label": "Unbounded intervals",
+    "section": "Improper integrals over unbounded intervals",
+    "subgoals": [
+      "Set up the limit at infinity",
+      "Evaluate the antiderivative first",
+      "Take the limit last"
+    ]
+  },
+  {
+    "label": "Worked p-test",
+    "section": "Example 4",
+    "subgoals": [
+      "Follow the worked p-test example",
+      "Contrast p > 1 vs p ≤ 1",
+      "Note the flipped rule at 0"
+    ]
+  }
+]

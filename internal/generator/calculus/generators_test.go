@@ -114,6 +114,31 @@ func TestDerivClairautGen(t *testing.T)            { fuzzGen(t, &derivClairautGe
 func TestDerivTotalDiffGen(t *testing.T)           { fuzzGen(t, &derivTotalDiffGen{}) }
 func TestDerivDiffContinuityGen(t *testing.T)      { fuzzGen(t, &derivDiffContinuityGen{}) }
 func TestDerivJacobianGen(t *testing.T)            { fuzzGen(t, &derivJacobianGen{}) }
+func TestIntegralNetChangeGen(t *testing.T)        { fuzzGen(t, &integralNetChangeGen{}) }
+func TestIntegralVariableLimitsGen(t *testing.T)   { fuzzGen(t, &integralVariableLimitsGen{}) }
+func TestIntegralMVTGen(t *testing.T)              { fuzzGen(t, &integralMVTGen{}) }
+func TestIntegralWorkGen(t *testing.T)             { fuzzGen(t, &integralWorkGen{}) }
+func TestIntegralCenterMassGen(t *testing.T)       { fuzzGen(t, &integralCenterMassGen{}) }
+func TestIntegralSurfaceAreaGen(t *testing.T)      { fuzzGen(t, &integralSurfaceAreaGen{}) }
+func TestIntegralTrapezoidGen(t *testing.T)        { fuzzGen(t, &integralTrapezoidGen{}) }
+func TestIntegralSimpsonGen(t *testing.T)          { fuzzGen(t, &integralSimpsonGen{}) }
+func TestIntegralImproperCompareGen(t *testing.T)  { fuzzGen(t, &integralImproperCompareGen{}) }
+func TestIntegralPTestGen(t *testing.T)            { fuzzGen(t, &integralPTestGen{}) }
+func TestRatioTestGen(t *testing.T)                { fuzzGen(t, &ratioTestGen{}) }
+func TestGeometricSeriesGen(t *testing.T)          { fuzzGen(t, &geometricSeriesGen{}) }
+func TestNthTermGen(t *testing.T)                  { fuzzGen(t, &nthTermGen{}) }
+func TestTelescopingSeriesGen(t *testing.T)        { fuzzGen(t, &telescopingSeriesGen{}) }
+func TestDirectCompareGen(t *testing.T)            { fuzzGen(t, &directCompareGen{}) }
+func TestLimitCompareGen(t *testing.T)             { fuzzGen(t, &limitCompareGen{}) }
+func TestAbsoluteConvergenceGen(t *testing.T)      { fuzzGen(t, &absoluteConvergenceGen{}) }
+func TestAlternatingRemainderGen(t *testing.T)     { fuzzGen(t, &alternatingRemainderGen{}) }
+func TestConvergenceRadiusGen(t *testing.T)        { fuzzGen(t, &convergenceRadiusGen{}) }
+func TestEpsilonDeltaGen(t *testing.T)             { fuzzGen(t, &epsilonDeltaGen{}) }
+func TestOneSidedLimitGen(t *testing.T)            { fuzzGen(t, &oneSidedLimitGen{}) }
+func TestInfiniteLimitGen(t *testing.T)            { fuzzGen(t, &infiniteLimitGen{}) }
+func TestSineLimitGen(t *testing.T)                { fuzzGen(t, &sineLimitGen{}) }
+func TestExpLimitGen(t *testing.T)                 { fuzzGen(t, &expLimitGen{}) }
+func TestBoundedSeqGen(t *testing.T)               { fuzzGen(t, &boundedSeqGen{}) }
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()

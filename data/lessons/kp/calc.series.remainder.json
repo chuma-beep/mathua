@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Remainder bound",
+    "section": "What is Leibniz’s criterion used for",
+    "subgoals": [
+      "Bound |R(n)| by a(n+1)",
+      "Stop (-1)^n/n at n = 10 → 1/11",
+      "Stop (-1)^n/n² at n = 5 → 1/36"
+    ]
+  },
+  {
+    "label": "Leibniz criterion refresher",
+    "section": "What is Leibniz’s criterion used for",
+    "subgoals": [
+      "Require decreasing null sequence",
+      "Confirm alternation",
+      "License the remainder bound"
+    ]
+  },
+  {
+    "label": "Worked remainder examples",
+    "section": "Example",
+    "subgoals": [
+      "Follow the worked error example",
+      "Identify the first omitted term",
+      "Report the numeric bound"
+    ]
+  }
+]

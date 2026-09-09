@@ -1,0 +1,29 @@
+[
+  {
+    "label": "First fundamental theorem",
+    "section": "The First Fundamental Theorem of Calculus",
+    "subgoals": [
+      "State ∫_a^b f' = f(b) - f(a)",
+      "Recognize rates integrating to net change",
+      "Check velocity 3t^2 over [0,2] gives 8"
+    ]
+  },
+  {
+    "label": "Net change worked examples",
+    "section": "Example 1",
+    "subgoals": [
+      "Follow the worked net-change example",
+      "Recover f(3) = 13 from f' = 2x",
+      "Track inflow 4t over [0,3] to 18"
+    ]
+  },
+  {
+    "label": "FTC introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Review the FTC overview",
+      "Link differentiation and integration",
+      "Preview variable-limit extensions"
+    ]
+  }
+]

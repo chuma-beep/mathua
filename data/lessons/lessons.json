@@ -2518,5 +2518,105 @@
   {
     "concept_id": "calc.deriv.jacobian",
     "source": "algebrica/derivatives/partial-derivatives.md"
+  },
+  {
+    "concept_id": "calc.integral.net_change",
+    "source": "algebrica/integrals/fundamental-theorem-of-calculus.md"
+  },
+  {
+    "concept_id": "calc.integral.variable_limits",
+    "source": "algebrica/integrals/fundamental-theorem-of-calculus.md"
+  },
+  {
+    "concept_id": "calc.integral.mvt",
+    "source": "algebrica/integrals/definite-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.work",
+    "source": "authored/calc.integral.applied.md"
+  },
+  {
+    "concept_id": "calc.integral.center_mass",
+    "source": "authored/calc.integral.applied.md"
+  },
+  {
+    "concept_id": "calc.integral.surface_area",
+    "source": "authored/calc.integral.applied.md"
+  },
+  {
+    "concept_id": "calc.integral.trapezoid",
+    "source": "algebrica/integrals/numerical-integration.md"
+  },
+  {
+    "concept_id": "calc.integral.simpson",
+    "source": "algebrica/integrals/numerical-integration.md"
+  },
+  {
+    "concept_id": "calc.integral.improper_compare",
+    "source": "algebrica/integrals/improper-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.p_test",
+    "source": "algebrica/integrals/improper-integrals.md"
+  },
+  {
+    "concept_id": "calc.series.ratio_test",
+    "source": "authored/calc.series.ratio.md"
+  },
+  {
+    "concept_id": "calc.series.geometric",
+    "source": "algebrica/series/geometric-series.md"
+  },
+  {
+    "concept_id": "calc.series.nth_term",
+    "source": "algebrica/series/series.md"
+  },
+  {
+    "concept_id": "calc.series.telescoping",
+    "source": "algebrica/series/series.md"
+  },
+  {
+    "concept_id": "calc.series.direct_compare",
+    "source": "algebrica/series/series-with-positive-terms.md"
+  },
+  {
+    "concept_id": "calc.series.limit_compare",
+    "source": "algebrica/series/series-with-positive-terms.md"
+  },
+  {
+    "concept_id": "calc.series.absolute",
+    "source": "algebrica/integrals/improper-integrals.md"
+  },
+  {
+    "concept_id": "calc.series.remainder",
+    "source": "algebrica/series/leibniz-criterion.md"
+  },
+  {
+    "concept_id": "calc.series.radius",
+    "source": "algebrica/series/power-series.md"
+  },
+  {
+    "concept_id": "calc.limit.epsilon_delta",
+    "source": "algebrica/limits/limits.md"
+  },
+  {
+    "concept_id": "calc.limit.one_sided",
+    "source": "algebrica/limits/limits.md"
+  },
+  {
+    "concept_id": "calc.limit.infinite",
+    "source": "algebrica/limits/limits.md"
+  },
+  {
+    "concept_id": "calc.limit.sine_limit",
+    "source": "algebrica/limits/remarkable-limits.md"
+  },
+  {
+    "concept_id": "calc.limit.exp_limit",
+    "source": "algebrica/limits/remarkable-limits.md"
+  },
+  {
+    "concept_id": "calc.seq.bounded",
+    "source": "algebrica/sequences/convergent-and-divergent-sequences.md"
   }
 ]

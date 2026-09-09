@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Simpson's rule",
+    "section": "Simpson's rules22a6fce0",
+    "subgoals": [
+      "Alternate 4/2 coefficients",
+      "Require even n",
+      "Scale by Δx/3"
+    ]
+  },
+  {
+    "label": "Parabolas over pairs",
+    "section": "The trapezoidal rules17635cbc",
+    "subgoals": [
+      "Fit parabolas per subinterval pair",
+      "See why n must be even",
+      "Contrast with single trapezoids"
+    ]
+  },
+  {
+    "label": "Exactness on linears",
+    "section": "Comparison and order of convergences3d833505",
+    "subgoals": [
+      "Check ∫_0^2 x dx = 2 exactly",
+      "Note higher convergence order",
+      "Prefer Simpson for smooth f"
+    ]
+  }
+]

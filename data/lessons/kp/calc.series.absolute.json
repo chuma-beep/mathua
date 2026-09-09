@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Absolute convergence",
+    "section": "Absolute convergence",
+    "subgoals": [
+      "Test ∑|a(n)| first",
+      "Conclude ∑a(n) converges",
+      "Check (-1)^n/n² via 1/n²"
+    ]
+  },
+  {
+    "label": "Conditional convergence",
+    "section": "Convergence and comparison",
+    "subgoals": [
+      "Converge without absolute convergence",
+      "Identify (-1)^n/n as conditional",
+      "Separate the two strengths"
+    ]
+  },
+  {
+    "label": "Worked absolute check",
+    "section": "Example 5",
+    "subgoals": [
+      "Follow the worked absolute example",
+      "Strip signs before testing",
+      "Classify the original series"
+    ]
+  }
+]

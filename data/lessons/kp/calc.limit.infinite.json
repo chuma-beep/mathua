@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Infinite limits",
+    "section": "Asymptotes and infinite limits",
+    "subgoals": [
+      "Detect 1/x² → +∞ at 0",
+      "Split 1/(x-2) by side",
+      "Name the vertical asymptote"
+    ]
+  },
+  {
+    "label": "Limit definition refresher",
+    "section": "Definition",
+    "subgoals": [
+      "Recall finite-limit form",
+      "Extend to unbounded outputs",
+      "Keep side analysis explicit"
+    ]
+  },
+  {
+    "label": "Limit properties",
+    "section": "Properties",
+    "subgoals": [
+      "Apply laws where finite",
+      "Stop laws at infinities",
+      "Switch to asymptote language"
+    ]
+  }
+]
