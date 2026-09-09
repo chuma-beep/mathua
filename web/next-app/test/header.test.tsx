@@ -105,6 +105,17 @@ describe('Header mobile nav menu', () => {
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
 
+  it('spins forward on open and reverses on close without crashing', () => {
+    render(<Header />)
+    const button = screen.getByRole('button', { name: 'Open navigation menu' })
+    fireEvent.click(button)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(4)
+    fireEvent.click(button)
+    expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
+    fireEvent.click(button)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(4)
+  })
+
   it('closes when a link is clicked', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
