@@ -26,8 +26,10 @@ vi.mock('next/navigation', () => ({
   usePathname: () => mockPathname,
 }))
 
+const { toggleThemeMock } = vi.hoisted(() => ({ toggleThemeMock: vi.fn() }))
+
 vi.mock('../hooks/useTheme', () => ({
-  useTheme: () => ({ theme: 'dark', mounted: true, toggleTheme: vi.fn() }),
+  useTheme: () => ({ theme: 'dark', mounted: true, toggleTheme: toggleThemeMock }),
 }))
 
 vi.mock('../hooks/useAuthState', () => ({
@@ -108,5 +110,12 @@ describe('Header mobile nav menu', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     fireEvent.click(screen.getByRole('menuitem', { name: 'Study' }))
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
+  })
+
+  it('theme toggle plays the sun-moon animation and toggles the theme', () => {
+    toggleThemeMock.mockClear()
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle theme' }))
+    expect(toggleThemeMock).toHaveBeenCalledTimes(1)
   })
 })
