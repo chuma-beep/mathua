@@ -115,45 +115,6 @@ export default function Header({ links }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {/* Mobile nav menu: mirrors the desktop link row, which is
-              hidden below md. One source of truth (displayLinks), so the
-              homepage and docs-section menus both surface on phones. */}
-          <div className="relative md:hidden" ref={navMenuRef}>
-            <button
-              onClick={() => setNavOpen(o => !o)}
-              aria-label="Open navigation menu"
-              aria-expanded={navOpen}
-              aria-haspopup="menu"
-              className="flex items-center justify-center min-h-[44px] min-w-[44px] font-mono text-mathua-muted bg-transparent border border-mathua-border-strong cursor-pointer rounded-none hover:text-mathua-blue hover:border-mathua-blue transition-colors"
-            >
-              <Compass size={18} strokeWidth={2} aria-hidden="true" />
-            </button>
-            {navOpen && (
-              <div
-                role="menu"
-                aria-label="Site navigation"
-                className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
-              >
-                {displayLinks.map(link => {
-                  const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      role="menuitem"
-                      aria-current={active ? 'page' : undefined}
-                      onClick={() => setNavOpen(false)}
-                      className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
-                        active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  )
-                })}
-              </div>
-            )}
-          </div>
           {mounted && (
             <button
               onClick={toggleTheme}
@@ -210,6 +171,44 @@ export default function Header({ links }: HeaderProps) {
               )}
             </div>
           ) : null}
+          {/* Mobile nav: bare compass mark at the far right, mirroring
+              the desktop link row (hidden below md) on every page. */}
+          <div className="relative md:hidden" ref={navMenuRef}>
+            <button
+                onClick={() => setNavOpen(o => !o)}
+                aria-label="Open navigation menu"
+                aria-expanded={navOpen}
+                aria-haspopup="menu"
+                className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
+              >
+                <Compass size={15} strokeWidth={2} aria-hidden="true" />
+              </button>
+              {navOpen && (
+                <div
+                  role="menu"
+                  aria-label="Site navigation"
+                  className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
+                >
+                  {displayLinks.map(link => {
+                    const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        role="menuitem"
+                        aria-current={active ? 'page' : undefined}
+                        onClick={() => setNavOpen(false)}
+                        className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
+                          active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+          </div>
         </div>
       </div>
     </header>
