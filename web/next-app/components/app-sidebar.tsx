@@ -6,7 +6,10 @@ import { LogOut } from 'lucide-react'
 import {
   BookOpen,
   ChevronsLeft,
+  FileText,
+  HeartHandshake,
   Network,
+  PenLine,
   Play,
   Settings,
   Trophy,
@@ -39,6 +42,14 @@ const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
   { label: 'Settings', href: '/settings', icon: Settings },
+]
+
+// Resources group: docs, contributing, creator's note. Informational pages
+// only — never Diagnostic / Quiz / Review (no CTA duplication).
+const RESOURCE_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
+  { label: 'Docs', href: '/docs', icon: FileText },
+  { label: 'Contribute', href: '/docs/contributing', icon: HeartHandshake },
+  { label: "Creator's note", href: '/note', icon: PenLine },
 ]
 
 interface AppSidebarProps {
@@ -122,6 +133,27 @@ export function AppSidebar({
                     {item.href === '/session' && dueReviews > 0 && (
                       <SidebarMenuBadge>{dueReviews}</SidebarMenuBadge>
                     )}
+                  </SidebarMenuItem>
+                )
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Resources</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {RESOURCE_ITEMS.map((item) => {
+                const active = pathname === item.href || pathname.startsWith(item.href + '/')
+                const Icon = item.icon
+                return (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
+                      <Link href={item.href}>
+                        <Icon aria-hidden="true" className="size-4 shrink-0" />
+                        <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 )
               })}

@@ -37,6 +37,22 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Review Now')).toBeNull()
   })
 
+  it('renders Resources group with Docs, Contribute, and Creator note links', () => {
+    renderSidebar()
+    expect(screen.getByText('Resources')).toBeInTheDocument()
+    for (const label of ['Docs', 'Contribute', "Creator's note"]) {
+      expect(screen.getByText(label)).toBeInTheDocument()
+    }
+    const sidebar = screen.getByTestId('profile-sidebar')
+    for (const href of ['/docs', '/docs/contributing', '/note']) {
+      const link = sidebar.querySelector(`a[href="${href}"]`)!
+      expect(link).not.toBeNull()
+      const svg = link.querySelector('svg')
+      expect(svg).not.toBeNull()
+      expect(svg?.getAttribute('class') ?? '').toMatch(/size-4/)
+    }
+  })
+
   it('renders slim sidebar without Next up / Goals / On-this-page duplication', () => {
     renderSidebar({ dueReviews: 2 })
     expect(screen.getByText('2')).toBeInTheDocument() // due-review badge
@@ -68,7 +84,7 @@ describe('AppSidebar', () => {
     const sidebar = screen.getByTestId('profile-sidebar')
     // Every text label next to an icon carries the collapse-hide class;
     // tooltips (not visible text) carry the label when collapsed.
-    const labels = ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']
+    const labels = ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
     for (const label of labels) {
       const el = screen.getByText(label, { exact: true })
       expect(sidebar.contains(el)).toBe(true)
