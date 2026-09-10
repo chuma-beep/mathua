@@ -1,29 +1,29 @@
 [
   {
-    "label": "Definition",
-    "section": "Definition",
+    "label": "The cellular chain complex",
+    "section": "The Cellular Chain Complex",
     "subgoals": [
-      "Define concept",
-      "Recall definition",
-      "Apply definition"
+      "Build C_n from the n-cells of a CW complex",
+      "Write the boundary via attaching degrees",
+      "Verify d-squared equals zero on the chain"
     ]
   },
   {
-    "label": "Example",
-    "section": "Example",
+    "label": "Homology as cycles modulo boundaries",
+    "section": "Cycles Modulo Boundaries",
     "subgoals": [
-      "Study example",
-      "Follow steps",
-      "Check result"
+      "Define H_n as kernel modulo image",
+      "Interpret a surviving class as a hole",
+      "Explain why Smith normal form finishes the computation"
     ]
   },
   {
-    "label": "Properties",
-    "section": "Properties",
+    "label": "Computing H_n",
+    "section": "Sample Computations",
     "subgoals": [
-      "List properties",
-      "Verify property",
-      "Use property"
+      "Compute H_n of S-n from one 0-cell and one n-cell",
+      "Read H_1 and H_2 of the torus off the commutator word",
+      "Contrast with the Klein bottle torsion term"
     ]
   }
 ]
