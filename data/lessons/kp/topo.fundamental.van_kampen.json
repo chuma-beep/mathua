@@ -1,29 +1,29 @@
 [
   {
-    "label": "Definition",
-    "section": "Definition",
+    "label": "Statement and setup",
+    "section": "Statement and Setup",
     "subgoals": [
-      "Define concept",
-      "Recall definition",
-      "Apply definition"
+      "Name the hypotheses on U, V, and their intersection",
+      "Explain why the two inclusions jointly surject",
+      "Write the overlap relation killing i_U(g) i_V(g)-inverse"
     ]
   },
   {
-    "label": "Example",
-    "section": "Example",
+    "label": "Wedge of circles",
+    "section": "Wedge of Circles",
     "subgoals": [
-      "Study example",
-      "Follow steps",
-      "Check result"
+      "Decompose the figure eight into retracting opens",
+      "Read off trivial intersection contribution",
+      "Present the free group on a and b"
     ]
   },
   {
-    "label": "Properties",
-    "section": "Properties",
+    "label": "Computing fundamental groups",
+    "section": "Computing Fundamental Groups",
     "subgoals": [
-      "List properties",
-      "Verify property",
-      "Use property"
+      "Remove a point from the torus to get a wedge",
+      "Identify the commutator loop killed by refilling",
+      "Present pi_1 of the torus as Z cross Z"
     ]
   }
 ]
