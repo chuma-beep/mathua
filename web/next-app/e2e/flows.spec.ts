@@ -53,7 +53,7 @@ test('study → answer → XP persists (Study seam)', async ({ page }) => {
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await expect(input).toBeVisible({ timeout: 20_000 })
   await input.fill('4')
-  await page.getByRole('button', { name: 'Submit' }).first().click()
+  await page.getByRole('button', { name: 'Check Answer' }).first().click()
   await expect(page.getByText('+10 XP').first()).toBeVisible({ timeout: 20_000 })
 })
 
