@@ -24,8 +24,9 @@ loop is 0 by Stokes' theorem. The puncture is what makes the difference.
 
 ## Cohomology Groups
 
-The **\(k\)-th de Rham group** is \(H^k_{dR}(M) = \{\text{closed } k\text{-forms}\} /
-\{\text{exact } k\text{-forms}\}\): closed forms modulo the trivial ones.
+The **\(k\)-th de Rham group** is
+\(H^k_{dR}(M) = \{\text{closed } k\text{-forms}\} / \{\text{exact } k\text{-forms}\}\),
+closed forms modulo the trivial ones.
 \(H^0_{dR}(M) \cong \mathbb{R}^c\) where \(c\) is the number of connected
 components (closed 0-forms are locally constant functions). For the circle,
 \([d\theta]\) generates \(H^1_{dR}(S^1) \cong \mathbb{R}\): one independent
