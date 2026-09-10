@@ -1,0 +1,5 @@
+{
+  "name": "anti-slop-vendored",
+  "private": true,
+  "type": "module"
+}
