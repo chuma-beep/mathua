@@ -1,0 +1,11 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">√36 asks: which square has area 36?</text>
+  <g stroke="#BABABA" stroke-width="2" fill="none">
+    <rect x="40" y="60" width="120" height="120"/>
+    <line x1="80" y1="60" x2="80" y2="180"/><line x1="120" y1="60" x2="120" y2="180"/>
+    <line x1="40" y1="100" x2="160" y2="100"/><line x1="40" y1="140" x2="160" y2="140"/>
+  </g>
+  <text x="100" y="60" font-size="12" fill="#8a8f98" text-anchor="middle">6 by 6</text>
+  <text x="220" y="120" font-size="18" fill="#BABABA">√36 = 6</text>
+  <text x="220" y="145" font-size="12" fill="#8a8f98">because 6² = 36</text>
+</svg>

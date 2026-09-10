@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">same signs → positive, different → negative</text>
+  <g font-size="15" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="120" y="80">(+)(+) = +</text>
+    <text x="120" y="110">(−)(−) = +</text>
+    <text x="120" y="140">(+)(−) = −</text>
+    <text x="120" y="170">(−)(+) = −</text>
+  </g>
+  <g font-size="13" fill="#8a8f98" text-anchor="middle" font-family="monospace">
+    <text x="260" y="95">−2 × −3</text>
+    <text x="260" y="115">= +6</text>
+    <text x="260" y="150">−12 ÷ 4</text>
+    <text x="260" y="170">= −3</text>
+  </g>
+</svg>

@@ -787,6 +787,21 @@ var conceptDiagrams = map[string]string{
 	"arith.factor.gcf":        "/diagrams/arithmetic/factor-gcf.svg",
 	"arith.factor.lcm":        "/diagrams/arithmetic/factor-lcm.svg",
 	"arith.factor.composite":  "/diagrams/arithmetic/factor-composite.svg",
+	// Batch C5c: hand-authored arithmetic diagrams (exp/sqrt/neg/order/dec).
+	"arith.exp.concept":       "/diagrams/arithmetic/exp-concept.svg",
+	"arith.exp.evaluate":      "/diagrams/arithmetic/exp-evaluate.svg",
+	"arith.exp.product_rule":  "/diagrams/arithmetic/exp-product-rule.svg",
+	"arith.exp.quotient_rule": "/diagrams/arithmetic/exp-quotient-rule.svg",
+	"arith.exp.power_rule":    "/diagrams/arithmetic/exp-power-rule.svg",
+	"arith.sqrt.perfect":      "/diagrams/arithmetic/sqrt-perfect.svg",
+	"arith.sqrt.simplify":     "/diagrams/arithmetic/sqrt-simplify.svg",
+	"arith.neg.number_line":   "/diagrams/arithmetic/neg-number-line.svg",
+	"arith.neg.add_sub":       "/diagrams/arithmetic/neg-add-sub.svg",
+	"arith.neg.mult_div":      "/diagrams/arithmetic/neg-mult-div.svg",
+	"arith.order_ops.basic":   "/diagrams/arithmetic/order-basic.svg",
+	"arith.order_ops.full":    "/diagrams/arithmetic/order-full.svg",
+	"arith.order_ops.nested":  "/diagrams/arithmetic/order-nested.svg",
+	"arith.dec.intro":         "/diagrams/arithmetic/dec-intro.svg",
 }
 
 // DiagramFor exposes the dual-coding diagram for a concept (exported for API).

@@ -1,0 +1,22 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">1.25: one and twenty-five hundredths</text>
+  <g stroke="#BABABA" stroke-width="2" fill="none">
+    <rect x="40" y="60" width="60" height="60"/>
+    <rect x="120" y="60" width="18" height="60"/>
+    <rect x="144" y="60" width="18" height="60"/>
+    <rect x="168" y="90" width="12" height="12"/>
+    <rect x="184" y="90" width="12" height="12"/>
+    <rect x="200" y="90" width="12" height="12"/>
+    <rect x="216" y="90" width="12" height="12"/>
+    <rect x="232" y="90" width="12" height="12"/>
+  </g>
+  <g font-size="22" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="285" y="95">1.25</text>
+  </g>
+  <g font-size="11" fill="#8a8f98" text-anchor="middle">
+    <text x="70" y="140">1 one</text>
+    <text x="141" y="140">2 tenths</text>
+    <text x="216" y="140">5 hundredths</text>
+  </g>
+  <text x="180" y="175" font-size="12" fill="#8a8f98" text-anchor="middle">each place right is 10× smaller</text>
+</svg>
