@@ -1187,7 +1187,7 @@
   ],
   "mastery_threshold": {
    "streak": 3,
-   "avg_time_seconds": 150
+   "avg_time_seconds": 120
   }
  },
  {
@@ -1386,7 +1386,7 @@
   ],
   "mastery_threshold": {
    "streak": 3,
-   "avg_time_seconds": 150
+   "avg_time_seconds": 120
   }
  },
  {
