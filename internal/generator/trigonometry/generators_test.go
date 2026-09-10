@@ -104,4 +104,3 @@ func TestDifficultyScaling(t *testing.T) {
 		}
 	}
 }
-

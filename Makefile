@@ -21,6 +21,9 @@ validate:
 lint-go:
 	go run github.com/curtbushko/go-ai-lint/cmd/go-ai-lint@v1.0.1-0.20260620203811-c6ce4ee5624f ./...
 
+lint-slop:
+	npx --yes aislop@0.16.1 scan
+
 fuzz:
 	go test ./internal/generator/... -run TestFuzz -count 1000
 

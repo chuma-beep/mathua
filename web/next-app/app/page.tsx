@@ -15,7 +15,7 @@ import DomainTable from '../components/DomainTable'
 import ProgressionLevels from '../components/ProgressionLevels'
 import Footer from '../components/Footer'
 import Loading from '../components/Loading'
-import conceptsData from '../data/concepts.json'
+import { concepts as conceptsData } from '../lib/conceptData'
 
 const loadingGraphStyle: React.CSSProperties = {
   height: 'clamp(320px, 60dvh, 520px)',
@@ -41,7 +41,7 @@ const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3
   ),
 })
 
-const heroConcepts = (conceptsData as any[]).map((c: any) => ({
+const heroConcepts = conceptsData.map((c) => ({
   id: c.id,
   label: c.label,
   domain: c.domain,
@@ -90,10 +90,10 @@ export default function HomePage() {
 
   const conceptCount = conceptsData.length
   const connectionCount = conceptsData.reduce(
-    (sum: number, c: any) => sum + ((c.prerequisites as any[])?.length || 0),
+    (sum, c) => sum + (c.prerequisites?.length ?? 0),
     0
   )
-  const domainCount = new Set(conceptsData.map((c: any) => c.domain)).size
+  const domainCount = new Set(conceptsData.map((c) => c.domain)).size
 
   const domainOrder = [
     'arithmetic',

@@ -27,12 +27,12 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestSlopeGen(t *testing.T)      { fuzzGen(t, &slopeGen{}) }
+func TestSlopeGen(t *testing.T)          { fuzzGen(t, &slopeGen{}) }
 func TestSlopeInterceptGen(t *testing.T) { fuzzGen(t, &slopeInterceptGen{}) }
-func TestMultiStepEqGen(t *testing.T) { fuzzGen(t, &multiStepEqGen{}) }
-func TestVarsBothSidesGen(t *testing.T) { fuzzGen(t, &varsBothSidesGen{}) }
-func TestStdFormGen(t *testing.T)     { fuzzGen(t, &stdFormGen{}) }
-func TestParallelPerpGen(t *testing.T) { fuzzGen(t, &parallelPerpGen{}) }
+func TestMultiStepEqGen(t *testing.T)    { fuzzGen(t, &multiStepEqGen{}) }
+func TestVarsBothSidesGen(t *testing.T)  { fuzzGen(t, &varsBothSidesGen{}) }
+func TestStdFormGen(t *testing.T)        { fuzzGen(t, &stdFormGen{}) }
+func TestParallelPerpGen(t *testing.T)   { fuzzGen(t, &parallelPerpGen{}) }
 
 func TestDifficultyScaling(t *testing.T) {
 	gen := &multiStepEqGen{}
@@ -62,4 +62,3 @@ func TestFuzz(t *testing.T) {
 		})
 	}
 }
-

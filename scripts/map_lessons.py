@@ -5,7 +5,6 @@ Generate lessons.json mapping and add new concept IDs for scraped Algebrica cont
 
 import json
 import os
-import glob
 
 BASE = os.path.join(os.path.dirname(__file__), "..")
 LESSONS_DIR = os.path.join(BASE, "data", "lessons", "algebrica")

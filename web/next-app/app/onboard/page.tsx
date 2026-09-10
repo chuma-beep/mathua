@@ -24,7 +24,7 @@ import {
   type DiagnosticProgress,
 } from '../../lib/api'
 import { setUserInfo, getUserInfo } from '../../lib/auth'
-import conceptsData from '../../data/concepts.json'
+import { concepts as conceptsData } from '../../lib/conceptData'
 
 type Step = 'welcome' | 'diagnostic' | 'results'
 
@@ -86,7 +86,7 @@ export default function OnboardPage() {
 
   useEffect(() => {
     if (!mounted) return
-    const raw = conceptsData as any[]
+    const raw = conceptsData
     const map = new Map<string, string[]>()
     for (const c of raw) {
       const list = map.get(c.domain) || []

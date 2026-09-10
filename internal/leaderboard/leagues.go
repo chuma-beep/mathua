@@ -23,13 +23,13 @@ const (
 
 // League is one tier's current standings after any pending reset.
 type League struct {
-	Tier    string          `json:"tier"`
+	Tier    string                 `json:"tier"`
 	Members []storage.LeagueMember `json:"members"`
 }
 
 // LeagueBoard is the full response for GET /api/leagues.
 type LeagueBoard struct {
-	Week  string   `json:"week"`
+	Week    string   `json:"week"`
 	Leagues []League `json:"leagues"`
 }
 

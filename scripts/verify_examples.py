@@ -814,7 +814,7 @@ def _pair_guard(lhs, rhs) -> str | None:
         try:
             if sp.simplify(lhs - rhs) == 0:
                 return None
-        except Exception:
+        except Exception:  # aislop-ignore-line ai-slop/swallowed-exception -- parse failure falls through to an honest SKIP verdict
             pass
         return "dependent variable"
     if bool(lf) != bool(rf):
@@ -975,7 +975,7 @@ def _verify_piece(blk: Block, body: str, had_long_text: bool) -> None:
                     body_expr = latex2sympy(body)
                     arg_expr = latex2sympy(mfn.group(2))
                     return body_expr.subs(sp.Symbol(var), arg_expr)
-                except Exception:
+                except Exception:  # aislop-ignore-line ai-slop/swallowed-exception -- parse failure falls through to an honest SKIP verdict
                     pass
         return latex2sympy(seg)
 
@@ -1067,7 +1067,7 @@ def _verify_piece(blk: Block, body: str, had_long_text: bool) -> None:
         if any("\\" in str(s) for s in allfree):
             blk.verdict, blk.reason = "SKIP", "unparsed command"
             return
-    except Exception:
+    except Exception:  # aislop-ignore-line ai-slop/swallowed-exception -- parse failure falls through to an honest SKIP verdict
         pass
     # Textual unknown-call detection: `f(...)` / `\varphi(...)` on either side
     # whose head is neither a collected definition nor a known function
@@ -1089,7 +1089,7 @@ def _verify_piece(blk: Block, body: str, had_long_text: bool) -> None:
                for e in (lhs, rhs) if isinstance(e, sp.Basic)):
             try:
                 lhs, rhs = lhs.doit(), rhs.doit()
-            except Exception:
+            except Exception:  # aislop-ignore-line ai-slop/swallowed-exception -- parse failure falls through to an honest SKIP verdict
                 pass
             if any(isinstance(e, (sp.Limit, sp.Sum, sp.Product, sp.Integral))
                    for e in (lhs, rhs) if isinstance(e, sp.Basic)):

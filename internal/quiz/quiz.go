@@ -12,11 +12,11 @@ import (
 // Guest unlimited retake: each POST /api/quiz/session creates a new session.
 type Session struct {
 	sync.Mutex
-	ID        string
-	StudentID string
-	Order     []*concepts.Concept
-	Index     int
-	Attempts  []Attempt
+	ID            string
+	StudentID     string
+	Order         []*concepts.Concept
+	Index         int
+	Attempts      []Attempt
 	LastProblem   *generator.Problem
 	LastConceptID string
 	// Difficulties holds weakness→difficulty per concept (80% target, 0.3-1.0).

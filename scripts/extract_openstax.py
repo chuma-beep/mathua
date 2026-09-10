@@ -302,7 +302,7 @@ def main():
                 out_path.write_text(md)
                 print(f"  -> Wrote {out_path}")
 
-        except Exception as e:
+        except Exception as e:  # aislop-ignore-line ai-slop/swallowed-exception -- per-file extraction failure is reported and skipped
             print(f"  X Error: {e}")
 
 

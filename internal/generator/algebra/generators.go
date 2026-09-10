@@ -140,7 +140,9 @@ func (g *slopeInterceptGen) Generate(ctx generator.GeneratorContext) generator.P
 	if ctx.Difficulty > 0.6 && rand.Intn(2) == 0 {
 		m := rand.Intn(3) + 1
 		n := rand.Intn(3) + 2
-		if rand.Intn(2) == 0 { m = -m }
+		if rand.Intn(2) == 0 {
+			m = -m
+		}
 		b := rand.Intn(int(5+ctx.Difficulty*10)) - int(3+ctx.Difficulty*5)
 		return generator.Problem{
 			Question:    fmt.Sprintf("Write the equation of a line with slope \\(%d/%d\\) and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, n, b),
@@ -903,7 +905,9 @@ func (g *conicParabolaGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	h := rand.Intn(5) - 2
 	k := rand.Intn(5) - 2
 	p := rand.Intn(3) + 1
-	if rand.Intn(2) == 0 { p = -p }
+	if rand.Intn(2) == 0 {
+		p = -p
+	}
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
 			Question:    fmt.Sprintf("Parabola: \\((x%+d)^{2} = %d(y%+d)\\). Which direction does it open?", -h, 4*p, -k),
@@ -996,7 +1000,7 @@ func (g *extraneousRootsGen) Generate(ctx generator.GeneratorContext) generator.
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1109,7 +1113,7 @@ func (g *funcDirichletGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1129,7 +1133,7 @@ func (g *funcDomainGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1151,7 +1155,7 @@ func (g *funcEvenOddGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1171,7 +1175,7 @@ func (g *graphAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1191,7 +1195,9 @@ type monotonicityGen struct{}
 
 func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
-	if rand.Intn(2) == 0 { a = -a }
+	if rand.Intn(2) == 0 {
+		a = -a
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is \\(f(x) = %dx\\) increasing or decreasing on \\(\\mathbb{R}\\)?", a),
 		Answer:      map[bool]string{true: "increasing", false: "decreasing"}[a > 0],
@@ -1227,7 +1233,7 @@ func (g *funcSigmoidGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
-		Question:    e.question, Answer: e.answer, Explanation: e.exp,
+		Question: e.question, Answer: e.answer, Explanation: e.exp,
 	}
 }
 
@@ -1235,9 +1241,13 @@ type funcSignGen struct{}
 
 func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(10) - 5
-	if x == 0 { x = 3 }
+	if x == 0 {
+		x = 3
+	}
 	ans := "positive"
-	if x < 0 { ans = "negative" }
+	if x < 0 {
+		ans = "negative"
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the sign of \\(f(x) = x\\) at \\(x = %d\\)?", x),
 		Answer:      ans,
@@ -1343,7 +1353,7 @@ func (g *ineqSystemsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	b := rand.Intn(5) - 2
 	x := rand.Intn(4) + 1
 	y := a*x + b + rand.Intn(3)
-	satisfies := y > a*x + b
+	satisfies := y > a*x+b
 	ans := map[bool]string{true: "yes", false: "no"}[satisfies]
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(y > %dx + %d\\)?", x, y, a, b),

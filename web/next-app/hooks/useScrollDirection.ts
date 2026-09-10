@@ -30,7 +30,6 @@ export function useScrollDirection({
         const atBottom = window.innerHeight + y >= document.documentElement.scrollHeight - bottomOffset
 
         if (idleTimer.current !== null) window.clearTimeout(idleTimer.current)
-        // @ts-ignore setTimeout returns number in browser
         idleTimer.current = window.setTimeout(() => setHidden(false), idleMs)
 
         if (atBottom) setHidden(false)

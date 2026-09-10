@@ -12,21 +12,21 @@ import (
 )
 
 type Scores struct {
-	LifetimePoints    int                 `json:"lifetime_points"`
-	WeeklyScore       int                 `json:"weekly_score"`
-	SpeedBonus        float64             `json:"speed_bonus"`
-	ConceptsMastered  int                 `json:"concepts_mastered"`
-	CurrentStreak     int                 `json:"current_streak"`
-	Level             string              `json:"level"`
-	XPTotal           int                 `json:"xp_total"`
-	XPToday           int                 `json:"xp_today"`
-	DailyXPGoal       int                 `json:"daily_xp_goal"`
-	SpacedReps        map[string]float64  `json:"spaced_reps,omitempty"`
-	AvgLearningSpeed  float64             `json:"avg_learning_speed"`
-	PausedUntil       string              `json:"paused_until,omitempty"`
+	LifetimePoints   int                `json:"lifetime_points"`
+	WeeklyScore      int                `json:"weekly_score"`
+	SpeedBonus       float64            `json:"speed_bonus"`
+	ConceptsMastered int                `json:"concepts_mastered"`
+	CurrentStreak    int                `json:"current_streak"`
+	Level            string             `json:"level"`
+	XPTotal          int                `json:"xp_total"`
+	XPToday          int                `json:"xp_today"`
+	DailyXPGoal      int                `json:"daily_xp_goal"`
+	SpacedReps       map[string]float64 `json:"spaced_reps,omitempty"`
+	AvgLearningSpeed float64            `json:"avg_learning_speed"`
+	PausedUntil      string             `json:"paused_until,omitempty"`
 	// Batch 1: Quiz 150 XP gate signal (MA verbatim).
-	XPSinceQuiz       int                 `json:"xp_since_quiz"`
-	QuizDue           bool                `json:"quiz_due"`
+	XPSinceQuiz int  `json:"xp_since_quiz"`
+	QuizDue     bool `json:"quiz_due"`
 }
 
 type Updater struct {
@@ -100,21 +100,21 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 	}
 
 	return &Scores{
-		LifetimePoints:    lifetimePoints,
-		WeeklyScore:       weeklyScore,
-		SpeedBonus:        speedBonus,
-		ConceptsMastered:  mastered,
-		CurrentStreak:     streak,
-		Level:             level,
-		XPTotal:           xpTotal,
-		XPToday:           xpToday,
-		DailyXPGoal:       dailyGoal,
-		SpacedReps:        spacedReps,
-		AvgLearningSpeed:  math.Round(avgSpeed*100) / 100,
-		PausedUntil:       pausedUntil(u, studentID),
-		XPSinceQuiz:       xpSinceQuiz,
+		LifetimePoints:   lifetimePoints,
+		WeeklyScore:      weeklyScore,
+		SpeedBonus:       speedBonus,
+		ConceptsMastered: mastered,
+		CurrentStreak:    streak,
+		Level:            level,
+		XPTotal:          xpTotal,
+		XPToday:          xpToday,
+		DailyXPGoal:      dailyGoal,
+		SpacedReps:       spacedReps,
+		AvgLearningSpeed: math.Round(avgSpeed*100) / 100,
+		PausedUntil:      pausedUntil(u, studentID),
+		XPSinceQuiz:      xpSinceQuiz,
 		// 150 mirrors engine.QuizGateXP (import cycle forbids sharing).
-		QuizDue:           xpSinceQuiz >= 150,
+		QuizDue: xpSinceQuiz >= 150,
 	}, nil
 }
 

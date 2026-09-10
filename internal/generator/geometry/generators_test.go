@@ -57,4 +57,3 @@ func TestFuzz(t *testing.T) {
 		})
 	}
 }
-

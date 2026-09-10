@@ -62,7 +62,7 @@ func parseNumeric(s string) (float64, bool, bool) {
 		if _, ok := frac.SetString(m[2]); !ok {
 			return 0, false, false
 		}
-		val, _ := new(big.Rat).Add(whole, frac).Float64()
+		val, _ := new(big.Rat).Add(whole, frac).Float64() // aislop-ignore-line ai-slop/swallowed-exception -- Float64's 2nd result is an exactness flag, not an error
 		return val, true, true
 	}
 
@@ -95,11 +95,11 @@ func parseNumeric(s string) (float64, bool, bool) {
 		pow := new(big.Int).Exp(ten, new(big.Int).Abs(exp), nil)
 		if exp.Sign() >= 0 {
 			num := new(big.Int).Mul(coeff.Num(), pow)
-			val, _ := new(big.Rat).SetFrac(num, coeff.Denom()).Float64()
+			val, _ := new(big.Rat).SetFrac(num, coeff.Denom()).Float64() // aislop-ignore-line ai-slop/swallowed-exception -- Float64's 2nd result is an exactness flag, not an error
 			return val, true, true
 		}
 		denom := new(big.Int).Mul(coeff.Denom(), pow)
-		val, _ := new(big.Rat).SetFrac(coeff.Num(), denom).Float64()
+		val, _ := new(big.Rat).SetFrac(coeff.Num(), denom).Float64() // aislop-ignore-line ai-slop/swallowed-exception -- Float64's 2nd result is an exactness flag, not an error
 		return val, true, true
 	}
 

@@ -12,28 +12,28 @@ type Variant struct {
 }
 
 type Concept struct {
-	ID               string           `json:"id"`
-	Label            string           `json:"label"`
-	Domain           string           `json:"domain"`
-	Subdomain        string           `json:"subdomain"`
-	GradingType      string           `json:"grading_type"`
-	Prerequisites    []string         `json:"prerequisites"`
-	Encompasses      []string         `json:"encompasses,omitempty"`
-	KeyPrerequisites []string         `json:"key_prerequisites,omitempty"`
-	InterferenceGroup string          `json:"interference_group,omitempty"`
-	Variants         []Variant        `json:"variants,omitempty"`
-	MasteryThreshold MasteryThreshold `json:"mastery_threshold"`
+	ID                string           `json:"id"`
+	Label             string           `json:"label"`
+	Domain            string           `json:"domain"`
+	Subdomain         string           `json:"subdomain"`
+	GradingType       string           `json:"grading_type"`
+	Prerequisites     []string         `json:"prerequisites"`
+	Encompasses       []string         `json:"encompasses,omitempty"`
+	KeyPrerequisites  []string         `json:"key_prerequisites,omitempty"`
+	InterferenceGroup string           `json:"interference_group,omitempty"`
+	Variants          []Variant        `json:"variants,omitempty"`
+	MasteryThreshold  MasteryThreshold `json:"mastery_threshold"`
 }
 
 type DAG struct {
-	concepts       map[string]*Concept
-	order          []*Concept
-	domains        []string
-	prereqsOf      map[string][]*Concept
-	dependentsOf   map[string][]*Concept
-	encompassedBy  map[string][]*Concept
-	encompassesOf  map[string][]*Concept
-	interferersOf  map[string][]*Concept
+	concepts      map[string]*Concept
+	order         []*Concept
+	domains       []string
+	prereqsOf     map[string][]*Concept
+	dependentsOf  map[string][]*Concept
+	encompassedBy map[string][]*Concept
+	encompassesOf map[string][]*Concept
+	interferersOf map[string][]*Concept
 }
 
 func (d *DAG) Concepts() map[string]*Concept {

@@ -8,6 +8,9 @@ import { OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { type MasteryStatus } from '../lib/graphStatus'
+
+export type { MasteryStatus }
 
 export interface ConceptDef {
   id: string
@@ -15,8 +18,6 @@ export interface ConceptDef {
   domain: string
   prerequisites: string[]
 }
-
-export type MasteryStatus = 'mastered' | 'practicing' | 'learning' | 'unseen' | 'locked'
 
 interface MathConceptGraph3DProps {
   theme?: 'dark' | 'light'

@@ -708,57 +708,76 @@ func (g *greenFunctionGen) Generate(ctx generator.GeneratorContext) generator.Pr
 }
 
 type sturmLiouvilleGen struct{}
+
 func (g *sturmLiouvilleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is Sturm-Liouville operator self-adjoint? (yes/no)","yes","SL is self-adjoint under weight."},{"Does SL have real eigenvalues? (yes/no)","yes","Self-adjoint gives real."},{"Are eigenfunctions orthogonal with weight? (yes/no)","yes","Orthogonal."}}
-	hard:=[]entry{{"Does SL on [a,b] with separated BC have discrete spectrum? (yes/no)","yes","Eigenvalues infinite discrete."},{"Is Legendre equation Sturm-Liouville? (yes/no)","yes","With p=1-x^2."},{"Does completeness of eigenfunctions hold? (yes/no)","yes","Expand in eigenfunctions."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is Sturm-Liouville operator self-adjoint? (yes/no)", "yes", "SL is self-adjoint under weight."}, {"Does SL have real eigenvalues? (yes/no)", "yes", "Self-adjoint gives real."}, {"Are eigenfunctions orthogonal with weight? (yes/no)", "yes", "Orthogonal."}}
+	hard := []entry{{"Does SL on [a,b] with separated BC have discrete spectrum? (yes/no)", "yes", "Eigenvalues infinite discrete."}, {"Is Legendre equation Sturm-Liouville? (yes/no)", "yes", "With p=1-x^2."}, {"Does completeness of eigenfunctions hold? (yes/no)", "yes", "Expand in eigenfunctions."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type boundaryValueGen struct{}
+
 func (g *boundaryValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Does BVP y''=0, y(0)=0,y(1)=1 have unique solution y=x? (yes/no)","yes","Linear BVP."},{"Is BVP different from IVP (conditions at two points)? (yes/no)","yes","BVP at boundaries."},{"Does BVP may have 0,1,∞ solutions? (yes/no)","yes","Unlike IVP."}}
-	hard:=[]entry{{"Does Green's function solve BVP? (yes/no)","yes","Via integral."},{"Is shooting method for BVP? (yes/no)","yes","Convert BVP to IVP iteration."},{"Does Fredholm alternative apply? (yes/no)","yes","Solvability condition."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Does BVP y''=0, y(0)=0,y(1)=1 have unique solution y=x? (yes/no)", "yes", "Linear BVP."}, {"Is BVP different from IVP (conditions at two points)? (yes/no)", "yes", "BVP at boundaries."}, {"Does BVP may have 0,1,∞ solutions? (yes/no)", "yes", "Unlike IVP."}}
+	hard := []entry{{"Does Green's function solve BVP? (yes/no)", "yes", "Via integral."}, {"Is shooting method for BVP? (yes/no)", "yes", "Convert BVP to IVP iteration."}, {"Does Fredholm alternative apply? (yes/no)", "yes", "Solvability condition."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type lyapunovGen struct{}
+
 func (g *lyapunovGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is V(x)=x^2 Lyapunov for x'=-x? (yes/no)","yes","V>0, dV/dt<0."},{"Does Lyapunov prove stability without solving ODE? (yes/no)","yes","Energy-like function."},{"Is Lyapunov's direct method? (yes/no)","yes","Direct."}}
-	hard:=[]entry{{"Does LaSalle's invariance principle extend Lyapunov? (yes/no)","yes","Invariant set."},{"Is V strict Lyapunov if dV/dt<0? (yes/no)","yes","Strict."},{"Does converse Lyapunov hold for asymptotically stable? (yes/no)","yes","Existence of V."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is V(x)=x^2 Lyapunov for x'=-x? (yes/no)", "yes", "V>0, dV/dt<0."}, {"Does Lyapunov prove stability without solving ODE? (yes/no)", "yes", "Energy-like function."}, {"Is Lyapunov's direct method? (yes/no)", "yes", "Direct."}}
+	hard := []entry{{"Does LaSalle's invariance principle extend Lyapunov? (yes/no)", "yes", "Invariant set."}, {"Is V strict Lyapunov if dV/dt<0? (yes/no)", "yes", "Strict."}, {"Does converse Lyapunov hold for asymptotically stable? (yes/no)", "yes", "Existence of V."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type laplaceEqGen struct{}
+
 func (g *laplaceEqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is Laplace equation Δu=0? (yes/no)","yes","Laplace."},{"Does Laplace solution have mean value property? (yes/no)","yes","Harmonic."},{"Is Dirichlet problem Laplace with boundary values? (yes/no)","yes","Boundary condition."}}
-	hard:=[]entry{{"Does maximum principle hold for Laplace? (yes/no)","yes","Interior max = boundary max."},{"Is fundamental solution log| x| in 2D? (yes/no)","yes","Newtonian potential."},{"Does separation give harmonic functions? (yes/no)","yes","Via eigenfunctions."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is Laplace equation Δu=0? (yes/no)", "yes", "Laplace."}, {"Does Laplace solution have mean value property? (yes/no)", "yes", "Harmonic."}, {"Is Dirichlet problem Laplace with boundary values? (yes/no)", "yes", "Boundary condition."}}
+	hard := []entry{{"Does maximum principle hold for Laplace? (yes/no)", "yes", "Interior max = boundary max."}, {"Is fundamental solution log| x| in 2D? (yes/no)", "yes", "Newtonian potential."}, {"Does separation give harmonic functions? (yes/no)", "yes", "Via eigenfunctions."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type volterraGen struct{}
+
 func (g *volterraGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is Volterra equation y(x)=f(x)+∫_0^x K(x,t)y(t)dt? (yes/no)","yes","Volterra of second kind."},{"Does Volterra have unique continuous solution? (yes/no)","yes","Via Picard iteration."},{"Is Volterra with K=1 solvable via differentiation? (yes/no)","yes","Differentiate to ODE."}}
-	hard:=[]entry{{"Does resolvent kernel give solution? (yes/no)","yes","Neumann series."},{"Is Volterra compact operator? (yes/no)","yes","Integral compact."},{"Does Laplace solve convolution Volterra? (yes/no)","yes","Transform."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is Volterra equation y(x)=f(x)+∫_0^x K(x,t)y(t)dt? (yes/no)", "yes", "Volterra of second kind."}, {"Does Volterra have unique continuous solution? (yes/no)", "yes", "Via Picard iteration."}, {"Is Volterra with K=1 solvable via differentiation? (yes/no)", "yes", "Differentiate to ODE."}}
+	hard := []entry{{"Does resolvent kernel give solution? (yes/no)", "yes", "Neumann series."}, {"Is Volterra compact operator? (yes/no)", "yes", "Integral compact."}, {"Does Laplace solve convolution Volterra? (yes/no)", "yes", "Transform."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }

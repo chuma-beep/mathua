@@ -70,7 +70,6 @@ func TestValidateUnpairedDollar(t *testing.T) {
 	}
 }
 
-
 func TestValidateEscapedDollarClean(t *testing.T) {
 	// The real arith.factor.find.md case: '\$' inside inline math is an
 	// escaped literal dollar, not a delimiter.

@@ -270,8 +270,8 @@ type inequalitiesGen struct{}
 func (g *inequalitiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	type entry struct {
-		a, b    int
-		desc    string
+		a, b int
+		desc string
 	}
 	entries := []entry{
 		{3, 4, "\\(|3+4i|\\)"},

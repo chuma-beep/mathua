@@ -159,9 +159,9 @@ func TestDAG_Available(t *testing.T) {
 
 	// Everything mastered — nothing available.
 	all := map[string]bool{
-		"arith.add.single":     true,
-		"arith.sub.single":     true,
-		"frac.basics.concept":  true,
+		"arith.add.single":    true,
+		"arith.sub.single":    true,
+		"frac.basics.concept": true,
 	}
 	avail = d.Available(all)
 	if len(avail) != 0 {

@@ -430,11 +430,11 @@ func (g *coordPolarGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		{3, 90, 0, 3},
 		{2, 180, -2, 0},
 		{4, 270, 0, -4},
-		{2, 45, 1, 1},     // approx (√2, √2) → 1,1
-		{3, 45, 2, 2},     // approx
-		{2, 135, -1, 1},   // approx
-		{2, 225, -1, -1},  // approx
-		{2, 315, 1, -1},   // approx
+		{2, 45, 1, 1},    // approx (√2, √2) → 1,1
+		{3, 45, 2, 2},    // approx
+		{2, 135, -1, 1},  // approx
+		{2, 225, -1, -1}, // approx
+		{2, 315, 1, -1},  // approx
 	}
 	e := entries[rand.Intn(len(entries))]
 	if rand.Intn(2) == 0 {

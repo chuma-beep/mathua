@@ -65,6 +65,8 @@ jobs:
       - run: npx tsc --noEmit
       - run: npm run lint
       - run: npm run lint:antislop
+      - name: aislop (soft gate — reports, never fails)
+        run: npx --yes aislop@0.16.1 ci --human
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
