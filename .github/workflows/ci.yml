@@ -65,7 +65,9 @@ jobs:
       - run: npx tsc --noEmit
       - run: npm run lint
       - run: npm run lint:antislop
+      # Repo-root: aislop reads .aislop/config.yml (excludes vendored/generated).
       - name: aislop (soft gate — reports, never fails)
+        working-directory: ${{ github.workspace }}
         run: npx --yes aislop@0.16.1 ci --human
       - run: npm test
       - run: npm run build
