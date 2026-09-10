@@ -48,17 +48,28 @@ export function LazyGraphMount({ children }: { children: React.ReactNode }) {
       setVisible(true)
       return
     }
+    let idleId: number | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
     const obs = new IntersectionObserver(
       entries => {
-        if (entries[0]?.isIntersecting) {
-          setVisible(true)
-          obs.disconnect()
+        if (!entries[0]?.isIntersecting) return
+        obs.disconnect()
+        // Mount after the page is interactive: the WebGL context + 630-node
+        // scene must not compete with hydration/first paint.
+        if (typeof window.requestIdleCallback === 'function') {
+          idleId = window.requestIdleCallback(() => setVisible(true), { timeout: 1500 })
+        } else {
+          timeoutId = setTimeout(() => setVisible(true), 200)
         }
       },
       { rootMargin: '200px' }
     )
     obs.observe(el)
-    return () => obs.disconnect()
+    return () => {
+      obs.disconnect()
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId)
+      if (timeoutId !== undefined) clearTimeout(timeoutId)
+    }
   }, [])
 
   return <div ref={ref}>{visible ? children : <div style={loadingGraphStyle}><Loading label="PREPARING GRAPH" /></div>}</div>

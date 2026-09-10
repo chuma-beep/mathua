@@ -2,8 +2,8 @@
 
 /* eslint-disable react/no-unknown-property -- R3F/Drei JSX elements use non-HTML attributes */
 
-import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import React, { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect } from 'react'
+import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
@@ -80,6 +80,8 @@ const ACTIVE_LINK_COLOR = '#60a5fa'
 const ACTIVE_LINK_COLOR_LIGHT = '#2563eb'
 
 const NODE_RADIUS = 0.20
+const HIGHLIGHT = new THREE.Color('#ffffff')
+const GOLD = new THREE.Color('#c8a96e')
 
 interface RenderNode {
   id: string
@@ -146,88 +148,151 @@ const tooltipStyle: React.CSSProperties = {
   boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
 }
 
-const NodeMesh = React.memo(function NodeMesh({
-  node,
-  isActive,
-  isHovered,
-  onHover,
-  onSelect,
+// ── Instanced nodes ─────────────────────────────────────
+//
+// One draw call for all 630 node spheres (plus one for their halo rings)
+// instead of ~1,260 individual meshes, and no per-node useFrame callbacks.
+// Per-instance colour carries the domain/status; active + hovered instances
+// are brightened in the colour buffer, and a single glow mesh marks the
+// active node.
+
+function NodeInstances({
+  nodes,
+  activeId,
+  hoveredId,
   theme,
   isMobile,
+  onHover,
+  onSelect,
 }: {
-  node: RenderNode
-  isActive: boolean
-  isHovered: boolean
-  onHover: (id: string | null) => void
-  onSelect: (id: string) => void
+  nodes: RenderNode[]
+  activeId: string
+  hoveredId: string | null
   theme: 'dark' | 'light'
   isMobile: boolean
+  onHover: (id: string | null) => void
+  onSelect: (id: string) => void
 }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-  const ringRef = useRef<THREE.Mesh>(null)
+  const meshRef = useRef<THREE.InstancedMesh>(null)
+  const ringRef = useRef<THREE.InstancedMesh>(null)
+  const hoveredRef = useRef<string | null>(null)
+  const count = nodes.length
+  const segments = isMobile ? 8 : 12
+
+  const { geometry, material, ringGeometry, ringMaterial } = useMemo(() => {
+    const geometry = new THREE.SphereGeometry(NODE_RADIUS, segments, segments)
+    const material = new THREE.MeshStandardMaterial({
+      roughness: 0.25,
+      metalness: 0.1,
+      emissive: new THREE.Color('#ffffff'),
+      emissiveIntensity: 0.35,
+    })
+    // Tint the (white) emissive by the per-instance colour so each node keeps
+    // its domain glow. USE_COLOR is defined for instanced colour, so vColor
+    // is available in the fragment stage.
+    material.onBeforeCompile = (shader) => {
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <emissivemap_fragment>',
+        '#include <emissivemap_fragment>\n#ifdef USE_INSTANCING_COLOR\n\ttotalEmissiveRadiance *= vColor;\n#endif',
+      )
+    }
+    const ringGeometry = new THREE.SphereGeometry(NODE_RADIUS * 2.2, 8, 8)
+    const ringMaterial = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0.05,
+      depthWrite: false,
+    })
+    return { geometry, material, ringGeometry, ringMaterial }
+  }, [segments])
+
+  // Positions are stable per layout; upload the instance matrices once.
+  useLayoutEffect(() => {
+    const mesh = meshRef.current
+    const ring = ringRef.current
+    if (!mesh) return
+    const dummy = new THREE.Object3D()
+    for (let i = 0; i < count; i++) {
+      const p = nodes[i].position
+      dummy.position.set(p[0], p[1], p[2])
+      dummy.updateMatrix()
+      mesh.setMatrixAt(i, dummy.matrix)
+      if (ring) ring.setMatrixAt(i, dummy.matrix)
+    }
+    mesh.instanceMatrix.needsUpdate = true
+    if (ring) ring.instanceMatrix.needsUpdate = true
+  }, [nodes, count])
+
+  // Colours depend on theme + selection/hover; refresh the buffer when they change.
+  useLayoutEffect(() => {
+    const mesh = meshRef.current
+    const ring = ringRef.current
+    if (!mesh) return
+    const col = new THREE.Color()
+    for (let i = 0; i < count; i++) {
+      const n = nodes[i]
+      col.set(nodeDisplayColor(n, theme))
+      if (n.id === activeId) col.lerp(HIGHLIGHT, 0.55)
+      else if (n.id === hoveredId) col.lerp(HIGHLIGHT, 0.35)
+      mesh.setColorAt(i, col)
+      if (ring) ring.setColorAt(i, n.onPath ? GOLD : col)
+    }
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true
+    if (ring?.instanceColor) ring.instanceColor.needsUpdate = true
+  }, [nodes, theme, activeId, hoveredId, count])
+
+  return (
+    <>
+      <instancedMesh ref={ringRef} args={[ringGeometry, ringMaterial, count]} frustumCulled={false} />
+      <instancedMesh
+        ref={meshRef}
+        args={[geometry, material, count]}
+        frustumCulled={false}
+        onPointerMove={(e: ThreeEvent<PointerEvent>) => {
+          e.stopPropagation()
+          const id = e.instanceId != null ? nodes[e.instanceId]?.id ?? null : null
+          if (id !== hoveredRef.current) {
+            hoveredRef.current = id
+            onHover(id)
+          }
+        }}
+        onPointerOut={() => {
+          if (hoveredRef.current !== null) {
+            hoveredRef.current = null
+            onHover(null)
+          }
+        }}
+        onClick={(e: ThreeEvent<MouseEvent>) => {
+          e.stopPropagation()
+          if (e.instanceId != null && nodes[e.instanceId]) onSelect(nodes[e.instanceId].id)
+        }}
+      />
+    </>
+  )
+}
+
+function HoverTooltip({ node, theme, isMobile }: { node: RenderNode; theme: 'dark' | 'light'; isMobile: boolean }) {
   const color = nodeDisplayColor(node, theme)
   const showStatus = node.status !== null && node.status !== 'locked' && node.status !== 'unseen'
   const statusLabel = showStatus ? node.status : node.domain
-
-  useFrame(() => {
-    if (meshRef.current) {
-      const mat = meshRef.current.material as THREE.MeshStandardMaterial
-      const targetIntensity = isActive ? 2.0 : isHovered ? 1.2 : node.onPath ? 0.8 : node.status === 'locked' ? 0.1 : 0.3
-      if (Math.abs(mat.emissiveIntensity - targetIntensity) > 0.01) {
-        mat.emissiveIntensity = THREE.MathUtils.lerp(mat.emissiveIntensity, targetIntensity, 0.25)
-      }
-    }
-    if (ringRef.current) {
-      const mat = ringRef.current.material as THREE.MeshBasicMaterial
-      const targetOpacity = node.onPath ? 0.18 : 0.04
-      if (Math.abs(mat.opacity - targetOpacity) > 0.005) {
-        mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOpacity, 0.2)
-      }
-    }
-  })
-
   return (
-    <group position={node.position as [number, number, number]}>
-      <mesh
-        ref={ringRef}
-        onPointerOver={() => onHover(node.id)}
-        onPointerOut={() => onHover(null)}
-        onClick={() => onSelect(node.id)}
-      >
-        <sphereGeometry args={[NODE_RADIUS * 2.2, 8, 8]} />
-        <meshBasicMaterial color={node.onPath ? '#c8a96e' : color} transparent opacity={0.04} depthWrite={false} />
-      </mesh>
-      <mesh ref={meshRef}>
-        <sphereGeometry args={[NODE_RADIUS, 12, 12]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={node.status === 'locked' ? 0.05 : 0.3}
-          roughness={node.status === 'locked' ? 0.7 : 0.2}
-          metalness={0.1}
-        />
-      </mesh>
-      {isHovered && (
-          <Html center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 20 }}>
-          <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
-            <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
-            <div style={{ color, fontSize: isMobile ? '13px' : '12px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
-            {showStatus && (
-              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
-                {node.status} {node.onPath ? '· on path' : ''}
-              </div>
-            )}
-            {!showStatus && (
-              <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', fontFamily: monoFont }}>
-                Not started
-              </div>
-            )}
+    <Html position={node.position} center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 20 }}>
+      <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
+        <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
+        <div style={{ color, fontSize: isMobile ? '13px' : '12px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
+        {showStatus && (
+          <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
+            {node.status} {node.onPath ? '· on path' : ''}
           </div>
-        </Html>
-      )}
-    </group>
+        )}
+        {!showStatus && (
+          <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', fontFamily: monoFont }}>
+            Not started
+          </div>
+        )}
+      </div>
+    </Html>
   )
-})
+}
 
 function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], positionMap: Map<string, [number, number, number]>, activeId: string, theme: 'dark' | 'light' }) {
   const activeLinks = useMemo(() => links.filter(l => l.source === activeId || l.target === activeId), [links, activeId])
@@ -342,9 +407,12 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
 
   useEffect(() => {
     if (controlsRef.current) {
-      controlsRef.current.autoRotate = hovered === null && !rotatePaused
+      controlsRef.current.autoRotate = hovered === null && !rotatePaused && !isMobile
     }
-  }, [hovered, rotatePaused, controlsRef])
+  }, [hovered, rotatePaused, controlsRef, isMobile])
+
+  const hoveredNode = useMemo(() => nodes.find(n => n.id === hovered) ?? null, [nodes, hovered])
+  const activeNode = useMemo(() => nodes.find(n => n.id === activeId) ?? null, [nodes, activeId])
 
   return (
     <>
@@ -355,18 +423,22 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
       <AllEdges links={links} positionMap={positionMap} theme={theme} />
       <EdgeLines links={links} positionMap={positionMap} activeId={activeId} theme={theme} />
 
-      {nodes.map(node => (
-        <NodeMesh
-          key={node.id}
-          node={node}
-          isActive={node.id === activeId}
-          isHovered={node.id === hovered}
-          onHover={setHovered}
-          onSelect={onSelect}
-          theme={theme}
-          isMobile={isMobile}
-        />
-      ))}
+      <NodeInstances
+        nodes={nodes}
+        activeId={activeId}
+        hoveredId={hovered}
+        theme={theme}
+        isMobile={isMobile}
+        onHover={setHovered}
+        onSelect={onSelect}
+      />
+
+      {activeNode && (
+        <mesh position={activeNode.position}>
+          <sphereGeometry args={[NODE_RADIUS * 1.7, 12, 12]} />
+          <meshBasicMaterial color="#ffdd88" transparent opacity={0.22} depthWrite={false} />
+        </mesh>
+      )}
 
       <Particles theme={theme} count={isMobile ? 300 : 800} />
 
@@ -376,11 +448,13 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
         enableZoom={true}
         minDistance={12}
         maxDistance={45}
-        autoRotate={true}
+        autoRotate={!isMobile}
         autoRotateSpeed={1.2}
         dampingFactor={0.05}
         enableDamping={true}
       />
+
+      {hoveredNode && <HoverTooltip node={hoveredNode} theme={theme} isMobile={isMobile} />}
     </>
   )
 }
@@ -607,7 +681,8 @@ export default function MathConceptGraph3D({
         <Canvas
           camera={{ position: [0, 0, 28], fov: 60 }}
           gl={{ alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' }}
-          dpr={[1, 1.5]}
+          dpr={isMobile ? 1 : [1, 1.5]}
+          frameloop={isMobile ? 'demand' : 'always'}
           onCreated={({ gl }) => {
             const canvas = gl.domElement as HTMLCanvasElement
             const onLost = (e: Event) => {
