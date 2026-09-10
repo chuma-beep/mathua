@@ -1,0 +1,16 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="150" y="60">2</text><text x="185" y="60">3</text>
+    <text x="118" y="100">×</text>
+    <text x="185" y="100">4</text>
+    <line x1="115" y1="115" x2="205" y2="115" stroke="#BABABA" stroke-width="2"/>
+    <text x="150" y="152">9</text><text x="185" y="152">2</text>
+  </g>
+  <g font-size="12" fill="#8a8f98">
+    <text x="230" y="70">4 × 3 = 12,</text>
+    <text x="230" y="88">write 2 carry 1;</text>
+    <text x="230" y="106">4 × 2 = 8, + 1</text>
+    <text x="230" y="124">= 9</text>
+  </g>
+  <text x="160" y="185" font-size="14" fill="#BABABA" text-anchor="middle">23 × 4 = 92</text>
+</svg>

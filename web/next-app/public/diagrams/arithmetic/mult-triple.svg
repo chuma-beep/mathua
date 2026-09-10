@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="130" y="60">2</text><text x="165" y="60">3</text><text x="200" y="60">4</text>
+    <text x="100" y="100">×</text>
+    <text x="200" y="100">3</text>
+    <line x1="95" y1="115" x2="225" y2="115" stroke="#BABABA" stroke-width="2"/>
+    <text x="130" y="152">7</text><text x="165" y="152">0</text><text x="200" y="152">2</text>
+  </g>
+  <g font-size="12" fill="#8a8f98">
+    <text x="245" y="70">3 × 4 = 12,</text>
+    <text x="245" y="88">3 × 3 = 9 + 1,</text>
+    <text x="245" y="106">3 × 2 = 6</text>
+  </g>
+  <text x="160" y="185" font-size="14" fill="#BABABA" text-anchor="middle">234 × 3 = 702</text>
+</svg>

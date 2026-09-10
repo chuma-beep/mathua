@@ -1,0 +1,21 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">60 = 2² × 3 × 5</text>
+  <g font-size="15" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="180" y="60">60</text>
+  </g>
+  <g stroke="#8a8f98" stroke-width="1.5">
+    <line x1="165" y1="68" x2="120" y2="95"/><line x1="195" y1="68" x2="240" y2="95"/>
+    <line x1="105" y1="103" x2="80" y2="130"/><line x1="135" y1="103" x2="160" y2="130"/>
+    <line x1="225" y1="103" x2="210" y2="130"/><line x1="255" y1="103" x2="280" y2="130"/>
+  </g>
+  <g font-size="14" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="110" y="92">6</text><text x="250" y="92">10</text>
+    <text x="70" y="125">2</text><text x="170" y="125">3</text>
+    <text x="200" y="125">2</text><text x="290" y="125">5</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="70" y="150">prime</text><text x="170" y="150">prime</text>
+    <text x="200" y="150">prime</text><text x="290" y="150">prime</text>
+  </g>
+  <text x="180" y="180" font-size="12" fill="#8a8f98" text-anchor="middle">split until every branch is prime</text>
+</svg>

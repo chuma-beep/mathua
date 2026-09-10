@@ -1,0 +1,16 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">GCF(12, 18): biggest shared factor</text>
+  <ellipse cx="130" cy="105" rx="75" ry="55" fill="none" stroke="#BABABA" stroke-width="2"/>
+  <ellipse cx="230" cy="105" rx="75" ry="55" fill="none" stroke="#BABABA" stroke-width="2"/>
+  <g font-size="12" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="85" y="95">1, 2</text>
+    <text x="85" y="115">4</text>
+    <text x="180" y="95">3, 6</text>
+    <text x="275" y="95">9</text>
+    <text x="275" y="115">18</text>
+  </g>
+  <g font-size="11" fill="#8a8f98" text-anchor="middle">
+    <text x="85" y="70">12 only</text><text x="275" y="70">18 only</text>
+  </g>
+  <text x="180" y="185" font-size="14" fill="#E6E6E6" text-anchor="middle">GCF = 6</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">times table: row × column</text>
+  <g font-size="12" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="60" y="60">×</text><text x="100" y="60">1</text><text x="135" y="60">2</text><text x="170" y="60">3</text><text x="205" y="60">4</text><text x="240" y="60">5</text><text x="275" y="60">6</text>
+    <text x="60" y="85">1</text><text x="100" y="85">1</text><text x="135" y="85">2</text><text x="170" y="85">3</text><text x="205" y="85">4</text><text x="240" y="85">5</text><text x="275" y="85">6</text>
+    <text x="60" y="110">2</text><text x="100" y="110">2</text><text x="135" y="110">4</text><text x="170" y="110">6</text><text x="205" y="110">8</text><text x="240" y="110">10</text><text x="275" y="110">12</text>
+    <text x="60" y="135">3</text><text x="100" y="135">3</text><text x="135" y="135">6</text><text x="170" y="135">9</text><text x="205" y="135">12</text><text x="240" y="135">15</text><text x="275" y="135">18</text>
+    <text x="60" y="160">4</text><text x="100" y="160">4</text><text x="135" y="160">8</text><text x="170" y="160">12</text><text x="205" y="160">16</text><text x="240" y="160">20</text><text x="275" y="160">24</text>
+  </g>
+  <rect x="155" y="95" width="30" height="25" fill="none" stroke="#E6E6E6" stroke-width="2"/>
+  <text x="310" y="110" font-size="13" fill="#BABABA">3 × 4</text>
+  <text x="310" y="130" font-size="13" fill="#BABABA">= 12</text>
+</svg>

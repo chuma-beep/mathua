@@ -1,0 +1,13 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="13" fill="#8a8f98">20 cookies for 4 friends</text>
+  <g fill="#BABABA">
+    <circle cx="50" cy="70" r="8"/><circle cx="75" cy="70" r="8"/><circle cx="100" cy="70" r="8"/><circle cx="125" cy="70" r="8"/><circle cx="150" cy="70" r="8"/>
+    <circle cx="50" cy="95" r="8"/><circle cx="75" cy="95" r="8"/><circle cx="100" cy="95" r="8"/><circle cx="125" cy="95" r="8"/><circle cx="150" cy="95" r="8"/>
+    <circle cx="50" cy="120" r="8"/><circle cx="75" cy="120" r="8"/><circle cx="100" cy="120" r="8"/><circle cx="125" cy="120" r="8"/><circle cx="150" cy="120" r="8"/>
+    <circle cx="50" cy="145" r="8"/><circle cx="75" cy="145" r="8"/><circle cx="100" cy="145" r="8"/><circle cx="125" cy="145" r="8"/><circle cx="150" cy="145" r="8"/>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="230" y="80">deal into</text><text x="230" y="98">4 piles,</text><text x="230" y="116">5 in each</text>
+  </g>
+  <text x="230" y="150" font-size="14" fill="#BABABA">20 ÷ 4 = 5</text>
+</svg>
