@@ -13,8 +13,9 @@ A map \(p: E \to B\) is a **covering** if every \(x \in B\) has a neighborhood
 homeomorphically onto \(U\) by \(p\). Each such sheet looks exactly like \(U\).
 
 For \(p(t) = (\cos 2\pi t, \sin 2\pi t)\), any arc \(U \subset S^1\) shorter than
-the full circle lifts to disjoint intervals \(\dots, (a-1, b-1), (a, b),
-(a+1, b+1), \dots\), one per winding. The fiber \(p^{-1}(x)\) over any point is
+the full circle lifts to disjoint intervals
+\(\dots, (a-1, b-1), (a, b), (a+1, b+1), \dots\), one per winding. The fiber
+\(p^{-1}(x)\) over any point is
 a copy of \(\mathbb{Z}\). A covering with \(n\)-point fibers is called
 **\(n\)-sheeted**; the circle also has a connected 2-sheeted cover
 \(z \mapsto z^2\).

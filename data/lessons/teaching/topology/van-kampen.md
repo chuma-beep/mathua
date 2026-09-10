@@ -36,8 +36,7 @@ The torus \(T = S^1 \times S^1\) is a square with opposite edges glued. Removing
 one interior point leaves a wedge of two circles, with \(\pi_1\) free on the
 edge-loops \(a, b\). Filling the point back in kills exactly the commutator
 loop \(aba^{-1}b^{-1}\) that runs around the missing point. Van Kampen yields
-\(\pi_1(T) \cong \langle a, b \mid aba^{-1}b^{-1} = 1 \rangle \cong
-\mathbb{Z} \times \mathbb{Z}\).
+\(\pi_1(T) \cong \langle a, b \mid aba^{-1}b^{-1} = 1 \rangle \cong \mathbb{Z} \times \mathbb{Z}\).
 
 The pattern generalizes: a cell complex with one vertex has \(\pi_1\) free on
 its edges modulo one relation per attached 2-cell. This is how presentations

@@ -30,7 +30,7 @@ with, and a difference must fit between the two quantities.
 ## Practice
 
 A recipe needs \(\frac{3}{4}\) cup of sugar and you have already added
-\(\frac{1}{3}\) cup: \(\frac{3}{4} - \frac{1}{3} = \frac{9}{12} - \frac{4}{12}
-= \frac{5}{12}\) cup still to add. Check: \(\frac{5}{12}\) is less than
-\(\frac{3}{4}\), and \(\frac{1}{3} + \frac{5}{12} = \frac{9}{12} =
-\frac{3}{4}\) recovers the recipe, so the subtraction checks out.
+\(\frac{1}{3}\) cup: \(\frac{3}{4} - \frac{1}{3} = \frac{9}{12} - \frac{4}{12} = \frac{5}{12}\)
+cup still to add. Check: \(\frac{5}{12}\) is less than
+\(\frac{3}{4}\), and \(\frac{1}{3} + \frac{5}{12} = \frac{9}{12} = \frac{3}{4}\)
+recovers the recipe, so the subtraction checks out.
