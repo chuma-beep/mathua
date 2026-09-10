@@ -1018,6 +1018,10 @@ export interface QuizStartRes {
 	concept_name?: string
 	question?: string
 	done?: boolean
+	// Timed closed-book contract (Batch 1 backend).
+	closed_book?: boolean
+	time_limit_seconds?: number
+	questions_total?: number
 }
 export interface QuizAnswerRes {
 	done: boolean
@@ -1028,6 +1032,12 @@ export interface QuizAnswerRes {
 	concept_id?: string
 	concept_name?: string
 	question?: string
+	// Batch 1: immediate remedial concepts + retake flag.
+	remedial?: string[]
+	retake_available?: boolean
+	closed_book?: boolean
+	time_limit_seconds?: number
+	questions_total?: number
 }
 
 interface QuizSessionBody {
