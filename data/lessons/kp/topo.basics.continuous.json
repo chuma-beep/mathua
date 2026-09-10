@@ -1,11 +1,11 @@
 [
   {
-    "label": "$\\epsilon$-$\\delta$ Definition",
-    "section": "$\\epsilon$-$\\delta$ Definition",
+    "label": "Epsilon-Delta Definition",
+    "section": "Epsilon-Delta Definition",
     "subgoals": [
-      "Define continuity in topological spaces",
-      "Follow the worked example",
-      "Apply the rule"
+      "State the epsilon-delta condition at a point",
+      "Pin down an output tolerance from an input bound",
+      "Extend pointwise continuity to the whole map"
     ]
   },
   {

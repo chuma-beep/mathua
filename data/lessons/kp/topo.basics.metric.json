@@ -1,29 +1,29 @@
 [
   {
+    "label": "Definition and axioms",
+    "section": "Definition and Axioms",
+    "subgoals": [
+      "State the four metric axioms",
+      "Check symmetry and non-negativity on the real line",
+      "Verify the triangle inequality on two points"
+    ]
+  },
+  {
     "label": "Examples",
     "section": "Examples",
     "subgoals": [
-      "Define metric spaces",
-      "Follow the worked example",
-      "Apply the rule"
+      "Compute a Euclidean distance in the plane",
+      "Contrast the discrete and taxicab metrics",
+      "Give a non-numeric example of a metric space"
     ]
   },
   {
-    "label": "Open Balls",
-    "section": "Open Balls",
+    "label": "Why metrics matter",
+    "section": "Why Metrics Matter",
     "subgoals": [
-      "Understand open balls",
-      "Apply open balls",
-      "Check the result"
-    ]
-  },
-  {
-    "label": "Metric spaces — practice 3",
-    "section": "",
-    "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Phrase closeness using only the metric",
+      "Explain why limits need no coordinates",
+      "Preview open sets and continuity ahead"
     ]
   }
 ]

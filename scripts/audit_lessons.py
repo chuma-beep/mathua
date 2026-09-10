@@ -52,6 +52,13 @@ def main():
     if stale:
         errors.append(f"stale lessons.json ids (not in DAG): {len(stale)}\n  " + ", ".join(stale))
 
+    # 2b. Concepts with multiple lesson sources (loader silently shadows all
+    # but the reverse-lexicographic winner — resolve to exactly one entry).
+    multi = sorted(cid for cid, srcs in concept_sources.items() if len(srcs) > 1)
+    if multi:
+        detail = "; ".join(f"{cid}: {sorted(concept_sources[cid])}" for cid in multi)
+        errors.append(f"multi-source concepts (shadowing): {len(multi)}\n  " + detail)
+
     # 3. Sources that fail to load on disk.
     missing = sorted(s for s in sources if not os.path.exists(os.path.join(LESSONS, s)))
     if missing:
@@ -101,7 +108,7 @@ def main():
                     kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
         if kp_orphans:
             errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))
-        # Validate shard file count and total KPs (570 files ×3 =1710)
+        # Validate shard file count and total KPs (630 files ×3 =1890)
         if kp_files != len(dag_ids):
             errors.append(f"kp shard count mismatch: {kp_files} files vs {len(dag_ids)} concepts")
         if kp_total != len(dag_ids) * 3:
