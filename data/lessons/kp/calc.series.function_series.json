@@ -1,29 +1,29 @@
 [
   {
-    "label": "Series of functions",
-    "section": "",
+    "label": "Pointwise vs uniform convergence",
+    "section": "Pointwise vs Uniform Convergence",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Test convergence at a fixed x first",
+      "Explain why the x-n example jumps at 1",
+      "State the continuity preservation for uniform limits"
     ]
   },
   {
-    "label": "Series of functions — practice 2",
-    "section": "",
+    "label": "The Weierstrass M-test",
+    "section": "The Weierstrass M-Test",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Bound each term by a convergent constant series",
+      "Certify sine-over-n-squared uniform on R",
+      "Conclude continuity of the sum without computing it"
     ]
   },
   {
-    "label": "Series of functions — practice 3",
-    "section": "",
+    "label": "Calculus of uniform limits",
+    "section": "Calculus of Uniform Limits",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Integrate a uniformly convergent series term by term",
+      "State the extra hypothesis for differentiation",
+      "Explain the Fourier failure at the jump"
     ]
   }
 ]

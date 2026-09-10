@@ -1,29 +1,29 @@
 [
   {
     "label": "Radius of convergence",
-    "section": "",
+    "section": "Radius of Convergence",
     "subgoals": [
-      "Apply ratio test in x",
-      "Read R = ∞, 1, or 0 cases",
-      "Check x^n/n! vs x^n vs n!x^n"
+      "Distinguish absolute convergence inside from divergence outside",
+      "Handle the R-equals-0 and R-equals-infinity extremes",
+      "Work the factorial over factorial worked example"
     ]
   },
   {
-    "label": "Interval vs radius",
-    "section": "",
+    "label": "Differentiating term by term",
+    "section": "Differentiating Term by Term",
     "subgoals": [
-      "Open the interval from R",
-      "Test each endpoint separately",
-      "Report interval plus endpoints"
+      "Track how endpoints can flip under differentiation",
+      "Apply the preserved-radius rule to a new series",
+      "Check the x-equals-1 divergence in the example"
     ]
   },
   {
-    "label": "Power series refresher",
-    "section": "",
+    "label": "Taylor series connection",
+    "section": "Taylor Series Connection",
     "subgoals": [
-      "Recall ∑c(n)(x-a)^n form",
-      "Center determines symmetry",
-      "Feed coefficients to ratio test"
+      "Use c-n equals f-nth over n-factorial",
+      "Explain the flat-function counterexample",
+      "State the remainder requirement for equality"
     ]
   }
 ]
