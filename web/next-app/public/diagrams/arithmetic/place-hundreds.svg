@@ -1,0 +1,20 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">235 = 2 hundreds + 3 tens + 5 ones</text>
+  <g stroke="#BABABA" stroke-width="2" fill="none">
+    <rect x="30" y="55" width="80" height="80"/>
+    <line x1="30" y1="95" x2="110" y2="95"/>
+    <rect x="130" y="75" width="14" height="60"/>
+    <rect x="150" y="75" width="14" height="60"/>
+    <rect x="170" y="75" width="14" height="60"/>
+    <rect x="200" y="105" width="12" height="12"/>
+    <rect x="216" y="105" width="12" height="12"/>
+    <rect x="232" y="105" width="12" height="12"/>
+    <rect x="248" y="105" width="12" height="12"/>
+    <rect x="264" y="105" width="12" height="12"/>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="70" y="155">2 flats = 200</text>
+    <text x="157" y="155">3 rods = 30</text>
+    <text x="240" y="155">5 cubes = 5</text>
+  </g>
+</svg>

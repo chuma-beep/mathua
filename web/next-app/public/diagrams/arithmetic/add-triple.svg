@@ -1,0 +1,17 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="140" y="28">carry</text><text x="175" y="28">carry</text>
+  </g>
+  <g font-size="15" fill="#E6E6E6" text-anchor="middle">
+    <text x="140" y="48">1</text><text x="175" y="48">1</text>
+  </g>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="140" y="82">2</text><text x="175" y="82">4</text><text x="210" y="82">6</text>
+    <text x="105" y="122">+</text>
+    <text x="140" y="122">3</text><text x="175" y="122">7</text><text x="210" y="122">8</text>
+    <line x1="100" y1="137" x2="225" y2="137" stroke="#BABABA" stroke-width="2"/>
+    <text x="140" y="175">6</text><text x="175" y="175">2</text><text x="210" y="175">4</text>
+  </g>
+  <text x="250" y="110" font-size="14" fill="#BABABA">246 + 378</text>
+  <text x="250" y="130" font-size="14" fill="#BABABA">= 624</text>
+</svg>

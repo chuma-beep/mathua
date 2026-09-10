@@ -753,6 +753,22 @@ var conceptDiagrams = map[string]string{
 	"calc.deriv.tangent_line":    "/diagrams/algebrica/parabola-7.png",
 	"alg.quad.discriminant":      "/diagrams/algebrica/quadratic-inequalities-2.png",
 	"geo.circle.parts":           "/diagrams/algebrica/circumference-5.png",
+	// Batch C5a: hand-authored arithmetic diagrams (add/sub/place/round).
+	"arith.add.single":      "/diagrams/arithmetic/add-single.svg",
+	"arith.add.double":      "/diagrams/arithmetic/add-double.svg",
+	"arith.add.carry":       "/diagrams/arithmetic/add-carry.svg",
+	"arith.add.triple":      "/diagrams/arithmetic/add-triple.svg",
+	"arith.add.word":        "/diagrams/arithmetic/add-word.svg",
+	"arith.sub.single":      "/diagrams/arithmetic/sub-single.svg",
+	"arith.sub.double":      "/diagrams/arithmetic/sub-double.svg",
+	"arith.sub.borrow":      "/diagrams/arithmetic/sub-borrow.svg",
+	"arith.sub.word":        "/diagrams/arithmetic/sub-word.svg",
+	"arith.place.tens":      "/diagrams/arithmetic/place-tens.svg",
+	"arith.place.hundreds":  "/diagrams/arithmetic/place-hundreds.svg",
+	"arith.place.thousands": "/diagrams/arithmetic/place-thousands.svg",
+	"arith.round.tens":      "/diagrams/arithmetic/round-tens.svg",
+	"arith.round.hundreds":  "/diagrams/arithmetic/round-hundreds.svg",
+	"arith.round.thousands": "/diagrams/arithmetic/round-thousands.svg",
 }
 
 // DiagramFor exposes the dual-coding diagram for a concept (exported for API).

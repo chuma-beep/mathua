@@ -1,0 +1,14 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="150" y="70">2</text><text x="185" y="70">4</text>
+    <text x="120" y="110">+</text>
+    <text x="150" y="110">3</text><text x="185" y="110">1</text>
+    <line x1="115" y1="125" x2="205" y2="125" stroke="#BABABA" stroke-width="2"/>
+    <text x="150" y="165">5</text><text x="185" y="165">5</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="150" y="45">tens</text><text x="185" y="45">ones</text>
+  </g>
+  <text x="260" y="110" font-size="14" fill="#BABABA">24 + 31 = 55</text>
+  <text x="180" y="192" font-size="12" fill="#8a8f98" text-anchor="middle">add each column: 2+3, 4+1</text>
+</svg>

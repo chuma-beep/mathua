@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="150" y="30">carry 1</text>
+  </g>
+  <text x="150" y="52" font-size="16" fill="#E6E6E6" text-anchor="middle">1</text>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="150" y="85">4</text><text x="185" y="85">7</text>
+    <text x="120" y="125">+</text>
+    <text x="150" y="125">3</text><text x="185" y="125">8</text>
+    <line x1="115" y1="140" x2="205" y2="140" stroke="#BABABA" stroke-width="2"/>
+    <text x="150" y="178">8</text><text x="185" y="178">5</text>
+  </g>
+  <text x="245" y="90" font-size="13" fill="#BABABA">7 + 8 = 15,</text>
+  <text x="245" y="110" font-size="13" fill="#BABABA">write 5, carry 1</text>
+</svg>
