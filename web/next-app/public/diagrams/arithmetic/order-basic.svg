@@ -1,0 +1,13 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">multiply before adding</text>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="120" y="90">3</text><text x="155" y="90">+</text>
+    <text x="195" y="90">4</text><text x="230" y="90">×</text><text x="270" y="90">2</text>
+  </g>
+  <ellipse cx="232" cy="85" rx="48" ry="24" fill="none" stroke="#E6E6E6" stroke-width="2"/>
+  <text x="232" y="55" font-size="12" fill="#E6E6E6" text-anchor="middle">first</text>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="140" y="140">= 3 + 8</text><text x="265" y="140">= 11</text>
+  </g>
+  <text x="180" y="175" font-size="12" fill="#8a8f98" text-anchor="middle">× ÷ before + −, left to right</text>
+</svg>

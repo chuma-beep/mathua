@@ -1,0 +1,12 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">power of a power: multiply the powers</text>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="70" y="90">(2³)²</text>
+    <text x="170" y="90">=</text>
+    <text x="220" y="90">2⁶</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="165" y="125">(2·2·2)·(2·2·2): six 2s</text>
+  </g>
+  <text x="165" y="165" font-size="14" fill="#BABABA" text-anchor="middle">(x^a)^b = x^(a·b)</text>
+</svg>

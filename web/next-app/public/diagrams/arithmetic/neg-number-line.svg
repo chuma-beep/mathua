@@ -1,0 +1,13 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="110" x2="340" y2="110" stroke="#BABABA" stroke-width="2"/>
+  <g font-size="13" fill="#BABABA" text-anchor="middle">
+    <text x="40" y="135">−5</text><text x="80" y="135">−4</text><text x="120" y="135">−3</text>
+    <text x="160" y="135">−2</text><text x="200" y="135">−1</text><text x="240" y="135">0</text>
+    <text x="275" y="135">1</text><text x="310" y="135">2</text>
+  </g>
+  <line x1="240" y1="60" x2="240" y2="110" stroke="#E6E6E6" stroke-width="2"/>
+  <text x="240" y="50" font-size="12" fill="#E6E6E6" text-anchor="middle">zero splits the line</text>
+  <text x="120" y="70" font-size="12" fill="#8a8f98" text-anchor="middle">negative: left of zero</text>
+  <text x="290" y="70" font-size="12" fill="#8a8f98" text-anchor="middle">positive: right</text>
+  <text x="180" y="175" font-size="12" fill="#8a8f98" text-anchor="middle">−3 is 3 steps left of zero</text>
+</svg>

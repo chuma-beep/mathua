@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">2³ means 2 used 3 times</text>
+  <g font-size="22" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="90" y="100">2</text>
+    <text x="115" y="75" font-size="15" fill="#E6E6E6">3</text>
+    <text x="160" y="100">=</text>
+    <text x="210" y="100">2</text><text x="240" y="100">×</text>
+    <text x="270" y="100">2</text><text x="300" y="100">×</text>
+    <text x="330" y="100">2</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="90" y="130">base</text><text x="115" y="130">power</text>
+  </g>
+  <text x="180" y="175" font-size="14" fill="#BABABA" text-anchor="middle">2 × 2 × 2 = 8</text>
+</svg>

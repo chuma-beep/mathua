@@ -1,0 +1,14 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">same base: add the powers</text>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="70" y="90">2³</text>
+    <text x="120" y="90">×</text>
+    <text x="165" y="90">2²</text>
+    <text x="215" y="90">=</text>
+    <text x="260" y="90">2⁵</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="165" y="125">(2·2·2)·(2·2): five 2s</text>
+  </g>
+  <text x="165" y="165" font-size="14" fill="#BABABA" text-anchor="middle">x^a · x^b = x^(a+b)</text>
+</svg>

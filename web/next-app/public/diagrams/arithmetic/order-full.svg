@@ -1,0 +1,14 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">exponents before multiply before add</text>
+  <g font-size="19" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="100" y="85">2 + 3² × 2</text>
+  </g>
+  <ellipse cx="168" cy="80" rx="30" ry="22" fill="none" stroke="#E6E6E6" stroke-width="2"/>
+  <text x="168" y="50" font-size="12" fill="#E6E6E6" text-anchor="middle">1st</text>
+  <ellipse cx="232" cy="80" rx="42" ry="22" fill="none" stroke="#8a8f98" stroke-width="2"/>
+  <text x="232" y="50" font-size="12" fill="#8a8f98" text-anchor="middle">2nd</text>
+  <g font-size="19" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="180" y="135">= 2 + 18 = 20</text>
+  </g>
+  <text x="180" y="175" font-size="12" fill="#8a8f98" text-anchor="middle">BODMAS: brackets, orders, ×÷, +−</text>
+</svg>
