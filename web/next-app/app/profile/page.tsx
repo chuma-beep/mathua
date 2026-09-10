@@ -28,7 +28,7 @@ interface UserInfo {
 }
 
 export default function ProfilePage() {
-  const { theme, mounted } = useTheme()
+  const { mounted } = useTheme()
 
   const [user, setUser] = useState<UserInfo | null>(null)
   const [scores, setScores] = useState<Scores | null>(null)
@@ -121,7 +121,7 @@ export default function ProfilePage() {
           setProgress(progressRes as Record<string, ConceptProgress>)
           setWeaknesses(null)
         }
-      } catch (err) {
+      } catch {
         if (info) setError('Failed to load profile data')
       } finally {
         setLoading(false)
@@ -131,7 +131,6 @@ export default function ProfilePage() {
     fetchData()
   }, [mounted])
 
-  const headingFont = "'IBM Plex Serif', serif"
   const monoFont = "'IBM Plex Mono', monospace"
 
   if (!mounted) {

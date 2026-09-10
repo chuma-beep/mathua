@@ -15,10 +15,6 @@ export const lessonMacros: Record<string, string> = macrosJson as Record<string,
 // below never mistake it for a math boundary. Restored at the end.
 const ESC_DOLLAR = '\u0000MU-ESC-DOLLAR\u0000'
 
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-}
-
 function escapeHtmlMath(s: string): string {
   // Inside math, & is the aligned/array column separator — must NOT be
   // escaped to &amp; (breaks \begin{aligned} &=). Only escape < > for HTML.

@@ -26,7 +26,7 @@ interface MathConceptGraph3DProps {
   onNodeSelect?: (nodeId: string) => void
 }
 
-const DOMAIN_COLORS: Record<string, string> = {
+const DOMAIN_COLORS = {
   arithmetic:           '#4db8a0',
   fractions:            '#a8a0f0',
   prealgebra:           '#7dd3fc',
@@ -43,9 +43,9 @@ const DOMAIN_COLORS: Record<string, string> = {
   differential_equations:'#fdba74',
   abstract_algebra:     '#c4b5fd',
   topology:             '#f9a8d4',
-}
+} satisfies Record<string, string>
 
-const DOMAIN_COLORS_LIGHT: Record<string, string> = {
+const DOMAIN_COLORS_LIGHT = {
   arithmetic:           '#3a9a8a',
   fractions:            '#8a80d8',
   prealgebra:           '#5ab8dc',
@@ -62,7 +62,7 @@ const DOMAIN_COLORS_LIGHT: Record<string, string> = {
   differential_equations:'#d09050',
   abstract_algebra:     '#a090d0',
   topology:             '#d080b0',
-}
+} satisfies Record<string, string>
 
 const FALLBACK_COLOR = '#5a6577'
 const FALLBACK_COLOR_LIGHT = '#888'
@@ -103,21 +103,21 @@ interface GraphSceneProps {
   controlsRef: React.MutableRefObject<any>
 }
 
-const STATUS_COLORS_DARK: Record<string, string> = {
+const STATUS_COLORS_DARK = {
   mastered:   '#4db8a0',
   practicing: '#60a5fa',
   learning:   '#e8a849',
   unseen:     '#5a6577',
   locked:     '#2a2d35',
-}
+} satisfies Record<string, string>
 
-const STATUS_COLORS_LIGHT: Record<string, string> = {
+const STATUS_COLORS_LIGHT = {
   mastered:   '#3a9a8a',
   practicing: '#3b82f6',
   learning:   '#c08a30',
   unseen:     '#9ca3af',
   locked:     '#d0d0d0',
-}
+} satisfies Record<string, string>
 
 function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
   const showStatus = node.status !== null
@@ -135,7 +135,6 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
 
 const monoFont = "'IBM Plex Mono', monospace"
 const serifFont = "'IBM Plex Serif', serif"
-const bodyFont = "'IBM Plex Serif', serif"
 
 const tooltipStyle: React.CSSProperties = {
   background: 'var(--bg)',

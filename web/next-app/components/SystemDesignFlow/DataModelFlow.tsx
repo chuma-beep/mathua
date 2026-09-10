@@ -18,7 +18,7 @@ import { themeColors } from '../FlowDiagram'
 
 const monoFont = "'IBM Plex Mono', monospace"
 
-const tableDetails: Record<string, { columns: string[]; desc: string }> = {
+const tableDetails = {
   students: {
     desc: 'User accounts with XP tracking and auth. UUID primary key.',
     columns: ['id TEXT PK', 'name TEXT', 'username TEXT', 'password_hash TEXT', 'course_id TEXT', 'xp_total INTEGER', 'xp_today INTEGER', 'settings TEXT (JSON)'],
@@ -39,7 +39,7 @@ const tableDetails: Record<string, { columns: string[]; desc: string }> = {
     desc: 'Optional pre-seeded question bank.',
     columns: ['id INTEGER PK AUTO', 'concept_id TEXT', 'question TEXT', 'answer TEXT', 'explanation TEXT', 'difficulty REAL'],
   },
-}
+} satisfies Record<string, { columns: string[]; desc: string }>
 
 function TableNode({ data }: { data: { label: string } }) {
   const { theme } = useTheme()

@@ -18,7 +18,7 @@ import { themeColors } from '../FlowDiagram'
 
 const monoFont = "'IBM Plex Mono', monospace"
 
-const stepData: Record<string, { label: string; desc: string }> = {
+const stepData = {
   '1-client': { label: 'Client', desc: 'POST /api/answer\n{session_id, answer, elapsed}' },
   '2-auth': { label: 'Auth Middleware', desc: 'Validate JWT\nExtract studentID\nInject into context' },
   '3-handler': { label: 'Handler', desc: 'handleAnswer()\nCalls Engine.SubmitAnswer()' },
@@ -31,7 +31,7 @@ const stepData: Record<string, { label: string; desc: string }> = {
   '10-xp': { label: 'Compute XP', desc: 'base * timeMult * streakMult\nrepo.AddXP()' },
   '11-next': { label: 'Next Question', desc: 'sched.Next() -> generator\nNew problem for next concept' },
   '12-response': { label: 'Response', desc: 'JSON to client\n{result, next_question, done}' },
-}
+} satisfies Record<string, { label: string; desc: string }>
 
 function FlowNode({ data }: { data: { label: string; stepId: string } }) {
   const { theme } = useTheme()

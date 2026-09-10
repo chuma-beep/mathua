@@ -32,15 +32,6 @@ const loadingGraphStyle: React.CSSProperties = {
   maxWidth: '100%',
 }
 
-const statCountStyle: React.CSSProperties = {
-  color: 'var(--bg)',
-  fontFamily: "'IBM Plex Mono', monospace",
-  fontSize: '30px',
-  fontWeight: 400,
-  lineHeight: 1,
-  marginBottom: '4px',
-}
-
 const MathConceptGraph3D = dynamic(() => import('../components/MathConceptGraph3D'), {
   ssr: false,
   loading: () => (
@@ -121,7 +112,7 @@ export default function HomePage() {
     'abstract_algebra',
     'topology',
   ]
-  const domainLabels: Record<string, string> = {
+  const domainLabels = {
     arithmetic: 'Arithmetic',
     fractions: 'Fractions',
     prealgebra: 'Pre-Algebra',
@@ -137,7 +128,7 @@ export default function HomePage() {
     differential_equations: 'Differential Equations',
     abstract_algebra: 'Abstract Algebra',
     topology: 'Topology',
-  }
+  } satisfies Record<string, string>
   const domainCounts = conceptsData.reduce(
     (acc: Record<string, number>, c: any) => {
       acc[c.domain] = (acc[c.domain] || 0) + 1

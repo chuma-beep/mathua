@@ -23,6 +23,12 @@ The rules are configured in `web/next-app/.oxlintrc.json`, all as `"warn"`
   signal; revisit as an opt-in later.
 - `anti-slop/no-module-mocking`: **off in test files** (`test/**`,
   `**/*.test.*`, `e2e/**`) — `vi.mock` is our deliberate test seam.
+- `anti-slop/no-runtime-typeof`: **off**. Browser platform guards
+  (`typeof window === 'undefined'`) and React `ReactNode` narrowing are
+  idiomatic and not "representation without a contract"; the rule assumes a
+  Node I/O boundary we do not have in the web app.
+- `anti-slop/no-shape-in-symbol-names`: **off**. False positives on the SVG
+  DOM property `shapeRendering` and Zod's `.shape` accessor.
 
 ## Updating
 

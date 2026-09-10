@@ -35,7 +35,7 @@ interface DomainInfo {
   selected: boolean
 }
 
-const domainLabels: Record<string, string> = {
+const domainLabels = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -52,7 +52,7 @@ const domainLabels: Record<string, string> = {
   differential_equations: 'Differential Equations',
   abstract_algebra: 'Abstract Algebra',
   topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
 

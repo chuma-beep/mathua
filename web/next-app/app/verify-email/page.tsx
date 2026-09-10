@@ -29,7 +29,7 @@ function VerifyEmailInner() {
         if (info) setUserInfo({ ...info, email_verified: true })
         setStatus('done')
       })
-      .catch((e: unknown) => {
+      .catch((e) => {
         setStatus('error')
         setMessage(e instanceof Error ? e.message : 'Verification failed — the link may have expired.')
       })

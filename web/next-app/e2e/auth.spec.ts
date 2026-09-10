@@ -23,7 +23,7 @@ test('header shows authenticated links when a token exists', async ({ page }) =>
   await page.addInitScript(([user]) => {
     localStorage.setItem('mathua_token', 'fake-token')
     localStorage.setItem('mathua_user', JSON.stringify(user))
-  }, [USER] as unknown as string[])
+  }, [USER])
   await page.goto('/graph')
   const header = page.locator('header')
   await expect(header.getByText('Profile').first()).toBeVisible()

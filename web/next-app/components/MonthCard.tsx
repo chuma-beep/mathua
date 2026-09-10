@@ -3,8 +3,6 @@
 import { useMemo } from 'react'
 import type { DailyActivity } from '../lib/api'
 
-const GAP = 2
-
 const DAY_HEADERS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 

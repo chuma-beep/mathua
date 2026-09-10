@@ -67,6 +67,7 @@ const ScoresSchema = z.object({
   quiz_due: z.boolean().optional(),
 })
 
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- zod parse boundary: input is untrusted by design
 function validateResponse<T>(schema: z.ZodType<T>, data: unknown, name: string): T {
   const result = schema.safeParse(data)
   if (!result.success) {
@@ -240,10 +241,10 @@ export interface ConceptProgress {
 }
 
 export async function startSession(): Promise<StartSessionRes> {
-  const headers: Record<string, string> = {
+  const headers = {
     'Content-Type': 'application/json',
     ...getAuthHeaders(),
-  }
+  } satisfies Record<string, string>
   const res = await authedFetch(`${API_BASE}/api/session`, {
     method: 'POST',
     headers,
@@ -262,25 +263,24 @@ export async function startSessionName(name: string): Promise<StartSessionRes> {
   return res.json()
 }
 
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
 export function isConflictError(err: unknown): boolean {
-  return err instanceof Error && (err as unknown as Record<string, unknown>).status === 409
+  return err instanceof Error && (err as { status?: number }).status === 409
 }
 
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
 export function isTooQuickError(err: unknown): boolean {
-  return err instanceof Error && (err as unknown as Record<string, unknown>).status === 400
+  return err instanceof Error && (err as { status?: number }).status === 400
 }
 
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
 export function getErrorMessage(err: unknown): string {
   if (err instanceof Error) {
-    const e = err as unknown as Record<string, unknown>
-    if (typeof e.serverMessage === 'string' && e.serverMessage) return e.serverMessage as string
+    const e = err as { serverMessage?: string }
+    if (typeof e.serverMessage === 'string' && e.serverMessage) return e.serverMessage
     return err.message
   }
   return String(err)
-}
-
-function throwWithStatus(msg: string, status: number): never {
-  throw Object.assign(new Error(msg), { status })
 }
 
 async function throwWithResponse(res: Response, fallbackMsg: string): Promise<never> {
@@ -299,10 +299,10 @@ export async function submitAnswer(
   elapsed: number,
   attemptID: string,
 ): Promise<AnswerRes> {
-  const headers: Record<string, string> = {
+  const headers = {
     'Content-Type': 'application/json',
     ...getAuthHeaders(),
-  }
+  } satisfies Record<string, string>
   const res = await authedFetch(`${API_BASE}/api/answer`, {
     method: 'POST',
     headers,
@@ -313,7 +313,7 @@ export async function submitAnswer(
 }
 
 export async function getCurrentQuestion(sessionID: string): Promise<Question | null> {
-  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const headers = { ...getAuthHeaders() } satisfies Record<string, string>
   const res = await authedFetch(`${API_BASE}/api/session/current?session_id=${encodeURIComponent(sessionID)}`, { headers })
   if (!res.ok) return null
   const data = await res.json()
@@ -322,14 +322,14 @@ export async function getCurrentQuestion(sessionID: string): Promise<Question | 
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
-  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const headers = { ...getAuthHeaders() } satisfies Record<string, string>
   const res = await authedFetch(`${API_BASE}/api/progress/${studentID}`, { headers })
   if (!res.ok) return {}
   return validateResponse(ProgressMapSchema, await res.json(), 'getProgress') as Record<string, ConceptProgress>
 }
 
 export async function getScores(studentID: string): Promise<Scores> {
-  const headers: Record<string, string> = { ...getAuthHeaders() }
+  const headers = { ...getAuthHeaders() } satisfies Record<string, string>
   const res = await authedFetch(`${API_BASE}/api/scores/${studentID}`, { headers })
   if (!res.ok) throw new Error(`Scores fetch failed: ${res.status}`)
   return validateResponse(ScoresSchema, await res.json(), 'getScores') as Scores
@@ -928,12 +928,20 @@ export interface StudyAnswerRes {
 	expected_answer?: string
 }
 
+interface StudyAnswerBody {
+	concept_id: string
+	answer: string
+	expected: string
+	elapsed: number
+	student_id?: string
+}
+
 export async function submitStudyAnswer(conceptId: string, answer: string, expected: string, elapsed: number): Promise<StudyAnswerRes> {
 	const { getGuestId } = await import('./auth')
-	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
-	const body: Record<string, unknown> = { concept_id: conceptId, answer, expected, elapsed }
+	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
+	const body: StudyAnswerBody = { concept_id: conceptId, answer, expected, elapsed }
 	const guestId = getGuestId()
-	if (guestId && !headers.Authorization) {
+	if (guestId && !('Authorization' in headers)) {
 		body.student_id = guestId
 	}
 	const res = await authedFetch(`${API_BASE}/api/study/answer`, {
@@ -957,24 +965,24 @@ export interface DailyActivity {
 }
 
 export async function getActivity(days: number = 365): Promise<DailyActivity[]> {
-	const headers: Record<string, string> = { ...getAuthHeaders() }
+	const headers = { ...getAuthHeaders() } satisfies Record<string, string>
 	const res = await authedFetch(`${API_BASE}/api/activity?days=${days}`, { headers })
 	if (!res.ok) return []
 	return res.json()
 }
 
 export async function getDueReviews(): Promise<DueReviewsRes> {
-	const headers: Record<string, string> = { ...getAuthHeaders() }
+	const headers = { ...getAuthHeaders() } satisfies Record<string, string>
 	const res = await authedFetch(`${API_BASE}/api/reviews/due`, { headers })
 	if (!res.ok) return { count: 0 }
 	return res.json()
 }
 
 export async function startReviewSession(): Promise<StartSessionRes> {
-	const headers: Record<string, string> = {
+	const headers = {
 		'Content-Type': 'application/json',
 		...getAuthHeaders(),
-	}
+	} satisfies Record<string, string>
 	const res = await authedFetch(`${API_BASE}/api/reviews/session`, {
 		method: 'POST',
 		headers,
@@ -989,10 +997,10 @@ export async function submitReviewAnswer(
 	elapsed: number,
 	attemptID: string,
 ): Promise<AnswerRes> {
-	const headers: Record<string, string> = {
+	const headers = {
 		'Content-Type': 'application/json',
 		...getAuthHeaders(),
-	}
+	} satisfies Record<string, string>
 	const res = await authedFetch(`${API_BASE}/api/reviews/answer`, {
 		method: 'POST',
 		headers,
@@ -1022,12 +1030,16 @@ export interface QuizAnswerRes {
 	question?: string
 }
 
+interface QuizSessionBody {
+	student_id?: string
+}
+
 export async function startQuizSession(): Promise<QuizStartRes> {
 	const { getGuestId } = await import('./auth')
-	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
-	const body: Record<string, unknown> = {}
+	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
+	const body: QuizSessionBody = {}
 	const guestId = getGuestId()
-	if (guestId && !headers.Authorization) body.student_id = guestId
+	if (guestId && !('Authorization' in headers)) body.student_id = guestId
 	const res = await authedFetch(`${API_BASE}/api/quiz/session`, {
 		method: 'POST',
 		headers,
@@ -1036,12 +1048,20 @@ export async function startQuizSession(): Promise<QuizStartRes> {
 	if (!res.ok) throw new Error(`Quiz session start failed: ${res.status}`)
 	return res.json()
 }
+interface QuizAnswerBody {
+	session_id: string
+	concept_id: string
+	answer: string
+	elapsed: number
+	student_id?: string
+}
+
 export async function submitQuizAnswer(sessionId: string, conceptId: string, answer: string, elapsed: number): Promise<QuizAnswerRes> {
 	const { getGuestId } = await import('./auth')
-	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
-	const body: Record<string, unknown> = { session_id: sessionId, concept_id: conceptId, answer, elapsed }
+	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
+	const body: QuizAnswerBody = { session_id: sessionId, concept_id: conceptId, answer, elapsed }
 	const guestId = getGuestId()
-	if (guestId && !headers.Authorization) body.student_id = guestId
+	if (guestId && !('Authorization' in headers)) body.student_id = guestId
 	const res = await authedFetch(`${API_BASE}/api/quiz/answer`, {
 		method: 'POST',
 		headers,
@@ -1092,12 +1112,16 @@ export interface SubmitReportRes {
 	status: ReportStatus
 }
 
+interface ReportBody extends SubmitReportInput {
+	reporter_id?: string
+}
+
 export async function submitReport(input: SubmitReportInput): Promise<SubmitReportRes> {
 	const { getGuestId } = await import('./auth')
-	const headers: Record<string, string> = { 'Content-Type': 'application/json', ...getAuthHeaders() }
-	const body: Record<string, unknown> = { ...input }
+	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
+	const body: ReportBody = { ...input }
 	const guestId = getGuestId()
-	if (guestId && !headers.Authorization) {
+	if (guestId && !('Authorization' in headers)) {
 		body.reporter_id = guestId
 	}
 	const res = await authedFetch(`${API_BASE}/api/reports`, {

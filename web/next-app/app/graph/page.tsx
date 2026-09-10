@@ -13,9 +13,9 @@ import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
 import conceptsData from '../../data/concepts.json'
 import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
-import { isLoggedIn, getUserInfo } from '../../lib/auth'
+import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
-import { deriveStatuses, type MasteryStatus } from '../../lib/graphStatus'
+import { deriveStatuses } from '../../lib/graphStatus'
 import Loading from '../../components/Loading'
 
 const graphLoadingStyle: React.CSSProperties = {
@@ -48,7 +48,7 @@ const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
   id: c.id, label: c.label, domain: c.domain, prerequisites: c.prerequisites,
 }))
 
-const domainLabels: Record<string, string> = {
+const domainLabels = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -65,7 +65,7 @@ const domainLabels: Record<string, string> = {
   differential_equations: 'Diff. Eqs.',
   abstract_algebra: 'Abstract Algebra',
   topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 const domainOrder = [
   'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry',

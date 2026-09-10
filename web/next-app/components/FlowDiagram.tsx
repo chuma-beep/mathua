@@ -10,7 +10,6 @@ import {
   useNodesState,
   useEdgesState,
   type Node,
-  type Edge,
 } from '@xyflow/react'
 import '@xyflow/react/dist/base.css'
 import dagre from 'dagre'
@@ -77,7 +76,7 @@ interface FlowDiagramProps {
 const NODE_WIDTH = 150
 const NODE_HEIGHT = 44
 
-function buildVariantStyles(c: typeof themeColors.light) {
+function buildVariantStyles(c: typeof themeColors.light): Record<NodeVariant, React.CSSProperties> {
   return {
     default: {
       background: c.surface,
@@ -125,7 +124,7 @@ function buildVariantStyles(c: typeof themeColors.light) {
       border: '0.5px solid ' + c.border,
       color: c.textSecondary,
     },
-  } as Record<string, React.CSSProperties>
+  }
 }
 
 function buildEdgeStyle(c: typeof themeColors.light, color?: EdgeColor, dashed?: boolean) {
@@ -133,10 +132,9 @@ function buildEdgeStyle(c: typeof themeColors.light, color?: EdgeColor, dashed?:
     : color === 'red' ? c.accentRed
     : color === 'blue' ? c.accentBlue
     : c.borderStrong
-  return {
-    stroke,
-    ...(dashed ? { strokeDasharray: '4 4' } : {}),
-  }
+  const style: React.CSSProperties = { stroke }
+  if (dashed) style.strokeDasharray = '4 4'
+  return style
 }
 
 function buildEdgeLabelStyle(c: typeof themeColors.light, color?: EdgeColor) {

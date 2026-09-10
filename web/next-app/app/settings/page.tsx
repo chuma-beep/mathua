@@ -21,7 +21,7 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<UserSettings>({})
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [shareToken, setShareToken] = useState('')
+  const [, setShareToken] = useState('')
   const [shareUrl, setShareUrl] = useState('')
   const [shareBusy, setShareBusy] = useState(false)
   const [restricted, setRestricted] = useState(false)
@@ -145,7 +145,7 @@ export default function SettingsPage() {
   // migration to the DiceBear model — presets are no longer offered).
   const stripPreset = (s: UserSettings): UserSettings => {
     const next = { ...s }
-    delete (next as unknown as Record<string, unknown>).avatar_preset
+    delete next.avatar_preset
     return next
   }
 

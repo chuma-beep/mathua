@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { prepareLessonMath } from '../lib/lessonMath'
 
-function mathSpans(s: string): { display: string[]; inline: string[] } {
+function mathSpans(s: string) {
   const display: string[] = []
   const inline: string[] = []
   const re = /<span class="math-(display|inline)">([\s\S]*?)<\/span>/g

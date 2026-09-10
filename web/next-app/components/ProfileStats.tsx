@@ -11,7 +11,7 @@ interface Props {
   avatarPreset?: number | null
 }
 
-const LEVEL_NAMES: Record<string, string> = {
+const LEVEL_NAMES = {
   'Novice': '01',
   'Apprentice': '02',
   'Student': '03',
@@ -21,7 +21,7 @@ const LEVEL_NAMES: Record<string, string> = {
   'Master': '07',
   'Grandmaster': '08',
   'Math Architect': '09',
-}
+} satisfies Record<string, string>
 
 export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avatarPreset }: Props) {
   const xpPct = scores.daily_xp_goal > 0

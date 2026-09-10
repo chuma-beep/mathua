@@ -840,13 +840,6 @@ function GraphInner({
   const flowEdges = useMemo<ConceptFlowEdge[]>(() => {
     return allEdgesList.map(({ source, target }) => {
       const highlighted = !!effectiveSelected && (source === effectiveSelected || target === effectiveSelected)
-      const inNeighborhood =
-        !neighborhood ||
-        (neighborhood.upstream.has(source) &&
-          (neighborhood.upstream.has(target) || target === effectiveSelected)) ||
-        (source === effectiveSelected && neighborhood.downstream.has(target)) ||
-        (neighborhood.downstream.has(target) &&
-          (neighborhood.downstream.has(source) || source === effectiveSelected))
       const variant: FlowEdgeData['variant'] = highlighted
         ? 'flow'
         : ambientActive
@@ -862,7 +855,7 @@ function GraphInner({
         markerEnd: highlighted ? { type: MarkerType.ArrowClosed, width: 12, height: 12 } : undefined,
       }
     })
-  }, [allEdgesList, effectiveSelected, neighborhood, ambientActive])
+  }, [allEdgesList, effectiveSelected, ambientActive])
 
   useEffect(() => {
     if (!effectiveSelected || isMobile) return
