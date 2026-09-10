@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
-import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getEfficacyTrend, getScores, getSettings } from '../../lib/api'
+import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport, EfficacyTrend } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
@@ -37,6 +37,7 @@ export default function ProfilePage() {
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
   const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
+  const [efficacyTrend, setEfficacyTrend] = useState<EfficacyTrend | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
@@ -109,6 +110,7 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
           getEfficacy().then(setEfficacy).catch(() => {})
+          getEfficacyTrend().then(setEfficacyTrend).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
           const guestId = getGuestId() || ''
@@ -439,6 +441,30 @@ export default function ProfilePage() {
                 </div>
               ))}
             </div>
+            {efficacyTrend && efficacyTrend.weeks.length > 0 && (
+              <div className="mt-4 border border-mathua-border bg-mathua-surface p-3 min-w-0">
+                <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 mb-2">
+                  <span className="font-mono text-[10px] uppercase text-mathua-muted">First-pass by week</span>
+                  <span className="font-mono text-[10px] text-mathua-muted">
+                    {efficacyTrend.total_students} learner{efficacyTrend.total_students !== 1 ? 's' : ''} · {Math.round(efficacyTrend.retention_rate * 100)}% returning
+                  </span>
+                </div>
+                <div className="flex items-end gap-1 h-12">
+                  {efficacyTrend.weeks.slice(-12).map(w => (
+                    <div
+                      key={w.week_start}
+                      className="flex-1 min-w-0"
+                      title={`${w.week_start}: ${Math.round(w.first_pass_rate * 100)}% first-pass (${w.active_students} active)`}
+                    >
+                      <div
+                        className="w-full bg-mathua-blue"
+                        style={{ height: `${Math.max(2, Math.round(w.first_pass_rate * 48))}px` }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         )}
 

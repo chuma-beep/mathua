@@ -447,6 +447,30 @@ export async function getEfficacy(): Promise<EfficacyReport | null> {
   return res.json()
 }
 
+export interface EfficacyWeek {
+  week_start: string
+  attempts: number
+  concepts_touched: number
+  first_pass_rate: number
+  second_pass_rate: number
+  active_students: number
+}
+
+export interface EfficacyTrend {
+  weeks: EfficacyWeek[]
+  total_students: number
+  returning_students: number
+  retention_rate: number
+  first_pass_trend: number
+}
+
+// Product-wide longitudinal efficacy (weekly first-pass rate + retention).
+export async function getEfficacyTrend(): Promise<EfficacyTrend | null> {
+  const res = await authedFetch(`${API_BASE}/api/efficacy/trend`, { headers: { ...getAuthHeaders() } })
+  if (!res.ok) return null
+  return res.json()
+}
+
 export interface ConfigRes {
 	auth_enabled: boolean
 	google_client_id?: string
