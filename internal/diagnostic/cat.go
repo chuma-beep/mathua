@@ -18,14 +18,31 @@ const (
 )
 
 const (
-	// minTotalQuestions is the floor before the diagnostic considers convergence.
-	minTotalQuestions = 15
+	// minTotalQuestions is the floor before the diagnostic considers
+	// convergence (spec + docs/architecture: 25-45 adaptive questions).
+	minTotalQuestions = 25
 	// maxTotalQuestions hard caps an adaptive session (supplemental included).
 	maxTotalQuestions = 45
 	// coverSize is the target size of the compressed covering set.
 	coverSize = 30
 	// beliefThreshold is the frontier cutoff: belief >= threshold is "known".
 	beliefThreshold = 0.6
+	// confidenceThreshold gates supplemental re-probes: cover concepts
+	// settled below this confidence get one extra probe each.
+	confidenceThreshold = 0.7
+	// Bayes evidence weights (conflict resolution): a correct answer is
+	// +evidenceCorrectWeight toward prerequisites, an incorrect answer is
+	// −evidenceIncorrectWeight toward dependents; conflicting prior
+	// evidence discounts both directions by conflictDiscount.
+	evidenceCorrectWeight   = 0.3
+	evidenceIncorrectWeight = 0.3
+	conflictDiscount        = 0.5
+	// conditionalStripFactor scales back "conditionally completed"
+	// prerequisites (belief in [threshold, threshold+0.15)) on a miss —
+	// the frontier falls backwards immediately on struggle.
+	conditionalStripFactor = 0.8
+	// maxSupplementalProbes caps extra re-probes per concept.
+	maxSupplementalProbes = 1
 )
 
 type Session struct {
@@ -50,6 +67,8 @@ type Session struct {
 	totalCount   map[string]int
 	totalAsked   int
 	doneSet      map[string]bool
+	// supplementalCount tracks extra re-probes per concept (cap enforced).
+	supplementalCount map[string]int
 }
 
 type Attempt struct {
@@ -97,14 +116,15 @@ func (e *Engine) StartWithPath(path []*concepts.Concept) *Session {
 		return &Session{State: StateDone, order: path}
 	}
 	s := &Session{
-		State:        StateProbing,
-		order:        path,
-		beliefs:      make(map[string]float64, len(path)),
-		confidence:   make(map[string]float64, len(path)),
-		probeCounts:  make(map[string]int, len(path)),
-		correctCount: make(map[string]int, len(path)),
-		totalCount:   make(map[string]int, len(path)),
-		doneSet:      make(map[string]bool, len(path)),
+		State:             StateProbing,
+		order:             path,
+		beliefs:           make(map[string]float64, len(path)),
+		confidence:        make(map[string]float64, len(path)),
+		probeCounts:       make(map[string]int, len(path)),
+		correctCount:      make(map[string]int, len(path)),
+		totalCount:        make(map[string]int, len(path)),
+		doneSet:           make(map[string]bool, len(path)),
+		supplementalCount: make(map[string]int),
 	}
 	for _, c := range path {
 		s.beliefs[c.ID] = 0.5
@@ -209,6 +229,11 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	}
 	cid := e.pickByInfoGain(s)
 	if cid == "" {
+		// Cover exhausted: run the supplemental diagnostic for
+		// low-confidence concepts before declaring done.
+		cid = e.supplementalDiagnostic(s)
+	}
+	if cid == "" {
 		s.State = StateDone
 		s.LastProblem = nil
 		return nil, "", nil
@@ -311,44 +336,77 @@ func (e *Engine) RecordAnswerTimed(s *Session, conceptID string, correct bool, e
 	}
 	s.beliefs[conceptID] = b
 
-	// Evidence propagation: correct -> prerequisites more likely known
-	// (diminished when slow); incorrect -> dependents more likely unknown.
-	if correct {
-		for _, pr := range e.dag.PrereqsOf(conceptID) {
-			if pr.ID == conceptID {
-				continue
-			}
-			s.beliefs[pr.ID] += 0.3 * slowFactor * (1 - s.beliefs[pr.ID]) * 0.5
-		}
-	} else {
-		for _, dep := range e.dag.DependentsOf(conceptID) {
-			if dep.ID == conceptID {
-				continue
-			}
-			s.beliefs[dep.ID] *= (1 - 0.3*0.5)
-		}
-		// MA fall-back: a miss also strips "conditionally completed" credit
-		// from barely-passed prerequisites — the frontier falls backwards
-		// along the learning path immediately on struggle.
-		for _, pr := range e.dag.PrereqsOf(conceptID) {
-			if pr.ID == conceptID {
-				continue
-			}
-			if b := s.beliefs[pr.ID]; b >= beliefThreshold && b < beliefThreshold+0.15 {
-				s.beliefs[pr.ID] = b * 0.8
-			}
-		}
-	}
+	// Evidence propagation with Bayes conflict weighting: correct answers
+	// lend positive evidence to prerequisites (diminished when slow);
+	// incorrect answers lend negative evidence to dependents and strip
+	// barely-passing "conditional" credit from prerequisites.
+	e.propagateEvidence(s, conceptID, correct, slowFactor)
 
 	// Confidence: 2 probes settle a concept.
 	s.confidence[conceptID] = math.Min(1.0, float64(s.probeCounts[conceptID])*0.5)
 
-	// Supplemental: re-probe low-confidence cover concepts until 45 Q cap.
+	// Settle concepts at 2 probes; low-confidence ones are revisited by
+	// supplementalDiagnostic (up to maxSupplementalProbes extra each).
 	s.doneSet[conceptID] = s.totalCount[conceptID] >= 2
 
 	if s.shouldStop() {
 		s.State = StateDone
 	}
+}
+
+// propagateEvidence applies ±evidence weights along DAG edges with
+// conflictDiscount damping both directions when prior evidence conflicts.
+func (e *Engine) propagateEvidence(s *Session, conceptID string, correct bool, slowFactor float64) {
+	if correct {
+		for _, pr := range e.dag.PrereqsOf(conceptID) {
+			if pr.ID == conceptID {
+				continue
+			}
+			s.beliefs[pr.ID] += evidenceCorrectWeight * slowFactor * (1 - s.beliefs[pr.ID]) * conflictDiscount
+		}
+		return
+	}
+	for _, dep := range e.dag.DependentsOf(conceptID) {
+		if dep.ID == conceptID {
+			continue
+		}
+		s.beliefs[dep.ID] *= (1 - evidenceIncorrectWeight*conflictDiscount)
+	}
+	// MA fall-back: a miss also strips "conditionally completed" credit
+	// from barely-passed prerequisites — the frontier falls backwards
+	// along the learning path immediately on struggle.
+	for _, pr := range e.dag.PrereqsOf(conceptID) {
+		if pr.ID == conceptID {
+			continue
+		}
+		if pb := s.beliefs[pr.ID]; pb >= beliefThreshold && pb < beliefThreshold+0.15 {
+			s.beliefs[pr.ID] = pb * conditionalStripFactor
+		}
+	}
+}
+
+// supplementalDiagnostic re-probes settled cover concepts whose confidence
+// never reached confidenceThreshold (e.g. answers recorded without question
+// probes on the legacy API path). Each concept gets at most
+// maxSupplementalProbes extra probes; "" means supplemental is complete.
+// Caller must hold s.Lock (NextQuestion does).
+func (e *Engine) supplementalDiagnostic(s *Session) string {
+	cover := e.compressedCover(s)
+	for _, c := range cover {
+		if !s.doneSet[c.ID] {
+			continue
+		}
+		if s.confidence[c.ID] >= confidenceThreshold {
+			continue
+		}
+		if s.supplementalCount[c.ID] >= maxSupplementalProbes {
+			continue
+		}
+		s.supplementalCount[c.ID]++
+		delete(s.doneSet, c.ID)
+		return c.ID
+	}
+	return ""
 }
 
 func (s *Session) shouldStop() bool {

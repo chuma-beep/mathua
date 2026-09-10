@@ -706,6 +706,18 @@ func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) 
 		writeError(w, "failed to get next question", 500)
 		return
 	}
+	if cid == "" {
+		// Cover exhausted (incl. supplemental): the Next call above marked
+		// the session done — close it with the report, never serve an
+		// empty question with done:false.
+		frontier := s.eng.DiagnosticFrontier(sess)
+		report := s.eng.DiagnosticReport(sess)
+		s.mu.Lock()
+		delete(s.diagSessions, req.SessionID)
+		s.mu.Unlock()
+		writeJSON(w, map[string]interface{}{"done": true, "frontier": frontier, "report": report})
+		return
+	}
 	writeJSON(w, map[string]interface{}{"done": false, "concept_id": cid})
 }
 
@@ -957,6 +969,20 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	nextProb, cid, err := s.eng.NextDiagnosticQuestion(session)
 	if err != nil {
 		writeError(w, "failed to get next question", 500)
+		return
+	}
+	if cid == "" || nextProb == nil {
+		// Cover exhausted (incl. supplemental): close with the report,
+		// never serve an empty question with done:false.
+		report := s.eng.DiagnosticReport(session)
+		prog := s.eng.DiagnosticProgress(session)
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  correct,
+			"feedback": explanation,
+			"report":   report,
+			"progress": prog,
+		})
 		return
 	}
 	c := s.eng.GetDAG().Concept(cid)
