@@ -55,9 +55,22 @@ const LEVELS = [  { num: '01', name: 'Novice', range: '0–31' },
   { num: '09', name: 'Math Architect', range: '256–284', elite: true },
 ]
 
+function computeCountdown(): string {
+  const now = new Date()
+  const nextMonday = new Date(now)
+  nextMonday.setUTCDate(now.getUTCDate() + ((7 - now.getUTCDay() + 1) % 7 || 7))
+  nextMonday.setUTCHours(0, 0, 0, 0)
+  const diff = nextMonday.getTime() - now.getTime()
+  const d = Math.floor(diff / 86400000)
+  const h = Math.floor((diff % 86400000) / 3600000)
+  const m = Math.floor((diff % 3600000) / 60000)
+  return `${d}d ${h}h ${m}m`
+}
+
 export default function LeaderboardPage() {
   const { mounted } = useTheme()
-  const [countdown, setCountdown] = useState('')
+  // Lazy initializer derives the first value during render (no init effect).
+  const [countdown, setCountdown] = useState(computeCountdown)
   const [entries, setEntries] = useState<LeaderboardEntry[]>([])
   const [leagues, setLeagues] = useState<LeagueBoard | null>(null)
   const [leaguesFailed, setLeaguesFailed] = useState(false)
@@ -71,15 +84,7 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     const update = () => {
-      const now = new Date()
-      const nextMonday = new Date(now)
-      nextMonday.setUTCDate(now.getUTCDate() + ((7 - now.getUTCDay() + 1) % 7 || 7))
-      nextMonday.setUTCHours(0, 0, 0, 0)
-      const diff = nextMonday.getTime() - now.getTime()
-      const d = Math.floor(diff / 86400000)
-      const h = Math.floor((diff % 86400000) / 3600000)
-      const m = Math.floor((diff % 3600000) / 60000)
-      setCountdown(`${d}d ${h}h ${m}m`)
+      setCountdown(computeCountdown())
     }
     update()
     const interval = setInterval(update, 60000)
@@ -103,7 +108,7 @@ export default function LeaderboardPage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex mb-4">
-          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
           </button>
         </span>
@@ -155,7 +160,7 @@ export default function LeaderboardPage() {
               {!loading && loadError && (
                 <tr>
                   <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                    Couldn&apos;t load the leaderboard. <button onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button>
+                    Couldn&apos;t load the leaderboard. <button type="button" onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button>
                   </td>
                 </tr>
               )}
@@ -212,7 +217,7 @@ export default function LeaderboardPage() {
             <Loading label="LOADING LEAGUES" />
           </div>
         ) : leaguesFailed ? (
-          <p className="text-center text-mathua-muted text-sm">Couldn&apos;t load leagues. <button onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button></p>
+          <p className="text-center text-mathua-muted text-sm">Couldn&apos;t load leagues. <button type="button" onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button></p>
         ) : leagues!.leagues.length === 0 ? (
           <p className="text-center text-mathua-muted text-sm"><Link href="/login" className="text-mathua-blue hover:text-mathua-blue-hover">Sign in</Link> to join a league.</p>
         ) : (

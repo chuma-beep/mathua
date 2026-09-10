@@ -92,7 +92,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
           const isExpanded = expanded === domain
           return (
             <div key={domain} className="border border-mathua-border bg-mathua-surface">
-              <button onClick={() => setExpanded(isExpanded ? null : domain)} className="w-full flex items-center justify-between p-3 text-left">
+              <button type="button" onClick={() => setExpanded(isExpanded ? null : domain)} aria-expanded={isExpanded} className="w-full flex items-center justify-between p-3 text-left">
                 <span className="font-mono text-xs text-mathua-primary">{label}</span>
                 <span className="font-mono text-[11px] text-mathua-muted">{weak.length} to review · {strong.length} strong</span>
               </button>
@@ -158,7 +158,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
 
       {onStartPractice && (
         <div className="text-center">
-          <button onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-10 h-12 font-mono text-sm">
+          <button type="button" onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-10 h-12 font-mono text-sm">
             Start practicing →
           </button>
         </div>

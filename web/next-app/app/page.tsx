@@ -93,7 +93,7 @@ const PIPELINE_STATES = [
 
 export default function HomePage() {
   const { theme, mounted } = useTheme()
-  const router = useRouter()
+  const { push } = useRouter()
   // Logged-in visits bounce to /profile; explicit Home clicks stay put.
   const homeChecked = useHomeRedirect(mounted)
 
@@ -266,11 +266,12 @@ export default function HomePage() {
 
         <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
           <button
+            type="button"
             onClick={() => {
               ensureGuestId()
               // Mint the guest token before landing on /profile so the first
               // scores fetch already carries a credential. Best-effort.
-              ensureGuestToken().finally(() => router.push('/profile'))
+              ensureGuestToken().finally(() => push('/profile'))
             }}
             style={ctaPrimaryStyle}
             className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]"

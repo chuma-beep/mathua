@@ -338,6 +338,7 @@ function SearchOverlay({
           setOpen(true)
         }}
         onFocus={() => setOpen(true)}
+        aria-label="Search concepts"
         onKeyDown={e => {
           if (e.key === 'Enter' && results.length > 0) {
             onSelect(results[0].id)
@@ -353,6 +354,7 @@ function SearchOverlay({
           {results.map(r => (
             <button
               key={r.id}
+              type="button"
               onClick={() => {
                 onSelect(r.id)
                 setOpen(false)
@@ -379,8 +381,10 @@ function AmbientToggle({
 }) {
   return (
     <button
+      type="button"
       onClick={onToggle}
       title="Toggle edge flow animation"
+      aria-label="Toggle edge flow animation"
       style={{
         position: 'absolute',
         top: 10,
@@ -415,6 +419,7 @@ function ListToggleButton({
 }) {
   return (
     <button
+      type="button"
       onClick={onToggle}
       title="Browse concepts as a keyboard-accessible list"
       aria-expanded={open}
@@ -533,6 +538,7 @@ function ListView({
               return (
                 <button
                   key={c.id}
+                  type="button"
                   onClick={() => {
                     onSelect(c.id)
                     onClose()
@@ -1020,6 +1026,7 @@ function GraphInner({
               <span className="text-[11px] shrink-0" style={{ color: STATUS_COLORS[selectedStatus] }}>● {STATUS_LABELS[selectedStatus]}</span>
             )}
             <button
+              type="button"
               onClick={() => onNodeSelect?.(selected.id)}
               className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue/30 rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue hover:text-white transition-colors"
             >
@@ -1037,6 +1044,7 @@ function GraphInner({
                     {prereqList.map(p => (
                       <button
                         key={p.id}
+                        type="button"
                         onClick={() => select(p.id)}
                         className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >
@@ -1055,6 +1063,7 @@ function GraphInner({
                     {unlocksList.map(u => (
                       <button
                         key={u.id}
+                        type="button"
                         onClick={() => select(u.id)}
                         className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >

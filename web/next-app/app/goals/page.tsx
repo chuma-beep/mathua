@@ -66,6 +66,9 @@ function GoalsContent() {
   const { mounted } = useTheme()
   const { push } = useRouter()
   const searchParams = useSearchParams()
+  // Stable string dep for the effect below (avoids re-running on
+  // searchParams object identity changes).
+  const quizParam = searchParams.get('quiz')
 
   const [step, setStep] = useState<Step>('select')
   const [quizPending, setQuizPending] = useState(() => {
@@ -132,11 +135,11 @@ function GoalsContent() {
     } catch {
       setHasPaused(false)
     }
-    if (searchParams.get('quiz') === '1') {
+    if (quizParam === '1') {
       // Reuse: quiz host — auto-start actionable quiz (150 XP, 80% own grading, guest allowed)
       setTimeout(() => { startQuiz() }, 300)
     }
-  }, [mounted, searchParams])
+  }, [mounted, quizParam])
 
   function buildDomains() {
     const raw = conceptsData as any[]
@@ -395,7 +398,7 @@ function GoalsContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex mb-4">
-            <button onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
+            <button type="button" onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
           </span>
 
           {/* === STEP 1: Goal Selection === */}
@@ -416,6 +419,7 @@ function GoalsContent() {
                   const label = domainLabels[d.name] || d.name
                   return (
                     <button
+                      type="button"
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
                     className={`rounded-none p-3 sm:p-4 text-left transition-all text-sm min-h-[60px] min-w-0 overflow-hidden ${
@@ -436,6 +440,7 @@ function GoalsContent() {
               <div className="text-center px-4">
                 {hasPaused && step === 'select' && (
                   <button
+                    type="button"
                     onClick={resumeDiagnostic}
                     disabled={loading}
                     className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
@@ -444,6 +449,7 @@ function GoalsContent() {
                   </button>
                 )}
                 <button
+                  type="button"
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
@@ -555,8 +561,8 @@ function GoalsContent() {
               </div>
               {/* Quiz CTA — actionable after diagnostic, also reachable via ?quiz=1 */}
               <div className="mt-6 text-center">
-                <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (150 XP gate) →</button>
-                <p className="font-mono text-xs text-mathua-muted mt-2">Guest allowed — unlimited retake</p>
+                <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (150 XP gate) →</button>
+                <p className="font-mono text-xs text-mathua-muted mt-2">Guest allowed, unlimited retake</p>
               </div>
             </>
           )}
@@ -609,18 +615,18 @@ function GoalsContent() {
               {quizAccuracy.total === 0 ? (
                 <>
                   <SectionHeader label="Quiz" title="No questions available" />
-                  <p className="font-mono text-sm text-mathua-secondary mt-4">There are no quiz questions available right now — try again later.</p>
+                  <p className="font-mono text-sm text-mathua-secondary mt-4">There are no quiz questions available right now, try again later.</p>
                   <div className="mt-6 flex gap-3 justify-center">
-                    <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Try again →</button>
+                    <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Try again →</button>
                     <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
                   </div>
                 </>
               ) : (
                 <>
                   <SectionHeader label="Quiz complete" title={`${quizAccuracy.correct}/${quizAccuracy.total} correct`} />
-                  <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct — retake anytime.</p>
+                  <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct, retake anytime.</p>
                   <div className="mt-6 flex gap-3 justify-center">
-                    <button onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
+                    <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
                     <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
                   </div>
                 </>

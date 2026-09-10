@@ -367,6 +367,7 @@ function DomainOverview({
 
           return (
             <button
+              type="button"
               key={domain}
               onClick={() => onSelectDomain(domain)}
               className={`w-full text-left transition-all duration-200 group ${
@@ -435,6 +436,7 @@ function DomainOverview({
       {pageCount > 1 && (
         <div className="flex items-center justify-center gap-3 mt-6">
           <button
+            type="button"
             onClick={() => goToPage(safePage - 1)}
             disabled={safePage <= 1}
             aria-label="Previous page"
@@ -446,6 +448,7 @@ function DomainOverview({
             Page {safePage} of {pageCount}
           </span>
           <button
+            type="button"
             onClick={() => goToPage(safePage + 1)}
             disabled={safePage >= pageCount}
             aria-label="Next page"
@@ -484,6 +487,7 @@ function DomainDrillDown({
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
+        type="button"
         onClick={onBack}
         className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
       >
@@ -527,7 +531,8 @@ function DomainDrillDown({
 
           return (
             <button
-              key={i}
+              type="button"
+              key={lesson.title}
               onClick={() => onSelectLesson(lesson)}
               className={`text-left transition-all duration-200 group animate-fadeIn ${
                 allDone ? 'opacity-50 hover:opacity-70' : ''
@@ -605,12 +610,18 @@ function LessonDetail({
     return () => { cancelled = true }
   }, [lesson])
 
-  const kpConcepts = lesson.concepts.slice(0, 3).filter(cid => (kpMap[cid]?.kps?.length ?? 0) > 0)
-  const hasKps = kpConcepts.length > 0
+  // Single pass: collect only concepts that actually have KP shards.
+  const kpSections: { cid: string; kps: NonNullable<LessonKpsRes['kps']>; diagram: LessonKpsRes['diagram'] }[] = []
+  for (const cid of lesson.concepts.slice(0, 3)) {
+    const kps = kpMap[cid]?.kps ?? []
+    if (kps.length > 0) kpSections.push({ cid, kps, diagram: kpMap[cid]?.diagram })
+  }
+  const hasKps = kpSections.length > 0
 
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
+        type="button"
         onClick={onBack}
         className="text-mathua-secondary text-xs font-mono hover:text-mathua-blue mb-6"
       >
@@ -672,9 +683,7 @@ function LessonDetail({
 
       {hasKps ? (
         <div className="space-y-5">
-          {kpConcepts.map(cid => {
-            const kps = kpMap[cid]?.kps ?? []
-            const diagram = kpMap[cid]?.diagram
+          {kpSections.map(({ cid, kps, diagram }) => {
             return (
               <div key={cid} className="w-full max-w-full min-w-0 overflow-hidden">
                 <div className="flex items-center gap-2 mb-3">
@@ -684,15 +693,15 @@ function LessonDetail({
                   <span className="font-mono text-[10px] text-mathua-muted">{cid}</span>
                 </div>
                 {kps.map((kp, k) => (
-                  <div key={`${cid}-${k}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
+                  <div key={`${cid}-${kp.label}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
                     <p className="font-mono text-xs text-mathua-primary">
                       {k + 1}. {kp.label}
                     </p>
                     {kp.subgoals.length > 0 && (
                       <ul className="mt-2 space-y-1">
-                        {kp.subgoals.map((sg, j) => (
+                        {kp.subgoals.map((sg) => (
                           <li
-                            key={j}
+                            key={sg}
                             className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
                           >
                             {sg}
@@ -819,7 +828,7 @@ function getLessonsCached(studentId?: string): Promise<LessonsRes> {
 
 function StudyContent() {
   const searchParams = useSearchParams()
-  const router = useRouter()
+  const { push } = useRouter()
   const lessonParam = searchParams.get('lesson')
   const domainParam = searchParams.get('domain')
   const conceptParam = searchParams.get('concept')
@@ -846,21 +855,35 @@ function StudyContent() {
     }
   }, [])
 
+  // O(1) lookups for URL → state sync (replaces find-in-loop).
+  const lessonByTitle = useMemo(() => {
+    const m = new Map<string, LessonInfo>()
+    for (const lessons of Object.values(lessonsByDomain)) {
+      for (const l of lessons) m.set(l.title, l)
+    }
+    return m
+  }, [lessonsByDomain])
+  const lessonByConcept = useMemo(() => {
+    const m = new Map<string, LessonInfo>()
+    for (const lessons of Object.values(lessonsByDomain)) {
+      for (const l of lessons) {
+        for (const c of l.concepts) {
+          if (!m.has(c)) m.set(c, l)
+        }
+      }
+    }
+    return m
+  }, [lessonsByDomain])
+
   // URL → state sync
   useEffect(() => {
     if (lessonParam) {
-      for (const lessons of Object.values(lessonsByDomain)) {
-        const found = lessons.find(l => l.title === lessonParam)
-        if (found) { setSelectedLesson(found); return }
-      }
-      setSelectedLesson(null)
+      setSelectedLesson(lessonByTitle.get(lessonParam) ?? null)
       return
     }
     if (conceptParam && Object.keys(lessonsByDomain).length > 0) {
-      for (const lessons of Object.values(lessonsByDomain)) {
-        const found = lessons.find(l => l.concepts.includes(conceptParam))
-        if (found) { setSelectedLesson(found); return }
-      }
+      const found = lessonByConcept.get(conceptParam)
+      if (found) { setSelectedLesson(found); return }
     }
 
     if (domainParam && lessonsByDomain[domainParam]) {
@@ -868,8 +891,7 @@ function StudyContent() {
     } else {
       setSelectedDomain(null)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lessonParam, domainParam, conceptParam, lessonsByDomain])
+  }, [lessonParam, domainParam, conceptParam, lessonsByDomain, lessonByTitle, lessonByConcept])
 
   // Lazily fetch the selected lesson's markdown body.
   useEffect(() => {
@@ -982,8 +1004,9 @@ function StudyContent() {
             <>
               {bodyError && (
                 <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
-                  <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the lesson text — practice below still works.</span>
+                  <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the lesson text, practice below still works.</span>
                   <button
+                    type="button"
                     onClick={() => setBodyRetry(n => n + 1)}
                     className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
                   >
@@ -999,7 +1022,7 @@ function StudyContent() {
                 const url = selectedDomain
                   ? '/study?domain=' + encodeURIComponent(selectedDomain)
                   : '/study'
-                router.push(url)
+                push(url)
               }}
             />
             </>
@@ -1011,11 +1034,11 @@ function StudyContent() {
               agg={domainAgg[selectedDomain]}
               onBack={() => {
                 setSelectedDomain(null)
-                router.push('/study')
+                push('/study')
               }}
               onSelectLesson={(lesson) => {
                 setSelectedLesson(lesson)
-                router.push('/study?domain=' + encodeURIComponent(selectedDomain) + '&lesson=' + encodeURIComponent(lesson.title))
+                push('/study?domain=' + encodeURIComponent(selectedDomain) + '&lesson=' + encodeURIComponent(lesson.title))
               }}
             />
           ) : (
@@ -1024,7 +1047,7 @@ function StudyContent() {
               {Object.values(domainAgg).every(a => a.mastered === 0) && (
                 <div className="max-w-4xl mx-auto mt-2 mb-4 border border-mathua-border bg-mathua-surface p-4">
                   <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-2">Start here</h3>
-                  <p className="font-mono text-xs text-mathua-secondary mb-3">New here? Follow the order — it respects prerequisites.</p>
+                  <p className="font-mono text-xs text-mathua-secondary mb-3">New here? Follow the order, it respects prerequisites.</p>
                   <div className="flex flex-wrap gap-2">
                     {[
                       { prefix: 'arith', label: 'Arithmetic' },
@@ -1032,12 +1055,13 @@ function StudyContent() {
                       { prefix: 'prealg', label: 'Pre-Algebra' },
                     ].map(d => (
                       <button
+                        type="button"
                         key={d.prefix}
                         onClick={() => {
                           const match = sortedDomains.find(s => s === d.prefix || s.startsWith(d.prefix + '.') || s.startsWith(d.prefix))
                           const target = match ?? sortedDomains.find(s => s.startsWith(d.prefix.slice(0, 4))) ?? d.prefix
                           setSelectedDomain(target)
-                          router.push('/study?domain=' + encodeURIComponent(target))
+                          push('/study?domain=' + encodeURIComponent(target))
                         }}
                         className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
                       >
@@ -1045,7 +1069,7 @@ function StudyContent() {
                       </button>
                     ))}
                   </div>
-                  <p className="font-mono text-[10px] text-mathua-muted mt-3">Study is a library (Lesson = corpus) — browse any lesson, but practice respects the DAG. Each lesson shows 2 in a row to advance before you practice.</p>
+                  <p className="font-mono text-[10px] text-mathua-muted mt-3">Study is a library (Lesson = corpus): browse any lesson, but practice respects the DAG. Each lesson shows 2 in a row to advance before you practice.</p>
                 </div>
               )}
               <DomainOverview
@@ -1055,11 +1079,11 @@ function StudyContent() {
                 allLessons={allLessons}
                 onSelectDomain={(d) => {
                   setSelectedDomain(d)
-                  router.push('/study?domain=' + encodeURIComponent(d))
+                  push('/study?domain=' + encodeURIComponent(d))
                 }}
                 onSelectLesson={(lesson) => {
                   setSelectedLesson(lesson)
-                  router.push('/study?lesson=' + encodeURIComponent(lesson.title))
+                  push('/study?lesson=' + encodeURIComponent(lesson.title))
                 }}
               />
             </>

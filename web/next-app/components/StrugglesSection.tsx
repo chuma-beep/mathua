@@ -113,11 +113,12 @@ export default function StrugglesSection({ weaknesses }: Props) {
         {/* View all toggle */}
         <div className="px-3 pb-3">
           <button
+            type="button"
             onClick={() => setExpanded(v => !v)}
             aria-expanded={expanded}
             className="font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover underline underline-offset-4"
           >
-            {expanded ? 'Hide details' : `View all — ${flat.length} items`}
+            {expanded ? 'Hide details' : `View all (${flat.length} items)`}
           </button>
         </div>
 
@@ -138,6 +139,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
                 return (
                   <div key={domain} className="border-b-[0.5px] border-mathua-border last:border-b-0">
                     <button
+                      type="button"
                       onClick={() => toggleDomain(domain)}
                       aria-expanded={isOpen}
                       className="w-full flex items-center gap-2 px-3 py-2 min-h-[44px] text-left hover:bg-mathua-surface-elevated transition-colors"

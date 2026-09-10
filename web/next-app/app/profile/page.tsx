@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
@@ -30,7 +29,6 @@ interface UserInfo {
 
 export default function ProfilePage() {
   const { theme, mounted } = useTheme()
-  const router = useRouter()
 
   const [user, setUser] = useState<UserInfo | null>(null)
   const [scores, setScores] = useState<Scores | null>(null)
@@ -131,7 +129,7 @@ export default function ProfilePage() {
     }
 
     fetchData()
-  }, [mounted, router])
+  }, [mounted])
 
   const headingFont = "'IBM Plex Serif', serif"
   const monoFont = "'IBM Plex Mono', monospace"
@@ -259,7 +257,7 @@ export default function ProfilePage() {
             {error}
             <div className="mt-4 flex gap-3 justify-center">
               <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
-              <button onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
+              <button type="button" onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
             </div>
           </div>
         </div>
@@ -334,7 +332,7 @@ export default function ProfilePage() {
         {scores.paused_until && (
           <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <p className="font-mono text-xs text-mathua-primary min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
-              ⏸ Paused until {scores.paused_until} — due reviews are hidden
+              ⏸ Paused until {scores.paused_until}: due reviews are hidden
             </p>
             <Link href="/settings" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
               Resume
@@ -373,7 +371,7 @@ export default function ProfilePage() {
             <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
               <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
                 <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">150 XP reached — mastery check recommended</span>
+                <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">150 XP reached: mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
                 <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 150) * 100, 100)}%` }} />

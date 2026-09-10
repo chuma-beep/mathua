@@ -73,7 +73,7 @@ export default function SettingsPage() {
       const savedShare = localStorage.getItem('mathua_share_url')
       if (savedShare) setShareUrl(savedShare)
     } catch { /* private mode — share link just won't persist */ }
-  }, [push])
+  }, [])
 
   const handleCheckedChange = async (checked: boolean) => {
     const next = { ...settings, show_timer: checked }
@@ -327,6 +327,9 @@ export default function SettingsPage() {
     }
   }
 
+  // Single-pass lookup for the connect-button list below.
+  const connectedSet = new Set(identities.map(id => id.provider))
+
   const userEmail = typeof window !== 'undefined' ? getUserInfo()?.email ?? '' : ''
   const userEmailVerified = typeof window !== 'undefined' ? getUserInfo()?.email_verified ?? false : false
 
@@ -335,7 +338,7 @@ export default function SettingsPage() {
       <>
         <Header />
         <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 text-center overflow-x-hidden min-w-0">
-          <p className="font-mono text-xs text-mathua-secondary mb-4">Settings needs an account — your preferences are stored per account.</p>
+          <p className="font-mono text-xs text-mathua-secondary mb-4">Settings needs an account: your preferences are stored per account.</p>
           <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
         </div>
         <BottomTabs />
@@ -363,7 +366,7 @@ export default function SettingsPage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex justify-between items-center mb-4">
-            <button onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+            <button type="button" onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
               ← Back
             </button>
           </span>
@@ -399,6 +402,7 @@ export default function SettingsPage() {
                 <div className="flex flex-wrap gap-2 mt-3">
                   {[30, 60, 90].map(d => (
                     <button
+                      type="button"
                       key={d}
                       onClick={() => handlePause(d)}
                       className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-4 h-9 text-xs font-mono disabled:opacity-40"
@@ -408,6 +412,7 @@ export default function SettingsPage() {
                   ))}
                   {paused && (
                     <button
+                      type="button"
                       onClick={() => handlePause(null)}
                       className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono"
                     >
@@ -459,8 +464,9 @@ export default function SettingsPage() {
                 </div>
                 {userEmail !== '' && !userEmailVerified && (
                   <div className="mt-2 flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[11px] text-mathua-muted">Email unverified — logins won’t merge until you verify.</span>
+                    <span className="font-mono text-[11px] text-mathua-muted">Email unverified: logins won’t merge until you verify.</span>
                     <button
+                      type="button"
                       onClick={handleVerifyEmail}
                       disabled={verifyBusy}
                       className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none px-3 h-8 text-[11px] font-mono disabled:opacity-50"
@@ -495,6 +501,7 @@ export default function SettingsPage() {
                     const selected = !settings.avatar_custom && shown?.style === style
                     return (
                       <button
+                        type="button"
                         key={style}
                         onClick={() => handlePickStyle(style)}
                         title={style}
@@ -509,6 +516,7 @@ export default function SettingsPage() {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-3">
                   <button
+                    type="button"
                     onClick={handleSurprise}
                     className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono inline-flex items-center gap-2"
                   >
@@ -516,6 +524,7 @@ export default function SettingsPage() {
                     Surprise me
                   </button>
                   <button
+                    type="button"
                     onClick={handleSaveImage}
                     disabled={!pendingDiffers || imageBusy}
                     className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
@@ -536,6 +545,7 @@ export default function SettingsPage() {
                   </label>
                   {settings.avatar_custom && (
                     <button
+                      type="button"
                       onClick={handleRemovePhoto}
                       disabled={photoBusy}
                       className="border border-mathua-border text-mathua-secondary hover:border-mathua-red hover:text-mathua-red rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
@@ -577,6 +587,7 @@ export default function SettingsPage() {
                   />
                 </div>
                 <button
+                  type="button"
                   onClick={handleChangePassword}
                   disabled={cpBusy}
                   className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
@@ -589,7 +600,7 @@ export default function SettingsPage() {
               <div className="border-t border-mathua-border pt-6 min-w-0">
                 <span className="font-mono text-sm text-mathua-primary">Connected accounts</span>
                 <p className="text-mathua-muted text-xs mt-1">
-                  Sign in with any of these — verified emails merge into this account, never a new one.
+                  Sign in with any of these: verified emails merge into this account, never a new one.
                 </p>
                 <div className="mt-3 space-y-2">
                   {identities.map(id => (
@@ -599,6 +610,7 @@ export default function SettingsPage() {
                         {id.email && <span className="text-mathua-muted"> · {id.email}</span>}
                       </span>
                       <button
+                        type="button"
                         onClick={() => handleDisconnect(id.provider)}
                         disabled={idBusy}
                         className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-red disabled:opacity-50"
@@ -607,8 +619,9 @@ export default function SettingsPage() {
                       </button>
                     </div>
                   ))}
-                  {providers.filter(p => !identities.some(id => id.provider === p)).map(p => (
+                  {providers.flatMap(p => connectedSet.has(p) ? [] : [
                     <button
+                      type="button"
                       key={p}
                       onClick={() => handleConnect(p)}
                       disabled={idBusy}
@@ -616,7 +629,7 @@ export default function SettingsPage() {
                     >
                       Connect {OAUTH_LABELS[p]}
                     </button>
-                  ))}
+                  ])}
                   {providers.length === 0 && (
                     <p className="font-mono text-[11px] text-mathua-muted">No external login services configured on this server.</p>
                   )}
@@ -634,11 +647,13 @@ export default function SettingsPage() {
                     <input
                       readOnly
                       value={shareUrl}
+                      aria-label="Share link"
                       onFocus={e => e.currentTarget.select()}
                       className="w-full bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-xs text-mathua-primary focus:outline-none focus:border-mathua-blue min-w-0"
                     />
                     <div className="flex gap-2 mt-2">
                       <button
+                        type="button"
                         onClick={() => {
                           const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000) }
                           if (navigator.clipboard?.writeText) {
@@ -650,6 +665,7 @@ export default function SettingsPage() {
                         {copied ? 'Copied!' : 'Copy link'}
                       </button>
                       <button
+                        type="button"
                         onClick={() => handleShare(false)}
                         disabled={shareBusy}
                         className="border border-mathua-red text-mathua-red hover:bg-mathua-red hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
@@ -660,6 +676,7 @@ export default function SettingsPage() {
                   </div>
                 ) : (
                   <button
+                    type="button"
                     onClick={() => handleShare(true)}
                     disabled={shareBusy}
                     className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
