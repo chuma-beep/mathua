@@ -77,7 +77,7 @@ Five core tables: `students`, `concept_progress`, `sessions`, `attempts`, `quest
 | `xp_total` | INTEGER | Lifetime XP (`MAX(0, xp_total+?)` floor `sqlite.go:199`) |
 | `xp_today` | INTEGER | Resets via `xp_date` check (`MAX(0, …)`) |
 | `xp_date` | TEXT | Date of `xp_today` bucket (`YYYY-MM-DD`) |
-| `daily_xp_goal` | INTEGER | Daily goal (default 30, `migrate.go:76` drift fix) |
+| `daily_xp_goal` | INTEGER | Daily goal (default 30, migrated from legacy 150 via versioned backfill `sqlite.go`) |
 | `settings` | TEXT (JSON) | Arbitrary key-value settings (`pause_until`, `accommodations.extra_time`) |
 | `diagnostic_completed` | INTEGER | Boolean flag |
 | `share_token` | TEXT | `s_` + 12 random bytes (`engine.go:1270`) |
