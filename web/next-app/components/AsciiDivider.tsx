@@ -3,12 +3,6 @@ interface AsciiDividerProps {
   className?: string
 }
 
-const patterns: Record<string, string> = {
-  double: '══════════════════════════════════════════════════════════',
-  dash: '─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─',
-  wave: '╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌',
-}
-
-export default function AsciiDivider({ pattern = 'double', className = '' }: AsciiDividerProps) {
+export default function AsciiDivider(_props: AsciiDividerProps) {
   return null
 }

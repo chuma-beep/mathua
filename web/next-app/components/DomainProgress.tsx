@@ -11,7 +11,7 @@ const DOMAIN_ORDER = [
   'abstract_algebra', 'topology',
 ]
 
-const DOMAIN_LABELS: Record<string, string> = {
+const DOMAIN_LABELS = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -27,7 +27,7 @@ const DOMAIN_LABELS: Record<string, string> = {
   differential_equations: 'Differential Equations',
   abstract_algebra: 'Abstract Algebra',
   topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 interface Props {
   progress: Record<string, { status: string }>
@@ -45,12 +45,11 @@ export default function DomainProgress({ progress }: Props) {
       byDomain.set(c.domain, entry)
     }
 
-    return DOMAIN_ORDER
-      .filter((d) => byDomain.has(d))
-      .map((d) => {
-        const e = byDomain.get(d)!
-        return { domain: d, label: DOMAIN_LABELS[d] ?? d, ...e }
-      })
+    return DOMAIN_ORDER.flatMap((d) => {
+      const e = byDomain.get(d)
+      if (!e) return []
+      return [{ domain: d, label: DOMAIN_LABELS[d] ?? d, ...e }]
+    })
   }, [progress])
 
   if (domains.length === 0) return null

@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { setToken, clearToken, getToken, authedFetch, getGuestToken, ensureGuestToken, getAuthHeaders } from '../lib/auth'
 import { validateToken, login } from '../lib/api'
 
-function mockFetchOnce(res: Partial<Response> & { json?: () => Promise<unknown> }) {
+function mockFetchOnce(res: Partial<Response> & { json?: () => Promise<object> }) {
   const fn = vi.fn().mockResolvedValue({
     ok: true,
     status: 200,
@@ -135,7 +135,7 @@ describe('login persistence', () => {
   it('authedFetch aborts after timeoutMs', async () => {
     clearToken()
     localStorage.removeItem('mathua_guest_token')
-    vi.stubGlobal('fetch', vi.fn((_url: unknown, init?: RequestInit) => new Promise((_res, rej) => {
+    vi.stubGlobal('fetch', vi.fn((_url: RequestInfo | URL, init?: RequestInit) => new Promise((_res, rej) => {
       init?.signal?.addEventListener('abort', () => rej(new DOMException('aborted', 'AbortError')))
     })))
     await expect(authedFetch('https://x/api/slow', { timeoutMs: 30 })).rejects.toThrow()

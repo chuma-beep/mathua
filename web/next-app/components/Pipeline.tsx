@@ -8,10 +8,10 @@ interface PipelineProps {
   className?: string
 }
 
-const statusStyle: Record<string, React.CSSProperties> = {
+const statusStyle = {
   mastered: { color: 'var(--accent-blue)' },
   decaying: { color: 'var(--accent-teal)' },
-}
+} satisfies Record<string, React.CSSProperties>
 
 export default function Pipeline({ states, className = '' }: PipelineProps) {
   return (

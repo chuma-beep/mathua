@@ -8,7 +8,7 @@ interface Props {
   weaknesses: WeaknessRes | null
 }
 
-const DOMAIN_LABELS: Record<string, string> = {
+const DOMAIN_LABELS = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -27,9 +27,9 @@ const DOMAIN_LABELS: Record<string, string> = {
   machine_learning: 'Machine Learning',
   machinelearning: 'Machine Learning',
   precalculus: 'Precalculus',
-}
+} satisfies Record<string, string>
 
-function tierFor(w: number): { label: string; color: string } {
+function tierFor(w: number) {
   if (w >= 0.6) return { label: 'Struggling', color: '#ef4444' }
   return { label: 'Needs practice', color: '#f59e0b' }
 }

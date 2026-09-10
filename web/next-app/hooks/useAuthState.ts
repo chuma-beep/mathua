@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { isLoggedIn, getUserInfo, type UserInfo } from '../lib/auth'
 
-export function useAuthState(): { loggedIn: boolean; user: UserInfo | null } {
+export function useAuthState() {
   const [loggedIn, setLoggedIn] = useState(() => typeof window !== 'undefined' && isLoggedIn())
   const [user, setUser] = useState<UserInfo | null>(() => (typeof window !== 'undefined' ? getUserInfo() : null))
 

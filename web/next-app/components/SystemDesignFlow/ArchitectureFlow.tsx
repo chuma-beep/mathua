@@ -10,7 +10,6 @@ import {
   useNodesState,
   useEdgesState,
   type Node,
-  type Edge,
 } from '@xyflow/react'
 import '@xyflow/react/dist/base.css'
 import { useTheme } from '../../hooks/useTheme'
@@ -18,7 +17,7 @@ import { themeColors } from '../FlowDiagram'
 
 const monoFont = "'IBM Plex Mono', monospace"
 
-const detailInfo: Record<string, string> = {
+const detailInfo = {
   'web-app': 'Next.js 14 static export with React + KaTeX. Served directly by the Go binary. Dark/light theme via CSS custom properties.',
   'api-router': 'net/http standard library. 25+ REST endpoints. Middleware stack: CORS, logging, JWT auth, rate limiting.',
   'auth': 'JWT-based (HS256, 30-day expiry). bcrypt password hashing. Rate-limited by token bucket (5/min).',
@@ -35,7 +34,7 @@ const detailInfo: Record<string, string> = {
   'multiple-choice': 'Case-insensitive. Single-letter matching (B matches Option B).',
   'sqlite': 'Local/dev. WAL mode, foreign_keys ON, busy_timeout 5000. File-based, zero config.',
   'postgresql': 'Production web. Shared state, concurrent connections. Via Repository interface.',
-}
+} satisfies Record<string, string>
 
 function LayerNode({ data }: { data: { label: string } }) {
   const { theme } = useTheme()

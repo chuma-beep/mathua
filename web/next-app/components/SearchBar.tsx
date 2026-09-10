@@ -108,7 +108,7 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
                   {r.item.domain} &middot; {r.item.concepts.length} concept{r.item.concepts.length !== 1 ? 's' : ''}
                 </div>
                 <div className="font-mono text-[10px] text-mathua-secondary mt-0.5 line-clamp-1">
-                  {r.item.body.replace(/[#*\[\]()\\$]/g, '').slice(0, 120)}
+                  {r.item.body.replace(/[#*[\]()\\$]/g, '').slice(0, 120)}
                 </div>
               </button>
             ))

@@ -19,8 +19,8 @@ let mockUser: { student_id: string; name: string; username: string } | null = {
   name: 'Ada',
   username: 'ada',
 }
-const setUserInfoMock = vi.fn((info: unknown) => {
-  mockUser = info as typeof mockUser
+const setUserInfoMock = vi.fn((info: typeof mockUser) => {
+  mockUser = info
 })
 
 vi.mock('next/navigation', () => ({
@@ -49,7 +49,7 @@ vi.mock('../lib/api', () => ({
 vi.mock('../lib/auth', () => ({
   isLoggedIn: () => true,
   getUserInfo: () => mockUser,
-  setUserInfo: (info: unknown) => setUserInfoMock(info),
+  setUserInfo: (info: typeof mockUser) => setUserInfoMock(info),
 }))
 
 vi.mock('../components/Header', () => ({ default: () => <div data-testid="header-stub" /> }))

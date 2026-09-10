@@ -6,14 +6,14 @@ import type { GoalPlanRes } from '../lib/api'
 import { getLessons } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 
-const DOMAIN_LABELS: Record<string, string> = {
+const DOMAIN_LABELS = {
   arithmetic: 'Arithmetic', fractions: 'Fractions', prealgebra: 'Pre-Algebra',
   algebra: 'Algebra', geometry: 'Geometry', trigonometry: 'Trigonometry',
   complex_numbers: 'Complex Numbers', precalculus: 'Precalculus', calculus: 'Calculus',
   linear_algebra: 'Linear Algebra', statistics: 'Statistics', discrete_math: 'Discrete Math',
   number_theory: 'Number Theory', differential_equations: 'Differential Equations',
   abstract_algebra: 'Abstract Algebra', topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 interface Props {
   plan: GoalPlanRes

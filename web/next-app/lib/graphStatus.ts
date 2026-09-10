@@ -9,16 +9,16 @@ export interface ProgressInput {
   status?: string
 }
 
-const KNOWN_PROGRESS: Record<string, Exclude<MasteryStatus, 'unseen' | 'locked'>> = {
+const KNOWN_PROGRESS = {
   MASTERED: 'mastered',
   PRACTICING: 'practicing',
   LEARNING: 'learning',
-}
+} satisfies Record<string, Exclude<MasteryStatus, 'unseen' | 'locked'>>
 
 export function deriveStatuses(
   concepts: GraphConceptInput[],
   progress: Record<string, ProgressInput> = {}
-): Record<string, MasteryStatus> {
+) {
   const knownIds = new Set(concepts.map(c => c.id))
   const mastered = new Set<string>()
   const started = new Map<string, MasteryStatus>()

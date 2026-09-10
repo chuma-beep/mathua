@@ -27,10 +27,8 @@ export function isLoggedIn(): boolean {
 
 export function getAuthHeaders(): Record<string, string> {
   const token = getToken() || getGuestToken()
-  if (token) {
-    return { Authorization: `Bearer ${token}` }
-  }
-  return {}
+  const headers = token ? { Authorization: `Bearer ${token}` } : {}
+  return headers
 }
 
 // authedFetch is the single choke point for API calls: it attaches the
@@ -108,12 +106,16 @@ export function setUserInfo(info: UserInfo) {
   window.dispatchEvent(new Event('auth-changed'))
 }
 
+interface GoogleAccountsWindow {
+  google?: { accounts?: { id?: { disableAutoSelect?: () => void } } }
+}
+
 export function signOut() {
   localStorage.removeItem(TOKEN_KEY)
   localStorage.removeItem(USER_KEY)
   // preserve guest progress
   try {
-    const g = (window as unknown as { google?: { accounts?: { id?: { disableAutoSelect?: () => void } } } }).google
+    const g = (window as GoogleAccountsWindow).google
     g?.accounts?.id?.disableAutoSelect?.()
   } catch { /* ignore */ }
   window.dispatchEvent(new Event('auth-changed'))

@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 
-const diagramMap: Record<string, { light: string; dark: string }> = {
+const diagramMap = {
   architecture: {
     light: '/diagrams/architecture-light.svg',
     dark: '/diagrams/architecture-dark.svg',
@@ -43,7 +43,7 @@ const diagramMap: Record<string, { light: string; dark: string }> = {
     light: '/diagrams/system-design-cat-diagnostic-light.svg',
     dark: '/diagrams/system-design-cat-diagnostic-dark.svg',
   },
-}
+} satisfies Record<string, { light: string; dark: string }>
 
 interface D2DiagramProps {
   name: keyof typeof diagramMap

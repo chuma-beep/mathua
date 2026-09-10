@@ -85,11 +85,11 @@ function ConceptContent() {
   }
 
   const masteryPct = detail.progress?.mastery_pct ?? 0
-  const statusColors: Record<string, string> = {
+  const statusColors = {
     MASTERED: 'text-green-400',
     PRACTICING: 'text-yellow-400',
     LEARNING: 'text-yellow-600',
-  }
+  } satisfies Record<string, string>
   const statusColor = statusColors[detail.progress?.status ?? ''] || 'text-mathua-muted'
   const toc = extractToc(detail.lesson?.body || '')
 

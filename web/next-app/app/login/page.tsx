@@ -38,6 +38,33 @@ type LoginAction =
   | { type: 'SET_ATTEMPTED'; attempted: boolean }
   | { type: 'SET_FIELD_ERRORS'; fieldErrors: LoginState['fieldErrors'] }
 
+interface GoogleIdConfiguration {
+  client_id: string
+  callback: (resp: { credential?: string }) => void
+  auto_select: boolean
+  cancel_on_tap_outside: boolean
+}
+
+interface GoogleButtonConfiguration {
+  theme: string
+  size: string
+  width: number
+  text: string
+  shape: string
+}
+
+interface GoogleWindow {
+  google?: {
+    accounts: {
+      id: {
+        initialize: (config: GoogleIdConfiguration) => void
+        renderButton: (element: HTMLElement, config: GoogleButtonConfiguration) => void
+        prompt: () => void
+      }
+    }
+  }
+}
+
 const initialState: LoginState = {
   tab: 'login',
   name: '',
@@ -219,12 +246,12 @@ function LoginInner() {
       if (Array.isArray(cfg.providers)) {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p in OAUTH_LABELS))
       }
-      const cid = (cfg as unknown as { google_client_id?: string }).google_client_id
+      const cid = cfg.google_client_id
       if (!cid || cancelled) return
       const src = 'https://accounts.google.com/gsi/client'
       const existing = document.querySelector(`script[src="${src}"]`) as HTMLScriptElement | null
       const init = () => {
-        const g = (window as unknown as { google?: { accounts: { id: { initialize: (o: unknown) => void; renderButton: (a: HTMLElement, b: unknown) => void; prompt: () => void } } } }).google
+        const g = (window as GoogleWindow).google
         if (!g) return
         try {
           g.accounts.id.initialize({

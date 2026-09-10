@@ -11,7 +11,6 @@ import {
   useNodesState,
   useEdgesState,
   type Node,
-  type Edge,
 } from '@xyflow/react'
 import '@xyflow/react/dist/base.css'
 import { useTheme } from '../hooks/useTheme'

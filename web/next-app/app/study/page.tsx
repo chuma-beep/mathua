@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'react'
+import { useState, useEffect, useMemo, useRef, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -53,7 +53,7 @@ const domainOrder = [
   'trig.adv', 'trig.basics', 'trig.eq', 'trig.graph', 'trig.graph_cos', 'trig.graph_sin', 'trig.hyperbolic', 'trig.ident', 'trig.ineq', 'trig.inverse', 'trig.law_cosines', 'trig.law_sines', 'trig.period', 'trig.pythagorean_id', 'trig.radians', 'trig.reciprocal', 'trig.reference_angle', 'trig.sin_cos_def', 'trig.special_angles', 'trig.tan_def', 'trig.unit_circle',
 ]
 
-const domainLabels: Record<string, string> = {
+const domainLabels = {
   'arith': 'Arithmetic',
   'fractions': 'Fractions',
   'prealgebra': 'Pre-Algebra',
@@ -235,9 +235,9 @@ const domainLabels: Record<string, string> = {
   'trig.special_angles': 'Trigonometry · Special Angles',
   'trig.tan_def': 'Trigonometry · Tangent Definition',
   'trig.unit_circle': 'Trigonometry · Unit Circle',
-}
+} satisfies Record<string, string>
 
-const domainIcons: Record<string, string> = {
+const domainIcons = {
   arith: '+',
   fractions: '½',
   frac: '½',
@@ -261,7 +261,7 @@ const domainIcons: Record<string, string> = {
   stat: 'Σ',
   topo: '○',
   ml: '✦',
-}
+} satisfies Record<string, string>
 
 function domainIcon(domain: string): string {
   const parts = domain.split('.')
@@ -272,7 +272,7 @@ function domainIcon(domain: string): string {
   return '◇'
 }
 
-function lessonProgress(lesson: LessonInfo): { mastered: number; total: number } {
+function lessonProgress(lesson: LessonInfo) {
   if (!lesson.progress) return { mastered: 0, total: lesson.concepts.length }
   let mastered = 0
   for (const cid of lesson.concepts) {

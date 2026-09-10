@@ -42,7 +42,7 @@ interface DomainInfo {
   selected: boolean
 }
 
-const domainLabels: Record<string, string> = {
+const domainLabels = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -59,7 +59,7 @@ const domainLabels: Record<string, string> = {
   differential_equations: 'Differential Equations',
   abstract_algebra: 'Abstract Algebra',
   topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 function GoalsContent() {
   const GOALS_DIAG_KEY = 'mathua_diag_session_goals'
@@ -112,7 +112,7 @@ function GoalsContent() {
   const [quizAnswerInput, setQuizAnswerInput] = useState('')
   const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; xp?: number } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
-  const [quizDone, setQuizDone] = useState(false)
+  const [, setQuizDone] = useState(false)
 
   // Load scores and domains on mount — auto-start quiz if ?quiz=1
   useEffect(() => {

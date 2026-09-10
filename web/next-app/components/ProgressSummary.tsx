@@ -5,7 +5,7 @@ interface ProgressSummaryProps {
   weakByDomain?: Record<string, { id: string; label: string }[]>
 }
 
-const domainLabels: Record<string, string> = {
+const domainLabels = {
   arithmetic: 'Arithmetic',
   fractions: 'Fractions',
   prealgebra: 'Pre-Algebra',
@@ -22,7 +22,7 @@ const domainLabels: Record<string, string> = {
   differential_equations: 'Differential Equations',
   abstract_algebra: 'Abstract Algebra',
   topology: 'Topology',
-}
+} satisfies Record<string, string>
 
 export default function ProgressSummary({ scores, weakByDomain }: ProgressSummaryProps) {
   const stats = [

@@ -161,7 +161,6 @@ const archEdges: ArchEdge[] = [
 const ITEM_W = 110
 const ITEM_H = 44
 const LAYER_PAD = 8
-const LAYER_GAP_X = 8
 const LAYER_GAP_Y = 16
 const ITEM_GAP_X = 8
 const ITEM_GAP_Y = 8
