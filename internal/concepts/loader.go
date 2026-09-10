@@ -1,3 +1,4 @@
+// aislop-ignore-file ai-slop/hardcoded-id -- enrichment struct fields describe content metadata, not deployment identifiers
 package concepts
 
 import (
@@ -56,14 +57,14 @@ func LoadDir(dir string) (*DAG, error) {
 
 // enrichmentEntry mirrors the loose schema in data/concepts/enrichment.json.
 type enrichmentEntry struct {
-	ID               string    `json:"id"`
-	Heuristic        string    `json:"heuristic"`
-	Note             string    `json:"note"`
-	Encompasses      []string  `json:"encompasses"`
-	KeyPrerequisites []string  `json:"key_prerequisites"`
-	InterferenceGroup string   `json:"interference_group"`
-	Members          []string  `json:"members"`
-	Variants         []Variant `json:"variants"`
+	ID                string    `json:"id"`
+	Heuristic         string    `json:"heuristic"`
+	Note              string    `json:"note"`
+	Encompasses       []string  `json:"encompasses"`
+	KeyPrerequisites  []string  `json:"key_prerequisites"`
+	InterferenceGroup string    `json:"interference_group"`
+	Members           []string  `json:"members"`
+	Variants          []Variant `json:"variants"`
 }
 
 func mergeEnrichment(dir string, raw []Concept) error {

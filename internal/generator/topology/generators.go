@@ -623,112 +623,151 @@ func (g *orientabilityGen) Generate(ctx generator.GeneratorContext) generator.Pr
 }
 
 type embeddingGen struct{}
+
 func (g *embeddingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Does Whitney embedding embed n-manifold in R^{2n}? (yes/no)","yes","Whitney."},{"Is embedding injective immersion homeomorphic onto image? (yes/no)","yes","Embedding."},{"Does Urysohn embedding use countable product of [0,1]? (yes/no)","yes","Metrization proof."}}
-	hard:=[]entry{{"Does Nash embed Riemannian manifold isometrically in R^n? (yes/no)","yes","Nash embedding."},{"Is Alexander horned sphere embedding wild? (yes/no)","yes","Wild embedding."},{"Does Schoenflies generalize Jordan curve? (yes/no)","yes","Sphere."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Does Whitney embedding embed n-manifold in R^{2n}? (yes/no)", "yes", "Whitney."}, {"Is embedding injective immersion homeomorphic onto image? (yes/no)", "yes", "Embedding."}, {"Does Urysohn embedding use countable product of [0,1]? (yes/no)", "yes", "Metrization proof."}}
+	hard := []entry{{"Does Nash embed Riemannian manifold isometrically in R^n? (yes/no)", "yes", "Nash embedding."}, {"Is Alexander horned sphere embedding wild? (yes/no)", "yes", "Wild embedding."}, {"Does Schoenflies generalize Jordan curve? (yes/no)", "yes", "Sphere."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type knotGen struct{}
+
 func (g *knotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is unknot trivial? (yes/no)","yes","Unknotted circle."},{"Does trefoil have crossing number 3? (yes/no)","yes","Simplest nontrivial."},{"Is knot complement fundamental group knot invariant? (yes/no)","yes","Knot group."}}
-	hard:=[]entry{{"Is Jones polynomial knot invariant? (yes/no)","yes","Jones."},{"Does Gordon-Luecke show knot determined by complement? (yes/no)","yes","Knot complement."},{"Is figure-eight knot 4_1? (yes/no)","yes","Four crossings."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is unknot trivial? (yes/no)", "yes", "Unknotted circle."}, {"Does trefoil have crossing number 3? (yes/no)", "yes", "Simplest nontrivial."}, {"Is knot complement fundamental group knot invariant? (yes/no)", "yes", "Knot group."}}
+	hard := []entry{{"Is Jones polynomial knot invariant? (yes/no)", "yes", "Jones."}, {"Does Gordon-Luecke show knot determined by complement? (yes/no)", "yes", "Knot complement."}, {"Is figure-eight knot 4_1? (yes/no)", "yes", "Four crossings."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type cohomologyGen struct{}
+
 func (g *cohomologyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is cohomology dual to homology? (yes/no)","yes","Universal coefficients."},{"Does de Rham cohomology use differential forms? (yes/no)","yes","Smooth manifolds."},{"Is H^0 connected components? (yes/no)","yes","H^0."}}
-	hard:=[]entry{{"Does cohomology ring have cup product? (yes/no)","yes","Ring structure."},{"Is singular cohomology homotopy invariant? (yes/no)","yes","Homotopy."},{"Does Poincaré duality hold for compact orientable manifold? (yes/no)","yes","Duality."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is cohomology dual to homology? (yes/no)", "yes", "Universal coefficients."}, {"Does de Rham cohomology use differential forms? (yes/no)", "yes", "Smooth manifolds."}, {"Is H^0 connected components? (yes/no)", "yes", "H^0."}}
+	hard := []entry{{"Does cohomology ring have cup product? (yes/no)", "yes", "Ring structure."}, {"Is singular cohomology homotopy invariant? (yes/no)", "yes", "Homotopy."}, {"Does Poincaré duality hold for compact orientable manifold? (yes/no)", "yes", "Duality."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type stoneCechGen struct{}
+
 func (g *stoneCechGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is Stone-Čech compactification largest compactification? (yes/no)","yes","Universal."},{"Does βN contain remainder N*? (yes/no)","yes","Growth."},{"Is Tychonoff exactly embeddable in compact Hausdorff? (yes/no)","yes","Characterization."}}
-	hard:=[]entry{{"Is βR not metrizable? (yes/no)","yes","Huge."},{"Does Stone-Čech of discrete is ultrafilters? (yes/no)","yes","βD."},{"Is completely regular iff subspace of compact Hausdorff? (yes/no)","yes","Tychonoff."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is Stone-Čech compactification largest compactification? (yes/no)", "yes", "Universal."}, {"Does βN contain remainder N*? (yes/no)", "yes", "Growth."}, {"Is Tychonoff exactly embeddable in compact Hausdorff? (yes/no)", "yes", "Characterization."}}
+	hard := []entry{{"Is βR not metrizable? (yes/no)", "yes", "Huge."}, {"Does Stone-Čech of discrete is ultrafilters? (yes/no)", "yes", "βD."}, {"Is completely regular iff subspace of compact Hausdorff? (yes/no)", "yes", "Tychonoff."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type dimensionGen struct{}
+
 func (g *dimensionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is covering dimension of R^n equal n? (yes/no)","yes","Lebesgue dimension."},{"Is dimension of Cantor set 0? (yes/no)","yes","Totally disconnected."},{"Does dimension not increase under subspace? (yes/no)","yes","Subspace."}}
-	hard:=[]entry{{"Is inductive dimension equal covering for separable metric? (yes/no)","yes","Coincidence."},{"Does Brouwer show dimension is topological invariant? (yes/no)","yes","Invariance of domain."},{"Is Menger-Nöbeling embed n-dim compact in R^{2n+1}? (yes/no)","yes","Embedding."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is covering dimension of R^n equal n? (yes/no)", "yes", "Lebesgue dimension."}, {"Is dimension of Cantor set 0? (yes/no)", "yes", "Totally disconnected."}, {"Does dimension not increase under subspace? (yes/no)", "yes", "Subspace."}}
+	hard := []entry{{"Is inductive dimension equal covering for separable metric? (yes/no)", "yes", "Coincidence."}, {"Does Brouwer show dimension is topological invariant? (yes/no)", "yes", "Invariance of domain."}, {"Is Menger-Nöbeling embed n-dim compact in R^{2n+1}? (yes/no)", "yes", "Embedding."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type coveringGen struct{}
+
 func (g *coveringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is a covering map a local homeomorphism? (yes/no)","yes","Covering."},{"Does every covering have unique path lifting? (yes/no)","yes","Lifting."},{"Is universal cover simply connected? (yes/no)","yes","Universal."}}
-	hard:=[]entry{{"Does covering correspond to subgroup of π_1? (yes/no)","yes","Classification."},{"Is deck transformation group π_1? (yes/no)","yes","Deck."},{"Does covering of path-connected is path-connected? (yes/no)","yes","Connected."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is a covering map a local homeomorphism? (yes/no)", "yes", "Covering."}, {"Does every covering have unique path lifting? (yes/no)", "yes", "Lifting."}, {"Is universal cover simply connected? (yes/no)", "yes", "Universal."}}
+	hard := []entry{{"Does covering correspond to subgroup of π_1? (yes/no)", "yes", "Classification."}, {"Is deck transformation group π_1? (yes/no)", "yes", "Deck."}, {"Does covering of path-connected is path-connected? (yes/no)", "yes", "Connected."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type vanKampenGen struct{}
+
 func (g *vanKampenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Does Van Kampen compute π_1 of union? (yes/no)","yes","Van Kampen."},{"Is π_1 wedge of circles free group? (yes/no)","yes","Wedge."},{"Does Van Kampen need path-connected intersection? (yes/no)","yes","Intersection."}}
-	hard:=[]entry{{"Is π_1 torus via Van Kampen Z×Z? (yes/no)","yes","Torus."},{"Does Van Kampen give amalgamated product? (yes/no)","yes","Amalgam."},{"Is Seifert-Van Kampen for open cover? (yes/no)","yes","Open."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Does Van Kampen compute π_1 of union? (yes/no)", "yes", "Van Kampen."}, {"Is π_1 wedge of circles free group? (yes/no)", "yes", "Wedge."}, {"Does Van Kampen need path-connected intersection? (yes/no)", "yes", "Intersection."}}
+	hard := []entry{{"Is π_1 torus via Van Kampen Z×Z? (yes/no)", "yes", "Torus."}, {"Does Van Kampen give amalgamated product? (yes/no)", "yes", "Amalgam."}, {"Is Seifert-Van Kampen for open cover? (yes/no)", "yes", "Open."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type fiberBundleGen struct{}
+
 func (g *fiberBundleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Is a covering a fiber bundle with discrete fiber? (yes/no)","yes","Discrete."},{"Is tangent bundle of S^1 trivial? (yes/no)","yes","S^1."},{"Does fiber bundle have local trivialization? (yes/no)","yes","Local."}}
-	hard:=[]entry{{"Is Hopf fibration S^3→S^2 fiber bundle? (yes/no)","yes","Hopf."},{"Does Möbius band fiber bundle over S^1? (yes/no)","yes","Möbius."},{"Is vector bundle fiber is vector space? (yes/no)","yes","Vector."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Is a covering a fiber bundle with discrete fiber? (yes/no)", "yes", "Discrete."}, {"Is tangent bundle of S^1 trivial? (yes/no)", "yes", "S^1."}, {"Does fiber bundle have local trivialization? (yes/no)", "yes", "Local."}}
+	hard := []entry{{"Is Hopf fibration S^3→S^2 fiber bundle? (yes/no)", "yes", "Hopf."}, {"Does Möbius band fiber bundle over S^1? (yes/no)", "yes", "Möbius."}, {"Is vector bundle fiber is vector space? (yes/no)", "yes", "Vector."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type cellularHomologyGen struct{}
+
 func (g *cellularHomologyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Does cellular homology use CW skeleton? (yes/no)","yes","CW."},{"Is cellular chain from cells? (yes/no)","yes","Cells."},{"Does cellular homology compute singular? (yes/no)","yes","Isomorphic."}}
-	hard:=[]entry{{"Is cellular boundary via degree? (yes/no)","yes","Degree."},{"Does CW complex have cellular homology? (yes/no)","yes","CW."},{"Is cellular homology finitely generated for finite CW? (yes/no)","yes","Finite."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Does cellular homology use CW skeleton? (yes/no)", "yes", "CW."}, {"Is cellular chain from cells? (yes/no)", "yes", "Cells."}, {"Does cellular homology compute singular? (yes/no)", "yes", "Isomorphic."}}
+	hard := []entry{{"Is cellular boundary via degree? (yes/no)", "yes", "Degree."}, {"Does CW complex have cellular homology? (yes/no)", "yes", "CW."}, {"Is cellular homology finitely generated for finite CW? (yes/no)", "yes", "Finite."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
+
 type deRhamGen struct{}
+
 func (g *deRhamGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale:=int(1+ctx.Difficulty*4)
-	type entry struct{q,a,e string}
-	easy:=[]entry{{"Does de Rham cohomology use differential forms? (yes/no)","yes","Forms."},{"Is de Rham cohomology homotopy invariant? (yes/no)","yes","Invariant."},{"Does de Rham theorem relate to singular cohomology? (yes/no)","yes","Isomorphism."}}
-	hard:=[]entry{{"Does Poincaré lemma give H^n of R^n? (yes/no)","yes","Poincaré."},{"Is de Rham cohomology ring via wedge product? (yes/no)","yes","Ring."},{"Does de Rham cohomology vanish above dimension? (yes/no)","yes","Dimension."}}
-	pool:=easy
-	if scale>3{pool=append(easy,hard...)}
-	e:=pool[rand.Intn(len(pool))]
-	return generator.Problem{Question:e.q,Answer:e.a,Explanation:e.e}
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct{ q, a, e string }
+	easy := []entry{{"Does de Rham cohomology use differential forms? (yes/no)", "yes", "Forms."}, {"Is de Rham cohomology homotopy invariant? (yes/no)", "yes", "Invariant."}, {"Does de Rham theorem relate to singular cohomology? (yes/no)", "yes", "Isomorphism."}}
+	hard := []entry{{"Does Poincaré lemma give H^n of R^n? (yes/no)", "yes", "Poincaré."}, {"Is de Rham cohomology ring via wedge product? (yes/no)", "yes", "Ring."}, {"Does de Rham cohomology vanish above dimension? (yes/no)", "yes", "Dimension."}}
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }

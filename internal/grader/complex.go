@@ -6,10 +6,10 @@ import (
 )
 
 var (
-	iToIRe     = regexp.MustCompile(`(\d)i\b`)
+	iToIRe      = regexp.MustCompile(`(\d)i\b`)
 	standaloneI = regexp.MustCompile(`\bi\b`)
-	polarRe    = regexp.MustCompile(`(\d+)\(cos\s+(\d+)°?\s*\+\s*i\s*sin\s+(\d+)°?\s*\)`)
-	degreeRe   = regexp.MustCompile(`°`)
+	polarRe     = regexp.MustCompile(`(\d+)\(cos\s+(\d+)°?\s*\+\s*i\s*sin\s+(\d+)°?\s*\)`)
+	degreeRe    = regexp.MustCompile(`°`)
 	plusMinusRe = regexp.MustCompile(`±`)
 )
 

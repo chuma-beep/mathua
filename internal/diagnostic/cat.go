@@ -60,9 +60,9 @@ type Session struct {
 	LastConceptName string
 
 	// Per-concept student model (belief 0-1 + confidence 0-1).
-	beliefs     map[string]float64
-	confidence  map[string]float64
-	probeCounts map[string]int
+	beliefs      map[string]float64
+	confidence   map[string]float64
+	probeCounts  map[string]int
 	correctCount map[string]int
 	totalCount   map[string]int
 	totalAsked   int

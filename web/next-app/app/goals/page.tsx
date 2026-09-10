@@ -2,7 +2,7 @@
 
 import Loading from '../../components/Loading'
 import { useState, useEffect, useRef, Suspense } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
@@ -30,8 +30,7 @@ import {
   type DiagnosticProgress,
 } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
-import { useSearchParams } from 'next/navigation'
-import conceptsData from '../../data/concepts.json'
+import { concepts as conceptsData } from '../../lib/conceptData'
 
 type Step = 'select' | 'diagnostic' | 'results' | 'quiz' | 'quiz_done'
 
@@ -142,7 +141,7 @@ function GoalsContent() {
   }, [mounted, quizParam])
 
   function buildDomains() {
-    const raw = conceptsData as any[]
+    const raw = conceptsData
     const map = new Map<string, string[]>()
     for (const c of raw) {
       const list = map.get(c.domain) || []

@@ -308,7 +308,7 @@ func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		w, r, d := toMixed(rn, rd)
 		if r == 0 {
 			return generator.Problem{
-			Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
+				Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
 				Answer:      strconv.Itoa(w),
 				Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %d", whole, num, den, whole*num, den, w),
 			}
@@ -442,7 +442,9 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Explanation: fmt.Sprintf("(%d/%d) x (%d/%d) = %d/%d = %s", aImp, den, bImp, den, rn, rd, mixStr(w, r, d)),
 	}
 }
+
 type fracSubWordGen struct{}
+
 func (g *fracSubWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	aDen := rand.Intn(max(1, scale*2)) + 3
@@ -468,7 +470,9 @@ func (g *fracSubWordGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Explanation: fmt.Sprintf("%d/%d - %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
 	}
 }
+
 type fracMultWordGen struct{}
+
 func (g *fracMultWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	aNum := rand.Intn(max(1, scale)) + 1
@@ -482,7 +486,9 @@ func (g *fracMultWordGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Explanation: fmt.Sprintf("%d/%d x %d/%d = %d/%d cups", aNum, aDen, bNum, bDen, rn, rd),
 	}
 }
+
 type fracDivWordGen struct{}
+
 func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	aNum := rand.Intn(max(1, scale)) + 1
@@ -496,7 +502,9 @@ func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Explanation: fmt.Sprintf("%d/%d ÷ %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
 	}
 }
+
 type fracMixedWordGen struct{}
+
 func (g *fracMixedWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	w1 := rand.Intn(max(1, scale)) + 1
@@ -521,7 +529,9 @@ func (g *fracMixedWordGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Explanation: fmt.Sprintf("%d %d/%d + %d %d/%d = %d %d/%d", w1, n1, den, w2, n2, den, w, r, d),
 	}
 }
+
 type fracCompareWordGen struct{}
+
 func (g *fracCompareWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	aNum := rand.Intn(max(1, scale*2)) + 1
@@ -532,8 +542,8 @@ func (g *fracCompareWordGen) Generate(ctx generator.GeneratorContext) generator.
 		bNum = rand.Intn(max(1, scale*2)) + 1
 	}
 	// Word comparison: who has more?
-	av2 := float64(aNum)/float64(aDen)
-	bv2 := float64(bNum)/float64(bDen)
+	av2 := float64(aNum) / float64(aDen)
+	bv2 := float64(bNum) / float64(bDen)
 	ans := "first"
 	if bv2 > av2 {
 		ans = "second"

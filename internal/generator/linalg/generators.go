@@ -594,12 +594,12 @@ func (g *diagonalizationGen) Generate(ctx generator.GeneratorContext) generator.
 	// Diagonalizable matrices (real distinct eigenvalues)
 	type entry struct {
 		a, b, c, d int
-		l1, l2 int
+		l1, l2     int
 	}
 	entries := []entry{
-		{2, 0, 0, 3, 2, 3},    // diagonal already
-		{3, 1, 0, 2, 3, 2},    // triangular
-		{1, 2, 2, 1, 3, -1},   // need eigenvectors
+		{2, 0, 0, 3, 2, 3},  // diagonal already
+		{3, 1, 0, 2, 3, 2},  // triangular
+		{1, 2, 2, 1, 3, -1}, // need eigenvectors
 		{5, 0, 0, 4, 5, 4},
 		{2, 1, 0, 1, 2, 1},
 		{3, 0, 0, 5, 3, 5},
@@ -657,7 +657,7 @@ type rankGen struct{}
 func (g *rankGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		matrix [][]int
-		rank int
+		rank   int
 	}
 	entries := []entry{
 		{[][]int{{1, 0}, {0, 1}}, 2},
@@ -685,7 +685,7 @@ type cosineSimilarityGen struct{}
 func (g *cosineSimilarityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
 		u, v [2]int
-		cos int
+		cos  int
 	}
 	entries := []entry{
 		{[2]int{1, 0}, [2]int{1, 0}, 1},

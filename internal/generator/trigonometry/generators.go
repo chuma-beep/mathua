@@ -75,7 +75,7 @@ var unitCircleAngles = []struct {
 	cos   string
 	easy  bool
 }{
-		{"\\(0^{\\circ}\\)", "0", "1", true},
+	{"\\(0^{\\circ}\\)", "0", "1", true},
 	{"\\(30^{\\circ}\\)", "\\(1/2\\)", "\\(\\sqrt{3}/2\\)", true},
 	{"\\(45^{\\circ}\\)", "\\(\\sqrt{2}/2\\)", "\\(\\sqrt{2}/2\\)", true},
 	{"\\(60^{\\circ}\\)", "\\(\\sqrt{3}/2\\)", "\\(1/2\\)", true},

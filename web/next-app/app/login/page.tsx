@@ -153,9 +153,11 @@ function validateFields(
     }
   }
   if (!values.password) {
+    // aislop-ignore-next-line security/hardcoded-secret -- validation message string, not a credential
     errors.password = 'Password is required'
   } else if (tab === 'signup') {
     const issues = passwordIssues(values.password)
+    // aislop-ignore-next-line security/hardcoded-secret -- validation message string, not a credential
     if (issues.length > 0) errors.password = 'Password needs ' + issues.join(', ')
   }
   return errors

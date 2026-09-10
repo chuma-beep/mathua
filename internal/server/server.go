@@ -2151,12 +2151,12 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 		name = c.Label
 	}
 	writeJSON(w, map[string]interface{}{
-		"session_id":         sess.ID,
-		"student_id":         studentID,
-		"concept_id":         cid,
-		"concept_name":       name,
-		"question":           prob.Question,
-		"done":               false,
+		"session_id":   sess.ID,
+		"student_id":   studentID,
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     prob.Question,
+		"done":         false,
 		// Batch 1: timed closed-book contract — per-question limit
 		// (accommodated), total count, no-lesson closed book.
 		"closed_book":        true,

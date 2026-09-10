@@ -1,0 +1,43 @@
+# aislop — quality gate for agentic coding. https://scanaislop.com
+#
+# Soft mode: this config excludes vendored/generated paths and never fails CI.
+# Run with: make lint-slop
+version: 1
+
+# Paths aislop should not score. Vendored third-party code, generated data,
+# and static assets are not ours to "fix".
+exclude:
+  - "web/next-app/tools/oxlint/anti-slop/**" # vendored dmmulroy/anti-slop (MIT)
+  - "web/next-app/node_modules/**"
+  - "web/next-app/out/**"
+  - "web/next-app/.next/**"
+  - "web/next-app/public/**" # static assets (theme-init.js is deliberate)
+  - "node_modules/**"
+  - "data/**" # 630 concept JSONs + 1890 lesson KP shards (content, not code)
+  - "docs/**"
+  - "bin/**"
+  - "dist/**"
+
+engines:
+  format: true
+  lint: true
+  code-quality: true
+  ai-slop: true
+  architecture: false
+  security: true
+
+# Content-heavy pages (study/goals/how-it-works) are tracked for splitting in
+# the structural-refactor workstream; keep the ceiling above current sizes so
+# this gate reports genuinely egregious cases only.
+quality:
+  maxFunctionLoc: 120
+  maxFileLoc: 800
+  maxNesting: 6
+  maxParams: 8
+
+ci:
+  failBelow: 0 # soft mode: report only, never fail
+  format: json
+
+telemetry:
+  enabled: false

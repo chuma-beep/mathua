@@ -150,7 +150,7 @@ func (g *truthTablesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	if rand.Intn(2) == 0 {
 		rows := 1 << vars
 		return generator.Problem{
-			Question:    			fmt.Sprintf("How many rows are in a truth table for \\(%s\\)?", e.description),
+			Question:    fmt.Sprintf("How many rows are in a truth table for \\(%s\\)?", e.description),
 			Answer:      fmt.Sprintf("%d", rows),
 			Explanation: fmt.Sprintf("With %d variable(s), there are 2^%d = %d rows.", vars, vars, rows),
 		}
@@ -908,8 +908,8 @@ type binomialTheoremGen struct{}
 
 func (g *binomialTheoremGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct {
-		n, k   int
-		coeff  int
+		n, k  int
+		coeff int
 	}
 	entries := []entry{
 		{4, 2, 6},

@@ -86,7 +86,7 @@ func TestSympyGrade_ExpressionAndPolynomialBothRoute(t *testing.T) {
 	}
 	r := NewRouter()
 	tests := []struct {
-		gt           GradingType
+		gt               GradingType
 		expected, answer string
 	}{
 		{GradingExpression, "x^2+2x+1", "(x+1)^2"},

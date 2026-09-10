@@ -9,9 +9,9 @@ import (
 
 // DiagnosticReport is the adaptive-exam summary (improve.md:126).
 type DiagnosticReport struct {
-	PlacementCourseID string              `json:"placement_course_id"`
-	FrontierIdx       int                 `json:"frontier_idx"`
-	FrontierLabel     string              `json:"frontier_label"`
+	PlacementCourseID string `json:"placement_course_id"`
+	FrontierIdx       int    `json:"frontier_idx"`
+	FrontierLabel     string `json:"frontier_label"`
 	// FrontierConditional marks a provisional frontier: the frontier concept
 	// was barely passed (MA "conditionally completed") — tasks assume it
 	// known but must fall back along its prerequisites on struggle.
@@ -24,8 +24,8 @@ type DiagnosticReport struct {
 	MasteryLevels          map[string]float64 `json:"mastery_levels"`
 	Confidence             map[string]float64 `json:"confidence"`
 	AvgConfidence          float64            `json:"avg_confidence"`
-	CompletionEstimates map[int]string    `json:"completion_estimates"`
-	TotalQuestions    int                 `json:"total_questions"`
+	CompletionEstimates    map[int]string     `json:"completion_estimates"`
+	TotalQuestions         int                `json:"total_questions"`
 }
 
 // Report builds the done-branch summary for a session.

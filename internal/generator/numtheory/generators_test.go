@@ -18,14 +18,14 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestDivisibilityGen(t *testing.T)  { fuzzGen(t, &divisibilityGen{}) }
-func TestGcdEuclideanGen(t *testing.T)  { fuzzGen(t, &gcdEuclideanGen{}) }
-func TestModularGen(t *testing.T)       { fuzzGen(t, &modularGen{}) }
-func TestCongruenceGen(t *testing.T)    { fuzzGen(t, &congruenceGen{}) }
-func TestFermatLittleGen(t *testing.T)  { fuzzGen(t, &fermatLittleGen{}) }
-func TestEulerPhiGen(t *testing.T)      { fuzzGen(t, &eulerPhiGen{}) }
-func TestDiophantineGen(t *testing.T)   { fuzzGen(t, &diophantineGen{}) }
-func TestCryptoGen(t *testing.T)        { fuzzGen(t, &cryptoGen{}) }
+func TestDivisibilityGen(t *testing.T) { fuzzGen(t, &divisibilityGen{}) }
+func TestGcdEuclideanGen(t *testing.T) { fuzzGen(t, &gcdEuclideanGen{}) }
+func TestModularGen(t *testing.T)      { fuzzGen(t, &modularGen{}) }
+func TestCongruenceGen(t *testing.T)   { fuzzGen(t, &congruenceGen{}) }
+func TestFermatLittleGen(t *testing.T) { fuzzGen(t, &fermatLittleGen{}) }
+func TestEulerPhiGen(t *testing.T)     { fuzzGen(t, &eulerPhiGen{}) }
+func TestDiophantineGen(t *testing.T)  { fuzzGen(t, &diophantineGen{}) }
+func TestCryptoGen(t *testing.T)       { fuzzGen(t, &cryptoGen{}) }
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()
@@ -43,4 +43,3 @@ func TestFuzz(t *testing.T) {
 		})
 	}
 }
-

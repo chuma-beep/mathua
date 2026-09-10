@@ -18,20 +18,20 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestPropositionsGen(t *testing.T)   { fuzzGen(t, &propositionsGen{}) }
-func TestConnectivesGen(t *testing.T)    { fuzzGen(t, &connectivesGen{}) }
-func TestTruthTablesGen(t *testing.T)    { fuzzGen(t, &truthTablesGen{}) }
-func TestQuantifiersGen(t *testing.T)    { fuzzGen(t, &quantifiersGen{}) }
-func TestSetOpsGen(t *testing.T)         { fuzzGen(t, &setOpsGen{}) }
-func TestVennGen(t *testing.T)           { fuzzGen(t, &vennGen{}) }
-func TestPermutationsGen(t *testing.T)   { fuzzGen(t, &permutationsGen{}) }
-func TestCombinationsGen(t *testing.T)   { fuzzGen(t, &combinationsGen{}) }
-func TestPascalGen(t *testing.T)         { fuzzGen(t, &pascalGen{}) }
-func TestGraphBasicsGen(t *testing.T)    { fuzzGen(t, &graphBasicsGen{}) }
-func TestGraphPathsGen(t *testing.T)     { fuzzGen(t, &graphPathsGen{}) }
-func TestTreesGen(t *testing.T)          { fuzzGen(t, &treesGen{}) }
-func TestRecurrenceGen(t *testing.T)     { fuzzGen(t, &recurrenceGen{}) }
-func TestInductionGen(t *testing.T)      { fuzzGen(t, &inductionGen{}) }
+func TestPropositionsGen(t *testing.T)    { fuzzGen(t, &propositionsGen{}) }
+func TestConnectivesGen(t *testing.T)     { fuzzGen(t, &connectivesGen{}) }
+func TestTruthTablesGen(t *testing.T)     { fuzzGen(t, &truthTablesGen{}) }
+func TestQuantifiersGen(t *testing.T)     { fuzzGen(t, &quantifiersGen{}) }
+func TestSetOpsGen(t *testing.T)          { fuzzGen(t, &setOpsGen{}) }
+func TestVennGen(t *testing.T)            { fuzzGen(t, &vennGen{}) }
+func TestPermutationsGen(t *testing.T)    { fuzzGen(t, &permutationsGen{}) }
+func TestCombinationsGen(t *testing.T)    { fuzzGen(t, &combinationsGen{}) }
+func TestPascalGen(t *testing.T)          { fuzzGen(t, &pascalGen{}) }
+func TestGraphBasicsGen(t *testing.T)     { fuzzGen(t, &graphBasicsGen{}) }
+func TestGraphPathsGen(t *testing.T)      { fuzzGen(t, &graphPathsGen{}) }
+func TestTreesGen(t *testing.T)           { fuzzGen(t, &treesGen{}) }
+func TestRecurrenceGen(t *testing.T)      { fuzzGen(t, &recurrenceGen{}) }
+func TestInductionGen(t *testing.T)       { fuzzGen(t, &inductionGen{}) }
 func TestBinomialTheoremGen(t *testing.T) { fuzzGen(t, &binomialTheoremGen{}) }
 
 func TestFuzz(t *testing.T) {
@@ -78,4 +78,3 @@ func TestDifficultyScaling(t *testing.T) {
 		}
 	}
 }
-

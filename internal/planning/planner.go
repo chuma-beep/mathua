@@ -148,11 +148,11 @@ func (p *Planner) Readiness(path *Path, progress map[string]*storage.ConceptProg
 
 // CourseProgress is the accreditation-track view of one course.
 type CourseProgress struct {
-	Total       int      `json:"total"`
-	Mastered    int      `json:"mastered"`
-	Pct         float64  `json:"pct"`
-	Remaining   []string `json:"remaining,omitempty"`
-	DaysRemaining int    `json:"days_remaining"` // estimate at daily_xp_goal
+	Total         int      `json:"total"`
+	Mastered      int      `json:"mastered"`
+	Pct           float64  `json:"pct"`
+	Remaining     []string `json:"remaining,omitempty"`
+	DaysRemaining int      `json:"days_remaining"` // estimate at daily_xp_goal
 }
 
 // ProgressForCourse computes mastery over the course's transitive path.

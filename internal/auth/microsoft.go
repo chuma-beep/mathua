@@ -60,10 +60,10 @@ func ExchangeMicrosoftCode(ctx context.Context, code, redirectURI string) (OAuth
 		return OAuthProfile{}, fmt.Errorf("no access_token from microsoft")
 	}
 	var ui struct {
-		Sub            string `json:"sub"`
-		Email          string `json:"email"`
-		Name           string `json:"name"`
-		PreferredName  string `json:"preferred_username"`
+		Sub           string `json:"sub"`
+		Email         string `json:"email"`
+		Name          string `json:"name"`
+		PreferredName string `json:"preferred_username"`
 	}
 	if err := oauthGetJSON(ctx, "https://graph.microsoft.com/oidc/userinfo", tok.AccessToken, &ui); err != nil {
 		return OAuthProfile{}, err

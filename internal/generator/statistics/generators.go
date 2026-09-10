@@ -550,7 +550,7 @@ func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	vals := make([]int, 5)
 	sum := 0
 	for i := range vals {
-		vals[i] = (rand.Intn(max(1, scale))+1)*2
+		vals[i] = (rand.Intn(max(1, scale)) + 1) * 2
 		sum += vals[i]
 	}
 	mean := float64(sum) / float64(len(vals))

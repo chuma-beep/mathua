@@ -18,13 +18,13 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestGroupDefGen(t *testing.T)       { fuzzGen(t, &groupDefGen{}) }
-func TestGroupExamplesGen(t *testing.T)  { fuzzGen(t, &groupExamplesGen{}) }
-func TestSubgroupGen(t *testing.T)       { fuzzGen(t, &subgroupGen{}) }
-func TestRingGen(t *testing.T)           { fuzzGen(t, &ringGen{}) }
-func TestHomomorphismGen(t *testing.T)   { fuzzGen(t, &homomorphismGen{}) }
-func TestFieldGen(t *testing.T)          { fuzzGen(t, &fieldGen{}) }
-func TestModuleGen(t *testing.T)         { fuzzGen(t, &moduleGen{}) }
+func TestGroupDefGen(t *testing.T)      { fuzzGen(t, &groupDefGen{}) }
+func TestGroupExamplesGen(t *testing.T) { fuzzGen(t, &groupExamplesGen{}) }
+func TestSubgroupGen(t *testing.T)      { fuzzGen(t, &subgroupGen{}) }
+func TestRingGen(t *testing.T)          { fuzzGen(t, &ringGen{}) }
+func TestHomomorphismGen(t *testing.T)  { fuzzGen(t, &homomorphismGen{}) }
+func TestFieldGen(t *testing.T)         { fuzzGen(t, &fieldGen{}) }
+func TestModuleGen(t *testing.T)        { fuzzGen(t, &moduleGen{}) }
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()
@@ -70,4 +70,3 @@ func TestDifficultyScaling(t *testing.T) {
 		}
 	}
 }
-

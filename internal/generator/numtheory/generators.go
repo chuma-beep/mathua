@@ -384,7 +384,7 @@ type mobiusGen struct{}
 func (g *mobiusGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct {
-		n int
+		n  int
 		mu int
 	}
 	easy := []entry{

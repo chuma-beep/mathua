@@ -11,7 +11,7 @@ import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import AsciiDivider from '../../components/AsciiDivider'
-import conceptsData from '../../data/concepts.json'
+import { concepts as conceptsData } from '../../lib/conceptData'
 import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
@@ -44,7 +44,7 @@ const ConceptGraphFlow = dynamic(
   }
 )
 
-const fallbackConcepts = (conceptsData as any[]).map((c: any) => ({
+const fallbackConcepts = conceptsData.map((c) => ({
   id: c.id, label: c.label, domain: c.domain, prerequisites: c.prerequisites,
 }))
 
@@ -158,7 +158,7 @@ function GraphContent() {
   // locked/unseen get no bar.
   const conceptProgress = useMemo(() => {
     const thresholds = new Map<string, number>()
-    for (const c of conceptsData as any[]) {
+    for (const c of conceptsData) {
       thresholds.set(c.id, c.mastery_threshold?.streak ?? 10)
     }
     const out: Record<string, number> = {}

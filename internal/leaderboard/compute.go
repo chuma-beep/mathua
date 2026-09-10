@@ -48,9 +48,9 @@ func (c *Computer) Weekly() ([]Entry, error) {
 			AvatarCustom:   custom,
 			AvatarVersion:  version,
 			Mastered:       r.TotalMastered,
-			Level:    levels.Compute(r.TotalMastered),
-			Streak:   0,
-			Score:    score,
+			Level:          levels.Compute(r.TotalMastered),
+			Streak:         0,
+			Score:          score,
 		})
 	}
 	sort.Slice(entries, func(i, j int) bool {
