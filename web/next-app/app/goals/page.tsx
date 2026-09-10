@@ -1,36 +1,23 @@
 'use client'
 
-import Loading from '../../components/Loading'
-import { useState, useEffect, useRef, Suspense } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-import KatexContent from '../../components/KatexContent'
 import { useTheme } from '../../hooks/useTheme'
+import ProgressSummary from '../../components/ProgressSummary'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
-import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
-import SymbolPalette from '../../components/SymbolPalette'
-import ReportButton from '../../components/ReportButton'
 import DiagnosticResults from '../../components/DiagnosticResults'
-import ProgressBar from '../../components/ProgressBar'
-import {
-  startGoalDiagnostic,
-  submitGoalAnswer,
-  getGoalPlan,
-  resumeGoalDiagnostic,
-  getScores,
-  getWeaknesses,
-  type GoalPlanRes,
-  type Scores,
-  type DiagnosticProgress,
-} from '../../lib/api'
+import Loading from '../../components/Loading'
+import { getScores, getWeaknesses, type GoalPlanRes, type Scores } from '../../lib/api'
 import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import QuizHost from './QuizHost'
+import DiagnosticHost from './DiagnosticHost'
+import { GOALS_DIAG_KEY } from './constants'
 
-type Step = 'select' | 'diagnostic' | 'results' | 'quiz' | 'quiz_done'
+type Step = 'select' | 'diagnostic' | 'results' | 'quiz'
 
 interface DomainInfo {
   name: string
@@ -59,7 +46,6 @@ const domainLabels = {
 } satisfies Record<string, string>
 
 function GoalsContent() {
-  const GOALS_DIAG_KEY = 'mathua_diag_session_goals'
   const { mounted } = useTheme()
   const { push } = useRouter()
 
@@ -68,26 +54,15 @@ function GoalsContent() {
     return new URLSearchParams(window.location.search).get('quiz') === '1' ? 'quiz' : 'select'
   })
   const [scores, setScores] = useState<Scores | null>(null)
-  const [loading, setLoading] = useState(false)
 
   // Step 1: goal selection
   const [domains, setDomains] = useState<DomainInfo[]>([])
   const [customConcepts] = useState<string[]>([])
-
-  // Step 2: diagnostic
-  const sessionId = useRef('')
-  const tokenRef = useRef('')
-  const goalsInputRef = useRef<HTMLInputElement>(null)
-  const [question, setQuestion] = useState('')
-  const conceptId = useRef('')
-  const [conceptName, setConceptName] = useState('')
-  const [questionCount, setQuestionCount] = useState(0)
-  const [estimatedTotal, setEstimatedTotal] = useState(0)
-  const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [hasPaused, setHasPaused] = useState(false)
-  const [answerInput, setAnswerInput] = useState('')
-  const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
-  const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
+
+  // Diagnostic handoff (the host owns the session once started)
+  const [diagStart, setDiagStart] = useState<string[] | null>(null)
+  const [diagResume, setDiagResume] = useState<string | null>(null)
 
   // Step 3: results
   const [plan, setPlan] = useState<GoalPlanRes | null>(null)
@@ -96,8 +71,6 @@ function GoalsContent() {
   // Load scores and domains on mount — QuizHost auto-starts when ?quiz=1.
   useEffect(() => {
     if (!mounted) return
-    const token = localStorage.getItem('mathua_token')
-    tokenRef.current = token
     const loggedIn = isLoggedIn()
     if (loggedIn) {
       const user = getUserInfo()
@@ -117,9 +90,8 @@ function GoalsContent() {
   }, [mounted])
 
   function buildDomains() {
-    const raw = conceptsData
     const map = new Map<string, string[]>()
-    for (const c of raw) {
+    for (const c of conceptsData) {
       const list = map.get(c.domain) || []
       list.push(c.id)
       map.set(c.domain, list)
@@ -155,54 +127,15 @@ function GoalsContent() {
     return ids
   }
 
-  async function startDiagnostic() {
+  function startDiagnostic() {
     const ids = selectedConceptIds()
     if (ids.length === 0) return
-    setLoading(true)
-    try {
-      const res = await startGoalDiagnostic(ids)
-      if (res.done) {
-        setPlan({
-          readiness: 1,
-          total_tested: 0,
-          correct_count: 0,
-          weak_areas: {},
-          strong_areas: {},
-        })
-        setStep('results')
-        return
-      }
-      sessionId.current = res.session_id
-      try {
-        sessionStorage.setItem(GOALS_DIAG_KEY, res.session_id)
-        setHasPaused(true)
-      } catch { /* storage unavailable — session simply won't resume */ }
-      setQuestion(res.question || '')
-      conceptId.current = res.concept_id || ''
-      setConceptName(res.concept_name || '')
-      setQuestionCount(1)
-      // Backend truth first; frontend estimate as fallback for older servers.
-      if (res.progress && res.progress.cover_size > 0) {
-        setProgress(res.progress)
-        setEstimatedTotal(res.progress.cover_size)
-      } else {
-        // Fallback cover size: ~10 + log2(selected concepts)
-        const est = Math.min(10 + Math.ceil(Math.log2(ids.length) * 5), 50)
-        setEstimatedTotal(est)
-        setProgress(null)
-      }
-      setAccuracy({ correct: 0, total: 0 })
-      setLastResult(null)
-      setAnswerInput('')
-      setStep('diagnostic')
-    } catch {
-      toast.error("Something went wrong, but we're working on it.")
-    } finally {
-      setLoading(false)
-    }
+    setDiagStart(ids)
+    setDiagResume(null)
+    setStep('diagnostic')
   }
 
-  async function resumeDiagnostic() {
+  function resumeDiagnostic() {
     let sid = ''
     try {
       sid = sessionStorage.getItem(GOALS_DIAG_KEY) || ''
@@ -210,91 +143,9 @@ function GoalsContent() {
       sid = ''
     }
     if (!sid) return
-    setLoading(true)
-    try {
-      const data = await resumeGoalDiagnostic(sid)
-      if (data.done) {
-        try {
-          sessionStorage.removeItem(GOALS_DIAG_KEY)
-        } catch { /* ignore */ }
-        setHasPaused(false)
-        toast.error('That diagnostic already finished — start a fresh one below.')
-        setLoading(false)
-        return
-      }
-      sessionId.current = sid
-      setQuestion(data.question || '')
-      conceptId.current = data.concept_id || ''
-      setConceptName(data.concept_name || '')
-      if (data.progress) {
-        setProgress(data.progress)
-        setEstimatedTotal(data.progress.cover_size)
-        setQuestionCount(data.progress.answered + 1)
-      }
-      setLastResult(null)
-      setAnswerInput('')
-      setStep('diagnostic')
-    } catch {
-      try {
-        sessionStorage.removeItem(GOALS_DIAG_KEY)
-      } catch { /* ignore */ }
-      setHasPaused(false)
-      toast.error('Could not resume — that session expired. Start a fresh diagnostic.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  async function submitAnswer() {
-    if (!answerInput.trim()) return
-    setLoading(true)
-    try {
-      const answer = answerInput.trim()
-      const elapsed = 5.0
-      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed)
-      const correct = data.correct || false
-      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
-      setAccuracy(prev => ({
-        correct: prev.correct + (correct ? 1 : 0),
-        total: prev.total + 1,
-      }))
-      setLastResult({ correct, feedback })
-      if (data.progress && data.progress.cover_size > 0) {
-        setProgress(data.progress)
-        setEstimatedTotal(data.progress.cover_size)
-      }
-
-      if (data.done) {
-        setTimeout(async () => {
-          try {
-            const planRes = await getGoalPlan(sessionId.current)
-            setPlan(planRes)
-            setStep('results')
-            try {
-              sessionStorage.removeItem(GOALS_DIAG_KEY)
-            } catch { /* ignore */ }
-            setHasPaused(false)
-          } catch {
-            alert('Could not generate plan.')
-          }
-          setLoading(false)
-        }, 800)
-        return
-      }
-
-      setTimeout(() => {
-        setQuestion(data.question || '')
-        conceptId.current = data.concept_id || ''
-        setConceptName(data.concept_name || '')
-        setQuestionCount(prev => prev + 1)
-        setLastResult(null)
-        setAnswerInput('')
-        setLoading(false)
-      }, 1200)
-    } catch {
-      alert('Failed to submit answer.')
-      setLoading(false)
-    }
+    setDiagResume(sid)
+    setDiagStart(null)
+    setStep('diagnostic')
   }
 
   function startPractice() {
@@ -345,23 +196,22 @@ function GoalsContent() {
               </div>
 
               <div className="text-center px-4">
-                {hasPaused && step === 'select' && (
+                {hasPaused && (
                   <button
                     type="button"
                     onClick={resumeDiagnostic}
-                    disabled={loading}
                     className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
                   >
-                    {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue diagnostic →'}
+                    Continue diagnostic →
                   </button>
                 )}
                 <button
                   type="button"
                   onClick={startDiagnostic}
-                  disabled={selectedConceptIds().length === 0 || loading}
+                  disabled={selectedConceptIds().length === 0}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
-                  {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedConceptIds().length} concepts selected)`}
+                  {`Start diagnostic test (${selectedConceptIds().length} concepts selected)`}
                 </button>
               </div>
             </>
@@ -369,94 +219,19 @@ function GoalsContent() {
 
           {/* === STEP 2: Diagnostic === */}
           {step === 'diagnostic' && (
-            <>
-              <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
-              <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
-                <ProgressBar
-                  answered={progress ? progress.answered + 1 : questionCount}
-                  coverDone={progress ? progress.cover_done : 0}
-                  coverSize={progress ? progress.cover_size : estimatedTotal}
-                />
-
-                {/* Accuracy display */}
-                {accuracy.total > 0 && (
-                  <div className="mb-4 flex items-center gap-2 text-xs font-mono text-mathua-muted justify-center">
-                    <span className={accuracy.correct / accuracy.total >= 0.7 ? 'text-mathua-green' : accuracy.correct / accuracy.total < 0.4 ? 'text-mathua-red' : ''}>
-                      {accuracy.correct}/{accuracy.total}
-                    </span>
-                    <span>correct</span>
-                    <div className="w-20 h-1 bg-mathua-code rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-mathua-blue rounded-full transition-all"
-                        style={{ width: `${(accuracy.correct / Math.max(accuracy.total, 1)) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors duration-200 w-full max-w-full min-w-0 overflow-hidden ${
-                  lastResult
-                    ? lastResult.correct ? 'border-green-500/40' : 'border-red-500/40'
-                    : 'border-mathua-border'
-                }`}>
-                  <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">
-                    <div className="w-full max-w-full min-w-0 overflow-hidden">
-                       <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">
-                         {question}
-                       </KatexContent>
-                     </div>
-                   </div>
-
-                    {!lastResult ? (
-                      <>
-                      <form
-                        onSubmit={e => { e.preventDefault(); submitAnswer() }}
-                        className="flex flex-col sm:flex-row gap-3 min-w-0"
-                      >
-                        <label htmlFor="goals-answer" className="sr-only">Your answer</label>
-                        <input
-                          ref={goalsInputRef}
-                          id="goals-answer"
-                          type="text"
-                          value={answerInput}
-                          onChange={(e) => setAnswerInput(e.target.value)}
-                          placeholder="Your answer..."
-                          enterKeyHint="go"
-                          disabled={loading}
-                          className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
-                      />
-                        <button
-                          type="submit"
-                          disabled={!answerInput.trim() || loading}
-                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 whitespace-nowrap shrink-0 w-full sm:w-auto"
-                        >
-                          Check Answer
-                        </button>
-                      </form>
-                       <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
-                      <div className="mt-2 flex justify-end">
-                        <ReportButton
-                          key={question}
-                          conceptId={conceptId.current}
-                          kind="question"
-                          question={question}
-                          source="diagnostic"
-                          sessionId={sessionId.current}
-                        />
-                      </div>
-                      </>
-                    ) : (
-                    <div className="animate-fadeIn text-center">
-                      <p className={`text-base font-medium mb-2 ${lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>
-                        {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
-                      </p>
-                      <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
-                      {loading && <p className="text-mathua-muted text-xs mt-2"><Loading inline size={11} /> Loading next question…</p>}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
+            <DiagnosticHost
+              startIds={diagStart}
+              resumeId={diagResume}
+              onComplete={(p) => {
+                setPlan(p)
+                setHasPaused(false)
+                setStep('results')
+              }}
+              onResumeExpired={() => {
+                setHasPaused(false)
+                setStep('select')
+              }}
+            />
           )}
 
           {/* === STEP 3: Results === */}
@@ -476,7 +251,6 @@ function GoalsContent() {
 
           {/* === QUIZ — actionable every 150 XP, own grading path, guest unlimited === */}
           {step === 'quiz' && <QuizHost />}
-
         </section>
       </div>
       <Footer />
