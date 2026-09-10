@@ -27,7 +27,7 @@ _Avoid_: test, assessment, quiz (reserved)
 **TaskLesson / TaskReview / TaskMultistep / TaskQuiz** — XP task types (`internal/engine/engine.go:580` `taskBaseXP` `10/5/15/20`). Q2 locked: `*.word` (`frac.add.word`, `arith.*.word` `internal/generator/fractions/generators.go:272`) → `TaskMultistep 15`; plain → `TaskLesson 10`; `isReview` → `TaskReview 5`; `Quiz` → `20`.  
 _Avoid_: lesson XP flat, word as separate prereq depth (temporary node, future `Variants` fold via `enrichment.json` `improve.md:114`)
 
-**Quiz (150 XP gate)** — Q3 locked to MA verbatim `improve.md:27`: every `150 XP`, timed closed-book, `80%` difficulty via `computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty`), diverse recents, immediate remedial + retake (`internal/quiz/quiz.go:1` `improve.md:133`). Daily goal `30` (`internal/scoring/updater.go:59` drift fix queued). Banner: `Study → Take Test` + `Profile` due-reviews.  
+**Quiz (150 XP gate)** — Q3 locked to MA verbatim `improve.md:27`: every `150 XP`, timed closed-book, `80%` difficulty via `computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty`), diverse recents, immediate remedial + retake (`internal/quiz/quiz.go:1` `improve.md:133`). Daily goal `30` (drift fix shipped: versioned backfill in `sqlite.go`). Banner: `Study → Take Test` + `Profile` due-reviews.  
 _Avoid_: 1–2 lesson gate, 30 XP shortcut
 
 **XP** — `computeXPForTask` (`engine.go:607` `10/5/15/20 × timeMult 0.5–1.5 × streakMult 1+0.1*streak`). MA `~1 min` per XP (`improve.md:42`), daily goal `30`. Verified via `go vet` + `study → answer → profile` `playwright`.
