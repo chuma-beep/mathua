@@ -1,29 +1,29 @@
 [
   {
-    "label": "Fermat's little theorem",
-    "section": "",
+    "label": "Statement",
+    "section": "Statement",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "State a-p-minus-1 for prime p and a coprime to p",
+      "Check the 2-to-4 mod 5 example",
+      "Convert between the two equivalent forms"
     ]
   },
   {
-    "label": "Fermat's little theorem — practice 2",
-    "section": "",
+    "label": "Proof sketch",
+    "section": "Proof Sketch",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Argue multiplication by a permutes residues",
+      "Equate the two products of permuted classes",
+      "Cancel the factorial using coprimality"
     ]
   },
   {
-    "label": "Fermat's little theorem — practice 3",
-    "section": "",
+    "label": "Applications",
+    "section": "Applications",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Reduce 3-to-100 mod 7 via exponent division",
+      "Name primality testing as a use case",
+      "Connect to RSA via Euler generalization"
     ]
   }
 ]

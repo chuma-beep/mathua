@@ -65,10 +65,6 @@
   },
   {
     "concept_id": "alg.eq.literal",
-    "source": "algebrica/equations/equations-with-parameters.md"
-  },
-  {
-    "concept_id": "alg.eq.literal",
     "source": "algebrica/equations/linear-equations-with-parameters.md"
   },
   {
@@ -249,10 +245,6 @@
   },
   {
     "concept_id": "alg.log.concept",
-    "source": "algebrica/functions/logarithmic-function.md"
-  },
-  {
-    "concept_id": "alg.log.concept",
     "source": "algebrica/powers-radicals-logarithms/logarithms.md"
   },
   {
@@ -266,10 +258,6 @@
   {
     "concept_id": "alg.poly.add_sub",
     "source": "algebrica/polynomials/adding-and-subtracting-polynomials.md"
-  },
-  {
-    "concept_id": "alg.poly.concept",
-    "source": "algebrica/functions/polynomial-function.md"
   },
   {
     "concept_id": "alg.poly.concept",
@@ -585,23 +573,11 @@
   },
   {
     "concept_id": "calc.deriv.applications",
-    "source": "algebrica/kinematics/acceleration.md"
-  },
-  {
-    "concept_id": "calc.deriv.applications",
-    "source": "algebrica/kinematics/simple-harmonic-motion.md"
-  },
-  {
-    "concept_id": "calc.deriv.applications",
     "source": "algebrica/kinematics/velocity.md"
   },
   {
     "concept_id": "calc.deriv.cauchy_mvt",
     "source": "algebrica/differential-calculus-theorems/cauchy-theorem.md"
-  },
-  {
-    "concept_id": "calc.deriv.chain_rule",
-    "source": "algebrica/derivatives/derivative-of-composite-power-functions.md"
   },
   {
     "concept_id": "calc.deriv.chain_rule",
@@ -1001,10 +977,6 @@
   },
   {
     "concept_id": "discrete.sequences.recurrence",
-    "source": "teaching/discrete.recurrence.md"
-  },
-  {
-    "concept_id": "discrete.sequences.recurrence",
     "source": "teaching/discrete.sequences.recurrence.md"
   },
   {
@@ -1276,24 +1248,12 @@
     "source": "teaching/nt.adv.diophantine.md"
   },
   {
-    "concept_id": "nt.adv.diophantine",
-    "source": "teaching/nt.diophantine.md"
-  },
-  {
     "concept_id": "nt.adv.euler_phi",
     "source": "algebrica/sets-and-numbers/natural-numbers.md"
   },
   {
     "concept_id": "nt.adv.fermat_little",
     "source": "authored/nt.adv.fermat_little.md"
-  },
-  {
-    "concept_id": "nt.adv.fermat_little",
-    "source": "teaching/nt.fermat_little.md"
-  },
-  {
-    "concept_id": "nt.app.crypto",
-    "source": "authored/nt.app.crypto.md"
   },
   {
     "concept_id": "nt.app.crypto",
@@ -1309,19 +1269,11 @@
   },
   {
     "concept_id": "nt.basics.gcd_euclidean",
-    "source": "algebrica/sets-and-numbers/modulo-operator.md"
-  },
-  {
-    "concept_id": "nt.basics.gcd_euclidean",
     "source": "teaching/nt.gcd_euclidean.md"
   },
   {
     "concept_id": "nt.basics.modular",
     "source": "algebrica/sets-and-numbers/modulo-operator.md"
-  },
-  {
-    "concept_id": "ode.adv.systems",
-    "source": "algebrica/differential-equations/differential-equations.md"
   },
   {
     "concept_id": "ode.adv.systems",
@@ -1333,15 +1285,7 @@
   },
   {
     "concept_id": "ode.first_order.exact",
-    "source": "algebrica/differential-equations/differential-equations.md"
-  },
-  {
-    "concept_id": "ode.first_order.exact",
     "source": "teaching/ode.exact.md"
-  },
-  {
-    "concept_id": "ode.first_order.linear",
-    "source": "algebrica/differential-equations/differential-equations.md"
   },
   {
     "concept_id": "ode.first_order.linear",
@@ -1349,15 +1293,7 @@
   },
   {
     "concept_id": "ode.first_order.separable",
-    "source": "algebrica/differential-equations/differential-equations.md"
-  },
-  {
-    "concept_id": "ode.first_order.separable",
     "source": "teaching/ode.separable.md"
-  },
-  {
-    "concept_id": "ode.second_order.homogeneous",
-    "source": "algebrica/differential-equations/differential-equations.md"
   },
   {
     "concept_id": "ode.second_order.homogeneous",
@@ -1365,15 +1301,7 @@
   },
   {
     "concept_id": "ode.second_order.nonhomogeneous",
-    "source": "algebrica/differential-equations/differential-equations.md"
-  },
-  {
-    "concept_id": "ode.second_order.nonhomogeneous",
     "source": "teaching/ode.nonhomogeneous.md"
-  },
-  {
-    "concept_id": "ode.transforms.laplace",
-    "source": "algebrica/differential-equations/differential-equations.md"
   },
   {
     "concept_id": "ode.transforms.laplace",
@@ -1569,10 +1497,6 @@
   },
   {
     "concept_id": "ratio.ops.scale",
-    "source": "teaching/ratio.ops.scale.md"
-  },
-  {
-    "concept_id": "ratio.ops.scale",
     "source": "teaching/ratio.scale.md"
   },
   {
@@ -1606,10 +1530,6 @@
   {
     "concept_id": "stat.data.line_plot",
     "source": "teaching/stat.data.line_plot.md"
-  },
-  {
-    "concept_id": "stat.data.mean",
-    "source": "algebrica/probability-and-statistics/arithmetic-mean.md"
   },
   {
     "concept_id": "stat.data.mean",
@@ -1732,24 +1652,12 @@
     "source": "authored/topo.basics.continuous.md"
   },
   {
-    "concept_id": "topo.basics.continuous",
-    "source": "teaching/topo.continuous.md"
-  },
-  {
     "concept_id": "topo.basics.metric",
     "source": "authored/topo.basics.metric.md"
   },
   {
-    "concept_id": "topo.basics.metric",
-    "source": "teaching/topo.metric.md"
-  },
-  {
     "concept_id": "topo.basics.open_closed",
     "source": "authored/topo.basics.open_closed.md"
-  },
-  {
-    "concept_id": "topo.basics.open_closed",
-    "source": "teaching/topo.open_closed.md"
   },
   {
     "concept_id": "trig.adv.arctan",
@@ -1766,10 +1674,6 @@
   {
     "concept_id": "trig.adv.law_sines",
     "source": "algebrica/trigonometry/the-law-of-sines.md"
-  },
-  {
-    "concept_id": "trig.basics.radians",
-    "source": "algebrica/trigonometry/unit-circle.md"
   },
   {
     "concept_id": "trig.basics.radians",
@@ -1814,10 +1718,6 @@
   {
     "concept_id": "trig.graph.cos",
     "source": "algebrica/trigonometry/sine-and-cosine.md"
-  },
-  {
-    "concept_id": "trig.graph.period",
-    "source": "algebrica/functions/sine-function.md"
   },
   {
     "concept_id": "trig.graph.period",
