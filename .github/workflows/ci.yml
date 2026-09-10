@@ -24,6 +24,7 @@ jobs:
       - run: go mod tidy
       - run: go build ./...
       - run: go test ./...
+      - run: make lint-go
       - run: go run scripts/validate_graph.go
       - run: python3 scripts/audit_lessons.py
       - run: go test ./internal/generator/... -run TestFuzz -count 100 -timeout 120s
@@ -63,6 +64,7 @@ jobs:
       - run: npm ci
       - run: npx tsc --noEmit
       - run: npm run lint
+      - run: npm run lint:antislop
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium

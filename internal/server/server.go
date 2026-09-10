@@ -162,6 +162,7 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 	}
 	// Clean up abandoned diagnostic/quiz sessions older than 1 hour, plus
 	// expired durable server_sessions rows (admin logins, study anchors).
+	//nolint:goroutinelint // process-lifetime janitor: runs until the process exits
 	go func() {
 		for {
 			time.Sleep(10 * time.Minute)
