@@ -121,7 +121,17 @@ type Engine struct {
 	studySessions map[string]string
 	// H1b: server-side expected answers for study seam to prevent client cheat
 	studyExpected map[string]string
+	// Batch 1: immediate remedial queue from quiz misses (studentID → conceptIDs).
+	// In-memory by design, same as diag/quiz sessions: a restart just means
+	// a retake; weakness propagation (+0.2/miss) is the durable signal.
+	quizRemedial map[string][]string
 }
+
+// QuizGateXP is the MA-verbatim mastery-check interval (CONTEXT.md Q3 lock).
+const QuizGateXP = 150
+
+// maxQuizRemedial caps the per-student quiz remedial queue.
+const maxQuizRemedial = 10
 
 func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner) *Engine {
 	return &Engine{
@@ -141,6 +151,7 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		studyMisses:   make(map[string]int),
 		studySessions: make(map[string]string),
 		studyExpected: make(map[string]string),
+		quizRemedial:  make(map[string][]string),
 	}
 }
 
@@ -1180,6 +1191,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	// PR 1.5: negative XP for rushing/guessing + halt flag at 2 consecutive misses.
 	missKey := studentID + "|" + conceptID
 	halted := false
+	var remedial []string
 	e.mu.Lock()
 	if !gr.Correct {
 		e.studyMisses[missKey]++
@@ -1188,6 +1200,12 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		}
 		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 {
 			xp = -5
+		}
+		// Batch 1: immediate remedial enqueue on quiz miss — missed concept
+		// plus its key prerequisites surface first in Study after the quiz.
+		if taskType == TaskQuiz {
+			e.enqueueQuizRemedialLocked(studentID, conceptID)
+			remedial = append([]string(nil), e.quizRemedial[studentID]...)
 		}
 	} else {
 		delete(e.studyMisses, missKey)
@@ -1208,6 +1226,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		XP:             xp,
 		ExpectedAnswer: expected,
 		Halted:         halted,
+		Remedial:       remedial,
 	}, nil
 }
 
@@ -1263,6 +1282,97 @@ func (e *Engine) QuizXP(correct bool, elapsed, timeThreshold float64, streak int
 // DifficultyFor exposes weakness→difficulty (0.3-1.0) for quiz 80% targeting.
 func (e *Engine) DifficultyFor(studentID, conceptID string) float64 {
 	return e.computeDifficulty(studentID, conceptID)
+}
+
+// TimeLimitFor exposes the accommodated per-question time limit for quiz
+// timed closed-book metadata.
+func (e *Engine) TimeLimitFor(studentID, conceptID string) float64 {
+	base := 10.0
+	if c := e.dag.Concept(conceptID); c != nil {
+		base = c.MasteryThreshold.AvgTimeSeconds
+	}
+	return e.accommodatedThreshold(studentID, base)
+}
+
+// QuizXPSince returns lifetime XP earned since the last completed quiz
+// (or all XP when no quiz completed yet). Floor 0: XP never decreases
+// except rushing penalties, which must not manufacture quiz eligibility.
+func (e *Engine) QuizXPSince(studentID string) (int, error) {
+	total, _, err := e.repo.GetXP(studentID)
+	if err != nil {
+		return 0, err
+	}
+	last, err := e.repo.LastQuizCompletion(studentID)
+	if err != nil {
+		return 0, err
+	}
+	if last == nil {
+		return total, nil
+	}
+	since := total - last.XPTotal
+	if since < 0 {
+		since = 0
+	}
+	return since, nil
+}
+
+// QuizDue reports whether the 150 XP mastery-check gate is reached.
+func (e *Engine) QuizDue(studentID string) (bool, error) {
+	since, err := e.QuizXPSince(studentID)
+	if err != nil {
+		return false, err
+	}
+	return since >= QuizGateXP, nil
+}
+
+// RecordQuizCompletion snapshots current lifetime XP as the gate baseline.
+func (e *Engine) RecordQuizCompletion(studentID string) error {
+	total, _, err := e.repo.GetXP(studentID)
+	if err != nil {
+		return err
+	}
+	return e.repo.RecordQuizCompletion(studentID, total)
+}
+
+// enqueueQuizRemedialLocked queues a missed quiz concept plus its key
+// prerequisites for immediate Study review. Caller holds e.mu.
+func (e *Engine) enqueueQuizRemedialLocked(studentID, conceptID string) {
+	queue := e.quizRemedial[studentID]
+	seen := make(map[string]bool, len(queue)+4)
+	for _, id := range queue {
+		seen[id] = true
+	}
+	push := func(id string) {
+		if seen[id] || len(queue) >= maxQuizRemedial {
+			return
+		}
+		if e.dag.Concept(id) == nil {
+			return
+		}
+		seen[id] = true
+		queue = append(queue, id)
+	}
+	if c := e.dag.Concept(conceptID); c != nil {
+		for _, kp := range c.KeyPrerequisites {
+			push(kp)
+		}
+	}
+	push(conceptID)
+	e.quizRemedial[studentID] = queue
+}
+
+// QuizRemedial returns a snapshot of pending quiz-miss remedial concepts.
+func (e *Engine) QuizRemedial(studentID string) []string {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	return append([]string(nil), e.quizRemedial[studentID]...)
+}
+
+// ClearQuizRemedial drains the queue (called when Study serves it).
+func (e *Engine) ClearQuizRemedial(studentID string) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+	delete(e.quizRemedial, studentID)
 }
 
 // computeXP retains bool-based API for backward compatibility (isReview=true→review 5, false→lesson 10).

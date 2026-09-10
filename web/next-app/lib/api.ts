@@ -63,6 +63,8 @@ const ScoresSchema = z.object({
   daily_xp_goal: z.number(),
   spaced_reps: z.record(z.string(), z.number()).optional(),
   avg_learning_speed: z.number().optional(),
+  xp_since_quiz: z.number().optional(),
+  quiz_due: z.boolean().optional(),
 })
 
 function validateResponse<T>(schema: z.ZodType<T>, data: unknown, name: string): T {
@@ -223,6 +225,9 @@ export interface Scores {
   spaced_reps?: Record<string, number>
   avg_learning_speed?: number
   paused_until?: string
+  // Batch 1: Quiz 150 XP gate signal (backend); absent on old mocks.
+  xp_since_quiz?: number
+  quiz_due?: boolean
 }
 
 export interface ConceptProgress {

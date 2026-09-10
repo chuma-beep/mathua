@@ -180,6 +180,13 @@ type TopicSpeed struct {
 	LearningSpeed float64 `json:"learning_speed"`
 }
 
+// QuizCompletion records one finished mastery-check quiz (Batch 1 gate).
+type QuizCompletion struct {
+	StudentID   string `json:"student_id"`
+	CompletedAt string `json:"completed_at"`
+	XPTotal     int    `json:"xp_total"`
+}
+
 // QuestionReport is a user complaint about a question, explanation,
 // lesson body, worked example, or diagram.
 type QuestionReport struct {
@@ -274,6 +281,10 @@ type Repository interface {
 	GetTopicSpeed(studentID, conceptID string) (*TopicSpeed, error)
 	GetAllTopicSpeeds(studentID string) (map[string]*TopicSpeed, error)
 	UpsertTopicSpeed(ts *TopicSpeed) error
+
+	// Batch 1: Quiz 150 XP gate completions.
+	RecordQuizCompletion(studentID string, xpTotal int) error
+	LastQuizCompletion(studentID string) (*QuizCompletion, error)
 
 	CreateReport(r QuestionReport) (int64, error)
 	ListReports(status string, limit, offset int) ([]QuestionReport, error)

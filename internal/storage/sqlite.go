@@ -1328,6 +1328,29 @@ func (s *SQLiteStore) UpsertTopicSpeed(ts *TopicSpeed) error {
 	return nil
 }
 
+// Batch 1: Quiz 150 XP gate completions.
+
+func (s *SQLiteStore) RecordQuizCompletion(studentID string, xpTotal int) error {
+	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES (?, datetime('now'), ?)`, studentID, xpTotal); err != nil {
+		return fmt.Errorf("record quiz completion: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) LastQuizCompletion(studentID string) (*QuizCompletion, error) {
+	row := s.db.QueryRow(`SELECT student_id, completed_at, xp_total FROM quiz_completions WHERE student_id = ? ORDER BY id DESC LIMIT 1`, studentID)
+	var qc QuizCompletion
+	var at sql.NullString
+	if err := row.Scan(&qc.StudentID, &at, &qc.XPTotal); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("last quiz completion: %w", err)
+	}
+	qc.CompletedAt = at.String
+	return &qc, nil
+}
+
 func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProgress, error) {
 	p := &ConceptProgress{}
 	var lastAtt, lastRev, nextRev, masterAt sql.NullString
