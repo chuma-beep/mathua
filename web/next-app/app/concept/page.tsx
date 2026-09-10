@@ -74,7 +74,7 @@ function ConceptContent() {
         <Header />
         <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <p className="text-mathua-muted text-sm">{error || 'Concept not found'}</p>
-          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
+          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-blue text-sm hover:underline mt-4 inline-block">
             ← Back
           </button>
         </div>

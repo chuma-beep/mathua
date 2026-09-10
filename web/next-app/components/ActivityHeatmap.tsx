@@ -40,6 +40,7 @@ export default function ActivityHeatmap({ data }: Props) {
 
         <div className="inline-flex shrink-0 self-start sm:self-auto border-[0.5px] border-mathua-border-strong rounded-none overflow-hidden">
           <button
+            type="button"
             onClick={() => switchView('monthly')}
             aria-pressed={view === 'monthly'}
             className={`font-mono text-[11px] px-3 min-h-[36px] inline-flex items-center justify-center border-none cursor-pointer transition-colors ${
@@ -49,6 +50,7 @@ export default function ActivityHeatmap({ data }: Props) {
             Monthly
           </button>
           <button
+            type="button"
             onClick={() => switchView('yearly')}
             aria-pressed={view === 'yearly'}
             className={`font-mono text-[11px] px-3 min-h-[36px] inline-flex items-center justify-center border-none cursor-pointer transition-colors ${

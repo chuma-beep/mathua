@@ -363,12 +363,12 @@ function LoginInner() {
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
           {authDisabled && (
             <p className="font-mono text-xs text-mathua-secondary text-center mt-4 mb-4">
-              Accounts are disabled on this server — continue as guest from the Study page.
+              Accounts are disabled on this server: continue as guest from the Study page.
             </p>
           )}
           <div className="flex gap-2 mt-6 mb-4 min-w-0">
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
-            <button onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
+            <button type="button" onClick={() => dispatch({ type: 'SET_TAB', tab: 'login' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'login' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Login</button>
+            <button type="button" onClick={() => dispatch({ type: 'SET_TAB', tab: 'signup' })} className={`flex-1 min-w-0 min-h-[44px] rounded-none h-12 text-sm font-medium px-2 ${state.tab === 'signup' ? 'bg-mathua-blue text-white' : 'bg-mathua-surface-elevated border border-mathua-border text-mathua-secondary'}`}>Sign Up</button>
           </div>
           <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 space-y-4 w-full max-w-full min-w-0 overflow-hidden">
             {resetToken ? (
@@ -393,7 +393,7 @@ function LoginInner() {
               </form>
             ) : forgotMode ? (
               <form onSubmit={e => { e.preventDefault(); handleForgot() }} className="space-y-4">
-                <p className="font-mono text-xs text-mathua-secondary">Enter your username or email — if a recovery email is on file, we’ll send a reset link.</p>
+                <p className="font-mono text-xs text-mathua-secondary">Enter your username or email: if a recovery email is on file, we’ll send a reset link.</p>
                 <div>
                   <label htmlFor="forgot-id" className="font-mono text-[10px] uppercase text-mathua-muted">Username or email</label>
                   <input

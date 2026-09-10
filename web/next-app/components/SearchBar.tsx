@@ -96,9 +96,10 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
               No results found
             </div>
           ) : (
-            results.map((r, i) => (
+            results.map((r) => (
               <button
-                key={i}
+                key={`${r.item.title}::${r.item.domain}`}
+                type="button"
                 onClick={() => { onSelect(r.item); setShowResults(false); setQuery('') }}
                 className="w-full text-left p-3 hover:bg-mathua-code border-b border-mathua-border last:border-b-0 transition-colors"
               >

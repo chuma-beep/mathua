@@ -42,7 +42,7 @@ function SessionContent() {
           )}
 
           <div className="max-w-2xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Option 1 — Diagnostic (Recommended) */}
+            {/* Option 1: Diagnostic (Recommended) */}
             <Link
               href="/onboard"
               className="group relative flex flex-col border-2 border-mathua-blue bg-mathua-surface p-6 text-left hover:bg-mathua-blue hover:text-white transition-colors"
@@ -64,7 +64,7 @@ function SessionContent() {
               </span>
             </Link>
 
-            {/* Option 2 — Study */}
+            {/* Option 2: Study */}
             <Link
               href="/study"
               className="flex flex-col border border-mathua-border bg-mathua-surface p-6 text-left hover:border-mathua-blue hover:text-mathua-blue transition-colors"
@@ -76,7 +76,7 @@ function SessionContent() {
                 Go to Study
               </h3>
               <p className="font-mono text-xs text-mathua-secondary mt-2 leading-relaxed">
-                Browse the corpus directly — lessons first, then practice. Progress and XP are still recorded.
+                Browse the corpus directly: lessons first, then practice. Progress and XP are still recorded.
               </p>
               <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue">
                 Open Study →

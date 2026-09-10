@@ -98,7 +98,10 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
   return (
     <div className="w-full max-w-full min-w-0 border-[0.5px] border-mathua-border mb-1 overflow-hidden bg-transparent">
       <button
+        type="button"
         onClick={onToggle}
+        aria-expanded={expanded}
+        aria-label={`${MONTH_NAMES[month]} ${year} activity`}
         className="flex w-full max-w-full min-w-0 items-center justify-between gap-2 px-3 py-2 min-h-[36px] bg-transparent border-none cursor-pointer text-mathua-primary font-mono"
       >
         <span className="min-w-0 flex-1 truncate text-left text-[13px] font-normal">

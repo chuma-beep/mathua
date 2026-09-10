@@ -143,6 +143,7 @@ export default function Header({ links }: HeaderProps) {
         <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {mounted && (
             <button
+              type="button"
               onClick={handleThemeToggle}
               aria-label="Toggle theme"
               className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
@@ -153,6 +154,7 @@ export default function Header({ links }: HeaderProps) {
           {loggedIn && user ? (
             <div className="relative" ref={menuRef}>
               <button
+                type="button"
                 onClick={() => setOpen(o => !o)}
                 aria-label="Open profile menu"
                 aria-expanded={open}
@@ -174,6 +176,7 @@ export default function Header({ links }: HeaderProps) {
                     {user.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
                   </div>
                   <button
+                    type="button"
                     onClick={() => {
                       setOpen(false)
                       signOut()
@@ -184,6 +187,7 @@ export default function Header({ links }: HeaderProps) {
                     Sign out
                   </button>
                   <button
+                    type="button"
                     onClick={() => {
                       setOpen(false)
                       signOut()
@@ -201,6 +205,7 @@ export default function Header({ links }: HeaderProps) {
               the desktop link row (hidden below md) on every page. */}
           <div className="relative md:hidden" ref={navMenuRef}>
               <button
+                type="button"
                 onClick={toggleNav}
                 aria-label="Open navigation menu"
                 aria-expanded={navOpen}

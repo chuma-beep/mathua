@@ -262,7 +262,7 @@ export default function OnboardPage() {
         <section className="pt-8 min-w-0 overflow-hidden">
           {step !== 'welcome' && (
             <span className="flex mb-4">
-              <button onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
+              <button type="button" onClick={() => setStep('welcome')} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
             </span>
           )}
 
@@ -281,6 +281,7 @@ export default function OnboardPage() {
 
               <div className="flex gap-3 justify-center mb-6 px-2">
                 <button
+                  type="button"
                   onClick={selectAll}
                   className="bg-mathua-surface border border-mathua-border rounded-none h-10 min-h-[36px] px-6 text-sm text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
                 >
@@ -293,6 +294,7 @@ export default function OnboardPage() {
                   const label = domainLabels[d.name] || d.name
                   return (
                     <button
+                      type="button"
                       key={d.name}
                       onClick={() => toggleDomain(d.name)}
                     className={`rounded-none p-3 sm:p-4 text-left transition-all text-sm min-h-[60px] min-w-0 overflow-hidden ${
@@ -313,6 +315,7 @@ export default function OnboardPage() {
               <div className="text-center px-4">
                 {hasPaused && (
                   <button
+                    type="button"
                     onClick={resumeDiagnostic}
                     disabled={loading}
                     className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full mb-3"
@@ -321,6 +324,7 @@ export default function OnboardPage() {
                   </button>
                 )}
                 <button
+                  type="button"
                   onClick={startDiagnostic}
                   disabled={selectedConceptIds().length === 0 || loading}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"

@@ -69,6 +69,7 @@ export default function ReportButton(props: ReportButtonProps) {
   if (!open) {
     return (
       <button
+        type="button"
         onClick={() => setOpen(true)}
         title="Complain about this question or explanation"
         className="font-mono text-[10px] text-mathua-muted hover:text-mathua-blue transition-colors uppercase tracking-wider"
@@ -85,6 +86,7 @@ export default function ReportButton(props: ReportButtonProps) {
           What&apos;s wrong?
         </span>
         <button
+          type="button"
           onClick={() => setOpen(false)}
           className="font-mono text-[10px] text-mathua-muted hover:text-mathua-primary"
         >
@@ -112,6 +114,7 @@ export default function ReportButton(props: ReportButtonProps) {
         <p className="mt-1 font-mono text-[10px] text-red-400">{error}</p>
       )}
       <button
+        type="button"
         onClick={handleSubmit}
         disabled={sending}
         className="mt-2 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 h-9 text-xs font-mono disabled:opacity-50"

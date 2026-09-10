@@ -191,8 +191,19 @@ function GraphContent() {
 
   const onPathNodes = useMemo(() => {
     if (!activeDomain) return undefined
-    return concepts.filter(c => c.domain === activeDomain).map(c => c.id)
+    // Single pass (replaces filter().map()).
+    const ids: string[] = []
+    for (const c of concepts) {
+      if (c.domain === activeDomain) ids.push(c.id)
+    }
+    return ids
   }, [activeDomain, concepts])
+
+  // O(1) node lookup for onNodeSelect (replaces find).
+  const conceptById = useMemo(() => {
+    const source = concepts.length > 0 ? concepts : fallbackConcepts
+    return new Map(source.map(c => [c.id, c] as const))
+  }, [concepts])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
@@ -202,7 +213,7 @@ function GraphContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex justify-between mb-4">
-          <button onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
             ← Back
           </button>
         </span>
@@ -226,6 +237,7 @@ function GraphContent() {
       {domains.length > 0 && (
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
+            type="button"
             onClick={() => setActiveDomain(null)}
             className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
               activeDomain === null
@@ -237,6 +249,7 @@ function GraphContent() {
           </button>
           {domains.map(d => (
             <button
+              type="button"
               key={d}
               onClick={() => setActiveDomain(activeDomain === d ? null : d)}
               className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
@@ -254,8 +267,9 @@ function GraphContent() {
       <div className="my-6 sm:my-8 w-full max-w-full min-w-0 overflow-hidden">
         {graphError && (
           <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
-            <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the live graph — showing the bundled fallback.</span>
+            <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the live graph: showing the bundled fallback.</span>
             <button
+              type="button"
               onClick={loadGraph}
               className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover uppercase tracking-wider"
             >
@@ -272,7 +286,7 @@ function GraphContent() {
           selectedId={selectedId}
           onSelectionChange={handleSelectionChange}
           onNodeSelect={(nodeId) => {
-            const c = (concepts.length > 0 ? concepts : fallbackConcepts).find(n => n.id === nodeId)
+            const c = conceptById.get(nodeId)
             if (c) push(`/concept?id=${encodeURIComponent(c.id)}`)
           }}
         />

@@ -138,6 +138,7 @@ export default function AdminReportsPage() {
                 <label htmlFor="admin-password" className="sr-only">Admin password</label>
                 <input
                   id="admin-password"
+                  aria-label="Admin password"
                   type="password"
                   value={password}
                   onChange={e => setPassword(e.target.value)}
@@ -166,6 +167,7 @@ export default function AdminReportsPage() {
                 expires {new Date(session.expires_at).toLocaleString()}
               </span>
               <button
+                type="button"
                 onClick={handleLogout}
                 className="font-mono text-[11px] text-mathua-muted hover:text-mathua-primary uppercase tracking-wider"
               >
@@ -176,6 +178,7 @@ export default function AdminReportsPage() {
             <div className="mt-4 flex gap-2 flex-wrap">
               {STATUSES.map(s => (
                 <button
+                  type="button"
                   key={s}
                   onClick={() => { setStatus(s); load(session, s) }}
                   className={`px-3 h-8 font-mono text-[11px] uppercase tracking-wider border transition-colors ${
@@ -193,6 +196,7 @@ export default function AdminReportsPage() {
               <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">Source:</span>
               {SOURCES.map(s => (
                 <button
+                  type="button"
                   key={s}
                   onClick={() => setSource(s)}
                   className={`px-3 h-8 font-mono text-[11px] uppercase tracking-wider border transition-colors ${
@@ -244,6 +248,7 @@ export default function AdminReportsPage() {
                   <div className="mt-2 flex gap-2">
                     {(['confirmed', 'fixed', 'dismissed'] as ReportStatus[]).map(next => (
                       <button
+                        type="button"
                         key={next}
                         onClick={() => resolve(r.id, next)}
                         disabled={r.status === next}

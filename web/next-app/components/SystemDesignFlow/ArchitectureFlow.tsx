@@ -191,7 +191,7 @@ function DetailPanel({ nodeId, onClose }: { nodeId: string | null; onClose: () =
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <strong style={{ fontFamily: monoFont, color: c.textPrimary, fontSize: 12 }}>{nodeId}</strong>
-        <button onClick={onClose} aria-label="Close panel" style={{ background: 'none', border: 'none', color: c.textMuted, cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>x</button>
+        <button type="button" onClick={onClose} aria-label="Close panel" style={{ background: 'none', border: 'none', color: c.textMuted, cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>x</button>
       </div>
       <p style={{ margin: 0 }}>{info}</p>
     </div>

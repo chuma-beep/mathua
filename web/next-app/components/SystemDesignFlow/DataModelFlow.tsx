@@ -102,7 +102,7 @@ function TableDetail({ tableId, onClose }: { tableId: string | null; onClose: ()
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
         <strong style={{ fontFamily: monoFont, color: c.textPrimary, fontSize: 13 }}>{tableId}</strong>
-        <button onClick={onClose} aria-label="Close panel" style={{ background: 'none', border: 'none', color: c.textMuted, cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>x</button>
+        <button type="button" onClick={onClose} aria-label="Close panel" style={{ background: 'none', border: 'none', color: c.textMuted, cursor: 'pointer', fontSize: 14, padding: '2px 6px' }}>x</button>
       </div>
       <p style={{ margin: '0 0 10px', fontSize: 12, fontStyle: 'italic' }}>{detail.desc}</p>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: monoFont, fontSize: 11 }}>
