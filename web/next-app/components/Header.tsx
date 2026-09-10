@@ -11,11 +11,7 @@ import { signOut } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import { getSettings } from '../lib/api'
-
-interface HeaderLink {
-  label: string
-  href: string
-}
+import { desktopLinks, overflowLinks, type HeaderLink } from '../lib/nav'
 
 interface HeaderProps {
   links?: HeaderLink[]
@@ -102,15 +98,11 @@ export default function Header({ links }: HeaderProps) {
     }
   }, [])
 
-  const displayLinks = links || [
-    { label: 'Study', href: '/study' },
-    { label: 'Leaderboard', href: '/leaderboard' },
-    { label: 'Graph', href: '/graph' },
-    ...(loggedIn
-      ? [{ label: 'Profile', href: '/profile' }, { label: 'Start', href: '/session' }, { label: 'Settings', href: '/settings' }]
-      : [{ label: 'Login', href: '/login' }]
-    ),
-  ]
+  // Desktop row: full link set. Mobile compass: overflow only (destinations
+  // missing from the bottom tabs) so nothing appears twice on one screen.
+  // A custom links list (e.g. docs section menu) is shown in full.
+  const displayLinks = links || desktopLinks(loggedIn)
+  const compassLinks = links || overflowLinks(loggedIn)
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur border-b border-mathua-border bg-mathua-bg transition-colors">
@@ -186,23 +178,22 @@ export default function Header({ links }: HeaderProps) {
                   >
                     Sign out
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setOpen(false)
-                      signOut()
-                      router.push('/profile')
-                    }}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
-                  >
-                    Profile
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setOpen(false)
+                        router.push('/profile')
+                      }}
+                      className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
+                    >
+                      Profile
+                    </button>
                 </div>
               )}
             </div>
           ) : null}
-          {/* Mobile nav: bare compass mark at the far right, mirroring
-              the desktop link row (hidden below md) on every page. */}
+          {/* Mobile nav: bare compass mark at the far right. Overflow only
+              (see lib/nav.ts) — destinations missing from the bottom tabs. */}
           <div className="relative md:hidden" ref={navMenuRef}>
               <button
                 type="button"
@@ -220,7 +211,7 @@ export default function Header({ links }: HeaderProps) {
                   aria-label="Site navigation"
                   className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
                 >
-                  {displayLinks.map(link => {
+                  {compassLinks.map(link => {
                     const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
                     return (
                       <Link

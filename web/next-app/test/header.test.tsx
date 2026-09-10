@@ -50,14 +50,14 @@ describe('Header mobile nav menu', () => {
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
 
-  it('opens the default logged-out links with correct hrefs on click', () => {
+  it('opens the overflow links with correct hrefs on click', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const items = screen.getAllByRole('menuitem')
     const labels = items.map(i => i.textContent)
-    expect(labels).toEqual(['Study', 'Leaderboard', 'Graph', 'Login'])
+    expect(labels).toEqual(['Leaderboard', 'Login'])
     const hrefs = items.map(i => (i as HTMLAnchorElement).getAttribute('href'))
-    expect(hrefs).toEqual(['/study', '/leaderboard', '/graph', '/login'])
+    expect(hrefs).toEqual(['/leaderboard', '/login'])
     expect(screen.getByRole('button', { name: 'Open navigation menu' }))
       .toHaveAttribute('aria-expanded', 'true')
   })
@@ -100,7 +100,7 @@ describe('Header mobile nav menu', () => {
   it('closes on Escape', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
-    expect(screen.getAllByRole('menuitem')).toHaveLength(4)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
@@ -109,17 +109,17 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     const button = screen.getByRole('button', { name: 'Open navigation menu' })
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(4)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
     fireEvent.click(button)
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(4)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
   })
 
   it('closes when a link is clicked', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Study' }))
+    fireEvent.click(screen.getByRole('menuitem', { name: 'Leaderboard' }))
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
 
