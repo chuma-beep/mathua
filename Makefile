@@ -18,6 +18,9 @@ validate:
 	go run scripts/validate_graph.go
 	python3 scripts/audit_lessons.py
 
+lint-go:
+	go run github.com/curtbushko/go-ai-lint/cmd/go-ai-lint@v1.0.1-0.20260620203811-c6ce4ee5624f ./...
+
 fuzz:
 	go test ./internal/generator/... -run TestFuzz -count 1000
 

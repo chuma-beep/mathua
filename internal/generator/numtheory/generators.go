@@ -3,6 +3,7 @@ package numtheory
 import (
 	"fmt"
 	"math/rand"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -260,14 +261,14 @@ func (g *primeInfGen) Generate(ctx generator.GeneratorContext) generator.Problem
 }
 
 func joinProd(primes []int) string {
-	s := ""
+	var s strings.Builder
 	for i, p := range primes {
 		if i > 0 {
-			s += "\\times "
+			s.WriteString("\\times ")
 		}
-		s += fmt.Sprintf("%d", p)
+		fmt.Fprintf(&s, "%d", p)
 	}
-	return s
+	return s.String()
 }
 
 type legendreGen struct{}

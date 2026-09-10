@@ -1,0 +1,33 @@
+# go-ai-lint — curated gate for AI-generated Go mistakes.
+# https://github.com/curtbushko/go-ai-lint
+#
+# Run with: make lint-go
+# Pinned by pseudo-version in the Makefile (v1.0.0 is broken on Go 1.27).
+#
+# Note: github.com/JacobJNilsson/anti-slop-go (the Go companion to the Oxlint
+# anti-slop rules used in web/next-app) is deferred: its loader crashes on
+# Go 1.27 with `package "time" without types`, and no released or @main
+# revision fixes it yet. Revisit when it supports Go 1.27.
+#
+# We keep the analyzers that catch real AI defects (error handling, panics,
+# init side effects, string/concurrency footguns) and disable the ones that
+# clash with this project's established conventions. Each disable states why.
+version: 1
+
+output:
+  format: text
+  print-analyzer-name: true
+  sort-by: file
+
+analyzers:
+  enable-all: true
+  disable:
+    - testlint # requires testify; this project uses the stdlib testing package
+    - naminglint # flags Get* prefixes; that is our storage.Repository interface convention
+    - deferlint # flags ignored rows.Close() error in defer; not actionable there
+    - interfacelint # flags storage.Repository width; it is a deliberate deep-module seam
+    - cmdlint # wants cobra/viper; cmd/mathua is intentionally a single flag-based binary
+
+severity:
+  min-severity: low
+  error-on: [] # findings still exit non-zero; baseline is clean, so this gates

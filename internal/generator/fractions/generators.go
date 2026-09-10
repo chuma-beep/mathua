@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -66,16 +67,16 @@ func (g *fracConceptGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	scale := int(1 + ctx.Difficulty*5)
 	den := rand.Intn(max(1, scale*2)) + 3
 	num := rand.Intn(max(1, den-2)) + 1
-	bar := ""
+	var bar strings.Builder
 	for i := 0; i < den; i++ {
 		if i < num {
-			bar += "X "
+			bar.WriteString("X ")
 		} else {
-			bar += "_ "
+			bar.WriteString("_ ")
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What fraction of the bar is filled?\n\n\\(%s\\)", bar),
+		Question:    fmt.Sprintf("What fraction of the bar is filled?\n\n\\(%s\\)", bar.String()),
 		Answer:      fracStr(num, den),
 		Explanation: fmt.Sprintf("%d out of %d equal parts are filled = %d/%d", num, den, num, den),
 	}
