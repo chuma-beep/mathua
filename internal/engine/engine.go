@@ -769,6 +769,24 @@ var conceptDiagrams = map[string]string{
 	"arith.round.tens":      "/diagrams/arithmetic/round-tens.svg",
 	"arith.round.hundreds":  "/diagrams/arithmetic/round-hundreds.svg",
 	"arith.round.thousands": "/diagrams/arithmetic/round-thousands.svg",
+	// Batch C5b: hand-authored arithmetic diagrams (mult/div/factors).
+	"arith.mult.concept":      "/diagrams/arithmetic/mult-concept.svg",
+	"arith.mult.2_5_10":       "/diagrams/arithmetic/mult-2-5-10.svg",
+	"arith.mult.tables":       "/diagrams/arithmetic/mult-tables.svg",
+	"arith.mult.double":       "/diagrams/arithmetic/mult-double.svg",
+	"arith.mult.triple":       "/diagrams/arithmetic/mult-triple.svg",
+	"arith.mult.word":         "/diagrams/arithmetic/mult-word.svg",
+	"arith.div.concept":       "/diagrams/arithmetic/div-concept.svg",
+	"arith.div.basic":         "/diagrams/arithmetic/div-basic.svg",
+	"arith.div.remainder":     "/diagrams/arithmetic/div-remainder.svg",
+	"arith.div.long":          "/diagrams/arithmetic/div-long.svg",
+	"arith.div.word":          "/diagrams/arithmetic/div-word.svg",
+	"arith.factor.find":       "/diagrams/arithmetic/factor-find.svg",
+	"arith.factor.prime":      "/diagrams/arithmetic/factor-prime.svg",
+	"arith.factor.prime_fact": "/diagrams/arithmetic/factor-prime-fact.svg",
+	"arith.factor.gcf":        "/diagrams/arithmetic/factor-gcf.svg",
+	"arith.factor.lcm":        "/diagrams/arithmetic/factor-lcm.svg",
+	"arith.factor.composite":  "/diagrams/arithmetic/factor-composite.svg",
 }
 
 // DiagramFor exposes the dual-coding diagram for a concept (exported for API).

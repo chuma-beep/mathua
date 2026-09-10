@@ -1,0 +1,12 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">4 × 3 = 3 + 3 + 3 + 3 = 12</text>
+  <g stroke="#BABABA" stroke-width="2" fill="none">
+    <circle cx="50" cy="70" r="10"/><circle cx="78" cy="70" r="10"/><circle cx="106" cy="70" r="10"/>
+    <circle cx="50" cy="100" r="10"/><circle cx="78" cy="100" r="10"/><circle cx="106" cy="100" r="10"/>
+    <circle cx="50" cy="130" r="10"/><circle cx="78" cy="130" r="10"/><circle cx="106" cy="130" r="10"/>
+    <circle cx="50" cy="160" r="10"/><circle cx="78" cy="160" r="10"/><circle cx="106" cy="160" r="10"/>
+  </g>
+  <text x="180" y="100" font-size="13" fill="#8a8f98">4 rows</text>
+  <text x="180" y="120" font-size="13" fill="#8a8f98">of 3</text>
+  <text x="78" y="192" font-size="12" fill="#8a8f98" text-anchor="middle">multiplication counts equal groups</text>
+</svg>

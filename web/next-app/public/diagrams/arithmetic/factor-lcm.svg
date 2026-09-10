@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="180" y="28" font-size="14" fill="#BABABA" text-anchor="middle">LCM(4, 6): first shared multiple</text>
+  <g font-size="13" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="90" y="70">4:</text>
+    <text x="90" y="95">4</text><text x="90" y="120">8</text>
+    <text x="140" y="120" fill="#E6E6E6">12</text>
+    <text x="90" y="145">16…</text>
+    <text x="240" y="70">6:</text>
+    <text x="240" y="95">6</text>
+    <text x="240" y="120" fill="#E6E6E6">12</text>
+    <text x="240" y="145">18…</text>
+  </g>
+  <line x1="60" y1="120" x2="300" y2="120" stroke="#8a8f98" stroke-width="1" stroke-dasharray="4"/>
+  <text x="180" y="180" font-size="14" fill="#E6E6E6" text-anchor="middle">LCM = 12</text>
+</svg>

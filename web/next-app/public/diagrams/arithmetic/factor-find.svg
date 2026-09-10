@@ -1,0 +1,12 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">factors of 12 come in pairs</text>
+  <g font-size="15" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="60" y="80">1 × 12</text>
+    <text x="60" y="110">2 × 6</text>
+    <text x="60" y="140">3 × 4</text>
+  </g>
+  <path d="M130,74 Q190,74 250,100 M130,104 Q190,104 250,100 M130,134 Q190,134 250,100" stroke="#8a8f98" stroke-width="1.5" fill="none"/>
+  <text x="265" y="105" font-size="15" fill="#E6E6E6">12</text>
+  <text x="60" y="175" font-size="13" fill="#BABABA">1, 2, 3, 4, 6, 12</text>
+  <text x="230" y="175" font-size="12" fill="#8a8f98">6 factors</text>
+</svg>

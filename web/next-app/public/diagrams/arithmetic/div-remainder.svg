@@ -1,0 +1,17 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">13 ÷ 4: four groups of 3, 1 left over</text>
+  <g>
+    <rect x="30" y="55" width="60" height="60" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <rect x="100" y="55" width="60" height="60" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <rect x="170" y="55" width="60" height="60" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <rect x="240" y="55" width="60" height="60" fill="none" stroke="#BABABA" stroke-width="2"/>
+  </g>
+  <g font-size="12" fill="#BABABA" text-anchor="middle">
+    <text x="60" y="88">3</text><text x="130" y="88">3</text><text x="200" y="88">3</text><text x="270" y="88">3</text>
+  </g>
+  <circle cx="320" cy="85" r="10" fill="none" stroke="#E6E6E6" stroke-width="2"/>
+  <text x="320" y="89" font-size="11" fill="#E6E6E6" text-anchor="middle">1</text>
+  <text x="320" y="125" font-size="11" fill="#8a8f98" text-anchor="middle">remainder</text>
+  <text x="30" y="155" font-size="14" fill="#BABABA">13 ÷ 4 = 3 R 1</text>
+  <text x="30" y="178" font-size="12" fill="#8a8f98">check: 4 × 3 + 1 = 13</text>
+</svg>

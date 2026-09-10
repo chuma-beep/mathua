@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="22" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="140" y="80">12</text>
+    <text x="195" y="80">÷</text>
+    <text x="245" y="80">3</text>
+    <text x="140" y="130">=</text>
+    <text x="195" y="130">4</text>
+  </g>
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="140" y="105">split</text>
+    <text x="245" y="105">groups</text>
+    <text x="195" y="155">in each</text>
+  </g>
+  <text x="180" y="185" font-size="12" fill="#8a8f98" text-anchor="middle">3 × 4 = 12 checks the division</text>
+</svg>

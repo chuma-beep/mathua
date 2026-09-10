@@ -1,0 +1,15 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="14" fill="#BABABA">12 shared equally among 3</text>
+  <g>
+    <ellipse cx="70" cy="70" rx="55" ry="28" fill="none" stroke="#8a8f98" stroke-width="1" stroke-dasharray="4"/>
+    <ellipse cx="190" cy="70" rx="55" ry="28" fill="none" stroke="#8a8f98" stroke-width="1" stroke-dasharray="4"/>
+    <ellipse cx="300" cy="70" rx="55" ry="28" fill="none" stroke="#8a8f98" stroke-width="1" stroke-dasharray="4"/>
+  </g>
+  <g fill="#BABABA">
+    <circle cx="50" cy="70" r="7"/><circle cx="70" cy="70" r="7"/><circle cx="90" cy="70" r="7"/><circle cx="110" cy="70" r="7"/>
+    <circle cx="170" cy="70" r="7"/><circle cx="190" cy="70" r="7"/><circle cx="210" cy="70" r="7"/><circle cx="230" cy="70" r="7"/>
+    <circle cx="280" cy="70" r="7"/><circle cx="300" cy="70" r="7"/><circle cx="320" cy="70" r="7"/><circle cx="340" cy="70" r="7"/>
+  </g>
+  <text x="30" y="130" font-size="14" fill="#BABABA">12 ÷ 3 = 4 each</text>
+  <text x="30" y="155" font-size="12" fill="#8a8f98">deal out one at a time, count each share</text>
+</svg>
