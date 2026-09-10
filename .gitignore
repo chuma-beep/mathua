@@ -15,6 +15,12 @@ coverage.txt
 .env.local
 .env.*.local
 
+# Auto-generated local JWT signing secret (0600, created on first boot next
+# to the DB file; explicit JWT_SECRET env always wins). Never commit —
+# whoever holds it can forge auth tokens.
+.jwt_secret
+.jwt_secret.bad.*
+
 # Databases
 *.db
 *.sqlite
