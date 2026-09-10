@@ -272,6 +272,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
 	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyAll))))
+	mux.HandleFunc("/api/efficacy/trend", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyTrend))))
 }
 
 // POST /api/session
@@ -2351,6 +2352,21 @@ func (s *Server) handleEfficacyAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, report)
+}
+
+// GET /api/efficacy/trend — public longitudinal weekly efficacy + retention
+// (docs/efficacy.md). Rate-limited like /api/efficacy/all.
+func (s *Server) handleEfficacyTrend(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	trend, err := s.eng.EfficacyTrend()
+	if err != nil {
+		writeError(w, "failed to compute efficacy trend", 500)
+		return
+	}
+	writeJSON(w, trend)
 }
 
 func logRequest(next http.HandlerFunc) http.HandlerFunc {

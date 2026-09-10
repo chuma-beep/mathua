@@ -1381,3 +1381,22 @@ func TestDiagnostic_FullFlowReport(t *testing.T) {
 		t.Errorf("expected frontier index, got %v", done)
 	}
 }
+
+// D: longitudinal efficacy trend endpoint (weekly buckets + retention).
+func TestEfficacyTrend_Endpoint(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/efficacy/trend", nil))
+	if rec.Code != 200 {
+		t.Fatalf("efficacy trend: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var res map[string]interface{}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	for _, key := range []string{"weeks", "total_students", "returning_students", "retention_rate", "first_pass_trend"} {
+		if _, ok := res[key]; !ok {
+			t.Errorf("expected key %q, got %v", key, res)
+		}
+	}
+}
