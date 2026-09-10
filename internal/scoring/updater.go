@@ -24,6 +24,9 @@ type Scores struct {
 	SpacedReps        map[string]float64  `json:"spaced_reps,omitempty"`
 	AvgLearningSpeed  float64             `json:"avg_learning_speed"`
 	PausedUntil       string              `json:"paused_until,omitempty"`
+	// Batch 1: Quiz 150 XP gate signal (MA verbatim).
+	XPSinceQuiz       int                 `json:"xp_since_quiz"`
+	QuizDue           bool                `json:"quiz_due"`
 }
 
 type Updater struct {
@@ -87,6 +90,15 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		avgSpeed = speedSum / float64(speedCount)
 	}
 
+	// Batch 1: XP earned since last completed quiz drives the 150 XP gate.
+	xpSinceQuiz := xpTotal
+	if last, err := u.repo.LastQuizCompletion(studentID); err == nil && last != nil {
+		xpSinceQuiz = xpTotal - last.XPTotal
+		if xpSinceQuiz < 0 {
+			xpSinceQuiz = 0
+		}
+	}
+
 	return &Scores{
 		LifetimePoints:    lifetimePoints,
 		WeeklyScore:       weeklyScore,
@@ -100,6 +112,9 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		SpacedReps:        spacedReps,
 		AvgLearningSpeed:  math.Round(avgSpeed*100) / 100,
 		PausedUntil:       pausedUntil(u, studentID),
+		XPSinceQuiz:       xpSinceQuiz,
+		// 150 mirrors engine.QuizGateXP (import cycle forbids sharing).
+		QuizDue:           xpSinceQuiz >= 150,
 	}, nil
 }
 

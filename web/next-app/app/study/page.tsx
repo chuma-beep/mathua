@@ -283,9 +283,11 @@ function lessonProgress(lesson: LessonInfo): { mastered: number; total: number }
 }
 
 function QuizGateBanner({ scores }: { scores: Scores | null }) {
-  const xp = scores?.xp_total ?? 0
+  // Batch 1: prefer backend gate (xp since last completion); fall back to
+  // lifetime total so old mocks/e2e without the new fields still gate.
+  const xp = scores?.xp_since_quiz ?? scores?.xp_total ?? 0
+  const done = scores?.quiz_due ?? xp >= 150
   const goal = 150 // CONTEXT.md Quiz 150 XP gate MA verbatim
-  const done = xp >= goal
   const pct = Math.min((xp / goal) * 100, 100)
   return (
     <div className={`mt-6 border p-4 flex flex-col sm:flex-row items-center justify-between gap-3 ${done ? 'border-mathua-blue bg-mathua-surface' : 'border-mathua-border bg-mathua-surface'}`}>

@@ -2124,12 +2124,17 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 		name = c.Label
 	}
 	writeJSON(w, map[string]interface{}{
-		"session_id":   sess.ID,
-		"student_id":   studentID,
-		"concept_id":   cid,
-		"concept_name": name,
-		"question":     prob.Question,
-		"done":         false,
+		"session_id":         sess.ID,
+		"student_id":         studentID,
+		"concept_id":         cid,
+		"concept_name":       name,
+		"question":           prob.Question,
+		"done":               false,
+		// Batch 1: timed closed-book contract — per-question limit
+		// (accommodated), total count, no-lesson closed book.
+		"closed_book":        true,
+		"time_limit_seconds": s.eng.TimeLimitFor(studentID, cid),
+		"questions_total":    len(sess.Order),
 	})
 }
 
@@ -2209,6 +2214,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// one progress update, one AddXP, DB and response agree by construction.
 	xp := 0
 	var newStatus string
+	var remedial []string
 	if studentID != "" {
 		res, err := s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
 		if err != nil {
@@ -2223,14 +2229,22 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		} else if res != nil {
 			xp = res.XP
 			newStatus = string(res.NewStatus)
+			// Batch 1: immediate remedial on quiz miss.
+			remedial = res.Remedial
 		}
 	}
 	if qEng.IsComplete(sess) {
+		if studentID != "" {
+			// Batch 1: completing a quiz resets the 150 XP gate baseline.
+			if err := s.eng.RecordQuizCompletion(studentID); err != nil {
+				log.Printf("handleQuizAnswer: RecordQuizCompletion failed for %s: %v", studentID, err)
+			}
+		}
 		s.mu.Lock()
 		delete(s.quizSessions, req.SessionID)
 		delete(s.quizCreated, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": gr.Feedback, "xp": xp, "new_status": newStatus})
+		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": gr.Feedback, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -2244,14 +2258,18 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		name2 = c2.Label
 	}
 	writeJSON(w, map[string]interface{}{
-		"done":         false,
-		"correct":      gr.Correct,
-		"feedback":     gr.Feedback,
-		"xp":           xp,
-		"new_status":   newStatus,
-		"concept_id":   cid,
-		"concept_name": name2,
-		"question":     prob.Question,
+		"done":               false,
+		"correct":            gr.Correct,
+		"feedback":           gr.Feedback,
+		"xp":                 xp,
+		"new_status":         newStatus,
+		"remedial":           remedial,
+		"concept_id":         cid,
+		"concept_name":       name2,
+		"question":           prob.Question,
+		"closed_book":        true,
+		"time_limit_seconds": s.eng.TimeLimitFor(studentID, cid),
+		"questions_total":    len(sess.Order),
 	})
 }
 

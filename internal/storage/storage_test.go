@@ -591,3 +591,33 @@ func TestDataMigrations_RunOnce(t *testing.T) {
 		t.Fatalf("second migrate: %v", err)
 	}
 }
+
+// Batch 1: quiz 150 XP gate completions round-trip.
+
+func TestQuizCompletion_RoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("quizzer")
+	if got, err := store.LastQuizCompletion(st.ID); err != nil || got != nil {
+		t.Fatalf("expected nil completion, got %+v err=%v", got, err)
+	}
+	if err := store.AddXP(st.ID, 175); err != nil {
+		t.Fatalf("add xp: %v", err)
+	}
+	if err := store.RecordQuizCompletion(st.ID, 175); err != nil {
+		t.Fatalf("record: %v", err)
+	}
+	got, err := store.LastQuizCompletion(st.ID)
+	if err != nil || got == nil {
+		t.Fatalf("expected completion row, got %+v err=%v", got, err)
+	}
+	if got.XPTotal != 175 {
+		t.Errorf("expected xp_total 175, got %d", got.XPTotal)
+	}
+	if err := store.RecordQuizCompletion(st.ID, 300); err != nil {
+		t.Fatalf("record second: %v", err)
+	}
+	got, err = store.LastQuizCompletion(st.ID)
+	if err != nil || got == nil || got.XPTotal != 300 {
+		t.Fatalf("expected latest xp_total 300, got %+v err=%v", got, err)
+	}
+}

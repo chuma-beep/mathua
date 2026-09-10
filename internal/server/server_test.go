@@ -1202,3 +1202,127 @@ func TestGuestToken_RefusesRegistered(t *testing.T) {
 		t.Errorf("claim unknown uuid: expected 404, got %d: %s", rec.Code, rec.Body.String())
 	}
 }
+
+// Batch 1 helpers: guest-authed JSON POST.
+
+func quizPost(t *testing.T, mux *http.ServeMux, path, body, token string) map[string]interface{} {
+	t.Helper()
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", path, bytes.NewReader([]byte(body)))
+	if token != "" {
+		req.Header.Set("Authorization", "Bearer "+token)
+	}
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("%s: expected 200, got %d: %s", path, rec.Code, rec.Body.String())
+	}
+	var res map[string]interface{}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("%s: decode: %v", path, err)
+	}
+	return res
+}
+
+func quizGuest(t *testing.T, mux *http.ServeMux) (token, studentID string) {
+	t.Helper()
+	rec := postGuest(t, mux, `{}`, "")
+	if rec.Code != 200 {
+		t.Fatalf("create guest: %d %s", rec.Code, rec.Body.String())
+	}
+	var res map[string]interface{}
+	_ = json.Unmarshal(rec.Body.Bytes(), &res)
+	return res["token"].(string), res["student_id"].(string)
+}
+
+// Batch 1: quiz session carries timed closed-book contract; completing it
+// records the gate baseline and offers retake.
+
+func TestQuizSession_ClosedBookContractAndCompletion(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	token, _ := quizGuest(t, mux)
+
+	sess := quizPost(t, mux, "/api/quiz/session", `{}`, token)
+	if sess["done"] == true {
+		t.Fatal("expected quiz question, got done")
+	}
+	if sess["closed_book"] != true {
+		t.Errorf("expected closed_book true, got %v", sess)
+	}
+	if sess["time_limit_seconds"] != float64(60) {
+		t.Errorf("expected 60s limit, got %v", sess["time_limit_seconds"])
+	}
+	if sess["questions_total"] != float64(1) {
+		t.Errorf("expected 1 question total, got %v", sess["questions_total"])
+	}
+
+	ans := quizPost(t, mux, "/api/quiz/answer", `{"session_id":"`+sess["session_id"].(string)+`","concept_id":"a","answer":"4","elapsed":5}`, token)
+	if ans["done"] != true || ans["correct"] != true {
+		t.Fatalf("expected done+correct, got %v", ans)
+	}
+	if ans["retake_available"] != true {
+		t.Errorf("expected retake_available, got %v", ans)
+	}
+	if ans["xp"] == float64(0) {
+		t.Errorf("expected TaskQuiz XP, got %v", ans["xp"])
+	}
+
+	// Gate baseline reset: scores show 0 since quiz, not due.
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/scores/x", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("scores: %d %s", rec.Code, rec.Body.String())
+	}
+	var scores map[string]interface{}
+	_ = json.Unmarshal(rec.Body.Bytes(), &scores)
+	if scores["xp_since_quiz"] != float64(0) {
+		t.Errorf("expected xp_since_quiz 0 after completion, got %v", scores["xp_since_quiz"])
+	}
+	if scores["quiz_due"] == true {
+		t.Errorf("expected quiz_due false after completion, got %v", scores)
+	}
+
+	// Retake: a fresh session starts immediately after completion.
+	sess2 := quizPost(t, mux, "/api/quiz/session", `{}`, token)
+	if sess2["done"] == true || sess2["session_id"] == sess["session_id"] {
+		t.Errorf("expected fresh retake session, got %v", sess2)
+	}
+}
+
+// Batch 1: quiz miss returns immediate remedial; 150 XP of study earns due.
+
+func TestQuizMiss_RemedialAndGateDue(t *testing.T) {
+	s, mux, store := guestServer(t)
+	token, sid := quizGuest(t, mux)
+
+	sess := quizPost(t, mux, "/api/quiz/session", `{}`, token)
+	ans := quizPost(t, mux, "/api/quiz/answer", `{"session_id":"`+sess["session_id"].(string)+`","concept_id":"a","answer":"999","elapsed":5}`, token)
+	if ans["correct"] == true {
+		t.Fatalf("expected incorrect, got %v", ans)
+	}
+	rem, _ := ans["remedial"].([]interface{})
+	if len(rem) != 1 || rem[0] != "a" {
+		t.Errorf("expected remedial [a], got %v", ans["remedial"])
+	}
+	if got := s.eng.QuizRemedial(sid); len(got) != 1 || got[0] != "a" {
+		t.Errorf("expected engine queue [a], got %v", got)
+	}
+
+	// Earn 150 XP of study: gate flips due (completion earlier baselined 0).
+	if err := store.AddXP(sid, 150); err != nil {
+		t.Fatalf("add xp: %v", err)
+	}
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/scores/x", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	var scores map[string]interface{}
+	_ = json.Unmarshal(rec.Body.Bytes(), &scores)
+	if scores["quiz_due"] != true {
+		t.Errorf("expected quiz_due true at 150 since, got %v", scores)
+	}
+	if scores["xp_since_quiz"] != float64(150) {
+		t.Errorf("expected xp_since_quiz 150, got %v", scores["xp_since_quiz"])
+	}
+}

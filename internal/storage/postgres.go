@@ -119,14 +119,23 @@ CREATE INDEX IF NOT EXISTS idx_active_sessions_attempt ON active_sessions(attemp
 CREATE TABLE IF NOT EXISTS student_topic_speed (
     student_id    TEXT NOT NULL,
     concept_id    TEXT NOT NULL,
-    efactor       DOUBLE PRECISION NOT NULL DEFAULT 2.5,
+    efactor       REAL NOT NULL DEFAULT 2.5,
     interval      INTEGER NOT NULL DEFAULT 0,
     repetitions   INTEGER NOT NULL DEFAULT 0,
-    learning_speed DOUBLE PRECISION NOT NULL DEFAULT 1.0,
+    learning_speed REAL NOT NULL DEFAULT 1.0,
     updated_at    TEXT NOT NULL DEFAULT (now()::text),
-    PRIMARY KEY (student_id, concept_id)
+    PRIMARY KEY (student_id, concept_id),
+    FOREIGN KEY (student_id) REFERENCES students(id)
 );
 CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
+
+CREATE TABLE IF NOT EXISTS quiz_completions (
+    id           SERIAL PRIMARY KEY,
+    student_id   TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    completed_at TEXT NOT NULL DEFAULT (now()::text),
+    xp_total     INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_quiz_completions_student ON quiz_completions(student_id, completed_at);
 
 CREATE TABLE IF NOT EXISTS question_reports (
     id          SERIAL PRIMARY KEY,
@@ -1476,6 +1485,29 @@ func (s *PostgresStore) UpsertTopicSpeed(ts *TopicSpeed) error {
 		return fmt.Errorf("upsert topic speed: %w", err)
 	}
 	return nil
+}
+
+// Batch 1: Quiz 150 XP gate completions.
+
+func (s *PostgresStore) RecordQuizCompletion(studentID string, xpTotal int) error {
+	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES ($1, now()::text, $2)`, studentID, xpTotal); err != nil {
+		return fmt.Errorf("record quiz completion: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) LastQuizCompletion(studentID string) (*QuizCompletion, error) {
+	row := s.db.QueryRow(`SELECT student_id, completed_at, xp_total FROM quiz_completions WHERE student_id = $1 ORDER BY id DESC LIMIT 1`, studentID)
+	var qc QuizCompletion
+	var at sql.NullString
+	if err := row.Scan(&qc.StudentID, &at, &qc.XPTotal); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, fmt.Errorf("last quiz completion: %w", err)
+	}
+	qc.CompletedAt = at.String
+	return &qc, nil
 }
 
 // Question reports (user complaints about questions/explanations/lessons).

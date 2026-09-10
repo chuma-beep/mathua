@@ -640,3 +640,104 @@ func TestEngine_StudyExpected_SurvivesRestart(t *testing.T) {
 		t.Error("expected consumed anchor to miss on second pop")
 	}
 }
+
+// Batch 1: quiz miss enqueues immediate remedial (key prereqs + concept).
+
+func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
+	d, err := concepts.Build([]concepts.Concept{
+		{
+			ID: "a", Label: "Concept A", Domain: "d",
+			GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60},
+		},
+		{
+			ID: "b", Label: "Concept B", Domain: "d",
+			GradingType: "numeric", Prerequisites: []string{"a"},
+			KeyPrerequisites: []string{"a"},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60},
+		},
+	})
+	if err != nil {
+		t.Fatalf("build DAG: %v", err)
+	}
+	store, err := storage.NewSQLiteStore(":memory:")
+	if err != nil {
+		t.Fatalf("create store: %v", err)
+	}
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{answer: "42"})
+	reg.Register("b", &testGen{answer: "99"})
+	e := New(store, d, reg, nil, nil)
+	st, _ := e.CreateStudent("remedial")
+
+	res, err := e.SubmitQuizAnswer(st.ID, "b", "wrong", "99", 5.0)
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if res.Correct {
+		t.Fatal("expected incorrect grade")
+	}
+	if len(res.Remedial) != 2 || res.Remedial[0] != "a" || res.Remedial[1] != "b" {
+		t.Errorf("expected remedial [a b], got %v", res.Remedial)
+	}
+	if got := e.QuizRemedial(st.ID); len(got) != 2 {
+		t.Errorf("expected queued remedial len 2, got %v", got)
+	}
+	// Correct answers never enqueue.
+	if _, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 5.0); err != nil {
+		t.Fatalf("submit correct: %v", err)
+	}
+	if got := e.QuizRemedial(st.ID); len(got) != 2 {
+		t.Errorf("expected queue unchanged after correct, got %v", got)
+	}
+	e.ClearQuizRemedial(st.ID)
+	if got := e.QuizRemedial(st.ID); len(got) != 0 {
+		t.Errorf("expected drained queue, got %v", got)
+	}
+}
+
+// Batch 1: 150 XP gate — due at 150 since last completion, reset on record.
+
+func TestEngine_QuizGate_DueAndReset(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("gate")
+	due, err := e.QuizDue(st.ID)
+	if err != nil || due {
+		t.Fatalf("expected not due at 0 XP, due=%v err=%v", due, err)
+	}
+	if err := e.repo.AddXP(st.ID, 149); err != nil {
+		t.Fatalf("add xp: %v", err)
+	}
+	if due, _ := e.QuizDue(st.ID); due {
+		t.Error("expected not due at 149 XP since quiz")
+	}
+	if err := e.repo.AddXP(st.ID, 1); err != nil {
+		t.Fatalf("add xp: %v", err)
+	}
+	if since, _ := e.QuizXPSince(st.ID); since != 150 {
+		t.Errorf("expected 150 since, got %d", since)
+	}
+	if due, _ := e.QuizDue(st.ID); !due {
+		t.Error("expected due at 150 XP since quiz")
+	}
+	if err := e.RecordQuizCompletion(st.ID); err != nil {
+		t.Fatalf("record completion: %v", err)
+	}
+	if since, _ := e.QuizXPSince(st.ID); since != 0 {
+		t.Errorf("expected 0 since after completion, got %d", since)
+	}
+	if due, _ := e.QuizDue(st.ID); due {
+		t.Error("expected not due right after completion")
+	}
+}
+
+// Batch 1: accommodated time limit wrapper follows concept threshold.
+
+func TestEngine_TimeLimitFor_ScalesWithAccommodation(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("timed")
+	if got := e.TimeLimitFor(st.ID, "a"); got != 60 {
+		t.Errorf("expected base 60s, got %v", got)
+	}
+}

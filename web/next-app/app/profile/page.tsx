@@ -367,8 +367,8 @@ export default function ProfilePage() {
         </section>
         )}
 
-        {/* 150 XP Quiz gate (CONTEXT.md Quiz) */}
-        {scores && scores.xp_total >= 150 && (
+        {/* 150 XP Quiz gate (CONTEXT.md Quiz) — backend signal, lifetime fallback */}
+        {scores && (scores.quiz_due ?? scores.xp_total >= 150) && (
           <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
               <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
@@ -376,7 +376,7 @@ export default function ProfilePage() {
                 <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">150 XP reached — mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min((scores.xp_total / 150) * 100, 100)}%` }} />
+                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 150) * 100, 100)}%` }} />
               </div>
             </div>
             <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">

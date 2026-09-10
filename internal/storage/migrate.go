@@ -117,6 +117,16 @@ CREATE TABLE IF NOT EXISTS student_topic_speed (
 );
 CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
 
+-- Batch 1 (Quiz 150 XP gate): one row per completed mastery-check quiz.
+-- xp_total snapshots lifetime XP so xp_since_quiz = current - last.
+CREATE TABLE IF NOT EXISTS quiz_completions (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id   TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    completed_at TEXT NOT NULL DEFAULT (datetime('now')),
+    xp_total     INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS idx_quiz_completions_student ON quiz_completions(student_id, completed_at);
+
 CREATE TABLE IF NOT EXISTS avatar_images (
     student_id   TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
     content_type TEXT NOT NULL,
