@@ -1,29 +1,29 @@
 [
   {
-    "label": "Backpropagation in neural networks",
-    "section": "",
+    "label": "Forward pass and loss",
+    "section": "Forward Pass and Loss",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Run activations forward through one layer",
+      "Score the prediction with MSE or cross-entropy",
+      "Name which intermediates the backward pass needs"
     ]
   },
   {
-    "label": "Backpropagation in neural networks — practice 2",
-    "section": "",
+    "label": "Backward sweep",
+    "section": "Backward Sweep",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Propagate the loss gradient in reverse order",
+      "Compute dW as outer product of downstream and input",
+      "Compare one sweep against per-weight finite differences"
     ]
   },
   {
-    "label": "Backpropagation in neural networks — practice 3",
-    "section": "",
+    "label": "Gradient descent update",
+    "section": "Gradient Descent Update",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Apply the downhill step with learning rate eta",
+      "Diagnose diverging versus crawling training",
+      "Name momentum and Adam as trajectory smoothers"
     ]
   }
 ]

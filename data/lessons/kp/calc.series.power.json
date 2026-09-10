@@ -1,29 +1,29 @@
 [
   {
-    "label": "Power series",
-    "section": "",
+    "label": "Radius of convergence",
+    "section": "Radius of Convergence",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Write a power series centered at a",
+      "Compute R via the ratio of coefficients",
+      "Test both endpoints separately"
     ]
   },
   {
-    "label": "Power series — practice 2",
-    "section": "",
+    "label": "Differentiating term by term",
+    "section": "Differentiating Term by Term",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Differentiate a power series term by term",
+      "Confirm the radius is preserved",
+      "Flag endpoint behavior that can change"
     ]
   },
   {
-    "label": "Power series — practice 3",
-    "section": "",
+    "label": "Taylor series connection",
+    "section": "Taylor Series Connection",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Recover coefficients from derivatives at the center",
+      "Explain why every power series is a Taylor series",
+      "State why smooth need not equal its Taylor series"
     ]
   }
 ]
