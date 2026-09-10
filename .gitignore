@@ -65,6 +65,10 @@ mathua.db*
 # Local analysis artifacts
 .understand-anything/
 
+# aislop local run history / agent sessions (config.yml IS tracked)
+.aislop/history.jsonl
+.aislop/agent/
+
 # Local skills marketplace (vendored, has own .git)
 skills/
 
