@@ -1326,3 +1326,58 @@ func TestQuizMiss_RemedialAndGateDue(t *testing.T) {
 		t.Errorf("expected xp_since_quiz 150, got %v", scores["xp_since_quiz"])
 	}
 }
+
+// Batch 2: diagnostic end-to-end — start, answer to completion, report
+// carries placement, frontier, gaps, and completion estimates.
+
+func TestDiagnostic_FullFlowReport(t *testing.T) {
+	_, mux, _ := guestServer(t)
+
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/diagnostic", nil))
+	if rec.Code != 200 {
+		t.Fatalf("start: %d %s", rec.Code, rec.Body.String())
+	}
+	var start map[string]interface{}
+	_ = json.Unmarshal(rec.Body.Bytes(), &start)
+	sid, _ := start["session_id"].(string)
+	cid, _ := start["concept_id"].(string)
+	if sid == "" || cid == "" {
+		t.Fatalf("expected session+concept, got %v", start)
+	}
+
+	var done map[string]interface{}
+	for i := 0; i < 60; i++ {
+		body, _ := json.Marshal(map[string]interface{}{
+			"session_id": sid, "concept_id": cid, "correct": true, "fast": true,
+		})
+		rec = httptest.NewRecorder()
+		mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/diagnostic/answer", bytes.NewReader(body)))
+		if rec.Code != 200 {
+			t.Fatalf("answer %d: %d %s", i, rec.Code, rec.Body.String())
+		}
+		_ = json.Unmarshal(rec.Body.Bytes(), &done)
+		if d, _ := done["done"].(bool); d {
+			break
+		}
+		cid, _ = done["concept_id"].(string)
+		if cid == "" {
+			break
+		}
+	}
+	if d, _ := done["done"].(bool); !d {
+		t.Fatalf("expected diagnostic completion, last=%v", done)
+	}
+	rep, _ := done["report"].(map[string]interface{})
+	if rep == nil {
+		t.Fatalf("expected report, got %v", done)
+	}
+	for _, key := range []string{"placement_course_id", "frontier_idx", "frontier_label", "gaps_by_domain", "mastery_levels", "confidence", "completion_estimates", "total_questions"} {
+		if _, ok := rep[key]; !ok {
+			t.Errorf("expected report key %q, got %v", key, rep)
+		}
+	}
+	if _, ok := done["frontier"]; !ok {
+		t.Errorf("expected frontier index, got %v", done)
+	}
+}

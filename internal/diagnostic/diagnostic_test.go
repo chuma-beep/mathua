@@ -219,12 +219,18 @@ func TestEngine_Supplemental_LowConfidenceExtends(t *testing.T) {
 	if e.IsComplete(s) {
 		t.Error("expected not complete with only 1 probe per concept (low confidence)")
 	}
-	// Second probe per concept settles them.
+	// Second probe per concept settles them; 25-question floor needs 5 more.
 	for i := 0; i < 10; i++ {
 		e.RecordAnswer(s, idFor(i), true, true)
 	}
+	if e.IsComplete(s) {
+		t.Error("expected not complete before the 25-question floor")
+	}
+	for i := 0; i < 5; i++ {
+		e.RecordAnswer(s, idFor(i), true, true)
+	}
 	if !e.IsComplete(s) {
-		t.Error("expected complete after 2 probes per concept")
+		t.Error("expected complete after 2 probes per concept + floor met")
 	}
 }
 
@@ -237,6 +243,10 @@ func TestEngine_AllProbedCompletes(t *testing.T) {
 			e.RecordAnswer(s, cid, true, true)
 			e.RecordAnswer(s, cid, true, true)
 		}
+	}
+	// 10 concepts × 2 probes = 20 < 25-question floor: top up round-robin.
+	for i := 0; !e.IsComplete(s) && i < 60; i++ {
+		e.RecordAnswer(s, idFor(i%len(s.order)), true, true)
 	}
 	if !e.IsComplete(s) {
 		t.Errorf("expected complete after all probed, state=%s asked=%d", s.State, s.totalAsked)
@@ -294,8 +304,8 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	prevCover := -1
 	for i := 0; i < 60 && !e.IsComplete(s); i++ {
 		p := e.Progress(s)
-		if p.EstimatedTotal < 15 || p.EstimatedTotal > 45 {
-			t.Fatalf("estimated_total out of [15,45]: %+v", p)
+		if p.EstimatedTotal < 25 || p.EstimatedTotal > 45 {
+			t.Fatalf("estimated_total out of [25,45]: %+v", p)
 		}
 		if p.Answered != s.totalAsked {
 			t.Fatalf("answered mismatch: progress=%d asked=%d", p.Answered, s.totalAsked)
@@ -344,4 +354,54 @@ func TestEngine_Report_ConditionallyCompleted(t *testing.T) {
 	if s.beliefs[cid] >= before {
 		t.Errorf("expected fall-back decay on conditional prereq: before=%f after=%f", before, s.beliefs[cid])
 	}
+}
+
+// Batch 2: supplementalDiagnostic re-probes settled low-confidence concepts
+// once each (legacy path: answers recorded without question probes leave
+// confidence at 0), then reports complete.
+
+func TestEngine_SupplementalDiagnostic_NamedPath(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	// Settle every concept with 2 probes each, no question probes asked.
+	for i := 0; i < 10; i++ {
+		e.RecordAnswer(s, idFor(i), true, true)
+		e.RecordAnswer(s, idFor(i), true, true)
+	}
+	for _, c := range s.order {
+		if !s.doneSet[c.ID] {
+			t.Fatalf("expected %s settled, doneSet=%v", c.ID, s.doneSet)
+		}
+	}
+	s.Lock()
+	first := e.supplementalDiagnostic(s)
+	s.Unlock()
+	if first == "" {
+		t.Fatal("expected supplemental target at confidence 0")
+	}
+	if s.supplementalCount[first] != 1 {
+		t.Errorf("expected supplemental count 1, got %d", s.supplementalCount[first])
+	}
+	if s.doneSet[first] {
+		t.Errorf("expected %s unsettled for re-probe", first)
+	}
+	// Cap: second call for the same concept moves on, never loops forever.
+	answered := map[string]bool{first: true}
+	for i := 0; i < 60; i++ {
+		s.Lock()
+		next := e.supplementalDiagnostic(s)
+		s.Unlock()
+		if next == "" {
+			break
+		}
+		if answered[next] {
+			t.Fatalf("concept %s re-probed twice, cap broken", next)
+		}
+		answered[next] = true
+	}
+	s.Lock()
+	if tail := e.supplementalDiagnostic(s); tail != "" {
+		t.Errorf("expected supplemental exhaustion, got %q", tail)
+	}
+	s.Unlock()
 }
