@@ -1,0 +1,16 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <g font-size="12" fill="#8a8f98" text-anchor="middle">
+    <text x="150" y="28">5 becomes 4, 2 becomes 12</text>
+  </g>
+  <g font-size="20" fill="#BABABA" text-anchor="middle" font-family="monospace">
+    <text x="150" y="66" font-size="14" fill="#8a8f98">4</text>
+    <text x="185" y="66" font-size="14" fill="#8a8f98">12</text>
+    <text x="150" y="92" opacity="0.45">5</text><text x="185" y="92" opacity="0.45">2</text>
+    <text x="120" y="128">−</text>
+    <text x="150" y="128">2</text><text x="185" y="128">7</text>
+    <line x1="115" y1="143" x2="205" y2="143" stroke="#BABABA" stroke-width="2"/>
+    <text x="150" y="181">2</text><text x="185" y="181">5</text>
+  </g>
+  <text x="245" y="100" font-size="13" fill="#BABABA">borrow 1 ten:</text>
+  <text x="245" y="120" font-size="13" fill="#BABABA">12 − 7 = 5</text>
+</svg>

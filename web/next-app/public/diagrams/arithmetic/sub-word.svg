@@ -1,0 +1,29 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="28" font-size="13" fill="#8a8f98">12 eggs, 5 used for breakfast</text>
+  <g>
+    <ellipse cx="55" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="85" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="115" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="145" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="175" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="205" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="235" cy="75" rx="11" ry="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <ellipse cx="55" cy="115" rx="11" ry="14" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <ellipse cx="85" cy="115" rx="11" ry="14" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <ellipse cx="115" cy="115" rx="11" ry="14" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <ellipse cx="145" cy="115" rx="11" ry="14" fill="none" stroke="#8a8f98" stroke-width="2"/>
+    <ellipse cx="175" cy="115" rx="11" ry="14" fill="none" stroke="#8a8f98" stroke-width="2"/>
+  </g>
+  <line x1="40" y1="60" x2="70" y2="90" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="70" y1="60" x2="40" y2="90" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="70" y1="100" x2="100" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="100" y1="100" x2="70" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="100" y1="100" x2="130" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="130" y1="100" x2="100" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="130" y1="100" x2="160" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="160" y1="100" x2="130" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="160" y1="100" x2="190" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <line x1="190" y1="100" x2="160" y2="130" stroke="#8a8f98" stroke-width="2"/>
+  <text x="230" y="115" font-size="14" fill="#BABABA">12 − 5 = 7 left</text>
+  <text x="30" y="175" font-size="12" fill="#8a8f98">cross out what is taken, count the rest</text>
+</svg>

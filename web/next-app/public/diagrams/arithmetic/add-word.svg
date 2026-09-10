@@ -1,0 +1,16 @@
+<svg width="360" height="200" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+  <text x="30" y="30" font-size="13" fill="#8a8f98">5 red apples + 3 green apples</text>
+  <g>
+    <circle cx="50" cy="80" r="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <circle cx="85" cy="80" r="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <circle cx="120" cy="80" r="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <circle cx="155" cy="80" r="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <circle cx="190" cy="80" r="14" fill="none" stroke="#BABABA" stroke-width="2"/>
+    <circle cx="225" cy="80" r="14" fill="none" stroke="#8a8f98" stroke-width="2" stroke-dasharray="4"/>
+    <circle cx="260" cy="80" r="14" fill="none" stroke="#8a8f98" stroke-width="2" stroke-dasharray="4"/>
+    <circle cx="295" cy="80" r="14" fill="none" stroke="#8a8f98" stroke-width="2" stroke-dasharray="4"/>
+  </g>
+  <text x="30" y="130" font-size="14" fill="#BABABA">count them all: 8 apples</text>
+  <text x="30" y="155" font-size="14" fill="#BABABA">5 + 3 = 8</text>
+  <text x="30" y="180" font-size="12" fill="#8a8f98">join the groups, then count</text>
+</svg>
