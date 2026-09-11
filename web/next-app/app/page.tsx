@@ -10,10 +10,12 @@ import Footer from '../components/Footer'
 import {
   ContributingSection,
   CurriculumSection,
+  FaqSection,
   FeaturesSection,
   HeroSection,
   PipelineSection,
   ProgressionSection,
+  SocialProofSection,
 } from './home/sections'
 
 export default function HomePage() {
@@ -39,12 +41,15 @@ export default function HomePage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <HeroSection theme={theme} onGetStarted={handleGetStarted} />
         <AsciiDivider pattern="wave" />
+        <SocialProofSection />
         <FeaturesSection />
         <PipelineSection />
         <AsciiDivider pattern="dash" />
         <CurriculumSection />
         <AsciiDivider pattern="wave" />
         <ProgressionSection />
+        <AsciiDivider pattern="wave" />
+        <FaqSection />
         <AsciiDivider pattern="wave" />
         <ContributingSection />
         <Footer />

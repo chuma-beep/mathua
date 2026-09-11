@@ -276,6 +276,91 @@ export function ProgressionSection() {
   )
 }
 
+export function SocialProofSection() {
+  return (
+    <section className="py-20 max-sm:py-12">
+      <SectionHeader title="Why it is trusted" />
+      <p
+        style={{
+          fontFamily: bodyFont,
+          fontSize: '0.95rem',
+          color: 'var(--text-secondary)',
+          lineHeight: 1.85,
+          textAlign: 'center',
+          maxWidth: '600px',
+          margin: '0 auto',
+        }}
+      >
+        Open-source under MIT. Sequencing inspired by Math Academy, content shaped by
+        OpenStax, MIT OpenCourseWare, and Art of Problem Solving. Lessons build on
+        Algebrica under CC BY-NC 4.0. No accounts to start, no paywall on the graph.
+      </p>
+      <div style={statsRowStyle} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center mt-6">
+        <span>{conceptCount} worked concepts</span>
+        <span style={{ color: 'var(--border-strong)' }}>·</span>
+        <span>generated problems, never stored</span>
+        <span style={{ color: 'var(--border-strong)' }}>·</span>
+        <span>150 XP mastery-check quiz</span>
+      </div>
+    </section>
+  )
+}
+
+const FAQS = [
+  {
+    q: 'Do I need an account to start?',
+    a: 'No. Get started creates a guest profile instantly. Sign up later only if you want your progress on another device.',
+  },
+  {
+    q: 'Why does speed matter, not just accuracy?',
+    a: 'Each concept has a streak and a time threshold. A slow correct answer counts as weak mastery, so fluency is proven before you advance.',
+  },
+  {
+    q: 'What happens every 150 XP?',
+    a: 'A timed, closed-book mastery-check quiz at 80% difficulty over recent material, with immediate remedial work and a retake path.',
+  },
+  {
+    q: 'Is Mathua free and open-source?',
+    a: 'Yes, MIT licensed. The concept graph, generators, and lessons are in the repo and validated by automated checks on every change.',
+  },
+]
+
+export function FaqSection() {
+  return (
+    <section className="py-20 max-sm:py-12">
+      <SectionHeader title="Questions, answered." />
+      <div style={{ marginTop: '2rem' }}>
+        {FAQS.map(f => (
+          <details key={f.q} style={{ borderTop: '0.5px solid var(--border)', padding: '1rem 0' }}>
+            <summary
+              style={{
+                fontFamily: headingFont,
+                fontSize: '1rem',
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+              }}
+            >
+              {f.q}
+            </summary>
+            <p
+              style={{
+                fontFamily: bodyFont,
+                fontSize: '0.95rem',
+                color: 'var(--text-secondary)',
+                lineHeight: 1.85,
+                marginTop: '0.5rem',
+                marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)',
+              }}
+            >
+              {f.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export function ContributingSection() {
   return (
     <section className="py-20 max-sm:py-12">
