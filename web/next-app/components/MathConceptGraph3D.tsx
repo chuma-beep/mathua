@@ -136,6 +136,19 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
   return domainColor(node.domain, theme)
 }
 
+function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduced(mql.matches)
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [])
+  return reduced
+}
+
 const monoFont = "'IBM Plex Mono', monospace"
 const serifFont = "'IBM Plex Serif', serif"
 
@@ -204,6 +217,16 @@ function NodeInstances({
     })
     return { geometry, material, ringGeometry, ringMaterial }
   }, [segments])
+
+  // Dispose GPU resources on unmount / segment change (no leak on nav).
+  useEffect(() => {
+    return () => {
+      geometry.dispose()
+      material.dispose()
+      ringGeometry.dispose()
+      ringMaterial.dispose()
+    }
+  }, [geometry, material, ringGeometry, ringMaterial])
 
   // Positions are stable per layout; upload the instance matrices once.
   useLayoutEffect(() => {
@@ -376,7 +399,7 @@ function AllEdges({ links, positionMap, theme }: { links: Link[], positionMap: M
   )
 }
 
-function Particles({ theme, count = 800 }: { theme: 'dark' | 'light'; count?: number }) {
+function Particles({ theme, count = 400 }: { theme: 'dark' | 'light'; count?: number }) {
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
@@ -402,14 +425,14 @@ function Particles({ theme, count = 800 }: { theme: 'dark' | 'light'; count?: nu
   )
 }
 
-function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused, controlsRef }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean }) {
+function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused, reducedMotion, controlsRef }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean; reducedMotion: boolean }) {
   const [hovered, setHovered] = useState<string | null>(null)
 
   useEffect(() => {
     if (controlsRef.current) {
-      controlsRef.current.autoRotate = hovered === null && !rotatePaused && !isMobile
+      controlsRef.current.autoRotate = hovered === null && !rotatePaused && !isMobile && !reducedMotion
     }
-  }, [hovered, rotatePaused, controlsRef, isMobile])
+  }, [hovered, rotatePaused, controlsRef, isMobile, reducedMotion])
 
   const hoveredNode = useMemo(() => nodes.find(n => n.id === hovered) ?? null, [nodes, hovered])
   const activeNode = useMemo(() => nodes.find(n => n.id === activeId) ?? null, [nodes, activeId])
@@ -440,7 +463,7 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
         </mesh>
       )}
 
-      <Particles theme={theme} count={isMobile ? 300 : 800} />
+      <Particles theme={theme} count={isMobile ? 150 : 400} />
 
       <OrbitControls
         ref={controlsRef}
@@ -448,7 +471,7 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
         enableZoom={true}
         minDistance={12}
         maxDistance={45}
-        autoRotate={!isMobile}
+        autoRotate={!isMobile && !reducedMotion}
         autoRotateSpeed={1.2}
         dampingFactor={0.05}
         enableDamping={true}
@@ -557,6 +580,7 @@ export default function MathConceptGraph3D({
   onNodeSelect,
 }: MathConceptGraph3DProps) {
   const isMobile = useIsMobile()
+  const reducedMotion = usePrefersReducedMotion()
 
   const { nodes, links, positionMap } = useMemo(() => {
     const input: ConceptLayoutInput[] = concepts.map(c => ({ id: c.id, prerequisites: c.prerequisites }))
@@ -682,7 +706,7 @@ export default function MathConceptGraph3D({
           camera={{ position: [0, 0, 28], fov: 60 }}
           gl={{ alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' }}
           dpr={isMobile ? 1 : [1, 1.5]}
-          frameloop={isMobile ? 'demand' : 'always'}
+          frameloop={isMobile || reducedMotion ? 'demand' : 'always'}
           onCreated={({ gl }) => {
             const canvas = gl.domElement as HTMLCanvasElement
             const onLost = (e: Event) => {
@@ -703,6 +727,7 @@ export default function MathConceptGraph3D({
             theme={theme}
             isMobile={isMobile}
             rotatePaused={rotatePaused}
+            reducedMotion={reducedMotion}
             controlsRef={controlsRef}
           />
         </Canvas>
