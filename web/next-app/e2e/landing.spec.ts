@@ -32,7 +32,7 @@ test('landing page does not ship the concept corpus in First Load JS', async ({ 
   expect(json.edges.length).toBeGreaterThan(500)
 })
 
-test('stats row shows concept and domain counts from the dataset', async ({ page }) => {
+test('concept count is shown from the dataset', async ({ page }) => {
   await page.goto('/')
   const count = conceptsData.length
   await expect(page.getByText(String(count)).first()).toBeVisible()
