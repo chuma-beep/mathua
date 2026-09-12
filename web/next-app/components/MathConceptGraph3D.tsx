@@ -567,6 +567,7 @@ interface LabelCandidate {
   active: boolean
   dimmed: boolean
   priority: number
+  color?: string
 }
 
 function LabelProjector({
@@ -668,6 +669,9 @@ function LabelProjector({
       if (span.textContent !== candidate.text) span.textContent = candidate.text
       const className = `graph-label graph-label--${candidate.kind}${candidate.active ? ' is-active' : ''}${candidate.dimmed ? ' is-dim' : ''}`
       if (span.className !== className) span.className = className
+      if (candidate.kind === 'domain') {
+        span.style.setProperty('--label-color', candidate.color ?? 'var(--text-muted)')
+      }
       span.style.display = 'block'
       span.style.transform =
         candidate.kind === 'domain'
@@ -750,11 +754,12 @@ function GraphScene({
       kind: LabelCandidate['kind'],
       priority: number,
       active = false,
-      dimmed = false
+      dimmed = false,
+      color?: string
     ) => {
       if (seen.has(key)) return
       seen.add(key)
-      out.push({ key, text, position, kind, priority, active, dimmed })
+      out.push({ key, text, position, kind, priority, active, dimmed, color })
     }
 
     if (activeNode) add(`n:${activeNode.id}`, activeNode.name, activeNode.position, 'node', 0, true)
@@ -772,7 +777,7 @@ function GraphScene({
     if (lod !== 'close') {
       for (const [domain, centroid] of Object.entries(graph.domainCentroids)) {
         const dimmed = focused && focusIds !== null && !focusDomains.has(domain)
-        add(`d:${domain}`, domainLabel(domain), centroid, 'domain', lod === 'far' ? 3 : 4, false, dimmed)
+        add(`d:${domain}`, domainLabel(domain), centroid, 'domain', lod === 'far' ? 3 : 4, false, dimmed, domainColor(domain, theme))
       }
     }
     if (lod !== 'far') {
@@ -782,7 +787,7 @@ function GraphScene({
       }
     }
     return out.sort((a, b) => a.priority - b.priority)
-  }, [graph, lod, activeNode, hovered, focused, focusIds, activeId])
+  }, [graph, lod, activeNode, hovered, focused, focusIds, activeId, theme])
 
   const autoRotate = autoRotateBase && hovered === null && !focused
 
@@ -950,7 +955,9 @@ function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }:
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' as const }}>
-        <span style={{ color, fontSize: '12px', fontFamily: monoFont }}>● {concept.domain.replace(/_/g, ' ')}</span>
+        <span style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
+          <span style={{ color }}>●</span> {concept.domain.replace(/_/g, ' ')}
+        </span>
         {concept.status && (
           <span style={{
             color: concept.status === 'mastered' ? 'var(--accent-teal)' : concept.status === 'learning' ? '#e8a849' : 'var(--text-muted)',
