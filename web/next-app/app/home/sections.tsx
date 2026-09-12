@@ -9,7 +9,6 @@ import DomainTable from '../../components/DomainTable'
 import ProgressionLevels from '../../components/ProgressionLevels'
 import Loading from '../../components/Loading'
 import { loadPositionEntries } from '../../lib/graphPositions'
-import { domainColor } from '../../lib/graphDomains'
 import {
   PIPELINE_STATES,
   conceptCount,
@@ -131,36 +130,6 @@ export function GraphPoster() {
   )
 }
 
-// Static cluster key (no canvas cost): one dot per domain so the node
-// cloud reads as grouped clusters. Counts come from the build-generated
-// meta file, so the concept corpus stays out of the page bundle.
-function DomainLegend({ theme }: { theme: 'dark' | 'light' }) {
-  return (
-    <div
-      aria-label="Domains in the graph"
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '4px 12px',
-        marginTop: '0.75rem',
-        fontFamily: monoFont,
-        fontSize: '11px',
-        color: 'var(--text-muted)',
-      }}
-    >
-      {domainOrder
-        .filter(domain => domainCounts[domain] > 0)
-        .map(domain => (
-          <span key={domain} title={`${domainCounts[domain]} topics`} style={{ whiteSpace: 'nowrap' }}>
-            <span style={{ color: domainColor(domain, theme) }}>●</span>{' '}
-            {domain.replace(/_/g, ' ')}
-          </span>
-        ))}
-    </div>
-  )
-}
-
 export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; onGetStarted: () => void }) {
   return (
     <section className="py-20 max-sm:py-8 text-center" style={{ background: 'transparent' }}>
@@ -216,7 +185,6 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         No account needed to start.
       </p>
 
-      <DomainLegend theme={theme} />
       <div
         className="sm:hidden"
         style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.5rem' }}
@@ -287,6 +255,20 @@ export function PipelineSection() {
     <section className="py-20 max-sm:py-12">
       <SectionHeader title="The states" />
       <Pipeline states={PIPELINE_STATES} className="my-7" />
+      <p
+        style={{
+          fontFamily: monoFont,
+          fontSize: '12px',
+          color: 'var(--text-secondary)',
+          textAlign: 'center',
+          marginTop: '-0.5rem',
+          marginBottom: '1.5rem',
+          lineHeight: 1.8,
+        }}
+      >
+        example · <span style={{ color: 'var(--accent-blue)' }}>arith.add.single</span> · 10 correct
+        in a row at ≤8s → MASTERED
+      </p>
       <div className="flex justify-center">
         <FormulaBlock
           code={`priority = (0.7 × days_since_last_seen)
@@ -335,6 +317,15 @@ export function CurriculumSection() {
       >
         Problems are generated on demand, never stored. There is nothing to memorise.
       </p>
+      <div className="flex justify-center mt-5">
+        <a
+          href="/study"
+          className="link-underline"
+          style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--accent-blue)' }}
+        >
+          Browse all {conceptCount} concepts →
+        </a>
+      </div>
     </section>
   )
 }
