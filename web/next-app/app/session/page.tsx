@@ -88,8 +88,9 @@ function SessionContent() {
           </p>
         </section>
 
-        <Footer />
       </div>
+
+      <Footer />
       <BottomTabs />
     </>
   )

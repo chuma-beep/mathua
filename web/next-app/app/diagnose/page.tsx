@@ -101,9 +101,10 @@ export default function DiagnosePage() {
         </div>
       </section>
 
-      <Footer />
     </div>
-      <BottomTabs />
+
+    <Footer />
+    <BottomTabs />
     </>
   )
 }

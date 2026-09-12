@@ -291,9 +291,10 @@ function GraphContent() {
         />
       </div>
 
-      <Footer />
     </div>
-      <BottomTabs />
+
+    <Footer />
+    <BottomTabs />
     </>
   )
 }

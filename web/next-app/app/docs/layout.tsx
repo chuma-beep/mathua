@@ -1,6 +1,7 @@
 'use client'
 
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 import BottomTabs from '../../components/BottomTabs'
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
@@ -14,17 +15,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         { label: 'Note', href: '/note' },
       ]} />
       <main>{children}</main>
-      <footer style={{
-        borderTop: '0.5px solid var(--border)',
-        padding: '32px 24px',
-        textAlign: 'center',
-        fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
-        fontSize: '12px',
-        color: 'var(--text-muted)',
-        lineHeight: 1.6,
-      }}>
-        Mathua · MIT License
-      </footer>
+      <Footer />
       <BottomTabs />
     </>
   )
