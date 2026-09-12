@@ -4,17 +4,17 @@ import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
 import { ensureGuestId, ensureGuestToken } from '../lib/auth'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import {
-  ContributingSection,
-  CurriculumSection,
+  CoverageSection,
+  EditorialFooter,
   FaqSection,
   FeaturesSection,
   HeroSection,
-  PipelineSection,
-  ProgressionSection,
-  SocialProofSection,
+  RankingSection,
+  StatesSection,
+  TrustSection,
 } from './home/sections'
 
 export default function HomePage() {
@@ -22,6 +22,8 @@ export default function HomePage() {
   const { push } = useRouter()
   // Logged-in visits bounce to /profile; explicit Home clicks stay put.
   const homeChecked = useHomeRedirect(mounted)
+  // Sections only exist once the redirect check resolves, so gate on it.
+  useScrollReveal(mounted && homeChecked)
 
   if (!mounted || !homeChecked) {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
@@ -37,17 +39,16 @@ export default function HomePage() {
   return (
     <>
       <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
-      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      <main className="max-w-container mx-auto px-4 sm:px-6 overflow-x-clip min-w-0">
         <HeroSection theme={theme} onGetStarted={handleGetStarted} />
-        <SocialProofSection />
+        <TrustSection />
         <FeaturesSection />
-        <PipelineSection />
-        <CurriculumSection />
-        <ProgressionSection />
+        <StatesSection />
+        <CoverageSection />
+        <RankingSection />
         <FaqSection />
-        <ContributingSection />
-        <Footer />
-      </div>
+      </main>
+      <EditorialFooter />
     </>
   )
 }

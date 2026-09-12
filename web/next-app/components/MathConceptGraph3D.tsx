@@ -1166,7 +1166,7 @@ export default function MathConceptGraph3D({
         }}
         style={{
           position: 'relative',
-          height: isMobile ? '320px' : '520px',
+          height: isMobile ? '280px' : '300px',
           width: '100%',
           borderRadius: 0,
           overflow: 'hidden',
