@@ -60,6 +60,50 @@ test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
   await expect(tabs).toBeInViewport()
 })
 
+test('mobile landing hero graph supports tap, pan and pinch', async ({ page }) => {
+  const errors: string[] = []
+  page.on('pageerror', e => errors.push(String(e)))
+  page.on('console', m => {
+    if (m.type() === 'error') errors.push(m.text())
+  })
+
+  await page.goto('/')
+  const canvas = page.locator('canvas').first()
+  await canvas.scrollIntoViewIfNeeded()
+  await expect(canvas).toBeVisible({ timeout: 45_000 })
+  await expect(page.locator('.graph-label--domain').first()).toBeVisible({ timeout: 30_000 })
+  expect(await overflowPx(page)).toBeLessThanOrEqual(1)
+
+  const box = (await canvas.boundingBox())!
+  const cx = box.x + box.width / 2
+  const cy = box.y + box.height / 2
+
+  // Tap selects a concept; the info panel below always names the active one.
+  await page.touchscreen.tap(cx, cy)
+  await expect(page.getByText('selected concept', { exact: true })).toBeVisible()
+
+  // One-finger pan + two-finger pinch through CDP touch events.
+  const cdp = await page.context().newCDPSession(page)
+  await cdp.send('Input.synthesizeScrollGesture', {
+    x: Math.round(cx),
+    y: Math.round(cy),
+    xDistance: -140,
+    yDistance: 70,
+    speed: 900,
+    gestureSourceType: 'touch',
+  })
+  await cdp.send('Input.synthesizePinchGesture', {
+    x: Math.round(cx),
+    y: Math.round(cy),
+    scaleFactor: 1.7,
+    relativeSpeed: 700,
+    gestureSourceType: 'touch',
+  })
+  await page.waitForTimeout(600)
+  await expect(canvas).toBeVisible()
+  expect(errors).toEqual([])
+})
+
 test('mobile graph renders and is usable', async ({ page }) => {
   await page.goto('/graph')
   const nodes = page.locator('.react-flow__node')

@@ -3,10 +3,13 @@
 /* eslint-disable react/no-unknown-property -- R3F/Drei JSX elements use non-HTML attributes */
 
 import React, { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect } from 'react'
-import { Canvas, useFrame, type ThreeEvent } from '@react-three/fiber'
-import { OrbitControls, Html } from '@react-three/drei'
+import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as THREE from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
+import { loadGraphPayload, loadPositionEntries } from '../lib/graphPositions'
+import type { GraphPayload } from '../lib/graphPayload'
+import { domainColor, domainLabel, DOMAIN_ORDER } from '../lib/graphDomains'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { type MasteryStatus } from '../lib/graphStatus'
 
@@ -21,90 +24,30 @@ export interface ConceptDef {
 
 interface MathConceptGraph3DProps {
   theme?: 'dark' | 'light'
-  concepts: ConceptDef[]
   conceptStatuses?: Record<string, MasteryStatus>
   onPathNodes?: string[]
   onNodeSelect?: (nodeId: string) => void
 }
 
-const DOMAIN_COLORS = {
-  arithmetic:           '#4db8a0',
-  fractions:            '#a8a0f0',
-  prealgebra:           '#7dd3fc',
-  algebra:              '#e8a849',
-  geometry:             '#86efac',
-  trigonometry:         '#fda4af',
-  complex_numbers:      '#e879f9',
-  precalculus:          '#fda4af',
-  calculus:             '#e879f9',
-  linear_algebra:       '#86efac',
-  statistics:           '#67e8f9',
-  discrete_math:        '#f0abab',
-  number_theory:        '#a8e6cf',
-  differential_equations:'#fdba74',
-  abstract_algebra:     '#c4b5fd',
-  topology:             '#f9a8d4',
-} satisfies Record<string, string>
-
-const DOMAIN_COLORS_LIGHT = {
-  arithmetic:           '#3a9a8a',
-  fractions:            '#8a80d8',
-  prealgebra:           '#5ab8dc',
-  algebra:              '#c08a30',
-  geometry:             '#68c88c',
-  trigonometry:         '#e88a99',
-  complex_numbers:      '#c868e8',
-  precalculus:          '#e88a99',
-  calculus:             '#c868e8',
-  linear_algebra:       '#68c88c',
-  statistics:           '#50c8d8',
-  discrete_math:        '#d08a8a',
-  number_theory:        '#80c8a8',
-  differential_equations:'#d09050',
-  abstract_algebra:     '#a090d0',
-  topology:             '#d080b0',
-} satisfies Record<string, string>
-
-const FALLBACK_COLOR = '#5a6577'
-const FALLBACK_COLOR_LIGHT = '#888'
-
-function domainColor(domain: string, theme: 'dark' | 'light'): string {
-  const map = theme === 'dark' ? DOMAIN_COLORS : DOMAIN_COLORS_LIGHT
-  return map[domain] ?? (theme === 'dark' ? FALLBACK_COLOR : FALLBACK_COLOR_LIGHT)
-}
+type Vec3 = [number, number, number]
+type LodTier = 'far' | 'mid' | 'close'
 
 const LINK_COLOR = '#8ed8d0'
 const LINK_COLOR_LIGHT = '#207068'
-
 const ACTIVE_LINK_COLOR = '#60a5fa'
 const ACTIVE_LINK_COLOR_LIGHT = '#2563eb'
 
-const NODE_RADIUS = 0.20
+const NODE_RADIUS = 0.2
+const LABEL_POOL = 72
 const HIGHLIGHT = new THREE.Color('#ffffff')
 const GOLD = new THREE.Color('#c8a96e')
+const DIM_DARK = new THREE.Color('#11151f')
+const DIM_LIGHT = new THREE.Color('#eae8e0')
 
-interface RenderNode {
-  id: string
-  name: string
-  domain: string
-  position: [number, number, number]
-  status: MasteryStatus | null
-  onPath: boolean
-}
-
-interface Link {
-  source: string
-  target: string
-}
-
-interface GraphSceneProps {
-  nodes: RenderNode[]
-  links: Link[]
-  activeId: string
-  onSelect: (id: string) => void
-  theme: 'dark' | 'light'
-  controlsRef: React.MutableRefObject<any>
-}
+const EDGE_ALPHA: Record<LodTier, number> = { far: 0.07, mid: 0.16, close: 0.26 }
+const EDGE_ALPHA_LIGHT: Record<LodTier, number> = { far: 0.1, mid: 0.2, close: 0.32 }
+const FOCUS_EDGE_ALPHA = 0.6
+const UNFOCUSED_EDGE_FACTOR = 0.12
 
 const STATUS_COLORS_DARK = {
   mastered:   '#4db8a0',
@@ -121,6 +64,35 @@ const STATUS_COLORS_LIGHT = {
   unseen:     '#9ca3af',
   locked:     '#d0d0d0',
 } satisfies Record<string, string>
+
+const monoFont = "'IBM Plex Mono', monospace"
+const serifFont = "'IBM Plex Serif', serif"
+
+interface RenderNode {
+  id: string
+  name: string
+  domain: string
+  position: Vec3
+  status: MasteryStatus | null
+  onPath: boolean
+  importance: number
+}
+
+interface Link {
+  source: string
+  target: string
+}
+
+interface BuiltGraph {
+  nodes: RenderNode[]
+  links: Link[]
+  positionMap: Map<string, Vec3>
+  nodeById: Map<string, RenderNode>
+  prereqsById: Map<string, string[]>
+  unlocksById: Map<string, string[]>
+  domainCentroids: Record<string, Vec3>
+  byImportance: RenderNode[]
+}
 
 function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
   const showStatus = node.status !== null
@@ -149,309 +121,684 @@ function usePrefersReducedMotion(): boolean {
   return reduced
 }
 
-const monoFont = "'IBM Plex Mono', monospace"
-const serifFont = "'IBM Plex Serif', serif"
+function useCoarsePointer(): boolean {
+  const [coarse, setCoarse] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return
+    const mql = window.matchMedia('(pointer: coarse)')
+    setCoarse(mql.matches)
+    const onChange = (e: MediaQueryListEvent) => setCoarse(e.matches)
+    mql.addEventListener('change', onChange)
+    return () => mql.removeEventListener('change', onChange)
+  }, [])
+  return coarse
+}
 
-const tooltipStyle: React.CSSProperties = {
-  background: 'var(--bg)',
-  border: '0.5px solid var(--border)',
-  borderRadius: 0,
-  whiteSpace: 'nowrap',
-  minWidth: 'max-content',
-  boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+// ── Data ────────────────────────────────────────────────
+
+function buildGraph(
+  payload: GraphPayload,
+  entries: Array<[string, Vec3]>,
+  statuses: Record<string, MasteryStatus> | undefined,
+  onPathNodes: string[] | undefined
+): BuiltGraph {
+  const positionMap = new Map<string, Vec3>(entries)
+  const idAt = (i: number) => payload.nodes[i][0]
+
+  const prereqIds: string[][] = payload.nodes.map(() => [])
+  for (const [source, target] of payload.edges) prereqIds[target].push(idAt(source))
+
+  let missing = false
+  for (const [id] of payload.nodes) {
+    if (!positionMap.has(id)) {
+      missing = true
+      break
+    }
+  }
+  if (missing) {
+    const input: ConceptLayoutInput[] = payload.nodes.map(([id, , domain], i) => ({
+      id,
+      prerequisites: prereqIds[i],
+      domain,
+    }))
+    const fallback = layoutDAG3D(input, { domainOrder: [...DOMAIN_ORDER] })
+    for (const [id, p] of Object.entries(fallback.positions)) positionMap.set(id, p)
+  }
+
+  const onPathSet = onPathNodes ? new Set(onPathNodes) : null
+  const nodes: RenderNode[] = payload.nodes.map(([id, label, domain, importance]) => ({
+    id,
+    name: label,
+    domain,
+    position: positionMap.get(id) ?? [0, 0, 0],
+    status: statuses?.[id] ?? null,
+    onPath: onPathSet?.has(id) ?? false,
+    importance,
+  }))
+
+  const links: Link[] = payload.edges.map(([source, target]) => ({
+    source: idAt(source),
+    target: idAt(target),
+  }))
+
+  const nodeById = new Map<string, RenderNode>()
+  for (const n of nodes) nodeById.set(n.id, n)
+
+  const prereqsById = new Map<string, string[]>()
+  const unlocksById = new Map<string, string[]>()
+  for (const link of links) {
+    const pre = prereqsById.get(link.target)
+    if (pre) pre.push(link.source)
+    else prereqsById.set(link.target, [link.source])
+    const post = unlocksById.get(link.source)
+    if (post) post.push(link.target)
+    else unlocksById.set(link.source, [link.target])
+  }
+
+  const centroidSums = new Map<string, { x: number; y: number; z: number; n: number }>()
+  for (const n of nodes) {
+    const acc = centroidSums.get(n.domain) ?? { x: 0, y: 0, z: 0, n: 0 }
+    acc.x += n.position[0]
+    acc.y += n.position[1]
+    acc.z += n.position[2]
+    acc.n += 1
+    centroidSums.set(n.domain, acc)
+  }
+  const domainCentroids: Record<string, Vec3> = {}
+  for (const [domain, acc] of centroidSums) {
+    domainCentroids[domain] = [acc.x / acc.n, acc.y / acc.n, acc.z / acc.n]
+  }
+
+  const byImportance = [...nodes].sort((a, b) => b.importance - a.importance || a.id.localeCompare(b.id))
+
+  return { nodes, links, positionMap, nodeById, prereqsById, unlocksById, domainCentroids, byImportance }
 }
 
 // ── Instanced nodes ─────────────────────────────────────
-//
-// One draw call for all 630 node spheres (plus one for their halo rings)
-// instead of ~1,260 individual meshes, and no per-node useFrame callbacks.
-// Per-instance colour carries the domain/status; active + hovered instances
-// are brightened in the colour buffer, and a single glow mesh marks the
-// active node.
 
 function NodeInstances({
   nodes,
   activeId,
   hoveredId,
+  focused,
+  focusIds,
   theme,
   isMobile,
+  hoverEnabled,
   onHover,
   onSelect,
 }: {
   nodes: RenderNode[]
   activeId: string
   hoveredId: string | null
+  focused: boolean
+  focusIds: Set<string> | null
   theme: 'dark' | 'light'
   isMobile: boolean
+  hoverEnabled: boolean
   onHover: (id: string | null) => void
   onSelect: (id: string) => void
 }) {
   const meshRef = useRef<THREE.InstancedMesh>(null)
-  const ringRef = useRef<THREE.InstancedMesh>(null)
   const hoveredRef = useRef<string | null>(null)
   const count = nodes.length
   const segments = isMobile ? 8 : 12
+  const maxImportance = useMemo(
+    () => Math.max(1, ...nodes.map(n => n.importance)),
+    [nodes]
+  )
 
-  const { geometry, material, ringGeometry, ringMaterial } = useMemo(() => {
+  const { geometry, material } = useMemo(() => {
     const geometry = new THREE.SphereGeometry(NODE_RADIUS, segments, segments)
     const material = new THREE.MeshStandardMaterial({
-      roughness: 0.25,
-      metalness: 0.1,
+      roughness: 0.32,
+      metalness: 0.08,
       emissive: new THREE.Color('#ffffff'),
-      emissiveIntensity: 0.35,
+      emissiveIntensity: 0.18,
     })
-    // Tint the (white) emissive by the per-instance colour so each node keeps
-    // its domain glow. USE_COLOR is defined for instanced colour, so vColor
-    // is available in the fragment stage.
-    material.onBeforeCompile = (shader) => {
+    material.onBeforeCompile = shader => {
       shader.fragmentShader = shader.fragmentShader.replace(
         '#include <emissivemap_fragment>',
-        '#include <emissivemap_fragment>\n#ifdef USE_INSTANCING_COLOR\n\ttotalEmissiveRadiance *= vColor;\n#endif',
+        '#include <emissivemap_fragment>\n#ifdef USE_INSTANCING_COLOR\n\ttotalEmissiveRadiance *= vColor;\n#endif'
       )
     }
-    const ringGeometry = new THREE.SphereGeometry(NODE_RADIUS * 2.2, 8, 8)
-    const ringMaterial = new THREE.MeshBasicMaterial({
-      transparent: true,
-      opacity: 0.05,
-      depthWrite: false,
-    })
-    return { geometry, material, ringGeometry, ringMaterial }
+    return { geometry, material }
   }, [segments])
 
-  // Dispose GPU resources on unmount / segment change (no leak on nav).
   useEffect(() => {
     return () => {
       geometry.dispose()
       material.dispose()
-      ringGeometry.dispose()
-      ringMaterial.dispose()
     }
-  }, [geometry, material, ringGeometry, ringMaterial])
+  }, [geometry, material])
 
-  // Positions are stable per layout; upload the instance matrices once.
+  // Positions + importance-scaled sizes are stable per layout: upload once.
   useLayoutEffect(() => {
     const mesh = meshRef.current
-    const ring = ringRef.current
     if (!mesh) return
     const dummy = new THREE.Object3D()
+    const logMax = Math.log1p(maxImportance)
     for (let i = 0; i < count; i++) {
-      const p = nodes[i].position
-      dummy.position.set(p[0], p[1], p[2])
+      const n = nodes[i]
+      const norm = logMax > 0 ? Math.log1p(n.importance) / logMax : 0
+      dummy.position.set(n.position[0], n.position[1], n.position[2])
+      dummy.scale.setScalar(0.8 + 0.5 * norm)
       dummy.updateMatrix()
       mesh.setMatrixAt(i, dummy.matrix)
-      if (ring) ring.setMatrixAt(i, dummy.matrix)
     }
     mesh.instanceMatrix.needsUpdate = true
-    if (ring) ring.instanceMatrix.needsUpdate = true
-  }, [nodes, count])
+  }, [nodes, count, maxImportance])
 
-  // Colours depend on theme + selection/hover; refresh the buffer when they change.
+  // Colours depend on theme + selection/hover: refresh the buffer on change.
   useLayoutEffect(() => {
     const mesh = meshRef.current
-    const ring = ringRef.current
     if (!mesh) return
     const col = new THREE.Color()
+    const dimTarget = theme === 'dark' ? DIM_DARK : DIM_LIGHT
     for (let i = 0; i < count; i++) {
       const n = nodes[i]
       col.set(nodeDisplayColor(n, theme))
-      if (n.id === activeId) col.lerp(HIGHLIGHT, 0.55)
-      else if (n.id === hoveredId) col.lerp(HIGHLIGHT, 0.35)
+      if (n.onPath) col.lerp(GOLD, 0.35)
+      const isActive = n.id === activeId
+      const isHovered = n.id === hoveredId
+      const inFocus = !focused || focusIds === null || focusIds.has(n.id)
+      if (focused && !inFocus) {
+        col.lerp(dimTarget, 0.78)
+      } else if (isActive) {
+        col.lerp(HIGHLIGHT, 0.5)
+      } else if (isHovered) {
+        col.lerp(HIGHLIGHT, 0.3)
+      }
       mesh.setColorAt(i, col)
-      if (ring) ring.setColorAt(i, n.onPath ? GOLD : col)
     }
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true
-    if (ring?.instanceColor) ring.instanceColor.needsUpdate = true
-  }, [nodes, theme, activeId, hoveredId, count])
+  }, [nodes, theme, activeId, hoveredId, focused, focusIds, count])
 
   return (
-    <>
-      <instancedMesh ref={ringRef} args={[ringGeometry, ringMaterial, count]} frustumCulled={false} />
-      <instancedMesh
-        ref={meshRef}
-        args={[geometry, material, count]}
-        frustumCulled={false}
-        onPointerMove={(e: ThreeEvent<PointerEvent>) => {
-          e.stopPropagation()
-          const id = e.instanceId != null ? nodes[e.instanceId]?.id ?? null : null
-          if (id !== hoveredRef.current) {
-            hoveredRef.current = id
-            onHover(id)
-          }
-        }}
-        onPointerOut={() => {
-          if (hoveredRef.current !== null) {
-            hoveredRef.current = null
-            onHover(null)
-          }
-        }}
-        onClick={(e: ThreeEvent<MouseEvent>) => {
-          e.stopPropagation()
-          if (e.instanceId != null && nodes[e.instanceId]) onSelect(nodes[e.instanceId].id)
-        }}
-      />
-    </>
+    <instancedMesh
+      ref={meshRef}
+      args={[geometry, material, count]}
+      frustumCulled={false}
+      onPointerMove={
+        hoverEnabled
+          ? (e: ThreeEvent<PointerEvent>) => {
+              e.stopPropagation()
+              const id = e.instanceId != null ? nodes[e.instanceId]?.id ?? null : null
+              if (id !== hoveredRef.current) {
+                hoveredRef.current = id
+                onHover(id)
+              }
+            }
+          : undefined
+      }
+      onPointerOut={
+        hoverEnabled
+          ? () => {
+              if (hoveredRef.current !== null) {
+                hoveredRef.current = null
+                onHover(null)
+              }
+            }
+          : undefined
+      }
+      onClick={(e: ThreeEvent<MouseEvent>) => {
+        e.stopPropagation()
+        // Ignore drags (pan/rotate) so gestures never select by accident.
+        if (e.delta > 6) return
+        if (e.instanceId != null && nodes[e.instanceId]) onSelect(nodes[e.instanceId].id)
+      }}
+    />
   )
 }
 
-function HoverTooltip({ node, theme, isMobile }: { node: RenderNode; theme: 'dark' | 'light'; isMobile: boolean }) {
-  const color = nodeDisplayColor(node, theme)
-  const showStatus = node.status !== null && node.status !== 'locked' && node.status !== 'unseen'
-  const statusLabel = showStatus ? node.status : node.domain
-  return (
-    <Html position={node.position} center distanceFactor={isMobile ? 18 : 12} style={{ pointerEvents: 'none', zIndex: 20 }}>
-      <div style={{ ...tooltipStyle, padding: isMobile ? '10px 14px' : '8px 12px', maxWidth: isMobile ? '220px' : '240px' }}>
-        <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '14px' : '12px', fontFamily: monoFont }}>{node.name}</div>
-        <div style={{ color, fontSize: isMobile ? '13px' : '12px', textTransform: 'uppercase', marginTop: '3px', fontFamily: monoFont }}>{statusLabel}</div>
-        {showStatus && (
-          <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', textTransform: 'uppercase', fontFamily: monoFont }}>
-            {node.status} {node.onPath ? '· on path' : ''}
-          </div>
-        )}
-        {!showStatus && (
-          <div style={{ color: 'var(--text-muted)', fontSize: isMobile ? '12px' : '11px', marginTop: '2px', fontFamily: monoFont }}>
-            Not started
-          </div>
-        )}
-      </div>
-    </Html>
-  )
-}
+// ── Edges (one draw call, per-vertex alpha) ─────────────
 
-function EdgeLines({ links, positionMap, activeId, theme }: { links: Link[], positionMap: Map<string, [number, number, number]>, activeId: string, theme: 'dark' | 'light' }) {
-  const activeLinks = useMemo(() => links.filter(l => l.source === activeId || l.target === activeId), [links, activeId])
-  const edgeColor = theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT
+function EdgeBatch({
+  links,
+  positionMap,
+  activeId,
+  focused,
+  focusIds,
+  theme,
+  lod,
+}: {
+  links: Link[]
+  positionMap: Map<string, Vec3>
+  activeId: string
+  focused: boolean
+  focusIds: Set<string> | null
+  theme: 'dark' | 'light'
+  lod: LodTier
+}) {
+  const validLinks = useMemo(
+    () => links.filter(l => positionMap.has(l.source) && positionMap.has(l.target)),
+    [links, positionMap]
+  )
 
   const geometry = useMemo(() => {
-    const validLinks = activeLinks.filter(l => positionMap.has(l.source) && positionMap.has(l.target))
     const positions = new Float32Array(validLinks.length * 6)
     const colors = new Float32Array(validLinks.length * 6)
-
+    const alphas = new Float32Array(validLinks.length * 2)
     validLinks.forEach((link, i) => {
       const sp = positionMap.get(link.source)!
       const tp = positionMap.get(link.target)!
-
       const idx = i * 6
-      positions[idx]   = sp[0]; positions[idx+1] = sp[1]; positions[idx+2] = sp[2]
-      positions[idx+3] = tp[0]; positions[idx+4] = tp[1]; positions[idx+5] = tp[2]
-
-      const c = new THREE.Color(edgeColor)
-      colors[idx] = c.r; colors[idx+1] = c.g; colors[idx+2] = c.b
-      colors[idx+3] = c.r; colors[idx+4] = c.g; colors[idx+5] = c.b
+      positions[idx] = sp[0]
+      positions[idx + 1] = sp[1]
+      positions[idx + 2] = sp[2]
+      positions[idx + 3] = tp[0]
+      positions[idx + 4] = tp[1]
+      positions[idx + 5] = tp[2]
     })
-
     const geo = new THREE.BufferGeometry()
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+    geo.setAttribute('aColor', new THREE.BufferAttribute(colors, 3))
+    geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphas, 1))
     return geo
-  }, [activeLinks, edgeColor, positionMap])
+  }, [validLinks, positionMap])
 
-  const lineRef = useRef<THREE.LineSegments>(null)
-  const clockRef = useRef(0)
+  const material = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        transparent: true,
+        depthWrite: false,
+        vertexShader: `
+          attribute float aAlpha;
+          attribute vec3 aColor;
+          varying float vAlpha;
+          varying vec3 vColor;
+          void main() {
+            vAlpha = aAlpha;
+            vColor = aColor;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          varying float vAlpha;
+          varying vec3 vColor;
+          void main() {
+            if (vAlpha <= 0.002) discard;
+            gl_FragColor = vec4(vColor, vAlpha);
+          }
+        `,
+      }),
+    []
+  )
 
-  useFrame((_, delta) => {
-    clockRef.current += delta
-    if (lineRef.current) {
-      const mat = lineRef.current.material as THREE.LineBasicMaterial
-      mat.opacity = 0.6 + 0.4 * Math.sin(clockRef.current * 4)
+  useEffect(() => {
+    return () => {
+      geometry.dispose()
+      material.dispose()
+    }
+  }, [geometry, material])
+
+  useLayoutEffect(() => {
+    const colorAttr = geometry.getAttribute('aColor') as THREE.BufferAttribute
+    const alphaAttr = geometry.getAttribute('aAlpha') as THREE.BufferAttribute
+    const baseColor = new THREE.Color(theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT)
+    const activeColor = new THREE.Color(theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT)
+    const baseAlpha = theme === 'dark' ? EDGE_ALPHA[lod] : EDGE_ALPHA_LIGHT[lod]
+    const dim = theme === 'dark' ? DIM_DARK : DIM_LIGHT
+
+    validLinks.forEach((link, i) => {
+      const touchesActive = link.source === activeId || link.target === activeId
+      const inFocus = !focused || focusIds === null || (focusIds.has(link.source) && focusIds.has(link.target))
+      let color = baseColor
+      let alpha = baseAlpha
+      if (focused && touchesActive) {
+        color = activeColor
+        alpha = FOCUS_EDGE_ALPHA
+      } else if (focused && !inFocus) {
+        color = baseColor.clone().lerp(dim, 0.7)
+        alpha = baseAlpha * UNFOCUSED_EDGE_FACTOR
+      }
+      colorAttr.setXYZ(i * 2, color.r, color.g, color.b)
+      colorAttr.setXYZ(i * 2 + 1, color.r, color.g, color.b)
+      alphaAttr.setX(i * 2, alpha)
+      alphaAttr.setX(i * 2 + 1, alpha)
+    })
+    colorAttr.needsUpdate = true
+    alphaAttr.needsUpdate = true
+  }, [geometry, validLinks, activeId, focused, focusIds, theme, lod])
+
+  if (validLinks.length === 0) return null
+
+  return <lineSegments geometry={geometry} material={material} frustumCulled={false} />
+}
+
+// ── Controls ────────────────────────────────────────────
+
+function MapControls({
+  controlsRef,
+  autoRotate,
+  onInteract,
+  invalidate,
+}: {
+  controlsRef: React.MutableRefObject<OrbitControls | null>
+  autoRotate: boolean
+  onInteract: () => void
+  invalidate: () => void
+}) {
+  const { camera, gl } = useThree()
+
+  useEffect(() => {
+    const controls = new OrbitControls(camera, gl.domElement)
+    controls.enableDamping = true
+    controls.dampingFactor = 0.08
+    controls.enablePan = true
+    controls.screenSpacePanning = true
+    controls.minDistance = 8
+    controls.maxDistance = 60
+    controls.zoomSpeed = 0.9
+    controls.rotateSpeed = 0.6
+    controls.panSpeed = 0.8
+    // Touch: one finger pans the map, two fingers pinch + pan. Tap selects.
+    controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN }
+    controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE }
+    const onChange = () => invalidate()
+    controls.addEventListener('change', onChange)
+    controlsRef.current = controls
+
+    const el = gl.domElement
+    const mark = () => onInteract()
+    el.addEventListener('pointerdown', mark, { once: true })
+    el.addEventListener('wheel', mark, { once: true, passive: true })
+
+    return () => {
+      el.removeEventListener('pointerdown', mark)
+      el.removeEventListener('wheel', mark)
+      controls.removeEventListener('change', onChange)
+      controls.dispose()
+      controlsRef.current = null
+    }
+  }, [camera, gl, invalidate, controlsRef, onInteract])
+
+  useFrame(() => {
+    const controls = controlsRef.current
+    if (!controls) return
+    controls.update()
+    // Keep the cloud reachable: clamp the pan target so a long drag cannot
+    // lose the graph off-screen (camera moves with the target).
+    const target = controls.target
+    const maxPan = 30
+    const len = Math.hypot(target.x, target.y, target.z)
+    if (len > maxPan) {
+      const scale = maxPan / len
+      const nx = target.x * scale
+      const ny = target.y * scale
+      const nz = target.z * scale
+      camera.position.x += nx - target.x
+      camera.position.y += ny - target.y
+      camera.position.z += nz - target.z
+      target.set(nx, ny, nz)
+      controls.update()
     }
   })
 
-  if (activeLinks.length === 0) return null
+  useEffect(() => {
+    const controls = controlsRef.current
+    if (!controls) return
+    controls.autoRotate = autoRotate
+    controls.autoRotateSpeed = 0.55
+    invalidate()
+  }, [autoRotate, controlsRef, invalidate])
 
-  return (
-    <lineSegments ref={lineRef} geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.9 : 1.0} />
-    </lineSegments>
-  )
+  return null
 }
 
-function AllEdges({ links, positionMap, theme }: { links: Link[], positionMap: Map<string, [number, number, number]>, theme: 'dark' | 'light' }) {
-  const edgeColor = theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT
+// ── Labels (single DOM overlay, imperative updates) ─────
 
-  const geometry = useMemo(() => {
-    const validLinks = links.filter(l => positionMap.has(l.source) && positionMap.has(l.target))
-    const positions = new Float32Array(validLinks.length * 6)
-    const colors = new Float32Array(validLinks.length * 6)
-
-    validLinks.forEach((link, i) => {
-      const sp = positionMap.get(link.source)!
-      const tp = positionMap.get(link.target)!
-
-      const idx = i * 6
-      positions[idx]   = sp[0]; positions[idx+1] = sp[1]; positions[idx+2] = sp[2]
-      positions[idx+3] = tp[0]; positions[idx+4] = tp[1]; positions[idx+5] = tp[2]
-
-      const c = new THREE.Color(edgeColor)
-      colors[idx] = c.r; colors[idx+1] = c.g; colors[idx+2] = c.b
-      colors[idx+3] = c.r; colors[idx+4] = c.g; colors[idx+5] = c.b
-    })
-
-    const geo = new THREE.BufferGeometry()
-    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
-    return geo
-  }, [links, edgeColor, positionMap])
-
-  return (
-    <lineSegments geometry={geometry}>
-      <lineBasicMaterial vertexColors transparent opacity={theme === 'dark' ? 0.15 : 0.25} />
-    </lineSegments>
-  )
+interface LabelCandidate {
+  key: string
+  text: string
+  position: Vec3
+  kind: 'node' | 'domain'
+  active: boolean
+  dimmed: boolean
+  priority: number
 }
 
-function Particles({ theme, count = 400 }: { theme: 'dark' | 'light'; count?: number }) {
-  const positions = useMemo(() => {
-    const pos = new Float32Array(count * 3)
-    for (let i = 0; i < count; i++) {
-      const theta = Math.random() * Math.PI * 2
-      const phi = Math.acos(2 * Math.random() - 1)
-      const r = 60 * Math.cbrt(Math.random())
-      pos[i*3] = r * Math.sin(phi) * Math.cos(theta)
-      pos[i*3+1] = r * Math.sin(phi) * Math.sin(theta)
-      pos[i*3+2] = r * Math.cos(phi)
-    }
-    return pos
-  }, [count])
-
-  const color = theme === 'dark' ? '#4a5568' : '#aaa'
-
-  return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-      </bufferGeometry>
-      <pointsMaterial size={0.06} color={color} transparent opacity={0.8} sizeAttenuation />
-    </points>
-  )
-}
-
-function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMobile, rotatePaused, reducedMotion, controlsRef }: GraphSceneProps & { positionMap: Map<string, [number, number, number]>; isMobile: boolean; rotatePaused: boolean; reducedMotion: boolean }) {
-  const [hovered, setHovered] = useState<string | null>(null)
+function LabelProjector({
+  overlayRef,
+  candidates,
+}: {
+  overlayRef: React.RefObject<HTMLDivElement>
+  candidates: LabelCandidate[]
+}) {
+  const { camera, size } = useThree()
+  const poolRef = useRef<HTMLSpanElement[]>([])
+  const gridRef = useRef<Uint8Array>(new Uint8Array(0))
+  const gridSizeRef = useRef({ cols: 0, rows: 0 })
+  const projected = useRef(new THREE.Vector3())
+  const viewScratch = useRef(new THREE.Vector3())
 
   useEffect(() => {
-    if (controlsRef.current) {
-      controlsRef.current.autoRotate = hovered === null && !rotatePaused && !isMobile && !reducedMotion
+    const overlay = overlayRef.current
+    if (!overlay) return
+    const spans: HTMLSpanElement[] = []
+    for (let i = 0; i < LABEL_POOL; i++) {
+      const span = document.createElement('span')
+      span.className = 'graph-label'
+      span.style.display = 'none'
+      overlay.appendChild(span)
+      spans.push(span)
     }
-  }, [hovered, rotatePaused, controlsRef, isMobile, reducedMotion])
+    poolRef.current = spans
+    return () => {
+      for (const span of spans) span.remove()
+      poolRef.current = []
+    }
+  }, [overlayRef])
 
-  const hoveredNode = useMemo(() => nodes.find(n => n.id === hovered) ?? null, [nodes, hovered])
-  const activeNode = useMemo(() => nodes.find(n => n.id === activeId) ?? null, [nodes, activeId])
+  useFrame(() => {
+    const overlay = overlayRef.current
+    if (!overlay) return
+    const pool = poolRef.current
+    const width = size.width
+    const height = size.height
+    const cellW = 112
+    const cellH = 18
+    const cols = Math.max(1, Math.ceil(width / cellW))
+    const rows = Math.max(1, Math.ceil(height / cellH))
+    if (gridSizeRef.current.cols !== cols || gridSizeRef.current.rows !== rows) {
+      gridSizeRef.current = { cols, rows }
+      gridRef.current = new Uint8Array(cols * rows)
+    } else {
+      gridRef.current.fill(0)
+    }
+    const grid = gridRef.current
+    const v = projected.current
+    const cam = camera as THREE.PerspectiveCamera
+
+    let used = 0
+    for (const candidate of candidates) {
+      if (used >= pool.length) break
+      v.set(candidate.position[0], candidate.position[1], candidate.position[2])
+      // Skip points behind the camera before projecting.
+      const viewZ = viewScratch.current.copy(v).applyMatrix4(cam.matrixWorldInverse).z
+      if (viewZ > -0.1) continue
+      v.project(cam)
+      if (v.z < -1 || v.z > 1) continue
+      const x = (v.x * 0.5 + 0.5) * width
+      const y = (-v.y * 0.5 + 0.5) * height
+      if (x < -40 || x > width + 40 || y < -16 || y > height + 16) continue
+
+      const textW = candidate.text.length * (candidate.kind === 'domain' ? 7.2 : 6) + 10
+      const halfW = textW / 2
+      const halfH = cellH / 2
+      if (textW > width - 4) continue
+      // Keep labels inside the overlay; anchor nodes above their dot and
+      // domain labels on their centroid.
+      const anchorX = Math.min(Math.max(x, halfW + 2), width - halfW - 2)
+      const anchorY = candidate.kind === 'domain' ? y : y - 4
+      const c0 = Math.max(0, Math.floor((anchorX - halfW) / cellW))
+      const c1 = Math.min(cols - 1, Math.floor((anchorX + halfW) / cellW))
+      const top = candidate.kind === 'domain' ? anchorY - halfH : anchorY - cellH
+      const bottom = candidate.kind === 'domain' ? anchorY + halfH : anchorY
+      const r0 = Math.max(0, Math.floor(top / cellH))
+      const r1 = Math.min(rows - 1, Math.floor(bottom / cellH))
+      let blocked = false
+      for (let r = r0; r <= r1 && !blocked; r++) {
+        for (let c = c0; c <= c1; c++) {
+          if (grid[r * cols + c]) {
+            blocked = true
+            break
+          }
+        }
+      }
+      if (blocked) continue
+      for (let r = r0; r <= r1; r++) {
+        for (let c = c0; c <= c1; c++) grid[r * cols + c] = 1
+      }
+
+      const span = pool[used++]
+      // Avoid redundant DOM mutations: text/class only change when the
+      // candidate assigned to this pooled span changes.
+      if (span.textContent !== candidate.text) span.textContent = candidate.text
+      const className = `graph-label graph-label--${candidate.kind}${candidate.active ? ' is-active' : ''}${candidate.dimmed ? ' is-dim' : ''}`
+      if (span.className !== className) span.className = className
+      span.style.display = 'block'
+      span.style.transform =
+        candidate.kind === 'domain'
+          ? `translate3d(${anchorX.toFixed(1)}px, ${anchorY.toFixed(1)}px, 0) translate(-50%, -50%)`
+          : `translate3d(${anchorX.toFixed(1)}px, ${anchorY.toFixed(1)}px, 0) translate(-50%, -100%)`
+    }
+    for (let i = used; i < pool.length; i++) pool[i].style.display = 'none'
+  })
+
+  return null
+}
+
+// ── Scene ───────────────────────────────────────────────
+
+function GraphScene({
+  graph,
+  activeId,
+  focused,
+  focusIds,
+  onSelect,
+  theme,
+  isMobile,
+  isTouch,
+  autoRotateBase,
+  controlsRef,
+  overlayRef,
+  onInteract,
+}: {
+  graph: BuiltGraph
+  activeId: string
+  focused: boolean
+  focusIds: Set<string> | null
+  onSelect: (id: string) => void
+  theme: 'dark' | 'light'
+  isMobile: boolean
+  isTouch: boolean
+  autoRotateBase: boolean
+  controlsRef: React.MutableRefObject<OrbitControls | null>
+  overlayRef: React.RefObject<HTMLDivElement>
+  onInteract: () => void
+}) {
+  const [hovered, setHovered] = useState<string | null>(null)
+  const [lod, setLod] = useState<LodTier>('mid')
+  const frameCount = useRef(0)
+  const { gl, invalidate } = useThree()
+
+  // LOD by apparent graph size (world units per pixel), not distance to
+  // origin, so panning never changes detail level.
+  useFrame(({ camera }) => {
+    frameCount.current += 1
+    if (frameCount.current % 8 !== 0) return
+    const target = controlsRef.current?.target
+    const distance = target ? camera.position.distanceTo(target) : camera.position.length()
+    const fov = (camera as THREE.PerspectiveCamera).fov ?? 60
+    const visibleHeight = 2 * Math.tan(((fov * Math.PI) / 180) / 2) * distance
+    const tier: LodTier = visibleHeight > 46 ? 'far' : visibleHeight > 27 ? 'mid' : 'close'
+    setLod(prev => (prev === tier ? prev : tier))
+  })
+
+  useEffect(() => {
+    gl.domElement.style.cursor = hovered ? 'pointer' : 'default'
+  }, [hovered, gl])
+
+  const activeNode = graph.nodeById.get(activeId) ?? null
+
+  const candidates = useMemo(() => {
+    const out: LabelCandidate[] = []
+    const seen = new Set<string>()
+    const focusDomains = new Set<string>()
+    if (focused && focusIds) {
+      for (const id of focusIds) {
+        const n = graph.nodeById.get(id)
+        if (n) focusDomains.add(n.domain)
+      }
+    }
+    const add = (
+      key: string,
+      text: string,
+      position: Vec3,
+      kind: LabelCandidate['kind'],
+      priority: number,
+      active = false,
+      dimmed = false
+    ) => {
+      if (seen.has(key)) return
+      seen.add(key)
+      out.push({ key, text, position, kind, priority, active, dimmed })
+    }
+
+    if (activeNode) add(`n:${activeNode.id}`, activeNode.name, activeNode.position, 'node', 0, true)
+    if (hovered) {
+      const n = graph.nodeById.get(hovered)
+      if (n) add(`n:${n.id}`, n.name, n.position, 'node', 1)
+    }
+    if (focused && focusIds) {
+      for (const id of focusIds) {
+        if (id === activeId) continue
+        const n = graph.nodeById.get(id)
+        if (n) add(`n:${n.id}`, n.name, n.position, 'node', 2)
+      }
+    }
+    if (lod !== 'close') {
+      for (const [domain, centroid] of Object.entries(graph.domainCentroids)) {
+        const dimmed = focused && focusIds !== null && !focusDomains.has(domain)
+        add(`d:${domain}`, domainLabel(domain), centroid, 'domain', lod === 'far' ? 3 : 4, false, dimmed)
+      }
+    }
+    if (lod !== 'far') {
+      const cap = lod === 'mid' ? 26 : 80
+      for (const n of graph.byImportance.slice(0, cap)) {
+        add(`n:${n.id}`, n.name, n.position, 'node', lod === 'mid' ? 5 : 6)
+      }
+    }
+    return out.sort((a, b) => a.priority - b.priority)
+  }, [graph, lod, activeNode, hovered, focused, focusIds, activeId])
+
+  const autoRotate = autoRotateBase && hovered === null && !focused
 
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <pointLight position={[10, 10, 10]} intensity={0.8} />
-      <pointLight position={[-10, -10, -10]} intensity={0.4} color={theme === 'dark' ? '#c8a96e' : '#a0814a'} />
+      <ambientLight intensity={0.65} />
+      <directionalLight position={[8, 12, 10]} intensity={0.75} />
 
-      <AllEdges links={links} positionMap={positionMap} theme={theme} />
-      <EdgeLines links={links} positionMap={positionMap} activeId={activeId} theme={theme} />
+      <EdgeBatch
+        links={graph.links}
+        positionMap={graph.positionMap}
+        activeId={activeId}
+        focused={focused}
+        focusIds={focusIds}
+        theme={theme}
+        lod={lod}
+      />
 
       <NodeInstances
-        nodes={nodes}
+        nodes={graph.nodes}
         activeId={activeId}
         hoveredId={hovered}
+        focused={focused}
+        focusIds={focusIds}
         theme={theme}
         isMobile={isMobile}
+        hoverEnabled={!isTouch}
         onHover={setHovered}
         onSelect={onSelect}
       />
@@ -459,101 +806,153 @@ function GraphScene({ nodes, links, activeId, positionMap, onSelect, theme, isMo
       {activeNode && (
         <mesh position={activeNode.position}>
           <sphereGeometry args={[NODE_RADIUS * 1.7, 12, 12]} />
-          <meshBasicMaterial color="#ffdd88" transparent opacity={0.22} depthWrite={false} />
+          <meshBasicMaterial color="#ffdd88" transparent opacity={focused ? 0.2 : 0.1} depthWrite={false} />
         </mesh>
       )}
 
-      <Particles theme={theme} count={isMobile ? 150 : 400} />
-
-      <OrbitControls
-        ref={controlsRef}
-        enablePan={false}
-        enableZoom={true}
-        minDistance={12}
-        maxDistance={45}
-        autoRotate={!isMobile && !reducedMotion}
-        autoRotateSpeed={1.2}
-        dampingFactor={0.05}
-        enableDamping={true}
+      <MapControls
+        controlsRef={controlsRef}
+        autoRotate={autoRotate}
+        onInteract={onInteract}
+        invalidate={invalidate}
       />
 
-      {hoveredNode && <HoverTooltip node={hoveredNode} theme={theme} isMobile={isMobile} />}
+      <LabelProjector overlayRef={overlayRef} candidates={candidates} />
     </>
   )
 }
 
-function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme, isMobile }: {
+// ── Info panel ──────────────────────────────────────────
+
+function InfoPanel({
+  activeId,
+  graph,
+  theme,
+  isMobile,
+}: {
   activeId: string
-  concepts: ConceptDef[]
-  conceptStatuses?: Record<string, MasteryStatus>
-  onPathNodes?: string[]
+  graph: BuiltGraph
   theme: 'dark' | 'light'
   isMobile: boolean
 }) {
-  const concept = useMemo(() => concepts.find(c => c.id === activeId), [concepts, activeId])
+  const concept = graph.nodeById.get(activeId)
   if (!concept) return null
 
-  const status = conceptStatuses?.[concept.id] ?? null
-  const onPath = onPathNodes?.includes(concept.id) ?? false
   const color = domainColor(concept.domain, theme)
+  const prereqConcepts = (graph.prereqsById.get(concept.id) ?? [])
+    .map(id => graph.nodeById.get(id))
+    .filter((c): c is RenderNode => Boolean(c))
+  const unlockedBy = (graph.unlocksById.get(concept.id) ?? [])
+    .map(id => graph.nodeById.get(id))
+    .filter((c): c is RenderNode => Boolean(c))
 
-  const prereqConcepts = concept.prerequisites
-    .flatMap(id => {
-      const c = concepts.find(c => c.id === id)
-      return c ? [c] : []
-    }) as ConceptDef[]
+  const body = (
+    <InfoPanelBody
+      concept={concept}
+      color={color}
+      prereqConcepts={prereqConcepts}
+      unlockedBy={unlockedBy}
+      isMobile={isMobile}
+    />
+  )
 
-  const unlockedBy = concepts.filter(c => c.prerequisites.includes(concept.id))
+  const shellStyle = {
+    background: 'transparent',
+    borderTop: '0.5px solid var(--border)',
+    padding: isMobile ? '0.5rem' : '0.75rem 1rem',
+    borderRadius: 0,
+  } as const
+
+  const heading = (
+    <>
+      <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', fontFamily: monoFont }}>selected concept</div>
+      <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '18px', marginTop: '4px', fontFamily: serifFont, fontWeight: 400 }}>{concept.name}</div>
+    </>
+  )
+
+  // Mobile: collapsible via native <details> (key resets it open on each
+  // new selection). Desktop keeps the always-open panel.
+  if (isMobile) {
+    return (
+      <details open key={activeId} style={shellStyle}>
+        <summary style={{ cursor: 'pointer', listStyle: 'none' }}>
+          {heading}
+        </summary>
+        {body}
+      </details>
+    )
+  }
 
   return (
-    <div style={{
-      background: 'transparent',
-      borderTop: '0.5px solid var(--border)',
-      padding: isMobile ? '0.5rem' : '0.75rem 1rem',
-      borderRadius: 0,
-    }}>
-      <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', fontFamily: monoFont }}>selected concept</div>
-      <div style={{ color: 'var(--text-primary)', fontSize: isMobile ? '16px' : '18px', marginTop: '4px', fontFamily: serifFont, fontWeight: 400 }}>{concept.label}</div>
+    <div style={shellStyle}>
+      {heading}
+      {body}
+    </div>
+  )
+}
+
+// Chip list with a native "+N more" expander so hub nodes don't push
+// the mobile page several screens long. Everything stays reachable.
+function ChipList({ title, items, isMobile }: { title: string; items: RenderNode[]; isMobile: boolean }) {
+  if (items.length === 0) return null
+  const cap = isMobile && items.length > 6 ? 6 : items.length
+  const shown = items.slice(0, cap)
+  const hiddenCount = items.length - shown.length
+  return (
+    <div style={{ marginTop: '8px' }}>
+      <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>{title}</div>
+      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
+        {shown.map(c => (
+          <span key={c.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
+            {c.name}
+          </span>
+        ))}
+      </div>
+      {hiddenCount > 0 && (
+        <details style={{ marginTop: '4px' }}>
+          <summary style={{ color: 'var(--accent-blue)', fontSize: '12px', fontFamily: monoFont, cursor: 'pointer' }}>
+            +{hiddenCount} more
+          </summary>
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const, marginTop: '4px' }}>
+            {items.slice(cap).map(c => (
+              <span key={c.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
+                {c.name}
+              </span>
+            ))}
+          </div>
+        </details>
+      )}
+    </div>
+  )
+}
+
+function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }: {
+  concept: RenderNode
+  color: string
+  prereqConcepts: RenderNode[]
+  unlockedBy: RenderNode[]
+  isMobile: boolean
+}) {
+  return (
+    <>
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', flexWrap: 'wrap' as const }}>
-        <span style={{ color, fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>● {concept.domain}</span>
-        {status && (
+        <span style={{ color, fontSize: '12px', fontFamily: monoFont }}>● {concept.domain.replace(/_/g, ' ')}</span>
+        {concept.status && (
           <span style={{
-            color: status === 'mastered' ? 'var(--accent-teal)' : status === 'learning' ? '#e8a849' : 'var(--text-muted)',
-            fontSize: isMobile ? '12px' : '12px',
+            color: concept.status === 'mastered' ? 'var(--accent-teal)' : concept.status === 'learning' ? '#e8a849' : 'var(--text-muted)',
+            fontSize: '12px',
             textTransform: 'uppercase',
             fontFamily: monoFont,
           }}>
-            {status}
+            {concept.status}
           </span>
         )}
-        {onPath && (
-          <span style={{ color: 'var(--accent-blue)', fontSize: isMobile ? '12px' : '12px', fontFamily: monoFont }}>on path</span>
+        {concept.onPath && (
+          <span style={{ color: 'var(--accent-blue)', fontSize: '12px', fontFamily: monoFont }}>on path</span>
         )}
       </div>
-      {prereqConcepts.length > 0 && (
-        <div style={{ marginTop: '8px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>prerequisites</div>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
-            {prereqConcepts.map(p => (
-              <span key={p.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
-                {p.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-      {unlockedBy.length > 0 && (
-        <div style={{ marginTop: '6px' }}>
-          <div style={{ color: 'var(--text-muted)', fontSize: '12px', textTransform: 'uppercase', marginBottom: '4px', fontFamily: monoFont }}>unlocks</div>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' as const }}>
-            {unlockedBy.map(u => (
-              <span key={u.id} style={{ color: 'var(--text-secondary)', fontSize: '12px', fontFamily: monoFont }}>
-                {u.label}
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
+      <ChipList title="prerequisites" items={prereqConcepts} isMobile={isMobile} />
+      <ChipList title="unlocks" items={unlockedBy} isMobile={isMobile} />
       <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
         <a
           href={`/concept?id=${encodeURIComponent(concept.id)}`}
@@ -568,78 +967,117 @@ function InfoPanel({ activeId, concepts, conceptStatuses, onPathNodes, theme, is
           Practice →
         </a>
       </div>
-    </div>
+    </>
   )
 }
 
+// ── Root ────────────────────────────────────────────────
+
 export default function MathConceptGraph3D({
   theme = 'dark',
-  concepts,
   conceptStatuses,
   onPathNodes,
   onNodeSelect,
 }: MathConceptGraph3DProps) {
   const isMobile = useIsMobile()
   const reducedMotion = usePrefersReducedMotion()
+  const isTouch = useCoarsePointer()
+  const [inView, setInView] = useState(true)
+  const [domFocused, setDomFocused] = useState(false)
+  const [interacted, setInteracted] = useState(false)
+  const [payload, setPayload] = useState<GraphPayload | null>(null)
+  const [positions, setPositions] = useState<Array<[string, Vec3]> | null>(null)
+  const [failed, setFailed] = useState(false)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
+  const controlsRef = useRef<OrbitControls | null>(null)
 
-  const { nodes, links, positionMap } = useMemo(() => {
-    const input: ConceptLayoutInput[] = concepts.map(c => ({ id: c.id, prerequisites: c.prerequisites }))
-    const layout = layoutDAG3D(input)
-
-    const allLinks: Link[] = []
-    for (const c of concepts) {
-      for (const prereq of c.prerequisites) {
-        allLinks.push({ source: prereq, target: c.id })
+  // Fetch graph payload + positions once; both are cached single-flight and
+  // shared with the static poster. The corpus never enters the page bundle.
+  useEffect(() => {
+    let live = true
+    Promise.all([loadGraphPayload(), loadPositionEntries()]).then(([graphPayload, entries]) => {
+      if (!live) return
+      if (!graphPayload) {
+        setFailed(true)
+        return
       }
+      setPayload(graphPayload)
+      setPositions(entries)
+    })
+    return () => {
+      live = false
     }
+  }, [])
 
-    const nodeList: RenderNode[] = concepts.map(c => ({
-      id: c.id,
-      name: c.label,
-      domain: c.domain,
-      position: layout.positions[c.id] ?? [0, 0, 0],
-      status: conceptStatuses?.[c.id] ?? null,
-      onPath: onPathNodes?.includes(c.id) ?? false,
-    }))
+  const graph = useMemo(
+    () => (payload && positions ? buildGraph(payload, positions, conceptStatuses, onPathNodes) : null),
+    [payload, positions, conceptStatuses, onPathNodes]
+  )
 
-    const pm = new Map<string, [number, number, number]>()
-    for (const n of nodeList) {
-      pm.set(n.id, n.position)
-    }
-
-    return { nodes: nodeList, links: allLinks, positionMap: pm }
-  }, [concepts, conceptStatuses, onPathNodes])
-
-  const [activeId, setActiveId] = useState(() => nodes[0]?.id ?? '')
-  const [rotatePaused, setRotatePaused] = useState(false)
-  const controlsRef = useRef<any>(null)
+  const [activeId, setActiveId] = useState('')
+  const [focused, setFocused] = useState(false)
 
   useEffect(() => {
-    if (nodes.length > 0 && !nodes.find(n => n.id === activeId)) {
-      setActiveId(nodes[0].id)
+    if (graph && graph.nodes.length > 0 && !graph.nodeById.has(activeId)) {
+      setActiveId(graph.nodes[0].id)
+      setFocused(false)
     }
-  }, [nodes, activeId])
-
-  const handleSelect = useCallback((id: string) => {
-    setActiveId(id)
-    onNodeSelectRef.current?.(id)
-  }, [])
+  }, [graph, activeId])
 
   const onNodeSelectRef = useRef(onNodeSelect)
   useEffect(() => {
     onNodeSelectRef.current = onNodeSelect
   }, [onNodeSelect])
 
+  const handleSelect = useCallback((id: string) => {
+    setActiveId(id)
+    setFocused(true)
+    onNodeSelectRef.current?.(id)
+  }, [])
+
+  const pointerDown = useRef<{ x: number; y: number } | null>(null)
+
+  // Clear focus on background clicks, but not when the pointer was panning
+  // or rotating (same drag threshold as node selection).
+  const handleMiss = useCallback((event?: MouseEvent) => {
+    const start = pointerDown.current
+    if (event && start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 6) return
+    setFocused(false)
+  }, [])
+
+  const handleInteract = useCallback(() => {
+    setInteracted(true)
+  }, [])
+
+  // Pause rendering entirely when scrolled offscreen (frameloop 'never').
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const obs = new IntersectionObserver(entries => setInView(entries[0]?.isIntersecting ?? true), { threshold: 0 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  // Focus mode: selected node + its direct prerequisites/unlocks stay lit,
+  // everything else dims (never removed). null = nothing selected yet.
+  const focusIds = useMemo(() => {
+    if (!graph || !focused || !activeId) return null
+    const set = new Set<string>([activeId])
+    for (const id of graph.prereqsById.get(activeId) ?? []) set.add(id)
+    for (const id of graph.unlocksById.get(activeId) ?? []) set.add(id)
+    return set
+  }, [graph, focused, activeId])
+
   // Stable traversal order for keyboard browsing: domain, then label.
   const orderedIds = useMemo(
     () =>
-      [...concepts]
-        .sort(
-          (a, b) =>
-            a.domain.localeCompare(b.domain) || a.label.localeCompare(b.label)
-        )
-        .map(c => c.id),
-    [concepts]
+      graph
+        ? [...graph.nodes]
+            .sort((a, b) => a.domain.localeCompare(b.domain) || a.name.localeCompare(b.name))
+            .map(c => c.id)
+        : [],
+    [graph]
   )
 
   const handleGraphKeyDown = useCallback(
@@ -655,40 +1093,52 @@ export default function MathConceptGraph3D({
         next = 0
       } else if (e.key === 'End') {
         next = orderedIds.length - 1
+      } else if (e.key === 'Escape') {
+        setFocused(false)
       } else if (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '_') {
         e.preventDefault()
+        handleInteract()
         const controls = controlsRef.current
         const camera = controls?.object as THREE.PerspectiveCamera | undefined
         if (!camera) return
-        const dist = camera.position.length()
+        const target = controls?.target ?? new THREE.Vector3()
+        const distance = camera.position.distanceTo(target)
         const zoomInKey = e.key === '+' || e.key === '='
         const clamped = THREE.MathUtils.clamp(
-          zoomInKey ? dist * 0.85 : dist * 1.18,
-          controls.minDistance ?? 12,
-          controls.maxDistance ?? 45
+          zoomInKey ? distance * 0.85 : distance * 1.18,
+          controls?.minDistance ?? 8,
+          controls?.maxDistance ?? 60
         )
-        camera.position.multiplyScalar(clamped / dist)
-        controls.update?.()
+        const direction = camera.position.clone().sub(target).normalize()
+        camera.position.copy(target).addScaledVector(direction, clamped)
+        controls?.update()
       }
       if (next !== null && orderedIds[next] !== activeId) {
         e.preventDefault()
         handleSelect(orderedIds[next])
       }
     },
-    [orderedIds, activeId, handleSelect, controlsRef]
+    [orderedIds, activeId, handleSelect, handleInteract]
   )
 
+  const autoRotateBase = !isMobile && !reducedMotion && !interacted && !domFocused && inView
+  const frameloop = !inView ? 'never' : autoRotateBase ? 'always' : 'demand'
+
   return (
-    <div>
+    <div ref={wrapRef}>
       <div
         className="concept-graph-3d"
         tabIndex={0}
         role="application"
         aria-label="Concept map. Use the left and right arrow keys to browse concepts, plus and minus to zoom, and Home or End to jump to the first or last concept."
         onKeyDown={handleGraphKeyDown}
-        onFocus={() => setRotatePaused(true)}
-        onBlur={() => setRotatePaused(false)}
+        onFocus={() => setDomFocused(true)}
+        onBlur={() => setDomFocused(false)}
+        onPointerDown={e => {
+          pointerDown.current = { x: e.clientX, y: e.clientY }
+        }}
         style={{
+          position: 'relative',
           height: isMobile ? '320px' : '520px',
           width: '100%',
           borderRadius: 0,
@@ -702,44 +1152,59 @@ export default function MathConceptGraph3D({
           concepts, plus and minus zoom, and details of the selected concept
           appear below the map.
         </span>
-        <Canvas
-          camera={{ position: [0, 0, 28], fov: 60 }}
-          gl={{ alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' }}
-          dpr={isMobile ? 1 : [1, 1.5]}
-          frameloop={isMobile || reducedMotion ? 'demand' : 'always'}
-          onCreated={({ gl }) => {
-            const canvas = gl.domElement as HTMLCanvasElement
-            const onLost = (e: Event) => {
-              e.preventDefault()
-              console.warn('WebGL context lost — will attempt restore')
-            }
-            const onRestored = () => console.warn('WebGL context restored')
-            canvas.addEventListener('webglcontextlost', onLost, false)
-            canvas.addEventListener('webglcontextrestored', onRestored, false)
-          }}
-        >
-          <GraphScene
-            nodes={nodes}
-            links={links}
-            activeId={activeId}
-            positionMap={positionMap}
-            onSelect={handleSelect}
-            theme={theme}
-            isMobile={isMobile}
-            rotatePaused={rotatePaused}
-            reducedMotion={reducedMotion}
-            controlsRef={controlsRef}
-          />
-        </Canvas>
+        {graph ? (
+          <>
+            <Canvas
+              camera={{ position: [0, 0, 30], fov: 60 }}
+              gl={{ alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance', antialias: !isMobile }}
+              dpr={isMobile ? 1 : [1, 1.5]}
+              frameloop={frameloop}
+              onPointerMissed={handleMiss}
+              onCreated={({ gl }) => {
+                const canvas = gl.domElement as HTMLCanvasElement
+                const onLost = (e: Event) => {
+                  e.preventDefault()
+                  console.warn('WebGL context lost — will attempt restore')
+                }
+                const onRestored = () => console.warn('WebGL context restored')
+                canvas.addEventListener('webglcontextlost', onLost, false)
+                canvas.addEventListener('webglcontextrestored', onRestored, false)
+              }}
+            >
+              <GraphScene
+                graph={graph}
+                activeId={activeId}
+                focused={focused}
+                focusIds={focusIds}
+                onSelect={handleSelect}
+                theme={theme}
+                isMobile={isMobile}
+                isTouch={isTouch}
+                autoRotateBase={autoRotateBase}
+                controlsRef={controlsRef}
+                overlayRef={overlayRef}
+                onInteract={handleInteract}
+              />
+            </Canvas>
+            <div ref={overlayRef} className="graph-label-layer" aria-hidden="true" />
+          </>
+        ) : (
+          <div
+            style={{
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-muted)',
+              fontFamily: monoFont,
+              fontSize: '13px',
+            }}
+          >
+            {failed ? 'GRAPH UNAVAILABLE' : 'LOADING GRAPH'}
+          </div>
+        )}
       </div>
-      <InfoPanel
-        activeId={activeId}
-        concepts={concepts}
-        conceptStatuses={conceptStatuses}
-        onPathNodes={onPathNodes}
-        theme={theme}
-        isMobile={isMobile}
-      />
+      {graph && <InfoPanel activeId={activeId} graph={graph} theme={theme} isMobile={isMobile} />}
     </div>
   )
 }

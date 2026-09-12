@@ -1,11 +1,18 @@
-import { concepts as conceptsData } from '../../lib/conceptData'
+import graphMetaJson from '../../data/graph.meta.json'
+import { DOMAIN_LABELS, DOMAIN_ORDER } from '../../lib/graphDomains'
 
-export const heroConcepts = conceptsData.map((c) => ({
-  id: c.id,
-  label: c.label,
-  domain: c.domain,
-  prerequisites: c.prerequisites,
-}))
+// Tiny build-generated stats. The full concept corpus is fetched by the graph
+// chunk at idle; the landing bundle only carries counts and labels.
+interface GraphMeta {
+  conceptCount: number
+  connectionCount: number
+  domainCount: number
+  domainCounts: Record<string, number>
+  generatedAt: string
+  layoutVersion: number
+}
+
+const graphMeta = graphMetaJson as GraphMeta
 
 export const PIPELINE_STATES = [
   { label: 'UNSEEN', status: 'unseen' as const },
@@ -15,56 +22,14 @@ export const PIPELINE_STATES = [
   { label: 'DECAYING', status: 'decaying' as const },
 ]
 
-export const conceptCount = conceptsData.length
-export const connectionCount = conceptsData.reduce(
-  (sum, c) => sum + (c.prerequisites?.length ?? 0),
-  0
-)
-export const domainCount = new Set(conceptsData.map((c) => c.domain)).size
+export const conceptCount = graphMeta.conceptCount
+export const connectionCount = graphMeta.connectionCount
+export const domainCount = graphMeta.domainCount
+export const domainCounts = graphMeta.domainCounts
 
-export const domainOrder = [
-  'arithmetic',
-  'fractions',
-  'prealgebra',
-  'algebra',
-  'geometry',
-  'trigonometry',
-  'calculus',
-  'statistics',
-  'linear_algebra',
-  'discrete_math',
-  'complex_numbers',
-  'number_theory',
-  'differential_equations',
-  'abstract_algebra',
-  'topology',
-]
+export const domainOrder = [...DOMAIN_ORDER]
 
-export const domainLabels = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  calculus: 'Calculus',
-  statistics: 'Statistics',
-  linear_algebra: 'Linear Algebra',
-  discrete_math: 'Discrete Math',
-  complex_numbers: 'Complex Numbers',
-  number_theory: 'Number Theory',
-  differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-} satisfies Record<string, string>
-
-export const domainCounts = conceptsData.reduce(
-  (acc: Record<string, number>, c) => {
-    acc[c.domain] = (acc[c.domain] || 0) + 1
-    return acc
-  },
-  {} as Record<string, number>
-)
+export const domainLabels = DOMAIN_LABELS
 
 export const levels = [
   { num: '01', name: 'Novice', range: '0–31' },

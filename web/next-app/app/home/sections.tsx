@@ -8,6 +8,8 @@ import FormulaBlock from '../../components/FormulaBlock'
 import DomainTable from '../../components/DomainTable'
 import ProgressionLevels from '../../components/ProgressionLevels'
 import Loading from '../../components/Loading'
+import { loadPositionEntries } from '../../lib/graphPositions'
+import { domainColor } from '../../lib/graphDomains'
 import {
   PIPELINE_STATES,
   conceptCount,
@@ -16,7 +18,6 @@ import {
   domainCounts,
   domainLabels,
   domainOrder,
-  heroConcepts,
   levels,
 } from './data'
 import {
@@ -26,6 +27,7 @@ import {
   ctaSecondaryStyle,
   headingFont,
   loadingGraphStyle,
+  monoFont,
   statsRowStyle,
 } from './styles'
 
@@ -38,7 +40,7 @@ const MathConceptGraph3D = dynamic(() => import('../../components/MathConceptGra
   ),
 })
 
-export function LazyGraphMount({ children }: { children: React.ReactNode }) {
+export function LazyGraphMount({ children, fallback }: { children: React.ReactNode; fallback?: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -72,12 +74,98 @@ export function LazyGraphMount({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  return <div ref={ref}>{visible ? children : <div style={loadingGraphStyle}><Loading label="PREPARING GRAPH" /></div>}</div>
+  return <div ref={ref}>{visible ? children : fallback ?? <div style={loadingGraphStyle}><Loading label="PREPARING GRAPH" /></div>}</div>
+}
+
+// Static SVG snapshot of the DAG (orthographic x/y scatter from the same
+// precomputed positions the WebGL scene uses). Positions arrive via fetch
+// (public/ copy) so the 26KB payload stays out of the page bundle; the box
+// paints with first paint and dots pop in when the fetch resolves.
+export function GraphPoster() {
+  const [entries, setEntries] = useState<Array<[string, [number, number, number]]>>([])
+  useEffect(() => {
+    let live = true
+    loadPositionEntries().then(list => {
+      if (live) setEntries(list)
+    })
+    return () => {
+      live = false
+    }
+  }, [])
+  const W = 400
+  const H = 400
+  const PAD = 16
+  let minX = Infinity
+  let maxX = -Infinity
+  let minY = Infinity
+  let maxY = -Infinity
+  for (const [, p] of entries) {
+    if (p[0] < minX) minX = p[0]
+    if (p[0] > maxX) maxX = p[0]
+    if (p[1] < minY) minY = p[1]
+    if (p[1] > maxY) maxY = p[1]
+  }
+  const spanX = Math.max(maxX - minX, 1e-6)
+  const spanY = Math.max(maxY - minY, 1e-6)
+  // Fit data bounds exactly (no letterbox); flip y so root layers read top-down.
+  const dot = (p: [number, number, number]): [number, number] => [
+    PAD + ((p[0] - minX) / spanX) * (W - 2 * PAD),
+    PAD + (1 - (p[1] - minY) / spanY) * (H - 2 * PAD),
+  ]
+  return (
+    <div style={loadingGraphStyle} aria-hidden="true">
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet" role="presentation">
+        {entries.map(([id, p], i) => {
+          const [cx, cy] = dot(p)
+          return (
+            <circle
+              key={id}
+              cx={cx.toFixed(1)}
+              cy={cy.toFixed(1)}
+              r={i % 12 === 0 ? 2.6 : 1.6}
+              fill={i % 12 === 0 ? 'var(--accent-blue)' : 'var(--text-muted)'}
+              opacity={i % 12 === 0 ? 0.9 : 0.7}
+            />
+          )
+        })}
+      </svg>
+    </div>
+  )
+}
+
+// Static cluster key (no canvas cost): one dot per domain so the node
+// cloud reads as grouped clusters. Counts come from the build-generated
+// meta file, so the concept corpus stays out of the page bundle.
+function DomainLegend({ theme }: { theme: 'dark' | 'light' }) {
+  return (
+    <div
+      aria-label="Domains in the graph"
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '4px 12px',
+        marginTop: '0.75rem',
+        fontFamily: monoFont,
+        fontSize: '11px',
+        color: 'var(--text-muted)',
+      }}
+    >
+      {domainOrder
+        .filter(domain => domainCounts[domain] > 0)
+        .map(domain => (
+          <span key={domain} title={`${domainCounts[domain]} topics`} style={{ whiteSpace: 'nowrap' }}>
+            <span style={{ color: domainColor(domain, theme) }}>●</span>{' '}
+            {domain.replace(/_/g, ' ')}
+          </span>
+        ))}
+    </div>
+  )
 }
 
 export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; onGetStarted: () => void }) {
   return (
-    <section className="py-20 max-sm:py-12 text-center" style={{ background: 'transparent' }}>
+    <section className="py-20 max-sm:py-8 text-center" style={{ background: 'transparent' }}>
       <h1
         style={{
           fontFamily: headingFont,
@@ -105,7 +193,7 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         you have truly mastered the prerequisite, both speed and accuracy must be proven.
       </p>
 
-      <div className="flex gap-3 justify-center items-center mb-10 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
+      <div className="flex gap-3 justify-center items-center mb-10 max-sm:mb-6 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
         <button
           type="button"
           onClick={onGetStarted}
@@ -119,12 +207,19 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         </a>
       </div>
 
-      <div style={statsRowStyle} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center">
+      <div style={{ ...statsRowStyle, marginBottom: '1.25rem' }} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center">
         <span>{conceptCount} topics</span>
         <span style={{ color: 'var(--border-strong)' }}>·</span>
         <span>{connectionCount} connections</span>
         <span style={{ color: 'var(--border-strong)' }}>·</span>
         <span>{domainCount} domains</span>
+      </div>
+      <DomainLegend theme={theme} />
+      <div
+        className="sm:hidden"
+        style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.5rem' }}
+      >
+        Pinch to zoom · tap a node to explore
       </div>
 
       {/* 3D Concept Graph */}
@@ -137,8 +232,8 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         }}
       >
         <div className="w-full max-w-full min-w-0 overflow-hidden">
-          <LazyGraphMount>
-            <MathConceptGraph3D theme={theme} concepts={heroConcepts} />
+          <LazyGraphMount fallback={<GraphPoster />}>
+            <MathConceptGraph3D theme={theme} />
           </LazyGraphMount>
         </div>
       </div>
