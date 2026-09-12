@@ -80,7 +80,7 @@ export default function Avatar({ seed, name, size = 64, url, preset, className }
         height: size,
         background: palette.bg,
         color: palette.fg,
-        fontFamily: "'IBM Plex Mono', monospace",
+        fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
         fontSize,
         fontWeight: 600,
         lineHeight: 1,

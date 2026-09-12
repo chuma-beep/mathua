@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description: 'Architecture and contributing guide for Mathua, the open-source adaptive math learning engine.',
 }
 
-const monoFont = "'IBM Plex Mono', monospace"
-const bodyFont = "'IBM Plex Serif', serif"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
 
 export default function DocsIndexPage() {
   const textStyle: React.CSSProperties = {
@@ -24,7 +24,7 @@ export default function DocsIndexPage() {
         ← Back
       </Link>
       <h1 style={{
-        fontFamily: "'IBM Plex Serif', serif",
+        fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
         fontWeight: 400,
         fontSize: '1.9rem',
         color: 'var(--text-primary)',
@@ -64,7 +64,7 @@ export default function DocsIndexPage() {
           </span>
           <div>
             <div style={{
-              fontFamily: "'IBM Plex Serif', serif",
+              fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
               fontWeight: 400,
               fontSize: '1.1rem',
               color: 'var(--text-primary)',
@@ -101,7 +101,7 @@ export default function DocsIndexPage() {
           </span>
           <div>
             <div style={{
-              fontFamily: "'IBM Plex Serif', serif",
+              fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
               fontWeight: 400,
               fontSize: '1.1rem',
               color: 'var(--text-primary)',
@@ -121,7 +121,7 @@ export default function DocsIndexPage() {
         paddingTop: '3rem',
       }}>
         <h2 style={{
-          fontFamily: "'IBM Plex Serif', serif",
+          fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
           fontWeight: 400,
           fontSize: '1.3rem',
           color: 'var(--text-primary)',

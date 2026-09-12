@@ -65,8 +65,8 @@ const STATUS_COLORS_LIGHT = {
   locked:     '#d0d0d0',
 } satisfies Record<string, string>
 
-const monoFont = "'IBM Plex Mono', monospace"
-const serifFont = "'IBM Plex Serif', serif"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+const serifFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
 
 interface RenderNode {
   id: string

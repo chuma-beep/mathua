@@ -16,7 +16,7 @@ import '@xyflow/react/dist/base.css'
 import { useTheme } from '../../hooks/useTheme'
 import { themeColors } from '../FlowDiagram'
 
-const monoFont = "'IBM Plex Mono', monospace"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
 
 const tableDetails = {
   students: {
@@ -95,7 +95,7 @@ function TableDetail({ tableId, onClose }: { tableId: string | null; onClose: ()
       border: '0.5px solid ' + c.border,
       borderRadius: 0,
       padding: '12px 16px',
-      fontFamily: "'IBM Plex Serif', serif",
+      fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
       fontSize: '13px',
       color: c.textSecondary,
       lineHeight: 1.6,

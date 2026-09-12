@@ -113,7 +113,7 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
         position: 'relative' as const,
         opacity: data.dimmed ? 0.22 : 1,
         transition: 'opacity 150ms ease',
-        fontFamily: "'IBM Plex Mono', monospace",
+        fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
         fontSize: 11,
         color: 'var(--text-primary)',
         cursor: 'pointer',
@@ -395,7 +395,7 @@ function AmbientToggle({
         fontSize: 10,
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
-        fontFamily: "'IBM Plex Mono', monospace",
+        fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
         color: enabled ? '#fff' : 'var(--text-muted)',
         background: enabled ? 'var(--accent-blue)' : 'var(--surface-elevated)',
         border: '0.5px solid var(--border-strong)',
@@ -528,7 +528,7 @@ function ListView({
                 textTransform: 'uppercase',
                 letterSpacing: '0.08em',
                 color: 'var(--text-muted)',
-                fontFamily: "'IBM Plex Mono', monospace",
+                fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
               }}
             >
               {g.domain.replace(/_/g, ' ')} · {g.items.length}
@@ -604,7 +604,7 @@ function ListView({
               padding: 12,
               fontSize: 11,
               color: 'var(--text-muted)',
-              fontFamily: "'IBM Plex Mono', monospace",
+              fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
             }}
           >
             No matching concepts
@@ -997,7 +997,7 @@ function GraphInner({
             fontSize: 10,
             letterSpacing: '0.05em',
             color: 'var(--text-muted)',
-            fontFamily: "'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
             userSelect: 'none' as const,
           }}
         >
