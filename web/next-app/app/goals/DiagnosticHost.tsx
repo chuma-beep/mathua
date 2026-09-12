@@ -238,7 +238,7 @@ export default function DiagnosticHost({
                   placeholder="Your answer..."
                   enterKeyHint="go"
                   disabled={loading}
-                  className="h-40 sm:h-12 sm:flex-1"
+                  className="sm:flex-1"
                 />
                 <button
                   type="submit"
