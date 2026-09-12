@@ -269,7 +269,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           type="submit"
                           disabled={!!checking[i]}
                           aria-label={`Check Answer for question ${i + 1}`}
-                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-3 h-12 text-sm font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto shrink-0"
+                          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors px-6 h-12 text-sm font-mono rounded-none disabled:opacity-50 disabled:cursor-not-allowed w-auto self-end sm:self-auto shrink-0"
                         >
                         {checking[i] ? 'Checking…' : 'Check Answer'}
                         </button>
