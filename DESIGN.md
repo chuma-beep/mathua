@@ -1,12 +1,12 @@
 # Mathua Design System
 
-A mathematics learning platform design system built on a single serif family (IBM Plex Serif) paired with its companion monospace (IBM Plex Mono). Dark-first, warm-neutral, gold-accented. Warm parchment for the web. Precision above decoration.
+A mathematics learning platform design system built on a geometric sans (Space Grotesk) paired with a technical monospace (JetBrains Mono). Dark-first, warm-neutral, gold-accented. Warm parchment for the web. Precision above decoration.
 
 ---
 
 ## Design Philosophy
 
-**One family, two voices.** IBM Plex Serif carries all text — headings and body use weight alone for hierarchy. IBM Plex Mono carries code, labels, nav, and structure. The two were designed together by Bold Monday and share the same construction principles. Nothing clashes.
+**One family, two voices.** Space Grotesk carries all text — headings and body use weight alone for hierarchy. JetBrains Mono carries code, labels, nav, and structure. A grotesque for reading, a coding mono for structure: the pairing reads modern and technical without clashing.
 
 The palette is warm: dark surfaces are `#0b0f1a` (a hint of blue, not pure black) and light surfaces are `#fefcf4` (warmest parchment, never pure white). A single gold accent (`#c8a96e` light / `#b8933e` dark) marks mastery, theorems, and structure. Secondary accents serve semantic roles — green for correct, red for errors, teal for decay.
 
@@ -66,16 +66,16 @@ The palette is warm: dark surfaces are `#0b0f1a` (a hint of blue, not pure black
 
 | Role | Font Family | Weight | Size / Line | Responsive |
 |---|---|---|---|---|
-| Page Title | `'IBM Plex Serif', serif` | 400 | `clamp(1.5rem, 5vw, 1.9rem)` / 1.2 | `max-sm:text-[1.5rem]` (SectionHeader) |
-| Section Heading | `'IBM Plex Serif', serif` | 400 | `1.9rem` / 1.2 | `max-sm:text-[1.5rem]` |
-| Card Heading | `'IBM Plex Serif', serif` | 400 | `1.1rem` / 1.3 | |
-| Body | `'IBM Plex Serif', serif` | 400 | 15px / 1.75 | `max-width: 640px` on mobile, bumps to 16px |
-| Body Small | `'IBM Plex Serif', serif` | 400 | 14px / 1.6 | |
-| Inline Code | `'IBM Plex Mono', monospace` | 400 | 0.9em | |
-| Nav / Labels | `'IBM Plex Mono', monospace` | 400 | 11–12px / 1.5 | |
-| Code Blocks | `'IBM Plex Mono', monospace` | 400 | 13px / 1.6 | |
-| Metric Numbers | `'IBM Plex Mono', monospace` | 400 | 2rem / 1 | `font-variant-numeric: tabular-nums` |
-| ASCII Art | `'IBM Plex Mono', monospace` | 400 | 12px / 1.6 | `overflow-x: auto` |
+| Page Title | `'Space Grotesk', sans-serif` | 400 | `clamp(1.5rem, 5vw, 1.9rem)` / 1.2 | `max-sm:text-[1.5rem]` (SectionHeader) |
+| Section Heading | `'Space Grotesk', sans-serif` | 400 | `1.9rem` / 1.2 | `max-sm:text-[1.5rem]` |
+| Card Heading | `'Space Grotesk', sans-serif` | 400 | `1.1rem` / 1.3 | |
+| Body | `'Space Grotesk', sans-serif` | 400 | 15px / 1.75 | `max-width: 640px` on mobile, bumps to 16px |
+| Body Small | `'Space Grotesk', sans-serif` | 400 | 14px / 1.6 | |
+| Inline Code | `'JetBrains Mono', monospace` | 400 | 0.9em | |
+| Nav / Labels | `'JetBrains Mono', monospace` | 400 | 11–12px / 1.5 | |
+| Code Blocks | `'JetBrains Mono', monospace` | 400 | 13px / 1.6 | |
+| Metric Numbers | `'JetBrains Mono', monospace` | 400 | 2rem / 1 | `font-variant-numeric: tabular-nums` |
+| ASCII Art | `'JetBrains Mono', monospace` | 400 | 12px / 1.6 | `overflow-x: auto` |
 
 ### Fluid typography pattern
 
@@ -160,13 +160,13 @@ Sticky blurred nav bar at the top of every page. Single component in `components
 
 - Position: `sticky top-0 z-100`, backdrop-filter: `blur(8px)`
 - Background: semitransparent (`rgba(11, 15, 26, 0.95)` dark / `rgba(254, 252, 244, 0.95)` light)
-- Font: IBM Plex Mono, 12px links, 13px brand name in `var(--accent-gold)`
+- Font: JetBrains Mono, 12px links, 13px brand name in `var(--accent-gold)`
 - Mobile: horizontal scroll (`overflow-x: auto`) with `white-space: nowrap` — no hamburger, no JS state
 - Theme toggle: inline button in bar (not floating), hidden until `mounted`
 
 ### Footer
 
-In `components/Footer.tsx`. Links use `display: flex; flex-wrap: wrap` with `gap: 4px 12px` — wraps gracefully on any screen width. Tagline in IBM Plex Serif.
+In `components/Footer.tsx`. Links use `display: flex; flex-wrap: wrap` with `gap: 4px 12px` — wraps gracefully on any screen width. Tagline in Space Grotesk.
 
 ### FormulaBlock
 
@@ -185,11 +185,11 @@ SVGs are committed to the repo. The component picks the right variant based on t
 
 ### Section Header
 
-In `components/SectionHeader.tsx`. Renders a centered page-section heading with a gold left-border block. Title font: IBM Plex Serif, `1.9rem max-sm:1.5rem`.
+In `components/SectionHeader.tsx`. Renders a centered page-section heading with a gold left-border block. Title font: Space Grotesk, `1.9rem max-sm:1.5rem`.
 
 ### Pipeline, DomainTable, ProgressionLevels
 
-All use `width: 100%` and IBM Plex Mono for labels/structure. Pipeline wraps with `flex-wrap`. DomainTable uses `overflow-x: auto` for safe table scrolling.
+All use `width: 100%` and JetBrains Mono for labels/structure. Pipeline wraps with `flex-wrap`. DomainTable uses `overflow-x: auto` for safe table scrolling.
 
 ---
 
@@ -234,8 +234,8 @@ maxWidth: {
   container: '1100px',
 },
 fontFamily: {
-  serif: ['IBM Plex Serif', 'serif'],
-  sans: ['IBM Plex Serif', 'serif'],
-  mono: ['IBM Plex Mono', 'monospace'],
+  serif: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+  sans: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+  mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
 }
 ```

@@ -9,7 +9,7 @@ export const loadingGraphStyle: CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
   color: 'var(--text-muted)',
-  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
+  fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
   fontSize: '13px',
   width: '100%',
   maxWidth: '100%',

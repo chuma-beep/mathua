@@ -16,7 +16,7 @@ import '@xyflow/react/dist/base.css'
 import { useTheme } from '../hooks/useTheme'
 import { themeColors } from './FlowDiagram'
 
-const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+const monoFont = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace"
 
 function LayerNode({ data }: { data: { label: string } }) {
   const { theme } = useTheme()
