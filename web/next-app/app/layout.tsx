@@ -28,14 +28,12 @@ const ibmPlexSerif = IBM_Plex_Serif({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: 'Mathua — Adaptive math learning platform',
-    template: '%s · Mathua',
-  },
+  title: 'Mathua',
+  applicationName: 'Mathua',
   description: 'An open-source adaptive math learning platform. Mastery-gated, 630 concepts, generated problems, 150 XP quizzes.',
   manifest: '/manifest.webmanifest',
   openGraph: {
-    title: 'Mathua — Adaptive math learning platform',
+    title: 'Mathua',
     description: 'Master prerequisites before you advance. Open-source, 630 concepts, spaced repetition, 150 XP mastery checks.',
     type: 'website',
     siteName: 'Mathua',
@@ -43,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mathua — Adaptive math learning platform',
+    title: 'Mathua',
     description: 'Master prerequisites before you advance. Open-source, 630 concepts, spaced repetition.',
     images: ['/og.png'],
   },
