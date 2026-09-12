@@ -1,0 +1,26 @@
+{
+  "conceptCount": 630,
+  "connectionCount": 833,
+  "domainCount": 17,
+  "domainCounts": {
+    "abstract_algebra": 30,
+    "algebra": 84,
+    "arithmetic": 46,
+    "calculus": 121,
+    "complex_numbers": 25,
+    "differential_equations": 25,
+    "discrete_math": 25,
+    "fractions": 26,
+    "geometry": 22,
+    "linear_algebra": 25,
+    "machine_learning": 25,
+    "number_theory": 25,
+    "prealgebra": 40,
+    "precalculus": 23,
+    "statistics": 36,
+    "topology": 30,
+    "trigonometry": 22
+  },
+  "generatedAt": "2026-09-11",
+  "layoutVersion": 2
+}

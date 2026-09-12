@@ -297,6 +297,54 @@ footer .link-underline:hover {
   outline-offset: -2px;
 }
 
+/* Landing graph labels: one pointer-events-none overlay, positioned
+   imperatively from the render loop (no per-label React elements). */
+.graph-label-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.graph-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  transform-origin: 0 0;
+  will-change: transform;
+  pointer-events: none;
+  user-select: none;
+}
+
+.graph-label--node {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.01em;
+  color: var(--text-secondary);
+  text-shadow: 0 0 3px var(--graph-surface), 0 0 3px var(--graph-surface);
+}
+
+.graph-label--node.is-active {
+  color: var(--text-primary);
+  font-size: 11px;
+}
+
+.graph-label--domain {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+  text-shadow: 0 0 4px var(--graph-surface), 0 0 4px var(--graph-surface);
+}
+
+.graph-label.is-dim {
+  opacity: 0.18;
+}
+
 /* Lesson body typography: scraped extracts emit their own headings;
    clamp them so section titles never compete with page titles. */
 .mathua-lesson h1 {
