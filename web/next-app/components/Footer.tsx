@@ -16,7 +16,7 @@ const linkClass = 'block opacity-70 transition-opacity hover:opacity-100'
 
 export default function Footer({ className = '' }: FooterProps) {
   return (
-    <footer className={`bg-mathua-primary text-mathua-bg ${className}`}>
+    <footer className={`mt-[10px] bg-mathua-primary text-mathua-bg dark:border-t dark:border-mathua-border dark:bg-mathua-code dark:text-mathua-primary ${className}`}>
       <div className="mx-auto max-w-container px-4 py-14 sm:px-6">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
@@ -29,7 +29,7 @@ export default function Footer({ className = '' }: FooterProps) {
                   alt=""
                   width={32}
                   height={32}
-                  className="size-8"
+                  className="size-8 ring-1 ring-white/10"
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />

@@ -291,19 +291,19 @@ export function StatesSection() {
       <p className="mt-4 font-mono text-[11px] text-mathua-muted">
         example · <span className="text-mathua-blue">arith.add.single</span> · 10 correct in a row at ≤8s → MASTERED
       </p>
-      <div className="mt-6 overflow-x-auto border border-mathua-border bg-mathua-primary p-8 font-mono text-[13px] leading-loose text-mathua-bg">
+      <div className="mt-6 overflow-x-auto border border-mathua-border bg-mathua-primary p-8 font-mono text-[13px] leading-loose text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
         <span className="opacity-40">priority</span> = (0.7 × days_since_last_seen)
         <br />
         <span className="pl-20">+ (0.3 × (1 − mastery))</span>
         <br />
         <span className="pl-20">
           + 5.0{' '}
-          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2 dark:decoration-mathua-bg">if DECAYING</span>
+          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2">if DECAYING</span>
         </span>
         <br />
         <span className="pl-20">
           + 2.0{' '}
-          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2 dark:decoration-mathua-bg">if newly_unlocked</span>
+          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2">if newly_unlocked</span>
         </span>
       </div>
       <p className="mt-4 max-w-[60ch] text-[13px] leading-relaxed text-mathua-secondary">
@@ -363,7 +363,7 @@ export function RankingSection() {
         The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three
         components:
       </p>
-      <div className="mt-4 overflow-x-auto border border-mathua-border bg-mathua-primary p-6 font-mono text-[13px] leading-loose text-mathua-bg">
+      <div className="mt-4 overflow-x-auto border border-mathua-border bg-mathua-primary p-6 font-mono text-[13px] leading-loose text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
         <span className="opacity-40">score</span> = (mastered_count × 100)
         <br />
         <span className="pl-6">+ speed_bonus</span>
@@ -377,7 +377,7 @@ export function RankingSection() {
         {levels.map(l => {
           const elite = 'elite' in l && l.elite
           return (
-            <div key={l.name} className={elite ? 'bg-mathua-primary p-3 text-mathua-bg' : 'bg-mathua-bg p-3'}>
+            <div key={l.name} className={elite ? 'bg-mathua-primary p-3 text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary' : 'bg-mathua-bg p-3'}>
               <div className={elite ? 'font-mono text-[10px] opacity-50' : 'font-mono text-[10px] text-mathua-muted'}>
                 {l.num}
               </div>
@@ -436,7 +436,7 @@ export function FaqSection() {
           contribution goes through a graph validator that rejects cycles and orphaned nodes
           automatically.
         </p>
-        <pre className="mt-4 overflow-x-auto whitespace-pre border border-mathua-border bg-mathua-primary p-5 font-mono text-[11px] leading-relaxed text-mathua-bg">
+        <pre className="mt-4 overflow-x-auto whitespace-pre border border-mathua-border bg-mathua-primary p-5 font-mono text-[11px] leading-relaxed text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
 {`{
   "id":                "arith.add.multi",
   "label":             "Multi-digit addition",
