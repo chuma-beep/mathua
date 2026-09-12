@@ -7,7 +7,6 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 import Loading from '../../components/Loading'
 
 const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), {
@@ -16,7 +15,7 @@ const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), 
     <div style={{
       height: 420, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING DIAGNOSTIC" />
     </div>
@@ -47,7 +46,6 @@ export default function DiagnosePage() {
         </p>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* How it works */}
       <section className="py-20 max-sm:py-12">
@@ -77,7 +75,6 @@ export default function DiagnosePage() {
         <style>{`ul { counter-reset: step-counter; }`}</style>
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Actions */}
       <section className="py-20 max-sm:py-12 text-center">

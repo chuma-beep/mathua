@@ -10,7 +10,6 @@ import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
@@ -292,7 +291,6 @@ function GraphContent() {
         />
       </div>
 
-      <AsciiDivider pattern="wave" />
       <Footer />
     </div>
       <BottomTabs />

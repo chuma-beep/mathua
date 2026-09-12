@@ -7,7 +7,6 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 import KatexContent from '../../components/KatexContent'
 import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
@@ -288,7 +287,6 @@ function ConceptContent() {
           </div>
         </section>
 
-        <AsciiDivider pattern="wave" />
         <Footer />
       </div>
       <BottomTabs />

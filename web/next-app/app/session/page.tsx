@@ -7,7 +7,6 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 
 function SessionContent() {
   const searchParams = useSearchParams()
@@ -89,7 +88,6 @@ function SessionContent() {
           </p>
         </section>
 
-        <AsciiDivider pattern="wave" />
         <Footer />
       </div>
       <BottomTabs />

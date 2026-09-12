@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 import Loading from '../../components/Loading'
 import { getLessons, getLessonBody, getScores, type LessonInfo, type LessonsRes, type Scores } from '../../lib/api'
 import { getUserInfo, getGuestId } from '../../lib/auth'
@@ -287,7 +286,6 @@ function StudyContent() {
           )}
         </section>
 
-        <AsciiDivider pattern="wave" />
         <Footer />
       </div>
       <BottomTabs />

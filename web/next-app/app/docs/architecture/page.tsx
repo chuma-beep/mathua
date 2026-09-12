@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
-import AsciiDivider from '../../../components/AsciiDivider'
 import Loading from '../../../components/Loading'
 
 const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureFlow'), {
@@ -11,7 +10,7 @@ const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureF
     <div style={{
       height: 440, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING ARCHITECTURE DIAGRAM" />
     </div>
@@ -24,7 +23,7 @@ const DiagnosticFlow = dynamic(() => import('../../../components/DiagnosticFlow'
     <div style={{
       height: 420, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING DIAGNOSTIC DIAGRAM" />
     </div>
@@ -37,7 +36,7 @@ const DataModelFlow = dynamic(() => import('../../../components/SystemDesignFlow
     <div style={{
       height: 320, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING DATA MODEL DIAGRAM" />
     </div>
@@ -50,16 +49,16 @@ const RequestFlow = dynamic(() => import('../../../components/SystemDesignFlow/R
     <div style={{
       height: 600, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING REQUEST FLOW DIAGRAM" />
     </div>
   ),
 })
 
-const headingFont = "'IBM Plex Serif', serif"
-const bodyFont = "'IBM Plex Serif', serif"
-const monoFont = "'IBM Plex Mono', monospace"
+const headingFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
 
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
@@ -124,7 +123,6 @@ export default function ArchitecturePage() {
         <ArchitectureFlow />
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* II. Data Model */}
       <section className="py-20 max-sm:py-12">
@@ -150,7 +148,6 @@ export default function ArchitecturePage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* III. Request Flow */}
       <section className="py-20 max-sm:py-12">
@@ -187,7 +184,6 @@ export default function ArchitecturePage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* IV. Grading System */}
       <section className="py-20 max-sm:py-12">
@@ -217,7 +213,6 @@ export default function ArchitecturePage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* V. CAT Diagnostic */}
       <section className="py-20 max-sm:py-12">
@@ -253,7 +248,6 @@ export default function ArchitecturePage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* VI. Key Trade-offs */}
       <section className="py-20 max-sm:py-12">

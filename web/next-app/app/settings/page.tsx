@@ -7,7 +7,6 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import AsciiDivider from '../../components/AsciiDivider'
 import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
@@ -700,7 +699,6 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        <AsciiDivider pattern="wave" />
         <Footer />
       </div>
       <BottomTabs />

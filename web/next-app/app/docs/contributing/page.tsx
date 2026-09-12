@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
-import AsciiDivider from '../../../components/AsciiDivider'
 import Loading from '../../../components/Loading'
 
 export const metadata: Metadata = {
@@ -15,16 +14,16 @@ const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
     <div style={{
       height: 400, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING WORKFLOW" />
     </div>
   ),
 })
 
-const headingFont = "'IBM Plex Serif', serif"
-const bodyFont = "'IBM Plex Serif', serif"
-const monoFont = "'IBM Plex Mono', monospace"
+const headingFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
 
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
@@ -143,7 +142,6 @@ export default function ContributingPage() {
         </div>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* Getting started */}
       <section className="py-20 max-sm:py-12">
@@ -201,7 +199,6 @@ npm run dev`}
         ))}
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Step 1: Concepts */}
       <section className="py-20 max-sm:py-12">
@@ -320,7 +317,6 @@ npm run dev`}
         </div>
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Step 2: Generators */}
       <section className="py-20 max-sm:py-12">
@@ -373,7 +369,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         ))}
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* Step 3: Fuzz tests */}
       <section className="py-20 max-sm:py-12">
@@ -403,7 +398,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         </pre>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* Step 4: Lessons */}
       <section className="py-20 max-sm:py-12">
@@ -433,7 +427,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         </p>
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Frontend contributions */}
       <section className="py-20 max-sm:py-12">
@@ -503,7 +496,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         ))}
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* API server contributions */}
       <section className="py-20 max-sm:py-12">
@@ -555,7 +547,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         ))}
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* Deployment */}
       <section className="py-20 max-sm:py-12">
@@ -576,7 +567,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         ))}
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Validator */}
       <section className="py-20 max-sm:py-12">
@@ -601,7 +591,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         </pre>
       </section>
 
-      <AsciiDivider pattern="wave" />
 
       {/* PR workflow */}
       <section className="py-20 max-sm:py-12">
@@ -634,7 +623,6 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         </p>
       </section>
 
-      <AsciiDivider pattern="dash" />
 
       {/* Design conventions */}
       <section className="py-20 max-sm:py-12">
