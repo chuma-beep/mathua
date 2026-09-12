@@ -38,11 +38,14 @@ export const metadata: Metadata = {
     title: 'Mathua — Adaptive math learning platform',
     description: 'Master prerequisites before you advance. Open-source, 630 concepts, spaced repetition, 150 XP mastery checks.',
     type: 'website',
+    siteName: 'Mathua',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Mathua concept graph' }],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Mathua — Adaptive math learning platform',
     description: 'Master prerequisites before you advance. Open-source, 630 concepts, spaced repetition.',
+    images: ['/og.png'],
   },
   icons: {
     icon: [
