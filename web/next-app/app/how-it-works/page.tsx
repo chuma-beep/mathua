@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import BottomTabs from '../../components/BottomTabs'
-import AsciiDivider from '../../components/AsciiDivider'
 import { bodyStyle, h1Style, sections } from './styles'
 import {
   ConceptGraphSection,
@@ -28,7 +27,7 @@ function NavSidebar({ activeSection }: { activeSection: string }) {
           href={`#${section.id}`}
           className="block text-[12px] py-2 px-3 mb-1 transition-colors max-md:mb-0 max-md:whitespace-nowrap max-md:min-h-[36px] max-md:flex max-md:items-center max-md:shrink-0"
           style={{
-            fontFamily: "'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
             color: activeSection === section.id ? 'var(--accent-blue)' : 'var(--text-muted)',
             borderLeft: activeSection === section.id ? '2px solid var(--accent-blue)' : '2px solid transparent',
             textDecoration: 'none',
@@ -88,19 +87,12 @@ export default function HowItWorksPage() {
           </section>
 
           <ConceptGraphSection />
-          <AsciiDivider pattern="dash" />
           <StudentModelSection />
-          <AsciiDivider pattern="dash" />
           <SpacedRepetitionSection />
-          <AsciiDivider pattern="dash" />
           <DiagnosticSection />
-          <AsciiDivider pattern="dash" />
           <SchedulerSection />
-          <AsciiDivider pattern="dash" />
           <ScoringSection />
-          <AsciiDivider pattern="dash" />
           <GeneratorsSection />
-          <AsciiDivider pattern="dash" />
           <SymbolicGradingSection />
 
           <section className="mt-12 pt-6 text-center" style={{ borderTop: '0.5px solid var(--border)' }}>
@@ -108,10 +100,10 @@ export default function HowItWorksPage() {
               Ready to find your starting point?
             </p>
             <div className="flex gap-3 justify-center mt-4 max-sm:flex-col max-sm:items-center">
-              <a href="/onboard" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
+              <a href="/onboard" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
                 Start diagnostic test →
               </a>
-              <a href="/study" style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
+              <a href="/study" style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
                 Open Study →
               </a>
             </div>
