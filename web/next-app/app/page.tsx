@@ -6,9 +6,9 @@ import { ensureGuestId, ensureGuestToken } from '../lib/auth'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import {
   CoverageSection,
-  EditorialFooter,
   FaqSection,
   FeaturesSection,
   HeroSection,
@@ -48,7 +48,7 @@ export default function HomePage() {
         <RankingSection />
         <FaqSection />
       </main>
-      <EditorialFooter />
+      <Footer />
     </>
   )
 }

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Loading from '../../components/Loading'
 import { loadPositionEntries } from '../../lib/graphPositions'
-import { DICEBEAR_VERSION } from '../../lib/dicebear'
 import {
   PIPELINE_STATES,
   conceptCount,
@@ -458,62 +457,5 @@ export function FaqSection() {
         </Link>
       </div>
     </section>
-  )
-}
-
-const FOOTER_SHAPES = ['alpha', 'beta', 'gamma']
-const shapeUrl = (seed: string) =>
-  `https://api.dicebear.com/${DICEBEAR_VERSION}/shapes/svg?seed=${seed}&backgroundColor=1c3a5e`
-
-export function EditorialFooter() {
-  return (
-    <footer className="bg-mathua-primary text-mathua-bg">
-      <div className="mx-auto max-w-container px-4 py-14 sm:px-6">
-        <div className="grid gap-8 md:grid-cols-4">
-          <div>
-            <div className="font-serif text-lg">λ Mathua</div>
-            <div className="mt-2 flex gap-2">
-              {FOOTER_SHAPES.map(seed => (
-                <img
-                  key={seed}
-                  src={shapeUrl(seed)}
-                  alt=""
-                  width={32}
-                  height={32}
-                  className="size-8"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
-              ))}
-            </div>
-          </div>
-          <div className="space-y-2 font-mono text-xs">
-            <a
-              href="https://github.com/chuma-beep/mathua"
-              className="block opacity-70 transition-opacity hover:opacity-100"
-            >
-              GitHub
-            </a>
-            <Link href="/docs" className="block opacity-70 transition-opacity hover:opacity-100">
-              Docs
-            </Link>
-            <Link href="/docs/contributing" className="block opacity-70 transition-opacity hover:opacity-100">
-              Contributing
-            </Link>
-          </div>
-          <div className="space-y-2 font-mono text-xs">
-            <Link href="/note" className="block opacity-70 transition-opacity hover:opacity-100">
-              Creator&apos;s Note
-            </Link>
-            <div className="opacity-40">Avatars by DiceBear</div>
-            <div className="opacity-40">MIT License</div>
-          </div>
-          <div className="font-mono text-[10px] opacity-40 md:text-right">
-            <div>Draft · Sheet 01</div>
-            <div>Scale 1:1 · Grid 22px</div>
-          </div>
-        </div>
-      </div>
-    </footer>
   )
 }

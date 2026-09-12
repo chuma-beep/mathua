@@ -267,9 +267,10 @@ export default function LeaderboardPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
-      <BottomTabs />
+
+    <Footer />
+    <BottomTabs />
     </>
   )
 }

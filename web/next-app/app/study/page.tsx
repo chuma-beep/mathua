@@ -285,9 +285,9 @@ function StudyContent() {
             </>
           )}
         </section>
-
-        <Footer />
       </div>
+
+      <Footer />
       <BottomTabs />
     </>
   )
