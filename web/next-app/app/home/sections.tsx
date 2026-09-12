@@ -1,14 +1,11 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import SectionHeader from '../../components/SectionHeader'
-import Pipeline from '../../components/Pipeline'
-import FormulaBlock from '../../components/FormulaBlock'
-import DomainTable from '../../components/DomainTable'
-import ProgressionLevels from '../../components/ProgressionLevels'
 import Loading from '../../components/Loading'
 import { loadPositionEntries } from '../../lib/graphPositions'
+import { DICEBEAR_VERSION } from '../../lib/dicebear'
 import {
   PIPELINE_STATES,
   conceptCount,
@@ -17,16 +14,7 @@ import {
   domainOrder,
   levels,
 } from './data'
-import {
-  bodyFont,
-  codeQuoteStyle,
-  ctaPrimaryStyle,
-  ctaSecondaryStyle,
-  headingFont,
-  loadingGraphStyle,
-  monoFont,
-  statsRowStyle,
-} from './styles'
+import { loadingGraphStyle } from './styles'
 
 const MathConceptGraph3D = dynamic(() => import('../../components/MathConceptGraph3D'), {
   ssr: false,
@@ -132,79 +120,116 @@ export function GraphPoster() {
 
 export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; onGetStarted: () => void }) {
   return (
-    <section className="py-20 max-sm:py-8 text-center" style={{ background: 'transparent' }}>
-      <h1
-        style={{
-          fontFamily: headingFont,
-          fontWeight: 400,
-          fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
-          lineHeight: 1.2,
-          color: 'var(--text-primary)',
-          marginBottom: '1rem',
-          letterSpacing: '-0.01em',
-        }}
-      >
-        Adaptive math learning platform
-      </h1>
-      <p
-        style={{
-          fontFamily: bodyFont,
-          fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
-          color: 'var(--text-secondary)',
-          maxWidth: '600px',
-          margin: '0 auto 2rem',
-          lineHeight: 1.85,
-        }}
-      >
-        Mathua is an open-source adaptive math learning engine. You cannot advance until you
-        have truly mastered the prerequisite — both speed and accuracy must be proven.
-      </p>
-
-      <div className="flex gap-3 justify-center items-center mb-10 max-sm:mb-6 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
-        <button
-          type="button"
-          onClick={onGetStarted}
-          style={ctaPrimaryStyle}
-          className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]"
+    <section className="grid grid-cols-1 gap-10 border-b border-mathua-division pb-16 pt-12 md:grid-cols-12 md:gap-8 md:pt-20">
+      <div className="min-w-0 md:col-span-7">
+        <div className="section-label reveal">( 01 · Title Block )</div>
+        <h1
+          className="reveal mt-5 max-w-[18ch] text-balance font-serif text-[clamp(2.5rem,6vw,4.5rem)] font-normal leading-[1.05] sm:leading-[0.95] tracking-tight text-mathua-primary"
+          style={{ animationDelay: '80ms' }}
         >
-          Get started
-        </button>
-        <a href="https://github.com/chuma-beep/mathua" style={ctaSecondaryStyle} className="inline-flex items-center justify-center min-h-[44px] max-sm:w-full max-sm:max-w-[280px]">
-          View on GitHub
-        </a>
+          Adaptive math learning platform
+        </h1>
+        <p
+          className="reveal mt-6 max-w-[46ch] text-pretty text-base sm:text-[15px] leading-relaxed text-mathua-secondary"
+          style={{ animationDelay: '160ms' }}
+        >
+          Mathua is an open-source adaptive math learning engine. You cannot advance until you
+          have truly mastered the prerequisite — both speed and accuracy must be proven.
+        </p>
+        <div className="reveal mt-8 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ animationDelay: '240ms' }}>
+          <button
+            type="button"
+            onClick={onGetStarted}
+            className="inline-flex w-full min-h-[44px] items-center justify-center bg-mathua-primary px-6 py-3 text-sm font-medium text-mathua-bg transition-colors hover:bg-mathua-blue hover:text-white sm:w-auto"
+          >
+            Get started
+          </button>
+          <a
+            href="https://github.com/chuma-beep/mathua"
+            className="inline-flex w-full min-h-[44px] items-center justify-center border border-mathua-border px-6 py-3 text-sm font-medium text-mathua-primary transition-colors hover:bg-mathua-primary hover:text-mathua-bg sm:w-auto"
+          >
+            View on GitHub
+          </a>
+        </div>
+        <p className="reveal mt-4 font-mono text-[11px] text-mathua-muted" style={{ animationDelay: '320ms' }}>
+          No account needed to start.
+        </p>
       </div>
-      <p
-        style={{
-          fontFamily: monoFont,
-          fontSize: '11px',
-          color: 'var(--text-muted)',
-          marginTop: '-1rem',
-          marginBottom: '1.25rem',
-        }}
-      >
-        No account needed to start.
-      </p>
-
-      <div
-        className="sm:hidden"
-        style={{ fontFamily: monoFont, fontSize: '11px', color: 'var(--text-muted)', marginTop: '0.5rem' }}
-      >
-        Pinch to zoom · tap a node to explore
-      </div>
-
-      {/* 3D Concept Graph */}
-      <div
-        className="p-3 sm:p-6 w-full max-w-full min-w-0 overflow-hidden"
-        style={{
-          border: '0.5px solid var(--border)',
-          borderRadius: 0,
-          background: 'var(--graph-surface)',
-        }}
-      >
+      <div className="min-w-0 md:col-span-5">
+        <div className="mb-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-mathua-muted">
+          <span>Fig. A — Concept Graph</span>
+          <span>N 47°12′</span>
+        </div>
         <div className="w-full max-w-full min-w-0 overflow-hidden">
           <LazyGraphMount fallback={<GraphPoster />}>
             <MathConceptGraph3D theme={theme} />
           </LazyGraphMount>
+        </div>
+        <p className="mt-2 font-mono text-[11px] text-mathua-muted sm:hidden">
+          Pinch to zoom · tap a node to explore
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// Counts up when the stat scrolls into view. The target is rendered first so
+// no-JS, reduced-motion, and e2e reads always see the real number; the
+// observer restarts it from 0 only once the element is (barely) on screen.
+function CountUp({ target, duration = 1200 }: { target: number; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let raf = 0
+    const observer = new IntersectionObserver(
+      entries => {
+        if (!entries[0]?.isIntersecting) return
+        observer.disconnect()
+        const start = performance.now()
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / duration)
+          const eased = 1 - Math.pow(1 - t, 3)
+          el.textContent = String(Math.round(eased * target))
+          if (t < 1) raf = requestAnimationFrame(tick)
+        }
+        raf = requestAnimationFrame(tick)
+      },
+      { threshold: 0 }
+    )
+    observer.observe(el)
+    return () => {
+      observer.disconnect()
+      cancelAnimationFrame(raf)
+    }
+  }, [target, duration])
+  return <span ref={ref}>{target}</span>
+}
+
+export function TrustSection() {
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 02 · Why it is trusted )</div>
+      <div className="mt-5 grid gap-10 md:grid-cols-12 md:items-start">
+        <p className="max-w-[52ch] text-sm leading-relaxed text-mathua-secondary md:col-span-7">
+          Open-source under MIT. Sequencing inspired by Math Academy, content shaped by
+          OpenStax, MIT OpenCourseWare, and Art of Problem Solving. Lessons build on Algebrica
+          under CC BY-NC 4.0. No accounts to start, no paywall on the graph.
+        </p>
+        <div className="grid grid-cols-3 divide-x divide-mathua-division border border-mathua-border md:col-span-5">
+          <div className="p-5">
+            <div className="font-serif text-3xl tracking-tight text-mathua-primary"><CountUp target={conceptCount} /></div>
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">worked concepts</div>
+          </div>
+          <div className="p-5">
+            <div className="font-serif text-3xl tracking-tight text-mathua-primary">∞</div>
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">generated problems</div>
+          </div>
+          <div className="p-5">
+            <div className="font-serif text-3xl tracking-tight text-mathua-primary">150</div>
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">XP mastery check</div>
+          </div>
         </div>
       </div>
     </section>
@@ -231,18 +256,14 @@ const FEATURES = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="3 main features" />
-      <div style={{ marginTop: '2rem' }}>
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 03 · 3 Main Features )</div>
+      <div className="mt-6 grid gap-px border border-mathua-division bg-mathua-division md:grid-cols-3">
         {FEATURES.map(f => (
-          <div key={f.title} style={{ borderTop: '0.5px solid var(--border)', padding: '1.2rem 0' }}>
-            <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem' }}>
-              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--accent-blue)' }}>{f.numeral}</span>
-              <span style={{ fontFamily: headingFont, fontSize: '1.1rem', color: 'var(--text-primary)' }}>{f.title}</span>
-            </div>
-            <p style={{ fontFamily: bodyFont, fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.85, marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
-              {f.body}
-            </p>
+          <div key={f.title} className="bg-mathua-bg p-6">
+            <div className="font-mono text-xs text-mathua-blue">{f.numeral}</div>
+            <h4 className="mt-3 font-serif text-lg text-mathua-primary">{f.title}</h4>
+            <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{f.body}</p>
           </div>
         ))}
       </div>
@@ -250,145 +271,124 @@ export function FeaturesSection() {
   )
 }
 
-export function PipelineSection() {
+const chipClass = (status: string) => {
+  if (status === 'mastered') return 'border border-mathua-blue bg-mathua-blue text-mathua-bg'
+  if (status === 'decaying') return 'border border-dashed border-mathua-border text-mathua-primary'
+  return 'border border-mathua-border text-mathua-primary'
+}
+
+export function StatesSection() {
   return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="The states" />
-      <Pipeline states={PIPELINE_STATES} className="my-7" />
-      <p
-        style={{
-          fontFamily: monoFont,
-          fontSize: '12px',
-          color: 'var(--text-secondary)',
-          textAlign: 'center',
-          marginTop: '-0.5rem',
-          marginBottom: '1.5rem',
-          lineHeight: 1.8,
-        }}
-      >
-        example · <span style={{ color: 'var(--accent-blue)' }}>arith.add.single</span> · 10 correct
-        in a row at ≤8s → MASTERED
-      </p>
-      <div className="flex justify-center">
-        <FormulaBlock
-          code={`priority = (0.7 × days_since_last_seen)
-         + (0.3 × (1 − mastery))
-         + 5.0  if DECAYING
-         + 2.0  if newly_unlocked`}
-        />
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 04 · The States )</div>
+      <div className="mt-6 flex flex-wrap items-center gap-2 font-mono text-xs">
+        {PIPELINE_STATES.map((s, i) => (
+          <span key={s.label} className="flex items-center gap-2">
+            {i > 0 && <span className="text-mathua-muted">→</span>}
+            <span className={`px-3 py-1.5 ${chipClass(s.status)}`}>{s.label}</span>
+          </span>
+        ))}
       </div>
-      <p
-        style={{
-          fontFamily: bodyFont,
-          fontSize: '0.95rem',
-          color: 'var(--text-secondary)',
-          textAlign: 'center',
-          marginTop: '1.25rem',
-          lineHeight: 1.85,
-        }}
-      >
+      <p className="mt-4 font-mono text-[11px] text-mathua-muted">
+        example · <span className="text-mathua-blue">arith.add.single</span> · 10 correct in a row at ≤8s → MASTERED
+      </p>
+      <div className="mt-6 overflow-x-auto border border-mathua-border bg-mathua-primary p-8 font-mono text-[13px] leading-loose text-mathua-bg">
+        <span className="opacity-40">priority</span> = (0.7 × days_since_last_seen)
+        <br />
+        <span className="pl-20">+ (0.3 × (1 − mastery))</span>
+        <br />
+        <span className="pl-20">
+          + 5.0{' '}
+          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2 dark:decoration-mathua-bg">if DECAYING</span>
+        </span>
+        <br />
+        <span className="pl-20">
+          + 2.0{' '}
+          <span className="underline decoration-mathua-blue decoration-2 underline-offset-2 dark:decoration-mathua-bg">if newly_unlocked</span>
+        </span>
+      </div>
+      <p className="mt-4 max-w-[60ch] text-[13px] leading-relaxed text-mathua-secondary">
         The scheduler enforces three hard rules: prerequisites must be mastered before a concept
-        unlocks, the same concept never appears twice in a row, and roughly 70% of each session is
-        new material.
+        unlocks, the same concept never appears twice in a row, and roughly 70% of each session
+        is new material.
       </p>
     </section>
   )
 }
 
-export function CurriculumSection() {
+function DomainTable({ rows }: { rows: [string, number][] }) {
   return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="What Mathua covers" />
-      <DomainTable
-        className="mt-5"
-        rows={domainOrder.map((d) => ({
-          domain: domainLabels[d],
-          count: domainCounts[d],
-        }))}
-      />
-      <p
-        style={{
-          fontFamily: bodyFont,
-          fontStyle: 'italic',
-          fontSize: '13px',
-          color: 'var(--text-muted)',
-          marginTop: '0.75rem',
-        }}
-      >
-        Problems are generated on demand, never stored. There is nothing to memorise.
-      </p>
-      <div className="flex justify-center mt-5">
-        <a
+    <table className="w-full font-mono text-xs">
+      <tbody className="[&_td]:border-b [&_td]:border-mathua-division [&_td]:py-1.5">
+        {rows.map(([domain, count]) => (
+          <tr key={domain}>
+            <td className="text-mathua-secondary">{domain}</td>
+            <td className="text-right text-mathua-primary">{count}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+export function CoverageSection() {
+  const rows: [string, number][] = domainOrder.map(d => [domainLabels[d], domainCounts[d]])
+  const half = Math.ceil(rows.length / 2)
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <div className="section-label">( 05 · What Mathua covers )</div>
+        <Link
           href="/study"
-          className="link-underline"
-          style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--accent-blue)' }}
+          className="font-mono text-[11px] text-mathua-muted transition-colors hover:text-mathua-blue"
         >
           Browse all {conceptCount} concepts →
-        </a>
+        </Link>
       </div>
-    </section>
-  )
-}
-
-export function ProgressionSection() {
-  return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="Ranking system" />
-      <div className="flex flex-wrap gap-8 items-start mt-7 max-sm:flex-col max-sm:gap-4">
-        <div className="flex-1 min-w-[280px] max-sm:min-w-0">
-          <p
-            style={{
-              fontFamily: bodyFont,
-              fontSize: '0.95rem',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.85,
-              textAlign: 'center',
-            }}
-          >
-            The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three
-            components:
-          </p>
-          <div className="flex justify-center mt-4">
-            <FormulaBlock
-              code={`score = (mastered_count × 100)
-    + speed_bonus
-     + (current_streak × 10)`}
-            />
-          </div>
-        </div>
-        <div className="flex-1 min-w-[280px] max-sm:min-w-0">
-          <ProgressionLevels levels={levels} />
-        </div>
+      <div className="mt-6 grid gap-x-12 gap-y-6 md:grid-cols-2">
+        <DomainTable rows={rows.slice(0, half)} />
+        <DomainTable rows={rows.slice(half)} />
       </div>
-    </section>
-  )
-}
-
-export function SocialProofSection() {
-  return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="Why it is trusted" />
-      <p
-        style={{
-          fontFamily: bodyFont,
-          fontSize: '0.95rem',
-          color: 'var(--text-secondary)',
-          lineHeight: 1.85,
-          textAlign: 'center',
-          maxWidth: '600px',
-          margin: '0 auto',
-        }}
-      >
-        Open-source under MIT. Sequencing inspired by Math Academy, content shaped by
-        OpenStax, MIT OpenCourseWare, and Art of Problem Solving. Lessons build on
-        Algebrica under CC BY-NC 4.0. No accounts to start, no paywall on the graph.
+      <p className="mt-4 font-mono text-[11px] text-mathua-muted">
+        Problems are generated on demand, never stored. There is nothing to memorise.
       </p>
-      <div style={statsRowStyle} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center mt-6">
-        <span>{conceptCount} worked concepts</span>
-        <span style={{ color: 'var(--border-strong)' }}>·</span>
-        <span>generated problems, never stored</span>
-        <span style={{ color: 'var(--border-strong)' }}>·</span>
-        <span>150 XP mastery-check quiz</span>
+    </section>
+  )
+}
+
+export function RankingSection() {
+  return (
+    <section data-reveal className="border-b border-mathua-division py-16">
+      <div className="section-label">( 06 · Ranking System )</div>
+      <p className="mt-4 max-w-[52ch] text-sm text-mathua-secondary">
+        The leaderboard resets every Monday at 00:00 UTC. Your score is calculated from three
+        components:
+      </p>
+      <div className="mt-4 overflow-x-auto border border-mathua-border bg-mathua-primary p-6 font-mono text-[13px] leading-loose text-mathua-bg">
+        <span className="opacity-40">score</span> = (mastered_count × 100)
+        <br />
+        <span className="pl-6">+ speed_bonus</span>
+        <br />
+        <span className="pl-6">+ (current_streak × 10)</span>
+      </div>
+      <div className="mt-8 font-mono text-[10px] uppercase tracking-[0.2em] text-mathua-muted">
+        Levels of mastery
+      </div>
+      <div className="mt-3 grid grid-cols-3 gap-px border border-mathua-division bg-mathua-division md:grid-cols-9">
+        {levels.map(l => {
+          const elite = 'elite' in l && l.elite
+          return (
+            <div key={l.name} className={elite ? 'bg-mathua-primary p-3 text-mathua-bg' : 'bg-mathua-bg p-3'}>
+              <div className={elite ? 'font-mono text-[10px] opacity-50' : 'font-mono text-[10px] text-mathua-muted'}>
+                {l.num}
+              </div>
+              <div className={`mt-1 font-serif text-[13px] ${elite ? '' : 'text-mathua-primary'}`}>{l.name}</div>
+              <div className={elite ? 'mt-1 font-mono text-[10px] opacity-50' : 'mt-1 font-mono text-[10px] text-mathua-muted'}>
+                {l.range}
+              </div>
+            </div>
+          )
+        })}
       </div>
     </section>
   )
@@ -397,104 +397,123 @@ export function SocialProofSection() {
 const FAQS = [
   {
     q: 'Do I need an account to start?',
-    a: 'No. Get started creates a guest profile instantly. Sign up later only if you want your progress on another device.',
+    a: 'No. Begin studying immediately — accounts are optional and only needed to sync progress across devices.',
   },
   {
     q: 'Why does speed matter, not just accuracy?',
-    a: 'Each concept has a streak and a time threshold. A slow correct answer counts as weak mastery, so fluency is proven before you advance.',
+    a: 'Fluency requires retrieval under time pressure. Knowing the answer is not enough; you must know it fast, or the foundation will not hold the next concept.',
   },
   {
     q: 'What happens every 150 XP?',
-    a: 'A timed, closed-book mastery-check quiz at 80% difficulty over recent material, with immediate remedial work and a retake path.',
+    a: 'A mastery-check quiz verifies retention across your recent concepts before new material continues.',
   },
   {
     q: 'Is Mathua free and open-source?',
-    a: 'Yes, MIT licensed. The concept graph, generators, and lessons are in the repo and validated by automated checks on every change.',
+    a: 'Yes — MIT licensed, with no paywall on the graph. Every concept and generator is in the repository.',
   },
 ]
 
 export function FaqSection() {
   return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="Questions, answered." />
-      <div style={{ marginTop: '2rem' }}>
-        {FAQS.map(f => (
-          <details key={f.q} style={{ borderTop: '0.5px solid var(--border)', padding: '1rem 0' }}>
-            <summary
-              style={{
-                fontFamily: headingFont,
-                fontSize: '1rem',
-                color: 'var(--text-primary)',
-                cursor: 'pointer',
-              }}
-            >
-              {f.q}
-            </summary>
-            <p
-              style={{
-                fontFamily: bodyFont,
-                fontSize: '0.95rem',
-                color: 'var(--text-secondary)',
-                lineHeight: 1.85,
-                marginTop: '0.5rem',
-                marginLeft: 'clamp(0.5rem, 3vw, 1.5rem)',
-              }}
-            >
-              {f.a}
-            </p>
-          </details>
-        ))}
+    <section data-reveal className="grid gap-10 border-b border-mathua-division py-16 md:grid-cols-2">
+      <div>
+        <div className="section-label">( 07 · Questions, answered. )</div>
+        <div className="mt-5 divide-y divide-mathua-division border-y border-mathua-division">
+          {FAQS.map(f => (
+            <details key={f.q} className="group py-3">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 font-serif text-[15px] text-mathua-primary">
+                <span>{f.q}</span>
+                <span className="font-mono text-mathua-muted transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <p className="mt-2 text-[13px] leading-relaxed text-mathua-secondary">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+      <div>
+        <div className="section-label">( 08 · How it is extended. )</div>
+        <p className="mt-4 text-[13px] leading-relaxed text-mathua-secondary">
+          Every concept is a JSON node. Every problem is a Go generator function. Every
+          contribution goes through a graph validator that rejects cycles and orphaned nodes
+          automatically.
+        </p>
+        <pre className="mt-4 overflow-x-auto whitespace-pre border border-mathua-border bg-mathua-primary p-5 font-mono text-[11px] leading-relaxed text-mathua-bg">
+{`{
+  "id":                "arith.add.multi",
+  "label":             "Multi-digit addition",
+  "domain":            "arithmetic",
+  "prerequisites":     ["arith.add.single",
+                        "arith.add.carry"],
+  "mastery_threshold": {
+    "streak":          5,
+    "avg_time_seconds": 8
+  }
+}`}
+        </pre>
+        <Link
+          href="/docs/contributing"
+          className="mt-4 inline-block font-mono text-[11px] text-mathua-muted transition-colors hover:text-mathua-blue"
+        >
+          Read the contributing guide →
+        </Link>
       </div>
     </section>
   )
 }
 
-export function ContributingSection() {
+const FOOTER_SHAPES = ['alpha', 'beta', 'gamma']
+const shapeUrl = (seed: string) =>
+  `https://api.dicebear.com/${DICEBEAR_VERSION}/shapes/svg?seed=${seed}&backgroundColor=1c3a5e`
+
+export function EditorialFooter() {
   return (
-    <section className="py-20 max-sm:py-12">
-      <SectionHeader title="How it is extended." />
-      <p
-        style={{
-          fontFamily: bodyFont,
-          fontSize: '0.95rem',
-          color: 'var(--text-secondary)',
-          lineHeight: 1.85,
-          textAlign: 'center',
-          maxWidth: '600px',
-          margin: '0 auto',
-        }}
-      >
-        Every concept is a JSON node. Every problem is a Go generator function. Every contribution
-        goes through a graph validator that rejects cycles and orphaned nodes automatically.
-      </p>
-      <div className="flex justify-center mt-4">
-        <pre style={codeQuoteStyle}>
-{`{
-   "id":                "arith.add.multi",
-   "label":             "Multi-digit addition",
-   "domain":            "arithmetic",
-   "prerequisites":     ["arith.add.single", "arith.add.carry"],
-   "mastery_threshold": {
-     "streak":          5,
-     "avg_time_seconds": 8
-   }
- }`}
-        </pre>
+    <footer className="bg-mathua-primary text-mathua-bg">
+      <div className="mx-auto max-w-container px-4 py-14 sm:px-6">
+        <div className="grid gap-8 md:grid-cols-4">
+          <div>
+            <div className="font-serif text-lg">λ Mathua</div>
+            <div className="mt-2 flex gap-2">
+              {FOOTER_SHAPES.map(seed => (
+                <img
+                  key={seed}
+                  src={shapeUrl(seed)}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="size-8"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
+              ))}
+            </div>
+          </div>
+          <div className="space-y-2 font-mono text-xs">
+            <a
+              href="https://github.com/chuma-beep/mathua"
+              className="block opacity-70 transition-opacity hover:opacity-100"
+            >
+              GitHub
+            </a>
+            <Link href="/docs" className="block opacity-70 transition-opacity hover:opacity-100">
+              Docs
+            </Link>
+            <Link href="/docs/contributing" className="block opacity-70 transition-opacity hover:opacity-100">
+              Contributing
+            </Link>
+          </div>
+          <div className="space-y-2 font-mono text-xs">
+            <Link href="/note" className="block opacity-70 transition-opacity hover:opacity-100">
+              Creator&apos;s Note
+            </Link>
+            <div className="opacity-40">Avatars by DiceBear</div>
+            <div className="opacity-40">MIT License</div>
+          </div>
+          <div className="font-mono text-[10px] opacity-40 md:text-right">
+            <div>Draft · Sheet 01</div>
+            <div>Scale 1:1 · Grid 22px</div>
+          </div>
+        </div>
       </div>
-      <div className="flex justify-center mt-6">
-        <a
-          href="/docs/contributing"
-          className="link-underline"
-          style={{
-            fontFamily: headingFont,
-            fontStyle: 'italic',
-            fontSize: '1rem',
-            color: 'var(--accent-blue)',
-          }}
-        >
-          Read the contributing guide →
-        </a>
-      </div>
-    </section>
+    </footer>
   )
 }
