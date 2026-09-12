@@ -1,4 +1,4 @@
-FROM node:20-bookworm AS webbuilder
+FROM node:24-bookworm AS webbuilder
 
 WORKDIR /app
 COPY web/next-app/package.json web/next-app/package-lock.json ./web/next-app/
