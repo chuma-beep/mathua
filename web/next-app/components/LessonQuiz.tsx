@@ -5,6 +5,7 @@ import KatexContent from './KatexContent'
 import ReportButton from './ReportButton'
 import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../lib/api'
 import { applyResult, initialState, type StreakState } from '../lib/progression'
+import { Input } from '@/components/ui/input'
 
 interface LessonQuizProps {
   conceptId: string
@@ -246,7 +247,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2"
                       >
                         <label htmlFor={`lesson-quiz-${conceptId}-${i}`} className="sr-only">Your answer</label>
-                        <input
+                        <Input
                           id={`lesson-quiz-${conceptId}-${i}`}
                           type="text"
                           value={answers[i] || ''}
@@ -254,15 +255,15 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           placeholder="Your answer…"
                           aria-label={`Your answer for question ${i + 1}`}
                           enterKeyHint="go"
-                        disabled={result !== undefined || locked}
-                        className={`flex-1 min-w-0 bg-mathua-bg border px-4 h-40 sm:h-12 text-base font-mono text-mathua-primary placeholder:text-mathua-muted outline-none transition-colors rounded-none ${
-                          result === 'correct'
-                            ? 'border-green-500/60'
-                            : result === 'incorrect'
-                            ? 'border-red-500/60'
-                            : 'border-mathua-border focus:border-mathua-blue'
-                        }`}
-                      />
+                          disabled={result !== undefined || locked}
+                          className={`flex-1 h-40 sm:h-12 bg-mathua-bg ${
+                            result === 'correct'
+                              ? 'border-green-500/60'
+                              : result === 'incorrect'
+                              ? 'border-red-500/60'
+                              : ''
+                          }`}
+                        />
                       {result === undefined && !locked && (
                         <button
                           type="submit"

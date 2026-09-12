@@ -10,6 +10,7 @@ import DiagnosticResults from '../../components/DiagnosticResults'
 import Loading from '../../components/Loading'
 import type { DiagnosticProgress, GoalPlanRes } from '../../lib/api'
 import { domainLabels, type DomainInfo } from './domains'
+import { Input } from '@/components/ui/input'
 
 export function WelcomeStep({
   domains,
@@ -148,7 +149,7 @@ export function DiagnosticStep({
             className="flex flex-col sm:flex-row gap-3 min-w-0"
           >
             <label htmlFor="onboard-answer" className="sr-only">Your answer</label>
-            <input
+            <Input
               ref={inputRef}
               id="onboard-answer"
               type="text"
@@ -157,7 +158,7 @@ export function DiagnosticStep({
               placeholder="Your answer..."
               enterKeyHint="go"
               disabled={loading || lastResult !== null}
-              className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-40 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+              className="flex-1 h-40 sm:h-12"
             />
             <button
               type="submit"
