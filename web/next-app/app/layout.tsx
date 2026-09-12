@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
+import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -22,7 +23,11 @@ const ibmPlexSerif = IBM_Plex_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'Mathua',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Mathua — Adaptive math learning platform',
+    template: '%s · Mathua',
+  },
   description: 'An open-source adaptive math learning platform. Mastery-gated, 630 concepts, generated problems, 150 XP quizzes.',
   manifest: '/manifest.webmanifest',
   openGraph: {
@@ -77,7 +82,12 @@ export default function RootLayout({
             maskImage: "radial-gradient(ellipse at center, black 40%, transparent 78%)",
           }}
         />
-        <div className="relative z-10">{children}</div>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <div id="main-content" tabIndex={-1} className="relative z-10">
+          {children}
+        </div>
         <Toaster />
         <ServiceWorkerRegistrar />
       </body>
