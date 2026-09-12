@@ -13,8 +13,6 @@ import { domainColor } from '../../lib/graphDomains'
 import {
   PIPELINE_STATES,
   conceptCount,
-  connectionCount,
-  domainCount,
   domainCounts,
   domainLabels,
   domainOrder,
@@ -207,13 +205,6 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         </a>
       </div>
 
-      <div style={{ ...statsRowStyle, marginBottom: '1.25rem' }} className="flex flex-wrap justify-center gap-x-2 gap-y-1 px-2 text-center">
-        <span>{conceptCount} topics</span>
-        <span style={{ color: 'var(--border-strong)' }}>·</span>
-        <span>{connectionCount} connections</span>
-        <span style={{ color: 'var(--border-strong)' }}>·</span>
-        <span>{domainCount} domains</span>
-      </div>
       <DomainLegend theme={theme} />
       <div
         className="sm:hidden"
