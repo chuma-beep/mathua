@@ -82,7 +82,7 @@
   body {
     background: var(--bg);
     color: var(--text-secondary);
-    font-family: var(--font-ibm-plex-serif), 'IBM Plex Serif', serif;
+    font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.75;
@@ -98,7 +98,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-ibm-plex-serif), 'IBM Plex Serif', serif;
+    font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
     font-weight: 400;
     color: var(--text-primary);
     letter-spacing: -0.01em;
@@ -115,7 +115,7 @@
 
 @layer components {
   .ascii-text {
-    font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+    font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
     color: var(--accent-blue);
     white-space: pre;
     overflow-x: auto;
@@ -124,7 +124,7 @@
   }
 
   .ascii-divider {
-    font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+    font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--text-muted);
     text-align: center;
@@ -168,7 +168,7 @@ footer .link-underline:hover {
 
 /* Landing: blueprint-sheet section labels */
 .section-label {
-  font-family: var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -241,7 +241,7 @@ footer .link-underline:hover {
 [data-sonner-toast] {
   border-radius: 0 !important;
   border-width: 0.5px !important;
-  font-family: var(--font-ibm-plex-mono) !important;
+  font-family: var(--font-jetbrains-mono) !important;
   font-size: 13px !important;
   color: var(--text-primary) !important;
   background: var(--surface) !important;
@@ -358,7 +358,7 @@ footer .link-underline:hover {
   background: var(--bg);
   color: var(--text-primary);
   border: 0.5px solid var(--border-strong);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: 12px;
   text-decoration: none;
 }
@@ -392,7 +392,7 @@ footer .link-underline:hover {
 }
 
 .graph-label--node {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.01em;
   color: var(--text-secondary);
@@ -405,7 +405,7 @@ footer .link-underline:hover {
 }
 
 .graph-label--domain {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;

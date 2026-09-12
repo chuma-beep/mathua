@@ -19,13 +19,13 @@ export default function Pipeline({ states, className = '' }: PipelineProps) {
       {states.map((state, i) => (
         <span key={state.status} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
           {i > 0 && (
-            <span style={{ color: 'var(--border-strong)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px' }}>
+            <span style={{ color: 'var(--border-strong)', fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px' }}>
               {' → '}
             </span>
           )}
           <span
             style={{
-              fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
+              fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
               fontSize: '13px',
               letterSpacing: '0.05em',
               color: 'var(--text-secondary)',

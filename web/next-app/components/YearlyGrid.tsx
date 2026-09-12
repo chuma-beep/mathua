@@ -123,7 +123,7 @@ export default function YearlyGrid({ data }: Props) {
         width={svgW}
         height={svgH}
         className="block shrink-0 font-mono"
-        style={{ fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", minWidth: svgW, margin: '0 auto' }}
+        style={{ fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", minWidth: svgW, margin: '0 auto' }}
       >
         {monthLabels.map((m) => (
           <text

@@ -14,16 +14,16 @@ const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
     <div style={{
       height: 400, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING WORKFLOW" />
     </div>
   ),
 })
 
-const headingFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
-const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
-const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+const headingFont = "var(--font-space-grotesk), 'Space Grotesk', serif"
+const bodyFont = "var(--font-space-grotesk), 'Space Grotesk', serif"
+const monoFont = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace"
 
 const h2Style: React.CSSProperties = {
   fontFamily: headingFont,
@@ -440,7 +440,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
 
         <h3 style={h3Style}>Design system</h3>
         {[
-          'Typeface: IBM Plex Mono for code/UI, IBM Plex Serif for body/headings. Loaded via next/font as CSS variables (--font-ibm-plex-mono, --font-ibm-plex-serif).',
+          'Typeface: JetBrains Mono for code/UI, Space Grotesk for body/headings. Loaded via next/font as CSS variables (--font-jetbrains-mono, --font-space-grotesk).',
           'Colors: oklch color space as CSS custom properties (--bg, --surface, --text-primary, --accent-blue, --border, etc). Supports light/dark via class="dark" on <html>.',
           'Borders: 0.5px solid. No rounded corners (rounded-none everywhere). Zero box-shadow on interactive elements.',
           'Spacing: 1rem/4px base grid. Sections use py-20 (5rem). Cards use gap-3 (0.75rem) or gap-4 (1rem).',
@@ -646,7 +646,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         <h3 style={h3Style}>Frontend</h3>
         {[
           'Colors only through CSS variables (var(--accent-blue), var(--border), etc). Never hardcode hex/rgb.',
-          'Typography: var(--font-ibm-plex-mono) for code, var(--font-ibm-plex-serif) for prose. Loaded via next/font CSS variables.',
+          'Typography: var(--font-jetbrains-mono) for code, var(--font-space-grotesk) for prose. Loaded via next/font CSS variables.',
           'Borders: border-[0.5px] with var(--border) / var(--border-strong). rounded-none on all interactive elements.',
           'No box-shadow on buttons or inputs. Use border changes or background transitions for hover states.',
           'Animations: use the @keyframes defined in tailwind.config.js (ascii-reveal, fadeIn, progress-fill). Keep transitions under 300ms.',

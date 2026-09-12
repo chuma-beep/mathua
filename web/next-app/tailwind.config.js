@@ -39,9 +39,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['var(--font-ibm-plex-serif)', 'IBM Plex Serif', 'serif'],
-        sans: ['var(--font-ibm-plex-serif)', 'IBM Plex Serif', 'serif'],
-        mono: ['var(--font-ibm-plex-mono)', 'IBM Plex Mono', 'monospace'],
+        serif: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+        sans: ['var(--font-space-grotesk)', 'Space Grotesk', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'JetBrains Mono', 'monospace'],
       },
       maxWidth: {
         container: '1100px',

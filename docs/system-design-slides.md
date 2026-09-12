@@ -238,7 +238,7 @@ Same schema, same interface. Transparent swap via `DATABASE_URL`.
 - **Static export** -- served by Go binary, no Node.js runtime
 - **CSS custom properties** for dark/light theme
 - **Warm palette**: `#0b0f1a` dark, `#fefcf4` light, `#c8a96e` gold accent
-- **IBM Plex Serif** for text, **IBM Plex Mono** for code/labels
+- **Space Grotesk** for text, **JetBrains Mono** for code/labels
 - **KaTeX** for math rendering
 - **No global state** -- each page manages its own hooks
 

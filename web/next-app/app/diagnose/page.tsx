@@ -15,7 +15,7 @@ const DiagnosticFlow = dynamic(() => import('../../components/DiagnosticFlow'), 
     <div style={{
       height: 420, border: '0.5px solid var(--border)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace", fontSize: '13px',
+      color: 'var(--text-muted)', fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px',
     }}>
       <Loading label="LOADING DIAGNOSTIC" />
     </div>

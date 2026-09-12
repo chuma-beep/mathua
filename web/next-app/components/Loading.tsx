@@ -29,7 +29,7 @@ export default function Loading({ label, full = false, size = 18, inline = false
         aria-hidden
         style={{
           display: 'inline-block',
-          fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
+          fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
           fontSize: size,
           lineHeight: 1,
           width: size,
@@ -60,7 +60,7 @@ export default function Loading({ label, full = false, size = 18, inline = false
       <span
         aria-hidden
         style={{
-          fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
+          fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
           fontSize: size,
           lineHeight: 1,
           color: 'var(--accent-blue)',
@@ -74,7 +74,7 @@ export default function Loading({ label, full = false, size = 18, inline = false
       {label && (
         <span
           style={{
-            fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
+            fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace",
             fontSize: 12,
             color: 'var(--text-muted)',
             letterSpacing: '0.04em',

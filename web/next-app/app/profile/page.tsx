@@ -133,7 +133,7 @@ export default function ProfilePage() {
     fetchData()
   }, [mounted])
 
-  const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+  const monoFont = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace"
 
   if (!mounted) {
     return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />

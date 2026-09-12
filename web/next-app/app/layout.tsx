@@ -1,29 +1,29 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { IBM_Plex_Mono, IBM_Plex_Serif } from 'next/font/google'
+import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
-const ibmPlexMono = IBM_Plex_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   style: ['normal', 'italic'],
   display: 'swap',
-  // Only the faces a page actually renders are fetched; preloading all eight
-  // (both families x 2 weights x 2 styles) cost ~105KB on the landing page.
+  // Only the faces a page actually renders are fetched; preloading the
+  // families costs ~105KB on the landing page.
   preload: false,
-  variable: '--font-ibm-plex-mono',
+  variable: '--font-jetbrains-mono',
 })
 
-const ibmPlexSerif = IBM_Plex_Serif({
+// Space Grotesk ships no italic face — only normal weights are requested.
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '700'],
   display: 'swap',
   preload: false,
-  variable: '--font-ibm-plex-serif',
+  variable: '--font-space-grotesk',
 })
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="dark light" />
       </head>
-      <body className={`${ibmPlexMono.variable} ${ibmPlexSerif.variable}`}>
+      <body className={`${jetbrainsMono.variable} ${spaceGrotesk.variable}`}>
         <Script
           src="/js/theme-init.js"
           strategy="beforeInteractive"
