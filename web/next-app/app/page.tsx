@@ -5,7 +5,6 @@ import { useTheme } from '../hooks/useTheme'
 import { ensureGuestId, ensureGuestToken } from '../lib/auth'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
 import Header from '../components/Header'
-import AsciiDivider from '../components/AsciiDivider'
 import Footer from '../components/Footer'
 import {
   ContributingSection,
@@ -40,17 +39,12 @@ export default function HomePage() {
       <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <HeroSection theme={theme} onGetStarted={handleGetStarted} />
-        <AsciiDivider pattern="wave" />
         <SocialProofSection />
         <FeaturesSection />
         <PipelineSection />
-        <AsciiDivider pattern="dash" />
         <CurriculumSection />
-        <AsciiDivider pattern="wave" />
         <ProgressionSection />
-        <AsciiDivider pattern="wave" />
         <FaqSection />
-        <AsciiDivider pattern="wave" />
         <ContributingSection />
         <Footer />
       </div>

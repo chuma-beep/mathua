@@ -187,8 +187,8 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
           lineHeight: 1.85,
         }}
       >
-        Mathua is an open-source adaptive math learning engine. It never lets you advance until
-        you have truly mastered the prerequisite, both speed and accuracy must be proven.
+        Mathua is an open-source adaptive math learning engine. You cannot advance until you
+        have truly mastered the prerequisite — both speed and accuracy must be proven.
       </p>
 
       <div className="flex gap-3 justify-center items-center mb-10 max-sm:mb-6 max-sm:flex-col max-sm:[&_a]:w-full max-sm:[&_a]:max-w-[280px] max-sm:px-2 min-w-0">
@@ -204,6 +204,17 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
           View on GitHub
         </a>
       </div>
+      <p
+        style={{
+          fontFamily: monoFont,
+          fontSize: '11px',
+          color: 'var(--text-muted)',
+          marginTop: '-1rem',
+          marginBottom: '1.25rem',
+        }}
+      >
+        No account needed to start.
+      </p>
 
       <DomainLegend theme={theme} />
       <div

@@ -214,6 +214,17 @@ function buildGraph(
   return { nodes, links, positionMap, nodeById, prereqsById, unlocksById, domainCentroids, byImportance }
 }
 
+// Landing default: an early, self-contained concept reads better than the
+// alphabetically-first advanced one (abstract.group.def). Prefer the known
+// arithmetic root, then the highest-unlock root, then anything.
+function pickDefaultId(graph: BuiltGraph): string {
+  if (graph.nodeById.has('arith.add.single')) return 'arith.add.single'
+  const roots = graph.nodes.filter(n => (graph.prereqsById.get(n.id) ?? []).length === 0)
+  const pool = roots.length > 0 ? roots : graph.nodes
+  const best = [...pool].sort((a, b) => b.importance - a.importance || a.id.localeCompare(b.id))[0]
+  return best?.id ?? ''
+}
+
 // ── Instanced nodes ─────────────────────────────────────
 
 function NodeInstances({
@@ -829,11 +840,13 @@ function InfoPanel({
   graph,
   theme,
   isMobile,
+  expanded,
 }: {
   activeId: string
   graph: BuiltGraph
   theme: 'dark' | 'light'
   isMobile: boolean
+  expanded: boolean
 }) {
   const concept = graph.nodeById.get(activeId)
   if (!concept) return null
@@ -870,11 +883,12 @@ function InfoPanel({
     </>
   )
 
-  // Mobile: collapsible via native <details> (key resets it open on each
-  // new selection). Desktop keeps the always-open panel.
+  // Mobile: collapsible via native <details>; collapsed until the user
+  // selects a node (key resets it per selection). Desktop keeps the
+  // always-open panel.
   if (isMobile) {
     return (
-      <details open key={activeId} style={shellStyle}>
+      <details open={expanded} key={activeId} style={shellStyle}>
         <summary style={{ cursor: 'pointer', listStyle: 'none' }}>
           {heading}
         </summary>
@@ -1017,11 +1031,14 @@ export default function MathConceptGraph3D({
 
   const [activeId, setActiveId] = useState('')
   const [focused, setFocused] = useState(false)
+  // Mobile panel stays collapsed until the user actually selects a node.
+  const [userSelected, setUserSelected] = useState(false)
 
   useEffect(() => {
     if (graph && graph.nodes.length > 0 && !graph.nodeById.has(activeId)) {
-      setActiveId(graph.nodes[0].id)
+      setActiveId(pickDefaultId(graph))
       setFocused(false)
+      setUserSelected(false)
     }
   }, [graph, activeId])
 
@@ -1033,6 +1050,7 @@ export default function MathConceptGraph3D({
   const handleSelect = useCallback((id: string) => {
     setActiveId(id)
     setFocused(true)
+    setUserSelected(true)
     onNodeSelectRef.current?.(id)
   }, [])
 
@@ -1044,6 +1062,7 @@ export default function MathConceptGraph3D({
     const start = pointerDown.current
     if (event && start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 6) return
     setFocused(false)
+    setUserSelected(false)
   }, [])
 
   const handleInteract = useCallback(() => {
@@ -1095,6 +1114,7 @@ export default function MathConceptGraph3D({
         next = orderedIds.length - 1
       } else if (e.key === 'Escape') {
         setFocused(false)
+        setUserSelected(false)
       } else if (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '_') {
         e.preventDefault()
         handleInteract()
@@ -1204,7 +1224,7 @@ export default function MathConceptGraph3D({
           </div>
         )}
       </div>
-      {graph && <InfoPanel activeId={activeId} graph={graph} theme={theme} isMobile={isMobile} />}
+      {graph && <InfoPanel activeId={activeId} graph={graph} theme={theme} isMobile={isMobile} expanded={userSelected} />}
     </div>
   )
 }
