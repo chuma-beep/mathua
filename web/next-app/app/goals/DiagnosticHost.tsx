@@ -237,7 +237,7 @@ export default function DiagnosticHost({
                   placeholder="Your answer..."
                   enterKeyHint="go"
                   disabled={loading}
-                  className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-24 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-40 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
                 />
                 <button
                   type="submit"
