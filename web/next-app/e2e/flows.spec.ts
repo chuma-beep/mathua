@@ -52,7 +52,7 @@ test('study → answer → XP persists (Study seam)', async ({ page }) => {
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await expect(input).toBeVisible({ timeout: 20_000 })
-  // Desktop stays a 48px control (h-12) while mobile is 160px (h-40).
+  // Answer input is the standard 48px control at all widths.
   const inputBox = await input.boundingBox()
   expect(inputBox?.height).toBe(48)
   await input.fill('4')

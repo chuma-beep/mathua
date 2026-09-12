@@ -158,7 +158,7 @@ export function DiagnosticStep({
               placeholder="Your answer..."
               enterKeyHint="go"
               disabled={loading || lastResult !== null}
-              className="h-40 sm:h-12 sm:flex-1"
+              className="sm:flex-1"
             />
             <button
               type="submit"
