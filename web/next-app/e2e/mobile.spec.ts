@@ -246,6 +246,10 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await expect(input).toBeVisible({ timeout: 20_000 })
+  // Regression guard: `flex-1` on the column form once made flex-basis:0% win
+  // over the height class, collapsing the box to ~22px on mobile.
+  const inputBox = await input.boundingBox()
+  expect(inputBox?.height ?? 0).toBeGreaterThanOrEqual(150)
   await input.fill('9')
   await page.getByRole('button', { name: /Submit|Check Answer/ }).first().dblclick()
   await page.waitForTimeout(500)

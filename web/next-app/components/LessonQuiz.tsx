@@ -256,7 +256,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           aria-label={`Your answer for question ${i + 1}`}
                           enterKeyHint="go"
                           disabled={result !== undefined || locked}
-                          className={`flex-1 h-40 sm:h-12 bg-mathua-bg ${
+                          className={`h-40 sm:h-12 sm:flex-1 bg-mathua-bg ${
                             result === 'correct'
                               ? 'border-green-500/60'
                               : result === 'incorrect'
