@@ -17,6 +17,7 @@ import {
   type DiagnosticProgress,
 } from '../../lib/api'
 import { GOALS_DIAG_KEY } from './constants'
+import { Input } from '@/components/ui/input'
 
 const EMPTY_PLAN: GoalPlanRes = {
   readiness: 1,
@@ -228,7 +229,7 @@ export default function DiagnosticHost({
                 className="flex flex-col sm:flex-row gap-3 min-w-0"
               >
                 <label htmlFor="goals-answer" className="sr-only">Your answer</label>
-                <input
+                <Input
                   ref={goalsInputRef}
                   id="goals-answer"
                   type="text"
@@ -237,7 +238,7 @@ export default function DiagnosticHost({
                   placeholder="Your answer..."
                   enterKeyHint="go"
                   disabled={loading}
-                  className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-40 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                  className="flex-1 h-40 sm:h-12"
                 />
                 <button
                   type="submit"

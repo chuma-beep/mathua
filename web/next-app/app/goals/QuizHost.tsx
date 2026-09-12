@@ -10,6 +10,7 @@ import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startQuizSession, submitQuizAnswer } from '../../lib/api'
 import { concepts as conceptsData } from '../../lib/conceptData'
+import { Input } from '@/components/ui/input'
 
 type Phase = 'loading' | 'quiz' | 'done'
 
@@ -200,7 +201,7 @@ export default function QuizHost() {
             <>
               <form onSubmit={e => { e.preventDefault(); submitQuizAnswerFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
-                <input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" disabled={loading} className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-40 sm:h-12 px-4 font-mono text-base text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue" />
+                <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" disabled={loading} className="flex-1 h-40 sm:h-12" />
                 <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50">Check Answer</button>
               </form>
               <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
