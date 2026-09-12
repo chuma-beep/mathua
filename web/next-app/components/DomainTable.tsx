@@ -10,7 +10,7 @@ interface DomainTableProps {
 }
 
 const thStyle: React.CSSProperties = {
-  fontFamily: "'IBM Plex Mono', monospace",
+  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
   fontWeight: 400,
   fontSize: '0.8rem',
   textTransform: 'uppercase',
@@ -58,7 +58,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
             <tr key={row.domain} style={{ borderBottom: '0.5px solid var(--border)', background: 'transparent' }}>
               <td
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
                   fontSize: '1rem',
                   color: 'var(--text-secondary)',
                   padding: '14px 20px 14px 0',
@@ -69,7 +69,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
                 {row.comingSoon && (
                   <span
                     style={{
-                      fontFamily: "'IBM Plex Mono', monospace",
+                      fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
                       fontStyle: 'italic',
                       fontSize: '0.9rem',
                       color: 'var(--text-muted)',
@@ -82,7 +82,7 @@ export default function DomainTable({ rows, className = '' }: DomainTableProps) 
               </td>
               <td
                 style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
+                  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
                   fontSize: '0.9rem',
                   color: 'var(--accent-blue)',
                   textAlign: 'right',

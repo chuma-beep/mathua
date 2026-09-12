@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'Why Mathua exists, from the person building it.',
 }
 
-const monoFont = "'IBM Plex Mono', monospace"
-const bodyFont = "'IBM Plex Serif', serif"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
+const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
 
 const textStyle: React.CSSProperties = {
   fontFamily: bodyFont,
@@ -43,7 +43,7 @@ export default function NotePage() {
           WHY MATHUA EXISTS
         </div>
         <h1 style={{
-          fontFamily: "'IBM Plex Serif', serif",
+          fontFamily: "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif",
           fontWeight: 400,
           fontSize: '1.9rem',
           color: 'var(--text-primary)',

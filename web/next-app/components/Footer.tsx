@@ -6,12 +6,12 @@ interface FooterProps {
 
 const linkStyle: React.CSSProperties = {
   textDecoration: 'none',
-  fontFamily: "'IBM Plex Mono', monospace",
+  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
   fontSize: '12px',
 }
 
 const linkContainerStyle: React.CSSProperties = {
-  fontFamily: "'IBM Plex Mono', monospace",
+  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
   fontSize: '12px',
   color: 'var(--text-muted)',
   marginBottom: '1rem',
@@ -22,7 +22,7 @@ const linkContainerStyle: React.CSSProperties = {
 }
 
 const licenseStyle: React.CSSProperties = {
-  fontFamily: "'IBM Plex Mono', monospace",
+  fontFamily: "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace",
   fontStyle: 'italic',
   fontSize: '0.9rem',
   color: 'var(--text-muted)',

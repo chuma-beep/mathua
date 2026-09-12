@@ -15,7 +15,7 @@ import '@xyflow/react/dist/base.css'
 import dagre from 'dagre'
 import { useTheme } from '../hooks/useTheme'
 
-const monoFont = "'IBM Plex Mono', monospace"
+const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
 
 export const themeColors = {
   light: {

@@ -11,6 +11,9 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ['400', '500'],
   style: ['normal', 'italic'],
   display: 'swap',
+  // Only the faces a page actually renders are fetched; preloading all eight
+  // (both families x 2 weights x 2 styles) cost ~105KB on the landing page.
+  preload: false,
   variable: '--font-ibm-plex-mono',
 })
 
@@ -19,6 +22,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
   weight: ['400', '500'],
   style: ['normal', 'italic'],
   display: 'swap',
+  preload: false,
   variable: '--font-ibm-plex-serif',
 })
 

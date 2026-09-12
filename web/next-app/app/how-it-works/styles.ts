@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'react'
 
-export const headingFont = "'IBM Plex Serif', serif"
-export const bodyFont = "'IBM Plex Serif', serif"
-export const monoFont = "'IBM Plex Mono', monospace"
+export const headingFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+export const bodyFont = "var(--font-ibm-plex-serif), 'IBM Plex Serif', serif"
+export const monoFont = "var(--font-ibm-plex-mono), 'IBM Plex Mono', monospace"
 
 export const sections = [
   { id: 'concept-graph', label: 'Concept graph' },
