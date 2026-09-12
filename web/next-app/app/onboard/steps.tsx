@@ -163,7 +163,7 @@ export function DiagnosticStep({
             <button
               type="submit"
               disabled={!answerInput.trim() || loading || lastResult !== null}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-8 font-medium text-sm disabled:opacity-50 shrink-0 w-full sm:w-auto"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
             >
               Check Answer
             </button>

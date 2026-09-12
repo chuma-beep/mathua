@@ -243,7 +243,7 @@ export default function DiagnosticHost({
                 <button
                   type="submit"
                   disabled={!answerInput.trim() || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50 shrink-0"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
                 >
                   Check Answer
                 </button>

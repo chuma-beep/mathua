@@ -250,8 +250,13 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   // over the height class, collapsing the box to ~22px on mobile.
   const inputBox = await input.boundingBox()
   expect(inputBox?.height).toBe(48)
+  // Submit hugs its label instead of stretching to the column width.
+  const submit = page.getByRole('button', { name: /Submit|Check Answer/ }).first()
+  const submitBox = await submit.boundingBox()
+  expect(submitBox?.height).toBe(48)
+  expect(submitBox?.width ?? 0).toBeLessThan(inputBox?.width ?? 0)
   await input.fill('9')
-  await page.getByRole('button', { name: /Submit|Check Answer/ }).first().dblclick()
+  await submit.dblclick()
   await page.waitForTimeout(500)
 
   expect(answerPosts).toBe(1)
