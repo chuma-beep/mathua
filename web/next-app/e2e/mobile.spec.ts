@@ -39,6 +39,28 @@ for (const route of ROUTES) {
   })
 }
 
+test('landing FAQ and extension columns stay inside the viewport', async ({ page }) => {
+  await page.goto('/')
+  const section = page.locator('section', { hasText: 'Questions, answered' })
+  await section.scrollIntoViewIfNeeded()
+  const vw = page.viewportSize()!.width
+
+  // Regression: the JSON pre's min-content used to widen the grid track past
+  // the container, so main's overflow-x-clip cut off the FAQ text and code.
+  for (const child of await section.locator('> div').all()) {
+    const box = await child.boundingBox()
+    expect(box).toBeTruthy()
+    expect(box!.x).toBeGreaterThanOrEqual(0)
+    expect(box!.x + box!.width).toBeLessThanOrEqual(vw + 1)
+  }
+
+  const pre = section.locator('pre')
+  const box = await pre.boundingBox()
+  expect(box).toBeTruthy()
+  expect(box!.x).toBeGreaterThanOrEqual(0)
+  expect(box!.x + box!.width).toBeLessThanOrEqual(vw + 1)
+})
+
 test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
   await page.goto('/how-it-works')
   const tabs = page.locator('nav.lg\\:hidden')
