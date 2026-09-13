@@ -415,7 +415,7 @@ const FAQS = [
 export function FaqSection() {
   return (
     <section data-reveal className="grid gap-10 py-16 md:grid-cols-2">
-      <div>
+      <div className="min-w-0">
         <div className="section-label">( 07 · Questions, answered. )</div>
         <div className="mt-5 divide-y divide-mathua-division border-y border-mathua-division">
           {FAQS.map(f => (
@@ -429,14 +429,14 @@ export function FaqSection() {
           ))}
         </div>
       </div>
-      <div>
+      <div className="min-w-0">
         <div className="section-label">( 08 · How it is extended. )</div>
         <p className="mt-4 text-[13px] leading-relaxed text-mathua-secondary">
           Every concept is a JSON node. Every problem is a Go generator function. Every
           contribution goes through a graph validator that rejects cycles and orphaned nodes
           automatically.
         </p>
-        <pre className="mt-4 overflow-x-auto whitespace-pre border border-mathua-border bg-mathua-primary p-5 font-mono text-[11px] leading-relaxed text-mathua-bg dark:bg-mathua-code dark:text-mathua-primary">
+        <pre className="mt-4 overflow-x-auto overscroll-x-contain whitespace-pre border border-mathua-border bg-mathua-primary p-4 font-mono text-[11px] leading-relaxed text-mathua-bg sm:p-5 dark:bg-mathua-code dark:text-mathua-primary">
 {`{
   "id":                "arith.add.multi",
   "label":             "Multi-digit addition",
