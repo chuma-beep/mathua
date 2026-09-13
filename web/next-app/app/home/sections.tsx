@@ -414,7 +414,7 @@ const FAQS = [
 
 export function FaqSection() {
   return (
-    <section data-reveal className="grid gap-10 border-b border-mathua-division py-16 md:grid-cols-2">
+    <section data-reveal className="grid gap-10 py-16 md:grid-cols-2">
       <div>
         <div className="section-label">( 07 · Questions, answered. )</div>
         <div className="mt-5 divide-y divide-mathua-division border-y border-mathua-division">
