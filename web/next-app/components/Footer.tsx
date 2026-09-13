@@ -23,17 +23,17 @@ export default function Footer({ className = '' }: FooterProps) {
       <div className="w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
-            <div className="flex items-center gap-3 md:block">
+            <div>
               <div className="font-sans text-lg">λ Mathua</div>
-              <div className="flex gap-2 md:mt-3">
+              <div className="mt-2 flex gap-2 md:mt-3">
                 {FOOTER_SHAPES.map(seed => (
                   <img
                     key={seed}
                     src={shapeUrl(seed)}
                     alt=""
-                    width={32}
-                    height={32}
-                    className="size-8 ring-1 ring-white/10"
+                    width={24}
+                    height={24}
+                    className="size-6 ring-1 ring-white/10 md:size-8"
                     loading="lazy"
                     referrerPolicy="no-referrer"
                   />
