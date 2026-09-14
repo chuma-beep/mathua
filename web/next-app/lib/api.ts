@@ -632,11 +632,12 @@ export async function submitGoalAnswer(
 	conceptId: string,
 	answer: string,
 	elapsed: number,
+	dontKnow?: boolean,
 ): Promise<GoalDiagAnswerRes> {
 	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/answer`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
-		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
+		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed, dont_know: dontKnow ?? false }),
 	})
 	if (!res.ok) await throwWithResponse(res, `Goal answer failed: ${res.status}`)
 	return res.json()
@@ -1120,10 +1121,10 @@ interface QuizAnswerBody {
 	student_id?: string
 }
 
-export async function submitQuizAnswer(sessionId: string, conceptId: string, answer: string, elapsed: number): Promise<QuizAnswerRes> {
+export async function submitQuizAnswer(sessionId: string, conceptId: string, answer: string, elapsed: number, dontKnow?: boolean): Promise<QuizAnswerRes> {
 	const { getGuestId } = await import('./auth')
 	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
-	const body: QuizAnswerBody = { session_id: sessionId, concept_id: conceptId, answer, elapsed }
+	const body: QuizAnswerBody & { dont_know: boolean } = { session_id: sessionId, concept_id: conceptId, answer, elapsed, dont_know: dontKnow ?? false }
 	const guestId = getGuestId()
 	if (guestId && !('Authorization' in headers)) body.student_id = guestId
 	const res = await authedFetch(`${API_BASE}/api/quiz/answer`, {

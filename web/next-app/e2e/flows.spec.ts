@@ -94,9 +94,11 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   await page.route('**/api/quiz/session', route =>
     route.fulfill({ json: { session_id: 'q1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '5 + 3 = ?', grading_type: 'numeric', done: false } }),
   )
-  await page.route('**/api/quiz/answer', route =>
-    route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 20, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?', grading_type: 'numeric' } }),
-  )
+  let sawDontKnow = false
+  await page.route('**/api/quiz/answer', route => {
+    if (route.request().postDataJSON()?.dont_know === true) sawDontKnow = true
+    return route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 20, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?', grading_type: 'numeric' } })
+  })
 
   await page.goto('/goals?quiz=1')
   await expect(page.getByText('Before you start').first()).toBeVisible({ timeout: 30_000 })
@@ -113,6 +115,10 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   // Manual advance: feedback holds until Next reveals the staged question.
   await page.getByRole('button', { name: 'Next →' }).click()
   await expect(page.getByText('8 - 3 = ?').first()).toBeVisible({ timeout: 20_000 })
+  // I don't know: empty input still submits, flagged for the engine.
+  await page.getByRole('button', { name: "I don't know" }).click()
+  await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 20_000 })
+  await expect.poll(async () => sawDontKnow, { timeout: 20_000 }).toBe(true)
 })
 
 test('share link: settings enable → copyable URL → public share page', async ({ page }) => {

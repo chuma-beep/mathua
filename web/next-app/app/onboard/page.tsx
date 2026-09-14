@@ -192,14 +192,14 @@ export default function OnboardPage() {
     }
   }
 
-  async function submitAnswer() {
-    if (!answerInput.trim()) return
+  async function submitAnswer(dontKnow = false) {
+    if (!dontKnow && !answerInput.trim()) return
     setLoading(true)
     setSubmitError(null)
     try {
-      const answer = answerInput.trim()
+      const answer = dontKnow ? '' : answerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
-      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed)
+      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
@@ -353,7 +353,8 @@ export default function OnboardPage() {
               conceptId={conceptId.current}
               sessionId={sessionId.current}
               onInputChange={setAnswerInput}
-              onSubmit={submitAnswer}
+              onSubmit={() => { void submitAnswer(false) }}
+              onDontKnow={() => { void submitAnswer(true) }}
               onNext={goNext}
               done={finished}
               answerFormat={answerFormat}

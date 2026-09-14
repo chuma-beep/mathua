@@ -77,6 +77,9 @@ type Attempt struct {
 	Fast           bool
 	ElapsedSeconds float64
 	Timestamp      time.Time
+	// DontKnow marks an admitted unknown ("I don't know" button): clean
+	// negative evidence, as opposed to a failed attempt which may be a slip.
+	DontKnow bool
 }
 
 // Progress is the backend truth for the progress bar (MA parity: no exact
@@ -295,6 +298,18 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 // unaffected by timing. elapsed < 0 preserves legacy fast/not-fast-only
 // behavior (tests, /api/diagnostic/answer).
 func (e *Engine) RecordAnswerTimed(s *Session, conceptID string, correct bool, elapsed, timeThresh float64) {
+	e.recordTimed(s, conceptID, correct, elapsed, timeThresh, false)
+}
+
+// RecordDontKnow records an admitted unknown as negative evidence through
+// the standard incorrect path (belief drop, negative propagation, normal
+// 2-probe settle). An admit is never "fast": speed bonuses apply to correct
+// answers only. Like skip, it carries no XP; unlike skip, it counts.
+func (e *Engine) RecordDontKnow(s *Session, conceptID string, elapsed, timeThresh float64) {
+	e.recordTimed(s, conceptID, false, elapsed, timeThresh, true)
+}
+
+func (e *Engine) recordTimed(s *Session, conceptID string, correct bool, elapsed, timeThresh float64, dontKnow bool) {
 	s.Lock()
 	defer s.Unlock()
 	fast := false
@@ -307,12 +322,16 @@ func (e *Engine) RecordAnswerTimed(s *Session, conceptID string, correct bool, e
 		}
 		fast = elapsed < thresh
 	}
+	if dontKnow {
+		fast = false
+	}
 	s.Attempts = append(s.Attempts, Attempt{
 		ConceptID:      conceptID,
 		Correct:        correct,
 		Fast:           fast,
 		ElapsedSeconds: elapsed,
 		Timestamp:      time.Now().UTC(),
+		DontKnow:       dontKnow,
 	})
 	s.totalCount[conceptID]++
 	s.totalAsked++

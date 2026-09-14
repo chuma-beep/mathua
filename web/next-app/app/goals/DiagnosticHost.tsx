@@ -173,14 +173,14 @@ export default function DiagnosticHost({
     if (!lastResult && question) goalsInputRef.current?.focus()
   }, [lastResult, question])
 
-  async function submitAnswer() {
-    if (!answerInput.trim()) return
+  async function submitAnswer(dontKnow = false) {
+    if (!dontKnow && !answerInput.trim()) return
     setLoading(true)
     setSubmitError(null)
     try {
-      const answer = answerInput.trim()
+      const answer = dontKnow ? '' : answerInput.trim()
       const elapsed = 5.0
-      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed)
+      const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({
@@ -318,7 +318,7 @@ export default function DiagnosticHost({
           {!lastResult ? (
             <>
               <form
-                onSubmit={e => { e.preventDefault(); submitAnswer() }}
+                onSubmit={e => { e.preventDefault(); void submitAnswer(false) }}
                 className="flex flex-col sm:flex-row gap-3 min-w-0"
               >
                 <label htmlFor="goals-answer" className="sr-only">Your answer</label>
@@ -342,7 +342,17 @@ export default function DiagnosticHost({
                   Check Answer
                 </button>
               </form>
-              <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+                <button
+                  type="button"
+                  onClick={() => { void submitAnswer(true) }}
+                  disabled={loading}
+                  className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary underline underline-offset-2 disabled:opacity-50"
+                >
+                  I don&apos;t know
+                </button>
+              </div>
               <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
@@ -369,7 +379,7 @@ export default function DiagnosticHost({
           <div className="mb-6">
             <SubmitErrorBlock
               error={submitError}
-              onRetry={submitAnswer}
+              onRetry={() => { void submitAnswer(false) }}
               onSkip={skipAnswer}
               skipsLeft={MAX_SKIPS - skipCount}
               onRestart={restartDiagnostic}

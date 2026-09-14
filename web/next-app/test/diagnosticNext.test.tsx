@@ -114,6 +114,7 @@ const stepProps = {
   sessionId: 's1',
   onInputChange: () => {},
   onSubmit: () => {},
+  onDontKnow: () => {},
   onNext: () => {},
   done: false,
   answerFormat: formatForGradingType('numeric'),
@@ -234,6 +235,26 @@ describe('DiagnosticStep Next button', () => {  it('shows no Next button before 
     expect(screen.queryByRole('button', { name: 'Skip →' })).toBeNull()
     expect(screen.getByRole('button', { name: 'Restart diagnostic' })).toBeInTheDocument()
   })
+
+  it("shows I don't know before answering, hides it after, and sends the flag", () => {
+    const onDontKnow = vi.fn()
+    const { rerender } = render(
+      <DiagnosticStep {...stepProps} lastResult={null} onDontKnow={onDontKnow} />,
+    )
+    const btn = screen.getByRole('button', { name: "I don't know" })
+    expect(btn).toBeInTheDocument()
+    fireEvent.click(btn)
+    expect(onDontKnow).toHaveBeenCalledTimes(1)
+
+    rerender(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={{ correct: false, feedback: 'Nope' }}
+        onDontKnow={onDontKnow}
+      />,
+    )
+    expect(screen.queryByRole('button', { name: "I don't know" })).toBeNull()
+  })
 })
 
 describe('DiagnosticHost manual advance', () => {
@@ -306,8 +327,7 @@ describe('DiagnosticHost manual advance', () => {
     await screen.findByText('Q2 text')
   })
 
-  it('shows only Restart on an expired session', async () => {
-    vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
+    it('shows only Restart on an expired session', async () => {    vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
       Object.assign(new Error('Goal answer failed: 404'), {
         status: 404,
         serverMessage: 'diagnostic session not found',
@@ -361,6 +381,31 @@ describe('DiagnosticHost manual advance', () => {
     expect(screen.queryByRole('alert')).toBeNull()
     expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
   })
+
+  it("I don't know submits empty with the flag and lands on feedback", async () => {
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+
+    // Empty input: Check Answer stays disabled, I don't know works.
+    expect(screen.getByRole('button', { name: 'Check Answer' })).toBeDisabled()
+    fireEvent.click(screen.getByRole('button', { name: "I don't know" }))
+
+    await screen.findByText('Nice!')
+    expect(vi.mocked(submitGoalAnswer)).toHaveBeenCalledWith(
+      's1',
+      'c1',
+      '',
+      expect.any(Number),
+      true,
+    )
+  })
 })
 
 describe('QuizHost manual advance', () => {
@@ -405,5 +450,23 @@ describe('QuizHost manual advance', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Skip →' }))
     await screen.findByText('Quiz Q3 text')
     expect(vi.mocked(skipQuizQuestion)).toHaveBeenCalledTimes(1)
+  })
+
+  it("QuizHost I don't know submits empty with the flag", async () => {
+    render(<QuizHost />)
+    fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
+    await screen.findByText('Quiz Q1 text')
+
+    expect(screen.getByRole('button', { name: 'Check Answer' })).toBeDisabled()
+    fireEvent.click(screen.getByRole('button', { name: "I don't know" }))
+
+    await screen.findByText('Good!')
+    expect(vi.mocked(submitQuizAnswer)).toHaveBeenCalledWith(
+      'q1',
+      'c1',
+      '',
+      expect.any(Number),
+      true,
+    )
   })
 })

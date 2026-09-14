@@ -267,3 +267,88 @@ func TestQuizSkip(t *testing.T) {
 		t.Errorf("expected 404 for unknown session, got %d", code)
 	}
 }
+
+// Admitted unknowns record clean negative evidence: incorrect, flagged,
+// progressed — and exempt from the too-quick floor (an instant admit is
+// honesty, not spam).
+func TestGoalDiagnosticDontKnow(t *testing.T) {
+	s, mux := twoConceptServer(t)
+
+	code, start := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start: %d %v", code, start)
+	}
+	sid, _ := start["session_id"].(string)
+	first, _ := start["concept_id"].(string)
+
+	code, res := postJSON(t, mux, "/api/goal/diagnostic/answer",
+		`{"session_id":"`+sid+`","concept_id":"`+first+`","answer":"","elapsed":0.1,"dont_know":true}`)
+	if code != 200 {
+		t.Fatalf("dont_know: %d %v", code, res)
+	}
+	if res["correct"] == true {
+		t.Errorf("dont_know must grade incorrect, got %v", res)
+	}
+	if res["done"] == true {
+		t.Fatalf("expected another question after dont_know, got %v", res)
+	}
+	if nextCID, _ := res["concept_id"].(string); nextCID == "" || nextCID == first {
+		t.Errorf("expected advance past %q, got %q", first, nextCID)
+	}
+
+	s.mu.Lock()
+	sess := s.diagSessions[sid]
+	s.mu.Unlock()
+	if sess == nil {
+		t.Fatal("expected session to survive dont_know")
+	}
+	sess.Lock()
+	defer sess.Unlock()
+	if len(sess.Attempts) != 1 {
+		t.Fatalf("expected 1 recorded attempt, got %d", len(sess.Attempts))
+	}
+	att := sess.Attempts[0]
+	if att.Correct || !att.DontKnow {
+		t.Errorf("expected flagged incorrect attempt, got %+v", att)
+	}
+}
+
+// Quiz admits: miss recorded, no XP, progression intact.
+func TestQuizDontKnow(t *testing.T) {
+	s, mux := twoConceptServer(t)
+
+	code, sess := postJSON(t, mux, "/api/quiz/session", `{}`)
+	if code != 200 {
+		t.Fatalf("session: %d %v", code, sess)
+	}
+	sid, _ := sess["session_id"].(string)
+	first, _ := sess["concept_id"].(string)
+
+	code, res := postJSON(t, mux, "/api/quiz/answer",
+		`{"session_id":"`+sid+`","concept_id":"`+first+`","answer":"","elapsed":0.1,"dont_know":true}`)
+	if code != 200 {
+		t.Fatalf("dont_know: %d %v", code, res)
+	}
+	if res["correct"] == true {
+		t.Errorf("dont_know must grade incorrect, got %v", res)
+	}
+	if xp, _ := res["xp"].(float64); xp != 0 {
+		t.Errorf("dont_know must award no XP, got %v", res)
+	}
+	if res["done"] == true {
+		t.Fatalf("expected another question after dont_know, got %v", res)
+	}
+
+	s.mu.Lock()
+	qsess := s.quizSessions[sid]
+	s.mu.Unlock()
+	if qsess == nil {
+		t.Fatal("expected quiz session to survive dont_know")
+	}
+	qsess.Lock()
+	defer qsess.Unlock()
+	if len(qsess.Attempts) != 1 || qsess.Attempts[0].Correct {
+		t.Errorf("expected 1 recorded miss, got %+v", qsess.Attempts)
+	}
+}
