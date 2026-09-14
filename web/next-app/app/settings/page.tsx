@@ -698,9 +698,9 @@ export default function SettingsPage() {
             )}
           </div>
         </section>
-
-        <Footer />
       </div>
+
+      <Footer />
       <BottomTabs />
     </>
   )
