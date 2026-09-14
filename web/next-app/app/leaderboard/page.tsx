@@ -12,7 +12,7 @@ import ProgressionLevels from '../../components/ProgressionLevels'
 import { getLeaderboard, getLeagues, API_BASE, type LeaderboardEntry, type LeagueBoard } from '../../lib/api'
 import { resolveAvatar } from '../../lib/dicebear'
 import Avatar from '../../components/Avatar'
-import Loading from '../../components/Loading'
+import { LeaderboardTableSkeleton, LeaguesSkeleton } from '../../components/skeletons/LeaderboardSkeleton'
 
 // Display chain: registered name → random/claimed username → Anonymous.
 // Enforcement (required + trimmed at signup, service-level cap) should make
@@ -138,6 +138,11 @@ export default function LeaderboardPage() {
       </section>
 
       <div className="mb-12 w-full max-w-full min-w-0 overflow-hidden">
+        {loading && (
+          <span role="status" aria-live="polite" aria-label="Loading leaderboard" className="sr-only">
+            Loading leaderboard
+          </span>
+        )}
         <div className="w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 overflow-x-auto overscroll-x-contain">
           <table className="w-full min-w-[320px] border-collapse bg-mathua-surface rounded-none overflow-hidden border border-mathua-border">
             <thead>
@@ -150,13 +155,7 @@ export default function LeaderboardPage() {
               </tr>
             </thead>
             <tbody>
-              {loading && (
-                <tr>
-                  <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
-                    <Loading label="LOADING LEADERBOARD" />
-                  </td>
-                </tr>
-              )}
+              {loading && <LeaderboardTableSkeleton rows={8} />}
               {!loading && loadError && (
                 <tr>
                   <td colSpan={5} className="p-8 text-center text-mathua-muted text-sm">
@@ -213,9 +212,7 @@ export default function LeaderboardPage() {
           Top 2 in each league promote each Monday; the bottom 2 demote.
         </p>
         {!leagues && !leaguesFailed ? (
-          <div className="text-center py-8">
-            <Loading label="LOADING LEAGUES" />
-          </div>
+          <LeaguesSkeleton />
         ) : leaguesFailed ? (
           <p className="text-center text-mathua-muted text-sm">Couldn&apos;t load leagues. <button type="button" onClick={() => window.location.reload()} className="text-mathua-blue hover:underline">Retry</button></p>
         ) : leagues!.leagues.length === 0 ? (

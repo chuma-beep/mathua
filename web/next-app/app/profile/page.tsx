@@ -11,7 +11,7 @@ import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
-import Loading from '../../components/Loading'
+import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpCard from '../../components/NextUpCard'
@@ -141,18 +141,15 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
-        <div
-          style={{
-            fontFamily: monoFont,
-            fontSize: 13,
-            color: 'var(--text-muted)',
-            textAlign: 'center',
-          }}
-        >
-          <Loading label="LOADING PROFILE" />
-        </div>
-      </div>
+      <SidebarProvider>
+        <AppSidebar name="…" studentId="…" />
+        <SidebarInset>
+          <div className="mb-2 flex justify-start md:hidden px-4 sm:px-6 pt-8">
+            <SidebarTrigger variant="ghost" />
+          </div>
+          <ProfileSkeleton />
+        </SidebarInset>
+      </SidebarProvider>
     )
   }
 

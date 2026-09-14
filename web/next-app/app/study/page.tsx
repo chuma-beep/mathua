@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
-import Loading from '../../components/Loading'
+import StudySkeleton from '../../components/skeletons/StudySkeleton'
 import { getLessons, getLessonBody, getScores, type LessonInfo, type LessonsRes, type Scores } from '../../lib/api'
 import { getUserInfo, getGuestId } from '../../lib/auth'
 import { conceptLabels, domainOrder, lessonProgress } from './domains'
@@ -165,8 +165,8 @@ function StudyContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
-          <Loading label="LOADING LESSONS" />
+        <div className="pt-20 lg:pt-0">
+          <StudySkeleton />
         </div>
         <BottomTabs />
         <Footer />
@@ -296,7 +296,7 @@ function StudyContent() {
 export default function StudyPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING LESSONS" /></div><Footer /></>
+      <><Header /><div className="pt-20 lg:pt-0"><StudySkeleton /></div><Footer /></>
     }>
       <StudyContent />
     </Suspense>
