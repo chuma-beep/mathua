@@ -15,6 +15,7 @@ import { isLoggedIn, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import QuizHost from './QuizHost'
 import DiagnosticHost from './DiagnosticHost'
+import BriefingCard, { DIAGNOSTIC_BRIEFING } from '../../components/BriefingCard'
 import { GOALS_DIAG_KEY } from './constants'
 
 type Step = 'select' | 'diagnostic' | 'results' | 'quiz'
@@ -45,6 +46,52 @@ const domainLabels = {
   topology: 'Topology',
 } satisfies Record<string, string>
 
+function GoalConfirmReview({
+  domains,
+  selectedCount,
+  onBegin,
+  onCancel,
+}: {
+  domains: DomainInfo[]
+  selectedCount: number
+  onBegin: () => void
+  onCancel: () => void
+}) {
+  const selected = domains.filter(d => d.selected)
+  const shown = selected.slice(0, 3).map(d => domainLabels[d.name] || d.name)
+  const extra = selected.length > 3 ? ` +${selected.length - 3} more` : ''
+  return (
+    <div className="max-w-2xl mx-auto px-2">
+      <div className="text-center mb-4 mt-6 sm:mt-8 min-w-0">
+        <div className="font-mono text-[11px] uppercase text-mathua-muted mb-3">One quick check</div>
+        <h1 className="font-serif text-2xl sm:text-3xl font-medium text-mathua-primary px-2">
+          Before you begin
+        </h1>
+        <p className="text-mathua-secondary text-sm mt-3 px-2">
+          Starting test on: {shown.join(', ')}{extra} · {selectedCount} concepts
+        </p>
+      </div>
+      <BriefingCard eyebrow="What to expect" items={DIAGNOSTIC_BRIEFING} />
+      <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-2">
+        <button
+          type="button"
+          onClick={onBegin}
+          className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm max-w-full"
+        >
+          Begin diagnostic →
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="font-mono text-xs text-mathua-muted hover:text-mathua-primary min-h-[44px] px-4"
+        >
+          ← Back
+        </button>
+      </div>
+    </div>
+  )
+}
+
 function GoalsContent() {
   const { mounted } = useTheme()
   const { push } = useRouter()
@@ -59,6 +106,7 @@ function GoalsContent() {
   const [domains, setDomains] = useState<DomainInfo[]>([])
   const [customConcepts] = useState<string[]>([])
   const [hasPaused, setHasPaused] = useState(false)
+  const [confirming, setConfirming] = useState(false)
 
   // Diagnostic handoff (the host owns the session once started)
   const [diagStart, setDiagStart] = useState<string[] | null>(null)
@@ -130,6 +178,7 @@ function GoalsContent() {
   function startDiagnostic() {
     const ids = selectedConceptIds()
     if (ids.length === 0) return
+    setConfirming(false)
     setDiagStart(ids)
     setDiagResume(null)
     setStep('diagnostic')
@@ -164,7 +213,7 @@ function GoalsContent() {
           </span>
 
           {/* === STEP 1: Goal Selection === */}
-          {step === 'select' && (
+          {step === 'select' && !confirming && (
             <>
               {scores && <div className="min-w-0 overflow-hidden"><ProgressSummary scores={scores} weakByDomain={weakByDomain || undefined} /></div>}
               <SectionHeader label="Step 1" title="What do you want to learn?" />
@@ -207,7 +256,7 @@ function GoalsContent() {
                 )}
                 <button
                   type="button"
-                  onClick={startDiagnostic}
+                  onClick={() => setConfirming(true)}
                   disabled={selectedConceptIds().length === 0}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
@@ -215,6 +264,16 @@ function GoalsContent() {
                 </button>
               </div>
             </>
+          )}
+
+          {/* === STEP 1b: Review before you begin === */}
+          {step === 'select' && confirming && (
+            <GoalConfirmReview
+              domains={domains}
+              selectedCount={selectedConceptIds().length}
+              onBegin={startDiagnostic}
+              onCancel={() => setConfirming(false)}
+            />
           )}
 
           {/* === STEP 2: Diagnostic === */}

@@ -48,7 +48,7 @@ export function ConceptGraphSection() {
       </p>
       <p style={bodyStyle}>
         The graph currently contains 630 concepts spanning 17 domains: from early Counting
-        through Calculus, Linear Algebra, and Topology.
+        through Calculus, Linear Algebra and Topology.
       </p>
       <pre style={codeBlockStyle}>
 {`{
@@ -171,7 +171,7 @@ export function DiagnosticSection() {
     'The concept graph is sorted topologically. The diagnostic starts at the concept at the midpoint of the sorted order.',
     'If the student answers correctly within the time limit, the algorithm moves forward: it next tests a concept further along the prerequisite chain.',
     'If the student answers incorrectly or exceeds twice the expected time, the algorithm moves backward: it tests a concept earlier in the chain.',
-    'This binary search continues with multiple probes per concept until the student\'s knowledge frontier is clearly established.',
+    'This binary search continues with multiple probes per concept until the student\'s starting point is clearly established.',
     'The diagnostic records a starting mastery estimate for every concept the student passed through. Concepts answered correctly count as LEARNING. Concepts answered quickly and accurately count as conditionally MASTERED and are skipped in early sessions.',
   ]
   return (
@@ -179,7 +179,7 @@ export function DiagnosticSection() {
       <h2 style={h2Style}>The Diagnostic Algorithm</h2>
       <p style={bodyStyle}>
         When a student first opens Mathua, they enter a Computerised Adaptive Testing (CAT)
-        session. The goal is to locate the student&apos;s knowledge frontier using as few questions
+        session. The goal is to find the student&apos;s starting point using as few questions
         as possible.
       </p>
       <ol className="list-none my-4">
@@ -325,7 +325,7 @@ export function SymbolicGradingSection() {
         <code style={mutedCodeStyle}>2x&#178; + 3x - 5</code>{' '}
         where numeric comparison is no longer sufficient. Mathua uses a mixed Go/Python
         grading system: a Go router dispatches to six grader types, and mathematical
-        equivalence for algebra, calculus, differential equations, and trigonometry is
+        equivalence for algebra, calculus, differential equations and trigonometry is
         handled by a Python subprocess running{' '}
         <code style={inlineCodeStyle}>sympy</code>.
       </p>

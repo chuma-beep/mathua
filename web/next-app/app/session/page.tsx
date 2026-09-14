@@ -56,7 +56,7 @@ function SessionContent() {
                 Take a diagnostic test
               </h3>
               <p className="font-mono text-xs text-mathua-secondary group-hover:text-white/80 mt-2 leading-relaxed">
-                A diagnostic test to find your knowledge frontier and get a personalized starting recommendation.
+                A diagnostic test to find your starting point and get a personalized recommendation.
               </p>
               <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue group-hover:text-white">
                 Start diagnostic test →

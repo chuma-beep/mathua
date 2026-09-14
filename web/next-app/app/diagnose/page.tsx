@@ -38,7 +38,7 @@ export default function DiagnosePage() {
           </Link>
         </span>
 
-        <SectionHeader label="Diagnostic Test" title="Find your knowledge frontier" />
+        <SectionHeader label="Diagnostic Test" title="Find your starting point" />
 
         <p className="text-mathua-secondary text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-4">
           A diagnostic test that locates your position in the concept graph

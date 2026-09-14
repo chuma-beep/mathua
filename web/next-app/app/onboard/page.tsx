@@ -40,6 +40,7 @@ export default function OnboardPage() {
 
   const [step, setStep] = useState<Step>('welcome')
   const [loading, setLoading] = useState(false)
+  const [confirming, setConfirming] = useState(false)
 
   const [domains, setDomains] = useState<DomainInfo[]>([])
 
@@ -328,10 +329,13 @@ export default function OnboardPage() {
               loading={loading}
               hasPaused={hasPaused}
               selectedCount={selectedConceptIds().length}
+              confirming={confirming}
               onToggle={toggleDomain}
               onSelectAll={selectAll}
-              onStart={startDiagnostic}
+              onStart={() => setConfirming(true)}
               onResume={resumeDiagnostic}
+              onBegin={() => { setConfirming(false); void startDiagnostic() }}
+              onCancel={() => setConfirming(false)}
             />
           )}
 

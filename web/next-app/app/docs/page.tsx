@@ -73,7 +73,7 @@ export default function DocsIndexPage() {
               Architecture
             </div>
             <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Full system design: 5-layer architecture, data model, request flow, grading, CAT diagnostic, and trade-offs.
+              Full system design: 5-layer architecture, data model, request flow, grading, CAT diagnostic and trade-offs.
             </p>
           </div>
         </Link>

@@ -100,7 +100,7 @@ export default function NotePage() {
           <p style={textStyle}>
             Mathua is for self-learners working through math on their own, and
             for parents and teachers who want an honest picture of where a
-            student stands. Take the diagnostic to find your frontier, or browse
+            student stands. Take the diagnostic to find your starting point or browse
             the Study library directly. If something is wrong, report it from
             any question: every report goes to a real triage queue.
           </p>
