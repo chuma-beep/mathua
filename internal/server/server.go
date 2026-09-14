@@ -239,6 +239,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart)))))
 	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer)))))
 	mux.HandleFunc("/api/goal/diagnostic/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticSkip)))))
+	mux.HandleFunc("/api/goal/diagnostic/retry", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticRetry)))))
 	mux.HandleFunc("/api/goal/diagnostic/resume", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticResume))))
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalPlan)))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
@@ -1007,6 +1008,9 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		})
 		return
 	}
+	// Methodology gate, evaluated against the staged next question: the
+	// offer covers the just-answered miss given what CAT serves next.
+	retryAvailable := s.eng.DiagnosticRetryAvailableFor(session, req.ConceptID, cid)
 	c := s.eng.GetDAG().Concept(cid)
 	name := cid
 	if c != nil {
@@ -1014,14 +1018,15 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 	prog := s.eng.DiagnosticProgress(session)
 	writeJSON(w, map[string]interface{}{
-		"done":         false,
-		"correct":      correct,
-		"feedback":     explanation,
-		"concept_id":   cid,
-		"concept_name": name,
-		"question":     nextProb.Question,
-		"grading_type": s.gradingTypeOf(cid),
-		"progress":     prog,
+		"done":            false,
+		"correct":         correct,
+		"feedback":        explanation,
+		"concept_id":      cid,
+		"concept_name":    name,
+		"question":        nextProb.Question,
+		"grading_type":    s.gradingTypeOf(cid),
+		"progress":        prog,
+		"retry_available": retryAvailable,
 	})
 }
 
@@ -1116,6 +1121,67 @@ func (s *Server) handleGoalDiagnosticSkip(w http.ResponseWriter, r *http.Request
 		"concept_id":   cid,
 		"concept_name": name,
 		"question":     nextProb.Question,
+		"grading_type": s.gradingTypeOf(cid),
+		"progress":     prog,
+	})
+}
+
+// POST /api/goal/diagnostic/retry
+// Body: { "session_id": "...", "concept_id": "..." }
+// "Silly mistake" retry: voids the superseded question's miss and restores
+// it as pending. The concept_id names the question being retried and must
+// match the voidable attempt — a stale client that already moved on gets a
+// 400 instead of voiding the wrong answer. Methodology-gated (engine):
+// only surprising misses qualify, once per question. Never for quiz.
+func (s *Server) handleGoalDiagnosticRetry(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string `json:"session_id"`
+		ConceptID string `json:"concept_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.ConceptID == "" {
+		writeError(w, "concept_id required", 400)
+		return
+	}
+	s.mu.Lock()
+	session := s.diagSessions[req.SessionID]
+	s.mu.Unlock()
+	if session == nil {
+		writeError(w, "diagnostic session not found", 404)
+		return
+	}
+	if authStudentID, _ := r.Context().Value(authStudentKey{}).(string); authStudentID != "" {
+		session.Lock()
+		owner := session.StudentID
+		session.Unlock()
+		if owner != "" && owner != authStudentID {
+			writeError(w, "diagnostic session does not belong to authenticated user", 403)
+			return
+		}
+	}
+	// Sliding expiry: retrying keeps a long diagnostic alive.
+	s.mu.Lock()
+	s.diagCreated[req.SessionID] = time.Now()
+	s.mu.Unlock()
+
+	prob, cid, name, err := s.eng.RetryDiagnosticQuestion(session, req.ConceptID)
+	if err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
+	prog := s.eng.DiagnosticProgress(session)
+	writeJSON(w, map[string]interface{}{
+		"done":         false,
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     prob.Question,
 		"grading_type": s.gradingTypeOf(cid),
 		"progress":     prog,
 	})

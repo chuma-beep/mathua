@@ -1,6 +1,7 @@
 package diagnostic
 
 import (
+	"fmt"
 	"math"
 	"sort"
 	"sync"
@@ -58,6 +59,13 @@ type Session struct {
 	LastProblem     *generator.Problem
 	LastConceptID   string
 	LastConceptName string
+	// prevProblem tracks the superseded pending question so a "silly
+	// mistake" retry can take the student back to it (answer responses
+	// always carry the next staged question; the voidable attempt belongs
+	// to the previous one).
+	prevProblem     *generator.Problem
+	prevConceptID   string
+	prevConceptName string
 
 	// Per-concept student model (belief 0-1 + confidence 0-1).
 	beliefs      map[string]float64
@@ -69,6 +77,9 @@ type Session struct {
 	doneSet      map[string]bool
 	// supplementalCount tracks extra re-probes per concept (cap enforced).
 	supplementalCount map[string]int
+	// retryUsed marks that the pending question's "silly mistake" retry was
+	// consumed; reset whenever NextQuestion serves a new problem.
+	retryUsed bool
 }
 
 type Attempt struct {
@@ -80,6 +91,9 @@ type Attempt struct {
 	// DontKnow marks an admitted unknown ("I don't know" button): clean
 	// negative evidence, as opposed to a failed attempt which may be a slip.
 	DontKnow bool
+	// BeliefSnapshot captures concept beliefs before this attempt's update
+	// so a voided "silly mistake" retry can restore exact prior state.
+	BeliefSnapshot map[string]float64
 }
 
 // Progress is the backend truth for the progress bar (MA parity: no exact
@@ -255,10 +269,99 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	if err != nil {
 		return nil, "", err
 	}
+	// Keep the superseded pending question: a retry voids its attempt and
+	// takes the student back to it (responses always stage the next one).
+	s.prevProblem, s.prevConceptID, s.prevConceptName = s.LastProblem, s.LastConceptID, s.LastConceptName
 	s.LastProblem = &p
 	s.LastConceptID = cid
 	s.LastConceptName = concept.Label
+	s.retryUsed = false
 	return s.LastProblem, cid, nil
+}
+
+// retryEligibleForLocked reports whether a recorded miss looks like a slip
+// worth offering back. Any one of three triggers qualifies:
+//  1. established knowledge — pre-answer belief at or above the confidence
+//     threshold (the model is surprised);
+//  2. level drop — the staged next concept sits earlier in path order than
+//     the missed one (the miss demoted the student; heuristic: path order is
+//     topological, foundations first, not a strict difficulty scale);
+//  3. really simple — the missed question was served at base difficulty
+//     (first probe, 0.3 tier).
+//
+// Admits ("I don't know") never qualify: an admit is not a slip.
+// Caller must hold s.Lock. Genuine unknowns on hard material get no offer.
+func (e *Engine) retryEligibleForLocked(s *Session, missedCID, nextCID string) bool {
+	if s.State == StateDone || s.retryUsed {
+		return false
+	}
+	n := len(s.Attempts)
+	if n == 0 {
+		return false
+	}
+	last := s.Attempts[n-1]
+	if last.ConceptID != missedCID || last.Correct || last.DontKnow {
+		return false
+	}
+	if prior, ok := last.BeliefSnapshot[last.ConceptID]; ok && prior >= confidenceThreshold {
+		return true
+	}
+	if nextCID != "" && s.index(nextCID) < s.index(missedCID) {
+		return true
+	}
+	return s.probeCounts[missedCID] <= 1
+}
+
+// RetryAvailableFor reports whether the missed concept's latest miss may be
+// retried ("silly mistake" offer), given the staged next concept ("" when
+// none is staged yet). Safe for concurrent use.
+func (e *Engine) RetryAvailableFor(s *Session, missedCID, nextCID string) bool {
+	s.Lock()
+	defer s.Unlock()
+	return e.retryEligibleForLocked(s, missedCID, nextCID)
+}
+
+// RetryServe voids the just-superseded question's recorded miss for a
+// "silly mistake" retry and restores that question as pending: the slip is
+// popped, counts decremented, beliefs restored from the pre-answer snapshot,
+// and doneSet recomputed. Only the superseded pending question can come
+// back, only when its miss passes the methodology gate, and only once
+// (retryUsed). Returns the restored problem, concept ID and name.
+func (e *Engine) RetryServe(s *Session, conceptID string) (*generator.Problem, string, string, error) {
+	s.Lock()
+	defer s.Unlock()
+	if s.State == StateDone {
+		return nil, "", "", fmt.Errorf("diagnostic session already complete")
+	}
+	if conceptID == "" {
+		return nil, "", "", fmt.Errorf("concept_id required")
+	}
+	if s.retryUsed {
+		return nil, "", "", fmt.Errorf("retry already used for this question")
+	}
+	n := len(s.Attempts)
+	if n == 0 || s.prevProblem == nil {
+		return nil, "", "", fmt.Errorf("nothing to retry")
+	}
+	last := s.Attempts[n-1]
+	if last.ConceptID != conceptID || last.ConceptID != s.prevConceptID {
+		return nil, "", "", fmt.Errorf("latest attempt does not match the retryable question")
+	}
+	if last.Correct {
+		return nil, "", "", fmt.Errorf("correct answers cannot be retried")
+	}
+	if !e.retryEligibleForLocked(s, last.ConceptID, s.LastConceptID) {
+		return nil, "", "", fmt.Errorf("retry not available: the miss does not look like a slip")
+	}
+	s.Attempts = s.Attempts[:n-1]
+	s.totalCount[last.ConceptID]--
+	s.totalAsked--
+	s.beliefs = last.BeliefSnapshot
+	s.doneSet[last.ConceptID] = s.totalCount[last.ConceptID] >= 2
+	s.LastProblem, s.LastConceptID, s.LastConceptName = s.prevProblem, s.prevConceptID, s.prevConceptName
+	s.prevProblem, s.prevConceptID, s.prevConceptName = nil, "", ""
+	s.retryUsed = true
+	return s.LastProblem, s.LastConceptID, s.LastConceptName, nil
 }
 
 // SettleCurrent marks the current question's concept as settled without
@@ -325,6 +428,10 @@ func (e *Engine) recordTimed(s *Session, conceptID string, correct bool, elapsed
 	if dontKnow {
 		fast = false
 	}
+	snapshot := make(map[string]float64, len(s.beliefs))
+	for id, b := range s.beliefs {
+		snapshot[id] = b
+	}
 	s.Attempts = append(s.Attempts, Attempt{
 		ConceptID:      conceptID,
 		Correct:        correct,
@@ -332,6 +439,7 @@ func (e *Engine) recordTimed(s *Session, conceptID string, correct bool, elapsed
 		ElapsedSeconds: elapsed,
 		Timestamp:      time.Now().UTC(),
 		DontKnow:       dontKnow,
+		BeliefSnapshot: snapshot,
 	})
 	s.totalCount[conceptID]++
 	s.totalAsked++

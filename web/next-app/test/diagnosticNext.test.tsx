@@ -7,6 +7,7 @@ import QuizHost from '../app/goals/QuizHost'
 import {
   submitGoalAnswer,
   skipGoalQuestion,
+  retryGoalQuestion,
   submitQuizAnswer,
   skipQuizQuestion,
 } from '../lib/api'
@@ -95,8 +96,14 @@ vi.mock('../lib/api', async (importOriginal) => {
     concept_id: 'c3',
     concept_name: 'Q3 quiz',
     question: 'Quiz Q3 text',
-    grading_type: 'numeric',
     time_limit_seconds: 30,
+  })),
+  retryGoalQuestion: vi.fn(async () => ({
+    done: false,
+    concept_id: 'c1',
+    concept_name: 'Q1 concept',
+    question: 'Q1 text',
+    grading_type: 'numeric',
   })),
   }
 })
@@ -124,6 +131,8 @@ const stepProps = {
   skipsLeft: 3,
   onRestart: () => {},
   onRetryPlan: () => {},
+  retryAvailable: false,
+  onRetryQuestion: () => {},
 }
 
 describe('WelcomeStep briefing', () => {
@@ -222,8 +231,7 @@ describe('DiagnosticStep Next button', () => {  it('shows no Next button before 
     expect(onRetry).toHaveBeenCalledTimes(1)
   })
 
-  it('shows only Restart on a 404 expired session', () => {
-    render(
+  it('shows only Restart on a 404 expired session', () => {    render(
       <DiagnosticStep
         {...stepProps}
         lastResult={null}
@@ -254,6 +262,44 @@ describe('DiagnosticStep Next button', () => {  it('shows no Next button before 
       />,
     )
     expect(screen.queryByRole('button', { name: "I don't know" })).toBeNull()
+  })
+
+  it('offers retry only on eligible incorrect misses', () => {
+    const onRetryQuestion = vi.fn()
+    const { rerender } = render(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={{ correct: false, feedback: 'Nope' }}
+        retryAvailable
+        onRetryQuestion={onRetryQuestion}
+      />,
+    )
+    const retry = screen.getByRole('button', { name: 'I made a silly mistake — retry' })
+    expect(retry).toBeInTheDocument()
+    fireEvent.click(retry)
+    expect(onRetryQuestion).toHaveBeenCalledTimes(1)
+
+    // Correct answers never offer retry.
+    rerender(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={{ correct: true, feedback: 'Nice!' }}
+        retryAvailable
+        onRetryQuestion={onRetryQuestion}
+      />,
+    )
+    expect(screen.queryByRole('button', { name: 'I made a silly mistake — retry' })).toBeNull()
+
+    // Ineligible misses never offer retry.
+    rerender(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={{ correct: false, feedback: 'Nope' }}
+        retryAvailable={false}
+        onRetryQuestion={onRetryQuestion}
+      />,
+    )
+    expect(screen.queryByRole('button', { name: 'I made a silly mistake — retry' })).toBeNull()
   })
 })
 
@@ -405,6 +451,42 @@ describe('DiagnosticHost manual advance', () => {
       expect.any(Number),
       true,
     )
+  })
+
+  it('retry voids the slip and re-serves the same question', async () => {
+    vi.mocked(submitGoalAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      feedback: 'Nope',
+      concept_id: 'c2',
+      concept_name: 'Q2 concept',
+      question: 'Q2 text',
+      grading_type: 'numeric',
+      retry_available: true,
+      progress: { ...PROG0, answered: 1, cover_done: 1 },
+    })
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: 'wrong' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    await screen.findByText('Nope')
+    const retry = screen.getByRole('button', { name: 'I made a silly mistake — retry' })
+    expect(retry).toBeInTheDocument()
+
+    fireEvent.click(retry)
+    await screen.findByText('Q1 text')
+    expect(vi.mocked(retryGoalQuestion)).toHaveBeenCalledWith('s1', 'c1')
+    expect(screen.queryByRole('button', { name: 'I made a silly mistake — retry' })).toBeNull()
+    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
   })
 })
 

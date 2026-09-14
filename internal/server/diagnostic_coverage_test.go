@@ -268,6 +268,164 @@ func TestQuizSkip(t *testing.T) {
 	}
 }
 
+// Retry takes back a surprising miss: correct, correct, then a miss on the
+// re-probed concept carries retry_available, and retry restores it.
+func TestGoalDiagnosticRetry(t *testing.T) {
+	s, mux := twoConceptServer(t)
+
+	code, start := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start: %d %v", code, start)
+	}
+	sid, _ := start["session_id"].(string)
+	c1, _ := start["concept_id"].(string)
+	if sid == "" || c1 == "" {
+		t.Fatalf("expected session + first concept, got %v", start)
+	}
+	answer := func(cid, ans string) (int, map[string]interface{}) {
+		return postJSON(t, mux, "/api/goal/diagnostic/answer",
+			`{"session_id":"`+sid+`","concept_id":"`+cid+`","answer":"`+ans+`","elapsed":5.0}`)
+	}
+
+	code, ans1 := answer(c1, "4")
+	if code != 200 || ans1["done"] == true {
+		t.Fatalf("answer1: %d %v", code, ans1)
+	}
+	c2, _ := ans1["concept_id"].(string)
+	if c2 != "b" {
+		t.Fatalf("expected CAT to move to b, got %q", c2)
+	}
+
+	code, ans2 := answer(c2, "4")
+	if code != 200 || ans2["done"] == true {
+		t.Fatalf("answer2: %d %v", code, ans2)
+	}
+	c3, _ := ans2["concept_id"].(string)
+	if c3 != "b" {
+		t.Fatalf("expected re-probe of b, got %q", c3)
+	}
+
+	// Miss on established knowledge while cover stays open: retry offered.
+	code, ans3 := answer(c3, "999")
+	if code != 200 || ans3["done"] == true {
+		t.Fatalf("answer3: %d %v", code, ans3)
+	}
+	if ans3["retry_available"] != true {
+		t.Fatalf("expected retry_available after surprising miss, got %v", ans3)
+	}
+
+	code, retried := postJSON(t, mux, "/api/goal/diagnostic/retry",
+		`{"session_id":"`+sid+`","concept_id":"b"}`)
+	if code != 200 {
+		t.Fatalf("retry: %d %v", code, retried)
+	}
+	if retried["concept_id"] != "b" {
+		t.Errorf("expected restored %q, got %v", "b", retried)
+	}
+	if q, _ := retried["question"].(string); q == "" {
+		t.Error("expected restored question text")
+	}
+
+	s.mu.Lock()
+	sess := s.diagSessions[sid]
+	s.mu.Unlock()
+	sess.Lock()
+	n := len(sess.Attempts)
+	sess.Unlock()
+	if n != 2 {
+		t.Errorf("expected voided slip (2 attempts), got %d", n)
+	}
+
+	// Once per question.
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry", `{"session_id":"`+sid+`","concept_id":"b"}`)
+	if code != 400 {
+		t.Errorf("expected 400 on second retry, got %d", code)
+	}
+
+	// Unknown session → 404; correct answers cannot be retried.
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry", `{"session_id":"nope","concept_id":"a"}`)
+	if code != 404 {
+		t.Errorf("expected 404 for unknown session, got %d", code)
+	}
+	code, start2 := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start2: %d %v", code, start2)
+	}
+	sid2, _ := start2["session_id"].(string)
+	cc1, _ := start2["concept_id"].(string)
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/answer",
+		`{"session_id":"`+sid2+`","concept_id":"`+cc1+`","answer":"4","elapsed":5.0}`)
+	if code != 200 {
+		t.Fatalf("correct answer: %d", code)
+	}
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry", `{"session_id":"`+sid2+`","concept_id":"`+cc1+`"}`)
+	if code != 400 {
+		t.Errorf("expected 400 retrying a correct answer, got %d", code)
+	}
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry", `{"session_id":"`+sid2+`","concept_id":"zzz"}`)
+	if code != 400 {
+		t.Errorf("expected 400 on concept mismatch, got %d", code)
+	}
+
+	// Fresh session with no attempts → 400.
+	code, start3 := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	sid3, _ := start3["session_id"].(string)
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry", `{"session_id":"`+sid3+`","concept_id":"a"}`)
+	if code != 400 {
+		t.Errorf("expected 400 with nothing to retry, got %d", code)
+	}
+}
+
+// Genuine unknowns never get the offer: first miss on fresh beliefs carries
+// retry_available:false and the endpoint rejects the retry.
+func TestGoalDiagnosticRetryUnavailableForUnknown(t *testing.T) {
+	_, mux := twoConceptServer(t)
+
+	code, start := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start: %d %v", code, start)
+	}
+	sid, _ := start["session_id"].(string)
+	c1, _ := start["concept_id"].(string)
+
+	miss := func(cid string) (int, map[string]interface{}) {
+		return postJSON(t, mux, "/api/goal/diagnostic/answer",
+			`{"session_id":"`+sid+`","concept_id":"`+cid+`","answer":"999","elapsed":5.0}`)
+	}
+	// Three straight misses: the third lands on a re-probed concept at low
+	// belief (no trigger: not established, no drop possible from index 0,
+	// past base difficulty).
+	code, ans1 := miss(c1)
+	if code != 200 || ans1["done"] == true {
+		t.Fatalf("answer1: %d %v", code, ans1)
+	}
+	c2, _ := ans1["concept_id"].(string)
+	code, ans2 := miss(c2)
+	if code != 200 || ans2["done"] == true {
+		t.Fatalf("answer2: %d %v", code, ans2)
+	}
+	c3, _ := ans2["concept_id"].(string)
+	if c3 != c1 {
+		t.Fatalf("expected return to %q, got %q", c1, c3)
+	}
+	code, ans3 := miss(c3)
+	if code != 200 || ans3["done"] == true {
+		t.Fatalf("answer3: %d %v", code, ans3)
+	}
+	if ans3["retry_available"] == true {
+		t.Errorf("expected no retry offer for a hard-material unknown, got %v", ans3)
+	}
+	code, _ = postJSON(t, mux, "/api/goal/diagnostic/retry",
+		`{"session_id":"`+sid+`","concept_id":"`+c3+`"}`)
+	if code != 400 {
+		t.Errorf("expected 400 retrying a genuine unknown, got %d", code)
+	}
+}
+
 // Admitted unknowns record clean negative evidence: incorrect, flagged,
 // progressed — and exempt from the too-quick floor (an instant admit is
 // honesty, not spam).
