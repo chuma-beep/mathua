@@ -576,6 +576,7 @@ export interface GoalDiagAnswerRes {
   concept_name?: string
   question?: string
   grading_type?: string
+  retry_available?: boolean
   progress?: DiagnosticProgress
 }
 
@@ -660,6 +661,20 @@ export async function skipGoalQuestion(sessionId: string): Promise<GoalDiagAnswe
 		body: JSON.stringify({ session_id: sessionId }),
 	})
 	if (!res.ok) await throwWithResponse(res, `Goal skip failed: ${res.status}`)
+	return res.json()
+}
+
+// Void the superseded question's miss and restore it ("silly mistake"
+// retry). The concept_id names the question being retried and must match
+// the voidable attempt — a stale client that already moved on gets a 400
+// instead of voiding the wrong answer.
+export async function retryGoalQuestion(sessionId: string, conceptId: string): Promise<GoalDiagAnswerRes> {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/retry`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Goal retry failed: ${res.status}`)
 	return res.json()
 }
 

@@ -13,6 +13,7 @@ import {
   resumeGoalDiagnostic,
   getGoalPlan,
   skipGoalQuestion,
+  retryGoalQuestion,
   type GoalPlanRes,
   type DiagnosticProgress,
 } from '../../lib/api'
@@ -68,6 +69,10 @@ export default function DiagnosticHost({
   const [planError, setPlanError] = useState('')
   const [finished, setFinished] = useState(false)
   const [skipCount, setSkipCount] = useState(0)
+  const [retryAvailable, setRetryAvailable] = useState(false)
+  // Concept the visible feedback belongs to — the retry call must name it,
+  // since conceptId.current already advanced to the staged next question.
+  const [retryConcept, setRetryConcept] = useState('')
   const [answerFormat, setAnswerFormat] = useState<AnswerFormat>(() => formatForGradingType())
 
   async function start() {
@@ -106,6 +111,7 @@ export default function DiagnosticHost({
       setPlanError('')
       setFinished(false)
       setSkipCount(0)
+      setRetryAvailable(false)
     } catch {
       toast.error("Something went wrong, but we're working on it.")
       onResumeExpired()
@@ -148,6 +154,7 @@ export default function DiagnosticHost({
       setPlanError('')
       setFinished(false)
       setSkipCount(0)
+      setRetryAvailable(false)
     } catch {
       try {
         sessionStorage.removeItem(GOALS_DIAG_KEY)
@@ -188,6 +195,8 @@ export default function DiagnosticHost({
         total: prev.total + 1,
       }))
       setLastResult({ correct, feedback })
+      setRetryAvailable(data.done ? false : data.retry_available === true)
+      setRetryConcept(data.done ? '' : conceptId.current)
       if (data.progress && data.progress.cover_size > 0) {
         setProgress(data.progress)
         setEstimatedTotal(data.progress.cover_size)
@@ -239,6 +248,8 @@ export default function DiagnosticHost({
     setLastResult(null)
     setAnswerInput('')
     setSubmitError(null)
+    setRetryAvailable(false)
+    setRetryConcept('')
   }
 
   async function skipAnswer() {
@@ -272,8 +283,32 @@ export default function DiagnosticHost({
     setSubmitError(null)
     setPlanError('')
     setSkipCount(0)
+    setRetryAvailable(false)
+    setRetryConcept('')
     setFinished(false)
     void start()
+  }
+
+  async function retryQuestion() {
+    if (loading || !retryConcept) return
+    setLoading(true)
+    setSubmitError(null)
+    try {
+      const data = await retryGoalQuestion(sessionId.current, retryConcept)
+      setRetryAvailable(false)
+      setRetryConcept('')
+      pendingNext.current = null
+      setQuestion(data.question || '')
+      conceptId.current = data.concept_id || ''
+      setConceptName(data.concept_name || '')
+      setAnswerFormat(formatForGradingType(data.grading_type || ''))
+      setLastResult(null)
+      setAnswerInput('')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to retry question.'))
+    } finally {
+      setLoading(false)
+    }
   }
 
   function goNext() {
@@ -371,6 +406,16 @@ export default function DiagnosticHost({
                 {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
               </p>
               <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
+              {!lastResult.correct && !finished && retryAvailable && (
+                <button
+                  type="button"
+                  onClick={() => { void retryQuestion() }}
+                  disabled={loading}
+                  className="mt-2 font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
+                >
+                  I made a silly mistake — retry
+                </button>
+              )}
             </div>
           )}
         </div>

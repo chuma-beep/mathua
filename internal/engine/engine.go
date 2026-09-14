@@ -1603,6 +1603,20 @@ func (e *Engine) SettleDiagnosticCurrent(s *diagnostic.Session) string {
 	return e.diag.SettleCurrent(s)
 }
 
+// DiagnosticRetryAvailableFor reports whether the missed concept's latest
+// miss qualifies for a "silly mistake" retry (methodology gate), given the
+// staged next concept ("" when none is staged yet).
+func (e *Engine) DiagnosticRetryAvailableFor(s *diagnostic.Session, missedCID, nextCID string) bool {
+	return e.diag.RetryAvailableFor(s, missedCID, nextCID)
+}
+
+// RetryDiagnosticQuestion voids the superseded question's miss and restores
+// it as pending for a "silly mistake" retry. Returns restored problem,
+// concept ID and name.
+func (e *Engine) RetryDiagnosticQuestion(s *diagnostic.Session, conceptID string) (*generator.Problem, string, string, error) {
+	return e.diag.RetryServe(s, conceptID)
+}
+
 func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 	return e.diag.IsComplete(s)
 }

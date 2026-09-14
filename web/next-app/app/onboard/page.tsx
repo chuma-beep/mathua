@@ -13,6 +13,7 @@ import {
   getGoalPlan,
   resumeGoalDiagnostic,
   skipGoalQuestion,
+  retryGoalQuestion,
   type GoalPlanRes,
   type DiagnosticProgress,
 } from '../../lib/api'
@@ -63,6 +64,10 @@ export default function OnboardPage() {
   const [planError, setPlanError] = useState('')
   const [finished, setFinished] = useState(false)
   const [skipCount, setSkipCount] = useState(0)
+  const [retryAvailable, setRetryAvailable] = useState(false)
+  // Concept the visible feedback belongs to — the retry call must name it,
+  // since conceptId.current already advanced to the staged next question.
+  const [retryConcept, setRetryConcept] = useState('')
   const [answerFormat, setAnswerFormat] = useState<AnswerFormat>(() => formatForGradingType())
 
   const [plan, setPlan] = useState<GoalPlanRes | null>(null)
@@ -135,6 +140,8 @@ export default function OnboardPage() {
       setPlanError('')
       setFinished(false)
       setSkipCount(0)
+      setRetryAvailable(false)
+      setRetryConcept('')
       setStep('diagnostic')
     } catch {
       toast.error("Something went wrong, but we're working on it.")
@@ -180,6 +187,8 @@ export default function OnboardPage() {
       setPlanError('')
       setFinished(false)
       setSkipCount(0)
+      setRetryAvailable(false)
+      setRetryConcept('')
       setStep('diagnostic')
     } catch {
       try {
@@ -204,6 +213,8 @@ export default function OnboardPage() {
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
       setLastResult({ correct, feedback })
+      setRetryAvailable(data.done ? false : data.retry_available === true)
+      setRetryConcept(data.done ? '' : conceptId.current)
       if (data.progress) setProgress(data.progress)
 
       if (data.done) {
@@ -256,6 +267,31 @@ export default function OnboardPage() {
     setLastResult(null)
     setAnswerInput('')
     setSubmitError(null)
+    setRetryAvailable(false)
+    setRetryConcept('')
+  }
+
+  async function retryQuestion() {
+    if (loading || !retryConcept) return
+    setLoading(true)
+    setSubmitError(null)
+    try {
+      const data = await retryGoalQuestion(sessionId.current, retryConcept)
+      setRetryAvailable(false)
+      setRetryConcept('')
+      pendingNext.current = null
+      setQuestion(data.question || '')
+      conceptId.current = data.concept_id || ''
+      questionShownAt.current = Date.now()
+      setConceptName(data.concept_name || '')
+      setAnswerFormat(formatForGradingType(data.grading_type || ''))
+      setLastResult(null)
+      setAnswerInput('')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to retry question.'))
+    } finally {
+      setLoading(false)
+    }
   }
 
   async function skipAnswer() {
@@ -285,6 +321,8 @@ export default function OnboardPage() {
     setSubmitError(null)
     setPlanError('')
     setSkipCount(0)
+    setRetryAvailable(false)
+    setRetryConcept('')
     setFinished(false)
     void startDiagnostic()
   }
@@ -363,6 +401,8 @@ export default function OnboardPage() {
               onSkip={skipAnswer}
               skipsLeft={MAX_SKIPS - skipCount}
               onRestart={restartDiagnostic}
+              retryAvailable={retryAvailable}
+              onRetryQuestion={() => { void retryQuestion() }}
               onRetryPlan={() => { setLoading(true); void fetchPlan() }}
             />
           )}

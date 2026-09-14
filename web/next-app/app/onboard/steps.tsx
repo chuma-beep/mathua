@@ -170,6 +170,8 @@ export function DiagnosticStep({
   skipsLeft,
   onRestart,
   onRetryPlan,
+  retryAvailable,
+  onRetryQuestion,
 }: {
   question: string
   conceptName: string
@@ -194,6 +196,8 @@ export function DiagnosticStep({
   skipsLeft: number
   onRestart: () => void
   onRetryPlan: () => void
+  retryAvailable: boolean
+  onRetryQuestion: () => void
 }) {
   return (
     <>
@@ -263,6 +267,16 @@ export function DiagnosticStep({
         {lastResult && (
           <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
             <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
+            {!lastResult.correct && !done && retryAvailable && (
+              <button
+                type="button"
+                onClick={onRetryQuestion}
+                disabled={loading}
+                className="mt-2 font-mono text-[11px] text-mathua-muted hover:text-mathua-blue underline underline-offset-2 disabled:opacity-50"
+              >
+                I made a silly mistake — retry
+              </button>
+            )}
           </div>
         )}
 
