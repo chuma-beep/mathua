@@ -107,6 +107,9 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
   await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 20_000 })
   await expect(page.getByText('+20 XP').first()).toBeVisible()
+  // Manual advance: feedback holds until Next reveals the staged question.
+  await page.getByRole('button', { name: 'Next →' }).click()
+  await expect(page.getByText('8 - 3 = ?').first()).toBeVisible({ timeout: 20_000 })
 })
 
 test('share link: settings enable → copyable URL → public share page', async ({ page }) => {
