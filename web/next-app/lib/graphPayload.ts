@@ -27,7 +27,6 @@ export interface GraphMeta {
   connectionCount: number
   domainCount: number
   domainCounts: Record<string, number>
-  generatedAt: string
   layoutVersion: number
 }
 
@@ -71,7 +70,6 @@ export function buildGraphMeta(concepts: ConceptRecord[]): GraphMeta {
     connectionCount,
     domainCount: Object.keys(domainCounts).length,
     domainCounts,
-    generatedAt: new Date().toISOString().slice(0, 10),
     layoutVersion: GRAPH_PAYLOAD_VERSION,
   }
 }
