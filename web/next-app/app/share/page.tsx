@@ -90,8 +90,9 @@ function ShareContent() {
             </section>
           </div>
         </section>
-        <Footer />
       </div>
+
+      <Footer />
       <BottomTabs />
     </>
   )

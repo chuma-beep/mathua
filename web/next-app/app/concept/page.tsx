@@ -287,8 +287,9 @@ function ConceptContent() {
           </div>
         </section>
 
-        <Footer />
       </div>
+
+      <Footer />
       <BottomTabs />
     </>
   )
