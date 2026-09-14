@@ -762,7 +762,12 @@ type decIntroGen struct{}
 func (g *decIntroGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	ones := rand.Intn(max(1, scale)) + 1
-	tenths := rand.Intn(max(1, scale))
+	// Tenths digit is never zero: a mixed number needs a real fractional
+	// part ("Write 2.0 as a mixed number" with answer "2 0/10" is degenerate).
+	tenths := rand.Intn(max(1, scale*2)) + 1
+	if tenths > 9 {
+		tenths = 9
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write %d.%d as a mixed number.", ones, tenths),
 		Answer:      fmt.Sprintf("%d %d/10", ones, tenths),

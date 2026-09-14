@@ -2,6 +2,7 @@ package arithmetic
 
 import (
 	"math/rand"
+	"regexp"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -53,6 +54,25 @@ func TestNegAddSubGen(t *testing.T)       { fuzzGen(t, &negAddSubGen{}) }
 func TestNegMultDivGen(t *testing.T)      { fuzzGen(t, &negMultDivGen{}) }
 func TestOrderOpsGen(t *testing.T)        { fuzzGen(t, &orderOpsGen{}) }
 func TestDecIntroGen(t *testing.T)        { fuzzGen(t, &decIntroGen{}) }
+
+var decZeroTenthsRe = regexp.MustCompile(`Write \d+\.0 as a mixed number\.`)
+var decZeroNumerRe = regexp.MustCompile(`\\frac\{0\}\{`)
+
+// A mixed number needs a real fractional part: tenths == 0 produced
+// "Write 2.0 as a mixed number" with answer "2 0/10" (degenerate).
+func TestDecIntroGen_NonzeroTenths(t *testing.T) {
+	g := &decIntroGen{}
+	for i := 0; i < 500; i++ {
+		d := rand.Float64()
+		p := g.Generate(generator.GeneratorContext{Difficulty: d})
+		if decZeroTenthsRe.MatchString(p.Question) {
+			t.Fatalf("degenerate zero-tenths question at difficulty=%.2f: %q", d, p.Question)
+		}
+		if decZeroNumerRe.MatchString(p.Explanation) {
+			t.Fatalf("zero-numerator fraction in explanation at difficulty=%.2f: %q", d, p.Explanation)
+		}
+	}
+}
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()
