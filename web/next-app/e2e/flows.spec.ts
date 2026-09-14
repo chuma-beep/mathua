@@ -92,15 +92,16 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   )
   await page.route('**/api/weaknesses**', route => route.fulfill({ json: { by_domain: {} } }))
   await page.route('**/api/quiz/session', route =>
-    route.fulfill({ json: { session_id: 'q1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '5 + 3 = ?', done: false } }),
+    route.fulfill({ json: { session_id: 'q1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '5 + 3 = ?', grading_type: 'numeric', done: false } }),
   )
   await page.route('**/api/quiz/answer', route =>
-    route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 20, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?' } }),
+    route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 20, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?', grading_type: 'numeric' } }),
   )
 
   await page.goto('/goals?quiz=1')
   await expect(page.getByText('Quiz question 1').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
+  await expect(page.getByText('Answer with a number').first()).toBeVisible()
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await input.fill('8')

@@ -258,6 +258,23 @@ func (e *Engine) NextQuestion(s *Session) (*generator.Problem, string, error) {
 	return s.LastProblem, cid, nil
 }
 
+// SettleCurrent marks the current question's concept as settled without
+// recording an answer — the skip escape hatch for questions that can't be
+// answered (bad content, repeated submit failures). No belief update, no
+// attempt, no XP: settling (rather than merely re-asking) is what moves CAT
+// past a poisoned transition, since NextQuestion is deterministic on state.
+// Returns the settled concept ID ("" if nothing pending).
+func (e *Engine) SettleCurrent(s *Session) string {
+	s.Lock()
+	defer s.Unlock()
+	cid := s.LastConceptID
+	if cid == "" || s.LastProblem == nil {
+		return ""
+	}
+	s.doneSet[cid] = true
+	return cid
+}
+
 // RecordAnswer processes an answer: belief update + evidence propagation +
 // confidence update + supplemental + stop conditions.
 func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) {

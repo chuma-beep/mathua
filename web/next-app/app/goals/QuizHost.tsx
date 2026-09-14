@@ -8,7 +8,13 @@ import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
 import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
-import { startQuizSession, submitQuizAnswer } from '../../lib/api'
+import { startQuizSession, submitQuizAnswer, skipQuizQuestion } from '../../lib/api'
+import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import SubmitErrorBlock, {
+  MAX_SKIPS,
+  toSubmitError,
+  type SubmitError,
+} from '../../components/SubmitErrorBlock'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { Input } from '@/components/ui/input'
 
@@ -37,6 +43,10 @@ export default function QuizHost() {
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
   const [quizRemedial, setQuizRemedial] = useState<string[]>([])
+  const [submitError, setSubmitError] = useState<SubmitError | null>(null)
+  const [finished, setFinished] = useState(false)
+  const [skipCount, setSkipCount] = useState(0)
+  const [answerFormat, setAnswerFormat] = useState<AnswerFormat>(() => formatForGradingType())
   // Next question staged from the submit response — revealed by goNextQuiz(),
   // never fetched. Cleared on advance, so double-press is a no-op.
   const pendingQuizNext = useRef<{
@@ -44,6 +54,7 @@ export default function QuizHost() {
     conceptId: string
     conceptName: string
     timeLimit: number
+    gradingType: string
   } | null>(null)
 
   async function startQuiz() {
@@ -60,6 +71,7 @@ export default function QuizHost() {
       quizConceptId.current = res.concept_id || ''
       setQuizConceptName(res.concept_name || '')
       quizShownAt.current = Date.now()
+      setAnswerFormat(formatForGradingType(res.grading_type))
       setQuizCount(1)
       setQuizAccuracy({ correct: 0, total: 0 })
       setQuizLastResult(null)
@@ -70,6 +82,9 @@ export default function QuizHost() {
       setQuizQuestionsTotal(res.questions_total ?? 0)
       setQuizRemedial([])
       pendingQuizNext.current = null
+      setSubmitError(null)
+      setSkipCount(0)
+      setFinished(false)
       setPhase('quiz')
     } catch {
       toast.error('Quiz failed to start — try again.')
@@ -105,6 +120,7 @@ export default function QuizHost() {
   async function submitQuizAnswerFn() {
     if (!quizAnswerInput.trim()) return
     setLoading(true)
+    setSubmitError(null)
     try {
       const answer = quizAnswerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (quizShownAt.current ?? Date.now())) / 1000)
@@ -118,6 +134,7 @@ export default function QuizHost() {
       }
 
       if (data.done) {
+        setFinished(true)
         setTimeout(() => {
           setPhase('done')
           setLoading(false)
@@ -132,27 +149,71 @@ export default function QuizHost() {
         conceptId: data.concept_id || '',
         conceptName: data.concept_name || '',
         timeLimit: data.time_limit_seconds ?? 0,
+        gradingType: data.grading_type || '',
       }
       setLoading(false)
-    } catch {
-      toast.error('Failed to submit quiz answer.')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to submit quiz answer.'))
       setLoading(false)
     }
+  }
+
+  function applyQuizQuestion(question: string, cid: string, name: string, timeLimit: number, gradingType: string) {
+    setQuizQuestion(question)
+    quizConceptId.current = cid
+    quizShownAt.current = Date.now()
+    setQuizConceptName(name)
+    setQuizCount(prev => prev + 1)
+    setQuizLastResult(null)
+    setQuizAnswerInput('')
+    setQuizTimeLimit(timeLimit)
+    setQuizRemaining(timeLimit)
+    setAnswerFormat(formatForGradingType(gradingType))
+    setSubmitError(null)
+  }
+
+  async function skipQuiz() {
+    if (skipCount >= MAX_SKIPS || loading) return
+    setLoading(true)
+    setSubmitError(null)
+    try {
+      const data = await skipQuizQuestion(quizSessionId.current)
+      setSkipCount(c => c + 1)
+      if (data.done) {
+        setFinished(true)
+        setQuizLastResult({ correct: false, feedback: 'Skipped — no XP awarded.', xp: 0 })
+        setTimeout(() => {
+          setPhase('done')
+          setLoading(false)
+        }, 800)
+        return
+      }
+      applyQuizQuestion(
+        data.question || '',
+        data.concept_id || '',
+        data.concept_name || '',
+        data.time_limit_seconds ?? 0,
+        data.grading_type || '',
+      )
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to skip quiz question.'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function restartQuiz() {
+    setSubmitError(null)
+    setSkipCount(0)
+    setFinished(false)
+    void startQuiz()
   }
 
   function goNextQuiz() {
     const staged = pendingQuizNext.current
     if (!staged) return
     pendingQuizNext.current = null
-    setQuizQuestion(staged.question)
-    quizConceptId.current = staged.conceptId
-    quizShownAt.current = Date.now()
-    setQuizConceptName(staged.conceptName)
-    setQuizCount(prev => prev + 1)
-    setQuizLastResult(null)
-    setQuizAnswerInput('')
-    setQuizTimeLimit(staged.timeLimit)
-    setQuizRemaining(staged.timeLimit)
+    applyQuizQuestion(staged.question, staged.conceptId, staged.conceptName, staged.timeLimit, staged.gradingType)
   }
 
   if (phase === 'loading') {
@@ -166,7 +227,7 @@ export default function QuizHost() {
   if (phase === 'done') {
     return (
       <div className="max-w-2xl mx-auto text-center">
-        {quizAccuracy.total === 0 ? (
+        {quizAccuracy.total === 0 && skipCount === 0 ? (
           <>
             <SectionHeader label="Quiz" title="No questions available" />
             <p className="font-mono text-sm text-mathua-secondary mt-4">There are no quiz questions available right now, try again later.</p>
@@ -228,9 +289,10 @@ export default function QuizHost() {
             <>
               <form onSubmit={e => { e.preventDefault(); submitQuizAnswerFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
-                <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" disabled={loading} className="sm:flex-1" />
+                <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
                 <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
+              <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
               <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
@@ -251,7 +313,19 @@ export default function QuizHost() {
           )}
         </div>
 
-        {quizLastResult && (
+        {submitError ? (
+          <div className="mb-6">
+            <SubmitErrorBlock
+              error={submitError}
+              onRetry={submitQuizAnswerFn}
+              onSkip={skipQuiz}
+              skipsLeft={MAX_SKIPS - skipCount}
+              onRestart={restartQuiz}
+              restartLabel="Restart quiz"
+              retrying={loading}
+            />
+          </div>
+        ) : quizLastResult && !finished ? (
           <div className="mb-6 text-center">
             <button
               type="button"
@@ -262,7 +336,11 @@ export default function QuizHost() {
               Next →
             </button>
           </div>
-        )}
+        ) : quizLastResult && finished ? (
+          <div className="mb-6 text-center text-mathua-muted text-xs font-mono">
+            Wrapping up…
+          </div>
+        ) : null}
       </div>
     </>
   )

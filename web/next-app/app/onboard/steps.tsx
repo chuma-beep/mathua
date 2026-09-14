@@ -6,9 +6,11 @@ import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
 import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
+import SubmitErrorBlock, { type SubmitError } from '../../components/SubmitErrorBlock'
 import DiagnosticResults from '../../components/DiagnosticResults'
 import Loading from '../../components/Loading'
 import type { DiagnosticProgress, GoalPlanRes } from '../../lib/api'
+import type { AnswerFormat } from '../../lib/answerFormat'
 import { domainLabels, type DomainInfo } from './domains'
 import { Input } from '@/components/ui/input'
 
@@ -115,6 +117,14 @@ export function DiagnosticStep({
   onInputChange,
   onSubmit,
   onNext,
+  done,
+  answerFormat,
+  submitError,
+  planError,
+  onSkip,
+  skipsLeft,
+  onRestart,
+  onRetryPlan,
 }: {
   question: string
   conceptName: string
@@ -130,6 +140,14 @@ export function DiagnosticStep({
   onInputChange: (value: string) => void
   onSubmit: () => void
   onNext: () => void
+  done: boolean
+  answerFormat: AnswerFormat
+  submitError: SubmitError | null
+  planError: string
+  onSkip: () => void
+  skipsLeft: number
+  onRestart: () => void
+  onRetryPlan: () => void
 }) {
   return (
     <>
@@ -159,6 +177,7 @@ export function DiagnosticStep({
               onChange={(e) => onInputChange(e.target.value)}
               placeholder="Your answer..."
               enterKeyHint="go"
+              inputMode={answerFormat.inputMode}
               disabled={loading || lastResult !== null}
               className="sm:flex-1"
             />
@@ -170,6 +189,7 @@ export function DiagnosticStep({
               Check Answer
             </button>
           </form>
+          <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
           <SymbolPalette targetRef={inputRef} onInsert={onInputChange} />
           <div className="mt-2 flex justify-end">
             <ReportButton
@@ -184,22 +204,54 @@ export function DiagnosticStep({
         </div>
 
         {lastResult && (
-          <>
-            <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
-              <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
-            </div>
-            <div className="mb-4 text-center">
+          <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
+            <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
+          </div>
+        )}
+
+        {submitError ? (
+          <div className="mb-4">
+            <SubmitErrorBlock
+              error={submitError}
+              onRetry={onSubmit}
+              onSkip={onSkip}
+              skipsLeft={skipsLeft}
+              onRestart={onRestart}
+              restartLabel="Restart diagnostic"
+              retrying={loading}
+            />
+          </div>
+        ) : lastResult && !done ? (
+          <div className="mb-4 text-center">
+            <button
+              type="button"
+              autoFocus
+              onClick={onNext}
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+            >
+              Next →
+            </button>
+          </div>
+        ) : lastResult && done && planError ? (
+          <div className="mb-4 border border-mathua-red/60 bg-mathua-surface p-4 text-left" role="alert">
+            <p className="font-mono text-xs text-mathua-red">Couldn&apos;t load your results.</p>
+            <p className="mt-1 font-mono text-[11px] text-mathua-muted break-words [overflow-wrap:anywhere]">{planError}</p>
+            <div className="mt-3">
               <button
                 type="button"
-                autoFocus
-                onClick={onNext}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+                onClick={onRetryPlan}
+                disabled={loading}
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-10 font-mono text-xs disabled:opacity-50"
               >
-                Next →
+                {loading ? 'Loading…' : 'Load results'}
               </button>
             </div>
-          </>
-        )}
+          </div>
+        ) : lastResult && done ? (
+          <div className="mb-4 text-center text-mathua-muted text-xs font-mono">
+            Preparing results…
+          </div>
+        ) : null}
 
         <div className="text-center text-mathua-muted text-xs font-mono">
           {accuracy.total > 0 && `${accuracy.correct}/${accuracy.total} correct`}

@@ -12,9 +12,17 @@ import {
   submitGoalAnswer,
   getGoalPlan,
   resumeGoalDiagnostic,
+  skipGoalQuestion,
   type GoalPlanRes,
   type DiagnosticProgress,
 } from '../../lib/api'
+import { getErrorMessage } from '../../lib/api'
+import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import {
+  MAX_SKIPS,
+  toSubmitError,
+  type SubmitError,
+} from '../../components/SubmitErrorBlock'
 import { setUserInfo, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { domainOrder, type DomainInfo } from './domains'
@@ -41,7 +49,7 @@ export default function OnboardPage() {
   const conceptId = useRef('')
   // Next question staged from the submit response — revealed by goNext(),
   // never fetched. Cleared on advance, so double-press is a no-op.
-  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string } | null>(null)
+  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string; gradingType: string } | null>(null)
   const questionShownAt = useRef<number | null>(null)
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
@@ -50,6 +58,11 @@ export default function OnboardPage() {
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
   const [hasPaused, setHasPaused] = useState(false)
+  const [submitError, setSubmitError] = useState<SubmitError | null>(null)
+  const [planError, setPlanError] = useState('')
+  const [finished, setFinished] = useState(false)
+  const [skipCount, setSkipCount] = useState(0)
+  const [answerFormat, setAnswerFormat] = useState<AnswerFormat>(() => formatForGradingType())
 
   const [plan, setPlan] = useState<GoalPlanRes | null>(null)
 
@@ -110,12 +123,17 @@ export default function OnboardPage() {
       conceptId.current = res.concept_id || ''
       questionShownAt.current = Date.now()
       setConceptName(res.concept_name || '')
+      setAnswerFormat(formatForGradingType(res.grading_type))
       setQuestionCount(1)
       setProgress(res.progress ?? null)
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
       pendingNext.current = null
+      setSubmitError(null)
+      setPlanError('')
+      setFinished(false)
+      setSkipCount(0)
       setStep('diagnostic')
     } catch {
       toast.error("Something went wrong, but we're working on it.")
@@ -149,6 +167,7 @@ export default function OnboardPage() {
       conceptId.current = data.concept_id || ''
       questionShownAt.current = Date.now()
       setConceptName(data.concept_name || '')
+      setAnswerFormat(formatForGradingType(data.grading_type))
       if (data.progress) {
         setProgress(data.progress)
         setQuestionCount(data.progress.answered + 1)
@@ -156,6 +175,10 @@ export default function OnboardPage() {
       setLastResult(null)
       setAnswerInput('')
       pendingNext.current = null
+      setSubmitError(null)
+      setPlanError('')
+      setFinished(false)
+      setSkipCount(0)
       setStep('diagnostic')
     } catch {
       try {
@@ -171,6 +194,7 @@ export default function OnboardPage() {
   async function submitAnswer() {
     if (!answerInput.trim()) return
     setLoading(true)
+    setSubmitError(null)
     try {
       const answer = answerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
@@ -182,19 +206,9 @@ export default function OnboardPage() {
       if (data.progress) setProgress(data.progress)
 
       if (data.done) {
-        setTimeout(async () => {
-          try {
-            const planRes = await getGoalPlan(sessionId.current)
-            setPlan(planRes)
-            setStep('results')
-            try {
-              sessionStorage.removeItem(DIAG_KEY)
-            } catch { /* ignore */ }
-            setHasPaused(false)
-          } catch {
-            alert('Could not generate plan.')
-          }
-          setLoading(false)
+        setFinished(true)
+        setTimeout(() => {
+          void fetchPlan()
         }, 800)
         return
       }
@@ -205,25 +219,80 @@ export default function OnboardPage() {
         question: data.question || '',
         conceptId: data.concept_id || '',
         conceptName: data.concept_name || '',
+        gradingType: data.grading_type || '',
       }
       setLoading(false)
-    } catch {
-      alert('Failed to submit answer.')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to submit answer.'))
       setLoading(false)
     }
+  }
+
+  async function fetchPlan() {
+    setPlanError('')
+    try {
+      const planRes = await getGoalPlan(sessionId.current)
+      setPlan(planRes)
+      setStep('results')
+      try {
+        sessionStorage.removeItem(DIAG_KEY)
+      } catch { /* ignore */ }
+      setHasPaused(false)
+    } catch (e) {
+      setPlanError(getErrorMessage(e) || 'Could not generate plan.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function applyQuestion(question: string, cid: string, name: string, gradingType: string) {
+    setQuestion(question)
+    conceptId.current = cid
+    questionShownAt.current = Date.now()
+    setConceptName(name)
+    setAnswerFormat(formatForGradingType(gradingType))
+    setQuestionCount(prev => prev + 1)
+    setLastResult(null)
+    setAnswerInput('')
+    setSubmitError(null)
+  }
+
+  async function skipAnswer() {
+    if (skipCount >= MAX_SKIPS || loading) return
+    setLoading(true)
+    setSubmitError(null)
+    try {
+      const data = await skipGoalQuestion(sessionId.current)
+      setSkipCount(c => c + 1)
+      if (data.done) {
+        setFinished(true)
+        setLastResult({ correct: false, feedback: 'Skipped — no evidence recorded.' })
+        setTimeout(() => {
+          void fetchPlan()
+        }, 800)
+        return
+      }
+      applyQuestion(data.question || '', data.concept_id || '', data.concept_name || '', data.grading_type || '')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to skip question.'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function restartDiagnostic() {
+    setSubmitError(null)
+    setPlanError('')
+    setSkipCount(0)
+    setFinished(false)
+    void startDiagnostic()
   }
 
   function goNext() {
     const staged = pendingNext.current
     if (!staged) return
     pendingNext.current = null
-    setQuestion(staged.question)
-    conceptId.current = staged.conceptId
-    questionShownAt.current = Date.now()
-    setConceptName(staged.conceptName)
-    setQuestionCount(prev => prev + 1)
-    setLastResult(null)
-    setAnswerInput('')
+    applyQuestion(staged.question, staged.conceptId, staged.conceptName, staged.gradingType)
   }
 
   // Keyboard flow: put the cursor back in the answer box whenever a fresh
@@ -282,6 +351,14 @@ export default function OnboardPage() {
               onInputChange={setAnswerInput}
               onSubmit={submitAnswer}
               onNext={goNext}
+              done={finished}
+              answerFormat={answerFormat}
+              submitError={submitError}
+              planError={planError}
+              onSkip={skipAnswer}
+              skipsLeft={MAX_SKIPS - skipCount}
+              onRestart={restartDiagnostic}
+              onRetryPlan={() => { setLoading(true); void fetchPlan() }}
             />
           )}
 
