@@ -160,6 +160,7 @@ export function DiagnosticStep({
   sessionId,
   onInputChange,
   onSubmit,
+  onDontKnow,
   onNext,
   done,
   answerFormat,
@@ -183,6 +184,7 @@ export function DiagnosticStep({
   sessionId: string
   onInputChange: (value: string) => void
   onSubmit: () => void
+  onDontKnow: () => void
   onNext: () => void
   done: boolean
   answerFormat: AnswerFormat
@@ -233,7 +235,18 @@ export function DiagnosticStep({
               Check Answer
             </button>
           </form>
-          <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+            {!lastResult && !loading && (
+              <button
+                type="button"
+                onClick={onDontKnow}
+                className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary underline underline-offset-2"
+              >
+                I don&apos;t know
+              </button>
+            )}
+          </div>
           <SymbolPalette targetRef={inputRef} onInsert={onInputChange} />
           <div className="mt-2 flex justify-end">
             <ReportButton

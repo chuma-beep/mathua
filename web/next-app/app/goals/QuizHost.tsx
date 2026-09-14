@@ -113,14 +113,14 @@ export default function QuizHost() {
     return () => window.clearInterval(id)
   }, [phase, quizLastResult, quizTimeLimit, quizQuestion])
 
-  async function submitQuizAnswerFn() {
-    if (!quizAnswerInput.trim()) return
+  async function submitQuizAnswerFn(dontKnow = false) {
+    if (!dontKnow && !quizAnswerInput.trim()) return
     setLoading(true)
     setSubmitError(null)
     try {
-      const answer = quizAnswerInput.trim()
+      const answer = dontKnow ? '' : quizAnswerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (quizShownAt.current ?? Date.now())) / 1000)
-      const data = await submitQuizAnswer(quizSessionId.current, quizConceptId.current, answer, elapsed)
+      const data = await submitQuizAnswer(quizSessionId.current, quizConceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
@@ -304,12 +304,22 @@ export default function QuizHost() {
           </div>
           {!quizLastResult ? (
             <>
-              <form onSubmit={e => { e.preventDefault(); submitQuizAnswerFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
+              <form onSubmit={e => { e.preventDefault(); void submitQuizAnswerFn(false) }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
                 <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
                 <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
-              <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+              <div className="mt-2 flex items-center justify-between gap-2">
+                <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+                <button
+                  type="button"
+                  onClick={() => { void submitQuizAnswerFn(true) }}
+                  disabled={loading}
+                  className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary underline underline-offset-2 disabled:opacity-50"
+                >
+                  I don&apos;t know
+                </button>
+              </div>
               <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
@@ -334,7 +344,7 @@ export default function QuizHost() {
           <div className="mb-6">
             <SubmitErrorBlock
               error={submitError}
-              onRetry={submitQuizAnswerFn}
+              onRetry={() => { void submitQuizAnswerFn(false) }}
               onSkip={skipQuiz}
               skipsLeft={MAX_SKIPS - skipCount}
               onRestart={restartQuiz}

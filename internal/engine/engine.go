@@ -1090,7 +1090,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 	if strings.HasSuffix(conceptID, ".word") {
 		taskType = TaskMultistep
 	}
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true, false)
 }
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
@@ -1098,10 +1098,17 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 // construction. Unlike SubmitStudyAnswer it never consults studyExpected:
 // the quiz expected answer comes from the quiz session.
 func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false)
 }
 
-func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool) (*AnswerResult, error) {
+// SubmitQuizDontKnow records an admitted unknown ("I don't know" button) as
+// a quiz miss: weakness up, streak reset, remedial queued — but no XP and no
+// rushing penalty (an instant admit is honesty, not rushing).
+func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true)
+}
+
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool, dontKnow bool) (*AnswerResult, error) {
 	if e.dag.Concept(conceptID) == nil {
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
@@ -1141,8 +1148,12 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	if timeThreshold == 0 {
 		timeThreshold = 10.0
 	}
-	// Grade using concept's grading type via registry/router.
+	// Grade using concept's grading type via registry/router — skipped for
+	// admitted unknowns, which are forced misses (no XP, no rushing penalty).
 	gr := e.gradeAnswer(conceptID, expected, answer)
+	if dontKnow {
+		gr = grader.Result{Correct: false}
+	}
 
 	progress, err := e.repo.GetProgress(studentID, conceptID)
 	if err != nil {
@@ -1269,7 +1280,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		if e.studyMisses[missKey] >= 2 {
 			halted = true
 		}
-		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 {
+		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 && !dontKnow {
 			xp = -5
 		}
 		// Batch 1: immediate remedial enqueue on quiz miss — missed concept
@@ -1574,6 +1585,16 @@ func (e *Engine) SubmitDiagnosticAnswerTimed(s *diagnostic.Session, conceptID st
 	studentID = s.StudentID
 	s.Unlock()
 	e.diag.RecordAnswerTimed(s, conceptID, correct, elapsed, e.accommodatedThreshold(studentID, timeThresh))
+}
+
+// SubmitDiagnosticDontKnow records an admitted unknown ("I don't know"
+// button) as negative evidence through the standard incorrect path.
+func (e *Engine) SubmitDiagnosticDontKnow(s *diagnostic.Session, conceptID string, elapsed, timeThresh float64) {
+	studentID := ""
+	s.Lock()
+	studentID = s.StudentID
+	s.Unlock()
+	e.diag.RecordDontKnow(s, conceptID, elapsed, e.accommodatedThreshold(studentID, timeThresh))
 }
 
 // SettleDiagnosticCurrent settles the session's pending question without

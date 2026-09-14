@@ -888,7 +888,9 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 }
 
 // POST /api/goal/diagnostic/answer
-// Body: { "session_id": "...", "concept_id": "...", "answer": "...", "elapsed": 0.0 }
+// Body: { "session_id": "...", "concept_id": "...", "answer": "...", "elapsed": 0.0, "dont_know": false }
+// dont_know records an admitted unknown as negative evidence (grader
+// bypassed, too-quick check exempt — an instant admit is honesty, not spam).
 func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -899,12 +901,13 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		ConceptID string  `json:"concept_id"`
 		Answer    string  `json:"answer"`
 		Elapsed   float64 `json:"elapsed"`
+		DontKnow  bool    `json:"dont_know"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
 		return
 	}
-	if req.Elapsed < MinAnswerSeconds {
+	if !req.DontKnow && req.Elapsed < MinAnswerSeconds {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
@@ -960,15 +963,19 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	expExplanation := session.LastProblem.Explanation
 	session.Unlock()
 	graderRouter := s.eng.GetGrader()
-	if graderRouter != nil {
-		grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
-		correct = grResult.Correct
+	if req.DontKnow {
+		s.eng.SubmitDiagnosticDontKnow(session, req.ConceptID, req.Elapsed, timeThresh)
 	} else {
-		correct = expected == req.Answer
+		if graderRouter != nil {
+			grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
+			correct = grResult.Correct
+		} else {
+			correct = expected == req.Answer
+		}
+
+		s.eng.SubmitDiagnosticAnswerTimed(session, req.ConceptID, correct, req.Elapsed, timeThresh)
 	}
 	explanation = expExplanation
-
-	s.eng.SubmitDiagnosticAnswerTimed(session, req.ConceptID, correct, req.Elapsed, timeThresh)
 	if s.eng.IsDiagnosticComplete(session) {
 		report := s.eng.DiagnosticReport(session)
 		prog := s.eng.DiagnosticProgress(session)
@@ -2279,7 +2286,9 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 }
 
 // POST /api/quiz/answer — own grading path via SubmitStudyAnswer with TaskQuiz 20
-// Body: { session_id, concept_id, answer, elapsed, student_id? }
+// Body: { session_id, concept_id, answer, elapsed, student_id?, dont_know? }
+// dont_know records an admitted unknown as a miss (remedial queued, no XP,
+// no rushing penalty); the grader is bypassed.
 func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -2291,6 +2300,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		Answer    string  `json:"answer"`
 		Elapsed   float64 `json:"elapsed"`
 		StudentID string  `json:"student_id"`
+		DontKnow  bool    `json:"dont_know"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -2304,7 +2314,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer too long", 400)
 		return
 	}
-	if req.Elapsed < MinAnswerSeconds {
+	if !req.DontKnow && req.Elapsed < MinAnswerSeconds {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
@@ -2347,6 +2357,15 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	expected := sess.LastProblem.Answer
 	gr := s.eng.GetGrader().Grade(grader.GradingType(gt), expected, req.Answer)
+	feedback := gr.Feedback
+	if req.DontKnow {
+		// Admitted unknown: forced miss, teaching content as feedback.
+		gr = grader.Result{Correct: false}
+		feedback = sess.LastProblem.Explanation
+		if feedback == "" {
+			feedback = "Not quite."
+		}
+	}
 	// Record via quiz engine (advance index)
 	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
 	qEng.RecordAnswer(sess, req.ConceptID, gr.Correct)
@@ -2356,7 +2375,13 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	var newStatus string
 	var remedial []string
 	if studentID != "" {
-		res, err := s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
+		var res *engine.AnswerResult
+		var err error
+		if req.DontKnow {
+			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, req.Elapsed)
+		} else {
+			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
+		}
 		if err != nil {
 			if errors.Is(err, engine.ErrUnknownConcept) {
 				writeError(w, "unknown concept", 404)
@@ -2384,7 +2409,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		delete(s.quizSessions, req.SessionID)
 		delete(s.quizCreated, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": gr.Feedback, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
+		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -2400,7 +2425,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]interface{}{
 		"done":               false,
 		"correct":            gr.Correct,
-		"feedback":           gr.Feedback,
+		"feedback":           feedback,
 		"xp":                 xp,
 		"new_status":         newStatus,
 		"remedial":           remedial,
