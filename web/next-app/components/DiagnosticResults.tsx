@@ -161,6 +161,11 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
           <button type="button" onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-10 h-12 font-mono text-sm">
             Start practicing →
           </button>
+          <div className="mt-3">
+            <Link href="/progress-card" className="font-mono text-xs text-mathua-muted hover:text-mathua-primary">
+              View progress card →
+            </Link>
+          </div>
         </div>
       )}
     </div>

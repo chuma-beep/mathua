@@ -398,6 +398,49 @@ export interface ShareReport {
   activity: DailyActivity[]
   progress: Record<string, ConceptProgress>
   weakness: Record<string, number>
+  attempts?: AttemptRecord[]
+}
+
+export interface AttemptRecord {
+  session_id: string
+  student_id: string
+  concept_id: string
+  concept_name?: string
+  answer: string
+  expected: string
+  correct: boolean
+  elapsed_seconds: number
+  timestamp: string
+  question: string
+  source: string
+  explanation: string
+}
+
+export interface AttemptsRes {
+  attempts: AttemptRecord[]
+  total: number
+}
+
+export async function getAttempts(params?: {
+  source?: string
+  concept_id?: string
+  incorrect_only?: boolean
+  limit?: number
+  offset?: number
+}): Promise<AttemptsRes> {
+  const q = new URLSearchParams()
+  if (params?.source) q.set('source', params.source)
+  if (params?.concept_id) q.set('concept_id', params.concept_id)
+  if (params?.incorrect_only) q.set('incorrect_only', '1')
+  if (params?.limit != null) q.set('limit', String(params.limit))
+  if (params?.offset) q.set('offset', String(params.offset))
+  const qs = q.toString()
+  const res = await authedFetch(`${API_BASE}/api/attempts${qs ? `?${qs}` : ''}`, {
+    headers: { ...getAuthHeaders() },
+    cache: 'no-store',
+  })
+  if (!res.ok) throw new Error(`Attempts fetch failed: ${res.status}`)
+  return res.json()
 }
 
 export async function enableShare(): Promise<{ enabled: boolean; token: string }> {
@@ -1002,12 +1045,13 @@ interface StudyAnswerBody {
 	expected: string
 	elapsed: number
 	student_id?: string
+	question?: string
 }
 
-export async function submitStudyAnswer(conceptId: string, answer: string, expected: string, elapsed: number): Promise<StudyAnswerRes> {
+export async function submitStudyAnswer(conceptId: string, answer: string, expected: string, elapsed: number, question?: string): Promise<StudyAnswerRes> {
 	const { getGuestId } = await import('./auth')
 	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
-	const body: StudyAnswerBody = { concept_id: conceptId, answer, expected, elapsed }
+	const body: StudyAnswerBody = { concept_id: conceptId, answer, expected, elapsed, question }
 	const guestId = getGuestId()
 	if (guestId && !('Authorization' in headers)) {
 		body.student_id = guestId

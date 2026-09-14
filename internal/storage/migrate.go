@@ -60,6 +60,9 @@ CREATE TABLE IF NOT EXISTS attempts (
     correct         INTEGER NOT NULL DEFAULT 0,
     elapsed_seconds REAL    NOT NULL DEFAULT 0,
     timestamp       TEXT    NOT NULL DEFAULT (datetime('now')),
+    question        TEXT    NOT NULL DEFAULT '',
+    source          TEXT    NOT NULL DEFAULT '',
+    explanation     TEXT    NOT NULL DEFAULT '',
     FOREIGN KEY (session_id) REFERENCES sessions(id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 );

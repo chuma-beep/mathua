@@ -278,6 +278,9 @@ export default function QuizHost() {
               <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
+            <div className="mt-3 text-center">
+              <Link href="/progress-card" className="font-mono text-xs text-mathua-muted hover:text-mathua-primary">View progress card →</Link>
+            </div>
           </>
         )}
       </div>

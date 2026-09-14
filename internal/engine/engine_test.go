@@ -490,14 +490,14 @@ func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("study_rush")
 	// First incorrect rush → 0; second incorrect rush → -5
-	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0)
+	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0, "")
 	if err != nil {
 		t.Fatalf("study submit 1: %v", err)
 	}
 	if r1.XP != 0 {
 		t.Errorf("expected 0 XP first study rush, got %d", r1.XP)
 	}
-	r2, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0)
+	r2, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0, "")
 	if err != nil {
 		t.Fatalf("study submit 2: %v", err)
 	}
@@ -514,13 +514,13 @@ func TestEngine_Efficacy(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("efficacy")
 	// Concept a: first attempt correct (first-pass hit), concept b: wrong then right.
-	if _, err := e.SubmitStudyAnswer(st.ID, "a", "42", "42", 5.0); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "a", "42", "42", 5.0, ""); err != nil {
 		t.Fatalf("submit a: %v", err)
 	}
-	if _, err := e.SubmitStudyAnswer(st.ID, "b", "1", "99", 5.0); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "1", "99", 5.0, ""); err != nil {
 		t.Fatalf("submit b wrong: %v", err)
 	}
-	if _, err := e.SubmitStudyAnswer(st.ID, "b", "99", "99", 5.0); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "99", "99", 5.0, ""); err != nil {
 		t.Fatalf("submit b right: %v", err)
 	}
 	rep, err := e.Efficacy(st.ID)
@@ -551,14 +551,14 @@ func TestEngine_AggregateEfficacy(t *testing.T) {
 	st1, _ := e.CreateStudent("agg1")
 	st2, _ := e.CreateStudent("agg2")
 	// agg1: a correct first try; b wrong then right.
-	_, _ = e.SubmitStudyAnswer(st1.ID, "a", "42", "42", 5.0)
-	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "1", "99", 5.0)
-	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "99", "99", 5.0)
+	_, _ = e.SubmitStudyAnswer(st1.ID, "a", "42", "42", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "1", "99", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "99", "99", 5.0, "")
 	// agg2: a wrong then right; b wrong then right.
-	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "1", "42", 5.0)
-	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "42", "42", 5.0)
-	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "1", "99", 5.0)
-	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "99", "99", 5.0)
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "1", "42", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "42", "42", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "1", "99", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "99", "99", 5.0, "")
 
 	rep, err := e.AggregateEfficacy()
 	if err != nil {
@@ -585,7 +585,7 @@ func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	res, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 3.0)
+	res, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 3.0, "")
 	if err != nil {
 		t.Fatalf("submit quiz answer: %v", err)
 	}
@@ -614,10 +614,10 @@ func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
 func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("lost")
-	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", "1", 5.0); !errors.Is(err, ErrUnknownConcept) {
+	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
 		t.Errorf("expected ErrUnknownConcept, got %v", err)
 	}
-	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0); !errors.Is(err, ErrUnknownConcept) {
+	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
 		t.Errorf("expected ErrUnknownConcept (quiz), got %v", err)
 	}
 	// No garbage progress row persisted.
@@ -671,7 +671,7 @@ func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
 	e := New(store, d, reg, nil, nil)
 	st, _ := e.CreateStudent("remedial")
 
-	res, err := e.SubmitQuizAnswer(st.ID, "b", "wrong", "99", 5.0)
+	res, err := e.SubmitQuizAnswer(st.ID, "b", "wrong", "99", 5.0, "")
 	if err != nil {
 		t.Fatalf("submit: %v", err)
 	}
@@ -685,7 +685,7 @@ func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
 		t.Errorf("expected queued remedial len 2, got %v", got)
 	}
 	// Correct answers never enqueue.
-	if _, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 5.0); err != nil {
+	if _, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 5.0, ""); err != nil {
 		t.Fatalf("submit correct: %v", err)
 	}
 	if got := e.QuizRemedial(st.ID); len(got) != 2 {

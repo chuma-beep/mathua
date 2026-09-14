@@ -78,6 +78,9 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE active_sessions ADD COLUMN last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN session_review INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN session_new INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE attempts ADD COLUMN question TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE attempts ADD COLUMN source TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE attempts ADD COLUMN explanation TEXT NOT NULL DEFAULT ''",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -820,6 +823,19 @@ func (s *SQLiteStore) GetSession(id string) (*Session, error) {
 	return &ses, nil
 }
 
+// EnsureSession inserts a sessions row idempotently for ephemeral
+// diagnostic/quiz UUIDs (attempts.session_id references sessions(id)).
+func (s *SQLiteStore) EnsureSession(id, studentID string) error {
+	_, err := s.db.Exec(
+		"INSERT OR IGNORE INTO sessions (id, student_id, started_at) VALUES (?, ?, ?)",
+		id, studentID, time.Now().UTC().Format(time.RFC3339),
+	)
+	if err != nil {
+		return fmt.Errorf("ensure session: %w", err)
+	}
+	return nil
+}
+
 // ServerSessions is a durable KV for restart-proof server state.
 
 func (s *SQLiteStore) UpsertServerSession(kind, key, value, expiresAt string) error {
@@ -961,13 +977,14 @@ func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 	_, err := s.db.Exec(`
 		INSERT INTO attempts
 			(session_id, student_id, concept_id, answer, expected,
-			 correct, elapsed_seconds, timestamp)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+			 correct, elapsed_seconds, timestamp, question, source, explanation)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`,
 		entry.SessionID, entry.StudentID, entry.ConceptID,
 		entry.Answer, entry.Expected,
 		boolToInt(entry.Correct), entry.ElapsedSeconds,
 		entry.Timestamp.Format(time.RFC3339),
+		entry.Question, entry.Source, entry.Explanation,
 	)
 	if err != nil {
 		return fmt.Errorf("record attempt: %w", err)
@@ -980,7 +997,7 @@ func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp
+		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		ORDER BY student_id, concept_id, timestamp ASC
 	`)
@@ -997,15 +1014,12 @@ func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 		if err := rows.Scan(
 			&e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
+			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
 		e.Correct = correct != 0
-		if ts != "" {
-			if t, err := time.Parse(time.RFC3339, ts); err == nil {
-				e.Timestamp = t
-			}
-		}
+		e.Timestamp = parseAttemptTimestamp(ts)
 		out = append(out, e)
 	}
 	return out, rows.Err()
@@ -1016,7 +1030,7 @@ func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp
+		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		WHERE student_id = ?
 		ORDER BY concept_id, timestamp ASC
@@ -1034,15 +1048,12 @@ func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, e
 		if err := rows.Scan(
 			&e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
+			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
 		e.Correct = correct != 0
-		if ts != "" {
-			if t, err := time.Parse(time.RFC3339, ts); err == nil {
-				e.Timestamp = t
-			}
-		}
+		e.Timestamp = parseAttemptTimestamp(ts)
 		out = append(out, e)
 	}
 	return out, rows.Err()
@@ -1051,7 +1062,7 @@ func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, e
 func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp
+		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		WHERE student_id = ? AND session_id = ?
 		ORDER BY timestamp ASC
@@ -1069,15 +1080,12 @@ func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]Attempt
 		if err := rows.Scan(
 			&e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
+			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
 		e.Correct = correct != 0
-		if ts != "" {
-			if t, err := time.Parse(time.RFC3339, ts); err == nil {
-				e.Timestamp = t
-			}
-		}
+		e.Timestamp = parseAttemptTimestamp(ts)
 		out = append(out, e)
 	}
 	return out, rows.Err()

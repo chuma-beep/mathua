@@ -12,6 +12,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"sort"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -233,6 +235,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseRoute))))
 	mux.HandleFunc("/api/transcript", logRequest(cors(s.authMiddleware(s.handleTranscript))))
+	mux.HandleFunc("/api/attempts", logRequest(cors(s.authMiddleware(s.handleAttempts))))
 	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticStart))))
 	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticAnswer))))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
@@ -962,6 +965,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	}
 	expected := session.LastProblem.Answer
 	expExplanation := session.LastProblem.Explanation
+	questionText := session.LastProblem.Question
 	session.Unlock()
 	graderRouter := s.eng.GetGrader()
 	if req.DontKnow {
@@ -977,6 +981,33 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		s.eng.SubmitDiagnosticAnswerTimed(session, req.ConceptID, correct, req.Elapsed, timeThresh)
 	}
 	explanation = expExplanation
+	// Persist the attempt for the mistakes transcript (best-effort: a
+	// recording failure must not fail the graded answer).
+	session.Lock()
+	diagStudentID := session.StudentID
+	session.Unlock()
+	if diagStudentID != "" {
+		// Ephemeral diagnostic UUIDs have no sessions row; ensure one so
+		// the attempts FK holds. Best-effort throughout: recording must
+		// never fail the graded answer.
+		if err := s.repo.EnsureSession(req.SessionID, diagStudentID); err != nil {
+			log.Printf("handleGoalDiagnosticAnswer: ensure session failed for %s: %v", diagStudentID, err)
+		} else if err := s.repo.RecordAttempt(storage.AttemptEntry{
+			SessionID:      req.SessionID,
+			StudentID:      diagStudentID,
+			ConceptID:      req.ConceptID,
+			Answer:         req.Answer,
+			Expected:       expected,
+			Correct:        correct,
+			ElapsedSeconds: req.Elapsed,
+			Timestamp:      time.Now(),
+			Question:       questionText,
+			Source:         "diagnostic",
+			Explanation:    expExplanation,
+		}); err != nil {
+			log.Printf("handleGoalDiagnosticAnswer: record attempt failed for %s: %v", diagStudentID, err)
+		}
+	}
 	if s.eng.IsDiagnosticComplete(session) {
 		report := s.eng.DiagnosticReport(session)
 		prog := s.eng.DiagnosticProgress(session)
@@ -2099,6 +2130,78 @@ func (s *Server) handleCourseDetail(w http.ResponseWriter, r *http.Request) {
 	writeError(w, "course not found", 404)
 }
 
+// GET /api/attempts — mistakes transcript source, always self-scoped.
+// Query: source=diagnostic|quiz|practice|review, concept_id=...,
+// incorrect_only=1, limit (default 100, max 500), offset (default 0).
+// Newest first. Pre-migration rows carry empty question/source.
+func (s *Server) handleAttempts(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	q := r.URL.Query()
+	sourceFilter := q.Get("source")
+	conceptFilter := q.Get("concept_id")
+	incorrectOnly := q.Get("incorrect_only") == "1" || strings.EqualFold(q.Get("incorrect_only"), "true")
+	limit := 100
+	if v, err := strconv.Atoi(q.Get("limit")); err == nil {
+		limit = v
+	}
+	if limit < 1 {
+		limit = 1
+	}
+	if limit > 500 {
+		limit = 500
+	}
+	offset := 0
+	if v, err := strconv.Atoi(q.Get("offset")); err == nil && v > 0 {
+		offset = v
+	}
+	all, err := s.repo.GetAttemptsForStudent(studentID)
+	if err != nil {
+		writeError(w, "failed to load attempts", 500)
+		return
+	}
+	type attemptRow struct {
+		storage.AttemptEntry
+		ConceptName string `json:"concept_name"`
+	}
+	filtered := make([]attemptRow, 0, len(all))
+	for _, a := range all {
+		if sourceFilter != "" && a.Source != sourceFilter {
+			continue
+		}
+		if conceptFilter != "" && a.ConceptID != conceptFilter {
+			continue
+		}
+		if incorrectOnly && a.Correct {
+			continue
+		}
+		name := a.ConceptID
+		if c := s.eng.GetDAG().Concept(a.ConceptID); c != nil {
+			name = c.Label
+		}
+		filtered = append(filtered, attemptRow{AttemptEntry: a, ConceptName: name})
+	}
+	sort.SliceStable(filtered, func(i, j int) bool {
+		return filtered[i].Timestamp.After(filtered[j].Timestamp)
+	})
+	total := len(filtered)
+	if offset > total {
+		offset = total
+	}
+	end := offset + limit
+	if end > total {
+		end = total
+	}
+	writeJSON(w, map[string]interface{}{"attempts": filtered[offset:end], "total": total})
+}
+
 // GET /api/transcript — accreditation-track completion overview
 // (?format=csv returns a downloadable transcript).
 func (s *Server) handleTranscript(w http.ResponseWriter, r *http.Request) {
@@ -2206,6 +2309,7 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		Expected  string  `json:"expected"`
 		Elapsed   float64 `json:"elapsed"`
 		StudentID string  `json:"student_id"`
+		Question  string  `json:"question"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -2221,6 +2325,10 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	if len(req.Answer) > 4096 || len(req.Expected) > 4096 {
 		writeError(w, "answer or expected too long", 400)
+		return
+	}
+	if len(req.Question) > 4096 {
+		writeError(w, "question too long", 400)
 		return
 	}
 	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
@@ -2257,7 +2365,7 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
-	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed)
+	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed, req.Question)
 	if err != nil {
 		if errors.Is(err, engine.ErrUnknownConcept) {
 			writeError(w, "unknown concept", 404)
@@ -2444,9 +2552,9 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		var res *engine.AnswerResult
 		var err error
 		if req.DontKnow {
-			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, req.Elapsed)
+			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, req.Elapsed, sess.LastProblem.Question)
 		} else {
-			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed)
+			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed, sess.LastProblem.Question)
 		}
 		if err != nil {
 			if errors.Is(err, engine.ErrUnknownConcept) {

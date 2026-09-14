@@ -87,14 +87,44 @@ type ActiveSession struct {
 }
 
 type AttemptEntry struct {
-	SessionID      string
-	StudentID      string
-	ConceptID      string
-	Answer         string
-	Expected       string
-	Correct        bool
-	ElapsedSeconds float64
-	Timestamp      time.Time
+	SessionID      string    `json:"session_id"`
+	StudentID      string    `json:"student_id"`
+	ConceptID      string    `json:"concept_id"`
+	Answer         string    `json:"answer"`
+	Expected       string    `json:"expected"`
+	Correct        bool      `json:"correct"`
+	ElapsedSeconds float64   `json:"elapsed_seconds"`
+	Timestamp      time.Time `json:"timestamp"`
+	// Question is the served question text (for mistakes review).
+	// Source is diagnostic|quiz|practice|review. Explanation is the
+	// teaching content shown with feedback. Pre-migration rows carry "".
+	Question    string `json:"question"`
+	Source      string `json:"source"`
+	Explanation string `json:"explanation"`
+}
+
+// parseAttemptTimestamp parses attempt timestamps from either store.
+// SQLite writes RFC3339; Postgres writes now()::text ("2006-01-02
+// 15:04:05.999999-07"), which RFC3339 parsing rejects.
+func parseAttemptTimestamp(ts string) time.Time {
+	if ts == "" {
+		return time.Time{}
+	}
+	if t, err := time.Parse(time.RFC3339, ts); err == nil {
+		return t
+	}
+	for _, layout := range []string{
+		"2006-01-02 15:04:05.999999999-07:00",
+		"2006-01-02 15:04:05.999999999-07",
+		"2006-01-02 15:04:05-07:00",
+		"2006-01-02 15:04:05-07",
+		"2006-01-02T15:04:05.999999999-07:00",
+	} {
+		if t, err := time.Parse(layout, ts); err == nil {
+			return t
+		}
+	}
+	return time.Time{}
 }
 
 type Question struct {
@@ -241,6 +271,10 @@ type Repository interface {
 
 	CreateSession(studentID string) (*Session, error)
 	GetSession(id string) (*Session, error)
+	// EnsureSession inserts a sessions row idempotently (ephemeral
+	// diagnostic/quiz UUIDs are not created through CreateSession but
+	// attempts.session_id references sessions(id)).
+	EnsureSession(id, studentID string) error
 	// ServerSessions is a durable KV for restart-proof server state
 	// (study anti-cheat expected answers, admin logins). Values carry an
 	// RFC3339 expires_at; readers treat expired rows as missing.

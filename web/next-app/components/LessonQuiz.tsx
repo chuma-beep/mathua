@@ -142,7 +142,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     const elapsed = Math.max(0.5, (Date.now() - (loadTimes.current[i] ?? Date.now())) / 1000)
     dispatch({ type: 'checkStart', index: i })
     try {
-      const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed)
+      const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed, q.question)
       dispatch({ type: 'gradeServer', index: i, correct: res.correct, xp: res.xp ?? 0 })
     } catch {
       // Fallback to local grading if server unreachable
