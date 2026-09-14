@@ -213,7 +213,7 @@ export function TrustSection() {
       <div className="mt-5 grid gap-10 md:grid-cols-12 md:items-start">
         <p className="max-w-[52ch] text-sm leading-relaxed text-mathua-secondary md:col-span-7">
           Open-source under MIT. Sequencing inspired by Math Academy, content shaped by
-          OpenStax, MIT OpenCourseWare, and Art of Problem Solving. Lessons build on Algebrica
+          OpenStax, MIT OpenCourseWare and Art of Problem Solving. Lessons build on Algebrica
           under CC BY-NC 4.0. No accounts to start, no paywall on the graph.
         </p>
         <div className="grid grid-cols-3 divide-x divide-mathua-division border border-mathua-border md:col-span-5">
@@ -308,7 +308,7 @@ export function StatesSection() {
       </div>
       <p className="mt-4 max-w-[60ch] text-[13px] leading-relaxed text-mathua-secondary">
         The scheduler enforces three hard rules: prerequisites must be mastered before a concept
-        unlocks, the same concept never appears twice in a row, and roughly 70% of each session
+        unlocks, the same concept never appears twice in a row and roughly 70% of each session
         is new material.
       </p>
     </section>

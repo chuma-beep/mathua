@@ -115,7 +115,7 @@ export default function DiagnosticFlow() {
     { id: 'forward', type: 'processNode', position: { x: CX - NODE_W - 30, y: yBranch }, data: { label: 'Move forward:\nharder concepts' } },
     { id: 'backward', type: 'processNode', position: { x: CX + 30, y: yBranch }, data: { label: 'Move backward:\nfoundational' } },
     { id: 'check', type: 'decisionNode', position: { x: CX - NODE_W / 2, y: yCheck }, data: { label: 'X correct\nin a row?' } },
-    { id: 'locked', type: 'terminalNode', position: { x: CX - NODE_W / 2, y: yLocked }, data: { label: 'FRONTIER\nLOCKED' } },
+    { id: 'locked', type: 'terminalNode', position: { x: CX - NODE_W / 2, y: yLocked }, data: { label: 'PLACEMENT\nLOCKED' } },
   ]
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes)

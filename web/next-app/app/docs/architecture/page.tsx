@@ -115,7 +115,7 @@ export default function ArchitecturePage() {
           The system is organized into five layers. The UI has a single implementation -- the web frontend
           (React/Next.js) -- calling into the Go engine through the REST API.
           The API exposes 25+ REST endpoints through net/http. The Core Engine handles DAG loading,
-          SM-2 scheduling, problem generation, mastery tracking, scoring, and the CAT diagnostic.
+          SM-2 scheduling, problem generation, mastery tracking, scoring and the CAT diagnostic.
           The Grading layer dispatches to 6+ grader strategies with a SymPy subprocess for symbolic
           math. Storage is abstracted behind a Repository interface.
         </p>
@@ -167,7 +167,7 @@ export default function ArchitecturePage() {
             'Auth middleware validates JWT and injects student ID into request context.',
             'Engine.SubmitAnswer routes to the correct grader by grading_type.',
             'The Mastery Machine evaluates whether a state transition is earned.',
-            'SM-2 Compute recalculates repetition count, interval, and easiness factor.',
+            'SM-2 Compute recalculates repetition count, interval and easiness factor.',
             'repo.UpsertProgress atomically saves all fields via ON CONFLICT DO UPDATE.',
             'If weakness > 0.3, it propagates to dependent concepts at w * 0.3.',
             'repo.RecordAttempt stores the raw answer for analytics.',
@@ -203,9 +203,9 @@ export default function ArchitecturePage() {
           string normalizer. The subprocess has a 10-second timeout and 500-character input limit.
         </p>
         <p style={bodyStyle}>
-          The complex grader preprocesses polar form, handles plus-minus notation, and delegates to
+          The complex grader preprocesses polar form, handles plus-minus notation and delegates to
           SymPy. In total there are 8 grading strategies: numeric, multiple choice, comparison,
-          ordering, tuple, complex, symbolic (fallback), and SymPy (polynomial/expression).
+          ordering, tuple, complex, symbolic (fallback) and SymPy (polynomial/expression).
         </p>
 
         <div style={calloutStyle}>
@@ -218,7 +218,7 @@ export default function ArchitecturePage() {
       <section className="py-20 max-sm:py-12">
         <h2 style={h2Style}>V. Computerised Adaptive Testing</h2>
         <p style={bodyStyle}>
-          The diagnostic engine locates a student&apos;s knowledge frontier using binary search on
+          The diagnostic engine finds a student&apos;s starting point using binary search on
           the topologically sorted concept graph. This reduces the assessment from 284 questions
           (one per concept) to approximately 20-35.
         </p>
@@ -230,7 +230,7 @@ export default function ArchitecturePage() {
             'The concept graph is sorted topologically. The diagnostic starts at the midpoint.',
             'Correct answers within the time limit move the probe forward toward harder concepts.',
             'Incorrect or slow answers move backward toward foundational material.',
-            'After 3 consecutive correct answers in a region, the frontier is considered located.',
+            'After 3 consecutive correct answers in a region, the starting point is considered found.',
             'The diagnostic records a mastery estimate for every concept passed through.',
           ].map((step, i) => (
             <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
@@ -298,7 +298,7 @@ export default function ArchitecturePage() {
 
         <div style={calloutStyle}>
           For the full system design document covering all 11 sections in detail (including SM-2
-          algorithm internals, scoring formulas, level system, and complete API reference),
+          algorithm internals, scoring formulas, level system and complete API reference),
           see the <a href="https://github.com/chuma-beep/mathua/blob/main/docs/system-design.md" className="link-underline" style={{ color: 'var(--accent-blue)' }}>system design markdown document</a>.
         </div>
       </section>

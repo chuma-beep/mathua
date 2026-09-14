@@ -6,6 +6,7 @@ import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
 import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
+import BriefingCard, { DIAGNOSTIC_BRIEFING } from '../../components/BriefingCard'
 import SubmitErrorBlock, { type SubmitError } from '../../components/SubmitErrorBlock'
 import DiagnosticResults from '../../components/DiagnosticResults'
 import Loading from '../../components/Loading'
@@ -19,20 +20,63 @@ export function WelcomeStep({
   loading,
   hasPaused,
   selectedCount,
+  confirming,
   onToggle,
   onSelectAll,
   onStart,
   onResume,
+  onBegin,
+  onCancel,
 }: {
   domains: DomainInfo[]
   loading: boolean
   hasPaused: boolean
   selectedCount: number
+  confirming: boolean
   onToggle: (name: string) => void
   onSelectAll: () => void
   onStart: () => void
   onResume: () => void
+  onBegin: () => void
+  onCancel: () => void
 }) {
+  if (confirming) {
+    const selected = domains.filter(d => d.selected)
+    const shown = selected.slice(0, 3).map(d => domainLabels[d.name] || d.name)
+    const extra = selected.length > 3 ? ` +${selected.length - 3} more` : ''
+    return (
+      <div className="max-w-2xl mx-auto px-2">
+        <div className="text-center mb-4 mt-6 sm:mt-8 min-w-0">
+          <div className="font-mono text-[11px] uppercase text-mathua-muted mb-3">One quick check</div>
+          <h1 className="font-serif text-2xl sm:text-3xl font-medium text-mathua-primary px-2">
+            Before you begin
+          </h1>
+          <p className="text-mathua-secondary text-sm mt-3 px-2">
+            Starting test on: {shown.join(', ')}{extra} · {selectedCount} concepts
+          </p>
+        </div>
+        <BriefingCard eyebrow="What to expect" items={DIAGNOSTIC_BRIEFING} />
+        <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-2">
+          <button
+            type="button"
+            onClick={onBegin}
+            disabled={loading}
+            className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50"
+          >
+            {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Begin diagnostic →'}
+          </button>
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={loading}
+            className="font-mono text-xs text-mathua-muted hover:text-mathua-primary min-h-[44px] px-4 disabled:opacity-50"
+          >
+            ← Back
+          </button>
+        </div>
+      </div>
+    )
+  }
   return (
     <div className="max-w-4xl mx-auto">
       <div className="text-center mb-4 mt-6 sm:mt-8 px-2 min-w-0">

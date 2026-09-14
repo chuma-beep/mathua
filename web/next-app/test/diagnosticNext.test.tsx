@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { createRef } from 'react'
-import { DiagnosticStep } from '../app/onboard/steps'
+import { DiagnosticStep, WelcomeStep } from '../app/onboard/steps'
 import DiagnosticHost from '../app/goals/DiagnosticHost'
 import QuizHost from '../app/goals/QuizHost'
 import {
@@ -125,8 +125,60 @@ const stepProps = {
   onRetryPlan: () => {},
 }
 
-describe('DiagnosticStep Next button', () => {
-  it('shows no Next button before answering', () => {
+describe('WelcomeStep briefing', () => {
+  const welcomeProps = {
+    domains: [],
+    loading: false,
+    hasPaused: false,
+    selectedCount: 0,
+    confirming: false,
+    onToggle: () => {},
+    onSelectAll: () => {},
+    onStart: () => {},
+    onResume: () => {},
+    onBegin: () => {},
+    onCancel: () => {},
+  }
+
+  it('states duration and expectations in the review step', () => {
+    render(<WelcomeStep {...welcomeProps} confirming />)
+    expect(screen.getByText('Before you begin')).toBeInTheDocument()
+    expect(screen.getByText('What to expect')).toBeInTheDocument()
+    expect(screen.getByText('25–45 questions · about 30–45 minutes')).toBeInTheDocument()
+    expect(screen.getByText('Answer from what you know — no searching')).toBeInTheDocument()
+    expect(screen.getByText('Speed counts')).toBeInTheDocument()
+    expect(screen.getByText('Pause anytime')).toBeInTheDocument()
+    expect(screen.queryByText(/frontier/i)).toBeNull()
+  })
+
+  it('Start opens review, Begin starts, Back cancels', () => {
+    const onStart = vi.fn()
+    const onBegin = vi.fn()
+    const onCancel = vi.fn()
+    const { rerender } = render(
+      <WelcomeStep {...welcomeProps} selectedCount={3} onStart={onStart} onBegin={onBegin} onCancel={onCancel} />,
+    )
+    expect(screen.queryByText('Before you begin')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: /Start diagnostic test/ }))
+    expect(onStart).toHaveBeenCalledTimes(1)
+
+    rerender(
+      <WelcomeStep
+        {...welcomeProps}
+        confirming
+        onStart={onStart}
+        onBegin={onBegin}
+        onCancel={onCancel}
+      />,
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Begin diagnostic →' }))
+    expect(onBegin).toHaveBeenCalledTimes(1)
+    fireEvent.click(screen.getByRole('button', { name: '← Back' }))
+    expect(onCancel).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('DiagnosticStep Next button', () => {  it('shows no Next button before answering', () => {
     render(<DiagnosticStep {...stepProps} lastResult={null} />)
     expect(screen.getByRole('button', { name: 'Check Answer' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
@@ -314,6 +366,11 @@ describe('DiagnosticHost manual advance', () => {
 describe('QuizHost manual advance', () => {
   it('holds feedback until Next reveals the staged question and focuses input', async () => {
     render(<QuizHost />)
+    // Intro briefing gates the start — timing begins at Start, not mount.
+    expect(screen.getByText('Before you start')).toBeInTheDocument()
+    expect(screen.getByText('Up to 5 questions · timed · closed book')).toBeInTheDocument()
+    expect(screen.queryByText('Quiz Q1 text')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
 
     fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
@@ -336,6 +393,7 @@ describe('QuizHost manual advance', () => {
       }),
     )
     render(<QuizHost />)
+    fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
 
     fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })

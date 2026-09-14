@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
+import BriefingCard, { QUIZ_BRIEFING } from '../../components/BriefingCard'
 import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startQuizSession, submitQuizAnswer, skipQuizQuestion } from '../../lib/api'
@@ -18,19 +19,18 @@ import SubmitErrorBlock, {
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { Input } from '@/components/ui/input'
 
-type Phase = 'loading' | 'quiz' | 'done'
+type Phase = 'loading' | 'intro' | 'quiz' | 'done'
 
 // Actionable quiz every 150 XP: timed closed-book, own grading path, guest
 // unlimited retake. Self-contained so the goals page only mounts it.
 export default function QuizHost() {
-  const [phase, setPhase] = useState<Phase>('loading')
+  const [phase, setPhase] = useState<Phase>('intro')
   const [loading, setLoading] = useState(false)
 
   const quizSessionId = useRef('')
   const quizInputRef = useRef<HTMLInputElement>(null)
   const quizShownAt = useRef<number | null>(null)
   const quizConceptId = useRef('')
-  const startedRef = useRef(false)
 
   const [quizQuestion, setQuizQuestion] = useState('')
   const [quizConceptName, setQuizConceptName] = useState('')
@@ -94,12 +94,8 @@ export default function QuizHost() {
     }
   }
 
-  useEffect(() => {
-    if (startedRef.current) return
-    startedRef.current = true
-    void startQuiz()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // The quiz starts from the intro screen, not on mount — timing and
+  // question reveal begin at Start, so the briefing costs nothing.
 
   // Per-question countdown for the timed closed-book quiz. Informational:
   // the engine grades over-time answers as slow, it never blocks submission.
@@ -214,6 +210,27 @@ export default function QuizHost() {
     if (!staged) return
     pendingQuizNext.current = null
     applyQuizQuestion(staged.question, staged.conceptId, staged.conceptName, staged.timeLimit, staged.gradingType)
+  }
+
+  if (phase === 'intro') {
+    return (
+      <>
+        <SectionHeader label="Quiz" title="Mastery check" />
+        <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
+          <BriefingCard eyebrow="Before you start" items={QUIZ_BRIEFING} />
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => { void startQuiz() }}
+              disabled={loading}
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
+            >
+              Start quiz →
+            </button>
+          </div>
+        </div>
+      </>
+    )
   }
 
   if (phase === 'loading') {

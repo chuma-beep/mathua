@@ -240,7 +240,7 @@ export default function SettingsPage() {
       const uploadedInfo = getUserInfo()
       if (uploadedInfo) setUserInfo({ ...uploadedInfo })
     } catch {
-      setPhotoMsg('Upload failed — use PNG, JPEG, GIF, or WebP up to 512KB.')
+      setPhotoMsg('Upload failed — use PNG, JPEG, GIF or WebP up to 512KB.')
     } finally {
       setPhotoBusy(false)
     }
@@ -396,7 +396,7 @@ export default function SettingsPage() {
                 <p className="text-mathua-muted text-xs mt-1">
                   {paused
                     ? `Paused until ${pausedLabel}. Due reviews are hidden while paused. Pick another duration to change it, or resume.`
-                    : 'Take a break for 30, 60, or 90 days. Due reviews are hidden while paused.'}
+                    : 'Take a break for 30, 60 or 90 days. Due reviews are hidden while paused.'}
                 </p>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {[30, 60, 90].map(d => (
@@ -639,7 +639,7 @@ export default function SettingsPage() {
               <div className="border-t border-mathua-border pt-6 min-w-0">
                 <span className="font-mono text-sm text-mathua-primary">Share with parent / teacher</span>
                 <p className="text-mathua-muted text-xs mt-1">
-                  Generate a read-only link to this student&apos;s progress, activity, and weak spots.
+                  Generate a read-only link to this student&apos;s progress, activity and weak spots.
                 </p>
                 {shareUrl ? (
                   <div className="mt-3 min-w-0">

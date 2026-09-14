@@ -5,7 +5,7 @@ import Loading from '../../../components/Loading'
 
 export const metadata: Metadata = {
   title: 'Contributing \u2014 Mathua',
-  description: 'How to contribute to Mathua: concepts, generators, frontend components, and more.',
+  description: 'How to contribute to Mathua: concepts, generators, frontend components and more.',
 }
 
 const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
@@ -123,7 +123,7 @@ export default function ContributingPage() {
         <SectionHeader label="Community" title="Contributing to Mathua" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
           Mathua is a full-stack project: a Go backend with a Next.js frontend,
-          a scheduling engine, and a concept graph. Every generator, every diagram,
+          a scheduling engine and a concept graph. Every generator, every diagram,
           every API route was built by someone who wanted to help others learn math.
           Here&apos;s how to join them.
         </p>
@@ -435,7 +435,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           The frontend is a Next.js App Router application under{' '}
           <code style={inlineCodeStyle}>web/next-app/</code>.
           It&apos;s designed with a brutalist aesthetic: monospace typography, minimal
-          chrome, no rounded corners, and a terminal-calibrated color palette.
+          chrome, no rounded corners and a terminal-calibrated color palette.
         </p>
 
         <h3 style={h3Style}>Design system</h3>
@@ -454,7 +454,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
 
         <h3 style={h3Style}>React Flow diagrams</h3>
         <p style={bodyStyle}>
-          Architecture, scheduler, and student model diagrams use{' '}
+          Architecture, scheduler and student model diagrams use{' '}
           <code style={inlineCodeStyle}>@xyflow/react</code> (React Flow v12).
           All diagrams share{' '}
           <code style={inlineCodeStyle}>FlowDiagram</code> as a common wrapper
@@ -486,7 +486,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         {[
           'API calls go through lib/api.ts. Auth headers come from lib/auth.ts (JWT in localStorage).',
           'Use the motion-safe animation classes for transitions (fadeIn, ascii-reveal). Avoid heavy animation libraries.',
-          'Profile pages, heatmaps, and stats components consume data from GET /api/activity, /api/scores, and /api/weaknesses.',
+          'Profile pages, heatmaps and stats components consume data from GET /api/activity, /api/scores and /api/weaknesses.',
           'UI primitives live in components/ui/ (Radix/shadcn: sidebar, sheet, button, switch, tooltip — used by AppSidebar on Profile), plus React Flow for diagrams, sonner for toasts, lucide-react for icons. Reuse these — do not add new UI kits.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
@@ -607,7 +607,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'For frontend changes: run npm run build in web/next-app/ to verify the static export compiles.',
           'For API changes: run go vet ./internal/... to check for issues.',
           'Open a PR. The CI pipeline runs the validator and all tests automatically.',
-          'A maintainer reviews the concept ordering, thresholds, generator quality, and UI changes.',
+          'A maintainer reviews the concept ordering, thresholds, generator quality and UI changes.',
         ].map((step, i) => (
           <div key={step} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px' }}>
@@ -635,7 +635,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'Subdomains group related concepts. If a domain grows past 15 concepts, consider introducing subdomains.',
           'Generators accept a generator.GeneratorContext with Difficulty (0.0–1.0) and Seed (int64). Use ctx.Seed for deterministic generation; this enables question replay, regression suites, and A/B testing.',
           'Difficulty scaling should be linear where sensible. The jump from 0.0 to 1.0 should feel meaningful, not extreme.',
-          'Grading types: use numeric for arithmetic, polynomial/expression for algebra (routes through SymPy), and comparison/ordering/multiple_choice for structured answers.',
+          'Grading types: use numeric for arithmetic, polynomial/expression for algebra (routes through SymPy) and comparison/ordering/multiple_choice for structured answers.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -651,7 +651,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           'No box-shadow on buttons or inputs. Use border changes or background transitions for hover states.',
           'Animations: use the @keyframes defined in tailwind.config.js (ascii-reveal, fadeIn, progress-fill). Keep transitions under 300ms.',
           'Diagrams: follow the React Flow conventions above. Use dagre for automatic layout, themeColors for node styling.',
-          'Read the full design system in DESIGN.md for color palette, typography scales, spacing, and component patterns.',
+          'Read the full design system in DESIGN.md for color palette, typography scales, spacing and component patterns.',
         ].map((rule) => (
           <div key={rule} style={{ ...bodyStyle, marginBottom: '0.4rem' }}>
             <span style={{ color: 'var(--border-strong)', marginRight: '0.25rem', fontFamily: monoFont }}>·</span>
@@ -664,7 +664,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
           <a href="https://github.com/chuma-beep/mathua/blob/main/DESIGN.md" style={{ color: 'var(--accent-blue)', textDecoration: 'underline' }}>
             DESIGN.md
           </a>{' '}
-          for color palette, typography, spacing, and component patterns.
+          for color palette, typography, spacing and component patterns.
         </div>
       </section>
     </div>

@@ -99,6 +99,8 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   )
 
   await page.goto('/goals?quiz=1')
+  await expect(page.getByText('Before you start').first()).toBeVisible({ timeout: 30_000 })
+  await page.getByRole('button', { name: 'Start quiz →' }).click()
   await expect(page.getByText('Quiz question 1').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
   await expect(page.getByText('Answer with a number').first()).toBeVisible()

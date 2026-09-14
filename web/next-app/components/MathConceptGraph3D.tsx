@@ -1157,7 +1157,7 @@ export default function MathConceptGraph3D({
         className="concept-graph-3d"
         tabIndex={0}
         role="application"
-        aria-label="Concept map. Use the left and right arrow keys to browse concepts, plus and minus to zoom, and Home or End to jump to the first or last concept."
+        aria-label="Concept map. Use the left and right arrow keys to browse concepts, plus and minus to zoom and Home or End to jump to the first or last concept."
         onKeyDown={handleGraphKeyDown}
         onFocus={() => setDomFocused(true)}
         onBlur={() => setDomFocused(false)}
@@ -1176,7 +1176,7 @@ export default function MathConceptGraph3D({
       >
         <span className="sr-only">
           Interactive three-dimensional concept map. Arrow keys move between
-          concepts, plus and minus zoom, and details of the selected concept
+          concepts, plus and minus zoom and details of the selected concept
           appear below the map.
         </span>
         {graph ? (

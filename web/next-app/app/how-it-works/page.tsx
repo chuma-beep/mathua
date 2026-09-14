@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
             </h1>
             <p style={bodyStyle}>
               The engine behind the learning: a technical explanation of the concept graph, student
-              model, diagnostic algorithm, task selection, and scoring system.
+              model, diagnostic algorithm, task selection and scoring system.
             </p>
           </section>
 

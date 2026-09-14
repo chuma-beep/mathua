@@ -186,7 +186,7 @@ export default function ProfilePage() {
           </div>
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
-            <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks, and mastery. Your activity heatmap will appear here once you start practicing.</p>
+            <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks and mastery. Your activity heatmap will appear here once you start practicing.</p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
               <Link href="/login" className="w-full sm:w-auto border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Sign in</Link>
               <Link href="/session" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
@@ -198,7 +198,7 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                   <div className="font-mono text-xs text-mathua-blue mb-1">1. Take diagnostic test</div>
-                  <p className="font-mono text-[11px] text-mathua-secondary">Finds your knowledge frontier</p>
+                  <p className="font-mono text-[11px] text-mathua-secondary">Finds your starting point</p>
                   <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
                 </div>
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
@@ -229,7 +229,7 @@ export default function ProfilePage() {
                 <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Recommended</span>
                 <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">Take a diagnostic to get a recommendation on where to start</span>
               </div>
-              <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">Diagnostic test · finds your knowledge frontier</p>
+              <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">Diagnostic test · finds your starting point</p>
             </div>
             <Link href="/onboard" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Start diagnostic test →</Link>
           </section>
@@ -310,7 +310,7 @@ export default function ProfilePage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                 <div className="font-mono text-xs text-mathua-blue mb-1">1. Take diagnostic test</div>
-                <p className="font-mono text-[11px] text-mathua-secondary">Finds your knowledge frontier</p>
+                <p className="font-mono text-[11px] text-mathua-secondary">Finds your starting point</p>
                 <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
               </div>
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
@@ -351,7 +351,7 @@ export default function ProfilePage() {
               </span>
             </div>
             <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">
-              Diagnostic test · finds your knowledge frontier
+              Diagnostic test · finds your starting point
             </p>
           </div>
           <Link

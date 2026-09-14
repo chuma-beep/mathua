@@ -120,7 +120,7 @@ function passwordIssues(pw: string): string[] {
 function usernameIssues(username: string): string | null {
   const u = username.trim().toLowerCase()
   if (u.length < 3 || [...u].length > 20) return 'Username must be 3-20 characters'
-  if (!/^[a-z0-9_.]+$/.test(u)) return 'Username may only contain letters, numbers, underscore, and dot'
+  if (!/^[a-z0-9_.]+$/.test(u)) return 'Username may only contain letters, numbers, underscore and dot'
   return null
 }
 

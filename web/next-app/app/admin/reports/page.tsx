@@ -122,7 +122,7 @@ export default function AdminReportsPage() {
       <main className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-16">
         <h1 className="font-serif text-2xl text-mathua-primary">Content reports</h1>
         <p className="mt-1 font-mono text-xs text-mathua-muted">
-          User complaints about questions, explanations, lessons, and diagrams.
+          User complaints about questions, explanations, lessons and diagrams.
         </p>
 
         {!session ? (

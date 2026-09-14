@@ -38,7 +38,7 @@ export default function NotFound() {
         </h2>
         <p className="mt-3 max-w-md font-mono text-sm leading-relaxed text-mathua-muted">
           The concept you requested isn&apos;t in the graph: it may have been moved,
-          renamed, or never existed in this domain.
+          renamed or never existed in this domain.
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-3">
