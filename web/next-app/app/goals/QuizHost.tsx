@@ -315,7 +315,7 @@ export default function QuizHost() {
                   type="button"
                   onClick={() => { void submitQuizAnswerFn(true) }}
                   disabled={loading}
-                  className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary underline underline-offset-2 disabled:opacity-50"
+                  className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-red underline underline-offset-2 disabled:opacity-50"
                 >
                   I don&apos;t know
                 </button>
