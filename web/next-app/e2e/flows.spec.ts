@@ -170,3 +170,33 @@ test('share link: settings enable → copyable URL → public share page', async
   await expect(page.getByText("Tester's progress").first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('Read-only report').first()).toBeVisible()
 })
+
+test('progress card: rows with corrections, missed filter, source filter', async ({ page }) => {
+  const rows = [
+    { session_id: 's1', student_id: 's1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', answer: '5', expected: '4', correct: false, elapsed_seconds: 3, timestamp: '2026-09-10T10:00:00Z', question: '2 + 3 = ?', source: 'diagnostic', explanation: '2 + 3 = 5' },
+    { session_id: 's1', student_id: 's1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', answer: '5', expected: '5', correct: true, elapsed_seconds: 2, timestamp: '2026-09-11T10:00:00Z', question: '2 + 3 = ?', source: 'quiz', explanation: '' },
+  ]
+  await page.route('**/api/attempts**', route => {
+    const url = new URL(route.request().url())
+    let out = rows
+    if (url.searchParams.get('incorrect_only') === '1') out = out.filter(r => !r.correct)
+    const source = url.searchParams.get('source')
+    if (source) out = out.filter(r => r.source === source)
+    return route.fulfill({ json: { attempts: out, total: out.length } })
+  })
+  await page.addInitScript(() => {
+    localStorage.setItem('mathua_token', 'fake-token')
+    localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: 1, current_streak: 1, level: 'Novice', diagnostic_completed: true }))
+  })
+  await page.goto('/progress-card')
+  await expect(page.getByText('Answered questions').first()).toBeVisible({ timeout: 30_000 })
+  // Default: missed only.
+  await expect(page.getByText('Showing 1 of 1').first()).toBeVisible()
+  await expect(page.getByText('2 + 3 = ?').first()).toBeVisible()
+  await expect(page.getByText(/Correct: 4/).first()).toBeVisible()
+  // Switch to all + filter by quiz source.
+  await page.getByRole('button', { name: 'All', exact: true }).click()
+  await expect(page.getByText('Showing 2 of 2').first()).toBeVisible()
+  await page.getByRole('button', { name: 'quiz' }).click()
+  await expect(page.getByText('Showing 1 of 1').first()).toBeVisible()
+})

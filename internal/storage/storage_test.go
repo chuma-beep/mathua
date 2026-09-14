@@ -241,6 +241,59 @@ func TestGetSessionAttempts_Empty(t *testing.T) {
 	}
 }
 
+// Mistakes transcript: question/source/explanation survive the round trip;
+// pre-migration rows (recorded without them) come back empty, never failing.
+func TestRecordAttempt_WithContent(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("judy")
+	sess, _ := store.CreateSession(st.ID)
+
+	full := AttemptEntry{
+		SessionID:      sess.ID,
+		StudentID:      st.ID,
+		ConceptID:      "arith.add.single",
+		Answer:         "13",
+		Expected:       "12",
+		Correct:        false,
+		ElapsedSeconds: 4.0,
+		Timestamp:      time.Now().UTC(),
+		Question:       "What is 5 + 7?",
+		Source:         "diagnostic",
+		Explanation:    "5 + 7 = 12",
+	}
+	if err := store.RecordAttempt(full); err != nil {
+		t.Fatalf("record attempt: %v", err)
+	}
+	legacy := AttemptEntry{
+		SessionID: sess.ID, StudentID: st.ID, ConceptID: "arith.add.single",
+		Answer: "12", Expected: "12", Correct: true,
+		ElapsedSeconds: 2.0, Timestamp: time.Now().UTC(),
+	}
+	if err := store.RecordAttempt(legacy); err != nil {
+		t.Fatalf("record legacy attempt: %v", err)
+	}
+
+	attempts, err := store.GetAttemptsForStudent(st.ID)
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(attempts) != 2 {
+		t.Fatalf("expected 2 attempts, got %d", len(attempts))
+	}
+	var got *AttemptEntry
+	for i := range attempts {
+		if attempts[i].Answer == "13" {
+			got = &attempts[i]
+		}
+	}
+	if got == nil {
+		t.Fatal("missing recorded attempt")
+	}
+	if got.Question != "What is 5 + 7?" || got.Source != "diagnostic" || got.Explanation != "5 + 7 = 12" {
+		t.Errorf("content fields lost: %+v", got)
+	}
+}
+
 // Leaderboard
 
 func TestGetWeeklyLeaderboard(t *testing.T) {

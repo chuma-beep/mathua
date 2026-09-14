@@ -852,6 +852,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		conceptID      string
 		expectedAnswer string
 		explanation    string
+		questionText   string
 		requiredStreak int
 		timeThreshold  float64
 		isReview       bool
@@ -859,6 +860,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		conceptID:      as.conceptID,
 		expectedAnswer: as.expectedAnswer,
 		explanation:    as.explanation,
+		questionText:   as.questionText,
 		requiredStreak: as.requiredStreak,
 		timeThreshold:  as.timeThreshold,
 		isReview:       as.isReview,
@@ -990,6 +992,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		Correct:        gr.Correct,
 		ElapsedSeconds: elapsedSeconds,
 		Timestamp:      nowUTC(),
+		Question:       sessionFields.questionText,
+		Source:         sourceForTask(sessionFields.isReview),
+		Explanation:    sessionFields.explanation,
 	}); err != nil {
 		return nil, fmt.Errorf("record attempt: %w", err)
 	}
@@ -1085,30 +1090,30 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 // H1b: if a server-side expected was stored via SetStudyExpected (practice
 // generation), it is used instead of the client-supplied expected to prevent
 // trivial cheat (client sending expected==answer).
-func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
+func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
 	taskType := TaskLesson
 	if strings.HasSuffix(conceptID, ".word") {
 		taskType = TaskMultistep
 	}
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true, false)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true, false, questionText)
 }
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
 // progress update, and exactly one AddXP — DB and response agree by
 // construction. Unlike SubmitStudyAnswer it never consults studyExpected:
 // the quiz expected answer comes from the quiz session.
-func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false)
+func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText)
 }
 
 // SubmitQuizDontKnow records an admitted unknown ("I don't know" button) as
 // a quiz miss: weakness up, streak reset, remedial queued — but no XP and no
 // rushing penalty (an instant admit is honesty, not rushing).
-func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true)
+func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText)
 }
 
-func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool, dontKnow bool) (*AnswerResult, error) {
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool, dontKnow bool, questionText string) (*AnswerResult, error) {
 	if e.dag.Concept(conceptID) == nil {
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
@@ -1248,6 +1253,11 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		return nil, fmt.Errorf("save progress: %w", err)
 	}
 	e.PropagateWeakness(studentID)
+	explanation := ""
+	if !gr.Correct && c != nil {
+		// Prefer generator explanation; fallback to grader feedback.
+		explanation = gr.Feedback
+	}
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
 		SessionID:      sessionID,
 		StudentID:      studentID,
@@ -1257,16 +1267,11 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		Correct:        gr.Correct,
 		ElapsedSeconds: elapsedSeconds,
 		Timestamp:      nowUTC(),
+		Question:       questionText,
+		Source:         sourceForTaskType(taskType),
+		Explanation:    explanation,
 	}); err != nil {
 		return nil, fmt.Errorf("record attempt: %w", err)
-	}
-	explanation := ""
-	if !gr.Correct {
-		// Prefer generator explanation; fallback to grader feedback.
-		if c != nil {
-			// Try to fetch explanation via expected (already passed) — keep grader feedback as explanation.
-			explanation = gr.Feedback
-		}
 	}
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, timeThreshold, progress.Streak, taskType)
 
@@ -1318,6 +1323,26 @@ const (
 	TaskMultistep = "multistep"
 	TaskQuiz      = "quiz"
 )
+
+// sourceForTask maps the study flow to the mistakes-report source bucket.
+func sourceForTask(isReview bool) string {
+	if isReview {
+		return "review"
+	}
+	return "practice"
+}
+
+// sourceForTaskType maps MA task types to the mistakes-report source bucket.
+func sourceForTaskType(taskType string) string {
+	switch taskType {
+	case TaskQuiz:
+		return "quiz"
+	case TaskReview:
+		return "review"
+	default:
+		return "practice"
+	}
+}
 
 // taskBaseXP maps MA task types to base XP (10/5/15/20).
 func taskBaseXP(taskType string) int {
@@ -1508,6 +1533,7 @@ type ShareReport struct {
 	Activity  []storage.DailyActivity             `json:"activity"`
 	Progress  map[string]*storage.ConceptProgress `json:"progress"`
 	Weakness  map[string]float64                  `json:"weakness"`
+	Attempts  []storage.AttemptEntry              `json:"attempts"`
 }
 
 // EnableShare mints a read-only share token for the student.
@@ -1546,6 +1572,18 @@ func (e *Engine) GetShareReport(token string) (*ShareReport, error) {
 	if err != nil {
 		progress = map[string]*storage.ConceptProgress{}
 	}
+	attempts, err := e.repo.GetAttemptsForStudent(st.ID)
+	if err != nil {
+		attempts = []storage.AttemptEntry{}
+	}
+	// Newest first, capped: the share payload stays small while the
+	// mistakes history itself is uncapped server-side.
+	sort.SliceStable(attempts, func(i, j int) bool {
+		return attempts[i].Timestamp.After(attempts[j].Timestamp)
+	})
+	if len(attempts) > 500 {
+		attempts = attempts[:500]
+	}
 	weakAll := e.weaknessMapFromProgress(progress)
 	filteredWeak := make(map[string]float64)
 	for id, w := range weakAll {
@@ -1561,6 +1599,7 @@ func (e *Engine) GetShareReport(token string) (*ShareReport, error) {
 		Activity:  activity,
 		Progress:  progress,
 		Weakness:  filteredWeak,
+		Attempts:  attempts,
 	}, nil
 }
 

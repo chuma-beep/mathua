@@ -7,7 +7,9 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -426,6 +428,43 @@ func TestGoalDiagnosticRetryUnavailableForUnknown(t *testing.T) {
 	}
 }
 
+// Diagnostic answers persist attempts with question + source for the
+// mistakes transcript (best-effort recording inside the answer handler).
+func TestGoalDiagnosticAnswer_RecordsAttempt(t *testing.T) {
+	s, mux := twoConceptServer(t)
+
+	code, start := postJSON(t, mux, "/api/goal/diagnostic",
+		`{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start: %d %v", code, start)
+	}
+	sid, _ := start["session_id"].(string)
+	studentID, _ := start["student_id"].(string)
+	c1, _ := start["concept_id"].(string)
+	if sid == "" || studentID == "" || c1 == "" {
+		t.Fatalf("expected session + student + concept, got %v", start)
+	}
+	code, ans := postJSON(t, mux, "/api/goal/diagnostic/answer",
+		`{"session_id":"`+sid+`","concept_id":"`+c1+`","answer":"4","elapsed":5.0}`)
+	if code != 200 || ans["done"] == true {
+		t.Fatalf("answer: %d %v", code, ans)
+	}
+	rows, err := s.repo.GetAttemptsForStudent(studentID)
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(rows) != 1 {
+		t.Fatalf("expected 1 recorded attempt, got %d", len(rows))
+	}
+	got := rows[0]
+	if got.Question == "" || got.Source != "diagnostic" {
+		t.Errorf("expected question+source recorded, got %+v", got)
+	}
+	if !got.Correct || got.Answer != "4" || got.Expected != "4" {
+		t.Errorf("expected correct 4==4 record, got %+v", got)
+	}
+}
+
 // Admitted unknowns record clean negative evidence: incorrect, flagged,
 // progressed — and exempt from the too-quick floor (an instant admit is
 // honesty, not spam).
@@ -508,5 +547,93 @@ func TestQuizDontKnow(t *testing.T) {
 	defer qsess.Unlock()
 	if len(qsess.Attempts) != 1 || qsess.Attempts[0].Correct {
 		t.Errorf("expected 1 recorded miss, got %+v", qsess.Attempts)
+	}
+}
+
+// GET /api/attempts is self-scoped with source/correctness filters.
+func TestAttemptsEndpoint(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	token, st, err := authSvc.Signup("Ada", "ada", "Engine!n1")
+	if err != nil || token == "" || st == nil {
+		t.Fatalf("signup: %v", err)
+	}
+	other, _ := store.CreateStudent("mallory")
+	sessA, _ := store.CreateSession(st.ID)
+	sessB, _ := store.CreateSession(other.ID)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	seed := []storage.AttemptEntry{
+		{SessionID: sessA.ID, StudentID: st.ID, ConceptID: "a", Answer: "5", Expected: "4", Correct: false, Question: "2+2=?", Source: "diagnostic", Explanation: "2+2=4"},
+		{SessionID: sessA.ID, StudentID: st.ID, ConceptID: "a", Answer: "4", Expected: "4", Correct: true, Question: "2+2=?", Source: "quiz"},
+		{SessionID: sessB.ID, StudentID: other.ID, ConceptID: "a", Answer: "x", Expected: "4", Correct: false, Question: "2+2=?", Source: "practice"},
+	}
+	for _, e := range seed {
+		e.Timestamp = time.Now().UTC()
+		if err := store.RecordAttempt(e); err != nil {
+			t.Fatalf("seed: %v", err)
+		}
+	}
+	get := func(path, tok string) (int, map[string]interface{}) {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("GET", path, nil)
+		if tok != "" {
+			req.Header.Set("Authorization", "Bearer "+tok)
+		}
+		mux.ServeHTTP(rec, req)
+		var res map[string]interface{}
+		_ = json.Unmarshal(rec.Body.Bytes(), &res)
+		return rec.Code, res
+	}
+
+	// Anonymous → 401.
+	if code, _ := get("/api/attempts", ""); code != 401 {
+		t.Fatalf("expected 401 anonymous, got %d", code)
+	}
+	// Self sees own two only (never Mallory's).
+	code, res := get("/api/attempts", token)
+	if code != 200 {
+		t.Fatalf("attempts: %d %v", code, res)
+	}
+	if res["total"] != float64(2) {
+		t.Fatalf("expected own 2 attempts, got %v", res)
+	}
+	rows := res["attempts"].([]interface{})
+	first := rows[0].(map[string]interface{})
+	if first["question"] != "2+2=?" || first["source"] == "" {
+		t.Errorf("expected question+source passthrough, got %v", first)
+	}
+	if first["concept_name"] != "A" {
+		t.Errorf("expected concept label, got %v", first)
+	}
+	// Incorrect-only + source filters compose.
+	_, res = get("/api/attempts?incorrect_only=1", token)
+	if res["total"] != float64(1) {
+		t.Errorf("expected 1 incorrect, got %v", res)
+	}
+	_, res = get("/api/attempts?source=quiz", token)
+	if res["total"] != float64(1) {
+		t.Errorf("expected 1 quiz attempt, got %v", res)
+	}
+	_, res = get("/api/attempts?source=practice", token)
+	if res["total"] != float64(0) {
+		t.Errorf("expected 0 practice attempts, got %v", res)
+	}
+	// Pagination: limit + offset.
+	_, res = get("/api/attempts?limit=1&offset=1", token)
+	if res["total"] != float64(2) {
+		t.Errorf("expected total 2 with pagination, got %v", res)
+	}
+	if len(res["attempts"].([]interface{})) != 1 {
+		t.Errorf("expected 1 paged row, got %v", res)
 	}
 }

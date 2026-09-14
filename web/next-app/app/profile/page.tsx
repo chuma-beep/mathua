@@ -416,6 +416,11 @@ export default function ProfilePage() {
 
         <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
           <StrugglesSection weaknesses={weaknesses} />
+          <div className="mt-3 text-center">
+            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
+              View progress card →
+            </Link>
+          </div>
         </section>
 
         {/* Efficacy — first-pass / second-pass instrumentation */}
