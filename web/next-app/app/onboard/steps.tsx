@@ -241,7 +241,7 @@ export function DiagnosticStep({
               <button
                 type="button"
                 onClick={onDontKnow}
-                className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-primary underline underline-offset-2"
+                className="shrink-0 font-mono text-[11px] text-mathua-muted hover:text-mathua-red underline underline-offset-2"
               >
                 I don&apos;t know
               </button>
