@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
-import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
 import SymbolPalette from '../../components/SymbolPalette'
@@ -48,6 +47,9 @@ export default function DiagnosticHost({
 
   const [question, setQuestion] = useState('')
   const [conceptName, setConceptName] = useState('')
+  // Next question staged from the submit response — revealed by goNext(),
+  // never fetched. Cleared on advance, so double-press is a no-op.
+  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string } | null>(null)
   const [questionCount, setQuestionCount] = useState(0)
   const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
@@ -85,6 +87,7 @@ export default function DiagnosticHost({
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
+      pendingNext.current = null
     } catch {
       toast.error("Something went wrong, but we're working on it.")
       onResumeExpired()
@@ -121,6 +124,7 @@ export default function DiagnosticHost({
       }
       setLastResult(null)
       setAnswerInput('')
+      pendingNext.current = null
     } catch {
       try {
         sessionStorage.removeItem(GOALS_DIAG_KEY)
@@ -139,6 +143,12 @@ export default function DiagnosticHost({
     else void start()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Keyboard flow: the answer form unmounts while feedback shows, so the
+  // cursor is restored here — whenever a fresh question is revealed.
+  useEffect(() => {
+    if (!lastResult && question) goalsInputRef.current?.focus()
+  }, [lastResult, question])
 
   async function submitAnswer() {
     if (!answerInput.trim()) return
@@ -175,19 +185,29 @@ export default function DiagnosticHost({
         return
       }
 
-      setTimeout(() => {
-        setQuestion(data.question || '')
-        conceptId.current = data.concept_id || ''
-        setConceptName(data.concept_name || '')
-        setQuestionCount(prev => prev + 1)
-        setLastResult(null)
-        setAnswerInput('')
-        setLoading(false)
-      }, 1200)
+      // Manual advance: stage the prefetched next question, reveal on Next.
+      pendingNext.current = {
+        question: data.question || '',
+        conceptId: data.concept_id || '',
+        conceptName: data.concept_name || '',
+      }
+      setLoading(false)
     } catch {
       alert('Failed to submit answer.')
       setLoading(false)
     }
+  }
+
+  function goNext() {
+    const staged = pendingNext.current
+    if (!staged) return
+    pendingNext.current = null
+    setQuestion(staged.question)
+    conceptId.current = staged.conceptId
+    setConceptName(staged.conceptName)
+    setQuestionCount(prev => prev + 1)
+    setLastResult(null)
+    setAnswerInput('')
   }
 
   return (
@@ -266,10 +286,22 @@ export default function DiagnosticHost({
                 {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
               </p>
               <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
-              {loading && <p className="text-mathua-muted text-xs mt-2"><Loading inline size={11} /> Loading next question…</p>}
             </div>
           )}
         </div>
+
+        {lastResult && (
+          <div className="mb-6 text-center">
+            <button
+              type="button"
+              autoFocus
+              onClick={goNext}
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+            >
+              Next →
+            </button>
+          </div>
+        )}
       </div>
     </>
   )

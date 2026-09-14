@@ -39,6 +39,9 @@ export default function OnboardPage() {
   const onboardInputRef = useRef<HTMLInputElement>(null)
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
+  // Next question staged from the submit response — revealed by goNext(),
+  // never fetched. Cleared on advance, so double-press is a no-op.
+  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string } | null>(null)
   const questionShownAt = useRef<number | null>(null)
   const [conceptName, setConceptName] = useState('')
   const [questionCount, setQuestionCount] = useState(0)
@@ -112,6 +115,7 @@ export default function OnboardPage() {
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
+      pendingNext.current = null
       setStep('diagnostic')
     } catch {
       toast.error("Something went wrong, but we're working on it.")
@@ -151,6 +155,7 @@ export default function OnboardPage() {
       }
       setLastResult(null)
       setAnswerInput('')
+      pendingNext.current = null
       setStep('diagnostic')
     } catch {
       try {
@@ -194,21 +199,38 @@ export default function OnboardPage() {
         return
       }
 
-      setTimeout(() => {
-        setQuestion(data.question || '')
-        conceptId.current = data.concept_id || ''
-        questionShownAt.current = Date.now()
-        setConceptName(data.concept_name || '')
-        setQuestionCount(prev => prev + 1)
-        setLastResult(null)
-        setAnswerInput('')
-        setLoading(false)
-      }, 1200)
+      // Manual advance: stage the prefetched next question, reveal on Next.
+      // The staged question stays hidden, so answer timing starts at reveal.
+      pendingNext.current = {
+        question: data.question || '',
+        conceptId: data.concept_id || '',
+        conceptName: data.concept_name || '',
+      }
+      setLoading(false)
     } catch {
       alert('Failed to submit answer.')
       setLoading(false)
     }
   }
+
+  function goNext() {
+    const staged = pendingNext.current
+    if (!staged) return
+    pendingNext.current = null
+    setQuestion(staged.question)
+    conceptId.current = staged.conceptId
+    questionShownAt.current = Date.now()
+    setConceptName(staged.conceptName)
+    setQuestionCount(prev => prev + 1)
+    setLastResult(null)
+    setAnswerInput('')
+  }
+
+  // Keyboard flow: put the cursor back in the answer box whenever a fresh
+  // question is revealed (start, resume, or manual Next).
+  useEffect(() => {
+    if (step === 'diagnostic' && !lastResult && question) onboardInputRef.current?.focus()
+  }, [step, lastResult, question])
 
   function finishOnboarding() {
     const user = getUserInfo()
@@ -259,6 +281,7 @@ export default function OnboardPage() {
               sessionId={sessionId.current}
               onInputChange={setAnswerInput}
               onSubmit={submitAnswer}
+              onNext={goNext}
             />
           )}
 

@@ -114,6 +114,7 @@ export function DiagnosticStep({
   sessionId,
   onInputChange,
   onSubmit,
+  onNext,
 }: {
   question: string
   conceptName: string
@@ -128,6 +129,7 @@ export function DiagnosticStep({
   sessionId: string
   onInputChange: (value: string) => void
   onSubmit: () => void
+  onNext: () => void
 }) {
   return (
     <>
@@ -182,9 +184,21 @@ export function DiagnosticStep({
         </div>
 
         {lastResult && (
-          <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
-            <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
-          </div>
+          <>
+            <div className={`bg-mathua-surface border rounded-none p-4 mb-4 text-center ${lastResult.correct ? 'border-mathua-green' : 'border-mathua-red'}`}>
+              <KatexContent className={lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}>{lastResult.feedback}</KatexContent>
+            </div>
+            <div className="mb-4 text-center">
+              <button
+                type="button"
+                autoFocus
+                onClick={onNext}
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              >
+                Next →
+              </button>
+            </div>
+          </>
         )}
 
         <div className="text-center text-mathua-muted text-xs font-mono">

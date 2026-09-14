@@ -37,6 +37,14 @@ export default function QuizHost() {
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
   const [quizRemedial, setQuizRemedial] = useState<string[]>([])
+  // Next question staged from the submit response — revealed by goNextQuiz(),
+  // never fetched. Cleared on advance, so double-press is a no-op.
+  const pendingQuizNext = useRef<{
+    question: string
+    conceptId: string
+    conceptName: string
+    timeLimit: number
+  } | null>(null)
 
   async function startQuiz() {
     setPhase('loading')
@@ -61,6 +69,7 @@ export default function QuizHost() {
       setQuizClosedBook(!!res.closed_book)
       setQuizQuestionsTotal(res.questions_total ?? 0)
       setQuizRemedial([])
+      pendingQuizNext.current = null
       setPhase('quiz')
     } catch {
       toast.error('Quiz failed to start — try again.')
@@ -79,6 +88,11 @@ export default function QuizHost() {
 
   // Per-question countdown for the timed closed-book quiz. Informational:
   // the engine grades over-time answers as slow, it never blocks submission.
+  // Keyboard flow: the answer form unmounts while feedback shows, so the
+  // cursor is restored here — whenever a fresh question is revealed.
+  useEffect(() => {
+    if (phase === 'quiz' && !quizLastResult && quizQuestion) quizInputRef.current?.focus()
+  }, [phase, quizLastResult, quizQuestion])
   useEffect(() => {
     if (phase !== 'quiz' || quizLastResult || quizTimeLimit <= 0) return
     const started = quizShownAt.current ?? Date.now()
@@ -110,22 +124,35 @@ export default function QuizHost() {
         }, 800)
         return
       }
-      setTimeout(() => {
-        setQuizQuestion(data.question || '')
-        quizConceptId.current = data.concept_id || ''
-        quizShownAt.current = Date.now()
-        setQuizConceptName(data.concept_name || '')
-        setQuizCount(prev => prev + 1)
-        setQuizLastResult(null)
-        setQuizAnswerInput('')
-        setQuizTimeLimit(data.time_limit_seconds ?? 0)
-        setQuizRemaining(data.time_limit_seconds ?? 0)
-        setLoading(false)
-      }, 1200)
+      // Manual advance: stage the prefetched next question, reveal on Next.
+      // The staged question stays hidden and the countdown starts at reveal,
+      // so reading feedback never burns question time.
+      pendingQuizNext.current = {
+        question: data.question || '',
+        conceptId: data.concept_id || '',
+        conceptName: data.concept_name || '',
+        timeLimit: data.time_limit_seconds ?? 0,
+      }
+      setLoading(false)
     } catch {
       toast.error('Failed to submit quiz answer.')
       setLoading(false)
     }
+  }
+
+  function goNextQuiz() {
+    const staged = pendingQuizNext.current
+    if (!staged) return
+    pendingQuizNext.current = null
+    setQuizQuestion(staged.question)
+    quizConceptId.current = staged.conceptId
+    quizShownAt.current = Date.now()
+    setQuizConceptName(staged.conceptName)
+    setQuizCount(prev => prev + 1)
+    setQuizLastResult(null)
+    setQuizAnswerInput('')
+    setQuizTimeLimit(staged.timeLimit)
+    setQuizRemaining(staged.timeLimit)
   }
 
   if (phase === 'loading') {
@@ -220,10 +247,22 @@ export default function QuizHost() {
             <div className="animate-fadeIn text-center">
               <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
               <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
-              {loading && <p className="text-mathua-muted text-xs mt-2"><Loading inline size={11} /> Loading next…</p>}
             </div>
           )}
         </div>
+
+        {quizLastResult && (
+          <div className="mb-6 text-center">
+            <button
+              type="button"
+              autoFocus
+              onClick={goNextQuiz}
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+            >
+              Next →
+            </button>
+          </div>
+        )}
       </div>
     </>
   )
