@@ -8,7 +8,6 @@ interface GraphMeta {
   connectionCount: number
   domainCount: number
   domainCounts: Record<string, number>
-  generatedAt: string
   layoutVersion: number
 }
 
