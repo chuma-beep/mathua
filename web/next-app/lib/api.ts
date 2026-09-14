@@ -274,6 +274,20 @@ export function isTooQuickError(err: unknown): boolean {
 }
 
 // oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
+export function isNotFoundError(err: unknown): boolean {
+  return err instanceof Error && (err as { status?: number }).status === 404
+}
+
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
+export function getErrorStatus(err: unknown): number | undefined {
+  if (err instanceof Error) {
+    const s = (err as { status?: number }).status
+    if (typeof s === 'number') return s
+  }
+  return undefined
+}
+
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
 export function getErrorMessage(err: unknown): string {
   if (err instanceof Error) {
     const e = err as { serverMessage?: string }
@@ -549,6 +563,7 @@ export interface GoalDiagStartRes {
   concept_id?: string
   concept_name?: string
   question?: string
+  grading_type?: string
   done?: boolean
   progress?: DiagnosticProgress
 }
@@ -560,6 +575,7 @@ export interface GoalDiagAnswerRes {
   concept_id?: string
   concept_name?: string
   question?: string
+  grading_type?: string
   progress?: DiagnosticProgress
 }
 
@@ -597,7 +613,7 @@ export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDia
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ concept_ids: conceptIds }),
 	})
-	if (!res.ok) throw new Error(`Goal diagnostic start failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Goal diagnostic start failed: ${res.status}`)
 	return res.json()
 }
 
@@ -607,7 +623,7 @@ export async function startGoalDiagnosticName(name: string, conceptIds: string[]
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ name, concept_ids: conceptIds }),
 	})
-	if (!res.ok) throw new Error(`Goal diagnostic start failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Goal diagnostic start failed: ${res.status}`)
 	return res.json()
 }
 
@@ -622,7 +638,7 @@ export async function submitGoalAnswer(
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ session_id: sessionId, concept_id: conceptId, answer, elapsed }),
 	})
-	if (!res.ok) throw new Error(`Goal answer failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Goal answer failed: ${res.status}`)
 	return res.json()
 }
 
@@ -630,7 +646,19 @@ export async function resumeGoalDiagnostic(sessionId: string): Promise<GoalDiagA
 	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/resume?session_id=${encodeURIComponent(sessionId)}`, {
 		headers: { ...getAuthHeaders() },
 	})
-	if (!res.ok) throw new Error(`Goal resume failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Goal resume failed: ${res.status}`)
+	return res.json()
+}
+
+// Skip the pending diagnostic question: settles the concept with no evidence
+// recorded and serves the next question. Escape hatch for unanswerable items.
+export async function skipGoalQuestion(sessionId: string): Promise<GoalDiagAnswerRes> {
+	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic/skip`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ session_id: sessionId }),
+	})
+	if (!res.ok) await throwWithResponse(res, `Goal skip failed: ${res.status}`)
 	return res.json()
 }
 
@@ -640,7 +668,7 @@ export async function getGoalPlan(sessionId: string): Promise<GoalPlanRes> {
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ session_id: sessionId }),
 	})
-	if (!res.ok) throw new Error(`Goal plan failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Goal plan failed: ${res.status}`)
 	return res.json()
 }
 
@@ -1039,23 +1067,25 @@ export interface QuizStartRes {
 	session_id: string
 	student_id?: string
 	concept_id?: string
-	concept_name?: string
-	question?: string
-	done?: boolean
-	// Timed closed-book contract (Batch 1 backend).
-	closed_book?: boolean
-	time_limit_seconds?: number
-	questions_total?: number
+  concept_name?: string
+  question?: string
+  done?: boolean
+  grading_type?: string
+  // Timed closed-book contract (Batch 1 backend).
+  closed_book?: boolean
+  time_limit_seconds?: number
+  questions_total?: number
 }
 export interface QuizAnswerRes {
-	done: boolean
-	correct?: boolean
-	feedback?: string
-	xp?: number
-	new_status?: string
-	concept_id?: string
-	concept_name?: string
-	question?: string
+  done: boolean
+  correct?: boolean
+  feedback?: string
+  xp?: number
+  new_status?: string
+  concept_id?: string
+  concept_name?: string
+  question?: string
+  grading_type?: string
 	// Batch 1: immediate remedial concepts + retake flag.
 	remedial?: string[]
 	retake_available?: boolean
@@ -1079,7 +1109,7 @@ export async function startQuizSession(): Promise<QuizStartRes> {
 		headers,
 		body: JSON.stringify(body),
 	})
-	if (!res.ok) throw new Error(`Quiz session start failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Quiz session start failed: ${res.status}`)
 	return res.json()
 }
 interface QuizAnswerBody {
@@ -1102,6 +1132,27 @@ export async function submitQuizAnswer(sessionId: string, conceptId: string, ans
 		body: JSON.stringify(body),
 	})
 	if (!res.ok) await throwWithResponse(res, `Quiz answer failed: ${res.status}`)
+	return res.json()
+}
+
+interface QuizSkipBody {
+	session_id: string
+	student_id?: string
+}
+
+// Skip the pending quiz question: advances with no grade, no XP, no remedial.
+export async function skipQuizQuestion(sessionId: string): Promise<QuizAnswerRes> {
+	const { getGuestId } = await import('./auth')
+	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
+	const body: QuizSkipBody = { session_id: sessionId }
+	const guestId = getGuestId()
+	if (guestId && !('Authorization' in headers)) body.student_id = guestId
+	const res = await authedFetch(`${API_BASE}/api/quiz/skip`, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) await throwWithResponse(res, `Quiz skip failed: ${res.status}`)
 	return res.json()
 }
 

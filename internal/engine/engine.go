@@ -1576,10 +1576,15 @@ func (e *Engine) SubmitDiagnosticAnswerTimed(s *diagnostic.Session, conceptID st
 	e.diag.RecordAnswerTimed(s, conceptID, correct, elapsed, e.accommodatedThreshold(studentID, timeThresh))
 }
 
+// SettleDiagnosticCurrent settles the session's pending question without
+// recording an answer (skip escape hatch). Returns the settled concept ID.
+func (e *Engine) SettleDiagnosticCurrent(s *diagnostic.Session) string {
+	return e.diag.SettleCurrent(s)
+}
+
 func (e *Engine) IsDiagnosticComplete(s *diagnostic.Session) bool {
 	return e.diag.IsComplete(s)
 }
-
 func (e *Engine) DiagnosticProgress(s *diagnostic.Session) diagnostic.Progress {
 	return e.diag.Progress(s)
 }

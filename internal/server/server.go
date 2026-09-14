@@ -238,6 +238,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
 	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart)))))
 	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer)))))
+	mux.HandleFunc("/api/goal/diagnostic/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticSkip)))))
 	mux.HandleFunc("/api/goal/diagnostic/resume", logRequest(cors(s.optionalAuthMiddleware(s.handleGoalDiagnosticResume))))
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalPlan)))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
@@ -268,6 +269,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.handleAdminLogout)))
 	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
+	mux.HandleFunc("/api/quiz/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSkip)))))
 	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
@@ -813,6 +815,16 @@ func (s *Server) handleGoal(w http.ResponseWriter, r *http.Request) {
 // POST /api/goal/diagnostic
 // Body (auth): { "concept_ids": [...] }
 // Body (no-auth): { "name": "...", "concept_ids": [...] }
+// gradingTypeOf returns the DAG grading type for a concept ("" when unknown).
+// Served alongside every question so clients can state the expected answer
+// form up front instead of letting learners guess it.
+func (s *Server) gradingTypeOf(cid string) string {
+	if c := s.eng.GetDAG().Concept(cid); c != nil {
+		return c.GradingType
+	}
+	return ""
+}
+
 func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -870,6 +882,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		"concept_id":   question.ConceptID,
 		"concept_name": question.ConceptName,
 		"question":     question.Question,
+		"grading_type": s.gradingTypeOf(question.ConceptID),
 		"progress":     prog,
 	})
 }
@@ -1000,6 +1013,103 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		"concept_id":   cid,
 		"concept_name": name,
 		"question":     nextProb.Question,
+		"grading_type": s.gradingTypeOf(cid),
+		"progress":     prog,
+	})
+}
+
+// POST /api/goal/diagnostic/skip
+// Body: { "session_id": "..." }
+// Escape hatch for questions that can't be answered (bad content, repeated
+// submit failures). Settles the pending concept with no evidence recorded —
+// settling (not re-asking) is what moves CAT past a poisoned transition,
+// since NextQuestion is deterministic on session state.
+func (s *Server) handleGoalDiagnosticSkip(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string `json:"session_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	s.mu.Lock()
+	session := s.diagSessions[req.SessionID]
+	s.mu.Unlock()
+	if session == nil {
+		writeError(w, "diagnostic session not found", 404)
+		return
+	}
+	// If caller is authenticated, verify session ownership
+	if authStudentID, _ := r.Context().Value(authStudentKey{}).(string); authStudentID != "" {
+		session.Lock()
+		owner := session.StudentID
+		session.Unlock()
+		if owner != "" && owner != authStudentID {
+			writeError(w, "diagnostic session does not belong to authenticated user", 403)
+			return
+		}
+	}
+	// Sliding expiry: skipping keeps a long diagnostic alive.
+	s.mu.Lock()
+	s.diagCreated[req.SessionID] = time.Now()
+	s.mu.Unlock()
+
+	if s.eng.SettleDiagnosticCurrent(session) == "" {
+		// Nothing pending — session is already done.
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  false,
+			"feedback": "diagnostic session already complete",
+		})
+		return
+	}
+	if s.eng.IsDiagnosticComplete(session) {
+		report := s.eng.DiagnosticReport(session)
+		prog := s.eng.DiagnosticProgress(session)
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  false,
+			"feedback": "Skipped — no evidence recorded.",
+			"report":   report,
+			"progress": prog,
+		})
+		return
+	}
+	nextProb, cid, err := s.eng.NextDiagnosticQuestion(session)
+	if err != nil {
+		writeError(w, "failed to get next question", 500)
+		return
+	}
+	if cid == "" || nextProb == nil {
+		report := s.eng.DiagnosticReport(session)
+		prog := s.eng.DiagnosticProgress(session)
+		writeJSON(w, map[string]interface{}{
+			"done":     true,
+			"correct":  false,
+			"feedback": "Skipped — no evidence recorded.",
+			"report":   report,
+			"progress": prog,
+		})
+		return
+	}
+	c := s.eng.GetDAG().Concept(cid)
+	name := cid
+	if c != nil {
+		name = c.Label
+	}
+	prog := s.eng.DiagnosticProgress(session)
+	writeJSON(w, map[string]interface{}{
+		"done":         false,
+		"correct":      false,
+		"feedback":     "Skipped — no evidence recorded.",
+		"concept_id":   cid,
+		"concept_name": name,
+		"question":     nextProb.Question,
+		"grading_type": s.gradingTypeOf(cid),
 		"progress":     prog,
 	})
 }
@@ -1078,6 +1188,7 @@ func (s *Server) handleGoalDiagnosticResume(w http.ResponseWriter, r *http.Reque
 		"concept_id":   cid,
 		"concept_name": name,
 		"question":     prob.Question,
+		"grading_type": s.gradingTypeOf(cid),
 		"progress":     s.eng.DiagnosticProgress(session),
 	})
 }
@@ -2157,6 +2268,7 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 		"concept_id":   cid,
 		"concept_name": name,
 		"question":     prob.Question,
+		"grading_type": s.gradingTypeOf(cid),
 		"done":         false,
 		// Batch 1: timed closed-book contract — per-question limit
 		// (accommodated), total count, no-lesson closed book.
@@ -2295,6 +2407,99 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		"concept_id":         cid,
 		"concept_name":       name2,
 		"question":           prob.Question,
+		"grading_type":       s.gradingTypeOf(cid),
+		"closed_book":        true,
+		"time_limit_seconds": s.eng.TimeLimitFor(studentID, cid),
+		"questions_total":    len(sess.Order),
+	})
+}
+
+// POST /api/quiz/skip — escape hatch for unanswerable quiz questions.
+// Body: { session_id, concept_id?, student_id? }
+// Advances past the pending question with no grade, no XP, no remedial.
+// The 150 XP gate baseline resets only if at least one answer was recorded,
+// so a fully-skipped quiz can't dodge the gate.
+func (s *Server) handleQuizSkip(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	var req struct {
+		SessionID string `json:"session_id"`
+		ConceptID string `json:"concept_id"`
+		StudentID string `json:"student_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.SessionID == "" {
+		writeError(w, "session_id required", 400)
+		return
+	}
+	s.mu.Lock()
+	sess := s.quizSessions[req.SessionID]
+	s.mu.Unlock()
+	if sess == nil {
+		writeError(w, "quiz session not found", 404)
+		return
+	}
+	if sess.LastProblem == nil {
+		writeJSON(w, map[string]interface{}{"done": true, "correct": false, "feedback": "quiz session already complete"})
+		return
+	}
+	authStudentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if authStudentID != "" && req.StudentID != "" && req.StudentID != authStudentID {
+		writeError(w, "student_id does not match authenticated user", 403)
+		return
+	}
+	studentID := authStudentID
+	if studentID == "" {
+		studentID = req.StudentID
+		if studentID == "" {
+			studentID = sess.StudentID
+		}
+	}
+	if authStudentID != "" && sess.StudentID != "" && sess.StudentID != authStudentID {
+		writeError(w, "quiz session does not belong to authenticated user", 403)
+		return
+	}
+	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
+	qEng.SkipQuestion(sess)
+	if qEng.IsComplete(sess) {
+		if studentID != "" && qEng.HasAttempts(sess) {
+			if err := s.eng.RecordQuizCompletion(studentID); err != nil {
+				log.Printf("handleQuizSkip: RecordQuizCompletion failed for %s: %v", studentID, err)
+			}
+		}
+		s.mu.Lock()
+		delete(s.quizSessions, req.SessionID)
+		delete(s.quizCreated, req.SessionID)
+		s.mu.Unlock()
+		writeJSON(w, map[string]interface{}{"done": true, "correct": false, "feedback": "Skipped — no XP awarded.", "xp": 0, "retake_available": true})
+		return
+	}
+	prob, cid, err := qEng.NextQuestion(sess)
+	if err != nil {
+		writeError(w, "failed to get next quiz question", 500)
+		return
+	}
+	c2 := s.eng.GetDAG().Concept(cid)
+	name2 := cid
+	if c2 != nil {
+		name2 = c2.Label
+	}
+	writeJSON(w, map[string]interface{}{
+		"done":               false,
+		"correct":            false,
+		"feedback":           "Skipped — no XP awarded.",
+		"xp":                 0,
+		"new_status":         "",
+		"remedial":           []string{},
+		"concept_id":         cid,
+		"concept_name":       name2,
+		"question":           prob.Question,
+		"grading_type":       s.gradingTypeOf(cid),
 		"closed_book":        true,
 		"time_limit_seconds": s.eng.TimeLimitFor(studentID, cid),
 		"questions_total":    len(sess.Order),

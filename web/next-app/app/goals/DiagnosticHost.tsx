@@ -12,9 +12,17 @@ import {
   submitGoalAnswer,
   resumeGoalDiagnostic,
   getGoalPlan,
+  skipGoalQuestion,
   type GoalPlanRes,
   type DiagnosticProgress,
 } from '../../lib/api'
+import { getErrorMessage } from '../../lib/api'
+import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import SubmitErrorBlock, {
+  MAX_SKIPS,
+  toSubmitError,
+  type SubmitError,
+} from '../../components/SubmitErrorBlock'
 import { GOALS_DIAG_KEY } from './constants'
 import { Input } from '@/components/ui/input'
 
@@ -49,13 +57,18 @@ export default function DiagnosticHost({
   const [conceptName, setConceptName] = useState('')
   // Next question staged from the submit response — revealed by goNext(),
   // never fetched. Cleared on advance, so double-press is a no-op.
-  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string } | null>(null)
+  const pendingNext = useRef<{ question: string; conceptId: string; conceptName: string; gradingType: string } | null>(null)
   const [questionCount, setQuestionCount] = useState(0)
   const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [answerInput, setAnswerInput] = useState('')
   const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
+  const [submitError, setSubmitError] = useState<SubmitError | null>(null)
+  const [planError, setPlanError] = useState('')
+  const [finished, setFinished] = useState(false)
+  const [skipCount, setSkipCount] = useState(0)
+  const [answerFormat, setAnswerFormat] = useState<AnswerFormat>(() => formatForGradingType())
 
   async function start() {
     setLoading(true)
@@ -73,6 +86,7 @@ export default function DiagnosticHost({
       setQuestion(res.question || '')
       conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
+      setAnswerFormat(formatForGradingType(res.grading_type))
       setQuestionCount(1)
       // Backend truth first; frontend estimate as fallback for older servers.
       if (res.progress && res.progress.cover_size > 0) {
@@ -88,6 +102,10 @@ export default function DiagnosticHost({
       setLastResult(null)
       setAnswerInput('')
       pendingNext.current = null
+      setSubmitError(null)
+      setPlanError('')
+      setFinished(false)
+      setSkipCount(0)
     } catch {
       toast.error("Something went wrong, but we're working on it.")
       onResumeExpired()
@@ -117,6 +135,7 @@ export default function DiagnosticHost({
       setQuestion(data.question || '')
       conceptId.current = data.concept_id || ''
       setConceptName(data.concept_name || '')
+      setAnswerFormat(formatForGradingType(data.grading_type))
       if (data.progress) {
         setProgress(data.progress)
         setEstimatedTotal(data.progress.cover_size)
@@ -125,6 +144,10 @@ export default function DiagnosticHost({
       setLastResult(null)
       setAnswerInput('')
       pendingNext.current = null
+      setSubmitError(null)
+      setPlanError('')
+      setFinished(false)
+      setSkipCount(0)
     } catch {
       try {
         sessionStorage.removeItem(GOALS_DIAG_KEY)
@@ -153,6 +176,7 @@ export default function DiagnosticHost({
   async function submitAnswer() {
     if (!answerInput.trim()) return
     setLoading(true)
+    setSubmitError(null)
     try {
       const answer = answerInput.trim()
       const elapsed = 5.0
@@ -170,17 +194,9 @@ export default function DiagnosticHost({
       }
 
       if (data.done) {
-        setTimeout(async () => {
-          try {
-            const planRes = await getGoalPlan(sessionId.current)
-            try {
-              sessionStorage.removeItem(GOALS_DIAG_KEY)
-            } catch { /* ignore */ }
-            onComplete(planRes)
-          } catch {
-            alert('Could not generate plan.')
-          }
-          setLoading(false)
+        setFinished(true)
+        setTimeout(() => {
+          void fetchPlan()
         }, 800)
         return
       }
@@ -190,24 +206,81 @@ export default function DiagnosticHost({
         question: data.question || '',
         conceptId: data.concept_id || '',
         conceptName: data.concept_name || '',
+        gradingType: data.grading_type || '',
       }
       setLoading(false)
-    } catch {
-      alert('Failed to submit answer.')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to submit answer.'))
       setLoading(false)
     }
+  }
+
+  async function fetchPlan() {
+    setPlanError('')
+    try {
+      const planRes = await getGoalPlan(sessionId.current)
+      try {
+        sessionStorage.removeItem(GOALS_DIAG_KEY)
+      } catch { /* ignore */ }
+      onComplete(planRes)
+    } catch (e) {
+      setPlanError(getErrorMessage(e) || 'Could not generate plan.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function applyQuestion(question: string, cid: string, name: string, gradingType: string) {
+    setQuestion(question)
+    conceptId.current = cid
+    setConceptName(name)
+    setAnswerFormat(formatForGradingType(gradingType))
+    setQuestionCount(prev => prev + 1)
+    setLastResult(null)
+    setAnswerInput('')
+    setSubmitError(null)
+  }
+
+  async function skipAnswer() {
+    if (skipCount >= MAX_SKIPS || loading) return
+    setLoading(true)
+    setSubmitError(null)
+    try {
+      const data = await skipGoalQuestion(sessionId.current)
+      setSkipCount(c => c + 1)
+      if (data.done) {
+        setFinished(true)
+        setLastResult({ correct: false, feedback: 'Skipped — no evidence recorded.' })
+        setTimeout(() => {
+          void fetchPlan()
+        }, 800)
+        return
+      }
+      if (data.progress && data.progress.cover_size > 0) {
+        setProgress(data.progress)
+        setEstimatedTotal(data.progress.cover_size)
+      }
+      applyQuestion(data.question || '', data.concept_id || '', data.concept_name || '', data.grading_type || '')
+    } catch (e) {
+      setSubmitError(toSubmitError(e, 'Failed to skip question.'))
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function restartDiagnostic() {
+    setSubmitError(null)
+    setPlanError('')
+    setSkipCount(0)
+    setFinished(false)
+    void start()
   }
 
   function goNext() {
     const staged = pendingNext.current
     if (!staged) return
     pendingNext.current = null
-    setQuestion(staged.question)
-    conceptId.current = staged.conceptId
-    setConceptName(staged.conceptName)
-    setQuestionCount(prev => prev + 1)
-    setLastResult(null)
-    setAnswerInput('')
+    applyQuestion(staged.question, staged.conceptId, staged.conceptName, staged.gradingType)
   }
 
   return (
@@ -257,6 +330,7 @@ export default function DiagnosticHost({
                   onChange={e => setAnswerInput(e.target.value)}
                   placeholder="Your answer..."
                   enterKeyHint="go"
+                  inputMode={answerFormat.inputMode}
                   disabled={loading}
                   className="sm:flex-1"
                 />
@@ -268,6 +342,7 @@ export default function DiagnosticHost({
                   Check Answer
                 </button>
               </form>
+              <p className="mt-2 font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
               <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
@@ -290,7 +365,19 @@ export default function DiagnosticHost({
           )}
         </div>
 
-        {lastResult && (
+        {submitError ? (
+          <div className="mb-6">
+            <SubmitErrorBlock
+              error={submitError}
+              onRetry={submitAnswer}
+              onSkip={skipAnswer}
+              skipsLeft={MAX_SKIPS - skipCount}
+              onRestart={restartDiagnostic}
+              restartLabel="Restart diagnostic"
+              retrying={loading}
+            />
+          </div>
+        ) : lastResult && !finished ? (
           <div className="mb-6 text-center">
             <button
               type="button"
@@ -301,7 +388,26 @@ export default function DiagnosticHost({
               Next →
             </button>
           </div>
-        )}
+        ) : lastResult && finished && planError ? (
+          <div className="mb-6 border border-mathua-red/60 bg-mathua-surface p-4 text-left" role="alert">
+            <p className="font-mono text-xs text-mathua-red">Couldn&apos;t load your plan.</p>
+            <p className="mt-1 font-mono text-[11px] text-mathua-muted break-words [overflow-wrap:anywhere]">{planError}</p>
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={() => { setLoading(true); void fetchPlan() }}
+                disabled={loading}
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-10 font-mono text-xs disabled:opacity-50"
+              >
+                {loading ? 'Loading…' : 'Load plan'}
+              </button>
+            </div>
+          </div>
+        ) : lastResult && finished ? (
+          <div className="mb-6 text-center text-mathua-muted text-xs font-mono">
+            Preparing your plan…
+          </div>
+        ) : null}
       </div>
     </>
   )

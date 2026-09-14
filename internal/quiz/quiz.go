@@ -93,6 +93,25 @@ func (e *Engine) IsComplete(s *Session) bool {
 	return s.Index >= len(s.Order)
 }
 
+// HasAttempts reports whether any answer was recorded this session —
+// used to avoid resetting the 150 XP gate baseline on an all-skipped quiz.
+func (e *Engine) HasAttempts(s *Session) bool {
+	s.Lock()
+	defer s.Unlock()
+	return len(s.Attempts) > 0
+}
+
+// SkipQuestion advances past the current question without recording an
+// attempt — the skip escape hatch for questions that can't be answered.
+// No grade, no XP, no remedial: the concept simply goes untested this quiz.
+func (e *Engine) SkipQuestion(s *Session) {
+	s.Lock()
+	defer s.Unlock()
+	if s.Index < len(s.Order) {
+		s.Index++
+	}
+}
+
 // PickQuizConcepts selects diverse recent weak concepts for quiz.
 // Stub: sorts by weakness desc, picks top 5 distinct subdomains if possible.
 func PickQuizConcepts(dag *concepts.DAG, weakness map[string]float64) []*concepts.Concept {

@@ -4,6 +4,23 @@ import { createRef } from 'react'
 import { DiagnosticStep } from '../app/onboard/steps'
 import DiagnosticHost from '../app/goals/DiagnosticHost'
 import QuizHost from '../app/goals/QuizHost'
+import {
+  submitGoalAnswer,
+  skipGoalQuestion,
+  submitQuizAnswer,
+  skipQuizQuestion,
+} from '../lib/api'
+import { formatForGradingType } from '../lib/answerFormat'
+
+describe('formatForGradingType', () => {
+  it('maps known types to hint + keyboard, unknowns to generic text', () => {
+    expect(formatForGradingType('numeric')).toEqual({ hint: 'Answer with a number', inputMode: 'numeric' })
+    expect(formatForGradingType('expression').inputMode).toBe('text')
+    expect(formatForGradingType('multiple_choice').hint).toBe('Choose one option')
+    expect(formatForGradingType(undefined)).toEqual({ hint: 'Answer in the form shown', inputMode: 'text' })
+    expect(formatForGradingType('bogus')).toEqual({ hint: 'Answer in the form shown', inputMode: 'text' })
+  })
+})
 
 const PROG0 = {
   answered: 0,
@@ -15,13 +32,17 @@ const PROG0 = {
   done: false,
 }
 
-vi.mock('../lib/api', () => ({
-  startGoalDiagnostic: vi.fn(async () => ({
+vi.mock('../lib/api', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/api')>()
+  return {
+    ...mod,
+    startGoalDiagnostic: vi.fn(async () => ({
     session_id: 's1',
     concept_id: 'c1',
     concept_name: 'Q1 concept',
     question: 'Q1 text',
     done: false,
+    grading_type: 'numeric',
     progress: PROG0,
   })),
   submitGoalAnswer: vi.fn(async () => ({
@@ -31,6 +52,7 @@ vi.mock('../lib/api', () => ({
     concept_id: 'c2',
     concept_name: 'Q2 concept',
     question: 'Q2 text',
+    grading_type: 'numeric',
     progress: { ...PROG0, answered: 1, cover_done: 1 },
   })),
   resumeGoalDiagnostic: vi.fn(),
@@ -41,6 +63,7 @@ vi.mock('../lib/api', () => ({
     concept_name: 'Q1 quiz',
     question: 'Quiz Q1 text',
     done: false,
+    grading_type: 'numeric',
     time_limit_seconds: 30,
   })),
   submitQuizAnswer: vi.fn(async () => ({
@@ -51,9 +74,32 @@ vi.mock('../lib/api', () => ({
     concept_id: 'c2',
     concept_name: 'Q2 quiz',
     question: 'Quiz Q2 text',
+    grading_type: 'numeric',
     time_limit_seconds: 30,
   })),
-}))
+  skipGoalQuestion: vi.fn(async () => ({
+    done: false,
+    correct: false,
+    feedback: 'Skipped — no evidence recorded.',
+    concept_id: 'c3',
+    concept_name: 'Q3 concept',
+    question: 'Q3 text',
+    grading_type: 'numeric',
+    progress: { ...PROG0, answered: 1, cover_done: 1 },
+  })),
+  skipQuizQuestion: vi.fn(async () => ({
+    done: false,
+    correct: false,
+    feedback: 'Skipped — no XP awarded.',
+    xp: 0,
+    concept_id: 'c3',
+    concept_name: 'Q3 quiz',
+    question: 'Quiz Q3 text',
+    grading_type: 'numeric',
+    time_limit_seconds: 30,
+  })),
+  }
+})
 
 const stepProps = {
   question: 'Q1 text',
@@ -69,6 +115,14 @@ const stepProps = {
   onInputChange: () => {},
   onSubmit: () => {},
   onNext: () => {},
+  done: false,
+  answerFormat: formatForGradingType('numeric'),
+  submitError: null,
+  planError: '',
+  onSkip: () => {},
+  skipsLeft: 3,
+  onRestart: () => {},
+  onRetryPlan: () => {},
 }
 
 describe('DiagnosticStep Next button', () => {
@@ -92,6 +146,42 @@ describe('DiagnosticStep Next button', () => {
     fireEvent.click(next)
     expect(onNext).toHaveBeenCalledTimes(1)
   })
+
+  it('hides Next once finished and shows the error block on submit failure', () => {
+    const onRetry = vi.fn()
+    const { rerender } = render(
+      <DiagnosticStep {...stepProps} lastResult={{ correct: true, feedback: 'Nice!' }} done />,
+    )
+    expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
+    expect(screen.getByText('Preparing results…')).toBeInTheDocument()
+
+    rerender(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={null}
+        submitError={{ message: 'boom', status: 500 }}
+        onSubmit={onRetry}
+      />,
+    )
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+    expect(screen.getByText('(500) boom')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
+    expect(onRetry).toHaveBeenCalledTimes(1)
+  })
+
+  it('shows only Restart on a 404 expired session', () => {
+    render(
+      <DiagnosticStep
+        {...stepProps}
+        lastResult={null}
+        submitError={{ message: 'diagnostic session not found', status: 404 }}
+      />,
+    )
+    expect(screen.getByText(/Session expired/)).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Retry' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Skip →' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Restart diagnostic' })).toBeInTheDocument()
+  })
 })
 
 describe('DiagnosticHost manual advance', () => {
@@ -110,6 +200,10 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
+    // Format hint from the served grading_type, with numeric keyboard.
+    expect(screen.getByText('Answer with a number')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/your answer/i).getAttribute('inputmode')).toBe('numeric')
+
     fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
@@ -122,6 +216,97 @@ describe('DiagnosticHost manual advance', () => {
     fireEvent.click(next)
     await screen.findByText('Q2 text')
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
+    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+  })
+
+  it('shows the error block with Retry and Skip on submit failure', async () => {
+    vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
+      Object.assign(new Error('Goal answer failed: 500'), {
+        status: 500,
+        serverMessage: 'failed to get next question',
+      }),
+    )
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    // No alert: persistent inline error with the server's own words.
+    await screen.findByRole('alert')
+    expect(screen.getByText('(500) failed to get next question')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Skip →' })).toBeInTheDocument()
+    // Answer preserved for one-tap retry.
+    expect(screen.getByPlaceholderText(/your answer/i)).toHaveValue('5')
+
+    // Retry succeeds (mock default) and advances on Next.
+    fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
+    await screen.findByText('Nice!')
+    fireEvent.click(screen.getByRole('button', { name: 'Next →' }))
+    await screen.findByText('Q2 text')
+  })
+
+  it('shows only Restart on an expired session', async () => {
+    vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
+      Object.assign(new Error('Goal answer failed: 404'), {
+        status: 404,
+        serverMessage: 'diagnostic session not found',
+      }),
+    )
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    // 404: session gone — Retry/Skip pointless, only Restart.
+    await screen.findByRole('alert')
+    expect(screen.getByText(/Session expired/)).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Retry' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Skip →' })).toBeNull()
+    expect(vi.mocked(skipGoalQuestion)).not.toHaveBeenCalled()
+  })
+
+  it('Skip serves the next staged question without recording', async () => {
+    vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
+      Object.assign(new Error('Goal answer failed: 500'), {
+        status: 500,
+        serverMessage: 'failed to get next question',
+      }),
+    )
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+    await screen.findByRole('alert')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Skip →' }))
+    await screen.findByText('Q3 text')
+    expect(vi.mocked(skipGoalQuestion)).toHaveBeenCalledTimes(1)
+    expect(screen.queryByRole('alert')).toBeNull()
     expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
   })
 })
@@ -141,5 +326,26 @@ describe('QuizHost manual advance', () => {
     await screen.findByText('Quiz Q2 text')
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
     expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+  })
+
+  it('QuizHost shows the error block and Skip advances without XP', async () => {
+    vi.mocked(submitQuizAnswer).mockRejectedValueOnce(
+      Object.assign(new Error('Quiz answer failed: 500'), {
+        status: 500,
+        serverMessage: 'failed to get next quiz question',
+      }),
+    )
+    render(<QuizHost />)
+    await screen.findByText('Quiz Q1 text')
+
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    await screen.findByRole('alert')
+    expect(screen.getByText('(500) failed to get next quiz question')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Skip →' }))
+    await screen.findByText('Quiz Q3 text')
+    expect(vi.mocked(skipQuizQuestion)).toHaveBeenCalledTimes(1)
   })
 })

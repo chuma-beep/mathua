@@ -563,7 +563,7 @@ func (g *expConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	base := rand.Intn(max(1, scale)) + 2
 	exp := rand.Intn(3) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("What does \\(%d^{%d}\\) mean?", base, exp),
+		Question:    fmt.Sprintf("What is the value of \\(%d^{%d}\\)?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %s = %d\\)", base, exp, strings.Repeat(fmt.Sprintf("%d \\times ", base), exp-1)+fmt.Sprintf("%d", base), mathutil.IntPow(base, exp)),
 	}

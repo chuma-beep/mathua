@@ -1,10 +1,12 @@
 'use client'
 
-import { useEffect, useCallback, useRef, useReducer, useState } from 'react'
+import { useEffect, useCallback, useMemo, useRef, useReducer, useState } from 'react'
 import KatexContent from './KatexContent'
 import ReportButton from './ReportButton'
 import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../lib/api'
 import { applyResult, initialState, type StreakState } from '../lib/progression'
+import { concepts } from '../lib/conceptData'
+import { formatForGradingType } from '../lib/answerFormat'
 import { Input } from '@/components/ui/input'
 
 interface LessonQuizProps {
@@ -97,6 +99,12 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
 
   // Derived during render: null questions means a fetch is in flight.
   const loading = questions === null
+
+  // Expected-answer form from the bundled corpus (same table as diagnostics).
+  const format = useMemo(
+    () => formatForGradingType(concepts.find(c => c.id === conceptId)?.grading_type),
+    [conceptId],
+  )
 
   const loadQuestions = useCallback(() => {
     setQuestions(null)
@@ -255,6 +263,7 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           placeholder="Your answer…"
                           aria-label={`Your answer for question ${i + 1}`}
                           enterKeyHint="go"
+                          inputMode={format.inputMode}
                           disabled={result !== undefined || locked}
                           className={`sm:flex-1 bg-mathua-bg ${
                             result === 'correct'
@@ -275,6 +284,9 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                         </button>
                       )}
                       </form>
+                      {result === undefined && (
+                        <p className="mt-2 font-mono text-[11px] text-mathua-muted">{format.hint}</p>
+                      )}
 
                     {result === 'correct' && (
                       <p className="mt-2 text-xs font-mono text-green-400">
