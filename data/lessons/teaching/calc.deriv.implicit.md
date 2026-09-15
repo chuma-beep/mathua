@@ -148,10 +148,11 @@ Find an equation of the line tangent to the curve $x^{2} + y^{2} = 25$ at the po
 
 Although we could find this equation without using implicit differentiation, using that method makes it much easier. In Example 3.68, we found $\frac{dy}{dx} = - \frac{x}{y}.$
 
-The slope of the tangent line is found by substituting $\left( {3,-4} \right)$ into this expression. Consequently, the slope of the tangent line is \$\frac{dy}{dx}\left| \begin{array}{l}
- \\
+The slope of the tangent line is found by substituting $\left( {3,-4} \right)$ into this expression. Consequently, the slope of the tangent line is
+$$\frac{dy}{dx}\left| \begin{array}{l}
+\\
 {}_{({3,-4})}
-\end{array} \right. = - \frac{3}{-4} = \frac{3}{4}.\$
+\end{array} \right. = - \frac{3}{-4} = \frac{3}{4}.$$
 
 Using the point $\left( {3,-4} \right)$ and the slope $\frac{3}{4}$ in the point-slope equation of the line, we obtain the equation $y = \frac{3}{4}x - \frac{25}{4}$ (Figure 3.31).
 

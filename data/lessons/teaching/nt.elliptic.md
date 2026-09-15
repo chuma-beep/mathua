@@ -1,6 +1,6 @@
 # Elliptic Curves and BSD
 
-**Elliptic curve:** $E: y^2=x^3+ax+b$, $\Delta=-16(4a^3+27b^2)\neq0$; points form abelian group via chord-tangent; Mordell-Weil $E(\mathbb Q)\cong\mathbb Z^r\times\text{torsion}$; Hasse bound $|#E(\mathbb F_p)-(p+1)|\le2\sqrt p$; BSD relates rank $r$ to $L(E,1)$.
+**Elliptic curve:** $E: y^2=x^3+ax+b$, $\Delta=-16(4a^3+27b^2)\neq0$; points form abelian group via chord-tangent; Mordell-Weil $E(\mathbb Q)\cong\mathbb Z^r\times\text{torsion}$; Hasse bound $|\#E(\mathbb F_p)-(p+1)|\le2\sqrt p$; BSD relates rank $r$ to $L(E,1)$.
 
 ## Arithmetic of Curves
 

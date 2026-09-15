@@ -240,8 +240,7 @@ Troll 3: Either we are all knaves or at least one of us is a knight.ð
 > \(\neg \forall x P(x)\) is equivalent to \(\exists x \neg P(x)\text{.}\)ð
 
 
-\(\neg \exists x P(x)\) is equivalent to \(\forall x \neg P(x)
-\text{.}\)ð
+\(\neg \exists x P(x)\) is equivalent to \(\forall x \neg P(x)\text{.}\)ð
 
 ð
 
