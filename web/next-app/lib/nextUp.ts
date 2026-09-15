@@ -64,7 +64,7 @@ export function selectNextUp(input: NextUpInput): NextUp {
       badge: 'Due now',
       title: `${input.dueReviews} concept${input.dueReviews !== 1 ? 's' : ''} due for review`,
       detail: 'Spaced repetition — review before decay',
-      href: '/session',
+      href: '/review',
       cta: 'Review now →',
     }
   }

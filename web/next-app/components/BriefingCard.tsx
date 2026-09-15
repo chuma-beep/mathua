@@ -46,6 +46,25 @@ export const QUIZ_BRIEFING: BriefingItem[] = [
   },
 ]
 
+export const REVIEW_BRIEFING: BriefingItem[] = [
+  {
+    title: 'Only what is due for review',
+    detail: 'Questions come from concepts whose memory is fading.',
+  },
+  {
+    title: 'Answer from what you remember — no searching',
+    detail: 'Honest answers recalibrate your next review date.',
+  },
+  {
+    title: 'Speed counts',
+    detail: 'Fast correct answers show the memory is solid.',
+  },
+  {
+    title: 'XP for each correct answer',
+    detail: 'Reviews record progress and XP like practice.',
+  },
+]
+
 export default function BriefingCard({ eyebrow, items }: { eyebrow: string; items: BriefingItem[] }) {
   return (
     <div className="border border-mathua-border bg-mathua-surface p-4 text-left">

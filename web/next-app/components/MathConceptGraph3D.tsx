@@ -982,7 +982,7 @@ function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }:
           Study →
         </a>
         <a
-          href={`/session`}
+          href={`/session?concept=${encodeURIComponent(concept.id)}`}
           style={{ color: 'var(--accent-teal)', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
         >
           Practice →

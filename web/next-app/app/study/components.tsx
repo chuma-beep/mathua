@@ -500,7 +500,7 @@ export function LessonDetail({
         </div>
       )}
 
-      <div className="mt-2 flex items-center gap-2">
+      <div id="practice" className="mt-2 flex items-center gap-2 scroll-mt-24">
         <span className="bg-mathua-border text-mathua-primary px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
           Practice
         </span>
@@ -536,10 +536,10 @@ export function LessonDetail({
 
       <div className="mt-8 text-center">
         <Link
-          href={`/session`}
+          href={`#practice`}
           className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white h-12 px-8 font-medium text-sm leading-[48px]"
         >
-          Start practicing these concepts
+          Practice these concepts ↓
         </Link>
       </div>
     </div>

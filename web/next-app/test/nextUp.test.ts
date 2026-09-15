@@ -14,7 +14,7 @@ describe('selectNextUp', () => {
   it('prefers due reviews', () => {
     const n = selectNextUp({ ...base, dueReviews: 3 })
     expect(n.kind).toBe('review')
-    expect(n.href).toBe('/session')
+    expect(n.href).toBe('/review')
   })
 
   it('recommends weakest non-mastered concept via supported ?concept= link', () => {
