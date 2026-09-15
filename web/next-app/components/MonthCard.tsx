@@ -2,15 +2,10 @@
 
 import { useMemo } from 'react'
 import type { DailyActivity } from '../lib/api'
+import { heatColor, heatTextColor } from '../lib/heatColor'
 
 const DAY_HEADERS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
-function cellColor(level: number): string {
-  if (level === 0) return 'transparent'
-  const pcts = { 1: '18', 2: '38', 3: '60', 4: '85' }
-  return `color-mix(in oklch, var(--accent-blue) ${pcts[level as keyof typeof pcts]}%, var(--bg))`
-}
 
 interface Props {
   year: number
@@ -149,9 +144,9 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
                       }
                       className="w-[11px] h-[11px] flex items-center justify-center font-mono text-[7px] shrink-0 border-[0.5px]"
                       style={{
-                        background: cell ? cellColor(cell.level) : 'transparent',
+                        background: cell ? heatColor(cell.level) : 'transparent',
                         borderColor: cell ? 'var(--border)' : 'transparent',
-                        color: cell && cell.questions > 0 ? 'var(--accent-blue)' : 'var(--text-muted)',
+                        color: cell ? heatTextColor(cell.level) : 'var(--text-muted)',
                       }}
                     >
                       {cell?.date}

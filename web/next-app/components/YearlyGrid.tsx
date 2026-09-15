@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import type { DailyActivity } from '../lib/api'
+import { heatColor } from '../lib/heatColor'
 
 const CELL_W = 12
 const CELL_H = 12
@@ -19,12 +20,6 @@ function intensityLevel(count: number, max: number): number {
   if (ratio <= 0.50) return 2
   if (ratio <= 0.75) return 3
   return 4
-}
-
-function cellColor(level: number): string {
-  if (level === 0) return 'transparent'
-  const pcts = { 1: '18', 2: '38', 3: '60', 4: '85' }
-  return `color-mix(in oklch, var(--accent-blue) ${pcts[level as keyof typeof pcts]}%, var(--bg))`
 }
 
 function formatDate(dateStr: string): string {
@@ -155,7 +150,7 @@ export default function YearlyGrid({ data }: Props) {
             width={CELL_W}
             height={CELL_H}
             style={{
-              fill: cellColor(cell.level),
+              fill: heatColor(cell.level),
               stroke: 'var(--border)',
               strokeWidth: 0.5,
               cursor: 'pointer',
@@ -191,7 +186,7 @@ export default function YearlyGrid({ data }: Props) {
             width={CELL_W}
             height={CELL_H}
             style={{
-              fill: cellColor(level),
+              fill: heatColor(level),
               stroke: 'var(--border)',
               strokeWidth: 0.5,
               shapeRendering: 'crispEdges',
