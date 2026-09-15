@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
+import LessonQuiz from '../../components/LessonQuiz'
 import Footer from '../../components/Footer'
 
 function SessionContent() {
@@ -27,16 +28,16 @@ function SessionContent() {
             Take a diagnostic test to get a recommendation on where to start, or jump straight into Study.
           </p>
           {concept && (
-            <div className="max-w-2xl mx-auto mt-6 border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <span className="font-mono text-xs text-mathua-primary min-w-0 truncate">
-                Continue with {concept}
-              </span>
-              <Link
-                href={`/concept?id=${encodeURIComponent(concept)}`}
-                className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center"
-              >
-                Open concept →
-              </Link>
+            <div className="max-w-2xl mx-auto mt-6 min-w-0 overflow-hidden">
+              <LessonQuiz conceptId={concept} limit={5} />
+              <div className="mt-4 text-center">
+                <Link
+                  href={`/concept?id=${encodeURIComponent(concept)}`}
+                  className="font-mono text-xs text-mathua-blue hover:underline"
+                >
+                  Open the lesson for {concept} →
+                </Link>
+              </div>
             </div>
           )}
 

@@ -383,7 +383,7 @@ export default function ProfilePage() {
 
         {dueReviews > 0 && (
           <Link
-            href="/session"
+            href="/review"
             className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
           >
             <span className="font-mono text-xs text-yellow-400 min-w-0 break-words [overflow-wrap:anywhere] leading-snug">

@@ -16,6 +16,7 @@ const ROUTES = [
   '/profile',
   '/study',
   '/session',
+  '/review',
   '/concept?id=arith.add.single',
   '/graph',
   '/leaderboard',

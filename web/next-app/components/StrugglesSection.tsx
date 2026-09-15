@@ -85,7 +85,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
             <div className="font-mono text-[10px] text-mathua-muted truncate">{flat.length} concept{flat.length !== 1 ? 's' : ''} · {domains.length} domain{domains.length !== 1 ? 's' : ''}</div>
           </div>
           <Link
-            href="/session"
+            href="/review"
             className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-3 h-8 font-mono text-[11px] inline-flex items-center justify-center min-h-[32px]"
           >
             Review now →
