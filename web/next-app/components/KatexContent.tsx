@@ -45,9 +45,17 @@ export default function KatexContent({ children, className = '' }: { children: s
   const content = prepareLessonMath(children)
   // In production KaTeX errors are still non-throwing (red fallback) but we
   // emit a console warning for telemetry — vitest corpus gate uses throwOnError:true.
-  if (typeof window !== 'undefined' && content.includes('math-') && content.includes('\\')) {
-    // Cheap heuristic: if prepareLessonMath emitted math spans with backslashes,
-    // downstream KaTeX may warn — let rehype-katex handle it.
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    const suspect = content.match(/<span class="math-(display|inline)">[^<]*\\[^<]*<\/span>/)
+    if (suspect) {
+      console.warn('[KatexContent] math span with raw backslash may fail KaTeX:', suspect[0].slice(0, 160))
+    }
+    const proseLeak = content
+      .replace(/<span class="math-(display|inline)">[\s\S]*?<\/span>/g, ' ')
+      .match(/\\(frac|begin|end|text|cdot|pi)\b/)
+    if (proseLeak) {
+      console.warn('[KatexContent] possible raw LaTeX in prose:', proseLeak[0])
+    }
   }
 
   return (

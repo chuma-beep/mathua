@@ -164,7 +164,7 @@ From the sign analysis, it follows that there is a local minimum at \\( \sqrt{\f
 \\[\begin{align} f\left(\sqrt{\frac{2}{3}}\right) &= \left(\sqrt{\frac{2}{3}}\right)^3 - 2\left(\sqrt{\frac{2}{3}}\right) \\\\[0.5em] &= \frac{2\sqrt{2}}{3\sqrt{3}} - 2\sqrt{\frac{2}{3}} \\\\[0.5em] &= \frac{2\sqrt{6}}{9} - \frac{6\sqrt{6}}{9} \\\\[0.5em] &= \frac{-4\sqrt{6}}{9} \end{align} \\]
 
 
-From the sign analysis, it also follows that there is a local maximum at ( -\sqrt{\frac{2}{3}} ). We now compute the function value at this point:
+From the sign analysis, it also follows that there is a local maximum at \\( -\sqrt{\\frac{2}{3}} \\). We now compute the function value at this point:
 
 \\[\begin{align} f\left(-\sqrt{\frac{2}{3}}\right) &= \left(-\sqrt{\frac{2}{3}}\right)^3 - 2\left(-\sqrt{\frac{2}{3}}\right) \\\\[0.5em] &= -\frac{2\sqrt{2}}{3\sqrt{3}} + 2\sqrt{\frac{2}{3}} \\\\[0.5em] &= -\frac{2\sqrt{6}}{9} + \frac{6\sqrt{6}}{9} \\\\[0.5em] &= \frac{4\sqrt{6}}{9} \end{align} \\]
 

@@ -66,7 +66,7 @@ Let us consider the final case, where nothing can be concluded about the converg
 
 \\[\sqrt[n]{|a_n|} > 1 - \varepsilon \quad \text{and} \quad \sqrt[n]{|a_n|} < 1 + \varepsilon \\]
 
-This range includes both convergent and divergent behaviors. For example, the [harmonic series](<../harmonic-series>) \\( a_n = \frac{1}{n} \\) has \\( \sqrt[n]{|a_n|} \to 1 \\) and diverges. The [p-series](<../harmonic-series>) ( a_n = \frac{1}{n^2} ) also has \\( \sqrt[n]{|a_n|} \to 1 \\), but it converges. So, the test is inconclusive when \\( L = 1 \\).
+This range includes both convergent and divergent behaviors. For example, the [harmonic series](<../harmonic-series>) \\( a_n = \frac{1}{n} \\) has \\( \sqrt[n]{|a_n|} \to 1 \\) and diverges. The [p-series](<../harmonic-series>) \\( a_n = \\frac{1}{n^2} \\) also has \\( \sqrt[n]{|a_n|} \to 1 \\), but it converges. So, the test is inconclusive when \\( L = 1 \\).
 
 ## Example
 
