@@ -63,7 +63,7 @@ test('profile sidebar collapses to icons via trigger', async ({ page }) => {
     )
     .toBe('0')
   // Collapsed rail: nav links each show a centered Lucide icon (no text overflow)
-  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/settings']) {
+  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/progress-card', '/settings']) {
     const link = sidebar.locator(`a[href="${href}"]`).first()
     await expect(link.locator('svg').first()).toBeVisible()
   }
@@ -89,7 +89,7 @@ test('profile sidebar collapses to icons only at large viewport', async ({ page 
   await expect(rail).toHaveAttribute('data-state', 'collapsed', { timeout: 10_000 })
   await expect.poll(async () => sidebar.boundingBox().then((b) => b!.width), { timeout: 10_000 }).toBeLessThan(expandedWidth)
   // Icons only: every nav link shows its svg, every label is hidden
-  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/settings']) {
+  for (const href of ['/study', '/session', '/graph', '/leaderboard', '/progress-card', '/settings']) {
     const link = sidebar.locator(`a[href="${href}"]`).first()
     await expect(link.locator('svg').first()).toBeVisible()
   }

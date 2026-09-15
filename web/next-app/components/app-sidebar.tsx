@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   BookOpen,
+  ChartNoAxesColumn,
   ChevronsLeft,
   FileText,
   HeartHandshake,
@@ -41,6 +42,7 @@ const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Start', href: '/session', icon: Play },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
+  { label: 'Progress', href: '/progress-card', icon: ChartNoAxesColumn },
   { label: 'Settings', href: '/settings', icon: Settings },
 ]
 
