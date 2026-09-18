@@ -25,7 +25,7 @@ The need for a limiting process becomes clear when one attempts to apply the Fun
 \int_{-1}^{1} \frac{1}{x^2}\\,dx
 \\]
 
-A direct calculation gives \\(\left[-x^{-1}\right]\_{-1}^{1} = -2\\), which is clearly wrong. The integrand is strictly positive, so the integral cannot be negative. The issue is that \\(1/x^2\\) has a singularity at \\(x=0\\), which lies inside the interval (the Fundamental Theorem does not apply here). This example shows that extending integration beyond its classical domain requires more than mechanical computation: it requires a definition built on limits.
+A direct calculation gives \\(\left[-x^{-1}\right]_{-1}^{1} = -2\\), which is clearly wrong. The integrand is strictly positive, so the integral cannot be negative. The issue is that \\(1/x^2\\) has a singularity at \\(x=0\\), which lies inside the interval (the Fundamental Theorem does not apply here). This example shows that extending integration beyond its classical domain requires more than mechanical computation: it requires a definition built on limits.
 
 > Blindly applying the Fundamental Theorem of Calculus to an improper integral can produce results that are mathematically nonsensical, not merely inaccurate.
 
@@ -71,11 +71,10 @@ For integrals over the entire real line, neither endpoint is finite, so a single
 \\]
 is defined as:
 \\[
-\int_{-\infty}^{+\infty} f(x)\\,dx
-=
-\int_{-\infty}^c f(x)\\,dx
-\+
-\int_c^{+\infty} \\! f(x)\\,dx
+\\begin{aligned}
+\int_{-\infty}^{+\infty} f(x)\\,dx &= \int_{-\infty}^c f(x)\\,dx \\\\
+&+ \int_c^{+\infty} \\! f(x)\\,dx
+\\end{aligned}
 \\]
 for some real \\(c\\), provided both integrals converge separately. The result does not depend on the choice of \\(c\\).
 
@@ -89,12 +88,11 @@ To illustrate convergence, we compute the following integral:
 Following the definition, we replace the infinite upper limit with a finite bound \\(b\\) and compute the resulting ordinary integral:
 
 \\[
-\int_1^b \frac{1}{x^2}\\,dx
-=
-\int_1^b x^{-2}\\,dx
-=
-\left[ -x^{-1} \right]_1^b
-= -\frac{1}{b} + 1
+\\begin{aligned}
+\int_1^b \frac{1}{x^2}\\,dx &= \int_1^b x^{-2}\\,dx \\\\
+&= \left[ -x^{-1} \right]_1^b \\\\
+&= -\frac{1}{b} + 1
+\\end{aligned}
 \\]
 
 It remains to take the limit as \\(b \to +\infty\\). As \\(b\\) grows without bound, the term \\(\frac{1}{b}\\) vanishes, and we obtain:
@@ -120,11 +118,10 @@ We now consider a case where the limit fails to be finite. The integral:
 looks structurally similar to the previous one, but the behavior is fundamentally different. We compute:
 
 \\[
-\int_1^b \frac{1}{x}\\,dx
-=
-\left[ \ln x \right]\_1^b
-=
-\ln b
+\\begin{aligned}
+\int_1^b \frac{1}{x}\\,dx &= \left[ \ln x \right]_1^b \\\\
+&= \ln b
+\\end{aligned}
 \\]
 
 Taking the limit as \\(b \to +\infty\\):
@@ -156,11 +153,10 @@ provided the limit exists and is finite. Symmetrically, if \\(f\\) is continuous
 If the singularity occurs at an interior point \\(c \in (a,b)\\), the integral is split at \\(c\\):
 
 \\[
-\int_a^b f(x)\\,dx
-=
-\int_a^c f(x)\\,dx
-\+
-\int_c^b f(x)\\,dx
+\\begin{aligned}
+\int_a^b f(x)\\,dx &= \int_a^c f(x)\\,dx \\\\
+&+ \int_c^b f(x)\\,dx
+\\end{aligned}
 \\]
 
 provided both integrals converge separately.
@@ -184,16 +180,16 @@ The function \\(\frac{1}{\sqrt{x}}\\) is unbounded as \\(x \to 0^+\\), so this i
 We compute the antiderivative:
 
 \\[
-\int x^{-1/2}\\,dx
-=
-2x^{1/2} + c
+\\begin{aligned}
+\int x^{-1/2}\\,dx &= 2x^{1/2} + c
+\\end{aligned}
 \\]
 
 Evaluating over \\([t,1]\\):
 \\[
-\int_t^1 x^{-1/2}\\,dx
-=
-2 - 2\sqrt{t}
+\\begin{aligned}
+\int_t^1 x^{-1/2}\\,dx &= 2 - 2\sqrt{t}
+\\end{aligned}
 \\]
 
 Taking the limit as \\(t \to 0^+\\):
@@ -214,11 +210,10 @@ A fundamental reference example is the family of integrals:
 where \\(p\\) is a real parameter. The behavior of this integral depends entirely on \\(p\\), and the result serves as a benchmark for comparing more complex integrands. For \\(p \neq 1\\), we compute:
 
 \\[
-\int_1^b x^{-p}\\,dx
-=
-\left[ \frac{x^{1-p}}{1-p} \right]_1^b
-=
-\frac{b^{1-p} - 1}{1-p}
+\\begin{aligned}
+\int_1^b x^{-p}\\,dx &= \left[ \frac{x^{1-p}}{1-p} \right]_1^b \\\\
+&= \frac{b^{1-p} - 1}{1-p}
+\\end{aligned}
 \\]
 
 Taking the limit as \\(b \to +\infty\\) we have the following cases:
@@ -228,13 +223,13 @@ Taking the limit as \\(b \to +\infty\\) we have the following cases:
 | \\(p > 1\\) | \\(b^{1-p} \to 0\\)       | converges to \\(\dfrac{1}{p-1}\\) |
 | \\(p = 1\\) | \\(\ln b \to +\infty\\)   | diverges                          |
 | \\(p < 1\\) | \\(b^{1-p} \to +\infty\\) | diverges                          |
-In summary, the integral \\(1\\) converges if and only if \\(p > 1.\\) An analogous result holds near the origin. For the integral:
+In summary, the integral (1) converges if and only if \\(p > 1.\\) An analogous result holds near the origin. For the integral:
 
 \\[
 \int_0^1 \frac{1}{x^p}\\,dx \tag{2}
 \\]
 
-the singularity is now at \\(x = 0\\), and the roles are reversed. The integral \\(2\\) converges if and only if \\(p < 1.\\)
+the singularity is now at \\(x = 0\\), and the roles are reversed. The integral (2) converges if and only if \\(p < 1.\\)
 
 > The \\(p\\)-integral test illustrates a fundamental principle: the convergence of an improper integral is governed by the rate at which the integrand decays or blows up. What ultimately matters is not the exact form of the function, but its asymptotic behavior near infinity or near the singular point. For this reason, powers of \\(x\\) serve as natural comparison models in a wide range of convergence arguments.
 
@@ -286,10 +281,10 @@ To illustrate the limit comparison test, consider the integral:
 Finding an explicit antiderivative is possible here, it involves \\(\arctan x\\), but the point of the example is different: we want to establish convergence without computing the integral, purely by comparing asymptotic rates. For large \\(x\\), the term \\(+1\\) in the denominator becomes negligible relative to \\(x^2\\), so the integrand behaves like \\(1/x^2\\). To make this precise, we compute the limit:
 
 \\[
-\lim_{x \to +\infty} \frac{\dfrac{1}{x^2+1}}{\dfrac{1}{x^2}}
-=
-\lim_{x \to +\infty} \frac{x^2}{x^2+1}
-=1
+\\begin{aligned}
+\lim_{x \to +\infty} \frac{\dfrac{1}{x^2+1}}{\dfrac{1}{x^2}} &= \lim_{x \to +\infty} \frac{x^2}{x^2+1} \\\\
+&= 1
+\\end{aligned}
 \\]
 
 The limit is finite and strictly positive. By the limit comparison test the two integrals
