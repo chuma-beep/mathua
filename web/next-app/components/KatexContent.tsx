@@ -41,6 +41,70 @@ const sanitizeSchema = {
   tagNames: [...(defaultSchema.tagNames ?? []), 'span'],
 }
 
+// rehype-katex renders failures two ways: <span class="katex-error"> when
+// even the lenient retry throws, and red text (errorColor) when KaTeX itself
+// renders the ParseError. Replace both with a labeled <code> fallback so
+// users never see red TeX soup, and log once per span so new corpus breakage
+// is visible in telemetry instead of silent.
+const KATEX_ERROR_COLOR_RE = /#cc0000|204,\s*0,\s*0/i // must match errorColor below
+function rehypeKatexFallback() {
+  return (tree: unknown) => {
+    const walk = (node: any, parent: any, index: number): void => {
+      if (!node || typeof node !== 'object') return
+      const classes: unknown = node.properties?.className
+      const style: unknown = node.properties?.style
+      const isErrorNode =
+        node.type === 'element' &&
+        Array.isArray(classes) &&
+        (classes as unknown[]).includes('katex-error')
+      const isErrorColor =
+        node.type === 'element' &&
+        node.tagName === 'span' &&
+        typeof style === 'string' &&
+        KATEX_ERROR_COLOR_RE.test(style)
+      if (
+        (isErrorNode || isErrorColor) &&
+        parent &&
+        Array.isArray(parent.children) &&
+        index >= 0
+      ) {
+        const texts: string[] = []
+        const collect = (n: any): void => {
+          if (!n || typeof n !== 'object') return
+          if (typeof n.value === 'string') texts.push(n.value)
+          if (Array.isArray(n.children)) n.children.forEach(collect)
+        }
+        collect(node)
+        const source: string = texts.join('')
+        if (typeof window !== 'undefined') {
+          // eslint-disable-next-line no-console
+          console.error('[KatexContent] KaTeX failed to render; showing source fallback:', source.slice(0, 200))
+        }
+        const detail: string =
+          typeof node.properties?.title === 'string' && node.properties.title
+            ? node.properties.title
+            : source
+        parent.children[index] = {
+          type: 'element',
+          // NOTE: plain span, not code — the components.code override below
+          // would discard a code node's className/title.
+          tagName: 'span',
+          properties: {
+            className: ['math-fallback'],
+            title: `Math failed to render (${detail.slice(0, 200)})`,
+          },
+          children: [{ type: 'text', value: source }],
+        }
+        return
+      }
+      if (Array.isArray(node.children)) {
+        node.children.forEach((child: unknown, i: number) => walk(child, node, i))
+      }
+    }
+    walk(tree, null, -1)
+  }
+}
+
 export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
   const content = prepareLessonMath(children)
   // In production KaTeX errors are still non-throwing (red fallback) but we
@@ -69,7 +133,7 @@ export default function KatexContent({ children, className = '' }: { children: s
           output: 'html',
           errorColor: '#cc0000',
           macros: lessonMacros,
-        }]]}
+        }], rehypeKatexFallback]}
         components={{
           a: ({ children }) => <>{children}</>,
           code: ({ children }) => (
@@ -115,6 +179,7 @@ export default function KatexContent({ children, className = '' }: { children: s
         .katex-content ul, .katex-content ol { margin: 0.5rem 0; padding-left: 1.5rem; }
         .katex-content li { margin: 0.25rem 0; font-size: clamp(0.875rem, 0.8rem + 0.3vw, 1rem); }
         .katex-content .katex { font-size: 1.05875rem; }
+        .katex-content .math-fallback { font-family: var(--font-mono, monospace); font-size: 0.85em; background: var(--code-bg); border: 1px dashed currentColor; padding: 0.1em 0.35em; opacity: 0.85; overflow-wrap: anywhere; }
         .katex-content .katex-display { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding-bottom: 4px; }
         .katex-content .math-display { display: block; overflow-x: auto; max-width: 100%; }
         .katex-content hr { border: 0; border-top: 1px solid; margin: 1.5rem 0; opacity: 0.3; }
