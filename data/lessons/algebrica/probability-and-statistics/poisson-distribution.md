@@ -84,7 +84,7 @@ The [variance](<../variance-and-covariance-of-a-random-variable/>) of a Poisson 
 
 We can rewrite \\( x^2 \\) as \\( x[(x-1)+1] \\), which gives:
 
-\\[E(X^2) = \lambda e^{-\lambda} \left[ \sum_{x=1}^{\infty} \frac{\lambda^{x-1}}{(x-1)!} \+ \sum_{x=2}^{\infty} \frac{\lambda^{x-2}}{(x-2)!} \right] \\]
+\\[E(X^2) = \lambda e^{-\lambda} \left[ \sum_{x=1}^{\infty} \frac{\lambda^{x-1}}{(x-1)!} + \sum_{x=2}^{\infty} \frac{\lambda^{x-2}}{(x-2)!} \right] \\]
 
 Since these sums correspond to exponential series, the expression can be rewritten as:
 

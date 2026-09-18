@@ -56,9 +56,9 @@ Let’s apply this property to the data from Example 1, where the salaries (in d
 
 We compute the total absolute deviation for several possible values of \\( m \\).
 
-For \\(m= 1200\\) we have \\(\sum_{i=1}^{n} |x_i - m|\\): \\[\begin{aligned} &= |1200 - 1200| + \\\ &\+ |1300 - 1200| \\\ &\+ |1400 - 1200| \\\ &\+ |1500 - 1200| \\\ &\+ |3000 - 1200| \\\ &\+ |3200 - 1200| \\\ &\+ |4000 - 1200| \\\ &= 7,100 \end{aligned} \\]
+For \\(m= 1200\\) we have \\(\sum_{i=1}^{n} |x_i - m|\\): \\[\begin{aligned} &= |1200 - 1200| + \\\ &+ |1300 - 1200| \\\ &+ |1400 - 1200| \\\ &+ |1500 - 1200| \\\ &+ |3000 - 1200| \\\ &+ |3200 - 1200| \\\ &+ |4000 - 1200| \\\ &= 7,100 \end{aligned} \\]
 
-For \\(m= 1300\\) we have \\(\sum_{i=1}^{n} |x_i - m|\\): \\[\begin{aligned} &= |1200 - 1300| + \\\ &\+ |1300 - 1300| \\\ &\+ |1400 - 1300| \\\ &\+ |1500 - 1300| \\\ &\+ |3000 - 1300| \\\ &\+ |3200 - 1300| \\\ &\+ |4000 - 1300| \\\ &= 6,700 \end{aligned} \\]
+For \\(m= 1300\\) we have \\(\sum_{i=1}^{n} |x_i - m|\\): \\[\begin{aligned} &= |1200 - 1300| + \\\ &+ |1300 - 1300| \\\ &+ |1400 - 1300| \\\ &+ |1500 - 1300| \\\ &+ |3000 - 1300| \\\ &+ |3200 - 1300| \\\ &+ |4000 - 1300| \\\ &= 6,700 \end{aligned} \\]
 
 Iterating the same procedure for each value of \\(m\\) gives the following total results.
 

@@ -144,20 +144,20 @@ Returning to the original variable by substituting \\(t = 6x + 1\\), we obtain t
 In many situations, the integral of a rational function cannot be computed directly by inspection. Even when the expression appears relatively simple, algebraic manipulations may not reveal an immediate antiderivative. In such cases, the method of partial fraction decomposition provides a systematic way to rewrite the function as a sum of elementary terms whose integrals are well known. By decomposing the rational function into simpler components, we obtain a representation that is far more suitable for integration. To illustrate the idea in a setting different from the earlier examples, consider the integral:
 
 \\[
-\int \frac{7x + 5}{(x - 1)(3x + 2)} \\, dx
+\int \frac{7x + 13}{(x - 1)(3x + 2)} \\, dx
 \\]
 
 At first glance, the structure of this expression does not suggest an obvious primitive. However, once we decompose the integrand into partial fractions, the computation becomes straightforward. We begin by writing
 
 \\[ \tag{1}
-\frac{7x + 5}{(x - 1)(3x + 2)} =
+\frac{7x + 13}{(x - 1)(3x + 2)} =
 \frac{A}{x - 1} + \frac{B}{3x + 2}
 \\]
 
 Multiplying both sides by \\((x - 1)(3x + 2)\\) yields the identity:
 
 \\[
-7x + 5 = A(3x + 2) + B(x - 1)
+7x + 13 = A(3x + 2) + B(x - 1)
 \\]
 
 which allows us to determine the coefficients \\(A\\) and \\(B\\). Evaluating at the convenient values \\(x = 1\\) and \\(x = -2/3\\), we obtain:
@@ -169,11 +169,7 @@ A = 4 \qquad B = -5
 Thus, by substituting the values obtained into identity \\(1\\), we obtain:
 
 \\[
-\frac{7x + 5}{(x - 1)(3x + 2)}
-=
-\frac{4}{x - 1}
-\-
-\frac{5}{3x + 2}
+\frac{7x + 13}{(x - 1)(3x + 2)} = \frac{4}{x - 1} - \frac{5}{3x + 2}
 \\]
 
 At this point the integral becomes:

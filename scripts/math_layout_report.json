@@ -1,0 +1,26 @@
+[
+  {
+    "file": "data/lessons/teaching/alg.linear.slope.md",
+    "type": "fused-display",
+    "line": 89,
+    "excerpt": "\\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using $2$ gallons of gas every $3$"
+  },
+  {
+    "file": "data/lessons/teaching/alg.linear.slope.md",
+    "type": "fused-display",
+    "line": 163,
+    "excerpt": "So the tree is growing at a rate of $4\\,\\text{ft}/$  But hold on. Did we really *need* this picture? The \"rise\" of $12$ came from a subtract"
+  },
+  {
+    "file": "data/lessons/teaching/alg.linear.slope.md",
+    "type": "fused-display",
+    "line": 175,
+    "excerpt": "This is known as the *slope formula*. The following graphs help to understand why  this formula works. Basically, we are still using a slope"
+  },
+  {
+    "file": "data/lessons/teaching/alg.linear.slope.md",
+    "type": "fused-display",
+    "line": 195,
+    "excerpt": "Now apply the  slope formula :"
+  }
+]

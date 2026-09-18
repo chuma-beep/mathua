@@ -223,7 +223,7 @@ c_1
 2 \\\\
 1
 \end{pmatrix}
-\+
++
 c_2
 \begin{pmatrix}
 0 \\\\

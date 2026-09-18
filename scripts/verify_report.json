@@ -10406,207 +10406,207 @@
   "line": 73,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int_{-\\infty}^{+\\infty} f(x)\\\\,dx\n=\n\\int_{-\\infty}^c f(x)\\\\,dx\n\\+\n\\int_c^{+\\infty} \\\\! f(x)\\\\,dx"
+  "latex": "\\\\begin{aligned}\n\\int_{-\\infty}^{+\\infty} f(x)\\\\,dx &= \\int_{-\\infty}^c f(x)\\\\,dx \\\\\\\\\n&+ \\int_c^{+\\infty} \\\\! f(x)\\\\,dx\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 85,
+  "line": 84,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 91,
+  "line": 90,
   "verdict": "SKIP",
-  "reason": "evaluation-bar notation",
-  "latex": "\\int_1^b \\frac{1}{x^2}\\\\,dx\n=\n\\int_1^b x^{-2}\\\\,dx\n=\n\\left[ -x^{-1} \\right]_1^b\n= -\\frac{1}{b} + 1"
+  "reason": "differential relation",
+  "latex": "\\\\begin{aligned}\n\\int_1^b \\frac{1}{x^2}\\\\,dx &= \\int_1^b x^{-2}\\\\,dx \\\\\\\\\n&= \\left[ -x^{-1} \\right]_1^b \\\\\\\\\n&= -\\frac{1}{b} + 1\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 107,
+  "line": 105,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2}\\\\,dx = 1"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 116,
+  "line": 114,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 122,
+  "line": 120,
   "verdict": "SKIP",
-  "reason": "differential relation",
-  "latex": "\\int_1^b \\frac{1}{x}\\\\,dx\n=\n\\left[ \\ln x \\right]\\_1^b\n=\n\\ln b"
+  "reason": "evaluation-bar notation",
+  "latex": "\\\\begin{aligned}\n\\int_1^b \\frac{1}{x}\\\\,dx &= \\left[ \\ln x \\right]_1^b \\\\\\\\\n&= \\ln b\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 142,
+  "line": 139,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_a^b f(x)\\\\,dx\n\\:=\n\\lim_{t \\to a^+} \\int_t^b f(x)\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 150,
+  "line": 147,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_a^b f(x)\\\\,dx\n\\:=\n\\lim_{t \\to b^-} \\int_a^t f(x)\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 158,
+  "line": 155,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int_a^b f(x)\\\\,dx\n=\n\\int_a^c f(x)\\\\,dx\n\\+\n\\int_c^b f(x)\\\\,dx"
+  "latex": "\\\\begin{aligned}\n\\int_a^b f(x)\\\\,dx &= \\int_a^c f(x)\\\\,dx \\\\\\\\\n&+ \\int_c^b f(x)\\\\,dx\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 172,
+  "line": 168,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_0^1 \\frac{1}{\\sqrt{x}}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 178,
+  "line": 174,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_0^1 \\frac{1}{\\sqrt{x}}\\\\,dx\n\\:=\n\\lim_{t \\to 0^+} \\int_t^1 x^{-1/2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 186,
+  "line": 182,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int x^{-1/2}\\\\,dx\n=\n2x^{1/2} + c"
+  "latex": "\\\\begin{aligned}\n\\int x^{-1/2}\\\\,dx &= 2x^{1/2} + c\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 193,
+  "line": 189,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int_t^1 x^{-1/2}\\\\,dx\n=\n2 - 2\\sqrt{t}"
+  "latex": "\\\\begin{aligned}\n\\int_t^1 x^{-1/2}\\\\,dx &= 2 - 2\\sqrt{t}\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 200,
+  "line": 196,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{t \\to 0^+} (2 - 2\\sqrt{t})\n=2"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 210,
+  "line": 206,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^p}\\\\,dx \\tag{1}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 216,
+  "line": 212,
   "verdict": "SKIP",
   "reason": "evaluation-bar notation",
-  "latex": "\\int_1^b x^{-p}\\\\,dx\n=\n\\left[ \\frac{x^{1-p}}{1-p} \\right]_1^b\n=\n\\frac{b^{1-p} - 1}{1-p}"
+  "latex": "\\\\begin{aligned}\n\\int_1^b x^{-p}\\\\,dx &= \\left[ \\frac{x^{1-p}}{1-p} \\right]_1^b \\\\\\\\\n&= \\frac{b^{1-p} - 1}{1-p}\n\\\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 233,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_0^1 \\frac{1}{x^p}\\\\,dx \\tag{2}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 256,
+  "line": 251,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "\\lim_{x \\to +\\infty} \\frac{f(x)}{g(x)} = L \\quad \\quad 0 < L < +\\infty"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 282,
+  "line": 277,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2 + 1}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 297,
+  "line": 292,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2+1}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 298,
+  "line": 293,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 301,
+  "line": 296,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{1}{x^2+1}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 310,
+  "line": 305,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_2^{+\\infty} \\frac{\\cos^2 x}{x^2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 316,
+  "line": 311,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "0 \\le \\frac{\\cos^2 x}{x^2} \\le \\frac{1}{x^2}"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 322,
+  "line": 317,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_2^{+\\infty} \\frac{1}{x^2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 326,
+  "line": 321,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_2^{+\\infty} \\frac{\\cos^2 x}{x^2}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 334,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_a^{+\\infty} f(x)\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 340,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_a^{+\\infty} |f(x)|\\\\,dx < +\\infty"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 346,
+  "line": 341,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{\\sin x}{x}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/improper-integrals.md",
-  "line": 352,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_1^{+\\infty} \\frac{|\\sin x|}{x}\\\\,dx"
@@ -10973,21 +10973,21 @@
   "line": 146,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int \\frac{7x + 5}{(x - 1)(3x + 2)} \\\\, dx"
+  "latex": "\\int \\frac{7x + 13}{(x - 1)(3x + 2)} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
   "line": 152,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
-  "latex": "\\tag{1}\n\\frac{7x + 5}{(x - 1)(3x + 2)} =\n\\frac{A}{x - 1} + \\frac{B}{3x + 2}"
+  "latex": "\\tag{1}\n\\frac{7x + 13}{(x - 1)(3x + 2)} =\n\\frac{A}{x - 1} + \\frac{B}{3x + 2}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
   "line": 159,
   "verdict": "SKIP",
   "reason": "unresolved function",
-  "latex": "7x + 5 = A(3x + 2) + B(x - 1)"
+  "latex": "7x + 13 = A(3x + 2) + B(x - 1)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
@@ -10998,266 +10998,259 @@
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 171,
-  "verdict": "SKIP",
-  "reason": "parse: Exception",
-  "latex": "\\frac{7x + 5}{(x - 1)(3x + 2)}\n=\n\\frac{4}{x - 1}\n\\-\n\\frac{5}{3x + 2}"
- },
- {
-  "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 181,
+  "line": 177,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\left( \\frac{4}{x - 1} - \\frac{5}{3x + 2} \\right) dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 187,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "4 \\int \\frac{1}{x - 1} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 190,
+  "line": 186,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "5 \\int \\frac{1}{3x + 2} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 196,
+  "line": 192,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "4 \\ln|x - 1| + c_1"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 199,
+  "line": 195,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{3} \\ln|3x + 2| + c_2"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 205,
+  "line": 201,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "4 \\ln|x - 1| -\\frac{5}{3} \\ln|3x + 2| + c"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 217,
+  "line": 213,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{A_1}{x - r} + \\frac{A_2}{(x - r)^2} + \\dots + \\frac{A_k}{(x - r)^k}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 225,
+  "line": 221,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\frac{1}{(x - r)^j} \\\\, dx = \\frac{(x - r)^{1 - j}}{1 - j} + c \\qquad (j \\geq 2)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 235,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\frac{3x + 1}{(x - 1)^2 (x + 2)} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 241,
+  "line": 237,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{3x + 1}{(x - 1)^2 (x + 2)} = \\frac{A}{x - 1} + \\frac{B}{(x - 1)^2} + \\frac{C}{x + 2}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 247,
+  "line": 243,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "3x + 1 = A(x - 1)(x + 2) + B(x + 2) + C(x - 1)^2"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 253,
+  "line": 249,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "B = \\frac{4}{3}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 259,
+  "line": 255,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "C = -\\frac{5}{9}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 265,
+  "line": 261,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "A = \\frac{5}{9}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 277,
+  "line": 273,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\frac{5}{9} \\int \\frac{1}{x - 1} \\\\, dx + \\frac{4}{3} \\int \\frac{1}{(x - 1)^2} \\\\, dx - \\frac{5}{9} \\int \\frac{1}{x + 2} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 285,
+  "line": 281,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{9} \\ln|x - 1| - \\frac{4}{3} \\cdot \\frac{1}{x - 1} - \\frac{5}{9} \\ln|x + 2| + c"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 299,
+  "line": 295,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{A}{x - r}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 303,
+  "line": 299,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{Ax + B}{ax^2 + bx + c}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 307,
+  "line": 303,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\frac{1}{u^2 + a^2} \\\\, du"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 311,
+  "line": 307,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{a}\\arctan\\\\!\\left(\\frac{u}{a}\\right) + c"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 319,
+  "line": 315,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\frac{5x^2 + 3x - 2}{(x + 1)(x^2 + 2x + 3)} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 323,
+  "line": 319,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "\\Delta = 2^2 - 4 \\cdot 1 \\cdot 3 = 4 - 12 = -8 < 0"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 327,
+  "line": 323,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{5x^2 + 3x - 2}{(x + 1)(x^2 + 2x + 3)} = \\frac{A}{x + 1} + \\frac{Bx + C}{x^2 + 2x + 3}"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 331,
+  "line": 327,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "5x^2 + 3x - 2 = A(x^2 + 2x + 3) + (Bx + C)(x + 1)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 335,
+  "line": 331,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "5(-1)^2 + 3(-1) - 2 = A\\bigl((-1)^2 + 2(-1) + 3\\bigr)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 339,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "A = 0"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 343,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "5x^2 + 3x - 2 = (Bx + C)(x + 1)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 351,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "B = 5 \\qquad B + C = 3"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 359,
+  "line": 355,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\frac{5x - 2}{x^2 + 2x + 3} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 363,
+  "line": 359,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\frac{d}{dx}(x^2 + 2x + 3) = 2x + 2"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 371,
+  "line": 367,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\frac{5}{2} \\int \\frac{2x + 2}{x^2 + 2x + 3} \\\\, dx - 7 \\int \\frac{1}{x^2 + 2x + 3} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 376,
+  "line": 372,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{2} \\ln|x^2 + 2x + 3|"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 383,
+  "line": 379,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "-7 \\int \\frac{1}{(x+1)^2 + 2} \\\\, dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 387,
+  "line": 383,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "-\\frac{7}{\\sqrt{2}} \\arctan\\\\!\\left(\\frac{x+1}{\\sqrt{2}}\\right)"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 391,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{2} \\ln(x^2 + 2x + 3) - \\frac{7}{\\sqrt{2}} \\arctan\\\\!\\left(\\frac{x+1}{\\sqrt{2}}\\right) + c"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 402,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\\\int \\\\frac{N(x)}{D(x)}\\\\,dx = \\\\int Q(x)\\\\,dx + \\\\int \\\\frac{R(x)}{D(x)}\\\\,dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
-  "line": 407,
+  "line": 403,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\\\int \\\\frac{c}{ax + b}\\\\,dx = \\\\frac{c}{a}\\\\ln|ax + b| + k"
@@ -17357,7 +17350,7 @@
   "line": 119,
   "verdict": "SKIP",
   "reason": "ellipsis schema",
-  "latex": "\\frac{A_{1}}{x + a}\n\\+ \\frac{A_{2}}{(x + a)^{2}}\n\\+ \\cdots\n\\+ \\frac{A_{k}}{(x + a)^{k}}"
+  "latex": "\\frac{A_{1}}{x + a}\n+ \\frac{A_{2}}{(x + a)^{2}}\n+ \\cdots\n+ \\frac{A_{k}}{(x + a)^{k}}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/partial-fraction-decomposition.md",
@@ -17371,7 +17364,7 @@
   "line": 134,
   "verdict": "SKIP",
   "reason": "ellipsis schema",
-  "latex": "\\frac{B_{1}x + C_{1}}{x^{2} + ax + b}\n\\+ \\frac{B_{2}x + C_{2}}{(x^{2} + ax + b)^{2}}\n\\+ \\cdots\n\\+ \\frac{B_{k}x + C_{k}}{(x^{2} + ax + b)^{k}}"
+  "latex": "\\frac{B_{1}x + C_{1}}{x^{2} + ax + b}\n+ \\frac{B_{2}x + C_{2}}{(x^{2} + ax + b)^{2}}\n+ \\cdots\n+ \\frac{B_{k}x + C_{k}}{(x^{2} + ax + b)^{k}}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/partial-fraction-decomposition.md",
@@ -17658,14 +17651,14 @@
   "line": 173,
   "verdict": "SKIP",
   "reason": "environment: array",
-  "latex": "\\begin{array}{rrrr|rr}\n\\+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\\\\\\n\\-x^3 &      & -x &    & +x   &    \\\\\\\\\n\\text{//} & +x^2 & \\text{//} & +2 & &\n\\end{array}"
+  "latex": "\\begin{array}{rrrr|rr}\n+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\\\\\\n\\-x^3 &      & -x &    & +x   &    \\\\\\\\\n\\text{//} & +x^2 & \\text{//} & +2 & &\n\\end{array}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
   "line": 183,
   "verdict": "SKIP",
   "reason": "environment: array",
-  "latex": "\\begin{array}{rrrr|rr}\n\\+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\\\\\\n\\-x^3 &      & -x &    & +x   & +1 \\\\\\\\\n\\text{//} & +x^2 & \\text{//} & +2 & & \\\\\\\\\n     & -x^2 &           & -1 & & \\\\\\\\\n     & \\text{//} &      & +1 & &\n\\end{array}"
+  "latex": "\\begin{array}{rrrr|rr}\n+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\\\\\\n\\-x^3 &      & -x &    & +x   & +1 \\\\\\\\\n\\text{//} & +x^2 & \\text{//} & +2 & & \\\\\\\\\n     & -x^2 &           & -1 & & \\\\\\\\\n     & \\text{//} &      & +1 & &\n\\end{array}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
@@ -17707,21 +17700,21 @@
   "line": 252,
   "verdict": "SKIP",
   "reason": "environment: array",
-  "latex": "\\begin{array}{rrrr|rr}\n\\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\\\\\\\\n\\end{array}"
+  "latex": "\\begin{array}{rrrr|rr}\n+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\\\\\\\\n\\end{array}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
   "line": 261,
   "verdict": "SKIP",
   "reason": "environment: array",
-  "latex": "\\begin{array}{rrrr|rr}\n\\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\-2x^3 & +4x^2 &    &    & 2x^2 &    \\\\\\\\\n\\text{//} & +x^2 & +x & -5 & &\n\\end{array}"
+  "latex": "\\begin{array}{rrrr|rr}\n+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\-2x^3 & +4x^2 &    &    & 2x^2 &    \\\\\\\\\n\\text{//} & +x^2 & +x & -5 & &\n\\end{array}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
   "line": 271,
   "verdict": "SKIP",
   "reason": "environment: array",
-  "latex": "\\begin{array}{rrrr|rr}\n\\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\-2x^3 & +4x^2 &    &    & 2x^2 & +x \\\\\\\\\n\\text{//} & +x^2 & +x & -5 & & \\\\\\\\\n      & -x^2 & +2x &    & & \\\\\\\\\n\\text{//} & \\text{//} & +3x & -5 & &\n\\end{array}"
+  "latex": "\\begin{array}{rrrr|rr}\n+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\\\\\\n\\-2x^3 & +4x^2 &    &    & 2x^2 & +x \\\\\\\\\n\\text{//} & +x^2 & +x & -5 & & \\\\\\\\\n      & -x^2 & +2x &    & & \\\\\\\\\n\\text{//} & \\text{//} & +3x & -5 & &\n\\end{array}"
  },
  {
   "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
@@ -21018,14 +21011,14 @@
   "line": 59,
   "verdict": "SKIP",
   "reason": "empty side",
-  "latex": "\\begin{aligned} &= |1200 - 1200| + \\\\\\ &\\+ |1300 - 1200| \\\\\\ &\\+ |1400 - 1200| \\\\\\ &\\+ |1500 - 1200| \\\\\\ &\\+ |3000 - 1200| \\\\\\ &\\+ |3200 - 1200| \\\\\\ &\\+ |4000 - 1200| \\\\\\ &= 7,100 \\end{aligned}"
+  "latex": "\\begin{aligned} &= |1200 - 1200| + \\\\\\ &+ |1300 - 1200| \\\\\\ &+ |1400 - 1200| \\\\\\ &+ |1500 - 1200| \\\\\\ &+ |3000 - 1200| \\\\\\ &+ |3200 - 1200| \\\\\\ &+ |4000 - 1200| \\\\\\ &= 7,100 \\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/probability-and-statistics/median.md",
   "line": 61,
   "verdict": "SKIP",
   "reason": "empty side",
-  "latex": "\\begin{aligned} &= |1200 - 1300| + \\\\\\ &\\+ |1300 - 1300| \\\\\\ &\\+ |1400 - 1300| \\\\\\ &\\+ |1500 - 1300| \\\\\\ &\\+ |3000 - 1300| \\\\\\ &\\+ |3200 - 1300| \\\\\\ &\\+ |4000 - 1300| \\\\\\ &= 6,700 \\end{aligned}"
+  "latex": "\\begin{aligned} &= |1200 - 1300| + \\\\\\ &+ |1300 - 1300| \\\\\\ &+ |1400 - 1300| \\\\\\ &+ |1500 - 1300| \\\\\\ &+ |3000 - 1300| \\\\\\ &+ |3200 - 1300| \\\\\\ &+ |4000 - 1300| \\\\\\ &= 6,700 \\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/probability-and-statistics/median.md",
@@ -21347,7 +21340,7 @@
   "line": 87,
   "verdict": "SKIP",
   "reason": "parse: Exception",
-  "latex": "E(X^2) = \\lambda e^{-\\lambda} \\left[ \\sum_{x=1}^{\\infty} \\frac{\\lambda^{x-1}}{(x-1)!} \\+ \\sum_{x=2}^{\\infty} \\frac{\\lambda^{x-2}}{(x-2)!} \\right]"
+  "latex": "E(X^2) = \\lambda e^{-\\lambda} \\left[ \\sum_{x=1}^{\\infty} \\frac{\\lambda^{x-1}}{(x-1)!} + \\sum_{x=2}^{\\infty} \\frac{\\lambda^{x-2}}{(x-2)!} \\right]"
  },
  {
   "file": "data/lessons/algebrica/probability-and-statistics/poisson-distribution.md",
@@ -22845,7 +22838,7 @@
   "line": 14,
   "verdict": "SKIP",
   "reason": "parse: Exception",
-  "latex": "f(x) \\sim \\frac{a_0}{2} \\+ \\sum_{n=1}^{\\infty} a_n \\cos(nx) + b_n \\sin(nx)"
+  "latex": "f(x) \\sim \\frac{a_0}{2} + \\sum_{n=1}^{\\infty} a_n \\cos(nx) + b_n \\sin(nx)"
  },
  {
   "file": "data/lessons/algebrica/series/fourier-series.md",
@@ -22901,7 +22894,7 @@
   "line": 69,
   "verdict": "SKIP",
   "reason": "unresolved function",
-  "latex": "S_N(x) = \\frac{a_0}{2} \\+ \\sum_{n=1}^{N} a_n\\cos(nx)+b_n\\sin(nx)"
+  "latex": "S_N(x) = \\frac{a_0}{2} + \\sum_{n=1}^{N} a_n\\cos(nx)+b_n\\sin(nx)"
  },
  {
   "file": "data/lessons/algebrica/series/fourier-series.md",
@@ -25211,95 +25204,95 @@
   "line": 125,
   "verdict": "SKIP",
   "reason": "disjoint variables",
-  "latex": "Y^{2}\n= X^{2} - 1\n= \\left(\\frac{e^{x} + e^{-x}}{2}\\right)^{2} - 1"
+  "latex": "\\\\begin{aligned}\nY^{2} &= X^{2} - 1 \\\\\n&= \\left(\\frac{e^{x} + e^{-x}}{2}\\right)^{2} - 1\n\\end{aligned}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 133,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "disjoint variables",
   "latex": "Y^{2}\n= \\left(\\frac{e^{x} - e^{-x}}{2}\\right)^{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 144,
+  "line": 145,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "Y = \\frac{e^{x} - e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 158,
+  "line": 159,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "A = \\frac{1}{2}\\\\,\\ln\\\\!\\bigl(X + \\sqrt{X^{2}-1}\\bigr)"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 164,
+  "line": 165,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "x = \\ln\\\\!\\bigl(X + \\sqrt{X^{2}-1}\\bigr) = 2A"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 170,
+  "line": 171,
   "verdict": "SKIP",
   "reason": "disjoint variables",
   "latex": "X + \\sqrt{X^{2}-1} = e^{x}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 176,
+  "line": 177,
   "verdict": "SKIP",
   "reason": "waived: isolation step under exponentiated hypothesis X+sqrt=e^x",
   "latex": "\\sqrt{X^{2}-1} = e^{x} - X"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 182,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "X = \\frac{e^{x} + e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 194,
+  "line": 195,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\text{1. } \\quad \\sinh(x)\n= \\frac{e^{x} - e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 199,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\text{2. } \\quad \\cosh(x)\n= \\frac{e^{x} + e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 226,
+  "line": 227,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "x^{2} - y^{2} = 1"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 231,
+  "line": 232,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "X_{P} = \\cosh(x) = \\frac{e^{x} + e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 234,
+  "line": 235,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "Y_{P} = \\sinh(x) = \\frac{e^{x} - e^{-x}}{2}"
  },
  {
   "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
-  "line": 239,
+  "line": 240,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "P(X_{P}, Y_{P}) = P(\\cos\\theta,\\\\, \\sin\\theta)"
@@ -26884,7 +26877,7 @@
   "line": 219,
   "verdict": "SKIP",
   "reason": "environment: pmatrix",
-  "latex": "c_1\n\\begin{pmatrix}\n1 \\\\\\\\\n2 \\\\\\\\\n1\n\\end{pmatrix}\n\\+\nc_2\n\\begin{pmatrix}\n0 \\\\\\\\\n1 \\\\\\\\\n1\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n3 \\\\\\\\\n7 \\\\\\\\\n5\n\\end{pmatrix}"
+  "latex": "c_1\n\\begin{pmatrix}\n1 \\\\\\\\\n2 \\\\\\\\\n1\n\\end{pmatrix}\n+\nc_2\n\\begin{pmatrix}\n0 \\\\\\\\\n1 \\\\\\\\\n1\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n3 \\\\\\\\\n7 \\\\\\\\\n5\n\\end{pmatrix}"
  },
  {
   "file": "data/lessons/algebrica/vectors-and-matrices/linear-combinations.md",
@@ -31683,35 +31676,42 @@
  },
  {
   "file": "data/lessons/teaching/calc.deriv.implicit.md",
-  "line": 172,
+  "line": 152,
+  "verdict": "SKIP",
+  "reason": "environment: array",
+  "latex": "\\frac{dy}{dx}\\left| \\begin{array}{l}\n\\\\\n{}_{({3,-4})}\n\\end{array} \\right. = - \\frac{3}{-4} = \\frac{3}{4}."
+ },
+ {
+  "file": "data/lessons/teaching/calc.deriv.implicit.md",
+  "line": 173,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rll}\n{\\frac{d}{dx}\\left( {y^{3} + x^{3} - 3xy} \\right)} & = & {\\frac{d}{dx}(0)} \\\\\n{3y^{2}\\frac{dy}{dx} + 3x^{2} - \\left( {3y + \\frac{dy}{dx}3x} \\right)} & = & 0 \\\\\n\\frac{dy}{dx} & = & {\\frac{3y - 3x^{2}}{3y^{2} - 3x}.}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/calc.deriv.implicit.md",
-  "line": 182,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\frac{dy}{dx}\\left| \\begin{array}{l}\n \\\\\n{}_{({\\frac{3}{2},\\frac{3}{2}})}\n\\end{array} \\right. = -1."
  },
  {
   "file": "data/lessons/teaching/calc.deriv.implicit.md",
-  "line": 191,
+  "line": 192,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "y = \\text{−}x + 3."
  },
  {
   "file": "data/lessons/teaching/calc.deriv.implicit.md",
-  "line": 209,
+  "line": 210,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "8x + 50y\\frac{dy}{dx} = 0."
  },
  {
   "file": "data/lessons/teaching/calc.deriv.implicit.md",
-  "line": 215,
+  "line": 216,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\frac{dy}{dx} = - \\frac{4x}{25y}."

@@ -123,9 +123,10 @@ X = \cosh(x) = \frac{e^{x} + e^{-x}}{2}
 we can plug this expression directly into the hyperbola’s equation and solve for \\(Y\\). We have:
 
 \\[
-Y^{2}
-= X^{2} - 1
-= \left(\frac{e^{x} + e^{-x}}{2}\right)^{2} - 1
+\\begin{aligned}
+Y^{2} &= X^{2} - 1 \\
+&= \left(\frac{e^{x} + e^{-x}}{2}\right)^{2} - 1
+\end{aligned}
 \\]
 
 Expanding the square and simplifying leads to:
