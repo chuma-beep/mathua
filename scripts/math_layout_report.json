@@ -1,5 +1,3251 @@
 [
   {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 10,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 12,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 16,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 57,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 57,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 63,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 63,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/fields.md",
+    "type": "dollar-number",
+    "line": 79,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 43,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 49,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 51,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 58,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 67,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 67,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 67,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 88,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 88,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 91,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 91,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 93,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 95,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/groups.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/modules.md",
+    "type": "dollar-number",
+    "line": 83,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/modules.md",
+    "type": "dollar-number",
+    "line": 83,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/modules.md",
+    "type": "dollar-number",
+    "line": 87,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 52,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 55,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 55,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/rings.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
+    "type": "dollar-number",
+    "line": 51,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
+    "type": "dollar-number",
+    "line": 53,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers-in-exponential-form.md",
+    "type": "dollar-number",
+    "line": 130,
+    "excerpt": "\\\\( 6 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers-in-exponential-form.md",
+    "type": "dollar-number",
+    "line": 175,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers-in-exponential-form.md",
+    "type": "dollar-number",
+    "line": 175,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers.md",
+    "type": "dollar-number",
+    "line": 40,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/complex-numbers.md",
+    "type": "dollar-number",
+    "line": 197,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/de-moivre-theorem.md",
+    "type": "dollar-number",
+    "line": 222,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md",
+    "type": "dollar-number",
+    "line": 102,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md",
+    "type": "dollar-number",
+    "line": 104,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md",
+    "type": "dollar-number",
+    "line": 179,
+    "excerpt": "\\\\( 10 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/operations-with-complex-numbers.md",
+    "type": "dollar-number",
+    "line": 168,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/roots-of-unity.md",
+    "type": "dollar-number",
+    "line": 25,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/roots-of-unity.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/roots-of-unity.md",
+    "type": "dollar-number",
+    "line": 96,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/complex-numbers/roots-of-unity.md",
+    "type": "dollar-number",
+    "line": 109,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/cauchy-theorem.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/hopital-rule.md",
+    "type": "dollar-number",
+    "line": 53,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/hopital-rule.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/hopital-rule.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/hopital-rule.md",
+    "type": "dollar-number",
+    "line": 98,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/rolles-theorem.md",
+    "type": "dollar-number",
+    "line": 55,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/weierstrass-theorem.md",
+    "type": "dollar-number",
+    "line": 33,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/weierstrass-theorem.md",
+    "type": "dollar-number",
+    "line": 33,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/differential-calculus-theorems/weierstrass-theorem.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/binomial-equations.md",
+    "type": "dollar-number",
+    "line": 17,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/binomial-equations.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/binomial-equations.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 42,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 98,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 98,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 100,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations.md",
+    "type": "dollar-number",
+    "line": 33,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations.md",
+    "type": "dollar-number",
+    "line": 49,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/equations.md",
+    "type": "dollar-number",
+    "line": 55,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/exponential-equations.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/factoring-quadratic-equations.md",
+    "type": "dollar-number",
+    "line": 64,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/factoring-quadratic-equations.md",
+    "type": "dollar-number",
+    "line": 64,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/factoring-quadratic-equations.md",
+    "type": "dollar-number",
+    "line": 94,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/homogeneous-trigonometric-equations.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/linear-equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 128,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/linear-equations.md",
+    "type": "dollar-number",
+    "line": 7,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/polynomial-equations.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/polynomial-equations.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/quadratic-equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 110,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/quadratic-equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 162,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/quadratic-equations-with-parameters.md",
+    "type": "dollar-number",
+    "line": 171,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/trigonometric-equations.md",
+    "type": "dollar-number",
+    "line": 48,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/equations/trigonometric-equations.md",
+    "type": "dollar-number",
+    "line": 106,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/continuous-functions.md",
+    "type": "dollar-number",
+    "line": 34,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/continuous-functions.md",
+    "type": "dollar-number",
+    "line": 103,
+    "excerpt": "\\\\( 1. \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/cosine-function.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/cosine-function.md",
+    "type": "dollar-number",
+    "line": 19,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 76,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 104,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 143,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
+    "type": "dollar-number",
+    "line": 143,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 30,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 30,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 34,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 34,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 44,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/dirichlet-function.md",
+    "type": "dollar-number",
+    "line": 44,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 54,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 86,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 86,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 90,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 92,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 92,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 144,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
+    "type": "dollar-number",
+    "line": 144,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/functions.md",
+    "type": "dollar-number",
+    "line": 104,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/functions.md",
+    "type": "dollar-number",
+    "line": 104,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/functions.md",
+    "type": "dollar-number",
+    "line": 191,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/functions.md",
+    "type": "dollar-number",
+    "line": 206,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/logarithmic-function.md",
+    "type": "dollar-number",
+    "line": 18,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/secant-function.md",
+    "type": "dollar-number",
+    "line": 22,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sigmoid-function.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sigmoid-function.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sigmoid-function.md",
+    "type": "dollar-number",
+    "line": 93,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sigmoid-function.md",
+    "type": "dollar-number",
+    "line": 133,
+    "excerpt": "\\\\(0.1050\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 54,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 58,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 106,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sign-function.md",
+    "type": "dollar-number",
+    "line": 106,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sine-function.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/functions/sine-function.md",
+    "type": "dollar-number",
+    "line": 19,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 90,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 90,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 92,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 92,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 124,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 189,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 203,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
+    "type": "dollar-number",
+    "line": 235,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/linear-inequalities.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/linear-inequalities.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/linear-inequalities.md",
+    "type": "dollar-number",
+    "line": 155,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/logarithmic-inequalities.md",
+    "type": "dollar-number",
+    "line": 48,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/logarithmic-inequalities.md",
+    "type": "dollar-number",
+    "line": 99,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/systems-of-inequalities.md",
+    "type": "dollar-number",
+    "line": 37,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/inequalities/systems-of-inequalities.md",
+    "type": "dollar-number",
+    "line": 37,
+    "excerpt": "\\\\( 9 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/fundamental-theorem-of-calculus.md",
+    "type": "dollar-number",
+    "line": 207,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/fundamental-theorem-of-calculus.md",
+    "type": "dollar-number",
+    "line": 239,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/fundamental-theorem-of-calculus.md",
+    "type": "dollar-number",
+    "line": 264,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/indefinite-integrals.md",
+    "type": "dollar-number",
+    "line": 65,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/indefinite-integrals.md",
+    "type": "dollar-number",
+    "line": 73,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-rational-functions.md",
+    "type": "dollar-number",
+    "line": 169,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 136,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 142,
+    "excerpt": "\\\\( 16 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\( 8 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 160,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 182,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 188,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 206,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 216,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 236,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 258,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-the-exponential-function.md",
+    "type": "dollar-number",
+    "line": 332,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-trigonometric-functions.md",
+    "type": "dollar-number",
+    "line": 95,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-trigonometric-functions.md",
+    "type": "dollar-number",
+    "line": 215,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-trigonometric-functions.md",
+    "type": "dollar-number",
+    "line": 241,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integral-of-trigonometric-functions.md",
+    "type": "dollar-number",
+    "line": 268,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/integration-by-parts.md",
+    "type": "dollar-number",
+    "line": 189,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/integrals/the-weierstrass-substitution.md",
+    "type": "dollar-number",
+    "line": 36,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/algebra-of-limits.md",
+    "type": "dollar-number",
+    "line": 93,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/asymptotes.md",
+    "type": "dollar-number",
+    "line": 42,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/limits.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/limits.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/limits.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/little-o-notation.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/little-o-notation.md",
+    "type": "dollar-number",
+    "line": 99,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/squeeze-theorem.md",
+    "type": "dollar-number",
+    "line": 57,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/squeeze-theorem.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/squeeze-theorem.md",
+    "type": "dollar-number",
+    "line": 90,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/limits/squeeze-theorem.md",
+    "type": "dollar-number",
+    "line": 117,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 61,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 121,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/linear-systems/rouche-capelli-theorem.md",
+    "type": "dollar-number",
+    "line": 121,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/lines-planes-conic-sections/circumference.md",
+    "type": "dollar-number",
+    "line": 10,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/adding-and-subtracting-polynomials.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/adding-and-subtracting-polynomials.md",
+    "type": "dollar-number",
+    "line": 97,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 14,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 15,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 16,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 85,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 105,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomial-theorem.md",
+    "type": "dollar-number",
+    "line": 125,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomials.md",
+    "type": "dollar-number",
+    "line": 8,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/binomials.md",
+    "type": "dollar-number",
+    "line": 151,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/completing-the-square.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\( 9 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/completing-the-square.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/completing-the-square.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/factoring-polynomials-ac-method.md",
+    "type": "dollar-number",
+    "line": 115,
+    "excerpt": "\\\\( 12 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\( 4 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 22,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 51,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 54,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 54,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 63,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 63,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/monomials.md",
+    "type": "dollar-number",
+    "line": 134,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/notable-products.md",
+    "type": "dollar-number",
+    "line": 101,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/notable-products.md",
+    "type": "dollar-number",
+    "line": 192,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 123,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 181,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 193,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 193,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 250,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 281,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/polynomial-division.md",
+    "type": "dollar-number",
+    "line": 295,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 38,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 38,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 85,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 103,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 103,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 203,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 209,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 209,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/synthetic-division-method.md",
+    "type": "dollar-number",
+    "line": 209,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 113,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 113,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 113,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 129,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 129,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 129,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 153,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/polynomials/vieta-formulas.md",
+    "type": "dollar-number",
+    "line": 153,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/logarithms.md",
+    "type": "dollar-number",
+    "line": 22,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/logarithms.md",
+    "type": "dollar-number",
+    "line": 35,
+    "excerpt": "\\\\(10\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/logarithms.md",
+    "type": "dollar-number",
+    "line": 89,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 25,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 25,
+    "excerpt": "\\\\( 4 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 26,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 26,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 26,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\( 4 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 38,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 52,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 63,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/powers.md",
+    "type": "dollar-number",
+    "line": 124,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/radicals.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/radicals.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(9\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/radicals.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/radicals.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/powers-radicals-logarithms/radicals.md",
+    "type": "dollar-number",
+    "line": 49,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 41,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 41,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 79,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/bernoulli-distribution.md",
+    "type": "dollar-number",
+    "line": 79,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/beta-distribution.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/beta-distribution.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/beta-distribution.md",
+    "type": "dollar-number",
+    "line": 40,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/binomial-distribution.md",
+    "type": "dollar-number",
+    "line": 114,
+    "excerpt": "\\\\( 0.324 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/chi-square-distribution.md",
+    "type": "dollar-number",
+    "line": 138,
+    "excerpt": "\\\\(1.542\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/confidence-intervals.md",
+    "type": "dollar-number",
+    "line": 87,
+    "excerpt": "\\\\(1.96\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/discrete-random-variables.md",
+    "type": "dollar-number",
+    "line": 14,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/discrete-random-variables.md",
+    "type": "dollar-number",
+    "line": 14,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/discrete-random-variables.md",
+    "type": "dollar-number",
+    "line": 14,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/discrete-random-variables.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/discrete-random-variables.md",
+    "type": "dollar-number",
+    "line": 52,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/gamma-distribution.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/gamma-distribution.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/gamma-distribution.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/geometric-mean.md",
+    "type": "dollar-number",
+    "line": 48,
+    "excerpt": "\\\\( 3.93 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/geometric-mean.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 60,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 62,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 65,
+    "excerpt": "\\\\(0.81\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 65,
+    "excerpt": "\\\\(0.18\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 65,
+    "excerpt": "\\\\(0.01\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/mean-or-expected-value-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 75,
+    "excerpt": "\\\\(0.2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/median.md",
+    "type": "dollar-number",
+    "line": 75,
+    "excerpt": "\\\\(1500\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 64,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 64,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 77,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/normal-distribution.md",
+    "type": "dollar-number",
+    "line": 77,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/poisson-distribution.md",
+    "type": "dollar-number",
+    "line": 157,
+    "excerpt": "\\\\(0.0653\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/sampling-distributions.md",
+    "type": "dollar-number",
+    "line": 25,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/sampling-distributions.md",
+    "type": "dollar-number",
+    "line": 57,
+    "excerpt": "\\\\( 6 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/sampling-distributions.md",
+    "type": "dollar-number",
+    "line": 57,
+    "excerpt": "\\\\( 6 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 55,
+    "excerpt": "\\\\( 0.5636 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 64,
+    "excerpt": "\\\\( 0.5636 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 70,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 74,
+    "excerpt": "\\\\(0.16\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 82,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 82,
+    "excerpt": "\\\\(0.16\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 88,
+    "excerpt": "\\\\( 6.5 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 91,
+    "excerpt": "\\\\( 6.5 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/standard-normal-z-table.md",
+    "type": "dollar-number",
+    "line": 109,
+    "excerpt": "\\\\( 0.1056 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 24,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 26,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 0.01 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 0.01 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 0.01 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 73,
+    "excerpt": "\\\\( 0.01 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/student-t-distribution.md",
+    "type": "dollar-number",
+    "line": 91,
+    "excerpt": "\\\\(0.01\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/uniform-distribution.md",
+    "type": "dollar-number",
+    "line": 126,
+    "excerpt": "\\\\(4.8\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/uniform-distribution.md",
+    "type": "dollar-number",
+    "line": 126,
+    "excerpt": "\\\\(5.4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/uniform-distribution.md",
+    "type": "dollar-number",
+    "line": 139,
+    "excerpt": "\\\\(0.333\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/uniform-distribution.md",
+    "type": "dollar-number",
+    "line": 150,
+    "excerpt": "\\\\(0.333\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/uniform-distribution.md",
+    "type": "dollar-number",
+    "line": 172,
+    "excerpt": "\\\\(0.03\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(0.1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(0.3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(0.4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(0.1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 47,
+    "excerpt": "\\\\(0.1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md",
+    "type": "dollar-number",
+    "line": 148,
+    "excerpt": "\\\\(0.94\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/cauchy-sequence.md",
+    "type": "dollar-number",
+    "line": 41,
+    "excerpt": "\\\\( 2 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/convergent-and-divergent-sequences.md",
+    "type": "dollar-number",
+    "line": 56,
+    "excerpt": "\\\\(1.\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 11,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 11,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 35,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 45,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 70,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/principle-of-mathematical-induction.md",
+    "type": "dollar-number",
+    "line": 72,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/sequences-of-functions.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/sequences-of-functions.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sequences/sequences-of-functions.md",
+    "type": "dollar-number",
+    "line": 66,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
+    "type": "dollar-number",
+    "line": 102,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/series/geometric-series.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/series/taylor-series.md",
+    "type": "dollar-number",
+    "line": 128,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/series/taylor-series.md",
+    "type": "dollar-number",
+    "line": 154,
+    "excerpt": "\\\\(0.1745\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/series/taylor-series.md",
+    "type": "dollar-number",
+    "line": 191,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/binomial-coefficient.md",
+    "type": "dollar-number",
+    "line": 27,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/binomial-coefficient.md",
+    "type": "dollar-number",
+    "line": 100,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/binomial-coefficient.md",
+    "type": "dollar-number",
+    "line": 118,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/binomial-coefficient.md",
+    "type": "dollar-number",
+    "line": 256,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 5,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 14,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 20,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 20,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 32,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 53,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 59,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 59,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 59,
+    "excerpt": "\\\\(7\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 59,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 59,
+    "excerpt": "\\\\(210\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/factorial.md",
+    "type": "dollar-number",
+    "line": 137,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 18,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 86,
+    "excerpt": "\\\\(235.\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 108,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 108,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 112,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 116,
+    "excerpt": "\\\\(26\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 116,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 117,
+    "excerpt": "\\\\(13\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 117,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 118,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 118,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 119,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 119,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 120,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 120,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 121,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 121,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 127,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 128,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 129,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 130,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 131,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 132,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 142,
+    "excerpt": "\\\\(12\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 142,
+    "excerpt": "\\\\(14\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 142,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 147,
+    "excerpt": "\\\\(24\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 147,
+    "excerpt": "\\\\(12\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 147,
+    "excerpt": "\\\\(12\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 147,
+    "excerpt": "\\\\(11\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 150,
+    "excerpt": "\\\\(12\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/integers.md",
+    "type": "dollar-number",
+    "line": 175,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/intervals.md",
+    "type": "dollar-number",
+    "line": 89,
+    "excerpt": "\\\\( 3 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/intervals.md",
+    "type": "dollar-number",
+    "line": 89,
+    "excerpt": "\\\\( 5 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 21,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(17\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 78,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 107,
+    "excerpt": "\\\\(100\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 107,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 109,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(10\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(7\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(10\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(4\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/modulo-operator.md",
+    "type": "dollar-number",
+    "line": 111,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 15,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 19,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 33,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 36,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 40,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 92,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 93,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 137,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/natural-numbers.md",
+    "type": "dollar-number",
+    "line": 137,
+    "excerpt": "\\\\(5\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\(2\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 29,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 161,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 167,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 170,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 176,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 178,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 178,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 190,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 199,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/properties-of-real-numbers.md",
+    "type": "dollar-number",
+    "line": 199,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/real-numbers.md",
+    "type": "dollar-number",
+    "line": 8,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/real-numbers.md",
+    "type": "dollar-number",
+    "line": 8,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/real-numbers.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/real-numbers.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/real-numbers.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/types-of-numbers.md",
+    "type": "dollar-number",
+    "line": 23,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/sets-and-numbers/types-of-numbers.md",
+    "type": "dollar-number",
+    "line": 28,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/arctangent-and-arccotangent.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/arctangent-and-arccotangent.md",
+    "type": "dollar-number",
+    "line": 130,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/arctangent-and-arccotangent.md",
+    "type": "dollar-number",
+    "line": 170,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
+    "type": "dollar-number",
+    "line": 209,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-sine-and-cosine.md",
+    "type": "dollar-number",
+    "line": 239,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 98,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 114,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 118,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 118,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 127,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/hyperbolic-tangent-and-cotangent.md",
+    "type": "dollar-number",
+    "line": 139,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/pythagorean-identity.md",
+    "type": "dollar-number",
+    "line": 6,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/pythagorean-theorem.md",
+    "type": "dollar-number",
+    "line": 85,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/reduction-formulas-and-reference-angles.md",
+    "type": "dollar-number",
+    "line": 69,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/reduction-formulas-and-reference-angles.md",
+    "type": "dollar-number",
+    "line": 169,
+    "excerpt": "\\\\( 0 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/right-triangle-trigonometry.md",
+    "type": "dollar-number",
+    "line": 102,
+    "excerpt": "\\\\(8.66\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/right-triangle-trigonometry.md",
+    "type": "dollar-number",
+    "line": 102,
+    "excerpt": "\\\\(8.66\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/secant-and-cosecant.md",
+    "type": "dollar-number",
+    "line": 6,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/sine-and-cosine.md",
+    "type": "dollar-number",
+    "line": 6,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/sine-and-cosine.md",
+    "type": "dollar-number",
+    "line": 68,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/sine-and-cosine.md",
+    "type": "dollar-number",
+    "line": 144,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/the-law-of-cosines.md",
+    "type": "dollar-number",
+    "line": 51,
+    "excerpt": "\\\\(7.21\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/the-law-of-sines.md",
+    "type": "dollar-number",
+    "line": 52,
+    "excerpt": "\\\\(14.1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/trigonometry/unit-circle.md",
+    "type": "dollar-number",
+    "line": 20,
+    "excerpt": "\\\\( 1 \\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 31,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 50,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 106,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 140,
+    "excerpt": "\\\\(0.75\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/various/cosine-similarity.md",
+    "type": "dollar-number",
+    "line": 140,
+    "excerpt": "\\\\(0.48\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/vectors-and-matrices/vectors.md",
+    "type": "dollar-number",
+    "line": 67,
+    "excerpt": "\\\\(1\\\\)"
+  },
+  {
+    "file": "data/lessons/algebrica/vectors-and-matrices/vectors.md",
+    "type": "dollar-number",
+    "line": 94,
+    "excerpt": "\\\\(7\\\\)"
+  },
+  {
+    "file": "data/lessons/authored/calc.integral.applied.md",
+    "type": "dollar-number",
+    "line": 9,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/authored/calc.integral.applied.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
+    "file": "data/lessons/authored/calc.integral.applied.md",
+    "type": "dollar-number",
+    "line": 13,
+    "excerpt": "\\\\(3\\\\)"
+  },
+  {
+    "file": "data/lessons/authored/topo.basics.open_closed.md",
+    "type": "dollar-number",
+    "line": 7,
+    "excerpt": "\\\\(0\\\\)"
+  },
+  {
     "file": "data/lessons/teaching/alg.linear.slope.md",
     "type": "fused-display",
     "line": 89,
@@ -22,5 +3268,113 @@
     "type": "fused-display",
     "line": 195,
     "excerpt": "Now apply the  slope formula :"
+  },
+  {
+    "file": "data/lessons/teaching/discrete.sequences.recurrence.md",
+    "type": "dollar-number",
+    "line": 126,
+    "excerpt": "\\\\(6\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/discrete.sets.venn.md",
+    "type": "dollar-number",
+    "line": 129,
+    "excerpt": "\\(3\\)"
+  },
+  {
+    "file": "data/lessons/teaching/discrete.sets.venn.md",
+    "type": "dollar-number",
+    "line": 132,
+    "excerpt": "\\(3\\)"
+  },
+  {
+    "file": "data/lessons/teaching/discrete.sets.venn.md",
+    "type": "dollar-number",
+    "line": 135,
+    "excerpt": "\\(3\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 206,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 210,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 210,
+    "excerpt": "\\\\(23\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 210,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 214,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 398,
+    "excerpt": "\\\\(3491\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 432,
+    "excerpt": "\\\\(18\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 432,
+    "excerpt": "\\\\(42\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 438,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 438,
+    "excerpt": "\\\\(8\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 496,
+    "excerpt": "\\\\(10\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 598,
+    "excerpt": "\\\\(51\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/nt.adv.diophantine.md",
+    "type": "dollar-number",
+    "line": 598,
+    "excerpt": "\\\\(87\\\\)"
+  },
+  {
+    "file": "data/lessons/teaching/topology/covering-spaces.md",
+    "type": "dollar-number",
+    "line": 33,
+    "excerpt": "\\(0\\)"
   }
 ]

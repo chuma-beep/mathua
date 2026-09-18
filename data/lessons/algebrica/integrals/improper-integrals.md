@@ -105,7 +105,7 @@ The limit exists and is finite, so we conclude:
 \\[
 \int_1^{+\infty} \frac{1}{x^2}\\,dx = 1
 \\]
-and the integral converges to \\(1\\).
+and the integral converges to 1.
 
 ## Example 2
 
@@ -197,7 +197,7 @@ Taking the limit as \\(t \to 0^+\\):
 \lim_{t \to 0^+} (2 - 2\sqrt{t})
 =2
 \\]
-The limit exists and is finite, so the integral converges and equals \\(2\\).
+The limit exists and is finite, so the integral converges and equals 2.
 
 ## The \\(p\\)-Integral Test
 

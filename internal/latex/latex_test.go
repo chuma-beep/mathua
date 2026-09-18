@@ -70,6 +70,28 @@ func TestValidateUnpairedDollar(t *testing.T) {
 	}
 }
 
+func TestValidateOverescapedNumber(t *testing.T) {
+	// The fixed-point loop turns explicit \(1\) into \$1\$ on rescan; the
+	// frontend honors the escape, so users see literal `$1$`.
+	w := Validate(`converges to \$1\$.`, ORCCA)
+	found := false
+	for _, m := range w {
+		if strings.Contains(m, "over-escaped number") {
+			found = true
+		}
+	}
+	if !found {
+		t.Errorf("expected over-escaped-number warning, got %v", w)
+	}
+}
+
+func TestValidateSingleEscapedPriceClean(t *testing.T) {
+	// A lone `\$5` price (no closer) is legitimate and must not warn.
+	if w := Validate(`pays \$5 today`, ORCCA); len(w) != 0 {
+		t.Errorf("single escaped price should not warn, got %v", w)
+	}
+}
+
 func TestValidateEscapedDollarClean(t *testing.T) {
 	// The real arith.factor.find.md case: '\$' inside inline math is an
 	// escaped literal dollar, not a delimiter.

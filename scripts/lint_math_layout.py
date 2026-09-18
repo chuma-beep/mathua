@@ -22,6 +22,10 @@ time (horizontal overflow wall on mobile, `=` visually lost). This lens flags:
   eqref-math     `the equation \\(1\\)` style \\tag pointers written as math
                  instead of text `(1)`                        (error)
                  ("identity \\(1\\)" is the identity ELEMENT — math, ignored)
+  dollar-number  bare numerals as inline math `\\(1\\)`: the Go fixed-point
+                 loop re-escapes the rescan (`$1$` -> `\\$1\\$`), so users see
+                 literal `$1$`. Upright text numerals are also typographically
+                 correct — never set bare numbers as math      (error)
 
 Usage:
   python3 scripts/lint_math_layout.py            # report, exit 1 on errors
@@ -29,10 +33,11 @@ Usage:
 
 Report goes to scripts/math_layout_report.json (list; empty means clean).
 --fix handles: lone `\\+` lines -> `+`, `\\+`/`\\-`-safe rewrites in math,
-`]_` detachment, eqref-math -> text, and wraps bare-chain / multiline-eq
-blocks in `aligned` (first relation `&=`, continuations `\\\\ &=` /
-`\\\\ &+` / `\\\\ &-`). Blocks already containing `\\\\`, an aligned/array
-env, single-`$` fragments, or blank lines are never rewritten.
+`]_` detachment, eqref-math -> text, bare `\\(N\\)` numerals -> text, and
+wraps bare-chain / multiline-eq blocks in `aligned` (first relation `&=`,
+continuations `\\\\ &=` / `\\\\ &+` / `\\\\ &-`). Blocks already containing
+`\\\\`, an aligned/array env, single-`$` fragments, or blank lines are never
+rewritten.
 """
 from __future__ import annotations
 
@@ -65,13 +70,17 @@ EQREF_RE = re.compile(
     r"(equation|formula|integral)\s+\\\\\((\d{1,2})\\\\\)",
     re.IGNORECASE,
 )
+# Bare numerals set as inline math. Excludes coordinates `\(1, 2\)` (space),
+# signed `\(-5\)` (marker: stays math, renders fine) and anything with
+# operators — only pure digit/dot/comma runs.
+DOLLAR_NUMBER_RE = re.compile(r"(?<!\\)\\{1,2}\(\s*(\d[\d.,]*)\s*\\{1,2}\)")
 # A continuation line starts with a bare relation. Leading `-` is excluded:
 # `- \\frac...` may be a fresh (negated) expression, not a join.
 LEAD_REL_RE = re.compile(r"^(=|\\approx|\\equiv|\\simeq|\\cong|\\le|\\ge)\s+(.+)$")
 # A line ending in a bare `=` (not ==, <=, >=, !=, =>, \:=) joins with the next.
 TRAIL_EQ_RE = re.compile(r"^(?P<head>.+?)(?<![<>=!:])=\s*$")
 
-ERROR_TYPES = {"bare-chain", "multiline-eq", "bad-plus", "detached-sub", "eqref-math"}
+ERROR_TYPES = {"bare-chain", "multiline-eq", "bad-plus", "detached-sub", "eqref-math", "dollar-number"}
 
 
 def _count_joins(content: list[str]) -> tuple[int, bool]:
@@ -151,12 +160,15 @@ def lint_text(rel: str, text: str):
     for m in EQREF_RE.finditer(text):
         add("eqref-math", text.count("\n", 0, m.start()) + 1, m.group(0).strip())
 
+    for m in DOLLAR_NUMBER_RE.finditer(text):
+        add("dollar-number", text.count("\n", 0, m.start()) + 1, m.group(0).strip())
+
     return issues
 
 
 def fix_text(text: str):
     """Apply mechanical fixes. Returns (new_text, counts dict)."""
-    counts = {"bad-plus": 0, "detached-sub": 0, "eqref-math": 0, "bare-chain": 0, "multiline-eq": 0}
+    counts = {"bad-plus": 0, "detached-sub": 0, "eqref-math": 0, "bare-chain": 0, "multiline-eq": 0, "dollar-number": 0}
 
     # Lone `\+` lines -> `+` (canonical; safe: a lone line is never content).
     def _plus(m):
@@ -201,6 +213,14 @@ def fix_text(text: str):
         return f"{m.group(1)} ({m.group(2)})"
 
     text = EQREF_RE.sub(_eqref, text)
+
+    # Bare numerals as inline math -> upright text numerals. Runs after the
+    # eqref rewrite so `equation \(1\)` keeps its `(1)` reference form.
+    def _dollarnum(m):
+        counts["dollar-number"] += 1
+        return m.group(1)
+
+    text = DOLLAR_NUMBER_RE.sub(_dollarnum, text)
 
     # Wrap bare-chain blocks in aligned.
     text = _fix_bare_chains(text, counts)

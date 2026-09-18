@@ -27,7 +27,11 @@ function extractToc(body: string): { id: string; label: string; level: number }[
     const match = line.match(/^(#{2,3})\s+(.+)/)
     if (match) {
       const level = match[1].length
-      const label = match[2].trim()
+      // Headings may carry inline math (`## The $p$-Integral Test`); the
+      // "In this lesson" nav shows plain text. Only the label is stripped —
+      // slugify() below is unchanged, and `$` is non-alphanumeric in both
+      // sluggers, so anchors keep matching KatexContent's heading ids.
+      const label = match[2].trim().replace(/(?<!\\)\$(.+?)(?<!\\)\$/g, '$1')
       const id = slugify(label)
       headings.push({ id, label, level })
     }
