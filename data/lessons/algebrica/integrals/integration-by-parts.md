@@ -266,7 +266,7 @@ Therefore:
       - _evaluate \\( \int f'g\\,dx \\)_
         apply the appropriate standard formula, or repeat integration by parts if needed
       - **IF** the integral is definite
-        - _evaluate the boundary term \\( \bigl[f(x)g(x)\bigr]\_a^b \\)_
+        - _evaluate the boundary term \\( \bigl[f(x)g(x)\bigr]_a^b \\)_
           compute \\( f(b)g(b) - f(a)g(a) \\) explicitly  
           omitting this term is a common error
         - _the result is a number_

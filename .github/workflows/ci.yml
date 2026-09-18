@@ -32,6 +32,7 @@ jobs:
       - run: python scripts/lint_prose_display.py
       - run: python scripts/lint_hypothesis.py
       - run: python scripts/lint_notation.py
+      - run: python3 scripts/lint_math_layout.py
       - name: Fail on verifier FAILs
         run: |
           python -c "

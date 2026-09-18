@@ -172,7 +172,7 @@ Dividing \\(x^3\\) by \\(x^2\\) yields \\(x\\). Multiplying \\(x\\) by \\(D(x)\\
 
 \\[
 \begin{array}{rrrr|rr}
-\+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\
++x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\
 \-x^3 &      & -x &    & +x   &    \\\\
 \text{//} & +x^2 & \text{//} & +2 & &
 \end{array}
@@ -182,7 +182,7 @@ Dividing \\(x^2\\) by \\(x^2\\) yields \\(1\\). Multiplying and subtracting give
 
 \\[
 \begin{array}{rrrr|rr}
-\+x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\
++x^3 & +x^2 & +x & +2 & +x^2 & +1 \\\\
 \-x^3 &      & -x &    & +x   & +1 \\\\
 \text{//} & +x^2 & \text{//} & +2 & & \\\\
      & -x^2 &           & -1 & & \\\\
@@ -251,7 +251,7 @@ The remainder theorem predicts that the remainder of dividing \\(P(x)\\) by \\(x
 
 \\[
 \begin{array}{rrrr|rr}
-\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
++2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
 \\\\
 \end{array}
 \\]
@@ -260,7 +260,7 @@ Dividing the leading term \\(2x^3\\) by \\(x\\) yields \\(2x^2\\), which serves 
 
 \\[
 \begin{array}{rrrr|rr}
-\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
++2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
 \-2x^3 & +4x^2 &    &    & 2x^2 &    \\\\
 \text{//} & +x^2 & +x & -5 & &
 \end{array}
@@ -270,7 +270,7 @@ Dividing \\(x^2\\) by \\(x\\) yields \\(x\\). Multiplying and subtracting gives:
 
 \\[
 \begin{array}{rrrr|rr}
-\+2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
++2x^3 & -3x^2 & +x & -5 & +x & -2 \\\\
 \-2x^3 & +4x^2 &    &    & 2x^2 & +x \\\\
 \text{//} & +x^2 & +x & -5 & & \\\\
       & -x^2 & +2x &    & & \\\\

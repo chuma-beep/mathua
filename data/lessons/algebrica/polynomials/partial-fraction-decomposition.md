@@ -118,9 +118,9 @@ If the factor occurs with multiplicity \\(k\\), the decomposition includes \\(k\
 
 \\[
 \frac{A_{1}}{x + a}
-\+ \frac{A_{2}}{(x + a)^{2}}
-\+ \cdots
-\+ \frac{A_{k}}{(x + a)^{k}}
++ \frac{A_{2}}{(x + a)^{2}}
++ \cdots
++ \frac{A_{k}}{(x + a)^{k}}
 \\]
 
 To every irreducible quadratic factor \\(x^{2} + ax + b\\) corresponds a term:
@@ -133,9 +133,9 @@ The numerator is a linear polynomial because the denominator has degree two, and
 
 \\[
 \frac{B_{1}x + C_{1}}{x^{2} + ax + b}
-\+ \frac{B_{2}x + C_{2}}{(x^{2} + ax + b)^{2}}
-\+ \cdots
-\+ \frac{B_{k}x + C_{k}}{(x^{2} + ax + b)^{k}}
++ \frac{B_{2}x + C_{2}}{(x^{2} + ax + b)^{2}}
++ \cdots
++ \frac{B_{k}x + C_{k}}{(x^{2} + ax + b)^{k}}
 \\]
 
 > Every rational function whose denominator factors over the real numbers admits a unique partial fraction representation, determined up to the values of the coefficients.

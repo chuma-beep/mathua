@@ -11,7 +11,7 @@ Let \\( f : \mathbb{R} \to \mathbb{R} \\) be a function that is periodic with pe
 
 Assume that \\( f \\) is [integrable](<../definite-integrals/>) on the [interval](<../intervals/>) \\( [-\pi,\pi] \\). The Fourier series of \\( f \\) is the formal trigonometric expansion:
 
-\\[f(x) \sim \frac{a_0}{2} \+ \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx) \\]
+\\[f(x) \sim \frac{a_0}{2} + \sum_{n=1}^{\infty} a_n \cos(nx) + b_n \sin(nx) \\]
 
   * The symbol \\( \sim \\) emphasizes that we are not yet asserting equality (we are defining a trigonometric series associated with \\( f \\)).
   * The question of whether the series converges to \\( f \\) will be addressed later.
@@ -66,7 +66,7 @@ The definition of the Fourier series does not automatically guarantee convergenc
 
 then the Fourier series converges at every point \\( x. \\) More precisely consider the \\(N\\)-th partial sum:
 
-\\[S_N(x) = \frac{a_0}{2} \+ \sum_{n=1}^{N} a_n\cos(nx)+b_n\sin(nx) \\]
+\\[S_N(x) = \frac{a_0}{2} + \sum_{n=1}^{N} a_n\cos(nx)+b_n\sin(nx) \\]
 
 \\[\lim_{N\to\infty} S_N(x) = \frac{f(x^+)+f(x^-)}{2} \\]
 

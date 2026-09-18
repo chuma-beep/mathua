@@ -22,7 +22,7 @@ Intuitively, we can see that the area \\( A \\) is given by the difference betwe
 A = \int_a^b f(x) \\, dx  \\,\\,- \int_a^b g(x) \\, dx
 \\]
 
-By the linearity of the integral, this becomes equation \\(1\\).
+By the linearity of the integral, this becomes equation (1).
 
 ## Areas between intersecting curves
 
@@ -67,7 +67,7 @@ Solving the integral, we obtain:
 \\[
 \begin{aligned}
 A &= \int_{-1}^{1} \left[ e^x - x^2 + 1 \right] \\, dx \\\\
-&= \left[ e^x - \frac{x^3}{3} + x \right]\_{-1}^{1} \\\\
+&= \left[ e^x - \frac{x^3}{3} + x \right]_{-1}^{1} \\\\
 &= \left( e - \frac{1}{3} + 1 \right) - \left( e^{-1} + \frac{1}{3} - 1 \right) \\\\
 &= e - \frac{1}{e} + \frac{4}{3}
 \end{aligned}
@@ -133,7 +133,7 @@ Computing the second integral, we obtain:
 
 \\[
 \begin{aligned}
-\int_{0}^{2} (4x - x^3) \\, dx &= \left[ 2x^2 - \frac{x^4}{4} \right]\_{0}^{2} \\\\
+\int_{0}^{2} (4x - x^3) \\, dx &= \left[ 2x^2 - \frac{x^4}{4} \right]_{0}^{2} \\\\
 &= \left(2 \cdot 4 - \frac{16}{4}\right) - 0 \\\\
 &= 8 - 4 \\\\
 &= 4
