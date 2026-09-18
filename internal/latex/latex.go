@@ -346,6 +346,23 @@ func envOutput(r latexnorm.Region) string {
 	}
 }
 
+// overescapedNumberRe flags paired `\$N\$` in canonical output: the
+// fixed-point loop over-escapes explicit `\(N\)` math on rescan
+// (`\(1\)` -> `$1$` -> `\$1\$`), which the frontend honors as literal `$1$`
+// text. Bare numerals must be plain text. Single `\$5` prices (no closer)
+// are legitimate and never match.
+var overescapedNumberRe = regexp.MustCompile(`\\\$[0-9][0-9.,]*\\\$`)
+
+func checkOverescapedNumbers(s string) string {
+	for _, loc := range overescapedNumberRe.FindAllStringIndex(s, -1) {
+		if loc[1] < len(s) && s[loc[1]] == '$' {
+			continue // `\$5$$`: the "closer" is a display `$$`, not a pair
+		}
+		return "over-escaped number renders literal dollars (write bare numerals as text): " + s[loc[0]:loc[1]]
+	}
+	return ""
+}
+
 // structuredArtifactRe flags dialect leftovers that must never survive the
 // structured ingestion pipelines.
 var structuredArtifactRe = regexp.MustCompile(`\\amp\b|<span class="math-|\\begin\{align\}|\\begin\{equation`)
@@ -375,6 +392,9 @@ func validateStructured(s string) []string {
 			warnings = append(warnings, "inline math: "+msg)
 		}
 	}
+	if msg := checkOverescapedNumbers(s); msg != "" {
+		warnings = append(warnings, msg)
+	}
 	return warnings
 }
 
@@ -400,6 +420,9 @@ func Validate(canonical string, a Adapter) []string {
 				warnings = append(warnings, "display math: "+msg)
 			}
 		}
+	}
+	if msg := checkOverescapedNumbers(canonical); msg != "" {
+		warnings = append(warnings, msg)
 	}
 	return warnings
 }
