@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/cauchy-convergence-criterion-series/) — CC BY-NC 4.0
 
+# Cauchy's Convergence Criterion
+
 ## Introduction
 
 **Cauchy’s criterion** is a useful tool for proving that a [series](<../series>) converges without needing to know its sum. Rather than computing the exact value of the series, the criterion checks whether the partial sums eventually become arbitrarily close to one another. If this condition holds, we can conclude that the series converges even if the actual [limit](<../limits>) remains unknown.

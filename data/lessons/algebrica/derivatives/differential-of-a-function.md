@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/differential-of-a-function/) — CC BY-NC 4.0
 
+# Differential of a Function
+
 Consider \\(f(x)\\) a [differentiable](<../derivatives>) function on the interval \\([a,b]\\). Since the function is differentiable, it is also [continuous](<../continuous-functions/>) on the given interval. Let us consider two points \\(x\\) and \\(x + \Delta x \in [a,b]\\).
 
 It is defined the differential of a function \\(f(x)\\), relative to the point \\(x\\) and the increment \\(\Delta x\\), as the product of the derivative of the function evaluated at \\(x\\) and the increment \\(\Delta x\\):

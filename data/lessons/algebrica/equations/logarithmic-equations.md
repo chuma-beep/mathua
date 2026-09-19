@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/logarithmic-equations/) — CC BY-NC 4.0
 
+# Logarithmic Equations
+
 ## Introduction
 
 Logarithmic equations are [equations](<../equations>) in which the unknown appears inside a [logarithm](<../logarithms>). To solve them, it is crucial to understand the properties of logarithms and how these can be applied to isolate and determine the value of the unknown. A logarithmic equation takes the form:

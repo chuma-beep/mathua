@@ -243,21 +243,37 @@ func (l *Loader) Count() int {
 func extractTitle(md string) string {
 	var first string
 	for _, line := range strings.Split(md, "\n") {
-		trimmed := strings.TrimLeft(line, "#")
-		if len(trimmed) < len(line) && strings.HasPrefix(trimmed, " ") {
-			title := strings.TrimSpace(trimmed)
-			if first == "" {
-				first = title
-			}
-			if !isGenericTitle(title) {
-				return title
-			}
+		level := 0
+		for level < len(line) && line[level] == '#' {
+			level++
+		}
+		if level == 0 || level > 3 || level >= len(line) || line[level] != ' ' {
+			continue
+		}
+		title := stripTitleMarkup(strings.TrimSpace(line[level:]))
+		if first == "" {
+			first = title
+		}
+		if !isGenericTitle(title) {
+			return title
 		}
 	}
 	if first != "" {
 		return first
 	}
 	return ""
+}
+
+// titleLinkRe extracts link text: titles render as plain text (SectionHeader,
+// study lists), so `[Rolle's Theorem](<../x/>)` must read as its text.
+var titleLinkRe = regexp.MustCompile(`\[([^\]]*)\]\([^)]*\)`)
+
+// stripTitleMarkup removes math delimiters and markdown links from a title.
+// Titles render as plain text outside KatexContent; without this, `$p$` or
+// `\(t\)` (or a pasted `[label](url)`) shows literally.
+func stripTitleMarkup(s string) string {
+	s = titleLinkRe.ReplaceAllString(s, "$1")
+	return normSectionKey(s)
 }
 
 // Generic opening headings ("Introduction") describe position, not content;

@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/fermat-theorem/) — CC BY-NC 4.0
 
+# Fermat's Theorem
+
 ## Introduction
 
 Fermat’s Theorem states that any relative [maximum or minimum](<../maximum-minimum-and-inflection-points/>) of a differentiable function within its [domain](<../determining-the-domain-of-a-function/>) must occur at a stationary point, that is, a point where the first [derivative](<../derivatives/>) is equal to zero, and the tangent line is horizontal (parallel to the \\(x\\)-axis).

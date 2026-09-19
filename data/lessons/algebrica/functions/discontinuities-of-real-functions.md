@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/discontinuities-of-real-functions/) — CC BY-NC 4.0
 
+# Discontinuities of Real Functions
+
 ## Introduction
 
 Continuity is a property of a [function](<../functions/>) in which small variations in the input result in correspondingly small variations in the output within the neighbourhood of a given point. If this local stability does not hold, the function is considered discontinuous. Discontinuities are typically classified into three distinct types:

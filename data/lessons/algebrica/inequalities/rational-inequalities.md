@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/rational-inequalities/) — CC BY-NC 4.0
 
+# Rational Inequalities
+
 ## Introduction
 
 A rational inequality is an inequality that involves at least one rational expression, that is, a ratio in which both the numerator and the denominator are [polynomials](<../polynomials>). The natural domain of such an expression is the set of all real numbers for which the denominator does not vanish; any value of \\(x\\) that makes the denominator equal to zero is excluded from the domain and cannot belong to the solution set. Every rational inequality can be reduced to one of the following canonical forms.
