@@ -13,6 +13,12 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONCEPTS_DIR = os.path.join(ROOT, "data", "concepts")
 LESSONS = os.path.join(ROOT, "data", "lessons")
+
+# Glued scraper-bleed element ids (PreTeXt xml:id concatenated onto text,
+# e.g. "antiderivativess359ebbb1", "Example 1se93b3fa4"). The leading run
+# must be glued (no space) to a word char or digit; spaced tags are left
+# alone. Keep in sync with the cleanup rule (strip trailing s+7hex).
+GLUED_ID_RE = r"[A-Za-z0-9]s[0-9a-f]{7,}"
 LESSONS_JSON = os.path.join(LESSONS, "lessons.json")
 
 
@@ -110,10 +116,22 @@ def main():
                 t = line.strip()
                 m = re.match(r"^(#{2,4})\s+(.+)$", t)
                 if m:
-                    heads.add(norm_section(m.group(2).strip()))
+                    raw_head = m.group(2).strip()
+                    heads.add(norm_section(raw_head))
+                    if re.search(GLUED_ID_RE, raw_head):
+                        kp_orphans.append(f"{src}: glued element id in heading {raw_head!r}")
             for kp in kps:
                 if kp.get("section") and norm_section(kp["section"]) not in heads:
                     kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
+                # Scraper-bleed element ids (PreTeXt xml:id glued onto text,
+                # e.g. "antiderivativess359ebbb1") must never land in
+                # user-visible KP fields.
+                for field in ("label", "section"):
+                    if kp.get(field) and re.search(GLUED_ID_RE, kp[field]):
+                        kp_orphans.append(f"{name}: glued element id in KP {field} {kp[field]!r}")
+                for sg in kp.get("subgoals", []) or []:
+                    if re.search(GLUED_ID_RE, sg):
+                        kp_orphans.append(f"{name}: glued element id in subgoal {sg!r}")
         if kp_orphans:
             errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))
         # Validate shard file count and total KPs (630 files ×3 =1890)
@@ -121,6 +139,21 @@ def main():
             errors.append(f"kp shard count mismatch: {kp_files} files vs {len(dag_ids)} concepts")
         if kp_total != len(dag_ids) * 3:
             errors.append(f"kp total mismatch: {kp_total} KPs vs {len(dag_ids)*3} expected (3 per concept)")
+
+    # 5b. Glued element ids in ANY lesson heading (including sources shadowed
+    # by the reverse-lexicographic pick above): PreTeXt xml:id bleed such as
+    # "antiderivativess359ebbb1" surfaces verbatim in study titles.
+    id_heads = []
+    for p in sorted(os.path.join(LESSONS, s) for s in sources):
+        if not os.path.isfile(p):
+            continue
+        with open(p, encoding="utf-8") as f:
+            for i, line in enumerate(f, 1):
+                m = re.match(r"^(#{1,4})\s+(.+)$", line.strip())
+                if m and re.search(GLUED_ID_RE, m.group(2)):
+                    id_heads.append(f"{os.path.relpath(p, ROOT)}:{i} {m.group(2).strip()[:80]}")
+    if id_heads:
+        errors.append(f"glued element ids in headings ({len(id_heads)}):\n  " + "\n  ".join(id_heads))
 
     # 6. Diagram mappings (engine.conceptDiagrams): concept in DAG, asset on disk.
     engine_src = os.path.join(ROOT, "internal", "engine", "engine.go")

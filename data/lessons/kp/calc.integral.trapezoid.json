@@ -1,7 +1,7 @@
 [
   {
     "label": "Trapezoidal rule",
-    "section": "The trapezoidal rules17635cbc",
+    "section": "The trapezoidal rule",
     "subgoals": [
       "Weight endpoints once, interior twice",
       "Scale by Δx/2",
@@ -10,7 +10,7 @@
   },
   {
     "label": "Quadrature principle",
-    "section": "General principle of a quadrature formulas345e11a4",
+    "section": "General principle of a quadrature formula",
     "subgoals": [
       "Replace f by local approximants",
       "Sum weighted samples",
@@ -19,7 +19,7 @@
   },
   {
     "label": "Trapezoid error sense",
-    "section": "Comparison and order of convergences3d833505",
+    "section": "Comparison and order of convergence",
     "subgoals": [
       "Compare against true 1/3 for x²",
       "Note overestimation on convex f",
