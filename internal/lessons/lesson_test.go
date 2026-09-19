@@ -314,3 +314,40 @@ func TestNormSectionKey_PlainHeadingsUnchanged(t *testing.T) {
 		t.Errorf("plain heading altered: %q", got)
 	}
 }
+
+func TestExtractTitle_SkipsDeepNoteHeadings(t *testing.T) {
+	// H4+ headings are styled notes (PreTeXt small print), never titles:
+	// the old code returned the whole note paragraph as the lesson title.
+	md := "## Introduction\n\n###### Each of these types will be examined.\n\n## Recall of continuity\n"
+	if got := extractTitle(md); got != "Recall of continuity" {
+		t.Errorf("got %q", got)
+	}
+}
+
+func TestExtractTitle_StripsMathAndLinks(t *testing.T) {
+	md := "## Integrals of trigonometric powers with \\(n\\) even\n"
+	if got := extractTitle(md); got != "Integrals of trigonometric powers with n even" {
+		t.Errorf("got %q", got)
+	}
+	md = "## Proof of [Rolle's Theorem](<../rolles-theorem/>)\n"
+	if got := extractTitle(md); got != "Proof of Rolle's Theorem" {
+		t.Errorf("got %q", got)
+	}
+}
+
+func TestStripTitleMarkup(t *testing.T) {
+	cases := map[string]string{
+		"The $p$-Integral Test":                   "The p-Integral Test",
+		"See [limits](<../limits/>) next":         "See limits next",
+		"Plain title":                             "Plain title",
+		"The substitution \\( t = \\tan(x/2) \\)": "The substitution t = \\tan(x/2)",
+	}
+	// NOTE: lone `$` prices would lose their sign (`Cost $5` -> `Cost 5`).
+	// No lesson heading in the corpus carries a price (verified), so the
+	// simple strip stands; revisit if one ever appears.
+	for in, want := range cases {
+		if got := stripTitleMarkup(in); got != want {
+			t.Errorf("stripTitleMarkup(%q) = %q, want %q", in, got, want)
+		}
+	}
+}

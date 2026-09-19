@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/increasing-and-decreasing-functions/) — CC BY-NC 4.0
 
+# Increasing and Decreasing Functions
+
 ## Introduction
 
 Understanding the behavior of [functions](<../functions>) is fundamental in mathematics. Depending on how their output values change with respect to the input, functions can be classified as:

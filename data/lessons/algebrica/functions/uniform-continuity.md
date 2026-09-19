@@ -1,5 +1,7 @@
 > Content sourced from [Algebrica](https://algebrica.org/uniform-continuity/) — CC BY-NC 4.0
 
+# Uniform Continuity
+
 ## Introduction
 
 [Ordinary continuity](<../continuous-functions/>) describes the local behaviour of a [function](<../functions/>), where small changes in the input near each point result in small changes in the output. This property can depend on the specific point, and in many contexts, a more robust form of continuity is required to ensure consistent regulation of oscillations across the entire [domain](<../determining-the-domain-of-a-function/>). Uniform continuity addresses this need by requiring a single tolerance for input variations to apply everywhere in the set.

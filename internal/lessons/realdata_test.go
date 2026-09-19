@@ -1,6 +1,7 @@
 package lessons
 
 import (
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -84,5 +85,38 @@ func TestRealDataKPSectionsResolve(t *testing.T) {
 	}
 	if checked == 0 {
 		t.Fatal("no KP sections checked")
+	}
+}
+
+// Guard: every served lesson title must be plain renderable text — the
+// title slots (study list/detail, concept page) never run math or markdown.
+// Catches paragraph-titles (deep-note H6 picked by a naive first-heading
+// scan), raw delimiters, and pasted markdown links.
+func TestRealDataTitlesSane(t *testing.T) {
+	lib, err := Load("../../data/lessons")
+	if err != nil {
+		t.Skipf("dataset not present: %v", err)
+	}
+	badBackslash := regexp.MustCompile(`\\[a-zA-Z]`)
+	checked := 0
+	for _, l := range lib.All() {
+		for _, c := range l.Concepts {
+			checked++
+			if l.Title == "" {
+				t.Errorf("%s: empty lesson title", c)
+			}
+			if len(l.Title) > 120 {
+				t.Errorf("%s: suspiciously long title (%d chars): %q", c, len(l.Title), l.Title[:60])
+			}
+			if strings.Contains(l.Title, "$") || strings.Contains(l.Title, "](") {
+				t.Errorf("%s: raw markup in title: %q", c, l.Title)
+			}
+			if badBackslash.MatchString(l.Title) {
+				t.Errorf("%s: raw TeX command in title: %q", c, l.Title)
+			}
+		}
+	}
+	if checked == 0 {
+		t.Fatal("no lessons checked")
 	}
 }
