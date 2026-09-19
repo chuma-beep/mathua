@@ -16,4 +16,4 @@ Error per step is $O(h^2)$; global error after $1/h$ steps is $O(h)$. Smaller $h
 
 ## Example
 
-Use $h=0.1$ for $y'=y$, $y(0)=1$ to estimate $y(0.1)$. $f(0,1)=1$, so $y_1=1+0.1\cdot1=1.1$. The exact $y(0.1)=e^{0.1}\approx1.1052$, error $0.0052$.
+Use $h=0.1$ for $y'=y$, $y(0)=1$ to estimate $y(0.1)$. $f(0,1)=1$, so $y_1=1+0.1\cdot1=1.1$. The exact $y(0.1)=e^{0.1}\approx1.1052$, error 0.0052.

@@ -30,7 +30,7 @@ endpoint of a lifted loop depends only on the loop's homotopy class.
 
 Consequence: a loop in \(B\) lifts to a loop in \(E\) exactly when its class
 lies in the subgroup \(p_*(\pi_1(E)) \subseteq \pi_1(B)\). For the exponential
-covering, the loop winding \(n\) times lifts to the path from \(0\) to \(n\),
+covering, the loop winding \(n\) times lifts to the path from 0 to \(n\),
 which closes up only for \(n = 0\). This is the standard proof that
 \(\pi_1(S^1) \cong \mathbb{Z}\).
 

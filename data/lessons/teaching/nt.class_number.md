@@ -5,7 +5,7 @@
 ## Class Number Formula
 
 ### Dirichlet Formula
-$h(D)=( \sqrt{|D|}/2\pi) L(1,\chi_D)$ for $D<-4$; $L(1,\chi_D)$ Dirichlet L at $1$ encodes class number.
+$h(D)=( \sqrt{|D|}/2\pi) L(1,\chi_D)$ for $D<-4$; $L(1,\chi_D)$ Dirichlet L at 1 encodes class number.
 
 ### Stark-Heegner
 Largest Heegner $h(-163)=1$; class numbers grow roughly $\sqrt{|D|}$.

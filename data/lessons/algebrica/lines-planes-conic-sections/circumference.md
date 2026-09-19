@@ -7,7 +7,7 @@ When introducing the [parabola](<../parabola>), we observed that the intersectio
 \\[f(x, y) = a_{11}x^2 + 2a_{12}xy + a_{22}y^2 + 2a_{13}x + 2a_{23}y + a_{33} = 0 \\]
 
   * The coefficients \\(a_{ij}\\) are real numbers.
-  * The factor \\(2\\) appearing in front of the mixed and linear terms is a conventional choice that simplifies the matrix representation of the conic.
+  * The factor 2 appearing in front of the mixed and linear terms is a conventional choice that simplifies the matrix representation of the conic.
 
 
 In order for the equation to describe a quadratic curve, at least one among \\(a_{11}\\), \\(a_{12}\\), and \\(a_{22}\\) must be different from zero otherwise the expression reduces to a [linear equation](<../linear-equations/>) and the locus degenerates into a line.

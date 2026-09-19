@@ -12,4 +12,4 @@ When characteristics intersect, solution becomes multi-valued → shock. Quasi-l
 
 ## Example
 
-$u_t+2u_x=0$, $u(x,0)=f(x)$: char $x-2t=\text{const}$, solution $u(x,t)=f(x-2t)$, wave moves right at speed $2$.
+$u_t+2u_x=0$, $u(x,0)=f(x)$: char $x-2t=\text{const}$, solution $u(x,t)=f(x-2t)$, wave moves right at speed 2.

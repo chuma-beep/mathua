@@ -48,9 +48,9 @@ The set \\(\mathcal{C}([a,b])\\) of all continuous real-valued functions on a cl
 
 A nonempty subset \\(W \subseteq V\\) is called a subspace of \\(V\\) if \\(W\\) is itself a vector space over \\(F\\) under the operations inherited from \\(V\\). Rather than verifying all axioms separately, it suffices to check two conditions: for all \\(\mathbf{u}, \mathbf{v} \in W\\) and all \\(\alpha \in F\\), one requires \\(\mathbf{u} + \mathbf{v} \in W\\) and \\(\alpha \cdot \mathbf{v} \in W\\). These two conditions together are called closure under linear combinations. The zero vector \\(\mathbf{0}\\) must belong to every subspace, since setting \\(\alpha = 0\\) gives \\(0 \cdot \mathbf{v} = \mathbf{0} \in W\\).
 
-As an example, the set \\(W = \{(x, y) \in \mathbb{R}^2 : y = 2x\}\\) is a subspace of \\(\mathbb{R}^2\\). For any two vectors \\((x_1, 2x_1)\\) and \\((x_2, 2x_2)\\) in \\(W\\), their sum \\((x_1 + x_2,\\, 2x_1 + 2x_2) = (x_1 + x_2,\\, 2(x_1+x_2))\\) belongs to \\(W\\), and for any scalar \\(\alpha \in \mathbb{R}\\) the vector \\(\alpha(x_1, 2x_1) = (\alpha x_1,\\, 2\alpha x_1)\\) also belongs to \\(W\\). Both conditions are satisfied, so \\(W\\) is a subspace of \\(\mathbb{R}^2\\). Geometrically, \\(W\\) is the line through the origin with slope \\(2\\).
+As an example, the set \\(W = \{(x, y) \in \mathbb{R}^2 : y = 2x\}\\) is a subspace of \\(\mathbb{R}^2\\). For any two vectors \\((x_1, 2x_1)\\) and \\((x_2, 2x_2)\\) in \\(W\\), their sum \\((x_1 + x_2,\\, 2x_1 + 2x_2) = (x_1 + x_2,\\, 2(x_1+x_2))\\) belongs to \\(W\\), and for any scalar \\(\alpha \in \mathbb{R}\\) the vector \\(\alpha(x_1, 2x_1) = (\alpha x_1,\\, 2\alpha x_1)\\) also belongs to \\(W\\). Both conditions are satisfied, so \\(W\\) is a subspace of \\(\mathbb{R}^2\\). Geometrically, \\(W\\) is the line through the origin with slope 2.
 
-> The diagram illustrates the two closure conditions on the subspace \\(W = \\{(x, y) \\in \\mathbb{R}^2 : y = 2x\\}\\). Any vector in \\(W\\) lies on the line through the origin with slope \\(2\\). Adding two such vectors or multiplying one by a scalar always produces a vector that remains on the same line, confirming that \\(W\\) is closed under both operations.
+> The diagram illustrates the two closure conditions on the subspace \\(W = \\{(x, y) \\in \\mathbb{R}^2 : y = 2x\\}\\). Any vector in \\(W\\) lies on the line through the origin with slope 2. Adding two such vectors or multiplying one by a scalar always produces a vector that remains on the same line, confirming that \\(W\\) is closed under both operations.
 
 ## Basis and dimension
 
@@ -71,7 +71,7 @@ and linear independence forces \\(\alpha_k = \beta_k\\) for all \\(k\\).
 
 One of the fundamental theorems of linear algebra states that any two bases of the same vector space contain the same number of elements. The argument rests on the observation that if a set of \\(m\\) vectors spans \\(V\\) and a set of \\(n\\) vectors is linearly independent in \\(V\\), then necessarily \\(n \leq m\\). Applying this inequality twice, once in each direction, to any two bases forces their cardinalities to be equal. This common cardinality is called the dimension of \\(V\\) and is denoted \\(\dim V\\).
 
-The standard basis of \\(\mathbb{R}^n\\) consists of the \\(n\\) vectors \\(\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\\), where \\(\mathbf{e}_k\\) has a \\(1\\) in position \\(k\\) and \\(0\\) everywhere else. For example, in \\(\mathbb{R}^3\\) the standard basis is the following:
+The standard basis of \\(\mathbb{R}^n\\) consists of the \\(n\\) vectors \\(\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\\), where \\(\mathbf{e}_k\\) has a 1 in position \\(k\\) and 0 everywhere else. For example, in \\(\mathbb{R}^3\\) the standard basis is the following:
 
 \\[
 \mathbf{e}_1 = (1, 0, 0), \quad \mathbf{e}_2 = (0, 1, 0), \quad \mathbf{e}_3 = (0, 0, 1)

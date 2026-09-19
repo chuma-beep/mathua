@@ -12,7 +12,7 @@ Multiples $nZ$ are ideals of $Z$. Odd integers are not ideals because odd plus o
 
 ### Example
 
-$\{0,2,4\}$ is an ideal of $Z_6$: closed under addition mod $6$ and absorbs multiplication.
+$\{0,2,4\}$ is an ideal of $Z_6$: closed under addition mod 6 and absorbs multiplication.
 
 ## Principal ideals
 

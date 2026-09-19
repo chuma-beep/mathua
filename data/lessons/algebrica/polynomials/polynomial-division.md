@@ -120,7 +120,7 @@ Dividing \\(3x^2\\) by \\(x\\) yields \\(3x\\). Multiplying and subtracting as b
 \end{array}
 \\]
 
-Dividing \\(2x\\) by \\(x\\) yields \\(2\\). Multiplying and subtracting completes the process:
+Dividing \\(2x\\) by \\(x\\) yields 2. Multiplying and subtracting completes the process:
 
 \\[
 \begin{array}{rrrr|rr}
@@ -178,7 +178,7 @@ Dividing \\(x^3\\) by \\(x^2\\) yields \\(x\\). Multiplying \\(x\\) by \\(D(x)\\
 \end{array}
 \\]
 
-Dividing \\(x^2\\) by \\(x^2\\) yields \\(1\\). Multiplying and subtracting gives:
+Dividing \\(x^2\\) by \\(x^2\\) yields 1. Multiplying and subtracting gives:
 
 \\[
 \begin{array}{rrrr|rr}
@@ -190,7 +190,7 @@ Dividing \\(x^2\\) by \\(x^2\\) yields \\(1\\). Multiplying and subtracting give
 \end{array}
 \\]
 
-The degree of the remainder \\(1\\) is \\(0\\), which is strictly less than \\(\deg D(x) = 2\\), so the algorithm terminates. The quotient and the remainder are:
+The degree of the remainder 1 is 0, which is strictly less than \\(\deg D(x) = 2\\), so the algorithm terminates. The quotient and the remainder are:
 
 \\[
 Q(x) = x + 1 \qquad R(x) = 1
@@ -247,7 +247,7 @@ and the value \\(c = 2\\). According to the theorem, dividing \\(P(x)\\) by \\(x
 P(2) = 2(2)^3 - 3(2)^2 + (2) - 5 = 16 - 12 + 2 - 5 = 1
 \\]
 
-The remainder theorem predicts that the remainder of dividing \\(P(x)\\) by \\(x - 2\\) is \\(1\\). The result can be verified using the long division method:
+The remainder theorem predicts that the remainder of dividing \\(P(x)\\) by \\(x - 2\\) is 1. The result can be verified using the long division method:
 
 \\[
 \begin{array}{rrrr|rr}
@@ -278,7 +278,7 @@ Dividing \\(x^2\\) by \\(x\\) yields \\(x\\). Multiplying and subtracting gives:
 \end{array}
 \\]
 
-Dividing \\(3x\\) by \\(x\\) yields \\(3\\). Multiplying and subtracting:
+Dividing \\(3x\\) by \\(x\\) yields 3. Multiplying and subtracting:
 
 \\[
 \begin{array}{rrrr|rr}
@@ -292,7 +292,7 @@ Dividing \\(3x\\) by \\(x\\) yields \\(3\\). Multiplying and subtracting:
 \end{array}
 \\]
 
-The remainder is \\(1\\), confirming that \\(R = P(2) = 1\\) in accordance with the remainder theorem. The quotient and the remainder are:
+The remainder is 1, confirming that \\(R = P(2) = 1\\) in accordance with the remainder theorem. The quotient and the remainder are:
 
 \\[
 Q(x) = 2x^2 + x + 3 \qquad R = 1

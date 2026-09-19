@@ -14,7 +14,7 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  Translate and solve: $\frac{3}{4}$ of $x$ is $24.$  
+1.  Translate and solve: $\frac{3}{4}$ of $x$ is 24.  
     If you missed this problem, review Example 4.105.
 2.  Simplify: ${(4.5)(2.38)}.$  
     If you missed this problem, review Example 5.15.
@@ -45,7 +45,7 @@ What number is $\text{35\%}$ of $90?$
 |----|----|
 | Translate into algebra. Let $n = $the number. |  |
 | Multiply. |  |
-|  | $31.5$ is $35\%$ of $90$ |
+|  | 31.5 is $35\%$ of 90 |
 
 ### Try It 6.27
 
@@ -57,7 +57,7 @@ What number is $\text{55\%}$ of $60?$
 
 ### Example 6.15
 
-$\text{125\%}$ of $28$ is what number?
+$\text{125\%}$ of 28 is what number?
 
 #### Solution
 
@@ -65,23 +65,23 @@ $\text{125\%}$ of $28$ is what number?
 |----|----|
 | Translate into algebra. Let $a\  = $the number. |  |
 | Multiply. |  |
-|  | $125\%$ of $28$ is $35$. |
+|  | $125\%$ of 28 is 35. |
 
-Remember that a percent over $100$ is a number greater than $1.$ We found that $\text{125\%}$ of $28$ is $35,$ which is greater than $28.$
+Remember that a percent over 100 is a number greater than 1. We found that $\text{125\%}$ of 28 is 35, which is greater than 28.
 
 ### Try It 6.29
 
-$\text{150\%}$ of $78$ is what number?
+$\text{150\%}$ of 78 is what number?
 
 ### Try It 6.30
 
-$\text{175\%}$ of $72$ is what number?
+$\text{175\%}$ of 72 is what number?
 
 In the next examples, we are asked to find the base.
 
 ### Example 6.16
 
-Translate and solve: $36$ is $\text{75\%}$ of what number?
+Translate and solve: 36 is $\text{75\%}$ of what number?
 
 #### Solution
 
@@ -93,11 +93,11 @@ Translate and solve: $36$ is $\text{75\%}$ of what number?
 
 ### Try It 6.31
 
-$17$ is $\text{25\%}$ of what number?
+17 is $\text{25\%}$ of what number?
 
 ### Try It 6.32
 
-$40$ is $\text{62.5\%}$ of what number?
+40 is $\text{62.5\%}$ of what number?
 
 ### Example 6.17
 
@@ -123,7 +123,7 @@ In the next examples, we will solve for the percent.
 
 ### Example 6.18
 
-What percent of $36$ is $9?$
+What percent of 36 is $9?$
 
 #### Solution
 
@@ -137,15 +137,15 @@ What percent of $36$ is $9?$
 
 ### Try It 6.35
 
-What percent of $76$ is $57?$
+What percent of 76 is $57?$
 
 ### Try It 6.36
 
-What percent of $120$ is $96?$
+What percent of 120 is $96?$
 
 ### Example 6.19
 
-$144$ is what percent of $96?$
+144 is what percent of $96?$
 
 #### Solution
 
@@ -158,11 +158,11 @@ $144$ is what percent of $96?$
 
 ### Try It 6.37
 
-$110$ is what percent of $88?$
+110 is what percent of $88?$
 
 ### Try It 6.38
 
-$126$ is what percent of $72?$
+126 is what percent of $72?$
 
 ### Solve Applications of Percent
 
@@ -241,7 +241,7 @@ Kimngoc had lunch at her favorite restaurant. She wants to leave $\text{15\%}$ o
 
 ### Example 6.21
 
-The label on Masao's breakfast cereal said that one serving of cereal provides $85$ milligrams (mg) of potassium, which is $\text{2\%}$ of the recommended daily amount. What is the total recommended daily amount of potassium?
+The label on Masao's breakfast cereal said that one serving of cereal provides 85 milligrams (mg) of potassium, which is $\text{2\%}$ of the recommended daily amount. What is the total recommended daily amount of potassium?
 
 #### Solution
 
@@ -259,15 +259,15 @@ The label on Masao's breakfast cereal said that one serving of cereal provides $
 
 ### Try It 6.41
 
-One serving of wheat square cereal has $7$ grams of fiber, which is $\text{29\%}$ of the recommended daily amount. What is the total recommended daily amount of fiber?
+One serving of wheat square cereal has 7 grams of fiber, which is $\text{29\%}$ of the recommended daily amount. What is the total recommended daily amount of fiber?
 
 ### Try It 6.42
 
-One serving of rice cereal has $190$ mg of sodium, which is $\text{8\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
+One serving of rice cereal has 190 mg of sodium, which is $\text{8\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
 
 ### Example 6.22
 
-Mitzi received some gourmet brownies as a gift. The wrapper said each brownie was $480$ calories, and had $240$ calories of fat. What percent of the total calories in each brownie comes from fat?
+Mitzi received some gourmet brownies as a gift. The wrapper said each brownie was 480 calories, and had 240 calories of fat. What percent of the total calories in each brownie comes from fat?
 
 #### Solution
 
@@ -286,11 +286,11 @@ Mitzi received some gourmet brownies as a gift. The wrapper said each brownie wa
 
 ### Try It 6.43
 
-Veronica is planning to make muffins from a mix. The package says each muffin will be $230$ calories and $60$ calories will be from fat. What percent of the total calories is from fat? (Round to the nearest whole percent.)
+Veronica is planning to make muffins from a mix. The package says each muffin will be 230 calories and 60 calories will be from fat. What percent of the total calories is from fat? (Round to the nearest whole percent.)
 
 ### Try It 6.44
 
-The brownie mix Ricardo plans to use says that each brownie will be $190$ calories, and $70$ calories are from fat. What percent of the total calories are from fat?
+The brownie mix Ricardo plans to use says that each brownie will be 190 calories, and 70 calories are from fat. What percent of the total calories are from fat?
 
 ### Find Percent Increase and Percent Decrease
 
@@ -310,7 +310,7 @@ Step 2. Find the percent increase as a percent of the original amount.
 
 ### Example 6.23
 
-In $2011,$ the California governor proposed raising community college fees from $\text{\$26}$ per unit to $\text{\$36}$ per unit. Find the percent increase. (Round to the nearest tenth of a percent.)
+In 2011, the California governor proposed raising community college fees from $\text{\$26}$ per unit to $\text{\$36}$ per unit. Find the percent increase. (Round to the nearest tenth of a percent.)
 
 #### Solution
 
@@ -328,11 +328,11 @@ In $2011,$ the California governor proposed raising community college fees from 
 
 ### Try It 6.45
 
-In $2011,$ the IRS increased the deductible mileage cost to $55.5$ cents from $51$ cents. Find the percent increase. (Round to the nearest tenth of a percent.)
+In 2011, the IRS increased the deductible mileage cost to 55.5 cents from 51 cents. Find the percent increase. (Round to the nearest tenth of a percent.)
 
 ### Try It 6.46
 
-In $1995,$ the standard bus fare in Chicago was $\text{\$1.50}.$ In $2008,$ the standard bus fare was $\text{\$2.25}.$ Find the percent increase. (Round to the nearest tenth of a percent.)
+In 1995, the standard bus fare in Chicago was $\text{\$1.50}.$ In 2008, the standard bus fare was $\text{\$2.25}.$ Find the percent increase. (Round to the nearest tenth of a percent.)
 
 Finding the percent decrease is very similar to finding the percent increase, but now the amount of decrease is the difference between the original amount and the final amount. Then we find what percent the amount of decrease is of the original amount.
 
@@ -346,7 +346,7 @@ Finding the percent decrease is very similar to finding the percent increase, bu
 
 ### Example 6.24
 
-The average price of a gallon of gas in one city in June $2014$ was $\text{\$3.71}.$ The average price in that city in July was $\text{\$3.64}.$ Find the percent decrease.
+The average price of a gallon of gas in one city in June 2014 was $\text{\$3.71}.$ The average price in that city in July was $\text{\$3.64}.$ Find the percent decrease.
 
 #### Solution
 
@@ -364,7 +364,7 @@ The average price of a gallon of gas in one city in June $2014$ was $\text{\$3.7
 
 ### Try It 6.47
 
-The population of one city was about $672,000$ in $2010.$ The population of the city is projected to be about $630,000$ in $2020.$ Find the percent decrease. (Round to the nearest tenth of a percent.)
+The population of one city was about 672,000 in 2010. The population of the city is projected to be about 630,000 in 2020. Find the percent decrease. (Round to the nearest tenth of a percent.)
 
 ### Try It 6.48
 
@@ -402,35 +402,35 @@ What number is $\text{36\%}$ of $124?$
 
 102\.
 
-$\text{250\%}$ of $65$ is what number?
+$\text{250\%}$ of 65 is what number?
 
 103\.
 
-$\text{150\%}$ of $90$ is what number?
+$\text{150\%}$ of 90 is what number?
 
 104\.
 
-$\text{800\%}$ of $2,250$ is what number?
+$\text{800\%}$ of 2,250 is what number?
 
 105\.
 
-$\text{600\%}$ of $1,740$ is what number?
+$\text{600\%}$ of 1,740 is what number?
 
 106\.
 
-$28$ is $\text{25\%}$ of what number?
+28 is $\text{25\%}$ of what number?
 
 107\.
 
-$36$ is $\text{25\%}$ of what number?
+36 is $\text{25\%}$ of what number?
 
 108\.
 
-$81$ is $\text{75\%}$ of what number?
+81 is $\text{75\%}$ of what number?
 
 109\.
 
-$93$ is $\text{75\%}$ of what number?
+93 is $\text{75\%}$ of what number?
 
 110\.
 
@@ -450,35 +450,35 @@ $\text{12.3\%}$ of what number is $\text{\$92.25}?$
 
 114\.
 
-What percent of $260$ is $78?$
+What percent of 260 is $78?$
 
 115\.
 
-What percent of $215$ is $86?$
+What percent of 215 is $86?$
 
 116\.
 
-What percent of $1,500$ is $540?$
+What percent of 1,500 is $540?$
 
 117\.
 
-What percent of $1,800$ is $846?$
+What percent of 1,800 is $846?$
 
 118\.
 
-$30$ is what percent of $20?$
+30 is what percent of $20?$
 
 119\.
 
-$50$ is what percent of $40?$
+50 is what percent of $40?$
 
 120\.
 
-$840$ is what percent of $480?$
+840 is what percent of $480?$
 
 121\.
 
-$790$ is what percent of $395?$
+790 is what percent of $395?$
 
 **Solve Applications of Percents**
 
@@ -502,27 +502,27 @@ Cherise deposits $\text{8\%}$ of each paycheck into her retirement account. Her 
 
 126\.
 
-One serving of oatmeal has $8$ grams of fiber, which is $\text{33\%}$ of the recommended daily amount. What is the total recommended daily amount of fiber?
+One serving of oatmeal has 8 grams of fiber, which is $\text{33\%}$ of the recommended daily amount. What is the total recommended daily amount of fiber?
 
 127\.
 
-One serving of trail mix has $67$ grams of carbohydrates, which is $\text{22\%}$ of the recommended daily amount. What is the total recommended daily amount of carbohydrates?
+One serving of trail mix has 67 grams of carbohydrates, which is $\text{22\%}$ of the recommended daily amount. What is the total recommended daily amount of carbohydrates?
 
 128\.
 
-A bacon cheeseburger at a popular fast food restaurant contains $2,070$ milligrams (mg) of sodium, which is $\text{86\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
+A bacon cheeseburger at a popular fast food restaurant contains 2,070 milligrams (mg) of sodium, which is $\text{86\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
 
 129\.
 
-A grilled chicken salad at a popular fast food restaurant contains $650$ milligrams (mg) of sodium, which is $\text{27\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
+A grilled chicken salad at a popular fast food restaurant contains 650 milligrams (mg) of sodium, which is $\text{27\%}$ of the recommended daily amount. What is the total recommended daily amount of sodium?
 
 130\.
 
-The nutrition fact sheet at a fast food restaurant says the fish sandwich has $380$ calories, and $171$ calories are from fat. What percent of the total calories is from fat?
+The nutrition fact sheet at a fast food restaurant says the fish sandwich has 380 calories, and 171 calories are from fat. What percent of the total calories is from fat?
 
 131\.
 
-The nutrition fact sheet at a fast food restaurant says a small portion of chicken nuggets has $190$ calories, and $114$ calories are from fat. What percent of the total calories is from fat?
+The nutrition fact sheet at a fast food restaurant says a small portion of chicken nuggets has 190 calories, and 114 calories are from fat. What percent of the total calories is from fat?
 
 132\.
 
@@ -546,7 +546,7 @@ Ayodele got a raise in her hourly pay, from $\text{\$24.50}$ to $\text{\$25.48}.
 
 136\.
 
-Annual student fees at the University of California rose from about $\text{\$4,000}$ in $2000$ to about $\text{\$9,000}$ in $2014.$ Find the percent increase.
+Annual student fees at the University of California rose from about $\text{\$4,000}$ in 2000 to about $\text{\$9,000}$ in 2014. Find the percent increase.
 
 137\.
 
@@ -554,7 +554,7 @@ The price of a share of one stock rose from $\text{\$12.50}$ to $\text{\$50}.$ F
 
 138\.
 
-According to Time magazine $\left( \text{7/19/2011} \right)$ annual global seafood consumption rose from $22$ pounds per person in $1960$ to $38$ pounds per person today. Find the percent increase. (Round to the nearest tenth of a percent.)
+According to Time magazine $\left( \text{7/19/2011} \right)$ annual global seafood consumption rose from 22 pounds per person in 1960 to 38 pounds per person today. Find the percent increase. (Round to the nearest tenth of a percent.)
 
 139\.
 
@@ -574,7 +574,7 @@ Hernando's salary was $\text{\$49,500}$ last year. This year his salary was cut 
 
 143\.
 
-From $2000$ to $2010,$ the population of Detroit fell from about $951,000$ to about $714,000.$ Find the percent decrease. (Round to the nearest tenth of a percent.)
+From 2000 to 2010, the population of Detroit fell from about 951,000 to about 714,000. Find the percent decrease. (Round to the nearest tenth of a percent.)
 
 144\.
 
@@ -598,11 +598,11 @@ Sales of video games and consoles fell from $\text{\$1,150}$ million to $\text{\
 
 148\.
 
-Without solving the problem $``44$ is $\text{80\%}$ of what number”, think about what the solution might be. Should it be a number that is greater than $44$ or less than $44?$ Explain your reasoning.
+Without solving the problem $``44$ is $\text{80\%}$ of what number”, think about what the solution might be. Should it be a number that is greater than 44 or less than $44?$ Explain your reasoning.
 
 149\.
 
-Without solving the problem “What is $\text{20\%}$ of $300\text{?"}$ think about what the solution might be. Should it be a number that is greater than $300$ or less than $300?$ Explain your reasoning.
+Without solving the problem “What is $\text{20\%}$ of $300\text{?"}$ think about what the solution might be. Should it be a number that is greater than 300 or less than $300?$ Explain your reasoning.
 
 150\.
 

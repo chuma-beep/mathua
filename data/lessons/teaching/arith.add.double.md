@@ -24,15 +24,15 @@ Before you get started, take this readiness quiz.
 
 ### Use Addition Notation
 
-A college student has a part-time job. Last week he worked $3$ hours on Monday and $4$ hours on Friday. To find the total number of hours he worked last week, he added $3$ and $4.$
+A college student has a part-time job. Last week he worked 3 hours on Monday and 4 hours on Friday. To find the total number of hours he worked last week, he added 3 and 4.
 
-The operation of addition combines numbers to get a sum. The notation we use to find the sum of $3$ and $4$ is:
+The operation of addition combines numbers to get a sum. The notation we use to find the sum of 3 and 4 is:
 
 $$
 3 + 4
 $$
 
-We read this as *three plus four* and the result is the sum of three and four. The numbers $3$ and $4$ are called the addends. A math statement that includes numbers and operations is called an expression.
+We read this as *three plus four* and the result is the sum of three and four. The numbers 3 and 4 are called the addends. A math statement that includes numbers and operations is called an expression.
 
 ### Addition Notation
 
@@ -40,7 +40,7 @@ To describe addition, we can use symbols and words.
 
 | Operation | Notation | Expression | Read as         | Result                     |
 |-----------|----------|------------|-----------------|----------------------------|
-| Addition  | $+$    | $3 + 4$  | three plus four | the sum of $3$ and $4$ |
+| Addition  | $+$    | $3 + 4$  | three plus four | the sum of 3 and 4 |
 
 ### Example 1.11
 
@@ -70,9 +70,9 @@ Translate from math notation to words:
 
 ### Model Addition of Whole Numbers
 
-Addition is really just counting. We will model addition with $\text{base-10}$ blocks. Remember, a block represents $1$ and a rod represents $10.$ Let’s start by modeling the addition expression we just considered, $3 + 4.$
+Addition is really just counting. We will model addition with $\text{base-10}$ blocks. Remember, a block represents 1 and a rod represents 10. Let’s start by modeling the addition expression we just considered, $3 + 4.$
 
-Each addend is less than $10,$ so we can use ones blocks.
+Each addend is less than 10, so we can use ones blocks.
 
 |                                                      |     |
 |------------------------------------------------------|-----|
@@ -80,7 +80,7 @@ Each addend is less than $10,$ so we can use ones blocks.
 | Then we model the second number with 4 blocks.       |     |
 | Count the total number of blocks.                    |     |
 
-There are $7$ blocks in all. We use an equal sign $\text{(=)}$ to show the sum. A math sentence that shows that two expressions are equal is called an equation. We have shown that. $3 + 4 = 7.$
+There are 7 blocks in all. We use an equal sign $\text{(=)}$ to show the sum. A math sentence that shows that two expressions are equal is called an equation. We have shown that. $3 + 4 = 7.$
 
 ### Manipulative Mathematics
 
@@ -92,7 +92,7 @@ Model the addition $2 + 6.$
 
 #### Solution
 
-$2 + 6$ means the sum of $2$ and $6$
+$2 + 6$ means the sum of 2 and 6
 
 Each addend is less than 10, so we can use ones blocks.
 
@@ -113,7 +113,7 @@ Each addend is less than 10, so we can use ones blocks.
 <tr>
 <td>Count the total number of blocks</td>
 <td><br />
-There are $8$ blocks in all, so $2 + 6 = 8.$</td>
+There are 8 blocks in all, so $2 + 6 = 8.$</td>
 </tr>
 </tbody>
 </table>
@@ -126,7 +126,7 @@ Model: $3 + 6.$
 
 Model: $5 + 1.$
 
-When the result is $10$ or more ones blocks, we will exchange the $10$ blocks for one rod.
+When the result is 10 or more ones blocks, we will exchange the 10 blocks for one rod.
 
 ### Example 1.13
 
@@ -134,7 +134,7 @@ Model the addition $5 + 8.$
 
 #### Solution
 
-$5 + 8$ means the sum of $5$ and $8.$
+$5 + 8$ means the sum of 5 and 8.
 
 |  |  |
 |----|----|
@@ -233,7 +233,7 @@ Did you notice what happens when you add zero to a number? The sum of any number
 
 ### Identity Property of Addition
 
-The sum of any number $a$ and $0$ is the number.
+The sum of any number $a$ and 0 is the number.
 
 $$
 \begin{matrix}
@@ -302,13 +302,13 @@ Add:
   |------|-----------|
   | ⓐ    |           |
   | Add. | $8 + 7$ |
-  |      | $15$    |
+  |      | 15    |
 
 - |      |           |
   |------|-----------|
   | ⓑ    |           |
   | Add. | $7 + 8$ |
-  |      | $15$    |
+  |      | 15    |
 
 Did you notice that changing the order of the addends did not change their sum? We could have immediately known the sum from part ⓑ just by recognizing that the addends were the same as in part ⓑ, but in the reverse order. As a result, both sums are the same.
 
@@ -364,20 +364,20 @@ Add: $32 + 54.$
 
 Add: $25 + 74.$
 
-In the previous example, the sum of the ones and the sum of the tens were both less than $10.$ But what happens if the sum is $10$ or more? Let’s use our $\text{base-10}$ model to find out. Figure 1.10 shows the addition of $17$ and $26$ again.
+In the previous example, the sum of the ones and the sum of the tens were both less than 10. But what happens if the sum is 10 or more? Let’s use our $\text{base-10}$ model to find out. Figure 1.10 shows the addition of 17 and 26 again.
 
 *Figure 1.10*
 
-When we add the ones, $7 + 6,$ we get $13$ ones. Because we have more than $10$ ones, we can exchange $10$ of the ones for $1$ ten. Now we have $4$ tens and $3$ ones. Without using the model, we show this as a small red $1$ above the digits in the tens place.
+When we add the ones, $7 + 6,$ we get 13 ones. Because we have more than 10 ones, we can exchange 10 of the ones for 1 ten. Now we have 4 tens and 3 ones. Without using the model, we show this as a small red 1 above the digits in the tens place.
 
-When the sum in a place value column is greater than $9,$ we carry over to the next column to the left. Carrying is the same as regrouping by exchanging. For example, $10$ ones for $1$ ten or $10$ tens for $1$ hundred.
+When the sum in a place value column is greater than 9, we carry over to the next column to the left. Carrying is the same as regrouping by exchanging. For example, 10 ones for 1 ten or 10 tens for 1 hundred.
 
 ### How To
 
 #### Add whole numbers.
 
 1.  Step 1. Write the numbers so each place value lines up vertically.
-2.  Step 2. Add the digits in each place value. Work from right to left starting with the ones place. If a sum in a place value is more than $9,$ carry to the next place value.
+2.  Step 2. Add the digits in each place value. Work from right to left starting with the ones place. If a sum in a place value is more than 9, carry to the next place value.
 3.  Step 3. Continue adding each place value from right to left, adding each place value and carrying if needed.
 
 ### Example 1.18
@@ -406,8 +406,8 @@ Add the ones: $3 + 9 = 12$</td>
 <td></td>
 </tr>
 <tr>
-<td>Write the $2$ in the ones place in the sum.<br />
-Add the $1$ ten to the tens place.</td>
+<td>Write the 2 in the ones place in the sum.<br />
+Add the 1 ten to the tens place.</td>
 <td>$$\begin{array}{r}
 {{\overset{1}{4}3}} \\
 \underset{\text{\_\_\_\_}}{+69} \\
@@ -453,17 +453,17 @@ Add: $324 + 586.$
 <tr>
 <td>Add the digits in each place value.<br />
 Add the ones: $4 + 6 = 10$<br />
-Write the $0$ in the ones place in the sum and carry the $1$ ten to the tens place.</td>
+Write the 0 in the ones place in the sum and carry the 1 ten to the tens place.</td>
 <td></td>
 </tr>
 <tr>
 <td>Add the tens: $1 + 2 + 8 = 11$<br />
-Write the $1$ in the tens place in the sum and carry the $1$ hundred to the hundreds</td>
+Write the 1 in the tens place in the sum and carry the 1 hundred to the hundreds</td>
 <td></td>
 </tr>
 <tr>
 <td>Add the hundreds: $1 + 3 + 5 = 9$<br />
-Write the $9$ in the hundreds place.</td>
+Write the 9 in the hundreds place.</td>
 <td></td>
 </tr>
 </tbody>
@@ -503,7 +503,7 @@ Add: $1,683 + 479.$
 </tr>
 <tr>
 <td>Add the ones: $3 + 9 = 12.$<br />
-Write the $2$ in the ones place of the sum and carry the $1$ ten to the tens place.</td>
+Write the 2 in the ones place of the sum and carry the 1 ten to the tens place.</td>
 <td>$$\begin{array}{r}
 {{1,6\overset{1}{8}3}\ } \\
  \\
@@ -513,7 +513,7 @@ Write the $2$ in the ones place of the sum and carry the $1$ ten to the tens pla
 </tr>
 <tr>
 <td>Add the tens: $1 + 7 + 8 = 16$<br />
-Write the $6$ in the tens place and carry the $1$ hundred to the hundreds place.</td>
+Write the 6 in the tens place and carry the 1 hundred to the hundreds place.</td>
 <td>$$\begin{array}{r}
 {{1,\overset{1}{6}\overset{1}{8}3}\ } \\
  \\
@@ -523,7 +523,7 @@ Write the $6$ in the tens place and carry the $1$ hundred to the hundreds place.
 </tr>
 <tr>
 <td>Add the hundreds: $1 + 6 + 4 = 11$<br />
-Write the $1$ in the hundreds place and carry the $1$ thousand to the thousands place.</td>
+Write the 1 in the hundreds place and carry the 1 thousand to the thousands place.</td>
 <td>$$\begin{array}{r}
 {{1,\overset{1}{6}\overset{1}{8}3}\ } \\
  \\
@@ -533,7 +533,7 @@ Write the $1$ in the hundreds place and carry the $1$ thousand to the thousands 
 </tr>
 <tr>
 <td>Add the thousands $1 + 1 = 2$.<br />
-Write the $2$ in the thousands place of the sum.</td>
+Write the 2 in the thousands place of the sum.</td>
 <td>$$\begin{array}{r}
 {{1,\overset{1}{6}\overset{1}{8}3}\ } \\
  \\
@@ -581,7 +581,7 @@ Add: $21,357 + 861 + 8,596.$
 </tr>
 <tr>
 <td>Add the ones: $7 + 1 + 6 = 14$<br />
-Write the $4$ in the ones place of the sum and carry the $1$ to the tens place.</td>
+Write the 4 in the ones place of the sum and carry the 1 to the tens place.</td>
 <td>$$\begin{array}{r}
 {21,3\overset{1}{5}7} \\
 861 \\
@@ -592,7 +592,7 @@ Write the $4$ in the ones place of the sum and carry the $1$ to the tens place.<
 </tr>
 <tr>
 <td>Add the tens: $1 + 5 + 6 + 9 = 21$<br />
-Write the $1$ in the tens place and carry the $2$ to the hundreds place.</td>
+Write the 1 in the tens place and carry the 2 to the hundreds place.</td>
 <td>$$\begin{array}{r}
 {21,\overset{2}{3}\overset{1}{5}7} \\
 861 \\
@@ -603,7 +603,7 @@ Write the $1$ in the tens place and carry the $2$ to the hundreds place.</td>
 </tr>
 <tr>
 <td>Add the hundreds: $2 + 3 + 8 + 5 = 18$<br />
-Write the $8$ in the hundreds place and carry the $1$ to the thousands place.</td>
+Write the 8 in the hundreds place and carry the 1 to the thousands place.</td>
 <td>$$\begin{array}{r}
 {2\overset{1}{1,}\overset{2}{3}\overset{1}{5}7} \\
 861 \\
@@ -614,7 +614,7 @@ Write the $8$ in the hundreds place and carry the $1$ to the thousands place.</t
 </tr>
 <tr>
 <td>Add the thousands $1 + 1 + 8 = 10$.<br />
-Write the $0$ in the thousands place and carry the $1$ to the ten thousands place.</td>
+Write the 0 in the thousands place and carry the 1 to the ten thousands place.</td>
 <td>$$\begin{array}{r}
 {\overset{1}{2}\overset{1}{1,}\overset{2}{3}\overset{1}{5}7} \\
 861 \\
@@ -625,7 +625,7 @@ Write the $0$ in the thousands place and carry the $1$ to the ten thousands plac
 </tr>
 <tr>
 <td>Add the ten-thousands $1 + 2 = 3$.<br />
-Write the $3$ in the ten thousands place in the sum.</td>
+Write the 3 in the ten thousands place in the sum.</td>
 <td>$$\begin{array}{r}
 {\overset{1}{2}\overset{1}{1,}\overset{2}{3}\overset{1}{5}7} \\
 861 \\
@@ -675,12 +675,12 @@ increased by<br />
 more than<br />
 total of<br />
 added to</td>
-<td data-align="left" data-valign="top">$1$ plus $2$<br />
-the sum of $3$ and $4$<br />
-$5$ increased by $6$<br />
-$8$ more than $7$<br />
-the total of $9$ and $5$<br />
-$6$ added to $4$</td>
+<td data-align="left" data-valign="top">1 plus 2<br />
+the sum of 3 and 4<br />
+5 increased by 6<br />
+8 more than 7<br />
+the total of 9 and 5<br />
+6 added to 4</td>
 <td data-align="left" data-valign="top">$1 + 2$<br />
 $3 + 4$<br />
 $5 + 6$<br />
@@ -695,30 +695,30 @@ Table 1.2
 
 ### Example 1.22
 
-Translate and simplify: the sum of $19$ and $23.$
+Translate and simplify: the sum of 19 and 23.
 
 #### Solution
 
-The word *sum* tells us to add. The words *of* $19$ *and* $23$ tell us the addends.
+The word *sum* tells us to add. The words *of* 19 *and* 23 tell us the addends.
 
 |            |                                         |
 |------------|-----------------------------------------|
-|            | The sum of $19$ and $23$            |
+|            | The sum of 19 and 23            |
 | Translate. | $19 + 23$                             |
-| Add.       | $42$                                  |
-|            | The sum of $19$ and $23$ is $42.$ |
+| Add.       | 42                                  |
+|            | The sum of 19 and 23 is 42. |
 
 ### Try It 1.43
 
-Translate and simplify: the sum of $17$ and $26.$
+Translate and simplify: the sum of 17 and 26.
 
 ### Try It 1.44
 
-Translate and simplify: the sum of $28$ and $14.$
+Translate and simplify: the sum of 28 and 14.
 
 ### Example 1.23
 
-Translate and simplify: $28$ increased by $31.$
+Translate and simplify: 28 increased by 31.
 
 #### Solution
 
@@ -726,18 +726,18 @@ The words *increased by* tell us to add. The numbers given are the addends.
 
 |            |                                          |
 |------------|------------------------------------------|
-|            | $28$ increased by $31.$              |
+|            | 28 increased by 31.              |
 | Translate. | $28 + 31$                              |
-| Add.       | $59$                                   |
-|            | So $28$ increased by $31$ is $59.$ |
+| Add.       | 59                                   |
+|            | So 28 increased by 31 is 59. |
 
 ### Try It 1.45
 
-Translate and simplify: $29$ increased by $76.$
+Translate and simplify: 29 increased by 76.
 
 ### Try It 1.46
 
-Translate and simplify: $37$ increased by $69.$
+Translate and simplify: 37 increased by 69.
 
 ### Add Whole Numbers in Applications
 
@@ -769,11 +769,11 @@ We are asked to find the total number of points on the tests.
 \end{array}\$ |
 | Write a sentence to answer the question. | Hao earned a total of 432 points. |
 
-Notice that we added *points*, so the sum is $432$ *points*. It is important to include the appropriate units in all answers to applications problems.
+Notice that we added *points*, so the sum is 432 *points*. It is important to include the appropriate units in all answers to applications problems.
 
 ### Try It 1.47
 
-Mark is training for a bicycle race. Last week he rode $18$ miles on Monday, $15$ miles on Wednesday, $26$ miles on Friday, $49$ miles on Saturday, and $32$ miles on Sunday. What is the total number of miles he rode last week?
+Mark is training for a bicycle race. Last week he rode 18 miles on Monday, 15 miles on Wednesday, 26 miles on Friday, 49 miles on Saturday, and 32 miles on Sunday. What is the total number of miles he rode last week?
 
 ### Try It 1.48
 
@@ -792,9 +792,9 @@ Find the perimeter of the patio shown.
 | We are asked to find the perimeter. |  |
 | Write a phrase. | the sum of the sides |
 | Translate to math notation. | $4 + 6 + 2 + 3 + 2 + 9$ |
-| Simplify by adding. | $26$ |
+| Simplify by adding. | 26 |
 | Write a sentence to answer the question. |  |
-| We added feet, so the sum is $26$ feet. | The perimeter of the patio is $26$ feet. |
+| We added feet, so the sum is 26 feet. | The perimeter of the patio is 26 feet. |
 
 ### Try It 1.49
 
@@ -1010,51 +1010,51 @@ In the following exercises, translate each phrase into math notation and then si
 
 107\.
 
-the sum of $13$ and $18$
+the sum of 13 and 18
 
 108\.
 
-the sum of $12$ and $19$
+the sum of 12 and 19
 
 109\.
 
-the sum of $90$ and $65$
+the sum of 90 and 65
 
 110\.
 
-the sum of $70$ and $38$
+the sum of 70 and 38
 
 111\.
 
-$33$ increased by $49$
+33 increased by 49
 
 112\.
 
-$68$ increased by $25$
+68 increased by 25
 
 113\.
 
-$250$ more than $599$
+250 more than 599
 
 114\.
 
-$115$ more than $286$
+115 more than 286
 
 115\.
 
-the total of $628$ and $77$
+the total of 628 and 77
 
 116\.
 
-the total of $593$ and $79$
+the total of 593 and 79
 
 117\.
 
-$1,482$ added to $915$
+1,482 added to 915
 
 118\.
 
-$2,719$ added to $682$
+2,719 added to 682
 
 **Add Whole Numbers in Applications**
 
@@ -1070,19 +1070,19 @@ In the following exercises, solve the problem.
 
 121\.
 
-**Bike riding** Ethan rode his bike $14$ miles on Monday, $19$ miles on Tuesday, $12$ miles on Wednesday, $25$ miles on Friday, and $68$ miles on Saturday. What was the total number of miles Ethan rode?
+**Bike riding** Ethan rode his bike 14 miles on Monday, 19 miles on Tuesday, 12 miles on Wednesday, 25 miles on Friday, and 68 miles on Saturday. What was the total number of miles Ethan rode?
 
 122\.
 
-**Business** Chloe has a flower shop. Last week she made $19$ floral arrangements on Monday, $12$ on Tuesday, $23$ on Wednesday, $29$ on Thursday, and $44$ on Friday. What was the total number of floral arrangements Chloe made?
+**Business** Chloe has a flower shop. Last week she made 19 floral arrangements on Monday, 12 on Tuesday, 23 on Wednesday, 29 on Thursday, and 44 on Friday. What was the total number of floral arrangements Chloe made?
 
 123\.
 
-**Apartment size** Jackson lives in a $7$ room apartment. The number of square feet in each room is $238,120,156,196,100,132,$ and $225.$ What is the total number of square feet in all $7$ rooms?
+**Apartment size** Jackson lives in a 7 room apartment. The number of square feet in each room is 238,120,156,196,100,132, and 225. What is the total number of square feet in all 7 rooms?
 
 124\.
 
-**Weight** Seven men rented a fishing boat. The weights of the men were $175,192,148,169,205,181,$ and $\text{225}$ pounds. What was the total weight of the seven men?
+**Weight** Seven men rented a fishing boat. The weights of the men were 175,192,148,169,205,181, and $\text{225}$ pounds. What was the total weight of the seven men?
 
 125\.
 
@@ -1102,9 +1102,9 @@ In the following exercises, find the perimeter of each figure.
 
 **Calories** Paulette had a grilled chicken salad, ranch dressing, and a $\text{16-ounce}$ drink for lunch. On the restaurant’s nutrition chart, she saw that each item had the following number of calories:
 
-Grilled chicken salad – $320$ calories  
-Ranch dressing – $170$ calories  
-$\text{16-ounce}$ drink – $150$ calories
+Grilled chicken salad – 320 calories  
+Ranch dressing – 170 calories  
+$\text{16-ounce}$ drink – 150 calories
 
 What was the total number of calories of Paulette’s lunch?
 
@@ -1112,19 +1112,19 @@ What was the total number of calories of Paulette’s lunch?
 
 **Calories** Fred had a grilled chicken sandwich, a small order of fries, and a $\text{12-oz}$ chocolate shake for dinner. The restaurant’s nutrition chart lists the following calories for each item:
 
-Grilled chicken sandwich – $420$ calories  
-Small fries – $230$ calories  
-$\text{12-oz}$ chocolate shake – $580$ calories
+Grilled chicken sandwich – 420 calories  
+Small fries – 230 calories  
+$\text{12-oz}$ chocolate shake – 580 calories
 
 What was the total number of calories of Fred’s dinner?
 
 137\.
 
-**Test scores** A students needs a total of $400$ points on five tests to pass a course. The student scored $82,91,75,88,\text{and}\ 70.$ Did the student pass the course?
+**Test scores** A students needs a total of 400 points on five tests to pass a course. The student scored $82,91,75,88,\text{and}\ 70.$ Did the student pass the course?
 
 138\.
 
-**Elevators** The maximum weight capacity of an elevator is $1150$ pounds. Six men are in the elevator. Their weights are $210,145,183,230,159,\text{and}\ 164$ pounds. Is the total weight below the elevators’ maximum capacity?
+**Elevators** The maximum weight capacity of an elevator is 1150 pounds. Six men are in the elevator. Their weights are $210,145,183,230,159,\text{and}\ 164$ pounds. Is the total weight below the elevators’ maximum capacity?
 
 #### Writing Exercises
 

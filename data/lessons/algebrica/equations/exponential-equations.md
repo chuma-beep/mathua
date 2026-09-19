@@ -25,7 +25,7 @@ The equation
 
 \\[1^x = 1 \\]
 
-is satisfied for every real number \\( x \\). This means that, when \\( a = 1 \\) and \\( b = 1 \\), the exponential equation has infinitely many solutions and is therefore considered undetermined. \\(1^x = 1\\) is considered a fundamental principle in mathematics. This is because, regardless of the value of \\(x\\), the expression \\(1^x\\) always equals \\(1\\).
+is satisfied for every real number \\( x \\). This means that, when \\( a = 1 \\) and \\( b = 1 \\), the exponential equation has infinitely many solutions and is therefore considered undetermined. \\(1^x = 1\\) is considered a fundamental principle in mathematics. This is because, regardless of the value of \\(x\\), the expression \\(1^x\\) always equals 1.
 
 ## How to solve quadratic equations of the form \\( a^{f(x)} = b \\)
 

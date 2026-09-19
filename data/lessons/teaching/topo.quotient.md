@@ -8,7 +8,7 @@
 $q$ collapses each class to a point. Openness in the quotient is pulled back to $X$: you check preimages.
 
 ### Circles from Intervals
-Take $X=[0,1]$ with $0\sim1$. The quotient identifies the endpoints, yielding a space homeomorphic to $S^{1}$. The loop closes because neighborhoods of the glued point come from neighborhoods of both $0$ and $1$.
+Take $X=[0,1]$ with $0\sim1$. The quotient identifies the endpoints, yielding a space homeomorphic to $S^{1}$. The loop closes because neighborhoods of the glued point come from neighborhoods of both 0 and 1.
 
 ## Example
 

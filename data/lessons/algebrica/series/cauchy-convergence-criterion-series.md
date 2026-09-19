@@ -99,7 +99,7 @@ Since the right-hand side tends to zero as \\( n \to \infty \\), for any \\( \va
 \\[\left| \sum_{k=n+1}^{n+p} x^k \right| < \varepsilon \quad \text{for all } p \in \mathbb{N} \\]
 
 
-This behavior is illustrated in the following plot, which shows how the partial sums \\( s_n \\) rapidly approach the exact value of the series, which is \\(2\\) when \\( x = 0.5 \\).
+This behavior is illustrated in the following plot, which shows how the partial sums \\( s_n \\) rapidly approach the exact value of the series, which is 2 when \\( x = 0.5 \\).
 
 ![](/diagrams/algebrica/series-cauchy-1.png)
 

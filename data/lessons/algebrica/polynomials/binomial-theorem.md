@@ -11,9 +11,9 @@ The binomial theorem asserts that for any positive integer \\(n\\), the expressi
 \\]
 
 + The exponent \\(n\\) is a positive integer, that is \\(n \in \mathbb{N}^+\\).
-+ The base \\(a\\) is raised to a decreasing power, from \\(n\\) down to \\(0\\)
-+ The base \\(b\\) is raised to an increasing power, from \\(0\\) up to \\(n\\).
-+ The factor \\(\dbinom{n}{k}\\) is the binomial coefficient, where the index \\(k\\) takes integer values between \\(0\\) and \\(n\\).
++ The base \\(a\\) is raised to a decreasing power, from \\(n\\) down to 0
++ The base \\(b\\) is raised to an increasing power, from 0 up to \\(n\\).
++ The factor \\(\dbinom{n}{k}\\) is the binomial coefficient, where the index \\(k\\) takes integer values between 0 and \\(n\\).
 
 > The coefficients \\(\binom{n}{k}\\) appearing in the expansion correspond exactly to the entries of the \\(n\\)-th row of Pascal's triangle. The symmetry \\(\binom{n}{k} = \binom{n}{n-k}\\) reflects the fact that choosing \\(k\\) elements from a set of \\(n\\) is equivalent to leaving out the remaining \\(n-k\\).
 
@@ -47,7 +47,7 @@ There are two standard proofs of the theorem. The first is based on a combinator
 (a+b)^n = \underbrace{(a+b)(a+b)\cdots(a+b)}_{n \text{ factors}}
 \\]
 
-Each term in the expanded product results from selecting either \\(a\\) or \\(b\\) from each factor. A term of the form \\(a^{n-k} b^k\\) occurs when \\(b\\) is chosen from exactly \\(k\\) of the \\(n\\) factors, and \\(a\\) from the remaining \\(n-k\\). The number of such selections is \\(\binom{n}{k}\\), which enumerates the \\(k\\)-element subsets of the \\(n\\) factors. Summing over all possible values of \\(k\\) from \\(0\\) to \\(n\\) establishes the theorem.
+Each term in the expanded product results from selecting either \\(a\\) or \\(b\\) from each factor. A term of the form \\(a^{n-k} b^k\\) occurs when \\(b\\) is chosen from exactly \\(k\\) of the \\(n\\) factors, and \\(a\\) from the remaining \\(n-k\\). The number of such selections is \\(\binom{n}{k}\\), which enumerates the \\(k\\)-element subsets of the \\(n\\) factors. Summing over all possible values of \\(k\\) from 0 to \\(n\\) establishes the theorem.
 
 The second proof uses mathematical induction on \\(n\\). For \\(n = 1\\) the identity becomes \\((a+b)^1 = a + b\\), which is clearly valid. Assume the theorem holds for some integer \\(n \geq 1\\). Multiplying both sides of the inductive hypothesis by \\((a+b)\\) yields:
 
@@ -82,7 +82,7 @@ The sum of all binomial coefficients of order \\(n\\) is obtained by setting \\(
 \sum_{k=0}^{n} \binom{n}{k} = 2^n
 \\]
 
-This identity admits a combinatorial interpretation: the total number of subsets of a set with \\(n\\) elements equals \\(2^n\\), and each subset corresponds to choosing some \\(k\\) elements out of \\(n\\) for a value of \\(k\\) between \\(0\\) and \\(n\\). Setting \\(a = 1\\) and \\(b = -1\\) yields the alternating sum identity:
+This identity admits a combinatorial interpretation: the total number of subsets of a set with \\(n\\) elements equals \\(2^n\\), and each subset corresponds to choosing some \\(k\\) elements out of \\(n\\) for a value of \\(k\\) between 0 and \\(n\\). Setting \\(a = 1\\) and \\(b = -1\\) yields the alternating sum identity:
 
 \\[
 \sum_{k=0}^{n} (-1)^k \binom{n}{k} = 0 \qquad \text{for } n \geq 1
@@ -102,7 +102,7 @@ The general term of the expansion, often denoted \\(T_{k+1}\\), is:
 T_{k+1} = \binom{n}{k} a^{n-k} b^k
 \\]
 
-The index \\(k+1\\) reflects the position of the term in the expansion, since \\(k\\) ranges from \\(0\\) to \\(n\\) and the first term corresponds to \\(k = 0\\). This formulation is useful when a specific term of the expansion is required without computing the full sum.
+The index \\(k+1\\) reflects the position of the term in the expansion, since \\(k\\) ranges from 0 to \\(n\\) and the first term corresponds to \\(k = 0\\). This formulation is useful when a specific term of the expansion is required without computing the full sum.
 
 ## Special cases
 
@@ -122,7 +122,7 @@ The case \\(n = 3\\) gives the cube of a binomial:
 (a + b)^3 = a^3 + 3a^2 b + 3a b^2 + b^3
 \\]
 
-The coefficients \\(1, 3, 3, 1\\) form the third row of Pascal's triangle. The two interior coefficients are equal, in agreement with the symmetry relation \\(\binom{3}{1} = \binom{3}{2}\\). When one of the two terms is equal to \\(1\\), the theorem reduces to the expansion of \\((1 + x)^n\\):
+The coefficients \\(1, 3, 3, 1\\) form the third row of Pascal's triangle. The two interior coefficients are equal, in agreement with the symmetry relation \\(\binom{3}{1} = \binom{3}{2}\\). When one of the two terms is equal to 1, the theorem reduces to the expansion of \\((1 + x)^n\\):
 
 \\[
 (1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k

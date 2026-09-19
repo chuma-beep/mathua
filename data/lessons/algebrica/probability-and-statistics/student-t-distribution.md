@@ -21,11 +21,11 @@ This expression shows how the shape of the distribution depends on the parameter
 
 ##### The plot visually highlights how the \\(t\\) curves gradually tighten around the center as the degrees of freedom grow, illustrating the smooth transition from a heavier-tailed distribution to the familiar bell shape of the normal model.
 
-  * The total area under the curve equals \\(1\\). This means that the [integral](<../definite-integrals/>) of its probability density function over the entire real line, from \\(-\infty\\) to \\(+\infty\\), is equal to \\(1\\).
+  * The total area under the curve equals 1. This means that the [integral](<../definite-integrals/>) of its probability density function over the entire real line, from \\(-\infty\\) to \\(+\infty\\), is equal to 1.
 
-  * The curve is [symmetric](<../even-and-odd-functions/>) around the [mean](<../introduction-to-the-mean/>) \\(0\\). Because the student’s \\(t\\) distribution is centered at zero and is symmetric, half of the total probability lies on each side of the origin.
+  * The curve is [symmetric](<../even-and-odd-functions/>) around the [mean](<../introduction-to-the-mean/>) 0. Because the student’s \\(t\\) distribution is centered at zero and is symmetric, half of the total probability lies on each side of the origin.
 
-  * The curve has two [inflection points](<../maximum-minimum-and-inflection-points/>), whose location depends on the degrees of freedom \\(k\\). For small \\(k\\), the inflection points lie farther from the center, reflecting the heavier tails; as \\(k\\) increases, they move closer to \\(0\\), approaching those of the standard normal curve.
+  * The curve has two [inflection points](<../maximum-minimum-and-inflection-points/>), whose location depends on the degrees of freedom \\(k\\). For small \\(k\\), the inflection points lie farther from the center, reflecting the heavier tails; as \\(k\\) increases, they move closer to 0, approaching those of the standard normal curve.
 
   * The curve is [asymptotic](<../algebrica.org/asymptotes/>) to the x-axis. As \\(t\\) moves farther away from the center, the probability density approaches (0), but more slowly than the normal distribution when \\(k\\) is small, due to its heavier tails.
 
@@ -66,11 +66,11 @@ The idea is the same as in the normal case: z-tables allow you to find either th
 
 ## Example 1
 
-Suppose we want to determine the value of the \\(t\\) statistic with \\( k = 12 \\) degrees of freedom that leaves an area of \\( 0.01 \\) in the left tail of the distribution. Because the student’s \\(t\\) distribution is symmetric around zero, the \\(t\\) value that leaves an area of \\( 0.01 \\) in the left tail corresponds to the negative of the \\(t\\) value that leaves an area of \\( 0.01 \\) in the right tail. In terms of quantiles, this means:
+Suppose we want to determine the value of the \\(t\\) statistic with \\( k = 12 \\) degrees of freedom that leaves an area of 0.01 in the left tail of the distribution. Because the student’s \\(t\\) distribution is symmetric around zero, the \\(t\\) value that leaves an area of 0.01 in the left tail corresponds to the negative of the \\(t\\) value that leaves an area of 0.01 in the right tail. In terms of quantiles, this means:
 
 \\[t_{0.99} = -\,t_{0.01} \\]
 
-To find the needed value, we use te T-table and look up the row corresponding to \\( k = 12 \\) and the column for a tail probability of \\( 0.01 \\). The intersection in the is shown below:
+To find the needed value, we use te T-table and look up the row corresponding to \\( k = 12 \\) and the column for a tail probability of 0.01. The intersection in the is shown below:
 
 \\(k\\)| 0.10| 0.05| 0.025| 0.01| …  
 ---|---|---|---|---|---  
@@ -88,7 +88,7 @@ Thus, the \\(t\\) value that leaves 1% of the total probability on the left side
 
 ## Note on tail probabilities
 
-Since the student’s \\(t\\) distribution is symmetric around zero, the probability contained in the two tails is simply twice the probability in one tail. In the example 1, the right-tail area is \\(0.01\\), and the left-tail area is the same. Therefore, the total probability outside the [interval](<../intervals/>) \\([-t_{0.99},1, t_{0.99}]\\) is:
+Since the student’s \\(t\\) distribution is symmetric around zero, the probability contained in the two tails is simply twice the probability in one tail. In the example 1, the right-tail area is 0.01, and the left-tail area is the same. Therefore, the total probability outside the [interval](<../intervals/>) \\([-t_{0.99},1, t_{0.99}]\\) is:
 
 \\[2 \times 0.01 = 0.02 \\]
 

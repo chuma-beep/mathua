@@ -165,7 +165,7 @@ Let \\( z_1 = 5 + 3i \\) and \\( z_2 = 2 - i \\). To compute the quotient \\( z_
 
 ## Reciprocal of a complex number
 
-The reciprocal of a nonzero complex number \\( z = a + bi \\) is the multiplicative inverse \\( z^{-1} \\), defined by the condition \\( z \cdot z^{-1} = 1 \\). It is a special case of division with numerator equal to \\( 1 \\), and is computed by the same technique: multiplying numerator and denominator by the conjugate \\( \overline{z} = a - bi \\). The general formula is the following.
+The reciprocal of a nonzero complex number \\( z = a + bi \\) is the multiplicative inverse \\( z^{-1} \\), defined by the condition \\( z \cdot z^{-1} = 1 \\). It is a special case of division with numerator equal to 1, and is computed by the same technique: multiplying numerator and denominator by the conjugate \\( \overline{z} = a - bi \\). The general formula is the following.
 
 \\[
 z^{-1} = \frac{1}{a + bi} = \frac{a - bi}{a^2 + b^2} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2}\\,i

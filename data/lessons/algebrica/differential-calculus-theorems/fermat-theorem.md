@@ -59,7 +59,7 @@ The derivative vanishes precisely when \\(3x(x - 2) = 0\\) which occurs at:
 These two values are therefore the only candidates for interior extrema, because Fermat’s Theorem states that any differentiable function reaching a local extremum must have a horizontal tangent line at that point.
 
 
-To determine the nature of these points, we examine how the derivative behaves around them. For \\( x < 0 \\), the derivative is positive and the function increases. Between \\( 0 \\) and \\( 2 \\), the derivative becomes negative, so the function decreases. For \\( x > 2 \\), the derivative returns to positive, meaning the function increases again. This change in [monotonicity](<../increasing-and-decreasing-functions/>) reveals that:
+To determine the nature of these points, we examine how the derivative behaves around them. For \\( x < 0 \\), the derivative is positive and the function increases. Between 0 and 2, the derivative becomes negative, so the function decreases. For \\( x > 2 \\), the derivative returns to positive, meaning the function increases again. This change in [monotonicity](<../increasing-and-decreasing-functions/>) reveals that:
 
   * for \\( x = 0 \\), the function transitions from increasing to decreasing, indicating a local maximum;
   * for \\( x = 2 \\), the function transitions from decreasing to increasing, indicating a local minimum.

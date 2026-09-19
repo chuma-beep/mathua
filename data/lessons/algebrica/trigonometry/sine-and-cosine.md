@@ -3,7 +3,7 @@
 
 ## Introduction
 
-Sine and cosine are the two primary trigonometric functions. Given an oriented angle \\( \theta \\), represented on the unit circle by a point \\( P \\), the sine and cosine of \\( \theta \\) are defined respectively as the \\( y \\)-coordinate and the \\( x \\)-coordinate of \\( P \\). The unit circle is the circle of radius \\( 1 \\) centered at the origin, described by the equation:
+Sine and cosine are the two primary trigonometric functions. Given an oriented angle \\( \theta \\), represented on the unit circle by a point \\( P \\), the sine and cosine of \\( \theta \\) are defined respectively as the \\( y \\)-coordinate and the \\( x \\)-coordinate of \\( P \\). The unit circle is the circle of radius 1 centered at the origin, described by the equation:
 
 \\[
 x^2+y^2=1
@@ -65,7 +65,7 @@ Geometrically, this identity represents the Pythagorean theorem applied to the t
 
 ## Periodicity
 
-Sine and cosine take values between \\(-1\\) and \\(1\\) because the lengths of segments \\( \overline{OR} \\) and \\( \overline{PR} \\) cannot exceed the radius, which is equal to 1.
+Sine and cosine take values between \\(-1\\) and 1 because the lengths of segments \\( \overline{OR} \\) and \\( \overline{PR} \\) cannot exceed the radius, which is equal to 1.
 
 If an integer multiple of a full revolution is added to an angle \\( \theta \\), the sine and cosine values remain unchanged because the point \\( P \\) returns to the same position on the unit circle. From this property, it follows that sine and cosine are periodic functions with a period of \\( 2 \pi \\):
 \\[ \sin\theta = \sin(\theta + 2 \pi k) \quad k \in \mathbb{Z} \\]
@@ -141,7 +141,7 @@ The cosine function \\( f(x) = \cos(x) \\) assigns to each angle \\( x \\), expr
 
 ## Sine and cosine in the hyperbolic setting
 
-In the circular case, the sine and cosine of an angle \\( \theta \\) are obtained from the unit circle of radius \\(1\\), where the point on the circumference provides the coordinates \\( (\cos\theta,\\, \sin\theta) \\).A closely related construction exists in the hyperbolic context, where the reference curve is the equilateral hyperbola
+In the circular case, the sine and cosine of an angle \\( \theta \\) are obtained from the unit circle of radius 1, where the point on the circumference provides the coordinates \\( (\cos\theta,\\, \sin\theta) \\).A closely related construction exists in the hyperbolic context, where the reference curve is the equilateral hyperbola
 
 \\[
 x^{2} - y^{2} = 1

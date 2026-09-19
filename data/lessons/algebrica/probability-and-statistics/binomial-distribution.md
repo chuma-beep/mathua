@@ -111,7 +111,7 @@ Assuming that each test is independent, the probability is given by:
 
 ##### The [factorial](<../factorial>) symbol \\((!)\\) indicates the product of all positive integers up to a given number.
 
-Therefore, the probability that exactly four sensors out of six will pass the test is approximately \\( 0.324 \\), or 32.4%.
+Therefore, the probability that exactly four sensors out of six will pass the test is approximately 0.324, or 32.4%.
 
 ## Cumulative binomial distribution
 

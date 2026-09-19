@@ -10,7 +10,7 @@ Sometimes, the easiest way to make a graph of an equation is by making a table a
 
 **Example**
 
-A bathtub is holding $12$ gallons of water. The drain starts to leak water at a constant rate of $0.6$ gallons per second. A linear function with formula $W(x)=-0.6x+12$ can be used to model the amount of water, in gallons, in the tub $x$ seconds after it started draining. Let's make a graph of this function. The most straightforward method to graph any function is to build a table of $x$- and $y$-values, and then plot the points.
+A bathtub is holding 12 gallons of water. The drain starts to leak water at a constant rate of 0.6 gallons per second. A linear function with formula $W(x)=-0.6x+12$ can be used to model the amount of water, in gallons, in the tub $x$ seconds after it started draining. Let's make a graph of this function. The most straightforward method to graph any function is to build a table of $x$- and $y$-values, and then plot the points.
 
 *A table of values for $W(x)=-0.6x+12$*
 
@@ -30,9 +30,9 @@ $$
 -0.6=-\frac{6}{10}=-\frac{3}{5}
 $$
 
-. So start our graph at $(0,12)$ and go forward $5$ units and then down $3$ units to reach more points.
+. So start our graph at $(0,12)$ and go forward 5 units and then down 3 units to reach more points.
 
-Since we know that we will go forward $5$ units and then down $3$ units, and that we will start our graph at $(0,12)$, we can choose to orient and scale our axes to see a more complete picture of $W$ than we achieved by plotting convenient points in  Example .
+Since we know that we will go forward 5 units and then down 3 units, and that we will start our graph at $(0,12)$, we can choose to orient and scale our axes to see a more complete picture of $W$ than we achieved by plotting convenient points in  Example .
 
 *A graph of $W(x)=-0.6x+12$*
 
@@ -40,7 +40,7 @@ Since we know that we will go forward $5$ units and then down $3$ units, and tha
 
 Find the slope and vertical intercept of $y=h(x)$, where $h(x)=\frac{5}{3}x-4$. Then use slope triangles to find two more points on the line and sketch it.
 
-The slope is $\frac{5}{3}$ and the vertical intercept is $(0,-4)$. Starting at $(0,-4)$, we go forward $3$ units and up $5$ units to reach more points: $(3,1)$ and $(6,6)$.
+The slope is $\frac{5}{3}$ and the vertical intercept is $(0,-4)$. Starting at $(0,-4)$, we go forward 3 units and up 5 units to reach more points: $(3,1)$ and $(6,6)$.
 
 *A graph of $h(x)=\frac{5}{3}x-4$*
 
@@ -70,13 +70,13 @@ Let's make graph of this equation given the information provided, but only betwe
 
 Find the slope and a point on the graph of $y=m(x)$, where $m(x)=-\frac{9}{5}(x+1)-3$. Then use slope triangles to find two more points on the line and sketch it.
 
-The slope of the line is $-\frac{9}{5}$, and the point given by the equation is $(-1,-3)$. So to graph $h$, start at $(-1,-3)$, and the go forward $5$ units and down $9$ units to reach more points: $(4,-12)$ and $(9,-21)$.
+The slope of the line is $-\frac{9}{5}$, and the point given by the equation is $(-1,-3)$. So to graph $h$, start at $(-1,-3)$, and the go forward 5 units and down 9 units to reach more points: $(4,-12)$ and $(9,-21)$.
 
 *A graph of $m(x)=-\frac{9}{5}(x+1)-3$*
 
 ## Graphing Lines Using Intercepts
 
-Recall that the  standard form  of a line equation is $Ax+By=C$ where where $A$, $B$, and $C$ are three numbers (each of which might be $0$, although at least one of $A$ and $B$ must be nonzero).
+Recall that the  standard form  of a line equation is $Ax+By=C$ where where $A$, $B$, and $C$ are three numbers (each of which might be 0, although at least one of $A$ and $B$ must be nonzero).
 
 **Example**
 
@@ -134,7 +134,7 @@ Any function, linear or not, can be graphed by building a table of $x$- and $y$-
 
 Imagine a company called Corduroy's-Я-Us that makes pants. Their profit from their Royal Blue Corduroys, in thousands of dollars, can be modeled by the function $P(x)=-0.5x^2+33x-200$ where $x$ is the price of each pair of Royal Blue pants that they sell. Let's build a table of values and plot the function's graph.
 
-In this context, the value of $x$ must be positive. Furthermore, we shouldn't really consider $x$-values like $1$, $2$, etc., because it is not realistic that the price of a pair of new pants would be so low. Instead we try multiples of $10$: $10$, $20$, etc.
+In this context, the value of $x$ must be positive. Furthermore, we shouldn't really consider $x$-values like 1, 2, etc., because it is not realistic that the price of a pair of new pants would be so low. Instead we try multiples of 10: 10, 20, etc.
 
 *A table of values for $P(x)=-0.5x^2+33x-200$*
 
@@ -146,7 +146,7 @@ With the values in  Table , we can sketch the graph. Note that we have to estima
 
 Human-initiated global warming has been the subject of some debate. However, one aspect of the debate is undeniable fact: the amount of atmospheric carbon dioxide ($\mathrm{CO}_2$: ) is being  and is increasing faster and faster. The measured yearly average atmospheric carbon dioxide levels in parts per million (ppm) since 1958 can be very closely approximated by the function $C(x)=244+29\cdot1.0148^x$ where $x$ represents the number of years since the year 1900. Before 1958, the greenhouse gases weren't regularly measured. Create a table of values rounded to the nearest whole number for the carbon dioxide levels since 1958.
 
-Since 1958 is $58$ years since 1900, we will start our table at $x=58$ and go by $10$s up through $x=118$, which would stand for the year 2018.
+Since 1958 is 58 years since 1900, we will start our table at $x=58$ and go by 10s up through $x=118$, which would stand for the year 2018.
 
 *A table of values for $C(x)=244+29\cdot1.0148^x$*
 

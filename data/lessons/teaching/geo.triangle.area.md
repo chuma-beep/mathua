@@ -17,7 +17,7 @@ This works for every triangle, not just ones sitting on their bottom side. Any s
 
 **Example**
 
-Find the area of a triangle with base $10$ cm and height $6$ cm.
+Find the area of a triangle with base 10 cm and height 6 cm.
 
 *Solution*
 
@@ -27,7 +27,7 @@ The area is $30\text{ cm}^2$.
 
 **Example**
 
-A triangle has sides $8$, $5$, and a height of $3$ drawn to the side of length $8$. Find its area.
+A triangle has sides 8, 5, and a height of 3 drawn to the side of length 8. Find its area.
 
 *Solution*
 
@@ -35,7 +35,7 @@ Only the base that matches the given height matters; the third side is extra inf
 
 \[A = \frac{1}{2}(8)(3) = \frac{1}{2}(24) = 12\]
 
-The area is $12$ square units.
+The area is 12 square units.
 
 ## Units
 

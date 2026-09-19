@@ -63,7 +63,7 @@ Let’s study the behavior of the following sequence of functions in the interva
 
 \\[f_n(x) = x^n \\]
 
-For a fixed value of \\(x\\) in this interval, we know that the [absolute value](<../absolute-value>) of \\(x\\) is less than \\(1\\), that is, \\(|x| < 1\\). This means we are considering [powers](<../powers>) of a number smaller than \\(1\\) in absolute value. By properties of [exponents](<../exponential-function>), when the base has an absolute value less than \\(1\\), the sequence \\(x^n\\) tends to zero as \\(n\\) tends to infinity:
+For a fixed value of \\(x\\) in this interval, we know that the [absolute value](<../absolute-value>) of \\(x\\) is less than 1, that is, \\(|x| < 1\\). This means we are considering [powers](<../powers>) of a number smaller than 1 in absolute value. By properties of [exponents](<../exponential-function>), when the base has an absolute value less than 1, the sequence \\(x^n\\) tends to zero as \\(n\\) tends to infinity:
 
 \\[\lim_{n \to \infty} x^n = 0 \\]
 

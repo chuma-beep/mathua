@@ -118,7 +118,7 @@ Subtract: $2.51 - 7.4.$
 
 #### Solution
 
-If we subtract $7.4$ from $2.51,$ the answer will be negative since $7.4 > 2.51.$ To subtract easily, we can subtract $2.51$ from $7.4.$ Then we will place the negative sign in the result.  
+If we subtract 7.4 from 2.51, the answer will be negative since $7.4 > 2.51.$ To subtract easily, we can subtract 2.51 from 7.4. Then we will place the negative sign in the result.  
 
 |  |  |
 |----|----|
@@ -149,7 +149,7 @@ So let’s see what we would get as the product of decimals by converting them t
 |  | $(0.3)(0.7)$ | $(0.2)(0.46)$ |
 | Convert to fractions. | $\left( \frac{3}{10} \right)\left( \frac{7}{10} \right)$ | $\left( \frac{2}{10} \right)\left( \frac{46}{100} \right)$ |
 | Multiply. | $\frac{21}{100}$ | $\frac{92}{1000}$ |
-| Convert back to decimals. | $0.21$ | $0.092$ |
+| Convert back to decimals. | 0.21 | 0.092 |
 
 Table 5.3
 
@@ -291,9 +291,9 @@ Multiply: $(0.04)(0.087)\text{.}$
 
 Multiply: $(0.09)(0.067)\text{.}$
 
-#### Multiply by Powers of $10$
+#### Multiply by Powers of 10
 
-In many fields, especially in the sciences, it is common to multiply decimals by powers of $10.$ Let’s see what happens when we multiply $1.9436$ by some powers of $10.$
+In many fields, especially in the sciences, it is common to multiply decimals by powers of 10. Let’s see what happens when we multiply 1.9436 by some powers of 10.
 
 Look at the results without the final zeros. Do you notice a pattern?
 
@@ -307,29 +307,29 @@ The number of places that the decimal point moved is the same as the number of z
 
 | Multiply by | Number of zeros | Number of places decimal point moves |
 |-------------|-----------------|--------------------------------------|
-| $10$      | $1$           | $1$ place to the right             |
-| $100$     | $2$           | $2$ places to the right            |
-| $1,000$   | $3$           | $3$ places to the right            |
-| $10,000$  | $4$           | $4$ places to the right            |
+| 10      | 1           | 1 place to the right             |
+| 100     | 2           | 2 places to the right            |
+| 1,000   | 3           | 3 places to the right            |
+| 10,000  | 4           | 4 places to the right            |
 
 Table 5.4
 
-We can use this pattern as a shortcut to multiply by powers of ten instead of multiplying using the vertical format. We can count the zeros in the power of $10$ and then move the decimal point that same of places to the right.
+We can use this pattern as a shortcut to multiply by powers of ten instead of multiplying using the vertical format. We can count the zeros in the power of 10 and then move the decimal point that same of places to the right.
 
-So, for example, to multiply $45.86$ by $100,$ move the decimal point $2$ places to the right.
+So, for example, to multiply 45.86 by 100, move the decimal point 2 places to the right.
 
-Sometimes when we need to move the decimal point, there are not enough decimal places. In that case, we use zeros as placeholders. For example, let’s multiply $2.4$ by $100.$ We need to move the decimal point $2$ places to the right. Since there is only one digit to the right of the decimal point, we must write a $0$ in the hundredths place.
+Sometimes when we need to move the decimal point, there are not enough decimal places. In that case, we use zeros as placeholders. For example, let’s multiply 2.4 by 100. We need to move the decimal point 2 places to the right. Since there is only one digit to the right of the decimal point, we must write a 0 in the hundredths place.
 
 ### How To
 
 #### Multiply a decimal by a power of 10.
 
-1.  Step 1. Move the decimal point to the right the same number of places as the number of zeros in the power of $10.$
+1.  Step 1. Move the decimal point to the right the same number of places as the number of zeros in the power of 10.
 2.  Step 2. Write zeros at the end of the number as placeholders if needed.
 
 ### Example 5.18
 
-Multiply $5.63$ by factors of ⓐ$10$ ⓑ$100$ⓒ$1000.$
+Multiply 5.63 by factors of ⓐ10 ⓑ100ⓒ1000.
 
 #### Solution
 
@@ -340,29 +340,29 @@ By looking at the number of zeros in the multiple of ten, we see the number of p
 | ⓐ |  |
 |  | $56.3(10)$ |
 | There is 1 zero in 10, so move the decimal point 1 place to the right. |  |
-|  | $56.3$ |
+|  | 56.3 |
 
 |  |  |
 |----|----|
 | ⓑ |  |
 |  | $5.63(100)$ |
 | There are 2 zeros in 100, so move the decimal point 2 places to the right. |  |
-|  | $563$ |
+|  | 563 |
 
 |  |  |
 |----|----|
 | ⓒ |  |
 |  | $5.63(1000)$ |
 | There are 3 zeros in 1000, so move the decimal point 3 places to the right. |  |
-| A zero must be added at the end. | $5,630$ |
+| A zero must be added at the end. | 5,630 |
 
 ### Try It 5.35
 
-Multiply $2.58$ by factors of ⓐ$10$ ⓑ$100$ ⓒ$1000.$
+Multiply 2.58 by factors of ⓐ10 ⓑ100 ⓒ1000.
 
 ### Try It 5.36
 
-Multiply $14.2$ by factors of ⓐ$10$ ⓑ$100$ ⓒ$1000.$
+Multiply 14.2 by factors of ⓐ10 ⓑ100 ⓒ1000.
 
 ### Divide Decimals
 
@@ -418,7 +418,7 @@ Divide: $0.28 \div 4.$
 
 Divide: $0.56 \div 7.$
 
-In everyday life, we divide whole numbers into decimals—money—to find the price of one item. For example, suppose a case of $24$ water bottles cost $\text{\$3.99}.$ To find the price per water bottle, we would divide $\text{\$3.99}$ by $24,$ and round the answer to the nearest cent (hundredth).
+In everyday life, we divide whole numbers into decimals—money—to find the price of one item. For example, suppose a case of 24 water bottles cost $\text{\$3.99}.$ To find the price per water bottle, we would divide $\text{\$3.99}$ by 24, and round the answer to the nearest cent (hundredth).
 
 ### Example 5.20
 
@@ -434,7 +434,7 @@ Divide: $\text{\$3.99} \div 24.$
 | Round to the nearest cent. | $\$ 0.166 \approx \$ 0.17$ |
 |  | $\$ 3.99 \div 24 \approx \$ 0.17$ |
 
-This means the price per bottle is $17$ cents.
+This means the price per bottle is 17 cents.
 
 ### Try It 5.39
 
@@ -452,13 +452,13 @@ $$
 (0.2)(4) = 0.8
 $$
 
-Remember, again, that a multiplication problem can be rephrased as a division problem. This time we ask, “How many times does $0.2$ go into $0.8\text{?”}$ Because $(0.2)(4) = 0.8,$ we can say that $0.2$ goes into $0.8$ four times. This means that $0.8$ divided by $0.2$ is $4.$
+Remember, again, that a multiplication problem can be rephrased as a division problem. This time we ask, “How many times does 0.2 go into $0.8\text{?”}$ Because $(0.2)(4) = 0.8,$ we can say that 0.2 goes into 0.8 four times. This means that 0.8 divided by 0.2 is 4.
 
 $$
 0.8 \div 0.2 = 4
 $$
 
-We would get the same answer, $4,$ if we divide $8$ by $2,$ both whole numbers. Why is this so? Let’s think about the division problem as a fraction.
+We would get the same answer, 4, if we divide 8 by 2, both whole numbers. Why is this so? Let’s think about the division problem as a fraction.
 
 $$
 \begin{matrix}
@@ -472,7 +472,7 @@ $$
 \end{matrix}
 $$
 
-We multiplied the numerator and denominator by $10$ and ended up just dividing $8$ by $4.$ To divide decimals, we multiply both the numerator and denominator by the same power of $10$ to make the denominator a whole number. Because of the Equivalent Fractions Property, we haven’t changed the value of the fraction. The effect is to move the decimal points in the numerator and denominator the same number of places to the right.
+We multiplied the numerator and denominator by 10 and ended up just dividing 8 by 4. To divide decimals, we multiply both the numerator and denominator by the same power of 10 to make the denominator a whole number. Because of the Equivalent Fractions Property, we haven’t changed the value of the fraction. The effect is to move the decimal points in the numerator and denominator the same number of places to the right.
 
 We use the rules for dividing positive and negative numbers with decimals, too. When dividing signed decimals, first determine the sign of the quotient and then divide as if the numbers were both positive. Finally, write the quotient with the appropriate sign.
 
@@ -592,7 +592,7 @@ Place the decimal point in the quotient above the decimal point in the dividend.
 </tbody>
 </table>
 
-We can relate this example to money. How many nickels are there in four dollars? Because $4 \div 0.05 = 80,$ there are $80$ nickels in $\text{\$4}.$
+We can relate this example to money. How many nickels are there in four dollars? Because $4 \div 0.05 = 80,$ there are 80 nickels in $\text{\$4}.$
 
 ### Try It 5.45
 
@@ -638,7 +638,7 @@ Amber bought a pair of shoes for $\text{\$24.75}$ and a purse for $\text{\$36.90
 
 ### Example 5.25
 
-Jessie put $8$ gallons of gas in her car. One gallon of gas costs $\text{\$3.529}.$ How much does Jessie owe for the gas? (Round the answer to the nearest cent.)
+Jessie put 8 gallons of gas in her car. One gallon of gas costs $\text{\$3.529}.$ How much does Jessie owe for the gas? (Round the answer to the nearest cent.)
 
 #### Solution
 
@@ -653,11 +653,11 @@ Jessie put $8$ gallons of gas in her car. One gallon of gas costs $\text{\$3.529
 
 ### Try It 5.49
 
-Hector put $13$ gallons of gas into his car. One gallon of gas costs $\text{\$3.175}.$ How much did Hector owe for the gas? Round to the nearest cent.
+Hector put 13 gallons of gas into his car. One gallon of gas costs $\text{\$3.175}.$ How much did Hector owe for the gas? Round to the nearest cent.
 
 ### Try It 5.50
 
-Christopher bought $5$ pizzas for the team. Each pizza cost $\text{\$9.75}.$ How much did all the pizzas cost?
+Christopher bought 5 pizzas for the team. Each pizza cost $\text{\$9.75}.$ How much did all the pizzas cost?
 
 ### Example 5.26
 
@@ -679,13 +679,13 @@ Six friends went out for dinner. The total cost of their dinner was $\text{\$92.
 
 ### Try It 5.52
 
-Chad worked $40$ hours last week and his paycheck was $\text{\$570}.$ How much does he earn per hour?
+Chad worked 40 hours last week and his paycheck was $\text{\$570}.$ How much does he earn per hour?
 
 Be careful to follow the order of operations in the next example. Remember to multiply before you add.
 
 ### Example 5.27
 
-Marla buys $6$ bananas that cost $\text{\$0.22}$ each and $4$ oranges that cost $\text{\$0.49}$ each. How much is the total cost of the fruit?
+Marla buys 6 bananas that cost $\text{\$0.22}$ each and 4 oranges that cost $\text{\$0.49}$ each. How much is the total cost of the fruit?
 
 #### Solution
 
@@ -700,7 +700,7 @@ Marla buys $6$ bananas that cost $\text{\$0.22}$ each and $4$ oranges that cost 
 
 ### Try It 5.53
 
-Suzanne buys $3$ cans of beans that cost $\text{\$0.75}$ each and $6$ cans of corn that cost $\text{\$0.62}$ each. How much is the total cost of these groceries?
+Suzanne buys 3 cans of beans that cost $\text{\$0.75}$ each and 6 cans of corn that cost $\text{\$0.62}$ each. How much is the total cost of these groceries?
 
 ### Try It 5.54
 
@@ -1098,35 +1098,35 @@ In the following exercises, use the strategy for applications to solve.
 
 183\.
 
-**Diet** Leo took part in a diet program. He weighed $190$ pounds at the start of the program. During the first week, he lost $4.3$ pounds. During the second week, he had lost $2.8$ pounds. The third week, he gained $0.7$ pounds. The fourth week, he lost $1.9$ pounds. What did Leo weigh at the end of the fourth week?
+**Diet** Leo took part in a diet program. He weighed 190 pounds at the start of the program. During the first week, he lost 4.3 pounds. During the second week, he had lost 2.8 pounds. The third week, he gained 0.7 pounds. The fourth week, he lost 1.9 pounds. What did Leo weigh at the end of the fourth week?
 
 184\.
 
-**Snowpack** On April $1,$ the snowpack at the ski resort was $4$ meters deep, but the next few days were very warm. By April $5,$ the snow depth was $1.6$ meters less. On April $8,$ it snowed and added $2.1$ meters of snow. What was the total depth of the snow?
+**Snowpack** On April 1, the snowpack at the ski resort was 4 meters deep, but the next few days were very warm. By April 5, the snow depth was 1.6 meters less. On April 8, it snowed and added 2.1 meters of snow. What was the total depth of the snow?
 
 185\.
 
-**Coffee** Noriko bought $4$ coffees for herself and her co-workers. Each coffee was $\text{\$3.75}.$ How much did she pay for all the coffees?
+**Coffee** Noriko bought 4 coffees for herself and her co-workers. Each coffee was $\text{\$3.75}.$ How much did she pay for all the coffees?
 
 186\.
 
-**Subway Fare** Arianna spends $\text{\$4.50}$ per day on subway fare. Last week she rode the subway $6$ days. How much did she spend for the subway fares?
+**Subway Fare** Arianna spends $\text{\$4.50}$ per day on subway fare. Last week she rode the subway 6 days. How much did she spend for the subway fares?
 
 187\.
 
-**Income** Mayra earns $\text{\$9.25}$ per hour. Last week she worked $32$ hours. How much did she earn?
+**Income** Mayra earns $\text{\$9.25}$ per hour. Last week she worked 32 hours. How much did she earn?
 
 188\.
 
-**Income** Peter earns $\text{\$8.75}$ per hour. Last week he worked $19$ hours. How much did he earn?
+**Income** Peter earns $\text{\$8.75}$ per hour. Last week he worked 19 hours. How much did he earn?
 
 189\.
 
-**Hourly Wage** Alan got his first paycheck from his new job. He worked $30$ hours and earned $\text{\$382.50}.$ How much does he earn per hour?
+**Hourly Wage** Alan got his first paycheck from his new job. He worked 30 hours and earned $\text{\$382.50}.$ How much does he earn per hour?
 
 190\.
 
-**Hourly Wage** Maria got her first paycheck from her new job. She worked $25$ hours and earned $\text{\$362.50}.$ How much does she earn per hour?
+**Hourly Wage** Maria got her first paycheck from her new job. She worked 25 hours and earned $\text{\$362.50}.$ How much does she earn per hour?
 
 191\.
 
@@ -1158,43 +1158,43 @@ In the following exercises, use the strategy for applications to solve.
 
 193\.
 
-**Fast Food** At their favorite fast food restaurant, the Carlson family orders $4$ burgers that cost $\text{\$3.29}$ each and $2$ orders of fries at $\text{\$2.74}$ each. What is the total cost of the order?
+**Fast Food** At their favorite fast food restaurant, the Carlson family orders 4 burgers that cost $\text{\$3.29}$ each and 2 orders of fries at $\text{\$2.74}$ each. What is the total cost of the order?
 
 194\.
 
-**Home Goods** Chelsea needs towels to take with her to college. She buys $2$ bath towels that cost $\text{\$9.99}$ each and $6$ washcloths that cost $\text{\$2.99}$ each. What is the total cost for the bath towels and washcloths?
+**Home Goods** Chelsea needs towels to take with her to college. She buys 2 bath towels that cost $\text{\$9.99}$ each and 6 washcloths that cost $\text{\$2.99}$ each. What is the total cost for the bath towels and washcloths?
 
 195\.
 
-**Zoo** The Lewis and Chousmith families are planning to go to the zoo together. Adult tickets cost $\text{\$29.95}$ and children’s tickets cost $\text{\$19.95}.$ What will the total cost be for $4$ adults and $7$ children?
+**Zoo** The Lewis and Chousmith families are planning to go to the zoo together. Adult tickets cost $\text{\$29.95}$ and children’s tickets cost $\text{\$19.95}.$ What will the total cost be for 4 adults and 7 children?
 
 196\.
 
-**Ice Skating** Jasmine wants to have her birthday party at the local ice skating rink. It will cost $\text{\$8.25}$ per child and $\text{\$12.95}$ per adult. What will the total cost be for $12$ children and $3$ adults?
+**Ice Skating** Jasmine wants to have her birthday party at the local ice skating rink. It will cost $\text{\$8.25}$ per child and $\text{\$12.95}$ per adult. What will the total cost be for 12 children and 3 adults?
 
 #### Everyday Math
 
 197\.
 
-**Paycheck** Annie has two jobs. She gets paid $\text{\$14.04}$ per hour for tutoring at City College and $\text{\$8.75}$ per hour at a coffee shop. Last week she tutored for $8$ hours and worked at the coffee shop for $15$ hours.
+**Paycheck** Annie has two jobs. She gets paid $\text{\$14.04}$ per hour for tutoring at City College and $\text{\$8.75}$ per hour at a coffee shop. Last week she tutored for 8 hours and worked at the coffee shop for 15 hours.
 
 ⓐ How much did she earn?
 
-ⓑ If she had worked all $23$ hours as a tutor instead of working both jobs, how much more would she have earned?
+ⓑ If she had worked all 23 hours as a tutor instead of working both jobs, how much more would she have earned?
 
 198\.
 
-**Paycheck** Jake has two jobs. He gets paid $\text{\$7.95}$ per hour at the college cafeteria and $\text{\$20.25}$ at the art gallery. Last week he worked $12$ hours at the cafeteria and $5$ hours at the art gallery.
+**Paycheck** Jake has two jobs. He gets paid $\text{\$7.95}$ per hour at the college cafeteria and $\text{\$20.25}$ at the art gallery. Last week he worked 12 hours at the cafeteria and 5 hours at the art gallery.
 
 ⓐ How much did he earn?
 
-ⓑ If he had worked all $17$ hours at the art gallery instead of working both jobs, how much more would he have earned?
+ⓑ If he had worked all 17 hours at the art gallery instead of working both jobs, how much more would he have earned?
 
 #### Writing Exercises
 
 199\.
 
-In the 2010 winter Olympics, two skiers took the silver and bronze medals in the Men's Super-G ski event. The silver medalist's time was $1$ minute $30.62$ seconds and bronze medalist's time was $1$ minute $30.65$ seconds. Whose time was faster? Find the difference in their times and then write the name of that decimal.
+In the 2010 winter Olympics, two skiers took the silver and bronze medals in the Men's Super-G ski event. The silver medalist's time was 1 minute 30.62 seconds and bronze medalist's time was 1 minute 30.65 seconds. Whose time was faster? Find the difference in their times and then write the name of that decimal.
 
 200\.
 

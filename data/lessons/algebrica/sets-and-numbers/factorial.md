@@ -2,7 +2,7 @@
 
 ## Definition
 
-The factorial of a non-negative integer \\(n\\), written \\(n!\\), is the product of all positive integers from \\(1\\) to \\(n\\):
+The factorial of a non-negative integer \\(n\\), written \\(n!\\), is the product of all positive integers from 1 to \\(n\\):
 
 \\[
 \begin{align}
@@ -11,13 +11,13 @@ n! &= n \cdot (n-1) \cdot (n-2) \cdot \ldots \cdot 2 \cdot 1 \\\\[6pt]
 \end{align}
 \\]
 
-For example, the factorial of \\(4\\) is computed as follows:
+For example, the factorial of 4 is computed as follows:
 
 \\[
 4! = 4 \cdot 3 \cdot 2 \cdot 1 = 24
 \\]
 
-By convention, the factorial of \\(0\\) is equal to \\(1\\).
+By convention, the factorial of 0 is equal to 1.
 
 The factorial can also be expressed through a recursive function defined by cases:
 
@@ -29,7 +29,7 @@ n \cdot (n-1)! & \text{if } n \in \mathbb{N},\ n > 0 \\\\[6pt]
 \end{cases}
 \\]
 
-The same definition can be written more compactly using the product symbol \\(\prod\\), where the index \\(k\\) ranges from \\(1\\) to \\(n\\):
+The same definition can be written more compactly using the product symbol \\(\prod\\), where the index \\(k\\) ranges from 1 to \\(n\\):
 
 \\[
 n! =
@@ -50,13 +50,13 @@ Suppose we are given two non-negative integers \\(n\\) and \\(k\\) with \\(n > k
 \frac{n!}{(n-k)!}
 \\]
 
-The denominator cancels the factors from \\((n-k)\\) to \\(1\\), leaving \\(k\\) terms in the numerator.
+The denominator cancels the factors from \\((n-k)\\) to 1, leaving \\(k\\) terms in the numerator.
 
 \\[
 \frac{n!}{(n-k)!} = n \cdot (n-1) \cdot \ldots \cdot (n-k+1)
 \\]
 
-Consider the ratio between \\(7!\\) and \\(4!\\). The factors from \\(4\\) down to \\(1\\) appear in both numerator and denominator and therefore cancel. What remains in the numerator is the product of the integers from \\(7\\) down to \\(5\\), which is equal to \\(210\\):
+Consider the ratio between \\(7!\\) and \\(4!\\). The factors from 4 down to 1 appear in both numerator and denominator and therefore cancel. What remains in the numerator is the product of the integers from 7 down to 5, which is equal to 210:
 
 \\[
 \frac{7!}{4!} = \frac{7 \cdot 6 \cdot 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1}{4 \cdot 3 \cdot 2 \cdot 1} = 7 \cdot 6 \cdot 5 = 210
@@ -134,7 +134,7 @@ This approximation is needed because the factorial grows faster than both polyno
 | 10 | 100 | 1,024 | 3,628,800 |
 | 15 | 225 | 32,768 | ~1.307 billion |
 
-The ratio between \\(n!\\) and its Stirling approximation tends to \\(1\\) as \\(n\\) grows without bound:
+The ratio between \\(n!\\) and its Stirling approximation tends to 1 as \\(n\\) grows without bound:
 
 \\[
 \lim_{n \to \infty} \frac{n!}{\sqrt{2\pi n}\left(\dfrac{n}{e}\right)^n} = 1

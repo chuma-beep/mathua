@@ -24,7 +24,7 @@ Unlike permutations, where order matters, the pairs \\((p,q)\\) and \\((q,p)\\) 
 
 ## Pascal's triangle
 
-Pascal's triangle is a triangular arrangement of binomial coefficients, the coefficients that appear in the expansion of the binomial \\((a+b)\\) raised to a non-negative integer power \\(n\\). The first row contains only \\(1\\), and each number in the subsequent rows is the sum of the two numbers directly above it. The outermost elements of every row are always 1. Here are the first six rows:
+Pascal's triangle is a triangular arrangement of binomial coefficients, the coefficients that appear in the expansion of the binomial \\((a+b)\\) raised to a non-negative integer power \\(n\\). The first row contains only 1, and each number in the subsequent rows is the sum of the two numbers directly above it. The outermost elements of every row are always 1. Here are the first six rows:
 
 \\[
 \begin{array}{c}
@@ -97,7 +97,7 @@ row \\( n \\) of Pascal's triangle equals \\( 2^n \\):
 \sum_{k=0}^{n} \binom{n}{k} = 2^n
 \\]
 
-One way to see why this is true: consider a set of \\( n \\) elements. Each element can either be included in a subset or not, giving two independent choices per element. The total number of subsets is therefore \\( 2^n \\), and since \\( \binom{n}{k} \\) counts the subsets of exactly \\( k \\) elements, summing over all possible values of \\( k \\) from \\( 0 \\) to \\( n \\) recovers the same count.
+One way to see why this is true: consider a set of \\( n \\) elements. Each element can either be included in a subset or not, giving two independent choices per element. The total number of subsets is therefore \\( 2^n \\), and since \\( \binom{n}{k} \\) counts the subsets of exactly \\( k \\) elements, summing over all possible values of \\( k \\) from 0 to \\( n \\) recovers the same count.
 
 
 The alternating sum identity is a close relative of the row sum, but with alternating signs:
@@ -115,7 +115,7 @@ The Vandermonde identity describes what happens when two independent selections 
 \binom{m+n}{r} = \sum_{k=0}^{r} \binom{m}{k} \binom{n}{r-k}
 \\]
 
-The reasoning is direct: any selection of \\( r \\) elements from the  combined group must draw exactly \\( k \\) elements from the first group and  \\( r - k \\) from the second, for some value of \\( k \\) between \\( 0 \\) and \\( r \\). Each such split contributes \\( \binom{m}{k} \cdot \binom{n}{r-k} \\) combinations, and summing over all valid values of \\( k \\) gives the total. A particularly useful special case arises when \\( m = n \\) and \\( r = n \\):
+The reasoning is direct: any selection of \\( r \\) elements from the  combined group must draw exactly \\( k \\) elements from the first group and  \\( r - k \\) from the second, for some value of \\( k \\) between 0 and \\( r \\). Each such split contributes \\( \binom{m}{k} \cdot \binom{n}{r-k} \\) combinations, and summing over all valid values of \\( k \\) gives the total. A particularly useful special case arises when \\( m = n \\) and \\( r = n \\):
 
 \\[
 \binom{2n}{n} = \sum_{k=0}^{n} \binom{n}{k}^2
@@ -253,4 +253,4 @@ The binomial coefficient provides the foundation for the binomial distribution, 
 b(x; n, p) = \binom{n}{x} p^{x} q^{n - x}
 \\]
 
-This expression combines the binomial coefficient, which counts the number of ways \\( x \\) successes can be arranged across \\( n \\) trials, and the factor \\( p^x q^{n-x} \\), which measures the probability of any one such arrangement. Fixing \\( n \\) and \\( p \\), and letting \\( x \\) vary from \\( 0 \\) to \\( n \\), gives the full distribution, with each outcome weighted by the number of ways it can occur.
+This expression combines the binomial coefficient, which counts the number of ways \\( x \\) successes can be arranged across \\( n \\) trials, and the factor \\( p^x q^{n-x} \\), which measures the probability of any one such arrangement. Fixing \\( n \\) and \\( p \\), and letting \\( x \\) vary from 0 to \\( n \\), gives the full distribution, with each outcome weighted by the number of ways it can occur.

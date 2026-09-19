@@ -7,13 +7,13 @@ A field is an algebraic structure in which the operations of addition and multip
 
 Formally, a field is a set \\(F\\) together with two binary operations \\(+\\) and \\(\\cdot\\) satisfying the following axioms:
 
-- \\((F, +)\\) is an abelian group. The additive identity is denoted \\(0\\), and the additive inverse of an element \\(a \\in F\\) is denoted \\(-a.\\)
+- \\((F, +)\\) is an abelian group. The additive identity is denoted 0, and the additive inverse of an element \\(a \\in F\\) is denoted \\(-a.\\)
 
-- \\((F \\setminus \\{0\\}, \\cdot)\\) is an abelian group. The multiplicative identity is denoted \\(1\\), and the multiplicative inverse of a nonzero element \\(a\\) is denoted \\(a^{-1}.\\)
+- \\((F \\setminus \\{0\\}, \\cdot)\\) is an abelian group. The multiplicative identity is denoted 1, and the multiplicative inverse of a nonzero element \\(a\\) is denoted \\(a^{-1}.\\)
 
 - Multiplication distributes over addition: for all \\(a, b, c \\in F\\), one has \\(a \\cdot (b + c) = a \\cdot b + a \\cdot c\\).
 
-> The requirement that \\(0 \\neq 1\\) is included implicitly by excluding \\(0\\) from the multiplicative group, and it ensures that the trivial set \\(\\{0\\}\\) does not qualify as a field. A field is therefore a commutative ring with unity in which every nonzero element is invertible. Every field is a ring, but a ring is generally not a field.
+> The requirement that \\(0 \\neq 1\\) is included implicitly by excluding 0 from the multiplicative group, and it ensures that the trivial set \\(\\{0\\}\\) does not qualify as a field. A field is therefore a commutative ring with unity in which every nonzero element is invertible. Every field is a ring, but a ring is generally not a field.
 
 ## Properties
 
@@ -54,13 +54,13 @@ The set \\(\\mathbb{R}\\) of real numbers is a field extending \\(\\mathbb{Q}\\)
 The set \\(\\mathbb{C}\\) of complex numbers is a field extending \\(\\mathbb{R}\\). Unlike \\(\\mathbb{R}\\), it is algebraically closed: every nonconstant polynomial with coefficients in \\(\\mathbb{C}\\) has at least one root in \\(\\mathbb{C}\\), a result known as the fundamental theorem of algebra.
 
 
-For any prime \\(p\\), the set \\(\\mathbb{Z}/p\\mathbb{Z} = \\{0, 1, \\ldots, p-1\\}\\) equipped with addition and multiplication modulo \\(p\\) is a field, commonly denoted \\(\\mathbb{F}\_p\\). This is a finite field: it contains exactly \\(p\\) elements. The primality of \\(p\\) is essential. In \\(\\mathbb{Z}/6\\mathbb{Z}\\), for instance, the elements \\(2\\) and \\(3\\) satisfy \\(2 \\cdot 3 = 0\\), so neither is invertible, and the structure fails to be a field.
+For any prime \\(p\\), the set \\(\\mathbb{Z}/p\\mathbb{Z} = \\{0, 1, \\ldots, p-1\\}\\) equipped with addition and multiplication modulo \\(p\\) is a field, commonly denoted \\(\\mathbb{F}\_p\\). This is a finite field: it contains exactly \\(p\\) elements. The primality of \\(p\\) is essential. In \\(\\mathbb{Z}/6\\mathbb{Z}\\), for instance, the elements 2 and 3 satisfy \\(2 \\cdot 3 = 0\\), so neither is invertible, and the structure fails to be a field.
 
 > Finite fields exist only when the number of elements is a prime power \\(p^n\\), for some prime \\(p\\) and positive integer \\(n\\). For every such prime power there exists, up to isomorphism, exactly one finite field, denoted \\(\\mathbb{F}_{p^n}\\) or \\(\\text{GF}(p^n)\\).
 
 ## Subfields and field extensions
 
-A subset \\(K \\subseteq F\\) is called a subfield of \\(F\\) if \\(K\\) is itself a field under the operations inherited from \\(F\\). Equivalently, \\(K\\) is a subfield of \\(F\\) if it contains \\(0\\) and \\(1\\), and is closed under addition, negation, multiplication, and taking multiplicative inverses of nonzero elements. The rational numbers \\(\\mathbb{Q}\\) form a subfield of \\(\\mathbb{R}\\), which is itself a subfield of \\(\\mathbb{C}\\). These inclusions define a chain of fields:
+A subset \\(K \\subseteq F\\) is called a subfield of \\(F\\) if \\(K\\) is itself a field under the operations inherited from \\(F\\). Equivalently, \\(K\\) is a subfield of \\(F\\) if it contains 0 and 1, and is closed under addition, negation, multiplication, and taking multiplicative inverses of nonzero elements. The rational numbers \\(\\mathbb{Q}\\) form a subfield of \\(\\mathbb{R}\\), which is itself a subfield of \\(\\mathbb{C}\\). These inclusions define a chain of fields:
 
 \\[
 \\mathbb{Q} \\subseteq \\mathbb{R} \\subseteq \\mathbb{C}
@@ -76,7 +76,7 @@ Every field \\(F\\) has an associated non-negative integer called its characteri
 \\underbrace{1 + 1 + \\cdots + 1}_{n} = 0
 \\]
 
-If no such \\(n\\) exists, the characteristic is defined to be \\(0\\). The characteristic of a field is always either zero or a prime number. If the characteristic were a composite number \\(n = ab\\) with \\(1 < a, b < n\\), one could write:
+If no such \\(n\\) exists, the characteristic is defined to be 0. The characteristic of a field is always either zero or a prime number. If the characteristic were a composite number \\(n = ab\\) with \\(1 < a, b < n\\), one could write:
 
 \\[
 0 = \\underbrace{1 + \\cdots + 1}\_{n} = \\left(\\underbrace{1 + \\cdots + 1}\_{a}\\right) \\cdot \\left(\\underbrace{1 + \\cdots + 1}\_{b}\\right)

@@ -12,9 +12,9 @@ $$
  \text{base}^{\text{exponent}} = \text{power} 
 $$
 
-For example, when we calculate $8^{2} = 64$, the *base* is $8$, the *exponent* is $2$, and the expression $8^{2}$ is called the 2nd *power* of $8$.
+For example, when we calculate $8^{2} = 64$, the *base* is 8, the *exponent* is 2, and the expression $8^{2}$ is called the 2nd *power* of 8.
 
-Exponents indicate repeated multiplication. When the exponent is a positive integer, the power can be rewritten as repeated multiplication of the base. For example, the $4$th power of $3$ can be written as $4$ factors of $3$ like so:
+Exponents indicate repeated multiplication. When the exponent is a positive integer, the power can be rewritten as repeated multiplication of the base. For example, the 4th power of 3 can be written as 4 factors of 3 like so:
 
 $$
  3^{4} = 3 \cdot 3 \cdot 3 \cdot 3 
@@ -30,7 +30,7 @@ $$
  3^5 \cdot 3^2 = \left(3 \cdot 3\cdot 3\cdot 3\cdot 3\right) \cdot \left(3 \cdot 3\right) 
 $$
 
-If we then count how many $3$s are being multiplied together, we find we have $5+2=7$, a total of seven $3$s. So $3^5\cdot 3^2$ simplifies like this:
+If we then count how many 3s are being multiplied together, we find we have $5+2=7$, a total of seven 3s. So $3^5\cdot 3^2$ simplifies like this:
 
 $$
 \begin{aligned}3^5\cdot 3^2 &= 3^{5+2} \\ &= 3^7\end{aligned}
@@ -46,7 +46,7 @@ $$
 \begin{aligned}x^2\cdot x^3 &=(x\cdot x)(x \cdot x \cdot x) \\ &=x\cdot x\cdot x \cdot x \cdot x \\ &=x^5\end{aligned}
 $$
 
-Note that we obtained the exponent of $5$ by adding $2$ and $3$.
+Note that we obtained the exponent of 5 by adding 2 and 3.
 
 This demonstrates our first exponent rule, the *Product Rule*: when multiplying two  expressions that have the same base, we can simplify the product by adding the exponents.
 
@@ -82,7 +82,7 @@ $$
 \begin{aligned}\left(3^5\right)^2 &= \left(3^5\right)\cdot \left(3^5\right) \\ &= \left(3\cdot 3\cdot 3\cdot 3 \cdot 3 \right) \cdot \left(3 \cdot 3\cdot 3\cdot 3\cdot 3\right)\end{aligned}
 $$
 
-If we again count how many $3$s are being multiplied, we have a total of two groups each with five $3$s. So we'd have $2\cdot 5=10$ instances of a $3$. So $\left(3^5\right)^2$ simplifies like this:
+If we again count how many 3s are being multiplied, we have a total of two groups each with five 3s. So we'd have $2\cdot 5=10$ instances of a 3. So $\left(3^5\right)^2$ simplifies like this:
 
 $$
 \begin{aligned}\left(3^5\right)^2 &= 3^{2\cdot 5} \\ &= 3^{10}\end{aligned}
@@ -98,7 +98,7 @@ $$
 \begin{aligned}\left(x^2\right)^3 &=\left(x^2\right) \cdot \left(x^2\right)\cdot\left(x^2\right) \\ &=(x \cdot x)\cdot (x \cdot x)\cdot (x \cdot x) \\ &=x^6\end{aligned}
 $$
 
-Note that we obtained the exponent of $6$ by multiplying $2$ and $3$.
+Note that we obtained the exponent of 6 by multiplying 2 and 3.
 
 This demonstrates our second exponent rule, the *Power to a Power Rule*: when a  base is raised to an exponent and that expression is raised to another exponent, we multiply the exponents.
 
@@ -116,7 +116,7 @@ $$
  (3t)^5= (3t)(3t)(3t)(3t)(3t) 
 $$
 
-Keeping in mind that there is multiplication between every $3$ and $t$, and multiplication between all of the parentheses pairs, we can reorder and regroup the factors:
+Keeping in mind that there is multiplication between every 3 and $t$, and multiplication between all of the parentheses pairs, we can reorder and regroup the factors:
 
 $$
 \begin{aligned}\left(3t\right)^5 &= (3\cdot t)\cdot (3\cdot t)\cdot (3\cdot t)\cdot (3\cdot t)\cdot (3\cdot t) \\ &= \left(3\cdot 3\cdot 3\cdot 3\cdot 3 \right) \cdot \left(t \cdot t \cdot t \cdot t \cdot t\right) \\ &= 3^5 t^5\end{aligned}
@@ -124,7 +124,7 @@ $$
 
 We could leave it written this way if $3^5$ feels especially large. But if you are able to evaluate $3^5=243$, then perhaps a better final version of this expression is $243t^5$.
 
-We essentially applied the outer exponent to each factor inside the parentheses. It is important to see how the exponent $5$ applied to *both* the $3$*and* the $t$, not just to the $t$.
+We essentially applied the outer exponent to each factor inside the parentheses. It is important to see how the exponent 5 applied to *both* the 3*and* the $t$, not just to the $t$.
 
 **Example**
 
@@ -183,7 +183,7 @@ How many exponent rules are discussed in this section? Write an example of each 
 
 **Exercise**
 
-The order of operations say that operations inside parentheses should get the highest priority. But with $(5x)^3$, you cannot actually do anything with the $5$ and the $x$. Which exponent rule allows you to sidestep the order of operations and still simplify this expression a little?
+The order of operations say that operations inside parentheses should get the highest priority. But with $(5x)^3$, you cannot actually do anything with the 5 and the $x$. Which exponent rule allows you to sidestep the order of operations and still simplify this expression a little?
 
 ##
 

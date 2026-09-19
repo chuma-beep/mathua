@@ -24,7 +24,7 @@ When an expression has subtraction, we can rewrite the it using addition of a ne
 
 List the terms in the expression $-3x^2+5x-4$.
 
-We can rewrite this expression as $-3x^2+5x+(-4)$ to see that the terms are $-3x^2$, $5x$, and $-4$. Note that the third term is $-4$, not just $4$.
+We can rewrite this expression as $-3x^2+5x+(-4)$ to see that the terms are $-3x^2$, $5x$, and $-4$. Note that the third term is $-4$, not just 4.
 
 **Example**
 
@@ -36,7 +36,7 @@ This expression has four terms: $3\,\text{cm}$, $2\,\text{cm}$, $-3\,\text{cm}$,
 
 ## Combining Like Terms
 
-If you have $3\,\text{cm}+2\,\text{cm}$, it is natural to add those together to get $5\,\text{cm}$. That works because their units ($\text{cm}$) are the same. The same idea applies to other terms, even ones that don't have units. For example, with $2x+3x$, we have $2$*things* and then $3$ more of those *things*. All together, we have $5$ of those things. So $2x+3x$ is the same as $5x$.
+If you have $3\,\text{cm}+2\,\text{cm}$, it is natural to add those together to get $5\,\text{cm}$. That works because their units ($\text{cm}$) are the same. The same idea applies to other terms, even ones that don't have units. For example, with $2x+3x$, we have 2*things* and then 3 more of those *things*. All together, we have 5 of those things. So $2x+3x$ is the same as $5x$.
 
 Terms in an algebraic expression that can be combined by adding them together into one new  term are called *like terms*.
 
@@ -97,7 +97,7 @@ Simplify each expression by combining like terms (if possible).
    \begin{aligned}\frac{10}{3}-1&=\frac{10}{3}-\frac{3}{3} \\ &=\frac{7}{3}\end{aligned}
    $$
    Our two terms combine to make $\frac{7}{3}t$. There was another term when this started and the final simplified expression is $\frac{7}{3}t-\frac{1}{2}x$.
-6) This expression can be thought of as $1.00x-0.15x$. Subtracting decimals $1.00-0.15$, the result is $0.85$. So we have $0.85x$.
+6) This expression can be thought of as $1.00x-0.15x$. Subtracting decimals $1.00-0.15$, the result is 0.85. So we have $0.85x$.
 
 **Exercise**
 

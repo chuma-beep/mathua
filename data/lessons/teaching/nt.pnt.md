@@ -9,7 +9,7 @@ Equivalently $p_n\sim n\log n$ for the $n$-th prime, and density near $x$ is $\a
 ## Counting Primes
 
 ### Asymptotic Density
-$\pi(10)=4$ ($2,3,5,7$); $10/\log10\approx4.3$. Larger $x$ matches more closely; error $O(x\exp(-c\sqrt{\log x}))$ unconditionally, $O(\sqrt{x}\log x)$ under RH.
+$\pi(10)=4$ (2,3,5,7); $10/\log10\approx4.3$. Larger $x$ matches more closely; error $O(x\exp(-c\sqrt{\log x}))$ unconditionally, $O(\sqrt{x}\log x)$ under RH.
 
 ### Use
 $n$-th prime heuristics, cryptography key-size estimates, and Möbius sums $\sum_{n\le x}\mu(n)=o(x)$ equivalent to PNT.

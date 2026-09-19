@@ -57,12 +57,12 @@ In both forms, the mean represents the weighted average of the function \\(g(X, 
 
 Consider a discrete random variable \\(X\\) that represents the number of defective items found in a random sample of two products taken from a batch where 10% of all items are defective. Each item can be either defective (D) or non-defective (N), and the probability of defect is the same for each draw.
 
-The possible values of \\(X\\) are \\(0\\), \\(1\\), and \\(2\\), corresponding to the number of defective items in the sample. Assuming independence between draws, the probability distribution is:
+The possible values of \\(X\\) are 0, 1, and 2, corresponding to the number of defective items in the sample. Assuming independence between draws, the probability distribution is:
 
-\\(x\\)| \\(0\\)| \\(1\\)| \\(2\\)  
+\\(x\\)| 0| 1| 2  
 ---|---|---|---  
 \\(f(x)\\)| \\(0.9^2\\)| \\(2 \cdot 0.1 \cdot 0.9\\)| \\(0.1^2\\)  
-\\(f(x)\\)| \\(0.81\\)| \\(0.18\\)| \\(0.01\\)  
+\\(f(x)\\)| 0.81| 0.18| 0.01  
   
 Using the formula for the mean of a discrete random variable
 
@@ -72,7 +72,7 @@ we obtain:
 
 \\[\begin{align} \mu = E(X) &= 0 \cdot 0.81 + 1 \cdot 0.18 + 2 \cdot 0.01 \\\\[6pt] &= 0 + 0.18 + 0.02 \\\\[6pt] &= 0.20 \end{align} \\]
 
-The expected number of defective items in the two-product sample is therefore \\(0.2\\). This means that, on average, one defective item is expected every five samples of two products drawn under the same conditions.
+The expected number of defective items in the two-product sample is therefore 0.2. This means that, on average, one defective item is expected every five samples of two products drawn under the same conditions.
 
 ## Example 2
 

@@ -112,7 +112,7 @@ When \\( \Delta > 0 \\) but not a perfect square integer, the trinomial has two 
 When \\( \Delta = 0 \\), the trinomial has a repeated root \\( x = -b/(2a) \\), which is rational but not necessarily an integer, so irreducibility over \\( \mathbb{Z} \\) depends on whether \\( 2a \mid b \\). The AC method, being combinatorial in nature, terminates without output once all integer divisor pairs of \\( ac \\) have been checked without success, and this exhaustion of cases constitutes a constructive proof of irreducibility over \\( \mathbb{Z} \\).
 
 
-For illustration, consider the trinomial \\( 3x^2 + 5x + 4 \\). In this case, \\( a = 3 \\), \\( b = 5 \\), and \\( c = 4 \\), yielding \\( ac = 12 \\). The integer divisor pairs of \\( 12 \\) are as follows:
+For illustration, consider the trinomial \\( 3x^2 + 5x + 4 \\). In this case, \\( a = 3 \\), \\( b = 5 \\), and \\( c = 4 \\), yielding \\( ac = 12 \\). The integer divisor pairs of 12 are as follows:
 
 \\[ \begin{array}{rrrr} m & n & mn & m+n \\\\ \hline 1 & 12 & 12 & 13 \\\\ 2 & 6 & 12 & 8 \\\\ 3 & 4 & 12 & 7 \\\\ -1 & -12 & 12 & -13 \\\\ -2 & -6 & 12 & -8 \\\\ -3 & -4 & 12 & -7 \end{array} \\]
 

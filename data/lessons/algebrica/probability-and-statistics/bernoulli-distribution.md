@@ -2,7 +2,7 @@
 
 ## Introduction to the Bernoulli distribution
 
-The Bernoulli distribution models the outcome of a single experiment that can result in only two mutually exclusive events: success or failure. Such an experiment is known as a Bernoulli trial. A [discrete random variable](<../discrete-random-variables/>) is said to follow a Bernoulli distribution when it takes the value \\(1\\) if the trial results in success and the value \\(0\\) if it results in failure. The uncertainty of the experiment is governed entirely by a single parameter \\( p \\), which represents the probability of success in that trial. A Bernoulli trial must satisfy a few basic conditions:
+The Bernoulli distribution models the outcome of a single experiment that can result in only two mutually exclusive events: success or failure. Such an experiment is known as a Bernoulli trial. A [discrete random variable](<../discrete-random-variables/>) is said to follow a Bernoulli distribution when it takes the value 1 if the trial results in success and the value 0 if it results in failure. The uncertainty of the experiment is governed entirely by a single parameter \\( p \\), which represents the probability of success in that trial. A Bernoulli trial must satisfy a few basic conditions:
 
   * Only two outcomes are possible: success with probability \\( p \\), and failure with probability \\( 1 - p = q\\).
   * The probability structure of the trial is fixed and determined solely by the value of \\( p \\).
@@ -38,7 +38,7 @@ where:
 
 ## Mean of the Bernoulli distribution
 
-The [mean](<../introduction-to-the-mean/>), or [expected value](<../mean-or-expected-value-of-a-random-variable/>), of a Bernoulli distribution represents the long–run average outcome of a sequence of identical Bernoulli trials. Since the random variable can take only the values \\(0\\) and \\(1\\), the mean expresses the proportion of successes that would be observed over many repetitions of the same experiment. To compute the mean formally, we start from the definition of the expected value of a discrete random variable:
+The [mean](<../introduction-to-the-mean/>), or [expected value](<../mean-or-expected-value-of-a-random-variable/>), of a Bernoulli distribution represents the long–run average outcome of a sequence of identical Bernoulli trials. Since the random variable can take only the values 0 and 1, the mean expresses the proportion of successes that would be observed over many repetitions of the same experiment. To compute the mean formally, we start from the definition of the expected value of a discrete random variable:
 
 \\[\mu = E(X) = \sum_{x \in {0,1}} x \, b(x;p) \\]
 
@@ -76,7 +76,7 @@ Therefore, the variance of a Bernoulli distribution is:
 
 \\[\sigma^{2} = p(1-p) \\]
 
-##### As \\( p \\) moves closer to \\(0\\) or \\(1\\), the variance decreases, since the experiment becomes more and more predictable and the outcome tends to repeat itself with little fluctuation.
+##### As \\( p \\) moves closer to 0 or 1, the variance decreases, since the experiment becomes more and more predictable and the outcome tends to repeat itself with little fluctuation.
 
 ## Example 1
 

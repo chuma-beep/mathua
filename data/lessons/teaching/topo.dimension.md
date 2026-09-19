@@ -1,6 +1,6 @@
 # Lebesgue Covering Dimension
 
-**Covering dimension $\dim X$:** Smallest $n$ such that every open cover has refinement with no point in more than $n+1$ sets; $\dim\mathbb R^n=n$, Cantor $0$, subspace does not increase.
+**Covering dimension $\dim X$:** Smallest $n$ such that every open cover has refinement with no point in more than $n+1$ sets; $\dim\mathbb R^n=n$, Cantor 0, subspace does not increase.
 
 ## Invariants
 

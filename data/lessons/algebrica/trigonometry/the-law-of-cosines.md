@@ -48,7 +48,7 @@ c^2 &= a^2 + b^2 - 2ab\cos(\theta) \\\\[6pt]
 
 Taking the positive square root, one obtains \\(c = \sqrt{52} = 2\sqrt{13} \approx 7.21\\).
 
-The length of the third side is approximately \\(7.21\\) units.
+The length of the third side is approximately 7.21 units.
 
 ## Example 2
 

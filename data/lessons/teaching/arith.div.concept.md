@@ -25,23 +25,23 @@ Before you get started, take this readiness quiz.
 
 ### Use Division Notation
 
-So far we have explored addition, subtraction, and multiplication. Now let’s consider division. Suppose you have the $12$ cookies in Figure 1.13 and want to package them in bags with $4$ cookies in each bag. How many bags would we need?
+So far we have explored addition, subtraction, and multiplication. Now let’s consider division. Suppose you have the 12 cookies in Figure 1.13 and want to package them in bags with 4 cookies in each bag. How many bags would we need?
 
 *Figure 1.13*
 
-You might put $4$ cookies in first bag, $4$ in the second bag, and so on until you run out of cookies. Doing it this way, you would fill $3$ bags.
+You might put 4 cookies in first bag, 4 in the second bag, and so on until you run out of cookies. Doing it this way, you would fill 3 bags.
 
-In other words, starting with the $12$ cookies, you would take away, or subtract, $4$ cookies at a time. Division is a way to represent repeated subtraction just as multiplication represents repeated addition.
+In other words, starting with the 12 cookies, you would take away, or subtract, 4 cookies at a time. Division is a way to represent repeated subtraction just as multiplication represents repeated addition.
 
-Instead of subtracting $4$ repeatedly, we can write
+Instead of subtracting 4 repeatedly, we can write
 
 $$
 12 \div 4
 $$
 
-We read this as *twelve divided by four* and the result is the quotient of $12$ and $4.$ The quotient is $3$ because we can subtract $4$ from $12$ exactly $3$ times. We call the number being divided the dividend and the number dividing it the divisor. In this case, the dividend is $12$ and the divisor is $4.$
+We read this as *twelve divided by four* and the result is the quotient of 12 and 4. The quotient is 3 because we can subtract 4 from 12 exactly 3 times. We call the number being divided the dividend and the number dividing it the divisor. In this case, the dividend is 12 and the divisor is 4.
 
-In the past you may have used the notation $412$, but this division also can be written as $12 \div 4,\ 12\text{/}4,\frac{12}{4}.$ In each case the $12$ is the dividend and the $4$ is the divisor.
+In the past you may have used the notation 412, but this division also can be written as $12 \div 4,\ 12\text{/}4,\frac{12}{4}.$ In each case the 12 is the dividend and the 4 is the divisor.
 
 ### Operation Symbols for Division
 
@@ -73,7 +73,7 @@ $<em>b</em><em>a</em>$<br />
 $<em>a</em>/<em>b</em>$</td>
 <td data-align="left" data-valign="top">$12 \div 4$<br />
 $$\frac{12}{4}$$<br />
-$412$<br />
+412<br />
 $12/4$</td>
 <td data-align="left" data-valign="top">$Twelve divided by four$</td>
 <td data-align="left" data-valign="top">$the quotient of 12 and 4$</td>
@@ -87,7 +87,7 @@ Division is performed on two numbers at a time. When translating from math notat
 
 Translate from math notation to words.
 
-ⓐ $64 \div 8$ ⓑ $\frac{42}{7}$ ⓒ $428$
+ⓐ $64 \div 8$ ⓑ $\frac{42}{7}$ ⓒ 428
 
 #### Solution
 
@@ -99,13 +99,13 @@ Translate from math notation to words.
 
 Translate from math notation to words:
 
-ⓐ $84 \div 7$ ⓑ $\frac{18}{6}$ ⓒ $824$
+ⓐ $84 \div 7$ ⓑ $\frac{18}{6}$ ⓒ 824
 
 ### Try It 1.112
 
 Translate from math notation to words:
 
-ⓐ $72 \div 9$ ⓑ $\frac{21}{3}$ ⓒ $654$
+ⓐ $72 \div 9$ ⓑ $\frac{21}{3}$ ⓒ 654
 
 ### Model Division of Whole Numbers
 
@@ -121,13 +121,13 @@ Model the division: $24 \div 8.$
 
 #### Solution
 
-To find the quotient $24 \div 8,$ we want to know how many groups of $8$ are in $24.$
+To find the quotient $24 \div 8,$ we want to know how many groups of 8 are in 24.
 
-Model the dividend. Start with $24$ counters.  
+Model the dividend. Start with 24 counters.  
 
-The divisor tell us the number of counters we want in each group. Form groups of $8$ counters.  
+The divisor tell us the number of counters we want in each group. Form groups of 8 counters.  
 
-Count the number of groups. There are $3$ groups.
+Count the number of groups. There are 3 groups.
 
 $24 \div 8 = 3$
 
@@ -147,7 +147,7 @@ We check our answer to division by multiplying the quotient by the divisor to de
 
 ### Example 1.58
 
-Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ $763$
+Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ 763
 
 #### Solution
 
@@ -167,7 +167,7 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ $763$
   </tr>
   <tr>
   <td>Divide 42 by 6.</td>
-  <td>$7$</td>
+  <td>7</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -197,7 +197,7 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ $763$
   </tr>
   <tr>
   <td>Divide 72 by 9.</td>
-  <td>$8$</td>
+  <td>8</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -223,11 +223,11 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ $763$
   </tr>
   <tr>
   <td></td>
-  <td>$763$</td>
+  <td>763</td>
   </tr>
   <tr>
   <td>Divide 63 by 7.</td>
-  <td>$9$</td>
+  <td>9</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -251,7 +251,7 @@ Divide. Then check by multiplying:
 
 Divide. Then check by multiplying:
 
-ⓐ $\frac{36}{9}$ ⓑ $840$
+ⓐ $\frac{36}{9}$ ⓑ 840
 
 What is the quotient when you divide a number by itself?
 
@@ -259,7 +259,7 @@ $$
 \frac{15}{15} = 1\ \text{because}\ 1 \cdot 15 = 15
 $$
 
-Dividing any number $\text{(except 0)}$ by itself produces a quotient of $1.$ Also, any number divided by $1$ produces a quotient of the number. These two ideas are stated in the Division Properties of One.
+Dividing any number $\text{(except 0)}$ by itself produces a quotient of 1. Also, any number divided by 1 produces a quotient of the number. These two ideas are stated in the Division Properties of One.
 
 ### Division Properties of One
 
@@ -276,7 +276,7 @@ Divide. Then check by multiplying:
 
 1.  ⓐ $11 \div 11$
 2.  ⓑ $\frac{19}{1}$
-3.  ⓒ $17$
+3.  ⓒ 17
 
 #### Solution
 
@@ -296,7 +296,7 @@ Divide. Then check by multiplying:
   </tr>
   <tr>
   <td>A number divided by itself is 1.</td>
-  <td>$1$</td>
+  <td>1</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -326,7 +326,7 @@ Divide. Then check by multiplying:
   </tr>
   <tr>
   <td>A number divided by 1 equals itself.</td>
-  <td>$19$</td>
+  <td>19</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -352,11 +352,11 @@ Divide. Then check by multiplying:
   </tr>
   <tr>
   <td></td>
-  <td>$17$</td>
+  <td>17</td>
   </tr>
   <tr>
   <td>A number divided by 1 equals itself.</td>
-  <td>$7$</td>
+  <td>7</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -380,11 +380,11 @@ Divide. Then check by multiplying:
 
 Divide. Then check by multiplying:
 
-ⓐ $\frac{16}{1}$ ⓑ $14$
+ⓐ $\frac{16}{1}$ ⓑ 14
 
-Suppose we have $\text{\$0},$ and want to divide it among $3$ people. How much would each person get? Each person would get $\text{\$0}.$ Zero divided by any number is $0.$
+Suppose we have $\text{\$0},$ and want to divide it among 3 people. How much would each person get? Each person would get $\text{\$0}.$ Zero divided by any number is 0.
 
-Now suppose that we want to divide $\text{\$1}0$ by $0.$ That means we would want to find a number that we multiply by $0$ to get $10.$ This cannot happen because $0$ times any number is $0.$ Division by zero is said to be *undefined*.
+Now suppose that we want to divide $\text{\$1}0$ by 0. That means we would want to find a number that we multiply by 0 to get 10. This cannot happen because 0 times any number is 0. Division by zero is said to be *undefined*.
 
 These two ideas make up the Division Properties of Zero.
 
@@ -397,7 +397,7 @@ These two ideas make up the Division Properties of Zero.
 
 Table 1.7
 
-Another way to explain why division by zero is undefined is to remember that division is really repeated subtraction. How many times can we take away $0$ from $10?$ Because subtracting $0$ will never change the total, we will never get an answer. So we cannot divide a number by $0.$
+Another way to explain why division by zero is undefined is to remember that division is really repeated subtraction. How many times can we take away 0 from $10?$ Because subtracting 0 will never change the total, we will never get an answer. So we cannot divide a number by 0.
 
 ### Example 1.60
 
@@ -421,7 +421,7 @@ Divide. Check by multiplying: ⓐ $0 \div 3$ ⓑ $10/0.$
   </tr>
   <tr>
   <td>Zero divided by any number is zero.</td>
-  <td>$0$</td>
+  <td>0</td>
   </tr>
   <tr>
   <td>Check by multiplying.<br />
@@ -453,7 +453,7 @@ Divide. Then check by multiplying:
 
 ⓐ $0 \div 6$ ⓑ $13/0$
 
-When the divisor or the dividend has more than one digit, it is usually easier to use the $412$ notation. This process is called long division. Let’s work through the process by dividing $78$ by $3.$
+When the divisor or the dividend has more than one digit, it is usually easier to use the 412 notation. This process is called long division. Let’s work through the process by dividing 78 by 3.
 
 |  |  |
 |----|----|
@@ -472,7 +472,7 @@ $$
 \text{So}\ 78 \div 3 = 26.
 $$
 
-Check by multiplying the quotient times the divisor to get the dividend. Multiply $26\  \times \ 3$ to make sure that product equals the dividend, $78.$
+Check by multiplying the quotient times the divisor to get the dividend. Multiply $26\  \times \ 3$ to make sure that product equals the dividend, 78.
 
 $$
 \begin{array}{r}
@@ -677,7 +677,7 @@ Divide. Then check by multiplying: $4,928 \div 7.$
 
 Divide. Then check by multiplying: $5,663 \div 7.$
 
-So far all the division problems have worked out evenly. For example, if we had $24$ cookies and wanted to make bags of $8$ cookies, we would have $3$ bags. But what if there were $28$ cookies and we wanted to make bags of $8?$ Start with the $28$ cookies as shown in Figure 1.14.
+So far all the division problems have worked out evenly. For example, if we had 24 cookies and wanted to make bags of 8 cookies, we would have 3 bags. But what if there were 28 cookies and we wanted to make bags of $8?$ Start with the 28 cookies as shown in Figure 1.14.
 
 *Figure 1.14*
 
@@ -685,9 +685,9 @@ Try to put the cookies in groups of eight as in Figure 1.15.
 
 *Figure 1.15*
 
-There are $3$ groups of eight cookies, and $4$ cookies left over. We call the $4$ cookies that are left over the remainder and show it by writing R4 next to the $3.$ (The R stands for remainder.)
+There are 3 groups of eight cookies, and 4 cookies left over. We call the 4 cookies that are left over the remainder and show it by writing R4 next to the 3. (The R stands for remainder.)
 
-To check this division we multiply $3$ times $8$ to get $24,$ and then add the remainder of $4.$
+To check this division we multiply 3 times 8 to get 24, and then add the remainder of 4.
 
 $$
 \begin{array}{r}
@@ -744,7 +744,7 @@ The remainder is 3.</td>
 </tbody>
 </table>
 
-So $1,439 \div 4$ is $359$ with a remainder of $3.$ Our answer is correct.
+So $1,439 \div 4$ is 359 with a remainder of 3. Our answer is correct.
 
 ### Try It 1.127
 
@@ -892,13 +892,13 @@ Earlier in this section, we translated math notation for division into words. No
 <td data-align="left" data-valign="top">divided by<br />
 quotient of<br />
 divided into</td>
-<td data-align="left" data-valign="top">$12$ divided by $4$<br />
-the quotient of $12$ and $4$<br />
-$4$ divided into $12$</td>
+<td data-align="left" data-valign="top">12 divided by 4<br />
+the quotient of 12 and 4<br />
+4 divided into 12</td>
 <td data-align="left" data-valign="top">$12 \div 4$<br />
 $$\frac{12}{4}$$<br />
 $12/4$<br />
-$412$</td>
+412</td>
 </tr>
 </tbody>
 </table>
@@ -907,7 +907,7 @@ Table 1.8
 
 ### Example 1.67
 
-Translate and simplify: the quotient of $51$ and $17.$
+Translate and simplify: the quotient of 51 and 17.
 
 #### Solution
 
@@ -919,17 +919,17 @@ The word *quotient* tells us to divide.
 \text{Divide.} & & & 3
 \end{array}\$
 
-We could just as correctly have translated *the quotient of* $51$ *and* $17$ using the notation
+We could just as correctly have translated *the quotient of* 51 *and* 17 using the notation
 
 $1751\ \text{or}\frac{51}{17}.$
 
 ### Try It 1.133
 
-Translate and simplify: the quotient of $91$ and $13.$
+Translate and simplify: the quotient of 91 and 13.
 
 ### Try It 1.134
 
-Translate and simplify: the quotient of $52$ and $13.$
+Translate and simplify: the quotient of 52 and 13.
 
 ### Divide Whole Numbers in Applications
 
@@ -937,7 +937,7 @@ We will use the same strategy we used in previous sections to solve applications
 
 ### Example 1.68
 
-Cecelia bought a $\text{160-ounce}$ box of oatmeal at the big box store. She wants to divide the $160$ ounces of oatmeal into $\text{8-ounce}$ servings. She will put each serving into a plastic bag so she can take one bag to work each day. How many servings will she get from the big box?
+Cecelia bought a $\text{160-ounce}$ box of oatmeal at the big box store. She wants to divide the 160 ounces of oatmeal into $\text{8-ounce}$ servings. She will put each serving into a plastic bag so she can take one bag to work each day. How many servings will she get from the big box?
 
 #### Solution
 
@@ -947,16 +947,16 @@ We are asked to find the how many servings she will get from the big box.
 |----|----|
 | Write a phrase. | 160 ounces divided by 8 ounces |
 | Translate to math notation. | $160 \div 8$ |
-| Simplify by dividing. | $20$ |
+| Simplify by dividing. | 20 |
 | Write a sentence to answer the question. | Cecelia will get 20 servings from the big box. |
 
 ### Try It 1.135
 
-Marcus is setting out animal crackers for snacks at the preschool. He wants to put $9$ crackers in each cup. One box of animal crackers contains $135$ crackers. How many cups can he fill from one box of crackers?
+Marcus is setting out animal crackers for snacks at the preschool. He wants to put 9 crackers in each cup. One box of animal crackers contains 135 crackers. How many cups can he fill from one box of crackers?
 
 ### Try It 1.136
 
-Andrea is making bows for the girls in her dance class to wear at the recital. Each bow takes $4$ feet of ribbon, and $36$ feet of ribbon are on one spool. How many bows can Andrea make from one spool of ribbon?
+Andrea is making bows for the girls in her dance class to wear at the recital. Each bow takes 4 feet of ribbon, and 36 feet of ribbon are on one spool. How many bows can Andrea make from one spool of ribbon?
 
 ### Media
 
@@ -988,7 +988,7 @@ $\frac{32}{8}$
 
 346\.
 
-$642$
+642
 
 347\.
 
@@ -1000,7 +1000,7 @@ $\frac{63}{9}$
 
 349\.
 
-$763$
+763
 
 350\.
 
@@ -1028,11 +1028,11 @@ $\frac{18}{6}$
 
 355\.
 
-$420$
+420
 
 356\.
 
-$315$
+315
 
 357\.
 
@@ -1064,11 +1064,11 @@ $\frac{30}{3}$
 
 363\.
 
-$428$
+428
 
 364\.
 
-$436$
+436
 
 365\.
 
@@ -1084,7 +1084,7 @@ $72/8$
 
 368\.
 
-$864$
+864
 
 369\.
 
@@ -1096,11 +1096,11 @@ $42 \div 7$
 
 371\.
 
-$1515$
+1515
 
 372\.
 
-$1212$
+1212
 
 373\.
 
@@ -1152,11 +1152,11 @@ $\frac{32}{0}$
 
 385\.
 
-$120$
+120
 
 386\.
 
-$160$
+160
 
 387\.
 
@@ -1176,11 +1176,11 @@ $\frac{78}{6}$
 
 391\.
 
-$5465$
+5465
 
 392\.
 
-$4528$
+4528
 
 393\.
 
@@ -1200,11 +1200,11 @@ $\frac{3,776}{8}$
 
 397\.
 
-$431,324$
+431,324
 
 398\.
 
-$546,855$
+546,855
 
 399\.
 
@@ -1224,11 +1224,11 @@ $3,208 \div 4$
 
 403\.
 
-$42,816$
+42,816
 
 404\.
 
-$63,624$
+63,624
 
 405\.
 
@@ -1248,11 +1248,11 @@ $3,741 \div 7$
 
 409\.
 
-$855,305$
+855,305
 
 410\.
 
-$951,492$
+951,492
 
 411\.
 
@@ -1274,7 +1274,7 @@ $105,609 \div 2$
 
 415\.
 
-$155,735$
+155,735
 
 416\.
 
@@ -1298,7 +1298,7 @@ $26,145 \div 415$
 
 421\.
 
-$273542,195$
+273542,195
 
 422\.
 
@@ -1334,7 +1334,7 @@ $647 + 528$
 
 429\.
 
-$25875$
+25875
 
 430\.
 
@@ -1346,19 +1346,19 @@ In the following exercises, translate and simplify.
 
 431\.
 
-the quotient of $45$ and $15$
+the quotient of 45 and 15
 
 432\.
 
-the quotient of $64$ and $16$
+the quotient of 64 and 16
 
 433\.
 
-the quotient of $288$ and $24$
+the quotient of 288 and 24
 
 434\.
 
-the quotient of $256$ and $32$
+the quotient of 256 and 32
 
 **Divide Whole Numbers in Applications**
 
@@ -1366,27 +1366,27 @@ In the following exercises, solve.
 
 435\.
 
-**Trail mix** Ric bought $64$ ounces of trail mix. He wants to divide it into small bags, with $2$ ounces of trail mix in each bag. How many bags can Ric fill?
+**Trail mix** Ric bought 64 ounces of trail mix. He wants to divide it into small bags, with 2 ounces of trail mix in each bag. How many bags can Ric fill?
 
 436\.
 
-**Crackers** Evie bought a $42$ ounce box of crackers. She wants to divide it into bags with $3$ ounces of crackers in each bag. How many bags can Evie fill?
+**Crackers** Evie bought a 42 ounce box of crackers. She wants to divide it into bags with 3 ounces of crackers in each bag. How many bags can Evie fill?
 
 437\.
 
-**Astronomy class** There are $125$ students in an astronomy class. The professor assigns them into groups of $5.$ How many groups of students are there?
+**Astronomy class** There are 125 students in an astronomy class. The professor assigns them into groups of 5. How many groups of students are there?
 
 438\.
 
-**Flower shop** Melissa’s flower shop got a shipment of $152$ roses. She wants to make bouquets of $8$ roses each. How many bouquets can Melissa make?
+**Flower shop** Melissa’s flower shop got a shipment of 152 roses. She wants to make bouquets of 8 roses each. How many bouquets can Melissa make?
 
 439\.
 
-**Baking** One roll of plastic wrap is $48$ feet long. Marta uses $3$ feet of plastic wrap to wrap each cake she bakes. How many cakes can she wrap from one roll?
+**Baking** One roll of plastic wrap is 48 feet long. Marta uses 3 feet of plastic wrap to wrap each cake she bakes. How many cakes can she wrap from one roll?
 
 440\.
 
-**Dental floss** One package of dental floss is $54$ feet long. Brian uses $2$ feet of dental floss every day. How many days will one package of dental floss last Brian?
+**Dental floss** One package of dental floss is 54 feet long. Brian uses 2 feet of dental floss every day. How many days will one package of dental floss last Brian?
 
 **Mixed Practice**
 
@@ -1394,35 +1394,35 @@ In the following exercises, solve.
 
 441\.
 
-**Miles per gallon** Susana’s hybrid car gets $45$ miles per gallon. Her son’s truck gets $17$ miles per gallon. What is the difference in miles per gallon between Susana’s car and her son’s truck?
+**Miles per gallon** Susana’s hybrid car gets 45 miles per gallon. Her son’s truck gets 17 miles per gallon. What is the difference in miles per gallon between Susana’s car and her son’s truck?
 
 442\.
 
-**Distance** Mayra lives $53$ miles from her mother’s house and $71$ miles from her mother-in-law’s house. How much farther is Mayra from her mother-in-law’s house than from her mother’s house?
+**Distance** Mayra lives 53 miles from her mother’s house and 71 miles from her mother-in-law’s house. How much farther is Mayra from her mother-in-law’s house than from her mother’s house?
 
 443\.
 
-**Field trip** The $45$ students in a Geology class will go on a field trip, using the college’s vans. Each van can hold $9$ students. How many vans will they need for the field trip?
+**Field trip** The 45 students in a Geology class will go on a field trip, using the college’s vans. Each van can hold 9 students. How many vans will they need for the field trip?
 
 444\.
 
-**Potting soil** Aki bought a $128$ ounce bag of potting soil. How many $4$ ounce pots can he fill from the bag?
+**Potting soil** Aki bought a 128 ounce bag of potting soil. How many 4 ounce pots can he fill from the bag?
 
 445\.
 
-**Hiking** Bill hiked $8$ miles on the first day of his backpacking trip, $14$ miles the second day, $11$ miles the third day, and $17$ miles the fourth day. What is the total number of miles Bill hiked?
+**Hiking** Bill hiked 8 miles on the first day of his backpacking trip, 14 miles the second day, 11 miles the third day, and 17 miles the fourth day. What is the total number of miles Bill hiked?
 
 446\.
 
-**Reading** Last night Emily read $6$ pages in her Business textbook, $26$ pages in her History text, $15$ pages in her Psychology text, and $9$ pages in her math text. What is the total number of pages Emily read?
+**Reading** Last night Emily read 6 pages in her Business textbook, 26 pages in her History text, 15 pages in her Psychology text, and 9 pages in her math text. What is the total number of pages Emily read?
 
 447\.
 
-**Patients** LaVonne treats $12$ patients each day in her dental office. Last week she worked $4$ days. How many patients did she treat last week?
+**Patients** LaVonne treats 12 patients each day in her dental office. Last week she worked 4 days. How many patients did she treat last week?
 
 448\.
 
-**Scouts** There are $14$ boys in Dave’s scout troop. At summer camp, each boy earned $5$ merit badges. What was the total number of merit badges earned by Dave’s scout troop at summer camp?
+**Scouts** There are 14 boys in Dave’s scout troop. At summer camp, each boy earned 5 merit badges. What was the total number of merit badges earned by Dave’s scout troop at summer camp?
 
 #### Writing Exercises
 
@@ -1432,17 +1432,17 @@ Explain how you use the multiplication facts to help with division.
 
 450\.
 
-Oswaldo divided $300$ by $8$ and said his answer was $37$ with a remainder of $4.$ How can you check to make sure he is correct?
+Oswaldo divided 300 by 8 and said his answer was 37 with a remainder of 4. How can you check to make sure he is correct?
 
 #### Everyday Math
 
 451\.
 
-**Contact lenses** Jenna puts in a new pair of contact lenses every $14$ days. How many pairs of contact lenses does she need for $365$ days?
+**Contact lenses** Jenna puts in a new pair of contact lenses every 14 days. How many pairs of contact lenses does she need for 365 days?
 
 452\.
 
-**Cat food** One bag of cat food feeds Lara’s cat for $25$ days. How many bags of cat food does Lara need for $365$ days?
+**Cat food** One bag of cat food feeds Lara’s cat for 25 days. How many bags of cat food does Lara need for 365 days?
 
 #### Self Check
 

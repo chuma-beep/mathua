@@ -71,7 +71,7 @@ Now let’s calculate:
 
 \\[\frac{f’ \left(c \right)}{g’ \left(c \right)} = \frac{4c-4}{2c} \\]
 
-From \\(1\\), the equality becomes:
+From 1, the equality becomes:
 
 \\[\begin{align} \frac{4c - 4}{2c} &= 1 \\\\[0.5em] \frac{4c - 4}{2c} &= \frac{2c}{2c} \\\\[0.5em] 4c - 4 &= 2c \\\\[0.5em] 2c &= 4 \\\\[0.5em] c &= 2\\\ \end{align} \\]
 

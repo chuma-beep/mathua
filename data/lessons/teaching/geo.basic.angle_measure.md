@@ -25,7 +25,7 @@ We write $m\angle ABC$ for "the measure of angle $ABC$." Two angles are **congru
 
 **Example**
 
-A protractor shows ray $BA$ at $0^\circ$ and ray $BC$ crossing the scale at $65$. Classify $\angle ABC$.
+A protractor shows ray $BA$ at $0^\circ$ and ray $BC$ crossing the scale at 65. Classify $\angle ABC$.
 
 *Solution*
 

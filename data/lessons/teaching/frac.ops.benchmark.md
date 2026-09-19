@@ -31,7 +31,7 @@ In math, we write $\frac{1}{2}$ to mean one out of two parts.
 
 On Tuesday, Andy and Bobby share a pizza with their parents, Fred and Christy, with each person getting an equal amount of the whole pizza. How much of the pizza does each person get? There is one whole pizza, divided evenly into four equal parts. Each person has one of the four equal parts, so each has $\frac{1}{4}$ of the pizza.
 
-On Wednesday, the family invites some friends over for a pizza dinner. There are a total of $12$ people. If they share the pizza equally, each person would get $\frac{1}{12}$ of the pizza.
+On Wednesday, the family invites some friends over for a pizza dinner. There are a total of 12 people. If they share the pizza equally, each person would get $\frac{1}{12}$ of the pizza.
 
 ### Fractions
 
@@ -87,9 +87,9 @@ Shade $\frac{3}{4}$ of the circle.
 
 #### Solution
 
-The denominator is $4,$ so we divide the circle into four equal parts ⓐ.
+The denominator is 4, so we divide the circle into four equal parts ⓐ.
 
-The numerator is $3,$ so we shade three of the four parts ⓑ.
+The numerator is 3, so we shade three of the four parts ⓑ.
 
 $\frac{3}{4}$ of the circle is shaded.
 
@@ -113,9 +113,9 @@ We’ll be using fraction tiles to discover some basic facts about fractions. Re
 | How many $\frac{1}{3}$ tiles does it take to make one whole tile? | It takes three thirds, so three out of three is $\frac{3}{3} = 1.$ |
 | How many $\frac{1}{4}$ tiles does it take to make one whole tile? | It takes four fourths, so four out of four is $\frac{4}{4} = 1.$ |
 | How many $\frac{1}{6}$ tiles does it take to make one whole tile? | It takes six sixths, so six out of six is $\frac{6}{6} = 1.$ |
-| What if the whole were divided into $24$ equal parts? (We have not shown fraction tiles to represent this, but try to visualize it in your mind.) How many $\frac{1}{24}$ tiles does it take to make one whole tile? | It takes $24$ twenty-fourths, so $\frac{24}{24} = 1.$ |
+| What if the whole were divided into 24 equal parts? (We have not shown fraction tiles to represent this, but try to visualize it in your mind.) How many $\frac{1}{24}$ tiles does it take to make one whole tile? | It takes 24 twenty-fourths, so $\frac{24}{24} = 1.$ |
 
-It takes $24$ twenty-fourths, so $\frac{24}{24} = 1.$
+It takes 24 twenty-fourths, so $\frac{24}{24} = 1.$
 
 This leads us to the *Property of One*.
 
@@ -135,49 +135,49 @@ Doing the Manipulative Mathematics activity "Fractions Equivalent to One" will h
 
 Use fraction circles to make wholes using the following pieces:
 
-1.  ⓐ $4$ fourths
-2.  ⓑ $5$ fifths
-3.  ⓒ $6$ sixths
+1.  ⓐ 4 fourths
+2.  ⓑ 5 fifths
+3.  ⓒ 6 sixths
 
 #### Solution
 
 ### Try It 4.5
 
-Use fraction circles to make wholes with the following pieces: $3$ thirds.
+Use fraction circles to make wholes with the following pieces: 3 thirds.
 
 ### Try It 4.6
 
-Use fraction circles to make wholes with the following pieces: $8$ eighths.
+Use fraction circles to make wholes with the following pieces: 8 eighths.
 
-What if we have more fraction pieces than we need for $1$ whole? We’ll look at this in the next example.
+What if we have more fraction pieces than we need for 1 whole? We’ll look at this in the next example.
 
 ### Example 4.4
 
 Use fraction circles to make wholes using the following pieces:
 
-1.  ⓐ $3$ halves
-2.  ⓑ $8$ fifths
-3.  ⓒ $7$ thirds
+1.  ⓐ 3 halves
+2.  ⓑ 8 fifths
+3.  ⓒ 7 thirds
 
 #### Solution
 
-ⓐ $3$ halves make $1$ whole with $1$ half left over.
+ⓐ 3 halves make 1 whole with 1 half left over.
 
-ⓑ $8$ fifths make $1$ whole with $3$ fifths left over.
+ⓑ 8 fifths make 1 whole with 3 fifths left over.
 
-ⓒ$7$ thirds make $2$ wholes with $1$ third left over.
+ⓒ7 thirds make 2 wholes with 1 third left over.
 
 ### Try It 4.7
 
-Use fraction circles to make wholes with the following pieces: $5$ thirds.
+Use fraction circles to make wholes with the following pieces: 5 thirds.
 
 ### Try It 4.8
 
-Use fraction circles to make wholes with the following pieces: $5$ halves.
+Use fraction circles to make wholes with the following pieces: 5 halves.
 
 ### Model Improper Fractions and Mixed Numbers
 
-In Example 4.4 (b), you had eight equal fifth pieces. You used five of them to make one whole, and you had three fifths left over. Let us use fraction notation to show what happened. You had eight pieces, each of them one fifth, $\frac{1}{5},$ so altogether you had eight fifths, which we can write as $\frac{8}{5}.$ The fraction $\frac{8}{5}$ is one whole, $1,$ plus three fifths, $\frac{3}{5},$ or $1\frac{3}{5},$ which is read as *one and three-fifths*.
+In Example 4.4 (b), you had eight equal fifth pieces. You used five of them to make one whole, and you had three fifths left over. Let us use fraction notation to show what happened. You had eight pieces, each of them one fifth, $\frac{1}{5},$ so altogether you had eight fifths, which we can write as $\frac{8}{5}.$ The fraction $\frac{8}{5}$ is one whole, 1, plus three fifths, $\frac{3}{5},$ or $1\frac{3}{5},$ which is read as *one and three-fifths*.
 
 The number $1\frac{3}{5}$ is called a mixed number. A mixed number consists of a whole number and a fraction.
 
@@ -221,7 +221,7 @@ Draw a figure to model $\frac{11}{8}.$
 
 #### Solution
 
-The denominator of the improper fraction is $8.$ Draw a circle divided into eight pieces and shade all of them. This takes care of eight eighths, but we have $11$ eighths. We must shade three of the eight parts of another circle.
+The denominator of the improper fraction is 8. Draw a circle divided into eight pieces and shade all of them. This takes care of eight eighths, but we have 11 eighths. We must shade three of the eight parts of another circle.
 
 So, $\frac{11}{8} = 1\frac{3}{8}.$
 
@@ -239,7 +239,7 @@ Use a model to rewrite the improper fraction $\frac{11}{6}$ as a mixed number.
 
 #### Solution
 
-We start with $11$ sixths $\left( \frac{11}{6} \right).$ We know that six sixths makes one whole.
+We start with 11 sixths $\left( \frac{11}{6} \right).$ We know that six sixths makes one whole.
 
 $$
 \frac{6}{6} = 1
@@ -263,7 +263,7 @@ Use a model to rewrite the mixed number $1\frac{4}{5}$ as an improper fraction.
 
 #### Solution
 
-The mixed number $1\frac{4}{5}$ means one whole plus four fifths. The denominator is $5,$ so the whole is $\frac{5}{5}.$ Together five fifths and four fifths equals nine fifths.
+The mixed number $1\frac{4}{5}$ means one whole plus four fifths. The denominator is 5, so the whole is $\frac{5}{5}.$ Together five fifths and four fifths equals nine fifths.
 
 So, $1\frac{4}{5} = \frac{9}{5}.$
 
@@ -277,9 +277,9 @@ Use a model to rewrite the mixed number as an improper fraction: $1\frac{5}{6}.$
 
 ### Convert between Improper Fractions and Mixed Numbers
 
-In Example 4.7, we converted the improper fraction $\frac{11}{6}$ to the mixed number $1\frac{5}{6}$ using fraction circles. We did this by grouping six sixths together to make a whole; then we looked to see how many of the $11$ pieces were left. We saw that $\frac{11}{6}$ made one whole group of six sixths plus five more sixths, showing that $\frac{11}{6} = 1\frac{5}{6}.$
+In Example 4.7, we converted the improper fraction $\frac{11}{6}$ to the mixed number $1\frac{5}{6}$ using fraction circles. We did this by grouping six sixths together to make a whole; then we looked to see how many of the 11 pieces were left. We saw that $\frac{11}{6}$ made one whole group of six sixths plus five more sixths, showing that $\frac{11}{6} = 1\frac{5}{6}.$
 
-The division expression $\frac{11}{6}$ (which can also be written as $611$) tells us to find how many groups of $6$ are in $11.$ To convert an improper fraction to a mixed number without fraction circles, we divide.
+The division expression $\frac{11}{6}$ (which can also be written as 611) tells us to find how many groups of 6 are in 11. To convert an improper fraction to a mixed number without fraction circles, we divide.
 
 ### Example 4.9
 
@@ -321,7 +321,7 @@ Convert the improper fraction $\frac{33}{8}$ to a mixed number.
 |  |  |
 |----|----|
 |  | $\frac{33}{8}$ |
-| Divide the denominator into the numerator. | Remember, $\frac{33}{8}$ means $833$. |
+| Divide the denominator into the numerator. | Remember, $\frac{33}{8}$ means 833. |
 | Identify the quotient, remainder, and divisor. |  |
 | Write the mixed number as quotient $\frac{\text{remainder}}{\text{divisor}}$. | $4\frac{1}{8}$ |
 |  | So, $\frac{33}{8} = 4\frac{1}{8}$ |
@@ -486,7 +486,7 @@ Find three fractions equivalent to $\frac{2}{5}.$
 
 #### Solution
 
-To find a fraction equivalent to $\frac{2}{5},$ we multiply the numerator and denominator by the same number (but not zero). Let us multiply them by $2,3,$ and $5.$
+To find a fraction equivalent to $\frac{2}{5},$ we multiply the numerator and denominator by the same number (but not zero). Let us multiply them by 2,3, and 5.
 
 So, $\frac{4}{10},\frac{6}{15},$ and $\frac{10}{25}$ are equivalent to $\frac{2}{5}.$
 
@@ -500,21 +500,21 @@ Find three fractions equivalent to $\frac{4}{5}.$
 
 ### Example 4.15
 
-Find a fraction with a denominator of $21$ that is equivalent to $\frac{2}{7}.$
+Find a fraction with a denominator of 21 that is equivalent to $\frac{2}{7}.$
 
 #### Solution
 
-To find equivalent fractions, we multiply the numerator and denominator by the same number. In this case, we need to multiply the denominator by a number that will result in $21.$
+To find equivalent fractions, we multiply the numerator and denominator by the same number. In this case, we need to multiply the denominator by a number that will result in 21.
 
-Since we can multiply $7$ by $3$ to get $21,$ we can find the equivalent fraction by multiplying both the numerator and denominator by $3.$
+Since we can multiply 7 by 3 to get 21, we can find the equivalent fraction by multiplying both the numerator and denominator by 3.
 
 ### Try It 4.29
 
-Find a fraction with a denominator of $21$ that is equivalent to $\frac{6}{7}.$
+Find a fraction with a denominator of 21 that is equivalent to $\frac{6}{7}.$
 
 ### Try It 4.30
 
-Find a fraction with a denominator of $100$ that is equivalent to $\frac{3}{10}.$
+Find a fraction with a denominator of 100 that is equivalent to $\frac{3}{10}.$
 
 ### Locate Fractions and Mixed Numbers on the Number Line
 
@@ -522,17 +522,17 @@ Now we are ready to plot fractions on a number line. This will help us visualize
 
 ### Manipulative Mathematics
 
-Doing the Manipulative Mathematics activity "Number Line Part $3$" will help you develop a better understanding of the location of fractions on the number line.
+Doing the Manipulative Mathematics activity "Number Line Part 3" will help you develop a better understanding of the location of fractions on the number line.
 
 Let us locate $\frac{1}{5},\frac{4}{5},3,3\frac{1}{3},\frac{7}{4},\frac{9}{2},5,$ and $\frac{8}{3}$ on the number line.
 
-We will start with the whole numbers $3$ and $5$ because they are the easiest to plot.
+We will start with the whole numbers 3 and 5 because they are the easiest to plot.
 
-The proper fractions listed are $\frac{1}{5}$ and $\frac{4}{5}.$ We know proper fractions have values less than one, so $\frac{1}{5}$ and $\frac{4}{5}$ are located between the whole numbers $0$ and $1.$ The denominators are both $5,$ so we need to divide the segment of the number line between $0$ and $1$ into five equal parts. We can do this by drawing four equally spaced marks on the number line, which we can then label as $\frac{1}{5},\frac{2}{5},\frac{3}{5},$ and $\frac{4}{5}.$
+The proper fractions listed are $\frac{1}{5}$ and $\frac{4}{5}.$ We know proper fractions have values less than one, so $\frac{1}{5}$ and $\frac{4}{5}$ are located between the whole numbers 0 and 1. The denominators are both 5, so we need to divide the segment of the number line between 0 and 1 into five equal parts. We can do this by drawing four equally spaced marks on the number line, which we can then label as $\frac{1}{5},\frac{2}{5},\frac{3}{5},$ and $\frac{4}{5}.$
 
 Now plot points at $\frac{1}{5}$ and $\frac{4}{5}.$
 
-The only mixed number to plot is $3\frac{1}{3}.$ Between what two whole numbers is $3\frac{1}{3}?$ Remember that a mixed number is a whole number plus a proper fraction, so $3\frac{1}{3} > 3.$ Since it is greater than $3,$ but not a whole unit greater, $3\frac{1}{3}$ is between $3$ and $4.$ We need to divide the portion of the number line between $3$ and $4$ into three equal pieces (thirds) and plot $3\frac{1}{3}$ at the first mark.
+The only mixed number to plot is $3\frac{1}{3}.$ Between what two whole numbers is $3\frac{1}{3}?$ Remember that a mixed number is a whole number plus a proper fraction, so $3\frac{1}{3} > 3.$ Since it is greater than 3, but not a whole unit greater, $3\frac{1}{3}$ is between 3 and 4. We need to divide the portion of the number line between 3 and 4 into three equal pieces (thirds) and plot $3\frac{1}{3}$ at the first mark.
 
 Finally, look at the improper fractions $\frac{7}{4},\frac{9}{2},$ and $\frac{8}{3}.$ Locating these points will be easier if you change each of them to a mixed number.
 
@@ -548,9 +548,9 @@ Locate and label the following on a number line: $\frac{3}{4},\frac{4}{3},\frac{
 
 #### Solution
 
-Start by locating the proper fraction $\frac{3}{4}.$ It is between $0$ and $1.$ To do this, divide the distance between $0$ and $1$ into four equal parts. Then plot $\frac{3}{4}.$
+Start by locating the proper fraction $\frac{3}{4}.$ It is between 0 and 1. To do this, divide the distance between 0 and 1 into four equal parts. Then plot $\frac{3}{4}.$
 
-Next, locate the mixed number $4\frac{1}{5}.$ It is between $4$ and $5$ on the number line. Divide the number line between $4$ and $5$ into five equal parts, and then plot $4\frac{1}{5}$ one-fifth of the way between $4$ and $5$.
+Next, locate the mixed number $4\frac{1}{5}.$ It is between 4 and 5 on the number line. Divide the number line between 4 and 5 into five equal parts, and then plot $4\frac{1}{5}$ one-fifth of the way between 4 and 5.
 
 Now locate the improper fractions $\frac{4}{3}$ and $\frac{5}{3}$.
 
@@ -560,9 +560,9 @@ $$
 \frac{4}{3} = 1\frac{1}{3},\quad\frac{5}{3} = 1\frac{2}{3}
 $$
 
-Divide the distance between $1$ and $2$ into thirds.
+Divide the distance between 1 and 2 into thirds.
 
-Next let us plot $\frac{7}{2}.$ We write it as a mixed number, $\frac{7}{2} = 3\frac{1}{2}$. Plot it between $3$ and $4.$
+Next let us plot $\frac{7}{2}.$ We write it as a mixed number, $\frac{7}{2} = 3\frac{1}{2}$. Plot it between 3 and 4.
 
 The number line shows all the numbers located on the number line.
 
@@ -574,11 +574,11 @@ Locate and label the following on a number line: $\frac{1}{3},\frac{5}{4},\frac{
 
 Locate and label the following on a number line: $\frac{2}{3},\frac{5}{2},\frac{9}{4},\frac{11}{4},3\frac{2}{5}.$
 
-In Introduction to Integers, we defined the opposite of a number. It is the number that is the same distance from zero on the number line but on the opposite side of zero. We saw, for example, that the opposite of $7$ is $-7$ and the opposite of $-7$ is $7.$
+In Introduction to Integers, we defined the opposite of a number. It is the number that is the same distance from zero on the number line but on the opposite side of zero. We saw, for example, that the opposite of 7 is $-7$ and the opposite of $-7$ is 7.
 
-Fractions have opposites, too. The opposite of $\frac{3}{4}$ is $- \frac{3}{4}.$ It is the same distance from $0$ on the number line, but on the opposite side of $0.$
+Fractions have opposites, too. The opposite of $\frac{3}{4}$ is $- \frac{3}{4}.$ It is the same distance from 0 on the number line, but on the opposite side of 0.
 
-Thinking of negative fractions as the opposite of positive fractions will help us locate them on the number line. To locate $- \frac{15}{8}$ on the number line, first think of where $\frac{15}{8}$ is located. It is an improper fraction, so we first convert it to the mixed number $1\frac{7}{8}$ and see that it will be between $1$ and $2$ on the number line. So its opposite, $- \frac{15}{8},$ will be between $-1$ and $-2$ on the number line.
+Thinking of negative fractions as the opposite of positive fractions will help us locate them on the number line. To locate $- \frac{15}{8}$ on the number line, first think of where $\frac{15}{8}$ is located. It is an improper fraction, so we first convert it to the mixed number $1\frac{7}{8}$ and see that it will be between 1 and 2 on the number line. So its opposite, $- \frac{15}{8},$ will be between $-1$ and $-2$ on the number line.
 
 ### Example 4.17
 
@@ -586,17 +586,17 @@ Locate and label the following on the number line: $\frac{1}{4}, - \frac{1}{4},1
 
 #### Solution
 
-Draw a number line. Mark $0$ in the middle and then mark several units to the left and right.
+Draw a number line. Mark 0 in the middle and then mark several units to the left and right.
 
-To locate $\frac{1}{4},$ divide the interval between $0$ and $1$ into four equal parts. Each part represents one-quarter of the distance. So plot $\frac{1}{4}$ at the first mark.
+To locate $\frac{1}{4},$ divide the interval between 0 and 1 into four equal parts. Each part represents one-quarter of the distance. So plot $\frac{1}{4}$ at the first mark.
 
-To locate $- \frac{1}{4},$ divide the interval between $0$ and $-1$ into four equal parts. Plot $- \frac{1}{4}$ at the first mark to the left of $0.$
+To locate $- \frac{1}{4},$ divide the interval between 0 and $-1$ into four equal parts. Plot $- \frac{1}{4}$ at the first mark to the left of 0.
 
-Since $1\frac{1}{3}$ is between $1$ and $2,$ divide the interval between $1$ and $2$ into three equal parts. Plot $1\frac{1}{3}$ at the first mark to the right of $1.$ Then since $-1\frac{1}{3}$ is the opposite of $1\frac{1}{3}$ it is between $-1$ and $-2.$ Divide the interval between $-1$ and $-2$ into three equal parts. Plot $-1\frac{1}{3}$ at the first mark to the left of $-1.$
+Since $1\frac{1}{3}$ is between 1 and 2, divide the interval between 1 and 2 into three equal parts. Plot $1\frac{1}{3}$ at the first mark to the right of 1. Then since $-1\frac{1}{3}$ is the opposite of $1\frac{1}{3}$ it is between $-1$ and $-2.$ Divide the interval between $-1$ and $-2$ into three equal parts. Plot $-1\frac{1}{3}$ at the first mark to the left of $-1.$
 
 To locate $\frac{5}{2}$ and $- \frac{5}{2},$ it may be helpful to rewrite them as the mixed numbers $2\frac{1}{2}$ and $-2\frac{1}{2}.$
 
-Since $2\frac{1}{2}$ is between $2$ and $3,$ divide the interval between $2$ and $3$ into two equal parts. Plot $\frac{5}{2}$ at the mark. Then since $-2\frac{1}{2}$ is between $-2$ and $-3,$ divide the interval between $-2$ and $-3$ into two equal parts. Plot $- \frac{5}{2}$ at the mark.
+Since $2\frac{1}{2}$ is between 2 and 3, divide the interval between 2 and 3 into two equal parts. Plot $\frac{5}{2}$ at the mark. Then since $-2\frac{1}{2}$ is between $-2$ and $-3,$ divide the interval between $-2$ and $-3$ into two equal parts. Plot $- \frac{5}{2}$ at the mark.
 
 ### Try It 4.33
 
@@ -704,27 +704,27 @@ In the following exercises, use fraction circles to make wholes, if possible, wi
 
 11\.
 
-$3$ thirds
+3 thirds
 
 12\.
 
-$8$ eighths
+8 eighths
 
 13\.
 
-$7$ sixths
+7 sixths
 
 14\.
 
-$4$ thirds
+4 thirds
 
 15\.
 
-$7$ fifths
+7 fifths
 
 16\.
 
-$7$ fourths
+7 fourths
 
 In the following exercises, name the improper fractions. Then write each improper fraction as a mixed number.
 
@@ -963,7 +963,7 @@ $-4\underset{\;\;}{\quad} - \frac{23}{6}$
 **Music Measures** Fractions are used often in music. In $\frac{4}{4}$ time, there are four quarter notes in one measure.
 
 1.  ⓐ How many measures would eight quarter notes make?
-2.  ⓑ The song “Happy Birthday to You” has $25$ quarter notes. How many measures are there in “Happy Birthday to You?”
+2.  ⓑ The song “Happy Birthday to You” has 25 quarter notes. How many measures are there in “Happy Birthday to You?”
 
 74\.
 
@@ -980,7 +980,7 @@ Give an example from your life experience (outside of school) where it was impor
 
 76\.
 
-Explain how you locate the improper fraction $\frac{21}{4}$ on a number line on which only the whole numbers from $0$ through $10$ are marked.
+Explain how you locate the improper fraction $\frac{21}{4}$ on a number line on which only the whole numbers from 0 through 10 are marked.
 
 #### Self Check
 

@@ -38,7 +38,7 @@ Four equal sides make it a rhombus. Without right angles it is not a square or a
 
 **Example**
 
-A quadrilateral has one pair of parallel sides of lengths $9$ and $5$. Can it be a parallelogram?
+A quadrilateral has one pair of parallel sides of lengths 9 and 5. Can it be a parallelogram?
 
 *Solution*
 

@@ -22,12 +22,12 @@ $$
 
 .
 
-A slope is a rate of change. So if there are units for the horizontal and vertical variables, then there will be units for the slope. The slope will be measured in $\frac{\text{vertical units}}{\text{horizontal units}}$. If the slope is nonzero, we say  that there is a *linear relationship* between $x$ and $y$. When the slope  is $0$, we say that $y$ is *constant* with respect to $x$.
+A slope is a rate of change. So if there are units for the horizontal and vertical variables, then there will be units for the slope. The slope will be measured in $\frac{\text{vertical units}}{\text{horizontal units}}$. If the slope is nonzero, we say  that there is a *linear relationship* between $x$ and $y$. When the slope  is 0, we say that $y$ is *constant* with respect to $x$.
 
 Here are some scenarios with different slopes. As you read each scenario, note how a slope is more meaningful with units.
 
-- If a tree grows $2.5$ feet every year, its rate of change in height is the same from year to year. So the height and time have a linear relationship where the slope is $2.5\,\text{ft}/$.
-- If a company loses $2$ million dollars every year, its rate of change in reserve funds is the same from year to year. So the company's reserve funds and time have a linear relationship where the slope is $-2$ million dollars per year.
+- If a tree grows 2.5 feet every year, its rate of change in height is the same from year to year. So the height and time have a linear relationship where the slope is $2.5\,\text{ft}/$.
+- If a company loses 2 million dollars every year, its rate of change in reserve funds is the same from year to year. So the company's reserve funds and time have a linear relationship where the slope is $-2$ million dollars per year.
 - If Sakura is an adult who has stopped growing, her rate of change in height is the same from year to year---it's zero. So the slope is $0\,\text{in}/$. Sakura's height is constant with respect to time. Since the slope is zero, we don't say that Sakura's height and time have a linear relationship.
 
 **Remark**
@@ -52,9 +52,9 @@ We can also examine Yara's savings using a table as in  the figure .
 
 *Yara's savings*
 
-In first rows of the table, we see that when $x$ increases by $1$ (week), then $y$ increases by $20$ (dollars). The row-to-row rate of change is $\frac{20\,\text{dollars}}{1\,\text{wk}} = 20\,\frac{\text{dollars}}{\text{wk}}$, which we already know is the slope. In any table showing a linear relationship, whenever $x$ increases by $1$ unit, $y$ will increase by the slope.
+In first rows of the table, we see that when $x$ increases by 1 (week), then $y$ increases by 20 (dollars). The row-to-row rate of change is $\frac{20\,\text{dollars}}{1\,\text{wk}} = 20\,\frac{\text{dollars}}{\text{wk}}$, which we already know is the slope. In any table showing a linear relationship, whenever $x$ increases by 1 unit, $y$ will increase by the slope.
 
-In later rows, notice that the change in $x$ is larger than $1$, but the change in $y$ is also larger than $20$. The changes in $y$ have grown proportionally with the changes in $x$ and this keeps the *rate* of change steady. Looking in particular at the last two rows of the table, we see $x$ increases by $5$ and $y$ increases by $100$, which gives a rate of change $\frac{100\,\text{dollars}}{5\,\text{wk}} = 20\,\frac{\text{dollars}}{\text{wk}}$, which is once again the value of the slope.
+In later rows, notice that the change in $x$ is larger than 1, but the change in $y$ is also larger than 20. The changes in $y$ have grown proportionally with the changes in $x$ and this keeps the *rate* of change steady. Looking in particular at the last two rows of the table, we see $x$ increases by 5 and $y$ increases by 100, which gives a rate of change $\frac{100\,\text{dollars}}{5\,\text{wk}} = 20\,\frac{\text{dollars}}{\text{wk}}$, which is once again the value of the slope.
 
 On a graph of Yara's savings, we can "see" the rates of change between consecutive rows of the table by using *slope triangles*. These are right triangles showing how to  move horizontally, then vertically, to get from one point to another.
 
@@ -86,7 +86,7 @@ $$
  \text{slope}=\frac{-2\,\text{gallons}}{3\,\text{hours}}=-\frac{2}{3}\,\frac{\text{gal}}{\text{h}} 
 $$
 
-. In the given context, this slope implies gas in the tank is *decreasing* at the rate of $\frac{2}{3}$$\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using $2$ gallons of gas every $3$ hours.
+. In the given context, this slope implies gas in the tank is *decreasing* at the rate of $\frac{2}{3}$$\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using 2 gallons of gas every 3 hours.
 
 **Exercise**
 
@@ -164,7 +164,7 @@ $$
 
 So the tree is growing at a rate of $4\,\text{ft}/$
 
-But hold on. Did we really *need* this picture? The "rise" of $12$ came from a subtraction of two $y$-values: $27-15$. And the "run" of $3$ came from a subtraction of two $x$-values: $6-3$.
+But hold on. Did we really *need* this picture? The "rise" of 12 came from a subtraction of two $y$-values: $27-15$. And the "run" of 3 came from a subtraction of two $x$-values: $6-3$.
 
 Here is a picture-free approach. We know that after $3\,\text{year}$, the height is $15\,\text{ft}$. As an ordered pair, that information gives us the point $(3,15)$ which we can label as $(\overset{x_1}{3},\overset{y_1}{15})$. Similarly, the background information tells us to consider $(6,27)$, which we label as $(\overset{x_2}{6},\overset{y_2}{27})$. Here, $x_1$ and $y_1$ represent the first point's $x$- and $y$-values, and $x_2$ and $y_2$ represent the second point's $x$- and $y$-values.
 

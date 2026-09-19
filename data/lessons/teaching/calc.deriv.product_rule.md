@@ -30,7 +30,7 @@ $$
 \end{array}
 $$
 
-The rule for differentiating constant functions is called the constant rule. It states that the derivative of a constant function is zero; that is, since a constant function is a horizontal line, the slope, or the rate of change, of a constant function is $0.$ We restate this rule in the following theorem.
+The rule for differentiating constant functions is called the constant rule. It states that the derivative of a constant function is zero; that is, since a constant function is a horizontal line, the slope, or the rate of change, of a constant function is 0. We restate this rule in the following theorem.
 
 ### Theorem 3.2
 
@@ -814,11 +814,11 @@ For the following exercises, assume that $f(x)$ and $g(x)$ are both differentiab
 
 |               |        |       |        |        |
 |---------------|--------|-------|--------|--------|
-| **$x$**     | $1$  | $2$ | $3$  | $4$  |
-| **$f(x)$**  | $3$  | $5$ | $-2$ | $0$  |
-| **$g(x)$**  | $2$  | $3$ | $-4$ | $6$  |
-| **$f'(x)$** | $-1$ | $7$ | $8$  | $-3$ |
-| **$g'(x)$** | $4$  | $1$ | $2$  | $9$  |
+| **$x$**     | 1  | 2 | 3  | 4  |
+| **$f(x)$**  | 3  | 5 | $-2$ | 0  |
+| **$g(x)$**  | 2  | 3 | $-4$ | 6  |
+| **$f'(x)$** | $-1$ | 7 | 8  | $-3$ |
+| **$g'(x)$** | 4  | 1 | 2  | 9  |
 
 126\.
 
@@ -939,7 +939,7 @@ The population in millions of arctic flounder in the Atlantic Ocean is modeled b
 **\[T\]** The concentration of antibiotic in the bloodstream $t$ hours after being injected is given by the function $C(t) = \frac{2t^{2} + t}{t^{3} + 50},$ where $C$ is measured in milligrams per liter of blood.
 
 1.  Find the rate of change of $C(t).$
-2.  Determine the rate of change for $t = 8,12,24,$ and $36.$
+2.  Determine the rate of change for $t = 8,12,24,$ and 36.
 3.  Briefly describe what seems to be occurring as the number of hours increases.
 
 148\.

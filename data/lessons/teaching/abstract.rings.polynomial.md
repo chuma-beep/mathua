@@ -5,7 +5,7 @@
 ## From Polynomials to Fields
 
 ### Ideals in $R[x]$
-$(x)$ consists of polynomials with zero constant term; $R[x]/(x)\cong R$ (evaluate at $0$). $(x^{2}+1)$ in $\mathbb R[x]$ is maximal, so $\mathbb R[x]/(x^{2}+1)\cong\mathbb C$.
+$(x)$ consists of polynomials with zero constant term; $R[x]/(x)\cong R$ (evaluate at 0). $(x^{2}+1)$ in $\mathbb R[x]$ is maximal, so $\mathbb R[x]/(x^{2}+1)\cong\mathbb C$.
 
 ### Field Extensions
 Adjoining a root: $\mathbb Q[x]/(x^{2}-2)\cong\mathbb Q(\sqrt2)$. Irreducible $p(x)$ of degree $n$ gives an $n$-dimensional extension.

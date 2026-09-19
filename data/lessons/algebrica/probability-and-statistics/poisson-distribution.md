@@ -154,7 +154,7 @@ The difference between them gives:
 
 \\[P(X = 8) = 0.9319 - 0.8666 = 0.0653 \\]
 
-Therefore, the probability that exactly eight calls are received during a ten-minute interval is approximately \\(0.0653\\), meaning there is about a \\(6.5%\\) chance of observing this specific count of calls under the assumed conditions.
+Therefore, the probability that exactly eight calls are received during a ten-minute interval is approximately 0.0653, meaning there is about a \\(6.5%\\) chance of observing this specific count of calls under the assumed conditions.
 
 ## From the binomial to the Poisson distribution
 

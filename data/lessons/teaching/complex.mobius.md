@@ -5,10 +5,10 @@
 ## Sphere Automorphisms
 
 ### Circle Preservation
-Möbius maps circles/lines to circles/lines; $w=1/z$ swaps $0$ and $\infty$.
+Möbius maps circles/lines to circles/lines; $w=1/z$ swaps 0 and $\infty$.
 
 ### Group Structure
-$PSL(2,\mathbb C)$ acts 3-transitively: any $3$ points → $0,1,\infty$.
+$PSL(2,\mathbb C)$ acts 3-transitively: any 3 points → $0,1,\infty$.
 
 ## Example
 

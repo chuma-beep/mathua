@@ -19,7 +19,7 @@ For estimating, use $\pi \approx 3.14$ or the fraction $\pi \approx \frac{22}{7}
 
 **Example**
 
-A circle has diameter $10$ inches. Find its circumference exactly, then to the nearest hundredth.
+A circle has diameter 10 inches. Find its circumference exactly, then to the nearest hundredth.
 
 *Solution*
 
@@ -31,7 +31,7 @@ Using $\pi \approx 3.14159$:
 
 **Example**
 
-Find the circumference of a circle with radius $7$ cm.
+Find the circumference of a circle with radius 7 cm.
 
 *Solution*
 
@@ -39,7 +39,7 @@ Find the circumference of a circle with radius $7$ cm.
 
 ## Unrolling a Circle
 
-Imagine wrapping a string around the circle once, then unrolling it flat: the string's length is $d$ lengths of about $3.14$ laid end to end. That is why $C = \pi d$.
+Imagine wrapping a string around the circle once, then unrolling it flat: the string's length is $d$ lengths of about 3.14 laid end to end. That is why $C = \pi d$.
 
 ## Summary
 

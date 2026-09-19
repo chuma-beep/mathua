@@ -38,7 +38,7 @@ This is the sum of the first \\( n \\) terms of a geometric progression with rat
 
 ![](/diagrams/algebrica/cauchy-sequence-1.png)
 
-In the limit, this sequence converges to \\( 2 \\), reinforcing that it is both a Cauchy and convergent sequence.
+In the limit, this sequence converges to 2, reinforcing that it is both a Cauchy and convergent sequence.
 
 ##### In general, a numerical sequence is called a [geometric progression](<../sequences>) when the ratio between each term and its previous one is constant
 

@@ -1,6 +1,6 @@
 # Solvable Groups and Composition Series
 
-**Solvable:** Has subnormal series $1=G_0\lhd G_1\lhd\cdots\lhd G_n=G$ with abelian quotients $G_{i+1}/G_i$; derived series reaches $1$.
+**Solvable:** Has subnormal series $1=G_0\lhd G_1\lhd\cdots\lhd G_n=G$ with abelian quotients $G_{i+1}/G_i$; derived series reaches 1.
 
 ## Solvability
 

@@ -14,4 +14,4 @@ $\left(\frac{a}{p}\right)\equiv a^{(p-1)/2}\pmod p$. Supplement: $\left(\frac{2}
 
 ## Example
 
-Mod $5$: residues are $1^{2}=1,2^{2}=4$, so $\left(\frac{1}{5}\right)=1$, $\left(\frac{4}{5}\right)=1$, $\left(\frac{2}{5}\right)=-1$.
+Mod 5: residues are $1^{2}=1,2^{2}=4$, so $\left(\frac{1}{5}\right)=1$, $\left(\frac{4}{5}\right)=1$, $\left(\frac{2}{5}\right)=-1$.

@@ -6,7 +6,7 @@ The sign function assigns to each real number its sign, disregarding its magnitu
 
 \\[\operatorname{sgn}(x) = \begin{cases} -1 & \text{if } x < 0 \\\\[6pt] 0 & \text{if } x = 0 \\\\[6pt] 1 & \text{if } x > 0 \end{cases} \quad \forall \, x \in \mathbb{R} \\]
 
-Specifically, \\(\operatorname{sgn}(x)\\) returns \\(-1\\) for negative values, \\(0\\) when \\(x = 0\\), and \\(1\\) for positive values. The function does not quantify the magnitude of \\(x\\) but solely indicates the position of \\(x\\) relative to zero. For example, applying the definition we have:
+Specifically, \\(\operatorname{sgn}(x)\\) returns \\(-1\\) for negative values, 0 when \\(x = 0\\), and 1 for positive values. The function does not quantify the magnitude of \\(x\\) but solely indicates the position of \\(x\\) relative to zero. For example, applying the definition we have:
 
 \\[\operatorname{sgn}(-7) = -1 \qquad \operatorname{sgn}(0) = 0 \qquad \operatorname{sgn}(4) = 1 \\]
 
@@ -51,11 +51,11 @@ At \\(x = 0\\), the derivative does not exist because the function is discontinu
 
 \\[\frac{d}{dx} \operatorname{sgn}(x) = 2\delta(x) \\]
 
-\\(\delta(x)\\) is the Dirac delta, a generalised function that is zero everywhere except at the origin and integrates to one over the entire real line. This distributional identity demonstrates that the sign function exhibits a discontinuity of amplitude \\(2\\) at the origin, as:
+\\(\delta(x)\\) is the Dirac delta, a generalised function that is zero everywhere except at the origin and integrates to one over the entire real line. This distributional identity demonstrates that the sign function exhibits a discontinuity of amplitude 2 at the origin, as:
 
 \\[\lim_{x \to 0^-} \operatorname{sgn}(x) = -1 \\] \\[\lim_{x \to 0^+} \operatorname{sgn}(x) = 1 \\]
 
-This amplitude explains the presence of the factor \\(2\\) preceding the Dirac delta function.
+This amplitude explains the presence of the factor 2 preceding the Dirac delta function.
 
 
 The [indefinite integral](<../indefinite-integrals/>) of the sign function, computed away from the origin, gives back the [absolute value](<../absolute-value-function/>):
@@ -103,4 +103,4 @@ Equivalently, we have:
 
 \\[H(x) = \frac{1 + \operatorname{sgn}(x)}{2} \\]
 
-This relationship is frequently utilised as converting between these representations can simplify calculations. The Heaviside function maps \\((-\infty, 0)\\) to \\(0\\) and \\((0, +\infty)\\) to \\(1\\), and may therefore be interpreted as a shifted and rescaled form of the sign function.
+This relationship is frequently utilised as converting between these representations can simplify calculations. The Heaviside function maps \\((-\infty, 0)\\) to 0 and \\((0, +\infty)\\) to 1, and may therefore be interpreted as a shifted and rescaled form of the sign function.

@@ -16,16 +16,16 @@ By the end of this section, you will be able to:
 Before you get started, take this readiness quiz.
 
 1.  Which of the following numbers are counting numbers (natural numbers)?  
-    $0,4,215$  
+    0,4,215  
     If you missed this problem, review Example 1.1.
-2.  Find the sum of $3,5,$ and $7.$  
+2.  Find the sum of 3,5, and 7.  
     If you missed the problem, review Example 2.1.
 
 ### Identify Multiples of Numbers
 
-Annie is counting the shoes in her closet. The shoes are matched in pairs, so she doesn’t have to count each one. She counts by twos: $2,4,6,8,10,12.$ She has $12$ shoes in her closet.
+Annie is counting the shoes in her closet. The shoes are matched in pairs, so she doesn’t have to count each one. She counts by twos: 2,4,6,8,10,12. She has 12 shoes in her closet.
 
-The numbers $2,4,6,8,10,12$ are called multiples of $2.$ Multiples of $2$ can be written as the product of a counting number and $2.$ The first six multiples of $2$ are given below.
+The numbers 2,4,6,8,10,12 are called multiples of 2. Multiples of 2 can be written as the product of a counting number and 2. The first six multiples of 2 are given below.
 
 $$
 \begin{array}{l}
@@ -38,7 +38,7 @@ $$
 \end{array}
 $$
 
-A multiple of a number is the product of the number and a counting number. So a multiple of $3$ would be the product of a counting number and $3.$ Below are the first six multiples of $3.$
+A multiple of a number is the product of the number and a counting number. So a multiple of 3 would be the product of a counting number and 3. Below are the first six multiples of 3.
 
 $$
 \begin{array}{l}
@@ -51,18 +51,18 @@ $$
 \end{array}
 $$
 
-We can find the multiples of any number by continuing this process. Table 2.8 shows the multiples of $2$ through $9$ for the first twelve counting numbers.
+We can find the multiples of any number by continuing this process. Table 2.8 shows the multiples of 2 through 9 for the first twelve counting numbers.
 
-| **Counting Number** | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ | $11$ | $12$ |
+| **Counting Number** | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
 |----|----|----|----|----|----|----|----|----|----|----|----|----|
-| $\text{Multiples of}\ 2$ | $2$ | $4$ | $6$ | $8$ | $10$ | $12$ | $14$ | $16$ | $18$ | $20$ | $22$ | $24$ |
-| $\text{Multiples of}\ 3$ | $3$ | $6$ | $9$ | $12$ | $15$ | $18$ | $21$ | $24$ | $27$ | $30$ | $33$ | $36$ |
-| $\text{Multiples of}\ 4$ | $4$ | $8$ | $12$ | $16$ | $20$ | $24$ | $28$ | $32$ | $36$ | $40$ | $44$ | $48$ |
-| $\text{Multiples of}\ 5$ | $5$ | $10$ | $15$ | $20$ | $25$ | $30$ | $35$ | $40$ | $45$ | $50$ | $55$ | $60$ |
-| $\text{Multiples of}\ 6$ | $6$ | $12$ | $18$ | $24$ | $30$ | $36$ | $42$ | $48$ | $54$ | $60$ | $66$ | $72$ |
-| $\text{Multiples of}\ 7$ | $7$ | $14$ | $21$ | $28$ | $35$ | $42$ | $49$ | $56$ | $63$ | $70$ | $77$ | $84$ |
-| $\text{Multiples of}\ 8$ | $8$ | $16$ | $24$ | $32$ | $40$ | $48$ | $56$ | $64$ | $72$ | $80$ | $88$ | $96$ |
-| $\text{Multiples of}\ 9$ | $9$ | $18$ | $27$ | $36$ | $45$ | $54$ | $63$ | $72$ | $81$ | $90$ | $99$ | $108$ |
+| $\text{Multiples of}\ 2$ | 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 |
+| $\text{Multiples of}\ 3$ | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 | 27 | 30 | 33 | 36 |
+| $\text{Multiples of}\ 4$ | 4 | 8 | 12 | 16 | 20 | 24 | 28 | 32 | 36 | 40 | 44 | 48 |
+| $\text{Multiples of}\ 5$ | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 |
+| $\text{Multiples of}\ 6$ | 6 | 12 | 18 | 24 | 30 | 36 | 42 | 48 | 54 | 60 | 66 | 72 |
+| $\text{Multiples of}\ 7$ | 7 | 14 | 21 | 28 | 35 | 42 | 49 | 56 | 63 | 70 | 77 | 84 |
+| $\text{Multiples of}\ 8$ | 8 | 16 | 24 | 32 | 40 | 48 | 56 | 64 | 72 | 80 | 88 | 96 |
+| $\text{Multiples of}\ 9$ | 9 | 18 | 27 | 36 | 45 | 54 | 63 | 72 | 81 | 90 | 99 | 108 |
 
 Table 2.8
 
@@ -76,18 +76,18 @@ Recognizing the patterns for multiples of $2,5,10,\text{and}\ 3$ will be helpful
 
 Doing the Manipulative Mathematics activity “Multiples” will help you develop a better understanding of multiples.
 
-Figure 2.6 shows the counting numbers from $1$ to $50.$ Multiples of $2$ are highlighted. Do you notice a pattern?
+Figure 2.6 shows the counting numbers from 1 to 50. Multiples of 2 are highlighted. Do you notice a pattern?
 
 *Figure 2.6 Multiples of 2 2 between 1 1 and 50 50*
 
-The last digit of each highlighted number in Figure 2.6 is either $0,2,4,6,\text{or}\ 8.$ This is true for the product of $2$ and any counting number. So, to tell if any number is a multiple of $2$ look at the last digit. If it is $0,2,4,6,\ \text{or}\ 8,$ then the number is a multiple of $2.$
+The last digit of each highlighted number in Figure 2.6 is either $0,2,4,6,\text{or}\ 8.$ This is true for the product of 2 and any counting number. So, to tell if any number is a multiple of 2 look at the last digit. If it is $0,2,4,6,\ \text{or}\ 8,$ then the number is a multiple of 2.
 
 ### Example 2.40
 
 Determine whether each of the following is a multiple of $2\text{:}$
 
-1.  ⓐ$489$
-2.  ⓑ $3,714$
+1.  ⓐ489
+2.  ⓑ 3,714
 
 #### Solution
 
@@ -109,28 +109,28 @@ Determine whether each of the following is a multiple of $2\text{:}$
 
 Determine whether each number is a multiple of $2\text{:}$
 
-1.  ⓐ $678$
-2.  ⓑ $21,493$
+1.  ⓐ 678
+2.  ⓑ 21,493
 
 ### Try It 2.80
 
 Determine whether each number is a multiple of $2\text{:}$
 
-1.  ⓐ $979$
-2.  ⓑ $17,780$
+1.  ⓐ 979
+2.  ⓑ 17,780
 
-Now let’s look at multiples of $5.$ Figure 2.7 highlights all of the multiples of $5$ between $1$ and $50.$ What do you notice about the multiples of $5?$
+Now let’s look at multiples of 5. Figure 2.7 highlights all of the multiples of 5 between 1 and 50. What do you notice about the multiples of $5?$
 
 *Figure 2.7 Multiples of 5 5 between 1 1 and 50 50*
 
-All multiples of $5$ end with either $5$ or $0.$ Just like we identify multiples of $2$ by looking at the last digit, we can identify multiples of $5$ by looking at the last digit.
+All multiples of 5 end with either 5 or 0. Just like we identify multiples of 2 by looking at the last digit, we can identify multiples of 5 by looking at the last digit.
 
 ### Example 2.41
 
 Determine whether each of the following is a multiple of $5\text{:}$
 
-1.  ⓐ $579$
-2.  ⓑ $880$
+1.  ⓐ 579
+2.  ⓑ 880
 
 #### Solution
 
@@ -150,19 +150,19 @@ Determine whether each of the following is a multiple of $5\text{:}$
 
 ### Try It 2.81
 
-Determine whether each number is a multiple of $5.$
+Determine whether each number is a multiple of 5.
 
-1.  ⓐ $675$
-2.  ⓑ $1,578$
+1.  ⓐ 675
+2.  ⓑ 1,578
 
 ### Try It 2.82
 
-Determine whether each number is a multiple of $5.$
+Determine whether each number is a multiple of 5.
 
-1.  ⓐ $421$
-2.  ⓑ $2,690$
+1.  ⓐ 421
+2.  ⓑ 2,690
 
-Figure 2.8 highlights the multiples of $10$ between $1$ and $50.$ All multiples of $10$ all end with a zero.
+Figure 2.8 highlights the multiples of 10 between 1 and 50. All multiples of 10 all end with a zero.
 
 *Figure 2.8 Multiples of 10 10 between 1 1 and 50 50*
 
@@ -170,8 +170,8 @@ Figure 2.8 highlights the multiples of $10$ between $1$ and $50.$ All multiples 
 
 Determine whether each of the following is a multiple of $10\text{:}$
 
-1.  ⓐ $425$
-2.  ⓑ $350$
+1.  ⓐ 425
+2.  ⓑ 350
 
 #### Solution
 
@@ -193,26 +193,26 @@ Determine whether each of the following is a multiple of $10\text{:}$
 
 Determine whether each number is a multiple of $10\text{:}$
 
-1.  ⓐ $179$
-2.  ⓑ $3,540$
+1.  ⓐ 179
+2.  ⓑ 3,540
 
 ### Try It 2.84
 
 Determine whether each number is a multiple of $10\text{:}$
 
-1.  ⓐ $110$
-2.  ⓑ $7,595$
+1.  ⓐ 110
+2.  ⓑ 7,595
 
-Figure 2.9 highlights multiples of $3.$ The pattern for multiples of $3$ is not as obvious as the patterns for multiples of $2,5,\text{and}\ 10.$
+Figure 2.9 highlights multiples of 3. The pattern for multiples of 3 is not as obvious as the patterns for multiples of $2,5,\text{and}\ 10.$
 
 *Figure 2.9 Multiples of 3 3 between 1 1 and 50 50*
 
-Unlike the other patterns we’ve examined so far, this pattern does not involve the last digit. The pattern for multiples of $3$ is based on the sum of the digits. If the sum of the digits of a number is a multiple of $3,$ then the number itself is a multiple of $3.$ See Table 2.9.
+Unlike the other patterns we’ve examined so far, this pattern does not involve the last digit. The pattern for multiples of 3 is based on the sum of the digits. If the sum of the digits of a number is a multiple of 3, then the number itself is a multiple of 3. See Table 2.9.
 
 |  |  |  |  |  |  |  |  |  |
 |----|----|----|----|----|----|----|----|----|
-| $\textbf{Multiple of 3}$ | $3$ | $6$ | $9$ | $12$ | $15$ | $18$ | $21$ | $24$ |
-| $\textbf{Sum of digits}$ | $3$ | $6$ | $9$ | \$\begin{matrix}
+| $\textbf{Multiple of 3}$ | 3 | 6 | 9 | 12 | 15 | 18 | 21 | 24 |
+| $\textbf{Sum of digits}$ | 3 | 6 | 9 | \$\begin{matrix}
 {1 + 2} \\
 3
 \end{matrix}$ | $\begin{matrix}
@@ -231,18 +231,18 @@ Unlike the other patterns we’ve examined so far, this pattern does not involve
 
 Table 2.9
 
-Consider the number $42.$ The digits are $4$ and $2,$ and their sum is $4 + 2 = 6.$ Since $6$ is a multiple of $3,$ we know that $42$ is also a multiple of $3.$
+Consider the number 42. The digits are 4 and 2, and their sum is $4 + 2 = 6.$ Since 6 is a multiple of 3, we know that 42 is also a multiple of 3.
 
 ### Example 2.43
 
 Determine whether each of the given numbers is a multiple of $3\text{:}$
 
-1.  ⓐ $645$
-2.  ⓑ $10,519$
+1.  ⓐ 645
+2.  ⓑ 10,519
 
 #### Solution
 
-ⓐ Is $645$ a multiple of $3?$
+ⓐ Is 645 a multiple of $3?$
 
 |  |  |
 |----|----|
@@ -251,7 +251,7 @@ Determine whether each of the given numbers is a multiple of $3\text{:}$
 | If we're not sure, we could add its digits to find out. We can check it by dividing 645 by 3. | $645 \div 3$ |
 | The quotient is 215. | $3 \cdot 215 = 645$ |
 
-ⓑ Is $10,519$ a multiple of $3?$
+ⓑ Is 10,519 a multiple of $3?$
 
 |                                               |                            |
 |-----------------------------------------------|----------------------------|
@@ -263,27 +263,27 @@ Determine whether each of the given numbers is a multiple of $3\text{:}$
                                                  {310,519\quad}              
                                                  \end{matrix}\$              |
 
-When we divide $10,519$ by $3,$ we do not get a counting number, so $10,519$ is not the product of a counting number and $3.$ It is not a multiple of $3.$
+When we divide 10,519 by 3, we do not get a counting number, so 10,519 is not the product of a counting number and 3. It is not a multiple of 3.
 
 ### Try It 2.85
 
 Determine whether each number is a multiple of $3\text{:}$
 
-1.  ⓐ $954$
-2.  ⓑ $3,742$
+1.  ⓐ 954
+2.  ⓑ 3,742
 
 ### Try It 2.86
 
 Determine whether each number is a multiple of $3\text{:}$
 
-1.  ⓐ $643$
-2.  ⓑ $8,379$
+1.  ⓐ 643
+2.  ⓑ 8,379
 
-Look back at the charts where you highlighted the multiples of $2,$ of $5,$ and of $10.$ Notice that the multiples of $10$ are the numbers that are multiples of both $2$ and $5.$ That is because $10 = 2 \cdot 5.$ Likewise, since $6 = 2 \cdot 3,$ the multiples of $6$ are the numbers that are multiples of both $2$ and $3.$
+Look back at the charts where you highlighted the multiples of 2, of 5, and of 10. Notice that the multiples of 10 are the numbers that are multiples of both 2 and 5. That is because $10 = 2 \cdot 5.$ Likewise, since $6 = 2 \cdot 3,$ the multiples of 6 are the numbers that are multiples of both 2 and 3.
 
 ### Use Common Divisibility Tests
 
-Another way to say that $375$ is a multiple of $5$ is to say that $375$ is divisible by $5.$ In fact, $375 \div 5$ is $75,$ so $375$ is $5 \cdot 75.$ Notice in Example 2.43 that $10,519$ is not a multiple $3.$ When we divided $10,519$ by $3$ we did not get a counting number, so $10,519$ is not divisible by $3.$
+Another way to say that 375 is a multiple of 5 is to say that 375 is divisible by 5. In fact, $375 \div 5$ is 75, so 375 is $5 \cdot 75.$ Notice in Example 2.43 that 10,519 is not a multiple 3. When we divided 10,519 by 3 we did not get a counting number, so 10,519 is not divisible by 3.
 
 ### Divisibility
 
@@ -294,21 +294,21 @@ Since multiplication and division are inverse operations, the patterns of multip
 | **Divisibility Tests** |  |
 |----|----|
 | **A number is divisible by** |  |
-| $2$ | if the last digit is $0,\ 2,\ 4,\ 6,\ \text{or}\ 8$ |
-| $3$ | if the sum of the digits is divisible by $3$ |
-| $5$ | if the last digit is $5$ or $0$ |
-| $6$ | if divisible by both $2$ and $3$ |
-| $10$ | if the last digit is $0$ |
+| 2 | if the last digit is $0,\ 2,\ 4,\ 6,\ \text{or}\ 8$ |
+| 3 | if the sum of the digits is divisible by 3 |
+| 5 | if the last digit is 5 or 0 |
+| 6 | if divisible by both 2 and 3 |
+| 10 | if the last digit is 0 |
 
 Table 2.10
 
 ### Example 2.44
 
-Determine whether $1,290$ is divisible by $2,3,5,\text{and}\ 10.$
+Determine whether 1,290 is divisible by $2,3,5,\text{and}\ 10.$
 
 #### Solution
 
-Table 2.11 applies the divisibility tests to $1,290.$ In the far right column, we check the results of the divisibility tests by seeing if the quotient is a whole number.
+Table 2.11 applies the divisibility tests to 1,290. In the far right column, we check the results of the divisibility tests by seeing if the quotient is a whole number.
 
 <table data-id="fs-id1405269" data-summary="This table has five rows and four columns. The first row is a header row that labels each column. The columns are labeled “Divisible by”, “Test”, “Divisible?” and “Check”. The second row shows the number 2 in the first column, the question “Is the last digit 0, 2, 4, 6, or 8? “ is in the second column, the word yes in the third column and the equation 1290 divided by 2 equals 645 in the fourth column.  The third row shows the number 3 in the first column, the question “Is the sum of the digits divisible by 3” then the equation 1 plus 2 plus 9 plus 0 = 12 is in the second column, the word yes in the third column and the equation 1290 divided by 3 equals 430 in the fourth column.  The fourth row shows the number 5 in the first column, the question “Is the last digit 5 or 0” is in the second column, the word yes in the third column and the equation 1290 divided by 5 equals 258 in the fourth column.  The fifth row shows the number 10 in the first column, the question “Is the last digit 0” is in the second column,  the word yes in the third column and the equation 1290 divided by 10 equals 129 in the fourth column.">
 <colgroup>
@@ -327,26 +327,26 @@ Table 2.11 applies the divisibility tests to $1,290.$ In the far right column, w
 </thead>
 <tbody>
 <tr data-valign="top">
-<td data-align="center">$2$</td>
+<td data-align="center">2</td>
 <td data-align="left">Is last digit $0, 2, 4, 6, or 8?$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$1290 \div 2 = 645$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$3$</td>
+<td data-align="center">3</td>
 <td data-align="left">$Is sum of digits divisible by 3?$<br />
 $1 + 2 + 9 + 0 = 12$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$1290 \div 3 = 430$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$5$</td>
-<td data-align="left">Is last digit $5$ or $0?$ <em>Yes.</em></td>
+<td data-align="center">5</td>
+<td data-align="left">Is last digit 5 or $0?$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$1290 \div 5 = 258$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$10$</td>
+<td data-align="center">10</td>
 <td data-align="left">Is last digit $0?$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$1290 \div 10 = 129$</td>
@@ -356,27 +356,27 @@ $1 + 2 + 9 + 0 = 12$ <em>Yes.</em></td>
 
 Table 2.11
 
-Thus, $1,290$ is divisible by $2,3,5,\text{and}\ 10.$
+Thus, 1,290 is divisible by $2,3,5,\text{and}\ 10.$
 
 ### Try It 2.87
 
 Determine whether the given number is divisible by $2,3,5,\text{and}\ 10.$
 
-$6240$
+6240
 
 ### Try It 2.88
 
 Determine whether the given number is divisible by $2,3,5,\text{and}\ 10.$
 
-$7248$
+7248
 
 ### Example 2.45
 
-Determine whether $5,625$ is divisible by $2,3,5,\text{and}\ 10.$
+Determine whether 5,625 is divisible by $2,3,5,\text{and}\ 10.$
 
 #### Solution
 
-Table 2.12 applies the divisibility tests to $5,625$ and tests the results by finding the quotients.
+Table 2.12 applies the divisibility tests to 5,625 and tests the results by finding the quotients.
 
 <table data-id="fs-id1970659" data-summary="This table has five rows and four columns. The first row is a header row that labels each column. The columns are labeled “Divisible by”, “Test”, “Divisible?” and “Check”. The second row shows the number 2 in the first column, the question “Is the last digit 0, 2, 4, 6, or 8? “ is in the second column, the word no in the third column and the equation 5625 divided by 2 equals 2812.5 in the fourth column.  The third row shows the number 3 in the first column, the question “Is the sum of the digits divisible by 3” then the equation 5 plus 6 plus 2 plus 5 = 18 is in the second column, the word yes in the third column and the equation 5625 divided by 3 equals 1875 in the fourth column.  The fourth row shows the number 5 in the first column, the question “Is the last digit 5 or 0” is in the second column, the word yes in the third column and the equation 5625 divided by 5 equals 1125 in the fourth column.  The fifth row shows the number 10 in the first column, the question “Is the last digit 0” is in the second column,  the word no in the third column and the equation 5625 divided by 10 equals 562.5 in the fourth column.">
 <colgroup>
@@ -395,26 +395,26 @@ Table 2.12 applies the divisibility tests to $5,625$ and tests the results by fi
 </thead>
 <tbody>
 <tr data-valign="top">
-<td data-align="center">$2$</td>
+<td data-align="center">2</td>
 <td data-align="left">Is last digit $0, 2, 4, 6, or 8?$ <em>No.</em></td>
 <td data-align="center">no</td>
 <td data-align="center">$5625 \div 2 = 2812.5$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$3$</td>
+<td data-align="center">3</td>
 <td data-align="left">$Is sum of digits divisible by 3?$<br />
 $5 + 6 + 2 + 5 = 18$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$5625 \div 3 = 1875$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$5$</td>
-<td data-align="left">Is last digit is $5$ or $0?$ <em>Yes.</em></td>
+<td data-align="center">5</td>
+<td data-align="left">Is last digit is 5 or $0?$ <em>Yes.</em></td>
 <td data-align="center">yes</td>
 <td data-align="center">$5625 \div 5 = 1125$</td>
 </tr>
 <tr data-valign="top">
-<td data-align="center">$10$</td>
+<td data-align="center">10</td>
 <td data-align="left">Is last digit $0?$ <em>No.</em></td>
 <td data-align="center">no</td>
 <td data-align="center">$5625 \div 10 = 562.5$</td>
@@ -424,23 +424,23 @@ $5 + 6 + 2 + 5 = 18$ <em>Yes.</em></td>
 
 Table 2.12
 
-Thus, $5,625$ is divisible by $3$ and $5,$ but not $2,$ or $10.$
+Thus, 5,625 is divisible by 3 and 5, but not 2, or 10.
 
 ### Try It 2.89
 
 Determine whether the given number is divisible $\text{by}\ 2,3,5,\text{and}\ 10.$
 
-$4962$
+4962
 
 ### Try It 2.90
 
 Determine whether the given number is divisible $\text{by}\ 2,3,5,\text{and}\ 10.$
 
-$3765$
+3765
 
 ### Find All the Factors of a Number
 
-There are often several ways to talk about the same idea. So far, we’ve seen that if $m$ is a multiple of $n,$ we can say that $m$ is divisible by $n.$ We know that $72$ is the product of $8$ and $9,$ so we can say $72$ is a multiple of $8$ and $72$ is a multiple of $9.$ We can also say $72$ is divisible by $8$ and by $9.$ Another way to talk about this is to say that $8$ and $9$ are factors of $72.$ When we write $72 = 8 \cdot 9$ we can say that we have factored $72.$
+There are often several ways to talk about the same idea. So far, we’ve seen that if $m$ is a multiple of $n,$ we can say that $m$ is divisible by $n.$ We know that 72 is the product of 8 and 9, so we can say 72 is a multiple of 8 and 72 is a multiple of 9. We can also say 72 is divisible by 8 and by 9. Another way to talk about this is to say that 8 and 9 are factors of 72. When we write $72 = 8 \cdot 9$ we can say that we have factored 72.
 
 ### Factors
 
@@ -452,32 +452,32 @@ In algebra, it can be useful to determine all of the factors of a number. This i
 
 Doing the Manipulative Mathematics activity “Model Multiplication and Factoring” will help you develop a better understanding of multiplication and factoring.
 
-For example, suppose a choreographer is planning a dance for a ballet recital. There are $24$ dancers, and for a certain scene, the choreographer wants to arrange the dancers in groups of equal sizes on stage.
+For example, suppose a choreographer is planning a dance for a ballet recital. There are 24 dancers, and for a certain scene, the choreographer wants to arrange the dancers in groups of equal sizes on stage.
 
-In how many ways can the dancers be put into groups of equal size? Answering this question is the same as identifying the factors of $24.$ Table 2.13 summarizes the different ways that the choreographer can arrange the dancers.
+In how many ways can the dancers be put into groups of equal size? Answering this question is the same as identifying the factors of 24. Table 2.13 summarizes the different ways that the choreographer can arrange the dancers.
 
 | **Number of Groups** | **Dancers per Group** | **Total Dancers**   |
 |----------------------|-----------------------|---------------------|
-| $1$                | $24$                | $1 \cdot 24 = 24$ |
-| $2$                | $12$                | $2 \cdot 12 = 24$ |
-| $3$                | $8$                 | $3 \cdot 8 = 24$  |
-| $4$                | $6$                 | $4 \cdot 6 = 24$  |
-| $6$                | $4$                 | $6 \cdot 4 = 24$  |
-| $8$                | $3$                 | $8 \cdot 3 = 24$  |
-| $12$               | $2$                 | $12 \cdot 2 = 24$ |
-| $24$               | $1$                 | $24 \cdot 1 = 24$ |
+| 1                | 24                | $1 \cdot 24 = 24$ |
+| 2                | 12                | $2 \cdot 12 = 24$ |
+| 3                | 8                 | $3 \cdot 8 = 24$  |
+| 4                | 6                 | $4 \cdot 6 = 24$  |
+| 6                | 4                 | $6 \cdot 4 = 24$  |
+| 8                | 3                 | $8 \cdot 3 = 24$  |
+| 12               | 2                 | $12 \cdot 2 = 24$ |
+| 24               | 1                 | $24 \cdot 1 = 24$ |
 
 Table 2.13
 
-What patterns do you see in Table 2.13? Did you notice that the number of groups times the number of dancers per group is always $24?$ This makes sense, since there are always $24$ dancers.
+What patterns do you see in Table 2.13? Did you notice that the number of groups times the number of dancers per group is always $24?$ This makes sense, since there are always 24 dancers.
 
-You may notice another pattern if you look carefully at the first two columns. These two columns contain the exact same set of numbers—but in reverse order. They are mirrors of one another, and in fact, both columns list all of the factors of $24,$ which are:
+You may notice another pattern if you look carefully at the first two columns. These two columns contain the exact same set of numbers—but in reverse order. They are mirrors of one another, and in fact, both columns list all of the factors of 24, which are:
 
 $$
 1,2,3,4,6,8,12,24
 $$
 
-We can find all the factors of any counting number by systematically dividing the number by each counting number, starting with $1.$ If the quotient is also a counting number, then the divisor and the quotient are factors of the number. We can stop when the quotient becomes smaller than the divisor.
+We can find all the factors of any counting number by systematically dividing the number by each counting number, starting with 1. If the quotient is also a counting number, then the divisor and the quotient are factors of the number. We can stop when the quotient becomes smaller than the divisor.
 
 ### How To
 
@@ -491,13 +491,13 @@ We can find all the factors of any counting number by systematically dividing th
 
 ### Example 2.46
 
-Find all the factors of $72.$
+Find all the factors of 72.
 
 #### Solution
 
-Divide $72$ by each of the counting numbers starting with $1.$ If the quotient is a whole number, the divisor and quotient are a pair of factors.  
+Divide 72 by each of the counting numbers starting with 1. If the quotient is a whole number, the divisor and quotient are a pair of factors.  
 
-The next line would have a divisor of $9$ and a quotient of $8.$ The quotient would be smaller than the divisor, so we stop. If we continued, we would end up only listing the same factors again in reverse order. Listing all the factors from smallest to greatest, we have
+The next line would have a divisor of 9 and a quotient of 8. The quotient would be smaller than the divisor, so we stop. If we continued, we would end up only listing the same factors again in reverse order. Listing all the factors from smallest to greatest, we have
 
 $1,2,3,4,6,8,9,12,18,24,36,\text{and}\ 72$
 
@@ -505,83 +505,83 @@ $1,2,3,4,6,8,9,12,18,24,36,\text{and}\ 72$
 
 Find all the factors of the given number:
 
-$96$
+96
 
 ### Try It 2.92
 
 Find all the factors of the given number:
 
-$80$
+80
 
 ### Identify Prime and Composite Numbers
 
-Some numbers, like $72,$ have many factors. Other numbers, such as $7,$ have only two factors: $1$ and the number. A number with only two factors is called a prime number. A number with more than two factors is called a composite number. The number $1$ is neither prime nor composite. It has only one factor, itself.
+Some numbers, like 72, have many factors. Other numbers, such as 7, have only two factors: 1 and the number. A number with only two factors is called a prime number. A number with more than two factors is called a composite number. The number 1 is neither prime nor composite. It has only one factor, itself.
 
 ### Prime Numbers and Composite Numbers
 
-A prime number is a counting number greater than $1$ whose only factors are $1$ and itself.
+A prime number is a counting number greater than 1 whose only factors are 1 and itself.
 
 A composite number is a counting number that is not prime.
 
-Figure 2.10 lists the counting numbers from $2$ through $20$ along with their factors. The highlighted numbers are prime, since each has only two factors.
+Figure 2.10 lists the counting numbers from 2 through 20 along with their factors. The highlighted numbers are prime, since each has only two factors.
 
 *Figure 2.10 Factors of the counting numbers from 2 2 through 20 , 20 , with prime numbers highlighted*
 
-The prime numbers less than $20$ are $2,3,5,7,11,13,17,\text{and}\ 19.$ There are many larger prime numbers too. In order to determine whether a number is prime or composite, we need to see if the number has any factors other than $1$ and itself. To do this, we can test each of the smaller prime numbers in order to see if it is a factor of the number. If none of the prime numbers are factors, then that number is also prime.
+The prime numbers less than 20 are $2,3,5,7,11,13,17,\text{and}\ 19.$ There are many larger prime numbers too. In order to determine whether a number is prime or composite, we need to see if the number has any factors other than 1 and itself. To do this, we can test each of the smaller prime numbers in order to see if it is a factor of the number. If none of the prime numbers are factors, then that number is also prime.
 
 ### How To
 
 #### Determine if a number is prime.
 
 1.  Step 1. Test each of the primes, in order, to see if it is a factor of the number.
-2.  Step 2. Start with $2$ and stop when the quotient is smaller than the divisor or when a prime factor is found.
+2.  Step 2. Start with 2 and stop when the quotient is smaller than the divisor or when a prime factor is found.
 3.  Step 3. If the number has a prime factor, then it is a composite number. If it has no prime factors, then the number is prime.
 
 ### Example 2.47
 
 Identify each number as prime or composite:
 
-1.  ⓐ $83$
-2.  ⓑ $77$
+1.  ⓐ 83
+2.  ⓑ 77
 
 #### Solution
 
-ⓐ Test each prime, in order, to see if it is a factor of $83$, starting with $2,$ as shown. We will stop when the quotient is smaller than the divisor.
+ⓐ Test each prime, in order, to see if it is a factor of 83, starting with 2, as shown. We will stop when the quotient is smaller than the divisor.
 
 | **Prime** | **Test** | **Factor of** $83?$ |
 |----|----|----|
-| $2$ | Last digit of $83$ is not $0,2,4,6,\text{or}\ 8.$ | No. |
-| $3$ | $8 + 3 = 11,$ and $11$ is not divisible by $3.$ | No. |
-| $5$ | The last digit of $83$ is not $5$ or $0.$ | No. |
-| $7$ | $83 \div 7 = 11.857\text{….}$ | No. |
-| $11$ | $83 \div 11 = 7.545\text{…}$ | No. |
+| 2 | Last digit of 83 is not $0,2,4,6,\text{or}\ 8.$ | No. |
+| 3 | $8 + 3 = 11,$ and 11 is not divisible by 3. | No. |
+| 5 | The last digit of 83 is not 5 or 0. | No. |
+| 7 | $83 \div 7 = 11.857\text{….}$ | No. |
+| 11 | $83 \div 11 = 7.545\text{…}$ | No. |
 
-We can stop when we get to $11$ because the quotient $\text{(7.545…)}$ is less than the divisor.
+We can stop when we get to 11 because the quotient $\text{(7.545…)}$ is less than the divisor.
 
-We did not find any prime numbers that are factors of $83,$ so we know $83$ is prime.
+We did not find any prime numbers that are factors of 83, so we know 83 is prime.
 
-ⓑ Test each prime, in order, to see if it is a factor of $77.$
+ⓑ Test each prime, in order, to see if it is a factor of 77.
 
 | **Prime** | **Test** | **Factor of $77?$** |
 |----|----|----|
-| $2$ | Last digit is not $0,2,4,6,\text{or}\ 8.$ | No. |
-| $3$ | $7 + 7 = 14,$ and $14$ is not divisible by $3.$ | No. |
-| $5$ | the last digit is not $5$ or $0.$ | No. |
-| $7$ | $77 \div 7 = 11$ | Yes. |
+| 2 | Last digit is not $0,2,4,6,\text{or}\ 8.$ | No. |
+| 3 | $7 + 7 = 14,$ and 14 is not divisible by 3. | No. |
+| 5 | the last digit is not 5 or 0. | No. |
+| 7 | $77 \div 7 = 11$ | Yes. |
 
-Since $77$ is divisible by $7,$ we know it is not a prime number. It is composite.
+Since 77 is divisible by 7, we know it is not a prime number. It is composite.
 
 ### Try It 2.93
 
 Identify the number as prime or composite:
 
-$91$
+91
 
 ### Try It 2.94
 
 Identify the number as prime or composite:
 
-$137$
+137
 
 ### Links To Literacy
 
@@ -603,47 +603,47 @@ The Links to Literacy activities *One Hundred Hungry Ants*, *Spunky Monkeys on P
 
 **Identify Multiples of Numbers**
 
-In the following exercises, list all the multiples less than $50$ for the given number.
+In the following exercises, list all the multiples less than 50 for the given number.
 
 215\.
 
-$2$
+2
 
 216\.
 
-$3$
+3
 
 217\.
 
-$4$
+4
 
 218\.
 
-$5$
+5
 
 219\.
 
-$6$
+6
 
 220\.
 
-$7$
+7
 
 221\.
 
-$8$
+8
 
 222\.
 
-$9$
+9
 
 223\.
 
-$10$
+10
 
 224\.
 
-$12$
+12
 
 **Use Common Divisibility Tests**
 
@@ -651,75 +651,75 @@ In the following exercises, use the divisibility tests to determine whether each
 
 225\.
 
-$84$
+84
 
 226\.
 
-$96$
+96
 
 227\.
 
-$75$
+75
 
 228\.
 
-$78$
+78
 
 229\.
 
-$168$
+168
 
 230\.
 
-$264$
+264
 
 231\.
 
-$900$
+900
 
 232\.
 
-$800$
+800
 
 233\.
 
-$896$
+896
 
 234\.
 
-$942$
+942
 
 235\.
 
-$375$
+375
 
 236\.
 
-$750$
+750
 
 237\.
 
-$350$
+350
 
 238\.
 
-$550$
+550
 
 239\.
 
-$1430$
+1430
 
 240\.
 
-$1080$
+1080
 
 241\.
 
-$22,335$
+22,335
 
 242\.
 
-$39,075$
+39,075
 
 **Find All the Factors of a Number**
 
@@ -727,35 +727,35 @@ In the following exercises, find all the factors of the given number.
 
 243\.
 
-$36$
+36
 
 244\.
 
-$42$
+42
 
 245\.
 
-$60$
+60
 
 246\.
 
-$48$
+48
 
 247\.
 
-$144$
+144
 
 248\.
 
-$200$
+200
 
 249\.
 
-$588$
+588
 
 250\.
 
-$576$
+576
 
 **Identify Prime and Composite Numbers**
 
@@ -763,51 +763,51 @@ In the following exercises, determine if the given number is prime or composite.
 
 251\.
 
-$43$
+43
 
 252\.
 
-$67$
+67
 
 253\.
 
-$39$
+39
 
 254\.
 
-$53$
+53
 
 255\.
 
-$71$
+71
 
 256\.
 
-$119$
+119
 
 257\.
 
-$481$
+481
 
 258\.
 
-$221$
+221
 
 259\.
 
-$209$
+209
 
 260\.
 
-$359$
+359
 
 261\.
 
-$667$
+667
 
 262\.
 
-$1771$
+1771
 
 #### Everyday Math
 
@@ -817,14 +817,14 @@ $1771$
 
 | **Weeks after graduation** | **Total number of dollars Frank put in the account** | **Simplified Total** |
 |----|----|----|
-| $0$ | $100$ | $100$ |
-| $1$ | $100 + 15$ | $115$ |
-| $2$ | $100 + 15 \cdot 2$ | $130$ |
-| $3$ | $100 + 15 \cdot 3$ |  |
-| $4$ | $100 + 15 \cdot \lbrack\ \rbrack$ |  |
-| $5$ | $100 + \lbrack\ \rbrack$ |  |
-| $6$ |  |  |
-| $20$ |  |  |
+| 0 | 100 | 100 |
+| 1 | $100 + 15$ | 115 |
+| 2 | $100 + 15 \cdot 2$ | 130 |
+| 3 | $100 + 15 \cdot 3$ |  |
+| 4 | $100 + 15 \cdot \lbrack\ \rbrack$ |  |
+| 5 | $100 + \lbrack\ \rbrack$ |  |
+| 6 |  |  |
+| 20 |  |  |
 | $x$ |  |  |
 
 264\.
@@ -833,21 +833,21 @@ $1771$
 
 | **Weeks after opening the account** | **Total number of dollars Gina put in the account** | **Simplified Total** |
 |----|----|----|
-| $0$ | $75$ | $75$ |
-| $1$ | $75 + 20$ | $95$ |
-| $2$ | $75 + 20 \cdot 2$ | $115$ |
-| $3$ | $75 + 20 \cdot 3$ |  |
-| $4$ | $75 + 20 \cdot \lbrack\ \rbrack$ |  |
-| $5$ | $75 + \lbrack\ \rbrack$ |  |
-| $6$ |  |  |
-| $20$ |  |  |
+| 0 | 75 | 75 |
+| 1 | $75 + 20$ | 95 |
+| 2 | $75 + 20 \cdot 2$ | 115 |
+| 3 | $75 + 20 \cdot 3$ |  |
+| 4 | $75 + 20 \cdot \lbrack\ \rbrack$ |  |
+| 5 | $75 + \lbrack\ \rbrack$ |  |
+| 6 |  |  |
+| 20 |  |  |
 | $x$ |  |  |
 
 #### Writing Exercises
 
 265\.
 
-If a number is divisible by $2$ and by $3,$ why is it also divisible by $6?$
+If a number is divisible by 2 and by 3, why is it also divisible by $6?$
 
 266\.
 

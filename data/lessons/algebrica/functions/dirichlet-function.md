@@ -27,11 +27,11 @@ At first glance this appears to be an almost trivial definition, a simple distin
 
 A notable property of \\(D\\) is its [discontinuity](<../discontinuities-of-real-functions/>) at every point of \\(\mathbb{R}\\). This result follows from the mutual density of \\(\mathbb{Q}\\) and \\(\mathbb{R} \setminus \mathbb{Q}\\) in the real line.
 
-For any fixed point \\(x_0 \in \mathbb{R}\\) and any \\(\varepsilon > 0\\), the [interval](<../intervals/>) \\((x_0 - \varepsilon, x_0 + \varepsilon)\\) contains both rational and irrational numbers. Therefore, there is no neighborhood of \\(x_0\\) on which \\(D\\) is constant, and any sequence converging to \\(x_0\\) can be constructed so that the values of \\(D\\) alternate indefinitely between \\(0\\) and \\(1\\). As a result, the following [limit](<../limits/>):
+For any fixed point \\(x_0 \in \mathbb{R}\\) and any \\(\varepsilon > 0\\), the [interval](<../intervals/>) \\((x_0 - \varepsilon, x_0 + \varepsilon)\\) contains both rational and irrational numbers. Therefore, there is no neighborhood of \\(x_0\\) on which \\(D\\) is constant, and any sequence converging to \\(x_0\\) can be constructed so that the values of \\(D\\) alternate indefinitely between 0 and 1. As a result, the following [limit](<../limits/>):
 
 \\[\lim_{x \to x_0} D(x)\\]
 
-does not exist for any \\(x_0\\), establishing discontinuity at every point. Since a function that is discontinuous everywhere cannot be [Riemann integrable](<../riemann-integrability-criteria/>) on any non-degenerate interval, this can be confirmed by noting that the upper and lower Darboux sums remain fixed at \\(1\\) and \\(0\\), respectively, for every partition of the interval.
+does not exist for any \\(x_0\\), establishing discontinuity at every point. Since a function that is discontinuous everywhere cannot be [Riemann integrable](<../riemann-integrability-criteria/>) on any non-degenerate interval, this can be confirmed by noting that the upper and lower Darboux sums remain fixed at 1 and 0, respectively, for every partition of the interval.
 
 ###### Darboux sums are sums obtained by multiplying the maximum or minimum value of a function on each subinterval of a partition by the width of that subinterval. These sums are used to approximate the integral from above and below.
 
@@ -41,7 +41,7 @@ Consider an interval \\([a, b]\\) with \\(a < b\\) and any partition \\(\mathcal
 
 \\[\mathcal{P} = {a = x_0 < x_1 < \cdots < x_n = b}\\]
 
-On each subinterval \\([x_{i-1}, x_i]\\), the supremum of \\(D\\) is \\(1\\) due to the density of the rationals, while the infimum is \\(0\\) due to the density of the irrationals. Therefore:
+On each subinterval \\([x_{i-1}, x_i]\\), the supremum of \\(D\\) is 1 due to the density of the rationals, while the infimum is 0 due to the density of the irrationals. Therefore:
 
 \\[U(D, \mathcal{P}) = \sum_{i=1}^{n} 1 \cdot (x_i - x_{i-1}) = b - a\\] \\[L(D, \mathcal{P}) = \sum_{i=1}^{n} 0 \cdot (x_i - x_{i-1}) = 0\\]
 

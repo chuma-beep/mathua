@@ -123,7 +123,7 @@ which is exactly the density of a uniform random variable on \\((0,1)\\).
 
 ## Example 1
 
-An industrial cutting machine completes a full cycle in a time that varies slightly due to mechanical tolerances and temperature fluctuations. Measurements show that the cycle time is equally likely to take any value between \\(4.8\\) and \\(5.4\\) seconds. Let \\(X\\) denote the cycle time in seconds, and assume
+An industrial cutting machine completes a full cycle in a time that varies slightly due to mechanical tolerances and temperature fluctuations. Measurements show that the cycle time is equally likely to take any value between 4.8 and 5.4 seconds. Let \\(X\\) denote the cycle time in seconds, and assume
 
 \\[X \sim \mathrm{U}(x; 4.8, 5.4) \\]
 
@@ -136,7 +136,7 @@ We obtain:
 
 \\[P(X < 5) = \frac{0.2}{0.6} = \frac{1}{3} \\]
 
-So the probability is approximately \\(0.333\\).
+So the probability is approximately 0.333.
 
 
 Determine the probability that the cycle time lies between 5.1 and 5.3 seconds. We have:
@@ -147,7 +147,7 @@ This gives:
 
 \\[P(5.1 \le X \le 5.3) = \frac{0.2}{0.6} = \frac{1}{3} \\]
 
-So the probability is again approximately \\(0.333\\).
+So the probability is again approximately 0.333.
 
 
 Find the expected cycle time \\(E(X)\\). For a uniform distribution on \\((a, b)\\) we have:
@@ -169,4 +169,4 @@ Substituting the values we obtain:
 
 \\[\mathrm{Var}(X) = \frac{(5.4 - 4.8)^{2}}{12} = \frac{0.6^{2}}{12} = \frac{0.36}{12} = 0.03 \\]
 
-So the variance is \\(0.03\\).
+So the variance is 0.03.

@@ -20,7 +20,7 @@ Using  Definition , a function $f$ could be given by $\{(1,4), (2,3), (5,3), (6,
 
 1. What is $f(1)?$ Since the ordered pair $(1,4)$ appears in the collection of ordered pairs, $f(1)=4$.
 2. What is $f(2)?$ Since the ordered pair $(2,3)$ appears in the collection of ordered pairs, $f(2)=3$.
-3. What is $f(3)?$ None of the ordered pairs in the collection start with $3$, so $f(3)$ is undefined, and we would say that $3$ is not in the domain of $f$.
+3. What is $f(3)?$ None of the ordered pairs in the collection start with 3, so $f(3)$ is undefined, and we would say that 3 is not in the domain of $f$.
 
 **Example**
 
@@ -42,9 +42,9 @@ A Function Given as a Formula
 
 Consider the function $h$ expressed by the formula $h(x)=x^2$. How is this "a collection of ordered pairs?"
 
-This time, the collection is *really big*. Imagine an $x$-value, like $x=2$. We can calculate that $f(2)=2^2=4$. So the input $2$ pairs with the output $4$ and the ordered pair $(2,4)$ is part of the collection.
+This time, the collection is *really big*. Imagine an $x$-value, like $x=2$. We can calculate that $f(2)=2^2=4$. So the input 2 pairs with the output 4 and the ordered pair $(2,4)$ is part of the collection.
 
-You could move on to *any*$x$-value, like say $x=2.1$. We can calculate that $f(2.1)=2.1^2=4.41$. So the input $2.1$ pairs with the output $4.41$ and the ordered pair $(2.1,4.41)$ is part of the collection.
+You could move on to *any*$x$-value, like say $x=2.1$. We can calculate that $f(2.1)=2.1^2=4.41$. So the input 2.1 pairs with the output 4.41 and the ordered pair $(2.1,4.41)$ is part of the collection.
 
 The collection is so large that we cannot literally list all the ordered pairs as was done in  Example  and  Example . We just have to imagine this giant collection of ordered pairs. And if it helps to conceptualize it, we know that the ordered pairs $(2,4)$ and $(2.1,4.41)$ are included.
 
@@ -79,10 +79,10 @@ Consider each set of ordered pairs. Does it make a function?
 3. $\left\{\left(5,9\right),\left(3,9\right),\left(4.2,\sqrt{2}\right),\left(\frac{4}{3},\frac{1}{2}\right)\right\}$
 4. $\left\{\left(5,9\right),\left(0.7,2\right),\left(\sqrt{25},3\right),\left(\frac{2}{3},\frac{3}{2}\right)\right\}$
 
-1) This set of ordered pairs is *not* a function. The problem is that it has both $(5,9)$ and $(5,1)$. It uses the same $x$-value paired with two different $y$-values. We have no clear way to turn the input $5$ into an output.
+1) This set of ordered pairs is *not* a function. The problem is that it has both $(5,9)$ and $(5,1)$. It uses the same $x$-value paired with two different $y$-values. We have no clear way to turn the input 5 into an output.
 2) This set of ordered pairs *is* a function. It is a collection of ordered pairs, and the $x$-values are never reused.
-3) This set of ordered pairs *is* a function. It is a collection of ordered pairs, and the $x$-values are never reused. You might note that the *output* value $9$ appears twice, but that doesn't matter. That just tells us that the function turns $5$ into $9$ and it also turns $3$ into $9$.
-4) This set of ordered pairs is *not* a function, but it's a little tricky. One of the ordered pairs uses $\sqrt{25}$ as an input value. But that is the same as $5$, which is also used as an input value.
+3) This set of ordered pairs *is* a function. It is a collection of ordered pairs, and the $x$-values are never reused. You might note that the *output* value 9 appears twice, but that doesn't matter. That just tells us that the function turns 5 into 9 and it also turns 3 into 9.
+4) This set of ordered pairs is *not* a function, but it's a little tricky. One of the ordered pairs uses $\sqrt{25}$ as an input value. But that is the same as 5, which is also used as an input value.
 
 Now that we understand how some sets of ordered pairs might not be functions, what about tables, graphs, and equations? If we are handed one of these things, can we tell whether or not it is giving us a function?
 
@@ -152,7 +152,7 @@ Do each of these equations make $y$ a function of $x$?
 3) The equation $x^2+y^2=9$ does *not* make $y$ a function of $x$. Here are three possible explanations.
    1. Imagine that you have a specific value for $x$ and you substitute it in to $x^2+y^2=9$. Will you be able to use algebra to solve for $y$? For example, if you substitute in $x=1$, then you have $1+y^2=9$, which simplifies to $y^2=8$. Can you really determine what $y$ is? No, because it could be $\sqrt{8}$ or it could be $-\sqrt{8}$. So this equation does not provide you with a way to turn $x$-values into $y$-values.
    2. Can you just isolate $y$ in terms of $x$? You might get started and use algebra to convert $x^2+y^2=9$ into $y^2=9-x^2$. But what now? The best you can do is acknowledge that $y$ is either the positive or the negative square root of $9 - x^2$. You might write $y=\pm\sqrt{9-x^2}$. But now for almost any valid $x$-value, there are *two* associated $y$-values.
-   3. You recognize that the graph of this equation would be a circle with radius $3$, and so it would not pass the   .
+   3. You recognize that the graph of this equation would be a circle with radius 3, and so it would not pass the   .
 
 **Exercise**
 

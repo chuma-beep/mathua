@@ -54,7 +54,7 @@ The subsequent example demonstrates how the theorem is applied to compute the fo
 \\[\lim_{x \to 0} x \cdot \sin\left( \frac{1}{x} \right) \\]
 
 
-The term \\( \sin\left( \frac{1}{x} \right) \\) does not admit a limit as \\( x \to 0 \\), since it oscillates indefinitely between \\(-1\\) and \\(1\\). However, for every [real number](<../types-of-numbers>) \\( x \neq 0 \\), the following inequality holds:
+The term \\( \sin\left( \frac{1}{x} \right) \\) does not admit a limit as \\( x \to 0 \\), since it oscillates indefinitely between \\(-1\\) and 1. However, for every [real number](<../types-of-numbers>) \\( x \neq 0 \\), the following inequality holds:
 
 \\[-1 \leq \sin\left( \frac{1}{x} \right) \leq 1 \\]
 
@@ -71,7 +71,7 @@ Since \\( f(x) \\) is squeezed between two functions that both approach zero, we
 
 \\[\lim_{x \to 0} x \cdot \sin\left( \frac{1}{x} \right) = 0 \\]
 
-In many instances, when an oscillating function is multiplied by a power of \\( x \\) that approaches zero, the overall limit is zero. This result arises because the oscillation remains bounded, as demonstrated by sine and cosine functions, which are always confined between \\(-1\\) and \\(1\\). Conversely, the factor \\( x^n \\) approaches zero rapidly enough to dominate the oscillation, causing the entire product to converge to zero.
+In many instances, when an oscillating function is multiplied by a power of \\( x \\) that approaches zero, the overall limit is zero. This result arises because the oscillation remains bounded, as demonstrated by sine and cosine functions, which are always confined between \\(-1\\) and 1. Conversely, the factor \\( x^n \\) approaches zero rapidly enough to dominate the oscillation, causing the entire product to converge to zero.
 
 ## Exercises: compute the following limits using the Squeeze Theorem
 
@@ -87,7 +87,7 @@ Evaluate the following limit:
 \\[\lim_{x \to +\infty} \frac{\ln(3 + \sin x)}{x^3} \\]
 
 
-To begin, observe that the sine function is always bounded between \\(-1\\) and \\(1\\) for all real \\( x \\), so we can write:
+To begin, observe that the sine function is always bounded between \\(-1\\) and 1 for all real \\( x \\), so we can write:
 
 \\[-1 \leq \sin x \leq 1 \\]
 
@@ -114,7 +114,7 @@ Evaluate the following limit:
 
 \\[\lim_{x \to 0} x^4 \cdot \cos\left( \frac{2}{x} \right) + 2 \\]
 
-To do so, we start by analyzing the behavior of the function \\( x^4 \cdot \cos\left( \frac{2}{x} \right) \\). We know that the cosine function is bounded between \\(-1\\) and \\(1\\) for all real values:
+To do so, we start by analyzing the behavior of the function \\( x^4 \cdot \cos\left( \frac{2}{x} \right) \\). We know that the cosine function is bounded between \\(-1\\) and 1 for all real values:
 
 \\[-1 \leq \cos\left( \frac{2}{x} \right) \leq 1 \\]
 

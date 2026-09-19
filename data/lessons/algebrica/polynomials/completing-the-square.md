@@ -57,7 +57,7 @@ The algebraic identity underlying the method of completing the square allows for
 x^2 + 6x + 9
 \\]
 
-Each term represents the area of a specific geometric region: \\( x^2 \\) corresponds to a square with side length \\( x \\); \\( 6x \\) represents the combined area of two rectangles, each measuring \\( x \\times 3 \\); and \\( 9 \\) denotes the area of a square with side length \\( 3 \\). When these three regions are arranged around a common vertex, they tile a larger square with side length \\( x + 3 \\), thereby confirming the identity:
+Each term represents the area of a specific geometric region: \\( x^2 \\) corresponds to a square with side length \\( x \\); \\( 6x \\) represents the combined area of two rectangles, each measuring \\( x \\times 3 \\); and 9 denotes the area of a square with side length 3. When these three regions are arranged around a common vertex, they tile a larger square with side length \\( x + 3 \\), thereby confirming the identity:
 
 \\[
 x^2 + 6x + 9 = (x + 3)^2
@@ -75,7 +75,7 @@ An application of the method can be demonstrated using the following quadratic e
 3x^2 - 4x - 1 = 0
 \\]
 
-The constant term is moved to the right-hand side, and both sides are divided by \\( 3 \\):
+The constant term is moved to the right-hand side, and both sides are divided by 3:
 
 \\[
 x^2 - \\frac{4}{3}x = \\frac{1}{3}

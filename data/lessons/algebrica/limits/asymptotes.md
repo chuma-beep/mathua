@@ -39,7 +39,7 @@ We observe that the [rational function](<../rational-functions>) is undefined at
 
 \\[\lim_{x \to 1^-} \frac{1}{x - 1} = -\infty \quad \lim_{x \to 1^+} \frac{1}{x - 1} = +\infty \\]
 
-This means that the function diverges to \\( -\infty \\) when approaching \\(1\\) from the left, and to \\( +\infty \\) when approaching from the right. Therefore, the line \\( x = 1 \\) is a vertical asymptote of the function.
+This means that the function diverges to \\( -\infty \\) when approaching 1 from the left, and to \\( +\infty \\) when approaching from the right. Therefore, the line \\( x = 1 \\) is a vertical asymptote of the function.
 
 ###### [Rational functions](<../rational-functions>) often have vertical asymptotes at points where the denominator is zero, and the function is undefined. These points correspond to non-removable discontinuities, which are typical of this type of function.
 

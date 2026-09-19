@@ -18,16 +18,16 @@ We begin by examining what it means for a function to have a finite limit at inf
 
 #### Limits at Infinity and Horizontal Asymptotes
 
-Recall that $\underset{x\rightarrow a}{\text{lim}}f(x) = L$ means $f(x)$ becomes arbitrarily close to $L$ as long as $x$ is sufficiently close to $a.$ We can extend this idea to limits at infinity. For example, consider the function $f(x) = 2 + \frac{1}{x}.$ As can be seen graphically in Figure 4.40 and numerically in Table 4.2, as the values of $x$ get larger, the values of $f(x)$ approach $2.$ We say the limit as $x$ approaches $\infty$ of $f(x)$ is $2$ and write $\underset{x\rightarrow\infty}{\text{lim}}f(x) = 2.$ Similarly, for $x < 0,$ as the values $|x|$ get larger, the values of $f(x)$ approaches $2.$ We say the limit as $x$ approaches $\text{-}\infty$ of $f(x)$ is $2$ and write $\underset{x\rightarrow - \infty}{\text{lim}}f(x) = 2.$
+Recall that $\underset{x\rightarrow a}{\text{lim}}f(x) = L$ means $f(x)$ becomes arbitrarily close to $L$ as long as $x$ is sufficiently close to $a.$ We can extend this idea to limits at infinity. For example, consider the function $f(x) = 2 + \frac{1}{x}.$ As can be seen graphically in Figure 4.40 and numerically in Table 4.2, as the values of $x$ get larger, the values of $f(x)$ approach 2. We say the limit as $x$ approaches $\infty$ of $f(x)$ is 2 and write $\underset{x\rightarrow\infty}{\text{lim}}f(x) = 2.$ Similarly, for $x < 0,$ as the values $|x|$ get larger, the values of $f(x)$ approaches 2. We say the limit as $x$ approaches $\text{-}\infty$ of $f(x)$ is 2 and write $\underset{x\rightarrow - \infty}{\text{lim}}f(x) = 2.$
 
 *Figure 4.40 The function approaches the asymptote y = 2 y = 2 as x x approaches ± ∞ . ± ∞ .*
 
 |                         |         |          |           |             |
 |-------------------------|---------|----------|-----------|-------------|
-| **$x$**               | $10$  | $100$  | $1,000$ | $10,000$  |
-| **$2 + \frac{1}{x}$** | $2.1$ | $2.01$ | $2.001$ | $2.0001$  |
+| **$x$**               | 10  | 100  | 1,000 | 10,000  |
+| **$2 + \frac{1}{x}$** | 2.1 | 2.01 | 2.001 | 2.0001  |
 | **$x$**               | $-10$ | $-100$ | $-1000$ | $-10,000$ |
-| **$2 + \frac{1}{x}$** | $1.9$ | $1.99$ | $1.999$ | $1.9999$  |
+| **$2 + \frac{1}{x}$** | 1.9 | 1.99 | 1.999 | 1.9999  |
 
 Table 4.2 Values of a function $f$ as $x\rightarrow\text{\pm}\infty$
 
@@ -146,8 +146,8 @@ For example, consider the function $f(x) = x^{3}.$ As seen in Table 4.3 and Figu
 
 |  |  |  |  |  |  |
 |----|----|----|----|----|----|
-| **$x$** | $10$ | $20$ | $50$ | $100$ | $1000$ |
-| **$x^{3}$** | $1000$ | $8000$ | $125,000$ | $1,000,000$ | $1,000,000,000$ |
+| **$x$** | 10 | 20 | 50 | 100 | 1000 |
+| **$x^{3}$** | 1000 | 8000 | 125,000 | 1,000,000 | 1,000,000,000 |
 | **$x$** | $-10$ | $-20$ | $-50$ | $-100$ | $-1000$ |
 | **$x^{3}$** | $-1000$ | $-8000$ | $-125,000$ | $-1,000,000$ | $-1,000,000,000$ |
 
@@ -340,7 +340,7 @@ For each function $f,$ evaluate $\underset{x\rightarrow\infty}{\text{lim}}f(x)$ 
 #### Solution
 
 1.  Since the coefficient of $x^{3}$ is $-5,$ the graph of $f(x) = -5x^{3}$ involves a vertical stretch and reflection of the graph of $y = x^{3}$ about the $x$-axis. Therefore, $\underset{x\rightarrow\infty}{\text{lim}}\left( {-5x^{3}} \right) = \text{-}\infty$ and $\underset{x\rightarrow\text{-}\infty}{\text{lim}}\left( {-5x^{3}} \right) = \infty.$
-2.  Since the coefficient of $x^{4}$ is $2,$ the graph of $f(x) = 2x^{4}$ is a vertical stretch of the graph of $y = x^{4}.$ Therefore, $\underset{x\rightarrow\infty}{\text{lim}}2x^{4} = \infty$ and $\underset{x\rightarrow\text{-}\infty}{\text{lim}}2x^{4} = \infty.$
+2.  Since the coefficient of $x^{4}$ is 2, the graph of $f(x) = 2x^{4}$ is a vertical stretch of the graph of $y = x^{4}.$ Therefore, $\underset{x\rightarrow\infty}{\text{lim}}2x^{4} = \infty$ and $\underset{x\rightarrow\text{-}\infty}{\text{lim}}2x^{4} = \infty.$
 
 ### Checkpoint 4.23
 
@@ -370,9 +370,9 @@ For example, the function $f(x) = 5x^{3} - 3x^{2} + 4$ behaves like $g(x) = 5x^{
 
 |  |  |  |  |
 |----|----|----|----|
-| **$x$** | $10$ | $100$ | $1000$ |
-| **$f(x) = 5x^{3} - 3x^{2} + 4$** | $4704$ | $4,970,004$ | $4,997,000,004$ |
-| **$g(x) = 5x^{3}$** | $5000$ | $5,000,000$ | $5,000,000,000$ |
+| **$x$** | 10 | 100 | 1000 |
+| **$f(x) = 5x^{3} - 3x^{2} + 4$** | 4704 | 4,970,004 | 4,997,000,004 |
+| **$g(x) = 5x^{3}$** | 5000 | 5,000,000 | 5,000,000,000 |
 | **$x$** | $-10$ | $-100$ | $-1000$ |
 | **$f(x) = 5x^{3} - 3x^{2} + 4$** | $-5296$ | $-5,029,996$ | $-5,002,999,996$ |
 | **$g(x) = 5x^{3}$** | $-5000$ | $-5,000,000$ | $-5,000,000,000$ |
@@ -423,7 +423,7 @@ For each of the following functions, determine the limits as $x\rightarrow\infty
     \underset{x\rightarrow\text{±}\infty}{\text{lim}}\frac{3x^{2} + 4x}{x + 2} = \underset{x\rightarrow\text{±}\infty}{\text{lim}}\frac{3x + 4}{1 + 2\text{/}x}.
     ```
       
-    As $x\rightarrow\text{\pm}\infty,$ the denominator approaches $1.$ As $x\rightarrow\infty,$ the numerator approaches $+ \infty.$ As $x\rightarrow\text{-}\infty,$ the numerator approaches $\text{-}\infty.$ Therefore $\underset{x\rightarrow\infty}{\text{lim}}f(x) = \infty,$ whereas $\underset{x\rightarrow\text{-}\infty}{\text{lim}}f(x) = \text{-}\infty$ as shown in the following figure.  
+    As $x\rightarrow\text{\pm}\infty,$ the denominator approaches 1. As $x\rightarrow\infty,$ the numerator approaches $+ \infty.$ As $x\rightarrow\text{-}\infty,$ the numerator approaches $\text{-}\infty.$ Therefore $\underset{x\rightarrow\infty}{\text{lim}}f(x) = \infty,$ whereas $\underset{x\rightarrow\text{-}\infty}{\text{lim}}f(x) = \text{-}\infty$ as shown in the following figure.  
 
     *Figure 4.55 As x → ∞ , x → ∞ , the values f ( x ) → ∞ . f ( x ) → ∞ . As x → − ∞ , x → − ∞ , the values f ( x ) → − ∞ . f ( x ) → − ∞ .*
 
@@ -508,12 +508,12 @@ The six basic trigonometric functions are periodic and do not approach a finite 
 
 *Figure 4.59 The function f ( x ) = tan x f ( x ) = tan x does not approach a limit and does not approach ± ∞ ± ∞ as x → ± ∞ x → ± ∞*
 
-Recall that for any base $b > 0,b \neq 1,$ the function $y = b^{x}$ is an exponential function with domain $\left( {\text{-}\infty,\infty} \right)$ and range $\left( {0,\infty} \right).$ If $b > 1,y = b^{x}$ is increasing over $`\left( {\text{-}\infty,\infty} \right).$ If $0 < b < 1,$ $y = b^{x}$ is decreasing over $\left( {\text{-}\infty,\infty} \right).$ For the natural exponential function $f(x) = e^{x},$ $e \approx 2.718 > 1.$ Therefore, $f(x) = e^{x}$ is increasing on $`\left( {\text{-}\infty,\infty} \right)$ and the range is $`\left( {0,\infty} \right).$ The exponential function $f(x) = e^{x}$ approaches $\infty$ as $x\rightarrow\infty$ and approaches $0$ as $x\rightarrow\text{-}\infty$ as shown in Table 4.5 and Figure 4.60.
+Recall that for any base $b > 0,b \neq 1,$ the function $y = b^{x}$ is an exponential function with domain $\left( {\text{-}\infty,\infty} \right)$ and range $\left( {0,\infty} \right).$ If $b > 1,y = b^{x}$ is increasing over $`\left( {\text{-}\infty,\infty} \right).$ If $0 < b < 1,$ $y = b^{x}$ is decreasing over $\left( {\text{-}\infty,\infty} \right).$ For the natural exponential function $f(x) = e^{x},$ $e \approx 2.718 > 1.$ Therefore, $f(x) = e^{x}$ is increasing on $`\left( {\text{-}\infty,\infty} \right)$ and the range is $`\left( {0,\infty} \right).$ The exponential function $f(x) = e^{x}$ approaches $\infty$ as $x\rightarrow\infty$ and approaches 0 as $x\rightarrow\text{-}\infty$ as shown in Table 4.5 and Figure 4.60.
 
 |               |             |           |       |           |             |
 |---------------|-------------|-----------|-------|-----------|-------------|
-| **$x$**     | $-5$      | $-2$    | $0$ | $2$     | $5$       |
-| **$e^{x}$** | $0.00674$ | $0.135$ | $1$ | $7.389$ | $148.413$ |
+| **$x$**     | $-5$      | $-2$    | 0 | 2     | 5       |
+| **$e^{x}$** | 0.00674 | 0.135 | 1 | 7.389 | 148.413 |
 
 Table 4.5 End behavior of the natural exponential function
 
@@ -523,8 +523,8 @@ Recall that the natural logarithm function $f(x) = \text{ln}(x)$ is the inverse 
 
 |                      |            |            |       |           |           |
 |----------------------|------------|------------|-------|-----------|-----------|
-| **$x$**            | $0.01$   | $0.1$    | $1$ | $10$    | $100$   |
-| **$\text{ln}(x)$** | $-4.605$ | $-2.303$ | $0$ | $2.303$ | $4.605$ |
+| **$x$**            | 0.01   | 0.1    | 1 | 10    | 100   |
+| **$\text{ln}(x)$** | $-4.605$ | $-2.303$ | 0 | 2.303 | 4.605 |
 
 Table 4.6 End behavior of the natural logarithm function
 
@@ -634,7 +634,7 @@ The second derivative is zero at $x = 0.$ Therefore, to determine the concavity 
 | $\left( {\text{-}\infty,0} \right)$ | $x = -1$ | $-$ | $f$ is concave down. |
 | $\left( {0,\infty} \right)$ | $x = 1$ | $+$ | $f$ is concave up. |
 
-We note that the information in the preceding table confirms the fact, found in step $5,$ that $f$ has a local maximum at $x = -1$ and a local minimum at $x = 1.$ In addition, the information found in step $5$—namely, $f$ has a local maximum at $x = -1$ and a local minimum at $x = 1,$ and $f'(x) = 0$ at those points—combined with the fact that $f^{''}$ changes sign only at $x = 0$ confirms the results found in step $6$ on the concavity of $f.$
+We note that the information in the preceding table confirms the fact, found in step 5, that $f$ has a local maximum at $x = -1$ and a local minimum at $x = 1.$ In addition, the information found in step 5—namely, $f$ has a local maximum at $x = -1$ and a local minimum at $x = 1,$ and $f'(x) = 0$ at those points—combined with the fact that $f^{''}$ changes sign only at $x = 0$ confirms the results found in step 6 on the concavity of $f.$
 
 Combining this information, we arrive at the graph of $f(x) = \left( {x - 1} \right)^{2}\left( {x + 2} \right)$ shown in the following graph.
 
@@ -652,7 +652,7 @@ Sketch the graph of ${f(x) = \frac{x^{2}}{\left( {1 - x^{2}} \right)}}\text{.}$
 
 Step 1. The function $f$ is defined as long as the denominator is not zero. Therefore, the domain is the set of all real numbers $x$ except $x = \text{\pm}1.$
 
-Step 2. Find the intercepts. If $x = 0,$ then $f(x) = 0,$ so $0$ is an intercept. If $y = 0,$ then $\frac{x^{2}}{\left( {1 - x^{2}} \right)} = 0,$ which implies $x = 0.$ Therefore, $\left( {0,0} \right)$ is the only intercept.
+Step 2. Find the intercepts. If $x = 0,$ then $f(x) = 0,$ so 0 is an intercept. If $y = 0,$ then $\frac{x^{2}}{\left( {1 - x^{2}} \right)} = 0,$ which implies $x = 0.$ Therefore, $\left( {0,0} \right)$ is the only intercept.
 
 Step 3. Evaluate the limits at infinity. Since $f$ is a rational function, divide the numerator and denominator by the highest power in the denominator: $x^{2}.$ We obtain
 
@@ -742,7 +742,7 @@ $$
 \underset{x\rightarrow 1^{+}}{\text{lim}}\frac{x^{2}}{x - 1} = \infty\ \text{and}\ \underset{x\rightarrow 1^{-}}{\text{lim}}\frac{x^{2}}{x - 1} = \text{−}\infty.
 $$
 
-Therefore, $x = 1$ is a vertical asymptote, and we have determined the behavior of $f$ as $x$ approaches $1$ from the right and the left.
+Therefore, $x = 1$ is a vertical asymptote, and we have determined the behavior of $f$ as $x$ approaches 1 from the right and the left.
 
 Step 5. Calculate the first derivative:
 

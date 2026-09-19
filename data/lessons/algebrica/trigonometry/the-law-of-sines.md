@@ -49,7 +49,7 @@ Multiplying both sides by \\(\sin 65^\circ\\) isolates \\(b\\):
 b = \frac{10 \cdot \sin 65^\circ}{\sin 40^\circ} = \frac{10 \cdot 0.9063}{0.6428} \approx 14.1
 \\]
 
-The length of side \\(b\\) is approximately \\(14.1\\) units.
+The length of side \\(b\\) is approximately 14.1 units.
 
 ## The ambiguous case
 

@@ -16,4 +16,4 @@ It connects residues mod $p$ and residues mod $q$, enabling fast evaluation of L
 
 ## Example
 
-$\left(\frac{5}{7}\right)$: both primes, $5\equiv1\pmod4$, so $\left(\frac{5}{7}\right)=\left(\frac{7}{5}\right)=\left(\frac{2}{5}\right)=-1$ (since $2$ is non-residue mod $5$).
+$\left(\frac{5}{7}\right)$: both primes, $5\equiv1\pmod4$, so $\left(\frac{5}{7}\right)=\left(\frac{7}{5}\right)=\left(\frac{2}{5}\right)=-1$ (since 2 is non-residue mod 5).

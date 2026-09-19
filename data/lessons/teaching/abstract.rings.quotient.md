@@ -8,7 +8,7 @@ $Z / 2Z$ has two cosets: even numbers and odd numbers, isomorphic to $Z_2$.
 
 ## Isomorphisms
 
-Many quotient rings are familiar objects: $Z / nZ \cong Z_n$, and $R[x]/(x) \cong R$ by evaluating at $0$.
+Many quotient rings are familiar objects: $Z / nZ \cong Z_n$, and $R[x]/(x) \cong R$ by evaluating at 0.
 
 ### Example
 

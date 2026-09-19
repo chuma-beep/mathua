@@ -4,7 +4,7 @@ A perceptron is the simplest neural unit. It computes a weighted sum of inputs p
 
 ### Example
 
-With weights $[0.5, -0.5]$, bias $0$, and inputs $[1,1]$, the weighted sum is $0$ and the step activation gives $0$.
+With weights $[0.5, -0.5]$, bias 0, and inputs $[1,1]$, the weighted sum is 0 and the step activation gives 0.
 
 ## The weighted sum
 
@@ -20,4 +20,4 @@ The perceptron uses an activation to decide its output: step, sign, sigmoid, or 
 
 ### Example
 
-Step activation outputs $1$ if the sum is positive, otherwise $0$.
+Step activation outputs 1 if the sum is positive, otherwise 0.

@@ -98,7 +98,7 @@ The same procedure works for \\(a^3 - b^3\\):
 
 In both cases the mixed terms cancel in pairs, and only the cubes \\(a^3\\) and \\(\pm b^3\\) survive.
 
-> In the expansion of \\((a+b+c)^3\\), the coefficient \\(6\\) in the term \\(6abc\\) arises from the number of permutations of the three distinct factors \\(a\\), \\(b\\), \\(c\\), that is \\(3!=6\\). This is an instance of the multinomial theorem, which generalises the binomial theorem to sums of more than two terms.
+> In the expansion of \\((a+b+c)^3\\), the coefficient 6 in the term \\(6abc\\) arises from the number of permutations of the three distinct factors \\(a\\), \\(b\\), \\(c\\), that is \\(3!=6\\). This is an instance of the multinomial theorem, which generalises the binomial theorem to sums of more than two terms.
 
 
 ## Notable products and the binomial theorem
@@ -189,7 +189,7 @@ The case of even \\(n\\) admits one exception, known as Sophie Germain's identit
 a^4+4b^4 = (a^2+2b^2+2ab)(a^2+2b^2-2ab)
 \\]
 
-At first sight this might seem like a contradiction, since we have just said that sums of even powers do not generally factorise over \\(\mathbb{R}\\). In this case the coefficient \\(4\\) makes it possible to complete the square and obtain:
+At first sight this might seem like a contradiction, since we have just said that sums of even powers do not generally factorise over \\(\mathbb{R}\\). In this case the coefficient 4 makes it possible to complete the square and obtain:
 
 \\[
 a^4+4b^4 = (a^2+2b^2)^2-(2ab)^2

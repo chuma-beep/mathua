@@ -204,7 +204,7 @@ The function \\( f \\) is Riemann-integrable on \\( [-1, 1] \\), since the singl
 F(x) = \int_{-1}^{x} (-1)\\,dt = -x - 1
 \\]
 
-For \\( x \in [0, 1] \\) we split the integration at \\( 0 \\), so that:
+For \\( x \in [0, 1] \\) we split the integration at 0, so that:
 
 \\[
 F(x) = \int_{-1}^{0} (-1)\\,dt + \int_{0}^{x} 1\\,dt = -1 + x
@@ -236,7 +236,7 @@ An antiderivative of \\( 3x^2 \\) is \\( F(x) = x^3 \\). By the Second Fundament
 \int_0^1 3x^2\\,dx = F(1) - F(0) = 1^3 - 0^3 = 1
 \\]
 
-The area under the curve \\( 3x^2 \\) over the interval \\([0, 1]\\) is therefore exactly \\( 1 \\), obtained through the evaluation of an antiderivative at the endpoints, without any geometric argument.
+The area under the curve \\( 3x^2 \\) over the interval \\([0, 1]\\) is therefore exactly 1, obtained through the evaluation of an antiderivative at the endpoints, without any geometric argument.
 
 As a second illustration, define:
 
@@ -261,7 +261,7 @@ Apply the First Fundamental Theorem of Calculus to find the following derivative
 \\]
 
 + The integrand here is \\( f(t) = e^{-t^2} \\), a continuous function on all of \\( \mathbb{R} \\).
-+ The lower bound of integration is the constant \\( 1 \\), and the upper bound is the variable \\( x \\).
++ The lower bound of integration is the constant 1, and the upper bound is the variable \\( x \\).
 
 This is precisely the setting of the First Fundamental Theorem: if \\( F(x) = \int_a^x f(t)\\,dt \\), then \\( F'(x) = f(x) \\). Applying this directly we obtain:
 

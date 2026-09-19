@@ -27,13 +27,13 @@ Suppose you were asked to count all these pennies shown in Figure 1.11.
 
 *Figure 1.11*
 
-Would you count the pennies individually? Or would you count the number of pennies in each row and add that number $3$ times.
+Would you count the pennies individually? Or would you count the number of pennies in each row and add that number 3 times.
 
 $$
 8 + 8 + 8
 $$
 
-Multiplication is a way to represent repeated addition. So instead of adding $8$ three times, we could write a multiplication expression.
+Multiplication is a way to represent repeated addition. So instead of adding 8 three times, we could write a multiplication expression.
 
 $$
 3\  \times \ 8
@@ -117,15 +117,15 @@ Model: $3\  \times \ 8.$
 
 #### Solution
 
-To model the product $3\  \times \ 8,$ we’ll start with a row of $8$ counters.  
+To model the product $3\  \times \ 8,$ we’ll start with a row of 8 counters.  
 
-The other factor is $3,$ so we’ll make $3$ rows of $8$ counters.  
+The other factor is 3, so we’ll make 3 rows of 8 counters.  
 
-Now we can count the result. There are $24$ counters in all.
+Now we can count the result. There are 24 counters in all.
 
 $3\  \times \ 8 = 24$
 
-If you look at the counters sideways, you’ll see that we could have also made $8$ rows of $3$ counters. The product would have been the same. We’ll get back to this idea later.
+If you look at the counters sideways, you’ll see that we could have also made 8 rows of 3 counters. The product would have been the same. We’ll get back to this idea later.
 
 ### Try It 1.79
 
@@ -160,7 +160,7 @@ What happens when you multiply a number by zero? You can see that the product of
 
 ### Multiplication Property of Zero
 
-The product of any number and $0$ is $0.$
+The product of any number and 0 is 0.
 
 $$
 \begin{matrix}
@@ -182,9 +182,9 @@ Multiply:
 |                                             |                |
 |---------------------------------------------|----------------|
 | ⓐ                                           | $0 \cdot 11$ |
-| The product of any number and zero is zero. | $0$          |
+| The product of any number and zero is zero. | 0          |
 | ⓑ                                           | $(42)0$      |
-| Multiplying by zero results in zero.        | $0$          |
+| Multiplying by zero results in zero.        | 0          |
 
 ### Try It 1.81
 
@@ -200,11 +200,11 @@ Find each product:
 1.  ⓐ $0 \cdot 24$
 2.  ⓑ $(57)0$
 
-What happens when you multiply a number by one? Multiplying a number by one does not change its value. We call this fact the Identity Property of Multiplication, and $1$ is called the multiplicative identity.
+What happens when you multiply a number by one? Multiplying a number by one does not change its value. We call this fact the Identity Property of Multiplication, and 1 is called the multiplicative identity.
 
 ### Identity Property of Multiplication
 
-The product of any number and $1$ is the number.
+The product of any number and 1 is the number.
 
 $$
 \begin{matrix}
@@ -225,9 +225,9 @@ Multiply:
 |                                                  |                |
 |--------------------------------------------------|----------------|
 | ⓐ                                                | $(11)1$      |
-| The product of any number and one is the number. | $11$         |
+| The product of any number and one is the number. | 11         |
 | ⓑ                                                | $1 \cdot 42$ |
-| Multiplying by one does not change the value.    | $42$         |
+| Multiplying by one does not change the value.    | 42         |
 
 ### Try It 1.83
 
@@ -281,9 +281,9 @@ Multiply:
 |           |               |
 |-----------|---------------|
 | ⓐ         | $8 \cdot 7$ |
-| Multiply. | $56$        |
+| Multiply. | 56        |
 | ⓑ         | $7 \cdot 8$ |
-| Multiply. | $56$        |
+| Multiply. | 56        |
 
 Changing the order of the factors does not change the product.
 
@@ -310,17 +310,17 @@ $$
 \end{array}
 $$
 
-We start by multiplying $3$ by $7.$
+We start by multiplying 3 by 7.
 
 $$
 3\  \times \ 7 = 21
 $$
 
-We write the $1$ in the ones place of the product. We carry the $2$ tens by writing $2$ above the tens place.
+We write the 1 in the ones place of the product. We carry the 2 tens by writing 2 above the tens place.
 
-Then we multiply the $3$ by the $2,$ and add the $2$ above the tens place to the product. So $3\  \times \ 2 = 6,$ and $6 + 2 = 8.$ Write the $8$ in the tens place of the product.
+Then we multiply the 3 by the 2, and add the 2 above the tens place to the product. So $3\  \times \ 2 = 6,$ and $6 + 2 = 8.$ Write the 8 in the tens place of the product.
 
-The product is $81.$
+The product is 81.
 
 When we multiply two numbers with a different number of digits, it’s usually easier to write the smaller number on the bottom. You could write it the other way, too, but this way is easier to work with.
 
@@ -337,18 +337,18 @@ Multiply: $15 \cdot 4.$
 </colgroup>
 <tbody>
 <tr>
-<td>Write the numbers so the digits $5$ and $4$ line up vertically.</td>
+<td>Write the numbers so the digits 5 and 4 line up vertically.</td>
 <td>$$\begin{array}{r}
 {15} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 4}
 \end{array}$$</td>
 </tr>
 <tr>
-<td>Multiply $4$ by the digit in the ones place of $15.$ $4 ⋅ 5 = 20.$</td>
+<td>Multiply 4 by the digit in the ones place of 15. $4 ⋅ 5 = 20.$</td>
 <td></td>
 </tr>
 <tr>
-<td>Write $0$ in the ones place of the product and carry the $2$ tens.</td>
+<td>Write 0 in the ones place of the product and carry the 2 tens.</td>
 <td>$$\begin{array}{r}
 {\overset{2}{1}5} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 4} \\
@@ -356,12 +356,12 @@ Multiply: $15 \cdot 4.$
 \end{array}$$</td>
 </tr>
 <tr>
-<td>Multiply $4$ by the digit in the tens place of $15.$ $4 ⋅ 1 = 4$.<br />
-Add the $2$ tens we carried. $4 + 2 = 6$.</td>
+<td>Multiply 4 by the digit in the tens place of 15. $4 ⋅ 1 = 4$.<br />
+Add the 2 tens we carried. $4 + 2 = 6$.</td>
 <td></td>
 </tr>
 <tr>
-<td>Write the $6$ in the tens place of the product.</td>
+<td>Write the 6 in the tens place of the product.</td>
 <td>$$\begin{array}{r}
 {\overset{2}{1}5} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 4} \\
@@ -392,18 +392,18 @@ Multiply: $286 \cdot 5.$
 </colgroup>
 <tbody>
 <tr>
-<td>Write the numbers so the digits $5$ and $6$ line up vertically.</td>
+<td>Write the numbers so the digits 5 and 6 line up vertically.</td>
 <td>$$\begin{array}{r}
 {286} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 5}
 \end{array}$$</td>
 </tr>
 <tr>
-<td>Multiply $5$ by the digit in the ones place of $286.$ $5 ⋅ 6 = 30.$</td>
+<td>Multiply 5 by the digit in the ones place of 286. $5 ⋅ 6 = 30.$</td>
 <td></td>
 </tr>
 <tr>
-<td>Write the $0$ in the ones place of the product and carry the $3$ to the tens place.Multiply $5$ by the digit in the tens place of $286.$ $5 ⋅ 8 = 40$.</td>
+<td>Write the 0 in the ones place of the product and carry the 3 to the tens place.Multiply 5 by the digit in the tens place of 286. $5 ⋅ 8 = 40$.</td>
 <td>$$\begin{array}{r}
  \\
 {2\overset{3}{8}6} \\
@@ -412,8 +412,8 @@ Multiply: $286 \cdot 5.$
 \end{array}$$</td>
 </tr>
 <tr>
-<td>Add the $3$ tens we carried to get $40 + 3 = 43$.<br />
-Write the $3$ in the tens place of the product and carry the 4 to the hundreds place.</td>
+<td>Add the 3 tens we carried to get $40 + 3 = 43$.<br />
+Write the 3 in the tens place of the product and carry the 4 to the hundreds place.</td>
 <td>$$\begin{array}{r}
 {\overset{4}{2}\overset{3}{8}6} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 5} \\
@@ -421,9 +421,9 @@ Write the $3$ in the tens place of the product and carry the 4 to the hundreds p
 \end{array}$$</td>
 </tr>
 <tr>
-<td>Multiply $5$ by the digit in the hundreds place of $286.$ $5 ⋅ 2 = 10.$<br />
-Add the $4$ hundreds we carried to get $10 + 4 = 14.$<br />
-Write the $4$ in the hundreds place of the product and the $1$ to the thousands place.</td>
+<td>Multiply 5 by the digit in the hundreds place of 286. $5 ⋅ 2 = 10.$<br />
+Add the 4 hundreds we carried to get $10 + 4 = 14.$<br />
+Write the 4 in the hundreds place of the product and the 1 to the thousands place.</td>
 <td>$$\begin{array}{r}
 {\overset{4}{2}\overset{3}{8}6} \\
 \underset{\text{\_\_\_\_\_}}{\times\; 5} \\
@@ -451,7 +451,7 @@ When we multiply by a number with two or more digits, we multiply by each of the
 2.  Step 2. Multiply the digits in each place value.
     - Work from right to left, starting with the ones place in the bottom number.
       - Multiply the bottom number by the ones digit in the top number, then by the tens digit, and so on.
-      - If a product in a place value is more than $9,$ carry to the next place value.
+      - If a product in a place value is more than 9, carry to the next place value.
       - Write the partial products, lining up the digits in the place values with the numbers above.
     - Repeat for the tens place in the bottom number, the hundreds place, and so on.
     - Insert a zero as a placeholder with each additional partial product.
@@ -473,7 +473,7 @@ Multiply: $62{(87)}.$
 | Multiply 8 by 6, the digit in the tens place of 62, then add the 1 ten we carried to get 49. Write the 9 in the hundreds place of the product and the 4 in the thousands place. |  |
 | The second partial product is 4960. Add the partial products. |  |
 
-The product is $5,394.$
+The product is 5,394.
 
 ### Try It 1.91
 
@@ -512,9 +512,9 @@ Multiply:
                       {4,700\ }                                        
                       \end{array}\$                                    |
 
-When we multiplied $47$ times $10,$ the product was $470.$ Notice that $10$ has one zero, and we put one zero after $47$ to get the product. When we multiplied $47$ times $100,$ the product was $4,700.$ Notice that $100$ has two zeros and we put two zeros after $47$ to get the product.
+When we multiplied 47 times 10, the product was 470. Notice that 10 has one zero, and we put one zero after 47 to get the product. When we multiplied 47 times 100, the product was 4,700. Notice that 100 has two zeros and we put two zeros after 47 to get the product.
 
-Do you see the pattern? If we multiplied $47$ times $10,000,$ which has four zeros, we would put four zeros after $47$ to get the product $470,000.$
+Do you see the pattern? If we multiplied 47 times 10,000, which has four zeros, we would put four zeros after 47 to get the product 470,000.
 
 ### Try It 1.93
 
@@ -536,7 +536,7 @@ Multiply: $(354)(438).$
 
 #### Solution
 
-There are three digits in the factors so there will be $3$ partial products. We do not have to write the $0$ as a placeholder as long as we write each partial product in the correct place.  
+There are three digits in the factors so there will be 3 partial products. We do not have to write the 0 as a placeholder as long as we write each partial product in the correct place.  
 
 ### Try It 1.95
 
@@ -552,11 +552,11 @@ Multiply: $(896)201.$
 
 #### Solution
 
-There should be $3$ partial products. The second partial product will be the result of multiplying $896$ by $0.$  
+There should be 3 partial products. The second partial product will be the result of multiplying 896 by 0.  
 
-Notice that the second partial product of all zeros doesn’t really affect the result. We can place a zero as a placeholder in the tens place and then proceed directly to multiplying by the $2$ in the hundreds place, as shown.
+Notice that the second partial product of all zeros doesn’t really affect the result. We can place a zero as a placeholder in the tens place and then proceed directly to multiplying by the 2 in the hundreds place, as shown.
 
-Multiply by $10,$ but insert only one zero as a placeholder in the tens place. Multiply by $200,$ putting the $2$ from the $12.$ $2 \cdot 6 = 12$ in the hundreds place.
+Multiply by 10, but insert only one zero as a placeholder in the tens place. Multiply by 200, putting the 2 from the 12. $2 \cdot 6 = 12$ in the hundreds place.
 
 $$
 \begin{array}{r}
@@ -584,7 +584,7 @@ When there are three or more factors, we multiply the first two and then multipl
 |-------------------------------|-----------------------|
 | to multiply                   | $8 \cdot 3 \cdot 2$ |
 | first multiply $8 \cdot 3$  | $24 \cdot 2$        |
-| then multiply $24 \cdot 2$. | $48$                |
+| then multiply $24 \cdot 2$. | 48                |
 
 ### Translate Word Phrases to Math Notation
 
@@ -611,9 +611,9 @@ Earlier in this section, we translated math notation into words. Now we’ll rev
 <td data-align="left" data-valign="top">times<br />
 product<br />
 twice</td>
-<td data-align="left" data-valign="top">$3$ times $8$<br />
-the product of $3$ and $8$<br />
-twice $4$</td>
+<td data-align="left" data-valign="top">3 times 8<br />
+the product of 3 and 8<br />
+twice 4</td>
 <td data-align="left" data-valign="top">$3 \times 8, 3 ⋅ 8, (3)(8),$<br />
 $(3)8, or 3(8)$<br />
 $2 ⋅ 4$</td>
@@ -625,25 +625,25 @@ Table 1.5
 
 ### Example 1.50
 
-Translate and simplify: the product of $12$ and $27.$
+Translate and simplify: the product of 12 and 27.
 
 #### Solution
 
-The word *product* tells us to multiply. The words *of* $12$ *and* $27$ tell us the two factors.
+The word *product* tells us to multiply. The words *of* 12 *and* 27 tell us the two factors.
 
 |            |                          |
 |------------|--------------------------|
 |            | the product of 12 and 27 |
 | Translate. | $12 \cdot 27$          |
-| Multiply.  | $324$                  |
+| Multiply.  | 324                  |
 
 ### Try It 1.99
 
-Translate and simplify the product of $13$ and $28.$
+Translate and simplify the product of 13 and 28.
 
 ### Try It 1.100
 
-Translate and simplify the product of $47$ and $14.$
+Translate and simplify the product of 47 and 14.
 
 ### Example 1.51
 
@@ -651,7 +651,7 @@ Translate and simplify: twice two hundred eleven.
 
 #### Solution
 
-The word *twice* tells us to multiply by $2.$
+The word *twice* tells us to multiply by 2.
 
 |            |                          |
 |------------|--------------------------|
@@ -673,7 +673,7 @@ We will use the same strategy we used previously to solve applications of multip
 
 ### Example 1.52
 
-Humberto bought $4$ sheets of stamps. Each sheet had $20$ stamps. How many stamps did Humberto buy?
+Humberto bought 4 sheets of stamps. Each sheet had 20 stamps. How many stamps did Humberto buy?
 
 #### Solution
 
@@ -688,15 +688,15 @@ We are asked to find the total number of stamps.
 
 ### Try It 1.103
 
-Valia donated water for the snack bar at her son’s baseball game. She brought $6$ cases of water bottles. Each case had $24$ water bottles. How many water bottles did Valia donate?
+Valia donated water for the snack bar at her son’s baseball game. She brought 6 cases of water bottles. Each case had 24 water bottles. How many water bottles did Valia donate?
 
 ### Try It 1.104
 
-Vanessa brought $8$ packs of hot dogs to a family reunion. Each pack has $10$ hot dogs. How many hot dogs did Vanessa bring?
+Vanessa brought 8 packs of hot dogs to a family reunion. Each pack has 10 hot dogs. How many hot dogs did Vanessa bring?
 
 ### Example 1.53
 
-When Rena cooks rice, she uses twice as much water as rice. How much water does she need to cook $4$ cups of rice?
+When Rena cooks rice, she uses twice as much water as rice. How much water does she need to cook 4 cups of rice?
 
 #### Solution
 
@@ -719,7 +719,7 @@ A college choir has twice as many women as men. There are 18 men in the choir. H
 
 ### Example 1.54
 
-Van is planning to build a patio. He will have $8$ rows of tiles, with $14$ tiles in each row. How many tiles does he need for the patio?
+Van is planning to build a patio. He will have 8 rows of tiles, with 14 tiles in each row. How many tiles does he need for the patio?
 
 #### Solution
 
@@ -747,7 +747,7 @@ Yousef is putting shingles on his garage roof. He will need 24 rows of shingles,
 
 If we want to know the size of a wall that needs to be painted or a floor that needs to be carpeted, we will need to find its area. The area is a measure of the amount of surface that is covered by the shape. Area is measured in square units. We often use square inches, square feet, square centimeters, or square miles to measure area. A square centimeter is a square that is one centimeter (cm.) on a side. A square inch is a square that is one inch on each side, and so on.
 
-For a rectangular figure, the area is the product of the length and the width. Figure 1.12 shows a rectangular rug with a length of $2$ feet and a width of $3$ feet. Each square is $1$ foot wide by $1$ foot long, or $1$ square foot. The rug is made of $6$ squares. The area of the rug is $6$ square feet.
+For a rectangular figure, the area is the product of the length and the width. Figure 1.12 shows a rectangular rug with a length of 2 feet and a width of 3 feet. Each square is 1 foot wide by 1 foot long, or 1 square foot. The rug is made of 6 squares. The area of the rug is 6 square feet.
 
 *Figure 1.12 The area of a rectangle is the product of its length and its width, or 6 6 square feet.*
 
@@ -1039,11 +1039,11 @@ In the following exercises, translate and simplify.
 
 289\.
 
-the product of $18$ and $33$
+the product of 18 and 33
 
 290\.
 
-the product of $15$ and $22$
+the product of 15 and 22
 
 291\.
 
@@ -1055,11 +1055,11 @@ forty-eight times seventy-one
 
 293\.
 
-twice $249$
+twice 249
 
 294\.
 
-twice $589$
+twice 589
 
 295\.
 

@@ -10,11 +10,11 @@ We solved equations in  the section  where only one step was needed to isolate t
 
 **Example**
 
-A water tank can hold up to $140$ gallons of water, but it starts with only $5$ gallons. A tap is turned on, pouring $15$ gallons of water into the tank every minute. After how many minutes will the tank be full?
+A water tank can hold up to 140 gallons of water, but it starts with only 5 gallons. A tap is turned on, pouring 15 gallons of water into the tank every minute. After how many minutes will the tank be full?
 
 You might recognize that this is a "rate" scenario like we explored in  the section . If you didn't notice that, you can still explore the given information with a table. You may find a pattern that helps you understand the question better. (And even if you do not find a pattern, spending some time thinking about these quantities stills helps to understand the question better.)
 
-Each additional minute of time gives us $15$ more gallons of water. So after $t$ minutes, we've added "$15$ times $t$" gallons of water to the $5$ gallons that we started with. So after $t$ minutes, we have $15t+5$ gallons. To find when the tank will be full with $140$ gallons, we can write the equation
+Each additional minute of time gives us 15 more gallons of water. So after $t$ minutes, we've added "15 times $t$" gallons of water to the 5 gallons that we started with. So after $t$ minutes, we have $15t+5$ gallons. To find when the tank will be full with 140 gallons, we can write the equation
 
 $$
  15t+5=140 
@@ -22,7 +22,7 @@ $$
 
 This is the same equation we would get if we apply  the rate model formula .
 
-To solve this, first we isolate the variable term, $15t$. We need to "remove" the $5$ from the left side of the equation. We can do this in a legal way using the  addition property of equality  by subtracting $5$ from each side of the equation. Once the variable term is isolated, we can eliminate its coefficient and solve for $t$.
+To solve this, first we isolate the variable term, $15t$. We need to "remove" the 5 from the left side of the equation. We can do this in a legal way using the  addition property of equality  by subtracting 5 from each side of the equation. Once the variable term is isolated, we can eliminate its coefficient and solve for $t$.
 
 The full process is:
 
@@ -30,17 +30,17 @@ $$
 \begin{aligned}15t+5&=140 \\ 15t+5\subtractright{5}&=140\subtractright{5} \\ 15t&=135 \\ \divideunder{15t}{15}&=\divideunder{135}{15} \\ t&=9\end{aligned}
 $$
 
-We should check this possible solution by substituting $9$ in for $t$ in the original equation:
+We should check this possible solution by substituting 9 in for $t$ in the original equation:
 
 $$
 \begin{aligned}15t+5&=140 \\ 15(\substitute{9})+5&\wonder{=}140 \\ 135+5&\confirm{=}140\end{aligned}
 $$
 
-And the solution $9$ is verified.
+And the solution 9 is verified.
 
-This problem had *context*. It was not simply solving an equation. It came with a story about a tank filling with water. So we should report a conclusion that uses that context. Something like "The tank will be full after $9$ minutes."
+This problem had *context*. It was not simply solving an equation. It came with a story about a tank filling with water. So we should report a conclusion that uses that context. Something like "The tank will be full after 9 minutes."
 
-In solving the two-step equation in  the example , we first isolated the variable expression $15t$ and then eliminated the coefficient $15$ by dividing each side of the equation by $15$. These two steps are the heart of our approach to solving linear equations. Try these two steps in the following exercise.
+In solving the two-step equation in  the example , we first isolated the variable expression $15t$ and then eliminated the coefficient 15 by dividing each side of the equation by 15. These two steps are the heart of our approach to solving linear equations. Try these two steps in the following exercise.
 
 **Exercise**
 
@@ -72,13 +72,13 @@ $$
 \begin{aligned}550t+2500&=250t+4600 \\ 550t+2500\subtractright{250t}&=250t+4600\subtractright{250t} \\ 300t+2500&=4600 \\ 300t+2500\subtractright{2500}&=4600\subtractright{2500} \\ 300t&=2100 \\ \divideunder{300t}{300}&=\divideunder{2100}{300} \\ t&=7\end{aligned}
 $$
 
-Checking the solution $7$:
+Checking the solution 7:
 
 $$
 \begin{aligned}550t+2500&=250t+4600 \\ 550(\substitute{7})+2500&\wonder{=}250(\substitute{7})+4600 \\ 3850+2500&\wonder{=}1750+4600 \\ 6350&\confirm{=}6350\end{aligned}
 $$
 
-Ahmed will catch up to Julia after $7$ months.
+Ahmed will catch up to Julia after 7 months.
 
 **Exercise**
 
@@ -162,7 +162,7 @@ $$
 \begin{aligned}2.5 + 1.75t &= 6.25 \\ 2.5 + 1.75t\subtractright{2.5} &= 6.25\subtractright{2.5} \\ 1.75t&= 3.75 \\ \divideunder{1.75t}{1.75}&=\divideunder{3.75}{1.75} \\ t&\approx2.14\end{aligned}
 $$
 
-So it will take about $2.14$ minutes for the tub to have $6.25\,\text{ft}^{3}$ of water.
+So it will take about 2.14 minutes for the tub to have $6.25\,\text{ft}^{3}$ of water.
 
 Here we revisit  the example .
 
@@ -178,7 +178,7 @@ $$
  (\text{last year's salary})+(4\%\text{ of last year's salary}) = (\text{this year's salary}) 
 $$
 
-We represent "$4\%$ of last year's salary" with $0.04S$ since $0.04$ is the decimal equivalent to $4\%$. So out equation is:
+We represent "$4\%$ of last year's salary" with $0.04S$ since 0.04 is the decimal equivalent to $4\%$. So out equation is:
 
 $$
  S + 0.04S = 73290 
@@ -216,7 +216,7 @@ Note that our final result is an *expression*.
 
 Evaluate the expression $10-3(x+2)$ when $x=2$.
 
-Substitute $2$ in for $x$ in the expression:
+Substitute 2 in for $x$ in the expression:
 
 $$
 \begin{aligned}10-3(x+2)&=10-3(\substitute{2}+2) \\ &=10-3(4) \\ &=10-12 \\ &=-2\end{aligned}

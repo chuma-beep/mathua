@@ -4,8 +4,8 @@
 
 When you write something down, it's important that the people who read it will understand what you actually meant. But language can be ambiguous. If we say in English, "two times three squared", do we mean that:
 
-- $2$ is multiplied by $3$, and then the result is squared? That would mean first we have $6$, and then we square $6$ to end with $36$.
-- Or that $2$ is multiplied by "three squared"? That would mean first we square $3$ to get $9$, and then we multiply by $2$ to end with $18$.
+- 2 is multiplied by 3, and then the result is squared? That would mean first we have 6, and then we square 6 to end with 36.
+- Or that 2 is multiplied by "three squared"? That would mean first we square 3 to get 9, and then we multiply by 2 to end with 18.
 
 So it makes a difference, and the English phrase "two times three squared" is arguably ambiguous.
 
@@ -13,7 +13,7 @@ English is allowed to be ambiguous. But math needs to be unambiguous and mean th
 
 ## Grouping Symbols
 
-Consider the expression $2\cdot3^2$. There are two math operations here: at some point two things will be multiplied, and at some point something will be raised to a power. The result depends on which operation you decide to do first: If you multiply $2\cdot3$, and then square the result, you end with $36$. If you square $3$, and then multiply that result by $2$, you end with $18$. So if we want all people everywhere to interpret $2\cdot3^2$ in the same way, then only *one* of these can be correct.
+Consider the expression $2\cdot3^2$. There are two math operations here: at some point two things will be multiplied, and at some point something will be raised to a power. The result depends on which operation you decide to do first: If you multiply $2\cdot3$, and then square the result, you end with 36. If you square 3, and then multiply that result by 2, you end with 18. So if we want all people everywhere to interpret $2\cdot3^2$ in the same way, then only *one* of these can be correct.
 
 One tool that we have to clearly tell readers which thing to do first is a pair of grouping symbols, like parentheses and brackets. If you *intend* to do the multiplication first, then writing $(2\cdot3)^2$clearly tells your reader to do that. And if you *intend* to execute the power first, then writing $2\cdot\left(3^2\right)$ clearly tells your reader to do that.
 
@@ -25,7 +25,7 @@ To visualize the difference between $2\cdot \left(3^2\right)$ or $(2\cdot 3)^2$,
 
 If we find $3^2$, we have the area of one of the small square garden plots on the left. Then if we double that, we have $2\cdot\left(3^2\right)$, the area of the entire left garden plot.
 
-But if we find $(2\cdot3)^2$, then first we are doubling $3$. So we are getting the area of a large square garden plot whose sides are twice as long. We end up with the area of the entire garden plot on the right.
+But if we find $(2\cdot3)^2$, then first we are doubling 3. So we are getting the area of a large square garden plot whose sides are twice as long. We end up with the area of the entire garden plot on the right.
 
 The point is that these amounts are different.
 
@@ -68,18 +68,18 @@ Use the order of operations to simplify the following expressions.
    $$
    \begin{aligned}20\div 4\cdot 5&=20\div 4 \cdot 5 \\ &=\highlight{5}\cdot5 \\ &=\highlight{25}\end{aligned}
    $$
-5. $(6+7)^2$. Here we have addition inside parentheses, and an exponent of $2$ outside. We must do the arithmetic inside the parentheses first:
+5. $(6+7)^2$. Here we have addition inside parentheses, and an exponent of 2 outside. We must do the arithmetic inside the parentheses first:
    $$
    \begin{aligned}(6+7)^2&= (6+7)^2 \\ &= \highlight{13}^2 \\ &= \highlight{169}\end{aligned}
    $$
-6. $4(2)^3$. This expression has multiplication and an exponent. There are parentheses, but no operation inside them. Parentheses used this way are just to make it clear that the $4$ and $2$ are separate numbers, not to be confused with the number $42$. Exponentiation has the higher priority, so we'll do that part first, and then multiply:
+6. $4(2)^3$. This expression has multiplication and an exponent. There are parentheses, but no operation inside them. Parentheses used this way are just to make it clear that the 4 and 2 are separate numbers, not to be confused with the number 42. Exponentiation has the higher priority, so we'll do that part first, and then multiply:
    $$
    \begin{aligned}4(2)^3 &= 4(2)^3 \\ &= 4(\highlight{8}) \\ &= \highlight{32}\end{aligned}
    $$
 
 **Remark**
 
-There are several different ways to write multiplication. We can use the symbols $\cdot$, $\times$, and $*$ to mean multiplication. We can also write two things right next to each other with no symbol in between them to mean multiplication. That is what is happening in  Item , where the $4$ is written right next to the $(2)^3$ with no symbol in between.
+There are several different ways to write multiplication. We can use the symbols $\cdot$, $\times$, and $*$ to mean multiplication. We can also write two things right next to each other with no symbol in between them to mean multiplication. That is what is happening in  Item , where the 4 is written right next to the $(2)^3$ with no symbol in between.
 
 Using a symbol for multiplication is called "explicit multiplication" and not writing  any symbol at all is called "implicit multiplication". For this textbook, explicit and  implicit multiplication have the same priority in the order of operations. However there are some conventions out in the real world where implicit multiplication has a higher priority in the order of operations than explicit multiplication. You may have seen memes with expressions like $6\div2(3)$ that play on how the real world has more than one convention for the order of operations.
 
@@ -123,7 +123,7 @@ Use the order of operations to simplify the following expressions.
    $$
    \begin{aligned}4-3\abs{5-7} &= 4-3\abs{5-7} \\ &= 4-3\abs{\highlight{-2}} \\ &= 4-3(\highlight{2}) \\ &= 4-\highlight{6} \\ &= \highlight{-2}\end{aligned}
    $$
-   It would be a mistake to subtract $4-3$ first, because that $3$ is multiplied by the $\abs{5-7}$. So subtracting $4-3$ would violate the order of operations.
+   It would be a mistake to subtract $4-3$ first, because that 3 is multiplied by the $\abs{5-7}$. So subtracting $4-3$ would violate the order of operations.
 2. $8-\sqrt{5^2-8\cdot 2}$. The radical is grouping $5^2-8\cdot 2$, which must be simplified first. Then we take the square root and continue:
    $$
    \begin{aligned}8-\sqrt{5^2-8\cdot 2} &= 8-\sqrt{5^2-8\cdot 2} \\ &= 8-\sqrt{\highlight{25}-8\cdot 2} \\ &= 8-\sqrt{25-\highlight{16}} \\ &= 8-\sqrt{\highlight{9}} \\ &= 8-\highlight{3} \\ &= \highlight{5}\end{aligned}
@@ -145,7 +145,7 @@ We noted in the  order of operations  that using the minus sign to negate a numb
 
 How would you write a math expression that takes the number $-4$ and squares it? Is it OK to write $-4^2$? How about $(-4)^2$?
 
-These expressions mean very different things. The second option, $(-4)^2$ is squaring the number $-4$. The parentheses make this clear. The result is $16$.
+These expressions mean very different things. The second option, $(-4)^2$ is squaring the number $-4$. The parentheses make this clear. The result is 16.
 
 The first expression $-4^2$ is different. There are two actions here: a negation and exponentiation. According to the order of operations, the exponentiation has higher priority, so we should do $4^2$ first.
 
@@ -153,7 +153,7 @@ $$
 \begin{aligned}-4^2&=-4^2 \\ &=-16\end{aligned}
 $$
 
-and this is not the same as $(-4)^2$, which is *positive*$16$.
+and this is not the same as $(-4)^2$, which is *positive*16.
 
 **Warning**
 
@@ -162,7 +162,7 @@ Negative Numbers Raised to Powers
 You may find yourself needing to raise a negative number to a power, and using a calculator to do the work for you. If you do not understand the issue described above, then you may get incorrect results.
 
 - Entering `-4^2` into a calculator or computer will result in $-16$.
-- Entering `(-4)^2` into a calculator or computer will result in $16$.
+- Entering `(-4)^2` into a calculator or computer will result in 16.
 
 Try entering these into your own calculator.
 

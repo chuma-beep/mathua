@@ -26,7 +26,7 @@ To use this formula, it's important to recognize which numbers are perfect squar
 
 Factor $x^2-16$.
 
-The "$16$" being subtracted here is a perfect square. It is the same as $4^2$. So we can take $b=4$ and write:
+The "16" being subtracted here is a perfect square. It is the same as $4^2$. So we can take $b=4$ and write:
 
 $$
 \begin{aligned}x^2-16&=(x-b)(x+b) \\ &=(x-4)(x+4)\end{aligned}
@@ -54,7 +54,7 @@ $$
 
 Factor $1-p^2$.
 
-The "$1$" at the beginning of this expression is a perfect square; it's the same as $1^2$. The "$p^2$" being subtracted here is also perfect square. We can take $A=1$ and $B=p$, and use   :
+The "1" at the beginning of this expression is a perfect square; it's the same as $1^2$. The "$p^2$" being subtracted here is also perfect square. We can take $A=1$ and $B=p$, and use   :
 
 $$
 \begin{aligned}1-p^2&=(A-B)(A+B) \\ &=(1-p)(1+p)\end{aligned}
@@ -64,7 +64,7 @@ $$
 
 Factor $m^2n^2-4$.
 
-Is the "$m^2n^2$" at the beginning of this expression a perfect square? By the properties of exponents, it is the same as $(mn)^2$, so yes, it is a perfect square and we may take $A=mn$. The "$4$" being subtracted here is also perfect square. We can take $B=2$.    tells us:
+Is the "$m^2n^2$" at the beginning of this expression a perfect square? By the properties of exponents, it is the same as $(mn)^2$, so yes, it is a perfect square and we may take $A=mn$. The "4" being subtracted here is also perfect square. We can take $B=2$.    tells us:
 
 $$
 \begin{aligned}m^2n^2-4&=(A-B)(A+B) \\ &=(mn-2)(mn+2)\end{aligned}
@@ -78,7 +78,7 @@ Try to factor one yourself:
 
 Factor $x^6-9$.
 
-Is the "$x^6$" at the beginning of this expression is a perfect square? It may appear to be a *sixth* power, but it is *also* a perfect square because we can write $x^6=\left(x^3\right)^2$. So we may take $A=x^3$. The "$9$" being subtracted here is also perfect square. We can take $B=3$.    tells us:
+Is the "$x^6$" at the beginning of this expression is a perfect square? It may appear to be a *sixth* power, but it is *also* a perfect square because we can write $x^6=\left(x^3\right)^2$. So we may take $A=x^3$. The "9" being subtracted here is also perfect square. We can take $B=3$.    tells us:
 
 $$
 \begin{aligned}x^6-9&=(A-B)(A+B) \\ &=(x^3-3)(x^3+3)\end{aligned}
@@ -107,7 +107,7 @@ $$
 The tricky part is recognizing when a trinomial you have encountered is in this special form. Ask yourself:
 
 1. Are the first and last terms perfect square? If so, jot down what $A$ and $B$ would be.
-2. When you multiply $2$ with what you wrote down for $A$ and $B$, i.e. $2AB$, do you have the middle term? If you have this middle term exactly, then your polynomial factors as $(A+B)^2$. If the middle term is the negative of $2AB$, then the sign on your $B$ can be reversed, and your polynomial factors as $(A-B)^2$.
+2. When you multiply 2 with what you wrote down for $A$ and $B$, i.e. $2AB$, do you have the middle term? If you have this middle term exactly, then your polynomial factors as $(A+B)^2$. If the middle term is the negative of $2AB$, then the sign on your $B$ can be reversed, and your polynomial factors as $(A-B)^2$.
 
 **Fact**
 
@@ -123,7 +123,7 @@ $$
 
 Factor $x^2+6x+9$.
 
-The first term, $x^2$, is clearly a perfect square. So we could take $A=x$. The last term, $9$, is also a perfect square since it is equal to $3^2$. So we could take $B=3$. Now we multiply $2AB=2\cdot x\cdot3$, and the result is $6x$. This is the middle term, which is what we hope to see.
+The first term, $x^2$, is clearly a perfect square. So we could take $A=x$. The last term, 9, is also a perfect square since it is equal to $3^2$. So we could take $B=3$. Now we multiply $2AB=2\cdot x\cdot3$, and the result is $6x$. This is the middle term, which is what we hope to see.
 
 So we can use   :
 
@@ -201,7 +201,7 @@ $$
 
 .
 
-The square numbers $16$ and $9$ in $16x^2y^2-24xy+9$ hint that maybe we could use   . Taking $A=4xy$ and $B=3$, we multiply $2AB=2\cdot(4xy)\cdot 3$. The result is $24xy$, which is the negative of our middle term. So the whole process is:
+The square numbers 16 and 9 in $16x^2y^2-24xy+9$ hint that maybe we could use   . Taking $A=4xy$ and $B=3$, we multiply $2AB=2\cdot(4xy)\cdot 3$. The result is $24xy$, which is the negative of our middle term. So the whole process is:
 
 $$
 \begin{aligned}32x^6y^2-48x^5y+18x^4&=2x^4(16x^2y^2-24xy+9) \\ &=2x^4(4xy-3)^2\end{aligned}

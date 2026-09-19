@@ -4,7 +4,7 @@ The order of an element $g$ in a group $G$ is the smallest positive integer $n$ 
 
 ### Example
 
-In $Z_6$, the order of $2$ is $3$ because $2+2+2 = 0$ and no smaller positive multiple works.
+In $Z_6$, the order of 2 is 3 because $2+2+2 = 0$ and no smaller positive multiple works.
 
 ## Order of a group
 
@@ -12,7 +12,7 @@ The order of a group $G$, denoted $|G|$, is the number of its elements. For a fi
 
 ### Example
 
-$|S_3| = 6$, and the 3-cycle $(1 2 3)$ has order $3$.
+$|S_3| = 6$, and the 3-cycle $(1 2 3)$ has order 3.
 
 ## Computing orders
 

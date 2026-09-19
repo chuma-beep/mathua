@@ -16,4 +16,4 @@ Small $\lambda$: fits training data closely. Large $\lambda$: heavily shrinks we
 
 ## Example
 
-Linear model $y=w x$ on noisy points. Unregularized $w=5.2$ fits noise; with $\lambda=0.1$, gradient $2\lambda w$ reduces $w$ to $3.1$, smoothing the fit and lowering test error.
+Linear model $y=w x$ on noisy points. Unregularized $w=5.2$ fits noise; with $\lambda=0.1$, gradient $2\lambda w$ reduces $w$ to 3.1, smoothing the fit and lowering test error.

@@ -2,7 +2,7 @@
 
 ## Introduction to the beta distribution
 
-The **beta distribution** is a continuous probability distribution defined over the open [interval](<../intervals/>) \\( (0, 1) \\). It depends on two positive numbers, \\( \alpha \\) and \\( \beta \\), which determine how the curve bends and how its mass is distributed along the interval. Because it only takes values between \\(0\\) and \\(1\\), it is often used to describe random quantities that represent proportions, ratios, or probabilities, situations where the outcomes are naturally limited within these bounds. In formal terms, the beta distribution is defined by the following probability density function:
+The **beta distribution** is a continuous probability distribution defined over the open [interval](<../intervals/>) \\( (0, 1) \\). It depends on two positive numbers, \\( \alpha \\) and \\( \beta \\), which determine how the curve bends and how its mass is distributed along the interval. Because it only takes values between 0 and 1, it is often used to describe random quantities that represent proportions, ratios, or probabilities, situations where the outcomes are naturally limited within these bounds. In formal terms, the beta distribution is defined by the following probability density function:
 
 \\[B(x; \alpha, \beta) = \frac{x^{\alpha - 1}(1 - x)^{\beta - 1}}{B(\alpha, \beta)} \quad 0 < x < 1 \\]
 
@@ -37,7 +37,7 @@ The figure illustrates one of the possible shapes of the beta distribution when 
 ![Typical U-shaped form of the Beta distribution with α < 1, β < 1, and α = β.
 ](/diagrams/algebrica/beta-distribution-1.png)
 
-An interesting case occurs when the two parameters are equal, that is \\( \alpha = \beta \\), and both are greater than \\(1\\). In this situation, the beta distribution becomes symmetric with respect to the vertical line \\( x = \tfrac{1}{2} \\) and takes on a unimodal (that is, a single-peaked curve), bell-shaped form with a single central peak. As the values of \\( \alpha \\) and \\( \beta \\) increase, the curve becomes progressively narrower and increasingly similar to a [normal distribution](<../normal-distribution>) centered around \\( x = 0.5 \\).
+An interesting case occurs when the two parameters are equal, that is \\( \alpha = \beta \\), and both are greater than 1. In this situation, the beta distribution becomes symmetric with respect to the vertical line \\( x = \tfrac{1}{2} \\) and takes on a unimodal (that is, a single-peaked curve), bell-shaped form with a single central peak. As the values of \\( \alpha \\) and \\( \beta \\) increase, the curve becomes progressively narrower and increasingly similar to a [normal distribution](<../normal-distribution>) centered around \\( x = 0.5 \\).
 
 ![As α and β increase, the Beta distribution approaches a normal curve centered at 0.5.](/diagrams/algebrica/beta-distribution-2.png)
 

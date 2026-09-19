@@ -6,7 +6,7 @@ A generic [normal distribution](<../normal-distribution>) \\( \mathcal{N}(x; \mu
 
 \\[Z = \frac{X - \mu}{\sigma} \\]
 
-This transformation, known as standardization, expresses each value of the [continuous random variable](<../continuous-random-variables/>) \\( X \\) in terms of the number of [standard deviations](<../variance-and-covariance-of-a-random-variable/>) it lies away from the [mean](<../mean-or-expected-value-of-a-random-variable/>) \\( \mu \\). As a result, the new variable \\( Z \\) follows a standard normal distribution with mean \\( 0 \\) and standard deviation \\( 1 \\).
+This transformation, known as standardization, expresses each value of the [continuous random variable](<../continuous-random-variables/>) \\( X \\) in terms of the number of [standard deviations](<../variance-and-covariance-of-a-random-variable/>) it lies away from the [mean](<../mean-or-expected-value-of-a-random-variable/>) \\( \mu \\). As a result, the new variable \\( Z \\) follows a standard normal distribution with mean 0 and standard deviation 1.
 
 
 The process of standardization is particularly useful because it places different normal distributions on a common scale. Once the variable \\( X \\) has been transformed into the standard variable \\( Z \\), probabilities and critical values can be derived directly from the standard normal distribution \\( N(x; 0, 1) \\).
@@ -52,7 +52,7 @@ Let us consider a simple example to illustrate how the Z table is used to determ
 
 \\[z = 0.16\\]
 
-To find the cumulative probability to the left of the standardized variable \\( z \\), we locate the value 0.1 in the row and 0.06 in the column of the Z table. The intersection of these two entries gives the corresponding probability value, which in this case is \\( 0.5636 \\).
+To find the cumulative probability to the left of the standardized variable \\( z \\), we locate the value 0.1 in the row and 0.06 in the column of the Z table. The intersection of these two entries gives the corresponding probability value, which in this case is 0.5636.
 
 z| .00| .01| .02| .03| .04| .05| **.06**| .07| .08| …  
 ---|---|---|---|---|---|---|---|---|---|---  
@@ -61,17 +61,17 @@ z| .00| .01| .02| .03| .04| .05| **.06**| .07| .08| …
 …| …| …| …| …| …| …| …| …| …| …  
   
 
-This means that approximately 56.36% of the observations in a standard normal distribution fall below this value of \\( z \\). We can therefore state that the probability of the standardized variable \\( Z \\) being less than \\( z = 0.16 \\) is equal to \\( 0.5636 \\), that is:
+This means that approximately 56.36% of the observations in a standard normal distribution fall below this value of \\( z \\). We can therefore state that the probability of the standardized variable \\( Z \\) being less than \\( z = 0.16 \\) is equal to 0.5636, that is:
 
 \\[P(Z < 0.16) = 0.5636 \\]
 
 ![](/diagrams/algebrica/normal-distribution-standard-2-1.png)
 
-Since the total area under the standard normal curve equals \\(1\\), and the distribution is symmetric with respect to its [mean](<../mean-or-expected-value-of-a-random-variable/>), we can immediately deduce that
+Since the total area under the standard normal curve equals 1, and the distribution is symmetric with respect to its [mean](<../mean-or-expected-value-of-a-random-variable/>), we can immediately deduce that
 
 \\[P(Z > 0.16) = 1 - 0.5636 \\]
 
-Moreover, the probability that \\( Z \\) lies between \\(0\\) and \\(0.16\\) is obtained by subtracting the cumulative probability up to \\( Z = 0 \\) from that up to \\( Z = 0.16 \\):
+Moreover, the probability that \\( Z \\) lies between 0 and 0.16 is obtained by subtracting the cumulative probability up to \\( Z = 0 \\) from that up to \\( Z = 0.16 \\):
 
 \\[P(0 < Z < 0.16) = P(Z < 0.16) - P(Z < 0) \\]
 
@@ -79,16 +79,16 @@ Substituting the corresponding values gives
 
 \\[P(0 < Z < 0.16) = 0.5636 - 0.5 = 0.0636 \\]
 
-Finally, due to the symmetry of the normal distribution about its mean, the probability that \\( Z \\) lies within the [interval](<../intervals/>) \\( -0.16 < Z < 0.16 \\) is twice the probability of being between \\(0\\) and \\(0.16\\):
+Finally, due to the symmetry of the normal distribution about its mean, the probability that \\( Z \\) lies within the [interval](<../intervals/>) \\( -0.16 < Z < 0.16 \\) is twice the probability of being between 0 and 0.16:
 
 \\[P(-0.16 < Z < 0.16) = 2 \times P(0 < Z < 0.16) = 0.1272 \\]
 
 ## Example 2
 
-Suppose that the average lifetime of a rechargeable battery is \\( \mu = 8.0 \\) hours, with a standard deviation of \\( \sigma = 1.2 \\) hours, and that battery life follows a normal distribution. We want to calculate the probability that a randomly selected battery lasts less than \\( 6.5 \\) hours.
+Suppose that the average lifetime of a rechargeable battery is \\( \mu = 8.0 \\) hours, with a standard deviation of \\( \sigma = 1.2 \\) hours, and that battery life follows a normal distribution. We want to calculate the probability that a randomly selected battery lasts less than 6.5 hours.
 
 
-To find the probability \\( P(X < 6.5) \\), we need to determine the area under the normal curve to the left of \\( 6.5 \\). For this purpose, we apply the standardization formula:
+To find the probability \\( P(X < 6.5) \\), we need to determine the area under the normal curve to the left of 6.5. For this purpose, we apply the standardization formula:
 
 \\[z = \frac{x - \mu}{\sigma} \\]
 
@@ -106,7 +106,7 @@ z| .00| .01| .02| .03| .04| **.05**| .06| .07| .08| …
 …| …| …| …| …| …| …| …| …| …| …  
   
 
-From the intersection of the selected row and column, we obtain a probability value equal to \\( 0.1056 \\). The figure below illustrates where this probability is located under the standard normal curve, corresponding to the cumulative area to the left of \\( z = -1.25 \\).
+From the intersection of the selected row and column, we obtain a probability value equal to 0.1056. The figure below illustrates where this probability is located under the standard normal curve, corresponding to the cumulative area to the left of \\( z = -1.25 \\).
 
 ![](/diagrams/algebrica/normal-distribution-standard-4.png)
 

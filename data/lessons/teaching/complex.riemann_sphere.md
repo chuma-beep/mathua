@@ -12,4 +12,4 @@ Meromorphic functions on $\hat{\mathbb C}$ are exactly rational functions; behav
 
 ## Example
 
-$1/z$ has pole at $0$ and zero at $\infty$ on the sphere; the map $z\mapsto1/z$ is rotation of $S^{2}$ swapping north and south poles.
+$1/z$ has pole at 0 and zero at $\infty$ on the sphere; the map $z\mapsto1/z$ is rotation of $S^{2}$ swapping north and south poles.

@@ -84,7 +84,7 @@ We are dealing with a standard example in which the task is to determine a confi
 
 \\[z_{0.025} = 1.96 \\]
 
-###### The value \\(1.96\\)is obtained from the [standard normal Z Table](<../standard-normal-z-table/>).
+###### The value 1.96 is obtained from the [standard normal Z Table](<../standard-normal-z-table/>).
 
 
 To construct the interval, we first compute the standard error of the sample mean, which measures how much \\( \bar{X} \\) is expected to vary from sample to sample. Using the known population standard deviation, we obtain: \\[\frac{\sigma}{\sqrt{n}} = \frac{1.5}{\sqrt{25}} = \frac{1.5}{5} = 0.30 \\]

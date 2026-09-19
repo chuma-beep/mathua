@@ -5,7 +5,7 @@
 ## Angle Preservation
 
 ### Nonzero Derivative
-$w=z^2$ doubles angles at $0$ where $f'=0$, not conformal there; elsewhere conformal.
+$w=z^2$ doubles angles at 0 where $f'=0$, not conformal there; elsewhere conformal.
 
 ### Riemann Mapping
 Simply connected domain conformally maps to unit disk; orientation preserved via positive Jacobian $|\!f'|^2$.

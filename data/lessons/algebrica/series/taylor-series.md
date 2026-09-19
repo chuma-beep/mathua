@@ -125,7 +125,7 @@ Evaluating at the origin yields \\(f^{(n)}(0) = (-1)^{n-1} (n-1)!\\). The corres
 
 \\[\ln(1+x) = \sum_{n=1}^{\infty} (-1)^{n-1} \frac{x^n}{n} = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots \\]
 
-The ratio test shows that the radius of convergence is exactly equal to \\(1\\), and a more delicate analysis at the boundary establishes convergence at \\(x = 1\\), with the celebrated identity:
+The ratio test shows that the radius of convergence is exactly equal to 1, and a more delicate analysis at the boundary establishes convergence at \\(x = 1\\), with the celebrated identity:
 
 \\[\ln 2 = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots\\]
 
@@ -151,7 +151,7 @@ To appreciate the practical strength of the method we compute an approximation o
 
 \\[10^{\circ} = \frac{\pi}{180} \cdot 10 = \frac{\pi}{18} \\]
 
-The value \\(\pi/18\\) is approximately \\(0.1745\\), which is small enough to expect rapid convergence of the Maclaurin series. Truncating after the cubic term we obtain:
+The value \\(\pi/18\\) is approximately 0.1745, which is small enough to expect rapid convergence of the Maclaurin series. Truncating after the cubic term we obtain:
 
 \\[\sin!\left(\tfrac{\pi}{18}\right) \approx \frac{\pi}{18} - \frac{1}{3!} \left(\frac{\pi}{18}\right)^3 \\]
 
@@ -188,7 +188,7 @@ Yet the function itself takes strictly positive values for every \\(x \neq 0\\).
 
 The range of applications of Taylor series extends far beyond the numerical evaluation of functions. Three classes of problems deserve to be mentioned at least briefly.
 
-The first concerns the computation of [limits of indeterminate form](<../indeterminate-forms/>). Replacing each factor of an expression by a Taylor polynomial of suitable order often reveals the dominant behaviour and resolves indeterminacies of type \\(0/0\\) without recourse to repeated applications of de l’Hôpital’s rule. For instance, the well-known limit \\(\lim_{x \to 0} (\sin x)/x = 1\\) follows immediately from the Maclaurin series of the sine, since \\((\sin x)/x = 1 - x^2/6 + O(x^4)\\) tends to \\(1\\) as \\(x \to 0\\).
+The first concerns the computation of [limits of indeterminate form](<../indeterminate-forms/>). Replacing each factor of an expression by a Taylor polynomial of suitable order often reveals the dominant behaviour and resolves indeterminacies of type \\(0/0\\) without recourse to repeated applications of de l’Hôpital’s rule. For instance, the well-known limit \\(\lim_{x \to 0} (\sin x)/x = 1\\) follows immediately from the Maclaurin series of the sine, since \\((\sin x)/x = 1 - x^2/6 + O(x^4)\\) tends to 1 as \\(x \to 0\\).
 
 The second class concerns the integration of functions whose antiderivatives cannot be expressed in elementary terms. The following [integrals](<../integrals/>) have no representation in closed form:
 

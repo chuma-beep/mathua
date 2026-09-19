@@ -14,4 +14,4 @@ Counting via Möbius: $\pi(n)=\sum_{d}\mu(d)\lfloor n/d\rfloor$-like sums; Brun 
 
 ## Example
 
-$n=30$: primes $2,3,5$ mark multiples; survivors $\{2,3,5,7,11,13,17,19,23,29\}$.
+$n=30$: primes 2,3,5 mark multiples; survivors $\{2,3,5,7,11,13,17,19,23,29\}$.

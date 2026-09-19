@@ -27,11 +27,11 @@ Before you get started, take this readiness quiz.
 
 So far, we’ve added and subtracted proper and improper fractions, but not mixed numbers. Let’s begin by thinking about addition of mixed numbers using money.
 
-If Ron has $1$ dollar and $1$ quarter, he has $1\frac{1}{4}$ dollars.
+If Ron has 1 dollar and 1 quarter, he has $1\frac{1}{4}$ dollars.
 
-If Don has $2$ dollars and $1$ quarter, he has $2\frac{1}{4}$ dollars.
+If Don has 2 dollars and 1 quarter, he has $2\frac{1}{4}$ dollars.
 
-What if Ron and Don put their money together? They would have $3$ dollars and $2$ quarters. They add the dollars and add the quarters. This makes $3\frac{2}{4}$ dollars. Because two quarters is half a dollar, they would have $3$ and a half dollars, or $3\frac{1}{2}$ dollars.
+What if Ron and Don put their money together? They would have 3 dollars and 2 quarters. They add the dollars and add the quarters. This makes $3\frac{2}{4}$ dollars. Because two quarters is half a dollar, they would have 3 and a half dollars, or $3\frac{1}{2}$ dollars.
 
 $$
 \begin{array}{l}
@@ -80,7 +80,7 @@ We will use fraction circles, whole circles for the whole numbers and $\frac{1}{
 | plus one whole and two $\frac{1}{3}$s        |     |     |
 | sum is three wholes and three $\frac{1}{3}$s |     |     |
 
-This is the same as $4$ wholes. So, $2\frac{1}{3} + 1\frac{2}{3} = 4.$
+This is the same as 4 wholes. So, $2\frac{1}{3} + 1\frac{2}{3} = 4.$
 
 ### Try It 4.161
 
@@ -108,7 +108,7 @@ We will use fraction circles, whole circles for the whole numbers and $\frac{1}{
 | plus two wholes and three $\frac{1}{5}\text{s}$.  |     |     |
 | sum is three wholes and six $\frac{1}{5}\text{s}$ |     |     |
 
-Adding the whole circles and fifth pieces, we got a sum of $3\frac{6}{5}.$ We can see that $\frac{6}{5}$ is equivalent to $1\frac{1}{5},$ so we add that to the $3$ to get $4\frac{1}{5}.$
+Adding the whole circles and fifth pieces, we got a sum of $3\frac{6}{5}.$ We can see that $\frac{6}{5}$ is equivalent to $1\frac{1}{5},$ so we add that to the 3 to get $4\frac{1}{5}.$
 
 ### Try It 4.163
 
@@ -317,7 +317,7 @@ Use a model to subtract: $2 - 1\frac{1}{3}.$
 
 Use a model to subtract: $2 - 1\frac{1}{4}.$
 
-What if you start with a mixed number and need to subtract a fraction? Think about this situation: You need to put three quarters in a parking meter, but you have only a $\text{\$1}$ bill and one quarter. What could you do? You could change the dollar bill into $4$ quarters. The value of $4$ quarters is the same as one dollar bill, but the $4$ quarters are more useful for the parking meter. Now, instead of having a $\text{\$1}$ bill and one quarter, you have $5$ quarters and can put $3$ quarters in the meter.
+What if you start with a mixed number and need to subtract a fraction? Think about this situation: You need to put three quarters in a parking meter, but you have only a $\text{\$1}$ bill and one quarter. What could you do? You could change the dollar bill into 4 quarters. The value of 4 quarters is the same as one dollar bill, but the 4 quarters are more useful for the parking meter. Now, instead of having a $\text{\$1}$ bill and one quarter, you have 5 quarters and can put 3 quarters in the meter.
 
 This models what happens when we subtract a fraction from a mixed number. We subtracted three quarters from one dollar and one quarter.
 
@@ -479,7 +479,7 @@ Add: $2\frac{1}{2} + 5\frac{2}{3}.$
 
 #### Solution
 
-Since the denominators are different, we rewrite the fractions as equivalent fractions with the LCD, $6.$ Then we will add and simplify.
+Since the denominators are different, we rewrite the fractions as equivalent fractions with the LCD, 6. Then we will add and simplify.
 
 We write the answer as a mixed number because we were given mixed numbers in the problem.
 
@@ -497,7 +497,7 @@ Subtract: $4\frac{3}{4} - 2\frac{7}{8}.$
 
 #### Solution
 
-Since the denominators of the fractions are different, we will rewrite them as equivalent fractions with the LCD $8.$ Once in that form, we will subtract. But we will need to borrow $1$ first.
+Since the denominators of the fractions are different, we will rewrite them as equivalent fractions with the LCD 8. Once in that form, we will subtract. But we will need to borrow 1 first.
 
 We were given mixed numbers, so we leave the answer as a mixed number.
 
@@ -515,7 +515,7 @@ Subtract: $3\frac{5}{11} - 4\frac{3}{4}.$
 
 #### Solution
 
-We can see the answer will be negative since we are subtracting $4$ from $3.$ Generally, when we know the answer will be negative it is easier to subtract with improper fractions rather than mixed numbers.
+We can see the answer will be negative since we are subtracting 4 from 3. Generally, when we know the answer will be negative it is easier to subtract with improper fractions rather than mixed numbers.
 
 <table class="unnumbered unstyled" data-id="eip-id1168466307254" data-label="" data-summary="." role="presentation">
 <colgroup>
@@ -823,7 +823,7 @@ $4\frac{3}{8} - 3\frac{2}{3}$
 
 493\.
 
-**Framing a picture** Tessa bought a picture frame for her son’s graduation picture. The picture is $8$ inches wide. The picture frame is $2\frac{5}{8}$ inches wide on each side. How wide will the framed picture be?
+**Framing a picture** Tessa bought a picture frame for her son’s graduation picture. The picture is 8 inches wide. The picture frame is $2\frac{5}{8}$ inches wide on each side. How wide will the framed picture be?
 
 #### Writing Exercises
 

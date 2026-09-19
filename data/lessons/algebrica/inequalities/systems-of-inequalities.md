@@ -34,7 +34,7 @@ We have, therefore, three intervals: \\(x > -2\\), \\(x \geq 3\\), \\(x<9\\). As
   
 The solution to the system is: \\[x \in [3, 9)\\]
 
-##### This interval includes \\( 3 \\) and excludes \\( 9 \\). For a more detailed discussion of the structure and interpretation of intervals, refer to the [dedicated entry](<../determining-the-domain-of-a-function/>).
+##### This interval includes 3 and excludes 9. For a more detailed discussion of the structure and interpretation of intervals, refer to the [dedicated entry](<../determining-the-domain-of-a-function/>).
 
 ## General strategy for solving systems of inequalities
 

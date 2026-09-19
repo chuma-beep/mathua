@@ -19,7 +19,7 @@ The more slices, the closer the shape gets to a true rectangle.
 
 **Example**
 
-Find the area of a circle with radius $5$ m. Give an exact answer and one rounded to the nearest tenth.
+Find the area of a circle with radius 5 m. Give an exact answer and one rounded to the nearest tenth.
 
 *Solution*
 
@@ -31,7 +31,7 @@ Rounded:
 
 **Example**
 
-A circle has diameter $12$ cm. Find its area.
+A circle has diameter 12 cm. Find its area.
 
 *Solution*
 

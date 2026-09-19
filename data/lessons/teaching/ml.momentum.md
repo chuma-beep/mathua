@@ -20,4 +20,4 @@ Each weight gets its own effective learning rate $\eta/\sqrt{v}$, so sparse or s
 
 ## Example
 
-Loss valley: gradient alternates $+5,-5$ across walls with $+0.3$ downhill. Plain SGD zigzags; momentum averages $\pm5$ to near zero on walls while $0.3$ accumulates, moving steadily downhill. Adam rescales walls further for faster descent.
+Loss valley: gradient alternates $+5,-5$ across walls with $+0.3$ downhill. Plain SGD zigzags; momentum averages $\pm5$ to near zero on walls while 0.3 accumulates, moving steadily downhill. Adam rescales walls further for faster descent.

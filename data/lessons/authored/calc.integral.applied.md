@@ -6,11 +6,11 @@ When a force \\(F(x)\\) acts along the \\(x\\)-axis from \\(x = a\\) to \\(x = b
 
 \\[W = \int_{a}^{b} F(x)\,dx\\]
 
-For a constant force this reduces to \\(W = F\cdot d\\). A spring with Hooke's-law force \\(F(x) = kx\\) stretched from \\(0\\) to \\(L\\) stores work \\(W = kL^{2}/2\\).
+For a constant force this reduces to \\(W = F\cdot d\\). A spring with Hooke's-law force \\(F(x) = kx\\) stretched from 0 to \\(L\\) stores work \\(W = kL^{2}/2\\).
 
 ### Example
 
-\\(F(x) = 2x\\) from \\(0\\) to \\(3\\): \\(W = \int_{0}^{3} 2x\,dx = 9\\) joules.
+\\(F(x) = 2x\\) from 0 to 3: \\(W = \int_{0}^{3} 2x\,dx = 9\\) joules.
 
 ## Center of mass
 

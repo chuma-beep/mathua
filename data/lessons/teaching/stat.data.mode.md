@@ -28,7 +28,7 @@ Find a pattern in each table, using only the table itself. What is the missing e
 
 *Patterns in 3 tables*
 
-Generally in a table with two columns of data, we can think of the table as *assigning* value on the right to each value on the left. The first table *assigns*"white" to "black", as its opposite. The second table *assigns*"Paris" to "France", as its capital city. The third table *assigns*$10$ to $5$, as its double.
+Generally in a table with two columns of data, we can think of the table as *assigning* value on the right to each value on the left. The first table *assigns*"white" to "black", as its opposite. The second table *assigns*"Paris" to "France", as its capital city. The third table *assigns*10 to 5, as its double.
 
 *Table with a mathematical pattern*
 
@@ -36,7 +36,7 @@ Only the third table in  the example  is a table of numbers. Let's examine that 
 
 *The data from the third table in&#x20;*
 
-With the data plotted, and the question being what should happen when $x$ is $5$, our eyes can converge to the point $(5,10)$ and we conclude the missing value will be $10$. Graphically, we didn't have to use the observation that the $y$-values were twice the $x$-values.
+With the data plotted, and the question being what should happen when $x$ is 5, our eyes can converge to the point $(5,10)$ and we conclude the missing value will be 10. Graphically, we didn't have to use the observation that the $y$-values were twice the $x$-values.
 
 For each of the following tables, find an equation that describes the pattern you see. Numerical pattern recognition may or may not come naturally for you and you may want to use a graph to help visually process the numbers. Either way, pattern recognition is an important mathematical skill that anyone can develop. The solutions for these exercises offer some hints about what patterns you might look for.
 
@@ -48,7 +48,7 @@ For each of the following tables, find an equation that describes the pattern yo
 
 ## Rate of Change
 
-For an hourly wage-earner, the amount of money they earn depends on how many hours they work. If a worker earns $$\$15$$ per hour, then $10$ hours of work corresponds to $$\$150$$ of pay. Working *one* additional hour will change $10$ hours to $11$ hours; and this will cause the $$\$150$$ in pay to rise by *fifteen* dollars to $$\$165$$ in pay. Any time we compare how one amount changes (dollars earned) as a consequence of another amount changing (hours worked), we are talking about a *rate of change*.
+For an hourly wage-earner, the amount of money they earn depends on how many hours they work. If a worker earns $$\$15$$ per hour, then 10 hours of work corresponds to $$\$150$$ of pay. Working *one* additional hour will change 10 hours to 11 hours; and this will cause the $$\$150$$ in pay to rise by *fifteen* dollars to $$\$165$$ in pay. Any time we compare how one amount changes (dollars earned) as a consequence of another amount changing (hours worked), we are talking about a *rate of change*.
 
 Given a table of two-variable data, between any two rows we can compute a *rate of change*.
 
@@ -64,13 +64,13 @@ $$
  19887 - 17458 = 2429 
 $$
 
-meaning that there were $2429$ more invasive cancer incidents in 2010 than in 2000. Since $10$ years passed (which you can calculate as $2010-2000$), the rate of change is $2429$ diagnoses per $10$ years, or
+meaning that there were 2429 more invasive cancer incidents in 2010 than in 2000. Since 10 years passed (which you can calculate as $2010-2000$), the rate of change is 2429 diagnoses per 10 years, or
 
 $$
  \frac{2429\,\text{diagnoses}}{10\,\text{year}}=242.9\,\frac{\text{diagnoses}}{\text{year}} 
 $$
 
-We read that last quantity as "$242.9$ diagnoses per year". This rate of change means that between the years $2000$ and $2010$, there were $242.9$ more diagnoses *each* year, on average. This is just an average over those ten years---it does not mean that the diagnoses grew by exactly this much each year.
+We read that last quantity as "242.9 diagnoses per year". This rate of change means that between the years 2000 and 2010, there were 242.9 more diagnoses *each* year, on average. This is just an average over those ten years---it does not mean that the diagnoses grew by exactly this much each year.
 
 **Exercise**
 
@@ -108,7 +108,7 @@ The rate of change between two data points is related to the steepness of the li
 2. If one rate of change between two data points equals another rate of change between two different data points, then the corresponding line segments will have the same steepness.
 3. We always measure rate of change from left to right. When a line segment between two data points slants up from left to right, the rate of change between those points will be positive. When a line segment between two data points slants down from left to right, the rate of change between those points will be negative.
 
-In the solution to  the exercise , the key observation was that the rate of change from one row to the next was constant: $3$ units of increase in $y$ for every $1$ unit of increase in $x$. Graphing this pattern in  the figure , we see that every line segment here has the same steepness, so the whole picture is a straight line.
+In the solution to  the exercise , the key observation was that the rate of change from one row to the next was constant: 3 units of increase in $y$ for every 1 unit of increase in $x$. Graphing this pattern in  the figure , we see that every line segment here has the same steepness, so the whole picture is a straight line.
 
 Whenever the rate of change is constant no matter which two $(x,y)$-pairs (or data pairs) are chosen from a data set, then you can conclude the graph will be a straight line *even without making the graph*. We call this kind of relationship a *linear* relationship. We'll study linear relationships in more detail throughout this chapter. Right  now in this section, we feel it is important to simply identify if data has a linear relationship or not.
 
@@ -130,7 +130,7 @@ $$
  \frac{(31-27.7)\,\text{pct. points}}{(2018-2005)\,\text{years}}=\frac{3.4\,\text{pct. points}}{13\,\text{years}}\approx0.2615\,\frac{\text{pct. points}}{\text{year}} 
 $$
 
-So we might say that *on average*, the rate of change expressed by this data is $0.2615$ percentage points per year.
+So we might say that *on average*, the rate of change expressed by this data is 0.2615 percentage points per year.
 
 ##
 

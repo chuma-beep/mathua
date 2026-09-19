@@ -135,4 +135,4 @@ At this point, the observed value of the chi-square statistic must be compared w
 
 \\[0.215 \le \chi^{2} \le 7.815 \\]
 
-Because the observed value \\(1.542\\) falls inside this range, the sample does not exhibit unusual variability relative to what would be expected if the true standard deviation were indeed 0.8 PSI. In other words, the dispersion observed in the four tested sensors is entirely compatible with the manufacturer’s claim.
+Because the observed value 1.542 falls inside this range, the sample does not exhibit unusual variability relative to what would be expected if the true standard deviation were indeed 0.8 PSI. In other words, the dispersion observed in the four tested sensors is entirely compatible with the manufacturer’s claim.

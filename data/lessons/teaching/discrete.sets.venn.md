@@ -126,13 +126,13 @@ Another way we could have written this set, using more strict set builder notati
 1. Meaningless. A set cannot be less than another set.ð
 
 ð
-1. True. \(3\) is one of the elements of the set \(C\text{.}\)ð
+1. True. 3 is one of the elements of the set \(C\text{.}\)ð
 
 ð
-1. Meaningless. \(3\) is not a set, so it cannot be a subset of another set.ð
+1. Meaningless. 3 is not a set, so it cannot be a subset of another set.ð
 
 ð
-1. True. \(3\) is the only element of the set \(\{3\}\text{,}\) and is an element of \(C\text{,}\) so every element in \(\{3\}\) is an element of \(C\text{.}\)ð
+1. True. 3 is the only element of the set \(\{3\}\text{,}\) and is an element of \(C\text{,}\) so every element in \(\{3\}\) is an element of \(C\text{.}\)ð
 
 ð
 #### Example 0.3.4.

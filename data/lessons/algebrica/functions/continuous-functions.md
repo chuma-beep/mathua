@@ -31,7 +31,7 @@ Let us consider the [polynomial function](<../polynomial-function/>):
 
 \\[f(x) = 3x + 1 \\]
 
-We are interested in verifying whether this function is continuous at the point \\( x_0 = 2 \\). To do so, we first compute the limit of the function as \\( x \\) approaches \\(2\\):
+We are interested in verifying whether this function is continuous at the point \\( x_0 = 2 \\). To do so, we first compute the limit of the function as \\( x \\) approaches 2:
 
 \\[\lim_{x \to 2} f(x) = \lim_{x \to 2} (3x + 1) = 3 \cdot 2 + 1 = 7 \\]
 
@@ -100,7 +100,7 @@ Let us look at an example of a simple function that is not continuous: the [sign
 At first glance, it may seem straightforward, but this function is not continuous at \\( x = 0 \\). To be continuous at a point, the limit from the left and the limit from the right must exist and be equal to the function’s value at that point. Let’s examine the limits:
 
   * As \\( x \to 0^- \\), the function approaches \\( -1. \\)
-  * As \\( x \to 0^+ \\), the function approaches \\( 1. \\)
+  * As \\( x \to 0^+ \\), the function approaches 1.
 
 
 So we have:

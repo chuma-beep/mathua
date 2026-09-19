@@ -67,13 +67,33 @@ BAD_PLUS_RE = re.compile(r"(?<!\\)\\\+")
 # Only equation/formula/integral references are \\tag pointers; "identity (1)"
 # is the identity ELEMENT written (correctly) as math — never rewrite those.
 EQREF_RE = re.compile(
-    r"(equation|formula|integral)\s+\\\\\((\d{1,2})\\\\\)",
+    r"(equation|formula|integral)[ \t]+\\\\\((\d{1,2})\\\\\)",
     re.IGNORECASE,
 )
 # Bare numerals set as inline math. Excludes coordinates `\(1, 2\)` (space),
 # signed `\(-5\)` (marker: stays math, renders fine) and anything with
-# operators — only pure digit/dot/comma runs.
-DOLLAR_NUMBER_RE = re.compile(r"(?<!\\)\\{1,2}\(\s*(\d[\d.,]*)\s*\\{1,2}\)")
+# operators — only pure digit/dot/comma runs. Whitespace is same-line only
+# (`[ \t]`): `\s` would match across lines and glue separate math spans
+# together (e.g. `...$\n3. $...` merged two list items).
+DOLLAR_NUMBER_RE = re.compile(r"(?<!\\)\\{1,2}\([ \t]*(\d[\d.,]*)[ \t]*\\{1,2}\)")
+# Same class in bare-dollar dialect (Levin/Hefferon extracts): `$13$ people`.
+# Single `\$5` prices (no closer) never match; `$$` display pairs are
+# excluded by the lookarounds.
+BARE_DOLLAR_NUMBER_RE = re.compile(r"(?<!\\)\$(?!\$)[ \t]*(\d[\d.,]*)[ \t]*(?<!\\)\$(?!\$)")
+
+
+def prose_segments(text: str):
+    """Split markdown into (is_prose, segment) honoring code spans.
+
+    Dollar/paren rewrites must never touch code samples (e.g. docs showing
+    LaTeX syntax). With unbalanced backticks, fall back to all-prose (no
+    worse than no guard at all).
+    """
+    parts = re.split(r"(`+)", text)
+    ticks = (len(parts) - 1) // 2
+    if ticks % 2 == 1:
+        return [(True, text)]
+    return [((i % 2 == 0), s) for i, s in enumerate(parts)]
 # A continuation line starts with a bare relation. Leading `-` is excluded:
 # `- \\frac...` may be a fresh (negated) expression, not a join.
 LEAD_REL_RE = re.compile(r"^(=|\\approx|\\equiv|\\simeq|\\cong|\\le|\\ge)\s+(.+)$")
@@ -160,8 +180,14 @@ def lint_text(rel: str, text: str):
     for m in EQREF_RE.finditer(text):
         add("eqref-math", text.count("\n", 0, m.start()) + 1, m.group(0).strip())
 
-    for m in DOLLAR_NUMBER_RE.finditer(text):
-        add("dollar-number", text.count("\n", 0, m.start()) + 1, m.group(0).strip())
+    # Bare numerals as math, outside code spans (see prose_segments).
+    offset = 0
+    for is_prose, seg in prose_segments(text):
+        if is_prose:
+            for rx in (DOLLAR_NUMBER_RE, BARE_DOLLAR_NUMBER_RE):
+                for m in rx.finditer(seg):
+                    add("dollar-number", text.count("\n", 0, offset + m.start()) + 1, m.group(0).strip())
+        offset += len(seg)
 
     return issues
 
@@ -216,11 +242,15 @@ def fix_text(text: str):
 
     # Bare numerals as inline math -> upright text numerals. Runs after the
     # eqref rewrite so `equation \(1\)` keeps its `(1)` reference form.
+    # Code spans are exempt (see prose_segments).
     def _dollarnum(m):
         counts["dollar-number"] += 1
         return m.group(1)
 
-    text = DOLLAR_NUMBER_RE.sub(_dollarnum, text)
+    text = "".join(
+        DOLLAR_NUMBER_RE.sub(_dollarnum, BARE_DOLLAR_NUMBER_RE.sub(_dollarnum, seg)) if is_prose else seg
+        for is_prose, seg in prose_segments(text)
+    )
 
     # Wrap bare-chain blocks in aligned.
     text = _fix_bare_chains(text, counts)

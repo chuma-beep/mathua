@@ -18,17 +18,17 @@ The zero monomial is the special case where \\(a = 0\\). It is considered a mono
 
 Examples of monomials include:
 
-- \\( 4 \\): a non-zero real constant (coefficient only, no variables).
-- \\( -2x \\): coefficient \\(-2\\) and variable \\(x\\) with exponent \\(1\\).
-- \\( 3x^2y \\): coefficient \\(3\\), variable \\(x\\) with exponent \\(2\\), variable \\(y\\) with exponent \\(1\\).
-- \\( 0 \\): the zero monomial.
+- 4: a non-zero real constant (coefficient only, no variables).
+- \\( -2x \\): coefficient \\(-2\\) and variable \\(x\\) with exponent 1.
+- \\( 3x^2y \\): coefficient 3, variable \\(x\\) with exponent 2, variable \\(y\\) with exponent 1.
+- 0: the zero monomial.
 
 A monomial in \\(k\\) variables can be viewed as an element of the polynomial ring \\(\mathbb{R}[x_1, \dots, x_k]\\), where it corresponds to a single term of the form \\(a \cdot x_1^{n_1} \cdots x_k^{n_k}\\).
 
 > A ring is an algebraic structure with two operations, addition and multiplication, that satisfy associativity, distributivity, and the existence of an additive identity and additive inverses.
 
 
-A polynomial is called homogeneous if all its terms have the same total degree. Since a monomial consists of a single term, every monomial is homogeneous by definition. The monomials of degree \\(d\\) in \\(k\\) variables form a basis for the \\(\mathbb{R}\\) vector space of homogeneous polynomials of degree \\(d\\). For example, \\(x^2, xy, y^2\\) form a basis for the space of homogeneous polynomials of degree \\(2\\) in two variables.
+A polynomial is called homogeneous if all its terms have the same total degree. Since a monomial consists of a single term, every monomial is homogeneous by definition. The monomials of degree \\(d\\) in \\(k\\) variables form a basis for the \\(\mathbb{R}\\) vector space of homogeneous polynomials of degree \\(d\\). For example, \\(x^2, xy, y^2\\) form a basis for the space of homogeneous polynomials of degree 2 in two variables.
 
 ## Why exponents in a monomial must be non-negative integers
 
@@ -44,14 +44,14 @@ The third case, \\(4/x = 4x^{-1}\\), is simply a negative exponent in disguise.
 
 ## Degree of a monomial
 
-The degree of a monomial is the sum of the exponents of all its variables. For the monomial \\( ab^2c^3 \\), the exponents are \\(1\\), \\(2\\), and \\(3\\), so its degree is:
+The degree of a monomial is the sum of the exponents of all its variables. For the monomial \\( ab^2c^3 \\), the exponents are 1, 2, and 3, so its degree is:
 
 \\[1 + 2 + 3 = 6\\]
 
-The degree of a non-zero constant is \\(0\\), since no variables are present. The zero monomial has no defined degree.
+The degree of a non-zero constant is 0, since no variables are present. The zero monomial has no defined degree.
 
 
-The partial degree of a monomial with respect to a given variable is the exponent of that variable. For the monomial \\(3x^2y^3\\), the partial degree in \\(x\\) is \\(2\\) and the partial degree in \\(y\\) is \\(3\\). The total degree is the sum of all partial degrees:
+The partial degree of a monomial with respect to a given variable is the exponent of that variable. For the monomial \\(3x^2y^3\\), the partial degree in \\(x\\) is 2 and the partial degree in \\(y\\) is 3. The total degree is the sum of all partial degrees:
 
 \\[2 + 3 = 5\\]
 
@@ -60,7 +60,7 @@ The total number of monomials of degree \\(d\\) in \\(k\\) variables can be dete
 
 \\[\binom{d+k-1}{k-1}\\]
 
-For instance, the monomials of degree \\(2\\) in \\(2\\) variables are \\(x^2\\), \\(xy\\), and \\(y^2\\). This corresponds to: \\[\binom{2+2-1}{2-1} = \binom{3}{1} = 3\\]
+For instance, the monomials of degree 2 in 2 variables are \\(x^2\\), \\(xy\\), and \\(y^2\\). This corresponds to: \\[\binom{2+2-1}{2-1} = \binom{3}{1} = 3\\]
 
 ## Similar, opposite and equal monomials
 
@@ -131,7 +131,7 @@ The same rule extends to monomials in multiple variables:
 
 \\[(2x^2y^3)^3 = 2^3 \cdot x^{2 \cdot 3} \cdot y^{3 \cdot 3} = 8x^6y^9\\]
 
-When \\(n = 0\\), any non-zero monomial raised to the zeroth power equals \\(1\\), since \\(a^0 = 1\\) and \\(x_i^{0} = 1\\) for all \\(i\\).
+When \\(n = 0\\), any non-zero monomial raised to the zeroth power equals 1, since \\(a^0 = 1\\) and \\(x_i^{0} = 1\\) for all \\(i\\).
 
 ## GCD and LCM of monomials
 

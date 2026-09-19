@@ -15,7 +15,7 @@ A rigorous construction models each integer as a class of ordered pairs of natur
 \\]
 
 The pair \\((a,b)\\) represents the net difference between \\(a\\) and \\(b\\):  
-- Pairs with equal components form the class corresponding to \\(0\\).
+- Pairs with equal components form the class corresponding to 0.
 - Pairs where the first component dominates form the positive integers.  
 - Pairs where the second dominates form the negative ones.
 
@@ -83,7 +83,7 @@ a + 0 = a \qquad a \cdot 1 = a
 
 ## Integers in base 10
 
-Integers are typically written using the decimal system, that is, base 10. Each digit in a number carries a positional weight determined by a corresponding power of ten. By combining these weighted digits, we can reconstruct the entire value of the integer. Consider for example the number \\(235.\\) Using the positional principle, we can express the number as a sum of powers of ten:
+Integers are typically written using the decimal system, that is, base 10. Each digit in a number carries a positional weight determined by a corresponding power of ten. By combining these weighted digits, we can reconstruct the entire value of the integer. Consider for example the number 235. Using the positional principle, we can express the number as a sum of powers of ten:
 \\[
 235 = 2 \times 10^{2} + 3 \times 10^{1} + 5 \times 10^{0}
 \\]
@@ -105,31 +105,31 @@ Adding these contributions together recovers the integer:
 
 ## The binary system
 
-Although integers are commonly written in base 10, other numeral systems are equally valid and sometimes more convenient. An especially important alternative is base 2, or the binary system, which uses only the digits \\(0\\) and \\(1\\). This representation is fundamental in computer science and digital electronics, where information is stored and processed using two-state devices. In base 2, each position corresponds to a power of two rather than a power of ten. Any integer can be rewritten in binary by expanding it as a sum of weighted powers of two. For example, consider the integer:
+Although integers are commonly written in base 10, other numeral systems are equally valid and sometimes more convenient. An especially important alternative is base 2, or the binary system, which uses only the digits 0 and 1. This representation is fundamental in computer science and digital electronics, where information is stored and processed using two-state devices. In base 2, each position corresponds to a power of two rather than a power of ten. Any integer can be rewritten in binary by expanding it as a sum of weighted powers of two. For example, consider the integer:
 \\[
 53
 \\]
-To convert it to binary, we repeatedly divide by \\(2\\) and record the remainders. Reading the remainders from bottom to top yields the binary expansion.
+To convert it to binary, we repeatedly divide by 2 and record the remainders. Reading the remainders from bottom to top yields the binary expansion.
 
 | Division by 2 | Quotient | Remainder |
 |--------------:|:--------:|:---------:|
-| \\(53 \div 2\\) | \\(26\\)       | \\(1\\)         |
-| \\(26 \div 2\\) | \\(13\\)       | \\(0\\)         |
-| \\(13 \div 2\\) | \\(6\\)        | \\(1\\)         |
-| \\(6 \div 2\\)  | \\(3\\)        | \\(0\\)         |
-| \\(3 \div 2\\)  | \\(1\\)        | \\(1\\)         |
-| \\(1 \div 2\\)  | \\(0\\)        | \\(1\\)         |
+| \\(53 \div 2\\) | 26       | 1         |
+| \\(26 \div 2\\) | 13       | 0         |
+| \\(13 \div 2\\) | 6        | 1         |
+| \\(6 \div 2\\)  | 3        | 0         |
+| \\(3 \div 2\\)  | 1        | 1         |
+| \\(1 \div 2\\)  | 0        | 1         |
 
 Reading the remainders upward gives the binary representation \\(53 = 110101.\\) We can check the conversion by expanding the binary digits in powers of two:
 
 | Binary digit | Power of two      | Contribution              |
 |--------------|-------------------|---------------------------|
-| \\(1\\)            | \\(2^{5}\\)         | \\(1 \times 2^{5} = 32\\)   |
-| \\(1\\)            | \\(2^{4}\\)         | \\(1 \times 2^{4} = 16\\)   |
-| \\(0\\)            | \\(2^{3}\\)         | \\(0 \times 2^{3} = 0\\)    |
-| \\(1\\)            | \\(2^{2}\\)         | \\(1 \times 2^{2} = 4\\)    |
-| \\(0\\)            | \\(2^{1}\\)         | \\(0 \times 2^{1} = 0\\)    |
-| \\(1\\)            | \\(2^{0}\\)         | \\(1 \times 2^{0} = 1\\)    |
+| 1            | \\(2^{5}\\)         | \\(1 \times 2^{5} = 32\\)   |
+| 1            | \\(2^{4}\\)         | \\(1 \times 2^{4} = 16\\)   |
+| 0            | \\(2^{3}\\)         | \\(0 \times 2^{3} = 0\\)    |
+| 1            | \\(2^{2}\\)         | \\(1 \times 2^{2} = 4\\)    |
+| 0            | \\(2^{1}\\)         | \\(0 \times 2^{1} = 0\\)    |
+| 1            | \\(2^{0}\\)         | \\(1 \times 2^{0} = 1\\)    |
 
 
 The sum of the contributions confirms the conversion:
@@ -139,15 +139,15 @@ The sum of the contributions confirms the conversion:
 
 ## The modulo operator
 
-Modular arithmetic describes how integers behave when we are interested only in their remainders after division by a fixed integer \\(n\\). Within \\(\mathbb{Z}\\), two integers are said to be equivalent modulo \\(n\\) when they differ by a multiple of \\(n\\). For example, in arithmetic modulo \\(12\\), the integers \\(14\\) and \\(2\\) represent the same residue class because \\(14 - 2 = 12\\). Addition and multiplication are carried out as usual, but the final result is replaced by its remainder upon division by \\(n\\). For example:
+Modular arithmetic describes how integers behave when we are interested only in their remainders after division by a fixed integer \\(n\\). Within \\(\mathbb{Z}\\), two integers are said to be equivalent modulo \\(n\\) when they differ by a multiple of \\(n\\). For example, in arithmetic modulo 12, the integers 14 and 2 represent the same residue class because \\(14 - 2 = 12\\). Addition and multiplication are carried out as usual, but the final result is replaced by its remainder upon division by \\(n\\). For example:
 
 \\[7 + 9 \equiv 4 \pmod{12}\\]
 \\[ 5 \times 7 \equiv 11 \pmod{12}\\]
 
-> In the case of \\(5 \times 7\\), the product is \\(35 = 24 + 11\\); since \\(24\\) is a multiple of \\(12\\), the value of the product modulo \\(12\\) is the remainder \\(11\\).
+> In the case of \\(5 \times 7\\), the product is \\(35 = 24 + 11\\); since 24 is a multiple of 12, the value of the product modulo 12 is the remainder 11.
 
 
-This kind of arithmetic is widely used beyond pure mathematics. In computer science, the modulo operator is essential for extracting remainders, generating cyclic patterns, and keeping values within a bounded range. A familiar example involves the months of the year: adding \\(n\\) months is naturally handled modulo \\(12\\), since month counts wrap around after December.
+This kind of arithmetic is widely used beyond pure mathematics. In computer science, the modulo operator is essential for extracting remainders, generating cyclic patterns, and keeping values within a bounded range. A familiar example involves the months of the year: adding \\(n\\) months is naturally handled modulo 12, since month counts wrap around after December.
 
 In many programming languages, including Java, the modulo operator is written as `%`. The following example computes the month occurring three months after October:
 
@@ -172,4 +172,4 @@ Thus, \\( p(n) \\) is true for every \\( n \in \mathbb{N}.\\) A concrete illustr
 
 \\[ \frac{n(n+1)}{2} \\]
 
-The base case \\( n = 1 \\) is immediate: both sides equal \\( 1 \\). For the inductive step, assuming the identity holds for some \\( n \\), one adds \\( n+1 \\) to both sides and verifies that the result matches the formula evaluated at \\( n+1 \\). Since the natural numbers embed into \\( \mathbb{Z} \\) as the non-negative integers, this identity holds in \\(\mathbb{Z}\\) as well, and the same method extends to any statement about \\(\mathbb{Z}\\) that can be reduced to a property of \\(\mathbb{N}\\) through the construction of the integers from ordered pairs of naturals.
+The base case \\( n = 1 \\) is immediate: both sides equal 1. For the inductive step, assuming the identity holds for some \\( n \\), one adds \\( n+1 \\) to both sides and verifies that the result matches the formula evaluated at \\( n+1 \\). Since the natural numbers embed into \\( \mathbb{Z} \\) as the non-negative integers, this identity holds in \\(\mathbb{Z}\\) as well, and the same method extends to any statement about \\(\mathbb{Z}\\) that can be reduced to a property of \\(\mathbb{N}\\) through the construction of the integers from ordered pairs of naturals.

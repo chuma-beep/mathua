@@ -99,9 +99,9 @@ Rearranging gives \\( |z_1| - |z_2| \leq |z_1 - z_2| \\). Exchanging the roles o
 Equality holds, as in the direct triangle inequality, when \\( z_1 \\) and \\( z_2 \\) lie on the same ray from the origin.
 
 
-The reverse triangle inequality has an important analytic consequence. Viewed as a map \\( |\\,\cdot\\,| : \mathbb{C} \to \mathbb{R} \\), the modulus is a Lipschitz function with constant \\( 1 \\). The inequality says exactly that the change in modulus is no larger than the distance between the two points. As a consequence, the modulus is uniformly continuous on \\( \mathbb{C} \\), a property routinely invoked in the analysis of sequences, series, and limits of complex-valued expressions.
+The reverse triangle inequality has an important analytic consequence. Viewed as a map \\( |\\,\cdot\\,| : \mathbb{C} \to \mathbb{R} \\), the modulus is a Lipschitz function with constant 1. The inequality says exactly that the change in modulus is no larger than the distance between the two points. As a consequence, the modulus is uniformly continuous on \\( \mathbb{C} \\), a property routinely invoked in the analysis of sequences, series, and limits of complex-valued expressions.
 
-> Lipschitz continuity with constant \\( 1 \\) is a strong form of uniform continuity. It guarantees that arbitrarily small variations of \\( z \\) produce variations of \\( |z| \\) that are no larger in magnitude than the variation of \\( z \\) itself.
+> Lipschitz continuity with constant 1 is a strong form of uniform continuity. It guarantees that arbitrarily small variations of \\( z \\) produce variations of \\( |z| \\) that are no larger in magnitude than the variation of \\( z \\) itself.
 
 ## Generalized triangle inequality
 
@@ -176,7 +176,7 @@ The role of Cauchy-Schwarz extends well beyond the present setting. In the theor
 
 ## Examples and applications
 
-A first illustration concerns the use of the elementary component inequalities. Suppose \\( z = a + bi \\) satisfies \\( |z| \leq 5 \\). The estimate \\( |a| \leq |z| \\) gives \\( -5 \leq a \leq 5 \\), and the corresponding bound for \\( b \\) shows that the point \\( z \\) is contained in the square of side \\( 10 \\) centred at the origin. Conversely, if \\( |a| \leq 3 \\) and \\( |b| \leq 4 \\), the inequality \\( |z| \leq |a| + |b| \\) gives the loose bound \\( |z| \leq 7 \\). The sharper estimate \\( |z| \leq \sqrt{9 + 16} = 5 \\) requires the full Pythagorean computation but produces a tighter result.
+A first illustration concerns the use of the elementary component inequalities. Suppose \\( z = a + bi \\) satisfies \\( |z| \leq 5 \\). The estimate \\( |a| \leq |z| \\) gives \\( -5 \leq a \leq 5 \\), and the corresponding bound for \\( b \\) shows that the point \\( z \\) is contained in the square of side 10 centred at the origin. Conversely, if \\( |a| \leq 3 \\) and \\( |b| \leq 4 \\), the inequality \\( |z| \leq |a| + |b| \\) gives the loose bound \\( |z| \leq 7 \\). The sharper estimate \\( |z| \leq \sqrt{9 + 16} = 5 \\) requires the full Pythagorean computation but produces a tighter result.
 
 
 A second application concerns the localisation of roots of polynomials. Consider a monic polynomial of degree \\( n \\):

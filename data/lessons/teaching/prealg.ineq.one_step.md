@@ -20,7 +20,7 @@ Divide on both sides by a *positive* number: if $2\lt4$, then $\divideunder{2}{2
 
 Solve the inequality $t+7\lt5$.
 
-There is not much difference between the steps to solve this inequality and the steps to solve the *equation*$t+7=5$. We can subtract $7$ from each side.
+There is not much difference between the steps to solve this inequality and the steps to solve the *equation*$t+7=5$. We can subtract 7 from each side.
 
 $$
 \begin{aligned}t+7&\lt5 \\ t+7\subtractright{7}&\lt5\subtractright{7} \\ t&\lt-2\end{aligned}
@@ -38,13 +38,13 @@ As with equations, we should check solutions to catch human mistakes. Since ther
 
 According to our solution, all values of $t$ for which $t\lt-2$ are solutions and all values of $t$ for which $t\geq2$ are not solutions. So an approach we can use is to check if one number less than $-2$ (any number, your choice) satisfies the inequality. And *also* that $-2$ itself does *not* satisfy the inequality. And *also* that one number greater than $-2$ (any number, your choice) does *not* satisfy the inequality.
 
-Here we will test $-3$, $-2$, and $0$ in the original inequality.
+Here we will test $-3$, $-2$, and 0 in the original inequality.
 
 $$
 \begin{aligned}&& t+7&\lt5&& \\ \substitute{-3}+7&\wonder{\lt}5& \substitute{-2}+7&\wonder{\lt}5& \substitute{0}+7&\wonder{\lt}5 \\ 4&\confirm{\lt}5& 5&\reject{\lt}5& 7&\reject{\lt}5\end{aligned}
 $$
 
-It worked! The number $-3$ is a solution, and both $-2$ and $0$ are *not*. This is what we expected. This is evidence that our solution set is correct, and we can feel more secure that we did not make a human mistake when we were solving. While it takes time and space to make three checks, it's worth it.
+It worked! The number $-3$ is a solution, and both $-2$ and 0 are *not*. This is what we expected. This is evidence that our solution set is correct, and we can feel more secure that we did not make a human mistake when we were solving. While it takes time and space to make three checks, it's worth it.
 
 **Exercise**
 
@@ -52,7 +52,7 @@ It worked! The number $-3$ is a solution, and both $-2$ and $0$ are *not*. This 
 
 ## Negation
 
-Something interesting happens when we multiply or divide by a *negative* number on each side of an inequality: the direction reverses! To understand why, consider  the figure , where the numbers $2$ and $4$ are each multiplied by $-1$.
+Something interesting happens when we multiply or divide by a *negative* number on each side of an inequality: the direction reverses! To understand why, consider  the figure , where the numbers 2 and 4 are each multiplied by $-1$.
 
 *When two numbers are multiplied by a negative number, their relationship changes*
 

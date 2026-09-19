@@ -18,4 +18,4 @@ If $y=1$ but $\hat{y}\to0$, $\text{CE}\to\infty$, while MSE stays bounded. Confi
 
 ## Example
 
-True label $1$, prediction $0.8$: $\text{CE}=-\log 0.8\approx0.22$. If prediction $0.1$: $\text{CE}=-\log0.1\approx2.30$. Poor confidence on the correct class costs far more.
+True label 1, prediction 0.8: $\text{CE}=-\log 0.8\approx0.22$. If prediction 0.1: $\text{CE}=-\log0.1\approx2.30$. Poor confidence on the correct class costs far more.

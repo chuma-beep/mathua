@@ -1,6 +1,6 @@
 # BERT and Pretraining
 
-**BERT:** Bidirectional encoder, masked language modeling (MLM) + next sentence prediction (NSP) pretraining, then fine-tuned; base $12$ layers, large $24$; RoBERTa removes NSP.
+**BERT:** Bidirectional encoder, masked language modeling (MLM) + next sentence prediction (NSP) pretraining, then fine-tuned; base 12 layers, large 24; RoBERTa removes NSP.
 
 ## Pretraining
 

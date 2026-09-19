@@ -186,7 +186,7 @@ the left-hand side:
 2I = e^x\sin(x) - e^x\cos(x)
 \\]
 
-Dividing through by \\(2\\) and adding the constant of integration:
+Dividing through by 2 and adding the constant of integration:
 
 \\[
 I = \frac{e^x}{2}\bigl(\sin(x) - \cos(x)\bigr) + c

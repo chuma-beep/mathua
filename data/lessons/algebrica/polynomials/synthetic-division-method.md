@@ -35,7 +35,7 @@ r = \frac{p}{q}
 
 where \\(p\\) and \\(q\\) are coprime integers, \\(p\\) is a divisor of the constant term \\(a_0\\) and \\(q\\) is a divisor of the leading coefficient \\(a_n\\). Both positive and negative divisors are admitted, since the sign of \\(r\\) depends on the signs of \\(p\\) and \\(q\\). In this way it is possible to reduce the search for rational solutions to a finite list of possible candidates, obtained by combining the divisors of \\(a_0\\) with those of \\(a_n\\).
 
-> Two integers are coprime when their greatest common divisor is \\(1\\). It means they share no factor other than \\(1\\).
+> Two integers are coprime when their greatest common divisor is 1. It means they share no factor other than 1.
 
 
 ## Statement of the method
@@ -82,7 +82,7 @@ We want to identify its rational roots using the rational root theorem. Accordin
 r = \frac{p}{q}
 \\]
 
-where \\(p\\) divides the constant term \\(a_0 = -6\\) and \\(q\\) divides the leading coefficient \\(a_3 = 1\\). Since the only divisors of \\(1\\) are \\(\pm 1\\), the set of possible rational roots is:
+where \\(p\\) divides the constant term \\(a_0 = -6\\) and \\(q\\) divides the leading coefficient \\(a_3 = 1\\). Since the only divisors of 1 are \\(\pm 1\\), the set of possible rational roots is:
 
 \\[
 r \in \\{\, \pm 1,\ \pm 2,\ \pm 3,\ \pm 6 \,\\}
@@ -100,7 +100,7 @@ P(1) &= 1^3 - 6 \cdot 1^2 + 11 \cdot 1 - 6 \\\\[6pt]
 
 Since \\(P(1) = 0\\), we conclude that \\(x = 1\\) is a root of the polynomial, and we can therefore apply synthetic division to divide \\(P(x)\\) by \\((x - 1)\\).
 
-We begin by setting up the table. In the top row we insert the coefficients of \\(P(x)\\) in order of decreasing degree. If a coefficient of a certain degree were missing, we would write \\(0\\) in its place. To the left we place the value of the root, which is \\(1\\). The bottom row is initially empty and will be filled during the procedure.
+We begin by setting up the table. In the top row we insert the coefficients of \\(P(x)\\) in order of decreasing degree. If a coefficient of a certain degree were missing, we would write 0 in its place. To the left we place the value of the root, which is 1. The bottom row is initially empty and will be filled during the procedure.
 
 \\[
 \begin{array}{c|cccc}
@@ -200,13 +200,13 @@ The polynomial can therefore be written as:
 P(x) = (x - 1)(x^2 - 5x + 6)
 \\]
 
-The quadratic factor can be further decomposed by elementary techniques. The two numbers whose product is \\(6\\) and whose sum is \\(-5\\) are \\(-2\\) and \\(-3\\), so we can write:
+The quadratic factor can be further decomposed by elementary techniques. The two numbers whose product is 6 and whose sum is \\(-5\\) are \\(-2\\) and \\(-3\\), so we can write:
 
 \\[
 x^2 - 5x + 6 = (x - 2)(x - 3)
 \\]
 
-Substituting this factorization into the previous expression, the polynomial \\(P(x)\\) admits the complete factorization \\(P(x) = (x - 1)(x - 2)(x - 3)\\), and its three roots are \\(1\\), \\(2\\) and \\(3\\).
+Substituting this factorization into the previous expression, the polynomial \\(P(x)\\) admits the complete factorization \\(P(x) = (x - 1)(x - 2)(x - 3)\\), and its three roots are 1, 2 and 3.
 
 > If the remainder is not zero, the value tested is not a root of the polynomial. In that case, the procedure must be repeated with a different candidate from the list provided by the rational root theorem.
 

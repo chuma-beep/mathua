@@ -13,16 +13,16 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  Is $810$ divisible by $2,3,5,6,\text{or}\ 10?$  
+1.  Is 810 divisible by $2,3,5,6,\text{or}\ 10?$  
     If you missed this problem, review Example 2.44.
-2.  Is $127$ prime or composite?  
+2.  Is 127 prime or composite?  
     If you missed this problem, review Example 2.47.
 3.  Write $2 \cdot 2 \cdot 2 \cdot 2$ in exponential notation.  
     If you missed this problem, review Example 2.5.
 
 ### Find the Prime Factorization of a Composite Number
 
-In the previous section, we found the factors of a number. Prime numbers have only two factors, the number $1$ and the prime number itself. Composite numbers have more than two factors, and every composite number can be written as a unique product of primes. This is called the prime factorization of a number. When we write the prime factorization of a number, we are rewriting the number as a product of primes. Finding the prime factorization of a composite number will help you later in this course.
+In the previous section, we found the factors of a number. Prime numbers have only two factors, the number 1 and the prime number itself. Composite numbers have more than two factors, and every composite number can be written as a unique product of primes. This is called the prime factorization of a number. When we write the prime factorization of a number, we are rewriting the number as a product of primes. Finding the prime factorization of a composite number will help you later in this course.
 
 ### Prime Factorization
 
@@ -32,7 +32,7 @@ The prime factorization of a number is the product of prime numbers that equals 
 
 Doing the Manipulative Mathematics activity “Prime Numbers” will help you develop a better sense of prime numbers.
 
-You may want to refer to the following list of prime numbers less than $50$ as you work through this section.
+You may want to refer to the following list of prime numbers less than 50 as you work through this section.
 
 $$
 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47
@@ -46,11 +46,11 @@ If a factor is prime, we circle it (like a bud on a tree), and do not factor tha
 
 We continue until all the branches end with a prime. When the factor tree is complete, the circled primes give us the prime factorization.
 
-For example, let’s find the prime factorization of $36.$ We can start with any factor pair such as $3$ and $12.$ We write $3$ and $12$ below $36$ with branches connecting them.
+For example, let’s find the prime factorization of 36. We can start with any factor pair such as 3 and 12. We write 3 and 12 below 36 with branches connecting them.
 
-The factor $3$ is prime, so we circle it. The factor $12$ is composite, so we need to find its factors. Let’s use $3$ and $4.$ We write these factors on the tree under the $12.$
+The factor 3 is prime, so we circle it. The factor 12 is composite, so we need to find its factors. Let’s use 3 and 4. We write these factors on the tree under the 12.
 
-The factor $3$ is prime, so we circle it. The factor $4$ is composite, and it factors into $2 \cdot 2.$ We write these factors under the $4.$ Since $2$ is prime, we circle both $2\text{s}.$
+The factor 3 is prime, so we circle it. The factor 4 is composite, and it factors into $2 \cdot 2.$ We write these factors under the 4. Since 2 is prime, we circle both $2\text{s}.$
 
 The prime factorization is the product of the circled primes. We generally write the prime factorization in order from least to greatest.
 
@@ -68,7 +68,7 @@ $$
 \end{matrix}
 $$
 
-Note that we could have started our factor tree with any factor pair of $36.$ We chose $12$ and $3,$ but the same result would have been the same if we had started with $2$ and $18,4$ and $9,\text{or}\ 6\ \text{and}\ 6.$
+Note that we could have started our factor tree with any factor pair of 36. We chose 12 and 3, but the same result would have been the same if we had started with 2 and 18,4 and $9,\text{or}\ 6\ \text{and}\ 6.$
 
 ### How To
 
@@ -81,7 +81,7 @@ Note that we could have started our factor tree with any factor pair of $36.$ We
 
 ### Example 2.48
 
-Find the prime factorization of $48$ using the factor tree method.
+Find the prime factorization of 48 using the factor tree method.
 
 #### Solution
 
@@ -118,15 +118,15 @@ We factor 6, using 2 and 3.</p>
 </tbody>
 </table>
 
-Check this on your own by multiplying all the factors together. The result should be $48.$
+Check this on your own by multiplying all the factors together. The result should be 48.
 
 ### Try It 2.95
 
-Find the prime factorization using the factor tree method: $80$
+Find the prime factorization using the factor tree method: 80
 
 ### Try It 2.96
 
-Find the prime factorization using the factor tree method: $60$
+Find the prime factorization using the factor tree method: 60
 
 ### Example 2.49
 
@@ -157,27 +157,27 @@ $2<sup>2</sup> ⋅ 3 ⋅ 7$</td>
 </tbody>
 </table>
 
-Draw a factor tree of $84.$
+Draw a factor tree of 84.
 
 ### Try It 2.97
 
-Find the prime factorization using the factor tree method: $126$
+Find the prime factorization using the factor tree method: 126
 
 ### Try It 2.98
 
-Find the prime factorization using the factor tree method: $294$
+Find the prime factorization using the factor tree method: 294
 
 #### Prime Factorization Using the Ladder Method
 
 The ladder method is another way to find the prime factors of a composite number. It leads to the same result as the factor tree method. Some people prefer the ladder method to the factor tree method, and vice versa.
 
-To begin building the “ladder,” divide the given number by its smallest prime factor. For example, to start the ladder for $36,$ we divide $36$ by $2,$ the smallest prime factor of $36.$
+To begin building the “ladder,” divide the given number by its smallest prime factor. For example, to start the ladder for 36, we divide 36 by 2, the smallest prime factor of 36.
 
 To add a “step” to the ladder, we continue dividing by the same prime until it no longer divides evenly.
 
-Then we divide by the next prime; so we divide $9$ by $3.$
+Then we divide by the next prime; so we divide 9 by 3.
 
-We continue dividing up the ladder in this way until the quotient is prime. Since the quotient, $3,$ is prime, we stop here.
+We continue dividing up the ladder in this way until the quotient is prime. Since the quotient, 3, is prime, we stop here.
 
 Do you see why the ladder method is sometimes called stacked division?
 
@@ -205,7 +205,7 @@ Notice that the result is the same as we obtained with the factor tree method.
 
 ### Example 2.50
 
-Find the prime factorization of $120$ using the ladder method.
+Find the prime factorization of 120 using the ladder method.
 
 #### Solution
 
@@ -235,19 +235,19 @@ $2<sup>3</sup> ⋅ 3 ⋅ 5$</td>
 </tbody>
 </table>
 
-Check this yourself by multiplying the factors. The result should be $120.$
+Check this yourself by multiplying the factors. The result should be 120.
 
 ### Try It 2.99
 
-Find the prime factorization using the ladder method: $80$
+Find the prime factorization using the ladder method: 80
 
 ### Try It 2.100
 
-Find the prime factorization using the ladder method: $60$
+Find the prime factorization using the ladder method: 60
 
 ### Example 2.51
 
-Find the prime factorization of $48$ using the ladder method.
+Find the prime factorization of 48 using the ladder method.
 
 #### Solution
 
@@ -275,11 +275,11 @@ $2<sup>4</sup> ⋅ 3$</td>
 
 ### Try It 2.101
 
-Find the prime factorization using the ladder method. $126$
+Find the prime factorization using the ladder method. 126
 
 ### Try It 2.102
 
-Find the prime factorization using the ladder method. $294$
+Find the prime factorization using the ladder method. 294
 
 ### Find the Least Common Multiple (LCM) of Two Numbers
 
@@ -287,7 +287,7 @@ One of the reasons we look at multiples and primes is to use these techniques to
 
 #### Listing Multiples Method
 
-A common multiple of two numbers is a number that is a multiple of both numbers. Suppose we want to find common multiples of $10$ and $25.$ We can list the first several multiples of each number. Then we look for multiples that are common to both lists—these are the common multiples.
+A common multiple of two numbers is a number that is a multiple of both numbers. Suppose we want to find common multiples of 10 and 25. We can list the first several multiples of each number. Then we look for multiples that are common to both lists—these are the common multiples.
 
 $$
 \begin{array}{l}
@@ -296,9 +296,9 @@ $$
 \end{array}
 $$
 
-We see that $50$ and $100$ appear in both lists. They are common multiples of $10$ and $25.$ We would find more common multiples if we continued the list of multiples for each.
+We see that 50 and 100 appear in both lists. They are common multiples of 10 and 25. We would find more common multiples if we continued the list of multiples for each.
 
-The smallest number that is a multiple of two numbers is called the least common multiple (LCM). So the least LCM of $10$ and $25$ is $50.$
+The smallest number that is a multiple of two numbers is called the least common multiple (LCM). So the least LCM of 10 and 25 is 50.
 
 ### How To
 
@@ -311,20 +311,20 @@ The smallest number that is a multiple of two numbers is called the least common
 
 ### Example 2.52
 
-Find the LCM of $15$ and $20$ by listing multiples.
+Find the LCM of 15 and 20 by listing multiples.
 
 #### Solution
 
-List the first several multiples of $15$ and of $20.$ Identify the first common multiple.
+List the first several multiples of 15 and of 20. Identify the first common multiple.
 
 \$\begin{array}{l}
 {\text{15:}\ 15,30,45,\ 60,75,90,105,\text{120}} \\
 {\text{20:}\ 20,40,\ 60,80,100,120,140,160}
 \end{array}\$
 
-The smallest number to appear on both lists is $60,$ so $60$ is the least common multiple of $15$ and $20.$
+The smallest number to appear on both lists is 60, so 60 is the least common multiple of 15 and 20.
 
-Notice that $120$ is on both lists, too. It is a common multiple, but it is not the least common multiple.
+Notice that 120 is on both lists, too. It is a common multiple, but it is not the least common multiple.
 
 ### Try It 2.103
 
@@ -336,7 +336,7 @@ Find the least common multiple (LCM) of the given numbers: $18\ \text{and}\ 24$
 
 #### Prime Factors Method
 
-Another way to find the least common multiple of two numbers is to use their prime factors. We’ll use this method to find the LCM of $12$ and $18.$
+Another way to find the least common multiple of two numbers is to use their prime factors. We’ll use this method to find the LCM of 12 and 18.
 
 We start by finding the prime factorization of each number.
 
@@ -355,7 +355,7 @@ $$
 
 Now we bring down the primes in each column. The LCM is the product of these factors.
 
-Notice that the prime factors of $12$ and the prime factors of $18$ are included in the LCM. By matching up the common primes, each common prime factor is used only once. This ensures that $36$ is the least common multiple.
+Notice that the prime factors of 12 and the prime factors of 18 are included in the LCM. By matching up the common primes, each common prime factor is used only once. This ensures that 36 is the least common multiple.
 
 ### How To
 
@@ -368,7 +368,7 @@ Notice that the prime factors of $12$ and the prime factors of $18$ are included
 
 ### Example 2.53
 
-Find the LCM of $15$ and $18$ using the prime factors method.
+Find the LCM of 15 and 18 using the prime factors method.
 
 #### Solution
 
@@ -408,7 +408,7 @@ Find the LCM using the prime factors method. $15\ \text{and}\ 35$
 
 ### Example 2.54
 
-Find the LCM of $50$ and $100$ using the prime factors method.
+Find the LCM of 50 and 100 using the prime factors method.
 
 #### Solution
 
@@ -440,11 +440,11 @@ The LCM of 50 and 100 is 100.</td>
 
 ### Try It 2.107
 
-Find the LCM using the prime factors method: $55,88$
+Find the LCM using the prime factors method: 55,88
 
 ### Try It 2.108
 
-Find the LCM using the prime factors method: $60,72$
+Find the LCM using the prime factors method: 60,72
 
 ### Media
 
@@ -469,39 +469,39 @@ In the following exercises, find the prime factorization of each number using th
 
 267\.
 
-$86$
+86
 
 268\.
 
-$78$
+78
 
 269\.
 
-$132$
+132
 
 270\.
 
-$455$
+455
 
 271\.
 
-$693$
+693
 
 272\.
 
-$420$
+420
 
 273\.
 
-$115$
+115
 
 274\.
 
-$225$
+225
 
 275\.
 
-$2475$
+2475
 
 276\.
 
@@ -511,77 +511,77 @@ In the following exercises, find the prime factorization of each number using th
 
 277\.
 
-$56$
+56
 
 278\.
 
-$72$
+72
 
 279\.
 
-$168$
+168
 
 280\.
 
-$252$
+252
 
 281\.
 
-$391$
+391
 
 282\.
 
-$400$
+400
 
 283\.
 
-$432$
+432
 
 284\.
 
-$627$
+627
 
 285\.
 
-$2160$
+2160
 
 286\.
 
-$2520$
+2520
 
 In the following exercises, find the prime factorization of each number using any method.
 
 287\.
 
-$150$
+150
 
 288\.
 
-$180$
+180
 
 289\.
 
-$525$
+525
 
 290\.
 
-$444$
+444
 
 291\.
 
-$36$
+36
 
 292\.
 
-$50$
+50
 
 293\.
 
-$350$
+350
 
 294\.
 
-$144$
+144
 
 **Find the Least Common Multiple (LCM) of Two Numbers**
 
@@ -589,79 +589,79 @@ In the following exercises, find the least common multiple (LCM) by listing mult
 
 295\.
 
-$8,12$
+8,12
 
 296\.
 
-$4,3$
+4,3
 
 297\.
 
-$6,15$
+6,15
 
 298\.
 
-$12,16$
+12,16
 
 299\.
 
-$30,40$
+30,40
 
 300\.
 
-$20,30$
+20,30
 
 301\.
 
-$60,75$
+60,75
 
 302\.
 
-$44,55$
+44,55
 
 In the following exercises, find the least common multiple (LCM) by using the prime factors method.
 
 303\.
 
-$8,12$
+8,12
 
 304\.
 
-$12,16$
+12,16
 
 305\.
 
-$24,30$
+24,30
 
 306\.
 
-$28,40$
+28,40
 
 307\.
 
-$70,84$
+70,84
 
 308\.
 
-$84,90$
+84,90
 
 In the following exercises, find the least common multiple (LCM) using any method.
 
 309\.
 
-$6,21$
+6,21
 
 310\.
 
-$9,15$
+9,15
 
 311\.
 
-$24,30$
+24,30
 
 312\.
 
-$32,40$
+32,40
 
 #### Everyday Math
 
@@ -671,7 +671,7 @@ $32,40$
 
 314\.
 
-**Grocery shopping** Paper plates are sold in packages of $12$ and party cups come in packs of $8.$ What is the smallest number of plates and cups you can purchase if you want to have the same number of each? (Hint: it is the LCM!)
+**Grocery shopping** Paper plates are sold in packages of 12 and party cups come in packs of 8. What is the smallest number of plates and cups you can purchase if you want to have the same number of each? (Hint: it is the LCM!)
 
 #### Writing Exercises
 

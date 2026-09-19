@@ -22,11 +22,11 @@ The table below illustrates selected values of \\(a^n\\). Each row corresponds t
 
 |       | \\( a^{-2} \\) | \\( a^{-1} \\) | \\( a^{0} \\) | \\( a^{1} \\) | \\( a^{2} \\) | ... |
 |:-----:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:---:|
-| \\(-2\\) | \\( \dfrac{1}{4} \\) | \\( -\dfrac{1}{2} \\) | \\( 1 \\) | \\( -2 \\) | \\( 4 \\) | ... |
-| \\(-1\\) | \\( 1 \\) | \\( -1 \\) | \\( 1 \\) | \\( -1 \\) | \\( 1 \\) | ... |
-| \\(0\\)  | — | — | — | \\( 0 \\) | \\( 0 \\) | ... |
-| \\(1\\)  | \\( 1 \\) | \\( 1 \\) | \\( 1 \\) | \\( 1 \\) | \\( 1 \\) | ... |
-| \\(2\\)  | \\( \dfrac{1}{4} \\) | \\( \dfrac{1}{2} \\) | \\( 1 \\) | \\( 2 \\) | \\( 4 \\) | ... |
+| \\(-2\\) | \\( \dfrac{1}{4} \\) | \\( -\dfrac{1}{2} \\) | 1 | \\( -2 \\) | 4 | ... |
+| \\(-1\\) | 1 | \\( -1 \\) | 1 | \\( -1 \\) | 1 | ... |
+| 0  | — | — | — | 0 | 0 | ... |
+| 1  | 1 | 1 | 1 | 1 | 1 | ... |
+| 2  | \\( \dfrac{1}{4} \\) | \\( \dfrac{1}{2} \\) | 1 | 2 | 4 | ... |
 | ...     | ... | ... | ... | ... | ... | ... |
 
 > The symbol — indicates that the expression is undefined: negative exponents of zero involve division by zero, and \\(0^0\\) is an indeterminate form.
@@ -35,7 +35,7 @@ If the base \\( a \\) is negative, the sign of \\( a^n \\) alternates according 
 
 ## Powers with real exponents
 
-The definition \\( a^n \\) in \\(1\\) is valid only for positive integers \\( n \\), but the idea of repeated multiplication does not work when the exponent is not an integer. Extending this concept to real exponents necessitates a different approach, one based on the exponential function and the natural logarithm. For any positive base \\( a > 0 \\) and real exponent \\( x \in \mathbb{R} \\), the power \\( a^x \\) is defined as follows.
+The definition \\( a^n \\) in 1 is valid only for positive integers \\( n \\), but the idea of repeated multiplication does not work when the exponent is not an integer. Extending this concept to real exponents necessitates a different approach, one based on the exponential function and the natural logarithm. For any positive base \\( a > 0 \\) and real exponent \\( x \in \mathbb{R} \\), the power \\( a^x \\) is defined as follows.
 \\[a^x = e^{x \ln a}\\]
 When \\( x \\) is a positive integer, it yields repeated multiplication. For rational \\( x \\), it aligns with the radical interpretation. To verify this, let \\( x = \frac{p}{q} \\) with \\( p, q \in \mathbb{Z} \\) and \\( q \neq 0 \\). Applying the definition yields the following:
 
@@ -49,7 +49,7 @@ This value is well-defined and can be approximated to any specified degree of pr
 
 The following rules govern the manipulation of expressions involving powers. They hold for real bases and exponents under the conditions specified in each case.
 
-Raising any base not equal to zero to an exponent of zero always results in \\(1\\). The value of \\(a\\) is restricted because the operation \\(0^0\\) is meaningless and considered an indeterminate form.
+Raising any base not equal to zero to an exponent of zero always results in 1. The value of \\(a\\) is restricted because the operation \\(0^0\\) is meaningless and considered an indeterminate form.
 \\[a^0 = 1 \quad \text{if} \quad a \neq 0\\]
 
 
@@ -60,7 +60,7 @@ The condition \\( n > 0 \\) is necessary because \\( 0^0 \\) is an indeterminate
 \\[\lim_{x \to 0} x^0 = 1\\]
 The form \\( 0^0 \\) is therefore left undefined in the context of limits. More generally, the following expressions are indeterminate forms, meaning their value cannot be determined without further analysis of the specific limit: \\( 0^0 \\), \\( 1^{\infty} \\), and \\( \infty^0 \\).
 
-> In combinatorics and algebra, however, it is conventionally assigned the value \\( 1 \\), since it arises naturally in expressions such as the binomial theorem.
+> In combinatorics and algebra, however, it is conventionally assigned the value 1, since it arises naturally in expressions such as the binomial theorem.
 
 
 The product of two or more powers with the same base \\(a\\) is a power with the same base and exponent equal to the sum of the exponents:
@@ -121,7 +121,7 @@ When the exponent is a rational number of the form \\( \frac{m}{n} \\), the powe
 | Real exponent            |               \\[ a^x = e^{x \ln a} \\]                | \\[ a > 0,\ x \in \mathbb{R} \\] |
 ## Why is \\( a^0 = 1 \\)?
 
-Among the properties of exponents, the result \\(a^0 = 1\\) may initially seem counterintuitive, but this outcome follows directly from the quotient rule, which states that dividing any power by itself yields \\(1\\).
+Among the properties of exponents, the result \\(a^0 = 1\\) may initially seem counterintuitive, but this outcome follows directly from the quotient rule, which states that dividing any power by itself yields 1.
 \\[\frac{a^n}{a^n} = 1\\]
 Applying the quotient rule to the left-hand side gives the following.
 \\[\frac{a^n}{a^n} = a^{n-n} = a^0\\]

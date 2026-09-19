@@ -22,7 +22,7 @@ Expanding via Euler's formula, each root can be written in rectangular coordinat
 z_k = \cos\\!\left(\frac{2\pi k}{n}\right) + i\\,\sin\\!\left(\frac{2\pi k}{n}\right)
 \\]
 
-For \\(k = 0\\) one recovers \\(z_0 = 1\\), which is always a root regardless of \\(n\\). When \\(n = 2\\) the two roots are \\(1\\) and \\(-1\\). When \\(n = 4\\) the four roots are \\(1, i, -1, -i\\), which are familiar from the arithmetic of the Gaussian integers. For general \\(n\\), the roots come in conjugate pairs: since the arguments \\(2\pi k/n\\) and \\(2\pi(n-k)/n\\) sum to \\(2\pi\\), one has \\(z_{n-k} = \overline{z_k}\\).
+For \\(k = 0\\) one recovers \\(z_0 = 1\\), which is always a root regardless of \\(n\\). When \\(n = 2\\) the two roots are 1 and \\(-1\\). When \\(n = 4\\) the four roots are \\(1, i, -1, -i\\), which are familiar from the arithmetic of the Gaussian integers. For general \\(n\\), the roots come in conjugate pairs: since the arguments \\(2\pi k/n\\) and \\(2\pi(n-k)/n\\) sum to \\(2\pi\\), one has \\(z_{n-k} = \overline{z_k}\\).
 
 ## Group structure
 
@@ -44,7 +44,7 @@ In particular, \\(\mu_n\\) is abelian, and its subgroup structure mirrors that o
 
 ## Geometric interpretation
 
-In the complex plane, the \\(n\\)-th roots of unity are located at the vertices of a regular \\(n\\)-gon inscribed in the unit circle, with one vertex fixed at the point \\(1\\) on the real axis. The vertices are equally spaced, with an angular separation of \\(2\pi/n\\) radians between any two consecutive roots.
+In the complex plane, the \\(n\\)-th roots of unity are located at the vertices of a regular \\(n\\)-gon inscribed in the unit circle, with one vertex fixed at the point 1 on the real axis. The vertices are equally spaced, with an angular separation of \\(2\pi/n\\) radians between any two consecutive roots.
 
 This geometric regularity is a direct consequence of the uniform spacing of the arguments \\(2\pi k/n\\). As \\(k\\) increases by one unit, the corresponding point on the unit circle advances by a fixed angle. The cases \\(n = 3, 4, 6\\) are particularly natural, since the corresponding regular polygons tile the plane. For \\(n = 3\\), for example, one obtains an equilateral triangle, with vertices at:
 
@@ -93,7 +93,7 @@ Geometrically, this result states that the centroid of the vertices of a regular
 ## Product of the Roots
 
 The product of all \\(n\\)-th roots of unity is given by the following identity. Since the
-constant term of \\(z^n - 1\\) is \\(-1\\) and the leading coefficient is \\(1\\), comparing
+constant term of \\(z^n - 1\\) is \\(-1\\) and the leading coefficient is 1, comparing
 coefficients in the factorisation:
 
 \\[
@@ -106,7 +106,7 @@ yields:
 \prod_{k=0}^{n-1} z_k = (-1)^{n+1}
 \\]
 
-This result is a direct consequence of Vieta's formulas, which relate the coefficients of a polynomial to the elementary symmetric polynomials of its roots. For instance, when \\(n = 2\\) the roots are \\(1\\) and \\(-1\\), whose product is \\(-1 = (-1)^3\\), and when \\(n = 3\\) the roots are the three cube roots of unity, whose product is \\(1 = (-1)^4\\).
+This result is a direct consequence of Vieta's formulas, which relate the coefficients of a polynomial to the elementary symmetric polynomials of its roots. For instance, when \\(n = 2\\) the roots are 1 and \\(-1\\), whose product is \\(-1 = (-1)^3\\), and when \\(n = 3\\) the roots are the three cube roots of unity, whose product is \\(1 = (-1)^4\\).
 
 ## Cyclotomic polynomials
 

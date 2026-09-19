@@ -66,7 +66,7 @@ Consider the following inequality:
 
 \\[-\frac{x}{2} + 5 > 2x - 5\\]
 
-The goal is to reduce it to the standard form \\( ax > b \\). Since the left-hand side contains a fraction with denominator \\( 2 \\), multiplying both sides by \\( 2 \\) clears the denominator without altering the direction of the inequality, as the multiplier is positive.
+The goal is to reduce it to the standard form \\( ax > b \\). Since the left-hand side contains a fraction with denominator 2, multiplying both sides by 2 clears the denominator without altering the direction of the inequality, as the multiplier is positive.
 
 \\[-x + 10 > 4x - 10\\]
 
@@ -152,7 +152,7 @@ Substituting the second branch into the inequality and solving yields the follow
 
 \\[\begin{cases} x < 1 \\\\[6pt] -x + 1 < 2x + 4 \end{cases} \\]
 
-| \\( -1 \\)| \\( 1 \\)|   
+| \\( -1 \\)| 1|   
 ---|---|---|---  
 | | |   
 | | |   

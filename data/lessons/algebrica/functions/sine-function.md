@@ -2,7 +2,7 @@
 
 ## Sine function
 
-The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding [sine](<../sine-and-cosine>) value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between \\(-1\\) and \\(1\\). The function \\( f(x) = \cos x \\) has all real numbers in its [domain](<../determining-the-domain-of-a-function/>), but its range is \\( -1 \leq \cos(x) \leq 1 \\).
+The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed in radians, its corresponding [sine](<../sine-and-cosine>) value. Its graph is a periodic wave with a period of \\(2 \pi \\) and an amplitude of 1, oscillating between \\(-1\\) and 1. The function \\( f(x) = \cos x \\) has all real numbers in its [domain](<../determining-the-domain-of-a-function/>), but its range is \\( -1 \leq \cos(x) \leq 1 \\).
 
 ![](/diagrams/algebrica/sine-cosine-3-1.png)
 
@@ -16,7 +16,7 @@ The sine function \\(f(x) = \sin(x) \\) assigns to each angle \\(x\\), expressed
   * Parity: [odd](<../even-and-odd-functions/>), \\( \sin(-x) = -\sin(x)\\)
   * Roots: \\(x = \pi n, \quad n \in \mathbb{Z} \\)
   * [Integer](<../integers/>) root: \\(x=0\\)
-  * [Maximum and minimum points](<../maximum-minimum-and-inflection-points/>): \\( \sin(x) \\) reaches its maximum \\(1\\) at \\( x = \dfrac{\pi}{2} + 2k \pi \\) with \\( k \in \mathbb{Z} \\) and its minimum \\(-1\\) at \\( x = \dfrac{3\pi}{2} + 2k \pi \\) with \\( k \in \mathbb{Z} \\).
+  * [Maximum and minimum points](<../maximum-minimum-and-inflection-points/>): \\( \sin(x) \\) reaches its maximum 1 at \\( x = \dfrac{\pi}{2} + 2k \pi \\) with \\( k \in \mathbb{Z} \\) and its minimum \\(-1\\) at \\( x = \dfrac{3\pi}{2} + 2k \pi \\) with \\( k \in \mathbb{Z} \\).
 
 
 ## Limits, derivatives, and integrals of the cosine function

@@ -12,4 +12,4 @@ $p:\mathbb R→S^{1}$, $p(t)=e^{2π i t}$ is the universal cover of $S^{1}$; lif
 
 ## Example
 
-Loop around $S^{1}$ once: class $1\in\mathbb Z$; twice $2$, etc. Null-homotopic iff winding number $0$.
+Loop around $S^{1}$ once: class $1\in\mathbb Z$; twice 2, etc. Null-homotopic iff winding number 0.

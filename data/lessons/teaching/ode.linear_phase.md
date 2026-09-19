@@ -12,4 +12,4 @@ Pair $\alpha\pm i\beta$: spiral if $\alpha\neq0$ (stable if $\alpha<0$, unstable
 
 ## Example
 
-$A=\begin{pmatrix}2&0\\0&-3\end{pmatrix}$ has eigenvalues $2,-3$. Opposite signs → saddle. Trajectories approach along the $y$-axis (eigenvalue $-3$ direction) and depart along the $x$-axis (eigenvalue $2$ direction). The phase portrait shows hyperbolic curves hugging the axes.
+$A=\begin{pmatrix}2&0\\0&-3\end{pmatrix}$ has eigenvalues $2,-3$. Opposite signs → saddle. Trajectories approach along the $y$-axis (eigenvalue $-3$ direction) and depart along the $x$-axis (eigenvalue 2 direction). The phase portrait shows hyperbolic curves hugging the axes.

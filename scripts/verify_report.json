@@ -22320,7 +22320,7 @@
   "line": 36,
   "verdict": "SKIP",
   "reason": "equation to solve",
-  "latex": "0.5em]\\dfrac{1}{2^{n+1}}, \\dfrac{1}{2^{n+2}}, \\dots \\end{align}\\\\)\n\n\n![](/diagrams/algebrica/cauchy-sequence-1.png)\n\nIn the limit, this sequence converges to \\\\( 2 \\\\), reinforcing that it is both a Cauchy and convergent sequence.\n\n##### In general, a numerical sequence is called a [geometric progre"
+  "latex": "0.5em]\\dfrac{1}{2^{n+1}}, \\dfrac{1}{2^{n+2}}, \\dots \\end{align}\\\\)\n\n\n![](/diagrams/algebrica/cauchy-sequence-1.png)\n\nIn the limit, this sequence converges to 2, reinforcing that it is both a Cauchy and convergent sequence.\n\n##### In general, a numerical sequence is called a [geometric progression](<"
  },
  {
   "file": "data/lessons/algebrica/sequences/cauchy-sequence.md",
@@ -28354,14 +28354,14 @@
   "line": 89,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
-  "latex": "\\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using $2$ gallons of gas every $3$ hours.\n\n**Exercise**\n\n**Exercise**\n\n## Comparing Slopes\n\nIt's useful to understand when more than one line having different slopes appear on the same coordinat"
+  "latex": "\\text{gallon}/$. Since this slope is written as a fraction, another way to understand it is that Kiran is using 2 gallons of gas every 3 hours.\n\n**Exercise**\n\n**Exercise**\n\n## Comparing Slopes\n\nIt's useful to understand when more than one line having different slopes appear on the same coordinate sy"
  },
  {
   "file": "data/lessons/teaching/alg.linear.slope.md",
   "line": 163,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
-  "latex": "So the tree is growing at a rate of $4\\,\\text{ft}/$\n\nBut hold on. Did we really *need* this picture? The \"rise\" of $12$ came from a subtraction of two $y$-values: $27-15$. And the \"run\" of $3$ came from a subtraction of two $x$-values: $6-3$.\n\nHere is a picture-free approach. We know that after $3\\,"
+  "latex": "So the tree is growing at a rate of $4\\,\\text{ft}/$\n\nBut hold on. Did we really *need* this picture? The \"rise\" of 12 came from a subtraction of two $y$-values: $27-15$. And the \"run\" of 3 came from a subtraction of two $x$-values: $6-3$.\n\nHere is a picture-free approach. We know that after $3\\,\\tex"
  },
  {
   "file": "data/lessons/teaching/alg.linear.slope.md",

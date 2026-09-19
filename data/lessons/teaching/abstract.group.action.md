@@ -12,4 +12,4 @@ Bijection $G/\operatorname{Stab}(x)\cong \operatorname{Orb}(x)$ gives $|G|=|\ope
 
 ## Example
 
-$S_3$ acting on $\{1,2,3\}$: orbit of $1$ is $\{1,2,3\}$ (transitive), stabilizer of $1$ is $\{e,(2\,3)\}$ of order $2$, and $6=3\cdot2$.
+$S_3$ acting on $\{1,2,3\}$: orbit of 1 is $\{1,2,3\}$ (transitive), stabilizer of 1 is $\{e,(2\,3)\}$ of order 2, and $6=3\cdot2$.

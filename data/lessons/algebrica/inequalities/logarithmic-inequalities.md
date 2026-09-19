@@ -45,7 +45,7 @@ To explain the role played by the base of the logarithm, let us recall the behav
 
 ![Graph of the logarithmic function with base between zero and one.](/diagrams/algebrica/logharithm-5-1.png)
 
-##### The dashed curve represents the logarithmic function with base \\(a > 1\\). In this case, the function is strictly increasing. In both cases, when \\(x = 1\\), the value of the logarithmic function is \\(0\\), and the graphs intersect at the point \\((1,0)\\).
+##### The dashed curve represents the logarithmic function with base \\(a > 1\\). In this case, the function is strictly increasing. In both cases, when \\(x = 1\\), the value of the logarithmic function is 0, and the graphs intersect at the point \\((1,0)\\).
 
 ## Example 1
 
@@ -96,7 +96,7 @@ Using a graphical representation and considering the solution intervals of the l
 Therefore, the domain \\(D\\) of the original inequality is given by the following interval: \\[(-1, 2) \\]
 
 
-Next, we rewrite the logarithm with base \\(\tfrac{1}{2}\\) in terms of base \\(2\\). Since \\(\tfrac{1}{2} = 2^{-1}\\), we have \\[\log_{\frac{1}{2}}(x+1) = \frac{\log_2(x+1)}{\log_2(\frac{1}{2})} = -\log_2(x+1) \\]
+Next, we rewrite the logarithm with base \\(\tfrac{1}{2}\\) in terms of base 2. Since \\(\tfrac{1}{2} = 2^{-1}\\), we have \\[\log_{\frac{1}{2}}(x+1) = \frac{\log_2(x+1)}{\log_2(\frac{1}{2})} = -\log_2(x+1) \\]
 
 Substituting into the original inequality, we obtain:
 

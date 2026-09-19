@@ -4,7 +4,7 @@ Gradient descent is an optimization algorithm that minimizes a loss by moving pa
 
 ### Example
 
-With gradient $2$ and learning rate $0.1$, the update is $0.2$ in the negative direction.
+With gradient 2 and learning rate 0.1, the update is 0.2 in the negative direction.
 
 ## The learning rate
 
@@ -12,7 +12,7 @@ The learning rate controls step size. Too large diverges, too small is slow. It 
 
 ### Example
 
-Learning rate $0.01$ with gradient $2$ gives update $0.02$.
+Learning rate 0.01 with gradient 2 gives update 0.02.
 
 ## Stochastic and batch variants
 

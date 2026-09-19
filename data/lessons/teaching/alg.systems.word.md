@@ -16,7 +16,7 @@ Practice with translating these English phrases and sentences into math expressi
 
 ## Rate Models
 
-A *rate* is a measurement that tells us how much one quantity is changing with  respect to how some other quantity is changing. For example, the number of people on earth is growing by about $2.6$ people per second. Time is passing second by second, and as that change in time happens, we have a net gain of about $2.6$ people. The rate we are discussing is $2.6\,\frac{\text{people}}{\text{s}}$. Note that the unit on this rate is fractional---this is common with rates.
+A *rate* is a measurement that tells us how much one quantity is changing with  respect to how some other quantity is changing. For example, the number of people on earth is growing by about 2.6 people per second. Time is passing second by second, and as that change in time happens, we have a net gain of about 2.6 people. The rate we are discussing is $2.6\,\frac{\text{people}}{\text{s}}$. Note that the unit on this rate is fractional---this is common with rates.
 
 One common class of modeling applications involve rates like these. Let's examine a first example.
 
@@ -24,17 +24,17 @@ One common class of modeling applications involve rates like these. Let's examin
 
 Your savings account starts with $$\$500$$. Then each month, there is an automatic deposit of $$\$150$$. You need $$\$1700$$ to afford a deposit on a new apartment. Write an equation where the solution represents how much time this will take.
 
-Do you have an understanding of each of the numbers in this setting, and what they truly mean in context? The $500$ is a number that only matters *once* in the story of this bank account: it is how much money was there when we started making automatic deposits. The $1700$ also only matters *once*: at the end, we will have that much money.
+Do you have an understanding of each of the numbers in this setting, and what they truly mean in context? The 500 is a number that only matters *once* in the story of this bank account: it is how much money was there when we started making automatic deposits. The 1700 also only matters *once*: at the end, we will have that much money.
 
-But the $150$ is different. Month after month, the account balance goes up by $$\$150$$. This number is used repeatedly in the scenario. It might look like it's just a dollar amount, but it's actually a *rate*: it's $150\,\frac{\text{dollar}}{\text{month}}$.
+But the 150 is different. Month after month, the account balance goes up by $$\$150$$. This number is used repeatedly in the scenario. It might look like it's just a dollar amount, but it's actually a *rate*: it's $150\,\frac{\text{dollar}}{\text{month}}$.
 
 If you have any uncertainty about understanding a rate value, it can help to make a table. We know the account balance is changing month by month, so it makes sense to track the months and the account balance.
 
-In the first column, we go up by one month from one row to the next. In the second column, we go up by $$\$150$$ from one row to the next. If you are able to build a table like this, then you are dealing with a rate. In the second column, values increase by $150$ dollars. In the first column, values increase by $1$ month. The rate we are working with comes from dividing these: $\frac{150\,\text{dollars}}{1\,\text{month}}$, which is just $150\,\frac{\text{dollar}}{\text{month}}$.
+In the first column, we go up by one month from one row to the next. In the second column, we go up by $$\$150$$ from one row to the next. If you are able to build a table like this, then you are dealing with a rate. In the second column, values increase by 150 dollars. In the first column, values increase by 1 month. The rate we are working with comes from dividing these: $\frac{150\,\text{dollars}}{1\,\text{month}}$, which is just $150\,\frac{\text{dollar}}{\text{month}}$.
 
 Now that we've spent time making sure we understand the meaning of the numbers in this story, we can try to do what we were asked to do: write an equation where the solution represents how much time it will take to reach $$\$1700$$. It's kind of a big deal to *clearly identify what variable* we will use. Our task is to write an equation where the solution represents "how much time" and we are measuring time in months. So one perfectly fine choice we can make is to let $m$ be our variable, where $m$ stands for the number of months it will take to reach $$\$1700$$. (Another common choice would be to use $t$, since it stands for an amount of time.)
 
-What will the equation look like? For this example, let's return to the table we made earlier. Was there a pattern connecting the left column to the right column? For example in the left column there is a row where $3$ months have passed. At that time, we have $$\$950$$. How did that $$\$950$$ come about? Well, we started with $$\$500$$ and then added $$\$150$$ not once, not twice, but three times. As an equation:
+What will the equation look like? For this example, let's return to the table we made earlier. Was there a pattern connecting the left column to the right column? For example in the left column there is a row where 3 months have passed. At that time, we have $$\$950$$. How did that $$\$950$$ come about? Well, we started with $$\$500$$ and then added $$\$150$$ not once, not twice, but three times. As an equation:
 
 $$
  500+150(3)=950 
@@ -80,7 +80,7 @@ $$
 
 ## Percent Applications
 
-the section  reviews the fundamentals of working with percentages. Here we look at some scenarios where there is an equation to set up based on percentages. One important consideration is that when doing math with percentages, it's almost always best to rewrite each percentage as a decimal. For example, $18\%$ should be written as $0.18$ if you are going to use it to do algebra or arithmetic.
+the section  reviews the fundamentals of working with percentages. Here we look at some scenarios where there is an equation to set up based on percentages. One important consideration is that when doing math with percentages, it's almost always best to rewrite each percentage as a decimal. For example, $18\%$ should be written as 0.18 if you are going to use it to do algebra or arithmetic.
 
 **Example**
 
@@ -94,7 +94,7 @@ $$
  (\text{last year's salary})+(4\%\text{ of last year's salary}) = (\text{this year's salary}) 
 $$
 
-We represent "$4\%$ of last year's salary" with $0.04S$ since $0.04$ is the decimal equivalent to $4\%$. So out equation is:
+We represent "$4\%$ of last year's salary" with $0.04S$ since 0.04 is the decimal equivalent to $4\%$. So out equation is:
 
 $$
  S + 0.04S = 73290 

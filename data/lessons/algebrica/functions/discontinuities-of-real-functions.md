@@ -51,13 +51,13 @@ Consider the function defined by the following [rational](<../rational-functions
 
 \\[f(x) = \frac{x^2 - 1}{x - 1} \\]
 
-[Factoring](<../factoring-ac-method/>) the numerator demonstrates that the expression simplifies for all values of \\( x \\) except \\(1\\) since \\(x=1\\) would cancel the denominator and make the function undefined.
+[Factoring](<../factoring-ac-method/>) the numerator demonstrates that the expression simplifies for all values of \\( x \\) except 1 since \\(x=1\\) would cancel the denominator and make the function undefined.
 
 \\[x^2 - 1 = (x - 1)(x + 1) \\]
 
 For all \\( x \neq 1 \\), the function is equivalent to a linear function: \\[f(x) = x + 1 \\]
 
-Although the function is undefined at \\( x = 1 \\), the limit as \\( x \\) approaches \\(1\\) exists and is finite:
+Although the function is undefined at \\( x = 1 \\), the limit as \\( x \\) approaches 1 exists and is finite:
 
 \\[\lim_{x \to 1} \frac{x^2 - 1}{x - 1} = 2 \\]
 
@@ -83,13 +83,13 @@ To analyse the jump discontinuity, consider the following simple function, which
 
 ![](/diagrams/algebrica/discontinuity-2.png)
 
-For values of \\(x\\) approaching \\(1\\) from the left, the function remains constant at \\(0\\). Therefore:
+For values of \\(x\\) approaching 1 from the left, the function remains constant at 0. Therefore:
 
 \\[\lim_{x \to 1^-} f(x) = 0 \\]
 
-For values of \\( x \\) approaching 1 from the right, the function remains constantly equal to \\(2\\), and therefore the limit is: \\[\lim_{x \to 1^+} f(x) = 2 \\]
+For values of \\( x \\) approaching 1 from the right, the function remains constantly equal to 2, and therefore the limit is: \\[\lim_{x \to 1^+} f(x) = 2 \\]
 
-Both one-sided limits exist and are finite but they are not equal. Since \\( 0 \neq 2 \\), it follows that the two one-sided limits do not coincide, and consequently, the limit \\(\lim_{x \to 1} f(x)\\) does not exist. The graph of the function shows a vertical jump at \\(x = 1\\), transitioning from \\(0\\) to \\(2\\).
+Both one-sided limits exist and are finite but they are not equal. Since \\( 0 \neq 2 \\), it follows that the two one-sided limits do not coincide, and consequently, the limit \\(\lim_{x \to 1} f(x)\\) does not exist. The graph of the function shows a vertical jump at \\(x = 1\\), transitioning from 0 to 2.
 
 This discontinuity cannot be removed by redefining the function at \\(x = 1\\), as the difference between the two limiting values indicates a break in the local behaviour of the function.
 
@@ -141,7 +141,7 @@ A classic example is the following function, which exhibits an essential discont
 
 \\[f(x) = \sin\left(\frac{1}{x}\right) \\]
 
-As \\(x\\) approaches \\(0\\), the argument \\(1/x\\) grows without bound, causing the function to oscillate between \\(-1\\) and \\(1\\) with increasing frequency. Neither one-sided limit exists, and no value can be assigned to \\(f(0)\\) that would restore any form of continuity.
+As \\(x\\) approaches 0, the argument \\(1/x\\) grows without bound, causing the function to oscillate between \\(-1\\) and 1 with increasing frequency. Neither one-sided limit exists, and no value can be assigned to \\(f(0)\\) that would restore any form of continuity.
 
 ## Selected references
 

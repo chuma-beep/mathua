@@ -8,7 +8,7 @@ Mathematical induction is a fundamental principle used to rigorously prove state
   * \\( \forall \, x \in A\\) it follows that \\(x + 1 \in A \\).
 
 
-In other words, an inductive set contains the element \\( 0 \\) and is closed under the operation of adding \\( 1 \\).
+In other words, an inductive set contains the element 0 and is closed under the operation of adding 1.
 
 
 Let \\( A, B \subseteq \mathbb{R} \\) be two inductive sets. Then, their intersection \\( A \cap B \\) is also an inductive set. Since \\( A \\) and \\( B \\) are inductive, we have:
@@ -32,7 +32,7 @@ Thus, \\( p(n) \\) is true for every \\( n \in \mathbb{N}.\\)
 
 These two conditions correspond precisely to the structure of a proof by mathematical induction:
 
-  * The base case consists of verifying that \\( p(0) \\) holds, meaning that \\( 0 \\) belongs to \\( A \\).
+  * The base case consists of verifying that \\( p(0) \\) holds, meaning that 0 belongs to \\( A \\).
   * The inductive step consists of proving that, whenever \\( p(n) \\) is true for some \\( n \in \mathbb{N} \\), it follows that \\( p(n+1) \\) is also true, thereby ensuring that \\( n+1 \in A \\).
 
 
@@ -42,7 +42,7 @@ Let us see a practical application of the principle of mathematical induction by
 
 \\[\sum_{i=1}^{n} i = \frac{n(n+1)}{2} \quad \forall \, n \in \mathbb{N} \\]
 
-We first consider the base case. For \\( n = 0 \\), the left-hand side is an empty sum, which equals \\( 0 \\) by convention. The right-hand side gives:
+We first consider the base case. For \\( n = 0 \\), the left-hand side is an empty sum, which equals 0 by convention. The right-hand side gives:
 
 \\[\frac{0(0+1)}{2} = 0 \\]
 
@@ -67,9 +67,9 @@ It follows that the formula holds for every \\( n \in \mathbb{N} \\).
 
 ## Applications: divisibility
 
-We show that the expression \\( n^3 - n \\) is divisible by \\( 3 \\) for every \\( n \in \mathbb{N} \\). We start with the base case. For \\( n = 0 \\), we have \\( 0^3 - 0 = 0 \\), and \\( 3 \mid 0 \\) holds trivially since \\( 0 = 3 \cdot 0. \\)
+We show that the expression \\( n^3 - n \\) is divisible by 3 for every \\( n \in \mathbb{N} \\). We start with the base case. For \\( n = 0 \\), we have \\( 0^3 - 0 = 0 \\), and \\( 3 \mid 0 \\) holds trivially since \\( 0 = 3 \cdot 0. \\)
 
-We now turn to the inductive step. Assume that \\( 3 \mid k^3 - k \\) for some \\( k \in \mathbb{N} \\), that is, \\( k^3 - k = 3m \\) for some integer \\( m \\). Under this hypothesis, we want to show that divisibility by \\( 3 \\) carries over to the next term, meaning that \\( 3 \mid (k+1)^3 - (k+1) \\). Expanding the expression we obtain:
+We now turn to the inductive step. Assume that \\( 3 \mid k^3 - k \\) for some \\( k \in \mathbb{N} \\), that is, \\( k^3 - k = 3m \\) for some integer \\( m \\). Under this hypothesis, we want to show that divisibility by 3 carries over to the next term, meaning that \\( 3 \mid (k+1)^3 - (k+1) \\). Expanding the expression we obtain:
 
 \\[\begin{align} (k+1)^3 - (k+1) &= k^3 + 3k^2 + 3k + 1 - k - 1 \\\\[6pt] &= (k^3 - k) + 3k^2 + 3k \end{align} \\]
 

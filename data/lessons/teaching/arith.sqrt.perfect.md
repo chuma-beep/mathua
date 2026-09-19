@@ -8,15 +8,15 @@ In this section, we will learn the basics of *absolute value* and *square root*.
 
 **Definition**
 
-The *absolute value* of a number is the distance between that number and $0$ on a number line. For the absolute value of $x$, we write $\abs{x}$.
+The *absolute value* of a number is the distance between that number and 0 on a number line. For the absolute value of $x$, we write $\abs{x}$.
 
-Let's look at $\abs{2}$ and $\abs{-2}$, the absolute value of $2$ and the absolute value of $-2$.
+Let's look at $\abs{2}$ and $\abs{-2}$, the absolute value of 2 and the absolute value of $-2$.
 
 *$\abs{2}$ and $\abs{-2}$*
 
-Since the distance between $2$ and $0$ on the number line is $2$ units, the absolute value of $2$ is $2$. We write $\abs{2}=2$.
+Since the distance between 2 and 0 on the number line is 2 units, the absolute value of 2 is 2. We write $\abs{2}=2$.
 
-Since the distance between $-2$ and $0$ on the number line is also $2$ units, the absolute value of $-2$ is also $2$. We write $\abs{-2}=2$.
+Since the distance between $-2$ and 0 on the number line is also 2 units, the absolute value of $-2$ is also 2. We write $\abs{-2}=2$.
 
 **Fact**
 
@@ -34,25 +34,25 @@ $\abs{57}=$
 
 Solution
 
-$57$ is $57$ units away from $0$ on a number line, so $\abs{57}=57$. Another way to think about this is that the "positive version" of $57$ is $57$.
+57 is 57 units away from 0 on a number line, so $\abs{57}=57$. Another way to think about this is that the "positive version" of 57 is 57.
 
 $\abs{-43}=$
 
 Solution
 
-$-43$ is $43$ units away from $0$ on a number line, so $\abs{-43}=43$. Another way to think about this is that the "positive version" of $-43$ is $43$.
+$-43$ is 43 units away from 0 on a number line, so $\abs{-43}=43$. Another way to think about this is that the "positive version" of $-43$ is 43.
 
 $\abs{\frac{2}{-5}}=$
 
 Solution
 
-$\frac{2}{-5}$ is $\frac{2}{5}$ units away from $0$ on a number line, so $\abs{\frac{2}{-5}}=\frac{2}{5}$. Another way to think about this is that the "positive version" of $\frac{2}{-5}$ is $\frac{2}{5}$.
+$\frac{2}{-5}$ is $\frac{2}{5}$ units away from 0 on a number line, so $\abs{\frac{2}{-5}}=\frac{2}{5}$. Another way to think about this is that the "positive version" of $\frac{2}{-5}$ is $\frac{2}{5}$.
 
 **Warning**
 
 Absolute Value Does Not Exactly "Make Everything Positive"
 
-Students may see an expression like $\abs{2-5}$ and incorrectly think it is OK to "make everything positive" and write $2+5$. This is incorrect since $\abs{2-5}$ works out to be $3$, not $7$, as we are actually taking the absolute value of $-3$ (the equivalent number inside the absolute value).
+Students may see an expression like $\abs{2-5}$ and incorrectly think it is OK to "make everything positive" and write $2+5$. This is incorrect since $\abs{2-5}$ works out to be 3, not 7, as we are actually taking the absolute value of $-3$ (the equivalent number inside the absolute value).
 
 ## Square Root Facts
 
@@ -62,9 +62,9 @@ If you have learned your basic multiplication table, you know:
 
 The numbers along the diagonal are special; they are known as *perfect squares*.  And for working with square roots, it will be helpful if you can memorize these first few perfect square numbers.
 
-"Taking a square root" is the opposite action of squaring a number. For example, when you  square $3$, the result is $9$. So when you take the square root of $9$, the result is $3$. Just knowing that $9$ comes about as $3^2$ lets us realize that $3$ is the square root of $9$. This is why memorizing the perfect squares from the multiplication table can be so helpful.
+"Taking a square root" is the opposite action of squaring a number. For example, when you  square 3, the result is 9. So when you take the square root of 9, the result is 3. Just knowing that 9 comes about as $3^2$ lets us realize that 3 is the square root of 9. This is why memorizing the perfect squares from the multiplication table can be so helpful.
 
-The notation we use for taking a square root is the *radical*, $\sqrt{\phantom{x}}$. For example, "the square root of $9$" is denoted $\sqrt{9}$. And now we know enough to be able to write $\sqrt{9}=3$.
+The notation we use for taking a square root is the *radical*, $\sqrt{\phantom{x}}$. For example, "the square root of 9" is denoted $\sqrt{9}$. And now we know enough to be able to write $\sqrt{9}=3$.
 
 Tossing in a few extra special square roots, it's advisable to memorize the following:
 
@@ -76,13 +76,13 @@ $$
 \begin{aligned}\sqrt{4}&=2&\sqrt{5}&=\mathord{?}&\sqrt{9}&=3\end{aligned}
 $$
 
-Since $5$ is between $4$ and $9$, then $\sqrt{5}$ must be somewhere between $2$ and $3$. There are no whole numbers between $2$ and $3$, so $\sqrt{5}$ must be some number with decimal places. If the decimal places eventually stopped, then squaring it would give you another number with decimal places that stop further out. But squaring it gives you $5$ with no decimal places. So the only possibility is that $\sqrt{5}$ is a decimal between $2$ and $3$ that goes on forever. With a calculator, we can see:
+Since 5 is between 4 and 9, then $\sqrt{5}$ must be somewhere between 2 and 3. There are no whole numbers between 2 and 3, so $\sqrt{5}$ must be some number with decimal places. If the decimal places eventually stopped, then squaring it would give you another number with decimal places that stop further out. But squaring it gives you 5 with no decimal places. So the only possibility is that $\sqrt{5}$ is a decimal between 2 and 3 that goes on forever. With a calculator, we can see:
 
 $$
  \sqrt{5}\approx2.236 
 $$
 
-Actually the decimal will not terminate, and that is why we used the $\approx$ symbol instead of an equal sign. To get $2.236$ we rounded down slightly from the true value of $\sqrt{5}$. With a calculator, we can check that $2.236^2=4.999696$, a little shy of $5$.
+Actually the decimal will not terminate, and that is why we used the $\approx$ symbol instead of an equal sign. To get 2.236 we rounded down slightly from the true value of $\sqrt{5}$. With a calculator, we can check that $2.236^2=4.999696$, a little shy of 5.
 
 ## Square Roots of Fractions
 

@@ -58,7 +58,7 @@ The coefficient matrix and the augmented matrix are:
 
 \\[A \mid \mathbf{b} = \begin{pmatrix} 3 & -1 & 7 \\\\[6pt] 1 & \phantom{-}2 & 0 \end{pmatrix}\\]
 
-Since \\(\det(A) = 3 \cdot 2 - (-1) \cdot 1 = 7 \neq 0\\), the rank of \\(A\\) is \\(2\\), the maximum possible. The augmented matrix has at most rank \\(2\\) and contains \\(A\\) as a submatrix of rank \\(2\\), so its rank is also \\(2\\). The Rouché-Capelli theorem then guarantees consistency, and because \\(r = n = 2\\) the solution is unique. To find it, we use the second equation to write \\(x = -2y\\), and substitute into the first equation to obtain \\(3(-2y) - y = 7\\), which gives \\(y = -1\\). Substituting back yields \\(x = 2\\). The system therefore admits the unique solution \\((x, y) = (2, -1)\\).
+Since \\(\det(A) = 3 \cdot 2 - (-1) \cdot 1 = 7 \neq 0\\), the rank of \\(A\\) is 2, the maximum possible. The augmented matrix has at most rank 2 and contains \\(A\\) as a submatrix of rank 2, so its rank is also 2. The Rouché-Capelli theorem then guarantees consistency, and because \\(r = n = 2\\) the solution is unique. To find it, we use the second equation to write \\(x = -2y\\), and substitute into the first equation to obtain \\(3(-2y) - y = 7\\), which gives \\(y = -1\\). Substituting back yields \\(x = 2\\). The system therefore admits the unique solution \\((x, y) = (2, -1)\\).
 
 ## Example 2
 
@@ -118,7 +118,7 @@ and its determinant is:
 
 \\[\det(A) = k(k+1) - 6 = k^2 + k - 6 = (k - 2)(k + 3) \\]
 
-which vanishes precisely for \\(k = 2\\) and \\(k = -3\\). When \\(k\\) lies outside this set of exceptional values, the determinant is nonzero, so \\(r(A) = 2\\). The augmented matrix has at most rank \\(2\\) and already contains \\(A\\) as a submatrix of rank \\(2\\), hence \\(r(A \mid \mathbf{b}) = 2\\) as well. The Rouché-Capelli theorem then yields a unique solution.
+which vanishes precisely for \\(k = 2\\) and \\(k = -3\\). When \\(k\\) lies outside this set of exceptional values, the determinant is nonzero, so \\(r(A) = 2\\). The augmented matrix has at most rank 2 and already contains \\(A\\) as a submatrix of rank 2, hence \\(r(A \mid \mathbf{b}) = 2\\) as well. The Rouché-Capelli theorem then yields a unique solution.
 
 For \\(k = 2\\) the substitution gives:
 

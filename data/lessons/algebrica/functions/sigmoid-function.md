@@ -18,7 +18,7 @@ The following concepts, [Exponential Function](https://algebrica.org/exponential
 
 ## Definition
 
-The sigmoid function is a real-valued [function](<../functions/>) of a real variable that takes values strictly between \\(0\\) and \\(1\\), approaching each of the two extremes [asymptotically](<../asymptotes/>). It provides a smooth mapping from the real line to the unit interval and is widely used in analysis and machine learning. Its definition is the following:
+The sigmoid function is a real-valued [function](<../functions/>) of a real variable that takes values strictly between 0 and 1, approaching each of the two extremes [asymptotically](<../asymptotes/>). It provides a smooth mapping from the real line to the unit interval and is widely used in analysis and machine learning. Its definition is the following:
 
 \\[\sigma(x) = \frac{1}{1 + e^{-x}} \\]
 
@@ -90,7 +90,7 @@ It follows that the function is concave upward on \\((-\infty, 0)\\) and concave
 
 ## Relation to the logistic function
 
-The sigmoid function coincides with the special case of the logistic function in which the growth rate equals \\(1\\) and the inflection point is located at the origin. The general form of the logistic function is the following:
+The sigmoid function coincides with the special case of the logistic function in which the growth rate equals 1 and the inflection point is located at the origin. The general form of the logistic function is the following:
 
 \\[f(x) = \frac{L}{1 + e^{-k(x - x_0)}} \\]
 
@@ -130,4 +130,4 @@ Applying the derivative formula, the value of \\(\sigma’(2)\\) is the followin
 
 \\[\sigma’(2) = \sigma(2),\bigl(1 - \sigma(2)\bigr) \approx 0.8808 \cdot 0.1192 \approx 0.1050 \\]
 
-The value of the derivative of the sigmoid function at \\(x = 2\\) is therefore approximately \\(0.1050\\), confirming both the formula and the fact that the function grows very slowly in that region, having already approached saturation.
+The value of the derivative of the sigmoid function at \\(x = 2\\) is therefore approximately 0.1050, confirming both the formula and the fact that the function grows very slowly in that region, having already approached saturation.
