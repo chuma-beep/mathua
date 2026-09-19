@@ -1,13 +1,26 @@
 import { describe, it, expect } from 'vitest'
 import { prepareLessonMath } from '../lib/lessonMath'
 
+function unescapeHtml(s: string): string {
+  // Mirrors what rehype-raw does before KaTeX: named entities plus the
+  // numeric refs prepareLessonMath uses to keep spans opaque to markdown
+  // (`&#92;` backslash, `&#10;` newline).
+  return s
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, n: string) => String.fromCharCode(Number(n)))
+}
+
 function mathSpans(s: string) {
   const display: string[] = []
   const inline: string[] = []
   const re = /<span class="math-(display|inline)">([\s\S]*?)<\/span>/g
   let m: RegExpExecArray | null
   while ((m = re.exec(s)) !== null) {
-    ;(m[1] === 'display' ? display : inline).push(m[2])
+    ;(m[1] === 'display' ? display : inline).push(unescapeHtml(m[2]))
   }
   return { display, inline }
 }
@@ -138,5 +151,17 @@ describe('prepareLessonMath', () => {
     const { display } = mathSpans(out)
     expect(display).toHaveLength(1)
     expect(display[0]).toContain('\\\\[6pt]')
+  })
+})
+
+describe('stripMathDelimiters', () => {
+  it('strips doubled, single, and dollar delimiters to inner text', async () => {
+    const { stripMathDelimiters } = await import('../lib/lessonMath')
+    expect(stripMathDelimiters('The substitution \\\\( t = \\\\tan(x/2) \\\\)')).toBe(
+      'The substitution t = \\tan(x/2)'
+    )
+    expect(stripMathDelimiters('The $p$-Integral Test')).toBe('The p-Integral Test')
+    expect(stripMathDelimiters('plain title')).toBe('plain title')
+    expect(stripMathDelimiters('costs \\$5 today')).toBe('costs \\$5 today')
   })
 })

@@ -16,9 +16,23 @@ export const lessonMacros: Record<string, string> = macrosJson as Record<string,
 const ESC_DOLLAR = '\u0000MU-ESC-DOLLAR\u0000'
 
 function escapeHtmlMath(s: string): string {
-  // Inside math, & is the aligned/array column separator — must NOT be
-  // escaped to &amp; (breaks \begin{aligned} &=). Only escape < > for HTML.
-  return s.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  // Span HTML is inline raw HTML inside markdown: remark parses it line-wise
+  // and runs backslash-escape processing on anything that looks like text,
+  // which halves `\\` runs (`\\[6pt]` row-break spacing becomes `\[6pt]` and
+  // KaTeX hard-fails) and eats backslashes before punctuation (`\,` thin
+  // space becomes a literal `,`, `\!` becomes `!`, `\%` starts a comment).
+  // Only backslash+letter survives (`\frac`), which is why most math looked
+  // fine while spacing/punctuation silently corrupted. Encode everything
+  // markdown-significant (including newlines, so a span is always a single
+  // htmlText token) — rehype-raw decodes entities back before KaTeX sees
+  // them, so KaTeX input is byte-identical to the TeX here.
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\\/g, '&#92;')
+    .replace(/\r\n/g, '&#10;')
+    .replace(/[\n\r]/g, '&#10;')
 }
 
 export function prepareLessonMath(input: string): string {
@@ -173,8 +187,33 @@ export function prepareLessonMath(input: string): string {
     .map((part) => (part.startsWith('<span class="math-') ? part : wrapBareEnv(part)))
     .join('')
 
-  // Restore escaped literal dollars.
-  content = content.split(ESC_DOLLAR).join('\\$')
+  // Restore escaped literal dollars. In prose `\$` is correct markdown for
+  // a literal `$` — but inside math spans a literal backslash would be eaten
+  // by markdown escape processing (`\$` corrupts to a bare `$`, which KaTeX
+  // rejects), so spans get the entity-encoded form rehype-raw decodes back.
+  content = content
+    .split(/(<span class="math-(?:display|inline)">[\s\S]*?<\/span>)/g)
+    .map((part) =>
+      part.startsWith('<span class="math-')
+        ? part.split(ESC_DOLLAR).join('&#92;$')
+        : part.split(ESC_DOLLAR).join('\\$')
+    )
+    .join('')
 
   return content
+}
+
+// Plain-text rendering for math-bearing titles (KP labels, checklist items,
+// "In this lesson" nav): these render outside KatexContent, so delimiters
+// would show literally. Collapse the doubled Algebrica dialect first so inner
+// commands read single (`\\tan` → `\tan`), then strip each delimiter form to
+// trimmed inner text. `$` is non-alphanumeric in both sluggers, so anchor ids
+// keep matching KatexContent's heading ids. Escaped `\$` prices are left
+// untouched.
+export function stripMathDelimiters(s: string): string {
+  const single = s.replace(/\\\\/g, '\\')
+  return single
+    .replace(/(?<!\\)\\\((.*?)(?<!\\)\\\)/g, (_, g: string) => g.trim())
+    .replace(/(?<!\\)\\\[(.*?)(?<!\\)\\\]/g, (_, g: string) => g.trim())
+    .replace(/(?<!\\)\$(.+?)(?<!\\)\$/g, (_, g: string) => g.trim())
 }

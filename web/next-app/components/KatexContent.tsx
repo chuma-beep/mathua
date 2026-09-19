@@ -43,20 +43,43 @@ const sanitizeSchema = {
 
 // rehype-katex renders failures two ways: <span class="katex-error"> when
 // even the lenient retry throws, and red text (errorColor) when KaTeX itself
-// renders the ParseError. Replace both with a labeled <code> fallback so
+// renders the ParseError. Replace both with a labeled <span> fallback so
 // users never see red TeX soup, and log once per span so new corpus breakage
 // is visible in telemetry instead of silent.
 const KATEX_ERROR_COLOR_RE = /#cc0000|204,\s*0,\s*0/i // must match errorColor below
+let fontCheckDone = false
+function warnFontOnce(): void {
+  // KaTeX renders negation slashes (e.g. \neq) with a private-use glyph that
+  // exists only in KaTeX_Main: without the webfont users see tofu boxes even
+  // though parsing succeeded. Diagnose once instead of failing silently.
+  if (fontCheckDone || typeof window === 'undefined') return
+  fontCheckDone = true
+  try {
+    const fonts = (window as unknown as { fonts?: { check(spec: string): boolean } }).fonts
+    if (fonts && !fonts.check('16px KaTeX_Main')) {
+      // eslint-disable-next-line no-console
+      console.warn('[KatexContent] KaTeX_Main webfont not loaded — math symbols may show as boxes')
+    }
+  } catch {
+    // Font check API unavailable; nothing to diagnose.
+  }
+}
 function rehypeKatexFallback() {
   return (tree: unknown) => {
-    const walk = (node: any, parent: any, index: number): void => {
+    const walk = (node: any, parent: any, index: number, mathKind: string): void => {
       if (!node || typeof node !== 'object') return
       const classes: unknown = node.properties?.className
+      const classList: string[] = Array.isArray(classes) ? (classes as unknown[]).map(String) : []
+      // KaTeX replaces math-display/math-inline scopes with its own output:
+      // .katex-display marks display mode, plain .katex marks inline.
+      const kind = classList.includes('katex-display')
+        ? 'display'
+        : classList.includes('katex') && !classList.includes('katex-error')
+          ? 'inline'
+          : mathKind
       const style: unknown = node.properties?.style
       const isErrorNode =
-        node.type === 'element' &&
-        Array.isArray(classes) &&
-        (classes as unknown[]).includes('katex-error')
+        node.type === 'element' && classList.includes('katex-error')
       const isErrorColor =
         node.type === 'element' &&
         node.tagName === 'span' &&
@@ -77,8 +100,15 @@ function rehypeKatexFallback() {
         collect(node)
         const source: string = texts.join('')
         if (typeof window !== 'undefined') {
+          warnFontOnce()
+          // Provenance for triage: route + span kind + full-ish source. The
+          // `\[`-storm investigation showed a bare excerpt is unidentifiable.
+          const route = window.location.pathname + window.location.search
           // eslint-disable-next-line no-console
-          console.error('[KatexContent] KaTeX failed to render; showing source fallback:', source.slice(0, 200))
+          console.error(
+            `[KatexContent] KaTeX failed to render (${kind} @ ${route}); showing source fallback:`,
+            source.slice(0, 500)
+          )
         }
         const detail: string =
           typeof node.properties?.title === 'string' && node.properties.title
@@ -98,17 +128,20 @@ function rehypeKatexFallback() {
         return
       }
       if (Array.isArray(node.children)) {
-        node.children.forEach((child: unknown, i: number) => walk(child, node, i))
+        node.children.forEach((child: unknown, i: number) => walk(child, node, i, kind))
       }
     }
-    walk(tree, null, -1)
+    walk(tree, null, -1, 'math')
   }
 }
 
 export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
   const content = prepareLessonMath(children)
-  // In production KaTeX errors are still non-throwing (red fallback) but we
-  // emit a console warning for telemetry — vitest corpus gate uses throwOnError:true.
+  // In production KaTeX errors are still non-throwing (labeled fallback via
+  // rehypeKatexFallback below) but we emit a console warning for telemetry —
+  // vitest corpus gate uses throwOnError:true. Note spans are entity-encoded
+  // by prepareLessonMath (`&#92;`), so the suspect check below only ever
+  // matches prose leaks, never span contents.
   if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
     const suspect = content.match(/<span class="math-(display|inline)">[^<]*\\[^<]*<\/span>/)
     if (suspect) {
