@@ -13,6 +13,9 @@ interface ReportButtonProps {
   source?: string
   sessionId?: string
   attemptId?: string
+  /** Button caption. Defaults to 'Report a problem'; pass a specific one
+      whenever several report buttons share a row or card. */
+  label?: string
 }
 
 const REASONS: { value: ReportReason; label: string }[] = [
@@ -74,7 +77,7 @@ export default function ReportButton(props: ReportButtonProps) {
         title="Complain about this question or explanation"
         className="font-mono text-[10px] text-mathua-muted hover:text-mathua-blue transition-colors uppercase tracking-wider"
       >
-        Report a problem
+        {props.label ?? 'Report a problem'}
       </button>
     )
   }
