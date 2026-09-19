@@ -50,3 +50,39 @@ func TestRealDataCanonicalized(t *testing.T) {
 		}
 	}
 }
+
+// Guard: every KP shard section must resolve to a real slice of the
+// concept's canonical lesson body. Unresolved sections silently fall back
+// to the FULL body (duplicated study content) — e.g. raw `\\(...)`
+// sections vs canonical `$...$` headings (calc.integral.weierstrass_sub).
+func TestRealDataKPSectionsResolve(t *testing.T) {
+	lib, err := Load("../../data/lessons")
+	if err != nil {
+		t.Skipf("dataset not present: %v", err)
+	}
+	checked := 0
+	for cid, kps := range lib.kps {
+		lesson := lib.concepts[cid]
+		if lesson == nil {
+			continue
+		}
+		multiSection := strings.Count(lesson.Body, "\n## ") > 0
+		for _, kp := range kps {
+			if kp.Section == "" {
+				continue
+			}
+			checked++
+			body, ok := lib.KPSectionBody(cid, kp.Section)
+			if !ok {
+				t.Errorf("%s: section %q unresolved (would serve full body)", cid, kp.Section)
+				continue
+			}
+			if multiSection && body == lesson.Body {
+				t.Errorf("%s: section %q fell back to full body", cid, kp.Section)
+			}
+		}
+	}
+	if checked == 0 {
+		t.Fatal("no KP sections checked")
+	}
+}

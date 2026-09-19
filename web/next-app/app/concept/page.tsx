@@ -8,6 +8,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import KatexContent from '../../components/KatexContent'
+import { stripMathDelimiters } from '../../lib/lessonMath'
 import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
@@ -31,7 +32,7 @@ function extractToc(body: string): { id: string; label: string; level: number }[
       // "In this lesson" nav shows plain text. Only the label is stripped —
       // slugify() below is unchanged, and `$` is non-alphanumeric in both
       // sluggers, so anchors keep matching KatexContent's heading ids.
-      const label = match[2].trim().replace(/(?<!\\)\$(.+?)(?<!\\)\$/g, '$1')
+      const label = stripMathDelimiters(match[2].trim())
       const id = slugify(label)
       headings.push({ id, label, level })
     }
