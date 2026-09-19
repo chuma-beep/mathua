@@ -423,6 +423,25 @@ export function LessonDetail({
                   </span>
                   <span className="font-mono text-[10px] text-mathua-muted">{cid}</span>
                 </div>
+                {diagram && (
+                  <div className="mb-3 border border-mathua-border bg-mathua-surface p-3 flex items-center gap-3 flex-wrap min-w-0 overflow-hidden">
+                    <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
+                      <Image src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted mb-1">
+                        Concept diagram
+                      </div>
+                      <ReportButton
+                        conceptId={cid}
+                        lessonId={lesson.title}
+                        kind="diagram"
+                        question={diagram}
+                        label="Report diagram problem"
+                      />
+                    </div>
+                  </div>
+                )}
                 {kps.map((kp, k) => (
                   <div key={`${cid}-${kp.label}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
                     <p className="font-mono text-xs text-mathua-primary">
@@ -445,11 +464,6 @@ export function LessonDetail({
                         Worked example
                       </summary>
                       <div className="mt-2 flex flex-col md:flex-row gap-4 items-start">
-                        {diagram && (
-                          <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
-                            <Image src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
-                          </div>
-                        )}
                         <div className="bg-mathua-code border border-mathua-border p-3 text-sm flex-1 min-w-0 overflow-hidden">
                           <KatexContent>{kp.worked_example}</KatexContent>
                         </div>
@@ -462,14 +476,6 @@ export function LessonDetail({
                         kind="worked_example"
                         question={`${kp.label}: ${kp.worked_example}`}
                       />
-                      {diagram && (
-                        <ReportButton
-                          conceptId={cid}
-                          lessonId={lesson.title}
-                          kind="diagram"
-                          question={diagram}
-                        />
-                      )}
                     </div>
                   </div>
                 ))}
