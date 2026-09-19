@@ -1,7 +1,7 @@
 [
   {
-    "label": "Integrals without elementary antiderivativess359ebbb1",
-    "section": "Integrals without elementary antiderivativess359ebbb1",
+    "label": "Integrals without elementary antiderivatives",
+    "section": "Integrals without elementary antiderivatives",
     "subgoals": [
       "Define numerical integration",
       "Follow the worked example",
@@ -9,20 +9,20 @@
     ]
   },
   {
-    "label": "General principle of a quadrature formulas345e11a4",
-    "section": "General principle of a quadrature formulas345e11a4",
+    "label": "General principle of a quadrature formula",
+    "section": "General principle of a quadrature formula",
     "subgoals": [
-      "Understand general principle of a quadrature formulas345e11a4",
-      "Apply general principle of a quadrature formulas345e11a4",
+      "Understand general principle of a quadrature formula",
+      "Apply general principle of a quadrature formula",
       "Check the result"
     ]
   },
   {
-    "label": "The rectangle and midpoint ruless09425c34",
-    "section": "The rectangle and midpoint ruless09425c34",
+    "label": "The rectangle and midpoint rules",
+    "section": "The rectangle and midpoint rules",
     "subgoals": [
-      "Understand the rectangle and midpoint ruless09425c34",
-      "Apply the rectangle and midpoint ruless09425c34",
+      "Understand the rectangle and midpoint rules",
+      "Apply the rectangle and midpoint rules",
       "Check the result"
     ]
   }
