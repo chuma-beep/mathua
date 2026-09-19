@@ -29,12 +29,16 @@ function errorKind(msg: string): string {
 }
 
 function unescapeHtml(s: string): string {
+  // Named entities plus the numeric refs prepareLessonMath uses to keep
+  // spans opaque to markdown (`&#92;` backslash, `&#10;` newline) — the same
+  // decoding rehype-raw performs before KaTeX.
   return s
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (_, n: string) => String.fromCharCode(Number(n)))
 }
 
 function canonicalBodies(): Record<string, string> {
@@ -200,6 +204,35 @@ describe('lesson corpus renders through KaTeX', () => {
       }
       if (fresh.length > 0) {
         throw new Error(`${fresh.length} structural violations:\n` + fresh.slice(0, 20).join('\n'))
+      }
+    }
+  )
+
+  it(
+    'emitted math spans stay opaque to markdown (no literal backslash/newline)',
+    { timeout: 300_000 },
+    () => {
+      // Span HTML is inline raw HTML inside markdown: remark parses it
+      // line-wise and runs backslash-escape processing on anything that
+      // looks like text. A literal `\` or newline inside a span tag means
+      // markdown will mangle the TeX before KaTeX sees it (`\\[6pt]` became
+      // `\[6pt]` and hard-failed; `\,` became a literal comma). Spans must
+      // carry everything entity-encoded (`&#92;`, `&#10;`, `&amp;`).
+      const bodies = canonicalBodies()
+      const bad: string[] = []
+      const spanRe = /<span class="math-(display|inline)">([\s\S]*?)<\/span>/g
+      for (const rel of Object.keys(bodies)) {
+        const prepared = prepareLessonMath(bodies[rel])
+        let m: RegExpExecArray | null
+        while ((m = spanRe.exec(prepared)) !== null) {
+          const inner = m[2]
+          if (inner.includes('\\') || inner.includes('\n')) {
+            bad.push(`${rel}: span leaks ${JSON.stringify(inner.slice(0, 60))}`)
+          }
+        }
+      }
+      if (bad.length > 0) {
+        throw new Error(`${bad.length} markdown-opaque violations:\n` + bad.slice(0, 20).join('\n'))
       }
     }
   )
