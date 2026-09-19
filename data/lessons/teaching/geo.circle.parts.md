@@ -23,21 +23,21 @@ Every diameter is a chord — the longest possible one — but not every chord p
 
 **Example**
 
-A circle has a radius of $6$ cm. What is its diameter?
+A circle has a radius of 6 cm. What is its diameter?
 
 *Solution*
 
 \[d = 2r = 2(6) = 12\]
 
-The diameter is $12$ cm.
+The diameter is 12 cm.
 
 **Example**
 
-A chord of a circle measures $9$ inches. Could the radius be $4$ inches?
+A chord of a circle measures 9 inches. Could the radius be 4 inches?
 
 *Solution*
 
-No. The longest chord is the diameter, so every chord must be no longer than the diameter. A $9$-inch chord requires a diameter of at least $9$ inches, i.e. a radius of at least $4.5$ inches.
+No. The longest chord is the diameter, so every chord must be no longer than the diameter. A 9-inch chord requires a diameter of at least 9 inches, i.e. a radius of at least 4.5 inches.
 
 ## Naming Arcs
 

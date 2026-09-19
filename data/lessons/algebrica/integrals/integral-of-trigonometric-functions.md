@@ -92,7 +92,7 @@ Substituting this expression into the previous result gives:
 
 \\[\begin{aligned} \cos^{4}x & = \frac{1}{4}\left(1 + 2\cos 2x + \frac{1+\cos 4x}{2}\right) \\\\[6pt] &= \frac{1}{4}\left(\frac{3}{2} + 2\cos 2x + \frac{1}{2}\cos 4x\right) \\\\[6pt] &= \frac{3}{8} + \frac{1}{2}\cos 2x + \frac{1}{8}\cos 4x \end{aligned} \\]
 
-Multiplying by \\(2\\), as required by the original integral, we obtain the simplified form:
+Multiplying by 2, as required by the original integral, we obtain the simplified form:
 
 \\[2\cos^{4}x = \frac{3}{4} + \cos 2x + \frac{1}{4}\cos 4x \\]
 
@@ -212,7 +212,7 @@ The presence of a second function raised to a power did not change the method: a
 
 ## Reciprocals of sine and cosine
 
-Other frequently encountered cases involve the integrals of the reciprocals of sine and cosine. Although these expressions appear less straightforward at first, both follow from the same algebraic device. For the secant, the integrand is multiplied by a fraction equal to \\(1\\):
+Other frequently encountered cases involve the integrals of the reciprocals of sine and cosine. Although these expressions appear less straightforward at first, both follow from the same algebraic device. For the secant, the integrand is multiplied by a fraction equal to 1:
 
 \\[\begin{aligned} \int \sec x\,dx &= \int \sec x \cdot \frac{\sec x + \tan x}{\sec x + \tan x}\,dx \\\\[6pt] &= \int \frac{\sec^{2}x + \sec x\tan x}{\sec x + \tan x}\,dx \end{aligned} \\]
 
@@ -238,7 +238,7 @@ so the integral of \\(\csc x\\) produces:
 
 In both cases the result is [logarithmic](<../logarithms/>), and the sign inside the [absolute value](<../absolute-value/>) is easily confused. The two forms are best memorised together: \\(\sec x + \tan x\\) for the cosine reciprocal, \\(\csc x - \cot x\\) for the sine reciprocal.
 
-  * theorem 4.  The reciprocals of cosine and sine integrate to \\( \int \sec x \, dx = \ln|\sec x + \tan x| + c \\) and \\( \int \csc x \, dx = \ln|\csc x - \cot x| + c \\). Each result is obtained by multiplying the integrand by a fraction equal to \\( 1 \\), chosen so that the numerator becomes the derivative of the denominator, which reduces the integral to the logarithmic form \\( \int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + c \\).
+  * theorem 4.  The reciprocals of cosine and sine integrate to \\( \int \sec x \, dx = \ln|\sec x + \tan x| + c \\) and \\( \int \csc x \, dx = \ln|\csc x - \cot x| + c \\). Each result is obtained by multiplying the integrand by a fraction equal to 1, chosen so that the numerator becomes the derivative of the denominator, which reduces the integral to the logarithmic form \\( \int \frac{f'(x)}{f(x)} \, dx = \ln|f(x)| + c \\).
 
 
 ## Flowchart
@@ -265,7 +265,7 @@ In both cases the result is [logarithmic](<../logarithms/>), and the sign inside
         *  _apply the power-reduction identities to every squared term_ the identity \\( \sin x \cos x = \frac{1}{2}\sin 2x \\) often shortens the work
         *  _integrate term by term_ the integrand reduces to a sum of expressions of the form \\( \cos kx \\)
     * `ELSE IF` the integrand is \\( \sec x \\) or \\( \csc x \\)
-      * _multiply by a fraction equal to_ \\( 1 \\) use \\( \frac{\sec x + \tan x}{\sec x + \tan x} \\) for the secant, \\( \frac{\csc x - \cot x}{\csc x - \cot x} \\) for the cosecant
+      * _multiply by a fraction equal to_ 1 use \\( \frac{\sec x + \tan x}{\sec x + \tan x} \\) for the secant, \\( \frac{\csc x - \cot x}{\csc x - \cot x} \\) for the cosecant
       *  _recognise the logarithmic form_ the numerator is the derivative of the denominator, so the integral is \\( \int \frac{f’(x)}{f(x)},dx = \ln|f(x)| + c \\)
     * `ELSE`
       *  _simplify the integrand first_ expand, factor, or apply trigonometric identities to reach one of the cases above

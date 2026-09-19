@@ -15,7 +15,7 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  Find the prime factorization of $48.$  
+1.  Find the prime factorization of 48.  
     If you missed this problem, review Example 2.48.
 2.  Draw a model of the fraction $\frac{3}{4}.$  
     If you missed this problem, review Example 4.2.
@@ -27,7 +27,7 @@ Before you get started, take this readiness quiz.
 
 In working with equivalent fractions, you saw that there are many ways to write fractions that have the same value, or represent the same part of the whole. How do you know which one to use? Often, we’ll use the fraction that is in *simplified* form.
 
-A fraction is considered simplified if there are no common factors, other than $1,$ in the numerator and denominator. If a fraction does have common factors in the numerator and denominator, we can reduce the fraction to its simplified form by removing the common factors.
+A fraction is considered simplified if there are no common factors, other than 1, in the numerator and denominator. If a fraction does have common factors in the numerator and denominator, we can reduce the fraction to its simplified form by removing the common factors.
 
 ### Simplified Fraction
 
@@ -35,8 +35,8 @@ A fraction is considered simplified if there are no common factors in the numera
 
 For example,
 
-- $\frac{2}{3}$ is simplified because there are no common factors of $2$ and $3.$
-- $\frac{10}{15}$ is not simplified because $5$ is a common factor of $10$ and $15.$
+- $\frac{2}{3}$ is simplified because there are no common factors of 2 and 3.
+- $\frac{10}{15}$ is not simplified because 5 is a common factor of 10 and 15.
 
 The process of simplifying a fraction is often called *reducing the fraction*. In the previous section, we used the Equivalent Fractions Property to find equivalent fractions. We can also use the Equivalent Fractions Property in reverse to simplify fractions. We rewrite the property to show both forms together.
 
@@ -234,7 +234,7 @@ First shade in $\frac{3}{4}$ of the rectangle.
 
 We will take $\frac{1}{2}$ of this $\frac{3}{4},$ so we heavily shade $\frac{1}{2}$ of the shaded region.
 
-Notice that $3$ out of the $8$ pieces are heavily shaded. This means that $\frac{3}{8}$ of the rectangle is heavily shaded.
+Notice that 3 out of the 8 pieces are heavily shaded. This means that $\frac{3}{8}$ of the rectangle is heavily shaded.
 
 Therefore, $\frac{1}{2}$ of $\frac{3}{4}$ is $\frac{3}{8},$ or $\frac{1}{2} \cdot \frac{3}{4} = \frac{3}{8}.$
 
@@ -387,7 +387,7 @@ Multiply, and write the answer in simplified form:
 |  | $\frac{1}{7} \cdot 56$ |
 | Write 56 as a fraction. | $\frac{1}{7} \cdot \frac{56}{1}$ |
 | Determine the sign of the product; multiply. | $\frac{56}{7}$ |
-| Simplify. | $8$ |
+| Simplify. | 8 |
 
 |  |  |
 |----|----|
@@ -414,7 +414,7 @@ Multiply, and write the answer in simplified form:
 
 ### Find Reciprocals
 
-The fractions $\frac{2}{3}$ and $\frac{3}{2}$ are related to each other in a special way. So are $- \frac{10}{7}$ and $- \frac{7}{10}.$ Do you see how? Besides looking like upside-down versions of one another, if we were to multiply these pairs of fractions, the product would be $1.$
+The fractions $\frac{2}{3}$ and $\frac{3}{2}$ are related to each other in a special way. So are $- \frac{10}{7}$ and $- \frac{7}{10}.$ Do you see how? Besides looking like upside-down versions of one another, if we were to multiply these pairs of fractions, the product would be 1.
 
 $$
 \frac{2}{3} \cdot \frac{3}{2} = 1\quad\text{and}\quad - \frac{10}{7}\left( {- \frac{7}{10}} \right) = 1
@@ -426,7 +426,7 @@ Such pairs of numbers are called reciprocals.
 
 The reciprocal of the fraction $\frac{a}{b}$ is $\frac{b}{a},$ where $a \neq 0$ and $b \neq 0,$
 
-A number and its reciprocal have a product of $1.$
+A number and its reciprocal have a product of 1.
 
 $$
 \frac{a}{b} \cdot \frac{b}{a} = 1
@@ -436,16 +436,16 @@ To find the reciprocal of a fraction, we invert the fraction. This means that we
 
 To get a positive result when multiplying two numbers, the numbers must have the same sign. So reciprocals must have the same sign.
 
-To find the reciprocal, keep the same sign and invert the fraction. The number zero does not have a reciprocal. Why? A number and its reciprocal multiply to $1.$ Is there any number $r$ so that ${0 \cdot r = 1}?$ No. So, the number $0$ does not have a reciprocal.
+To find the reciprocal, keep the same sign and invert the fraction. The number zero does not have a reciprocal. Why? A number and its reciprocal multiply to 1. Is there any number $r$ so that ${0 \cdot r = 1}?$ No. So, the number 0 does not have a reciprocal.
 
 ### Example 4.29
 
-Find the reciprocal of each number. Then check that the product of each number and its reciprocal is $1.$
+Find the reciprocal of each number. Then check that the product of each number and its reciprocal is 1.
 
 1.  ⓐ$\frac{4}{9}$
 2.  ⓑ$- \frac{1}{6}$
 3.  ⓒ$- \frac{14}{5}$
-4.  ⓓ$7$
+4.  ⓓ7
 
 #### Solution
 
@@ -479,8 +479,8 @@ To find the reciprocals, we keep the sign and invert the fractions.
 |  |  |
 |----|----|
 | ⓓ |  |
-| Find the reciprocal of $7$. |  |
-| Write $7$ as a fraction. | $\frac{7}{1}$ |
+| Find the reciprocal of 7. |  |
+| Write 7 as a fraction. | $\frac{7}{1}$ |
 | Write the reciprocal of $\frac{7}{1}$. | $\frac{1}{7}$ |
 | Check: | $7 \cdot \left( \frac{1}{7} \right)$ |
 |  | $1✓$ |
@@ -492,7 +492,7 @@ Find the reciprocal:
 1.  ⓐ$\frac{5}{7}$
 2.  ⓑ$- \frac{1}{8}$
 3.  ⓒ$- \frac{11}{4}$
-4.  ⓓ$14$
+4.  ⓓ14
 
 ### Try It 4.58
 
@@ -501,7 +501,7 @@ Find the reciprocal:
 1.  ⓐ$\frac{3}{7}$
 2.  ⓑ$- \frac{1}{12}$
 3.  ⓒ$- \frac{14}{9}$
-4.  ⓓ$21$
+4.  ⓓ21
 
 In a previous chapter, we worked with opposites and absolute values. Table 4.1 compares opposites, absolute values, and reciprocals.
 
@@ -529,9 +529,9 @@ To find the opposite, change the sign. To find the absolute value, leave the pos
 | Number            | Opposite          | Absolute Value  | Reciprocal        |
 |-------------------|-------------------|-----------------|-------------------|
 | $- \frac{3}{8}$ | $\frac{3}{8}$   | $\frac{3}{8}$ | $- \frac{8}{3}$ |
-| $\frac{1}{2}$   | $- \frac{1}{2}$ | $\frac{1}{2}$ | $2$             |
+| $\frac{1}{2}$   | $- \frac{1}{2}$ | $\frac{1}{2}$ | 2             |
 | $\frac{9}{5}$   | $- \frac{9}{5}$ | $\frac{9}{5}$ | $\frac{5}{9}$   |
-| $-5$            | $5$             | $5$           | $- \frac{1}{5}$ |
+| $-5$            | 5             | 5           | $- \frac{1}{5}$ |
 
 ### Try It 4.59
 
@@ -557,9 +557,9 @@ Fill in the chart for each number given:
 
 ### Divide Fractions
 
-Why is ${12 \div 3 = 4}?$ We previously modeled this with counters. How many groups of $3$ counters can be made from a group of $12$ counters?
+Why is ${12 \div 3 = 4}?$ We previously modeled this with counters. How many groups of 3 counters can be made from a group of 12 counters?
 
-There are $4$ groups of $3$ counters. In other words, there are four $3\text{s}$ in $12.$ So, $12 \div 3 = 4.$
+There are 4 groups of 3 counters. In other words, there are four $3\text{s}$ in 12. So, $12 \div 3 = 4.$
 
 What about dividing fractions? Suppose we want to find the quotient: $\frac{1}{2} \div \frac{1}{6}.$ We need to figure out how many $\frac{1}{6}\text{s}$ there are in $\frac{1}{2}.$ We can use fraction tiles to model this division. We start by lining up the half and sixth fraction tiles as shown in Figure 4.5. Notice, there are three $\frac{1}{6}$ tiles in $\frac{1}{2},$ so $\frac{1}{2} \div \frac{1}{6} = 3.$
 
@@ -595,7 +595,7 @@ Model: $2 \div \frac{1}{4}.$
 
 #### Solution
 
-We are trying to determine how many $\frac{1}{4}\text{s}$ there are in $2.$ We can model this as shown.
+We are trying to determine how many $\frac{1}{4}\text{s}$ there are in 2. We can model this as shown.
 
 Because there are eight $\frac{1}{4}\text{s}$ in $2,{2 \div \frac{1}{4} = 8.}$
 
@@ -607,7 +607,7 @@ Model: $2 \div \frac{1}{3}$
 
 Model: $3 \div \frac{1}{2}$
 
-Let’s use money to model $2 \div \frac{1}{4}$ in another way. We often read $\frac{1}{4}$ as a ‘quarter’, and we know that a quarter is one-fourth of a dollar as shown in Figure 4.6. So we can think of $2 \div \frac{1}{4}$ as, “How many quarters are there in two dollars?” One dollar is $4$ quarters, so $2$ dollars would be $8$ quarters. So again, $2 \div \frac{1}{4} = 8.$
+Let’s use money to model $2 \div \frac{1}{4}$ in another way. We often read $\frac{1}{4}$ as a ‘quarter’, and we know that a quarter is one-fourth of a dollar as shown in Figure 4.6. So we can think of $2 \div \frac{1}{4}$ as, “How many quarters are there in two dollars?” One dollar is 4 quarters, so 2 dollars would be 8 quarters. So again, $2 \div \frac{1}{4} = 8.$
 
 *Figure 4.6 The U.S. coin called a quarter is worth one-fourth of a dollar.*
 
@@ -972,7 +972,7 @@ $-1$
 
 135\.
 
-$1$
+1
 
 136\.
 
@@ -1134,18 +1134,18 @@ $\frac{11}{2} \div \frac{7}{8} \cdot \frac{2}{11}$
 
 169\.
 
-**Baking** Nina is making $4$ pans of fudge to serve after a music recital. For each pan, she needs $\frac{2}{3}$ cup of condensed milk.
+**Baking** Nina is making 4 pans of fudge to serve after a music recital. For each pan, she needs $\frac{2}{3}$ cup of condensed milk.
 
 1.  ⓐ How much condensed milk will Nina need? Show your calculation. Write your result as an improper fraction and as a mixed number.
 2.  ⓑ Measuring cups usually come in sets of $\frac{1}{8},\frac{1}{4},\frac{1}{3},\frac{1}{2},\text{and}\ 1$ cup. Draw a diagram to show two different ways that Nina could measure the condensed milk she needs.
 
 170\.
 
-**Portions** Don purchased a bulk package of candy that weighs $5$ pounds. He wants to sell the candy in little bags that hold $\frac{1}{4}$ pound. How many little bags of candy can he fill from the bulk package?
+**Portions** Don purchased a bulk package of candy that weighs 5 pounds. He wants to sell the candy in little bags that hold $\frac{1}{4}$ pound. How many little bags of candy can he fill from the bulk package?
 
 171\.
 
-**Portions** Kristen has $\frac{3}{4}$ yards of ribbon. She wants to cut it into equal parts to make hair ribbons for her daughter’s $6$ dolls. How long will each doll’s hair ribbon be?
+**Portions** Kristen has $\frac{3}{4}$ yards of ribbon. She wants to cut it into equal parts to make hair ribbons for her daughter’s 6 dolls. How long will each doll’s hair ribbon be?
 
 #### Writing Exercises
 
@@ -1159,7 +1159,7 @@ Explain how you find the reciprocal of a negative fraction.
 
 174\.
 
-Rafael wanted to order half a medium pizza at a restaurant. The waiter told him that a medium pizza could be cut into $6$ or $8$ slices. Would he prefer $3$ out of $6$ slices or $4$ out of $8$ slices? Rafael replied that since he wasn’t very hungry, he would prefer $3$ out of $6$ slices. Explain what is wrong with Rafael’s reasoning.
+Rafael wanted to order half a medium pizza at a restaurant. The waiter told him that a medium pizza could be cut into 6 or 8 slices. Would he prefer 3 out of 6 slices or 4 out of 8 slices? Rafael replied that since he wasn’t very hungry, he would prefer 3 out of 6 slices. Explain what is wrong with Rafael’s reasoning.
 
 175\.
 

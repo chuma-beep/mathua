@@ -5,7 +5,7 @@
 ## Holomorphic vs Continuous
 
 ### Characterizations
-Analytic ⇒ infinitely differentiable, satisfies CR, has power series expansion, and satisfies Liouville: bounded entire ⇒ constant. Non-examples: $\bar{z}$, $|z|^{2}$ (only at $0$).
+Analytic ⇒ infinitely differentiable, satisfies CR, has power series expansion, and satisfies Liouville: bounded entire ⇒ constant. Non-examples: $\bar{z}$, $|z|^{2}$ (only at 0).
 
 ### Entire Functions
 Polynomials, $e^{z}$, $\sin z$, $\cos z$ are entire (analytic on $\mathbb C$). $\bar{z}$ is nowhere analytic.

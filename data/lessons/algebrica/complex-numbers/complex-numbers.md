@@ -37,7 +37,7 @@ The real numbers embed into \\( \mathbb{C} \\) through the identification \\( a 
 \\]
 Under the identification above, the pair \\( (-1, 0) \\) corresponds to the real number \\( -1 \\). In other words, the element \\( (0, 1) \\) of \\( \mathbb{C} \\) satisfies exactly the relation that the symbol \\( i \\) is traditionally required to satisfy. This element is called the imaginary unit and is denoted \\( i \\), so that by definition \\( i = (0, 1) \\) and consequently \\( i^2 = -1 \\). The property \\( i^2 = -1 \\) is therefore not a postulate imposed on an undefined symbol: it is a theorem that follows from the multiplication rule on \\( \mathbb{R}^2 \\).
 
-With this notation established, every complex number \\( (a, b) \\) can be decomposed as a combination of the two basis elements \\( (1, 0) \\) and \\( (0, 1) \\), which correspond to \\( 1 \\) and \\( i \\) respectively. The decomposition takes the familiar form \\( a + bi \\), since the following chain of equalities holds.
+With this notation established, every complex number \\( (a, b) \\) can be decomposed as a combination of the two basis elements \\( (1, 0) \\) and \\( (0, 1) \\), which correspond to 1 and \\( i \\) respectively. The decomposition takes the familiar form \\( a + bi \\), since the following chain of equalities holds.
 \\[
 \begin{align}
 (a,\\, b) &= (a,\\, 0) + (0,\\, b) \\\\[6pt]
@@ -75,7 +75,7 @@ z = a + ib \quad \rightarrow \quad
 \end{cases}
 \\]
 + The representation \\( z = a + ib \\) is called the algebraic form of a complex number. As established in the construction above, the complex number \\( a + bi \\) is the ordered pair \\( (a, b) \in \mathbb{R} \times \mathbb{R} \\), and the set \\( \mathbb{C} \\) coincides with the Cartesian product \\( \mathbb{R} \times \mathbb{R} \\) equipped with the operations defined there.
-+ The complex number \\( z = 2 + 3i \\) has a real part of \\( 2 \\) and an imaginary part of \\( 3 \\).
++ The complex number \\( z = 2 + 3i \\) has a real part of 2 and an imaginary part of 3.
 + Numbers of the form \\( z = ib \\) are called purely imaginary numbers.
 
 
@@ -194,7 +194,7 @@ The opposite of \\( a + bi \\) is the complex number:
 The reciprocal of a nonzero complex number \\( z = a + bi \\) is the complex number:
 \\[\frac{1}{z} = \frac{a}{a^2 + b^2} - \frac{b}{a^2 + b^2} i \\]
 Complex numbers of the form \\( z = a + 0i \\), where the imaginary part is zero, are precisely the real numbers.
-The set of complex numbers \\( \mathbb{C} \\) cannot be ordered in a way that is compatible with addition and multiplication. If there existed a total order \\( \leq \\) on \\( \mathbb{C} \\), we should be able to compare \\( i \\) with \\( 0 \\). There are two possible cases:  
+The set of complex numbers \\( \mathbb{C} \\) cannot be ordered in a way that is compatible with addition and multiplication. If there existed a total order \\( \leq \\) on \\( \mathbb{C} \\), we should be able to compare \\( i \\) with 0. There are two possible cases:  
 + If \\( i > 0 \\), then multiplying both sides by \\( i \\) gives \\( i^2 = -1 > 0 \\), which is a contradiction.  
 + If \\( i < 0 \\), multiplying both sides by \\( i \\) again leads to the same contradiction: \\( -1 > 0 \\).  
 Since neither case is valid, no total order on \\( \mathbb{C} \\) can be defined.

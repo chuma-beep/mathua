@@ -8,7 +8,7 @@
 $A$ must be closed; e.g. $A=\mathbb Q\subset\mathbb R$ not closed cannot extend all bounded functions.
 
 ### Urysohn as Corollary
-Tietze with $A=A_0\cup A_1$ ($A_0,A_1$ disjoint closed) and $f=0$ on $A_0$, $1$ on $A_1$ gives Urysohn's lemma.
+Tietze with $A=A_0\cup A_1$ ($A_0,A_1$ disjoint closed) and $f=0$ on $A_0$, 1 on $A_1$ gives Urysohn's lemma.
 
 ## Example
 

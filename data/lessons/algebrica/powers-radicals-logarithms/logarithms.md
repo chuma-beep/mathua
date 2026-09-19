@@ -19,7 +19,7 @@ In simpler terms, the logarithm of a number refers to the exponent to which a sp
 > To clarify the concept, let's consider a simple example: \\(\log{_2}8 = 3 \to 2^3 =8\\).
 
 
-The condition \\( a \neq 1 \\) is essential. In fact, when \\( a = 1 \\), the exponential expression \\( a^x \\) becomes \\( 1^x = 1 \quad \forall \\, x \in \mathbb{R} \\) In this case, the exponential function is constant and therefore not invertible. Since the logarithm is defined as the inverse operation of exponentiation, it cannot be defined when the base is equal to \\(1\\). For this reason, the base of a logarithm must satisfy \\( a > 0 \\) and \\( a \neq 1 \\).
+The condition \\( a \neq 1 \\) is essential. In fact, when \\( a = 1 \\), the exponential expression \\( a^x \\) becomes \\( 1^x = 1 \quad \forall \\, x \in \mathbb{R} \\) In this case, the exponential function is constant and therefore not invertible. Since the logarithm is defined as the inverse operation of exponentiation, it cannot be defined when the base is equal to 1. For this reason, the base of a logarithm must satisfy \\( a > 0 \\) and \\( a \neq 1 \\).
 
 ## Basic identities
 
@@ -32,7 +32,7 @@ Since the exponential is always positive, it is not possible to determine the lo
 
 + Logarithms with base \\(e\\), known as natural or Napierian logarithms, are typically denoted as \\( \ln a \\) without specifying the base, where \\(e \approx 2.71828\\) is Euler's number, the base of the natural exponential function \\(e^x\\).
 
-+ Logarithms with the base of the number \\(10\\), known as common logarithms, are typically denoted as \\( \text{Log} a \\) without specifying the base.
++ Logarithms with the base of the number 10, known as common logarithms, are typically denoted as \\( \text{Log} a \\) without specifying the base.
 
 > The base-10 logarithm is especially useful when dealing with very large or very small numbers. It helps reduce the scale, making the values easier to interpret and compare. That’s why it’s commonly used in scientific and technical fields, often represented on logarithmic scales.
 
@@ -86,7 +86,7 @@ a^{\log_a x} = x \qquad \forall x \in (0,+\infty)
 The product rule states that the logarithm of a product of two numbers is equal to the sum of their logarithms in the same base: \\[\log_a(xy) = \log_ax + \log_ay \\]
 
 
-The quotient rule states that the logarithm of a quotient of two numbers is equal to the difference of the numerator and the denominator: \\[ \log_a{\frac{x}{y}} = \log_ax-\log_ay  \\] From the previous expression, if the numerator \\(x\\) is equal to \\(1\\), we obtain: \\[ \log_a{\frac{1}{y}} = -\log_ay \\] This means that the logarithm of the reciprocal of a number \\(\frac{1}{y}\\) is the opposite of its logarithm, and this is called the co-logarithm, indicated as: \\[\text{colog}_a{y} = -log_a{y} = \log_a{\frac{1}{y}}\\]
+The quotient rule states that the logarithm of a quotient of two numbers is equal to the difference of the numerator and the denominator: \\[ \log_a{\frac{x}{y}} = \log_ax-\log_ay  \\] From the previous expression, if the numerator \\(x\\) is equal to 1, we obtain: \\[ \log_a{\frac{1}{y}} = -\log_ay \\] This means that the logarithm of the reciprocal of a number \\(\frac{1}{y}\\) is the opposite of its logarithm, and this is called the co-logarithm, indicated as: \\[\text{colog}_a{y} = -log_a{y} = \log_a{\frac{1}{y}}\\]
 
 
 The property of the logarithm of a power states that the logarithm of a power of a number is equal to the product of the exponent and the logarithm of the base number: \\[ \log{_a}x^n = n \cdot \log{_a}x \\] This property directly follows from the properties of exponentials, as an expression like \\( x^n \\) can be understood as the result of multiplying \\( x \\) by itself \\( n \\) times.

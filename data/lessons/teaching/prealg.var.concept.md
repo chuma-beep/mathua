@@ -12,7 +12,7 @@ Since we are using a variable, we can discuss gas mileage for Honda Civics, Ford
 
 When variables stand for physical quantities, it's good to use letters that clearly represent those quantities. For example, it is wise to use $g$ for **g**as mileage. This helps people who read your mathematical writing understand it better. It is common to use $x$, $y$, and $z$ for variables when there is no context to suggest something more meaningful like $g$. You may see the variable $x$ a lot.
 
-It is important to be clear about what unit of measure goes with a variable. With gas mileage $g$, if we all agree to use $\text{milepergallon}$ for its units, then $g$ might be a placeholder for $25$, $30$, etc. On the other hand if we decide to use $\text{kilometerpergallon}$ (kilometers per gallon) for units, those quantities would be $40$, $48$, etc. So it's important to tell readers that $g$ represents gas mileage in *miles per gallon* or *kilometers per gallon* or whatever the case may be.
+It is important to be clear about what unit of measure goes with a variable. With gas mileage $g$, if we all agree to use $\text{milepergallon}$ for its units, then $g$ might be a placeholder for 25, 30, etc. On the other hand if we decide to use $\text{kilometerpergallon}$ (kilometers per gallon) for units, those quantities would be 40, 48, etc. So it's important to tell readers that $g$ represents gas mileage in *miles per gallon* or *kilometers per gallon* or whatever the case may be.
 
 Sometimes the units we should use for a variable are suggested indirectly. For example if we're told that a car has used so many *gallons* of gas after traveling so many *miles*, then we should measure gas mileage in $\text{milepergallon}$, not $\text{kilometerpergallon}$.
 
@@ -58,7 +58,7 @@ $$
 
 converts a temperature in degrees Fahrenheit to degrees Celsius. To do this, we need a Fahrenheit temperature, $F$. Then we can *evaluate* the expression. This  means replacing its variable(s) with specific numbers and finding the result as a single,  simplified number.
 
-Let's convert the temperature $89^{\circ}F$ to the Celsius scale by evaluating the expression. To do this, we *substitute* the number $89$ in place of the  variable $F$.
+Let's convert the temperature $89^{\circ}F$ to the Celsius scale by evaluating the expression. To do this, we *substitute* the number 89 in place of the  variable $F$.
 
 $$
 \begin{aligned}\frac{5}{9}(\substitute{89} - 32)&=\frac{5}{9}(57) &&\text{Review order of operations in }\text{.} \\ &=\frac{285}{9} &&\text{Review fraction multiplication in }\text{.} \\ &\approx 31.67\end{aligned}
@@ -108,7 +108,7 @@ A convention among contractors is that a staircase run, in inches, is given by $
 
 Determine the run for each step of a staircase where the rise is $7\,\text{in}$.
 
-We substitute $7$ for $h$:
+We substitute 7 for $h$:
 
 $$
 \begin{aligned}17.5-\substitute{7}&=10.5\end{aligned}
@@ -118,7 +118,7 @@ $$
 
 A staircase needs to span a total height of $108\,\text{in}$. What is a reasonable number of steps for it to have? What will that mean for the rise of each step? What will the run be for each step?
 
-There is more than one good answer, but if there are $12$ steps then the height of each step will be $\frac{108}{12}$ inches, or $9\,\text{in}$. And that mean the run of each step is found by substituting $9$ for $h$:
+There is more than one good answer, but if there are 12 steps then the height of each step will be $\frac{108}{12}$ inches, or $9\,\text{in}$. And that mean the run of each step is found by substituting 9 for $h$:
 
 $$
 \begin{aligned}17.5-\substitute{9}&=8.5\end{aligned}
@@ -170,11 +170,11 @@ We have been evaluating expressions, but we can evaluate formulas in the same wa
 
 Tent Height
 
-When you are $5$ $\text{ft}$ from the west side, the height is .
+When you are 5 $\text{ft}$ from the west side, the height is .
 
 Solution
 
-When you are $2.5$ $\text{ft}$ from the west side, the height is .
+When you are 2.5 $\text{ft}$ from the west side, the height is .
 
 Solution
 

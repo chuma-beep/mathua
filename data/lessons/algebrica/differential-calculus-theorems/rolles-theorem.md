@@ -52,7 +52,7 @@ This function satisfies \\(f(0) = f(1) = 0\\) and is differentiable on \\((0, 1)
 
 The second hypothesis requires differentiability on the open interval \\((a, b)\\). The absolute value function \\(f(x) = |x|\\) on \\([-1, 1]\\) is continuous on the closed interval and satisfies \\(f(-1) = f(1) = 1\\), so the first and third hypotheses are met. However, at \\(x = 0\\), the function has a corner and the derivative does not exist.
 
-The left and right derivatives at this point are \\(-1\\) and \\(1\\), respectively, indicating non-differentiability on all of \\((-1, 1)\\). Consequently, there is no horizontal tangent in the interior, demonstrating that differentiability is essential.
+The left and right derivatives at this point are \\(-1\\) and 1, respectively, indicating non-differentiability on all of \\((-1, 1)\\). Consequently, there is no horizontal tangent in the interior, demonstrating that differentiability is essential.
 
 
 The third hypothesis requires that the function values at the endpoints are equal. A strictly monotonic function can be continuous and differentiable everywhere, yet may lack an interior stationary point. For example, \\(f(x) = x\\) on \\([0, 1]\\) satisfies \\(f(0) \neq f(1)\\).

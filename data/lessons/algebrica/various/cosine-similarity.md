@@ -28,7 +28,7 @@ A small value of \\(d(\mathbf{u}, \mathbf{v})\\) indicates that the two vectors 
 
 \\[\text{sim}(\mathbf{u}, \mathbf{v}) = \frac{1}{1 + d(\mathbf{u}, \mathbf{v})} \\]
 
-This expression maps the distance to a value in the interval \\((0, 1]\\). When the two vectors are identical, the distance is zero and the similarity equals \\(1\\). As the distance increases, the similarity decreases monotonically towards \\(0\\), without ever reaching it.
+This expression maps the distance to a value in the interval \\((0, 1]\\). When the two vectors are identical, the distance is zero and the similarity equals 1. As the distance increases, the similarity decreases monotonically towards 0, without ever reaching it.
 
 
 The Euclidean distance, however, has a significant limitation when applied to text analysis: it is sensitive to the magnitude of the vectors, not only to their direction. Two documents discussing exactly the same topics will produce vectors that point in the same direction, but one of them might have a much larger norm simply because it is longer. The Euclidean distance would then indicate that the two documents are far apart, even though their content is essentially identical. Cosine similarity addresses this limitation by normalizing the vectors before comparing them, so that only the angle between the two directions is taken into account.
@@ -47,7 +47,7 @@ In these expressions, \\(V_x \cdot V_y\\) denotes the dot product of the two vec
 
 ![](/diagrams/algebrica/cosine-similarity.png)
 
-The value of cosine similarity ranges between \\(-1\\) and \\(1\\). In text analysis, where vector components are non-negative by construction, the range is restricted to \\([0, 1]\\). A value close to \\(1\\) indicates that the angle between the two vectors is small, meaning the vectors are nearly parallel and the corresponding documents are highly similar. A value close to \\(0\\) indicates that the vectors are nearly orthogonal, and therefore that the two documents share little to no common content.
+The value of cosine similarity ranges between \\(-1\\) and 1. In text analysis, where vector components are non-negative by construction, the range is restricted to \\([0, 1]\\). A value close to 1 indicates that the angle between the two vectors is small, meaning the vectors are nearly parallel and the corresponding documents are highly similar. A value close to 0 indicates that the vectors are nearly orthogonal, and therefore that the two documents share little to no common content.
 
 > From a purely mathematical standpoint, a value of \\(-1\\) indicates that the two vectors point in exactly opposite directions, forming an angle of \\(180°\\). This case does not arise in text analysis, where all vector components are non-negative, but it remains part of the general mathematical definition.
 
@@ -103,7 +103,7 @@ To find the angle \\(\theta\\) between the two vectors \\(V_x\\) and \\(V_y\\) f
 
 \\[\theta = \arccos(0.75) \approx 41.4^\circ \\]
 
-This result is consistent with the high similarity value computed earlier: an angle of approximately \\(41.4^\circ\\) indicates that the two vectors are oriented in nearly the same direction in the feature space. In general, as the angle between two vectors decreases towards zero, their cosine similarity approaches \\(1\\), reflecting an increasing degree of similarity between the corresponding documents.
+This result is consistent with the high similarity value computed earlier: an angle of approximately \\(41.4^\circ\\) indicates that the two vectors are oriented in nearly the same direction in the feature space. In general, as the angle between two vectors decreases towards zero, their cosine similarity approaches 1, reflecting an increasing degree of similarity between the corresponding documents.
 
 ## Cosine similarity and vector orthogonality
 
@@ -137,7 +137,7 @@ Below is an example of Python code for calculating the cosine similarity of vect
     print(f"Cosine similarity (Vx,Vy): {similarity}")
     
 
-> Having removed some words from the original example sentences to make the evaluation more precise, the sentences have been directly inserted as vectors in the code, returning a cosine similarity value of \\(0.75\\). For a complete example that starts from the raw sentences, the following code can be considered instead. In this case, the cosine similarity value between \\(V_x\\) and \\(V_y\\) will be approximately \\(0.48\\).
+> Having removed some words from the original example sentences to make the evaluation more precise, the sentences have been directly inserted as vectors in the code, returning a cosine similarity value of 0.75. For a complete example that starts from the raw sentences, the following code can be considered instead. In this case, the cosine similarity value between \\(V_x\\) and \\(V_y\\) will be approximately 0.48.
 
     
     

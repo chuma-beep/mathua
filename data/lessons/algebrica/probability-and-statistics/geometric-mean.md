@@ -45,7 +45,7 @@ In this case, \\( n = 5 \\). Substituting the values, we get:
 
 \\[M_g = (924)^{\frac{1}{5}} \approx 3.93 \\]
 
-##### The geometric mean provides a sense of the typical multiplicative value within a dataset.While the arithmetic mean of these numbers is \\( (2.0 + 3.5 + 4.0 + 5.5 + 6.0)/5 = 4.2 \\), the geometric mean is slightly lower (\\( 3.93 \\)) because it gives less weight to higher values and more to lower ones.
+##### The geometric mean provides a sense of the typical multiplicative value within a dataset.While the arithmetic mean of these numbers is \\( (2.0 + 3.5 + 4.0 + 5.5 + 6.0)/5 = 4.2 \\), the geometric mean is slightly lower (3.93) because it gives less weight to higher values and more to lower ones.
 
 Hence, the geometric mean of the series is approximately:
 
@@ -66,7 +66,7 @@ March| +7.6%
 April| +2.1%  
 May| +4.5%  
   
-When dealing with percentage returns, direct multiplication can quickly lead to very small or misleading values, especially when negative returns are involved. To handle this correctly, each percentage return \\( x_i \\) is first converted into a growth factor by adding \\(1\\) (that is, \\( 1 + x_i \\)). These factors are then multiplied together, the \\( n \\)-th root is taken, and finally, 1 is subtracted to bring the result back to percentage form.
+When dealing with percentage returns, direct multiplication can quickly lead to very small or misleading values, especially when negative returns are involved. To handle this correctly, each percentage return \\( x_i \\) is first converted into a growth factor by adding 1 (that is, \\( 1 + x_i \\)). These factors are then multiplied together, the \\( n \\)-th root is taken, and finally, 1 is subtracted to bring the result back to percentage form.
 
 \\[M_g = \left[ \prod_{i=1}^{n} (1 + x_i) \right]^{\frac{1}{n}} - 1 \\]
 

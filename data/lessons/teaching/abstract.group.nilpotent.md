@@ -12,4 +12,4 @@ Upper unitriangular group is nilpotent (Heisenberg); $S_3$ not nilpotent.
 
 ## Example
 
-$D_8$ (order $8$) is $2$-group, hence nilpotent; its centre is $\{1,r^2\}$.
+$D_8$ (order 8) is 2-group, hence nilpotent; its centre is $\{1,r^2\}$.

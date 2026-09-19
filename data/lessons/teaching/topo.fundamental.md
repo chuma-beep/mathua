@@ -12,4 +12,4 @@ $\pi_1$ trivial ⇔ every loop contracts; $S^{2}$ simply connected, $S^{1}$ not.
 
 ## Example
 
-$X=\mathbb R^{2}\setminus\{0,1\}$: $\pi_1$ free on $2$ generators (loops around each puncture).
+$X=\mathbb R^{2}\setminus\{0,1\}$: $\pi_1$ free on 2 generators (loops around each puncture).

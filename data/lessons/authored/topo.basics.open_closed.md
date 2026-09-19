@@ -4,7 +4,7 @@ Inside a metric space \\((X,d)\\), the most important regions are described by d
 
 ## Open Sets
 
-A set \\(U \subseteq X\\) is **open** when every point of \\(U\\) is surrounded by a small ball that still fits inside \\(U\\). Formally: for every \\(x \in U\\) there is an \\(\varepsilon > 0\\) such that all points within distance \\(\varepsilon\\) of \\(x\\) also lie in \\(U\\). An interval like \\((0,1)\\) on the real line is open — nudge any point slightly and you stay inside — while \\([0,1]\\) is not, because no ball around the endpoint \\(0\\) avoids negative numbers.
+A set \\(U \subseteq X\\) is **open** when every point of \\(U\\) is surrounded by a small ball that still fits inside \\(U\\). Formally: for every \\(x \in U\\) there is an \\(\varepsilon > 0\\) such that all points within distance \\(\varepsilon\\) of \\(x\\) also lie in \\(U\\). An interval like \\((0,1)\\) on the real line is open — nudge any point slightly and you stay inside — while \\([0,1]\\) is not, because no ball around the endpoint 0 avoids negative numbers.
 
 ## Closed Sets
 

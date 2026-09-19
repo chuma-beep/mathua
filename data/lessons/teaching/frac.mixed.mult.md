@@ -120,7 +120,7 @@ Divide: $2\frac{1}{2} \div 1\frac{1}{4}.$
 | Multiply. | $\frac{5 \cdot 4}{2 \cdot 5}$ |
 | Look for common factors. | $\frac{5\not{} \cdot 2\not{} \cdot 2}{2\not{} \cdot 1 \cdot 5\not{}}$ |
 | Remove common factors. | $\frac{2}{1}$ |
-| Simplify. | $2$ |
+| Simplify. | 2 |
 
 ### Try It 4.79
 
@@ -146,15 +146,15 @@ $$
 \text{The quotient}\ \text{of}\ 3x\ \text{and}\ 8\text{.}
 $$
 
-This tells us that we need to divide $3x$ by $8.$ $\frac{3x}{8}$
+This tells us that we need to divide $3x$ by 8. $\frac{3x}{8}$
 
 ### Try It 4.81
 
-Translate the phrase into an algebraic expression: the quotient of $9s$ and $14.$
+Translate the phrase into an algebraic expression: the quotient of $9s$ and 14.
 
 ### Try It 4.82
 
-Translate the phrase into an algebraic expression: the quotient of $5y$ and $6.$
+Translate the phrase into an algebraic expression: the quotient of $5y$ and 6.
 
 ### Example 4.42
 
@@ -279,7 +279,7 @@ Simplify: $\frac{2\frac{3}{4}}{\frac{1}{8}}.$
 | Multiply the first fraction by the reciprocal of the second. | $\frac{11}{4} \cdot \frac{8}{1}$ |
 | Multiply. | $\frac{11 \cdot 8}{4 \cdot 1}$ |
 | Look for common factors. | $\frac{11 \cdot 4\not{} \cdot 2}{4\not{} \cdot 1}$ |
-| Remove common factors and simplify. | $22$ |
+| Remove common factors and simplify. | 22 |
 
 ### Try It 4.91
 
@@ -422,7 +422,7 @@ Simplify: $\frac{4(-3) + 6(-2)}{-3(2)-2}.$
 |           | $\frac{4(-3) + 6(-2)}{-3(2)-2}$ |
 | Multiply. | $\frac{-12 + (-12)}{-6 - 2}$    |
 | Simplify. | $\frac{-24}{-8}$                |
-| Divide.   | $3$                             |
+| Divide.   | 3                             |
 
 ### Try It 4.101
 
@@ -519,11 +519,11 @@ In the following exercises, translate each English phrase into an algebraic expr
 
 192\.
 
-the quotient of $5u$ and $11$
+the quotient of $5u$ and 11
 
 193\.
 
-the quotient of $7v$ and $13$
+the quotient of $7v$ and 13
 
 194\.
 
@@ -535,11 +535,11 @@ the quotient of $a$ and $b$
 
 196\.
 
-the quotient of $r$ and the sum of $s$ and $10$
+the quotient of $r$ and the sum of $s$ and 10
 
 197\.
 
-the quotient of $A$ and the difference of $3$ and $B$
+the quotient of $A$ and the difference of 3 and $B$
 
 **Simplify Complex Fractions**
 
@@ -769,7 +769,7 @@ $\frac{8(9 - 2)-4(14 - 9)}{7(8 - 3)-3(16 - 9)}$
 **Baking** A booth at the county fair sells fudge by the pound. Their award winning “Chocolate Overdose” fudge contains $2\frac{2}{3}$ cups of chocolate chips per pound.
 
 1.  ⓐ How many cups of chocolate chips are in a half-pound of the fudge?
-2.  ⓑ The owners of the booth make the fudge in $10$-pound batches. How many chocolate chips do they need to make a $10$-pound batch? Write your results as improper fractions and as a mixed numbers.
+2.  ⓑ The owners of the booth make the fudge in 10-pound batches. How many chocolate chips do they need to make a 10-pound batch? Write your results as improper fractions and as a mixed numbers.
 
 #### Writing Exercises
 

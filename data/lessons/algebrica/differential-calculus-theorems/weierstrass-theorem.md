@@ -30,7 +30,7 @@ Consider the function \\( f(x) = x \\) on the open interval \\( (0,1) \\).
 
 ![](/diagrams/algebrica/weierstrass-theorem-2.png)
 
-The function is continuous, yet it has no maximum and no minimum on that interval. The infimum is \\( 0 \\) and the supremum is \\( 1 \\), but neither value is attained because the endpoints are not included.
+The function is continuous, yet it has no maximum and no minimum on that interval. The infimum is 0 and the supremum is 1, but neither value is attained because the endpoints are not included.
 
 
 Now consider \\( f(x) = \dfrac{1}{x} \\) on \\( (0,1] \\). The interval is bounded but not closed. The function is continuous on its [domain](<../determining-the-domain-of-a-function/>), yet it does not attain a maximum. As \\( x \to 0^+ \\), the function grows without bound.
@@ -59,7 +59,7 @@ These are the only interior points where the slope of the tangent line vanishes.
 
 \\[\begin{array}{ll} f(-2) = -2 & f(-1) = 2 \\\\[6pt] f(1) = -2 & f(2) = 2 \end{array} \\]
 
-Comparing these values, we observe that the maximum value is \\( 2 \\), attained at \\( x=-1 \\) and \\( x=2 \\), while the minimum value is \\( -2 \\), attained at \\( x=-2 \\) and \\( x=1 \\).
+Comparing these values, we observe that the maximum value is 2, attained at \\( x=-1 \\) and \\( x=2 \\), while the minimum value is \\( -2 \\), attained at \\( x=-2 \\) and \\( x=1 \\).
 
 ###### To summarize, one important point of this example is that Weierstrass’ theorem does not tell us where the extreme values are located, nor how many there are. It simply guarantees that they exist. It is the derivative that allows us to find them explicitly.
 

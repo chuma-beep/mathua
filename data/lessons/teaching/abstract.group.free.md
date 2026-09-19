@@ -12,4 +12,4 @@ $\langle a,b\mid aba^{-1}=b^{-1}\rangle$ gives Klein bottle group; $S_3=\langle 
 
 ## Example
 
-$F_2$ has basis $\{a,b\}$, elements reduced words $ab^{-1}a$; rank $2$ non-abelian.
+$F_2$ has basis $\{a,b\}$, elements reduced words $ab^{-1}a$; rank 2 non-abelian.

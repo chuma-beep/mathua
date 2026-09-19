@@ -23,7 +23,7 @@ The height must be measured perpendicular to the base — not along the slanted 
 
 **Example**
 
-Find the area of a rectangle measuring $8$ m by $5$ m.
+Find the area of a rectangle measuring 8 m by 5 m.
 
 *Solution*
 
@@ -33,7 +33,7 @@ The area is $40\text{ m}^2$.
 
 **Example**
 
-A parallelogram has base $7$ cm, slanted side $5$ cm, and height $4$ cm. Find its area.
+A parallelogram has base 7 cm, slanted side 5 cm, and height 4 cm. Find its area.
 
 *Solution*
 
@@ -41,7 +41,7 @@ Use the perpendicular height, not the slanted side:
 
 \[A = 7 \cdot 4 = 28\]
 
-The area is $28\text{ cm}^2$. (The side length $5$ is not needed.)
+The area is $28\text{ cm}^2$. (The side length 5 is not needed.)
 
 ## Units
 

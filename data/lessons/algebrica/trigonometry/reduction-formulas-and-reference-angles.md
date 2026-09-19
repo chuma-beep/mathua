@@ -66,7 +66,7 @@ The tangent and cotangent of \\( \pi/2+\alpha \\) therefore differ from the cota
 
 ## Reduction formulas for \\( \pi/2 - \alpha \\)
 
-Consider now an angle of the form \\(\frac{\pi}{2}-\alpha\\) where \\( \alpha \\) denotes an acute angle in the first quadrant. This angle is obtained by rotating counterclockwise from the positive \\( x \\)-axis up to \\( \frac{\pi}{2} \\), and then turning back by \\( \alpha \\). The backward rotation brings the terminal side to the right of the vertical axis, keeping it between \\( 0 \\) and \\( \frac{\pi}{2} \\). The resulting angle therefore lies in the first quadrant of the Cartesian plane.
+Consider now an angle of the form \\(\frac{\pi}{2}-\alpha\\) where \\( \alpha \\) denotes an acute angle in the first quadrant. This angle is obtained by rotating counterclockwise from the positive \\( x \\)-axis up to \\( \frac{\pi}{2} \\), and then turning back by \\( \alpha \\). The backward rotation brings the terminal side to the right of the vertical axis, keeping it between 0 and \\( \frac{\pi}{2} \\). The resulting angle therefore lies in the first quadrant of the Cartesian plane.
 
 A geometric analysis of the right triangle associated with the terminal side yields the following identities for sine and cosine:
 \\[
@@ -166,7 +166,7 @@ The two negative signs cancel in each quotient, and the tangent of \\( 3\pi/2-\a
 
 ## Reduction formulas for \\( 2\pi - \alpha = -\alpha \\)
 
-Consider finally an angle of the form \\(2\pi-\alpha\\) where \\( \alpha \\) denotes an acute angle. Since \\( 2\pi \\) corresponds to a full revolution and therefore identifies the same terminal side as \\( 0 \\), the subtraction of \\( \alpha \\) rotates the terminal side slightly below the positive \\( x \\)-axis. The resulting angle lies strictly between \\( 3\pi/2 \\) and \\( 2\pi \\), and therefore its terminal side falls in the fourth quadrant.
+Consider finally an angle of the form \\(2\pi-\alpha\\) where \\( \alpha \\) denotes an acute angle. Since \\( 2\pi \\) corresponds to a full revolution and therefore identifies the same terminal side as 0, the subtraction of \\( \alpha \\) rotates the terminal side slightly below the positive \\( x \\)-axis. The resulting angle lies strictly between \\( 3\pi/2 \\) and \\( 2\pi \\), and therefore its terminal side falls in the fourth quadrant.
 
 The angle \\( 2\pi-\alpha \\) is coterminal with \\( -\alpha \\), that is, the two angles differ by an integer multiple of \\( 2\pi \\) and therefore identify the same point on the unit circle. Since the trigonometric functions have period \\( 2\pi \\), they take the same values at \\( 2\pi-\alpha \\) and at \\( -\alpha \\), and this equivalence will be used implicitly in the identity.
 

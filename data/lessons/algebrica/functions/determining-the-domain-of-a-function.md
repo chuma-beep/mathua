@@ -66,14 +66,14 @@ To determine its domain, each component must be examined separately, because the
 
 The logarithmic term \\(\log(x - 1)\\) requires its argument to be strictly positive. This leads to the condition: \\[x - 1 > 0 \\]
 
-which means that only values greater than \\(1\\) are admissible. Any value less than or equal to \\(1\\) immediately violates the definition of the logarithm. Graphically, we can represent the condition in the following way:
+which means that only values greater than 1 are admissible. Any value less than or equal to 1 immediately violates the definition of the logarithm. Graphically, we can represent the condition in the following way:
 
 | \\[1\\]|   
 ---|---|---  
 | |   
 | |   
   
-The square root term \\(\sqrt{x + 4}\\) requires its argument to be non-negative. This condition is expressed by: \\[x + 4 \ge 0 \\] so the values \\(x \ge -4\\) are allowed. Compared to the logarithmic constraint, this requirement is less restrictive, since every value greater than \\(1\\) is automatically greater than \\(-4\\). By adding this result to the previous diagram, we obtain:
+The square root term \\(\sqrt{x + 4}\\) requires its argument to be non-negative. This condition is expressed by: \\[x + 4 \ge 0 \\] so the values \\(x \ge -4\\) are allowed. Compared to the logarithmic constraint, this requirement is less restrictive, since every value greater than 1 is automatically greater than \\(-4\\). By adding this result to the previous diagram, we obtain:
 
 | \\[-4\\]| \\[1\\]|   
 ---|---|---|---  
@@ -101,7 +101,7 @@ Since the logarithm is defined only for strictly positive values, we require:
 
 \\[2 + \sin x > 0\\]
 
-Because \\(\sin x\\) ranges between \\(-1\\) and \\(1\\), the smallest value this expression can take is \\(2 - 1 = 1\\), which is already positive. This means that the logarithm introduces no restriction on the domain, as its argument is positive for every real value of \\(x\\).
+Because \\(\sin x\\) ranges between \\(-1\\) and 1, the smallest value this expression can take is \\(2 - 1 = 1\\), which is already positive. This means that the logarithm introduces no restriction on the domain, as its argument is positive for every real value of \\(x\\).
 
 
 Moving a step outward, the logarithm itself appears in the numerator of a fraction whose denominator is \\(\sinh(x)\\). A denominator cannot be zero because division by zero is not defined in the [real numbers](<../types-of-numbers>), so we must exclude the values of \\(x\\) for which \\(\sinh(x) = 0\\). The hyperbolic sine vanishes only at \\(x = 0\\), so this point must be removed from the domain.
@@ -140,7 +140,7 @@ We now move one level outward and consider the entire expression inside the squa
 
 \\[\cos^{2}(3x - 1) - \log(5 - |2x|) \ge 0 \\]
 
-This inequality links together two terms with very different behaviors. The squared cosine oscillates between \\(0\\) and \\(1\\), while the logarithm varies over the interval \\((-5/2,\; 5/2)\\) and becomes arbitrarily large as \\(|2x|\\) approaches 5 from below. The inequality therefore holds only for those values of \\(x\\) for which the logarithmic term does not exceed the value of the squared cosine. In other words, we must have:
+This inequality links together two terms with very different behaviors. The squared cosine oscillates between 0 and 1, while the logarithm varies over the interval \\((-5/2,\; 5/2)\\) and becomes arbitrarily large as \\(|2x|\\) approaches 5 from below. The inequality therefore holds only for those values of \\(x\\) for which the logarithmic term does not exceed the value of the squared cosine. In other words, we must have:
 
 \\[\log(5 - |2x|) \le \cos^{2}(3x - 1) \\]
 

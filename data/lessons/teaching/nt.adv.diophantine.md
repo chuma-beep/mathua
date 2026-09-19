@@ -203,15 +203,15 @@ Again, there is a mathematical theory of equivalence relations which applies in 
 
 🔗
 
-All fun technical language aside, the idea is really simple. If two numbers belong to the same remainder class, then in some way, they are the same. That is, they are the same _up to division by \\(b\\)_. In the case where \\(b = 5\\) above, the numbers \\(8\\) and \\(23\text{,}\\) while not the same number, are the same when it comes to dividing by 5, because both have remainder \\(3\text{.}\\)
+All fun technical language aside, the idea is really simple. If two numbers belong to the same remainder class, then in some way, they are the same. That is, they are the same _up to division by \\(b\\)_. In the case where \\(b = 5\\) above, the numbers 8 and \\(23\text{,}\\) while not the same number, are the same when it comes to dividing by 5, because both have remainder \\(3\text{.}\\)
 
 🔗
 
-It matters what the divisor is: \\(8\\) and \\(23\\) are the same up to division by \\(5\text{,}\\) but not up to division by \\(7\text{,}\\) since \\(8\\) has remainder of 1 when divided by 7 while 23 has a remainder of 2.
+It matters what the divisor is: 8 and 23 are the same up to division by \\(5\text{,}\\) but not up to division by \\(7\text{,}\\) since 8 has remainder of 1 when divided by 7 while 23 has a remainder of 2.
 
 🔗
 
-With all this in mind, let’s introduce some notation. We want to say that \\(8\\) and 23 are basically the same, even though they are not equal. It would be wrong to say \\(8 = 23\text{.}\\) Instead, we write \\(8 \equiv 23\text{.}\\) But this is not always true. It works if we are thinking division by 5, so we need to denote that somehow. What we will actually write is this:
+With all this in mind, let’s introduce some notation. We want to say that 8 and 23 are basically the same, even though they are not equal. It would be wrong to say \\(8 = 23\text{.}\\) Instead, we write \\(8 \equiv 23\text{.}\\) But this is not always true. It works if we are thinking division by 5, so we need to denote that somehow. What we will actually write is this:
 
 \begin{equation*} 8 \equiv 23 \pmod{5} \end{equation*} 
 
@@ -395,7 +395,7 @@ One of the important consequences of these facts about congruences, is that we c
 
 ####  Example 5.2.3.
 
-Find the remainder of \\(3491\\) divided by \\(9\text{.}\\)
+Find the remainder of 3491 divided by \\(9\text{.}\\)
 
 🔗
 
@@ -429,13 +429,13 @@ So far we have seen how to add, subtract and multiply with congruences. What abo
 
 🔗
 
-This is true. Now \\(18\\) and \\(42\\) are both divisible by 6. However,
+This is true. Now 18 and 42 are both divisible by 6. However,
 
 \begin{equation*} 3 \not\equiv 7 \pmod 8\text{.} \end{equation*} 
 
 🔗
 
-While this doesn’t work, note that \\(3 \equiv 7 \pmod 4\text{.}\\) We cannot divide \\(8\\) by 6, but we can divide 8 by the greatest common factor of \\(8\\) and \\(6\text{.}\\) Will this always happen?
+While this doesn’t work, note that \\(3 \equiv 7 \pmod 4\text{.}\\) We cannot divide 8 by 6, but we can divide 8 by the greatest common factor of 8 and \\(6\text{.}\\) Will this always happen?
 
 🔗
 
@@ -493,7 +493,7 @@ Let’s also see how you could solve this using our rules for the algebra of con
 
 🔗
 
-Then to divide both sides by 3, we first add 0 to both sides. Of course, on the right-hand side, we want that 0 to be a 10 (yes, \\(10\\) really is 0 since they are congruent modulo 5). This gives,
+Then to divide both sides by 3, we first add 0 to both sides. Of course, on the right-hand side, we want that 0 to be a 10 (yes, 10 really is 0 since they are congruent modulo 5). This gives,
 
 \begin{equation*} 3x \equiv 12 \pmod{5}\text{.} \end{equation*} 
 
@@ -595,7 +595,7 @@ Let’s work this particular example to see how this might go.
 
 🔗
 
-First, check if perhaps there are no solutions because a divisor of \\(51\\) and \\(87\\) is not a divisor of \\(123\text{.}\\) Really, we just need to check whether \\(\gcd(51, 87) \mid 123\text{.}\\) This greatest common divisor is 3, and yes \\(3 \mid 123\text{.}\\) At this point, we might as well factor out this greatest common divisor. So instead, we will solve:
+First, check if perhaps there are no solutions because a divisor of 51 and 87 is not a divisor of \\(123\text{.}\\) Really, we just need to check whether \\(\gcd(51, 87) \mid 123\text{.}\\) This greatest common divisor is 3, and yes \\(3 \mid 123\text{.}\\) At this point, we might as well factor out this greatest common divisor. So instead, we will solve:
 
 \begin{equation*} 17x + 29y = 41\text{.} \end{equation*} 
 

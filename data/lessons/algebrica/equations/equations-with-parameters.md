@@ -39,7 +39,7 @@ Solving an equation with parameters involves determining, for each parameter con
 
 A parameter is defined as a real number that remains fixed within a single instance of an equation, whereas the unknown refers to the variable being solved for. The same symbol may assume different roles depending on the problem’s framing.
 
-For example, in the equation \\( ax + b = 0 \\), if the objective is to find the value of \\( x \\) that satisfies the equation, then \\( a \\) and \\( b \\) serve as parameters and \\( x \\) is the unknown. Conversely, if the question concerns which pairs \\( (a, b) \\) yield a solution equal to \\( 1 \\), then \\( a \\) and \\( b \\) become the unknowns.
+For example, in the equation \\( ax + b = 0 \\), if the objective is to find the value of \\( x \\) that satisfies the equation, then \\( a \\) and \\( b \\) serve as parameters and \\( x \\) is the unknown. Conversely, if the question concerns which pairs \\( (a, b) \\) yield a solution equal to 1, then \\( a \\) and \\( b \\) become the unknowns.
 
 The term parametric equations commonly appears in calculus and analytic geometry to describe curves whose coordinates are expressed as functions of a common variable, such as \\( x(t) \\) and \\( y(t) \\). In this context, however, the term refers to equations whose coefficients depend on one or more real parameters, with solutions analysed as those parameters vary.
 
@@ -58,7 +58,7 @@ This solution defines a [function](<../functions/>) of the parameter.
 
 Consider the following linear equation involving the parameter \\( k \\): \\[(k - 1)x = k^2 - 1 \\] The coefficient of \\( x \\) is \\( a(k) = k - 1 \\), and the right-hand side is \\( b(k) = k^2 - 1 \\). Since the right-hand side factors as \\( (k-1)(k+1) \\), the case \\( k = 1 \\) requires separate consideration.
 
-For \\( k \neq 1 \\), both sides can be divided by \\( k - 1 \\) without ambiguity, as the divisor is nonzero. This yields \\[x = \frac{(k-1)(k+1)}{k-1} = k + 1 \\] Thus, the equation has the unique solution \\( x = k + 1 \\) for every real value of \\( k \\) except \\( 1 \\). When \\( k = 1 \\), both sides become zero, and the equation reduces to \\( 0 \cdot x = 0 \\). This identity is satisfied by every real \\( x \\), so the solution set is \\( \mathbb{R} \\).
+For \\( k \neq 1 \\), both sides can be divided by \\( k - 1 \\) without ambiguity, as the divisor is nonzero. This yields \\[x = \frac{(k-1)(k+1)}{k-1} = k + 1 \\] Thus, the equation has the unique solution \\( x = k + 1 \\) for every real value of \\( k \\) except 1. When \\( k = 1 \\), both sides become zero, and the equation reduces to \\( 0 \cdot x = 0 \\). This identity is satisfied by every real \\( x \\), so the solution set is \\( \mathbb{R} \\).
 
 In summary, the solution is: \\[\begin{align} k = 1 &\Rightarrow x \in \mathbb{R} \\\\[6pt] k \neq 1 &\Rightarrow x = k + 1 \end{align} \\]
 
@@ -95,9 +95,9 @@ For \\( x > 0 \\), the condition \\( \sin x = kx \\) can be rewritten as
 
 \\[k = \frac{\sin x}{x} \\]
 
-The function \\( g(x) = \dfrac{\sin x}{x} \\) is [continuous](<../continuous-functions/>) for \\( x > 0 \\), tends to \\( 1 \\) as \\( x \to 0^+ \\), and oscillates with decreasing amplitude toward \\( 0 \\).
+The function \\( g(x) = \dfrac{\sin x}{x} \\) is [continuous](<../continuous-functions/>) for \\( x > 0 \\), tends to 1 as \\( x \to 0^+ \\), and oscillates with decreasing amplitude toward 0.
 
-Its [local maxima](<../maximum-minimum-and-inflection-points/>) form a strictly decreasing [sequence](<../sequences/>), all below \\( 1 \\).
+Its [local maxima](<../maximum-minimum-and-inflection-points/>) form a strictly decreasing [sequence](<../sequences/>), all below 1.
 
   * For \\( k \geq 1 \\), the line \\( y = kx \\) is too steep to intersect the sinusoid outside the origin, and no non-trivial solution exists.
 

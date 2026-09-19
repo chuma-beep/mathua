@@ -2,11 +2,11 @@
 
 # Compound Inequalities
 
-On the newest version of the SAT (an exam that often qualifies students for colleges) the minimum score that you can earn is $400$ and the maximum score that you can earn is $1600$. This means that only numbers between $400$ and $1600$, including these endpoints, are possible scores. To plot all of these values on a number line would look something like:
+On the newest version of the SAT (an exam that often qualifies students for colleges) the minimum score that you can earn is 400 and the maximum score that you can earn is 1600. This means that only numbers between 400 and 1600, including these endpoints, are possible scores. To plot all of these values on a number line would look something like:
 
 *Possible SAT Scores*
 
-Going back to the original statement, "the minimum score that you can earn is $400$ and the maximum score that you can earn is $1600$," this really says two things. First, it says that $(\text{a SAT score})\geq400$, and second, that $(\text{a SAT score})\le1600$. When we combine two inequalities like this into a single problem, it becomes a *compound inequality*.
+Going back to the original statement, "the minimum score that you can earn is 400 and the maximum score that you can earn is 1600," this really says two things. First, it says that $(\text{a SAT score})\geq400$, and second, that $(\text{a SAT score})\le1600$. When we combine two inequalities like this into a single problem, it becomes a *compound inequality*.
 
 Our lives are often constrained by the compound inequalities of reality: you need to buy enough materials to complete your project, but you can only fit so much into your vehicle; you would like to finish your degree early, but only have so much money and time to put toward your courses; you would like a vegetable garden big enough to supply you with veggies all summer long, but your yard or balcony only gets so much sun. In the rest of the section we hope to illuminate how to think mathematically about problems like these.
 
@@ -54,7 +54,7 @@ To find the intersection of the sets $(-\infty,5)$ and $[3,\infty)$, first we dr
 
 *A number line sketch of $(-\infty,5)$ and $[-3,\infty)$*
 
-Recall that the intersection of two sets is the set of the numbers in common to both sets. In English, we might say that the lines overlap at every number between $-3$ and $5$. This description is the same as the interval $[-3,5)$.
+Recall that the intersection of two sets is the set of the numbers in common to both sets. In English, we might say that the lines overlap at every number between $-3$ and 5. This description is the same as the interval $[-3,5)$.
 
 *A number line sketch of $[-3,5)$*
 
@@ -96,7 +96,7 @@ In this section, we mostly use  interval notation  to answer questions. Recall t
 
 **Definition**
 
-A *compound inequality* is a grouping of two or more inequalities into a larger inequality statement. These usually come in two flavors: "or" and "and" inequalities. For an example of an "or" compound inequality, you might get a discount at the movie theater if your age is less than $13$*or* greater than $64$. For an example of an "and" compound inequality, to purchase a drink at a bar in Oregon, you need to be over $21$ years old *and* be have money for your drink. You need to fulfill *both* requirements.
+A *compound inequality* is a grouping of two or more inequalities into a larger inequality statement. These usually come in two flavors: "or" and "and" inequalities. For an example of an "or" compound inequality, you might get a discount at the movie theater if your age is less than 13*or* greater than 64. For an example of an "and" compound inequality, to purchase a drink at a bar in Oregon, you need to be over 21 years old *and* be have money for your drink. You need to fulfill *both* requirements.
 
 In math, the technical term *or* means "either or both." So, mathematically, if we asked if you would like "chocolate cake *or* apple pie" for dessert, your choices are either "chocolate cake,""apple pie," or "both chocolate cake and apple pie." This is slightly different than the English "or" which usually means "one or the other but not both."
 
@@ -156,7 +156,7 @@ We have finished the problem, but for the sake of completeness, let's try to ver
   $$
   \begin{aligned}3-5x&\gt-7&\text{or}&& 2-x&\le-3 \\ 3-5(\highlight{3})&\wonder{\gt}-7&\text{or}&& 2-(\highlight{3})&\wonder{\le}-3 \\ -9&\reject{\gt}-7&\text{or}&& -1&\reject{\le}-3\end{aligned}
   $$
-  This value made *both* inequalities false which is why $3$ isn't in our solution set.
+  This value made *both* inequalities false which is why 3 isn't in our solution set.
 - Next, let's choose a number that *is* in our solution region. We will arbitrarily choose $\highlight{1}$.
   $$
   \begin{aligned}3-5x&\gt-7&\text{or}&& 2-x&\le-3 \\ 3-5(\highlight{1})&\wonder{\gt}-7&\text{or}&& 2-(\highlight{1})&\wonder{\le}-3 \\ -12&\confirm{\lt}-7&\text{or}&& -1&\reject{\leq}-3\end{aligned}
@@ -270,7 +270,7 @@ $$
  -7\lt x\le 5 
 $$
 
-The solutions to the three-part inequality $-7\lt x\le 5$ are those numbers that are trapped between $-7$ and $5$, including $5$ but not $-7$. Keep in mind that there are infinitely many decimal numbers and irrational numbers that satisfy this inequality like $-2.781828$ and $\pi$. We will write these numbers in interval notation as $(-7,5]$ or in set builder notation as $\{x\mid -7\lt x\le 5\}$.
+The solutions to the three-part inequality $-7\lt x\le 5$ are those numbers that are trapped between $-7$ and 5, including 5 but not $-7$. Keep in mind that there are infinitely many decimal numbers and irrational numbers that satisfy this inequality like $-2.781828$ and $\pi$. We will write these numbers in interval notation as $(-7,5]$ or in set builder notation as $\{x\mid -7\lt x\le 5\}$.
 
 **Example**
 
@@ -389,7 +389,7 @@ $$
 \begin{aligned}150 &\lt 21.70x+19.99 \lt 250 \\ 150\subtractright{19.99} &\lt 21.70x+19.99\subtractright{19.99} \lt 250\subtractright{19.99} \\ 130.01 &\lt 21.70x \lt 230.01 \\ \divideunder{130.01}{21.70} &\lt \divideunder{21.70x}{21.70} \lt \divideunder{230.01}{21.70} \\ 5.991 &\lt x \lt 10.6&\text{(note: these values are approximate)}\end{aligned}
 $$
 
-The interpretation of this inequality is a little tricky. Remember that $x$ represents the number of dishes Raphael can afford. Since you cannot buy $5.991$ dishes (manufacturers will typically only ship whole number amounts of tableware) his minimum purchase must be $6$ dishes. We have a similar problem with his maximum purchase: clearly he cannot buy $10.6$ dishes. So, should we round up or down? If we rounded up, that would be $11$ dishes and that would cost $$\$21.70\cdot\highlight{11}+\$19.99=\$258.69$$, which is outside his price range. Therefore, we should actually round *down* in this case.
+The interpretation of this inequality is a little tricky. Remember that $x$ represents the number of dishes Raphael can afford. Since you cannot buy 5.991 dishes (manufacturers will typically only ship whole number amounts of tableware) his minimum purchase must be 6 dishes. We have a similar problem with his maximum purchase: clearly he cannot buy 10.6 dishes. So, should we round up or down? If we rounded up, that would be 11 dishes and that would cost $$\$21.70\cdot\highlight{11}+\$19.99=\$258.69$$, which is outside his price range. Therefore, we should actually round *down* in this case.
 
 In conclusion, Raphael should buy somewhere between 6 and 10 dishes for his friend to stay within his budget.
 

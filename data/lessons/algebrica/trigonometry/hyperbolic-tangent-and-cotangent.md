@@ -95,7 +95,7 @@ or, equivalently, by multiplying by \\(e^{x}\\):
 \tanh(x) = \frac{e^{2x} – 1}{e^{2x} + 1}
 \\]
 
-All three expressions are equivalent and each makes apparent a different aspect of the function: in the first form, the numerator and denominator are the analytically defined hyperbolic sine and cosine themselves. In the latter two, the exponential growth as \\(x \to +\infty\\) or \\(x \to -\infty\\) becomes immediately visible, and from them one can read off at once that the function tends to \\(1\\) and \\(-1\\) respectively.
+All three expressions are equivalent and each makes apparent a different aspect of the function: in the first form, the numerator and denominator are the analytically defined hyperbolic sine and cosine themselves. In the latter two, the exponential growth as \\(x \to +\infty\\) or \\(x \to -\infty\\) becomes immediately visible, and from them one can read off at once that the function tends to 1 and \\(-1\\) respectively.
 
 ## Analytical expression of the hyperbolic cotangent
 
@@ -111,11 +111,11 @@ As before, multiplying numerator and denominator by \\(e^{-x}\\) or by \\(e^{x}\
 \coth(x) = \frac{1 + e^{-2x}}{1 – e^{-2x}} = \frac{e^{2x} + 1}{e^{2x} – 1}
 \\]
 
-The latter expressions show that for large positive \\(x\\) the function approaches \\(1\\) from above, while for large negative \\(x\\) it approaches \\(-1\\) from below, with a vertical asymptote at \\(x = 0\\) in both cases.
+The latter expressions show that for large positive \\(x\\) the function approaches 1 from above, while for large negative \\(x\\) it approaches \\(-1\\) from below, with a vertical asymptote at \\(x = 0\\) in both cases.
 
 ## Hyperbolic tangent and cotangent functions
 
-The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real numbers. Unlike the circular tangent, it does not have vertical asymptotes: its graph is a smooth, monotonically increasing curve that passes through the origin with slope \\(1\\) and remains bounded for all \\(x\\). As \\(x \to +\infty\\) the function approaches \\(1\\) asymptotically, while as \\(x \to -\infty\\) it approaches \\(-1\\), so the range is the open interval \\((-1, 1)\\).
+The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real numbers. Unlike the circular tangent, it does not have vertical asymptotes: its graph is a smooth, monotonically increasing curve that passes through the origin with slope 1 and remains bounded for all \\(x\\). As \\(x \to +\infty\\) the function approaches 1 asymptotically, while as \\(x \to -\infty\\) it approaches \\(-1\\), so the range is the open interval \\((-1, 1)\\).
 
 - Domain: \\(x \in \mathbb{R}\\)
 - Range: \\(y \in (-1, 1)\\)
@@ -124,7 +124,7 @@ The hyperbolic tangent function \\(f(x) = \tanh(x)\\) is defined for all real nu
 - Horizontal asymptotes: \\(y = 1\\) as \\(x \to +\infty\\); \\(y = -1\\) as \\(x \to -\infty\\)
 
 
-The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real \\(x \neq 0\\). Its graph consists of two branches: one for \\(x > 0\\), where the function decreases from \\(+\infty\\) toward \\(1\\), and one for \\(x < 0\\), where it increases from \\(-\infty\\) toward \\(-1\\). The origin is a vertical asymptote, and the lines \\(y = 1\\) and \\(y = -1\\) are horizontal asymptotes.
+The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real \\(x \neq 0\\). Its graph consists of two branches: one for \\(x > 0\\), where the function decreases from \\(+\infty\\) toward 1, and one for \\(x < 0\\), where it increases from \\(-\infty\\) toward \\(-1\\). The origin is a vertical asymptote, and the lines \\(y = 1\\) and \\(y = -1\\) are horizontal asymptotes.
 
 - Domain: \\(x \in \mathbb{R},\; x \neq 0\\)
 - Range: \\(y \in (-\infty, -1) \cup (1, +\infty)\\)
@@ -136,6 +136,6 @@ The hyperbolic cotangent function \\(f(x) = \coth(x)\\) is defined for all real 
 
 The circular tangent and cotangent are defined as ratios of the circular sine and cosine, which in turn arise from the geometry of the unit circle. By exact analogy, the hyperbolic tangent and cotangent are ratios of the hyperbolic sine and cosine, which arise from the geometry of the equilateral hyperbola. In both settings, the underlying identity constraining the coordinates of a point on the curve propagates to a corresponding identity for the ratio functions.
 
-There is, however, a fundamental difference between the two cases: while the circular tangent is periodic with period \\(\pi\\) and is unbounded, the hyperbolic tangent is monotone and bounded between \\(-1\\) and \\(1\\). Similarly, the circular cotangent has vertical asymptotes at every integer multiple of \\(\pi\\), whereas the hyperbolic cotangent has only one, at the origin.
+There is, however, a fundamental difference between the two cases: while the circular tangent is periodic with period \\(\pi\\) and is unbounded, the hyperbolic tangent is monotone and bounded between \\(-1\\) and 1. Similarly, the circular cotangent has vertical asymptotes at every integer multiple of \\(\pi\\), whereas the hyperbolic cotangent has only one, at the origin.
 
 > Both the circular and the hyperbolic tangent measure a kind of ratio of coordinates of a point on a curve, one on the unit circle and the other on the equilateral hyperbola. The structural parallelism between the two families of functions is one of the most elegant features of classical analysis.

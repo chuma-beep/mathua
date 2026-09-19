@@ -132,7 +132,7 @@ Simpson| 3| $O(h^4)$
 
 $$ \int_0^1 e^{-x^2}\\\\\,dx $$
 
-34.The integrand is the kernel of the Gauss error function and admits no antiderivative expressible in elementary form, so the integral cannot be evaluated by the [Fundamental Theorem of Calculus](<../fundamental-theorem-of-calculus/>) in any direct way. The reference value, obtained with arbitrary precision, is approximately $0.7468241328$, and it provides a yardstick against which our approximations can be tested.
+34.The integrand is the kernel of the Gauss error function and admits no antiderivative expressible in elementary form, so the integral cannot be evaluated by the [Fundamental Theorem of Calculus](<../fundamental-theorem-of-calculus/>) in any direct way. The reference value, obtained with arbitrary precision, is approximately 0.7468241328, and it provides a yardstick against which our approximations can be tested.
 
 35.We choose $n = 4$ subintervals of equal width $h = 1/4$. The nodes of the partition and the corresponding values of the integrand are listed in the following table.
 

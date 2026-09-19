@@ -2,7 +2,7 @@
 
 # Scientific Notation
 
-Very large and very small numbers can be awkward to write and calculate with. These kinds of numbers can show in the sciences. For example in biology, a human hair might be as thick as $0.000181$ meters. And the closest that Mars gets to the sun is $206620000$ meters. Keeping track of the decimal places and extra zeros raises the potential for mistakes to be made. In this section, we discuss a format used for very large and very small numbers called *scientific notation* that helps alleviate the issues with these numbers.
+Very large and very small numbers can be awkward to write and calculate with. These kinds of numbers can show in the sciences. For example in biology, a human hair might be as thick as 0.000181 meters. And the closest that Mars gets to the sun is 206620000 meters. Keeping track of the decimal places and extra zeros raises the potential for mistakes to be made. In this section, we discuss a format used for very large and very small numbers called *scientific notation* that helps alleviate the issues with these numbers.
 
 ## The Basics of Scientific Notation
 
@@ -16,26 +16,26 @@ The article also later states:
 
 When presented in this format, trying to comprehend the value of these numbers can be overwhelming. More commonly, such numbers would be presented in a descriptive manner:
 
-- The federal debt climbed by $1.42$ trillion dollars in 2016.
-- The federal debt was $19.6$ trillion dollars at the close of business on Sept. 30, 2016.
+- The federal debt climbed by 1.42 trillion dollars in 2016.
+- The federal debt was 19.6 trillion dollars at the close of business on Sept. 30, 2016.
 
 In science, government, business, and many other disciplines, it's not uncommon to deal with very large numbers like these. When numbers get this large, it can be hard to discern when a number has eleven digits and when it has twelve.
 
 We have descriptive language for all numbers based on the place value of the different digits: ones, tens, thousands, ten thousands, etc. We tend to rely upon this language more when we start dealing with larger numbers. Here's a chart for some of the most common numbers we see and use in the world around us:
 
-*Whole Number Powers of $10$*
+*Whole Number Powers of 10*
 
 Each number above has a corresponding power of ten and this power of ten will be important as we start to work with the content in this section. This descriptive language also covers even larger numbers: trillion, quadrillion, quintillion, sextillion, septillion, and so on. There's also corresponding language to describe very small numbers, such as thousandth, millionth, billionth, trillionth, etc.
 
-Through centuries of scientific progress, humanity became increasingly aware of very large numbers and very small measurements. As one example, the star that is nearest to our sun is . Proxima Centauri is about $25{,}000{,}000{,}000{,}000$ miles from our sun. Again, many will find the descriptive language easier to read: Proxima Centauri is about $25$ trillion miles from our sun.
+Through centuries of scientific progress, humanity became increasingly aware of very large numbers and very small measurements. As one example, the star that is nearest to our sun is . Proxima Centauri is about $25{,}000{,}000{,}000{,}000$ miles from our sun. Again, many will find the descriptive language easier to read: Proxima Centauri is about 25 trillion miles from our sun.
 
-To make computations involving such numbers more manageable, a standardized notation called "scientific notation" was established. The foundation of scientific notation is the fact that multiplying or dividing by a power of $10$ will move the decimal point of a number so many places to the right or left, respectively. So first, let's take a moment to review that level of basic arithmetic.
+To make computations involving such numbers more manageable, a standardized notation called "scientific notation" was established. The foundation of scientific notation is the fact that multiplying or dividing by a power of 10 will move the decimal point of a number so many places to the right or left, respectively. So first, let's take a moment to review that level of basic arithmetic.
 
 **Exercise**
 
 Multiplying a number by $10^n$ where $n$ is a positive integer had the effect of moving the decimal point $n$ places to the right.
 
-Every number can be written as a product of a number between $1$ and $10$ and a power of $10$. For example, $650 = 6.5 \times 100$. Since $100 = 10^2$, we can also write
+Every number can be written as a product of a number between 1 and 10 and a power of 10. For example, $650 = 6.5 \times 100$. Since $100 = 10^2$, we can also write
 
 $$
  650 = 6.5 \times 10^{2} 
@@ -47,31 +47,31 @@ and this is our first example of writing a number in scientific notation.
 
 A positive number is written in *scientific notation* when it has the form $a \times 10^n$ where $n$ is an integer and $1 \le a \lt 10 $. In other words, $a$ has precisely one nonzero digit to the left of the decimal place. The exponent $n$ used here is called the number's *order of magnitude*. The number $a$ is sometimes called the *significand* or the *mantissa*.
 
-Some conventions do not require $a$ to be between $1$ and $10$, excluding both values, but that is the convention used in this book.
+Some conventions do not require $a$ to be between 1 and 10, excluding both values, but that is the convention used in this book.
 
 Some calculators and computer readouts cannot display exponents in superscript. In some cases, these devices will display scientific notation in the form `6.5E2` instead of $6.5\times10^2$.
 
 ## Scientific Notation for Large Numbers
 
-To write a number larger than $10$ in scientific notation, like $89412$, first write the number with the decimal point right after its first digit, like $8.9412$. Now count how many places there are between where the decimal point originally was and where it is now.
+To write a number larger than 10 in scientific notation, like 89412, first write the number with the decimal point right after its first digit, like 8.9412. Now count how many places there are between where the decimal point originally was and where it is now.
 
 $$
 8.\overbrace{9412}^{4}
 $$
 
-Use that count as the power of $10$. In this example, we have
+Use that count as the power of 10. In this example, we have
 
 $$
 89412=8.9412\times10^4
 $$
 
-Scientific notation communicates the "essence" of the number ($8.9412$) and then its size, or order of magnitude ($10^4$).
+Scientific notation communicates the "essence" of the number (8.9412) and then its size, or order of magnitude ($10^4$).
 
 **Example**
 
 To get a sense of how scientific notation works, let's consider familiar lengths of time converted to seconds.
 
-Note that roughly $2.6$*million* seconds is one month, while roughly $2.5$*billion* seconds is an entire lifetime.
+Note that roughly 2.6*million* seconds is one month, while roughly 2.5*billion* seconds is an entire lifetime.
 
 **Exercise**
 
@@ -79,13 +79,13 @@ Note that roughly $2.6$*million* seconds is one month, while roughly $2.5$*billi
 
 ## Scientific Notation for Small Numbers
 
-Scientific notation can also be useful when working with numbers smaller than $1$. As we saw in  Figure , we can represent thousands, millions, billions, trillions, etc., with positive integer exponents on $10$. We can similarly represent numbers smaller than $1$ (which are written as tenths, hundredths, thousandths, millionths, billionths, trillionths, etc.), with *negative* integer exponents on $10$. This relationship is outlined in  Figure .
+Scientific notation can also be useful when working with numbers smaller than 1. As we saw in  Figure , we can represent thousands, millions, billions, trillions, etc., with positive integer exponents on 10. We can similarly represent numbers smaller than 1 (which are written as tenths, hundredths, thousandths, millionths, billionths, trillionths, etc.), with *negative* integer exponents on 10. This relationship is outlined in  Figure .
 
-*Negative Integer Powers of $10$*
+*Negative Integer Powers of 10*
 
-To see how this works with a digit other than $1$, let's look at $0.005$. When we state $0.005$ as a number, we say "5 thousandths." Thus $0.005=5\times \frac{1}{1000}$. The fraction $\frac{1}{1000}$ can be written as $\frac{1}{10^3}$, which we know is equivalent to $10^{-3}$. Using negative exponents, we can then rewrite $0.005$ as $5\times10^{-3}$. This is the scientific notation for $0.005$.
+To see how this works with a digit other than 1, let's look at 0.005. When we state 0.005 as a number, we say "5 thousandths." Thus $0.005=5\times \frac{1}{1000}$. The fraction $\frac{1}{1000}$ can be written as $\frac{1}{10^3}$, which we know is equivalent to $10^{-3}$. Using negative exponents, we can then rewrite 0.005 as $5\times10^{-3}$. This is the scientific notation for 0.005.
 
-In practice, we won't generally do that much computation. To write a small number in scientific notation we start as we did before and place the decimal point behind the first nonzero digit. We then count the number of decimal places between where the decimal had originally been and where it now is. Keep in mind that negative powers of ten are used to help represent very small numbers (smaller than $1$) and positive powers of ten are used to represent very large numbers (larger than $1$). So to convert $0.005$ to scientific notation, we have:
+In practice, we won't generally do that much computation. To write a small number in scientific notation we start as we did before and place the decimal point behind the first nonzero digit. We then count the number of decimal places between where the decimal had originally been and where it now is. Keep in mind that negative powers of ten are used to help represent very small numbers (smaller than 1) and positive powers of ten are used to represent very large numbers (larger than 1). So to convert 0.005 to scientific notation, we have:
 
 $$
  0\overbrace{.\highlight{005}}^{3}=5\times 10^{-3} 
@@ -146,7 +146,7 @@ Whenever we multiply or divide numbers that are written in scientific notation, 
 1. Multiply $\left( 2\times 10^5 \right)\left( 3\times10^4 \right)$.
 2. Divide $\dfrac{8\times 10^{17}}{4\times 10^2}$.
 
-We will simplify the significand/mantissa parts as one step and then simplify the powers of $10$ as a separate step.
+We will simplify the significand/mantissa parts as one step and then simplify the powers of 10 as a separate step.
 
 1. $$
 \begin{aligned}[t] \left( 2\times 10^5 \right)\left( 3\times10^4 \right) &= \left( 2\times 3 \right)\times \left(10^5 \times 10^4 \right)\\ &= 6 \times 10^{9} \end{aligned}
@@ -180,7 +180,7 @@ Multiply or divide as indicated. Write your answer using scientific notation.
 1.
 2.
 
-Again, we'll separate out the work for the significand/mantissa from the work for the powers of ten. If the resulting coefficient is not between $1$ and $10$, we'll need to adjust that coefficient to put it into scientific notation.
+Again, we'll separate out the work for the significand/mantissa from the work for the powers of ten. If the resulting coefficient is not between 1 and 10, we'll need to adjust that coefficient to put it into scientific notation.
 
 1. $$
 \begin{aligned}[t] \left( 8 \times 10^{21} \right)\left( 2 \times 10^{-7} \right) &= \left( 8 \times 2 \right)\times\left( 10^{21} \times 10^{-7} \right)\\ &= \highlight{16} \times 10^{14}\\ &= \highlight{1.6\times 10^1} \times 10^{14}\\ &= 1.6 \times 10^{15} \end{aligned}

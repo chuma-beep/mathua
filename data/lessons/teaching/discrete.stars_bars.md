@@ -12,4 +12,4 @@ If $x_i\ge1$, set $y_i=x_i-1$: $y_1+\cdots+y_k=n-k$, so $\binom{n-1}{k-1}$ solut
 
 ## Example
 
-$4$ identical balls into $3$ boxes: $\binom{4+3-1}{3-1}=\binom{6}{2}=15$ distributions.
+4 identical balls into 3 boxes: $\binom{4+3-1}{3-1}=\binom{6}{2}=15$ distributions.

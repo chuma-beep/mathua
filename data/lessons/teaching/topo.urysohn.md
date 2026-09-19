@@ -8,7 +8,7 @@
 Normal means disjoint closed sets have disjoint open neighborhoods. Metric spaces are normal, so the lemma applies broadly.
 
 ### The Separating Function
-$f$ is $0$ on $A$, $1$ on $B$, and transitions continuously between. It proves normal spaces have rich continuous functions.
+$f$ is 0 on $A$, 1 on $B$, and transitions continuously between. It proves normal spaces have rich continuous functions.
 
 ## Example
 

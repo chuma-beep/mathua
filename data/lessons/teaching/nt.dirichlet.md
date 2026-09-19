@@ -5,7 +5,7 @@
 ## Primes in Progressions
 
 ### Coprimality Condition
-Progression $3,7,11,\dots$ ($3\bmod4$) has $\gcd(3,4)=1$, so infinitely many primes $\equiv3\bmod4$. Progression $2,4,6,\dots$ has $\gcd(2,2)=2$, so only prime $2$ appears.
+Progression $3,7,11,\dots$ ($3\bmod4$) has $\gcd(3,4)=1$, so infinitely many primes $\equiv3\bmod4$. Progression $2,4,6,\dots$ has $\gcd(2,2)=2$, so only prime 2 appears.
 
 ### L-Functions
 Proof uses Dirichlet L-functions $L(s,\chi)$ and non-vanishing $L(1,\chi)\neq0$ to show $\sum_{p\equiv a(m)}1/p$ diverges.

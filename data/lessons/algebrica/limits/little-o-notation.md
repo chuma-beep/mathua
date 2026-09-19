@@ -71,7 +71,7 @@ In practice, this expression is used to describe the concept of \\( o(1) \\) by 
 
   * The functions considered must be defined on a neighborhood of \\( x_0 \\), excluding the point \\( x_0 \\) itself.
   * The function must tend to zero as \\( x \\) approaches \\( x_0 \\).
-  * The notation \\( o(1) \\) represents the set of all functions that are infinitesimal compared to a constant, specifically to \\(1\\).
+  * The notation \\( o(1) \\) represents the set of all functions that are infinitesimal compared to a constant, specifically to 1.
   * The symbol \\( B(x_0, \delta) \\) denotes an open neighborhood of \\( x_0 \\) with radius \\( \delta \\), where the function is defined and the limit is taken.
 
 
@@ -96,7 +96,7 @@ Therefore, as \\(x \to 0\\) we can write:
 
 \\[\frac{\sin(x)}{x} = 1 + o(1) \\]
 
-> This expression shows that the difference between \\( \frac{\sin(x)}{x} \\) and the constant \\(1\\) tends to zero in the limit, and the correction terms are asymptotically smaller than 1.
+> This expression shows that the difference between \\( \frac{\sin(x)}{x} \\) and the constant 1 tends to zero in the limit, and the correction terms are asymptotically smaller than 1.
 
 ## Properties
 

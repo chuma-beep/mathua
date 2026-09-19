@@ -6,13 +6,13 @@ There are special things to consider when adding, subtracting, multiplying, divi
 
 ## Signed Numbers
 
-Is it valid to subtract a large number from a smaller one? It may be hard to imagine what it would mean physically to subtract $3$ cars from your garage if you only have $1$ car there in there in the first place. But mathematics gives meaning to expressions like $1-3$ using *signed numbers*.
+Is it valid to subtract a large number from a smaller one? It may be hard to imagine what it would mean physically to subtract 3 cars from your garage if you only have 1 car there in there in the first place. But mathematics gives meaning to expressions like $1-3$ using *signed numbers*.
 
 You've probably seen signed numbers used to describe the temperature of very cold things. Most people on Earth use the Celsius scale for temperature. If you're not familiar with the Celsius temperature scale, think about these examples:
 
 *Number line with interesting Celsius temperatures*
 
-the figure  uses a *number line* to illustrate these  positive and negative numbers. A number line is a useful device for visualizing how numbers relate to each other and combine with each other. Values to the right of $0$ are called *positive* numbers and values to the left of $0$ are called *negative numbers*.
+the figure  uses a *number line* to illustrate these  positive and negative numbers. A number line is a useful device for visualizing how numbers relate to each other and combine with each other. Values to the right of 0 are called *positive* numbers and values to the left of 0 are called *negative numbers*.
 
 **Warning**
 
@@ -67,13 +67,13 @@ $$
  -18+(-7) 
 $$
 
-with extra parentheses. Since *both* terms are *negative*, we can add $18$ and $7$ to get $25$ but realize that our final result should be negative. So our result is $-25$:
+with extra parentheses. Since *both* terms are *negative*, we can add 18 and 7 to get 25 but realize that our final result should be negative. So our result is $-25$:
 
 $$
  -18+(-7)=-25 
 $$
 
-This approach works because adding numbers is like having two people tugging on a rope, with strength indicated by each number. In  the example  we have two people pulling to the left, one with strength $18$ and the other with strength $7$. Their forces combine to pull *left* with strength $25$, giving us our total of $-25$, as illustrated in  the figure .
+This approach works because adding numbers is like having two people tugging on a rope, with strength indicated by each number. In  the example  we have two people pulling to the left, one with strength 18 and the other with strength 7. Their forces combine to pull *left* with strength 25, giving us our total of $-25$, as illustrated in  the figure .
 
 If we are adding two numbers that have *opposite* signs, then the two people are tugging the rope in opposing directions. If either of them is using more strength than the other, then overall there will be a net pull in the stronger person's direction. And the overall pull on the rope will be the *difference* of the two strengths. This is illustrated in  the figure .
 
@@ -89,16 +89,16 @@ Here are four examples of addition where one number is positive and the other is
 
 1. $-15+12$
 
-   We have one number of each sign, with sizes $15$ and $12$. Their difference is $3$. But of the two numbers, the negative number is stronger. So the result from adding these is also negative: $-3$.
+   We have one number of each sign, with sizes 15 and 12. Their difference is 3. But of the two numbers, the negative number is stronger. So the result from adding these is also negative: $-3$.
 2. $200+(-100)$
 
-   We have one number of each sign, with sizes $200$ and $100$. Their difference is $100$. But of the two numbers, the positive number is stronger. So the result from adding these is also positive: $100$.
+   We have one number of each sign, with sizes 200 and 100. Their difference is 100. But of the two numbers, the positive number is stronger. So the result from adding these is also positive: 100.
 3. $12.8+(-20)$
 
-   We have one number of each sign, with sizes $12.8$ and $20$. Their difference is $7.2$. But of the two numbers, the negative number is stronger. So the result from adding these is also negative: $-7.2$.
+   We have one number of each sign, with sizes 12.8 and 20. Their difference is 7.2. But of the two numbers, the negative number is stronger. So the result from adding these is also negative: $-7.2$.
 4. $-87.3+87.3$
 
-   We have one number of each sign, both with size $87.3$. The opposing forces cancel each other, leaving a result of $0$.
+   We have one number of each sign, both with size 87.3. The opposing forces cancel each other, leaving a result of 0.
 
 **Exercise**
 
@@ -108,7 +108,7 @@ Add $-1+9$.
 
 Solution
 
-The two numbers have opposite sign, so we subtract $9-1=8$. Of the two numbers being added, the positive is larger, so the result should positive as well: $8$.
+The two numbers have opposite sign, so we subtract $9-1=8$. Of the two numbers being added, the positive is larger, so the result should positive as well: 8.
 
 Add $-12+(-98)$.
 
@@ -132,7 +132,7 @@ Find the sum $-34.67+81.53$.
 
 Solution
 
-The two numbers have opposite sign, so we can subtract $81.53-34.67=46.86$. Of the two numbers being added, the positive is larger, so the result should be positive: $46.86$.
+The two numbers have opposite sign, so we can subtract $81.53-34.67=46.86$. Of the two numbers being added, the positive is larger, so the result should be positive: 46.86.
 
 ## Subtracting
 
@@ -156,11 +156,11 @@ $$
 
 Subtraction with Negative Numbers
 
-Subtract $-1$ from $9$.
+Subtract $-1$ from 9.
 
 Solution
 
-After writing this as $9-(-1)$, we can change to $9+1$ and get $10$.
+After writing this as $9-(-1)$, we can change to $9+1$ and get 10.
 
 Subtract $32-50$.
 
@@ -172,7 +172,7 @@ Subtract $108-(-108)$.
 
 Solution
 
-We can rewrite this as $108+108$ and get $216$.
+We can rewrite this as $108+108$ and get 216.
 
 Find the difference $-5.9-(-3.1)$.
 
@@ -184,7 +184,7 @@ Find the difference $-12.04-17.2$.
 
 Solution
 
-Since we are subtracting a positive number from a negative number, the result should be an even more negative number. We can add $12.04+17.2$ to get $29.24$, but our final answer should be the opposite, $-29.24$.
+Since we are subtracting a positive number from a negative number, the result should be an even more negative number. We can add $12.04+17.2$ to get 29.24, but our final answer should be the opposite, $-29.24$.
 
 ## Multiplying
 
@@ -194,19 +194,19 @@ Multiplication with negative numbers is possible too. We can view multiplication
 
 the figure  illustrates that $3\cdot(-7)=-21$. Notice how a positive number multiplied by a negative number will make a negative result.
 
-What about the product $-3\cdot(-7)$, where both factors are negative? Should the result be positive or negative? If $3\cdot(-7)$ can be seen as *adding*$-7$ three times as in  the figure , then it isn't too crazy to interpret $-3\cdot(-7)$ as *subtracting*$-7$ three times. Or in other words, as *adding*$7$ three times. This is illustrated in  the figure .
+What about the product $-3\cdot(-7)$, where both factors are negative? Should the result be positive or negative? If $3\cdot(-7)$ can be seen as *adding*$-7$ three times as in  the figure , then it isn't too crazy to interpret $-3\cdot(-7)$ as *subtracting*$-7$ three times. Or in other words, as *adding*7 three times. This is illustrated in  the figure .
 
 *Viewing $-3\cdot(-7)$ as repeated subtraction*
 
 This illustrates that $-3\cdot(-7)=21$, and it seems that a negative number times a negative number gives a positive result.
 
-Positive and negative numbers are not the whole story. The number $0$ is neither positive nor negative. What happens with multiplication by $0$? You can choose to view $7\cdot0$ as adding the number $0$ seven times. And you can choose to view $0\cdot7$ as adding the number $7$ zero times. Either way, the result is $0$.
+Positive and negative numbers are not the whole story. The number 0 is neither positive nor negative. What happens with multiplication by 0? You can choose to view $7\cdot0$ as adding the number 0 seven times. And you can choose to view $0\cdot7$ as adding the number 7 zero times. Either way, the result is 0.
 
 **Fact**
 
-Multiplication by $0$
+Multiplication by 0
 
-Multiplying any number by $0$ results in $0$.
+Multiplying any number by 0 results in 0.
 
 **Exercise**
 
@@ -218,7 +218,7 @@ Solution
 
 Since $13\cdot2=26$, and we are multiplying numbers of opposite signs, the answer is negative: $-26$.
 
-Find the product of $30$ and $-50$.
+Find the product of 30 and $-50$.
 
 Solution
 
@@ -228,13 +228,13 @@ Compute $-12(-7)$.
 
 Solution
 
-Since $12\cdot7=84$, and we are multiplying numbers of the same sign, the answer is positive: $84$.
+Since $12\cdot7=84$, and we are multiplying numbers of the same sign, the answer is positive: 84.
 
 Find the product $-285(0)$.
 
 Solution
 
-Any number multiplied by $0$ is $0$.
+Any number multiplied by 0 is 0.
 
 ## Powers
 
@@ -264,7 +264,7 @@ $$
 
 Negative Signs and Exponents
 
-Expressions like $-3^4$ may not mean what you think they mean. What base do you see here? The correct answer is $3$. The exponent $4$ only applies to the $3$, not to $-3$. So this expression, $-3^4$, is actually the same as $-\mathopen{}\left(3^4\right)\mathclose{}$, which is $-81$. Be careful not to treat $-3^4$ as having base $-3$. That would make it equivalent to $(-3)^4$, which is *positive*$81$.
+Expressions like $-3^4$ may not mean what you think they mean. What base do you see here? The correct answer is 3. The exponent 4 only applies to the 3, not to $-3$. So this expression, $-3^4$, is actually the same as $-\mathopen{}\left(3^4\right)\mathclose{}$, which is $-81$. Be careful not to treat $-3^4$ as having base $-3$. That would make it equivalent to $(-3)^4$, which is *positive*81.
 
 **Exercise**
 
@@ -274,25 +274,25 @@ Compute $(-8)^2$.
 
 Solution
 
-Since $8^2$ is $64$ and we are raising a negative number to an *even* power, the answer is positive: $64$.
+Since $8^2$ is 64 and we are raising a negative number to an *even* power, the answer is positive: 64.
 
 Calculate the power $(-1)^{203}$.
 
 Solution
 
-Since $1^{203}$ is $1$ and we are raising a negative number to an *odd* power, the answer is negative: $-1$.
+Since $1^{203}$ is 1 and we are raising a negative number to an *odd* power, the answer is negative: $-1$.
 
 Find $(-3)^3$.
 
 Solution
 
-Since $3^{3}$ is $27$ and we are raising a negative number to an *odd* power, the answer is negative: $-27$.
+Since $3^{3}$ is 27 and we are raising a negative number to an *odd* power, the answer is negative: $-27$.
 
 Calculate $-5^2$.
 
 Solution
 
-Be careful: here we are raising *positive*$5$ to the second power to get $25$ and *then* negating the result: $-25$.
+Be careful: here we are raising *positive*5 to the second power to get 25 and *then* negating the result: $-25$.
 
 ## Summary
 

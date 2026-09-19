@@ -11,7 +11,7 @@ where \\(\Omega\\) is a discrete sample space.
 ##### When the sample space is continuous, composed of infinitely many infinitesimally close outcomes, we speak of [continuous random variables](<../continuous-random-variables/>).
 
 
-To illustrate the concept in a simple way, consider an experiment where a single die is rolled twice, and let the random variable \\(X\\) represent the number of sixes obtained. The possible values of \\(X\\) are 0, 1, and 2 where \\(0\\) means that no six appears in the two rolls, \\(1\\) means that exactly one six appears, and \\(2\\) means that both rolls show a six.
+To illustrate the concept in a simple way, consider an experiment where a single die is rolled twice, and let the random variable \\(X\\) represent the number of sixes obtained. The possible values of \\(X\\) are 0, 1, and 2 where 0 means that no six appears in the two rolls, 1 means that exactly one six appears, and 2 means that both rolls show a six.
 
 \\(x\\)| 0| 1| 2  
 ---|---|---|---  
@@ -21,7 +21,7 @@ where \\(x\\) represents the possible outcomes of the random variable \\(X\\) an
 
 \\[\sum f(x) = 1 \\]
 
-This is consistent with the law of total probability, which states that the sum of the probabilities of all mutually exclusive outcomes of a random variable must equal \\(1\\). It ensures that the probability distribution accounts for every possible event in the experiment.
+This is consistent with the law of total probability, which states that the sum of the probabilities of all mutually exclusive outcomes of a random variable must equal 1. It ensures that the probability distribution accounts for every possible event in the experiment.
 
 
 Since probability calculations can be tricky at first, the following shows how the values of \\(f(x)\\) for 0, 1, and 2 are obtained.
@@ -49,7 +49,7 @@ When dealing with a discrete random variable \\(X\\), it is often useful to desc
 
 \\[F(x) = P(X \le x) = \sum_{t \le x} f(t) \\]
 
-The function \\(F(x)\\) expresses the total probability accumulated up to \\(x\\). It is defined for all real values of \\(x\\) and increases step by step as new probability mass is added. Being cumulative by nature, \\(F(x)\\) is always non-decreasing and never exceeds \\(1\\). To better illustrate the concept, let us return to the example of rolling two dice and show how the cumulative distribution function is constructed. The random variable \\(X\\) represents the number of sixes obtained. Its probability mass function is:
+The function \\(F(x)\\) expresses the total probability accumulated up to \\(x\\). It is defined for all real values of \\(x\\) and increases step by step as new probability mass is added. Being cumulative by nature, \\(F(x)\\) is always non-decreasing and never exceeds 1. To better illustrate the concept, let us return to the example of rolling two dice and show how the cumulative distribution function is constructed. The random variable \\(X\\) represents the number of sixes obtained. Its probability mass function is:
 
 \\(x\\)| 0| 1| 2  
 ---|---|---|---  

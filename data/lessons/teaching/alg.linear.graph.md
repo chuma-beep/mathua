@@ -12,7 +12,7 @@ $$
  y=20x+50 
 $$
 
-. In this example, there is a constant rate of change of $20$ dollars per week, so we call that the slope. We also saw in  the figure  that plotting Yara's balance over time makes a straight-line graph.
+. In this example, there is a constant rate of change of 20 dollars per week, so we call that the slope. We also saw in  the figure  that plotting Yara's balance over time makes a straight-line graph.
 
 The graph of Yara's savings has some things in common with almost every straight-line graph. There is a slope, and there is a place where the line crosses the $y$-axis.  the figure  illustrates this in the abstract.
 
@@ -20,7 +20,7 @@ The graph of Yara's savings has some things in common with almost every straight
 
 *Generic line*
 
-We already have a symbol, $m$, for the slope of a line. That other feature, where the line crosses the $y$-intercept is of interest to us now. The *$y$-intercept* of a line is a *point* where the line crosses the $y$-axis. Since it's on the $y$-axis, the $x$-coordinate of this point is $0$. It is standard to call the point $(0,b)$ the $y$-intercept, and call the number $b$ the "$y$-coordinate of the $y$-intercept". It is almost inevitable that people will find this too wordy, and will call $b$ the $y$-intercept. But technically, the $y$-intercept is $(0,b)$.
+We already have a symbol, $m$, for the slope of a line. That other feature, where the line crosses the $y$-intercept is of interest to us now. The *$y$-intercept* of a line is a *point* where the line crosses the $y$-axis. Since it's on the $y$-axis, the $x$-coordinate of this point is 0. It is standard to call the point $(0,b)$ the $y$-intercept, and call the number $b$ the "$y$-coordinate of the $y$-intercept". It is almost inevitable that people will find this too wordy, and will call $b$ the $y$-intercept. But technically, the $y$-intercept is $(0,b)$.
 
 **Exercise**
 
@@ -56,7 +56,7 @@ The number $b$ is the $y$-value when $x=0$. Therefore it is common to refer to $
 
 **Example**
 
-With a simple equation like $y=2x+3$, we can see that this is a line whose slope is $2$ and which has initial value $3$. So starting at $y=3$ on the $y$-axis, each time we increase the $x$-value by $1$, the $y$-value increases by $2$. With these basic observations, we can quickly produce a table and/or a graph.
+With a simple equation like $y=2x+3$, we can see that this is a line whose slope is 2 and which has initial value 3. So starting at $y=3$ on the $y$-axis, each time we increase the $x$-value by 1, the $y$-value increases by 2. With these basic observations, we can quickly produce a table and/or a graph.
 
 **Example**
 
@@ -64,9 +64,9 @@ The conversion formula for a Celsius temperature into Fahrenheit is $F=\frac{9}{
 
 Since this equation is for converting a Celsius temperature to a Fahrenheit temperature, it makes sense to let $C$ be the horizontal axis variable and $F$ be the vertical axis variable. Note the slope is $\frac{9}{5}$ and the vertical intercept (here, the $F$-intercept) is $(0,32)$.
 
-1. Set up the axes using an appropriate window and labels. Considering the freezing temperature of water ($0^{\circ}$ Celsius or $32^{\circ}$ Fahrenheit), and the boiling temperature of water ($100^{\circ}$ Celsius or $212^{\circ}$ Fahrenheit), it's reasonable to let $C$ run through at least $0$ to $100$ and $F$ run through at least $32$ to $212$.
+1. Set up the axes using an appropriate window and labels. Considering the freezing temperature of water ($0^{\circ}$ Celsius or $32^{\circ}$ Fahrenheit), and the boiling temperature of water ($100^{\circ}$ Celsius or $212^{\circ}$ Fahrenheit), it's reasonable to let $C$ run through at least 0 to 100 and $F$ run through at least 32 to 212.
 2. Plot the $F$-intercept, which is at $(0,32)$.
-3. Starting at the $F$-intercept, use slope triangles to reach the next point. Since our slope is $\frac{9}{5}$, that suggests a "run" of $5$ and a "rise" of $9$ might work. But as  the figure  indicates, such slope triangles are too tiny. You can actually use any fraction equivalent to $\frac{9}{5}$ to plot using the slope, as in $\frac{18}{10}$, $\frac{90}{50}$, $\frac{900}{50}$, or $\frac{45}{25}$ which all reduce to $\frac{9}{5}$. Given the size of our graph, we will use $\frac{90}{50}$ to plot points, where we will try a "run" of $50$ and a "rise" of $90$.
+3. Starting at the $F$-intercept, use slope triangles to reach the next point. Since our slope is $\frac{9}{5}$, that suggests a "run" of 5 and a "rise" of 9 might work. But as  the figure  indicates, such slope triangles are too tiny. You can actually use any fraction equivalent to $\frac{9}{5}$ to plot using the slope, as in $\frac{18}{10}$, $\frac{90}{50}$, $\frac{900}{50}$, or $\frac{45}{25}$ which all reduce to $\frac{9}{5}$. Given the size of our graph, we will use $\frac{90}{50}$ to plot points, where we will try a "run" of 50 and a "rise" of 90.
 4. Connect your points with a straight line, use arrowheads, and label the equation.
 
 *Graphing $F=\frac{9}{5}C+32$*
@@ -101,7 +101,7 @@ $$
 \begin{aligned}m&=\frac{y_2-y_1}{x_2-x_1} \\ &=\frac{\substitute{-5}-\substitute{5}}{\substitute{8}-\substitute{0}} \\ &=\frac{-10}{8}=-\frac{5}{4}\end{aligned}
 $$
 
-We are trying to write $y=mx+b$. Since we already found the slope, we know that we want to write $y=-\frac{5}{4}x+b$ but we need a specific number for $b$. We *happen* to know that one point on this line is $(0,5)$, which is on the $y$-axis because its $x$-value is $0$. So $(0,5)$ is this line's $y$-intercept, and therefore $b=5$. So our equation is $y=-\frac{5}{4}x+5$.
+We are trying to write $y=mx+b$. Since we already found the slope, we know that we want to write $y=-\frac{5}{4}x+b$ but we need a specific number for $b$. We *happen* to know that one point on this line is $(0,5)$, which is on the $y$-axis because its $x$-value is 0. So $(0,5)$ is this line's $y$-intercept, and therefore $b=5$. So our equation is $y=-\frac{5}{4}x+5$.
 
 **Example**
 
@@ -113,7 +113,7 @@ $$
 \begin{aligned}m&=\frac{y_2-y_1}{x_2-x_1} \\ &=\frac{\substitute{1}-\substitute{(-8)}}{\substitute{{-}6}-\substitute{3}} \\ &=\frac{9}{-9} \\ &=-1\end{aligned}
 $$
 
-Now that we have the slope, we can write $y=-1x+b$, or more simply: $y=-x+b$. Unlike in  the example , we are not given the value of $b$ because neither of our two given points have an $x$-value of $0$. To find $b$, remember that we have two points that we already know should make the equation true! This means we can substitute *either* point into the equation (for the $x$ and the $y$) and solve for $b$. Let's arbitrarily choose $(3,-8)$ to substitute in.
+Now that we have the slope, we can write $y=-1x+b$, or more simply: $y=-x+b$. Unlike in  the example , we are not given the value of $b$ because neither of our two given points have an $x$-value of 0. To find $b$, remember that we have two points that we already know should make the equation true! This means we can substitute *either* point into the equation (for the $x$ and the $y$) and solve for $b$. Let's arbitrarily choose $(3,-8)$ to substitute in.
 
 $$
 \begin{aligned}y&=-x+b \\ \substitute{-8}&=-(\substitute{3})+b&\text{(Now solve for }b\text{.)} \\ -8&=-3+b \\ -8\addright{3}&=-3+b\addright{3} \\ -5&=b\end{aligned}
@@ -133,7 +133,7 @@ We can model many relationships using slope-intercept form, and then solve relat
 
 Uber is a ride-sharing company. Its pricing in Portland factors in how much time and how many miles a trip takes. But if you assume that rides average out at a speed of $30\,\text{mileperhour}$, then their pricing scheme boils down to a base of $$\$7.35$$ for the trip, plus $$\$3.85$$ per mile. Use a slope-intercept equation and algebra to answer these questions.
 
-1. How much is the fare if a trip is $5.3$ miles long?
+1. How much is the fare if a trip is 5.3 miles long?
 2. With $$\$100$$ available to you, how long of a trip can you afford?
 
 The rate of change (slope) is $$\$3.85$$ per mile, and the starting value is $$\$7.35$$. So the slope-intercept equation is
@@ -144,13 +144,13 @@ $$
 
 . In this equation, $x$ stands for the number of miles in a trip, and $y$ stands for the amount of money to be charged.
 
-If a trip is $5.3$ miles long, we substitute $x=5.3$ into the equation and we have:
+If a trip is 5.3 miles long, we substitute $x=5.3$ into the equation and we have:
 
 $$
 \begin{aligned}y&=3.85x+7.35 \\ &=3.85(\substitute{5.3})+7.35 \\ &=20.405+7.35 \\ &=27.755\end{aligned}
 $$
 
-And the $5.3$-mile ride will cost you about $$\$27.76$$. (We say "about", because this was all assuming you average $30\,\text{mileperhour}$.)
+And the 5.3-mile ride will cost you about $$\$27.76$$. (We say "about", because this was all assuming you average $30\,\text{mileperhour}$.)
 
 Next, to find how long of a trip would cost $$\$100$$, we substitute $y=100$ into the equation and solve for $x$:
 
@@ -158,7 +158,7 @@ $$
 \begin{aligned}y&=3.85x+7.35 \\ \substitute{100}&=3.85x+7.35 \\ 100\subtractright{7.35}&=3.85x \\ 92.65&=3.85x \\ \divideunder{92.65}{3.85}&=x \\ 24.06&\approx x\end{aligned}
 $$
 
-So with $$\$100$$ you could afford a little more than a $24$-mile trip.
+So with $$\$100$$ you could afford a little more than a 24-mile trip.
 
 **Exercise**
 

@@ -12,4 +12,4 @@ Asymptotically stable ⇒ exists Lyapunov $V$.
 
 ## Example
 
-$x'=-x$: $V=x^2$, $dV/dt=2x·(-x)=-2x^2<0$, so $0$ asymptotically stable.
+$x'=-x$: $V=x^2$, $dV/dt=2x·(-x)=-2x^2<0$, so 0 asymptotically stable.

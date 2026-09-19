@@ -123,7 +123,7 @@ Iteration can be messy, but when the recurrence relation only refers to one prev
 
 ###  Subsection The Characteristic Root Technique
 
-Suppose we want to solve a recurrence relation expressed as a combination of the two previous terms, such as \\(a_n = a_{n-1} + 6a_{n-2}\text{.}\\) In other words, we want to find a function of \\(n\\) which satisfies \\(a_n - a_{n-1} - 6a_{n-2} = 0\text{.}\\) Now iteration is too complicated, but think just for a second what would happen if we _did_ iterate. In each step, we would, among other things, multiply a previous iteration by 6. So our closed formula would include \\(6\\) multiplied some number of times. Thus it is reasonable to guess the solution will contain parts that look geometric. Perhaps the solution will take the form \\(r^n\\) for some constant \\(r\text{.}\\)
+Suppose we want to solve a recurrence relation expressed as a combination of the two previous terms, such as \\(a_n = a_{n-1} + 6a_{n-2}\text{.}\\) In other words, we want to find a function of \\(n\\) which satisfies \\(a_n - a_{n-1} - 6a_{n-2} = 0\text{.}\\) Now iteration is too complicated, but think just for a second what would happen if we _did_ iterate. In each step, we would, among other things, multiply a previous iteration by 6. So our closed formula would include 6 multiplied some number of times. Thus it is reasonable to guess the solution will contain parts that look geometric. Perhaps the solution will take the form \\(r^n\\) for some constant \\(r\text{.}\\)
 
 🔗
 

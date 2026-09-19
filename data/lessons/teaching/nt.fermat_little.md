@@ -8,10 +8,10 @@ Equivalently, for any integer $a$:
 $$a^p \equiv a \pmod{p}$$
 
 **Example 1:** Let $p = 7$ and $a = 2$.
-$2^{6} = 64$, and $64 \div 7 = 9$ remainder $1$, so $64 \equiv 1 \pmod{7}$.
+$2^{6} = 64$, and $64 \div 7 = 9$ remainder 1, so $64 \equiv 1 \pmod{7}$.
 
 **Example 2:** Let $p = 11$ and $a = 3$.
-$3^{10} = 59049$. Divide by 11: $59049 \div 11 = 5368 \times 11 + 1$, remainder $1$.
+$3^{10} = 59049$. Divide by 11: $59049 \div 11 = 5368 \times 11 + 1$, remainder 1.
 So $3^{10} \equiv 1 \pmod{11}$.
 
 **Application: Modular inverse**

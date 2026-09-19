@@ -42,9 +42,9 @@ The positive square root of the variance, denoted by \\(\sigma\\), is known as t
 
 Let us consider a random variable \\(X\\) representing the number of defective pieces found in a batch of ten components produced by a manufacturing line. Based on previous observations, the probability distribution of \\(X\\) is given as follows:
 
-\\(x\\)| \\(0\\)| \\(1\\)| \\(2\\)| \\(3\\)| \\(4\\)  
+\\(x\\)| 0| 1| 2| 3| 4  
 ---|---|---|---|---|---  
-\\(f(x)\\)| \\(0.1\\)| \\(0.3\\)| \\(0.4\\)| \\(0.1\\)| \\(0.1\\)  
+\\(f(x)\\)| 0.1| 0.3| 0.4| 0.1| 0.1  
   
 Let us now try to calculate the variance and the standard deviation of this random variable.
 
@@ -108,7 +108,7 @@ Formally, the correlation coefficient, denoted by \\(\rho_{XY}\\), is defined as
   * The value of \\(\rho_{XY}\\) always lies between \\(−1\\) and \\(+1\\).
 
 
-A value close to \\(1\\) indicates a strong positive linear relationship and both variables tend to increase together. A value close to \\(−1\\) indicates a strong negative relationship, so when one variable increases, the other tends to decrease. A value near \\(0\\) suggests that there is no linear association between them.
+A value close to 1 indicates a strong positive linear relationship and both variables tend to increase together. A value close to \\(−1\\) indicates a strong negative relationship, so when one variable increases, the other tends to decrease. A value near 0 suggests that there is no linear association between them.
 
 ## Example 2
 
@@ -145,4 +145,4 @@ The variance of \\(Y\\) is: \\[\mathrm{Var}(Y) = E[Y^2] - [E[Y]]^2 = 18.2 - (4.0
 
 The correlation coefficient is obtained as: \\[\begin{align} \rho_{XY} &= \frac{\mathrm{Cov}(X, Y)}{\sqrt{\mathrm{Var}(X)} \sqrt{\mathrm{Var}(Y)}} \\\\[6pt] &= \frac{1.5}{\sqrt{1.05}\sqrt{2.2}} \\\\[6pt] &= \frac{1.5}{1.075 \times 1.483} = \frac{1.5}{1.594} \approx 0.94 \end{align} \\]
 
-The correlation between \\(X\\) and \\(Y\\) is approximately \\(0.94\\). This value indicates a very strong positive linear relationship: when \\(X\\) increases, \\(Y\\) tends to increase almost proportionally, though not in a perfectly exact way.
+The correlation between \\(X\\) and \\(Y\\) is approximately 0.94. This value indicates a very strong positive linear relationship: when \\(X\\) increases, \\(Y\\) tends to increase almost proportionally, though not in a perfectly exact way.

@@ -12,4 +12,4 @@ Early steps bias-corrected; later $v$ stabilizes. Works well without manual sche
 
 ## Example
 
-Gradient $g=[2,0.1]$: $m$ smooths direction, $v$ scales $2$ down, $0.1$ up, so both dimensions progress steadily.
+Gradient $g=[2,0.1]$: $m$ smooths direction, $v$ scales 2 down, 0.1 up, so both dimensions progress steadily.

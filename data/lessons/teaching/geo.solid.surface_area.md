@@ -23,7 +23,7 @@ Surface area answers come in **square units** — each face contributes an area,
 
 **Example**
 
-Find the surface area of a prism measuring $5$ cm by $4$ cm by $3$ cm.
+Find the surface area of a prism measuring 5 cm by 4 cm by 3 cm.
 
 *Solution*
 
@@ -34,7 +34,7 @@ The surface area is $94\text{ cm}^2$.
 
 **Example**
 
-A cube has edges of $2$ m. Find its surface area.
+A cube has edges of 2 m. Find its surface area.
 
 *Solution*
 

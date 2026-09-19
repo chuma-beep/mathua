@@ -5,7 +5,7 @@
 ## Analytic Continuation
 
 ### Zeros and Poles
-Pole at $s=1$ residue $1$; trivial zeros $s=-2,-4,\dots$; nontrivial zeros conjectured $\Re(s)=1/2$ (RH).
+Pole at $s=1$ residue 1; trivial zeros $s=-2,-4,\dots$; nontrivial zeros conjectured $\Re(s)=1/2$ (RH).
 
 ### Basel and Special Values
 $\zeta(2)=\pi^2/6$, $\zeta(-1)=-1/12$ regularized.

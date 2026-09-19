@@ -42,7 +42,7 @@ If \\( n \neq m \\), the leading term of the polynomial of higher degree has no 
 
 The summation form introduced above admits a concrete computational counterpart, in which the two polynomials are written in standard form and the coefficients of terms of equal degree are combined directly. This is the procedure used in practice whenever a sum or difference must be evaluated by hand.
 
-Given two polynomials \\( P(x) \\) and \\( Q(x) \\), the sum is obtained in three steps: arrange both polynomials in decreasing order of degree, align the terms of equal degree, and add the corresponding coefficients. Missing terms are treated as having coefficient zero, so that every degree from \\( 0 \\) up to \\( \max\\{\deg P,\\, \deg Q\\} \\) is represented. Consider the following polynomials:
+Given two polynomials \\( P(x) \\) and \\( Q(x) \\), the sum is obtained in three steps: arrange both polynomials in decreasing order of degree, align the terms of equal degree, and add the corresponding coefficients. Missing terms are treated as having coefficient zero, so that every degree from 0 up to \\( \max\\{\deg P,\\, \deg Q\\} \\) is represented. Consider the following polynomials:
 
 \\[ P(x) = 4x^3 + 2x - 7 \\]
 
@@ -94,7 +94,7 @@ The second property is associativity. For every triple \\( P(x) \\), \\( Q(x) \\
 \bigl(P(x) + Q(x)\bigr) + R(x) = P(x) + \bigl(Q(x) + R(x)\bigr)
 \\]
 
-The third property is the existence of a neutral element. The zero polynomial, denoted \\( 0 \\), satisfies:
+The third property is the existence of a neutral element. The zero polynomial, denoted 0, satisfies:
 
 \\[
 P(x) + 0 = P(x)

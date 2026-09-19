@@ -82,7 +82,7 @@ A Pythagorean triple whose three entries are pairwise coprime is called a primit
 
 On the unit circle, the sine and cosine of an angle \\(\theta\\) admit a direct geometric interpretation. Dropping a perpendicular from the point on the circle identified by \\(\theta\\) to the horizontal axis produces a right triangle whose hypotenuse is the radius, whose horizontal leg has length \\(\cos\theta\\) and whose vertical leg has length \\(\sin\theta\\).
 
-Applying the Pythagorean theorem to this triangle, with legs of length \\(\sin\theta\\) and \\(\cos\theta\\) and hypotenuse of length \\(1\\), yields the fundamental trigonometric identity:
+Applying the Pythagorean theorem to this triangle, with legs of length \\(\sin\theta\\) and \\(\cos\theta\\) and hypotenuse of length 1, yields the fundamental trigonometric identity:
 
 \\[
 \sin^2\theta + \cos^2\theta = 1

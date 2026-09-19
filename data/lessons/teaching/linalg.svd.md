@@ -12,4 +12,4 @@ $U$'s columns left singular vectors, $V$'s right; $Av_i=\sigma_i u_i$.
 
 ## Example
 
-$A=\begin{pmatrix}3&0\\0&2\end{pmatrix}$: $U=I$, $V=I$, $\Sigma=\text{diag}(3,2)$, singular values $3,2$, rank $2$.
+$A=\begin{pmatrix}3&0\\0&2\end{pmatrix}$: $U=I$, $V=I$, $\Sigma=\text{diag}(3,2)$, singular values 3,2, rank 2.

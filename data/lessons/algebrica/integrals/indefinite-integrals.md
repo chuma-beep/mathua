@@ -62,7 +62,7 @@ A constant factor can be moved outside the integral sign:
 
 ## Example 2
 
-Compute the integral of \\(f(x) = 3x^2 + 2x\\). Applying property \\(1\\), the integral splits into two terms, each of which falls under the power rule:
+Compute the integral of \\(f(x) = 3x^2 + 2x\\). Applying property 1, the integral splits into two terms, each of which falls under the power rule:
 
 \\[\int (3x^2 + 2x) \\, dx = \int 3x^2 \\, dx + \int 2x \\, dx\\]
 
@@ -70,7 +70,7 @@ The two integration constants arising from each term combine into a single arbit
 
 ## Example 3
 
-Compute the integral of \\(f(x) = 5\sin(x)\\). Applying property \\(2\\), the constant factor is moved outside the integral:
+Compute the integral of \\(f(x) = 5\sin(x)\\). Applying property 2, the constant factor is moved outside the integral:
 
 \\[\int 5\sin(x) \\, dx = 5 \int \sin(x) \\, dx\\]
 

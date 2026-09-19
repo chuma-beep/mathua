@@ -12,4 +12,4 @@ Multi-head captures different relations.
 
 ## Example
 
-BERT base: $12$ layers, $768$ hidden, $12$ heads; attention matrix $n×n$.
+BERT base: 12 layers, 768 hidden, 12 heads; attention matrix $n×n$.

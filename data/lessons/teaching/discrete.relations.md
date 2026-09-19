@@ -12,4 +12,4 @@ Each class $[a]$ collects mutually related elements; distinct classes are disjoi
 
 ## Example
 
-$R=\{(a,b):a\equiv b\pmod 3\}$ on $\mathbb Z$: $a-a=0$ divisible by $3$ (reflexive), $a-b$ divisible implies $b-a$ divisible (symmetric), and transitivity holds via sums. Classes are $[0],[1],[2]$.
+$R=\{(a,b):a\equiv b\pmod 3\}$ on $\mathbb Z$: $a-a=0$ divisible by 3 (reflexive), $a-b$ divisible implies $b-a$ divisible (symmetric), and transitivity holds via sums. Classes are $[0],[1],[2]$.

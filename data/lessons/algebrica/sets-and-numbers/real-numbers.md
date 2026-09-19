@@ -5,7 +5,7 @@
 
 ## Field and order structure
 
-The real numbers are introduced as a structure characterised by a combination of algebraic and order properties. These properties determine their behaviour and distinguish it from all other numerical fields. The real numbers form a field under addition and multiplication. This means that both operations are associative and commutative, multiplication distributes over addition, and every nonzero real number admits a multiplicative inverse. The additive identity is \\(0\\) and the multiplicative identity is \\(1\\). The algebraic axioms underlying this structure are discussed in detail in Properties of Real Numbers. Beyond its algebraic structure, \\(\mathbb{R}\\) carries a total order relation, denoted \\(<\\): for any two elements \\(x, y \in \mathbb{R}\\), exactly one of the following three relations holds:
+The real numbers are introduced as a structure characterised by a combination of algebraic and order properties. These properties determine their behaviour and distinguish it from all other numerical fields. The real numbers form a field under addition and multiplication. This means that both operations are associative and commutative, multiplication distributes over addition, and every nonzero real number admits a multiplicative inverse. The additive identity is 0 and the multiplicative identity is 1. The algebraic axioms underlying this structure are discussed in detail in Properties of Real Numbers. Beyond its algebraic structure, \\(\mathbb{R}\\) carries a total order relation, denoted \\(<\\): for any two elements \\(x, y \in \mathbb{R}\\), exactly one of the following three relations holds:
 
 \\[
 x < y \qquad x = y \qquad y < x
@@ -20,7 +20,7 @@ A field equipped with a total order satisfying these compatibility conditions is
 
 ## The real line
 
-The real numbers admit a geometric interpretation that makes their order and completeness clear. Fix an arbitrary point on a straight line and label it \\(0\\). Fix a second point to its right and label it \\(1\\). Every real number \\(x\\) then corresponds to a unique point on the line: positive numbers lie to the right of \\(0\\), negative numbers to the left, at a distance from the origin equal to the absolute value \\(|x|\\). This correspondence is a bijection between \\(\mathbb{R}\\) and the points of the line and it preserves the order. \\(x < y\\) holds if and only if the point corresponding to \\(x\\) lies to the left of the point corresponding to \\(y\\).
+The real numbers admit a geometric interpretation that makes their order and completeness clear. Fix an arbitrary point on a straight line and label it 0. Fix a second point to its right and label it 1. Every real number \\(x\\) then corresponds to a unique point on the line: positive numbers lie to the right of 0, negative numbers to the left, at a distance from the origin equal to the absolute value \\(|x|\\). This correspondence is a bijection between \\(\mathbb{R}\\) and the points of the line and it preserves the order. \\(x < y\\) holds if and only if the point corresponding to \\(x\\) lies to the left of the point corresponding to \\(y\\).
 
 ## The completeness axiom
 

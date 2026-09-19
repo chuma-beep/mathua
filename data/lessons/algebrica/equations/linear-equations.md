@@ -4,7 +4,7 @@
 
 ## Definition
 
-A linear equation in the unknowns \\(x_1, x_2, \ldots, x_n\\) is an algebraic equation of degree one, in which each variable appears with exponent equal to \\(1\\) and never multiplied by another variable. Its standard form is:
+A linear equation in the unknowns \\(x_1, x_2, \ldots, x_n\\) is an algebraic equation of degree one, in which each variable appears with exponent equal to 1 and never multiplied by another variable. Its standard form is:
 
 \\[
 a_1x_1 + a_2x_2 + \ldots + a_nx_n = b

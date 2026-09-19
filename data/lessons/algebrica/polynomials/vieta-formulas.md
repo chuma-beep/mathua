@@ -110,7 +110,7 @@ Consider the quadratic equation:
 x^2 - 5x + 6 = 0
 \\]
 
-Vieta's formulas demand that the two roots have sum equal to \\(5\\) and product equal to \\(6\\). Among the integer pairs whose product is \\(6\\), namely \\((1, 6)\\), \\((-1, -6)\\), \\((2, 3)\\), and \\((-2, -3)\\), only the pair \\((2, 3)\\) also has the required sum. The polynomial therefore admits the factorisation:
+Vieta's formulas demand that the two roots have sum equal to 5 and product equal to 6. Among the integer pairs whose product is 6, namely \\((1, 6)\\), \\((-1, -6)\\), \\((2, 3)\\), and \\((-2, -3)\\), only the pair \\((2, 3)\\) also has the required sum. The polynomial therefore admits the factorisation:
 
 \\[
 x^2 - 5x + 6 = (x - 2)(x - 3)
@@ -126,7 +126,7 @@ Consider the cubic equation:
 x^3 - 6x^2 + 11x - 6 = 0
 \\]
 
-Suppose, by inspection or by trial, that its roots are \\(1\\), \\(2\\), and \\(3\\). To confirm, we evaluate the elementary symmetric polynomials in these three values:
+Suppose, by inspection or by trial, that its roots are 1, 2, and 3. To confirm, we evaluate the elementary symmetric polynomials in these three values:
 
 \\[
 \begin{align}
@@ -150,7 +150,7 @@ Vieta's formulas can be read in the opposite direction: given a list of numbers,
 p(x) = x^n - e_1\\, x^{n-1} + e_2\\, x^{n-2} - \cdots + (-1)^n e_n
 \\]
 
-As an illustration, suppose we want the monic polynomial whose roots are \\(2\\), \\(-1\\), and \\(3\\). Computing the three elementary symmetric polynomials in these values:
+As an illustration, suppose we want the monic polynomial whose roots are 2, \\(-1\\), and 3. Computing the three elementary symmetric polynomials in these values:
 
 \\[
 \begin{align}

@@ -6,7 +6,7 @@ The **geometric series** is defined as the infinite sum:
 
 \\[\sum_{n=0}^{\infty} r^n \\]
 
-\\( r \\) is the common ratio, which defines how each term is obtained by multiplying the previous one by \\( r \\). If \\( r = 0 \\), the geometric series converges and its sum is \\( 1 \\), since all terms after the first are zero: \\[\sum_{n=0}^{\infty} 0^n = 1 + 0 + 0 + \dots = 1 \\]
+\\( r \\) is the common ratio, which defines how each term is obtained by multiplying the previous one by \\( r \\). If \\( r = 0 \\), the geometric series converges and its sum is 1, since all terms after the first are zero: \\[\sum_{n=0}^{\infty} 0^n = 1 + 0 + 0 + \dots = 1 \\]
 
 If \\( r = 1 \\), the series diverges, because the sequence of partial sums grows without bound: \\[s_n = 1 + 1 + \dots + 1 = n + 1 \quad \rightarrow \quad \lim_{n \to \infty} s_n = \infty \\]
 

@@ -40,22 +40,22 @@ Imposing the further condition that every nonzero element be invertible under mu
 
 The order of an element \\(a\\) in a group \\(G\\) is the smallest positive integer \\(n\\) such that \\(a^n = e\\), where \\(e\\) is the identity element and the notation \\(a^n\\) denotes the product of \\(a\\) with itself \\(n\\) times. If no such integer exists, the element is said to have infinite order. The order of \\(a\\) is denoted \\(\mathrm{ord}(a)\\).
 
-As an example, consider the group \\((\mathbb{Z}/6\mathbb{Z}, +)\\). The element \\(2\\) has order \\(3\\), since \\(2+2+2 = 6 \equiv 0 \pmod{6}\\) and neither \\(2\\) nor \\(2+2 = 4\\) is congruent to \\(0\\). The element \\(1\\) has order \\(6\\), since one must add \\(1\\) to itself six times to obtain \\(0\\). In the group \\((\mathbb{Z}, +)\\) every nonzero element has infinite order, because no finite sum of a fixed nonzero integer can equal \\(0\\).
+As an example, consider the group \\((\mathbb{Z}/6\mathbb{Z}, +)\\). The element 2 has order 3, since \\(2+2+2 = 6 \equiv 0 \pmod{6}\\) and neither 2 nor \\(2+2 = 4\\) is congruent to 0. The element 1 has order 6, since one must add 1 to itself six times to obtain 0. In the group \\((\mathbb{Z}, +)\\) every nonzero element has infinite order, because no finite sum of a fixed nonzero integer can equal 0.
 
 > The modulo operator \\(a \bmod n\\) returns the remainder of the division of \\(a\\) by \\(n\\). For example, \\(7 \bmod 5 = 2\\) since \\(7 = 1 \cdot 5 + 2\\).
 
 ## Examples
 
-The set \\(\mathbb{Z}\\) equipped with ordinary addition forms an abelian group. The identity element is \\(0\\), and the inverse of an integer \\(n\\) is \\(-n\\). This is an infinite group and arguably the most natural example of a group in elementary mathematics.
+The set \\(\mathbb{Z}\\) equipped with ordinary addition forms an abelian group. The identity element is 0, and the inverse of an integer \\(n\\) is \\(-n\\). This is an infinite group and arguably the most natural example of a group in elementary mathematics.
 
-Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\) equipped with addition modulo \\(n\\) forms a finite abelian group of order \\(n\\). For example, in \\(\mathbb{Z}/5\mathbb{Z}\\) one has \\(3+4=2\\), since \\(7 \equiv 2 \pmod{5}\\). The identity element is \\(0\\) and the inverse of \\(k\\) is \\(n-k\\).
+Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\) equipped with addition modulo \\(n\\) forms a finite abelian group of order \\(n\\). For example, in \\(\mathbb{Z}/5\mathbb{Z}\\) one has \\(3+4=2\\), since \\(7 \equiv 2 \pmod{5}\\). The identity element is 0 and the inverse of \\(k\\) is \\(n-k\\).
 
 
 Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set of all invertible \\(n \times n\\) matrices with entries in \\(F\\), denoted \\(\mathrm{GL}(n, F)\\), forms a group under matrix multiplication. The identity element is the identity matrix \\(I_n\\), and the inverse of a matrix \\(A\\) is its matrix inverse \\(A^{-1}\\). This group is not abelian for \\(n \geq 2\\), since matrix multiplication does not commute in general.
 
 Given a set \\(\{1, 2, \ldots, n\}\\), a permutation is a bijection from this set to itself. The collection of all such permutations forms a group under composition of functions, denoted \\(S_n\\) and called the symmetric group on \\(n\\) elements. The identity element is the identity permutation, and the inverse of a permutation \\(\sigma\\) is the inverse function \\(\sigma^{-1}\\). The group \\(S_n\\) has order \\(n!\\) and is non-abelian for \\(n \geq 3\\).
 
-As a concrete illustration, consider \\(S_3\\), which has order \\(6\\). Let \\(\sigma\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 3\\), \\(3 \mapsto 1\\), and let \\(\tau\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 1\\), \\(3 \mapsto 3\\).
+As a concrete illustration, consider \\(S_3\\), which has order 6. Let \\(\sigma\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 3\\), \\(3 \mapsto 1\\), and let \\(\tau\\) be the permutation sending \\(1 \mapsto 2\\), \\(2 \mapsto 1\\), \\(3 \mapsto 3\\).
 
 \\[
 \sigma = \begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 3 & 1 \end{pmatrix} \qquad
@@ -63,10 +63,10 @@ As a concrete illustration, consider \\(S_3\\), which has order \\(6\\). Let \\(
 \\]
 
 To compute \\(\sigma \circ \tau\\), one applies \\(\tau\\) first and then \\(\sigma\\).
-The element \\(1\\) is sent by \\(\tau\\) to \\(2\\), and then \\(\sigma\\) sends \\(2\\)
-to \\(3\\), so \\(1 \mapsto 3\\). The element \\(2\\) is sent by \\(\tau\\) to \\(1\\),
-and then \\(\sigma\\) sends \\(1\\) to \\(2\\), so \\(2 \mapsto 2\\). Finally, \\(3\\)
-is fixed by \\(\tau\\), and \\(\sigma\\) sends \\(3\\) to \\(1\\), so \\(3 \mapsto 1\\).
+The element 1 is sent by \\(\tau\\) to 2, and then \\(\sigma\\) sends 2
+to 3, so \\(1 \mapsto 3\\). The element 2 is sent by \\(\tau\\) to 1,
+and then \\(\sigma\\) sends 1 to 2, so \\(2 \mapsto 2\\). Finally, 3
+is fixed by \\(\tau\\), and \\(\sigma\\) sends 3 to 1, so \\(3 \mapsto 1\\).
 Thus
 
 \\[
@@ -85,14 +85,14 @@ Since \\(\sigma \circ \tau \neq \tau \circ \sigma\\), the group \\(S_3\\) is ind
 
 A good way to appreciate the group axioms is to look at pairs consisting of a set and an operation that almost form a group, but fail on one specific point. Each failure isolates a different axiom and shows why the definition is cut exactly as it is.
 
-Consider the natural numbers including zero, \\(\mathbb{N}_0 = \{0, 1, 2, \ldots\}\\), equipped with ordinary addition. The operation is closed and associative, and \\(0\\) acts as an identity element. The axiom that fails is the existence of inverses. In fact given any positive integer \\(n\\), there is no element in \\(\mathbb{N}_0\\) that added to \\(n\\) returns \\(0\\), because the candidate \\(-n\\) lies outside the set. The structure \\((\mathbb{N}_0, +)\\) is therefore not a group, but only a monoid.
+Consider the natural numbers including zero, \\(\mathbb{N}_0 = \{0, 1, 2, \ldots\}\\), equipped with ordinary addition. The operation is closed and associative, and 0 acts as an identity element. The axiom that fails is the existence of inverses. In fact given any positive integer \\(n\\), there is no element in \\(\mathbb{N}_0\\) that added to \\(n\\) returns 0, because the candidate \\(-n\\) lies outside the set. The structure \\((\mathbb{N}_0, +)\\) is therefore not a group, but only a monoid.
 
 
-The integers with multiplication, \\((\mathbb{Z}, \cdot)\\), are another example. Closure, associativity, and the identity \\(1\\) are all in place, yet the vast majority of integers lack a multiplicative inverse inside \\(\mathbb{Z}\\). The only elements that admit an inverse are \\(1\\) and \\(-1\\), since for any other integer \\(n\\) the reciprocal \\(1/n\\) is not an integer. Dropping all non-invertible elements would leave only the two-element set \\(\{1, -1\}\\), which is a group under multiplication but a much smaller object than the integers.
+The integers with multiplication, \\((\mathbb{Z}, \cdot)\\), are another example. Closure, associativity, and the identity 1 are all in place, yet the vast majority of integers lack a multiplicative inverse inside \\(\mathbb{Z}\\). The only elements that admit an inverse are 1 and \\(-1\\), since for any other integer \\(n\\) the reciprocal \\(1/n\\) is not an integer. Dropping all non-invertible elements would leave only the two-element set \\(\{1, -1\}\\), which is a group under multiplication but a much smaller object than the integers.
 
-The real numbers with multiplication, \\((\mathbb{R}, \cdot)\\), come even closer to being a group. Every real number different from zero has a multiplicative inverse, namely its reciprocal. The obstacle is a single element: zero has no multiplicative inverse, and its presence in the set is enough to disqualify the whole structure. The fix is to remove it. The set of nonzero reals \\(\mathbb{R}\setminus\{0\}\\) equipped with ordinary multiplication does form an abelian group, with identity \\(1\\) and inverse \\(a^{-1} = 1/a\\) for every \\(a \neq 0\\).
+The real numbers with multiplication, \\((\mathbb{R}, \cdot)\\), come even closer to being a group. Every real number different from zero has a multiplicative inverse, namely its reciprocal. The obstacle is a single element: zero has no multiplicative inverse, and its presence in the set is enough to disqualify the whole structure. The fix is to remove it. The set of nonzero reals \\(\mathbb{R}\setminus\{0\}\\) equipped with ordinary multiplication does form an abelian group, with identity 1 and inverse \\(a^{-1} = 1/a\\) for every \\(a \neq 0\\).
 
-> These three cases each fail a different axiom. Iinverses for \\((\mathbb{N}\_0, +)\\), inverses for all but two elements in \\((\mathbb{Z}, \cdot)\\), and the existence of an inverse for the single element \\(0\\) in \\((\mathbb{R}, \cdot)\\). The last case illustrates a recurring pattern in algebra, where removing a problematic element produces a legitimate group.
+> These three cases each fail a different axiom. Iinverses for \\((\mathbb{N}\_0, +)\\), inverses for all but two elements in \\((\mathbb{Z}, \cdot)\\), and the existence of an inverse for the single element 0 in \\((\mathbb{R}, \cdot)\\). The last case illustrates a recurring pattern in algebra, where removing a problematic element produces a legitimate group.
 
 ## Cyclic groups
 
@@ -102,7 +102,7 @@ A group \\(G\\) is called cyclic if there exists an element \\(g \in G\\) such t
 
 Such an element \\(g\\) is called a generator of \\(G\\). Every cyclic group is isomorphic either to \\(\mathbb{Z}\\) if it is infinite, or to \\(\mathbb{Z}/n\mathbb{Z}\\) for some positive integer \\(n\\) if it is finite.
 
-The group \\((\mathbb{Z}/6\mathbb{Z}, +)\\) is cyclic with generator \\(1\\), since every element \\(0, 1, 2, 3, 4, 5\\) can be obtained as a multiple of \\(1\\). The element \\(5\\) is also a generator, as repeated addition of \\(5\\) modulo \\(6\\) produces all six residues. The element \\(2\\), however, is not a generator, since the multiples of \\(2\\) modulo \\(6\\) are only \\(\{0, 2, 4\}\\), which form a proper subgroup of \\(\mathbb{Z}/6\mathbb{Z}\\).
+The group \\((\mathbb{Z}/6\mathbb{Z}, +)\\) is cyclic with generator 1, since every element \\(0, 1, 2, 3, 4, 5\\) can be obtained as a multiple of 1. The element 5 is also a generator, as repeated addition of 5 modulo 6 produces all six residues. The element 2, however, is not a generator, since the multiples of 2 modulo 6 are only \\(\{0, 2, 4\}\\), which form a proper subgroup of \\(\mathbb{Z}/6\mathbb{Z}\\).
 
 ## Subgroups
 

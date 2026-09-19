@@ -99,5 +99,5 @@ Since the unknown \\(x\\) appears in the denominator, we multiply both sides by 
 x = \frac{5}{\tan(30^\circ)}
 \\]
 
-The tangent of \\(30^\circ\\) is equal to \\(1/\sqrt{3}\\), so the expression simplifies to \\(x = 5\sqrt{3}\\), which is approximately \\(8.66\\). The adjacent leg therefore measures about \\(8.66\\) units.
+The tangent of \\(30^\circ\\) is equal to \\(1/\sqrt{3}\\), so the expression simplifies to \\(x = 5\sqrt{3}\\), which is approximately 8.66. The adjacent leg therefore measures about 8.66 units.
 

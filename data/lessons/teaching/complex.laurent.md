@@ -16,4 +16,4 @@ Annulus radii determined by nearest singularities: $1/(z(1-z))$ has annuli $0<|z
 
 ## Example
 
-$f(z)=1/z$ at $0$: $f(z)=z^{-1}$ is already Laurent with $a_{-1}=1$, regular part $0$; residue $1$.
+$f(z)=1/z$ at 0: $f(z)=z^{-1}$ is already Laurent with $a_{-1}=1$, regular part 0; residue 1.

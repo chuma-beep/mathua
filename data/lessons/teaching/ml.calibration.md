@@ -12,4 +12,4 @@ Temperature scaling: softmax with temperature $T$ scales logits $z/T$, tuning $T
 
 ## Example
 
-Model predicts $100$ samples at $80\%$ confidence: if $80$ correct, calibrated; if $60$ correct, overconfident by $20\%$ ECE contribution $0.2×(100/N)$.
+Model predicts 100 samples at $80\%$ confidence: if 80 correct, calibrated; if 60 correct, overconfident by $20\%$ ECE contribution $0.2×(100/N)$.

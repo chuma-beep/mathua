@@ -166,7 +166,7 @@ which allows us to determine the coefficients \\(A\\) and \\(B\\). Evaluating at
 A = 4 \qquad B = -5
 \\]
 
-Thus, by substituting the values obtained into identity \\(1\\), we obtain:
+Thus, by substituting the values obtained into identity 1, we obtain:
 
 \\[
 \frac{7x + 13}{(x - 1)(3x + 2)} = \frac{4}{x - 1} - \frac{5}{3x + 2}

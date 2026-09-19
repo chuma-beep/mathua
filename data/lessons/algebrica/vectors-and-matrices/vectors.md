@@ -64,7 +64,7 @@ The operations of vector addition and scalar multiplication satisfy a set of fun
 
 + The zero vector \\(\mathbf{0}\\) acts as the additive identity, satisfying \\(\mathbf{v} + \mathbf{0} = \mathbf{v}\\) for every \\(\mathbf{v}\\), and each vector \\(\mathbf{v}\\) has an additive inverse \\(-\mathbf{v} = (-1)\mathbf{v}\\) such that \\(\mathbf{v} + (-\mathbf{v}) = \mathbf{0}.\\)
 
-+ Scalar multiplication distributes over vector addition according to \\(\lambda(\mathbf{u} + \mathbf{v}) = \lambda\mathbf{u} + \lambda\mathbf{v}\\), and over scalar addition according to \\((\lambda + \mu)\mathbf{v} = \lambda\mathbf{v} + \mu\mathbf{v}\\). Scalar multiplication is compatible with scalar product: \\((\lambda\mu)\mathbf{v} = \lambda(\mu\mathbf{v})\\), and the scalar \\(1\\) acts as the multiplicative identity, with \\(1 \cdot \mathbf{v} = \mathbf{v}.\\)
++ Scalar multiplication distributes over vector addition according to \\(\lambda(\mathbf{u} + \mathbf{v}) = \lambda\mathbf{u} + \lambda\mathbf{v}\\), and over scalar addition according to \\((\lambda + \mu)\mathbf{v} = \lambda\mathbf{v} + \mu\mathbf{v}\\). Scalar multiplication is compatible with scalar product: \\((\lambda\mu)\mathbf{v} = \lambda(\mu\mathbf{v})\\), and the scalar 1 acts as the multiplicative identity, with \\(1 \cdot \mathbf{v} = \mathbf{v}.\\)
 
 > These properties are not incidental: together they constitute the defining axioms of a vector space. The set \\(\mathbb{R}^n\\) equipped with these two operations forms a vector space over the field \\(\mathbb{R}\\), a structure that will be examined in greater generality in the entry on vector spaces.
 
@@ -91,7 +91,7 @@ As an example, consider the vector \\(\mathbf{v} = (2, -3, 6)\\) in \\(\mathbb{R
 \end{align}
 \\]
 
-Each term under the radical corresponds to the squared contribution of one coordinate direction, and the result confirms that \\(\mathbf{v}\\) has length \\(7\\). A vector whose norm is equal to one is called a unit vector. Given any non-zero vector \\(\mathbf{v}\\), it is always possible to construct a unit vector pointing in the same direction by dividing \\(\mathbf{v}\\) by its norm. This operation is called normalisation.
+Each term under the radical corresponds to the squared contribution of one coordinate direction, and the result confirms that \\(\mathbf{v}\\) has length 7. A vector whose norm is equal to one is called a unit vector. Given any non-zero vector \\(\mathbf{v}\\), it is always possible to construct a unit vector pointing in the same direction by dividing \\(\mathbf{v}\\) by its norm. This operation is called normalisation.
 
 \\[
 \hat{\mathbf{v}} = \frac{\mathbf{v}}{\\|\mathbf{v}\\|}

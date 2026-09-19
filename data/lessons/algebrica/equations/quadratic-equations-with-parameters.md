@@ -107,7 +107,7 @@ Making reference to the quadratic equation used in example 1, it is also helpful
 so analysing the roots is equivalent to studying where this curve intersects the x-axis. As the parameter moves, the entire family of parabolas shifts in a smooth and predictable way. One way to describe this evolution is to examine what happens in three key regimes of the parameter.
 
 
-When \\(|k|\\) becomes very large (\\(k \to +\infty\\) or \\(k \to -\infty\\)), the linear term \\(kx\\) dominates the expression and the two roots separate widely. A simple [asymptotic](<../asymptotes/>) argument shows that one root tends to \\(0\\), while the other behaves approximately like \\(-k\\). Geometrically, this means that the intersection points move far apart: one stays close to the origin, while the other drifts further and further along the negative axis. The parabola becomes increasingly tilted in appearance.
+When \\(|k|\\) becomes very large (\\(k \to +\infty\\) or \\(k \to -\infty\\)), the linear term \\(kx\\) dominates the expression and the two roots separate widely. A simple [asymptotic](<../asymptotes/>) argument shows that one root tends to 0, while the other behaves approximately like \\(-k\\). Geometrically, this means that the intersection points move far apart: one stays close to the origin, while the other drifts further and further along the negative axis. The parabola becomes increasingly tilted in appearance.
 
 
 At the critical values \\(k = \pm 2\\), the discriminant becomes zero. This corresponds to the moment when the parabola touches the x-axis at exactly one point. In these cases the graph has a single point of tangency, the equation has one repeated root, and the vertex lies precisely on the axis.
@@ -159,7 +159,7 @@ Consider the parameter-dependent quadratic equation:
 
 \\[x^{2} - (a - 4)x + (a^{2} - a) = 0 \\]
 
-where \\(a\\) is a real parameter. We want to determine the values of \\(a\\) for which the product of the two solutions is strictly less than \\(2\\). For a general quadratic equation of the form:
+where \\(a\\) is a real parameter. We want to determine the values of \\(a\\) for which the product of the two solutions is strictly less than 2. For a general quadratic equation of the form:
 
 \\[x^{2} + bx + c = 0 \\]
 
@@ -168,7 +168,7 @@ the product of the solutions satisfies the identity \\(x_{1}x_{2} = c\\).
 ###### This identity follows from the [factorised form](<../factoring-quadratic-equations/>) of a monic quadratic, where \\(x^{2} + bx + c = (x - x_{1})(x - x_{2})\\). By expanding the product, the constant term appears as \\(x_{1}x_{2}\\), which explains why the product of the solutions is equal to \\(c\\).
 
 
-In this case the constant term is \\(c = a^{2} - a\\), and requiring the product of the two solutions to be less than \\(2\\) translates into the inequality:
+In this case the constant term is \\(c = a^{2} - a\\), and requiring the product of the two solutions to be less than 2 translates into the inequality:
 
 \\[a^{2} - a < 2 \\]
 

@@ -26,7 +26,7 @@ This means that expressions inside parentheses are evaluated first. Exponents ar
 
 The real numbers are said to be dense: between any two distinct real numbers, there always exists another. Formally, for every \\(a, b \in \mathbb{R}\\) with \\(a < b\\), there exists \\(c \in \mathbb{R}\\) such that \\(a < c < b\\). One natural choice is the arithmetic mean \\(c = (a+b)/2\\), but infinitely many such values exist.
 
-This sets \\(\mathbb{R}\\) apart from the integers, where gaps are plainly visible: there is no integer between \\(2\\) and \\(3\\). The rational numbers \\(\mathbb{Q}\\) are also dense, yet incomplete: they contain gaps at points such as \\(\sqrt{2}\\) and \\(\pi\\), which are real but not rational.
+This sets \\(\mathbb{R}\\) apart from the integers, where gaps are plainly visible: there is no integer between 2 and 3. The rational numbers \\(\mathbb{Q}\\) are also dense, yet incomplete: they contain gaps at points such as \\(\sqrt{2}\\) and \\(\pi\\), which are real but not rational.
 
 > The real numbers are distinguished by being both dense and complete: every gap is filled, and the number line has no missing points. Completeness is a deeper structural property: every non-empty subset of \\(\mathbb{R}\\) bounded above has a least upper bound (supremum) in \\(\mathbb{R}\\), and every Cauchy sequence of real numbers converges to a real limit. In contrast, \\(\mathbb{Q}\\) is dense but not complete: there exist Cauchy sequences of rationals that converge to an irrational limit.
 
@@ -158,24 +158,24 @@ Thus, the distributive law underlies both expansion and factorization. It provid
 The identity properties describe the existence of special elements in the real numbers that leave other elements unchanged under a given operation. These elements are called identity elements because they preserve the value of a number when combined with it. In the real number system, there are two identity elements: one for addition and one for multiplication.
 
 
-There exists a unique real number, denoted \\( 0 \\), such that for every \\( a \in \mathbb{R} \\):
+There exists a unique real number, denoted 0, such that for every \\( a \in \mathbb{R} \\):
 
 \\[
 a + 0 = a \quad \text{and} \quad 0 + a = a
 \\]
 
-The number \\( 0 \\) is called the additive identity because adding zero does not alter the value of a real number. The uniqueness of this element is important. If a number \\( n \\) satisfies \\(a + n = a \quad \forall \\, a \in \mathbb{R}\\) then necessarily \\( n = 0 \\).
+The number 0 is called the additive identity because adding zero does not alter the value of a real number. The uniqueness of this element is important. If a number \\( n \\) satisfies \\(a + n = a \quad \forall \\, a \in \mathbb{R}\\) then necessarily \\( n = 0 \\).
 
 
-There also exists a unique real number, denoted \\( 1 \\), such that for every \\( a \in \mathbb{R} \\):
+There also exists a unique real number, denoted 1, such that for every \\( a \in \mathbb{R} \\):
 
 \\[
 a \cdot 1 = a \quad \text{and} \quad 1 \cdot a = a
 \\]
 
-The number \\( 1 \\) is called the multiplicative identity because multiplying by one leaves every real number unchanged. As in the additive case, this identity element is unique. If a number \\( n \\) satisfies \\(a \cdot n = a \quad \forall \\, a \in \mathbb{R}\\) then necessarily \\( n = 1 \\).
+The number 1 is called the multiplicative identity because multiplying by one leaves every real number unchanged. As in the additive case, this identity element is unique. If a number \\( n \\) satisfies \\(a \cdot n = a \quad \forall \\, a \in \mathbb{R}\\) then necessarily \\( n = 1 \\).
 
-> The existence of identity elements is one of the defining features of the real numbers as a field. The additive identity \\( 0 \\) anchors the additive structure, while the multiplicative identity \\( 1 \\) anchors the multiplicative structure.
+> The existence of identity elements is one of the defining features of the real numbers as a field. The additive identity 0 anchors the additive structure, while the multiplicative identity 1 anchors the multiplicative structure.
 
 ## Inverse property
 
@@ -187,7 +187,7 @@ For every \\( a \in \mathbb{R} \\), there exists a real number, denoted \\( -a \
 a + (-a) = 0
 \\]
 
-The number \\( -a \\) is called the additive inverse (or opposite) of \\( a \\). Its defining property is that when added to \\( a \\), the result is the additive identity \\( 0 \\). The additive inverse is unique. If a number \\( b \\) satisfies \\(a + b = 0\\) then necessarily \\( b = -a \\).
+The number \\( -a \\) is called the additive inverse (or opposite) of \\( a \\). Its defining property is that when added to \\( a \\), the result is the additive identity 0. The additive inverse is unique. If a number \\( b \\) satisfies \\(a + b = 0\\) then necessarily \\( b = -a \\).
 
 
 For every nonzero real number \\(a \in \mathbb{R}\\), there exists a unique real number \\(\dfrac{1}{a}\\) such that:
@@ -196,4 +196,4 @@ For every nonzero real number \\(a \in \mathbb{R}\\), there exists a unique real
 a \cdot \frac{1}{a} = 1
 \\]
 
-The number \\( \dfrac{1}{a} \\) is called the multiplicative inverse (or reciprocal) of \\( a \\). It is defined only for \\( a \neq 0 \\), since no real number multiplied by \\( 0 \\) can produce the multiplicative identity \\( 1 \\). As in the additive case, the multiplicative inverse is unique. If a number \\( b \\) satisfies \\(a \cdot b = 1\\) then necessarily \\( b = \dfrac{1}{a} \\).
+The number \\( \dfrac{1}{a} \\) is called the multiplicative inverse (or reciprocal) of \\( a \\). It is defined only for \\( a \neq 0 \\), since no real number multiplied by 0 can produce the multiplicative identity 1. As in the additive case, the multiplicative inverse is unique. If a number \\( b \\) satisfies \\(a \cdot b = 1\\) then necessarily \\( b = \dfrac{1}{a} \\).

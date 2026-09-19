@@ -125,7 +125,7 @@ If instead the parameter takes the value \\(k = \frac{3}{2}\\), the coefficient 
 k + 1 = 4
 \\]
 
-Since \\(k = \frac{3}{2}\\), the left-hand side evaluates to \\(\frac{3}{2} + 1 = \frac{5}{2}\\), which is not equal to \\(4\\). The statement is therefore false.
+Since \\(k = \frac{3}{2}\\), the left-hand side evaluates to \\(\frac{3}{2} + 1 = \frac{5}{2}\\), which is not equal to 4. The statement is therefore false.
 
 Therefore, in this case no real value of \\(x\\) can satisfy the equation. Summarising the two possible situations we obtain:
 

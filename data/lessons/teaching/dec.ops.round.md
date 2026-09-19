@@ -17,9 +17,9 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  Name the number $4,926,015$ in words.  
+1.  Name the number 4,926,015 in words.  
     If you missed this problem, review Example 1.4.
-2.  Round $748$ to the nearest ten.  
+2.  Round 748 to the nearest ten.  
     If you missed this problem, review Example 1.9.
 3.  Locate $\frac{3}{10}$ on a number line.  
     If you missed this problem, review Example 4.16.
@@ -28,7 +28,7 @@ Before you get started, take this readiness quiz.
 
 You probably already know quite a bit about decimals based on your experience with money. Suppose you buy a sandwich and a bottle of water for lunch. If the sandwich costs $\text{\$3.45}$, the bottle of water costs $\text{\$1.25}$, and the total sales tax is $\text{\$0.33}$, what is the total cost of your lunch?
 
-The total is $\text{\$5.03}.$ Suppose you pay with a $\text{\$5}$ bill and $3$ pennies. Should you wait for change? No, $\text{\$5}$ and $3$ pennies is the same as $\text{\$5.03}.$
+The total is $\text{\$5.03}.$ Suppose you pay with a $\text{\$5}$ bill and 3 pennies. Should you wait for change? No, $\text{\$5}$ and 3 pennies is the same as $\text{\$5.03}.$
 
 Because $\text{100 pennies} = \text{\$1},$ each penny is worth $\frac{1}{100}$ of a dollar. We write the value of one penny as $\$ 0.01,$ since $0.01 = \frac{1}{100}.$
 
@@ -36,7 +36,7 @@ Writing a number with a decimal is known as decimal notation. It is a way of sho
 
 | Counting number                            | Name         |
 |--------------------------------------------|--------------|
-| $1$                                      | One          |
+| 1                                      | One          |
 | $10 = 10$                                | Ten          |
 | $10 \cdot 10 = 100$                      | One hundred  |
 | $10 \cdot 10 \cdot 10 = 1000$            | One thousand |
@@ -48,14 +48,14 @@ How are decimals related to fractions? Table 5.2 shows the relation.
 
 | Decimal    | Fraction             | Name               |
 |------------|----------------------|--------------------|
-| $0.1$    | $\frac{1}{10}$     | One tenth          |
-| $0.01$   | $\frac{1}{100}$    | One hundredth      |
-| $0.001$  | $\frac{1}{1,000}$  | One thousandth     |
-| $0.0001$ | $\frac{1}{10,000}$ | One ten-thousandth |
+| 0.1    | $\frac{1}{10}$     | One tenth          |
+| 0.01   | $\frac{1}{100}$    | One hundredth      |
+| 0.001  | $\frac{1}{1,000}$  | One thousandth     |
+| 0.0001 | $\frac{1}{10,000}$ | One ten-thousandth |
 
 Table 5.2
 
-When we name a whole number, the name corresponds to the place value based on the powers of ten. In Whole Numbers, we learned to read $10,000$ as *ten thousand*. Likewise, the names of the decimal places correspond to their fraction values. Notice how the place value names in Figure 5.2 relate to the names of the fractions from Table 5.2.
+When we name a whole number, the name corresponds to the place value based on the powers of ten. In Whole Numbers, we learned to read 10,000 as *ten thousand*. Likewise, the names of the decimal places correspond to their fraction values. Notice how the place value names in Figure 5.2 relate to the names of the fractions from Table 5.2.
 
 *Figure 5.2 This chart illustrates place values to the left and right of the decimal point.*
 
@@ -64,7 +64,7 @@ Notice two important facts shown in Figure 5.2.
 - The “th” at the end of the name means the number is a fraction. “One thousand” is a number larger than one, but “one thousandth” is a number smaller than one.
 - The tenths place is the first place to the right of the decimal, but the tens place is two places to the left of the decimal.
 
-Remember that $\text{\$5}.03$ lunch? We read $\text{\$5.03}$ as *five dollars and three cents*. Naming decimals (those that don’t represent money) is done in a similar way. We read the number $5.03$ as *five and three hundredths*.
+Remember that $\text{\$5}.03$ lunch? We read $\text{\$5.03}$ as *five dollars and three cents*. Naming decimals (those that don’t represent money) is done in a similar way. We read the number 5.03 as *five and three hundredths*.
 
 We sometimes need to translate a number written in decimal notation into words. As shown in Figure 5.3, we write the amount on a check in both words and numbers.
 
@@ -78,7 +78,7 @@ We sometimes need to translate a number written in decimal notation into words. 
 | Then we name the number to the right of the decimal point as if it were a whole number. | fifteen and sixty-eight\_\_\_\_\_ |
 | Last, name the decimal place of the last digit. | fifteen and sixty-eight hundredths |
 
-The number $15.68$ is read *fifteen and sixty-eight hundredths*.
+The number 15.68 is read *fifteen and sixty-eight hundredths*.
 
 ### How To
 
@@ -91,7 +91,7 @@ The number $15.68$ is read *fifteen and sixty-eight hundredths*.
 
 ### Example 5.1
 
-Name each decimal: ⓐ$4.3$ ⓑ$2.45$ ⓒ$0.009$ ⓓ$-15.571.$
+Name each decimal: ⓐ4.3 ⓑ2.45 ⓒ0.009 ⓓ$-15.571.$
 
 #### Solution
 
@@ -134,13 +134,13 @@ Name each decimal: ⓐ$4.3$ ⓑ$2.45$ ⓒ$0.009$ ⓓ$-15.571.$
 
 Name each decimal:
 
-ⓐ$6.7$ ⓑ$19.58$ ⓒ$0.018$ ⓓ$-2.053$
+ⓐ6.7 ⓑ19.58 ⓒ0.018 ⓓ$-2.053$
 
 ### Try It 5.2
 
 Name each decimal:
 
-ⓐ$5.8$ ⓑ$3.57$ ⓒ$0.005$ ⓓ$-13.461$
+ⓐ5.8 ⓑ3.57 ⓒ0.005 ⓓ$-13.461$
 
 ### Write Decimals
 
@@ -278,15 +278,15 @@ $$
 
 ### Convert Decimals to Fractions or Mixed Numbers
 
-We often need to rewrite decimals as fractions or mixed numbers. Let’s go back to our lunch order to see how we can convert decimal numbers to fractions. We know that $\text{\$5.03}$ means $5$ dollars and $3$ cents. Since there are $100$ cents in one dollar, $3$ cents means $\frac{3}{100}$ of a dollar, so $0.03 = \frac{3}{100}.$
+We often need to rewrite decimals as fractions or mixed numbers. Let’s go back to our lunch order to see how we can convert decimal numbers to fractions. We know that $\text{\$5.03}$ means 5 dollars and 3 cents. Since there are 100 cents in one dollar, 3 cents means $\frac{3}{100}$ of a dollar, so $0.03 = \frac{3}{100}.$
 
-We convert decimals to fractions by identifying the place value of the farthest right digit. In the decimal $0.03,$ the $3$ is in the hundredths place, so $100$ is the denominator of the fraction equivalent to $0.03.$
+We convert decimals to fractions by identifying the place value of the farthest right digit. In the decimal 0.03, the 3 is in the hundredths place, so 100 is the denominator of the fraction equivalent to 0.03.
 
 $$
 0.03 = \frac{3}{100}
 $$
 
-For our $\text{\$5.03}$ lunch, we can write the decimal $5.03$ as a mixed number.
+For our $\text{\$5.03}$ lunch, we can write the decimal 5.03 as a mixed number.
 
 $$
 5.03 = 5\frac{3}{100}
@@ -312,7 +312,7 @@ Notice that when the number to the left of the decimal is zero, we get a proper 
 
 Write each of the following decimal numbers as a fraction or a mixed number:
 
-ⓐ$4.09$ ⓑ$3.7$ ⓒ$-0.286$
+ⓐ4.09 ⓑ3.7 ⓒ$-0.286$
 
 #### Solution
 
@@ -436,13 +436,13 @@ Write 1,000 in the denominator as the place value of the final digit, 6, is thou
 
 Write as a fraction or mixed number. Simplify the answer if possible.
 
-ⓐ$5.3$ ⓑ$6.07$ ⓒ$-0.234$
+ⓐ5.3 ⓑ6.07 ⓒ$-0.234$
 
 ### Try It 5.8
 
 Write as a fraction or mixed number. Simplify the answer if possible.
 
-ⓐ$8.7$ ⓑ$1.03$ ⓒ$-0.024$
+ⓐ8.7 ⓑ1.03 ⓒ$-0.024$
 
 ### Locate Decimals on the Number Line
 
@@ -450,21 +450,21 @@ Since decimals are forms of fractions, locating decimals on the number line is s
 
 ### Example 5.5
 
-Locate $0.4$ on a number line.
+Locate 0.4 on a number line.
 
 #### Solution
 
-The decimal $0.4$ is equivalent to $\frac{4}{10},$ so $0.4$ is located between $0$ and $1.$ On a number line, divide the interval between $0$ and $1$ into $10$ equal parts and place marks to separate the parts.
+The decimal 0.4 is equivalent to $\frac{4}{10},$ so 0.4 is located between 0 and 1. On a number line, divide the interval between 0 and 1 into 10 equal parts and place marks to separate the parts.
 
-Label the marks $0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0.$ We write $0$ as $0.0$ and $1$ as $1.0,$ so that the numbers are consistently in tenths. Finally, mark $0.4$ on the number line.  
+Label the marks 0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0. We write 0 as 0.0 and 1 as 1.0, so that the numbers are consistently in tenths. Finally, mark 0.4 on the number line.  
 
 ### Try It 5.9
 
-Locate $0.6$ on a number line.
+Locate 0.6 on a number line.
 
 ### Try It 5.10
 
-Locate $0.9$ on a number line.
+Locate 0.9 on a number line.
 
 ### Example 5.6
 
@@ -472,7 +472,7 @@ Locate $-0.74$ on a number line.
 
 #### Solution
 
-The decimal $-0.74$ is equivalent to $- \frac{74}{100},$ so it is located between $0$ and $-1.$ On a number line, mark off and label the multiples of $-0.10$ in the interval between $0$ and $-1$ ($-0.10$, $-0.20$, etc.) and mark $-0.74$ between $-0.70$ and $-0.80,$ a little closer to $-0.70$.  
+The decimal $-0.74$ is equivalent to $- \frac{74}{100},$ so it is located between 0 and $-1.$ On a number line, mark off and label the multiples of $-0.10$ in the interval between 0 and $-1$ ($-0.10$, $-0.20$, etc.) and mark $-0.74$ between $-0.70$ and $-0.80,$ a little closer to $-0.70$.  
 
 ### Try It 5.11
 
@@ -484,7 +484,7 @@ Locate $-0.25$ on a number line.
 
 ### Order Decimals
 
-Which is larger, $0.04$ or $0.40?$
+Which is larger, 0.04 or $0.40?$
 
 If you think of this as money, you know that $\text{\$0.40}$ (forty cents) is greater than $\text{\$0.04}$ (four cents). So,
 
@@ -502,22 +502,22 @@ $$
 \end{array}
 $$
 
-Where are $0.04$ and $0.40$ located on the number line?
+Where are 0.04 and 0.40 located on the number line?
 
-We see that $0.40$ is to the right of $0.04.$ So we know $0.40 > 0.04.$
+We see that 0.40 is to the right of 0.04. So we know $0.40 > 0.04.$
 
-How does $0.31$ compare to $0.308?$ This doesn’t translate into money to make the comparison easy. But if we convert $0.31$ and $0.308$ to fractions, we can tell which is larger.
+How does 0.31 compare to $0.308?$ This doesn’t translate into money to make the comparison easy. But if we convert 0.31 and 0.308 to fractions, we can tell which is larger.
 
 |  |  |  |
 |----|----|----|
-|  | $0.31$ | $0.308$ |
+|  | 0.31 | 0.308 |
 | Convert to fractions. | $\frac{31}{100}$ | $\frac{308}{1000}$ |
 | We need a common denominator to compare them. |  | $\frac{308}{1000}$ |
 |  | $\frac{310}{1000}$ | $\frac{308}{1000}$ |
 
 Because $310 > 308,$ we know that $\frac{310}{1000} > \frac{308}{1000}.$ Therefore, $0.31 > 0.308.$
 
-Notice what we did in converting $0.31$ to a fraction—we started with the fraction $\frac{31}{100}$ and ended with the equivalent fraction $\frac{310}{1000}.$ Converting $\frac{310}{1000}$ back to a decimal gives $0.310.$ So $0.31$ is equivalent to $0.310.$ Writing zeros at the end of a decimal does not change its value.
+Notice what we did in converting 0.31 to a fraction—we started with the fraction $\frac{31}{100}$ and ended with the equivalent fraction $\frac{310}{1000}.$ Converting $\frac{310}{1000}$ back to a decimal gives 0.310. So 0.31 is equivalent to 0.310. Writing zeros at the end of a decimal does not change its value.
 
 $$
 \frac{31}{100} = \frac{310}{1000}\text{and}\ 0.31 = 0.310
@@ -529,7 +529,7 @@ $$
 0.31 = 0.310
 $$
 
-We say $0.31$ and $0.310$ are equivalent decimals.
+We say 0.31 and 0.310 are equivalent decimals.
 
 ### Equivalent Decimals
 
@@ -630,7 +630,7 @@ Order each of the following pairs of numbers, using $< \ \text{or}\ \text{>:}$
 
 When we order negative decimals, it is important to remember how to order negative integers. Recall that larger numbers are to the right on the number line. For example, because $-2$ lies to the right of $-3$ on the number line, we know that $-2 > -3.$ Similarly, smaller numbers lie to the left on the number line. For example, because $-9$ lies to the left of $-6$ on the number line, we know that $-9 < -6.$
 
-If we zoomed in on the interval between $0$ and $-1,$ we would see in the same way that $-0.2 > -0.3\ \text{and}\ -0.9 < -0.6.$
+If we zoomed in on the interval between 0 and $-1,$ we would see in the same way that $-0.2 > -0.3\ \text{and}\ -0.9 < -0.6.$
 
 ### Example 5.8
 
@@ -692,13 +692,13 @@ Can we round decimals without number lines? Yes! We use a method based on the on
 1.  Step 1. Locate the given place value and mark it with an arrow.
 2.  Step 2. Underline the digit to the right of the given place value.
 3.  Step 3. Is this digit greater than or equal to $5?$
-    - Yes - add $1$ to the digit in the given place value.
+    - Yes - add 1 to the digit in the given place value.
     - No - do not change the digit in the given place value
 4.  Step 4. Rewrite the number, removing all digits to the right of the given place value.
 
 ### Example 5.9
 
-Round $18.379$ to the nearest hundredth.
+Round 18.379 to the nearest hundredth.
 
 #### Solution
 
@@ -713,15 +713,15 @@ Round $18.379$ to the nearest hundredth.
 
 ### Try It 5.17
 
-Round to the nearest hundredth: $1.047.$
+Round to the nearest hundredth: 1.047.
 
 ### Try It 5.18
 
-Round to the nearest hundredth: $9.173.$
+Round to the nearest hundredth: 9.173.
 
 ### Example 5.10
 
-Round $18.379$ to the nearest ⓐ tenth ⓑ whole number.
+Round 18.379 to the nearest ⓐ tenth ⓑ whole number.
 
 #### Solution
 
@@ -747,11 +747,11 @@ Round $18.379$ to the nearest ⓐ tenth ⓑ whole number.
 
 ### Try It 5.19
 
-Round $6.582$ to the nearest ⓐ hundredth ⓑ tenth ⓒ whole number.
+Round 6.582 to the nearest ⓐ hundredth ⓑ tenth ⓒ whole number.
 
 ### Try It 5.20
 
-Round $15.2175$ to the nearest ⓐ thousandth ⓑ hundredth ⓒ tenth.
+Round 15.2175 to the nearest ⓐ thousandth ⓑ hundredth ⓒ tenth.
 
 ### Media
 
@@ -773,43 +773,43 @@ In the following exercises, name each decimal.
 
 1\.
 
-$5.5$
+5.5
 
 2\.
 
-$7.8$
+7.8
 
 3\.
 
-$5.01$
+5.01
 
 4\.
 
-$14.02$
+14.02
 
 5\.
 
-$8.71$
+8.71
 
 6\.
 
-$2.64$
+2.64
 
 7\.
 
-$0.002$
+0.002
 
 8\.
 
-$0.005$
+0.005
 
 9\.
 
-$0.381$
+0.381
 
 10\.
 
-$0.479$
+0.479
 
 11\.
 
@@ -885,43 +885,43 @@ In the following exercises, convert each decimal to a fraction or mixed number.
 
 27\.
 
-$1.99$
+1.99
 
 28\.
 
-$5.83$
+5.83
 
 29\.
 
-$15.7$
+15.7
 
 30\.
 
-$18.1$
+18.1
 
 31\.
 
-$0.239$
+0.239
 
 32\.
 
-$0.373$
+0.373
 
 33\.
 
-$0.13$
+0.13
 
 34\.
 
-$0.19$
+0.19
 
 35\.
 
-$0.011$
+0.011
 
 36\.
 
-$0.049$
+0.049
 
 37\.
 
@@ -933,51 +933,51 @@ $-0.00003$
 
 39\.
 
-$6.4$
+6.4
 
 40\.
 
-$5.2$
+5.2
 
 41\.
 
-$7.05$
+7.05
 
 42\.
 
-$9.04$
+9.04
 
 43\.
 
-$4.006$
+4.006
 
 44\.
 
-$2.008$
+2.008
 
 45\.
 
-$10.25$
+10.25
 
 46\.
 
-$12.75$
+12.75
 
 47\.
 
-$1.324$
+1.324
 
 48\.
 
-$2.482$
+2.482
 
 49\.
 
-$14.125$
+14.125
 
 50\.
 
-$20.375$
+20.375
 
 **Locate Decimals on the Number Line**
 
@@ -985,11 +985,11 @@ In the following exercises, locate each number on a number line.
 
 51\.
 
-$0.8$
+0.8
 
 52\.
 
-$0.3$
+0.3
 
 53\.
 
@@ -1001,11 +1001,11 @@ $-0.9$
 
 55\.
 
-$3.1$
+3.1
 
 56\.
 
-$2.7$
+2.7
 
 57\.
 
@@ -1073,71 +1073,71 @@ In the following exercises, round each number to the nearest tenth.
 
 71\.
 
-$0.67$
+0.67
 
 72\.
 
-$0.49$
+0.49
 
 73\.
 
-$2.84$
+2.84
 
 74\.
 
-$4.63$
+4.63
 
 In the following exercises, round each number to the nearest hundredth.
 
 75\.
 
-$0.845$
+0.845
 
 76\.
 
-$0.761$
+0.761
 
 77\.
 
-$5.7932$
+5.7932
 
 78\.
 
-$3.6284$
+3.6284
 
 79\.
 
-$0.299$
+0.299
 
 80\.
 
-$0.697$
+0.697
 
 81\.
 
-$4.098$
+4.098
 
 82\.
 
-$7.096$
+7.096
 
 In the following exercises, round each number to the nearest ⓐ hundredth ⓑ tenth ⓒ whole number.
 
 83\.
 
-$5.781$
+5.781
 
 84\.
 
-$1.638$
+1.638
 
 85\.
 
-$63.479$
+63.479
 
 86\.
 
-$84.281$
+84.281
 
 #### Everyday Math
 

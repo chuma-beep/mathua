@@ -47,12 +47,12 @@ When the additional requirement that every nonzero element possess a multiplicat
 
 ## Examples
 
-The set \\(\mathbb{Z}\\) of integers, equipped with ordinary addition and multiplication, is the most simple example of a commutative ring with unity. The additive identity is \\(0\\), the multiplicative identity is \\(1\\), and every integer has an additive inverse. The integers form an integral domain, since the product of two nonzero integers is always nonzero.
+The set \\(\mathbb{Z}\\) of integers, equipped with ordinary addition and multiplication, is the most simple example of a commutative ring with unity. The additive identity is 0, the multiplicative identity is 1, and every integer has an additive inverse. The integers form an integral domain, since the product of two nonzero integers is always nonzero.
 
-The set of polynomials with real coefficients, denoted \\(\mathbb{R}[x]\\), forms a commutative ring with unity under the usual addition and multiplication of polynomials. The additive identity is the zero polynomial, and the multiplicative identity is the constant polynomial \\(1\\). This ring is also an integral domain.
+The set of polynomials with real coefficients, denoted \\(\mathbb{R}[x]\\), forms a commutative ring with unity under the usual addition and multiplication of polynomials. The additive identity is the zero polynomial, and the multiplicative identity is the constant polynomial 1. This ring is also an integral domain.
 
 
-Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\), equipped with addition and multiplication modulo \\(n\\), forms a commutative ring with unity. For example, in \\(\mathbb{Z}/6\mathbb{Z}\\) one has \\(2 \cdot 3 = 0\\), so \\(2\\) and \\(3\\) are zero divisors and \\(\mathbb{Z}/6\mathbb{Z}\\) is not an integral domain. When \\(n\\) is prime, however, \\(\mathbb{Z}/n\mathbb{Z}\\) contains no zero divisors and is in fact a field.
+Let \\(n\\) be a positive integer. The set \\(\mathbb{Z}/n\mathbb{Z} = \{0, 1, \ldots, n-1\}\\), equipped with addition and multiplication modulo \\(n\\), forms a commutative ring with unity. For example, in \\(\mathbb{Z}/6\mathbb{Z}\\) one has \\(2 \cdot 3 = 0\\), so 2 and 3 are zero divisors and \\(\mathbb{Z}/6\mathbb{Z}\\) is not an integral domain. When \\(n\\) is prime, however, \\(\mathbb{Z}/n\mathbb{Z}\\) contains no zero divisors and is in fact a field.
 
 Let \\(F\\) be a field and let \\(n\\) be a positive integer. The set \\(\mathrm{M}\_n(F)\\) of all \\(n \times n\\) matrices with entries in \\(F\\) forms a ring under matrix addition and multiplication. The additive identity is the zero matrix, and the multiplicative identity is the identity matrix \\(I_n\\). For \\(n \geq 2\\), this ring is not commutative, since matrix multiplication does not commute in general, and it contains zero divisors.
 
@@ -65,7 +65,7 @@ A subset \\(S\\) of a ring \\(R\\) is called a subring if \\(S\\) is itself a ri
 
 Any subring other than \\(R\\) is called a proper subring.
 
-As an example, the set of even integers \\(2\mathbb{Z} = \\{\ldots, -4, -2, 0, 2, 4, \ldots\\}\\) is a subring of \\((\mathbb{Z}, +, \cdot)\\). For any two even integers \\(a = 2m\\) and \\(b = 2k\\), one has \\(a - b = 2(m-k) \in 2\mathbb{Z}\\) and \\(a \cdot b = 4mk \in 2\mathbb{Z}\\), so both conditions are satisfied. Note that \\(2\mathbb{Z}\\) does not contain the multiplicative identity \\(1\\) of \\(\mathbb{Z}\\), which illustrates that a subring of a unital ring need not itself be unital.
+As an example, the set of even integers \\(2\mathbb{Z} = \\{\ldots, -4, -2, 0, 2, 4, \ldots\\}\\) is a subring of \\((\mathbb{Z}, +, \cdot)\\). For any two even integers \\(a = 2m\\) and \\(b = 2k\\), one has \\(a - b = 2(m-k) \in 2\mathbb{Z}\\) and \\(a \cdot b = 4mk \in 2\mathbb{Z}\\), so both conditions are satisfied. Note that \\(2\mathbb{Z}\\) does not contain the multiplicative identity 1 of \\(\mathbb{Z}\\), which illustrates that a subring of a unital ring need not itself be unital.
 
 ## Ideals
 

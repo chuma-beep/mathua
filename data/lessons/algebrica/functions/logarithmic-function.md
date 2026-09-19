@@ -15,7 +15,7 @@ There are two cases to consider when examining the logarithmic function \\( \log
 
 ![](/diagrams/algebrica/logharithm-6.png)
 
-In both cases, the only point where the logarithmic function takes the value \\( 0 \\) is at \\( x = 1 \\). This is because: \\(\log_a(1) = 0\\). This result is true because by definition, by the property of [powers](<../powers>), we have \\( a^0 = 1 \\).
+In both cases, the only point where the logarithmic function takes the value 0 is at \\( x = 1 \\). This is because: \\(\log_a(1) = 0\\). This result is true because by definition, by the property of [powers](<../powers>), we have \\( a^0 = 1 \\).
 
 ##### The value of the base, whether it is greater than 1 or between 0 and 1, plays a crucial role in many applications. In particular, when dealing with [logarithmic inequalities](<../logarithmic-inequalities/>), a base between 0 and 1 requires reversing the direction of the inequality, due to the decreasing nature of the logarithmic function.
 

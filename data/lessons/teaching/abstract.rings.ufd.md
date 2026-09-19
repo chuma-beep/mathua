@@ -12,4 +12,4 @@ Gauss's lemma: if $R$ is a UFD then $R[x]$ is a UFD. Hence $\mathbb Z[x]$ is a U
 
 ## Example
 
-$\mathbb Z$: $12=2^{2}\cdot3$ uniquely. $\mathbb Z[\sqrt{-5}]$: $6$ has two factorizations, so not a UFD.
+$\mathbb Z$: $12=2^{2}\cdot3$ uniquely. $\mathbb Z[\sqrt{-5}]$: 6 has two factorizations, so not a UFD.

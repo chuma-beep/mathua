@@ -29,7 +29,7 @@ In a right triangle, the side opposite the right angle — the longest side — 
 
 **Example**
 
-A triangle has sides of length $5$, $5$, and $8$, with the angle between the two equal sides measuring $40^\circ$. Classify it.
+A triangle has sides of length 5, 5, and 8, with the angle between the two equal sides measuring $40^\circ$. Classify it.
 
 *Solution*
 
@@ -41,11 +41,11 @@ Classification: acute isosceles triangle.
 
 **Example**
 
-Can a triangle have sides $2$, $2$, $2$ and be a right triangle?
+Can a triangle have sides 2, 2, 2 and be a right triangle?
 
 *Solution*
 
-No. Sides $2$, $2$, $2$ make it equilateral, so all three angles are equal. If one angle were $90^\circ$, all three would be $90^\circ$, totaling $270^\circ$ — impossible. An equilateral triangle is always acute.
+No. Sides 2, 2, 2 make it equilateral, so all three angles are equal. If one angle were $90^\circ$, all three would be $90^\circ$, totaling $270^\circ$ — impossible. An equilateral triangle is always acute.
 
 ## Summary
 

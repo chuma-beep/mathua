@@ -18,25 +18,25 @@ For special polygons the addition can be shortened with multiplication:
 
 **Example**
 
-Find the perimeter of a rectangle with length $6$ cm and width $4$ cm.
+Find the perimeter of a rectangle with length 6 cm and width 4 cm.
 
 *Solution*
 
 \[P = 2(6) + 2(4) = 12 + 8 = 20\]
 
-The perimeter is $20$ cm.
+The perimeter is 20 cm.
 
 **Example**
 
-A regular pentagon has sides of length $7$ m. Find its perimeter.
+A regular pentagon has sides of length 7 m. Find its perimeter.
 
 *Solution*
 
-A pentagon has $5$ equal sides:
+A pentagon has 5 equal sides:
 
 \[P = 5(7) = 35\]
 
-The perimeter is $35$ m.
+The perimeter is 35 m.
 
 ## Units
 

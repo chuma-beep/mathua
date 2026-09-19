@@ -36,9 +36,9 @@ This method for solving quadratic equations will work to solve *every* quadratic
 
 **Example**
 
-Linh is in a physics class that launches a tennis ball from a rooftop that is $90.2$ feet above the ground. They fire it directly upward at a speed of $14.4$ feet per second and measure the time it takes for the ball to hit the ground below. We can model the height of the tennis ball, $h$, in feet, with the quadratic equation $h=-16t^2+14.4t+90.2$, where $x$ represents the time in seconds after the launch. According to the model, when should the ball hit the ground?
+Linh is in a physics class that launches a tennis ball from a rooftop that is 90.2 feet above the ground. They fire it directly upward at a speed of 14.4 feet per second and measure the time it takes for the ball to hit the ground below. We can model the height of the tennis ball, $h$, in feet, with the quadratic equation $h=-16t^2+14.4t+90.2$, where $x$ represents the time in seconds after the launch. According to the model, when should the ball hit the ground?
 
-The ground has height $0$ feet, so we should substitute $0$ in for $h$. This gives us the quadratic equation:
+The ground has height 0 feet, so we should substitute 0 in for $h$. This gives us the quadratic equation:
 
 $$
  0=-16t^2+14.4t+90.2 
@@ -56,7 +56,7 @@ $$
 t\approx-1.966\qquad\text{or}\qquad t\approx2.866
 $$
 
-We don't use the negative solution because a negative time does not make sense in this context. The ball will hit the ground approximately $2.866$ seconds after it is launched.
+We don't use the negative solution because a negative time does not make sense in this context. The ball will hit the ground approximately 2.866 seconds after it is launched.
 
 The quadratic formula can be used to solve any quadratic equation, but it requires that you remembering the formula correctly and that you correctly identify $a$, $b$, and $c$. Also, that you don't make any arithmetic mistakes when you simplify. We recommend that you always check if you could use the square root property before using the quadratic formula.
 
@@ -78,7 +78,7 @@ When a quadratic equation does not start out in standard form we must convert it
 
 Solve for $x$ in $x^2=-10x-3$.
 
-First, we convert the equation into standard form by adding $10x$ and $3$ to each side of the equation:
+First, we convert the equation into standard form by adding $10x$ and 3 to each side of the equation:
 
 $$
  x^2+10x+3=0 
@@ -134,7 +134,7 @@ Certain "word problems" lead to a quadratic equation where the quadratic formula
 
 **Example**
 
-A rectangle is $5$ inches longer than it is wide. The total area of the rectangle is 60 square inches. How wide is the rectangle? (This is asking for the shorter dimension.)
+A rectangle is 5 inches longer than it is wide. The total area of the rectangle is 60 square inches. How wide is the rectangle? (This is asking for the shorter dimension.)
 
 The area of a rectangle is given by multipying its two dimensions. If we let $w$ stand for the width of the rectangle (the shorter dimension), then $w+5$ is the length, and the total area is $w(w+5)$. A diagram can help make more clear what needs to be done.
 
@@ -144,7 +144,7 @@ $$
 \begin{aligned}w&=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \\ &=\frac{-5\pm\sqrt{5^2-4(1)(-60)}}{2(1)} \\ &=\frac{-5\pm\sqrt{265}}{2} \\ w&\approx-10.64\quad\text{or}\quad w\approx5.64\end{aligned}
 $$
 
-Only the solution $w\approx5.64$ makes sense as the width of a rectangle. So the rectangle is about $5.64$ inches wide.
+Only the solution $w\approx5.64$ makes sense as the width of a rectangle. So the rectangle is about 5.64 inches wide.
 
 **Exercise**
 
@@ -152,7 +152,7 @@ Only the solution $w\approx5.64$ makes sense as the width of a rectangle. So the
 
 Amita has a food stand where she sells momo (Nepali dumplings). If she charges $p$ dollars for each momo, she estimates that she'd sell $80{,}000-20{,}000p$ over the course of a year. (This reflects how raising the price can lead to fewer people making purchases.) What is the largest price that Amita could set to end up with a revenue of $$\$70{,}000$$ for the year? (Note that revenue is not the same as profit, and we will not be accounting for Amita's expenses.)
 
-If Amita sets the price at $p$ dollars per momo, her total revenue will be $(\text{number sold})\cdot\text{price}$, which is $(80000-20000p)p$, which simplifies to $80000p-20000p^2$. We have been asked to set that equal to $70000$.
+If Amita sets the price at $p$ dollars per momo, her total revenue will be $(\text{number sold})\cdot\text{price}$, which is $(80000-20000p)p$, which simplifies to $80000p-20000p^2$. We have been asked to set that equal to 70000.
 
 $$
 \begin{aligned}80000p-20000p^2 & = 70000 \\ -20000p^2+80000p-70000 & = 0 \\ -2p^2+8p-7 & = 0\end{aligned}
@@ -162,7 +162,7 @@ $$
 \begin{aligned}p&=\frac{-b\pm\sqrt{b^2-4ac}}{2a} \\ &=\frac{-8\pm\sqrt{8^2-4(-2)(-7)}}{2(-2)} \\ &=\frac{-8\pm\sqrt{8}}{-4} \\ p\approx& 2.71 \quad\text{or}\quad x\approx1.29\end{aligned}
 $$
 
-The possible solutions are about $2.71$ and $1.29$. They are both valid solutions. Amita can reach the target revenue of $$\$70{,}000$$ by setting the price per momo to either $$\$1.29$$ or $$\$2.71$$.
+The possible solutions are about 2.71 and 1.29. They are both valid solutions. Amita can reach the target revenue of $$\$70{,}000$$ by setting the price per momo to either $$\$1.29$$ or $$\$2.71$$.
 
 ## Radical Equations
 
@@ -188,7 +188,7 @@ $$
 \begin{aligned}\sqrt{\substitute{1}}+2&\wonder{=}1&\sqrt{\substitute{4}}+2&\wonder{=}4 \\ 1+2&\reject{=}1&2+2&\confirm{=}4\end{aligned}
 $$
 
-It turned out that $1$ is an *extraneous solution*, but $4$ is a valid solution. So the equation has one solution, $4$, and the solution set is $\{4\}$.
+It turned out that 1 is an *extraneous solution*, but 4 is a valid solution. So the equation has one solution, 4, and the solution set is $\{4\}$.
 
 **Example**
 
@@ -208,13 +208,13 @@ $$
 \begin{aligned}n&=\frac{14-8}{2}&\text{ or }&& n&=\frac{14+8}{2} \\ n&=3&\text{ or }&& n&=11\end{aligned}
 $$
 
-So our two potential solutions are $3$ and $11$. We should now verify that they truly are solutions.
+So our two potential solutions are 3 and 11. We should now verify that they truly are solutions.
 
 $$
 \begin{aligned}\sqrt{2(\substitute{3})-6}&\wonder{=}1+\sqrt{\substitute{3}-2}&\sqrt{2(\substitute{11})-6}&\wonder{=}1+\sqrt{\substitute{11}-2} \\ \sqrt{6-6}&\wonder{=}1+\sqrt{1}&\sqrt{22-6}&\wonder{=}1+\sqrt{9} \\ \sqrt{0}&\wonder{=}1+1&\sqrt{16}&\wonder{=}1+3 \\ 0&\reject{=}2&4&\confirm{=}4\end{aligned}
 $$
 
-So, $11$ is the only solution. The solution set is $\{11\}$.
+So, 11 is the only solution. The solution set is $\{11\}$.
 
 ##
 

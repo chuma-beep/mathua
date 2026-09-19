@@ -17,7 +17,7 @@ Let \\( S \\) be the point \\( (1, 0) \\) where the unit circle meets the positi
 
 ## Fundamental trigonometric identity
 
-Once the notions of sine and cosine are introduced through the geometry of the unit circle, their relationship becomes obvious. If a point \\( P \\) lies on the unit circle and the segment \\( \overline{OP} \\) forms an angle \\( \theta \\) with the positive \\( x \\)-axis, the right triangle with vertices at \\( O \\), \\( R \\), and \\( P \\) has hypotenuse of length \\( 1 \\), horizontal leg of length \\( \cos\theta \\), and vertical leg of length \\( \sin\theta \\). Applying the Pythagorean theorem to this triangle gives the following identity:
+Once the notions of sine and cosine are introduced through the geometry of the unit circle, their relationship becomes obvious. If a point \\( P \\) lies on the unit circle and the segment \\( \overline{OP} \\) forms an angle \\( \theta \\) with the positive \\( x \\)-axis, the right triangle with vertices at \\( O \\), \\( R \\), and \\( P \\) has hypotenuse of length 1, horizontal leg of length \\( \cos\theta \\), and vertical leg of length \\( \sin\theta \\). Applying the Pythagorean theorem to this triangle gives the following identity:
 
 \\[
 \sin^2\theta + \cos^2\theta = 1

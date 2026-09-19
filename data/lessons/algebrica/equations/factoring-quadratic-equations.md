@@ -61,7 +61,7 @@ Consider a polynomial with integer roots:
 x^{2} - 4x + 3
 \\]
 
-Here \\(a=1\\), so identity \\((1)\\) reduces to \\((x-x_1)(x-x_2)\\). The roots can be found by inspection, looking for two numbers whose sum is \\(4\\) and whose product is \\(3\\). The pair \\((1,\\,3)\\) satisfies both conditions, and the factorization is:
+Here \\(a=1\\), so identity \\((1)\\) reduces to \\((x-x_1)(x-x_2)\\). The roots can be found by inspection, looking for two numbers whose sum is 4 and whose product is 3. The pair \\((1,\\,3)\\) satisfies both conditions, and the factorization is:
 
 \\[
 x^{2} - 4x + 3 = (x-1)(x-3)
@@ -91,7 +91,7 @@ Substituting these values into \\((1)\\) with \\(a = 2\\):
 2x^{2} - 7x + 3 = 2(x-3)\left(x-\tfrac{1}{2}\right) = (x-3)(2x-1)
 \\]
 
-> The factor \\(2\\) has been absorbed into the second linear term to produce a factorization with integer coefficients.
+> The factor 2 has been absorbed into the second linear term to produce a factorization with integer coefficients.
 
 ## Example 3
 

@@ -50,7 +50,7 @@ Let’s compute the following limit involving the [sine function](<../sine-funct
 \\[\lim_{x \to 0} \frac{\sin x}{x}\\]
 
 
-This is a fairly simple limit, but at first glance, it leads to an indeterminate form. Indeed, substituting \\(0\\) for \\(x\\), we get:
+This is a fairly simple limit, but at first glance, it leads to an indeterminate form. Indeed, substituting 0 for \\(x\\), we get:
 
 \\[\frac{\sin 0}{0} = \frac{0}{0} \\]
 
@@ -58,7 +58,7 @@ Because the functions meet the necessary conditions for l’Hôpital’s Rule, t
 
 \\[\lim_{x \to 0} \frac{\sin x}{x} = \lim_{x \to 0} \frac{(\sin x)'}{(x)'} = \lim_{x \to 0} \frac{\cos x}{1} \\]
 
-##### The conditions of the theorem are satisfied. Indeed, we have that \\(\sin(x)\\) and \\(x\\) are [continuous functions](<../continuous-functions/>) at \\(x_0 = 0\\), and \\(\sin(0) = 0,\, x\big|_{x=0} = 0\\). Moreover, both functions are differentiable in an interval \\(I\\) containing \\(0\\), and the derivative of the denominator \\(g’(x)\\), which in this case is simply \\(1\\), is different from zero.
+##### The conditions of the theorem are satisfied. Indeed, we have that \\(\sin(x)\\) and \\(x\\) are [continuous functions](<../continuous-functions/>) at \\(x_0 = 0\\), and \\(\sin(0) = 0,\, x\big|_{x=0} = 0\\). Moreover, both functions are differentiable in an interval \\(I\\) containing 0, and the derivative of the denominator \\(g’(x)\\), which in this case is simply 1, is different from zero.
 
 
 In this case, by evaluating the limit and computing \\(\cos(x)\\), we find that the limit is equal to (1):
@@ -95,7 +95,7 @@ The result is:
 
 \\[\lim_{x \to 0} \frac{1 – 2\cos x}{\sin x + x\cos x} = -\infty\\]
 
-Generally, if the application of L’Hôpital’s Rule yields a limit that remains an [indeterminate form](<../indeterminate-forms/>), the rule may be applied repeatedly, provided the necessary conditions are met at each stage. At every iteration, it is essential to confirm that both the new numerator and denominator approach either \\(0\\) or \\(\infty\\).
+Generally, if the application of L’Hôpital’s Rule yields a limit that remains an [indeterminate form](<../indeterminate-forms/>), the rule may be applied repeatedly, provided the necessary conditions are met at each stage. At every iteration, it is essential to confirm that both the new numerator and denominator approach either 0 or \\(\infty\\).
 
 ## Indeterminate products
 

@@ -86,7 +86,7 @@ union is the interval \\( (1, 7) \\).
 
 
 The third row shows the union \\( (1, 7) \\). By contrast, the union \\( (1, 3) \cup (5, 7) \\)
-is not an interval, because the points between \\( 3 \\) and \\( 5 \\) belong to neither set.
+is not an interval, because the points between 3 and 5 belong to neither set.
 ## Intervals and neighborhoods
 
 A concept closely related to intervals and central to mathematical analysis is that of a

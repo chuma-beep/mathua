@@ -5,7 +5,7 @@
 ## Homological Use
 
 ### Five Lemma
-Diagram chase: if $4$ of $5$ maps iso, middle iso.
+Diagram chase: if 4 of 5 maps iso, middle iso.
 
 ### Split Exact
 $0\to A\to B\to C\to0$ split $\Rightarrow B\cong A\oplus C$; tensor right exact only.

@@ -10,7 +10,7 @@ As previously introduced, the normal distribution has a distinctive bell-shaped 
 
 ![](/diagrams/algebrica/normal-distribution-1.png)
 
-  * The total area under the curve equals \\(1\\). This means that the integral of its probability density function over the entire real line, from \\( -\infty \\) to \\( +\infty \\), is equal to \\(1\\).
+  * The total area under the curve equals 1. This means that the integral of its probability density function over the entire real line, from \\( -\infty \\) to \\( +\infty \\), is equal to 1.
   * The curve is symmetric around the mean \\( \mu \\). In other words, it looks the same on both sides of the mean, with half of the total probability lying to the left and the other half to the right.
   * The curve has two [inflection points](<../maximum-minimum-and-inflection-points/>), located at \\( x = \mu + \sigma \\) and \\( x = \mu - \sigma \\). At these points, the curvature of the graph [changes sign](<../sign-analysis-in-inequalities/>), marking the transition between the concave and convex regions of the distribution.
   * The curve is asymptotic to the x-axis for values of \\( x \\) that move farther away from the mean.
@@ -61,7 +61,7 @@ To make probability calculations easier and more general, the normal distributio
 
 \\[Z = \frac{X - \mu}{\sigma} \\]
 
-This new variable \\( Z \\) follows what is called the **standard normal distribution** , a special case where the mean is \\( 0 \\) and the standard deviation is \\( 1 \\). By standardizing, we can work with a single universal curve and use [the standard normal Z table](<../standard-normal-z-table/>) to find probabilities, instead of computing the integral for each specific distribution. In practice, every normal distribution can be converted into the standard one, making comparisons and calculations much simpler.
+This new variable \\( Z \\) follows what is called the **standard normal distribution** , a special case where the mean is 0 and the standard deviation is 1. By standardizing, we can work with a single universal curve and use [the standard normal Z table](<../standard-normal-z-table/>) to find probabilities, instead of computing the integral for each specific distribution. In practice, every normal distribution can be converted into the standard one, making comparisons and calculations much simpler.
 
 ##### The values reported in Z-tables represent the cumulative area under the standard normal curve to the left of a given \\( Z \\) value.
 
@@ -74,7 +74,7 @@ If we transform the variable \\( X \\) into its standardized form, the interval 
 
 \\[P(x_0 < X < x_1) = P\left( \frac{x_0 - \mu}{\sigma} < Z < \frac{x_1 - \mu}{\sigma} \right) \\]
 
-where the variable \\( X \\) has been replaced by its standardized form \\( Z \\), and the limits \\( x_0 \\) and \\( x_1 \\) have been replaced by their corresponding standardized values. This transformation allows us to express the probability in the standard normal framework, where \\( Z \\) follows a distribution with mean \\( 0 \\) and standard deviation \\( 1 \\). Starting from the general form of the probability over an interval \\([x_0, x_1]\\) we have:
+where the variable \\( X \\) has been replaced by its standardized form \\( Z \\), and the limits \\( x_0 \\) and \\( x_1 \\) have been replaced by their corresponding standardized values. This transformation allows us to express the probability in the standard normal framework, where \\( Z \\) follows a distribution with mean 0 and standard deviation 1. Starting from the general form of the probability over an interval \\([x_0, x_1]\\) we have:
 
 \\[\begin{align} P(x_0 < X < x_1) &= \frac{1}{\sqrt{2\pi}\,\sigma} \int_{x_0}^{x_1} e^{-\frac{1}{2\sigma^2}(x - \mu)^2}\,dx\\\\[6pt] &=\frac{1}{\sqrt{2\pi}\,\sigma} \int_{z_0}^{z_1} e^{-\frac{1}{2}(z)^2}\,dx = P(z_0 < Z < z_1) \end{align} \\]
 

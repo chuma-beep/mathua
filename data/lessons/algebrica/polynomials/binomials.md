@@ -5,7 +5,7 @@
 
 A binomial refers to a polynomial that contains exactly two non-zero terms. Its general form is expressed as \\( (a + b)\\) or \\( (a - b) \\).
 
-In this context, \\(a\\) and \\(b\\) represent non-zero, unlike terms, meaning they cannot be combined into a single term. The degree of a binomial corresponds to the highest degree among its terms. For example, \\(x^3 + 2\\) is a binomial of degree 3, whereas \\(3x - 5\\) is a binomial of degree \\(1\\).
+In this context, \\(a\\) and \\(b\\) represent non-zero, unlike terms, meaning they cannot be combined into a single term. The degree of a binomial corresponds to the highest degree among its terms. For example, \\(x^3 + 2\\) is a binomial of degree 3, whereas \\(3x - 5\\) is a binomial of degree 1.
 
 Binomials exhibit properties that facilitate algebraic manipulation. Among these properties are notable products, which are specific products involving powers, binomials, and trinomials. These products are fundamental for solving equations and for identifying common mathematical patterns.
 
@@ -148,7 +148,7 @@ Where \\( \dbinom{n}{k} \\) represents the binomial coefficient calculated as:
 
 ![Pascal's triangle](svg/pascals-triangle.svg)
 
-The sum indicates that all terms are summed for \\( k \\) ranging from \\( 0 \\) to \\( n \\) and \\( a^{n - k}b^k \\) represents the partial terms of the expansion.
+The sum indicates that all terms are summed for \\( k \\) ranging from 0 to \\( n \\) and \\( a^{n - k}b^k \\) represents the partial terms of the expansion.
 
 
 To better understand how the expansion of a binomial works through the binomial theorem, let’s expand the following expression using the formula:  

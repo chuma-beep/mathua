@@ -364,15 +364,15 @@ The volume of a cube decreases at a rate of 10 m<sup>3</sup>/s. Find the rate at
 
 18\.
 
-The radius of a circle increases at a rate of $2$ m/sec. Find the rate at which the area of the circle increases when the radius is 5 m.
+The radius of a circle increases at a rate of 2 m/sec. Find the rate at which the area of the circle increases when the radius is 5 m.
 
 19\.
 
-The radius of a sphere decreases at a rate of $3$ m/sec. Find the rate at which the surface area decreases when the radius is 10 m.
+The radius of a sphere decreases at a rate of 3 m/sec. Find the rate at which the surface area decreases when the radius is 10 m.
 
 20\.
 
-The radius of a sphere increases at a rate of $1$ m/sec. Find the rate at which the volume increases when the radius is $20$ m.
+The radius of a sphere increases at a rate of 1 m/sec. Find the rate at which the volume increases when the radius is 20 m.
 
 21\.
 
@@ -446,7 +446,7 @@ For the following exercises, solve the related-rates problems. Consider making a
 
 37\.
 
-You are stationary on the ground and are watching a bird fly horizontally at a rate of $10$ m/sec. The bird is located 40 m above your head. How fast does the angle of elevation change when the horizontal distance between you and the bird is 9 m?
+You are stationary on the ground and are watching a bird fly horizontally at a rate of 10 m/sec. The bird is located 40 m above your head. How fast does the angle of elevation change when the horizontal distance between you and the bird is 9 m?
 
 38\.
 

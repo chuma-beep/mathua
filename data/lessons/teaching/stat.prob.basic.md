@@ -28,7 +28,7 @@ One application of decimals that arises often is finding the *average* of a set 
 
 The mean is often called the arithmetic average. It is computed by dividing the sum of the values by the number of values. Students want to know the mean of their test scores. Climatologists report that the mean temperature has, or has not, changed. City planners are interested in the mean household size.
 
-Suppose Ethan’s first three test scores were $85,88,\text{and}\ 94.$ To find the mean score, he would add them and divide by $3.$
+Suppose Ethan’s first three test scores were $85,88,\text{and}\ 94.$ To find the mean score, he would add them and divide by 3.
 
 $$
 \begin{matrix}
@@ -39,7 +39,7 @@ $$
 \end{matrix}
 $$
 
-His mean test score is $89$ points.
+His mean test score is 89 points.
 
 ### The Mean
 
@@ -79,11 +79,11 @@ Find the mean of the numbers $8,12,15,9,\text{and}\ 6.$
 
 ### Try It 5.97
 
-Find the mean of the numbers: $8,9,7,12,10,5.$
+Find the mean of the numbers: 8,9,7,12,10,5.
 
 ### Try It 5.98
 
-Find the mean of the numbers: $9,13,11,7,5.$
+Find the mean of the numbers: 9,13,11,7,5.
 
 ### Example 5.50
 
@@ -99,7 +99,7 @@ The ages of the members of a family who got together for a birthday celebration 
 | Simplify the fraction. | $\text{mean} = \frac{476}{8}$ |
 |  | $\text{mean} = 59.5$ |
 
-Is $59.5$ ‘typical’? Yes, it is neither less than $16$ nor greater than $97.$ The mean age is $59.5$ years.
+Is 59.5 ‘typical’? Yes, it is neither less than 16 nor greater than 97. The mean age is 59.5 years.
 
 ### Try It 5.99
 
@@ -109,7 +109,7 @@ The ages of the four students in Ben’s carpool are $25,18,21,\text{and}\ 22.$ 
 
 Yen counted the number of emails she received last week. The numbers were $4,9,15,12,10,12,\text{and}\ 8.$ Find the mean number of emails.
 
-Did you notice that in the last example, while all the numbers were whole numbers, the mean was $59.5,$ a number with one decimal place? It is customary to report the mean to one more decimal place than the original numbers. In the next example, all the numbers represent money, and it will make sense to report the mean in dollars and cents.
+Did you notice that in the last example, while all the numbers were whole numbers, the mean was 59.5, a number with one decimal place? It is customary to report the mean to one more decimal place than the original numbers. In the next example, all the numbers represent money, and it will make sense to report the mean in dollars and cents.
 
 ### Example 5.51
 
@@ -143,7 +143,7 @@ When Ann, Bianca, Dora, Eve, and Francine sing together on stage, they line up i
 
 | Ann    | Bianca | Dora   | Eve    | Francine |
 |--------|--------|--------|--------|----------|
-| $59$ | $60$ | $65$ | $68$ | $70$   |
+| 59 | 60 | 65 | 68 | 70   |
 
 Table 5.6
 
@@ -156,7 +156,7 @@ The median of a set of data values is the middle value.
 - Half the data values are less than or equal to the median.
 - Half the data values are greater than or equal to the median.
 
-What if Carmen, the pianist, joins the singing group on stage? Carmen is $62$ inches tall, so she fits in the height order between Bianca and Dora. Now the data set looks like this:
+What if Carmen, the pianist, joins the singing group on stage? Carmen is 62 inches tall, so she fits in the height order between Bianca and Dora. Now the data set looks like this:
 
 $$
 59,60,62,65,68,70
@@ -164,9 +164,9 @@ $$
 
 There is no single middle value. The heights of the six girls can be divided into two equal parts.
 
-Statisticians have agreed that in cases like this the median is the mean of the two values closest to the middle. So the median is the mean of $62\ \text{and}\ 65,\ \frac{62 + 65}{2}.$ The median height is $63.5$ inches.
+Statisticians have agreed that in cases like this the median is the mean of the two values closest to the middle. So the median is the mean of $62\ \text{and}\ 65,\ \frac{62 + 65}{2}.$ The median height is 63.5 inches.
 
-Notice that when the number of girls was $5,$ the median was the third height, but when the number of girls was $6,$ the median was the mean of the third and fourth heights. In general, when the number of values is odd, the median will be the one value in the middle, but when the number is even, the median is the mean of the two middle values.
+Notice that when the number of girls was 5, the median was the third height, but when the number of girls was 6, the median was the mean of the third and fourth heights. In general, when the number of values is odd, the median will be the one value in the middle, but when the number is even, the median is the mean of the two middle values.
 
 ### How To
 
@@ -194,11 +194,11 @@ Find the median of $12,13,19,9,11,15,\text{and}\ 18.$
 
 ### Try It 5.103
 
-Find the median of the data set: $43,38,51,40,46.$
+Find the median of the data set: 43,38,51,40,46.
 
 ### Try It 5.104
 
-Find the median of the data set: $15,35,20,45,50,25,30.$
+Find the median of the data set: 15,35,20,45,50,25,30.
 
 ### Example 5.53
 
@@ -221,11 +221,11 @@ $83,79,85,86,92,100,76,90,88,\text{and}\ 64.$ Find her median score.
 
 ### Try It 5.105
 
-Find the median of the data set: $8,7,5,10,9,12.$
+Find the median of the data set: 8,7,5,10,9,12.
 
 ### Try It 5.106
 
-Find the median of the data set: $21,25,19,17,22,18,20,24.$
+Find the median of the data set: 21,25,19,17,22,18,20,24.
 
 ### Identify the Mode of a Set of Numbers
 
@@ -245,7 +245,7 @@ $$
 2,3,5,8,8,8,15
 $$
 
-Jolene ran $8$ miles three times, and every other distance is listed only once. So the mode of the data is $8$ miles.
+Jolene ran 8 miles three times, and every other distance is listed only once. So the mode of the data is 8 miles.
 
 ### How To
 
@@ -259,21 +259,21 @@ Jolene ran $8$ miles three times, and every other distance is listed only once. 
 
 The ages of students in a college math class are listed below. Identify the mode.
 
-$18,18,18,18,19,19,19,20,20,20,20,20,20,20,21,21,22,22,22,22,22,23,24,24,25,29,30,40,44$
+18,18,18,18,19,19,19,20,20,20,20,20,20,20,21,21,22,22,22,22,22,23,24,24,25,29,30,40,44
 
 #### Solution
 
 The ages are already listed in order. We will make a table of frequencies to help identify the age with the highest frequency.
 
-Now look for the highest frequency. The highest frequency is $7,$ which corresponds to the age $20.$ So the mode of the ages in this class is $20$ years.
+Now look for the highest frequency. The highest frequency is 7, which corresponds to the age 20. So the mode of the ages in this class is 20 years.
 
 ### Try It 5.107
 
-The number of sick days employees used last year: $3,6,2,3,7,5,6,2,4,2.$ Identify the mode.
+The number of sick days employees used last year: 3,6,2,3,7,5,6,2,4,2. Identify the mode.
 
 ### Try It 5.108
 
-The number of handbags owned by women in a book club: $5,6,3,1,5,8,1,5,8,5.$ Identify the mode.
+The number of handbags owned by women in a book club: 5,6,3,1,5,8,1,5,8,5. Identify the mode.
 
 ### Example 5.55
 
@@ -281,24 +281,24 @@ The data lists the heights (in inches) of students in a statistics class. Identi
 
 |        |        |        |        |        |        |        |        |
 |--------|--------|--------|--------|--------|--------|--------|--------|
-| $56$ | $61$ | $63$ | $64$ | $65$ | $66$ | $67$ | $67$ |
-| $60$ | $62$ | $63$ | $64$ | $65$ | $66$ | $67$ | $70$ |
-| $60$ | $63$ | $63$ | $64$ | $66$ | $66$ | $67$ | $74$ |
-| $61$ | $63$ | $64$ | $65$ | $66$ | $67$ | $67$ |        |
+| 56 | 61 | 63 | 64 | 65 | 66 | 67 | 67 |
+| 60 | 62 | 63 | 64 | 65 | 66 | 67 | 70 |
+| 60 | 63 | 63 | 64 | 66 | 66 | 67 | 74 |
+| 61 | 63 | 64 | 65 | 66 | 67 | 67 |        |
 
 #### Solution
 
 List each number with its frequency.  
 
-Now look for the highest frequency. The highest frequency is $6,$ which corresponds to the height $67$ inches. So the mode of this set of heights is $67$ inches.
+Now look for the highest frequency. The highest frequency is 6, which corresponds to the height 67 inches. So the mode of this set of heights is 67 inches.
 
 ### Try It 5.109
 
-The ages of the students in a statistics class are listed here: $19$, $20$, $23$, $23$, $38$, $21$, $19$, $21$, $19$, $21$, $20$, $43$, $20$, $23$, $17$, $21$, $21$, $20$, $29$, $18$, $28$. What is the mode?
+The ages of the students in a statistics class are listed here: 19, 20, 23, 23, 38, 21, 19, 21, 19, 21, 20, 43, 20, 23, 17, 21, 21, 20, 29, 18, 28. What is the mode?
 
 ### Try It 5.110
 
-Students listed the number of members in their household as follows: $6$, $2$, $5$, $6$, $3$, $7$, $5$, $6$, $5$, $3$, $4$, $4$, $5$, $7$, $6$, $4$, $5$, $2$, $1$, $5$. What is the mode?
+Students listed the number of members in their household as follows: 6, 2, 5, 6, 3, 7, 5, 6, 5, 3, 4, 4, 5, 7, 6, 4, 5, 2, 1, 5. What is the mode?
 
 Some data sets do not have a mode because no value appears more than any other. And some data sets have more than one mode. In a given set, if two or more data values have the same highest frequency, we say they are all modes.
 
@@ -318,7 +318,7 @@ $$
 \text{Probability} = \frac{\text{number of favorable outcomes}}{\text{total number of outcomes}}
 $$
 
-Converting the fraction $\frac{3}{5}$ to a decimal, we would say there is a $0.6$ probability of choosing a banana.
+Converting the fraction $\frac{3}{5}$ to a decimal, we would say there is a 0.6 probability of choosing a banana.
 
 $$
 \begin{array}{l}
@@ -332,7 +332,7 @@ This basic definition of probability assumes that all the outcomes are equally l
 
 ### Example 5.56
 
-The ski club is holding a raffle to raise money. They sold $100$ tickets. All of the tickets are placed in a jar. One ticket will be pulled out of the jar at random, and the winner will receive a prize. Cherie bought one raffle ticket.
+The ski club is holding a raffle to raise money. They sold 100 tickets. All of the tickets are placed in a jar. One ticket will be pulled out of the jar at random, and the winner will receive a prize. Cherie bought one raffle ticket.
 
 ⓐ Find the probability she will win the prize.
 
@@ -361,7 +361,7 @@ Ignaly is attending a fashion show where the guests are seated at tables of ten.
 
 ### Try It 5.112
 
-Hoang is among $20$ people available to sit on a jury. One person will be chosen at random from the $20.$ ⓐ Find the probability Hoang will be chosen. ⓑ Convert the fraction to a decimal.
+Hoang is among 20 people available to sit on a jury. One person will be chosen at random from the 20. ⓐ Find the probability Hoang will be chosen. ⓑ Convert the fraction to a decimal.
 
 ### Example 5.57
 
@@ -391,11 +391,11 @@ Three women and five men interviewed for a job. One of the candidates will be of
 
 ### Try It 5.113
 
-A bowl of Halloween candy contains $5$ chocolate candies and $3$ lemon candies. Tanya will choose one piece of candy at random. ⓐ Find the probability Tanya will choose a chocolate candy. ⓑ Convert the fraction to a decimal.
+A bowl of Halloween candy contains 5 chocolate candies and 3 lemon candies. Tanya will choose one piece of candy at random. ⓐ Find the probability Tanya will choose a chocolate candy. ⓑ Convert the fraction to a decimal.
 
 ### Try It 5.114
 
-Dan has $2$ pairs of black socks and $6$ pairs of blue socks. He will choose one pair at random to wear tomorrow. ⓐ Find the probability Dan will choose a pair of black socks ⓑ Convert the fraction to a decimal.
+Dan has 2 pairs of black socks and 6 pairs of blue socks. He will choose one pair at random to wear tomorrow. ⓐ Find the probability Dan will choose a pair of black socks ⓑ Convert the fraction to a decimal.
 
 ### Media
 
@@ -416,35 +416,35 @@ In the following exercises, find the mean.
 
 357\.
 
-$3$, $8$, $2$, $2$, $5$
+3, 8, 2, 2, 5
 
 358\.
 
-$6$, $1$, $9$, $3$, $4$, $7$
+6, 1, 9, 3, 4, 7
 
 359\.
 
-$65$, $13$, $48$, $32$, $19$, $33$
+65, 13, 48, 32, 19, 33
 
 360\.
 
-$34$, $45$, $29$, $61$, and $41$
+34, 45, 29, 61, and 41
 
 361\.
 
-$202$, $241$, $265$, $274$
+202, 241, 265, 274
 
 362\.
 
-$525$, $532$, $558$, $574$
+525, 532, 558, 574
 
 363\.
 
-$12.45$, $12.99$, $10.50$, $11.25$, $9.99$, $12.72$
+12.45, 12.99, 10.50, 11.25, 9.99, 12.72
 
 364\.
 
-$28.8$, $32.9$, $32.5$, $27.9$, $30.4$, $32.5$, $31.6$, $32.7$
+28.8, 32.9, 32.5, 27.9, 30.4, 32.5, 31.6, 32.7
 
 365\.
 
@@ -452,11 +452,11 @@ Four girls leaving a mall were asked how much money they had just spent. The amo
 
 366\.
 
-Juan bought $5$ shirts to wear to his new job. The costs of the shirts were $\text{\$32.95}$, $\text{\$38.50}$, $\text{\$30.00}$, $\text{\$17.45}$, and $\text{\$24.25}$. Find the mean cost.
+Juan bought 5 shirts to wear to his new job. The costs of the shirts were $\text{\$32.95}$, $\text{\$38.50}$, $\text{\$30.00}$, $\text{\$17.45}$, and $\text{\$24.25}$. Find the mean cost.
 
 367\.
 
-The number of minutes it took Jim to ride his bike to school for each of the past six days was $21$, $18$, $16$, $19$, $24$, and $19$. Find the mean number of minutes.
+The number of minutes it took Jim to ride his bike to school for each of the past six days was 21, 18, 16, 19, 24, and 19. Find the mean number of minutes.
 
 368\.
 
@@ -468,7 +468,7 @@ The top eight hitters in a softball league have batting averages of $.373$, $.36
 
 370\.
 
-The monthly snowfall at a ski resort over a six-month period was $60.3,$ $79.7,$ $50.9,$ $28.0,$ $47.4,$ and $46.1$ inches. Find the mean snowfall.
+The monthly snowfall at a ski resort over a six-month period was 60.3, 79.7, 50.9, 28.0, 47.4, and 46.1 inches. Find the mean snowfall.
 
 **Find the Median of a Set of Numbers**
 
@@ -476,35 +476,35 @@ In the following exercises, find the median.
 
 371\.
 
-$24$, $19$, $18$, $29$, $21$
+24, 19, 18, 29, 21
 
 372\.
 
-$48$, $51$, $46$, $42$, $50$
+48, 51, 46, 42, 50
 
 373\.
 
-$65$, $56$, $35$, $34$, $44$, $39$, $55$, $52$, $45$
+65, 56, 35, 34, 44, 39, 55, 52, 45
 
 374\.
 
-$121$, $115$, $135$, $109$, $136$, $147$, $127$, $119$, $110$
+121, 115, 135, 109, 136, 147, 127, 119, 110
 
 375\.
 
-$4$, $8$, $1$, $5$, $14$, $3$, $1$, $12$
+4, 8, 1, 5, 14, 3, 1, 12
 
 376\.
 
-$3$, $9$, $2$, $6$, $20$, $3$, $3$, $10$
+3, 9, 2, 6, 20, 3, 3, 10
 
 377\.
 
-$99.2$, $101.9$, $98.6$, $99.5$, $100.8$, $99.8$
+99.2, 101.9, 98.6, 99.5, 100.8, 99.8
 
 378\.
 
-$28.8$, $32.9$, $32.5$, $27.9$, $30.4$, $32.5$, $31.6$, $32.7$
+28.8, 32.9, 32.5, 27.9, 30.4, 32.5, 31.6, 32.7
 
 379\.
 
@@ -512,15 +512,15 @@ Last week Ray recorded how much he spent for lunch each workday. He spent $\text
 
 380\.
 
-Michaela is in charge of 6 two-year olds at a daycare center. Their ages, in months, are $25$, $24$, $28$, $32$, $29$, and $31$. Find the median age.
+Michaela is in charge of 6 two-year olds at a daycare center. Their ages, in months, are 25, 24, 28, 32, 29, and 31. Find the median age.
 
 381\.
 
-Brian is teaching a swim class for $6$ three-year olds. Their ages, in months, are $38,41,45,36,40,\text{and}\ 42.$ Find the median age.
+Brian is teaching a swim class for 6 three-year olds. Their ages, in months, are $38,41,45,36,40,\text{and}\ 42.$ Find the median age.
 
 382\.
 
-Sal recorded the amount he spent for gas each week for the past $8$ weeks. The amounts were $\text{\$38.65},$ $\text{\$32.18},$ $\text{\$40.23},$ $\text{\$51.50},$ $\text{\$43.68},$ $\text{\$30.96},$ $\text{\$41.37},$ and $\text{\$44.72}.$ Find the median amount.
+Sal recorded the amount he spent for gas each week for the past 8 weeks. The amounts were $\text{\$38.65},$ $\text{\$32.18},$ $\text{\$40.23},$ $\text{\$51.50},$ $\text{\$43.68},$ $\text{\$30.96},$ $\text{\$41.37},$ and $\text{\$44.72}.$ Find the median amount.
 
 **Identify the Mode of a Set of Numbers**
 
@@ -528,35 +528,35 @@ In the following exercises, identify the mode.
 
 383\.
 
-$2$, $5$, $1$, $5$, $2$, $1$, $2$, $3$, $2$, $3$, $1$
+2, 5, 1, 5, 2, 1, 2, 3, 2, 3, 1
 
 384\.
 
-$8$, $5$, $1$, $3$, $7$, $1$, $1$, $7$, $1$, $8$, $7$
+8, 5, 1, 3, 7, 1, 1, 7, 1, 8, 7
 
 385\.
 
-$18$, $22$, $17$, $20$, $19$, $20$, $22$, $19$, $29$, $18$, $23$, $25$, $22$, $24$, $23$, $22$, $18$, $20$, $22$, $20$
+18, 22, 17, 20, 19, 20, 22, 19, 29, 18, 23, 25, 22, 24, 23, 22, 18, 20, 22, 20
 
 386\.
 
-$42$, $28$, $32$, $35$, $24$, $32$, $48$, $32$, $32$, $24$, $35$, $28$, $30$, $35$, $45$, $32$, $28$, $32$, $42$, $42$, $30$
+42, 28, 32, 35, 24, 32, 48, 32, 32, 24, 35, 28, 30, 35, 45, 32, 28, 32, 42, 42, 30
 
 387\.
 
-The number of children per house on one block: $1$, $4$, $2$, $3$, $3$, $2$, $6$, $2$, $4$, $2$, $0$, $3$, $0.$
+The number of children per house on one block: 1, 4, 2, 3, 3, 2, 6, 2, 4, 2, 0, 3, 0.
 
 388\.
 
-The number of movies watched each month last year: $2$, $0$, $3$, $0$, $0$, $8$, $6$, $5$, $0$, $1$, $2$, $3.$
+The number of movies watched each month last year: 2, 0, 3, 0, 0, 8, 6, 5, 0, 1, 2, 3.
 
 389\.
 
-The number of units being taken by students in one class: $12$, $5$, $11$, $10$, $10$, $11$, $5$, $11$, $11$, $11$, $10$, $12$.
+The number of units being taken by students in one class: 12, 5, 11, 10, 10, 11, 5, 11, 11, 11, 10, 12.
 
 390\.
 
-The number of hours of sleep per night for the past two weeks: $8$, $5$, $7$, $8$, $8$, $6$, $6$, $6$, $6$, $9$, $7$, $8$, $8$, $8$.
+The number of hours of sleep per night for the past two weeks: 8, 5, 7, 8, 8, 6, 6, 6, 6, 9, 7, 8, 8, 8.
 
 **Use the Basic Definition of Probability**
 
@@ -564,7 +564,7 @@ In the following exercises, express the probability as both a fraction and a dec
 
 391\.
 
-Josue is in a book club with $20$ members. One member is chosen at random each month to select the next month’s book. Find the probability that Josue will be chosen next month.
+Josue is in a book club with 20 members. One member is chosen at random each month to select the next month’s book. Find the probability that Josue will be chosen next month.
 
 392\.
 
@@ -572,7 +572,7 @@ Jessica is one of eight kindergarten teachers at Mandela Elementary School. One 
 
 393\.
 
-There are $24$ people who work in Dane’s department. Next week, one person will be selected at random to bring in doughnuts. Find the probability that Dane will be selected. Round your answer to the nearest thousandth.
+There are 24 people who work in Dane’s department. Next week, one person will be selected at random to bring in doughnuts. Find the probability that Dane will be selected. Round your answer to the nearest thousandth.
 
 394\.
 
@@ -588,17 +588,17 @@ Noah is planning his summer camping trip. He can’t decide among six campground
 
 397\.
 
-Donovan is considering transferring to a $\text{4-year college}.$ He is considering $10$ out-of state colleges and $4$ colleges in his state. He will choose one college at random to visit during spring break. Find the probability that Donovan will choose an out-of-state college.
+Donovan is considering transferring to a $\text{4-year college}.$ He is considering 10 out-of state colleges and 4 colleges in his state. He will choose one college at random to visit during spring break. Find the probability that Donovan will choose an out-of-state college.
 
 398\.
 
-There are $258,890,850$ number combinations possible in the Mega Millions lottery. One winning jackpot ticket will be chosen at random. Brent chooses his favorite number combination and buys one ticket. Find the probability Brent will win the jackpot. Round the decimal to the first digit that is not zero, then write the name of the decimal.
+There are 258,890,850 number combinations possible in the Mega Millions lottery. One winning jackpot ticket will be chosen at random. Brent chooses his favorite number combination and buys one ticket. Find the probability Brent will win the jackpot. Round the decimal to the first digit that is not zero, then write the name of the decimal.
 
 #### Everyday Math
 
 399\.
 
-Joaquin gets paid every Friday. His paychecks for the past $8$ Fridays were $\text{\$315},$ $\text{\$236.25},$ $\text{\$236.25},$ $\text{\$236.25}\ \text{\$315},$ $\text{\$315},$ $\text{\$236.25},$ $\text{\$393.75}.$ Find the ⓐ mean, ⓑ median, and ⓒ mode.
+Joaquin gets paid every Friday. His paychecks for the past 8 Fridays were $\text{\$315},$ $\text{\$236.25},$ $\text{\$236.25},$ $\text{\$236.25}\ \text{\$315},$ $\text{\$315},$ $\text{\$236.25},$ $\text{\$393.75}.$ Find the ⓐ mean, ⓑ median, and ⓒ mode.
 
 400\.
 

@@ -6,7 +6,7 @@ If we have two apples and *then* add three more, we have five apples. That resul
 
 ## Identities and Inverses
 
-We start with some definitions. The number $0$ is called the *additive identity*. It has this name because  adding $0$ to a number does not change that number's "identity".  If you were playing a "game" where you needed to add something to $x$, but you  didn't want to change the value, then you would add $0$:
+We start with some definitions. The number 0 is called the *additive identity*. It has this name because  adding 0 to a number does not change that number's "identity".  If you were playing a "game" where you needed to add something to $x$, but you  didn't want to change the value, then you would add 0:
 
 $$
  x+0=x 
@@ -14,33 +14,33 @@ $$
 
 Adding the additive identity to a number does not change that number.
 
-If the sum of two numbers is the additive identity ($0$) then those two numbers  are called *additive inverses* of each other.  Imagine playing a game where you have a number like $2$, and you need to add something  to it to get $0$. You would add $-2$:
+If the sum of two numbers is the additive identity (0) then those two numbers  are called *additive inverses* of each other.  Imagine playing a game where you have a number like 2, and you need to add something  to it to get 0. You would add $-2$:
 
 $$
  2+(-2)=0 
 $$
 
-It works the other way too when starting with a negative number. Now imagine starting with $-3$ and you need to add something to that to get $0$. You would add $3$:
+It works the other way too when starting with a negative number. Now imagine starting with $-3$ and you need to add something to that to get 0. You would add 3:
 
 $$
  -3+3=0 
 $$
 
-The additive inverse of a number is that same number with the opposite sign. And what makes that pair of numbers special is that they add to $0$.
+The additive inverse of a number is that same number with the opposite sign. And what makes that pair of numbers special is that they add to 0.
 
-We also have the special number $1$, which is the *multiplicative identity*.  The special feature being highlighted is that when you multiply a number by $1$,  it does not change that number's "identity". Once again, imagine you are playing a game  where your job is to multiply $x$ by something, but you actually do not want to change the number's value. Then you would multiply by $1$:
+We also have the special number 1, which is the *multiplicative identity*.  The special feature being highlighted is that when you multiply a number by 1,  it does not change that number's "identity". Once again, imagine you are playing a game  where your job is to multiply $x$ by something, but you actually do not want to change the number's value. Then you would multiply by 1:
 
 $$
  x\cdot1=x 
 $$
 
-If the product of two numbers is the multiplicative identity ($1$) then those two numbers  are called *multiplicative inverses* of each other.  Strategically, what would you multiply $2$ by to get $1$?  You could use the fraction $\frac12$:
+If the product of two numbers is the multiplicative identity (1) then those two numbers  are called *multiplicative inverses* of each other.  Strategically, what would you multiply 2 by to get 1?  You could use the fraction $\frac12$:
 
 $$
  2\cdot\frac12=1 
 $$
 
-Or what if you started with a more "complicated" number like $-\frac{2}{3}$? What could you multiply that by to get $1$? We would use $-\frac{3}{2}$ so that the negative signs cancel, and the product would be $\frac{6}{6}$ which reduces to $1$:
+Or what if you started with a more "complicated" number like $-\frac{2}{3}$? What could you multiply that by to get 1? We would use $-\frac{3}{2}$ so that the negative signs cancel, and the product would be $\frac{6}{6}$ which reduces to 1:
 
 $$
  -\frac{2}{3}\cdot\left(-\frac{3}{2}\right)=1 
@@ -78,13 +78,13 @@ What this shows us is $(dw)h=d(wh)$. We haven't changed the order that the three
 
 ### Distributive Property
 
-The final property we'll explore is called the *distributive property*, which involves both multiplication and addition (or subtraction). To understand this property, consider what happens if we take $3$ bags, and each bag contains one apple and one pear. We have the same total amount of fruit as if we'd taken a bag with $3$ apples and another bag with $3$ pears. Algebraically:
+The final property we'll explore is called the *distributive property*, which involves both multiplication and addition (or subtraction). To understand this property, consider what happens if we take 3 bags, and each bag contains one apple and one pear. We have the same total amount of fruit as if we'd taken a bag with 3 apples and another bag with 3 pears. Algebraically:
 
 $$
 \begin{aligned}&\text{3 bags, each with 1 apple and 1 pear}&&3(a+p) \\ &=(\text{bag with 3 apples})+(\text{bag with 3 pears})&&=3a+3p\end{aligned}
 $$
 
-It helps to think of this as "distributing" the $3$ to the $a$ and the $p$.
+It helps to think of this as "distributing" the 3 to the $a$ and the $p$.
 
 The distributive property also works with multiplication on the other side, and with subtraction:
 
@@ -200,7 +200,7 @@ $$
 
 And then using what you know about like terms, you could conclude that this is $7x+12$.
 
-Several steps that are described above are sweeping things under the rug, taking multiple steps at once without really justifying why that is legal. Why exactly is it OK to just ignore those parentheses? Why is it ok to add $4x$ and $3x$ when they are separated with the $5$ in between? With the algebra properties, we can cleanly justify why $(4x+5)+(3x+7)$ simplifies to $7x+12$, explaining one step at a time.
+Several steps that are described above are sweeping things under the rug, taking multiple steps at once without really justifying why that is legal. Why exactly is it OK to just ignore those parentheses? Why is it ok to add $4x$ and $3x$ when they are separated with the 5 in between? With the algebra properties, we can cleanly justify why $(4x+5)+(3x+7)$ simplifies to $7x+12$, explaining one step at a time.
 
 $$
 \begin{aligned}&\highlight{(4x+5)}+\Big(\highlight{3x}+\highlight{7}\Big) \\ &=\Big((4x+5)+3x\Big)+7 \\ &=(\highlight{(}4x+5\highlight{)}+3x)+7 \\ &=(4x+(5+3x))+7 \\ &=(4x+(\highlight{5}+\highlight{3x}))+7 \\ &=(4x+(3x+5))+7 \\ &=(4x+\highlight{(}3x+5\highlight{)})+7 \\ &=((4x+3x)+5)+7 \\ &=(\highlight{(4x+3x)}+\highlight{5})+\highlight{7} \\ &=(4x+3x)+(5+7) \\ &=\highlight{(4x+3x)}+(5+7) \\ &=(4+3)x+(5+7) \\ &=7x+12\end{aligned}
@@ -220,7 +220,7 @@ Solution
 
 ## The Role of the Order of Operations
 
-When simplifying an expression such as $3+4(5x+7)$, we need to respect the order of operations. Since the terms inside the parentheses are not like terms, there is nothing to simplify inside the parentheses. The next highest priority operation is multiplying the $4$ by the $(5x+7)$. This must be done *before* anything happens with that $3$ at the far left. It is wrong to write $3+4(5x+7)=\highlight{7}(5x+7)$, because that would mean we treated the addition as having higher priority than the multiplication. And that just plain violates the standard order of operations.
+When simplifying an expression such as $3+4(5x+7)$, we need to respect the order of operations. Since the terms inside the parentheses are not like terms, there is nothing to simplify inside the parentheses. The next highest priority operation is multiplying the 4 by the $(5x+7)$. This must be done *before* anything happens with that 3 at the far left. It is wrong to write $3+4(5x+7)=\highlight{7}(5x+7)$, because that would mean we treated the addition as having higher priority than the multiplication. And that just plain violates the standard order of operations.
 
 So the order of operations *alone* is not enough to simplify this expression. But the algebra properties let us rearrange things so that we can be productive. To simplify $3+4(5x+7)$, note that there is a place where we can apply the distributive property:
 
@@ -252,7 +252,7 @@ Solution
 
 **Exercise**
 
-Why is the number $1$ called the "multiplicative identity"?
+Why is the number 1 called the "multiplicative identity"?
 
 **Exercise**
 

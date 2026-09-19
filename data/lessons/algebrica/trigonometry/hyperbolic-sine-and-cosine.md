@@ -206,7 +206,7 @@ This value is therefore taken as the analytical definition of the hyperbolic cos
 
 ## Hyperbolic sine and cosine function
 
-The hyperbolic sine function \\(f(x) = \sinh(x)\\) associates each real number \\(x\\) with a value derived from the exponential function. Unlike the circular sine, it does not oscillate: its graph grows exponentially for large positive or negative values of \\(x\\), crossing the origin with slope \\(1\\). The function \\(f(x) = \sinh(x)\\) is defined for all real numbers, and its range also spans the entire real line.
+The hyperbolic sine function \\(f(x) = \sinh(x)\\) associates each real number \\(x\\) with a value derived from the exponential function. Unlike the circular sine, it does not oscillate: its graph grows exponentially for large positive or negative values of \\(x\\), crossing the origin with slope 1. The function \\(f(x) = \sinh(x)\\) is defined for all real numbers, and its range also spans the entire real line.
 
 + Domain: \\(x \in \mathbb{R}\\)  
 + Range: \\(y \in \mathbb{R}\\)  
@@ -236,7 +236,7 @@ X_{P} = \cosh(x) = \frac{e^{x} + e^{-x}}{2}
 Y_{P} = \sinh(x) = \frac{e^{x} - e^{-x}}{2}
 \\]
 
-In the circular setting, the corresponding quantities arise from the unit circle of radius \\(1\\), where a central angle \\( \theta \\) determines the circular sine and cosine, identified by the point:
+In the circular setting, the corresponding quantities arise from the unit circle of radius 1, where a central angle \\( \theta \\) determines the circular sine and cosine, identified by the point:
 \\[
 P(X_{P}, Y_{P}) = P(\cos\theta,\\, \sin\theta)
 \\]

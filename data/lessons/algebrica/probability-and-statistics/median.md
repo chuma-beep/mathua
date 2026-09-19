@@ -72,7 +72,7 @@ Iterating the same procedure for each value of \\(m\\) gives the following total
 3200| 8,400  
 4000| 12,400  
   
-The median is therefore \\(1500\\), as this value minimizes the total sum of absolute deviations, with \\(S(m) = 6300\\) being the smallest among all those computed.
+The median is therefore 1500, as this value minimizes the total sum of absolute deviations, with \\(S(m) = 6300\\) being the smallest among all those computed.
 
 ## Example 2
 

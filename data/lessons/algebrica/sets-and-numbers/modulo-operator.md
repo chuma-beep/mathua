@@ -10,7 +10,7 @@ The modulo operator is one of the most frequently used operations in integer ari
 a \bmod n = r
 \\]
 
-\\(r\\) is the unique integer satisfying \\(0 \le r < n\\) and \\(a = qn + r\\) for some integer \\(q\\). The integer \\(q\\) is the quotient of the division of \\(a\\) by \\(n\\), and \\(r\\) is the remainder. The existence and uniqueness of this decomposition is guaranteed by the division algorithm for integers. The number \\(n\\) is called the modulus. When \\(a\\) is positive, the value of \\(a \bmod n\\) coincides with the intuitive notion of the remainder learned in elementary arithmetic. For example, \\(17 \bmod 5 = 2\\), since \\(17 = 3 \cdot 5 + 2\\). The quotient is \\(3\\) and the remainder is \\(2\\).
+\\(r\\) is the unique integer satisfying \\(0 \le r < n\\) and \\(a = qn + r\\) for some integer \\(q\\). The integer \\(q\\) is the quotient of the division of \\(a\\) by \\(n\\), and \\(r\\) is the remainder. The existence and uniqueness of this decomposition is guaranteed by the division algorithm for integers. The number \\(n\\) is called the modulus. When \\(a\\) is positive, the value of \\(a \bmod n\\) coincides with the intuitive notion of the remainder learned in elementary arithmetic. For example, \\(17 \bmod 5 = 2\\), since \\(17 = 3 \cdot 5 + 2\\). The quotient is 3 and the remainder is 2.
 
 > The modulo operator is sometimes written as \\(a \\, \mathrm{mod} \\, n\\) in textbooks and as "a % n" in many programming languages, although the behaviour for negative operands may differ between the mathematical definition and specific programming implementations.
 
@@ -18,7 +18,7 @@ a \bmod n = r
 
 A subtle point arises when \\(a\\) is negative. The mathematical definition requires the remainder to satisfy \\(0 \le r < n\\), so the result is always a non-negative integer strictly smaller than the modulus. Consider \\(-7 \bmod 5\\). Writing \\(-7 = q \cdot 5 + r\\) with \\(0 \le r < 5\\), one finds \\(q = -2\\) and \\(r = 3\\), since \\(-7 = (-2) \cdot 5 + 3\\). Therefore \\(-7 \bmod 5 = 3\\), not \\(-2\\) as one might naively expect.
 
-This convention is not universal. In several programming languages the `%` operator follows the sign of the dividend, so that `-7 % 5` returns \\(-2\\) rather than \\(3\\). In a purely mathematical context, however, the remainder is always taken to be non-negative.
+This convention is not universal. In several programming languages the `%` operator follows the sign of the dividend, so that `-7 % 5` returns \\(-2\\) rather than 3. In a purely mathematical context, however, the remainder is always taken to be non-negative.
 
 ## Congruence modulo n
 
@@ -28,7 +28,7 @@ Closely related to the modulo operator is the notion of congruence. Two integers
 a \equiv b \pmod{n}
 \\]
 
-The equivalent characterisation in terms of divisibility states that \\(a \equiv b \pmod{n}\\) if and only if \\(n \mid (a - b)\\). For example, \\(17 \equiv 2 \pmod 5\\) because \\(17 - 2 = 15\\) is divisible by \\(5\\), and equivalently because both \\(17\\) and \\(2\\) leave remainder \\(2\\) when divided by \\(5\\).
+The equivalent characterisation in terms of divisibility states that \\(a \equiv b \pmod{n}\\) if and only if \\(n \mid (a - b)\\). For example, \\(17 \equiv 2 \pmod 5\\) because \\(17 - 2 = 15\\) is divisible by 5, and equivalently because both 17 and 2 leave remainder 2 when divided by 5.
 
 It is important to distinguish the operator \\(a \bmod n\\), which produces a specific integer, from the congruence \\(a \equiv b \pmod n\\), which is a relation between two integers. The first is a function of \\(a\\) and \\(n\\); the second is a statement that can be true or false depending on the integers involved. Congruence modulo \\(n\\) is an equivalence relation on the integers.
 
@@ -66,7 +66,7 @@ A useful way to visualise the arithmetic of residues modulo \\(n\\) is to arrang
 
 Each row is a cyclic shift of the previous one, which reflects the fact that adding a fixed residue permutes the elements of \\(\mathbb{Z}/4\mathbb{Z}\\) without ever leaving the set. Every row and every column contains each residue exactly once, a feature that holds for the addition table modulo any positive integer.
 
-The multiplication table modulo \\(4\\) is the following:
+The multiplication table modulo 4 is the following:
 
 | × | 0 | 1 | 2 | 3 |
 |---|---|---|---|---|
@@ -75,7 +75,7 @@ The multiplication table modulo \\(4\\) is the following:
 | 2 | 0 | 2 | 0 | 2 |
 | 3 | 0 | 3 | 2 | 1 |
 
-The behaviour of multiplication is noticeably less regular than that of addition. The row corresponding to \\(2\\) never produces \\(1\\), which means that \\(2\\) does not admit a multiplicative inverse modulo \\(4\\). This is consistent with the fact that \\(\gcd(2, 4) = 2 \neq 1\\). On the other hand, the rows corresponding to \\(1\\) and \\(3\\) do produce \\(1\\) at some point, reflecting the existence of multiplicative inverses for the residues coprime with \\(4\\).
+The behaviour of multiplication is noticeably less regular than that of addition. The row corresponding to 2 never produces 1, which means that 2 does not admit a multiplicative inverse modulo 4. This is consistent with the fact that \\(\gcd(2, 4) = 2 \neq 1\\). On the other hand, the rows corresponding to 1 and 3 do produce 1 at some point, reflecting the existence of multiplicative inverses for the residues coprime with 4.
 
 > In group theory, a table of this form is called a Cayley table. It describes a finite group by listing the result of its operation for every ordered pair of elements. The addition table modulo \\(n\\) is precisely the Cayley table of the group \\((\mathbb{Z}/n\mathbb{Z}, +)\\).
 
@@ -104,11 +104,11 @@ Every integer belongs to exactly one of these four classes, and the union of the
 
 ## Examples
 
-Consider the problem of determining the day of the week a given number of days from today. If today is Wednesday and one wants to know what day it will be in \\(100\\) days, it is enough to compute \\(100 \bmod 7\\). Since \\(100 = 14 \cdot 7 + 2\\), the remainder is \\(2\\), so the answer is two days after Wednesday, that is, Friday. The modulo operator captures precisely the cyclical structure of the week.
+Consider the problem of determining the day of the week a given number of days from today. If today is Wednesday and one wants to know what day it will be in 100 days, it is enough to compute \\(100 \bmod 7\\). Since \\(100 = 14 \cdot 7 + 2\\), the remainder is 2, so the answer is two days after Wednesday, that is, Friday. The modulo operator captures precisely the cyclical structure of the week.
 
-A second classical example is the parity of an integer. An integer \\(a\\) is even if \\(a \bmod 2 = 0\\) and odd if \\(a \bmod 2 = 1\\). The two residue classes modulo \\(2\\) correspond exactly to the even and odd integers, and the familiar rules of parity, such as "even plus even is even" or "odd times odd is odd", are special cases of the arithmetic properties of congruences.
+A second classical example is the parity of an integer. An integer \\(a\\) is even if \\(a \bmod 2 = 0\\) and odd if \\(a \bmod 2 = 1\\). The two residue classes modulo 2 correspond exactly to the even and odd integers, and the familiar rules of parity, such as "even plus even is even" or "odd times odd is odd", are special cases of the arithmetic properties of congruences.
 
-As a slightly less trivial example, one can use modular arithmetic to compute the last digit of a large power. The last digit of \\(7^{100}\\) in base \\(10\\) is simply \\(7^{100} \bmod 10\\). Computing successive powers of \\(7\\) modulo \\(10\\) yields \\(7, 9, 3, 1, 7, 9, 3, 1, \ldots\\), a cycle of length \\(4\\). Since \\(100 \bmod 4 = 0\\), the exponent falls at the end of a full cycle, so \\(7^{100} \equiv 1 \pmod{10}\\). The last digit of \\(7^{100}\\) is therefore \\(1\\).
+As a slightly less trivial example, one can use modular arithmetic to compute the last digit of a large power. The last digit of \\(7^{100}\\) in base 10 is simply \\(7^{100} \bmod 10\\). Computing successive powers of 7 modulo 10 yields \\(7, 9, 3, 1, 7, 9, 3, 1, \ldots\\), a cycle of length 4. Since \\(100 \bmod 4 = 0\\), the exponent falls at the end of a full cycle, so \\(7^{100} \equiv 1 \pmod{10}\\). The last digit of \\(7^{100}\\) is therefore 1.
 
 ## Relation with algebraic structures
 

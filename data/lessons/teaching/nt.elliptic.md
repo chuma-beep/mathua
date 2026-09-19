@@ -8,8 +8,8 @@
 Chord through $P,Q$ meets $E$ at $R$, reflect to $P+Q$; used in ECM factorization and ECC cryptography.
 
 ### L-Function
-$L(E,s)$ at $s=1$ conjecturally rank $0$ iff $L(E,1)\neq0$.
+$L(E,s)$ at $s=1$ conjecturally rank 0 iff $L(E,1)\neq0$.
 
 ## Example
 
-$E: y^2=x^3-x$, $E(\mathbb Q)$ rank $0$, $L(E,1)\neq0$ fits BSD.
+$E: y^2=x^3-x$, $E(\mathbb Q)$ rank 0, $L(E,1)\neq0$ fits BSD.

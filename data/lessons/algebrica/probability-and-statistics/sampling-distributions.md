@@ -22,7 +22,7 @@ In formal terms, the sample mean is defined as
   * \\( X_i \\) denotes the value of the \\( i \\)-th observation in the sample.
 
 
-For example, consider a sample \\( X \\) consisting of \\(5\\) observed values:
+For example, consider a sample \\( X \\) consisting of 5 observed values:
 
 \\( i \\)| 1| 2| 3| 4| 5  
 ---|---|---|---|---|---  
@@ -54,7 +54,7 @@ Consider a sample \\( X \\) consisting of 7 observed values:
 ---|---|---|---|---|---|---|---  
 \\( X_i \\)| 4| 6| 5| 6| 8| 6| 7  
   
-The sample mode is the value that occurs most frequently within the sample. In this case, the value \\( 6 \\) appears three times, more than any other observation. Therefore, the sample mode is \\( 6 \\).
+The sample mode is the value that occurs most frequently within the sample. In this case, the value 6 appears three times, more than any other observation. Therefore, the sample mode is 6.
 
 It is important to note that the mode is sensitive to the frequency of individual observations and may not be unique — multiple modes can exist if two or more values occur with the same highest frequency. In such cases, the distribution is referred to as multimodal.
 

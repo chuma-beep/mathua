@@ -23,7 +23,7 @@ Before you get started, take this readiness quiz.
 
 ### Use Subtraction Notation
 
-Suppose there are seven bananas in a bowl. Elana uses three of them to make a smoothie. How many bananas are left in the bowl? To answer the question, we subtract three from seven. When we subtract, we take one number away from another to find the difference. The notation we use to subtract $3$ from $7$ is
+Suppose there are seven bananas in a bowl. Elana uses three of them to make a smoothie. How many bananas are left in the bowl? To answer the question, we subtract three from seven. When we subtract, we take one number away from another to find the difference. The notation we use to subtract 3 from 7 is
 
 $$
 7 - 3
@@ -37,7 +37,7 @@ To describe subtraction, we can use symbols and words.
 
 | Operation | Notation | Expression | Read as | Result |
 |----|----|----|----|----|
-| Subtraction | $-$ | $7 - 3$ | seven minus three | the difference of $7$ and $3$ |
+| Subtraction | $-$ | $7 - 3$ | seven minus three | the difference of 7 and 3 |
 
 ### Example 1.26
 
@@ -129,13 +129,13 @@ Model the subtraction: $43 - 26.$
 
 #### Solution
 
-Because $43 - 26$ means $43$ take away $26,$ we begin by modeling the $43.$  
+Because $43 - 26$ means 43 take away 26, we begin by modeling the 43.  
 
-Now, we need to take away $26,$ which is $2$ tens and $6$ ones. We cannot take away $6$ ones from $3$ ones. So, we exchange $1$ ten for $10$ ones.  
+Now, we need to take away 26, which is 2 tens and 6 ones. We cannot take away 6 ones from 3 ones. So, we exchange 1 ten for 10 ones.  
 
-Now we can take away $2$ tens and $6$ ones.  
+Now we can take away 2 tens and 6 ones.  
 
-Count the number of blocks remaining. There is $1$ ten and $7$ ones, which is $17.$
+Count the number of blocks remaining. There is 1 ten and 7 ones, which is 17.
 
 $43 - 26 = 17$
 
@@ -186,7 +186,7 @@ Subtract and then check by adding:
 </tr>
 <tr>
 <td>Subtract 7 from 9.</td>
-<td>$2$</td>
+<td>2</td>
 </tr>
 <tr>
 <td>Check with addition.<br />
@@ -212,7 +212,7 @@ $2 + 7 = 9✓$</td>
 </tr>
 <tr>
 <td>Subtract 3 from 8.</td>
-<td>$5$</td>
+<td>5</td>
 </tr>
 <tr>
 <td>Check with addition.<br />
@@ -288,7 +288,7 @@ Subtract and then check by adding: $86 - 54.$
 
 Subtract and then check by adding: $99 - 74.$
 
-When we modeled subtracting $26$ from $43,$ we exchanged $1$ ten for $10$ ones. When we do this without the model, we say we borrow $1$ from the tens place and add $10$ to the ones place.
+When we modeled subtracting 26 from 43, we exchanged 1 ten for 10 ones. When we do this without the model, we say we borrow 1 from the tens place and add 10 to the ones place.
 
 ### How To
 
@@ -532,11 +532,11 @@ As with addition, word phrases can tell us to operate on two numbers using subtr
 
 | Operation   | Word Phrase     | Example                           | Expression |
 |-------------|-----------------|-----------------------------------|------------|
-| Subtraction | minus           | $5$ minus $1$                 | $5 - 1$  |
-|             | difference      | the difference of $9$ and $4$ | $9 - 4$  |
-|             | decreased by    | $7$ decreased by $3$          | $7 - 3$  |
-|             | less than       | $5$ less than $8$             | $8 - 5$  |
-|             | subtracted from | $1$ subtracted from $6$       | $6 - 1$  |
+| Subtraction | minus           | 5 minus 1                 | $5 - 1$  |
+|             | difference      | the difference of 9 and 4 | $9 - 4$  |
+|             | decreased by    | 7 decreased by 3          | $7 - 3$  |
+|             | less than       | 5 less than 8             | $8 - 5$  |
+|             | subtracted from | 1 subtracted from 6       | $6 - 1$  |
 
 Table 1.3
 
@@ -544,8 +544,8 @@ Table 1.3
 
 Translate and then simplify:
 
-1.  ⓐ the difference of $13$ and $8$
-2.  ⓑ subtract $24$ from $43$
+1.  ⓐ the difference of 13 and 8
+2.  ⓑ subtract 24 from 43
 
 #### Solution
 
@@ -573,15 +573,15 @@ Translate and then simplify:
 
 Translate and simplify:
 
-1.  ⓐ the difference of $14$ and $9$
-2.  ⓑ subtract $21$ from $37$
+1.  ⓐ the difference of 14 and 9
+2.  ⓑ subtract 21 from 37
 
 ### Try It 1.72
 
 Translate and simplify:
 
-1.  ⓐ $11$ decreased by $6$
-2.  ⓑ $18$ less than $67$
+1.  ⓐ 11 decreased by 6
+2.  ⓑ 18 less than 67
 
 ### Subtract Whole Numbers in Applications
 
@@ -589,7 +589,7 @@ To solve applications with subtraction, we will use the same plan that we used w
 
 ### Example 1.37
 
-The temperature in Chicago one morning was $73$ degrees Fahrenheit. A cold front arrived and by noon the temperature was $27$ degrees Fahrenheit. What was the difference between the temperature in the morning and the temperature at noon?
+The temperature in Chicago one morning was 73 degrees Fahrenheit. A cold front arrived and by noon the temperature was 27 degrees Fahrenheit. What was the difference between the temperature in the morning and the temperature at noon?
 
 #### Solution
 
@@ -604,11 +604,11 @@ We are asked to find the difference between the morning temperature and the noon
 
 ### Try It 1.73
 
-The high temperature on $\text{June}\ 1^{\text{st}}$ in Boston was $77$ degrees Fahrenheit, and the low temperature was $58$ degrees Fahrenheit. What was the difference between the high and low temperatures?
+The high temperature on $\text{June}\ 1^{\text{st}}$ in Boston was 77 degrees Fahrenheit, and the low temperature was 58 degrees Fahrenheit. What was the difference between the high and low temperatures?
 
 ### Try It 1.74
 
-The weather forecast for June $2$ in St Louis predicts a high temperature of $90$ degrees Fahrenheit and a low of $73$ degrees Fahrenheit. What is the difference between the predicted high and low temperatures?
+The weather forecast for June 2 in St Louis predicts a high temperature of 90 degrees Fahrenheit and a low of 73 degrees Fahrenheit. What is the difference between the predicted high and low temperatures?
 
 ### Example 1.38
 
@@ -831,67 +831,67 @@ In the following exercises, translate and simplify.
 
 183\.
 
-The difference of $10$ and $3$
+The difference of 10 and 3
 
 184\.
 
-The difference of $12$ and $8$
+The difference of 12 and 8
 
 185\.
 
-The difference of $15$ and $4$
+The difference of 15 and 4
 
 186\.
 
-The difference of $18$ and $7$
+The difference of 18 and 7
 
 187\.
 
-Subtract $6$ from $9$
+Subtract 6 from 9
 
 188\.
 
-Subtract $8$ from $9$
+Subtract 8 from 9
 
 189\.
 
-Subtract $28$ from $75$
+Subtract 28 from 75
 
 190\.
 
-Subtract $59$ from $81$
+Subtract 59 from 81
 
 191\.
 
-$45$ decreased by $20$
+45 decreased by 20
 
 192\.
 
-$37$ decreased by $24$
+37 decreased by 24
 
 193\.
 
-$92$ decreased by $67$
+92 decreased by 67
 
 194\.
 
-$75$ decreased by $49$
+75 decreased by 49
 
 195\.
 
-$12$ less than $16$
+12 less than 16
 
 196\.
 
-$15$ less than $19$
+15 less than 19
 
 197\.
 
-$38$ less than $61$
+38 less than 61
 
 198\.
 
-$47$ less than $62$
+47 less than 62
 
 **Mixed Practice**
 
@@ -941,19 +941,19 @@ Sixty more than ninety-three
 
 209\.
 
-$13$ less than $41$
+13 less than 41
 
 210\.
 
-$28$ less than $36$
+28 less than 36
 
 211\.
 
-The difference of $100$ and $76$
+The difference of 100 and 76
 
 212\.
 
-The difference of $1,000$ and $945$
+The difference of 1,000 and 945
 
 **Subtract Whole Numbers in Applications**
 
@@ -961,19 +961,19 @@ In the following exercises, solve.
 
 213\.
 
-**Temperature** The high temperature on June $2$ in Las Vegas was $80$ degrees and the low temperature was $63$ degrees. What was the difference between the high and low temperatures?
+**Temperature** The high temperature on June 2 in Las Vegas was 80 degrees and the low temperature was 63 degrees. What was the difference between the high and low temperatures?
 
 214\.
 
-**Temperature** The high temperature on June $1$ in Phoenix was $97$ degrees and the low was $73$ degrees. What was the difference between the high and low temperatures?
+**Temperature** The high temperature on June 1 in Phoenix was 97 degrees and the low was 73 degrees. What was the difference between the high and low temperatures?
 
 215\.
 
-**Class size** Olivia’s third grade class has $35$ children. Last year, her second grade class had $22$ children. What is the difference between the number of children in Olivia’s third grade class and her second grade class?
+**Class size** Olivia’s third grade class has 35 children. Last year, her second grade class had 22 children. What is the difference between the number of children in Olivia’s third grade class and her second grade class?
 
 216\.
 
-**Class size** There are $82$ students in the school band and $46$ in the school orchestra. What is the difference between the number of students in the band and the orchestra?
+**Class size** There are 82 students in the school band and 46 in the school orchestra. What is the difference between the number of students in the band and the orchestra?
 
 217\.
 
@@ -995,11 +995,11 @@ In the following exercises, solve.
 
 221\.
 
-**Road trip** Noah was driving from Philadelphia to Cincinnati, a distance of $502$ miles. He drove $115$ miles, stopped for gas, and then drove another $230$ miles before lunch. How many more miles did he have to travel?
+**Road trip** Noah was driving from Philadelphia to Cincinnati, a distance of 502 miles. He drove 115 miles, stopped for gas, and then drove another 230 miles before lunch. How many more miles did he have to travel?
 
 222\.
 
-**Test Scores** Sara needs $350$ points to pass her course. She scored $75,50,70,\ \text{and}\ 80$ on her first four tests. How many more points does Sara need to pass the course?
+**Test Scores** Sara needs 350 points to pass her course. She scored $75,50,70,\ \text{and}\ 80$ on her first four tests. How many more points does Sara need to pass the course?
 
 #### Writing Exercises
 

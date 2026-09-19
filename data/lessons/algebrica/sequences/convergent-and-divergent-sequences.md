@@ -53,7 +53,7 @@ So we can define:
 
 \\[n_0 = \left\lceil \frac{2}{\varepsilon} - 2 \right\rceil \\]
 
-From this point onward, every term of the sequence stays within a distance \\( \varepsilon \\) of the limit \\(1.\\) Hence, by definition:
+From this point onward, every term of the sequence stays within a distance \\( \varepsilon \\) of the limit 1. Hence, by definition:
 
 \\[\lim_{n \to +\infty} \frac{n}{n + 2} = 1. \\]
 

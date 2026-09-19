@@ -8,15 +8,15 @@ In  Chapter , we learned how to multiply polynomials, such as when you start wit
 
 When you write $x^2+2x$, you have an algebraic expression built with two terms---two parts that are *added* together. When you write $x(x+2)$, you have an algebraic expression built with two factors---two parts that are *multiplied* together. Factoring is useful, because sometimes (but not always) having your expression written as parts that are *multiplied* together makes it easy to simplify the expression.
 
-You've seen this with fractions. To simplify $\frac{15}{35}$, breaking down the numerator and denominator into factors is useful: $\frac{3\cdot5}{7\cdot5}$. Now you can see that the factors of $5$ cancel.
+You've seen this with fractions. To simplify $\frac{15}{35}$, breaking down the numerator and denominator into factors is useful: $\frac{3\cdot5}{7\cdot5}$. Now you can see that the factors of 5 cancel.
 
-There are other reasons to appreciate the value in factoring. One reason is that there is a relationship between a factored polynomial and the horizontal intercepts of its graph. For example in the graph of $y=(x+2)(x-3)$, the horizontal intercepts are $(-2,0)$ and $(3,0)$. Note the $x$-values are $-2$ and $3$, and think about what happens when you subsitutue those numbers in for $x$ in $y=(x+2)(x-3)$. We will explore this more fully in  Section .
+There are other reasons to appreciate the value in factoring. One reason is that there is a relationship between a factored polynomial and the horizontal intercepts of its graph. For example in the graph of $y=(x+2)(x-3)$, the horizontal intercepts are $(-2,0)$ and $(3,0)$. Note the $x$-values are $-2$ and 3, and think about what happens when you subsitutue those numbers in for $x$ in $y=(x+2)(x-3)$. We will explore this more fully in  Section .
 
 *A graph of $y=(x+2)(x-3)$*
 
 ## Identifying the Greatest Common Factor
 
-The most basic technique for factoring involves recognizing the *greatest common factor* between two expressions, which is the largest factor that goes in evenly to both expressions. For example, the greatest common factor between $6$ and $8$ is $2$, since $2$ divides nicely into both $6$ and $8$ and no larger number would divide nicely into both $6$ and $8$.
+The most basic technique for factoring involves recognizing the *greatest common factor* between two expressions, which is the largest factor that goes in evenly to both expressions. For example, the greatest common factor between 6 and 8 is 2, since 2 divides nicely into both 6 and 8 and no larger number would divide nicely into both 6 and 8.
 
 Similarly, the greatest common factor between $4x$ and $3x^2$ is $x$. If you write $4x$ as a product of its factors, you have $2\cdot 2 \cdot x$. And if you fully factor $3x^2$, you have $3\cdot x\cdot x$. The only factor they have in common is $x$, so that is the greatest common factor. No larger expression goes in nicely to both expressions.
 
@@ -30,7 +30,7 @@ $$
 \begin{aligned}6x^2 & =2\cdot3\cdot x\cdot x & 70x & =2\cdot5\cdot7\cdot x \\ 6x^2 & =\attention{2}\cdot3\cdot \attention{x}\cdot x & 70x & =\attention{2}\cdot5\cdot7\cdot \attention{x}\end{aligned}
 $$
 
-With $2$ and $x$ in common, the greatest common factor is $2x$.
+With 2 and $x$ in common, the greatest common factor is $2x$.
 
 **Exercise**
 
@@ -58,25 +58,25 @@ To factor $12x^2+15x$:
 
 Factor the polynomial $3x^3+3x^2-9$.
 
-1. We identify the greatest common factor as $3$, because $3$ is the only common factor between $3x^3$, $3x^2$ and $9$.
+1. We identify the greatest common factor as 3, because 3 is the only common factor between $3x^3$, $3x^2$ and 9.
 2. We write:
    $$
     3x^3+3x^2-9=3(\phantom{x^2}+\phantom{x^2}-\phantom{3}) 
    $$
    .
-3. We ask the question "$3$ times what gives $3x^3$?" The answer is $x^3$. Now we have:
+3. We ask the question "3 times what gives $3x^3$?" The answer is $x^3$. Now we have:
    $$
     3x^3+3x^2-9=3(x^3+\phantom{x^2}-\phantom{3}) 
    $$
    .
 
-   We ask the question "$3$ times what gives $3x^2$?" The answer is $x^2$. Now we have:
+   We ask the question "3 times what gives $3x^2$?" The answer is $x^2$. Now we have:
    $$
     3x^3+3x^2-9=3(x^3+x^2-\phantom{3}) 
    $$
    .
 
-   We ask the question "$3$ times what gives $9$?" The answer is $3$. Now we have:
+   We ask the question "3 times what gives 9?" The answer is 3. Now we have:
    $$
     3x^3+3x^2-9=3(x^3+x^2-3) 
    $$
@@ -111,7 +111,7 @@ Previous examples did not cover every nuance with factoring out the greatest com
 
 Factor $-35m^5+5m^4-10m^3$.
 
-First, we identify the common factor. The number $5$ is the greatest common factor of the three coefficients (which were $-35$, $5$, and $-10$) and also $m^3$ is the largest expression that divides $m^5$, $m^4$, and $m^3$. Therefore the greatest common factor is $5m^3$.
+First, we identify the common factor. The number 5 is the greatest common factor of the three coefficients (which were $-35$, 5, and $-10$) and also $m^3$ is the largest expression that divides $m^5$, $m^4$, and $m^3$. Therefore the greatest common factor is $5m^3$.
 
 In this example, the leading term is a negative number. When this happens, we will make it common practice to take that negative as part of the greatest common factor. So we will proceed by factoring out $-5m^3$. Note the signs change inside the parentheses.
 
@@ -131,7 +131,7 @@ $$
 
 .
 
-The number $7$ divides all of the numerical coefficients. Separately, no power of $n$ is part of the greatest common factor because the $14$ term has no $n$ factors. So the greatest common factor is just $7$. We proceed by factoring that out:
+The number 7 divides all of the numerical coefficients. Separately, no power of $n$ is part of the greatest common factor because the 14 term has no $n$ factors. So the greatest common factor is just 7. We proceed by factoring that out:
 
 $$
 \begin{aligned}14-7n^2+28n^4-21n&=28n^4-7n^2-21n+14 \\ &=7\mathopen{}\left(4n^4-n^2-3n+2\right)\mathclose{}\end{aligned}
@@ -141,7 +141,7 @@ $$
 
 Factor $24ab^2+16a^2b^3-12a^3b^2$.
 
-There are two variables in this polynomial, but that does not change the factoring strategy. The greatest numerical factor between the three terms is $4$. The variable $a$ divides all three terms, and $b^2$ divides all three terms. So we have:
+There are two variables in this polynomial, but that does not change the factoring strategy. The greatest numerical factor between the three terms is 4. The variable $a$ divides all three terms, and $b^2$ divides all three terms. So we have:
 
 $$
 \begin{aligned}24ab^2+16a^2b^3-12a^3b^2 &=4ab^2\mathopen{}\left(\phantom{6}+\phantom{4ab}-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow>&=4ab^2\mathopen{}\left(6+\phantom{4ab}-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow>&=4ab^2\mathopen{}\left(6+4ab-\phantom{3a^2}\right)\mathclose{}</mrow> <mrow> &=4ab^2\mathopen{}\left(6+4ab-3a^2\right)\mathclose{}\end{aligned}
@@ -151,7 +151,7 @@ $$
 
 Factor $4m^2n-3xy$.
 
-There are no common factors in those two terms (unless you want to count $1$ or $-1$, but we do not count these for the purposes of identifying a greatest common factor). In this situation we can say the polynomial is *prime* or *irreducible*, and leave it as it is.
+There are no common factors in those two terms (unless you want to count 1 or $-1$, but we do not count these for the purposes of identifying a greatest common factor). In this situation we can say the polynomial is *prime* or *irreducible*, and leave it as it is.
 
 **Example**
 

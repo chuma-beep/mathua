@@ -32,7 +32,7 @@ The $\sqrt{\phantom{x}}$ function is consistent; for example, every time you eva
 
 *Values of $\operatorname{sqrt}(x)$*
 
-The parentheses in $\operatorname{sqrt}\highlight{(\phantom{x})}$ are very important. To see why, try to put yourself in the "mind" of a computer. The computer will recognize `sqrt` and know that it needs to compute a square root but without parentheses it will think that it needs to compute `sqrt4` and then put a `9` on the end, which would produce a final result of $29$. This is probably not what was intended. And so the purpose of the parentheses in `sqrt(49)` is to  be deliberately clear.
+The parentheses in $\operatorname{sqrt}\highlight{(\phantom{x})}$ are very important. To see why, try to put yourself in the "mind" of a computer. The computer will recognize `sqrt` and know that it needs to compute a square root but without parentheses it will think that it needs to compute `sqrt4` and then put a `9` on the end, which would produce a final result of 29. This is probably not what was intended. And so the purpose of the parentheses in `sqrt(49)` is to  be deliberately clear.
 
 Functions have their own names. We've seen a function named $\operatorname{sqrt}$, but any name you can imagine is allowable. In the sciences, it is common to name functions with whole words, like $\operatorname{weight}$ or $\operatorname{health\_index}$. In math, we often abbreviate such function names to $w$ or $h$. And of course, since the word "function" itself starts with "f," we will often name a function $f$.
 
@@ -56,9 +56,9 @@ $$
 
 **Example**
 
-$f(13)$ is pronounced "f of 13." The word "of" is very important, because it reminds us that $f$ is a process and we are about to apply that process to the input value $13$. So $f$ is the function, $13$ is the input, and $f(13)$ is the output we'd get from using $13$ as input.
+$f(13)$ is pronounced "f of 13." The word "of" is very important, because it reminds us that $f$ is a process and we are about to apply that process to the input value 13. So $f$ is the function, 13 is the input, and $f(13)$ is the output we'd get from using 13 as input.
 
-$f(x)$ is pronounced "f of x." This is just like the previous example, except that the input is not any specific number. The value of $x$ could be $13$ or any other number. Whatever $x$'s value, $f(x)$ means the corresponding output from the function $f$.
+$f(x)$ is pronounced "f of x." This is just like the previous example, except that the input is not any specific number. The value of $x$ could be 13 or any other number. Whatever $x$'s value, $f(x)$ means the corresponding output from the function $f$.
 
 $\operatorname{BudgetDeficit}(2017)$ is pronounced "BudgetDeficit of 2017." This is probably about a function that takes a year as input, and gives that year's federal budget deficit as output. The process here of changing a year into a dollar amount might not involve any mathematical formula, but rather looking up information from the Congressional Budget Office's website.
 
@@ -185,7 +185,7 @@ Now given a graph of $f$, we interpret coordinates in the same way.
 
 **Example**
 
-In  Figure  we have a graph of a function $f$. If we wish to find $f(1)$, we recognize that $1$ is being used as an input. So we would want to find a point of the form $(1,\phantom{y})$. Seeking out $x$-coordinate $1$ in  Figure , we find that the only such point is $(1,2)$. Therefore the output for $1$ is $2$; in other words $f(1)=2$.
+In  Figure  we have a graph of a function $f$. If we wish to find $f(1)$, we recognize that 1 is being used as an input. So we would want to find a point of the form $(1,\phantom{y})$. Seeking out $x$-coordinate 1 in  Figure , we find that the only such point is $(1,2)$. Therefore the output for 1 is 2; in other words $f(1)=2$.
 
 **Exercise**
 
@@ -205,7 +205,7 @@ What was the unemployment in 2008? It is a straightforward matter to use  Figure
 
 If we use the table to establish that $u(2009)\approx9.25$, then we should be prepared to translate that into everyday-English using the context of the function: In 2009, unemployment in the  was about $9.25\%$.
 
-If we ask the question "when was unemployment at $5\%$," we can read the graph and see that there were two such times: mid-2007 and about 2016. But there is again a more mathematical notation-heavy way to ask this question. Namely, since we are being told that the output of $u$ is $5$, we are being asked to solve the equation $u(t)=5$. So the following communicate the same thing:
+If we ask the question "when was unemployment at $5\%$," we can read the graph and see that there were two such times: mid-2007 and about 2016. But there is again a more mathematical notation-heavy way to ask this question. Namely, since we are being told that the output of $u$ is 5, we are being asked to solve the equation $u(t)=5$. So the following communicate the same thing:
 
 "When was unemployment at $5\%$?"
 
@@ -236,13 +236,13 @@ This has been visualized in  Figure .
 
 **Example**
 
-Consider a function $f$ that squares its input and then adds $1$. Translate this verbal description of $f$ into a table, a graph, and a formula.
+Consider a function $f$ that squares its input and then adds 1. Translate this verbal description of $f$ into a table, a graph, and a formula.
 
 To make a table for $f$, we'll have to select some input $x$-values. These choices are left entirely up to us, so we might as well choose small, easy-to-work-with values. However we shouldn't shy away from negative input values. Given the verbal description, we should be able to compute a column of output values.  Figure  is one possible table that we might end up with.
 
 Once we have a table for $f$, we can make a graph for $f$ as in  Figure , using the table to plot points.
 
-Lastly, we must find a formula for $f$. This means we need to write an algebraic expression that says the same thing about $f$ as the verbal description, the table, and the graph. For this example, we can focus on the verbal description. Since $f$ takes its input, squares it, and adds $1$, we have that
+Lastly, we must find a formula for $f$. This means we need to write an algebraic expression that says the same thing about $f$ as the verbal description, the table, and the graph. For this example, we can focus on the verbal description. Since $f$ takes its input, squares it, and adds 1, we have that
 
 $$
  f(x)=x^2+1 

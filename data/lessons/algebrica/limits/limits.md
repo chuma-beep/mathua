@@ -145,7 +145,7 @@ For the exponential function with base \\( 0 < a < 1 \\), we have:
 
 \\[\lim_{x \to -\infty} a^x = +\infty \quad \text{and} \quad \lim_{x \to +\infty} a^x = 0\\]
 
-###### If the base is greater than \\(1\\), the exponential function increases without bound in one direction and approaches zero in the other. If the base is strictly between \\(0\\) and \\(1\\), this behaviour is reversed.
+###### If the base is greater than 1, the exponential function increases without bound in one direction and approaches zero in the other. If the base is strictly between 0 and 1, this behaviour is reversed.
 
 
 For the power function with an even exponent, we have:

@@ -20,12 +20,12 @@ The set of natural numbers, denoted by \\(\mathbb{N}\\), is the collection of no
 \mathbb{N} = \\{0, 1, 2, 3, 4, \ldots\\}
 \\]
 
-Each element is obtained by adding one to the previous, starting from \\(0\\). Because natural numbers express how many elements a collection contains, they are also called cardinal numbers. Whether zero belongs to \\(\mathbb{N}\\) is a matter of convention that varies across traditions; the two most common choices are recorded below:
+Each element is obtained by adding one to the previous, starting from 0. Because natural numbers express how many elements a collection contains, they are also called cardinal numbers. Whether zero belongs to \\(\mathbb{N}\\) is a matter of convention that varies across traditions; the two most common choices are recorded below:
 
 \\[\mathbb{N}_0 = \\{0, 1, 2, 3, \ldots\\}\\]
 \\[ \mathbb{N}^+ = \\{1, 2, 3, \ldots\\}\\]
 
-From a foundational point of view, \\(\mathbb{N}\\) is the smallest inductive set contained in \\(\mathbb{R}\\): it contains \\(0\\) and, whenever it contains an element \\(n\\), it also contains \\(n+1\\). This property is the basis of the principle of mathematical induction.
+From a foundational point of view, \\(\mathbb{N}\\) is the smallest inductive set contained in \\(\mathbb{R}\\): it contains 0 and, whenever it contains an element \\(n\\), it also contains \\(n+1\\). This property is the basis of the principle of mathematical induction.
 
 ## Integer numbers
 

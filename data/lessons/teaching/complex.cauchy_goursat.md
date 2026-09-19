@@ -12,4 +12,4 @@ Cauchy-Goursat via Goursat lemma shows analytic implies infinitely differentiabl
 
 ## Example
 
-$f(z)=1/z$ not analytic at $0$ inside $|z|=1$: $\oint_{|z|=1} dz/z=2\pi i\neq0$, so theorem fails due to singularity.
+$f(z)=1/z$ not analytic at 0 inside $|z|=1$: $\oint_{|z|=1} dz/z=2\pi i\neq0$, so theorem fails due to singularity.

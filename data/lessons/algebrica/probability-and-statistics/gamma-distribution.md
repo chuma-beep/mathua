@@ -18,10 +18,10 @@ The support of the distribution is the positive half-line, reflecting the fact t
 
 ![Plot of the gamma distribution for different parameter values.](/diagrams/algebrica/gamma-distribution.png)
 
-When \\(\alpha\\) grows beyond \\(1\\), the gamma density no longer peaks at zero but forms a maximum at a positive value of \\( x \\). As \\(\alpha\\) increases, this peak moves to the right and the overall shape becomes smoother and less skewed.
+When \\(\alpha\\) grows beyond 1, the gamma density no longer peaks at zero but forms a maximum at a positive value of \\( x \\). As \\(\alpha\\) increases, this peak moves to the right and the overall shape becomes smoother and less skewed.
 
 
-As with any continuous distribution, the total area under the density curve must equal 1. This is the same principle that holds for the [normal distribution](<../normal-distribution/>), whose density [integrates](<../definite-integrals/>) to \\(1\\) over the entire real line. The gamma distribution follows the same requirement: its density is defined so that the integral over the positive half-line is exactly equal to \\(1\\). Formally, we have
+As with any continuous distribution, the total area under the density curve must equal 1. This is the same principle that holds for the [normal distribution](<../normal-distribution/>), whose density [integrates](<../definite-integrals/>) to 1 over the entire real line. The gamma distribution follows the same requirement: its density is defined so that the integral over the positive half-line is exactly equal to 1. Formally, we have
 
 \\[\int_{0}^{+\infty} \frac{1}{\beta^{\alpha}\,\Gamma(\alpha)}\, x^{\alpha - 1}\, e^{-x/\beta}\, dx = 1 \\]
 

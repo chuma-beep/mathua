@@ -133,19 +133,19 @@ Consider the following integral, which involves a product of two exponential ter
 \int 8^x \cdot 2^{-3x + 4} \\, dx
 \\]
 
-The integrand can be simplified by applying the properties of powers. The exponent of \\( 2 \\) in the second factor can be split as:
+The integrand can be simplified by applying the properties of powers. The exponent of 2 in the second factor can be split as:
 
 \\[
 2^{-3x+4} = 2^{-3x} \cdot 2^4 = 16 \cdot 2^{-3x}
 \\]
 
-Substituting this identity into the integral and extracting the constant \\( 16 \\) by linearity, the expression becomes:
+Substituting this identity into the integral and extracting the constant 16 by linearity, the expression becomes:
 
 \\[
 \int 8^x \cdot 2^{-3x+4} \\, dx = 16 \int 8^x \cdot 2^{-3x} \\, dx
 \\]
 
-The base \\( 8 \\) can be rewritten as a power of \\( 2 \\), since \\( 8 = 2^3 \\). The integrand then reduces to a single power of \\( 2 \\):
+The base 8 can be rewritten as a power of 2, since \\( 8 = 2^3 \\). The integrand then reduces to a single power of 2:
 
 \\[
 \begin{aligned}
@@ -157,7 +157,7 @@ The base \\( 8 \\) can be rewritten as a power of \\( 2 \\), since \\( 8 = 2^3 \
 \end{aligned}
 \\]
 
-The integral of the constant function \\( 1 \\) is \\( x + c \\), so the final result is:
+The integral of the constant function 1 is \\( x + c \\), so the final result is:
 
 \\[
 \int 8^x \cdot 2^{-3x + 4} \\, dx = 16x + c
@@ -179,13 +179,13 @@ The two exponents can be separated by means of the properties of powers:
 9^{x-1} \cdot 3^{-x+2} = 9^x \cdot 9^{-1} \cdot 3^{-x} \cdot 3^2
 \\]
 
-Since \\( 3^2 = 9 \\), the factor \\( 9^{-1} \cdot 9 \\) reduces to \\( 1 \\) and the integrand simplifies to:
+Since \\( 3^2 = 9 \\), the factor \\( 9^{-1} \cdot 9 \\) reduces to 1 and the integrand simplifies to:
 
 \\[
 9^x \cdot 9^{-1} \cdot 3^{-x} \cdot 9 = 9^x \cdot 3^{-x}
 \\]
 
-Rewriting \\( 9^x \\) as \\( 3^{2x} \\), the product of the two exponential factors with base \\( 3 \\) collapses into a single power:
+Rewriting \\( 9^x \\) as \\( 3^{2x} \\), the product of the two exponential factors with base 3 collapses into a single power:
 
 \\[
 9^x \cdot 3^{-x} = 3^{2x} \cdot 3^{-x} = 3^{2x - x} = 3^x
@@ -203,7 +203,7 @@ Applying formula \\( (2) \\), the final result is:
 \int 9^{x-1} \cdot 3^{-x+2} \\, dx = \frac{1}{\ln 3} \cdot 3^x + c
 \\]
 
-> The reduction to a common base is the key step: once both factors are expressed as powers of \\( 3 \\), the integrand becomes a single exponential and the integration is immediate.
+> The reduction to a common base is the key step: once both factors are expressed as powers of 3, the integrand becomes a single exponential and the integration is immediate.
 
 ## Example 4
 
@@ -213,7 +213,7 @@ Consider the following integral:
 \int e^{3x - 2} \\, dx
 \\]
 
-The exponent is a linear function of \\( x \\), so the standard rule for exponentials of the form \\( e^{ax+b} \\) applies directly. The derivative of \\( 3x - 2 \\) is \\( 3 \\), and the compensating factor in the antiderivative is therefore \\( \dfrac{1}{3} \\):
+The exponent is a linear function of \\( x \\), so the standard rule for exponentials of the form \\( e^{ax+b} \\) applies directly. The derivative of \\( 3x - 2 \\) is 3, and the compensating factor in the antiderivative is therefore \\( \dfrac{1}{3} \\):
 
 \\[
 \int e^{3x - 2} \\, dx = \frac{1}{3} \\, e^{3x - 2} + c
@@ -233,7 +233,7 @@ The differentiation recovers the original integrand, so the antiderivative is co
 
 ## A common oversight
 
-A frequent source of error in the integration of exponential functions arises when the exponent carries a coefficient different from \\( 1 \\). A common incorrect formulation is:
+A frequent source of error in the integration of exponential functions arises when the exponent carries a coefficient different from 1. A common incorrect formulation is:
 
 \\[
 \int e^{3x - 2} \\, dx = e^{3x - 2} + c
@@ -255,7 +255,7 @@ Consider the following integral, in which the exponent is no longer a linear fun
 \int x \\, e^{x^2} \\, dx
 \\]
 
-The exponent \\( x^2 \\) is a quadratic function, so the rule for exponentials of the form \\( e^{ax+b} \\) cannot be applied directly. The structure of the integrand, however, suggests the appropriate strategy. The derivative of \\( x^2 \\) is \\( 2x \\), and a factor \\( x \\) is already present in the integrand. By multiplying and dividing by \\( 2 \\), the missing constant can be introduced without altering the value of the integral:
+The exponent \\( x^2 \\) is a quadratic function, so the rule for exponentials of the form \\( e^{ax+b} \\) cannot be applied directly. The structure of the integrand, however, suggests the appropriate strategy. The derivative of \\( x^2 \\) is \\( 2x \\), and a factor \\( x \\) is already present in the integrand. By multiplying and dividing by 2, the missing constant can be introduced without altering the value of the integral:
 
 \\[
 \int x \\, e^{x^2} \\, dx = \frac{1}{2} \int 2x \\, e^{x^2} \\, dx
@@ -329,7 +329,7 @@ A direct differentiation confirms the result which coincides with the original i
 \\]
 
 
-When the polynomial factor has degree greater than \\( 1 \\), a single application of the formula is not sufficient and the procedure must be iterated. Consider the integral:
+When the polynomial factor has degree greater than 1, a single application of the formula is not sufficient and the procedure must be iterated. Consider the integral:
 
 \\[
 \int x^2 \\, e^x \\, dx

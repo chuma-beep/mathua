@@ -12,4 +12,4 @@ Bipartite graphs $\chi=2$ (e.g. $K_{3,3}$, trees). Petersen graph has Eulerian t
 
 ## Example
 
-$K_3$ (triangle): all degrees $2$ (even) → Eulerian circuit around the triangle; it is also its own Hamiltonian cycle; $\chi(K_3)=3$.
+$K_3$ (triangle): all degrees 2 (even) → Eulerian circuit around the triangle; it is also its own Hamiltonian cycle; $\chi(K_3)=3$.

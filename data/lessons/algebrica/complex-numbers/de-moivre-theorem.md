@@ -219,7 +219,7 @@ z^3 = 1
 
 At first glance, it seems obvious that \\( z = 1 \\) is a solution. But since we're working in the complex plane, we know there are three cube roots in total, equally spaced around the unit circle.
 
-Since the argument of a complex number is defined up to multiples of \\( 2\pi \\), we write \\( 1 \\) in exponential form as:
+Since the argument of a complex number is defined up to multiples of \\( 2\pi \\), we write 1 in exponential form as:
 
 \\[
 1 = e^{i \cdot 2k\pi}, \quad k \in \mathbb{Z}

@@ -8,11 +8,11 @@ Previously in  the section , we learned how to multiply two monomials together (
 
 Revenue
 
-Avery owns a local organic jam company that currently sells about $1500$ jars a month at a price of $$\$13$$ per jar. Avery has found that for each time they would raise the price of a jar by $25$ cents, they will sell $50$ fewer jars of jam per month.
+Avery owns a local organic jam company that currently sells about 1500 jars a month at a price of $$\$13$$ per jar. Avery has found that for each time they would raise the price of a jar by 25 cents, they will sell 50 fewer jars of jam per month.
 
-In general, this company's revenue can be calculated by multiplying the cost per jar by the total number of jars of jam sold. If we let $x$ represent the number of times the price was raised by $25$ cents, then the price will be $13+0.25x$.
+In general, this company's revenue can be calculated by multiplying the cost per jar by the total number of jars of jam sold. If we let $x$ represent the number of times the price was raised by 25 cents, then the price will be $13+0.25x$.
 
-At the same time, the number of jars the company sells will be the $1500$ that they currently sell each month, minus $50$ times $x$. This gives us the expression $1500-50x$ to represent how many jars the company will sell after raising the price $x$ times.
+At the same time, the number of jars the company sells will be the 1500 that they currently sell each month, minus 50 times $x$. This gives us the expression $1500-50x$ to represent how many jars the company will sell after raising the price $x$ times.
 
 Combining these expressions, we can write a formula for the revenue model:
 
@@ -32,9 +32,9 @@ $$
 
 **Example**
 
-A rectangle's length is $4$ meters longer than its width. Assume its width is $w$ meters. Use a simplified polynomial to model the rectangle's area in terms of $w$ as the only variable.
+A rectangle's length is 4 meters longer than its width. Assume its width is $w$ meters. Use a simplified polynomial to model the rectangle's area in terms of $w$ as the only variable.
 
-Since the rectangle's length is $4$ meters longer than its width, we can model its length as $w+4$ meters.
+Since the rectangle's length is 4 meters longer than its width, we can model its length as $w+4$ meters.
 
 The rectangle's area would be:
 
@@ -66,7 +66,7 @@ Generic rectangles can be used to visualize multiplying polynomials.
 
 Whether we're multiplying a monomial with a polynomial or two larger polynomials together, the first step is still based on the   . We'll start with multiplying two binomials and then move on to examples with larger polynomials.
 
-We know we can distribute the $3$ in $(x+2)3$ to obtain $(x+2)\multiplyright{3}=x\multiplyright{3}+2\multiplyright{3}$. We can actually distribute *anything* across $(x+2)$ if it is multiplied. For example:
+We know we can distribute the 3 in $(x+2)3$ to obtain $(x+2)\multiplyright{3}=x\multiplyright{3}+2\multiplyright{3}$. We can actually distribute *anything* across $(x+2)$ if it is multiplied. For example:
 
 $$
  (x+2)\cat=x\cdot \cat + 2\cdot \cat 
@@ -102,7 +102,7 @@ $$
 
 ### Multiplying Binomials Using Generic Rectangles
 
-We could approach this same example using the generic rectangle method. To use generic rectangles, we treat $x+2$ as the base of a rectangle, broken up into $x$ and $2$. Similarly we treat $x+3$ as the height, broken up into $x$ and $3$. Their product, $(x+2)(x+3)$, represents the large rectangle's area.
+We could approach this same example using the generic rectangle method. To use generic rectangles, we treat $x+2$ as the base of a rectangle, broken up into $x$ and 2. Similarly we treat $x+3$ as the height, broken up into $x$ and 3. Their product, $(x+2)(x+3)$, represents the large rectangle's area.
 
 *Setting up Generic Rectangles to Multiply $(x+2)(x+3)$*
 
@@ -170,13 +170,13 @@ Now we have a formula for Avery's revenue based on how many times they raise the
 
 **Example**
 
-Tyrone is an artist and he sells each of his paintings for $$\$200$$. Currently, he can sell $100$ paintings per year. So his annual revenue from selling paintings is $$\$200\cdot100=\$20000$$. He plans to raise the price. However, for each \$20 price increase, his customers will buy $5$ fewer paintings each year.
+Tyrone is an artist and he sells each of his paintings for $$\$200$$. Currently, he can sell 100 paintings per year. So his annual revenue from selling paintings is $$\$200\cdot100=\$20000$$. He plans to raise the price. However, for each \$20 price increase, his customers will buy 5 fewer paintings each year.
 
 Assume Tyrone would raise the price of his paintings $x$ times, each time by \$20. Use an expanded polynomial to represent his new revenue per year.
 
 Currently, each painting costs \$200. After raising the price $x$ times, each time by \$20, each painting's new price would be $200+20x$ dollars.
 
-Currently, Tyrone sells $100$ paintings per year. After raising the price $x$ times, each time selling $5$ fewer paintings, he would end up selling $100-5x$ paintings per year.
+Currently, Tyrone sells 100 paintings per year. After raising the price $x$ times, each time selling 5 fewer paintings, he would end up selling $100-5x$ paintings per year.
 
 His annual revenue can be calculated by multiplying each painting's price by the number of paintings he would sell:
 
@@ -196,7 +196,7 @@ $$
 \begin{aligned}3(x + 2)(2x + 5) &= 3\left(2x^2 + 5x + 4x + 10\right) \\ &= 3\left(2x^2 + 9x + 10\right)\end{aligned}
 $$
 
-Now we can complete the multiplication just by distributing that $3$.
+Now we can complete the multiplication just by distributing that 3.
 
 $$
 \begin{aligned}3(x + 2)(2x + 5) &= 6x^2 + 27x + 30\end{aligned}

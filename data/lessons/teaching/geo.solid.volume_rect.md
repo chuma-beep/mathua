@@ -9,7 +9,7 @@ where $l$, $w$, and $h$ are the length, width, and height.
 
 ## Why Multiply?
 
-A box $5$ inches long, $4$ inches wide, and $3$ inches high holds a bottom layer of $5 \cdot 4 = 20$ one-inch cubes. The box is $3$ layers high, so:
+A box 5 inches long, 4 inches wide, and 3 inches high holds a bottom layer of $5 \cdot 4 = 20$ one-inch cubes. The box is 3 layers high, so:
 
 \[V = 5 \cdot 4 \cdot 3 = 60 \text{ in}^3\]
 
@@ -27,7 +27,7 @@ where $B = lw$ is the base area. This viewpoint carries over to cylinders, which
 
 **Example**
 
-Find the volume of a rectangular prism measuring $5$ cm by $4$ cm by $3$ cm.
+Find the volume of a rectangular prism measuring 5 cm by 4 cm by 3 cm.
 
 *Solution*
 
@@ -37,7 +37,7 @@ The volume is $60\text{ cm}^3$.
 
 **Example**
 
-A storage box has a square base with sides of $2$ ft and stands $5$ ft tall. How many cubic feet does it hold?
+A storage box has a square base with sides of 2 ft and stands 5 ft tall. How many cubic feet does it hold?
 
 *Solution*
 

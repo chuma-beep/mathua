@@ -101,7 +101,7 @@ Of course, if a function has a global maximum, then it is automatically bounded 
 \\[f(x) = \sin\\!\left(\frac{1}{x}\right) \quad x \neq 0  
 \\]
 
-This function always stays between \\(-1\\) and \\(1\\), so it is indeed bounded. Nevertheless, it has neither a global maximum nor a global minimum, because as \\(x\\) approaches \\(0\\) the oscillations become arbitrarily rapid and the function never reaches its extreme values.
+This function always stays between \\(-1\\) and 1, so it is indeed bounded. Nevertheless, it has neither a global maximum nor a global minimum, because as \\(x\\) approaches 0 the oscillations become arbitrarily rapid and the function never reaches its extreme values.
 
 ## Monotone functions
 
@@ -188,7 +188,7 @@ An example of a logarithmic function is:
 
 \\[y = \log_2(x - 1) \\]
 
-This function is defined only when the argument of the logarithm, \\( x - 1 \\), is strictly positive. Therefore, the domain is \\( x > 1 \\). For any value of \\( x \\) less than or equal to \\(1\\), the expression becomes undefined because the [logarithm](<../logarithms/>) of a non-positive number does not exist in the real domain. Another example is:
+This function is defined only when the argument of the logarithm, \\( x - 1 \\), is strictly positive. Therefore, the domain is \\( x > 1 \\). For any value of \\( x \\) less than or equal to 1, the expression becomes undefined because the [logarithm](<../logarithms/>) of a non-positive number does not exist in the real domain. Another example is:
 
 \\[y = \ln(3x + 6) \\]
 
@@ -203,7 +203,7 @@ are defined for all values in the domain of \\( f(x) \\). An example of an expon
 
 \\[y = 2^x \\]
 
-This function is defined for every real value of \\( x \\), since the base \\( a = 2 \\) is positive and different from \\(1\\). Its domain is therefore the entire set of real numbers, \\( \mathbb{R} \\), while the range is strictly positive, \\( y > 0 \\).
+This function is defined for every real value of \\( x \\), since the base \\( a = 2 \\) is positive and different from 1. Its domain is therefore the entire set of real numbers, \\( \mathbb{R} \\), while the range is strictly positive, \\( y > 0 \\).
 
 
 Exponential functions of the form:

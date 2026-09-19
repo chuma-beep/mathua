@@ -12,4 +12,4 @@ $\int_{-\infty}^{\infty} dx/(x^{2}+1)=\pi$ via semicircle contour enclosing $i$;
 
 ## Example
 
-$\oint_{|z|=1} dz/z = 2\pi i$ (residue $1$ at $0$). Deform small loop around $0$ to unit circle without crossing pole — same integral.
+$\oint_{|z|=1} dz/z = 2\pi i$ (residue 1 at 0). Deform small loop around 0 to unit circle without crossing pole — same integral.

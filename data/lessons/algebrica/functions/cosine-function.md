@@ -2,7 +2,7 @@
 
 ## Cosine function
 
-The cosine [function](<../functions/>) \\( f(x) = \cos(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding [cosine](<../sine-and-cosine/>) value. Its graph is a periodic wave with a period of \\( 2 \pi \\) and an amplitude of 1, oscillating between \\(-1\\) and \\(1\\). The function \\( f(x) = \cos x \\) has all real numbers in its [domain](<../determining-the-domain-of-a-function/>), but its range is \\( -1 \leq \cos(x) \leq 1 \\).
+The cosine [function](<../functions/>) \\( f(x) = \cos(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding [cosine](<../sine-and-cosine/>) value. Its graph is a periodic wave with a period of \\( 2 \pi \\) and an amplitude of 1, oscillating between \\(-1\\) and 1. The function \\( f(x) = \cos x \\) has all real numbers in its [domain](<../determining-the-domain-of-a-function/>), but its range is \\( -1 \leq \cos(x) \leq 1 \\).
 
 ![](/diagrams/algebrica/sine-cosine-4.png)
 
@@ -16,7 +16,7 @@ The cosine [function](<../functions/>) \\( f(x) = \cos(x) \\) assigns to each an
   * Parity: [even](<../even-and-odd-functions/>), \\( \cos(-x) = \cos(x) \\)
   * Roots: \\( x = \dfrac{\pi}{2} + n \pi, \quad n \in \mathbb{Z} \\)
   * [Integer](<../integers/>) root: \\( x = \dfrac{\pi}{2} \\)
-  * [Maximum and minimum points](<../maximum-minimum-and-inflection-points/>): \\( \cos(x) \\) reaches its \\(1\\) at \\( x = 2k \pi \\) with \\( k \in \mathbb{Z} \\) and its minimum \\(-1\\) at \\( x = \pi + 2k \pi \\) with \\( k \in \mathbb{Z} \\).
+  * [Maximum and minimum points](<../maximum-minimum-and-inflection-points/>): \\( \cos(x) \\) reaches its 1 at \\( x = 2k \pi \\) with \\( k \in \mathbb{Z} \\) and its minimum \\(-1\\) at \\( x = \pi + 2k \pi \\) with \\( k \in \mathbb{Z} \\).
 
 
 ## Limits, derivatives, and integrals of the cosine function

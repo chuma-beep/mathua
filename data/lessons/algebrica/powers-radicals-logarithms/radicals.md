@@ -24,7 +24,7 @@ Their decimal expansions are infinite and non-repeating, lacking any predictable
 
 Formally, if \\( a \in \mathbb{N} \\) is not a perfect square, then \\( \sqrt{a} \notin \mathbb{Q} \\).
 
-> Square roots are not always irrational. The square root of a perfect square, such as \\(4\\) or \\(9\\), is rational. In contrast, the square root of a non-perfect square, such as \\(2\\) or \\(5\\), is irrational because it cannot be expressed as a fraction.
+> Square roots are not always irrational. The square root of a perfect square, such as 4 or 9, is rational. In contrast, the square root of a non-perfect square, such as 2 or 5, is irrational because it cannot be expressed as a fraction.
 
 ## Why is \\( \sqrt{2} \\) irrational?
 
@@ -46,7 +46,7 @@ This implies that \\( a^2 \\) is even, which means \\( a \\) must also be even. 
 \\]
 
 
-This means \\( b^2 \\) is also even, so \\( b \\) must be even too. But if both \\( a \\) and \\( b \\) are even, they share a common factor which is \\(2\\) which contradicts our initial assumption that \\( \dfrac{a}{b} \\) is in lowest terms. This means \\(\sqrt{2}\\) is irrational.
+This means \\( b^2 \\) is also even, so \\( b \\) must be even too. But if both \\( a \\) and \\( b \\) are even, they share a common factor which is 2 which contradicts our initial assumption that \\( \dfrac{a}{b} \\) is in lowest terms. This means \\(\sqrt{2}\\) is irrational.
 
 ## Powers with rational exponents
 

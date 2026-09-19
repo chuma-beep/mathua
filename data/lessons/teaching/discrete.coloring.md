@@ -12,4 +12,4 @@ Petersen graph $\chi=3$; $K_{3,3}$ bipartite $\chi=2$; $C_5$ $\chi=3$.
 
 ## Example
 
-Color $K_3$ (triangle): each vertex adjacent to other two, needs $3$ colors, so $\chi=3$.
+Color $K_3$ (triangle): each vertex adjacent to other two, needs 3 colors, so $\chi=3$.

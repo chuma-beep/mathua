@@ -65,7 +65,7 @@ The arctangent can also be written using the sine and cosine functions, which hi
 \\[
 \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)}
 \\]
-one can consider a right triangle in which the angle \\( \theta \\) satisfies \\( \tan(\theta) = x \\), that is, the ratio of the opposite side to the adjacent side equals \\( x \\). Taking the adjacent side equal to \\( 1 \\) and the opposite side equal to \\( x \\), the hypotenuse is \\( \sqrt{1 + x^2} \\) by the Pythagorean theorem, so that:
+one can consider a right triangle in which the angle \\( \theta \\) satisfies \\( \tan(\theta) = x \\), that is, the ratio of the opposite side to the adjacent side equals \\( x \\). Taking the adjacent side equal to 1 and the opposite side equal to \\( x \\), the hypotenuse is \\( \sqrt{1 + x^2} \\) by the Pythagorean theorem, so that:
 
 \\[\sin(\theta) = \frac{x}{\sqrt{1 + x^2}}\\]
 \\[ \cos(\theta) = \frac{1}{\sqrt{1 + x^2}}\\]
@@ -127,7 +127,7 @@ As \\( x \\) grows without bound, the corresponding angle \\( \theta \\) approac
   \\[  \lim_{x \to +\infty} \operatorname{arccot}(x) = 0\\]
 \\[ \qquad \lim_{x \to -\infty} \operatorname{arccot}(x) = \pi\\]
 
-  These values are never attained, since no finite value of \\( x \\) has cotangent equal to \\( 0 \\) or \\( \pi \\); they correspond to the directions in which the terminal side of the angle becomes parallel to the x-axis.
+  These values are never attained, since no finite value of \\( x \\) has cotangent equal to 0 or \\( \pi \\); they correspond to the directions in which the terminal side of the angle becomes parallel to the x-axis.
 
 ## Reference values of arccotangent
 
@@ -167,7 +167,7 @@ The arccotangent can also be expressed in relation to the arctangent, sine, and 
 \cot(\theta) = \frac{\cos(\theta)}{\sin(\theta)}
 \\]
 
-one can consider a right triangle in which \\( \cot(\theta) = x \\), that is, the ratio of the adjacent side to the opposite side equals \\( x \\). Taking the opposite side equal to \\( 1 \\) and the adjacent side equal to \\( x, \\) the hypotenuse is \\( \sqrt{1 + x^2} \\) by the Pythagorean theorem, so that:
+one can consider a right triangle in which \\( \cot(\theta) = x \\), that is, the ratio of the adjacent side to the opposite side equals \\( x \\). Taking the opposite side equal to 1 and the adjacent side equal to \\( x, \\) the hypotenuse is \\( \sqrt{1 + x^2} \\) by the Pythagorean theorem, so that:
 
 \\[\sin(\theta) = \frac{1}{\sqrt{1 + x^2}}\\]
 \\[ \cos(\theta) = \frac{x}{\sqrt{1 + x^2}}\\]

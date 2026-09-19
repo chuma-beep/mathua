@@ -14,11 +14,11 @@ Binomial equations are a specific type of algebraic [equations](<../equations>) 
 
 ## Equations with a degree less than two
 
-If the value of \\(n\\) equals \\(1\\), the given equation reduces to a simple [linear equation](<../linear-equations>) in the form of \\(ax + b = 0\\) that can be solved by isolating the variable \\(x\\) and finding its corresponding value.
+If the value of \\(n\\) equals 1, the given equation reduces to a simple [linear equation](<../linear-equations>) in the form of \\(ax + b = 0\\) that can be solved by isolating the variable \\(x\\) and finding its corresponding value.
 
 \\[ax+b= 0 \quad \rightarrow \quad x = \frac{-b}{a} \\]
 
-If the value of \\(n\\) equals \\(2\\), the given equation reduces to a [quadratic equation](<../quadratic-equations>) in the form of \\(ax^2 + b = 0\\) that can be solved using the [quadratic formula](<../quadratic-formula>) or in a more straightforward calculating the square root of the term \\(\large{\frac{-b}{a}}\\):
+If the value of \\(n\\) equals 2, the given equation reduces to a [quadratic equation](<../quadratic-equations>) in the form of \\(ax^2 + b = 0\\) that can be solved using the [quadratic formula](<../quadratic-formula>) or in a more straightforward calculating the square root of the term \\(\large{\frac{-b}{a}}\\):
 
 \\[x = \pm \sqrt{\frac{-b}{a}} \\]
 
@@ -28,7 +28,7 @@ If the value of \\(n\\) equals \\(2\\), the given equation reduces to a [quadrat
 
 If \\(n\\) is greater than 2, we are dealing with a relatively simple case of an equation with a degree higher than two. Generally, such [equations](<../equations>) can be solved by calculating the nth root of the value \\(\large{\frac{-b}{a}}\\) while considering two two distinct cases, depending on whether \\(n\\) os even or \\(n\\) odd:
 
-When \\(n\\) is even and \\(\large{\frac{-b}{a}}\\) is positive, we have two distinct solutions, or a single solution if \\(\large{\frac{-b}{a}}\\) equals \\(0\\) in the form:
+When \\(n\\) is even and \\(\large{\frac{-b}{a}}\\) is positive, we have two distinct solutions, or a single solution if \\(\large{\frac{-b}{a}}\\) equals 0 in the form:
 
 \\[x = \pm \sqrt[\Large{n}]{\frac{-b}{a}} \\]
 

@@ -33,7 +33,7 @@ Writing the right-hand side as \\( 2\tan(x/2)\cos^2(x/2) \\) and using the ident
 
 \\[\sin x = \frac{2t}{1 + t^2} \tag{2} \\]
 
-The double-angle identity for the cosine reads \\( \cos x = \cos^2(x/2) - \sin^2(x/2) \\). Dividing the numerator and the denominator (which equals \\( 1 \\) by the Pythagorean identity) by \\( \cos^2(x/2) \\), we arrive at:
+The double-angle identity for the cosine reads \\( \cos x = \cos^2(x/2) - \sin^2(x/2) \\). Dividing the numerator and the denominator (which equals 1 by the Pythagorean identity) by \\( \cos^2(x/2) \\), we arrive at:
 
 \\[\cos x = \frac{1 - t^2}{1 + t^2} \tag{3} \\]
 

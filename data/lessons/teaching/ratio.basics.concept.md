@@ -31,7 +31,7 @@ When you apply for a mortgage, the loan officer will compare your total debt to 
 
 A ratio compares two numbers or two quantities that are measured with the same unit. The ratio of $a$ to $b$ is written ${a\ \text{to}\ b,}\ {\frac{a}{b},\ \text{or}\ \textit{a}\text{:}\textit{b}\text{.}}$
 
-In this section, we will use the fraction notation. When a ratio is written in fraction form, the fraction should be simplified. If it is an improper fraction, we do not change it to a mixed number. Because a ratio compares two quantities, we would leave a ratio as $\frac{4}{1}$ instead of simplifying it to $4$ so that we can see the two parts of the ratio.
+In this section, we will use the fraction notation. When a ratio is written in fraction form, the fraction should be simplified. If it is an improper fraction, we do not change it to a mixed number. Because a ratio compares two quantities, we would leave a ratio as $\frac{4}{1}$ instead of simplifying it to 4 so that we can see the two parts of the ratio.
 
 ### Example 5.58
 
@@ -67,9 +67,9 @@ Write each ratio as a fraction: ⓐ$27\ \text{to}\ 72$ⓑ$51\ \text{to}\ 34.$
 
 We will often work with ratios of decimals, especially when we have ratios involving money. In these cases, we can eliminate the decimals by using the Equivalent Fractions Property to convert the ratio to a fraction with whole numbers in the numerator and denominator.
 
-For example, consider the ratio $0.8\ \text{to}\ 0.05.$ We can write it as a fraction with decimals and then multiply the numerator and denominator by $100$ to eliminate the decimals.
+For example, consider the ratio $0.8\ \text{to}\ 0.05.$ We can write it as a fraction with decimals and then multiply the numerator and denominator by 100 to eliminate the decimals.
 
-Do you see a shortcut to find the equivalent fraction? Notice that $0.8 = \frac{8}{10}$ and $0.05 = \frac{5}{100}.$ The least common denominator of $\frac{8}{10}$ and $\frac{5}{100}$ is $100.$ By multiplying the numerator and denominator of $\frac{0.8}{0.05}$ by $100,$ we ‘moved’ the decimal two places to the right to get the equivalent fraction with no decimals. Now that we understand the math behind the process, we can find the fraction with no decimals like this:
+Do you see a shortcut to find the equivalent fraction? Notice that $0.8 = \frac{8}{10}$ and $0.05 = \frac{5}{100}.$ The least common denominator of $\frac{8}{10}$ and $\frac{5}{100}$ is 100. By multiplying the numerator and denominator of $\frac{0.8}{0.05}$ by 100, we ‘moved’ the decimal two places to the right to get the equivalent fraction with no decimals. Now that we understand the math behind the process, we can find the fraction with no decimals like this:
 
 |                              |                  |
 |------------------------------|------------------|
@@ -105,7 +105,7 @@ So $4.8\ \text{to}\ 11.2$ is equivalent to $\frac{3}{7}.$
 <tbody>
 <tr>
 <td>ⓑ<br />
-The numerator has one decimal place and the denominator has $2.$ To clear both decimals we need to move the decimal $2$ places to the right.<br />
+The numerator has one decimal place and the denominator has 2. To clear both decimals we need to move the decimal 2 places to the right.<br />
 $2.7 to 0.54$</td>
 <td></td>
 </tr>
@@ -161,11 +161,11 @@ Write each ratio as a fraction: $1\frac{1}{8}\ \text{to}\ 2\frac{3}{4}.$
 
 #### Applications of Ratios
 
-One real-world application of ratios that affects many people involves measuring cholesterol in blood. The ratio of total cholesterol to HDL cholesterol is one way doctors assess a person's overall health. A ratio of less than $5$ to $1$ is considered good.
+One real-world application of ratios that affects many people involves measuring cholesterol in blood. The ratio of total cholesterol to HDL cholesterol is one way doctors assess a person's overall health. A ratio of less than 5 to 1 is considered good.
 
 ### Example 5.61
 
-Hector's total cholesterol is $249$ mg/dl and his HDL cholesterol is $39$ mg/dl. ⓐ Find the ratio of his total cholesterol to his HDL cholesterol. ⓑ Assuming that a ratio less than $5$ to $1$ is considered good, what would you suggest to Hector?
+Hector's total cholesterol is 249 mg/dl and his HDL cholesterol is 39 mg/dl. ⓐ Find the ratio of his total cholesterol to his HDL cholesterol. ⓑ Assuming that a ratio less than 5 to 1 is considered good, what would you suggest to Hector?
 
 #### Solution
 
@@ -177,19 +177,19 @@ Hector's total cholesterol is $249$ mg/dl and his HDL cholesterol is $39$ mg/dl.
 | Substitute the values. | $\frac{249}{39}$ |
 | Simplify. | $\frac{83}{13}$ |
 
-ⓑ Is Hector's cholesterol ratio ok? If we divide $83$ by $13$ we obtain approximately $6.4,$ so $\frac{83}{13} \approx \frac{6.4}{1}.$ Hector's cholesterol ratio is high! Hector should either lower his total cholesterol or raise his HDL cholesterol.
+ⓑ Is Hector's cholesterol ratio ok? If we divide 83 by 13 we obtain approximately 6.4, so $\frac{83}{13} \approx \frac{6.4}{1}.$ Hector's cholesterol ratio is high! Hector should either lower his total cholesterol or raise his HDL cholesterol.
 
 ### Try It 5.121
 
 Find the patient's ratio of total cholesterol to HDL cholesterol using the given information.
 
-Total cholesterol is $185$ mg/dL and HDL cholesterol is $40$ mg/dL.
+Total cholesterol is 185 mg/dL and HDL cholesterol is 40 mg/dL.
 
 ### Try It 5.122
 
 Find the patient’s ratio of total cholesterol to HDL cholesterol using the given information.
 
-Total cholesterol is $204$ mg/dL and HDL cholesterol is $38$ mg/dL.
+Total cholesterol is 204 mg/dL and HDL cholesterol is 38 mg/dL.
 
 #### Ratios of Two Measurements in Different Units
 
@@ -199,7 +199,7 @@ We know that to simplify a fraction, we divide out common factors. Similarly in 
 
 ### Example 5.62
 
-The Americans with Disabilities Act (ADA) Guidelines for wheel chair ramps require a maximum vertical rise of $1$ inch for every $1$ foot of horizontal run. What is the ratio of the rise to the run?
+The Americans with Disabilities Act (ADA) Guidelines for wheel chair ramps require a maximum vertical rise of 1 inch for every 1 foot of horizontal run. What is the ratio of the rise to the run?
 
 #### Solution
 
@@ -215,19 +215,19 @@ Write the words that express the ratio.
 | Convert 1 foot to inches. | $\frac{\text{1 inch}}{\text{12 inches}}$ |
 | Simplify, dividing out common factors and units. | $\frac{1}{12}$ |
 
-So the ratio of rise to run is $1$ to $12.$ This means that the ramp should rise $1$ inch for every $12$ inches of horizontal run to comply with the guidelines.
+So the ratio of rise to run is 1 to 12. This means that the ramp should rise 1 inch for every 12 inches of horizontal run to comply with the guidelines.
 
 ### Try It 5.123
 
-Find the ratio of the first length to the second length: $32$ inches to $1$ foot.
+Find the ratio of the first length to the second length: 32 inches to 1 foot.
 
 ### Try It 5.124
 
-Find the ratio of the first length to the second length: $1$ foot to $54$ inches.
+Find the ratio of the first length to the second length: 1 foot to 54 inches.
 
 ### Write a Rate as a Fraction
 
-Frequently we want to compare two different types of measurements, such as miles to gallons. To make this comparison, we use a rate. Examples of rates are $120$ miles in $2$ hours, $160$ words in $4$ minutes, and $\text{\$5}$ dollars per $64$ ounces.
+Frequently we want to compare two different types of measurements, such as miles to gallons. To make this comparison, we use a rate. Examples of rates are 120 miles in 2 hours, 160 words in 4 minutes, and $\text{\$5}$ dollars per 64 ounces.
 
 ### Rate
 
@@ -237,7 +237,7 @@ When writing a fraction as a rate, we put the first given amount with its units 
 
 ### Example 5.63
 
-Bob drove his car $525$ miles in $9$ hours. Write this rate as a fraction.
+Bob drove his car 525 miles in 9 hours. Write this rate as a fraction.
 
 #### Solution
 
@@ -247,38 +247,38 @@ Bob drove his car $525$ miles in $9$ hours. Write this rate as a fraction.
 | Write as a fraction, with 525 miles in the numerator and 9 hours in the denominator. | $\frac{\text{525 miles}}{\text{9 hours}}$ |
 |  | $\frac{\text{175 miles}}{\text{3 hours}}$ |
 
-So $525$ miles in $9$ hours is equivalent to $\frac{\text{175 miles}}{\text{3 hours}}.$
+So 525 miles in 9 hours is equivalent to $\frac{\text{175 miles}}{\text{3 hours}}.$
 
 ### Try It 5.125
 
-Write the rate as a fraction: $492$ miles in $8$ hours.
+Write the rate as a fraction: 492 miles in 8 hours.
 
 ### Try It 5.126
 
-Write the rate as a fraction: $242$ miles in $6$ hours.
+Write the rate as a fraction: 242 miles in 6 hours.
 
 ### Find Unit Rates
 
-In the last example, we calculated that Bob was driving at a rate of $\frac{\text{175 miles}}{\text{3 hours}}.$ This tells us that every three hours, Bob will travel $175$ miles. This is correct, but not very useful. We usually want the rate to reflect the number of miles in one hour. A rate that has a denominator of $1$ unit is referred to as a unit rate.
+In the last example, we calculated that Bob was driving at a rate of $\frac{\text{175 miles}}{\text{3 hours}}.$ This tells us that every three hours, Bob will travel 175 miles. This is correct, but not very useful. We usually want the rate to reflect the number of miles in one hour. A rate that has a denominator of 1 unit is referred to as a unit rate.
 
 ### Unit Rate
 
-A unit rate is a rate with denominator of $1$ unit.
+A unit rate is a rate with denominator of 1 unit.
 
-Unit rates are very common in our lives. For example, when we say that we are driving at a speed of $68$ miles per hour we mean that we travel $68$ miles in $1$ hour. We would write this rate as $68$ miles/hour (read $68$ miles per hour). The common abbreviation for this is $68$ mph. Note that when no number is written before a unit, it is assumed to be $1.$
+Unit rates are very common in our lives. For example, when we say that we are driving at a speed of 68 miles per hour we mean that we travel 68 miles in 1 hour. We would write this rate as 68 miles/hour (read 68 miles per hour). The common abbreviation for this is 68 mph. Note that when no number is written before a unit, it is assumed to be 1.
 
-So $68$ miles/hour really means $\text{68 miles/1 hour.}$
+So 68 miles/hour really means $\text{68 miles/1 hour.}$
 
 Two rates we often use when driving can be written in different forms, as shown:
 
 | Example | Rate | Write | Abbreviate | Read |
 |----|----|----|----|----|
-| $68$ miles in $1$ hour | $\frac{\text{68 miles}}{\text{1 hour}}$ | $68$ miles/hour | $68$ mph | $\text{68 miles per hour}$ |
-| $36$ miles to $1$ gallon | $\frac{\text{36 miles}}{\text{1 gallon}}$ | $36$ miles/gallon | $36$ mpg | $\text{36 miles per gallon}$ |
+| 68 miles in 1 hour | $\frac{\text{68 miles}}{\text{1 hour}}$ | 68 miles/hour | 68 mph | $\text{68 miles per hour}$ |
+| 36 miles to 1 gallon | $\frac{\text{36 miles}}{\text{1 gallon}}$ | 36 miles/gallon | 36 mpg | $\text{36 miles per gallon}$ |
 
 Another example of unit rate that you may already know about is hourly pay rate. It is usually expressed as the amount of money earned for one hour of work. For example, if you are paid $\text{\$12.50}$ for each hour you work, you could write that your hourly (unit) pay rate is $\text{\$12.50/hour}$ (read $\text{\$12.50}$ per hour.)
 
-To convert a rate to a unit rate, we divide the numerator by the denominator. This gives us a denominator of $1.$
+To convert a rate to a unit rate, we divide the numerator by the denominator. This gives us a denominator of 1.
 
 ### Example 5.64
 
@@ -297,15 +297,15 @@ Anita’s hourly pay rate is $\text{\$12}$ per hour.
 
 ### Try It 5.127
 
-Find the unit rate: $\text{\$630}$ for $35$ hours.
+Find the unit rate: $\text{\$630}$ for 35 hours.
 
 ### Try It 5.128
 
-Find the unit rate: $\text{\$684}$ for $36$ hours.
+Find the unit rate: $\text{\$684}$ for 36 hours.
 
 ### Example 5.65
 
-Sven drives his car $455$ miles, using $14$ gallons of gasoline. How many miles per gallon does his car get?
+Sven drives his car 455 miles, using 14 gallons of gasoline. How many miles per gallon does his car get?
 
 #### Solution
 
@@ -317,15 +317,15 @@ Start with a rate of miles to gallons. Then divide.
 | Write as a rate. | $\frac{\text{455 miles}}{\text{14 gallons}}$ |
 | Divide 455 by 14 to get the unit rate. | $\frac{\text{32.5 miles}}{\text{1 gallon}}$ |
 
-Sven’s car gets $32.5$ miles/gallon, or $32.5$ mpg.
+Sven’s car gets 32.5 miles/gallon, or 32.5 mpg.
 
 ### Try It 5.129
 
-Find the unit rate: $423$ miles to $18$ gallons of gas.
+Find the unit rate: 423 miles to 18 gallons of gas.
 
 ### Try It 5.130
 
-Find the unit rate: $406$ miles to $14.5$ gallons of gas.
+Find the unit rate: 406 miles to 14.5 gallons of gas.
 
 ### Find Unit Price
 
@@ -337,7 +337,7 @@ A unit price is a unit rate that gives the price of one item.
 
 ### Example 5.66
 
-The grocery store charges $\text{\$3.99}$ for a case of $24$ bottles of water. What is the unit price?
+The grocery store charges $\text{\$3.99}$ for a case of 24 bottles of water. What is the unit price?
 
 #### Solution
 
@@ -367,7 +367,7 @@ Unit prices are very useful if you comparison shop. The *better buy* is the item
 
 ### Example 5.67
 
-Paul is shopping for laundry detergent. At the grocery store, the liquid detergent is priced at $\text{\$14.99}$ for $64$ loads of laundry and the same brand of powder detergent is priced at $\text{\$15.99}$ for $80$ loads.
+Paul is shopping for laundry detergent. At the grocery store, the liquid detergent is priced at $\text{\$14.99}$ for 64 loads of laundry and the same brand of powder detergent is priced at $\text{\$15.99}$ for 80 loads.
 
 Which is the better buy, the liquid or the powder detergent?
 
@@ -394,13 +394,13 @@ Now we compare the unit prices. The unit price of the liquid detergent is about 
 
 Find each unit price and then determine the better buy. Round to the nearest cent if necessary.
 
-Brand A Storage Bags, $\text{\$4.59}$ for $40$ count, or Brand B Storage Bags, $\text{\$3.99}$ for $30$ count
+Brand A Storage Bags, $\text{\$4.59}$ for 40 count, or Brand B Storage Bags, $\text{\$3.99}$ for 30 count
 
 ### Try It 5.134
 
 Find each unit price and then determine the better buy. Round to the nearest cent if necessary.
 
-Brand C Chicken Noodle Soup, $\text{\$1.89}$ for $26$ ounces, or Brand D Chicken Noodle Soup, $\text{\$0.95}$ for $10.75$ ounces
+Brand C Chicken Noodle Soup, $\text{\$1.89}$ for 26 ounces, or Brand D Chicken Noodle Soup, $\text{\$0.95}$ for 10.75 ounces
 
 Notice in Example 5.67 that we rounded the unit price to the nearest cent. Sometimes we may need to carry the division to one more place to see the difference between the unit prices.
 
@@ -412,9 +412,9 @@ Have you noticed that the examples in this section used the comparison words *ra
 
 Translate the word phrase into an algebraic expression:
 
-1.  ⓐ$427$ miles per $h$ hours
-2.  ⓑ$x$ students to $3$ teachers
-3.  ⓒ$y$ dollars for $18$ hours
+1.  ⓐ427 miles per $h$ hours
+2.  ⓑ$x$ students to 3 teachers
+3.  ⓒ$y$ dollars for 18 hours
 
 #### Solution
 
@@ -440,13 +440,13 @@ Translate the word phrase into an algebraic expression:
 
 Translate the word phrase into an algebraic expression.
 
-ⓐ$689$ miles per $h$ hours ⓑ $y$ parents to $22$ students ⓒ $d$ dollars for $9$ minutes
+ⓐ689 miles per $h$ hours ⓑ $y$ parents to 22 students ⓒ $d$ dollars for 9 minutes
 
 ### Try It 5.136
 
 Translate the word phrase into an algebraic expression.
 
-ⓐ $m$ miles per $9$ hours ⓑ $x$ students to $8$ buses ⓒ $y$ dollars for $40$ hours
+ⓐ $m$ miles per 9 hours ⓑ $x$ students to 8 buses ⓒ $y$ dollars for 40 hours
 
 ### Media
 
@@ -468,43 +468,43 @@ In the following exercises, write each ratio as a fraction.
 
 403\.
 
-$20$ to $36$
+20 to 36
 
 404\.
 
-$20$ to $32$
+20 to 32
 
 405\.
 
-$42$ to $48$
+42 to 48
 
 406\.
 
-$45$ to $54$
+45 to 54
 
 407\.
 
-$49$ to $21$
+49 to 21
 
 408\.
 
-$56$ to $16$
+56 to 16
 
 409\.
 
-$84$ to $36$
+84 to 36
 
 410\.
 
-$6.4$ to $0.8$
+6.4 to 0.8
 
 411\.
 
-$0.56$ to $2.8$
+0.56 to 2.8
 
 412\.
 
-$1.26$ to $4.2$
+1.26 to 4.2
 
 413\.
 
@@ -540,43 +540,43 @@ $\text{\$1.38}$ to $\text{\$0.69}$
 
 421\.
 
-$28$ ounces to $84$ ounces
+28 ounces to 84 ounces
 
 422\.
 
-$32$ ounces to $128$ ounces
+32 ounces to 128 ounces
 
 423\.
 
-$12$ feet to $46$ feet
+12 feet to 46 feet
 
 424\.
 
-$15$ feet to $57$ feet
+15 feet to 57 feet
 
 425\.
 
-$246$ milligrams to $45$ milligrams
+246 milligrams to 45 milligrams
 
 426\.
 
-$304$ milligrams to $48$ milligrams
+304 milligrams to 48 milligrams
 
 427\.
 
-total cholesterol of $175$ to HDL cholesterol of $45$
+total cholesterol of 175 to HDL cholesterol of 45
 
 428\.
 
-total cholesterol of $215$ to HDL cholesterol of $55$
+total cholesterol of 215 to HDL cholesterol of 55
 
 429\.
 
-$27$ inches to $1$ foot
+27 inches to 1 foot
 
 430\.
 
-$28$ inches to $1$ foot
+28 inches to 1 foot
 
 **Write a Rate as a Fraction**
 
@@ -584,35 +584,35 @@ In the following exercises, write each rate as a fraction.
 
 431\.
 
-$140$ calories per $12$ ounces
+140 calories per 12 ounces
 
 432\.
 
-$180$ calories per $16$ ounces
+180 calories per 16 ounces
 
 433\.
 
-$8.2$ pounds per $3$ square inches
+8.2 pounds per 3 square inches
 
 434\.
 
-$9.5$ pounds per $4$ square inches
+9.5 pounds per 4 square inches
 
 435\.
 
-$488$ miles in $7$ hours
+488 miles in 7 hours
 
 436\.
 
-$527$ miles in $9$ hours
+527 miles in 9 hours
 
 437\.
 
-$\text{\$595}$ for $40$ hours
+$\text{\$595}$ for 40 hours
 
 438\.
 
-$\text{\$798}$ for $40$ hours
+$\text{\$798}$ for 40 hours
 
 **Find Unit Rates**
 
@@ -620,67 +620,67 @@ In the following exercises, find the unit rate. Round to two decimal places, if 
 
 439\.
 
-$140$ calories per $12$ ounces
+140 calories per 12 ounces
 
 440\.
 
-$180$ calories per $16$ ounces
+180 calories per 16 ounces
 
 441\.
 
-$8.2$ pounds per $3$ square inches
+8.2 pounds per 3 square inches
 
 442\.
 
-$9.5$ pounds per $4$ square inches
+9.5 pounds per 4 square inches
 
 443\.
 
-$488$ miles in $7$ hours
+488 miles in 7 hours
 
 444\.
 
-$527$ miles in $9$ hours
+527 miles in 9 hours
 
 445\.
 
-$\text{\$595}$ for $40$ hours
+$\text{\$595}$ for 40 hours
 
 446\.
 
-$\text{\$798}$ for $40$ hours
+$\text{\$798}$ for 40 hours
 
 447\.
 
-$576$ miles on $18$ gallons of gas
+576 miles on 18 gallons of gas
 
 448\.
 
-$435$ miles on $15$ gallons of gas
+435 miles on 15 gallons of gas
 
 449\.
 
-$43$ pounds in $16$ weeks
+43 pounds in 16 weeks
 
 450\.
 
-$57$ pounds in $24$ weeks
+57 pounds in 24 weeks
 
 451\.
 
-$46$ beats in $0.5$ minute
+46 beats in 0.5 minute
 
 452\.
 
-$54$ beats in $0.5$ minute
+54 beats in 0.5 minute
 
 453\.
 
-The bindery at a printing plant assembles $96,000$ magazines in $12$ hours. How many magazines are assembled in one hour?
+The bindery at a printing plant assembles 96,000 magazines in 12 hours. How many magazines are assembled in one hour?
 
 454\.
 
-The pressroom at a printing plant prints $540,000$ sections in $12$ hours. How many sections are printed per hour?
+The pressroom at a printing plant prints 540,000 sections in 12 hours. How many sections are printed per hour?
 
 **Find Unit Price**
 
@@ -688,43 +688,43 @@ In the following exercises, find the unit price. Round to the nearest cent.
 
 455\.
 
-Soap bars at $8$ for $\text{\$8.69}$
+Soap bars at 8 for $\text{\$8.69}$
 
 456\.
 
-Soap bars at $4$ for $\text{\$3.39}$
+Soap bars at 4 for $\text{\$3.39}$
 
 457\.
 
-Women’s sports socks at $6$ pairs for $\text{\$7.99}$
+Women’s sports socks at 6 pairs for $\text{\$7.99}$
 
 458\.
 
-Men’s dress socks at $3$ pairs for $\text{\$8.49}$
+Men’s dress socks at 3 pairs for $\text{\$8.49}$
 
 459\.
 
-Snack packs of cookies at $12$ for $\text{\$5.79}$
+Snack packs of cookies at 12 for $\text{\$5.79}$
 
 460\.
 
-Granola bars at $5$ for $\text{\$3.69}$
+Granola bars at 5 for $\text{\$3.69}$
 
 461\.
 
-CD-RW discs at $25$ for $\text{\$14.99}$
+CD-RW discs at 25 for $\text{\$14.99}$
 
 462\.
 
-CDs at $50$ for $\text{\$4.49}$
+CDs at 50 for $\text{\$4.49}$
 
 463\.
 
-The grocery store has a special on macaroni and cheese. The price is $\text{\$3.87}$ for $3$ boxes. How much does each box cost?
+The grocery store has a special on macaroni and cheese. The price is $\text{\$3.87}$ for 3 boxes. How much does each box cost?
 
 464\.
 
-The pet store has a special on cat food. The price is $\text{\$4.32}$ for $12$ cans. How much does each can cost?
+The pet store has a special on cat food. The price is $\text{\$4.32}$ for 12 cans. How much does each can cost?
 
 In the following exercises, find each unit price and then identify the better buy. Round to three decimal places.
 
@@ -734,15 +734,15 @@ Mouthwash, $\text{50.7-ounce}$ size for $\text{\$6.99}$ or $\text{33.8-ounce}$ s
 
 466\.
 
-Toothpaste, $6$ ounce size for $\text{\$3.19}$ or $7.8-ounce$ size for $\text{\$5.19}$
+Toothpaste, 6 ounce size for $\text{\$3.19}$ or $7.8-ounce$ size for $\text{\$5.19}$
 
 467\.
 
-Breakfast cereal, $18$ ounces for $\text{\$3.99}$ or $14$ ounces for $\text{\$3.29}$
+Breakfast cereal, 18 ounces for $\text{\$3.99}$ or 14 ounces for $\text{\$3.29}$
 
 468\.
 
-Breakfast Cereal, $10.7$ ounces for $\text{\$2.69}$ or $14.8$ ounces for $\text{\$3.69}$
+Breakfast Cereal, 10.7 ounces for $\text{\$2.69}$ or 14.8 ounces for $\text{\$3.69}$
 
 469\.
 
@@ -754,11 +754,11 @@ Mayonnaise $\text{15-ounce}$ regular bottle for $\text{\$3.49}$ or $\text{22-oun
 
 471\.
 
-Cheese $\text{\$6.49}$ for $1$ lb. block or $\text{\$3.39}$ for $\frac{1}{2}$ lb. block
+Cheese $\text{\$6.49}$ for 1 lb. block or $\text{\$3.39}$ for $\frac{1}{2}$ lb. block
 
 472\.
 
-Candy $\text{\$10.99}$ for a $1$ lb. bag or $\text{\$2.89}$ for $\frac{1}{4}$ lb. of loose candy
+Candy $\text{\$10.99}$ for a 1 lb. bag or $\text{\$2.89}$ for $\frac{1}{4}$ lb. of loose candy
 
 **Translate Phrases to Expressions with Fractions**
 
@@ -766,27 +766,27 @@ In the following exercises, translate the English phrase into an algebraic expre
 
 473\.
 
-$793$ miles per $p$ hours
+793 miles per $p$ hours
 
 474\.
 
-$78$ feet per $r$ seconds
+78 feet per $r$ seconds
 
 475\.
 
-$\text{\$3}$ for $0.5$ lbs.
+$\text{\$3}$ for 0.5 lbs.
 
 476\.
 
-$j$ beats in $0.5$ minutes
+$j$ beats in 0.5 minutes
 
 477\.
 
-$105$ calories in $x$ ounces
+105 calories in $x$ ounces
 
 478\.
 
-$400$ minutes for $m$ dollars
+400 minutes for $m$ dollars
 
 479\.
 
@@ -800,19 +800,19 @@ the ratio of $12x$ and $y$
 
 481\.
 
-One elementary school in Ohio has $684$ students and $45$ teachers. Write the student-to-teacher ratio as a unit rate.
+One elementary school in Ohio has 684 students and 45 teachers. Write the student-to-teacher ratio as a unit rate.
 
 482\.
 
-The average American produces about $1,600$ pounds of paper trash per year $\text{(365 days).}$ How many pounds of paper trash does the average American produce each day? (Round to the nearest tenth of a pound.)
+The average American produces about 1,600 pounds of paper trash per year $\text{(365 days).}$ How many pounds of paper trash does the average American produce each day? (Round to the nearest tenth of a pound.)
 
 483\.
 
-A popular fast food burger weighs $7.5$ ounces and contains $540$ calories, $29$ grams of fat, $43$ grams of carbohydrates, and $25$ grams of protein. Find the unit rate of ⓐ calories per ounce ⓑ grams of fat per ounce ⓒ grams of carbohydrates per ounce ⓓ grams of protein per ounce. Round to two decimal places.
+A popular fast food burger weighs 7.5 ounces and contains 540 calories, 29 grams of fat, 43 grams of carbohydrates, and 25 grams of protein. Find the unit rate of ⓐ calories per ounce ⓑ grams of fat per ounce ⓒ grams of carbohydrates per ounce ⓓ grams of protein per ounce. Round to two decimal places.
 
 484\.
 
-A $16-ounce$ chocolate mocha coffee with whipped cream contains $470$ calories, $18$ grams of fat, $63$ grams of carbohydrates, and $15$ grams of protein. Find the unit rate of ⓐ calories per ounce ⓑ grams of fat per ounce ⓒ grams of carbohydrates per ounce ⓓ grams of protein per ounce.
+A $16-ounce$ chocolate mocha coffee with whipped cream contains 470 calories, 18 grams of fat, 63 grams of carbohydrates, and 15 grams of protein. Find the unit rate of ⓐ calories per ounce ⓑ grams of fat per ounce ⓒ grams of carbohydrates per ounce ⓓ grams of protein per ounce.
 
 #### Writing Exercises
 
@@ -822,15 +822,15 @@ Would you prefer the ratio of your income to your friend’s income to be $\text
 
 486\.
 
-The parking lot at the airport charges $\text{\$0.75}$ for every $15$ minutes. ⓐ How much does it cost to park for $1$ hour? ⓑ Explain how you got your answer to part ⓐ. Was your reasoning based on the unit cost or did you use another method?
+The parking lot at the airport charges $\text{\$0.75}$ for every 15 minutes. ⓐ How much does it cost to park for 1 hour? ⓑ Explain how you got your answer to part ⓐ. Was your reasoning based on the unit cost or did you use another method?
 
 487\.
 
-Kathryn ate a $4-ounce$ cup of frozen yogurt and then went for a swim. The frozen yogurt had $115$ calories. Swimming burns $422$ calories per hour. For how many minutes should Kathryn swim to burn off the calories in the frozen yogurt? Explain your reasoning.
+Kathryn ate a $4-ounce$ cup of frozen yogurt and then went for a swim. The frozen yogurt had 115 calories. Swimming burns 422 calories per hour. For how many minutes should Kathryn swim to burn off the calories in the frozen yogurt? Explain your reasoning.
 
 488\.
 
-Mollie had a $16-ounce$ cappuccino at her neighborhood coffee shop. The cappuccino had $110$ calories. If Mollie walks for one hour, she burns $246$ calories. For how many minutes must Mollie walk to burn off the calories in the cappuccino? Explain your reasoning.
+Mollie had a $16-ounce$ cappuccino at her neighborhood coffee shop. The cappuccino had 110 calories. If Mollie walks for one hour, she burns 246 calories. For how many minutes must Mollie walk to burn off the calories in the cappuccino? Explain your reasoning.
 
 #### Self Check
 

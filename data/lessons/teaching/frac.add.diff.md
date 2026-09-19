@@ -26,11 +26,11 @@ Before you get started, take this readiness quiz.
 
 In the previous section, we explained how to add and subtract fractions with a common denominator. But how can we add and subtract fractions with unlike denominators?
 
-Let’s think about coins again. Can you add one quarter and one dime? You could say there are two coins, but that’s not very useful. To find the total value of one quarter plus one dime, you change them to the same kind of unit—cents. One quarter equals $25$ cents and one dime equals $10$ cents, so the sum is $35$ cents. See Figure 4.7.
+Let’s think about coins again. Can you add one quarter and one dime? You could say there are two coins, but that’s not very useful. To find the total value of one quarter plus one dime, you change them to the same kind of unit—cents. One quarter equals 25 cents and one dime equals 10 cents, so the sum is 35 cents. See Figure 4.7.
 
 *Figure 4.7 Together, a quarter and a dime are worth 35 35 cents, or 35 100 35 100 of a dollar.*
 
-Similarly, when we add fractions with different denominators we have to convert them to equivalent fractions with a common denominator. With the coins, when we convert to cents, the denominator is $100.$ Since there are $100$ cents in one dollar, $25$ cents is $\frac{25}{100}$ and $10$ cents is $\frac{10}{100}.$ So we add $\frac{25}{100} + \frac{10}{100}$ to get $\frac{35}{100},$ which is $35$ cents.
+Similarly, when we add fractions with different denominators we have to convert them to equivalent fractions with a common denominator. With the coins, when we convert to cents, the denominator is 100. Since there are 100 cents in one dollar, 25 cents is $\frac{25}{100}$ and 10 cents is $\frac{10}{100}.$ So we add $\frac{25}{100} + \frac{10}{100}$ to get $\frac{35}{100},$ which is 35 cents.
 
 You have practiced adding and subtracting fractions with common denominators. Now let’s see what you need to do with fractions that have different denominators.
 
@@ -38,19 +38,19 @@ First, we will use fraction tiles to model finding the common denominator of $\f
 
 We’ll start with one $\frac{1}{2}$ tile and $\frac{1}{3}$ tile. We want to find a common fraction tile that we can use to match *both* $\frac{1}{2}$ and $\frac{1}{3}$ exactly.
 
-If we try the $\frac{1}{4}$ pieces, $2$ of them exactly match the $\frac{1}{2}$ piece, but they do not exactly match the $\frac{1}{3}$ piece.
+If we try the $\frac{1}{4}$ pieces, 2 of them exactly match the $\frac{1}{2}$ piece, but they do not exactly match the $\frac{1}{3}$ piece.
 
 If we try the $\frac{1}{5}$ pieces, they do not exactly cover the $\frac{1}{2}$ piece or the $\frac{1}{3}$ piece.
 
-If we try the $\frac{1}{6}$ pieces, we see that exactly $3$ of them cover the $\frac{1}{2}$ piece, and exactly $2$ of them cover the $\frac{1}{3}$ piece.
+If we try the $\frac{1}{6}$ pieces, we see that exactly 3 of them cover the $\frac{1}{2}$ piece, and exactly 2 of them cover the $\frac{1}{3}$ piece.
 
 If we were to try the $\frac{1}{12}$ pieces, they would also work.
 
 Even smaller tiles, such as $\frac{1}{24}$ and $\frac{1}{48},$ would also exactly cover the $\frac{1}{2}$ piece and the $\frac{1}{3}$ piece.
 
-The denominator of the largest piece that covers both fractions is the least common denominator (LCD) of the two fractions. So, the least common denominator of $\frac{1}{2}$ and $\frac{1}{3}$ is $6.$
+The denominator of the largest piece that covers both fractions is the least common denominator (LCD) of the two fractions. So, the least common denominator of $\frac{1}{2}$ and $\frac{1}{3}$ is 6.
 
-Notice that all of the tiles that cover $\frac{1}{2}$ and $\frac{1}{3}$ have something in common: Their denominators are common multiples of $2$ and $3,$ the denominators of $\frac{1}{2}$ and $\frac{1}{3}.$ The least common multiple (LCM) of the denominators is $6,$ and so we say that $6$ is the least common denominator (LCD) of the fractions $\frac{1}{2}$ and $\frac{1}{3}.$
+Notice that all of the tiles that cover $\frac{1}{2}$ and $\frac{1}{3}$ have something in common: Their denominators are common multiples of 2 and 3, the denominators of $\frac{1}{2}$ and $\frac{1}{3}.$ The least common multiple (LCM) of the denominators is 6, and so we say that 6 is the least common denominator (LCD) of the fractions $\frac{1}{2}$ and $\frac{1}{3}.$
 
 ### Manipulative Mathematics
 
@@ -104,9 +104,9 @@ Find the least common denominator for the fractions $\frac{8}{15}$ and $\frac{11
 
 To find the LCD, we find the LCM of the denominators.
 
-Find the LCM of $15$ and $24.$
+Find the LCM of 15 and 24.
 
-The LCM of $15$ and $24$ is $120.$ So, the LCD of $\frac{8}{15}$ and $\frac{11}{24}$ is $120.$
+The LCM of 15 and 24 is 120. So, the LCD of $\frac{8}{15}$ and $\frac{11}{24}$ is 120.
 
 ### Try It 4.127
 
@@ -118,7 +118,7 @@ Find the least common denominator for the fractions: $\frac{9}{28}$ and $\frac{2
 
 ### Convert Fractions to Equivalent Fractions with the LCD
 
-Earlier, we used fraction tiles to see that the LCD of $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ is $12.$ We saw that three $\frac{1}{12}$ pieces exactly covered $\frac{1}{4}$ and two $\frac{1}{12}$ pieces exactly covered $\frac{1}{6},$ so
+Earlier, we used fraction tiles to see that the LCD of $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ is 12. We saw that three $\frac{1}{12}$ pieces exactly covered $\frac{1}{4}$ and two $\frac{1}{12}$ pieces exactly covered $\frac{1}{6},$ so
 
 $$
 {\frac{1}{4} = \frac{3}{12}}\text{and}{\frac{1}{6} = \frac{2}{12}.}
@@ -136,11 +136,11 @@ $$
 \frac{a}{b} = \frac{a \cdot c}{b \cdot c}\quad\text{and}\quad\frac{a \cdot c}{b \cdot c} = \frac{a}{b}
 $$
 
-To add or subtract fractions with different denominators, we will first have to convert each fraction to an equivalent fraction with the LCD. Let’s see how to change $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ to equivalent fractions with denominator $12$ without using models.
+To add or subtract fractions with different denominators, we will first have to convert each fraction to an equivalent fraction with the LCD. Let’s see how to change $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ to equivalent fractions with denominator 12 without using models.
 
 ### Example 4.65
 
-Convert $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ to equivalent fractions with denominator $12,$ their LCD.
+Convert $\frac{1}{4}\ \text{and}\ \frac{1}{6}$ to equivalent fractions with denominator 12, their LCD.
 
 #### Solution
 
@@ -177,7 +177,7 @@ $- \frac{7}{12}$ and ${\frac{11}{15},}\ \text{LCD} = 60$
 
 ### Example 4.66
 
-Convert $\frac{8}{15}$ and $\frac{11}{24}$ to equivalent fractions with denominator $120,$ their LCD.
+Convert $\frac{8}{15}$ and $\frac{11}{24}$ to equivalent fractions with denominator 120, their LCD.
 
 #### Solution
 
@@ -193,13 +193,13 @@ Convert $\frac{8}{15}$ and $\frac{11}{24}$ to equivalent fractions with denomina
 
 Change to equivalent fractions with the LCD:
 
-$\frac{13}{24}$ and $\frac{17}{32},$ LCD $96$
+$\frac{13}{24}$ and $\frac{17}{32},$ LCD 96
 
 ### Try It 4.132
 
 Change to equivalent fractions with the LCD:
 
-$\frac{9}{28}$ and $\frac{27}{32},$ LCD $224$
+$\frac{9}{28}$ and $\frac{27}{32},$ LCD 224
 
 ### Add and Subtract Fractions with Different Denominators
 
@@ -250,7 +250,7 @@ Add: $\frac{1}{2} + \frac{1}{3}.$
 </tbody>
 </table>
 
-Remember, always check to see if the answer can be simplified. Since $5$ and $6$ have no common factors, the fraction $\frac{5}{6}$ cannot be reduced.
+Remember, always check to see if the answer can be simplified. Since 5 and 6 have no common factors, the fraction $\frac{5}{6}$ cannot be reduced.
 
 ### Try It 4.133
 
@@ -346,7 +346,7 @@ Add: $\frac{7}{12} + \frac{5}{18}.$
 </tbody>
 </table>
 
-Because $31$ is a prime number, it has no factors in common with $36.$ The answer is simplified.
+Because 31 is a prime number, it has no factors in common with 36. The answer is simplified.
 
 ### Try It 4.137
 
@@ -358,11 +358,11 @@ Add: $\frac{13}{15} + \frac{17}{20}.$
 
 When we use the Equivalent Fractions Property, there is a quick way to find the number you need to multiply by to get the LCD. Write the factors of the denominators and the LCD just as you did to find the LCD. The “missing” factors of each denominator are the numbers you need.
 
-The LCD, $36,$ has $2$ factors of $2$ and $2$ factors of $3.$
+The LCD, 36, has 2 factors of 2 and 2 factors of 3.
 
-Twelve has two factors of $2,$ but only one of $3$—so it is ‘missing‘ one $3.$ We multiplied the numerator and denominator of $\frac{7}{12}$ by $3$ to get an equivalent fraction with denominator $36.$
+Twelve has two factors of 2, but only one of 3—so it is ‘missing‘ one 3. We multiplied the numerator and denominator of $\frac{7}{12}$ by 3 to get an equivalent fraction with denominator 36.
 
-Eighteen is missing one factor of $2$—so you multiply the numerator and denominator $\frac{5}{18}$ by $2$ to get an equivalent fraction with denominator $36.$ We will apply this method as we subtract the fractions in the next example.
+Eighteen is missing one factor of 2—so you multiply the numerator and denominator $\frac{5}{18}$ by 2 to get an equivalent fraction with denominator 36. We will apply this method as we subtract the fractions in the next example.
 
 ### Example 4.70
 
@@ -510,7 +510,7 @@ The fractions have different denominators.
 </tbody>
 </table>
 
-We cannot add $24$ and $5x$ since they are not like terms, so we cannot simplify the expression any further.
+We cannot add 24 and $5x$ since they are not like terms, so we cannot simplify the expression any further.
 
 ### Try It 4.143
 
@@ -749,7 +749,7 @@ Evaluate $x + \frac{1}{3}$ when
 |-----------|---------------------|
 |           | $x + \frac{1}{3}$ |
 |           |                     |
-| Simplify. | $0$               |
+| Simplify. | 0               |
 
 ⓑ To evaluate $x + \frac{1}{3}$ when $x = - \frac{3}{4},$ we substitute $- \frac{3}{4}$ for $x$ in the expression.
 

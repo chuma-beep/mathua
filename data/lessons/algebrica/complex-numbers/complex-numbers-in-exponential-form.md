@@ -127,7 +127,7 @@ As a concrete illustration, consider \\( z_1 = 2e^{i\pi/3} \\) and \\( z_2 = 3e^
 \\[
 z_1 z_2 = 2 \cdot 3\\, e^{i(\pi/3 + \pi/6)} = 6\\, e^{i\pi/2}
 \\]
-The modulus of the product is \\( 6 \\) and its argument is \\( \pi/2 \\), corresponding to the imaginary unit direction in the complex plane.
+The modulus of the product is 6 and its argument is \\( \pi/2 \\), corresponding to the imaginary unit direction in the complex plane.
 
 
 Similarly, provided \\( z_2 \neq 0 \\), the quotient is obtained by dividing the moduli and subtracting the arguments:
@@ -172,7 +172,7 @@ w_2 &= 2e^{i \cdot 4\pi/3} = 2\\!\left(-\frac{1}{2} - i\frac{\sqrt{3}}{2}\right)
 \end{align}
 \\]
 
-> The three roots have equal modulus \\( 2 \\) and are separated by angles of \\( 2\pi/3 \\), forming the vertices of an equilateral triangle inscribed in a circle of radius \\( 2 \\) centered at the origin.
+> The three roots have equal modulus 2 and are separated by angles of \\( 2\pi/3 \\), forming the vertices of an equilateral triangle inscribed in a circle of radius 2 centered at the origin.
 
 ---
 

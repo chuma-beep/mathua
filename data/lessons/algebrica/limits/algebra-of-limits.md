@@ -90,7 +90,7 @@ The function \\( f(x) \\) is not defined at \\( x = 0 \\), so we cannot use dire
 
 For the denominator, we can use direct substitution because \\( g(x) \\) is defined at \\( x = 0 \\): \\[\lim_{x \to 0} \frac{x^2 + 1}{x + 1} = \frac{0 + 1}{0 + 1} = 1 \\] Since the denominator’s limit is \\( M = 1 \\) and not zero, we can use the quotient rule and get: \\[\lim_{x \to 0} \frac{f(x)}{g(x)} = \frac{1}{1} = 1 \\]
 
-###### This example shows why it is important to check that the denominator’s limit is not zero before using the quotient rule. In this case, \\( g(x) \\) stays close to \\( 1 \\) near \\( x = 0 \\), so there is no risk of dividing by zero.
+###### This example shows why it is important to check that the denominator’s limit is not zero before using the quotient rule. In this case, \\( g(x) \\) stays close to 1 near \\( x = 0 \\), so there is no risk of dividing by zero.
 
 ## Limits of powers and polynomials
 

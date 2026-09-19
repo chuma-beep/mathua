@@ -14,26 +14,26 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  Translate “the ratio of $33$ to $\text{5”}$ into an algebraic expression.  
+1.  Translate “the ratio of 33 to $\text{5”}$ into an algebraic expression.  
     If you missed this problem, review Table 2.7.
 2.  Write $\frac{3}{5}$ as a decimal.  
     If you missed this problem, review Example 5.28.
-3.  Write $0.62$ as a fraction.  
+3.  Write 0.62 as a fraction.  
     If you missed this problem, review Example 5.4.
 
 ### Use the Definition of Percent
 
-How many cents are in one dollar? There are $100$ cents in a dollar. How many years are in a century? There are $100$ years in a century. Does this give you a clue about what the word “percent” means? It is really two words, “per cent,” and means per one hundred. A percent is a ratio whose denominator is $100.$ We use the percent symbol $\text{\%,}$ to show percent.
+How many cents are in one dollar? There are 100 cents in a dollar. How many years are in a century? There are 100 years in a century. Does this give you a clue about what the word “percent” means? It is really two words, “per cent,” and means per one hundred. A percent is a ratio whose denominator is 100. We use the percent symbol $\text{\%,}$ to show percent.
 
 ### Percent
 
-A percent is a ratio whose denominator is $100.$
+A percent is a ratio whose denominator is 100.
 
-According to data from the American Association of Community Colleges $(2015)\text{,}$ about $\text{57\%}$ of community college students are female. This means $57$ out of every $100$ community college students are female, as Figure 6.2 shows. Out of the $100$ squares on the grid, $57$ are shaded, which we write as the ratio $\frac{57}{100}.$
+According to data from the American Association of Community Colleges $(2015)\text{,}$ about $\text{57\%}$ of community college students are female. This means 57 out of every 100 community college students are female, as Figure 6.2 shows. Out of the 100 squares on the grid, 57 are shaded, which we write as the ratio $\frac{57}{100}.$
 
 *Figure 6.2 Among every 100 100 community college students, 57 57 are female.*
 
-Similarly, $\text{25\%}$ means a ratio of ${\frac{25}{100},}\text{3\%}$ means a ratio of $\frac{3}{100}$ and $\text{100\%}$ means a ratio of $\frac{100}{100}.$ In words, "one hundred percent" means the total $\text{100\%}$ is $\frac{100}{100},$ and since $\frac{100}{100} = 1,$ we see that $\text{100\%}$ means $1$ whole.
+Similarly, $\text{25\%}$ means a ratio of ${\frac{25}{100},}\text{3\%}$ means a ratio of $\frac{3}{100}$ and $\text{100\%}$ means a ratio of $\frac{100}{100}.$ In words, "one hundred percent" means the total $\text{100\%}$ is $\frac{100}{100},$ and since $\frac{100}{100} = 1,$ we see that $\text{100\%}$ means 1 whole.
 
 ### Example 6.1
 
@@ -60,33 +60,33 @@ A study found that $\text{72\%}$ of U.S. teens send text messages regularly.
 
 ### Example 6.2
 
-In $2007,$ according to a U.S. Department of Education report, $21$ out of every $100$ first-time freshmen college students at $\text{4-year}$ public institutions took at least one remedial course. Write this as a ratio and then as a percent.
+In 2007, according to a U.S. Department of Education report, 21 out of every 100 first-time freshmen college students at $\text{4-year}$ public institutions took at least one remedial course. Write this as a ratio and then as a percent.
 
 #### Solution
 
 |  |  |
 |----|----|
-| The amount we want to convert is $21$ out of $100$. | $21$ out of $100$ |
+| The amount we want to convert is 21 out of 100. | 21 out of 100 |
 | Write as a ratio. | $\frac{21}{100}$ |
 | Convert the 21 per 100 to percent. | $21\%$ |
 
 ### Try It 6.3
 
-Write as a ratio and then as a percent: The American Association of Community Colleges reported that $62$ out of $100$ full-time community college students balance their studies with full-time or part time employment.
+Write as a ratio and then as a percent: The American Association of Community Colleges reported that 62 out of 100 full-time community college students balance their studies with full-time or part time employment.
 
 ### Try It 6.4
 
-Write as a ratio and then as a percent: In response to a student survey, $41$ out of $100$ Santa Ana College students expressed a goal of earning an Associate's degree or transferring to a four-year college.
+Write as a ratio and then as a percent: In response to a student survey, 41 out of 100 Santa Ana College students expressed a goal of earning an Associate's degree or transferring to a four-year college.
 
 ### Convert Percents to Fractions and Decimals
 
-Since percents are ratios, they can easily be expressed as fractions. Remember that percent means per $100,$ so the denominator of the fraction is $100.$
+Since percents are ratios, they can easily be expressed as fractions. Remember that percent means per 100, so the denominator of the fraction is 100.
 
 ### How To
 
 #### Convert a percent to a fraction.
 
-1.  Step 1. Write the percent as a ratio with the denominator $100.$
+1.  Step 1. Write the percent as a ratio with the denominator 100.
 2.  Step 2. Simplify the fraction if possible.
 
 ### Example 6.3
@@ -126,7 +126,7 @@ Convert each percent to a fraction:
 1.  ⓐ$\text{64\%}$
 2.  ⓑ$\text{150\%}$
 
-The previous example shows that a percent can be greater than $1.$ We saw that $\text{125\%}$ means $\frac{125}{100},$ or $\frac{5}{4}.$ These are improper fractions, and their values are greater than one.
+The previous example shows that a percent can be greater than 1. We saw that $\text{125\%}$ means $\frac{125}{100},$ or $\frac{5}{4}.$ These are improper fractions, and their values are greater than one.
 
 ### Example 6.4
 
@@ -177,7 +177,7 @@ In Decimals, we learned how to convert fractions to decimals. To convert a perce
 
 #### Convert a percent to a decimal.
 
-1.  Step 1. Write the percent as a ratio with the denominator $100.$
+1.  Step 1. Write the percent as a ratio with the denominator 100.
 2.  Step 2. Convert the fraction to a decimal by dividing the numerator by the denominator.
 
 ### Example 6.5
@@ -189,21 +189,21 @@ Convert each percent to a decimal:
 
 #### Solution
 
-Because we want to change to a decimal, we will leave the fractions with denominator $100$ instead of removing common factors.
+Because we want to change to a decimal, we will leave the fractions with denominator 100 instead of removing common factors.
 
 |  |  |
 |----|----|
 | ⓐ |  |
 |  | $6\%$ |
 | Write as a ratio with denominator 100. | $\frac{6}{100}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $0.06$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 0.06 |
 
 |  |  |
 |----|----|
 | ⓑ |  |
 |  | $78\%$ |
 | Write as a ratio with denominator 100. | $\frac{78}{100}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $0.78$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 0.78 |
 
 ### Try It 6.9
 
@@ -233,14 +233,14 @@ Convert each percent to a decimal:
 | ⓐ |  |
 |  | $135\%$ |
 | Write as a ratio with denominator 100. | $\frac{135}{100}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $1.35$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 1.35 |
 
 |  |  |
 |----|----|
 | ⓑ |  |
 |  | $12.5\%$ |
 | Write as a ratio with denominator 100. | $\frac{12.5}{100}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $0.125$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 0.125 |
 
 ### Try It 6.11
 
@@ -260,16 +260,16 @@ Let's summarize the results from the previous examples in Table 6.1, and look fo
 
 | Percent           | Decimal   |
 |-------------------|-----------|
-| $\text{6\%}$    | $0.06$  |
-| $\text{78\%}$   | $0.78$  |
-| $\text{135\%}$  | $1.35$  |
-| $\text{12.5\%}$ | $0.125$ |
+| $\text{6\%}$    | 0.06  |
+| $\text{78\%}$   | 0.78  |
+| $\text{135\%}$  | 1.35  |
+| $\text{12.5\%}$ | 0.125 |
 
 Table 6.1
 
 Do you see the pattern?
 
-To convert a percent number to a decimal number, we move the decimal point two places to the left and remove the $\%$ sign. (Sometimes the decimal point does not appear in the percent number, but just like we can think of the integer $6$ as $6.0,$ we can think of $\text{6\%}$ as $\text{6.0\%}.$) Notice that we may need to add zeros in front of the number when moving the decimal to the left.
+To convert a percent number to a decimal number, we move the decimal point two places to the left and remove the $\%$ sign. (Sometimes the decimal point does not appear in the percent number, but just like we can think of the integer 6 as 6.0, we can think of $\text{6\%}$ as $\text{6.0\%}.$) Notice that we may need to add zeros in front of the number when moving the decimal to the left.
 
 Figure 6.3 uses the percents in Table 6.1 and shows visually how to convert them to decimals by moving the decimal point two places to the left.
 
@@ -293,7 +293,7 @@ Convert the percent to: ⓐ a fraction ⓑ a decimal
 |----|----|
 | ⓑ |  |
 |  | $\frac{77}{100}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $0.77$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 0.77 |
 
 ### Try It 6.13
 
@@ -305,7 +305,7 @@ Twitter's share of web traffic jumped $\text{24\%}$ when one celebrity tweeted l
 
 Convert the percent to: ⓐ a fraction and ⓑ a decimal
 
-The U.S. Census estimated that in $2013,\text{44\%}$ of the population of Boston age $25$ or older have a bachelor's or higher degrees.
+The U.S. Census estimated that in $2013,\text{44\%}$ of the population of Boston age 25 or older have a bachelor's or higher degrees.
 
 ### Example 6.8
 
@@ -328,7 +328,7 @@ There are four suits of cards in a deck of cards—hearts, diamonds, clubs, and 
 |  |  |
 |----|----|
 | ⓑ | $\frac{1}{4}$ |
-| Change the fraction to a decimal by dividing the numerator by the denominator. | $0.25$ |
+| Change the fraction to a decimal by dividing the numerator by the denominator. | 0.25 |
 
 ### Try It 6.15
 
@@ -344,56 +344,56 @@ The probability of getting heads three times when tossing a coin three times is 
 
 ### Convert Decimals and Fractions to Percents
 
-To convert a decimal to a percent, remember that percent means per hundred. If we change the decimal to a fraction whose denominator is $100,$ it is easy to change that fraction to a percent.
+To convert a decimal to a percent, remember that percent means per hundred. If we change the decimal to a fraction whose denominator is 100, it is easy to change that fraction to a percent.
 
 ### How To
 
 #### Convert a decimal to a percent.
 
 1.  Step 1. Write the decimal as a fraction.
-2.  Step 2. If the denominator of the fraction is not $100,$ rewrite it as an equivalent fraction with denominator $100.$
+2.  Step 2. If the denominator of the fraction is not 100, rewrite it as an equivalent fraction with denominator 100.
 3.  Step 3. Write this ratio as a percent.
 
 ### Example 6.9
 
-Convert each decimal to a percent: ⓐ$0.05$ ⓑ$0.83$
+Convert each decimal to a percent: ⓐ0.05 ⓑ0.83
 
 #### Solution
 
 |                                              |                   |
 |----------------------------------------------|-------------------|
 | ⓐ                                            |                   |
-|                                              | $0.05$          |
+|                                              | 0.05          |
 | Write as a fraction. The denominator is 100. | $\frac{5}{100}$ |
 | Write this ratio as a percent.               | $5\%$           |
 
 |                                |                    |
 |--------------------------------|--------------------|
 | ⓑ                              |                    |
-|                                | $0.83$           |
+|                                | 0.83           |
 | The denominator is 100.        | $\frac{83}{100}$ |
 | Write this ratio as a percent. | $83\%$           |
 
 ### Try It 6.17
 
-Convert each decimal to a percent: ⓐ$0.01$ ⓑ$0.17.$
+Convert each decimal to a percent: ⓐ0.01 ⓑ0.17.
 
 ### Try It 6.18
 
-Convert each decimal to a percent: ⓐ$0.04$ ⓑ$0.41$
+Convert each decimal to a percent: ⓐ0.04 ⓑ0.41
 
 To convert a mixed number to a percent, we first write it as an improper fraction.
 
 ### Example 6.10
 
-Convert each decimal to a percent: ⓐ$1.05$ ⓑ$0.075$
+Convert each decimal to a percent: ⓐ1.05 ⓑ0.075
 
 #### Solution
 
 |  |  |
 |----|----|
 | ⓐ |  |
-|  | $0.05$ |
+|  | 0.05 |
 | Write as a fraction. | $1\frac{5}{100}$ |
 | Write as an improper fraction. The denominator is 100. | $\frac{105}{100}$ |
 | Write this ratio as a percent. | $105\%$ |
@@ -403,27 +403,27 @@ Notice that since $1.05 > 1,$ the result is more than $\text{100\%.}$
 |  |  |
 |----|----|
 | ⓑ |  |
-|  | $0.075$ |
+|  | 0.075 |
 | Write as a fraction. The denominator is 1,000. | $\frac{75}{1,000}$ |
 | Divide the numerator and denominator by 10, so that the denominator is 100. | $\frac{7.5}{100}$ |
 | Write this ratio as a percent. | $7.5\%$ |
 
 ### Try It 6.19
 
-Convert each decimal to a percent: ⓐ$1.75$ ⓑ$0.0825$
+Convert each decimal to a percent: ⓐ1.75 ⓑ0.0825
 
 ### Try It 6.20
 
-Convert each decimal to a percent: ⓐ$2.25$ ⓑ$0.0925$
+Convert each decimal to a percent: ⓐ2.25 ⓑ0.0925
 
 Let's summarize the results from the previous examples in Table 6.2 so we can look for a pattern.
 
 | Decimal   | Percent          |
 |-----------|------------------|
-| $0.05$  | $\text{5\%}$   |
-| $0.83$  | $\text{83\%}$  |
-| $1.05$  | $\text{105\%}$ |
-| $0.075$ | $\text{7.5\%}$ |
+| 0.05  | $\text{5\%}$   |
+| 0.83  | $\text{83\%}$  |
+| 1.05  | $\text{105\%}$ |
+| 0.075 | $\text{7.5\%}$ |
 
 Table 6.2
 
@@ -495,7 +495,7 @@ To change a fraction to a decimal, we divide the numerator by the denominator.
 |                                                         |                 |
 |---------------------------------------------------------|-----------------|
 |                                                         | $\frac{5}{7}$ |
-| Change to a decimal—rounding to the nearest thousandth. | $0.714$       |
+| Change to a decimal—rounding to the nearest thousandth. | 0.714       |
 | Write as a percent.                                     | $71.4\%$      |
 
 ### Try It 6.23
@@ -527,7 +527,7 @@ We could also write the percent as $33.\overset{\_}{3}\%$.
 
 Convert the fraction to a percent:
 
-According to the U.S. Census Bureau, about $\frac{1}{9}$ of United States housing units have just $1$ bedroom.
+According to the U.S. Census Bureau, about $\frac{1}{9}$ of United States housing units have just 1 bedroom.
 
 ### Try It 6.26
 
@@ -545,19 +545,19 @@ In the following exercises, write each percent as a ratio.
 
 1\.
 
-In $2014,$ the unemployment rate for those with only a high school degree was $\text{6.0\%}.$
+In 2014, the unemployment rate for those with only a high school degree was $\text{6.0\%}.$
 
 2\.
 
-In $2015,$ among the unemployed, $\text{29\%}$ were long-term unemployed.
+In 2015, among the unemployed, $\text{29\%}$ were long-term unemployed.
 
 3\.
 
-The unemployment rate for those with Bachelor's degrees was $\text{3.2\%}$ in $2014.$
+The unemployment rate for those with Bachelor's degrees was $\text{3.2\%}$ in 2014.
 
 4\.
 
-The unemployment rate in Michigan in $2014$ was $\text{7.3\%}.$
+The unemployment rate in Michigan in 2014 was $\text{7.3\%}.$
 
 In the following exercises, write as
 
@@ -566,19 +566,19 @@ In the following exercises, write as
 
 5\.
 
-$57$ out of $100$ nursing candidates received their degree at a community college.
+57 out of 100 nursing candidates received their degree at a community college.
 
 6\.
 
-$80$ out of $100$ firefighters and law enforcement officers were educated at a community college.
+80 out of 100 firefighters and law enforcement officers were educated at a community college.
 
 7\.
 
-$42$ out of $100$ first-time freshmen students attend a community college.
+42 out of 100 first-time freshmen students attend a community college.
 
 8\.
 
-$71$ out of $100$ full-time community college faculty have a master's degree.
+71 out of 100 full-time community college faculty have a master's degree.
 
 **Convert Percents to Fractions and Decimals**
 
@@ -729,11 +729,11 @@ In $2000,\text{4.2\%}$ of the United States population was of Asian descent. (*S
 
 43\.
 
-According to government data, in $2013$ the number of cell phones in India was $\text{70.23\%}$ of the population.
+According to government data, in 2013 the number of cell phones in India was $\text{70.23\%}$ of the population.
 
 44\.
 
-According to the U.S. Census Bureau, among Americans age $25$ or older who had doctorate degrees in $2014,\text{37.1\%}$ are women.
+According to the U.S. Census Bureau, among Americans age 25 or older who had doctorate degrees in $2014,\text{37.1\%}$ are women.
 
 45\.
 
@@ -741,15 +741,15 @@ A couple plans to have two children. The probability they will have two girls is
 
 46\.
 
-Javier will choose one digit at random from $0$ through $9.$ The probability he will choose $3$ is $\text{10\%}.$
+Javier will choose one digit at random from 0 through 9. The probability he will choose 3 is $\text{10\%}.$
 
 47\.
 
-According to the local weather report, the probability of thunderstorms in New York City on July $15$ is $\text{60\%}.$
+According to the local weather report, the probability of thunderstorms in New York City on July 15 is $\text{60\%}.$
 
 48\.
 
-A club sells $50$ tickets to a raffle. Osbaldo bought one ticket. The probability he will win the raffle is $\text{2\%}.$
+A club sells 50 tickets to a raffle. Osbaldo bought one ticket. The probability he will win the raffle is $\text{2\%}.$
 
 **Convert Decimals and Fractions to Percents**
 
@@ -757,67 +757,67 @@ In the following exercises, convert each decimal to a percent.
 
 49\.
 
-$0.01$
+0.01
 
 50\.
 
-$0.03$
+0.03
 
 51\.
 
-$0.18$
+0.18
 
 52\.
 
-$0.15$
+0.15
 
 53\.
 
-$1.35$
+1.35
 
 54\.
 
-$1.56$
+1.56
 
 55\.
 
-$3$
+3
 
 56\.
 
-$4$
+4
 
 57\.
 
-$0.009$
+0.009
 
 58\.
 
-$0.008$
+0.008
 
 59\.
 
-$0.0875$
+0.0875
 
 60\.
 
-$0.0625$
+0.0625
 
 61\.
 
-$1.5$
+1.5
 
 62\.
 
-$2.2$
+2.2
 
 63\.
 
-$2.254$
+2.254
 
 64\.
 
-$2.317$
+2.317
 
 In the following exercises, convert each fraction to a percent.
 
@@ -903,7 +903,7 @@ According to the National Center for Health Statistics, in ${2012,}\frac{7}{20}$
 
 84\.
 
-The U.S. Census Bureau estimated that in $2013,\text{85\%}$ of Americans lived in the same house as they did $1$ year before.
+The U.S. Census Bureau estimated that in $2013,\text{85\%}$ of Americans lived in the same house as they did 1 year before.
 
 In the following exercises, complete the table.
 
@@ -912,22 +912,22 @@ In the following exercises, complete the table.
 | Fraction        | Decimal    | Percent  |
 |-----------------|------------|----------|
 | $\frac{1}{2}$ |            |          |
-|                 | $0.45$   |          |
+|                 | 0.45   |          |
 |                 |            | $18\%$ |
 | $\frac{1}{3}$ |            |          |
-|                 | $0.0008$ |          |
-| $2$           |            |          |
+|                 | 0.0008 |          |
+| 2           |            |          |
 
 Table 6.3 86.
 
 | Fraction        | Decimal    | Percent  |
 |-----------------|------------|----------|
 | $\frac{1}{4}$ |            |          |
-|                 | $0.65$   |          |
+|                 | 0.65   |          |
 |                 |            | $22\%$ |
 | $\frac{2}{3}$ |            |          |
-|                 | $0.0004$ |          |
-| $3$           |            |          |
+|                 | 0.0004 |          |
+| 3           |            |          |
 
 Table 6.4
 
@@ -989,7 +989,7 @@ When the Szetos sold their home, the selling price was $\text{500\%}$ of what th
 
 97\.
 
-According to cnn.com, cell phone use in $2008$ was $\text{600\%}$ of what it had been in $2001.$ Explain what $\text{600\%}$ means in this context.
+According to cnn.com, cell phone use in 2008 was $\text{600\%}$ of what it had been in 2001. Explain what $\text{600\%}$ means in this context.
 
 #### Self Check
 

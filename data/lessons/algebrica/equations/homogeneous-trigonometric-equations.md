@@ -6,7 +6,7 @@ Homogeneous trigonometric equations are [equations](<../equations>) in which all
 
 \\[a \sin x + b \cos x = 0 \\]
 
-Each term in the equation is of degree \\(1\\) and \\( a \\) and \\( b \\) are [real coefficients](<../types-of-numbers>). A general form of a first-degree trigonometric equation is:
+Each term in the equation is of degree 1 and \\( a \\) and \\( b \\) are [real coefficients](<../types-of-numbers>). A general form of a first-degree trigonometric equation is:
 
 \\[a \sin x + b \cos x + c = 0 \\]
 

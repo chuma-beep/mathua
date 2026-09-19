@@ -58,7 +58,7 @@ Applying the fundamental property for the case \\(\leq\\), one obtains a [system
 
 \\[-5 \leq x - 3 \leq 5 \\]
 
-To isolate \\(x\\), one adds \\(3\\) to all three members of the compound inequality. This operation is admissible because adding the same quantity to both sides of an inequality does not alter its direction.
+To isolate \\(x\\), one adds 3 to all three members of the compound inequality. This operation is admissible because adding the same quantity to both sides of an inequality does not alter its direction.
 
 \\[-5 + 3 \leq x \leq 5 + 3 \\]
 
@@ -87,9 +87,9 @@ Applying the fundamental property for the case \\(>\\), the inequality splits in
 
 \\[2x + 1 < -3 \\] \\[2x + 1 > 3\\]
 
-Resolving the first condition, subtracting \\(1\\) from both sides gives \\(2x < -4\\), and dividing by \\(2\\) yields \\(x < -2\\). Since the divisor is positive, the direction of the inequality is preserved.
+Resolving the first condition, subtracting 1 from both sides gives \\(2x < -4\\), and dividing by 2 yields \\(x < -2\\). Since the divisor is positive, the direction of the inequality is preserved.
 
-Resolving the second condition in the same way and subtracting \\(1\\) gives \\(2x > 2\\), and dividing by \\(2\\) yields \\(x > 1\\).
+Resolving the second condition in the same way and subtracting 1 gives \\(2x > 2\\), and dividing by 2 yields \\(x > 1\\).
 
 Representing the values obtained on the real line gives the following picture:
 
@@ -121,7 +121,7 @@ Case \\(x < -1\\). In this region \\(x + 1 < 0\\) and \\(x - 2 < 0\\), so both a
 
 \\[-2x + 1 > 4 \\]
 
-Subtracting \\(1\\) from both sides gives \\(-2x > 3\\). Dividing by \\(-2\\) and reversing the direction of the inequality, since the divisor is negative, one obtains the following:
+Subtracting 1 from both sides gives \\(-2x > 3\\). Dividing by \\(-2\\) and reversing the direction of the inequality, since the divisor is negative, one obtains the following:
 
 \\[x < -\frac{3}{2} \\]
 
@@ -145,7 +145,7 @@ Case \\(x \geq 2\\). In this region \\(x + 1 > 0\\) and \\(x - 2 \geq 0\\), so b
 
 \\[2x - 1 > 4 \\]
 
-Adding \\(1\\) to both sides gives \\(2x > 5\\), and dividing by \\(2\\) yields the following:
+Adding 1 to both sides gives \\(2x > 5\\), and dividing by 2 yields the following:
 
 \\[x > \frac{5}{2} \\]
 
@@ -186,7 +186,7 @@ Case \\(k > 0\\). Applying the fundamental property for the case \\(>\\), the in
 
 \\[x - 1 < -k \\] \\[x - 1 > k\\]
 
-Adding \\(1\\) to both sides of each condition yields the following:
+Adding 1 to both sides of each condition yields the following:
 
 \\[x < 1 - k \qquad \text{or} \qquad x > 1 + k \\]
 
@@ -200,7 +200,7 @@ Representing the solution on the real line gives the following picture:
 | | |   
 | | |   
   
-Note that as \\(k \to 0^+\\) the two boundary points \\(1 - k\\) and \\(1 + k\\) approach \\(1\\) from opposite sides, and the solution set approaches \\(\mathbb{R} \setminus \\{1\\}\\), consistently with case \\(k = 0\\).
+Note that as \\(k \to 0^+\\) the two boundary points \\(1 - k\\) and \\(1 + k\\) approach 1 from opposite sides, and the solution set approaches \\(\mathbb{R} \setminus \\{1\\}\\), consistently with case \\(k = 0\\).
 
 The solution is therefore the union of two open intervals: \\[\left(-\infty,\, 1-k\right) \cup \left(1+k,\, +\infty\right)\\]
 
@@ -232,6 +232,6 @@ The left inequality \\(-(2x - 3) \leq x - 1\\) simplifies to \\(-2x + 3 \leq x -
 | | | |   
 | | | |   
   
-The three critical values appearing in the graph reflect the three independent conditions derived during the solution: the threshold \\(\frac{4}{3}\\) from the left inequality, the threshold \\(\frac{3}{2}\\) from the positivity requirement on \\(g(x)\\), and the threshold \\(2\\) from the right inequality. Since each condition is more restrictive than the previous one, the effective solution is determined entirely by the rightmost bound.
+The three critical values appearing in the graph reflect the three independent conditions derived during the solution: the threshold \\(\frac{4}{3}\\) from the left inequality, the threshold \\(\frac{3}{2}\\) from the positivity requirement on \\(g(x)\\), and the threshold 2 from the right inequality. Since each condition is more restrictive than the previous one, the effective solution is determined entirely by the rightmost bound.
 
 The solution is therefore the interval \\([2, +\infty)\\).

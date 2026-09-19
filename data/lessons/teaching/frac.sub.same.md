@@ -24,7 +24,7 @@ Before you get started, take this readiness quiz.
 
 ### Model Fraction Addition
 
-How many quarters are pictured? One quarter plus $2$ quarters equals $3$ quarters.
+How many quarters are pictured? One quarter plus 2 quarters equals 3 quarters.
 
 Remember, quarters are really fractions of a dollar. Quarters are another way to say fourths. So the picture of the coins shows that
 
@@ -203,7 +203,7 @@ Find each sum: $- \frac{5}{21} + \left( {- \frac{9}{21}} \right).$
 
 ### Model Fraction Subtraction
 
-Subtracting two fractions with common denominators is much like adding fractions. Think of a pizza that was cut into $12$ slices. Suppose five pieces are eaten for dinner. This means that, after dinner, there are seven pieces (or $\frac{7}{12}$ of the pizza) left in the box. If Leonardo eats $2$ of these remaining pieces (or $\frac{2}{12}$ of the pizza), how much is left? There would be $5$ pieces left (or $\frac{5}{12}$ of the pizza).
+Subtracting two fractions with common denominators is much like adding fractions. Think of a pizza that was cut into 12 slices. Suppose five pieces are eaten for dinner. This means that, after dinner, there are seven pieces (or $\frac{7}{12}$ of the pizza) left in the box. If Leonardo eats 2 of these remaining pieces (or $\frac{2}{12}$ of the pizza), how much is left? There would be 5 pieces left (or $\frac{5}{12}$ of the pizza).
 
 $$
 \frac{7}{12} - \frac{2}{12} = \frac{5}{12}
@@ -626,7 +626,7 @@ Bits that fell out: $\frac{7}{16}$, $\frac{3}{16}$, $\frac{1}{4}$.
 
 315\.
 
-After a party, Lupe has $\frac{5}{12}$ of a cheese pizza, $\frac{4}{12}$ of a pepperoni pizza, and $\frac{4}{12}$ of a veggie pizza left. Will all the slices fit into $1$ pizza box? Explain your reasoning.
+After a party, Lupe has $\frac{5}{12}$ of a cheese pizza, $\frac{4}{12}$ of a pepperoni pizza, and $\frac{4}{12}$ of a veggie pizza left. Will all the slices fit into 1 pizza box? Explain your reasoning.
 
 #### Self Check
 

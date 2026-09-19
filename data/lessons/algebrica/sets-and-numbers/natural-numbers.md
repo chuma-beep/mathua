@@ -10,13 +10,13 @@ We denote the set of natural numbers by \\(\\mathbb{N}\\), and throughout this p
 
 A useful way to visualise the natural numbers is to place them on the real line, alongside the other numerical systems that extend them. The real line provides a geometric representation of every number, and the natural numbers appear within it as a distinguished discrete subset.
 
-Starting from \\(0\\), the natural numbers occupy equally spaced positions to the right, corresponding to \\(0, 1, 2, 3, \\dots\\), and extending indefinitely in that direction. They form an unbounded, discrete sequence of points, with no natural number lying strictly between two consecutive ones. This discreteness sets them apart from the rational and irrational numbers, which are densely distributed along the line and fill the gaps between the integer positions.
+Starting from 0, the natural numbers occupy equally spaced positions to the right, corresponding to \\(0, 1, 2, 3, \\dots\\), and extending indefinitely in that direction. They form an unbounded, discrete sequence of points, with no natural number lying strictly between two consecutive ones. This discreteness sets them apart from the rational and irrational numbers, which are densely distributed along the line and fill the gaps between the integer positions.
 
-To the left of \\(0\\), the line continues with the negative integers \\(-1, -2, -3, \\dots\\), which do not belong to \\(\\mathbb{N}\\) and are introduced only when the set is extended to the integers \\(\\mathbb{Z}\\). Between any two consecutive integers one finds infinitely many rational numbers, such as \\(1/3\\), and infinitely many irrational numbers, such as \\(-\\sqrt{3}\\) or \\(\\pi\\), which require the further extensions to \\(\\mathbb{Q}\\) and \\(\\mathbb{R}\\). In this picture the natural numbers are the most elementary layer, from which all the other numerical systems are progressively built.
+To the left of 0, the line continues with the negative integers \\(-1, -2, -3, \\dots\\), which do not belong to \\(\\mathbb{N}\\) and are introduced only when the set is extended to the integers \\(\\mathbb{Z}\\). Between any two consecutive integers one finds infinitely many rational numbers, such as \\(1/3\\), and infinitely many irrational numbers, such as \\(-\\sqrt{3}\\) or \\(\\pi\\), which require the further extensions to \\(\\mathbb{Q}\\) and \\(\\mathbb{R}\\). In this picture the natural numbers are the most elementary layer, from which all the other numerical systems are progressively built.
 
 ## The Peano axioms
 
-The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a minimal list of properties, from which every other fact about natural numbers can be derived. The Peano axioms describe a set \\(\\mathbb{N}\\) together with a distinguished element \\(0\\) and a function \\(S : \\mathbb{N} \\to \\mathbb{N}\\), called the successor function, subject to the following conditions:
+The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a minimal list of properties, from which every other fact about natural numbers can be derived. The Peano axioms describe a set \\(\\mathbb{N}\\) together with a distinguished element 0 and a function \\(S : \\mathbb{N} \\to \\mathbb{N}\\), called the successor function, subject to the following conditions:
 
 \\[
 \\begin{align}
@@ -30,14 +30,14 @@ The axiomatic approach characterises \\(\\mathbb{N}\\)as a set that satisfies a 
 
 + The first axiom ensures the existence of an initial element, which acts as the starting point of the construction.
 + The second states that the successor operation never leaves the set, so that every natural number has a natural number as its successor.
-+ The third excludes the possibility that \\(0\\) is itself the successor of some element, which guarantees that the sequence does not close into a cycle.
++ The third excludes the possibility that 0 is itself the successor of some element, which guarantees that the sequence does not close into a cycle.
 + The fourth axiom, often called the injectivity of the successor, ensures that distinct natural numbers have distinct successors, so that applying \\(S\\) repeatedly generates genuinely new elements at each step.
 
-The fifth axiom, the principle of induction, asserts that any subset of \\(\\mathbb{N}\\) containing \\(0\\) and closed under the successor function must coincide with \\(\\mathbb{N}\\) itself. This is the axiom that fixes \\(\\mathbb{N}\\) as the smallest structure satisfying the previous four, and it is the conceptual engine behind every proof by induction. A detailed treatment is given in the page on the principle of mathematical induction.
+The fifth axiom, the principle of induction, asserts that any subset of \\(\\mathbb{N}\\) containing 0 and closed under the successor function must coincide with \\(\\mathbb{N}\\) itself. This is the axiom that fixes \\(\\mathbb{N}\\) as the smallest structure satisfying the previous four, and it is the conceptual engine behind every proof by induction. A detailed treatment is given in the page on the principle of mathematical induction.
 
 ## Set-theoretic construction
 
-The Peano axioms characterise \\(\\mathbb{N}\\) up to isomorphism, but they do not exhibit an explicit model. A concrete realisation was proposed by John von Neumann within the framework of set theory, and it is by now the standard reference construction. In this construction the natural number \\(0\\) is identified with the empty set, and the successor of a natural number is defined as the union of that number with the singleton containing it. The definitions are the following:
+The Peano axioms characterise \\(\\mathbb{N}\\) up to isomorphism, but they do not exhibit an explicit model. A concrete realisation was proposed by John von Neumann within the framework of set theory, and it is by now the standard reference construction. In this construction the natural number 0 is identified with the empty set, and the successor of a natural number is defined as the union of that number with the singleton containing it. The definitions are the following:
 
 \\[
 \\begin{align}
@@ -89,8 +89,8 @@ Multiplication is therefore constructed on top of addition, according to the ide
 
 From the recursive definitions, together with the induction axiom, one can prove that addition and multiplication satisfy the expected algebraic properties. The proofs proceed by induction on one of the arguments, and they are a standard exercise in arithmetic.
 
-+ Addition is associative and commutative, and admits \\(0\\) as neutral element.
-+ Multiplication is associative and commutative, admits \\(1\\) as neutral element, and distributes over addition.
++ Addition is associative and commutative, and admits 0 as neutral element.
++ Multiplication is associative and commutative, admits 1 as neutral element, and distributes over addition.
 
 These properties are summarised as follows:
 
@@ -134,6 +134,6 @@ As an illustration of how the recursive definitions interact with the algebraic 
 \\end{align}
 \\]
 
-Since \\(S(S(S(2)))\\) is, by definition, the natural number obtained from \\(2\\) by applying the successor function three times, the final value coincides with the natural number \\(5\\).
+Since \\(S(S(S(2)))\\) is, by definition, the natural number obtained from 2 by applying the successor function three times, the final value coincides with the natural number 5.
 
 The result of the computation is \\(2 + 3 = 5\\).

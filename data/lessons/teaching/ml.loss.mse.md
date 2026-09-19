@@ -4,7 +4,7 @@ Mean squared error (MSE) measures the average squared distance between predictio
 
 ### Example
 
-Prediction $2$, target $3$: MSE $= (2-3)^2 = 1$.
+Prediction 2, target 3: MSE $= (2-3)^2 = 1$.
 
 ## Properties
 

@@ -45,7 +45,7 @@ Since cosine is positive in the first and fourth quadrants, the two solutions wi
 \\[x_1 = \frac{\pi}{3}, \quad x_2 = \frac{5\pi}{3} \\]
 
 
-Let’s now try to solve the equation \\( \tan x = 2 \\). Let’s plot a line at the value \\( 2 \\) on the graph of the [tangent function](<../tangent-function>).
+Let’s now try to solve the equation \\( \tan x = 2 \\). Let’s plot a line at the value 2 on the graph of the [tangent function](<../tangent-function>).
 
 ![](/diagrams/algebrica/trigonometric-equations-3.png)
 
@@ -103,7 +103,7 @@ Setting \\( 3x + 2 \\) equal to these solutions, we obtain the two equations:
 \\[3x + 2 = -\frac{\pi}{4} + 2k\pi \\]
 
 
-Subtracting \\(2\\) from both sides:
+Subtracting 2 from both sides:
 
 \\[3x = \frac{\pi}{4} - 2 + 2k\pi \\]
 

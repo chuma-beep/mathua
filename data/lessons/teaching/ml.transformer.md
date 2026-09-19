@@ -16,4 +16,4 @@ Scaled dot-product is $O(n^2)$ in sequence length $n$ due to $n×n$ attention ma
 
 ## Example
 
-Sequence length $4$, $d_k=2$: $QK^T$ is $4×4$, softmax rows give attention weights summing to $1$ per query.
+Sequence length 4, $d_k=2$: $QK^T$ is $4×4$, softmax rows give attention weights summing to 1 per query.

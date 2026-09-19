@@ -20,7 +20,7 @@ Before you get started, take this readiness quiz.
     If you missed this problem, review Example 4.44.
 2.  Solve: $\frac{x}{4} = 20.$  
     If you missed this problem, review Example 4.99.
-3.  Write as a rate: Sale rode his bike $24$ miles in $2$ hours.  
+3.  Write as a rate: Sale rode his bike 24 miles in 2 hours.  
     If you missed this problem, review Example 5.63.
 
 ### Use the Definition of Proportion
@@ -33,7 +33,7 @@ A proportion is an equation of the form $\frac{a}{b} = \frac{c}{d},$ where ${b \
 
 The proportion states two ratios or rates are equal. The proportion is read $\text{“}a$ is to $b,$ as $c$ is to $d\text{”.}$
 
-The equation $\frac{1}{2} = \frac{4}{8}$ is a proportion because the two fractions are equal. The proportion $\frac{1}{2} = \frac{4}{8}$ is read $\text{“}1$ is to $2$ as $4$ is to $8\text{”.}$
+The equation $\frac{1}{2} = \frac{4}{8}$ is a proportion because the two fractions are equal. The proportion $\frac{1}{2} = \frac{4}{8}$ is read $\text{“}1$ is to 2 as 4 is to $8\text{”.}$
 
 If we compare quantities with units, we have to be sure we are comparing them in the right order. For example, in the proportion $\frac{\text{20 students}}{\text{1 teacher}} = \frac{\text{60 students}}{\text{3 teachers}}$ we compare the number of students to the number of teachers. We put students in the numerators and teachers in the denominators.
 
@@ -41,9 +41,9 @@ If we compare quantities with units, we have to be sure we are comparing them in
 
 Write each sentence as a proportion:
 
-1.  ⓐ$3$ is to $7$ as $15$ is to $35.$
-2.  ⓑ$5$ hits in $8$ at bats is the same as $30$ hits in $48$ at-bats.
-3.  ⓒ$\text{\$1.50}$ for $6$ ounces is equivalent to $\text{\$2.25}$ for $9$ ounces.
+1.  ⓐ3 is to 7 as 15 is to 35.
+2.  ⓑ5 hits in 8 at bats is the same as 30 hits in 48 at-bats.
+3.  ⓒ$\text{\$1.50}$ for 6 ounces is equivalent to $\text{\$2.25}$ for 9 ounces.
 
 #### Solution
 
@@ -71,17 +71,17 @@ Write each sentence as a proportion:
 
 Write each sentence as a proportion:
 
-1.  ⓐ$5$ is to $9$ as $20$ is to $36.$
-2.  ⓑ$7$ hits in $11$ at-bats is the same as $28$ hits in $44$ at-bats.
-3.  ⓒ$\text{\$2.50}$ for $8$ ounces is equivalent to $\text{\$3.75}$ for $12$ ounces.
+1.  ⓐ5 is to 9 as 20 is to 36.
+2.  ⓑ7 hits in 11 at-bats is the same as 28 hits in 44 at-bats.
+3.  ⓒ$\text{\$2.50}$ for 8 ounces is equivalent to $\text{\$3.75}$ for 12 ounces.
 
 ### Try It 6.80
 
 Write each sentence as a proportion:
 
-1.  ⓐ$6$ is to $7$ as $36$ is to $42.$
-2.  ⓑ$8$ adults for $36$ children is the same as $12$ adults for $54$ children.
-3.  ⓒ$\text{\$3.75}$ for $6$ ounces is equivalent to $\text{\$2.50}$ for $4$ ounces.
+1.  ⓐ6 is to 7 as 36 is to 42.
+2.  ⓑ8 adults for 36 children is the same as 12 adults for 54 children.
+3.  ⓒ$\text{\$3.75}$ for 6 ounces is equivalent to $\text{\$2.50}$ for 4 ounces.
 
 Look at the proportions $\frac{1}{2} = \frac{4}{8}$ and $\frac{2}{3} = \frac{6}{9}.$ From our work with equivalent fractions we know these equations are true. But how do we know if an equation is a proportion with equivalent fractions if it contains fractions with larger numbers?
 
@@ -264,7 +264,7 @@ The strategy for solving applications that we have used earlier in this chapter,
 
 ### Example 6.45
 
-When pediatricians prescribe acetaminophen to children, they prescribe $5$ milliliters (ml) of acetaminophen for every $25$ pounds of the child’s weight. If Zoe weighs $80$ pounds, how many milliliters of acetaminophen will her doctor prescribe?
+When pediatricians prescribe acetaminophen to children, they prescribe 5 milliliters (ml) of acetaminophen for every 25 pounds of the child’s weight. If Zoe weighs 80 pounds, how many milliliters of acetaminophen will her doctor prescribe?
 
 #### Solution
 
@@ -286,15 +286,15 @@ You could also solve this proportion by setting the cross products equal.
 
 ### Try It 6.89
 
-Pediatricians prescribe $5$ milliliters (ml) of acetaminophen for every $25$ pounds of a child’s weight. How many milliliters of acetaminophen will the doctor prescribe for Emilia, who weighs $60$ pounds?
+Pediatricians prescribe 5 milliliters (ml) of acetaminophen for every 25 pounds of a child’s weight. How many milliliters of acetaminophen will the doctor prescribe for Emilia, who weighs 60 pounds?
 
 ### Try It 6.90
 
-For every $1$ kilogram (kg) of a child’s weight, pediatricians prescribe $15$ milligrams (mg) of a fever reducer. If Isabella weighs $12$ kg, how many milligrams of the fever reducer will the pediatrician prescribe?
+For every 1 kilogram (kg) of a child’s weight, pediatricians prescribe 15 milligrams (mg) of a fever reducer. If Isabella weighs 12 kg, how many milligrams of the fever reducer will the pediatrician prescribe?
 
 ### Example 6.46
 
-One brand of microwave popcorn has $120$ calories per serving. A whole bag of this popcorn has $3.5$ servings. How many calories are in a whole bag of this microwave popcorn?
+One brand of microwave popcorn has 120 calories per serving. A whole bag of this popcorn has 3.5 servings. How many calories are in a whole bag of this microwave popcorn?
 
 #### Solution
 
@@ -313,15 +313,15 @@ One brand of microwave popcorn has $120$ calories per serving. A whole bag of th
 
 ### Try It 6.91
 
-Marissa loves the Caramel Macchiato at the coffee shop. The $16$ oz. medium size has $240$ calories. How many calories will she get if she drinks the large $20$ oz. size?
+Marissa loves the Caramel Macchiato at the coffee shop. The 16 oz. medium size has 240 calories. How many calories will she get if she drinks the large 20 oz. size?
 
 ### Try It 6.92
 
-Yaneli loves Starburst candies, but wants to keep her snacks to $100$ calories. If the candies have $160$ calories for $8$ pieces, how many pieces can she have in her snack?
+Yaneli loves Starburst candies, but wants to keep her snacks to 100 calories. If the candies have 160 calories for 8 pieces, how many pieces can she have in her snack?
 
 ### Example 6.47
 
-Josiah went to Mexico for spring break and changed $\text{\$325}$ dollars into Mexican pesos. At that time, the exchange rate had $\text{\$1}$ U.S. is equal to $12.54$ Mexican pesos. How many Mexican pesos did he get for his trip?
+Josiah went to Mexico for spring break and changed $\text{\$325}$ dollars into Mexican pesos. At that time, the exchange rate had $\text{\$1}$ U.S. is equal to 12.54 Mexican pesos. How many Mexican pesos did he get for his trip?
 
 #### Solution
 
@@ -340,11 +340,11 @@ Josiah went to Mexico for spring break and changed $\text{\$325}$ dollars into M
 
 ### Try It 6.93
 
-Yurianna is going to Europe and wants to change $\text{\$800}$ dollars into Euros. At the current exchange rate, $\text{\$1}$ US is equal to $0.738$ Euro. How many Euros will she have for her trip?
+Yurianna is going to Europe and wants to change $\text{\$800}$ dollars into Euros. At the current exchange rate, $\text{\$1}$ US is equal to 0.738 Euro. How many Euros will she have for her trip?
 
 ### Try It 6.94
 
-Corey and Nicole are traveling to Japan and need to exchange $\text{\$600}$ into Japanese yen. If each dollar is $94.1$ yen, how many yen will they get?
+Corey and Nicole are traveling to Japan and need to exchange $\text{\$600}$ into Japanese yen. If each dollar is 94.1 yen, how many yen will they get?
 
 ### Write Percent Equations As Proportions
 
@@ -362,7 +362,7 @@ $$
 
 ### Percent Proportion
 
-The amount is to the base as the percent is to $100.$
+The amount is to the base as the percent is to 100.
 
 $$
 \frac{\text{amount}}{\text{base}} = \frac{\text{percent}}{100}
@@ -406,7 +406,7 @@ Translate to a proportion: What number is $\text{40\%}$ of $85?$
 
 ### Example 6.49
 
-Translate to a proportion. $19$ is $\text{25\%}$ of what number?
+Translate to a proportion. 19 is $\text{25\%}$ of what number?
 
 #### Solution
 
@@ -418,15 +418,15 @@ Translate to a proportion. $19$ is $\text{25\%}$ of what number?
 
 ### Try It 6.97
 
-Translate to a proportion: $36$ is $\text{25\%}$ of what number?
+Translate to a proportion: 36 is $\text{25\%}$ of what number?
 
 ### Try It 6.98
 
-Translate to a proportion: $27$ is $\text{36\%}$ of what number?
+Translate to a proportion: 27 is $\text{36\%}$ of what number?
 
 ### Example 6.50
 
-Translate to a proportion. What percent of $27$ is $9?$
+Translate to a proportion. What percent of 27 is $9?$
 
 #### Solution
 
@@ -438,11 +438,11 @@ Translate to a proportion. What percent of $27$ is $9?$
 
 ### Try It 6.99
 
-Translate to a proportion: What percent of $52$ is $39?$
+Translate to a proportion: What percent of 52 is $39?$
 
 ### Try It 6.100
 
-Translate to a proportion: What percent of $92$ is $23?$
+Translate to a proportion: What percent of 92 is $23?$
 
 ### Translate and Solve Percent Proportions
 
@@ -475,11 +475,11 @@ Translate and solve using proportions: What number is $\text{65\%}$ of $40?$
 
 Translate and solve using proportions: What number is $\text{85\%}$ of $40?$
 
-In the next example, the percent is more than $100,$ which is more than one whole. So the unknown number will be more than the base.
+In the next example, the percent is more than 100, which is more than one whole. So the unknown number will be more than the base.
 
 ### Example 6.52
 
-Translate and solve using proportions: $\text{125\%}$ of $25$ is what number?
+Translate and solve using proportions: $\text{125\%}$ of 25 is what number?
 
 #### Solution
 
@@ -498,11 +498,11 @@ Translate and solve using proportions: $\text{125\%}$ of $25$ is what number?
 
 ### Try It 6.103
 
-Translate and solve using proportions: $\text{125\%}$ of $64$ is what number?
+Translate and solve using proportions: $\text{125\%}$ of 64 is what number?
 
 ### Try It 6.104
 
-Translate and solve using proportions: $\text{175\%}$ of $84$ is what number?
+Translate and solve using proportions: $\text{175\%}$ of 84 is what number?
 
 Percents with decimals and money are also used in proportions.
 
@@ -535,7 +535,7 @@ Translate and solve using proportions: $\text{7.25\%}$ of what number is $\text{
 
 ### Example 6.54
 
-Translate and solve using proportions: What percent of $72$ is $9?$
+Translate and solve using proportions: What percent of 72 is $9?$
 
 #### Solution
 
@@ -554,11 +554,11 @@ Translate and solve using proportions: What percent of $72$ is $9?$
 
 ### Try It 6.107
 
-Translate and solve using proportions: What percent of $72$ is $27?$
+Translate and solve using proportions: What percent of 72 is $27?$
 
 ### Try It 6.108
 
-Translate and solve using proportions: What percent of $92$ is $23?$
+Translate and solve using proportions: What percent of 92 is $23?$
 
 ### Section 6.5 Exercises
 
@@ -570,51 +570,51 @@ In the following exercises, write each sentence as a proportion.
 
 244\.
 
-$4$ is to $15$ as $36$ is to $135.$
+4 is to 15 as 36 is to 135.
 
 245\.
 
-$7$ is to $9$ as $35$ is to $45.$
+7 is to 9 as 35 is to 45.
 
 246\.
 
-$12$ is to $5$ as $96$ is to $40.$
+12 is to 5 as 96 is to 40.
 
 247\.
 
-$15$ is to $8$ as $75$ is to $40.$
+15 is to 8 as 75 is to 40.
 
 248\.
 
-$5$ wins in $7$ games is the same as $115$ wins in $161$ games.
+5 wins in 7 games is the same as 115 wins in 161 games.
 
 249\.
 
-$4$ wins in $9$ games is the same as $36$ wins in $81$ games.
+4 wins in 9 games is the same as 36 wins in 81 games.
 
 250\.
 
-$8$ campers to $1$ counselor is the same as $48$ campers to $6$ counselors.
+8 campers to 1 counselor is the same as 48 campers to 6 counselors.
 
 251\.
 
-$6$ campers to $1$ counselor is the same as $48$ campers to $8$ counselors.
+6 campers to 1 counselor is the same as 48 campers to 8 counselors.
 
 252\.
 
-$\text{\$9.36}$ for $18$ ounces is the same as $\text{\$2.60}$ for $5$ ounces.
+$\text{\$9.36}$ for 18 ounces is the same as $\text{\$2.60}$ for 5 ounces.
 
 253\.
 
-$\text{\$3.92}$ for $8$ ounces is the same as $\text{\$1.47}$ for $3$ ounces.
+$\text{\$3.92}$ for 8 ounces is the same as $\text{\$1.47}$ for 3 ounces.
 
 254\.
 
-$\text{\$18.04}$ for $11$ pounds is the same as $\text{\$4.92}$ for $3$ pounds.
+$\text{\$18.04}$ for 11 pounds is the same as $\text{\$4.92}$ for 3 pounds.
 
 255\.
 
-$\text{\$12.42}$ for $27$ pounds is the same as $\text{\$5.52}$ for $12$ pounds.
+$\text{\$12.42}$ for 27 pounds is the same as $\text{\$5.52}$ for 12 pounds.
 
 In the following exercises, determine whether each equation is a proportion.
 
@@ -724,35 +724,35 @@ In the following exercises, solve the proportion problem.
 
 280\.
 
-Pediatricians prescribe $5$ milliliters (ml) of acetaminophen for every $25$ pounds of a child’s weight. How many milliliters of acetaminophen will the doctor prescribe for Jocelyn, who weighs $45$ pounds?
+Pediatricians prescribe 5 milliliters (ml) of acetaminophen for every 25 pounds of a child’s weight. How many milliliters of acetaminophen will the doctor prescribe for Jocelyn, who weighs 45 pounds?
 
 281\.
 
-Brianna, who weighs $6$ kg, just received her shots and needs a pain killer. The pain killer is prescribed for children at $15$ milligrams (mg) for every $1$ kilogram (kg) of the child’s weight. How many milligrams will the doctor prescribe?
+Brianna, who weighs 6 kg, just received her shots and needs a pain killer. The pain killer is prescribed for children at 15 milligrams (mg) for every 1 kilogram (kg) of the child’s weight. How many milligrams will the doctor prescribe?
 
 282\.
 
-At the gym, Carol takes her pulse for $10$ sec and counts $19$ beats. How many beats per minute is this? Has Carol met her target heart rate of $140$ beats per minute?
+At the gym, Carol takes her pulse for 10 sec and counts 19 beats. How many beats per minute is this? Has Carol met her target heart rate of 140 beats per minute?
 
 283\.
 
-Kevin wants to keep his heart rate at $160$ beats per minute while training. During his workout he counts $27$ beats in $10$ seconds. How many beats per minute is this? Has Kevin met his target heart rate?
+Kevin wants to keep his heart rate at 160 beats per minute while training. During his workout he counts 27 beats in 10 seconds. How many beats per minute is this? Has Kevin met his target heart rate?
 
 284\.
 
-A new energy drink advertises $106$ calories for $8$ ounces. How many calories are in $12$ ounces of the drink?
+A new energy drink advertises 106 calories for 8 ounces. How many calories are in 12 ounces of the drink?
 
 285\.
 
-One $12$ ounce can of soda has $150$ calories. If Josiah drinks the big $32$ ounce size from the local mini-mart, how many calories does he get?
+One 12 ounce can of soda has 150 calories. If Josiah drinks the big 32 ounce size from the local mini-mart, how many calories does he get?
 
 286\.
 
-Karen eats $\frac{1}{2}$ cup of oatmeal that counts for $2$ points on her weight loss program. Her husband, Joe, can have $3$ points of oatmeal for breakfast. How much oatmeal can he have?
+Karen eats $\frac{1}{2}$ cup of oatmeal that counts for 2 points on her weight loss program. Her husband, Joe, can have 3 points of oatmeal for breakfast. How much oatmeal can he have?
 
 287\.
 
-An oatmeal cookie recipe calls for $\frac{1}{2}$ cup of butter to make $4$ dozen cookies. Hilda needs to make $10$ dozen cookies for the bake sale. How many cups of butter will she need?
+An oatmeal cookie recipe calls for $\frac{1}{2}$ cup of butter to make 4 dozen cookies. Hilda needs to make 10 dozen cookies for the bake sale. How many cups of butter will she need?
 
 288\.
 
@@ -760,15 +760,15 @@ Janice is traveling to Canada and will change $\text{\$250}$ US dollars into Can
 
 289\.
 
-Todd is traveling to Mexico and needs to exchange $\text{\$450}$ into Mexican pesos. If each dollar is worth $12.29$ pesos, how many pesos will he get for his trip?
+Todd is traveling to Mexico and needs to exchange $\text{\$450}$ into Mexican pesos. If each dollar is worth 12.29 pesos, how many pesos will he get for his trip?
 
 290\.
 
-Steve changed $\text{\$600}$ into $480$ Euros. How many Euros did he receive per US dollar?
+Steve changed $\text{\$600}$ into 480 Euros. How many Euros did he receive per US dollar?
 
 291\.
 
-Martha changed $\text{\$350}$ US into $385$ Australian dollars. How many Australian dollars did she receive per US dollar?
+Martha changed $\text{\$350}$ US into 385 Australian dollars. How many Australian dollars did she receive per US dollar?
 
 292\.
 
@@ -780,27 +780,27 @@ When she arrived at a casino, Gerty changed $\text{\$20}$ into nickels. How many
 
 294\.
 
-Jesse’s car gets $30$ miles per gallon of gas. If Las Vegas is $285$ miles away, how many gallons of gas are needed to get there and then home? If gas is $\text{\$3.09}$ per gallon, what is the total cost of the gas for the trip?
+Jesse’s car gets 30 miles per gallon of gas. If Las Vegas is 285 miles away, how many gallons of gas are needed to get there and then home? If gas is $\text{\$3.09}$ per gallon, what is the total cost of the gas for the trip?
 
 295\.
 
-Danny wants to drive to Phoenix to see his grandfather. Phoenix is $370$ miles from Danny’s home and his car gets $18.5$ miles per gallon. How many gallons of gas will Danny need to get to and from Phoenix? If gas is $\text{\$3.19}$ per gallon, what is the total cost for the gas to drive to see his grandfather?
+Danny wants to drive to Phoenix to see his grandfather. Phoenix is 370 miles from Danny’s home and his car gets 18.5 miles per gallon. How many gallons of gas will Danny need to get to and from Phoenix? If gas is $\text{\$3.19}$ per gallon, what is the total cost for the gas to drive to see his grandfather?
 
 296\.
 
-Hugh leaves early one morning to drive from his home in Chicago to go to Mount Rushmore, $812$ miles away. After $3$ hours, he has gone $190$ miles. At that rate, how long will the whole drive take?
+Hugh leaves early one morning to drive from his home in Chicago to go to Mount Rushmore, 812 miles away. After 3 hours, he has gone 190 miles. At that rate, how long will the whole drive take?
 
 297\.
 
-Kelly leaves her home in Seattle to drive to Spokane, a distance of $280$ miles. After $2$ hours, she has gone $152$ miles. At that rate, how long will the whole drive take?
+Kelly leaves her home in Seattle to drive to Spokane, a distance of 280 miles. After 2 hours, she has gone 152 miles. At that rate, how long will the whole drive take?
 
 298\.
 
-Phil wants to fertilize his lawn. Each bag of fertilizer covers about $4,000$ square feet of lawn. Phil’s lawn is approximately $13,500$ square feet. How many bags of fertilizer will he have to buy?
+Phil wants to fertilize his lawn. Each bag of fertilizer covers about 4,000 square feet of lawn. Phil’s lawn is approximately 13,500 square feet. How many bags of fertilizer will he have to buy?
 
 299\.
 
-April wants to paint the exterior of her house. One gallon of paint covers about $350$ square feet, and the exterior of the house measures approximately $2000$ square feet. How many gallons of paint will she have to buy?
+April wants to paint the exterior of her house. One gallon of paint covers about 350 square feet, and the exterior of the house measures approximately 2000 square feet. How many gallons of paint will she have to buy?
 
 **Write Percent Equations as Proportions**
 
@@ -824,35 +824,35 @@ What number is $\text{150\%}$ of $64?$
 
 304\.
 
-$45$ is $\text{30\%}$ of what number?
+45 is $\text{30\%}$ of what number?
 
 305\.
 
-$25$ is $\text{80\%}$ of what number?
+25 is $\text{80\%}$ of what number?
 
 306\.
 
-$90$ is $\text{150\%}$ of what number?
+90 is $\text{150\%}$ of what number?
 
 307\.
 
-$77$ is $\text{110\%}$ of what number?
+77 is $\text{110\%}$ of what number?
 
 308\.
 
-What percent of $85$ is $17?$
+What percent of 85 is $17?$
 
 309\.
 
-What percent of $92$ is $46?$
+What percent of 92 is $46?$
 
 310\.
 
-What percent of $260$ is $340?$
+What percent of 260 is $340?$
 
 311\.
 
-What percent of $180$ is $220?$
+What percent of 180 is $220?$
 
 **Translate and Solve Percent Proportions**
 
@@ -868,19 +868,19 @@ What number is $\text{55\%}$ of $300?$
 
 314\.
 
-$\text{18\%}$ of $92$ is what number?
+$\text{18\%}$ of 92 is what number?
 
 315\.
 
-$\text{22\%}$ of $74$ is what number?
+$\text{22\%}$ of 74 is what number?
 
 316\.
 
-$\text{175\%}$ of $26$ is what number?
+$\text{175\%}$ of 26 is what number?
 
 317\.
 
-$\text{250\%}$ of $61$ is what number?
+$\text{250\%}$ of 61 is what number?
 
 318\.
 
@@ -908,29 +908,29 @@ $\text{\$18.12}$ is $\text{7.55\%}$ of what number?
 
 324\.
 
-What percent of $56$ is $14?$
+What percent of 56 is $14?$
 
 325\.
 
-What percent of $80$ is $28?$
+What percent of 80 is $28?$
 
 326\.
 
-What percent of $96$ is $12?$
+What percent of 96 is $12?$
 
 327\.
 
-What percent of $120$ is $27?$
+What percent of 120 is $27?$
 
 #### Everyday Math
 
 328\.
 
-**Mixing a concentrate** Sam bought a large bottle of concentrated cleaning solution at the warehouse store. He must mix the concentrate with water to make a solution for washing his windows. The directions tell him to mix $3$ ounces of concentrate with $5$ ounces of water. If he puts $12$ ounces of concentrate in a bucket, how many ounces of water should he add? How many ounces of the solution will he have altogether?
+**Mixing a concentrate** Sam bought a large bottle of concentrated cleaning solution at the warehouse store. He must mix the concentrate with water to make a solution for washing his windows. The directions tell him to mix 3 ounces of concentrate with 5 ounces of water. If he puts 12 ounces of concentrate in a bucket, how many ounces of water should he add? How many ounces of the solution will he have altogether?
 
 329\.
 
-**Mixing a concentrate** Travis is going to wash his car. The directions on the bottle of car wash concentrate say to mix $2$ ounces of concentrate with $15$ ounces of water. If Travis puts $6$ ounces of concentrate in a bucket, how much water must he mix with the concentrate?
+**Mixing a concentrate** Travis is going to wash his car. The directions on the bottle of car wash concentrate say to mix 2 ounces of concentrate with 15 ounces of water. If Travis puts 6 ounces of concentrate in a bucket, how much water must he mix with the concentrate?
 
 #### Writing Exercises
 
@@ -940,7 +940,7 @@ To solve “what number is $\text{45\%}$ of $350\text{”}$ do you prefer to use
 
 331\.
 
-To solve “what percent of $125$ is $25\text{”}$ do you prefer to use an equation like you did in the section on Decimal Operations or a proportion like you did in this section? Explain your reason.
+To solve “what percent of 125 is $25\text{”}$ do you prefer to use an equation like you did in the section on Decimal Operations or a proportion like you did in this section? Explain your reason.
 
 #### Self Check
 

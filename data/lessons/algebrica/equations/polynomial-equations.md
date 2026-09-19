@@ -71,7 +71,7 @@ If \\(x = p/q\\) is a rational root expressed in lowest terms, then \\(p\\) must
 2x^3 - 3x^2 - 11x + 6 = 0
 \\]
 
-The divisors of the constant term \\(6\\) are \\(\pm 1, \pm 2, \pm 3, \pm 6\\), and the divisors of the leading coefficient \\(2\\) are \\(\pm 1, \pm 2\\). The rational root candidates are therefore all fractions of the form \\(p/q\\) drawn from these two sets. Testing \\(x = 3\\) by direct substitution gives the following.
+The divisors of the constant term 6 are \\(\pm 1, \pm 2, \pm 3, \pm 6\\), and the divisors of the leading coefficient 2 are \\(\pm 1, \pm 2\\). The rational root candidates are therefore all fractions of the form \\(p/q\\) drawn from these two sets. Testing \\(x = 3\\) by direct substitution gives the following.
 
 \\[
 2(27) - 3(9) - 11(3) + 6 = 54 - 27 - 33 + 6 = 0

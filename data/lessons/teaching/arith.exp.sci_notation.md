@@ -16,9 +16,9 @@ By the end of this section, you will be able to:
 
 Before you get started, take this readiness quiz.
 
-1.  What is the place value of the $6$ in the number $64,891?$  
+1.  What is the place value of the 6 in the number $64,891?$  
     If you missed this problem, review Example 1.3.
-2.  Name the decimal $0.0012.$  
+2.  Name the decimal 0.0012.  
     If you missed this problem, review \[link\].
 3.  Subtract: $5 - (-3).$  
     If you missed this problem, review Example 3.37.
@@ -180,7 +180,7 @@ Remember to always follow the order of operations.
 | ⓐ                                   |                             |
 | Do exponents before multiplication. | $4 \cdot 2^{-1}$          |
 | Use $a^{- n} = \frac{1}{a^{n}}.$  | $4 \cdot \frac{1}{2^{1}}$ |
-| Simplify.                           | $2$                       |
+| Simplify.                           | 2                       |
 
 |                                        |                          |
 |----------------------------------------|--------------------------|
@@ -488,9 +488,9 @@ Simplify: $\frac{y^{7}}{y^{-6}}.$
 
 ### Convert from Decimal Notation to Scientific Notation
 
-Remember working with place value for whole numbers and decimals? Our number system is based on powers of $10.$ We use tens, hundreds, thousands, and so on. Our decimal numbers are also based on powers of tens—tenths, hundredths, thousandths, and so on.
+Remember working with place value for whole numbers and decimals? Our number system is based on powers of 10. We use tens, hundreds, thousands, and so on. Our decimal numbers are also based on powers of tens—tenths, hundredths, thousandths, and so on.
 
-Consider the numbers $4000$ and $0.004.$ We know that $4000$ means $4\  \times \ 1000$ and $0.004$ means $4\  \times \ \frac{1}{1000}.$ If we write the $1000$ as a power of ten in exponential form, we can rewrite these numbers in this way:
+Consider the numbers 4000 and 0.004. We know that 4000 means $4\  \times \ 1000$ and 0.004 means $4\  \times \ \frac{1}{1000}.$ If we write the 1000 as a power of ten in exponential form, we can rewrite these numbers in this way:
 
 $$
 \begin{matrix}
@@ -501,7 +501,7 @@ $$
 \end{matrix}
 $$
 
-When a number is written as a product of two numbers, where the first factor is a number greater than or equal to one but less than $10,$ and the second factor is a power of $10$ written in exponential form, it is said to be in *scientific notation.*
+When a number is written as a product of two numbers, where the first factor is a number greater than or equal to one but less than 10, and the second factor is a power of 10 written in exponential form, it is said to be in *scientific notation.*
 
 ### Scientific Notation
 
@@ -519,14 +519,14 @@ Scientific notation is a useful way of writing very large or very small numbers.
 
 If we look at what happened to the decimal point, we can see a method to easily convert from decimal notation to scientific notation.
 
-In both cases, the decimal was moved $3$ places to get the first factor, $4,$ by itself.
+In both cases, the decimal was moved 3 places to get the first factor, 4, by itself.
 
-- The power of $10$ is positive when the number is larger than $1\text{:}\ 4000 = 4\  \times \ 10^{3}.$
-- The power of $10$ is negative when the number is between $0$ and $1\text{:}\ 0.004 = 4\  \times \ 10^{- 3}.$
+- The power of 10 is positive when the number is larger than $1\text{:}\ 4000 = 4\  \times \ 10^{3}.$
+- The power of 10 is negative when the number is between 0 and $1\text{:}\ 0.004 = 4\  \times \ 10^{- 3}.$
 
 ### Example 10.74
 
-Write $37,000$ in scientific notation.
+Write 37,000 in scientific notation.
 
 #### Solution
 
@@ -574,27 +574,27 @@ Write $37,000$ in scientific notation.
 
 ### Try It 10.147
 
-Write in scientific notation: $96,000.$
+Write in scientific notation: 96,000.
 
 ### Try It 10.148
 
-Write in scientific notation: $48,300.$
+Write in scientific notation: 48,300.
 
 ### How To
 
 #### Convert from decimal notation to scientific notation.
 
-1.  Step 1. Move the decimal point so that the first factor is greater than or equal to $1$ but less than $10.$
+1.  Step 1. Move the decimal point so that the first factor is greater than or equal to 1 but less than 10.
 2.  Step 2. Count the number of decimal places, $n,$ that the decimal point was moved.
-3.  Step 3. Write the number as a product with a power of $10.$
+3.  Step 3. Write the number as a product with a power of 10.
     - If the original number is:
-      - greater than $1,$ the power of $10$ will be $10^{n}.$
-      - between $0$ and $1,$ the power of $10$ will be $10^{- n}.$
+      - greater than 1, the power of 10 will be $10^{n}.$
+      - between 0 and 1, the power of 10 will be $10^{- n}.$
 4.  Step 4. Check.
 
 ### Example 10.75
 
-Write in scientific notation: $0.0052.$
+Write in scientific notation: 0.0052.
 
 #### Solution
 
@@ -642,11 +642,11 @@ $$\begin{matrix}
 
 ### Try It 10.149
 
-Write in scientific notation: $0.0078.$
+Write in scientific notation: 0.0078.
 
 ### Try It 10.150
 
-Write in scientific notation: $0.0129.$
+Write in scientific notation: 0.0129.
 
 ### Convert Scientific Notation to Decimal Form
 
@@ -714,7 +714,7 @@ Convert to decimal form: $9.25\  \times \ 10^{4}.$
 
 #### Convert scientific notation to decimal form.
 
-1.  Step 1. Determine the exponent, $n,$ on the factor $10.$
+1.  Step 1. Determine the exponent, $n,$ on the factor 10.
 2.  Step 2. Move the decimal $n$ places, adding zeros if needed.
     - If the exponent is positive, move the decimal point $n$ places to the right.
     - If the exponent is negative, move the decimal point $|n|$ places to the left.
@@ -758,7 +758,7 @@ Multiply. Write answers in decimal form: ${({4\  \times \ 10^{5}})}{({2\  \times
 |  | ${({4\  \times \ 10^{5}})}{({2\  \times \ 10^{-7}})}$ |
 | Use the Commutative Property to rearrange the factors. | $4 \cdot 2 \cdot 10^{5} \cdot 10^{-7}$ |
 | Multiply 4 by 2 and use the Product Property to multiply $10^{5}$ by $10^{-7}$. | $8\  \times \ 10^{-2}$ |
-| Change to decimal form by moving the decimal two places left. | $0.08$ |
+| Change to decimal form by moving the decimal two places left. | 0.08 |
 
 ### Try It 10.155
 
@@ -779,7 +779,7 @@ Divide. Write answers in decimal form: $\frac{9\  \times \ 10^{3}}{3\  \times \ 
 |  | $\frac{9\  \times \ 10^{3}}{3\  \times \ 10^{-2}}$ |
 | Separate the factors. | $\frac{9}{3}\  \times \ \frac{10^{3}}{10^{-2}}$ |
 | Divide 9 by 3 and use the Quotient Property to divide $10^{3}$ by $10^{-2}$. | $3\  \times \ 10^{5}$ |
-| Change to decimal form by moving the decimal five places right. | $300,000$ |
+| Change to decimal form by moving the decimal five places right. | 300,000 |
 
 ### Try It 10.157
 
@@ -1135,19 +1135,19 @@ In the following exercises, write each number in scientific notation.
 
 392\.
 
-The population of the United States on July 4, 2010 was almost $310,000,000.$
+The population of the United States on July 4, 2010 was almost 310,000,000.
 
 393\.
 
-The population of the world on July 4, 2010 was more than $6,850,000,000.$
+The population of the world on July 4, 2010 was more than 6,850,000,000.
 
 394\.
 
-The average width of a human hair is $0.0018$ centimeters.
+The average width of a human hair is 0.0018 centimeters.
 
 395\.
 
-The probability of winning the $2010$ Megamillions lottery is about $0.0000000057.$
+The probability of winning the 2010 Megamillions lottery is about 0.0000000057.
 
 **Convert Scientific Notation to Decimal Form**
 
@@ -1241,25 +1241,25 @@ $\frac{5\  \times \ 10^{-3}}{1\  \times \ 10^{-10}}$
 
 416\.
 
-**Calories** In May 2010 the Food and Beverage Manufacturers pledged to reduce their products by $1.5$ trillion calories by the end of 2015.
+**Calories** In May 2010 the Food and Beverage Manufacturers pledged to reduce their products by 1.5 trillion calories by the end of 2015.
 
-1.  ⓐ Write $1.5$ trillion in decimal notation.
-2.  ⓑ Write $1.5$ trillion in scientific notation.
+1.  ⓐ Write 1.5 trillion in decimal notation.
+2.  ⓑ Write 1.5 trillion in scientific notation.
 
 417\.
 
-**Length of a year** The difference between the calendar year and the astronomical year is $0.000125$ day.
+**Length of a year** The difference between the calendar year and the astronomical year is 0.000125 day.
 
 1.  ⓐ Write this number in scientific notation.
 2.  ⓑ How many years does it take for the difference to become 1 day?
 
 418\.
 
-**Calculator display** Many calculators automatically show answers in scientific notation if there are more digits than can fit in the calculator’s display. To find the probability of getting a particular 5-card hand from a deck of cards, Mario divided $1$ by $2,598,960$ and saw the answer $3.848\  \times \ 10^{-7}.$ Write the number in decimal notation.
+**Calculator display** Many calculators automatically show answers in scientific notation if there are more digits than can fit in the calculator’s display. To find the probability of getting a particular 5-card hand from a deck of cards, Mario divided 1 by 2,598,960 and saw the answer $3.848\  \times \ 10^{-7}.$ Write the number in decimal notation.
 
 419\.
 
-**Calculator display** Many calculators automatically show answers in scientific notation if there are more digits than can fit in the calculator’s display. To find the number of ways Barbara could make a collage with $6$ of her $50$ favorite photographs, she multiplied $50 \cdot 49 \cdot 48 \cdot 47 \cdot 46 \cdot 45.$ Her calculator gave the answer $1.1441304\  \times \ 10^{10}.$ Write the number in decimal notation.
+**Calculator display** Many calculators automatically show answers in scientific notation if there are more digits than can fit in the calculator’s display. To find the number of ways Barbara could make a collage with 6 of her 50 favorite photographs, she multiplied $50 \cdot 49 \cdot 48 \cdot 47 \cdot 46 \cdot 45.$ Her calculator gave the answer $1.1441304\  \times \ 10^{10}.$ Write the number in decimal notation.
 
 #### Writing Exercises
 

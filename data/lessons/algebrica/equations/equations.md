@@ -30,7 +30,7 @@ A representative instance is the quadratic equation with negative discriminant, 
 
 Two equations are considered equivalent if they possess identical solution sets. The objective in solving an equation is to apply a sequence of transformations that maintain this equivalence, thereby reducing the equation to a simpler form in which the solutions are readily apparent.
 
-Certain operations are guaranteed to yield an equivalent equation. Adding or subtracting the same expression on both sides, or multiplying both sides by a nonzero constant, does not alter the solution set. These manipulations form the basis of most elementary solution techniques. As a simple illustration, the equation \\( 2x + 4 = 0 \\) is equivalent to \\( x + 2 = 0 \\), obtained by dividing both sides by \\( 2 \\), and both equations share the unique solution \\( x = -2 \\).
+Certain operations are guaranteed to yield an equivalent equation. Adding or subtracting the same expression on both sides, or multiplying both sides by a nonzero constant, does not alter the solution set. These manipulations form the basis of most elementary solution techniques. As a simple illustration, the equation \\( 2x + 4 = 0 \\) is equivalent to \\( x + 2 = 0 \\), obtained by dividing both sides by 2, and both equations share the unique solution \\( x = -2 \\).
 
 Other operations can disrupt equivalence in less obvious ways. Multiplying both sides by an expression involving the variable may introduce extraneous solutions if the expression equals zero for some value of \\( x \\). Similarly, squaring both sides, a common technique for irrational equations, can produce solutions that satisfy the transformed equation but not the original. Conversely, dividing both sides by a variable expression may eliminate solutions at points where the expression is zero, a phenomenon addressed in detail in the discussion on loss of roots.
 
@@ -44,15 +44,15 @@ P(x) = a_{n}x^{n} + a_{n-1}x^{n-1} + \cdots + a_{1}x + a_{0}
 
 where \\( n \\) is a non-negative integer, the coefficients \\( a_0, a_1, \ldots, a_n \\) belong to some fixed field (typically \\( \mathbb{R} \\) or \\( \mathbb{C} \\)), and \\( a_n \neq 0 \\) when \\( n \geq 1 \\). The integer \\( n \\) is the degree of the polynomial. An algebraic equation then takes the form \\( P(x) = Q(x) \\), or equivalently \\( P(x) - Q(x) = 0 \\), which reduces the problem to finding the roots of a single polynomial. Algebraic equations are classified according to the degree of the polynomial involved.
 
-Linear equations have degree \\( 1 \\). They involve the variable raised to no power higher than the first, and their solution is always unique when the leading coefficient is nonzero.
+Linear equations have degree 1. They involve the variable raised to no power higher than the first, and their solution is always unique when the leading coefficient is nonzero.
 
-Quadratic equations have degree \\( 2 \\) and take the standard form \\( ax^2 + bx + c = 0 \\), with \\( a \neq 0 \\). The nature of their solutions is governed by the discriminant \\( \Delta = b^2 - 4ac \\).
+Quadratic equations have degree 2 and take the standard form \\( ax^2 + bx + c = 0 \\), with \\( a \neq 0 \\). The nature of their solutions is governed by the discriminant \\( \Delta = b^2 - 4ac \\).
 
 + If \\( \Delta > 0 \\) there are two distinct real solutions.
 + If \\( \Delta = 0 \\) there is one repeated real solution.
 + If \\( \Delta < 0 \\) the solutions are a pair of complex conjugates.
 
-Cubic equations have degree \\( 3 \\) and take the general form \\( ax^3 + bx^2 + cx + d = 0 \\). By the Fundamental Theorem of Algebra, every polynomial of degree \\( n \\) with coefficients in \\( \mathbb{C} \\) has exactly \\( n \\) roots in \\( \mathbb{C} \\), counted with multiplicity. A cubic equation therefore has exactly three roots in \\( \mathbb{C} \\), which may be all real, or one real and two complex conjugates.
+Cubic equations have degree 3 and take the general form \\( ax^3 + bx^2 + cx + d = 0 \\). By the Fundamental Theorem of Algebra, every polynomial of degree \\( n \\) with coefficients in \\( \mathbb{C} \\) has exactly \\( n \\) roots in \\( \mathbb{C} \\), counted with multiplicity. A cubic equation therefore has exactly three roots in \\( \mathbb{C} \\), which may be all real, or one real and two complex conjugates.
 
 Equations of degree higher than three follow the same principle: a polynomial equation of degree \\( n \\) has exactly \\( n \\) roots in \\( \mathbb{C} \\), counted with multiplicity, though explicit formulas for the roots in terms of radicals exist only for degrees up to four, a fact made precise by the theory of Galois.
 
