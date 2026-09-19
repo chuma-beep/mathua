@@ -27,6 +27,14 @@ def load_dag_ids():
     return ids
 
 
+def norm_section(s):
+    """Strip math delimiters so shard sections (raw Algebrica `\\(...)`)
+    compare equal to canonicalized headings (`$...$`) — the same rule as
+    normSectionKey in internal/lessons/lesson.go. Keep in sync."""
+    s = re.sub(r"\\\\[()\[\]]|\\[()\[\]]|\$\$?", "", s)
+    return " ".join(s.split())
+
+
 def main():
     errors = []
 
@@ -102,9 +110,9 @@ def main():
                 t = line.strip()
                 m = re.match(r"^(#{2,4})\s+(.+)$", t)
                 if m:
-                    heads.add(m.group(2).strip())
+                    heads.add(norm_section(m.group(2).strip()))
             for kp in kps:
-                if kp.get("section") and kp["section"] not in heads:
+                if kp.get("section") and norm_section(kp["section"]) not in heads:
                     kp_orphans.append(f"{name}: section {kp['section']!r} unresolved")
         if kp_orphans:
             errors.append(f"kp shard problems ({len(kp_orphans)}):\n  " + "\n  ".join(kp_orphans))

@@ -295,3 +295,22 @@ func writeFile(t *testing.T, path, content string) {
 		t.Fatalf("write file: %v", err)
 	}
 }
+
+func TestExtractSection_MathHeadingMatchesRawShardSection(t *testing.T) {
+	// Served headings are canonicalized (`$...$`); shard sections stay raw
+	// Algebrica (`\\(...\\)`). They must resolve to the section, not "".
+	body := "## Intro\n\nplain\n\n## The substitution $ t = \\tan(x/2)$\n\nwork\n\n## Next\n\ntail\n"
+	sec, ok := extractSection(body, `The substitution \\( t = \tan(x/2) \\)`)
+	if !ok {
+		t.Fatal("raw shard section did not resolve against canonical heading")
+	}
+	if !strings.Contains(sec, "work") || strings.Contains(sec, "tail") {
+		t.Errorf("wrong slice bounds, got:\n%s", sec)
+	}
+}
+
+func TestNormSectionKey_PlainHeadingsUnchanged(t *testing.T) {
+	if got := normSectionKey("Translating sine, cosine, and the differential"); got != "Translating sine, cosine, and the differential" {
+		t.Errorf("plain heading altered: %q", got)
+	}
+}

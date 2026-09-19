@@ -10,6 +10,7 @@ import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessonKPs, type LessonInfo, type Scores, type LessonKpsRes } from '../../lib/api'
+import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
 
 export function QuizGateBanner({ scores }: { scores: Scores | null }) {
@@ -425,7 +426,7 @@ export function LessonDetail({
                 {kps.map((kp, k) => (
                   <div key={`${cid}-${kp.label}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
                     <p className="font-mono text-xs text-mathua-primary">
-                      {k + 1}. {kp.label}
+                      {k + 1}. {stripMathDelimiters(kp.label)}
                     </p>
                     {kp.subgoals.length > 0 && (
                       <ul className="mt-2 space-y-1">
@@ -434,7 +435,7 @@ export function LessonDetail({
                             key={sg}
                             className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
                           >
-                            {sg}
+                            {stripMathDelimiters(sg)}
                           </li>
                         ))}
                       </ul>

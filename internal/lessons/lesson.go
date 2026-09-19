@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 )
@@ -150,9 +151,21 @@ func (l *Loader) KPSectionBody(conceptID, section string) (string, bool) {
 	return extractSection(lesson.Body, section)
 }
 
+// sectionDelimRe strips math delimiters for heading comparison. Shard
+// sections are raw Algebrica (`The substitution \\( t = ...`), while served
+// headings are canonicalized (`The substitution $ t = ...$`); without this
+// the exact match in extractSection fails and callers silently fall back to
+// the full lesson body (duplicated content on study pages).
+var sectionDelimRe = regexp.MustCompile(`\\\\[()\[\]]|\\[()\[\]]|\$\$?`)
+
+func normSectionKey(s string) string {
+	return strings.Join(strings.Fields(sectionDelimRe.ReplaceAllString(s, "")), " ")
+}
+
 // extractSection returns the markdown from the given heading up to the next
 // heading at the same or higher level.
 func extractSection(body, heading string) (string, bool) {
+	want := normSectionKey(heading)
 	lines := strings.Split(body, "\n")
 	start := -1
 	startLevel := 0
@@ -165,15 +178,15 @@ func extractSection(body, heading string) (string, bool) {
 		for level < len(t) && t[level] == '#' {
 			level++
 		}
-		name := strings.TrimSpace(t[level:])
+		name := normSectionKey(strings.TrimSpace(t[level:]))
 		if start < 0 {
-			if name == heading {
+			if name == want {
 				start = i
 				startLevel = level
 			}
 			continue
 		}
-		if level <= startLevel && name != heading {
+		if level <= startLevel && name != want {
 			return strings.Join(lines[start:i], "\n"), true
 		}
 	}
