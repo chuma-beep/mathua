@@ -1,0 +1,85 @@
+# Barrage load profile: guest study loop vs SQLite on one clock.
+#
+# Scenario runner drives the real HTTP flow (session -> chained answers ->
+# scores) while the db runner issues the app's heaviest read shapes directly
+# against the same SQLite file. Correlated buckets show whether answer-submit
+# latency comes from the app (grading/engine) or the database (write lock).
+#
+# Run (from repo root):
+#   go build -o /tmp/mathua-loadtest ./cmd/mathua
+#   DATABASE_URL=sqlite:/tmp/mathua-loadtest.db MATHUA_LOADTEST=1 \
+#     /tmp/mathua-loadtest -serve -no-auth -port 8081 &
+#   barrage run -c loadtest/barrage-study-loop.yaml --json loadtest/baseline-sqlite.json
+#
+# MATHUA_LOADTEST=1 is required: without it the write limiter (20/3s per IP)
+# absorbs the burst as 429s and the run measures the limiter, not the app.
+# Scratch DB only — never point this at mathua.db or production.
+
+duration: 30s
+bucket_width: 1s
+ramp: 5s
+concurrency: 20
+
+scenario:
+  - name: study-loop
+    weight: 3
+    steps:
+      - method: POST
+        url: http://localhost:8081/api/session
+        body: '{"name":"loadtest"}'
+        headers:
+          Content-Type: application/json
+        extract:
+          sid: $.session_id
+          aid: $.question.attempt_id
+          student: $.student_id
+      - method: POST
+        url: http://localhost:8081/api/answer
+        body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
+        headers:
+          Content-Type: application/json
+        extract:
+          aid: $.next_question.attempt_id
+      - method: POST
+        url: http://localhost:8081/api/answer
+        body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
+        headers:
+          Content-Type: application/json
+        extract:
+          aid: $.next_question.attempt_id
+      - method: POST
+        url: http://localhost:8081/api/answer
+        body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
+        headers:
+          Content-Type: application/json
+      - method: GET
+        url: http://localhost:8081/api/scores/{{student}}
+  - name: read-browse
+    weight: 1
+    steps:
+      - method: GET
+        url: http://localhost:8081/api/graph
+      - method: GET
+        url: http://localhost:8081/api/leaderboard
+
+db:
+  rate: 20
+  target:
+    driver: sqlite
+    conn: /tmp/mathua-loadtest.db
+    queries:
+      - query: SELECT COUNT(*) FROM attempts
+        weight: 20
+        type: read
+      - query: SELECT concept_id, status, streak FROM concept_progress LIMIT 50
+        weight: 20
+        type: read
+      - query: SELECT id FROM sessions ORDER BY started_at DESC LIMIT 20
+        weight: 15
+        type: read
+      - query: SELECT student_id, COUNT(*) FROM attempts GROUP BY student_id ORDER BY 2 DESC LIMIT 10
+        weight: 15
+        type: read
+      - query: SELECT AVG(elapsed_seconds) FROM attempts
+        weight: 10
+        type: read
