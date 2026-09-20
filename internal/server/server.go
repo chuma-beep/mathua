@@ -162,6 +162,15 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 		writeLimiter: newRateLimiter(20, 20, 3*time.Second),
 		shareLimiter: newRateLimiter(10, 10, 6*time.Second),
 	}
+	// MATHUA_LOADTEST=1 relaxes rate limits so load generators measure the
+	// app and database instead of the limiter. Local/staging use only —
+	// never set in production.
+	if os.Getenv("MATHUA_LOADTEST") == "1" {
+		log.Print("loadtest mode: rate limits relaxed")
+		s.authLimiter = newRateLimiter(100000, 100000, time.Second)
+		s.writeLimiter = newRateLimiter(100000, 100000, time.Second)
+		s.shareLimiter = newRateLimiter(100000, 100000, time.Second)
+	}
 	// Clean up abandoned diagnostic/quiz sessions older than 1 hour, plus
 	// expired durable server_sessions rows (admin logins, study anchors).
 	//nolint:goroutinelint // process-lifetime janitor: runs until the process exits
