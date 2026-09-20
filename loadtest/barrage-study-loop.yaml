@@ -5,11 +5,15 @@
 # against the same SQLite file. Correlated buckets show whether answer-submit
 # latency comes from the app (grading/engine) or the database (write lock).
 #
-# Run (from repo root):
+# Run (from repo root; port must be free — 8081 is taken by llama-server
+# on this machine, hence 18082):
 #   go build -o /tmp/mathua-loadtest ./cmd/mathua
-#   DATABASE_URL=sqlite:/tmp/mathua-loadtest.db MATHUA_LOADTEST=1 \
-#     /tmp/mathua-loadtest -serve -no-auth -port 8081 &
-#   barrage run -c loadtest/barrage-study-loop.yaml --json loadtest/baseline-sqlite.json
+#   DATABASE_URL=/tmp/mathua-loadtest.db MATHUA_LOADTEST=1 \
+#     /tmp/mathua-loadtest -serve -no-auth -port 18082 &
+#   barrage run -c loadtest/barrage-study-loop.yaml --json loadtest/baseline-sqlite-pool8.json
+#
+# NOTE: DATABASE_URL takes a bare file path — the `sqlite:` prefix used in
+# docker-compose.yml is not stripped by NewSQLiteStore and fails to open.
 #
 # MATHUA_LOADTEST=1 is required: without it the write limiter (20/3s per IP)
 # absorbs the burst as 429s and the run measures the limiter, not the app.
@@ -25,7 +29,7 @@ scenario:
     weight: 3
     steps:
       - method: POST
-        url: http://localhost:8081/api/session
+        url: http://localhost:18082/api/session
         body: '{"name":"loadtest"}'
         headers:
           Content-Type: application/json
@@ -34,33 +38,33 @@ scenario:
           aid: $.question.attempt_id
           student: $.student_id
       - method: POST
-        url: http://localhost:8081/api/answer
+        url: http://localhost:18082/api/answer
         body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
         headers:
           Content-Type: application/json
         extract:
           aid: $.next_question.attempt_id
       - method: POST
-        url: http://localhost:8081/api/answer
+        url: http://localhost:18082/api/answer
         body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
         headers:
           Content-Type: application/json
         extract:
           aid: $.next_question.attempt_id
       - method: POST
-        url: http://localhost:8081/api/answer
+        url: http://localhost:18082/api/answer
         body: '{"session_id":"{{sid}}","attempt_id":"{{aid}}","answer":"0","elapsed":1.5}'
         headers:
           Content-Type: application/json
       - method: GET
-        url: http://localhost:8081/api/scores/{{student}}
+        url: http://localhost:18082/api/scores/{{student}}
   - name: read-browse
     weight: 1
     steps:
       - method: GET
-        url: http://localhost:8081/api/graph
+        url: http://localhost:18082/api/graph
       - method: GET
-        url: http://localhost:8081/api/leaderboard
+        url: http://localhost:18082/api/leaderboard
 
 db:
   rate: 20

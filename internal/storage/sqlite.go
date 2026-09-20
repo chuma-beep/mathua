@@ -29,10 +29,12 @@ func NewSQLiteStore(path string) (*SQLiteStore, error) {
 	if _, err := db.Exec("PRAGMA busy_timeout=5000"); err != nil {
 		return nil, fmt.Errorf("set busy timeout: %w", err)
 	}
-	// Fix 7: single connection for SQLite. database/sql opens pools by
-	// default; concurrent writers then hit SQLITE_BUSY despite WAL. One
-	// conn serializes access — reads stay fast, writes never lock out.
-	db.SetMaxOpenConns(1)
+	// Fix 7 (revised): small pool instead of a single connection. WAL
+	// allows one writer plus concurrent readers; concurrent writers
+	// serialize inside SQLite and ride the 5s busy_timeout above. A pool
+	// of 8 lets reads interleave with the write queue instead of
+	// queueing behind it — loadtest-verified against MaxOpenConns(1).
+	db.SetMaxOpenConns(8)
 	store := &SQLiteStore{db: db}
 	if err := store.Migrate(); err != nil {
 		db.Close()
