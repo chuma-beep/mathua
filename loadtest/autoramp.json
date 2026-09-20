@@ -1,0 +1,125 @@
+{
+  "generated_at": "2026-09-20T20:51:49.247765468+01:00",
+  "duration": "1m50s",
+  "ramp": "5s",
+  "concurrency": 320,
+  "runners": null,
+  "spikes": [],
+  "timeline": {
+    "labels": null,
+    "series": []
+  },
+  "ramp_search": {
+    "steps": [
+      {
+        "concurrency": 20,
+        "requests": 10190,
+        "p99_ms": 93,
+        "success_percent": 99.8098098098098,
+        "broken": false
+      },
+      {
+        "concurrency": 40,
+        "requests": 5068,
+        "p99_ms": 200,
+        "success_percent": 99.20736932305056,
+        "broken": false
+      },
+      {
+        "concurrency": 80,
+        "requests": 4053,
+        "p99_ms": 10001,
+        "success_percent": 97.60295021511986,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 50,
+        "requests": 3986,
+        "p99_ms": 297,
+        "success_percent": 98.68043602983361,
+        "broken": false
+      },
+      {
+        "concurrency": 60,
+        "requests": 2785,
+        "p99_ms": 3240,
+        "success_percent": 97.57437070938215,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 70,
+        "requests": 2803,
+        "p99_ms": 10001,
+        "success_percent": 96.86162624821684,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 52,
+        "requests": 2901,
+        "p99_ms": 758,
+        "success_percent": 97.94290512174642,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 54,
+        "requests": 2704,
+        "p99_ms": 814,
+        "success_percent": 97.6905311778291,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 56,
+        "requests": 2317,
+        "p99_ms": 3242,
+        "success_percent": 97.04209328782709,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 58,
+        "requests": 2381,
+        "p99_ms": 1633,
+        "success_percent": 96.89234184239733,
+        "broken": true,
+        "broken_by": [
+          "scenario"
+        ]
+      },
+      {
+        "concurrency": 51,
+        "requests": 3033,
+        "p99_ms": 359,
+        "success_percent": 98.05786761791518,
+        "broken": false
+      }
+    ],
+    "break_at": 52,
+    "last_ok": 51
+  },
+  "story": {
+    "title": "Broke at 52 concurrent users",
+    "tone": "err",
+    "detail": "Held to 51 concurrent users, broke at 52. Blame: scenario. See the ramp chart for cliff vs slope.",
+    "next_steps": [
+      "Re-test at 52 users after the fix to prove the knee moved.",
+      "Same-machine numbers are relative — generate load from a separate box for real capacity."
+    ]
+  }
+}

@@ -24,6 +24,22 @@ bucket_width: 1s
 ramp: 5s
 concurrency: 20
 
+# Capacity search: doubling 20->40->... up to 320, then linear fine-fill
+# between last-ok and first-broken. Each level runs a 10s burst; ramp: and
+# duration: above are ignored while auto-ramp runs. Break = any runner P99
+# over its threshold (scenarios judged vs --http-threshold) or success <95%.
+# Run: barrage run -c loadtest/barrage-study-loop.yaml --auto-ramp \
+#        --http-threshold 500ms --json loadtest/autoramp.json
+# Fixed-load verification at one concurrency needs a config WITHOUT the
+# auto_ramp block (its presence forces auto-ramp mode): strip the block to
+# /tmp and run e.g. barrage run -c /tmp/barrage-fixed38.yaml --http-threshold
+# 500ms --json loadtest/capacity-c38.json. NOTE: sub-100% success in barrage
+# output is burst-cutoff artifact (in-flight journeys at run end), not app
+# errors — verify zero app errors with a status-capturing client instead.
+auto_ramp:
+  max_concurrency: 320
+  step_duration: 10s
+
 scenario:
   - name: study-loop
     weight: 3
