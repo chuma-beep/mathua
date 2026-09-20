@@ -734,59 +734,170 @@ func (g *graphBasicsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type graphPathsGen struct{}
 
 func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	connected := rand.Intn(2) == 0
-
-	var edges []string
-	var adj [4][4]int
-
-	if connected {
-		edges = []string{"A-B", "B-C", "C-D"}
-		adj[0][1] = 1
-		adj[1][0] = 1
-		adj[1][2] = 1
-		adj[2][1] = 1
-		adj[2][3] = 1
-		adj[3][2] = 1
-	} else {
-		edges = []string{"A-B", "C-D"}
-		adj[0][1] = 1
-		adj[1][0] = 1
-		adj[2][3] = 1
-		adj[3][2] = 1
+	n := 4
+	if ctx.Difficulty > 0.6 {
+		n = 5
 	}
-
-	graphStr := fmt.Sprintf("{%s}", strings.Join(edges, ", "))
-
+	verts := []string{"A", "B", "C", "D", "E"}[:n]
+	type edge struct{ u, v int }
+	var pairs []edge
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			pairs = append(pairs, edge{i, j})
+		}
+	}
+	rand.Shuffle(len(pairs), func(a, b int) { pairs[a], pairs[b] = pairs[b], pairs[a] })
+	adj := make([][]int, n)
+	addEdge := func(u, v int) {
+		adj[u] = append(adj[u], v)
+		adj[v] = append(adj[v], u)
+	}
+	hasEdge := func(u, v int) bool {
+		for _, w := range adj[u] {
+			if w == v {
+				return true
+			}
+		}
+		return false
+	}
 	if rand.Intn(2) == 0 {
-		ans := "yes"
-		exp := "There is a path: A-B-C-D"
-		if !connected {
-			ans = "no"
-			exp = "There is no path from A to D because the graph is disconnected."
+		// Connected: random spanning tree over all vertices plus extras.
+		perm := rand.Perm(n)
+		for i := 1; i < n; i++ {
+			addEdge(perm[i-1], perm[i])
+		}
+		for _, e := range pairs {
+			if rand.Intn(3) == 0 && !hasEdge(e.u, e.v) {
+				addEdge(e.u, e.v)
+			}
+		}
+	} else {
+		// Disconnected: split vertices into two nonempty groups,
+		// edges only within groups so no path crosses the cut.
+		cut := 1 + rand.Intn(n-1)
+		var within []edge
+		for _, e := range pairs {
+			if (e.u < cut) == (e.v < cut) {
+				within = append(within, e)
+			}
+		}
+		for _, e := range within[:1+rand.Intn(len(within))] {
+			addEdge(e.u, e.v)
+		}
+	}
+	var edgeStrs []string
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if hasEdge(i, j) {
+				edgeStrs = append(edgeStrs, verts[i]+"-"+verts[j])
+			}
+		}
+	}
+	graphStr := fmt.Sprintf("{%s}", strings.Join(edgeStrs, ", "))
+	// BFS distances and parents from verts[0].
+	dist := make([]int, n)
+	parent := make([]int, n)
+	for i := range dist {
+		dist[i] = -1
+		parent[i] = -1
+	}
+	dist[0] = 0
+	queue := []int{0}
+	for len(queue) > 0 {
+		v := queue[0]
+		queue = queue[1:]
+		for _, w := range adj[v] {
+			if dist[w] == -1 {
+				dist[w] = dist[v] + 1
+				parent[w] = v
+				queue = append(queue, w)
+			}
+		}
+	}
+	// Connected components via BFS.
+	comp := make([]int, n)
+	ncomp := 0
+	for i := 0; i < n; i++ {
+		if comp[i] != 0 {
+			continue
+		}
+		ncomp++
+		comp[i] = ncomp
+		q := []int{i}
+		for len(q) > 0 {
+			v := q[0]
+			q = q[1:]
+			for _, w := range adj[v] {
+				if comp[w] == 0 {
+					comp[w] = ncomp
+					q = append(q, w)
+				}
+			}
+		}
+	}
+	src, dst := verts[0], verts[n-1]
+	var pathStr string
+	if dist[n-1] != -1 {
+		var rev []string
+		for v := n - 1; v != -1; v = parent[v] {
+			rev = append([]string{verts[v]}, rev...)
+		}
+		pathStr = strings.Join(rev, "-")
+	}
+	switch rand.Intn(4) {
+	case 0:
+		ans := "no"
+		exp := fmt.Sprintf("There is no path from %s to %s (different components).", src, dst)
+		if dist[n-1] != -1 {
+			ans = "yes"
+			exp = fmt.Sprintf("There is a path: %s.", pathStr)
 		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("In the graph with edges %s, is there a path from A to D? (yes/no)", graphStr),
+			Question:    fmt.Sprintf("In the graph with edges %s, is there a path from %s to %s? (yes/no)", graphStr, src, dst),
 			Answer:      ans,
 			Explanation: exp,
 		}
-	}
-
-	pathLen := 3
-	exp := "The shortest path is A-B-C-D (3 edges)."
-	if !connected {
-		pathLen = -1
-		exp = "There is no path from A to D (the graph is disconnected)."
+	case 1:
+		if dist[n-1] == -1 {
+			return generator.Problem{
+				Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from %s to %s? (if none, write 'none')", graphStr, src, dst),
+				Answer:      "none",
+				Explanation: fmt.Sprintf("There is no path from %s to %s (the graph is disconnected).", src, dst),
+			}
+		}
 		return generator.Problem{
-			Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from A to D? (if none, write 'none')", graphStr),
-			Answer:      "none",
+			Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from %s to %s?", graphStr, src, dst),
+			Answer:      fmt.Sprintf("%d", dist[n-1]),
+			Explanation: fmt.Sprintf("The shortest path is %s (%d edges).", pathStr, dist[n-1]),
+		}
+	case 2:
+		ans := "no"
+		exp := fmt.Sprintf("The graph splits into %d components, so it is disconnected.", ncomp)
+		if ncomp == 1 {
+			ans = "yes"
+			exp = "Every vertex can be reached from every other, so the graph is connected."
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("Is the graph with edges %s connected? (yes/no)", graphStr),
+			Answer:      ans,
 			Explanation: exp,
 		}
-	}
-
-	return generator.Problem{
-		Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from A to D?", graphStr),
-		Answer:      fmt.Sprintf("%d", pathLen),
-		Explanation: exp,
+	default:
+		var parts []string
+		for c := 1; c <= ncomp; c++ {
+			var vs []string
+			for i := 0; i < n; i++ {
+				if comp[i] == c {
+					vs = append(vs, verts[i])
+				}
+			}
+			parts = append(parts, "{"+strings.Join(vs, ", ")+"}")
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many connected components does the graph with edges %s have? (enter a number)", graphStr),
+			Answer:      fmt.Sprintf("%d", ncomp),
+			Explanation: fmt.Sprintf("The components are %s, so there are %d.", strings.Join(parts, " and "), ncomp),
+		}
 	}
 }
 
