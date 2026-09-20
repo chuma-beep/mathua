@@ -6,17 +6,15 @@
 
 ###### Investigate!
 
-> Troll 1: If we are cousins, then we are both knaves.ð
+> Troll 1: If we are cousins, then we are both knaves.
 
-Troll 2: We are cousins or we are both knaves.ð
+Troll 2: We are cousins or we are both knaves.
 
-ð
 
 ### Subsection  Truth Tables
 
-> If you get more doubles than any other player then you will lose, or if you lose then you must have bought the most properties.ð
+> If you get more doubles than any other player then you will lose, or if you lose then you must have bought the most properties.
 
-ð
 
 | \(P\) | \(Q\) | \(P\wedge Q\) |
 | T | T | T |
@@ -85,7 +83,7 @@ Troll 2: We are cousins or we are both knaves.ð
 | F | T | F | F |
 | F | F | T | T |
 
-#### De Morganâs Laws.
+#### De Morgan’s Laws.
 
 #### Implications are Disjunctions.
 
@@ -112,9 +110,8 @@ Troll 2: We are cousins or we are both knaves.ð
 
 ###### Investigate!
 
-> If Edith eats her vegetables, then she can have a cookie. Edith ate her vegetables. Therefore Edith gets a cookie.ð
+> If Edith eats her vegetables, then she can have a cookie. Edith ate her vegetables. Therefore Edith gets a cookie.
 
-ð
 
 |  | \(P \imp Q\) |
 |  | \(P\) |
@@ -162,9 +159,8 @@ Troll 2: We are cousins or we are both knaves.ð
 
 ### Subsection  Beyond Propositions
 
-> All primes greater than 2 are odd.ð
+> All primes greater than 2 are odd.
 
-ð
 
 #### Example 3.1.8.
 
@@ -177,36 +173,26 @@ Troll 2: We are cousins or we are both knaves.ð
 
 #### 1.
 
-1. Translate the above statement into symbols. Clearly state which statement is \(P\) and which is \(Q\text{.}\)ð
+1. Translate the above statement into symbols. Clearly state which statement is \(P\) and which is \(Q\text{.}\)
 
-ð
-1. Make a truth table for the statement.ð
+1. Make a truth table for the statement.
 
-ð
-1. Assuming the statement is true, what (if anything) can you conclude if there will be cake?ð
+1. Assuming the statement is true, what (if anything) can you conclude if there will be cake?
 
-ð
-1. Assuming the statement is true, what (if anything) can you conclude if there will not be cake?ð
+1. Assuming the statement is true, what (if anything) can you conclude if there will not be cake?
 
-ð
-1. Suppose you found out that the statement was a lie. What can you conclude?ð
+1. Suppose you found out that the statement was a lie. What can you conclude?
 
-ð
-1. \(P\text{:}\) itâs your birthday; \(Q\text{:}\) there will be cake. \((P \vee Q) \imp Q\)
+1. \(P\text{:}\) it’s your birthday; \(Q\text{:}\) there will be cake. \((P \vee Q) \imp Q\)
 
-ð
-1. Hint: you should get three Tâs and one F.ð
+1. Hint: you should get three T’s and one F.
 
-ð
-1. Only that there will be cake.ð
+1. Only that there will be cake.
 
-ð
-1. Itâs NOT your birthday!ð
+1. It’s NOT your birthday!
 
-ð
-1. Itâs your birthday, but the cake is a lie.ð
+1. It’s your birthday, but the cake is a lie.
 
-ð
 #### 2.
 
 | \(P\) | \(Q\) | \(P \wedge Q\) | \(P \vee Q\) | \((P \wedge Q) \rightarrow (P \vee Q))\) |
@@ -229,21 +215,16 @@ Troll 2: We are cousins or we are both knaves.ð
 | F | T |  |  |  |
 | F | F |  |  |  |
 
-- That \(P\) and \(Q\) are both true.ð
+- That \(P\) and \(Q\) are both true.
 
-ð
-- That \(P\) is true and \(Q\) is false.ð
+- That \(P\) is true and \(Q\) is false.
 
-ð
-- That \(P\) is false and \(Q\) is true.ð
+- That \(P\) is false and \(Q\) is true.
 
-ð
-- That \(P\) and \(Q\) are both false.ð
+- That \(P\) and \(Q\) are both false.
 
-ð
-- None of the above.ð
+- None of the above.
 
-ð
 | \(P\) | \(Q\) | \(\neg Q\) | \(Q \rightarrow P\) | \(\neg Q \vee (Q \rightarrow P))\) |
 | T | T | F | T | T |
 | T | F | T | T | T |
@@ -274,15 +255,12 @@ Troll 2: We are cousins or we are both knaves.ð
 
 #### 5.
 
-1. Translate Geoffâs order into logical symbols.ð
+1. Translate Geoff’s order into logical symbols.
 
-ð
-1. The waiter knows that Geoff is either a liar or a truth-teller (so either everything he says is false, or everything is true). Which is it?ð
+1. The waiter knows that Geoff is either a liar or a truth-teller (so either everything he says is false, or everything is true). Which is it?
 
-ð
-1. What, if anything, can the waiter conclude about the ingredients in Geoffâs desired calzone?ð
+1. What, if anything, can the waiter conclude about the ingredients in Geoff’s desired calzone?
 
-ð
 #### 6.
 
 #### 7.
@@ -297,21 +275,16 @@ Troll 2: We are cousins or we are both knaves.ð
 | F | F | T |  |  |
 | F | F | F |  |  |
 
-- Yes, because the columns for the two statements are identical.ð
+- Yes, because the columns for the two statements are identical.
 
-ð
-- Yes, because even though the columns are not identical, there are some rows in which they are identical.ð
+- Yes, because even though the columns are not identical, there are some rows in which they are identical.
 
-ð
-- No, because the statements are not always true.ð
+- No, because the statements are not always true.
 
-ð
-- No, because the columns for the two statements are not identical.ð
+- No, because the columns for the two statements are not identical.
 
-ð
-- Impossible to determine without more information.ð
+- Impossible to determine without more information.
 
-ð
 | \(P\) | \(Q\) | \(R\) | \(P \rightarrow (Q \vee R)\) | \((P \rightarrow Q) \vee (P\rightarrow R)\) |
 | T | T | T | T | T |
 | T | T | F | T | T |
@@ -326,60 +299,43 @@ Troll 2: We are cousins or we are both knaves.ð
 
 1. \(\neg(P
 \imp \neg Q)\text{.}\)
-ð
 1. \((\neg P \vee
 \neg Q) \imp \neg (\neg Q \wedge R)\text{.}\)
-ð
 1. \(\neg((P \imp \neg Q) \vee \neg (R \wedge
 \neg
 R))\text{.}\)
-ð
-1. It is false that if Sam is not a man then Chris is a woman, and that Chris is not a woman.ð
+1. It is false that if Sam is not a man then Chris is a woman, and that Chris is not a woman.
 
-ð
 1. \(P
 \wedge Q\text{.}\)
-ð
 1. \((\neg P \vee \neg R) \imp (Q \vee \neg R)\) or, replacing the implication with a disjunction first: \((P \wedge Q) \vee (Q \vee \neg R)\text{.}\)
 
-ð
 1. \((P
-\wedge Q) \wedge (R \wedge \neg R)\text{.}\) This is necessarily false, so it is also equivalent to \(P \wedge \neg P\text{.}\)ð
+\wedge Q) \wedge (R \wedge \neg R)\text{.}\) This is necessarily false, so it is also equivalent to \(P \wedge \neg P\text{.}\)
 
-ð
-1. Either Sam is a woman and Chris is a man, or Chris is a woman.ð
+1. Either Sam is a woman and Chris is a man, or Chris is a woman.
 
-ð
 #### 9.
 
 1. \(\neg((\neg P \wedge Q) \vee \neg(R \vee \neg S))\text{.}\)
-ð
 1. \(\neg((\neg P \imp \neg
 Q) \wedge (\neg Q \imp R))\) (careful with the implications).
-ð
-1. For both parts above, verify your answers are correct using truth tables. That is, use a truth table to check that the given statement and your proposed simplification are actually logically equivalent.ð
+1. For both parts above, verify your answers are correct using truth tables. That is, use a truth table to check that the given statement and your proposed simplification are actually logically equivalent.
 
-ð
 #### 10.
 
-1. Make a truth table for the statement \((T \vee S) \imp \neg P\text{.}\)ð
+1. Make a truth table for the statement \((T \vee S) \imp \neg P\text{.}\)
 
-ð
-1. If you believed the statement was false, what properties would a counterexample need to possess? Explain by referencing your truth table.ð
+1. If you believed the statement was false, what properties would a counterexample need to possess? Explain by referencing your truth table.
 
-ð
-1. If the statement were true, what could you conclude about the number 5657, which is definitely prime? Again, explain using the truth table.ð
+1. If the statement were true, what could you conclude about the number 5657, which is definitely prime? Again, explain using the truth table.
 
-ð
-1. There will be three rows in which the statement is false.ð
+1. There will be three rows in which the statement is false.
 
-ð
-1. Consider the three rows that evaluate to false and say what the truth values of \(T\text{,}\) \(S\text{,}\) and \(P\) are there.ð
+1. Consider the three rows that evaluate to false and say what the truth values of \(T\text{,}\) \(S\text{,}\) and \(P\) are there.
 
-ð
-1. You are looking for a row in which \(P\) is true, and the whole statement is true.ð
+1. You are looking for a row in which \(P\) is true, and the whole statement is true.
 
-ð
 #### 11.
 
 #### 12.
@@ -394,21 +350,16 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 | F | T |  |  |  |
 | F | F |  |  |  |
 
-- No, because the conclusion is not always true.ð
+- No, because the conclusion is not always true.
 
-ð
-- Yes, because there is a row in which both premises are true.ð
+- Yes, because there is a row in which both premises are true.
 
-ð
-- No, because the columns for the two premises are not identical.ð
+- No, because the columns for the two premises are not identical.
 
-ð
-- Yes, in every row where both premises are true, the conclusion is also true.ð
+- Yes, in every row where both premises are true, the conclusion is also true.
 
-ð
-- Impossible to determine without more information.ð
+- Impossible to determine without more information.
 
-ð
 | \(P\) | \(Q\) | \(P \rightarrow Q\) | \(\neg Q\) | \(\neg P\) |
 | T | T | T | F | F |
 | T | F | F | T | F |
@@ -431,21 +382,16 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 | F | F | T |  |  |
 | F | F | F |  |  |
 
-- Yes, because there is a row in which both premises are true.ð
+- Yes, because there is a row in which both premises are true.
 
-ð
-- No, because the statements are not always true.ð
+- No, because the statements are not always true.
 
-ð
-- Yes, in every row where both premises are true, the conclusion is also true.ð
+- Yes, in every row where both premises are true, the conclusion is also true.
 
-ð
-- No, because the columns for the two premises are not identical.ð
+- No, because the columns for the two premises are not identical.
 
-ð
-- Impossible to determine without more information.ð
+- Impossible to determine without more information.
 
-ð
 | \(P\) | \(Q\) | \(R\) | \(P \rightarrow (Q \vee R)\) | \(\neg(P \rightarrow Q)\) |
 | T | T | T | T | F |
 | T | T | F | T | F |
@@ -472,21 +418,16 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 | F | F | T |  |  |  |
 | F | F | F |  |  |  |
 
-- Yes, because there is a row in which the conclusion and both premises are true.ð
+- Yes, because there is a row in which the conclusion and both premises are true.
 
-ð
-- Yes, because in every row that the conclusion is true, one of the premises is true.ð
+- Yes, because in every row that the conclusion is true, one of the premises is true.
 
-ð
-- No, because the columns for the two premises are not identical.ð
+- No, because the columns for the two premises are not identical.
 
-ð
-- No, because there is a row in which both premises are true but the conclusion is false.ð
+- No, because there is a row in which both premises are true but the conclusion is false.
 
-ð
-- Impossible to determine without more information.ð
+- Impossible to determine without more information.
 
-ð
 | \(P\) | \(Q\) | \(R\) | \((P \wedge Q) \rightarrow R\) | \(\neg P \vee \neg Q\) | \(\neg R\) |
 | T | T | T | T | F | F |
 | T | T | F | F | F | T |
@@ -499,7 +440,7 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 
 #### 15.
 
-1. Prove that the following is a valid deduction rule:ð
+1. Prove that the following is a valid deduction rule:
 
 
 
@@ -516,13 +457,12 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 \(P \imp R\)
 
 
-ð
 |  | \(P
 \imp Q\) |
 |  | \(Q \imp R\) |
 | \(\therefore\) | \(P \imp R\) |
 
-1. Prove that the following is a valid deduction rule for any \(n \ge 2\text{:}\)ð
+1. Prove that the following is a valid deduction rule for any \(n \ge 2\text{:}\)
 
 
 
@@ -549,9 +489,8 @@ Q) \wedge (\neg Q \imp R))\) (careful with the implications).
 \imp P_n\text{.}\)
 
 
-I suggest you donât go through the trouble of writing out a \(2^n\) row truth table. Instead, you should use part (a) and mathematical induction.ð
+I suggest you don’t go through the trouble of writing out a \(2^n\) row truth table. Instead, you should use part (a) and mathematical induction.
 
-ð
 |  | \(P_1 \imp P_2\) |
 |  | \(P_2
 \imp P_3\) |
@@ -564,48 +503,35 @@ I suggest you donât go through the trouble of writing out a \(2^n\) row tru
 #### 16.
 
 1. \(\neg \exists x \forall y (\neg O(x) \vee E(y))\text{.}\)
-ð
 1. \(\neg \forall x \neg
 \forall y \neg(x \lt y \wedge \exists z (x \lt z \vee y \lt z))\text{.}\)
-ð
-1. There is a number \(n\) for which no other number is either less \(n\) than or equal to \(n\text{.}\)ð
+1. There is a number \(n\) for which no other number is either less \(n\) than or equal to \(n\text{.}\)
 
-ð
-1. It is false that for every number \(n\) there are two other numbers which \(n\) is between.ð
+1. It is false that for every number \(n\) there are two other numbers which \(n\) is between.
 
-ð
 1. \(\forall
 x \exists y (O(x) \wedge \neg E(y))\text{.}\)
-ð
 1. \(\exists x \forall y (x \ge y \vee \forall
 z (x \ge z \wedge y \ge z))\text{.}\)
-ð
-1. There is a number \(n\) for which every other number is strictly greater than \(n\text{.}\)ð
+1. There is a number \(n\) for which every other number is strictly greater than \(n\text{.}\)
 
-ð
-1. There is a number \(n\) which is not between any other two numbers.ð
+1. There is a number \(n\) which is not between any other two numbers.
 
-ð
 #### 17.
 
-1. \(\neg \forall x \forall y (x \lt y \vee y \lt x)\text{.}\)ð
+1. \(\neg \forall x \forall y (x \lt y \vee y \lt x)\text{.}\)
 
-ð
 1. \(\neg(\exists
-x P(x) \imp \forall y P(y))\text{.}\)ð
+x P(x) \imp \forall y P(y))\text{.}\)
 
-ð
 #### 18.
 
-1. Every number is either even or odd.ð
+1. Every number is either even or odd.
 
-ð
-1. There is a sequence that is both arithmetic and geometric.ð
+1. There is a sequence that is both arithmetic and geometric.
 
-ð
-1. For all numbers \(n\text{,}\) if \(n\) is prime, then \(n+3\) is not prime.ð
+1. For all numbers \(n\text{,}\) if \(n\) is prime, then \(n+3\) is not prime.
 
-ð
 #### 19.
 
 #### 20.
@@ -632,21 +558,16 @@ x P(x) \imp \forall y P(y))\text{.}\)ð
 | F | F | T |  |  |
 | F | F | F |  |  |
 
-- Yes, in every row where both premises are true, the conclusion is also true.ð
+- Yes, in every row where both premises are true, the conclusion is also true.
 
-ð
-- No, because the premises are never both true in the same row.ð
+- No, because the premises are never both true in the same row.
 
-ð
-- Yes, because there is a row in which both premises are true.ð
+- Yes, because there is a row in which both premises are true.
 
-ð
-- No, because the columns for the two premises are not identical.ð
+- No, because the columns for the two premises are not identical.
 
-ð
-- Impossible to determine without more information.ð
+- Impossible to determine without more information.
 
-ð
 | \(P\) | \(Q\) | \(R\) | \(P \rightarrow Q\) | \(P \wedge \neg Q\) |
 | T | T | T | T | F |
 | T | T | F | T | F |

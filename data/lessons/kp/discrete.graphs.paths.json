@@ -1,29 +1,29 @@
 [
   {
-    "label": "Section 4.5 Euler Paths and Circuits",
-    "section": "Section 4.5 Euler Paths and Circuits",
+    "label": "Walks, Trails, and Paths",
+    "section": "Walks, Trails, and Paths",
     "subgoals": [
-      "Define paths, cycles, and connectivity",
-      "Follow the worked example",
-      "Apply the rule"
+      "Tell walks, trails, and paths apart",
+      "Spot repeated vertices and edges",
+      "Name the length of a walk"
     ]
   },
   {
-    "label": "Euler Paths and Circuits.",
-    "section": "Euler Paths and Circuits.",
+    "label": "Connected Graphs and Components",
+    "section": "Connected Graphs and Components",
     "subgoals": [
-      "Understand euler paths and circuits.",
-      "Apply euler paths and circuits.",
-      "Check the result"
+      "Test whether a graph is connected",
+      "Split a graph into components",
+      "Find isolated vertices"
     ]
   },
   {
-    "label": "Subsection  Hamilton Paths",
-    "section": "Subsection  Hamilton Paths",
+    "label": "Distance and Shortest Paths",
+    "section": "Distance and Shortest Paths",
     "subgoals": [
-      "Understand subsection  hamilton paths",
-      "Apply subsection  hamilton paths",
-      "Check the result"
+      "Measure distance as shortest length",
+      "Say none when no path exists",
+      "Trace a shortest path"
     ]
   }
 ]
