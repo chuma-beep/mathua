@@ -15,7 +15,7 @@ const shapeUrl = (seed: string) =>
 const linkClass = 'block opacity-70 transition-opacity hover:opacity-100'
 const headingClass = 'font-mono text-[10px] uppercase tracking-[0.2em] text-mathua-muted'
 
-const CREDITS = ['MIT License', 'Avatars by DiceBear', 'Draft · Sheet 01', 'Scale 1:1 · Grid 22px']
+const CREDITS = ['MIT License', 'Avatars by DiceBear']
 
 export default function Footer({ className = '' }: FooterProps) {
   return (
