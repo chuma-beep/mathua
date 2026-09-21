@@ -112,6 +112,13 @@
     "targets": ["stat.data.mean", "stat.prob.compound", "stat.dist.binomial", "stat.dist.normal", "stat.infer.confidence"]
   },
   {
+    "id": "nt",
+    "name": "Number Theory",
+    "grade": "college",
+    "description": "Divisibility, primes, modular arithmetic, Euler's theorem, and cryptography.",
+    "targets": ["nt.basics.divisibility", "nt.basics.gcd_euclidean", "nt.basics.modular", "nt.adv.fermat_little"]
+  },
+  {
     "id": "diffeq",
     "name": "Differential Equations",
     "grade": "college",

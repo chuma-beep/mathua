@@ -111,8 +111,8 @@ func TestLoad_RealData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load real data: %v", err)
 	}
-	if len(p.Courses()) != 21 {
-		t.Errorf("expected 21 courses, got %d", len(p.Courses()))
+	if len(p.Courses()) != 22 {
+		t.Errorf("expected 22 courses, got %d", len(p.Courses()))
 	}
 	// Check that 4th grade chain has reasonable size
 	path, err := p.PathForCourse("4")
