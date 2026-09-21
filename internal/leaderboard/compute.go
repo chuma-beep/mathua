@@ -2,6 +2,8 @@ package leaderboard
 
 import (
 	"sort"
+	"sync"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/levels"
 	"github.com/chuma-beep/mathua/internal/storage"
@@ -24,17 +26,52 @@ type Entry struct {
 
 type Computer struct {
 	repo storage.Repository
+
+	// Weekly board is a full students×progress scan per call; cache it
+	// briefly so leaderboard polling under load doesn't queue behind
+	// the write path on the SQLite pool.
+	mu      sync.Mutex
+	cached  []Entry
+	filled  time.Time
+	ttl     time.Duration
 }
 
+// DefaultWeeklyTTL is the cache lifetime for the weekly board. Weekly
+// granularity data changes slowly; 30s keeps it fresh while absorbing
+// poll storms from concurrent readers.
+const DefaultWeeklyTTL = 30 * time.Second
+
 func NewComputer(repo storage.Repository) *Computer {
-	return &Computer{repo: repo}
+	return NewComputerWithTTL(repo, DefaultWeeklyTTL)
+}
+
+func NewComputerWithTTL(repo storage.Repository, ttl time.Duration) *Computer {
+	return &Computer{repo: repo, ttl: ttl}
 }
 
 func (c *Computer) Weekly() ([]Entry, error) {
+	c.mu.Lock()
+	if c.cached != nil && time.Since(c.filled) < c.ttl {
+		out := c.cached
+		c.mu.Unlock()
+		return out, nil
+	}
+	c.mu.Unlock()
+
 	rows, err := c.repo.GetWeeklyLeaderboard()
 	if err != nil {
 		return nil, err
 	}
+	entries := buildEntries(rows)
+
+	c.mu.Lock()
+	c.cached = entries
+	c.filled = time.Now()
+	c.mu.Unlock()
+	return entries, nil
+}
+
+func buildEntries(rows []storage.LeaderboardRow) []Entry {
 	entries := make([]Entry, 0, len(rows))
 	for _, r := range rows {
 		score := r.WeeklyMastered * 100
@@ -62,5 +99,5 @@ func (c *Computer) Weekly() ([]Entry, error) {
 	for i := range entries {
 		entries[i].Rank = i + 1
 	}
-	return entries, nil
+	return entries
 }
