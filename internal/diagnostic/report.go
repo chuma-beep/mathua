@@ -82,7 +82,10 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 }
 
 // domainToCourse maps the frontier concept's domain to a placement course id
-// (ids match data/courses.json catalog).
+// (ids match data/courses.json catalog). Advanced subdomains place into the
+// *2 courses: calculus.series/sequences (Calc II: series), discrete
+// graph_theory/proof/recurrence (Discrete II: Eulerian, strong induction),
+// abstract rings/fields/structures (Abstract II: polynomial rings, fields).
 func domainToCourse(c *concepts.Concept) string {
 	d := c.Domain
 	switch {
@@ -99,6 +102,10 @@ func domainToCourse(c *concepts.Concept) string {
 	case strings.HasPrefix(d, "precalculus"):
 		return "pc"
 	case strings.HasPrefix(d, "calculus"):
+		switch c.Subdomain {
+		case "calculus.series", "calculus.sequences":
+			return "calc2"
+		}
 		return "calc1"
 	case strings.HasPrefix(d, "statistics"):
 		return "probstat"
@@ -107,6 +114,10 @@ func domainToCourse(c *concepts.Concept) string {
 	case strings.HasPrefix(d, "geometry"):
 		return "geo"
 	case strings.HasPrefix(d, "discrete"):
+		switch c.Subdomain {
+		case "discrete_math.graph_theory", "discrete_math.proof", "discrete_math.recurrence":
+			return "discrete2"
+		}
 		return "discrete"
 	case strings.HasPrefix(d, "number_theory"):
 		return "nt"
@@ -115,6 +126,10 @@ func domainToCourse(c *concepts.Concept) string {
 	case strings.HasPrefix(d, "differential_equations"):
 		return "diffeq"
 	case strings.HasPrefix(d, "abstract"):
+		switch c.Subdomain {
+		case "abstract_algebra.rings", "abstract_algebra.fields", "abstract_algebra.structures":
+			return "abstract2"
+		}
 		return "abstract"
 	case strings.HasPrefix(d, "topology"):
 		return "topo"
