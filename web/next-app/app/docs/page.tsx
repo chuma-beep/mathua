@@ -114,6 +114,42 @@ export default function DocsIndexPage() {
             </p>
           </div>
         </Link>
+        <Link
+          href="/docs/efficacy"
+          className="link-underline"
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            padding: '0.75rem 0',
+            borderBottom: '0.5px solid var(--border)',
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
+        >
+          <span style={{
+            fontFamily: monoFont,
+            fontSize: '13px',
+            color: 'var(--accent-blue)',
+            minWidth: '1.5rem',
+            paddingTop: '1px',
+          }}>
+            3.
+          </span>
+          <div>
+            <div style={{
+              fontFamily: "var(--font-space-grotesk), 'Space Grotesk', serif",
+              fontWeight: 400,
+              fontSize: '1.1rem',
+              color: 'var(--text-primary)',
+              marginBottom: '2px',
+            }}>
+              Efficacy
+            </div>
+            <p style={{ ...textStyle, margin: 0, fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+              First/second-pass instrumentation, retention, and the evidence figure.
+            </p>
+          </div>
+        </Link>
       </div>
 
       <div style={{
