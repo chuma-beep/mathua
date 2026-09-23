@@ -1,0 +1,19 @@
+{
+  "schema": "efficacy-bundle/1",
+  "source": "mathua.db",
+  "total_attempts": 71,
+  "students_tracked": 19,
+  "concepts_touched": 39,
+  "concepts_catalog": [
+    "arith.add.single",
+    "arith.neg.number_line",
+    "calc.integral.improper",
+    "geo.basic.points_lines"
+  ],
+  "first_pass_rate": 0.46153846153846156,
+  "second_pass_rate": 0.5384615384615384,
+  "avg_attempts_per_concept": 1.8205128205128205,
+  "window_start": "2026-08-28T04:14:42Z",
+  "window_end": "2026-09-14T10:44:39Z",
+  "observational": true
+}

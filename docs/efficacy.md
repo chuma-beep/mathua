@@ -61,6 +61,22 @@ chose to use Mathua, not a controlled trial.
 The Profile page renders the last 12 weeks as a first-pass sparkline plus the
 retention figure (`web/next-app/app/profile/page.tsx`).
 
+## Point-in-time figure (pilot)
+
+![Efficacy overview](../figures/output/efficacy-overview.svg)
+
+Generated from the dev attempt log by `python3 figures/efficacy.py`
+(style adapter: `figures/mathua_style.py`; Mathua tokens on figures4papers
+layout/export conventions). The MA 93%/98% lines are external reference
+markers, not Mathua data. The weekly-trend panel is deliberately omitted:
+with 70 + 1 attempts across two week-buckets a trend line would mislead
+(see `figures/efficacy.py` header). Regenerate after real usage accumulates:
+
+```bash
+python3 figures/fetch_fonts.py   # once per machine (gitignored display fonts)
+python3 figures/efficacy.py      # dump mathua.db -> figures/efficacy_data.json + render
+```
+
 ## How to read it
 
 1. **Compare within a student, not across.** A learner's own weekly first-pass
