@@ -9,6 +9,7 @@ import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import KatexContent from '../../components/KatexContent'
 import { stripMathDelimiters } from '../../lib/lessonMath'
+import { subdomainLeaf } from '../../lib/conceptDisplay'
 import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
@@ -123,7 +124,7 @@ function ConceptContent() {
           <div className="max-w-7xl mx-auto mt-8 mb-16">
             <SectionHeader label={detail.concept.domain} title={detail.concept.label} />
             <p className="text-mathua-muted text-xs font-mono text-center -mt-4 mb-8">
-              {detail.concept.domain}.{detail.concept.subdomain} &middot; {detail.concept.id}
+              {detail.concept.domain}.{subdomainLeaf(detail.concept.subdomain)} &middot; {detail.concept.id}
             </p>
 
             <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-8 min-w-0 overflow-hidden">
