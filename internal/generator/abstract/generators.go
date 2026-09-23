@@ -523,13 +523,18 @@ func (g *polynomialRingGen) Generate(ctx generator.GeneratorContext) generator.P
 		reason   string
 	}
 	tableEasy := []entry{
-		{"Is R[x] an integral domain? (yes/no)", "yes", "Polynomial ring over a field is an integral domain."},
-		{"Is Z[x] / (x) isomorphic to Z? (yes/no)", "yes", "Evaluating at 0 kills (x), leaving constants Z."},
-		{"Does R[x]/(x^2+1) give a field isomorphic to C? (yes/no)", "yes", "x^2+1 is irreducible over R, so quotient is a field extension C."},
+		{"What ring is R[x] / (x) isomorphic to?", "R", "Quotient by the ideal (x) evaluates polynomials at 0, leaving constants R."},
+		{"What ring is Z[x] / (x) isomorphic to?", "Z", "Evaluating at 0 kills (x), leaving constants Z."},
+		{"What field is R[x] / (x^2+1) isomorphic to?", "C", "x^2+1 is irreducible over R, so the quotient is a field extension C."},
+		{"In Q[x]/(x^2-2), what does the class of x square to?", "2", "x^2 = 2 in the quotient, so the class behaves as sqrt(2)."},
 		{"Is Q[x] a PID? (yes/no)", "yes", "Polynomial ring over a field is a PID."},
+		{"Is Z[x] a PID? (yes/no)", "no", "The ideal (2,x) is not principal, so Z[x] is not a PID."},
 	}
 	tableHard := []entry{
 		{"Is R[x]/(x^2) a field? (yes/no)", "no", "x^2 is not irreducible (has repeated root), quotient has zero divisors, so not a field."},
+		{"In R[x]/(x^2), the class of x is nonzero but squares to zero. Name it (the zero divisor).", "x", "The class of x is nonzero (x is not a multiple of x^2) and x*x = x^2 = 0 in the quotient."},
+		{"What is the minimal polynomial of sqrt(2) over Q? (type like x^2-2)", "x^2-2", "sqrt(2) satisfies x^2-2=0, irreducible over Q by Eisenstein/rational root test."},
+		{"What is Q[x]/(x^2-2) isomorphic to? (type like Q(sqrt(2)))", "Q(sqrt(2))", "Adjoining a root of the irreducible x^2-2 gives Q(sqrt(2))."},
 		{"Does Z[x] contain Q? (yes/no)", "no", "Z[x] has integer coefficients only; Q requires rational coefficients."},
 		{"Is the ideal (2,x) in Z[x] maximal? (yes/no)", "yes", "Quotient Z[x]/(2,x) ≅ Z_2, a field, so maximal."},
 	}

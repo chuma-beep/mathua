@@ -1,29 +1,29 @@
 [
   {
-    "label": "Polynomial Rings and Field Extensions",
-    "section": "From Polynomials to Fields",
+    "label": "Ideals by evaluation",
+    "section": "Ideals by evaluation",
     "subgoals": [
-      "Review From Polynomials to Fields",
-      "Work the example",
-      "Verify"
+      "Evaluate at 0 to see the kernel",
+      "Identify the kernel as (x)",
+      "Read the quotient as R"
     ]
   },
   {
-    "label": "Polynomial Rings and Field Extensions — practice 2",
-    "section": "From Polynomials to Fields",
+    "label": "Worked: R[x]/(x^2+1) is C",
+    "section": "Worked: R[x]/(x^2+1) is C",
     "subgoals": [
-      "Review From Polynomials to Fields",
-      "Work the example",
-      "Verify"
+      "Multiply two cosets",
+      "Reduce with x^2 = -1",
+      "Match the result against complex multiplication"
     ]
   },
   {
-    "label": "Polynomial Rings and Field Extensions — practice 3",
-    "section": "Example",
+    "label": "Worked: adjoining a square root",
+    "section": "Worked: adjoining a square root",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Square the class of x",
+      "Write a general element a+bx",
+      "Count the dimension over Q"
     ]
   }
 ]
