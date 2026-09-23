@@ -74,3 +74,6 @@ skills/
 
 # local research — do not commit
 improve.md
+
+# Figure display fonts (fetched via figures/fetch_fonts.py, never committed)
+figures/fonts/
