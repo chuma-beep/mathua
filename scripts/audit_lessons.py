@@ -241,6 +241,49 @@ def main():
         except Exception as e:
             errors.append(f"enrichment audit failed: {e}")
 
+    # 10. Stub lessons: teaching/ sources too short to carry a worked
+    # example (template cluster: <=12 non-blank lines). Ratcheted against
+    # scripts/audit_baseline.json — waves shrink it to empty; new stubs fail.
+    # 11. Placeholder KP subgoals: generic "Review X / Work the example /
+    # Verify" filler instead of moves naming the actual computation.
+    try:
+        with open(os.path.join(ROOT, "scripts", "audit_baseline.json")) as f:
+            baseline = json.load(f)
+    except Exception:
+        baseline = {}
+    stub_now, ph_now = [], []
+    if os.path.isdir(LESSONS):
+        for name in sorted(os.listdir(os.path.join(LESSONS, "teaching"))):
+            if not name.endswith(".md"):
+                continue
+            p = os.path.join(LESSONS, "teaching", name)
+            n = sum(1 for line in open(p, encoding="utf-8") if line.strip())
+            if n <= 12:
+                stub_now.append(f"teaching/{name}")
+    kp_dir = os.path.join(LESSONS, "kp")
+    if os.path.isdir(kp_dir):
+        for name in sorted(os.listdir(kp_dir)):
+            if not name.endswith(".json"):
+                continue
+            with open(os.path.join(kp_dir, name), encoding="utf-8") as f:
+                kps = json.load(f)
+            if any(
+                any(str(s).startswith("Review ") or s in ("Work the example", "Verify")
+                    for s in (k.get("subgoals") or []))
+                for k in kps
+            ):
+                ph_now.append(name[:-5])
+    for label, now, key in (("stub lessons", stub_now, "stub_lessons"),
+                            ("placeholder-KP shards", ph_now, "placeholder_kps")):
+        allowed = set(baseline.get(key, []))
+        fresh = sorted(set(now) - allowed)
+        fixed = sorted(allowed - set(now))
+        print(f"note: {label}: {len(now)} current ({len(allowed)} baselined"
+              f"{f', {len(fixed)} fixed' if fixed else ''})", file=sys.stderr)
+        if fresh:
+            errors.append(f"NEW {label} ({len(fresh)}), fix content, do not extend the baseline:\n  "
+                          + "\n  ".join(fresh[:30]))
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")
