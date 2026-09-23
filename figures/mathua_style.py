@@ -30,6 +30,7 @@ Omitted from the skill's surface on purpose:
 
 from __future__ import annotations
 
+import logging
 import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -113,9 +114,37 @@ def register_fonts(font_dir: str | Path | None = None) -> list[str]:
     return registered
 
 
+class _OnceFilter(logging.Filter):
+    """Let each distinct font-manager message through once; silence repeats.
+
+    The TEXT_STACK deliberately names "Space Grotesk" (browser-resolvable in
+    SVG via the site's webfonts) ahead of locally registered files, so the
+    resolver logs one "not found" per process run. That first line is the
+    signal; the following thirty are noise.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self._seen: set[str] = set()
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        msg = record.getMessage()
+        if msg in self._seen:
+            return False
+        self._seen.add(msg)
+        return True
+
+
+def _dedupe_font_warnings() -> None:
+    logger = logging.getLogger("matplotlib.font_manager")
+    if not any(isinstance(f, _OnceFilter) for f in logger.filters):
+        logger.addFilter(_OnceFilter())
+
+
 def apply_publication_style(style: MathuaStyle | None = None) -> MathuaStyle:
     """Configure matplotlib rcParams: parchment face, minimalist spines, vector text."""
     style = style or MathuaStyle()
+    _dedupe_font_warnings()
     plt.rcParams.update(
         {
             "font.family": list(style.font_family),
