@@ -1800,35 +1800,35 @@
  },
  {
   "file": "data/lessons/algebrica/derivatives/differential-of-a-function.md",
-  "line": 7,
+  "line": 9,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\mathrm{d}y = f’(x) \\cdot \\Delta x \\tag{1}"
  },
  {
   "file": "data/lessons/algebrica/derivatives/differential-of-a-function.md",
-  "line": 11,
+  "line": 13,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\mathrm{d}y = f’(x) \\cdot \\mathrm{d}x \\tag{2}"
  },
  {
   "file": "data/lessons/algebrica/derivatives/differential-of-a-function.md",
-  "line": 15,
+  "line": 17,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "f’(x) = \\frac{\\mathrm{d}y}{\\mathrm{d}x} \\tag{3}"
  },
  {
   "file": "data/lessons/algebrica/derivatives/differential-of-a-function.md",
-  "line": 21,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "conjugate/vector notation",
   "latex": "\\overline{BC} = \\overline{AB} \\cdot \\tan(\\alpha) \\tag{4}"
  },
  {
   "file": "data/lessons/algebrica/derivatives/differential-of-a-function.md",
-  "line": 25,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "conjugate/vector notation",
   "latex": "\\begin{align} \\overline{BC} &= \\overline{AB} \\cdot \\tan(\\alpha) \\tag{5} \\\\\\\\[0.5em] &= \\Delta x \\cdot f’(x) \\\\\\\\[0.5em] &= \\mathrm{d}y \\end{align}"
@@ -2556,98 +2556,98 @@
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 15,
+  "line": 17,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x_0) = 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 27,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) \\leq f(x_0) \\quad \\forall \\, x \\in I"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 29,
+  "line": 31,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "\\frac{f(x_0 + h) - f(x_0)}{h} \\leq 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 31,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "\\frac{f(x_0 + h) - f(x_0)}{h} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 35,
+  "line": 37,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{h \\to 0^+} \\frac{f(x_0 + h) - f(x_0)}{h} \\leq 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 35,
+  "line": 37,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{h \\to 0^-} \\frac{f(x_0 + h) - f(x_0)}{h} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 39,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x_0) = 0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 49,
+  "line": 51,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = x^{3} - 3x^{2} + 2"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 53,
+  "line": 55,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x) = 3x^{2} - 6x = 3x(x - 2)"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 57,
+  "line": 59,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "x = 0 \\quad \\text{and} \\quad x = 2"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 68,
+  "line": 70,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "0"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 68,
+  "line": 70,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "2"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 85,
+  "line": 87,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x) = 3x^2"
  },
  {
   "file": "data/lessons/algebrica/differential-calculus-theorems/fermat-theorem.md",
-  "line": 93,
+  "line": 95,
   "verdict": "SKIP",
   "reason": "environment: cases",
   "latex": "y = f(x) = |x| = \\begin{cases} +x & \\text{if } x \\ge 0\\\\\\\\[4pt] -x & \\text{if } x < 0 \\end{cases}"
@@ -4754,112 +4754,112 @@
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 7,
+  "line": 9,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_af(x) = g(x)"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 20,
+  "line": 22,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_af(x) = \\begin{cases} a > 0 \\\\\\\\[0.6em] a \\neq 1 \\\\\\\\[0.6em] f(x) > 0 \\\\\\ \\end{cases}"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 33,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_a f(x) = \\log_a g(x)"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 33,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "f(x) = g(x)"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 38,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_a f(x) = b"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 38,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "f(x) = a^b"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 41,
+  "line": 43,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_a^2(x+c) + \\log_a(x+c) + k = 0"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 47,
+  "line": 49,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "\\log_3(2x + 1) = \\log_3(x^2)"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 52,
+  "line": 54,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "2x + 1 > 0 \\rightarrow x > -\\frac{1}{2}"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 52,
+  "line": 54,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "x^2 > 0 \\rightarrow x \\neq 0"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 54,
+  "line": 56,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "-\\frac{1}{2}"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 54,
+  "line": 56,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 62,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\left(-\\frac12, 0\\right) \\;\\cup\\; (0, +\\infty)"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 67,
+  "line": 69,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "x^2-2x-1 = 0"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 71,
+  "line": 73,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
  },
  {
   "file": "data/lessons/algebrica/equations/logarithmic-equations.md",
-  "line": 75,
+  "line": 77,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.6em] &= \\frac{2 \\pm \\sqrt{4 + 4}}{2} \\\\\\\\[0.6em] &= \\frac{2 \\pm \\sqrt{8}}{2} \\\\\\\\[0.6em] &= \\frac{2 \\pm 2\\sqrt{2}}{2} \\\\\\\\[0.6em] &= 1 \\pm \\sqrt{2} \\end{align*}\n\n\nNow let’s verify that the solutions satisfy the domain:\n\n  * \\\\( x = 1 + \\sqrt{2} \\approx2.414 \\; \\\\) satisfies \\\\( x > -\\dfrac{1}{2} \\"
@@ -6931,126 +6931,126 @@
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 20,
+  "line": 22,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "\\lim_{x \\to x_0} f(x) = f(x_0)"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 34,
+  "line": 36,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\lim_{x \\to x_0} f(x) = \\ell \\in \\mathbb{R}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 42,
+  "line": 44,
   "verdict": "SKIP",
   "reason": "environment: cases",
   "latex": "g(x) = \\begin{cases} \\ell & \\text{if } x = x_0 \\\\\\\\[6pt] f(x) & \\text{if } x \\ne x_0 \\end{cases}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 52,
+  "line": 54,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = \\frac{x^2 - 1}{x - 1}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 58,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = x + 1"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 66,
+  "line": 68,
   "verdict": "SKIP",
   "reason": "environment: cases",
   "latex": "g(x) = \\begin{cases} 2 & \\text{if } x = 1 \\\\\\\\[6pt] f(x) & \\text{if } x \\ne 1 \\end{cases}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 74,
+  "line": 76,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\begin{align} \\lim_{x \\to x_0^-} f(x) &= \\ell_1 \\in \\mathbb{R} \\\\\\\\[6pt] \\lim_{x \\to x_0^+} f(x) &= \\ell_2 \\in \\mathbb{R} \\\\\\\\[6pt] \\ell_1 &\\neq \\ell_2 \\end{align}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 82,
+  "line": 84,
   "verdict": "SKIP",
   "reason": "environment: cases",
   "latex": "f(x) = \\begin{cases} 0 & \\text{if } x < 1 \\\\\\\\[6pt] 2 & \\text{if } x \\ge 1 \\end{cases}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 88,
+  "line": 90,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to 1^-} f(x) = 0"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 90,
+  "line": 92,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to 1^+} f(x) = 2"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 100,
+  "line": 102,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\begin{align} \\lim_{x \\to x_0^-} f(x) &= \\pm \\infty \\\\\\\\[6pt] \\lim_{x \\to x_0^+} f(x) &= \\pm \\infty \\end{align}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 108,
+  "line": 110,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = \\frac{1}{x - 2}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 114,
+  "line": 116,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to 2^-} f(x) = -\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 118,
+  "line": 120,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to 2^+} f(x) = +\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 126,
+  "line": 128,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x_0) = \\lim_{x \\to x_0} \\frac{f(x) - f(x_0)}{x - x_0}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 126,
+  "line": 128,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "\\lim_{x \\to x_0} f(x) = f(x_0)"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 132,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to x_0^-} \\frac{f(x) - f(x_0)}{x - x_0} \\neq \\lim_{x \\to x_0^+} \\frac{f(x) - f(x_0)}{x - x_0}"
  },
  {
   "file": "data/lessons/algebrica/functions/discontinuities-of-real-functions.md",
-  "line": 142,
+  "line": 144,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = \\sin\\left(\\frac{1}{x}\\right)"
@@ -7316,84 +7316,84 @@
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 15,
+  "line": 17,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x_1) < f(x_2)"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 24,
+  "line": 26,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x_1) > f(x_2)"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 59,
+  "line": 61,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f^{\\prime}\\left (c \\right ) = \\frac{f(b) - f(a)}{b - a}"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 67,
+  "line": 69,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "f(x) = \\frac{x^4}{4} - \\frac{x^2}{2}"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 70,
+  "line": 72,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f’(x) = x(x^2 - 1)"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 74,
+  "line": 76,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x > 0"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 74,
+  "line": 76,
   "verdict": "SKIP",
   "reason": "implication",
   "latex": "x^2 - 1 > 0 \\implies x < -1 \\text{ or } x > 1"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 78,
+  "line": 80,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "-1"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 78,
+  "line": 80,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "0"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 78,
+  "line": 80,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 82,
+  "line": 84,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "f’(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
-  "line": 86,
+  "line": 88,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "x \\in (-1,0) \\cup (1,+\\infty)"
@@ -8177,336 +8177,336 @@
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 20,
+  "line": 22,
   "verdict": "SKIP",
   "reason": "implication",
   "latex": "|x - y| < \\delta \\to |f(x) - f(y)| < \\varepsilon"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 31,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "implication",
   "latex": "|x - x_0| < \\delta \\to |f(x) - f(x_0)| < \\varepsilon"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 53,
+  "line": 55,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "|f(x_n) - f(y_n)| \\to 0"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 65,
+  "line": 67,
   "verdict": "SKIP",
   "reason": "disjoint variables",
   "latex": "|x_n - y_n| = \\frac{1}{n} \\to 0"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 69,
+  "line": 71,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "|f(x_n) - f(y_n)| = \\left(n + \\frac{1}{n}\\right)^2 - n^2 = 2 + \\frac{1}{n^2} \\to 2"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 85,
+  "line": 87,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "|f(x) - f(y)| \\le L |x - y|"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 89,
+  "line": 91,
   "verdict": "SKIP",
   "reason": "implication",
   "latex": "|x - y| < \\delta \\to |f(x) - f(y)| \\le L |x - y| < L \\delta = \\varepsilon"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 97,
+  "line": 99,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "|f’(x)| \\le M"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 101,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "f(x) - f(y) = f’(c)(x - y)"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 115,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "|\\sin(x) - \\sin(y)| = 2\\left|\\cos\\\\!\\left(\\frac{x+y}{2}\\right)\\sin\\\\!\\left(\\frac{x-y}{2}\\right)\\right|"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 119,
+  "line": 121,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "|\\sin(x) - \\sin(y)| \\leq 2\\left|\\sin\\\\!\\left(\\frac{x-y}{2}\\right)\\right|"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
-  "line": 127,
+  "line": 129,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|\\sin(x) - \\sin(y)| \\leq |x - y| < \\delta = \\varepsilon"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 23,
+  "line": 25,
   "verdict": "SKIP",
   "reason": "environment: cases",
   "latex": "|x| = \\begin{cases} +x & \\text{if } x \\geq 0 \\\\\\\\[6pt] -x & \\text{if } x < 0 \\end{cases} \\, \\forall \\, x \\in \\mathbb{R}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 69,
+  "line": 71,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "-2"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 69,
+  "line": 71,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 84,
+  "line": 86,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|2x + 1| > 3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 88,
+  "line": 90,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "2x + 1 < -3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 88,
+  "line": 90,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "2x + 1 > 3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 96,
+  "line": 98,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "-2"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 96,
+  "line": 98,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 111,
+  "line": 113,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|x + 1| + |x - 2| > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 118,
+  "line": 120,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "-(x + 1) + (-(x - 2)) > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 120,
+  "line": 122,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "-x - 1 - x + 2 > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 122,
+  "line": 124,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "-2x + 1 > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 126,
+  "line": 128,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x < -\\frac{3}{2}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 133,
+  "line": 135,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "(x + 1) + (-(x - 2)) > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 135,
+  "line": 137,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x + 1 - x + 2 > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 137,
+  "line": 139,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "3 > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 144,
+  "line": 146,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "(x + 1) + (x - 2) > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 146,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "2x - 1 > 4"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 150,
+  "line": 152,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x > \\frac{5}{2}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 157,
+  "line": 159,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "-\\frac{3}{2}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 157,
+  "line": 159,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{2}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 168,
+  "line": 170,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\left(-\\infty,\\, -\\frac{3}{2}\\right) \\cup \\left(\\frac{5}{2},\\, +\\infty\\right)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 174,
+  "line": 176,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|x - 1| > k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 187,
+  "line": 189,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x - 1 < -k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 187,
+  "line": 189,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x - 1 > k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 191,
+  "line": 193,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x < 1 - k \\qquad \\text{or} \\qquad x > 1 + k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 196,
+  "line": 198,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1-k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 196,
+  "line": 198,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1+k"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 205,
+  "line": 207,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\left(-\\infty,\\, 1-k\\right) \\cup \\left(1+k,\\, +\\infty\\right)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 211,
+  "line": 213,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "|f(x)| \\leq g(x)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 215,
+  "line": 217,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "-g(x) \\leq f(x) \\leq g(x)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 219,
+  "line": 221,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|x - 1| \\leq 2x - 3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 223,
+  "line": 225,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "-(2x - 3) \\leq x - 1 \\leq 2x - 3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 227,
+  "line": 229,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{4}{3}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 227,
+  "line": 229,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{2}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/inequalities-with-absolute-value.md",
-  "line": 227,
+  "line": 229,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "2"
@@ -9255,224 +9255,224 @@
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 7,
+  "line": 9,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "\\frac{P(x)}{Q(x)} > 0 \\qquad \\frac{P(x)}{Q(x)} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 7,
+  "line": 9,
   "verdict": "SKIP",
   "reason": "unbound function in inequality",
   "latex": "\\frac{P(x)}{Q(x)} < 0 \\qquad \\frac{P(x)}{Q(x)} \\leq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 34,
+  "line": 36,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{(x-1)^2}{x-3} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 38,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 38,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 41,
+  "line": 43,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x - 3 \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 42,
+  "line": 44,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{(x-1)^2}{x-3} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 48,
+  "line": 50,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\\\{1\\\\} \\cup (3, +\\infty)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 58,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "[1, 2) \\;\\cup\\; (2, 4]"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 66,
+  "line": 68,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{x - 1}{2 - x} < 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 70,
+  "line": 72,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "D = \\lbrace x \\in \\mathbb{R} : x \\neq 2 \\rbrace"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 74,
+  "line": 76,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1"
- },
- {
-  "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 74,
-  "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "2"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
   "line": 76,
   "verdict": "SKIP",
   "reason": "no claim",
-  "latex": "x - 1 \\lt 0"
- },
- {
-  "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 77,
-  "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "2 - x \\lt 0"
+  "latex": "2"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
   "line": 78,
   "verdict": "SKIP",
   "reason": "no claim",
+  "latex": "x - 1 \\lt 0"
+ },
+ {
+  "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
+  "line": 79,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "2 - x \\lt 0"
+ },
+ {
+  "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
+  "line": 80,
+  "verdict": "SKIP",
+  "reason": "no claim",
   "latex": "\\frac{x-1}{2-x} \\lt 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 82,
+  "line": 84,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "(-\\infty,\\, 1) \\;\\cup\\; (2,\\, +\\infty)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 88,
+  "line": 90,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{x - 1}{x^2 - 5x + 6} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 92,
+  "line": 94,
   "verdict": "SKIP",
   "reason": "dependent variable",
   "latex": "(x-3)(x-2) = 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 96,
+  "line": 98,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "D = \\lbrace \\, x \\in \\mathbb{R} : x \\neq 2, \\, x \\neq 3 \\,\\rbrace"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 100,
+  "line": 102,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "1"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 100,
+  "line": 102,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "2"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 100,
+  "line": 102,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 102,
+  "line": 104,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "x-1 \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 104,
+  "line": 106,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{x - 1}{x^2 - 5x + 6} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 110,
+  "line": 112,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "[1, 2) \\;\\cup\\; (3, +\\infty)"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 116,
+  "line": 118,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{2x + 1}{x - 3} \\geq \\frac{1}{x + 1}"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 120,
+  "line": 122,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{2x + 1}{x - 3} - \\frac{1}{x + 1} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 124,
+  "line": 126,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{(2x + 1)(x + 1) - (x - 3)}{(x - 3)(x + 1)} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 128,
+  "line": 130,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{2x^2 + 3x + 1 - x + 3}{(x - 3)(x + 1)} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 132,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\frac{2x^2 + 2x + 4}{(x - 3)(x + 1)} \\geq 0"
  },
  {
   "file": "data/lessons/algebrica/inequalities/rational-inequalities.md",
-  "line": 136,
+  "line": 138,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "(-\\infty, -1) \\;\\cup\\; (3, +\\infty)"
@@ -22765,63 +22765,63 @@
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 9,
+  "line": 11,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\forall \\, \\varepsilon > 0 \\ \\exists \\, \\nu \\in \\mathbb{N} \\, : \\, |a_n - a_m| < \\varepsilon \\quad \\forall\\, n, m > \\nu"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 17,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "set membership",
   "latex": "\\forall \\, \\varepsilon > 0 \\ \\exists \\, \\nu \\in \\mathbb{N}\\, : \\ \\left| \\sum_{k=\\nu+1}^{\\nu+p} a_k \\right| < \\varepsilon \\quad \\forall \\, p \\in \\mathbb{N}"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 30,
+  "line": 32,
   "verdict": "SKIP",
   "reason": "disjoint variables",
   "latex": "s_{n+p} - s_n = \\sum_{k=n+1}^{n+p} a_k"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 34,
+  "line": 36,
   "verdict": "SKIP",
   "reason": "disjoint variables",
   "latex": "|s_{n+p} - s_n| = \\left| \\sum_{k=n+1}^{n+p} a_k \\right|"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 38,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "|s_{n+p} - s_n| < \\varepsilon"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 54,
+  "line": 56,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\left| \\sum_{k=n+1}^{n+p} x^k \\right| = \\left| x^{n+1} + x^{n+2} + \\dots + x^{n+p} \\right|"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 83,
+  "line": 85,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\left| \\sum_{k=n+1}^{n+p} x^k \\right| = \\frac{(0.5)^{n+1} \\cdot |1 - (0.5)^p|}{|1 - 0.5|} = 2 \\cdot (0.5)^{n+1} \\cdot |1 - (0.5)^p|"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 94,
+  "line": 96,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\left| \\sum_{k=n+1}^{n+p} x^k \\right| \\leq 2 \\cdot (0.5)^{n+1}"
  },
  {
   "file": "data/lessons/algebrica/series/cauchy-convergence-criterion-series.md",
-  "line": 99,
+  "line": 101,
   "verdict": "SKIP",
   "reason": "conditional inequality",
   "latex": "\\left| \\sum_{k=n+1}^{n+p} x^k \\right| < \\varepsilon \\quad \\text{for all } p \\in \\mathbb{N}"
