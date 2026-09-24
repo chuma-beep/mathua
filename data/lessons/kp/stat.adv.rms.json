@@ -4,26 +4,26 @@
     "section": "What is the quadratic mean?",
     "subgoals": [
       "Define root mean square",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write the M_2 formula",
+      "Apply it to signed values"
     ]
   },
   {
-    "label": "Root mean square — practice 2",
-    "section": "",
+    "label": "Example 1 — temperature variation magnitude",
+    "section": "Example 1",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Understand why signs must not cancel",
+      "Square, average, and root the five readings",
+      "Check the result"
     ]
   },
   {
-    "label": "Root mean square — practice 3",
-    "section": "",
+    "label": "Example 1 — quadratic vs arithmetic mean",
+    "section": "Example 1",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Contrast the 2.56 and 0.18 summaries",
+      "Explain the sign-cancellation difference",
+      "Check the result"
     ]
   }
 ]

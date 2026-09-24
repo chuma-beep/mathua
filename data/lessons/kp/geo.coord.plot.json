@@ -1,29 +1,29 @@
 [
   {
-    "label": "Plot points on the coordinate plane",
+    "label": "Plotting points from pairs",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Step right for positive x and left for negative x",
+      "Step up for positive y and down for negative y",
+      "Mark (3, 2) after stepping 3 then 2"
     ]
   },
   {
-    "label": "Plot points on the coordinate plane — practice 2",
+    "label": "Quadrants and axis points",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Sort sign pairs into quadrants I through IV",
+      "Park (0, -3) and (4, 0) on their axes",
+      "Name all seven special places: origin, axes, quadrants"
     ]
   },
   {
-    "label": "Plot points on the coordinate plane — practice 3",
+    "label": "Drill: plot (3, 2), (-5, -1), (0, -3), (4, 0)",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Walk each pair horizontal-first, then vertical",
+      "Land (-5, -1) two signs deep in Quadrant III",
+      "Rest every point with a zero on its axis"
     ]
   }
 ]

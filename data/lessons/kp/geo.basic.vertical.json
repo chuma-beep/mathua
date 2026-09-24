@@ -3,27 +3,27 @@
     "label": "Vertical Angles",
     "section": "Vertical Angles",
     "subgoals": [
-      "Define vertical angles and parallel lines",
-      "Follow the worked example",
-      "Apply the rule"
+      "Pair opposite angles at one intersection",
+      "Copy 60 degrees across to the vertical partner",
+      "Fill the linear-pair neighbors with 180 minus 60"
     ]
   },
   {
     "label": "Parallel Lines Cut by a Transversal",
     "section": "Parallel Lines Cut by a Transversal",
     "subgoals": [
-      "Understand parallel lines cut by a transversal",
-      "Apply parallel lines cut by a transversal",
-      "Check the result"
+      "Match corresponding angles at each crossing",
+      "Equate alternate interior angles",
+      "Subtract from 180 for same-side interior partners"
     ]
   },
   {
-    "label": "Vertical angles and parallel lines — practice 3",
+    "label": "Drill: all four angles from one 60-degree angle",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Mirror 60 across the vertex",
+      "Compute 180 minus 60 for the neighbors",
+      "List 60, 120, 60, 120 around the point"
     ]
   }
 ]

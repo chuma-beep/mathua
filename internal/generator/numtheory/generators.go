@@ -346,11 +346,22 @@ func (g *quadraticReciprocityGen) Generate(ctx generator.GeneratorContext) gener
 		{"Does quadratic reciprocity relate (p/q) and (q/p) for odd primes p,q? (yes/no)", "yes", "(p/q)(q/p)=(-1)^{(p-1)(q-1)/4}."},
 		{"If p=5,q=7, does (5/7)=(7/5) hold? (yes/no)", "yes", "Both ≡1 mod4, so sign is +1."},
 		{"Is (3/11) = -(11/3) ? (yes/no)", "yes", "3≡3 mod4,11≡3 mod4 → sign -1."},
+		{"If p=3,q=7, does (3/7)=(7/3) hold? (yes/no)", "no", "3 and 7 are both 3 mod 4, so the reciprocity sign is -1."},
 	}
 	hard := []entry{
 		{"What is (3/5) using reciprocity? (enter -1,0,1)", "-1", "(3/5)=-(5/3)=-(2/3)=-( -1)= -1? Direct: residues mod5 1,4, so 3 non-residue."},
 		{"Does (p/q)=1 imply q is quadratic residue mod p? (yes/no)", "yes", "Definition of Legendre symbol."},
 		{"Is law of quadratic reciprocity used to compute (a/p) quickly? (yes/no)", "yes", "It swaps numerator/denominator to reduce."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: Legendre values via reciprocity (unique answers).
+		prod := []entry{
+			{"What is (1/5)? (enter -1,0,1)", "1", "1 = 1^2 mod 5, so it is a quadratic residue."},
+			{"What is (2/5)? (enter -1,0,1)", "-1", "Squares mod 5 are 1 and 4; 2 is a non-residue."},
+			{"What is (4/5)? (enter -1,0,1)", "1", "4 = 2^2 mod 5, so it is a quadratic residue."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -366,11 +377,19 @@ func (g *orderModGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	scale := int(1 + ctx.Difficulty*4)
 	// order of 2 mod small primes
 	entries := []struct {
-		a, m, ord int
+		a, m, ord, phi int
 	}{
-		{2, 5, 4}, {2, 7, 3}, {3, 7, 6}, {2, 9, 6}, {3, 8, 2}, {2, 11, 10},
+		{2, 5, 4, 4}, {2, 7, 3, 6}, {3, 7, 6, 6}, {2, 9, 6, 6}, {3, 8, 2, 4}, {2, 11, 10, 10},
 	}
 	e := entries[rand.Intn(len(entries))]
+	if rand.Intn(3) == 0 {
+		// typed production: the order value itself
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the order of %d modulo %d? (smallest k with %d^k≡1 mod %d)", e.a, e.m, e.a, e.m),
+			Answer:      fmt.Sprintf("%d", e.ord),
+			Explanation: fmt.Sprintf("Powers of %d mod %d cycle with period %d.", e.a, e.m, e.ord),
+		}
+	}
 	if scale > 3 {
 		// for harder, ask for order value; easy asks yes/no about divisibility of phi
 		return generator.Problem{
@@ -380,7 +399,7 @@ func (g *orderModGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		}
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Does the order of %d mod %d divide φ(%d)=%d? (yes/no)", e.a, e.m, e.m, e.ord+2),
+		Question:    fmt.Sprintf("Does the order of %d mod %d divide φ(%d)=%d? (yes/no)", e.a, e.m, e.m, e.phi),
 		Answer:      "yes",
 		Explanation: "Order always divides φ(m) (Euler) or p-1 for prime.",
 	}
@@ -404,6 +423,16 @@ func (g *primitiveRootGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{"How many primitive roots mod 7 are there? (enter a number)", "2", "Count = φ(φ(7))=φ(6)=2 (3 and 5)."},
 		{"Does every prime have a primitive root? (yes/no)", "yes", "Primitive root theorem for primes."},
 		{"Is 3 a primitive root mod 7? (yes/no)", "yes", "Powers of 3: 3,2,6,4,5,1 cover all residues."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: orders and smallest roots (unique answers).
+		prod := []entry{
+			{"How many primitive roots mod 7 are there? (enter a number)", "2", "Count = φ(φ(7))=φ(6)=2 (3 and 5)."},
+			{"What is the order of a primitive root mod 5? (enter a number)", "4", "A primitive root mod 5 has order φ(5)=4."},
+			{"What is the smallest primitive root mod 5? (enter a number)", "2", "Powers of 2 mod5: 2,4,3,1 cover all non-zero residues."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -452,11 +481,22 @@ func (g *pntGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does prime number theorem state π(x) ~ x/log x? (yes/no)", "yes", "π(x) ~ x/log x as x→∞."},
 		{"Does π(x) denote number of primes ≤ x? (yes/no)", "yes", "Prime counting function."},
 		{"Is density of primes near x about 1/log x? (yes/no)", "yes", "PNT gives density."},
+		{"Is the density of primes near x about 1/x? (yes/no)", "no", "PNT gives density about 1/log x, much larger than 1/x."},
 	}
 	hard := []entry{
 		{"Does PNT imply n-th prime p_n ~ n log n? (yes/no)", "yes", "Equivalent form of PNT."},
 		{"Is error in PNT related to Riemann hypothesis (O(√x log x))? (yes/no)", "yes", "RH gives sharp error."},
 		{"Does π(10)=4? (yes/no)", "yes", "Primes ≤10: 2,3,5,7."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: exact prime counts (unique answers).
+		prod := []entry{
+			{"How many primes are there ≤ 10? (enter a number)", "4", "Primes ≤10: 2,3,5,7."},
+			{"How many primes are there ≤ 20? (enter a number)", "8", "Primes ≤20: 2,3,5,7,11,13,17,19."},
+			{"How many primes are there ≤ 30? (enter a number)", "10", "Primes ≤30: 2,3,5,7,11,13,17,19,23,29."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -485,6 +525,16 @@ func (g *dirichletGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"Is L(1,χ)≠0 the key non-vanishing for Dirichlet? (yes/no)", "yes", "Non-vanishing of L at 1 proves theorem."},
 		{"Does Dirichlet generalize Euclid's infinitude? (yes/no)", "yes", "Euclid is case m=1 or a=1 mod m."},
 	}
+	if rand.Intn(3) == 0 {
+		// typed production: smallest prime in a progression (unique answers).
+		prod := []entry{
+			{"What is the smallest prime ≡3 mod 4? (enter a number)", "3", "3 ≡ 3 mod 4 and 3 is prime."},
+			{"What is the smallest prime ≡1 mod 4? (enter a number)", "5", "Numbers ≡1 mod 4: 1,5,...; 5 is the first prime."},
+			{"What is the smallest prime ≡2 mod 3? (enter a number)", "2", "2 ≡ 2 mod 3 and 2 is prime."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
+	}
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
@@ -506,11 +556,22 @@ func (g *sieveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does sieve of Eratosthenes mark multiples of p starting at p^2? (yes/no)", "yes", "Smaller multiples already marked by smaller primes."},
 		{"Is sieve time O(n log log n)? (yes/no)", "yes", "Eratosthenes complexity."},
 		{"Does Brun's sieve give upper bound for twin primes? (yes/no)", "yes", "Brun: sum of reciprocals of twin primes converges."},
+		{"Does the sieve test every number against all smaller numbers? (yes/no)", "no", "It only marks multiples of primes up to sqrt(n)."},
 	}
 	hard := []entry{
 		{"Does sieve principle use inclusion-exclusion with Möbius? (yes/no)", "yes", "Count via μ."},
 		{"Is Brun's theorem that twin primes are finite? (no)", "no", "Brun shows sum converges, not finiteness."},
 		{"Does segmented sieve handle large n with limited memory? (yes/no)", "yes", "Process intervals."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: sieve yields (unique answers).
+		prod := []entry{
+			{"How many primes does the sieve find below 10? (enter a number)", "4", "Survivors below 10: 2,3,5,7."},
+			{"How many primes does the sieve find below 20? (enter a number)", "8", "Survivors below 20: 2,3,5,7,11,13,17,19."},
+			{"What is the first prime the sieve uses to mark composites? (enter a number)", "2", "Marking starts with multiples of 2."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -533,11 +594,22 @@ func (g *zetaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does ζ(s)=∑_{n≥1}1/n^s converge for Re(s)>1? (yes/no)", "yes", "Zeta converges for Re(s)>1."},
 		{"Is ζ(2)=π^2/6? (yes/no)", "yes", "Basel problem."},
 		{"Does Euler product ζ(s)=∏_p(1-p^{-s})^{-1} hold? (yes/no)", "yes", "Euler product over primes."},
+		{"Is ζ(3) known in closed form like ζ(2)? (yes/no)", "no", "ζ(3) is Apéry's constant; no pi-power closed form is known."},
 	}
 	hard := []entry{
 		{"Are nontrivial zeros of ζ conjectured to lie on Re(s)=1/2? (yes/no)", "yes", "Riemann hypothesis."},
 		{"Does ζ(s) have pole at s=1? (yes/no)", "yes", "Simple pole with residue 1."},
 		{"Is ζ(-1)=-1/12 via analytic continuation? (yes/no)", "yes", "Regularized sum."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: zeta values and residue (unique answers).
+		prod := []entry{
+			{"What is zeta(2)? (type like pi^2/6)", "pi^2/6", "Basel problem: zeta(2) = pi^2/6."},
+			{"What is the residue of zeta at its pole s=1? (enter a number)", "1", "Zeta has a simple pole at s=1 with residue 1."},
+			{"What is zeta(4)? (type like pi^4/90)", "pi^4/90", "zeta(4) = pi^4/90."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -560,11 +632,22 @@ func (g *chebyshevGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"Is ψ(x)=∑_{n≤x}Λ(n) Chebyshev function? (yes/no)", "yes", "Von Mangoldt weight."},
 		{"Does θ(x)=∑_{p≤x}log p count primes with log weight? (yes/no)", "yes", "Chebyshev θ."},
 		{"Is PNT equivalent to ψ(x)∼x? (yes/no)", "yes", "Chebyshev form."},
+		{"Is ψ(x) the same as π(x)? (yes/no)", "no", "ψ weights prime powers by log p; π just counts primes."},
 	}
 	hard := []entry{
 		{"Does explicit formula ψ(x)=x-∑_ρ x^ρ/ρ - log(2π) hold? (yes/no)", "yes", "Over zeros of ζ."},
 		{"Is θ(x)∼x equivalent to PNT? (yes/no)", "yes", "Chebyshev equivalence."},
 		{"Does Chebyshev show π(x)≍x/log x with constants? (yes/no)", "yes", "Chebyshev bounds."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: prime-power counts behind ψ (unique answers).
+		prod := []entry{
+			{"How many prime powers n ≤ 5 are there? (enter a number)", "4", "2,3,4,5 (primes plus 4 = 2^2)."},
+			{"How many prime powers n ≤ 10 are there? (enter a number)", "7", "2,3,4,5,7,8,9."},
+			{"How many prime powers n ≤ 15 are there? (enter a number)", "9", "2,3,4,5,7,8,9,11,13."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -587,11 +670,22 @@ func (g *ellipticCurveGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{"Is elliptic curve E: y^2=x^3+ax+b with discriminant Δ≠0? (yes/no)", "yes", "Nonsingular cubic."},
 		{"Does E have group law via chord-tangent? (yes/no)", "yes", "Points form abelian group."},
 		{"Is BSD conjecture about rank of E(Q) and L(E,1)? (yes/no)", "yes", "Birch and Swinnerton-Dyer."},
+		{"Is y^2=x^3 (a=b=0) an elliptic curve? (yes/no)", "no", "Δ = 0: the cubic has a singular cusp, so it is not elliptic."},
 	}
 	hard := []entry{
 		{"Does Hasse bound |#E(F_p)-(p+1)|≤2√p hold? (yes/no)", "yes", "Hasse-Weil."},
 		{"Is elliptic curve used in factorization (ECM) and cryptography? (yes/no)", "yes", "ECM and ECC."},
 		{"Does Mordell-Weil state E(Q) finitely generated? (yes/no)", "yes", "E(Q)≅Z^r×torsion."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: discriminant quantity 4a^3+27b^2 (unique answers).
+		prod := []entry{
+			{"For E: y^2=x^3+1 (a=0,b=1), what is 4a^3+27b^2? (enter a number)", "27", "4(0)+27(1) = 27, so discriminant Δ = -16(27) ≠ 0."},
+			{"For E: y^2=x^3+x (a=1,b=0), what is 4a^3+27b^2? (enter a number)", "4", "4(1)+27(0) = 4, so Δ = -64 ≠ 0."},
+			{"For E: y^2=x^3+x+1 (a=1,b=1), what is 4a^3+27b^2? (enter a number)", "31", "4(1)+27(1) = 31, so Δ = -496 ≠ 0."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -614,11 +708,22 @@ func (g *continuedFractionsGen) Generate(ctx generator.GeneratorContext) generat
 		{"Is continued fraction [a0;a1,a2,...] = a0+1/(a1+1/(a2+...))? (yes/no)", "yes", "Definition."},
 		{"Do convergents p_k/q_k give best rational approximations? (yes/no)", "yes", "Best approximations."},
 		{"Is √2 = [1;2,2,2,...]? (yes/no)", "yes", "Periodic for quadratic irrationals."},
+		{"Is the continued fraction of every real number finite? (yes/no)", "no", "Only rationals have finite expansions; irrationals are infinite."},
 	}
 	hard := []entry{
 		{"Does Lagrange show periodic CF ⇔ quadratic irrational? (yes/no)", "yes", "Lagrange's theorem."},
 		{"Is e = [2;1,2,1,1,4,1,1,6,...] pattern? (yes/no)", "yes", "Continued fraction for e."},
 		{"Does CF of π start [3;7,15,1,292,...]? (yes/no)", "yes", "Approximation 22/7 from first term."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: short convergents as fractions (unique answers).
+		prod := []entry{
+			{"What fraction is [1;2]? (type like 3/2)", "3/2", "[1;2] = 1 + 1/2 = 3/2."},
+			{"What fraction is [2;2]? (type like 5/2)", "5/2", "[2;2] = 2 + 1/2 = 5/2."},
+			{"What fraction is [3;7]? (type like 22/7)", "22/7", "[3;7] = 3 + 1/7 = 22/7."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {
@@ -641,11 +746,22 @@ func (g *classNumberGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		{"Is class number h(D) count of ideal classes in quadratic order? (yes/no)", "yes", "Class group size."},
 		{"Does h(-3)=1 mean Z[ω] is UFD? (yes/no)", "yes", "Class number 1 ⇔ PID ⇔ UFD for rings of integers."},
 		{"Is Gauss class number problem about h(D)=1? (yes/no)", "yes", "Heegner completed."},
+		{"Does h(-5)=1 hold? (yes/no)", "no", "h(-5) = 2: Z[√-5] is the classic non-UFD."},
 	}
 	hard := []entry{
 		{"Does class number formula relate h(D) to L(1,χ_D)? (yes/no)", "yes", "Dirichlet class number formula."},
 		{"Is h(-163)=1 the largest Heegner number? (yes/no)", "yes", "Heegner numbers -1,-2,-3,-7,-11,-19,-43,-67,-163."},
 		{"Does Stark-Heegner show h(-163)=1? (yes/no)", "yes", "Stark-Heegner theorem."},
+	}
+	if rand.Intn(3) == 0 {
+		// typed production: small class numbers (unique answers).
+		prod := []entry{
+			{"What is the class number h(-7)? (enter a number)", "1", "Q(√-7) has class number 1: its integers form a UFD."},
+			{"What is the class number h(-15)? (enter a number)", "2", "Q(√-15) has class number 2."},
+			{"What is the class number h(-23)? (enter a number)", "3", "Q(√-23) has class number 3."},
+		}
+		v := prod[rand.Intn(len(prod))]
+		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
 	}
 	pool := easy
 	if scale > 3 {

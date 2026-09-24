@@ -3,8 +3,8 @@
     "label": "From the normal to the standard normal distribution",
     "section": "From the normal to the standard normal distribution",
     "subgoals": [
-      "Define standard normal distribution and z-table",
-      "Follow the worked example",
+      "Define the standardization Z = (X - mu)/sigma",
+      "Convert a normal value to standard deviations from the mean",
       "Apply the rule"
     ]
   },
@@ -12,18 +12,18 @@
     "label": "Standard Z Table",
     "section": "Standard Z Table",
     "subgoals": [
-      "Understand standard z table",
-      "Apply standard z table",
+      "Understand rows, columns, and cumulative cells",
+      "Look up a cumulative probability by row and column",
       "Check the result"
     ]
   },
   {
-    "label": "Standard normal distribution and Z-table — practice 3",
-    "section": "",
+    "label": "Example 1 — reading P(Z < 0.16)",
+    "section": "Example 1",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Split 0.16 into row 0.1 and column .06",
+      "Read the 0.5636 cell and derive complements",
+      "Check the result"
     ]
   }
 ]

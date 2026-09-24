@@ -3,27 +3,27 @@
     "label": "The Definitions",
     "section": "The Definitions",
     "subgoals": [
-      "Define complementary and supplementary angles",
-      "Follow the worked example",
-      "Apply the rule"
+      "Add two angles to 90 degrees for complementary",
+      "Add two angles to 180 degrees for supplementary",
+      "Pair C-before-S with 90-before-180 as a memory aid"
     ]
   },
   {
-    "label": "Complementary and supplementary angles — practice 2",
+    "label": "Drill: complement and supplement of 35 degrees",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Subtract 35 from 90 to get 55",
+      "Subtract 35 from 180 to get 145",
+      "Check each pair sums to its target"
     ]
   },
   {
-    "label": "Complementary and supplementary angles — practice 3",
+    "label": "Drill: splitting 90 degrees as 2x and 3x",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Write 2x plus 3x equals 90",
+      "Solve x equals 18",
+      "Confirm 36 plus 54 returns 90"
     ]
   }
 ]
