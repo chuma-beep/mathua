@@ -1,29 +1,29 @@
 [
   {
-    "label": "First-Order PDEs and Characteristics",
-    "section": "Transport Along Curves",
+    "label": "Worked: riding the transport equation",
+    "section": "Worked: riding the transport equation",
     "subgoals": [
-      "Review Transport Along Curves",
-      "Work the example",
-      "Verify"
+      "Write dx/dt = 2 for the characteristics",
+      "Hold u constant along x - 2t",
+      "Evaluate u(5, 1) from the shifted data"
     ]
   },
   {
-    "label": "First-Order PDEs and Characteristics — practice 2",
-    "section": "Transport Along Curves",
+    "label": "Worked: reading char ODEs",
+    "section": "Worked: reading char ODEs",
     "subgoals": [
-      "Review Transport Along Curves",
-      "Work the example",
-      "Verify"
+      "Form dx/a = dy/b for the curves",
+      "Write u = f(x - 3y) from constancy",
+      "Verify by differentiating back"
     ]
   },
   {
-    "label": "First-Order PDEs and Characteristics — practice 3",
-    "section": "Example",
+    "label": "When characteristics cross",
+    "section": "When characteristics cross",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Explain the multi-valued shock mechanism",
+      "Identify quasi-linear feedback as the cause",
+      "Contrast with linear transport"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Fourier Transforms and ODEs",
-    "section": "Solving ODEs in Frequency Domain",
+    "label": "Worked: derivatives become factors",
+    "section": "Worked: derivatives become factors",
     "subgoals": [
-      "Review Solving ODEs in Frequency Domain",
-      "Work the example",
-      "Verify"
+      "Write F(y') as the integral of y' e^{-iwt}",
+      "Integrate by parts to pull out iw",
+      "Apply twice for F(y'') = -w^2 Y"
     ]
   },
   {
-    "label": "Fourier Transforms and ODEs — practice 2",
-    "section": "Solving ODEs in Frequency Domain",
+    "label": "Worked: an ODE turned into division",
+    "section": "Worked: an ODE turned into division",
     "subgoals": [
-      "Review Solving ODEs in Frequency Domain",
-      "Work the example",
-      "Verify"
+      "Transform y'' + 4y = f to (-w^2+4)Y = F",
+      "Divide to isolate Y",
+      "Invert to recover y(t)"
     ]
   },
   {
-    "label": "Fourier Transforms and ODEs — practice 3",
-    "section": "Example",
+    "label": "Convolution and inversion",
+    "section": "Convolution and inversion",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "State F(f*g) = F(f)F(g)",
+      "Read the impulse response 1/(1-w^2)",
+      "Summarize transform-divide-invert"
     ]
   }
 ]

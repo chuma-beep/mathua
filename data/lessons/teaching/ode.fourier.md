@@ -1,15 +1,25 @@
 # Fourier Transforms and ODEs
 
-**Fourier transform:** $\hat{y}(\omega)=\int_{-\infty}^{\infty}y(t)e^{-i\omega t}dt$, with $F\{y'\}=i\omega\hat{y}$, $F\{y''\}=-\omega^{2}\hat{y}$.
+**Fourier transform:** $\hat{y}(\omega) = \int_{-\infty}^{\infty} y(t) e^{-i\omega t} dt$, with $F(y') = i\omega \hat{y}$ and $F(y'') = -\omega^2 \hat{y}$. Differentiation becomes multiplication, so constant-coefficient ODEs become algebra in frequency.
 
-## Solving ODEs in Frequency Domain
+## Worked: derivatives become factors
 
-### Algebraic Equation
-$y''+y=f(t)$ becomes $(-\omega^{2}+1)\hat{y}=\hat{f}$, so $\hat{y}=\hat{f}/(1-\omega^{2})$, then invert via integral.
+Check $F(y') = i\omega \hat{y}$:
+1. Write $F(y') = \int_{-\infty}^{\infty} y'(t) e^{-i\omega t} dt$.
+2. Integrate by parts: boundary terms vanish for decaying $y$, leaving $i\omega \int y e^{-i\omega t} dt$.
+3. That integral is $\hat{y}$, so $F(y') = i\omega \hat{y}$; applying twice gives $F(y'') = -\omega^2 \hat{y}$.
 
-### Convolution Like Laplace
-Fourier also turns convolution to product: $F\{f*g\}=F\{f\}F\{g\}$, useful for Green's functions.
+So each derivative just multiplies the transform by $i\omega$.
 
-## Example
+## Worked: an ODE turned into division
 
-$y''+y=\delta(t)$: Fourier gives $(1-\omega^{2})\hat{y}=1$, so $\hat{y}=1/(1-\omega^{2})$, inverse yields $y(t)=\sin t\cdot H(t)$ (up to constants).
+Solve $y'' + 4y = f(t)$ in frequency:
+1. Transform both sides: $(-\omega^2 + 4)\hat{y} = \hat{f}$.
+2. Divide: $\hat{y} = \hat{f} / (4 - \omega^2)$.
+3. Invert the result by the Fourier inversion integral to recover $y(t)$.
+
+So the differential operator $d^2/dt^2 + 4$ acts as the number $4 - \omega^2$ on each frequency.
+
+## Convolution and inversion
+
+Fourier also turns convolution into a product, $F(f*g) = F(f)F(g)$, which is how Green's functions enter: the impulse response $\hat{y} = 1/(1 - \omega^2)$ for $y'' + y = \delta$ inverts to ringing $\sin t$ switched on at zero. Transform, divide, invert — that is the whole method.

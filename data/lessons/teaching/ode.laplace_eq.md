@@ -1,15 +1,25 @@
 # Laplace Equation
 
-**Laplace:** $\Delta u=0$, harmonic, mean value property, maximum principle (max on boundary), Dirichlet problem $ \Delta u=0$ in domain, $u=f$ on boundary.
+**Laplace equation:** $\Delta u = u_{xx} + u_{yy} = 0$. Solutions are **harmonic**: they satisfy the mean value property, take their maxima on the boundary, and solve the Dirichlet problem (prescribed boundary values, harmonic inside).
 
-## Harmonic Functions
+## Worked: checking u = xy is harmonic
 
-### Mean Value
-$u(a)=\text{avg on circle}$ characterizes harmonic; fundamental solution $\log|x|$ in 2D Newtonian.
+Test $u(x, y) = xy$:
+1. Differentiate in $x$ twice: $u_x = y$, so $u_{xx} = 0$.
+2. Differentiate in $y$ twice: $u_y = x$, so $u_{yy} = 0$.
+3. Add: $\Delta u = 0 + 0 = 0$.
 
-### Separation
-Harmonic via separation yields eigenfunctions.
+So $xy$ is harmonic — while $x^2 + y^2$ is not, since $\Delta(x^2+y^2) = 2 + 2 = 4$.
 
-## Example
+## Worked: the center equals the average
 
-Unit disk Dirichlet: $u(re^{i\theta})=\sum a_n r^n e^{in\theta}$ with $a_n$ Fourier coefficients of boundary $f$.
+Take the harmonic $u(x, y) = x^2 - y^2$ on the disk of radius 2:
+1. Average $u$ over the circle: opposite points $(\pm a, \pm b)$ cancel, so the average is 0.
+2. The mean value property says $u$ at the center equals that average: $u(0, 0) = 0$.
+3. Check directly: $0^2 - 0^2 = 0$.
+
+So interior values are forced by surrounding values — harmonic functions cannot freelance.
+
+## Maxima live on the boundary
+
+A non-constant harmonic function never attains its maximum (or minimum) inside the domain — both sit on the boundary. That is the maximum principle, and it makes the Dirichlet problem well-posed: boundary data $f$ extends inward to exactly one harmonic $u$.

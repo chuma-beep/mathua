@@ -1,29 +1,29 @@
 [
   {
-    "label": "Sturm-Liouville Theory",
-    "section": "Spectral Properties",
+    "label": "Worked: modes of y'' + λy = 0",
+    "section": "Worked: modes of y'' + λy = 0",
     "subgoals": [
-      "Review Spectral Properties",
-      "Work the example",
-      "Verify"
+      "Write the cosine-sine general solution",
+      "Kill the cosine with y(0) = 0",
+      "Quantize l_n = n^2 from y(pi) = 0"
     ]
   },
   {
-    "label": "Sturm-Liouville Theory — practice 2",
-    "section": "Spectral Properties",
+    "label": "Worked: orthogonality of sin x and sin 2x",
+    "section": "Worked: orthogonality of sin x and sin 2x",
     "subgoals": [
-      "Review Spectral Properties",
-      "Work the example",
-      "Verify"
+      "Convert the product to cosines",
+      "Integrate over [0, pi] to zero",
+      "Read projection like a Fourier series"
     ]
   },
   {
-    "label": "Sturm-Liouville Theory — practice 3",
-    "section": "Example",
+    "label": "Self-adjoint spectrum",
+    "section": "Self-adjoint spectrum",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Claim real eigenvalues from self-adjointness",
+      "Order the discrete ladder l_1 < l_2 < ...",
+      "Place Legendre as the classic member"
     ]
   }
 ]

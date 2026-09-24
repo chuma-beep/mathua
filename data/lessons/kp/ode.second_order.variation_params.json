@@ -1,29 +1,29 @@
 [
   {
-    "label": "Variation of parameters",
-    "section": "Building the Particular Solution",
+    "label": "Worked: the Wronskian of cos and sin",
+    "section": "Worked: the Wronskian of cos and sin",
     "subgoals": [
-      "Review Building the Particular Solution",
-      "Work the example",
-      "Verify"
+      "Differentiate cos and sin",
+      "Form W = cos^2 + sin^2",
+      "Conclude W = 1 everywhere"
     ]
   },
   {
-    "label": "Variation of parameters — practice 2",
-    "section": "Building the Particular Solution",
+    "label": "Worked: a constant forcing term",
+    "section": "Worked: a constant forcing term",
     "subgoals": [
-      "Review Building the Particular Solution",
-      "Work the example",
-      "Verify"
+      "Compute u1' = -sin x and u2' = cos x",
+      "Integrate dropping constants",
+      "Assemble y_p = 1 and verify"
     ]
   },
   {
-    "label": "Variation of parameters — practice 3",
-    "section": "Example",
+    "label": "It needs the homogeneous basis first",
+    "section": "It needs the homogeneous basis first",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Require y1, y2 before W",
+      "Match undetermined coefficients where both apply",
+      "Reserve sec x-type forcing for this method"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Substitution Method",
     "section": "Substitution Method",
     "subgoals": [
-      "Define homogeneous second-order odes",
-      "Follow the worked example",
-      "Apply the rule"
+      "Recognize dy/dx = F(y/x) form",
+      "Substitute y = vx with dy/dx = v + x dv/dx",
+      "Separate x dv/dx = F(v) - v"
     ]
   },
   {
-    "label": "Homogeneous second-order ODEs — practice 2",
-    "section": "",
+    "label": "Worked homogeneous solve",
+    "section": "Substitution Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Rewrite (x^2+y^2)/xy as 1/v + v",
+      "Separate to v dv = dx/x",
+      "Integrate back to y^2 = x^2 ln(Cx^2)"
     ]
   },
   {
-    "label": "Homogeneous second-order ODEs — practice 3",
-    "section": "",
+    "label": "Radical homogeneous case",
+    "section": "Substitution Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Divide by x to expose v + sqrt(1+v^2)",
+      "Cancel v to get x dv/dx = sqrt(1+v^2)",
+      "Separate and integrate in v"
     ]
   }
 ]

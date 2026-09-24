@@ -1,29 +1,29 @@
 [
   {
-    "label": "Stability of Equilibria",
-    "section": "Linearization",
+    "label": "Worked: decay in x' = -2x",
+    "section": "Worked: decay in x' = -2x",
     "subgoals": [
-      "Review Linearization",
-      "Work the example",
-      "Verify"
+      "Solve to x(t) = x0 e^{-2t}",
+      "Compute the ratio e^{-2} at t = 1",
+      "Conclude asymptotic stability"
     ]
   },
   {
-    "label": "Stability of Equilibria — practice 2",
-    "section": "Linearization",
+    "label": "Worked: counting equilibria of x' = 4 - x^2",
+    "section": "Worked: counting equilibria of x' = 4 - x^2",
     "subgoals": [
-      "Review Linearization",
-      "Work the example",
-      "Verify"
+      "Solve 4 - x^2 = 0 for +-2",
+      "Read flow signs inside vs outside",
+      "Classify both as half-stable"
     ]
   },
   {
-    "label": "Stability of Equilibria — practice 3",
-    "section": "Example",
+    "label": "Linearization decides hyperbolic cases",
+    "section": "Linearization decides hyperbolic cases",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Test eigenvalue real parts for Ax",
+      "Linearize via the Jacobian",
+      "Flag centres as the non-hyperbolic edge"
     ]
   }
 ]

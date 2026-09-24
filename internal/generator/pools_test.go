@@ -113,6 +113,7 @@ func TestEasyPoolsDiscriminate(t *testing.T) {
 			}
 		}
 		t.Logf("%s: %d current (%d baselined), new: %v", name, len(current), len(allowed), fresh)
+		t.Logf("%s current full list: %v", name, current)
 		if len(fresh) > 0 {
 			t.Errorf("%s: %d NEW violations not in baseline (fix the pools, do not extend the baseline): %v",
 				name, len(fresh), fresh)

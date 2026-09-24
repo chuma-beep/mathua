@@ -1,29 +1,29 @@
 [
   {
-    "label": "Bifurcations in Nonlinear ODEs",
-    "section": "Types",
+    "label": "Worked: saddle-node creation",
+    "section": "Worked: saddle-node creation",
     "subgoals": [
-      "Review Types",
-      "Work the example",
-      "Verify"
+      "Solve mu - x^2 = 0 for the equilibria",
+      "Read flow signs between and outside the roots",
+      "Drop mu below zero to see them vanish"
     ]
   },
   {
-    "label": "Bifurcations in Nonlinear ODEs — practice 2",
-    "section": "Types",
+    "label": "Worked: pitchfork branches",
+    "section": "Worked: pitchfork branches",
     "subgoals": [
-      "Review Types",
-      "Work the example",
-      "Verify"
+      "Factor mu x - x^3 to find three equilibria",
+      "Check the sign on each interval for stability",
+      "Drop mu below zero to see one stable point remain"
     ]
   },
   {
-    "label": "Bifurcations in Nonlinear ODEs — practice 3",
-    "section": "Example",
+    "label": "When the portrait changes",
+    "section": "When the portrait changes",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Name the four bifurcation types",
+      "Count equilibria on each side of the threshold",
+      "Match transcritical and Hopf to their signatures"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Method of Undetermined Coefficients",
     "section": "Method of Undetermined Coefficients",
     "subgoals": [
-      "Define non-homogeneous second-order odes",
-      "Follow the worked example",
-      "Apply the rule"
+      "Solve the homogeneous part for y_h",
+      "Match r(x) to the exponential/trig/polynomial trial",
+      "Multiply by x when resonance hits"
+    ]
+  },
+  {
+    "label": "Worked coefficient solve",
+    "section": "Method of Undetermined Coefficients",
+    "subgoals": [
+      "Find roots 1, 2 for y'' - 3y' + 2y = e^{3x}",
+      "Try Ae^{3x} to get A = 1/2",
+      "Add y_h + y_p"
     ]
   },
   {
     "label": "Variation of Parameters",
     "section": "Variation of Parameters",
     "subgoals": [
-      "Understand variation of parameters",
-      "Apply variation of parameters",
-      "Check the result"
-    ]
-  },
-  {
-    "label": "Non-homogeneous second-order ODEs — practice 3",
-    "section": "",
-    "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Build the Wronskian from y1, y2",
+      "Integrate u1' = -y2 r/W and u2' = y1 r/W",
+      "Assemble y_p = u1 y1 + u2 y2"
     ]
   }
 ]

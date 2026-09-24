@@ -1,29 +1,29 @@
 [
   {
-    "label": "Laplace Equation",
-    "section": "Harmonic Functions",
+    "label": "Worked: checking u = xy is harmonic",
+    "section": "Worked: checking u = xy is harmonic",
     "subgoals": [
-      "Review Harmonic Functions",
-      "Work the example",
-      "Verify"
+      "Differentiate twice in x",
+      "Differentiate twice in y",
+      "Add to get Laplacian zero"
     ]
   },
   {
-    "label": "Laplace Equation — practice 2",
-    "section": "Harmonic Functions",
+    "label": "Worked: the center equals the average",
+    "section": "Worked: the center equals the average",
     "subgoals": [
-      "Review Harmonic Functions",
-      "Work the example",
-      "Verify"
+      "Average x^2 - y^2 over the circle",
+      "Apply the mean value property",
+      "Check u(0, 0) directly"
     ]
   },
   {
-    "label": "Laplace Equation — practice 3",
-    "section": "Example",
+    "label": "Maxima live on the boundary",
+    "section": "Maxima live on the boundary",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "State the maximum principle",
+      "Pose the Dirichlet problem",
+      "Claim uniqueness from boundary data"
     ]
   }
 ]

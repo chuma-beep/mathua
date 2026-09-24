@@ -1,29 +1,29 @@
 [
   {
-    "label": "Green's Functions",
-    "section": "Impulse Response",
+    "label": "Worked: the jump across the spike",
+    "section": "Worked: the jump across the spike",
     "subgoals": [
-      "Review Impulse Response",
-      "Work the example",
-      "Verify"
+      "Hold G continuous across xi",
+      "Measure the unit slope kink",
+      "Join two straight segments at the kink"
     ]
   },
   {
-    "label": "Green's Functions — practice 2",
-    "section": "Impulse Response",
+    "label": "Worked: piecewise G on the unit interval",
+    "section": "Worked: piecewise G on the unit interval",
     "subgoals": [
-      "Review Impulse Response",
-      "Work the example",
-      "Verify"
+      "Write the x(1-xi) / xi(1-x) branches",
+      "Check the kink magnitude",
+      "Integrate against f = -1 to get x(x-1)/2"
     ]
   },
   {
-    "label": "Green's Functions — practice 3",
-    "section": "Example",
+    "label": "Symmetry and spectra",
+    "section": "Symmetry and spectra",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "State reciprocity for self-adjoint L",
+      "Expand G in eigenfunctions",
+      "Read G as the inverse operator"
     ]
   }
 ]

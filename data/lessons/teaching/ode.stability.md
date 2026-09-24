@@ -1,15 +1,25 @@
 # Stability of Equilibria
 
-**Equilibrium:** $x^*$ with $f(x^*)=0$ for $x'=f(x)$. **Stable:** nearby solutions stay nearby; **asymptotically stable:** also converge to $x^*$; **unstable:** some nearby solutions diverge.
+**Equilibrium:** $x^*$ with $f(x^*) = 0$ for $x' = f(x)$. **Stable** means nearby solutions stay nearby; **asymptotically stable** adds convergence to $x^*$; **unstable** means some nearby solution escapes.
 
-## Linearization
+## Worked: decay in x' = -2x
 
-### Eigenvalue Test
-For $\mathbf{x}'=A\mathbf{x}$, origin is asymptotically stable if all eigenvalues have negative real part, unstable if any positive, centre (pure imaginary) stable but not asymptotically.
+Solve $x' = -2x$ from $x(0) = x_0$:
+1. Separate: $x(t) = x_0 e^{-2t}$.
+2. Ratio after one unit of time: $x(1)/x(0) = e^{-2} \approx 0.135$.
+3. Every start shrinks toward 0, so 0 is asymptotically stable.
 
-### Lyapunov Indirect
-Jacobian at equilibrium gives linear approximation; its eigenvalues decide stability when hyperbolic (no zero/ pure imaginary).
+So a negative rate constant is a contraction: the equilibrium pulls all nearby starts in.
 
-## Example
+## Worked: counting equilibria of x' = 4 - x^2
 
-$x'=-x$: $x(t)=x_0e^{-t}\to0$, asymptotically stable. $x'=x$: $x(t)=x_0e^{t}$ diverges, unstable.
+Find and classify equilibria for $x' = 4 - x^2$:
+1. Set $4 - x^2 = 0$: equilibria at $x = 2$ and $x = -2$.
+2. Between them $x' > 0$ (rightward flow); outside, $x' < 0$ (leftward flow).
+3. So $x = 2$ attracts from the left and $x = -2$ repels to the right: both half-stable, neither asymptotically stable.
+
+So counting (zero, one, or two equilibria as $\mu$ varies) comes before classifying.
+
+## Linearization decides hyperbolic cases
+
+For $x' = Ax$, the origin is asymptotically stable when every eigenvalue has negative real part, unstable when any has positive real part. Lyapunov's indirect method extends this: the Jacobian at an equilibrium classifies it whenever no eigenvalue sits on the imaginary axis. Centres (pure imaginary) stay stable but never asymptotic.

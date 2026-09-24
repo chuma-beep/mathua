@@ -1,29 +1,29 @@
 [
   {
-    "label": "Convolution and Laplace transforms",
-    "section": "The Convolution Theorem",
+    "label": "Worked: one convolved with one",
+    "section": "Worked: one convolved with one",
     "subgoals": [
-      "Review The Convolution Theorem",
-      "Work the example",
-      "Verify"
+      "Set up the integral of 1 over [0, t]",
+      "Evaluate it to t",
+      "Confirm via the 1/s^2 product"
     ]
   },
   {
-    "label": "Convolution and Laplace transforms — practice 2",
-    "section": "The Convolution Theorem",
+    "label": "Worked: Laplace of a convolution",
+    "section": "Worked: Laplace of a convolution",
     "subgoals": [
-      "Review The Convolution Theorem",
-      "Work the example",
-      "Verify"
+      "Multiply the transforms to 1/s^2",
+      "Invert 1/s^2 to t",
+      "Skip the time-domain integral"
     ]
   },
   {
-    "label": "Convolution and Laplace transforms — practice 3",
-    "section": "Example",
+    "label": "Worked: one convolved with an exponential",
+    "section": "Worked: one convolved with an exponential",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Form the product 1/(s(s-1))",
+      "Split into partial fractions",
+      "Invert to e^t - 1 and check directly"
     ]
   }
 ]
