@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define algebra of limits",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split lim(f+g) into lim f + lim g",
+      "Factor constants out of limits",
+      "Evaluate lim(x^2+3x) at x = 2 as 10"
     ]
   },
   {
     "label": "Limit of a sum",
     "section": "Limit of a sum",
     "subgoals": [
-      "Understand limit of a sum",
-      "Apply limit of a sum",
-      "Check the result"
+      "Add termwise limits for sums",
+      "Combine lim(x^3) and lim(2x) at x = 1",
+      "Confirm 1 + 2 = 3"
     ]
   },
   {
     "label": "Limit of a difference",
     "section": "Limit of a difference",
     "subgoals": [
-      "Understand limit of a difference",
-      "Apply limit of a difference",
-      "Check the result"
+      "Subtract termwise limits for differences",
+      "Evaluate lim(x^2-x) at x = 3 as 6",
+      "Confirm 9 - 3 = 6"
     ]
   }
 ]

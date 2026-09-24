@@ -3,7 +3,7 @@
     "label": "Direct comparison test",
     "section": "Comparison test",
     "subgoals": [
-      "Bound 0 ≤ a(n) ≤ b(n)",
+      "Bound 0 <= a(n) <= b(n)",
       "Inherit convergence from above",
       "Push divergence from below"
     ]
@@ -14,15 +14,15 @@
     "subgoals": [
       "Confirm all terms positive",
       "Pick a benchmark p-series",
-      "Check 1/(n²+1) against 1/n²"
+      "Check 1/(n^2+1) against 1/n^2"
     ]
   },
   {
     "label": "Worked comparison",
     "section": "Example",
     "subgoals": [
-      "Follow the worked comparison",
-      "Verify the domination inequality",
+      "Bound the worked terms by a p-series",
+      "Confirm the domination inequality",
       "Conclude convergence or divergence"
     ]
   }

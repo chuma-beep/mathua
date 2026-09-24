@@ -3,27 +3,27 @@
     "label": "What is the root test",
     "section": "What is the root test",
     "subgoals": [
-      "Define root test for series convergence",
-      "Follow the worked example",
-      "Apply the rule"
+      "Compute lim sup |a_n|^(1/n) = L",
+      "Converge if L < 1, diverge if L > 1",
+      "Test sum (2/3)^n: L = 2/3 converge"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Compare |a_n| against r^n with L < r < 1",
+      "Squeeze tails by geometric series",
+      "Treat L = 1 as inconclusive"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Compute L = 2/3 for sum 2^n/3^n",
+      "Conclude convergence since L < 1",
+      "Contrast with sum 1/n giving L = 1"
     ]
   }
 ]

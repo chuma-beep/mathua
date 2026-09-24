@@ -3,27 +3,27 @@
     "label": "What is little-o notation",
     "section": "What is little-o notation",
     "subgoals": [
-      "Define little-o notation",
-      "Follow the worked example",
-      "Apply the rule"
+      "Form the ratio f/g to 0",
+      "Contrast little-o (ratio to 0) vs big-O (bounded)",
+      "Classify x^2 as o(x) at 0"
     ]
   },
   {
     "label": "The meaning of \\\\( o(1) \\\\)",
     "section": "The meaning of \\\\( o(1) \\\\)",
     "subgoals": [
-      "Understand the meaning of \\\\( o(1) \\\\)",
-      "Apply the meaning of \\\\( o(1) \\\\)",
-      "Check the result"
+      "Take f(x) to 0 to certify o(1)",
+      "Test x^2 and sin x at 0",
+      "Reject oscillating sin x at inf"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Add o-terms by keeping the slowest",
+      "Multiply o(x^m)*o(x^n) = o(x^(m+n))",
+      "Truncate e^x = 1 + x + o(x^2)"
     ]
   }
 ]

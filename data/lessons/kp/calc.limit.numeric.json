@@ -3,27 +3,27 @@
     "label": "2.2 The Limit of a Function",
     "section": "2.2 The Limit of a Function",
     "subgoals": [
-      "Define estimate limits numerically",
-      "Follow the worked example",
-      "Apply the rule"
+      "Tabulate f near a from both sides",
+      "Read the trend toward L",
+      "Estimate (x^2-1)/(x-1) to 2 at x = 1"
     ]
   },
   {
     "label": "Intuitive Definition of a Limit",
     "section": "Intuitive Definition of a Limit",
     "subgoals": [
-      "Understand intuitive definition of a limit",
-      "Apply intuitive definition of a limit",
-      "Check the result"
+      "Fix eps and trap f within eps of L",
+      "Find d-window around a",
+      "Test the table against y = x+1"
     ]
   },
   {
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Understand definition",
-      "Apply definition",
-      "Check the result"
+      "Write |f(x)-L| < eps past d",
+      "Solve d = eps/2 for linear f",
+      "Confirm one-sided agreement"
     ]
   }
 ]

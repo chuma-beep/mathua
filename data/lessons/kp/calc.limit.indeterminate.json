@@ -3,27 +3,27 @@
     "label": "What are indeterminate forms?",
     "section": "What are indeterminate forms?",
     "subgoals": [
-      "Define indeterminate forms of limits",
-      "Follow the worked example",
-      "Apply the rule"
+      "Flag 0/0, inf/inf, 0*inf, inf-inf shapes",
+      "Route 0/0 to factor-or-L'Hopital",
+      "Preview (x^2-1)/(x-1) to 2"
     ]
   },
   {
     "label": "The form \\\\( \\frac{0}{0} \\\\)",
     "section": "The form \\\\( \\frac{0}{0} \\\\)",
     "subgoals": [
-      "Understand the form \\\\( \\frac{0}{0} \\\\)",
-      "Apply the form \\\\( \\frac{0}{0} \\\\)",
-      "Check the result"
+      "Factor and cancel the zero factor",
+      "Evaluate the reduced form at the point",
+      "Check (x^2-4)/(x-2) to 4"
     ]
   },
   {
     "label": "The form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
     "section": "The form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
     "subgoals": [
-      "Understand the form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
-      "Apply the form \\\\( \\dfrac{\\infty}{\\infty} \\\\)",
-      "Check the result"
+      "Divide top and bottom by top power",
+      "Read the leading-coefficient ratio",
+      "Evaluate (3x^2+1)/(2x^2-x) to 3/2"
     ]
   }
 ]

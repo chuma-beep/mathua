@@ -3,27 +3,27 @@
     "label": "What is a harmonic series",
     "section": "What is a harmonic series",
     "subgoals": [
-      "Define harmonic series",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write sum 1/n partial sums",
+      "Group 1/3+1/4 > 1/2 for divergence",
+      "Estimate S_4 = 25/12"
     ]
   },
   {
     "label": "Generalized harmonic series (p-series)",
     "section": "Generalized harmonic series (p-series)",
     "subgoals": [
-      "Understand generalized harmonic series (p-series)",
-      "Apply generalized harmonic series (p-series)",
-      "Check the result"
+      "Test sum 1/n^p: converge iff p > 1",
+      "Check sum 1/n^2 converges",
+      "Reject sum 1/sqrt(n) (p = 1/2)"
     ]
   },
   {
     "label": "Logarithmically modified harmonic series",
     "section": "Logarithmically modified harmonic series",
     "subgoals": [
-      "Understand logarithmically modified harmonic series",
-      "Apply logarithmically modified harmonic series",
-      "Check the result"
+      "Test sum 1/(n (log n)^p) via integral",
+      "Converge iff p > 1",
+      "Check sum 1/(n log^2 n) converges"
     ]
   }
 ]

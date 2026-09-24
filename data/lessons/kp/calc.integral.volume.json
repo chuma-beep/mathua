@@ -3,27 +3,27 @@
     "label": "6.3 Volumes of Revolution: Cylindrical Shells",
     "section": "6.3 Volumes of Revolution: Cylindrical Shells",
     "subgoals": [
-      "Define volume of solids of revolution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Rotate the region and pick shells vs washers",
+      "Set up 2 pi integral of radius*height dx",
+      "Preview shell for rotation around y-axis"
     ]
   },
   {
     "label": "The Method of Cylindrical Shells",
     "section": "The Method of Cylindrical Shells",
     "subgoals": [
-      "Understand the method of cylindrical shells",
-      "Apply the method of cylindrical shells",
-      "Check the result"
+      "Read radius = x and height = f(x)",
+      "Multiply shell area 2 pi x*f(x)",
+      "Integrate 2 pi integral of x*x^2 over [0,1] = pi/2"
     ]
   },
   {
     "label": "Rule: The Method of Cylindrical Shells",
     "section": "Rule: The Method of Cylindrical Shells",
     "subgoals": [
-      "Understand rule: the method of cylindrical shells",
-      "Apply rule: the method of cylindrical shells",
-      "Check the result"
+      "Assemble V = 2 pi integral of (radius)(height) dx",
+      "Identify radius and height in the figure",
+      "Evaluate the shell integral for the example"
     ]
   }
 ]

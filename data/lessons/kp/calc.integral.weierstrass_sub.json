@@ -3,27 +3,27 @@
     "label": "The class of integrals we want to handle",
     "section": "The class of integrals we want to handle",
     "subgoals": [
-      "Define weierstrass substitution (tangent half-angle)",
-      "Follow the worked example",
-      "Apply the rule"
+      "Flag rational-in-sin/cos integrands",
+      "Route integral dth/(2+cos th) to t-sub",
+      "Preview rational function in t"
     ]
   },
   {
     "label": "The substitution \\\\( t = \\tan(x/2) \\\\)",
     "section": "The substitution \\\\( t = \\tan(x/2) \\\\)",
     "subgoals": [
-      "Understand the substitution \\\\( t = \\tan(x/2) \\\\)",
-      "Apply the substitution \\\\( t = \\tan(x/2) \\\\)",
-      "Check the result"
+      "Set t = tan(x/2)",
+      "Replace dx by 2dt/(1+t^2)",
+      "Restrict x != pi + 2k pi"
     ]
   },
   {
     "label": "Translating sine, cosine, and the differential",
     "section": "Translating sine, cosine, and the differential",
     "subgoals": [
-      "Understand translating sine, cosine, and the differential",
-      "Apply translating sine, cosine, and the differential",
-      "Check the result"
+      "Replace sin x by 2t/(1+t^2)",
+      "Replace cos x by (1-t^2)/(1+t^2)",
+      "Integrate the resulting rational function in t"
     ]
   }
 ]

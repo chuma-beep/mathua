@@ -21,9 +21,9 @@
     "label": "Worked higher partials",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked partial example",
-      "Verify each second partial",
-      "Check sin(x)cos(y) signs"
+      "Compute every second partial of the worked example",
+      "Cross-check fxy against fyx",
+      "Confirm sin(x)cos(y) signs"
     ]
   }
 ]

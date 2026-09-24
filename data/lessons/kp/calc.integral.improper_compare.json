@@ -14,16 +14,16 @@
     "subgoals": [
       "Rewrite as a limit of proper integrals",
       "Identify unbounded vs singular type",
-      "Check 1/(x²+1) against 1/x²"
+      "Check 1/(x^2+1) against 1/x^2"
     ]
   },
   {
     "label": "Worked comparison",
     "section": "Example 4",
     "subgoals": [
-      "Follow the worked comparison",
-      "Verify divergence via 1/√x",
-      "Confirm the domination direction"
+      "Bound the worked integrand against 1/sqrt(x)",
+      "Confirm the domination direction",
+      "Conclude divergence from the minorant"
     ]
   }
 ]

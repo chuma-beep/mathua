@@ -3,27 +3,27 @@
     "label": "4.1 Related Rates",
     "section": "4.1 Related Rates",
     "subgoals": [
-      "Define related rates",
-      "Follow the worked example",
-      "Apply the rule"
+      "Link dV/dt to dr/dt through V(r)",
+      "Differentiate the geometric relation in t",
+      "Preview balloon dV/dt to dr/dt"
     ]
   },
   {
     "label": "Setting up Related-Rates Problems",
     "section": "Setting up Related-Rates Problems",
     "subgoals": [
-      "Understand setting up related-rates problems",
-      "Apply setting up related-rates problems",
-      "Check the result"
+      "Draw and label variables at time t",
+      "Differentiate the relating equation in t",
+      "Substitute known rates last"
     ]
   },
   {
     "label": "Inflating a Balloon",
     "section": "Inflating a Balloon",
     "subgoals": [
-      "Understand inflating a balloon",
-      "Apply inflating a balloon",
-      "Check the result"
+      "Differentiate V = 4/3 pi r^3 to dV/dt = 4 pi r^2 dr/dt",
+      "Plug r = 3 and dV/dt = 10",
+      "Solve dr/dt in cm/s"
     ]
   }
 ]

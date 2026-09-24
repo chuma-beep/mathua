@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define power rule for differentiation",
-      "Follow the worked example",
-      "Apply the rule"
+      "Differentiate x^n to n*x^(n-1)",
+      "Differentiate 5x^3 to 15x^2",
+      "Drop constants to zero"
     ]
   },
   {
     "label": "Degree of a polynomial",
     "section": "Degree of a polynomial",
     "subgoals": [
-      "Understand degree of a polynomial",
-      "Apply degree of a polynomial",
-      "Check the result"
+      "Read the degree off the top exponent",
+      "Contrast x^3 vs x^3+2x leading terms",
+      "Use degree to predict end behavior"
     ]
   },
   {
     "label": "Interpolation and degree of a polynomial",
     "section": "Interpolation and degree of a polynomial",
     "subgoals": [
-      "Understand interpolation and degree of a polynomial",
-      "Apply interpolation and degree of a polynomial",
-      "Check the result"
+      "Fit degree <= n through n+1 points",
+      "Count roots against degree",
+      "Check line-through-two-points as degree 1"
     ]
   }
 ]

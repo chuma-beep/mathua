@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define taylor series",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write sum f^(n)(a)(x-a)^n/n!",
+      "Center at a = 0 for Maclaurin",
+      "Preview e^x = sum x^n/n!"
     ]
   },
   {
     "label": "Analytic functions and the motivating problem",
     "section": "Analytic functions and the motivating problem",
     "subgoals": [
-      "Understand analytic functions and the motivating problem",
-      "Apply analytic functions and the motivating problem",
-      "Check the result"
+      "Match derivatives f^(n)(a) to coefficients",
+      "Explain why C^inf matters",
+      "Test e^x derivatives all 1 at 0"
     ]
   },
   {
     "label": "Determination of the coefficients",
     "section": "Determination of the coefficients",
     "subgoals": [
-      "Understand determination of the coefficients",
-      "Apply determination of the coefficients",
-      "Check the result"
+      "Differentiate the series term-by-term at a",
+      "Solve c_n = f^(n)(a)/n!",
+      "Compute c_2 for sin x at 0 as 0"
     ]
   }
 ]

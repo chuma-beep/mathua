@@ -3,27 +3,27 @@
     "label": "What is a series with positive terms?",
     "section": "What is a series with positive terms?",
     "subgoals": [
-      "Define series with positive terms",
-      "Follow the worked example",
-      "Apply the rule"
+      "Confirm a_n >= 0 for all n",
+      "Preview comparison vs p-series",
+      "Flag sum 1/(n^2+1) as testable"
     ]
   },
   {
     "label": "Comparison test",
     "section": "Comparison test",
     "subgoals": [
-      "Understand comparison test",
-      "Apply comparison test",
-      "Check the result"
+      "Dominate a_n <= b_n with sum b_n convergent",
+      "Minorize a_n >= d_n with sum d_n divergent",
+      "Test 1/(n^2+1) <= 1/n^2"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Bound the worked terms explicitly",
+      "Name the benchmark p-series",
+      "Conclude converge or diverge"
     ]
   }
 ]

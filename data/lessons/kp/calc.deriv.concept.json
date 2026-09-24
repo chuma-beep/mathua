@@ -3,27 +3,27 @@
     "label": "Introduction to derivatives",
     "section": "Introduction to derivatives",
     "subgoals": [
-      "Define derivative as slope of tangent line",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read f'(a) as the tangent slope at a",
+      "Form the limit of [f(a+h)-f(a)]/h",
+      "Evaluate the quotient for x^2 at x = 1 to get 2"
     ]
   },
   {
     "label": "Right-hand and left-hand derivatives",
     "section": "Right-hand and left-hand derivatives",
     "subgoals": [
-      "Understand right-hand and left-hand derivatives",
-      "Apply right-hand and left-hand derivatives",
-      "Check the result"
+      "Compute left and right difference quotients separately",
+      "Compare both one-sided limits at the kink",
+      "Declare non-differentiable when the sides disagree"
     ]
   },
   {
     "label": "Fundamental derivatives",
     "section": "Fundamental derivatives",
     "subgoals": [
-      "Understand fundamental derivatives",
-      "Apply fundamental derivatives",
-      "Check the result"
+      "Differentiate x^n to n*x^(n-1)",
+      "Differentiate sin to cos and cos to -sin",
+      "Differentiate e^x to e^x and ln x to 1/x"
     ]
   }
 ]

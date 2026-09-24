@@ -3,9 +3,9 @@
     "label": "Directional derivative formula",
     "section": "Directional derivatives",
     "subgoals": [
-      "State D_u f = grad f dot u",
-      "Require u to be a unit vector",
-      "D_u f projects the gradient"
+      "Dot grad f with unit vector u",
+      "Normalize u to length 1 first",
+      "Read D_u f as slope along u"
     ]
   },
   {
@@ -14,16 +14,16 @@
     "subgoals": [
       "Normalize direction vectors first",
       "Reuse the gradient computation",
-      "Check (1,0) needs no scaling"
+      "Confirm (1,0) needs no scaling"
     ]
   },
   {
     "label": "Worked directional examples",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked directional example",
+      "Compute D_u f for the worked f along (1,1)/sqrt(2)",
       "Dot gradient with direction",
-      "Verify the two numeric checks"
+      "Confirm the two numeric checks"
     ]
   }
 ]

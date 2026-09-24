@@ -3,27 +3,27 @@
     "label": "3.9 Derivatives of Exponential and Logarithmic Functions",
     "section": "3.9 Derivatives of Exponential and Logarithmic Functions",
     "subgoals": [
-      "Define derivatives of e^x and ln(x)",
-      "Follow the worked example",
-      "Apply the rule"
+      "Contrast d/dx e^x = e^x with d/dx ln x = 1/x",
+      "Differentiate e^(3x) to 3e^(3x) via chain",
+      "Differentiate ln(2x+1) to 2/(2x+1)"
     ]
   },
   {
     "label": "Derivative of the Exponential Function",
     "section": "Derivative of the Exponential Function",
     "subgoals": [
-      "Understand derivative of the exponential function",
-      "Apply derivative of the exponential function",
-      "Check the result"
+      "Differentiate e^u as e^u*u'",
+      "Combine with product on x*e^x",
+      "Evaluate the e^(x^2) slope at x = 1 as 2e"
     ]
   },
   {
     "label": "Theorem 3.14",
     "section": "Theorem 3.14",
     "subgoals": [
-      "Understand theorem 3.14",
-      "Apply theorem 3.14",
-      "Check the result"
+      "Take d/dx e^x = e^x as the base rule",
+      "Extend to e^(kx) with factor k",
+      "Differentiate e^(2x) to 2e^(2x)"
     ]
   }
 ]

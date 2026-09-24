@@ -3,27 +3,27 @@
     "label": "3.3 Differentiation Rules",
     "section": "3.3 Differentiation Rules",
     "subgoals": [
-      "Define sum and difference rules",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split (f+-g)' into f'+-g'",
+      "Differentiate 4x^3+2x^2-x term by term",
+      "Factor constants out first"
     ]
   },
   {
     "label": "The Basic Rules",
     "section": "The Basic Rules",
     "subgoals": [
-      "Understand the basic rules",
-      "Apply the basic rules",
-      "Check the result"
+      "Differentiate c*f to c*f' with constants factored out",
+      "Add derivatives term-by-term for sums",
+      "Combine on 3x^2+2x to 6x+2"
     ]
   },
   {
     "label": "The Constant Rule",
     "section": "The Constant Rule",
     "subgoals": [
-      "Understand the constant rule",
-      "Apply the constant rule",
-      "Check the result"
+      "Pull constants out before differentiating",
+      "Differentiate 4x^3 to 12x^2",
+      "Confirm constant functions give 0"
     ]
   }
 ]

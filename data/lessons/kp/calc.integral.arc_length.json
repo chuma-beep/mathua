@@ -3,27 +3,27 @@
     "label": "From straight segments to curved arcs",
     "section": "From straight segments to curved arcs",
     "subgoals": [
-      "Define arc length of a curve",
-      "Follow the worked example",
-      "Apply the rule"
+      "Approximate the curve by polygonal segments",
+      "Sum sqrt(dx^2+dy^2) over segments",
+      "Pass to integral of sqrt(1+(y')^2) dx"
     ]
   },
   {
     "label": "Polygonal approximation and the differential element",
     "section": "Polygonal approximation and the differential element",
     "subgoals": [
-      "Understand polygonal approximation and the differential element",
-      "Apply polygonal approximation and the differential element",
-      "Check the result"
+      "Slice [a,b] and sum hypotenuse pieces",
+      "Factor dx out of each segment",
+      "Read ds = sqrt(1+(y')^2) dx"
     ]
   },
   {
     "label": "Arc length in Cartesian form",
     "section": "Arc length in Cartesian form",
     "subgoals": [
-      "Understand arc length in cartesian form",
-      "Apply arc length in cartesian form",
-      "Check the result"
+      "Set up integral of sqrt(1+(y')^2) over [a,b]",
+      "Compute y' and square it",
+      "Evaluate for y = x^2 on [0,1]"
     ]
   }
 ]

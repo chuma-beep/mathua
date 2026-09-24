@@ -3,27 +3,27 @@
     "label": "The completeness axiom",
     "section": "The completeness axiom",
     "subgoals": [
-      "Define supremum and infimum",
-      "Follow the worked example",
-      "Apply the rule"
+      "Invoke least-upper-bound for bounded-above sets",
+      "Separate bounded vs unbounded",
+      "Preview sup(0,1) = 1"
     ]
   },
   {
     "label": "Upper and lower bounds",
     "section": "Upper and lower bounds",
     "subgoals": [
-      "Understand upper and lower bounds",
-      "Apply upper and lower bounds",
-      "Check the result"
+      "Exhibit M bounding all x in S",
+      "Test 1 as bound for (0,1)",
+      "Find least such M"
     ]
   },
   {
     "label": "Supremum",
     "section": "Supremum",
     "subgoals": [
-      "Understand supremum",
-      "Apply supremum",
-      "Check the result"
+      "Show 1 bounds (0,1) above",
+      "Beat any smaller candidate with x = (m+1)/2",
+      "Conclude sup = 1 outside set"
     ]
   }
 ]

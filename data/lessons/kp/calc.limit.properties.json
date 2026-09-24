@@ -3,27 +3,27 @@
     "label": "Understanding limits in calculus",
     "section": "Understanding limits in calculus",
     "subgoals": [
-      "Define limit laws and properties",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split limits across +, -, x, /",
+      "Flag 0/0 as needs-work shape",
+      "Evaluate lim(x^2+1) at 2 as 5"
     ]
   },
   {
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Understand definition",
-      "Apply definition",
-      "Check the result"
+      "Write the eps-d implication",
+      "Test lim 3x = 6 at x = 2 with d = eps/3",
+      "Require all paths agree"
     ]
   },
   {
     "label": "Asymptotes and infinite limits",
     "section": "Asymptotes and infinite limits",
     "subgoals": [
-      "Understand asymptotes and infinite limits",
-      "Apply asymptotes and infinite limits",
-      "Check the result"
+      "Take x to +-inf for end behavior",
+      "Take x to a+- for poles",
+      "Confirm 1/x^2 to inf at 0"
     ]
   }
 ]

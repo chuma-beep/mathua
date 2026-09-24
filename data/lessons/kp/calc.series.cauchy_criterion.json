@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define cauchy's convergence criterion for series",
-      "Follow the worked example",
-      "Apply the rule"
+      "Bound tail sums |sum_{k=n}^m a_k| < eps",
+      "Preview harmonic tails failing",
+      "Flag non-Cauchy as divergent"
     ]
   },
   {
     "label": "Cauchy’s convergence criterion",
     "section": "Cauchy’s convergence criterion",
     "subgoals": [
-      "Understand cauchy’s convergence criterion",
-      "Apply cauchy’s convergence criterion",
-      "Check the result"
+      "Require partial sums form Cauchy sequence",
+      "Test tails of sum 1/n^2 with integral bound",
+      "Certify convergence via completeness"
     ]
   },
   {
     "label": "Glossary",
     "section": "Glossary",
     "subgoals": [
-      "Understand glossary",
-      "Apply glossary",
-      "Check the result"
+      "Collect partial-sum vs tail-sum terms",
+      "Translate eps-N into tail language",
+      "Point each entry at its series example"
     ]
   }
 ]

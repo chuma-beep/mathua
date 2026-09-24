@@ -3,27 +3,27 @@
     "label": "What is a series",
     "section": "What is a series",
     "subgoals": [
-      "Define series: definition and convergence",
-      "Follow the worked example",
-      "Apply the rule"
+      "Form partial sums S_N = sum_1^N a_n",
+      "Take N to inf for the sum",
+      "Compute sum (1/2)^n = 1 via S_N"
     ]
   },
   {
     "label": "Nature of a series",
     "section": "Nature of a series",
     "subgoals": [
-      "Understand nature of a series",
-      "Apply nature of a series",
-      "Check the result"
+      "Sort converge vs diverge",
+      "Test sum 1/n vs sum 1/n^2 split",
+      "Preview harmonic divergence"
     ]
   },
   {
     "label": "Necessary condition for convergence",
     "section": "Necessary condition for convergence",
     "subgoals": [
-      "Understand necessary condition for convergence",
-      "Apply necessary condition for convergence",
-      "Check the result"
+      "Take a_n to 0 as gate check",
+      "Reject sum (-1)^n via a_n not to 0",
+      "Note passing gate proves nothing"
     ]
   }
 ]

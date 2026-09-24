@@ -21,9 +21,9 @@
     "label": "Higher-order worked examples",
     "section": "Example 2",
     "subgoals": [
-      "Follow the worked higher-order example",
-      "Differentiate sin and ln twice",
-      "Verify signs at each step"
+      "Differentiate the worked sin/ln pair twice",
+      "Track sign flips at each step",
+      "Confirm second derivatives match"
     ]
   }
 ]

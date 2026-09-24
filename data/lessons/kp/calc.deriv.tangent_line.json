@@ -12,9 +12,9 @@
     "label": "Worked tangent examples",
     "section": "Example 2",
     "subgoals": [
-      "Follow the worked tangent example",
+      "Differentiate x^3 to 3x^2 for the slope",
       "Simplify to slope-intercept form",
-      "Check x^3 at x = 2 gives y = 12x-16"
+      "Confirm x^3 at x = 2 gives y = 12x-16"
     ]
   },
   {

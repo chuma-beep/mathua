@@ -3,27 +3,27 @@
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Define rolle's theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Check continuity, differentiability, f(a) = f(b)",
+      "Locate c with f'(c) = 0",
+      "Test x^2-4 on [-2,2] to get c = 0"
     ]
   },
   {
     "label": "A geometric view of Rolle’s theorem",
     "section": "A geometric view of Rolle’s theorem",
     "subgoals": [
-      "Understand a geometric view of rolle’s theorem",
-      "Apply a geometric view of rolle’s theorem",
-      "Check the result"
+      "Read f'(c) = 0 as horizontal tangent",
+      "Spot the peak/valley between equal endpoints",
+      "Sketch the flat tangent inside (a,b)"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Push the max inside via f(a) = f(b)",
+      "Invoke Fermat at the interior extremum",
+      "Conclude f'(c) = 0"
     ]
   }
 ]

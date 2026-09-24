@@ -3,27 +3,27 @@
     "label": "Continuous function at a point",
     "section": "Continuous function at a point",
     "subgoals": [
-      "Define continuity and types of discontinuity",
-      "Follow the worked example",
-      "Apply the rule"
+      "Check lim(x to a) = f(a) three-way",
+      "Test polynomials at sample points",
+      "Flag 1/x at 0 as discontinuous"
     ]
   },
   {
     "label": "Continuous function on an interval",
     "section": "Continuous function on an interval",
     "subgoals": [
-      "Understand continuous function on an interval",
-      "Apply continuous function on an interval",
-      "Check the result"
+      "Test continuity at every interior point",
+      "Check one-sided at endpoints",
+      "Certify sin x continuous on R"
     ]
   },
   {
     "label": "Functions continuous on their domain",
     "section": "Functions continuous on their domain",
     "subgoals": [
-      "Understand functions continuous on their domain",
-      "Apply functions continuous on their domain",
-      "Check the result"
+      "Match each elementary type to its domain",
+      "Exclude denominator zeros and log nonpositives",
+      "Confirm tan x continuous off pi/2 + k pi"
     ]
   }
 ]

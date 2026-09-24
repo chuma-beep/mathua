@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define uniform continuity",
-      "Follow the worked example",
-      "Apply the rule"
+      "Contrast d(eps) global vs d(eps,a) pointwise",
+      "Preview x^2 failing on R",
+      "Flag 1/x on (0,1) as non-uniform"
     ]
   },
   {
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Understand definition",
-      "Apply definition",
-      "Check the result"
+      "Write forall eps exists d independent of x",
+      "Test d = eps/L for Lipschitz maps",
+      "Check sin x with d = eps"
     ]
   },
   {
     "label": "Heine–Cantor Theorem",
     "section": "Heine–Cantor Theorem",
     "subgoals": [
-      "Understand heine–cantor theorem",
-      "Apply heine–cantor theorem",
-      "Check the result"
+      "Require continuity on closed [a,b]",
+      "Promote to uniform via compactness",
+      "Apply to x^2 on [0,1]"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define concept of a limit",
-      "Follow the worked example",
-      "Apply the rule"
+      "Preview sin x/x to 1 and (1+1/n)^n to e",
+      "Separate trig vs exponential families",
+      "Flag 0/0 shape before evaluating"
     ]
   },
   {
     "label": "The trigonometric fundamental limit",
     "section": "The trigonometric fundamental limit",
     "subgoals": [
-      "Understand the trigonometric fundamental limit",
-      "Apply the trigonometric fundamental limit",
-      "Check the result"
+      "Squeeze sin x between cos-based bounds",
+      "Take x to 0 to get sin x/x to 1",
+      "Apply to lim sin(3x)/x = 3"
     ]
   },
   {
     "label": "The tangent limit",
     "section": "The tangent limit",
     "subgoals": [
-      "Understand the tangent limit",
-      "Apply the tangent limit",
-      "Check the result"
+      "Divide tan x by x via sin x/x * 1/cos x",
+      "Take x to 0 to get tan x/x to 1",
+      "Apply to lim tan(2x)/x = 2"
     ]
   }
 ]

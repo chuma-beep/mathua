@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define fourier series",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write a_0/2 + sum a_n cos nx + b_n sin nx",
+      "Require 2 pi-periodicity",
+      "Preview square-wave series"
     ]
   },
   {
     "label": "Fourier Coefficients",
     "section": "Fourier Coefficients",
     "subgoals": [
-      "Understand fourier coefficients",
-      "Apply fourier coefficients",
-      "Check the result"
+      "Integrate f(x)cos(nx)/pi for a_n",
+      "Integrate f(x)sin(nx)/pi for b_n",
+      "Compute a_0 as the mean value"
     ]
   },
   {
     "label": "Convergence of Fourier series",
     "section": "Convergence of Fourier series",
     "subgoals": [
-      "Understand convergence of fourier series",
-      "Apply convergence of fourier series",
-      "Check the result"
+      "Check Dirichlet jump conditions",
+      "Read convergence at jumps as midpoint",
+      "Confirm Gibbs overshoot near jumps"
     ]
   }
 ]

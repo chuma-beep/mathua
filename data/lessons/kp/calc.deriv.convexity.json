@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define convexity and concavity of functions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read convex as cup-up, concave as cup-down",
+      "Link f''>0 to convex and f''<0 to concave",
+      "Preview x^2 convex vs -x^2 concave"
     ]
   },
   {
     "label": "Convexity",
     "section": "Convexity",
     "subgoals": [
-      "Understand convexity",
-      "Apply convexity",
-      "Check the result"
+      "Compute f'' and test f''>0 on the interval",
+      "Check x^2 gives f'' = 2 > 0",
+      "Confirm chords lie above the graph"
     ]
   },
   {
     "label": "Concavity",
     "section": "Concavity",
     "subgoals": [
-      "Understand concavity",
-      "Apply concavity",
-      "Check the result"
+      "Compute f'' and test f''<0 on the interval",
+      "Check -x^3 on x > 0 gives f''<0",
+      "Confirm chords lie below the graph"
     ]
   }
 ]

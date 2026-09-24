@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define integral of exponential functions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Integrate e^x to e^x + C",
+      "Integrate e^(kx) to e^(kx)/k + C",
+      "Check by differentiating back"
     ]
   },
   {
     "label": "Canonical forms of exponential integrals",
     "section": "Canonical forms of exponential integrals",
     "subgoals": [
-      "Understand canonical forms of exponential integrals",
-      "Apply canonical forms of exponential integrals",
-      "Check the result"
+      "Match integral of e^(ax+b) to (1/a)e^(ax+b) + C",
+      "Factor constants out first",
+      "Integrate 3e^(2x) to (3/2)e^(2x) + C"
     ]
   },
   {
     "label": "Exponential with a linear argument",
     "section": "Exponential with a linear argument",
     "subgoals": [
-      "Understand exponential with a linear argument",
-      "Apply exponential with a linear argument",
-      "Check the result"
+      "Substitute u = ax+b with du = a dx",
+      "Divide by the inner coefficient a",
+      "Integrate e^(2x+1) to e^(2x+1)/2 + C"
     ]
   }
 ]

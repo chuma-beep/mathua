@@ -3,27 +3,27 @@
     "label": "What is the difference quotient",
     "section": "What is the difference quotient",
     "subgoals": [
-      "Define difference quotient",
-      "Follow the worked example",
-      "Apply the rule"
+      "Form [f(x+h)-f(x)]/h for the given f",
+      "Simplify the numerator before taking h to 0",
+      "Evaluate the quotient for x^2 to get 2x+h"
     ]
   },
   {
     "label": "Alternative forms",
     "section": "Alternative forms",
     "subgoals": [
-      "Understand alternative forms",
-      "Apply alternative forms",
-      "Check the result"
+      "Rewrite with [f(x)-f(a)]/(x-a) at x = a",
+      "Swap h-form for x-to-a form on demand",
+      "Check both forms agree on 1/x"
     ]
   },
   {
     "label": "Selected references",
     "section": "Selected references",
     "subgoals": [
-      "Understand selected references",
-      "Apply selected references",
-      "Check the result"
+      "Collect the quotient-limit definition",
+      "Point each reference at slope vs rate",
+      "Pick the worked-example source first"
     ]
   }
 ]

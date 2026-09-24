@@ -3,27 +3,27 @@
     "label": "What is the Squeeze Theorem",
     "section": "What is the Squeeze Theorem",
     "subgoals": [
-      "Define squeeze theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Trap g between f <= g <= h",
+      "Name explicit bounding functions",
+      "Preview -|x| <= x sin(1/x) <= |x|"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Check outer limits both equal L",
+      "Transfer L to the middle",
+      "Evaluate x sin(1/x) to 0"
     ]
   },
   {
     "label": "Proof of the Squeeze Theorem",
     "section": "Proof of the Squeeze Theorem",
     "subgoals": [
-      "Understand proof of the squeeze theorem",
-      "Apply proof of the squeeze theorem",
-      "Check the result"
+      "Push outer bounds together at a",
+      "Force the middle to L",
+      "Confirm via eps-sandwich"
     ]
   }
 ]
