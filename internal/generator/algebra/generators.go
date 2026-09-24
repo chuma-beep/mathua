@@ -595,6 +595,26 @@ func (g *funcEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type funcLinearGen struct{}
 
 func (g *funcLinearGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	if rand.Intn(3) == 0 {
+		// production: identify slope or intercept (unique answers).
+		m := rand.Intn(6) + 1
+		if rand.Intn(2) == 0 {
+			m = -m
+		}
+		b := rand.Intn(10) - 5
+		if rand.Intn(2) == 0 {
+			return generator.Problem{
+				Question:    fmt.Sprintf("What is the slope of \\(%s\\)? (enter a number)", formatLinear(m, b)),
+				Answer:      fmt.Sprintf("%d", m),
+				Explanation: fmt.Sprintf("In \\(y = mx + b\\), the slope is \\(%d\\).", m),
+			}
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the y-intercept of \\(%s\\)? (enter a number)", formatLinear(m, b)),
+			Answer:      fmt.Sprintf("%d", b),
+			Explanation: fmt.Sprintf("In \\(y = mx + b\\), the y-intercept is \\(%d\\).", b),
+		}
+	}
 	if rand.Intn(2) == 0 {
 		m := rand.Intn(6) - 3
 		if m == 0 {
@@ -1339,10 +1359,34 @@ type signAnalysisGen struct{}
 
 func (g *signAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(5) + 1
-	return generator.Problem{
-		Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x < -%d\\).", r, r, r),
-		Answer:      "positive",
-		Explanation: fmt.Sprintf("For \\(x < -%d\\): both \\((x+%d)\\) and \\((x-%d)\\) are negative, product is positive.", r, r, r),
+	switch rand.Intn(4) {
+	case 0:
+		// production: name the zeros (unique answers).
+		return generator.Problem{
+			Question:    fmt.Sprintf("What are the zeros of \\(f(x) = (x+%d)(x-%d)\\)? (enter like a,b with a<b)", r, r),
+			Answer:      fmt.Sprintf("%d,%d", -r, r),
+			Explanation: fmt.Sprintf("\\(x+%d = 0\\) gives \\(x = %d\\); \\(x-%d = 0\\) gives \\(x = %d\\).", r, -r, r, r),
+		}
+	case 1:
+		// production: sign between the roots (unique answer).
+		return generator.Problem{
+			Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(-%d < x < %d\\).", r, r, r, r),
+			Answer:      "negative",
+			Explanation: fmt.Sprintf("For \\(-%d < x < %d\\): \\((x+%d)\\) is positive but \\((x-%d)\\) is negative, product is negative.", r, r, r, r),
+		}
+	default:
+		if rand.Intn(2) == 0 {
+			return generator.Problem{
+				Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x < -%d\\).", r, r, r),
+				Answer:      "positive",
+				Explanation: fmt.Sprintf("For \\(x < -%d\\): both \\((x+%d)\\) and \\((x-%d)\\) are negative, product is positive.", r, r, r),
+			}
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x > %d\\).", r, r, r),
+			Answer:      "positive",
+			Explanation: fmt.Sprintf("For \\(x > %d\\): both \\((x+%d)\\) and \\((x-%d)\\) are positive, product is positive.", r, r, r),
+		}
 	}
 }
 
@@ -1436,12 +1480,32 @@ func (g *vietaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type quadComplexGen struct{}
 
 func (g *quadComplexGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	b := rand.Intn(6) + 2
+	scale := int(1 + ctx.Difficulty*5)
+	b := rand.Intn(max(5, scale*2)) + 2
+	if scale > 3 {
+		b = rand.Intn(12) + 6
+	}
 	c := (b*b)/4 + 1
+	disc := b*b - 4*c
+	if rand.Intn(3) == 0 {
+		// production: discriminant value and complex-solution count (unique answers).
+		if rand.Intn(2) == 0 {
+			return generator.Problem{
+				Question:    fmt.Sprintf("What is the discriminant of \\(x^{2} + %dx + %d = 0\\)? (enter a number)", b, c),
+				Answer:      fmt.Sprintf("%d", disc),
+				Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d - %d = %d < 0\\) → two complex (non-real) solutions.", b, c, b*b, 4*c, disc),
+			}
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many complex (non-real) solutions does \\(x^{2} + %dx + %d = 0\\) have? (enter a number)", b, c),
+			Answer:      "2",
+			Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d < 0\\), so both solutions are complex (non-real).", b, c, disc),
+		}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("How many real solutions does \\(x^{2} + %dx + %d = 0\\) have?", b, c),
 		Answer:      "0",
-		Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d - %d = %d < 0\\) → two complex (non-real) solutions.", b, c, b*b, 4*c, b*b-4*c),
+		Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d - %d = %d < 0\\) → two complex (non-real) solutions.", b, c, b*b, 4*c, disc),
 	}
 }
 
