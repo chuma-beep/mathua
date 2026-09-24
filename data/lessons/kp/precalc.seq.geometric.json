@@ -3,27 +3,27 @@
     "label": "What is a geometric sequence",
     "section": "What is a geometric sequence",
     "subgoals": [
-      "Define geometric sequences: common ratio and nth term",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide consecutive terms to read r",
+      "Compute a_n = 3*2^(n-1) term by term",
+      "Seed a1 = a and step a_n = a_(n-1)*r"
     ]
   },
   {
     "label": "Sum of \\\\( n \\\\) terms of a geometric progression",
     "section": "Sum of \\\\( n \\\\) terms of a geometric progression",
     "subgoals": [
-      "Understand sum of \\\\( n \\\\) terms of a geometric progression",
-      "Apply sum of \\\\( n \\\\) terms of a geometric progression",
-      "Check the result"
+      "Plug n=5, r=2 into S_n = a1*(1-r^n)/(1-r)",
+      "Evaluate S_5 = 2*(1-32)/(-1) = 62",
+      "Split r = 1 off as the separate constant case"
     ]
   },
   {
     "label": "Limit behavior of a geometric sequence",
     "section": "Limit behavior of a geometric sequence",
     "subgoals": [
-      "Understand limit behavior of a geometric sequence",
-      "Apply limit behavior of a geometric sequence",
-      "Check the result"
+      "Send r > 1 terms to +infinity like 2*3^(n-1)",
+      "Shrink |r| < 1 terms toward 0",
+      "Flag r <= -1 as sign-alternating oscillation"
     ]
   }
 ]

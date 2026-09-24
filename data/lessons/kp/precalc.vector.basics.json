@@ -3,27 +3,27 @@
     "label": "Geometric representation",
     "section": "Geometric representation",
     "subgoals": [
-      "Define vectors: magnitude and direction",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split a vector into magnitude plus direction",
+      "Slide equal-length parallel arrows into one free vector",
+      "Zero out magnitude and direction for the 0 vector"
     ]
   },
   {
     "label": "Components and coordinate representation",
     "section": "Components and coordinate representation",
     "subgoals": [
-      "Understand components and coordinate representation",
-      "Apply components and coordinate representation",
-      "Check the result"
+      "Write v as (v1, v2, v3) in R^3",
+      "Expand v into v1*i + v2*j + v3*k",
+      "Decode (3,-1,2) as 3i - j + 2k"
     ]
   },
   {
     "label": "Vector operations",
     "section": "Vector operations",
     "subgoals": [
-      "Understand vector operations",
-      "Apply vector operations",
-      "Check the result"
+      "Add component-wise into (u1+v1, u2+v2, u3+v3)",
+      "Chain u then v tip-to-tail for the triangle rule",
+      "Scale by lambda and flip direction for lambda < 0"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Definition of a discrete random variable",
     "section": "Definition of a discrete random variable",
     "subgoals": [
-      "Define discrete random variables",
-      "Follow the worked example",
-      "Apply the rule"
+      "Map die-roll outcomes to X = 0, 1, 2 sixes",
+      "Compute 25/36, 10/36, 1/36 via (5/6)^2 products",
+      "Sum the three masses into 1"
     ]
   },
   {
     "label": "Discrete probability distribution",
     "section": "Discrete probability distribution",
     "subgoals": [
-      "Understand discrete probability distribution",
-      "Apply discrete probability distribution",
-      "Check the result"
+      "Check each f(x) >= 0",
+      "Sum all f(x) into 1",
+      "Stack 25/36, 35/36, 1 into the stepwise F"
     ]
   },
   {
     "label": "Joint probability distributions",
     "section": "Joint probability distributions",
     "subgoals": [
-      "Understand joint probability distributions",
-      "Apply joint probability distributions",
-      "Check the result"
+      "Pair (x,y) outcomes into f(x,y)",
+      "Double-sum all pairs into 1",
+      "Read P(X=x,Y=y) off f(x,y)"
     ]
   }
 ]

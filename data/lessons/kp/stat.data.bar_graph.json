@@ -3,27 +3,27 @@
     "label": "Graphing Lines by Plotting Points",
     "section": "Graphing Lines by Plotting Points",
     "subgoals": [
-      "Define read and create bar graphs",
-      "Follow the worked example",
-      "Apply the rule"
+      "Tabulate W(x) = -0.6x+12 across x values",
+      "Plot each table row as one point",
+      "Connect the 12-gallon drain points into a line"
     ]
   },
   {
     "label": "Graphing Lines in Slope-Intercept Form",
     "section": "Graphing Lines in Slope-Intercept Form",
     "subgoals": [
-      "Understand graphing lines in slope-intercept form",
-      "Apply graphing lines in slope-intercept form",
-      "Check the result"
+      "Split y = mx+b into slope m and intercept (0,b)",
+      "Rewrite -0.6 as -3/5 for slope triangles",
+      "Step 5 right and 3 down from (0,12)"
     ]
   },
   {
     "label": "Graphing Lines in Point-Slope Form",
     "section": "Graphing Lines in Point-Slope Form",
     "subgoals": [
-      "Understand graphing lines in point-slope form",
-      "Apply graphing lines in point-slope form",
-      "Check the result"
+      "Read slope m and point (x0,y0) off y=m(x-x0)+y0",
+      "Check (-1,-3) satisfies m(x) = -9/5(x+1)-3",
+      "Step 5 right and 9 down into (4,-12) and (9,-21)"
     ]
   }
 ]

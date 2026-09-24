@@ -3,27 +3,27 @@
     "label": "5.5 Averages and Probability",
     "section": "5.5 Averages and Probability",
     "subgoals": [
-      "Define fundamental counting principle",
-      "Follow the worked example",
-      "Apply the rule"
+      "List every outcome the process can produce",
+      "Multiply choice counts stage by stage",
+      "Check the list exhausts all branches"
     ]
   },
   {
     "label": "Calculate the Mean of a Set of Numbers",
     "section": "Calculate the Mean of a Set of Numbers",
     "subgoals": [
-      "Understand calculate the mean of a set of numbers",
-      "Apply calculate the mean of a set of numbers",
-      "Check the result"
+      "Add 85+88+94 into 267",
+      "Divide 267 by 3 into 89",
+      "Report Ethan's mean as 89 points"
     ]
   },
   {
     "label": "The Mean",
     "section": "The Mean",
     "subgoals": [
-      "Understand the mean",
-      "Apply the mean",
-      "Check the result"
+      "Divide the data sum by n",
+      "Count ordered selections against unordered ones",
+      "Divide out permutations for combinations"
     ]
   }
 ]

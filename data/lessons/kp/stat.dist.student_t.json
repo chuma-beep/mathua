@@ -3,27 +3,27 @@
     "label": "Introduction to the student’s \\\\(t\\\\) distribution",
     "section": "Introduction to the student’s \\\\(t\\\\) distribution",
     "subgoals": [
-      "Define student's t-distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide Z by sqrt(V/k) for unknown variance",
+      "Track k degrees of freedom into tail weight",
+      "Converge the density to N(0,1) as k grows"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write the Gamma-ratio density in t and k",
+      "Read mu = 0 for k > 1",
+      "Compute sigma^2 = k/(k-2) for k > 2"
     ]
   },
   {
     "label": "Symmetry of the student’s \\\\(t\\\\) distribution",
     "section": "Symmetry of the student’s \\\\(t\\\\) distribution",
     "subgoals": [
-      "Understand symmetry of the student’s \\\\(t\\\\) distribution",
-      "Apply symmetry of the student’s \\\\(t\\\\) distribution",
-      "Check the result"
+      "Mirror left-tail alpha onto right-tail alpha",
+      "Negate t_alpha into t_(1-alpha) = -t_alpha",
+      "Look critical values up by k in the t-table"
     ]
   }
 ]

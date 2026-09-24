@@ -3,27 +3,27 @@
     "label": "5.5 Averages and Probability",
     "section": "5.5 Averages and Probability",
     "subgoals": [
-      "Define complement of an event",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count outcomes outside E for the complement",
+      "Subtract P(E) from 1 into P(not E)",
+      "Check P(E) + P(not E) = 1"
     ]
   },
   {
     "label": "Calculate the Mean of a Set of Numbers",
     "section": "Calculate the Mean of a Set of Numbers",
     "subgoals": [
-      "Understand calculate the mean of a set of numbers",
-      "Apply calculate the mean of a set of numbers",
-      "Check the result"
+      "Add 85+88+94 into 267",
+      "Divide 267 by 3 into 89",
+      "Report Ethan's mean as 89 points"
     ]
   },
   {
     "label": "The Mean",
     "section": "The Mean",
     "subgoals": [
-      "Understand the mean",
-      "Apply the mean",
-      "Check the result"
+      "Divide the data sum by n",
+      "Split outcomes into E versus not-E shares",
+      "Check both shares sum to 1"
     ]
   }
 ]

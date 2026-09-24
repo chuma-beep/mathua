@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define piecewise-defined functions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Evaluate sgn(-7) = -1, sgn(0) = 0, sgn(4) = 1",
+      "Split the graph into two rays plus the origin point",
+      "Check oddness via sgn(-x) = -sgn(x)"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Read the range as {-1, 0, 1}",
+      "Locate the single root at x = 0",
+      "Split the left limit -1 from the right limit 1 at 0"
     ]
   },
   {
     "label": "Limits at infinity",
     "section": "Limits at infinity",
     "subgoals": [
-      "Understand limits at infinity",
-      "Apply limits at infinity",
-      "Check the result"
+      "Push x to -infinity and read sgn = -1",
+      "Push x to +infinity and read sgn = 1",
+      "Hold the value constant on each side of 0"
     ]
   }
 ]

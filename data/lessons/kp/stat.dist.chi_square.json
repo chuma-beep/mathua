@@ -3,27 +3,27 @@
     "label": "From squared normals to the chi-square distribution",
     "section": "From squared normals to the chi-square distribution",
     "subgoals": [
-      "Define chi-square distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Square each standard normal Zi into Zi^2",
+      "Sum k squares into X = sum Zi^2",
+      "Carry k as the degrees of freedom"
     ]
   },
   {
     "label": "From the gamma to the chi-square distribution",
     "section": "From the gamma to the chi-square distribution",
     "subgoals": [
-      "Understand from the gamma to the chi-square distribution",
-      "Apply from the gamma to the chi-square distribution",
-      "Check the result"
+      "Set a = k/2 and b = 2 in the gamma density",
+      "Reduce the gamma form into the chi-square(k) density",
+      "Shift the mode right as k grows"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write the chi-square(k) density with Gamma(k/2)",
+      "Read mu = k and sigma^2 = 2k off k",
+      "Root 2k into sigma = sqrt(2k)"
     ]
   }
 ]

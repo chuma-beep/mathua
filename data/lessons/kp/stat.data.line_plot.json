@@ -3,27 +3,27 @@
     "label": "Modeling data with two variables",
     "section": "Modeling data with two variables",
     "subgoals": [
-      "Define read and create line plots",
-      "Follow the worked example",
-      "Apply the rule"
+      "Plot yearly top-1% shares from the table",
+      "Spot the 2008 dip and 2020 drop on the curve",
+      "Read the rising concentration trend off the graph"
     ]
   },
   {
     "label": "Patterns in Tables",
     "section": "Patterns in Tables",
     "subgoals": [
-      "Understand patterns in tables",
-      "Apply patterns in tables",
-      "Check the result"
+      "Pair each left entry with its right assignment",
+      "Double 5 into 10 for the numeric table",
+      "Fill the missing (5,10) point from the pattern"
     ]
   },
   {
     "label": "Rate of Change",
     "section": "Rate of Change",
     "subgoals": [
-      "Understand rate of change",
-      "Apply rate of change",
-      "Check the result"
+      "Subtract 19887 - 17458 into 2429 diagnoses",
+      "Divide 2429 by 10 years into 242.9/year",
+      "Price one extra hour at $15 for the wage rate"
     ]
   }
 ]

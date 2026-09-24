@@ -3,27 +3,27 @@
     "label": "Introduction to the geometric distribution",
     "section": "Introduction to the geometric distribution",
     "subgoals": [
-      "Define geometric distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count k-1 failures before the first success",
+      "Multiply (1-p)^(k-1) by the final p",
+      "Hold p constant across independent trials"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write P(X=k) = (1-p)^(k-1)*p",
+      "Invert mu = 1/p into mean waiting time",
+      "Compute sigma^2 = (1-p)/p^2 and root into sigma"
     ]
   },
   {
     "label": "Deriving the geometric distribution",
     "section": "Deriving the geometric distribution",
     "subgoals": [
-      "Understand deriving the geometric distribution",
-      "Apply deriving the geometric distribution",
-      "Check the result"
+      "Map X=1 to p and X=2 to (1-p)*p",
+      "Extend the failure run to (1-p)^(k-1)*p",
+      "Shrink P(X=k) as k grows"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Binomial Theorem",
     "section": "Binomial Theorem",
     "subgoals": [
-      "Define binomial theorem and pascal's triangle",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read row n of Pascal's triangle as expansion coefficients",
+      "Pair each coefficient with one a^(n-k) b^k term",
+      "Count n+1 terms in the full expansion"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Expand (a+b)^n into n+1 coefficient-weighted terms",
+      "Run a's exponent down from n to 0",
+      "Match C(n,k) against C(n,n-k) for symmetry"
     ]
   },
   {
     "label": "Binomial coefficient",
     "section": "Binomial coefficient",
     "subgoals": [
-      "Understand binomial coefficient",
-      "Apply binomial coefficient",
-      "Check the result"
+      "Compute C(n,k) as n! over k!(n-k)!",
+      "Zero out C(n,k) when n < k",
+      "Count unordered k-choices from n elements"
     ]
   }
 ]

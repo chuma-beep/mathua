@@ -3,27 +3,27 @@
     "label": "Introduction to the binomial distribution",
     "section": "Introduction to the binomial distribution",
     "subgoals": [
-      "Define binomial distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Fix n trials with constant success p",
+      "Count x-success orders with C(n,x)",
+      "Multiply into C(n,x)*p^x*q^(n-x)"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write b(x;n,p) = C(n,x)*p^x*q^(n-x)",
+      "Read mu = n*p off n and p",
+      "Compute sigma^2 = n*p*(1-p) and root into sigma"
     ]
   },
   {
     "label": "Mean of the binomial distribution",
     "section": "Mean of the binomial distribution",
     "subgoals": [
-      "Understand mean of the binomial distribution",
-      "Apply mean of the binomial distribution",
-      "Check the result"
+      "Fold x*C(n,x) into n*C(n-1,x-1)",
+      "Factor n*p out of the expectation sum",
+      "Collapse the remaining sum into 1"
     ]
   }
 ]

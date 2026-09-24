@@ -3,27 +3,27 @@
     "label": "From Cartesian to vector form",
     "section": "From Cartesian to vector form",
     "subgoals": [
-      "Define graphing parametric equations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Plot y = mx + q point by point from a table",
+      "Redraw the line through P0 along v",
+      "Sweep t over R to trace the full line"
     ]
   },
   {
     "label": "Parametric form",
     "section": "Parametric form",
     "subgoals": [
-      "Understand parametric form",
-      "Apply parametric form",
-      "Check the result"
+      "Step t through values to plot (x0+kt, y0+ht)",
+      "Read the step direction (k, h) off the plotted dots",
+      "Join the plotted dots into the line"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Mark P0 = (2,1) and P = (5,4) on the plane",
+      "Plug t = 0, 1, -1 into x=2+3t, y=1+3t",
+      "Join the dots into the line through (2,1) and (5,4)"
     ]
   }
 ]

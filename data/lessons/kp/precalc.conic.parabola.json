@@ -3,27 +3,27 @@
     "label": "Introduction to Conic Sections",
     "section": "Introduction to Conic Sections",
     "subgoals": [
-      "Define parabolas as conic sections: focus and directrix",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write the conic in the general quadratic f(x,y) = 0 form",
+      "Check a11 and a22 are both nonzero",
+      "Sort the cone cut into circle, parabola, ellipse, or hyperbola"
     ]
   },
   {
     "label": "Each coefficient carries specific geometric information about the conic.",
     "section": "Each coefficient carries specific geometric information about the conic.",
     "subgoals": [
-      "Understand each coefficient carries specific geometric information about the conic.",
-      "Apply each coefficient carries specific geometric information about the conic.",
-      "Check the result"
+      "Read curvature and shape off a11 and a22",
+      "Zero out a12 to align the conic with the axes",
+      "Shift position with a13, a23, and a33"
     ]
   },
   {
     "label": "Degenerate conic",
     "section": "Degenerate conic",
     "subgoals": [
-      "Understand degenerate conic",
-      "Apply degenerate conic",
-      "Check the result"
+      "Factor f(x,y) into (ax+by+c)(a'x+b'y+c')",
+      "Split the degenerate case into lines, one line, or empty set",
+      "Test factorability over C before calling it degenerate"
     ]
   }
 ]

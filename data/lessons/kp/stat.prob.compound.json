@@ -3,27 +3,27 @@
     "label": "5.5 Averages and Probability",
     "section": "5.5 Averages and Probability",
     "subgoals": [
-      "Define compound events: and / or",
-      "Follow the worked example",
-      "Apply the rule"
+      "List outcomes in A, in B, and in both",
+      "Add P(A)+P(B) and subtract the overlap",
+      "Multiply P(A)*P(B) for independent ANDs"
     ]
   },
   {
     "label": "Calculate the Mean of a Set of Numbers",
     "section": "Calculate the Mean of a Set of Numbers",
     "subgoals": [
-      "Understand calculate the mean of a set of numbers",
-      "Apply calculate the mean of a set of numbers",
-      "Check the result"
+      "Add 85+88+94 into 267",
+      "Divide 267 by 3 into 89",
+      "Report Ethan's mean as 89 points"
     ]
   },
   {
     "label": "The Mean",
     "section": "The Mean",
     "subgoals": [
-      "Understand the mean",
-      "Apply the mean",
-      "Check the result"
+      "Divide the data sum by n",
+      "Add P(A)+P(B) minus P(A and B) for ORs",
+      "Check disjoint ORs add cleanly"
     ]
   }
 ]

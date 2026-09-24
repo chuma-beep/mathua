@@ -3,27 +3,27 @@
     "label": "Modeling data with two variables",
     "section": "Modeling data with two variables",
     "subgoals": [
-      "Define read data from tables and charts",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read each year-share pair out of the table",
+      "Transfer each pair onto the Cartesian plane",
+      "Spot the 2008 dip and 2020 drop on the curve"
     ]
   },
   {
     "label": "Patterns in Tables",
     "section": "Patterns in Tables",
     "subgoals": [
-      "Understand patterns in tables",
-      "Apply patterns in tables",
-      "Check the result"
+      "Read left-to-right assignments row by row",
+      "Double 5 into 10 for the numeric table",
+      "Fill the missing (5,10) cell from the pattern"
     ]
   },
   {
     "label": "Rate of Change",
     "section": "Rate of Change",
     "subgoals": [
-      "Understand rate of change",
-      "Apply rate of change",
-      "Check the result"
+      "Read 17458 (2000) and 19887 (2010) off the table",
+      "Subtract into 2429 diagnoses over 10 years",
+      "Divide into 242.9 diagnoses per year"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define function transformations: shifts, reflections, stretches",
-      "Follow the worked example",
-      "Apply the rule"
+      "Order the analysis: domain, symmetry, intercepts, sign, asymptotes",
+      "Feed f' into increasing versus decreasing intervals",
+      "Feed f'' into concavity and inflection points"
     ]
   },
   {
     "label": "Domain",
     "section": "Domain",
     "subgoals": [
-      "Understand domain",
-      "Apply domain",
-      "Check the result"
+      "Scan x^3 - 2x for denominators, roots, and logs",
+      "Admit all of R as the polynomial domain",
+      "Block x-values that break the expression"
     ]
   },
   {
     "label": "Symmetry",
     "section": "Symmetry",
     "subgoals": [
-      "Understand symmetry",
-      "Apply symmetry",
-      "Check the result"
+      "Compute f(-x) = -x^3 + 2x for x^3 - 2x",
+      "Match f(-x) against -f(x) = -x^3 + 2x",
+      "Mirror the odd graph through the origin"
     ]
   }
 ]

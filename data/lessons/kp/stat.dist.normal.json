@@ -3,27 +3,27 @@
     "label": "Definition of the normal distribution",
     "section": "Definition of the normal distribution",
     "subgoals": [
-      "Define normal (gaussian) distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Center the bell at mu with spread sigma",
+      "Split probability half-half around mu",
+      "Mark inflection points at mu-sigma and mu+sigma"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write (1/(sigma*sqrt(2pi)))*exp(-(x-mu)^2/(2sigma^2))",
+      "Read mu as center and sigma^2 as spread",
+      "Integrate the full curve into area 1"
     ]
   },
   {
     "label": "Probability density function of the normal distribution",
     "section": "Probability density function of the normal distribution",
     "subgoals": [
-      "Understand probability density function of the normal distribution",
-      "Apply probability density function of the normal distribution",
-      "Check the result"
+      "Plug mu, sigma into the normal density",
+      "Integrate the density between x0 and x1",
+      "Shade P(x0 < X < x1) under the curve"
     ]
   }
 ]

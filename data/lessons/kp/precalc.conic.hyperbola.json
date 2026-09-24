@@ -3,27 +3,27 @@
     "label": "Introduction to conic sections",
     "section": "Introduction to conic sections",
     "subgoals": [
-      "Define hyperbolas: standard form and foci",
-      "Follow the worked example",
-      "Apply the rule"
+      "Expand the conic into the six-term quadratic f(x,y) = 0",
+      "Check a11 and a22 are nonzero for a genuine quadratic",
+      "Name the cone cut circle, parabola, ellipse, or hyperbola"
     ]
   },
   {
     "label": "What is a hyperbola",
     "section": "What is a hyperbola",
     "subgoals": [
-      "Understand what is a hyperbola",
-      "Apply what is a hyperbola",
-      "Check the result"
+      "Subtract PF1 - PF2 and fix the absolute value at 2a",
+      "Mark the vertices at (a, 0) and (-a, 0)",
+      "Draw asymptotes y = +/-(b/a)x through the center"
     ]
   },
   {
     "label": "Why is the difference of distances to the foci always constant in a hyperbola?",
     "section": "Why is the difference of distances to the foci always constant in a hyperbola?",
     "subgoals": [
-      "Understand why is the difference of distances to the foci always constant in a hyperbola?",
-      "Apply why is the difference of distances to the foci always constant in a hyperbola?",
-      "Check the result"
+      "Test each point against |PF1 - PF2| = 2a",
+      "Reject points whose difference misses 2a",
+      "Read the constant 2a off the vertex (a, 0)"
     ]
   }
 ]

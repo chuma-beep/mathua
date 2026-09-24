@@ -3,27 +3,27 @@
     "label": "What is the variance of a random variable?",
     "section": "What is the variance of a random variable?",
     "subgoals": [
-      "Define variance and covariance of random variables",
-      "Follow the worked example",
-      "Apply the rule"
+      "Square each (x-mu) deviation from the mean",
+      "Weight each square by f(x) and sum into sigma^2",
+      "Swap the sum for M(x^2)-[M(x)]^2"
     ]
   },
   {
     "label": "Deviation and Standard Deviation",
     "section": "Deviation and Standard Deviation",
     "subgoals": [
-      "Understand deviation and standard deviation",
-      "Apply deviation and standard deviation",
-      "Check the result"
+      "Subtract mu from x to get the deviation x-mu",
+      "Root sigma^2 into the positive sigma",
+      "Report sigma in the original data units"
     ]
   },
   {
     "label": "Covariance of a random variable",
     "section": "Covariance of a random variable",
     "subgoals": [
-      "Understand covariance of a random variable",
-      "Apply covariance of a random variable",
-      "Check the result"
+      "Multiply deviation pairs (x-mu_X)(y-mu_Y)",
+      "Weight each pair by the joint f(x,y)",
+      "Sum over all (x,y) into sigma_XY"
     ]
   }
 ]

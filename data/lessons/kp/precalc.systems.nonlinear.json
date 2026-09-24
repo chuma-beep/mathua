@@ -3,27 +3,27 @@
     "label": "What is a linear system?",
     "section": "What is a linear system?",
     "subgoals": [
-      "Define nonlinear systems of equations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write the m-by-n system in standard coefficient form",
+      "Read a_ij as the x_j multiplier in row i",
+      "Check every variable appears to the first power"
     ]
   },
   {
     "label": "Omogeneous systems",
     "section": "Omogeneous systems",
     "subgoals": [
-      "Understand omogeneous systems",
-      "Apply omogeneous systems",
-      "Check the result"
+      "Set every b_i = 0 for the homogeneous form",
+      "Plug the all-zero vector into every row",
+      "Separate homogeneous from non-homogeneous systems"
     ]
   },
   {
     "label": "Why is the matrix form important?",
     "section": "Why is the matrix form important?",
     "subgoals": [
-      "Understand why is the matrix form important?",
-      "Apply why is the matrix form important?",
-      "Check the result"
+      "Compress the system into matrix-times-vector form",
+      "Shrink m equations into one row stack",
+      "Run elimination on the compact matrix form"
     ]
   }
 ]

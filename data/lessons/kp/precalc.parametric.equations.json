@@ -3,27 +3,27 @@
     "label": "From Cartesian to vector form",
     "section": "From Cartesian to vector form",
     "subgoals": [
-      "Define parametric equations: converting between parametric and rectangular",
-      "Follow the worked example",
-      "Apply the rule"
+      "Rewrite y = mx + q as P - P0 = t*v",
+      "Pin P0 on the line with v parallel to it",
+      "Sweep t over R to trace every point"
     ]
   },
   {
     "label": "Parametric form",
     "section": "Parametric form",
     "subgoals": [
-      "Understand parametric form",
-      "Apply parametric form",
-      "Check the result"
+      "Split v into k*i + h*j components",
+      "Equate i-parts and j-parts into x = x0+kt, y = y0+ht",
+      "Eliminate t to recover Cartesian form"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Subtract P - P0 = (3, 3) from (2,1) to (5,4)",
+      "Substitute x0=2, y0=1, k=3, h=3 into the system",
+      "Vary t to generate x=2+3t, y=1+3t point by point"
     ]
   }
 ]
