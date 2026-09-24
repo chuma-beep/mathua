@@ -1,29 +1,29 @@
 [
   {
-    "label": "Locally Path-Connected Spaces",
-    "section": "Local vs Global Path-Connectedness",
+    "label": "Worked: Euclidean balls do the job",
+    "section": "Worked: Euclidean balls do the job",
     "subgoals": [
-      "Review Local vs Global Path-Connectedness",
-      "Work the example",
-      "Verify"
+      "Take balls as the neighbourhood base",
+      "Join two ball points by a segment",
+      "Conclude each basic neighbourhood is path-connected"
     ]
   },
   {
-    "label": "Locally Path-Connected Spaces — practice 2",
-    "section": "Local vs Global Path-Connectedness",
+    "label": "Worked: the bridge theorem",
+    "section": "Worked: the bridge theorem",
     "subgoals": [
-      "Review Local vs Global Path-Connectedness",
-      "Work the example",
-      "Verify"
+      "Open up the reachable set by paths",
+      "Open up its complement the same way",
+      "Conclude reachability is everything"
     ]
   },
   {
-    "label": "Locally Path-Connected Spaces — practice 3",
-    "section": "Example",
+    "label": "When local paths fail",
+    "section": "When local paths fail",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Zoom in on a baseline neighbourhood",
+      "Find gaps no path can cross",
+      "Conclude path-connected need not be local"
     ]
   }
 ]

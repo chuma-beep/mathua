@@ -1,29 +1,29 @@
 [
   {
-    "label": "Lebesgue Covering Dimension",
-    "section": "Invariants",
+    "label": "Worked: the line has dimension 1",
+    "section": "Worked: the line has dimension 1",
     "subgoals": [
-      "Review Invariants",
-      "Work the example",
-      "Verify"
+      "Refine to pairwise-overlapping intervals",
+      "Show order 1 always suffices",
+      "Rule out order 0 by connectedness"
     ]
   },
   {
-    "label": "Lebesgue Covering Dimension — practice 2",
-    "section": "Invariants",
+    "label": "Worked: the Cantor set has dimension 0",
+    "section": "Worked: the Cantor set has dimension 0",
     "subgoals": [
-      "Review Invariants",
-      "Work the example",
-      "Verify"
+      "Split into clopen stage pieces",
+      "Refine any cover disjointly",
+      "Conclude multiplicity 1 suffices"
     ]
   },
   {
-    "label": "Lebesgue Covering Dimension — practice 3",
-    "section": "Example",
+    "label": "Worked: dimension is topological",
+    "section": "Worked: dimension is topological",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Carry covers along the homeomorphism",
+      "Match minimal orders both ways",
+      "Invoke Brouwer for Euclidean spaces"
     ]
   }
 ]

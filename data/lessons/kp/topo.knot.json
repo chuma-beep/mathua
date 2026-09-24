@@ -1,29 +1,29 @@
 [
   {
-    "label": "Knot Theory Basics",
-    "section": "Invariants",
+    "label": "Worked: the trefoil is knotted",
+    "section": "Worked: the trefoil is knotted",
     "subgoals": [
-      "Review Invariants",
-      "Work the example",
-      "Verify"
+      "Count crossings in the diagram",
+      "Invoke crossing-number invariance",
+      "Compare against the unknot"
     ]
   },
   {
-    "label": "Knot Theory Basics — practice 2",
-    "section": "Invariants",
+    "label": "Worked: the knot group",
+    "section": "Worked: the knot group",
     "subgoals": [
-      "Review Invariants",
-      "Work the example",
-      "Verify"
+      "Retract the unknot complement to a torus",
+      "Present the trefoil complement group",
+      "Compare abelian against nonabelian"
     ]
   },
   {
-    "label": "Knot Theory Basics — practice 3",
-    "section": "Example",
+    "label": "Worked: polynomials distinguish",
+    "section": "Worked: polynomials distinguish",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Label the knots 3_1 and 4_1",
+      "Compare their Jones polynomials",
+      "Close with the Gordon-Luecke theorem"
     ]
   }
 ]

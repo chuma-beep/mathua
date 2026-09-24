@@ -1,29 +1,29 @@
 [
   {
-    "label": "Topological Manifolds",
-    "section": "Locally Euclidean",
+    "label": "Worked: the circle as a 1-manifold",
+    "section": "Worked: the circle as a 1-manifold",
     "subgoals": [
-      "Review Locally Euclidean",
-      "Work the example",
-      "Verify"
+      "Delete a point and project stereographically",
+      "Rotate the chart to cover the gap",
+      "Conclude every point has an interval chart"
     ]
   },
   {
-    "label": "Topological Manifolds — practice 2",
-    "section": "Locally Euclidean",
+    "label": "Worked: the sphere as a 2-manifold",
+    "section": "Worked: the sphere as a 2-manifold",
     "subgoals": [
-      "Review Locally Euclidean",
-      "Work the example",
-      "Verify"
+      "Project from the north pole",
+      "Add the south-pole chart",
+      "Conclude every point has a plane chart"
     ]
   },
   {
-    "label": "Topological Manifolds — practice 3",
-    "section": "Example",
+    "label": "When local Euclideanness fails",
+    "section": "When local Euclideanness fails",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Delete the crossing point",
+      "Count four components against two",
+      "Conclude no Euclidean chart exists"
     ]
   }
 ]

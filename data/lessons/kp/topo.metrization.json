@@ -1,29 +1,29 @@
 [
   {
-    "label": "Urysohn Metrization Theorem",
-    "section": "When Topology Comes from a Metric",
+    "label": "Worked: the interval is metrizable",
+    "section": "Worked: the interval is metrizable",
     "subgoals": [
-      "Review When Topology Comes from a Metric",
-      "Work the example",
-      "Verify"
+      "Separate points by subintervals",
+      "Separate points from closed sets",
+      "Exhibit the rational-endpoint base"
     ]
   },
   {
-    "label": "Urysohn Metrization Theorem — practice 2",
-    "section": "When Topology Comes from a Metric",
+    "label": "Worked: embedding into Hilbert space",
+    "section": "Worked: embedding into Hilbert space",
     "subgoals": [
-      "Review When Topology Comes from a Metric",
-      "Work the example",
-      "Verify"
+      "Collect countably many Urysohn functions",
+      "Assemble them into the cube map",
+      "Pull the metric back along the embedding"
     ]
   },
   {
-    "label": "Urysohn Metrization Theorem — practice 3",
-    "section": "Example",
+    "label": "When metrizability fails",
+    "section": "When metrizability fails",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Confirm regularity and Hausdorff",
+      "Count the forced basic opens",
+      "Conclude no metric fits"
     ]
   }
 ]

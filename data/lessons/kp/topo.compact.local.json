@@ -1,29 +1,29 @@
 [
   {
-    "label": "Local Compactness",
-    "section": "Local vs Global",
+    "label": "Worked: the line is locally compact",
+    "section": "Worked: the line is locally compact",
     "subgoals": [
-      "Review Local vs Global",
-      "Work the example",
-      "Verify"
+      "Wrap the point in a closed interval",
+      "Check the interval holds a neighbourhood",
+      "Apply Heine-Borel for compactness"
     ]
   },
   {
-    "label": "Local Compactness — practice 2",
-    "section": "Local vs Global",
+    "label": "Worked: the rationals are not",
+    "section": "Worked: the rationals are not",
     "subgoals": [
-      "Review Local vs Global",
-      "Work the example",
-      "Verify"
+      "Intersect a neighbourhood with Q",
+      "Close it up in R to find irrationals",
+      "Conclude no compact neighbourhood exists"
     ]
   },
   {
-    "label": "Local Compactness — practice 3",
-    "section": "Example",
+    "label": "Worked: one-point compactification",
+    "section": "Worked: one-point compactification",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Add the point at infinity",
+      "Declare complements of compacts open",
+      "Identify R plus infinity with the circle"
     ]
   }
 ]

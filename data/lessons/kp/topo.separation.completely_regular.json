@@ -1,29 +1,29 @@
 [
   {
-    "label": "Completely Regular Spaces",
-    "section": "Functions Separating Points and Closed Sets",
+    "label": "Worked: the metric separator",
+    "section": "Worked: the metric separator",
     "subgoals": [
-      "Review Functions Separating Points and Closed Sets",
-      "Work the example",
-      "Verify"
+      "Form the distance ratio",
+      "Evaluate it on A and at x",
+      "Conclude continuity into [0, 1]"
     ]
   },
   {
-    "label": "Completely Regular Spaces — practice 2",
-    "section": "Functions Separating Points and Closed Sets",
+    "label": "Worked: products stay Tychonoff",
+    "section": "Worked: products stay Tychonoff",
     "subgoals": [
-      "Review Functions Separating Points and Closed Sets",
-      "Work the example",
-      "Verify"
+      "Isolate one coordinate missing A",
+      "Borrow the factor separator",
+      "Pull it back along the projection"
     ]
   },
   {
-    "label": "Completely Regular Spaces — practice 3",
-    "section": "Example",
+    "label": "Worked: subspaces of compact Hausdorff",
+    "section": "Worked: subspaces of compact Hausdorff",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Collect all point-set separators",
+      "Embed into the function cube",
+      "Close up to a compact Hausdorff space"
     ]
   }
 ]

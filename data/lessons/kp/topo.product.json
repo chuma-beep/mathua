@@ -1,29 +1,29 @@
 [
   {
-    "label": "Product Topology",
-    "section": "Infinite vs Finite Products",
+    "label": "Worked: finite products",
+    "section": "Worked: finite products",
     "subgoals": [
-      "Review Infinite vs Finite Products",
-      "Work the example",
-      "Verify"
+      "Pick opens in each factor",
+      "Form the rectangle product",
+      "Project back to open factors"
     ]
   },
   {
-    "label": "Product Topology — practice 2",
-    "section": "Infinite vs Finite Products",
+    "label": "Worked: infinite products vs the box",
+    "section": "Worked: infinite products vs the box",
     "subgoals": [
-      "Review Infinite vs Finite Products",
-      "Work the example",
-      "Verify"
+      "Constrain finitely many coordinates",
+      "Build a box open around zero",
+      "Show no product open fits inside"
     ]
   },
   {
-    "label": "Product Topology — practice 3",
-    "section": "Example",
+    "label": "Worked: projections are continuous",
+    "section": "Worked: projections are continuous",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Take an open set in one factor",
+      "Pull it back to a single-constraint product",
+      "Read off continuity of the projection"
     ]
   }
 ]
