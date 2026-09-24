@@ -371,9 +371,9 @@ func (g *ratioSimplifyGen) Grade(expected, userAnswer string) grader.Result {
 
 func (g *ratioSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	f := rand.Intn(max(1, scale)) + 2
-	a := (rand.Intn(max(1, scale)) + 2) * f
-	b := (rand.Intn(max(1, scale)) + 2) * f
+	f := rand.Intn(max(3, scale*2)) + 2
+	a := (rand.Intn(max(3, scale*2)) + 2) * f
+	b := (rand.Intn(max(3, scale*2)) + 2) * f
 	for a == b {
 		b += f
 	}
@@ -435,8 +435,8 @@ type expNegGen struct{}
 
 func (g *expNegGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(max(1, scale)) + 2
-	exp := rand.Intn(max(1, scale/2+1)) + 1
+	base := rand.Intn(max(3, scale*2)) + 2
+	exp := rand.Intn(max(2, scale)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(%d^{-%d}\\)", base, exp),
 		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
@@ -448,7 +448,18 @@ type expZeroGen struct{}
 
 func (g *expZeroGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(scale*2) + 2
+	base := rand.Intn(max(4, scale*2)) + 2
+	if scale > 3 {
+		base = rand.Intn(40) + 10
+	}
+	if rand.Intn(3) == 0 {
+		// production: identify the base (unique answers).
+		return generator.Problem{
+			Question:    fmt.Sprintf("In the expression %d^0, what is the base? (enter a number)", base),
+			Answer:      fmt.Sprintf("%d", base),
+			Explanation: fmt.Sprintf("The base is %d; any non-zero base to the power 0 equals 1, so %d^0 = 1.", base, base),
+		}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d^{0} =\\) ?", base),
 		Answer:      "1",
@@ -650,7 +661,7 @@ func (g *eqWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(scale*4) + 5
 	items := []string{"apples", "coins", "tickets", "pencils"}
 	item := items[rand.Intn(len(items))]
-	cost := rand.Intn(scale) + 2
+	cost := rand.Intn(max(4, scale*2)) + 2
 	total := x * cost
 	return generator.Problem{
 		Question:    fmt.Sprintf("You bought %d %s for $%d. How much does each %s cost?", x, item, total, strings.TrimSuffix(item, "s")),

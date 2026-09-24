@@ -107,8 +107,8 @@ type fracNumberLineGen struct{}
 
 func (g *fracNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	den := rand.Intn(max(1, scale)) + 2
-	num := rand.Intn(max(1, den-2)) + 1
+	den := rand.Intn(max(3, scale*2)) + 2
+	num := rand.Intn(den-1) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Where is \\(\\frac{%d}{%d}\\) on a number line from \\(0\\) to \\(1\\)?", num, den),
 		Answer:      fmt.Sprintf("%.2f", float64(num)/float64(den)),
@@ -244,10 +244,10 @@ type fracOpDiffDenGen struct{ op string }
 
 func (g *fracOpDiffDenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	aDen := rand.Intn(max(1, scale*2)) + 2
-	bDen := rand.Intn(max(1, scale*2)) + 2
+	aDen := rand.Intn(max(3, scale*2)) + 2
+	bDen := rand.Intn(max(3, scale*2)) + 2
 	for aDen == bDen {
-		bDen = rand.Intn(max(1, scale*2)) + 2
+		bDen = rand.Intn(max(3, scale*2)) + 2
 	}
 	cm := lcm(aDen, bDen)
 	aNum := rand.Intn(aDen-1) + 1
@@ -301,8 +301,8 @@ type fracMultGen struct{ wholeMul bool }
 func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	if g.wholeMul {
-		whole := rand.Intn(max(1, scale*2)) + 2
-		den := rand.Intn(max(1, scale)) + 2
+		whole := rand.Intn(max(2, scale*2)) + 2
+		den := rand.Intn(max(3, scale*2)) + 2
 		num := rand.Intn(den-1) + 1
 		rn, rd := reduce(num*whole, den)
 		w, r, d := toMixed(rn, rd)
@@ -319,10 +319,10 @@ func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %s", whole, num, den, whole*num, den, mixStr(w, r, d)),
 		}
 	}
-	aNum := rand.Intn(max(1, scale)) + 1
-	aDen := rand.Intn(max(1, scale)) + 2
-	bNum := rand.Intn(max(1, scale)) + 1
-	bDen := rand.Intn(max(1, scale)) + 2
+	aNum := rand.Intn(max(3, scale*2)) + 1
+	aDen := rand.Intn(max(3, scale*2)) + 2
+	bNum := rand.Intn(max(3, scale*2)) + 1
+	bDen := rand.Intn(max(3, scale*2)) + 2
 	rn, rd := reduce(aNum*bNum, aDen*bDen)
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\times \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
@@ -336,9 +336,9 @@ type fracDivGen struct{ wholeDiv bool }
 func (g *fracDivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	if g.wholeDiv {
-		whole := rand.Intn(max(1, scale*2)) + 2
-		aNum := rand.Intn(max(1, scale)) + 1
-		aDen := rand.Intn(max(1, scale)) + 2
+		whole := rand.Intn(max(2, scale*2)) + 2
+		aNum := rand.Intn(max(3, scale*2)) + 1
+		aDen := rand.Intn(max(3, scale*2)) + 2
 		rn, rd := reduce(aNum, aDen*whole)
 		return generator.Problem{
 			Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div %d =\\) ?", aNum, aDen, whole),
@@ -346,10 +346,10 @@ func (g *fracDivGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			Explanation: fmt.Sprintf("%d/%d / %d = %d/(%d x %d) = %d/%d", aNum, aDen, whole, aNum, aDen, whole, rn, rd),
 		}
 	}
-	aNum := rand.Intn(max(1, scale)) + 1
-	aDen := rand.Intn(max(1, scale)) + 2
-	bNum := rand.Intn(max(1, scale)) + 1
-	bDen := rand.Intn(max(1, scale)) + 2
+	aNum := rand.Intn(max(3, scale*2)) + 1
+	aDen := rand.Intn(max(3, scale*2)) + 2
+	bNum := rand.Intn(max(3, scale*2)) + 1
+	bDen := rand.Intn(max(3, scale*2)) + 2
 	rn, rd := reduce(aNum*bDen, aDen*bNum)
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
@@ -425,9 +425,9 @@ type fracMixedMultGen struct{}
 
 func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	w1 := rand.Intn(max(1, scale)) + 1
-	w2 := rand.Intn(max(1, scale)) + 1
-	den := rand.Intn(max(1, scale)) + 2
+	w1 := rand.Intn(max(2, scale*2)) + 1
+	w2 := rand.Intn(max(2, scale*2)) + 1
+	den := rand.Intn(max(3, scale*2)) + 2
 	n1 := rand.Intn(den-1) + 1
 	n2 := rand.Intn(den-1) + 1
 	aImp := w1*den + n1
@@ -475,10 +475,10 @@ type fracMultWordGen struct{}
 
 func (g *fracMultWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	aNum := rand.Intn(max(1, scale)) + 1
-	aDen := rand.Intn(max(1, scale)) + 3
-	bNum := rand.Intn(max(1, scale)) + 1
-	bDen := rand.Intn(max(1, scale)) + 3
+	aNum := rand.Intn(max(3, scale*2)) + 1
+	aDen := rand.Intn(max(3, scale*2)) + 2
+	bNum := rand.Intn(max(3, scale*2)) + 1
+	bDen := rand.Intn(max(3, scale*2)) + 2
 	rn, rd := reduce(aNum*bNum, aDen*bDen)
 	return generator.Problem{
 		Question:    fmt.Sprintf("A recipe needs \\(\\frac{%d}{%d}\\) cup of sugar per serving. You make \\(\\frac{%d}{%d}\\) servings. How much sugar total?", aNum, aDen, bNum, bDen),
@@ -491,10 +491,10 @@ type fracDivWordGen struct{}
 
 func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	aNum := rand.Intn(max(1, scale)) + 1
-	aDen := rand.Intn(max(1, scale)) + 2
-	bNum := rand.Intn(max(1, scale)) + 1
-	bDen := rand.Intn(max(1, scale)) + 2
+	aNum := rand.Intn(max(3, scale*2)) + 1
+	aDen := rand.Intn(max(3, scale*2)) + 2
+	bNum := rand.Intn(max(3, scale*2)) + 1
+	bDen := rand.Intn(max(3, scale*2)) + 2
 	rn, rd := reduce(aNum*bDen, aDen*bNum)
 	return generator.Problem{
 		Question:    fmt.Sprintf("You have \\(\\frac{%d}{%d}\\) liters of juice. Each glass holds \\(\\frac{%d}{%d}\\) liters. How many glasses can you fill?", aNum, aDen, bNum, bDen),

@@ -238,8 +238,8 @@ type multConceptGen struct{}
 
 func (g *multConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(1, scale)) + 2
-	b := rand.Intn(max(1, scale)) + 2
+	a := rand.Intn(max(4, scale*3)) + 2
+	b := rand.Intn(max(4, scale*3)) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("%d groups of %d = ?", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
@@ -589,9 +589,9 @@ type expProductRuleGen struct{}
 
 func (g *expProductRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(max(1, scale)) + 2
-	e1 := rand.Intn(max(1, scale)) + 1
-	e2 := rand.Intn(max(1, scale)) + 1
+	base := rand.Intn(max(3, scale*2)) + 2
+	e1 := rand.Intn(max(3, scale*2)) + 1
+	e2 := rand.Intn(max(3, scale*2)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(%d^{%d} \\times %d^{%d}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1+e2),
@@ -603,9 +603,12 @@ type expQuotientRuleGen struct{}
 
 func (g *expQuotientRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(max(1, scale)) + 2
-	e1 := rand.Intn(max(1, scale)) + 3
-	e2 := rand.Intn(max(1, scale/2+1)) + 1
+	base := rand.Intn(max(3, scale*2)) + 2
+	e1 := rand.Intn(max(3, scale*2)) + 3
+	e2 := rand.Intn(max(2, scale/2+1)) + 1
+	if e2 >= e1 {
+		e1 = e2 + 1
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\(\\frac{%d^{%d}}{%d^{%d}}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1-e2),
@@ -617,9 +620,9 @@ type expPowerRuleGen struct{}
 
 func (g *expPowerRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(max(1, scale)) + 2
-	e1 := rand.Intn(max(1, scale)) + 1
-	e2 := rand.Intn(max(1, scale)) + 1
+	base := rand.Intn(max(3, scale*2)) + 2
+	e1 := rand.Intn(max(3, scale*2)) + 1
+	e2 := rand.Intn(max(3, scale*2)) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("Simplify: \\((%d^{%d})^{%d}\\)", base, e1, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1*e2),
