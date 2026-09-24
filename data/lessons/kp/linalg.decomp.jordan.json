@@ -1,29 +1,29 @@
 [
   {
-    "label": "Jordan Normal Form",
-    "section": "Structure",
+    "label": "Worked: [[2,1],[0,2]] is one block",
+    "section": "Worked: [[2,1],[0,2]] is one block",
     "subgoals": [
-      "Review Structure",
-      "Work the example",
-      "Verify"
+      "Read eigenvalue 2 doubled",
+      "Count one eigenvector direction",
+      "Conclude a single block"
     ]
   },
   {
-    "label": "Jordan Normal Form — practice 2",
-    "section": "Structure",
+    "label": "Worked: counting blocks in a diagonalizable 3x3",
+    "section": "Worked: counting blocks in a diagonalizable 3x3",
     "subgoals": [
-      "Review Structure",
-      "Work the example",
-      "Verify"
+      "Force all blocks 1x1",
+      "Count three",
+      "Confirm full supply"
     ]
   },
   {
-    "label": "Jordan Normal Form — practice 3",
-    "section": "Example",
+    "label": "Minimal polynomial",
+    "section": "Minimal polynomial",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Take the largest block per eigenvalue",
+      "Read exponents off sizes",
+      "Pin the polynomial"
     ]
   }
 ]

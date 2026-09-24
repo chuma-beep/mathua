@@ -1,29 +1,29 @@
 [
   {
-    "label": "Inner Products and Orthogonality",
-    "section": "Orthogonality",
+    "label": "Worked: (1,2)·(3,4) = 11",
+    "section": "Worked: (1,2)·(3,4) = 11",
     "subgoals": [
-      "Review Orthogonality",
-      "Work the example",
-      "Verify"
+      "Multiply componentwise",
+      "Add to 11",
+      "Check the norm 5"
     ]
   },
   {
-    "label": "Inner Products and Orthogonality — practice 2",
-    "section": "Orthogonality",
+    "label": "Worked: weighted inner product on R^2",
+    "section": "Worked: weighted inner product on R^2",
     "subgoals": [
-      "Review Orthogonality",
-      "Work the example",
-      "Verify"
+      "Verify bilinearity and symmetry",
+      "Check positive definiteness",
+      "Keep weights positive"
     ]
   },
   {
-    "label": "Inner Products and Orthogonality — practice 3",
-    "section": "Example",
+    "label": "Cauchy-Schwarz",
+    "section": "Cauchy-Schwarz",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Bound the inner product",
+      "Read the cosine range",
+      "Apply universally"
     ]
   }
 ]

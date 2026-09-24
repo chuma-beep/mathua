@@ -749,6 +749,7 @@ func (g *innerProductGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		{"Is inner product 〈u,v〉=u·v positive definite? (yes/no)", "yes", "u·u=|u|²≥0 and =0 iff u=0."},
 		{"Are orthogonal vectors u·v=0? (yes/no)", "yes", "Definition of orthogonality."},
 		{"Does Cauchy-Schwarz state |〈u,v〉|≤||u||·||v||? (yes/no)", "yes", "Cauchy-Schwarz inequality."},
+		{"Is every symmetric bilinear form an inner product? (yes/no)", "no", "Needs positive definiteness too: xᵀAx with indefinite A fails."},
 	}
 	hard := []entry{
 		{"Is 〈u,v〉=2u₁v₁+u₂v₂ an inner product on R²? (yes/no)", "yes", "Weighted dot with positive weights is inner product."},
@@ -758,6 +759,21 @@ func (g *innerProductGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: dot products and norms (unique answers).
+		type dotEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		dotTable := []dotEntry{
+			{"Compute (1,2)·(3,4) (enter a number)", "11", "1·3+2·4 = 11."},
+			{"What is (1,0)·(0,1)? (enter a number)", "0", "Perpendicular unit vectors: dot is 0."},
+			{"What is ||(3,4)||? (enter a number)", "5", "sqrt(9+16) = 5."},
+		}
+		d := dotTable[rand.Intn(len(dotTable))]
+		return generator.Problem{Question: d.question, Answer: d.answer, Explanation: d.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
@@ -776,6 +792,7 @@ func (g *luGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does LU decomposition write A=LU with L lower unit and U upper? (yes/no)", "yes", "LU factors invertible; solve via forward/back substitution."},
 		{"Is LU without pivoting possible only if leading principals nonzero? (yes/no)", "yes", "Need nonzero pivots."},
 		{"Does LU solve Ax=b via Ly=b then Ux=y? (yes/no)", "yes", "Two triangular solves."},
+		{"Does every invertible matrix admit LU without row swaps? (yes/no)", "no", "Zero leading pivots need permutation P: PA=LU."},
 	}
 	hard := []entry{
 		{"For A=[[2,1],[4,3]], is L=[[1,0],[2,1]] and U=[[2,1],[0,1]]? (yes/no)", "yes", "Multiply L×U = A."},
@@ -785,6 +802,21 @@ func (g *luGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: triangular solves and determinants (unique answers).
+		type luEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		luTable := []luEntry{
+			{"Ly=b with L=[[1,0],[2,1]], b=[1,3]. What is y_2? (enter a number)", "1", "y_1=1, then 2·1+y_2=3 gives y_2=1."},
+			{"LU with unit L and U diagonal (2,3): what is det(A)? (enter a number)", "6", "det(L)=1, so det(A) = 2·3 = 6."},
+			{"How many triangular solves does Ax=b need via LU? (enter a number)", "2", "Forward Ly=b, then back Ux=y."},
+		}
+		v := luTable[rand.Intn(len(luTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
@@ -803,6 +835,7 @@ func (g *qrGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does QR write A=QR with Q orthogonal and R upper triangular? (yes/no)", "yes", "QR via Gram-Schmidt."},
 		{"Is Q's columns orthonormal? (yes/no)", "yes", "QᵀQ=I."},
 		{"Does QR solve least squares via R x = Qᵀb? (yes/no)", "yes", "Normal equations stability."},
+		{"Is R lower triangular? (yes/no)", "no", "R is upper triangular by construction."},
 	}
 	hard := []entry{
 		{"For A=[[1,1],[1,0]], is Q's first column normalized (1,1)/√2? (yes/no)", "yes", "Gram-Schmidt on columns."},
@@ -812,6 +845,21 @@ func (g *qrGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: Gram-Schmidt quantities (unique answers).
+		type qrEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		qrTable := []qrEntry{
+			{"Gram-Schmidt on (1,1): what is ||(1,1)||? (enter like sqrt(2))", "sqrt(2)", "sqrt(1+1) = sqrt(2)."},
+			{"R is 2x2 upper triangular. How many possibly-nonzero entries? (enter a number)", "3", "Two diagonal plus one above: 3."},
+			{"Least squares via Rx=Qᵀb with upper-triangular R: forward or back substitution? (type one word)", "back", "Upper-triangular systems solve bottom-up: back substitution."},
+		}
+		v := qrTable[rand.Intn(len(qrTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
@@ -830,6 +878,7 @@ func (g *svdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does SVD write A=UΣVᵀ with U,V orthogonal and Σ diagonal? (yes/no)", "yes", "SVD exists for any real matrix."},
 		{"Are singular values σ_i ≥0? (yes/no)", "yes", "By definition."},
 		{"Does rank(A) equal number of nonzero singular values? (yes/no)", "yes", "Counting."},
+		{"Is SVD defined only for square matrices? (yes/no)", "no", "SVD exists for any m×n real matrix."},
 	}
 	hard := []entry{
 		{"Is σ_i = sqrt(eig(AᵀA))? (yes/no)", "yes", "Singular values via AᵀA."},
@@ -839,6 +888,21 @@ func (g *svdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: singular-value arithmetic (unique answers).
+		type svdEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		svdTable := []svdEntry{
+			{"A has singular values 5, 2, 0. What is rank(A)? (enter a number)", "2", "Two nonzero singular values: rank 2."},
+			{"Best rank-1 approximation keeps how many singular values? (enter a number)", "1", "Truncate to the top one (Eckart-Young)."},
+			{"AᵀA has eigenvalues 9, 4, 0. What is the largest singular value? (enter a number)", "3", "σ = sqrt(eig): sqrt(9) = 3."},
+		}
+		v := svdTable[rand.Intn(len(svdTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
@@ -857,6 +921,7 @@ func (g *jordanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Does Jordan form exist for every complex matrix? (yes/no)", "yes", "Jordan canonical form over C."},
 		{"Is diagonalizable matrices' Jordan blocks all 1×1? (yes/no)", "yes", "No nontrivial blocks."},
 		{"Does Jordan block J_2(λ) have λ on diagonal and 1 above? (yes/no)", "yes", "[[λ,1],[0,λ]]."},
+		{"Is every real matrix diagonalizable over R? (yes/no)", "no", "Rotations have no real eigenvectors; Jordan blocks appear."},
 	}
 	hard := []entry{
 		{"Is matrix [[2,1],[0,2]] already in Jordan form? (yes/no)", "yes", "Single Jordan block for eigenvalue 2."},
@@ -866,6 +931,21 @@ func (g *jordanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: block counts and shapes (unique answers).
+		type jorEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		jorTable := []jorEntry{
+			{"[[2,1],[0,2]] is one Jordan block. How many blocks? (enter a number)", "1", "Single block for eigenvalue 2."},
+			{"A 3x3 diagonalizable matrix: how many Jordan blocks? (enter a number)", "3", "All blocks 1×1: three of them."},
+			{"J_2(λ) is 2x2. What sits above the diagonal? (enter a number)", "1", "Ones on the superdiagonal by definition."},
+		}
+		v := jorTable[rand.Intn(len(jorTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}

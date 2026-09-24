@@ -1,29 +1,29 @@
 [
   {
-    "label": "Singular Value Decomposition",
-    "section": "Geometry and Rank",
+    "label": "Worked: rank from singular values 5, 2, 0",
+    "section": "Worked: rank from singular values 5, 2, 0",
     "subgoals": [
-      "Review Geometry and Rank",
-      "Work the example",
-      "Verify"
+      "Count nonzero: 2",
+      "Truncate to top 1",
+      "Read compressibility"
     ]
   },
   {
-    "label": "Singular Value Decomposition — practice 2",
-    "section": "Geometry and Rank",
+    "label": "Worked: largest singular value from A^TA",
+    "section": "Worked: largest singular value from A^TA",
     "subgoals": [
-      "Review Geometry and Rank",
-      "Work the example",
-      "Verify"
+      "Take root-eigenvalues",
+      "Pick sqrt(9) = 3",
+      "Name the top stretch"
     ]
   },
   {
-    "label": "Singular Value Decomposition — practice 3",
-    "section": "Example",
+    "label": "Vectors",
+    "section": "Vectors",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Pair u_i with v_i",
+      "Check Av_i = s_i u_i",
+      "Align both bases"
     ]
   }
 ]
