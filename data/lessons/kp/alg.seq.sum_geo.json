@@ -3,27 +3,27 @@
     "label": "What is a geometric series",
     "section": "What is a geometric series",
     "subgoals": [
-      "Identify the series terms",
-      "Find the common ratio",
-      "Prepare to sum"
+      "List terms with ratio r between neighbors",
+      "Separate series (sum) from sequence (list)",
+      "Flag r = 0 summing to 1, r = 1 diverging"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Follow the worked series",
-      "Apply the sum formula",
-      "Check the result"
+      "Compute partial sums S_n = (1 - r^(n+1))/(1 - r)",
+      "Multiply s_n by r and subtract for the formula",
+      "Require r != 1 to keep the denominator nonzero"
     ]
   },
   {
     "label": "Determine the nature",
     "section": "Determine the nature of the following series and compute their sum.",
     "subgoals": [
-      "Test convergence by the ratio",
-      "Apply the infinite sum formula",
-      "State the limit"
+      "Test |r| < 1 for convergence to 1/(1 - r)",
+      "Shift start to r^a/(1 - r) for n >= a",
+      "Bound positive-term series against the geometric model"
     ]
   }
 ]

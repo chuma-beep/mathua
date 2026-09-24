@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "State the definition",
-      "Apply definition in a worked example",
-      "Verify with an identity or example"
+      "Embed legs sin(theta), cos(theta) under hypotenuse 1",
+      "Square and add for sin^2(theta) + cos^2(theta) = 1",
+      "Solve sin(theta) = +/-sqrt(1 - cos^2(theta)) with quadrant signs"
     ]
   },
   {
     "label": "Domain restrictions",
     "section": "Domain restrictions",
     "subgoals": [
-      "Understand domain restrictions",
-      "Apply domain restrictions",
-      "Check the result"
+      "Exclude odd pi/2 multiples for tan^2 + 1 = sec^2",
+      "Exclude multiples of pi for 1 + cot^2 = csc^2",
+      "Keep sin^2 + cos^2 = 1 valid on all R"
     ]
   },
   {
     "label": "Validity for arbitrary angles",
     "section": "Validity for arbitrary angles",
     "subgoals": [
-      "Understand validity for arbitrary angles",
-      "Apply validity for arbitrary angles",
-      "Check the result"
+      "Start from acute-triangle geometry",
+      "Redefine sin/cos as circle coordinates for any theta",
+      "Substitute into x^2 + y^2 = 1 for universal validity"
     ]
   }
 ]

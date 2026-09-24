@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define modular arithmetic",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split a = qn + r with 0 <= r < n",
+      "Compute 17 = 3*5 + 2 for 17 mod 5 = 2",
+      "Name n the modulus of the operation"
     ]
   },
   {
     "label": "Modulo of a negative integer",
     "section": "Modulo of a negative integer",
     "subgoals": [
-      "Understand modulo of a negative integer",
-      "Apply modulo of a negative integer",
-      "Check the result"
+      "Force a nonnegative remainder for negatives",
+      "Compute -7 = (-2)*5 + 3 for -7 mod 5 = 3",
+      "Flag language % returning -2 instead"
     ]
   },
   {
     "label": "Congruence modulo n",
     "section": "Congruence modulo n",
     "subgoals": [
-      "Understand congruence modulo n",
-      "Apply congruence modulo n",
-      "Check the result"
+      "Equate remainders for a = b mod n",
+      "Check 17 = 2 mod 5 through 15 divisible by 5",
+      "Separate operator a mod n from relation a = b mod n"
     ]
   }
 ]

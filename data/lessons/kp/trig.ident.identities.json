@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Understand introduction",
-      "Apply introduction",
-      "Check the result"
+      "Separate identities (all angles) from equations (some angles)",
+      "Group by transformation: shift, sum, product, parametric",
+      "Reduce every expression toward sine and cosine"
     ]
   },
   {
     "label": "Fundamental identities",
     "section": "Fundamental identities",
     "subgoals": [
-      "Understand fundamental identities",
-      "Apply fundamental identities to simplify",
-      "Check by substitution"
+      "Start from sin^2 + cos^2 = 1 on the unit circle",
+      "Divide by cos^2 for 1 + tan^2 = sec^2",
+      "Divide by sin^2 for 1 + cot^2 = csc^2"
     ]
   },
   {
     "label": "Reference angles and reflections",
     "section": "Reference angles and reflections",
     "subgoals": [
-      "Understand reference angles and reflections",
-      "Use reference angles and reflections to rewrite an angle",
-      "Check the quadrant sign"
+      "Rewrite pi/2 + alpha via swapped cofunctions",
+      "Keep functions fixed for pi +/- alpha shifts",
+      "Assign signs from the target quadrant"
     ]
   }
 ]

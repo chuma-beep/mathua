@@ -3,27 +3,27 @@
     "label": "What is a linear system",
     "section": "What is a linear system?",
     "subgoals": [
-      "Identify the equations",
-      "Recognize the variables",
-      "Prepare to solve jointly"
+      "Count m equations in n unknowns x_1..x_n",
+      "Check each variable appears to first power only",
+      "Sort consistent/determined vs inconsistent systems"
     ]
   },
   {
     "label": "Matrix form",
     "section": "Why is the matrix form important?",
     "subgoals": [
-      "Write the coefficient matrix",
-      "Write the constants vector",
-      "Use compact notation"
+      "Stack coefficients into matrix A",
+      "Stack unknowns into X and constants into B",
+      "Compress the system to A*X = B"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Follow the worked system",
-      "Verify a candidate solution",
-      "Check all equations"
+      "Solve 3x3 via X = A^-1*B when det != 0",
+      "Test the tuple against every equation",
+      "Reject candidates failing any single row"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Simple Trigonometric Equations",
     "section": "Simple Trigonometric Equations",
     "subgoals": [
-      "Understand simple trigonometric equations",
-      "Solve a simple trigonometric equations example",
-      "Check solutions in [0, 2π)"
+      "Bound solvable sin x = m to |m| <= 1",
+      "Cut the unit circle at y = m for alpha and pi - alpha",
+      "Append +2k*pi for the full periodic family"
     ]
   },
   {
     "label": "Trigonometric Equations Solvable by Substitution",
     "section": "Trigonometric Equations Solvable by Substitution",
     "subgoals": [
-      "Understand trigonometric equations solvable by substitution",
-      "Solve a trigonometric equations solvable by substitution example",
-      "Check solutions in [0, 2π)"
+      "Substitute t = f(x) to reach sin t = m form",
+      "Solve for t first, then unwrap f(x) = t",
+      "Collect twin solutions per period of the outer function"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Split cos x = 1/2 into pi/3 and 5pi/3 on [0, 2pi)",
+      "Invert tan x = 2 via arctan 2 + k*pi",
+      "Fall back to arcsin/arccos for nonstandard values"
     ]
   }
 ]

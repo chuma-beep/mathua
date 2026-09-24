@@ -3,27 +3,27 @@
     "label": "Using reference angles to rewrite angles",
     "section": "Using reference angles to rewrite angles",
     "subgoals": [
-      "Understand using reference angles to rewrite angles",
-      "Use using reference angles to rewrite angles to rewrite an angle",
-      "Check the quadrant sign"
+      "Drop to the acute angle alpha against the x-axis",
+      "Strip multiples of 2pi to reach a standard form",
+      "Fix the sign from the quadrant of theta"
     ]
   },
   {
     "label": "Reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
     "section": "Reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
     "subgoals": [
-      "Understand reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
-      "Apply reduction formulas for \\\\( \\pi/2 + \\alpha \\\\)",
-      "Check the result"
+      "Rotate alpha past vertical into quadrant II",
+      "Swap to sin(pi/2 + alpha) = cos(alpha), cos = -sin(alpha)",
+      "Read the cosine minus sign off the unit circle"
     ]
   },
   {
     "label": "Reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
     "section": "Reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
     "subgoals": [
-      "Understand reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
-      "Apply reduction formulas for \\\\( \\pi/2 - \\alpha \\\\)",
-      "Check the result"
+      "Fold back from vertical into quadrant I",
+      "Swap to sin(pi/2 - alpha) = cos(alpha), cos = sin(alpha)",
+      "Keep all signs positive inside quadrant I"
     ]
   }
 ]

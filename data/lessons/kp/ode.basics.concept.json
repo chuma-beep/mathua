@@ -3,27 +3,27 @@
     "label": "What Are Differential Equations?",
     "section": "What Are Differential Equations?",
     "subgoals": [
-      "Define what is a differential equation",
-      "Follow the worked example",
-      "Apply the rule"
+      "Bind F(x, f, f', ..., f^(n)) = 0 on interval I",
+      "Spot y' + x*y = 0 as a first-order sample",
+      "Distinguish general, particular, and initial-value solutions"
     ]
   },
   {
     "label": "Order of a differential equation",
     "section": "Order of a differential equation",
     "subgoals": [
-      "Understand order of a differential equation",
-      "Apply order of a differential equation",
-      "Check the result"
+      "Scan for the highest derivative present",
+      "Grade the sample equation by its y'' term",
+      "Count one constant per order in the general solution"
     ]
   },
   {
     "label": "Forms and Types of Differential Equations",
     "section": "Forms and Types of Differential Equations",
     "subgoals": [
-      "Understand forms and types of differential equations",
-      "Apply forms and types of differential equations",
-      "Check the result"
+      "Solve normal form y^(n) = F(x, y, ..., y^(n-1))",
+      "Detect autonomous form like y' = y^2 - 1",
+      "Frame the Cauchy problem with y(x0) = y0"
     ]
   }
 ]

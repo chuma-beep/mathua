@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "State the definition",
-      "Apply definition in a worked example",
-      "Verify with an identity or example"
+      "Square the side via c^2 = a^2 + b^2 - 2ab*cos(theta)",
+      "Split b at a*cos(theta) under altitude a*sin(theta)",
+      "Collapse cos^2 + sin^2 to 1 for the formula"
     ]
   },
   {
     "label": "Vector interpretation",
     "section": "Vector interpretation",
     "subgoals": [
-      "Understand vector interpretation",
-      "Apply vector interpretation to solve a triangle",
-      "Check for ambiguous or special cases"
+      "Encode sides a, b as vectors u, v from vertex O",
+      "Expand ||v - u||^2 into norms minus 2u.v",
+      "Trade u.v for ab*cos(theta) to land the formula"
     ]
   },
   {
     "label": "Law of cosines",
     "section": "",
     "subgoals": [
-      "Understand law of cosines",
-      "Apply law of cosines to solve problems",
-      "Check the result and refine"
+      "Plug a = 8, b = 6, theta = 60 deg to get c = 2*sqrt(13)",
+      "Isolate cos(theta) = (a^2 + b^2 - c^2)/2ab as in the 5-7-9 case",
+      "Flag an obtuse angle when the numerator goes negative"
     ]
   }
 ]

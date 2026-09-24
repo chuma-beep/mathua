@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Understand introduction",
-      "Apply introduction",
-      "Check the result"
+      "Divide sin(theta) by cos(theta) for tan(theta)",
+      "Divide cos(theta) by sin(theta) for cot(theta)",
+      "Exclude zeros of cosine for tan, of sine for cot"
     ]
   },
   {
     "label": "Tangent",
     "section": "Tangent",
     "subgoals": [
-      "Understand tangent",
-      "Evaluate tangent",
-      "Check the identity"
+      "Read tan(theta) as segment ST on the line x = 1",
+      "Prove similarity OST ~ ORP for the sin/cos ratio",
+      "Restrict theta != pi/2 + k*pi where cosine vanishes"
     ]
   },
   {
     "label": "Common values of the tangent",
     "section": "Common values of the tangent",
     "subgoals": [
-      "Understand common values of the tangent",
-      "Evaluate common values of the tangent",
-      "Check the identity"
+      "Recall tan 0 = 0, tan pi/6 = 1/sqrt(3), tan pi/4 = 1",
+      "Read tan pi/3 = sqrt(3) with sign flips for negatives",
+      "Extend by oddness tan(-x) = -tan x"
     ]
   }
 ]

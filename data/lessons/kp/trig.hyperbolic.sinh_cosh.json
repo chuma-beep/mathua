@@ -3,27 +3,27 @@
     "label": "Introduction to hyperbolic sine and cosine",
     "section": "Introduction to hyperbolic sine and cosine",
     "subgoals": [
-      "Understand introduction to hyperbolic sine and cosine",
-      "Apply introduction to hyperbolic sine and cosine",
-      "Check via exponential form"
+      "Cut a hyperbolic sector of area x/2 on X^2 - Y^2 = 1",
+      "Read sinh x as the vertical coordinate Y_P",
+      "Read cosh x as the horizontal coordinate X_P"
     ]
   },
   {
     "label": "Fundamental hyperbolic identity",
     "section": "Fundamental hyperbolic identity",
     "subgoals": [
-      "Understand fundamental hyperbolic identity",
-      "Apply fundamental hyperbolic identity to simplify",
-      "Check by substitution"
+      "Plug (cosh x, sinh x) into X^2 - Y^2 = 1",
+      "Record cosh^2 x - sinh^2 x = 1 as the core identity",
+      "Contrast the minus sign against the circle case"
     ]
   },
   {
     "label": "Hyperbolic identities",
     "section": "Hyperbolic identities",
     "subgoals": [
-      "Understand hyperbolic identities",
-      "Apply hyperbolic identities to simplify",
-      "Check by substitution"
+      "Double via sinh 2x = 2*sinh x*cosh x",
+      "Shift via the sinh(x + y) sum formula",
+      "Expand cosh 2x = 1 + 2*sinh^2 x for even powers"
     ]
   }
 ]

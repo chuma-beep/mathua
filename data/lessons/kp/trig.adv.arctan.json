@@ -3,27 +3,27 @@
     "label": "Arctangent definition",
     "section": "Arctangent definition",
     "subgoals": [
-      "State the arctangent definition",
-      "Apply arctangent definition in a worked example",
-      "Verify with an identity or example"
+      "Invert tan x back to the angle in (-pi/2, pi/2)",
+      "Sort sign of x into quadrant I, IV, or zero",
+      "Push x to +/-infinity toward the +/-pi/2 asymptotes"
     ]
   },
   {
     "label": "Reference values of arctangent",
     "section": "Reference values of arctangent",
     "subgoals": [
-      "Understand reference values of arctangent",
-      "Use reference values of arctangent to rewrite an angle",
-      "Check the quadrant sign"
+      "Recall arctan 1 = pi/4 and arctan sqrt(3) = pi/3",
+      "Negate for negative inputs like arctan(-1) = -pi/4",
+      "Pin arctan 0 = 0 with limits +/-pi/2 at +/-infinity"
     ]
   },
   {
     "label": "Arctangent function",
     "section": "Arctangent function",
     "subgoals": [
-      "Understand arctangent function",
-      "Evaluate arctangent function",
-      "Check the identity"
+      "Trace domain R onto range (-pi/2, pi/2)",
+      "Mirror the graph through the origin via oddness",
+      "Cancel tan(arctan x) = x for every real x"
     ]
   }
 ]

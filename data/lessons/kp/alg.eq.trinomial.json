@@ -3,27 +3,27 @@
     "label": "What are trinomial equations",
     "section": "What are trinomial equations",
     "subgoals": [
-      "Identify a trinomial equation",
-      "Recognize the three terms",
-      "Prepare to factor"
+      "Match the shape a*x^(2n) + b*x^n + c = 0",
+      "Substitute y = x^n for a*y^2 + b*y + c = 0",
+      "Note n = 1 collapses to plain quadratic"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Follow the worked example",
-      "Factor or use the formula",
-      "State the solutions"
+      "Substitute y = x^2 into 3x^4 - 7x^2 + 2 = 0",
+      "Solve 3y^2 - 7y + 2 = 0 via the quadratic formula",
+      "Split y = 2 and y = 1/3 into x = +/-sqrt(y) branches"
     ]
   },
   {
     "label": "Practice the method",
     "section": "",
     "subgoals": [
-      "Set the trinomial to zero",
-      "Factor completely",
-      "Solve each factor"
+      "Set the trinomial equal to zero first",
+      "Factor or run the quadratic formula in y",
+      "Back-substitute x^n = y_i and recheck in the original"
     ]
   }
 ]

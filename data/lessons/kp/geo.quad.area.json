@@ -3,27 +3,27 @@
     "label": "Rectangle",
     "section": "Rectangle",
     "subgoals": [
-      "Define area of rectangles and parallelograms",
-      "Follow the worked example",
-      "Apply the rule"
+      "Tile l rows of w unit squares",
+      "Multiply A = l*w, squares as A = s^2",
+      "Evaluate 8 x 5 = 40 m^2 for the worked case"
     ]
   },
   {
     "label": "Parallelogram",
     "section": "Parallelogram",
     "subgoals": [
-      "Understand parallelogram",
-      "Apply parallelogram",
-      "Check the result"
+      "Slice the end triangle onto the other side",
+      "Multiply base by perpendicular height A = b*h",
+      "Evaluate 7 x 4 = 28 cm^2 ignoring the 5 cm slant"
     ]
   },
   {
     "label": "Units",
     "section": "Units",
     "subgoals": [
-      "Understand units",
-      "Apply units",
-      "Check the result"
+      "Multiply lengths into square units",
+      "Keep height perpendicular, never slanted",
+      "Summarize A = lw, A = s^2, A = bh with square units"
     ]
   }
 ]

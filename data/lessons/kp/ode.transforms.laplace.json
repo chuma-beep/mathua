@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define laplace transforms",
-      "Follow the worked example",
-      "Apply the rule"
+      "Integrate L{f} over e^(-st)f(t) from 0 to infinity",
+      "Enforce convergence s > 0 (s > a for e^(at))",
+      "Map f(t) = 1 to F(s) = 1/s as the base case"
     ]
   },
   {
     "label": "Key Transforms",
     "section": "Key Transforms",
     "subgoals": [
-      "Understand key transforms",
-      "Apply key transforms",
-      "Check the result"
+      "Look up t^n to n!/s^(n+1) and e^(at) to 1/(s - a)",
+      "Look up sin(at) to a/(s^2 + a^2), cos(at) to s/(s^2 + a^2)",
+      "Shift s to s - a for t^n*e^(at) and damped trig"
     ]
   },
   {
     "label": "Transform of Derivatives",
     "section": "Transform of Derivatives",
     "subgoals": [
-      "Understand transform of derivatives",
-      "Apply transform of derivatives",
-      "Check the result"
+      "Trade y' for sY(s) - y(0)",
+      "Trade y'' for s^2*Y - s*y(0) - y'(0)",
+      "Fold initial values into the algebraic equation"
     ]
   }
 ]

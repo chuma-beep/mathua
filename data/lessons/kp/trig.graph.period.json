@@ -3,27 +3,27 @@
     "label": "5.4 Right Triangle Trigonometry",
     "section": "5.4 Right Triangle Trigonometry",
     "subgoals": [
-      "Understand 5.4 right triangle trigonometry",
-      "Apply 5.4 right triangle trigonometry to find sides/angles",
-      "Check with Pythagorean theorem"
+      "Extend circle definitions to right-triangle ratios",
+      "Target 30, 45, 60 deg function values",
+      "Pair cofunctions of complementary angles"
     ]
   },
   {
     "label": "Using Right Triangles to Evaluate Trigonometric Functions",
     "section": "Using Right Triangles to Evaluate Trigonometric Functions",
     "subgoals": [
-      "Understand using right triangles to evaluate trigonometric functions",
-      "Apply using right triangles to evaluate trigonometric functions to find sides/angles",
-      "Check with Pythagorean theorem"
+      "Drop a vertical from (x, y) to form the triangle",
+      "Name opposite, adjacent, hypotenuse around angle t",
+      "Read sin, cos, tan as side ratios"
     ]
   },
   {
     "label": "Understanding Right Triangle Relationships",
     "section": "Understanding Right Triangle Relationships",
     "subgoals": [
-      "Understand understanding right triangle relationships",
-      "Apply understanding right triangle relationships to find sides/angles",
-      "Check with Pythagorean theorem"
+      "Apply SOH-CAH-TOA to angle t",
+      "Compute sin = opposite/hypotenuse, cos = adjacent/hypotenuse",
+      "Divide opposite by adjacent for the tangent"
     ]
   }
 ]

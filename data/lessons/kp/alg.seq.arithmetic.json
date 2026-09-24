@@ -3,27 +3,27 @@
     "label": "What is an arithmetic sequence",
     "section": "What is an arithmetic sequence",
     "subgoals": [
-      "Identify the common difference",
-      "Write the general term",
-      "Generate terms"
+      "Difference consecutive terms for d = a_n - a_(n-1)",
+      "Sort d > 0 increasing, d < 0 decreasing, d = 0 constant",
+      "Write the nth term a_n = a_1 + (n-1)*d"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Follow the worked sequence",
-      "Find specific terms",
-      "Verify the difference"
+      "Seed a_1 = 2 with d = 3",
+      "Generate 2, 5, 8, 11, 14 term by term",
+      "Confirm gaps stay 3 across the list"
     ]
   },
   {
     "label": "Sum of n terms",
     "section": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
     "subgoals": [
-      "Apply the sum formula",
-      "Use the first and last terms",
-      "Compute the total"
+      "Pair first and last terms a_1 + a_n",
+      "Multiply pairs by n/2 for the sum S_n",
+      "Compute totals without listing every term"
     ]
   }
 ]
