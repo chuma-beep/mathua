@@ -23,7 +23,7 @@
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 630 atomic concepts and 21 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1890 worked examples (630 KP shard files × 3 subgoals each) with subgoal labels and 115 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, parent/teacher share links, and graph visualisation. Transcripts export as CSV via the API.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 630 atomic concepts and 22 courses — never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 1890 worked examples (630 KP shard files × 3 subgoals each) with subgoal labels and 181 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, parent/teacher share links, and graph visualisation. Transcripts export as CSV via the API.
 
 ---
 
@@ -134,13 +134,13 @@ Mathua is a single Go binary with one delivery method. The engine core is identi
 Web (React + Next.js) ═══ REST API ═══ Core Engine ── Grading ── Storage
 ```
 
-The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fully documented at **[`docs/architecture.md`](docs/architecture.md)** and in the interactive **[web docs](/docs/architecture)** with Mermaid diagrams.
+The five-layer architecture — UI, API, Core Engine, Grading, Storage — is fully documented at **[`docs/architecture.md`](docs/architecture.md)** and in the interactive **[web docs](/docs/architecture)** with React Flow diagrams and pre-rendered D2 SVGs.
 
 ---
 
 ## Courses and transcripts
 
-21 courses from 4th grade to university are wired through the DAG — including Calculus I/II, Linear Algebra, Discrete Math I/II, Probability & Statistics, Differential Equations, Abstract Algebra I/II, Topology, and Machine Learning. Each course shows mastered/total, percent, and an estimate of days remaining at your daily XP goal. Transcripts export as CSV via `GET /api/transcript?format=csv` and the read-only share link (Settings → Share) lets a parent or teacher follow along.
+22 courses from 4th grade to university are wired through the DAG — including Calculus I/II, Linear Algebra, Discrete Math I/II, Probability & Statistics, Differential Equations, Abstract Algebra I/II, Topology, and Machine Learning. Each course shows mastered/total, percent, and an estimate of days remaining at your daily XP goal. Transcripts export as CSV via `GET /api/transcript?format=csv` and the read-only share link (Settings → Share) lets a parent or teacher follow along.
 
 ## Contributing
 
