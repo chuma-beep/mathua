@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "State the definition",
-      "Apply definition in a worked example",
-      "Verify with an identity or example"
+      "Equate a/sin(alpha) = b/sin(beta) = c/sin(gamma) to 2r",
+      "Drop altitude h to get b*sin(alpha) = a*sin(beta)",
+      "Read the common ratio as the circumdiameter 2r"
     ]
   },
   {
     "label": "The ambiguous case",
     "section": "The ambiguous case",
     "subgoals": [
-      "Understand the ambiguous case",
-      "Apply the ambiguous case to solve a triangle",
-      "Check for ambiguous or special cases"
+      "Isolate sin(beta) = b*sin(alpha)/a from the proportion",
+      "Split into beta and 180 deg - beta candidates",
+      "Keep only candidates with angles summing under 180 deg"
     ]
   },
   {
     "label": "A geometric criterion for the ambiguous case",
     "section": "A geometric criterion for the ambiguous case",
     "subgoals": [
-      "Understand a geometric criterion for the ambiguous case",
-      "Apply a geometric criterion for the ambiguous case to solve a triangle",
-      "Check for ambiguous or special cases"
+      "Compute the altitude b*sin(alpha) against side a",
+      "Sort a below, equal, between, or above b",
+      "Count zero, one, or two triangles from the sort"
     ]
   }
 ]

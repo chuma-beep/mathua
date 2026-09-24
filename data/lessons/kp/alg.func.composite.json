@@ -3,27 +3,27 @@
     "label": "What are composite functions",
     "section": "What are composite functions",
     "subgoals": [
-      "Identify the inner and outer functions",
-      "Substitute the inner output",
-      "Simplify the composition"
+      "Order inner f first, outer g second",
+      "Check f(A) subset B before composing",
+      "Write g o f: x -> g(f(x)) with domain A"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Follow the worked example",
-      "Evaluate at a given input",
-      "State the composed rule"
+      "Plug 2x + 3 into x^2 for (2x + 3)^2",
+      "Evaluate at x = 1 to get 25 as a check",
+      "Note g o f differs from f o g in general"
     ]
   },
   {
     "label": "Composition with the inverse",
     "section": "Composition with the inverse function",
     "subgoals": [
-      "Compose f with its inverse",
-      "Observe the identity result",
-      "Use it to verify inverses"
+      "Compose f(f^-1(x)) to recover x",
+      "Require injective plus surjective for invertibility",
+      "Use the identity round-trip to confirm inverses"
     ]
   }
 ]

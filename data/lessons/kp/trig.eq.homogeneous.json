@@ -3,27 +3,27 @@
     "label": "What are homogeneous trigonometric equations",
     "section": "What are homogeneous trigonometric equations",
     "subgoals": [
-      "Understand what are homogeneous trigonometric equations",
-      "Solve a what are homogeneous trigonometric equations example",
-      "Check solutions in [0, 2π)"
+      "Check every term shares degree n",
+      "Absorb the constant c = 0 for homogeneity",
+      "Rewrite sin 2x as 2*sin x*cos x to homogenize"
     ]
   },
   {
     "label": "Homogeneous trigonometric equations",
     "section": "",
     "subgoals": [
-      "Understand homogeneous trigonometric equations",
-      "Apply homogeneous trigonometric equations to solve problems",
-      "Check the result and refine"
+      "Divide sin x - sqrt(3)*cos x = 0 by cos x",
+      "Collapse sin/cos to tan x = sqrt(3)",
+      "Add k*pi to principal value pi/3"
     ]
   },
   {
     "label": "Homogeneous trigonometric equations",
     "section": "",
     "subgoals": [
-      "Understand homogeneous trigonometric equations",
-      "Apply homogeneous trigonometric equations to solve problems",
-      "Check the result and refine"
+      "Divide the degree-2 mix by cos^2 x",
+      "Substitute t = tan x for t^2 + 2t - 1 = 0",
+      "Solve the quadratic in t, then invert tan"
     ]
   }
 ]

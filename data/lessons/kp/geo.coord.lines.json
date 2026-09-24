@@ -3,27 +3,27 @@
     "label": "What are lines",
     "section": "What are lines",
     "subgoals": [
-      "Define lines in the coordinate plane",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write the implicit form ax + by + c = 0",
+      "Fix a line through any two of its points",
+      "Test membership by substituting (x, y)"
     ]
   },
   {
     "label": "Parallel and perpendicular lines",
     "section": "Parallel and perpendicular lines",
     "subgoals": [
-      "Understand parallel and perpendicular lines",
-      "Apply parallel and perpendicular lines",
-      "Check the result"
+      "Match slopes m_r = m_s for parallels",
+      "Flip to m_r = -1/m_s for perpendiculars",
+      "Read x = k vertical and y = k horizontal directly"
     ]
   },
   {
     "label": "General equation of a line",
     "section": "General equation of a line",
     "subgoals": [
-      "Understand general equation of a line",
-      "Apply general equation of a line",
-      "Check the result"
+      "Expose slope m and intercept q in y = mx + q",
+      "Solve y = 0 for the x-intercept root",
+      "Test (2, 5) against y = 2x + 1 for membership"
     ]
   }
 ]

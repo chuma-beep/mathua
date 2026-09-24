@@ -3,27 +3,27 @@
     "label": "Arcsine",
     "section": "Arcsine",
     "subgoals": [
-      "Understand arcsine",
-      "Evaluate arcsine for principal values",
-      "Check domain and range"
+      "Confine theta to [-pi/2, pi/2] for invertibility",
+      "Cancel sin(arcsin x) = x on [-1, 1]",
+      "Reject |x| > 1 as outside sine's range"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Set sin theta = 1/2 inside [-pi/2, pi/2]",
+      "Read theta = pi/6 from standard sine values",
+      "Confirm pi/6 sits in the principal interval"
     ]
   },
   {
     "label": "Common values of the arcsine",
     "section": "Common values of the arcsine",
     "subgoals": [
-      "Understand common values of the arcsine",
-      "Evaluate common values of the arcsine for principal values",
-      "Check domain and range"
+      "Recall arcsin(1/2) = pi/6 and arcsin(sqrt(3)/2) = pi/3",
+      "Mirror negatives like arcsin(-1/2) = -pi/6",
+      "Pin endpoints arcsin 0 = 0 and arcsin(+/-1) = +/-pi/2"
     ]
   }
 ]

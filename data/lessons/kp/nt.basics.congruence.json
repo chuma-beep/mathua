@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define congruence relations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide a by n for quotient q and remainder r",
+      "Pin 0 <= r < n, e.g. 17 mod 5 = 2",
+      "Write a = b mod n iff n divides a - b"
     ]
   },
   {
     "label": "Modulo of a negative integer",
     "section": "Modulo of a negative integer",
     "subgoals": [
-      "Understand modulo of a negative integer",
-      "Apply modulo of a negative integer",
-      "Check the result"
+      "Solve -7 = q*5 + r with 0 <= r < 5",
+      "Take q = -2 giving r = 3, not -2",
+      "Contrast math remainder with sign-of-dividend %"
     ]
   },
   {
     "label": "Congruence modulo n",
     "section": "Congruence modulo n",
     "subgoals": [
-      "Understand congruence modulo n",
-      "Apply congruence modulo n",
-      "Check the result"
+      "Test 17 = 2 mod 5 via difference 15",
+      "Check reflexive, symmetric, transitive closure",
+      "Reduce large powers mod n before multiplying"
     ]
   }
 ]

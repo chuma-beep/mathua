@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Understand introduction",
-      "Apply introduction",
-      "Check the result"
+      "Meet sine and cosine as circle coordinates",
+      "Set radius 1 so legs equal sin and cos",
+      "Let theta + 2k*pi revisit each point"
     ]
   },
   {
     "label": "Definition of sine and cosine",
     "section": "Definition of sine and cosine",
     "subgoals": [
-      "State the definition of sine and cosine",
-      "Apply definition of sine and cosine in a worked example",
-      "Verify with an identity or example"
+      "Project P onto the y-axis for sine",
+      "Project P onto the x-axis for cosine",
+      "Scale legs by hypotenuse 1 for the ratios"
     ]
   },
   {
     "label": "Fundamental trigonometric identity",
     "section": "Fundamental trigonometric identity",
     "subgoals": [
-      "Understand fundamental trigonometric identity",
-      "Apply fundamental trigonometric identity to simplify",
-      "Check by substitution"
+      "Square and add coordinates for sin^2 + cos^2 = 1",
+      "Clamp the range to [-1, 1] by radius 1",
+      "Repeat every 2pi for the periodic graph"
     ]
   }
 ]

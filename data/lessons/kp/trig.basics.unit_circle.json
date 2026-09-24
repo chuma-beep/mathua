@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "State the definition",
-      "Apply definition in a worked example",
-      "Verify with an identity or example"
+      "Center radius 1 at origin O",
+      "Sweep theta counterclockwise positive, clockwise negative",
+      "Read sin = PR, cos = OR, tan = ST off segments"
     ]
   },
   {
     "label": "Fundamental trigonometric identity",
     "section": "Fundamental trigonometric identity",
     "subgoals": [
-      "Understand fundamental trigonometric identity",
-      "Apply fundamental trigonometric identity to simplify",
-      "Check by substitution"
+      "Fit right triangle ORP with hypotenuse 1",
+      "Add squared legs for sin^2(theta) + cos^2(theta) = 1",
+      "Parametrize every circle point as (cos(theta), sin(theta))"
     ]
   },
   {
     "label": "Angles on the unit circle",
     "section": "Angles on the unit circle",
     "subgoals": [
-      "Understand angles on the unit circle",
-      "Apply angles on the unit circle",
-      "Check the result"
+      "Reduce rotations modulo 360 deg to one turn",
+      "Convert 30 deg to pi/6 via the pi/180 factor",
+      "Read arc length directly as the radian measure"
     ]
   }
 ]

@@ -3,7 +3,7 @@
     "label": "Epsilon-Delta Definition",
     "section": "Epsilon-Delta Definition",
     "subgoals": [
-      "State the epsilon-delta condition at a point",
+      "Trap f(x) within epsilon of f(x0) via a delta ball",
       "Pin down an output tolerance from an input bound",
       "Extend pointwise continuity to the whole map"
     ]
@@ -12,18 +12,18 @@
     "label": "Open Set Definition",
     "section": "Open Set Definition",
     "subgoals": [
-      "Understand open set definition",
-      "Apply open set definition",
-      "Check the result"
+      "Pull back each open set in Y to X",
+      "Drop distances and test openness only",
+      "Match preimages against the epsilon-delta condition"
     ]
   },
   {
     "label": "Equivalent Conditions",
     "section": "Equivalent Conditions",
     "subgoals": [
-      "Understand equivalent conditions",
-      "Apply equivalent conditions",
-      "Check the result"
+      "Compose continuous maps staying continuous",
+      "Push connected sets to connected images",
+      "Push compact sets to compact images with attained extrema"
     ]
   }
 ]

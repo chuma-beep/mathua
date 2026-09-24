@@ -3,27 +3,27 @@
     "label": "Secant",
     "section": "Secant",
     "subgoals": [
-      "Understand secant",
-      "Evaluate secant",
-      "Check the identity"
+      "Invert cos(theta) to sec(theta) = 1/cos(theta)",
+      "Exclude odd multiples of pi/2 from the domain",
+      "Bound |sec| >= 1 from the tangent-line construction"
     ]
   },
   {
     "label": "Common values of the secant",
     "section": "Common values of the secant",
     "subgoals": [
-      "Understand common values of the secant",
-      "Evaluate common values of the secant",
-      "Check the identity"
+      "Recall sec 0 = 1, sec pi/6 = 2*sqrt(3)/3, sec pi/4 = sqrt(2)",
+      "Read sec pi/3 = 2 from the cosine table",
+      "Mark sec pi/2 as undefined where cosine vanishes"
     ]
   },
   {
     "label": "Trigonometric identities for the secant",
     "section": "Trigonometric identities for the secant",
     "subgoals": [
-      "Understand trigonometric identities for the secant",
-      "Apply trigonometric identities for the secant to simplify",
-      "Check by substitution"
+      "Divide sin^2 + cos^2 = 1 by cos^2 for 1 + tan^2 = sec^2",
+      "Mirror with even symmetry sec(-x) = sec x",
+      "Rewrite sec*tan as sin/cos^2 for algebraic moves"
     ]
   }
 ]

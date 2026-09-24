@@ -3,27 +3,27 @@
     "label": "Trigonometric inequalities",
     "section": "",
     "subgoals": [
-      "Understand trigonometric inequalities",
-      "Apply trigonometric inequalities to solve problems",
-      "Check the result and refine"
+      "Sketch sin/cos over one 2pi period",
+      "Cut the graph at the boundary value",
+      "Shade the arc satisfying the inequality"
     ]
   },
   {
     "label": "Trigonometric inequalities",
     "section": "",
     "subgoals": [
-      "Understand trigonometric inequalities",
-      "Apply trigonometric inequalities to solve problems",
-      "Check the result and refine"
+      "Transfer unit-circle signs into intervals",
+      "Test one point inside each candidate arc",
+      "Append +2k*pi to every solution arc"
     ]
   },
   {
     "label": "Trigonometric inequalities",
     "section": "",
     "subgoals": [
-      "Understand trigonometric inequalities",
-      "Apply trigonometric inequalities to solve problems",
-      "Check the result and refine"
+      "Intersect solution arcs with the given domain",
+      "Discard endpoints failing strict inequality",
+      "Union disjoint arcs into the final set"
     ]
   }
 ]

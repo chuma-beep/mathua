@@ -3,27 +3,27 @@
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Define pythagorean theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Square the hypotenuse c^2 = a^2 + b^2",
+      "Invert to legs a = sqrt(c^2 - b^2), b = sqrt(c^2 - a^2)",
+      "Test the converse a^2 + b^2 = c^2 for rightness"
     ]
   },
   {
     "label": "Applications",
     "section": "Applications",
     "subgoals": [
-      "Understand applications",
-      "Apply applications",
-      "Check the result"
+      "Split the square along diagonal DB",
+      "Apply c = sqrt(a^2 + b^2) to each half",
+      "Drop altitude H to halve isosceles triangles"
     ]
   },
   {
     "label": "Pythagorean triples",
     "section": "Pythagorean triples",
     "subgoals": [
-      "Understand pythagorean triples",
-      "Apply pythagorean triples",
-      "Check the result"
+      "Check 3^2 + 4^2 = 5^2 for the (3, 4, 5) triple",
+      "Scale (3, 4, 5) to (6, 8, 10) and (9, 12, 15)",
+      "List (5, 12, 13), (7, 24, 25), (8, 15, 17) as primitives"
     ]
   }
 ]
