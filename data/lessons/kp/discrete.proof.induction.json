@@ -3,27 +3,27 @@
     "label": "Inductive set",
     "section": "Inductive set",
     "subgoals": [
-      "Define mathematical induction",
-      "Follow the worked example",
-      "Apply the rule"
+      "Check 0 lands in A",
+      "Close under x -> x+1",
+      "Intersect two inductive sets element by element"
     ]
   },
   {
     "label": "Mathematical induction",
     "section": "Mathematical induction",
     "subgoals": [
-      "Understand mathematical induction",
-      "Apply mathematical induction",
-      "Check the result"
+      "Anchor the base case at n = 0",
+      "Assume the statement at n = k",
+      "Derive it at k+1 from the hypothesis"
     ]
   },
   {
     "label": "Applications: divisibility",
     "section": "Applications: divisibility",
     "subgoals": [
-      "Understand applications: divisibility",
-      "Apply applications: divisibility",
-      "Check the result"
+      "Evaluate the base number directly",
+      "Factor the k+1 expression to expose the hypothesis",
+      "Pull out the divisor from each term"
     ]
   }
 ]

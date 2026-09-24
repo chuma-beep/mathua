@@ -3,27 +3,27 @@
     "label": "Geometric representation",
     "section": "Geometric representation",
     "subgoals": [
-      "Define vector addition and scalar multiplication",
-      "Follow the worked example",
-      "Apply the rule"
+      "Place vectors tail to tail",
+      "Complete the parallelogram diagonal",
+      "Read the diagonal as the sum"
     ]
   },
   {
     "label": "Components and coordinate representation",
     "section": "Components and coordinate representation",
     "subgoals": [
-      "Understand components and coordinate representation",
-      "Apply components and coordinate representation",
-      "Check the result"
+      "Split each vector into x/y/z components",
+      "Add matching components separately",
+      "Reassemble the sum vector"
     ]
   },
   {
     "label": "Vector operations",
     "section": "Vector operations",
     "subgoals": [
-      "Understand vector operations",
-      "Apply vector operations",
-      "Check the result"
+      "Add component-wise for u + v",
+      "Scale each component by r for r v",
+      "Subtract by adding the opposite vector"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define divide complex numbers",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split dividend and divisor into a + bi",
+      "Multiply top and bottom by the conjugate w-bar",
+      "Simplify i^2 to -1 in the denominator"
     ]
   },
   {
     "label": "Sum and difference of complex numbers",
     "section": "Sum and difference of complex numbers",
     "subgoals": [
-      "Understand sum and difference of complex numbers",
-      "Apply sum and difference of complex numbers",
-      "Check the result"
+      "Add real parts and imaginary parts separately",
+      "Subtract component-wise for the difference",
+      "Group into real-plus-imaginary form"
     ]
   },
   {
     "label": "Product of complex numbers",
     "section": "Product of complex numbers",
     "subgoals": [
-      "Understand product of complex numbers",
-      "Apply product of complex numbers",
-      "Check the result"
+      "Expand the product (a+bi)(c+di) first",
+      "Replace i^2 by -1 and collect terms",
+      "Divide the result by |w|^2 via the conjugate"
     ]
   }
 ]

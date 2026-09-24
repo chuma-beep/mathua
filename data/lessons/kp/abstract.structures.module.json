@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define modules: definition, examples, and properties",
-      "Follow the worked example",
-      "Apply the rule"
+      "Add vectors in the abelian group (M,+)",
+      "Scale by r.(u+v) = r.u + r.v",
+      "Split (r+s).v into r.v + s.v"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Multiply 0_R against v to get 0_M",
+      "Negate via (-r).v",
+      "Slide ring elements past the action"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Replace field scalars by ring scalars",
+      "Recover vector spaces when R is a field",
+      "Read Z-modules as abelian groups"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define set operations: union, intersection, complement",
-      "Follow the worked example",
-      "Apply the rule"
+      "List elements by enumeration {a1..a4}",
+      "Describe membership by {x | P(x)}",
+      "Test x IN A versus x NOTIN A"
     ]
   },
   {
     "label": "The universal set",
     "section": "The universal set",
     "subgoals": [
-      "Understand the universal set",
-      "Apply the universal set",
-      "Check the result"
+      "Fix U for the ambient context",
+      "Complement A inside U",
+      "Check A UNION A^c equals U"
     ]
   },
   {
     "label": "Cardinality of finite sets",
     "section": "Cardinality of finite sets",
     "subgoals": [
-      "Understand cardinality of finite sets",
-      "Apply cardinality of finite sets",
-      "Check the result"
+      "Count elements for |A|",
+      "Apply |A UNION B| = |A| + |B| - |A INTERSECT B|",
+      "Compare sizes to test equinumerosity"
     ]
   }
 ]

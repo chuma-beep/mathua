@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define add and subtract complex numbers",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split each z into a + bi",
+      "Read Re(z) = a and Im(z) = b",
+      "Embed real a as a + 0i"
     ]
   },
   {
     "label": "Sum and difference of complex numbers",
     "section": "Sum and difference of complex numbers",
     "subgoals": [
-      "Understand sum and difference of complex numbers",
-      "Apply sum and difference of complex numbers",
-      "Check the result"
+      "Add real parts a + c",
+      "Add imaginary parts b + d",
+      "Combine into (a+c) + (b+d)i"
     ]
   },
   {
     "label": "Product of complex numbers",
     "section": "Product of complex numbers",
     "subgoals": [
-      "Understand product of complex numbers",
-      "Apply product of complex numbers",
-      "Check the result"
+      "Expand (a+bi)(c+di) term by term",
+      "Replace i^2 by -1",
+      "Collect into (ac-bd) + (ad+bc)i"
     ]
   }
 ]

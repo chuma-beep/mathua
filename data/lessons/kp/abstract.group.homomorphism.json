@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define group homomorphisms",
-      "Follow the worked example",
-      "Apply the rule"
+      "Evaluate the map at the zero vector",
+      "Split f(u+v) into f(u) + f(v)",
+      "Pull scalars out as f(cv) = c f(v)"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Track the kernel back to zero",
+      "Push the image forward into the codomain",
+      "Test injectivity via a trivial kernel"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Drop linearity to fall from space to group",
+      "Restrict maps to invertible ones for GL",
+      "Stack spaces and maps into the hierarchy"
     ]
   }
 ]

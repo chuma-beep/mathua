@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define complex conjugate",
-      "Follow the worked example",
-      "Apply the rule"
+      "Flip the sign of Im to form z-bar",
+      "Reflect z across the real axis",
+      "Fix real numbers under conjugation"
     ]
   },
   {
     "label": "Sum and difference of complex numbers",
     "section": "Sum and difference of complex numbers",
     "subgoals": [
-      "Understand sum and difference of complex numbers",
-      "Apply sum and difference of complex numbers",
-      "Check the result"
+      "Conjugate the sum as z-bar + w-bar",
+      "Conjugate the difference as z-bar - w-bar",
+      "Recover Re(z) = (z + z-bar)/2"
     ]
   },
   {
     "label": "Product of complex numbers",
     "section": "Product of complex numbers",
     "subgoals": [
-      "Understand product of complex numbers",
-      "Apply product of complex numbers",
-      "Check the result"
+      "Conjugate the product as z-bar.w-bar",
+      "Compute z.z-bar = a^2 + b^2",
+      "Divide via w-bar over |w|^2"
     ]
   }
 ]

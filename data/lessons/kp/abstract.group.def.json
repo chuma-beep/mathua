@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define definition of a group",
-      "Follow the worked example",
-      "Apply the rule"
+      "Test closure of a.b inside G",
+      "Check (a.b).c equals a.(b.c)",
+      "Solve a.x = e for each inverse"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Cancel a common factor from both sides",
+      "Identify the unique identity e",
+      "Invert each element back to e"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Drop commutativity to step from abelian to group",
+      "Add a second operation to reach a ring",
+      "Restrict nonzero elements under multiplication to find the field"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define eigenvalues and eigenvectors concept",
-      "Follow the worked example",
-      "Apply the rule"
+      "Test whether A maps v onto its own line",
+      "Write the scaling relation Av = lambda v",
+      "Reject the zero vector as an eigenvector"
     ]
   },
   {
     "label": "The characteristic equation",
     "section": "The characteristic equation",
     "subgoals": [
-      "Understand the characteristic equation",
-      "Apply the characteristic equation",
-      "Check the result"
+      "Subtract lambda down the diagonal of A",
+      "Expand det(A - lambda I) into the characteristic polynomial",
+      "Solve for the lambdas scaling each direction"
     ]
   },
   {
     "label": "Eigenspaces",
     "section": "Eigenspaces",
     "subgoals": [
-      "Understand eigenspaces",
-      "Apply eigenspaces",
-      "Check the result"
+      "Plug each lambda into (A - lambda I)v = 0",
+      "Parametrize the solution set for v",
+      "Collect the lines fixed by A"
     ]
   }
 ]

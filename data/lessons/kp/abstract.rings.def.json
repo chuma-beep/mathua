@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define rings and fields",
-      "Follow the worked example",
-      "Apply the rule"
+      "Add inside the abelian group (R,+)",
+      "Multiply with associativity",
+      "Distribute a.(b+c) into a.b + a.c"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Multiply 0 by any element to get 0",
+      "Negate via (-1).a",
+      "Test whether the product commutes"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Forget inverses to drop from field to ring",
+      "Drop the second operation to reach a group",
+      "Restrict scalars from field to ring for a module"
     ]
   }
 ]

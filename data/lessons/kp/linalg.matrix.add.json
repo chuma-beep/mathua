@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define matrix addition and scalar multiplication",
-      "Follow the worked example",
-      "Apply the rule"
+      "Match rows m and columns n of A and B",
+      "Add entries aij + bij position by position",
+      "Write the m x n sum matrix"
     ]
   },
   {
     "label": "Vectors and the zero matrix",
     "section": "Vectors and the zero matrix",
     "subgoals": [
-      "Understand vectors and the zero matrix",
-      "Apply vectors and the zero matrix",
-      "Check the result"
+      "Add the zero matrix without changing entries",
+      "Add column vectors entry by entry",
+      "Confirm the shape stays m x n"
     ]
   },
   {
     "label": "Square matrices and special types",
     "section": "Square matrices and special types",
     "subgoals": [
-      "Understand square matrices and special types",
-      "Apply square matrices and special types",
-      "Check the result"
+      "Split diagonal entries from off-diagonal zeros",
+      "Flip entries across the main diagonal for the transpose",
+      "Negate every entry for the additive inverse"
     ]
   }
 ]

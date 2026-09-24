@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define subgroups and cosets",
-      "Follow the worked example",
-      "Apply the rule"
+      "Test closure under the group operation",
+      "Check inverses stay inside the subset",
+      "Verify the identity lands in the subset"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Multiply out cosets aH element by element",
+      "Count cosets to divide |G| by |H|",
+      "Conjugate via gHg^-1 to test normality"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Nest subgroups inside groups inside rings",
+      "Quotient by a normal subgroup",
+      "Map the quotient onto the homomorphic image"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define matrix multiplication",
-      "Follow the worked example",
-      "Apply the rule"
+      "Match columns of A against rows of B",
+      "Multiply row i of A by column j of B",
+      "Sum the pairwise products for entry cij"
     ]
   },
   {
     "label": "Vectors and the zero matrix",
     "section": "Vectors and the zero matrix",
     "subgoals": [
-      "Understand vectors and the zero matrix",
-      "Apply vectors and the zero matrix",
-      "Check the result"
+      "Multiply A times a column vector",
+      "Read the result as a combination of A's columns",
+      "Add the zero matrix to leave the product unchanged"
     ]
   },
   {
     "label": "Square matrices and special types",
     "section": "Square matrices and special types",
     "subgoals": [
-      "Understand square matrices and special types",
-      "Apply square matrices and special types",
-      "Check the result"
+      "Multiply two diagonal matrices entry by entry",
+      "Track how the transpose reverses factor order",
+      "Spot the identity acting as the multiplicative unit"
     ]
   }
 ]

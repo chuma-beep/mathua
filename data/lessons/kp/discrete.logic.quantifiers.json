@@ -3,27 +3,27 @@
     "label": "Section 0.2 Mathematical Statements",
     "section": "Section 0.2 Mathematical Statements",
     "subgoals": [
-      "Define quantifiers: universal and existential",
-      "Follow the worked example",
-      "Apply the rule"
+      "Sort claims into true/false/non-statements",
+      "Flag questions and commands as non-statements",
+      "Spot the open sentence 3+x = 12"
     ]
   },
   {
     "label": "Subsection  Atomic and Molecular Statements",
     "section": "Subsection  Atomic and Molecular Statements",
     "subgoals": [
-      "Understand subsection  atomic and molecular statements",
-      "Apply subsection  atomic and molecular statements",
-      "Check the result"
+      "Glue atoms with AND, OR, IMPLIES",
+      "Evaluate 3+7 = 12 as false",
+      "Test each row of the truth conditions"
     ]
   },
   {
     "label": "Logical Connectives.",
     "section": "Logical Connectives.",
     "subgoals": [
-      "Understand logical connectives.",
-      "Apply logical connectives.",
-      "Check the result"
+      "Negate FORALL into EXISTS with flipped predicate",
+      "Negate EXISTS into FORALL with flipped predicate",
+      "Translate 'if and only if' into two implications"
     ]
   }
 ]
