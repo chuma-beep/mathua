@@ -34020,41 +34020,6 @@
   "latex": "m = \\frac{m_{0}}{\\sqrt{1 - \\frac{v^{2}}{c^{2}}}},"
  },
  {
-  "file": "data/lessons/teaching/complex.cauchy_riemann.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "tuple or multi-argument form",
-  "latex": "u_{x}=v_{y}, \\qquad u_{y}=-v_{x}"
- },
- {
-  "file": "data/lessons/teaching/complex.euler_identity.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "solve-for (not an identity)",
-  "latex": "e^{i\\pi}+1=0"
- },
- {
-  "file": "data/lessons/teaching/complex.laurent.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "f(z)=\\sum_{n=-\\infty}^{\\infty} a_n (z-z_0)^n"
- },
- {
-  "file": "data/lessons/teaching/complex.modulus.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "disjoint variables",
-  "latex": "|z|=\\sqrt{a^{2}+b^{2}}"
- },
- {
-  "file": "data/lessons/teaching/complex.residue.md",
-  "line": 7,
-  "verdict": "SKIP",
-  "reason": "differential relation",
-  "latex": "\\oint_{C} f(z)\\,dz = 2\\pi i \\sum_{k}\\operatorname{Res}(f,z_{k})"
- },
- {
   "file": "data/lessons/teaching/dec.basics.compare.md",
   "line": 267,
   "verdict": "SKIP",
@@ -35714,27 +35679,6 @@
   "latex": "\\begin{matrix}\n\\frac{1}{4} & & \\frac{2}{4} & & \\frac{3}{4} \\\\\n\\text{one quarter} & + & \\text{two quarters} & = & \\text{three quarters}\n\\end{matrix}"
  },
  {
-  "file": "data/lessons/teaching/ml.cross_entropy.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "unknown macro: \\logy",
-  "latex": "\\text{CE}(y,\\hat{y}) = -y\\log\\hat{y}-(1-y)\\log(1-\\hat{y})"
- },
- {
-  "file": "data/lessons/teaching/ml.cross_entropy.md",
-  "line": 9,
-  "verdict": "SKIP",
-  "reason": "empty side",
-  "latex": "\\text{CE} = -\\sum_c y_c \\log \\hat{y}_c"
- },
- {
-  "file": "data/lessons/teaching/ml.gan.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "set membership",
-  "latex": "\\min_G \\max_D \\mathbb{E}_{x\\sim p_{data}}[\\log D(x)] + \\mathbb{E}_{z}[\\log(1-D(G(z)))]"
- },
- {
   "file": "data/lessons/teaching/ml.momentum.md",
   "line": 7,
   "verdict": "SKIP",
@@ -35747,20 +35691,6 @@
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "m_{t+1}=\\beta_1 m_t+(1-\\beta_1)g_t,\\; v_{t+1}=\\beta_2 v_t+(1-\\beta_2)g_t^2,\\; w_{t+1}=w_t-\\eta \\frac{m_{t+1}}{\\sqrt{v_{t+1}}+\\epsilon}"
- },
- {
-  "file": "data/lessons/teaching/ml.regularization.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "parse: AttributeError",
-  "latex": "L_{\\text{reg}} = L_{\\text{data}} + \\lambda\\|w\\|^{2}"
- },
- {
-  "file": "data/lessons/teaching/ml.transformer.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "parse: Exception",
-  "latex": "\\text{Attention}(Q,K,V)=\\text{softmax}(QK^T/\\sqrt{d_k})V"
  },
  {
   "file": "data/lessons/teaching/nt.bezout.md",
@@ -35847,27 +35777,6 @@
   "latex": "a^p \\equiv a \\pmod{p}"
  },
  {
-  "file": "data/lessons/teaching/nt.legendre.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "environment: cases",
-  "latex": "\\left(\\frac{a}{p}\\right)=\\begin{cases}0 & p\\mid a\\\\ 1 & a\\text{ is quadratic residue mod }p\\\\ -1 & a\\text{ is non-residue mod }p\\end{cases}"
- },
- {
-  "file": "data/lessons/teaching/nt.mobius.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "environment: cases",
-  "latex": "\\mu(n)=\\begin{cases}1 & n=1\\\\ 0 & \\text{some }e_i\\ge2\\\\ (-1)^k & \\text{all }e_i=1\\end{cases}"
- },
- {
-  "file": "data/lessons/teaching/nt.pnt.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "\\pi(x) \\sim \\frac{x}{\\log x}\\quad (x\\to\\infty)"
- },
- {
   "file": "data/lessons/teaching/nt.prime_inf.md",
   "line": 10,
   "verdict": "SKIP",
@@ -35875,32 +35784,11 @@
   "latex": "N = p_1p_2\\cdots p_k + 1"
  },
  {
-  "file": "data/lessons/teaching/nt.quadratic_reciprocity.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "waived: Legendre symbols need distinct odd primes (sampling p,q blind misfires)",
-  "latex": "\\left(\\frac{p}{q}\\right)\\left(\\frac{q}{p}\\right)=(-1)^{\\frac{p-1}{2}\\cdot\\frac{q-1}{2}}"
- },
- {
   "file": "data/lessons/teaching/nt.wilson.md",
   "line": 5,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "(p-1)! \\equiv -1 \\pmod{p}"
- },
- {
-  "file": "data/lessons/teaching/ode.convolution.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "(f*g)(t)=\\int_0^t f(\\tau)g(t-\\tau)\\,d\\tau"
- },
- {
-  "file": "data/lessons/teaching/ode.euler.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "tuple or multi-argument form",
-  "latex": "y_{n+1}=y_n + h\\,f(x_n,y_n), \\quad x_{n+1}=x_n+h"
  },
  {
   "file": "data/lessons/teaching/ode.exact.md",
@@ -36050,20 +35938,6 @@
   "latex": "y_p = -y_1 \\int \\frac{y_2 r}{W} dx + y_2 \\int \\frac{y_1 r}{W} dx"
  },
  {
-  "file": "data/lessons/teaching/ode.rk4.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "tuple or multi-argument form",
-  "latex": "k_1=f(x_n,y_n),\\;k_2=f(x_n+h/2,y_n+hk_1/2),\\;k_3=f(x_n+h/2,y_n+hk_2/2),\\;k_4=f(x_n+h,y_n+hk_3)"
- },
- {
-  "file": "data/lessons/teaching/ode.rk4.md",
-  "line": 7,
-  "verdict": "SKIP",
-  "reason": "definitional binding",
-  "latex": "y_{n+1}=y_n+h(k_1+2k_2+2k_3+k_4)/6"
- },
- {
   "file": "data/lessons/teaching/ode.separable.md",
   "line": 5,
   "verdict": "SKIP",
@@ -36146,13 +36020,6 @@
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\mathbf{x}(t) = X(t)X^{-1}(0)\\mathbf{x}_0 + X(t)\\int_0^t X^{-1}(s)\\mathbf{f}(s) ds"
- },
- {
-  "file": "data/lessons/teaching/ode.variation_params.md",
-  "line": 5,
-  "verdict": "SKIP",
-  "reason": "tuple or multi-argument form",
-  "latex": "y_p = u_1 y_1 + u_2 y_2, \\quad u_1'=-\\frac{y_2 g}{W},\\; u_2'=\\frac{y_1 g}{W}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.discount.md",

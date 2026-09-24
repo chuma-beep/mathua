@@ -22,4 +22,4 @@ So each divisibility condition removes its multiples and the overlap is added ba
 
 ## Three sets and derangements
 
-For three sets there are 3 singles, 3 pairs, and 1 triple: 7 terms with signs $+,-,+$. Derangements count permutations of $n$ with no fixed point by sieving out each $A_i=\{\text{$i$ fixed}\}$: $!n=n!\sum_{k=0}^n(-1)^k/k!$. In general, unions become alternating sums over all nonempty intersections.
+For three sets there are 3 singles, 3 pairs, and 1 triple: 7 terms with signs $+,-,+$. Derangements count permutations of $n$ with no fixed point by sieving out each $A_i$ (the permutations fixing $i$): $!n=n!\sum_{k=0}^n(-1)^k/k!$. In general, unions become alternating sums over all nonempty intersections.

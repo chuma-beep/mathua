@@ -283,12 +283,34 @@ function ConceptContent() {
             )}
 
             <div className="text-center">
-              <Link
-                href={`/session?concept=${encodeURIComponent(conceptId)}`}
-                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
-              >
-                Start practicing {detail.concept.label}
-              </Link>
+              {(() => {
+                // Locked concepts route to the first unmastered prerequisite
+                // instead of dead-ending at the backend prereq gate.
+                const nextPrereq = !detail.unlocked
+                  ? detail.prerequisites.find((p) => p.status !== 'MASTERED')
+                  : undefined
+                const href = nextPrereq
+                  ? `/concept?id=${encodeURIComponent(nextPrereq.id)}`
+                  : `/session?concept=${encodeURIComponent(conceptId)}`
+                const caption = nextPrereq
+                  ? `Start with ${nextPrereq.label}`
+                  : `Start practicing ${detail.concept.label}`
+                return (
+                  <>
+                    <Link
+                      href={href}
+                      className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
+                    >
+                      {caption}
+                    </Link>
+                    {nextPrereq && (
+                      <p className="font-mono text-[11px] text-mathua-muted mt-2">
+                        {detail.concept.label} unlocks after its prerequisites — this one first.
+                      </p>
+                    )}
+                  </>
+                )
+              })()}
             </div>
           </div>
         </section>
