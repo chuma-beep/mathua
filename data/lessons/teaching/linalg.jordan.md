@@ -1,15 +1,25 @@
-# Jordan Normal Form
+# Jordan Canonical Form
 
-**Jordan form:** Over $\mathbb C$, every square $A$ similar to block diagonal $J=\text{diag}(J_{n_1}(\lambda_1),\dots)$ where $J_n(\lambda)=\begin{pmatrix}\lambda&1&\\&\ddots&1\\&&\lambda\end{pmatrix}$.
+**Jordan form:** Every complex matrix is similar to block-diagonal Jordan form: eigenvalues on the diagonal, ones on the superdiagonal within each block. Block sizes encode the gap between algebraic and geometric multiplicity.
 
-## Structure
+## Worked: [[2,1],[0,2]] is one block
 
-### Diagonalizable
-Jordan blocks $1×1$ iff diagonalizable; $[[2,1],[0,2]]$ is single $2×2$ block for $\lambda=2$, not diagonalizable.
+Inspect directly:
+1. Eigenvalue 2 (double root of the characteristic polynomial).
+2. One eigenvector direction only (rank of $A - 2I$ is 1).
+3. So a single $2 \times 2$ block: one Jordan block, already in Jordan form.
 
-### Invariants
-Number of blocks for $\lambda$ = geometric multiplicity; largest block size = exponent of $(x-\lambda)$ in minimal polynomial.
+So a defective matrix shows its block structure on its face: repeated eigenvalue, too few eigenvectors.
 
-## Example
+## Worked: counting blocks in a diagonalizable 3x3
 
-$A=\begin{pmatrix}2&1\\0&2\end{pmatrix}$: Jordan form itself, one block $J_2(2)$, minimal polynomial $(x-2)^2$.
+If diagonalizable:
+1. Every block is $1 \times 1$ (no nontrivial blocks possible).
+2. Three diagonal entries means three blocks.
+3. So block count equals geometric-multiplicity sum: full eigenvector supply.
+
+So diagonalizability is the all-trivial-blocks case; anything else signals defectiveness.
+
+## Minimal polynomial
+
+The largest block size for $\lambda$ is its exponent in the minimal polynomial. Block sizes pin the polynomial exactly — no finer invariant exists.

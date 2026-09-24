@@ -1,29 +1,29 @@
 [
   {
-    "label": "LU Decomposition",
-    "section": "Factoring Matrices",
+    "label": "Worked: solve via Ly=b, Ux=y",
+    "section": "Worked: solve via Ly=b, Ux=y",
     "subgoals": [
-      "Review Factoring Matrices",
-      "Work the example",
-      "Verify"
+      "Solve forward for y",
+      "Solve backward for x",
+      "Skip elimination entirely"
     ]
   },
   {
-    "label": "LU Decomposition — practice 2",
-    "section": "Factoring Matrices",
+    "label": "Worked: det from U",
+    "section": "Worked: det from U",
     "subgoals": [
-      "Review Factoring Matrices",
-      "Work the example",
-      "Verify"
+      "Read det(L) as 1",
+      "Multiply the U diagonal",
+      "Report 6"
     ]
   },
   {
-    "label": "LU Decomposition — practice 3",
-    "section": "Example",
+    "label": "Pivoting",
+    "section": "Pivoting",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Spot the zero pivot",
+      "Swap rows via P",
+      "Default to partial pivoting"
     ]
   }
 ]

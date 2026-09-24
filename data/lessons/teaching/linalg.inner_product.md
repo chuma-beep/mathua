@@ -1,15 +1,25 @@
-# Inner Products and Orthogonality
+# Inner Products
 
-**Inner product:** $\langle u,v\rangle$ satisfies $\langle u,u\rangle\ge0$ with equality iff $u=0$, symmetry, linearity. Standard dot product $\langle u,v\rangle=u\cdot v$; weighted $\langle u,v\rangle=2u_1v_1+u_2v_2$ also works.
+**Inner product:** A symmetric positive-definite bilinear form $\langle u, v\rangle$: linear in each argument, $\langle u, v\rangle = \langle v, u\rangle$, and $\langle u, u\rangle \ge 0$ with equality only for $u = 0$. It turns a vector space into a geometry with lengths and angles.
 
-## Orthogonality
+## Worked: (1,2)·(3,4) = 11
 
-### Cauchy-Schwarz
-$|\langle u,v\rangle|\le\|u\|\|v\|$ with equality iff $u,v$ linearly dependent.
+Compute the dot product:
+1. Multiply componentwise: $1 \cdot 3 = 3$ and $2 \cdot 4 = 8$.
+2. Add: $3 + 8 = 11$.
+3. So $(1,2)\cdot(3,4) = 11$ — and $\|(3,4)\| = 5$ since $\sqrt{9+16} = 5$.
 
-### Gram-Schmidt
-Orthogonalize via $v_2' = v_2 - \text{proj}_{v_1}v_2$ using $\langle v_2,v_1\rangle/\langle v_1,v_1\rangle$.
+So the dot product is multiply-then-add; the norm is its square root at $u = v$.
 
-## Example
+## Worked: weighted inner product on R^2
 
-$u=(1,2)$, $v=(2,1)$: $\langle u,v\rangle=1·2+2·1=4$, not orthogonal.
+Test $\langle u,v\rangle = 2u_1v_1 + u_2v_2$:
+1. Bilinear and symmetric: clear from the formula.
+2. Positive definite: $2u_1^2 + u_2^2 \ge 0$, zero only at $u = 0$.
+3. So it is an inner product — positive weights keep definiteness.
+
+So weights are allowed as long as every weight stays positive; a zero or negative weight breaks it.
+
+## Cauchy-Schwarz
+
+$|\langle u,v\rangle| \le \|u\|\cdot\|v\|$: the angle between vectors has a cosine in $[-1, 1]$. Every inner product space inherits this bound.

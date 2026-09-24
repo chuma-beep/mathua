@@ -1,29 +1,29 @@
 [
   {
-    "label": "QR Decomposition",
-    "section": "Least Squares",
+    "label": "Worked: normalize (1,1)",
+    "section": "Worked: normalize (1,1)",
     "subgoals": [
-      "Review Least Squares",
-      "Work the example",
-      "Verify"
+      "Compute the norm sqrt(2)",
+      "Divide to unit length",
+      "Bank q_1"
     ]
   },
   {
-    "label": "QR Decomposition — practice 2",
-    "section": "Least Squares",
+    "label": "Worked: count R's entries",
+    "section": "Worked: count R's entries",
     "subgoals": [
-      "Review Least Squares",
-      "Work the example",
-      "Verify"
+      "Count 2 diagonal",
+      "Count 1 above",
+      "Trust the structural zeros"
     ]
   },
   {
-    "label": "QR Decomposition — practice 3",
-    "section": "Example",
+    "label": "Back substitution",
+    "section": "Back substitution",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Form Rx = Q^Tb",
+      "Solve bottom-up",
+      "Prefer Householder for stability"
     ]
   }
 ]
