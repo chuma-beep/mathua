@@ -1,29 +1,29 @@
 [
   {
-    "label": "Power Series and Radius of Convergence",
-    "section": "Convergence",
+    "label": "Worked: radius of one over one minus z",
+    "section": "Worked: radius of one over one minus z",
     "subgoals": [
-      "Review Convergence",
-      "Work the example",
-      "Verify"
+      "Sum the geometric series inside the disk",
+      "Locate the pole at distance 1",
+      "Read the radius from the pole distance"
     ]
   },
   {
-    "label": "Power Series and Radius of Convergence — practice 2",
-    "section": "Convergence",
+    "label": "Worked: e to the z has infinite radius",
+    "section": "Worked: e to the z has infinite radius",
     "subgoals": [
-      "Review Convergence",
-      "Work the example",
-      "Verify"
+      "Apply the ratio test to z^n/n!",
+      "Read infinite radius from the zero limit",
+      "Match against e^z being entire"
     ]
   },
   {
-    "label": "Power Series and Radius of Convergence — practice 3",
-    "section": "Example",
+    "label": "Worked: differentiating the geometric series",
+    "section": "Worked: differentiating the geometric series",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Differentiate the series term by term",
+      "Differentiate the closed form 1/(1-z)",
+      "Equate both sides on the disk"
     ]
   }
 ]

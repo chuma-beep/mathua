@@ -1,29 +1,29 @@
 [
   {
-    "label": "Laurent Series",
-    "section": "Annuli and Singularities",
+    "label": "Worked: one over z is its own Laurent series",
+    "section": "Worked: one over z is its own Laurent series",
     "subgoals": [
-      "Review Annuli and Singularities",
-      "Work the example",
-      "Verify"
+      "Write 1/z as the single power z^{-1}",
+      "Read a_{-1} and the zero regular part",
+      "Classify the pole from the finite principal part"
     ]
   },
   {
-    "label": "Laurent Series — practice 2",
-    "section": "Annuli and Singularities",
+    "label": "Worked: one over z squared has residue zero",
+    "section": "Worked: one over z squared has residue zero",
     "subgoals": [
-      "Review Annuli and Singularities",
-      "Work the example",
-      "Verify"
+      "Write 1/z^2 with the z^{-1} slot exposed",
+      "Read the residue a_{-1} = 0",
+      "Conclude the unit-circle integral is zero"
     ]
   },
   {
-    "label": "Laurent Series — practice 3",
-    "section": "Example",
+    "label": "Worked: exponential of one over z is essential",
+    "section": "Worked: exponential of one over z is essential",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Substitute w = 1/z into the exponential series",
+      "Observe the negative powers never stop",
+      "Classify the singularity as essential"
     ]
   }
 ]

@@ -1,19 +1,30 @@
 # Residues and the Residue Theorem
 
-**Residue:** For $f$ with isolated singularity at $z_{0}$, $\operatorname{Res}(f,z_{0})$ is the coefficient $a_{-1}$ of $(z-z_{0})^{-1}$ in its Laurent expansion.
+**Residue:** For $f$ with an isolated singularity at $z_0$, $\operatorname{Res}(f,z_0)$ is the coefficient $a_{-1}$ of $(z-z_0)^{-1}$ in its Laurent expansion. The residue theorem says $\oint_C f(z)\,dz=2\pi i$ times the sum of the residues inside $C$.
 
-**Residue theorem:** If $f$ is analytic inside and on a positively oriented simple closed contour $C$ except at finitely many interior poles $z_{k}$,
+## Worked: residue of one over z
 
-$$\oint_{C} f(z)\,dz = 2\pi i \sum_{k}\operatorname{Res}(f,z_{k})$$
+Find $\operatorname{Res}(1/z,0)$:
+1. Write the Laurent series at 0: $f(z)=z^{-1}$ is already a Laurent expansion.
+2. Read the coefficient of $z^{-1}$: it is $a_{-1}=1$.
+3. Conclude $\operatorname{Res}(f,0)=1$.
 
-## Computing and Using Residues
+So a simple pole shows its residue directly: for $f=g/h$ with a simple zero of $h$ at $z_0$, $\operatorname{Res}(f,z_0)=g(z_0)/h'(z_0)$.
 
-### Simple Poles
-If $f=g/h$ with $g(z_{0})\neq0$ and $h$ has a simple zero at $z_{0}$, then $\operatorname{Res}(f,z_{0})=g(z_{0})/h'(z_{0})$. For $f(z)=1/z$, $\operatorname{Res}(f,0)=1$.
+## Worked: residue of one over z squared
 
-### Closing Contours
-The theorem turns contour integrals into algebra: sum the residues inside $C$ and multiply by $2\pi i$. For $f(z)=1/z^{2}$, the residue at 0 is 0, so $\oint 1/z^{2}dz=0$.
+Find $\operatorname{Res}(1/z^2,0)$:
+1. Write the Laurent series at 0: $f(z)=z^{-2}+0 \cdot z^{-1}$.
+2. Read the coefficient of $z^{-1}$: it is $a_{-1}=0$.
+3. Conclude $\operatorname{Res}(f,0)=0$, so $\oint_{|z|=1} dz/z^2=0$.
 
-## Example
+So higher poles can hide a zero residue: only the $z^{-1}$ coefficient survives integration, since every other power has an antiderivative.
 
-Evaluate $\oint_{|z|=1} \frac{dz}{z}$. One interior pole at 0 with residue 1, so the integral is $2\pi i \cdot 1 = 2\pi i$.
+## Worked: closing the contour on one over z
+
+Evaluate $\oint_{|z|=1} dz/z$ by residues:
+1. List interior singularities: one simple pole at 0 with residue 1.
+2. Sum the residues: the total is 1.
+3. Multiply by $2\pi i$: the integral is $2\pi i \cdot 1=2\pi i$.
+
+So contour integration becomes algebra: sum the enclosed residues and multiply by $2\pi i$.

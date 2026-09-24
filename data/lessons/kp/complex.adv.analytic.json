@@ -1,29 +1,29 @@
 [
   {
-    "label": "Analytic Functions",
-    "section": "Holomorphic vs Continuous",
+    "label": "Worked: z squared is entire",
+    "section": "Worked: z squared is entire",
     "subgoals": [
-      "Review Holomorphic vs Continuous",
-      "Work the example",
-      "Verify"
+      "Compute the four partials of x^2-y^2 and 2xy",
+      "Verify both Cauchy-Riemann equations",
+      "Differentiate directly to get f'(z) = 2z"
     ]
   },
   {
-    "label": "Analytic Functions — practice 2",
-    "section": "Holomorphic vs Continuous",
+    "label": "Worked: the conjugate is analytic nowhere",
+    "section": "Worked: the conjugate is analytic nowhere",
     "subgoals": [
-      "Review Holomorphic vs Continuous",
-      "Work the example",
-      "Verify"
+      "Compute u_x and v_y for conjugate z",
+      "Show the first CR equation fails everywhere",
+      "Conclude no complex derivative exists"
     ]
   },
   {
-    "label": "Analytic Functions — practice 3",
-    "section": "Example",
+    "label": "Worked: modulus squared is analytic only at zero",
+    "section": "Worked: modulus squared is analytic only at zero",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Compute the partials of x^2+y^2",
+      "Force CR to hold only at the origin",
+      "Note the equations hold at no neighborhood"
     ]
   }
 ]
