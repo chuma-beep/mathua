@@ -3,27 +3,27 @@
     "label": "Definition of a continuous random variable",
     "section": "Definition of a continuous random variable",
     "subgoals": [
-      "Define continuous random variables",
-      "Follow the worked example",
-      "Apply the rule"
+      "Map each outcome to a real X value",
+      "Zero out P(X = x0) for exact points",
+      "Drop endpoints without changing the probability"
     ]
   },
   {
     "label": "Probability from the density function",
     "section": "Probability from the density function",
     "subgoals": [
-      "Understand probability from the density function",
-      "Apply probability from the density function",
-      "Check the result"
+      "Check f(x) >= 0 everywhere",
+      "Integrate f over R into 1",
+      "Integrate f from a to b for P(a<X<b)"
     ]
   },
   {
     "label": "Cumulative distribution function",
     "section": "Cumulative distribution function",
     "subgoals": [
-      "Understand cumulative distribution function",
-      "Apply cumulative distribution function",
-      "Check the result"
+      "Accumulate F(x) by integrating f from -inf to x",
+      "Subtract F(b)-F(a) for interval probability",
+      "Differentiate F back into the density f"
     ]
   }
 ]

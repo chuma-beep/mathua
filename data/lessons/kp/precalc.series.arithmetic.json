@@ -3,27 +3,27 @@
     "label": "What is a series",
     "section": "What is a series",
     "subgoals": [
-      "Define finite arithmetic series and the sum formula",
-      "Follow the worked example",
-      "Apply the rule"
+      "Accumulate s_n = a1+...+an term by term",
+      "Stack the partial sums into the sequence {s_n}",
+      "Write the series as a sum over k = 1 to infinity"
     ]
   },
   {
     "label": "Nature of a series",
     "section": "Nature of a series",
     "subgoals": [
-      "Understand nature of a series",
-      "Apply nature of a series",
-      "Check the result"
+      "Take lim s_n: finite means converge, infinite means diverge",
+      "Flag oscillation or missing limits as indeterminate",
+      "Sum |a_k| to test absolute convergence"
     ]
   },
   {
     "label": "Necessary condition for convergence",
     "section": "Necessary condition for convergence",
     "subgoals": [
-      "Understand necessary condition for convergence",
-      "Apply necessary condition for convergence",
-      "Check the result"
+      "Compute lim a_n and demand 0",
+      "Split a_n = s_n - s_(n-1) into S - S = 0",
+      "Reject a_n not tending to 0 as divergent"
     ]
   }
 ]

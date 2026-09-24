@@ -3,27 +3,27 @@
     "label": "What is the expected value of a random variable?",
     "section": "What is the expected value of a random variable?",
     "subgoals": [
-      "Define expected value of a random variable",
-      "Follow the worked example",
-      "Apply the rule"
+      "Weight each x by f(x) and sum into E(X)",
+      "Integrate x*f(x) over R for continuous X",
+      "Balance the distribution at mu = E[X]"
     ]
   },
   {
     "label": "Properties of the expected value of a random variable",
     "section": "Properties of the expected value of a random variable",
     "subgoals": [
-      "Understand properties of the expected value of a random variable",
-      "Apply properties of the expected value of a random variable",
-      "Check the result"
+      "Scale E(cX) out as c*E(X)",
+      "Split E(X+Y) into E(X)+E(Y)",
+      "Preserve X >= Y order into E(X) >= E(Y)"
     ]
   },
   {
     "label": "Expectation for jointly distributed variables",
     "section": "Expectation for jointly distributed variables",
     "subgoals": [
-      "Understand expectation for jointly distributed variables",
-      "Apply expectation for jointly distributed variables",
-      "Check the result"
+      "Weight g(x,y) by the joint f(x,y)",
+      "Double-sum g*f over all pairs for discrete data",
+      "Double-integrate g*f over R^2 for continuous data"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "The central behavior of a data distribution",
     "section": "The central behavior of a data distribution",
     "subgoals": [
-      "Define calculate the mean",
-      "Follow the worked example",
-      "Apply the rule"
+      "Substitute M for every xi inside F without changing it",
+      "Set F to the sum to recover sum(xi)/n",
+      "Compress the whole data set into M"
     ]
   },
   {
     "label": "The mean as the minimum substitution error",
     "section": "The mean as the minimum substitution error",
     "subgoals": [
-      "Understand the mean as the minimum substitution error",
-      "Apply the mean as the minimum substitution error",
-      "Check the result"
+      "Total sum(xi-mu)^2 over candidate mu values",
+      "Minimize the error at mu = xbar",
+      "Balance squared deviations around the mean"
     ]
   },
   {
     "label": "Hölder Mean",
     "section": "Hölder Mean",
     "subgoals": [
-      "Understand hölder mean",
-      "Apply hölder mean",
-      "Check the result"
+      "Plug s = 1, 0, -1, 2 into the Holder Ms",
+      "Recover arithmetic, geometric, harmonic, quadratic means",
+      "Raise xi to s, average, then take the 1/s power"
     ]
   }
 ]

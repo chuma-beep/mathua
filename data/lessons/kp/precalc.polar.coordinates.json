@@ -3,27 +3,27 @@
     "label": "Radial–angular description of a point",
     "section": "Radial–angular description of a point",
     "subgoals": [
-      "Define polar coordinates: conversion between polar and rectangular",
-      "Follow the worked example",
-      "Apply the rule"
+      "Fix the pole O, the polar axis, and CCW orientation",
+      "Project rho at angle theta into x = rho*cos(theta), y = rho*sin(theta)",
+      "Split Q into radial rho = |OQ| plus angle theta"
     ]
   },
   {
     "label": "Determining the angle \\\\(\\theta\\\\)",
     "section": "Determining the angle \\\\(\\theta\\\\)",
     "subgoals": [
-      "Understand determining the angle \\\\(\\theta\\\\)",
-      "Apply determining the angle \\\\(\\theta\\\\)",
-      "Check the result"
+      "Divide y/x into tan(theta) and flag the theta+pi ambiguity",
+      "Pin the quadrant with cos(theta) = x/rho and sin(theta) = y/rho",
+      "Collapse the origin to (0, theta) for any theta"
     ]
   },
   {
     "label": "Non-uniqueness of polar representation",
     "section": "Non-uniqueness of polar representation",
     "subgoals": [
-      "Understand non-uniqueness of polar representation",
-      "Apply non-uniqueness of polar representation",
-      "Check the result"
+      "Add 2*pi*k to theta without moving the point",
+      "Flip (rho,theta) into (-rho,theta+pi) for the same point",
+      "Restrict to rho >= 0, theta in [0,2*pi) for uniqueness"
     ]
   }
 ]

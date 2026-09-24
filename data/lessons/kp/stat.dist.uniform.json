@@ -3,27 +3,27 @@
     "label": "Definition of the uniform distribution",
     "section": "Definition of the uniform distribution",
     "subgoals": [
-      "Define uniform distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Flatten the density to 1/(b-a) on [a,b]",
+      "Price equal-width subintervals equally at w/(b-a)",
+      "Zero out P(X = x0) for single points"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write U(x;a,b) = 1/(b-a)",
+      "Midpoint mu = (a+b)/2 from the endpoints",
+      "Compute sigma^2 = (b-a)^2/12"
     ]
   },
   {
     "label": "Mean of the uniform distribution",
     "section": "Mean of the uniform distribution",
     "subgoals": [
-      "Understand mean of the uniform distribution",
-      "Apply mean of the uniform distribution",
-      "Check the result"
+      "Factor 1/(b-a) out of the x integral",
+      "Evaluate (b^2-a^2)/2 between a and b",
+      "Cancel (b-a) into mu = (a+b)/2"
     ]
   }
 ]

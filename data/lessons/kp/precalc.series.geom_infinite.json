@@ -3,27 +3,27 @@
     "label": "What is a geometric series",
     "section": "What is a geometric series",
     "subgoals": [
-      "Define infinite geometric series convergence and sum",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write the series as a sum of r^n from n = 0 to infinity",
+      "Multiply s_n by r and subtract into (1-r^(n+1))/(1-r)",
+      "Split r=0 (sum 1) from r=1 (diverges)"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Split (3^n+4^n)/5^n into (3/5)^n + (4/5)^n",
+      "Sum 1/(1-3/5) = 5/2 and 1/(1-4/5) = 5",
+      "Add 5/2 + 5 into 15/2"
     ]
   },
   {
     "label": "Determine the nature of the following series and compute their sum.",
     "section": "Determine the nature of the following series and compute their sum.",
     "subgoals": [
-      "Understand determine the nature of the following series and compute their sum.",
-      "Apply determine the nature of the following series and compute their sum.",
-      "Check the result"
+      "Read the ratio r off each listed series",
+      "Test |r| < 1 for convergence",
+      "Sum convergent cases via 1/(1-r)"
     ]
   }
 ]

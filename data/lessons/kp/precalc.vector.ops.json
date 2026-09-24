@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define vector operations: addition, subtraction, scalar multiplication",
-      "Follow the worked example",
-      "Apply the rule"
+      "Scale each vi by ci and add into sum ci*vi",
+      "Sweep a,b over R to trace the plane from v,w",
+      "Drop to one vector for lines through the origin"
     ]
   },
   {
     "label": "Coordinate representation",
     "section": "Coordinate representation",
     "subgoals": [
-      "Understand coordinate representation",
-      "Apply coordinate representation",
-      "Check the result"
+      "Stack each vi into an n-entry column",
+      "Combine matching entries across the columns",
+      "Reduce the vector sum to n scalar combinations"
     ]
   },
   {
     "label": "Matrix–Vector interpretation",
     "section": "Matrix–Vector interpretation",
     "subgoals": [
-      "Understand matrix–vector interpretation",
-      "Apply matrix–vector interpretation",
-      "Check the result"
+      "Pack v1..vk as the columns of A",
+      "Pack c1..ck into the coefficient vector c",
+      "Read A*c as c1*v1 + ... + ck*vk"
     ]
   }
 ]

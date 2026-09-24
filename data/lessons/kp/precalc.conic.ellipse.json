@@ -3,27 +3,27 @@
     "label": "Introduction to conic sections",
     "section": "Introduction to conic sections",
     "subgoals": [
-      "Define ellipses: standard form, vertices, and foci",
-      "Follow the worked example",
-      "Apply the rule"
+      "Collect the six terms into f(x,y) = 0",
+      "Check a11 and a22 are both nonzero",
+      "Name the cone cut circle, parabola, ellipse, or hyperbola"
     ]
   },
   {
     "label": "What is an ellipse",
     "section": "What is an ellipse",
     "subgoals": [
-      "Understand what is an ellipse",
-      "Apply what is an ellipse",
-      "Check the result"
+      "Add PF1 + PF2 and set the sum to 2a",
+      "Place the foci at (-c, 0) and (c, 0)",
+      "Measure the axes as 2a across and 2b tall"
     ]
   },
   {
     "label": "Why is the sum of distances to the foci always constant in an ellipse?",
     "section": "Why is the sum of distances to the foci always constant in an ellipse?",
     "subgoals": [
-      "Understand why is the sum of distances to the foci always constant in an ellipse?",
-      "Apply why is the sum of distances to the foci always constant in an ellipse?",
-      "Check the result"
+      "Test each point against PF1 + PF2 = 2a",
+      "Push non-2a points inside or outside the curve",
+      "Read the constant 2a off the vertex (a, 0)"
     ]
   }
 ]

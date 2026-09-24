@@ -3,27 +3,27 @@
     "label": "Geometric representation",
     "section": "Geometric representation",
     "subgoals": [
-      "Define dot product and angle between vectors",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split a vector into magnitude plus direction",
+      "Feed two magnitudes plus their enclosed angle into |u||v|cos",
+      "Slide equal arrows into one free vector"
     ]
   },
   {
     "label": "Components and coordinate representation",
     "section": "Components and coordinate representation",
     "subgoals": [
-      "Understand components and coordinate representation",
-      "Apply components and coordinate representation",
-      "Check the result"
+      "Write u, v as triples (u1,u2,u3), (v1,v2,v3)",
+      "Multiply matching components into u1v1+u2v2+u3v3",
+      "Collapse the sum into the scalar u.v"
     ]
   },
   {
     "label": "Vector operations",
     "section": "Vector operations",
     "subgoals": [
-      "Understand vector operations",
-      "Apply vector operations",
-      "Check the result"
+      "Distribute the dot over u + v sums",
+      "Pull scalars out via (lambda*u).v = lambda*(u.v)",
+      "Test orthogonality with u.v = 0"
     ]
   }
 ]

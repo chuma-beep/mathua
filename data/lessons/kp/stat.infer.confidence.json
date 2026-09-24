@@ -3,27 +3,27 @@
     "label": "Point estimation",
     "section": "Point estimation",
     "subgoals": [
-      "Define confidence intervals",
-      "Follow the worked example",
-      "Apply the rule"
+      "Estimate theta with the statistic theta-hat from the sample",
+      "Center E(theta-hat) exactly on theta for unbiasedness",
+      "Shrink Var(Xbar) = sigma^2/n by growing n"
     ]
   },
   {
     "label": "Interval estimation",
     "section": "Interval estimation",
     "subgoals": [
-      "Understand interval estimation",
-      "Apply interval estimation",
-      "Check the result"
+      "Bracket theta between theta-hat_L and theta-hat_U",
+      "Trap the error delta = theta-hat - theta inside the bounds",
+      "Cover theta with probability 1-alpha across samples"
     ]
   },
   {
     "label": "Interval estimation of the mean with known \\\\(\\sigma\\\\)",
     "section": "Interval estimation of the mean with known \\\\(\\sigma\\\\)",
     "subgoals": [
-      "Understand interval estimation of the mean with known \\\\(\\sigma\\\\)",
-      "Apply interval estimation of the mean with known \\\\(\\sigma\\\\)",
-      "Check the result"
+      "Standardize Z = (Xbar-mu)/(sigma/sqrt(n))",
+      "Cut alpha/2 tails with z_(alpha/2) on N(0,1)",
+      "Isolate mu inside the solved inequality"
     ]
   }
 ]

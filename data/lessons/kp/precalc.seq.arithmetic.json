@@ -3,27 +3,27 @@
     "label": "What is an arithmetic sequence",
     "section": "What is an arithmetic sequence",
     "subgoals": [
-      "Define arithmetic sequences: common difference and nth term",
-      "Follow the worked example",
-      "Apply the rule"
+      "Subtract consecutive terms to read d",
+      "Compute a_n = a1 + (n-1)*d directly",
+      "Sort d>0 increasing, d<0 decreasing, d=0 constant"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Seed a1 = 2 and d = 3",
+      "Plug into a_n = 2 + (n-1)*3",
+      "List 2, 5, 8, 11, 14 term by term"
     ]
   },
   {
     "label": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
     "section": "Sum of \\\\(n\\\\) terms of an arithmetic progression",
     "subgoals": [
-      "Understand sum of \\\\(n\\\\) terms of an arithmetic progression",
-      "Apply sum of \\\\(n\\\\) terms of an arithmetic progression",
-      "Check the result"
+      "Pair first and last terms into (a1+an)/2",
+      "Multiply by n into S_n = n(a1+an)/2",
+      "Evaluate S_5 = 5*(2+10)/2 = 30"
     ]
   }
 ]

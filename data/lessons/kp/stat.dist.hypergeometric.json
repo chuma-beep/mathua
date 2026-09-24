@@ -3,27 +3,27 @@
     "label": "Introduction to the hypergeometric distribution",
     "section": "Introduction to the hypergeometric distribution",
     "subgoals": [
-      "Define hypergeometric distribution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Fix population N with K successes",
+      "Draw n items without replacement",
+      "Divide C(K,x)*C(N-K,n-x) by C(N,n)"
     ]
   },
   {
     "label": "Key features",
     "section": "Key features",
     "subgoals": [
-      "Understand key features",
-      "Apply key features",
-      "Check the result"
+      "Write the pmf ratio of binomial coefficients",
+      "Read mu = n*K/N off sample times share",
+      "Multiply the variance by (N-n)/(N-1)"
     ]
   },
   {
     "label": "Mean of the hypergeometric distribution",
     "section": "Mean of the hypergeometric distribution",
     "subgoals": [
-      "Understand mean of the hypergeometric distribution",
-      "Apply mean of the hypergeometric distribution",
-      "Check the result"
+      "Fold x*C(K,x) into K*C(K-1,x-1)",
+      "Sum the reduced hypergeometric into C(N-1,n-1)",
+      "Cancel C(N-1,n-1)/C(N,n) into n/N"
     ]
   }
 ]

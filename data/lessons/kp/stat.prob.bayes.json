@@ -3,27 +3,27 @@
     "label": "What it is and what Bayes’ Theorem is used for",
     "section": "What it is and what Bayes’ Theorem is used for",
     "subgoals": [
-      "Define bayes' theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Multiply likelihood P(B|A) by prior P(A)",
+      "Divide by the evidence P(B)",
+      "Expand P(B) via total probability"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Tabulate P(S)=0.40, P(D|S)=0.95, P(D|not S)=0.02",
+      "Add 0.38+0.012 into P(D) = 0.392",
+      "Divide 0.38/0.392 into P(S|D) approx 0.969"
     ]
   },
   {
     "label": "Glossary",
     "section": "Glossary",
     "subgoals": [
-      "Understand glossary",
-      "Apply glossary",
-      "Check the result"
+      "Tag P(A|B) posterior and P(A) prior",
+      "Tag P(B|A) likelihood and P(B) evidence",
+      "Intersect A and B for the joint probability"
     ]
   }
 ]

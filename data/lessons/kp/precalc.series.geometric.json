@@ -3,27 +3,27 @@
     "label": "What is a geometric series",
     "section": "What is a geometric series",
     "subgoals": [
-      "Define finite geometric series sum",
-      "Follow the worked example",
-      "Apply the rule"
+      "Stack 1 + r + ... + r^n into S_n",
+      "Derive S_n = (1-r^(n+1))/(1-r) via the r*s_n subtraction",
+      "Handle r = 1 as the divergent n+1 case"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Split (3^n+4^n)/5^n into (3/5)^n + (4/5)^n",
+      "Sum finite prefixes with (1-r^(n+1))/(1-r)",
+      "Pass n to infinity to land on 15/2"
     ]
   },
   {
     "label": "Determine the nature of the following series and compute their sum.",
     "section": "Determine the nature of the following series and compute their sum.",
     "subgoals": [
-      "Understand determine the nature of the following series and compute their sum.",
-      "Apply determine the nature of the following series and compute their sum.",
-      "Check the result"
+      "Extract r from each of the three listed series",
+      "Compare |r| against 1",
+      "Evaluate 1/(1-r) wherever |r| < 1"
     ]
   }
 ]
