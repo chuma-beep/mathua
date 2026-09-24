@@ -3,27 +3,27 @@
     "label": "What is cosine similarity",
     "section": "What is cosine similarity",
     "subgoals": [
-      "Define cosine similarity between vectors",
-      "Follow the worked example",
-      "Apply the rule"
+      "Encode each document as a feature vector",
+      "Divide the dot product by both norms",
+      "Read 1 as same direction and 0 as orthogonal"
     ]
   },
   {
     "label": "Distance between vectors and its limitations",
     "section": "Distance between vectors and its limitations",
     "subgoals": [
-      "Understand distance between vectors and its limitations",
-      "Apply distance between vectors and its limitations",
-      "Check the result"
+      "Compute Euclidean distance between endpoints",
+      "Spot long documents dominating the distance",
+      "Switch to the angle to ignore length"
     ]
   },
   {
     "label": "The angle between vectors",
     "section": "The angle between vectors",
     "subgoals": [
-      "Understand the angle between vectors",
-      "Apply the angle between vectors",
-      "Check the result"
+      "Solve cos(theta) = (A.B)/(|A||B|)",
+      "Take arccos to recover theta",
+      "Flag orthogonal pairs at cos = 0"
     ]
   }
 ]

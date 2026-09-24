@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define determinant of a 3x3 matrix",
-      "Follow the worked example",
-      "Apply the rule"
+      "Copy the first two columns beside the matrix for Sarrus",
+      "Sum the three down-right diagonal products",
+      "Subtract the three up-right diagonal products"
     ]
   },
   {
     "label": "Diagonal and triangular matrices",
     "section": "Diagonal and triangular matrices",
     "subgoals": [
-      "Understand diagonal and triangular matrices",
-      "Apply diagonal and triangular matrices",
-      "Check the result"
+      "Spot zeros in every off-diagonal entry",
+      "Read the determinant as the product of diagonal entries",
+      "Multiply the three diagonal entries together"
     ]
   },
   {
     "label": "Laplace expansion",
     "section": "Laplace expansion",
     "subgoals": [
-      "Understand laplace expansion",
-      "Apply laplace expansion",
-      "Check the result"
+      "Strike row i and column j to form each 2x2 minor",
+      "Attach (-1)^(i+j) to each minor",
+      "Sum the three signed 2x2 determinants"
     ]
   }
 ]

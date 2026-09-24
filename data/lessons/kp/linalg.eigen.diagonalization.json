@@ -3,27 +3,27 @@
     "label": "The diagonalization condition",
     "section": "The diagonalization condition",
     "subgoals": [
-      "Define matrix diagonalization",
-      "Follow the worked example",
-      "Apply the rule"
+      "Stack candidate eigenvectors as columns of P",
+      "Check det(P) != 0 for independence",
+      "Form D = P^-1 A P"
     ]
   },
   {
     "label": "Eigenvalues and eigenvectors",
     "section": "Eigenvalues and eigenvectors",
     "subgoals": [
-      "Understand eigenvalues and eigenvectors",
-      "Apply eigenvalues and eigenvectors",
-      "Check the result"
+      "Solve det(A - lambda I) = 0 for the spectrum",
+      "Solve (A - lambda I)v = 0 for each vector",
+      "Pair each eigenvalue with its eigenvector"
     ]
   },
   {
     "label": "Algebraic and geometric multiplicity",
     "section": "Algebraic and geometric multiplicity",
     "subgoals": [
-      "Understand algebraic and geometric multiplicity",
-      "Apply algebraic and geometric multiplicity",
-      "Check the result"
+      "Read algebraic multiplicity off the characteristic polynomial",
+      "Count free variables for the geometric multiplicity",
+      "Compare the two counts to test diagonalizability"
     ]
   }
 ]

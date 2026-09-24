@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define multiply complex numbers",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split each factor into a + bi",
+      "Read off the four pairwise products",
+      "Replace i^2 by -1"
     ]
   },
   {
     "label": "Sum and difference of complex numbers",
     "section": "Sum and difference of complex numbers",
     "subgoals": [
-      "Understand sum and difference of complex numbers",
-      "Apply sum and difference of complex numbers",
-      "Check the result"
+      "Add real parts and imaginary parts separately",
+      "Subtract component-wise for the difference",
+      "Group into real-plus-imaginary form"
     ]
   },
   {
     "label": "Product of complex numbers",
     "section": "Product of complex numbers",
     "subgoals": [
-      "Understand product of complex numbers",
-      "Apply product of complex numbers",
-      "Check the result"
+      "Expand (a+bi)(c+di) term by term",
+      "Collect (ac-bd) + (ad+bc)i",
+      "Scale the modulus by |w| and rotate by arg(w)"
     ]
   }
 ]

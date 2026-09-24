@@ -3,27 +3,27 @@
     "label": "From Cartesian to vector form",
     "section": "From Cartesian to vector form",
     "subgoals": [
-      "Define vector and parametric equations of a line",
-      "Follow the worked example",
-      "Apply the rule"
+      "Fix point P0 on the line",
+      "Attach direction vector v at P0",
+      "Write P - P0 = t v"
     ]
   },
   {
     "label": "Parametric form",
     "section": "Parametric form",
     "subgoals": [
-      "Understand parametric form",
-      "Apply parametric form",
-      "Check the result"
+      "Split P = P0 + t v into coordinates",
+      "Read x = x0 + t vx per axis",
+      "Vary t across R to trace the line"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Plug t = 0 to recover P0",
+      "Plug t = 1 to step one v forward",
+      "Check the traced point against y = mx + q"
     ]
   }
 ]

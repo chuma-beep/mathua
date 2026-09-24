@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define identity matrix and matrix inverses",
-      "Follow the worked example",
-      "Apply the rule"
+      "Multiply A by the candidate inverse both ways",
+      "Confirm both products equal I",
+      "Test det(A) != 0 before inverting"
     ]
   },
   {
     "label": "Properties of the inverse",
     "section": "Properties of the inverse",
     "subgoals": [
-      "Understand properties of the inverse",
-      "Apply properties of the inverse",
-      "Check the result"
+      "Reverse the factor order in (AB)^-1 = B^-1 A^-1",
+      "Transpose then invert in either order",
+      "Cancel A^-1 A to I inside a product"
     ]
   },
   {
     "label": "Computing the inverse: the cofactor method",
     "section": "Computing the inverse: the cofactor method",
     "subgoals": [
-      "Understand computing the inverse: the cofactor method",
-      "Apply computing the inverse: the cofactor method",
-      "Check the result"
+      "Strike row i and column j to form each minor",
+      "Attach (-1)^(i+j) and transpose into the adjugate",
+      "Divide the adjugate by det(A)"
     ]
   }
 ]

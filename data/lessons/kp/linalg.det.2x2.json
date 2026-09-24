@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define determinant of a 2x2 matrix",
-      "Follow the worked example",
-      "Apply the rule"
+      "Multiply a11 by a22 down the main diagonal",
+      "Multiply a21 by a12 across the off diagonal",
+      "Subtract the off-diagonal product from the main product"
     ]
   },
   {
     "label": "Diagonal and triangular matrices",
     "section": "Diagonal and triangular matrices",
     "subgoals": [
-      "Understand diagonal and triangular matrices",
-      "Apply diagonal and triangular matrices",
-      "Check the result"
+      "Spot zeros in every off-diagonal entry",
+      "Read the determinant as the product of diagonal entries",
+      "Multiply the diagonal entries together"
     ]
   },
   {
     "label": "Laplace expansion",
     "section": "Laplace expansion",
     "subgoals": [
-      "Understand laplace expansion",
-      "Apply laplace expansion",
-      "Check the result"
+      "Pick the row or column with the most zeros",
+      "Expand along it with alternating signs",
+      "Sum the signed 1x1 cofactors"
     ]
   }
 ]

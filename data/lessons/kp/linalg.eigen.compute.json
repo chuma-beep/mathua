@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define compute eigenvalues of a 2x2 matrix",
-      "Follow the worked example",
-      "Apply the rule"
+      "Set Av equal to lambda v with v nonzero",
+      "Rearrange into (A - lambda I)v = 0",
+      "Require det(A - lambda I) = 0 for a nontrivial v"
     ]
   },
   {
     "label": "The characteristic equation",
     "section": "The characteristic equation",
     "subgoals": [
-      "Understand the characteristic equation",
-      "Apply the characteristic equation",
-      "Check the result"
+      "Subtract lambda down the diagonal of A",
+      "Expand det(A - lambda I) into a polynomial",
+      "Solve the polynomial roots for lambda"
     ]
   },
   {
     "label": "Eigenspaces",
     "section": "Eigenspaces",
     "subgoals": [
-      "Understand eigenspaces",
-      "Apply eigenspaces",
-      "Check the result"
+      "Plug each lambda back into (A - lambda I)v = 0",
+      "Row-reduce to read the free variables",
+      "Write the basis vectors spanning the null space"
     ]
   }
 ]

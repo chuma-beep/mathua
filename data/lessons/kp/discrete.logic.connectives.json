@@ -3,27 +3,27 @@
     "label": "Section 3.1 Propositional Logic",
     "section": "Section 3.1 Propositional Logic",
     "subgoals": [
-      "Define logical connectives: and, or, not, implies",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split the troll sentence into P and Q",
+      "Assign T/F to each atom",
+      "Combine with AND, OR, IMPLIES"
     ]
   },
   {
     "label": "Subsection  Truth Tables",
     "section": "Subsection  Truth Tables",
     "subgoals": [
-      "Understand subsection  truth tables",
-      "Apply subsection  truth tables",
-      "Check the result"
+      "List all four T/F rows for P,Q",
+      "Compute P AND Q down the column",
+      "Compute P IMPLIES Q with only T->F false"
     ]
   },
   {
     "label": "Subsection  Logical Equivalence",
     "section": "Subsection  Logical Equivalence",
     "subgoals": [
-      "Understand subsection  logical equivalence",
-      "Apply subsection  logical equivalence",
-      "Check the result"
+      "Compare columns row by row",
+      "Rewrite P IMPLIES Q as (NOT P) OR Q",
+      "Push negations inside via De Morgan"
     ]
   }
 ]

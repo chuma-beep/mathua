@@ -3,27 +3,27 @@
     "label": "Geometric representation",
     "section": "Geometric representation",
     "subgoals": [
-      "Define vectors: magnitude and direction",
-      "Follow the worked example",
-      "Apply the rule"
+      "Draw the directed segment from tail to head",
+      "Measure its length for magnitude",
+      "Read its arrowhead for direction"
     ]
   },
   {
     "label": "Components and coordinate representation",
     "section": "Components and coordinate representation",
     "subgoals": [
-      "Understand components and coordinate representation",
-      "Apply components and coordinate representation",
-      "Check the result"
+      "Drop perpendiculars to read x/y/z components",
+      "Compute length via sqrt(x^2 + y^2 + z^2)",
+      "Normalize by length to get the unit direction"
     ]
   },
   {
     "label": "Vector operations",
     "section": "Vector operations",
     "subgoals": [
-      "Understand vector operations",
-      "Apply vector operations",
-      "Check the result"
+      "Add vectors tip to tail",
+      "Scale by stretching along the same line",
+      "Distinguish free vectors from anchored segments"
     ]
   }
 ]

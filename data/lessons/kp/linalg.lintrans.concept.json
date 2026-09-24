@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define linear transformations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Scale each vector by its coefficient ci",
+      "Add the scaled vectors tip to tail",
+      "Read the result as c1 v1 + ... + ck vk"
     ]
   },
   {
     "label": "Coordinate representation",
     "section": "Coordinate representation",
     "subgoals": [
-      "Understand coordinate representation",
-      "Apply coordinate representation",
-      "Check the result"
+      "Fix the standard basis e1..en",
+      "Read off the coordinates of v in that basis",
+      "Stack the coordinates into a column"
     ]
   },
   {
     "label": "Matrix–Vector interpretation",
     "section": "Matrix–Vector interpretation",
     "subgoals": [
-      "Understand matrix–vector interpretation",
-      "Apply matrix–vector interpretation",
-      "Check the result"
+      "Multiply A times x row by column",
+      "Read each output entry as a row-dot-column sum",
+      "Match Ax against the combination of A's columns"
     ]
   }
 ]

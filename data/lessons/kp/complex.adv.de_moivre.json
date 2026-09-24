@@ -3,27 +3,27 @@
     "label": "Motivation for De Moivre’s Theorem",
     "section": "Motivation for De Moivre’s Theorem",
     "subgoals": [
-      "Define de moivre's theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Square (a+ib) by expanding directly",
+      "Count the cross terms as the power grows",
+      "Switch to r(cos th + i sin th) past power 3"
     ]
   },
   {
     "label": "De Moivre's theorem and exponential notation for complex numbers",
     "section": "De Moivre's theorem and exponential notation for complex numbers",
     "subgoals": [
-      "Understand de moivre's theorem and exponential notation for complex numbers",
-      "Apply de moivre's theorem and exponential notation for complex numbers",
-      "Check the result"
+      "Raise r to the nth power",
+      "Multiply the angle by n",
+      "Rewrite as r^n(cos nth + i sin nth)"
     ]
   },
   {
     "label": "A proof by induction",
     "section": "A proof by induction",
     "subgoals": [
-      "Understand a proof by induction",
-      "Apply a proof by induction",
-      "Check the result"
+      "Anchor the base case at n = 1",
+      "Multiply the n-case by (cos th + i sin th)",
+      "Apply angle-addition to reach n+1"
     ]
   }
 ]

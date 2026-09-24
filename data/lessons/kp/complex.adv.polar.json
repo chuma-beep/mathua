@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define polar form of complex numbers",
-      "Follow the worked example",
-      "Apply the rule"
+      "Compute r = sqrt(a^2 + b^2)",
+      "Solve cos th = a/r and sin th = b/r",
+      "Write z = r(cos th + i sin th)"
     ]
   },
   {
     "label": "Operations",
     "section": "Operations",
     "subgoals": [
-      "Understand operations",
-      "Apply operations",
-      "Check the result"
+      "Multiply moduli and add angles",
+      "Divide moduli and subtract angles",
+      "Raise to powers via r^n and n th"
     ]
   },
   {
     "label": "Modulus and argument",
     "section": "Modulus and argument",
     "subgoals": [
-      "Understand modulus and argument",
-      "Apply modulus and argument",
-      "Check the result"
+      "Measure r as distance from the origin",
+      "Read th from the positive real axis",
+      "Normalize th into (-pi,pi]"
     ]
   }
 ]

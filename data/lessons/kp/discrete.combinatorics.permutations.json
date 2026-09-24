@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define permutations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Multiply n.(n-1)...1",
+      "Anchor 0! at 1",
+      "Evaluate 4! as 24"
     ]
   },
   {
     "label": "Simplifying factorial ratios",
     "section": "Simplifying factorial ratios",
     "subgoals": [
-      "Understand simplifying factorial ratios",
-      "Apply simplifying factorial ratios",
-      "Check the result"
+      "Cancel shared factors top and bottom",
+      "Collapse n!/(n-k)! to a falling product",
+      "Strip the common tail"
     ]
   },
   {
     "label": "Factorial in combinatorics",
     "section": "Factorial in combinatorics",
     "subgoals": [
-      "Understand factorial in combinatorics",
-      "Apply factorial in combinatorics",
-      "Check the result"
+      "Count orderings of n distinct objects",
+      "Multiply choices n.(n-1)...1",
+      "Divide by k! when order stops mattering"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Section 0.3 Sets",
     "section": "Section 0.3 Sets",
     "subgoals": [
-      "Define venn diagrams",
-      "Follow the worked example",
-      "Apply the rule"
+      "Parse {x | x+3 IN N} by set-builder",
+      "List {-3,-2,...} by enumeration",
+      "Test -3+3 = 0 for membership"
     ]
   },
   {
     "label": "Subsection  Notation",
     "section": "Subsection  Notation",
     "subgoals": [
-      "Understand subsection  notation",
-      "Apply subsection  notation",
-      "Check the result"
+      "Write x IN N for membership",
+      "Join conditions with AND and OR",
+      "Read x IN N AND -x IN N as {0}"
     ]
   },
   {
     "label": "Special sets.",
     "section": "Special sets.",
     "subgoals": [
-      "Understand special sets.",
-      "Apply special sets.",
-      "Check the result"
+      "Name N, Z, Q, R in the hierarchy",
+      "Spot the empty set with no elements",
+      "Place each number in its smallest set"
     ]
   }
 ]

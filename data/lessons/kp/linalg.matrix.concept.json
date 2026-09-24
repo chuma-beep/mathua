@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define matrices: rows, columns, and entries",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count m rows by n columns",
+      "Index each entry as aij",
+      "Read a23 as row 2 column 3"
     ]
   },
   {
     "label": "Vectors and the zero matrix",
     "section": "Vectors and the zero matrix",
     "subgoals": [
-      "Understand vectors and the zero matrix",
-      "Apply vectors and the zero matrix",
-      "Check the result"
+      "Read a column vector as an m x 1 matrix",
+      "Add the zero matrix entry by entry",
+      "Confirm dimensions match before adding"
     ]
   },
   {
     "label": "Square matrices and special types",
     "section": "Square matrices and special types",
     "subgoals": [
-      "Understand square matrices and special types",
-      "Apply square matrices and special types",
-      "Check the result"
+      "Test squareness by comparing m against n",
+      "Flag symmetric entries across the diagonal",
+      "Name triangular types from the zero pattern"
     ]
   }
 ]

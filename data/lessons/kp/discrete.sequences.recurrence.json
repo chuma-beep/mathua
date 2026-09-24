@@ -3,27 +3,27 @@
     "label": "Section 2.4 Solving Recurrence Relations",
     "section": "Section 2.4 Solving Recurrence Relations",
     "subgoals": [
-      "Define recurrence relations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Unroll a_0 = 1, a_1 = 2 forward",
+      "Guess a closed form from the terms",
+      "Check the guess against a_n = 5a_{n-1} - 6a_{n-2}"
     ]
   },
   {
     "label": "Subsection The Characteristic Root Technique",
     "section": "Subsection The Characteristic Root Technique",
     "subgoals": [
-      "Understand subsection the characteristic root technique",
-      "Apply subsection the characteristic root technique",
-      "Check the result"
+      "Assume a_n = r^n",
+      "Divide through by r^{n-2} for the quadratic",
+      "Solve the quadratic for r"
     ]
   },
   {
     "label": "Characteristic Roots.",
     "section": "Characteristic Roots.",
     "subgoals": [
-      "Understand characteristic roots.",
-      "Apply characteristic roots.",
-      "Check the result"
+      "Split distinct roots into c1 r1^n + c2 r2^n",
+      "Fit c1, c2 to a_0 and a_1",
+      "Collapse repeated roots with an n.r^n term"
     ]
   }
 ]

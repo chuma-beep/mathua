@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define combinations",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count k-subsets ignoring order",
+      "Compute n!/(k!(n-k)!)",
+      "Return 0 when k > n"
     ]
   },
   {
     "label": "Pascal's triangle",
     "section": "Pascal's triangle",
     "subgoals": [
-      "Understand pascal's triangle",
-      "Apply pascal's triangle",
-      "Check the result"
+      "Add the two entries above for Pascal's rule",
+      "Read C(n,k) off row n",
+      "Walk down the triangle to row n"
     ]
   },
   {
     "label": "Fundamental properties of the binomial coefficient",
     "section": "Fundamental properties of the binomial coefficient",
     "subgoals": [
-      "Understand fundamental properties of the binomial coefficient",
-      "Apply fundamental properties of the binomial coefficient",
-      "Check the result"
+      "Cancel k! against n! term by term",
+      "Apply symmetry C(n,k) = C(n,n-k)",
+      "Sum the row to 2^n"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define rank of a matrix",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count the independent rows of A",
+      "Bound the rank by min(m,n)",
+      "Split rank from nullity via rank + nullity = n"
     ]
   },
   {
     "label": "Submatrices and minors",
     "section": "Submatrices and minors",
     "subgoals": [
-      "Understand submatrices and minors",
-      "Apply submatrices and minors",
-      "Check the result"
+      "Delete rows and columns to form a submatrix",
+      "Take the determinant of each square submatrix",
+      "Name each determinant a minor"
     ]
   },
   {
     "label": "Definition via minors",
     "section": "Definition via minors",
     "subgoals": [
-      "Understand definition via minors",
-      "Apply definition via minors",
-      "Check the result"
+      "Search for the largest nonzero minor",
+      "Read its order as the rank",
+      "Confirm all larger minors vanish"
     ]
   }
 ]

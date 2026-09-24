@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define exponential form of complex numbers (euler's formula)",
-      "Follow the worked example",
-      "Apply the rule"
+      "Compute r = sqrt(a^2 + b^2)",
+      "Read th = arg(z) off the plane",
+      "Write z = r e^{i th}"
     ]
   },
   {
     "label": "Properties of the exponential form",
     "section": "Properties of the exponential form",
     "subgoals": [
-      "Understand properties of the exponential form",
-      "Apply properties of the exponential form",
-      "Check the result"
+      "Multiply moduli r1.r2",
+      "Add arguments th1 + th2",
+      "Divide by subtracting arguments"
     ]
   },
   {
     "label": "Roots in exponential form",
     "section": "Roots in exponential form",
     "subgoals": [
-      "Understand roots in exponential form",
-      "Apply roots in exponential form",
-      "Check the result"
+      "Take the nth root of r",
+      "Split 2pi k/n around the circle",
+      "List k = 0..n-1 for all roots"
     ]
   }
 ]

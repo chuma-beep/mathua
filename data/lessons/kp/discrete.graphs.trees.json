@@ -3,27 +3,27 @@
     "label": "Section 4.2 Trees",
     "section": "Section 4.2 Trees",
     "subgoals": [
-      "Define trees and spanning trees",
-      "Follow the worked example",
-      "Apply the rule"
+      "Delete edges until no cycle remains",
+      "Keep every vertex connected",
+      "Count edges to verify n-1"
     ]
   },
   {
     "label": "Definition of a Tree.",
     "section": "Definition of a Tree.",
     "subgoals": [
-      "Understand definition of a tree.",
-      "Apply definition of a tree.",
-      "Check the result"
+      "Test connectedness across all pairs",
+      "Search for any cycle to fail the test",
+      "Accept connected plus acyclic as a tree"
     ]
   },
   {
     "label": "Subsection  Properties of Trees",
     "section": "Subsection  Properties of Trees",
     "subgoals": [
-      "Understand subsection  properties of trees",
-      "Apply subsection  properties of trees",
-      "Check the result"
+      "Count edges against vertices minus one",
+      "Remove any edge to disconnect the tree",
+      "Add any edge to create exactly one cycle"
     ]
   }
 ]

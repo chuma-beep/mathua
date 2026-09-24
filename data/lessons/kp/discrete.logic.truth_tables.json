@@ -3,27 +3,27 @@
     "label": "Section 3.1 Propositional Logic",
     "section": "Section 3.1 Propositional Logic",
     "subgoals": [
-      "Define truth tables",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split the compound claim into atoms P and Q",
+      "Enumerate the four T/F rows",
+      "Evaluate each connective column by column"
     ]
   },
   {
     "label": "Subsection  Truth Tables",
     "section": "Subsection  Truth Tables",
     "subgoals": [
-      "Understand subsection  truth tables",
-      "Apply subsection  truth tables",
-      "Check the result"
+      "List all four T/F rows for P,Q",
+      "Fill P AND Q and P OR Q columns",
+      "Fill P IMPLIES Q false only on T->F"
     ]
   },
   {
     "label": "Subsection  Logical Equivalence",
     "section": "Subsection  Logical Equivalence",
     "subgoals": [
-      "Understand subsection  logical equivalence",
-      "Apply subsection  logical equivalence",
-      "Check the result"
+      "Compare whole columns row by row",
+      "Rewrite P IMPLIES Q as (NOT P) OR Q",
+      "Push negations inside via De Morgan"
     ]
   }
 ]

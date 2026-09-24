@@ -3,27 +3,27 @@
     "label": "Binomial Theorem",
     "section": "Binomial Theorem",
     "subgoals": [
-      "Define binomial theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Expand (a+b)^n into n+1 terms",
+      "Pair a^{n-k} with b^k per term",
+      "Weight each term by C(n,k)"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Read the exponent n off (a+b)^n",
+      "Run k from 0 to n",
+      "Sum C(n,k) a^{n-k} b^k"
     ]
   },
   {
     "label": "Binomial coefficient",
     "section": "Binomial coefficient",
     "subgoals": [
-      "Understand binomial coefficient",
-      "Apply binomial coefficient",
-      "Check the result"
+      "Compute n!/(k!(n-k)!) for each weight",
+      "Read row n of Pascal's triangle",
+      "Match C(n,k) to the kth entry"
     ]
   }
 ]

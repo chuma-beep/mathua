@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define examples of groups",
-      "Follow the worked example",
-      "Apply the rule"
+      "Test integers under addition for closure",
+      "Check nonzero reals under multiplication",
+      "Verify invertible matrices under multiplication"
     ]
   },
   {
     "label": "Properties",
     "section": "Properties",
     "subgoals": [
-      "Understand properties",
-      "Apply properties",
-      "Check the result"
+      "Compute a.a^-1 to reach e",
+      "Iterate powers to find the order of an element",
+      "Separate abelian examples from nonabelian ones"
     ]
   },
   {
     "label": "Algebraic hierarchy",
     "section": "Algebraic hierarchy",
     "subgoals": [
-      "Understand algebraic hierarchy",
-      "Apply algebraic hierarchy",
-      "Check the result"
+      "Climb from monoid to group by adjoining inverses",
+      "Climb from group to ring with a second operation",
+      "Locate each example in the hierarchy"
     ]
   }
 ]
