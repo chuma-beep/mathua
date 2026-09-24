@@ -1,29 +1,29 @@
 [
   {
-    "label": "Legendre Symbol",
-    "section": "Quadratic Residues",
+    "label": "Worked: residues mod 5",
+    "section": "Worked: residues mod 5",
     "subgoals": [
-      "Review Quadratic Residues",
-      "Work the example",
-      "Verify"
+      "Square each residue 1 through 4",
+      "Sort the outputs into residues and non-residues",
+      "Read off (1/5), (4/5), (2/5)"
     ]
   },
   {
-    "label": "Legendre Symbol — practice 2",
-    "section": "Quadratic Residues",
+    "label": "Worked: Euler criterion mod 7",
+    "section": "Worked: Euler criterion mod 7",
     "subgoals": [
-      "Review Quadratic Residues",
-      "Work the example",
-      "Verify"
+      "Halve p-1 to get the exponent 3",
+      "Raise 2 to the 3rd mod 7",
+      "Match the result against the square 3"
     ]
   },
   {
-    "label": "Legendre Symbol — practice 3",
-    "section": "Example",
+    "label": "Worked: the supplement for 2",
+    "section": "Worked: the supplement for 2",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Reduce 17 mod 8",
+      "Apply the plus-or-minus-1 rule",
+      "Confirm with the witness 6"
     ]
   }
 ]

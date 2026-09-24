@@ -1,29 +1,29 @@
 [
   {
-    "label": "Chebyshev Functions",
-    "section": "Prime Counting",
+    "label": "Worked: theta at 10",
+    "section": "Worked: theta at 10",
     "subgoals": [
-      "Review Prime Counting",
-      "Work the example",
-      "Verify"
+      "List the primes 2, 3, 5, 7",
+      "Add their logs to 5.35",
+      "Compare against the asymptote x"
     ]
   },
   {
-    "label": "Chebyshev Functions — practice 2",
-    "section": "Prime Counting",
+    "label": "Worked: von Mangoldt at 8, 9, 12",
+    "section": "Worked: von Mangoldt at 8, 9, 12",
     "subgoals": [
-      "Review Prime Counting",
-      "Work the example",
-      "Verify"
+      "Detect the prime powers 8 and 9",
+      "Name their base-prime logs",
+      "Zero out 12 for its two distinct primes"
     ]
   },
   {
-    "label": "Chebyshev Functions — practice 3",
-    "section": "Example",
+    "label": "Worked: psi at 10",
+    "section": "Worked: psi at 10",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Add the prime-power tail to theta(10)",
+      "Total the sum to 7.83",
+      "Read psi(x) as the sharpest PNT form"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Infinitude of primes",
+    "label": "Euclid's Construction",
     "section": "Euclid's Construction",
     "subgoals": [
-      "Review Euclid's Construction",
-      "Work the example",
-      "Verify"
+      "Multiply the listed primes together",
+      "Add 1 to form N",
+      "Argue N brings a new prime factor"
     ]
   },
   {
-    "label": "Infinitude of primes — practice 2",
-    "section": "Euclid's Construction",
-    "subgoals": [
-      "Review Euclid's Construction",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Infinitude of primes — practice 3",
+    "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Form 2x3x5+1=31",
+      "Check 31 against 2, 3, 5",
+      "Split 30031 into 59x509 for the composite case"
+    ]
+  },
+  {
+    "label": "Why This Proves Infinitude",
+    "section": "Why This Proves Infinitude",
+    "subgoals": [
+      "Assume finitely many primes",
+      "Apply the construction to the full list",
+      "Conclude a contradiction"
     ]
   }
 ]

@@ -1,15 +1,30 @@
 # Primitive Roots
 
-**Primitive root:** $g$ mod $p$ (prime) is a primitive root if $\operatorname{ord}_p(g)=p-1$, i.e. powers $\{g^{0},\dots,g^{p-2}\}$ cover all non-zero residues mod $p$.
+**Primitive root:** For prime \(p\), a base \(g\) is primitive when its order is \(p - 1\): its powers \(g^0\) through \(g^{p-2}\) cover every nonzero residue mod \(p\). Every prime has \(\varphi(p-1)\) of them.
 
-## Existence and Counting
+## Worked: 2 is primitive mod 5
 
-### Primes Have Primitive Roots
-Every prime $p$ has $\varphi(p-1)$ primitive roots. For $p=5$, $\varphi(4)=2$ primitive roots: 2 and 3 (powers of 2 mod 5 are 2,4,3,1).
+List the powers of 2 mod 5:
+1. \(2^0 = 1\), \(2^1 = 2\), \(2^2 = 4\), \(2^3 = 3\) mod 5.
+2. The set 1, 2, 4, 3 is all four nonzero residues.
+3. So the order is 4, which equals \(5 - 1\): base 2 is primitive mod 5.
 
-### Order Characterization
-$g$ is primitive iff no smaller $k<p-1$ gives $g^{k}\equiv1$. 2 mod 7 has order $3\neq6$, so not primitive; 3 mod 7 has order 6, so primitive.
+So one orbit covers the whole group: that is what primitive means.
 
-## Example
+## Worked: 2 is not primitive mod 7
 
-Mod 7: primitive roots are 3 and 5 (each generates $\{1,\dots,6\}$); 2 is not primitive (generates only $\{2,4,1\}$).
+Same base, new modulus:
+1. Powers: \(2^1 = 2\), \(2^2 = 4\), \(2^3 = 1\) mod 7, then the cycle repeats.
+2. The orbit 2, 4, 1 has 3 elements, not 6.
+3. Since 3 differs from \(7 - 1 = 6\), base 2 is not primitive mod 7.
+
+So primitivity depends on the modulus, not the base alone: 2 works mod 5 and fails mod 7.
+
+## Worked: counting them mod 7
+
+The primitive roots mod 7 are exactly the elements of order 6:
+1. Test \(g = 3\): powers run 3, 2, 6, 4, 5, 1, all six distinct, so the order is 6.
+2. Test \(g = 5\): powers run 5, 4, 6, 2, 3, 1, all six distinct, so the order is 6.
+3. Count check: \(\varphi(7-1) = \varphi(6) = 2\), matching the pair 3, 5.
+
+So the count \(\varphi(p-1)\) predicts and listing confirms: exactly 2 primitive roots mod 7.

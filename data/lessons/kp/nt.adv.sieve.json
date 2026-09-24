@@ -1,29 +1,29 @@
 [
   {
-    "label": "Sieve of Eratosthenes and Brun's Sieve",
-    "section": "Sieving Primes",
+    "label": "Worked: sieving to 30",
+    "section": "Worked: sieving to 30",
     "subgoals": [
-      "Review Sieving Primes",
-      "Work the example",
-      "Verify"
+      "Cross out multiples of 2 from 4",
+      "Cross out multiples of 3 from 9",
+      "Collect the 10 survivors"
     ]
   },
   {
-    "label": "Sieve of Eratosthenes and Brun's Sieve — practice 2",
-    "section": "Sieving Primes",
+    "label": "Worked: why start at p squared",
+    "section": "Worked: why start at p squared",
     "subgoals": [
-      "Review Sieving Primes",
-      "Work the example",
-      "Verify"
+      "Factor a composite below p-squared",
+      "Find its prime factor below p",
+      "Conclude smaller primes covered it"
     ]
   },
   {
-    "label": "Sieve of Eratosthenes and Brun's Sieve — practice 3",
-    "section": "Example",
+    "label": "Worked: Brun's bound on twins",
+    "section": "Worked: Brun's bound on twins",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Count the naive inclusion-exclusion terms",
+      "Truncate the sum to keep an upper bound",
+      "Conclude reciprocal twin primes converge"
     ]
   }
 ]

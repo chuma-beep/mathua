@@ -1,29 +1,29 @@
 [
   {
-    "label": "Riemann Zeta Function",
-    "section": "Analytic Continuation",
+    "label": "Worked: Basel at 2",
+    "section": "Worked: Basel at 2",
     "subgoals": [
-      "Review Analytic Continuation",
-      "Work the example",
-      "Verify"
+      "Add the first four reciprocal squares",
+      "Compare the partial sum to pi-squared over 6",
+      "Confirm the sum sits below the limit"
     ]
   },
   {
-    "label": "Riemann Zeta Function — practice 2",
-    "section": "Analytic Continuation",
+    "label": "Worked: Euler product at 2",
+    "section": "Worked: Euler product at 2",
     "subgoals": [
-      "Review Analytic Continuation",
-      "Work the example",
-      "Verify"
+      "Evaluate the p=2 factor as 4/3",
+      "Multiply by the p=3 factor 9/8",
+      "Read the running product toward pi-squared over 6"
     ]
   },
   {
-    "label": "Riemann Zeta Function — practice 3",
-    "section": "Example",
+    "label": "Worked: pole and zeros",
+    "section": "Worked: pole and zeros",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Locate the pole at s=1",
+      "Place the trivial zeros at negative even integers",
+      "State the Riemann hypothesis for the rest"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Primitive Roots",
-    "section": "Existence and Counting",
+    "label": "Worked: 2 is primitive mod 5",
+    "section": "Worked: 2 is primitive mod 5",
     "subgoals": [
-      "Review Existence and Counting",
-      "Work the example",
-      "Verify"
+      "List the powers 1, 2, 4, 3",
+      "Cover all four nonzero residues",
+      "Conclude the order is p-1"
     ]
   },
   {
-    "label": "Primitive Roots — practice 2",
-    "section": "Existence and Counting",
+    "label": "Worked: 2 is not primitive mod 7",
+    "section": "Worked: 2 is not primitive mod 7",
     "subgoals": [
-      "Review Existence and Counting",
-      "Work the example",
-      "Verify"
+      "Cycle the powers 2, 4, 1",
+      "Count only 3 distinct residues",
+      "Reject primitivity against p-1"
     ]
   },
   {
-    "label": "Primitive Roots — practice 3",
-    "section": "Example",
+    "label": "Worked: counting them mod 7",
+    "section": "Worked: counting them mod 7",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Verify order 6 for bases 3 and 5",
+      "Compute phi(6) as the predicted count",
+      "Match the prediction to the pair"
     ]
   }
 ]

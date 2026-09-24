@@ -1,29 +1,29 @@
 [
   {
-    "label": "Chinese remainder theorem",
+    "label": "Constructing the Solution",
     "section": "Constructing the Solution",
     "subgoals": [
-      "Review Constructing the Solution",
-      "Work the example",
-      "Verify"
+      "Check the moduli are coprime",
+      "Build M1, M2 and their inverses",
+      "Assemble x=r1M1y1+r2M2y2"
     ]
   },
   {
-    "label": "Chinese remainder theorem — practice 2",
-    "section": "Constructing the Solution",
+    "label": "Combining Congruences",
+    "section": "Combining Congruences",
     "subgoals": [
-      "Review Constructing the Solution",
-      "Work the example",
-      "Verify"
+      "Split M into M1 and M2",
+      "Invert M1 mod m1 and M2 mod m2",
+      "Add the weighted terms mod M"
     ]
   },
   {
-    "label": "Chinese remainder theorem — practice 3",
+    "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Set M=15 with inverses 2 and 2",
+      "Compute 2x5x2+3x3x2=38",
+      "Reduce to 8 and check both congruences"
     ]
   }
 ]

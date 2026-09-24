@@ -1,29 +1,29 @@
 [
   {
-    "label": "Class Numbers",
-    "section": "Class Number Formula",
+    "label": "Worked: 6 factors two ways",
+    "section": "Worked: 6 factors two ways",
     "subgoals": [
-      "Review Class Number Formula",
-      "Work the example",
-      "Verify"
+      "Factor 6 as 2 times 3 and check irreducibility",
+      "Factor 6 via the conjugate brackets",
+      "Prove the factorizations are distinct"
     ]
   },
   {
-    "label": "Class Numbers — practice 2",
-    "section": "Class Number Formula",
+    "label": "Worked: Gaussian integers have class number 1",
+    "section": "Worked: Gaussian integers have class number 1",
     "subgoals": [
-      "Review Class Number Formula",
-      "Work the example",
-      "Verify"
+      "Round the quotient to the nearest lattice point",
+      "Run the Euclidean algorithm on remainders",
+      "Conclude PID hence UFD hence class number 1"
     ]
   },
   {
-    "label": "Class Numbers — practice 3",
-    "section": "Example",
+    "label": "Worked: the formula at minus 163",
+    "section": "Worked: the formula at minus 163",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Plug D=-163 into the class number formula",
+      "Combine the root and L-value to 1",
+      "Read the L-value as a factorization certificate"
     ]
   }
 ]
