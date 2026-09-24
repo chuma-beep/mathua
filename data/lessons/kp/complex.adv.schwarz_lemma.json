@@ -1,29 +1,29 @@
 [
   {
-    "label": "Schwarz Lemma",
-    "section": "Disk Automorphisms",
+    "label": "Worked: z squared obeys the bound strictly",
+    "section": "Worked: z squared obeys the bound strictly",
     "subgoals": [
-      "Review Disk Automorphisms",
-      "Work the example",
-      "Verify"
+      "Check the hypotheses on the unit disk",
+      "Compare |z|^2 against |z|",
+      "Check the derivative bound at 0"
     ]
   },
   {
-    "label": "Schwarz Lemma — practice 2",
-    "section": "Disk Automorphisms",
+    "label": "Worked: rotations attain the bound",
+    "section": "Worked: rotations attain the bound",
     "subgoals": [
-      "Review Disk Automorphisms",
-      "Work the example",
-      "Verify"
+      "Check the hypotheses for e^{i theta} z",
+      "Compare |f(z)| against |z| exactly",
+      "Check the derivative hits modulus 1"
     ]
   },
   {
-    "label": "Schwarz Lemma — practice 3",
-    "section": "Example",
+    "label": "Worked: bounding a shifted map via Schwarz-Pick",
+    "section": "Worked: bounding a shifted map via Schwarz-Pick",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Identify the automorphism sending 1/2 to 0",
+      "Apply the invariant form at 0 and 1/2",
+      "Verify the bound is saturated"
     ]
   }
 ]

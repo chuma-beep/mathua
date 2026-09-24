@@ -1,29 +1,29 @@
 [
   {
-    "label": "Cauchy-Riemann Equations",
-    "section": "Analyticity Criterion",
+    "label": "Worked: z squared satisfies CR everywhere",
+    "section": "Worked: z squared satisfies CR everywhere",
     "subgoals": [
-      "Review Analyticity Criterion",
-      "Work the example",
-      "Verify"
+      "Differentiate u and v in x",
+      "Differentiate u and v in y",
+      "Match u_x against v_y and u_y against -v_x"
     ]
   },
   {
-    "label": "Cauchy-Riemann Equations — practice 2",
-    "section": "Analyticity Criterion",
+    "label": "Worked: the conjugate fails CR everywhere",
+    "section": "Worked: the conjugate fails CR everywhere",
     "subgoals": [
-      "Review Analyticity Criterion",
-      "Work the example",
-      "Verify"
+      "Differentiate the parts of conjugate z in x",
+      "Differentiate the parts in y",
+      "Show u_x differs from v_y at every point"
     ]
   },
   {
-    "label": "Cauchy-Riemann Equations — practice 3",
-    "section": "Example",
+    "label": "Worked: e to the z satisfies CR everywhere",
+    "section": "Worked: e to the z satisfies CR everywhere",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Differentiate e^x cos y and e^x sin y in x",
+      "Differentiate both parts in y",
+      "Match the cross partials to confirm CR"
     ]
   }
 ]

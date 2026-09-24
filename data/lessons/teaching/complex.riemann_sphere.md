@@ -1,15 +1,30 @@
 # Riemann Sphere and Stereographic Projection
 
-**Riemann sphere:** One-point compactification $\hat{\mathbb C}=\mathbb C\cup\{\infty\}\cong S^{2}$ via stereographic projection from north pole: point $(X,Y,Z)$ on sphere maps to $z=(X+iY)/(1-Z)$.
+**Riemann sphere:** The one-point compactification $\hat{\mathbb C}=\mathbb C \cup \{\infty\}$ is the sphere $S^2$ via stereographic projection from the north pole: $(X,Y,Z)$ maps to $z=(X+iY)/(1-Z)$, and the north pole itself is $\infty$.
 
-## Sphere as Compact Complex Plane
+## Worked: one over z swaps zero and infinity
 
-### Circles to Circles
-Stereographic sends circles on $S^{2}$ to circles or lines in $\mathbb C$; Möbius transformations correspond to rotations of the sphere.
+Track $w=1/z$ on the sphere:
+1. As $z$ approaches 0, $|w|=1/|z|$ blows up, so $w$ tends to the north pole $\infty$.
+2. As $|z|$ grows without bound, $|w|$ tends to 0, the south pole.
+3. Read the swap: 0 and $\infty$ exchange places, a rotation of the sphere.
 
-### Meromorphic on Sphere
-Meromorphic functions on $\hat{\mathbb C}$ are exactly rational functions; behavior at $\infty$ studied via chart $w=1/z$.
+So $\infty$ is an ordinary point of the sphere: behavior there is studied in the chart $w=1/z$, where it becomes behavior at 0.
 
-## Example
+## Worked: the unit circle lifts to the equator
 
-$1/z$ has pole at 0 and zero at $\infty$ on the sphere; the map $z\mapsto1/z$ is rotation of $S^{2}$ swapping north and south poles.
+Lift $|z|=1$ through stereographic projection:
+1. Points with $|z|=1$ satisfy $X^2+Y^2=(1-Z)^2$ on the sphere.
+2. Combined with $X^2+Y^2+Z^2=1$ this forces $Z=0$.
+3. Read the image: the equator $Z=0$, a circle on the sphere.
+
+So stereographic projection sends circles on the sphere to circles or lines in the plane: the equator gives a circle, while any circle through the north pole gives a line.
+
+## Worked: z squared has a double pole at infinity
+
+Study $f(z)=z^2$ at $\infty$ via $w=1/z$:
+1. Substitute: $g(w)=f(1/w)=w^{-2}$.
+2. Read the singularity: a pole of order 2 at $w=0$.
+3. Conclude $z^2$ has a double pole at $\infty$ on the sphere.
+
+So meromorphic functions on the sphere are exactly rational functions: poles of finite order everywhere including $\infty$ leave only quotients of polynomials.

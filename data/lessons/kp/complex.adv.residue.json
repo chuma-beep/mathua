@@ -1,29 +1,29 @@
 [
   {
-    "label": "Residues and the Residue Theorem",
-    "section": "Computing and Using Residues",
+    "label": "Worked: residue of one over z",
+    "section": "Worked: residue of one over z",
     "subgoals": [
-      "Review Computing and Using Residues",
-      "Work the example",
-      "Verify"
+      "Write 1/z as its Laurent expansion at 0",
+      "Read the z^{-1} coefficient",
+      "Record the residue"
     ]
   },
   {
-    "label": "Residues and the Residue Theorem — practice 2",
-    "section": "Computing and Using Residues",
+    "label": "Worked: residue of one over z squared",
+    "section": "Worked: residue of one over z squared",
     "subgoals": [
-      "Review Computing and Using Residues",
-      "Work the example",
-      "Verify"
+      "Write 1/z^2 exposing the empty z^{-1} slot",
+      "Read a_{-1} = 0",
+      "Conclude the closed-loop integral vanishes"
     ]
   },
   {
-    "label": "Residues and the Residue Theorem — practice 3",
-    "section": "Example",
+    "label": "Worked: closing the contour on one over z",
+    "section": "Worked: closing the contour on one over z",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "List the interior pole and its residue",
+      "Sum the enclosed residues",
+      "Multiply by 2 pi i"
     ]
   }
 ]

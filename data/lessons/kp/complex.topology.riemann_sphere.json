@@ -1,29 +1,29 @@
 [
   {
-    "label": "Riemann Sphere and Stereographic Projection",
-    "section": "Sphere as Compact Complex Plane",
+    "label": "Worked: one over z swaps zero and infinity",
+    "section": "Worked: one over z swaps zero and infinity",
     "subgoals": [
-      "Review Sphere as Compact Complex Plane",
-      "Work the example",
-      "Verify"
+      "Send z to 0 and watch 1/z blow up",
+      "Send |z| to infinity and watch 1/z tend to 0",
+      "Read the swap of the two poles"
     ]
   },
   {
-    "label": "Riemann Sphere and Stereographic Projection — practice 2",
-    "section": "Sphere as Compact Complex Plane",
+    "label": "Worked: the unit circle lifts to the equator",
+    "section": "Worked: the unit circle lifts to the equator",
     "subgoals": [
-      "Review Sphere as Compact Complex Plane",
-      "Work the example",
-      "Verify"
+      "Impose |z| = 1 in sphere coordinates",
+      "Combine with the sphere equation to force Z = 0",
+      "Read the equator as the lifted circle"
     ]
   },
   {
-    "label": "Riemann Sphere and Stereographic Projection — practice 3",
-    "section": "Example",
+    "label": "Worked: z squared has a double pole at infinity",
+    "section": "Worked: z squared has a double pole at infinity",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Change chart with w = 1/z",
+      "Read the pole order of w^{-2} at 0",
+      "Transfer the order back to infinity"
     ]
   }
 ]

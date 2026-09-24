@@ -1,29 +1,29 @@
 [
   {
-    "label": "Möbius Transformations",
-    "section": "Sphere Automorphisms",
+    "label": "Worked: one over z is the swap map",
+    "section": "Worked: one over z is the swap map",
     "subgoals": [
-      "Review Sphere Automorphisms",
-      "Work the example",
-      "Verify"
+      "Read the coefficients a, b, c, d",
+      "Check the determinant is nonzero",
+      "Track where 0 and infinity go"
     ]
   },
   {
-    "label": "Möbius Transformations — practice 2",
-    "section": "Sphere Automorphisms",
+    "label": "Worked: one over z fixes the unit circle",
+    "section": "Worked: one over z fixes the unit circle",
     "subgoals": [
-      "Review Sphere Automorphisms",
-      "Work the example",
-      "Verify"
+      "Take moduli of w = 1/z",
+      "Impose |z| = 1",
+      "Conclude the circle maps onto itself"
     ]
   },
   {
-    "label": "Möbius Transformations — practice 3",
-    "section": "Example",
+    "label": "Worked: pinning three points with z minus one over z plus one",
+    "section": "Worked: pinning three points with z minus one over z plus one",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Plug in z = 1 to hit 0",
+      "Plug in z = -1 to hit infinity",
+      "Send z to infinity to hit 1"
     ]
   }
 ]

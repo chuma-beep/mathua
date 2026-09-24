@@ -1,29 +1,29 @@
 [
   {
-    "label": "Euler's Identity",
-    "section": "Five Constants in One Equation",
+    "label": "Worked: e to the i pi is negative one",
+    "section": "Worked: e to the i pi is negative one",
     "subgoals": [
-      "Review Five Constants in One Equation",
-      "Work the example",
-      "Verify"
+      "Split e^{i pi} into cosine and sine parts",
+      "Read cos pi and sin pi",
+      "Recombine to get -1"
     ]
   },
   {
-    "label": "Euler's Identity — practice 2",
-    "section": "Five Constants in One Equation",
+    "label": "Worked: e to the i pi over two is i",
+    "section": "Worked: e to the i pi over two is i",
     "subgoals": [
-      "Review Five Constants in One Equation",
-      "Work the example",
-      "Verify"
+      "Split e^{i pi/2} into cosine and sine parts",
+      "Read cos(pi/2) and sin(pi/2)",
+      "Recombine to get i"
     ]
   },
   {
-    "label": "Euler's Identity — practice 3",
-    "section": "Example",
+    "label": "Worked: e to the two i pi is one",
+    "section": "Worked: e to the two i pi is one",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Split e^{2i pi} into cosine and sine parts",
+      "Read cos(2 pi) and sin(2 pi)",
+      "Recombine to get 1"
     ]
   }
 ]

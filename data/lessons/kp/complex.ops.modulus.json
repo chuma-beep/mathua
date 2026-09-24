@@ -1,29 +1,29 @@
 [
   {
-    "label": "Modulus of a Complex Number",
-    "section": "Geometric Meaning",
+    "label": "Worked: modulus of 3+4i",
+    "section": "Worked: modulus of 3+4i",
     "subgoals": [
-      "Review Geometric Meaning",
-      "Work the example",
-      "Verify"
+      "Square the real and imaginary parts",
+      "Add the squares",
+      "Take the square root for the distance"
     ]
   },
   {
-    "label": "Modulus of a Complex Number — practice 2",
-    "section": "Geometric Meaning",
+    "label": "Worked: modulus squared via the conjugate",
+    "section": "Worked: modulus squared via the conjugate",
     "subgoals": [
-      "Review Geometric Meaning",
-      "Work the example",
-      "Verify"
+      "Form the conjugate",
+      "Multiply z by its conjugate",
+      "Match the product against the squared modulus"
     ]
   },
   {
-    "label": "Modulus of a Complex Number — practice 3",
-    "section": "Example",
+    "label": "Worked: triangle inequality on two vectors",
+    "section": "Worked: triangle inequality on two vectors",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Read the two moduli and add them",
+      "Add the complex numbers and take the modulus",
+      "Compare the sum of moduli against the modulus of the sum"
     ]
   }
 ]

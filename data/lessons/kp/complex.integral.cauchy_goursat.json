@@ -1,29 +1,29 @@
 [
   {
-    "label": "Cauchy-Goursat Theorem",
-    "section": "Consequences",
+    "label": "Worked: integral of z squared over a triangle is zero",
+    "section": "Worked: integral of z squared over a triangle is zero",
     "subgoals": [
-      "Review Consequences",
-      "Work the example",
-      "Verify"
+      "Take the antiderivative z^3/3",
+      "Walk the three edges and telescope",
+      "Close the loop at total zero"
     ]
   },
   {
-    "label": "Cauchy-Goursat Theorem — practice 2",
-    "section": "Consequences",
+    "label": "Worked: one over z breaks the conclusion",
+    "section": "Worked: one over z breaks the conclusion",
     "subgoals": [
-      "Review Consequences",
-      "Work the example",
-      "Verify"
+      "Spot the singularity inside the circle",
+      "Compute the nonzero integral 2 pi i",
+      "Blame the failed analyticity hypothesis"
     ]
   },
   {
-    "label": "Cauchy-Goursat Theorem — practice 3",
-    "section": "Example",
+    "label": "Worked: Goursat bisection on a triangle",
+    "section": "Worked: Goursat bisection on a triangle",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Split the triangle and keep the worst quarter",
+      "Nest the triangles down to a point",
+      "Linearize at the limit point to squeeze to zero"
     ]
   }
 ]
