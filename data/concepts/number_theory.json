@@ -206,7 +206,7 @@
     "label": "Order modulo n",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "nt.basics.crt"
     ],

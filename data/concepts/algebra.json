@@ -649,7 +649,7 @@
     "label": "Equations involving absolute value",
     "domain": "algebra",
     "subdomain": "algebra.equations",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.eq.multi_step"
     ],
@@ -719,7 +719,7 @@
     "label": "Polynomial equations (higher degree)",
     "domain": "algebra",
     "subdomain": "algebra.equations",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.quad.formula"
     ],
@@ -792,7 +792,7 @@
     "label": "Incomplete quadratic equations",
     "domain": "algebra",
     "subdomain": "algebra.quadratics",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.quad.solve_factor"
     ],
@@ -907,7 +907,7 @@
     "label": "Sign analysis method for inequalities",
     "domain": "algebra",
     "subdomain": "algebra.inequalities",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.ineq.multi_step"
     ],
@@ -1104,7 +1104,7 @@
     "label": "Roots of a polynomial",
     "domain": "algebra",
     "subdomain": "algebra.polynomials",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.poly.concept",
       "alg.quad.formula"
@@ -1189,7 +1189,7 @@
     "label": "Gaussian elimination for solving linear systems",
     "domain": "algebra",
     "subdomain": "algebra.systems",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "alg.systems.concept"
     ],

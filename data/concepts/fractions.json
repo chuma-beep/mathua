@@ -367,7 +367,7 @@
     "label": "Fraction comparison word problems",
     "domain": "fractions",
     "subdomain": "frac.compare",
-    "grading_type": "numeric",
+    "grading_type": "multiple_choice",
     "prerequisites": [
       "frac.ops.compare",
       "frac.ops.benchmark"
