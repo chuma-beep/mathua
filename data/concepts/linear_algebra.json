@@ -265,7 +265,7 @@
     "label": "Vector and parametric equations of a line",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
-    "grading_type": "symbolic",
+    "grading_type": "tuple",
     "prerequisites": [
       "linalg.vector.concept"
     ],

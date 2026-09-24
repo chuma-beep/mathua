@@ -800,7 +800,7 @@
   "label": "Sequences: definition and notation",
   "domain": "calculus",
   "subdomain": "calculus.sequences",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "calc.limit.concept"
   ],
@@ -814,7 +814,7 @@
   "label": "Convergent and divergent sequences",
   "domain": "calculus",
   "subdomain": "calculus.sequences",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "calc.seq.concept"
   ],
@@ -1295,7 +1295,7 @@
   "label": "Gradient of a multivariable function",
   "domain": "calculus",
   "subdomain": "calculus.advanced",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "calc.deriv.partial"
   ],
@@ -1380,7 +1380,7 @@
   "label": "Jacobian matrix of a vector function",
   "domain": "calculus",
   "subdomain": "calculus.advanced",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "calc.deriv.partial"
   ],

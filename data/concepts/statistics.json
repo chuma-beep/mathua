@@ -440,7 +440,7 @@
   "label": "Beta distribution",
   "domain": "statistics",
   "subdomain": "statistics.distributions",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "stat.dist.gamma"
   ],

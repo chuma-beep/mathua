@@ -307,7 +307,7 @@
   "label": "Polar coordinates",
   "domain": "geometry",
   "subdomain": "geometry.coordinate",
-  "grading_type": "symbolic",
+  "grading_type": "tuple",
   "prerequisites": [
    "geo.coord.distance"
   ],
