@@ -1,15 +1,25 @@
-# Free Groups and Presentations
+# Free Groups
 
-**Free group $F_n$:** Group with $n$ generators and no relations; $F_1\cong\mathbb Z$, $F_2$ non-abelian free on $a,b$; every group is quotient $F_n/N$ for some $N$ (presentation $\langle X\mid R\rangle$).
+**Free group:** $F(S)$ on a set $S$ is the group of reduced words in $S$ with no relations beyond cancellation: every group with $|S|$ generators is a quotient of it. Free means maximally unconstrained.
 
-## Universal Property
+## Worked: F_1 is Z
 
-### No Relations
-$F_n$ is free product $\mathbb Z*\cdots*\mathbb Z$; Nielsen-Schreier: subgroups of free are free.
+Reduce words in one generator $a$:
+1. Every word collapses to $a^n$ for some integer $n$ (negative $n$ for inverses).
+2. The map $a^n \mapsto n$ is a bijection respecting the operation.
+3. So $F_1 \cong \mathbb Z$: rank 1 free is just the integers.
 
-### Presentations
-$\langle a,b\mid aba^{-1}=b^{-1}\rangle$ gives Klein bottle group; $S_3=\langle a,b\mid a^2=b^3=1,aba=b^{-1}\rangle$.
+So freeness on one generator adds nothing beyond integer arithmetic.
 
-## Example
+## Worked: F_2 is non-abelian
 
-$F_2$ has basis $\{a,b\}$, elements reduced words $ab^{-1}a$; rank 2 non-abelian.
+Compare $aba^{-1}b^{-1}$ against the identity:
+1. No cancellation is possible: the word is already reduced and nonempty.
+2. In particular $ab \neq ba$: the generators do not commute.
+3. So $F_2$ is non-abelian — two free generators already escape commutativity.
+
+So relations are the only source of commutativity; with none imposed, even two generators stay wild.
+
+## Abelianization
+
+Killing all commutators collapses $F_n$ to $\mathbb Z^n$: $F_n/[F_n, F_n] \cong \mathbb Z^n$. The abelianization counts the generators and forgets everything else.

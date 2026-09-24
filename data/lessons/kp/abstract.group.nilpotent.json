@@ -1,29 +1,29 @@
 [
   {
-    "label": "Nilpotent and Solvable Groups",
-    "section": "Hierarchy",
+    "label": "Worked: a group of order 8",
+    "section": "Worked: a group of order 8",
     "subgoals": [
-      "Review Hierarchy",
-      "Work the example",
-      "Verify"
+      "Read 8 as 2^3",
+      "Invoke p-group nilpotence",
+      "Skip further analysis"
     ]
   },
   {
-    "label": "Nilpotent and Solvable Groups — practice 2",
-    "section": "Hierarchy",
+    "label": "Worked: counting Sylows in order 12",
+    "section": "Worked: counting Sylows in order 12",
     "subgoals": [
-      "Review Hierarchy",
-      "Work the example",
-      "Verify"
+      "Force uniqueness from nilpotence",
+      "Count one Sylow 2 and one Sylow 3",
+      "Contrast with the non-nilpotent case"
     ]
   },
   {
-    "label": "Nilpotent and Solvable Groups — practice 3",
-    "section": "Example",
+    "label": "Strictly between",
+    "section": "Strictly between",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Place abelian at class 1",
+      "Pass nilpotent to solvable",
+      "Witness strictness with S_3"
     ]
   }
 ]

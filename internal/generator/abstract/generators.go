@@ -62,6 +62,26 @@ func (g *groupDefGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		{"real numbers", "addition", "yes", "Real numbers under addition satisfy closure, associativity, identity (0), and inverses (-a)."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: name the failing axiom (type one word).
+		type failEntry struct {
+			set       string
+			operation string
+			axiom     string
+			reason    string
+		}
+		failTable := []failEntry{
+			{"natural numbers", "addition", "inverses", "No n gives 3+n=0 in N: inverses fail."},
+			{"odd integers", "addition", "closure", "odd+odd=even leaves the set: closure fails."},
+			{"integers", "multiplication", "inverses", "2 has no integer multiplicative inverse: inverses fail."},
+		}
+		f := failTable[rand.Intn(len(failTable))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("The set of %s under %s is NOT a group. Which axiom fails: closure, identity, or inverses? (type one word)", f.set, f.operation),
+			Answer:      f.axiom,
+			Explanation: f.reason,
+		}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is the set of %s under %s a group? (yes/no)", e.set, e.operation),
 		Answer:      e.isGroup,
@@ -91,6 +111,21 @@ func (g *groupExamplesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{"S₃ (permutations of 3 elements)", "composition", "yes", "S₃ under composition is the symmetric group: closed, associative, identity, and every permutation has an inverse."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: compute an inverse or an order in small modular groups.
+		type invEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		invTable := []invEntry{
+			{"What is the inverse of 2 in Z_5 \\ {0} under multiplication mod 5? (enter a number)", "3", "2×3=6≡1 mod 5, so 3 is the inverse."},
+			{"What is the inverse of 3 in Z_4 under addition? (enter a number)", "1", "3+1=4≡0 mod 4, so 1 is the inverse."},
+			{"What is the order of S_3? (enter a number)", "6", "S_3 has 3! = 6 permutations."},
+		}
+		v := invTable[rand.Intn(len(invTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s under %s a group? (yes/no)", e.set, e.operation),
 		Answer:      e.isGroup,
@@ -173,6 +208,25 @@ func (g *ringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"n×n matrices over R", "yes", "no", "n×n matrices under addition and multiplication form a ring but not a field (matrix multiplication is not commutative)."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: name a witness element with no multiplicative inverse.
+		type witEntry struct {
+			set    string
+			wit    string
+			reason string
+		}
+		witTable := []witEntry{
+			{"Z (integers)", "2", "2 has no integer multiplicative inverse: no integer times 2 is 1."},
+			{"Z_6 (integers mod 6)", "2", "2 has no inverse mod 6 (2×3=6≡0); it is a zero divisor."},
+			{"Z[i] (Gaussian integers)", "2", "2 has no inverse in Z[i]: (a+bi)(c+di)=1 forces norm 1, but N(2)=4."},
+		}
+		w := witTable[rand.Intn(len(witTable))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("Name an element of %s with no multiplicative inverse (enter it)", w.set),
+			Answer:      w.wit,
+			Explanation: w.reason,
+		}
+	}
 	if rand.Intn(2) == 0 {
 		return generator.Problem{
 			Question:    fmt.Sprintf("Is %s a ring under addition and multiplication? (yes/no)", e.set),
@@ -212,6 +266,26 @@ func (g *homomorphismGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		{"f(x)=x mod 2", "Z", "Z₂", "yes", "f(a+b)=(a+b) mod 2 = (a mod 2)+(b mod 2) mod 2 = f(a)+f(b)."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: evaluate a homomorphism at a point.
+		type evalEntry struct {
+			f      string
+			point  string
+			value  string
+			reason string
+		}
+		evalTable := []evalEntry{
+			{"f(x)=2x from Z to Z", "3", "6", "f(3)=2·3=6."},
+			{"f(x)=x mod 2 from Z to Z_2", "5", "1", "5 mod 2 = 1."},
+			{"f(x)=det(x) on GL(2,R)", "I (identity)", "1", "det(I)=1."},
+		}
+		v := evalTable[rand.Intn(len(evalTable))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("For %s, what is f(%s)? (enter the value)", v.f, v.point),
+			Answer:      v.value,
+			Explanation: v.reason,
+		}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s from %s to %s a group homomorphism? (yes/no)", e.f, e.domain, e.codomain),
 		Answer:      e.isHomo,
@@ -293,6 +367,21 @@ func (g *moduleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"R as a vector space over Q", "Q", "yes", "R is a Q-vector space, hence a Q-module, though it is infinite-dimensional over Q."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: dimensions and scalar computations in modules.
+		type modEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		modTable := []modEntry{
+			{"What is the dimension of R^3 as an R-module? (enter a number)", "3", "R^3 is free of rank 3 over R."},
+			{"Is R finite- or infinite-dimensional over Q? (type finite or infinite)", "infinite", "R over Q needs infinitely many basis elements (uncountable vs countable)."},
+			{"In Z_6 as a Z-module, compute 4·5 (enter a number)", "2", "4·5 = 20 ≡ 2 mod 6."},
+		}
+		m := modTable[rand.Intn(len(modTable))]
+		return generator.Problem{Question: m.question, Answer: m.answer, Explanation: m.reason}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s a module over %s? (yes/no)", e.set, e.ring),
 		Answer:      e.isModule,
@@ -320,6 +409,21 @@ func (g *cyclicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"Q under addition", "no", "Q is not cyclic: no single rational generates all rationals."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: orders and generators in cyclic groups.
+		type cycEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		cycTable := []cycEntry{
+			{"U(5) = {1,2,3,4} under multiplication mod 5 is cyclic. Name a generator (enter a number 1-4)", "2", "2^1=2, 2^2=4, 2^3=3, 2^4=1: 2 generates all of U(5)."},
+			{"What is the order of the Klein four-group V_4? (enter a number)", "4", "V_4 = {e,a,b,ab} has 4 elements."},
+			{"S_3 is not cyclic. What is the largest element order in S_3? (enter a number)", "3", "3-cycles have order 3; nothing has order 6."},
+		}
+		c := cycTable[rand.Intn(len(cycTable))]
+		return generator.Problem{Question: c.question, Answer: c.answer, Explanation: c.reason}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is the group %s cyclic? (yes/no)", e.group),
 		Answer:      e.cyclic,
@@ -376,6 +480,21 @@ func (g *idealGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"the set of polynomials with zero constant term", "R[x]", "yes", "Polynomials with zero constant term form an ideal: sums and multiples by any polynomial keep zero constant term."},
 	}
 	e := table[rand.Intn(len(table))]
+	if rand.Intn(3) == 0 {
+		// production: witness computations for closure failures.
+		type witEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		witTable := []witEntry{
+			{"{0,1,2} is not an ideal of Z_6. Compute 2+2 mod 6 (enter a number)", "4", "4 lies outside {0,1,2}, witnessing the failure of closure."},
+			{"Odd integers are not an ideal of Z. Compute 1+3 (enter a number)", "4", "4 is even, outside the odd integers: closure fails."},
+			{"3Z is an ideal of Z. Compute 3+3+3 (enter a number)", "9", "9 = 3·3 stays in 3Z, as closure demands."},
+		}
+		w := witTable[rand.Intn(len(witTable))]
+		return generator.Problem{Question: w.question, Answer: w.answer, Explanation: w.reason}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s an ideal of %s? (yes/no)", e.set, e.ring),
 		Answer:      e.isIdeal,
@@ -435,6 +554,21 @@ func (g *normalSubgroupGen) Generate(ctx generator.GeneratorContext) generator.P
 		pool = table[:2] // focus on S_3 tricky cases
 	}
 	e := pool[rand.Intn(len(pool))]
+	if rand.Intn(3) == 0 {
+		// production: indices and conjugates in S_3.
+		type norEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		norTable := []norEntry{
+			{"What is the index of A_3 in S_3? (enter a number)", "2", "|S_3|/|A_3| = 6/3 = 2; index-2 subgroups are always normal."},
+			{"Conjugate (1 2) by (1 3) in S_3. Type the result like (2 3)", "(2 3)", "(1 3)(1 2)(1 3) sends 2 to 3: the conjugate is (2 3), outside {e,(1 2)}."},
+			{"Z_6 is abelian, so every subgroup is normal. How many subgroups does Z_6 have? (enter a number)", "4", "One per divisor of 6: orders 1, 2, 3, 6."},
+		}
+		v := norTable[rand.Intn(len(norTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is %s normal in %s? (yes/no)", e.subgroup, e.group),
 		Answer:      e.normal,
@@ -471,6 +605,26 @@ func (g *lagrangeGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		pool = append(tableSmall, tableLarge...)
 	}
 	e := pool[rand.Intn(len(pool))]
+	if rand.Intn(3) == 0 {
+		// production: subgroup indices from Lagrange (unique answers).
+		type idxEntry struct {
+			orderG string
+			orderH string
+			index  string
+			reason string
+		}
+		idxTable := []idxEntry{
+			{"12", "4", "3", "Index [G:H] = |G|/|H| = 12/4 = 3."},
+			{"12", "3", "4", "Index = 12/3 = 4."},
+			{"24", "8", "3", "Index = 24/8 = 3."},
+		}
+		v := idxTable[rand.Intn(len(idxTable))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("A group G has order %s and a subgroup H of order %s. What is the index [G:H]? (enter a number)", v.orderG, v.orderH),
+			Answer:      v.index,
+			Explanation: v.reason,
+		}
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Can a group of order %s have a subgroup of order %s? (yes/no)", e.orderG, e.orderH),
 		Answer:      e.valid,
@@ -562,6 +716,7 @@ func (g *groupActionGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		{"Does orbit-stabilizer give |G| = |Orb(x)|·|Stab(x)|? (yes/no)", "yes", "The bijection G/Stab(x) ≅ Orb(x) gives the formula."},
 		{"Is action of S_n on {1..n} transitive? (yes/no)", "yes", "Any i can be sent to any j by a permutation."},
 		{"Does trivial action have all orbits of size 1? (yes/no)", "yes", "gx=x for all g gives orbits {x}."},
+		{"Do different orbits of one action always have the same size? (yes/no)", "no", "Orbit sizes divide |G| but vary: fixed points have size 1, others larger."},
 	}
 	hard := []entry{
 		{"Does conjugation action of G on itself have orbits = conjugacy classes? (yes/no)", "yes", "gxg^{-1} orbits are conjugacy classes."},
@@ -572,9 +727,26 @@ func (g *groupActionGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: orbit-stabilizer arithmetic (unique answers).
+		type orbEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		orbTable := []orbEntry{
+			{"G acts transitively on 5 points and |Stab(x)|=3. What is |G|? (enter a number)", "15", "Orbit-stabilizer: |G| = 5·3 = 15."},
+			{"D_4 acts on the 4 vertices in one orbit. If |Stab|=2, what is |D_4|? (enter a number)", "8", "Orbit-stabilizer: 4·2 = 8."},
+			{"S_3 acts on {1,2,3} transitively. The stabilizer of 3 has order 2. What is |S_3|? (enter a number)", "6", "Orbit-stabilizer: 3·2 = 6."},
+		}
+		o := orbTable[rand.Intn(len(orbTable))]
+		return generator.Problem{Question: o.question, Answer: o.answer, Explanation: o.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }
+
+// ----- 17. sylow -----
 
 // ----- 17. sylow -----
 
@@ -600,6 +772,21 @@ func (g *sylowGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: pin down n_p from the divisibility + congruence constraints.
+		type sylEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		sylTable := []sylEntry{
+			{"|G|=15=3·5. n_5 divides 3 and is 1 mod 5. What is n_5? (enter a number)", "1", "Divisors of 3: 1, 3. Only 1 is 1 mod 5."},
+			{"|G|=21=3·7. n_7 divides 3 and is 1 mod 7. What is n_7? (enter a number)", "1", "Divisors of 3: 1, 3. Only 1 is 1 mod 7."},
+			{"|G|=12. n_3 divides 4 and is 1 mod 3. How many values can n_3 take? (enter a number)", "2", "n_3 ∈ {1, 4}: two possibilities."},
+		}
+		s := sylTable[rand.Intn(len(sylTable))]
+		return generator.Problem{Question: s.question, Answer: s.answer, Explanation: s.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -631,6 +818,21 @@ func (g *ufdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: count factors / factorizations (unique answers).
+		type ufdEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		ufdTable := []ufdEntry{
+			{"How many prime factors (with multiplicity) does 12 have in Z? (enter a number)", "3", "12 = 2·2·3: three prime factors."},
+			{"In 6 = 2·3 = (1+√-5)(1-√-5), how many distinct factorizations are shown? (enter a number)", "2", "Two genuinely different factorizations: witnesses non-uniqueness."},
+			{"x^2-1 factors over Q. How many linear factors? (enter a number)", "2", "x^2-1 = (x-1)(x+1): two linear factors."},
+		}
+		u := ufdTable[rand.Intn(len(ufdTable))]
+		return generator.Problem{Question: u.question, Answer: u.answer, Explanation: u.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -659,6 +861,21 @@ func (g *fieldExtensionGen) Generate(ctx generator.GeneratorContext) generator.P
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: extension degrees (unique answers).
+		type degEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		degTable := []degEntry{
+			{"What is [Q(√2):Q]? (enter a number)", "2", "Minimal polynomial x^2-2 has degree 2."},
+			{"What is [Q(∛2):Q]? (enter a number)", "3", "x^3-2 is Eisenstein at 2, degree 3."},
+			{"What is the degree of the splitting field of x^2-2 over Q? (enter a number)", "2", "Q(√2) already splits it: (x-√2)(x+√2)."},
+		}
+		d := degTable[rand.Intn(len(degTable))]
+		return generator.Problem{Question: d.question, Answer: d.answer, Explanation: d.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -689,6 +906,21 @@ func (g *galoisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: Galois group orders (unique answers).
+		type galEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		galTable := []galEntry{
+			{"What is |Gal(Q(√2)/Q)|? (enter a number)", "2", "Automorphisms √2→±√2: order 2."},
+			{"The splitting field of x^3-2 over Q has Galois group S_3. What is its order? (enter a number)", "6", "|S_3| = 6."},
+			{"If |G|=6 and |H|=2, the fixed field K^H has what degree over k? (enter a number)", "3", "Fundamental theorem: [K^H:k] = |G|/|H| = 3."},
+		}
+		v := galTable[rand.Intn(len(galTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -715,6 +947,21 @@ func (g *localizationGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: fractions and maximal-ideal counts (unique answers).
+		type locEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		locTable := []locEntry{
+			{"In Z[1/2], what is 1/2+1/4? (enter a fraction like 3/4)", "3/4", "Common denominator 4: 2/4+1/4=3/4."},
+			{"How many maximal ideals does the local ring Z_(p) have? (enter a number)", "1", "Local means unique maximal ideal."},
+			{"In Z[1/2], what is 2/4 reduced? (enter a fraction like 1/2)", "1/2", "Cancel 2: 2/4 = 1/2."},
+		}
+		v := locTable[rand.Intn(len(locTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -743,6 +990,21 @@ func (g *finiteFieldGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: orders and degrees in finite fields (unique answers).
+		type finEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		finTable := []finEntry{
+			{"How many elements does F_8 have? (enter a number)", "8", "F_8 is degree 3 over F_2: 2^3 = 8."},
+			{"F_4^× is cyclic. What is its order? (enter a number)", "3", "4-1 = 3 nonzero elements."},
+			{"A field of order 9 is degree n over F_3. What is n? (enter a number)", "2", "9 = 3^2, so n = 2."},
+		}
+		v := finTable[rand.Intn(len(finTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -769,6 +1031,21 @@ func (g *nilpotentGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: Sylow counts and nilpotency classes (unique answers).
+		type nilEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		nilTable := []nilEntry{
+			{"A nilpotent group of order 12=2^2·3 has unique Sylow subgroups. How many Sylow subgroups total? (enter a number)", "2", "One Sylow 2-subgroup and one Sylow 3-subgroup."},
+			{"A_3 is abelian, hence nilpotent of class 1. What is its class? (enter a number)", "1", "Abelian groups have trivial commutators: class 1."},
+			{"A group of order 8=2^3 is a 2-group. What prime? (enter a number)", "2", "8 = 2^3: it is a 2-group, hence nilpotent."},
+		}
+		v := nilTable[rand.Intn(len(nilTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -797,6 +1074,21 @@ func (g *tensorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: tensor computations with unique answers.
+		type tenEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		tenTable := []tenEntry{
+			{"Z/6 ⊗ Z/4 ≅ Z/gcd(6,4). What is the order? (enter a number)", "2", "gcd(6,4) = 2: the tensor has order 2."},
+			{"Q ⊗_Z Z/5 = 0. What is the order of the trivial group? (enter a number)", "1", "The zero module has 1 element."},
+			{"M ⊗_R R ≅ M. If M = Z^2, what is the rank? (enter a number)", "2", "Z^2 stays rank 2 after tensoring with R."},
+		}
+		v := tenTable[rand.Intn(len(tenTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -823,6 +1115,21 @@ func (g *solvableGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: orders inside solvable series (unique answers).
+		type solEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		solTable := []solEntry{
+			{"S_3 has series 1◃A_3◃S_3. What is |A_3|? (enter a number)", "3", "A_3 has the 3 even permutations."},
+			{"S_n is non-solvable for n≥5. What is the smallest such n? (enter a number)", "5", "S_5 is the smallest non-solvable symmetric group."},
+			{"Derived series of S_3: S_3' = A_3, A_3' = 1. How many steps to reach 1? (enter a number)", "2", "Two derived subgroups: S_3 → A_3 → 1."},
+		}
+		v := solTable[rand.Intn(len(solTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -851,6 +1158,21 @@ func (g *freeGroupGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: ranks and generator counts (unique answers).
+		type freeEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		freeTable := []freeEntry{
+			{"F_1 ≅ Z. What is the rank of F_1? (enter a number)", "1", "One generator: rank 1."},
+			{"F_n/[F_n,F_n] ≅ Z^n. For n=3, what is the rank? (enter a number)", "3", "Abelianization of F_3 is Z^3."},
+			{"Z * Z ≅ F_2. How many generators? (enter a number)", "2", "Free product of two Z's: two generators."},
+		}
+		v := freeTable[rand.Intn(len(freeTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -877,6 +1199,21 @@ func (g *noetherianGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: ideal counts and principal generators (unique answers).
+		type noeEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		noeTable := []noeEntry{
+			{"A field has exactly how many ideals? (enter a number)", "2", "Only 0 and the field itself."},
+			{"Ideals of Z/12Z correspond to divisors of 12. How many divisors does 12 have? (enter a number)", "6", "1, 2, 3, 4, 6, 12: six divisors, six ideals."},
+			{"In the PID Z, the ideal (6,10) equals (d) for d=gcd(6,10). What is d? (enter a number)", "2", "gcd(6,10) = 2, so (6,10) = (2)."},
+		}
+		v := noeTable[rand.Intn(len(noeTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -905,6 +1242,21 @@ func (g *galoisGroupGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: Galois group orders (unique answers).
+		type ggEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		ggTable := []ggEntry{
+			{"Gal(Q(√2)/Q) ≅ Z_2. What is its order? (enter a number)", "2", "|Z_2| = 2."},
+			{"The splitting field of x^3-2 over Q has degree 6. What is |Gal|? (enter a number)", "6", "Galois group order equals extension degree."},
+			{"Gal(F_9/F_3) is generated by Frobenius x→x^3. What is its order? (enter a number)", "2", "[F_9:F_3] = 2."},
+		}
+		v := ggTable[rand.Intn(len(ggTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -932,6 +1284,21 @@ func (g *exactSequenceGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	if scale > 3 {
 		pool = append(easy, hard...)
 	}
+	if rand.Intn(3) == 0 {
+		// production: orders inside exact sequences (unique answers).
+		type exEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		exTable := []exEntry{
+			{"0→A→B→C→0 is exact for finite groups with |A|=2, |C|=3. What is |B|? (enter a number)", "6", "|B| = |A|·|C| = 6."},
+			{"In 0→Z --2→ Z → Z/2 →0, what is the kernel of ×2? (type 0)", "0", "×2 is injective: kernel is 0."},
+			{"In the same sequence, im(×2) = 2Z. What is ker(Z → Z/2)? (type like 2Z)", "2Z", "Even integers map to 0 mod 2."},
+		}
+		v := exTable[rand.Intn(len(exTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
@@ -958,6 +1325,21 @@ func (g *commutatorGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: orders around the commutator subgroup (unique answers).
+		type comEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		comTable := []comEntry{
+			{"S_3' = A_3. What is |A_3|? (enter a number)", "3", "Three even permutations."},
+			{"F_n/[F_n,F_n] ≅ Z^n. For F_2, what is the rank? (enter a number)", "2", "Abelianization of F_2 is Z^2."},
+			{"A_3 is abelian so A_3' = 1. What is the order of A_3'? (enter a number)", "1", "Trivial group has order 1."},
+		}
+		v := comTable[rand.Intn(len(comTable))]
+		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}

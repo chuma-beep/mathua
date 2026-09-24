@@ -1,29 +1,29 @@
 [
   {
-    "label": "Exact Sequences",
-    "section": "Homological Use",
+    "label": "Worked: 0 → Z --2→ Z → Z/2 → 0",
+    "section": "Worked: 0 → Z --2→ Z → Z/2 → 0",
     "subgoals": [
-      "Review Homological Use",
-      "Work the example",
-      "Verify"
+      "Check kernel of ×2 is 0",
+      "Match image 2Z to kernel of projection",
+      "Confirm surjectivity at the end"
     ]
   },
   {
-    "label": "Exact Sequences — practice 2",
-    "section": "Homological Use",
+    "label": "Worked: orders multiply",
+    "section": "Worked: orders multiply",
     "subgoals": [
-      "Review Homological Use",
-      "Work the example",
-      "Verify"
+      "Inject A of order 2",
+      "Count 3 cosets",
+      "Multiply to 6"
     ]
   },
   {
-    "label": "Exact Sequences — practice 3",
-    "section": "Example",
+    "label": "Splitting",
+    "section": "Splitting",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Split to get direct sum",
+      "Spot Z_4 as non-split",
+      "Respect the extension"
     ]
   }
 ]

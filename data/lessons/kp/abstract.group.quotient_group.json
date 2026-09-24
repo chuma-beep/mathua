@@ -1,29 +1,29 @@
 [
   {
-    "label": "Quotient Groups and Isomorphism Theorems",
-    "section": "Building Quotients",
+    "label": "Worked: S_3/A_3 has order 2",
+    "section": "Worked: S_3/A_3 has order 2",
     "subgoals": [
-      "Review Building Quotients",
-      "Work the example",
-      "Verify"
+      "Count 2 cosets",
+      "Force the order-2 structure",
+      "Read parity as the quotient"
     ]
   },
   {
-    "label": "Quotient Groups and Isomorphism Theorems — practice 2",
-    "section": "Building Quotients",
+    "label": "Worked: Z_12/{0,4,8} has order 4",
+    "section": "Worked: Z_12/{0,4,8} has order 4",
     "subgoals": [
-      "Review Building Quotients",
-      "Work the example",
-      "Verify"
+      "List the 4 cosets",
+      "Find 1+H of order 4",
+      "Conclude Z_4"
     ]
   },
   {
-    "label": "Quotient Groups and Isomorphism Theorems — practice 3",
-    "section": "Example",
+    "label": "Quotients of Z_n",
+    "section": "Quotients of Z_n",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Divide the order by |H|",
+      "Note cyclicity survives",
+      "Apply to any Z_n"
     ]
   }
 ]

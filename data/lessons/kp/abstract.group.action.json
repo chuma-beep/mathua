@@ -1,29 +1,29 @@
 [
   {
-    "label": "Group Actions and Orbit-Stabilizer",
-    "section": "Structure of Actions",
+    "label": "Worked: orbits partition {1, 2, 3} under S_3",
+    "section": "Worked: orbits partition {1, 2, 3} under S_3",
     "subgoals": [
-      "Review Structure of Actions",
-      "Work the example",
-      "Verify"
+      "Send 1 to 2 and 3 by permutations",
+      "Recognize one transitive orbit",
+      "Check orbit-stabilizer: 3 times 2 is 6"
     ]
   },
   {
-    "label": "Group Actions and Orbit-Stabilizer — practice 2",
-    "section": "Structure of Actions",
+    "label": "Worked: |D_4| from orbit-stabilizer",
+    "section": "Worked: |D_4| from orbit-stabilizer",
     "subgoals": [
-      "Review Structure of Actions",
-      "Work the example",
-      "Verify"
+      "Count one orbit of size 4",
+      "Count the vertex stabilizer as 2",
+      "Multiply to get 8"
     ]
   },
   {
-    "label": "Group Actions and Orbit-Stabilizer — practice 3",
-    "section": "Example",
+    "label": "Orbit sizes vary",
+    "section": "Orbit sizes vary",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Spot fixed points as size-1 orbits",
+      "Note sizes divide |G|",
+      "Keep only the partition guarantee"
     ]
   }
 ]

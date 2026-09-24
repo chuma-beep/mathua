@@ -1,19 +1,25 @@
-## Quotient rings
+# Quotient Rings
 
-Given a ring $R$ and an ideal $I$, the quotient ring $R/I$ consists of cosets $r + I$ with operations $(r+I)+(s+I) = (r+s)+I$ and $(r+I)(s+I) = rs + I$.
+**Quotient ring:** For an ideal $I \subseteq R$, the cosets $R/I$ form a ring under $(a+I) + (b+I) = (a+b)+I$ and similarly for multiplication. The ideal absorbs exactly the ambiguity representatives introduce.
 
-### Example
+## Worked: Z/6Z has six elements
 
-$Z / 2Z$ has two cosets: even numbers and odd numbers, isomorphic to $Z_2$.
+List the cosets of $6\mathbb Z$:
+1. $0 + 6\mathbb Z, 1 + 6\mathbb Z, \dots, 5 + 6\mathbb Z$: six distinct cosets.
+2. $6 + 6\mathbb Z = 0 + 6\mathbb Z$: the seventh wraps back.
+3. So $Z/6Z = \{0, 1, 2, 3, 4, 5\}$ with mod-6 arithmetic — nothing more.
 
-## Isomorphisms
+So quotienting the integers by $n\mathbb Z$ just builds clock arithmetic.
 
-Many quotient rings are familiar objects: $Z / nZ \cong Z_n$, and $R[x]/(x) \cong R$ by evaluating at 0.
+## Worked: 2Z/4Z has two elements
 
-### Example
+Quotient even integers by multiples of 4:
+1. Cosets: $2\mathbb Z$ itself (evens congruent to 0 mod 4) and $2 + 4\mathbb Z$ (evens congruent to 2 mod 4).
+2. Two cosets, and doubling the non-identity one returns: $2 + 2 = 4 \in 4\mathbb Z$.
+3. So $2\mathbb Z/4\mathbb Z \cong Z_2$: even the quotient of a non-unital ring by an ideal behaves.
 
-$Z / 3Z$ has three cosets $0+3Z, 1+3Z, 2+3Z$.
+So coset counting works uniformly — count the pieces, read off the structure.
 
-## Universal property
+## Ideals control quotients
 
-Quotient rings collapse the ideal to zero and are universal with that property.
+Bigger ideal means fewer cosets: $Z/2Z$ has 2 elements where $Z/6Z$ has 6. The ideal is the dial setting the quotient's size.

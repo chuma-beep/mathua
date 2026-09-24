@@ -1,29 +1,29 @@
 [
   {
-    "label": "Commutator Subgroup and Abelianization",
-    "section": "Abelianization",
+    "label": "Worked: S_3' = A_3",
+    "section": "Worked: S_3' = A_3",
     "subgoals": [
-      "Review Abelianization",
-      "Work the example",
-      "Verify"
+      "Push commutators into A_3 via the sign map",
+      "Exhibit a nontrivial commutator",
+      "Pin S_3' to exactly A_3"
     ]
   },
   {
-    "label": "Commutator Subgroup and Abelianization — practice 2",
-    "section": "Abelianization",
+    "label": "Worked: abelianization of F_2",
+    "section": "Worked: abelianization of F_2",
     "subgoals": [
-      "Review Abelianization",
-      "Work the example",
-      "Verify"
+      "Force a and b to commute",
+      "Read two infinite-order generators",
+      "Conclude Z^2"
     ]
   },
   {
-    "label": "Commutator Subgroup and Abelianization — practice 3",
-    "section": "Example",
+    "label": "Abelian test",
+    "section": "Abelian test",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Check G' equals 1",
+      "Apply to A_3",
+      "Read order 1"
     ]
   }
 ]

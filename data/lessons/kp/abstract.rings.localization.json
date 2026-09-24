@@ -1,29 +1,29 @@
 [
   {
-    "label": "Localization of Rings",
-    "section": "Inverting Elements",
+    "label": "Worked: halving odd denominators",
+    "section": "Worked: halving odd denominators",
     "subgoals": [
-      "Review Inverting Elements",
-      "Work the example",
-      "Verify"
+      "Take denominator 4",
+      "Add 2/4 and 1/4",
+      "Read 3/4 inside the ring"
     ]
   },
   {
-    "label": "Localization of Rings — practice 2",
-    "section": "Inverting Elements",
+    "label": "Worked: Z_(p) has one maximal ideal",
+    "section": "Worked: Z_(p) has one maximal ideal",
     "subgoals": [
-      "Review Inverting Elements",
-      "Work the example",
-      "Verify"
+      "Restrict denominators away from p",
+      "Show outsiders are units",
+      "Collect non-units into one ideal"
     ]
   },
   {
-    "label": "Localization of Rings — practice 3",
-    "section": "Example",
+    "label": "Fractions as localization",
+    "section": "Fractions as localization",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Invert all nonzero elements",
+      "Watch the ring become a field",
+      "Generalize to any domain"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Normal Subgroups and Conjugacy",
-    "section": "Recognizing Normality",
+    "label": "Worked: A_3 is normal in S_3",
+    "section": "Worked: A_3 is normal in S_3",
     "subgoals": [
-      "Review Recognizing Normality",
-      "Work the example",
-      "Verify"
+      "Conjugate a 3-cycle and track cycle type",
+      "Confirm the result stays in A_3",
+      "Invoke the index-2 shortcut"
     ]
   },
   {
-    "label": "Normal Subgroups and Conjugacy — practice 2",
-    "section": "Recognizing Normality",
+    "label": "Worked: {e, (1 2)} is not normal in S_3",
+    "section": "Worked: {e, (1 2)} is not normal in S_3",
     "subgoals": [
-      "Review Recognizing Normality",
-      "Work the example",
-      "Verify"
+      "Conjugate (1 2) by (1 3)",
+      "Find (2 3) outside the set",
+      "Conclude normality fails"
     ]
   },
   {
-    "label": "Normal Subgroups and Conjugacy — practice 3",
-    "section": "Example",
+    "label": "Abelian shortcut",
+    "section": "Abelian shortcut",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Note ghg^-1 = h in abelian groups",
+      "Apply to every subgroup at once",
+      "Restrict attention to non-abelian groups"
     ]
   }
 ]

@@ -1,17 +1,29 @@
 [
   {
-    "label": "Definition of ideals",
-    "section": "Definition of ideals",
-    "subgoals": ["Check closure under addition", "Check absorption by ring elements", "Verify the ideal axioms"]
+    "label": "Worked: {0,1,2} fails in Z_6",
+    "section": "Worked: {0,1,2} fails in Z_6",
+    "subgoals": [
+      "Compute 2+2 mod 6",
+      "Find 4 outside the set",
+      "Disproof complete"
+    ]
   },
   {
-    "label": "Examples and non-examples",
-    "section": "Examples and non-examples",
-    "subgoals": ["See multiples nZ as ideals", "Spot odd integers failure", "Test closure"]
+    "label": "Worked: 3Z passes in Z",
+    "section": "Worked: 3Z passes in Z",
+    "subgoals": [
+      "Check closure under addition",
+      "Check absorption",
+      "Read the quotient Z/3Z"
+    ]
   },
   {
-    "label": "Principal ideals",
-    "section": "Principal ideals",
-    "subgoals": ["Form (a) = {ra}", "Recognize principal generation", "Use in quotient construction"]
+    "label": "The zero-constant-term ideal",
+    "section": "The zero-constant-term ideal",
+    "subgoals": [
+      "Evaluate at 0 for the kernel",
+      "Verify sums and multiples stay",
+      "Quotient back to R"
+    ]
   }
 ]

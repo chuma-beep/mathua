@@ -1,29 +1,29 @@
 [
   {
-    "label": "Noetherian Rings and Hilbert Basis Theorem",
-    "section": "Chain Conditions",
+    "label": "Worked: the failing chain in k[x_1, x_2, ...]",
+    "section": "Worked: the failing chain in k[x_1, x_2, ...]",
     "subgoals": [
-      "Review Chain Conditions",
-      "Work the example",
-      "Verify"
+      "Add one fresh variable per step",
+      "Check each inclusion is strict",
+      "Conclude non-Noetherian"
     ]
   },
   {
-    "label": "Noetherian Rings and Hilbert Basis Theorem — practice 2",
-    "section": "Chain Conditions",
+    "label": "Worked: (6, 10) = (2) in Z",
+    "section": "Worked: (6, 10) = (2) in Z",
     "subgoals": [
-      "Review Chain Conditions",
-      "Work the example",
-      "Verify"
+      "Compute gcd(6, 10) as 2",
+      "Show 2 lies in the ideal",
+      "Collapse to one generator"
     ]
   },
   {
-    "label": "Noetherian Rings and Hilbert Basis Theorem — practice 3",
-    "section": "Example",
+    "label": "Hilbert basis",
+    "section": "Hilbert basis",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Adjoin one variable safely",
+      "Induct to finitely many",
+      "Blame infinitely many variables"
     ]
   }
 ]
