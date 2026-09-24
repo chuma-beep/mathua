@@ -41,6 +41,17 @@ type divisibilityGen struct{}
 
 func (g *divisibilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
+	if rand.Intn(2) == 0 {
+		// typed production: quotient of a divisible pair
+		d := rand.Intn(max(1, scale*10)) + 2
+		q := rand.Intn(max(1, scale*12)) + 2
+		a := d * q
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is %d / %d? (enter a number)", a, d),
+			Answer:      fmt.Sprintf("%d", q),
+			Explanation: fmt.Sprintf("%d = %d x %d, so the quotient is %d.", a, d, q, q),
+		}
+	}
 	a := rand.Intn(max(1, scale*45)) + 6
 	d := rand.Intn(max(1, scale*10)) + 2
 	divisible := a%d == 0
@@ -102,6 +113,15 @@ func (g *congruenceGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	scale := int(1 + ctx.Difficulty*5)
 	m := rand.Intn(max(1, scale*10)) + 2
 	a := rand.Intn(max(1, scale*30)) + 1
+	if rand.Intn(2) == 0 {
+		// typed production: least residue
+		r := a % m
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the least residue of %d mod %d? (enter a number)", a, m),
+			Answer:      fmt.Sprintf("%d", r),
+			Explanation: fmt.Sprintf("%d = %d x %d + %d, so the least residue is %d.", a, m, a/m, r, r),
+		}
+	}
 	b := a + m*rand.Intn(max(1, scale*5))
 	congruent := true
 	if rand.Intn(max(1, scale*2)) == 0 {
@@ -127,11 +147,17 @@ func (g *fermatLittleGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	primes := []int{3, 5, 7, 11, 13}
 	p := primes[rand.Intn(len(primes))]
 	a := rand.Intn(p-2) + 2
-	result := mathutil.IntPow(a, p-1) % p
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("By Fermat's little theorem, what is \\(%d^{%d} \\bmod %d\\)?", a, p-1, p),
+			Answer:      "1",
+			Explanation: fmt.Sprintf("Fermat: \\(a^{p-1} \\equiv 1 \\pmod{p}\\) for \\(a\\) coprime to \\(p=%d\\).", p),
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("By Fermat's little theorem, what is \\(%d^{%d} \\bmod %d\\)?", a, p-1, p),
-		Answer:      fmt.Sprintf("%d", result),
-		Explanation: fmt.Sprintf("Fermat's little theorem: \\(%d^{%d} \\equiv 1 \\pmod{%d}\\), so \\(%d^{%d} \\bmod %d = %d\\).", a, p-1, p, a, p-1, p, result),
+		Question:    fmt.Sprintf("By Fermat's little theorem, what is \\(%d^{%d} \\bmod %d\\)?", a, p, p),
+		Answer:      fmt.Sprintf("%d", a),
+		Explanation: fmt.Sprintf("Multiply Fermat by \\(a\\): \\(a^{p} \\equiv a \\pmod{%d}\\), so the answer is \\(%d\\).", p, a),
 	}
 }
 
@@ -252,6 +278,14 @@ func (g *primeInfGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		prod *= p
 	}
 	n := prod + 1
+	if rand.Intn(2) == 0 {
+		// typed production: the Euclid number itself
+		return generator.Problem{
+			Question:    fmt.Sprintf("Euclid's construction: \\(N = %s + 1\\). What is \\(N\\)? (enter a number)", joinProd(primes)),
+			Answer:      fmt.Sprintf("%d", n),
+			Explanation: fmt.Sprintf("Multiply out \\(%s\\) and add 1: \\(N=%d\\), which brings a new prime factor.", joinProd(primes), n),
+		}
+	}
 	// question: is n divisible by any listed prime? always no
 	return generator.Problem{
 		Question:    fmt.Sprintf("Euclid's construction: \\(N = %s + 1 = %d\\) where the product is over \\(%v\\). Is \\(N\\) divisible by any of \\(%v\\)? (yes/no)", joinProd(primes), n, primes, primes),

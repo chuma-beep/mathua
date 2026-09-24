@@ -1,29 +1,29 @@
 [
   {
-    "label": "Order Modulo n",
-    "section": "Properties",
+    "label": "Worked: order of 2 mod 7",
+    "section": "Worked: order of 2 mod 7",
     "subgoals": [
-      "Review Properties",
-      "Work the example",
-      "Verify"
+      "Raise 2 until 1 appears mod 7",
+      "Record the first hitting exponent",
+      "Check it divides phi(7)"
     ]
   },
   {
-    "label": "Order Modulo n — practice 2",
-    "section": "Properties",
+    "label": "Worked: order of 3 mod 7",
+    "section": "Worked: order of 3 mod 7",
     "subgoals": [
-      "Review Properties",
-      "Work the example",
-      "Verify"
+      "Walk the powers 3, 2, 6, 4, 5, 1",
+      "Confirm the full cycle of length 6",
+      "Contrast with the order-3 base 2"
     ]
   },
   {
-    "label": "Order Modulo n — practice 3",
-    "section": "Example",
+    "label": "Worked: testing divisors of phi",
+    "section": "Worked: testing divisors of phi",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "List the divisors of phi(9)",
+      "Reject exponents 1, 2, 3 by computation",
+      "Accept 6 as the minimal survivor"
     ]
   }
 ]

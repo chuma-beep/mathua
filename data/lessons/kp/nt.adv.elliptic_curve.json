@@ -1,29 +1,29 @@
 [
   {
-    "label": "Elliptic Curves and BSD",
-    "section": "Arithmetic of Curves",
+    "label": "Worked: doubling on y squared equals x cubed minus 2",
+    "section": "Worked: doubling on y squared equals x cubed minus 2",
     "subgoals": [
-      "Review Arithmetic of Curves",
-      "Work the example",
-      "Verify"
+      "Compute the tangent slope 27/10 at (3,5)",
+      "Solve for the new x-coordinate 129/100",
+      "Reflect to the new y-coordinate -383/1000"
     ]
   },
   {
-    "label": "Elliptic Curves and BSD — practice 2",
-    "section": "Arithmetic of Curves",
+    "label": "Worked: Hasse count mod 5",
+    "section": "Worked: Hasse count mod 5",
     "subgoals": [
-      "Review Arithmetic of Curves",
-      "Work the example",
-      "Verify"
+      "Solve y-squared equals x-cubed plus 1 at each x",
+      "Tally 5 affine points plus infinity",
+      "Check the error against the Hasse bound"
     ]
   },
   {
-    "label": "Elliptic Curves and BSD — practice 3",
-    "section": "Example",
+    "label": "Worked: rank zero and BSD",
+    "section": "Worked: rank zero and BSD",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "List the four torsion points",
+      "Conclude the rank is 0",
+      "Match rank 0 to the nonzero L-value"
     ]
   }
 ]

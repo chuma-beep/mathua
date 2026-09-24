@@ -1,29 +1,29 @@
 [
   {
-    "label": "Continued Fractions",
-    "section": "Approximations",
+    "label": "Worked: 22 over 7 from 3 semicolon 7",
+    "section": "Worked: 22 over 7 from 3 semicolon 7",
     "subgoals": [
-      "Review Approximations",
-      "Work the example",
-      "Verify"
+      "Start at the tail entry 7",
+      "Invert and add to reach 22/7",
+      "Measure the error against pi"
     ]
   },
   {
-    "label": "Continued Fractions — practice 2",
-    "section": "Approximations",
+    "label": "Worked: root 2 repeats 2 forever",
+    "section": "Worked: root 2 repeats 2 forever",
     "subgoals": [
-      "Review Approximations",
-      "Work the example",
-      "Verify"
+      "Split off the integer part 1",
+      "Invert the remainder to regenerate it",
+      "Conclude the digit 2 repeats"
     ]
   },
   {
-    "label": "Continued Fractions — practice 3",
-    "section": "Example",
+    "label": "Worked: best approximation quality",
+    "section": "Worked: best approximation quality",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Measure the error of 22/7",
+      "Evaluate the 1/(q q-next) bound",
+      "Confirm the error sits under the bound"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Wilson's theorem",
+    "label": "Factorial Modulo a Prime",
     "section": "Factorial Modulo a Prime",
     "subgoals": [
-      "Review Factorial Modulo a Prime",
-      "Work the example",
-      "Verify"
+      "Pair each residue with its inverse",
+      "Isolate the self-inverse pair 1 and p-1",
+      "Collapse the product to -1"
     ]
   },
   {
-    "label": "Wilson's theorem — practice 2",
-    "section": "Factorial Modulo a Prime",
+    "label": "The Pairing Argument",
+    "section": "The Pairing Argument",
     "subgoals": [
-      "Review Factorial Modulo a Prime",
-      "Work the example",
-      "Verify"
+      "Argue inverses are unique mod p",
+      "Cancel each pair to 1",
+      "Leave 1 times p-1 standing"
     ]
   },
   {
-    "label": "Wilson's theorem — practice 3",
+    "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Expand 4! to 24 for p=5",
+      "Divide 24 by 5 for remainder 4",
+      "Read 4 as -1 mod 5"
     ]
   }
 ]

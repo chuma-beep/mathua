@@ -1,29 +1,29 @@
 [
   {
-    "label": "Linear Diophantine equations",
-    "section": "",
+    "label": "Subsection Divisibility",
+    "section": "Subsection Divisibility",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Test whether m divides n via remainders",
+      "Write a as q times b plus remainder",
+      "Apply the division algorithm"
     ]
   },
   {
-    "label": "Linear Diophantine equations — practice 2",
-    "section": "",
+    "label": "Subsection Solving Congruences",
+    "section": "Subsection Solving Congruences",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Trial x in 0 through 4 for 3x+2=4 mod 5",
+      "Confirm x=4 as the least solution",
+      "Lift the solution to 4+5k"
     ]
   },
   {
-    "label": "Linear Diophantine equations — practice 3",
-    "section": "",
+    "label": "Subsection Solving Linear Diophantine Equations",
+    "section": "Subsection Solving Linear Diophantine Equations",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Check gcd(51,87) divides 123",
+      "Convert to a congruence modulo 17",
+      "Plug back to solve for x and y"
     ]
   }
 ]

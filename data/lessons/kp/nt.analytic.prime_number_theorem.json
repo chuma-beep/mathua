@@ -1,29 +1,29 @@
 [
   {
-    "label": "Prime Number Theorem",
-    "section": "Counting Primes",
+    "label": "Worked: estimating pi of 100",
+    "section": "Worked: estimating pi of 100",
     "subgoals": [
-      "Review Counting Primes",
-      "Work the example",
-      "Verify"
+      "Divide 100 by log 100",
+      "Compare against the true count 25",
+      "Note the shrinking relative error"
     ]
   },
   {
-    "label": "Prime Number Theorem — practice 2",
-    "section": "Counting Primes",
+    "label": "Worked: density near a million",
+    "section": "Worked: density near a million",
     "subgoals": [
-      "Review Counting Primes",
-      "Work the example",
-      "Verify"
+      "Evaluate 1/log x at a million",
+      "Convert the density to 1 in 14",
+      "Scale to a block of 140 integers"
     ]
   },
   {
-    "label": "Prime Number Theorem — practice 3",
-    "section": "Example",
+    "label": "Worked: the nth prime heuristic",
+    "section": "Worked: the nth prime heuristic",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Multiply 1000 by log 1000",
+      "Compare the guess against 7919",
+      "Read the law backwards from counts to sizes"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Dirichlet's Theorem on Arithmetic Progressions",
-    "section": "Primes in Progressions",
+    "label": "Worked: primes 1 mod 4",
+    "section": "Worked: primes 1 mod 4",
     "subgoals": [
-      "Review Primes in Progressions",
-      "Work the example",
-      "Verify"
+      "Check gcd(1,4) equals 1",
+      "Spot the primes 5, 13, 17, 29 in the lane",
+      "Conclude the lane never runs dry"
     ]
   },
   {
-    "label": "Dirichlet's Theorem on Arithmetic Progressions — practice 2",
-    "section": "Primes in Progressions",
+    "label": "Worked: the even lane fails",
+    "section": "Worked: the even lane fails",
     "subgoals": [
-      "Review Primes in Progressions",
-      "Work the example",
-      "Verify"
+      "Compute gcd(2,2)",
+      "List the all-even progression",
+      "Blame the common divisor for the blockage"
     ]
   },
   {
-    "label": "Dirichlet's Theorem on Arithmetic Progressions — practice 3",
-    "section": "Example",
+    "label": "Worked: primes 3 mod 4",
+    "section": "Worked: primes 3 mod 4",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Check gcd(3,4) equals 1",
+      "Spot the primes 3, 7, 11, 19, 23",
+      "Factor out the composite 15 as a check"
     ]
   }
 ]

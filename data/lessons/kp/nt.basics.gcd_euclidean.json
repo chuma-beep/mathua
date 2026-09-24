@@ -1,29 +1,29 @@
 [
   {
-    "label": "Euclidean algorithm for GCD",
-    "section": "",
+    "label": "The Euclidean Algorithm",
+    "section": "The Euclidean Algorithm",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Divide a by b for quotient and remainder",
+      "Replace the pair by b and the remainder",
+      "Stop when the remainder hits 0"
     ]
   },
   {
-    "label": "Euclidean algorithm for GCD — practice 2",
-    "section": "",
+    "label": "Worked: gcd of 252 and 105",
+    "section": "Worked: gcd of 252 and 105",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Chain 252 to 105 to 42 to 21",
+      "Catch the last nonzero remainder 21",
+      "Name 21 the gcd"
     ]
   },
   {
-    "label": "Euclidean algorithm for GCD — practice 3",
-    "section": "",
+    "label": "Why It Works",
+    "section": "Why It Works",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Push a common divisor through a-bq",
+      "Equate gcd(a,b) with gcd(b,r)",
+      "Appeal to shrinking remainders"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Bézout's identity",
+    "label": "The GCD as a Linear Combination",
     "section": "The GCD as a Linear Combination",
     "subgoals": [
-      "Review The GCD as a Linear Combination",
-      "Work the example",
-      "Verify"
+      "State the gcd as ax+by",
+      "Run the extended algorithm on 12 and 8",
+      "Name the smallest positive combination"
     ]
   },
   {
-    "label": "Bézout's identity — practice 2",
-    "section": "The GCD as a Linear Combination",
-    "subgoals": [
-      "Review The GCD as a Linear Combination",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Bézout's identity — practice 3",
+    "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Divide 27 by 18 for remainder 9",
+      "Work backwards to 9=27-18",
+      "Read off x=1, y=-1"
+    ]
+  },
+  {
+    "label": "Application: Inverses",
+    "section": "Application: Inverses",
+    "subgoals": [
+      "Set ax+my=1 for coprime a and m",
+      "Reduce to ax=1 mod m",
+      "Name x the modular inverse"
     ]
   }
 ]
