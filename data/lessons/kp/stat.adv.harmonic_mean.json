@@ -9,21 +9,21 @@
     ]
   },
   {
-    "label": "Example 1 — average speed over equal segments",
+    "label": "Example 1 \u2014 average speed over equal segments",
     "section": "Example 1",
     "subgoals": [
-      "Understand why equal distances weight the slower speed more",
+      "Name the slower speed as the weight driver",
       "Compute 2/(1/60 + 1/90)",
-      "Check the result"
+      "Confirm against the arithmetic mean"
     ]
   },
   {
-    "label": "Example 2 — average rate over equal periods",
+    "label": "Example 2 \u2014 average rate over equal periods",
     "section": "Example 2",
     "subgoals": [
-      "Understand the five-period production setup",
+      "List the five period rates",
       "Sum the five reciprocals and divide into 5",
-      "Check the result"
+      "Compare with the naive average"
     ]
   }
 ]

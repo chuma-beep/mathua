@@ -9,21 +9,21 @@
     ]
   },
   {
-    "label": "Example 1 — temperature variation magnitude",
+    "label": "Example 1 \u2014 temperature variation magnitude",
     "section": "Example 1",
     "subgoals": [
-      "Understand why signs must not cancel",
+      "Square first so signs cannot cancel",
       "Square, average, and root the five readings",
-      "Check the result"
+      "Compare with the arithmetic mean"
     ]
   },
   {
-    "label": "Example 1 — quadratic vs arithmetic mean",
+    "label": "Example 1 \u2014 quadratic vs arithmetic mean",
     "section": "Example 1",
     "subgoals": [
       "Contrast the 2.56 and 0.18 summaries",
       "Explain the sign-cancellation difference",
-      "Check the result"
+      "Name which summary fits magnitudes"
     ]
   }
 ]
