@@ -339,12 +339,27 @@ func (g *derivProductRuleGen) Generate(ctx generator.GeneratorContext) generator
 type derivQuotientRuleGen struct{}
 
 func (g *derivQuotientRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// f(x) = (x+1)/(x-1), f'(x) = -2/(x-1)², ask for f'(2) = -2
-	return generator.Problem{
-		Question:    "Find \\(f'(2)\\) if \\(f(x)=\\frac{x+1}{x-1}\\).",
-		Answer:      "-2",
-		Explanation: "Quotient rule: f'(x)=((x-1)·1-(x+1)·1)/(x-1)² = -2/(x-1)². f'(2) = -2/(1)² = -2.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Find \\(f'(2)\\) if \\(f(x)=\\frac{x+1}{x-1}\\).", "-2", "Quotient rule: f'(x)=((x-1)·1-(x+1)·1)/(x-1)² = -2/(x-1)². f'(2) = -2/(1)² = -2."},
+		{"Find \\(f'(3)\\) if \\(f(x)=\\frac{x+2}{x-2}\\).", "-4", "f'(x)=((x-2)-(x+2))/(x-2)² = -4/(x-2)². f'(3) = -4/1 = -4."},
+		{"Find \\(f'(0)\\) if \\(f(x)=\\frac{x}{x+1}\\).", "1", "f'(x)=((x+1)-x)/(x+1)² = 1/(x+1)². f'(0) = 1/1 = 1."},
+		{"Find \\(f'(0)\\) if \\(f(x)=\\frac{x-1}{x+1}\\).", "2", "f'(x)=((x+1)-(x-1))/(x+1)² = 2/(x+1)². f'(0) = 2/1 = 2."},
+		{"For \\(f(x)=\\frac{x+1}{x-1}\\), what is \\(f'(x)\\) in terms of \\(x\\)?", "-2/(x-1)^2", "Quotient rule gives f'(x) = -2/(x-1)²."},
+	}
+	tableHard := []entry{
+		{"Find \\(f'(2)\\) if \\(f(x)=\\frac{2x+1}{x-1}\\).", "-3", "f'(x)=((x-1)·2-(2x+1))/(x-1)² = -3/(x-1)². f'(2) = -3."},
+		{"Find \\(f'(1)\\) if \\(f(x)=\\frac{x+3}{x+1}\\).", "-1/2", "f'(x)=((x+1)-(x+3))/(x+1)² = -2/(x+1)². f'(1) = -2/4 = -1/2."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type derivChainRuleGen struct{}
@@ -469,7 +484,7 @@ type integralPowerRuleGen struct{}
 
 func (g *integralPowerRuleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	n := rand.Intn(max(1, scale)) + 1
+	n := rand.Intn(max(2, scale)) + 1
 	a := n + 1
 	exp := n + 1
 	coef := a / (n + 1)
@@ -490,7 +505,7 @@ type integralSubstitutionGen struct{}
 
 func (g *integralSubstitutionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	n := rand.Intn(max(1, scale)) + 2
+	n := rand.Intn(max(2, scale)) + 2
 	coef := n
 	exp := n - 1
 	answer := fmt.Sprintf("e^(x^%d)+C", n)
@@ -527,7 +542,7 @@ type integralFTCGen struct{}
 
 func (g *integralFTCGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	n := rand.Intn(max(1, scale)) + 1
+	n := rand.Intn(max(2, scale)) + 1
 	answer := fmt.Sprintf("x^%d", n)
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(F(x)=\\int_{0}^{x} t^{%d} \\, dt\\), what is \\(F'(x)\\)?", n),
@@ -539,23 +554,51 @@ func (g *integralFTCGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type integralAreaBetweenGen struct{}
 
 func (g *integralAreaBetweenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// Area between y=x and y=x² from 0 to 1 = 1/6 ≈ 0.1667
-	return generator.Problem{
-		Question:    "Find area between \\(y=x\\) and \\(y=x^{2}\\) from \\(x=0\\) to \\(x=1\\).",
-		Answer:      "0.1667",
-		Explanation: "∫(x-x²)dx from 0 to 1 = [x²/2-x³/3]₀¹ = 1/2-1/3 = 1/6 ≈ 0.1667.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Find area between \\(y=x\\) and \\(y=x^{2}\\) from \\(x=0\\) to \\(x=1\\).", "0.1667", "∫(x-x²)dx from 0 to 1 = [x²/2-x³/3]₀¹ = 1/2-1/3 = 1/6 ≈ 0.1667."},
+		{"Find area between \\(y=2x\\) and \\(y=x\\) from \\(x=0\\) to \\(x=2\\).", "2", "∫(2x-x)dx from 0 to 2 = ∫x dx = [x²/2]₀² = 2."},
+		{"Find area between \\(y=x+2\\) and \\(y=x\\) from \\(x=0\\) to \\(x=3\\).", "6", "The gap is constant 2, so area = 2·3 = 6."},
+		{"Find area between \\(y=4x\\) and \\(y=3x\\) from \\(x=0\\) to \\(x=3\\).", "9/2", "∫(4x-3x)dx from 0 to 3 = ∫x dx = [x²/2]₀³ = 9/2."},
+	}
+	tableHard := []entry{
+		{"Find area between \\(y=x\\) and \\(y=x^{3}\\) from \\(x=0\\) to \\(x=1\\).", "1/4", "∫(x-x³)dx from 0 to 1 = [x²/2-x⁴/4]₀¹ = 1/2-1/4 = 1/4."},
+		{"Find area between \\(y=2x^{2}\\) and \\(y=x^{2}\\) from \\(x=0\\) to \\(x=2\\).", "8/3", "∫x²dx from 0 to 2 = [x³/3]₀² = 8/3."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type integralVolumeGen struct{}
 
 func (g *integralVolumeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// V = π∫(√x)²dx from 0 to 4 = π∫x dx = π·x²/2 from 0 to 4 = π·16/2 = 8π
-	return generator.Problem{
-		Question:    "Find the volume when \\(y=\\sqrt{x}\\) from \\(x=0\\) to \\(4\\) is revolved around the \\(x\\)-axis.",
-		Answer:      "8π",
-		Explanation: "V = π∫(√x)²dx = π∫x dx = π[x²/2]₀⁴ = π(16/2-0) = 8π.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Find the volume when \\(y=\\sqrt{x}\\) from \\(x=0\\) to \\(4\\) is revolved around the \\(x\\)-axis.", "8pi", "V = π∫(√x)²dx = π∫x dx = π[x²/2]₀⁴ = π(16/2-0) = 8π."},
+		{"Find the volume when \\(y=x\\) from \\(x=0\\) to \\(1\\) is revolved around the \\(x\\)-axis.", "pi/3", "V = π∫x²dx = π[x³/3]₀¹ = pi/3."},
+		{"Find the volume when \\(y=x\\) from \\(x=0\\) to \\(2\\) is revolved around the \\(x\\)-axis.", "8pi/3", "V = π∫x²dx = π[x³/3]₀² = 8pi/3."},
+		{"Find the volume when \\(y=2\\) from \\(x=0\\) to \\(3\\) is revolved around the \\(x\\)-axis.", "12pi", "V = π∫4dx = π[4x]₀³ = 12pi (a cylinder of radius 2)."},
+	}
+	tableHard := []entry{
+		{"Find the volume when \\(y=x^{2}\\) from \\(x=0\\) to \\(2\\) is revolved around the \\(x\\)-axis.", "32pi/5", "V = π∫x⁴dx = π[x⁵/5]₀² = 32pi/5."},
+		{"Find the volume when \\(y=\\sqrt{x}\\) from \\(x=0\\) to \\(1\\) is revolved around the \\(x\\)-axis.", "pi/2", "V = π∫x dx = π[x²/2]₀¹ = pi/2."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type derivImplicitGen struct{}
@@ -613,21 +656,51 @@ func (g *derivRelatedRatesGen) Generate(ctx generator.GeneratorContext) generato
 type integralPartsGen struct{}
 
 func (g *integralPartsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return generator.Problem{
-		Question:    "Find \\(\\int x e^{x} \\, dx\\).",
-		Answer:      "xe^x-e^x+C",
-		Explanation: "Integration by parts: let u=x, dv=e^x dx → du=dx, v=e^x. ∫x·e^x dx = x·e^x - ∫e^x dx = x·e^x - e^x + C.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Find \\(\\int x e^{x} \\, dx\\).", "xe^x-e^x+C", "Integration by parts: let u=x, dv=e^x dx → du=dx, v=e^x. ∫x·e^x dx = x·e^x - ∫e^x dx = x·e^x - e^x + C."},
+		{"Find \\(\\int 2x e^{x} \\, dx\\).", "2xe^x-2e^x+C", "Let u=2x, dv=e^x dx → du=2dx, v=e^x. ∫2x·e^x dx = 2x·e^x - ∫2e^x dx = 2x·e^x - 2e^x + C."},
+		{"For \\(\\int x e^{x} \\, dx\\) with \\(u=x\\) and \\(dv=e^{x}dx\\), what is \\(du\\)?", "dx", "Differentiate u=x to get du=dx; then v=e^x, and the parts formula gives x·e^x - e^x + C."},
+		{"Find \\(\\int x e^{2x} \\, dx\\).", "(2x-1)e^(2x)/4+C", "Let u=x, dv=e^(2x)dx → du=dx, v=e^(2x)/2. ∫x·e^(2x)dx = x·e^(2x)/2 - ∫e^(2x)/2 dx = (2x-1)e^(2x)/4 + C."},
+	}
+	tableHard := []entry{
+		{"Find \\(\\int x^{2} e^{x} \\, dx\\).", "x^2e^x-2xe^x+2e^x+C", "Apply parts twice: ∫x²e^x dx = x²e^x - ∫2xe^x dx = x²e^x - 2xe^x + 2e^x + C."},
+		{"Find \\(\\int x \\ln(x) \\, dx\\).", "x^2ln(x)/2-x^2/4+C", "Let u=ln(x), dv=x dx → du=dx/x, v=x²/2. ∫x·ln(x)dx = x²ln(x)/2 - ∫x/2 dx = x²ln(x)/2 - x²/4 + C."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type integralPartialFractionsGen struct{}
 
 func (g *integralPartialFractionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return generator.Problem{
-		Question:    "Find \\(\\int \\frac{1}{x^{2}-1} \\, dx\\).",
-		Answer:      "(1/2)ln|x-1|-(1/2)ln|x+1|+C",
-		Explanation: "Partial fractions: 1/(x²-1) = 1/2·(1/(x-1) - 1/(x+1)). Integrate: (1/2)ln|x-1| - (1/2)ln|x+1| + C.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Find \\(\\int \\frac{1}{x^{2}-1} \\, dx\\).", "(1/2)ln|x-1|-(1/2)ln|x+1|+C", "Partial fractions: 1/(x²-1) = 1/2·(1/(x-1) - 1/(x+1)). Integrate: (1/2)ln|x-1| - (1/2)ln|x+1| + C."},
+		{"Find \\(\\int \\frac{1}{x(x+1)} \\, dx\\).", "ln|x|-ln|x+1|+C", "Partial fractions: 1/(x(x+1)) = 1/x - 1/(x+1). Integrate: ln|x| - ln|x+1| + C."},
+		{"Find \\(\\int \\frac{1}{x(x-1)} \\, dx\\).", "ln|x-1|-ln|x|+C", "Partial fractions: 1/(x(x-1)) = 1/(x-1) - 1/x. Integrate: ln|x-1| - ln|x| + C."},
+		{"In \\(\\frac{1}{x^{2}-1} = \\frac{A}{x-1}+\\frac{B}{x+1}\\), what is \\(A\\)?", "1/2", "Write 1 = A(x+1)+B(x-1). Setting x=1 gives 1 = 2A, so A = 1/2."},
+	}
+	tableHard := []entry{
+		{"Find \\(\\int \\frac{2}{x^{2}-4} \\, dx\\).", "(1/2)ln|x-2|-(1/2)ln|x+2|+C", "Partial fractions: 2/(x²-4) = 1/2·(1/(x-2) - 1/(x+2)). Integrate: (1/2)ln|x-2| - (1/2)ln|x+2| + C."},
+		{"In \\(\\frac{2}{x^{2}-4} = \\frac{A}{x-2}+\\frac{B}{x+2}\\), what is \\(B\\)?", "-1/2", "Write 2 = A(x+2)+B(x-2). Setting x=-2 gives 2 = -4B, so B = -1/2."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 func singleTerm(coef, exp int) string {
@@ -849,11 +922,26 @@ func (g *partialDerivGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type arcLengthGen struct{}
 
 func (g *arcLengthGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return generator.Problem{
-		Question:    "What is the formula for arc length of \\(y=f(x)\\) from \\(x=a\\) to \\(x=b\\)?",
-		Answer:      "∫√(1+(f'(x))²)dx from a to b",
-		Explanation: "Arc length = ∫ₐᵇ √(1+(f'(x))²) dx. For parametric curves, use ∫√((dx/dt)²+(dy/dt)²) dt.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Arc length integrates speed sqrt(1+(f')^2). For \\(y=3x\\), what is \\((f')^2\\)? (enter a number)", "9", "f'=3, so (f')^2=9 and the integrand is sqrt(1+9)=sqrt(10). Arc length is the integral of speed: ∫ₐᵇ √(1+(f'(x))²) dx."},
+		{"What is the arc length of \\(y=2x\\) from \\(x=0\\) to \\(1\\)?", "sqrt(5)", "f'(x)=2, so L = ∫₀¹√(1+4)dx = √5."},
+		{"What is the arc length of \\(y=x\\) from \\(x=0\\) to \\(3\\)?", "3sqrt(2)", "f'(x)=1, so L = ∫₀³√2 dx = 3√2."},
+		{"In the arc-length integrand √(1+(f')²), what is f' for \\(y=3x\\)?", "3", "The derivative of 3x is the constant 3."},
+	}
+	tableHard := []entry{
+		{"What is the arc length of \\(y=4x\\) from \\(x=0\\) to \\(2\\)?", "2sqrt(17)", "f'(x)=4, so L = ∫₀²√17 dx = 2√17."},
+		{"What integrand replaces √(1+(f')²) for a parametric curve \\((x(t),y(t))\\)?", "sqrt((dx/dt)^2+(dy/dt)^2)", "Parametric arc length uses ∫√((dx/dt)²+(dy/dt)²)dt."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type expIntegralGen struct{}
@@ -872,11 +960,26 @@ func (g *expIntegralGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type improperIntegralGen struct{}
 
 func (g *improperIntegralGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return generator.Problem{
-		Question:    "Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x^{2}} \\, dx\\) converges or diverges.",
-		Answer:      "converges (to 1)",
-		Explanation: "∫₁^∞ 1/x² dx = lim_{b→∞} [-1/x]₁ᵇ = lim_{b→∞} (-1/b+1) = 1. The integral converges to 1.",
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
 	}
+	tableEasy := []entry{
+		{"Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x^{2}} \\, dx\\) converges or diverges.", "converges (to 1)", "∫₁^∞ 1/x² dx = lim_{b→∞} [-1/x]₁ᵇ = lim_{b→∞} (-1/b+1) = 1. The integral converges to 1."},
+		{"Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x^{3}} \\, dx\\) converges or diverges.", "converges (to 1/2)", "∫₁^∞ x⁻³dx = lim_{b→∞} [-1/(2x²)]₁ᵇ = 1/2. The integral converges to 1/2."},
+		{"Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x} \\, dx\\) converges or diverges.", "diverges", "∫₁^∞ 1/x dx = lim_{b→∞} [ln x]₁ᵇ = ∞. The integral diverges (logarithmic growth)."},
+		{"What is the smallest integer p for which \\(\\int_{1}^{\\infty} dx/x^{p}\\) converges? (enter a number)", "2", "The p-integral converges iff p>1 (the cases p=2 and p=3 above converge; p=1 diverges), so the smallest integer is 2."},
+	}
+	tableHard := []entry{
+		{"Determine if \\(\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx\\) converges or diverges.", "converges (to 2)", "∫₀¹ x^{-1/2}dx = lim_{a→0+} [2√x]ₐ¹ = 2. The integral converges to 2."},
+		{"Determine if \\(\\int_{1}^{\\infty} \\frac{1}{\\sqrt{x}} \\, dx\\) converges or diverges.", "diverges", "Here p=1/2 ≤ 1, so the p-integral diverges."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type numericalIntegralGen struct{}
@@ -1274,9 +1377,9 @@ func (g *harmonicSeriesGen) Generate(ctx generator.GeneratorContext) generator.P
 	}
 	table := []entry{
 		{"Does the harmonic series \\(\\sum 1/n\\) converge or diverge?", "diverges", "The harmonic series \\(\\sum 1/n\\) diverges (slowly — like \\(\\ln(n)\\)), even though its terms \\(\\to 0\\)."},
-		{"What is the \\(p\\)-series \\(\\sum 1/n^{p}\\): when does it converge?", "converges for \\(p > 1\\)", "\\(\\sum 1/n^{p}\\) converges if \\(p>1\\), diverges if \\(p\\leq 1\\). The harmonic series \\((p=1)\\) is the boundary case."},
-		{"Approximately how large is the \\(n\\)th partial sum of the harmonic series?", "\\(H_{n} \\approx \\ln(n) + \\gamma\\) \\((\\gamma\\approx 0.577)\\)", "The harmonic numbers \\(H_{n} = \\sum_{k=1}^{n} 1/k \\approx \\ln(n) + \\gamma\\), where \\(\\gamma\\) is the Euler-Mascheroni constant."},
-		{"Is \\(\\sum 1/n^{2}\\) convergent or divergent?", "converges (to \\(\\pi^{2}/6\\))", "\\(\\sum 1/n^{2}\\) converges \\((p=2>1)\\). Its sum is \\(\\pi^{2}/6 \\approx 1.645\\) (Basel problem)."},
+		{"For the p-series \\(\\sum 1/n^{p}\\): does p=2 converge? (yes/no)", "yes", "\\(\\sum 1/n^{p}\\) converges if \\(p>1\\), diverges if \\(p\\leq 1\\). The harmonic series \\((p=1)\\) is the boundary case."},
+		{"The nth partial sum H_n grows like ln(n). Does H_n stay bounded? (yes/no)", "no", "The harmonic numbers \\(H_{n} = \\sum_{k=1}^{n} 1/k \\approx \\ln(n) + \\gamma\\) grow without bound, where \\(\\gamma\\) is the Euler-Mascheroni constant."},
+		{"Does \\(\\sum 1/n^{2}\\) converge? (yes/no)", "yes", "\\(\\sum 1/n^{2}\\) converges \\((p=2>1)\\). Its sum is \\(\\pi^{2}/6 \\approx 1.645\\) (Basel problem)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -1977,10 +2080,10 @@ func (g *integralPTestGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		q, a, e string
 	}
 	table := []entry{
-		{"For which \\(p\\) does \\(\\int_{1}^{\\infty}dx/x^{p}\\) converge?", "p>1", "The \\(p\\)-integral converges iff \\(p>1\\)."},
-		{"Does \\(\\int_{1}^{\\infty}dx/x^{3}\\) converge?", "yes (p=3>1)", "Since \\(p=3>1\\), the integral converges."},
-		{"Does \\(\\int_{1}^{\\infty}dx/x\\) converge?", "no (p=1)", "The harmonic case \\(p=1\\) diverges (logarithmic growth)."},
-		{"Does \\(\\int_{0}^{1}dx/x^{p}\\) converge for \\(p<1\\)?", "yes", "At \\(0\\), \\(\\int_{0}^{1}dx/x^{p}\\) converges iff \\(p<1\\) (flipped condition)."},
+		{"What is the smallest integer p for which \\(\\int_{1}^{\\infty}dx/x^{p}\\) converges? (enter a number)", "2", "The \\(p\\)-integral converges iff \\(p>1\\): smallest integer 2."},
+		{"Does \\(\\int_{1}^{\\infty}dx/x^{3}\\) converge? (yes/no)", "yes", "Since \\(p=3>1\\), the integral converges."},
+		{"Does \\(\\int_{1}^{\\infty}dx/x\\) converge? (yes/no)", "no", "The harmonic case \\(p=1\\) diverges (logarithmic growth)."},
+		{"Does \\(\\int_{0}^{1}dx/x^{p}\\) converge for \\(p<1\\)? (yes/no)", "yes", "At \\(0\\), \\(\\int_{0}^{1}dx/x^{p}\\) converges iff \\(p<1\\) (flipped condition)."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}

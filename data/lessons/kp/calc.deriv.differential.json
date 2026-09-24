@@ -3,27 +3,27 @@
     "label": "Differential of a function",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Form dy = f'(x)dx from the derivative",
+      "Set dx = Δx for the independent variable",
+      "Compute dy = 2x·dx for y = x^2"
     ]
   },
   {
-    "label": "Differential of a function — practice 2",
+    "label": "Approximating change with dy",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Replace Δy by dy for small dx",
+      "Evaluate dy at x = 3 with dx = 0.1",
+      "Compare against the true (3.1)^2 - 9"
     ]
   },
   {
-    "label": "Differential of a function — practice 3",
+    "label": "Tangent-line meaning",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Read dy as rise along the tangent line",
+      "Identify slope f'(x) with tan(alpha)",
+      "Recover f'(x) = dy/dx as a ratio"
     ]
   }
 ]

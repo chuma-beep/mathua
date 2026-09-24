@@ -1,29 +1,29 @@
 [
   {
-    "label": "Monotone sequences",
+    "label": "Monotone shape",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Check a_{n+1} >= a_n termwise",
+      "Test 1-1/n for increase",
+      "Flag n as unbounded increase"
     ]
   },
   {
-    "label": "Monotone sequences — practice 2",
+    "label": "Monotone convergence theorem",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Pair monotonicity with an upper bound",
+      "Conclude 1-1/n converges to 1",
+      "Reject n for missing an upper bound"
     ]
   },
   {
-    "label": "Monotone sequences — practice 3",
+    "label": "Non-monotone convergence",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Exhibit (-1)^n/n oscillating",
+      "Squeeze it to 0 anyway",
+      "File monotone as sufficient, not necessary"
     ]
   }
 ]
