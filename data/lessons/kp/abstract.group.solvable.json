@@ -1,29 +1,29 @@
 [
   {
-    "label": "Solvable Groups and Composition Series",
-    "section": "Solvability",
+    "label": "Worked: S_3 is solvable in two steps",
+    "section": "Worked: S_3 is solvable in two steps",
     "subgoals": [
-      "Review Solvability",
-      "Work the example",
-      "Verify"
+      "Compute S_3' as A_3",
+      "Compute A_3' as 1",
+      "Count two steps to 1"
     ]
   },
   {
-    "label": "Solvable Groups and Composition Series — practice 2",
-    "section": "Solvability",
+    "label": "Worked: S_5 is not solvable",
+    "section": "Worked: S_5 is not solvable",
     "subgoals": [
-      "Review Solvability",
-      "Work the example",
-      "Verify"
+      "Find the only normal subgroup A_5",
+      "Show no abelian quotient appears",
+      "Link to quintic unsolvability"
     ]
   },
   {
-    "label": "Solvable Groups and Composition Series — practice 3",
-    "section": "Example",
+    "label": "p-groups are solvable",
+    "section": "p-groups are solvable",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Recall p-groups are nilpotent",
+      "Pass through nilpotent to solvable",
+      "Contrast with S_n for n at least 5"
     ]
   }
 ]

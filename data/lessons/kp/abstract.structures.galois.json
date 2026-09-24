@@ -1,29 +1,29 @@
 [
   {
-    "label": "Galois Correspondence",
-    "section": "The Correspondence",
+    "label": "Worked: subfields of the x^3 - 2 splitting field",
+    "section": "Worked: subfields of the x^3 - 2 splitting field",
     "subgoals": [
-      "Review The Correspondence",
-      "Work the example",
-      "Verify"
+      "List subgroups of S_3",
+      "Match order-2 to cubics",
+      "Match A_3 to the quadratic"
     ]
   },
   {
-    "label": "Galois Correspondence — practice 2",
-    "section": "The Correspondence",
+    "label": "Worked: fixed-field degrees",
+    "section": "Worked: fixed-field degrees",
     "subgoals": [
-      "Review The Correspondence",
-      "Work the example",
-      "Verify"
+      "Divide |G| by |H|",
+      "Get 3 for the transposition case",
+      "Skip field arithmetic"
     ]
   },
   {
-    "label": "Galois Correspondence — practice 3",
-    "section": "Example",
+    "label": "Solvability link",
+    "section": "Solvability link",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Check the Galois group is solvable",
+      "Allow radicals for x^3 - 2",
+      "Block generic quintics via S_5"
     ]
   }
 ]

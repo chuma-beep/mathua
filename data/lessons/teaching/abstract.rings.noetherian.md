@@ -1,15 +1,25 @@
-# Noetherian Rings and Hilbert Basis Theorem
+# Noetherian Rings
 
-**Noetherian:** ACC on ideals (every ideal finitely generated); Hilbert basis: $R$ Noetherian $\Rightarrow R[x]$ Noetherian; fields, PIDs, $k[x_1,\dots,x_n]$ Noetherian.
+**Noetherian ring:** Every ascending chain of ideals stabilizes — equivalently, every ideal is finitely generated. Noetherian means ideal theory stays finite: no infinite strictly-growing towers.
 
-## Chain Conditions
+## Worked: the failing chain in k[x_1, x_2, ...]
 
-### Hilbert Basis
-$k[x_1,x_2,\dots]$ infinite variables non-Noetherian: $(x_1)\subset(x_1,x_2)\subset\cdots$ never stabilizes.
+Build $(x_1) \subset (x_1, x_2) \subset (x_1, x_2, x_3) \subset \cdots$:
+1. Each step adds a fresh variable no earlier ideal contains: $x_{n+1} \notin (x_1, \dots, x_n)$.
+2. So every inclusion is strict, forever.
+3. Hence $k[x_1, x_2, \dots]$ is not Noetherian — infinitely many variables defeat finiteness.
 
-### Closure
-Quotients and localizations of Noetherian remain Noetherian.
+So non-Noetherian means a concrete infinite tower exists, not an abstract failure.
 
-## Example
+## Worked: (6, 10) = (2) in Z
 
-$\mathbb Z$: Noetherian (PID); $k[x,y]$ Noetherian by Hilbert; $k[x_1,x_2,\dots]$ not.
+Find one generator for the ideal $(6, 10)$:
+1. Any common divisor story: $d$ generates iff $d = \gcd(6, 10)$.
+2. $\gcd(6, 10) = 2$: indeed $6 = 2 \cdot 3$ and $10 = 2 \cdot 5$, and $2 = 10 - 6$ lies in the ideal.
+3. So $(6, 10) = (2)$: principal, as Noetherian (here PID) structure demands.
+
+So in a PID every multi-generator ideal collapses to a gcd computation.
+
+## Hilbert basis
+
+$R$ Noetherian implies $R[x]$ Noetherian: adjoining one variable preserves finiteness. By induction, $k[x_1, \dots, x_n]$ is Noetherian for finite $n$ — only infinitely many variables break it.

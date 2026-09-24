@@ -1,29 +1,29 @@
 [
   {
-    "label": "Unique Factorization Domains",
-    "section": "Factorization Hierarchy",
+    "label": "Worked: 12 has three prime factors in Z",
+    "section": "Worked: 12 has three prime factors in Z",
     "subgoals": [
-      "Review Factorization Hierarchy",
-      "Work the example",
-      "Verify"
+      "Split 12 into 2, 2, 3",
+      "Check irreducibility",
+      "Count three with multiplicity"
     ]
   },
   {
-    "label": "Unique Factorization Domains — practice 2",
-    "section": "Factorization Hierarchy",
+    "label": "Worked: 6 breaks in Z[√-5]",
+    "section": "Worked: 6 breaks in Z[√-5]",
     "subgoals": [
-      "Review Factorization Hierarchy",
-      "Work the example",
-      "Verify"
+      "Factor as 2 times 3",
+      "Factor as (1+√-5)(1-√-5)",
+      "Certify difference via norms"
     ]
   },
   {
-    "label": "Unique Factorization Domains — practice 3",
-    "section": "Example",
+    "label": "PID implies UFD",
+    "section": "PID implies UFD",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Pass through Bézout",
+      "Promote irreducibles to primes",
+      "Apply to Z and F[x]"
     ]
   }
 ]

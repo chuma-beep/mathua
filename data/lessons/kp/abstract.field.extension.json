@@ -1,29 +1,29 @@
 [
   {
-    "label": "Field Extensions and Splitting Fields",
-    "section": "Building Extensions",
+    "label": "Worked: [Q(√2):Q] = 2",
+    "section": "Worked: [Q(√2):Q] = 2",
     "subgoals": [
-      "Review Building Extensions",
-      "Work the example",
-      "Verify"
+      "Write elements as a+b√2",
+      "Check independence of {1, √2}",
+      "Read degree 2"
     ]
   },
   {
-    "label": "Field Extensions and Splitting Fields — practice 2",
-    "section": "Building Extensions",
+    "label": "Worked: splitting x^2 - 2 costs nothing extra",
+    "section": "Worked: splitting x^2 - 2 costs nothing extra",
     "subgoals": [
-      "Review Building Extensions",
-      "Work the example",
-      "Verify"
+      "Adjoin √2",
+      "Get -√2 free",
+      "Stop at degree 2"
     ]
   },
   {
-    "label": "Field Extensions and Splitting Fields — practice 3",
-    "section": "Example",
+    "label": "Towers multiply",
+    "section": "Towers multiply",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Stack two quadratics",
+      "Multiply 2 by 2",
+      "Read degree 4"
     ]
   }
 ]

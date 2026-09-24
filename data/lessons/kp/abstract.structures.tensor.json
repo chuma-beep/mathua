@@ -1,29 +1,29 @@
 [
   {
-    "label": "Tensor Products of Modules",
-    "section": "Properties",
+    "label": "Worked: Z/6 ⊗ Z/4 has order 2",
+    "section": "Worked: Z/6 ⊗ Z/4 has order 2",
     "subgoals": [
-      "Review Properties",
-      "Work the example",
-      "Verify"
+      "Compute gcd(6, 4)",
+      "Read the tensor as Z/2",
+      "Note coprime inputs die"
     ]
   },
   {
-    "label": "Tensor Products of Modules — practice 2",
-    "section": "Properties",
+    "label": "Worked: Q ⊗ Z/5 = 0",
+    "section": "Worked: Q ⊗ Z/5 = 0",
     "subgoals": [
-      "Review Properties",
-      "Work the example",
-      "Verify"
+      "Slide 5 across the tensor",
+      "Use divisibility of Q",
+      "Kill every generator"
     ]
   },
   {
-    "label": "Tensor Products of Modules — practice 3",
-    "section": "Example",
+    "label": "Base change",
+    "section": "Base change",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Tensor with R, change nothing",
+      "Keep rank 2 for Z^2",
+      "Read localization as base change"
     ]
   }
 ]

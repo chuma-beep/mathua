@@ -1,29 +1,29 @@
 [
   {
-    "label": "Lagrange's Theorem",
-    "section": "Divisibility Constraint",
+    "label": "Worked: cosets of {0, 3} in Z_6",
+    "section": "Worked: cosets of {0, 3} in Z_6",
     "subgoals": [
-      "Review Divisibility Constraint",
-      "Work the example",
-      "Verify"
+      "List the three cosets",
+      "Check equal size and no overlap",
+      "Read the index as 3"
     ]
   },
   {
-    "label": "Lagrange's Theorem — practice 2",
-    "section": "Divisibility Constraint",
+    "label": "Worked: no subgroup of order 4 in a group of order 6",
+    "section": "Worked: no subgroup of order 4 in a group of order 6",
     "subgoals": [
-      "Review Divisibility Constraint",
-      "Work the example",
-      "Verify"
+      "Test 4 against divisibility by 6",
+      "See the tiling fail",
+      "Conclude no such subgroup exists"
     ]
   },
   {
-    "label": "Lagrange's Theorem — practice 3",
-    "section": "Example",
+    "label": "Converse fails",
+    "section": "Converse fails",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Note 6 divides 12",
+      "Recall A_4 has no order-6 subgroup",
+      "Separate necessity from sufficiency"
     ]
   }
 ]

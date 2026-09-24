@@ -1,15 +1,25 @@
 # Unique Factorization Domains
 
-**UFD:** An integral domain where every non-zero non-unit factors into irreducibles uniquely up to order and units; irreducible $\Rightarrow$ prime.
+**UFD:** An integral domain where every nonzero non-unit factors into irreducibles, uniquely up to order and units. UFD is the precise sense in which "prime factorization works" — and it can fail.
 
-## Factorization Hierarchy
+## Worked: 12 has three prime factors in Z
 
-### PID ⇒ UFD
-Every PID is a UFD: $ \mathbb Z$ and $F[x]$ are UFDs. The converse fails: $\mathbb Z[\sqrt{-5}]$ has $6=2\cdot3=(1+\sqrt{-5})(1-\sqrt{-5})$ so not a UFD.
+Factor 12 in the integers:
+1. $12 = 2 \cdot 6 = 2 \cdot 2 \cdot 3$.
+2. 2 and 3 are irreducible (hence prime) in $\mathbb Z$.
+3. Three prime factors with multiplicity — and any other factorization regroups these same primes.
 
-### Polynomial Rings over UFDs
-Gauss's lemma: if $R$ is a UFD then $R[x]$ is a UFD. Hence $\mathbb Z[x]$ is a UFD even though $\mathbb Z$ has non-principal ideals.
+So unique factorization means the multiset of irreducibles is an invariant of the number.
 
-## Example
+## Worked: 6 breaks in Z[√-5]
 
-$\mathbb Z$: $12=2^{2}\cdot3$ uniquely. $\mathbb Z[\sqrt{-5}]$: 6 has two factorizations, so not a UFD.
+Factor 6 two ways in $\mathbb Z[\sqrt{-5}]$:
+1. $6 = 2 \cdot 3$: both factors are irreducible (no proper factorization exists).
+2. $6 = (1+\sqrt{-5})(1-\sqrt{-5})$: also irreducible, genuinely different (norms: $N(2) = 4$ vs $N(1\pm\sqrt{-5}) = 6$).
+3. Two distinct factorizations: $\mathbb Z[\sqrt{-5}]$ is not a UFD.
+
+So norms certify the break: same element, incompatible irreducible pieces.
+
+## PID implies UFD
+
+Every PID is a UFD (irreducible elements are prime once principal ideals give Bézout). $\mathbb Z$ and $F[x]$ inherit uniqueness from principality.

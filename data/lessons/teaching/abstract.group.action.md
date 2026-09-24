@@ -1,15 +1,25 @@
-# Group Actions and Orbit-Stabilizer
+# Group Actions
 
-**Group action:** A homomorphism $G\to\operatorname{Sym}(X)$, written $g\cdot x$. The orbit $\operatorname{Orb}(x)=\{g\cdot x:g\in G\}$ partitions $X$; the stabilizer $\operatorname{Stab}(x)=\{g:g\cdot x=x\}$ is a subgroup.
+**Group action:** $G$ acts on $X$ when each $g$ permutes $X$ compatibly: $e$ fixes everything and $(gh)x = g(hx)$. The orbit of $x$ is everything reachable from $x$; the stabilizer is what fixes $x$.
 
-## Structure of Actions
+## Worked: orbits partition {1, 2, 3} under S_3
 
-### Orbits as Equivalence Classes
-$x\sim y$ iff $y=g\cdot x$ for some $g$ is an equivalence relation. Orbits are the classes.
+Act by permuting positions:
+1. From 1, some permutation sends $1 \to 2$ and another sends $1 \to 3$: the orbit of 1 is all of $\{1, 2, 3\}$.
+2. One orbit covers everything, so the action is transitive — a single orbit.
+3. The stabilizer of 3 is the permutations fixing 3: $\{e, (1\,2)\}$, of order 2.
 
-### Orbit-Stabilizer
-Bijection $G/\operatorname{Stab}(x)\cong \operatorname{Orb}(x)$ gives $|G|=|\operatorname{Orb}(x)|\cdot|\operatorname{Stab}(x)|$ for finite $G$. Burnside's lemma: $|X/G|=\frac1{|G|}\sum_g|\operatorname{Fix}(g)|$.
+So orbit-stabilizer checks out: $3 \cdot 2 = 6 = |S_3|$.
 
-## Example
+## Worked: |D_4| from orbit-stabilizer
 
-$S_3$ acting on $\{1,2,3\}$: orbit of 1 is $\{1,2,3\}$ (transitive), stabilizer of 1 is $\{e,(2\,3)\}$ of order 2, and $6=3\cdot2$.
+$D_4$ acts on the 4 square vertices in one orbit:
+1. One orbit of size 4: the action is transitive.
+2. The stabilizer of a vertex has order 2 (identity plus reflection across its diagonal).
+3. So $|D_4| = 4 \cdot 2 = 8$ — the group order falls out of the action.
+
+So orbit-stabilizer turns geometry (one orbit, small stabilizer) into the group order.
+
+## Orbit sizes vary
+
+Fixed points are orbits of size 1; other orbits are larger. Orbit sizes always divide $|G|$, but different orbits of one action need not match — only the partition property is guaranteed.

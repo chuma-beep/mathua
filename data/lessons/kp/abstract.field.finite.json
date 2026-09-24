@@ -1,29 +1,29 @@
 [
   {
-    "label": "Finite Fields",
-    "section": "Prime Power Fields",
+    "label": "Worked: F_4 exists, order-6 fields do not",
+    "section": "Worked: F_4 exists, order-6 fields do not",
     "subgoals": [
-      "Review Prime Power Fields",
-      "Work the example",
-      "Verify"
+      "Check 4 as a prime power",
+      "Reject 6 as non-prime-power",
+      "Filter by order first"
     ]
   },
   {
-    "label": "Finite Fields — practice 2",
-    "section": "Prime Power Fields",
+    "label": "Worked: F_4^× has order 3",
+    "section": "Worked: F_4^× has order 3",
     "subgoals": [
-      "Review Prime Power Fields",
-      "Work the example",
-      "Verify"
+      "Remove 0 from 4 elements",
+      "Note cyclicity",
+      "Generalize to p^n - 1"
     ]
   },
   {
-    "label": "Finite Fields — practice 3",
-    "section": "Example",
+    "label": "Frobenius",
+    "section": "Frobenius",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Apply x to x^p",
+      "Generate the Galois group",
+      "Read order n"
     ]
   }
 ]

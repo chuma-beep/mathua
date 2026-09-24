@@ -1,17 +1,29 @@
 [
   {
-    "label": "Quotient rings",
-    "section": "Quotient rings",
-    "subgoals": ["Form cosets r+I", "Define addition and multiplication", "Check well-definedness"]
+    "label": "Worked: Z/6Z has six elements",
+    "section": "Worked: Z/6Z has six elements",
+    "subgoals": [
+      "List cosets 0 through 5",
+      "Watch the seventh wrap back",
+      "Read clock arithmetic"
+    ]
   },
   {
-    "label": "Isomorphisms",
-    "section": "Isomorphisms",
-    "subgoals": ["Recognize Z/nZ as quotient", "Map R[x]/(x) to R", "Identify the isomorphism"]
+    "label": "Worked: 2Z/4Z has two elements",
+    "section": "Worked: 2Z/4Z has two elements",
+    "subgoals": [
+      "Split evens mod 4",
+      "Double the odd coset back",
+      "Conclude Z_2"
+    ]
   },
   {
-    "label": "Universal property",
-    "section": "Universal property",
-    "subgoals": ["Collapse the ideal to zero", "State universal mapping", "Apply to examples"]
+    "label": "Ideals control quotients",
+    "section": "Ideals control quotients",
+    "subgoals": [
+      "Compare Z/2Z with Z/6Z",
+      "See the ideal set the size",
+      "Generalize the dial"
+    ]
   }
 ]

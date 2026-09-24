@@ -1,17 +1,29 @@
 [
   {
-    "label": "Definition of order",
-    "section": "Definition of order",
-    "subgoals": ["Define order as smallest n with g^n=e", "Handle infinite order", "Compute by repeated operation"]
+    "label": "Worked: order of 2 in Z_6",
+    "section": "Worked: order of 2 in Z_6",
+    "subgoals": [
+      "Add 2 twice, then three times",
+      "Stop at the first 0",
+      "Read order 3"
+    ]
   },
   {
-    "label": "Order of a group",
-    "section": "Order of a group",
-    "subgoals": ["Count elements of G", "Relate generator order to |G|", "Use cyclic generators"]
+    "label": "Worked: a transposition has order 2",
+    "section": "Worked: a transposition has order 2",
+    "subgoals": [
+      "Apply (1 2) twice",
+      "Contrast the 3-cycle",
+      "Read order from cycle type"
+    ]
   },
   {
-    "label": "Computing orders",
-    "section": "Computing orders",
-    "subgoals": ["Add multiples mod n", "Test successive powers", "State the order"]
+    "label": "Infinite order",
+    "section": "Infinite order",
+    "subgoals": [
+      "Test multiples of -1",
+      "Find no return to 0",
+      "Name the infinite cyclic subgroup"
+    ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Galois Groups of Polynomials",
-    "section": "Polynomials",
+    "label": "Worked: x^2 - 2 gives Z_2",
+    "section": "Worked: x^2 - 2 gives Z_2",
     "subgoals": [
-      "Review Polynomials",
-      "Work the example",
-      "Verify"
+      "Fix the splitting field degree as 2",
+      "Send √2 to plus or minus itself",
+      "Read order 2"
     ]
   },
   {
-    "label": "Galois Groups of Polynomials — practice 2",
-    "section": "Polynomials",
+    "label": "Worked: x^3 - 2 gives S_3",
+    "section": "Worked: x^3 - 2 gives S_3",
     "subgoals": [
-      "Review Polynomials",
-      "Work the example",
-      "Verify"
+      "Adjoin the real root then omega",
+      "Count degree 6",
+      "Find transposition plus 3-cycle"
     ]
   },
   {
-    "label": "Galois Groups of Polynomials — practice 3",
-    "section": "Example",
+    "label": "Discriminants detect A_n",
+    "section": "Discriminants detect A_n",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Check the discriminant is square",
+      "Land inside A_n",
+      "Flag generic quintics as S_5"
     ]
   }
 ]

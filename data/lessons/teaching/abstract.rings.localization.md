@@ -1,15 +1,25 @@
-# Localization of Rings
+# Localization
 
-**Localization:** For multiplicative set $S\subset R$, $S^{-1}R=\{r/s:r\in R,s\in S\}$ inverts $S$. $R$ localized at prime $P$ is $R_P$ with unique maximal ideal $PR_P$.
+**Localization:** Given $R$ and a multiplicative set $S$ (closed under multiplication, $0 \notin S$), $S^{-1}R$ adjoins inverses for everything in $S$: fractions $r/s$ with the usual cross-multiplication rules. Localizing focuses the ring at the primes avoiding $S$.
 
-## Inverting Elements
+## Worked: halving odd denominators
 
-### Fractions
-$S^{-1}R$ makes $S$ units; field of fractions of domain is $S=R\setminus\{0\}$. $S=\{1,2,4,8,\dots\}$ gives $Z[1/2]$.
+In $\mathbb Z[1/2]$, add $1/2 + 1/4$:
+1. Common denominator 4: $2/4 + 1/4$.
+2. Sum: $3/4$.
+3. So $1/2 + 1/4 = 3/4$ — ordinary fraction arithmetic, now legal inside the ring.
 
-### Local Rings
-$R_{(p)}=\{a/b\in\mathbb Q:p\nmid b\}$ localizes $\mathbb Z$ at $(p)$, maximal ideal $pR_{(p)}$.
+So localization just permits the divisions in $S$; everything else computes normally.
 
-## Example
+## Worked: Z_(p) has one maximal ideal
 
-$\mathbb Z$ localized at $(2)$: elements $a/b$ with $b$ odd, maximal ideal $2\mathbb Z_{(2)}$.
+Localize $\mathbb Z$ at the complement of $(p)$:
+1. Allowed denominators are integers not divisible by $p$.
+2. Every element outside $p\mathbb Z_{(p)}$ is a unit (numerator and denominator both prime to $p$).
+3. Non-units form the single ideal $p\mathbb Z_{(p)}$ — hence local, with one maximal ideal.
+
+So throwing away the primes outside $(p)$ collapses the ideal structure to a single point.
+
+## Fractions as localization
+
+The field of fractions of a domain is localization at all nonzero elements: $S = R \setminus \{0\}$. Inverting everything possible leaves a field.

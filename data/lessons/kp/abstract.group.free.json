@@ -1,29 +1,29 @@
 [
   {
-    "label": "Free Groups and Presentations",
-    "section": "Universal Property",
+    "label": "Worked: F_1 is Z",
+    "section": "Worked: F_1 is Z",
     "subgoals": [
-      "Review Universal Property",
-      "Work the example",
-      "Verify"
+      "Collapse every word to a^n",
+      "Map a^n to n",
+      "Read rank 1"
     ]
   },
   {
-    "label": "Free Groups and Presentations — practice 2",
-    "section": "Universal Property",
+    "label": "Worked: F_2 is non-abelian",
+    "section": "Worked: F_2 is non-abelian",
     "subgoals": [
-      "Review Universal Property",
-      "Work the example",
-      "Verify"
+      "Write aba^-1b^-1 reduced",
+      "Show ab differs from ba",
+      "Conclude non-abelian"
     ]
   },
   {
-    "label": "Free Groups and Presentations — practice 3",
-    "section": "Example",
+    "label": "Abelianization",
+    "section": "Abelianization",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Force [a,b] to e",
+      "Read the quotient as Z^2",
+      "Count generators, forget the rest"
     ]
   }
 ]
