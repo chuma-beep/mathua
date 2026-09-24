@@ -3,27 +3,27 @@
     "label": "What is the harmonic mean?",
     "section": "What is the harmonic mean?",
     "subgoals": [
-      "Define harmonic mean",
-      "Follow the worked example",
-      "Apply the rule"
+      "Define harmonic mean via reciprocals",
+      "Write the M_{-1} formula",
+      "Decide when rate data calls for it"
     ]
   },
   {
-    "label": "Harmonic mean — practice 2",
-    "section": "",
+    "label": "Example 1 — average speed over equal segments",
+    "section": "Example 1",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Understand why equal distances weight the slower speed more",
+      "Compute 2/(1/60 + 1/90)",
+      "Check the result"
     ]
   },
   {
-    "label": "Harmonic mean — practice 3",
-    "section": "",
+    "label": "Example 2 — average rate over equal periods",
+    "section": "Example 2",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Understand the five-period production setup",
+      "Sum the five reciprocals and divide into 5",
+      "Check the result"
     ]
   }
 ]

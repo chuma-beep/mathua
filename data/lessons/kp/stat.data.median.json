@@ -3,8 +3,8 @@
     "label": "The central position in a data distribution",
     "section": "The central position in a data distribution",
     "subgoals": [
-      "Define find the median",
-      "Follow the worked example",
+      "Define the median as the middle ordered value",
+      "Separate the odd-n and even-n cases",
       "Apply the rule"
     ]
   },
@@ -12,18 +12,18 @@
     "label": "A distance-based definition of the median",
     "section": "A distance-based definition of the median",
     "subgoals": [
-      "Understand a distance-based definition of the median",
-      "Apply a distance-based definition of the median",
+      "Understand the median as loss minimizer",
+      "Apply the absolute-deviation criterion",
       "Check the result"
     ]
   },
   {
-    "label": "Find the median — practice 3",
-    "section": "",
+    "label": "Median and quantiles",
+    "section": "Median and quantiles",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Locate the median as the x_{0.5} quantile",
+      "Split quartiles and form the interquartile range",
+      "Check the result"
     ]
   }
 ]

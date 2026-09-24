@@ -3,27 +3,27 @@
     "label": "The Family of Quadrilaterals",
     "section": "The Family of Quadrilaterals",
     "subgoals": [
-      "Define types of quadrilaterals",
-      "Follow the worked example",
-      "Apply the rule"
+      "Count parallel pairs: one for trapezoid, two for parallelogram",
+      "Demand four right angles for a rectangle",
+      "Demand four equal sides for a rhombus"
     ]
   },
   {
     "label": "The Hierarchy",
     "section": "The Hierarchy",
     "subgoals": [
-      "Understand the hierarchy",
-      "Apply the hierarchy",
-      "Check the result"
+      "Nest every square inside rectangle and rhombus",
+      "Carry parallelogram properties down to all children",
+      "Total every quadrilateral at 360 degrees"
     ]
   },
   {
-    "label": "Types of quadrilaterals — practice 3",
+    "label": "Drill: rhombus-or-trapezoid calls",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Call four equal sides without right angles a rhombus",
+      "Reject 9-and-5 opposite sides as a parallelogram",
+      "File the 9-and-5 shape as a trapezoid"
     ]
   }
 ]

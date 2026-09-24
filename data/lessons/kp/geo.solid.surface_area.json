@@ -3,27 +3,27 @@
     "label": "The Formula",
     "section": "The Formula",
     "subgoals": [
-      "Define surface area of rectangular prism",
-      "Follow the worked example",
-      "Apply the rule"
+      "Pair top-bottom as 2lw and front-back as 2lh",
+      "Pair left-right as 2wh",
+      "Sum to SA equals 2(lw + lh + wh)"
     ]
   },
   {
     "label": "Volume vs. Surface Area",
     "section": "Volume vs. Surface Area",
     "subgoals": [
-      "Understand volume vs. surface area",
-      "Apply volume vs. surface area",
-      "Check the result"
+      "Charge volume with the inside and area with the wrapping",
+      "Bill volume in cubic units and area in square units",
+      "Collapse cubes to SA equals 6 s-squared"
     ]
   },
   {
-    "label": "Surface area of rectangular prism — practice 3",
+    "label": "Drill: 5-by-4-by-3 prism and edge-2 cube",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Score the face pairs 40, 30, and 24 for 94 total",
+      "Attach square centimeters to the 94",
+      "Multiply six 2-by-2 faces for 24 square meters"
     ]
   }
 ]

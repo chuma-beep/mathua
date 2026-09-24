@@ -52,19 +52,43 @@ type angleTypesGen struct{}
 
 func (g *angleTypesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	deg := rand.Intn(max(1, scale*30))
-	ans := "straight"
-	if deg < 90 {
-		ans = "acute"
-	} else if deg == 90 {
-		ans = "right"
-	} else if deg < 180 {
-		ans = "obtuse"
+	if rand.Intn(3) == 0 {
+		// production: degrees short of a right angle (unique numeric answer).
+		a := rand.Intn(60) + 10 // 10..69
+		return generator.Problem{
+			Question:    fmt.Sprintf("An angle measures %d degrees. How many degrees short of a right angle is it? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", 90-a),
+			Explanation: fmt.Sprintf("A right angle is 90 degrees, so 90 - %d = %d.", a, 90-a),
+		}
 	}
+	type entry struct {
+		deg int
+		cls string
+	}
+	tableEasy := []entry{
+		{30, "acute"},
+		{45, "acute"},
+		{90, "right"},
+		{120, "obtuse"},
+		{135, "obtuse"},
+		{180, "straight"},
+	}
+	tableHard := []entry{
+		{89, "acute"},
+		{91, "obtuse"},
+		{179, "obtuse"},
+		{10, "acute"},
+		{150, "obtuse"},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("An angle of %d degrees is classified as:", deg),
-		Answer:      ans,
-		Explanation: fmt.Sprintf("Acute < 90, right = 90, obtuse > 90 and < 180, straight = 180. %d is %s.", deg, ans),
+		Question:    fmt.Sprintf("An angle of %d degrees is classified as:", e.deg),
+		Answer:      e.cls,
+		Explanation: fmt.Sprintf("Acute < 90, right = 90, obtuse > 90 and < 180, straight = 180. %d is %s.", e.deg, e.cls),
 	}
 }
 
@@ -72,24 +96,43 @@ type angleMeasureGen struct{}
 
 func (g *angleMeasureGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(1, scale*30)) + 1
-	return generator.Problem{
-		Question:    fmt.Sprintf("An angle of %d degrees is a:", a),
-		Answer:      classAngle(a),
-		Explanation: fmt.Sprintf("%d degrees is %s.", a, classAngle(a)),
+	if rand.Intn(3) == 0 {
+		// production: degrees to reach a straight angle (unique numeric answer).
+		a := rand.Intn(80) + 91 // 91..170
+		return generator.Problem{
+			Question:    fmt.Sprintf("An angle measures %d degrees. How many more degrees are needed to reach a straight angle? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", 180-a),
+			Explanation: fmt.Sprintf("A straight angle is 180 degrees, so 180 - %d = %d.", a, 180-a),
+		}
 	}
-}
-
-func classAngle(d int) string {
-	switch {
-	case d < 90:
-		return "acute angle"
-	case d == 90:
-		return "right angle"
-	case d < 180:
-		return "obtuse angle"
-	default:
-		return "straight angle"
+	type entry struct {
+		deg int
+		cls string
+	}
+	tableEasy := []entry{
+		{25, "acute angle"},
+		{60, "acute angle"},
+		{90, "right angle"},
+		{110, "obtuse angle"},
+		{150, "obtuse angle"},
+		{180, "straight angle"},
+	}
+	tableHard := []entry{
+		{89, "acute angle"},
+		{91, "obtuse angle"},
+		{179, "obtuse angle"},
+		{5, "acute angle"},
+		{160, "obtuse angle"},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("An angle of %d degrees is a:", e.deg),
+		Answer:      e.cls,
+		Explanation: fmt.Sprintf("%d degrees is %s.", e.deg, e.cls),
 	}
 }
 
@@ -167,20 +210,44 @@ type pythagoreanGen struct{}
 
 func (g *pythagoreanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(1, scale*3)) + 3
-	b := rand.Intn(max(1, scale*3)) + 3
-	cSq := a*a + b*b
-	c := int(math.Sqrt(float64(cSq)))
-	for c*c != cSq {
-		a = rand.Intn(max(1, scale*3)) + 3
-		b = rand.Intn(max(1, scale*3)) + 3
-		cSq = a*a + b*b
-		c = int(math.Sqrt(float64(cSq)))
+	type triple struct{ a, b, c int }
+	tableEasy := []triple{
+		{3, 4, 5},
+		{6, 8, 10},
+		{5, 12, 13},
+		{9, 12, 15},
 	}
+	tableHard := []triple{
+		{8, 15, 17},
+		{7, 24, 25},
+		{20, 21, 29},
+	}
+	if rand.Intn(3) == 0 {
+		// production: missing leg from hypotenuse and one leg (unique answer).
+		pool := tableEasy
+		if scale > 3 {
+			pool = append(tableEasy, tableHard...)
+		}
+		t := pool[rand.Intn(len(pool))]
+		known, unknown := t.a, t.b
+		if rand.Intn(2) == 0 {
+			known, unknown = t.b, t.a
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("Right triangle: hypotenuse \\(= %d\\) and one leg \\(= %d\\). Find the other leg. (enter a number)", t.c, known),
+			Answer:      fmt.Sprintf("%d", unknown),
+			Explanation: fmt.Sprintf("\\(\\text{leg}^{2} = %d^{2} - %d^{2} = %d - %d = %d\\), so \\(\\text{leg} = \\sqrt{%d} = %d\\).", t.c, known, t.c*t.c, known*known, unknown*unknown, unknown*unknown, unknown),
+		}
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	t := pool[rand.Intn(len(pool))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Right triangle: legs \\(= %d\\) and \\(%d\\). Find the hypotenuse \\(c\\).", a, b),
-		Answer:      fmt.Sprintf("%d", c),
-		Explanation: fmt.Sprintf("\\(c^{2} = %d^{2} + %d^{2} = %d + %d = %d\\), so \\(c = \\sqrt{%d} = %d\\).", a, b, a*a, b*b, c*c, c*c, c),
+		Question:    fmt.Sprintf("Right triangle: legs \\(= %d\\) and \\(%d\\). Find the hypotenuse \\(c\\).", t.a, t.b),
+		Answer:      fmt.Sprintf("%d", t.c),
+		Explanation: fmt.Sprintf("\\(c^{2} = %d^{2} + %d^{2} = %d + %d = %d\\), so \\(c = \\sqrt{%d} = %d\\).", t.a, t.b, t.a*t.a, t.b*t.b, t.c*t.c, t.c*t.c, t.c),
 	}
 }
 
@@ -273,12 +340,49 @@ type coordPlotGen struct{}
 
 func (g *coordPlotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	x := rand.Intn(max(1, scale*2)) - 5
-	y := rand.Intn(max(1, scale*2)) - 5
+	if rand.Intn(3) == 0 {
+		// production: read one coordinate off a plotted point (unique answer).
+		x := rand.Intn(11) - 5
+		y := rand.Intn(11) - 5
+		if rand.Intn(2) == 0 {
+			return generator.Problem{
+				Question:    fmt.Sprintf("What is the x-coordinate of the point \\((%d, %d)\\)? (enter a number)", x, y),
+				Answer:      fmt.Sprintf("%d", x),
+				Explanation: fmt.Sprintf("In (%d,%d) the first entry is the x-coordinate: %d.", x, y, x),
+			}
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the y-coordinate of the point \\((%d, %d)\\)? (enter a number)", x, y),
+			Answer:      fmt.Sprintf("%d", y),
+			Explanation: fmt.Sprintf("In (%d,%d) the second entry is the y-coordinate: %d.", x, y, y),
+		}
+	}
+	type entry struct{ x, y int }
+	tableEasy := []entry{
+		{2, 3},
+		{-2, 3},
+		{-2, -3},
+		{2, -3},
+		{0, 4},
+		{3, 0},
+	}
+	tableHard := []entry{
+		{5, 7},
+		{-6, 2},
+		{-4, -8},
+		{7, -1},
+		{0, -5},
+		{-3, 0},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("What quadrant is the point \\((%d, %d)\\) in?", x, y),
-		Answer:      quad(x, y),
-		Explanation: fmt.Sprintf("(%d,%d) is in %s.", x, y, quad(x, y)),
+		Question:    fmt.Sprintf("What quadrant is the point \\((%d, %d)\\) in?", e.x, e.y),
+		Answer:      quad(e.x, e.y),
+		Explanation: fmt.Sprintf("(%d,%d) is in %s.", e.x, e.y, quad(e.x, e.y)),
 	}
 }
 
@@ -301,20 +405,40 @@ type coordDistanceGen struct{}
 
 func (g *coordDistanceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	dx := rand.Intn(max(1, scale*4)) + 1
-	dy := rand.Intn(max(1, scale*4)) + 1
-	dist := int(math.Round(math.Sqrt(float64(dx*dx + dy*dy))))
-	for dist*dist != dx*dx+dy*dy {
-		dx = rand.Intn(max(1, scale*4)) + 1
-		dy = rand.Intn(max(1, scale*4)) + 1
-		dist = int(math.Round(math.Sqrt(float64(dx*dx + dy*dy))))
+	type triple struct{ dx, dy, dist int }
+	tableEasy := []triple{
+		{3, 4, 5},
+		{6, 8, 10},
+		{5, 12, 13},
+		{9, 12, 15},
 	}
+	tableHard := []triple{
+		{8, 15, 17},
+		{7, 24, 25},
+		{20, 21, 29},
+	}
+	if rand.Intn(3) == 0 {
+		// production: axis-aligned distance (unique numeric answer).
+		x1 := rand.Intn(9) - 4
+		y := rand.Intn(9) - 4
+		dx := rand.Intn(8) + 2 // 2..9
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\). (enter a number)", x1, y, x1+dx, y),
+			Answer:      fmt.Sprintf("%d", dx),
+			Explanation: fmt.Sprintf("Same y-coordinate, so the distance is \\(|%d-%d| = %d\\).", x1+dx, x1, dx),
+		}
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	t := pool[rand.Intn(len(pool))]
 	x1 := rand.Intn(5)
 	y1 := rand.Intn(5)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x1+dx, y1+dy),
-		Answer:      fmt.Sprintf("%d", dist),
-		Explanation: fmt.Sprintf("\\(\\sqrt{(%d-%d)^{2} + (%d-%d)^{2}} = \\sqrt{%d + %d} = \\sqrt{%d} = %d\\).", x1+dx, x1, y1+dy, y1, dx*dx, dy*dy, dx*dx+dy*dy, dist),
+		Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x1+t.dx, y1+t.dy),
+		Answer:      fmt.Sprintf("%d", t.dist),
+		Explanation: fmt.Sprintf("\\(\\sqrt{(%d-%d)^{2} + (%d-%d)^{2}} = \\sqrt{%d + %d} = \\sqrt{%d} = %d\\).", x1+t.dx, x1, y1+t.dy, y1, t.dx*t.dx, t.dy*t.dy, t.dx*t.dx+t.dy*t.dy, t.dist),
 	}
 }
 
@@ -366,12 +490,32 @@ type coordLinesGen struct{}
 
 func (g *coordLinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	x1 := rand.Intn(max(1, scale)) - 2
-	y1 := rand.Intn(max(1, scale)) - 2
-	x2 := x1 + rand.Intn(max(1, scale)) + 1
-	y2 := y1 + rand.Intn(max(1, scale)) + 1
+	if rand.Intn(3) == 0 {
+		// production: slope of a line through two points (unique numeric answer).
+		run := rand.Intn(4) + 1
+		slope := rand.Intn(4) + 1
+		rise := run * slope
+		x1 := rand.Intn(7) - 3
+		y1 := rand.Intn(7) - 3
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the slope of the line through \\((%d,%d)\\) and \\((%d,%d)\\)? (enter a number)", x1, y1, x1+run, y1+rise),
+			Answer:      fmt.Sprintf("%d", slope),
+			Explanation: fmt.Sprintf("\\(\\text{Slope} = \\frac{%d-%d}{%d-%d} = \\frac{%d}{%d} = %d\\).", y1+rise, y1, x1+run, x1, rise, run, slope),
+		}
+	}
+	x1 := rand.Intn(scale*2+4) - 3
+	y1 := rand.Intn(scale*2+4) - 3
+	x2 := x1 + rand.Intn(scale*2+2) + 1
+	y2 := y1 + rand.Intn(scale*2+2) + 1
 	dx := x2 - x1
 	dy := y2 - y1
+	if scale <= 3 {
+		// easy: integer slopes only; resample the rise until it divides evenly.
+		for dy%dx != 0 {
+			y2 = y1 + rand.Intn(scale*2+2) + 1
+			dy = y2 - y1
+		}
+	}
 	// slope = dy/dx
 	gcd := mathutil.GCD(dy, dx)
 	mNum := dy / gcd

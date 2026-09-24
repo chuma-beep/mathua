@@ -3,27 +3,27 @@
     "label": "Perimeter Formulas",
     "section": "Perimeter Formulas",
     "subgoals": [
-      "Define perimeter of polygons",
-      "Follow the worked example",
-      "Apply the rule"
+      "Add every side for P equals a plus b plus c",
+      "Shorten rectangles to 2l plus 2w",
+      "Multiply regular n-gons as n times s"
     ]
   },
   {
     "label": "Units",
     "section": "Units",
     "subgoals": [
-      "Understand units",
-      "Apply units",
-      "Check the result"
+      "Report perimeter in plain length units",
+      "Refuse square units for a distance-around",
+      "Match cm sides with a cm perimeter"
     ]
   },
   {
-    "label": "Perimeter of polygons — practice 3",
+    "label": "Drill: rectangle 6 by 4 and pentagon side 7",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Double 6 and 4, then add for 20 cm",
+      "Multiply 5 equal sides by 7 for 35 m",
+      "Check the units match the side units"
     ]
   }
 ]

@@ -337,7 +337,7 @@ func (g *basicProbGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(max(1, scale)) + 1
+		counts[i] = rand.Intn(max(4, scale*4)) + 1
 		total += counts[i]
 	}
 	pick := rand.Intn(3)
@@ -364,7 +364,7 @@ func (g *complementProbGen) Generate(ctx generator.GeneratorContext) generator.P
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(max(1, scale)) + 1
+		counts[i] = rand.Intn(max(4, scale*4)) + 1
 		total += counts[i]
 	}
 	pick := rand.Intn(3)
@@ -391,7 +391,7 @@ func (g *compoundProbGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	colorNames := make([]string, 3)
 	for i := 0; i < 3; i++ {
 		colorNames[i] = colors[rand.Intn(len(colors))]
-		counts[i] = rand.Intn(max(1, scale)) + 2
+		counts[i] = rand.Intn(max(4, scale*4)) + 2
 		total += counts[i]
 	}
 	pick1 := rand.Intn(3)
@@ -508,8 +508,8 @@ type harmonicMeanGen struct{}
 
 func (g *harmonicMeanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := (rand.Intn(max(1, scale)) + 2) * 2
-	b := (rand.Intn(max(1, scale)) + 2) * 2
+	a := (rand.Intn(max(6, scale*4)) + 2) * 2
+	b := (rand.Intn(max(6, scale*4)) + 2) * 2
 	numer := 2 * a * b
 	denom := a + b
 	gcd := mathutil.GCD(numer, denom)
@@ -550,7 +550,7 @@ func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	vals := make([]int, 5)
 	sum := 0
 	for i := range vals {
-		vals[i] = (rand.Intn(max(1, scale)) + 1) * 2
+		vals[i] = (rand.Intn(max(4, scale*4)) + 1) * 2
 		sum += vals[i]
 	}
 	mean := float64(sum) / float64(len(vals))

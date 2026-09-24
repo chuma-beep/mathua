@@ -1,29 +1,29 @@
 [
   {
-    "label": "Distance between two points",
+    "label": "Ordered pairs give every point an address",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Move east-west first, then north-south",
+      "Write the horizontal step before the vertical step",
+      "Pin the origin at (0, 0)"
     ]
   },
   {
-    "label": "Distance between two points — practice 2",
+    "label": "Axes split the plane into quadrants",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Cross the x-axis and y-axis at the origin",
+      "Number the four quadrants with Roman numerals",
+      "Read (1, 2) as x-coordinate 1, y-coordinate 2"
     ]
   },
   {
-    "label": "Distance between two points — practice 3",
+    "label": "Drill: addresses off the street grid",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Count 2 blocks east and 3 north to the restaurant",
+      "Count 3 right and 3 down for the bar",
+      "Count 2 left and 4 down for the gas station"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Why Multiply?",
     "section": "Why Multiply?",
     "subgoals": [
-      "Define volume of rectangular prism",
-      "Follow the worked example",
-      "Apply the rule"
+      "Tile the bottom layer as 5 times 4 cubes",
+      "Stack 3 layers for 5 times 4 times 3",
+      "Report the 60 in cubic inches"
     ]
   },
   {
     "label": "The Base-Times-Height View",
     "section": "The Base-Times-Height View",
     "subgoals": [
-      "Understand the base-times-height view",
-      "Apply the base-times-height view",
-      "Check the result"
+      "Fold length times width into base area B",
+      "Multiply B by height for V equals Bh",
+      "Carry the Bh view forward to cylinders"
     ]
   },
   {
-    "label": "Volume of rectangular prism — practice 3",
+    "label": "Drill: 5-by-4-by-3 box and the 2-ft base tower",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Multiply 5, 4, 3 for 60 cubic cm",
+      "Square the 2-ft base to 4 square ft",
+      "Raise 4 by 5 for 20 cubic ft"
     ]
   }
 ]

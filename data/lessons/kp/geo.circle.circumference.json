@@ -3,27 +3,27 @@
     "label": "The Number Pi",
     "section": "The Number Pi",
     "subgoals": [
-      "Define circumference of a circle",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide any circumference by its diameter to get pi",
+      "Write C equals pi d and C equals 2 pi r",
+      "Estimate with 3.14 or 22 over 7"
     ]
   },
   {
     "label": "Unrolling a Circle",
     "section": "Unrolling a Circle",
     "subgoals": [
-      "Understand unrolling a circle",
-      "Apply unrolling a circle",
-      "Check the result"
+      "Unroll one wrap of string into about 3.14 diameters",
+      "Read diameter 10 as exactly 10 pi inches",
+      "Multiply radius 7 by 2 pi for 14 pi cm"
     ]
   },
   {
-    "label": "Circumference of a circle — practice 3",
+    "label": "Drill: circumference to the nearest hundredth",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Compute 10 times 3.14159 as 31.4159",
+      "Round 31.4159 up to 31.42",
+      "Keep the exact 10 pi form alongside"
     ]
   }
 ]

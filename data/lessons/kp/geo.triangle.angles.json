@@ -3,27 +3,27 @@
     "label": "Why It Works",
     "section": "Why It Works",
     "subgoals": [
-      "Define triangle angle sum is 180 degrees",
-      "Follow the worked example",
-      "Apply the rule"
+      "Slide the triangle angles onto one straight line",
+      "Read the straight line as 180 degrees",
+      "Blame parallel lines for the constant sum"
     ]
   },
   {
     "label": "Using the Rule",
     "section": "Using the Rule",
     "subgoals": [
-      "Understand using the rule",
-      "Apply using the rule",
-      "Check the result"
+      "Subtract two known angles from 180",
+      "Turn 62 plus 71 into 180 minus 133 for 47",
+      "Split right triangles into 90 plus two summing to 90"
     ]
   },
   {
-    "label": "Triangle angle sum is 180 degrees — practice 3",
+    "label": "Drill: third angle from 90 and 38",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Write 180 minus 90 minus 38",
+      "Land on 52 degrees",
+      "Confirm the two acute angles total 90"
     ]
   }
 ]

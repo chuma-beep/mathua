@@ -3,27 +3,27 @@
     "label": "Using a Protractor",
     "section": "Using a Protractor",
     "subgoals": [
-      "Define measuring angles in degrees",
-      "Follow the worked example",
-      "Apply the rule"
+      "Center the protractor on the vertex B",
+      "Line up the 0-degree mark with side BA",
+      "Read the scale that starts at 0 degrees"
     ]
   },
   {
     "label": "Comparing Angle Measures",
     "section": "Comparing Angle Measures",
     "subgoals": [
-      "Understand comparing angle measures",
-      "Apply comparing angle measures",
-      "Check the result"
+      "Sort 65 degrees as acute against the 90-degree benchmark",
+      "Record the measure with m-angle notation",
+      "Spot congruent angles by equal measures"
     ]
   },
   {
-    "label": "Measuring angles in degrees — practice 3",
+    "label": "Drill: quarter-turn and protractor reads",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Divide a 360-degree turn by 4 to get 90",
+      "Classify the quarter-turn result as a right angle",
+      "Check 65 degrees against 90 before naming it acute"
     ]
   }
 ]

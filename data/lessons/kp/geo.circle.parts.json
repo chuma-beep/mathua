@@ -3,27 +3,27 @@
     "label": "The Vocabulary",
     "section": "The Vocabulary",
     "subgoals": [
-      "Define parts of a circle: radius, diameter, chord",
-      "Follow the worked example",
-      "Apply the rule"
+      "Run the radius from center to edge",
+      "Double the radius through the center for the diameter",
+      "Join any two edge points for a chord"
     ]
   },
   {
     "label": "Naming Arcs",
     "section": "Naming Arcs",
     "subgoals": [
-      "Understand naming arcs",
-      "Apply naming arcs",
-      "Check the result"
+      "Name an arc by its two endpoints",
+      "Split the circle into 180-degree semicircles",
+      "Sort leftover arcs into minor and major"
     ]
   },
   {
-    "label": "Parts of a circle: radius, diameter, chord — practice 3",
+    "label": "Drill: radius 6 and the 9-inch chord test",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Double 6 to a 12 cm diameter",
+      "Cap every chord at the diameter",
+      "Reject radius 4 against a 9-inch chord"
     ]
   }
 ]

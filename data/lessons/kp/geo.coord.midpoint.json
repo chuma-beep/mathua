@@ -1,29 +1,29 @@
 [
   {
-    "label": "Midpoint of a line segment",
+    "label": "Halves of the street-grid steps",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Average the two x-values for the middle x",
+      "Average the two y-values for the middle y",
+      "Keep horizontal-first order in the answer pair"
     ]
   },
   {
-    "label": "Midpoint of a line segment — practice 2",
+    "label": "Origin and axes as reference points",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Start every address at the origin (0, 0)",
+      "Measure x along the horizontal axis",
+      "Measure y along the vertical axis"
     ]
   },
   {
-    "label": "Midpoint of a line segment — practice 3",
+    "label": "Drill: middle of two addresses",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Add the two x-values and halve the total",
+      "Add the two y-values and halve the total",
+      "Check the midpoint sits halfway on each axis"
     ]
   }
 ]
