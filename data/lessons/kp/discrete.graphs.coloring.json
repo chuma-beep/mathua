@@ -1,29 +1,29 @@
 [
-  {
-    "label": "Graph Coloring and Chromatic Number",
-    "section": "Coloring Graphs",
-    "subgoals": [
-      "Review Coloring Graphs",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Graph Coloring and Chromatic Number — practice 2",
-    "section": "Coloring Graphs",
-    "subgoals": [
-      "Review Coloring Graphs",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Graph Coloring and Chromatic Number — practice 3",
-    "section": "Example",
-    "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
-    ]
-  }
+ {
+  "label": "Coloring complete graphs",
+  "section": "Coloring complete graphs",
+  "subgoals": [
+   "Force n colors on K_n from pairwise adjacency",
+   "2-color a bipartite graph by sides",
+   "Read chi off the densest forced subgraph"
+  ]
+ },
+ {
+  "label": "Worked: C_5 needs 3 colors",
+  "section": "Worked: C_5 needs 3 colors",
+  "subgoals": [
+   "Alternate 2 colors around the first four vertices",
+   "Show the fifth vertex touches both colors",
+   "Conclude odd cycles need a third color"
+  ]
+ },
+ {
+  "label": "Worked: the greedy bound",
+  "section": "Worked: the greedy bound",
+  "subgoals": [
+   "Count already-colored neighbors of the next vertex",
+   "Pick the first color none of them uses",
+   "Conclude chi(G) <= Delta+1"
+  ]
+ }
 ]

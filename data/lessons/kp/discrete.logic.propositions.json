@@ -1,29 +1,29 @@
 [
   {
-    "label": "Propositional logic: statements and truth values",
+    "label": "Decide if a sentence is a proposition",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Test for a declarative sentence form",
+      "Check it has one definite truth value",
+      "Reject questions, commands, and paradoxes"
     ]
   },
   {
-    "label": "Propositional logic: statements and truth values — practice 2",
+    "label": "Sort true, false, and non-propositions",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Accept false statements as propositions",
+      "Flag vague open sentences like x is large",
+      "Count propositions in a mixed list"
     ]
   },
   {
-    "label": "Propositional logic: statements and truth values — practice 3",
+    "label": "Apply the proposition test at speed",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Scan three statements for truth-valuedness",
+      "Tally how many qualify",
+      "Name the disqualifier for each reject"
     ]
   }
 ]

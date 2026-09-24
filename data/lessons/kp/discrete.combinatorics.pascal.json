@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define pascal's triangle and binomial theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read C(n,k) as unordered selections from n",
+      "Divide ordered picks by k! to remove ordering",
+      "List the 6 pairs for C(4,2) explicitly"
     ]
   },
   {
     "label": "Pascal's triangle",
     "section": "Pascal's triangle",
     "subgoals": [
-      "Understand pascal's triangle",
-      "Apply pascal's triangle",
-      "Check the result"
+      "Build each row as sums of the pair above",
+      "Locate C(4,2) = 6 in row 4",
+      "Apply the recurrence C(n,k) = C(n-1,k-1) + C(n-1,k)"
     ]
   },
   {
     "label": "Fundamental properties of the binomial coefficient",
     "section": "Fundamental properties of the binomial coefficient",
     "subgoals": [
-      "Understand fundamental properties of the binomial coefficient",
-      "Apply fundamental properties of the binomial coefficient",
-      "Check the result"
+      "Fix edges with C(n,0) = C(n,n) = 1",
+      "Mirror with symmetry C(n,k) = C(n,n-k)",
+      "Step rows with the additive property"
     ]
   }
 ]

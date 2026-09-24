@@ -1,29 +1,29 @@
 [
   {
-    "label": "Relations, Functions and Partitions",
-    "section": "Properties and Partitions",
+    "label": "Worked: one property can fail",
+    "section": "Worked: one property can fail",
     "subgoals": [
-      "Review Properties and Partitions",
-      "Work the example",
-      "Verify"
+      "Verify both loops for reflexivity",
+      "Spot the missing (2,1) breaking symmetry",
+      "Reject the equivalence claim on one failure"
     ]
   },
   {
-    "label": "Relations, Functions and Partitions — practice 2",
-    "section": "Properties and Partitions",
+    "label": "Worked: congruence mod 3",
+    "section": "Worked: congruence mod 3",
     "subgoals": [
-      "Review Properties and Partitions",
-      "Work the example",
-      "Verify"
+      "Check a - a = 0 for reflexivity",
+      "Negate the multiple for symmetry",
+      "Add multiples for transitivity"
     ]
   },
   {
-    "label": "Relations, Functions and Partitions — practice 3",
-    "section": "Example",
+    "label": "Counting partitions with Bell numbers",
+    "section": "Counting partitions with Bell numbers",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Group mutually related elements into blocks",
+      "List all 5 partitions of a 3-element set",
+      "Read the count as Bell number B_3 = 5"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Pigeonhole Principle",
-    "section": "Counting Guarantees",
+    "label": "Worked: 13 people, 12 months",
+    "section": "Worked: 13 people, 12 months",
     "subgoals": [
-      "Review Counting Guarantees",
-      "Work the example",
-      "Verify"
+      "Place 13 birthdays into 12 month-holes",
+      "Force the 13th into an occupied month",
+      "Confirm the bound ceil(13/12) = 2"
     ]
   },
   {
-    "label": "Pigeonhole Principle — practice 2",
-    "section": "Counting Guarantees",
+    "label": "Worked: 30 students, 4 grades",
+    "section": "Worked: 30 students, 4 grades",
     "subgoals": [
-      "Review Counting Guarantees",
-      "Work the example",
-      "Verify"
+      "Bound capacity at 7 per grade: 28 < 30",
+      "Compute ceil(30/4) = 8",
+      "Check sharpness with a 29-student split"
     ]
   },
   {
-    "label": "Pigeonhole Principle — practice 3",
-    "section": "Example",
+    "label": "Worked: 5 points in a unit square",
+    "section": "Worked: 5 points in a unit square",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Partition the square into 4 quarters",
+      "Trap two points in one quarter",
+      "Bound their distance by the diagonal sqrt(2)/2"
     ]
   }
 ]
