@@ -12,16 +12,16 @@
     "label": "Worked total differentials",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked differential example",
-      "Verify xy gives y dx + x dy",
-      "Confirm the assembly pattern"
+      "Assemble dz = y dx + x dy for z = xy",
+      "Confirm each coefficient matches a partial",
+      "Evaluate dz at (1,2)"
     ]
   },
   {
     "label": "Partial derivatives refresher",
     "section": "Definition",
     "subgoals": [
-      "Recall fx holds y constant",
+      "Hold y constant to read fx",
       "Compute first-order partials",
       "Feed them into dz"
     ]

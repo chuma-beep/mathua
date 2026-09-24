@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define cauchy's mean value theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Contrast Cauchy form with single-function Lagrange",
+      "Name the g'(x) != 0 hypothesis",
+      "Preview the (f(b)-f(a))/(g(b)-g(a)) ratio"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Check f,g continuous on [a,b] and differentiable inside",
+      "Locate c with f'(c)/g'(c) equal to the secant ratio",
+      "Recover Lagrange by setting g(x) = x"
     ]
   },
   {
     "label": "Proof of Cauchy’s theorem",
     "section": "Proof of Cauchy’s theorem",
     "subgoals": [
-      "Understand proof of cauchy’s theorem",
-      "Apply proof of cauchy’s theorem",
-      "Check the result"
+      "Build h(x) = f(x) - k*g(x) with k the ratio",
+      "Force h(a) = h(b) then invoke Rolle",
+      "Solve h'(c) = 0 for the Cauchy quotient"
     ]
   }
 ]

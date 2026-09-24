@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define applications: velocity and acceleration",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read v as dx/dt and a as dv/dt",
+      "Link the sign of v to direction of motion",
+      "Link the sign of a to speeding vs slowing"
     ]
   },
   {
     "label": "Velocity",
     "section": "Velocity",
     "subgoals": [
-      "Understand velocity",
-      "Apply velocity",
-      "Check the result"
+      "Differentiate x(t) to get v(t)",
+      "Evaluate v at the given instant",
+      "Read the sign as forward vs backward"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Differentiate the position polynomial term by term",
+      "Plug t = 2 into v(t)",
+      "Compare v(2) against average velocity"
     ]
   }
 ]

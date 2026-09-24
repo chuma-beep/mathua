@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define partial derivatives",
-      "Follow the worked example",
-      "Apply the rule"
+      "Hold y fixed and differentiate in x for fx",
+      "Hold x fixed and differentiate in y for fy",
+      "Compute fx, fy of x^2 y + sin y"
     ]
   },
   {
     "label": "Higher-order partial derivatives",
     "section": "Higher-order partial derivatives",
     "subgoals": [
-      "Understand higher-order partial derivatives",
-      "Apply higher-order partial derivatives",
-      "Check the result"
+      "Differentiate fx again for fxx",
+      "Cross-differentiate for fxy",
+      "Compute all four second partials of x^3 y^2"
     ]
   },
   {
     "label": "Schwarz’s theorem",
     "section": "Schwarz’s theorem",
     "subgoals": [
-      "Understand schwarz’s theorem",
-      "Apply schwarz’s theorem",
-      "Check the result"
+      "Check continuity before swapping order",
+      "Equate fxy with fyx",
+      "Confirm on x^2 y^3 both give 6xy^2"
     ]
   }
 ]

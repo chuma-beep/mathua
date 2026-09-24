@@ -3,27 +3,27 @@
     "label": "Integrals without elementary antiderivatives",
     "section": "Integrals without elementary antiderivatives",
     "subgoals": [
-      "Define numerical integration",
-      "Follow the worked example",
-      "Apply the rule"
+      "Flag e^(-x^2) as non-elementary",
+      "Replace integral of f by weighted sum of w_i f(x_i)",
+      "Preview midpoint vs Simpson on integral of x^2 over [0,1]"
     ]
   },
   {
     "label": "General principle of a quadrature formula",
     "section": "General principle of a quadrature formula",
     "subgoals": [
-      "Understand general principle of a quadrature formula",
-      "Apply general principle of a quadrature formula",
-      "Check the result"
+      "Pick nodes x_i and weights w_i",
+      "Sum w_i f(x_i) for the estimate",
+      "Refine by doubling n"
     ]
   },
   {
     "label": "The rectangle and midpoint rules",
     "section": "The rectangle and midpoint rules",
     "subgoals": [
-      "Understand the rectangle and midpoint rules",
-      "Apply the rectangle and midpoint rules",
-      "Check the result"
+      "Multiply width dx by midpoint heights",
+      "Sum left vs midpoint on integral of x^2 over [0,1]",
+      "Compare errors at n = 4"
     ]
   }
 ]

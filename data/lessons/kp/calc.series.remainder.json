@@ -4,8 +4,8 @@
     "section": "What is Leibniz’s criterion used for",
     "subgoals": [
       "Bound |R(n)| by a(n+1)",
-      "Stop (-1)^n/n at n = 10 → 1/11",
-      "Stop (-1)^n/n² at n = 5 → 1/36"
+      "Stop (-1)^n/n at n = 10 to 1/11",
+      "Stop (-1)^n/n^2 at n = 5 to 1/36"
     ]
   },
   {
@@ -21,7 +21,7 @@
     "label": "Worked remainder examples",
     "section": "Example",
     "subgoals": [
-      "Follow the worked error example",
+      "Truncate the worked series at n = 10",
       "Identify the first omitted term",
       "Report the numeric bound"
     ]

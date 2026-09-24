@@ -3,27 +3,27 @@
     "label": "Area between two curves using definite integrals",
     "section": "Area between two curves using definite integrals",
     "subgoals": [
-      "Define area between two curves",
-      "Follow the worked example",
-      "Apply the rule"
+      "Subtract lower curve from upper: integral of (f-g)",
+      "Split at intersection x-values",
+      "Integrate x^2 vs x on [0,1] to get 1/6"
     ]
   },
   {
     "label": "Areas between intersecting curves",
     "section": "Areas between intersecting curves",
     "subgoals": [
-      "Understand areas between intersecting curves",
-      "Apply areas between intersecting curves",
-      "Check the result"
+      "Solve f(x) = g(x) for crossing points",
+      "Test which curve sits on top per interval",
+      "Add signed pieces separately"
     ]
   },
   {
     "label": "Flowchart",
     "section": "Flowchart",
     "subgoals": [
-      "Understand flowchart",
-      "Apply flowchart",
-      "Check the result"
+      "Decide dx vs dy from curve layout",
+      "Branch on intersect vs enclose",
+      "Route to split-at-crossings"
     ]
   }
 ]

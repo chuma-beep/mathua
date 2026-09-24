@@ -3,27 +3,27 @@
     "label": "4.6 Limits at Infinity and Asymptotes",
     "section": "4.6 Limits at Infinity and Asymptotes",
     "subgoals": [
-      "Define limits at infinity",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide by the top power of x",
+      "Take x to +-inf termwise",
+      "Read y = L off the limit"
     ]
   },
   {
     "label": "Limits at Infinity",
     "section": "Limits at Infinity",
     "subgoals": [
-      "Understand limits at infinity",
-      "Apply limits at infinity",
-      "Check the result"
+      "Compute lim(x to inf) 1/x^r = 0",
+      "Split rational into leading vs rest",
+      "Evaluate (2x+1)/(x-3) to 2"
     ]
   },
   {
     "label": "Limits at Infinity and Horizontal Asymptotes",
     "section": "Limits at Infinity and Horizontal Asymptotes",
     "subgoals": [
-      "Understand limits at infinity and horizontal asymptotes",
-      "Apply limits at infinity and horizontal asymptotes",
-      "Check the result"
+      "Equate horizontal asymptote to the two-sided end limits",
+      "Test e^x: 0 left, inf right",
+      "Sketch end behavior from limits"
     ]
   }
 ]

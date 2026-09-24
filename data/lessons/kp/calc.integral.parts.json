@@ -3,27 +3,27 @@
     "label": "The method of integration by parts",
     "section": "The method of integration by parts",
     "subgoals": [
-      "Define integration by parts",
-      "Follow the worked example",
-      "Apply the rule"
+      "Split integral of u dv into uv - integral of v du",
+      "Choose u by LIATE priority",
+      "Integrate x e^x to (x-1)e^x + C"
     ]
   },
   {
     "label": "Derivation of the formula",
     "section": "Derivation of the formula",
     "subgoals": [
-      "Understand derivation of the formula",
-      "Apply derivation of the formula",
-      "Check the result"
+      "Derive from (uv)' = u'v + uv'",
+      "Integrate both sides then rearrange",
+      "Read the boundary term uv"
     ]
   },
   {
     "label": "Most common mistakes",
     "section": "Most common mistakes",
     "subgoals": [
-      "Understand most common mistakes",
-      "Apply most common mistakes",
-      "Check the result"
+      "Flag wrong u-choice looping forever",
+      "Differentiate the chosen u to check simplification",
+      "Re-pick u when integral of v du gets harder"
     ]
   }
 ]

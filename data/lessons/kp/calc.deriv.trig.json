@@ -3,27 +3,27 @@
     "label": "3.5 Derivatives of Trigonometric Functions",
     "section": "3.5 Derivatives of Trigonometric Functions",
     "subgoals": [
-      "Define derivatives of sine and cosine",
-      "Follow the worked example",
-      "Apply the rule"
+      "Differentiate sin x to cos x",
+      "Differentiate cos x to -sin x",
+      "Differentiate 2 sin x + 3 cos x term by term"
     ]
   },
   {
     "label": "Derivatives of the Sine and Cosine Functions",
     "section": "Derivatives of the Sine and Cosine Functions",
     "subgoals": [
-      "Understand derivatives of the sine and cosine functions",
-      "Apply derivatives of the sine and cosine functions",
-      "Check the result"
+      "Take the squeeze limit sin h/h to 1",
+      "Split sin(x+h) via angle addition",
+      "Read off d/dx sin x = cos x"
     ]
   },
   {
     "label": "Theorem 3.8",
     "section": "Theorem 3.8",
     "subgoals": [
-      "Understand theorem 3.8",
-      "Apply theorem 3.8",
-      "Check the result"
+      "Differentiate sin x to cos x and cos x to -sin x",
+      "Extend to tan via quotient: sec^2 x",
+      "Check sin(2x) gives 2cos(2x)"
     ]
   }
 ]

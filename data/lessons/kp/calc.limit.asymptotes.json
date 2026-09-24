@@ -3,27 +3,27 @@
     "label": "Horizontal asymptotes",
     "section": "Horizontal asymptotes",
     "subgoals": [
-      "Define asymptotes of functions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Compute lim(x to +inf) vs lim(x to -inf)",
+      "Read y = L as horizontal line",
+      "Check 1/x to 0 both ends"
     ]
   },
   {
     "label": "Vertical asymptotes",
     "section": "Vertical asymptotes",
     "subgoals": [
-      "Understand vertical asymptotes",
-      "Apply vertical asymptotes",
-      "Check the result"
+      "Solve denominator = 0 for candidates",
+      "Take one-sided limits at each candidate",
+      "Confirm x = 2 pole of 1/(x-2)"
     ]
   },
   {
     "label": "Oblique asymptotes",
     "section": "Oblique asymptotes",
     "subgoals": [
-      "Understand oblique asymptotes",
-      "Apply oblique asymptotes",
-      "Check the result"
+      "Divide to get mx+b remainder",
+      "Take the linear part as slant line",
+      "Check (x^2+1)/x toward y = x"
     ]
   }
 ]

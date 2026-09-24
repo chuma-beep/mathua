@@ -3,27 +3,27 @@
     "label": "Primitives",
     "section": "Primitives",
     "subgoals": [
-      "Define indefinite integrals and antiderivatives",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read F' = f to certify antiderivatives",
+      "Add +C for the family",
+      "Check x^3/3 against x^2 by differentiating"
     ]
   },
   {
     "label": "What is the indefinite integral",
     "section": "What is the indefinite integral",
     "subgoals": [
-      "Understand what is the indefinite integral",
-      "Apply what is the indefinite integral",
-      "Check the result"
+      "Write integral of f as F + C with F' = f",
+      "Contrast definite (number) vs indefinite (family)",
+      "Test integral of 2x dx = x^2 + C"
     ]
   },
   {
     "label": "Linearity properties",
     "section": "Linearity properties",
     "subgoals": [
-      "Understand linearity properties",
-      "Apply linearity properties",
-      "Check the result"
+      "Split integral of (f+g) into integral of f + integral of g",
+      "Pull constants out of the integral",
+      "Integrate 3x^2+2x to x^3+x^2 + C"
     ]
   }
 ]

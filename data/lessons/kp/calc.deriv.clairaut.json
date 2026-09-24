@@ -3,9 +3,9 @@
     "label": "Clairaut-Schwarz statement",
     "section": "Schwarz’s theorem",
     "subgoals": [
-      "State fxy = fyx under continuity",
+      "Equate fxy with fyx under continuity",
       "Name the mixed-partial hypothesis",
-      "Apply to x^2 y^3 to get 6xy^2"
+      "Differentiate x^2 y^3 to 6xy^2"
     ]
   },
   {
@@ -21,7 +21,7 @@
     "label": "Worked Clairaut check",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked mixed-partial example",
+      "Differentiate the worked polynomial in both orders",
       "Check continuity justifies equality",
       "Note polynomials always qualify"
     ]

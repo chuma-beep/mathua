@@ -3,27 +3,27 @@
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Define weierstrass extreme value theorem",
-      "Follow the worked example",
-      "Apply the rule"
+      "Check continuity plus closed bounded [a,b]",
+      "Conclude max and min attained",
+      "Test x^3-3x on [-2,2]"
     ]
   },
   {
     "label": "Why closed and bounded matters",
     "section": "Why closed and bounded matters",
     "subgoals": [
-      "Understand why closed and bounded matters",
-      "Apply why closed and bounded matters",
-      "Check the result"
+      "Drop closed: (0,1] counterexample",
+      "Drop bounded: [0,inf) counterexample",
+      "Drop continuity: step-function counterexample"
     ]
   },
   {
     "label": "The range of a continuous function",
     "section": "The range of a continuous function",
     "subgoals": [
-      "Understand the range of a continuous function",
-      "Apply the range of a continuous function",
-      "Check the result"
+      "Image f([a,b]) is compact interval",
+      "Read off [m,M] as the range",
+      "Confirm sin on [0,2 pi] spans [-1,1]"
     ]
   }
 ]

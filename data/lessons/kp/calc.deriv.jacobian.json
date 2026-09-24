@@ -5,7 +5,7 @@
     "subgoals": [
       "Stack all first-order partials",
       "Read row i, column j as dT_i/dx_j",
-      "Check (x+y, x-y) gives [[1,1],[1,-1]]"
+      "Compute [[1,1],[1,-1]] for (x+y, x-y)"
     ]
   },
   {
@@ -21,8 +21,8 @@
     "label": "Worked Jacobian examples",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked Jacobian example",
-      "Verify each matrix entry",
+      "Differentiate each component of the worked map",
+      "Arrange partials row by row",
       "Confirm the layout convention"
     ]
   }

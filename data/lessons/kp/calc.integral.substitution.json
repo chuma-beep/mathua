@@ -3,27 +3,27 @@
     "label": "How substitution simplifies integration",
     "section": "How substitution simplifies integration",
     "subgoals": [
-      "Define u-substitution",
-      "Follow the worked example",
-      "Apply the rule"
+      "Spot u = g(x) hiding inside f",
+      "Rewrite dx as du/g'(x)",
+      "Reduce integral of 2x*e^(x^2) to integral of e^u du"
     ]
   },
   {
     "label": "Recognizing when to use substitution",
     "section": "Recognizing when to use substitution",
     "subgoals": [
-      "Understand recognizing when to use substitution",
-      "Apply recognizing when to use substitution",
-      "Check the result"
+      "Match f(g(x))*g'(x) pattern",
+      "Reject substitution when no g' factor",
+      "Test x*sin(x^2) vs sin(x^2)"
     ]
   },
   {
     "label": "Substitution patterns",
     "section": "Substitution patterns",
     "subgoals": [
-      "Understand substitution patterns",
-      "Apply substitution patterns",
-      "Check the result"
+      "Substitute u = ax+b or u = x^2+1",
+      "Back-substitute u to x at the end",
+      "Convert limits for definite integrals"
     ]
   }
 ]

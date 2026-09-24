@@ -21,9 +21,9 @@
     "label": "Worked inflection examples",
     "section": "Example 2",
     "subgoals": [
-      "Follow the worked inflection example",
-      "Verify x^4-6x^2 inflects at x = +-1",
-      "Confirm sign flips on both sides"
+      "Solve f'' = 0 for x^4-6x^2 to get x = 0, +-1",
+      "Test f'' sign on each side",
+      "Confirm inflections at x = +-1 only"
     ]
   }
 ]

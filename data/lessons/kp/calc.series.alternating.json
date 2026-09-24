@@ -3,27 +3,27 @@
     "label": "What is Leibniz’s criterion used for",
     "section": "What is Leibniz’s criterion used for",
     "subgoals": [
-      "Define alternating series and leibniz criterion",
-      "Follow the worked example",
-      "Apply the rule"
+      "Check b_n decreasing to 0",
+      "Conclude sum (-1)^n b_n converges",
+      "Test sum (-1)^n/n converges"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Bound partial sums in nested intervals",
+      "Shrink interval widths b_n to 0",
+      "Trap the sum in the limit interval"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Check 1/n decreasing to 0",
+      "Sum first 5 terms of sum (-1)^n/n",
+      "Estimate sum approx -0.69 within 1/6"
     ]
   }
 ]

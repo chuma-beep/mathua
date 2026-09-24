@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define riemann integrability criteria",
-      "Follow the worked example",
-      "Apply the rule"
+      "Contrast Riemann sums vs Darboux bounds",
+      "Preview U-L to 0 as the test",
+      "Flag Dirichlet as non-integrable"
     ]
   },
   {
     "label": "Partitions, upper sums, lower sums",
     "section": "Partitions, upper sums, lower sums",
     "subgoals": [
-      "Understand partitions, upper sums, lower sums",
-      "Apply partitions, upper sums, lower sums",
-      "Check the result"
+      "Partition [a,b] and compute sup/inf per cell",
+      "Form upper U and lower L sums",
+      "Refine until U-L < eps"
     ]
   },
   {
     "label": "The Darboux criterion",
     "section": "The Darboux criterion",
     "subgoals": [
-      "Understand the darboux criterion",
-      "Apply the darboux criterion",
-      "Check the result"
+      "Test U(P)-L(P) to 0 under refinement",
+      "Certify continuous functions integrable",
+      "Reject unbounded functions outright"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Definition",
     "section": "Definition",
     "subgoals": [
-      "Define improper integrals",
-      "Follow the worked example",
-      "Apply the rule"
+      "Rewrite as limit over truncated proper integrals",
+      "Classify unbounded vs singular type",
+      "Preview integral of dx/x^2 over [1,inf) = 1"
     ]
   },
   {
     "label": "Improper integrals over unbounded intervals",
     "section": "Improper integrals over unbounded intervals",
     "subgoals": [
-      "Understand improper integrals over unbounded intervals",
-      "Apply improper integrals over unbounded intervals",
-      "Check the result"
+      "Replace inf by t and integrate first",
+      "Take t to inf on the closed form",
+      "Evaluate integral of e^(-x) over [1,inf) = 1/e"
     ]
   },
   {
     "label": "Improper integrals with infinite discontinuities",
     "section": "Improper integrals with infinite discontinuities",
     "subgoals": [
-      "Understand improper integrals with infinite discontinuities",
-      "Apply improper integrals with infinite discontinuities",
-      "Check the result"
+      "Split at the singular point c",
+      "Take one-sided limits into c",
+      "Evaluate integral of dx/sqrt(x) over [0,1] = 2"
     ]
   }
 ]

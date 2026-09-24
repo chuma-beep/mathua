@@ -3,27 +3,27 @@
     "label": "3.8 Implicit Differentiation",
     "section": "3.8 Implicit Differentiation",
     "subgoals": [
-      "Define implicit differentiation",
-      "Follow the worked example",
-      "Apply the rule"
+      "Differentiate both sides treating y as y(x)",
+      "Attach y' to every y-term via chain",
+      "Solve dy/dx for x^2+y^2 = 25"
     ]
   },
   {
     "label": "Implicit Differentiation",
     "section": "Implicit Differentiation",
     "subgoals": [
-      "Understand implicit differentiation",
-      "Apply implicit differentiation",
-      "Check the result"
+      "Differentiate term-by-term with product on xy",
+      "Collect y' terms on one side",
+      "Isolate y' as a rational expression"
     ]
   },
   {
     "label": "Problem-Solving Strategy",
     "section": "Problem-Solving Strategy",
     "subgoals": [
-      "Understand problem-solving strategy",
-      "Apply problem-solving strategy",
-      "Check the result"
+      "Differentiate the equation first",
+      "Substitute the point to get the slope",
+      "Write the tangent via point-slope form"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Indeterminate forms",
     "section": "Indeterminate forms",
     "subgoals": [
-      "Define l'hopital's rule",
-      "Follow the worked example",
-      "Apply the rule"
+      "Confirm 0/0 or inf/inf shape first",
+      "Differentiate top and bottom separately",
+      "Retry or factor when still indeterminate"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Check differentiability near a (not at a)",
+      "Compute lim f'/g' instead",
+      "Evaluate lim sin x/x = 1 via cos"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Apply Cauchy MVT to f/g on [a,x]",
+      "Squeeze the intermediate c to a",
+      "Transfer the limit to f'/g'"
     ]
   }
 ]

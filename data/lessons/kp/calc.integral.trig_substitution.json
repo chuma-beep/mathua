@@ -3,27 +3,27 @@
     "label": "How trigonometric substitution works",
     "section": "How trigonometric substitution works",
     "subgoals": [
-      "Define trigonometric substitution for integrals",
-      "Follow the worked example",
-      "Apply the rule"
+      "Match sqrt(a^2-x^2) to x = a sin th",
+      "Match sqrt(x^2+a^2) to x = a tan th",
+      "Match sqrt(x^2-a^2) to x = a sec th"
     ]
   },
   {
     "label": "From substitutions to geometry",
     "section": "From substitutions to geometry",
     "subgoals": [
-      "Understand from substitutions to geometry",
-      "Apply from substitutions to geometry",
-      "Check the result"
+      "Draw the right triangle for x vs th",
+      "Read dx and radical off the triangle",
+      "Convert back via th = arcsin(x/a)"
     ]
   },
   {
     "label": "The form \\\\(\\sqrt{a^2-x^2}\\\\)",
     "section": "The form \\\\(\\sqrt{a^2-x^2}\\\\)",
     "subgoals": [
-      "Understand the form \\\\(\\sqrt{a^2-x^2}\\\\)",
-      "Apply the form \\\\(\\sqrt{a^2-x^2}\\\\)",
-      "Check the result"
+      "Set x = a sin th, dx = a cos th dth",
+      "Cancel the radical to a cos th",
+      "Evaluate integral of sqrt(1-x^2) via th"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "What is a sequence",
     "section": "What is a sequence",
     "subgoals": [
-      "Define sequences: definition and notation",
-      "Follow the worked example",
-      "Apply the rule"
+      "Write a_n formula and first five terms",
+      "Plot n vs a_n",
+      "Give 1/n terms 1, 1/2, 1/3"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Compute a_1..a_5 of (-1)^n/n",
+      "Separate odd vs even subsequences",
+      "Guess the limit from the table"
     ]
   },
   {
     "label": "Recursively defined sequences",
     "section": "Recursively defined sequences",
     "subgoals": [
-      "Understand recursively defined sequences",
-      "Apply recursively defined sequences",
-      "Check the result"
+      "Unroll a_1 given plus a_(n+1) rule",
+      "Compute five Fibonacci-style terms",
+      "Solve a_(n+1) = 2a_n + 1 explicitly"
     ]
   }
 ]

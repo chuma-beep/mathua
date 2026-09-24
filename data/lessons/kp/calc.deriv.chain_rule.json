@@ -3,27 +3,27 @@
     "label": "The chain rule",
     "section": "The chain rule",
     "subgoals": [
-      "Define chain rule",
-      "Follow the worked example",
-      "Apply the rule"
+      "Multiply outer derivative by inner derivative",
+      "Differentiate (2x+1)^3 as 6(2x+1)^2",
+      "Split the computation at u = 2x+1"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Form the difference quotient with a du/du factor",
+      "Take limits through continuity of the outer",
+      "Read the limit as f'(g(x))*g'(x)"
     ]
   },
   {
     "label": "Extension to multiple compositions",
     "section": "Extension to multiple compositions",
     "subgoals": [
-      "Understand extension to multiple compositions",
-      "Apply extension to multiple compositions",
-      "Check the result"
+      "Chain three layers outside-in",
+      "Multiply f'(g(h))*g'(h)*h'",
+      "Differentiate sin(x^2+1) to 2x*cos(x^2+1)"
     ]
   }
 ]

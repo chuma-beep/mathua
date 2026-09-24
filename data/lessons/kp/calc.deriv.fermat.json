@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define fermat's theorem on stationary points",
-      "Follow the worked example",
-      "Apply the rule"
+      "Link interior extrema to flat tangents",
+      "Solve f'(x) = 0 for stationary candidates",
+      "Preview x^2 minimum at x = 0"
     ]
   },
   {
     "label": "Statement",
     "section": "Statement",
     "subgoals": [
-      "Understand statement",
-      "Apply statement",
-      "Check the result"
+      "Require c interior with local max or min",
+      "Conclude f'(c) = 0 at the extremum",
+      "Test x^3 at 0 as non-extremum counterpoint"
     ]
   },
   {
     "label": "Proof",
     "section": "Proof",
     "subgoals": [
-      "Understand proof",
-      "Apply proof",
-      "Check the result"
+      "Squeeze both one-sided quotients toward 0",
+      "Force left >= 0 and right <= 0 at a max",
+      "Pin f'(c) = 0 between the sides"
     ]
   }
 ]

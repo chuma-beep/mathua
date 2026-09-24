@@ -3,27 +3,27 @@
     "label": "Behavior of a sequence",
     "section": "Behavior of a sequence",
     "subgoals": [
-      "Define convergent and divergent sequences",
-      "Follow the worked example",
-      "Apply the rule"
+      "Test a_n to L via |a_n-L| < eps",
+      "Sort converge vs diverge vs oscillate",
+      "Preview 1/n to 0 vs 2^n to inf"
     ]
   },
   {
     "label": "Convergent sequence",
     "section": "Convergent sequence",
     "subgoals": [
-      "Understand convergent sequence",
-      "Apply convergent sequence",
-      "Check the result"
+      "Fix eps and solve N from |a_n-L| < eps",
+      "Exhibit N = 1/eps for 1/n",
+      "Confirm tails stay in the strip"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Evaluate lim (n+1)/n = 1",
+      "Split numerator and denominator by n",
+      "Confirm limit 1"
     ]
   }
 ]

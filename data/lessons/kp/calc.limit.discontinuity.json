@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define types of discontinuities",
-      "Follow the worked example",
-      "Apply the rule"
+      "Sort into removable, jump, infinite",
+      "Compute left vs right limits",
+      "Preview (x^2-1)/(x-1) hole at x = 1"
     ]
   },
   {
     "label": "Recall of continuity",
     "section": "Recall of continuity",
     "subgoals": [
-      "Understand recall of continuity",
-      "Apply recall of continuity",
-      "Check the result"
+      "Recheck lim(x to a) vs f(a)",
+      "Name which equality fails",
+      "Test |x|/x at 0 for jump"
     ]
   },
   {
     "label": "Removable discontinuity",
     "section": "Removable discontinuity",
     "subgoals": [
-      "Understand removable discontinuity",
-      "Apply removable discontinuity",
-      "Check the result"
+      "Cancel the hole factor (x-1)",
+      "Fill f(1) = 2 to repair",
+      "Confirm repaired function continuous"
     ]
   }
 ]

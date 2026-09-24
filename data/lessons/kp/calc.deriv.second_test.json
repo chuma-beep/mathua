@@ -4,7 +4,7 @@
     "section": "How to determine the concavity of a function",
     "subgoals": [
       "Compute f'' at the critical point",
-      "Read f'' > 0 as minimum, f'' < 0 as maximum",
+      "Read f''>0 as minimum, f''<0 as maximum",
       "Treat f'' = 0 as inconclusive"
     ]
   },
@@ -21,9 +21,9 @@
     "label": "Worked second-derivative test",
     "section": "Example 2",
     "subgoals": [
-      "Follow the worked test example",
-      "Evaluate f'' at each critical point",
-      "Classify x^3-3x^2 at x = 0 and x = 2"
+      "Compute f'' for x^3-3x^2",
+      "Evaluate f'' at x = 0 and x = 2",
+      "Classify max at 0, min at 2"
     ]
   }
 ]

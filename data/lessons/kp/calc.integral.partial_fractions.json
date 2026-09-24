@@ -3,27 +3,27 @@
     "label": "Integration of rational functions with polynomial division",
     "section": "Integration of rational functions with polynomial division",
     "subgoals": [
-      "Define integration by partial fractions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Divide when deg P >= deg Q first",
+      "Split remainder over factored denominator",
+      "Integrate x^3/(x^2-1) after division"
     ]
   },
   {
     "label": "Integrals with linear denominators",
     "section": "Integrals with linear denominators",
     "subgoals": [
-      "Understand integrals with linear denominators",
-      "Apply integrals with linear denominators",
-      "Check the result"
+      "Split A/(x-a) + B/(x-b)",
+      "Solve for A, B by cover-up",
+      "Integrate to A ln|x-a| + B ln|x-b|"
     ]
   },
   {
     "label": "Partial fraction decomposition",
     "section": "Partial fraction decomposition",
     "subgoals": [
-      "Understand partial fraction decomposition",
-      "Apply partial fraction decomposition",
-      "Check the result"
+      "Factor Q into linear/irreducible pieces",
+      "Assign A, B, C numerators per piece",
+      "Clear denominators to solve coefficients"
     ]
   }
 ]

@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define sequences of functions",
-      "Follow the worked example",
-      "Apply the rule"
+      "Freeze x then take n to inf",
+      "Contrast moving-vs-fixed x",
+      "Preview x^n on [0,1] limit shape"
     ]
   },
   {
     "label": "Pointwise convergence",
     "section": "Pointwise convergence",
     "subgoals": [
-      "Understand pointwise convergence",
-      "Apply pointwise convergence",
-      "Check the result"
+      "Compute f_n(x_0) to f(x_0) per point",
+      "Test x^n to 0 inside, to 1 at endpoint",
+      "Write the pointwise limit function"
     ]
   },
   {
     "label": "Example",
     "section": "Example",
     "subgoals": [
-      "Understand example",
-      "Apply example",
-      "Check the result"
+      "Evaluate x^n at x = 1/2, 1 for n = 5, 10",
+      "Compare rates across x",
+      "Confirm the jump at x = 1"
     ]
   }
 ]

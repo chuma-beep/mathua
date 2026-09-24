@@ -3,27 +3,27 @@
     "label": "Area under a function: from curve to integral",
     "section": "Area under a function: from curve to integral",
     "subgoals": [
-      "Define definite integrals and area",
-      "Follow the worked example",
-      "Apply the rule"
+      "Read definite integral as signed area under f",
+      "Split above- vs below-axis regions",
+      "Preview rectangles converging to area"
     ]
   },
   {
     "label": "Approximating area with rectangular sums",
     "section": "Approximating area with rectangular sums",
     "subgoals": [
-      "Understand approximating area with rectangular sums",
-      "Apply approximating area with rectangular sums",
-      "Check the result"
+      "Sum f(x_i) dx over n rectangles",
+      "Refine with midpoint heights",
+      "Take n to inf for the exact area"
     ]
   },
   {
     "label": "Computing definite integrals",
     "section": "Computing definite integrals",
     "subgoals": [
-      "Understand computing definite integrals",
-      "Apply computing definite integrals",
-      "Check the result"
+      "Find antiderivative F then compute F(b)-F(a)",
+      "Split integral of x^2 over [-1,1] at 0",
+      "Evaluate integral of x over [0,2] as 2"
     ]
   }
 ]

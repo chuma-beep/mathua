@@ -3,7 +3,7 @@
     "label": "Local maxima and minima",
     "section": "Local maximum and minimum points",
     "subgoals": [
-      "Define local extrema via neighborhoods",
+      "Pin local extrema via neighborhoods",
       "Connect extrema to flat tangents",
       "Preview the critical-point hunt"
     ]
@@ -21,7 +21,7 @@
     "label": "Worked classification",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked critical-point example",
+      "Solve f'(x) = 0 for the worked cubic",
       "List all candidates before classifying",
       "Confirm none are missed"
     ]
