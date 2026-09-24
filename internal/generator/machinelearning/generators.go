@@ -50,7 +50,7 @@ func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		},
 		{
 			"The forward pass computes the ____ given input data.",
-			"output (or prediction)",
+			"output",
 			"The forward pass propagates input through each layer to compute the network's output or prediction.",
 		},
 		{
@@ -64,9 +64,9 @@ func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			"Gradient descent updates weights in the opposite direction of the gradient to minimize the loss.",
 		},
 		{
-			"In a neural network with sigmoid activation, what is the derivative of \\(\\sigma(x) = 1/(1+e^{-x})\\) in terms of \\(\\sigma(x)\\)?",
-			"σ(x)(1-σ(x))",
-			"The derivative of the sigmoid function is \\(\\sigma(x)(1-\\sigma(x))\\), which makes backpropagation efficient.",
+			"In a neural network with sigmoid activation, the derivative at x=0 is σ(0)(1-σ(0)). What is it? (enter a number)",
+			"0.25",
+			"The derivative of the sigmoid function is \\(\\sigma(x)(1-\\sigma(x))\\); at x=0: 0.5·0.5=0.25, which makes backpropagation efficient.",
 		},
 		{
 			"What does the learning rate control in gradient descent with backpropagation?",
@@ -89,8 +89,8 @@ func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			"ReLU (Rectified Linear Unit) has derivative 1 for positive inputs, helping gradients flow through deep networks.",
 		},
 		{
-			"During backpropagation, the gradient of the loss with respect to a weight depends on the gradient from the ____ layer.",
-			"next (or subsequent)",
+			"The chain rule means each layer's gradient depends on the gradient from the layer above it. Which layer: above or below? (type one word)",
+			"above",
 			"The chain rule means each layer's gradient depends on the gradient from the layer above it.",
 		},
 	}
