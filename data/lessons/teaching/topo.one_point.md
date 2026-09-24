@@ -1,15 +1,33 @@
 # One-Point Compactification
 
-**One-point (Alexandroff) compactification:** For locally compact Hausdorff $X$, $X^*=X\cup\{\infty\}$ with neighbourhoods of $\infty$ being complements of compact sets is compact Hausdorff and contains $X$ densely.
+**One-point (Alexandroff) compactification:** For locally compact Hausdorff $X$, form $X^*=X$ union $\{\infty\}$ where neighbourhoods of $\infty$ are complements of compact sets. Then $X^*$ is compact Hausdorff containing $X$ densely.
 
-## Compactifying Locally Compact Spaces
+## Worked: the line closes into a circle
 
-### Construction
-$X$ locally compact Hausdorff ⇒ $X^*$ compact Hausdorff. $\mathbb R\cup\{\infty\}\cong S^{1}$, $\mathbb R^{2}\cup\{\infty\}\cong S^{2}$ via stereographic.
+Compactify $\mathbb{R}$ by one point:
 
-### Non-Examples
-$\mathbb Q$ is not locally compact, so its one-point compactification is not Hausdorff compact; already compact $X$ gains no point.
+1. Compact sets in $\mathbb{R}$ are exactly the closed bounded sets.
+2. A neighbourhood of $\infty$ is therefore $(-\infty, a)$ union $(b, \infty)$ plus $\infty$: both tails at once.
+3. Sending $x$ to its stereographic image and $\infty$ to the north pole matches these with circle arcs.
 
-## Example
+So $\mathbb{R}$ union $\{\infty\}$ is homeomorphic to $S^1$: the two ends join at infinity.
 
-$\mathbb R$: compact sets are closed bounded intervals $[a,b]$; complements $(-\infty,a)\cup(b,\infty)\cup\{\infty\}$ give neighbourhoods of $\infty$.
+## Worked: the plane closes into a sphere
+
+Repeat for $\mathbb{R}^2$:
+
+1. Complements of large closed discs, plus $\infty$, form the neighbourhoods of infinity.
+2. Stereographic projection sends each such neighbourhood to a cap around the north pole.
+3. The bijection extends continuously both ways.
+
+So $\mathbb{R}^2$ union $\{\infty\}$ is homeomorphic to $S^2$; one point compactifies the plane into a sphere.
+
+## When compactification fails
+
+Try the procedure on $\mathbb{Q}$:
+
+1. $\mathbb{Q}$ is not locally compact: no point has a compact neighbourhood inside $\mathbb{Q}$.
+2. The complement-of-compact neighbourhoods of $\infty$ then fail to separate $\infty$ from points of $\mathbb{Q}$.
+3. The result is not Hausdorff compact, so Alexandroff needs local compactness.
+
+So the construction is sharp: locally compact Hausdorff in, compact Hausdorff out; already-compact spaces gain nothing.

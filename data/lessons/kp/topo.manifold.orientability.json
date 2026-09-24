@@ -1,29 +1,29 @@
 [
   {
-    "label": "Orientability of Manifolds",
-    "section": "Detecting Orientability",
+    "label": "Worked: the sphere is orientable",
+    "section": "Worked: the sphere is orientable",
     "subgoals": [
-      "Review Detecting Orientability",
-      "Work the example",
-      "Verify"
+      "Attach the outward normal field",
+      "Carry the choice across charts",
+      "Check transitions preserve it"
     ]
   },
   {
-    "label": "Orientability of Manifolds — practice 2",
-    "section": "Detecting Orientability",
+    "label": "Worked: the Mobius band is not",
+    "section": "Worked: the Mobius band is not",
     "subgoals": [
-      "Review Detecting Orientability",
-      "Work the example",
-      "Verify"
+      "Start a frame on the central circle",
+      "Slide it once around the band",
+      "Watch it return mirrored"
     ]
   },
   {
-    "label": "Orientability of Manifolds — practice 3",
-    "section": "Example",
+    "label": "Worked: the orientability test",
+    "section": "Worked: the orientability test",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Hunt for an embedded Mobius band",
+      "Compute the Stiefel-Whitney class",
+      "Certify the torus as orientable"
     ]
   }
 ]

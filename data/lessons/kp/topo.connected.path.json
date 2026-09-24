@@ -1,29 +1,29 @@
 [
   {
-    "label": "Path-Connected Spaces",
-    "section": "Paths vs Connectedness",
+    "label": "Worked: intervals are path-connected",
+    "section": "Worked: intervals are path-connected",
     "subgoals": [
-      "Review Paths vs Connectedness",
-      "Work the example",
-      "Verify"
+      "Write the straight-line segment",
+      "Check it stays in the interval",
+      "Evaluate at both endpoints"
     ]
   },
   {
-    "label": "Path-Connected Spaces — practice 2",
-    "section": "Paths vs Connectedness",
+    "label": "Worked: the punctured plane stays path-connected",
+    "section": "Worked: the punctured plane stays path-connected",
     "subgoals": [
-      "Review Paths vs Connectedness",
-      "Work the example",
-      "Verify"
+      "Try the straight segment first",
+      "Detour around the origin if blocked",
+      "Concatenate into one path"
     ]
   },
   {
-    "label": "Path-Connected Spaces — practice 3",
-    "section": "Example",
+    "label": "When connected does not imply path-connected",
+    "section": "When connected does not imply path-connected",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Exhibit the limit segment",
+      "Rule out paths by oscillation",
+      "Conclude connected but not path-connected"
     ]
   }
 ]

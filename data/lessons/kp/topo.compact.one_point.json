@@ -1,29 +1,29 @@
 [
   {
-    "label": "One-Point Compactification",
-    "section": "Compactifying Locally Compact Spaces",
+    "label": "Worked: the line closes into a circle",
+    "section": "Worked: the line closes into a circle",
     "subgoals": [
-      "Review Compactifying Locally Compact Spaces",
-      "Work the example",
-      "Verify"
+      "Identify the compact sets of R",
+      "Trap infinity between both tails",
+      "Match the result against the circle"
     ]
   },
   {
-    "label": "One-Point Compactification — practice 2",
-    "section": "Compactifying Locally Compact Spaces",
+    "label": "Worked: the plane closes into a sphere",
+    "section": "Worked: the plane closes into a sphere",
     "subgoals": [
-      "Review Compactifying Locally Compact Spaces",
-      "Work the example",
-      "Verify"
+      "Complement large discs for infinity",
+      "Project stereographically",
+      "Extend continuously to the pole"
     ]
   },
   {
-    "label": "One-Point Compactification — practice 3",
-    "section": "Example",
+    "label": "When compactification fails",
+    "section": "When compactification fails",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Search Q for a compact neighbourhood",
+      "Show infinity cannot be separated",
+      "Conclude local compactness is required"
     ]
   }
 ]

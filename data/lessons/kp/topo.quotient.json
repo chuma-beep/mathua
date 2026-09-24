@@ -1,29 +1,29 @@
 [
   {
-    "label": "Quotient Topology",
-    "section": "Glueing Spaces",
+    "label": "Worked: the circle from an interval",
+    "section": "Worked: the circle from an interval",
     "subgoals": [
-      "Review Glueing Spaces",
-      "Work the example",
-      "Verify"
+      "Collapse the endpoint class to one point",
+      "Pull neighbourhoods back to both ends",
+      "Match the quotient against the circle"
     ]
   },
   {
-    "label": "Quotient Topology — practice 2",
-    "section": "Glueing Spaces",
+    "label": "Worked: the quotient map is continuous",
+    "section": "Worked: the quotient map is continuous",
     "subgoals": [
-      "Review Glueing Spaces",
-      "Work the example",
-      "Verify"
+      "Take an open set in the quotient",
+      "Read openness off the preimage rule",
+      "Conclude continuity by construction"
     ]
   },
   {
-    "label": "Quotient Topology — practice 3",
-    "section": "Example",
+    "label": "When the quotient is not Hausdorff",
+    "section": "When the quotient is not Hausdorff",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Collapse a non-closed set to a point",
+      "Show every neighbourhood reaches the missing limit",
+      "Conclude separation fails"
     ]
   }
 ]

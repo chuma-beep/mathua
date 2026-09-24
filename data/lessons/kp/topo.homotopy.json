@@ -1,29 +1,29 @@
 [
   {
-    "label": "Homotopy and Fundamental Group",
-    "section": "Loops and Groups",
+    "label": "Worked: winding number on the circle",
+    "section": "Worked: winding number on the circle",
     "subgoals": [
-      "Review Loops and Groups",
-      "Work the example",
-      "Verify"
+      "Lift the loop to the real line",
+      "Read the endpoint integer",
+      "Match homotopic loops to equal endpoints"
     ]
   },
   {
-    "label": "Homotopy and Fundamental Group — practice 2",
-    "section": "Loops and Groups",
+    "label": "Worked: the sphere is simply connected",
+    "section": "Worked: the sphere is simply connected",
     "subgoals": [
-      "Review Loops and Groups",
-      "Work the example",
-      "Verify"
+      "Perturb the loop off a point",
+      "Contract it in the punctured sphere",
+      "Conclude every loop is null-homotopic"
     ]
   },
   {
-    "label": "Homotopy and Fundamental Group — practice 3",
-    "section": "Example",
+    "label": "Worked: maps into Euclidean space",
+    "section": "Worked: maps into Euclidean space",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Write the straight-line homotopy",
+      "Check it stays in Euclidean space",
+      "Conclude all maps are homotopic"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Embedding Theorems",
-    "section": "Types",
+    "label": "Worked: Whitney's target dimension",
+    "section": "Worked: Whitney's target dimension",
     "subgoals": [
-      "Review Types",
-      "Work the example",
-      "Verify"
+      "Map generically into R^2n",
+      "Push apart the double points",
+      "Check the subspace topology matches"
     ]
   },
   {
-    "label": "Embedding Theorems — practice 2",
-    "section": "Types",
+    "label": "Worked: the circle in the plane",
+    "section": "Worked: the circle in the plane",
     "subgoals": [
-      "Review Types",
-      "Work the example",
-      "Verify"
+      "Parametrize by angle",
+      "Check the derivative never vanishes",
+      "Match the subspace topology"
     ]
   },
   {
-    "label": "Embedding Theorems — practice 3",
-    "section": "Example",
+    "label": "Worked: wild versus tame",
+    "section": "Worked: wild versus tame",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Bound balls on both sides of the round sphere",
+      "Find the non-simply-connected horned complement",
+      "Conclude placement matters"
     ]
   }
 ]

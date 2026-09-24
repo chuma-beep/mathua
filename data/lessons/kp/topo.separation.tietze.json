@@ -1,29 +1,29 @@
 [
   {
-    "label": "Tietze Extension Theorem",
-    "section": "Extending from Closed Sets",
+    "label": "Worked: extending from two points",
+    "section": "Worked: extending from two points",
     "subgoals": [
-      "Review Extending from Closed Sets",
-      "Work the example",
-      "Verify"
+      "Check the two-point set is closed",
+      "Interpolate linearly between the values",
+      "Extend constantly outside"
     ]
   },
   {
-    "label": "Tietze Extension Theorem — practice 2",
-    "section": "Extending from Closed Sets",
+    "label": "Worked: Urysohn as a corollary",
+    "section": "Worked: Urysohn as a corollary",
     "subgoals": [
-      "Review Extending from Closed Sets",
-      "Work the example",
-      "Verify"
+      "Glue the two closed sets into one domain",
+      "Define 0 on one piece and 1 on the other",
+      "Extend by Tietze to the separator"
     ]
   },
   {
-    "label": "Tietze Extension Theorem — practice 3",
-    "section": "Example",
+    "label": "When the subset is not closed",
+    "section": "When the subset is not closed",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Find a limit point outside Q",
+      "Oscillate toward conflicting limits",
+      "Conclude extension fails in general"
     ]
   }
 ]

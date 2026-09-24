@@ -1,29 +1,29 @@
 [
   {
-    "label": "Cohomology",
-    "section": "Structure",
+    "label": "Worked: the torus",
+    "section": "Worked: the torus",
     "subgoals": [
-      "Review Structure",
-      "Work the example",
-      "Verify"
+      "Count the connected components",
+      "Read two 1-cycles off the factors",
+      "Cup the generators into H^2"
     ]
   },
   {
-    "label": "Cohomology — practice 2",
-    "section": "Structure",
+    "label": "Worked: de Rham on the circle",
+    "section": "Worked: de Rham on the circle",
     "subgoals": [
-      "Review Structure",
-      "Work the example",
-      "Verify"
+      "Write closed 1-forms as multiples of dt",
+      "Integrate exact forms to zero",
+      "Count one class per hole"
     ]
   },
   {
-    "label": "Cohomology — practice 3",
-    "section": "Example",
+    "label": "Worked: homotopy invariance",
+    "section": "Worked: homotopy invariance",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Retract the punctured plane to the circle",
+      "Carry cohomology along the retraction",
+      "Read H^1 off the circle"
     ]
   }
 ]

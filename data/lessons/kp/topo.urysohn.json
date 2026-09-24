@@ -1,29 +1,29 @@
 [
   {
-    "label": "Urysohn's Lemma",
-    "section": "Separating Closed Sets",
+    "label": "Worked: separating two points on the line",
+    "section": "Worked: separating two points on the line",
     "subgoals": [
-      "Review Separating Closed Sets",
-      "Work the example",
-      "Verify"
+      "Set f(x) = x between the points",
+      "Extend constantly outside",
+      "Check continuity at the joints"
     ]
   },
   {
-    "label": "Urysohn's Lemma — practice 2",
-    "section": "Separating Closed Sets",
+    "label": "Worked: the metric formula",
+    "section": "Worked: the metric formula",
     "subgoals": [
-      "Review Separating Closed Sets",
-      "Work the example",
-      "Verify"
+      "Form the distance ratio",
+      "Evaluate it on A and on B",
+      "Conclude continuity on all of X"
     ]
   },
   {
-    "label": "Urysohn's Lemma — practice 3",
-    "section": "Example",
+    "label": "When separation fails",
+    "section": "When separation fails",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Locate the missing disjoint neighbourhoods",
+      "See there is no room for transition values",
+      "Conclude normality is sharp"
     ]
   }
 ]
