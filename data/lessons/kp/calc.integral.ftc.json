@@ -3,27 +3,27 @@
     "label": "Introduction",
     "section": "Introduction",
     "subgoals": [
-      "Define fundamental theorem of calculus",
-      "Follow the worked example",
-      "Apply the rule"
+      "Contrast instantaneous variation with accumulated quantity",
+      "State the two complementary claims",
+      "Preview antiderivative construction vs endpoint evaluation"
     ]
   },
   {
     "label": "The First Fundamental Theorem of Calculus",
     "section": "The First Fundamental Theorem of Calculus",
     "subgoals": [
-      "Understand the first fundamental theorem of calculus",
-      "Apply the first fundamental theorem of calculus",
-      "Check the result"
+      "Split the accumulation at x+h",
+      "Apply the integral mean value theorem",
+      "Take h to 0 through continuity"
     ]
   },
   {
     "label": "Extension to variable limits of integration",
     "section": "Extension to variable limits of integration",
     "subgoals": [
-      "Understand extension to variable limits of integration",
-      "Apply extension to variable limits of integration",
-      "Check the result"
+      "Split at a fixed constant c",
+      "Chain-rule through b(x) and a(x)",
+      "Weight each boundary by its speed"
     ]
   }
 ]

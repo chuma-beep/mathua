@@ -3,7 +3,7 @@
     "label": "Variable limits of integration",
     "section": "Extension to variable limits of integration",
     "subgoals": [
-      "Apply FTC1 to d/dx ∫_0^x",
+      "Apply FTC1 to d/dx \u222b_0^x",
       "Chain-rule through x^2 limits",
       "Negate for lower-limit variables"
     ]
@@ -21,9 +21,9 @@
     "label": "Worked variable-limit examples",
     "section": "Example 2",
     "subgoals": [
-      "Follow the worked variable-limit example",
       "Verify 2x^3 for the x^2 cap",
-      "Verify -e^x for the flipped limit"
+      "Verify -e^x for the flipped limit",
+      "Name the entering/leaving boundary terms"
     ]
   }
 ]
