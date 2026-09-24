@@ -1,29 +1,29 @@
 [
   {
-    "label": "Runge-Kutta 4th Order Method",
-    "section": "Accuracy",
+    "label": "Worked: one RK4 step for y' = y",
+    "section": "Worked: one RK4 step for y' = y",
     "subgoals": [
-      "Review Accuracy",
-      "Work the example",
-      "Verify"
+      "Probe k1 through k4 at 0.1 step",
+      "Form the (k1+2k2+2k3+k4)/6 average",
+      "Step to y_1 = 1.10517"
     ]
   },
   {
-    "label": "Runge-Kutta 4th Order Method — practice 2",
-    "section": "Accuracy",
+    "label": "Worked: RK4 against Euler",
+    "section": "Worked: RK4 against Euler",
     "subgoals": [
-      "Review Accuracy",
-      "Work the example",
-      "Verify"
+      "Compare RK4 error 1e-7 vs Euler 0.0052",
+      "Fix the step size for fairness",
+      "Conclude probes beat tangents"
     ]
   },
   {
-    "label": "Runge-Kutta 4th Order Method — practice 3",
-    "section": "Example",
+    "label": "Order costs evaluations",
+    "section": "Order costs evaluations",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Count four evaluations per step",
+      "Quote O(h^4) global error",
+      "Compute the 16x halving payoff"
     ]
   }
 ]

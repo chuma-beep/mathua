@@ -1,29 +1,29 @@
 [
   {
-    "label": "Wave Equation and d'Alembert Solution",
-    "section": "Characteristics and Energy",
+    "label": "Worked: d'Alembert with a parabola",
+    "section": "Worked: d'Alembert with a parabola",
     "subgoals": [
-      "Review Characteristics and Energy",
-      "Work the example",
-      "Verify"
+      "Split x^2 evenly into travellers",
+      "Evaluate (1 + 25)/2 = 13 at (3, 1)",
+      "Expand to x^2 + 4t^2 rigid lift"
     ]
   },
   {
-    "label": "Wave Equation and d'Alembert Solution — practice 2",
-    "section": "Characteristics and Energy",
+    "label": "Worked: domain of dependence",
+    "section": "Worked: domain of dependence",
     "subgoals": [
-      "Review Characteristics and Energy",
-      "Work the example",
-      "Verify"
+      "Trace characteristics to [1, 5]",
+      "Argue outside data never matters",
+      "Read finite speed c = 2"
     ]
   },
   {
-    "label": "Wave Equation and d'Alembert Solution — practice 3",
-    "section": "Example",
+    "label": "Energy rides along",
+    "section": "Energy rides along",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Write the conserved energy integral",
+      "Carry energy along characteristics",
+      "Sort hyperbolic vs parabolic vs elliptic"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
+    "label": "Solution Method",
+    "section": "Solution Method",
+    "subgoals": [
+      "Check dM/dy against dN/dx",
+      "Integrate M dx plus h(y)",
+      "Fix h(y) from dpsi/dy = N"
+    ]
+  },
+  {
+    "label": "Worked exact solve",
+    "section": "Solution Method",
+    "subgoals": [
+      "Verify 2x = 2x for (2xy+1, x^2+3y^2)",
+      "Integrate to x^2 y + x + h(y)",
+      "Solve h'(y) = 3y^2 to close psi = C"
+    ]
+  },
+  {
     "label": "Integrating Factors (Nonexact to Exact)",
     "section": "Integrating Factors (Nonexact to Exact)",
     "subgoals": [
-      "Define exact equations",
-      "Follow the worked example",
-      "Apply the rule"
-    ]
-  },
-  {
-    "label": "Exact equations — practice 2",
-    "section": "",
-    "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
-    ]
-  },
-  {
-    "label": "Exact equations — practice 3",
-    "section": "",
-    "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Detect dM/dy != dN/dx failure",
+      "Find mu(x) or mu(y) multiplier",
+      "Re-run the exact method on mu M, mu N"
     ]
   }
 ]

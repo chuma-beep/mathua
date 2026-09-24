@@ -1,29 +1,29 @@
 [
   {
-    "label": "Lyapunov Functions",
-    "section": "Direct Method",
+    "label": "Worked: V = x^2 for x' = -3x",
+    "section": "Worked: V = x^2 for x' = -3x",
     "subgoals": [
-      "Review Direct Method",
-      "Work the example",
-      "Verify"
+      "Check V > 0 away from zero",
+      "Chain-rule dV/dt to -6x^2",
+      "Evaluate -24 at x = 2"
     ]
   },
   {
-    "label": "Lyapunov Functions — practice 2",
-    "section": "Direct Method",
+    "label": "Worked: stable but not asymptotic",
+    "section": "Worked: stable but not asymptotic",
     "subgoals": [
-      "Review Direct Method",
-      "Work the example",
-      "Verify"
+      "Compute dV/dt = 0 for x' = 0",
+      "Show freezing implies stability",
+      "Show no convergence occurs"
     ]
   },
   {
-    "label": "Lyapunov Functions — practice 3",
-    "section": "Example",
+    "label": "Stability without solving",
+    "section": "Stability without solving",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "State LaSalle for dV/dt <= 0",
+      "State the converse existence claim",
+      "Certify stability from decay"
     ]
   }
 ]

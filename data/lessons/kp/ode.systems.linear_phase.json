@@ -1,29 +1,29 @@
 [
   {
-    "label": "Linear systems and phase portraits",
-    "section": "Classification by Eigenvalues",
+    "label": "Worked: a saddle from diag(2, -3)",
+    "section": "Worked: a saddle from diag(2, -3)",
     "subgoals": [
-      "Review Classification by Eigenvalues",
-      "Work the example",
-      "Verify"
+      "Read eigenvalues 2 and -3",
+      "Assign approach vs departure axes",
+      "Sketch the hyperbolic flow"
     ]
   },
   {
-    "label": "Linear systems and phase portraits — practice 2",
-    "section": "Classification by Eigenvalues",
+    "label": "Worked: a node and a spiral",
+    "section": "Worked: a node and a spiral",
     "subgoals": [
-      "Review Classification by Eigenvalues",
-      "Work the example",
-      "Verify"
+      "Sink all directions for -1, -2",
+      "Split 0.5 +- 2i into growth and rotation",
+      "Classify the unstable spiral"
     ]
   },
   {
-    "label": "Linear systems and phase portraits — practice 3",
-    "section": "Example",
+    "label": "Eigenvalues decide the portrait",
+    "section": "Eigenvalues decide the portrait",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Sort real pairs into node vs saddle",
+      "Read stability off the complex real part",
+      "Handle the zero-eigenvalue line case"
     ]
   }
 ]

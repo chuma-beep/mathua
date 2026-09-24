@@ -3,27 +3,27 @@
     "label": "Integrating Factor Method",
     "section": "Integrating Factor Method",
     "subgoals": [
-      "Define first-order linear odes",
-      "Follow the worked example",
-      "Apply the rule"
+      "Put the ODE in dy/dx + P(x)y = Q(x) form",
+      "Build mu = e^{int P dx}",
+      "Collapse to d(mu y)/dx and integrate"
     ]
   },
   {
-    "label": "First-order linear ODEs — practice 2",
-    "section": "",
+    "label": "Worked linear solve",
+    "section": "Integrating Factor Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Read P = 2 for mu = e^{2x}",
+      "Multiply through to d(e^{2x} y)/dx = 6e^{3x}",
+      "Integrate to y = 2e^x + Ce^{-2x}"
     ]
   },
   {
-    "label": "First-order linear ODEs — practice 3",
-    "section": "",
+    "label": "Initial value version",
+    "section": "Integrating Factor Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Solve generally with mu = e^{3x}",
+      "Apply y(0) = 1 to fix C",
+      "Check the solution satisfies the ODE"
     ]
   }
 ]

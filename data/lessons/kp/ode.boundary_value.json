@@ -1,29 +1,29 @@
 [
   {
-    "label": "Boundary Value Problems",
-    "section": "Versus IVP",
+    "label": "Worked: pinning down y'' = 0",
+    "section": "Worked: pinning down y'' = 0",
     "subgoals": [
-      "Review Versus IVP",
-      "Work the example",
-      "Verify"
+      "Integrate twice to get Cx + D",
+      "Apply y(0) = 0 to kill D",
+      "Apply y(1) = 3 to fix C"
     ]
   },
   {
-    "label": "Boundary Value Problems — practice 2",
-    "section": "Versus IVP",
+    "label": "Worked: same ODE, different pins",
+    "section": "Worked: same ODE, different pins",
     "subgoals": [
-      "Review Versus IVP",
-      "Work the example",
-      "Verify"
+      "Integrate twice to get Cx + D",
+      "Apply y(0) = 1 to fix D",
+      "Apply y(1) = 1 to force C = 0"
     ]
   },
   {
-    "label": "Boundary Value Problems — practice 3",
-    "section": "Example",
+    "label": "IVP always answers, BVP sometimes",
+    "section": "IVP always answers, BVP sometimes",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Contrast Picard uniqueness with BVP counts",
+      "Describe the shooting iteration",
+      "State the Green/Fredholm solvability role"
     ]
   }
 ]

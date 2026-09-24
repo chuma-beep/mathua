@@ -1,29 +1,29 @@
 [
   {
-    "label": "Separable differential equations",
-    "section": "",
+    "label": "Solution Method",
+    "section": "Solution Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Factor dy/dx into f(x) g(y)",
+      "Separate to dy/g(y) = f(x) dx",
+      "Integrate both sides"
     ]
   },
   {
-    "label": "Separable differential equations — practice 2",
-    "section": "",
+    "label": "Worked separable solve",
+    "section": "Solution Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Separate dy/dx = 2xy to dy/y = 2x dx",
+      "Integrate to ln|y| = x^2 + C",
+      "Exponentiate to y = Ae^{x^2}"
     ]
   },
   {
-    "label": "Separable differential equations — practice 3",
-    "section": "",
+    "label": "Initial value version",
+    "section": "Solution Method",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Separate dy/dx = y^2 with y(0) = 1",
+      "Integrate to y = -1/(x + C)",
+      "Apply y(0) = 1 to get y = 1/(1-x)"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Volterra Integral Equations",
-    "section": "Solving",
+    "label": "Worked: differentiating back to an ODE",
+    "section": "Worked: differentiating back to an ODE",
     "subgoals": [
-      "Review Solving",
-      "Work the example",
-      "Verify"
+      "Differentiate to y' = 2y",
+      "Read y(0) = 1 from x = 0",
+      "Solve to y = e^{2x} and y(1) = e^2"
     ]
   },
   {
-    "label": "Volterra Integral Equations — practice 2",
-    "section": "Solving",
+    "label": "Worked: Picard iterates converge",
+    "section": "Worked: Picard iterates converge",
     "subgoals": [
-      "Review Solving",
-      "Work the example",
-      "Verify"
+      "Iterate 1 to 1 + x",
+      "Iterate again to 1 + x + x^2/2",
+      "Recognize the exponential series"
     ]
   },
   {
-    "label": "Volterra Integral Equations — practice 3",
-    "section": "Example",
+    "label": "Resolvent and Laplace routes",
+    "section": "Resolvent and Laplace routes",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Sum kernels into the resolvent",
+      "Route convolution kernels through Laplace",
+      "Pick differentiate vs iterate vs transform"
     ]
   }
 ]
