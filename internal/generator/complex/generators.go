@@ -258,10 +258,17 @@ func (g *exponentialGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			Explanation: fmt.Sprintf("%d(cos %d° + i sin %d°) = %d(%d) + %d(%d)i = %s", r, e.theta, e.theta, r, e.realPart, r, e.imagPart, fmtComplex(realPart, imagPart)),
 		}
 	}
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the modulus of \\(%s\\)? (enter a number)", fmtComplex(realPart, imagPart)),
+			Answer:      fmt.Sprintf("%d", r),
+			Explanation: fmt.Sprintf("Modulus r = √(%d²+%d²) = %d.", realPart, imagPart, r),
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert \\(%s\\) to polar exponential form using Euler's formula.", fmtComplex(realPart, imagPart)),
-		Answer:      fmt.Sprintf("%d e^(i·%d°)", r, e.theta),
-		Explanation: fmt.Sprintf("r = √(%d²+%d²) = %d, θ = %d°, so %s = %d e^(i·%d°)", realPart, imagPart, r, e.theta, fmtComplex(realPart, imagPart), r, e.theta),
+		Question:    fmt.Sprintf("What is the argument in degrees of \\(%s\\)? (enter a number)", fmtComplex(realPart, imagPart)),
+		Answer:      fmt.Sprintf("%d", e.theta),
+		Explanation: fmt.Sprintf("The point sits at angle %d°: r = %d, θ = %d°.", e.theta, r, e.theta),
 	}
 }
 
@@ -297,9 +304,9 @@ func (g *inequalitiesGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	s := fmtComplex(r1, i1)
 	t := fmtComplex(r2, i2)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Let \\(z_{1}=%s\\), \\(z_{2}=%s\\). Which is always true? (enter '\\(\\leq\\)' for \\(|z_{1}+z_{2}| \\leq |z_{1}|+|z_{2}|\\), or '\\(\\geq\\)' for the reverse)", s, t),
-		Answer:      "≤",
-		Explanation: "The triangle inequality |z₁+z₂| ≤ |z₁|+|z₂| holds for all complex numbers.",
+		Question:    fmt.Sprintf("Let z1=%s, z2=%s. Does the triangle inequality use less-or-equal, that is |z1+z2| is less-or-equal to |z1|+|z2|? (yes/no)", s, t),
+		Answer:      "yes",
+		Explanation: "The triangle inequality |z1+z2| <= |z1|+|z2| holds for all complex numbers.",
 	}
 }
 

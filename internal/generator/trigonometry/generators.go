@@ -592,14 +592,14 @@ func (g *trigEqBasicGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		exp      string
 	}
 	entries := []entry{
-		{"Solve \\(\\sin(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(0^{\\circ},180^{\\circ}\\)", "\\(\\sin(x) = 0\\) when \\(x = 0^{\\circ}\\) or \\(x = 180^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(90^{\\circ},270^{\\circ}\\)", "\\(\\cos(x) = 0\\) when \\(x = 90^{\\circ}\\) or \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\sin(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(90^{\\circ}\\)", "\\(\\sin(x) = 1\\) only at \\(x = 90^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(0^{\\circ}\\)", "\\(\\cos(x) = 1\\) only at \\(x = 0^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\sin(x) = -1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(270^{\\circ}\\)", "\\(\\sin(x) = -1\\) only at \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\tan(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(0^{\\circ},180^{\\circ}\\)", "\\(\\tan(x) = \\sin(x)/\\cos(x)\\), so \\(\\tan(x) = 0\\) when \\(\\sin(x) = 0\\) at \\(x = 0^{\\circ},180^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(30^{\\circ},150^{\\circ}\\)", "\\(\\sin(30^{\\circ}) = 1/2\\) and \\(\\sin(150^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(60^{\\circ},300^{\\circ}\\)", "\\(\\cos(60^{\\circ}) = 1/2\\) and \\(\\cos(300^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\sin(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0,180", "\\(\\sin(x) = 0\\) when \\(x = 0^{\\circ}\\) or \\(x = 180^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "90,270", "\\(\\cos(x) = 0\\) when \\(x = 90^{\\circ}\\) or \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\sin(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "90", "\\(\\sin(x) = 1\\) only at \\(x = 90^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\cos(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0", "\\(\\cos(x) = 1\\) only at \\(x = 0^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\sin(x) = -1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "270", "\\(\\sin(x) = -1\\) only at \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\tan(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0,180", "\\(\\tan(x) = \\sin(x)/\\cos(x)\\), so \\(\\tan(x) = 0\\) when \\(\\sin(x) = 0\\) at \\(x = 0^{\\circ},180^{\\circ}\\)."},
+		{"Solve \\(\\sin(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "30,150", "\\(\\sin(30^{\\circ}) = 1/2\\) and \\(\\sin(150^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+		{"Solve \\(\\cos(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "60,300", "\\(\\cos(60^{\\circ}) = 1/2\\) and \\(\\cos(300^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -619,12 +619,12 @@ func (g *trigEqHomogeneousGen) Generate(ctx generator.GeneratorContext) generato
 		exp      string
 	}
 	entries := []entry{
-		{"What substitution is used to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "\\(\\tan(x) = -b/a\\)", "Divide both sides by \\(\\cos(x)\\): \\(a\\tan(x) + b = 0 \\to \\tan(x) = -b/a\\)."},
-		{"Solve \\(\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(45^{\\circ},225^{\\circ}\\)", "\\(\\sin(x) = \\cos(x) \\to \\tan(x) = 1 \\to x = 45^{\\circ}, 225^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) + \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(135^{\\circ},315^{\\circ}\\)", "\\(\\sin(x) = -\\cos(x) \\to \\tan(x) = -1 \\to x = 135^{\\circ}, 315^{\\circ}\\)."},
-		{"Solve \\(\\sqrt{3}\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(30^{\\circ},210^{\\circ}\\)", "\\(\\sqrt{3}\\sin(x) = \\cos(x) \\to \\tan(x) = 1/\\sqrt{3} \\to x = 30^{\\circ}, 210^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) - \\sqrt{3}\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "\\(60^{\\circ},240^{\\circ}\\)", "\\(\\sin(x) = \\sqrt{3}\\cos(x) \\to \\tan(x) = \\sqrt{3} \\to x = 60^{\\circ}, 240^{\\circ}\\)."},
-		{"What is the general method to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "divide by \\(\\cos(x)\\)", "Dividing by \\(\\cos(x)\\) gives \\(a\\tan(x) + b = 0\\), which can be solved for \\(x\\)."},
+		{"What substitution is used to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "tan(x) = -b/a", "Divide both sides by \\(\\cos(x)\\): \\(a\\tan(x) + b = 0 \\to \\tan(x) = -b/a\\)."},
+		{"Solve \\(\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "45,225", "\\(\\sin(x) = \\cos(x) \\to \\tan(x) = 1 \\to x = 45^{\\circ}, 225^{\\circ}\\)."},
+		{"Solve \\(\\sin(x) + \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "135,315", "\\(\\sin(x) = -\\cos(x) \\to \\tan(x) = -1 \\to x = 135^{\\circ}, 315^{\\circ}\\)."},
+		{"Solve \\(\\sqrt{3}\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "30,210", "\\(\\sqrt{3}\\sin(x) = \\cos(x) \\to \\tan(x) = 1/\\sqrt{3} \\to x = 30^{\\circ}, 210^{\\circ}\\)."},
+		{"Solve \\(\\sin(x) - \\sqrt{3}\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "60,240", "\\(\\sin(x) = \\sqrt{3}\\cos(x) \\to \\tan(x) = \\sqrt{3} \\to x = 60^{\\circ}, 240^{\\circ}\\)."},
+		{"What is the general method to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "divide by cos(x)", "Dividing by \\(\\cos(x)\\) gives \\(a\\tan(x) + b = 0\\), which can be solved for \\(x\\)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -644,14 +644,14 @@ func (g *sinhCoshGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		exp      string
 	}
 	entries := []entry{
-		{"What is the definition of \\(\\sinh(x)\\)?", "\\((e^{x} - e^{-x})/2\\)", "\\(\\sinh(x) = (e^{x} - e^{-x})/2\\), the odd part of the exponential function."},
-		{"What is the definition of \\(\\cosh(x)\\)?", "\\((e^{x} + e^{-x})/2\\)", "\\(\\cosh(x) = (e^{x} + e^{-x})/2\\), the even part of the exponential function."},
+		{"What is sinh(0)? (enter a number)", "0", "sinh(0) = (e^{0} - e^{-0})/2 = (1 - 1)/2 = 0; \\(\\sinh(x) = (e^{x} - e^{-x})/2\\), the odd part of the exponential function."},
+		{"What is cosh(0)? (enter a number)", "1", "cosh(0) = (e^{0} + e^{-0})/2 = (1 + 1)/2 = 1; \\(\\cosh(x) = (e^{x} + e^{-x})/2\\), the even part of the exponential function."},
 		{"What is \\(\\cosh^{2}(x) - \\sinh^{2}(x)\\)?", "1", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\) (the hyperbolic analogue of \\(\\cos^{2}+\\sin^{2}=1\\))."},
 		{"Is \\(\\sinh(x)\\) an even or odd function?", "odd", "\\(\\sinh(-x) = -\\sinh(x)\\), so \\(\\sinh\\) is odd."},
 		{"Is \\(\\cosh(x)\\) an even or odd function?", "even", "\\(\\cosh(-x) = \\cosh(x)\\), so \\(\\cosh\\) is even."},
-		{"What is the derivative of \\(\\sinh(x)\\)?", "\\(\\cosh(x)\\)", "\\(d/dx \\sinh(x) = \\cosh(x)\\)."},
-		{"What is the derivative of \\(\\cosh(x)\\)?", "\\(\\sinh(x)\\)", "\\(d/dx \\cosh(x) = \\sinh(x)\\)."},
-		{"What is the identity relating \\(\\cosh^{2}(x)\\) and \\(\\sinh^{2}(x)\\)?", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\)", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\) is the fundamental hyperbolic identity."},
+		{"What is the derivative of \\(\\sinh(x)\\)?", "cosh(x)", "\\(d/dx \\sinh(x) = \\cosh(x)\\)."},
+		{"What is the derivative of \\(\\cosh(x)\\)?", "sinh(x)", "\\(d/dx \\cosh(x) = \\sinh(x)\\)."},
+		{"What is cosh(x)^2 - sinh(x)^2? (enter a number)", "1", "The fundamental hyperbolic identity gives \\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -671,13 +671,13 @@ func (g *tanhCothGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		exp      string
 	}
 	entries := []entry{
-		{"What is the definition of \\(\\tanh(x)\\)?", "\\(\\sinh(x)/\\cosh(x)\\)", "\\(\\tanh(x) = \\sinh(x)/\\cosh(x) = (e^{x} - e^{-x})/(e^{x} + e^{-x})\\)."},
-		{"What is the definition of \\(\\coth(x)\\)?", "\\(\\cosh(x)/\\sinh(x)\\)", "\\(\\coth(x) = \\cosh(x)/\\sinh(x) = 1/\\tanh(x)\\)."},
+		{"What is the definition of \\(\\tanh(x)\\)?", "sinh(x)/cosh(x)", "\\(\\tanh(x) = \\sinh(x)/\\cosh(x) = (e^{x} - e^{-x})/(e^{x} + e^{-x})\\)."},
+		{"What is the definition of \\(\\coth(x)\\)?", "cosh(x)/sinh(x)", "\\(\\coth(x) = \\cosh(x)/\\sinh(x) = 1/\\tanh(x)\\)."},
 		{"What is \\(\\tanh(0)\\)?", "0", "\\(\\tanh(0) = \\sinh(0)/\\cosh(0) = 0/1 = 0\\)."},
 		{"As \\(x \\to \\infty\\), \\(\\tanh(x)\\) approaches what value?", "1", "\\(\\lim_{x\\to\\infty} \\tanh(x) = 1\\) because \\(e^{x}\\) dominates \\(e^{-x}\\)."},
 		{"As \\(x \\to -\\infty\\), \\(\\tanh(x)\\) approaches what value?", "-1", "\\(\\lim_{x\\to-\\infty} \\tanh(x) = -1\\) because \\(e^{-x}\\) dominates \\(e^{x}\\)."},
-		{"What is the range of \\(\\tanh(x)\\)?", "\\((-1, 1)\\)", "\\(\\tanh(x)\\) maps real numbers to the open interval \\((-1, 1)\\)."},
-		{"What is \\(1 - \\tanh^{2}(x)\\)?", "\\(\\sech^{2}(x)\\)", "\\(1 - \\tanh^{2}(x) = \\sech^{2}(x) = 1/\\cosh^{2}(x)\\)."},
+		{"How many horizontal asymptotes does \\(y = \\tanh(x)\\) have? (enter a number)", "2", "\\(\\tanh(x)\\) maps real numbers to the open interval \\((-1, 1)\\), with horizontal asymptotes \\(y = 1\\) and \\(y = -1\\)."},
+		{"What is \\(1 - \\tanh^{2}(x)\\)?", "sech(x)^2", "\\(1 - \\tanh^{2}(x) = \\sech^{2}(x) = 1/\\cosh^{2}(x)\\)."},
 		{"Is \\(\\tanh(x)\\) an even or odd function?", "odd", "\\(\\tanh(-x) = -\\tanh(x)\\), so \\(\\tanh\\) is odd."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -699,13 +699,13 @@ func (g *trigIdentGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	}
 	entries := []entry{
 		{"Simplify \\(\\sin^{2}(x) + \\cos^{2}(x)\\).", "1", "\\(\\sin^{2}(x) + \\cos^{2}(x) = 1\\) (the Pythagorean identity)."},
-		{"Simplify \\(1 + \\tan^{2}(x)\\).", "\\(\\sec^{2}(x)\\)", "\\(1 + \\tan^{2}(x) = \\sec^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\cos^{2}\\)."},
-		{"Simplify \\(1 + \\cot^{2}(x)\\).", "\\(\\csc^{2}(x)\\)", "\\(1 + \\cot^{2}(x) = \\csc^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\sin^{2}\\)."},
-		{"What is \\(\\sin(2x)\\) in terms of \\(\\sin(x)\\) and \\(\\cos(x)\\)?", "\\(2\\sin(x)\\cos(x)\\)", "\\(\\sin(2x) = 2\\sin(x)\\cos(x)\\) (double angle formula)."},
-		{"What is \\(\\cos(2x)\\) in terms of \\(\\cos(x)\\)?", "\\(2\\cos^{2}(x) - 1\\)", "\\(\\cos(2x) = 2\\cos^{2}(x) - 1 = \\cos^{2}(x) - \\sin^{2}(x) = 1 - 2\\sin^{2}(x)\\)."},
-		{"What is \\(\\sin(-x)\\) in terms of \\(\\sin(x)\\)?", "\\(-\\sin(x)\\)", "\\(\\sin(-x) = -\\sin(x)\\) (sine is odd)."},
-		{"What is \\(\\cos(-x)\\) in terms of \\(\\cos(x)\\)?", "\\(\\cos(x)\\)", "\\(\\cos(-x) = \\cos(x)\\) (cosine is even)."},
-		{"Simplify \\(\\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\).", "\\(\\sin(x+y)\\)", "\\(\\sin(x+y) = \\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\) (addition formula)."},
+		{"What is 1 + tan(x)^2 at x = 45 degrees? (enter a number)", "2", "At 45 degrees, tan = 1, so 1 + tan^2 = 1 + 1 = 2; in general \\(1 + \\tan^{2}(x) = \\sec^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\cos^{2}\\)."},
+		{"Simplify \\(1 + \\cot^{2}(x)\\).", "csc(x)^2", "\\(1 + \\cot^{2}(x) = \\csc^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\sin^{2}\\)."},
+		{"What is \\(\\sin(2x)\\) in terms of \\(\\sin(x)\\) and \\(\\cos(x)\\)?", "2*sin(x)*cos(x)", "\\(\\sin(2x) = 2\\sin(x)\\cos(x)\\) (double angle formula)."},
+		{"What is cos(2x) at x = 90 degrees? (enter a number)", "-1", "cos(180 degrees) = -1; in general \\(\\cos(2x) = 2\\cos^{2}(x) - 1 = \\cos^{2}(x) - \\sin^{2}(x) = 1 - 2\\sin^{2}(x)\\)."},
+		{"What is \\(\\sin(-x)\\) in terms of \\(\\sin(x)\\)?", "-sin(x)", "\\(\\sin(-x) = -\\sin(x)\\) (sine is odd)."},
+		{"What is \\(\\cos(-x)\\) in terms of \\(\\cos(x)\\)?", "cos(x)", "\\(\\cos(-x) = \\cos(x)\\) (cosine is even)."},
+		{"Simplify \\(\\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\).", "sin(x+y)", "\\(\\sin(x+y) = \\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\) (addition formula)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{

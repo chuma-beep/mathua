@@ -1013,10 +1013,10 @@ func (g *extraneousRootsGen) Generate(ctx generator.GeneratorContext) generator.
 		exp      string
 	}
 	entries := []entry{
-		{"Why must you check solutions when squaring both sides of an equation?", "squaring can introduce extraneous roots", "Squaring is not reversible: if a=b then a²=b², but not vice versa."},
-		{"Solve \\(\\sqrt{x} = -2\\). How many solutions?", "0", "The principal square root is always \\(\\geq 0\\), so \\(\\sqrt{x} = -2\\) has no solution."},
-		{"When solving \\(\\sqrt{x+3} = x-3\\), what should you check after finding candidates?", "substitute back into original equation", "Extraneous roots satisfy the squared equation but not the original."},
-		{"Multiplying both sides by a variable expression can introduce extraneous roots. (true/false)", "true", "If you multiply by something that equals 0 for some x, you may introduce extraneous solutions."},
+		{"Can squaring both sides of an equation introduce extraneous roots? (yes/no)", "yes", "Squaring is not reversible: if a=b then a²=b², but b²=a² does not imply a=b (e.g. a=2, b=-2). So squaring can introduce extraneous roots — always check candidates in the original equation."},
+		{"Solve \\(\\sqrt{x} = -2\\). How many solutions? (enter a number)", "0", "The principal square root is always \\(\\geq 0\\), so \\(\\sqrt{x} = -2\\) has no solution."},
+		{"The candidates when solving \\(\\sqrt{x+3} = x-3\\) are \\(x = 1\\) and \\(x = 6\\). Which one satisfies the original equation? (enter a number)", "6", "Check: \\(\\sqrt{1+3} = 2\\) but \\(1-3 = -2\\), so \\(x=1\\) is extraneous; \\(\\sqrt{6+3} = 3\\) and \\(6-3 = 3\\), so \\(x=6\\) works. Extraneous roots satisfy the squared equation but not the original."},
+		{"If you multiply both sides of an equation by \\((x - 2)\\), should you check whether \\(x = 2\\) is extraneous? (yes/no)", "yes", "If you multiply by something that equals 0 for some x, you may introduce extraneous solutions — always substitute candidates back into the original equation."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1126,10 +1126,10 @@ func (g *funcDirichletGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		exp      string
 	}
 	entries := []entry{
-		{"What is the Dirichlet function?", "D(x) = 1 if x is rational, 0 if x is irrational", "The Dirichlet function is nowhere continuous."},
-		{"Is the Dirichlet function continuous anywhere?", "no", "The Dirichlet function is discontinuous at every point."},
-		{"Is the Dirichlet function periodic?", "yes", "The Dirichlet function is periodic with any rational period."},
-		{"Is the Dirichlet function Riemann integrable?", "no", "The Dirichlet function is not Riemann integrable on any interval."},
+		{"For the Dirichlet function (1 on rationals, 0 on irrationals), what is D(1/2)? (enter a number)", "1", "The Dirichlet function is D(x) = 1 if x is rational, 0 if x is irrational. Since 1/2 is rational, D(1/2) = 1. It is nowhere continuous."},
+		{"Is the Dirichlet function continuous anywhere? (yes/no)", "no", "The Dirichlet function is discontinuous at every point."},
+		{"Is the Dirichlet function periodic? (yes/no)", "yes", "The Dirichlet function is periodic with any rational period."},
+		{"Is the Dirichlet function Riemann integrable? (yes/no)", "no", "The Dirichlet function is not Riemann integrable on any interval."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1146,10 +1146,10 @@ func (g *funcDomainGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		exp      string
 	}
 	entries := []entry{
-		{"What is the domain of \\(f(x) = 1/x\\)?", "\\(x \\neq 0\\)", "Division by zero is undefined, so \\(x\\) cannot be \\(0\\)."},
-		{"What is the domain of \\(f(x) = \\sqrt{x}\\)?", "\\(x \\geq 0\\)", "The square root of a negative number is not real."},
-		{"What is the domain of \\(f(x) = \\ln(x)\\)?", "\\(x > 0\\)", "The natural log of zero or negative numbers is undefined."},
-		{"What is the domain of \\(f(x) = 1/(x-2)\\)?", "\\(x \\neq 2\\)", "The denominator is zero at \\(x = 2\\)."},
+		{"What is excluded from the domain of \\(f(x) = 1/x\\)? (enter a number)", "0", "Division by zero is undefined, so \\(x\\) cannot be \\(0\\). The domain is all nonzero reals."},
+		{"What is the smallest integer in the domain of \\(f(x) = \\sqrt{x}\\)? (enter a number)", "0", "The square root of a negative number is not real, so the domain is \\(x \\geq 0\\); the smallest integer in it is 0."},
+		{"What is the smallest integer in the domain of \\(f(x) = \\ln(x)\\)? (enter a number)", "1", "The natural log of zero or negative numbers is undefined, so the domain is \\(x > 0\\); the smallest integer in it is 1."},
+		{"What is excluded from the domain of \\(f(x) = 1/(x-2)\\)? (enter a number)", "2", "The denominator is zero at \\(x = 2\\), so 2 is excluded from the domain."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1188,10 +1188,10 @@ func (g *graphAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		exp      string
 	}
 	entries := []entry{
-		{"What does the y-intercept tell you about a function?", "the output when x = 0", "The y-intercept is f(0), the value at x = 0."},
-		{"On a graph, what are the x-intercepts?", "where f(x) = 0", "X-intercepts are the real roots/solutions of f(x) = 0."},
-		{"What does f'(x) > 0 on an interval tell you?", "f is increasing", "A positive derivative means the function is increasing."},
-		{"What does a vertical asymptote indicate?", "the function approaches ±∞ at that x", "As x → a, f(x) → ±∞ at a vertical asymptote x = a."},
+		{"For \\(f(x) = 3x + 2\\), what is \\(f(0)\\)? (enter a number)", "2", "The y-intercept is f(0), the output when x = 0. Here \\(f(0) = 3(0)+2 = 2\\)."},
+		{"What is the x-intercept of \\(f(x) = 2x - 4\\)? (enter a number)", "2", "X-intercepts are the real roots/solutions of f(x) = 0: \\(2x-4 = 0\\) gives \\(x = 2\\)."},
+		{"If \\(f'(x) > 0\\) on an interval, is \\(f\\) increasing there? (yes/no)", "yes", "A positive derivative means the function is increasing on that interval."},
+		{"Does \\(f(x) = 1/(x-2)\\) have a vertical asymptote at \\(x = 2\\)? (yes/no)", "yes", "As \\(x \\to 2\\), \\(f(x) \\to \\pm\\infty\\): a vertical asymptote at x = a means the function approaches ±∞ at that x."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1246,7 +1246,7 @@ func (g *funcSigmoidGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		exp      string
 	}
 	entries := []entry{
-		{"What is the range of the sigmoid function \\(\\sigma(x) = 1/(1+e^{-x})\\)?", "\\((0, 1)\\)", "The sigmoid maps all real numbers to the open interval \\((0,1)\\)."},
+		{"How many integers lie in the range of the sigmoid function \\(\\sigma(x) = 1/(1+e^{-x})\\)? (enter a number)", "0", "The sigmoid maps all real numbers to the open interval \\((0,1)\\), which contains no integers."},
 		{"What is \\(\\sigma(0)\\) for the sigmoid function?", "0.5", "\\(\\sigma(0) = 1/(1+e^{0}) = 1/2 = 0.5\\)."},
 		{"The sigmoid function is commonly used as an ____ function in neural networks.", "activation", "The sigmoid is a popular activation function that introduces non-linearity."},
 		{"As \\(x \\to \\infty\\), \\(\\sigma(x)\\) approaches ____.", "1", "As \\(x \\to \\infty\\), \\(e^{-x} \\to 0\\), so \\(\\sigma(x) \\to 1\\)."},
@@ -1282,9 +1282,9 @@ type ineqAbsValGen struct{}
 func (g *ineqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(|x| < %d\\)", a),
-		Answer:      fmt.Sprintf("-%d < x < %d", a, a),
-		Explanation: fmt.Sprintf("\\(|x| < %d\\) means \\(-%d < x < %d\\)", a, a, a),
+		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(|x| < %d\\)? (enter a number)", a),
+		Answer:      fmt.Sprintf("%d", a-1),
+		Explanation: fmt.Sprintf("\\(|x| < %d\\) means \\(-%d < x < %d\\), so the largest integer is \\(%d\\)", a, a, a, a-1),
 	}
 }
 
@@ -1314,9 +1314,9 @@ type ineqIrrationalGen struct{}
 func (g *ineqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	x := rand.Intn(8) + 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} > %d\\)", x),
-		Answer:      fmt.Sprintf("x > %d", x*x),
-		Explanation: fmt.Sprintf("\\(\\sqrt{x} > %d\\) → \\(x > %d^{2} = %d\\) (x ≥ 0 implied)", x, x, x*x),
+		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\sqrt{x} > %d\\)? (enter a number)", x),
+		Answer:      fmt.Sprintf("%d", x*x+1),
+		Explanation: fmt.Sprintf("\\(\\sqrt{x} > %d\\) → \\(x > %d^{2} = %d\\) (x ≥ 0 implied), so the smallest integer is \\(%d\\)", x, x, x*x, x*x+1),
 	}
 }
 
@@ -1327,9 +1327,9 @@ func (g *ineqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 	e := rand.Intn(3) + 1
 	v := mathutil.IntPow(b, e)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) > %d\\)", b, e),
-		Answer:      fmt.Sprintf("x > %d", v),
-		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) > %d\\) → \\(x > %d^{%d} = %d\\) (base > 1 preserves inequality)", b, e, b, e, v),
+		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\log_{%d}(x) > %d\\)? (enter a number)", b, e),
+		Answer:      fmt.Sprintf("%d", v+1),
+		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) > %d\\) → \\(x > %d^{%d} = %d\\) (base > 1 preserves inequality), so the smallest integer is \\(%d\\)", b, e, b, e, v, v+1),
 	}
 }
 
@@ -1338,9 +1338,9 @@ type ineqQuadraticGen struct{}
 func (g *ineqQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d < 0\\)", r*r),
-		Answer:      fmt.Sprintf("-%d < x < %d", r, r),
-		Explanation: fmt.Sprintf("\\(x^{2} - %d < 0\\) → \\((x-%d)(x+%d) < 0\\) → \\(-%d < x < %d\\)", r*r, r, r, r, r),
+		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(x^{2} - %d < 0\\)? (enter a number)", r*r),
+		Answer:      fmt.Sprintf("%d", r-1),
+		Explanation: fmt.Sprintf("\\(x^{2} - %d < 0\\) → \\((x-%d)(x+%d) < 0\\) → \\(-%d < x < %d\\), so the largest integer is \\(%d\\)", r*r, r, r, r, r, r-1),
 	}
 }
 
@@ -1349,9 +1349,9 @@ type ineqRationalGen struct{}
 func (g *ineqRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(\\frac{1}{x-%d} > 0\\)", a),
-		Answer:      fmt.Sprintf("x > %d", a),
-		Explanation: fmt.Sprintf("numerator is always positive 1, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\)", a, a, a),
+		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\frac{1}{x-%d} > 0\\)? (enter a number)", a),
+		Answer:      fmt.Sprintf("%d", a+1),
+		Explanation: fmt.Sprintf("The numerator 1 is always positive, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\); the smallest integer is \\(%d\\)", a, a, a, a+1),
 	}
 }
 
@@ -1534,20 +1534,43 @@ func (g *quadParametricGen) Generate(ctx generator.GeneratorContext) generator.P
 type quadQuadraticGen struct{}
 
 func (g *quadQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"What is the standard form of a quadratic equation?", "\\(ax^{2} + bx + c = 0\\)", "Standard form: \\(ax^{2} + bx + c = 0\\) where \\(a \\neq 0\\)."},
-		{"What is the quadratic formula?", "\\(x = [-b \\pm \\sqrt{b^{2}-4ac}]/(2a)\\)", "The quadratic formula solves \\(ax^{2} + bx + c = 0\\)."},
-		{"What does the discriminant determine?", "the number and type of solutions", "\\(b^{2}-4ac > 0\\): two real; \\(= 0\\): one real; \\(< 0\\): two complex."},
-		{"The graph of a quadratic function is a ____.", "parabola", "\\(f(x) = ax^{2} + bx + c\\) graphs as a parabola."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question: e.question, Answer: e.answer, Explanation: e.exp,
+	// Gradable numeric forms: the standard-form / formula / discriminant facts
+	// live in the Explanation (never graded); the graded answer is a number.
+	switch rand.Intn(4) {
+	case 0:
+		b := rand.Intn(5) + 1
+		c := rand.Intn(5) + 1
+		return generator.Problem{
+			Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\) in standard form \\(ax^{2} + bx + c = 0\\), what is \\(b\\)? (enter a number)", b, c),
+			Answer:      fmt.Sprintf("%d", b),
+			Explanation: fmt.Sprintf("Standard form is \\(ax^{2} + bx + c = 0\\) with \\(a \\neq 0\\); here \\(a=1\\), \\(b=%d\\), \\(c=%d\\)", b, c),
+		}
+	case 1:
+		r1 := rand.Intn(6) + 2
+		r2 := rand.Intn(6) + 2
+		b := -(r1 + r2)
+		c := r1 * r2
+		lo := min(r1, r2)
+		return generator.Problem{
+			Question:    fmt.Sprintf("Solve with the quadratic formula: %s = 0. What is the smaller root? (enter a number)", formatQuadratic(b, c)),
+			Answer:      fmt.Sprintf("%d", lo),
+			Explanation: fmt.Sprintf("\\(x = [-b \\pm \\sqrt{b^{2}-4ac}]/(2a)\\) gives \\(x = %d\\) or \\(x = %d\\); the smaller root is \\(%d\\). The formula solves \\(ax^{2} + bx + c = 0\\).", r1, r2, lo),
+		}
+	case 2:
+		b := rand.Intn(5) + 2
+		c := rand.Intn(5) + 1
+		disc := b*b - 4*c
+		return generator.Problem{
+			Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\), what is the discriminant \\(b^{2} - 4ac\\)? (enter a number)", b, c),
+			Answer:      fmt.Sprintf("%d", disc),
+			Explanation: fmt.Sprintf("The discriminant \\(b^{2}-4ac = %d\\) determines the number and type of solutions: \\(> 0\\): two real; \\(= 0\\): one real; \\(< 0\\): two complex.", disc),
+		}
+	default:
+		return generator.Problem{
+			Question:    "The graph of a quadratic function is a ____.",
+			Answer:      "parabola",
+			Explanation: "\\(f(x) = ax^{2} + bx + c\\) graphs as a parabola.",
+		}
 	}
 }
 
@@ -1562,10 +1585,10 @@ func (g *systemsConceptGen) Generate(ctx generator.GeneratorContext) generator.P
 		exp      string
 	}
 	entries := []entry{
-		{"What does it mean to solve a system of equations?", "find values satisfying all equations simultaneously", "The solution makes every equation in the system true."},
-		{"How many solutions can a system of two linear equations have?", "0, 1, or infinitely many", "Two lines can intersect once, be parallel (0), or be the same line (∞)."},
-		{"What is a consistent system?", "a system with at least one solution", "Consistent: at least one solution exists."},
-		{"What is an inconsistent system?", "a system with no solution", "Inconsistent: parallel lines that never intersect."},
+		{"Is \\((2,3)\\) a solution of the system \\(x + y = 5\\), \\(x - y = -1\\)? (yes/no)", "yes", "To solve a system is to find values satisfying all equations simultaneously: \\(2+3 = 5\\) and \\(2-3 = -1\\), so yes."},
+		{"Two distinct parallel lines intersect in how many points? (enter a number)", "0", "A system of two linear equations has 0 solutions (parallel distinct lines), 1 (intersecting lines), or infinitely many (the same line)."},
+		{"Is the system \\(x + y = 3\\), \\(x - y = 1\\) consistent? (yes/no)", "yes", "A consistent system has at least one solution: \\(x=2\\), \\(y=1\\) satisfies both equations, so yes."},
+		{"How many solutions does an inconsistent system have? (enter a number)", "0", "An inconsistent system has no solution (parallel lines that never intersect)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{

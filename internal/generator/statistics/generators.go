@@ -468,12 +468,12 @@ func (g *covarianceGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		exp      string
 	}
 	entries := []entry{
-		{"What does a positive covariance between two variables indicate?", "they move in the same direction", "Positive covariance means the variables tend to increase together."},
-		{"What does a negative covariance between two variables indicate?", "they move in opposite directions", "Negative covariance means one tends to increase while the other decreases."},
+		{"Do two variables that tend to increase together have positive covariance? (yes/no)", "yes", "Positive covariance means the variables tend to increase together."},
+		{"Do two variables that move in opposite directions have positive covariance? (yes/no)", "no", "Negative covariance means one tends to increase while the other decreases."},
 		{"What does covariance near zero indicate?", "no linear relationship", "Zero or near-zero covariance suggests no linear relationship between variables."},
 		{"Is covariance scale-dependent or scale-invariant?", "scale-dependent", "Covariance depends on the units of measurement; it is not standardized."},
-		{"What is the formula for sample covariance?", "Σ(x_i-x̄)(y_i-ȳ)/(n-1)", "Sample covariance divides by (n-1), while population covariance divides by n."},
-		{"How is correlation related to covariance?", "correlation = covariance/(σ_x·σ_y)", "Pearson correlation standardizes covariance by dividing by the product of standard deviations."},
+		{"For a sample of size 11, what is the denominator of the sample covariance?", "10", "Sample covariance divides by (n-1) = 10, while population covariance divides by n."},
+		{"Is correlation equal to covariance divided by the product of the standard deviations? (yes/no)", "yes", "Pearson correlation standardizes covariance by dividing by the product of standard deviations."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -585,9 +585,9 @@ func (g *bernoulliGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"A Bernoulli distribution models an experiment with how many possible outcomes?", "2", "Bernoulli: exactly two outcomes (success/failure)."},
 		{"What is the expected value (mean) of a Bernoulli(p) random variable?", "p", "E[X] = p for Bernoulli(p)."},
 		{"What is the variance of a Bernoulli(p) random variable?", "p(1-p)", "Var[X] = p(1-p) for Bernoulli(p)."},
-		{"What does X ~ Bernoulli(p) mean?", "X takes value 1 with probability p and 0 with probability 1-p", "Bernoulli random variable: P(X=1)=p, P(X=0)=1-p."},
-		{"How is a Bernoulli trial different from a Binomial experiment?", "Bernoulli is one trial; Binomial is n trials", "A Binomial(n,p) is the sum of n independent Bernoulli(p) variables."},
-		{"What is the probability mass function of Bernoulli(p)?", "P(X=x) = p^x(1-p)^(1-x)", "PMF: P(X=1)=p, P(X=0)=1-p."},
+		{"What does X ~ Bernoulli(p) mean? Does X = 1 occur with probability p? (yes/no)", "yes", "Bernoulli random variable: P(X=1)=p, P(X=0)=1-p."},
+		{"A Binomial(7,p) experiment consists of how many Bernoulli trials?", "7", "A Binomial(n,p) is the sum of n independent Bernoulli(p) variables."},
+		{"For X ~ Bernoulli(0.3), what is P(X = 1) as a decimal?", "0.3", "PMF: P(X=1)=p=0.3, P(X=0)=1-p=0.7."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -633,7 +633,7 @@ func (g *binomialDistGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		{"What is the expected value of Binomial(n,p)?", "np", "E[X] = np for Binomial(n,p)."},
 		{"What is the variance of Binomial(n,p)?", "np(1-p)", "Var[X] = np(1-p) for Binomial(n,p)."},
 		{"A Binomial distribution counts the number of ____ in n independent trials.", "successes", "Binomial: count of successes in n independent Bernoulli trials."},
-		{"What is P(X=k) for Binomial(n,p)?", "C(n,k) p^k (1-p)^(n-k)", "The binomial probability mass function."},
+		{"In the Binomial PMF, what is C(5,2), the number of ways to get 2 successes in 5 trials?", "10", "The binomial PMF is C(n,k) p^k (1-p)^(n-k); here C(5,2) = 10."},
 		{"How many outcomes does a single Binomial trial have?", "2", "Each trial is Bernoulli with 2 outcomes (success/failure)."},
 		{"What condition must hold between trials in a Binomial experiment?", "independence", "Binomial trials must be independent of each other."},
 	}
@@ -658,7 +658,7 @@ func (g *chiSquareGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"What is the variance of χ²(k)?", "2k", "The variance of χ²(k) is 2k."},
 		{"The χ² distribution is the sum of squared independent ____ random variables.", "standard normal", "If Z_i ∼ N(0,1) i.i.d., then ΣZ_i² ∼ χ²(k)."},
 		{"What parameter determines the shape of a χ² distribution?", "degrees of freedom (k)", "The degrees of freedom parameter k controls the shape."},
-		{"What is the support of the χ² distribution?", "[0, ∞)", "χ² takes only non-negative values."},
+		{"Does a chi-square random variable take negative values? (yes/no)", "no", "Chi-square takes only non-negative values (support x >= 0)."},
 		{"The χ² distribution is used in which common statistical test?", "goodness of fit", "The χ² test is used for goodness of fit and independence tests."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -678,12 +678,12 @@ func (g *exponentialDistGen) Generate(ctx generator.GeneratorContext) generator.
 		exp      string
 	}
 	entries := []entry{
-		{"What is the mean of Exponential(λ)?", "1/λ", "The mean of Exp(λ) is 1/λ."},
-		{"What is the variance of Exponential(λ)?", "1/λ²", "The variance of Exp(λ) is 1/λ²."},
-		{"What is the memoryless property of the Exponential distribution?", "P(X > s+t | X > s) = P(X > t)", "The exponential is the only continuous distribution with the memoryless property."},
+		{"Events occur at rate 4 per hour. What is the mean waiting time in hours as a decimal?", "0.25", "The mean of Exp(rate) is 1/rate = 1/4."},
+		{"For an Exponential(rate=5) variable, what is the variance of the waiting time as a decimal?", "0.04", "The variance of Exp(rate) is 1/rate^2 = 1/25."},
+		{"Does the Exponential distribution have the memoryless property? (yes/no)", "yes", "The exponential is the only continuous distribution with the memoryless property: past waiting tells nothing about the future."},
 		{"What type of process is the Exponential distribution used to model?", "waiting times", "Exponential models waiting times between Poisson events."},
-		{"What is the rate parameter λ in an Exponential distribution?", "average number of events per unit time", "λ is the rate parameter; the mean time between events is 1/λ."},
-		{"The Exponential distribution is a special case of which distribution?", "Gamma", "Exponential(λ) = Gamma(1, λ)."},
+		{"The mean waiting time is 0.5 hours. What is the rate parameter per hour?", "2", "The rate is the average number of events per unit time; rate = 1/mean = 2."},
+		{"The Exponential distribution is a special case of which distribution?", "Gamma", "Exponential(rate) = Gamma(shape=1, rate)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -702,12 +702,12 @@ func (g *gammaDistGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		exp      string
 	}
 	entries := []entry{
-		{"What parameters define the Gamma distribution?", "shape (k) and rate (θ or λ)", "Gamma(k, θ) where k is shape and θ is scale (or rate)."},
-		{"What is the mean of Gamma(k, θ)?", "kθ", "The mean of Gamma(k, θ) is kθ (shape × scale)."},
-		{"Gamma(1, λ) is equivalent to which distribution?", "Exponential(λ)", "Gamma(1, λ) = Exponential(λ)."},
-		{"What is the support of the Gamma distribution?", "(0, ∞)", "The Gamma distribution is defined for positive real numbers."},
-		{"The sum of k independent Exponential(λ) variables follows what distribution?", "Gamma(k, 1/λ)", "The sum of k i.i.d. Exp(λ) variables is Gamma(k, 1/λ)."},
-		{"The χ²(k) distribution is a special case of Gamma with which parameters?", "Gamma(k/2, 2)", "χ²(k) = Gamma(k/2, 2)."},
+		{"How many parameters define the Gamma distribution?", "2", "Gamma is defined by shape k and a rate (or scale) parameter."},
+		{"If X has Gamma(shape=3, scale=2), what is the mean of X?", "6", "The mean of Gamma is shape times scale = 3 times 2."},
+		{"Is Gamma(shape=1) the same as an Exponential distribution? (yes/no)", "yes", "Gamma(shape=1, rate) = Exponential(rate)."},
+		{"Can a Gamma random variable take negative values? (yes/no)", "no", "The Gamma distribution is defined only for positive real numbers."},
+		{"The sum of 5 independent Exponential(rate=2) variables follows a Gamma distribution with what shape?", "5", "The sum of k independent Exp(rate) variables is Gamma(shape=k, rate)."},
+		{"Is chi-square with k degrees of freedom a special case of the Gamma distribution? (yes/no)", "yes", "Chi-square(k) = Gamma(shape=k/2, scale=2)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -728,10 +728,10 @@ func (g *geometricDistGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	entries := []entry{
 		{"What does a Geometric(p) distribution model?", "number of trials until first success", "Geometric: the number of Bernoulli trials needed to get the first success."},
 		{"What is the expected value of Geometric(p)?", "1/p", "E[X] = 1/p for Geometric(p)."},
-		{"What is the variance of Geometric(p)?", "(1-p)/p²", "Var[X] = (1-p)/p² for Geometric(p)."},
+		{"For a Geometric(p=0.5) variable, what is the variance?", "2", "Var[X] = (1-p)/p^2 = 0.5/0.25 for p = 0.5."},
 		{"What is P(X=k) for Geometric(p)?", "(1-p)^(k-1) p", "Geometric PMF: P(X=k) = (1-p)^(k-1)p for k = 1, 2, ..."},
 		{"Does the Geometric distribution have the memoryless property?", "yes", "Like the exponential (its continuous analogue), the geometric is memoryless."},
-		{"What is the relationship between Geometric and Binomial?", "Geometric = first success; Binomial = count of successes in n trials", "Both involve Bernoulli trials but count different things."},
+		{"Does Geometric count trials to the first success while Binomial counts successes in n trials? (yes/no)", "yes", "Both involve Bernoulli trials but count different things."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -751,10 +751,10 @@ func (g *hypergeometricGen) Generate(ctx generator.GeneratorContext) generator.P
 	}
 	entries := []entry{
 		{"How does Hypergeometric differ from Binomial?", "sampling without replacement", "Hypergeometric: sampling without replacement; Binomial: with replacement."},
-		{"What parameters define the Hypergeometric distribution?", "N, K, n", "Hypergeometric(N, K, n): population size N, K successes, n draws."},
-		{"What is the expected value of Hypergeometric(N,K,n)?", "n(K/N)", "E[X] = nK/N (n × proportion of successes)."},
+		{"How many parameters define the Hypergeometric distribution? (enter a number)", "3", "Hypergeometric(N, K, n): population size N, K successes, n draws: three parameters."},
+		{"Hypergeometric(N=10,K=4,n=5): what is the expected value? (enter a number)", "2", "E[X] = nK/N = 5·4/10 = 2 (n × proportion of successes)."},
 		{"In Hypergeometric, draws are ____.", "dependent (without replacement)", "Each draw changes the composition of the remaining population."},
-		{"What is the support of Hypergeometric?", "max(0, n-(N-K)) to min(n, K)", "The number of successes drawn cannot exceed K or n."},
+		{"Is the support of Hypergeometric finite? (yes/no)", "yes", "The number of successes drawn cannot exceed K or n: finitely many values."},
 		{"As N → ∞ with K/N fixed, Hypergeometric approaches which distribution?", "Binomial", "When N is large, sampling without replacement approximates Binomial."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -774,14 +774,14 @@ func (g *normalDistGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		exp      string
 	}
 	entries := []entry{
-		{"What parameters define the Normal distribution?", "μ (mean) and σ² (variance)", "N(μ, σ²) is parameterized by mean μ and variance σ²."},
-		{"What is the 68-95-99.7 rule for Normal distributions?", "68% within 1σ, 95% within 2σ, 99.7% within 3σ", "Empirical rule for the standard normal."},
+		{"How many parameters define the Normal distribution?", "2", "N(mean, variance) is parameterized by its mean and its variance."},
+		{"About what proportion of Normal data falls within 2 SD of the mean? Answer as a decimal.", "0.95", "About 0.68 within 1 SD, 0.95 within 2 SD, 0.997 within 3 SD."},
 		{"What is the mean of a standard Normal distribution?", "0", "Standard Normal: N(0,1) with μ=0, σ=1."},
 		{"What is the variance of a standard Normal distribution?", "1", "Standard Normal: N(0,1) with μ=0, σ²=1."},
-		{"What transformation converts X ∼ N(μ,σ²) to standard Normal?", "Z = (X-μ)/σ", "Standardization: subtract mean, divide by standard deviation."},
+		{"If X = 70 comes from a Normal population with mean 50 and SD 10, what is the z-score?", "2", "Standardization: z = (x - mean)/SD = 30/10."},
 		{"The Normal distribution is symmetric about its ____.", "mean", "The Normal distribution is symmetric about μ."},
-		{"What is the shape of the Normal distribution?", "bell-shaped", "The Normal distribution has the characteristic bell curve shape."},
-		{"What does the Central Limit Theorem say about sample means?", "they approach Normal as n increases", "CLT: sample means of i.i.d. variables approach Normal as n → ∞."},
+		{"What is the shape of the Normal distribution?", "bell curve", "The Normal distribution has the characteristic bell curve shape."},
+		{"Do sample means approach a Normal distribution as the sample size grows? (yes/no)", "yes", "CLT: sample means of independent identical variables approach Normal as n grows."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -800,12 +800,12 @@ func (g *poissonGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		exp      string
 	}
 	entries := []entry{
-		{"What is the mean of Poisson(λ)?", "λ", "E[X] = λ for Poisson(λ)."},
-		{"What is the variance of Poisson(λ)?", "λ", "Var[X] = λ for Poisson(λ) (mean = variance)."},
-		{"What type of process does Poisson model?", "count of events in a fixed interval", "Poisson models the number of events occurring in a fixed time or space."},
-		{"What is P(X=k) for Poisson(λ)?", "e^(-λ) λ^k / k!", "Poisson PMF: P(X=k) = e^(-λ)λ^k/k! for k = 0, 1, 2, ..."},
-		{"What is the support of Poisson?", "{0, 1, 2, ...}", "Poisson is defined for non-negative integers."},
-		{"What is the relationship between Poisson and Exponential?", "inter-arrival times are Exponential", "In a Poisson process, the time between events follows Exponential(λ)."},
+		{"A Poisson process averages 3 events per hour. How many events on average in 2 hours?", "6", "Mean = rate times time = 3 times 2."},
+		{"For X ~ Poisson(4), what is the variance?", "4", "For Poisson, variance = mean."},
+		{"Does a Poisson model count events in a fixed interval? (yes/no)", "yes", "Poisson models the number of events occurring in a fixed time or space."},
+		{"Is P(X=k) = e^(-L) L^k / k! the Poisson PMF? (yes/no)", "yes", "Poisson PMF: P(X=k) = e^(-L)L^k/k! for k = 0, 1, 2, ..."},
+		{"Is 3 a possible value of a Poisson random variable? (yes/no)", "yes", "Poisson is defined for non-negative integers 0, 1, 2, ..."},
+		{"What is the relationship between Poisson and Exponential?", "inter-arrival times are Exponential", "In a Poisson process, the time between events follows Exponential(rate)."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -824,12 +824,12 @@ func (g *studentTGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		exp      string
 	}
 	entries := []entry{
-		{"What parameter defines Student's t distribution?", "degrees of freedom (ν)", "t(ν) is parameterized by degrees of freedom ν."},
+		{"Is Student's t defined by its degrees of freedom? (yes/no)", "yes", "t(ν) is parameterized by degrees of freedom ν."},
 		{"As ν → ∞, the t distribution approaches ____.", "standard Normal", "As degrees of freedom increase, t approaches N(0,1)."},
-		{"Compared to Normal, Student's t has ____ tails.", "heavier (or fatter)", "The t distribution has heavier tails than Normal, especially for small ν."},
+		{"Compared to Normal, does Student's t have heavier tails? (yes/no)", "yes", "The t distribution has heavier tails than Normal, especially for small ν."},
 		{"What is the mean of t(ν) for ν > 1?", "0", "The t distribution is symmetric about 0 with mean 0 (for ν > 1)."},
-		{"When is the t distribution used instead of Normal?", "when σ is unknown and estimated", "t is used when the population standard deviation is unknown."},
-		{"What is the variance of t(ν) for ν > 2?", "ν/(ν-2)", "Var[t(ν)] = ν/(ν-2) for ν > 2."},
+		{"Is the t distribution used instead of Normal when sigma is unknown? (yes/no)", "yes", "t is used when the population standard deviation is unknown."},
+		{"The t(nu) variance is finite when nu exceeds which integer? (enter a number)", "2", "Var[t(ν)] = ν/(ν-2) for ν > 2."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -849,11 +849,11 @@ func (g *uniformDistGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	entries := []entry{
 		{"What is the mean of Uniform(a,b)?", "(a+b)/2", "E[X] = (a+b)/2 for Uniform(a,b)."},
-		{"What is the variance of Uniform(a,b)?", "(b-a)²/12", "Var[X] = (b-a)²/12 for Uniform(a,b)."},
-		{"What is the probability density function of Uniform(a,b)?", "1/(b-a) for x in [a,b]", "f(x) = 1/(b-a) for a ≤ x ≤ b, 0 otherwise."},
-		{"Uniform(0,1) is a special case of which other distribution?", "Beta(1,1)", "Beta(1,1) = Uniform(0,1)."},
+		{"For Uniform(0,12), what is the variance?", "12", "Var = (b-a)^2/12 = 144/12."},
+		{"For Uniform(2,6), what is the density value as a decimal?", "0.25", "Density = 1/(b-a) = 1/4 on the interval, 0 otherwise."},
+		{"Is Uniform(0,1) the same as Beta(1,1)? (yes/no)", "yes", "Beta(1,1) = Uniform(0,1)."},
 		{"In a Uniform distribution, all outcomes are ____.", "equally likely", "Uniform: constant probability density over the interval."},
-		{"What is the support of Uniform(a,b)?", "[a, b]", "Uniform is defined on the interval [a, b]."},
+		{"For Uniform(3,9), what is the length of the support interval?", "6", "Uniform is defined on the interval from a to b, here length 9-3."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -875,10 +875,10 @@ func (g *zTableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		{"What z-score corresponds to the 50th percentile of N(0,1)?", "0", "The median of standard Normal is 0."},
 		{"What z-score approximately corresponds to the 97.5th percentile?", "1.96", "P(Z < 1.96) ≈ 0.975, used for 95% confidence intervals."},
 		{"What is the z-score for a 95% confidence interval?", "1.96", "95% CI uses z = 1.96 (approximately 2)."},
-		{"What does a z-score measure?", "how many SD from the mean", "z = (x - μ)/σ measures standard deviations from the mean."},
-		{"About what percentage of data falls within z = ±1?", "68%", "≈68% of data falls within 1 standard deviation of the mean."},
-		{"About what percentage of data falls within z = ±2?", "95%", "≈95% of data falls within 2 standard deviations of the mean."},
-		{"About what percentage of data falls within z = ±3?", "99.7%", "≈99.7% of data falls within 3 standard deviations of the mean."},
+		{"Does a z-score measure how many SD a value is from the mean? (yes/no)", "yes", "z = (x - mean)/SD measures standard deviations from the mean."},
+		{"About what proportion of data falls within z = +-1? Answer as a decimal.", "0.68", "About 0.68 of data falls within 1 standard deviation of the mean."},
+		{"About what proportion of data falls within z = +-2? Answer as a decimal.", "0.95", "About 0.95 of data falls within 2 standard deviations of the mean."},
+		{"About what proportion of data falls within z = +-3? Answer as a decimal.", "0.997", "About 0.997 of data falls within 3 standard deviations of the mean."},
 		{"A z-score of -2 means the value is ____.", "2 SD below the mean", "Negative z: below mean; positive z: above mean."},
 	}
 	e := entries[rand.Intn(len(entries))]
@@ -900,12 +900,12 @@ func (g *confidenceGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		exp      string
 	}
 	entries := []entry{
-		{"What does a 95% confidence interval mean?", "95% of intervals contain the true parameter", "In repeated sampling, 95% of CIs contain the population parameter."},
-		{"What is the formula for a confidence interval for the mean?", "x̄ ± z*(σ/√n)", "CI = sample mean ± margin of error."},
-		{"How does sample size affect confidence interval width?", "larger n → narrower interval", "CI width ∝ 1/√n, so larger samples give more precise estimates."},
+		{"Does a 95% confidence interval mean that 95% of such intervals contain the true parameter? (yes/no)", "yes", "In repeated sampling, 95% of CIs contain the population parameter."},
+		{"A sample of n=100 has SD 20. With z=2, what is the margin of error?", "4", "CI = sample mean plus/minus margin; margin = z times SD/sqrt(n) = 2 times 2."},
+		{"Does a larger sample give a narrower confidence interval? (yes/no)", "yes", "CI width goes like 1/sqrt(n), so larger samples give more precise estimates."},
 		{"What happens to CI width when confidence level increases from 95% to 99%?", "it gets wider", "Higher confidence requires a wider interval."},
-		{"What is the margin of error in a confidence interval?", "z*(σ/√n)", "Margin of error = critical value × standard error."},
-		{"A confidence interval for a proportion uses what formula?", "p̂ ± z*√(p̂(1-p̂)/n)", "CI for proportion p with sample proportion p̂."},
+		{"A 95% CI is 10 plus/minus 2. What is the margin of error?", "2", "Margin of error = critical value times standard error."},
+		{"For 50 of 100 voters with z=2, what is the margin of error as a decimal?", "0.1", "Margin = z times sqrt(phat(1-phat)/n) = 2 times 0.05."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -924,12 +924,12 @@ func (g *samplingGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		exp      string
 	}
 	entries := []entry{
-		{"What is the standard error of the mean?", "σ/√n", "Standard error = population SD / √(sample size)."},
-		{"What does the Central Limit Theorem say about the sampling distribution?", "it approaches Normal as n increases", "CLT: the sampling distribution of the mean approaches Normal for large n."},
-		{"What is the mean of the sampling distribution of x̄?", "μ (population mean)", "x̄ is an unbiased estimator of μ."},
-		{"What is a sampling distribution?", "distribution of a statistic over all possible samples", "The sampling distribution shows how a statistic varies from sample to sample."},
-		{"Does a larger sample size reduce bias?", "no (bias is independent of n)", "Bias depends on the sampling method, not sample size."},
-		{"What is the difference between population and sample?", "population = all; sample = subset", "The population is the entire group; the sample is a subset drawn from it."},
+		{"The population SD is 12 and n=36. What is the standard error of the mean?", "2", "Standard error = population SD / sqrt(sample size) = 12/6."},
+		{"Does the sampling distribution of the mean approach Normal as n grows? (yes/no)", "yes", "CLT: the sampling distribution of the mean approaches Normal for large n."},
+		{"The population mean is 50. What is the mean of the sampling distribution of xbar?", "50", "xbar is an unbiased estimator of the population mean."},
+		{"Is a sampling distribution the distribution of a statistic over all possible samples? (yes/no)", "yes", "The sampling distribution shows how a statistic varies from sample to sample."},
+		{"Does a larger sample size reduce bias? (yes/no)", "no", "Bias depends on the sampling method, not sample size; bias is independent of n."},
+		{"Is a sample a subset of the population? (yes/no)", "yes", "The population is the entire group; the sample is a subset drawn from it."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -950,12 +950,12 @@ func (g *bayesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What is Bayes' theorem?", "P(A|B) = P(B|A)P(A)/P(B)", "Bayes' theorem relates conditional probabilities."},
+		{"Is P(A|B) = P(B|A)P(A)/P(B) Bayes theorem? (yes/no)", "yes", "Bayes theorem relates conditional probabilities."},
 		{"In Bayes' theorem, P(A) is called the ____ probability.", "prior", "P(A) is the prior probability before observing B."},
 		{"In Bayes' theorem, P(A|B) is called the ____ probability.", "posterior", "P(A|B) is the updated probability after observing B."},
-		{"What is the denominator in Bayes' theorem called?", "marginal likelihood (or evidence)", "P(B) normalizes the posterior."},
-		{"In medical testing, P(test positive | has disease) is called ____.", "sensitivity (or true positive rate)", "Sensitivity = P(+|disease)."},
-		{"In medical testing, P(test negative | no disease) is called ____.", "specificity (or true negative rate)", "Specificity = P(-|no disease)."},
+		{"What is the denominator in Bayes' theorem called?", "marginal likelihood", "P(B) normalizes the posterior; it is called the marginal likelihood or evidence."},
+		{"In medical testing, P(test positive | has disease) is called ____.", "sensitivity", "Sensitivity = P(positive|disease), the true positive rate."},
+		{"In medical testing, P(test negative | no disease) is called ____.", "specificity", "Specificity = P(negative|no disease), the true negative rate."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -976,8 +976,8 @@ func (g *continuousRVGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	entries := []entry{
 		{"What is the probability of a continuous random variable taking any single value?", "0", "P(X = a) = 0 for continuous random variables."},
 		{"What function gives probabilities for a continuous random variable via areas?", "probability density function (PDF)", "P(a ≤ X ≤ b) = ∫ₐᵇ f(x)dx."},
-		{"What is the cumulative distribution function (CDF)?", "F(x) = P(X ≤ x)", "The CDF gives the probability of being less than or equal to x."},
-		{"What is the relationship between PDF and CDF?", "CDF is the integral of PDF", "F(x) = ∫_{-∞}^{x} f(t)dt, and f(x) = F'(x)."},
+		{"Is the CDF equal to P(X <= x), the probability of being less than or equal to x? (yes/no)", "yes", "The CDF gives the probability of being less than or equal to x."},
+		{"Is the CDF the integral of the PDF? (yes/no)", "yes", "CDF(x) is the integral of the PDF up to x, and PDF is the derivative of the CDF."},
 		{"For a valid PDF, what must ∫_{-∞}^{∞} f(x)dx equal?", "1", "Total probability under the PDF must be 1."},
 		{"Is the PDF of a continuous variable always ≤ 1?", "no", "The PDF can be > 1 as long as the total area is 1."},
 	}
@@ -998,12 +998,12 @@ func (g *discreteRVGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		exp      string
 	}
 	entries := []entry{
-		{"What is the probability mass function (PMF)?", "P(X = x) for each possible x", "PMF gives the probability of each specific value for a discrete variable."},
+		{"Does the PMF give P(X = x) for each possible x? (yes/no)", "yes", "PMF gives the probability of each specific value for a discrete variable."},
 		{"For a valid PMF, what must Σ P(X=x) equal?", "1", "All probabilities must sum to 1."},
-		{"What is the difference between PMF and PDF?", "PMF for discrete; PDF for continuous", "PMF gives probabilities at specific points; PDF gives density."},
-		{"What is the cumulative distribution for a discrete variable?", "F(x) = Σ_{k ≤ x} P(X = k)", "Discrete CDF sums PMF values up to x."},
+		{"Is the PMF for discrete variables and the PDF for continuous ones? (yes/no)", "yes", "PMF gives probabilities at specific points; PDF gives density."},
+		{"Is the discrete CDF the sum of PMF values up to x? (yes/no)", "yes", "Discrete CDF sums PMF values up to x."},
 		{"Can a discrete random variable take infinitely many values?", "yes", "Discrete variables can be countably infinite (e.g., Poisson, Geometric)."},
-		{"What is the expected value of a discrete random variable?", "E[X] = Σ x·P(X=x)", "The mean is the probability-weighted sum of all possible values."},
+		{"X takes values 1 and 3 with probability 0.5 each. What is E[X]?", "2", "The mean is the probability-weighted sum: 1 times 0.5 plus 3 times 0.5."},
 	}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{
@@ -1023,10 +1023,10 @@ func (g *expectedValueGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	}
 	entries := []entry{
 		{"What is the expected value of a constant c?", "c", "E[c] = c for any constant c."},
-		{"What is E[aX + b] in terms of E[X]?", "a·E[X] + b", "Linearity of expectation: E[aX+b] = aE[X] + b."},
-		{"What is the expected value of the sum of random variables?", "E[X+Y] = E[X] + E[Y]", "Linearity: expectation of sum = sum of expectations."},
+		{"If E[X] = 5, what is E[2X + 1]?", "11", "Linearity of expectation: E[aX+b] = aE[X] + b = 2 times 5 plus 1."},
+		{"If E[X] = 3 and E[Y] = 4, what is E[X + Y]?", "7", "Linearity: expectation of sum = sum of expectations."},
 		{"Is E[XY] always equal to E[X]E[Y]?", "no", "E[XY] = E[X]E[Y] only when X and Y are independent."},
-		{"How is variance related to expected value?", "Var[X] = E[X²] - (E[X])²", "Variance = second moment minus squared mean."},
+		{"If E[X] = 2 and E[X^2] = 8, what is Var[X]?", "4", "Variance = second moment minus squared mean = 8 - 4."},
 		{"What is E[X²] called?", "second moment", "E[X²] is the second moment about the origin."},
 	}
 	e := entries[rand.Intn(len(entries))]
