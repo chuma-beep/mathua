@@ -5,25 +5,25 @@
     "subgoals": [
       "Define the standardization Z = (X - mu)/sigma",
       "Convert a normal value to standard deviations from the mean",
-      "Apply the rule"
+      "Standardize one value end to end"
     ]
   },
   {
     "label": "Standard Z Table",
     "section": "Standard Z Table",
     "subgoals": [
-      "Understand rows, columns, and cumulative cells",
+      "Map row plus column to one cumulative cell",
       "Look up a cumulative probability by row and column",
-      "Check the result"
+      "Cross-check a second cell"
     ]
   },
   {
-    "label": "Example 1 — reading P(Z < 0.16)",
+    "label": "Example 1 \u2014 reading P(Z < 0.16)",
     "section": "Example 1",
     "subgoals": [
       "Split 0.16 into row 0.1 and column .06",
       "Read the 0.5636 cell and derive complements",
-      "Check the result"
+      "Derive P(Z > 0.16) as complement"
     ]
   }
 ]

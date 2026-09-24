@@ -284,6 +284,30 @@ def main():
             errors.append(f"NEW {label} ({len(fresh)}), fix content, do not extend the baseline:\n  "
                           + "\n  ".join(fresh[:30]))
 
+    # 12. Cliché KP subgoals: filler verbs that never name the move
+    # ("Follow the worked example", "Apply the rule", "Check the result",
+    # "Understand X"). Ratcheted like 10/11 — waves rewrite to move-naming
+    # subgoals (P1 template) and shrink the baseline to empty.
+    cliche_re = re.compile(r"^follow the worked|^apply the rule$|^check the result$|^understand\b", re.I)
+    cliche_now = []
+    if os.path.isdir(kp_dir):
+        for name in sorted(os.listdir(kp_dir)):
+            if not name.endswith(".json"):
+                continue
+            with open(os.path.join(kp_dir, name), encoding="utf-8") as f:
+                kps = json.load(f)
+            if any(cliche_re.search(str(sg))
+                   for k in kps for sg in (k.get("subgoals") or [])):
+                cliche_now.append(name[:-5])
+    allowed = set(baseline.get("cliche_kp_shards", []))
+    fresh = sorted(set(cliche_now) - allowed)
+    fixed = sorted(allowed - set(cliche_now))
+    print(f"note: cliche-KP shards: {len(cliche_now)} current ({len(allowed)} baselined"
+          f"{f', {len(fixed)} fixed' if fixed else ''})", file=sys.stderr)
+    if fresh:
+        errors.append(f"NEW cliche-KP shards ({len(fresh)}), fix content, do not extend the baseline:\n  "
+                      + "\n  ".join(fresh[:30]))
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")
