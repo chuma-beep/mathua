@@ -9,9 +9,27 @@ import SearchBar from '../../components/SearchBar'
 import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessonKPs, type LessonInfo, type Scores, type LessonKpsRes } from '../../lib/api'
+import { getLessonKPs, type LessonInfo, type Scores, type LessonKpsRes, type KpInfo } from '../../lib/api'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
+
+// Normalize a KP section the way Go normSectionKey does ( mirrored by
+// norm_section in scripts/audit_lessons.py): strip math delimiters,
+// collapse whitespace. Shared-lesson concepts often point at the same
+// section under byte-identical names; normalization keeps those deduped.
+function normSection(s: string): string {
+  return s.replace(/\\\\[()[\]]|\\[()[\]]|\$\$?/g, '').split(/\s+/).join(' ').trim()
+}
+
+// Short stable hash for body text (djb2). The dedupe key is
+// (normalized section + body hash): same name and same body is by
+// definition a true duplicate, so unlike either half alone this key
+// cannot hide distinct content while still catching renames.
+function hashBody(s: string): string {
+  let h = 5381
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0
+  return h.toString(36)
+}
 
 export function QuizGateBanner({ scores }: { scores: Scores | null }) {
   // Batch 1: prefer backend gate (xp since last completion); fall back to
@@ -349,6 +367,33 @@ export function LessonDetail({
   }
   const hasKps = kpSections.length > 0
 
+  // Dedupe pass: multi-concept lessons share sources, so the same worked
+  // body (and sometimes the same diagram asset) recurs per concept.
+  // First occurrence renders fully with an anchor; repeats keep their
+  // label + subgoals and point back. Empty bodies never dedupe.
+  const seenBodies = new Map<string, { cid: string; k: number; label: string }>()
+  const seenDiagrams = new Map<string, string>()
+  const annotated = kpSections.map(({ cid, kps, diagram }) => {
+    let diagramDupOf: string | undefined
+    if (diagram) {
+      const first = seenDiagrams.get(diagram)
+      if (first) diagramDupOf = first
+      else seenDiagrams.set(diagram, cid)
+    }
+    const akps: { kp: KpInfo; k: number; anchor: string; dupOf?: { cid: string; k: number; label: string } }[] =
+      kps.map((kp, k) => {
+        const anchor = `lesson-kp-${cid}-${k}`
+        const body = kp.worked_example ?? ''
+        if (!body) return { kp, k, anchor }
+        const key = `${normSection(kp.section ?? '')}::${hashBody(body)}`
+        const first = seenBodies.get(key)
+        if (first) return { kp, k, anchor, dupOf: first }
+        seenBodies.set(key, { cid, k, label: kp.label })
+        return { kp, k, anchor }
+      })
+    return { cid, diagram, diagramDupOf, kps: akps }
+  })
+
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
@@ -414,7 +459,7 @@ export function LessonDetail({
 
       {hasKps ? (
         <div className="space-y-5">
-          {kpSections.map(({ cid, kps, diagram }) => {
+          {annotated.map(({ cid, kps, diagram, diagramDupOf }) => {
             return (
               <div key={cid} className="w-full max-w-full min-w-0 overflow-hidden">
                 <div className="flex items-center gap-2 mb-3">
@@ -423,8 +468,8 @@ export function LessonDetail({
                   </span>
                   <span className="font-mono text-[10px] text-mathua-muted">{cid}</span>
                 </div>
-                {diagram && (
-                  <div className="mb-3 border border-mathua-border bg-mathua-surface p-3 flex items-center gap-3 flex-wrap min-w-0 overflow-hidden">
+                {diagram && !diagramDupOf && (
+                  <div id={`lesson-diagram-${cid}`} className="mb-3 border border-mathua-border bg-mathua-surface p-3 flex items-center gap-3 flex-wrap min-w-0 overflow-hidden">
                     <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
                       <Image src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
                     </div>
@@ -442,8 +487,16 @@ export function LessonDetail({
                     </div>
                   </div>
                 )}
-                {kps.map((kp, k) => (
-                  <div key={`${cid}-${kp.label}`} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden">
+                {diagram && diagramDupOf && (
+                  <p className="font-mono text-[11px] text-mathua-muted mb-3">
+                    Same diagram as {conceptLabels.get(diagramDupOf) || diagramDupOf} ↑{' '}
+                    <a href={`#lesson-diagram-${diagramDupOf}`} className="link-underline" style={{ color: 'var(--accent-blue)' }}>
+                      jump
+                    </a>
+                  </p>
+                )}
+                {kps.map(({ kp, k, anchor, dupOf }) => (
+                  <div key={`${cid}-${kp.label}`} id={anchor} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden scroll-mt-20">
                     <p className="font-mono text-xs text-mathua-primary">
                       {k + 1}. {stripMathDelimiters(kp.label)}
                     </p>
@@ -459,6 +512,14 @@ export function LessonDetail({
                         ))}
                       </ul>
                     )}
+                    {dupOf ? (
+                      <p className="font-mono text-[11px] text-mathua-muted mt-2">
+                        Same worked example as {conceptLabels.get(dupOf.cid) || dupOf.cid} ↑{' '}
+                        <a href={`#lesson-kp-${dupOf.cid}-${dupOf.k}`} className="link-underline" style={{ color: 'var(--accent-blue)' }}>
+                          jump
+                        </a>
+                      </p>
+                    ) : (
                     <details className="mt-2">
                       <summary className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider cursor-pointer">
                         Worked example
@@ -469,6 +530,7 @@ export function LessonDetail({
                         </div>
                       </div>
                     </details>
+                    )}
                     <div className="mt-2 flex justify-end gap-3">
                       <ReportButton
                         conceptId={cid}

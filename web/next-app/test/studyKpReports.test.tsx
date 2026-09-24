@@ -1,22 +1,32 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import type { KpInfo } from '../lib/api'
 
-const { submitReportMock, getDiagram } = vi.hoisted(() => ({
+interface KpStub {
+  kps: KpInfo[]
+  diagram: string
+}
+
+const { submitReportMock, getDiagram, kpOverride } = vi.hoisted(() => ({
   submitReportMock: vi.fn(async () => {}),
   getDiagram: { value: '/diagrams/algebrica/example.svg' as string | null },
+  kpOverride: { value: null as null | Record<string, KpStub> },
 }))
 
 vi.mock('../lib/api', async importOriginal => ({
   ...(await importOriginal<typeof import('../lib/api')>()),
-  getLessonKPs: (cid: string) =>
-    Promise.resolve({
+  getLessonKPs: (cid: string) => {
+    const over = kpOverride.value?.[cid]
+    if (over) return Promise.resolve({ concept_id: cid, ...over })
+    return Promise.resolve({
       concept_id: cid,
       kps: [
         { label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first $x$' },
         { label: 'KP two', section: 'S2', subgoals: [], worked_example: 'second $y$' },
       ],
       diagram: getDiagram.value ?? '',
-    }),
+    })
+  },
   submitReport: submitReportMock,
 }))
 
@@ -83,5 +93,90 @@ describe('study KP report buttons', () => {
     expect(screen.queryByText('Report diagram problem')).toBeNull()
     // Worked-example buttons are unaffected.
     expect(screen.getAllByText('Report a problem')).toHaveLength(2)
+  })
+})
+
+describe('study KP dedupe across concepts', () => {
+  const twoConceptLesson = { ...lesson, concepts: ['c1', 'c2'] }
+
+  beforeEach(() => {
+    submitReportMock.mockClear()
+    kpOverride.value = null
+  })
+
+  it('renders a shared worked-example body once and points repeats back', async () => {
+    kpOverride.value = {
+      c1: {
+        kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'shared body' }],
+        diagram: '',
+      },
+      c2: {
+        kps: [
+          { label: 'KP repeat', section: 'S1', subgoals: [], worked_example: 'shared body' },
+          { label: 'KP fresh', section: 'S2', subgoals: [], worked_example: 'other body' },
+        ],
+        diagram: '',
+      },
+    }
+    render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/KP fresh/)
+    // Full "Worked example" expanders: one for the shared body, one fresh.
+    // (Per-concept header badges also read "Worked example"; count summaries.)
+    const summaries = document.querySelectorAll('details > summary')
+    expect(summaries).toHaveLength(2)
+    // The repeat keeps its label and points back instead of re-rendering.
+    expect(screen.getByText(/KP repeat/)).toBeTruthy()
+    expect(screen.getByText(/Same worked example as/)).toBeTruthy()
+  })
+
+  it('renders distinct bodies fully with no pointers', async () => {
+    kpOverride.value = {
+      c1: {
+        kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first body' }],
+        diagram: '',
+      },
+      c2: {
+        kps: [{ label: 'KP two', section: 'S2', subgoals: [], worked_example: 'second body' }],
+        diagram: '',
+      },
+    }
+    render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/KP two/)
+    expect(document.querySelectorAll('details > summary')).toHaveLength(2)
+    expect(screen.queryByText(/Same worked example as/)).toBeNull()
+  })
+
+  it('renders a shared diagram once and points repeats back', async () => {
+    kpOverride.value = {
+      c1: {
+        kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first body' }],
+        diagram: '/diagrams/algebrica/shared.svg',
+      },
+      c2: {
+        kps: [{ label: 'KP two', section: 'S2', subgoals: [], worked_example: 'second body' }],
+        diagram: '/diagrams/algebrica/shared.svg',
+      },
+    }
+    render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/KP two/)
+    expect(screen.getAllByText('Report diagram problem')).toHaveLength(1)
+    expect(screen.getByText(/Same diagram as/)).toBeTruthy()
+  })
+
+  it('renders distinct diagrams fully with no pointers', async () => {
+    kpOverride.value = {
+      c1: {
+        kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first body' }],
+        diagram: '/diagrams/algebrica/one.svg',
+      },
+      c2: {
+        kps: [{ label: 'KP two', section: 'S2', subgoals: [], worked_example: 'second body' }],
+        diagram: '/diagrams/algebrica/two.svg',
+      },
+    }
+    render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/KP two/)
+    expect(screen.getAllByText('Report diagram problem')).toHaveLength(2)
+    expect(screen.queryByText(/Same diagram as/)).toBeNull()
   })
 })
