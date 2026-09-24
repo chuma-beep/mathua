@@ -1,29 +1,29 @@
 [
   {
-    "label": "Regularization (L2 Weight Decay)",
-    "section": "Why Regularize",
+    "label": "Worked: the penalty gradient",
+    "section": "Worked: the penalty gradient",
     "subgoals": [
-      "Review Why Regularize",
-      "Work the example",
-      "Verify"
+      "Differentiate the squared penalty",
+      "Subtract the inward pull",
+      "Scale shrinkage by weight size"
     ]
   },
   {
-    "label": "Regularization (L2 Weight Decay) — practice 2",
-    "section": "Why Regularize",
+    "label": "Worked: tuning the strength",
+    "section": "Worked: tuning the strength",
     "subgoals": [
-      "Review Why Regularize",
-      "Work the example",
-      "Verify"
+      "Fit unregularized and note overfit",
+      "Raise lambda until test error falls",
+      "Stop before weights collapse"
     ]
   },
   {
-    "label": "Regularization (L2 Weight Decay) — practice 3",
-    "section": "Example",
+    "label": "When penalties hurt",
+    "section": "When penalties hurt",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Recognize abundant clean data",
+      "Weigh bias added versus variance cut",
+      "Drop the penalty where data suffices"
     ]
   }
 ]

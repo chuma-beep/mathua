@@ -1,29 +1,29 @@
 [
   {
-    "label": "ROC Curves and Evaluation Metrics",
-    "section": "Threshold Trade-Offs",
+    "label": "Worked: one threshold point",
+    "section": "Worked: one threshold point",
     "subgoals": [
-      "Review Threshold Trade-Offs",
-      "Work the example",
-      "Verify"
+      "Compute TPR from hits and misses",
+      "Compute FPR from false alarms",
+      "Place the threshold on the curve"
     ]
   },
   {
-    "label": "ROC Curves and Evaluation Metrics — practice 2",
-    "section": "Threshold Trade-Offs",
+    "label": "Worked: reading AUC",
+    "section": "Worked: reading AUC",
     "subgoals": [
-      "Review Threshold Trade-Offs",
-      "Work the example",
-      "Verify"
+      "Read AUC as ranking probability",
+      "Name 1 perfect and 0.5 random",
+      "Separate ranking from accuracy"
     ]
   },
   {
-    "label": "ROC Curves and Evaluation Metrics — practice 3",
-    "section": "Example",
+    "label": "When ROC flatters",
+    "section": "When ROC flatters",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Dilute false positives in negatives",
+      "Check precision on rare positives",
+      "Switch to precision-recall curves"
     ]
   }
 ]

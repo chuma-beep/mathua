@@ -1,29 +1,29 @@
 [
   {
-    "label": "Q-Learning",
-    "section": "Optimality",
+    "label": "Worked: one Bellman update",
+    "section": "Worked: one Bellman update",
     "subgoals": [
-      "Review Optimality",
-      "Work the example",
-      "Verify"
+      "Add reward to discounted best future",
+      "Subtract the current estimate",
+      "Step Q toward the target"
     ]
   },
   {
-    "label": "Q-Learning — practice 2",
-    "section": "Optimality",
+    "label": "Worked: reading the greedy policy",
+    "section": "Worked: reading the greedy policy",
     "subgoals": [
-      "Review Optimality",
-      "Work the example",
-      "Verify"
+      "Take argmax over action values",
+      "Explore epsilon-greedy while learning greedy",
+      "Converge the policy with the values"
     ]
   },
   {
-    "label": "Q-Learning — practice 3",
-    "section": "Example",
+    "label": "When the max bites back",
+    "section": "When the max bites back",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Trace optimistic noise through max",
+      "Split selection from evaluation",
+      "Reach for Double Q-learning"
     ]
   }
 ]

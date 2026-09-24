@@ -1,29 +1,29 @@
 [
   {
-    "label": "Transformers and Attention",
-    "section": "Architecture",
+    "label": "Worked: one attention computation",
+    "section": "Worked: one attention computation",
     "subgoals": [
-      "Review Architecture",
-      "Work the example",
-      "Verify"
+      "Score the query against each key",
+      "Normalize scores into weights",
+      "Mix values by the weights"
     ]
   },
   {
-    "label": "Transformers and Attention — practice 2",
-    "section": "Architecture",
+    "label": "Worked: dimensions and cost",
+    "section": "Worked: dimensions and cost",
     "subgoals": [
-      "Review Architecture",
-      "Work the example",
-      "Verify"
+      "Size the n-by-n score matrix",
+      "Split width across heads",
+      "Add encodings for order"
     ]
   },
   {
-    "label": "Transformers and Attention — practice 3",
-    "section": "Example",
+    "label": "When attention is too expensive",
+    "section": "When attention is too expensive",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Price quadratic cost at long n",
+      "Mask the future for generation",
+      "Swap in sparse or linear variants"
     ]
   }
 ]

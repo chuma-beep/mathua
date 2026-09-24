@@ -1,29 +1,29 @@
 [
   {
-    "label": "Batch Normalization",
-    "section": "Stabilizing Training",
+    "label": "Worked: normalizing one batch",
+    "section": "Worked: normalizing one batch",
     "subgoals": [
-      "Review Stabilizing Training",
-      "Work the example",
-      "Verify"
+      "Compute the batch mean",
+      "Compute the batch variance",
+      "Standardize then scale and shift"
     ]
   },
   {
-    "label": "Batch Normalization — practice 2",
-    "section": "Stabilizing Training",
+    "label": "Worked: test time without batches",
+    "section": "Worked: test time without batches",
     "subgoals": [
-      "Review Stabilizing Training",
-      "Work the example",
-      "Verify"
+      "Track running averages in training",
+      "Freeze population stats for inference",
+      "Keep learned gamma and beta"
     ]
   },
   {
-    "label": "Batch Normalization — practice 3",
-    "section": "Example",
+    "label": "When normalization stabilizes",
+    "section": "When normalization stabilizes",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Read stable inputs every batch",
+      "Raise the learning rate safely",
+      "Recover identity via gamma and beta"
     ]
   }
 ]

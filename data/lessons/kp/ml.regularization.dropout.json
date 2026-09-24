@@ -1,29 +1,29 @@
 [
   {
-    "label": "Dropout Regularization",
-    "section": "Why It Helps",
+    "label": "Worked: one dropout mask",
+    "section": "Worked: one dropout mask",
     "subgoals": [
-      "Review Why It Helps",
-      "Work the example",
-      "Verify"
+      "Sample the keep-or-drop mask",
+      "Rescale survivors by 1/(1-p)",
+      "Run all units unscaled at test"
     ]
   },
   {
-    "label": "Dropout Regularization — practice 2",
-    "section": "Why It Helps",
+    "label": "Worked: counting the ensemble",
+    "section": "Worked: counting the ensemble",
     "subgoals": [
-      "Review Why It Helps",
-      "Work the example",
-      "Verify"
+      "Count masks as 2 to the n",
+      "Share weights across subnetworks",
+      "Average via the full test network"
     ]
   },
   {
-    "label": "Dropout Regularization — practice 3",
-    "section": "Example",
+    "label": "When dropout hurts",
+    "section": "When dropout hurts",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Spot capacity starved by noise",
+      "Lower p on tiny layers",
+      "Disable dropout at inference"
     ]
   }
 ]

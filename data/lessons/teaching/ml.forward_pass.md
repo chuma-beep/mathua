@@ -1,23 +1,25 @@
-## Definition of the forward pass
+# The Forward Pass
 
-The forward pass propagates input data through each layer of a neural network, computing activations from weighted sums plus biases and activation functions.
+**Forward pass:** For layer inputs $a$, compute $z = Wa + b$ then $a' = \sigma(z)$, layer after layer from input to output. It turns data into predictions — and into the loss that backpropagation later differentiates.
 
-### Example
+## Worked: an identity layer
 
-With $W=[[1,0],[0,1]]$ and $x=[2,3]$, the forward pass gives $Wx = [2,3]$.
+Take $W=[[1, 0], [0, 1]]$ (identity), $b=[0, 0]$, input $x=[2, 3]$, activation $\sigma$ the identity:
+1. Multiply: $Wx = [1\cdot 2 + 0\cdot 3,\; 0\cdot 2 + 1\cdot 3] = [2, 3]$.
+2. Add the bias: $[2, 3] + [0, 0] = [2, 3]$.
+3. Apply $\sigma$: identity leaves $[2, 3]$ unchanged.
 
-## Layer by layer computation
+So a layer with identity weights and zero bias passes its input through untouched — the base case every deeper computation builds on.
 
-Each layer computes $a^{(l)} = \sigma(W^{(l)} a^{(l-1)} + b^{(l)})$. The output of one layer becomes the input to the next.
+## Worked: a ReLU layer
 
-### Example
+Take $W=[[1, -1]]$, $b=[0]$, $x=[2, 5]$, $\sigma = \text{ReLU}$:
+1. Multiply and add: $z = 1\cdot 2 + (-1)\cdot 5 + 0 = -3$.
+2. Apply ReLU: $\max(0, -3) = 0$.
+3. The neuron is silent: its output 0 carries no signal to the next layer.
 
-First layer: $z = Wx + b$, then $a = \sigma(z)$.
+So each layer is just affine map plus pointwise nonlinearity, repeated: the output of one layer is the next layer's input.
 
 ## Before backpropagation
 
-The forward pass must complete before backpropagation can compute gradients. Predictions are needed to evaluate the loss.
-
-### Example
-
-Input → forward pass → loss → backpropagation → gradient descent update.
+The forward pass must finish before gradients exist: predictions feed the loss, the loss feeds the backward sweep. The order is always input, then forward pass, then loss, then backpropagation, then the gradient descent update — never reversed.

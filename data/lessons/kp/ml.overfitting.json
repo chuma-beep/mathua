@@ -1,29 +1,29 @@
 [
   {
-    "label": "Overfitting and Generalization",
-    "section": "Diagnosing Overfitting",
+    "label": "Worked: three polynomial fits",
+    "section": "Worked: three polynomial fits",
     "subgoals": [
-      "Review Diagnosing Overfitting",
-      "Work the example",
-      "Verify"
+      "Fit too stiff and read both errors",
+      "Fit too flexible and read the gap",
+      "Pick the degree where both stay low"
     ]
   },
   {
-    "label": "Overfitting and Generalization — practice 2",
-    "section": "Diagnosing Overfitting",
+    "label": "Worked: reading the capacity curve",
+    "section": "Worked: reading the capacity curve",
     "subgoals": [
-      "Review Diagnosing Overfitting",
-      "Work the example",
-      "Verify"
+      "Identify underfit on the falling arm",
+      "Mark the test-error minimum",
+      "Name overfit on the rising arm"
     ]
   },
   {
-    "label": "Overfitting and Generalization — practice 3",
-    "section": "Example",
+    "label": "When more data fixes it",
+    "section": "When more data fixes it",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Match the gap to data scarcity",
+      "Grow the dataset to close the gap",
+      "Shrink the model when data cannot grow"
     ]
   }
 ]

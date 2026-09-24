@@ -1,23 +1,25 @@
-## Definition of gradient descent
+# Gradient Descent
 
-Gradient descent is an optimization algorithm that minimizes a loss by moving parameters in the direction of the negative gradient.
+**Gradient descent:** For parameters $w$ and loss $L$, repeat $w \leftarrow w - \eta \nabla L(w)$: step opposite the gradient, scaled by the learning rate $\eta$. The negative gradient is the locally steepest downhill direction.
 
-### Example
+## Worked: one gradient step
 
-With gradient 2 and learning rate 0.1, the update is 0.2 in the negative direction.
+Take weight $w = 1$, gradient $\nabla L = 2$, learning rate 0.1:
+1. Scale the gradient: $0.1 \cdot 2 = 0.2$.
+2. Step against it: $w \leftarrow 1 - 0.2 = 0.8$.
+3. The loss falls: on $L = w^2$ it drops from 1 to 0.64.
 
-## The learning rate
+So each step trades gradient information for loss decrease — small, repeated, downhill.
 
-The learning rate controls step size. Too large diverges, too small is slow. It scales the gradient update.
+## Worked: stochastic versus batch cost
 
-### Example
+Take 1000 training points and mini-batches of 32:
+1. Batch gradient descent computes all 1000 gradients, then takes 1 step per epoch.
+2. Mini-batch SGD takes $1000/32 \approx 31$ steps per epoch on noisy estimates.
+3. SGD with one sample per update takes 1000 noisy steps per epoch — fastest per step, noisiest direction.
 
-Learning rate 0.01 with gradient 2 gives update 0.02.
+So batch size trades gradient accuracy against update count: more noise per step, many more steps per pass.
 
-## Stochastic and batch variants
+## When descent diverges
 
-Stochastic gradient descent updates after each sample; batch gradient descent uses the whole dataset. Mini-batch is a compromise.
-
-### Example
-
-SGD with one sample per update is noisy but fast; batch is stable but slower per step.
+The same rule with $\eta$ too large overshoots: on $L = w^2$ from $w = 1$ with $\eta = 1.5$, the update jumps to $1 - 1.5\cdot 2 = -2$, and the loss grows from 1 to 4. Too large diverges, too small crawls — the rate must be tuned between the two.

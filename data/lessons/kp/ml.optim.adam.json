@@ -1,29 +1,29 @@
 [
   {
-    "label": "Adam Optimizer Details",
-    "section": "Adaptive Per-Parameter",
+    "label": "Worked: the first update",
+    "section": "Worked: the first update",
     "subgoals": [
-      "Review Adaptive Per-Parameter",
-      "Work the example",
-      "Verify"
+      "Accumulate the first and second moments",
+      "Divide out the initialization bias",
+      "Step with the corrected moments"
     ]
   },
   {
-    "label": "Adam Optimizer Details — practice 2",
-    "section": "Adaptive Per-Parameter",
+    "label": "Worked: why moments adapt",
+    "section": "Worked: why moments adapt",
     "subgoals": [
-      "Review Adaptive Per-Parameter",
-      "Work the example",
-      "Verify"
+      "Average oscillations with momentum",
+      "Scale each weight by its variance",
+      "Read direction from m, size from v"
     ]
   },
   {
-    "label": "Adam Optimizer Details — practice 3",
-    "section": "Example",
+    "label": "When Adam is not the answer",
+    "section": "When Adam is not the answer",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Compare final generalization with SGD",
+      "Weigh prototyping speed against accuracy",
+      "Switch optimizers where it matters"
     ]
   }
 ]

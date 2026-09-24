@@ -1,17 +1,29 @@
 [
   {
-    "label": "Definition of gradient descent",
-    "section": "Definition of gradient descent",
-    "subgoals": ["Follow the negative gradient", "Update the parameters", "Reduce the loss"]
+    "label": "Worked: one gradient step",
+    "section": "Worked: one gradient step",
+    "subgoals": [
+      "Scale the gradient by the learning rate",
+      "Step opposite the gradient",
+      "Check the loss decreased"
+    ]
   },
   {
-    "label": "The learning rate",
-    "section": "The learning rate",
-    "subgoals": ["Scale the gradient step", "Avoid divergence", "Tune for speed"]
+    "label": "Worked: stochastic versus batch cost",
+    "section": "Worked: stochastic versus batch cost",
+    "subgoals": [
+      "Count updates per epoch for batch",
+      "Count updates per epoch for mini-batch",
+      "Trade gradient noise for step count"
+    ]
   },
   {
-    "label": "Stochastic and batch variants",
-    "section": "Stochastic and batch variants",
-    "subgoals": ["Distinguish SGD from batch", "Trade noise for speed", "Choose the variant"]
+    "label": "When descent diverges",
+    "section": "When descent diverges",
+    "subgoals": [
+      "Spot overshoot from a large rate",
+      "Distinguish crawling from diverging",
+      "Tune the rate between the two"
+    ]
   }
 ]

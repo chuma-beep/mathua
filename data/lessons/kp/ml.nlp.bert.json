@@ -1,29 +1,29 @@
 [
   {
-    "label": "BERT and Pretraining",
-    "section": "Pretraining",
+    "label": "Worked: masking one batch",
+    "section": "Worked: masking one batch",
     "subgoals": [
-      "Review Pretraining",
-      "Work the example",
-      "Verify"
+      "Mask 15 percent of tokens",
+      "Mix mask, random, and kept tokens",
+      "Predict hidden tokens from both sides"
     ]
   },
   {
-    "label": "BERT and Pretraining — practice 2",
-    "section": "Pretraining",
+    "label": "Worked: pretrain then fine-tune",
+    "section": "Worked: pretrain then fine-tune",
     "subgoals": [
-      "Review Pretraining",
-      "Work the example",
-      "Verify"
+      "Pretrain once on raw text",
+      "Swap in one task-specific head",
+      "Fine-tune cheaply per task"
     ]
   },
   {
-    "label": "BERT and Pretraining — practice 3",
-    "section": "Example",
+    "label": "When NSP goes away",
+    "section": "When NSP goes away",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Ablate the auxiliary objective",
+      "Scale masking and data instead",
+      "Keep objectives that prove useful"
     ]
   }
 ]

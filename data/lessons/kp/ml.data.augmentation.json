@@ -1,29 +1,29 @@
 [
   {
-    "label": "Data Augmentation",
-    "section": "Regularization via Augmentation",
+    "label": "Worked: doubling CIFAR-10",
+    "section": "Worked: doubling CIFAR-10",
     "subgoals": [
-      "Review Regularization via Augmentation",
-      "Work the example",
-      "Verify"
+      "Vary crops so pixels never repeat",
+      "Count flipped views per epoch",
+      "Convert variety into generalization"
     ]
   },
   {
-    "label": "Data Augmentation — practice 2",
-    "section": "Regularization via Augmentation",
+    "label": "Worked: one mixup pair",
+    "section": "Worked: one mixup pair",
     "subgoals": [
-      "Review Regularization via Augmentation",
-      "Work the example",
-      "Verify"
+      "Blend the two inputs by lambda",
+      "Blend the labels identically",
+      "Train on the soft in-between target"
     ]
   },
   {
-    "label": "Data Augmentation — practice 3",
-    "section": "Example",
+    "label": "When augmentation breaks labels",
+    "section": "When augmentation breaks labels",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Check the transform preserves meaning",
+      "Reject label-breaking rotations",
+      "Augment only within task invariance"
     ]
   }
 ]
