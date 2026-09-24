@@ -58,6 +58,24 @@ func (g *propositionsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		{"1 + 1 = 3", "yes", "It is a declarative statement with a definite truth value (false)."},
 		{"This sentence is false.", "no", "It is a paradox — it cannot have a consistent truth value."},
 	}
+	// Production question: count propositions in a random triple, so the
+	// pool has typed numeric answers (0-3) alongside yes/no recognition.
+	if rand.Intn(2) == 0 {
+		idx := rand.Perm(len(table))[:3]
+		count := 0
+		parts := make([]string, 3)
+		for i, j := range idx {
+			if table[j].isProp == "yes" {
+				count++
+			}
+			parts[i] = fmt.Sprintf("(%s) '%s'", string(rune('a'+i)), table[j].statement)
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many of these are propositions? %s (enter a number)", strings.Join(parts, " ")),
+			Answer:      fmt.Sprintf("%d", count),
+			Explanation: fmt.Sprintf("%d of the 3 statements are declarative with a definite truth value.", count),
+		}
+	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is '%s' a proposition? (yes/no)", e.statement),
@@ -628,7 +646,12 @@ type pascalGen struct{}
 
 func (g *pascalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	n := rand.Intn(max(1, scale)) + 2
+	// Easy rows 2..4: at Difficulty 0.12 scale=1, so all three rows are
+	// reachable and the pool discriminates (1,2,1 vs 1,3,3,1 vs 1,4,6,4,1).
+	n := 2 + rand.Intn(3)
+	if scale > 3 {
+		n = 2 + rand.Intn(6) // rows 2..7
+	}
 	row := pascalRow(n)
 	parts := make([]string, len(row))
 	for i, v := range row {
@@ -1121,10 +1144,14 @@ func (g *equivalenceGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		e string
 	}
 	easy := []entry{
+		{"How many of the 4 truth-table rows for p,q falsify p -> q? (enter a number)", "1", "p -> q is false only when p is true and q is false: 1 row."},
+		{"How many of the 4 truth-table rows for p,q falsify p <-> q? (enter a number)", "2", "p <-> q is false when p,q disagree (2 rows) and true when they agree."},
+		{"How many rows does a truth table for 2 variables have? (enter a number)", "4", "With 2 variables there are 2^2 = 4 rows."},
 		{"Is ¬(p ∧ q) equivalent to ¬p ∨ ¬q? (yes/no)", "yes", "De Morgan: ¬(p∧q) ≡ ¬p∨¬q."},
 		{"Is ¬(p ∨ q) equivalent to ¬p ∧ ¬q? (yes/no)", "yes", "De Morgan: ¬(p∨q) ≡ ¬p∧¬q."},
 		{"Is p → q equivalent to ¬p ∨ q? (yes/no)", "yes", "Implication ≡ disjunction with negation."},
-		{"Is p ↔ q equivalent to (p→q)∧(q→p)? (yes/no)", "yes", "Biconditional is two implications."},
+		{"Is p → q equivalent to p ∧ q? (yes/no)", "no", "p → q is false in 1 row, p ∧ q is false in 3 rows: different tables."},
+		{"Is ¬(p ∧ q) equivalent to ¬p ∧ ¬q? (yes/no)", "no", "De Morgan flips ∧ to ∨: ¬(p∧q) ≡ ¬p∨¬q, not ¬p∧¬q."},
 	}
 	hard := []entry{
 		{"Is (p∧q)∨(¬p∧¬q) equivalent to p↔q? (yes/no)", "yes", "Both express biconditional."},
@@ -1151,9 +1178,11 @@ func (g *relationsGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		e string
 	}
 	easy := []entry{
+		{"How many equivalence classes does congruence mod 3 give on Z? (enter a number)", "3", "Residues 0, 1, 2 give classes [0], [1], [2]: 3 classes."},
+		{"How many partitions does a 2-element set have? (enter a number)", "2", "Either {a,b} together or {a}|{b}: 2 partitions (Bell B_2=2)."},
 		{"Is relation {(1,1),(2,2)} on {1,2} reflexive? (yes/no)", "yes", "Every element relates to itself."},
 		{"Is {(1,2)} on {1,2} symmetric? (yes/no)", "no", "Contains (1,2) but not (2,1)."},
-		{"Does {(1,1),(2,2),(1,2)} represent a partition of {1,2} into {{1},{2}}? (no)", "no", "Partition needs disjoint blocks covering set; this is a relation, not partition."},
+		{"Is {(1,2),(2,3)} on {1,2,3} transitive? (yes/no)", "no", "Has (1,2) and (2,3) but is missing (1,3)."},
 		{"Is the relation 'divides' on N reflexive? (yes/no)", "yes", "Every n divides itself."},
 	}
 	hard := []entry{
@@ -1181,7 +1210,10 @@ func (g *pigeonholeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		e string
 	}
 	easy := []entry{
-		{"Among 13 people, must two share a birth month? (yes/no)", "yes", "13 pigeons, 12 holes → one hole has ≥2 (⌈13/12⌉=2)."},
+		{"Among 13 people, how many must share a birth month? (enter a number)", "2", "13 pigeons, 12 holes: ceil(13/12) = 2 share a month."},
+		{"Among 25 people, how many must share a birth month? (enter a number)", "3", "ceil(25/12) = 3: 2 per month holds only 24 < 25."},
+		{"If 30 students get 4 possible grades, how many must share a grade? (enter a number)", "8", "ceil(30/4) = 8: 7 per grade holds only 28 < 30."},
+		{"If 10 socks are black or white, what is the largest k so that k socks must share a color? (enter a number)", "5", "Worst case splits 5-5, so 5 of one color is guaranteed but 6 is not."},
 		{"Among 5 points in a unit square, must two be within √2/2? (yes/no)", "yes", "Partition square into 4 quarters (side 0.5); 5 pigeons → one quarter has 2 points, diagonal √2/2."},
 		{"If 10 socks are either black or white, must 6 be same color? (yes/no)", "no", "Worst case 5-5 split, so 10 does not guarantee 6 of one color (need 11)."},
 	}
@@ -1210,10 +1242,12 @@ func (g *eulerianGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		e string
 	}
 	easy := []entry{
+		{"How many vertices of odd degree does K_3 (triangle) have? (enter a number)", "0", "K_3 has all degrees 2 (even): 0 odd vertices, so it is Eulerian."},
+		{"How many vertices of odd degree does the path A-B-C have? (enter a number)", "2", "Degrees are 1, 2, 1: the two ends A and C are odd."},
+		{"What is the chromatic number of K_3 (triangle)? (enter a number)", "3", "Each vertex touches the other two, so 3 colors are needed."},
 		{"Does a connected graph where all vertices have even degree have an Eulerian circuit? (yes/no)", "yes", "Euler's theorem: even degree everywhere → Eulerian circuit."},
-		{"Is K_3 (triangle) Eulerian? (yes/no)", "yes", "K_3 has all degrees 2 (even) and is connected."},
-		{"Does K_3 have a Hamiltonian cycle? (yes/no)", "yes", "Triangle itself is a cycle visiting each vertex once."},
-		{"Is every tree 2-colorable? (yes/no)", "yes", "Trees are bipartite, chromatic number 2."},
+		{"Is K_4 (every vertex degree 3) Eulerian? (yes/no)", "no", "All 4 vertices have odd degree 3, so no Eulerian circuit or trail."},
+		{"Does a connected graph with 4 vertices of odd degree have an Eulerian trail? (yes/no)", "no", "Trails need 0 or 2 odds; 4 odds cannot be covered by one trail."},
 	}
 	hard := []entry{
 		{"Does a graph with exactly two vertices of odd degree have an Eulerian trail? (yes/no)", "yes", "Two odds → trail between them; zero odds → circuit."},
@@ -1240,9 +1274,11 @@ func (g *strongInductionGen) Generate(ctx generator.GeneratorContext) generator.
 		e string
 	}
 	easy := []entry{
+		{"A recurrence uses the two previous cases. How many base cases must be checked? (enter a number)", "2", "Each step consumes 2 priors, so 2 starting values are needed."},
+		{"Ordinary induction proves P(k+1) from P(k). How many prior cases does its hypothesis use? (enter a number)", "1", "Ordinary induction assumes just the single predecessor P(k)."},
 		{"Does strong induction assume P(k) for all k < n to prove P(n)? (yes/no)", "yes", "Strong induction uses all previous cases, not just P(n-1)."},
 		{"Is well-ordering equivalent to induction on N? (yes/no)", "yes", "Well-ordering, induction, and strong induction are equivalent on N."},
-		{"In proving Fibonacci identities, is strong induction often needed? (yes/no)", "yes", "Recurrence a_n = a_{n-1}+a_{n-2} needs two prior cases."},
+		{"Does ordinary induction assume P(k) for all k < n? (yes/no)", "no", "Ordinary induction assumes only P(n-1); assuming all smaller cases is the strong form."},
 	}
 	hard := []entry{
 		{"To prove every integer >1 is product of primes, which proof method fits best? (strong induction)", "strong induction", "Factorization uses all smaller numbers, so strong induction."},
@@ -1267,8 +1303,10 @@ func (g *starsBarsGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		e string
 	}
 	easy := []entry{
-		{"How many nonnegative solutions to x1+x2=3? (enter a number)", "4", "C(3+2-1,2-1)=C(4,1)=4."},
+		{"How many nonnegative solutions to x1+x2=3? (enter a number)", "4", "C(3+2-1,2-1)=C(4,1)=4: (3,0),(2,1),(1,2),(0,3)."},
+		{"How many nonnegative solutions to x1+x2=4? (enter a number)", "5", "C(4+2-1,2-1)=C(5,1)=5: x1 = 0..4 with x2 forced."},
 		{"How many solutions to x1+x2+x3=2 with xi≥0? (enter a number)", "6", "C(2+3-1,3-1)=C(4,2)=6."},
+		{"How many ways to put 2 identical balls into 2 boxes? (enter a number)", "3", "C(2+2-1,2-1)=C(3,1)=3: (2,0),(1,1),(0,2)."},
 		{"Does stars and bars count distributions of n identical objects into k boxes? (yes/no)", "yes", "C(n+k-1,k-1)."},
 	}
 	hard := []entry{
@@ -1294,9 +1332,12 @@ func (g *coloringGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		e string
 	}
 	easy := []entry{
-		{"What is χ(K_n)? (enter a number for K_3)", "3", "Complete graph needs n colors."},
-		{"Is bipartite χ=2? (yes/no)", "yes", "Bipartite needs 2."},
-		{"Does greedy coloring use at most Δ+1 colors? (yes/no)", "yes", "Δ is max degree."},
+		{"What is the chromatic number of K_3 (triangle)? (enter a number)", "3", "Complete graph needs n colors: each vertex touches the other two."},
+		{"What is the chromatic number of K_4? (enter a number)", "4", "K_4 needs 4 colors: every pair is adjacent."},
+		{"What is the chromatic number of a bipartite graph with an edge? (enter a number)", "2", "Two sides take two colors; one edge forces both."},
+		{"A graph has maximum degree 3. How many colors does greedy coloring guarantee? (enter a number)", "4", "Greedy uses at most Delta+1 = 4 colors."},
+		{"Is C_5 (5-cycle) 2-colorable? (yes/no)", "no", "Odd cycle needs 3: alternating fails at the closing edge."},
+		{"Is every tree 2-colorable? (yes/no)", "yes", "Trees are bipartite, chromatic number 2."},
 	}
 	hard := []entry{
 		{"What is χ(C_5)? (enter a number)", "3", "Odd cycle needs 3."},
@@ -1321,9 +1362,11 @@ func (g *contradictionGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		e string
 	}
 	easy := []entry{
-		{"Is proof that √2 is irrational by contradiction? (yes/no)", "yes", "Assume rational, derive contradiction."},
-		{"Does contradiction assume ¬P and derive false? (yes/no)", "yes", "If ¬P→false, then P."},
-		{"Is proof that primes infinite via contradiction? (yes/no)", "yes", "Assume finitely many, construct new prime."},
+		{"To prove P by contradiction, what do you first assume? (type like not P)", "not P", "Assume the negation, then derive something false."},
+		{"A proof by contradiction assumes not P and derives what? (one word)", "contradiction", "Deriving Q and not-Q shows the assumption is impossible."},
+		{"Is the classic proof that sqrt(2) is irrational by contradiction? (yes/no)", "yes", "Assume rational in lowest terms, force p,q both even: contradiction."},
+		{"Does proof by contrapositive assume not P and derive false? (yes/no)", "no", "Contrapositive proves not Q -> not P directly; only contradiction derives false."},
+		{"Is deriving P from the assumption P a proof by contradiction? (yes/no)", "no", "Contradiction must assume not P, not P itself."},
 	}
 	hard := []entry{
 		{"Does contradiction prove P by showing ¬P→(Q∧¬Q)? (yes/no)", "yes", "Contradiction."},
@@ -1348,9 +1391,12 @@ func (g *inclusionExclusionGen) Generate(ctx generator.GeneratorContext) generat
 		e string
 	}
 	easy := []entry{
-		{"For |A|=3,|B|=4,|A∩B|=1, what is |A∪B|? (enter a number)", "6", "|A∪B|=|A|+|B|-|A∩B|=6."},
-		{"Does |A∪B|=|A|+|B|-|A∩B|? (yes/no)", "yes", "Two sets."},
-		{"For 3 sets, does inclusion-exclusion have 7 terms? (yes/no)", "yes", "Sum singles - pairs + triple."},
+		{"For |A|=3,|B|=4,|A∩B|=1, what is |A∪B|? (enter a number)", "6", "|A∪B|=|A|+|B|-|A∩B|=3+4-1=6."},
+		{"For |A|=5,|B|=4,|A∩B|=2, what is |A∪B|? (enter a number)", "7", "|A∪B|=5+4-2=7."},
+		{"For |A|=8,|B|=12,|A∩B|=3, what is |A∪B|? (enter a number)", "17", "|A∪B|=8+12-3=17."},
+		{"How many integers ≤6 are divisible by neither 2 nor 3? (enter a number)", "2", "6-floor(6/2)-floor(6/3)+floor(6/6)=6-3-2+1=2 (1 and 5)."},
+		{"Does |A∪B|=|A|+|B|-|A∩B|? (yes/no)", "yes", "Two sets: add both, subtract the double-counted overlap."},
+		{"Is |A∪B| = |A|+|B| for overlapping sets? (yes/no)", "no", "Overlapping sets double-count the intersection; subtract it once."},
 	}
 	hard := []entry{
 		{"How many integers ≤10 not divisible by 2 or 3? (enter a number)", "3", "10 - floor(10/2)-floor(10/3)+floor(10/6)=3 (1,5,7)."},
@@ -1375,9 +1421,12 @@ func (g *generatingFunctionsGen) Generate(ctx generator.GeneratorContext) genera
 		e string
 	}
 	easy := []entry{
-		{"Does ordinary generating function for (a_n) equal A(x)=∑ a_n x^n? (yes/no)", "yes", "Definition."},
-		{"Is generating function for Fibonacci F(x)=x/(1-x-x^2)? (yes/no)", "yes", "Closed form."},
-		{"Does convolution correspond to product of generating functions? (yes/no)", "yes", "A(x)B(x) ↔ convolution."},
+		{"What is the coefficient of x^2 in 1/(1-x)? (enter a number)", "1", "1/(1-x) = 1+x+x^2+...: every coefficient is 1."},
+		{"What is the coefficient of x^3 in x/(1-x-x^2)? (enter a number)", "2", "Fibonacci series x+x^2+2x^3+3x^4+...: the x^3 coefficient is 2."},
+		{"What is the coefficient of x^4 in x/(1-x-x^2)? (enter a number)", "3", "Fibonacci series x+x^2+2x^3+3x^4+...: the x^4 coefficient is 3."},
+		{"Does the product of generating functions give convolution? (yes/no)", "yes", "A(x)B(x) has coefficients c_n = sum_k a_k b_{n-k}."},
+		{"Is the ordinary generating function of (1,1,1,...) equal to x/(1-x)? (yes/no)", "no", "It is 1/(1-x); the extra x shifts everything one place right."},
+		{"Is E(x) = sum a_n x^n the exponential generating function? (yes/no)", "no", "The EGF divides by n!: E(x) = sum a_n x^n/n!."},
 	}
 	hard := []entry{
 		{"Does a_n = a_{n-1}+a_{n-2} give A(x)=x/(1-x-x^2)? (yes/no)", "yes", "Derivation."},

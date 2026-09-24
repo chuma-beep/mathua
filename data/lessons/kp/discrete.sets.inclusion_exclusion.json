@@ -1,29 +1,29 @@
 [
   {
-    "label": "Inclusion-Exclusion Principle",
-    "section": "Counting via Overlaps",
+    "label": "Worked: two sets",
+    "section": "Worked: two sets",
     "subgoals": [
-      "Review Counting via Overlaps",
-      "Work the example",
-      "Verify"
+      "Add the two set sizes",
+      "Subtract the doubly-counted overlap once",
+      "Check against the three disjoint regions"
     ]
   },
   {
-    "label": "Inclusion-Exclusion Principle — practice 2",
-    "section": "Counting via Overlaps",
+    "label": "Worked: integers up to 10 coprime to 6",
+    "section": "Worked: integers up to 10 coprime to 6",
     "subgoals": [
-      "Review Counting via Overlaps",
-      "Work the example",
-      "Verify"
+      "Count multiples of 2, of 3, and of 6",
+      "Sieve with 10 - 5 - 3 + 1",
+      "List survivors 1, 5, 7 to verify"
     ]
   },
   {
-    "label": "Inclusion-Exclusion Principle — practice 3",
-    "section": "Example",
+    "label": "Three sets and derangements",
+    "section": "Three sets and derangements",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Write all 7 signed intersection terms",
+      "Sieve fixed points out of n! permutations",
+      "Alternate signs over larger intersections"
     ]
   }
 ]

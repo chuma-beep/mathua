@@ -1,29 +1,29 @@
 [
-  {
-    "label": "Strong Induction and Well-Ordering",
-    "section": "Stronger Hypotheses",
-    "subgoals": [
-      "Review Stronger Hypotheses",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Strong Induction and Well-Ordering — practice 2",
-    "section": "Stronger Hypotheses",
-    "subgoals": [
-      "Review Stronger Hypotheses",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Strong Induction and Well-Ordering — practice 3",
-    "section": "Example",
-    "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
-    ]
-  }
+ {
+  "label": "Worked: every n > 1 factors into primes",
+  "section": "Worked: every n > 1 factors into primes",
+  "subgoals": [
+   "Take 2 prime as the base case",
+   "Split composite n = ab below n",
+   "Concatenate the factors from the hypothesis"
+  ]
+ },
+ {
+  "label": "Worked: Fibonacci growth needs two priors",
+  "section": "Worked: Fibonacci growth needs two priors",
+  "subgoals": [
+   "Check both base cases P(1) and P(2)",
+   "Invoke a(n-1) and a(n-2) bounds together",
+   "Add them under 2^n"
+  ]
+ },
+ {
+  "label": "Minimal counterexamples",
+  "section": "Minimal counterexamples",
+  "subgoals": [
+   "Assume a failing set and take its least element",
+   "Apply the step to all smaller cases",
+   "Contradict minimality to close the induction"
+  ]
+ }
 ]

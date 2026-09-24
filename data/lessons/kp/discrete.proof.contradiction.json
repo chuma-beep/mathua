@@ -1,29 +1,29 @@
 [
-  {
-    "label": "Proof by Contradiction",
-    "section": "Classic Proofs",
-    "subgoals": [
-      "Review Classic Proofs",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Proof by Contradiction — practice 2",
-    "section": "Classic Proofs",
-    "subgoals": [
-      "Review Classic Proofs",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Proof by Contradiction — practice 3",
-    "section": "Example",
-    "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
-    ]
-  }
+ {
+  "label": "Worked: sqrt(2) is irrational",
+  "section": "Worked: sqrt(2) is irrational",
+  "subgoals": [
+   "Assume sqrt(2) = p/q in lowest terms",
+   "Force p even, then q even, from 2q^2 = p^2",
+   "Contradict lowest terms to conclude irrational"
+  ]
+ },
+ {
+  "label": "Worked: infinitely many primes",
+  "section": "Worked: infinitely many primes",
+  "subgoals": [
+   "Assume a complete finite prime list",
+   "Build N = product + 1 with a new prime factor",
+   "Contradict completeness to conclude infinitude"
+  ]
+ },
+ {
+  "label": "Contradiction versus contrapositive",
+  "section": "Contradiction versus contrapositive",
+  "subgoals": [
+   "State the assumed negation precisely",
+   "Push it until a Q-and-not-Q pair appears",
+   "Discharge the assumption to conclude P"
+  ]
+ }
 ]

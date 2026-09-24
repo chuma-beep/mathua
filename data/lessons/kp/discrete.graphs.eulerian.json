@@ -1,29 +1,29 @@
 [
   {
-    "label": "Eulerian Trails, Hamiltonian and Coloring",
-    "section": "Traversing Graphs",
+    "label": "Worked: K_3 is Eulerian",
+    "section": "Worked: K_3 is Eulerian",
     "subgoals": [
-      "Review Traversing Graphs",
-      "Work the example",
-      "Verify"
+      "Check every vertex has even degree",
+      "Walk the triangle using each edge once",
+      "Close the trail back at the start"
     ]
   },
   {
-    "label": "Eulerian Trails, Hamiltonian and Coloring — practice 2",
-    "section": "Traversing Graphs",
+    "label": "Worked: a trail between two odds",
+    "section": "Worked: a trail between two odds",
     "subgoals": [
-      "Review Traversing Graphs",
-      "Work the example",
-      "Verify"
+      "Count the odd-degree vertices on the path",
+      "Start the trail at one odd end",
+      "End at the other odd vertex"
     ]
   },
   {
-    "label": "Eulerian Trails, Hamiltonian and Coloring — practice 3",
-    "section": "Example",
+    "label": "Eulerian is not Hamiltonian",
+    "section": "Eulerian is not Hamiltonian",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Separate edge-covering from vertex-covering demands",
+      "Use Petersen as the non-Hamiltonian witness",
+      "Color bipartite pieces with 2 colors"
     ]
   }
 ]

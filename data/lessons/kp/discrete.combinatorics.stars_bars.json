@@ -1,29 +1,29 @@
 [
-  {
-    "label": "Stars and Bars",
-    "section": "Counting Distributions",
-    "subgoals": [
-      "Review Counting Distributions",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Stars and Bars — practice 2",
-    "section": "Counting Distributions",
-    "subgoals": [
-      "Review Counting Distributions",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Stars and Bars — practice 3",
-    "section": "Example",
-    "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
-    ]
-  }
+ {
+  "label": "Worked: x1+x2 = 3",
+  "section": "Worked: x1+x2 = 3",
+  "subgoals": [
+   "Enumerate x1 = 0..3 with forced x2",
+   "Count 4 solutions against C(4,1)",
+   "Encode each solution as one bar placement"
+  ]
+ },
+ {
+  "label": "Worked: 4 identical balls into 3 boxes",
+  "section": "Worked: 4 identical balls into 3 boxes",
+  "subgoals": [
+   "Write 4 stars and 2 bars in a row",
+   "Choose 2 bar slots from 6 positions",
+   "Evaluate C(6,2) = 15"
+  ]
+ },
+ {
+  "label": "Worked: positive solutions to x1+x2+x3 = 5",
+  "section": "Worked: positive solutions to x1+x2+x3 = 5",
+  "subgoals": [
+   "Shift yi = xi - 1 to reach yi >= 0",
+   "Reduce the sum to y1+y2+y3 = 2",
+   "Evaluate C(4,2) = 6 and lift back"
+  ]
+ }
 ]

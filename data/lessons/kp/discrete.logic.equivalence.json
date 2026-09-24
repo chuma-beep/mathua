@@ -1,29 +1,29 @@
 [
-  {
-    "label": "Logical Equivalence, De Morgan and Normal Forms",
-    "section": "Transforming Formulas",
-    "subgoals": [
-      "Review Transforming Formulas",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Logical Equivalence, De Morgan and Normal Forms — practice 2",
-    "section": "Transforming Formulas",
-    "subgoals": [
-      "Review Transforming Formulas",
-      "Work the example",
-      "Verify"
-    ]
-  },
-  {
-    "label": "Logical Equivalence, De Morgan and Normal Forms — practice 3",
-    "section": "Example",
-    "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
-    ]
-  }
+ {
+  "label": "Worked: De Morgan for AND",
+  "section": "Worked: De Morgan for AND",
+  "subgoals": [
+   "Find the single row falsifying the left side",
+   "Find the single row falsifying the right side",
+   "Match the columns to conclude equivalence"
+  ]
+ },
+ {
+  "label": "Worked: implication in CNF",
+  "section": "Worked: implication in CNF",
+  "subgoals": [
+   "Locate the row where the implication is false",
+   "Check ¬p∨q fails in exactly that row",
+   "Read the result as a CNF clause"
+  ]
+ },
+ {
+  "label": "Worked: biconditional as DNF",
+  "section": "Worked: biconditional as DNF",
+  "subgoals": [
+   "Collect the two rows where the biconditional holds",
+   "Write one minterm per true row",
+   "Regroup as (p→q)∧(q→p)"
+  ]
+ }
 ]
