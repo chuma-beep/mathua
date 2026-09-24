@@ -1,29 +1,29 @@
 [
   {
-    "label": "Euler's number as a limit of a sequence",
+    "label": "Euler limit of (1+1/n)^n",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Form (1+1/n)^n for growing n",
+      "Push n toward infinity",
+      "Record e ≈ 2.718"
     ]
   },
   {
-    "label": "Euler's number as a limit of a sequence — practice 2",
+    "label": "Series face of e",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Expand 1 + 1/1! + 1/2! + ...",
+      "Sum the reciprocal factorials",
+      "Match the limit value 2.718"
     ]
   },
   {
-    "label": "Euler's number as a limit of a sequence — practice 3",
+    "label": "Irrationality of e",
     "section": "",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Suppose e equals a rational p/q",
+      "Derive the factorial contradiction",
+      "File e as irrational"
     ]
   }
 ]

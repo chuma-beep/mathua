@@ -12,18 +12,18 @@
     "label": "Worked inverse examples",
     "section": "Example 1",
     "subgoals": [
-      "Follow the worked inverse example",
-      "Evaluate f' at the preimage point",
-      "Take the reciprocal"
+      "Evaluate f'(2) = 12 for x^3 at the preimage",
+      "Pair y = 8 with x = 2",
+      "Take the reciprocal to 1/12"
     ]
   },
   {
     "label": "Fundamental derivative table",
     "section": "Fundamental derivatives",
     "subgoals": [
-      "Review the base derivative rules",
-      "Identify which rule the outer function needs",
-      "Combine rules for composites"
+      "Differentiate x^3 to 3x^2 for the outer map",
+      "Read f'(1) = 4 off the power rule",
+      "Invert to (f^-1)'(f(1)) = 1/4"
     ]
   }
 ]

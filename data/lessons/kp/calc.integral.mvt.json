@@ -21,7 +21,7 @@
     "label": "Integral properties",
     "section": "Properties",
     "subgoals": [
-      "Review integral linearity",
+      "Apply linearity to split the integrand",
       "Split intervals additively",
       "Use properties before averaging"
     ]

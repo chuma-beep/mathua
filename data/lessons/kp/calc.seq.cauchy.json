@@ -1,29 +1,29 @@
 [
   {
-    "label": "What is a Cauchy sequence",
+    "label": "Cauchy definition",
     "section": "What is a Cauchy sequence",
     "subgoals": [
-      "Define cauchy sequences",
-      "Follow the worked example",
-      "Apply the rule"
+      "State |a_n - a_m| < ε for n,m past N",
+      "Test 1/n by squeezing tail differences",
+      "Conclude stability without naming the limit"
     ]
   },
   {
-    "label": "Theorem",
+    "label": "Convergent implies Cauchy",
     "section": "Theorem",
     "subgoals": [
-      "Understand theorem",
-      "Apply theorem",
-      "Check the result"
+      "Split ε into halves around the limit L",
+      "Apply the triangle inequality",
+      "Conclude every convergent sequence is Cauchy"
     ]
   },
   {
-    "label": "Cauchy sequences — practice 3",
-    "section": "",
+    "label": "Cauchy implies bounded",
+    "section": "Theorem",
     "subgoals": [
-      "Review the definition",
-      "Work through the example",
-      "Verify the result"
+      "Freeze ε = 1 past the threshold N",
+      "Bound the tail by |x_N| + 1",
+      "Cap the head with a finite maximum"
     ]
   }
 ]

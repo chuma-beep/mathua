@@ -21,7 +21,7 @@
     "label": "Limit properties",
     "section": "Properties",
     "subgoals": [
-      "Review algebraic limit laws",
+      "Factor constants out of limits",
       "Apply laws before epsilon work",
       "Reserve ε-δ for definitions"
     ]
