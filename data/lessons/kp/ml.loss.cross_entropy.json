@@ -1,29 +1,29 @@
 [
   {
-    "label": "Cross-Entropy Loss",
-    "section": "When to Use Cross-Entropy",
+    "label": "Worked: one confident prediction",
+    "section": "Worked: one confident prediction",
     "subgoals": [
-      "Review When to Use Cross-Entropy",
-      "Work the example",
-      "Verify"
+      "Keep only the true-class term",
+      "Evaluate negative log probability",
+      "Reward sharper correct confidence"
     ]
   },
   {
-    "label": "Cross-Entropy Loss — practice 2",
-    "section": "When to Use Cross-Entropy",
+    "label": "Worked: confident and wrong",
+    "section": "Worked: confident and wrong",
     "subgoals": [
-      "Review When to Use Cross-Entropy",
-      "Work the example",
-      "Verify"
+      "Score a confident mistake",
+      "Watch the loss grow without bound",
+      "Contrast with bounded squared error"
     ]
   },
   {
-    "label": "Cross-Entropy Loss — practice 3",
-    "section": "Example",
+    "label": "When cross-entropy misleads",
+    "section": "When cross-entropy misleads",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Price one flipped label",
+      "See the boundary chase noise",
+      "Cap the penalty with smoothing"
     ]
   }
 ]

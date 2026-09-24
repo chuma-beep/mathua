@@ -1,29 +1,29 @@
 [
   {
-    "label": "Train/Validation Split and Cross-Validation",
-    "section": "Reliable Estimates",
+    "label": "Worked: one 5-fold split",
+    "section": "Worked: one 5-fold split",
     "subgoals": [
-      "Review Reliable Estimates",
-      "Work the example",
-      "Verify"
+      "Cut the data into k equal folds",
+      "Rotate the held-out fold",
+      "Average the validation errors"
     ]
   },
   {
-    "label": "Train/Validation Split and Cross-Validation — practice 2",
-    "section": "Reliable Estimates",
+    "label": "Worked: the cost of peeking",
+    "section": "Worked: the cost of peeking",
     "subgoals": [
-      "Review Reliable Estimates",
-      "Work the example",
-      "Verify"
+      "Tune on validation, report on test",
+      "Price tuning directly on test",
+      "Freeze choices before the final report"
     ]
   },
   {
-    "label": "Train/Validation Split and Cross-Validation — practice 3",
-    "section": "Example",
+    "label": "When a single split suffices",
+    "section": "When a single split suffices",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Judge split noise against data size",
+      "Hold out once on large data",
+      "Reserve folds for small data"
     ]
   }
 ]

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Actor-Critic Methods",
-    "section": "Advantage",
+    "label": "Worked: one TD error",
+    "section": "Worked: one TD error",
     "subgoals": [
-      "Review Advantage",
-      "Work the example",
-      "Verify"
+      "Bootstrap reward plus discounted value",
+      "Subtract the current estimate",
+      "Update critic and actor from one number"
     ]
   },
   {
-    "label": "Actor-Critic Methods — practice 2",
-    "section": "Advantage",
+    "label": "Worked: advantage over raw return",
+    "section": "Worked: advantage over raw return",
     "subgoals": [
-      "Review Advantage",
-      "Work the example",
-      "Verify"
+      "Center returns with the critic",
+      "Blend horizons with GAE",
+      "Average over parallel actors"
     ]
   },
   {
-    "label": "Actor-Critic Methods — practice 3",
-    "section": "Example",
+    "label": "When actions go continuous",
+    "section": "When actions go continuous",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Swap probabilities for densities",
+      "Pair a deterministic actor with noise",
+      "Match the method to the action space"
     ]
   }
 ]

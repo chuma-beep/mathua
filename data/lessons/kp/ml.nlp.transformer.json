@@ -1,29 +1,29 @@
 [
   {
-    "label": "Transformers for NLP",
-    "section": "NLP Use",
+    "label": "Worked: why order needs encoding",
+    "section": "Worked: why order needs encoding",
     "subgoals": [
-      "Review NLP Use",
-      "Work the example",
-      "Verify"
+      "Strip positions to a token multiset",
+      "Add sinusoidal position markers",
+      "Separate agent from patient"
     ]
   },
   {
-    "label": "Transformers for NLP \u2014 practice 2",
-    "section": "NLP Use",
+    "label": "Worked: BERT base dimensions",
+    "section": "Worked: BERT base dimensions",
     "subgoals": [
-      "Review NLP Use",
-      "Work the example",
-      "Verify"
+      "Divide width across heads",
+      "Size the attention matrix",
+      "Stack relations over layers"
     ]
   },
   {
-    "label": "Transformers for NLP \u2014 practice 3",
-    "section": "Example",
+    "label": "When the decoder masks",
+    "section": "When the decoder masks",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Hide future tokens causally",
+      "Generate autoregressively",
+      "Read both ways only for encoding"
     ]
   }
 ]

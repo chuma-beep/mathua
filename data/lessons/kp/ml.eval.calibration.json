@@ -1,29 +1,29 @@
 [
   {
-    "label": "Calibration and Reliability Diagrams",
-    "section": "Measuring Calibration",
+    "label": "Worked: one ECE computation",
+    "section": "Worked: one ECE computation",
     "subgoals": [
-      "Review Measuring Calibration",
-      "Work the example",
-      "Verify"
+      "Weight each bin by its share",
+      "Multiply share by the gap",
+      "Sum into expected calibration error"
     ]
   },
   {
-    "label": "Calibration and Reliability Diagrams — practice 2",
-    "section": "Measuring Calibration",
+    "label": "Worked: overconfident by twenty points",
+    "section": "Worked: overconfident by twenty points",
     "subgoals": [
-      "Review Measuring Calibration",
-      "Work the example",
-      "Verify"
+      "Subtract accuracy from confidence",
+      "Convert the gap into ECE",
+      "Close it with temperature scaling"
     ]
   },
   {
-    "label": "Calibration and Reliability Diagrams — practice 3",
-    "section": "Example",
+    "label": "When calibration misleads",
+    "section": "When calibration misleads",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Calibrate a useless base-rate model",
+      "Separate trust from discrimination",
+      "Report ECE beside accuracy and AUC"
     ]
   }
 ]

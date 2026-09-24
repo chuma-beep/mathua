@@ -1,17 +1,29 @@
 [
   {
-    "label": "Definition of the forward pass",
-    "section": "Definition of the forward pass",
-    "subgoals": ["Propagate input layer by layer", "Compute weighted sums", "Apply activations"]
+    "label": "Worked: an identity layer",
+    "section": "Worked: an identity layer",
+    "subgoals": [
+      "Multiply weights by the input",
+      "Add the bias vector",
+      "Apply the activation"
+    ]
   },
   {
-    "label": "Layer by layer computation",
-    "section": "Layer by layer computation",
-    "subgoals": ["Compute z = W a + b", "Apply sigma", "Pass to the next layer"]
+    "label": "Worked: a ReLU layer",
+    "section": "Worked: a ReLU layer",
+    "subgoals": [
+      "Compute the affine map z",
+      "Threshold negatives with ReLU",
+      "Feed the output to the next layer"
+    ]
   },
   {
     "label": "Before backpropagation",
     "section": "Before backpropagation",
-    "subgoals": ["Finish forward to get loss", "Prepare for backward", "Order the passes"]
+    "subgoals": [
+      "Finish the forward pass to get loss",
+      "Order forward before backward",
+      "Hand predictions to the loss"
+    ]
   }
 ]

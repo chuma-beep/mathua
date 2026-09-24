@@ -300,7 +300,7 @@ type transformerGen struct{}
 func (g *transformerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ question, answer, exp string }
-	easy := []entry{{"Does attention compute weighted sum of values by query-key similarity? (yes/no)", "yes", "Attention = softmax(QK^T/√d)V."}, {"Is self-attention permutation equivariant without positional encoding? (yes/no)", "yes", "Positional encoding adds order."}, {"Does transformer use multi-head attention? (yes/no)", "yes", "Multiple heads."}}
+	easy := []entry{{"With n=4 tokens, what shape is the QK^T attention matrix?", "4x4", "Every query meets every key: 4 queries by 4 keys gives a 4x4 score matrix."}, {"With d_model=512 and h=8 heads, what is the per-head dimension?", "64", "Width splits across heads: 512/8 = 64 dimensions per head."}, {"Attention weights [0.7,0.2,0.1] sum to what?", "1", "Softmax normalizes scores so the weights sum to 1."}, {"Values [10,20,30] with weights [1,0,0] give what output?", "10", "All weight on the first value returns it: 1*10+0*20+0*30 = 10."}, {"Is self-attention without positional encoding permutation equivariant? (yes/no)", "yes", "Reordering inputs reorders outputs identically; encodings add order."}, {"Is scaled dot-product attention linear O(n) in sequence length? (yes/no)", "no", "The n-by-n score matrix makes it quadratic O(n^2)."}}
 	hard := []entry{{"Is scaled dot-product attention O(n²) in sequence length? (yes/no)", "yes", "n×n matrix."}, {"Does positional encoding use sin/cos of different frequencies? (yes/no)", "yes", "Sinusoidal."}, {"Is transformer decoder autoregressive with causal mask? (yes/no)", "yes", "Mask prevents future."}}
 	pool := easy
 	if scale > 3 {
@@ -315,7 +315,7 @@ type ganGen struct{}
 func (g *ganGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ question, answer, exp string }
-	easy := []entry{{"GAN has generator and discriminator playing minimax game? (yes/no)", "yes", "G vs D."}, {"Does GAN training aim for Nash equilibrium? (yes/no)", "yes", "Equilibrium."}, {"Is GAN generator trained to minimize log(1-D(G(z)))? (yes/no)", "yes", "Original loss."}}
+	easy := []entry{{"At the Nash equilibrium, what value does D output everywhere?", "0.5", "Generator matches data so real and fake are indistinguishable: D = 0.5."}, {"D scores 4 fakes [0.1,0.4,0.5,0.9]; how many fool D (score above 0.5)?", "1", "Only 0.9 exceeds 0.5, so 1 of 4 fakes fools the discriminator."}, {"G covers 2 of 10 data modes; what fraction is covered?", "0.2", "Coverage 2/10 = 0.2, a sign of mode collapse."}, {"A GAN trains how many networks: generator and discriminator?", "2", "Two players: G generates fakes, D classifies real vs fake."}, {"Does GAN training aim for a Nash equilibrium? (yes/no)", "yes", "Neither player can improve alone at equilibrium."}, {"Is mode collapse a sign of healthy GAN training? (yes/no)", "no", "Collapse means G emits few modes; healthy G covers the data."}}
 	hard := []entry{{"Does mode collapse mean G outputs limited diversity? (yes/no)", "yes", "Few modes."}, {"Is Wasserstein GAN using Earth mover distance? (yes/no)", "yes", "WGAN."}, {"Does D provide gradient for G? (yes/no)", "yes", "Via backprop."}}
 	pool := easy
 	if scale > 3 {
@@ -330,7 +330,7 @@ type adamDetailsGen struct{}
 func (g *adamDetailsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ question, answer, exp string }
-	easy := []entry{{"Does Adam maintain first and second moment estimates? (yes/no)", "yes", "m and v."}, {"Is bias correction important early in Adam? (yes/no)", "yes", "m̂=m/(1-β1^t)."}, {"Does Adam default β1=0.9, β2=0.999? (yes/no)", "yes", "Defaults."}}
+	easy := []entry{{"First Adam step with gradient 2, beta1=0.9, beta2=0.999, eta=0.1: what is the update magnitude?", "0.1", "Bias-corrected m-hat=2, v-hat=4, so 0.1*2/sqrt(4) = 0.1."}, {"After step 1 with beta1=0.9, m=0.18. What is bias-corrected m-hat?", "1.8", "Divide out the initialization bias: 0.18/0.1 = 1.8."}, {"With beta=0.9, the effective memory horizon is roughly how many steps?", "10", "Horizon is about 1/(1-beta) = 1/0.1 = 10."}, {"Adam default beta1 equals what?", "0.9", "Standard defaults: beta1=0.9, beta2=0.999."}, {"Does Adam maintain first and second moment estimates? (yes/no)", "yes", "m tracks mean gradient, v tracks mean squared gradient."}, {"Is Adam non-adaptive with one global step size? (yes/no)", "no", "Each weight gets its own effective rate eta/sqrt(v)."}}
 	hard := []entry{{"Does Adam update = -η m̂/(√v̂+ε)? (yes/no)", "yes", "Rule."}, {"Is Adam adaptive per-parameter? (yes/no)", "yes", "Per-weight."}, {"Does Adam combine momentum and RMSProp? (yes/no)", "yes", "Hybrid."}}
 	pool := easy
 	if scale > 3 {
@@ -345,7 +345,7 @@ type calibrationGen struct{}
 func (g *calibrationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ question, answer, exp string }
-	easy := []entry{{"Is calibrated classifier's confidence ≈ true accuracy? (yes/no)", "yes", "Reliability."}, {"Does reliability diagram plot accuracy vs confidence? (yes/no)", "yes", "Binned."}, {"Is ECE expected calibration error? (yes/no)", "yes", "Weighted avg."}}
+	easy := []entry{{"A bin holds 100 of 200 samples with |acc-conf|=0.2. What is its ECE contribution?", "0.1", "Weight 100/200 = 0.5 times gap 0.2 gives 0.1."}, {"100 predictions at 80 percent confidence with 80 correct are miscalibrated by how much?", "0", "Accuracy 0.8 matches confidence 0.8: gap 0, calibrated."}, {"60 correct of 100 at 80 percent confidence means overconfidence by what fraction?", "0.2", "Confidence 0.8 minus accuracy 0.6 gives 0.2 overconfidence."}, {"Reliability diagrams bin predictions by what: confidence or loss?", "confidence", "Predictions group by confidence; accuracy plots per bin."}, {"Is a calibrated classifier's confidence approximately its accuracy? (yes/no)", "yes", "Calibration means confidence matches empirical accuracy."}, {"Does temperature scaling change the predicted class? (yes/no)", "no", "Scaling logits keeps argmax fixed; only confidence changes."}}
 	hard := []entry{{"Does overconfidence mean ECE high? (yes/no)", "yes", "Gap."}, {"Is temperature scaling a calibration method? (yes/no)", "yes", "Softmax temp."}, {"Does well-calibrated with 80% conf mean 80% correct? (yes/no)", "yes", "Definition."}}
 	pool := easy
 	if scale > 3 {
@@ -390,7 +390,7 @@ type qlearningGen struct{}
 func (g *qlearningGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ q, a, e string }
-	easy := []entry{{"Does Q-learning learn Q(s,a) via Bellman update? (yes/no)", "yes", "Q-learning."}, {"Is Q-learning off-policy? (yes/no)", "yes", "Learn from any policy."}, {"Does Q* satisfy Bellman optimality? (yes/no)", "yes", "Optimal."}}
+	easy := []entry{{"Q=0, alpha=0.5, r=2, gamma=0.9, max next Q=4. What is the updated Q?", "2.8", "Target 2+0.9*4 = 5.6; Q moves halfway: 0+0.5*5.6 = 2.8."}, {"With epsilon=0.1, an epsilon-greedy policy exploits with what probability?", "0.9", "Exploit with 1-epsilon = 0.9, explore randomly with 0.1."}, {"With discount gamma=0, the Bellman target equals what: r or r+Q?", "r", "Zero discount drops the future term, leaving reward r."}, {"Q(s,a) estimates expected return or immediate reward: return or reward?", "return", "Q is the expected discounted return from s taking a."}, {"Is Q-learning off-policy? (yes/no)", "yes", "It learns greedy values from any exploratory behavior."}, {"Does Q-learning need a model of the environment? (yes/no)", "no", "Model-free: updates come from sampled transitions."}}
 	hard := []entry{{"Does Q-learning converge with infinite exploration? (yes/no)", "yes", "Convergence."}, {"Is Q-learning model-free? (yes/no)", "yes", "No model."}, {"Does overestimation bias exist in Q-learning? (yes/no)", "yes", "Max bias."}}
 	pool := easy
 	if scale > 3 {
@@ -405,7 +405,7 @@ type policyGradientGen struct{}
 func (g *policyGradientGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ q, a, e string }
-	easy := []entry{{"Does REINFORCE use Monte Carlo returns? (yes/no)", "yes", "Policy gradient."}, {"Is policy gradient on-policy? (yes/no)", "yes", "Samples from current policy."}, {"Does baseline reduce variance? (yes/no)", "yes", "Advantage."}}
+	easy := []entry{{"REINFORCE with alpha=0.1, return G=4, score grad 0.5: what is the update?", "0.2", "Update alpha*G*grad = 0.1*4*0.5 = 0.2."}, {"Q=7, V=5. What is the advantage A=Q-V?", "2", "The action beats its state average by 7-5 = 2."}, {"A variance-cutting signal that adds no bias is an example of what: advantage or entropy?", "advantage", "Baselines like advantage center updates without bias."}, {"Policy gradient samples from the current or an old policy: current or old?", "current", "REINFORCE is on-policy: trajectories come from the current policy."}, {"Does REINFORCE use Monte Carlo returns? (yes/no)", "yes", "Full-episode returns weight each score gradient."}, {"Is the REINFORCE gradient estimator biased? (yes/no)", "no", "Unbiased but high-variance; baselines cut the variance."}}
 	hard := []entry{{"Is actor-critic both value and policy? (yes/no)", "yes", "Actor-critic."}, {"Does entropy regularization encourage exploration? (yes/no)", "yes", "Entropy bonus."}, {"Is PPO clipped surrogate objective? (yes/no)", "yes", "PPO."}}
 	pool := easy
 	if scale > 3 {
@@ -420,7 +420,7 @@ type bertGen struct{}
 func (g *bertGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ q, a, e string }
-	easy := []entry{{"Is BERT bidirectional encoder? (yes/no)", "yes", "BERT."}, {"Does BERT use masked language modeling? (yes/no)", "yes", "MLM."}, {"Is BERT pretrained then fine-tuned? (yes/no)", "yes", "Pretrain."}}
+	easy := []entry{{"BERT base has 12 layers and large has 24. How many times deeper is large?", "2", "24/12 = 2: large doubles base depth."}, {"Masking 15 percent of 100 tokens masks how many?", "15", "0.15*100 = 15 masked tokens per batch."}, {"BERT base width 768 with 12 heads gives what head dimension?", "64", "768/12 = 64 dimensions per attention head."}, {"BERT pretraining pairs MLM with what second task: NSP or causal LM?", "NSP", "Next sentence prediction: does sentence B follow A."}, {"Is BERT a bidirectional encoder? (yes/no)", "yes", "Full left and right context informs every token."}, {"Is BERT trained from scratch for every downstream task? (yes/no)", "no", "Pretrain once, then fine-tune the same base per task."}}
 	hard := []entry{{"Does BERT base have 12 layers? (yes/no)", "yes", "Base 12, large 24."}, {"Is next sentence prediction part of BERT pretraining? (yes/no)", "yes", "NSP."}, {"Does RoBERTa remove NSP? (yes/no)", "yes", "RoBERTa."}}
 	pool := easy
 	if scale > 3 {
@@ -435,7 +435,7 @@ type actorCriticGen struct{}
 func (g *actorCriticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	type entry struct{ q, a, e string }
-	easy := []entry{{"Does actor-critic combine policy and value? (yes/no)", "yes", "Actor and critic."}, {"Is A2C synchronous actor-critic? (yes/no)", "yes", "A2C."}, {"Does critic estimate value baseline? (yes/no)", "yes", "Baseline."}}
+	easy := []entry{{"r=1, gamma=0.9, next value 10, current value 8: what is the TD error?", "2", "Target 1+0.9*10 = 10; error 10-8 = 2."}, {"Q=7, V=5. What is the advantage?", "2", "Advantage Q-V = 7-5 = 2."}, {"The critic fits values while the actor updates what: policy or value?", "policy", "Actor holds the policy, critic the value baseline."}, {"A2C runs actors synchronously or asynchronously: synchronously or asynchronously?", "synchronously", "A2C is synchronous; A3C is the asynchronous variant."}, {"Does the critic provide a value baseline? (yes/no)", "yes", "V(s) centers updates as the advantage baseline."}, {"Is the actor updated with raw returns and no baseline? (yes/no)", "no", "Actor-critic weights updates by advantage, not raw return."}}
 	hard := []entry{{"Is advantage = Q - V? (yes/no)", "yes", "Advantage."}, {"Does GAE generalize advantage? (yes/no)", "yes", "Generalized."}, {"Is DDPG actor-critic for continuous actions? (yes/no)", "yes", "DDPG."}}
 	pool := easy
 	if scale > 3 {

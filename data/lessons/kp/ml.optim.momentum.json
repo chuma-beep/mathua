@@ -1,29 +1,29 @@
 [
   {
-    "label": "Momentum and Adam Optimization",
+    "label": "Accelerating Through Terrain",
     "section": "Accelerating Through Terrain",
     "subgoals": [
-      "Review Accelerating Through Terrain",
-      "Work the example",
-      "Verify"
+      "Accumulate velocity through flat spots",
+      "Damp oscillations across valley walls",
+      "Read the horizon from beta"
     ]
   },
   {
-    "label": "Momentum and Adam Optimization — practice 2",
-    "section": "Accelerating Through Terrain",
+    "label": "Momentum's Memory",
+    "section": "Momentum's Memory",
     "subgoals": [
-      "Review Accelerating Through Terrain",
-      "Work the example",
-      "Verify"
+      "Weight past gradients by beta",
+      "Carry direction through noise",
+      "Tune memory against overshoot"
     ]
   },
   {
-    "label": "Momentum and Adam Optimization — practice 3",
-    "section": "Example",
+    "label": "Adam's Adaptation",
+    "section": "Adam's Adaptation",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Scale each weight by its variance",
+      "Correct the early-step bias",
+      "Converge without manual scheduling"
     ]
   }
 ]

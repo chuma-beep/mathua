@@ -1,29 +1,29 @@
 [
   {
-    "label": "Generative Adversarial Networks",
-    "section": "Adversarial Training",
+    "label": "Worked: one discriminator update",
+    "section": "Worked: one discriminator update",
     "subgoals": [
-      "Review Adversarial Training",
-      "Work the example",
-      "Verify"
+      "Score the real sample term",
+      "Score the fake sample term",
+      "Push gradients back into the generator"
     ]
   },
   {
-    "label": "Generative Adversarial Networks — practice 2",
-    "section": "Adversarial Training",
+    "label": "Worked: equilibrium",
+    "section": "Worked: equilibrium",
     "subgoals": [
-      "Review Adversarial Training",
-      "Work the example",
-      "Verify"
+      "Match the generator to the data",
+      "Read the discriminator at chance",
+      "Name the Nash equilibrium"
     ]
   },
   {
-    "label": "Generative Adversarial Networks — practice 3",
-    "section": "Example",
+    "label": "When the generator collapses",
+    "section": "When the generator collapses",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Count covered versus missing modes",
+      "Diagnose diversity collapse",
+      "Stabilize with Wasserstein distance"
     ]
   }
 ]

@@ -1,17 +1,29 @@
 [
   {
-    "label": "Definition of a perceptron",
-    "section": "Definition of a perceptron",
-    "subgoals": ["Compute weighted sum plus bias", "Apply the activation", "State the output"]
+    "label": "Worked: one forward computation",
+    "section": "Worked: one forward computation",
+    "subgoals": [
+      "Form the dot product of weights and inputs",
+      "Add the bias to shift the boundary",
+      "Apply the step activation"
+    ]
   },
   {
-    "label": "The weighted sum",
-    "section": "The weighted sum",
-    "subgoals": ["Form the dot product", "Add the bias term", "Interpret the result"]
+    "label": "Worked: why XOR needs more",
+    "section": "Worked: why XOR needs more",
+    "subgoals": [
+      "Separate AND with one line",
+      "Show no line separates XOR",
+      "Stack perceptrons into a hidden layer"
+    ]
   },
   {
-    "label": "Activation functions",
-    "section": "Activation functions",
-    "subgoals": ["Choose step vs sigmoid vs ReLU", "Apply the threshold", "Decide the class"]
+    "label": "When the step is not enough",
+    "section": "When the step is not enough",
+    "subgoals": [
+      "Spot the zero gradient of the step",
+      "Swap in sigmoid or ReLU",
+      "Keep the weighted-sum front end"
+    ]
   }
 ]

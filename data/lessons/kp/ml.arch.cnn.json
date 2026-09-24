@@ -1,29 +1,29 @@
 [
   {
-    "label": "Convolutional Neural Networks",
-    "section": "Local Structure",
+    "label": "Worked: output size",
+    "section": "Worked: output size",
     "subgoals": [
-      "Review Local Structure",
-      "Work the example",
-      "Verify"
+      "Count filter placements per side",
+      "Apply (in-filter)/stride + 1",
+      "Multiply placements by ops each"
     ]
   },
   {
-    "label": "Convolutional Neural Networks — practice 2",
-    "section": "Local Structure",
+    "label": "Worked: why sharing saves parameters",
+    "section": "Worked: why sharing saves parameters",
     "subgoals": [
-      "Review Local Structure",
-      "Work the example",
-      "Verify"
+      "Count fully connected weights",
+      "Count one shared filter plus bias",
+      "Trade position freedom for efficiency"
     ]
   },
   {
-    "label": "Convolutional Neural Networks — practice 3",
-    "section": "Example",
+    "label": "When convolutions are wrong",
+    "section": "When convolutions are wrong",
     "subgoals": [
-      "Review Example",
-      "Work the example",
-      "Verify"
+      "Test whether neighbors correlate",
+      "Drop locality where it buys nothing",
+      "Pick dense or attention layers instead"
     ]
   }
 ]
