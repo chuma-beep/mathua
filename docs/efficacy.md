@@ -77,6 +77,14 @@ python3 figures/fetch_fonts.py   # once per machine (gitignored display fonts)
 python3 figures/efficacy.py      # dump mathua.db -> figures/efficacy_data.json + render
 ```
 
+Automated refresh: `.github/workflows/figures.yml` runs every Monday 06:00 UTC
+(matching the Monday-start weekly buckets) plus on demand via
+`workflow_dispatch`. It pulls the public prod datasets
+(`figures/fetch_prod.py` → `/api/efficacy/all` + `/api/efficacy/trend`),
+re-renders, syncs the `web/next-app/public/figures/` copy, and commits only
+on material change (bundle/PNG/PDF gate the commit; the SVG embeds random
+element ids per save, so it always diffs cosmetically).
+
 ## How to read it
 
 1. **Compare within a student, not across.** A learner's own weekly first-pass
