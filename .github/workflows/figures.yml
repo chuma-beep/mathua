@@ -1,0 +1,46 @@
+name: Refresh efficacy figures
+
+on:
+  schedule:
+    # Weekly, Monday 06:00 UTC — matches the Monday-start weekly buckets
+    # behind GET /api/efficacy/trend.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: efficacy-figures
+  cancel-in-progress: true
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install matplotlib numpy fonttools brotli
+      - run: python3 figures/fetch_fonts.py
+      - run: python3 figures/fetch_prod.py --api https://mathua.fly.dev --out figures/efficacy_data.json
+      - run: echo "SOURCE_DATE_EPOCH=$(git log -1 --format=%ct)" >> $GITHUB_ENV
+      - run: python3 figures/efficacy.py --input figures/efficacy_data.json --out figures/output/efficacy-overview
+      - run: cp figures/output/efficacy-overview.svg web/next-app/public/figures/efficacy-overview.svg
+      - run: python3 scripts/audit_lessons.py
+      - name: Commit refreshed figures
+        run: |
+          git config user.name "mathua-figures"
+          git config user.email "mathua-figures@users.noreply.github.com"
+          git add figures/efficacy_data.json figures/output/efficacy-overview.svg figures/output/efficacy-overview.png figures/output/efficacy-overview.pdf web/next-app/public/figures/efficacy-overview.svg
+          # SVG embeds random element ids per save, so it always diffs:
+          # gate on the deterministic artifacts (bundle, PNG, PDF) instead.
+          if git diff --cached --quiet -- figures/efficacy_data.json figures/output/efficacy-overview.png figures/output/efficacy-overview.pdf; then
+            echo "no material change — skipping commit"
+          else
+            git commit -m "chore(figures): refresh efficacy overview from prod API" && git push
+          fi
