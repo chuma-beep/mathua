@@ -308,6 +308,33 @@ def main():
         errors.append(f"NEW cliche-KP shards ({len(fresh)}), fix content, do not extend the baseline:\n  "
                       + "\n  ".join(fresh[:30]))
 
+    # 15. Textbook apparatus in teaching/ sources: OpenStax back-matter that
+    # renders inertly on atomic concept pages (readiness quizzes with dead
+    # textbook refs, external resource links, static exercise lists,
+    # self-check checklists). The DAG + diagnostic already do readiness;
+    # practice already does exercises. Ratcheted: waves strip per file.
+    apparatus_re = re.compile(
+        r"^#{1,4}\s+(Be Prepared\b|Media\s*$|Everyday Math\b|Writing Exercises\b"
+        r"|Self Check\b|Section \d+\.\d+ Exercises\s*$)", re.M)
+    apparatus_now = []
+    teaching_dir = os.path.join(LESSONS, "teaching")
+    if os.path.isdir(teaching_dir):
+        for name in sorted(os.listdir(teaching_dir)):
+            if not name.endswith(".md"):
+                continue
+            with open(os.path.join(teaching_dir, name), encoding="utf-8") as f:
+                body = f.read()
+            if apparatus_re.search(body) or "ACCESS ADDITIONAL ONLINE RESOURCES" in body:
+                apparatus_now.append(f"teaching/{name}")
+    allowed = set(baseline.get("apparatus_lessons", []))
+    fresh = sorted(set(apparatus_now) - allowed)
+    fixed = sorted(allowed - set(apparatus_now))
+    print(f"note: apparatus lessons: {len(apparatus_now)} current ({len(allowed)} baselined"
+          f"{f', {len(fixed)} fixed' if fixed else ''})", file=sys.stderr)
+    if fresh:
+        errors.append(f"NEW apparatus lessons ({len(fresh)}), strip back-matter, do not extend the baseline:\n  "
+                      + "\n  ".join(fresh[:30]))
+
     # 13. Diagram metadata coverage (data/diagrams/meta.json): every mapped
     # asset needs an entry with a valid source and a non-empty title; SVG
     # algebrica assets need the upstream link (CC BY-NC attribution record).
