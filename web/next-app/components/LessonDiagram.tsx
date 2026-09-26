@@ -106,7 +106,7 @@ export default function LessonDiagram({ src, alt, maxHeight = 180 }: LessonDiagr
       role="img"
       aria-label={label}
       style={{ maxHeight: `${maxHeight}px` }}
-      dangerouslySetInnerHTML={{ __html: inline }}
+      dangerouslySetInnerHTML={{ __html: inline }} // aislop-ignore-line security/dangerously-set-innerhtml -- inline is DOMPurify-sanitized upstream SVG set via sanitizeSvg(); raw fetch output never reaches the DOM
     />
   )
 }
