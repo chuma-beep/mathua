@@ -1,29 +1,29 @@
 [
   {
-    "label": "Negative exponents",
-    "section": "Use the Definition of a Negative Exponent",
+    "label": "The a times 10^n form",
+    "section": "Scientific Notation",
     "subgoals": [
-      "Rewrite a negative exponent as a reciprocal",
-      "Convert between forms",
-      "Prepare for scientific notation"
+      "Split a number into a factor between 1 and 10",
+      "Read the power of 10 from the decimal shift",
+      "Flip the exponent sign below 1"
     ]
   },
   {
-    "label": "Convert to scientific notation",
+    "label": "Convert decimal to scientific notation",
     "section": "Convert from Decimal Notation to Scientific Notation",
     "subgoals": [
-      "Move the decimal point after the first digit",
+      "Move the point to isolate one nonzero digit",
       "Count the places moved",
-      "Choose a positive or negative power of 10"
+      "Attach 10^n with the shift sign"
     ]
   },
   {
-    "label": "Convert to decimal form",
+    "label": "Convert scientific notation to decimal form",
     "section": "Convert Scientific Notation to Decimal Form",
     "subgoals": [
-      "Move the decimal point by the exponent",
-      "Fill zeros as needed",
-      "State the decimal value"
+      "Read n from the power of 10",
+      "Shift right for positive n, left for negative",
+      "Add zeros as placeholders"
     ]
   }
 ]

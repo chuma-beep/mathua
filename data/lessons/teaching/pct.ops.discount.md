@@ -113,7 +113,7 @@ Evelyn bought a new smartphone for $\text{\$499}$ plus tax. She was surprised wh
 </tr>
 <tr>
 <td>Choose a variable to represent it.</td>
-<td>Let $<em>r</em>=$ sales tax.</td>
+<td>Let $r=$ sales tax.</td>
 </tr>
 <tr>
 <td>Write a sentence that gives the information to find it.</td>
@@ -213,7 +213,7 @@ Rikki earned $\text{\$87}$ commission when she sold a $\text{\$1,450}$ stove. Wh
 </tr>
 <tr>
 <td>Choose a variable to represent it.</td>
-<td>Let $<em>r</em>=$ the rate of commission.</td>
+<td>Let $r=$ the rate of commission.</td>
 </tr>
 <tr>
 <td>Write a sentence that gives the information to find it.</td>

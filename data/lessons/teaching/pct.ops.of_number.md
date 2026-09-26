@@ -201,7 +201,7 @@ Dezohn and his girlfriend enjoyed a dinner at a restaurant, and the bill was $\t
 </tr>
 <tr>
 <td>Choose a variable to represent it.</td>
-<td>Let $<em>t</em>=$ amount of tip.</td>
+<td>Let $t=$ amount of tip.</td>
 </tr>
 <tr>
 <td>Write a sentence that give the information to find it.</td>
