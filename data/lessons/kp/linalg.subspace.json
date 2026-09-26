@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three checks suffice",
+    "section": "The subspace criterion",
+    "subgoals": [
+      "Test zero membership first",
+      "Test closure under addition",
+      "Test closure under scalar multiplication"
+    ]
+  },
+  {
+    "label": "Homogeneous systems give subspaces",
+    "section": "Solutions of a homogeneous system",
+    "subgoals": [
+      "Check the origin solves Ax = 0",
+      "Push linear combinations through A",
+      "Read dimension as n minus rank"
+    ]
+  },
+  {
+    "label": "Dimensions add minus overlap",
+    "section": "Grassmann's formula",
+    "subgoals": [
+      "Extend the intersection basis both ways",
+      "Union into a basis of the sum",
+      "Subtract the double-counted k"
+    ]
+  }
+]

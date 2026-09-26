@@ -9,7 +9,7 @@
   },
   {
     "concept_id": "abstract.group.homomorphism",
-    "source": "algebrica/algebraic-structures/vector-spaces.md"
+    "source": "algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md"
   },
   {
     "concept_id": "abstract.group.subgroup",
@@ -2518,5 +2518,21 @@
   {
     "concept_id": "calc.seq.bounded",
     "source": "algebrica/sequences/convergent-and-divergent-sequences.md"
+  },
+  {
+    "concept_id": "abstract.group.symmetric",
+    "source": "algebrica/algebraic-structures/symmetric-group.md"
+  },
+  {
+    "concept_id": "abstract.group.dihedral",
+    "source": "algebrica/algebraic-structures/dihedral-groups.md"
+  },
+  {
+    "concept_id": "linalg.subspace",
+    "source": "algebrica/algebraic-structures/subspaces.md"
+  },
+  {
+    "concept_id": "complex.adv.logarithm",
+    "source": "algebrica/complex-numbers/complex-logarithm.md"
   }
 ]
