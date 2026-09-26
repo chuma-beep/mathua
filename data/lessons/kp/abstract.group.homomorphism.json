@@ -1,29 +1,29 @@
 [
   {
-    "label": "Definition",
-    "section": "Definition",
+    "label": "Homomorphisms preserve structure",
+    "section": "Homomorphisms for standard algebraic structures",
     "subgoals": [
-      "Evaluate the map at the zero vector",
-      "Split f(u+v) into f(u) + f(v)",
-      "Pull scalars out as f(cv) = c f(v)"
+      "Check phi(a*b) against phi(a)*phi(b)",
+      "Derive identity and inverse preservation",
+      "Add the unity condition for unital rings"
     ]
   },
   {
-    "label": "Properties",
-    "section": "Properties",
+    "label": "Kernel detects injectivity",
+    "section": "Kernel and image",
     "subgoals": [
-      "Track the kernel back to zero",
-      "Push the image forward into the codomain",
-      "Test injectivity via a trivial kernel"
+      "Compute ker(phi) as the identity preimage",
+      "Test triviality for injectivity",
+      "Build SL(n,F) as a determinant kernel"
     ]
   },
   {
-    "label": "Algebraic hierarchy",
-    "section": "Algebraic hierarchy",
+    "label": "Sign of a permutation",
+    "section": "The sign homomorphism",
     "subgoals": [
-      "Drop linearity to fall from space to group",
-      "Restrict maps to invertible ones for GL",
-      "Stack spaces and maps into the hierarchy"
+      "Take determinants of permutation matrices",
+      "Read parity from (-1)^r",
+      "Land even permutations in A_n"
     ]
   }
 ]

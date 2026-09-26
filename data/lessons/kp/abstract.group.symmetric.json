@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cycle notation compresses permutations",
+    "section": "Cycle notation",
+    "subgoals": [
+      "Follow one element until the cycle closes",
+      "Drop fixed points from the notation",
+      "Decompose rho into (1 3)(2 5)"
+    ]
+  },
+  {
+    "label": "Order from cycle lengths",
+    "section": "Order of a permutation",
+    "subgoals": [
+      "Read each cycle length",
+      "Take the least common multiple",
+      "Beat single-cycle lengths with mixed types"
+    ]
+  },
+  {
+    "label": "Sign via transposition count",
+    "section": "Transpositions and the sign homomorphism",
+    "subgoals": [
+      "Expand a k-cycle into k-1 transpositions",
+      "Take parity mod 2",
+      "Flip parity against cycle length"
+    ]
+  }
+]

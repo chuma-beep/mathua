@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Principal value selection",
+    "section": "The principal logarithm",
+    "subgoals": [
+      "Restrict Arg to (-pi, pi]",
+      "Compute Log(-sqrt(3)-i) = ln 2 - 5pi i/6",
+      "Separate Log from the full set log"
+    ]
+  },
+  {
+    "label": "Cuts enable branches",
+    "section": "Logarithmic branches and branch cuts",
+    "subgoals": [
+      "Circle the origin and watch constancy fail",
+      "Delete a ray to restore continuity",
+      "Differ two branches by 2m pi i"
+    ]
+  },
+  {
+    "label": "Product law needs correction",
+    "section": "Logarithmic identities and their restrictions",
+    "subgoals": [
+      "Add principal arguments naively",
+      "Detect exit from (-pi, pi]",
+      "Subtract 2m pi i back inside"
+    ]
+  }
+]

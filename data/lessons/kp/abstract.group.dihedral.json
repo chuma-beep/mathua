@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two generators and three relations",
+    "section": "Generators and defining relations",
+    "subgoals": [
+      "Verify r^n, s^2, and srs = r^-1",
+      "Reduce every product to r^a s^i normal form",
+      "Count 2n distinct elements"
+    ]
+  },
+  {
+    "label": "Center and element orders",
+    "section": "Element orders and the centre",
+    "subgoals": [
+      "Count n reflections plus the half-turn when n is even",
+      "Solve r^k = r^-k for central rotations",
+      "Conclude D_n is never abelian for n at least 3"
+    ]
+  },
+  {
+    "label": "Dihedral inside symmetric",
+    "section": "Dihedral groups inside the symmetric group",
+    "subgoals": [
+      "Label vertices 1 to n in order",
+      "Send r to the n-cycle and s to the reversal",
+      "Spot D_3 = S_3 and D_4 as Sylow 2-subgroup"
+    ]
+  }
+]
