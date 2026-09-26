@@ -5,7 +5,21 @@
 import React, { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect } from 'react'
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as THREE from 'three'
+import {
+  BufferAttribute,
+  BufferGeometry,
+  Color,
+  InstancedMesh,
+  MathUtils,
+  MeshStandardMaterial,
+  MOUSE,
+  Object3D,
+  PerspectiveCamera,
+  ShaderMaterial,
+  SphereGeometry,
+  TOUCH,
+  Vector3,
+} from 'three'
 import { layoutDAG3D, type ConceptLayoutInput } from '../lib/layoutDAG3D'
 import { loadGraphPayload, loadPositionEntries } from '../lib/graphPositions'
 import type { GraphPayload } from '../lib/graphPayload'
@@ -39,10 +53,10 @@ const ACTIVE_LINK_COLOR_LIGHT = '#2563eb'
 
 const NODE_RADIUS = 0.2
 const LABEL_POOL = 72
-const HIGHLIGHT = new THREE.Color('#ffffff')
-const GOLD = new THREE.Color('#c8a96e')
-const DIM_DARK = new THREE.Color('#11151f')
-const DIM_LIGHT = new THREE.Color('#eae8e0')
+const HIGHLIGHT = new Color('#ffffff')
+const GOLD = new Color('#c8a96e')
+const DIM_DARK = new Color('#11151f')
+const DIM_LIGHT = new Color('#eae8e0')
 
 const EDGE_ALPHA: Record<LodTier, number> = { far: 0.07, mid: 0.16, close: 0.26 }
 const EDGE_ALPHA_LIGHT: Record<LodTier, number> = { far: 0.1, mid: 0.2, close: 0.32 }
@@ -250,7 +264,7 @@ function NodeInstances({
   onHover: (id: string | null) => void
   onSelect: (id: string) => void
 }) {
-  const meshRef = useRef<THREE.InstancedMesh>(null)
+  const meshRef = useRef<InstancedMesh>(null)
   const hoveredRef = useRef<string | null>(null)
   const count = nodes.length
   const segments = isMobile ? 8 : 12
@@ -260,11 +274,11 @@ function NodeInstances({
   )
 
   const { geometry, material } = useMemo(() => {
-    const geometry = new THREE.SphereGeometry(NODE_RADIUS, segments, segments)
-    const material = new THREE.MeshStandardMaterial({
+    const geometry = new SphereGeometry(NODE_RADIUS, segments, segments)
+    const material = new MeshStandardMaterial({
       roughness: 0.32,
       metalness: 0.08,
-      emissive: new THREE.Color('#ffffff'),
+      emissive: new Color('#ffffff'),
       emissiveIntensity: 0.18,
     })
     material.onBeforeCompile = shader => {
@@ -287,7 +301,7 @@ function NodeInstances({
   useLayoutEffect(() => {
     const mesh = meshRef.current
     if (!mesh) return
-    const dummy = new THREE.Object3D()
+    const dummy = new Object3D()
     const logMax = Math.log1p(maxImportance)
     for (let i = 0; i < count; i++) {
       const n = nodes[i]
@@ -304,7 +318,7 @@ function NodeInstances({
   useLayoutEffect(() => {
     const mesh = meshRef.current
     if (!mesh) return
-    const col = new THREE.Color()
+    const col = new Color()
     const dimTarget = theme === 'dark' ? DIM_DARK : DIM_LIGHT
     for (let i = 0; i < count; i++) {
       const n = nodes[i]
@@ -401,16 +415,16 @@ function EdgeBatch({
       positions[idx + 4] = tp[1]
       positions[idx + 5] = tp[2]
     })
-    const geo = new THREE.BufferGeometry()
-    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geo.setAttribute('aColor', new THREE.BufferAttribute(colors, 3))
-    geo.setAttribute('aAlpha', new THREE.BufferAttribute(alphas, 1))
+    const geo = new BufferGeometry()
+    geo.setAttribute('position', new BufferAttribute(positions, 3))
+    geo.setAttribute('aColor', new BufferAttribute(colors, 3))
+    geo.setAttribute('aAlpha', new BufferAttribute(alphas, 1))
     return geo
   }, [validLinks, positionMap])
 
   const material = useMemo(
     () =>
-      new THREE.ShaderMaterial({
+      new ShaderMaterial({
         transparent: true,
         depthWrite: false,
         vertexShader: `
@@ -444,10 +458,10 @@ function EdgeBatch({
   }, [geometry, material])
 
   useLayoutEffect(() => {
-    const colorAttr = geometry.getAttribute('aColor') as THREE.BufferAttribute
-    const alphaAttr = geometry.getAttribute('aAlpha') as THREE.BufferAttribute
-    const baseColor = new THREE.Color(theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT)
-    const activeColor = new THREE.Color(theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT)
+    const colorAttr = geometry.getAttribute('aColor') as BufferAttribute
+    const alphaAttr = geometry.getAttribute('aAlpha') as BufferAttribute
+    const baseColor = new Color(theme === 'dark' ? LINK_COLOR : LINK_COLOR_LIGHT)
+    const activeColor = new Color(theme === 'dark' ? ACTIVE_LINK_COLOR : ACTIVE_LINK_COLOR_LIGHT)
     const baseAlpha = theme === 'dark' ? EDGE_ALPHA[lod] : EDGE_ALPHA_LIGHT[lod]
     const dim = theme === 'dark' ? DIM_DARK : DIM_LIGHT
 
@@ -504,8 +518,8 @@ function MapControls({
     controls.rotateSpeed = 0.6
     controls.panSpeed = 0.8
     // Touch: one finger pans the map, two fingers pinch + pan. Tap selects.
-    controls.touches = { ONE: THREE.TOUCH.PAN, TWO: THREE.TOUCH.DOLLY_PAN }
-    controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE }
+    controls.touches = { ONE: TOUCH.PAN, TWO: TOUCH.DOLLY_PAN }
+    controls.mouseButtons = { LEFT: MOUSE.PAN, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.ROTATE }
     const onChange = () => invalidate()
     controls.addEventListener('change', onChange)
     controlsRef.current = controls
@@ -581,8 +595,8 @@ function LabelProjector({
   const poolRef = useRef<HTMLSpanElement[]>([])
   const gridRef = useRef<Uint8Array>(new Uint8Array(0))
   const gridSizeRef = useRef({ cols: 0, rows: 0 })
-  const projected = useRef(new THREE.Vector3())
-  const viewScratch = useRef(new THREE.Vector3())
+  const projected = useRef(new Vector3())
+  const viewScratch = useRef(new Vector3())
 
   useEffect(() => {
     const overlay = overlayRef.current
@@ -620,7 +634,7 @@ function LabelProjector({
     }
     const grid = gridRef.current
     const v = projected.current
-    const cam = camera as THREE.PerspectiveCamera
+    const cam = camera as PerspectiveCamera
 
     let used = 0
     for (const candidate of candidates) {
@@ -725,7 +739,7 @@ function GraphScene({
     if (frameCount.current % 8 !== 0) return
     const target = controlsRef.current?.target
     const distance = target ? camera.position.distanceTo(target) : camera.position.length()
-    const fov = (camera as THREE.PerspectiveCamera).fov ?? 60
+    const fov = (camera as PerspectiveCamera).fov ?? 60
     const visibleHeight = 2 * Math.tan(((fov * Math.PI) / 180) / 2) * distance
     const tier: LodTier = visibleHeight > 46 ? 'far' : visibleHeight > 27 ? 'mid' : 'close'
     setLod(prev => (prev === tier ? prev : tier))
@@ -1062,6 +1076,8 @@ export default function MathConceptGraph3D({
   }, [])
 
   const pointerDown = useRef<{ x: number; y: number } | null>(null)
+  // Scratch for keyboard zoom direction (avoids a Vector3 alloc per keypress).
+  const zoomDir = useRef(new Vector3()).current
 
   // Clear focus on background clicks, but not when the pointer was panning
   // or rotating (same drag threshold as node selection).
@@ -1126,17 +1142,17 @@ export default function MathConceptGraph3D({
         e.preventDefault()
         handleInteract()
         const controls = controlsRef.current
-        const camera = controls?.object as THREE.PerspectiveCamera | undefined
+        const camera = controls?.object as PerspectiveCamera | undefined
         if (!camera) return
-        const target = controls?.target ?? new THREE.Vector3()
+        const target = controls?.target ?? new Vector3()
         const distance = camera.position.distanceTo(target)
         const zoomInKey = e.key === '+' || e.key === '='
-        const clamped = THREE.MathUtils.clamp(
+        const clamped = MathUtils.clamp(
           zoomInKey ? distance * 0.85 : distance * 1.18,
           controls?.minDistance ?? 8,
           controls?.maxDistance ?? 60
         )
-        const direction = camera.position.clone().sub(target).normalize()
+        const direction = zoomDir.copy(camera.position).sub(target).normalize()
         camera.position.copy(target).addScaledVector(direction, clamped)
         controls?.update()
       }
