@@ -69,8 +69,8 @@ To represent and describe division, we can use symbols and words.
 <td data-align="left" data-valign="top">$Division$</td>
 <td data-align="left" data-valign="top">$\div$<br />
 $$\frac{a}{b}$$<br />
-$<em>b</em><em>a</em>$<br />
-$<em>a</em>/<em>b</em>$</td>
+$ba$<br />
+$a/b$</td>
 <td data-align="left" data-valign="top">$12 \div 4$<br />
 $$\frac{12}{4}$$<br />
 412<br />

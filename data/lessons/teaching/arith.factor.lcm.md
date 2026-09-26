@@ -113,7 +113,7 @@ We factor 6, using 2 and 3.</p>
 </tr>
 <tr>
 <td>Write in exponential form.</td>
-<td>$2<sup>4</sup> ⋅ 3$</td>
+<td>$2^{4} ⋅ 3$</td>
 </tr>
 </tbody>
 </table>
@@ -152,7 +152,7 @@ Find the prime factorization of 84 using the factor tree method.
 <tr>
 <td>Then we write 84 as the product of all circled primes.</td>
 <td>$2 ⋅ 2 ⋅ 3 ⋅ 7$<br />
-$2<sup>2</sup> ⋅ 3 ⋅ 7$</td>
+$2^{2} ⋅ 3 ⋅ 7$</td>
 </tr>
 </tbody>
 </table>
@@ -230,7 +230,7 @@ Find the prime factorization of 120 using the ladder method.
 <tr>
 <td>The quotient, 5, is prime, so the ladder is complete. Write the prime factorization of 120.</td>
 <td>$2 ⋅ 2 ⋅ 2 ⋅ 3 ⋅ 5$<br />
-$2<sup>3</sup> ⋅ 3 ⋅ 5$</td>
+$2^{3} ⋅ 3 ⋅ 5$</td>
 </tr>
 </tbody>
 </table>
@@ -268,7 +268,7 @@ Find the prime factorization of 48 using the ladder method.
 <tr>
 <td>The quotient, 3, is prime, so the ladder is complete. Write the prime factorization of 48.</td>
 <td>$2 ⋅ 2 ⋅ 2 ⋅ 2 ⋅ 3$<br />
-$2<sup>4</sup> ⋅ 3$</td>
+$2^{4} ⋅ 3$</td>
 </tr>
 </tbody>
 </table>
