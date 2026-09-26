@@ -9,6 +9,7 @@ import {
   ConceptGraphSection,
   DiagnosticSection,
   GeneratorsSection,
+  MeasuringLearningSection,
   SchedulerSection,
   ScoringSection,
   SpacedRepetitionSection,
@@ -94,6 +95,7 @@ export default function HowItWorksPage() {
           <ScoringSection />
           <GeneratorsSection />
           <SymbolicGradingSection />
+          <MeasuringLearningSection />
 
           <section className="mt-12 pt-6 text-center" style={{ borderTop: '0.5px solid var(--border)' }}>
             <p style={{ ...bodyStyle, textAlign: 'center' }}>

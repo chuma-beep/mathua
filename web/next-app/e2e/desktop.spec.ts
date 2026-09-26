@@ -29,7 +29,15 @@ test('graph controls are desktop-sized and minimap is readable at 1280px', async
 test('stacked table cards hidden on desktop, real table shown', async ({ page }) => {
   for (const path of ['/docs/contributing', '/how-it-works']) {
     await page.goto(path)
-    await expect(page.locator('div.sm\\:hidden.space-y-2')).not.toBeVisible()
-    await expect(page.locator('table')).toBeVisible()
+    // Pages may carry several card/table pairs (one per section): every
+    // mobile-only stack stays hidden, every real table stays visible.
+    for (const stack of await page.locator('div.sm\\:hidden.space-y-2').all()) {
+      await expect(stack).not.toBeVisible()
+    }
+    const tables = page.locator('table')
+    expect(await tables.count()).toBeGreaterThan(0)
+    for (const table of await tables.all()) {
+      await expect(table).toBeVisible()
+    }
   }
 })

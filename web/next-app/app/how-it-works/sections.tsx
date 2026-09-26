@@ -397,3 +397,76 @@ for line in sys.stdin:
     </section>
   )
 }
+
+export function MeasuringLearningSection() {
+  const rows: [string, string][] = [
+    ['First-pass rate', 'Share of concepts answered correctly on the very first attempt.'],
+    ['Second-pass rate', 'Share correct within the first two attempts — the recovery metric. A gap between first- and second-pass means material is learnable with feedback but not yet automatic.'],
+    ['Average attempts per concept', 'Mean attempts across concepts; falls as fluency builds.'],
+    ['Retention', 'Students active in two or more distinct weeks ÷ all students who ever attempted. A coarse cohort signal, not a week-over-week curve.'],
+    ['First-pass trend', 'Last week minus first week. Positive means accuracy improved across the observed window; noisy at small N.'],
+  ]
+  return (
+    <section id="measuring-learning" className="mt-12 pt-6">
+      <h2 style={h2Style}>Measuring Learning</h2>
+      <p style={bodyStyle}>
+        Every answer in Mathua writes one row to an attempt log: student, concept,
+        correctness, elapsed seconds, timestamp. Nothing is sampled or aggregated
+        at write time — every metric below is computed from that raw log, per
+        student or product-wide.
+      </p>
+
+      {/* Mobile: stacked labeled cards */}
+      <div className="sm:hidden space-y-2 w-full max-w-[720px] mx-auto min-w-0 my-6">
+        {rows.map(([metric, meaning]) => (
+          <div key={`card-${metric}`} className="border-[0.5px] border-mathua-border p-3 min-w-0 overflow-hidden">
+            <div className="font-mono text-[12px] text-mathua-primary mb-1 break-words">{metric}</div>
+            <div className="font-mono text-[11px] text-mathua-muted">{meaning}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: real table */}
+      <div className="hidden sm:block overflow-x-auto overscroll-x-contain w-[calc(100%+2rem)] -mx-4 px-4 sm:w-full sm:mx-0 sm:px-0 my-6">
+        <table className="w-full"
+          style={{
+            width: '100%',
+            borderCollapse: 'collapse',
+            border: 'none',
+            background: 'transparent',
+          }}
+        >
+          <thead>
+            <tr style={{ background: 'transparent' }}>
+              <th style={tableHeaderStyle}>Metric</th>
+              <th style={tableHeaderStyle}>What it means</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(([metric, meaning]) => (
+              <tr key={`row-${metric}`} style={{ background: 'transparent' }}>
+                <td style={tableCellStyle}>{metric}</td>
+                <td style={tableCellStyle}>{meaning}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p style={bodyStyle}>
+        These are usage metrics, not an efficacy claim: no control group, no
+        randomisation. Compare within a student over weeks, not across learners
+        at different frontiers — and always read a weekly rate alongside its
+        active-student count, since a week with three attempts can show 0% or
+        100% by accident.
+      </p>
+      <p style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.7 }}>
+        Product-wide figures are withheld until the attempt log reaches reporting
+        volume. This section describes the method — your live numbers are on your{' '}
+        <a href="/profile#efficacy" className="link-underline" style={{ color: 'var(--accent-blue)' }}>Profile</a>,
+        and the evidence figure with regeneration commands lives in{' '}
+        <a href="/docs/efficacy" className="link-underline" style={{ color: 'var(--accent-blue)' }}>Docs</a>.
+      </p>
+    </section>
+  )
+}
