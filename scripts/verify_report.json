@@ -29079,1029 +29079,1029 @@
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 31,
+  "line": 21,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3 + 4"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 238,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a + 0 = a} \\\\\n{0 + a = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 339,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 349,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 397,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{43\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+69}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 411,
+  "line": 401,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{2}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 420,
+  "line": 410,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{112}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 494,
+  "line": 484,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{1,683\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 507,
+  "line": 497,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,6\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 517,
+  "line": 507,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{62\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 527,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 537,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2,162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 571,
+  "line": 561,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n21,357 \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 585,
+  "line": 575,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,3\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n4\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 596,
+  "line": 586,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n14\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 607,
+  "line": 597,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{2\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 618,
+  "line": 608,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n0814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.carry.md",
-  "line": 629,
+  "line": 619,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n30,814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 31,
+  "line": 21,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3 + 4"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 238,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a + 0 = a} \\\\\n{0 + a = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 339,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 349,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 397,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{43\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+69}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 411,
+  "line": 401,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{2}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 420,
+  "line": 410,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{112}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 494,
+  "line": 484,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{1,683\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 507,
+  "line": 497,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,6\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 517,
+  "line": 507,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{62\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 527,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 537,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2,162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 571,
+  "line": 561,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n21,357 \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 585,
+  "line": 575,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,3\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n4\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 596,
+  "line": 586,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n14\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 607,
+  "line": 597,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{2\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 618,
+  "line": 608,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n0814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.double.md",
-  "line": 629,
+  "line": 619,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n30,814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 31,
+  "line": 21,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3 + 4"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 238,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a + 0 = a} \\\\\n{0 + a = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 339,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 349,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 397,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{43\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+69}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 411,
+  "line": 401,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{2}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 420,
+  "line": 410,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{112}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 494,
+  "line": 484,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{1,683\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 507,
+  "line": 497,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,6\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 517,
+  "line": 507,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{62\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 527,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 537,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2,162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 571,
+  "line": 561,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n21,357 \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 585,
+  "line": 575,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,3\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n4\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 596,
+  "line": 586,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n14\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 607,
+  "line": 597,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{2\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 618,
+  "line": 608,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n0814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.single.md",
-  "line": 629,
+  "line": 619,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n30,814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 31,
+  "line": 21,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3 + 4"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 238,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a + 0 = a} \\\\\n{0 + a = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 339,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 349,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 397,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{43\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+69}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 411,
+  "line": 401,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{2}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 420,
+  "line": 410,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{112}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 494,
+  "line": 484,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{1,683\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 507,
+  "line": 497,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,6\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 517,
+  "line": 507,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{62\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 527,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 537,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2,162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 571,
+  "line": 561,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n21,357 \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 585,
+  "line": 575,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,3\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n4\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 596,
+  "line": 586,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n14\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 607,
+  "line": 597,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{2\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 618,
+  "line": 608,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n0814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.triple.md",
-  "line": 629,
+  "line": 619,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n30,814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 31,
+  "line": 21,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3 + 4"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 238,
+  "line": 228,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a + 0 = a} \\\\\n{0 + a = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 339,
+  "line": 329,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 349,
+  "line": 339,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+61}} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 397,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{43\\ } \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_}}{+69}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 411,
+  "line": 401,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{2}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 420,
+  "line": 410,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{\\overset{1}{4}3}} \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+69} \\\\\n{112}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 494,
+  "line": 484,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{1,683\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 507,
+  "line": 497,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,6\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 517,
+  "line": 507,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{62\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 527,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 537,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{{1,\\overset{1}{6}\\overset{1}{8}3}\\ } \\\\\n \\\\\n{\\qquad\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+\\ 479}} \\\\\n{2,162\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 571,
+  "line": 561,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n21,357 \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 585,
+  "line": 575,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,3\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n4\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 596,
+  "line": 586,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{21,\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n14\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 607,
+  "line": 597,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{2\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 618,
+  "line": 608,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n0814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.add.word.md",
-  "line": 629,
+  "line": 619,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}\\overset{1}{1,}\\overset{2}{3}\\overset{1}{5}7} \\\\\n861 \\\\\n \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_}}{+ 8,596}} \\\\\n30,814\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 267,
+  "line": 256,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{5 = 5.0} & & & {-2 = -2.0} \\\\\n{5 = 5.00} & & & {-2 = -2.00} \\\\\n{5 = 5.000} & & & {-2 = -2.000}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 275,
+  "line": 264,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\text{and so on…}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 285,
+  "line": 274,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.03 = \\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 291,
+  "line": 280,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "5.03 = 5\\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 491,
+  "line": 480,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.40 > 0.04"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 497,
+  "line": 486,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{a < b ‘a\\ \\text{is less than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the left of}\\ b\\ \\text{on the number line}} \\\\\n{a > b ‘a\\ \\text{is greater than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the right of}\\ b\\ \\text{on the number line}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.dec.intro.md",
-  "line": 528,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.31 = 0.310"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 38,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "12 \\div 4"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 71,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{a}{b}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 75,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 196,
+  "line": 185,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{72}{9}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 258,
+  "line": 247,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{15}{15} = 1\\ \\text{because}\\ 1 \\cdot 15 = 15"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 325,
+  "line": 314,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{1}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 471,
+  "line": 460,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\text{So}\\ 78 \\div 3 = 26."
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 477,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}6} \\\\\n{\\underset{\\text{\\_\\_\\_}}{\\times 3}} \\\\\n{78✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 692,
+  "line": 681,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{3\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 8} \\\\\n{24\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{+4} \\\\\n28\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.basic.md",
-  "line": 899,
+  "line": 888,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 38,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "12 \\div 4"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 71,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{a}{b}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 75,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 196,
+  "line": 185,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{72}{9}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 258,
+  "line": 247,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{15}{15} = 1\\ \\text{because}\\ 1 \\cdot 15 = 15"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 325,
+  "line": 314,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{1}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 471,
+  "line": 460,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\text{So}\\ 78 \\div 3 = 26."
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 477,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}6} \\\\\n{\\underset{\\text{\\_\\_\\_}}{\\times 3}} \\\\\n{78✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 692,
+  "line": 681,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{3\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 8} \\\\\n{24\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{+4} \\\\\n28\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.concept.md",
-  "line": 899,
+  "line": 888,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 38,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "12 \\div 4"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 71,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{a}{b}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 75,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 196,
+  "line": 185,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{72}{9}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 258,
+  "line": 247,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{15}{15} = 1\\ \\text{because}\\ 1 \\cdot 15 = 15"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 325,
+  "line": 314,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{1}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 471,
+  "line": 460,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\text{So}\\ 78 \\div 3 = 26."
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 477,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}6} \\\\\n{\\underset{\\text{\\_\\_\\_}}{\\times 3}} \\\\\n{78✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 692,
+  "line": 681,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{3\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 8} \\\\\n{24\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{+4} \\\\\n28\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.long.md",
-  "line": 899,
+  "line": 888,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 38,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "12 \\div 4"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 71,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{a}{b}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 75,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 196,
+  "line": 185,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{72}{9}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 258,
+  "line": 247,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{15}{15} = 1\\ \\text{because}\\ 1 \\cdot 15 = 15"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 325,
+  "line": 314,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{1}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 471,
+  "line": 460,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\text{So}\\ 78 \\div 3 = 26."
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 477,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}6} \\\\\n{\\underset{\\text{\\_\\_\\_}}{\\times 3}} \\\\\n{78✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 692,
+  "line": 681,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{3\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 8} \\\\\n{24\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{+4} \\\\\n28\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.remainder.md",
-  "line": 899,
+  "line": 888,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 38,
+  "line": 27,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "12 \\div 4"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 71,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{a}{b}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 75,
+  "line": 64,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 196,
+  "line": 185,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{72}{9}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 258,
+  "line": 247,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{15}{15} = 1\\ \\text{because}\\ 1 \\cdot 15 = 15"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 325,
+  "line": 314,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{1}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 471,
+  "line": 460,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\text{So}\\ 78 \\div 3 = 26."
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 477,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{1}{2}6} \\\\\n{\\underset{\\text{\\_\\_\\_}}{\\times 3}} \\\\\n{78✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 692,
+  "line": 681,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{3\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 8} \\\\\n{24\\ } \\\\\n\\underset{\\text{\\_\\_\\_}}{+4} \\\\\n28\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.div.word.md",
-  "line": 899,
+  "line": 888,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{4}"
@@ -30150,42 +30150,42 @@
  },
  {
   "file": "data/lessons/teaching/arith.factor.composite.md",
-  "line": 30,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 2 = 2} \\\\\n{2 \\cdot 2 = 4} \\\\\n{3 \\cdot 2 = 6} \\\\\n{4 \\cdot 2 = 8} \\\\\n{5 \\cdot 2 = 10} \\\\\n{6 \\cdot 2 = 12}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.composite.md",
-  "line": 43,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 3 = 3} \\\\\n{2 \\cdot 3 = 6} \\\\\n{3 \\cdot 3 = 9} \\\\\n{4 \\cdot 3 = 12} \\\\\n{5 \\cdot 3 = 15} \\\\\n{6 \\cdot 3 = 18}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.composite.md",
-  "line": 476,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "1,2,3,4,6,8,12,24"
  },
  {
   "file": "data/lessons/teaching/arith.factor.find.md",
-  "line": 30,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 2 = 2} \\\\\n{2 \\cdot 2 = 4} \\\\\n{3 \\cdot 2 = 6} \\\\\n{4 \\cdot 2 = 8} \\\\\n{5 \\cdot 2 = 10} \\\\\n{6 \\cdot 2 = 12}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.find.md",
-  "line": 43,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 3 = 3} \\\\\n{2 \\cdot 3 = 6} \\\\\n{3 \\cdot 3 = 9} \\\\\n{4 \\cdot 3 = 12} \\\\\n{5 \\cdot 3 = 15} \\\\\n{6 \\cdot 3 = 18}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.find.md",
-  "line": 476,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "1,2,3,4,6,8,12,24"
@@ -30227,672 +30227,672 @@
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 37,
+  "line": 26,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,7,11,13,17,19,23,29,31,37,41,43,47"
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 57,
+  "line": 46,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "2 \\cdot 2 \\cdot 3 \\cdot 3"
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 63,
+  "line": 52,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{2 \\cdot 2 \\cdot 3 \\cdot 3} \\\\\n \\\\\n{2^{2} \\cdot 3^{2}}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 186,
+  "line": 175,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{2 \\cdot 2 \\cdot 3 \\cdot 3} \\\\\n \\\\\n{2^{2} \\cdot 3^{2}}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 292,
+  "line": 281,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{10\\text{:}10,20,30,40,\\ 50,60,70,80,90,100,110,\\text{…}} \\\\\n{25\\text{:}25,\\ 50,75,\\ 100,125,\\text{…}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.lcm.md",
-  "line": 349,
+  "line": 338,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{12 = 2 \\cdot 2 \\cdot 3} \\\\\n{18 = 2 \\cdot  3 \\cdot 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime.md",
-  "line": 30,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 2 = 2} \\\\\n{2 \\cdot 2 = 4} \\\\\n{3 \\cdot 2 = 6} \\\\\n{4 \\cdot 2 = 8} \\\\\n{5 \\cdot 2 = 10} \\\\\n{6 \\cdot 2 = 12}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime.md",
-  "line": 43,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 3 = 3} \\\\\n{2 \\cdot 3 = 6} \\\\\n{3 \\cdot 3 = 9} \\\\\n{4 \\cdot 3 = 12} \\\\\n{5 \\cdot 3 = 15} \\\\\n{6 \\cdot 3 = 18}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime.md",
-  "line": 476,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "1,2,3,4,6,8,12,24"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime_fact.md",
-  "line": 30,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 2 = 2} \\\\\n{2 \\cdot 2 = 4} \\\\\n{3 \\cdot 2 = 6} \\\\\n{4 \\cdot 2 = 8} \\\\\n{5 \\cdot 2 = 10} \\\\\n{6 \\cdot 2 = 12}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime_fact.md",
-  "line": 43,
+  "line": 33,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{1 \\cdot 3 = 3} \\\\\n{2 \\cdot 3 = 6} \\\\\n{3 \\cdot 3 = 9} \\\\\n{4 \\cdot 3 = 12} \\\\\n{5 \\cdot 3 = 15} \\\\\n{6 \\cdot 3 = 18}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.factor.prime_fact.md",
-  "line": 476,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "1,2,3,4,6,8,12,24"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.2_5_10.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.concept.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.double.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.tables.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.triple.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 32,
+  "line": 23,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "8 + 8 + 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 38,
+  "line": 29,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "3\\  \\times \\ 8"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 165,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n{a \\cdot 0 = 0} \\\\\n{0 \\cdot a = 0}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 209,
+  "line": 200,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n{1 \\cdot a = a} \\\\\n{a \\cdot 1 = a}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 306,
+  "line": 297,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{27} \\\\\n\\underset{\\text{\\_\\_\\_}}{\\times 3}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 315,
+  "line": 306,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "3\\  \\times \\ 7 = 21"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 341,
+  "line": 332,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{15} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 352,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{0}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 365,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{2}{1}5} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 4} \\\\\n{60}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{286} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 407,
+  "line": 398,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{2\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{0\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 417,
+  "line": 408,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{30\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 427,
+  "line": 418,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{\\overset{4}{2}\\overset{3}{8}6} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times\\; 5} \\\\\n{1,430\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.mult.word.md",
-  "line": 561,
+  "line": 552,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_}}{\\times 201}\\;} \\\\\n{896} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_}}{17920}\\;} \\\\\n{180,096}\n\\end{array}"
@@ -31228,168 +31228,168 @@
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 28,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "7 - 3"
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 156,
+  "line": 147,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lcclccl}\n{\\quad{7 - 3 = 4}} & & & \\text{because} & & & {\\quad 4 + 3 = 7} \\\\\n{ 13 - 8 = 5} & & & \\text{because} & & & {\\quad 5 + 8 = 13} \\\\\n{43 - 26 = 17} & & & \\text{because} & & & {17 + 26 = 43}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 253,
+  "line": 244,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 263,
+  "line": 254,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61} \\\\\n{28\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 271,
+  "line": 262,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+61} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.borrow.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\quad\\overset{1}{1},\\overset{1}{6}\\overset{1}{8}3} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+ 479}} \\\\\n{ 2,\\; 162✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 28,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "7 - 3"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 156,
+  "line": 147,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lcclccl}\n{\\quad{7 - 3 = 4}} & & & \\text{because} & & & {\\quad 4 + 3 = 7} \\\\\n{ 13 - 8 = 5} & & & \\text{because} & & & {\\quad 5 + 8 = 13} \\\\\n{43 - 26 = 17} & & & \\text{because} & & & {17 + 26 = 43}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 253,
+  "line": 244,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 263,
+  "line": 254,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61} \\\\\n{28\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 271,
+  "line": 262,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+61} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.double.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\quad\\overset{1}{1},\\overset{1}{6}\\overset{1}{8}3} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+ 479}} \\\\\n{ 2,\\; 162✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 28,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "7 - 3"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 156,
+  "line": 147,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lcclccl}\n{\\quad{7 - 3 = 4}} & & & \\text{because} & & & {\\quad 4 + 3 = 7} \\\\\n{ 13 - 8 = 5} & & & \\text{because} & & & {\\quad 5 + 8 = 13} \\\\\n{43 - 26 = 17} & & & \\text{because} & & & {17 + 26 = 43}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 253,
+  "line": 244,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 263,
+  "line": 254,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61} \\\\\n{28\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 271,
+  "line": 262,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+61} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.single.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\quad\\overset{1}{1},\\overset{1}{6}\\overset{1}{8}3} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+ 479}} \\\\\n{ 2,\\; 162✓}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 28,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "7 - 3"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 156,
+  "line": 147,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lcclccl}\n{\\quad{7 - 3 = 4}} & & & \\text{because} & & & {\\quad 4 + 3 = 7} \\\\\n{ 13 - 8 = 5} & & & \\text{because} & & & {\\quad 5 + 8 = 13} \\\\\n{43 - 26 = 17} & & & \\text{because} & & & {17 + 26 = 43}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 253,
+  "line": 244,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 263,
+  "line": 254,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{89\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{-61} \\\\\n{28\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 271,
+  "line": 262,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n{28\\ } \\\\\n\\underset{\\text{\\_\\_\\_\\_}}{+61} \\\\\n{89\\ }\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/arith.sub.word.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\quad\\overset{1}{1},\\overset{1}{6}\\overset{1}{8}3} \\\\\n{\\underset{\\text{\\_\\_\\_\\_\\_\\_}}{+ 479}} \\\\\n{ 2,\\; 162✓}\n\\end{array}"
@@ -33958,1659 +33958,1659 @@
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 267,
+  "line": 256,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{5 = 5.0} & & & {-2 = -2.0} \\\\\n{5 = 5.00} & & & {-2 = -2.00} \\\\\n{5 = 5.000} & & & {-2 = -2.000}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 275,
+  "line": 264,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\text{and so on…}"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 285,
+  "line": 274,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.03 = \\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 291,
+  "line": 280,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "5.03 = 5\\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 491,
+  "line": 480,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.40 > 0.04"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 497,
+  "line": 486,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{a < b ‘a\\ \\text{is less than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the left of}\\ b\\ \\text{on the number line}} \\\\\n{a > b ‘a\\ \\text{is greater than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the right of}\\ b\\ \\text{on the number line}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.basics.compare.md",
-  "line": 528,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.31 = 0.310"
  },
  {
   "file": "data/lessons/teaching/dec.convert.from_frac.md",
-  "line": 108,
+  "line": 97,
   "verdict": "SKIP",
   "reason": "unknown macro: \\overset",
   "latex": "\\frac{43}{22} = 1.9\\overset{\\text{—}}{54}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.from_frac.md",
-  "line": 313,
+  "line": 302,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{r\\ \\text{is the length of the radius.}} \\\\\n{d\\ \\text{is the length of the diameter.}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.from_frac.md",
-  "line": 320,
+  "line": 309,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{\\text{The circumference is}\\ 2\\text{π}\\textit{r}.} & & & {C = 2\\text{π}\\textit{r}} \\\\\n{\\text{The area is}\\ \\text{π}\\textit{r}^{2}.} & & & {A = \\ \\text{π}\\textit{r}^{2}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.from_frac.md",
-  "line": 331,
+  "line": 320,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{A = \\ \\text{π}\\textit{r}^{2}} \\\\\n{A = \\ \\text{π}\\text{(}10^{2}\\text{)}} \\\\\n{A = \\pi \\cdot 100}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.from_frac.md",
-  "line": 344,
+  "line": 333,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{ccl}\nA & = & {100\\text{π}} \\\\\n & & \\\\\n & \\approx & {100 \\cdot 3.14} \\\\\n & \\approx & {314\\ \\text{square inches}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.to_frac.md",
-  "line": 108,
+  "line": 97,
   "verdict": "SKIP",
   "reason": "unknown macro: \\overset",
   "latex": "\\frac{43}{22} = 1.9\\overset{\\text{—}}{54}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.to_frac.md",
-  "line": 313,
+  "line": 302,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{r\\ \\text{is the length of the radius.}} \\\\\n{d\\ \\text{is the length of the diameter.}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.to_frac.md",
-  "line": 320,
+  "line": 309,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{\\text{The circumference is}\\ 2\\text{π}\\textit{r}.} & & & {C = 2\\text{π}\\textit{r}} \\\\\n{\\text{The area is}\\ \\text{π}\\textit{r}^{2}.} & & & {A = \\ \\text{π}\\textit{r}^{2}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.to_frac.md",
-  "line": 331,
+  "line": 320,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{A = \\ \\text{π}\\textit{r}^{2}} \\\\\n{A = \\ \\text{π}\\text{(}10^{2}\\text{)}} \\\\\n{A = \\pi \\cdot 100}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.convert.to_frac.md",
-  "line": 344,
+  "line": 333,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{ccl}\nA & = & {100\\text{π}} \\\\\n & & \\\\\n & \\approx & {100 \\cdot 3.14} \\\\\n & \\approx & {314\\ \\text{square inches}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.add.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 4 = 0.2"
  },
  {
   "file": "data/lessons/teaching/dec.ops.add.md",
-  "line": 457,
+  "line": 446,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 0.2 = 4"
  },
  {
   "file": "data/lessons/teaching/dec.ops.add.md",
-  "line": 463,
+  "line": 452,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{0.8}{0.2} \\\\\n \\\\\n\\frac{(0.8)10}{(0.2)10} \\\\\n \\\\\n\\frac{8}{2} \\\\\n \\\\\n4\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.div.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 4 = 0.2"
  },
  {
   "file": "data/lessons/teaching/dec.ops.div.md",
-  "line": 457,
+  "line": 446,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 0.2 = 4"
  },
  {
   "file": "data/lessons/teaching/dec.ops.div.md",
-  "line": 463,
+  "line": 452,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{0.8}{0.2} \\\\\n \\\\\n\\frac{(0.8)10}{(0.2)10} \\\\\n \\\\\n\\frac{8}{2} \\\\\n \\\\\n4\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.mult.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 4 = 0.2"
  },
  {
   "file": "data/lessons/teaching/dec.ops.mult.md",
-  "line": 457,
+  "line": 446,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 0.2 = 4"
  },
  {
   "file": "data/lessons/teaching/dec.ops.mult.md",
-  "line": 463,
+  "line": 452,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{0.8}{0.2} \\\\\n \\\\\n\\frac{(0.8)10}{(0.2)10} \\\\\n \\\\\n\\frac{8}{2} \\\\\n \\\\\n4\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 267,
+  "line": 256,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{5 = 5.0} & & & {-2 = -2.0} \\\\\n{5 = 5.00} & & & {-2 = -2.00} \\\\\n{5 = 5.000} & & & {-2 = -2.000}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 275,
+  "line": 264,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\text{and so on…}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 285,
+  "line": 274,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.03 = \\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 291,
+  "line": 280,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "5.03 = 5\\frac{3}{100}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 491,
+  "line": 480,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.40 > 0.04"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 497,
+  "line": 486,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{a < b ‘a\\ \\text{is less than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the left of}\\ b\\ \\text{on the number line}} \\\\\n{a > b ‘a\\ \\text{is greater than}\\ b’\\ \\text{when}\\ a\\ \\text{is to the right of}\\ b\\ \\text{on the number line}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/dec.ops.round.md",
-  "line": 528,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.31 = 0.310"
  },
  {
   "file": "data/lessons/teaching/dec.ops.sub.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 4 = 0.2"
  },
  {
   "file": "data/lessons/teaching/dec.ops.sub.md",
-  "line": 457,
+  "line": 446,
   "verdict": "SKIP",
   "reason": "equation to solve",
   "latex": "0.8 \\div 0.2 = 4"
  },
  {
   "file": "data/lessons/teaching/dec.ops.sub.md",
-  "line": 463,
+  "line": 452,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{0.8}{0.2} \\\\\n \\\\\n\\frac{(0.8)10}{(0.2)10} \\\\\n \\\\\n\\frac{8}{2} \\\\\n \\\\\n4\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 123,
+  "line": 114,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "{\\frac{1}{4} = \\frac{3}{12}}\\text{and}{\\frac{1}{6} = \\frac{2}{12}.}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 231,
+  "line": 222,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} + \\frac{1}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 244,
+  "line": 235,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{6} + \\frac{2}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 248,
+  "line": 239,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 277,
+  "line": 268,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 290,
+  "line": 281,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2}{4} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 294,
+  "line": 285,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2\\  - \\ (-1)}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 298,
+  "line": 289,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 327,
+  "line": 318,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{12} + \\frac{5}{18}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 340,
+  "line": 331,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{21}{36} + \\frac{10}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 344,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{31}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 381,
+  "line": 372,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{15} - \\frac{19}{24}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{56}{120} - \\frac{95}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 400,
+  "line": 391,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{39}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 404,
+  "line": 395,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13 \\cdot 3}{40 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 408,
+  "line": 399,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 435,
+  "line": 426,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{11}{30} + \\frac{23}{42}}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 448,
+  "line": 439,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{77}{210} + \\frac{115}{210}}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 452,
+  "line": 443,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{38}{210}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 456,
+  "line": 447,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19 \\cdot 2}{105 \\cdot 2}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 460,
+  "line": 451,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{105}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 491,
+  "line": 482,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{5} + \\frac{x}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 504,
+  "line": 495,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24}{40} + \\frac{5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24\\  + \\ 5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 576,
+  "line": 567,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{4} + \\frac{1}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 589,
+  "line": 580,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{3}{12} + \\frac{2}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 593,
+  "line": 584,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.add.diff.md",
-  "line": 670,
+  "line": 661,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{\\ \\frac{3}{4}\\ }{\\ \\frac{5}{8}\\ } = \\frac{3}{4} \\div \\frac{5}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.add.same.md",
-  "line": 31,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{1}{4} & & \\frac{2}{4} & & \\frac{3}{4} \\\\\n\\text{one quarter} & + & \\text{two quarters} & = & \\text{three quarters}\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 123,
+  "line": 114,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "{\\frac{1}{4} = \\frac{3}{12}}\\text{and}{\\frac{1}{6} = \\frac{2}{12}.}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 231,
+  "line": 222,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} + \\frac{1}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 244,
+  "line": 235,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{6} + \\frac{2}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 248,
+  "line": 239,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 277,
+  "line": 268,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 290,
+  "line": 281,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2}{4} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 294,
+  "line": 285,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2\\  - \\ (-1)}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 298,
+  "line": 289,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 327,
+  "line": 318,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{12} + \\frac{5}{18}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 340,
+  "line": 331,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{21}{36} + \\frac{10}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 344,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{31}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 381,
+  "line": 372,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{15} - \\frac{19}{24}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{56}{120} - \\frac{95}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 400,
+  "line": 391,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{39}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 404,
+  "line": 395,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13 \\cdot 3}{40 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 408,
+  "line": 399,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 435,
+  "line": 426,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{11}{30} + \\frac{23}{42}}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 448,
+  "line": 439,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{77}{210} + \\frac{115}{210}}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 452,
+  "line": 443,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{38}{210}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 456,
+  "line": 447,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19 \\cdot 2}{105 \\cdot 2}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 460,
+  "line": 451,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{105}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 491,
+  "line": 482,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{5} + \\frac{x}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 504,
+  "line": 495,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24}{40} + \\frac{5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24\\  + \\ 5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 576,
+  "line": 567,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{4} + \\frac{1}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 589,
+  "line": 580,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{3}{12} + \\frac{2}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 593,
+  "line": 584,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.add.word.md",
-  "line": 670,
+  "line": 661,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{\\ \\frac{3}{4}\\ }{\\ \\frac{5}{8}\\ } = \\frac{3}{4} \\div \\frac{5}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.concept.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.basics.concept.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.concept.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.concept.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.equivalent.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.basics.equivalent.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.equivalent.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.equivalent.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.number_line.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.basics.number_line.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.number_line.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.number_line.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.parts.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.basics.parts.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.parts.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.basics.parts.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 156,
+  "line": 144,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{210}{385}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 169,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2 \\cdot 3}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 173,
+  "line": 161,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{6}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 338,
+  "line": 326,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 342,
+  "line": 330,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 355,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{2 \\cdot 4}{3 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.div.whole.md",
-  "line": 359,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{8}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 36,
+  "line": 25,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n \\\\\n \\\\\n{ 1\\frac{1}{4}} \\\\\n{+ 2\\frac{1}{4}} \\\\\n\\text{\\_\\_\\_\\_\\_\\_\\_\\_} \\\\\n \\\\\n \\\\\n{ 3\\frac{2}{4} = 3\\frac{1}{2}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 52,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "1\\frac{1}{4} + 2\\frac{1}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 176,
+  "line": 165,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "9\\frac{5}{9} + 5\\frac{7}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 181,
+  "line": 170,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{9\\frac{5}{9}} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{+\\ 5\\frac{7}{9}} \\\\\n{14\\frac{12}{9}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 189,
+  "line": 178,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 190,
+  "line": 179,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "14 + 1\\frac{3}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 194,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "15\\frac{3}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 198,
+  "line": 187,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "15\\frac{1}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{4}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 351,
+  "line": 340,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 352,
+  "line": 341,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{5}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{4}{5}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{3}{5}:\\left( \\frac{5}{5} + \\frac{3}{5} = \\frac{8}{5} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 528,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{5}{11} - 4\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 532,
+  "line": 521,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{5 \\cdot 4}{11 \\cdot 4} - 4\\frac{3 \\cdot 11}{4 \\cdot 11}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 534,
+  "line": 523,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{20}{44} - 4\\frac{33}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 538,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{152}{44} - \\frac{209}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 542,
+  "line": 531,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{57}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.add.md",
-  "line": 546,
+  "line": 535,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "-1\\frac{13}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.convert.md",
-  "line": 145,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\text{The quotient}\\ \\text{of}\\ 3x\\ \\text{and}\\ 8\\text{.}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.convert.md",
-  "line": 167,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{m - n}{p}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.convert.md",
-  "line": 185,
+  "line": 174,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{\\ \\frac{6}{7}\\ }{\\ 3\\ }\\frac{\\ \\frac{3}{4}\\ }{\\ \\frac{5}{8}\\ }\\frac{\\ \\frac{x}{2}\\ }{\\ \\frac{5}{6}\\ }"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.convert.md",
-  "line": 298,
+  "line": 287,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "\\frac{-1}{-3} = \\frac{1}{3}\\frac{\\text{negative}}{\\text{negative}} = \\text{positive}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.convert.md",
-  "line": 314,
+  "line": 303,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "\\ \\frac{-7}{-8},\\frac{-7}{8},\\frac{7}{8}, - \\frac{7}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.mult.md",
-  "line": 145,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\text{The quotient}\\ \\text{of}\\ 3x\\ \\text{and}\\ 8\\text{.}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.mult.md",
-  "line": 167,
+  "line": 156,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{m - n}{p}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.mult.md",
-  "line": 185,
+  "line": 174,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{\\ \\frac{6}{7}\\ }{\\ 3\\ }\\frac{\\ \\frac{3}{4}\\ }{\\ \\frac{5}{8}\\ }\\frac{\\ \\frac{x}{2}\\ }{\\ \\frac{5}{6}\\ }"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.mult.md",
-  "line": 298,
+  "line": 287,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "\\frac{-1}{-3} = \\frac{1}{3}\\frac{\\text{negative}}{\\text{negative}} = \\text{positive}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.mult.md",
-  "line": 314,
+  "line": 303,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "\\ \\frac{-7}{-8},\\frac{-7}{8},\\frac{7}{8}, - \\frac{7}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 36,
+  "line": 25,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n \\\\\n \\\\\n{ 1\\frac{1}{4}} \\\\\n{+ 2\\frac{1}{4}} \\\\\n\\text{\\_\\_\\_\\_\\_\\_\\_\\_} \\\\\n \\\\\n \\\\\n{ 3\\frac{2}{4} = 3\\frac{1}{2}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 52,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "1\\frac{1}{4} + 2\\frac{1}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 176,
+  "line": 165,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "9\\frac{5}{9} + 5\\frac{7}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 181,
+  "line": 170,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{r}\n \\\\\n{9\\frac{5}{9}} \\\\\n\\underset{\\text{\\_\\_\\_\\_\\_}}{+\\ 5\\frac{7}{9}} \\\\\n{14\\frac{12}{9}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 189,
+  "line": 178,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{12}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 190,
+  "line": 179,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "14 + 1\\frac{3}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 194,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "15\\frac{3}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 198,
+  "line": 187,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "15\\frac{1}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{4}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 346,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 351,
+  "line": 340,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 352,
+  "line": 341,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{5}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{4}{5}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 408,
+  "line": 397,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{3}{5}:\\left( \\frac{5}{5} + \\frac{3}{5} = \\frac{8}{5} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 528,
+  "line": 517,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{5}{11} - 4\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 532,
+  "line": 521,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{5 \\cdot 4}{11 \\cdot 4} - 4\\frac{3 \\cdot 11}{4 \\cdot 11}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 534,
+  "line": 523,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "3\\frac{20}{44} - 4\\frac{33}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 538,
+  "line": 527,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{152}{44} - \\frac{209}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 542,
+  "line": 531,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{57}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mixed.sub.md",
-  "line": 546,
+  "line": 535,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "-1\\frac{13}{44}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 156,
+  "line": 144,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{210}{385}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 169,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2 \\cdot 3}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 173,
+  "line": 161,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{6}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 338,
+  "line": 326,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 342,
+  "line": 330,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 355,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{2 \\cdot 4}{3 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.mult.whole.md",
-  "line": 359,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{8}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.benchmark.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.ops.benchmark.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.benchmark.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.benchmark.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.compare.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.ops.compare.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.compare.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.compare.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 156,
+  "line": 144,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{210}{385}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 169,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2 \\cdot 3}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 173,
+  "line": 161,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{6}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 338,
+  "line": 326,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 342,
+  "line": 330,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 355,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{2 \\cdot 4}{3 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.div.md",
-  "line": 359,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{8}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 156,
+  "line": 144,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{210}{385}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 169,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2 \\cdot 3}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 173,
+  "line": 161,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{6}{11}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 338,
+  "line": 326,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 342,
+  "line": 330,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{14}{15} \\cdot \\frac{20}{21}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 355,
+  "line": 343,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{2 \\cdot 4}{3 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.mult.md",
-  "line": 359,
+  "line": 347,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{8}{9}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.simplify.md",
-  "line": 126,
+  "line": 117,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{a}{a} = 1\\left( {a \\neq 0} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.ops.simplify.md",
-  "line": 475,
+  "line": 466,
   "verdict": "SKIP",
   "reason": "undetermined coefficients",
   "latex": "\\frac{a}{b} = \\frac{a \\cdot c}{b \\cdot c}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.simplify.md",
-  "line": 539,
+  "line": 530,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{7}{4} = 1\\frac{3}{4},\\quad\\frac{9}{2} = 4\\frac{1}{2},\\quad\\frac{8}{3} = 2\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.simplify.md",
-  "line": 559,
+  "line": 550,
   "verdict": "SKIP",
   "reason": "mixed-number/binomial",
   "latex": "\\frac{4}{3} = 1\\frac{1}{3},\\quad\\frac{5}{3} = 1\\frac{2}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.to_decimal.md",
-  "line": 108,
+  "line": 97,
   "verdict": "SKIP",
   "reason": "unknown macro: \\overset",
   "latex": "\\frac{43}{22} = 1.9\\overset{\\text{—}}{54}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.to_decimal.md",
-  "line": 313,
+  "line": 302,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n{r\\ \\text{is the length of the radius.}} \\\\\n{d\\ \\text{is the length of the diameter.}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.to_decimal.md",
-  "line": 320,
+  "line": 309,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{lccl}\n{\\text{The circumference is}\\ 2\\text{π}\\textit{r}.} & & & {C = 2\\text{π}\\textit{r}} \\\\\n{\\text{The area is}\\ \\text{π}\\textit{r}^{2}.} & & & {A = \\ \\text{π}\\textit{r}^{2}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.to_decimal.md",
-  "line": 331,
+  "line": 320,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{A = \\ \\text{π}\\textit{r}^{2}} \\\\\n{A = \\ \\text{π}\\text{(}10^{2}\\text{)}} \\\\\n{A = \\pi \\cdot 100}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.ops.to_decimal.md",
-  "line": 344,
+  "line": 333,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{ccl}\nA & = & {100\\text{π}} \\\\\n & & \\\\\n & \\approx & {100 \\cdot 3.14} \\\\\n & \\approx & {314\\ \\text{square inches}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 123,
+  "line": 114,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "{\\frac{1}{4} = \\frac{3}{12}}\\text{and}{\\frac{1}{6} = \\frac{2}{12}.}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 231,
+  "line": 222,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} + \\frac{1}{3}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 244,
+  "line": 235,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{6} + \\frac{2}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 248,
+  "line": 239,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 277,
+  "line": 268,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{1}{2} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 290,
+  "line": 281,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2}{4} - \\left( - \\frac{1}{4} \\right)"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 294,
+  "line": 285,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2\\  - \\ (-1)}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 298,
+  "line": 289,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{4}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 327,
+  "line": 318,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{12} + \\frac{5}{18}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 340,
+  "line": 331,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{21}{36} + \\frac{10}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 344,
+  "line": 335,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{31}{36}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 381,
+  "line": 372,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{7}{15} - \\frac{19}{24}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 396,
+  "line": 387,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{56}{120} - \\frac{95}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 400,
+  "line": 391,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{39}{120}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 404,
+  "line": 395,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13 \\cdot 3}{40 \\cdot 3}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 408,
+  "line": 399,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{13}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 435,
+  "line": 426,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{11}{30} + \\frac{23}{42}}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 448,
+  "line": 439,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- {\\frac{77}{210} + \\frac{115}{210}}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 452,
+  "line": 443,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{38}{210}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 456,
+  "line": 447,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19 \\cdot 2}{105 \\cdot 2}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 460,
+  "line": 451,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{19}{105}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 491,
+  "line": 482,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{3}{5} + \\frac{x}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 504,
+  "line": 495,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24}{40} + \\frac{5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 508,
+  "line": 499,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{24\\  + \\ 5x}{40}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 576,
+  "line": 567,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{4} + \\frac{1}{6}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 589,
+  "line": 580,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{3}{12} + \\frac{2}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 593,
+  "line": 584,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "- \\frac{1}{12}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.diff.md",
-  "line": 670,
+  "line": 661,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\frac{\\ \\frac{3}{4}\\ }{\\ \\frac{5}{8}\\ } = \\frac{3}{4} \\div \\frac{5}{8}"
  },
  {
   "file": "data/lessons/teaching/frac.sub.same.md",
-  "line": 31,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n\\frac{1}{4} & & \\frac{2}{4} & & \\frac{3}{4} \\\\\n\\text{one quarter} & + & \\text{two quarters} & = & \\text{three quarters}\n\\end{matrix}"
@@ -35960,56 +35960,56 @@
  },
  {
   "file": "data/lessons/teaching/pct.ops.discount.md",
-  "line": 50,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{Sales Tax} & = & {\\text{Tax Rate} \\cdot \\text{Purchase Price}} \\\\\n\\text{Total Cost} & = & {\\text{Purchase Price} + \\text{Sales Tax}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.discount.md",
-  "line": 166,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{commission} = \\text{rate of commission} \\cdot \\text{total sales}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.discount.md",
-  "line": 272,
+  "line": 263,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{amount of discount} & = & {\\text{discount rate} \\cdot \\text{original price}} \\\\\n\\text{sale price} & = & {\\text{original price} - \\text{discount}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.discount.md",
-  "line": 411,
+  "line": 402,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{amount of mark-up} & = & {\\text{mark-up rate} \\cdot \\text{wholesale price}} \\\\\n\\text{list price} & = & {\\text{wholesale price} + \\text{mark up}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.tax_tip.md",
-  "line": 50,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{Sales Tax} & = & {\\text{Tax Rate} \\cdot \\text{Purchase Price}} \\\\\n\\text{Total Cost} & = & {\\text{Purchase Price} + \\text{Sales Tax}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.tax_tip.md",
-  "line": 166,
+  "line": 157,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{commission} = \\text{rate of commission} \\cdot \\text{total sales}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.tax_tip.md",
-  "line": 272,
+  "line": 263,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{amount of discount} & = & {\\text{discount rate} \\cdot \\text{original price}} \\\\\n\\text{sale price} & = & {\\text{original price} - \\text{discount}}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/pct.ops.tax_tip.md",
-  "line": 411,
+  "line": 402,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{rcl}\n\\text{amount of mark-up} & = & {\\text{mark-up rate} \\cdot \\text{wholesale price}} \\\\\n\\text{list price} & = & {\\text{wholesale price} + \\text{mark up}}\n\\end{array}"
@@ -36954,161 +36954,161 @@
  },
  {
   "file": "data/lessons/teaching/ratio.basics.concept.md",
-  "line": 114,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2.7}{0.54}"
  },
  {
   "file": "data/lessons/teaching/ratio.basics.concept.md",
-  "line": 118,
+  "line": 107,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{270}{54}"
  },
  {
   "file": "data/lessons/teaching/ratio.basics.concept.md",
-  "line": 122,
+  "line": 111,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{1}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.proportion.md",
-  "line": 355,
+  "line": 344,
   "verdict": "SKIP",
   "reason": "dependent variable",
   "latex": "\\frac{\\text{amount}}{\\text{base}} = \\frac{\\text{percent}}{100}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.proportion.md",
-  "line": 367,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "dependent variable",
   "latex": "\\frac{\\text{amount}}{\\text{base}} = \\frac{\\text{percent}}{100}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.proportion.md",
-  "line": 373,
+  "line": 362,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\textit{The amount is to the base as the percent is to one hundred.}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.proportion.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\textit{The amount out of the base is the same as the percent out of one hundred.}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.rate.md",
-  "line": 114,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2.7}{0.54}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.rate.md",
-  "line": 118,
+  "line": 107,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{270}{54}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.rate.md",
-  "line": 122,
+  "line": 111,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{1}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.scale.md",
-  "line": 355,
+  "line": 344,
   "verdict": "SKIP",
   "reason": "dependent variable",
   "latex": "\\frac{\\text{amount}}{\\text{base}} = \\frac{\\text{percent}}{100}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.scale.md",
-  "line": 367,
+  "line": 356,
   "verdict": "SKIP",
   "reason": "dependent variable",
   "latex": "\\frac{\\text{amount}}{\\text{base}} = \\frac{\\text{percent}}{100}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.scale.md",
-  "line": 373,
+  "line": 362,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\textit{The amount is to the base as the percent is to one hundred.}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.scale.md",
-  "line": 379,
+  "line": 368,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\textit{The amount out of the base is the same as the percent out of one hundred.}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.simplify.md",
-  "line": 114,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2.7}{0.54}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.simplify.md",
-  "line": 118,
+  "line": 107,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{270}{54}"
  },
  {
   "file": "data/lessons/teaching/ratio.ops.simplify.md",
-  "line": 122,
+  "line": 111,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{1}"
  },
  {
   "file": "data/lessons/teaching/ratio.scale.md",
-  "line": 114,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2.7}{0.54}"
  },
  {
   "file": "data/lessons/teaching/ratio.scale.md",
-  "line": 118,
+  "line": 107,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{270}{54}"
  },
  {
   "file": "data/lessons/teaching/ratio.scale.md",
-  "line": 122,
+  "line": 111,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{1}"
  },
  {
   "file": "data/lessons/teaching/ratio.simplify.md",
-  "line": 114,
+  "line": 103,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{2.7}{0.54}"
  },
  {
   "file": "data/lessons/teaching/ratio.simplify.md",
-  "line": 118,
+  "line": 107,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{270}{54}"
  },
  {
   "file": "data/lessons/teaching/ratio.simplify.md",
-  "line": 122,
+  "line": 111,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{5}{1}"
@@ -37353,210 +37353,210 @@
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 33,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n\\frac{85 + 88 + 94}{3} \\\\\n\\frac{267}{3} \\\\\n89\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 48,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{mean} = \\frac{\\text{sum of values in data set}}{n}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 161,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "59,60,62,65,68,70"
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 244,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,8,8,8,15"
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 317,
+  "line": 304,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{Probability} = \\frac{\\text{number of favorable outcomes}}{\\text{total number of outcomes}}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.basic.md",
-  "line": 323,
+  "line": 310,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\text{Probability of choosing a banana} = \\frac{3}{5}} \\\\\n{\\text{Probability of choosing a banana} = 0.6}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 33,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n\\frac{85 + 88 + 94}{3} \\\\\n\\frac{267}{3} \\\\\n89\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 48,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{mean} = \\frac{\\text{sum of values in data set}}{n}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 161,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "59,60,62,65,68,70"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 244,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,8,8,8,15"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 317,
+  "line": 304,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{Probability} = \\frac{\\text{number of favorable outcomes}}{\\text{total number of outcomes}}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.complement.md",
-  "line": 323,
+  "line": 310,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\text{Probability of choosing a banana} = \\frac{3}{5}} \\\\\n{\\text{Probability of choosing a banana} = 0.6}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 33,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n\\frac{85 + 88 + 94}{3} \\\\\n\\frac{267}{3} \\\\\n89\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 48,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{mean} = \\frac{\\text{sum of values in data set}}{n}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 161,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "59,60,62,65,68,70"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 244,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,8,8,8,15"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 317,
+  "line": 304,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{Probability} = \\frac{\\text{number of favorable outcomes}}{\\text{total number of outcomes}}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.compound.md",
-  "line": 323,
+  "line": 310,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\text{Probability of choosing a banana} = \\frac{3}{5}} \\\\\n{\\text{Probability of choosing a banana} = 0.6}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 33,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n\\frac{85 + 88 + 94}{3} \\\\\n\\frac{267}{3} \\\\\n89\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 48,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{mean} = \\frac{\\text{sum of values in data set}}{n}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 161,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "59,60,62,65,68,70"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 244,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,8,8,8,15"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 317,
+  "line": 304,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{Probability} = \\frac{\\text{number of favorable outcomes}}{\\text{total number of outcomes}}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.counting.md",
-  "line": 323,
+  "line": 310,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\text{Probability of choosing a banana} = \\frac{3}{5}} \\\\\n{\\text{Probability of choosing a banana} = 0.6}\n\\end{array}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 33,
+  "line": 20,
   "verdict": "SKIP",
   "reason": "environment: matrix",
   "latex": "\\begin{matrix}\n \\\\\n\\frac{85 + 88 + 94}{3} \\\\\n\\frac{267}{3} \\\\\n89\n\\end{matrix}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 48,
+  "line": 35,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{mean} = \\frac{\\text{sum of values in data set}}{n}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 161,
+  "line": 148,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "59,60,62,65,68,70"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 244,
+  "line": 231,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
   "latex": "2,3,5,8,8,8,15"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 317,
+  "line": 304,
   "verdict": "SKIP",
   "reason": "empty side",
   "latex": "\\text{Probability} = \\frac{\\text{number of favorable outcomes}}{\\text{total number of outcomes}}"
  },
  {
   "file": "data/lessons/teaching/stat.prob.sample_space.md",
-  "line": 323,
+  "line": 310,
   "verdict": "SKIP",
   "reason": "environment: array",
   "latex": "\\begin{array}{l}\n \\\\\n{\\text{Probability of choosing a banana} = \\frac{3}{5}} \\\\\n{\\text{Probability of choosing a banana} = 0.6}\n\\end{array}"
