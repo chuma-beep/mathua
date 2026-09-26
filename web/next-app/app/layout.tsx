@@ -71,6 +71,16 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="dark light" />
+        {/* KaTeX builds some glyphs (≠, ≤, overlays) from private-use codepoints
+            that render as tofu until KaTeX_Main arrives. katex.min.css uses
+            font-display:block with no preload, so slow networks show broken
+            math. Preload the Main faces up front. Filenames are content hashes
+            from the katex package — refresh these hrefs when katex upgrades
+            (a stale href 404s and degrades gracefully to status quo). */}
+        <link rel="preload" href="/_next/static/media/KaTeX_Main-Regular.0462f03b.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/KaTeX_Main-Bold.c3fb5ac2.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/KaTeX_Main-Italic.8916142b.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/_next/static/media/KaTeX_Main-BoldItalic.6f2bb1df.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body className={`${jetbrainsMono.variable} ${spaceGrotesk.variable}`}>
         <Script
