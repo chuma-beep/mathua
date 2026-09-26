@@ -88,7 +88,7 @@
     "name": "Linear Algebra",
     "grade": "college",
     "description": "Vectors, matrices, determinants, systems, eigenvalues, spans and bases, and linear transformations.",
-    "targets": ["linalg.matrix.mult", "linalg.det.3x3", "linalg.eigen.compute", "linalg.vec.span", "linalg.vec.basis", "linalg.lintrans.concept"]
+    "targets": ["linalg.matrix.mult", "linalg.det.3x3", "linalg.eigen.compute", "linalg.vec.span", "linalg.vec.basis", "linalg.lintrans.concept", "linalg.subspace"]
   },
   {
     "id": "discrete",
@@ -137,7 +137,7 @@
     "name": "Abstract Algebra II",
     "grade": "college",
     "description": "Normal subgroups, Lagrange, quotient groups, polynomial rings, and field extensions.",
-    "targets": ["abstract.group.normal", "abstract.group.lagrange", "abstract.group.quotient_group", "abstract.rings.polynomial", "abstract.group.action", "abstract.group.sylow", "abstract.rings.ufd", "abstract.field.extension", "abstract.structures.galois"]
+    "targets": ["abstract.group.normal", "abstract.group.lagrange", "abstract.group.quotient_group", "abstract.rings.polynomial", "abstract.group.action", "abstract.group.sylow", "abstract.rings.ufd", "abstract.field.extension", "abstract.structures.galois", "abstract.group.symmetric", "abstract.group.dihedral"]
   },
   {
     "id": "topo",

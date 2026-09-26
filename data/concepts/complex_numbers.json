@@ -129,6 +129,20 @@
     }
   },
   {
+    "id": "complex.adv.logarithm",
+    "label": "Complex logarithm and branches",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "complex.adv.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
     "id": "complex.adv.inequalities",
     "label": "Fundamental inequalities for complex numbers",
     "domain": "complex_numbers",
