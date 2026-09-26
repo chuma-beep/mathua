@@ -308,6 +308,79 @@ def main():
         errors.append(f"NEW cliche-KP shards ({len(fresh)}), fix content, do not extend the baseline:\n  "
                       + "\n  ".join(fresh[:30]))
 
+    # 13. Diagram metadata coverage (data/diagrams/meta.json): every mapped
+    # asset needs an entry with a valid source and a non-empty title; SVG
+    # algebrica assets need the upstream link (CC BY-NC attribution record).
+    # 14. SVG-first for local mappings: hand-authored assets (anything outside
+    # /diagrams/algebrica/) must be .svg; vendored algebrica tracks upstream.
+    engine_src = os.path.join(ROOT, "internal", "engine", "engine.go")
+    mapped_assets = []
+    if os.path.exists(engine_src):
+        with open(engine_src) as f:
+            eng = f.read()
+        start = eng.find("var conceptDiagrams = map[string]string{")
+        if start >= 0:
+            block = eng[start:eng.find("\n}", start)]
+            mapped_assets = sorted(set(
+                m.group(2) for m in re.finditer(r'"([^"]+)":\s*"((?:/diagrams/)[^"]+)"', block)))
+    meta_path = os.path.join(ROOT, "data", "diagrams", "meta.json")
+    meta = {}
+    if os.path.exists(meta_path):
+        with open(meta_path, encoding="utf-8") as f:
+            meta = json.load(f)
+    # Grandfathered: algebrica-dir SVGs with no same-stem upstream twin
+    # (local renames or older releases). New algebrica SVGs must link.
+    UNLINKED_GRANDFATHERED = frozenset({
+        "/diagrams/algebrica/completing-square.svg",
+        "/diagrams/algebrica/complex-plane.svg",
+        "/diagrams/algebrica/hyperbolic-functions.svg",
+        "/diagrams/algebrica/inverse-trig-graphs.svg",
+        "/diagrams/algebrica/law-of-cosines.svg",
+        "/diagrams/algebrica/law-of-sines.svg",
+        "/diagrams/algebrica/linear-equation-graph.svg",
+        "/diagrams/algebrica/number-line-absolute-value.svg",
+        "/diagrams/algebrica/number-line-intervals.svg",
+        "/diagrams/algebrica/number-line-real.svg",
+        "/diagrams/algebrica/number-types-venn.svg",
+        "/diagrams/algebrica/pascals-triangle.svg",
+        "/diagrams/algebrica/polynomial-roots-graph.svg",
+        "/diagrams/algebrica/pythagorean-theorem.svg",
+        "/diagrams/algebrica/reference-angles.svg",
+        "/diagrams/algebrica/right-triangle-trig.svg",
+        "/diagrams/algebrica/right-triangle-unit-circle.svg",
+        "/diagrams/algebrica/sec-csc-cot-graphs.svg",
+        "/diagrams/algebrica/sine-cosine-graph.svg",
+        "/diagrams/algebrica/unit-circle-labeled.svg",
+        "/diagrams/algebrica/unit-circle-sine-cosine.svg",
+        "/diagrams/algebrica/unit-circle-tangent.svg",
+        "/diagrams/algebrica/vector-addition.svg",
+        "/diagrams/algebrica/vector-arrow.svg",
+    })
+    meta_bad, raster_local = [], []
+    for asset in mapped_assets:
+        ent = meta.get(asset)
+        if not isinstance(ent, dict):
+            meta_bad.append(f"{asset}: no meta.json entry")
+            continue
+        if ent.get("source") not in ("algebrica", "local"):
+            meta_bad.append(f"{asset}: source {ent.get('source')!r} not algebrica|local")
+        if not (ent.get("title") or "").strip():
+            meta_bad.append(f"{asset}: empty title")
+        if ent.get("source") == "algebrica" and asset.lower().endswith(".svg") \
+                and not ent.get("upstream") and asset not in UNLINKED_GRANDFATHERED:
+            meta_bad.append(f"{asset}: algebrica SVG without upstream link")
+        if "/diagrams/algebrica/" not in asset and not asset.lower().endswith(".svg"):
+            raster_local.append(f"{asset}: local mapping must be .svg")
+    # Stale entries pointing at unmapped assets.
+    mapped_set = set(mapped_assets)
+    for asset in sorted(meta):
+        if asset not in mapped_set:
+            meta_bad.append(f"{asset}: meta entry for unmapped asset")
+    if meta_bad:
+        errors.append(f"diagram metadata problems ({len(meta_bad)}):\n  " + "\n  ".join(meta_bad[:30]))
+    if raster_local:
+        errors.append(f"raster local diagrams ({len(raster_local)}):\n  " + "\n  ".join(raster_local[:30]))
+
     if errors:
         print("\n\n".join(errors))
         print(f"\nFAIL: {sum(1 for _ in errors)} categories with issues")
