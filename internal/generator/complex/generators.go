@@ -37,6 +37,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("complex.series.power", &powerSeriesGen{})
 	reg.Register("complex.adv.mobius", &mobiusTransformGen{})
 	reg.Register("complex.adv.schwarz_lemma", &schwarzLemmaGen{})
+	reg.Register("complex.adv.logarithm", &logarithmGen{})
 }
 
 func fmtComplex(r, i int) string {
@@ -759,4 +760,33 @@ func (g *schwarzLemmaGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- complex logarithm -----
+
+type logarithmGen struct{}
+
+func (g *logarithmGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"Does e^w = 0 have solutions? (yes/no)", "no", "The complex exponential never vanishes: |e^w| > 0 always, so 0 has no logarithm."},
+		{"What is the principal Log(1)? (enter a number)", "0", "ln|1| + i*Arg(1) = 0 + 0 = 0."},
+		{"Is the complex logarithm single-valued without a branch cut? (yes/no)", "no", "Values differ by 2*pi*i: a cut selects one branch."},
+		{"Does Log(e^w) = w hold for all w? (yes/no)", "no", "Only on the strip -pi < Im(w) <= pi; otherwise subtract 2*k*pi*i."},
+	}
+	tableHard := []entry{
+		{"Log(-1) + Log(-1) vs Log(1): the correction term is a multiple of pi. Which multiple of pi? (enter like 2pi)", "2pi", "i*pi + i*pi = 2*pi*i vs 0: differs by 2*pi*i."},
+		{"Principal Log(-1) equals? (enter like pi*i)", "pi*i", "ln|-1| + i*Arg(-1) = 0 + pi*i."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

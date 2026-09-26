@@ -41,6 +41,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.decomp.qr", &qrGen{})
 	reg.Register("linalg.decomp.svd", &svdGen{})
 	reg.Register("linalg.decomp.jordan", &jordanGen{})
+	reg.Register("linalg.subspace", &subspaceGen{})
 }
 
 type vectorConceptGen struct{}
@@ -946,6 +947,51 @@ func (g *jordanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		}
 		v := jorTable[rand.Intn(len(jorTable))]
 		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- subspace -----
+
+type subspaceGen struct{}
+
+func (g *subspaceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"Does the line y = x + 1 form a subspace of R^2? (yes/no)", "no", "It misses the origin: no subspace lacks 0."},
+		{"Is {(0,0)} a subspace of R^2? (yes/no)", "yes", "The zero subspace always qualifies."},
+		{"Is the union of the x-axis and y-axis a subspace of R^2? (yes/no)", "no", "(1,0)+(0,1) = (1,1) escapes the union."},
+		{"Do the subspaces of R^2 consist exactly of {0}, lines through origin, R^2? (yes/no)", "yes", "One nonzero vector spans a line; two independent ones span all of R^2."},
+	}
+	tableHard := []entry{
+		{"Two planes through the origin in R^3 meet in a line. Their sum has dimension? (enter a number)", "3", "Grassmann: 2+2-1 = 3."},
+		{"A complement of a line in R^2 has dimension? (enter a number)", "1", "dim A + dim B = dim V: 1 + 1 = 2."},
+		{"Is the sum of three lines in R^2 with pairwise trivial intersection direct? (yes/no)", "no", "(1,0)+(0,1)-(1,1) = 0 is a nontrivial relation."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	if rand.Intn(3) == 0 {
+		// production: dimension counts (unique answers).
+		type dimEntry struct {
+			question string
+			answer   string
+			reason   string
+		}
+		dimTable := []dimEntry{
+			{"Two planes through the origin in R^3 meet in a line. Their sum has dimension? (enter a number)", "3", "Grassmann: 2+2-1 = 3."},
+			{"A complement of a line in R^2 has dimension? (enter a number)", "1", "dim A + dim B = dim V: 1 + 1 = 2."},
+			{"The zero subspace of R^5 has dimension? (enter a number)", "0", "Only the zero vector: dimension 0."},
+		}
+		d := dimTable[rand.Intn(len(dimTable))]
+		return generator.Problem{Question: d.question, Answer: d.answer, Explanation: d.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
