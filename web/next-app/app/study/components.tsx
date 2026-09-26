@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import LessonDiagram from '../../components/LessonDiagram'
 import SectionHeader from '../../components/SectionHeader'
 import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
@@ -470,8 +470,8 @@ export function LessonDetail({
                 </div>
                 {diagram && !diagramDupOf && (
                   <div id={`lesson-diagram-${cid}`} className="mb-3 border border-mathua-border bg-mathua-surface p-3 flex items-center gap-3 flex-wrap min-w-0 overflow-hidden">
-                    <div className="shrink-0 bg-mathua-code border border-mathua-border p-2 flex items-center justify-center">
-                      <Image src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} width={220} height={180} className="max-w-full h-auto" style={{ maxHeight: '180px' }} unoptimized />
+                    <div className="shrink-0 min-w-0 max-w-full">
+                      <LessonDiagram src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} />
                     </div>
                     <div className="min-w-0">
                       <div className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted mb-1">
