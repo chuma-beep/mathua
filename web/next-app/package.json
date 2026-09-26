@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "dagre": "^0.8.5",
     "fuse.js": "^7.3.0",
+    "isomorphic-dompurify": "^4.4.0",
     "katex": "^0.16.9",
     "lucide-react": "^1.41.0",
     "motion": "^13.2.0",

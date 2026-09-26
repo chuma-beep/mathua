@@ -467,4 +467,27 @@ footer .link-underline:hover {
 .mathua-lesson h5,
 .mathua-lesson h6 {
   font-size: 0.95rem !important;
+  line-height: 1.4;
+}
+
+/* Lesson diagrams (recolor policy: works in light AND dark mode).
+   Vendored/legacy assets are never retouched: the surface card supplies a
+   controlled backdrop so transparent-background strokes and light PNG boxes
+   read correctly in both themes. New local SVGs should paint with
+   currentColor where possible so they adapt automatically. */
+.lesson-diagram {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  padding: 12px;
+  overflow: hidden;
+  max-width: 100%;
+}
+.lesson-diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.lesson-diagram text {
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
