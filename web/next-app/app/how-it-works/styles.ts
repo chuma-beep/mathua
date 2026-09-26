@@ -13,6 +13,7 @@ export const sections = [
   { id: 'scoring', label: 'Scoring' },
   { id: 'generators', label: 'Generators' },
   { id: 'symbolic-grading', label: 'Expression grading' },
+  { id: 'measuring-learning', label: 'Measuring learning' },
 ]
 
 export const inlineCodeStyle: CSSProperties = {
