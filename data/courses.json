@@ -81,7 +81,7 @@
     "name": "Calculus II",
     "grade": "college",
     "description": "Integration techniques, improper integrals, sequences and series, power and Taylor series.",
-    "targets": ["calc.integral.parts", "calc.integral.trig_substitution", "calc.integral.partial_fractions", "calc.series.concept", "calc.series.taylor"]
+    "targets": ["calc.integral.parts", "calc.integral.trig_substitution", "calc.integral.partial_fractions", "calc.series.concept", "calc.series.taylor", "calc.integral.disc", "calc.integral.washer", "calc.integral.shell"]
   },
   {
     "id": "linalg",

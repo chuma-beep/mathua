@@ -668,6 +668,10 @@
     "source": "algebrica/integrals/definite-integrals.md"
   },
   {
+    "concept_id": "calc.integral.disc",
+    "source": "algebrica/integrals/the-disc-method.md"
+  },
+  {
     "concept_id": "calc.integral.exp_integral",
     "source": "algebrica/integrals/integral-of-the-exponential-function.md"
   },
@@ -700,6 +704,10 @@
     "source": "teaching/calc.integral.power_rule.md"
   },
   {
+    "concept_id": "calc.integral.shell",
+    "source": "algebrica/integrals/the-shell-method.md"
+  },
+  {
     "concept_id": "calc.integral.riemann_criteria",
     "source": "algebrica/integrals/riemann-integrability-criteria.md"
   },
@@ -718,6 +726,10 @@
   {
     "concept_id": "calc.integral.volume",
     "source": "teaching/calc.integral.volume.md"
+  },
+  {
+    "concept_id": "calc.integral.washer",
+    "source": "algebrica/integrals/the-washer-method.md"
   },
   {
     "concept_id": "calc.integral.weierstrass_sub",
@@ -2441,7 +2453,7 @@
   },
   {
     "concept_id": "calc.integral.surface_area",
-    "source": "authored/calc.integral.applied.md"
+    "source": "algebrica/integrals/surface-area-of-revolution.md"
   },
   {
     "concept_id": "calc.integral.trapezoid",

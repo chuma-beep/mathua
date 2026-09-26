@@ -326,23 +326,65 @@
    "avg_time_seconds": 25.0
   }
  },
- {
-  "id": "calc.integral.volume",
-  "label": "Volume of solids of revolution",
-  "domain": "calculus",
-  "subdomain": "calculus.integrals",
-  "grading_type": "expression",
-  "prerequisites": [
-   "calc.integral.area_between",
-   "geo.circle.area"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 30.0
-  }
- },
- {
-  "id": "calc.deriv.implicit",
+  {
+   "id": "calc.integral.volume",
+   "label": "Volume of solids of revolution",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "expression",
+   "prerequisites": [
+    "calc.integral.area_between",
+    "geo.circle.area"
+   ],
+   "mastery_threshold": {
+    "streak": 10,
+    "avg_time_seconds": 30.0
+   }
+  },
+  {
+   "id": "calc.integral.disc",
+   "label": "Disc method for volumes of revolution",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "numeric",
+   "prerequisites": [
+    "calc.integral.definite"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  },
+  {
+   "id": "calc.integral.washer",
+   "label": "Washer method for volumes of revolution",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "numeric",
+   "prerequisites": [
+    "calc.integral.definite"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  },
+  {
+   "id": "calc.integral.shell",
+   "label": "Shell method for volumes of revolution",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "numeric",
+   "prerequisites": [
+    "calc.integral.definite"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  },
+  {
+   "id": "calc.deriv.implicit",
   "label": "Implicit differentiation",
   "domain": "calculus",
   "subdomain": "calculus.advanced",
@@ -1725,18 +1767,18 @@
    "avg_time_seconds": 60
   }
  },
- {
-  "id": "calc.seq.bounded",
-  "label": "Bounded sequences",
-  "domain": "calculus",
-  "subdomain": "calculus.sequences",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "calc.seq.convergence"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 60
+  {
+   "id": "calc.seq.bounded",
+   "label": "Bounded sequences",
+   "domain": "calculus",
+   "subdomain": "calculus.sequences",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "calc.seq.convergence"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 60
+   }
   }
- }
 ]

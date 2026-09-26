@@ -2,9 +2,11 @@ package calculus
 
 import (
 	"math/rand"
+	"strings"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/grader"
 )
 
 func fuzzGen(t *testing.T, gen generator.Generator) {
@@ -139,6 +141,9 @@ func TestInfiniteLimitGen(t *testing.T)            { fuzzGen(t, &infiniteLimitGe
 func TestSineLimitGen(t *testing.T)                { fuzzGen(t, &sineLimitGen{}) }
 func TestExpLimitGen(t *testing.T)                 { fuzzGen(t, &expLimitGen{}) }
 func TestBoundedSeqGen(t *testing.T)               { fuzzGen(t, &boundedSeqGen{}) }
+func TestDiscMethodGen(t *testing.T)               { fuzzGen(t, &discMethodGen{}) }
+func TestWasherMethodGen(t *testing.T)             { fuzzGen(t, &washerMethodGen{}) }
+func TestShellMethodGen(t *testing.T)              { fuzzGen(t, &shellMethodGen{}) }
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()
@@ -154,5 +159,49 @@ func TestFuzz(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+// TestDiscShellWasherGenDiscriminate is the P2.1 quality bar (mirrors the
+// P1 polynomial template): each new easy pool must discriminate (distinct
+// answers) with production (typed-answer) questions, and every sampled
+// answer form must grade against itself through the numeric router the
+// new concepts declare.
+func TestDiscShellWasherGenDiscriminate(t *testing.T) {
+	rand.Seed(11)
+	gens := map[string]generator.Generator{
+		"calc.integral.disc":   &discMethodGen{},
+		"calc.integral.washer": &washerMethodGen{},
+		"calc.integral.shell":  &shellMethodGen{},
+	}
+	r := grader.NewRouter()
+	for _, a := range []string{"12", "8", "2", "32/5", "1/7", "7/3", "2/15", "7/15", "1/6", "1/2", "16/5", "4/3", "6", "128", "81/2"} {
+		if res := r.Grade(grader.GradingNumeric, a, a); !res.Correct {
+			t.Errorf("answer form %q does not grade against itself under numeric", a)
+		}
+	}
+	for id, gen := range gens {
+		answers := map[string]bool{}
+		typed := 0
+		const n = 150
+		for i := 0; i < n; i++ {
+			p := gen.Generate(generator.GeneratorContext{Difficulty: 0.12})
+			if p.Question == "" || p.Answer == "" || p.Explanation == "" {
+				t.Fatalf("%s: empty field at sample %d: q=%q a=%q e=%q", id, i, p.Question, p.Answer, p.Explanation)
+			}
+			answers[strings.ToLower(strings.TrimSpace(p.Answer))] = true
+			if !strings.Contains(p.Question, "(yes/no)") {
+				typed++
+			}
+			if res := r.Grade(grader.GradingNumeric, p.Answer, p.Answer); !res.Correct {
+				t.Errorf("%s: sampled answer %q fails numeric self-grade (q=%q)", id, p.Answer, p.Question)
+			}
+		}
+		if len(answers) < 2 {
+			t.Errorf("%s: easy pool non-discriminating: %d distinct answers over %d samples", id, len(answers), n)
+		}
+		if typed == 0 {
+			t.Errorf("%s: easy pool has no production (typed-answer) questions: recognition-only", id)
+		}
 	}
 }

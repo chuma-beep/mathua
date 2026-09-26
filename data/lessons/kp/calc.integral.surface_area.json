@@ -1,29 +1,29 @@
 [
   {
     "label": "Surface of revolution formula",
-    "section": "Surface of revolution",
+    "section": "From the sum to the integral",
     "subgoals": [
-      "Write S = 2π∫f√(1+(f')²)dx",
-      "Identify radius and slant factors",
-      "Recover 4πr² for the sphere"
+      "Replace each curve chord by a cone frustum",
+      "Apply the mean value theorem to the chord length",
+      "Take the limit to S = 2pi times the integral of f times sqrt(1+(f')^2)"
     ]
   },
   {
     "label": "Slant correction",
-    "section": "Surface of revolution",
+    "section": "The surface element",
     "subgoals": [
-      "Explain the √(1+(f')²) factor",
-      "Link it to arc length",
-      "Contrast with flat bands"
+      "Split dS into 2pi times r times ds",
+      "Read the radius r from the axis of revolution",
+      "Pick ds for a graph versus a parametric curve"
     ]
   },
   {
     "label": "Sphere check",
-    "section": "Surface of revolution",
+    "section": "Example 1",
     "subgoals": [
-      "Revolve a semicircle radius r",
-      "Simplify to 4πr²",
-      "Confirm circumference times slant"
+      "Differentiate sqrt(r^2-x^2) on the open interval",
+      "Cancel the radical against the ordinate to the constant r",
+      "Integrate the constant over [-r,r] to 4pi times r^2"
     ]
   }
 ]
