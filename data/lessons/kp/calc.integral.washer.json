@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Determining the volume",
+    "section": "Determining the volume",
+    "subgoals": [
+      "Subtract the inner disc from the outer disc for the annulus area",
+      "Sum the washers into V = pi times the integral of f^2-g^2",
+      "Split the integral where the boundary curves cross"
+    ]
+  },
+  {
+    "label": "Example 1",
+    "section": "Example 1",
+    "subgoals": [
+      "Read outer radius x and inner radius x^2 on [0,1]",
+      "Integrate x^2-x^4 term by term",
+      "Combine the fractions to 2pi/15"
+    ]
+  },
+  {
+    "label": "Example 3",
+    "section": "Example 3",
+    "subgoals": [
+      "Read outer sqrt(R^2-x^2) and inner a at the meeting points",
+      "Exploit evenness to double the integral over [0,c]",
+      "Rewrite the ring volume as pi times h^3 over 6"
+    ]
+  }
+]

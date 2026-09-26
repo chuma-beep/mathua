@@ -116,6 +116,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.integral.work", &integralWorkGen{})
 	reg.Register("calc.integral.center_mass", &integralCenterMassGen{})
 	reg.Register("calc.integral.surface_area", &integralSurfaceAreaGen{})
+	reg.Register("calc.integral.disc", &discMethodGen{})
+	reg.Register("calc.integral.washer", &washerMethodGen{})
+	reg.Register("calc.integral.shell", &shellMethodGen{})
 	reg.Register("calc.integral.trapezoid", &integralTrapezoidGen{})
 	reg.Register("calc.integral.simpson", &integralSimpsonGen{})
 	reg.Register("calc.integral.improper_compare", &integralImproperCompareGen{})
@@ -2359,5 +2362,212 @@ func (g *boundedSeqGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		{"Is a bounded sequence always convergent?", "no", "\\((-1)^{n}\\) is bounded yet oscillates: boundedness is necessary, not sufficient."},
 	}
 	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type discMethodGen struct{}
+
+func (g *discMethodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	if scale <= 3 {
+		switch rand.Intn(6) {
+		case 0:
+			r := rand.Intn(4) + 1
+			h := rand.Intn(5) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("The region under \\(y=%d\\) from \\(x=0\\) to \\(x=%d\\) revolves about the \\(x\\)-axis (a cylinder). What is \\(V/\\pi\\)? (enter a number)", r, h),
+				Answer:      fmt.Sprintf("%d", r*r*h),
+				Explanation: fmt.Sprintf("Disc radius %d gives V = π∫₀^%d %d²dx = π·%d·%d, so V/π = %d.", r, h, r, r*r, h, r*r*h),
+			}
+		case 1:
+			b := (rand.Intn(3) + 1) * 2
+			return generator.Problem{
+				Question:    fmt.Sprintf("The region under \\(y=\\sqrt{x}\\) from \\(x=0\\) to \\(x=%d\\) revolves about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a number)", b),
+				Answer:      fmt.Sprintf("%d", b*b/2),
+				Explanation: fmt.Sprintf("V = π∫₀^%d x\\,dx = π[%d²/2] = π·%d, so V/π = %d.", b, b, b*b/2, b*b/2),
+			}
+		case 2:
+			n := rand.Intn(5) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("Disc method with \\(f(x)=x^{2}\\). What is the disc radius at \\(x=%d\\)? (enter a number)", n),
+				Answer:      fmt.Sprintf("%d", n*n),
+				Explanation: fmt.Sprintf("Radius is f(%d) = %d² = %d.", n, n, n*n),
+			}
+		case 3:
+			r := rand.Intn(6) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("A disc-method cross section has radius \\(%d\\). What is its area divided by \\(\\pi\\)? (enter a number)", r),
+				Answer:      fmt.Sprintf("%d", r*r),
+				Explanation: fmt.Sprintf("Area πr² with r=%d gives area/π = %d² = %d.", r, r, r*r),
+			}
+		case 4:
+			c := rand.Intn(4) + 1
+			h := rand.Intn(4) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("The segment \\(x=%d\\) for \\(0 \\leq y \\leq %d\\) revolves about the \\(y\\)-axis. What is \\(V/\\pi\\)? (enter a number)", c, h),
+				Answer:      fmt.Sprintf("%d", c*c*h),
+				Explanation: fmt.Sprintf("Discs of radius %d stacked over height %d: V = π·%d²·%d, so V/π = %d.", c, h, c, h, c*c*h),
+			}
+		default:
+			c := rand.Intn(5) + 1
+			l := rand.Intn(4) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("The region under \\(f(x)=-%d\\) from \\(x=0\\) to \\(x=%d\\) revolves about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a number)", c, l),
+				Answer:      fmt.Sprintf("%d", c*c*l),
+				Explanation: fmt.Sprintf("Radius is |f| = %d, so V = π·%d²·%d and V/π = %d.", c, c, l, c*c*l),
+			}
+		}
+	}
+	type entry struct {
+		q, a, e string
+	}
+	c := rand.Intn(3) + 1
+	tableHard := []entry{
+		{"Revolve \\(y=x^{2}\\) from \\(x=0\\) to \\(x=2\\) about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a fraction)", "32/5", "V = π∫₀²x⁴dx = π[32/5], so V/π = 32/5."},
+		{"Revolve \\(y=x^{3}\\) from \\(x=0\\) to \\(x=1\\) about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a fraction)", "1/7", "V = π∫₀¹x⁶dx = π[1/7], so V/π = 1/7."},
+		{fmt.Sprintf("The region under \\(y=x+%d\\) from \\(x=0\\) to \\(x=1\\) revolves about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a fraction)", c), fmt.Sprintf("%d/3", (c+1)*(c+1)*(c+1)-c*c*c), fmt.Sprintf("Radius x+%d: V = π∫₀¹(x+%d)²dx = π((%d)³-(%d)³)/3 = %d/3.", c, c, c+1, c, (c+1)*(c+1)*(c+1)-c*c*c)},
+	}
+	e := tableHard[rand.Intn(len(tableHard))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type washerMethodGen struct{}
+
+func (g *washerMethodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	if scale <= 3 {
+		switch rand.Intn(6) {
+		case 0:
+			bigR := rand.Intn(4) + 2
+			smallR := rand.Intn(bigR-1) + 1
+			l := rand.Intn(4) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("Washers have outer radius \\(%d\\), inner radius \\(%d\\), over length \\(%d\\). What is \\(V/\\pi\\)? (enter a number)", bigR, smallR, l),
+				Answer:      fmt.Sprintf("%d", (bigR*bigR-smallR*smallR)*l),
+				Explanation: fmt.Sprintf("V = π(%d²-%d²)·%d = π·%d, so V/π = %d.", bigR, smallR, l, (bigR*bigR-smallR*smallR)*l, (bigR*bigR-smallR*smallR)*l),
+			}
+		case 1:
+			bigR := rand.Intn(5) + 2
+			smallR := rand.Intn(bigR-1) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("A washer has outer radius \\(%d\\) and inner radius \\(%d\\). What is its area divided by \\(\\pi\\)? (enter a number)", bigR, smallR),
+				Answer:      fmt.Sprintf("%d", bigR*bigR-smallR*smallR),
+				Explanation: fmt.Sprintf("Annulus π(%d²-%d²) = π·%d, so area/π = %d.", bigR, smallR, bigR*bigR-smallR*smallR, bigR*bigR-smallR*smallR),
+			}
+		case 2:
+			return generator.Problem{
+				Question:    "Revolve the region between \\(y=x\\) and \\(y=x^{2}\\) on \\([0,1]\\) about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a fraction)",
+				Answer:      "2/15",
+				Explanation: "V = π∫₀¹(x²-x⁴)dx = π(1/3-1/5) = 2π/15, so V/π = 2/15.",
+			}
+		case 3:
+			n := rand.Intn(3) + 2
+			return generator.Problem{
+				Question:    fmt.Sprintf("Washers use outer \\(f(x)=x^{2}\\) and inner \\(g(x)=x\\). What is \\(f^{2}-g^{2}\\) at \\(x=%d\\)? (enter a number)", n),
+				Answer:      fmt.Sprintf("%d", n*n*n*n-n*n),
+				Explanation: fmt.Sprintf("f(%d)²-g(%d)² = %d⁴-%d² = %d-%d = %d.", n, n, n, n, n*n*n*n, n*n, n*n*n*n-n*n),
+			}
+		case 4:
+			h := 2
+			ans := "4/3"
+			if rand.Intn(2) == 0 {
+				h = 4
+				ans = "32/3"
+			}
+			return generator.Problem{
+				Question:    fmt.Sprintf("A spherical napkin ring has height \\(%d\\). Its volume is \\(\\pi h^{3}/6\\). What is \\(V/\\pi\\)? (enter a fraction)", h),
+				Answer:      ans,
+				Explanation: fmt.Sprintf("V/π = %d³/6 = %s.", h, ans),
+			}
+		default:
+			bigR := rand.Intn(5) + 1
+			l := rand.Intn(4) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("Washers with inner radius \\(0\\) (a disc), outer radius \\(%d\\), over length \\(%d\\). What is \\(V/\\pi\\)? (enter a number)", bigR, l),
+				Answer:      fmt.Sprintf("%d", bigR*bigR*l),
+				Explanation: fmt.Sprintf("Inner radius 0 degenerates to a disc: V = π·%d²·%d, so V/π = %d.", bigR, l, bigR*bigR*l),
+			}
+		}
+	}
+	type entry struct {
+		q, a, e string
+	}
+	c := rand.Intn(3) + 1
+	tableHard := []entry{
+		{"Rotate the region between \\(y=x\\) and \\(y=x^{2}\\) on \\([0,1]\\) about the line \\(y=-1\\). What is \\(V/\\pi\\)? (enter a fraction)", "7/15", "Outer x+1, inner x²+1: V = π∫₀¹((x+1)²-(x²+1)²)dx = 7π/15, so V/π = 7/15."},
+		{fmt.Sprintf("Rotate the region between \\(y=x+%d\\) and \\(y=x\\) on \\([0,1]\\) about the \\(x\\)-axis. What is \\(V/\\pi\\)? (enter a number)", c), fmt.Sprintf("%d", c+c*c), fmt.Sprintf("Outer (x+%d)² minus inner x² = %dx+%d: V = π∫₀¹(%dx+%d)dx = π(%d), so V/π = %d.", c, 2*c, c*c, 2*c, c*c, c+c*c, c+c*c)},
+		{"Describe \\(x=y\\) and \\(x=y^{2}\\) on \\([0,1]\\) rotated about the \\(y\\)-axis with washers. What is \\(V/\\pi\\)? (enter a fraction)", "2/15", "V = π∫₀¹(y²-(y²)²)dy = π(1/3-1/5) = 2π/15, so V/π = 2/15."},
+	}
+	e := tableHard[rand.Intn(len(tableHard))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type shellMethodGen struct{}
+
+func (g *shellMethodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	if scale <= 3 {
+		switch rand.Intn(6) {
+		case 0:
+			c := rand.Intn(4) + 1
+			a := rand.Intn(3)
+			b := a + rand.Intn(3) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("The region under \\(y=%d\\) on \\([%d,%d]\\) revolves about the \\(y\\)-axis (shells). What is \\(V/\\pi\\)? (enter a number)", c, a, b),
+				Answer:      fmt.Sprintf("%d", c*(b*b-a*a)),
+				Explanation: fmt.Sprintf("V = 2π∫_{%d}^{%d} x·%d\\,dx = 2π·%d·(%d-%d)/2 = π·%d, so V/π = %d.", a, b, c, c, b*b, a*a, c*(b*b-a*a), c*(b*b-a*a)),
+			}
+		case 1:
+			n := rand.Intn(4) + 1
+			num := n * n * n * n
+			ans := fmt.Sprintf("%d", num/2)
+			if num%2 == 1 {
+				ans = fmt.Sprintf("%d/2", num)
+			}
+			return generator.Problem{
+				Question:    fmt.Sprintf("The region under \\(y=x^{2}\\) on \\([0,%d]\\) revolves about the \\(y\\)-axis (shells). What is \\(V/\\pi\\)? (enter a fraction)", n),
+				Answer:      ans,
+				Explanation: fmt.Sprintf("V = 2π∫₀^%d x³\\,dx = 2π·%d⁴/4 = π·%d⁴/2, so V/π = %s.", n, n, n, ans),
+			}
+		case 2:
+			r := rand.Intn(5) + 1
+			h := rand.Intn(5) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("A cylindrical shell has radius \\(%d\\) and height \\(%d\\). What is \\(dV/(\\pi\\,dx)\\)? (enter a number)", r, h),
+				Answer:      fmt.Sprintf("%d", 2*r*h),
+				Explanation: fmt.Sprintf("dV = 2π·radius·height·dx = 2π·%d·%d·dx, so dV/(π\\,dx) = %d.", r, h, 2*r*h),
+			}
+		case 3:
+			a := rand.Intn(5) + 1
+			return generator.Problem{
+				Question:    fmt.Sprintf("The vertical strip at \\(x=%d\\) runs from \\(y=x\\) up to \\(y=4x\\). What is its height? (enter a number)", a),
+				Answer:      fmt.Sprintf("%d", 3*a),
+				Explanation: fmt.Sprintf("Height = top minus bottom = 4·%d-%d = %d.", a, a, 3*a),
+			}
+		case 4:
+			return generator.Problem{
+				Question:    "Revolve the region between \\(y=x\\) and \\(y=x^{2}\\) on \\([0,1]\\) about the \\(y\\)-axis (shells). What is \\(V/\\pi\\)? (enter a fraction)",
+				Answer:      "1/6",
+				Explanation: "V = 2π∫₀¹x(x-x²)dx = 2π(1/3-1/4) = π/6, so V/π = 1/6.",
+			}
+		default:
+			a := rand.Intn(5) + 2
+			return generator.Problem{
+				Question:    fmt.Sprintf("A vertical strip at \\(x=%d\\) revolves about the \\(y\\)-axis. What is the shell radius? (enter a number)", a),
+				Answer:      fmt.Sprintf("%d", a),
+				Explanation: fmt.Sprintf("Shell radius is the distance from the strip to the axis: %d.", a),
+			}
+		}
+	}
+	type entry struct {
+		q, a, e string
+	}
+	c := rand.Intn(3) + 2
+	tableHard := []entry{
+		{"Rotate the region between \\(y=x\\) and \\(y=x^{2}\\) on \\([0,1]\\) about the line \\(x=2\\) (shells). What is \\(V/\\pi\\)? (enter a fraction)", "1/2", "Radius 2-x: V = 2π∫₀¹(2-x)(x-x²)dx = π/2, so V/π = 1/2."},
+		{"Rotate the region under \\(y=2x^{2}-x^{3}\\) on \\([0,2]\\) about the \\(y\\)-axis (shells). What is \\(V/\\pi\\)? (enter a fraction)", "16/5", "V = 2π∫₀²x(2x²-x³)dx = 2π(8-32/5) = 16π/5, so V/π = 16/5."},
+		{fmt.Sprintf("A vertical strip at \\(x=1\\) revolves about the line \\(x=%d\\) (shells). What is the shell radius? (enter a number)", c), fmt.Sprintf("%d", c-1), fmt.Sprintf("Radius is the distance %d-1 = %d.", c, c-1)},
+	}
+	e := tableHard[rand.Intn(len(tableHard))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The volume of a cylindrical shell",
+    "section": "The volume of a cylindrical shell",
+    "subgoals": [
+      "Factor the shell volume to 2pi times mean radius times height times thickness",
+      "Read the mean radius as the strip midpoint x*",
+      "Write V = 2pi times the integral of x times [f(x)-g(x)]"
+    ]
+  },
+  {
+    "label": "Example 2",
+    "section": "Example 2",
+    "subgoals": [
+      "Read the strip height 2x^2-x^3 on [0,2]",
+      "Multiply by radius x to raise the degree to four",
+      "Evaluate the polynomial integral to 16pi/5"
+    ]
+  },
+  {
+    "label": "How to choose the method",
+    "section": "How to choose the method",
+    "subgoals": [
+      "Use discs or washers when the region matches the axis variable",
+      "Use shells when the region matches the perpendicular variable",
+      "Prefer the method that avoids inverting the boundary curves"
+    ]
+  }
+]
