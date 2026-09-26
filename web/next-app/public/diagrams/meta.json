@@ -1,0 +1,1668 @@
+{
+ "/diagrams/algebrica/Heaviside-function-1.png": {
+  "concepts": [
+   "calc.limit.discontinuity"
+  ],
+  "title": "Types of discontinuities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/absolute-value-1.svg": {
+  "concepts": [
+   "alg.func.absolute_value"
+  ],
+  "title": "Absolute value function",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/sets-and-numbers/svg/absolute-value-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arc-length-of-a-curve-1.svg": {
+  "concepts": [
+   "calc.integral.arc_length"
+  ],
+  "title": "Arc length of a curve",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/arc-length-of-a-curve-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arithmetic-sequence.png": {
+  "concepts": [
+   "alg.seq.arithmetic"
+  ],
+  "title": "Arithmetic sequences",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/asymptotes-1.svg": {
+  "concepts": [
+   "calc.limit.asymptotes"
+  ],
+  "title": "Asymptotes of functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/asymptotes-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/beta-distribution-1.svg": {
+  "concepts": [
+   "stat.dist.beta"
+  ],
+  "title": "Beta distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/probability-and-statistics/svg/beta-distribution-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/big-o-notation-1.svg": {
+  "concepts": [
+   "calc.limit.big_o"
+  ],
+  "title": "Big O notation",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/big-o-notation-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/cauchy-sequence-1.svg": {
+  "concepts": [
+   "calc.seq.cauchy"
+  ],
+  "title": "Cauchy sequences",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/sequences/svg/cauchy-sequence-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/chi-squared-distribution.png": {
+  "concepts": [
+   "stat.dist.chi_square"
+  ],
+  "title": "Chi-square distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/circumference-5.svg": {
+  "concepts": [
+   "geo.circle.parts"
+  ],
+  "title": "Parts of a circle: radius, diameter, chord",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/circumference-5.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/completing-square.svg": {
+  "concepts": [
+   "alg.quad.complete_square"
+  ],
+  "title": "Completing the square",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/complex-plane.svg": {
+  "concepts": [
+   "complex.adv.polar",
+   "complex.basics.concept"
+  ],
+  "title": "Imaginary unit i and complex numbers",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/composite-functions-1-1.png": {
+  "concepts": [
+   "alg.func.composite"
+  ],
+  "title": "Composite functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/confidence-intervals.png": {
+  "concepts": [
+   "stat.infer.confidence"
+  ],
+  "title": "Confidence intervals",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/conic-circle-1.png": {
+  "concepts": [
+   "alg.conic.circle"
+  ],
+  "title": "Equation and graph of a circle",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/continuous-functions.png": {
+  "concepts": [
+   "calc.limit.concept"
+  ],
+  "title": "Concept of a limit",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/continuous-random-vars-1.png": {
+  "concepts": [
+   "stat.prob.continuous_rv"
+  ],
+  "title": "Continuous random variables",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/convexity-1-1.png": {
+  "concepts": [
+   "calc.deriv.convexity"
+  ],
+  "title": "Convexity and concavity of functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/cosine-similarity.png": {
+  "concepts": [
+   "linalg.vector.cosine_similarity"
+  ],
+  "title": "Cosine similarity between vectors",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/definite-integrals-1.svg": {
+  "concepts": [
+   "calc.integral.definite"
+  ],
+  "title": "Definite integrals and area",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/definite-integrals-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/derivatives-1.svg": {
+  "concepts": [
+   "calc.deriv.concept"
+  ],
+  "title": "Derivative as slope of tangent line",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/derivatives/svg/derivatives-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/difference-quotient-2.png": {
+  "concepts": [
+   "calc.deriv.difference_quotient"
+  ],
+  "title": "Difference quotient",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/differential-equations-1-1.png": {
+  "concepts": [
+   "ode.basics.concept"
+  ],
+  "title": "What is a differential equation",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/differential-equations-2.png": {
+  "concepts": [
+   "ode.first_order.separable"
+  ],
+  "title": "Separable differential equations",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/ellipse-1.svg": {
+  "concepts": [
+   "alg.conic.ellipse"
+  ],
+  "title": "Equation and graph of an ellipse",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/ellipse-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/ellipse-2.svg": {
+  "concepts": [
+   "precalc.conic.ellipse"
+  ],
+  "title": "Ellipses: standard form, vertices, and foci",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/ellipse-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/euclidean-distance.png": {
+  "concepts": [
+   "geo.coord.distance"
+  ],
+  "title": "Distance between two points",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/even-odd-functions-1.png": {
+  "concepts": [
+   "alg.func.even_odd"
+  ],
+  "title": "Even and odd functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/exponential-distribution-1.png": {
+  "concepts": [
+   "stat.dist.exponential"
+  ],
+  "title": "Exponential distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/exponential-function-1.svg": {
+  "concepts": [
+   "alg.exp.concept"
+  ],
+  "title": "Exponential functions: growth and decay",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/exponential-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/fermat-1.png": {
+  "concepts": [
+   "calc.deriv.fermat"
+  ],
+  "title": "Fermat's theorem on stationary points",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/finding-areas-by-integration-1.svg": {
+  "concepts": [
+   "calc.integral.area_between"
+  ],
+  "title": "Area between two curves",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/finding-areas-by-integration-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/finding-areas-by-integration-2.svg": {
+  "concepts": [
+   "calc.integral.volume"
+  ],
+  "title": "Volume of solids of revolution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/finding-areas-by-integration-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/functions-5.png": {
+  "concepts": [
+   "alg.func.concept"
+  ],
+  "title": "What is a function: domain and range",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/fundamental-theorem-of-calculus-1.svg": {
+  "concepts": [
+   "calc.integral.ftc"
+  ],
+  "title": "Fundamental Theorem of Calculus",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/fundamental-theorem-of-calculus-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/gamma-distribution.png": {
+  "concepts": [
+   "stat.dist.gamma"
+  ],
+  "title": "Gamma distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/geometri-sequence-1.png": {
+  "concepts": [
+   "alg.seq.geometric"
+  ],
+  "title": "Geometric sequences",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/geometri-sequence-2-1.png": {
+  "concepts": [
+   "precalc.seq.geometric"
+  ],
+  "title": "Geometric sequences: common ratio and nth term",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/harmonic-series-1-2.png": {
+  "concepts": [
+   "calc.series.harmonic"
+  ],
+  "title": "Harmonic series",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/hyperbola-1.svg": {
+  "concepts": [
+   "alg.conic.hyperbola"
+  ],
+  "title": "Hyperbola: equation and graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/hyperbola-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/hyperbola-2.svg": {
+  "concepts": [
+   "precalc.conic.hyperbola"
+  ],
+  "title": "Hyperbolas: standard form and foci",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/hyperbola-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/hyperbolic-functions.svg": {
+  "concepts": [
+   "trig.hyperbolic.sinh_cosh",
+   "trig.hyperbolic.tanh_coth"
+  ],
+  "title": "Hyperbolic sine and cosine functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/improper-integrals-1.svg": {
+  "concepts": [
+   "calc.integral.improper"
+  ],
+  "title": "Improper integrals",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/improper-integrals-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/improper-integrals-2.svg": {
+  "concepts": [
+   "calc.integral.numerical"
+  ],
+  "title": "Numerical integration",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/improper-integrals-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/incomplete-quadratic-equations.svg": {
+  "concepts": [
+   "alg.quad.incomplete"
+  ],
+  "title": "Incomplete quadratic equations",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/equations/svg/incomplete-quadratic-equations.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/increasing-decreasing-function.png": {
+  "concepts": [
+   "alg.func.monotonicity"
+  ],
+  "title": "Increasing and decreasing functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/inequalities-1.png": {
+  "concepts": [
+   "alg.ineq.compound"
+  ],
+  "title": "Compound inequalities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/integral-test-series-1.png": {
+  "concepts": [
+   "calc.series.integral_test"
+  ],
+  "title": "Integral test for series convergence",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/inverse-function-1.svg": {
+  "concepts": [
+   "alg.func.inverse"
+  ],
+  "title": "Inverse functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/inverse-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/inverse-trig-graphs.svg": {
+  "concepts": [
+   "trig.adv.arctan",
+   "trig.adv.inverse"
+  ],
+  "title": "Inverse trig functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/irr-ineq-1.png": {
+  "concepts": [
+   "alg.ineq.irrational"
+  ],
+  "title": "Irrational inequalities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/lagrange-theoreme-4.png": {
+  "concepts": [
+   "calc.deriv.mvt"
+  ],
+  "title": "Mean value theorem (Lagrange)",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/law-of-cosines.svg": {
+  "concepts": [
+   "trig.adv.law_cosines"
+  ],
+  "title": "Law of cosines",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/law-of-sines.svg": {
+  "concepts": [
+   "trig.adv.law_sines"
+  ],
+  "title": "Law of sines",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/limits-1.svg": {
+  "concepts": [
+   "calc.limit.epsilon_delta"
+  ],
+  "title": "Epsilon-delta definition of a limit",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/limits-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/limits-2.svg": {
+  "concepts": [
+   "calc.limit.infinite"
+  ],
+  "title": "Infinite limits and vertical asymptotes",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/limits-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/limits-3.svg": {
+  "concepts": [
+   "calc.limit.infinity"
+  ],
+  "title": "Limits at infinity",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/limits-3.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/line-1.png": {
+  "concepts": [
+   "alg.linear.standard_form"
+  ],
+  "title": "Standard form of a linear equation Ax + By = C",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/linear-equation-graph.svg": {
+  "concepts": [
+   "alg.linear.graph",
+   "alg.linear.slope",
+   "alg.linear.slope_intercept"
+  ],
+  "title": "Graph a linear equation",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/lines-5.png": {
+  "concepts": [
+   "alg.systems.concept"
+  ],
+  "title": "Systems of linear equations: introduction",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/little-o-1.svg": {
+  "concepts": [
+   "calc.limit.little_o"
+  ],
+  "title": "Little-o notation",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/limits/svg/little-o-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/logharithm-6.png": {
+  "concepts": [
+   "alg.log.concept"
+  ],
+  "title": "What is a logarithm",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/max-min-1.png": {
+  "concepts": [
+   "calc.deriv.global_extrema"
+  ],
+  "title": "Global maxima and minima on closed intervals",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/max-min-3-1.png": {
+  "concepts": [
+   "calc.deriv.critical_points"
+  ],
+  "title": "Critical points and the first derivative test",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/maximum-minimum-7.png": {
+  "concepts": [
+   "calc.deriv.inflection"
+  ],
+  "title": "Inflection points of functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/neural-network-2.png": {
+  "concepts": [
+   "ml.forward_pass"
+  ],
+  "title": "Forward pass",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/neural-network.png": {
+  "concepts": [
+   "ml.backpropagation"
+  ],
+  "title": "Backpropagation in neural networks",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/non-differentiable-points-1.png": {
+  "concepts": [
+   "calc.deriv.non_differentiability"
+  ],
+  "title": "Points of non-differentiability",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/normal-distribution-1.svg": {
+  "concepts": [
+   "stat.dist.normal"
+  ],
+  "title": "Normal (Gaussian) distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/probability-and-statistics/svg/normal-distribution-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/normal-distribution-standard-1.png": {
+  "concepts": [
+   "stat.dist.z_table"
+  ],
+  "title": "Standard normal distribution and Z-table",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/number-line-absolute-value.svg": {
+  "concepts": [
+   "alg.ineq.absolute_value",
+   "arith.neg.abs_value"
+  ],
+  "title": "Absolute value",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/number-line-intervals.svg": {
+  "concepts": [
+   "alg.ineq.interval"
+  ],
+  "title": "Interval notation",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/number-line-real.svg": {
+  "concepts": [
+   "prealg.real.concept"
+  ],
+  "title": "Real numbers and the number line",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/number-types-venn.svg": {
+  "concepts": [
+   "prealg.types"
+  ],
+  "title": "Types of numbers",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/parabola-1.svg": {
+  "concepts": [
+   "alg.conic.parabola"
+  ],
+  "title": "Parabola: equation and graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/parabola-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/parabola-2.svg": {
+  "concepts": [
+   "alg.func.quad"
+  ],
+  "title": "Quadratic functions and parabolas",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/parabola-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/parabola-5-1.png": {
+  "concepts": [
+   "precalc.conic.parabola"
+  ],
+  "title": "Parabolas as conic sections: focus and directrix",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/parabola-7.svg": {
+  "concepts": [
+   "calc.deriv.tangent_line"
+  ],
+  "title": "Equation of the tangent line",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/lines-planes-conic-sections/svg/parabola-7.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/partial-derivatives-1.png": {
+  "concepts": [
+   "calc.deriv.partial"
+  ],
+  "title": "Partial derivatives",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/pascals-triangle.svg": {
+  "concepts": [
+   "discrete.combinatorics.binomial_theorem",
+   "discrete.combinatorics.pascal",
+   "precalc.binomial_theorem"
+  ],
+  "title": "Pascal's triangle and binomial theorem",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/polar-coordinates-1-1.png": {
+  "concepts": [
+   "geo.coord.polar",
+   "precalc.polar.coordinates"
+  ],
+  "title": "Polar coordinates",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/polar-coordinates-2-1.png": {
+  "concepts": [
+   "precalc.polar.graph"
+  ],
+  "title": "Graphing polar equations",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/polynomial-roots-graph.svg": {
+  "concepts": [
+   "alg.poly.roots"
+  ],
+  "title": "Roots of a polynomial",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/pythagorean-theorem.svg": {
+  "concepts": [
+   "geo.triangle.pythagorean",
+   "trig.ident.pythagorean"
+  ],
+  "title": "Pythagorean theorem",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/quad-eq-complex-roots.png": {
+  "concepts": [
+   "alg.quad.complex"
+  ],
+  "title": "Quadratic equations with complex solutions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/quadratic-equations-params-6.png": {
+  "concepts": [
+   "alg.quad.parametric"
+  ],
+  "title": "Quadratic equations with parameters",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/quadratic-equations.svg": {
+  "concepts": [
+   "alg.quad.formula",
+   "alg.quad.quadratic",
+   "alg.quad.solve_factor"
+  ],
+  "title": "Solve quadratics by factoring",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/equations/svg/quadratic-equations.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/quadratic-inequalities-1-1.png": {
+  "concepts": [
+   "alg.ineq.quadratic"
+  ],
+  "title": "Quadratic inequalities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/quadratic-inequalities-2.svg": {
+  "concepts": [
+   "alg.quad.discriminant"
+  ],
+  "title": "Discriminant: number of real solutions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/inequalities/svg/quadratic-inequalities-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/reference-angles.svg": {
+  "concepts": [
+   "trig.basics.reference_angle"
+  ],
+  "title": "Reference angles and quadrants",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/riemann-integrability-criteria-1.svg": {
+  "concepts": [
+   "calc.limit.continuity"
+  ],
+  "title": "Continuity and types of discontinuity",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/riemann-integrability-criteria-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/riemann-integrability-criteria-2.svg": {
+  "concepts": [
+   "calc.integral.riemann_criteria"
+  ],
+  "title": "Riemann integrability criteria",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/riemann-integrability-criteria-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/right-triangle-trig.svg": {
+  "concepts": [
+   "trig.basics.right_triangle"
+  ],
+  "title": "Right triangle trigonometry",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/right-triangle-unit-circle.svg": {
+  "concepts": [
+   "trig.basics.sin_cos_def"
+  ],
+  "title": "Sine and cosine definitions in right triangles",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/rolle-theorem-1-1.png": {
+  "concepts": [
+   "calc.deriv.rolle"
+  ],
+  "title": "Rolle's theorem",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sec-csc-cot-graphs.svg": {
+  "concepts": [
+   "trig.basics.reciprocal"
+  ],
+  "title": "Reciprocal trig functions: csc, sec, cot",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sequence-functions-1.png": {
+  "concepts": [
+   "calc.series.function_series"
+  ],
+  "title": "Series of functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sequences-conv-1.png": {
+  "concepts": [
+   "calc.seq.convergence"
+  ],
+  "title": "Convergent and divergent sequences",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/series-cauchy-1.png": {
+  "concepts": [
+   "calc.series.cauchy_criterion"
+  ],
+  "title": "Cauchy's convergence criterion for series",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sigmoid-function.png": {
+  "concepts": [
+   "alg.func.sigmoid"
+  ],
+  "title": "Sigmoid function (logistic function)",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sign-analysis-1.png": {
+  "concepts": [
+   "alg.ineq.sign_analysis"
+  ],
+  "title": "Sign analysis method for inequalities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sign-function-1.svg": {
+  "concepts": [
+   "alg.func.sign"
+  ],
+  "title": "Sign function",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/sign-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sine-cosine-graph.svg": {
+  "concepts": [
+   "trig.graph.cos",
+   "trig.graph.period",
+   "trig.graph.sin"
+  ],
+  "title": "Graph of sine function",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/squeeze-theorem.png": {
+  "concepts": [
+   "calc.limit.squeeze"
+  ],
+  "title": "Squeeze theorem",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/student-t-distribution.png": {
+  "concepts": [
+   "stat.dist.student_t"
+  ],
+  "title": "Student's t-distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/supremum-and-infimum-1.svg": {
+  "concepts": [
+   "calc.limit.supremum"
+  ],
+  "title": "Supremum and infimum",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/sets-and-numbers/svg/supremum-and-infimum-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/trigonometric-equations-1.png": {
+  "concepts": [
+   "trig.eq.basic"
+  ],
+  "title": "Basic trigonometric equations",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/trigonometric-substitution-for-integrals-1.svg": {
+  "concepts": [
+   "calc.integral.trig_substitution"
+  ],
+  "title": "Trigonometric substitution for integrals",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/integrals/svg/trigonometric-substitution-for-integrals-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/uniform-continuity-1.svg": {
+  "concepts": [
+   "calc.limit.uniform_continuity"
+  ],
+  "title": "Uniform continuity",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/uniform-continuity-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/uniform-distribution.png": {
+  "concepts": [
+   "stat.dist.uniform"
+  ],
+  "title": "Uniform distribution",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/unit-circle-labeled.svg": {
+  "concepts": [
+   "trig.basics.special_angles",
+   "trig.basics.unit_circle"
+  ],
+  "title": "Unit circle: sine and cosine of standard angles",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/unit-circle-sine-cosine.svg": {
+  "concepts": [
+   "trig.basics.radians"
+  ],
+  "title": "Radians and degrees conversion",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/unit-circle-tangent.svg": {
+  "concepts": [
+   "trig.basics.tan_def"
+  ],
+  "title": "Tangent definition and ratio identity",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/vector-addition.svg": {
+  "concepts": [
+   "linalg.vector.add",
+   "linalg.vector.dot"
+  ],
+  "title": "Vector addition and scalar multiplication",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/vector-arrow.svg": {
+  "concepts": [
+   "linalg.vector.concept"
+  ],
+  "title": "Vectors: magnitude and direction",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/vector-equation-line-1.png": {
+  "concepts": [
+   "linalg.vector.parametric"
+  ],
+  "title": "Vector and parametric equations of a line",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/velocity-1-1.png": {
+  "concepts": [
+   "calc.deriv.applications"
+  ],
+  "title": "Applications: velocity and acceleration",
+  "description": "",
+  "source": "algebrica",
+  "upstream": null,
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/velocity-2.svg": {
+  "concepts": [
+   "precalc.parametric.graph"
+  ],
+  "title": "Graphing parametric equations",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/kinematics/svg/velocity-2.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/weierstrass-theorem-1.svg": {
+  "concepts": [
+   "calc.limit.weierstrass"
+  ],
+  "title": "Weierstrass extreme value theorem",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/differential-calculus-theorems/svg/weierstrass-theorem-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/arithmetic/add-carry.svg": {
+  "concepts": [
+   "arith.add.carry"
+  ],
+  "title": "Addition with carrying",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/add-double.svg": {
+  "concepts": [
+   "arith.add.double"
+  ],
+  "title": "Two-digit addition",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/add-single.svg": {
+  "concepts": [
+   "arith.add.single"
+  ],
+  "title": "Single-digit addition",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/add-triple.svg": {
+  "concepts": [
+   "arith.add.triple"
+  ],
+  "title": "Three-digit addition",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/add-word.svg": {
+  "concepts": [
+   "arith.add.word"
+  ],
+  "title": "Addition word problems",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/dec-intro.svg": {
+  "concepts": [
+   "arith.dec.intro"
+  ],
+  "title": "Read and write decimals to hundredths",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/div-basic.svg": {
+  "concepts": [
+   "arith.div.basic"
+  ],
+  "title": "Basic division without remainder",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/div-concept.svg": {
+  "concepts": [
+   "arith.div.concept"
+  ],
+  "title": "Division as equal sharing",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/div-long.svg": {
+  "concepts": [
+   "arith.div.long"
+  ],
+  "title": "Long division",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/div-remainder.svg": {
+  "concepts": [
+   "arith.div.remainder"
+  ],
+  "title": "Division with remainders",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/div-word.svg": {
+  "concepts": [
+   "arith.div.word"
+  ],
+  "title": "Division word problems",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/exp-concept.svg": {
+  "concepts": [
+   "arith.exp.concept"
+  ],
+  "title": "Exponents: base and power",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/exp-evaluate.svg": {
+  "concepts": [
+   "arith.exp.evaluate"
+  ],
+  "title": "Evaluate simple exponents",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/exp-power-rule.svg": {
+  "concepts": [
+   "arith.exp.power_rule"
+  ],
+  "title": "Power of a power rule: (x^a)^b",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/exp-product-rule.svg": {
+  "concepts": [
+   "arith.exp.product_rule"
+  ],
+  "title": "Exponent product rule: x^a times x^b",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/exp-quotient-rule.svg": {
+  "concepts": [
+   "arith.exp.quotient_rule"
+  ],
+  "title": "Exponent quotient rule: x^a divided by x^b",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-composite.svg": {
+  "concepts": [
+   "arith.factor.composite"
+  ],
+  "title": "Identify composite numbers",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-find.svg": {
+  "concepts": [
+   "arith.factor.find"
+  ],
+  "title": "Find factors of a number",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-gcf.svg": {
+  "concepts": [
+   "arith.factor.gcf"
+  ],
+  "title": "Greatest common factor",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-lcm.svg": {
+  "concepts": [
+   "arith.factor.lcm"
+  ],
+  "title": "Least common multiple",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-prime-fact.svg": {
+  "concepts": [
+   "arith.factor.prime_fact"
+  ],
+  "title": "Prime factorization",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/factor-prime.svg": {
+  "concepts": [
+   "arith.factor.prime"
+  ],
+  "title": "Identify prime numbers",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-2-5-10.svg": {
+  "concepts": [
+   "arith.mult.2_5_10"
+  ],
+  "title": "Times tables 2, 5 and 10",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-concept.svg": {
+  "concepts": [
+   "arith.mult.concept"
+  ],
+  "title": "Multiplication as repeated addition",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-double.svg": {
+  "concepts": [
+   "arith.mult.double"
+  ],
+  "title": "Multiply two-digit numbers",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-tables.svg": {
+  "concepts": [
+   "arith.mult.tables"
+  ],
+  "title": "Times tables 1 to 12",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-triple.svg": {
+  "concepts": [
+   "arith.mult.triple"
+  ],
+  "title": "Multiply three-digit by one-digit",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/mult-word.svg": {
+  "concepts": [
+   "arith.mult.word"
+  ],
+  "title": "Multiplication word problems",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/neg-add-sub.svg": {
+  "concepts": [
+   "arith.neg.add_sub"
+  ],
+  "title": "Add and subtract negative numbers",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/neg-mult-div.svg": {
+  "concepts": [
+   "arith.neg.mult_div"
+  ],
+  "title": "Multiply and divide with negatives",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/neg-number-line.svg": {
+  "concepts": [
+   "arith.neg.number_line"
+  ],
+  "title": "Negative numbers on number line",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/order-basic.svg": {
+  "concepts": [
+   "arith.order_ops.basic"
+  ],
+  "title": "Order of operations without exponents",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/order-full.svg": {
+  "concepts": [
+   "arith.order_ops.full"
+  ],
+  "title": "BODMAS with exponents",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/order-nested.svg": {
+  "concepts": [
+   "arith.order_ops.nested"
+  ],
+  "title": "Nested parentheses in order of operations",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/place-hundreds.svg": {
+  "concepts": [
+   "arith.place.hundreds"
+  ],
+  "title": "Hundreds place value",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/place-tens.svg": {
+  "concepts": [
+   "arith.place.tens"
+  ],
+  "title": "Tens and units place value",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/place-thousands.svg": {
+  "concepts": [
+   "arith.place.thousands"
+  ],
+  "title": "Thousands place value",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/round-hundreds.svg": {
+  "concepts": [
+   "arith.round.hundreds"
+  ],
+  "title": "Round to nearest 100",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/round-tens.svg": {
+  "concepts": [
+   "arith.round.tens"
+  ],
+  "title": "Round to nearest 10",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/round-thousands.svg": {
+  "concepts": [
+   "arith.round.thousands"
+  ],
+  "title": "Round to nearest 1000",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sqrt-perfect.svg": {
+  "concepts": [
+   "arith.sqrt.perfect"
+  ],
+  "title": "Square roots of perfect squares",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sqrt-simplify.svg": {
+  "concepts": [
+   "arith.sqrt.simplify"
+  ],
+  "title": "Simplify square roots",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sub-borrow.svg": {
+  "concepts": [
+   "arith.sub.borrow"
+  ],
+  "title": "Subtraction with borrowing",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sub-double.svg": {
+  "concepts": [
+   "arith.sub.double"
+  ],
+  "title": "Two-digit subtraction",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sub-single.svg": {
+  "concepts": [
+   "arith.sub.single"
+  ],
+  "title": "Single-digit subtraction",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ },
+ "/diagrams/arithmetic/sub-word.svg": {
+  "concepts": [
+   "arith.sub.word"
+  ],
+  "title": "Subtraction word problems",
+  "description": "",
+  "source": "local",
+  "upstream": null,
+  "license": "Mathua (own work)"
+ }
+}
