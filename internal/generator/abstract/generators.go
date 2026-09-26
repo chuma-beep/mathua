@@ -38,6 +38,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("abstract.field.galois_group", &galoisGroupGen{})
 	reg.Register("abstract.structures.exact_sequence", &exactSequenceGen{})
 	reg.Register("abstract.group.commutator", &commutatorGen{})
+	reg.Register("abstract.group.symmetric", &symmetricGroupGen{})
+	reg.Register("abstract.group.dihedral", &dihedralGroupGen{})
 }
 
 // ----- 1. group.def -----
@@ -1343,4 +1345,67 @@ func (g *commutatorGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+// ----- symmetric group -----
+
+type symmetricGroupGen struct{}
+
+func (g *symmetricGroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is the order of S_3? (enter a number)", "6", "3! = 6 permutations."},
+		{"What is the order of S_4? (enter a number)", "24", "4! = 24."},
+		{"What is the order of (1 2 3) in S_3? (enter a number)", "3", "3-cycles have order 3."},
+		{"Is S_3 abelian? (yes/no)", "no", "σ∘τ ≠ τ∘σ in general: (1 3) vs (2 3)."},
+		{"Does every permutation decompose into disjoint cycles? (yes/no)", "yes", "Follow orbits until they close; decomposition is unique up to order."},
+	}
+	tableHard := []entry{
+		{"What is |A_4|? (enter a number)", "12", "Index 2 in S_4: 24/2 = 12."},
+		{"How many conjugacy classes does S_4 have? (enter a number)", "5", "Five partitions of 4: identity, transpositions, double transpositions, 3-cycles, 4-cycles."},
+		{"Is S_n non-abelian for n≥3? (yes/no)", "yes", "Embed the S_3 pair fixing 4..n."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+// ----- dihedral group -----
+
+type dihedralGroupGen struct{}
+
+func (g *dihedralGroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is the order of D_3? (enter a number)", "6", "3 rotations + 3 reflections; D_3 ≅ S_3."},
+		{"What is the order of D_4? (enter a number)", "8", "4 rotations + 4 reflections."},
+		{"In D_5, what is the order of the rotation r? (enter a number)", "5", "Rotations form a cyclic subgroup of order n."},
+		{"Is D_3 isomorphic to S_3? (yes/no)", "yes", "Both order 6 with the same structure: rotations as 3-cycles, reflections as transpositions."},
+		{"Do all reflections in D_n have order 2? (yes/no)", "yes", "Each reflection is an involution."},
+		{"Is D_4 abelian? (yes/no)", "no", "Rotations and reflections do not commute: sr = r^-1 s."},
+	}
+	tableHard := []entry{
+		{"How many central elements does D_4 have? (enter a number)", "2", "Identity plus the half-turn r^2."},
+		{"How many subgroups does D_6 have? (enter a number)", "16", "τ(6) + σ(6) = 4 + 12."},
+		{"In D_n, srs equals what power expression? (type like r^-1)", "r^-1", "Moving a rotation across a reflection inverts it."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }
