@@ -29,6 +29,36 @@
     }
   },
   {
+    "id": "abstract.group.symmetric",
+    "label": "Symmetric groups S_n",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.def",
+      "abstract.group.examples"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "abstract.group.dihedral",
+    "label": "Dihedral groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "abstract.group.def",
+      "abstract.group.symmetric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
     "id": "abstract.group.subgroup",
     "label": "Subgroups and cosets",
     "domain": "abstract_algebra",

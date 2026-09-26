@@ -218,6 +218,21 @@
     }
   },
   {
+    "id": "linalg.subspace",
+    "label": "Subspaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "linalg.vector.concept",
+      "linalg.vec.span"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
     "id": "linalg.vec.basis",
     "label": "Basis and dimension",
     "domain": "linear_algebra",

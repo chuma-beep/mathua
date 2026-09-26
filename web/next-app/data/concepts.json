@@ -31,6 +31,36 @@
   {
     "domain": "abstract_algebra",
     "grading_type": "multiple_choice",
+    "id": "abstract.group.symmetric",
+    "label": "Symmetric groups S_n",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.def",
+      "abstract.group.examples"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "multiple_choice",
+    "id": "abstract.group.dihedral",
+    "label": "Dihedral groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.def",
+      "abstract.group.symmetric"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "multiple_choice",
     "id": "abstract.group.subgroup",
     "label": "Subgroups and cosets",
     "mastery_threshold": {
@@ -4129,6 +4159,20 @@
   {
     "domain": "complex_numbers",
     "grading_type": "symbolic",
+    "id": "complex.adv.logarithm",
+    "label": "Complex logarithm and branches",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "complex.adv.exponential"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "symbolic",
     "id": "complex.adv.inequalities",
     "label": "Fundamental inequalities for complex numbers",
     "mastery_threshold": {
@@ -5983,6 +6027,21 @@
     "prerequisites": [
       "linalg.vector.add",
       "linalg.det.2x2"
+    ],
+    "subdomain": "linear_algebra.vectors"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "multiple_choice",
+    "id": "linalg.subspace",
+    "label": "Subspaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.vector.concept",
+      "linalg.vec.span"
     ],
     "subdomain": "linear_algebra.vectors"
   },
