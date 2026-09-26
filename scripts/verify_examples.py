@@ -95,6 +95,16 @@ WAIVERS: list[tuple[str, str, str]] = [
      "radical-isolation derivation (equation steps, not identities)"),
     ("lines-planes-conic-sections/lines.md", "\\begin{align} &2x + 1 = -x + 4",
      "intersection solve-track (solving the system)"),
+    ("algebraic-structures/dihedral-groups.md", "(r^a s^i)(r^b s^j)",
+     "noncommutative dihedral generators (scalar sampling misfires)"),
+    ("algebraic-structures/dihedral-groups.md", "(r^ks)(r^ks)",
+     "noncommutative dihedral generators (scalar sampling misfires)"),
+    ("algebraic-structures/dihedral-groups.md", "r(r^ks)r^{-1}",
+     "noncommutative dihedral generators (scalar sampling misfires)"),
+    ("algebraic-structures/dihedral-groups.md", "(r^js)r^k",
+     "noncommutative dihedral generators (scalar sampling misfires)"),
+    ("algebraic-structures/dihedral-groups.md", "(r^js)(r^ks)",
+     "noncommutative dihedral generators (scalar sampling misfires)"),
 ]
 
 CONTRADICTION_RE = re.compile(r"contradiction|absurd|no solution|impossible", re.I)

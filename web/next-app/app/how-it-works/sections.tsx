@@ -47,7 +47,7 @@ export function ConceptGraphSection() {
         B is ever shown to the student.
       </p>
       <p style={bodyStyle}>
-        The graph currently contains 630 concepts spanning 17 domains: from early Counting
+        The graph currently contains 634 concepts spanning 17 domains: from early Counting
         through Calculus, Linear Algebra and Topology.
       </p>
       <pre style={codeBlockStyle}>
@@ -203,7 +203,7 @@ export function DiagnosticSection() {
       <DiagnosticFlow />
       <p style={bodyStyle}>
         The diagnostic test asks as few questions as possible. Without this algorithm, a
-        naive assessment of 630 concepts would require up to 630 questions. The CAT approach,
+        naive assessment of 634 concepts would require up to 634 questions. The CAT approach,
         combining binary search with the topological ordering, reduces this by roughly 90%.
       </p>
       <p style={bodyStyle}>

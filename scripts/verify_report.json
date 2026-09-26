@@ -1,5 +1,131 @@
 [
  {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "v_k = \\left( \\cos\\frac{2\\pi k}{n}, \\ \\sin\\frac{2\\pi k}{n} \\right) \\qquad k = 0, 1, \\ldots, n - 1"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 15,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "D_n = \\{\\ e, r, \\ldots, r^{n-1}, s, rs, \\ldots, r^{n-1}s \\ \\} \\qquad |D_n| = 2n"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 23,
+  "verdict": "SKIP",
+  "reason": "conjugate/vector notation",
+  "latex": "r(z) = \\zeta z \\qquad s(z) = \\overline{z}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 27,
+  "verdict": "SKIP",
+  "reason": "conjugate/vector notation",
+  "latex": "s(r(s(z))) = \\overline{\\zeta\\overline{z}} = \\overline{\\zeta}z = \\zeta^{-1}z"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 33,
+  "verdict": "SKIP",
+  "reason": "waived: noncommutative dihedral generators (scalar sampling misfires)",
+  "latex": "(r^a s^i)(r^b s^j) = r^{a + (-1)^i b}s^{i+j}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 39,
+  "verdict": "SKIP",
+  "reason": "waived: noncommutative dihedral generators (scalar sampling misfires)",
+  "latex": "(r^ks)(r^ks) = r^k(sr^k)s = r^kr^{-k}ss = e"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 43,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "D_n = \\langle\\ r, s \\mid r^n = s^2 = e, \\ srs = r^{-1}\\ \\rangle"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "s^2 = t^2 = (st)^n = e"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 63,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "R = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\[6pt] \\sin\\theta & \\cos\\theta \\end{pmatrix} \\qquad J = \\begin{pmatrix} 1 & 0 \\\\[6pt] 0 & -1 \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 67,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\begin{align}\nJR &= \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\[6pt] -\\sin\\theta & -\\cos\\theta \\end{pmatrix} \\\\[6pt]\nJRJ &= \\begin{pmatrix} \\cos\\theta & \\sin\\theta \\\\[6pt] -\\sin\\theta & \\cos\\theta \\end{pmatrix} \\\\[6pt]\n    &= R^{-1}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 79,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\langle r \\rangle = \\{\\ e, r, \\ldots, r^{n-1} \\ \\} \\cong \\mathbb{Z}/n\\mathbb{Z}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "\\varphi_k = \\frac{\\pi k}{n} \\qquad k = 0, 1, \\ldots, n-1"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 111,
+  "verdict": "SKIP",
+  "reason": "waived: noncommutative dihedral generators (scalar sampling misfires)",
+  "latex": "r(r^ks)r^{-1} = r^{k+1}(sr^{-1}) = r^{k+1}rs = r^{k+2}s"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 115,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "Z(D_n) = \\begin{cases} \\{\\ e \\ \\} & n \\ \\text{odd} \\\\[6pt] \\{\\ e, r^{n/2} \\ \\} & n \\ \\text{even} \\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 129,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "H = \\langle r^d \\rangle \\cup \\langle r^d \\rangle r^is = \\langle\\ r^d, r^is\\ \\rangle"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 141,
+  "verdict": "SKIP",
+  "reason": "waived: noncommutative dihedral generators (scalar sampling misfires)",
+  "latex": "(r^js)r^k(r^js)^{-1} = r^j(sr^ks)r^{-j} = r^jr^{-k}r^{-j} = r^{-k}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 147,
+  "verdict": "SKIP",
+  "reason": "waived: noncommutative dihedral generators (scalar sampling misfires)",
+  "latex": "(r^js)(r^ks)(r^js)^{-1} = r^jsr^k(ss)r^{-j} = r^jsr^{k-j} = r^{2j-k}s"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/dihedral-groups.md",
+  "line": 157,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "r \\mapsto (1\\ 2\\ \\cdots\\ n) \\qquad s \\mapsto (2\\ n)(3\\ n-1) \\cdots"
+ },
+ {
   "file": "data/lessons/algebrica/algebraic-structures/fields.md",
   "line": 65,
   "verdict": "SKIP",
@@ -91,6 +217,139 @@
   "latex": "\\mathrm{im}(\\varphi) = \\{\\varphi(a) : a \\in G\\}"
  },
  {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\star",
+  "latex": "\\varphi(a \\cdot b) = \\varphi(a) \\star \\varphi(b)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 19,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\varphi(a + b) = \\varphi(a) + \\varphi(b)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 21,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\varphi(a \\cdot b) = \\varphi(a) \\cdot \\varphi(b)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 29,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\varphi(\\mathbf{u} + \\mathbf{v}) = \\varphi(\\mathbf{u}) + \\varphi(\\mathbf{v})"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 31,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\varphi(r \\cdot \\mathbf{v}) = r \\cdot \\varphi(\\mathbf{v})"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 41,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\rho(gh)(x) = (gh) \\cdot x = g \\cdot (h \\cdot x) = \\rho(g)(\\rho(h)(x))"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 57,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\ker(\\varphi) = \\{\\ a \\in A : \\varphi(a) = e_B \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 61,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\mathrm{im}(\\varphi) = \\{\\ \\varphi(a) : a \\in A \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 71,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\star",
+  "latex": "\\varphi(g \\cdot x \\cdot g^{-1}) = \\varphi(g) \\star \\varphi(x) \\star \\varphi(g)^{-1} = e_H"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 83,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\mathrm{sgn} : S_n \\to \\{\\ 1, -1 \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 91,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\ker",
+  "latex": "A_n = \\ker(\\mathrm{sgn})"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 97,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "(a_1, a_2, \\ldots, a_k) = (a_1, a_k)(a_1, a_{k-1})\\cdots(a_1, a_2)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 127,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\varphi(n) = \\varphi(\\underbrace{1 + 1 + \\cdots + 1}_{n \\text{ summands}}) = n\\varphi(1)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 137,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "A / \\ker(\\varphi) \\cong \\mathrm{im}(\\varphi)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 149,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "H/(H \\cap N) \\cong HN/N"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 153,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "M/(M \\cap N) \\cong (M + N)/N"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 161,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "(X/N)/(M/N) \\cong X/M"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 171,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "T_{A,\\mathbf{b}} \\longmapsto\n\\begin{pmatrix}\nA & \\mathbf{b} \\\\\n0 & 1\n\\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/homomorphisms-and-isomorphisms.md",
+  "line": 185,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\log : (\\mathbb{R}^{+}, \\cdot) \\to (\\mathbb{R}, +)"
+ },
+ {
   "file": "data/lessons/algebrica/algebraic-structures/modules.md",
   "line": 50,
   "verdict": "SKIP",
@@ -168,102 +427,389 @@
   "latex": "\\qquad \\mathrm{im}(\\varphi) = \\\\{\\varphi(a) : a \\in R\\\\}"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 59,
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 31,
   "verdict": "SKIP",
-  "reason": "ellipsis schema",
-  "latex": "\\alpha_1 \\mathbf{v}_1 + \\alpha_2 \\mathbf{v}_2 + \\cdots + \\alpha_n \\mathbf{v}_n = \\mathbf{0}"
+  "reason": "set membership",
+  "latex": "\\alpha\\mathbf{u} + \\beta\\mathbf{v} \\in W \\qquad \\text{for all } \\mathbf{u}, \\mathbf{v} \\in W \\text{ and all } \\alpha, \\beta \\in F"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 64,
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 39,
   "verdict": "SKIP",
-  "reason": "ellipsis schema",
-  "latex": "\\mathbf{v} = \\alpha_1 \\mathbf{v}_1 + \\cdots + \\alpha_n \\mathbf{v}_n = \\beta_1 \\mathbf{v}_1 + \\cdots + \\beta_n \\mathbf{v}_n"
+  "reason": "set membership",
+  "latex": "\\mathcal{S} = \\{\\ \\mathbf{x} \\in \\mathbb{R}^n \\mid A\\mathbf{x} = \\mathbf{0} \\ \\}"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 67,
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 43,
   "verdict": "SKIP",
-  "reason": "ellipsis schema",
-  "latex": "(\\alpha_1 - \\beta_1)\\mathbf{v}_1 + \\cdots + (\\alpha_n - \\beta_n)\\mathbf{v}_n = \\mathbf{0}"
+  "reason": "unresolved function",
+  "latex": "A(\\alpha\\mathbf{x} + \\beta\\mathbf{y}) = \\alpha A\\mathbf{x} + \\beta A\\mathbf{y} = \\mathbf{0}"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 77,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "A + B = \\{\\ \\mathbf{a} + \\mathbf{b} \\mid \\mathbf{a} \\in A,\\ \\mathbf{b} \\in B \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 81,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\alpha(\\mathbf{a}_1 + \\mathbf{b}_1) + \\beta(\\mathbf{a}_2 + \\mathbf{b}_2) = (\\alpha\\mathbf{a}_1 + \\beta\\mathbf{a}_2) + (\\alpha\\mathbf{b}_1 + \\beta\\mathbf{b}_2)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\dim(A + B) = \\dim A + \\dim B - \\dim(A \\cap B)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 97,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\mathcal{B} = \\{\\ \\mathbf{u}_1, \\ldots, \\mathbf{u}_k, \\mathbf{a}_1, \\ldots, \\mathbf{a}_p, \\mathbf{b}_1, \\ldots, \\mathbf{b}_q \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 103,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\sum_{i=1}^{k} \\lambda_i\\mathbf{u}_i + \\sum_{j=1}^{p} \\mu_j\\mathbf{a}_j + \\sum_{l=1}^{q} \\nu_l\\mathbf{b}_l = \\mathbf{0}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 107,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\sum_{i=1}^{k} \\delta_i\\mathbf{u}_i - \\sum_{l=1}^{q} \\nu_l\\mathbf{b}_l = \\mathbf{0}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 117,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "A = \\mathrm{span}\\{\\ (1, 0, 1, 0),\\ (0, 1, 0, 1) \\ \\}, \\qquad B = \\mathrm{span}\\{\\ (1, 1, 0, 0),\\ (0, 0, 1, 1) \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 129,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\dim",
+  "latex": "\\dim(A \\oplus B) = \\dim A + \\dim B"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 135,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\mathbf{0} = \\mathbf{a}_1 + \\cdots + \\mathbf{a}_s \\quad \\Longrightarrow \\quad \\mathbf{a}_1 = \\cdots = \\mathbf{a}_s = \\mathbf{0}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 139,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "(1, 0) + (0, 1) - (1, 1) = (0, 0)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 149,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\dim",
+  "latex": "\\dim A + \\dim B = \\dim V"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/subspaces.md",
+  "line": 157,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "(\\mathbf{v}_1, \\ldots, \\mathbf{v}_s) + (\\mathbf{w}_1, \\ldots, \\mathbf{w}_s) = (\\mathbf{v}_1 + \\mathbf{w}_1, \\ldots, \\mathbf{v}_s + \\mathbf{w}_s), \\qquad \\alpha(\\mathbf{v}_1, \\ldots, \\mathbf{v}_s) = (\\alpha\\mathbf{v}_1, \\ldots, \\alpha\\mathbf{v}_s)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 9,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "\\sigma = \\begin{pmatrix} 1 & 2 & \\cdots & n \\\\[6pt] \\sigma(1) & \\sigma(2) & \\cdots & \\sigma(n) \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "|S_n| = n!"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 19,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "\\sigma = \\begin{pmatrix} 1 & 2 & 3 \\\\[6pt] 2 & 3 & 1 \\end{pmatrix} \\qquad \\tau = \\begin{pmatrix} 1 & 2 & 3 \\\\[6pt] 2 & 1 & 3 \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 23,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "\\sigma \\circ \\tau = \\begin{pmatrix} 1 & 2 & 3 \\\\[6pt] 3 & 2 & 1 \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 27,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "\\tau \\circ \\sigma = \\begin{pmatrix} 1 & 2 & 3 \\\\[6pt] 1 & 3 & 2 \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 45,
+  "verdict": "SKIP",
+  "reason": "environment: pmatrix",
+  "latex": "\\rho = \\begin{pmatrix} 1 & 2 & 3 & 4 & 5 & 6 \\\\[6pt] 3 & 5 & 1 & 4 & 2 & 6 \\end{pmatrix}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 57,
+  "verdict": "SKIP",
+  "reason": "sigma function",
+  "latex": "\\mathrm{ord}(\\sigma) = \\mathrm{lcm}(k_1, k_2, \\ldots, k_m)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 65,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "(a_1\\ a_2\\ \\cdots\\ a_k) = (a_1\\ a_k)(a_1\\ a_{k-1}) \\cdots (a_1\\ a_2)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 71,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\Delta = \\prod_{1 \\leq i < j \\leq n} (x_i - x_j)"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 75,
+  "verdict": "SKIP",
+  "reason": "sigma function",
+  "latex": "\\mathrm{sgn}(\\sigma) = \\frac{\\sigma \\cdot \\Delta}{\\Delta} \\in \\{\\ 1, -1 \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 91,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "|A_n| = \\frac{n!}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/algebraic-structures/symmetric-group.md",
+  "line": 101,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\pi (a_1\\ a_2\\ \\cdots\\ a_k) \\pi^{-1} = (\\pi(a_1)\\ \\pi(a_2)\\ \\cdots\\ \\pi(a_k))"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "e^{w+2k\\pi i}=e^w"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 9,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "e^w=z"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "e^w=e^{u+iv}=e^u(\\cos v+i\\sin v)"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 17,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\log z:=\\{\\ \\ln|z|+i(\\theta+2k\\pi)\\mid k\\in\\mathbb{Z}\\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 27,
+  "verdict": "SKIP",
+  "reason": "principal argument",
+  "latex": "\\mathrm{Log}(z):=\\ln|z|+i\\mathrm{Arg}(z)"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 31,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\mathrm{Log}(x)=\\ln x,\\qquad \\mathrm{Log}(-x)=\\ln x+i\\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 35,
+  "verdict": "SKIP",
+  "reason": "principal argument",
+  "latex": "\\begin{align}\n|z|&=\\sqrt{(-\\sqrt{3})^2+(-1)^2}=2\\\\[6pt]\n\\mathrm{Arg}(z)&=-\\frac{5\\pi}{6}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 44,
+  "verdict": "SKIP",
+  "reason": "nested sqrt power",
+  "latex": "\\mathrm{Log}(-\\sqrt{3}-i)=\\ln 2-\\frac{5\\pi i}{6}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 48,
+  "verdict": "SKIP",
+  "reason": "nested sqrt power",
+  "latex": "\\log(-\\sqrt{3}-i)=\\left\\{\\ \\ln 2+i\\left(-\\frac{5\\pi}{6}+2k\\pi\\right)\\mid k\\in\\mathbb{Z}\\ \\right\\}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 56,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "e^{\\mathrm{Log}(z)}=z"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 60,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\mathrm{Log}(e^w)=w-2k\\pi i"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 68,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "e^{L(z)}=z"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 72,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "h(t):=L(e^{it})-it"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
   "line": 76,
   "verdict": "SKIP",
   "reason": "tuple or multi-argument form",
-  "latex": "\\mathbf{e}_1 = (1, 0, 0), \\quad \\mathbf{e}_2 = (0, 1, 0), \\quad \\mathbf{e}_3 = (0, 0, 1)"
+  "latex": "h(0)=L(1),\\qquad h(2\\pi)=L(1)-2\\pi i"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 86,
-  "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "\\varphi(\\mathbf{u} + \\mathbf{v}) = \\varphi(\\mathbf{u}) + \\varphi(\\mathbf{v})"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 87,
-  "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "\\varphi(\\alpha \\cdot \\mathbf{v}) = \\alpha \\cdot \\varphi(\\mathbf{v})"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 93,
-  "verdict": "SKIP",
-  "reason": "empty side",
-  "latex": "\\ker(\\varphi) = \\\\{\\mathbf{v} \\in V : \\varphi(\\mathbf{v}) = \\mathbf{0}\\\\}"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 94,
-  "verdict": "SKIP",
-  "reason": "empty side",
-  "latex": "\\mathrm{im}(\\varphi) = \\\\{\\varphi(\\mathbf{v}) : \\mathbf{v} \\in V\\\\}"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 98,
-  "verdict": "SKIP",
-  "reason": "unknown macro: \\dim",
-  "latex": "\\dim V = \\dim \\ker(\\varphi) + \\dim \\mathrm{im}(\\varphi)"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 108,
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 84,
   "verdict": "SKIP",
   "reason": "parse: Exception",
-  "latex": "\\varphi(x, y, z) = (x + y,\\\\; y + z)"
+  "latex": "R_{\\beta}:=\\{\\ re^{i\\beta}\\mid r\\geq0\\ \\}"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 114,
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 88,
   "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "\\varphi(\\mathbf{u} + \\mathbf{v}) = \\varphi(\\mathbf{u}) + \\varphi(\\mathbf{v})"
+  "reason": "principal argument",
+  "latex": "L_{\\beta}(z):=\\ln|z|+i\\mathrm{Arg}_{\\beta}(z)"
  },
  {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 115,
-  "verdict": "SKIP",
-  "reason": "unresolved function",
-  "latex": "\\varphi(\\alpha \\mathbf{v}) = \\alpha \\varphi(\\mathbf{v})"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 119,
-  "verdict": "SKIP",
-  "reason": "parse: Exception",
-  "latex": "(-y, y, -y) = y(-1, 1, -1)"
- },
- {
-  "file": "data/lessons/algebrica/algebraic-structures/vector-spaces.md",
-  "line": 123,
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 92,
   "verdict": "SKIP",
   "reason": "set membership",
-  "latex": "\\dim \\mathbb{R}^3 = \\dim \\ker(\\varphi) + \\dim \\mathrm{im}(\\varphi) = 1 + 2 = 3"
+  "latex": "\\mathbb{C}\\setminus(-\\infty,0]"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 98,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\n\\lim_{y\\to0^+}\\mathrm{Log}(x+iy)&=\\ln|x|+i\\pi\\\\[6pt]\n\\lim_{y\\to0^-}\\mathrm{Log}(x+iy)&=\\ln|x|-i\\pi\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 109,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "L_1(z)-L_2(z)=2m\\pi i"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 119,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\ln|z_1|+\\ln|z_2|+i(\\theta_1+\\theta_2+2k\\pi)"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 125,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\mathrm{Log}(z_1z_2)=\\mathrm{Log}(z_1)+\\mathrm{Log}(z_2)-2m\\pi i"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 129,
+  "verdict": "SKIP",
+  "reason": "principal argument",
+  "latex": "-\\pi<\\mathrm{Arg}(z_1)+\\mathrm{Arg}(z_2)\\leq\\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 133,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\n\\mathrm{Log}((-1)(-1))&=\\mathrm{Log}(1)=0\\\\[6pt]\n\\mathrm{Log}(-1)+\\mathrm{Log}(-1)&=2\\pi i\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 148,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\ne^{L(z)}L'(z)&=1\\\\[6pt]\nzL'(z)&=1\\\\[6pt]\nL'(z)&=\\frac{1}{z}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 160,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\mathrm{Log}(1+u)=\\sum_{n=1}^{\\infty}(-1)^{n+1}\\frac{u^n}{n}=u-\\frac{u^2}{2}+\\frac{u^3}{3}-\\frac{u^4}{4}+\\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 168,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "z^a:=e^{aL(z)}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 174,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\log i=\\left\\{\\ i\\left(\\frac{\\pi}{2}+2k\\pi\\right)\\mid k\\in\\mathbb{Z}\\ \\right\\}"
+ },
+ {
+  "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md",
+  "line": 178,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "i^i=\\left\\{\\ e^{-\\pi/2-2k\\pi}\\mid k\\in\\mathbb{Z}\\ \\right\\}"
  },
  {
   "file": "data/lessons/algebrica/complex-numbers/complex-numbers-in-exponential-form.md",

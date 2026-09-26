@@ -3,6 +3,12 @@
     "type": "log_ln_mix",
     "detail": "both \\log and \\ln in math",
     "line": 1,
+    "file": "data/lessons/algebrica/complex-numbers/complex-logarithm.md"
+  },
+  {
+    "type": "log_ln_mix",
+    "detail": "both \\log and \\ln in math",
+    "line": 1,
     "file": "data/lessons/algebrica/derivatives/derivatives.md"
   },
   {
