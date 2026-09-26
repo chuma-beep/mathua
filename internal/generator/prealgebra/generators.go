@@ -472,12 +472,64 @@ type sciNotationGen struct{}
 func (g *sciNotationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	coeff := float64(rand.Intn(scale*20)+10) / 10
-	exp := rand.Intn(max(1, scale)) + 1
-	return generator.Problem{
-		Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, exp),
-		Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
-		Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\)", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
+	switch rand.Intn(3) {
+	case 0:
+		// scientific -> standard, positive exponent (existing behavior).
+		exp := rand.Intn(max(1, scale)) + 1
+		return generator.Problem{
+			Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, exp),
+			Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
+			Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\)", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
+		}
+	case 1:
+		// scientific -> standard, negative exponent.
+		exp := rand.Intn(max(1, scale)) + 1
+		return generator.Problem{
+			Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, -exp),
+			Answer:      fmt.Sprintf("%g", coeff/float64(mathutil.IntPow(10, exp))),
+			Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\): move the point %d places left.", coeff, -exp, coeff/float64(mathutil.IntPow(10, exp)), exp),
+		}
+	default:
+		// standard -> scientific, typed in x10^ form (e.g. 3.7x10^4).
+		exp := rand.Intn(max(1, scale)) + 1
+		if rand.Intn(2) == 0 {
+			exp = -exp
+		}
+		std := coeff * math.Pow(10, float64(exp))
+		return generator.Problem{
+			Question:    fmt.Sprintf("Write %g in scientific notation (type like 3.7x10^4).", std),
+			Answer:      fmt.Sprintf("%gx10^%d", coeff, exp),
+			Explanation: fmt.Sprintf("%g = %g × 10^%d: shift the point to isolate one nonzero digit.", std, coeff, exp),
+		}
 	}
+}
+
+// Grade handles both answer shapes this generator serves: plain standard
+// numbers (numeric compare) and x10^ scientific form (reuses the ops
+// normalizer in this package).
+func (g *sciNotationGen) Grade(expected, userAnswer string) grader.Result {
+	if strings.Contains(expected, "x10^") {
+		normE := normalizeSciNotation(expected)
+		normA := normalizeSciNotation(userAnswer)
+		if normE == "" || normA == "" {
+			return grader.Result{Correct: false, Score: 0, Feedback: "Type scientific notation like 3.7x10^4"}
+		}
+		eCoeff, eExp := parseSciNotationValue(normE)
+		aCoeff, aExp := parseSciNotationValue(normA)
+		if eCoeff == nil || aCoeff == nil {
+			return grader.Result{Correct: false, Score: 0, Feedback: "Type scientific notation like 3.7x10^4"}
+		}
+		if *eExp != *aExp || math.Abs(*eCoeff-*aCoeff) >= 1e-4 {
+			return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect — check the coefficient and the exponent"}
+		}
+		return grader.Result{Correct: true, Score: 1}
+	}
+	e, errE := strconv.ParseFloat(strings.TrimSpace(expected), 64)
+	a, errA := strconv.ParseFloat(strings.TrimSpace(userAnswer), 64)
+	if errE != nil || errA != nil || math.Abs(e-a) >= 1e-9 {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Incorrect — convert carefully"}
+	}
+	return grader.Result{Correct: true, Score: 1}
 }
 
 type sciNotationOpsGen struct{}
