@@ -15,14 +15,29 @@
 // prerequisites + encompasses as edges) so the precomputed layout matches
 // what the client computes today from /api/graph order. Keep in sync.
 //
-// Usage: npm run flow:build [-- --print-order]
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
+// Usage: npm run flow:build [-- --print-order | --require-source]
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import dagre from 'dagre'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const conceptsDir = join(root, '..', '..', 'data', 'concepts')
+const artifact = join(root, 'data', 'flow.positions.json')
+
+// The Docker webbuilder stage only copies web/next-app, so the raw per-domain
+// corpus is absent there. Fall back to the committed artifact instead of
+// failing the image build; `--require-source` restores strict mode for local
+// runs that must regenerate.
+if (!existsSync(conceptsDir) && !process.argv.includes('--require-source')) {
+  console.log(
+    `flow:build skipped: raw corpus not present at ${conceptsDir}; ` +
+      (existsSync(artifact)
+        ? `using committed data/flow.positions.json`
+        : `WARNING no committed artifact at ${artifact}`)
+  )
+  process.exit(0)
+}
 
 function loadRaw() {
   const files = readdirSync(conceptsDir)
@@ -152,6 +167,6 @@ if (process.argv.includes('--print-order')) {
   const t0 = performance.now()
   const positions = layout(concepts)
   const ms = performance.now() - t0
-  writeFileSync(join(root, 'data', 'flow.positions.json'), JSON.stringify(positions) + '\n')
+  writeFileSync(artifact, JSON.stringify(positions) + '\n')
   console.log(`flow:build ${Object.keys(positions).length} positions in ${ms.toFixed(0)}ms -> data/flow.positions.json`)
 }
