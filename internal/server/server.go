@@ -245,8 +245,6 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseRoute))))
 	mux.HandleFunc("/api/transcript", logRequest(cors(s.authMiddleware(s.handleTranscript))))
 	mux.HandleFunc("/api/attempts", logRequest(cors(s.authMiddleware(s.handleAttempts))))
-	mux.HandleFunc("/api/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticStart))))
-	mux.HandleFunc("/api/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.handleDiagnosticAnswer))))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
 	mux.HandleFunc("/api/goal/diagnostic", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticStart)))))
 	mux.HandleFunc("/api/goal/diagnostic/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalDiagnosticAnswer)))))
@@ -669,84 +667,6 @@ func (s *Server) handleLeagues(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, board)
-}
-
-// POST /api/diagnostic
-func (s *Server) handleDiagnosticStart(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	sess := s.eng.StartDiagnostic()
-	sess.ID = newUUID()
-	_, cid, err := s.eng.NextDiagnosticQuestion(sess)
-	if err != nil {
-		writeError(w, "failed to get diagnostic question", 500)
-		return
-	}
-	s.mu.Lock()
-	s.diagSessions[sess.ID] = sess
-	s.diagCreated[sess.ID] = time.Now()
-	s.mu.Unlock()
-	writeJSON(w, map[string]interface{}{
-		"session_id": sess.ID,
-		"concept_id": cid,
-	})
-}
-
-// POST /api/diagnostic/answer
-type diagAnswerReq struct {
-	SessionID string `json:"session_id"`
-	ConceptID string `json:"concept_id"`
-	Correct   bool   `json:"correct"`
-	Fast      bool   `json:"fast"`
-}
-
-func (s *Server) handleDiagnosticAnswer(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	var req diagAnswerReq
-	if err := decodeJSON(w, r, &req); err != nil {
-		writeError(w, "invalid request", 400)
-		return
-	}
-	s.mu.Lock()
-	sess := s.diagSessions[req.SessionID]
-	s.mu.Unlock()
-	if sess == nil {
-		writeError(w, "diagnostic session not found", 404)
-		return
-	}
-	s.eng.SubmitDiagnosticAnswer(sess, req.ConceptID, req.Correct, req.Fast)
-	if s.eng.IsDiagnosticComplete(sess) {
-		frontier := s.eng.DiagnosticFrontier(sess)
-		report := s.eng.DiagnosticReport(sess)
-		s.mu.Lock()
-		delete(s.diagSessions, req.SessionID)
-		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "frontier": frontier, "report": report})
-		return
-	}
-	_, cid, err := s.eng.NextDiagnosticQuestion(sess)
-	if err != nil {
-		writeError(w, "failed to get next question", 500)
-		return
-	}
-	if cid == "" {
-		// Cover exhausted (incl. supplemental): the Next call above marked
-		// the session done — close it with the report, never serve an
-		// empty question with done:false.
-		frontier := s.eng.DiagnosticFrontier(sess)
-		report := s.eng.DiagnosticReport(sess)
-		s.mu.Lock()
-		delete(s.diagSessions, req.SessionID)
-		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "frontier": frontier, "report": report})
-		return
-	}
-	writeJSON(w, map[string]interface{}{"done": false, "concept_id": cid})
 }
 
 // GET /api/health
