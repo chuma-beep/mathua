@@ -1409,6 +1409,36 @@
   {
     "domain": "algebra",
     "grading_type": "symbolic",
+    "id": "alg.func.power",
+    "label": "Power functions x^a",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "alg.func.evaluate",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "symbolic",
+    "id": "alg.func.irrational",
+    "label": "Irrational (root) functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "alg.func.domain",
+      "arith.sqrt.simplify"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "symbolic",
     "id": "alg.func.even_odd",
     "label": "Even and odd functions",
     "mastery_threshold": {
@@ -1445,6 +1475,21 @@
     },
     "prerequisites": [
       "alg.func.concept"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "symbolic",
+    "id": "alg.func.injectivity",
+    "label": "Injective, surjective, and bijective functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.composite"
     ],
     "subdomain": "algebra.functions"
   },
@@ -7614,6 +7659,36 @@
   },
   {
     "domain": "precalculus",
+    "grading_type": "symbolic",
+    "id": "precalc.func.floor_ceiling",
+    "label": "Floor and ceiling functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.evaluate"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "symbolic",
+    "id": "precalc.func.heaviside",
+    "label": "Heaviside step function",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "precalc.func.piecewise",
+      "alg.func.evaluate"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
     "grading_type": "expression",
     "id": "precalc.func.arith_combine",
     "label": "Arithmetic combinations of functions",
@@ -8318,6 +8393,21 @@
   {
     "domain": "statistics",
     "grading_type": "symbolic",
+    "id": "stat.func.gaussian",
+    "label": "Gaussian function: moments, FWHM, convolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "stat.dist.normal",
+      "alg.exp.concept"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "symbolic",
     "id": "stat.dist.z_table",
     "label": "Standard normal distribution and Z-table",
     "mastery_threshold": {
@@ -8907,6 +8997,35 @@
   },
   {
     "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.sine",
+    "label": "Sine function: properties, derivatives, and integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.sin_cos_def",
+      "alg.func.concept"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.cosine",
+    "label": "Cosine function: properties, derivatives, and integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.func.sine"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.basics.tan_def",
     "label": "Tangent definition and ratio identity",
@@ -8921,6 +9040,35 @@
   },
   {
     "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.tangent",
+    "label": "Tangent function: asymptotes, derivative, and integral",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.tan_def",
+      "trig.func.sine"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.cotangent",
+    "label": "Cotangent function: asymptotes, derivative, and integral",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.func.tangent"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.basics.reciprocal",
     "label": "Reciprocal trig functions: csc, sec, cot",
@@ -8932,6 +9080,36 @@
       "trig.basics.tan_def"
     ],
     "subdomain": "trigonometry.basics"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.secant",
+    "label": "Secant function: reciprocal properties and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.reciprocal",
+      "trig.func.cosine"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.cosecant",
+    "label": "Cosecant function: reciprocal properties and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.reciprocal",
+      "trig.func.sine"
+    ],
+    "subdomain": "trigonometry.functions"
   },
   {
     "domain": "trigonometry",
@@ -9036,6 +9214,35 @@
   },
   {
     "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.arcsine",
+    "label": "Arcsine function: inverse properties and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.sine"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.arccosine",
+    "label": "Arccosine function: inverse properties and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.func.arcsine"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.adv.law_sines",
     "label": "Law of sines",
@@ -9077,6 +9284,35 @@
       "trig.adv.inverse"
     ],
     "subdomain": "trigonometry.advanced"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.arctangent",
+    "label": "Arctangent function: asymptotes and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.adv.arctan",
+      "trig.func.tangent"
+    ],
+    "subdomain": "trigonometry.functions"
+  },
+  {
+    "domain": "trigonometry",
+    "grading_type": "multiple_choice",
+    "id": "trig.func.arccotangent",
+    "label": "Arccotangent function: asymptotes and calculus",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.func.arctangent"
+    ],
+    "subdomain": "trigonometry.functions"
   },
   {
     "domain": "trigonometry",

@@ -504,5 +504,20 @@
    "streak": 3,
    "avg_time_seconds": 120
   }
- }
+ },
+  {
+   "id": "stat.func.gaussian",
+   "label": "Gaussian function: moments, FWHM, convolution",
+   "domain": "statistics",
+   "subdomain": "statistics.distributions",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "stat.dist.normal",
+    "alg.exp.concept"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  }
 ]

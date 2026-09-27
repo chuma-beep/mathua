@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Evaluate H at a negative input, at zero, and at a positive input",
+      "Read the jump amplitude as 1 at the origin",
+      "State the value H(0) = 1/2"
+    ]
+  },
+  {
+    "label": "Translating the step and writing piecewise functions compactly",
+    "section": "Translating the step and writing piecewise functions compactly",
+    "subgoals": [
+      "Locate the jump of H(t - a) at t = a",
+      "Write a two-piece step as a combination of shifted Heavisides",
+      "Read the jump amplitude off the coefficient"
+    ]
+  },
+  {
+    "label": "Laplace transform of the Heaviside function",
+    "section": "Laplace transform of the Heaviside function",
+    "subgoals": [
+      "Transform H(t) at the origin to 1/s",
+      "Apply the delay rule to H(t - a) to get e^(-as)/s",
+      "Combine a delay factor e^(-as) with a given F(s)"
+    ]
+  }
+]

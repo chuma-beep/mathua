@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The square root function",
+    "section": "The square root function",
+    "subgoals": [
+      "Evaluate the square root at a perfect square",
+      "State the domain as x >= 0",
+      "Read monotonicity as strictly increasing"
+    ]
+  },
+  {
+    "label": "Roots of odd index",
+    "section": "Roots of odd index",
+    "subgoals": [
+      "Evaluate the cube root of a negative number",
+      "State the domain as all real numbers",
+      "Track the sign of the output against the input"
+    ]
+  },
+  {
+    "label": "Domain",
+    "section": "Domain",
+    "subgoals": [
+      "Impose radicand >= 0 for an even index",
+      "Solve the radicand inequality for the endpoint",
+      "Drop the restriction for an odd index"
+    ]
+  }
+]

@@ -338,5 +338,35 @@
    "streak": 10,
    "avg_time_seconds": 12.0
   }
- }
+ },
+  {
+   "id": "precalc.func.floor_ceiling",
+   "label": "Floor and ceiling functions",
+   "domain": "precalculus",
+   "subdomain": "precalculus.functions",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "alg.func.concept",
+    "alg.func.evaluate"
+   ],
+   "mastery_threshold": {
+    "streak": 10,
+    "avg_time_seconds": 18.0
+   }
+  },
+  {
+   "id": "precalc.func.heaviside",
+   "label": "Heaviside step function",
+   "domain": "precalculus",
+   "subdomain": "precalculus.functions",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "precalc.func.piecewise",
+    "alg.func.evaluate"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  }
 ]

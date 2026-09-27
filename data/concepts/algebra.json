@@ -1197,5 +1197,50 @@
       "streak": 3,
       "avg_time_seconds": 120
     }
+  },
+  {
+    "id": "alg.func.injectivity",
+    "label": "Injective, surjective, and bijective functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.composite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.power",
+    "label": "Power functions x^a",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.evaluate",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "alg.func.irrational",
+    "label": "Irrational (root) functions",
+    "domain": "algebra",
+    "subdomain": "algebra.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.domain",
+      "arith.sqrt.simplify"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]

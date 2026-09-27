@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Evaluate e^(-x^2) at x = 0",
+      "Read the maximum value 1 at the centre",
+      "Conclude symmetry about x = 0"
+    ]
+  },
+  {
+    "label": "Inflection points and concavity",
+    "section": "Inflection points and concavity",
+    "subgoals": [
+      "Locate the inflection points at one sigma each side",
+      "Mark the bell as concave near the centre",
+      "Mark the tails as convex past the inflection"
+    ]
+  },
+  {
+    "label": "The Gaussian integral",
+    "section": "The Gaussian integral",
+    "subgoals": [
+      "State the total area as sqrt(pi)",
+      "Rescale the curve to unit area",
+      "Scale the area by sigma for a general width"
+    ]
+  }
+]
