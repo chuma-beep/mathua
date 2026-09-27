@@ -183,6 +183,17 @@ cp .env.example .env && docker compose up
 
 The server is available at `http://localhost:8080`. A `Dockerfile` and `docker-compose.yml` are included in the repo.
 
+### Repairing grading data
+
+If a grader fault or parser gap recorded correct answers as misses, re-grade the persisted attempts and rebuild the affected progress:
+
+```bash
+./mathua -repair-grading-dry-run   # report what would change (writes nothing)
+./mathua -repair-grading           # flip false negatives + rebuild progress
+```
+
+It re-grades every incorrect attempt with the canonical grader (`Engine.GradeAnswer`), flips those that now grade correct, and replays each affected concept's history into `concept_progress`. Attempts the grader cannot decide are left untouched, and XP is not rewritten. Requires Python + SymPy (see above) for the symbolic/expression types.
+
 ---
 
 ## Acknowledgements

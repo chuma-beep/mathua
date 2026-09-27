@@ -87,6 +87,8 @@ type ActiveSession struct {
 }
 
 type AttemptEntry struct {
+	// ID is the persistent row id (set on read; ignored on insert).
+	ID             int64     `json:"id,omitempty"`
 	SessionID      string    `json:"session_id"`
 	StudentID      string    `json:"student_id"`
 	ConceptID      string    `json:"concept_id"`
@@ -286,6 +288,9 @@ type Repository interface {
 	UpsertActiveSession(a *ActiveSession) error
 	DeleteActiveSession(sessionID string) error
 	RecordAttempt(entry AttemptEntry) error
+	// UpdateAttemptCorrect flips a recorded attempt's correctness. Used by the
+	// grading data-repair pass to fix false negatives.
+	UpdateAttemptCorrect(id int64, correct bool) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 	GetAttemptsForStudent(studentID string) ([]AttemptEntry, error)
 	GetAllAttempts() ([]AttemptEntry, error)

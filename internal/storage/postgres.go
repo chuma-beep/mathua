@@ -1127,9 +1127,17 @@ func (s *PostgresStore) RecordAttempt(entry AttemptEntry) error {
 	return nil
 }
 
+// UpdateAttemptCorrect flips an attempt's correctness (grading data-repair).
+func (s *PostgresStore) UpdateAttemptCorrect(id int64, correct bool) error {
+	if _, err := s.db.Exec(`UPDATE attempts SET correct = $1 WHERE id = $2`, boolToInt(correct), id); err != nil {
+		return fmt.Errorf("update attempt correct: %w", err)
+	}
+	return nil
+}
+
 func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
-		SELECT session_id, student_id, concept_id, answer, expected,
+		SELECT id, session_id, student_id, concept_id, answer, expected,
 		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		ORDER BY student_id, concept_id, timestamp ASC
@@ -1145,7 +1153,7 @@ func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 		var correct int
 		var ts string
 		if err := rows.Scan(
-			&e.SessionID, &e.StudentID, &e.ConceptID,
+			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
 			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
@@ -1160,7 +1168,7 @@ func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 
 func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
-		SELECT session_id, student_id, concept_id, answer, expected,
+		SELECT id, session_id, student_id, concept_id, answer, expected,
 		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		WHERE student_id = $1
@@ -1177,7 +1185,7 @@ func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry,
 		var correct int
 		var ts string
 		if err := rows.Scan(
-			&e.SessionID, &e.StudentID, &e.ConceptID,
+			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
 			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
@@ -1192,7 +1200,7 @@ func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry,
 
 func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
-		SELECT session_id, student_id, concept_id, answer, expected,
+		SELECT id, session_id, student_id, concept_id, answer, expected,
 		       correct, elapsed_seconds, timestamp, question, source, explanation
 		FROM attempts
 		WHERE student_id = $1 AND session_id = $2
@@ -1209,7 +1217,7 @@ func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]Attem
 		var correct int
 		var ts string
 		if err := rows.Scan(
-			&e.SessionID, &e.StudentID, &e.ConceptID,
+			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
 			&e.Question, &e.Source, &e.Explanation,
 		); err != nil {
