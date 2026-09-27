@@ -12,6 +12,8 @@ const SYMBOLS: { label: string; value: string }[] = [
   { label: ']', value: ']' }, { label: '|', value: '|' }, { label: '/', value: '/' },
   // Mixed numbers need a space ("4 1/10"); numeric mobile keyboards lack one.
   { label: '␣', value: ' ' },
+  // Comma separates solution lists / ordered answers (tuple, ordering types).
+  { label: ',', value: ',' },
 ]
 
 interface Props {
