@@ -40,6 +40,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("stat.dist.geometric", &geometricDistGen{})
 	reg.Register("stat.dist.hypergeometric", &hypergeometricGen{})
 	reg.Register("stat.dist.normal", &normalDistGen{})
+	reg.Register("stat.func.gaussian", &gaussianFuncGen{})
 	reg.Register("stat.dist.poisson", &poissonGen{})
 	reg.Register("stat.dist.student_t", &studentTGen{})
 	reg.Register("stat.dist.uniform", &uniformDistGen{})
@@ -1035,4 +1036,32 @@ func (g *expectedValueGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Answer:      e.answer,
 		Explanation: e.exp,
 	}
+}
+
+type gaussianFuncGen struct{}
+
+func (g *gaussianFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"Standard normal is Gaussian with mean? (enter a number)", "0", "Centered at zero by definition."},
+		{"Gaussian e^(-x^2): maximum at x = ? (enter a number)", "0", "Peak at the mean, x = 0."},
+		{"Is a Gaussian symmetric about its mean? (yes/no)", "yes", "Bell curve mirrors left-right."},
+		{"How many parameters define a Gaussian (mean and variance)? (enter a number)", "2", "Mean plus variance."},
+	}
+	tableHard := []entry{
+		{"Gaussian variance 4: standard deviation? (enter a number)", "2", "SD is the square root of variance."},
+		{"Wider bell: larger or smaller variance? (type larger or smaller)", "larger", "Variance spreads the curve."},
+		{"Is the sum of independent Gaussians Gaussian? (yes/no)", "yes", "Closed under convolution."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

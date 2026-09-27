@@ -679,6 +679,7 @@ var conceptDiagrams = map[string]string{
 	"alg.seq.arithmetic":  "/diagrams/algebrica/arithmetic-sequence.png",
 	"alg.seq.geometric":   "/diagrams/algebrica/geometri-sequence-1.png",
 	"stat.dist.normal":    "/diagrams/algebrica/normal-distribution-1.svg",
+	"stat.func.gaussian":  "/diagrams/algebrica/gaussian-function-1.svg",
 
 	// Functions (G3)
 	"alg.func.absolute_value":    "/diagrams/algebrica/absolute-value-1.svg",
@@ -688,6 +689,11 @@ var conceptDiagrams = map[string]string{
 	"alg.func.sigmoid":           "/diagrams/algebrica/sigmoid-function.png",
 	"alg.func.sign":              "/diagrams/algebrica/sign-function-1.svg",
 	"alg.func.composite":         "/diagrams/algebrica/composite-functions-1-1.png",
+	"alg.func.injectivity":       "/diagrams/algebrica/injective-surjective-and-bijective-functions-1.svg",
+	"alg.func.power":             "/diagrams/algebrica/power-function-1.svg",
+	"alg.func.irrational":        "/diagrams/algebrica/irrational-functions-1.svg",
+	"precalc.func.floor_ceiling": "/diagrams/algebrica/floor-and-ceiling-functions-1.svg",
+	"precalc.func.heaviside":     "/diagrams/algebrica/heaviside-function-1.svg",
 	"alg.ineq.quadratic":         "/diagrams/algebrica/quadratic-inequalities-1-1.png",
 	"alg.ineq.sign_analysis":     "/diagrams/algebrica/sign-analysis-1.png",
 	"alg.quad.complex":           "/diagrams/algebrica/quad-eq-complex-roots.png",
