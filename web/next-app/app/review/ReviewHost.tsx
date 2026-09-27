@@ -11,6 +11,7 @@ import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startReviewSession, submitReviewAnswer } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import ChoiceOptions from '../../components/ChoiceOptions'
 import SubmitErrorBlock, { toSubmitError, type SubmitError } from '../../components/SubmitErrorBlock'
 import { Input } from '@/components/ui/input'
 
@@ -231,6 +232,7 @@ export default function ReviewHost() {
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
             <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{reviewQuestion}</KatexContent>
           </div>
+          <ChoiceOptions question={reviewQuestion} value={reviewAnswerInput} onPick={setReviewAnswerInput} disabled={loading} />
           {!reviewLastResult ? (
             <>
               <form onSubmit={e => { e.preventDefault(); void submitReviewFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">

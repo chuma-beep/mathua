@@ -11,7 +11,7 @@ export interface AnswerFormat {
 export function formatForGradingType(gradingType?: string): AnswerFormat {
   switch (gradingType) {
     case 'numeric':
-      return { hint: 'Answer with a number', inputMode: 'numeric' }
+      return { hint: 'Answer with a number, fraction, or mixed number (e.g. 4 1/10)', inputMode: 'numeric' }
     case 'expression':
     case 'polynomial':
       return { hint: 'Answer as an expression', inputMode: 'text' }

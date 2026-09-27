@@ -19,6 +19,7 @@ import {
 } from '../../lib/api'
 import { getErrorMessage } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import ChoiceOptions from '../../components/ChoiceOptions'
 import SubmitErrorBlock, {
   MAX_SKIPS,
   toSubmitError,
@@ -350,6 +351,7 @@ export default function DiagnosticHost({
               <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{question}</KatexContent>
             </div>
           </div>
+          <ChoiceOptions question={question} value={answerInput} onPick={setAnswerInput} disabled={loading} />
           {!lastResult ? (
             <>
               <form

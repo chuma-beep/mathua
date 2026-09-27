@@ -1,10 +1,17 @@
 'use client'
 
-const SYMBOLS = [
-  'π', '±', '∞', '√', '∛', '²', '³', '°',
-  '≠', '≈', '≤', '≥', '×', '÷', '·',
-  '∫', '∑', '∂', 'θ', 'α', 'β',
-  '(', ')', '[', ']', '|', '/',
+const SYMBOLS: { label: string; value: string }[] = [
+  { label: 'π', value: 'π' }, { label: '±', value: '±' }, { label: '∞', value: '∞' },
+  { label: '√', value: '√' }, { label: '∛', value: '∛' }, { label: '²', value: '²' },
+  { label: '³', value: '³' }, { label: '°', value: '°' }, { label: '≠', value: '≠' },
+  { label: '≈', value: '≈' }, { label: '≤', value: '≤' }, { label: '≥', value: '≥' },
+  { label: '×', value: '×' }, { label: '÷', value: '÷' }, { label: '·', value: '·' },
+  { label: '∫', value: '∫' }, { label: '∑', value: '∑' }, { label: '∂', value: '∂' },
+  { label: 'θ', value: 'θ' }, { label: 'α', value: 'α' }, { label: 'β', value: 'β' },
+  { label: '(', value: '(' }, { label: ')', value: ')' }, { label: '[', value: '[' },
+  { label: ']', value: ']' }, { label: '|', value: '|' }, { label: '/', value: '/' },
+  // Mixed numbers need a space ("4 1/10"); numeric mobile keyboards lack one.
+  { label: '␣', value: ' ' },
 ]
 
 interface Props {
@@ -37,13 +44,13 @@ export default function SymbolPalette({ targetRef, onInsert, compact }: Props) {
     <div className={`flex flex-wrap gap-1.5 p-2 bg-mathua-surface border border-mathua-border w-full max-w-full overflow-hidden ${compact ? 'mt-1' : 'mt-2'}`}>
       {SYMBOLS.map((s) => (
         <button
-          key={s}
+          key={s.label}
           type="button"
-          onClick={() => insert(s)}
+          onClick={() => insert(s.value)}
           className="w-9 h-9 min-w-[36px] min-h-[36px] font-mono text-xs border border-mathua-border-strong bg-mathua-code text-mathua-primary hover:border-mathua-blue hover:text-mathua-blue shrink-0 inline-flex items-center justify-center"
-          aria-label={`Insert ${s}`}
+          aria-label={`Insert ${s.label}`}
         >
-          {s}
+          {s.label}
         </button>
       ))}
     </div>

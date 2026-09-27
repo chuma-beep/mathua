@@ -7,6 +7,7 @@ import { getLessonPractice, submitStudyAnswer, type PracticeQuestion } from '../
 import { applyResult, initialState, type StreakState } from '../lib/progression'
 import { concepts } from '../lib/conceptData'
 import { formatForGradingType } from '../lib/answerFormat'
+import ChoiceOptions from './ChoiceOptions'
 import { Input } from '@/components/ui/input'
 
 interface LessonQuizProps {
@@ -255,6 +256,13 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
                           {q.question}
                         </KatexContent>
                       </div>
+
+                      <ChoiceOptions
+                        question={q.question}
+                        value={answers[i] || ''}
+                        onPick={v => dispatch({ type: 'setAnswer', index: i, value: v })}
+                        disabled={result !== undefined || locked}
+                      />
 
                       <form
                         onSubmit={e => { e.preventDefault(); handleCheck(i) }}

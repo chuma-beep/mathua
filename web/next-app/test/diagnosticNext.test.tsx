@@ -15,7 +15,7 @@ import { formatForGradingType } from '../lib/answerFormat'
 
 describe('formatForGradingType', () => {
   it('maps known types to hint + keyboard, unknowns to generic text', () => {
-    expect(formatForGradingType('numeric')).toEqual({ hint: 'Answer with a number', inputMode: 'numeric' })
+    expect(formatForGradingType('numeric')).toEqual({ hint: 'Answer with a number, fraction, or mixed number (e.g. 4 1/10)', inputMode: 'numeric' })
     expect(formatForGradingType('expression').inputMode).toBe('text')
     expect(formatForGradingType('multiple_choice').hint).toBe('Type the exact answer')
     expect(formatForGradingType(undefined)).toEqual({ hint: 'Answer in the form shown', inputMode: 'text' })
@@ -320,7 +320,7 @@ describe('DiagnosticHost manual advance', () => {
     await screen.findByText('Q1 text')
 
     // Format hint from the served grading_type, with numeric keyboard.
-    expect(screen.getByText('Answer with a number')).toBeInTheDocument()
+    expect(screen.getByText('Answer with a number, fraction, or mixed number (e.g. 4 1/10)')).toBeInTheDocument()
     expect(screen.getByPlaceholderText(/your answer/i).getAttribute('inputmode')).toBe('numeric')
 
     fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
